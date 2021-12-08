@@ -24,14 +24,6 @@ function DefinitionTooltip({ children, definition, ...rest }) {
     }
   }
 
-  function handleOnClick() {
-    if (isOpen) {
-      setOpen(false);
-      return;
-    }
-    setOpen(true);
-  }
-
   return (
     <Popover open={isOpen} highContrast dropShadow={false} align="bottom-left">
       <button
@@ -43,7 +35,7 @@ function DefinitionTooltip({ children, definition, ...rest }) {
         onMouseOver={() => setOpen(true)}
         onBlur={() => setOpen(false)}
         onKeyDown={handleKeyDown}
-        onClick={handleOnClick}
+        onClick={() => setOpen(!isOpen)}
         onFocus={() => setOpen(true)}
         {...rest}>
         {children}
