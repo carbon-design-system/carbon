@@ -23,3 +23,15 @@ export function adjustLightness(token, shift) {
     .hex()
     .toLowerCase();
 }
+
+/**
+ * Adjust a given token's alpha by a specified percentage
+ * Example: token = rgba(10, 10, 10, 1.0);
+ * adjustAlpha(token, 0.5) === rgba(10, 10, 10, 0.5);
+ * @param {string} token
+ * @param {integer} alpha The number of percentage points by which to shift the opacity of a token.
+ * @returns {string}
+ */
+export function adjustAlpha(token, alpha) {
+  return Color(token).rgba().alpha(alpha).string();
+}

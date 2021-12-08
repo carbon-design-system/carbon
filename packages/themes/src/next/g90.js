@@ -45,7 +45,7 @@ import {
   // Tools
   rgba,
 } from '@carbon/colors';
-import { adjustLightness } from '../tools';
+import { adjustLightness, adjustAlpha } from '../tools';
 
 // Background
 export const background = gray90;
@@ -143,18 +143,18 @@ export const borderInverse = gray10;
 export const borderInteractive = blue50;
 
 // border
-export const borderDisabled = gray80;
+export const borderDisabled = adjustAlpha(gray50, 0.5);
 
 // Text
 export const textPrimary = gray10;
 export const textSecondary = gray30;
-export const textPlaceholder = gray50;
+export const textPlaceholder = adjustAlpha(textPrimary, 0.4);
 export const textHelper = gray30;
 export const textError = red30;
 export const textInverse = gray100;
 export const textOnColor = white;
-export const textOnColorDisabled = gray40;
-export const textDisabled = gray60;
+export const textOnColorDisabled = adjustAlpha(textOnColor, 0.25);
+export const textDisabled = adjustAlpha(textPrimary, 0.25);
 
 // Link
 export const linkPrimary = blue40;
@@ -168,7 +168,7 @@ export const iconPrimary = gray10;
 export const iconSecondary = gray30;
 export const iconInverse = gray100;
 export const iconOnColor = white;
-export const iconOnColorDisabled = gray40;
+export const iconOnColorDisabled = adjustAlpha(iconOnColor, 0.25);
 export const iconDisabled = gray60;
 
 // Support
