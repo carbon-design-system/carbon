@@ -1,0 +1,31 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme';
+
+.theme-section {
+  padding: 1rem;
+  background: theme.$background;
+  color: theme.$text-primary;
+}
+
+.theme-layer-example {
+  padding: 1rem;
+  background: theme.$background;
+  color: theme.$text-primary;
+}
+
+.theme-layer-header {
+  margin-bottom: 1rem;
+}
+
+.theme-with-layer {
+  padding: 1rem;
+  background: theme.$layer;
+  color: theme.$text-primary;
+}

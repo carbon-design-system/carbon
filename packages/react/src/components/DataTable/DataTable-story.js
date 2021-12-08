@@ -88,6 +88,7 @@ export const Usage = () => (
             <TableRow>
               {headers.map((header) => (
                 <TableHeader
+                  id={header.key}
                   key={header.key}
                   {...getHeaderProps({ header })}
                   isSortable>
@@ -139,7 +140,9 @@ export const BasicTable = () => {
       <TableHead>
         <TableRow>
           {headers.map((header) => (
-            <TableHeader key={header}>{header}</TableHeader>
+            <TableHeader id={header.key} key={header}>
+              {header}
+            </TableHeader>
           ))}
         </TableRow>
       </TableHead>
@@ -216,6 +219,17 @@ export const WithToolbar = () => (
             <TableToolbarSearch
               onChange={onInputChange}
               onClear={action('onClear')}
+              onFocus={(event, handleExpand) => {
+                action('onFocus')();
+                handleExpand(event, true);
+              }}
+              onBlur={(event, handleExpand) => {
+                action('onBlur')();
+                const { value } = event.target;
+                if (!value) {
+                  handleExpand(event, false);
+                }
+              }}
             />
             <TableToolbarMenu light>
               <TableToolbarAction onClick={action('Action 1 Click')}>
@@ -397,7 +411,10 @@ export const Playground = () => (
           <TableHead>
             <TableRow>
               {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+                <TableHeader
+                  id={header.key}
+                  key={i}
+                  {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}

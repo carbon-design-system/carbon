@@ -6,597 +6,409 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
-import classNames from 'classnames';
-import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
-import debounce from 'lodash.debounce';
+import React, { useState, useRef, useEffect } from 'react';
+import cx from 'classnames';
 import { keys, match, matches } from '../../../internal/keyboard';
-import TabContent from '../../TabContent';
-import deprecate from '../../../prop-types/deprecate';
 import { usePrefix } from '../../../internal/usePrefix';
+import { useId } from '../../../internal/useId';
+import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
+import { useControllableState } from '../../ContentSwitcher/next/useControllableState';
+import { useMergedRefs } from '../../../internal/useMergedRefs';
 
-const Tabs = React.forwardRef(function Tabs(
-  {
-    children,
-    className,
-    leftOverflowButtonProps,
-    light = false,
-    onSelectionChange,
-    rightOverflowButtonProps,
-    scrollIntoView = true,
-    selected = 0,
-    selectionMode = 'automatic',
-    tabContentClassName,
-    ...other
-  },
-  ref
-) {
-  const prefix = usePrefix();
+// Used to manage the overall state of the Tabs
+const TabsContext = React.createContext();
 
-  //refs
-  const tablist = useRef();
-  const leftOverflowNavButton = useRef();
-  const rightOverflowNavButton = useRef();
-  const tabs = useRef([]);
+// Used to keep track of position in a tablist
+const TabContext = React.createContext();
 
-  //states
-  const [horizontalOverflow, setHorizontalOverflow] = useState(false);
-  const [tablistClientWidth, setTablistClientWidth] = useState(null);
-  const [tablistScrollWidth, setTablistScrollWidth] = useState(null);
-  const [tablistScrollLeft, setTablistScrollLeft] = useState(null);
-  const [isSelected, setIsSelected] = useState(selected);
-  const [prevSelected, setPrevSelected] = useState(isSelected);
-
-  /**
-   * prop + state alignment - getDerivedStateFromProps
-   * only update if selected prop changes
-   */
-  useEffect(() => {
-    if (selected !== prevSelected) {
-      setIsSelected(selected);
-      setPrevSelected(selected);
-    }
-  }, [selected]); //eslint-disable-line react-hooks/exhaustive-deps
-
-  // width of the overflow buttons
-  let OVERFLOW_BUTTON_OFFSET = 40;
-
-  /**
-   * `scroll` event handler to save tablist clientWidth, scrollWidth, and
-   * scrollLeft
-   */
-  const handleScroll = () => {
-    if (!tablist?.current) {
-      return;
-    }
-    const { clientWidth, scrollLeft, scrollWidth } = tablist.current;
-
-    setTablistClientWidth(clientWidth);
-    setTablistScrollWidth(scrollWidth);
-    setTablistScrollLeft(scrollLeft);
-    setHorizontalOverflow(scrollWidth > clientWidth);
-  };
-
-  /**
-   * The debounced version of the `resize` event handler.
-   * @type {Function}
-   * @private
-   */
-  const _debouncedHandleWindowResize = useRef();
-
-  const _handleWindowResize = handleScroll;
-
-  /**
-   * returns all tabs that are not disabled
-   * used for keyboard navigation
-   */
-  const getEnabledTabs = () =>
-    React.Children.toArray(children).reduce(
-      (enabledTabs, tab, index) =>
-        !tab.props.disabled ? enabledTabs.concat(index) : enabledTabs,
-      []
-    );
-
-  /**
-   * returns the index of the next tab we are going to when navigating L/R arrow keys (i.e. 0, 1, 2)
-   * used in handleTabKeyDown to get the next index after keyboard arrow evt, which then updates selected tab
-   */
-  const getNextIndex = (index, direction) => {
-    const enabledTabs = getEnabledTabs();
-    const nextIndex = Math.max(
-      enabledTabs.indexOf(index) + direction,
-      // For `tab` not found in `enabledTabs`
-      -1
-    );
-    const nextIndexLooped =
-      nextIndex >= 0 && nextIndex < enabledTabs.length
-        ? nextIndex
-        : nextIndex - Math.sign(nextIndex) * enabledTabs.length;
-    return enabledTabs[nextIndexLooped];
-  };
-
-  /**
-   * used as second argument for getNextIndex(i,d)
-   * returns -1, 1 or 0 depending on arrow key
-   * number is then used in math calculations to find the index of the next tab we are navigating to
-   */
-  const getDirection = (evt) => {
-    if (match(evt, keys.ArrowLeft)) {
-      return -1;
-    }
-    if (match(evt, keys.ArrowRight)) {
-      return 1;
-    }
-    return 0;
-  };
-
-  const getTabAt = useCallback(
-    (index) => tabs.current[index] || React.Children.toArray(children)[index],
-    [tabs, children]
-  );
-
-  const scrollTabIntoView = (event, { index }) => {
-    const tab = getTabAt(index);
-    if (
-      matches(event, [keys.ArrowLeft, keys.ArrowRight]) ||
-      event.type === 'click'
-    ) {
-      const currentScrollLeft = tablistScrollLeft;
-      tab?.tabAnchor?.scrollIntoView({
-        block: 'nearest',
-        inline: 'nearest',
-      });
-      tab?.tabAnchor?.focus();
-      const newScrollLeft = tablist.current.scrollLeft;
-      if (newScrollLeft > currentScrollLeft) {
-        tablist.current.scrollLeft += OVERFLOW_BUTTON_OFFSET;
+// Used to keep track of position in a list of tab panels
+const TabPanelContext = React.createContext();
+function Tabs({
+  children,
+  defaultSelectedIndex = 0,
+  onChange,
+  selectedIndex: controlledSelectedIndex,
+}) {
+  const baseId = useId('ccs');
+  // The active index is used to track the element which has focus in our tablist
+  const [activeIndex, setActiveIndex] = useState(defaultSelectedIndex);
+  // The selected index is used for the tab/panel pairing which is "visible"
+  const [selectedIndex, setSelectedIndex] = useControllableState({
+    value: controlledSelectedIndex,
+    defaultValue: defaultSelectedIndex,
+    onChange: (value) => {
+      if (onChange) {
+        onChange({ selectedIndex: value });
       }
-    }
-  };
-
-  /**
-   * selecting tab on click and on keyboard nav
-   * index = tab to be selected, returned in handleTabKeyDown
-   * onSelectionChange = optional prop for event handler
-   */
-  const selectTabAt = (event, { index, onSelectionChange }) => {
-    scrollTabIntoView(event, { index });
-    if (isSelected !== index) {
-      setIsSelected(index);
-      setPrevSelected(index);
-      if (typeof onSelectionChange === 'function') {
-        onSelectionChange(index);
-      }
-    }
-  };
-
-  /**
-   *  keyboard event handler
-   */
-  const handleTabKeyDown = (onSelectionChange) => {
-    return (index, evt) => {
-      if (matches(evt, [keys.Enter, keys.Space])) {
-        selectTabAt(evt, { index, onSelectionChange });
-      }
-
-      const nextIndex = (() => {
-        if (matches(evt, [keys.ArrowLeft, keys.ArrowRight])) {
-          return getNextIndex(index, getDirection(evt));
-        }
-        if (match(evt, keys.Home)) {
-          return 0;
-        }
-        if (match(evt, keys.End)) {
-          return getEnabledTabs().pop();
-        }
-      })();
-      const tab = getTabAt(nextIndex);
-
-      // updating selected tab
-      if (
-        matches(evt, [keys.ArrowLeft, keys.ArrowRight, keys.Home, keys.End])
-      ) {
-        evt.preventDefault();
-        if (selectionMode !== 'manual') {
-          selectTabAt(evt, { index: nextIndex, onSelectionChange });
-        } else {
-          scrollTabIntoView(evt, { index: nextIndex });
-        }
-        tab?.focus();
-      }
-    };
-  };
-
-  const getTabs = () => React.Children.map(children, (tab) => tab);
-
-  /**
-   *  click handler
-   *  passed down to Tab children as a prop in `tabsWithProps`
-   *  following functions (handle*) are Props on Tab.js, see Tab.js for parameters
-   */
-  const handleTabClick = (onSelectionChange) => (index, evt) => {
-    evt.preventDefault();
-    selectTabAt(evt, { index, onSelectionChange });
-  };
-
-  /**
-   * creates an array of all the child tab items
-   */
-  const setTabAt = (index, tabRef) => {
-    tabs.current[index] = tabRef;
-  };
-
-  let overflowNavInterval = null;
-
-  /**
-   * group - overflow scroll
-   * scrolling via overflow btn click
-   * click handler for scrollable tabs L/R arrow buttons
-   */
-  const handleOverflowNavClick = (_, { direction, multiplier = 10 }) => {
-    // account for overflow button appearing and causing tablist width change
-    const { clientWidth, scrollLeft, scrollWidth } = tablist?.current;
-    if (direction === 1 && !scrollLeft) {
-      tablist.current.scrollLeft += OVERFLOW_BUTTON_OFFSET;
-    }
-
-    tablist.current.scrollLeft += direction * multiplier;
-
-    const leftEdgeReached =
-      direction === -1 && scrollLeft < OVERFLOW_BUTTON_OFFSET;
-
-    const rightEdgeReached =
-      direction === 1 &&
-      scrollLeft + clientWidth >= scrollWidth - OVERFLOW_BUTTON_OFFSET;
-
-    if (leftEdgeReached || rightEdgeReached) {
-      if (leftEdgeReached) {
-        rightOverflowNavButton?.current?.focus();
-      }
-      if (rightEdgeReached) {
-        leftOverflowNavButton?.current?.focus();
-      }
-    }
-  };
-
-  /**
-   * group - overflow scroll
-   * scrolling w/ mouse event
-   * mousedown handler for scrollable tabs
-   */
-  const handleOverflowNavMouseDown = (event, { direction }) => {
-    // disregard mouse buttons aside from LMB
-    if (event.buttons !== 1) {
-      return;
-    }
-
-    overflowNavInterval = setInterval(() => {
-      const { clientWidth, scrollLeft, scrollWidth } = tablist?.current;
-
-      // clear interval if scroll reaches left or right edge
-      const leftEdgeReached =
-        direction === -1 && scrollLeft < OVERFLOW_BUTTON_OFFSET;
-
-      const rightEdgeReached =
-        direction === 1 &&
-        scrollLeft + clientWidth >= scrollWidth - OVERFLOW_BUTTON_OFFSET;
-
-      if (leftEdgeReached || rightEdgeReached) {
-        clearInterval(overflowNavInterval);
-      }
-
-      // account for overflow button appearing and causing tablist width change
-      handleOverflowNavClick(event, { direction });
-    });
-  };
-
-  /**
-   * group - overflow scroll
-   * scrolling w/ mouse event
-   * mouseup handler for scrollable tabs
-   */
-  const handleOverflowNavMouseUp = () => {
-    clearInterval(overflowNavInterval);
-  };
-
-  /**
-   * only run once - component did mount equivalent
-   */
-  useEffect(() => {
-    _debouncedHandleWindowResize.current = debounce(_handleWindowResize, 200);
-
-    _handleWindowResize();
-    window.addEventListener('resize', _debouncedHandleWindowResize.current);
-
-    // scroll selected tab into view on mount
-    const { clientWidth, scrollLeft, scrollWidth } = tablist?.current || {};
-
-    setTablistClientWidth(clientWidth);
-    setTablistScrollWidth(scrollWidth);
-    setTablistScrollLeft(scrollLeft);
-
-    const tab = getTabAt(isSelected);
-    const horizontalOverflow = scrollWidth > clientWidth;
-
-    if (horizontalOverflow) {
-      const leftOverflowNavButtonHidden =
-        tab?.tabAnchor?.getBoundingClientRect().right <
-        tab?.tabAnchor?.offsetParent.getBoundingClientRect().right;
-
-      const rightOverflowNavButtonHidden =
-        scrollLeft + clientWidth === scrollWidth;
-      scrollIntoView &&
-        tab?.tabAnchor?.scrollIntoView({
-          block: 'nearest',
-          inline: 'nearest',
-        });
-
-      // account for overflow buttons in scroll position on mount
-      if (!leftOverflowNavButtonHidden && !rightOverflowNavButtonHidden) {
-        tablist.current.scrollLeft += OVERFLOW_BUTTON_OFFSET * 2;
-      }
-    }
-
-    //component will unmount equivalent
-    return () => {
-      if (_debouncedHandleWindowResize.current) {
-        _debouncedHandleWindowResize.current.cancel();
-      }
-      window.removeEventListener(
-        'resize',
-        _debouncedHandleWindowResize.current
-      );
-    };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * component did update equivalent
-   */
-  useEffect(() => {
-    // compare current tablist properties to current state
-    const {
-      clientWidth: currentTablistClientWidth,
-      scrollLeft: currentTablistScrollLeft,
-      scrollWidth: currentTablistScrollWidth,
-    } = tablist.current;
-
-    if (
-      currentTablistClientWidth !== tablistClientWidth ||
-      currentTablistScrollLeft !== tablistScrollLeft ||
-      currentTablistScrollWidth !== tablistScrollWidth
-    ) {
-      setTablistClientWidth(currentTablistClientWidth);
-      setTablistScrollWidth(currentTablistScrollWidth);
-      setTablistScrollLeft(currentTablistScrollLeft);
-      setHorizontalOverflow(
-        currentTablistScrollWidth > currentTablistClientWidth
-      );
-    }
-
-    if (scrollIntoView && prevSelected !== isSelected) {
-      getTabAt(isSelected)?.tabAnchor?.scrollIntoView({
-        block: 'nearest',
-        inline: 'nearest',
-      });
-    }
-  }, [
-    isSelected,
-    prevSelected,
-    scrollIntoView,
-    tablistClientWidth,
-    tablistScrollLeft,
-    tablistScrollWidth,
-    getTabAt,
-  ]);
-
-  /**
-   * The tab panel acts like a tab panel when the screen is wider, but acts
-   * like a select list when the screen is narrow.  In the wide case we want
-   * to allow the user to use the tab key to set the focus in the tab panel
-   * and then use the left and right arrow keys to navigate the tabs.  In the
-   * narrow case we want to use the tab key to select different options in
-   * the list.
-   *
-   * We set the tab index based on the different states so the browser will treat
-   * the whole tab panel as a single focus component when it looks like a tab
-   * panel and separate components when it looks like a select list.
-   */
-  const tabsWithProps = getTabs().map((tab, index) => {
-    const tabIndex = index === isSelected ? 0 : -1;
-    const newTab = React.cloneElement(tab, {
-      index,
-      selected: index === isSelected,
-      handleTabClick: handleTabClick(onSelectionChange),
-      tabIndex,
-      ref: (e) => {
-        setTabAt(index, e);
-      },
-      handleTabKeyDown: handleTabKeyDown(onSelectionChange),
-    });
-
-    return newTab;
+    },
   });
 
-  const tabContentWithProps = React.Children.map(tabsWithProps, (tab) => {
-    const {
-      id: tabId,
-      children,
-      selected,
-      renderContent: Content = TabContent,
-    } = tab.props;
-
-    return (
-      <Content
-        id={tabId && `${tabId}__panel`}
-        className={tabContentClassName}
-        hidden={!selected}
-        selected={selected}
-        aria-labelledby={tabId}>
-        {children}
-      </Content>
-    );
-  });
-
-  const leftOverflowNavButtonHidden = !horizontalOverflow || !tablistScrollLeft;
-
-  const rightOverflowNavButtonHidden =
-    !horizontalOverflow ||
-    tablistScrollLeft + tablistClientWidth === tablistScrollWidth;
-
-  const classes = {
-    // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
-    tabs: classNames(
-      className,
-      // `${prefix}--tabs`,
-      `${prefix}--tabs--scrollable`,
-      {
-        // [`${prefix}--tabs--light`]: light,
-        [`${prefix}--tabs--scrollable--light`]: light,
-      }
-    ),
-    // TODO: remove scrollable from classnames in next major release and uncomment classnames that don't contain scrollable
-    tablist: classNames(
-      // `${prefix}--tabs__nav`,
-      `${prefix}--tabs--scrollable__nav`
-    ),
-    leftOverflowButtonClasses: classNames({
-      [`${prefix}--tab--overflow-nav-button`]: horizontalOverflow,
-      [`${prefix}--tab--overflow-nav-button--hidden`]: leftOverflowNavButtonHidden,
-    }),
-    rightOverflowButtonClasses: classNames({
-      [`${prefix}--tab--overflow-nav-button`]: horizontalOverflow,
-      [`${prefix}--tab--overflow-nav-button--hidden`]: rightOverflowNavButtonHidden,
-    }),
+  const value = {
+    baseId,
+    activeIndex,
+    defaultSelectedIndex,
+    setActiveIndex,
+    selectedIndex,
+    setSelectedIndex,
   };
 
-  return (
-    <>
-      <div className={classes.tabs} ref={ref} {...other}>
-        <button
-          aria-hidden="true"
-          aria-label="Scroll left"
-          className={classes.leftOverflowButtonClasses}
-          onClick={(_) => handleOverflowNavClick(_, { direction: -1 })}
-          onMouseDown={(event) =>
-            handleOverflowNavMouseDown(event, { direction: -1 })
-          }
-          onMouseUp={handleOverflowNavMouseUp}
-          ref={leftOverflowNavButton}
-          tabIndex="-1"
-          type="button"
-          {...leftOverflowButtonProps}>
-          <ChevronLeft16 />
-        </button>
-        {!leftOverflowNavButtonHidden && (
-          <div className={`${prefix}--tabs__overflow-indicator--left`} />
-        )}
-        <ul
-          role="tablist"
-          tabIndex={-1}
-          className={classes.tablist}
-          ref={tablist}
-          onScroll={handleScroll}>
-          {tabsWithProps}
-        </ul>
-        {!rightOverflowNavButtonHidden && (
-          <div className={`${prefix}--tabs__overflow-indicator--right`} />
-        )}
-        <button
-          aria-hidden="true"
-          aria-label="Scroll right"
-          className={classes.rightOverflowButtonClasses}
-          onClick={(_) => handleOverflowNavClick(_, { direction: 1 })}
-          onMouseDown={(event) =>
-            handleOverflowNavMouseDown(event, { direction: 1 })
-          }
-          onMouseUp={handleOverflowNavMouseUp}
-          ref={rightOverflowNavButton}
-          tabIndex="-1"
-          type="button"
-          {...rightOverflowButtonProps}>
-          <ChevronRight16 />
-        </button>
-      </div>
-      {tabContentWithProps}
-    </>
-  );
-});
+  return <TabsContext.Provider value={value}>{children}</TabsContext.Provider>;
+}
 
 Tabs.propTypes = {
   /**
-   * Pass in a collection of <Tab> children to be rendered depending on the
-   * currently selected tab
+   * Provide child elements to be rendered inside of the `Tabs`.
+   * These elements should render either `TabsList` or `TabsPanels`
    */
   children: PropTypes.node,
 
   /**
-   * Provide a className that is applied to the root <div> component for the
-   * <Tabs>
+   * Specify which content tab should be initially selected when the component
+   * is first rendered
+   */
+  defaultSelectedIndex: PropTypes.number,
+
+  /**
+   * Provide an optional function which is called whenever the state of the
+   * `Tabs` changes
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Control which content panel is currently selected. This puts the component
+   * in a controlled mode and should be used along with `onChange`
+   */
+  selectedIndex: PropTypes.number,
+};
+
+function useEffectOnce(callback) {
+  const savedCallback = useRef(callback);
+  const effectGuard = useRef(false);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+
+  useEffect(() => {
+    if (effectGuard.current !== true) {
+      effectGuard.current = true;
+      savedCallback.current();
+    }
+  }, []);
+}
+
+/**
+ * Get the next index for a given keyboard event given a count of the total
+ * items and the current index
+ * @param {Event} event
+ * @param {number} total
+ * @param {number} index
+ * @returns {number}
+ */
+function getNextIndex(event, total, index) {
+  if (match(event, keys.ArrowRight)) {
+    return (index + 1) % total;
+  } else if (match(event, keys.ArrowLeft)) {
+    return (total + index - 1) % total;
+  } else if (match(event, keys.Home)) {
+    return 0;
+  } else if (match(event, keys.End)) {
+    return total - 1;
+  }
+}
+
+function TabList({
+  activation = 'automatic',
+  'aria-label': label,
+  children,
+  className: customClassName,
+  light,
+  scrollIntoView,
+  contained = false,
+  ...rest
+}) {
+  const {
+    activeIndex,
+    selectedIndex,
+    setSelectedIndex,
+    setActiveIndex,
+  } = React.useContext(TabsContext);
+  const prefix = usePrefix();
+  const ref = useRef(null);
+  const className = cx(`${prefix}--tabs`, customClassName, {
+    [`${prefix}--tabs--contained`]: contained,
+    [`${prefix}--tabs--light`]: light,
+  });
+
+  const tabs = [];
+
+  function onKeyDown(event) {
+    if (
+      matches(event, [keys.ArrowRight, keys.ArrowLeft, keys.Home, keys.End])
+    ) {
+      const activeTabs = tabs.filter((tab) => {
+        return !tab.current.disabled;
+      });
+
+      const currentIndex = activeTabs.indexOf(
+        tabs[activation === 'automatic' ? selectedIndex : activeIndex]
+      );
+      const nextIndex = tabs.indexOf(
+        activeTabs[getNextIndex(event, activeTabs.length, currentIndex)]
+      );
+
+      if (activation === 'automatic') {
+        setSelectedIndex(nextIndex);
+      } else if (activation === 'manual') {
+        setActiveIndex(nextIndex);
+      }
+
+      tabs[nextIndex].current.focus();
+    }
+  }
+
+  useEffectOnce(() => {
+    const tab = tabs[selectedIndex];
+    if (scrollIntoView && tab) {
+      tab.current.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest',
+      });
+    }
+  });
+
+  useEffectOnce(() => {
+    if (tabs[selectedIndex].current.disabled) {
+      const activeTabs = tabs.filter((tab) => {
+        return !tab.current.disabled;
+      });
+
+      if (activeTabs.length > 0) {
+        const tab = activeTabs[0];
+        setSelectedIndex(tabs.indexOf(tab));
+      }
+    }
+  });
+
+  return (
+    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
+    <div
+      {...rest}
+      aria-label={label}
+      ref={ref}
+      role="tablist"
+      className={className}
+      onKeyDown={onKeyDown}>
+      {React.Children.map(children, (child, index) => {
+        const ref = React.createRef();
+        tabs.push(ref);
+        return (
+          <TabContext.Provider value={index}>
+            {React.cloneElement(child, {
+              ref,
+            })}
+          </TabContext.Provider>
+        );
+      })}
+    </div>
+  );
+}
+
+TabList.propTypes = {
+  /**
+   * Specify whether the content tab should be activated automatically or
+   * manually
+   */
+  activation: PropTypes.oneOf(['automatic', 'manual']),
+
+  /**
+   * Provide an accessible label to be read when a user interacts with this
+   * component
+   */
+  'aria-label': PropTypes.string.isRequired,
+
+  /**
+   * Provide child elements to be rendered inside of `ContentTabs`.
+   * These elements should render a `ContentTab`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be added to the container node
    */
   className: PropTypes.string,
-
   /**
-   * Specify whether the Tab content is hidden
+   * Specify whether component is contained type
    */
-  hidden: PropTypes.bool,
 
-  /**
-   * Provide the props that describe the left overflow button
-   */
-  leftOverflowButtonProps: PropTypes.object,
-
+  contained: PropTypes.bool,
   /**
    * Specify whether or not to use the light component variant
    */
-  light: deprecate(
-    PropTypes.bool,
-    'The light prop has been deprecated in v11 in favor of our new layering model that uses the Layer component'
-  ),
-
-  /**
-   * Optionally provide an `onClick` handler that is invoked when a <Tab> is
-   * clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * Optionally provide an `onKeyDown` handler that is invoked when keyed
-   * navigation is triggered
-   */
-  onKeyDown: PropTypes.func,
-
-  /**
-   * Provide an optional handler that is called whenever the selection
-   * changes. This method is called with the index of the tab that was
-   * selected
-   */
-  onSelectionChange: PropTypes.func,
-
-  /**
-   * Provide the props that describe the right overflow button
-   */
-  rightOverflowButtonProps: PropTypes.object,
-
+  light: PropTypes.bool,
   /**
    * Choose whether or not to automatically scroll to newly selected tabs
    * on component rerender
    */
   scrollIntoView: PropTypes.bool,
-
-  /**
-   * Optionally provide an index for the currently selected <Tab>
-   */
-  selected: PropTypes.number,
-
-  /**
-   * Choose whether or not to automatically change selection on focus
-   */
-  selectionMode: PropTypes.oneOf(['automatic', 'manual']),
-
-  /**
-   * Provide a className that is applied to the <TabContent> components
-   */
-  tabContentClassName: PropTypes.string,
 };
 
-export default Tabs;
+const Tab = React.forwardRef(function Tab(
+  {
+    as: BaseComponent = 'button',
+    children,
+    className: customClassName,
+    disabled,
+    onClick,
+    onKeyDown,
+    ...rest
+  },
+  ref
+) {
+  const prefix = usePrefix();
+  const { selectedIndex, setSelectedIndex, baseId } = React.useContext(
+    TabsContext
+  );
+  const index = React.useContext(TabContext);
+  const id = `${baseId}-tab-${index}`;
+  const panelId = `${baseId}-tabpanel-${index}`;
+  const className = cx(
+    `${prefix}--tabs__nav-item`,
+    `${prefix}--tabs__nav-link`,
+    customClassName,
+    {
+      [`${prefix}--tabs__nav-item--selected`]: selectedIndex === index,
+      [`${prefix}--tabs__nav-item--disabled`]: disabled,
+    }
+  );
+
+  return (
+    <BaseComponent
+      {...rest}
+      aria-controls={panelId}
+      aria-disabled={disabled}
+      aria-selected={selectedIndex === index}
+      ref={ref}
+      id={id}
+      role="tab"
+      className={className}
+      disabled={disabled}
+      onClick={(evt) => {
+        if (disabled) {
+          return;
+        }
+        setSelectedIndex(index);
+        if (onClick) {
+          onClick(evt);
+        }
+      }}
+      onKeyDown={onKeyDown}
+      tabIndex={selectedIndex === index ? '0' : '-1'}
+      type="button">
+      {children}
+    </BaseComponent>
+  );
+});
+
+Tab.propTypes = {
+  /**
+   * Provide a custom element to render instead of the default button
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+  /**
+   * Provide child elements to be rendered inside of `Tab`.
+   */
+  children: PropTypes.node,
+  /**
+   * Specify an optional className to be added to your Tab
+   */
+  className: PropTypes.string,
+  /**
+   * Whether your Tab is disabled.
+   */
+  disabled: PropTypes.bool,
+  /**
+   * Provide a handler that is invoked when a user clicks on the control
+   */
+  onClick: PropTypes.func,
+  /**
+   * Provide a handler that is invoked on the key down event for the control
+   */
+  onKeyDown: PropTypes.func,
+  /*
+   * An optional parameter to allow overriding the anchor rendering.
+   * Useful for using Tab along with react-router or other client
+   * side router libraries.
+   **/
+  renderButton: PropTypes.func,
+};
+
+const TabPanel = React.forwardRef(function TabPanel(
+  { children, className: customClassName, ...rest },
+  forwardRef
+) {
+  const prefix = usePrefix();
+  const panel = useRef(null);
+  const ref = useMergedRefs([forwardRef, panel]);
+
+  const [tabIndex, setTabIndex] = useState('0');
+  const { selectedIndex, baseId } = React.useContext(TabsContext);
+  const index = React.useContext(TabPanelContext);
+  const id = `${baseId}-tabpanel-${index}`;
+  const tabId = `${baseId}-tab-${index}`;
+  const className = cx(`${prefix}--tab-content`, customClassName);
+
+  // tabindex should only be 0 if no interactive content in children
+  useEffect(() => {
+    const interactiveContent = getInteractiveContent(panel.current);
+    if (interactiveContent) {
+      setTabIndex('-1');
+    }
+  }, []);
+
+  return (
+    <div
+      {...rest}
+      aria-labelledby={tabId}
+      id={id}
+      className={className}
+      ref={ref}
+      role="tabpanel"
+      tabIndex={tabIndex}
+      hidden={selectedIndex !== index}>
+      {children}
+    </div>
+  );
+});
+
+TabPanel.propTypes = {
+  /**
+   * Provide child elements to be rendered inside of `TabPanel`.
+   */
+  children: PropTypes.node,
+  /**
+   * Specify an optional className to be added to TabPanel.
+   */
+  className: PropTypes.string,
+};
+
+function TabPanels({ children }) {
+  return React.Children.map(children, (child, index) => {
+    return (
+      <TabPanelContext.Provider value={index}>{child}</TabPanelContext.Provider>
+    );
+  });
+}
+
+TabPanels.propTypes = {
+  /**
+   * Provide child elements to be rendered inside of `TabPanels`.
+   */
+  children: PropTypes.node,
+};
+
+export { Tabs, Tab, TabPanel, TabPanels, TabList };
+
+// TO DO: implement horizontal scroll and the following props:
+// leftOverflowButtonProps
+// rightOverflowButtonProps

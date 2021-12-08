@@ -39,6 +39,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     ariaLabel,
     itemToString,
     itemToElement,
+    renderSelectedItem,
     type,
     size,
     onChange,
@@ -174,7 +175,11 @@ const Dropdown = React.forwardRef(function Dropdown(
           {...toggleButtonProps}
           ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
-            {selectedItem ? itemToString(selectedItem) : label}
+            {selectedItem
+              ? renderSelectedItem
+                ? renderSelectedItem(selectedItem)
+                : itemToString(selectedItem)
+              : label}
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
@@ -252,7 +257,7 @@ Dropdown.propTypes = {
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  helperText: PropTypes.node,
 
   /**
    * Specify whether the title text should be hidden or not
@@ -328,6 +333,12 @@ Dropdown.propTypes = {
    * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func,
+
+  /**
+   * An optional callback to render the currently selected item as a react element instead of only
+   * as a string.
+   */
+  renderSelectedItem: PropTypes.func,
 
   /**
    * In the case you want to control the dropdown selection entirely.
