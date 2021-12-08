@@ -1,7 +1,7 @@
 {
   "name": "carbon-components-react",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "7.48.0",
+  "version": "7.50.0-rc.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -34,7 +34,6 @@
     "postinstall": "carbon-telemetry collect --install",
     "prepublish": "yarn build",
     "start": "yarn storybook",
-    "start:v11": "CARBON_ENABLE_V11_RELEASE=true yarn storybook",
     "storybook": "rimraf node_modules/.cache/storybook && start-storybook -p 9000 -s ./.storybook/assets",
     "snapshot": "build-storybook && percy-storybook --widths=320,1280",
     "test:e2e": "cypress run-ct --config video=false,screenshotOnRunFailure=false"
@@ -48,7 +47,7 @@
   "dependencies": {
     "@babel/runtime": "^7.14.6",
     "@carbon/feature-flags": "^0.6.0",
-    "@carbon/icons-react": "^10.43.0",
+    "@carbon/icons-react": "^10.44.0",
     "@carbon/layout": "^10.34.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
     "classnames": "2.3.1",
@@ -103,7 +102,7 @@
     "babel-plugin-react-docgen": "^4.2.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "browserslist-config-carbon": "^10.6.1",
-    "carbon-components": "^10.48.0",
+    "carbon-components": "^10.50.0-rc.0",
     "carbon-icons": "^7.0.5",
     "chalk": "^4.1.1",
     "cli-table": "^0.3.0",

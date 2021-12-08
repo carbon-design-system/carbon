@@ -839,6 +839,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "Kman316",
+      "name": "Cathal Kenneally",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25666525?v=4",
+      "profile": "https://github.com/Kman316",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

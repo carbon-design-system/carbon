@@ -6,13 +6,11 @@
  */
 
 import React from 'react';
-import {
-  Tab,
-  Button,
-  Tabs,
-  unstable_ContainedTab as ContainedTab,
-  unstable_ContainedTabs as ContainedTabs,
-} from 'carbon-components-react';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
+import Button from '../../Button';
+
+import TabsSkeleton from './Tabs.Skeleton';
+import { Monster20, Corn20, Bat20 } from '@carbon/icons-react';
 
 import { unstable_FeatureFlags as FeatureFlags } from 'carbon-components-react';
 
@@ -28,55 +26,81 @@ export default {
   parameters: {
     component: Tabs,
     subcomponents: {
+      TabList,
       Tab,
+      TabPanels,
+      TabPanel,
     },
   },
 };
 
 export const Default = () => (
   <Tabs>
-    <Tab id="tab-1" label="Tab label 1">
-      <p>Content for first tab goes here.</p>
-    </Tab>
-    <Tab id="tab-2" label="Tab label 2">
-      <p>Content for second tab goes here.</p>
-      <Button>With a button</Button>
-    </Tab>
-    <Tab id="tab-3" label="Tab label 3" disabled>
-      <p>Content for third tab goes here.</p>
-    </Tab>
-    <Tab
-      id="tab-4"
-      label="Tab label 4 shows truncation"
-      title="Tab label 4 shows truncation">
-      <p>Content for fourth tab goes here.</p>
-    </Tab>
-    <Tab label={<div>Custom Label</div>}>
-      <p>Content for fifth tab goes here.</p>
-    </Tab>
+    <TabList aria-label="List of tabs">
+      <Tab>Tab Label 1</Tab>
+      <Tab>Tab Label 2</Tab>
+      <Tab disabled>Tab Label 3</Tab>
+      <Tab>Tab Label 4 with a very long long label</Tab>
+      <Tab>Tab Label 5</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        Tab Panel 1 <Button>Example button</Button>
+      </TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const IconOnly = () => (
+  <Tabs>
+    <TabList aria-label="List of tabs">
+      <Tab disabled>
+        <Monster20 />
+      </Tab>
+      <Tab>
+        <Corn20 />
+      </Tab>
+      <Tab>
+        <Bat20 />
+      </Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+    </TabPanels>
   </Tabs>
 );
 
 export const Contained = () => (
-  <ContainedTabs>
-    <ContainedTab id="tab-1" label="Tab label 1">
-      <p>Content for first tab goes here.</p>
-    </ContainedTab>
-    <ContainedTab id="tab-2" label="Tab label 2">
-      <p>Content for second tab goes here.</p>
-      <Button>With a button</Button>
-    </ContainedTab>
-    <ContainedTab id="tab-3" label="Tab label 3" disabled>
-      <p>Content for third tab goes here.</p>
-    </ContainedTab>
-    <ContainedTab
-      id="tab-4"
-      label="Tab label 4 shows truncation"
-      title="Tab label 4 shows truncation">
-      <p>Content for fourth tab goes here.</p>
-    </ContainedTab>
-    <ContainedTab label={<div>Custom Label</div>}>
-      <p>Content for fifth tab goes here.</p>
-    </ContainedTab>
-  </ContainedTabs>
+  <Tabs>
+    <TabList aria-label="List of tabs" contained>
+      <Tab>Tab Label 1</Tab>
+      <Tab>Tab Label 2</Tab>
+      <Tab disabled>Tab Label 3</Tab>
+      <Tab>Tab Label 4 with a very long long title</Tab>
+      <Tab>Tab Label 5</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>
+        Tab Panel 2 <Button>Example button</Button>
+      </TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+    </TabPanels>
+  </Tabs>
 );
+
+export const Skeleton = () => {
+  return (
+    <div style={{ maxWidth: '100%' }}>
+      <TabsSkeleton />
+    </div>
+  );
+};

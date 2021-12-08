@@ -2,12 +2,16 @@
 
 exports[`Snapshot Tests should match snapshots 1`] = `
 Array [
+  "scss/compat/theme",
+  "scss/compat/themes",
+  "scss/components",
+  "scss/fonts",
   "scss/breakpoint",
   "scss/colors",
   "scss/config",
   "scss/feature-flags",
-  "scss/font-face",
   "scss/grid",
+  "scss/layer",
   "scss/motion",
   "scss/reset",
   "scss/spacing",
@@ -23,7 +27,6 @@ Array [
   "scss/utilities/focus-outline",
   "scss/utilities/high-contrast-mode",
   "scss/utilities/keyframes",
-  "scss/utilities/layer-set",
   "scss/utilities/placeholder-colors",
   "scss/utilities/rotate",
   "scss/utilities/skeleton",
