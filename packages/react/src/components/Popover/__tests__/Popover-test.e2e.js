@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import '@carbon/styles/scss/_layer.scss';
 import '@carbon/styles/scss/components/popover/_index.scss';
 import '../next/story.scss';
 

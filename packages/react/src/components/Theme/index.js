@@ -9,8 +9,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { LayerContext } from '../Layer/LayerContext';
 
-const ThemeContext = React.createContext({
+export const ThemeContext = React.createContext({
   theme: 'white',
 });
 
@@ -30,6 +31,7 @@ export function Theme({
     [`${prefix}--g10`]: theme === 'g10',
     [`${prefix}--g90`]: theme === 'g90',
     [`${prefix}--g100`]: theme === 'g100',
+    [`${prefix}--layer-one`]: true,
   });
   const value = React.useMemo(() => {
     return {
@@ -39,9 +41,11 @@ export function Theme({
 
   return (
     <ThemeContext.Provider value={value}>
-      <BaseComponent {...rest} className={className}>
-        {children}
-      </BaseComponent>
+      <LayerContext.Provider value={1}>
+        <BaseComponent {...rest} className={className}>
+          {children}
+        </BaseComponent>
+      </LayerContext.Provider>
     </ThemeContext.Provider>
   );
 }
