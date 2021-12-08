@@ -213,6 +213,7 @@ Array [
   "unstable_PageSelector",
   "unstable_Pagination",
   "unstable_ProgressBar",
+  "unstable_ThemeContext",
   "unstable_TreeNode",
   "unstable_TreeView",
   "unstable_useContextMenu",

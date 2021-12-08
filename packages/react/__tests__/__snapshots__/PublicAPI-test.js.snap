@@ -5946,51 +5946,6 @@ Map {
       },
     },
   },
-  "unstable_ContainedTab" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "handleTabClick": Object {
-        "type": "func",
-      },
-      "handleTabKeyDown": Object {
-        "type": "func",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "index": Object {
-        "type": "number",
-      },
-      "label": Object {
-        "type": "node",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "renderButton": Object {
-        "type": "func",
-      },
-      "renderContent": Object {
-        "type": "func",
-      },
-      "selected": Object {
-        "type": "bool",
-      },
-      "tabIndex": Object {
-        "type": "number",
-      },
-    },
-    "render": [Function],
-  },
   "TabContent" => Object {
     "defaultProps": Object {
       "selected": false,
@@ -6089,7 +6044,7 @@ Map {
       },
     },
   },
-  "unstable_ContainedTabs" => Object {
+  "unstable_TabPanel" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
@@ -6098,32 +6053,19 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "hidden": Object {
-        "type": "bool",
+    },
+    "render": [Function],
+  },
+  "unstable_TabPanels" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
       },
-      "leftOverflowButtonProps": Object {
-        "type": "object",
-      },
-      "light": [Function],
-      "onClick": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "onSelectionChange": Object {
-        "type": "func",
-      },
-      "rightOverflowButtonProps": Object {
-        "type": "object",
-      },
-      "scrollIntoView": Object {
-        "type": "bool",
-      },
-      "selected": Object {
-        "type": "number",
-      },
-      "selectionMode": Object {
+    },
+  },
+  "unstable_TabList" => Object {
+    "propTypes": Object {
+      "activation": Object {
         "args": Array [
           Array [
             "automatic",
@@ -6132,11 +6074,26 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tabContentClassName": Object {
+      "aria-label": Object {
+        "isRequired": true,
         "type": "string",
       },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "contained": Object {
+        "type": "bool",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
+      },
     },
-    "render": [Function],
   },
   "Tag" => Object {
     "propTypes": Object {
@@ -9270,6 +9227,11 @@ Map {
     },
   },
   "unstable_usePrefix" => Object {},
+  "unstable_ThemeContext" => Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": "React.Consumer",
+    "Provider": "React.Provider",
+  },
   "unstable_Theme" => Object {
     "propTypes": Object {
       "as": Object {
