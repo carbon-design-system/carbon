@@ -10,15 +10,26 @@ import React, { useState } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import { match, keys } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
+import { useId } from '../../../internal/useId';
 
-const DefinitionTooltip = ({ children, definition }) => {
+function DefinitionTooltip({ children, definition, ...rest }) {
   const [isOpen, setOpen] = useState(false);
   const prefix = usePrefix();
+  const id = useId();
 
   function handleKeyDown(event) {
     if (match(event, keys.Escape) && isOpen) {
+      event.stopPropagation();
       setOpen(false);
     }
+  }
+
+  function handleOnClick() {
+    if (isOpen) {
+      setOpen(false);
+      return;
+    }
+    setOpen(true);
   }
 
   return (
@@ -28,24 +39,21 @@ const DefinitionTooltip = ({ children, definition }) => {
         className={`${prefix}--definition-term`}
         aria-controls="definition-id"
         aria-expanded={isOpen}
-        onMouseOut={() => setOpen(!isOpen)}
-        onFocus={() => setOpen(!isOpen)}
-        onBlur={() => setOpen(!isOpen)}
-        onMouseOver={() => setOpen(!isOpen)}
+        onMouseOut={() => setOpen(false)}
+        onMouseOver={() => setOpen(true)}
+        onBlur={() => setOpen(false)}
         onKeyDown={handleKeyDown}
-        onClick={() => {
-          setOpen(!isOpen);
-        }}>
+        onClick={handleOnClick}
+        onFocus={() => setOpen(true)}
+        {...rest}>
         {children}
       </button>
-      <PopoverContent
-        className={`${prefix}--definition-tooltip`}
-        id="definition-id">
+      <PopoverContent className={`${prefix}--definition-tooltip`} id={id}>
         {definition}
       </PopoverContent>
     </Popover>
   );
-};
+}
 
 DefinitionTooltip.propTypes = {
   /**

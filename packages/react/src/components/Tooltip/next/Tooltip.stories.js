@@ -71,15 +71,15 @@ export const Duration = () => {
 
 export const Definition = () => {
   const definition =
-    'Starfleet was the deep space exploratory and defense service maintained by the United Federation of Planets.';
+    'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.';
   return (
     <div>
       <p>
-        The first duty of every{' '}
-        <DefinitionTooltip definition={definition}>Starfleet</DefinitionTooltip>{' '}
-        officer is to the truth, whether it’s scientific truth, or historical
-        truth, or personal truth! It is the guiding principle on which Starfleet
-        is based.
+        Custom domains direct requests for your apps in this Cloud Foundry
+        organization to a{' '}
+        <DefinitionTooltip definition={definition}>URL</DefinitionTooltip> that
+        you own. A custom domain can be a shared domain, a shared subdomain, or
+        a shared domain and host.
       </p>
     </div>
   );
