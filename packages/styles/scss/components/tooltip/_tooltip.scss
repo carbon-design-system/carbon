@@ -46,7 +46,7 @@ $tooltip-padding-inline: custom-property.get-var(
     border-bottom: 1px dotted theme.$border-strong;
     border-radius: 0;
   }
-  
+
   .#{$prefix}--definition-term:focus {
     @include focus-outline.focus-outline;
 
