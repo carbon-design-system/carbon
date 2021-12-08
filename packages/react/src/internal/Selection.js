@@ -9,12 +9,6 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 
-const canCallOnChange = (isMounted, savedOnChange) =>
-  isMounted && savedOnChange;
-
-const shouldCallOnChange = (isMounted, savedOnChange, isControlled) =>
-  canCallOnChange(isMounted, savedOnChange) && !isControlled;
-
 function callOnChangeHandler({
   isControlled,
   isMounted,
@@ -99,9 +93,7 @@ export function useSelection({
   }, [onChange]);
 
   useEffect(() => {
-    if (
-      shouldCallOnChange(isMounted.current, savedOnChange.current, isControlled)
-    ) {
+    if (isMounted.current && savedOnChange.current && !isControlled) {
       savedOnChange.current({ selectedItems });
     }
   }, [isControlled, selectedItems]);
