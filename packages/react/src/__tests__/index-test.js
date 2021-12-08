@@ -221,6 +221,7 @@ Array [
   "unstable_TabPanel",
   "unstable_TabPanels",
   "unstable_Theme",
+  "unstable_ThemeContext",
   "unstable_Tooltip",
   "unstable_TreeNode",
   "unstable_TreeView",

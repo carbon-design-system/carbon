@@ -10,6 +10,8 @@
 @use './config';
 @use './themes';
 @use './theme';
+// Inline themes depend on layer styles to property reset the layer level
+@use './layer';
 @use './utilities/custom-property';
 
 /// Specify a Map of zones where the key will be used as part of the selector
