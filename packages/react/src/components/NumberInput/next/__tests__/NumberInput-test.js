@@ -105,16 +105,6 @@ describe('NumberInput', () => {
         );
       });
 
-      it('should apply aria-label based on the label', () => {
-        const getInputRegion = () => wrapper.find('input');
-        expect(getInputRegion().prop('aria-label')).toEqual(null);
-
-        wrapper.setProps({ label: '' });
-        expect(getInputRegion().prop('aria-label')).toEqual(
-          mockProps.ariaLabel
-        );
-      });
-
       it('should set invalidText as expected', () => {
         expect(wrapper.find(`.${prefix}--form-requirement`).length).toEqual(0);
         wrapper.setProps({ invalid: true });
@@ -124,9 +114,8 @@ describe('NumberInput', () => {
       });
 
       it('should specify light number input as expected', () => {
-        expect(wrapper.find('NumberInput').props().light).toEqual(false);
         wrapper.setProps({ light: true });
-        expect(wrapper.find('NumberInput').props().light).toEqual(true);
+        expect(wrapper.find(NumberInput).props().light).toEqual(true);
       });
 
       it('should hide label as expected', () => {
@@ -169,9 +158,6 @@ describe('NumberInput', () => {
             />
           );
           const numberInput = getNumberInput(wrapper);
-          expect(wrapper.find('NumberInput').instance().state.value).toEqual(
-            10
-          );
           expect(numberInput.prop('value')).toEqual(10);
         });
 
@@ -203,80 +189,84 @@ describe('NumberInput', () => {
         });
 
         it('should set invalidText when value is empty string', () => {
-          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper.find('NumberInput').instance().setState({ value: '' });
-          wrapper.update();
+          wrapper.find('input').simulate('change', {
+            target: {
+              value: '',
+            },
+          });
           const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(1);
-
           expect(invalidText.text()).toEqual('invalid text');
         });
 
         it('allow empty string value', () => {
-          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper.find('NumberInput').instance().setState({ value: '' });
-
-          wrapper.update();
+          wrapper.find('input').simulate('change', {
+            target: {
+              value: '',
+            },
+          });
           wrapper.setProps({ allowEmpty: true });
           const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(0);
         });
 
         it('should allow updating the value with empty string and not be invalid', () => {
-          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper.find('NumberInput').instance().setState({ value: 50 });
-
-          wrapper.update();
+          wrapper.find('input').simulate('change', {
+            target: {
+              value: 50,
+            },
+          });
           wrapper.setProps({ value: '', allowEmpty: true });
-          wrapper.update();
           const invalidText = wrapper.find(`.${prefix}--form-requirement`);
           expect(invalidText.length).toEqual(0);
         });
 
         it('should change the value upon change in props', () => {
           wrapper.setProps({ value: 1 });
-          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper.find('NumberInput').instance().setState({ value: 1 });
-          wrapper.update();
+          wrapper.find('input').simulate('change', {
+            target: {
+              value: 2,
+            },
+          });
           wrapper.setProps({ value: 2 });
-          // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-          expect(wrapper.find('NumberInput').instance().state.value).toEqual(2);
+          expect(wrapper.find('input').prop('value')).toEqual(2);
         });
 
         it('should not cap the number given to value prop', () => {
-          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper.find('NumberInput').instance().setState({ value: 0 });
-          wrapper.update();
+          wrapper.find('input').simulate('change', {
+            target: {
+              value: 0,
+            },
+          });
+
           wrapper.setProps({ value: 5, min: 10, max: 20 });
-          // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-          expect(wrapper.find('NumberInput').instance().state.value).toEqual(5);
+          expect(wrapper.find('input').prop('value')).toEqual(5);
+
           wrapper.setProps({ value: 25, min: 10, max: 20 });
-          // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-          expect(wrapper.find('NumberInput').instance().state.value).toEqual(
-            25
-          );
+          expect(wrapper.find('input').prop('value')).toEqual(25);
         });
 
         // NumberInput propTypes do not allow a string to be passed
-        it.skip('should avoid capping when non-number prop is given to value prop', () => {
-          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper.find('NumberInput').instance().setState({ value: 2 });
-          wrapper.update();
+        it('should avoid capping when non-number prop is given to value prop', () => {
+          wrapper.find('input').simulate('change', {
+            target: {
+              value: 2,
+            },
+          });
+
           wrapper.setProps({ value: '', min: 1, max: 3 });
-          // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-          expect(wrapper.find('NumberInput').instance().state.value).toEqual(
-            ''
-          );
+          expect(wrapper.find('input').prop('value')).toBe('');
         });
 
         it('should avoid change the value upon setting props, unless there the value actually changes', () => {
           wrapper.setProps({ value: 1 });
-          // Enzyme doesn't seem to allow setState() in a forwardRef-wrapped class component
-          wrapper.find('NumberInput').instance().setState({ value: 2 });
-          wrapper.update();
+          wrapper.find('input').simulate('change', {
+            target: {
+              value: 2,
+            },
+          });
           wrapper.setProps({ value: 1 });
-          // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-          expect(wrapper.find('NumberInput').instance().state.value).toEqual(2);
+          expect(wrapper.find('input').prop('value')).toBe(2);
         });
       });
     });
@@ -284,12 +274,6 @@ describe('NumberInput', () => {
     describe('Icon', () => {
       it('renders two Icon components', () => {
         expect(icons.length).toEqual(2);
-      });
-
-      it('has the expected default iconDescription', () => {
-        expect(wrapper.find('NumberInput').prop('iconDescription')).toEqual(
-          'choose a number'
-        );
       });
 
       it('should use correct icons', () => {
@@ -303,10 +287,11 @@ describe('NumberInput', () => {
       });
 
       it('should have iconDescription match Icon component description prop', () => {
+        wrapper.setProps({ iconDescription: 'test' });
         const iconUpText = wrapper.find('button.up-icon').prop('title');
         const iconDownText = wrapper.find('button.down-icon').prop('title');
         const iconDescription = wrapper
-          .find('NumberInput')
+          .find(NumberInput)
           .prop('iconDescription');
 
         const matches =
@@ -417,23 +402,22 @@ describe('NumberInput', () => {
         wrapper.setProps({ value: 1 });
         upArrow.simulate('click');
         expect(onClick).toHaveBeenCalled();
-        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'up', 2);
+        expect(onClick).toHaveBeenCalledWith(expect.anything(), {
+          direction: 'up',
+          value: 2,
+        });
       });
 
       it('should only increase the value on up arrow click if value is less than max', () => {
         wrapper.setProps({ value: 100 });
         upArrow.simulate('click');
-        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-        expect(wrapper.find('NumberInput').instance().state.value).toEqual(100);
-        expect(onClick).not.toHaveBeenCalled();
+        expect(wrapper.find('input').prop('value')).toEqual(100);
       });
 
       it('should only decrease the value on down arrow click if value is greater than min', () => {
         wrapper.setProps({ value: 0 });
         downArrow.simulate('click');
-        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-        expect(wrapper.find('NumberInput').instance().state.value).toEqual(0);
-        expect(onClick).not.toHaveBeenCalled();
+        expect(wrapper.find('input').prop('value')).toEqual(0);
       });
 
       it('should increase by the value of step', () => {
@@ -441,11 +425,9 @@ describe('NumberInput', () => {
           step: 10,
           value: 0,
         });
-        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-        expect(wrapper.find('NumberInput').instance().state.value).toEqual(0);
+        expect(wrapper.find('input').prop('value')).toEqual(0);
         upArrow.simulate('click');
-        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-        expect(wrapper.find('NumberInput').instance().state.value).toEqual(10);
+        expect(wrapper.find('input').prop('value')).toEqual(10);
       });
 
       it('should decrease by the value of step', () => {
@@ -453,16 +435,9 @@ describe('NumberInput', () => {
           step: 10,
           value: 100,
         });
-        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-        expect(wrapper.find('NumberInput').instance().state.value).toEqual(100);
+        expect(wrapper.find('input').prop('value')).toEqual(100);
         downArrow.simulate('click');
-        // Enzyme doesn't seem to allow state() in a forwardRef-wrapped class component
-        expect(wrapper.find('NumberInput').instance().state.value).toEqual(90);
-      });
-
-      it('should not invoke onClick when down arrow is clicked and value is 0', () => {
-        downArrow.simulate('click');
-        expect(onClick).not.toHaveBeenCalled();
+        expect(wrapper.find('input').prop('value')).toEqual(90);
       });
 
       it('should invoke onClick when down arrow is clicked and value is above min', () => {
@@ -470,7 +445,10 @@ describe('NumberInput', () => {
         downArrow.simulate('click');
         expect(onClick).toHaveBeenCalled();
         expect(onChange).toHaveBeenCalled();
-        expect(onClick).toHaveBeenCalledWith(expect.anything(), 'down', 0);
+        expect(onClick).toHaveBeenCalledWith(expect.anything(), {
+          direction: 'down',
+          value: 0,
+        });
       });
 
       it('should invoke onChange when numberInput is changed', () => {

@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
 import { Add16, Subtract16 } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -30,7 +29,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
   const enabled = useFeatureFlag('enable-v11-release');
   const {
     allowEmpty = false,
-    ariaLabel = 'Numeric input field with increment and decrement buttons',
     className: customClassName,
     disabled = false,
     defaultValue,
@@ -47,6 +45,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     max,
     min,
     onChange,
+    onClick,
     readOnly,
     size,
     step = 1,
@@ -66,6 +65,9 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
     return 0;
   });
+  const [prevControlledValue, setPrevControlledValue] = useState(
+    controlledValue
+  );
   const inputRef = useRef(null);
   const ref = useMergedRefs([forwardRef, inputRef]);
   const numberInputClasses = cx({
@@ -86,7 +88,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     max,
     min,
   });
-
   const normalizedProps = normalize({
     id,
     readOnly,
@@ -96,22 +97,24 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     warn,
     warnText,
   });
-
   const [incrementNumLabel, decrementNumLabel] = [
     t('increment.number'),
     t('decrement.number'),
   ];
-
   const wrapperClasses = cx(`${prefix}--number__input-wrapper`, {
     [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
   });
-
   const iconClasses = cx({
     [`${prefix}--number__invalid`]:
       normalizedProps.invalid || normalizedProps.warn,
     [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
     [`${prefix}--number__readonly-icon`]: readOnly,
   });
+
+  if (controlledValue !== prevControlledValue) {
+    setValue(controlledValue);
+    setPrevControlledValue(controlledValue);
+  }
 
   let ariaDescribedBy = null;
   if (normalizedProps.invalid) {
@@ -126,15 +129,14 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
       return;
     }
 
-    const { value: nextValue } = event.target;
-    const direction = value < nextValue ? 'up' : 'down';
-    setValue(nextValue);
+    const state = {
+      value: event.target.value,
+      direction: value < event.target.value ? 'up' : 'down',
+    };
+    setValue(state.value);
 
     if (onChange) {
-      onChange(event, {
-        direction,
-        value: nextValue,
-      });
+      onChange(event, state);
     }
   }
 
@@ -142,7 +144,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     <div className={cx(`${prefix}--form-item`, { [customClassName]: enabled })}>
       <div
         className={numberInputClasses}
-        data-invalid={normalizedProps.invalid ? true : null}>
+        data-invalid={normalizedProps.invalid ? true : undefined}>
         <Label
           disabled={normalizedProps.disabled}
           hideLabel={hideLabel}
@@ -152,7 +154,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
         <div className={wrapperClasses}>
           <input
             {...rest}
-            data-invalid={normalizedProps.invalid ? true : null}
+            data-invalid={normalizedProps.invalid ? true : undefined}
             aria-invalid={normalizedProps.invalid}
             aria-describedby={ariaDescribedBy}
             disabled={normalizedProps.disabled}
@@ -160,6 +162,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             id={id}
             max={max}
             min={min}
+            onClick={onClick}
             onChange={handleOnChange}
             pattern="[0-9]*"
             readOnly={readOnly}
@@ -177,13 +180,18 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 className={`${prefix}--number__control-btn down-icon`}
                 disabled={disabled}
                 onClick={(event) => {
-                  const nextValue = clamp(max, min, value - step);
-                  setValue(nextValue);
+                  const state = {
+                    value: clamp(max, min, value - step),
+                    direction: 'down',
+                  };
+                  setValue(state.value);
+
                   if (onChange) {
-                    onChange(event, {
-                      value: nextValue,
-                      direction: 'down',
-                    });
+                    onChange(event, state);
+                  }
+
+                  if (onClick) {
+                    onClick(event, state);
                   }
                 }}
                 tabIndex="-1"
@@ -197,13 +205,18 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 className={`${prefix}--number__control-btn up-icon`}
                 disabled={disabled}
                 onClick={(event) => {
-                  const nextValue = clamp(max, min, value + step);
-                  setValue(nextValue);
+                  const state = {
+                    value: clamp(max, min, value + step),
+                    direction: 'up',
+                  };
+                  setValue(state.value);
+
                   if (onChange) {
-                    onChange(event, {
-                      value: nextValue,
-                      direction: 'up',
-                    });
+                    onChange(event, state);
+                  }
+
+                  if (onClick) {
+                    onClick(event, state);
                   }
                 }}
                 tabIndex="-1"
@@ -215,7 +228,9 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             </div>
           )}
         </div>
-        {normalizedProps.validation || (
+        {normalizedProps.validation ? (
+          normalizedProps.validation
+        ) : (
           <HelperText disabled={disabled} description={helperText} />
         )}
       </div>
@@ -228,11 +243,6 @@ NumberInput.propTypes = {
    * `true` to allow empty string.
    */
   allowEmpty: PropTypes.bool,
-
-  /**
-   * Provide a description that would be used to best describe the use case of the NumberInput component
-   */
-  ariaLabel: PropTypes.string,
 
   /**
    * Specify an optional className to be applied to the wrapper node
@@ -380,6 +390,13 @@ function Label({ disabled, id, hideLabel, label }) {
   return null;
 }
 
+Label.propTypes = {
+  disabled: PropTypes.bool,
+  hideLabel: PropTypes.bool,
+  id: PropTypes.string,
+  label: PropTypes.node,
+};
+
 function HelperText({ disabled, description }) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
@@ -392,6 +409,24 @@ function HelperText({ disabled, description }) {
   return null;
 }
 
+HelperText.propTypes = {
+  description: PropTypes.node,
+  disabled: PropTypes.bool,
+};
+
+/**
+ * Determine if the given value is invalid based on the given max, min and
+ * conditions like `allowEmpty`. If `invalid` is passed through, it will default
+ * to false.
+ *
+ * @param {object} config
+ * @param {boolean} config.allowEmpty
+ * @param {boolean} config.invalid
+ * @param {number} config.value
+ * @param {number} config.max
+ * @param {number} config.min
+ * @returns {boolean}
+ */
 function getInputValidity({ allowEmpty, invalid, value, max, min }) {
   if (invalid) {
     return false;
@@ -408,6 +443,12 @@ function getInputValidity({ allowEmpty, invalid, value, max, min }) {
   return true;
 }
 
+/**
+ * Clamp the given value between the upper bound `max` and the lower bound `min`
+ * @param {number} max
+ * @param {number} min
+ * @param {number} value
+ */
 function clamp(max, min, value) {
   return Math.min(max, Math.max(min, value));
 }
