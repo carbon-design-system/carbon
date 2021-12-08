@@ -6,8 +6,10 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import { Tooltip } from '../../next';
+import { DefinitionTooltip } from '../../next/DefinitionTooltip';
 
 describe('Tooltip', () => {
   it('should support a custom className with the `className` prop', () => {
@@ -53,5 +55,44 @@ describe('Tooltip', () => {
       </Tooltip>
     );
     expect(screen.getByText('test')).toHaveAttribute('aria-describedby');
+  });
+});
+
+describe('DefintiionTooltip', () => {
+  it('should support a custom className with the `className` prop', () => {
+    const definition = 'Uniform Resource Locator';
+    render(
+      <DefinitionTooltip definition={definition} className="tooltip-class">
+        URL
+      </DefinitionTooltip>
+    );
+    expect(screen.getByText('URL')).toHaveClass('tooltip-class');
+  });
+
+  it('should apply additional props to the outermost element', () => {
+    const definition = 'Uniform Resource Locator';
+    render(
+      <DefinitionTooltip
+        data-testid="test"
+        definition={definition}
+        className="tooltip-class">
+        URL
+      </DefinitionTooltip>
+    );
+    expect(screen.getByText('URL')).toHaveAttribute('data-testid', 'test');
+  });
+
+  it('should display onClick a defintion provided via prop', () => {
+    const definition = 'Uniform Resource Locator';
+    render(
+      <DefinitionTooltip
+        data-testid="test"
+        definition={definition}
+        className="tooltip-class">
+        URL
+      </DefinitionTooltip>
+    );
+    userEvent.click(screen.getByText('URL'));
+    expect(screen.getByText(definition)).toHaveTextContent(definition);
   });
 });
