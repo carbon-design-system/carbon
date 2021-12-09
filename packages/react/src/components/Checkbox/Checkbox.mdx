@@ -91,23 +91,6 @@ event.
 <Checkbox onChange={()=>{}} labelText={`Checkbox label`} id="checkbox-label-2" />
 ```
 
-### Checkbox onClick
-
-You can use the `onClick` prop to pass in a custom function for event handling.
-This event can be used to control click event bubbling without having to
-implement your own wrapping element/component. It receives the dom event as its
-only argument.
-
-`onClick` is placed on the wrapping `div` containing both the `input` and
-`label`. As such, this will be called twice for every click - once for the
-input, a second time for the label. Due to this, `onClick` should not be used to
-catch state updates when using Checkbox as a controlled component.
-
-```jsx
-<Checkbox onClick={()=>{}} labelText={`Checkbox label`} id="checkbox-label-1" />
-<Checkbox onClick={()=>{}} labelText={`Checkbox label`} id="checkbox-label-2" />
-```
-
 ## Feedback
 
 Help us improve this component by providing feedback, asking questions on Slack,
