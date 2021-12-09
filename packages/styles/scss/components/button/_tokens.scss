@@ -330,11 +330,11 @@ $button-disabled: (
     ),
     (
       theme: themes.$g90,
-      value: #6f6f6f,
+      value: rgba(141, 141, 141, 0.3),
     ),
     (
       theme: themes.$g100,
-      value: #525252,
+      value: rgba(141, 141, 141, 0.3),
     ),
   ),
 ) !default;
