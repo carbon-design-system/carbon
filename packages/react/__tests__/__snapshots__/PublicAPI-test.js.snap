@@ -4307,6 +4307,7 @@ Map {
       "light": false,
       "locale": "en",
       "open": false,
+      "selectedItems": null,
       "selectionFeedback": "top-after-reopen",
       "sortItems": [Function],
       "title": false,
@@ -4502,6 +4503,9 @@ Map {
       },
       "open": Object {
         "type": "bool",
+      },
+      "selectedItems": Object {
+        "type": "array",
       },
       "selectionFeedback": Object {
         "args": Array [
