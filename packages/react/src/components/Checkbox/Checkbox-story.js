@@ -102,7 +102,6 @@ const props = () => ({
   hideLabel: boolean('No label (hideLabel)', false),
   wrapperClassName: text('Wrapper CSS class name (wrapperClassName)', ''),
   onChange: action('onChange'),
-  onClick: action('onClick'),
 });
 
 export const playground = () => (
