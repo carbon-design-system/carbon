@@ -10,7 +10,14 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
 import Button from '../../Button';
 
 import TabsSkeleton from './Tabs.Skeleton';
-import { Monster20, Corn20, Bat20 } from '@carbon/icons-react';
+import {
+  Monster20,
+  Corn20,
+  Bat20,
+  Monster16,
+  Corn16,
+  Bat16,
+} from '@carbon/icons-react';
 
 import { unstable_FeatureFlags as FeatureFlags } from 'carbon-components-react';
 
@@ -66,6 +73,27 @@ export const IconOnly = () => (
       </Tab>
       <Tab>
         <Bat20 />
+      </Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const Icon16Only = () => (
+  <Tabs>
+    <TabList aria-label="List of tabs">
+      <Tab disabled>
+        <Monster16 />
+      </Tab>
+      <Tab>
+        <Corn16 />
+      </Tab>
+      <Tab>
+        <Bat16 />
       </Tab>
     </TabList>
     <TabPanels>
