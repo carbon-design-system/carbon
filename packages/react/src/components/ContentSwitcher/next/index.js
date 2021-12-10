@@ -11,7 +11,7 @@ import React from 'react';
 import cx from 'classnames';
 import { match, matches, keys } from '../../../internal/keyboard';
 import { useId } from '../../../internal/useId';
-import { useControllableState } from './useControllableState';
+import { useControllableState } from '../../../internal/useControllableState';
 
 const { prefix } = settings;
 
