@@ -31,7 +31,6 @@ describe('NumberInput', () => {
         max: 100,
         id: 'test',
         label: 'Number Input',
-        ariaLabel: 'Number Input',
         className: 'extra-class',
         invalidText: 'invalid text',
         helperText: 'testHelper',
