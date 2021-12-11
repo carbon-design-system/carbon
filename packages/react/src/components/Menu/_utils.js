@@ -66,6 +66,18 @@ export function getParentNode(node) {
   return null;
 }
 
+export function getSubMenuOffset(node) {
+  if (node) {
+    const nodeStyles = getComputedStyle(node);
+    const spacings =
+      parseInt(nodeStyles.paddingTop) + parseInt(nodeStyles.paddingBottom); // styles always in px, convert to number
+    const elementHeight = node.firstElementChild.offsetHeight;
+    return elementHeight + spacings || 0;
+  }
+
+  return 0;
+}
+
 export function getParentMenu(el) {
   if (el) {
     const parentMenu = el.parentNode.closest(`ul.${prefix}--menu`);
@@ -135,7 +147,9 @@ export function getPosition(
   elementDimensions,
   targetBoundaries,
   containerBoundaries,
-  preferredDirection = 1
+  preferredDirection = 1,
+  isRootLevel,
+  element
 ) {
   const position = [0, 0];
   let direction = preferredDirection;
@@ -171,6 +185,11 @@ export function getPosition(
   );
   if (!yFits) {
     position[1] = targetBoundaries[1] - elementDimensions[1];
+    if (!isRootLevel && element) {
+      // if sub-menu and not root level, consider offset
+      const diff = getSubMenuOffset(element);
+      position[1] += diff;
+    }
   }
 
   return {
