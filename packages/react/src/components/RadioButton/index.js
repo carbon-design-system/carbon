@@ -14,4 +14,4 @@ const RadioButton = FeatureFlags.enabled('enable-v11-release')
   : RadioButtonClassic;
 
 export default RadioButton;
-export * from './RadioButton.Skeleton';
+export { default as RadioButtonSkeleton } from './RadioButton.Skeleton';

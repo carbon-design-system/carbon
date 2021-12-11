@@ -121,15 +121,15 @@ $radio-border-width: 1px !default;
     }
   }
 
-  .#{$prefix}--radio-button:button-disabled + .#{$prefix}--radio-button__label {
+  .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
     color: $button-disabled;
     cursor: not-allowed;
   }
 
-  .#{$prefix}--radio-button:button-disabled
+  .#{$prefix}--radio-button:disabled
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance,
-  .#{$prefix}--radio-button:button-disabled:checked
+  .#{$prefix}--radio-button:disabled:checked
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
     border-color: $border-disabled;

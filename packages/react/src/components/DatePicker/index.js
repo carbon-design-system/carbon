@@ -14,4 +14,4 @@ const DatePicker = FeatureFlags.enabled('enable-v11-release')
   : DatePickerClassic;
 
 export default DatePicker;
-export * from './DatePicker.Skeleton';
+export { default as DatePickerSkeleton } from './DatePicker.Skeleton';
