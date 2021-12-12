@@ -16,8 +16,8 @@ $index: 1;
 }
 
 .px-0 {
-  padding-left: 0;
   padding-right: 0;
+  padding-left: 0;
 }
 
 .py-0 {
@@ -47,8 +47,8 @@ $index: 1;
   }
 
   .px-#{$index} {
-    padding-left: $value;
     padding-right: $value;
+    padding-left: $value;
   }
 
   .py-#{$index} {
@@ -82,8 +82,8 @@ $index: 1;
 }
 
 .mx-0 {
-  margin-left: 0;
   margin-right: 0;
+  margin-left: 0;
 }
 
 .my-0 {
@@ -113,8 +113,8 @@ $index: 1;
   }
 
   .mx-#{$index} {
-    margin-left: $value;
     margin-right: $value;
+    margin-left: $value;
   }
 
   .my-#{$index} {

@@ -7,12 +7,12 @@
 
 .header {
   display: grid;
-  column-gap: 2rem;
-  grid-template-columns: max-content 1fr;
-  border-bottom: 2px solid #000000;
-  padding: 0 1rem;
   min-height: 4rem;
   align-items: center;
+  padding: 0 1rem;
+  border-bottom: 2px solid #000000;
+  column-gap: 2rem;
+  grid-template-columns: max-content 1fr;
 }
 
 .nav {
@@ -21,7 +21,7 @@
 
 .links {
   display: flex;
-  column-gap: 1rem;
   height: 100%;
   align-items: center;
+  column-gap: 1rem;
 }

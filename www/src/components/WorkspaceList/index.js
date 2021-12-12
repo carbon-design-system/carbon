@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as classes from './WorkspaceList.module.scss';
-import Link from 'next/link';
 import {
   Grid,
   Column,
@@ -17,6 +15,7 @@ import {
   TableRow,
   TableCell,
 } from '@carbon/react';
+import Link from 'next/link';
 
 function WorkspaceList({ workspaces }) {
   return (
