@@ -1,0 +1,141 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:string';
+@use '@carbon/react/scss/spacing';
+
+// Padding
+$index: 1;
+
+.p0 {
+  padding: 0;
+}
+
+.px-0 {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.py-0 {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.pl-0 {
+  padding-left: 0;
+}
+
+.pr-0 {
+  padding-right: 0;
+}
+
+.pt-0 {
+  padding-top: 0;
+}
+
+.pb-0 {
+  padding-bottom: 0;
+}
+
+@each $key, $value in spacing.$spacing {
+  .p#{$index} {
+    padding: $value;
+  }
+
+  .px-#{$index} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+
+  .py-#{$index} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+
+  .pl-#{$index} {
+    padding-left: $value;
+  }
+
+  .pr-#{$index} {
+    padding-right: $value;
+  }
+
+  .pt-#{$index} {
+    padding-top: $value;
+  }
+
+  .pb-#{$index} {
+    padding-bottom: $value;
+  }
+  $index: $index + 1;
+}
+
+// Margin
+$index: 1;
+
+.m0 {
+  margin: 0;
+}
+
+.mx-0 {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.my-0 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.ml-0 {
+  margin-left: 0;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+
+.mt-0 {
+  margin-top: 0;
+}
+
+.mb-0 {
+  margin-bottom: 0;
+}
+
+@each $key, $value in spacing.$spacing {
+  .m#{$index} {
+    margin: $value;
+  }
+
+  .mx-#{$index} {
+    margin-left: $value;
+    margin-right: $value;
+  }
+
+  .my-#{$index} {
+    margin-top: $value;
+    margin-bottom: $value;
+  }
+
+  .ml-#{$index} {
+    margin-left: $value;
+  }
+
+  .mr-#{$index} {
+    margin-right: $value;
+  }
+
+  .mt-#{$index} {
+    margin-top: $value;
+  }
+
+  .mb-#{$index} {
+    margin-bottom: $value;
+  }
+  $index: $index + 1;
+}

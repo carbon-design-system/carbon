@@ -1,0 +1,31 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/spacing';
+
+.card {
+  display: grid;
+  background: white;
+  padding: spacing.$spacing-05;
+  grid-template-rows: max-content 1fr;
+  row-gap: 1.5rem;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 1fr max-content;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  grid-template-rows: max-content;
+  column-gap: 1rem;
+  row-gap: 0.25rem;
+  font-size: 14px;
+  align-self: end;
+}
