@@ -18,6 +18,7 @@ import {
   TableBody,
   TableCell,
 } from '@carbon/react';
+import { Caution, Warning } from '@carbon/react/icons';
 import { parseISO, format } from 'date-fns';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -25,6 +26,7 @@ import { getIssueStatistics, getEnabledRepos } from '../../../github';
 import { Header } from '../../../components/Header';
 import { Text } from '../../../components/Text';
 import { Box } from '../../../components/Box';
+import { Flex } from '../../../components/Flex';
 
 export default function InsightPage(props) {
   const router = useRouter();
@@ -114,21 +116,27 @@ export default function InsightPage(props) {
                       };
                       const closedStyle = {};
                       const createdStyle = {};
+                      let createdLabel = null;
+                      let closedLabel = null;
 
                       if (stddevs.created >= 2) {
                         createdStyle.background = 'red';
                         createdStyle.color = 'black';
+                        createdLabel = <Warning />;
                       } else if (stddevs.created >= 1) {
                         createdStyle.background = 'yellow';
                         createdStyle.color = 'black';
+                        createdLabel = <Caution />;
                       }
 
                       if (stddevs.closed >= 2) {
                         closedStyle.background = 'red';
                         closedStyle.color = 'black';
+                        closedLabel = <Warning />;
                       } else if (stddevs.closed >= 1) {
                         closedStyle.background = 'yellow';
                         closedStyle.color = 'black';
+                        closedLabel = <Caution />;
                       }
 
                       const delta =
@@ -142,19 +150,35 @@ export default function InsightPage(props) {
                             {format(end, 'MMMM do')}
                           </TableCell>
                           <TableCell>
-                            {sprint.issues.states.open.total}{' '}
-                            {formatChange(sprint.issues.states.open.change)}
+                            <span>
+                              {sprint.issues.states.open.total}{' '}
+                              {formatChange(sprint.issues.states.open.change)}
+                            </span>
                           </TableCell>
                           <TableCell style={closedStyle}>
-                            {sprint.issues.states.closed.total}{' '}
-                            {formatChange(sprint.issues.states.closed.change)}
+                            <Flex align-center justify-between gap-x-5>
+                              <span>
+                                {sprint.issues.states.closed.total}{' '}
+                                {formatChange(
+                                  sprint.issues.states.closed.change
+                                )}
+                              </span>
+                              {closedLabel}
+                            </Flex>
                           </TableCell>
                           <TableCell style={createdStyle}>
-                            {sprint.issues.states.created.total}{' '}
-                            {formatChange(sprint.issues.states.created.change)}
+                            <Flex align-center justify-between gap-x-5>
+                              <span>
+                                {sprint.issues.states.created.total}{' '}
+                                {formatChange(
+                                  sprint.issues.states.created.change
+                                )}
+                              </span>
+                              {createdLabel}
+                            </Flex>
                           </TableCell>
                           <TableCell>
-                            {`${delta > 0 ? '+' : ''}${delta}`}
+                            <span>{`${delta > 0 ? '+' : ''}${delta}`}</span>
                           </TableCell>
                         </TableRow>
                       );

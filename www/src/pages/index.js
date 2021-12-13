@@ -5,31 +5,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { Grid, Column } from '@carbon/react';
 import Link from 'next/link';
 import React from 'react';
+import { Header } from '../components/Header';
+import { Text } from '../components/Text';
 
 export default function IndexPage() {
   return (
     <>
-      <header>
-        Carbon
-        <nav aria-label="Navigation">
-          <ul>
-            <li>
-              <Link href="/">
-                <a>Home</a>
-              </Link>
-            </li>
-            <li>
-              <Link href="/packages">
-                <a>Packages</a>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
+      <Header />
       <main>
-        <h1>Support</h1>
+        <Grid>
+          <Column sm={4} md={8} lg={16}>
+            <Text productive-heading-04 mt-8>
+              <h1>Carbon Design System</h1>
+            </Text>
+          </Column>
+        </Grid>
       </main>
     </>
   );

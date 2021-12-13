@@ -1,0 +1,115 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/spacing';
+
+.flex {
+  display: flex;
+}
+
+/// https://tailwindcss.com/docs/flex-wrap
+.wrap {
+  flex-wrap: wrap;
+}
+
+.wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+.nowrap {
+  flex-wrap: nowrap;
+}
+
+/// https://tailwindcss.com/docs/flex-direction
+.row {
+  flex-direction: row;
+}
+
+.row-reverse {
+  flex-direction: row-reverse;
+}
+
+.col {
+  flex-direction: column;
+}
+
+.col-reverse {
+  flex-direction: column-reverse;
+}
+
+/// https://tailwindcss.com/docs/gap
+.gap-0 {
+  gap: 0px;
+}
+
+.gap-x-0 {
+  column-gap: 0px;
+}
+
+.gap-y-0 {
+  row-gap: 0px;
+}
+
+$index: 1;
+
+@each $key, $value in spacing.$spacing {
+  .gap-#{$index} {
+    gap: $value;
+  }
+
+  .gap-x-#{$index} {
+    column-gap: $value;
+  }
+
+  .gap-y-#{$index} {
+    row-gap: $value;
+  }
+
+  $index: $index + 1;
+}
+
+/// https://tailwindcss.com/docs/justify-content
+.justify-start {
+  justify-content: flex-start;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-center {
+  justify-content: flex-center;
+}
+
+.justify-between {
+  justify-content: space-between;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-around {
+  justify-content: space-around;
+}
+
+.justify-evenly {
+  justify-content: space-evenly;
+}
+
+/// https://tailwindcss.com/docs/align-items
+.align-start {
+  align-items: flex-start;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
