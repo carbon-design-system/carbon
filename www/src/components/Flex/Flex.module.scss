@@ -43,15 +43,15 @@
 
 /// https://tailwindcss.com/docs/gap
 .gap-0 {
-  gap: 0px;
+  gap: 0;
 }
 
 .gap-x-0 {
-  column-gap: 0px;
+  column-gap: 0;
 }
 
 .gap-y-0 {
-  row-gap: 0px;
+  row-gap: 0;
 }
 
 $index: 1;
@@ -87,10 +87,6 @@ $index: 1;
 
 .justify-between {
   justify-content: space-between;
-}
-
-.justify-around {
-  justify-content: space-around;
 }
 
 .justify-around {
