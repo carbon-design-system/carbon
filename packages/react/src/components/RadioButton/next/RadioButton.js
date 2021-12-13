@@ -9,6 +9,7 @@ import { Text } from '../../Text';
 const RadioButton = React.forwardRef(function RadioButton(
   {
     className,
+    disabled,
     hideLabel,
     id,
     labelPosition = 'right',
@@ -50,6 +51,7 @@ const RadioButton = React.forwardRef(function RadioButton(
         onChange={handleOnChange}
         id={uniqueId}
         ref={ref}
+        disabled={disabled}
       />
       <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
         <span className={`${prefix}--radio-button__appearance`} />

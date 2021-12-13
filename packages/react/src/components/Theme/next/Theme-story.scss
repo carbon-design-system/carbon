@@ -7,10 +7,25 @@
 
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/zone';
 
 .theme-section {
   padding: 1rem;
   background: theme.$background;
+  color: theme.$text-primary;
+}
+
+.theme-layer-example {
+  padding: 1rem;
+  background: theme.$background;
+  color: theme.$text-primary;
+}
+
+.theme-layer-header {
+  margin-bottom: 1rem;
+}
+
+.theme-with-layer {
+  padding: 1rem;
+  background: theme.$layer;
   color: theme.$text-primary;
 }

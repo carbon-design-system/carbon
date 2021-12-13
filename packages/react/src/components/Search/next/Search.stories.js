@@ -23,6 +23,19 @@ export const Default = () => (
   />
 );
 
+export const Disabled = () => (
+  <Search
+    disabled
+    size="lg"
+    defaultValue="A default value"
+    labelText="Search"
+    closeButtonLabelText="Clear search input"
+    id="search-1"
+    onChange={() => {}}
+    onKeyDown={() => {}}
+  />
+);
+
 export const Expandable = () => (
   <ExpandableSearch
     size="lg"

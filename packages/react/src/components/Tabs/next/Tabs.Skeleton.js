@@ -21,10 +21,10 @@ function Tab() {
   );
 }
 
-function TabsSkeleton({ className, type, ...rest }) {
+function TabsSkeleton({ className, contained, ...rest }) {
   const prefix = usePrefix();
   const tabClasses = cx(className, `${prefix}--tabs`, `${prefix}--skeleton`, {
-    [`${prefix}--tabs--container`]: type === 'container',
+    [`${prefix}--tabs--contained`]: contained,
   });
   return (
     <div className={tabClasses} {...rest}>
@@ -48,7 +48,7 @@ TabsSkeleton.propTypes = {
   /**
    * Provide the type of Tab
    */
-  type: PropTypes.oneOf(['', 'default', 'container']),
+  contained: PropTypes.bool,
 };
 
 export default TabsSkeleton;

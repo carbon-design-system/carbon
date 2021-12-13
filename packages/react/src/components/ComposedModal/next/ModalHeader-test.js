@@ -24,7 +24,3 @@ describe('ModalHeader', () => {
     expect(container.firstChild).toHaveTextContent('Carbon label');
   });
 });
-
-// TODO: write tests for composed modal
-// TODO: write tests for modal body
-// TODO: write tests for modal footer
