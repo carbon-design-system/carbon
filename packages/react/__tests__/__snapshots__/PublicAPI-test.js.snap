@@ -318,7 +318,6 @@ Map {
     "defaultProps": Object {
       "indeterminate": false,
       "onChange": [Function],
-      "onClick": [Function],
     },
     "propTypes": Object {
       "checked": Object {
@@ -348,9 +347,6 @@ Map {
         "type": "node",
       },
       "onChange": Object {
-        "type": "func",
-      },
-      "onClick": Object {
         "type": "func",
       },
       "title": Object {

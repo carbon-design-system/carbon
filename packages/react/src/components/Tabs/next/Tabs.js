@@ -12,7 +12,7 @@ import { keys, match, matches } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useId } from '../../../internal/useId';
 import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
-import { useControllableState } from '../../ContentSwitcher/next/useControllableState';
+import { useControllableState } from '../../../internal/useControllableState';
 import { useMergedRefs } from '../../../internal/useMergedRefs';
 
 // Used to manage the overall state of the Tabs
