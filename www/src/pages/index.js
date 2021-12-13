@@ -6,7 +6,6 @@
  */
 
 import { Grid, Column } from '@carbon/react';
-import Link from 'next/link';
 import React from 'react';
 import { Header } from '../components/Header';
 import { Text } from '../components/Text';

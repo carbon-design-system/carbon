@@ -9,7 +9,6 @@ import {
   Grid,
   Column,
   unstable_Heading as Heading,
-  unstable_Section as Section,
   Stack,
   Table,
   TableHead,
