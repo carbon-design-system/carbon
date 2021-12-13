@@ -16,13 +16,16 @@ module.exports = {
       name: '@storybook/addon-essentials',
       options: {
         actions: true,
-        backgrounds: true,
+        backgrounds: false,
         controls: true,
         docs: true,
         toolbars: true,
         viewport: true,
       },
     },
+    '@storybook/addon-storysource',
+    '@storybook/addon-a11y',
+    'storybook-dark-mode',
   ],
   stories: [
     './Welcome/Welcome.stories.js',
