@@ -26,7 +26,6 @@ function Flex({ as: BaseComponent = 'div', children, ...rest }) {
       return classes[key];
     })
   );
-  console.log(className);
 
   return (
     <Box {...childProps}>
