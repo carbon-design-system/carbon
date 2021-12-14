@@ -80,55 +80,14 @@ export default {
 
 export const _Default = () => (
   <>
-    <Tag
-      className="some-class"
-      type="red"
-      size="sm"
-      title="Clear Filter"
-      filter>
-      {'Tag content'}
+    <Tag className="some-class" {...props.regular()}>
+      {text('Content (children)', 'This is a tag')}
     </Tag>
     <Tag
       className="some-class"
-      type="magenta"
-      size="sm"
-      title="Clear Filter"
-      filter>
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="purple" size="sm" title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="blue" size="sm" title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="cyan" size="sm" title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="teal" size="sm" title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="green" size="sm" title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="gray" size="sm" title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="cool-gray" size="sm" title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="warm-gray" size="sm" title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag
-      className="some-class"
-      type="high-contrast"
-      size="sm"
-      title="Clear Filter">
-      {'Tag content'}
-    </Tag>
-    <Tag className="some-class" type="outline" size="sm" title="Clear Filter">
-      {'Tag content'}
+      {...props.regular()}
+      onClick={action('onClick')}>
+      This is an interactive tag
     </Tag>
   </>
 );
@@ -174,6 +133,51 @@ CustomIcon.parameters = {
       `,
   },
 };
+
+export const AllTags = () => (
+  <>
+    <Tag className="some-class" type="red" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="magenta" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="purple" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="blue" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="cyan" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="teal" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="green" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="gray" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="cool-gray" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="warm-gray" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag
+      className="some-class"
+      type="high-contrast"
+      size="sm"
+      title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+    <Tag className="some-class" type="outline" size="sm" title="Clear Filter">
+      {'Tag content'}
+    </Tag>
+  </>
+);
 
 export const Skeleton = () => (
   <div>
