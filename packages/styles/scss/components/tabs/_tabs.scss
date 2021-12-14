@@ -245,6 +245,20 @@
     }
 
     //-----------------------------
+    // Icon Item
+    //-----------------------------
+
+    // .#{$prefix}--tabs__nav-item--icon {
+    //   // had to use exact pixels to get to 40px height/width
+    //   padding: $spacing-04 $spacing-04 6px $spacing-04;
+    // }
+
+    // .#{$prefix}--tabs__nav-item--icon--lg {
+    //   // had to use exact pixels to get to 48px height/width
+    //   padding: 15px 14px 7px 14px;
+    // }
+
+    //-----------------------------
     // Item Hover
     //-----------------------------
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item:hover {

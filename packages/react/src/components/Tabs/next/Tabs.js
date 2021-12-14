@@ -343,6 +343,42 @@ Tab.propTypes = {
   renderButton: PropTypes.func,
 };
 
+const IconTab = React.forwardRef(function IconTab(
+  { children, size, ...rest },
+  ref
+) {
+  const prefix = usePrefix();
+
+  const classNames = cx({
+    [`${prefix}--tabs__nav-item--icon`]: size === 'default',
+    [`${prefix}--tabs__nav-item--icon--lg`]: size === 'lg',
+  });
+  return (
+    <Tab className={classNames} ref={ref} {...rest}>
+      {children}
+    </Tab>
+  );
+});
+
+IconTab.propTypes = {
+  /**
+   * Provide child elements to be rendered inside of `Tab`.
+   */
+  children: PropTypes.node,
+  /**
+   * Specify an optional className to be added to your Tab
+   */
+  className: PropTypes.string,
+  /**
+   * Size of IconTab, default is meant to be used with size 16 icons and lg is meant to be used with size 20 icons.
+   */
+  size: PropTypes.oneOf(['default', 'lg']),
+};
+
+IconTab.defaultProps = {
+  size: 'default',
+};
+
 const TabPanel = React.forwardRef(function TabPanel(
   { children, className: customClassName, ...rest },
   forwardRef
@@ -407,7 +443,7 @@ TabPanels.propTypes = {
   children: PropTypes.node,
 };
 
-export { Tabs, Tab, TabPanel, TabPanels, TabList };
+export { Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };
 
 // TO DO: implement horizontal scroll and the following props:
 // leftOverflowButtonProps

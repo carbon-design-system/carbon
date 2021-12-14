@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
+import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import Button from '../../Button';
 
 import TabsSkeleton from './Tabs.Skeleton';
@@ -65,15 +65,15 @@ export const Default = () => (
 export const IconOnly = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
-      <Tab disabled>
+      <IconTab size="lg" disabled>
         <Monster20 />
-      </Tab>
-      <Tab>
+      </IconTab>
+      <IconTab size="lg">
         <Corn20 />
-      </Tab>
-      <Tab>
+      </IconTab>
+      <IconTab size="lg">
         <Bat20 />
-      </Tab>
+      </IconTab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -86,15 +86,15 @@ export const IconOnly = () => (
 export const Icon16Only = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
-      <Tab disabled>
+      <IconTab disabled>
         <Monster16 />
-      </Tab>
-      <Tab>
+      </IconTab>
+      <IconTab>
         <Corn16 />
-      </Tab>
-      <Tab>
+      </IconTab>
+      <IconTab>
         <Bat16 />
-      </Tab>
+      </IconTab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
