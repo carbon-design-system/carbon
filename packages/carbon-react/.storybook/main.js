@@ -25,8 +25,10 @@ module.exports = {
     },
     '@storybook/addon-storysource',
     '@storybook/addon-a11y',
-    'storybook-dark-mode',
   ],
+  core: {
+    builder: 'webpack5',
+  },
   stories: [
     './Welcome/Welcome.stories.js',
     '../src/**/*.stories.js',
@@ -75,7 +77,6 @@ module.exports = {
           options: {
             postcssOptions: {
               plugins: [
-                require('postcss-custom-properties')(),
                 require('autoprefixer')({
                   overrideBrowserslist: ['last 1 version'],
                 }),
