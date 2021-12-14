@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   withKnobs,
@@ -20,6 +20,7 @@ import MultiSelect from '../MultiSelect';
 import FilterableMultiSelect from '../MultiSelect/FilterableMultiSelect';
 import Checkbox from '../Checkbox';
 import mdx from './MultiSelect.mdx';
+import Button from '../Button';
 
 const items = [
   {
@@ -139,6 +140,44 @@ export const Default = withReadme(readme, () => {
         translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
         selectionFeedback={selectionFeedback}
       />
+    </div>
+  );
+});
+
+export const controlled = withReadme(readme, () => {
+  const {
+    listBoxMenuIconTranslationIds,
+    selectionFeedback,
+    ...multiSelectProps
+  } = props();
+  const [selectedItems, setSelectedItems] = useState([]);
+  const onChange = useCallback(({ selectedItems: newSelectedItems }) => {
+    setSelectedItems(newSelectedItems);
+  }, []);
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        {...multiSelectProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+        selectionFeedback={selectionFeedback}
+        onChange={onChange}
+        selectedItems={selectedItems}
+      />
+      <Button
+        onClick={() => {
+          setSelectedItems([{ id: 'downshift-1-item-0', text: 'Option 1' }]);
+        }}>
+        click to select only Option 1
+      </Button>
+      <Button
+        onClick={() => {
+          setSelectedItems([]);
+        }}>
+        click to clear selections
+      </Button>
     </div>
   );
 });

@@ -671,7 +671,9 @@ class Tooltip extends Component {
                 className={`${prefix}--tooltip__trigger`}
                 {...properties}
                 ref={refProp}
-                aria-describedby={tooltipBodyId}>
+                aria-describedby={
+                  tooltipBodyId || properties['aria-describedby']
+                }>
                 <IconCustomElement {...iconProperties} />
               </div>
             </div>
@@ -681,7 +683,9 @@ class Tooltip extends Component {
               className={triggerClasses}
               ref={refProp}
               {...properties}
-              aria-describedby={tooltipBodyId}>
+              aria-describedby={
+                tooltipBodyId || properties['aria-describedby']
+              }>
               {triggerText}
             </div>
           )}
