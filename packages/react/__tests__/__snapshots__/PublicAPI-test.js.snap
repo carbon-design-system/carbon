@@ -2525,9 +2525,6 @@ Map {
       "onClick": Object {
         "type": "func",
       },
-      "openCalendar": Object {
-        "type": "func",
-      },
       "pattern": [Function],
       "placeholder": Object {
         "type": "string",

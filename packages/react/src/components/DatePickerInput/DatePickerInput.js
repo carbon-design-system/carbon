@@ -81,11 +81,6 @@ export default class DatePickerInput extends Component {
     onClick: PropTypes.func,
 
     /**
-     * Provide a function to be called when the input field is clicked
-     */
-    openCalendar: PropTypes.func,
-
-    /**
      * Provide a regular expression that the input value must match
      */
     pattern: (props, propName, componentName) => {
@@ -151,7 +146,6 @@ export default class DatePickerInput extends Component {
       datePickerType,
       pattern,
       iconDescription,
-      openCalendar,
       size,
       warn,
       warnText,
@@ -218,9 +212,8 @@ export default class DatePickerInput extends Component {
       return (
         <Calendar16
           className={`${prefix}--date-picker__icon`}
-          aria-label={iconDescription}
-          onClick={openCalendar}
-          role="img">
+          role="img"
+          aria-hidden="true">
           {iconDescription && <title>{iconDescription}</title>}
         </Calendar16>
       );
