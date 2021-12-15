@@ -7,86 +7,54 @@
 
 import React from 'react';
 import Tag from '../Tag';
-import TagSkeleton from '../Tag/Tag.Skeleton';
 import { Add16 } from '@carbon/icons-react';
-import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
-import { render, cleanup } from '@carbon/test-utils/react';
-
-const { prefix } = settings;
+import { render, screen } from '@testing-library/react';
 
 describe('Tag', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
-      const { container } = render(<Tag type="red">This is not a tag</Tag>);
+      const { container } = render(<Tag type="red">Dog</Tag>);
       await expect(container).toHaveNoAxeViolations();
     });
 
     it('should have no AC violations', async () => {
       const { container } = render(
         <main>
-          <Tag type="red">This is not a tag</Tag>
+          <Tag type="red">Dog</Tag>
         </main>
       );
       await expect(container).toHaveNoACViolations('Tag');
     });
   });
 
-  describe('with a screenreader', () => {
-    it('filtered variant should have appropriate aria-label', () => {
-      const children = 'tag content';
-      const { container } = render(
-        <Tag type="red" filter>
-          {children}
-        </Tag>
-      );
-      const button = container.querySelector('[aria-label], [aria-labelledby]');
-      const accessibilityLabel =
-        button.getAttribute('aria-label') ||
-        button.getAttribute('aria-labelledby');
-      // This check would mirror our "Accessibility label must contain at least all of visible label"
-      // requirement
-      expect(accessibilityLabel).toEqual(expect.stringContaining(children));
-    });
-  });
-
-  describe('Renders as expected', () => {
-    it('should render with the appropriate type', () => {
-      const tag = shallow(<Tag type="red" />);
-      expect(tag.hasClass(`${prefix}--tag`)).toEqual(true);
-      expect(tag.hasClass(`${prefix}--tag--red`)).toEqual(true);
-    });
+  it('should have an appropriate aria-label when (filterable)', () => {
+    const children = 'tag content';
+    const { container } = render(
+      <Tag type="red" filter>
+        {children}
+      </Tag>
+    );
+    const button = container.querySelector('[aria-label], [aria-labelledby]');
+    const accessibilityLabel =
+      button.getAttribute('aria-label') ||
+      button.getAttribute('aria-labelledby');
+    // This check would mirror our "Accessibility label must contain at least all of visible label"
+    // requirement
+    expect(accessibilityLabel).toEqual(expect.stringContaining(children));
   });
 
   it('should allow for a custom label', () => {
-    const tag = shallow(<Tag type="red">New Version!</Tag>);
-    expect(tag.text()).toEqual('New Version!');
+    render(<Tag data-testid="tag" type="red">Johnny Ramone</Tag>);
+    expect(screen.getByText('Johnny Ramone').toBeTruthy());
   });
 
   it('should allow for a custom icon', () => {
-    const tag = shallow(
+    render(
       <Tag type="red" renderIcon={Add16}>
-        This is a tag
+        Dee Dee Ramone
       </Tag>
     );
-    expect(tag.childAt(0).hasClass('bx--tag__custom-icon')).toBe(true);
-  });
 
-  it('should support extra class names', () => {
-    const tag = shallow(<Tag type="red" className="extra-class" />);
-    expect(tag.hasClass('extra-class')).toEqual(true);
-  });
-});
-
-describe('TagSkeleton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<TagSkeleton />);
-
-    it('Has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--tag`)).toEqual(true);
-    });
+    expect(document.querySelector('svg').toBeTruthy);
   });
 });
