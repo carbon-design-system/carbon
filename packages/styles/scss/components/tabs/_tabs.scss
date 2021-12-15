@@ -248,15 +248,17 @@
     // Icon Item
     //-----------------------------
 
-    // .#{$prefix}--tabs__nav-item--icon {
-    //   // had to use exact pixels to get to 40px height/width
-    //   padding: $spacing-04 $spacing-04 6px $spacing-04;
-    // }
+    .#{$prefix}--tabs__nav-item--icon {
+      display: flex;
+      padding-right: $spacing-04;
+      padding-left: $spacing-04;
+    }
 
-    // .#{$prefix}--tabs__nav-item--icon--lg {
-    //   // had to use exact pixels to get to 48px height/width
-    //   padding: 15px 14px 7px 14px;
-    // }
+    .#{$prefix}--tabs__nav-item--icon--lg {
+      display: flex;
+      // had to use exact pixels because there is no way to get to 48px h/w without it.
+      padding: 13px 14px;
+    }
 
     //-----------------------------
     // Item Hover

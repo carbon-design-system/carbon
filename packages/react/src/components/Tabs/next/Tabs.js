@@ -344,7 +344,7 @@ Tab.propTypes = {
 };
 
 const IconTab = React.forwardRef(function IconTab(
-  { children, size, ...rest },
+  { children, className: customClassName, size, ...rest },
   ref
 ) {
   const prefix = usePrefix();
@@ -352,6 +352,7 @@ const IconTab = React.forwardRef(function IconTab(
   const classNames = cx({
     [`${prefix}--tabs__nav-item--icon`]: size === 'default',
     [`${prefix}--tabs__nav-item--icon--lg`]: size === 'lg',
+    customClassName,
   });
   return (
     <Tab className={classNames} ref={ref} {...rest}>
@@ -362,7 +363,7 @@ const IconTab = React.forwardRef(function IconTab(
 
 IconTab.propTypes = {
   /**
-   * Provide child elements to be rendered inside of `Tab`.
+   * Provide an icons to be rendered inside of `IconTab` as the visual label for Tab.
    */
   children: PropTypes.node,
   /**
@@ -370,7 +371,7 @@ IconTab.propTypes = {
    */
   className: PropTypes.string,
   /**
-   * Size of IconTab, default is meant to be used with size 16 icons and lg is meant to be used with size 20 icons.
+   * size of IconTab, default is intended for use with size 16 icons and lg is intended for use with size 20 icons.
    */
   size: PropTypes.oneOf(['default', 'lg']),
 };
