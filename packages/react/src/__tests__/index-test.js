@@ -203,6 +203,7 @@ Array [
   "unstable_HStack",
   "unstable_Heading",
   "unstable_IconButton",
+  "unstable_IconTab",
   "unstable_Layer",
   "unstable_Menu",
   "unstable_MenuDivider",
