@@ -155,7 +155,7 @@ export const SmallToolbar = () => (
                 }
               }}
             />
-            <TableToolbarMenu light>
+            <TableToolbarMenu light size="sm">
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
