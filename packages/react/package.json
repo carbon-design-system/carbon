@@ -29,7 +29,7 @@
   },
   "scripts": {
     "build": "yarn clean && node scripts/build.js && rollup -c",
-    "build-storybook": "cross-env NODE_ENV=production build-storybook -s ./.storybook/assets",
+    "build-storybook": "cross-env NODE_ENV=production build-storybook",
     "clean": "rimraf es lib umd storybook-static build react-docgen.json",
     "postinstall": "carbon-telemetry collect --install",
     "prepublish": "yarn build",
@@ -118,7 +118,7 @@
     "fast-sass-loader": "^1.5.0",
     "gzip-size": "^6.0.0",
     "lcov2badge": "^0.1.0",
-    "mini-css-extract-plugin": "^0.9.0",
+    "mini-css-extract-plugin": "^2.4.5",
     "npm-which": "^3.0.1",
     "object-assign": "^4.1.1",
     "postcss-custom-properties": "^9.0.2",
