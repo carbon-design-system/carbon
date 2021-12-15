@@ -7,6 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import deprecate from '../../prop-types/deprecate';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import {
@@ -46,7 +47,10 @@ export default class DatePickerInput extends Component {
     /**
      * The description of the calendar icon.
      */
-    iconDescription: PropTypes.string,
+    iconDescription: deprecate(
+      PropTypes.string,
+      `\nThe prop \`iconDescriptionInput\` for DatePickerInput has been deprecated and is no longer used`
+    ),
 
     /**
      * Specify an id that uniquely identifies the `<input>`
@@ -79,6 +83,14 @@ export default class DatePickerInput extends Component {
      * Provide a function to be called when the input field is clicked
      */
     onClick: PropTypes.func,
+
+    /**
+     * Provide a function to be called when the input field is clicked
+     */
+    openCalendar: deprecate(
+      PropTypes.func,
+      `\nThe prop \`openCalendar\` for DatePickerInput has been deprecated and is no longer used`
+    ),
 
     /**
      * Provide a regular expression that the input value must match
@@ -146,6 +158,7 @@ export default class DatePickerInput extends Component {
       datePickerType,
       pattern,
       iconDescription,
+      openCalendar,
       size,
       warn,
       warnText,
@@ -212,6 +225,8 @@ export default class DatePickerInput extends Component {
       return (
         <Calendar16
           className={`${prefix}--date-picker__icon`}
+          aria-label={iconDescription}
+          onClick={openCalendar}
           role="img"
           aria-hidden="true">
           {iconDescription && <title>{iconDescription}</title>}
