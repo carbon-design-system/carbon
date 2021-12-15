@@ -62,7 +62,7 @@ export const Default = () => (
   </Tabs>
 );
 
-export const IconOnly = () => (
+export const Icon20Only = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
       <IconTab size="lg" disabled>
@@ -83,7 +83,7 @@ export const IconOnly = () => (
   </Tabs>
 );
 
-export const Icon16Only = () => (
+export const IconOnly = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
       <IconTab disabled>

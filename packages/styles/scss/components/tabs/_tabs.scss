@@ -250,12 +250,14 @@
 
     .#{$prefix}--tabs__nav-item--icon {
       display: flex;
+    }
+
+    .#{$prefix}--tabs__nav-item--icon--default {
       padding-right: $spacing-04;
       padding-left: $spacing-04;
     }
 
     .#{$prefix}--tabs__nav-item--icon--lg {
-      display: flex;
       // had to use exact pixels because there is no way to get to 48px h/w without it.
       padding: 13px 14px;
     }

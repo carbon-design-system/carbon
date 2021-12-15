@@ -349,10 +349,9 @@ const IconTab = React.forwardRef(function IconTab(
 ) {
   const prefix = usePrefix();
 
-  const classNames = cx({
-    [`${prefix}--tabs__nav-item--icon`]: size === 'default',
+  const classNames = cx(`${prefix}--tabs__nav-item--icon`, customClassName, {
+    [`${prefix}--tabs__nav-item--icon--default`]: size === 'default',
     [`${prefix}--tabs__nav-item--icon--lg`]: size === 'lg',
-    customClassName,
   });
   return (
     <Tab className={classNames} ref={ref} {...rest}>
