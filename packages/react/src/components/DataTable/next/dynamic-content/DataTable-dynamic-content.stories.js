@@ -34,7 +34,7 @@ import DataTable, {
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
-} from '../../../DataTable';
+} from '../..';
 import { batchActionClick, rows, headers } from '../shared';
 
 const sizes = {

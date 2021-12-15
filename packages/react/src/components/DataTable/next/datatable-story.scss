@@ -1,0 +1,21 @@
+//
+// Copyright IBM Corp. 2016, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import '~@carbon/type/scss/type';
+@import '~@carbon/themes/scss/themes';
+
+.demo-inner-container-header {
+  @include carbon--type-style('productive-heading-01');
+
+  color: $text-01;
+}
+
+.demo-inner-container-content {
+  @include carbon--type-style('body-long-01');
+
+  color: $text-02;
+}
