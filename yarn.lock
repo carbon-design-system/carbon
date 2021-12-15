@@ -36152,13 +36152,16 @@ resolve@^2.0.0-next.3:
     "@octokit/rest": ^18.12.0
     clsx: ^1.1.1
     date-fns: ^2.25.0
+    fast-glob: ^3.2.7
     fs-extra: ^10.0.0
+    lodash.merge: ^4.6.2
     next: ^12.0.3
     prop-types: ^15.7.2
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.2
     sass: ^1.43.4
+    semver: ^7.3.5
   languageName: unknown
   linkType: soft
 
