@@ -1,0 +1,64 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/spacing';
+
+.grid {
+  display: grid;
+}
+
+/// https://tailwindcss.com/docs/grid-template-columns
+.cols-1 {
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+}
+
+.cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.cols-none {
+  grid-template-columns: none;
+}
+
+/// https://tailwindcss.com/docs/gap
+.gap-0 {
+  gap: 0;
+}
+
+.gap-x-0 {
+  column-gap: 0;
+}
+
+.gap-y-0 {
+  row-gap: 0;
+}
+
+$index: 1;
+
+@each $key, $value in spacing.$spacing {
+  .gap-#{$index} {
+    gap: $value;
+  }
+
+  .gap-x-#{$index} {
+    column-gap: $value;
+  }
+
+  .gap-y-#{$index} {
+    row-gap: $value;
+  }
+
+  $index: $index + 1;
+}

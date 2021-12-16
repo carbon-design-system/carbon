@@ -8,7 +8,7 @@
 import {
   Grid,
   Column,
-  unstable_Heading as Heading,
+  Heading,
   Stack,
   Table,
   TableHead,
@@ -81,7 +81,7 @@ export default function InsightPage(props) {
                 <Table>
                   <TableHead>
                     <TableRow>
-                      <TableHeader>Period</TableHeader>
+                      <TableHeader>Sprint</TableHeader>
                       <TableHeader>Open issues</TableHeader>
                       <TableHeader>Issues closed</TableHeader>
                       <TableHeader>Issues created</TableHeader>

@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/react/scss/theme';
+
 .header {
   display: grid;
   min-height: 4rem;
@@ -13,6 +15,11 @@
   border-bottom: 2px solid #000000;
   column-gap: 2rem;
   grid-template-columns: max-content 1fr;
+  z-index: 1000;
+  position: relative;
+  background: theme.$background;
+  position: sticky;
+  top: 0;
 }
 
 .nav {

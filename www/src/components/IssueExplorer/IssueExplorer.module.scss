@@ -1,0 +1,55 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+.layout {
+  display: grid;
+  grid-template-columns: 20rem 1fr;
+  grid-column-gap: 2rem;
+}
+
+.filterLayout {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+  position: fixed;
+  width: 20rem;
+  height: 100%;
+  padding-top: 4rem;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+}
+
+.filters {
+  display: flex;
+  flex-direction: column;
+  row-gap: 1rem;
+  flex: 1 1 0%;
+  overflow-y: auto;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+}
+
+.filter {
+  padding: 0 1rem;
+}
+
+.filterLabel {
+  margin-bottom: 0.5rem;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.25rem;
+}
+
+.issues {
+  grid-column-start: 2;
+}

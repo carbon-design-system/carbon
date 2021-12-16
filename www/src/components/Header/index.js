@@ -26,6 +26,11 @@ function Header() {
               <a>Insights</a>
             </Link>
           </li>
+          <li>
+            <Link href="/issues/carbon-design-system/carbon">
+              <a>Issues</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

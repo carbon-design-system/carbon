@@ -9,6 +9,7 @@ import { Grid, Column, Stack } from '@carbon/react';
 import path from 'path';
 import React from 'react';
 import * as Project from '../../project';
+import { npm } from '../../npm';
 import { Text } from '../../components/Text';
 import { Header } from '../../components/Header';
 import { WorkspaceList } from '../../components/WorkspaceList';
@@ -37,21 +38,33 @@ export default function PackagesPage({ workspaces }) {
 
 export async function getStaticProps() {
   const project = await Project.get();
-  const workspaces = project.workspaces
-    .filter((workspace) => {
-      if (workspace.name === 'www') {
-        return false;
-      }
-      return workspace.directory !== project.directory;
-    })
-    .map((workspace) => {
-      return {
-        id: workspace.id,
-        name: workspace.name,
-        version: workspace.version,
-        directory: path.relative(project.directory, workspace.directory),
-      };
-    });
+  const workspaces = await Promise.all(
+    project.workspaces
+      .filter((workspace) => {
+        if (workspace.name === 'www') {
+          return false;
+        }
+        return workspace.directory !== project.directory;
+      })
+      .map(async (workspace) => {
+        const isPrivate = await workspace.getPackageField('private');
+        let downloads = 0;
+
+        if (!isPrivate) {
+          const result = await npm.downloads.lastMonth(workspace.name);
+          downloads = result.downloads;
+        }
+
+        return {
+          id: workspace.id,
+          name: workspace.name,
+          version: workspace.version,
+          directory: path.relative(project.directory, workspace.directory),
+          private: isPrivate ?? false,
+          downloads,
+        };
+      })
+  );
 
   workspaces.sort((a, b) => {
     if (a.name.startsWith('@') && b.name.startsWith('@')) {

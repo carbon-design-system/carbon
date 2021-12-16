@@ -10,6 +10,7 @@ import glob from 'fast-glob';
 import path from 'path';
 import semver from 'semver';
 import { hash } from '../crypto/murmur';
+import { analyze } from './analyze';
 
 let defaultDirectory = process.cwd();
 let _project = null;
@@ -174,6 +175,63 @@ class Workspace {
     return Array.from(this.workspaces).flatMap((workspace) => {
       return [workspace, ...workspace.getWorkspaces()];
     });
+  }
+
+  async getPackageField(key) {
+    const packageJsonPath = path.join(this.directory, 'package.json');
+    const packageJson = await fs.readJson(packageJsonPath);
+    return packageJson[key];
+  }
+
+  async getPackageExports() {
+    const candidates = [
+      {
+        filepath: 'src/index.js',
+        type: 'javascript',
+      },
+      // {
+      // directory: 'scss',
+      // type: 'scss',
+      // },
+    ];
+    const entrypoints = candidates.filter(({ directory, filepath }) => {
+      if (directory) {
+        return fs.existsSync(path.join(this.directory, directory));
+      }
+      if (filepath) {
+        return fs.existsSync(path.join(this.directory, filepath));
+      }
+      return false;
+    });
+    const exports = await Promise.all(
+      entrypoints.map(async (info) => {
+        const details = {
+          type: info.type,
+        };
+
+        if (info.directory) {
+          details.directory = path.join(this.directory, info.directory);
+        }
+
+        if (info.filepath) {
+          details.filepath = path.join(this.directory, info.filepath);
+        }
+
+        return await analyze(details);
+      })
+    ).then((results) => {
+      const exports = {};
+
+      for (const result of results) {
+        for (const [key, value] of Object.entries(result)) {
+          exports[key] = value;
+        }
+      }
+
+      return exports;
+    });
+
+    return exports;
   }
 }
 

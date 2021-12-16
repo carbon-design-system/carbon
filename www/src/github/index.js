@@ -120,43 +120,44 @@ export function getLabelBreakdown(collection) {
     });
 }
 
+export const filters = {
+  open: (issue) => {
+    return issue.state === 'open';
+  },
+  closed: (issue) => {
+    return issue.state === 'closed';
+  },
+  created: (interval) => (issue) => {
+    return isWithinInterval(parseISO(issue.created_at), interval);
+  },
+  closed_at: (interval) => (issue) => {
+    if (issue.closed_at) {
+      return isWithinInterval(parseISO(issue.closed_at), interval);
+    }
+    return false;
+  },
+  apply,
+};
+
+function apply(collection, ...filters) {
+  return filters.reduce((acc, filter) => {
+    const result = [];
+
+    for (const item of acc) {
+      if (filter(item)) {
+        result.push(item);
+      }
+    }
+
+    return result;
+  }, collection);
+}
+
 export async function getIssueStatistics(owner, repo) {
   const details = await getRepoIssueDetails({
     owner,
     repo,
   });
-
-  const filters = {
-    open: (issue) => {
-      return issue.state === 'open';
-    },
-    closed: (issue) => {
-      return issue.state === 'closed';
-    },
-    created: (interval) => (issue) => {
-      return isWithinInterval(parseISO(issue.created_at), interval);
-    },
-    closed_at: (interval) => (issue) => {
-      if (issue.closed_at) {
-        return isWithinInterval(parseISO(issue.closed_at), interval);
-      }
-      return false;
-    },
-  };
-
-  function apply(collection, ...filters) {
-    return filters.reduce((acc, filter) => {
-      const result = [];
-
-      for (const item of acc) {
-        if (filter(item)) {
-          result.push(item);
-        }
-      }
-
-      return result;
-    }, collection);
-  }
 
   function or(a, b) {
     return (issue) => {

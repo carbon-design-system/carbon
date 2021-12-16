@@ -17,6 +17,8 @@ import {
 } from '@carbon/react';
 import Link from 'next/link';
 
+const formatter = new Intl.NumberFormat();
+
 function WorkspaceList({ workspaces }) {
   return (
     <Grid condensed>
@@ -25,8 +27,9 @@ function WorkspaceList({ workspaces }) {
           <TableHead>
             <TableRow>
               <TableHeader>Package</TableHeader>
-              <TableHeader>Exports</TableHeader>
               <TableHeader>Version</TableHeader>
+              <TableHeader>Downloads (Past Month)</TableHeader>
+              <TableHeader>Private</TableHeader>
               <TableHeader>Directory</TableHeader>
             </TableRow>
           </TableHead>
@@ -39,8 +42,15 @@ function WorkspaceList({ workspaces }) {
                       <a>{workspace.name}</a>
                     </Link>
                   </TableCell>
-                  <TableCell>-</TableCell>
                   <TableCell>{workspace.version}</TableCell>
+                  <TableCell>
+                    {workspace.private
+                      ? 'N/A'
+                      : formatter.format(workspace.downloads)}
+                  </TableCell>
+                  <TableCell>
+                    {workspace.private === true ? 'Yes' : 'No'}
+                  </TableCell>
                   <TableCell>{workspace.directory}</TableCell>
                 </TableRow>
               );
