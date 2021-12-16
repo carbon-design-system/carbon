@@ -1,7 +1,7 @@
 {
   "component": {
     "componentFolder": "src",
-    "testFiles": "**/*-test.e2e.js"
+    "testFiles": "components/Accordion/**/*-test.e2e.js"
   },
   "env": {
     "coverage": false
