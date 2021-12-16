@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import Copy from '../Copy';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
+import { Copy } from 'carbon-components-react';
+import React from 'react';
 
 const { prefix } = settings;
 

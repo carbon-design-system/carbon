@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import Checkbox from '../Checkbox';
-import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
-import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { settings } from 'carbon-components';
+import { Checkbox, CheckboxSkeleton } from 'carbon-components-react';
+import { mount } from 'enzyme';
+import React from 'react';
 
 const { prefix } = settings;
 
@@ -194,8 +193,6 @@ describe('CheckboxSkeleton', () => {
 });
 
 describe('Checkbox accessibility', () => {
-  afterEach(cleanup);
-
   it('should have no Axe violations', async () => {
     render(<Checkbox labelText="Checkbox label" id="test_id" />);
     await expect(

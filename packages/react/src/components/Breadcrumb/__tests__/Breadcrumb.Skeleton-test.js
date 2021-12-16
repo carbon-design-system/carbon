@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { BreadcrumbSkeleton } from '../';
+import { BreadcrumbSkeleton } from 'carbon-components-react';
 import { mount } from 'enzyme';
+import React from 'react';
 
 describe('BreadcrumbSkeleton', () => {
   it('should render', () => {

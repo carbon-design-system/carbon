@@ -7,6 +7,8 @@
 
 'use strict';
 
+const path = require('path');
+
 module.exports = {
   preset: 'jest-config-carbon',
   collectCoverageFrom: [
@@ -17,5 +19,28 @@ module.exports = {
     '!**/*.stories.js',
     '!**/*-test.e2e.js',
   ],
+  moduleNameMapper: {
+    '@carbon/react': path.join(
+      __dirname,
+      'packages',
+      'carbon-react',
+      'src',
+      'index.js'
+    ),
+    '@carbon/react/icons': path.join(
+      __dirname,
+      'packages',
+      'carbon-react',
+      'icons',
+      'index.js'
+    ),
+    'carbon-components-react': path.join(
+      __dirname,
+      'packages',
+      'react',
+      'src',
+      'index.js'
+    ),
+  },
   reporters: ['default', 'jest-junit'],
 };

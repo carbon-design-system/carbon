@@ -5,10 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { mount } from 'enzyme';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { settings } from 'carbon-components';
+import { ComboBox } from 'carbon-components-react';
+import { mount } from 'enzyme';
+import React from 'react';
 import {
   findListBoxNode,
   findMenuNode,
@@ -17,8 +19,6 @@ import {
   generateItems,
   generateGenericItem,
 } from '../ListBox/test-helpers';
-import ComboBox from '../ComboBox';
-import { settings } from 'carbon-components';
 
 const { prefix } = settings;
 const findInputNode = (wrapper) => wrapper.find(`.${prefix}--text-input`);

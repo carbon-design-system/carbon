@@ -5,22 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
+import { ModalHeader } from 'carbon-components-react';
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
-import { ModalHeader } from './ModalHeader';
 
 describe('ModalHeader', () => {
-  afterEach(cleanup);
-
   it('should render title if has title text', () => {
     const { container } = render(<ModalHeader title="Carbon" />);
-
     expect(container.firstChild).toHaveTextContent('Carbon');
   });
 
   it('should label if has label text', () => {
     const { container } = render(<ModalHeader label="Carbon label" />);
-
     expect(container.firstChild).toHaveTextContent('Carbon label');
   });
 });

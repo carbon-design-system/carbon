@@ -71,6 +71,29 @@ jobs:
       - name: Run tests
         run: yarn test --ci
 
+  next:
+    name: 'test:next'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js 14.x
+        uses: actions/setup-node@v2.5.0
+        with:
+          node-version: '14.x'
+      - uses: actions/cache@v2.1.7
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+      - name: Build project
+        run: yarn build --ignore '@carbon/sketch'
+      - name: Run tests
+        run: CARBON_ENABLE_V11_RELEASE=true yarn test --ci
+
   e2e:
     name: 'test:e2e'
     runs-on: ubuntu-latest

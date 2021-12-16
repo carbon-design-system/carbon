@@ -6,10 +6,9 @@
  */
 
 import { settings } from 'carbon-components';
+import { AccordionSkeleton, SkeletonText } from 'carbon-components-react';
 import { mount } from 'enzyme';
 import React from 'react';
-import AccordionSkeleton from '../Accordion.Skeleton';
-import SkeletonText from '../../SkeletonText';
 
 const { prefix } = settings;
 

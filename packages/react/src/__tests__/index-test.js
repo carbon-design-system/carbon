@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as Carbon from '../index';
+import * as Carbon from 'carbon-components-react';
 
 describe('Carbon Components React', () => {
   it('can be imported using the correct path', () => {

@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import ButtonSet from '../ButtonSet';
-import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
+import { ButtonSet } from 'carbon-components-react';
+import { shallow } from 'enzyme';
+import React from 'react';
 
 const { prefix } = settings;
 

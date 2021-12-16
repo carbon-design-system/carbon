@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { mount } from 'enzyme';
-import ComposedModal from './ComposedModal';
-import { ModalHeader } from './ModalHeader';
-import { ModalFooter } from '../ComposedModal';
 import { settings } from 'carbon-components';
+import {
+  ComposedModal,
+  ModalHeader,
+  ModalFooter,
+} from 'carbon-components-react';
+import { mount } from 'enzyme';
+import React from 'react';
 
 const { prefix } = settings;
 

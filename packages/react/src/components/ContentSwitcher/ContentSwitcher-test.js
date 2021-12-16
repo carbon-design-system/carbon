@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import ContentSwitcher from '../ContentSwitcher';
-import Switch from '../Switch';
 import { mount, shallow } from 'enzyme';
+import { ContentSwitcher, Switch } from 'carbon-components-react';
+import React from 'react';
 
 describe('ContentSwitcher', () => {
   describe('component initial rendering', () => {

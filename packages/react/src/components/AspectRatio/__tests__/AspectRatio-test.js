@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { AspectRatio } from 'carbon-components-react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Simulate } from 'react-dom/test-utils';
-import { AspectRatio } from '../';
 
 describe('AspectRatio', () => {
   it('should support rendering content in different aspect ratios', () => {

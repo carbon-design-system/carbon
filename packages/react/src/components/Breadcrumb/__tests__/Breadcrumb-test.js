@@ -17,9 +17,9 @@ describe('Breadcrumb', () => {
   let BreadcrumbItem;
 
   beforeEach(() => {
-    const BreadcrumbEntrypoint = require('../');
-    Breadcrumb = BreadcrumbEntrypoint.Breadcrumb;
-    BreadcrumbItem = BreadcrumbEntrypoint.BreadcrumbItem;
+    const Carbon = require('carbon-components-react');
+    Breadcrumb = Carbon.Breadcrumb;
+    BreadcrumbItem = Carbon.BreadcrumbItem;
   });
 
   it('should render', () => {

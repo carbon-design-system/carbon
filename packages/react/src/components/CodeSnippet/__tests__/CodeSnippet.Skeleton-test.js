@@ -5,17 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@carbon/test-utils/react';
 import { settings } from 'carbon-components';
+import { CodeSnippetSkeleton } from 'carbon-components-react';
 import React from 'react';
-import { CodeSnippetSkeleton } from '../';
 
 const { prefix } = settings;
 const snippetTypes = ['single', 'multi'];
 
 describe('CodeSnippetSkeleton', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility testing', () => {
     it.each(snippetTypes)(
       'should have no Axe violations with type="%s"',

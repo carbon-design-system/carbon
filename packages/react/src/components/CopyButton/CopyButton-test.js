@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import CopyButton from '../CopyButton';
 import { Copy16 } from '@carbon/icons-react';
 import { shallow, mount } from 'enzyme';
 import { settings } from 'carbon-components';
+import { CopyButton } from 'carbon-components-react';
+import React from 'react';
 
 const { prefix } = settings;
 jest.useFakeTimers();

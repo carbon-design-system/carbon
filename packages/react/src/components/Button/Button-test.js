@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
 import { Search16 } from '@carbon/icons-react';
-import Button from '../Button';
-import Link from '../Link';
-import ButtonSkeleton from '../Button/Button.Skeleton';
-import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { settings } from 'carbon-components';
+import { Button, ButtonSkeleton, Link } from 'carbon-components-react';
+import { shallow, mount } from 'enzyme';
+import React from 'react';
 
 const { prefix } = settings;
 
@@ -420,8 +418,6 @@ describe('Small ButtonSkeleton', () => {
 });
 
 describe('Button accessibility', () => {
-  afterEach(cleanup);
-
   it('should have no Axe violations', async () => {
     render(<Button>Button Label</Button>);
 

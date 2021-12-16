@@ -5,11 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import DangerButton from '../DangerButton';
-import { shallow, mount } from 'enzyme';
 import { Search16 } from '@carbon/icons-react';
 import { settings } from 'carbon-components';
+import { DangerButton } from 'carbon-components-react';
+import { shallow, mount } from 'enzyme';
+import React from 'react';
 
 const { prefix } = settings;
 
