@@ -1,4 +1,4 @@
-name: 'Code scanning - action'
+name: 'codeql'
 
 on:
   push:
@@ -9,21 +9,16 @@ on:
     - cron: '0 12 * * 1'
 
 jobs:
-  CodeQL-Build:
+  analyze:
     runs-on: ubuntu-latest
+
+    permissions:
+      # required for all workflows
+      security-events: write
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
-        with:
-          # We must fetch at least the immediate parents so that if this is
-          # a pull request then we can checkout the head.
-          fetch-depth: 2
-
-      # If this run was triggered by a pull request event, then checkout
-      # the head of the pull request instead of the merge commit.
-      - run: git checkout HEAD^2
-        if: ${{ github.event_name == 'pull_request' }}
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
