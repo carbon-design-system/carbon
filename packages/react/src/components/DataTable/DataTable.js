@@ -256,7 +256,7 @@ export default class DataTable extends React.Component {
     const { isExpandedAll, rowIds, rowsById } = this.state;
     const isExpanded =
       isExpandedAll || rowIds.every((id) => rowsById[id].isExpanded);
-    const translationKey = !isExpanded
+    const translationKey = isExpanded
       ? translationKeys.collapseAll
       : translationKeys.expandAll;
     return {
