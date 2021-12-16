@@ -11,8 +11,8 @@ import classnames from 'classnames';
 import {
   CheckmarkOutline16,
   Warning16,
-  RadioButton16,
-  CircleFilled16,
+  CircleDash16,
+  Incomplete16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix, PrefixContext } from '../../internal/usePrefix';
@@ -71,9 +71,9 @@ export function ProgressStep({
     }
     if (current) {
       return (
-        <CircleFilled16>
+        <Incomplete16>
           <title>{description}</title>
-        </CircleFilled16>
+        </Incomplete16>
       );
     }
     if (complete) {
@@ -84,9 +84,9 @@ export function ProgressStep({
       );
     }
     return (
-      <RadioButton16>
+      <CircleDash16>
         <title>{description}</title>
-      </RadioButton16>
+      </CircleDash16>
     );
   };
 
