@@ -8,18 +8,18 @@
 @use '@carbon/react/scss/theme';
 
 .header {
+  position: relative;
+  position: sticky;
+  z-index: 1000;
+  top: 0;
   display: grid;
   min-height: 4rem;
   align-items: center;
   padding: 0 1rem;
   border-bottom: 2px solid #000000;
+  background: theme.$background;
   column-gap: 2rem;
   grid-template-columns: max-content 1fr;
-  z-index: 1000;
-  position: relative;
-  background: theme.$background;
-  position: sticky;
-  top: 0;
 }
 
 .nav {

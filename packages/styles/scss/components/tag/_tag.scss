@@ -23,6 +23,7 @@
 /// @group tag
 @mixin tag {
   .#{$prefix}--tag {
+    @include button-reset.reset($width: false);
     @include type-style('label-01');
     @include tag-theme($tag-background-gray, $tag-color-gray, $tag-hover-gray);
 

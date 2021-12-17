@@ -5,35 +5,36 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/react/scss/type';
+
 .layout {
   display: grid;
-  grid-template-columns: 20rem 1fr;
   grid-column-gap: 2rem;
+  grid-template-columns: 20rem 1fr;
 }
 
 .filterLayout {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background: white;
   position: fixed;
+  z-index: 10;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
   width: 20rem;
   height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
   padding-top: 4rem;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 10;
+  background: white;
+  overflow-y: auto;
 }
 
 .filters {
   display: flex;
-  flex-direction: column;
-  row-gap: 1rem;
   flex: 1 1 0%;
-  overflow-y: auto;
-  padding-bottom: 1rem;
+  flex-direction: column;
   padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
 .filter {
@@ -41,15 +42,31 @@
 }
 
 .filterLabel {
-  margin-bottom: 0.5rem;
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
 }
 
 .options {
   display: flex;
   flex-direction: column;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
   row-gap: 0.25rem;
 }
 
 .issues {
+  padding: 2rem 2rem 2rem 0;
   grid-column-start: 2;
+}
+
+.label {
+  @include type.type-style('body-short-01');
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
