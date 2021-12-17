@@ -17,6 +17,7 @@ import {
 import Tooltip from '../Tooltip';
 import { Tooltip as OGTooltip } from './Tooltip';
 import Button from '../Button';
+import Link from '../Link';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import mdx from './Tooltip.mdx';
 
@@ -107,6 +108,37 @@ const containerStyles = {
 };
 
 Tooltip.displayName = 'Tooltip';
+
+function OnChangeExample() {
+  const [tipOpen, setTipOpen] = useState(false);
+  const handleChange = (ev, { open }) => {
+    console.log(ev);
+    console.log(open);
+    setTipOpen(open);
+  };
+
+  return (
+    <Tooltip
+      direction="bottom"
+      tabIndex={0}
+      triggerText="Tooltip label"
+      onChange={handleChange}
+      open={tipOpen}>
+      <p>
+        This is some tooltip text. This box shows the maximum amount of text
+        that should be displayed inside. If more room is needed, use a modal
+        instead.
+      </p>
+      <div className="bx--tooltip__footer">
+        <Link href="#">Learn more</Link>
+        <Button size="small" onClick={() => setTipOpen(false)}>
+          Create
+        </Button>
+      </div>
+    </Tooltip>
+  );
+}
+export const onChangeExample = () => <OnChangeExample />;
 
 function UncontrolledTooltipExample() {
   const [value, setValue] = useState(true);
