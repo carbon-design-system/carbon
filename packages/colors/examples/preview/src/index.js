@@ -7,10 +7,3 @@ function render(element) {
 }
 
 render(<App />);
-
-if (module.hot) {
-  const NextApp = require('./components/App').default;
-  module.hot.dispose(() => {
-    render(<NextApp />);
-  });
-}
