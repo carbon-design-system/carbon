@@ -133,6 +133,5 @@
     "extends": [
       "./config/stylelint-config-carbon"
     ]
-  },
-  "packageManager": "yarn@3.1.1"
+  }
 }
