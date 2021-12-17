@@ -9,12 +9,6 @@ function render(element) {
 
 render(<App />);
 
-if (module.hot) {
-  module.hot.dispose(() => {
-    render(<App />);
-  });
-}
-
 function App() {
   return (
     <React.Fragment>

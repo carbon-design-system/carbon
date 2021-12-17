@@ -17,6 +17,7 @@ css
 
 # Cache folders
 .cache
+.parcel-cache
 
 # Logs
 logs
