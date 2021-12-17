@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { element } from 'prop-types';
 import React from 'react';
+import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
@@ -87,6 +88,11 @@ export default class Tabs extends React.Component {
      * Provide a className that is applied to the <TabContent> components
      */
     tabContentClassName: PropTypes.string,
+
+    /**
+     * Provide a target node into which the tabs will be rendered. By default rendered as part of the Tabs component.
+     */
+    targetRef: PropTypes.instanceOf(element),
 
     /**
      * Provide the type of Tab
@@ -416,8 +422,10 @@ export default class Tabs extends React.Component {
       tabContentClassName,
       leftOverflowButtonProps,
       rightOverflowButtonProps,
+      targetRef,
       ...other
     } = this.props;
+    console.dir(this.props);
 
     const prefix = this.context;
 
@@ -551,7 +559,9 @@ export default class Tabs extends React.Component {
             <ChevronRight16 />
           </button>
         </div>
-        {tabContentWithProps}
+        {targetRef?.current
+          ? createPortal(tabContentWithProps, targetRef.current)
+          : tabContentWithProps}
       </>
     );
   }
