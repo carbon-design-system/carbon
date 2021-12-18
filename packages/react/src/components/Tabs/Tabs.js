@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { element } from 'prop-types';
 import React from 'react';
+import { createPortal } from 'react-dom';
 import classNames from 'classnames';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
@@ -27,6 +28,11 @@ export default class Tabs extends React.Component {
      * <Tabs>
      */
     className: PropTypes.string,
+
+    /**
+     * Provide a target node into which the tabs controls will be rendered. By default rendered as part of the Tabs component.
+     */
+    controlsTargetRef: PropTypes.instanceOf(element),
 
     /**
      * Specify whether the Tab content is hidden
@@ -416,8 +422,10 @@ export default class Tabs extends React.Component {
       tabContentClassName,
       leftOverflowButtonProps,
       rightOverflowButtonProps,
+      controlsTargetRef,
       ...other
     } = this.props;
+    console.dir(this.props);
 
     const prefix = this.context;
 
@@ -503,54 +511,60 @@ export default class Tabs extends React.Component {
       }),
     };
 
+    const tabControls = (
+      <div {...other} className={classes.tabs}>
+        <button
+          aria-hidden="true"
+          aria-label="Scroll left"
+          className={classes.leftOverflowButtonClasses}
+          onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
+          onMouseDown={(event) =>
+            this.handleOverflowNavMouseDown(event, { direction: -1 })
+          }
+          onMouseUp={this.handleOverflowNavMouseUp}
+          ref={this.leftOverflowNavButton}
+          tabIndex="-1"
+          type="button"
+          {...leftOverflowButtonProps}>
+          <ChevronLeft16 />
+        </button>
+        {!leftOverflowNavButtonHidden && (
+          <div className={`${prefix}--tabs__overflow-indicator--left`} />
+        )}
+        <ul
+          role="tablist"
+          tabIndex={-1}
+          className={classes.tablist}
+          ref={this.tablist}
+          onScroll={this._debouncedHandleScroll}>
+          {tabsWithProps}
+        </ul>
+        {!rightOverflowNavButtonHidden && (
+          <div className={`${prefix}--tabs__overflow-indicator--right`} />
+        )}
+        <button
+          aria-hidden="true"
+          aria-label="Scroll right"
+          className={classes.rightOverflowButtonClasses}
+          onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
+          onMouseDown={(event) =>
+            this.handleOverflowNavMouseDown(event, { direction: 1 })
+          }
+          onMouseUp={this.handleOverflowNavMouseUp}
+          ref={this.rightOverflowNavButton}
+          tabIndex="-1"
+          type="button"
+          {...rightOverflowButtonProps}>
+          <ChevronRight16 />
+        </button>
+      </div>
+    );
+
     return (
       <>
-        <div {...other} className={classes.tabs}>
-          <button
-            aria-hidden="true"
-            aria-label="Scroll left"
-            className={classes.leftOverflowButtonClasses}
-            onClick={(_) => this.handleOverflowNavClick(_, { direction: -1 })}
-            onMouseDown={(event) =>
-              this.handleOverflowNavMouseDown(event, { direction: -1 })
-            }
-            onMouseUp={this.handleOverflowNavMouseUp}
-            ref={this.leftOverflowNavButton}
-            tabIndex="-1"
-            type="button"
-            {...leftOverflowButtonProps}>
-            <ChevronLeft16 />
-          </button>
-          {!leftOverflowNavButtonHidden && (
-            <div className={`${prefix}--tabs__overflow-indicator--left`} />
-          )}
-          <ul
-            role="tablist"
-            tabIndex={-1}
-            className={classes.tablist}
-            ref={this.tablist}
-            onScroll={this._debouncedHandleScroll}>
-            {tabsWithProps}
-          </ul>
-          {!rightOverflowNavButtonHidden && (
-            <div className={`${prefix}--tabs__overflow-indicator--right`} />
-          )}
-          <button
-            aria-hidden="true"
-            aria-label="Scroll right"
-            className={classes.rightOverflowButtonClasses}
-            onClick={(_) => this.handleOverflowNavClick(_, { direction: 1 })}
-            onMouseDown={(event) =>
-              this.handleOverflowNavMouseDown(event, { direction: 1 })
-            }
-            onMouseUp={this.handleOverflowNavMouseUp}
-            ref={this.rightOverflowNavButton}
-            tabIndex="-1"
-            type="button"
-            {...rightOverflowButtonProps}>
-            <ChevronRight16 />
-          </button>
-        </div>
+        {controlsTargetRef?.current
+          ? createPortal(tabControls, controlsTargetRef.current)
+          : tabControls}
         {tabContentWithProps}
       </>
     );

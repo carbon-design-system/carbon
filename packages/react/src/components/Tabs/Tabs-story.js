@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   withKnobs,
@@ -212,6 +212,36 @@ export const Container = () => (
     </Tab>
   </Tabs>
 );
+
+export const ExternalRender = () => {
+  const controlsTargetRef = useRef(null);
+
+  return (
+    <>
+      <div className="tabs-container" ref={controlsTargetRef}></div>
+
+      <div className="tabs-content">
+        <Tabs controlsTargetRef={controlsTargetRef}>
+          <Tab id="tab-1" label="Tab label 1">
+            <p>Content for first tab goes here.</p>
+          </Tab>
+          <Tab id="tab-2" label="Tab label 2">
+            <p>Content for second tab goes here.</p>
+          </Tab>
+          <Tab
+            id="tab-3"
+            label="Tab label 3 shows truncation"
+            title="Tab label 3 shows truncation">
+            <p>Content for third tab goes here.</p>
+          </Tab>
+          <Tab label={<div>Custom Label</div>}>
+            <p>Content for fourth tab goes here.</p>
+          </Tab>
+        </Tabs>
+      </div>
+    </>
+  );
+};
 
 export const Skeleton = () => {
   const isLoading = boolean('isLoading', true);
