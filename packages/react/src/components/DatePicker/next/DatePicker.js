@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
@@ -130,10 +130,6 @@ const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
   <rect width="16" height="16" style="fill:none" />
 </svg>`;
 
-function useTrackedChanges(_object) {
-  return [];
-}
-
 function DatePicker({
   allowInput,
   appendTo,
@@ -162,15 +158,13 @@ function DatePicker({
   const savedOnChange = useSavedCallback(onChange);
   const savedOnClose = useSavedCallback(onClose);
   const savedOnOpen = useSavedCallback(onOpen);
-  const changes = useTrackedChanges({
-    dateFormat,
-    minDate,
-    maxDate,
-    value,
-    disable,
-    enable,
-    inline,
-  });
+  const [prevDateFormat, setPrevDateFormat] = useState(dateFormat);
+  const [prevMinDate, setPrevMinDate] = useState(minDate);
+  const [prevMaxDate, setPrevMaxDate] = useState(maxDate);
+  const [prevDisable, setPrevDisable] = useState(disable);
+  const [prevEnable, setPrevEnable] = useState(enable);
+  const [prevInline, setPrevInline] = useState(inline);
+  const [prevValue, setPrevValue] = useState(value);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -431,24 +425,52 @@ function DatePicker({
 
   // component did update equivalent
   useEffect(() => {
-    changes.forEach((change) => {
-      // Coordinate when the given `value` prop changes. When this happens, we
-      // should update the calendar to the new value.
-      if (change.name === 'value') {
-        if (calendarRef.current) {
-          calendarRef.current.setDate(change.value);
-          updateClassNames(calendarRef.current);
-        } else {
-          startInputField.current.value = change.value;
-        }
-        return;
+    if (calendarRef.current) {
+      if (prevDateFormat !== dateFormat) {
+        calendarRef.current.set({ dateFormat });
+        setPrevDateFormat(dateFormat);
       }
 
-      if (calendarRef.current) {
-        calendarRef.current.set(change.name, change.value);
+      if (prevMinDate !== minDate) {
+        calendarRef.current.set({ minDate });
+        setPrevMinDate(minDate);
       }
-    });
-  }, [changes]); //eslint-disable-line react-hooks/exhaustive-deps
+
+      if (prevMaxDate !== maxDate) {
+        calendarRef.current.set({ maxDate });
+        setPrevMaxDate(maxDate);
+      }
+
+      if (prevDisable !== disable) {
+        calendarRef.current.set({ disable });
+        setPrevDisable(disable);
+      }
+
+      if (prevEnable !== enable) {
+        calendarRef.current.set({ enable });
+        setPrevEnable(enable);
+      }
+
+      if (prevInline !== inline) {
+        calendarRef.current.set({ inline });
+        setPrevInline(inline);
+      }
+
+      if (prevValue !== value) {
+        calendarRef.current.setDate(value);
+        updateClassNames(calendarRef.current);
+        setPrevValue(value);
+      }
+    }
+
+    //for simple date picker w/o calendar
+    if (prevValue !== value) {
+      startInputField.current.value = value;
+      setPrevValue(value);
+    }
+
+    console.log('value', value);
+  }, [dateFormat, minDate, maxDate, disable, enable, inline, value]); //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className={wrapperClasses}>
