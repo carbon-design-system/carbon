@@ -91,7 +91,7 @@ IconButton.propTypes = {
   /**
    * Specify the size of the Button. Defaults to `md`.
    */
-  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
 export { IconButton };
