@@ -20,6 +20,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     kind,
     label,
     leaveDelayMs,
+    size = 'md',
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -32,7 +33,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
-      <Button {...rest} hasIconOnly kind={kind} ref={ref} size="sm">
+      <Button {...rest} hasIconOnly kind={kind} ref={ref} size={size}>
         {children}
       </Button>
     </Tooltip>
@@ -86,6 +87,11 @@ IconButton.propTypes = {
    * Specify the duration in milliseconds to delay before hiding the tooltip
    */
   leaveDelayMs: PropTypes.number,
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   */
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 };
 
 export { IconButton };
