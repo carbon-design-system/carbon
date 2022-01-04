@@ -368,7 +368,7 @@ Map {
         "type": "string",
       },
       "children": Object {
-        "type": "string",
+        "type": "node",
       },
       "className": Object {
         "type": "string",
@@ -377,6 +377,9 @@ Map {
         "type": "string",
       },
       "copyLabel": Object {
+        "type": "string",
+      },
+      "copyText": Object {
         "type": "string",
       },
       "disabled": Object {
