@@ -58,7 +58,7 @@ export FileUploader, {
   FileUploaderDropContainer,
   FileUploaderItem,
 } from './components/FileUploader';
-export FilterableMultiSelect from './components/FilterableMultiSelect';
+export { FilterableMultiSelect } from './components/FilterableMultiSelect';
 export Form from './components/Form';
 export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
@@ -239,14 +239,18 @@ export {
   Stack as unstable_Stack,
   VStack as unstable_VStack,
 } from './components/Stack';
-export { ContainedTab as unstable_ContainedTab } from './components/Tab';
-export { ContainedTabs as unstable_ContainedTabs } from './components/Tabs';
 export { Tooltip as unstable_Tooltip } from './components/Tooltip/next';
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
+export {
+  TabPanel as unstable_TabPanel,
+  TabPanels as unstable_TabPanels,
+  TabList as unstable_TabList,
+} from './components/Tabs';
 export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
 export {
+  ThemeContext as unstable_ThemeContext,
   Theme as unstable_Theme,
   useTheme as unstable_useTheme,
 } from './components/Theme';

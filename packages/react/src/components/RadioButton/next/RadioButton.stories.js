@@ -17,7 +17,7 @@ export const Default = () => {
       legendText="Radio button heading"
       name="radio-button-group"
       defaultSelected="radio-1">
-      <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
+      <RadioButton labelText="Option 1" value="radio-1" id="radio-1" disabled />
       <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
       <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
     </RadioButtonGroup>

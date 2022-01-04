@@ -28,11 +28,11 @@ export function Toggle({
   toggled,
   ...other
 }) {
-  const [checked, setChecked] = useControllableState(
-    toggled,
-    onToggle,
-    defaultToggled
-  );
+  const [checked, setChecked] = useControllableState({
+    value: toggled,
+    onChange: onToggle,
+    defaultValue: defaultToggled,
+  });
 
   function handleClick(e) {
     setChecked(!checked);

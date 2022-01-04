@@ -15,4 +15,6 @@
 
 @use 'scss/reset';
 @forward 'scss/fonts';
+@forward 'scss/layer';
+@forward 'scss/zone';
 @use 'scss/components';

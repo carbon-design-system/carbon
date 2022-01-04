@@ -6,8 +6,20 @@
 //
 
 @use '@carbon/react/scss/reset';
-@use '@carbon/react/scss/components/stack';
 @use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/theme' with (
+  $theme: themes.$g10
+);
+@use '@carbon/react/scss/layer';
+@use '@carbon/react/scss/grid';
+@use '@carbon/react/scss/components/data-table';
+@use '@carbon/react/scss/components/stack';
+
+body {
+  background: theme.$background;
+  color: theme.$text-primary;
+}
 
 .statistics {
   display: grid;

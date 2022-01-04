@@ -8,6 +8,7 @@
 import './Theme-story.scss';
 import React from 'react';
 import { Theme, useTheme } from '../../Theme';
+import { Layer } from '../../Layer';
 import mdx from './Theme.mdx';
 
 export default {
@@ -82,6 +83,39 @@ export const UseTheme = () => {
 };
 
 UseTheme.storyName = 'useTheme';
+
+export const WithLayer = () => {
+  function Layers() {
+    const { theme } = useTheme();
+    return (
+      <article className="theme-layer-example">
+        <header className="theme-layer-header">{theme} theme</header>
+        <div className="theme-with-layer">Layer one</div>
+        <Layer>
+          <div className="theme-with-layer">Layer two</div>
+          <Layer>
+            <div className="theme-with-layer">Layer three</div>
+          </Layer>
+        </Layer>
+      </article>
+    );
+  }
+
+  return (
+    <>
+      <Layers />
+      <Theme theme="g10">
+        <Layers />
+        <Theme theme="g90">
+          <Layers />
+          <Theme theme="g100">
+            <Layers />
+          </Theme>
+        </Theme>
+      </Theme>
+    </>
+  );
+};
 
 const PlaygroundStory = (args) => {
   return (

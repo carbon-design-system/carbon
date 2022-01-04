@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -25,8 +25,8 @@
     "@carbon/grid": "^10.39.0",
     "@carbon/layout": "^10.34.0",
     "@carbon/motion": "^10.26.0",
-    "@carbon/themes": "^10.47.0",
-    "@carbon/type": "^10.38.0",
+    "@carbon/themes": "^10.48.0",
+    "@carbon/type": "^10.39.0",
     "@ibm/plex": "6.0.0-next.6"
   },
   "devDependencies": {

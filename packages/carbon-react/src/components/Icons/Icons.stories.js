@@ -16,17 +16,17 @@ export default {
 export const Default = () => {
   return (
     <>
-      <section>
+      <section className="demo-icon-example">
         <h2>16 pixel (default)</h2>
         <Bee />
       </section>
 
-      <section>
+      <section className="demo-icon-example">
         <h2>20 pixel</h2>
         <Bicycle size={20} />
       </section>
 
-      <section>
+      <section className="demo-icon-example">
         <h2>32 pixel</h2>
         <ChevronUp size={32} />
       </section>
