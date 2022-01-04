@@ -11,6 +11,7 @@ import { withKnobs, boolean, text, number } from '@storybook/addon-knobs';
 import CodeSnippet from '../CodeSnippet';
 import CodeSnippetSkeleton from './CodeSnippet.Skeleton';
 import mdx from './CodeSnippet.mdx';
+import './CodeSnippet-story.scss';
 
 export default {
   title: 'Components/CodeSnippet',
@@ -177,6 +178,19 @@ const lightPropMessage = (
     </CodeSnippet>
     .
   </small>
+);
+
+export const withChildrenNodes = () => (
+  <CodeSnippet {...props()} type="multi" copyText={snippetText().multi}>
+    {snippetText()
+      .multi.split('\n')
+      .map((line, index) => (
+        <div key={line + index}>
+          <span>{index + 1}</span>
+          {line}
+        </div>
+      ))}
+  </CodeSnippet>
 );
 
 export const playground = () => (
