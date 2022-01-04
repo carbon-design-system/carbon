@@ -89,7 +89,7 @@ IconButton.propTypes = {
   leaveDelayMs: PropTypes.number,
 
   /**
-   * Specify the duration in milliseconds to delay before hiding the tooltip
+   * Specify the size of the Button. Defaults to `md`.
    */
   size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', '2xl']),
 };
