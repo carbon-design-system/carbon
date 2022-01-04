@@ -35,7 +35,8 @@
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
     "jest-circus": "^27.0.6",
-    "jest-watch-typeahead": "^0.6.4"
+    "jest-watch-typeahead": "^0.6.4",
+    "sass": "^1.45.0"
   },
   "devDependencies": {
     "react": "^17.0.1",
