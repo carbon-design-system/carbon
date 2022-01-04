@@ -12,8 +12,7 @@ import React from 'react';
 
 const keys = Object.keys(classes);
 
-function Box({ children, ...rest }) {
-  const child = React.Children.only(children);
+function Box({ as: BaseComponent = 'div', children, ...rest }) {
   const childProps = {};
   const tokens = keys.filter((key) => {
     if (rest[key]) {
@@ -27,10 +26,20 @@ function Box({ children, ...rest }) {
       return classes[token];
     })
   );
-  return React.cloneElement(child, {
-    ...childProps,
-    className: cx(child.props.className, className),
-  });
+
+  if (React.Children.count(children) === 1) {
+    const child = React.Children.only(children);
+    return React.cloneElement(child, {
+      ...childProps,
+      className: cx(child.props.className, className),
+    });
+  }
+
+  return (
+    <BaseComponent {...childProps} className={className}>
+      {children}
+    </BaseComponent>
+  );
 }
 
 export { Box };

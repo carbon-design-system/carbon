@@ -5,9 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as babel from '@babel/core';
+import traverse from '@babel/traverse';
+import crypto from 'crypto';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
 import path from 'path';
+import resolve from 'resolve';
 import semver from 'semver';
 import { hash } from '../crypto/murmur';
 import { analyze } from './analyze';
@@ -232,6 +236,113 @@ class Workspace {
     });
 
     return exports;
+  }
+
+  async getFiles() {
+    const candidates = ['src', 'scss'].map((candidate) => {
+      return path.join(this.directory, candidate);
+    });
+
+    const files = new Map();
+    const visited = new Set();
+    const queue = candidates.filter((candidate) => {
+      return fs.existsSync(candidate);
+    });
+    const ignorelist = [
+      '__tests__',
+      '__mocks__',
+      '-test.js',
+      '-test.e2e.js',
+      '.stories.js',
+      '-story.js',
+      'stories',
+      '.md',
+      '.mdx',
+    ];
+
+    while (queue.length !== 0) {
+      const filepath = queue.shift();
+      if (visited.has(filepath)) {
+        continue;
+      }
+
+      visited.add(filepath);
+
+      // TODO: how to exclude scss files if project is JS-based?
+
+      if (ignorelist.some((pattern) => filepath.includes(pattern))) {
+        continue;
+      }
+
+      const stats = await fs.stat(filepath);
+      if (stats.isDirectory()) {
+        const files = await fs.readdir(filepath).then((filepaths) => {
+          return filepaths.map((childPath) => {
+            return path.join(filepath, childPath);
+          });
+        });
+        queue.push(...files);
+        continue;
+      }
+
+      if (path.extname(filepath) === '.js') {
+        const id = hash(filepath);
+        const contents = await fs.readFile(filepath, 'utf8');
+        const ast = babel.parseSync(contents, {
+          presets: ['@babel/preset-env', '@babel/preset-react'],
+          plugins: ['@babel/plugin-proposal-export-default-from'],
+        });
+        const imports = new Set();
+        const exports = new Set();
+
+        traverse(ast, {
+          ExportAllDeclaration({ node }) {
+            // unsupported
+          },
+          ExportDefaultDeclaration({ node }) {
+            exports.add('default');
+          },
+          ExportNamedDeclaration({ node }) {
+            for (const specifier of node.specifiers) {
+              exports.add(specifier.exported.name);
+            }
+          },
+          ImportDeclaration({ node }) {
+            const source = node.source.value;
+            if (source.startsWith('.')) {
+              const resolved = resolve.sync(source, {
+                basedir: path.dirname(filepath),
+              });
+              imports.add(hash(resolved));
+              queue.push(resolved);
+            } else {
+              // imports.add(source);
+            }
+          },
+        });
+
+        files.set(id, {
+          id,
+          filepath,
+          imports,
+          exports,
+        });
+      }
+
+      if (path.extname(filepath) === '.scss') {
+        const id = hash(filepath);
+        const contents = await fs.readFile(filepath, 'utf8');
+
+        files.set(id, {
+          id,
+          filepath,
+          imports: [],
+          exports: [],
+        });
+      }
+    }
+
+    return Array.from(files.values());
   }
 }
 
