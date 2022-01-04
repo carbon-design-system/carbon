@@ -468,8 +468,6 @@ function DatePicker({
       startInputField.current.value = value;
       setPrevValue(value);
     }
-
-    console.log('value', value);
   }, [dateFormat, minDate, maxDate, disable, enable, inline, value]); //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
