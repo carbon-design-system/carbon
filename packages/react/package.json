@@ -156,34 +156,5 @@
       "@babel/plugin-proposal-export-default-from"
     ]
   },
-  "contributors": [
-    {
-      "name": "Brian Han",
-      "email": "bthan@us.ibm.com"
-    },
-    {
-      "name": "Aziz Punjani",
-      "email": "punjani@us.ibm.com"
-    },
-    {
-      "name": "Mari Johannessen",
-      "email": "mjohannessen@us.ibm.com"
-    },
-    {
-      "name": "TJ Egan",
-      "email": "twegan@us.ibm.com"
-    },
-    {
-      "name": "Ian Fleming",
-      "email": "ianfleming@us.ibm.com"
-    },
-    {
-      "name": "Chris Dhanaraj",
-      "email": "chrisdhanaraj@us.ibm.com"
-    }
-  ],
-  "bundleSizeThreshold": 120000,
-  "release": {
-    "branch": "main"
-  }
+  "bundleSizeThreshold": 120000
 }
