@@ -529,12 +529,6 @@ export default class DatePicker extends Component {
       </svg>`;
   }
 
-  openCalendar = () => {
-    if (this.cal) {
-      this.cal.open();
-    }
-  };
-
   updateClassNames = (calendar) => {
     const calendarContainer = calendar.calendarContainer;
     const daysContainer = calendar.days;
@@ -660,7 +654,6 @@ export default class DatePicker extends Component {
               return React.cloneElement(child, {
                 datePickerType,
                 ref: this.assignInputFieldRef,
-                openCalendar: this.openCalendar,
               });
             }
             if (
@@ -671,7 +664,6 @@ export default class DatePicker extends Component {
               return React.cloneElement(child, {
                 datePickerType,
                 ref: this.assignToInputFieldRef,
-                openCalendar: this.openCalendar,
               });
             }
             if (index === 0) {
