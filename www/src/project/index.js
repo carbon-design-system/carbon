@@ -7,7 +7,6 @@
 
 import * as babel from '@babel/core';
 import traverse from '@babel/traverse';
-import crypto from 'crypto';
 import fs from 'fs-extra';
 import glob from 'fast-glob';
 import path from 'path';
@@ -258,6 +257,7 @@ class Workspace {
       'stories',
       '.md',
       '.mdx',
+      'template',
     ];
 
     while (queue.length !== 0) {
@@ -269,7 +269,7 @@ class Workspace {
       visited.add(filepath);
 
       // TODO: how to exclude scss files if project is JS-based?
-
+      // TODO: make this glob based instead of matching on sub-path
       if (ignorelist.some((pattern) => filepath.includes(pattern))) {
         continue;
       }
@@ -296,10 +296,10 @@ class Workspace {
         const exports = new Set();
 
         traverse(ast, {
-          ExportAllDeclaration({ node }) {
+          ExportAllDeclaration() {
             // unsupported
           },
-          ExportDefaultDeclaration({ node }) {
+          ExportDefaultDeclaration() {
             exports.add('default');
           },
           ExportNamedDeclaration({ node }) {
@@ -331,7 +331,7 @@ class Workspace {
 
       if (path.extname(filepath) === '.scss') {
         const id = hash(filepath);
-        const contents = await fs.readFile(filepath, 'utf8');
+        // const contents = await fs.readFile(filepath, 'utf8');
 
         files.set(id, {
           id,

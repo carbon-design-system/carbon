@@ -96,14 +96,14 @@ function create({ maxAttempts = 10 } = {}) {
     async range(from, to, packageName) {
       const url = new URL('/downloads/point', 'https://api.npmjs.org');
 
-      if (!from instanceof Date) {
+      if (!(from instanceof Date)) {
         throw new Error(
           'Expected parameter `from` to be of type `Date`, instead received: ' +
             `${from}`
         );
       }
 
-      if (!to instanceof Date) {
+      if (!(to instanceof Date)) {
         throw new Error(
           'Expected parameter `to` to be of type `Date`, instead received: ' +
             `${to}`

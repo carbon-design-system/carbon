@@ -8,10 +8,19 @@
 'use strict';
 
 module.exports = {
-  extends: [require.resolve('../config/eslint-config-carbon/internal.js')],
+  extends: [
+    'plugin:@next/next/recommended',
+    'plugin:@next/next/core-web-vitals',
+    require.resolve('../config/eslint-config-carbon/internal.js'),
+  ],
   rules: {
     'jsx-a11y/anchor-is-valid': 'off',
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
+  },
+  settings: {
+    next: {
+      rootDir: __dirname,
+    },
   },
 };

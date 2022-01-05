@@ -16,7 +16,7 @@ import {
   TableCell,
   Tag,
 } from '@carbon/react';
-import { ChevronRight, ChevronDown } from '@carbon/react/icons';
+import { ChevronDown } from '@carbon/react/icons';
 import { parseISO, format } from 'date-fns';
 import { Flex } from '../Flex';
 import { Text } from '../Text';
@@ -141,6 +141,7 @@ function IssueExplorer({ issues, labelGroups }) {
                   const label = labelsById.get(id);
                   return (
                     <Tag
+                      key={id}
                       type="high-contrast"
                       filter
                       onClick={() => {
