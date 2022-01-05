@@ -8415,12 +8415,9 @@ Map {
       "size": Object {
         "args": Array [
           Array [
-            "xs",
             "sm",
             "md",
             "lg",
-            "xl",
-            "2xl",
           ],
         ],
         "type": "oneOf",
