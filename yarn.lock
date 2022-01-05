@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 4
+  version: 5
   cacheKey: 8
 
 "@actions/core@npm:^1.2.3":
@@ -124,7 +124,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:7.14.6, @babel/core@npm:>=7.9.0, @babel/core@npm:^7.1.0, @babel/core@npm:^7.12.10, @babel/core@npm:^7.13.16, @babel/core@npm:^7.14.6, @babel/core@npm:^7.4.3, @babel/core@npm:^7.7.2, @babel/core@npm:^7.7.5":
+"@babel/core@npm:>=7.9.0, @babel/core@npm:^7.1.0, @babel/core@npm:^7.12.10, @babel/core@npm:^7.13.16, @babel/core@npm:^7.14.6, @babel/core@npm:^7.4.3, @babel/core@npm:^7.7.2, @babel/core@npm:^7.7.5":
   version: 7.14.6
   resolution: "@babel/core@npm:7.14.6"
   dependencies:
@@ -2729,7 +2729,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@frctl/fractal@npm:1.2.1, @frctl/fractal@npm:^1.1.0, @frctl/fractal@npm:^1.1.0-alpha.0":
+"@frctl/fractal@npm:^1.1.0, @frctl/fractal@npm:^1.1.0-alpha.0":
   version: 1.2.1
   resolution: "@frctl/fractal@npm:1.2.1"
   dependencies:
@@ -4061,77 +4061,77 @@ __metadata:
 "@next/swc-android-arm64@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-android-arm64@npm:12.0.3"
-  checksum: 615c95d182685ec47ef58c377385b7aa8b460a3a70feb89123f24d58004cc5e1f5e37befb745846c920a5b6a4d69fc05ae81547264e5e0b4b11cc08f6dd89dd4
+  conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
 
 "@next/swc-darwin-arm64@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-darwin-arm64@npm:12.0.3"
-  checksum: f6c0bfbb099d530c7eca30a865fbbf01ff7abde58d3314e33d85ab3275238f07601f30b95876f3afe059caf8ec8ba41b19b8c3e4b92a6cf3c5c2bf9d21f768ac
+  conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
 
 "@next/swc-darwin-x64@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-darwin-x64@npm:12.0.3"
-  checksum: 22906cd7a86becf03082042847745e1666193269b389227ed078fc315bcdbaaa9dbd0725d010c346725f3c6f8591e6474a8b152e798fbb1975b02c015c378f61
+  conditions: os=darwin & cpu=x64
   languageName: node
   linkType: hard
 
 "@next/swc-linux-arm-gnueabihf@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-linux-arm-gnueabihf@npm:12.0.3"
-  checksum: 3474c5681d77710a664eddb50d06f2df00436caea28df1ffb6ab58e4d1b9683896fa35aab645bee95d92b4484bb2a45bd16ee5628f3639a1a240785a5cc7f604
+  conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
 
 "@next/swc-linux-arm64-gnu@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-linux-arm64-gnu@npm:12.0.3"
-  checksum: ede87d91e5943a92a47184bca29fd9ce97e2a25d318307a83e64f2b45adde91505cc8ef8352b91799f0126e5d8faf528eb8e4ae9efa025016613bec8bd5e4eb5
+  conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
 "@next/swc-linux-arm64-musl@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-linux-arm64-musl@npm:12.0.3"
-  checksum: f6cbe1e7dd9593d849bc279bf4239cc4705e2e833561455208df5c6011badcf9be48f21bbb04ae629c86af87d56f3d18a573a6ed3577774c8decc3e0a3b9c9c3
+  conditions: os=linux & cpu=arm64
   languageName: node
   linkType: hard
 
 "@next/swc-linux-x64-gnu@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-linux-x64-gnu@npm:12.0.3"
-  checksum: 0b0bc4b7c142f05d2db0ba97f1e3612e60c91a0e0da2ce72a6376622b91dbff99150fa0192f834abde36d462ef6e732db2145b93b380b931f9aa77ef9fbf39d1
+  conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
 "@next/swc-linux-x64-musl@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-linux-x64-musl@npm:12.0.3"
-  checksum: 6678c0a7b921a25ef2d0e11ee2317656dc56e3849bbd9f143a93b8745d483910693851a8956d4615bf1d8c355d38ed4e08a6141f577eeeb627f6ec0f20ddb757
+  conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
 
 "@next/swc-win32-arm64-msvc@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-win32-arm64-msvc@npm:12.0.3"
-  checksum: 0c2d9dddd331215fe4de34891ffd8fa072b245a65f64d770b119adaa2f5781b18a183a313acb4b2b8476f58aebf72ada9a86069e6e146af2273016ad48f711ad
+  conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
 "@next/swc-win32-ia32-msvc@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-win32-ia32-msvc@npm:12.0.3"
-  checksum: dc79d45f9ec027df828b3174a85a05d68fb6562e5407d4e4ebea9313649993d55c93451eb208f7a32623b77550a892806eef7a6c89b8a42d1347d43774863d5a
+  conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
 
 "@next/swc-win32-x64-msvc@npm:12.0.3":
   version: 12.0.3
   resolution: "@next/swc-win32-x64-msvc@npm:12.0.3"
-  checksum: 2c2f2540c8965dfc429b7a176328b03ee52ef5f8a08973238c55abbd50929c7745b71c4b0b9bdb2a4c54f3e877589f71e519db9c4b89e0ac2a22de7896e3272b
+  conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
@@ -16958,6 +16958,7 @@ __metadata:
     node-gyp: latest
     node-pre-gyp: "*"
   checksum: 3daedd1272f49c281b25eab372965673ba3cad5038ddf678ba0463e53181a1e9a8d471fcb5894cfee6b7e05406803b723fe708c1e3f6d5a93929115697439350
+  conditions: os=darwin
   languageName: node
   linkType: hard
 
@@ -16967,27 +16968,28 @@ __metadata:
   dependencies:
     node-gyp: latest
   checksum: 97ade64e75091afee5265e6956cb72ba34db7819b4c3e94c431d4be2b19b8bb7a2d4116da417950c3425f17c8fe693d25e20212cac583ac1521ad066b77ae31f
+  conditions: os=darwin
   languageName: node
   linkType: hard
 
 "fsevents@patch:fsevents@^1.0.0#~builtin<compat/fsevents>, fsevents@patch:fsevents@^1.2.7#~builtin<compat/fsevents>":
   version: 1.2.11
-  resolution: "fsevents@patch:fsevents@npm%3A1.2.11#~builtin<compat/fsevents>::version=1.2.11&hash=1cc4b2"
+  resolution: "fsevents@patch:fsevents@npm%3A1.2.11#~builtin<compat/fsevents>::version=1.2.11&hash=18f3a7"
   dependencies:
     bindings: ^1.5.0
     nan: ^2.12.1
     node-gyp: latest
     node-pre-gyp: "*"
-  checksum: 008ff261eff05bee0d4f2271add609d4b06c21a0ad33b91d478c0203f11de881072efa11cc7fd9553018b03e44c8db83bb7865f098a8a774fc64c6a3b13b7a08
+  conditions: os=darwin
   languageName: node
   linkType: hard
 
 "fsevents@patch:fsevents@^2.1.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@^2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.1#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=1cc4b2"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
   dependencies:
     node-gyp: latest
-  checksum: 78db9daf1f6526a49cefee3917cc988f62dc7f25b5dd80ad6de4ffc4af7f0cab7491ac737626ff53e482a111bc53aac9e411fe3602458eca36f6a003ecf69c16
+  conditions: os=darwin
   languageName: node
   linkType: hard
 
@@ -19180,6 +19182,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"immutable@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "immutable@npm:4.0.0"
+  checksum: 4b5e9181e4d5fa06728a481835ec09c86367e5d03268666c95b522b7644ab891098022e4479a43c4c81a68f2ed82f10751ce5d33e208d7b873b6e7f9dfaf4d87
+  languageName: node
+  linkType: hard
+
 "import-cwd@npm:^2.0.0":
   version: 2.1.0
   resolution: "import-cwd@npm:2.1.0"
@@ -20882,6 +20891,7 @@ __metadata:
     jest-watch-typeahead: ^0.6.4
     react: ^17.0.1
     react-dom: ^17.0.1
+    sass: ^1.45.0
   languageName: unknown
   linkType: soft
 
@@ -21189,7 +21199,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-resolve@npm:27.0.6, jest-resolve@npm:^27.0.6":
+"jest-resolve@npm:^27.0.6":
   version: 27.0.6
   resolution: "jest-resolve@npm:27.0.6"
   dependencies:
@@ -29708,21 +29718,21 @@ resolve@^2.0.0-next.3:
 
 "resolve@patch:resolve@^1.1.6#~builtin<compat/resolve>, resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.13.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.17.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.3.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.4.0#~builtin<compat/resolve>":
   version: 1.20.0
-  resolution: "resolve@patch:resolve@npm%3A1.20.0#~builtin<compat/resolve>::version=1.20.0&hash=00b1ff"
+  resolution: "resolve@patch:resolve@npm%3A1.20.0#~builtin<compat/resolve>::version=1.20.0&hash=07638b"
   dependencies:
     is-core-module: ^2.2.0
     path-parse: ^1.0.6
-  checksum: bed00be983cd20a8af0e7840664f655c4b269786dbd9595c5f156cd9d8a0050e65cdbbbdafc30ee9b6245b230c78a2c8ab6447a52545b582f476c29adb188cc5
+  checksum: a0dd7d16a8e47af23afa9386df2dff10e3e0debb2c7299a42e581d9d9b04d7ad5d2c53f24f1e043f7b3c250cbdc71150063e53d0b6559683d37f790b7c8c3cd5
   languageName: node
   linkType: hard
 
 "resolve@patch:resolve@^2.0.0-next.3#~builtin<compat/resolve>":
   version: 2.0.0-next.3
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.3#~builtin<compat/resolve>::version=2.0.0-next.3&hash=00b1ff"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.3#~builtin<compat/resolve>::version=2.0.0-next.3&hash=07638b"
   dependencies:
     is-core-module: ^2.2.0
     path-parse: ^1.0.6
-  checksum: eb88c5e53843bc022215744307a5f5664446c0fdb8f43c33456dce98d5ee6b3162d0cd0a177bb6f1c3d5c8bf01391ac7ab2de0e936e35318725fb40ba7efdaf6
+  checksum: 21684b4d99a4877337cdbd5484311c811b3e8910edb5d868eec85c6e6550b0f570d911f9a384f9e176172d6713f2715bd0b0887fa512cb8c6aeece018de6a9f8
   languageName: node
   linkType: hard
 
@@ -30277,14 +30287,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.43.3, sass@npm:^1.43.4":
-  version: 1.43.4
-  resolution: "sass@npm:1.43.4"
+"sass@npm:^1.43.3, sass@npm:^1.43.4, sass@npm:^1.45.0":
+  version: 1.45.0
+  resolution: "sass@npm:1.45.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
+    immutable: ^4.0.0
+    source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: 9af80105dabd32752c60b4557115832982cf1019c02c952db6a26c61a3e18dc95044c896685e6e9a6d6dd6643fc411ecf2ea4a8a431a8a08a7510a45d5a492ae
+  checksum: f20d22ddf91e3571926535cdec9e1092780b0bf133ee6a68d25ee21fd3fcb94f4b1df90823fdc60cabf468776d3a6bb693fd89305698e70609eb47bcfb905f10
   languageName: node
   linkType: hard
 
@@ -31589,6 +31601,13 @@ resolve@^2.0.0-next.3:
   version: 2.0.1
   resolution: "source-list-map@npm:2.0.1"
   checksum: 806efc6f75e7cd31e4815e7a3aaf75a45c704871ea4075cb2eb49882c6fca28998f44fc5ac91adb6de03b2882ee6fb02f951fdc85e6a22b338c32bfe19557938
+  languageName: node
+  linkType: hard
+
+"source-map-js@npm:>=0.6.2 <2.0.0":
+  version: 1.0.1
+  resolution: "source-map-js@npm:1.0.1"
+  checksum: 22606113d62bbd468712b0cb0c46e9a8629de7eb081049c62a04d977a211abafd7d61455617f8b78daba0b6c0c7e7c88f8c6b5aaeacffac0a6676ecf5caac5ce
   languageName: node
   linkType: hard
 

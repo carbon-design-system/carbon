@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import 'carbon-components/src/components/accordion/_accordion.scss';
+
 import React from 'react';
 import { default as Accordion, AccordionItem } from '../';
 import { cleanup, render, screen } from '@testing-library/react';
