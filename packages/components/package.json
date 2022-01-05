@@ -121,7 +121,7 @@
     "gulp-nodemon": "^2.4.2",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
-    "gulp-sass": "^4.1.0",
+    "gulp-sass": "^5.1.0",
     "gulp-sass-lint": "^1.4.0",
     "gulp-sourcemaps": "^2.6.0",
     "gulp-terser": "^1.0.0",
