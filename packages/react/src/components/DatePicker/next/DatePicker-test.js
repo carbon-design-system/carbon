@@ -9,7 +9,7 @@ import React from 'react';
 import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
-import DatePickerInput from '../../DatePickerInput/DatePickerInput';
+import DatePickerInput from '../../DatePickerInput/next/DatePickerInput';
 
 const prefix = 'bx';
 
