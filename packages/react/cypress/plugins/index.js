@@ -5,23 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// const preprocessor = require('@cypress/webpack-preprocessor');
-
 module.exports = (on, config) => {
   if (config.testingType === 'component') {
-    require('@cypress/react/plugins/react-scripts')(on, config);
+    const { startDevServer } = require('@cypress/webpack-dev-server');
+    const webpackConfig = require('../../webpack.config.js');
+
+    on('dev-server:start', (options) =>
+      startDevServer({ options, webpackConfig })
+    );
   }
 
   return config;
-
-  // if (config.testingType === 'component') {
-  // const { startDevServer } = require('@cypress/webpack-dev-server');
-  // const webpackConfig = require('../../webpack.config.js');
-
-  // on('dev-server:start', (options) =>
-  // startDevServer({ options, webpackConfig })
-  // );
-  // }
-
-  // return config;
 };
