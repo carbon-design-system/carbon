@@ -12,9 +12,6 @@
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "homepage": "https://www.carbondesignsystem.com/",
-  "engines": {
-    "node": ">=6.x"
-  },
   "files": [
     "css/**/*",
     "es/**/*",
