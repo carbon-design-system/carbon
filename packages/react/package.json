@@ -60,6 +60,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
     "lodash.throttle": "^4.1.1",
+    "prop-types": "^15.7.2",
     "react-is": "^17.0.2",
     "use-resize-observer": "^6.0.0",
     "wicg-inert": "^3.1.1",
@@ -125,7 +126,6 @@
     "postcss-custom-properties": "^9.0.2",
     "postcss-loader": "^6.2.1",
     "promise": "^8.0.1",
-    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "^5.0.0",
@@ -162,35 +162,6 @@
       "@babel/plugin-proposal-export-default-from"
     ]
   },
-  "contributors": [
-    {
-      "name": "Brian Han",
-      "email": "bthan@us.ibm.com"
-    },
-    {
-      "name": "Aziz Punjani",
-      "email": "punjani@us.ibm.com"
-    },
-    {
-      "name": "Mari Johannessen",
-      "email": "mjohannessen@us.ibm.com"
-    },
-    {
-      "name": "TJ Egan",
-      "email": "twegan@us.ibm.com"
-    },
-    {
-      "name": "Ian Fleming",
-      "email": "ianfleming@us.ibm.com"
-    },
-    {
-      "name": "Chris Dhanaraj",
-      "email": "chrisdhanaraj@us.ibm.com"
-    }
-  ],
-  "bundleSizeThreshold": 120000,
-  "release": {
-    "branch": "main"
-  },
-  "browserslist": "last 2 versions"
+  "browserslist": "last 2 versions",
+  "bundleSizeThreshold": 120000
 }
