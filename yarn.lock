@@ -10792,7 +10792,6 @@ __metadata:
     diff: ^5.0.0
     express-handlebars: ^5.2.1
     fancy-log: ^1.3.0
-    fibers: ^4.0.1
     flatpickr: 4.6.1
     glob: ^7.1.2
     globby: ^11.0.2
@@ -16096,15 +16095,6 @@ __metadata:
   version: 4.2.0
   resolution: "fecha@npm:4.2.0"
   checksum: 4eb4235959161446f6ec1a24e34eba7362187d2c96d9dd86ea4290e345d1efd2175ccb01bbef9ee852c6790aa7af2539d08361b0499ebc9bf23b4791f5666cd0
-  languageName: node
-  linkType: hard
-
-"fibers@npm:^4.0.1":
-  version: 4.0.2
-  resolution: "fibers@npm:4.0.2"
-  dependencies:
-    detect-libc: ^1.0.3
-  checksum: 0a96dd79fb2f4d4f813d29814a93d449cd7595ddb5a114cf336ceaf177ae3cdbc33a99f050ccb36e0e41b3fc38a69beff9a918d91d03f53fb7f37870d2aae473
   languageName: node
   linkType: hard
 
