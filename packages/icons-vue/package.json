@@ -33,7 +33,7 @@
   "devDependencies": {
     "@carbon/cli-reporter": "^10.5.0",
     "@carbon/icons": "^10.44.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^10.0.0",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.0",
     "rollup": "^2.46.0",
