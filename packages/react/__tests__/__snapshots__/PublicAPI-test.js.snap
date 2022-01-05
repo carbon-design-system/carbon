@@ -8412,6 +8412,16 @@ Map {
       "leaveDelayMs": Object {
         "type": "number",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
     "render": [Function],
   },
