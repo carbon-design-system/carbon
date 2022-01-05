@@ -46,6 +46,6 @@
     "yargs": "^17.0.1"
   },
   "devDependencies": {
-    "memfs": "^3.2.2"
+    "memfs": "^3.4.0"
   }
 }

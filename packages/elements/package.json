@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@carbon/cli": "^10.31.0",
-    "fs-extra": "^8.1.0",
+    "fs-extra": "^10.0.0",
     "klaw-sync": "^6.0.0",
     "replace-in-file": "^3.4.2",
     "rimraf": "^3.0.0"

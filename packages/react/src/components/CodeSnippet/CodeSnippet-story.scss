@@ -1,0 +1,14 @@
+@import '~@carbon/themes/scss/themes';
+
+.bx--snippet-container {
+  code > div {
+    white-space: pre;
+    > span {
+      display: inline-block;
+      user-select: none;
+      width: 2rem;
+      overflow: hidden;
+      color: $text-02;
+    }
+  }
+}
