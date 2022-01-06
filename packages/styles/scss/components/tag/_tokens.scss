@@ -25,11 +25,11 @@ $tag-background-red: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$red-80,
+      value: colors.$red-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$red-80,
+      value: colors.$red-70,
     ),
   ),
 ) !default;
@@ -47,11 +47,11 @@ $tag-color-red: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$red-30,
+      value: colors.$red-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$red-30,
+      value: colors.$red-20,
     ),
   ),
 ) !default;
@@ -69,11 +69,11 @@ $tag-hover-red: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$red-70,
+      value: colors.$red-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$red-70,
+      value: colors.$red-70-hover,
     ),
   ),
 ) !default;
@@ -92,11 +92,11 @@ $tag-background-magenta: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$magenta-80,
+      value: colors.$magenta-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$magenta-80,
+      value: colors.$magenta-70,
     ),
   ),
 ) !default;
@@ -114,11 +114,11 @@ $tag-color-magenta: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$magenta-30,
+      value: colors.$magenta-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$magenta-30,
+      value: colors.$magenta-20,
     ),
   ),
 ) !default;
@@ -136,11 +136,11 @@ $tag-hover-magenta: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$magenta-70,
+      value: colors.$magenta-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$magenta-70,
+      value: colors.$magenta-70-hover,
     ),
   ),
 ) !default;
@@ -159,11 +159,11 @@ $tag-background-purple: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$purple-80,
+      value: colors.$purple-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$purple-80,
+      value: colors.$purple-70,
     ),
   ),
 ) !default;
@@ -181,11 +181,11 @@ $tag-color-purple: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$purple-30,
+      value: colors.$purple-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$purple-30,
+      value: colors.$purple-20,
     ),
   ),
 ) !default;
@@ -203,11 +203,11 @@ $tag-hover-purple: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$purple-70,
+      value: colors.$purple-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$purple-70,
+      value: colors.$purple-70-hover,
     ),
   ),
 ) !default;
@@ -226,11 +226,11 @@ $tag-background-blue: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$blue-80,
+      value: colors.$blue-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$blue-80,
+      value: colors.$blue-70,
     ),
   ),
 ) !default;
@@ -248,11 +248,11 @@ $tag-color-blue: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$blue-30,
+      value: colors.$blue-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$blue-30,
+      value: colors.$blue-20,
     ),
   ),
 ) !default;
@@ -270,11 +270,11 @@ $tag-hover-blue: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$blue-70,
+      value: colors.$blue-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$blue-70,
+      value: colors.$blue-70-hover,
     ),
   ),
 ) !default;
@@ -293,11 +293,11 @@ $tag-background-cyan: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$cyan-80,
+      value: colors.$cyan-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$cyan-80,
+      value: colors.$cyan-70,
     ),
   ),
 ) !default;
@@ -315,11 +315,11 @@ $tag-color-cyan: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$cyan-30,
+      value: colors.$cyan-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$cyan-30,
+      value: colors.$cyan-20,
     ),
   ),
 ) !default;
@@ -337,11 +337,11 @@ $tag-hover-cyan: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$cyan-70,
+      value: colors.$cyan-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$cyan-70,
+      value: colors.$cyan-70-hover,
     ),
   ),
 ) !default;
@@ -360,11 +360,11 @@ $tag-background-teal: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$teal-80,
+      value: colors.$teal-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$teal-80,
+      value: colors.$teal-70,
     ),
   ),
 ) !default;
@@ -382,11 +382,11 @@ $tag-color-teal: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$teal-30,
+      value: colors.$teal-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$teal-30,
+      value: colors.$teal-20,
     ),
   ),
 ) !default;
@@ -404,11 +404,11 @@ $tag-hover-teal: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$teal-70,
+      value: colors.$teal-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$teal-70,
+      value: colors.$teal-70-hover,
     ),
   ),
 ) !default;
@@ -427,11 +427,11 @@ $tag-background-green: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$green-80,
+      value: colors.$green-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$green-80,
+      value: colors.$green-70,
     ),
   ),
 ) !default;
@@ -449,11 +449,11 @@ $tag-color-green: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$green-30,
+      value: colors.$green-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$green-30,
+      value: colors.$green-20,
     ),
   ),
 ) !default;
@@ -471,11 +471,11 @@ $tag-hover-green: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$green-70,
+      value: colors.$green-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$green-70,
+      value: colors.$green-70-hover,
     ),
   ),
 ) !default;
@@ -494,11 +494,11 @@ $tag-background-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$gray-80,
+      value: colors.$gray-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$gray-80,
+      value: colors.$gray-70,
     ),
   ),
 ) !default;
@@ -516,11 +516,11 @@ $tag-color-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$gray-30,
+      value: colors.$gray-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$gray-30,
+      value: colors.$gray-20,
     ),
   ),
 ) !default;
@@ -538,11 +538,11 @@ $tag-hover-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$gray-70,
+      value: colors.$gray-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$gray-70,
+      value: colors.$gray-70-hover,
     ),
   ),
 ) !default;
@@ -561,11 +561,11 @@ $tag-background-cool-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$cool-gray-80,
+      value: colors.$cool-gray-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$cool-gray-80,
+      value: colors.$cool-gray-70,
     ),
   ),
 ) !default;
@@ -583,11 +583,11 @@ $tag-color-cool-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$cool-gray-30,
+      value: colors.$cool-gray-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$cool-gray-30,
+      value: colors.$cool-gray-20,
     ),
   ),
 ) !default;
@@ -605,11 +605,11 @@ $tag-hover-cool-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$cool-gray-70,
+      value: colors.$cool-gray-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$cool-gray-70,
+      value: colors.$cool-gray-70-hover,
     ),
   ),
 ) !default;
@@ -628,11 +628,11 @@ $tag-background-warm-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$warm-gray-80,
+      value: colors.$warm-gray-70,
     ),
     (
       theme: themes.$g100,
-      value: colors.$warm-gray-80,
+      value: colors.$warm-gray-70,
     ),
   ),
 ) !default;
@@ -650,11 +650,11 @@ $tag-color-warm-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$warm-gray-30,
+      value: colors.$warm-gray-20,
     ),
     (
       theme: themes.$g100,
-      value: colors.$warm-gray-30,
+      value: colors.$warm-gray-20,
     ),
   ),
 ) !default;
@@ -672,11 +672,11 @@ $tag-hover-warm-gray: (
     ),
     (
       theme: themes.$g90,
-      value: colors.$warm-gray-70,
+      value: colors.$warm-gray-70-hover,
     ),
     (
       theme: themes.$g100,
-      value: colors.$warm-gray-70,
+      value: colors.$warm-gray-70-hover,
     ),
   ),
 ) !default;
