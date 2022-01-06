@@ -22,12 +22,12 @@
     "access": "public"
   },
   "devDependencies": {
-    "@babel/core": "^7.14.6",
-    "@babel/generator": "^7.14.5",
-    "@babel/preset-env": "^7.14.7",
-    "@babel/preset-react": "^7.14.5",
-    "@babel/template": "^7.14.5",
-    "@babel/types": "^7.14.5",
+    "@babel/core": "^7.16.7",
+    "@babel/generator": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@babel/preset-react": "^7.16.7",
+    "@babel/template": "^7.16.7",
+    "@babel/types": "^7.16.7",
     "@carbon/cli-reporter": "^10.5.0",
     "@carbon/icon-helpers": "^10.25.0",
     "@rollup/plugin-babel": "^5.3.0",
