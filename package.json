@@ -57,7 +57,7 @@
     "cross-env": "^5.2.0",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
-    "eslint": "^7.28.0",
+    "eslint": "^7.32.0",
     "fs-extra": "^10.0.0",
     "glob": "^7.1.4",
     "husky": "^7.0.0",
