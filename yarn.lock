@@ -1819,7 +1819,7 @@ __metadata:
     remark: ^10.0.1
     replace-in-file: ^6.1.0
     rollup: ^2.46.0
-    sass: ^1.43.3
+    sass: ^1.46.0
     sassdoc: ^2.7.3
     yargs: ^17.0.1
   bin:
@@ -2115,7 +2115,7 @@ __metadata:
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
     rtlcss: ^3.5.0
-    sass: ^1.45.0
+    sass: ^1.46.0
     sass-loader: ^12.4.0
     style-loader: ^3.3.1
     webpack: ^5.65.0
@@ -2199,7 +2199,7 @@ __metadata:
     react: ^17.0.1
     react-dom: ^16.9.0
     resolve: ^1.12.0
-    sass: ^1.43.3
+    sass: ^1.46.0
     tabbable: ^4.0.0
   peerDependencies:
     node-sass: ^4.13.1
@@ -11565,7 +11565,7 @@ __metadata:
     cypress-real-events: ^1.6.0
     downshift: 5.2.1
     fast-glob: ^3.2.7
-    fast-sass-loader: ^1.5.0
+    fast-sass-loader: ^2.0.1
     flatpickr: 4.6.9
     gzip-size: ^6.0.0
     invariant: ^2.2.3
@@ -11594,7 +11594,7 @@ __metadata:
     rollup-plugin-strip-banner: ^2.0.0
     rollup-plugin-terser: ^7.0.2
     rtlcss: ^2.4.0
-    sass: ^1.45.0
+    sass: ^1.46.0
     sass-loader: ^12.4.0
     storybook-readme: ^5.0.9
     string-replace-loader: ^2.1.0
@@ -11737,8 +11737,8 @@ __metadata:
     rollup: ^2.46.0
     rollup-plugin-filesize: ^9.1.1
     rollup-plugin-terser: ^7.0.2
-    sass: ^1.43.3
-    sass-loader: ^8.0.2
+    sass: ^1.46.0
+    sass-loader: ^12.4.0
     serve-static: ^1.13.0
     style-loader: ^1.1.3
     terser: ^5.7.0
@@ -17333,9 +17333,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-sass-loader@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "fast-sass-loader@npm:1.5.0"
+"fast-sass-loader@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "fast-sass-loader@npm:2.0.1"
   dependencies:
     async: ^2.0.1
     cli-source-preview: ^1.0.0
@@ -17343,9 +17343,9 @@ __metadata:
     fs-extra: 3.x
     loader-utils: ^1.1.0
   peerDependencies:
-    node-sass: 4.x || 3.x
-    webpack: 1.x || 2.x || 3.x || 4.x
-  checksum: 73ac3bba48b03179e89c4b94ddfad02c209e2cd7e5a50fe95bda8517b07c3b5d0d9b2c3b4efa6668aa86d07106bfffa6924f66c4e31754278307e74dddb14785
+    sass: 1.x
+    webpack: 1.x || 2.x || 3.x || 4.x || 5.x
+  checksum: 808ad855f4eaa23be2f98812383c3a7c06d3247e725b759168bcfac235f6935236fae332fbfd34795cca2481835377951ebc3dc062e34be632fcdceee399ee91
   languageName: node
   linkType: hard
 
@@ -22373,7 +22373,7 @@ __metadata:
     jest-watch-typeahead: ^1.0.0
     react: ^17.0.1
     react-dom: ^17.0.1
-    sass: ^1.45.0
+    sass: ^1.46.0
   languageName: unknown
   linkType: soft
 
@@ -32674,41 +32674,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^8.0.2":
-  version: 8.0.2
-  resolution: "sass-loader@npm:8.0.2"
-  dependencies:
-    clone-deep: ^4.0.1
-    loader-utils: ^1.2.3
-    neo-async: ^2.6.1
-    schema-utils: ^2.6.1
-    semver: ^6.3.0
-  peerDependencies:
-    fibers: ">= 3.1.0"
-    node-sass: ^4.0.0
-    sass: ^1.3.0
-    webpack: ^4.36.0 || ^5.0.0
-  peerDependenciesMeta:
-    fibers:
-      optional: true
-    node-sass:
-      optional: true
-    sass:
-      optional: true
-  checksum: 3e9ba97432fcf1092600a31501298f37a0a913f86086b841740f9f8371ee33de55b9740b31563b089524aeb9020fbc51126730fa51d18b2e724a4ada71e2ff81
-  languageName: node
-  linkType: hard
-
-"sass@npm:^1.43.3, sass@npm:^1.43.4, sass@npm:^1.45.0":
-  version: 1.45.0
-  resolution: "sass@npm:1.45.0"
+"sass@npm:^1.46.0":
+  version: 1.46.0
+  resolution: "sass@npm:1.46.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: f20d22ddf91e3571926535cdec9e1092780b0bf133ee6a68d25ee21fd3fcb94f4b1df90823fdc60cabf468776d3a6bb693fd89305698e70609eb47bcfb905f10
+  checksum: d1f727c41ec0fcf9c54c16571bebf97ae1f1f41617796f188d9a1166bd1f1dc03ff63083bb83a4910a40635d4ecd9de9aebded34a363d2c51eed340cd17f4730
   languageName: node
   linkType: hard
 
@@ -39072,7 +39047,7 @@ resolve@^2.0.0-next.3:
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.2
-    sass: ^1.43.4
+    sass: ^1.46.0
     semver: ^7.3.5
   languageName: unknown
   linkType: soft
