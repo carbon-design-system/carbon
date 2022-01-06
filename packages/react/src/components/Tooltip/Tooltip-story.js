@@ -161,8 +161,8 @@ export default {
 
 export const DefaultBottom = () => (
   <div style={containerStyles}>
-    <Tooltip {...props.withIcon()} tooltipBodyId="tooltip-body">
-      <p id="tooltip-body">
+    <Tooltip {...props.withIcon()}>
+      <p>
         This is some tooltip text. This box shows the maximum amount of text
         that should appear inside. If more room is needed please use a modal
         instead.

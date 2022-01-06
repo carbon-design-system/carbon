@@ -141,8 +141,8 @@
     // vertically center icon within parent container on IE11
     top: 50%;
     right: 1rem;
-    cursor: pointer;
     fill: $icon-primary;
+    pointer-events: none;
     transform: translateY(-50%);
   }
 

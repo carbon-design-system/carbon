@@ -9,14 +9,35 @@ import React, { useCallback, useEffect, useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import isEqual from 'lodash.isequal';
 
+function callOnChangeHandler({
+  isControlled,
+  isMounted,
+  onChangeHandlerControlled,
+  onChangeHandlerUncontrolled,
+  selectedItems,
+}) {
+  if (isControlled) {
+    if (isMounted && onChangeHandlerControlled) {
+      onChangeHandlerControlled({ selectedItems });
+    }
+  } else {
+    onChangeHandlerUncontrolled(selectedItems);
+  }
+}
+
 export function useSelection({
   disabled,
   onChange,
   initialSelectedItems = [],
+  selectedItems: controlledItems,
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
-  const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
+  const [uncontrolledItems, setUncontrolledItems] = useState(
+    initialSelectedItems
+  );
+  const isControlled = !!controlledItems;
+  const selectedItems = isControlled ? controlledItems : uncontrolledItems;
   const onItemChange = useCallback(
     (item) => {
       if (disabled) {
@@ -29,35 +50,53 @@ export function useSelection({
           selectedIndex = index;
         }
       });
-
+      let newSelectedItems;
       if (selectedIndex === undefined) {
-        setSelectedItems((selectedItems) => selectedItems.concat(item));
+        newSelectedItems = selectedItems.concat(item);
+        callOnChangeHandler({
+          isControlled,
+          isMounted: isMounted.current,
+          onChangeHandlerControlled: savedOnChange.current,
+          onChangeHandlerUncontrolled: setUncontrolledItems,
+          selectedItems: newSelectedItems,
+        });
         return;
       }
 
-      setSelectedItems((selectedItems) =>
-        removeAtIndex(selectedItems, selectedIndex)
-      );
+      newSelectedItems = removeAtIndex(selectedItems, selectedIndex);
+      callOnChangeHandler({
+        isControlled,
+        isMounted: isMounted.current,
+        onChangeHandlerControlled: savedOnChange.current,
+        onChangeHandlerUncontrolled: setUncontrolledItems,
+        selectedItems: newSelectedItems,
+      });
     },
-    [disabled, selectedItems]
+    [disabled, isControlled, selectedItems]
   );
 
   const clearSelection = useCallback(() => {
     if (disabled) {
       return;
     }
-    setSelectedItems([]);
-  }, [disabled]);
+    callOnChangeHandler({
+      isControlled,
+      isMounted: isMounted.current,
+      onChangeHandlerControlled: savedOnChange.current,
+      onChangeHandlerUncontrolled: setUncontrolledItems,
+      selectedItems: [],
+    });
+  }, [disabled, isControlled]);
 
   useEffect(() => {
     savedOnChange.current = onChange;
   }, [onChange]);
 
   useEffect(() => {
-    if (isMounted.current === true && savedOnChange.current) {
+    if (isMounted.current && savedOnChange.current && !isControlled) {
       savedOnChange.current({ selectedItems });
     }
-  }, [selectedItems]);
+  }, [isControlled, selectedItems]);
 
   useEffect(() => {
     isMounted.current = true;

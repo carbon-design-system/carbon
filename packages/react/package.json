@@ -1,7 +1,7 @@
 {
   "name": "carbon-components-react",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "7.50.0-rc.0",
+  "version": "7.50.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -60,6 +60,7 @@
     "lodash.isequal": "^4.5.0",
     "lodash.omit": "^4.5.0",
     "lodash.throttle": "^4.1.1",
+    "prop-types": "^15.7.2",
     "react-is": "^17.0.2",
     "use-resize-observer": "^6.0.0",
     "wicg-inert": "^3.1.1",
@@ -78,10 +79,10 @@
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
     "@carbon/test-utils": "^10.20.0",
-    "@cypress/react": "^5.4.0",
-    "@cypress/webpack-dev-server": "^1.1.5",
+    "@cypress/react": "^5.10.3",
+    "@cypress/webpack-dev-server": "^1.7.0",
     "@percy/cypress": "^3.1.1",
-    "@percy/storybook": "^3.3.1",
+    "@percy/storybook": "^4.1.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.0.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
@@ -102,15 +103,15 @@
     "babel-plugin-react-docgen": "^4.2.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "browserslist-config-carbon": "^10.6.1",
-    "carbon-components": "^10.50.0-rc.0",
+    "carbon-components": "^10.50.0",
     "carbon-icons": "^7.0.5",
     "chalk": "^4.1.1",
     "cli-table": "^0.3.0",
     "core-js": "^3.16.0",
     "cross-env": "^5.2.0",
     "css-loader": "^3.4.2",
-    "cypress": "^8.1.0",
-    "cypress-real-events": "^1.5.1",
+    "cypress": "^9.1.1",
+    "cypress-real-events": "^1.6.0",
     "fast-glob": "^3.2.7",
     "fast-sass-loader": "^1.5.0",
     "gzip-size": "^6.0.0",
@@ -121,7 +122,6 @@
     "postcss-custom-properties": "^9.0.2",
     "postcss-loader": "^3.0.0",
     "promise": "^8.0.1",
-    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-test-renderer": "^17.0.2",
@@ -138,7 +138,7 @@
     "string-replace-loader": "^2.1.0",
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^4.41.5",
-    "webpack-dev-server": "^3.11.2",
+    "webpack-dev-server": "^4.6.0",
     "whatwg-fetch": "^3.6.2"
   },
   "sideEffects": false,
@@ -156,34 +156,5 @@
       "@babel/plugin-proposal-export-default-from"
     ]
   },
-  "contributors": [
-    {
-      "name": "Brian Han",
-      "email": "bthan@us.ibm.com"
-    },
-    {
-      "name": "Aziz Punjani",
-      "email": "punjani@us.ibm.com"
-    },
-    {
-      "name": "Mari Johannessen",
-      "email": "mjohannessen@us.ibm.com"
-    },
-    {
-      "name": "TJ Egan",
-      "email": "twegan@us.ibm.com"
-    },
-    {
-      "name": "Ian Fleming",
-      "email": "ianfleming@us.ibm.com"
-    },
-    {
-      "name": "Chris Dhanaraj",
-      "email": "chrisdhanaraj@us.ibm.com"
-    }
-  ],
-  "bundleSizeThreshold": 120000,
-  "release": {
-    "branch": "main"
-  }
+  "bundleSizeThreshold": 120000
 }
