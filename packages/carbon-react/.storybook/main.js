@@ -16,14 +16,19 @@ module.exports = {
       name: '@storybook/addon-essentials',
       options: {
         actions: true,
-        backgrounds: true,
+        backgrounds: false,
         controls: true,
         docs: true,
         toolbars: true,
         viewport: true,
       },
     },
+    '@storybook/addon-storysource',
+    '@storybook/addon-a11y',
   ],
+  core: {
+    builder: 'webpack5',
+  },
   stories: [
     './Welcome/Welcome.stories.js',
     '../src/**/*.stories.js',
@@ -72,7 +77,6 @@ module.exports = {
           options: {
             postcssOptions: {
               plugins: [
-                require('postcss-custom-properties')(),
                 require('autoprefixer')({
                   overrideBrowserslist: ['last 1 version'],
                 }),

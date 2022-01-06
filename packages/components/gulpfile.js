@@ -272,6 +272,8 @@ gulp.task('scripts:umd', () => {
     plugins: [
       '@babel/plugin-transform-modules-umd',
       ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ['@babel/plugin-proposal-private-methods', { loose: true }],
     ],
   };
 
@@ -302,7 +304,11 @@ gulp.task('scripts:es', () => {
         },
       ],
     ],
-    plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
+    plugins: [
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ['@babel/plugin-proposal-private-methods', { loose: true }],
+    ],
   };
   return gulp
     .src(srcFiles)
@@ -355,7 +361,7 @@ const buildStyles = (prod) => {
       .pipe(
         postcss([
           autoprefixer({
-            browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+            overrideBrowserslist: ['> 1%', 'last 2 versions', 'ie >= 11'],
             grid: 'autoplace',
           }),
         ])
@@ -417,7 +423,7 @@ gulp.task('sass:dev', () => {
       postcss([
         customProperties(),
         autoprefixer({
-          browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+          overrideBrowserslist: ['> 1%', 'last 2 versions', 'ie >= 11'],
           grid: 'autoplace',
         }),
       ])
