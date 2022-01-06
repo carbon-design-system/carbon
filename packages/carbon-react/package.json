@@ -71,7 +71,7 @@
     "@storybook/manager-webpack5": "^6.4.9",
     "@storybook/react": "^6.4.9",
     "@storybook/theming": "^6.4.9",
-    "autoprefixer": "^10.4.0",
+    "autoprefixer": "^10.4.1",
     "babel-loader": "^8.2.3",
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-preset-carbon": "^0.1.0",
