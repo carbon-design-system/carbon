@@ -99,6 +99,14 @@
       color: transparent;
     }
   }
+
+  .#{$prefix}--text-area__counter-wrapper {
+    width: 100%;
+  }
+
+  .#{$prefix}--text-area__counter {
+    float: right;
+  }
 }
 
 @include exports('text-area') {

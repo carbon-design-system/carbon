@@ -76,6 +76,16 @@ describe('TextArea', () => {
         wrapper.setProps({ light: true });
         expect(wrapper.props().light).toEqual(true);
       });
+
+      it('should set enableCounter as expected', () => {
+        wrapper.setProps({ enableCounter: true });
+        expect(wrapper.props().enableCounter).toEqual(true);
+      });
+
+      it('should set maxCount as expected', () => {
+        wrapper.setProps({ maxCount: 5 });
+        expect(wrapper.props().maxCount).toEqual(5);
+      });
     });
 
     describe('label', () => {
@@ -115,6 +125,51 @@ describe('TextArea', () => {
         wrapper.setProps({ helperText: 'Helper text' });
         const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
         expect(renderedHelper.text()).toEqual('Helper text');
+      });
+    });
+
+    describe('counter', () => {
+      const counterTestWrapper1 = mount(
+        <TextArea id="counter1" labelText="someLabel" enableCounter={true} />
+      );
+
+      const counterTestWrapper2 = mount(
+        <TextArea id="counter2" labelText="someLabel" maxCount={5} />
+      );
+
+      it('should not render element without only enableCounter prop passed in', () => {
+        expect(
+          counterTestWrapper1.exists(`${prefix}--text-area__counter`)
+        ).toEqual(false);
+      });
+
+      it('should not render element without only maxCount prop passed in', () => {
+        expect(
+          counterTestWrapper2.exists(`${prefix}--text-area__counter`)
+        ).toEqual(false);
+      });
+
+      it('should be rendered with both enableCounter and maxCount props passed in', () => {
+        counterTestWrapper1.setProps({ maxCount: 5 });
+
+        expect(
+          counterTestWrapper1.exists(`.${prefix}--text-area__counter`)
+        ).toEqual(true);
+      });
+
+      it('has the expected classes', () => {
+        const counterTextarea = () =>
+          counterTestWrapper1.find(`.${prefix}--text-area__counter`);
+        expect(counterTextarea).not.toBeNull();
+      });
+
+      it('should be disabled with expected classes', () => {
+        counterTestWrapper1.setProps({ disabled: true });
+        const counterTextarea = () =>
+          counterTestWrapper1.find(`.${prefix}--text-area__counter`);
+        expect(
+          counterTextarea().hasClass(`${prefix}--label--disabled`)
+        ).toEqual(true);
       });
     });
   });

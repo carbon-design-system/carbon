@@ -27,6 +27,11 @@ const TextAreaProps = () => ({
   ),
   helperText: text('Helper text (helperText)', 'Optional helper text.'),
   placeholder: text('Placeholder text (placeholder)', 'Placeholder text.'),
+  enableCounter: boolean(
+    'Enable character counter/limit (enableCounter)',
+    false
+  ),
+  maxCount: text('Character limit (maxCount)', ''),
   id: 'test2',
   cols: number('Columns (columns)', 50),
   rows: number('Rows (rows)', 4),
