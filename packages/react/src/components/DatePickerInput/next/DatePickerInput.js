@@ -14,6 +14,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../../internal/usePrefix';
+import deprecate from '../../../prop-types/deprecate';
 
 const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const {
@@ -21,14 +22,12 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     disabled = false,
     helperText,
     hideLabel,
-    iconDescription,
     id,
     invalid = false,
     invalidText,
     labelText,
     onClick = () => {},
     onChange = () => {},
-    openCalendar,
     pattern = '\\d{1,2}\\/\\d{1,2}\\/\\d{4}',
     placeholder,
     size,
@@ -103,9 +102,9 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
         {input}
         <DatePickerIcon
           datePickerType={datePickerType}
-          iconDescription={iconDescription}
+          iconDescription={rest.iconDescription}
           invalid={invalid}
-          openCalendar={openCalendar}
+          openCalendar={rest.openCalendar}
           warn={warn}
         />
       </div>
@@ -146,7 +145,10 @@ DatePickerInput.propTypes = {
   /**
    * The description of the calendar icon.
    */
-  iconDescription: PropTypes.string,
+  iconDescription: deprecate(
+    PropTypes.string,
+    `\nThe prop \`iconDescriptionInput\` for DatePickerInput has been deprecated and is no longer used`
+  ),
 
   /**
    * Specify an id that uniquely identifies the `<input>`
@@ -183,7 +185,10 @@ DatePickerInput.propTypes = {
   /**
    * Provide a function to be called when the input field is clicked
    */
-  openCalendar: PropTypes.func,
+  openCalendar: deprecate(
+    PropTypes.func,
+    `\nThe prop \`openCalendar\` for DatePickerInput has been deprecated and is no longer used`
+  ),
 
   /**
    * Provide a regular expression that the input value must match
@@ -228,13 +233,7 @@ DatePickerInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-function DatePickerIcon({
-  datePickerType,
-  iconDescription,
-  invalid,
-  openCalendar,
-  warn,
-}) {
+function DatePickerIcon({ datePickerType, invalid, warn, ...rest }) {
   const prefix = usePrefix();
 
   if (datePickerType === 'simple' && !invalid && !warn) {
@@ -260,10 +259,11 @@ function DatePickerIcon({
   return (
     <Calendar16
       className={`${prefix}--date-picker__icon`}
-      aria-label={iconDescription}
-      onClick={openCalendar}
-      role="img">
-      {iconDescription && <title>{iconDescription}</title>}
+      aria-label={rest.iconDescription}
+      onClick={rest.openCalendar}
+      role="img"
+      aria-hidden="true">
+      {rest.iconDescription && <title>{rest.iconDescription}</title>}
     </Calendar16>
   );
 }
@@ -279,19 +279,9 @@ DatePickerIcon.propTypes = {
   datePickerType: PropTypes.oneOf(['simple', 'single', 'range']),
 
   /**
-   * The description of the calendar icon.
-   */
-  iconDescription: PropTypes.string,
-
-  /**
    * Specify whether or not the input should be invalid
    */
   invalid: PropTypes.bool,
-
-  /**
-   * Provide a function to be called when the input field is clicked
-   */
-  openCalendar: PropTypes.func,
 
   /**
    * Specify whether the control is currently in warning state
