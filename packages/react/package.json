@@ -140,7 +140,7 @@
     "sass": "^1.45.0",
     "sass-loader": "^12.4.0",
     "storybook-readme": "^5.0.9",
-    "string-replace-loader": "^2.1.0",
+    "string-replace-loader": "^3.1.0",
     "style-loader": "^3.3.1",
     "terser-webpack-plugin": "^2.3.2",
     "webpack": "^5.65.0",
