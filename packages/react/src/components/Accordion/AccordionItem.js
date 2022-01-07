@@ -16,7 +16,7 @@ import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
 
 const { prefix } = settings;
-const defaultRenderExpand = (props) => <button type="button" {...props} />;
+const defaultRenderToggle = (props) => <button type="button" {...props} />;
 
 function AccordionItem({
   children,
@@ -24,7 +24,8 @@ function AccordionItem({
   iconDescription, // eslint-disable-line
   open = false,
   onHeadingClick,
-  renderExpand: Expand = defaultRenderExpand,
+  renderExpando = defaultRenderToggle, // remove renderExpando in next major release
+  renderToggle = defaultRenderToggle,
   title = 'title',
   disabled,
   ...rest
@@ -40,6 +41,8 @@ function AccordionItem({
     [`${prefix}--accordion__item--disabled`]: disabled,
     [customClassName]: !!customClassName,
   });
+
+  const Toggle = renderToggle || renderExpando; // remove renderExpando in next major release
 
   if (open !== prevIsOpen) {
     setAnimation(isOpen ? 'collapsing' : 'expanding');
@@ -76,7 +79,7 @@ function AccordionItem({
 
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
-      <Expand
+      <Toggle
         disabled={disabled}
         aria-controls={id}
         aria-expanded={isOpen}
@@ -88,7 +91,7 @@ function AccordionItem({
         <Text as="div" className={`${prefix}--accordion__title`}>
           {title}
         </Text>
-      </Expand>
+      </Toggle>
       <div id={id} className={`${prefix}--accordion__content`}>
         {children}
       </div>
@@ -142,7 +145,16 @@ AccordionItem.propTypes = {
    * The callback function to render the expand button.
    * Can be a React component class.
    */
-  renderExpand: PropTypes.func,
+  renderExpando: deprecate(
+    PropTypes.func,
+    'The `renderExpando` prop has been deprecated and will be removed in the next major release of Carbon. Use the `renderToggle` prop instead.'
+  ),
+
+  /**
+   * The callback function to render the expand button.
+   * Can be a React component class.
+   */
+  renderToggle: PropTypes.func,
 
   /**
    * The accordion title.

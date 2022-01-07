@@ -59,7 +59,8 @@ Map {
       "open": Object {
         "type": "bool",
       },
-      "renderExpand": Object {
+      "renderExpando": [Function],
+      "renderToggle": Object {
         "type": "func",
       },
       "title": Object {
