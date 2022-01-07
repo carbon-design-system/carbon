@@ -334,7 +334,7 @@ export const BatchExpansion = () => (
           <TableHead>
             <TableRow>
               <TableExpandHeader
-                enableToggle={true}
+                enableToggle
                 {...getExpandHeaderProps()}
               />
               {headers.map((header, i) => (
