@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
@@ -158,13 +158,6 @@ function DatePicker({
   const savedOnChange = useSavedCallback(onChange);
   const savedOnClose = useSavedCallback(onClose);
   const savedOnOpen = useSavedCallback(onOpen);
-  const [prevDateFormat, setPrevDateFormat] = useState(dateFormat);
-  const [prevMinDate, setPrevMinDate] = useState(minDate);
-  const [prevMaxDate, setPrevMaxDate] = useState(maxDate);
-  const [prevDisable, setPrevDisable] = useState(disable);
-  const [prevEnable, setPrevEnable] = useState(enable);
-  const [prevInline, setPrevInline] = useState(inline);
-  const [prevValue, setPrevValue] = useState(value);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
     [`${prefix}--date-picker--short`]: short,
@@ -423,58 +416,57 @@ function DatePicker({
     };
   }, [savedOnChange, savedOnClose, savedOnOpen]); //eslint-disable-line react-hooks/exhaustive-deps
 
+  // update calendar config if props change
   // component did update equivalent
   useEffect(() => {
     if (calendarRef.current) {
-      if (prevDateFormat !== dateFormat) {
-        calendarRef.current.set({ dateFormat });
-        setPrevDateFormat(dateFormat);
-      }
-
-      if (prevMinDate !== minDate) {
-        calendarRef.current.set({ minDate });
-        setPrevMinDate(minDate);
-      }
-
-      if (prevMaxDate !== maxDate) {
-        calendarRef.current.set({ maxDate });
-        setPrevMaxDate(maxDate);
-      }
-
-      if (prevDisable !== disable) {
-        calendarRef.current.set({ disable });
-        setPrevDisable(disable);
-      }
-
-      if (prevEnable !== enable) {
-        calendarRef.current.set({ enable });
-        setPrevEnable(enable);
-      }
-
-      if (prevInline !== inline) {
-        calendarRef.current.set({ inline });
-        setPrevInline(inline);
-      }
-
-      if (prevValue !== value) {
-        calendarRef.current.setDate(value);
-        updateClassNames(calendarRef.current);
-        setPrevValue(value);
-      }
+      calendarRef.current.set({ dateFormat });
     }
+  }, [dateFormat]);
 
-    //for simple date picker w/o calendar
-    if (prevValue !== value) {
+  useEffect(() => {
+    if (calendarRef.current) {
+      calendarRef.current.set({ minDate });
+    }
+  }, [minDate]);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      calendarRef.current.set({ maxDate });
+    }
+  }, [maxDate]);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      calendarRef.current.set({ disable });
+    }
+  }, [disable]);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      calendarRef.current.set({ enable });
+    }
+  }, [enable]);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      calendarRef.current.set({ inline });
+    }
+  }, [inline]);
+
+  useEffect(() => {
+    if (calendarRef.current) {
+      calendarRef.current.set({ value });
+      updateClassNames(calendarRef.current);
+    } else {
+      //for simple date picker w/o calendar
       startInputField.current.value = value;
-      setPrevValue(value);
     }
-  }, [dateFormat, minDate, maxDate, disable, enable, inline, value]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [value]); //eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <div className={wrapperClasses}>
-      <div className={datePickerClasses} {...rest}>
-        {childrenWithProps}
-      </div>
+    <div className={wrapperClasses} {...rest}>
+      <div className={datePickerClasses}>{childrenWithProps}</div>
     </div>
   );
 }
