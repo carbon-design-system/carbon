@@ -37,7 +37,7 @@
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.0",
     "is-git-clean": "^1.1.0",
-    "jest-diff": "^27.0.6",
+    "jest-diff": "^27.4.6",
     "jscodeshift": "^0.13.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
