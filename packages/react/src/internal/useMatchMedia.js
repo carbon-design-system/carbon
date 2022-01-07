@@ -18,8 +18,8 @@ export function useMatchMedia(mediaQueryString) {
   });
 
   useEffect(() => {
-    function listener() {
-      setMatches(mediaQueryList.matches);
+    function listener(event) {
+      setMatches(event.matches);
     }
 
     const mediaQueryList = window.matchMedia(mediaQueryString);
