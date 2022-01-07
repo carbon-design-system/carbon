@@ -15,12 +15,12 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
   forwardRef
 ) {
   const {
-    ariaLabel = '',
+    ariaLabel,
     checked = false,
     disabled,
-    id = 'inline-checkbox',
+    id,
     indeterminate,
-    name = '',
+    name,
     onChange = () => {},
     onClick,
     onKeyDown,
@@ -72,7 +72,6 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
   );
 });
 
-InlineCheckbox.displayName = 'InlineCheckbox';
 InlineCheckbox.propTypes = {
   /**
    * Specify the label for the control
@@ -82,7 +81,7 @@ InlineCheckbox.propTypes = {
   /**
    * Specify whether the underlying control is checked, or not
    */
-  checked: PropTypes.bool.isRequired,
+  checked: PropTypes.bool,
 
   /**
    * Specify whether the underlying input control should be disabled
