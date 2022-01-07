@@ -425,32 +425,32 @@ function DatePicker({
   }, [dateFormat]);
 
   useEffect(() => {
-    if (calendarRef.current) {
-      calendarRef.current.set({ minDate });
+    if (calendarRef.current && minDate) {
+      calendarRef.current.set('minDate', minDate);
     }
   }, [minDate]);
 
   useEffect(() => {
-    if (calendarRef.current) {
-      calendarRef.current.set({ maxDate });
+    if (calendarRef.current && maxDate) {
+      calendarRef.current.set('maxDate', maxDate);
     }
   }, [maxDate]);
 
   useEffect(() => {
-    if (calendarRef.current) {
-      calendarRef.current.set({ disable });
+    if (calendarRef.current && disable) {
+      calendarRef.current.set('disbale', disable);
     }
   }, [disable]);
 
   useEffect(() => {
-    if (calendarRef.current) {
-      calendarRef.current.set({ enable });
+    if (calendarRef.current && enable) {
+      calendarRef.current.set('enable', enable);
     }
   }, [enable]);
 
   useEffect(() => {
-    if (calendarRef.current) {
-      calendarRef.current.set({ inline });
+    if (calendarRef.current && inline) {
+      calendarRef.current.set('inline', inline);
     }
   }, [inline]);
 
