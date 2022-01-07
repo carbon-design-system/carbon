@@ -27,15 +27,16 @@
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
     "@babel/runtime": "^7.14.6",
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.5",
-    "accessibility-checker": "^3.1.9",
-    "axe-core": "^4.3.2",
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.6",
+    "accessibility-checker": "^3.1.13",
+    "axe-core": "^4.3.5",
     "babel-jest": "^27.0.6",
     "chalk": "^4.1.1",
     "enzyme": "^3.11.0",
     "enzyme-to-json": "^3.6.2",
-    "jest-circus": "^27.0.6",
-    "jest-watch-typeahead": "^0.6.4"
+    "jest-circus": "^27.4.6",
+    "jest-watch-typeahead": "^1.0.0",
+    "sass": "^1.45.0"
   },
   "devDependencies": {
     "react": "^17.0.1",
