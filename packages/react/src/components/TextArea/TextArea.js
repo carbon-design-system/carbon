@@ -33,8 +33,10 @@ const TextArea = React.forwardRef(function TextArea(
 ) {
   const prefix = usePrefix();
   const enabled = useFeatureFlag('enable-v11-release');
-  const { defaultValue, disabled } = other;
-  const [textCount, setTextCount] = useState(defaultValue?.length || 0);
+  const { defaultValue, value, disabled } = other;
+  const [textCount, setTextCount] = useState(
+    defaultValue?.length || value?.length || 0
+  );
 
   const textareaProps = {
     id,

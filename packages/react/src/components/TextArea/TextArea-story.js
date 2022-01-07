@@ -31,7 +31,7 @@ const TextAreaProps = () => ({
     'Enable character counter/limit (enableCounter)',
     false
   ),
-  maxCount: text('Character limit (maxCount)', ''),
+  maxCount: number('Character limit (maxCount)', undefined),
   id: 'test2',
   cols: number('Columns (columns)', 50),
   rows: number('Rows (rows)', 4),
