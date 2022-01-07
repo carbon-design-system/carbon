@@ -72,9 +72,11 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     [`${prefix}--date-picker--nolabel`]: !labelText,
   });
 
+  const { openCalendar, iconDescription, ...other } = { ...rest };
+
   const input = invalid ? (
     <input
-      {...rest}
+      {...other}
       {...datePickerInputProps}
       disabled={disabled}
       ref={ref}
@@ -83,7 +85,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     />
   ) : (
     <input
-      {...rest}
+      {...other}
       {...datePickerInputProps}
       disabled={disabled}
       className={inputClasses}
@@ -102,9 +104,9 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
         {input}
         <DatePickerIcon
           datePickerType={datePickerType}
-          iconDescription={rest.iconDescription}
+          iconDescription={iconDescription}
           invalid={invalid}
-          openCalendar={rest.openCalendar}
+          openCalendar={openCalendar}
           warn={warn}
         />
       </div>
