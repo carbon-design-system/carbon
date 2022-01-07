@@ -113,6 +113,7 @@ InlineCheckbox.propTypes = {
    * Provide a handler that is invoked when a user clicks on the control
    */
   onClick: PropTypes.func,
+
   /**
    * Provide a handler that is invoked on the key down event for the control
    */
