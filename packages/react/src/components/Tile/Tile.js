@@ -676,7 +676,7 @@ export class ExpandableTile extends Component {
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...rest}
         onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
-        onClick={composeEventHandlers([onClick, this.handleClick])}
+        onClick={this.handleClick}
         tabIndex={tabIndex}>
         <div
           ref={(tileContent) => {
