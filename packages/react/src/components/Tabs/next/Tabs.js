@@ -125,6 +125,7 @@ function TabList({
   light,
   scrollIntoView,
   contained = false,
+  iconSize,
   ...rest
 }) {
   const {
@@ -138,6 +139,8 @@ function TabList({
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
+    [`${prefix}--tabs__icon--default`]: iconSize === '16',
+    [`${prefix}--tabs__icon--lg`]: iconSize === '20',
   });
 
   const tabs = [];
@@ -243,6 +246,10 @@ TabList.propTypes = {
 
   contained: PropTypes.bool,
   /**
+   * If using `IconTab`, specify the size of the icon being used.
+   */
+  iconSize: PropTypes.oneOf(['16', '20']),
+  /**
    * Specify whether or not to use the light component variant
    */
   light: PropTypes.bool,
@@ -344,15 +351,12 @@ Tab.propTypes = {
 };
 
 const IconTab = React.forwardRef(function IconTab(
-  { children, className: customClassName, size, ...rest },
+  { children, className: customClassName, ...rest },
   ref
 ) {
   const prefix = usePrefix();
 
-  const classNames = cx(`${prefix}--tabs__nav-item--icon`, customClassName, {
-    [`${prefix}--tabs__nav-item--icon--default`]: size === 'default',
-    [`${prefix}--tabs__nav-item--icon--lg`]: size === 'lg',
-  });
+  const classNames = cx(`${prefix}--tabs__nav-item--icon`, customClassName);
   return (
     <Tab className={classNames} ref={ref} {...rest}>
       {children}
@@ -369,14 +373,6 @@ IconTab.propTypes = {
    * Specify an optional className to be added to your Tab
    */
   className: PropTypes.string,
-  /**
-   * size of IconTab, default is intended for use with size 16 icons and lg is intended for use with size 20 icons.
-   */
-  size: PropTypes.oneOf(['default', 'lg']),
-};
-
-IconTab.defaultProps = {
-  size: 'default',
 };
 
 const TabPanel = React.forwardRef(function TabPanel(

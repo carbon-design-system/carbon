@@ -23,11 +23,14 @@
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/component-tokens' as *;
+@use '../../utilities/custom-property';
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
+
+$icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 
 /// Tabs styles
 /// @access public
@@ -250,16 +253,15 @@
 
     .#{$prefix}--tabs__nav-item--icon {
       display: flex;
+      width: $icon-tab-size;
+      height: $icon-tab-size;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
     }
 
-    .#{$prefix}--tabs__nav-item--icon--default {
-      padding-right: $spacing-04;
-      padding-left: $spacing-04;
-    }
-
-    .#{$prefix}--tabs__nav-item--icon--lg {
-      // had to use exact pixels because there is no way to get to 48px h/w without it.
-      padding: 13px 14px;
+    &.#{$prefix}--tabs__icon--lg {
+      @include custom-property.declaration('icon-tab-size', rem(48px));
     }
 
     //-----------------------------
