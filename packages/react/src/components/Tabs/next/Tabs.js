@@ -366,7 +366,7 @@ const IconTab = React.forwardRef(function IconTab(
 
 IconTab.propTypes = {
   /**
-   * Provide an icons to be rendered inside of `IconTab` as the visual label for Tab.
+   * Provide an icon to be rendered inside of `IconTab` as the visual label for Tab.
    */
   children: PropTypes.node,
   /**
