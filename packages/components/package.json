@@ -148,7 +148,7 @@
     "nodemon": "^1.18.7",
     "path-to-regexp": "^6.2.0",
     "portscanner": "^2.2.0",
-    "postcss-custom-properties": "^9.0.0",
+    "postcss-custom-properties": "^12.0.4",
     "postcss-loader": "^3.0.0",
     "promise": "^8.0.1",
     "prop-types": "^15.6.0",
