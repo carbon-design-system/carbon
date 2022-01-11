@@ -324,7 +324,7 @@ function MyComponent({ translateWithId: t = translateWithId }) {
 situations. In general, however, we try to avoid them unless one of the
 following conditions occur:
 
-- The identitiy of a function or object is required as a dependency in a
+- The identity of a function or object is required as a dependency in a
   dependency array
 - We have observed performance issues due to allocations that can be reproduced
   and resolved using these techniques
