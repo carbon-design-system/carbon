@@ -5,84 +5,101 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import chalk from 'chalk';
+import isGitClean from 'is-git-clean';
+import packageJson from '../package.json';
+import { logger } from './logger';
+import { upgrade } from './commands/upgrade';
+import { UpgradeError } from './error';
 
+// Note: for esbuild we need this import to be CommonJS
+// - https://github.com/yargs/yargs/issues/1929
+// - https://github.com/evanw/esbuild/issues/1492
+// - https://github.com/yargs/yargs/blob/main/docs/bundling.md#esbuild
 const cli = require('yargs');
-const isGitClean = require('is-git-clean');
-const packageJson = require('../package.json');
-const { UpgradeError } = require('./error');
-const { Migration } = require('./migration');
-const { Planner } = require('./planner');
-const { Project } = require('./project');
-const { Runner } = require('./runner');
 
-async function main({ argv, cwd }) {
+export async function main({ argv, cwd }) {
   cli.scriptName(packageJson.name).version(packageJson.version);
 
   cli
-    .option('verbose', {
+    .option('force', {
+      describe: 'force execution if the cli encounters an error',
       default: false,
-      describe: 'display the full output while running a command',
+      type: 'boolean',
     })
     .option('write', {
       alias: 'w',
       describe: 'update the files with changes found by running the migration',
       default: false,
     })
-    .option('ignore', {
-      alias: 'i',
-      describe:
-        'provide a list of glob pattern for directories you would like ignored',
-      default: [],
-      array: true,
+    .option('verbose', {
+      alias: 'v',
+      describe: 'optionally include additional logs, useful for debugging',
+      default: false,
+      type: 'boolean',
     });
 
   cli.usage('Usage: $0 [options]').command(
     '$0',
-    'run to upgrade your project',
+    'upgrade your project',
     {},
     run(async (args) => {
-      const { ignore, verbose, write } = args;
+      const { verbose, write } = args;
       const options = {
         cwd: cwd(),
-        ignore,
         verbose,
         write,
       };
-
-      const project = await Project.detect(options.cwd);
-      const migrationsByWorkspace = await Migration.getMigrationsByWorkspace(
-        Array.from(project.getWorkspaces()),
-        Migration.getMigrations()
-      );
-      const migrationsToRun = await Planner.getSelectedMigrations(
-        migrationsByWorkspace
-      );
-
-      await Runner.run(migrationsToRun, options);
+      await upgrade(options);
     })
   );
 
-  cli.strict().parse(argv.slice(2)).argv;
+  cli.strict().parse(argv.slice(2));
 }
 
+/**
+ * @param {Function} command
+ * @returns {Function}
+ */
 function run(command) {
-  return async (...args) => {
-    // checks git status on pwd, returns true if clean / false if not
-    let isClean = isGitClean.sync();
+  return async (args) => {
+    if (args.verbose === true) {
+      logger.setLevel('verbose');
+    }
 
     console.log('Thanks for trying out @carbon/upgrade! 🙏');
-    console.log('Checking git status...👀');
 
-    if (!isClean) {
-      console.error(
-        'Git directory is not clean. Please stash or commit your changes.'
+    // Inspired by react-codemod:
+    // https://github.com/reactjs/react-codemod/blob/b34b92a1f0b8ad333efe5effb50d17d46d66588b/bin/cli.js#L22
+    let clean = false;
+    let errorMessage = 'Unable to determine if git directory is clean';
+
+    try {
+      clean = isGitClean.sync(process.cwd());
+      errorMessage = 'Git directory is not clean';
+    } catch (error) {
+      if (
+        error &&
+        error.stderr &&
+        err.stderr.includes('Not a git repository')
+      ) {
+        clean = true;
+      }
+    }
+
+    if (!clean && args.force !== true) {
+      console.log(
+        chalk.yellow('[warning]'),
+        'It appears that you have untracked changes in your project. Before we continue, please stash or commit your changes to git.'
+      );
+      console.log(
+        '\nYou may use the --force flag to override this safety check.'
       );
       process.exit(1);
     }
 
     try {
-      await command(...args);
+      await command(args);
       console.log('Done! ✨');
     } catch (error) {
       if (error instanceof UpgradeError) {
@@ -96,5 +113,3 @@ function run(command) {
     }
   };
 }
-
-module.exports = main;

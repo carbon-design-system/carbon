@@ -5,20 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
-const glob = require('fast-glob');
-const fs = require('fs-extra');
-const merge = require('lodash.merge');
-const path = require('path');
-const semver = require('semver');
-const { UpgradeError } = require('../error');
-const { hash } = require('../hash');
+import fs from 'fs-extra';
+import glob from 'fast-glob';
+import merge from 'lodash.merge';
+import path from 'path';
+import semver from 'semver';
+import { UpgradeError } from './error';
+import { hash } from './hash';
 
 class Workspace {
   /**
    * @param {string} directory
-   * @returns {object}
+   * @returns {Promise<Workspace>}
    */
   static async load(directory) {
     const tree = await loadWorkspace(directory);
@@ -84,8 +82,11 @@ class Workspace {
   }
 
   getPackageJson() {
-    const packageJsonPath = path.join(this.directory, 'package.json');
-    return fs.readJson(packageJsonPath);
+    return fs.readJson(this.getPackageJsonPath());
+  }
+
+  getPackageJsonPath() {
+    return path.join(this.directory, 'package.json');
   }
 
   async updatePackageJson(packageJson) {
@@ -167,6 +168,34 @@ async function loadWorkspace(directory) {
   };
 }
 
-module.exports = {
-  Workspace,
-};
+const { root: ROOT_DIR } = path.parse(__dirname);
+
+/**
+ * Returns an array of the the directory and its ancestors
+ * @param {string} directory
+ * @returns {Array<string>}
+ */
+function ancestors(directory) {
+  const result = [];
+  let current = directory;
+
+  while (current !== '') {
+    result.push(current);
+
+    if (current !== ROOT_DIR) {
+      current = path.dirname(current);
+    } else {
+      current = '';
+    }
+  }
+
+  return result;
+}
+
+function getAvailableWorkspaces(directory) {
+  return ancestors(directory).filter((directory) => {
+    return fs.existsSync(path.join(directory, 'package.json'));
+  });
+}
+
+export { Workspace, getAvailableWorkspaces };

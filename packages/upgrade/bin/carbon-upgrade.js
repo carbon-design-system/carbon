@@ -18,24 +18,20 @@ process.on('unhandledRejection', (error) => {
   console.error(error);
 });
 
-var chalk = require('chalk');
-
 var currentNodeVersion = process.versions.node;
 var semver = currentNodeVersion.split('.');
 var major = semver[0];
 
 if (major < 14) {
   console.error(
-    chalk.red(
-      `You are running Node ${currentNodeVersion}.\n` +
-        `carbon-upgrade requires Node 14 or higher, please update your ` +
-        `version of Node.`
-    )
+    `You are running Node ${currentNodeVersion}.\n` +
+      `carbon-upgrade requires Node 14 or higher, please update your ` +
+      `version of Node.`
   );
   process.exit(1);
 }
 
-var main = require('../src/cli');
+const { main } = require('../cli');
 
 main(process).catch((error) => {
   console.error(error);
