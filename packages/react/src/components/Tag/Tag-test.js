@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Tag from '../Tag';
+import Tag from 'carbon-components-react';
 import { Add16 } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 
