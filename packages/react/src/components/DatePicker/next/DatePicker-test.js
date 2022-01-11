@@ -16,7 +16,6 @@ function getFlatpickrCalendar() {
   return document.querySelector(`.${prefix}--date-picker__calendar`);
 }
 
-
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
     let wrapper;
