@@ -8,36 +8,47 @@
 import React from 'react';
 import UnorderedList from '../UnorderedList';
 import ListItem from '../ListItem';
-import { shallow } from 'enzyme';
 import { settings } from 'carbon-components';
+import { render, screen } from '@testing-library/react';
 
 const { prefix } = settings;
+
 describe('UnorderedList', () => {
-  describe('Renders as expected', () => {
-    const list = shallow(
-      <UnorderedList className="some-class">
+  it('should render children as expected', () => {
+    render(
+      <UnorderedList>
+        <ListItem>Item</ListItem>
+      </UnorderedList>
+    );
+    expect(screen.getByText('Item')).toBeDefined();
+  });
+
+  it('should render nested lists', () => {
+    render(
+      <UnorderedList>
+        <ListItem>Item</ListItem>
+        <UnorderedList nested data-testid="nested-list">
+          <ListItem>Nested</ListItem>
+        </UnorderedList>
+      </UnorderedList>
+    );
+
+    expect(
+      screen
+        .getByTestId('nested-list')
+        .classList.contains(`${prefix}--list--nested`)
+    ).toBe(true);
+  });
+
+  it('should add custom className given via className prop', () => {
+    render(
+      <UnorderedList className="some-class" data-testid="list">
         <ListItem>Item</ListItem>
       </UnorderedList>
     );
 
-    it('should be a ul element', () => {
-      expect(list.find('ul').length).toEqual(1);
-    });
-
-    it('should render with the appropriate classes', () => {
-      expect(list.hasClass(`${prefix}--list--unordered`)).toEqual(true);
-      expect(list.hasClass('some-class')).toEqual(true);
-    });
-
-    it('should render children as expected', () => {
-      expect(list.find(ListItem).length).toEqual(1);
-    });
-
-    it('should render nested lists', () => {
-      list.setProps({ nested: true });
-      expect(list.hasClass(`${prefix}--list--nested`)).toEqual(true);
-      list.setProps({ nested: false });
-      expect(list.hasClass(`${prefix}--list--nested`)).toEqual(false);
-    });
+    expect(screen.getByTestId('list').classList.contains('some-class')).toBe(
+      true
+    );
   });
 });
