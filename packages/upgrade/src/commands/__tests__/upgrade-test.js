@@ -131,39 +131,6 @@ class TempWorkspace {
   }
 }
 
-afterEach(async () => {
-  await TempDir.clear();
-});
-
-// One workspace
-// Monorepo
-//   -> Ran from root
-//   -> Ran from workspace
-
-// Situations
-//
-// carbon-components
-//
-//
-// carbon-components
-// carbon-components-react
-// carbon-icons
-//
-//
-// carbon-components
-// carbon-components-react
-// carbon-icons
-// @carbon/icons-react
-//
-// No upgrades available
-// Upgrades available
-
-// Test package change types
-// install
-// update
-// uninstall
-// Test write/dry modes
-
 /**
  * Provide default and customizable options to pass to commands. These emulate
  * what this command is expected to receive from a CLI
@@ -200,6 +167,10 @@ describe('commands/upgrade', () => {
     inquirer = require('inquirer');
     logger = require('../../logger').logger;
     upgrade = require('../upgrade').upgrade;
+  });
+
+  afterEach(async () => {
+    await TempDir.clear();
   });
 
   test('no workspace', async () => {
