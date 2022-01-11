@@ -64,14 +64,14 @@ export const Default = () => (
 
 export const Icon20Only = () => (
   <Tabs>
-    <TabList iconSize="20" aria-label="List of tabs">
-      <IconTab disabled>
+    <TabList iconSize="lg" aria-label="List of tabs">
+      <IconTab label="Monster" disabled>
         <Monster20 />
       </IconTab>
-      <IconTab>
+      <IconTab label="Corn">
         <Corn20 />
       </IconTab>
-      <IconTab>
+      <IconTab label="Bat">
         <Bat20 />
       </IconTab>
     </TabList>
@@ -85,14 +85,14 @@ export const Icon20Only = () => (
 
 export const IconOnly = () => (
   <Tabs>
-    <TabList iconSize="16" aria-label="List of tabs">
-      <IconTab disabled>
+    <TabList iconSize="default" aria-label="List of tabs">
+      <IconTab label="Monster" disabled>
         <Monster16 />
       </IconTab>
-      <IconTab>
+      <IconTab label="Corn">
         <Corn16 />
       </IconTab>
-      <IconTab>
+      <IconTab label="Bat">
         <Bat16 />
       </IconTab>
     </TabList>

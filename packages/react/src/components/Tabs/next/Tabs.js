@@ -139,8 +139,8 @@ function TabList({
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
-    [`${prefix}--tabs__icon--default`]: iconSize === '16',
-    [`${prefix}--tabs__icon--lg`]: iconSize === '20',
+    [`${prefix}--tabs__icon--default`]: iconSize === 'default',
+    [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
   });
 
   const tabs = [];
@@ -248,7 +248,7 @@ TabList.propTypes = {
   /**
    * If using `IconTab`, specify the size of the icon being used.
    */
-  iconSize: PropTypes.oneOf(['16', '20']),
+  iconSize: PropTypes.oneOf(['default', 'lg']),
   /**
    * Specify whether or not to use the light component variant
    */

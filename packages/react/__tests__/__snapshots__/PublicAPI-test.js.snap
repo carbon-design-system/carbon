@@ -5765,31 +5765,6 @@ Map {
     },
     "render": [Function],
   },
-  "unstable_IconTab" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "size": "default",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-    "render": [Function],
-  },
-  "Tag" => Object {
   "SideNavSwitcher" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -7984,6 +7959,18 @@ Map {
     },
     "render": [Function],
   },
+  "unstable_IconTab" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "unstable_Layer" => Object {
     "propTypes": Object {
       "as": Object {
@@ -8549,6 +8536,15 @@ Map {
       },
       "contained": Object {
         "type": "bool",
+      },
+      "iconSize": Object {
+        "args": Array [
+          Array [
+            "default",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
       "light": Object {
         "type": "bool",
