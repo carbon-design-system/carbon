@@ -253,7 +253,6 @@ function DatePicker({
     }
   }
 
-  // component did mount equivalent
   useEffect(() => {
     if (datePickerType !== 'single' && datePickerType !== 'range') {
       return;
