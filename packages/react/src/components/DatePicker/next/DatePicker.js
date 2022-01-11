@@ -115,7 +115,11 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
   };
 };
 
-//returns true if children don't have labels
+/**
+ * Determine if every child in a list of children has no label specified
+ * @param {Array<ReactElement>} children
+ * @returns {boolean}
+ */
 function isLabelTextEmpty(children) {
   return children.every((child) => !child.props.labelText);
 }
