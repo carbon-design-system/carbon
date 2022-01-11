@@ -415,8 +415,6 @@ function DatePicker({
     };
   }, [savedOnChange, savedOnClose, savedOnOpen]); //eslint-disable-line react-hooks/exhaustive-deps
 
-  // update calendar config if props change
-  // component did update equivalent
   useEffect(() => {
     if (calendarRef.current) {
       calendarRef.current.set({ dateFormat });
