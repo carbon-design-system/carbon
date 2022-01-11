@@ -156,6 +156,13 @@ test('Public API should only change with a semver change', () => {
         return;
       }
 
+      if (key === 'contextType') {
+        api[key] = {
+          $$typeof: Component[key]['$$typeof'],
+        };
+        return;
+      }
+
       // Handle components defined as fields on a component, for example
       // `MultiSelect.Filterable`
       if (
