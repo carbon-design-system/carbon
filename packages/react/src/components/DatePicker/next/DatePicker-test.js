@@ -16,10 +16,6 @@ function getFlatpickrCalendar() {
   return document.querySelector(`.${prefix}--date-picker__calendar`);
 }
 
-// function isCalendarVisible() {
-//   const calendar = document.querySelector(`.${prefix}--date-picker__calendar`);
-//   return calendar.classList.contains('open');
-// }
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
