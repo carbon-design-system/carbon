@@ -47,8 +47,15 @@
   }
 
   .#{$prefix}--toolbar-content .#{$prefix}--search .#{$prefix}--search-input {
+    height: 3rem;
+    padding: 0 3rem;
     // For toolbar animation with (esp.) persistent search box
     background-color: transparent;
+  }
+
+  .#{$prefix}--toolbar-content .#{$prefix}--overflow-menu {
+    width: 3rem;
+    height: 3rem;
   }
 
   //-------------------------------------------------
@@ -482,6 +489,11 @@
       padding: $spacing-03;
     }
 
+    .#{$prefix}--toolbar-search-container-expandable
+      .#{$prefix}--search-magnifier-icon {
+      left: 0;
+    }
+
     .#{$prefix}--toolbar-action.#{$prefix}--toolbar-search-container-persistent {
       width: 100%;
     }
@@ -541,6 +553,11 @@
 
     .#{$prefix}--toolbar-content {
       height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-content .#{$prefix}--overflow-menu {
+      width: 2rem;
+      height: 2rem;
     }
   }
 
