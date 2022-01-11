@@ -16,14 +16,10 @@ function getFlatpickrCalendar() {
   return document.querySelector(`.${prefix}--date-picker__calendar`);
 }
 
-function isCalendarVisible() {
-  const calendar = document.querySelector(`.${prefix}--date-picker__calendar`);
-  return calendar.classList.contains('open');
-}
-
-// Notes:
-// - Use "visibility classes" to assert if calendar is open or closed
-// - instance().cal.calendarContainer is equal to getFlatpickrCalendar()
+// function isCalendarVisible() {
+//   const calendar = document.querySelector(`.${prefix}--date-picker__calendar`);
+//   return calendar.classList.contains('open');
+// }
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
@@ -232,32 +228,6 @@ describe('DatePicker', () => {
 
     it('should not have "console.error" being created', () => {
       expect(mockConsoleError).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('Opening up calendar dropdown', () => {
-    let wrapper;
-    beforeEach(() => {
-      wrapper = mount(
-        <DatePicker datePickerType="range" className="extra-class">
-          <DatePickerInput labelText="Date Picker label" id="input-from" />
-          <DatePickerInput labelText="Date Picker label" id="input-to" />
-        </DatePicker>
-      );
-    });
-
-    it('has the range date picker with min and max dates', () => {
-      const input = wrapper.find('input').at(0);
-
-      //simulate opening calendar via keyboard
-      input
-        .getDOMNode()
-        .dispatchEvent(
-          new window.KeyboardEvent('keydown', { key: 'ArrowDown' })
-        );
-
-      //check to see if it's visible
-      expect(isCalendarVisible()).toBe(true);
     });
   });
 });
