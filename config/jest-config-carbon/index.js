@@ -21,7 +21,7 @@ module.exports = {
   ],
   transform: {
     '^.+\\.(js|jsx)$': require.resolve('./transform/jsTransform.js'),
-    '^.+\\.css$': require.resolve('./transform/cssTransform.js'),
+    '^.+\\.s?css$': require.resolve('./transform/cssTransform.js'),
     '^(?!.*\\.(js|jsx|css|json)$)': require.resolve(
       './transform/fileTransform.js'
     ),

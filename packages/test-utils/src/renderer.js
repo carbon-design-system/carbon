@@ -89,7 +89,7 @@ function convert(value) {
   }
 
   if (value instanceof types.Color) {
-    return value.toString();
+    return value.dartValue.toString();
   }
 
   if (value instanceof types.List) {
