@@ -6,7 +6,7 @@
  */
 
 /**
- * @typdef Upgrade
+ * @typedef Upgrade
  * @property {string} name
  * @property {string} description
  * @property {Array<Update>} updates
@@ -20,10 +20,17 @@
  * @property {Array<Change>} changes
  */
 
+/**
+ * Represents all possible changes made in a project's package.json file for a
+ * package
+ */
 const Change = {
-  uninstall: {
-    type: 'uninstall',
-  },
+  /**
+   * @param {object} options
+   * @param {string} options.name
+   * @param {string} options.version
+   * @returns {object}
+   */
   install({ name, version }) {
     return {
       type: 'install',
@@ -33,6 +40,16 @@ const Change = {
       },
     };
   },
+
+  uninstall: {
+    type: 'uninstall',
+  },
+
+  /**
+   * @param {object} options
+   * @param {string} options.version
+   * @returns {object}
+   */
   update({ version }) {
     return {
       type: 'update',
@@ -42,15 +59,6 @@ const Change = {
     };
   },
 };
-
-/**
- * The v11 release has the following supported upgrade paths:
- *
- * - carbon-components, carbon-components-react, carbon-icons,
- *   @carbon/icons-react
- * - carbon-components
- * - carbon-components, carbon-components-react, carbon-icons,
- */
 
 /**
  * @type {Array<Upgrade>}

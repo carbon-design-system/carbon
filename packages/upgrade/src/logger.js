@@ -40,7 +40,7 @@ function getColor(level) {
 const defaultLevel = process.env.NODE_ENV === 'test' ? 'warn' : 'info';
 
 /**
- * @typdef LoggerInstance
+ * @typedef LoggerInstance
  * @property {Function} error
  * @property {Function} warn
  * @property {Function} info

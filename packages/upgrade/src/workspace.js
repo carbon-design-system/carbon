@@ -7,9 +7,10 @@
 
 import fs from 'fs-extra';
 import glob from 'fast-glob';
-import merge from 'lodash.merge';
+import clone from 'lodash.clonedeep';
 import path from 'path';
 import semver from 'semver';
+import { diff } from './diff';
 import { UpgradeError } from './error';
 import { hash } from './hash';
 
@@ -80,20 +81,26 @@ class Workspace {
     });
   }
 
-  getPackageJson() {
-    return fs.readJson(this.getPackageJsonPath());
+  async getPackageJson() {
+    if (!this.packageJson) {
+      const packageJson = await fs.readJson(this.getPackageJsonPath());
+      this.packageJson = PackageJson.create(packageJson);
+    }
+    return this.packageJson;
+  }
+
+  async writePackageJson() {
+    if (this.packageJson.changed) {
+      const packageJson = this.packageJson.getJSON();
+      await fs.writeJson(this.getPackageJsonPath(), packageJson, {
+        spaces: 2,
+      });
+      this.packageJson = PackageJson.create(packageJson);
+    }
   }
 
   getPackageJsonPath() {
     return path.join(this.directory, 'package.json');
-  }
-
-  async updatePackageJson(packageJson) {
-    const packageJsonPath = path.join(this.directory, 'package.json');
-    const current = await this.getPackageJson();
-    await fs.writeJson(packageJsonPath, merge(current, packageJson), {
-      spaces: 2,
-    });
   }
 }
 
@@ -191,10 +198,99 @@ function ancestors(directory) {
   return result;
 }
 
+/**
+ * @param {string} directory
+ * @returns {Array<string>}
+ */
 function getAvailableWorkspaces(directory) {
   return ancestors(directory).filter((directory) => {
     return fs.existsSync(path.join(directory, 'package.json'));
   });
+}
+
+class PackageJson {
+  /**
+   * @param {object} packageJson
+   * @returns {PackageJson}
+   */
+  static create(packageJson) {
+    return new PackageJson(packageJson);
+  }
+
+  static dependencyTypes = [
+    'dependencies',
+    'devDependencies',
+    'peerDependencies',
+  ];
+
+  constructor(packageJson) {
+    this.original = packageJson;
+    this.modified = clone(this.original);
+    this.changed = false;
+  }
+
+  install({ name, version, type = 'dependencies' }) {
+    const exists = PackageJson.dependencyTypes.find((type) => {
+      if (this.modified[type]) {
+        return this.modified[type][name];
+      }
+      return false;
+    });
+
+    if (exists) {
+      throw new UpgradeError(
+        `The dependency \`${name}\` alreadys exists and cannot be added`
+      );
+    }
+
+    this.changed = true;
+    if (!this.modified[type]) {
+      this.modified[type] = {};
+    }
+    this.modified[type][name] = version;
+  }
+
+  update({ name, version }) {
+    const type = PackageJson.dependencyTypes.find((type) => {
+      return this.modified[type][name];
+    });
+
+    if (type) {
+      this.changed = true;
+      this.modified[type][name] = version;
+    } else {
+      throw new Error(`Unable to find dependency type for: \`${name}\``);
+    }
+  }
+
+  uninstall({ name }) {
+    const types = PackageJson.dependencyTypes.filter((type) => {
+      if (this.original[type]) {
+        return this.original[type][name];
+      }
+      return false;
+    });
+
+    if (types.length === 0) {
+      throw new Error(`Unable to find and remove dependency: \`${name}\``);
+    }
+
+    this.changed = true;
+    for (const type of types) {
+      delete this.modified[type][name];
+    }
+  }
+
+  getJSON() {
+    return this.modified;
+  }
+
+  diff() {
+    return diff(
+      JSON.stringify(this.original, null, 2),
+      JSON.stringify(this.modified, null, 2)
+    );
+  }
 }
 
 export { Workspace, getAvailableWorkspaces };

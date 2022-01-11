@@ -37,6 +37,7 @@ packages/components/src/globals/scss/vendor/**
 
 # Upgrade
 **/__testfixtures__/**
+packages/upgrade/cli.js
 
 # React
 **/storybook-static/**

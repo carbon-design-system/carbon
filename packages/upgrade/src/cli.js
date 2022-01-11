@@ -24,20 +24,21 @@ export async function main({ argv, cwd }) {
 
   cli
     .option('force', {
+      default: false,
       describe:
         'force execution if the cli encounters an error while doing safety checks',
-      default: false,
       type: 'boolean',
     })
     .option('write', {
       alias: 'w',
-      describe: 'update the files with changes found by running the migration',
       default: false,
+      describe: 'update the files with changes found by running the migration',
+      type: 'boolean',
     })
     .option('verbose', {
       alias: 'v',
-      describe: 'optionally include additional logs, useful for debugging',
       default: false,
+      describe: 'optionally include additional logs, useful for debugging',
       type: 'boolean',
     });
 
@@ -81,7 +82,7 @@ function run(command) {
       if (
         error &&
         error.stderr &&
-        err.stderr.includes('Not a git repository')
+        error.stderr.includes('Not a git repository')
       ) {
         clean = true;
       }

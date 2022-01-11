@@ -31,7 +31,7 @@ if (major < 14) {
   process.exit(1);
 }
 
-const { main } = require('../cli');
+var { main } = require('../cli');
 
 main(process).catch((error) => {
   console.error(error);

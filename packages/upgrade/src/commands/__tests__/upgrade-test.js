@@ -12,8 +12,13 @@ import path from 'path';
 
 const directories = new Set();
 
+/**
+ * Helper for creating and clearing temporary directories in a filesystem.
+ * Useful for simulating projects in test files.
+ */
 const TempDir = {
   /**
+   * Create a temporary directory
    * @returns {Promise<string>}
    */
   async create() {
@@ -29,6 +34,7 @@ const TempDir = {
   },
 
   /**
+   * Remove all temporary directories that have been created
    * @returns {Promise<void>}
    */
   async clear() {
@@ -41,6 +47,7 @@ const TempDir = {
   },
 
   /**
+   * Get the tmp directory as reported by OS
    * @returns {string}
    */
   getTempDir() {
@@ -48,7 +55,19 @@ const TempDir = {
   },
 };
 
+/**
+ * Helper class for managing workspaces in a test environment. Workspaces are
+ * created in temporary directories and will commit files to the filesystem.
+ * This also abstracts adding child workspaces for monorepo sets to help with
+ * testing different project setups.
+ */
 class TempWorkspace {
+  /**
+   * @param {object} config
+   * @param {string} [config.directory]
+   * @param {object} config.packageJson
+   * @returns {Promise<TempWorkspace>}
+   */
   static async create({ directory, packageJson }) {
     const root = directory || (await TempDir.create());
     const packageJsonPath = path.join(root, 'package.json');
@@ -63,6 +82,12 @@ class TempWorkspace {
     this.packageJsonPath = path.join(this.directory, 'package.json');
   }
 
+  /**
+   * Add a child workspace to the existing workspace with a given packageJson
+   * @param {object} config
+   * @param {object} config.packageJson
+   * @returns {Promise<Workspace>}
+   */
   async addChildWorkspace({ packageJson }) {
     if (!this.workspaces) {
       this.workspaces = new Set();
@@ -81,16 +106,28 @@ class TempWorkspace {
     return workspace;
   }
 
+  /**
+   * Get the directory containing this workspace
+   * @returns {string}
+   */
   getDirectory() {
     return this.directory;
   }
 
+  /**
+   * Set a specific value in the package.json file for a workspace
+   * @returns {Promise<void>}
+   */
   async set(key, value) {
     this.packageJson = {
       ...this.packageJson,
       [key]: value,
     };
     await fs.writeJson(this.packageJsonPath, this.packageJson);
+  }
+
+  async getPackageJson() {
+    return await fs.readJson(this.packageJsonPath);
   }
 }
 
@@ -121,15 +158,32 @@ afterEach(async () => {
 // No upgrades available
 // Upgrades available
 
+// Test package change types
+// install
+// update
+// uninstall
+// Test write/dry modes
+
+/**
+ * Provide default and customizable options to pass to commands. These emulate
+ * what this command is expected to receive from a CLI
+ */
 const Options = {
   default: {
     cwd: TempDir.getTempDir(),
     verbose: false,
     write: false,
   },
-  with(cwd) {
+
+  /**
+   * Returns an options object with the given cwd set
+   * @param {string} cwd
+   * @returns {object}
+   */
+  with(cwd, options = {}) {
     return {
       ...Options.default,
+      ...options,
       cwd,
     };
   },
@@ -167,7 +221,111 @@ describe('commands/upgrade', () => {
   });
 
   test('single workspace with upgrade available', async () => {
-    //
+    const workspace = await TempWorkspace.create({
+      packageJson: {
+        name: 'test',
+        dependencies: {
+          'test-dependency': '1.0.0',
+        },
+      },
+    });
+    const options = Options.with(workspace.getDirectory(), {
+      write: true,
+    });
+
+    inquirer.mockAnswer('confirm', true);
+
+    await upgrade(options, [
+      {
+        name: 'test-upgrade',
+        updates: [
+          {
+            package: {
+              name: 'test-dependency',
+              range: '1.x',
+            },
+            changes: [
+              {
+                type: 'uninstall',
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+
+    await expect(workspace.getPackageJson()).resolves.toEqual({
+      name: 'test',
+      dependencies: {},
+    });
+  });
+
+  test('single workspace with upgrades available', async () => {
+    const workspace = await TempWorkspace.create({
+      packageJson: {
+        name: 'test',
+        dependencies: {
+          'test-dependency-a': '1.0.0',
+          'test-dependency-b': '2.0.0',
+        },
+      },
+    });
+    const options = Options.with(workspace.getDirectory(), {
+      write: true,
+    });
+
+    inquirer.mockAnswer('upgrade', 'two-dependencies');
+
+    await upgrade(options, [
+      {
+        name: 'one-dependency',
+        updates: [
+          {
+            package: {
+              name: 'test-dependency-a',
+              range: '1.x',
+            },
+            changes: [
+              {
+                type: 'uninstall',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        name: 'two-dependencies',
+        updates: [
+          {
+            package: {
+              name: 'test-dependency-a',
+              range: '1.x',
+            },
+            changes: [
+              {
+                type: 'uninstall',
+              },
+            ],
+          },
+          {
+            package: {
+              name: 'test-dependency-b',
+              range: '2.x',
+            },
+            changes: [
+              {
+                type: 'uninstall',
+              },
+            ],
+          },
+        ],
+      },
+    ]);
+
+    await expect(workspace.getPackageJson()).resolves.toEqual({
+      name: 'test',
+      dependencies: {},
+    });
   });
 
   test('multiple workspaces, select one with no upgrades available', async () => {
@@ -203,10 +361,13 @@ describe('commands/upgrade', () => {
         },
       },
     });
+    const options = Options.with(child.getDirectory(), {
+      write: true,
+    });
 
     inquirer.mockAnswer('workspace', child.getDirectory());
     inquirer.mockAnswer('confirm', true);
-    await upgrade(Options.with(child.getDirectory()), [
+    await upgrade(options, [
       {
         name: 'test-upgrade',
         updates: [
@@ -227,9 +388,143 @@ describe('commands/upgrade', () => {
         ],
       },
     ]);
+    await expect(child.getPackageJson()).resolves.toEqual({
+      name: 'a',
+      version: '0.0.0',
+      dependencies: {
+        'test-upgrade': '0.2.0',
+      },
+    });
   });
 
-  test('multiple workspaces, select root, workspaces have upgrades', async () => {
-    //
+  describe('changes', () => {
+    test('install', async () => {
+      const workspace = await TempWorkspace.create({
+        packageJson: {
+          name: 'test',
+          dependencies: {
+            'test-dependency': '1.0.0',
+          },
+        },
+      });
+      const options = Options.with(workspace.getDirectory(), {
+        write: true,
+      });
+
+      inquirer.mockAnswer('confirm', true);
+
+      await upgrade(options, [
+        {
+          name: 'test-upgrade',
+          updates: [
+            {
+              package: {
+                name: 'test-dependency',
+                range: '1.x',
+              },
+              changes: [
+                {
+                  type: 'install',
+                  package: {
+                    name: 'new-dependency',
+                    version: '1.0.0',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ]);
+      await expect(workspace.getPackageJson()).resolves.toEqual({
+        name: 'test',
+        dependencies: {
+          'test-dependency': '1.0.0',
+          'new-dependency': '1.0.0',
+        },
+      });
+    });
+
+    test('uninstall', async () => {
+      const workspace = await TempWorkspace.create({
+        packageJson: {
+          name: 'test',
+          dependencies: {
+            'test-dependency': '1.0.0',
+          },
+        },
+      });
+      const options = Options.with(workspace.getDirectory(), {
+        write: true,
+      });
+
+      inquirer.mockAnswer('confirm', true);
+
+      await upgrade(options, [
+        {
+          name: 'test-upgrade',
+          updates: [
+            {
+              package: {
+                name: 'test-dependency',
+                range: '1.x',
+              },
+              changes: [
+                {
+                  type: 'uninstall',
+                },
+              ],
+            },
+          ],
+        },
+      ]);
+      await expect(workspace.getPackageJson()).resolves.toEqual({
+        name: 'test',
+        dependencies: {},
+      });
+    });
+
+    test('update', async () => {
+      const workspace = await TempWorkspace.create({
+        packageJson: {
+          name: 'test',
+          dependencies: {
+            'test-dependency': '1.0.0',
+          },
+        },
+      });
+      const options = Options.with(workspace.getDirectory(), {
+        write: true,
+      });
+
+      inquirer.mockAnswer('confirm', true);
+
+      await upgrade(options, [
+        {
+          name: 'test-upgrade',
+          updates: [
+            {
+              package: {
+                name: 'test-dependency',
+                range: '1.x',
+              },
+              changes: [
+                {
+                  type: 'update',
+                  package: {
+                    version: '2.0.0',
+                  },
+                },
+              ],
+            },
+          ],
+        },
+      ]);
+      await expect(workspace.getPackageJson()).resolves.toEqual({
+        name: 'test',
+        dependencies: {
+          'test-dependency': '2.0.0',
+        },
+      });
+    });
   });
 });

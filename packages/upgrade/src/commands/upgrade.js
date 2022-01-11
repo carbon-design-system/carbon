@@ -6,12 +6,10 @@
  */
 
 import inquirer from 'inquirer';
-import clone from 'lodash.clonedeep';
 import semver from 'semver';
+import { UpgradeError } from '../error';
 import { logger } from '../logger';
 import { Workspace, getAvailableWorkspaces } from '../workspace';
-import { UpgradeError } from '../error';
-import { diff } from '../diff';
 
 export async function upgrade(options, availableUpgrades = []) {
   logger.verbose('running upgrade command with options: %o', options);
@@ -57,7 +55,7 @@ export async function upgrade(options, availableUpgrades = []) {
     workspace.directory
   );
 
-  const packageJson = PackageJson.create(await workspace.getPackageJson());
+  const packageJson = await workspace.getPackageJson();
 
   for (const update of upgrade.updates) {
     logger.verbose('applying updates for package: %s', update.package.name);
@@ -86,7 +84,7 @@ export async function upgrade(options, availableUpgrades = []) {
     const packageJsonPath = workspace.getPackageJsonPath();
     if (write) {
       logger.info('updating file: %s', packageJsonPath);
-      await workspace.updatePackageJson(packageJson.getJSON());
+      await workspace.writePackageJson();
     } else {
       logger.info('previewing changes for file: %s', packageJsonPath);
       logger.log(packageJson.diff());
@@ -95,7 +93,7 @@ export async function upgrade(options, availableUpgrades = []) {
 }
 
 /**
- * @param {Array<string>}
+ * @param {Array<string>} workspaces
  * @returns {Promise<Workspace>}
  */
 async function getSelectedWorkspace(workspaces) {
@@ -163,89 +161,4 @@ async function getSelectedUpgrade(upgrades) {
   return upgrades.find((upgrade) => {
     return upgrade.name === answers.upgrade;
   });
-}
-
-class PackageJson {
-  /**
-   * @param {object} packageJson
-   * @returns {PackageJson}
-   */
-  static create(packageJson) {
-    return new PackageJson(packageJson);
-  }
-
-  static dependencyTypes = [
-    'dependencies',
-    'devDependencies',
-    'peerDependencies',
-  ];
-
-  constructor(packageJson) {
-    this.original = packageJson;
-    this.modified = clone(this.original);
-    this.changed = false;
-  }
-
-  install({ name, version, type = 'dependencies' }) {
-    const exists = PackageJson.dependencyTypes.find((type) => {
-      if (this.modified[type]) {
-        return this.modified[type][name];
-      }
-      return false;
-    });
-
-    if (exists) {
-      throw new UpgradeError(
-        `The dependency \`${name}\` alreadys exists and cannot be added`
-      );
-    }
-
-    this.changed = true;
-    if (!this.modified[type]) {
-      this.modified[type] = {};
-    }
-    this.modified[type][name] = version;
-  }
-
-  update({ name, version }) {
-    const type = PackageJson.dependencyTypes.find((type) => {
-      return this.modified[type][name];
-    });
-
-    if (type) {
-      this.changed = true;
-      this.modified[type][name] = version;
-    } else {
-      throw new Error(`Unable to find dependency type for: \`${name}\``);
-    }
-  }
-
-  uninstall({ name }) {
-    const types = PackageJson.dependencyTypes.filter((type) => {
-      if (this.original[type]) {
-        return this.original[type][name];
-      }
-      return false;
-    });
-
-    if (types.length === 0) {
-      throw new Error(`Unable to find and remove dependency: \`${name}\``);
-    }
-
-    this.changed = true;
-    for (const type of types) {
-      delete this.modified[type][name];
-    }
-  }
-
-  getJSON() {
-    return this.modified;
-  }
-
-  diff() {
-    return diff(
-      JSON.stringify(this.original, null, 2),
-      JSON.stringify(this.modified, null, 2)
-    );
-  }
 }

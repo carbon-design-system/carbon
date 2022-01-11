@@ -1,6 +1,6 @@
 # @carbon/upgrade
 
-> A tool for upgrading Carbon versions
+> A tool for upgrading projects that use Carbon
 
 ## Getting started
 
@@ -25,24 +25,23 @@ You can install `@carbon/upgrade` in your project, or use a tool like
 by running the following command in your project:
 
 ```bash
-# Runs the command in "dry" mode, which means no files are altered.
-# To update the files, re-run the command without the `-d` flag.
 npx @carbon/upgrade -d
 ```
 
 Below is a full output of the options and commands available:
 
 ```bash
-Usage: carbon-upgrade [options]
-
-Commands:
-  carbon-upgrade                            run to upgrade your project[default]
-  carbon-upgrade migrate <package> <from>   run a specific migration for a
-  <to>                                      package
+Usage: @carbon/upgrade [options]
 
 Options:
-  --help        Show help                                              [boolean]
-  --version     Show version number                                    [boolean]
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
+      --force    force execution if the cli encounters an error while doing
+                 safety checks                        [boolean] [default: false]
+  -w, --write    update the files with changes found by running the migration
+                                                                [default: false]
+  -v, --verbose  optionally include additional logs, useful for debugging
+                                                      [boolean] [default: false]
 ```
 
 ## 🙌 Contributing
