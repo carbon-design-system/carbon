@@ -13,10 +13,10 @@ import { Workspace, getAvailableWorkspaces } from '../workspace';
 import { UpgradeError } from '../error';
 import { diff } from '../diff';
 
-export async function upgrade(options, defaultUpgrades = []) {
+export async function upgrade(options, availableUpgrades = []) {
   logger.verbose('running upgrade command with options: %o', options);
 
-  const { cwd } = options;
+  const { cwd, write } = options;
   const workspaces = getAvailableWorkspaces(cwd);
 
   if (workspaces.length === 0) {
@@ -24,10 +24,7 @@ export async function upgrade(options, defaultUpgrades = []) {
   }
 
   const workspace = await getSelectedWorkspace(workspaces);
-
-  logger.verbose('running from workspace: %s', workspace.directory);
-
-  const upgrades = defaultUpgrades.filter((upgrade) => {
+  const upgrades = availableUpgrades.filter((upgrade) => {
     logger.verbose('checking upgrade: %s', upgrade.name);
 
     return upgrade.updates.every((update) => {
@@ -44,12 +41,21 @@ export async function upgrade(options, defaultUpgrades = []) {
   });
 
   if (upgrades.length === 0) {
-    throw new UpgradeError('No upgrades available.');
+    logger.info('No upgrades available');
+    return;
   }
 
   const upgrade = await getSelectedUpgrade(upgrades);
+  if (!upgrade) {
+    logger.info('No upgrade selected');
+    return;
+  }
 
-  logger.info('running upgrade: %s', upgrade.name);
+  logger.verbose(
+    'running upgrade: %s for workspace: %s',
+    upgrade.name,
+    workspace.directory
+  );
 
   const packageJson = PackageJson.create(await workspace.getPackageJson());
 
@@ -57,25 +63,35 @@ export async function upgrade(options, defaultUpgrades = []) {
     logger.verbose('applying updates for package: %s', update.package.name);
 
     for (const change of update.changes) {
-      logger.verbose('applying change: %s', change.type);
+      logger.verbose('applying change: %o', change);
+
+      if (change.type === 'install') {
+        packageJson.install(change.package);
+      }
+
       if (change.type === 'update') {
-        packageJson.update(update.package);
+        packageJson.update({
+          name: update.package.name,
+          version: change.package.version,
+        });
+      }
+
+      if (change.type === 'uninstall') {
+        packageJson.uninstall(update.package);
       }
     }
   }
 
   if (packageJson.changed) {
     const packageJsonPath = workspace.getPackageJsonPath();
-    if (options.write) {
+    if (write) {
       logger.info('updating file: %s', packageJsonPath);
       await workspace.updatePackageJson(packageJson.getJSON());
     } else {
       logger.info('previewing changes for file: %s', packageJsonPath);
-      logger.info(packageJson.diff());
+      logger.log(packageJson.diff());
     }
   }
-
-  // TODO: children workspaces
 }
 
 /**
@@ -113,7 +129,8 @@ async function getSelectedUpgrade(upgrades) {
       {
         type: 'confirm',
         name: 'confirm',
-        message: `Would you like to run the ${upgrade.name} upgrade?`,
+        message: `Would you like to run the ${upgrade.name} upgrade?
+        (${upgrade.description})`,
       },
     ]);
 
@@ -130,13 +147,21 @@ async function getSelectedUpgrade(upgrades) {
       name: 'upgrade',
       message: 'Which upgrade would you like to run?',
       choices: upgrades.map((upgrade) => {
-        return upgrade.name;
+        return {
+          name: `${upgrade.name} (${upgrade.description})`,
+          value: upgrade.name,
+        };
       }),
+      default: 0,
     },
   ]);
 
+  if (answers.upgrade === undefined || answers.upgrade === null) {
+    return null;
+  }
+
   return upgrades.find((upgrade) => {
-    return upgrade.name === answers.name;
+    return upgrade.name === answers.upgrade;
   });
 }
 
@@ -161,9 +186,30 @@ class PackageJson {
     this.changed = false;
   }
 
+  install({ name, version, type = 'dependencies' }) {
+    const exists = PackageJson.dependencyTypes.find((type) => {
+      if (this.modified[type]) {
+        return this.modified[type][name];
+      }
+      return false;
+    });
+
+    if (exists) {
+      throw new UpgradeError(
+        `The dependency \`${name}\` alreadys exists and cannot be added`
+      );
+    }
+
+    this.changed = true;
+    if (!this.modified[type]) {
+      this.modified[type] = {};
+    }
+    this.modified[type][name] = version;
+  }
+
   update({ name, version }) {
     const type = PackageJson.dependencyTypes.find((type) => {
-      return this.original[type][name];
+      return this.modified[type][name];
     });
 
     if (type) {
@@ -171,6 +217,24 @@ class PackageJson {
       this.modified[type][name] = version;
     } else {
       throw new Error(`Unable to find dependency type for: \`${name}\``);
+    }
+  }
+
+  uninstall({ name }) {
+    const types = PackageJson.dependencyTypes.filter((type) => {
+      if (this.original[type]) {
+        return this.original[type][name];
+      }
+      return false;
+    });
+
+    if (types.length === 0) {
+      throw new Error(`Unable to find and remove dependency: \`${name}\``);
+    }
+
+    this.changed = true;
+    for (const type of types) {
+      delete this.modified[type][name];
     }
   }
 

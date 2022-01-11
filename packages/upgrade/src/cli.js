@@ -7,10 +7,11 @@
 
 import chalk from 'chalk';
 import isGitClean from 'is-git-clean';
-import packageJson from '../package.json';
-import { logger } from './logger';
 import { upgrade } from './commands/upgrade';
 import { UpgradeError } from './error';
+import { logger } from './logger';
+import { upgrades } from './upgrades';
+import packageJson from '../package.json';
 
 // Note: for esbuild we need this import to be CommonJS
 // - https://github.com/yargs/yargs/issues/1929
@@ -23,7 +24,8 @@ export async function main({ argv, cwd }) {
 
   cli
     .option('force', {
-      describe: 'force execution if the cli encounters an error',
+      describe:
+        'force execution if the cli encounters an error while doing safety checks',
       default: false,
       type: 'boolean',
     })
@@ -50,7 +52,7 @@ export async function main({ argv, cwd }) {
         verbose,
         write,
       };
-      await upgrade(options);
+      await upgrade(options, upgrades);
     })
   );
 
@@ -67,16 +69,14 @@ function run(command) {
       logger.setLevel('verbose');
     }
 
-    console.log('Thanks for trying out @carbon/upgrade! 🙏');
+    logger.log('Thanks for trying out @carbon/upgrade! 🙏');
 
     // Inspired by react-codemod:
     // https://github.com/reactjs/react-codemod/blob/b34b92a1f0b8ad333efe5effb50d17d46d66588b/bin/cli.js#L22
     let clean = false;
-    let errorMessage = 'Unable to determine if git directory is clean';
 
     try {
       clean = isGitClean.sync(process.cwd());
-      errorMessage = 'Git directory is not clean';
     } catch (error) {
       if (
         error &&
@@ -88,11 +88,11 @@ function run(command) {
     }
 
     if (!clean && args.force !== true) {
-      console.log(
+      logger.log(
         chalk.yellow('[warning]'),
         'It appears that you have untracked changes in your project. Before we continue, please stash or commit your changes to git.'
       );
-      console.log(
+      logger.log(
         '\nYou may use the --force flag to override this safety check.'
       );
       process.exit(1);
@@ -100,15 +100,15 @@ function run(command) {
 
     try {
       await command(args);
-      console.log('Done! ✨');
+      logger.log('Done! ✨');
     } catch (error) {
       if (error instanceof UpgradeError) {
-        console.error(error.message);
+        logger.error(error.message);
         process.exit(1);
       }
-      console.error('Yikes, looks like something really went wrong.');
-      console.error('Please make an issue with the following info:');
-      console.log(error);
+      logger.error('Yikes, looks like something really went wrong.');
+      logger.error('Please make an issue with the following info:');
+      logger.log(error);
       process.exit(1);
     }
   };

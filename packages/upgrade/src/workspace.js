@@ -74,11 +74,10 @@ class Workspace {
     this.workspaces.add(workspace);
   }
 
-  *getWorkspaces() {
-    yield this;
-    for (const workspace of this.workspaces) {
-      yield* workspace.getWorkspaces();
-    }
+  getWorkspaces() {
+    return Array.from(this.workspaces).flatMap((workspace) => {
+      return [workspace, ...workspace.getWorkspaces()];
+    });
   }
 
   getPackageJson() {

@@ -137,11 +137,14 @@ const Options = {
 
 describe('commands/upgrade', () => {
   let inquirer;
+  let logger;
   let upgrade;
 
   beforeEach(() => {
     jest.mock('inquirer');
+    jest.mock('../../logger');
     inquirer = require('inquirer');
+    logger = require('../../logger').logger;
     upgrade = require('../upgrade').upgrade;
   });
 
@@ -159,9 +162,8 @@ describe('commands/upgrade', () => {
         name: 'test',
       },
     });
-    await expect(
-      upgrade(Options.with(workspace.getDirectory()))
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`"No upgrades available."`);
+    await upgrade(Options.with(workspace.getDirectory()));
+    expect(logger.info).toHaveBeenCalledWith('No upgrades available');
   });
 
   test('single workspace with upgrade available', async () => {
@@ -182,9 +184,8 @@ describe('commands/upgrade', () => {
     });
 
     inquirer.mockAnswer('workspace', child.getDirectory());
-    await expect(
-      upgrade(Options.with(child.getDirectory()))
-    ).rejects.toThrowErrorMatchingInlineSnapshot(`"No upgrades available."`);
+    await upgrade(Options.with(child.getDirectory()));
+    expect(logger.info).toHaveBeenCalledWith('No upgrades available');
   });
 
   test('multiple workspaces, select one with upgrades available', async () => {

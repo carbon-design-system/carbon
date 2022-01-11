@@ -47,6 +47,7 @@ const defaultLevel = process.env.NODE_ENV === 'test' ? 'warn' : 'info';
  * @property {Function} verbose
  * @property {Function} debug
  * @property {Function} silly
+ * @property {Function} log
  */
 
 const Logger = {
@@ -59,6 +60,9 @@ const Logger = {
     const logger = {
       setLevel(level) {
         max = levels[level];
+      },
+      log(...args) {
+        console.log(...args);
       },
     };
 
