@@ -23,7 +23,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@babel/core": "^7.14.6",
+    "@babel/core": "^7.16.7",
     "@carbon/cli-reporter": "^10.5.0",
     "@octokit/plugin-retry": "^3.0.7",
     "@octokit/plugin-throttling": "^2.6.0",
