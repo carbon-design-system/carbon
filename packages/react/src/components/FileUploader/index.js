@@ -5,11 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default as Filename } from './Filename';
+import * as FeatureFlags from '@carbon/feature-flags';
+import Filename from './Filename';
 import FileUploader from './FileUploader';
-export { default as FileUploaderSkeleton } from './FileUploader.Skeleton';
-export { default as FileUploaderButton } from './FileUploaderButton';
-export { default as FileUploaderDropContainer } from './FileUploaderDropContainer';
-export { default as FileUploaderItem } from './FileUploaderItem';
+import FileUploaderSkeleton from './FileUploader.Skeleton';
+import FileUploaderButton from './FileUploaderButton';
+import FileUploaderDropContainer from './FileUploaderDropContainer';
+import FileUploaderItem from './FileUploaderItem';
+import { createClassWrapper } from '../../internal/createClassWrapper';
 
-export default FileUploader;
+export {
+  Filename,
+  FileUploaderSkeleton,
+  FileUploaderButton,
+  FileUploaderDropContainer,
+  FileUploaderItem,
+};
+
+export default FeatureFlags.enabled('enable-v11-release')
+  ? createClassWrapper(FileUploader)
+  : FileUploader;

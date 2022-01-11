@@ -36,6 +36,12 @@ module.exports = {
     require.resolve('./addon-theme/register'),
   ],
 
+  core: {
+    builder: 'webpack5',
+  },
+
+  staticDirs: [path.join(__dirname, 'assets')],
+
   stories: glob.sync(
     [
       './Welcome/Welcome.stories.js',
@@ -48,7 +54,12 @@ module.exports = {
     }
   ),
 
-  webpack(config) {
+  webpack(config, { configType }) {
+    config.devtool =
+      configType === 'DEVELOPMENT'
+        ? 'eval-cheap-module-source-map'
+        : 'source-map';
+
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {
         return loader.includes('babel-loader');
@@ -98,12 +109,13 @@ module.exports = {
         `,
         implementation: require('sass'),
         includePaths: [path.resolve(__dirname, '..', '..', 'node_modules')],
+        sourceMap: true,
       },
     };
 
     config.module.rules.push({
       test: /-story\.jsx?$/,
-      loaders: [
+      use: [
         {
           loader: require.resolve('@storybook/source-loader'),
           options: {
@@ -138,15 +150,14 @@ module.exports = {
         {
           loader: 'postcss-loader',
           options: {
-            plugins: () => {
-              const autoPrefixer = require('autoprefixer')({
-                overrideBrowserslist: ['last 1 version', 'ie >= 11'],
-              });
-              return [
+            postcssOptions: {
+              plugins: [
                 customProperties(),
-                autoPrefixer,
+                require('autoprefixer')({
+                  overrideBrowserslist: ['last 1 version'],
+                }),
                 ...(useRtl ? [rtlcss] : []),
-              ];
+              ],
             },
             sourceMap: true,
           },

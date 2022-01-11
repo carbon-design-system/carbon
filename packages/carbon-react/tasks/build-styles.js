@@ -37,6 +37,10 @@ async function build() {
       },
       {
         type: 'file',
+        filepath: '_layer.scss',
+      },
+      {
+        type: 'file',
         filepath: '_motion.scss',
       },
       {
