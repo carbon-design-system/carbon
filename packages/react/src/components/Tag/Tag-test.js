@@ -44,21 +44,17 @@ describe('Tag', () => {
   });
 
   it('should allow for a custom label', () => {
-    render(
-      <Tag type="red">
-        Johnny Ramone
-      </Tag>
-    );
+    render(<Tag type="red">Johnny Ramone</Tag>);
     expect(screen.getByText('Johnny Ramone')).toBeInTheDocument();
   });
 
   it('should allow for a custom icon', () => {
     render(
-      <Tag type="red" renderIcon={Add16}>
+      <Tag type="red" renderIcon={() => <Add16 data-testid="test" />}>
         Dee Dee Ramone
       </Tag>
     );
 
-    expect(document.querySelector('svg')).toBe('true');
+    expect(screen.getByTestId('test')).toBeInTheDocument();
   });
 });
