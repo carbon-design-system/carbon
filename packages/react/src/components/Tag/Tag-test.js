@@ -49,7 +49,7 @@ describe('Tag', () => {
         Johnny Ramone
       </Tag>
     );
-    expect(screen.getByText('Johnny Ramone')).toBe('true');
+    expect(screen.getByText('Johnny Ramone')).toBeInTheDocument();
   });
 
   it('should allow for a custom icon', () => {
