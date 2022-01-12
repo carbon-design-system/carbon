@@ -12,8 +12,6 @@ const autoprefixer = require('autoprefixer');
 const customProperties = require('postcss-custom-properties');
 // load dart-sass
 const dartSass = require('sass');
-// required for dart-sass - async builds are significantly slower without this package
-const Fiber = require('fibers');
 // require node-sass so we can explicitly set `gulp-sass`s `.compiler` property
 const nodeSass = require('node-sass');
 
@@ -148,9 +146,6 @@ let sassDefaultOptions = {};
 
 if (useDartSass) {
   sass.compiler = dartSass;
-  sassDefaultOptions = {
-    fiber: Fiber,
-  };
 } else {
   sass.compiler = nodeSass;
 }
