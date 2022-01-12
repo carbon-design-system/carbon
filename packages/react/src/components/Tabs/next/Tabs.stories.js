@@ -66,13 +66,13 @@ export const Icon20Only = () => (
   <Tabs>
     <TabList iconSize="lg" aria-label="List of tabs">
       <IconTab label="Monster" disabled>
-        <Monster20 />
+        <Monster20 aria-label="Monster" />
       </IconTab>
       <IconTab label="Corn">
-        <Corn20 />
+        <Corn20 aria-label="Corn" />
       </IconTab>
       <IconTab label="Bat">
-        <Bat20 />
+        <Bat20 aria-label="Bat" />
       </IconTab>
     </TabList>
     <TabPanels>
@@ -87,13 +87,13 @@ export const IconOnly = () => (
   <Tabs>
     <TabList iconSize="default" aria-label="List of tabs">
       <IconTab label="Monster" disabled>
-        <Monster16 />
+        <Monster16 aria-label="Monster" />
       </IconTab>
       <IconTab label="Corn">
-        <Corn16 />
+        <Corn16 aria-label="Corn" />
       </IconTab>
       <IconTab label="Bat">
-        <Bat16 />
+        <Bat16 aria-label="Bat" />
       </IconTab>
     </TabList>
     <TabPanels>
