@@ -20,7 +20,7 @@ describe('UnorderedList', () => {
         <ListItem>Item</ListItem>
       </UnorderedList>
     );
-    expect(screen.getByText('Item')).toBeDefined();
+    expect(screen.getByText('Item')).toBeInTheDocument();
   });
 
   it('should render nested lists', () => {
