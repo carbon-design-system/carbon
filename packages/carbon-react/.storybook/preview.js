@@ -80,6 +80,11 @@ export const parameters = {
 
     // https://storybook.js.org/docs/react/essentials/controls#sorting-controls
     sort: 'alpha',
+
+    hideNoControlsWarning: true,
+  },
+  darkMode: {
+    current: 'light',
   },
   // Small (<672)
   // Medium (672 - 1056px)
