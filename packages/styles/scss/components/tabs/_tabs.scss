@@ -251,7 +251,8 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     // Icon Item
     //-----------------------------
 
-    .#{$prefix}--tabs__nav-item--icon {
+    .#{$prefix}--tabs__nav-item--icon,
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
       display: flex;
       width: $icon-tab-size;
       height: $icon-tab-size;
