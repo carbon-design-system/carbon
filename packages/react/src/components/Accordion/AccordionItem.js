@@ -25,7 +25,7 @@ function AccordionItem({
   open = false,
   onHeadingClick,
   renderExpando = defaultRenderToggle, // remove renderExpando in next major release
-  renderToggle = defaultRenderToggle,
+  renderToggle,
   title = 'title',
   disabled,
   ...rest
