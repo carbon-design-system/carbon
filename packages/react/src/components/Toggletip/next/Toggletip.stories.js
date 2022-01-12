@@ -8,7 +8,12 @@
 import { Information16 } from '@carbon/icons-react';
 import React from 'react';
 import { IconButton } from '../../IconButton';
-import { Toggletip, ToggletipButton, ToggletipContent } from '../../Toggletip';
+import {
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
+  useToggletip,
+} from '../../Toggletip';
 import mdx from './Toggletip.mdx';
 
 export default {
@@ -25,9 +30,7 @@ export default {
       },
     },
     children: {
-      table: {
-        disable: true,
-      },
+      table: { disable: true },
     },
     className: {
       table: {
@@ -44,13 +47,61 @@ export default {
 
 export const Default = () => {
   return (
-    <Toggletip>
-      <ToggletipButton>
-        <IconButton>
-          <Information16 />
-        </IconButton>
-      </ToggletipButton>
-      <ToggletipContent>Test content</ToggletipContent>
-    </Toggletip>
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <Toggletip defaultOpen>
+        <ToggletipButton>
+          <IconButton>
+            <Information16 />
+          </IconButton>
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>
+            Ipsum voluptatum mollitia mollitia nobis cupiditate quaerat eum?
+            Quam impedit a culpa minus necessitatibus.
+          </p>
+          <div className="cds--toggletip-actions">
+            <a href="#">Link</a>
+            <button>Button</button>
+          </div>
+        </ToggletipContent>
+      </Toggletip>
+    </div>
   );
+};
+
+export const ProfileMenu = () => {
+  return 'TODO';
+};
+
+export const InlineEdit = () => {
+  return 'TODO';
+};
+
+export const FilterMenu = () => {
+  return 'TODO';
+};
+
+export const Hook = () => {
+  function Example() {
+    const { buttonProps, contentProps, state } = useToggletip({
+      defaultOpen: true,
+    });
+
+    return (
+      <>
+        <button type="button" {...buttonProps}>
+          Info
+        </button>
+        <div hidden={!state.open} {...contentProps}>
+          <div style={{ border: '1px solid black' }}>
+            Content
+            <button>inner</button>
+          </div>
+        </div>
+        <button>Outside</button>
+      </>
+    );
+  }
+
+  return <Example />;
 };
