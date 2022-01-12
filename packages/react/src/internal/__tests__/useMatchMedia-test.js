@@ -9,6 +9,8 @@ import { cleanup, render } from '@testing-library/react';
 import React from 'react';
 import { useMatchMedia } from '../useMatchMedia';
 
+function resizeBrowserWidth(width) {}
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation((query) => ({
@@ -35,6 +37,21 @@ describe('useMatchMedia', () => {
     }
     render(<Test />);
     expect(matches).toBe(true);
+  });
+  it.only('should update the match value if the query no longer applies', () => {
+    let matches = null;
+
+    function TestComponent() {
+      matches = useMatchMedia('(min-width: 320px)');
+      return null;
+    }
+
+    render(<TestComponent />);
+    expect(matches).toBe(true);
+
+    resiveBrowserWidth(960);
+
+    expect(matches).toBe(false);
   });
   it('should keep state in sync when mediaQueryString is changed', () => {
     const query1 = '(min-width: 768px)';
