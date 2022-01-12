@@ -7968,6 +7968,19 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
