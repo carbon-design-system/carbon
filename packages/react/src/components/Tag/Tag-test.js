@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Tag from 'carbon-components-react';
+import { Tag } from 'carbon-components-react';
 import { Add16 } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 
@@ -44,8 +44,12 @@ describe('Tag', () => {
   });
 
   it('should allow for a custom label', () => {
-    render(<Tag data-testid="tag" type="red">Johnny Ramone</Tag>);
-    expect(screen.getByText('Johnny Ramone').toBeTruthy());
+    render(
+      <Tag data-testid="tag" type="red">
+        Johnny Ramone
+      </Tag>
+    );
+    expect(screen.getByText('Johnny Ramone')).toBe('true');
   });
 
   it('should allow for a custom icon', () => {
@@ -55,6 +59,6 @@ describe('Tag', () => {
       </Tag>
     );
 
-    expect(document.querySelector('svg').toBeTruthy);
+    expect(document.querySelector('svg')).toBe('true');
   });
 });
