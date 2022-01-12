@@ -13,7 +13,7 @@ import { render, screen } from '@testing-library/react';
 describe('Tag', () => {
   describe('automated accessibility testing', () => {
     it('should have no Axe violations', async () => {
-      const { container } = render(<Tag type="red">Dog</Tag>);
+      const { container } = render(<Tag type="red">test-tag</Tag>);
       await expect(container).toHaveNoAxeViolations();
     });
 
