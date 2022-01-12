@@ -46,8 +46,6 @@ describe('UnorderedList', () => {
       </UnorderedList>
     );
 
-    expect(screen.getByTestId('list').classList.contains('some-class')).toBe(
-      true
-    );
+    expect(screen.getByTestId('list')).toHaveClass('some-class');
   });
 });
