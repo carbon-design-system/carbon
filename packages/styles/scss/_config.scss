@@ -36,6 +36,8 @@ $font-display: 'swap' !default;
 /// @group config
 $font-path: '~@ibm/plex' !default;
 
+$use-google-fonts: true !default;
+
 /// The value used to prefix selectors and CSS Custom Properties across the
 /// codebase
 /// @access public
