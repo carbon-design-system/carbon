@@ -45,7 +45,7 @@ describe('Tag', () => {
 
   it('should allow for a custom label', () => {
     render(
-      <Tag data-testid="tag" type="red">
+      <Tag type="red">
         Johnny Ramone
       </Tag>
     );
