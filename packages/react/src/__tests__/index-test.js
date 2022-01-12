@@ -199,11 +199,11 @@ Array [
   "TooltipDefinition",
   "TooltipIcon",
   "UnorderedList",
-  "unstable_ContainedTab",
-  "unstable_ContainedTabs",
   "unstable_FeatureFlags",
   "unstable_HStack",
   "unstable_Heading",
+  "unstable_IconButton",
+  "unstable_Layer",
   "unstable_Menu",
   "unstable_MenuDivider",
   "unstable_MenuGroup",
@@ -217,6 +217,11 @@ Array [
   "unstable_ProgressBar",
   "unstable_Section",
   "unstable_Stack",
+  "unstable_TabList",
+  "unstable_TabPanel",
+  "unstable_TabPanels",
+  "unstable_Theme",
+  "unstable_ThemeContext",
   "unstable_Tooltip",
   "unstable_TreeNode",
   "unstable_TreeView",
@@ -225,6 +230,7 @@ Array [
   "unstable_useFeatureFlag",
   "unstable_useFeatureFlags",
   "unstable_usePrefix",
+  "unstable_useTheme",
 ]
 `);
   });

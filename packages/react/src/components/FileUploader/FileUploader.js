@@ -193,7 +193,9 @@ export default class FileUploader extends React.Component {
 
     return (
       <div className={classes} {...other}>
-        <p className={`${prefix}--file--label`}>{labelTitle}</p>
+        {FeatureFlags.enabled('enable-v11-release') && !labelTitle ? null : (
+          <p className={`${prefix}--file--label`}>{labelTitle}</p>
+        )}
         <p className={`${prefix}--label-description`}>{labelDescription}</p>
         <FileUploaderButton
           labelText={buttonLabel}

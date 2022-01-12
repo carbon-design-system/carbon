@@ -66,6 +66,18 @@ export function getParentNode(node) {
   return null;
 }
 
+export function getSubMenuOffset(node) {
+  if (node) {
+    const nodeStyles = getComputedStyle(node);
+    const spacings =
+      parseInt(nodeStyles.paddingTop) + parseInt(nodeStyles.paddingBottom); // styles always in px, convert to number
+    const elementHeight = node.firstElementChild.offsetHeight;
+    return elementHeight + spacings || 0;
+  }
+
+  return 0;
+}
+
 export function getParentMenu(el) {
   if (el) {
     const parentMenu = el.parentNode.closest(`ul.${prefix}--menu`);
@@ -129,13 +141,17 @@ function elementFits(elementDimensions, position, boundaries, axis = 'x') {
  * @param {number[]} [targetBoundaries] The boundaries of the target the element should attach to: [minX, minY, maxX, maxY]
  * @param {number[]} [containerBoundaries] The boundaries of the container the element should be contained in: [minX, minY, maxX, maxY]
  * @param {number} [preferredDirection=1] Which direction is preferred. Either 1 (right right) or -1 (to left)
+ * @param {boolean} [isRootLevel] Flag that indicates if the element is on level 1 (the root level)
+ * @param {object} [element] The list element - used to calculate the offset of submenus
  * @returns {object} The determined position and direction of the element: { position: [x, y], direction: 1 | -1 }
  */
 export function getPosition(
   elementDimensions,
   targetBoundaries,
   containerBoundaries,
-  preferredDirection = 1
+  preferredDirection = 1,
+  isRootLevel,
+  element
 ) {
   const position = [0, 0];
   let direction = preferredDirection;
@@ -171,6 +187,11 @@ export function getPosition(
   );
   if (!yFits) {
     position[1] = targetBoundaries[1] - elementDimensions[1];
+    if (!isRootLevel && element) {
+      // if sub-menu and not root level, consider offset
+      const diff = getSubMenuOffset(element);
+      position[1] += diff;
+    }
   }
 
   return {

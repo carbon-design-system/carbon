@@ -10,6 +10,7 @@ import classNames from 'classnames';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Checkbox from '../Checkbox';
+import Button from '../../components/Button';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 import { settings } from 'carbon-components';
 import mdx from './Checkbox.mdx';
@@ -29,6 +30,31 @@ export default {
       page: mdx,
     },
   },
+};
+
+export const checkboxNativeValidation = () => {
+  function onSubmit(e) {
+    e.preventDefault();
+    var cb = e.target.querySelector('input[type=checkbox]');
+    if (cb.checked === false) {
+      cb.setCustomValidity('Privacy policy has to be accepted.');
+      cb.reportValidity();
+      return;
+    }
+
+    alert('submitted');
+  }
+
+  function onChange(e) {
+    e.target.setCustomValidity('');
+  }
+  return (
+    <form style={{ margin: '2em' }} onSubmit={onSubmit} onChange={onChange}>
+      <legend className={`${prefix}--label`}>Validation example</legend>
+      <Checkbox id="cb" labelText="Accept privacy policy" />
+      <Button type="submit">Submit</Button>
+    </form>
+  );
 };
 
 export const checkbox = () => {
@@ -76,7 +102,6 @@ const props = () => ({
   hideLabel: boolean('No label (hideLabel)', false),
   wrapperClassName: text('Wrapper CSS class name (wrapperClassName)', ''),
   onChange: action('onChange'),
-  onClick: action('onClick'),
 });
 
 export const playground = () => (

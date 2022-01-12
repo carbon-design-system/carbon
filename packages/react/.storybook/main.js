@@ -14,7 +14,6 @@ const customProperties = require('postcss-custom-properties');
 const rtlcss = require('rtlcss');
 
 const {
-  CARBON_ENABLE_V11_RELEASE = 'false',
   CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
   CARBON_REACT_STORYBOOK_USE_RTL,
   CARBON_REACT_STORYBOOK_USE_SASS_LOADER,
@@ -37,6 +36,12 @@ module.exports = {
     require.resolve('./addon-theme/register'),
   ],
 
+  core: {
+    builder: 'webpack5',
+  },
+
+  staticDirs: [path.join(__dirname, 'assets')],
+
   stories: glob.sync(
     [
       './Welcome/Welcome.stories.js',
@@ -49,7 +54,12 @@ module.exports = {
     }
   ),
 
-  webpack(config) {
+  webpack(config, { configType }) {
+    config.devtool =
+      configType === 'DEVELOPMENT'
+        ? 'eval-cheap-module-source-map'
+        : 'source-map';
+
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {
         return loader.includes('babel-loader');
@@ -76,7 +86,6 @@ module.exports = {
             $feature-flags: (
               ui-shell: true,
               enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
-              enable-v11-release: ${CARBON_ENABLE_V11_RELEASE},
             );
             ${content}
           `;
@@ -96,17 +105,17 @@ module.exports = {
           $feature-flags: (
             ui-shell: true,
             enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
-            enable-v11-release: ${CARBON_ENABLE_V11_RELEASE},
           );
         `,
         implementation: require('sass'),
         includePaths: [path.resolve(__dirname, '..', '..', 'node_modules')],
+        sourceMap: true,
       },
     };
 
     config.module.rules.push({
       test: /-story\.jsx?$/,
-      loaders: [
+      use: [
         {
           loader: require.resolve('@storybook/source-loader'),
           options: {
@@ -141,15 +150,14 @@ module.exports = {
         {
           loader: 'postcss-loader',
           options: {
-            plugins: () => {
-              const autoPrefixer = require('autoprefixer')({
-                overrideBrowserslist: ['last 1 version', 'ie >= 11'],
-              });
-              return [
+            postcssOptions: {
+              plugins: [
                 customProperties(),
-                autoPrefixer,
+                require('autoprefixer')({
+                  overrideBrowserslist: ['last 1 version'],
+                }),
                 ...(useRtl ? [rtlcss] : []),
-              ];
+              ],
             },
             sourceMap: true,
           },
@@ -167,18 +175,6 @@ module.exports = {
         })
       );
     }
-
-    // Enable process.env variables other than STORYBOOK_* in our preview
-    // environment
-    // @see https://github.com/storybookjs/storybook/issues/12270#issuecomment-755398949
-    const definePlugin = config.plugins.find((plugin) => {
-      return plugin.definitions && plugin.definitions['process.env'];
-    });
-
-    definePlugin.definitions['process.env'] = {
-      ...definePlugin.definitions['process.env'],
-      CARBON_ENABLE_V11_RELEASE: JSON.stringify(CARBON_ENABLE_V11_RELEASE),
-    };
 
     return config;
   },

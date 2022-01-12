@@ -14,12 +14,16 @@ const { SassRenderer } = require('@carbon/test-utils/scss');
 const { render } = SassRenderer.create(__dirname);
 
 const filepaths = [
+  'scss/compat/theme',
+  'scss/compat/themes',
+  'scss/components',
+  'scss/fonts',
   'scss/breakpoint',
   'scss/colors',
   'scss/config',
   'scss/feature-flags',
-  'scss/font-face',
   'scss/grid',
+  'scss/layer',
   'scss/motion',
   'scss/reset',
   'scss/spacing',
@@ -35,7 +39,6 @@ const filepaths = [
   'scss/utilities/focus-outline',
   'scss/utilities/high-contrast-mode',
   'scss/utilities/keyframes',
-  'scss/utilities/layer-set',
   'scss/utilities/placeholder-colors',
   'scss/utilities/rotate',
   'scss/utilities/skeleton',
@@ -107,20 +110,17 @@ describe('@carbon/styles/scss/config', () => {
       @use '../scss/config' with (
         $prefix: 'custom-prefix',
         $css--font-face: false,
-        $css--plex-arabic: true,
       );
 
       $_: get('config', (
         prefix: config.$prefix,
         css--font-face: config.$css--font-face,
-        css--plex-arabic: config.$css--plex-arabic,
       ));
     `);
 
     expect(get('config').value).toEqual({
       prefix: 'custom-prefix',
       ['css--font-face']: false,
-      ['css--plex-arabic']: true,
     });
   });
 });

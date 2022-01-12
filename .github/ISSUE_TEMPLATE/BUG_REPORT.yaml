@@ -32,6 +32,7 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - 'carbon-components-svelte'
     validations:
       required: true
   - type: dropdown
@@ -53,6 +54,12 @@ body:
       placeholder: e.g. v10.42.0
     validations:
       required: true
+  - type: input
+    id: react-version
+    attributes:
+      label: React version
+      description: 'Which React version are you using?'
+      placeholder: e.g. v17.0.2
   - type: textarea
     id: description
     attributes:

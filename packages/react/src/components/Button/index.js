@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Button.Skeleton';
+export { default as ButtonSkeleton } from './Button.Skeleton';
 export default from './Button';

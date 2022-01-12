@@ -19,7 +19,6 @@ const Checkbox = React.forwardRef(function Checkbox(
     id,
     labelText,
     onChange,
-    onClick,
     indeterminate,
     hideLabel,
     wrapperClassName,
@@ -45,15 +44,7 @@ const Checkbox = React.forwardRef(function Checkbox(
   );
 
   return (
-    /* 
-      The a11y rules below are disabled because <div> element has checkbox 
-      input and label elements as children that allows keyboard interaction. 
-      The onClick handler facilitates consumers' ability to stop click events 
-      from bubbling beyond the checkbox without having to implement their own 
-      wrapper element around <Checkbox>.
-    */
-    /* eslint-disable-next-line jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
-    <div className={wrapperClasses} onClick={(evt) => onClick(evt)}>
+    <div className={wrapperClasses}>
       <input
         {...other}
         type="checkbox"
@@ -133,14 +124,6 @@ Checkbox.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Provide an optional click handler that is applied to the wrapper div
-   * containing both the input and the span label. As such, this will be
-   * called twice for every click - once for the input, a second time for the label.
-   * Receives the dom event as its only argument.
-   */
-  onClick: PropTypes.func,
-
-  /**
    * Specify a title for the <label> node for the Checkbox
    */
   title: PropTypes.string,
@@ -156,7 +139,6 @@ Checkbox.propTypes = {
 
 Checkbox.defaultProps = {
   onChange: () => {},
-  onClick: () => {},
   indeterminate: false,
 };
 

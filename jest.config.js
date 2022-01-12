@@ -14,6 +14,8 @@ module.exports = {
     '!packages/{cli,components,sketch}/**',
     '!packages/**/{examples,stories}/**',
     '!**/*-story.js',
+    '!**/*.stories.js',
+    '!**/*-test.e2e.js',
   ],
   reporters: ['default', 'jest-junit'],
 };

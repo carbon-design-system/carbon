@@ -975,31 +975,21 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                           name="select-all"
                           onClick={[Function]}
                         >
-                          <InlineCheckbox
-                            ariaLabel="Select all rows"
+                          <input
                             checked={false}
+                            className="bx--checkbox"
                             id="data-table-7__select-all"
-                            indeterminate={false}
-                            innerRef={null}
                             name="select-all"
                             onChange={[Function]}
                             onClick={[Function]}
-                          >
-                            <input
-                              checked={false}
-                              className="bx--checkbox"
-                              id="data-table-7__select-all"
-                              name="select-all"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select all rows"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-7__select-all"
-                            />
-                          </InlineCheckbox>
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select all rows"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-7__select-all"
+                            onClick={[Function]}
+                          />
                         </ForwardRef(InlineCheckbox)>
                       </th>
                     </TableSelectAll>
@@ -1381,31 +1371,21 @@ exports[`DataTable selection should render 1`] = `
                           name="select-all"
                           onClick={[Function]}
                         >
-                          <InlineCheckbox
-                            ariaLabel="Select all rows"
+                          <input
                             checked={false}
+                            className="bx--checkbox"
                             id="data-table-6__select-all"
-                            indeterminate={false}
-                            innerRef={null}
                             name="select-all"
                             onChange={[Function]}
                             onClick={[Function]}
-                          >
-                            <input
-                              checked={false}
-                              className="bx--checkbox"
-                              id="data-table-6__select-all"
-                              name="select-all"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select all rows"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-6__select-all"
-                            />
-                          </InlineCheckbox>
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select all rows"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-6__select-all"
+                            onClick={[Function]}
+                          />
                         </ForwardRef(InlineCheckbox)>
                       </th>
                     </TableSelectAll>
@@ -1481,32 +1461,22 @@ exports[`DataTable selection should render 1`] = `
                           name="select-row-b"
                           onClick={[Function]}
                         >
-                          <InlineCheckbox
-                            ariaLabel="Select row"
+                          <input
                             checked={false}
+                            className="bx--checkbox"
                             disabled={false}
                             id="data-table-6__select-row-b"
-                            innerRef={null}
                             name="select-row-b"
                             onChange={[Function]}
                             onClick={[Function]}
-                          >
-                            <input
-                              checked={false}
-                              className="bx--checkbox"
-                              disabled={false}
-                              id="data-table-6__select-row-b"
-                              name="select-row-b"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select row"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-6__select-row-b"
-                            />
-                          </InlineCheckbox>
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select row"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-6__select-row-b"
+                            onClick={[Function]}
+                          />
                         </ForwardRef(InlineCheckbox)>
                       </td>
                     </TableSelectRow>
@@ -1550,32 +1520,22 @@ exports[`DataTable selection should render 1`] = `
                           name="select-row-a"
                           onClick={[Function]}
                         >
-                          <InlineCheckbox
-                            ariaLabel="Select row"
+                          <input
                             checked={false}
+                            className="bx--checkbox"
                             disabled={false}
                             id="data-table-6__select-row-a"
-                            innerRef={null}
                             name="select-row-a"
                             onChange={[Function]}
                             onClick={[Function]}
-                          >
-                            <input
-                              checked={false}
-                              className="bx--checkbox"
-                              disabled={false}
-                              id="data-table-6__select-row-a"
-                              name="select-row-a"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select row"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-6__select-row-a"
-                            />
-                          </InlineCheckbox>
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select row"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-6__select-row-a"
+                            onClick={[Function]}
+                          />
                         </ForwardRef(InlineCheckbox)>
                       </td>
                     </TableSelectRow>
@@ -1619,32 +1579,22 @@ exports[`DataTable selection should render 1`] = `
                           name="select-row-c"
                           onClick={[Function]}
                         >
-                          <InlineCheckbox
-                            ariaLabel="Select row"
+                          <input
                             checked={false}
+                            className="bx--checkbox"
                             disabled={false}
                             id="data-table-6__select-row-c"
-                            innerRef={null}
                             name="select-row-c"
                             onChange={[Function]}
                             onClick={[Function]}
-                          >
-                            <input
-                              checked={false}
-                              className="bx--checkbox"
-                              disabled={false}
-                              id="data-table-6__select-row-c"
-                              name="select-row-c"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select row"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-6__select-row-c"
-                            />
-                          </InlineCheckbox>
+                            type="checkbox"
+                          />
+                          <label
+                            aria-label="Select row"
+                            className="bx--checkbox-label"
+                            htmlFor="data-table-6__select-row-c"
+                            onClick={[Function]}
+                          />
                         </ForwardRef(InlineCheckbox)>
                       </td>
                     </TableSelectRow>
@@ -2044,9 +1994,15 @@ exports[`DataTable should render 1`] = `
                 <p
                   className="bx--batch-summary__para"
                 >
-                  <span>
-                    0 items selected
-                  </span>
+                  <Text
+                    as="span"
+                  >
+                    <span
+                      dir="auto"
+                    >
+                      0 items selected
+                    </span>
+                  </Text>
                 </p>
               </div>
               <TableActionList>
@@ -3103,9 +3059,15 @@ exports[`DataTable sticky header should render 1`] = `
                 <p
                   className="bx--batch-summary__para"
                 >
-                  <span>
-                    0 items selected
-                  </span>
+                  <Text
+                    as="span"
+                  >
+                    <span
+                      dir="auto"
+                    >
+                      0 items selected
+                    </span>
+                  </Text>
                 </p>
               </div>
               <TableActionList>

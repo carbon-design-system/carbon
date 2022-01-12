@@ -822,10 +822,47 @@
       ]
     },
     {
+      "login": "imp-dance",
+      "name": "Håkon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1190770?v=4",
+      "profile": "https://haakon.dev/",
+      "contributions": [
+        "code"
+      ]
+     },
+     {
       "login": "TannerS",
       "name": "Tanner Summers",
       "avatar_url": "https://avatars.githubusercontent.com/u/8866319?v=4",
       "profile": "https://github.com/TannerS",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "motou",
+      "name": "Zhen Wang",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1215956?v=4",
+      "profile": "https://github.com/motou",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "Kman316",
+      "name": "Cathal Kenneally",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25666525?v=4",
+      "profile": "https://github.com/Kman316",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "dezkareid",
+      "name": "Joel Humberto Gómez Paredes",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1269896?v=4",
+      "profile": "https://github.com/dezkareid",
       "contributions": [
         "code"
       ]
