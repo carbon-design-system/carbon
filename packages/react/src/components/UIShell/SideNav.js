@@ -121,8 +121,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
 
-  const isCollapsedWidth = useMatchMedia(`(max-width: 1055px)`);
-  const ariaHidden = expanded === false && isCollapsedWidth;
+  const isSideNavCollapsed = useMatchMedia(`(max-width: 1055px)`);
+  const ariaHidden = expanded === false && isSideNavCollapsed;
 
   return (
     <>

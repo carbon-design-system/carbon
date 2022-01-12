@@ -11,8 +11,8 @@ import { canUseDOM } from './environment';
 export function useMatchMedia(mediaQueryString) {
   const [matches, setMatches] = useState(() => {
     if (canUseDOM) {
-      const mql = window.matchMedia(mediaQueryString);
-      return mql.matches;
+      const mediaQueryList = window.matchMedia(mediaQueryString);
+      return mediaQueryList.matches;
     }
     return false;
   });
