@@ -15,11 +15,15 @@ import Dropdown from '../Dropdown';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../Switch';
 import { Heading } from '../Heading';
+import mdx from './Text.mdx';
 
 export default {
   title: 'Experimental/unstable_Text',
   parameters: {
     component: Text,
+    docs: {
+      page: mdx,
+    },
   },
 };
 
@@ -94,7 +98,7 @@ export const SetTextDirection = () => {
   );
 };
 
-export const ComponentExamples = () => {
+export const UsageExamples = () => {
   const rtlText = 'שלום!!';
   const dropdownItems = [
     {
@@ -108,7 +112,9 @@ export const ComponentExamples = () => {
   ];
   return (
     <>
-      <Heading>{rtlText}</Heading>
+      <Heading>
+        <Text>{rtlText}</Text>
+      </Heading>
       <Button kind="ghost">
         <Text>{rtlText}</Text>
       </Button>

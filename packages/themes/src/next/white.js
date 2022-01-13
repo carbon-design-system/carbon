@@ -38,7 +38,7 @@ import {
   white,
   whiteHover,
 } from '@carbon/colors';
-import { adjustLightness } from '../tools';
+import { adjustLightness, adjustAlpha } from '../tools';
 
 // Background
 export const background = white;
@@ -136,18 +136,18 @@ export const borderInverse = gray100;
 export const borderInteractive = blue60;
 
 // border
-export const borderDisabled = gray10;
+export const borderDisabled = gray30;
 
 // Text
 export const textPrimary = gray100;
 export const textSecondary = gray70;
-export const textPlaceholder = gray40;
+export const textPlaceholder = adjustAlpha(textPrimary, 0.4);
 export const textHelper = gray60;
 export const textError = red60;
 export const textInverse = white;
 export const textOnColor = white;
 export const textOnColorDisabled = gray50;
-export const textDisabled = gray30;
+export const textDisabled = adjustAlpha(textPrimary, 0.25);
 
 // Link
 export const linkPrimary = blue60;

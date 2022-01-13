@@ -63,7 +63,6 @@ export const skeleton = () => <BreadcrumbSkeleton />;
 const props = () => ({
   className: 'some-class',
   noTrailingSlash: boolean('No trailing slash (noTrailingSlash)', false),
-  isCurrentPage: boolean('Is current page (isCurrentPage)', false),
   onClick: action('onClick'),
 });
 
@@ -73,7 +72,10 @@ export const playground = () => (
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem href="#" {...props()}>
+    <BreadcrumbItem
+      href="#"
+      {...props()}
+      isCurrentPage={boolean('Is current page (isCurrentPage)', false)}>
       Breadcrumb 3
     </BreadcrumbItem>
     <BreadcrumbItem>Breadcrumb 4</BreadcrumbItem>

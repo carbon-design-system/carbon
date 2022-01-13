@@ -37,6 +37,10 @@ async function build() {
       },
       {
         type: 'file',
+        filepath: '_layer.scss',
+      },
+      {
+        type: 'file',
         filepath: '_motion.scss',
       },
       {
@@ -62,6 +66,20 @@ async function build() {
       {
         type: 'file',
         filepath: '_zone.scss',
+      },
+      {
+        type: 'directory',
+        filepath: 'compat',
+        files: [
+          {
+            type: 'file',
+            filepath: '_theme.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_themes.scss',
+          },
+        ],
       },
       {
         type: 'directory',
@@ -491,15 +509,43 @@ async function build() {
       },
       {
         type: 'directory',
-        filepath: 'compat',
+        filepath: 'fonts',
         files: [
           {
             type: 'file',
-            filepath: '_theme.scss',
+            filepath: '_index.scss',
           },
           {
             type: 'file',
-            filepath: '_themes.scss',
+            filepath: '_mono.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-arabic.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-devanagari.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-hebrew.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-thai-looped.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-thai.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_serif.scss',
           },
         ],
       },
