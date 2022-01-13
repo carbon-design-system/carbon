@@ -71,6 +71,10 @@ const directions = {
 };
 
 const props = () => ({
+  enableSelectionLabel: boolean(
+    'Show selection in place of label (enableSelectionLabel)',
+    false
+  ),
   id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   titleText: text('Title (titleText)', 'Multiselect title'),
   hideLabel: boolean('No title text shown (hideLabel)', false),

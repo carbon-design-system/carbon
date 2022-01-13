@@ -39,6 +39,7 @@ const {
 const MultiSelect = React.forwardRef(function MultiSelect(
   {
     className: containerClassName,
+    enableSelectionLabel,
     id,
     items,
     itemToElement,
@@ -272,7 +273,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             />
           )}
           <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
-            {label}
+            {itemToString && enableSelectionLabel && selectedItems.length > 0
+              ? selectedItems.map((item) => itemToString(item)).join(', ')
+              : label}
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
@@ -353,6 +356,11 @@ MultiSelect.propTypes = {
    * Additional props passed to Downshift
    */
   downshiftProps: PropTypes.shape(Downshift.propTypes),
+
+  /**
+   * Enable selection to display in place of label
+   */
+  enableSelectionLabel: PropTypes.bool,
 
   /**
    * Specify whether the title text should be hidden or not

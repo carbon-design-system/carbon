@@ -4387,6 +4387,9 @@ Map {
         ],
         "type": "shape",
       },
+      "enableSelectionLabel": Object {
+        "type": "bool",
+      },
       "hideLabel": Object {
         "type": "bool",
       },
