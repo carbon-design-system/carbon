@@ -11,20 +11,20 @@ class DataTableDemoExpandRowAllManager extends mixin(
   handles
 ) {
   /**
-   * The row expando handler for data table "expand all" feature demo.
+   * The row expand handler for data table "expand all" feature demo.
    * @extends CreateComponent
    * @extends InitComponentByEvent
    * @extends Handles
    * @param {HTMLElement} element The element working as the button for data table "expand all" feature demo.
    * @param {Object} [options] The component options.
-   * @param {string} [options.selectorExpandHeader] The CSS selector to find the header expando button.
-   * @param {string} [options.selectorExpandCells] The CSS selector to find the row expando button.
+   * @param {string} [options.selectorExpandHeader] The CSS selector to find the header expand button.
+   * @param {string} [options.selectorExpandCells] The CSS selector to find the row expand button.
    * @param {string} [options.selectorExpandCellsExpanded]
-   *   The CSS selector to find the row expando button with its expanded state.
+   *   The CSS selector to find the row expand button with its expanded state.
    */
   constructor(element, options) {
     super(element, options);
-    this.manage(on(element, 'click', this._handleClickRowExpando));
+    this.manage(on(element, 'click', this._handleClickRowExpand));
   }
 
   /**
@@ -32,14 +32,14 @@ class DataTableDemoExpandRowAllManager extends mixin(
    * @param {Event} event The event triggering the creation.
    */
   createdByEvent(event) {
-    this._handleClickRowExpando(event);
+    this._handleClickRowExpand(event);
   }
 
   /**
    * Handles `click` event on the row expand button.
    * @private
    */
-  _handleClickRowExpando = () => {
+  _handleClickRowExpand = () => {
     if (
       this.element.querySelectorAll(this.options.selectorExpandCells).length ===
       this.element.querySelectorAll(this.options.selectorExpandCellsExpanded)
@@ -66,10 +66,10 @@ class DataTableDemoExpandRowAllManager extends mixin(
    * and how {@linkcode DataTableDemoExpandRowAllManager.init .init()} works.
    * @member DataTableDemoExpandRowAllManager.options
    * @type {Object}
-   * @property {string} selectorInit The CSS selector to find the row expando handler for data table "expand all" feature demo.
-   * @property {string} [selectorExpandHeader] The CSS selector to find the header expando button.
-   * @property {string} [selectorExpandCells] The CSS selector to find the row expando button.
-   * @property {string} [selectorExpandCellsExpanded] The CSS selector to find the row expando button with its expanded state.
+   * @property {string} selectorInit The CSS selector to find the row expand handler for data table "expand all" feature demo.
+   * @property {string} [selectorExpandHeader] The CSS selector to find the header expand button.
+   * @property {string} [selectorExpandCells] The CSS selector to find the row expand button.
+   * @property {string} [selectorExpandCellsExpanded] The CSS selector to find the row expand button with its expanded state.
    * @property {string[]} initEventNames The event names that instantiates this component.
    */
   static get options() {
