@@ -6,15 +6,13 @@
  */
 
 import React, { useState, useRef } from 'react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
+import { usePrefix } from '../../internal/usePrefix';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
-
-const { prefix } = settings;
 
 const SideNav = React.forwardRef(function SideNav(props, ref) {
   const {
@@ -37,6 +35,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     ...other
   } = props;
 
+  const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
   const [expandedViaHoverState, setExpandedViaHoverState] = useState(
@@ -91,7 +90,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         : expanded;
       // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
       return React.cloneElement(child, {
-        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
+        ...(CARBON_SIDENAV_ITEMS.includes(
+          child.type?.displayName ?? child.type?.name
+        )
           ? {
               isSideNavExpanded: currentExpansionState,
             }
@@ -139,6 +140,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   );
 });
 
+SideNav.displayName = 'SideNav';
 SideNav.defaultProps = {
   // TO-DO: comment back in when footer is added for rails
   // translateById: (id) => {

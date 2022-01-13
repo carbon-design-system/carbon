@@ -1,9 +1,10 @@
 {
-  "componentFolder": "src",
+  "component": {
+    "componentFolder": "src",
+    "testFiles": "components/**/*-test.e2e.js"
+  },
   "env": {
     "coverage": false
   },
-  "fixturesFolder": false,
-  "nodeVersion": "system",
-  "testFiles": "**/*-test.e2e.js"
+  "fixturesFolder": false
 }

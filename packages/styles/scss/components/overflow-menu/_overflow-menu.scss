@@ -8,7 +8,7 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../button/tokens' as button;
 @use '../../utilities/box-shadow' as *;
@@ -16,6 +16,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/z-index' as *;
 
 /// Overflow menu styles
 /// @access public
@@ -230,7 +231,7 @@
   }
 
   .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
-    border-top: 1px solid $decorative-01;
+    border-top: 1px solid $border-subtle-02;
   }
 
   a.#{$prefix}--overflow-menu-options__btn::before {
@@ -252,7 +253,7 @@
     padding: 0 $spacing-05;
     border: none;
     background-color: transparent;
-    color: $text-02;
+    color: $text-secondary;
     cursor: pointer;
     font-family: inherit;
     font-weight: 400;
@@ -262,7 +263,7 @@
       color $duration-fast-02 motion(entrance, productive);
 
     &:hover {
-      color: $text-01;
+      color: $text-primary;
     }
 
     &:focus {

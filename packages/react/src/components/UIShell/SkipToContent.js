@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SkipToContent = ({
   children,
@@ -19,6 +17,7 @@ const SkipToContent = ({
   tabIndex,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--skip-to-content`, customClassName);
   return (
     <a {...rest} className={className} href={href} tabIndex={tabIndex}>

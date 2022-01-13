@@ -153,6 +153,7 @@ const ControlledPasswordInput = React.forwardRef(
   }
 );
 
+ControlledPasswordInput.displayName = 'ControlledPasswordInput';
 ControlledPasswordInput.propTypes = {
   /**
    * Provide a custom className that is applied directly to the underlying
@@ -207,7 +208,8 @@ ControlledPasswordInput.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * Specify light version or default version of this control
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,
 

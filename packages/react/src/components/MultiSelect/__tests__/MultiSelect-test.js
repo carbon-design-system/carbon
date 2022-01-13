@@ -311,6 +311,38 @@ describe('MultiSelect', () => {
       expect(getByText(container, 'marky')).toBeTruthy();
     });
 
+    it('should support a custom itemToElement', () => {
+      const items = [{ text: 'test-item' }];
+      const label = 'test-label';
+      const { container } = render(
+        <MultiSelect
+          id="custom-id"
+          label={label}
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          itemToElement={(item) =>
+            item ? (
+              <span className="test-element">
+                {item.text}{' '}
+                <span role="img" alt="fire">
+                  {' '}
+                  🔥
+                </span>
+              </span>
+            ) : (
+              ''
+            )
+          }
+        />
+      );
+
+      const labelNode = getByText(container, label);
+      Simulate.click(labelNode);
+
+      expect(document.querySelector('.test-element')).toBeTruthy();
+      expect(document.querySelector('span[role="img"]')).toBeTruthy();
+    });
+
     it('should support custom translation with translateWithId', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';

@@ -5,16 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import * as FeatureFlags from '@carbon/feature-flags';
 import React from 'react';
 import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
 import { ButtonKinds } from '../../prop-types/types';
 import { keys, matches } from '../../internal/keyboard';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class FileUploader extends React.Component {
   static propTypes = {
@@ -48,7 +47,9 @@ export default class FileUploader extends React.Component {
     /**
      * Provide a description for the complete/close icon that can be read by screen readers
      */
-    iconDescription: PropTypes.string,
+    iconDescription: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.string.isRequired
+      : PropTypes.string,
 
     /**
      * Specify the description text of this <FileUploader>
@@ -96,8 +97,12 @@ export default class FileUploader extends React.Component {
     size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
-    iconDescription: 'Provide icon description',
+    iconDescription: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'Provide icon description',
     filenameStatus: 'uploading',
     buttonLabel: '',
     buttonKind: 'primary',
@@ -174,6 +179,8 @@ export default class FileUploader extends React.Component {
       ...other
     } = this.props;
 
+    const prefix = this.context;
+
     const classes = classNames({
       [`${prefix}--form-item`]: true,
       [className]: className,
@@ -186,7 +193,9 @@ export default class FileUploader extends React.Component {
 
     return (
       <div className={classes} {...other}>
-        <p className={`${prefix}--file--label`}>{labelTitle}</p>
+        {FeatureFlags.enabled('enable-v11-release') && !labelTitle ? null : (
+          <p className={`${prefix}--file--label`}>{labelTitle}</p>
+        )}
         <p className={`${prefix}--label-description`}>{labelDescription}</p>
         <FileUploaderButton
           labelText={buttonLabel}

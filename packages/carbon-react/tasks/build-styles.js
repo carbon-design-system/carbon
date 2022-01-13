@@ -37,6 +37,10 @@ async function build() {
       },
       {
         type: 'file',
+        filepath: '_layer.scss',
+      },
+      {
+        type: 'file',
         filepath: '_motion.scss',
       },
       {
@@ -62,6 +66,20 @@ async function build() {
       {
         type: 'file',
         filepath: '_zone.scss',
+      },
+      {
+        type: 'directory',
+        filepath: 'compat',
+        files: [
+          {
+            type: 'file',
+            filepath: '_theme.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_themes.scss',
+          },
+        ],
       },
       {
         type: 'directory',
@@ -119,6 +137,16 @@ async function build() {
           },
           {
             type: 'directory',
+            filepath: 'combo-box',
+            files: [
+              {
+                type: 'file',
+                filepath: '_index.scss',
+              },
+            ],
+          },
+          {
+            type: 'directory',
             filepath: 'content-switcher',
             files: [
               {
@@ -150,6 +178,16 @@ async function build() {
           {
             type: 'directory',
             filepath: 'date-picker',
+            files: [
+              {
+                type: 'file',
+                filepath: '_index.scss',
+              },
+            ],
+          },
+          {
+            type: 'directory',
+            filepath: 'dropdown',
             files: [
               {
                 type: 'file',
@@ -230,6 +268,16 @@ async function build() {
           {
             type: 'directory',
             filepath: 'modal',
+            files: [
+              {
+                type: 'file',
+                filepath: '_index.scss',
+              },
+            ],
+          },
+          {
+            type: 'directory',
+            filepath: 'multiselect',
             files: [
               {
                 type: 'file',
@@ -330,6 +378,16 @@ async function build() {
           {
             type: 'directory',
             filepath: 'slider',
+            files: [
+              {
+                type: 'file',
+                filepath: '_index.scss',
+              },
+            ],
+          },
+          {
+            type: 'directory',
+            filepath: 'stack',
             files: [
               {
                 type: 'file',
@@ -446,6 +504,48 @@ async function build() {
                 filepath: '_index.scss',
               },
             ],
+          },
+        ],
+      },
+      {
+        type: 'directory',
+        filepath: 'fonts',
+        files: [
+          {
+            type: 'file',
+            filepath: '_index.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_mono.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-arabic.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-devanagari.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-hebrew.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-thai-looped.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans-thai.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_sans.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_serif.scss',
           },
         ],
       },

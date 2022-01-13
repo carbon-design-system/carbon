@@ -10,6 +10,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { Add16, Subtract16 } from '@carbon/icons-react';
+import * as FeatureFlags from '@carbon/feature-flags';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 // replace "use" prefix to avoid react thinking this is a hook that
@@ -17,6 +18,7 @@ import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useNormalizedInputProps as getNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -189,10 +191,14 @@ class NumberInput extends Component {
   static defaultProps = {
     disabled: false,
     hideLabel: false,
-    iconDescription: 'choose a number',
+    iconDescription: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'choose a number',
     step: 1,
     invalid: false,
-    invalidText: 'Provide invalidText',
+    invalidText: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'Provide invalidText',
     warn: false,
     warnText: '',
     ariaLabel: 'Numeric input field with increment and decrement buttons',
@@ -201,6 +207,8 @@ class NumberInput extends Component {
     allowEmpty: false,
     translateWithId: (id) => defaultTranslations[id],
   };
+
+  static contextType = FeatureFlagContext;
 
   static getDerivedStateFromProps({ value }, state) {
     const { prevValue } = state;
@@ -346,9 +354,16 @@ class NumberInput extends Component {
       ...other
     } = this.props;
 
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const numberInputClasses = classNames(
       `${prefix}--number ${prefix}--number--helpertext`,
-      className,
+      [enabled ? null : className],
       {
         [`${prefix}--number--readonly`]: readOnly,
         [`${prefix}--number--light`]: light,
@@ -458,7 +473,12 @@ class NumberInput extends Component {
     }
 
     return (
-      <div className={`${prefix}--form-item`}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
         <div className={numberInputClasses} {...inputWrapperProps}>
           {(() => {
             return (

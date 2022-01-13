@@ -8,11 +8,9 @@
 import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { keys, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function FileUploaderDropContainer({
   accept,
@@ -23,10 +21,12 @@ function FileUploaderDropContainer({
   multiple,
   name,
   onAddFiles,
+  pattern,
   role,
   tabIndex,
   ...rest
 }) {
+  const prefix = usePrefix();
   const inputRef = useRef(null);
   const { current: uid } = useRef(id || uniqueId());
   const [isActive, setActive] = useState(false);
@@ -53,7 +53,7 @@ function FileUploaderDropContainer({
     const acceptedTypes = new Set(accept);
     return transferredFiles.reduce((acc, curr) => {
       const { name, type: mimeType = '' } = curr;
-      const fileExtensionRegExp = new RegExp(/\.[0-9a-z]+$/, 'i');
+      const fileExtensionRegExp = new RegExp(pattern, 'i');
       const hasFileExtension = fileExtensionRegExp.test(name);
       if (!hasFileExtension) {
         return acc;
@@ -180,6 +180,11 @@ FileUploaderDropContainer.propTypes = {
   onAddFiles: PropTypes.func,
 
   /**
+   * Provide a custom regex pattern for the acceptedTypes
+   */
+  pattern: PropTypes.string,
+
+  /**
    * Provide an accessibility role for the <FileUploaderButton>
    */
   role: PropTypes.string,
@@ -203,6 +208,7 @@ FileUploaderDropContainer.defaultProps = {
   multiple: false,
   onAddFiles: () => {},
   accept: [],
+  pattern: '.[0-9a-z]+$',
 };
 
 export default FileUploaderDropContainer;

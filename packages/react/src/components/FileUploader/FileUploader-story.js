@@ -140,7 +140,11 @@ const props = {
     disabled: boolean('Disabled (disabled)', false),
     role: text('ARIA role of the button (role)', ''),
     tabIndex: number('Tab index (tabIndex)', 0),
-    onChange: action('onChange'),
+    pattern: text(
+      'Accepted MIME types or file extensions regex pattern (pattern)',
+      undefined
+    ),
+    onAddFiles: action('onAddFiles'),
   }),
 };
 

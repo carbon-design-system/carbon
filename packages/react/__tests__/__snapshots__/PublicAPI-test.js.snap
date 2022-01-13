@@ -59,13 +59,46 @@ Map {
       "open": Object {
         "type": "bool",
       },
-      "renderExpando": Object {
+      "renderExpando": [Function],
+      "renderToggle": Object {
         "type": "func",
       },
       "title": Object {
         "type": "node",
       },
     },
+  },
+  "AccordionSkeleton" => Object {
+    "defaultProps": Object {
+      "align": "end",
+      "count": 4,
+      "open": true,
+    },
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "start",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "count": Object {
+        "type": "number",
+      },
+      "open": Object {
+        "type": "bool",
+      },
+      "uid": [Function],
+    },
+  },
+  "ActionableNotification" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "AspectRatio" => Object {
     "propTypes": Object {
@@ -96,7 +129,6 @@ Map {
   },
   "Breadcrumb" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "Breadcrumb",
     "propTypes": Object {
       "aria-label": Object {
         "type": "string",
@@ -115,7 +147,6 @@ Map {
   },
   "BreadcrumbItem" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "BreadcrumbItem",
     "propTypes": Object {
       "aria-current": Object {
         "args": Array [
@@ -145,6 +176,13 @@ Map {
     },
     "render": [Function],
   },
+  "BreadcrumbSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
@@ -158,7 +196,6 @@ Map {
       "tooltipPosition": "top",
       "type": "button",
     },
-    "displayName": "Button",
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -303,7 +340,6 @@ Map {
   },
   "ButtonSet" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "ButtonSet",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -317,13 +353,43 @@ Map {
     },
     "render": [Function],
   },
+  "ButtonSkeleton" => Object {
+    "defaultProps": Object {
+      "small": false,
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "href": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "default",
+            "field",
+            "small",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+            "2xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "small": Object {
+        "type": "bool",
+      },
+    },
+  },
   "Checkbox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "indeterminate": false,
       "onChange": [Function],
     },
-    "displayName": "Checkbox",
     "propTypes": Object {
       "checked": Object {
         "type": "bool",
@@ -357,11 +423,52 @@ Map {
       "title": Object {
         "type": "string",
       },
-      "wrapperClassName": Object {
+      "wrapperClassName": [Function],
+    },
+    "render": [Function],
+  },
+  "CheckboxSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
         "type": "string",
       },
     },
-    "render": [Function],
+  },
+  "ClickableTile" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
+    "defaultProps": Object {
+      "clicked": false,
+      "light": false,
+      "onClick": [Function],
+      "onKeyDown": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "handleClick": [Function],
+      "handleKeyDown": [Function],
+      "href": Object {
+        "type": "string",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "rel": Object {
+        "type": "string",
+      },
+    },
   },
   "CodeSnippet" => Object {
     "defaultProps": Object {
@@ -375,7 +482,7 @@ Map {
         "type": "string",
       },
       "children": Object {
-        "type": "string",
+        "type": "node",
       },
       "className": Object {
         "type": "string",
@@ -384,6 +491,9 @@ Map {
         "type": "string",
       },
       "copyLabel": Object {
+        "type": "string",
+      },
+      "copyText": Object {
         "type": "string",
       },
       "disabled": Object {
@@ -434,6 +544,175 @@ Map {
       },
       "wrapText": Object {
         "type": "bool",
+      },
+    },
+  },
+  "CodeSnippetSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "single",
+            "multi",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
+  "Column" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "lg": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "offset": Object {
+                    "type": "number",
+                  },
+                  "span": Object {
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "max": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "offset": Object {
+                    "type": "number",
+                  },
+                  "span": Object {
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "md": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "offset": Object {
+                    "type": "number",
+                  },
+                  "span": Object {
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "sm": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "offset": Object {
+                    "type": "number",
+                  },
+                  "span": Object {
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "xlg": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "offset": Object {
+                    "type": "number",
+                  },
+                  "span": Object {
+                    "type": "number",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
     },
   },
@@ -701,6 +980,9 @@ Map {
     "render": [Function],
   },
   "ComposedModal" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "onKeyDown": [Function],
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
@@ -740,7 +1022,12 @@ Map {
         "type": "string",
       },
       "selectorsFloatingMenus": Object {
-        "type": "string",
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "type": "arrayOf",
       },
       "size": Object {
         "args": Array [
@@ -755,68 +1042,9 @@ Map {
       },
     },
   },
-  "ModalHeader" => Object {
+  "Content" => Object {
     "defaultProps": Object {
-      "buttonOnClick": [Function],
-      "iconDescription": "Close",
-    },
-    "propTypes": Object {
-      "buttonOnClick": Object {
-        "type": "func",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "closeClassName": Object {
-        "type": "string",
-      },
-      "closeIconClassName": Object {
-        "type": "string",
-      },
-      "closeModal": Object {
-        "type": "func",
-      },
-      "iconDescription": Object {
-        "type": "string",
-      },
-      "label": Object {
-        "type": "node",
-      },
-      "labelClassName": Object {
-        "type": "string",
-      },
-      "title": Object {
-        "type": "node",
-      },
-      "titleClassName": Object {
-        "type": "string",
-      },
-    },
-  },
-  "ModalBody" => Object {
-    "propTypes": Object {
-      "aria-label": [Function],
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "hasForm": Object {
-        "type": "bool",
-      },
-      "hasScrollingContent": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "ModalFooter" => Object {
-    "defaultProps": Object {
-      "onRequestClose": [Function],
-      "onRequestSubmit": [Function],
+      "tagName": "main",
     },
     "propTypes": Object {
       "children": Object {
@@ -825,57 +1053,15 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "closeModal": Object {
-        "type": "func",
-      },
-      "danger": Object {
-        "type": "bool",
-      },
-      "inputref": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "current": Object {
-                    "type": "any",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "onRequestClose": Object {
-        "type": "func",
-      },
-      "onRequestSubmit": Object {
-        "type": "func",
-      },
-      "primaryButtonDisabled": Object {
-        "type": "bool",
-      },
-      "primaryButtonText": Object {
-        "type": "string",
-      },
-      "primaryClassName": Object {
-        "type": "string",
-      },
-      "secondaryButtonText": Object {
-        "type": "string",
-      },
-      "secondaryButtons": [Function],
-      "secondaryClassName": Object {
+      "tagName": Object {
         "type": "string",
       },
     },
   },
   "ContentSwitcher" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "onChange": [Function],
       "selectedIndex": 0,
@@ -917,6 +1103,117 @@ Map {
         "type": "oneOf",
       },
     },
+  },
+  "ControlledPasswordInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "className": "\${prefix}--text__input",
+      "disabled": false,
+      "helperText": "",
+      "invalid": false,
+      "invalidText": "",
+      "light": false,
+      "onChange": [Function],
+      "onClick": [Function],
+      "size": "",
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "hidePasswordLabel": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+      "showPasswordLabel": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "type": "string",
+      },
+      "tooltipAlignment": Object {
+        "args": Array [
+          Array [
+            "start",
+            "center",
+            "end",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tooltipPosition": Object {
+        "args": Array [
+          Array [
+            "top",
+            "right",
+            "bottom",
+            "left",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+    "render": [Function],
   },
   "Copy" => Object {
     "defaultProps": Object {
@@ -1133,25 +1430,53 @@ Map {
         "title": Object {
           "type": "node",
         },
+        "useStaticWidth": Object {
+          "type": "bool",
+        },
       },
     },
     "TableExpandHeader": Object {
       "propTypes": Object {
-        "ariaLabel": [Function],
+        "ariaLabel": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
         "children": Object {
           "type": "node",
         },
         "className": Object {
           "type": "string",
         },
-        "enableExpando": Object {
+        "enableExpando": [Function],
+        "enableToggle": Object {
           "type": "bool",
         },
         "expandIconDescription": Object {
           "type": "string",
         },
-        "isExpanded": [Function],
-        "onExpand": [Function],
+        "isExpanded": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
+        "onExpand": Object {
+          "args": Array [
+            Array [
+              [Function],
+              [Function],
+            ],
+          ],
+          "type": "oneOfType",
+        },
       },
     },
     "TableExpandRow": Object {
@@ -1217,7 +1542,6 @@ Map {
         "scope": "col",
         "translateWithId": [Function],
       },
-      "displayName": "TableHeader",
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -1227,6 +1551,9 @@ Map {
         },
         "colSpan": Object {
           "type": "number",
+        },
+        "id": Object {
+          "type": "string",
         },
         "isSortHeader": Object {
           "type": "bool",
@@ -1367,7 +1694,6 @@ Map {
     },
     "TableToolbarAction": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "displayName": "TableToolbarAction",
       "propTypes": Object {
         "children": Object {
           "type": "node",
@@ -1427,6 +1753,7 @@ Map {
     },
     "TableToolbarSearch": Object {
       "defaultProps": Object {
+        "onClear": [Function],
         "persistent": false,
         "tabIndex": "0",
         "translateWithId": [Function],
@@ -1456,10 +1783,19 @@ Map {
         "labelText": Object {
           "type": "string",
         },
+        "onBlur": Object {
+          "type": "func",
+        },
         "onChange": Object {
           "type": "func",
         },
+        "onClear": Object {
+          "type": "func",
+        },
         "onExpand": Object {
+          "type": "func",
+        },
+        "onFocus": Object {
           "type": "func",
         },
         "persistant": [Function],
@@ -1609,527 +1945,63 @@ Map {
       "carbon.table.row.unselect",
     ],
   },
-  "Table" => Object {
+  "DataTableSkeleton" => Object {
     "defaultProps": Object {
-      "isSortable": false,
-      "overflowMenuOnHover": true,
+      "columnCount": 5,
+      "compact": false,
+      "rowCount": 5,
+      "showHeader": true,
+      "showToolbar": true,
+      "zebra": false,
     },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "isSortable": Object {
-        "type": "bool",
-      },
-      "overflowMenuOnHover": Object {
-        "type": "bool",
-      },
-      "shouldShowBorder": [Function],
-      "size": Object {
-        "args": Array [
-          Array [
-            "compact",
-            "short",
-            "normal",
-            "tall",
-            "xs",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "stickyHeader": Object {
-        "type": "bool",
-      },
-      "useStaticWidth": Object {
-        "type": "bool",
-      },
-      "useZebraStyles": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "TableActionList" => Object {
-    "displayName": "TableActionList",
     "propTypes": Object {
       "className": Object {
         "type": "string",
       },
-    },
-  },
-  "TableBatchAction" => Object {
-    "defaultProps": Object {
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "render": [Function],
+      "columnCount": Object {
+        "type": "number",
       },
-    },
-    "propTypes": Object {
-      "hasIconOnly": Object {
+      "compact": Object {
         "type": "bool",
       },
-      "iconDescription": [Function],
-      "renderIcon": Object {
+      "headers": Object {
         "args": Array [
           Array [
             Object {
-              "type": "func",
+              "type": "array",
             },
             Object {
-              "type": "object",
+              "args": Array [
+                Object {
+                  "key": Object {
+                    "type": "string",
+                  },
+                },
+              ],
+              "type": "shape",
             },
           ],
         ],
         "type": "oneOfType",
       },
-    },
-  },
-  "TableBatchActions" => Object {
-    "defaultProps": Object {
-      "translateWithId": [Function],
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "onCancel": Object {
-        "isRequired": true,
-        "type": "func",
-      },
-      "shouldShowBatchActions": Object {
-        "type": "bool",
-      },
-      "totalSelected": Object {
-        "isRequired": true,
+      "rowCount": Object {
         "type": "number",
       },
-      "translateWithId": Object {
-        "type": "func",
-      },
-    },
-    "translationKeys": Array [
-      "carbon.table.batch.cancel",
-      "carbon.table.batch.items.selected",
-      "carbon.table.batch.item.selected",
-    ],
-  },
-  "TableBody" => Object {
-    "defaultProps": Object {
-      "aria-live": "polite",
-    },
-    "propTypes": Object {
-      "aria-live": Object {
-        "args": Array [
-          Array [
-            "polite",
-            "assertive",
-            "off",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "TableCell" => Object {
-    "displayName": "TableCell",
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "TableContainer" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "description": Object {
-        "type": "node",
-      },
-      "stickyHeader": Object {
+      "showHeader": Object {
         "type": "bool",
       },
-      "title": Object {
-        "type": "node",
-      },
-    },
-  },
-  "TableExpandHeader" => Object {
-    "propTypes": Object {
-      "ariaLabel": [Function],
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "enableExpando": Object {
+      "showToolbar": Object {
         "type": "bool",
       },
-      "expandIconDescription": Object {
-        "type": "string",
-      },
-      "isExpanded": [Function],
-      "onExpand": [Function],
-    },
-  },
-  "TableExpandRow" => Object {
-    "defaultProps": Object {
-      "expandHeader": "expand",
-    },
-    "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "expandHeader": Object {
-        "type": "string",
-      },
-      "expandIconDescription": Object {
-        "type": "string",
-      },
-      "isExpanded": Object {
-        "isRequired": true,
+      "zebra": Object {
         "type": "bool",
-      },
-      "isSelected": Object {
-        "type": "bool",
-      },
-      "onExpand": Object {
-        "isRequired": true,
-        "type": "func",
-      },
-    },
-  },
-  "TableExpandedRow" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "colSpan": Object {
-        "isRequired": true,
-        "type": "number",
-      },
-    },
-  },
-  "TableHead" => Object {
-    "displayName": "TableHead",
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "TableHeader" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "isSortable": false,
-      "scope": "col",
-      "translateWithId": [Function],
-    },
-    "displayName": "TableHeader",
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "colSpan": Object {
-        "type": "number",
-      },
-      "isSortHeader": Object {
-        "type": "bool",
-      },
-      "isSortable": Object {
-        "type": "bool",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "scope": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "sortDirection": Object {
-        "args": Array [
-          Array [
-            "NONE",
-            "DESC",
-            "ASC",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "translateWithId": Object {
-        "type": "func",
-      },
-    },
-    "render": [Function],
-    "translationKeys": Array [
-      "carbon.table.header.icon.description",
-    ],
-  },
-  "TableRow" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "isSelected": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "TableSelectAll" => Object {
-    "defaultProps": Object {
-      "ariaLabel": "Select all rows in the table",
-    },
-    "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "checked": Object {
-        "isRequired": true,
-        "type": "bool",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "indeterminate": Object {
-        "type": "bool",
-      },
-      "name": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "onSelect": Object {
-        "isRequired": true,
-        "type": "func",
-      },
-    },
-  },
-  "TableSelectRow" => Object {
-    "propTypes": Object {
-      "ariaLabel": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "checked": Object {
-        "isRequired": true,
-        "type": "bool",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "name": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onSelect": Object {
-        "isRequired": true,
-        "type": "func",
-      },
-      "radio": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "TableToolbar" => Object {
-    "defaultProps": Object {
-      "aria-label": "data table toolbar",
-    },
-    "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "children": Object {
-        "type": "node",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "small",
-            "sm",
-            "normal",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-  },
-  "TableToolbarAction" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "TableToolbarAction",
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "onClick": Object {
-        "isRequired": true,
-        "type": "func",
-      },
-    },
-    "render": [Function],
-  },
-  "TableToolbarContent" => Object {
-    "displayName": "TableToolbarContent",
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "TableToolbarSearch" => Object {
-    "defaultProps": Object {
-      "persistent": false,
-      "tabIndex": "0",
-      "translateWithId": [Function],
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "defaultExpanded": Object {
-        "type": "bool",
-      },
-      "defaultValue": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "expanded": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onExpand": Object {
-        "type": "func",
-      },
-      "persistant": [Function],
-      "persistent": Object {
-        "type": "bool",
-      },
-      "placeHolderText": [Function],
-      "placeholder": Object {
-        "type": "string",
-      },
-      "searchContainerClass": Object {
-        "type": "string",
-      },
-      "tabIndex": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "number",
-            },
-            Object {
-              "type": "string",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "translateWithId": Object {
-        "isRequired": true,
-        "type": "func",
-      },
-    },
-  },
-  "TableToolbarMenu" => Object {
-    "defaultProps": Object {
-      "iconDescription": "Settings",
-      "renderIcon": Object {
-        "$$typeof": Symbol(react.forward_ref),
-        "render": [Function],
-      },
-    },
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "iconDescription": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
       },
     },
   },
   "DatePicker" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "dateFormat": "m/d/Y",
       "light": false,
@@ -2335,9 +2207,7 @@ Map {
       "hideLabel": Object {
         "type": "bool",
       },
-      "iconDescription": Object {
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -2358,9 +2228,7 @@ Map {
       "onClick": Object {
         "type": "func",
       },
-      "openCalendar": Object {
-        "type": "func",
-      },
+      "openCalendar": [Function],
       "pattern": [Function],
       "placeholder": Object {
         "type": "string",
@@ -2387,6 +2255,19 @@ Map {
       },
     },
   },
+  "DatePickerSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "range": Object {
+        "type": "bool",
+      },
+    },
+  },
   "Dropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
@@ -2399,7 +2280,6 @@ Map {
       "titleText": "",
       "type": "default",
     },
-    "displayName": "Dropdown",
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
@@ -2423,17 +2303,7 @@ Map {
         "type": "object",
       },
       "helperText": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "node",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "node",
       },
       "hideLabel": Object {
         "type": "bool",
@@ -2483,6 +2353,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "renderSelectedItem": Object {
         "type": "func",
       },
       "selectedItem": Object {
@@ -2536,28 +2409,28 @@ Map {
     },
     "render": [Function],
   },
+  "DropdownSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "inline": [Function],
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "ErrorBoundary" => Object {
     "contextType": Object {
       "$$typeof": Symbol(react.context),
-      "Consumer": Object {
-        "$$typeof": Symbol(react.context),
-        "_calculateChangedBits": null,
-        "_context": [Circular],
-      },
-      "Provider": Object {
-        "$$typeof": Symbol(react.provider),
-        "_context": [Circular],
-      },
-      "_calculateChangedBits": null,
-      "_currentRenderer": null,
-      "_currentRenderer2": null,
-      "_currentValue": Object {
-        "log": [Function],
-      },
-      "_currentValue2": Object {
-        "log": [Function],
-      },
-      "_threadCount": 0,
     },
     "propTypes": Object {
       "children": Object {
@@ -2573,7 +2446,158 @@ Map {
     "Consumer": "React.Consumer",
     "Provider": "React.Provider",
   },
+  "ExpandableSearch" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "closeButtonLabelText": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "placeHolderText": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "small": [Function],
+      "type": Object {
+        "type": "string",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
+  "ExpandableTile" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
+    "defaultProps": Object {
+      "expanded": false,
+      "light": false,
+      "onBeforeClick": [Function],
+      "onClick": [Function],
+      "tabIndex": 0,
+      "tileCollapsedIconText": "Interact to expand Tile",
+      "tileExpandedIconText": "Interact to collapse Tile",
+      "tileMaxHeight": 0,
+      "tilePadding": 0,
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "expanded": Object {
+        "type": "bool",
+      },
+      "handleClick": [Function],
+      "id": Object {
+        "type": "string",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "onBeforeClick": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyUp": Object {
+        "type": "func",
+      },
+      "tabIndex": Object {
+        "type": "number",
+      },
+      "tileCollapsedIconText": Object {
+        "type": "string",
+      },
+      "tileCollapsedLabel": Object {
+        "type": "string",
+      },
+      "tileExpandedIconText": Object {
+        "type": "string",
+      },
+      "tileExpandedLabel": Object {
+        "type": "string",
+      },
+    },
+  },
   "FileUploader" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "accept": Array [],
       "buttonKind": "primary",
@@ -2663,34 +2687,6 @@ Map {
       },
     },
   },
-  "Filename" => Object {
-    "defaultProps": Object {
-      "iconDescription": "Uploading file",
-      "status": "uploading",
-      "tabIndex": "0",
-    },
-    "propTypes": Object {
-      "iconDescription": Object {
-        "type": "string",
-      },
-      "invalid": Object {
-        "type": "bool",
-      },
-      "status": Object {
-        "args": Array [
-          Array [
-            "edit",
-            "complete",
-            "uploading",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "tabIndex": Object {
-        "type": "string",
-      },
-    },
-  },
   "FileUploaderButton" => Object {
     "propTypes": Object {
       "accept": Object {
@@ -2731,9 +2727,6 @@ Map {
       "labelText": Object {
         "type": "node",
       },
-      "listFiles": Object {
-        "type": "bool",
-      },
       "multiple": Object {
         "type": "bool",
       },
@@ -2773,6 +2766,7 @@ Map {
       "labelText": "Add file",
       "multiple": false,
       "onAddFiles": [Function],
+      "pattern": ".[0-9a-z]+$",
       "tabIndex": 0,
     },
     "propTypes": Object {
@@ -2805,6 +2799,9 @@ Map {
       },
       "onAddFiles": Object {
         "type": "func",
+      },
+      "pattern": Object {
+        "type": "string",
       },
       "role": Object {
         "type": "string",
@@ -2879,7 +2876,45 @@ Map {
       },
     },
   },
+  "FileUploaderSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "Filename" => Object {
+    "defaultProps": Object {
+      "iconDescription": "Uploading file",
+      "status": "uploading",
+      "tabIndex": "0",
+    },
+    "propTypes": Object {
+      "iconDescription": Object {
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "status": Object {
+        "args": Array [
+          Array [
+            "edit",
+            "complete",
+            "uploading",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tabIndex": Object {
+        "type": "string",
+      },
+    },
+  },
   "FilterableMultiSelect" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "ariaLabel": "Choose an item",
       "compareItems": [Function],
@@ -2894,7 +2929,6 @@ Map {
       "selectionFeedback": "top-after-reopen",
       "sortItems": [Function],
     },
-    "displayName": "MultiSelect.Filterable",
     "propTypes": Object {
       "ariaLabel": Object {
         "type": "string",
@@ -3038,6 +3072,9 @@ Map {
         ],
         "type": "shape",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -3050,6 +3087,9 @@ Map {
       },
       "invalidText": Object {
         "type": "node",
+      },
+      "itemToElement": Object {
+        "type": "func",
       },
       "itemToString": Object {
         "type": "func",
@@ -3116,7 +3156,7 @@ Map {
       },
     },
   },
-  "Form" => Object {
+  "FluidForm" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3126,7 +3166,7 @@ Map {
       },
     },
   },
-  "FluidForm" => Object {
+  "Form" => Object {
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3229,185 +3269,176 @@ Map {
       },
     },
   },
-  "Row" => Object {
+  "Header" => Object {
     "propTypes": Object {
-      "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "children": Object {
-        "type": "node",
-      },
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
       "className": Object {
         "type": "string",
       },
-      "condensed": Object {
-        "type": "bool",
-      },
-      "narrow": Object {
+    },
+  },
+  "HeaderContainer" => Object {
+    "defaultProps": Object {
+      "isSideNavExpanded": false,
+    },
+    "propTypes": Object {
+      "isSideNavExpanded": Object {
         "type": "bool",
       },
     },
   },
-  "Column" => Object {
+  "HeaderGlobalAction" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "as": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isActive": Object {
+        "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "tooltipAlignment": Object {
         "args": Array [
           Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
+            "start",
+            "center",
+            "end",
           ],
         ],
-        "type": "oneOfType",
+        "type": "oneOf",
       },
+    },
+    "render": [Function],
+  },
+  "HeaderGlobalBar" => Object {
+    "displayName": "HeaderGlobalBar",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "HeaderMenu" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "HeaderMenuButton" => Object {
+    "propTypes": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "className": Object {
+        "type": "string",
+      },
+      "isActive": Object {
+        "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+    },
+  },
+  "HeaderMenuItem" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "element": Object {
+        "type": "elementType",
+      },
+      "isCurrentPage": Object {
+        "type": "bool",
+      },
+      "isSideNavExpanded": Object {
+        "type": "bool",
+      },
+      "role": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "HeaderName" => Object {
+    "defaultProps": Object {
+      "prefix": "IBM",
+    },
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "element": Object {
+        "type": "elementType",
+      },
+      "href": Object {
+        "type": "string",
+      },
+      "isSideNavExpanded": Object {
+        "type": "bool",
+      },
+      "prefix": Object {
+        "type": "string",
+      },
+    },
+  },
+  "HeaderNavigation" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
+    "propTypes": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
       "children": Object {
         "type": "node",
       },
       "className": Object {
         "type": "string",
       },
-      "lg": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "bool",
-            },
-            Object {
-              "type": "number",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "offset": Object {
-                    "type": "number",
-                  },
-                  "span": Object {
-                    "type": "number",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+    },
+  },
+  "HeaderPanel" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "className": Object {
+        "type": "string",
       },
-      "max": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "bool",
-            },
-            Object {
-              "type": "number",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "offset": Object {
-                    "type": "number",
-                  },
-                  "span": Object {
-                    "type": "number",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+      "expanded": Object {
+        "type": "bool",
       },
-      "md": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "bool",
-            },
-            Object {
-              "type": "number",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "offset": Object {
-                    "type": "number",
-                  },
-                  "span": Object {
-                    "type": "number",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+    },
+    "render": [Function],
+  },
+  "HeaderSideNavItems" => Object {
+    "defaultProps": Object {
+      "hasDivider": false,
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
       },
-      "sm": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "bool",
-            },
-            Object {
-              "type": "number",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "offset": Object {
-                    "type": "number",
-                  },
-                  "span": Object {
-                    "type": "number",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+      "className": Object {
+        "type": "string",
       },
-      "xlg": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "bool",
-            },
-            Object {
-              "type": "number",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "offset": Object {
-                    "type": "number",
-                  },
-                  "span": Object {
-                    "type": "number",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+      "hasDivider": Object {
+        "type": "bool",
       },
     },
   },
@@ -3477,6 +3508,16 @@ Map {
       },
     },
   },
+  "IconSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+  },
   "InlineLoading" => Object {
     "defaultProps": Object {
       "successDelay": 1500,
@@ -3510,6 +3551,10 @@ Map {
         "type": "number",
       },
     },
+  },
+  "InlineNotification" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "Link" => Object {
     "propTypes": Object {
@@ -3597,7 +3642,6 @@ Map {
   "Modal" => Object {
     "defaultProps": Object {
       "hasScrollingContent": false,
-      "iconDescription": "Close",
       "modalHeading": "",
       "modalLabel": "",
       "onKeyDown": [Function],
@@ -3619,19 +3663,18 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeButtonLabel": Object {
+        "type": "string",
+      },
       "danger": Object {
         "type": "bool",
       },
       "focusTrap": [Function],
-      "hasForm": Object {
-        "type": "bool",
-      },
+      "hasForm": [Function],
       "hasScrollingContent": Object {
         "type": "bool",
       },
-      "iconDescription": Object {
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "id": Object {
         "type": "string",
       },
@@ -3699,6 +3742,132 @@ Map {
           ],
         ],
         "type": "oneOf",
+      },
+    },
+  },
+  "ModalBody" => Object {
+    "propTypes": Object {
+      "aria-label": [Function],
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hasForm": Object {
+        "type": "bool",
+      },
+      "hasScrollingContent": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "ModalFooter" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
+    "defaultProps": Object {
+      "onRequestClose": [Function],
+      "onRequestSubmit": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "closeModal": Object {
+        "type": "func",
+      },
+      "danger": Object {
+        "type": "bool",
+      },
+      "inputref": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "current": Object {
+                    "type": "any",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "onRequestClose": Object {
+        "type": "func",
+      },
+      "onRequestSubmit": Object {
+        "type": "func",
+      },
+      "primaryButtonDisabled": Object {
+        "type": "bool",
+      },
+      "primaryButtonText": Object {
+        "type": "string",
+      },
+      "primaryClassName": Object {
+        "type": "string",
+      },
+      "secondaryButtonText": Object {
+        "type": "string",
+      },
+      "secondaryButtons": [Function],
+      "secondaryClassName": Object {
+        "type": "string",
+      },
+    },
+  },
+  "ModalHeader" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
+    "defaultProps": Object {
+      "buttonOnClick": [Function],
+      "iconDescription": "Close",
+    },
+    "propTypes": Object {
+      "buttonOnClick": Object {
+        "type": "func",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "closeClassName": Object {
+        "type": "string",
+      },
+      "closeIconClassName": Object {
+        "type": "string",
+      },
+      "closeModal": Object {
+        "type": "func",
+      },
+      "iconDescription": Object {
+        "type": "string",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "labelClassName": Object {
+        "type": "string",
+      },
+      "title": Object {
+        "type": "node",
+      },
+      "titleClassName": Object {
+        "type": "string",
       },
     },
   },
@@ -3810,6 +3979,9 @@ Map {
   "MultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "Filterable": Object {
+      "contextType": Object {
+        "$$typeof": Symbol(react.context),
+      },
       "defaultProps": Object {
         "ariaLabel": "Choose an item",
         "compareItems": [Function],
@@ -3824,7 +3996,6 @@ Map {
         "selectionFeedback": "top-after-reopen",
         "sortItems": [Function],
       },
-      "displayName": "MultiSelect.Filterable",
       "propTypes": Object {
         "ariaLabel": Object {
           "type": "string",
@@ -3968,6 +4139,9 @@ Map {
           ],
           "type": "shape",
         },
+        "hideLabel": Object {
+          "type": "bool",
+        },
         "id": Object {
           "isRequired": true,
           "type": "string",
@@ -3980,6 +4154,9 @@ Map {
         },
         "invalidText": Object {
           "type": "node",
+        },
+        "itemToElement": Object {
+          "type": "func",
         },
         "itemToString": Object {
           "type": "func",
@@ -4057,12 +4234,12 @@ Map {
       "light": false,
       "locale": "en",
       "open": false,
+      "selectedItems": null,
       "selectionFeedback": "top-after-reopen",
       "sortItems": [Function],
       "title": false,
       "type": "default",
     },
-    "displayName": "MultiSelect",
     "propTypes": Object {
       "clearSelectionDescription": Object {
         "type": "string",
@@ -4209,6 +4386,9 @@ Map {
         ],
         "type": "shape",
       },
+      "hideLabel": Object {
+        "type": "bool",
+      },
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -4221,6 +4401,9 @@ Map {
       },
       "invalidText": Object {
         "type": "node",
+      },
+      "itemToElement": Object {
+        "type": "func",
       },
       "itemToString": Object {
         "type": "func",
@@ -4247,6 +4430,9 @@ Map {
       },
       "open": Object {
         "type": "bool",
+      },
+      "selectedItems": Object {
+        "type": "array",
       },
       "selectionFeedback": Object {
         "args": Array [
@@ -4300,34 +4486,31 @@ Map {
     },
     "render": [Function],
   },
-  "ToastNotification" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(ToastNotification)",
-    "render": [Function],
-  },
-  "InlineNotification" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(InlineNotification)",
-    "render": [Function],
-  },
   "NotificationActionButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(NotificationActionButton)",
     "render": [Function],
   },
   "NotificationButton" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(NotificationButton)",
     "render": [Function],
   },
   "NotificationTextDetails" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(NotificationTextDetails)",
     "render": [Function],
   },
   "NumberInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
+  },
+  "NumberInputSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+    },
   },
   "OrderedList" => Object {
     "defaultProps": Object {
@@ -4355,7 +4538,6 @@ Map {
   },
   "OverflowMenu" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(OverflowMenu)",
     "render": [Function],
   },
   "OverflowMenuItem" => Object {
@@ -4589,116 +4771,12 @@ Map {
     },
     "render": [Function],
   },
-  "ControlledPasswordInput" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "className": "\${prefix}--text__input",
-      "disabled": false,
-      "helperText": "",
-      "invalid": false,
-      "invalidText": "",
-      "light": false,
-      "onChange": [Function],
-      "onClick": [Function],
-      "size": "",
-    },
+  "PaginationSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
         "type": "string",
       },
-      "defaultValue": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "helperText": Object {
-        "type": "node",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-      "hidePasswordLabel": Object {
-        "type": "string",
-      },
-      "id": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "invalid": Object {
-        "type": "bool",
-      },
-      "invalidText": Object {
-        "type": "node",
-      },
-      "labelText": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "light": Object {
-        "type": "bool",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "placeholder": Object {
-        "type": "string",
-      },
-      "showPasswordLabel": Object {
-        "type": "string",
-      },
-      "size": Object {
-        "type": "string",
-      },
-      "tooltipAlignment": Object {
-        "args": Array [
-          Array [
-            "start",
-            "center",
-            "end",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "tooltipPosition": Object {
-        "args": Array [
-          Array [
-            "top",
-            "right",
-            "bottom",
-            "left",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "value": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
     },
-    "render": [Function],
   },
   "PasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -4834,6 +4912,9 @@ Map {
   },
   "PrimaryButton" => Object {},
   "ProgressIndicator" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "currentIndex": 0,
     },
@@ -4855,6 +4936,13 @@ Map {
       },
       "vertical": Object {
         "type": "bool",
+      },
+    },
+  },
+  "ProgressIndicatorSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
       },
     },
   },
@@ -4914,6 +5002,9 @@ Map {
     "render": [Function],
   },
   "RadioButtonGroup" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "labelPosition": "right",
       "onChange": [Function],
@@ -4985,42 +5076,104 @@ Map {
       },
     },
   },
+  "RadioButtonSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "RadioTile" => Object {
+    "defaultProps": Object {
+      "light": false,
+      "onChange": [Function],
+      "tabIndex": 0,
+    },
+    "propTypes": Object {
+      "checked": Object {
+        "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultChecked": Object {
+        "type": "bool",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "iconDescription": [Function],
+      "id": Object {
+        "type": "string",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "tabIndex": Object {
+        "type": "number",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOfType",
+      },
+    },
+  },
+  "Row" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "condensed": Object {
+        "type": "bool",
+      },
+      "narrow": Object {
+        "type": "bool",
+      },
+    },
+  },
   "Search" => Object {
     "contextType": Object {
       "$$typeof": Symbol(react.context),
-      "Consumer": Object {
-        "$$typeof": Symbol(react.context),
-        "_calculateChangedBits": null,
-        "_context": [Circular],
-      },
-      "Provider": Object {
-        "$$typeof": Symbol(react.provider),
-        "_context": [Circular],
-      },
-      "_calculateChangedBits": null,
-      "_currentRenderer": null,
-      "_currentRenderer2": null,
-      "_currentValue": FeatureFlagScope {
-        "flags": Map {
-          "enable-css-custom-properties" => false,
-          "enable-use-controlled-state-with-value" => false,
-          "enable-css-grid" => false,
-          "enable-v11-release" => false,
-        },
-      },
-      "_currentValue2": FeatureFlagScope {
-        "flags": Map {
-          "enable-css-custom-properties" => false,
-          "enable-use-controlled-state-with-value" => false,
-          "enable-css-grid" => false,
-          "enable-v11-release" => false,
-        },
-      },
-      "_threadCount": 0,
     },
     "defaultProps": Object {
       "closeButtonLabelText": "Clear search input",
       "onChange": [Function],
+      "onClear": [Function],
       "placeholder": "",
       "type": "text",
     },
@@ -5058,6 +5211,9 @@ Map {
         "type": "bool",
       },
       "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
         "type": "func",
       },
       "onKeyDown": Object {
@@ -5154,90 +5310,16 @@ Map {
       },
     },
   },
-  "ExpandableSearch" => Object {
+  "SearchSkeleton" => Object {
+    "defaultProps": Object {
+      "small": false,
+    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
       },
-      "closeButtonLabelText": Object {
-        "type": "string",
-      },
-      "defaultValue": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "disabled": Object {
+      "small": Object {
         "type": "bool",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "light": Object {
-        "type": "bool",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "placeHolderText": [Function],
-      "placeholder": Object {
-        "type": "string",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-            "lg",
-            "xl",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "small": [Function],
-      "type": Object {
-        "type": "string",
-      },
-      "value": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
       },
     },
   },
@@ -5253,7 +5335,6 @@ Map {
       "labelText": "Select",
       "light": false,
     },
-    "displayName": "Select",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -5367,37 +5448,51 @@ Map {
       },
     },
   },
-  "Switch" => Object {
-    "$$typeof": Symbol(react.forward_ref),
+  "SelectSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "SelectableTile" => Object {
     "defaultProps": Object {
+      "light": false,
+      "onChange": [Function],
       "onClick": [Function],
       "onKeyDown": [Function],
       "selected": false,
-      "text": "Provide text",
+      "tabIndex": 0,
+      "title": "title",
+      "value": "value",
     },
-    "displayName": "Switch",
     "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
       "className": Object {
         "type": "string",
       },
       "disabled": Object {
         "type": "bool",
       },
-      "index": Object {
-        "type": "number",
+      "handleClick": [Function],
+      "handleKeyDown": [Function],
+      "iconDescription": [Function],
+      "id": Object {
+        "type": "string",
+      },
+      "light": Object {
+        "type": "bool",
       },
       "name": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
       },
       "onClick": Object {
         "type": "func",
@@ -5408,14 +5503,352 @@ Map {
       "selected": Object {
         "type": "bool",
       },
-      "text": Object {
-        "isRequired": true,
+      "tabIndex": Object {
+        "type": "number",
+      },
+      "title": Object {
         "type": "string",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOfType",
+      },
+    },
+  },
+  "SideNav" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "addFocusListeners": true,
+      "addMouseListeners": true,
+      "defaultExpanded": false,
+      "isChildOfHeader": true,
+      "isFixedNav": false,
+      "isPersistent": true,
+    },
+    "propTypes": Object {
+      "addFocusListeners": Object {
+        "type": "bool",
+      },
+      "addMouseListeners": Object {
+        "type": "bool",
+      },
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "className": Object {
+        "type": "string",
+      },
+      "defaultExpanded": Object {
+        "type": "bool",
+      },
+      "expanded": Object {
+        "type": "bool",
+      },
+      "isChildOfHeader": Object {
+        "type": "bool",
+      },
+      "isFixedNav": Object {
+        "type": "bool",
+      },
+      "isPersistent": Object {
+        "type": "bool",
+      },
+      "isRail": Object {
+        "type": "bool",
+      },
+      "onOverlayClick": Object {
+        "type": "func",
+      },
+      "onToggle": Object {
+        "type": "func",
+      },
+      "translateById": Object {
+        "type": "func",
       },
     },
     "render": [Function],
   },
+  "SideNavDetails" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "title": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+    },
+  },
+  "SideNavDivider" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "SideNavFooter" => Object {
+    "defaultProps": Object {
+      "assistiveText": "Toggle opening or closing the side navigation",
+    },
+    "propTypes": Object {
+      "assistiveText": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "expanded": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+      "isSideNavExpanded": Object {
+        "type": "bool",
+      },
+      "onToggle": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+    },
+  },
+  "SideNavHeader" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isSideNavExpanded": Object {
+        "type": "bool",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOfType",
+      },
+    },
+  },
+  "SideNavIcon" => Object {
+    "defaultProps": Object {
+      "small": false,
+    },
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "small": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+    },
+  },
+  "SideNavItem" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "large": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "SideNavItems" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isSideNavExpanded": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "SideNavLink" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "element": "a",
+      "large": false,
+    },
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "element": Object {
+        "type": "elementType",
+      },
+      "isSideNavExpanded": Object {
+        "type": "bool",
+      },
+      "large": Object {
+        "type": "bool",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+    "render": [Function],
+  },
+  "SideNavLinkText" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "SideNavMenu" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "SideNavMenuItem" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isActive": Object {
+        "type": "bool",
+      },
+    },
+    "render": [Function],
+  },
+  "SideNavSwitcher" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "options": Object {
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "isRequired": true,
+        "type": "arrayOf",
+      },
+    },
+    "render": [Function],
+  },
+  "SkeletonPlaceholder" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "SkeletonText" => Object {
+    "defaultProps": Object {
+      "heading": false,
+      "lineCount": 3,
+      "paragraph": false,
+      "width": "100%",
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "heading": Object {
+        "type": "bool",
+      },
+      "lineCount": Object {
+        "type": "number",
+      },
+      "paragraph": Object {
+        "type": "bool",
+      },
+      "width": Object {
+        "type": "string",
+      },
+    },
+  },
+  "SkipToContent" => Object {
+    "defaultProps": Object {
+      "children": "Skip to main content",
+      "href": "#main-content",
+      "tabIndex": "0",
+    },
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "href": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "tabIndex": Object {
+        "type": "string",
+      },
+    },
+  },
   "Slider" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "ariaLabelInput": "Slider number input",
       "disabled": false,
@@ -5500,34 +5933,34 @@ Map {
       },
     },
   },
-  "StructuredListWrapper" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListWrapper)",
-    "render": [Function],
-  },
-  "StructuredListHead" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListHead)",
-    "render": [Function],
+  "SliderSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+    },
   },
   "StructuredListBody" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListBody)",
-    "render": [Function],
-  },
-  "StructuredListRow" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListRow)",
-    "render": [Function],
-  },
-  "StructuredListInput" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListInput)",
     "render": [Function],
   },
   "StructuredListCell" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(StructuredListCell)",
+    "render": [Function],
+  },
+  "StructuredListHead" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "StructuredListInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "StructuredListRow" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
   "StructuredListSkeleton" => Object {
@@ -5547,12 +5980,101 @@ Map {
       },
     },
   },
+  "StructuredListWrapper" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "Switch" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "onClick": [Function],
+      "onKeyDown": [Function],
+      "selected": false,
+      "text": "Provide text",
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "name": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "selected": Object {
+        "type": "bool",
+      },
+      "text": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "Switcher" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "SwitcherDivider" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "SwitcherItem" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "Tab" => Object {
     "defaultProps": Object {
       "label": "provide a label",
       "onClick": [Function],
       "onKeyDown": [Function],
-      "role": "presentation",
       "selected": false,
     },
     "propTypes": Object {
@@ -5593,10 +6115,7 @@ Map {
       "renderContent": Object {
         "type": "func",
       },
-      "role": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "role": [Function],
       "selected": Object {
         "isRequired": true,
         "type": "bool",
@@ -5622,7 +6141,569 @@ Map {
       },
     },
   },
+  "Table" => Object {
+    "defaultProps": Object {
+      "isSortable": false,
+      "overflowMenuOnHover": true,
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isSortable": Object {
+        "type": "bool",
+      },
+      "overflowMenuOnHover": Object {
+        "type": "bool",
+      },
+      "shouldShowBorder": [Function],
+      "size": Object {
+        "args": Array [
+          Array [
+            "compact",
+            "short",
+            "normal",
+            "tall",
+            "xs",
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "stickyHeader": Object {
+        "type": "bool",
+      },
+      "useStaticWidth": Object {
+        "type": "bool",
+      },
+      "useZebraStyles": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "TableActionList" => Object {
+    "displayName": "TableActionList",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "TableBatchAction" => Object {
+    "defaultProps": Object {
+      "renderIcon": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+    },
+    "propTypes": Object {
+      "hasIconOnly": Object {
+        "type": "bool",
+      },
+      "iconDescription": [Function],
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
+  "TableBatchActions" => Object {
+    "defaultProps": Object {
+      "translateWithId": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "onCancel": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+      "shouldShowBatchActions": Object {
+        "type": "bool",
+      },
+      "totalSelected": Object {
+        "isRequired": true,
+        "type": "number",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+    },
+    "translationKeys": Array [
+      "carbon.table.batch.cancel",
+      "carbon.table.batch.items.selected",
+      "carbon.table.batch.item.selected",
+    ],
+  },
+  "TableBody" => Object {
+    "defaultProps": Object {
+      "aria-live": "polite",
+    },
+    "propTypes": Object {
+      "aria-live": Object {
+        "args": Array [
+          Array [
+            "polite",
+            "assertive",
+            "off",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "TableCell" => Object {
+    "displayName": "TableCell",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "TableContainer" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "description": Object {
+        "type": "node",
+      },
+      "stickyHeader": Object {
+        "type": "bool",
+      },
+      "title": Object {
+        "type": "node",
+      },
+      "useStaticWidth": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "TableExpandHeader" => Object {
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "enableExpando": [Function],
+      "enableToggle": Object {
+        "type": "bool",
+      },
+      "expandIconDescription": Object {
+        "type": "string",
+      },
+      "isExpanded": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "onExpand": Object {
+        "args": Array [
+          Array [
+            [Function],
+            [Function],
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
+  "TableExpandRow" => Object {
+    "defaultProps": Object {
+      "expandHeader": "expand",
+    },
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "expandHeader": Object {
+        "type": "string",
+      },
+      "expandIconDescription": Object {
+        "type": "string",
+      },
+      "isExpanded": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+      "isSelected": Object {
+        "type": "bool",
+      },
+      "onExpand": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+    },
+  },
+  "TableExpandedRow" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "colSpan": Object {
+        "isRequired": true,
+        "type": "number",
+      },
+    },
+  },
+  "TableHead" => Object {
+    "displayName": "TableHead",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "TableHeader" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "isSortable": false,
+      "scope": "col",
+      "translateWithId": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "colSpan": Object {
+        "type": "number",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "isSortHeader": Object {
+        "type": "bool",
+      },
+      "isSortable": Object {
+        "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "scope": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "sortDirection": Object {
+        "args": Array [
+          Array [
+            "NONE",
+            "DESC",
+            "ASC",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+    },
+    "render": [Function],
+    "translationKeys": Array [
+      "carbon.table.header.icon.description",
+    ],
+  },
+  "TableRow" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "isSelected": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "TableSelectAll" => Object {
+    "defaultProps": Object {
+      "ariaLabel": "Select all rows in the table",
+    },
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "checked": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "indeterminate": Object {
+        "type": "bool",
+      },
+      "name": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onSelect": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+    },
+  },
+  "TableSelectRow" => Object {
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "checked": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "name": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onSelect": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+      "radio": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "TableToolbar" => Object {
+    "defaultProps": Object {
+      "aria-label": "data table toolbar",
+    },
+    "propTypes": Object {
+      "aria-label": [Function],
+      "aria-labelledby": [Function],
+      "children": Object {
+        "type": "node",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "small",
+            "sm",
+            "normal",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
+  "TableToolbarAction" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "onClick": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+    },
+    "render": [Function],
+  },
+  "TableToolbarContent" => Object {
+    "displayName": "TableToolbarContent",
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "TableToolbarMenu" => Object {
+    "defaultProps": Object {
+      "iconDescription": "Settings",
+      "renderIcon": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
+    },
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "iconDescription": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
+  "TableToolbarSearch" => Object {
+    "defaultProps": Object {
+      "onClear": [Function],
+      "persistent": false,
+      "tabIndex": "0",
+      "translateWithId": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultExpanded": Object {
+        "type": "bool",
+      },
+      "defaultValue": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "expanded": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "type": "string",
+      },
+      "onBlur": Object {
+        "type": "func",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClear": Object {
+        "type": "func",
+      },
+      "onExpand": Object {
+        "type": "func",
+      },
+      "onFocus": Object {
+        "type": "func",
+      },
+      "persistant": [Function],
+      "persistent": Object {
+        "type": "bool",
+      },
+      "placeHolderText": [Function],
+      "placeholder": Object {
+        "type": "string",
+      },
+      "searchContainerClass": Object {
+        "type": "string",
+      },
+      "tabIndex": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "translateWithId": Object {
+        "isRequired": true,
+        "type": "func",
+      },
+    },
+  },
   "Tabs" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "scrollIntoView": true,
       "selected": 0,
@@ -5678,6 +6759,23 @@ Map {
       "type": Object {
         "args": Array [
           Array [
+            "default",
+            "container",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
+  "TabsSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "",
             "default",
             "container",
           ],
@@ -5745,6 +6843,22 @@ Map {
             "cool-gray",
             "warm-gray",
             "high-contrast",
+            "outline",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
+  "TagSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
           ],
         ],
         "type": "oneOf",
@@ -5765,7 +6879,6 @@ Map {
       "placeholder": "",
       "rows": 4,
     },
-    "displayName": "TextArea",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5838,6 +6951,16 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "TextAreaSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+    },
   },
   "TextInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6097,7 +7220,6 @@ Map {
       "warn": false,
       "warnText": "",
     },
-    "displayName": "TextInput",
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -6192,7 +7314,20 @@ Map {
     },
     "render": [Function],
   },
+  "TextInputSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+    },
+  },
   "Tile" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "light": false,
     },
@@ -6205,162 +7340,13 @@ Map {
       },
       "light": Object {
         "type": "bool",
-      },
-    },
-  },
-  "ClickableTile" => Object {
-    "defaultProps": Object {
-      "clicked": false,
-      "handleClick": [Function],
-      "handleKeyDown": [Function],
-      "light": false,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "handleClick": Object {
-        "type": "func",
-      },
-      "handleKeyDown": Object {
-        "type": "func",
-      },
-      "href": Object {
-        "type": "string",
-      },
-      "light": Object {
-        "type": "bool",
-      },
-      "rel": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SelectableTile" => Object {
-    "defaultProps": Object {
-      "light": false,
-      "selected": false,
-      "tabIndex": 0,
-      "title": "title",
-      "value": "value",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "handleClick": [Function],
-      "handleKeyDown": [Function],
-      "iconDescription": [Function],
-      "id": Object {
-        "type": "string",
-      },
-      "light": Object {
-        "type": "bool",
-      },
-      "name": Object {
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "selected": Object {
-        "type": "bool",
-      },
-      "tabIndex": Object {
-        "type": "number",
-      },
-      "title": Object {
-        "type": "string",
-      },
-      "value": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "isRequired": true,
-        "type": "oneOfType",
-      },
-    },
-  },
-  "ExpandableTile" => Object {
-    "defaultProps": Object {
-      "expanded": false,
-      "handleClick": [Function],
-      "light": false,
-      "onBeforeClick": [Function],
-      "tabIndex": 0,
-      "tileCollapsedIconText": "Interact to expand Tile",
-      "tileExpandedIconText": "Interact to collapse Tile",
-      "tileMaxHeight": 0,
-      "tilePadding": 0,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "expanded": Object {
-        "type": "bool",
-      },
-      "handleClick": Object {
-        "type": "func",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "light": Object {
-        "type": "bool",
-      },
-      "onBeforeClick": Object {
-        "type": "func",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "onKeyUp": Object {
-        "type": "func",
-      },
-      "tabIndex": Object {
-        "type": "number",
-      },
-      "tileCollapsedIconText": Object {
-        "type": "string",
-      },
-      "tileCollapsedLabel": Object {
-        "type": "string",
-      },
-      "tileExpandedIconText": Object {
-        "type": "string",
-      },
-      "tileExpandedLabel": Object {
-        "type": "string",
       },
     },
   },
   "TileAboveTheFoldContent" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -6368,63 +7354,12 @@ Map {
     },
   },
   "TileBelowTheFoldContent" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "propTypes": Object {
       "children": Object {
         "type": "node",
-      },
-    },
-  },
-  "RadioTile" => Object {
-    "defaultProps": Object {
-      "light": false,
-      "onChange": [Function],
-      "tabIndex": 0,
-    },
-    "propTypes": Object {
-      "checked": Object {
-        "type": "bool",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "defaultChecked": Object {
-        "type": "bool",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "iconDescription": [Function],
-      "id": Object {
-        "type": "string",
-      },
-      "light": Object {
-        "type": "bool",
-      },
-      "name": Object {
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "tabIndex": Object {
-        "type": "number",
-      },
-      "value": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "isRequired": true,
-        "type": "oneOfType",
       },
     },
   },
@@ -6481,6 +7416,9 @@ Map {
     },
   },
   "TimePicker" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "disabled": false,
       "invalid": false,
@@ -6563,10 +7501,11 @@ Map {
   "TimePickerSelect" => Object {
     "defaultProps": Object {
       "disabled": false,
-      "iconDescription": "open list of options",
-      "inline": true,
     },
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -6580,16 +7519,10 @@ Map {
         "type": "bool",
       },
       "hideLabel": [Function],
-      "iconDescription": Object {
-        "isRequired": true,
-        "type": "string",
-      },
+      "iconDescription": [Function],
       "id": Object {
         "isRequired": true,
         "type": "string",
-      },
-      "inline": Object {
-        "type": "bool",
       },
       "labelText": Object {
         "isRequired": true,
@@ -6597,10 +7530,43 @@ Map {
       },
     },
   },
+  "ToastNotification" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "Toggle" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "displayName": "FeatureToggle(Toggle)",
     "render": [Function],
+  },
+  "ToggleSkeleton" => Object {
+    "defaultProps": Object {
+      "aria-label": "Toggle is loading",
+      "size": "md",
+    },
+    "propTypes": Object {
+      "aria-label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
   },
   "ToggleSmall" => Object {
     "defaultProps": Object {
@@ -6646,6 +7612,26 @@ Map {
       },
     },
   },
+  "ToggleSmallSkeleton" => Object {
+    "defaultProps": Object {
+      "aria-label": "Toggle is loading",
+    },
+    "propTypes": Object {
+      "aria-label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "labelText": Object {
+        "type": "string",
+      },
+    },
+  },
   "Toolbar" => Object {
     "propTypes": Object {
       "children": Object {
@@ -6655,6 +7641,10 @@ Map {
         "type": "string",
       },
     },
+  },
+  "ToolbarDivider" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "ToolbarItem" => Object {
     "defaultProps": Object {
@@ -6672,15 +7662,6 @@ Map {
       },
     },
   },
-  "ToolbarTitle" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "title": Object {
-        "type": "string",
-      },
-    },
-    "render": [Function],
-  },
   "ToolbarOption" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -6688,10 +7669,6 @@ Map {
         "type": "node",
       },
     },
-    "render": [Function],
-  },
-  "ToolbarDivider" => Object {
-    "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
   "ToolbarSearch" => Object {
@@ -6732,6 +7709,15 @@ Map {
         "type": "string",
       },
     },
+  },
+  "ToolbarTitle" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "title": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
   },
   "Tooltip" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -6886,900 +7872,6 @@ Map {
       },
     },
   },
-  "SkeletonText" => Object {
-    "defaultProps": Object {
-      "heading": false,
-      "lineCount": 3,
-      "paragraph": false,
-      "width": "100%",
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "heading": Object {
-        "type": "bool",
-      },
-      "lineCount": Object {
-        "type": "number",
-      },
-      "paragraph": Object {
-        "type": "bool",
-      },
-      "width": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SkeletonPlaceholder" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "DataTableSkeleton" => Object {
-    "defaultProps": Object {
-      "columnCount": 5,
-      "compact": false,
-      "rowCount": 5,
-      "showHeader": true,
-      "showToolbar": true,
-      "zebra": false,
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "columnCount": Object {
-        "type": "number",
-      },
-      "compact": Object {
-        "type": "bool",
-      },
-      "headers": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "array",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "key": Object {
-                    "type": "string",
-                  },
-                },
-              ],
-              "type": "shape",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "rowCount": Object {
-        "type": "number",
-      },
-      "showHeader": Object {
-        "type": "bool",
-      },
-      "showToolbar": Object {
-        "type": "bool",
-      },
-      "zebra": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "AccordionSkeleton" => Object {
-    "defaultProps": Object {
-      "align": "end",
-      "count": 4,
-      "open": true,
-    },
-    "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "start",
-            "end",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "count": Object {
-        "type": "number",
-      },
-      "open": Object {
-        "type": "bool",
-      },
-      "uid": [Function],
-    },
-  },
-  "BreadcrumbSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "ButtonSkeleton" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "href": Object {
-        "type": "string",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "field",
-            "small",
-            "sm",
-            "md",
-            "lg",
-            "xl",
-            "2xl",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "small": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "CheckboxSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "CodeSnippetSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "type": Object {
-        "args": Array [
-          Array [
-            "single",
-            "multi",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-  },
-  "DropdownSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "inline": [Function],
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-            "lg",
-            "xl",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-  },
-  "FileUploaderSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "NumberInputSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "PaginationSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "ProgressIndicatorSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "RadioButtonSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SearchSkeleton" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "small": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "SelectSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "SliderSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "TabsSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "type": Object {
-        "args": Array [
-          Array [
-            "",
-            "default",
-            "container",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-  },
-  "TagSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-  },
-  "TextAreaSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "TextInputSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "ToggleSkeleton" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle is loading",
-    },
-    "propTypes": Object {
-      "aria-label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-    },
-  },
-  "ToggleSmallSkeleton" => Object {
-    "defaultProps": Object {
-      "aria-label": "Toggle is loading",
-    },
-    "propTypes": Object {
-      "aria-label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-    },
-  },
-  "IconSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "style": Object {
-        "type": "object",
-      },
-    },
-  },
-  "DatePickerSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "range": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "Content" => Object {
-    "defaultProps": Object {
-      "tagName": "main",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "tagName": Object {
-        "type": "string",
-      },
-    },
-  },
-  "Header" => Object {
-    "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "HeaderContainer" => Object {
-    "defaultProps": Object {
-      "isSideNavExpanded": false,
-    },
-    "propTypes": Object {
-      "isSideNavExpanded": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "HeaderGlobalAction" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "HeaderGlobalAction",
-    "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "isActive": Object {
-        "type": "bool",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "tooltipAlignment": Object {
-        "args": Array [
-          Array [
-            "start",
-            "center",
-            "end",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
-    "render": [Function],
-  },
-  "HeaderGlobalBar" => Object {
-    "displayName": "HeaderGlobalBar",
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "HeaderMenu" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "HeaderMenu",
-    "render": [Function],
-  },
-  "HeaderMenuButton" => Object {
-    "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "className": Object {
-        "type": "string",
-      },
-      "isActive": Object {
-        "type": "bool",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-    },
-  },
-  "HeaderMenuItem" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "element": Object {
-        "type": "elementType",
-      },
-      "isCurrentPage": Object {
-        "type": "bool",
-      },
-      "isSideNavExpanded": Object {
-        "type": "bool",
-      },
-      "role": Object {
-        "type": "string",
-      },
-    },
-    "render": [Function],
-  },
-  "HeaderName" => Object {
-    "defaultProps": Object {
-      "prefix": "IBM",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "element": Object {
-        "type": "elementType",
-      },
-      "href": Object {
-        "type": "string",
-      },
-      "isSideNavExpanded": Object {
-        "type": "bool",
-      },
-      "prefix": Object {
-        "type": "string",
-      },
-    },
-  },
-  "HeaderNavigation" => Object {
-    "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "HeaderPanel" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "HeaderPanel",
-    "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "className": Object {
-        "type": "string",
-      },
-      "expanded": Object {
-        "type": "bool",
-      },
-    },
-    "render": [Function],
-  },
-  "HeaderSideNavItems" => Object {
-    "defaultProps": Object {
-      "hasDivider": false,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "hasDivider": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "Switcher" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-    "render": [Function],
-  },
-  "SwitcherItem" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-    "render": [Function],
-  },
-  "SwitcherDivider" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SkipToContent" => Object {
-    "defaultProps": Object {
-      "children": "Skip to main content",
-      "href": "#main-content",
-      "tabIndex": "0",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "href": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "tabIndex": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SideNav" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "addFocusListeners": true,
-      "addMouseListeners": true,
-      "defaultExpanded": false,
-      "isChildOfHeader": true,
-      "isFixedNav": false,
-      "isPersistent": true,
-    },
-    "propTypes": Object {
-      "addFocusListeners": Object {
-        "type": "bool",
-      },
-      "addMouseListeners": Object {
-        "type": "bool",
-      },
-      "aria-label": [Function],
-      "aria-labelledby": [Function],
-      "className": Object {
-        "type": "string",
-      },
-      "defaultExpanded": Object {
-        "type": "bool",
-      },
-      "expanded": Object {
-        "type": "bool",
-      },
-      "isChildOfHeader": Object {
-        "type": "bool",
-      },
-      "isFixedNav": Object {
-        "type": "bool",
-      },
-      "isPersistent": Object {
-        "type": "bool",
-      },
-      "isRail": Object {
-        "type": "bool",
-      },
-      "onOverlayClick": Object {
-        "type": "func",
-      },
-      "onToggle": Object {
-        "type": "func",
-      },
-      "translateById": Object {
-        "type": "func",
-      },
-    },
-    "render": [Function],
-  },
-  "SideNavDetails" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "title": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-    },
-  },
-  "SideNavDivider" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SideNavFooter" => Object {
-    "defaultProps": Object {
-      "assistiveText": "Toggle opening or closing the side navigation",
-    },
-    "propTypes": Object {
-      "assistiveText": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "expanded": Object {
-        "isRequired": true,
-        "type": "bool",
-      },
-      "isSideNavExpanded": Object {
-        "type": "bool",
-      },
-      "onToggle": Object {
-        "isRequired": true,
-        "type": "func",
-      },
-    },
-  },
-  "SideNavHeader" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "isSideNavExpanded": Object {
-        "type": "bool",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "isRequired": true,
-        "type": "oneOfType",
-      },
-    },
-  },
-  "SideNavIcon" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "small": Object {
-        "isRequired": true,
-        "type": "bool",
-      },
-    },
-  },
-  "SideNavItem" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "large": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "SideNavItems" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "isSideNavExpanded": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "SideNavLink" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "element": "a",
-      "large": false,
-    },
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "element": Object {
-        "type": "elementType",
-      },
-      "isSideNavExpanded": Object {
-        "type": "bool",
-      },
-      "large": Object {
-        "type": "bool",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-    },
-    "render": [Function],
-  },
-  "SideNavLinkText" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SideNavMenu" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "displayName": "SideNavMenu",
-    "render": [Function],
-  },
-  "SideNavMenuItem" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "isActive": Object {
-        "type": "bool",
-      },
-    },
-    "render": [Function],
-  },
-  "SideNavSwitcher" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "options": Object {
-        "args": Array [
-          Object {
-            "type": "string",
-          },
-        ],
-        "isRequired": true,
-        "type": "arrayOf",
-      },
-    },
-    "render": [Function],
-  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {
@@ -7795,8 +7887,325 @@ Map {
       },
     },
   },
-  "unstable_useFeatureFlag" => Object {},
-  "unstable_useFeatureFlags" => Object {},
+  "unstable_HStack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "unstable_Heading" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_IconButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "primary",
+            "secondary",
+            "ghost",
+            "tertiary",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_Layer" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_Menu" => Object {
+    "MenuDivider": Object {},
+    "MenuGroup": Object {
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "label": Object {
+          "isRequired": true,
+          "type": "node",
+        },
+      },
+    },
+    "MenuItem": Object {
+      "propTypes": Object {
+        "children": Object {
+          "type": "node",
+        },
+        "disabled": Object {
+          "type": "bool",
+        },
+        "kind": Object {
+          "args": Array [
+            Array [
+              "default",
+              "danger",
+            ],
+          ],
+          "type": "oneOf",
+        },
+        "label": Object {
+          "isRequired": true,
+          "type": "node",
+        },
+        "shortcut": Object {
+          "type": "node",
+        },
+      },
+    },
+    "MenuRadioGroup": Object {
+      "propTypes": Object {
+        "initialSelectedItem": Object {
+          "type": "string",
+        },
+        "items": Object {
+          "args": Array [
+            Object {
+              "type": "string",
+            },
+          ],
+          "isRequired": true,
+          "type": "arrayOf",
+        },
+        "label": Object {
+          "isRequired": true,
+          "type": "string",
+        },
+        "onChange": Object {
+          "type": "func",
+        },
+      },
+    },
+    "MenuSelectableItem": Object {
+      "propTypes": Object {
+        "initialChecked": Object {
+          "type": "bool",
+        },
+        "label": Object {
+          "isRequired": true,
+          "type": "node",
+        },
+        "onChange": Object {
+          "type": "func",
+        },
+      },
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "level": Object {
+        "type": "number",
+      },
+      "onClose": Object {
+        "type": "func",
+      },
+      "open": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "target": Object {
+        "type": "element",
+      },
+      "x": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "y": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "args": Array [
+                Object {
+                  "type": "number",
+                },
+              ],
+              "type": "arrayOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
+  "unstable_MenuDivider" => Object {},
+  "unstable_MenuGroup" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+    },
+  },
+  "unstable_MenuItem" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "default",
+            "danger",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "shortcut": Object {
+        "type": "node",
+      },
+    },
+  },
+  "unstable_MenuRadioGroup" => Object {
+    "propTypes": Object {
+      "initialSelectedItem": Object {
+        "type": "string",
+      },
+      "items": Object {
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "isRequired": true,
+        "type": "arrayOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+    },
+  },
+  "unstable_MenuSelectableItem" => Object {
+    "propTypes": Object {
+      "initialChecked": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+    },
+  },
   "unstable_PageSelector" => Object {
     "defaultProps": Object {
       "className": null,
@@ -7928,6 +8337,385 @@ Map {
       },
       "totalItems": Object {
         "type": "number",
+      },
+    },
+  },
+  "unstable_Popover" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "caret": Object {
+        "type": "bool",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "dropShadow": Object {
+        "type": "bool",
+      },
+      "highContrast": Object {
+        "type": "bool",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "open": Object {
+        "isRequired": true,
+        "type": "bool",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_PopoverContent" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_ProgressBar" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "helperText": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "max": Object {
+        "type": "number",
+      },
+      "value": Object {
+        "type": "number",
+      },
+    },
+  },
+  "unstable_Section" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_Stack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "as": Object {
+        "type": "elementType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "gap": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "args": Array [
+                Array [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                ],
+              ],
+              "type": "oneOf",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "orientation": Object {
+        "args": Array [
+          Array [
+            "horizontal",
+            "vertical",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_TabList" => Object {
+    "propTypes": Object {
+      "activation": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "aria-label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "contained": Object {
+        "type": "bool",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "unstable_TabPanel" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_TabPanels" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+    },
+  },
+  "unstable_Theme" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "theme": Object {
+        "args": Array [
+          Array [
+            "white",
+            "g10",
+            "g90",
+            "g100",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
+  "unstable_ThemeContext" => Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": "React.Consumer",
+    "Provider": "React.Provider",
+  },
+  "unstable_Tooltip" => Object {
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "description": Object {
+        "type": "node",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
+    },
+  },
+  "unstable_TreeNode" => Object {
+    "propTypes": Object {
+      "active": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "depth": Object {
+        "type": "number",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "isExpanded": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "onNodeFocusEvent": Object {
+        "type": "func",
+      },
+      "onSelect": Object {
+        "type": "func",
+      },
+      "onToggle": Object {
+        "type": "func",
+      },
+      "onTreeSelect": Object {
+        "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "selected": Object {
+        "args": Array [
+          Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "string",
+                },
+                Object {
+                  "type": "number",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        ],
+        "type": "arrayOf",
+      },
+      "value": Object {
+        "type": "string",
       },
     },
   },
@@ -8075,348 +8863,14 @@ Map {
       },
     },
   },
-  "unstable_TreeNode" => Object {
-    "propTypes": Object {
-      "active": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "depth": Object {
-        "type": "number",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "isExpanded": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "type": "node",
-      },
-      "onNodeFocusEvent": Object {
-        "type": "func",
-      },
-      "onSelect": Object {
-        "type": "func",
-      },
-      "onToggle": Object {
-        "type": "func",
-      },
-      "onTreeSelect": Object {
-        "type": "func",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "selected": Object {
-        "args": Array [
-          Object {
-            "args": Array [
-              Array [
-                Object {
-                  "type": "string",
-                },
-                Object {
-                  "type": "number",
-                },
-              ],
-            ],
-            "type": "oneOfType",
-          },
-        ],
-        "type": "arrayOf",
-      },
-      "value": Object {
-        "type": "string",
-      },
-    },
-  },
-  "unstable_Menu" => Object {
-    "MenuDivider": Object {},
-    "MenuGroup": Object {
-      "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-      },
-    },
-    "MenuItem": Object {
-      "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "disabled": Object {
-          "type": "bool",
-        },
-        "kind": Object {
-          "args": Array [
-            Array [
-              "default",
-              "danger",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-        "shortcut": Object {
-          "type": "node",
-        },
-      },
-    },
-    "MenuRadioGroup": Object {
-      "propTypes": Object {
-        "initialSelectedItem": Object {
-          "type": "string",
-        },
-        "items": Object {
-          "args": Array [
-            Object {
-              "type": "string",
-            },
-          ],
-          "isRequired": true,
-          "type": "arrayOf",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "string",
-        },
-        "onChange": Object {
-          "type": "func",
-        },
-      },
-    },
-    "MenuSelectableItem": Object {
-      "propTypes": Object {
-        "initialChecked": Object {
-          "type": "bool",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-        "onChange": Object {
-          "type": "func",
-        },
-      },
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "level": Object {
-        "type": "number",
-      },
-      "onClose": Object {
-        "type": "func",
-      },
-      "open": Object {
-        "type": "bool",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "x": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "number",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "type": "number",
-                },
-              ],
-              "type": "arrayOf",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "y": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "number",
-            },
-            Object {
-              "args": Array [
-                Object {
-                  "type": "number",
-                },
-              ],
-              "type": "arrayOf",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-    },
-  },
-  "unstable_MenuDivider" => Object {},
-  "unstable_MenuGroup" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-    },
-  },
-  "unstable_MenuItem" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "kind": Object {
-        "args": Array [
-          Array [
-            "default",
-            "danger",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "shortcut": Object {
-        "type": "node",
-      },
-    },
-  },
-  "unstable_MenuRadioGroup" => Object {
-    "propTypes": Object {
-      "initialSelectedItem": Object {
-        "type": "string",
-      },
-      "items": Object {
-        "args": Array [
-          Object {
-            "type": "string",
-          },
-        ],
-        "isRequired": true,
-        "type": "arrayOf",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-    },
-  },
-  "unstable_MenuSelectableItem" => Object {
-    "propTypes": Object {
-      "initialChecked": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-    },
+  "unstable_VStack" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "unstable_useContextMenu" => Object {},
-  "unstable_Heading" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "unstable_Section" => Object {
-    "propTypes": Object {
-      "as": Object {
-        "type": "elementType",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "unstable_ProgressBar" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "helperText": Object {
-        "type": "string",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "max": Object {
-        "type": "number",
-      },
-      "value": Object {
-        "type": "number",
-      },
-    },
-  },
+  "unstable_useFeatureFlag" => Object {},
+  "unstable_useFeatureFlags" => Object {},
+  "unstable_usePrefix" => Object {},
+  "unstable_useTheme" => Object {},
 }
 `;

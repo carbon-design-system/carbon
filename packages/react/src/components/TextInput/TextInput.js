@@ -8,18 +8,18 @@
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const TextInput = React.forwardRef(function TextInput(
   {
     labelText,
-    className = `${prefix}--text__input`,
+    className,
     id,
     placeholder,
     type,
@@ -40,6 +40,10 @@ const TextInput = React.forwardRef(function TextInput(
   },
   ref
 ) {
+  const prefix = usePrefix();
+
+  const enabled = useFeatureFlag('enable-v11-release');
+
   const normalizedProps = useNormalizedInputProps({
     id,
     readOnly,
@@ -50,12 +54,18 @@ const TextInput = React.forwardRef(function TextInput(
     warnText,
   });
 
-  const textInputClasses = classNames(`${prefix}--text-input`, className, {
-    [`${prefix}--text-input--light`]: light,
-    [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
-    [`${prefix}--text-input--warning`]: normalizedProps.warn,
-    [`${prefix}--text-input--${size}`]: size,
-  });
+  const customClassName = className ?? `${prefix}--text__input`;
+  const textInputClasses = classNames(
+    `${prefix}--text-input`,
+    [enabled ? null : className],
+    {
+      [customClassName]: enabled,
+      [`${prefix}--text-input--light`]: light,
+      [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
+      [`${prefix}--text-input--warning`]: normalizedProps.warn,
+      [`${prefix}--text-input--${size}`]: size,
+    }
+  );
   const sharedTextInputProps = {
     id,
     onChange: (evt) => {
@@ -75,10 +85,15 @@ const TextInput = React.forwardRef(function TextInput(
     title: labelText,
     disabled: normalizedProps.disabled,
     readOnly,
+    ['aria-describedby']: helperText && normalizedProps.helperId,
     ...other,
   };
   const inputWrapperClasses = classNames(
-    `${prefix}--form-item`,
+    [
+      enabled
+        ? classNames(`${prefix}--form-item`, className)
+        : `${prefix}--form-item`,
+    ],
     `${prefix}--text-input-wrapper`,
     {
       [`${prefix}--text-input-wrapper--readonly`]: readOnly,
@@ -120,8 +135,11 @@ const TextInput = React.forwardRef(function TextInput(
       {labelText}
     </label>
   ) : null;
+
   const helper = helperText ? (
-    <div className={helperTextClasses}>{helperText}</div>
+    <div id={normalizedProps.helperId} className={helperTextClasses}>
+      {helperText}
+    </div>
   ) : null;
 
   const input = (
@@ -221,7 +239,8 @@ TextInput.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * `true` to use the light version.
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,
 

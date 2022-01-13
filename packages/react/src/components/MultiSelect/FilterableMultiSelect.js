@@ -23,6 +23,7 @@ import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -51,6 +52,11 @@ export default class FilterableMultiSelect extends React.Component {
     downshiftProps: PropTypes.shape(Downshift.propTypes),
 
     /**
+     * Specify whether the title text should be hidden or not
+     */
+    hideLabel: PropTypes.bool,
+
+    /**
      * Specify a custom `id`
      */
     id: PropTypes.string.isRequired,
@@ -70,6 +76,12 @@ export default class FilterableMultiSelect extends React.Component {
      * If invalid, what is the error?
      */
     invalidText: PropTypes.node,
+
+    /**
+     * Function to render items as custom components instead of strings.
+     * Defaults to null and is overridden by a getter
+     */
+    itemToElement: PropTypes.func,
 
     /**
      * Helper function passed to downshift that allows the library to render a
@@ -153,6 +165,8 @@ export default class FilterableMultiSelect extends React.Component {
      */
     warnText: PropTypes.node,
   };
+
+  static contextType = FeatureFlagContext;
 
   static getDerivedStateFromProps({ open }, state) {
     /**
@@ -287,8 +301,10 @@ export default class FilterableMultiSelect extends React.Component {
       disabled,
       filterItems,
       items,
+      itemToElement,
       itemToString,
       titleText,
+      hideLabel,
       helperText,
       type,
       initialSelectedItems,
@@ -310,9 +326,20 @@ export default class FilterableMultiSelect extends React.Component {
     const inline = type === 'inline';
     const showWarning = !invalid && warn;
 
+    // needs to be capitalized for react to render it correctly
+    const ItemToElement = itemToElement;
+
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
+
     const wrapperClasses = cx(
       `${prefix}--multi-select__wrapper`,
       `${prefix}--list-box__wrapper`,
+      [enabled ? containerClassName : null],
       {
         [`${prefix}--multi-select__wrapper--inline`]: inline,
         [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -329,6 +356,7 @@ export default class FilterableMultiSelect extends React.Component {
     const titleClasses = cx({
       [`${prefix}--label`]: true,
       [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
     });
     const helperClasses = cx({
       [`${prefix}--form__helper-text`]: true,
@@ -387,7 +415,7 @@ export default class FilterableMultiSelect extends React.Component {
                 `${prefix}--multi-select`,
                 `${prefix}--combo-box`,
                 `${prefix}--multi-select--filterable`,
-                containerClassName,
+                [enabled ? null : containerClassName],
                 {
                   [`${prefix}--multi-select--invalid`]: invalid,
                   [`${prefix}--multi-select--open`]: isOpen,
@@ -541,7 +569,10 @@ export default class FilterableMultiSelect extends React.Component {
                             locale,
                           }
                         ).map((item, index) => {
-                          const itemProps = getItemProps({ item });
+                          const itemProps = getItemProps({
+                            item,
+                            disabled: item.disabled,
+                          });
                           const itemText = itemToString(item);
                           const isChecked =
                             selectedItem.filter((selected) =>
@@ -561,7 +592,14 @@ export default class FilterableMultiSelect extends React.Component {
                                   className={`${prefix}--checkbox-label`}
                                   data-contained-checkbox-state={isChecked}
                                   id={`${itemProps.id}-item`}>
-                                  {itemText}
+                                  {itemToElement ? (
+                                    <ItemToElement
+                                      key={itemProps.id}
+                                      {...item}
+                                    />
+                                  ) : (
+                                    itemText
+                                  )}
                                 </span>
                               </div>
                             </ListBox.MenuItem>

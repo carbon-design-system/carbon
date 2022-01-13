@@ -58,7 +58,7 @@ export FileUploader, {
   FileUploaderDropContainer,
   FileUploaderItem,
 } from './components/FileUploader';
-export FilterableMultiSelect from './components/FilterableMultiSelect';
+export { FilterableMultiSelect } from './components/FilterableMultiSelect';
 export Form from './components/Form';
 export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
@@ -74,6 +74,7 @@ export Modal from './components/Modal';
 export ModalWrapper from './components/ModalWrapper';
 export MultiSelect from './components/MultiSelect';
 export {
+  ActionableNotification,
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
@@ -205,18 +206,18 @@ export {
 } from './components/UIShell';
 
 // Experimental
+export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
   FeatureFlags as unstable_FeatureFlags,
   useFeatureFlag as unstable_useFeatureFlag,
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
 export {
-  PageSelector as unstable_PageSelector,
-  Pagination as unstable_Pagination,
-} from './components/Pagination/experimental';
-export unstable_TreeView, {
-  TreeNode as unstable_TreeNode,
-} from './components/TreeView';
+  Heading as unstable_Heading,
+  Section as unstable_Section,
+} from './components/Heading';
+export { IconButton as unstable_IconButton } from './components/IconButton';
+export { Layer as unstable_Layer } from './components/Layer';
 export unstable_Menu, {
   MenuDivider as unstable_MenuDivider,
   MenuGroup as unstable_MenuGroup,
@@ -224,9 +225,32 @@ export unstable_Menu, {
   MenuRadioGroup as unstable_MenuRadioGroup,
   MenuSelectableItem as unstable_MenuSelectableItem,
 } from './components/Menu';
-export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
-  Heading as unstable_Heading,
-  Section as unstable_Section,
-} from './components/Heading';
+  PageSelector as unstable_PageSelector,
+  Pagination as unstable_Pagination,
+} from './components/Pagination/experimental';
+export {
+  Popover as unstable_Popover,
+  PopoverContent as unstable_PopoverContent,
+} from './components/Popover';
 export { default as unstable_ProgressBar } from './components/ProgressBar';
+export {
+  HStack as unstable_HStack,
+  Stack as unstable_Stack,
+  VStack as unstable_VStack,
+} from './components/Stack';
+export { Tooltip as unstable_Tooltip } from './components/Tooltip/next';
+export unstable_TreeView, {
+  TreeNode as unstable_TreeNode,
+} from './components/TreeView';
+export {
+  TabPanel as unstable_TabPanel,
+  TabPanels as unstable_TabPanels,
+  TabList as unstable_TabList,
+} from './components/Tabs';
+export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
+export {
+  ThemeContext as unstable_ThemeContext,
+  Theme as unstable_Theme,
+  useTheme as unstable_useTheme,
+} from './components/Theme';

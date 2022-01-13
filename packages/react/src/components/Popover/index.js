@@ -5,42 +5,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-function Popover({
-  as: BaseComponent = 'div',
-  caret = true,
-  className: customClassName,
-  children,
-  align = 'bottom',
-  highContrast = false,
-  light = false,
-  open,
-  relative,
-  ...rest
-}) {
+const Popover = React.forwardRef(function Popover(props, ref) {
+  const {
+    align = 'bottom',
+    as: BaseComponent = 'span',
+    caret = true,
+    className: customClassName,
+    children,
+    dropShadow = true,
+    highContrast = false,
+    light = false,
+    open,
+    ...rest
+  } = props;
+  const prefix = usePrefix();
   const className = cx({
-    [`${prefix}--popover`]: true,
+    [`${prefix}--popover-container`]: true,
     [`${prefix}--popover--caret`]: caret,
-    [`${prefix}--popover--light`]: light,
+    [`${prefix}--popover--drop-shadow`]: dropShadow,
     [`${prefix}--popover--high-contrast`]: highContrast,
-    [`${prefix}--popover--${align}`]: true,
+    [`${prefix}--popover--light`]: light,
     [`${prefix}--popover--open`]: open,
-    [`${prefix}--popover--relative`]: relative,
+    [`${prefix}--popover--${align}`]: true,
     [customClassName]: !!customClassName,
   });
 
   return (
-    <BaseComponent {...rest} className={className}>
+    <BaseComponent {...rest} className={className} ref={ref}>
       {children}
     </BaseComponent>
   );
-}
+});
 
 Popover.propTypes = {
   /**
@@ -87,6 +87,11 @@ Popover.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether a drop shadow should be rendered on the popover
+   */
+  dropShadow: PropTypes.bool,
+
+  /**
    * Render the component using the high-contrast variant
    */
   highContrast: PropTypes.bool,
@@ -100,35 +105,24 @@ Popover.propTypes = {
    * Specify whether the component is currently open or closed
    */
   open: PropTypes.bool.isRequired,
-
-  /**
-   * Specify whether the component should be positioned using position:
-   * relative. By default, it will use position: absolute
-   */
-  relative: PropTypes.bool,
 };
 
 const PopoverContent = React.forwardRef(function PopoverContent(
-  { as: BaseComponent = 'div', className, children, ...rest },
+  { className, children, ...rest },
   ref
 ) {
+  const prefix = usePrefix();
   return (
-    <BaseComponent
-      {...rest}
-      className={cx(`${prefix}--popover-contents`, className)}
-      ref={ref}>
-      {children}
-    </BaseComponent>
+    <span {...rest} className={`${prefix}--popover`}>
+      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
+        {children}
+      </span>
+      <span className={`${prefix}--popover-caret`} />
+    </span>
   );
 });
 
 PopoverContent.propTypes = {
-  /**
-   * Provide a custom element or component to render the top-level node for the
-   * component.
-   */
-  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
-
   /**
    * Provide elements to be rendered inside of the component
    */

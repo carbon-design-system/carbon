@@ -124,7 +124,7 @@
 
   .#{$prefix}--slider-text-input,
   .#{$prefix}-slider-text-input {
-    width: auto;
+    width: rem(64px);
     height: rem(40px);
     -moz-appearance: textfield;
     text-align: center;
@@ -133,6 +133,10 @@
     &::-webkit-inner-spin-button {
       display: none;
     }
+  }
+
+  .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid {
+    padding-right: 1rem;
   }
 
   .#{$prefix}--slider__thumb:focus ~ .#{$prefix}--slider__filled-track {

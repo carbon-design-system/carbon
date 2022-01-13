@@ -28,11 +28,11 @@ export function Toggle({
   toggled,
   ...other
 }) {
-  const [checked, setChecked] = useControllableState(
-    toggled,
-    onToggle,
-    defaultToggled
-  );
+  const [checked, setChecked] = useControllableState({
+    value: toggled,
+    onChange: onToggle,
+    defaultValue: defaultToggled,
+  });
 
   function handleClick(e) {
     setChecked(!checked);
@@ -129,12 +129,12 @@ Toggle.propTypes = {
   /**
    * Specify the label for the "off" position
    */
-  labelA: PropTypes.node.isRequired,
+  labelA: PropTypes.node,
 
   /**
    * Specify the label for the "on" position
    */
-  labelB: PropTypes.node.isRequired,
+  labelB: PropTypes.node,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this

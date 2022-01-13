@@ -9,16 +9,13 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
-import debounce from 'lodash.debounce';
 import { ChevronDown16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const rowHeightInPixels = 16;
 const defaultMaxCollapsedNumberOfRows = 15;
@@ -35,6 +32,7 @@ function CodeSnippet({
   feedbackTimeout,
   onClick,
   ariaLabel,
+  copyText,
   copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
   copyButtonDescription,
   light,
@@ -53,6 +51,7 @@ function CodeSnippet({
   const { current: uid } = useRef(getUniqueId());
   const codeContentRef = useRef();
   const codeContainerRef = useRef();
+  const innerCodeRef = useRef();
   const [hasLeftOverflow, setHasLeftOverflow] = useState(false);
   const [hasRightOverflow, setHasRightOverflow] = useState(false);
   const getCodeRef = useCallback(() => {
@@ -63,6 +62,7 @@ function CodeSnippet({
       return codeContentRef;
     }
   }, [type]);
+  const prefix = usePrefix();
 
   const getCodeRefDimensions = useCallback(() => {
     const {
@@ -130,7 +130,7 @@ function CodeSnippet({
           (codeContentRef?.current && type === 'multi') ||
           (codeContainerRef?.current && type === 'single')
         ) {
-          debounce(handleScroll, 200);
+          handleScroll();
         }
       },
     },
@@ -148,7 +148,9 @@ function CodeSnippet({
   }, [handleScroll]);
 
   const handleCopyClick = (evt) => {
-    copy(children);
+    if (copyText || innerCodeRef?.current) {
+      copy(copyText ?? innerCodeRef?.current?.innerText);
+    }
 
     if (onClick) {
       onClick(evt);
@@ -170,7 +172,9 @@ function CodeSnippet({
     if (hideCopyButton) {
       return (
         <span className={codeSnippetClasses}>
-          <code id={uid}>{children}</code>
+          <code id={uid} ref={innerCodeRef}>
+            {children}
+          </code>
         </span>
       );
     }
@@ -184,7 +188,9 @@ function CodeSnippet({
         className={codeSnippetClasses}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
-        <code id={uid}>{children}</code>
+        <code id={uid} ref={innerCodeRef}>
+          {children}
+        </code>
       </Copy>
     );
   }
@@ -227,7 +233,7 @@ function CodeSnippet({
         <pre
           ref={codeContentRef}
           onScroll={(type === 'multi' && handleScroll) || null}>
-          <code>{children}</code>
+          <code ref={innerCodeRef}>{children}</code>
         </pre>
       </div>
       {/**
@@ -279,9 +285,9 @@ CodeSnippet.propTypes = {
   ariaLabel: PropTypes.string,
 
   /**
-   * Provide the content of your CodeSnippet as a string
+   * Provide the content of your CodeSnippet as a node or string
    */
-  children: PropTypes.string,
+  children: PropTypes.node,
 
   /**
    * Specify an optional className to be applied to the container node
@@ -298,6 +304,12 @@ CodeSnippet.propTypes = {
    * node
    */
   copyLabel: PropTypes.string,
+
+  /**
+   * Optional text to copy. If not specified, the `children` node's `innerText`
+   * will be used as the copy value.
+   */
+  copyText: PropTypes.string,
 
   /**
    * Specify whether or not the CodeSnippet should be disabled

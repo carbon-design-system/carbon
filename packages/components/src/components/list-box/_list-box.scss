@@ -408,7 +408,7 @@ $list-box-menu-width: rem(300px);
     position: absolute;
     top: 50%;
     /* to preserve .5rem space between icons according to spec top/transform used to center the combobox clear selection icon in IE11 */
-    right: rem(36px);
+    right: rem(40px);
     display: flex;
     width: rem(24px);
     height: rem(24px);
@@ -656,6 +656,36 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item__option {
     color: $disabled-02;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled],
+  .#{$prefix}--list-box__menu-item[disabled] *,
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    color: $disabled-02;
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    background-color: revert;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--checkbox-label::before {
+    border-color: $disabled-02;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $ui-03;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $ui-03;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline

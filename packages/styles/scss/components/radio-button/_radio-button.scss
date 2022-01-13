@@ -9,7 +9,7 @@
 // Radio
 //-----------------------------
 
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type';
 @use '../form';
 @use '../../utilities/focus-outline' as *;
@@ -19,6 +19,8 @@
 @use '../../utilities/convert' as *;
 @use '../../config' as *;
 @use '../../spacing' as *;
+
+@use '../button/tokens' as *;
 
 /// @type Number
 /// @access public
@@ -119,21 +121,21 @@ $radio-border-width: 1px !default;
     }
   }
 
-  .#{$prefix}--radio-button:disabled-01 + .#{$prefix}--radio-button__label {
-    color: $disabled-01;
+  .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
+    color: $button-disabled;
     cursor: not-allowed;
   }
 
-  .#{$prefix}--radio-button:disabled-01
+  .#{$prefix}--radio-button:disabled
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance,
-  .#{$prefix}--radio-button:disabled-01:checked
+  .#{$prefix}--radio-button:disabled:checked
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
-    border-color: $disabled-01;
+    border-color: $border-disabled;
 
     &::before {
-      background-color: $disabled-01;
+      background-color: $button-disabled;
     }
   }
 
@@ -142,8 +144,8 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button:focus
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
-    box-shadow: 0 0 0 2px $focus;
-    outline: 1px solid transparent;
+    outline: 2px solid $focus;
+    outline-offset: 1.5px;
   }
 
   // Skeleton State

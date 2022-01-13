@@ -437,6 +437,8 @@
 
     p {
       @include type-style('body-short-01');
+
+      text-align: left;
     }
 
     button {
@@ -719,24 +721,6 @@
   }
 }
 
-/// Tooltip styles for v11
-/// @access private
-/// @group tooltip
-@mixin tooltip-next {
-  .#{$prefix}--tooltip {
-    display: inline-block;
-    position: relative;
-  }
-
-  .#{$prefix}--tooltip-content {
-    padding: $carbon--spacing-05;
-  }
-}
-
 @include exports('tooltip') {
-  @if feature-flag-enabled('enable-2021-release') {
-    @include tooltip-next;
-  } @else {
-    @include tooltip;
-  }
+  @include tooltip;
 }

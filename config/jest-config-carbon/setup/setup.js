@@ -18,7 +18,7 @@ global.requestAnimationFrame = function requestAnimationFrame(callback) {
 };
 
 const enzyme = jest.requireActual('enzyme');
-const Adapter = jest.requireActual('enzyme-adapter-react-16');
+const Adapter = jest.requireActual('@wojtekmaj/enzyme-adapter-react-17');
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -38,4 +38,14 @@ if (global.window) {
   // https://github.com/nickcolley/jest-axe/issues/147#issuecomment-758804533
   const { getComputedStyle } = window;
   window.getComputedStyle = (element) => getComputedStyle(element);
+}
+
+if (global.window) {
+  window.ResizeObserver = jest.fn(() => {
+    return {
+      observe: jest.fn(),
+      unobserve: jest.fn(),
+      disconnect: jest.fn(),
+    };
+  });
 }

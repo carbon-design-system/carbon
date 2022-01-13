@@ -1,0 +1,28 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/scss/spacing';
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/theme' with (
+  $theme: themes.$g10
+);
+@use '@carbon/react/scss/layer';
+@use '@carbon/react/scss/grid';
+@use '@carbon/react/scss/components/data-table';
+@use '@carbon/react/scss/components/stack';
+
+body {
+  background: theme.$background;
+  color: theme.$text-primary;
+}
+
+.statistics {
+  display: grid;
+  grid-gap: spacing.$spacing-04 spacing.$spacing-06;
+  grid-template-columns: max-content 1fr;
+}

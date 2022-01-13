@@ -8,9 +8,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { HeaderMenu, HeaderMenuItem } from '../';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 describe('HeaderMenu', () => {
   let mountNode;
@@ -137,30 +136,5 @@ describe('HeaderMenu', () => {
       menuLink.simulate('keydown', { key: 'Escape', keyCode: 27, which: 27 });
       expect(headerInstance.state.expanded).toEqual(false);
     });
-  });
-
-  describe('menu button', () => {
-    it.skip('should set the given ref on the menu button', () => {});
-
-    it.skip('should open and close the menu when interacted with by a mouse', () => {});
-
-    it.skip('should focus the first item in the menu if DOWN is pressed', () => {});
-
-    it.skip('should focus the last item in the menu if UP is pressed', () => {});
-  });
-
-  describe('menu', () => {
-    // https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#kbd2_label
-    it.skip('should close the menu if RIGHT or LEFT are pressed', () => {});
-
-    it.skip('should close the menu and set focus on the menu button if ESC is pressed', () => {});
-
-    it.skip('should focus the first item if HOME is pressed', () => {});
-
-    it.skip('should focus the last item if END is pressed', () => {});
-
-    it.skip('should support movement with UP and DOWN keys', () => {});
-
-    it.skip('should close the menu if blur occurs that is not in the menu or menubar', () => {});
   });
 });

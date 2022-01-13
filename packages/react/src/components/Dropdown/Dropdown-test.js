@@ -65,6 +65,31 @@ describe('Dropdown', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('should render selectedItem as an element', () => {
+    const wrapper = mount(
+      <Dropdown
+        {...mockProps}
+        selectedItem={{
+          id: `id-1`,
+          label: `Item 1`,
+          value: 1,
+        }}
+        renderSelectedItem={(selectedItem) => (
+          <div id="a-custom-element-for-selected-item">
+            {selectedItem.label}
+          </div>
+        )}
+      />
+    );
+    // custom element should be rendered for the selected item
+    expect(wrapper.find('#a-custom-element-for-selected-item')).toHaveLength(1);
+    // the title should use the normal itemToString method
+    expect(wrapper.find('button').instance()).toHaveAttribute(
+      'title',
+      'Item 1'
+    );
+  });
+
   describe('title', () => {
     let wrapper;
     let renderedLabel;
@@ -133,7 +158,7 @@ describe('Dropdown', () => {
   it('should let the user select an option by clicking on the option node', () => {
     const wrapper = mount(<Dropdown {...mockProps} />);
     openMenu(wrapper);
-    wrapper.find('ForwardRef(ListBoxMenuItem)').at(0).simulate('click');
+    wrapper.find('ListBoxMenuItem').at(0).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
@@ -143,7 +168,7 @@ describe('Dropdown', () => {
     mockProps.onChange.mockClear();
 
     openMenu(wrapper);
-    wrapper.find('ForwardRef(ListBoxMenuItem)').at(1).simulate('click');
+    wrapper.find('ListBoxMenuItem').at(1).simulate('click');
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],

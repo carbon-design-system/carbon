@@ -28,7 +28,7 @@ module.exports = {
         ],
 
         // Enforce lowercase test names
-        'jest/lowercase-name': 'off',
+        'jest/prefer-lowercase-title': 'off',
 
         // Disallow alias methods
         'jest/no-alias-methods': 'error',
@@ -108,11 +108,8 @@ module.exports = {
         // Suggest using toStrictEqual()
         'jest/prefer-strict-equal': 'off',
 
-        // Suggest using toBeNull()
-        'jest/prefer-to-be-null': 'off',
-
-        // Suggest using toBeUndefined()
-        'jest/prefer-to-be-undefined': 'off',
+        // Suggest using toBe() for primitive literals
+        'jest/prefer-to-be': 'off',
 
         // Suggest using toContain()
         'jest/prefer-to-contain': 'off',
@@ -130,7 +127,7 @@ module.exports = {
         'jest/require-top-level-describe': 'off',
 
         // Enforce valid describe() callback
-        'jest/valid-describe': 'error',
+        'jest/valid-describe-callback': 'error',
 
         // Enforce valid expect() usage
         'jest/valid-expect': 'error',

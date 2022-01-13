@@ -120,23 +120,6 @@ to `false`:
 );
 ```
 
-### Emitting additional typefaces
-
-When using the font-face declarations, only `IBM Plex Sans` and `IBM Plex Mono`
-are emitted. If you would like to emit additional typefaces, like
-`IBM Plex Sans Arabic`, you can set additional config tokens:
-
-```scss
-@use '@carbon/styles/scss/config' with (
-  $css--plex-arabic: true,
-);
-```
-
-| IBM Plex Language | Token               |
-| :---------------- | :------------------ |
-| Arabic            | `$css--plex-arabic` |
-| TODO              | `TODO`              |
-
 ## Grid
 
 | Import                             | Filepath          |
@@ -383,9 +366,7 @@ you're using from `scss/compat/themes` and set that as your theme.
 
 ```scss
 @use '@carbon/styles/scss/compat/themes' as compat;
-@use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/compat/theme' with (
-  $fallback: themes.$g100,
   $theme: compat.$g100,
 );
 ```

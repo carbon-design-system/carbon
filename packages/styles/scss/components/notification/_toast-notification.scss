@@ -10,7 +10,7 @@
 @use '../../breakpoint' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
-@use '../../feature-flags' as *;
+@use '../../feature-flags';
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -19,6 +19,7 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
+@use './tokens' as *;
 
 /// Toast notification styles
 /// @access public
@@ -31,14 +32,19 @@
     width: rem(288px);
     height: auto;
     padding-left: $spacing-05;
-    margin-top: $spacing-03;
-    margin-right: $spacing-05;
-    margin-bottom: $spacing-03;
+    @if not enabled('enable-v11-release') {
+      margin-top: $spacing-03;
+      margin-right: $spacing-05;
+      margin-bottom: $spacing-03;
+    }
+
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     color: $text-inverse;
 
-    &:first-child {
-      margin-top: $spacing-05;
+    @if not enabled('enable-v11-release') {
+      &:first-child {
+        margin-top: $spacing-05;
+      }
     }
 
     @include breakpoint(max) {
@@ -82,7 +88,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--error {
     @include notification--experimental(
       $support-error,
-      get-token(var(--cds-background-error))
+      $notification-background-error
     );
   }
 
@@ -96,7 +102,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--success {
     @include notification--experimental(
       $support-success,
-      get-token(var(--cds-background-success))
+      $notification-background-success
     );
   }
 
@@ -112,7 +118,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--info-square {
     @include notification--experimental(
       $support-info,
-      get-token(var(--cds-background-info))
+      $notification-background-info
     );
   }
 
@@ -128,7 +134,7 @@
   .#{$prefix}--toast-notification--low-contrast.#{$prefix}--toast-notification--warning-alt {
     @include notification--experimental(
       $support-warning,
-      get-token(var(--cds-background-warning))
+      $notification-background-warning
     );
   }
 
@@ -145,7 +151,7 @@
     margin-right: $spacing-05;
   }
 
-  @if enabled('enable-v11-release') {
+  @if feature-flags.enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__content {
       @include type-style('body-short-01');
 
@@ -204,7 +210,7 @@
     fill: $icon-primary;
   }
 
-  @if not enabled('enable-v11-release') {
+  @if not feature-flags.enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__title {
       @include type-style('productive-heading-01');
 

@@ -16,7 +16,7 @@ const defaultOptions = {
 const cwd = path.resolve(__dirname, '../src');
 const files = glob.sync('**/*.scss', {
   cwd,
-  ignore: ['**/vendor/@carbon/**'],
+  ignore: ['**/vendor/@carbon/**', '**/*.import.scss'],
 });
 
 const render = promisify(sass.render);

@@ -8,12 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { getNextIndex, matches, keys } from '../../internal/keyboard';
-import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class ContentSwitcher extends React.Component {
   /**
@@ -67,6 +65,8 @@ export default class ContentSwitcher extends React.Component {
      */
     size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
   };
+
+  static contextType = PrefixContext;
 
   static defaultProps = {
     selectedIndex: 0,
@@ -130,6 +130,7 @@ export default class ContentSwitcher extends React.Component {
   };
 
   render() {
+    const prefix = this.context;
     const {
       children,
       className,

@@ -56,7 +56,6 @@ exports[`ModalWrapper should render 1`] = `
     <Modal
       aria-label="test modal"
       hasScrollingContent={false}
-      iconDescription="Close"
       id="modal"
       modalHeading="Transactional Modal"
       modalLabel="Test Modal Label"
@@ -110,34 +109,34 @@ exports[`ModalWrapper should render 1`] = `
               Transactional Modal
             </h3>
             <button
-              aria-label="Close"
+              aria-label="close"
               className="bx--modal-close"
               onClick={[Function]}
-              title="Close"
               type="button"
             >
               <ForwardRef(Close20)
-                aria-label="Close"
+                aria-hidden="true"
                 className="bx--modal-close__icon"
+                tabIndex="-1"
               >
                 <Icon
-                  aria-label="Close"
+                  aria-hidden="true"
                   className="bx--modal-close__icon"
                   fill="currentColor"
                   height={20}
                   preserveAspectRatio="xMidYMid meet"
+                  tabIndex="-1"
                   viewBox="0 0 32 32"
                   width={20}
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <svg
-                    aria-label="Close"
+                    aria-hidden={true}
                     className="bx--modal-close__icon"
                     fill="currentColor"
                     focusable="false"
                     height={20}
                     preserveAspectRatio="xMidYMid meet"
-                    role="img"
                     viewBox="0 0 32 32"
                     width={20}
                     xmlns="http://www.w3.org/2000/svg"
@@ -167,36 +166,34 @@ exports[`ModalWrapper should render 1`] = `
             <div
               className="bx--modal-footer bx--btn-set"
             >
-              <SecondaryButtonSet>
-                <Button
-                  dangerDescription="danger"
+              <Button
+                dangerDescription="danger"
+                disabled={false}
+                isExpressive={false}
+                kind="secondary"
+                onClick={[Function]}
+                size="default"
+                tabIndex={0}
+                tooltipAlignment="center"
+                tooltipPosition="top"
+                type="button"
+              >
+                <button
+                  aria-describedby={null}
+                  aria-pressed={null}
+                  className="bx--btn bx--btn--secondary"
                   disabled={false}
-                  isExpressive={false}
-                  kind="secondary"
+                  onBlur={[Function]}
                   onClick={[Function]}
-                  size="default"
+                  onFocus={[Function]}
+                  onMouseEnter={[Function]}
+                  onMouseLeave={[Function]}
                   tabIndex={0}
-                  tooltipAlignment="center"
-                  tooltipPosition="top"
                   type="button"
                 >
-                  <button
-                    aria-describedby={null}
-                    aria-pressed={null}
-                    className="bx--btn bx--btn--secondary"
-                    disabled={false}
-                    onBlur={[Function]}
-                    onClick={[Function]}
-                    onFocus={[Function]}
-                    onMouseEnter={[Function]}
-                    onMouseLeave={[Function]}
-                    tabIndex={0}
-                    type="button"
-                  >
-                    Cancel
-                  </button>
-                </Button>
-              </SecondaryButtonSet>
+                  Cancel
+                </button>
+              </Button>
               <Button
                 dangerDescription="danger"
                 disabled={false}

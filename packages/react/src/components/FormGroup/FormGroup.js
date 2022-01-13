@@ -8,9 +8,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
 const FormGroup = ({
   legendId,
@@ -20,10 +19,15 @@ const FormGroup = ({
   className,
   message,
   messageText,
-  hasMargin,
+  hasMargin, // TODO - remove in v11
   ...other
 }) => {
-  const classNamesLegend = classnames(`${prefix}--label`, className);
+  const prefix = usePrefix();
+  const enabled = useFeatureFlag('enable-v11-release');
+  const classNamesLegend = classnames(`${prefix}--label`, [
+    enabled ? null : className,
+  ]);
+  // TODO - remove `fieldset--no-margin` in v11
   const classNamesFieldset = classnames(`${prefix}--fieldset`, className, {
     [`${prefix}--fieldset--no-margin`]: !hasMargin,
   });

@@ -9,7 +9,7 @@
 @use '../../feature-flags' as *;
 @use "../../type" as *;
 @use '../../motion';
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use "../../utilities/focus-outline" as *;
 @use "../../utilities/skeleton" as *;
 @use "../../utilities/high-contrast-mode" as *;
@@ -36,7 +36,10 @@
 
     display: table;
     width: 100%;
-    margin-bottom: 5rem;
+    @if not enabled('enable-v11-release') {
+      margin-bottom: 5rem;
+    }
+
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
@@ -86,8 +89,8 @@
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
-    border-bottom: 1px solid $hover-row;
-    background-color: $hover-row;
+    border-bottom: 1px solid $background-hover;
+    background-color: $background-hover;
     cursor: pointer;
   }
 

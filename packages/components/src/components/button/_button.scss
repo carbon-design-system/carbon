@@ -523,6 +523,15 @@
   .#{$prefix}--btn:focus {
     @include high-contrast-mode('focus');
   }
+
+  // Windows HCM fix
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
+    .#{$prefix}--btn__icon
+    path:not([data-icon-path]):not([fill='none']),
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
+    @include high-contrast-mode('icon-fill');
+  }
 }
 
 @include exports('button') {

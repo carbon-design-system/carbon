@@ -10,10 +10,12 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import throttle from 'lodash.throttle';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard/match';
 import deprecate from '../../prop-types/deprecate';
+import { FeatureFlagContext } from '../FeatureFlags';
 
 const { prefix } = settings;
 
@@ -167,14 +169,19 @@ export default class Slider extends PureComponent {
     minLabel: '',
     maxLabel: '',
     inputType: 'number',
-    ariaLabelInput: 'Slider number input',
+    ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'Slider number input',
     light: false,
   };
+
+  static contextType = FeatureFlagContext;
 
   state = {
     value: this.props.value,
     left: 0,
     needsOnRelease: false,
+    isValid: true,
   };
 
   /**
@@ -299,7 +306,7 @@ export default class Slider extends PureComponent {
     });
 
     // Set needsOnRelease flag so event fires on next update
-    this.setState({ needsOnRelease: true });
+    this.setState({ needsOnRelease: true, isValid: true });
   };
 
   /**
@@ -329,7 +336,7 @@ export default class Slider extends PureComponent {
     }
 
     const { value, left } = this.calcValue({ clientX });
-    this.setState({ value, left });
+    this.setState({ value, left, isValid: true });
   };
 
   /**
@@ -380,7 +387,8 @@ export default class Slider extends PureComponent {
           ? Math.floor(this.state.value / this.props.step) * this.props.step
           : this.state.value) + delta,
     });
-    this.setState({ value, left });
+
+    this.setState({ value, left, isValid: true });
   };
 
   /**
@@ -390,6 +398,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
+
   onChange = (evt) => {
     // Do nothing if component is disabled
     if (this.props.disabled) {
@@ -407,18 +416,34 @@ export default class Slider extends PureComponent {
     if (isNaN(targetValue)) {
       this.setState({ value: evt.target.value });
     } else {
-      // Recalculate the state's value and update the Slider
-      // if it is a valid number
-      if (evt.target.checkValidity() === false) {
-        return;
-      }
-
       const { value, left } = this.calcValue({
         value: targetValue,
         useRawValue: true,
       });
-      this.setState({ value, left, needsOnRelease: true });
+      this.setState({
+        value,
+        left,
+        needsOnRelease: true,
+      });
     }
+  };
+
+  /**
+   * Checks for validity of input value after clicking out of the input. It also
+   * Handles state change to isValid state.
+   *
+   * @param {Event} evt The event.
+   */
+  onBlur = (evt) => {
+    // Do nothing if we have no valid event, target, or value
+    if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
+      return;
+    }
+    // determine validity of input change after clicking out of input
+    const validity = evt.target.checkValidity();
+    this.setState({
+      isValid: validity,
+    });
   };
 
   /**
@@ -485,6 +510,25 @@ export default class Slider extends PureComponent {
     return { value: steppedValue, left: steppedPercent * 100 };
   };
 
+  // syncs invalid state and prop
+  static getDerivedStateFromProps(props, state) {
+    const { isValid } = state;
+    // will override state in favor of invalid prop
+    if (props.invalid === true && isValid === true) {
+      return {
+        isValid: false,
+      };
+    }
+
+    if (props.invalid === false && isValid === false) {
+      return {
+        isValid: true,
+      };
+    }
+    //if invalid prop is not provided, state will remain the same
+    return null;
+  }
+
   render() {
     const {
       ariaLabelInput,
@@ -507,13 +551,20 @@ export default class Slider extends PureComponent {
       disabled,
       name,
       light,
-      invalid,
       ...other
     } = this.props;
 
     delete other.onRelease;
+    delete other.invalid;
 
-    const { value, left } = this.state;
+    const { value, left, isValid } = this.state;
+
+    const scope = this.context;
+    let enabled;
+
+    if (scope.enabled) {
+      enabled = scope.enabled('enable-v11-release');
+    }
 
     const labelId = `${id}-label`;
     const labelClasses = classNames(`${prefix}--label`, {
@@ -523,7 +574,7 @@ export default class Slider extends PureComponent {
     const sliderClasses = classNames(
       `${prefix}--slider`,
       { [`${prefix}--slider--disabled`]: disabled },
-      className
+      [enabled ? null : className]
     );
 
     const inputClasses = classNames(
@@ -531,7 +582,7 @@ export default class Slider extends PureComponent {
       `${prefix}--slider-text-input`,
       {
         [`${prefix}--text-input--light`]: light,
-        [`${prefix}--text-input--invalid`]: this.props.invalid,
+        [`${prefix}--text-input--invalid`]: isValid === false,
       }
     );
 
@@ -546,8 +597,16 @@ export default class Slider extends PureComponent {
     };
 
     return (
-      <div className={`${prefix}--form-item`}>
-        <label htmlFor={id} className={labelClasses} id={labelId}>
+      <div
+        className={
+          enabled
+            ? classNames(`${prefix}--form-item`, className)
+            : `${prefix}--form-item`
+        }>
+        <label
+          htmlFor={`${id}-input-for-slider`}
+          className={labelClasses}
+          id={labelId}>
           {labelText}
         </label>
         <div className={`${prefix}--slider-container`}>
@@ -564,7 +623,7 @@ export default class Slider extends PureComponent {
             onKeyDown={this.onKeyDown}
             role="presentation"
             tabIndex={-1}
-            data-invalid={invalid || null}
+            data-invalid={isValid ? null : true}
             {...other}>
             <div
               className={`${prefix}--slider__thumb`}
@@ -598,15 +657,16 @@ export default class Slider extends PureComponent {
             name={name}
             className={inputClasses}
             value={value}
-            aria-label={ariaLabelInput}
+            aria-label={ariaLabelInput ? ariaLabelInput : null}
             disabled={disabled}
             required={required}
             min={min}
             max={max}
             step={step}
             onChange={this.onChange}
-            data-invalid={invalid || null}
-            aria-invalid={invalid || null}
+            onBlur={this.onBlur}
+            data-invalid={isValid ? null : true}
+            aria-invalid={isValid ? null : true}
           />
         </div>
       </div>

@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './NumberInput.Skeleton';
+export { default as NumberInputSkeleton } from './NumberInput.Skeleton';
 export default from './NumberInput';

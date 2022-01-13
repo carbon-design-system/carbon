@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './prefix';
 import './feature-flags';
 
 export {
@@ -69,6 +70,7 @@ export {
   Loading,
   Modal,
   MultiSelect,
+  ActionableNotification,
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
@@ -126,9 +128,6 @@ export {
   ToolbarOption,
   ToolbarDivider,
   ToolbarSearch,
-  Tooltip,
-  TooltipDefinition,
-  TooltipIcon,
   UnorderedList,
   SkeletonText,
   SkeletonPlaceholder,
@@ -186,20 +185,38 @@ export {
   SideNavMenuItem,
   SideNavSwitcher,
   // Experimental
-  unstable_ProgressBar,
+  unstable_useContextMenu,
+  unstable_FeatureFlags as FeatureFlags,
+  unstable_Heading as Heading,
+  unstable_HStack as HStack,
+  unstable_IconButton as IconButton,
+  unstable_Layer as Layer,
+  unstable_Menu,
+  unstable_MenuDivider,
+  unstable_MenuGroup,
+  unstable_MenuItem,
+  unstable_MenuRadioGroup,
+  unstable_MenuSelectableItem,
   unstable_PageSelector,
   unstable_Pagination,
-  unstable_TreeView,
+  unstable_Popover as Popover,
+  unstable_PopoverContent as PopoverContent,
+  unstable_ProgressBar,
+  unstable_Section as Section,
+  unstable_Stack as Stack,
+  unstable_ThemeContext,
+  unstable_Theme as Theme,
+  unstable_Tooltip as Tooltip,
   unstable_TreeNode,
-  unstable_useContextMenu,
-  unstable_Heading,
-  unstable_Section,
+  unstable_TreeView,
+  unstable_useFeatureFlag as useFeatureFlag,
+  unstable_useFeatureFlags as useFeatureFlags,
+  unstable_usePrefix as usePrefix,
+  unstable_useTheme as useTheme,
+  unstable_VStack as VStack,
 } from 'carbon-components-react';
-
 export {
   // Grid
   Grid,
   Column,
 } from './components/Grid';
-
-export { Theme, useTheme } from './components/Theme';

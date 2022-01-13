@@ -20,6 +20,9 @@ $fallback: themes.$white !default;
 $theme: () !default;
 $theme: map.merge($fallback, $theme);
 
+/// Local component tokens that can be updated with `@mixin add-component-tokens`.
+$-component-tokens: ();
+
 /// Include the CSS Custom Properties for the active theme or a given theme on
 /// a selector
 @mixin theme($active-theme: $theme, $component-tokens...) {
@@ -32,6 +35,13 @@ $theme: map.merge($fallback, $theme);
       @include -custom-property($token, $value);
     }
   }
+
+  @each $token, $value in $-component-tokens {
+    @include -custom-property(
+      $token,
+      -resolve-token-value($active-theme, $value)
+    );
+  }
 }
 
 /// Retrieve the value for the given $token from the current $theme
@@ -41,6 +51,56 @@ $theme: map.merge($fallback, $theme);
     @return map.get($theme, $token);
   }
   @error "Unable to find token: #{$token} in current $theme";
+}
+
+/// Compare two themes to see if the second theme is a superset of the first
+/// theme. In other words, this function will return true if every token in the
+/// first theme is available in the second theme and has the same value. The
+/// second theme is allowed to have additional values and it will still match.
+/// @param {Map} $a
+/// @param {Map} $b
+/// @returns {Boolean}
+@function matches($a, $b) {
+  @each $key, $value in $a {
+    @if map.has-key($b, $key) == false {
+      @return false;
+    }
+
+    @if map.get($b, $key) != $value {
+      @return false;
+    }
+  }
+
+  @return true;
+}
+
+/// Add component tokens which will be included any time the theme mixin is
+/// called
+@mixin add-component-tokens($token-map) {
+  $-component-tokens: map.merge($-component-tokens, $token-map) !global;
+}
+
+/// Determine the value from a component token that matches the given theme.
+/// This is helpful when a component token may change depending on what theme the
+/// component is being rendered in.
+@function -resolve-token-value($active-theme: $theme, $token-value) {
+  @if meta.type-of($token-value) == map and map.has-key($token-value, values) {
+    $fallback: map.get($token-value, fallback);
+    $theme-values: map.get($token-value, values);
+
+    @each $theme-value in $theme-values {
+      $theme-to-match: map.get($theme-value, theme);
+      $value: map.get($theme-value, value);
+
+      @if matches($theme-to-match, $active-theme) {
+        @return $value;
+      }
+    }
+
+    @return $fallback;
+  }
+
+  @return $token-value;
 }
 
 /// @access private

@@ -9,7 +9,6 @@ import invariant from 'invariant';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import ClickListener from '../../internal/ClickListener';
 import FloatingMenu, {
   DIRECTION_TOP,
@@ -18,8 +17,8 @@ import FloatingMenu, {
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -99,7 +98,9 @@ class OverflowMenu extends Component {
     /**
      * The ARIA label.
      */
-    ariaLabel: PropTypes.string,
+    ariaLabel: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.string.isRequired
+      : PropTypes.string,
 
     /**
      * The child nodes.
@@ -217,8 +218,12 @@ class OverflowMenu extends Component {
     size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
-    ariaLabel: 'open and close list of options',
+    ariaLabel: FeatureFlags.enabled('enable-v11-release')
+      ? null
+      : 'open and close list of options',
     iconDescription: 'open and close list of options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -278,6 +283,7 @@ class OverflowMenu extends Component {
   }
 
   handleClick = (evt) => {
+    evt.stopPropagation();
     if (!this._menuBody || !this._menuBody.contains(evt.target)) {
       this.setState({ open: !this.state.open });
       this.props.onClick(evt);
@@ -416,7 +422,7 @@ class OverflowMenu extends Component {
               !menuBody.contains(target) &&
               triggerEl &&
               !target.matches(
-                `.${prefix}--overflow-menu,.${prefix}--overflow-menu-options`
+                `.${this.context}--overflow-menu,.${this.context}--overflow-menu-options`
               )
             ) {
               this.closeMenu();
@@ -441,6 +447,7 @@ class OverflowMenu extends Component {
   };
 
   render() {
+    const prefix = this.context;
     const {
       id,
       ariaLabel,
@@ -531,8 +538,6 @@ class OverflowMenu extends Component {
     );
 
     const iconProps = {
-      onClick: this.handleClick,
-      onKeyDown: this.handleKeyDown,
       className: overflowMenuIconClasses,
       'aria-label': iconDescription,
     };

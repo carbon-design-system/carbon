@@ -8,10 +8,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { WarningFilled16 } from '@carbon/icons-react';
-
-const { prefix } = settings;
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -30,6 +29,9 @@ const TextArea = React.forwardRef(function TextArea(
   },
   ref
 ) {
+  const prefix = usePrefix();
+  const enabled = useFeatureFlag('enable-v11-release');
+
   const textareaProps = {
     id,
     onChange: (evt) => {
@@ -72,10 +74,14 @@ const TextArea = React.forwardRef(function TextArea(
     </div>
   ) : null;
 
-  const textareaClasses = classNames(`${prefix}--text-area`, className, {
-    [`${prefix}--text-area--light`]: light,
-    [`${prefix}--text-area--invalid`]: invalid,
-  });
+  const textareaClasses = classNames(
+    `${prefix}--text-area`,
+    [enabled ? null : className],
+    {
+      [`${prefix}--text-area--light`]: light,
+      [`${prefix}--text-area--invalid`]: invalid,
+    }
+  );
 
   const input = (
     <textarea
@@ -90,7 +96,12 @@ const TextArea = React.forwardRef(function TextArea(
   );
 
   return (
-    <div className={`${prefix}--form-item`}>
+    <div
+      className={
+        enabled
+          ? classNames(`${prefix}--form-item`, className)
+          : `${prefix}--form-item`
+      }>
       {label}
       <div
         className={`${prefix}--text-area__wrapper`}
@@ -160,7 +171,8 @@ TextArea.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * Specify whether you want the light version of this control
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,
 

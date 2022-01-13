@@ -5,14 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/// The value used to prefix selectors and CSS Custom Properties across the
-/// codebase
-/// @access public
-/// @type String
-/// @group config
-$prefix: 'bx' !default;
-
-/// If true, includes font face mixins in `_css--font-face.scss` depending on the `css--plex` feature flag
+/// If true, includes font face mixins from scss/fonts
 /// @access public
 /// @type Bool
 /// @group config
@@ -30,8 +23,22 @@ $css--reset: true !default;
 /// @group config
 $css--default-type: true !default;
 
-/// If true, include IBM Plex Arabic type
+/// Specify the default value for the `font-display` property used for fonts
+/// loaded with @font-face
 /// @access public
-/// @type Bool
+/// @type String
 /// @group config
-$css--plex-arabic: false !default;
+$font-display: 'swap' !default;
+
+/// Specify the base path for loading IBM Plex
+/// @access public
+/// @type String
+/// @group config
+$font-path: '~@ibm/plex' !default;
+
+/// The value used to prefix selectors and CSS Custom Properties across the
+/// codebase
+/// @access public
+/// @type String
+/// @group config
+$prefix: 'cds' !default;

@@ -8,16 +8,14 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import {
   CheckmarkOutline16,
   Warning16,
-  RadioButton16,
-  CircleFilled16,
+  CircleDash16,
+  Incomplete16,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
-
-const { prefix } = settings;
+import { usePrefix, PrefixContext } from '../../internal/usePrefix';
 
 const defaultRenderLabel = (props) => <p {...props} />;
 
@@ -46,6 +44,7 @@ export function ProgressStep({
   translateWithId: t,
   ...rest
 }) {
+  const prefix = usePrefix();
   const classes = classnames({
     [`${prefix}--progress-step`]: true,
     [`${prefix}--progress-step--current`]: current,
@@ -72,9 +71,9 @@ export function ProgressStep({
     }
     if (current) {
       return (
-        <CircleFilled16>
+        <Incomplete16>
           <title>{description}</title>
-        </CircleFilled16>
+        </Incomplete16>
       );
     }
     if (complete) {
@@ -85,9 +84,9 @@ export function ProgressStep({
       );
     }
     return (
-      <RadioButton16>
+      <CircleDash16>
         <title>{description}</title>
-      </RadioButton16>
+      </CircleDash16>
     );
   };
 
@@ -127,12 +126,14 @@ export function ProgressStep({
           invalid={invalid}
           prefix={prefix}
         />
-        <ProgressStepLabel className={`${prefix}--progress-label`}>
-          {label}
-        </ProgressStepLabel>
-        {secondaryLabel !== null && secondaryLabel !== undefined ? (
-          <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
-        ) : null}
+        <div className={`${prefix}--progress-text`}>
+          <ProgressStepLabel className={`${prefix}--progress-label`}>
+            {label}
+          </ProgressStepLabel>
+          {secondaryLabel !== null && secondaryLabel !== undefined ? (
+            <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
+          ) : null}
+        </div>
         <span className={`${prefix}--progress-line`} />
       </button>
     </li>
@@ -253,6 +254,8 @@ export class ProgressIndicator extends Component {
     vertical: PropTypes.bool,
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
     currentIndex: 0,
   };
@@ -306,6 +309,7 @@ export class ProgressIndicator extends Component {
       spaceEqually,
       ...other
     } = this.props;
+    const prefix = this.context;
     const classes = classnames({
       [`${prefix}--progress`]: true,
       [`${prefix}--progress--vertical`]: vertical,

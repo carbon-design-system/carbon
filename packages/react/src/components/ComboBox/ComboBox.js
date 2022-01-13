@@ -9,7 +9,7 @@ import cx from 'classnames';
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState, useRef } from 'react';
-import { settings } from 'carbon-components';
+import { Text } from '../Text';
 import {
   Checkmark16,
   WarningAltFilled16,
@@ -21,8 +21,8 @@ import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
-
-const { prefix } = settings;
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -100,6 +100,7 @@ const ComboBox = React.forwardRef((props, ref) => {
     warnText,
     ...rest
   } = props;
+  const prefix = usePrefix();
 
   const textInput = useRef();
   const comboBoxInstanceId = getInstanceId();
@@ -190,11 +191,17 @@ const ComboBox = React.forwardRef((props, ref) => {
     }
   };
 
+  const enabled = useFeatureFlag('enable-v11-release');
+
   const showWarning = !invalid && warn;
-  const className = cx(`${prefix}--combo-box`, containerClassName, {
-    [`${prefix}--list-box--up`]: direction === 'top',
-    [`${prefix}--combo-box--warning`]: showWarning,
-  });
+  const className = cx(
+    `${prefix}--combo-box`,
+    [enabled ? null : containerClassName],
+    {
+      [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--combo-box--warning`]: showWarning,
+    }
+  );
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
   });
@@ -204,7 +211,10 @@ const ComboBox = React.forwardRef((props, ref) => {
   const helperClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
-  const wrapperClasses = cx(`${prefix}--list-box__wrapper`);
+  const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
+    enabled ? containerClassName : null,
+  ]);
+
   const inputClasses = cx(`${prefix}--text-input`, {
     [`${prefix}--text-input--empty`]: !inputValue,
   });
@@ -252,11 +262,13 @@ const ComboBox = React.forwardRef((props, ref) => {
           // https://github.com/downshift-js/downshift/blob/v5.2.1/src/downshift.js#L1051-L1065
           //
           // As a result, it will reset the state of the component and so we
-          // stop the event from propagating to prevent this. This allows the
-          // toggleMenu behavior for the toggleButton to correctly open and
+          // stop the event from propagating to prevent this if the menu is already open.
+          // This allows the toggleMenu behavior for the toggleButton to correctly open and
           // close the menu.
           onMouseUp(event) {
-            event.stopPropagation();
+            if (isOpen) {
+              event.stopPropagation();
+            }
           },
         });
         const inputProps = getInputProps({
@@ -281,9 +293,9 @@ const ComboBox = React.forwardRef((props, ref) => {
         return (
           <div className={wrapperClasses}>
             {titleText && (
-              <label className={titleClasses} {...labelProps}>
+              <Text as="label" className={titleClasses} {...labelProps}>
                 {titleText}
-              </label>
+              </Text>
             )}
             <ListBox
               className={className}
@@ -345,6 +357,7 @@ const ComboBox = React.forwardRef((props, ref) => {
                           ['aria-current']: selectedItem === item ? true : null,
                           ['aria-selected']:
                             highlightedIndex === index ? true : null,
+                          disabled: item.disabled,
                         });
                         return (
                           <ListBox.MenuItem
@@ -379,9 +392,9 @@ const ComboBox = React.forwardRef((props, ref) => {
               </ListBox.Menu>
             </ListBox>
             {helperText && !invalid && !warn && (
-              <div id={comboBoxHelperId} className={helperClasses}>
+              <Text as="div" id={comboBoxHelperId} className={helperClasses}>
                 {helperText}
-              </div>
+              </Text>
             )}
           </div>
         );
@@ -390,6 +403,7 @@ const ComboBox = React.forwardRef((props, ref) => {
   );
 });
 
+ComboBox.displayName = 'ComboBox';
 ComboBox.propTypes = {
   /**
    * 'aria-label' of the ListBox component.

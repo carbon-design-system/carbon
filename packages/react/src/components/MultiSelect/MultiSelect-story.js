@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import {
   withKnobs,
@@ -20,6 +20,7 @@ import MultiSelect from '../MultiSelect';
 import FilterableMultiSelect from '../MultiSelect/FilterableMultiSelect';
 import Checkbox from '../Checkbox';
 import mdx from './MultiSelect.mdx';
+import Button from '../Button';
 
 const items = [
   {
@@ -32,7 +33,8 @@ const items = [
   },
   {
     id: 'downshift-1-item-2',
-    text: 'Option 3',
+    text: 'Option 3 - a disabled item',
+    disabled: true,
   },
   {
     id: 'downshift-1-item-3',
@@ -71,6 +73,7 @@ const directions = {
 const props = () => ({
   id: text('MultiSelect ID (id)', 'carbon-multiselect-example'),
   titleText: text('Title (titleText)', 'Multiselect title'),
+  hideLabel: boolean('No title text shown (hideLabel)', false),
   helperText: text('Helper text (helperText)', 'This is helper text'),
   disabled: boolean('Disabled (disabled)', false),
   light: boolean('Light variant (light)', false),
@@ -136,6 +139,90 @@ export const Default = withReadme(readme, () => {
         itemToString={(item) => (item ? item.text : '')}
         translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
         selectionFeedback={selectionFeedback}
+      />
+    </div>
+  );
+});
+
+export const controlled = withReadme(readme, () => {
+  const {
+    listBoxMenuIconTranslationIds,
+    selectionFeedback,
+    ...multiSelectProps
+  } = props();
+  const [selectedItems, setSelectedItems] = useState([]);
+  const onChange = useCallback(({ selectedItems: newSelectedItems }) => {
+    setSelectedItems(newSelectedItems);
+  }, []);
+
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        {...multiSelectProps}
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
+        selectionFeedback={selectionFeedback}
+        onChange={onChange}
+        selectedItems={selectedItems}
+      />
+      <Button
+        onClick={() => {
+          setSelectedItems([{ id: 'downshift-1-item-0', text: 'Option 1' }]);
+        }}>
+        click to select only Option 1
+      </Button>
+      <Button
+        onClick={() => {
+          setSelectedItems([]);
+        }}>
+        click to clear selections
+      </Button>
+    </div>
+  );
+});
+
+export const ItemToElement = withReadme(readme, () => {
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        titleText="Multiselect with element items"
+        label="Choose an item"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            ''
+          )
+        }
+      />
+      <br />
+      <FilterableMultiSelect
+        titleText="Filterable Multiselect with element items"
+        placeholder="itemToElement example"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        itemToElement={(item) =>
+          item ? (
+            <span className="test">
+              {item.text}{' '}
+              <span role="img" alt="fire">
+                {' '}
+                🔥
+              </span>
+            </span>
+          ) : (
+            ''
+          )
+        }
       />
     </div>
   );

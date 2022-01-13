@@ -9,7 +9,7 @@ exports[`AccordionItem should render 1`] = `
     className="bx--accordion__item extra-class"
     onAnimationEnd={[Function]}
   >
-    <defaultRenderExpando
+    <defaultRenderToggle
       aria-controls="accordion-item-1"
       aria-expanded={false}
       className="bx--accordion__heading"
@@ -54,13 +54,19 @@ exports[`AccordionItem should render 1`] = `
             </svg>
           </Icon>
         </ForwardRef(ChevronRight16)>
-        <div
+        <Text
+          as="div"
           className="bx--accordion__title"
         >
-          A heading
-        </div>
+          <div
+            className="bx--accordion__title"
+            dir="auto"
+          >
+            A heading
+          </div>
+        </Text>
       </button>
-    </defaultRenderExpando>
+    </defaultRenderToggle>
     <div
       className="bx--accordion__content"
       id="accordion-item-1"

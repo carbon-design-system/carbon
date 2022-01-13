@@ -6,18 +6,12 @@
  */
 
 import { ChevronDown16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-
-const { prefix } = settings;
-
-const defaultRenderMenuContent = () => (
-  <ChevronDown16 className={`${prefix}--header__menu-arrow`} />
-);
+import { PrefixContext } from '../../internal/usePrefix';
 
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
@@ -53,9 +47,7 @@ class HeaderMenu extends React.Component {
     tabIndex: PropTypes.number,
   };
 
-  static defaultProps = {
-    renderMenuContent: defaultRenderMenuContent,
-  };
+  static contextType = PrefixContext;
 
   _subMenus = React.createRef();
 
@@ -166,7 +158,9 @@ class HeaderMenu extends React.Component {
   };
 
   render() {
+    const prefix = this.context;
     const {
+      isCurrentPage,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       className: customClassName,
@@ -176,11 +170,17 @@ class HeaderMenu extends React.Component {
       focusRef, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
+
     const accessibilityLabel = {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
     };
-    const className = cx(`${prefix}--header__submenu`, customClassName);
+    const className = cx({
+      [`${prefix}--header__submenu`]: true,
+      [customClassName]: true,
+      [`${prefix}--header__submenu--current`]: isCurrentPage,
+    });
+
     // Notes on eslint comments and based on the examples in:
     // https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#
     // - The focus is handled by the <a> menuitem, onMouseOver is for mouse
@@ -205,7 +205,11 @@ class HeaderMenu extends React.Component {
           tabIndex={0}
           {...accessibilityLabel}>
           {menuLinkName}
-          <MenuContent />
+          {MenuContent ? (
+            <MenuContent />
+          ) : (
+            <ChevronDown16 className={`${this.context}--header__menu-arrow`} />
+          )}
         </a>
         <ul
           {...accessibilityLabel}

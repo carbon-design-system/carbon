@@ -8,16 +8,16 @@
 @use '../../breakpoint' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
-@use '../../feature-flags' as *;
+@use '../../feature-flags';
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../themes' as *;
 @use '../../type' as *;
 @use '../../utilities/convert' as *;
-@use '../../utilities/component-tokens' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
+@use './tokens' as *;
 
 /// Inline notification styles
 /// @access public
@@ -34,8 +34,11 @@
     height: auto;
     min-height: rem(48px);
     flex-wrap: wrap;
-    margin-top: $spacing-05;
-    margin-bottom: $spacing-05;
+    @if not enabled('enable-v11-release') {
+      margin-top: $spacing-05;
+      margin-bottom: $spacing-05;
+    }
+
     color: $text-inverse;
 
     @include breakpoint(md) {
@@ -102,7 +105,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--error {
     @include notification--experimental(
       $support-error,
-      get-token(var(--cds-background-error))
+      $notification-background-error
     );
 
     &::before {
@@ -120,7 +123,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--success {
     @include notification--experimental(
       $support-success,
-      get-token-value(var(--cds-background-success))
+      $notification-background-success
     );
 
     &::before {
@@ -140,7 +143,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--info-square {
     @include notification--experimental(
       $support-info,
-      get-token-value(var(--cds-background-info))
+      $notification-background-info
     );
 
     &::before {
@@ -160,7 +163,7 @@
   .#{$prefix}--inline-notification--low-contrast.#{$prefix}--inline-notification--warning-alt {
     @include notification--experimental(
       $support-warning,
-      get-token-value(var(--cds-background-warning))
+      $notification-background-warning
     );
 
     &::before {
@@ -197,7 +200,7 @@
     padding: rem(15px) 0;
   }
 
-  @if enabled('enable-v11-release') {
+  @if feature-flags.enabled('enable-v11-release') {
     .#{$prefix}--inline-notification__content {
       @include type-style('body-short-01');
 
@@ -241,7 +244,7 @@
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:active,
   .#{$prefix}--inline-notification--low-contrast
     .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:hover {
-    background-color: get-token-value(var(--cds-action-hover));
+    background-color: $notification-action-hover;
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost:focus {

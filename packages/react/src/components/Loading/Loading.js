@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 
 function Loading({
@@ -23,6 +22,7 @@ function Loading({
   description,
   ...rest
 }) {
+  const prefix = usePrefix();
   const { current: instanceId } = useRef(getInstanceId());
   const loadingClassName = cx(customClassName, {
     [`${prefix}--loading`]: true,
@@ -84,7 +84,7 @@ Loading.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify an description that would be used to best describe the loading state
+   * Specify a description that would be used to best describe the loading state
    */
   description: PropTypes.string,
 

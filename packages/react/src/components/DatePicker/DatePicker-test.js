@@ -10,9 +10,8 @@ import DatePicker from '../DatePicker';
 import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
 import DatePickerInput from '../DatePickerInput/DatePickerInput';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'bx';
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {
@@ -352,21 +351,6 @@ describe('DatePicker', () => {
     it('should not have "console.error" being created', () => {
       expect(mockConsoleError).not.toHaveBeenCalled();
     });
-  });
-});
-
-describe('DatePickerInput', () => {
-  it('should call `openCalendar` on calendar icon click', () => {
-    const mockOpenCalendar = jest.fn();
-    const wrapper = mount(
-      <DatePickerInput
-        labelText="Date Picker label"
-        id="input-from"
-        openCalendar={mockOpenCalendar}
-      />
-    );
-    wrapper.find('svg').simulate('click');
-    expect(mockOpenCalendar).toHaveBeenCalled();
   });
 });
 

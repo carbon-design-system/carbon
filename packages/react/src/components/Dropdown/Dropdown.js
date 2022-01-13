@@ -7,7 +7,6 @@
 
 import React, { useRef } from 'react';
 import { useSelect } from 'downshift';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
@@ -19,8 +18,8 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -40,6 +39,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     ariaLabel,
     itemToString,
     itemToElement,
+    renderSelectedItem,
     type,
     size,
     onChange,
@@ -60,6 +60,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const selectProps = mapDownshiftProps({
     ...downshiftProps,
     items,
@@ -86,16 +87,22 @@ const Dropdown = React.forwardRef(function Dropdown(
   const inline = type === 'inline';
   const showWarning = !invalid && warn;
 
-  const className = cx(`${prefix}--dropdown`, containerClassName, {
-    [`${prefix}--dropdown--invalid`]: invalid,
-    [`${prefix}--dropdown--warning`]: showWarning,
-    [`${prefix}--dropdown--open`]: isOpen,
-    [`${prefix}--dropdown--inline`]: inline,
-    [`${prefix}--dropdown--disabled`]: disabled,
-    [`${prefix}--dropdown--light`]: light,
-    [`${prefix}--dropdown--${size}`]: size,
-    [`${prefix}--list-box--up`]: direction === 'top',
-  });
+  const enabled = useFeatureFlag('enable-v11-release');
+
+  const className = cx(
+    `${prefix}--dropdown`,
+    [enabled ? null : containerClassName],
+    {
+      [`${prefix}--dropdown--invalid`]: invalid,
+      [`${prefix}--dropdown--warning`]: showWarning,
+      [`${prefix}--dropdown--open`]: isOpen,
+      [`${prefix}--dropdown--inline`]: inline,
+      [`${prefix}--dropdown--disabled`]: disabled,
+      [`${prefix}--dropdown--light`]: light,
+      [`${prefix}--dropdown--${size}`]: size,
+      [`${prefix}--list-box--up`]: direction === 'top',
+    }
+  );
 
   const titleClasses = cx(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
@@ -109,6 +116,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   const wrapperClasses = cx(
     `${prefix}--dropdown__wrapper`,
     `${prefix}--list-box__wrapper`,
+    [enabled ? containerClassName : null],
     {
       [`${prefix}--dropdown__wrapper--inline`]: inline,
       [`${prefix}--list-box__wrapper--inline`]: inline,
@@ -167,14 +175,22 @@ const Dropdown = React.forwardRef(function Dropdown(
           {...toggleButtonProps}
           ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
-            {selectedItem ? itemToString(selectedItem) : label}
+            {selectedItem
+              ? renderSelectedItem
+                ? renderSelectedItem(selectedItem)
+                : itemToString(selectedItem)
+              : label}
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
         <ListBox.Menu {...getMenuProps()}>
           {isOpen &&
             items.map((item, index) => {
-              const itemProps = getItemProps({ item, index });
+              const itemProps = getItemProps({
+                item,
+                index,
+                disabled: item.disabled,
+              });
               const title = itemToElement ? item.text : itemToString(item);
               const { offsetWidth, scrollWidth } =
                 menuItemOptionRefs?.current[index]?.current || {};
@@ -241,7 +257,7 @@ Dropdown.propTypes = {
    * Provide helper text that is used alongside the control label for
    * additional help
    */
-  helperText: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  helperText: PropTypes.node,
 
   /**
    * Specify whether the title text should be hidden or not
@@ -317,6 +333,12 @@ Dropdown.propTypes = {
    * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func,
+
+  /**
+   * An optional callback to render the currently selected item as a react element instead of only
+   * as a string.
+   */
+  renderSelectedItem: PropTypes.func,
 
   /**
    * In the case you want to control the dropdown selection entirely.

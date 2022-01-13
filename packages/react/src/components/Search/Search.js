@@ -60,6 +60,11 @@ export default class Search extends Component {
     onChange: PropTypes.func,
 
     /**
+     * Optional callback called when the search value is cleared.
+     */
+    onClear: PropTypes.func,
+
+    /**
      * Provide a handler that is invoked on the key down event for the input
      */
     onKeyDown: PropTypes.func,
@@ -120,6 +125,7 @@ export default class Search extends Component {
     placeholder: '',
     closeButtonLabelText: 'Clear search input',
     onChange: () => {},
+    onClear: () => {},
   };
 
   state = {
@@ -149,6 +155,8 @@ export default class Search extends Component {
       });
       this.props.onChange(clearedEvt);
     }
+
+    this.props.onClear();
 
     this.setState({ hasContent: false }, () => this.input.focus());
   };
@@ -183,6 +191,7 @@ export default class Search extends Component {
       onChange,
       onKeyDown,
       renderIcon,
+      onClear, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
@@ -212,9 +221,16 @@ export default class Search extends Component {
       [`${prefix}--search-close--hidden`]: !hasContent,
     });
 
+    let customIcon;
+    if (renderIcon) {
+      customIcon = React.cloneElement(renderIcon, {
+        className: `${prefix}--search-magnifier-icon`,
+      });
+    }
+
     const searchId = `${id}-search`;
     const searchIcon = renderIcon ? (
-      renderIcon
+      customIcon
     ) : (
       <Search16 className={`${prefix}--search-magnifier-icon`} />
     );

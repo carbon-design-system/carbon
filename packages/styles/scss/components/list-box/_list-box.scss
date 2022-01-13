@@ -11,7 +11,7 @@
 @use '../tag/mixins' as *;
 @use '../../config' as *;
 @use '../../colors' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
@@ -158,7 +158,7 @@ $list-box-menu-width: rem(300px);
     background-color: $field-02;
 
     &:hover {
-      background-color: $hover-light-ui;
+      background-color: $layer-hover-02;
     }
   }
 
@@ -169,7 +169,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $decorative-01;
+    border-top-color: $border-subtle-02;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
@@ -561,7 +561,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
-    background-color: $hover-light-ui;
+    background-color: $layer-hover-02;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
@@ -668,6 +668,36 @@ $list-box-menu-width: rem(300px);
     color: $text-disabled;
   }
 
+  .#{$prefix}--list-box__menu-item[disabled],
+  .#{$prefix}--list-box__menu-item[disabled] *,
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    color: $text-disabled;
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    background-color: revert;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--checkbox-label::before {
+    border-color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle;
+  }
+
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__menu-item__option {
     margin: 0 $spacing-03;
@@ -713,8 +743,8 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--active:hover,
   .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
-    border-bottom-color: $layer-selected;
-    background-color: $layer-selected;
+    border-bottom-color: $layer-selected-hover;
+    background-color: $layer-selected-hover;
   }
 
   .#{$prefix}--list-box__menu-item--active

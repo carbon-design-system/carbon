@@ -10,17 +10,16 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { Close20 } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus from '../../internal/wrapFocus';
-
-const { prefix } = settings;
+import { usePrefix, PrefixContext } from '../../internal/usePrefix';
 
 export default class ComposedModal extends Component {
   state = {};
 
+  static contextType = PrefixContext;
   static defaultProps = {
     onKeyDown: () => {},
     selectorPrimaryFocus: '[data-modal-primary-focus]',
@@ -92,7 +91,7 @@ export default class ComposedModal extends Component {
     /**
      * Specify the CSS selectors that match the floating menus
      */
-    selectorsFloatingMenus: PropTypes.string,
+    selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
 
     /**
      * Specify the size variant.
@@ -164,7 +163,7 @@ export default class ComposedModal extends Component {
     if (prevState.open !== this.state.open) {
       toggleClass(
         document.body,
-        `${prefix}--body--with-modal-open`,
+        `${this.context}--body--with-modal-open`,
         this.state.open
       );
     }
@@ -186,13 +185,13 @@ export default class ComposedModal extends Component {
   };
 
   componentWillUnmount() {
-    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+    toggleClass(document.body, `${this.context}--body--with-modal-open`, false);
   }
 
   componentDidMount() {
     toggleClass(
       document.body,
-      `${prefix}--body--with-modal-open`,
+      `${this.context}--body--with-modal-open`,
       this.props.open
     );
     if (!this.props.open) {
@@ -225,6 +224,7 @@ export default class ComposedModal extends Component {
 
   render() {
     const { open } = this.state;
+    const prefix = this.context;
     const {
       ['aria-labelledby']: ariaLabelledBy,
       ['aria-label']: ariaLabel,
@@ -234,6 +234,7 @@ export default class ComposedModal extends Component {
       danger,
       preventCloseOnClickOutside, // eslint-disable-line
       selectorPrimaryFocus, // eslint-disable-line
+      selectorsFloatingMenus, // eslint-disable-line
       size,
       ...other
     } = this.props;
@@ -370,6 +371,8 @@ export class ModalHeader extends Component {
     titleClassName: PropTypes.string,
   };
 
+  static contextType = PrefixContext;
+
   static defaultProps = {
     iconDescription: 'Close',
     buttonOnClick: () => {},
@@ -396,6 +399,8 @@ export class ModalHeader extends Component {
       preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
+
+    const prefix = this.context;
 
     const headerClass = classNames({
       [`${prefix}--modal-header`]: true,
@@ -452,6 +457,7 @@ export function ModalBody(props) {
     preventCloseOnClickOutside, // eslint-disable-line
     ...other
   } = props;
+  const prefix = usePrefix();
   const contentClass = classNames({
     [`${prefix}--modal-content`]: true,
     [`${prefix}--modal-content--with-form`]: hasForm,
@@ -618,6 +624,8 @@ export class ModalFooter extends Component {
     onRequestSubmit: () => {},
   };
 
+  static contextType = PrefixContext;
+
   handleRequestClose = (evt) => {
     this.props.closeModal(evt);
     this.props.onRequestClose(evt);
@@ -640,6 +648,8 @@ export class ModalFooter extends Component {
       inputref,
       ...other
     } = this.props;
+
+    const prefix = this.context;
 
     const footerClass = classNames({
       [`${prefix}--modal-footer`]: true,

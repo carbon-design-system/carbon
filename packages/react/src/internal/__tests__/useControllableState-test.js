@@ -5,14 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React, { useState } from 'react';
 import { useControllableState } from '../useControllableState';
 
 describe('useControllableState', () => {
-  afterEach(cleanup);
-
   test('uncontrolled', () => {
     render(<TextInput />);
     userEvent.type(screen.getByTestId('input'), 'test');
@@ -26,28 +24,37 @@ describe('useControllableState', () => {
   });
 
   test('controlled to uncontrolled', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const error = jest.spyOn(console, 'error').mockImplementation(() => {});
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
-    render(<Toggle defaultControlled={true} />);
-
+    render(<Toggle defaultControlled />);
     userEvent.click(screen.getByTestId('toggle'));
-    expect(spy).toHaveBeenCalled();
-    spy.mockRestore();
+
+    expect(error).toHaveBeenCalled();
+    expect(warn).toHaveBeenCalled();
+
+    error.mockRestore();
+    warn.mockRestore();
   });
 
   test('uncontrolled to controlled', () => {
-    const spy = jest.spyOn(console, 'warn').mockImplementation(() => {});
+    const warn = jest.spyOn(console, 'warn').mockImplementation(() => {});
 
     render(<Toggle defaultControlled={false} />);
-
     userEvent.click(screen.getByTestId('toggle'));
-    expect(spy).toHaveBeenCalled();
-    spy.mockRestore();
+
+    expect(warn).toHaveBeenCalled();
+
+    warn.mockRestore();
   });
 });
 
 function TextInput({ onChange, value: controlledValue }) {
-  const [value, setValue] = useControllableState(controlledValue, onChange, '');
+  const [value, setValue] = useControllableState({
+    value: controlledValue,
+    defaultValue: '',
+    onChange,
+  });
 
   function handleOnChange(event) {
     setValue(event.target.value);
