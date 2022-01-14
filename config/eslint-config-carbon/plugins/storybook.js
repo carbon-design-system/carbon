@@ -38,7 +38,7 @@ module.exports = {
         'storybook/no-stories-of': 'error',
 
         // Do not define a title in meta
-        'storybook/no-title-property-in-meta': 'error',
+        'storybook/no-title-property-in-meta': 'off',
 
         // Stories should use PascalCase
         'storybook/prefer-pascal-case': 'error',
