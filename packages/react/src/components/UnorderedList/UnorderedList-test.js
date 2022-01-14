@@ -20,7 +20,7 @@ describe('UnorderedList', () => {
         <ListItem>Item</ListItem>
       </UnorderedList>
     );
-    expect(screen.getByText('Item')).toBeDefined();
+    expect(screen.getByText('Item')).toBeInTheDocument();
   });
 
   it('should render nested lists', () => {
@@ -36,8 +36,7 @@ describe('UnorderedList', () => {
     expect(
       screen
         .getByTestId('nested-list')
-        .classList.contains(`${prefix}--list--nested`)
-    ).toBe(true);
+    ).toHaveClass(`${prefix}--list--nested`);
   });
 
   it('should add custom className given via className prop', () => {
@@ -47,8 +46,6 @@ describe('UnorderedList', () => {
       </UnorderedList>
     );
 
-    expect(screen.getByTestId('list').classList.contains('some-class')).toBe(
-      true
-    );
+    expect(screen.getByTestId('list')).toHaveClass('some-class');
   });
 });
