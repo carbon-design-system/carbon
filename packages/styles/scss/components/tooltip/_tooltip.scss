@@ -43,7 +43,7 @@ $tooltip-padding-inline: custom-property.get-var(
   .#{$prefix}--definition-term {
     @include button-reset.reset;
 
-    border-bottom: 1px dotted theme.$border-strong;
+    border-bottom: 1px dotted theme.$border-interactive;
     border-radius: 0;
   }
 

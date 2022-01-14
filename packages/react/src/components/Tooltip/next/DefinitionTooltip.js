@@ -35,7 +35,7 @@ function DefinitionTooltip({ children, definition, ...rest }) {
         onMouseOver={() => setOpen(true)}
         onBlur={() => setOpen(false)}
         onKeyDown={handleKeyDown}
-        onClick={() => setOpen(!isOpen)}
+        onClick={() => !isOpen && setOpen(!isOpen)}
         onFocus={() => setOpen(true)}
         {...rest}>
         {children}
