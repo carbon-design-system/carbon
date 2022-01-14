@@ -11,7 +11,14 @@
 @use '../../theme' as *;
 @use '../../type';
 @use '../../utilities/component-reset';
+@use '../../utilities/custom-property';
 @use '../../utilities/focus-outline' as *;
+
+$link-text-color: custom-property.get-var('link-text-color', $link-primary);
+$link-hover-text-color: custom-property.get-var(
+  'link-hover-text-color',
+  $link-primary-hover
+);
 
 /// Link styles
 /// @access public
@@ -22,13 +29,13 @@
     @include type.type-style('body-short-01');
 
     display: inline-flex;
-    color: var(--cds-link-text-color, $link-primary);
+    color: $link-text-color;
     outline: none;
     text-decoration: none;
     transition: color $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      color: var(--cds-link-hover-text-color, $link-primary-hover);
+      color: $link-hover-text-color;
       text-decoration: underline;
     }
 

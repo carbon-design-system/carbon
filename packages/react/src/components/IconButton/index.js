@@ -25,26 +25,18 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
   } = props;
   const prefix = usePrefix();
 
-  if (label) {
-    return (
-      <Tooltip
-        align={align}
-        className={`${prefix}--icon-tooltip`}
-        defaultOpen={defaultOpen}
-        enterDelayMs={enterDelayMs}
-        label={label}
-        leaveDelayMs={leaveDelayMs}>
-        <Button {...rest} hasIconOnly kind={kind} ref={ref} size={size}>
-          {children}
-        </Button>
-      </Tooltip>
-    );
-  }
-
   return (
-    <Button {...rest} hasIconOnly kind={kind} ref={ref} size={size}>
-      {children}
-    </Button>
+    <Tooltip
+      align={align}
+      className={`${prefix}--icon-tooltip`}
+      defaultOpen={defaultOpen}
+      enterDelayMs={enterDelayMs}
+      label={label}
+      leaveDelayMs={leaveDelayMs}>
+      <Button {...rest} hasIconOnly kind={kind} ref={ref} size={size}>
+        {children}
+      </Button>
+    </Tooltip>
   );
 });
 

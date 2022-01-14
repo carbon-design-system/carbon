@@ -44,10 +44,16 @@
   }
 
   .#{$prefix}--toggletip-content {
-    @include type.type-style('body-short-01');
     @include custom-property.declaration('popover-offset', convert.rem(14px));
-    --cds-link-text-color: #{theme.$link-inverse};
-    --cds-link-hover-text-color: #{theme.$link-inverse};
+    @include custom-property.declaration(
+      'link-text-color',
+      theme.$link-inverse
+    );
+    @include custom-property.declaration(
+      'link-hover-text-color',
+      theme.$link-inverse
+    );
+    @include type.type-style('body-short-01');
 
     display: grid;
     max-width: 18rem;
