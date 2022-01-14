@@ -33,10 +33,9 @@ describe('UnorderedList', () => {
       </UnorderedList>
     );
 
-    expect(
-      screen
-        .getByTestId('nested-list')
-    ).toHaveClass(`${prefix}--list--nested`);
+    expect(screen.getByTestId('nested-list')).toHaveClass(
+      `${prefix}--list--nested`
+    );
   });
 
   it('should add custom className given via className prop', () => {
