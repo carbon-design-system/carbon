@@ -6,154 +6,122 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
-import { settings } from 'carbon-components';
-import mergeRefs from '../../tools/mergeRefs';
+import React, { useEffect, useRef } from 'react';
+import { usePrefix } from '../../internal/usePrefix';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
-const { prefix } = settings;
-
-class InlineCheckbox extends React.Component {
-  static propTypes = {
-    /**
-     * Specify the label for the control
-     */
-    ariaLabel: PropTypes.string.isRequired,
-
-    /**
-     * Specify whether the underlying control is checked, or not
-     */
-    checked: PropTypes.bool.isRequired,
-
-    /**
-     * Specify whether the underlying input control should be disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Provide an `id` for the underlying input control
-     */
-    id: PropTypes.string.isRequired,
-
-    /**
-     * Specify whether the control is in an indterminate state
-     */
-    indeterminate: PropTypes.bool,
-
-    /**
-     * Provide a `name` for the underlying input control
-     */
-    name: PropTypes.string.isRequired,
-
-    /**
-     * Provide an optional hook that is called each time the input is updated
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * Provide a handler that is invoked when a user clicks on the control
-     */
-    onClick: PropTypes.func,
-    /**
-     * Provide a handler that is invoked on the key down event for the control
-     */
-    onKeyDown: PropTypes.func,
-
-    /**
-     * Provide an optional tooltip for the InlineCheckbox
-     */
-    title: PropTypes.string,
+const InlineCheckbox = React.forwardRef(function InlineCheckbox(
+  props,
+  forwardRef
+) {
+  const {
+    ariaLabel,
+    checked = false,
+    disabled,
+    id,
+    indeterminate,
+    name,
+    onChange = () => {},
+    onClick,
+    onKeyDown,
+    title,
+  } = props;
+  const prefix = usePrefix();
+  const inputRef = useRef(null);
+  const ref = useMergedRefs([inputRef, forwardRef]);
+  const inputProps = {
+    checked,
+    className: `${prefix}--checkbox`,
+    disabled,
+    id,
+    name,
+    onClick,
+    onChange: (evt) => {
+      onChange(evt.target.checked, id, evt);
+    },
+    onKeyDown,
+    ref,
+    type: 'checkbox',
   };
 
-  static defaultProps = {
-    ariaLabel: '',
-    checked: false,
-    id: 'inline-checkbox',
-    name: '',
-    onChange: () => {},
-  };
-
-  componentDidMount() {
-    if (this.inputNode) {
-      this.inputNode.indeterminate = this.props.indeterminate;
-    }
+  if (indeterminate) {
+    inputProps.checked = false;
+    inputProps['aria-checked'] = 'mixed';
   }
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.inputNode &&
-      prevProps.indeterminate !== this.props.indeterminate
-    ) {
-      this.inputNode.indeterminate = this.props.indeterminate;
-    }
-  }
+  useEffect(() => {
+    inputRef.current.indeterminate = indeterminate;
+  }, [indeterminate]);
 
-  handleRef = (el) => {
-    this.inputNode = el;
-  };
-
-  render() {
-    const {
-      id,
-      indeterminate,
-      checked,
-      disabled,
-      ariaLabel,
-      name,
-      onChange,
-      onClick,
-      onKeyDown,
-      title = undefined,
-      // eslint-disable-next-line react/prop-types
-      innerRef: ref,
-    } = this.props;
-    const inputProps = {
-      id,
-      name,
-      onClick,
-      onChange: (evt) => {
-        onChange(evt.target.checked, id, evt);
-      },
-      onKeyDown,
-      className: `${prefix}--checkbox`,
-      type: 'checkbox',
-      ref: mergeRefs(ref, this.handleRef),
-      checked: false,
-      disabled,
-    };
-
-    if (checked) {
-      inputProps.checked = true;
-    }
-
-    if (indeterminate) {
-      inputProps.checked = false;
-      inputProps['aria-checked'] = 'mixed';
-    }
-
-    return (
-      <>
-        <input {...inputProps} />
-        {
-          /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
-          <label
-            htmlFor={id}
-            className={`${prefix}--checkbox-label`}
-            aria-label={ariaLabel}
-            title={title}
-            onClick={(evt) => {
-              evt.stopPropagation();
-            }}
-          />
-        }
-      </>
-    );
-  }
-}
-
-export default (() => {
-  const forwardRef = (props, ref) => (
-    <InlineCheckbox {...props} innerRef={ref} />
+  return (
+    <>
+      <input {...inputProps} />
+      {
+        /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
+        <label
+          htmlFor={id}
+          className={`${prefix}--checkbox-label`}
+          aria-label={ariaLabel}
+          title={title}
+          onClick={(evt) => {
+            evt.stopPropagation();
+          }}
+        />
+      }
+    </>
   );
-  forwardRef.displayName = 'InlineCheckbox';
-  return React.forwardRef(forwardRef);
-})();
+});
+
+InlineCheckbox.propTypes = {
+  /**
+   * Specify the label for the control
+   */
+  ariaLabel: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether the underlying control is checked, or not
+   */
+  checked: PropTypes.bool,
+
+  /**
+   * Specify whether the underlying input control should be disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Provide an `id` for the underlying input control
+   */
+  id: PropTypes.string.isRequired,
+
+  /**
+   * Specify whether the control is in an indterminate state
+   */
+  indeterminate: PropTypes.bool,
+
+  /**
+   * Provide a `name` for the underlying input control
+   */
+  name: PropTypes.string.isRequired,
+
+  /**
+   * Provide an optional hook that is called each time the input is updated
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Provide a handler that is invoked when a user clicks on the control
+   */
+  onClick: PropTypes.func,
+
+  /**
+   * Provide a handler that is invoked on the key down event for the control
+   */
+  onKeyDown: PropTypes.func,
+
+  /**
+   * Provide an optional tooltip for the InlineCheckbox
+   */
+  title: PropTypes.string,
+};
+
+export default InlineCheckbox;
