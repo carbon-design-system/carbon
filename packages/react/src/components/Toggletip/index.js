@@ -9,109 +9,113 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useContext, useRef, useState } from 'react';
 import { Popover, PopoverContent } from '../Popover';
-import { usePrefix } from '../../internal/usePrefix';
 import { match, keys } from '../../internal/keyboard';
+import { useWindowEvent } from '../../internal/useEvent';
+import { useId } from '../../internal/useId';
+import { usePrefix } from '../../internal/usePrefix';
 
-export function useToggletip({ defaultOpen }) {
+/**
+ * Used to render the label for a Toggletip
+ */
+function ToggletipLabel({
+  as: BaseComponent = 'span',
+  children,
+  className: customClassName,
+}) {
+  const prefix = usePrefix();
+  const className = cx(`${prefix}--toggletip-label`, customClassName);
+  return <BaseComponent className={className}>{children}</BaseComponent>;
+}
+
+ToggletipLabel.propTypes = {
+  /**
+   * Provide a custom element or component to render the top-level node for the
+   * component.
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * Custom children to be rendered as the content of the label
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
+};
+
+// Used to coordinate accessibility props between button and content along with
+// the actions to open and close the toggletip
+const ToggletipContext = React.createContext();
+
+function useToggletip() {
+  return useContext(ToggletipContext);
+}
+
+/**
+ * Used as a container for the button and content of a toggletip. This component
+ * is responsible for coordinating between interactions with the button and the
+ * visibility of the content
+ */
+function Toggletip({
+  align,
+  as,
+  className: customClassName,
+  children,
+  defaultOpen = false,
+}) {
+  const ref = useRef();
   const [open, setOpen] = useState(defaultOpen);
-  const buttonRef = useRef(null);
-  const contentRef = useRef(null);
-  const state = {
-    open,
-  };
+  const prefix = usePrefix();
+  const id = useId();
+  const className = cx(`${prefix}--toggletip`, customClassName, {
+    [`${prefix}--toggletip--open`]: open,
+  });
   const actions = {
     toggle: () => {
       setOpen(!open);
-    },
-    open: () => {
-      setOpen(true);
     },
     close: () => {
       setOpen(false);
     },
   };
-  const buttonProps = {
-    ref: buttonRef,
-    onBlur: (event) => {
-      if (!contentRef.current.contains(event.relatedTarget)) {
-        actions.close();
-      }
-    },
-    onClick: actions.toggle,
-    onKeyDown: (event) => {
-      if (open && match(event, keys.Escape)) {
-        event.preventDefault();
-        event.stopPropagation();
-        actions.close();
-      }
-    },
-  };
-  const contentProps = {
-    ref: contentRef,
-    onBlur: (event) => {
-      if (!buttonRef.current.contains(event.relatedTarget)) {
-        actions.close();
-      }
-    },
-    onKeyDown: (event) => {
-      if (open && match(event, keys.Escape)) {
-        event.preventDefault();
-        event.stopPropagation();
-        actions.close();
-        // TODO
-        buttonRef.current.focus();
-      }
-    },
-  };
-
-  return {
-    actions,
-    state,
-    buttonProps,
-    contentProps,
-  };
-}
-
-const ToggletipContext = React.createContext();
-
-function Toggletip({
-  align,
-  as,
-  caret,
-  className: customClassName,
-  children,
-  defaultOpen = false,
-  dropShadow,
-  highContrast = true,
-  light,
-}) {
-  const [open, setOpen] = useState(defaultOpen);
-  const prefix = usePrefix();
-  const className = cx(`${prefix}--toggletip-container`, customClassName);
   const value = {
-    state: {
-      open,
+    buttonProps: {
+      'aria-expanded': open,
+      'aria-controls': id,
+      onClick: actions.toggle,
     },
-    actions: {
-      toggle,
+    contentProps: {
+      id,
     },
   };
 
-  function toggle() {
-    setOpen((open) => !open);
+  function onKeyDown(event) {
+    if (open && match(event, keys.Escape)) {
+      actions.close();
+    }
   }
+
+  useWindowEvent('click', (event) => {
+    if (open && !ref.current.contains(event.target)) {
+      actions.close();
+    }
+  });
 
   return (
     <ToggletipContext.Provider value={value}>
       <Popover
         align={align}
         as={as}
-        caret={caret}
+        caret
         className={className}
-        dropShadow={dropShadow}
-        highContrast={highContrast}
-        light={light}
-        open={open}>
+        dropShadow={false}
+        highContrast
+        open={open}
+        onKeyDown={onKeyDown}
+        ref={ref}>
         {children}
       </Popover>
     </ToggletipContext.Provider>
@@ -120,25 +124,9 @@ function Toggletip({
 
 Toggletip.propTypes = {
   /**
-   * Specify how the popover should align with the trigger element
+   * Specify how the toggletip should align with the button
    */
-  align: PropTypes.oneOf([
-    'top',
-    'top-left',
-    'top-right',
-
-    'bottom',
-    'bottom-left',
-    'bottom-right',
-
-    'left',
-    'left-bottom',
-    'left-top',
-
-    'right',
-    'right-bottom',
-    'right-top',
-  ]),
+  align: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
 
   /**
    * Provide a custom element or component to render the top-level node for the
@@ -147,19 +135,9 @@ Toggletip.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Specify whether a caret should be rendered
-   */
-  caret: PropTypes.bool,
-
-  /**
-   * TODO
+   * Custom children to be rendered as the content of the label
    */
   children: PropTypes.node,
-
-  /**
-   * TODO
-   */
-  defaultOpen: PropTypes.bool,
 
   /**
    * Provide a custom class name to be added to the outermost node in the
@@ -168,61 +146,107 @@ Toggletip.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether a drop shadow should be rendered on the popover
+   *
    */
-  dropShadow: PropTypes.bool,
-
-  /**
-   * Render the component using the high-contrast variant
-   */
-  highContrast: PropTypes.bool,
-
-  /**
-   * Render the component using the light variant
-   */
-  light: PropTypes.bool,
-
-  /**
-   * Specify whether the component is currently open or closed
-   */
-  open: PropTypes.bool.isRequired,
+  defaultOpen: PropTypes.bool,
 };
 
-function ToggletipButton({ children }) {
-  const toggletip = useContext(ToggletipContext);
-  const child = React.Children.only(children);
-
-  return React.cloneElement(child, {
-    onClick: (...args) => {
-      toggletip.actions.toggle();
-      if (child.props.onClick) {
-        child.props.onClick(...args);
-      }
-    },
-  });
+/**
+ * `ToggletipButton` controls the visibility of the Toggletip through mouse
+ * clicks and keyboard interactions.
+ */
+function ToggletipButton({
+  children,
+  className: customClassName,
+  label = 'Show information',
+}) {
+  const toggletip = useToggletip();
+  const prefix = usePrefix();
+  const className = cx(`${prefix}--toggletip-button`, customClassName);
+  return (
+    <button
+      {...toggletip.buttonProps}
+      aria-label={label}
+      type="button"
+      className={className}>
+      {children}
+    </button>
+  );
 }
 
 ToggletipButton.propTypes = {
   /**
-   * TODO
+   * Custom children to be rendered as the content of the label
    */
   children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
+
+  /**
+   * Provide an accessible label for this button
+   */
+  label: PropTypes.string,
 };
 
-function ToggletipContent({ children }) {
+/**
+ * `ToggletipContent` is a wrapper around `PopoverContent`. It places the
+ * `children` passed in as a prop inside of `PopoverContent` so that they will
+ * be rendered inside of the popover for this component.
+ */
+function ToggletipContent({ children, className: customClassName }) {
+  const toggletip = useToggletip();
   const prefix = usePrefix();
   return (
-    <PopoverContent>
-      <div className={`${prefix}--toggletip`}>{children}</div>
+    <PopoverContent className={customClassName} {...toggletip.contentProps}>
+      <div className={`${prefix}--toggletip-content`}>{children}</div>
     </PopoverContent>
   );
 }
 
 ToggletipContent.propTypes = {
   /**
-   * Provide elements to be rendered inside of the component
+   * Custom children to be rendered as the content of the label
    */
   children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
 };
 
-export { Toggletip, ToggletipButton, ToggletipContent };
+/**
+ * `ToggletipActions` is a container for one or two actions present at the base
+ * of a toggletip. It is used for layout of these items.
+ */
+function ToggletipActions({ children, className: customClassName }) {
+  const prefix = usePrefix();
+  const className = cx(`${prefix}--toggletip-actions`, customClassName);
+  return <div className={className}>{children}</div>;
+}
+
+ToggletipActions.propTypes = {
+  /**
+   * Custom children to be rendered as the content of the label
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
+};
+
+export {
+  ToggletipLabel,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
+  ToggletipActions,
+};

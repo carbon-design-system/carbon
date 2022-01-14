@@ -22,13 +22,13 @@
     @include type.type-style('body-short-01');
 
     display: inline-flex;
-    color: $link-primary;
+    color: var(--cds-link-text-color, $link-primary);
     outline: none;
     text-decoration: none;
     transition: color $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-primary-hover;
+      color: var(--cds-link-hover-text-color, $link-primary-hover);
       text-decoration: underline;
     }
 

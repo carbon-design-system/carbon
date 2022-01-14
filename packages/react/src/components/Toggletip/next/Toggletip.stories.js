@@ -7,12 +7,14 @@
 
 import { Information16 } from '@carbon/icons-react';
 import React from 'react';
-import { IconButton } from '../../IconButton';
+import { default as Button } from '../../Button';
+import { default as Link } from '../../Link';
 import {
+  ToggletipLabel,
   Toggletip,
   ToggletipButton,
   ToggletipContent,
-  useToggletip,
+  ToggletipActions,
 } from '../../Toggletip';
 import mdx from './Toggletip.mdx';
 
@@ -20,8 +22,10 @@ export default {
   title: 'Components/Toggletip',
   component: Toggletip,
   subcomponents: {
+    ToggletipLabel,
     ToggletipButton,
     ToggletipContent,
+    ToggletipActions,
   },
   argTypes: {
     as: {
@@ -48,60 +52,22 @@ export default {
 export const Default = () => {
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <ToggletipLabel>Toggletip label</ToggletipLabel>
       <Toggletip defaultOpen>
-        <ToggletipButton>
-          <IconButton>
-            <Information16 />
-          </IconButton>
+        <ToggletipButton label="Show information">
+          <Information16 />
         </ToggletipButton>
         <ToggletipContent>
           <p>
-            Ipsum voluptatum mollitia mollitia nobis cupiditate quaerat eum?
-            Quam impedit a culpa minus necessitatibus.
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
           </p>
-          <div className="cds--toggletip-actions">
-            <a href="#">Link</a>
-            <button>Button</button>
-          </div>
+          <ToggletipActions>
+            <Link href="#">Link action</Link>
+            <Button size="sm">Button</Button>
+          </ToggletipActions>
         </ToggletipContent>
       </Toggletip>
     </div>
   );
-};
-
-export const ProfileMenu = () => {
-  return 'TODO';
-};
-
-export const InlineEdit = () => {
-  return 'TODO';
-};
-
-export const FilterMenu = () => {
-  return 'TODO';
-};
-
-export const Hook = () => {
-  function Example() {
-    const { buttonProps, contentProps, state } = useToggletip({
-      defaultOpen: true,
-    });
-
-    return (
-      <>
-        <button type="button" {...buttonProps}>
-          Info
-        </button>
-        <div hidden={!state.open} {...contentProps}>
-          <div style={{ border: '1px solid black' }}>
-            Content
-            <button>inner</button>
-          </div>
-        </div>
-        <button>Outside</button>
-      </>
-    );
-  }
-
-  return <Example />;
 };
