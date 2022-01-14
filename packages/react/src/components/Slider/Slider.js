@@ -603,10 +603,7 @@ export default class Slider extends PureComponent {
             ? classNames(`${prefix}--form-item`, className)
             : `${prefix}--form-item`
         }>
-        <label
-          htmlFor={`${id}-input-for-slider`}
-          className={labelClasses}
-          id={labelId}>
+        <label htmlFor={id} className={labelClasses} id={labelId}>
           {labelText}
         </label>
         <div className={`${prefix}--slider-container`}>
@@ -630,7 +627,6 @@ export default class Slider extends PureComponent {
               role="slider"
               id={id}
               tabIndex={0}
-              aria-labelledby={labelId}
               aria-valuemax={max}
               aria-valuemin={min}
               aria-valuenow={value}
@@ -657,6 +653,7 @@ export default class Slider extends PureComponent {
             name={name}
             className={inputClasses}
             value={value}
+            aria-labelledby={!ariaLabelInput ? labelId : null}
             aria-label={ariaLabelInput ? ariaLabelInput : null}
             disabled={disabled}
             required={required}
