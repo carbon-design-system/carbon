@@ -40,7 +40,7 @@ $font-path: '~@ibm/plex' !default;
 /// @access public
 /// @type String
 /// @group config
-$use-google-fonts: true !default;
+$use-google-fonts: false !default;
 
 /// The value used to prefix selectors and CSS Custom Properties across the
 /// codebase
