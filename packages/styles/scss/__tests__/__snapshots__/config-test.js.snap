@@ -8,5 +8,6 @@ Object {
   "font-display": "swap",
   "font-path": "~@ibm/plex",
   "prefix": "cds",
+  "use-google-fonts": false,
 }
 `;

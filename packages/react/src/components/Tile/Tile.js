@@ -445,7 +445,7 @@ export class ExpandableTile extends Component {
      */
     handleClick: deprecate(
       PropTypes.func,
-      'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
+      'The handleClick prop for ExpandableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
     ),
 
     /**
@@ -629,8 +629,6 @@ export class ExpandableTile extends Component {
       expanded, // eslint-disable-line
       tileMaxHeight, // eslint-disable-line
       tilePadding, // eslint-disable-line
-      handleClick, // eslint-disable-line
-      onClick,
       onKeyUp,
       tileCollapsedIconText,
       tileExpandedIconText,
@@ -676,7 +674,7 @@ export class ExpandableTile extends Component {
         title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
         {...rest}
         onKeyUp={composeEventHandlers([onKeyUp, this.handleKeyUp])}
-        onClick={composeEventHandlers([onClick, this.handleClick])}
+        onClick={this.handleClick}
         tabIndex={tabIndex}>
         <div
           ref={(tileContent) => {
