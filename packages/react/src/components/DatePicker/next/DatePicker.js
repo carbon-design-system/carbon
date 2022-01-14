@@ -134,6 +134,46 @@ const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
   <rect width="16" height="16" style="fill:none" />
 </svg>`;
 
+function updateClassNames(calendar, prefix) {
+  const calendarContainer = calendar.calendarContainer;
+  const daysContainer = calendar.days;
+  if (calendarContainer && daysContainer) {
+    // calendarContainer and daysContainer are undefined if flatpickr detects a mobile device
+    calendarContainer.classList.add(`${prefix}--date-picker__calendar`);
+    calendarContainer
+      .querySelector('.flatpickr-month')
+      .classList.add(`${prefix}--date-picker__month`);
+    calendarContainer
+      .querySelector('.flatpickr-weekdays')
+      .classList.add(`${prefix}--date-picker__weekdays`);
+    calendarContainer
+      .querySelector('.flatpickr-days')
+      .classList.add(`${prefix}--date-picker__days`);
+    forEach.call(
+      calendarContainer.querySelectorAll('.flatpickr-weekday'),
+      (item) => {
+        const currentItem = item;
+        currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
+        currentItem.classList.add(`${prefix}--date-picker__weekday`);
+      }
+    );
+    forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), (item) => {
+      item.classList.add(`${prefix}--date-picker__day`);
+      if (
+        item.classList.contains('today') &&
+        calendar.selectedDates.length > 0
+      ) {
+        item.classList.add('no-border');
+      } else if (
+        item.classList.contains('today') &&
+        calendar.selectedDates.length === 0
+      ) {
+        item.classList.remove('no-border');
+      }
+    });
+  }
+}
+
 function DatePicker({
   allowInput,
   appendTo,
@@ -217,46 +257,6 @@ function DatePicker({
     }
   );
 
-  function updateClassNames(calendar) {
-    const calendarContainer = calendar.calendarContainer;
-    const daysContainer = calendar.days;
-    if (calendarContainer && daysContainer) {
-      // calendarContainer and daysContainer are undefined if flatpickr detects a mobile device
-      calendarContainer.classList.add(`${prefix}--date-picker__calendar`);
-      calendarContainer
-        .querySelector('.flatpickr-month')
-        .classList.add(`${prefix}--date-picker__month`);
-      calendarContainer
-        .querySelector('.flatpickr-weekdays')
-        .classList.add(`${prefix}--date-picker__weekdays`);
-      calendarContainer
-        .querySelector('.flatpickr-days')
-        .classList.add(`${prefix}--date-picker__days`);
-      forEach.call(
-        calendarContainer.querySelectorAll('.flatpickr-weekday'),
-        (item) => {
-          const currentItem = item;
-          currentItem.innerHTML = currentItem.innerHTML.replace(/\s+/g, '');
-          currentItem.classList.add(`${prefix}--date-picker__weekday`);
-        }
-      );
-      forEach.call(daysContainer.querySelectorAll('.flatpickr-day'), (item) => {
-        item.classList.add(`${prefix}--date-picker__day`);
-        if (
-          item.classList.contains('today') &&
-          calendar.selectedDates.length > 0
-        ) {
-          item.classList.add('no-border');
-        } else if (
-          item.classList.contains('today') &&
-          calendar.selectedDates.length === 0
-        ) {
-          item.classList.remove('no-border');
-        }
-      });
-    }
-  }
-
   useEffect(() => {
     if (datePickerType !== 'single' && datePickerType !== 'range') {
       return;
@@ -266,8 +266,8 @@ function DatePicker({
       return;
     }
 
-    const onHook = (_electedDates, _dateStr, instance) => {
-      updateClassNames(instance);
+    const onHook = (_electedDates, _dateStr, instance, prefix) => {
+      updateClassNames(instance, prefix);
     };
 
     // Logic to determine if `enable` or `disable` will be passed down. If neither
@@ -458,12 +458,12 @@ function DatePicker({
   useEffect(() => {
     if (calendarRef.current) {
       calendarRef.current.set({ value });
-      updateClassNames(calendarRef.current);
-    } else {
-      //for simple date picker w/o calendar
+      updateClassNames(calendarRef.current, prefix);
+      //for simple date picker w/o calendar; initial mount may not have value
+    } else if (!calendarRef.current && value) {
       startInputField.current.value = value;
     }
-  }, [value]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [value, prefix]);
 
   return (
     <div className={wrapperClasses} {...rest}>
