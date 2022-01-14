@@ -9,8 +9,25 @@ import React from 'react';
 import Toggle from '../Toggle';
 import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+// packages/components/scss/components/toggle/_toggle.scss
+import '../../../../components/scss/components/toggle/_toggle.scss';
 
 const { prefix } = settings;
+
+describe('Toggle RTL', () => {
+  describe('Behaviors', () => {
+    fit('toggles on click', () => {
+      render(<Toggle id="test-id" />);
+      expect(screen.getByText('Off')).toBeVisible();
+      expect(screen.getByText('On')).not.toBeVisible();
+      userEvent.click(screen.getByRole('checkbox'));
+      expect(screen.getByText('On')).toBeVisible();
+      expect(screen.getByText('Off')).not.toBeVisible();
+    });
+  });
+});
 describe('Toggle', () => {
   const commonProps = {
     'aria-label': 'Toggle label',
