@@ -1,7 +1,7 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "10.16.0-rc.0",
+  "version": "10.16.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -14,7 +14,7 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "bin",
-    "src"
+    "cli.js"
   ],
   "keywords": [
     "carbon",
@@ -29,10 +29,17 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {
+  "scripts": {
+    "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14",
+    "clean": "rimraf cli.js",
+    "watch": "yarn build --watch"
+  },
+  "devDependencies": {
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
     "cross-spawn": "^7.0.3",
+    "esbuild": "^0.14.10",
+    "execa": "^5.1.1",
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.0",
@@ -41,11 +48,11 @@
     "jscodeshift": "^0.13.0",
     "lodash.clonedeep": "^4.5.0",
     "lodash.merge": "^4.6.2",
+    "memfs": "^3.4.0",
+    "nanoid": "^3.1.30",
     "npm-which": "^3.0.1",
+    "rimraf": "^3.0.2",
     "semver": "^7.3.5",
     "yargs": "^17.0.1"
-  },
-  "devDependencies": {
-    "memfs": "^3.4.0"
   }
 }

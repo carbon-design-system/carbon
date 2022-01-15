@@ -23,11 +23,14 @@
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/component-tokens' as *;
+@use '../../utilities/custom-property';
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
+
+$icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 
 /// Tabs styles
 /// @access public
@@ -242,6 +245,24 @@
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
       text-align: left;
+    }
+
+    //-----------------------------
+    // Icon Item
+    //-----------------------------
+
+    .#{$prefix}--tabs__nav-item--icon,
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
+      display: flex;
+      width: $icon-tab-size;
+      height: $icon-tab-size;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    &.#{$prefix}--tabs__icon--lg {
+      @include custom-property.declaration('icon-tab-size', rem(48px));
     }
 
     //-----------------------------
