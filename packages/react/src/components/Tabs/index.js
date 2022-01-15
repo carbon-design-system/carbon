@@ -6,7 +6,13 @@
  */
 
 import * as FeatureFlags from '@carbon/feature-flags';
-import { Tabs as TabsNext, TabPanel, TabPanels, TabList } from './next/Tabs';
+import {
+  Tabs as TabsNext,
+  TabPanel,
+  TabPanels,
+  TabList,
+  IconTab,
+} from './next/Tabs';
 import { default as TabsClassic } from './Tabs';
 import { default as TabsSkeletonClassic } from './Tabs.Skeleton';
 import { default as TabsSkeletonNext } from './next/Tabs.Skeleton';
@@ -19,6 +25,6 @@ const TabsSkeleton = FeatureFlags.enabled('enable-v11-release')
   ? TabsSkeletonNext
   : TabsSkeletonClassic;
 
-export { TabsSkeleton, TabPanels, TabPanel, TabList };
+export { TabsSkeleton, TabPanels, TabPanel, TabList, IconTab };
 
 export default Tabs;

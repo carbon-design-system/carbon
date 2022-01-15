@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 class CustomError extends Error {
   constructor(message) {
     super(message);
@@ -14,8 +12,4 @@ class CustomError extends Error {
   }
 }
 
-class UpgradeError extends CustomError {}
-
-module.exports = {
-  UpgradeError,
-};
+export class UpgradeError extends CustomError {}
