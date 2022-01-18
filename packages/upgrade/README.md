@@ -1,6 +1,6 @@
 # @carbon/upgrade
 
-> A tool for upgrading projects that use Carbon
+> A tool for upgrading Carbon versions
 
 ## Getting started
 

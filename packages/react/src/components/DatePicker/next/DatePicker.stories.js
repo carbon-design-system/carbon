@@ -7,7 +7,8 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { default as DatePicker, DatePickerSkeleton } from '../';
+import DatePicker from './DatePicker';
+import DatePickerSkeleton from '../DatePicker.Skeleton';
 import DatePickerInput from '../../DatePickerInput';
 import { Layer } from '../../Layer';
 
