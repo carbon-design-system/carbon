@@ -99,7 +99,7 @@
     "browserslist-config-carbon": "^10.6.1",
     "carbon-components": "^9.0.0",
     "carbon-components-react": "^6.0.0",
-    "chokidar": "^2.0.0",
+    "chokidar": "^3.5.3",
     "classnames": "^2.2.0",
     "commander": "^2.13.0",
     "core-js": "^3.16.0",
