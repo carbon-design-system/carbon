@@ -34,6 +34,8 @@ module.exports = {
         // Deprecated hierachy separator in title property
         'storybook/hierarchy-separator': 'error',
 
+        'storybook/no-redundant-story-name': 'error',
+
         // storiesOf is deprecated and should not be used
         'storybook/no-stories-of': 'error',
 
