@@ -15,9 +15,7 @@ import OverflowMenu from './OverflowMenu';
 
 export default {
   title: 'Experimental/unstable_Menu/OverflowMenu',
-  parameters: {
-    component: Menu,
-  },
+  component: Menu,
 };
 
 const Story = (items, props = {}) => (
