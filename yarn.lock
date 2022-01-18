@@ -13323,24 +13323,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"conventional-commits-parser@npm:^3.0.3":
-  version: 3.0.8
-  resolution: "conventional-commits-parser@npm:3.0.8"
-  dependencies:
-    JSONStream: ^1.0.4
-    is-text-path: ^1.0.1
-    lodash: ^4.17.15
-    meow: ^5.0.0
-    split2: ^2.0.0
-    through2: ^3.0.0
-    trim-off-newlines: ^1.0.0
-  bin:
-    conventional-commits-parser: cli.js
-  checksum: 90dc18d8ebd2a172b260446d213d03e5ed0631294ea88156ed778306ec544a8cbb23ba017b61d3de4c34fcd2daa4cf4178069f5b0cf8038353be32e5adab3341
-  languageName: node
-  linkType: hard
-
-"conventional-commits-parser@npm:^3.2.2":
+"conventional-commits-parser@npm:^3.0.3, conventional-commits-parser@npm:^3.2.2":
   version: 3.2.4
   resolution: "conventional-commits-parser@npm:3.2.4"
   dependencies:
@@ -36711,13 +36694,6 @@ resolve@^2.0.0-next.3:
   version: 3.0.0
   resolution: "trim-newlines@npm:3.0.0"
   checksum: ad99b771e7e6fc785cfdd60f3eeb794a6f2f230dd291987107974abd0c95a051d7cf3b6d45b542a59bfe67eb680c5b259ec19741e6fdfdbee0ab783ab8861585
-  languageName: node
-  linkType: hard
-
-"trim-off-newlines@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "trim-off-newlines@npm:1.0.1"
-  checksum: ca644908cace3d91b4c5b0fee0224640fed34a4503583e542db3f2dbec95246f2dc0f1bdfc5169e95f244f2613c0256ccc0c594ebe678fd9afdd9c5cf424562f
   languageName: node
   linkType: hard
 
