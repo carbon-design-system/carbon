@@ -4,9 +4,9 @@
 
 ## Usage
 
-The `@carbon/colors` package allows you to easily access colors from the IBM
-Design Language in Sass. You can access a color directly from the package by
-writing the following:
+The `@carbon/colors` package enables you to access colors from the IBM Design
+Language in Sass. You can access a color directly from the package by writing
+the following:
 
 ```scss
 @use '@carbon/colors';
