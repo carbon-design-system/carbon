@@ -422,6 +422,7 @@ export default class Tabs extends React.Component {
       type,
       light,
       onSelectionChange,
+      scrollDebounceWait, // eslint-disable-line no-unused-vars
       scrollIntoView, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,
