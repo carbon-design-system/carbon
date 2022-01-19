@@ -324,5 +324,8 @@
   .#{$prefix}--inline-notification__icon {
     @include high-contrast-mode('icon-fill');
   }
+  .#{$prefix}--inline-notification__close-icon {
+    @include high-contrast-mode('icon-fill');
+  }
   /* stylelint-enable */
 }
