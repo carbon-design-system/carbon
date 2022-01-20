@@ -49,6 +49,13 @@ export async function upgrade(options, availableUpgrades = []) {
     return;
   }
 
+  const migrations = await getSelectedMigrations(upgrade);
+  if (!migrations) {
+    logger.info('No migrations available, will only run the base upgrade');
+  } else if (migrations.length === 0) {
+    logger.info('No migrations selected, will only run the base upgrade');
+  }
+
   logger.verbose(
     'running upgrade: %s for workspace: %s',
     upgrade.name,
@@ -88,6 +95,17 @@ export async function upgrade(options, availableUpgrades = []) {
     } else {
       logger.info('previewing changes for file: %s', packageJsonPath);
       logger.log(packageJson.diff());
+    }
+  }
+
+  // do we need to worry about doing a yarn/npm install before running any codemods?
+  //   - we could ask the user for an install command or something?
+  if (migrations && migrations.length > 0) {
+    for (const migration of migrations) {
+      logger.verbose('running migration: %s', migration.name);
+
+      // Run each migrate function sequentially/non-async
+      migration.migrate(workspace.directory);
     }
   }
 }
@@ -160,5 +178,58 @@ async function getSelectedUpgrade(upgrades) {
 
   return upgrades.find((upgrade) => {
     return upgrade.name === answers.upgrade;
+  });
+}
+
+/**
+ * @param {object<Upgrade>} upgrade
+ * @returns {Array<Migration | null>}
+ */
+async function getSelectedMigrations(upgrade) {
+  const migrations = upgrade.migrations;
+
+  if (!migrations || migrations.length === 0) {
+    return null;
+  }
+
+  if (migrations.length === 1) {
+    const [migration] = migrations;
+    const answers = await inquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'confirm',
+        message: `There is one migration available for this upgrade. Would you like to run the ${migration.name} migration?
+        (${migration.description})`,
+      },
+    ]);
+
+    if (answers.confirm === false) {
+      return [];
+    }
+
+    return [migration];
+  }
+
+  const answers = await inquirer.prompt([
+    {
+      type: 'checkbox',
+      name: 'migration',
+      message: 'Which migrations would you like to run?',
+      choices: migrations.map((migration) => {
+        return {
+          name: `${migration.name} (${migration.description})`,
+          value: migration.name,
+        };
+      }),
+      default: 0,
+    },
+  ]);
+
+  if (answers.migration === undefined || answers.migration === null) {
+    return [];
+  }
+
+  return migrations.filter((migration) => {
+    return answers.migration.includes(migration.name);
   });
 }

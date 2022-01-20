@@ -138,6 +138,18 @@ export const upgrades = [
         changes: [Change.uninstall],
       },
     ],
+    migrations: [
+      {
+        name: 'pork belly',
+        description: 'tell me more about the belly',
+        migrate: async (context) => {
+          console.log('It is over 10lb 🤤');
+          console.log('I roasted it for 4 hours 🔥');
+          console.log('yooo it is delicious, we be havin so many tacos! 🌮');
+          console.log(context);
+        },
+      },
+    ],
   },
   {
     name: 'v11: carbon-components',
@@ -155,6 +167,24 @@ export const upgrades = [
             version: '~1.0.0',
           }),
         ],
+      },
+    ],
+    migrations: [
+      {
+        name: 'migration 1',
+        description: 'migration 1',
+        migrate: async (context) => {
+          console.log(`migration 1 function`);
+          console.log(context);
+        },
+      },
+      {
+        name: 'migration 2',
+        description: 'migration 2',
+        migrate: async (context) => {
+          console.log(`migration 2 function`);
+          console.log(context);
+        },
       },
     ],
   },
