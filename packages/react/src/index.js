@@ -247,6 +247,7 @@ export {
   TabPanel as unstable_TabPanel,
   TabPanels as unstable_TabPanels,
   TabList as unstable_TabList,
+  IconTab as unstable_IconTab,
 } from './components/Tabs';
 export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
 export {

@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useRef, useEffect } from 'react';
 import cx from 'classnames';
+import { Tooltip } from '../../Tooltip/next';
 import { keys, match, matches } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useId } from '../../../internal/useId';
@@ -125,6 +126,7 @@ function TabList({
   light,
   scrollIntoView,
   contained = false,
+  iconSize,
   ...rest
 }) {
   const {
@@ -138,6 +140,8 @@ function TabList({
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
+    [`${prefix}--tabs__icon--default`]: iconSize === 'default',
+    [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
   });
 
   const tabs = [];
@@ -243,6 +247,10 @@ TabList.propTypes = {
 
   contained: PropTypes.bool,
   /**
+   * If using `IconTab`, specify the size of the icon being used.
+   */
+  iconSize: PropTypes.oneOf(['default', 'lg']),
+  /**
    * Specify whether or not to use the light component variant
    */
   light: PropTypes.bool,
@@ -343,6 +351,71 @@ Tab.propTypes = {
   renderButton: PropTypes.func,
 };
 
+const IconTab = React.forwardRef(function IconTab(
+  {
+    children,
+    className: customClassName,
+    defaultOpen = false,
+    enterDelayMs,
+    leaveDelayMs,
+    label,
+    ...rest
+  },
+  ref
+) {
+  const prefix = usePrefix();
+
+  const classNames = cx(`${prefix}--tabs__nav-item--icon`, customClassName);
+  return (
+    <Tooltip
+      align="bottom"
+      defaultOpen={defaultOpen}
+      className={`${prefix}--icon-tooltip`}
+      enterDelayMs={enterDelayMs}
+      label={label}
+      leaveDelayMs={leaveDelayMs}>
+      <Tab className={classNames} ref={ref} {...rest}>
+        {children}
+      </Tab>
+    </Tooltip>
+  );
+});
+
+IconTab.propTypes = {
+  /**
+   * Provide an icon to be rendered inside of `IconTab` as the visual label for Tab.
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be added to your Tab
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the tooltip for the icon should be open when it first renders
+   */
+  defaultOpen: PropTypes.bool,
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip for the icon.
+   */
+  enterDelayMs: PropTypes.number,
+
+  /**
+   * Provide the label to be rendered inside of the Tooltip. The label will use
+   * `aria-labelledby` and will fully describe the child node that is provided.
+   * This means that if you have text in the child node it will not be
+   * announced to the screen reader.
+   */
+  label: PropTypes.node.isRequired,
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   */
+  leaveDelayMs: PropTypes.number,
+};
+
 const TabPanel = React.forwardRef(function TabPanel(
   { children, className: customClassName, ...rest },
   forwardRef
@@ -407,7 +480,7 @@ TabPanels.propTypes = {
   children: PropTypes.node,
 };
 
-export { Tabs, Tab, TabPanel, TabPanels, TabList };
+export { Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };
 
 // TO DO: implement horizontal scroll and the following props:
 // leftOverflowButtonProps
