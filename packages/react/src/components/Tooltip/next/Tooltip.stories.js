@@ -77,9 +77,11 @@ export const Definition = () => {
       <p>
         Custom domains direct requests for your apps in this Cloud Foundry
         organization to a{' '}
-        <DefinitionTooltip definition={definition}>URL</DefinitionTooltip> that
-        you own. A custom domain can be a shared domain, a shared subdomain, or
-        a shared domain and host.
+        <DefinitionTooltip openOnClick definition={definition}>
+          URL
+        </DefinitionTooltip>{' '}
+        that you own. A custom domain can be a shared domain, a shared
+        subdomain, or a shared domain and host.
       </p>
     </div>
   );

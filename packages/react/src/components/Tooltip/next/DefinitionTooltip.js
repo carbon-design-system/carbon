@@ -12,15 +12,19 @@ import { match, keys } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useId } from '../../../internal/useId';
 
-function DefinitionTooltip({ children, definition, ...rest }) {
+function DefinitionTooltip({ children, definition, openOnClick, ...rest }) {
   const [isOpen, setOpen] = useState(false);
   const prefix = usePrefix();
   const id = useId();
 
   function handleKeyDown(event) {
-    if (match(event, keys.Escape) && isOpen) {
+    if (isOpen && match(event, keys.Escape)) {
       event.stopPropagation();
       setOpen(false);
+    }
+    if (openOnClick && match(event, [keys.Enter, keys.Space])) {
+      event.stopPropagation();
+      setOpen(!isOpen);
     }
   }
 
@@ -31,12 +35,12 @@ function DefinitionTooltip({ children, definition, ...rest }) {
         className={`${prefix}--definition-term`}
         aria-controls="definition-id"
         aria-expanded={isOpen}
-        onMouseOut={() => setOpen(false)}
-        onMouseOver={() => setOpen(true)}
+        onMouseOut={() => !openOnClick && setOpen(false)}
+        onMouseOver={() => !openOnClick && setOpen(true)}
         onBlur={() => setOpen(false)}
         onKeyDown={handleKeyDown}
-        onClick={() => !isOpen && setOpen(!isOpen)}
-        onFocus={() => setOpen(true)}
+        onClick={() => setOpen(!isOpen)}
+        onFocus={() => !openOnClick && setOpen(true)}
         {...rest}>
         {children}
       </button>
@@ -57,6 +61,10 @@ DefinitionTooltip.propTypes = {
    * Provide the content being defined
    */
   definition: PropTypes.string.isRequired,
+  /**
+   * Specify whether the tooltip should toggle on click and NOT on mouse enter/leave
+   */
+  openOnClick: PropTypes.bool,
 };
 
 export { DefinitionTooltip };
