@@ -5,15 +5,15 @@ on:
       - main
 jobs:
   release:
-    runs-on: macOS-latest
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js 14.x
-        uses: actions/setup-node@v2.5.0
+      - uses: actions/checkout@v2
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v2.5.1
         with:
-          node-version: '14.x'
+          node-version: '16.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
       - name: Sync project dependency files
