@@ -8,12 +8,10 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
-import { FlexGrid } from './FlexGrid';
 import { GridContext, useGrid } from './GridContext';
 
-function Grid({
+function CSSGrid({
   as: BaseComponent = 'div',
   condensed = false,
   narrow = false,
@@ -24,45 +22,28 @@ function Grid({
   ...rest
 }) {
   const prefix = usePrefix();
-  const enableCSSGrid = useFeatureFlag('enable-css-grid');
   const { mode, subgrid } = useGrid();
-
-  if (enableCSSGrid) {
-    const className = cx(containerClassName, {
-      [`${prefix}--css-grid`]: !subgrid,
-      [`${prefix}--css-grid--${columns}`]: !subgrid && columns !== 16,
-      [`${prefix}--css-grid--condensed`]: condensed,
-      [`${prefix}--css-grid--narrow`]: narrow,
-      [`${prefix}--css-grid--full-width`]: fullWidth,
-      [`${prefix}--subgrid`]: subgrid,
-      [`${prefix}--col-span-${columns}`]:
-        (subgrid && columns !== 16) || columns !== 16,
-    });
-
-    return (
-      <GridContext.Provider value={{ mode, subgrid: true }}>
-        <BaseComponent className={className} {...rest}>
-          {children}
-        </BaseComponent>
-      </GridContext.Provider>
-    );
-  }
+  const className = cx(containerClassName, {
+    [`${prefix}--css-grid`]: !subgrid,
+    [`${prefix}--css-grid--${columns}`]: !subgrid && columns !== 16,
+    [`${prefix}--css-grid--condensed`]: condensed,
+    [`${prefix}--css-grid--narrow`]: narrow,
+    [`${prefix}--css-grid--full-width`]: fullWidth,
+    [`${prefix}--subgrid`]: subgrid,
+    [`${prefix}--col-span-${columns}`]:
+      (subgrid && columns !== 16) || columns !== 16,
+  });
 
   return (
-    <FlexGrid
-      as={as}
-      condensed={condensed}
-      narrow={narrow}
-      fullWidth={fullWidth}
-      columns={columns}
-      className={containerClassName}
-      {...rest}>
-      {children}
-    </FlexGrid>
+    <GridContext.Provider value={{ mode, subgrid: true }}>
+      <BaseComponent className={className} {...rest}>
+        {children}
+      </BaseComponent>
+    </GridContext.Provider>
   );
 }
 
-Grid.propTypes = {
+CSSGrid.propTypes = {
   /**
    * Provide a custom element to render instead of the default <div>
    */
@@ -101,4 +82,4 @@ Grid.propTypes = {
   narrow: PropTypes.bool,
 };
 
-export default Grid;
+export { CSSGrid };
