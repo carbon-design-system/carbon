@@ -7,8 +7,48 @@
 
 'use strict';
 
+const fs = require('fs');
+// TODO: make sure this is a devDependency
+const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+
+const stories = glob
+  .sync(
+    [
+      './Welcome/Welcome.stories.js',
+      '../src/**/*.stories.js',
+      '../src/**/*.stories.mdx',
+      '../../react/src/**/next/*.stories.js',
+      '../../react/src/**/next/*.stories.mdx',
+      '../../react/src/**/*-story.js',
+    ],
+    {
+      cwd: __dirname,
+    }
+  )
+  .filter((match) => {
+    const filepath = path.resolve(__dirname, match);
+    const basename = path.basename(match, '.js');
+
+    if (basename.endsWith('-story')) {
+      const component = basename.replace(/-story$/, '');
+      const storyName = path.resolve(
+        filepath,
+        '..',
+        'next',
+        `${component}.stories.js`
+      );
+
+      if (fs.existsSync(storyName)) {
+        return false;
+      }
+
+      return true;
+    }
+
+    return true;
+  });
 
 module.exports = {
   addons: [
@@ -29,13 +69,7 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
-  stories: [
-    './Welcome/Welcome.stories.js',
-    '../src/**/*.stories.js',
-    '../src/**/*.stories.mdx',
-    '../../react/src/**/next/*.stories.js',
-    '../../react/src/**/next/*.stories.mdx',
-  ],
+  stories: stories,
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {

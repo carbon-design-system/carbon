@@ -130,6 +130,9 @@ export const parameters = {
       },
     },
   },
+  options: {
+    method: 'alphabetical',
+  },
 };
 
 configureActions({
