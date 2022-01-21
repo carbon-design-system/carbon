@@ -13,14 +13,12 @@ import { Layer } from '../../Layer';
 
 export default {
   title: 'Components/Select',
+  component: Select,
   decorators: [(story) => <div style={{ width: '400px' }}>{story()}</div>],
-  parameters: {
-    component: Select,
-    subcomponents: {
-      SelectItem,
-      SelectItemGroup,
-      SelectSkeleton,
-    },
+  subcomponents: {
+    SelectItem,
+    SelectItemGroup,
+    SelectSkeleton,
   },
 };
 
@@ -90,7 +88,7 @@ export const _Skeleton = () => (
   </div>
 );
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <>
       <Select
