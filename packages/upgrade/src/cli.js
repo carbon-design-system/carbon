@@ -8,6 +8,7 @@
 import chalk from 'chalk';
 import isGitClean from 'is-git-clean';
 import { upgrade } from './commands/upgrade';
+import { migrate } from './commands/migrate';
 import { UpgradeError } from './error';
 import { logger } from './logger';
 import { upgrades } from './upgrades';
@@ -42,8 +43,9 @@ export async function main({ argv, cwd }) {
       type: 'boolean',
     });
 
+  // $0: the default command
   cli.usage('Usage: $0 [options]').command(
-    '$0',
+    ['upgrade', '$0'],
     'upgrade your project',
     {},
     run(async (args) => {
@@ -54,6 +56,41 @@ export async function main({ argv, cwd }) {
         write,
       };
       await upgrade(options, upgrades);
+    })
+  );
+
+  // cli.usage('Usage: migrate list').command(
+  //   'migrate list',
+  //   'list all migrations',
+  //   {},
+  //   run(async () => {
+  //     await migrate({ list: true }, upgrades);
+  //   })
+  // );
+
+  cli.usage('Usage: migrate').command(
+    'migrate [migration]',
+    'run a migration on your project',
+    async (cli) => {
+      cli.command(
+        'list',
+        'list all migrations',
+        {},
+        run(async (args) => {
+          const { verbose } = args;
+          const options = { cwd: cwd(), verbose, list: true };
+          await migrate(options, upgrades);
+        })
+      );
+    },
+    run(async (args) => {
+      const { verbose, migration } = args;
+      const options = {
+        cwd: cwd(),
+        verbose,
+        migration,
+      };
+      await migrate(options, upgrades);
     })
   );
 
