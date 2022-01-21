@@ -106,13 +106,13 @@ const props = () => ({
   ),
 });
 
-export const inline = () => (
+export const Inline = () => (
   <CodeSnippet type="inline" feedback="Copied to clipboard">
     {'node -v'}
   </CodeSnippet>
 );
 
-export const multiline = () => (
+export const Multiline = () => (
   <CodeSnippet type="multi" feedback="Copied to clipboard">
     {`  "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
@@ -146,14 +146,14 @@ export const multiline = () => (
   </CodeSnippet>
 );
 
-export const singleline = () => (
+export const Singleline = () => (
   <CodeSnippet type="single" feedback="Copied to clipboard">
     yarn add carbon-components@latest carbon-components-react@latest
     @carbon/icons-react@latest carbon-icons@latest
   </CodeSnippet>
 );
 
-export const skeleton = () => (
+export const Skeleton = () => (
   <div>
     <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
     <CodeSnippetSkeleton type="multi" />
@@ -180,7 +180,7 @@ const lightPropMessage = (
   </small>
 );
 
-export const withChildrenNodes = () => (
+export const WithChildrenNodes = () => (
   <CodeSnippet {...props()} type="multi" copyText={snippetText().multi}>
     {snippetText()
       .multi.split('\n')
@@ -193,7 +193,7 @@ export const withChildrenNodes = () => (
   </CodeSnippet>
 );
 
-export const playground = () => (
+export const Playground = () => (
   <div className={props().light ? 'bx--tile' : ''}>
     {props().light && lightPropMessage}
     <br />

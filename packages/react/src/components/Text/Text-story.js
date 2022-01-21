@@ -19,8 +19,8 @@ import mdx from './Text.mdx';
 
 export default {
   title: 'Experimental/unstable_Text',
+  component: Text,
   parameters: {
-    component: Text,
     docs: {
       page: mdx,
     },
