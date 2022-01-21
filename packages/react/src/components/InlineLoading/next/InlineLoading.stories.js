@@ -11,10 +11,7 @@ import InlineLoading from '../';
 
 export default {
   title: 'Components/InlineLoading',
-
-  parameters: {
-    component: InlineLoading,
-  },
+  component: InlineLoading,
 };
 
 export const _InlineLoading = () => (

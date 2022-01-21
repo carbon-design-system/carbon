@@ -57,7 +57,7 @@ export const Combobox = () => (
   </div>
 );
 
-export const withLayer = () => (
+export const WithLayer = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
