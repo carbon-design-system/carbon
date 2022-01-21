@@ -18,10 +18,9 @@ export async function migrate(options, upgrades = []) {
     .filter((upgrade) => {
       return upgrade.migrations && upgrade.migrations.length > 0;
     })
-    .map((upgrade) => {
+    .flatMap((upgrade) => {
       return upgrade.migrations;
-    })
-    .flat();
+    });
 
   if (!migrations || migrations.length === 0) {
     logger.info('No migrations available');
@@ -97,7 +96,7 @@ async function runMigration(migration, workspaces) {
     workspace.directory
   );
 
-  migration.migrate(workspace.directory);
+  await migration.migrate(workspace.directory);
 }
 
 /**

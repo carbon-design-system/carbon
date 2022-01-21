@@ -96,8 +96,7 @@ export async function upgrade(options, availableUpgrades = []) {
     for (const migration of migrations) {
       logger.verbose('running migration: %s', migration.name);
 
-      // Run each migrate function sequentially/non-async
-      migration.migrate(workspace.directory);
+      await migration.migrate(workspace.directory);
     }
   }
 }
