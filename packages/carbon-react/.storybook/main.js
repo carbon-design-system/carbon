@@ -8,7 +8,6 @@
 'use strict';
 
 const fs = require('fs');
-// TODO: make sure this is a devDependency
 const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
