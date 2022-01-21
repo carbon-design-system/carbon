@@ -9,6 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { GridSettings } from './GridContext';
 
 function FlexGrid({
   as: BaseComponent = 'div',
@@ -28,9 +29,11 @@ function FlexGrid({
     [`${prefix}--grid--full-width`]: fullWidth,
   });
   return (
-    <BaseComponent className={className} {...rest}>
-      {children}
-    </BaseComponent>
+    <GridSettings mode="flexbox" subgrid={false}>
+      <BaseComponent className={className} {...rest}>
+        {children}
+      </BaseComponent>
+    </GridSettings>
   );
 }
 

@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { GridContext, useGrid } from './GridContext';
+import { GridSettings, useGridSettings } from './GridContext';
 
 function CSSGrid({
   as: BaseComponent = 'div',
@@ -22,7 +22,7 @@ function CSSGrid({
   ...rest
 }) {
   const prefix = usePrefix();
-  const { mode, subgrid } = useGrid();
+  const { subgrid } = useGridSettings();
   const className = cx(containerClassName, {
     [`${prefix}--css-grid`]: !subgrid,
     [`${prefix}--css-grid--${columns}`]: !subgrid && columns !== 16,
@@ -35,11 +35,11 @@ function CSSGrid({
   });
 
   return (
-    <GridContext.Provider value={{ mode, subgrid: true }}>
+    <GridSettings mode="css-grid" subgrid>
       <BaseComponent className={className} {...rest}>
         {children}
       </BaseComponent>
-    </GridContext.Provider>
+    </GridSettings>
   );
 }
 

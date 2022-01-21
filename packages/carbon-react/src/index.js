@@ -184,6 +184,8 @@ export {
   SideNavMenu,
   SideNavMenuItem,
   SideNavSwitcher,
+  Grid,
+  Column,
   // Experimental
   unstable_useContextMenu,
   unstable_FeatureFlags as FeatureFlags,
@@ -215,8 +217,3 @@ export {
   unstable_useTheme as useTheme,
   unstable_VStack as VStack,
 } from 'carbon-components-react';
-export {
-  // Grid
-  Grid,
-  Column,
-} from './components/Grid';

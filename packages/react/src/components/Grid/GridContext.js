@@ -5,30 +5,47 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { createContext, useContext, useMemo } from 'react';
+import PropTypes from 'prop-types';
+import * as React from 'react';
 
 /**
  * Provides a grid context for communication the grid "mode" (flexbox or
  * css-grid) along with subgrid information.
  */
-export const GridContext = createContext({
+const GridSettingsContext = React.createContext({
   mode: 'flexbox',
   subgrid: false,
 });
 
-export function GridContext({ children, mode, subgrid }) {
-  const value = useMemo(() => {
+export function GridSettings({ children, mode, subgrid = false }) {
+  const value = React.useMemo(() => {
     return {
       mode,
       subgrid,
     };
   }, [mode, subgrid]);
-  return <GridContext.Provider value={value}>{children}</GridContext.Provider>;
+  return (
+    <GridSettingsContext.Provider value={value}>
+      {children}
+    </GridSettingsContext.Provider>
+  );
 }
+
+GridSettings.propTypes = {
+  /**
+   * Specify the grid mode for the GridContext
+   */
+  mode: PropTypes.oneOf(['flexbox', 'css-grid']).isRequired,
+
+  /**
+   * Specify whether subgrid should be enabled
+   */
+  subgrid: PropTypes.bool,
+};
 
 /**
  * Helper function for accessing the GridContext value
  */
-export function useGrid() {
-  return useContext(GridContext);
+export function useGridSettings() {
+  return React.useContext(GridSettingsContext);
 }

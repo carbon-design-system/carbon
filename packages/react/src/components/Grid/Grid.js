@@ -5,61 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-import { usePrefix } from '../../internal/usePrefix';
+import { CSSGrid } from './CSSGrid';
 import { FlexGrid } from './FlexGrid';
-import { GridContext, useGrid } from './GridContext';
 
-function Grid({
-  as: BaseComponent = 'div',
-  condensed = false,
-  narrow = false,
-  fullWidth = false,
-  columns = 16,
-  className: containerClassName,
-  children,
-  ...rest
-}) {
-  const prefix = usePrefix();
+function Grid(props) {
   const enableCSSGrid = useFeatureFlag('enable-css-grid');
-  const { mode, subgrid } = useGrid();
-
   if (enableCSSGrid) {
-    const className = cx(containerClassName, {
-      [`${prefix}--css-grid`]: !subgrid,
-      [`${prefix}--css-grid--${columns}`]: !subgrid && columns !== 16,
-      [`${prefix}--css-grid--condensed`]: condensed,
-      [`${prefix}--css-grid--narrow`]: narrow,
-      [`${prefix}--css-grid--full-width`]: fullWidth,
-      [`${prefix}--subgrid`]: subgrid,
-      [`${prefix}--col-span-${columns}`]:
-        (subgrid && columns !== 16) || columns !== 16,
-    });
-
-    return (
-      <GridContext.Provider value={{ mode, subgrid: true }}>
-        <BaseComponent className={className} {...rest}>
-          {children}
-        </BaseComponent>
-      </GridContext.Provider>
-    );
+    return <CSSGrid {...props} />;
   }
-
-  return (
-    <FlexGrid
-      as={as}
-      condensed={condensed}
-      narrow={narrow}
-      fullWidth={fullWidth}
-      columns={columns}
-      className={containerClassName}
-      {...rest}>
-      {children}
-    </FlexGrid>
-  );
+  return <FlexGrid {...props} />;
 }
 
 Grid.propTypes = {
@@ -101,4 +58,4 @@ Grid.propTypes = {
   narrow: PropTypes.bool,
 };
 
-export default Grid;
+export { Grid };
