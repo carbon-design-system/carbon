@@ -18,17 +18,15 @@ const { prefix } = settings;
 
 export default {
   title: 'Components/ProgressIndicator',
+  component: ProgressIndicator,
   decorators: [withKnobs],
-
   parameters: {
-    component: ProgressIndicator,
     docs: {
       page: mdx,
     },
-
-    subcomponents: {
-      ProgressStep,
-    },
+  },
+  subcomponents: {
+    ProgressStep,
   },
 };
 

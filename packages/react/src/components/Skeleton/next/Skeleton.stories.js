@@ -38,7 +38,11 @@ const textProps = () => ({
 
 export default {
   title: 'Components/Skeleton',
+  component: SkeletonText,
   decorators: [withKnobs],
+  subcomponents: {
+    SkeletonPlaceholder,
+  },
 };
 
 export const _SkeletonPlaceholder = () => {

@@ -69,6 +69,9 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
+  features: {
+    previewCsfV3: true,
+  },
   stories: stories,
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {

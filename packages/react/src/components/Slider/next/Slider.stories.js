@@ -16,14 +16,13 @@ import mdx from './Slider.mdx';
 
 export default {
   title: 'Components/Slider',
-
+  component: Slider,
+  subcomponents: {
+    SliderSkeleton,
+  },
   parameters: {
-    component: Slider,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      SliderSkeleton,
     },
   },
 };
@@ -64,7 +63,7 @@ export const ControlledSlider = () => {
   );
 };
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <>
       <Slider

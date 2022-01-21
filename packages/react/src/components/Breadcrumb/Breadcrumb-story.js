@@ -30,7 +30,7 @@ export default {
   },
 };
 
-export const breadcrumb = () => (
+export const BreadcrumbStory = () => (
   <Breadcrumb>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
@@ -41,7 +41,9 @@ export const breadcrumb = () => (
   </Breadcrumb>
 );
 
-export const breadcrumbWithOverflowMenu = () => (
+BreadcrumbStory.storyName = 'Breadcrumb';
+
+export const BreadcrumbWithOverflowMenu = () => (
   <Breadcrumb>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
@@ -58,7 +60,7 @@ export const breadcrumbWithOverflowMenu = () => (
   </Breadcrumb>
 );
 
-export const skeleton = () => <BreadcrumbSkeleton />;
+export const Skeleton = () => <BreadcrumbSkeleton />;
 
 const props = () => ({
   className: 'some-class',
@@ -66,7 +68,7 @@ const props = () => ({
   onClick: action('onClick'),
 });
 
-export const playground = () => (
+export const Playground = () => (
   <Breadcrumb {...props()}>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
