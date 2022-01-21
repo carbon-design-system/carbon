@@ -32,7 +32,7 @@ export default {
   },
 };
 
-export const checkboxNativeValidation = () => {
+export const CheckboxNativeValidation = () => {
   function onSubmit(e) {
     e.preventDefault();
     var cb = e.target.querySelector('input[type=checkbox]');
@@ -57,7 +57,7 @@ export const checkboxNativeValidation = () => {
   );
 };
 
-export const checkbox = () => {
+export const CheckboxStory = () => {
   return (
     <fieldset className={`${prefix}--fieldset`}>
       <legend className={`${prefix}--label`}>Checkbox heading</legend>
@@ -67,7 +67,9 @@ export const checkbox = () => {
   );
 };
 
-export const unstable_Checkbox = () => {
+CheckboxStory.storyName = 'Checkbox';
+
+export const UnstableCheckbox = () => {
   return (
     <FeatureFlags flags={{ 'enable-v11-release': true }}>
       <fieldset className={`${prefix}--fieldset`}>
@@ -87,11 +89,11 @@ export const unstable_Checkbox = () => {
   );
 };
 
-unstable_Checkbox.story = {
+UnstableCheckbox.story = {
   name: 'unstable_Checkbox',
 };
 
-export const skeleton = () => <CheckboxSkeleton />;
+export const Skeleton = () => <CheckboxSkeleton />;
 
 const props = () => ({
   checked: boolean('Checked (checked)', false),
@@ -104,7 +106,7 @@ const props = () => ({
   onChange: action('onChange'),
 });
 
-export const playground = () => (
+export const Playground = () => (
   <fieldset className={`${prefix}--fieldset`}>
     <legend
       className={classNames(`${prefix}--label`, {

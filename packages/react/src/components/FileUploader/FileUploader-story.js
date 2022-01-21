@@ -150,19 +150,17 @@ const props = {
 
 export default {
   title: 'Components/FileUploader',
+  component: FileUploader,
+  subcomponents: {
+    FileUploaderButton,
+    FileUploaderSkeleton,
+    FileUploaderItem,
+    FileUploaderDropContainer,
+  },
   decorators: [withKnobs],
-
   parameters: {
-    component: FileUploader,
     docs: {
       page: mdx,
-    },
-
-    subcomponents: {
-      FileUploaderButton,
-      FileUploaderSkeleton,
-      FileUploaderItem,
-      FileUploaderDropContainer,
     },
   },
 };

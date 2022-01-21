@@ -65,15 +65,14 @@ const props = {
 
 export default {
   title: 'Components/Tag',
+  component: Tag,
   decorators: [withKnobs],
-
+  subcomponents: {
+    TagSkeleton,
+  },
   parameters: {
-    component: Tag,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      TagSkeleton,
     },
   },
 };

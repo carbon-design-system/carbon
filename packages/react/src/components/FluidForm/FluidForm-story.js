@@ -38,11 +38,8 @@ const InvalidPasswordProps = {
 
 export default {
   title: 'Experimental/FluidForm',
+  component: FluidForm,
   decorators: [withKnobs],
-
-  parameters: {
-    component: FluidForm,
-  },
 };
 
 export const Default = () => (

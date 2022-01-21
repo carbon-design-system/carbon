@@ -15,9 +15,7 @@ import { useContextMenu } from './index';
 
 export default {
   title: 'Experimental/unstable_Menu/ContextMenu',
-  parameters: {
-    component: Menu,
-  },
+  component: Menu,
 };
 
 const Story = (items) => {

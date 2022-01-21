@@ -65,11 +65,8 @@ const propsSkeleton2 = {
 
 export default {
   title: 'Deprecated/Icon',
+  component: Icon,
   decorators: [withKnobs],
-
-  parameters: {
-    component: Icon,
-  },
 };
 
 export const Default = () => (

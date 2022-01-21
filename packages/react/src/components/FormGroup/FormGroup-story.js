@@ -23,9 +23,8 @@ const props = () => ({
 
 export default {
   title: 'Components/FormGroup',
-
+  component: FormGroup,
   parameters: {
-    component: FormGroup,
     docs: {
       page: mdx,
     },
