@@ -6706,6 +6706,7 @@ Map {
       "$$typeof": Symbol(react.context),
     },
     "defaultProps": Object {
+      "scrollDebounceWait": 150,
       "scrollIntoView": true,
       "selected": 0,
       "selectionMode": "automatic",
@@ -6738,6 +6739,9 @@ Map {
       },
       "rightOverflowButtonProps": Object {
         "type": "object",
+      },
+      "scrollDebounceWait": Object {
+        "type": "number",
       },
       "scrollIntoView": Object {
         "type": "bool",
