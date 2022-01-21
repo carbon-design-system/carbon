@@ -2104,6 +2104,7 @@ __metadata:
     carbon-components-react: ^7.51.0
     carbon-icons: ^7.0.7
     css-loader: ^6.5.1
+    fast-glob: ^3.2.7
     fs-extra: ^10.0.0
     mini-css-extract-plugin: ^2.4.5
     postcss: ^8.4.5
