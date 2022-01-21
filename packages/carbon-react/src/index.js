@@ -186,6 +186,7 @@ export {
   SideNavSwitcher,
   Grid,
   Column,
+  unstable_FlexGrid as FlexGrid,
   // Experimental
   unstable_useContextMenu,
   unstable_FeatureFlags as FeatureFlags,
