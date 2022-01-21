@@ -23,6 +23,7 @@ import { unstable_FeatureFlags as FeatureFlags } from 'carbon-components-react';
 
 export default {
   title: 'Components/Tabs',
+  component: Tabs,
   decorators: [
     (Story) => (
       <FeatureFlags flags={{ 'enable-v11-release': true }}>
@@ -30,15 +31,13 @@ export default {
       </FeatureFlags>
     ),
   ],
-  parameters: {
-    component: Tabs,
-    subcomponents: {
-      TabList,
-      Tab,
-      TabPanels,
-      TabPanel,
-    },
+  subcomponents: {
+    TabList,
+    Tab,
+    TabPanels,
+    TabPanel,
   },
+  parameters: {},
 };
 
 export const Default = () => (

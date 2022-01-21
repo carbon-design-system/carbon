@@ -133,9 +133,9 @@ const props = {
 
 export default {
   title: 'Components/Modal',
+  component: Modal,
   decorators: [withKnobs],
   parameters: {
-    component: Modal,
     docs: {
       page: mdx,
     },

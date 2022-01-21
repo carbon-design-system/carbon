@@ -41,10 +41,9 @@ const props = () => ({
 
 export default {
   title: 'Components/TooltipDefinition',
+  component: TooltipDefinition,
   decorators: [withKnobs],
-
   parameters: {
-    component: TooltipDefinition,
     docs: {
       page: mdx,
     },

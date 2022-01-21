@@ -58,15 +58,14 @@ const toastNotificationProps = () => ({
 
 export default {
   title: 'Components/Notifications',
+  component: ToastNotification,
   decorators: [withKnobs],
-
+  subcomponents: {
+    InlineNotification,
+  },
   parameters: {
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      ToastNotification,
-      InlineNotification,
     },
   },
 };
