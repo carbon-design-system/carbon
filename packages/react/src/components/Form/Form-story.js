@@ -136,16 +136,14 @@ RadioButton.displayName = 'RadioButton';
 
 export default {
   title: 'Components/Form',
+  component: Form,
+  subcomponents: {
+    FormGroup,
+  },
   decorators: [withKnobs],
-
   parameters: {
-    component: Form,
     docs: {
       page: mdx,
-    },
-
-    subcomponents: {
-      FormGroup,
     },
   },
 };

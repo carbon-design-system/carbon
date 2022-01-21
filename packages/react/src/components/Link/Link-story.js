@@ -35,10 +35,9 @@ const props = () => ({
 
 export default {
   title: 'Components/Link',
+  component: Link,
   decorators: [withKnobs],
-
   parameters: {
-    component: Link,
     docs: {
       page: mdx,
     },

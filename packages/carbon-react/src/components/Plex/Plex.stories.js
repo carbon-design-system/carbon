@@ -9,6 +9,7 @@ import './story.scss';
 
 import React from 'react';
 
+// eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Elements/IBM Plex',
   argTypes: {

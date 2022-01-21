@@ -31,10 +31,9 @@ const props = () => ({
 
 export default {
   title: 'Components/Skeleton/SkeletonText',
+  component: SkeletonText,
   decorators: [withKnobs],
-
   parameters: {
-    component: SkeletonText,
     docs: {
       page: mdx,
     },
