@@ -1827,15 +1827,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/codemods@workspace:codemods":
-  version: 0.0.0-use.local
-  resolution: "@carbon/codemods@workspace:codemods"
-  dependencies:
-    "@babel/preset-env": ^7.16.7
-    jscodeshift: ^0.13.0
-  languageName: unknown
-  linkType: soft
-
 "@carbon/colors@^10.35.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
