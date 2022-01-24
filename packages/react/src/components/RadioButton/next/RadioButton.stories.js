@@ -9,7 +9,13 @@ import RadioButton from '../';
 import RadioButtonGroup from '../../RadioButtonGroup';
 import React from 'react';
 
-export default { title: 'Components/RadioButton' };
+export default {
+  title: 'Components/RadioButton',
+  component: RadioButton,
+  subcomponents: {
+    RadioButtonGroup,
+  },
+};
 
 export const Default = () => {
   return (

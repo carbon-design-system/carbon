@@ -20,11 +20,8 @@ const props = () => ({
 
 export default {
   title: 'Experimental/unstable_ProgressBar',
+  component: ProgressBar,
   decorators: [withKnobs],
-
-  parameters: {
-    component: ProgressBar,
-  },
 };
 
 export const _ProgressBar = () => (
