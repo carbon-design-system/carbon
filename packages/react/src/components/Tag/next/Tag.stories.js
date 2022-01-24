@@ -10,9 +10,7 @@ import { Tag } from 'carbon-components-react';
 
 export default {
   title: 'Components/Tag',
-  parameters: {
-    component: Tag,
-  },
+  component: Tag,
 };
 
 export const Default = () => {

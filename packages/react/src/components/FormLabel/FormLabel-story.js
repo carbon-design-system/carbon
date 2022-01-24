@@ -13,9 +13,8 @@ import mdx from './FormLabel.mdx';
 
 export default {
   title: 'Components/FormLabel',
-
+  component: FormLabel,
   parameters: {
-    component: FormLabel,
     docs: {
       page: mdx,
     },

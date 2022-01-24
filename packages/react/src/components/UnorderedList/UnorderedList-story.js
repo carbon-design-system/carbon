@@ -22,15 +22,14 @@ const props = {
 
 export default {
   title: 'Components/UnorderedList',
+  component: UnorderedList,
+  subcomponents: {
+    ListItem,
+  },
   decorators: [withKnobs],
-
   parameters: {
-    component: UnorderedList,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      ListItem,
     },
   },
 };

@@ -16,6 +16,11 @@ import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/Notifications',
+  component: ToastNotification,
+  subscomponents: {
+    ActionableNotification,
+    InlineNotification,
+  },
   decorators: [
     (Story) => (
       <FeatureFlags flags={{ 'enable-v11-release': true }}>

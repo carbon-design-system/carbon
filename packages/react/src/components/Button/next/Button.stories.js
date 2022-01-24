@@ -13,12 +13,10 @@ import ButtonSet from '../../ButtonSet';
 
 export default {
   title: 'Components/Button',
-  parameters: {
-    component: Button,
-    subcomponents: {
-      ButtonSet,
-      ButtonSkeleton,
-    },
+  component: Button,
+  subcomponents: {
+    ButtonSet,
+    ButtonSkeleton,
   },
 };
 
