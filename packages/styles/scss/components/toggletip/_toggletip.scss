@@ -43,8 +43,11 @@
     @include focus-outline.focus-outline;
   }
 
+  .#{$prefix}--toggletip {
+    @include custom-property.declaration('popover-offset', convert.rem(13px));
+  }
+
   .#{$prefix}--toggletip-content {
-    @include custom-property.declaration('popover-offset', convert.rem(14px));
     @include custom-property.declaration(
       'link-text-color',
       theme.$link-inverse
@@ -52,6 +55,10 @@
     @include custom-property.declaration(
       'link-hover-text-color',
       theme.$link-inverse
+    );
+    @include custom-property.declaration(
+      'link-focus-text-color',
+      theme.$focus-inverse
     );
     @include type.type-style('body-short-01');
 

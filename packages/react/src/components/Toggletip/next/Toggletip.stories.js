@@ -71,3 +71,53 @@ export const Default = () => {
     </div>
   );
 };
+
+const PlaygroundStory = (controls) => {
+  const { align } = controls;
+  return (
+    <>
+      <ToggletipLabel>Toggletip label</ToggletipLabel>
+      <Toggletip align={align} defaultOpen>
+        <ToggletipButton label="Show information">
+          <Information16 />
+        </ToggletipButton>
+        <ToggletipContent>
+          <p>
+            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+          </p>
+          <ToggletipActions>
+            <Link href="#">Link action</Link>
+            <Button size="sm">Button</Button>
+          </ToggletipActions>
+        </ToggletipContent>
+      </Toggletip>
+    </>
+  );
+};
+
+export const Playground = PlaygroundStory.bind({});
+
+Playground.argTypes = {
+  align: {
+    options: ['top', 'bottom', 'left', 'right'],
+    control: {
+      type: 'select',
+    },
+  },
+};
+
+Playground.story = {
+  decorators: [
+    (story) => (
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}>
+        {story()}
+      </div>
+    ),
+  ],
+};

@@ -19,6 +19,10 @@ $link-hover-text-color: custom-property.get-var(
   'link-hover-text-color',
   $link-primary-hover
 );
+$link-focus-text-color: custom-property.get-var(
+  'link-focus-text-color',
+  $focus
+);
 
 /// Link styles
 /// @access public
@@ -48,6 +52,8 @@ $link-hover-text-color: custom-property.get-var(
 
     &:focus {
       @include focus-outline;
+
+      outline-color: $link-focus-text-color;
     }
 
     &:visited {
