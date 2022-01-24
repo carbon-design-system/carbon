@@ -40,6 +40,10 @@ const props = () => ({
 
 export default {
   title: 'Experimental/unstable_Pagination',
+  component: Pagination,
+  subcomponents: {
+    PageSelector,
+  },
   decorators: [
     withKnobs,
     (story) => <div style={{ width: '800px' }}>{story()}</div>,
