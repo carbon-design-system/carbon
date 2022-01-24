@@ -17,6 +17,9 @@
     "cli.js",
     "transforms"
   ],
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "keywords": [
     "carbon",
     "carbon-addons",
