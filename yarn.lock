@@ -11739,7 +11739,7 @@ __metadata:
     diff: ^5.0.0
     express-handlebars: ^5.2.1
     fancy-log: ^1.3.0
-    flatpickr: 4.6.1
+    flatpickr: 4.6.9
     glob: ^7.1.2
     globby: ^11.0.2
     gulp: ^4.0.0
@@ -18081,13 +18081,6 @@ __metadata:
   version: 4.5.7
   resolution: "flatpickr@npm:4.5.7"
   checksum: 03f89c15aefa6a1ae08fbb7ad2fb1dcd80dea0e397998557eb7a36e13de72211c5cef80196645bcc6a210e4020e27eb2bc21e73a5f17aaf17483106cf2ff04ee
-  languageName: node
-  linkType: hard
-
-"flatpickr@npm:4.6.1":
-  version: 4.6.1
-  resolution: "flatpickr@npm:4.6.1"
-  checksum: 66ea82084a70570a0dcf5a46a3b7e6a6551ec06fd1238f544226540feae69d2c3fd7af69f77c73023059e1a0d50e2f6ed0a6c4d4c390794cc4c8dd3c50002338
   languageName: node
   linkType: hard
 
