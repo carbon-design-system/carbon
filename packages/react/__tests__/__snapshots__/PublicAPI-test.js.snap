@@ -7913,9 +7913,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "columns": Object {
-        "type": "number",
-      },
       "condensed": Object {
         "type": "bool",
       },

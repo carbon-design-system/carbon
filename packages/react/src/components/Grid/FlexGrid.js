@@ -16,7 +16,6 @@ function FlexGrid({
   condensed = false,
   narrow = false,
   fullWidth = false,
-  columns = 16,
   className: containerClassName,
   children,
   ...rest
@@ -52,11 +51,6 @@ FlexGrid.propTypes = {
    * Specify a custom className to be applied to the `FlexGrid`
    */
   className: PropTypes.string,
-
-  /**
-   * Specify how many columns wide the FlexGrid should span
-   */
-  columns: PropTypes.number,
 
   /**
    * Collapse the gutter to 1px. Useful for fluid layouts.

@@ -33,6 +33,12 @@ export function GridSettings({ children, mode, subgrid = false }) {
 
 GridSettings.propTypes = {
   /**
+   * Pass in components which will be rendered within the `GridSettings`
+   * component
+   */
+  children: PropTypes.node,
+
+  /**
    * Specify the grid mode for the GridContext
    */
   mode: PropTypes.oneOf(['flexbox', 'css-grid']).isRequired,
