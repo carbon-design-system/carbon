@@ -26,7 +26,7 @@
 
   .#{$prefix}--pagination {
     @include component-reset.reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     width: calc(100% - 1px);
@@ -85,7 +85,18 @@
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $background-hover;
+    background: $layer-hover;
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus
+    option,
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus
+    optgroup {
+    background-color: $layer;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
