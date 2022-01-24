@@ -13,7 +13,6 @@ import { Workspace, getAvailableWorkspaces } from '../workspace';
 export async function migrate(options, upgrades = []) {
   logger.verbose('running migrate command with options: %o', options);
 
-  const { cwd } = options;
   const migrations = upgrades
     .filter((upgrade) => {
       return upgrade.migrations && upgrade.migrations.length > 0;
@@ -33,7 +32,7 @@ export async function migrate(options, upgrades = []) {
     return;
   }
 
-  const workspaces = getAvailableWorkspaces(cwd);
+  const workspaces = getAvailableWorkspaces(options.cwd);
   if (workspaces.length === 0) {
     throw new UpgradeError('Unable to find a workspace to migrate');
   }
@@ -51,7 +50,7 @@ export async function migrate(options, upgrades = []) {
       );
       listMigrations(migrations);
     } else {
-      await runMigration(migration, workspaces);
+      await runMigration(migration, workspaces, options);
     }
 
     return;
@@ -66,7 +65,7 @@ export async function migrate(options, upgrades = []) {
 
   if (selectedMigrations.length > 0) {
     for (const migration of selectedMigrations) {
-      await runMigration(migration, workspaces);
+      await runMigration(migration, workspaces, options);
     }
   }
 }
@@ -87,7 +86,7 @@ function listMigrations(migrations) {
  * @param {Array<string>} workspaces
  * @returns {<void>}
  */
-async function runMigration(migration, workspaces) {
+async function runMigration(migration, workspaces, options) {
   const workspace = await getSelectedWorkspace(workspaces);
 
   logger.verbose(
@@ -96,7 +95,7 @@ async function runMigration(migration, workspaces) {
     workspace.directory
   );
 
-  await migration.migrate(workspace.directory);
+  await migration.migrate({ ...options, workspaceDir: workspace.directory });
 }
 
 /**

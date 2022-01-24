@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { run } from './jscodeshift';
+
 /**
  * @typedef Upgrade
  * @property {string} name
@@ -140,13 +142,18 @@ export const upgrades = [
     ],
     migrations: [
       {
-        name: 'pork belly',
-        description: 'tell me more about the belly',
-        migrate: async (context) => {
-          console.log('It is over 10lb 🤤');
-          console.log('I roasted it for 4 hours 🔥');
-          console.log('yooo it is delicious, we be havin so many tacos! 🌮');
-          console.log(context);
+        name: 'imports-to-unified-package',
+        description:
+          'Rewrites imports from `carbon-components-react` to `@carbon/react`',
+        migrate: async (options) => {
+          const transformFileName = 'imports-to-unified-package.js';
+
+          await run(transformFileName, {
+            cwd: options.cwd,
+            dry: !options.write,
+            workspaceDir: options.workspaceDir,
+            TRANSFORM_DIR: options.TRANSFORM_DIR,
+          });
         },
       },
     ],
