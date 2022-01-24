@@ -146,7 +146,7 @@ Toggletip.propTypes = {
   className: PropTypes.string,
 
   /**
-   *
+   * Specify if the toggletip should be open by default
    */
   defaultOpen: PropTypes.bool,
 };
