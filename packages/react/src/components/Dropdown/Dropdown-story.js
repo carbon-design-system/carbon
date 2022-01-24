@@ -100,14 +100,12 @@ const props = () => ({
 
 export default {
   title: 'Components/Dropdown',
+  component: Dropdown,
+  subcomponents: {
+    DropdownSkeleton,
+  },
   decorators: [withKnobs],
-
   parameters: {
-    component: Dropdown,
-
-    subcomponents: {
-      DropdownSkeleton,
-    },
     docs: {
       page: mdx,
     },

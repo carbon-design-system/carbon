@@ -135,13 +135,13 @@ const props = {
 
 export default {
   title: 'Components/Button',
+  component: Button,
+  subcomponents: {
+    ButtonSet,
+    ButtonSkeleton,
+  },
   decorators: [withKnobs],
   parameters: {
-    component: Button,
-    subcomponents: {
-      ButtonSet,
-      ButtonSkeleton,
-    },
     docs: {
       page: mdx,
     },

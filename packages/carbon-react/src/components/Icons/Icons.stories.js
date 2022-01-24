@@ -9,6 +9,7 @@ import './Icons.stories.scss';
 import React from 'react';
 import { Bee, Bicycle, ChevronUp } from '../../../icons';
 
+// eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Elements/Icons',
 };

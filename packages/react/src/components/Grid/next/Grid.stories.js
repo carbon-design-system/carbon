@@ -61,7 +61,7 @@ export const Condensed = () => {
   );
 };
 
-export const fullWidth = () => (
+export const FullWidth = () => (
   <Grid fullWidth>
     <Column sm={4} />
     <Column sm={4} />

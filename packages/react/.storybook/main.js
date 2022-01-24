@@ -40,6 +40,10 @@ module.exports = {
     builder: 'webpack5',
   },
 
+  features: {
+    previewCsfV3: true,
+  },
+
   staticDirs: [path.join(__dirname, 'assets')],
 
   stories: glob.sync(
