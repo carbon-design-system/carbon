@@ -15,8 +15,6 @@ function run(transformFileName, options) {
   console.log(options);
   if (!jscodeshift) {
     jscodeshift = which.sync('jscodeshift', {
-      // Note: we could pass options.cwd but could that potentially resolve
-      // to a version of jscodeshift that we're not expecting?
       cwd: __dirname,
     });
   }

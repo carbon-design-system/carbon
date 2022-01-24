@@ -180,17 +180,17 @@ export const upgrades = [
       {
         name: 'migration 1',
         description: 'migration 1',
-        migrate: async (context) => {
+        migrate: async (options) => {
           console.log(`migration 1 function`);
-          console.log(context);
+          console.log(options);
         },
       },
       {
         name: 'migration 2',
         description: 'migration 2',
-        migrate: async (context) => {
+        migrate: async (options) => {
           console.log(`migration 2 function`);
-          console.log(context);
+          console.log(options);
         },
       },
     ],
