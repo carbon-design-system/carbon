@@ -11767,7 +11767,7 @@ __metadata:
     karma-jasmine: ^2.0.1
     karma-safari-launcher: ^1.0.0
     karma-sourcemap-loader: ~0.3.7
-    karma-spec-reporter: 0.0.32
+    karma-spec-reporter: 0.0.33
     karma-webpack: ^3.0.0
     lodash.debounce: ^4.0.8
     lolex: ^3.0.0
@@ -12817,7 +12817,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"colors@npm:^1.1.0, colors@npm:^1.1.2, colors@npm:^1.2.1, colors@npm:^1.4.0":
+"colors@npm:1.4.0, colors@npm:^1.1.0, colors@npm:^1.1.2, colors@npm:^1.2.1, colors@npm:^1.4.0":
   version: 1.4.0
   resolution: "colors@npm:1.4.0"
   checksum: 98aa2c2418ad87dedf25d781be69dc5fc5908e279d9d30c34d8b702e586a0474605b3a189511482b9d5ed0d20c867515d22749537f7bc546256c6014f3ebdcec
@@ -23783,14 +23783,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-spec-reporter@npm:0.0.32":
-  version: 0.0.32
-  resolution: "karma-spec-reporter@npm:0.0.32"
+"karma-spec-reporter@npm:0.0.33":
+  version: 0.0.33
+  resolution: "karma-spec-reporter@npm:0.0.33"
   dependencies:
-    colors: ^1.1.2
+    colors: 1.4.0
   peerDependencies:
     karma: ">=0.9"
-  checksum: 1857e8c9c862ee03a26e6a784838a751689d27f640ebc304e38220e3de60d521d96bddcaa0f3460b138f233cec03533618c21d80197afe6e42d4c5334057e9cc
+  checksum: 6218d49ca471f3a12dc4399a5245a76cd3a5d4b2c35a6196a674e27294c2fb09c2abb5177f3f2a1c73ec8ffe6e42f36910faa404421890c0c13bbda5f7b3df16
   languageName: node
   linkType: hard
 
