@@ -19,10 +19,9 @@ const props = () => ({
 
 export default {
   title: 'Components/Loading',
+  component: Loading,
   decorators: [withKnobs],
-
   parameters: {
-    component: Loading,
     docs: {
       page: mdx,
     },

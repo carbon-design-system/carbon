@@ -9,7 +9,13 @@ import { Search, ExpandableSearch } from 'carbon-components-react';
 import React from 'react';
 import { Layer } from '../../Layer';
 
-export default { title: 'Components/Search' };
+export default {
+  title: 'Components/Search',
+  component: Search,
+  subcomponents: {
+    ExpandableSearch,
+  },
+};
 
 export const Default = () => (
   <Search
@@ -47,7 +53,7 @@ export const Expandable = () => (
   />
 );
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <>
       <Search

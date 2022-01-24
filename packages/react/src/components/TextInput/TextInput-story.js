@@ -110,21 +110,20 @@ TextInput.displayName = 'TextInput';
 
 export default {
   title: 'Components/TextInput',
+  component: TextInput,
   decorators: [withKnobs],
-
+  subcomponents: {
+    TextInputSkeleton,
+    'TextInput.PasswordInput': TextInput.PasswordInput,
+  },
   parameters: {
-    component: TextInput,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      TextInputSkeleton,
-      'TextInput.PasswordInput': TextInput.PasswordInput,
     },
   },
 };
 
-export const classNameChangeTest = () => (
+export const ClassNameChangeTest = () => (
   <>
     <TextInput
       defaultValue="The class should be added to the label"
