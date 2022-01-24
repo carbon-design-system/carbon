@@ -35,10 +35,9 @@ const props = () => ({
 
 export default {
   title: 'Components/InlineLoading',
+  component: InlineLoading,
   decorators: [withKnobs],
-
   parameters: {
-    component: InlineLoading,
     docs: {
       page: mdx,
     },

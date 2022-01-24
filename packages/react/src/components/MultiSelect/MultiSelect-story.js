@@ -116,15 +116,14 @@ const props = () => ({
 
 export default {
   title: 'Components/MultiSelect',
+  component: MultiSelect,
+  subcomponents: {
+    FilterableMultiSelect,
+  },
   decorators: [withKnobs],
-
   parameters: {
-    component: MultiSelect,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      FilterableMultiSelect,
     },
   },
 };
@@ -148,7 +147,7 @@ export const Default = withReadme(readme, () => {
   );
 });
 
-export const controlled = withReadme(readme, () => {
+export const Controlled = withReadme(readme, () => {
   const {
     listBoxMenuIconTranslationIds,
     selectionFeedback,

@@ -59,14 +59,10 @@ const props = {
 
 export default {
   title: 'Components/DatePicker',
-
-  parameters: {
-    component: DatePicker,
-
-    subcomponents: {
-      DatePickerInput,
-      DatePickerSkeleton,
-    },
+  component: DatePicker,
+  subcomponents: {
+    DatePickerInput,
+    DatePickerSkeleton,
   },
 };
 
