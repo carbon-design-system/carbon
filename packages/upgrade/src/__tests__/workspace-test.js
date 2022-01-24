@@ -44,12 +44,6 @@ describe('Workspace', () => {
         directory
       )
     );
-    const workspace = await Workspace.load(directory);
-
-    expect(
-      Array.from(workspace.getWorkspaces()).map((w) => w.directory)
-    ).toEqual(['/test']);
-
     await expect(Workspace.load(directory)).resolves.toBeInstanceOf(Workspace);
   });
 
@@ -82,7 +76,6 @@ describe('Workspace', () => {
     expect(
       Array.from(workspace.getWorkspaces()).map((w) => w.directory)
     ).toEqual([
-      '/test',
       '/test/packages/a',
       '/test/packages/b',
       '/test/packages/c',
