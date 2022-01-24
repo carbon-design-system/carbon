@@ -13,15 +13,14 @@ import mdx from './TextInput.mdx';
 
 export default {
   title: 'Components/TextInput',
-
+  component: TextInput,
+  subcomponents: {
+    TextInputSkeleton,
+    'TextInput.PasswordInput': TextInput.PasswordInput,
+  },
   parameters: {
-    component: TextInput,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      TextInputSkeleton,
-      'TextInput.PasswordInput': TextInput.PasswordInput,
     },
   },
 };
@@ -55,7 +54,7 @@ export const TogglePasswordVisibility = () => {
   );
 };
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <>
       <TextInput
