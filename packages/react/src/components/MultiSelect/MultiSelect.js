@@ -225,6 +225,11 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 
   const toggleButtonProps = getToggleButtonProps();
 
+  const displayLabel = () =>
+    itemToString && enableSelectionLabel && selectedItems.length > 0
+      ? selectedItems.map((item) => itemToString(item)).join(', ')
+      : label;
+
   return (
     <div className={wrapperClasses}>
       <label className={titleClasses} {...getLabelProps()}>
@@ -273,9 +278,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             />
           )}
           <span id={fieldLabelId} className={`${prefix}--list-box__label`}>
-            {itemToString && enableSelectionLabel && selectedItems.length > 0
-              ? selectedItems.map((item) => itemToString(item)).join(', ')
-              : label}
+            {displayLabel()}
           </span>
           <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
         </button>
