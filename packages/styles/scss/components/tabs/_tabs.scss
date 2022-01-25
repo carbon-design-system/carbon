@@ -44,29 +44,21 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     width: 100%;
     height: auto;
     min-height: rem(40px);
+    max-height: 4rem;
+    overflow-x: auto;
+    overflow-y: hidden;
     color: $text-primary;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     &.#{$prefix}--tabs--contained {
       min-height: rem(48px);
     }
 
-    .#{$prefix}--tabs__nav {
+    .#{$prefix}--tab--list {
       display: flex;
-      overflow: auto hidden;
-      width: auto;
-      max-width: 100%;
-      flex-direction: row;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      outline: 0;
-      // hide scroll bars
-      scrollbar-width: none;
-      transition: max-height $duration-fast-01 motion(standard, productive);
-
-      &::-webkit-scrollbar {
-        display: none;
-      }
     }
 
     //-----------------------------

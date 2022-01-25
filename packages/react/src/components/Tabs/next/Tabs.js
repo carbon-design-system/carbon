@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useRef, useEffect } from 'react';
 import cx from 'classnames';
+import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import { Tooltip } from '../../Tooltip/next';
 import { keys, match, matches } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
@@ -117,7 +118,6 @@ function getNextIndex(event, total, index) {
     return total - 1;
   }
 }
-
 function TabList({
   activation = 'automatic',
   'aria-label': label,
@@ -137,12 +137,15 @@ function TabList({
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
+  const [scroll, setScroll] = useState(false);
+  const [scrollLeft, setScrollLeft] = useState(false);
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
     [`${prefix}--tabs__icon--default`]: iconSize === 'default',
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
   });
+  const overflowButtonClasses = cx();
 
   const tabs = [];
 
@@ -171,6 +174,16 @@ function TabList({
     }
   }
 
+  useEffect(() => {
+    const resizeObserver = new ResizeObserver((entries) => {});
+    resizeObserver.observe(ref.current);
+    if (ref.current.scrollWidth > ref.current.clientWidth) {
+      setScroll(true);
+    }
+    console.log(ref.current.scrollLeft);
+    return () => resizeObserver.disconnect();
+  }, []);
+
   useEffectOnce(() => {
     const tab = tabs[selectedIndex];
     if (scrollIntoView && tab) {
@@ -196,24 +209,42 @@ function TabList({
 
   return (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
-    <div
-      {...rest}
-      aria-label={label}
-      ref={ref}
-      role="tablist"
-      className={className}
-      onKeyDown={onKeyDown}>
-      {React.Children.map(children, (child, index) => {
-        const ref = React.createRef();
-        tabs.push(ref);
-        return (
-          <TabContext.Provider value={index}>
-            {React.cloneElement(child, {
-              ref,
-            })}
-          </TabContext.Provider>
-        );
-      })}
+    <div className={className}>
+      <button
+        className={
+          (`${prefix}--tab--overflow-nav-button--left`,
+          `${prefix}--tab--overflow-nav-button`)
+        }
+        type="button">
+        <ChevronLeft16 />
+      </button>
+      <div
+        {...rest}
+        aria-label={label}
+        ref={ref}
+        role="tablist"
+        className={`${prefix}--tab--list`}
+        onKeyDown={onKeyDown}>
+        {React.Children.map(children, (child, index) => {
+          const ref = React.createRef();
+          tabs.push(ref);
+          return (
+            <TabContext.Provider value={index}>
+              {React.cloneElement(child, {
+                ref,
+              })}
+            </TabContext.Provider>
+          );
+        })}
+      </div>
+      <button
+        className={
+          (`${prefix}--tab--overflow-nav-button--right`,
+          `${prefix}--tab--overflow-nav-button`)
+        }
+        type="button">
+        <ChevronRight16 />
+      </button>
     </div>
   );
 }
