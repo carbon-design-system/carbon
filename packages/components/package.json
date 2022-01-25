@@ -94,7 +94,7 @@
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-plugin-istanbul": "^6.1.1",
     "babel-plugin-rewire": "^1.2.0",
-    "bluebird": "~3.1.1",
+    "bluebird": "~3.7.0",
     "browser-sync": "^2.26.3",
     "browserslist-config-carbon": "^10.6.1",
     "carbon-components": "^9.0.0",
