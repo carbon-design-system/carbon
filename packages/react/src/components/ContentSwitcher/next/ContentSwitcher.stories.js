@@ -12,13 +12,9 @@ import { Layer } from '../../Layer';
 
 export default {
   title: 'Components/ContentSwitcher',
-
-  parameters: {
-    component: ContentSwitcher,
-
-    subcomponents: {
-      Switch,
-    },
+  component: ContentSwitcher,
+  subcomponents: {
+    Switch,
   },
 };
 
@@ -30,7 +26,7 @@ export const Default = () => (
   </ContentSwitcher>
 );
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <>
       <ContentSwitcher onChange={() => {}}>

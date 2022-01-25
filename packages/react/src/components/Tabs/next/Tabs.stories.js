@@ -6,16 +6,24 @@
  */
 
 import React from 'react';
-import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
+import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import Button from '../../Button';
 
 import TabsSkeleton from './Tabs.Skeleton';
-import { Monster20, Corn20, Bat20 } from '@carbon/icons-react';
+import {
+  Monster20,
+  Corn20,
+  Bat20,
+  Monster16,
+  Corn16,
+  Bat16,
+} from '@carbon/icons-react';
 
 import { unstable_FeatureFlags as FeatureFlags } from 'carbon-components-react';
 
 export default {
   title: 'Components/Tabs',
+  component: Tabs,
   decorators: [
     (Story) => (
       <FeatureFlags flags={{ 'enable-v11-release': true }}>
@@ -23,15 +31,13 @@ export default {
       </FeatureFlags>
     ),
   ],
-  parameters: {
-    component: Tabs,
-    subcomponents: {
-      TabList,
-      Tab,
-      TabPanels,
-      TabPanel,
-    },
+  subcomponents: {
+    TabList,
+    Tab,
+    TabPanels,
+    TabPanel,
   },
+  parameters: {},
 };
 
 export const Default = () => (
@@ -55,18 +61,39 @@ export const Default = () => (
   </Tabs>
 );
 
+export const Icon20Only = () => (
+  <Tabs>
+    <TabList iconSize="lg" aria-label="List of tabs">
+      <IconTab label="Monster" disabled>
+        <Monster20 aria-label="Monster" />
+      </IconTab>
+      <IconTab label="Corn">
+        <Corn20 aria-label="Corn" />
+      </IconTab>
+      <IconTab label="Bat">
+        <Bat20 aria-label="Bat" />
+      </IconTab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
 export const IconOnly = () => (
   <Tabs>
-    <TabList aria-label="List of tabs">
-      <Tab disabled>
-        <Monster20 />
-      </Tab>
-      <Tab>
-        <Corn20 />
-      </Tab>
-      <Tab>
-        <Bat20 />
-      </Tab>
+    <TabList iconSize="default" aria-label="List of tabs">
+      <IconTab label="Monster" disabled>
+        <Monster16 aria-label="Monster" />
+      </IconTab>
+      <IconTab label="Corn">
+        <Corn16 aria-label="Corn" />
+      </IconTab>
+      <IconTab label="Bat">
+        <Bat16 aria-label="Bat" />
+      </IconTab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>

@@ -3,9 +3,6 @@
 exports[`Public API should only change with a semver change 1`] = `
 Map {
   "Accordion" => Object {
-    "defaultProps": Object {
-      "align": "end",
-    },
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -59,7 +56,8 @@ Map {
       "open": Object {
         "type": "bool",
       },
-      "renderExpando": Object {
+      "renderExpando": [Function],
+      "renderToggle": Object {
         "type": "func",
       },
       "title": Object {
@@ -6705,6 +6703,7 @@ Map {
       "$$typeof": Symbol(react.context),
     },
     "defaultProps": Object {
+      "scrollDebounceWait": 150,
       "scrollIntoView": true,
       "selected": 0,
       "selectionMode": "automatic",
@@ -6737,6 +6736,9 @@ Map {
       },
       "rightOverflowButtonProps": Object {
         "type": "object",
+      },
+      "scrollDebounceWait": Object {
+        "type": "number",
       },
       "scrollIntoView": Object {
         "type": "bool",
@@ -7959,6 +7961,31 @@ Map {
     },
     "render": [Function],
   },
+  "unstable_IconTab" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
+    },
+    "render": [Function],
+  },
   "unstable_Layer" => Object {
     "propTypes": Object {
       "as": Object {
@@ -8524,6 +8551,15 @@ Map {
       },
       "contained": Object {
         "type": "bool",
+      },
+      "iconSize": Object {
+        "args": Array [
+          Array [
+            "default",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
       "light": Object {
         "type": "bool",

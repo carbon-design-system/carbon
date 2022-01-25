@@ -95,15 +95,13 @@ const props = {
 
 export default {
   title: 'Components/DatePicker',
+  component: DatePicker,
+  subcomponents: {
+    DatePickerInput,
+    DatePickerSkeleton,
+  },
   decorators: [withKnobs],
-
   parameters: {
-    component: DatePicker,
-
-    subcomponents: {
-      DatePickerInput,
-      DatePickerSkeleton,
-    },
     docs: {
       page: mdx,
     },

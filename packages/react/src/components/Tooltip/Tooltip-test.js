@@ -5,10 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import debounce from 'lodash.debounce'; // eslint-disable-line no-unused-vars
 import FloatingMenu from '../../internal/FloatingMenu';
 import Tooltip from '../Tooltip';
+import Link from '../Link';
+import Button from '../Button';
 import { mount } from 'enzyme';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
@@ -232,6 +234,103 @@ describe('Tooltip', () => {
       userEvent.keyboard('{esc}');
 
       expect(screen.queryByText('tooltip body')).not.toBeInTheDocument();
+    });
+
+    it('should not call onChange on focus of an interactive element in body when controlled', () => {
+      const onChange = jest.fn();
+      function ControlledWithStateOnChange() {
+        const [tipOpen, setTipOpen] = useState(false);
+        const handleChange = (ev, { open }) => {
+          onChange(ev, { open });
+          setTipOpen(open);
+        };
+
+        return (
+          <Tooltip
+            direction="bottom"
+            tabIndex={0}
+            triggerText="ControlledWithStateOnChange label"
+            onChange={handleChange}
+            open={tipOpen}>
+            <p>
+              This is some tooltip text. This box shows the maximum amount of
+              text that should be displayed inside. If more room is needed, use
+              a modal instead.
+            </p>
+            <div className="bx--tooltip__footer">
+              <Link href="#">Learn more</Link>
+              <Button size="small" onClick={() => setTipOpen(false)}>
+                Create
+              </Button>
+            </div>
+          </Tooltip>
+        );
+      }
+
+      render(<ControlledWithStateOnChange />);
+
+      expect(
+        screen.queryByText('ControlledWithStateOnChange label')
+      ).toBeInTheDocument();
+      expect(
+        screen.queryByRole('button', { name: 'Create' })
+      ).not.toBeInTheDocument();
+
+      // The trigger to open the tooltip
+      userEvent.click(screen.getByRole('button'));
+
+      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+          type: 'focus',
+        }),
+        expect.objectContaining({
+          open: false,
+        })
+      );
+      expect(onChange).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+          type: 'click',
+        }),
+        expect.objectContaining({
+          open: true,
+        })
+      );
+
+      expect(
+        screen.queryByRole('button', { name: 'Create' })
+      ).toBeInTheDocument();
+      userEvent.click(screen.getByRole('button', { name: 'Create' }));
+      expect(
+        screen.queryByRole('button', { name: 'Create' })
+      ).not.toBeInTheDocument();
+      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenNthCalledWith(
+        1,
+        expect.objectContaining({
+          type: 'focus',
+          target: expect.objectContaining({
+            className: `${prefix}--tooltip__trigger`,
+          }),
+        }),
+        expect.objectContaining({
+          open: false,
+        })
+      );
+      expect(onChange).toHaveBeenNthCalledWith(
+        2,
+        expect.objectContaining({
+          type: 'click',
+          target: expect.objectContaining({
+            className: `${prefix}--tooltip__trigger`,
+          }),
+        }),
+        expect.objectContaining({
+          open: true,
+        })
+      );
     });
   });
 });

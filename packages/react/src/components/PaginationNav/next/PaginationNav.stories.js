@@ -17,11 +17,8 @@ const props = () => ({
 
 export default {
   title: 'Components/PaginationNav',
+  component: PaginationNav,
   decorators: [(story) => <div style={{ width: '800px' }}>{story()}</div>],
-
-  parameters: {
-    component: PaginationNav,
-  },
 };
 
 export const _PaginationNav = () => <PaginationNav {...props()} />;
