@@ -54,19 +54,22 @@
     transition: all $duration--moderate-01 motion(standard, productive);
     white-space: nowrap;
 
-    &::after:not(&:disabled) {
+    &::after {
       position: absolute;
       top: 0;
       left: 0;
       display: block;
       width: 100%;
       height: 100%;
-      background-color: #161616;
+      background-color: $layer-selected-inverse;
       content: '';
       transform: scaleY(0);
       transform-origin: bottom;
-      transition: all $duration--moderate-01
-       motion(standard, productive);
+      transition: all $duration--moderate-01 motion(standard, productive);
+    }
+
+    &:disabled::after {
+      display: none;
     }
 
     &:focus {
