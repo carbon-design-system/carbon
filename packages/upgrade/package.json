@@ -17,9 +17,6 @@
     "cli.js",
     "transforms"
   ],
-  "installConfig": {
-    "hoistingLimits": "workspaces"
-  },
   "keywords": [
     "carbon",
     "carbon-addons",
@@ -34,16 +31,14 @@
     "access": "public"
   },
   "scripts": {
-    "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14",
+    "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14 --external:jscodeshift",
     "clean": "rimraf cli.js",
     "watch": "yarn build --watch"
   },
   "devDependencies": {
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
-    "cross-spawn": "^7.0.3",
     "esbuild": "^0.14.10",
-    "execa": "^5.1.1",
     "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "inquirer": "^8.1.0",
@@ -59,6 +54,7 @@
     "yargs": "^17.0.1"
   },
   "dependencies": {
+    "execa": "^6.0.0",
     "jscodeshift": "^0.13.1"
   }
 }

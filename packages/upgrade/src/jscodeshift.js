@@ -5,32 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import which from 'npm-which';
-import spawn from './spawn';
 import path from 'path';
+import { execa } from 'execa';
 
-let jscodeshift;
+let _jscodeshift;
 
-function run(transformFileName, options) {
-  if (!jscodeshift) {
-    jscodeshift = which.sync('jscodeshift', {
-      cwd: __dirname,
-    });
+function getBinPath() {
+  if (!_jscodeshift) {
+    const directory = path.dirname(require.resolve('jscodeshift'));
+    _jscodeshift = path.join(directory, 'bin', 'jscodeshift.js');
   }
+  return _jscodeshift;
+}
 
+export async function run(options) {
   const {
     cwd,
     stdio = 'inherit',
-    TRANSFORM_DIR,
-    ...jscodeshiftOptions
+    parser = 'babel',
+    paths,
+    transform,
   } = options;
-  const transformFile = path.join(TRANSFORM_DIR, transformFileName);
   const args = [
-    jscodeshiftOptions.print && '--print',
-    jscodeshiftOptions.verbose && '-v',
-    '--babel',
-    jscodeshiftOptions.dry && '--dry',
-    '--parser=babylon',
+    paths,
+    `-t=${transform}`,
+    `--parser=${parser}`,
     `--ignore-pattern=**/build/**`,
     `--ignore-pattern=**/dist/**`,
     `--ignore-pattern=**/es/**`,
@@ -38,16 +37,24 @@ function run(transformFileName, options) {
     `--ignore-pattern=**/node_modules/**`,
     `--ignore-pattern=**/storybook-static/**`,
     `--ignore-pattern=**/umd/**`,
-    `-t=${transformFile}`,
-    jscodeshiftOptions.workspaceDir,
-  ].filter(Boolean);
+  ];
 
-  return spawn(jscodeshift, args, {
+  if (options.print) {
+    args.push('--print');
+  }
+
+  if (options.verbose) {
+    args.push('-v');
+  }
+
+  if (options.dry) {
+    args.push('--dry');
+  }
+
+  console.log(args);
+
+  return await execa(getBinPath(), args, {
     cwd,
     stdio,
   });
 }
-
-module.exports = {
-  run,
-};

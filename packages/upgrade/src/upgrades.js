@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import path from 'path';
 import { run } from './jscodeshift';
 
 /**
@@ -146,13 +147,16 @@ export const upgrades = [
         description:
           'Rewrites imports from `carbon-components-react` to `@carbon/react`',
         migrate: async (options) => {
-          const transformFileName = 'imports-to-unified-package.js';
-
-          await run(transformFileName, {
-            cwd: options.cwd,
+          const transform = path.join(
+            options.TRANSFORM_DIR,
+            'imports-to-unified-package.js'
+          );
+          console.log(options);
+          await run({
+            transform: transform,
+            paths: options.workspaceDir,
             dry: !options.write,
-            workspaceDir: options.workspaceDir,
-            TRANSFORM_DIR: options.TRANSFORM_DIR,
+            ...options,
           });
         },
       },

@@ -74,7 +74,7 @@ export async function main({ argv, cwd }) {
           const { verbose } = args;
           const options = { cwd: cwd(), verbose, list: true };
           await migrate(options, upgrades);
-        })
+        }, true)
       );
     },
     run(async (args) => {
@@ -97,7 +97,7 @@ export async function main({ argv, cwd }) {
  * @param {Function} command
  * @returns {Function}
  */
-function run(command) {
+function run(command, ignoreSafetyChecks = false) {
   return async (args) => {
     if (args.verbose === true) {
       logger.setLevel('verbose');
@@ -121,7 +121,7 @@ function run(command) {
       }
     }
 
-    if (!clean && args.force !== true) {
+    if (!ignoreSafetyChecks && !clean && args.force !== true) {
       logger.log(
         chalk.yellow('[warning]'),
         'It appears that you have untracked changes in your project. Before we continue, please stash or commit your changes to git.'
@@ -134,7 +134,7 @@ function run(command) {
 
     try {
       await command(args);
-      logger.log('Done! ✨');
+      logger.verbose('Done! ✨');
     } catch (error) {
       if (error instanceof UpgradeError) {
         logger.error(error.message);
