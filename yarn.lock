@@ -10670,17 +10670,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"bluebird@npm:3.7.2, bluebird@npm:^3.0.5, bluebird@npm:^3.1.1, bluebird@npm:^3.3.0, bluebird@npm:^3.3.5, bluebird@npm:^3.4.1, bluebird@npm:^3.5.1, bluebird@npm:^3.5.2, bluebird@npm:^3.5.3, bluebird@npm:^3.5.4, bluebird@npm:^3.5.5":
+"bluebird@npm:3.7.2, bluebird@npm:^3.0.5, bluebird@npm:^3.1.1, bluebird@npm:^3.3.0, bluebird@npm:^3.3.5, bluebird@npm:^3.4.1, bluebird@npm:^3.5.1, bluebird@npm:^3.5.2, bluebird@npm:^3.5.3, bluebird@npm:^3.5.4, bluebird@npm:^3.5.5, bluebird@npm:~3.7.0":
   version: 3.7.2
   resolution: "bluebird@npm:3.7.2"
   checksum: 869417503c722e7dc54ca46715f70e15f4d9c602a423a02c825570862d12935be59ed9c7ba34a9b31f186c017c23cac6b54e35446f8353059c101da73eac22ef
-  languageName: node
-  linkType: hard
-
-"bluebird@npm:~3.1.1":
-  version: 3.1.5
-  resolution: "bluebird@npm:3.1.5"
-  checksum: 532596038c3d8802bc15e16407dd6c8c8b07951e17a84266e280b1f2ce90bec14a963fedd924f4c98b456ae48ad79acd2c6cfc7d87aae5262daf4402d78000c5
   languageName: node
   linkType: hard
 
@@ -11796,7 +11789,7 @@ __metadata:
     babel-plugin-dev-expression: ^0.2.3
     babel-plugin-istanbul: ^6.1.1
     babel-plugin-rewire: ^1.2.0
-    bluebird: ~3.1.1
+    bluebird: ~3.7.0
     browser-sync: ^2.26.3
     browserslist-config-carbon: ^10.6.1
     carbon-components: ^9.0.0
