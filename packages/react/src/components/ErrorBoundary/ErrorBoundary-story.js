@@ -12,10 +12,7 @@ import Button from '../Button';
 
 export default {
   title: 'Components/ErrorBoundary',
-
-  parameters: {
-    component: ErrorBoundary,
-  },
+  component: ErrorBoundary,
 };
 
 export const Default = () => {

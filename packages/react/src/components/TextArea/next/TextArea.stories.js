@@ -11,11 +11,9 @@ import { Layer } from '../../Layer';
 
 export default {
   title: 'Components/TextArea',
-  parameters: {
-    component: TextArea,
-    subcomponents: {
-      TextAreaSkeleton,
-    },
+  component: TextArea,
+  subcomponents: {
+    TextAreaSkeleton,
   },
 };
 
@@ -30,7 +28,7 @@ export const Default = () => (
   />
 );
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <>
       <TextArea

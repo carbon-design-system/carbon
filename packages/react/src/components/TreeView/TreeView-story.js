@@ -251,8 +251,8 @@ function renderTree({ nodes, expanded, withIcons = false }) {
 
 export default {
   title: 'Experimental/unstable_TreeView',
+  component: TreeView,
   decorators: [withKnobs],
-  parameters: { component: TreeView },
 };
 
 export const Default = () => (

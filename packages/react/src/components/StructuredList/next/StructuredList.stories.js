@@ -30,19 +30,18 @@ const props = () => ({
 
 export default {
   title: 'Components/StructuredList',
+  component: StructuredListWrapper,
   decorators: [withKnobs],
-
+  subcomponents: {
+    StructuredListHead,
+    StructuredListBody,
+    StructuredListRow,
+    StructuredListInput,
+    StructuredListCell,
+  },
   parameters: {
-    component: StructuredListWrapper,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      StructuredListHead,
-      StructuredListBody,
-      StructuredListRow,
-      StructuredListInput,
-      StructuredListCell,
     },
   },
 };
@@ -191,8 +190,6 @@ export const Skeleton = () => (
     <StructuredListSkeleton />
   </div>
 );
-
-Skeleton.storyName = 'Skeleton';
 
 Skeleton.parameters = {
   info: {

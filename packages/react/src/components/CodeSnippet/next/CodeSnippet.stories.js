@@ -14,13 +14,13 @@ export default {
   component: CodeSnippet,
 };
 
-export const inline = () => (
+export const Inline = () => (
   <CodeSnippet type="inline" feedback="Copied to clipboard">
     {'node -v'}
   </CodeSnippet>
 );
 
-export const multiline = () => (
+export const Multiline = () => (
   <CodeSnippet type="multi" feedback="Copied to clipboard">
     {`  "scripts": {
     "build": "lerna run build --stream --prefix --npm-client yarn",
@@ -54,14 +54,14 @@ export const multiline = () => (
   </CodeSnippet>
 );
 
-export const singleline = () => (
+export const Singleline = () => (
   <CodeSnippet type="single" feedback="Copied to clipboard">
     yarn add carbon-components@latest carbon-components-react@latest
     @carbon/icons-react@latest carbon-icons@latest
   </CodeSnippet>
 );
 
-export const inlineWithLayer = () => {
+export const InlineWithLayer = () => {
   return (
     <>
       <CodeSnippet type="inline" feedback="Copied to clipboard">
@@ -81,7 +81,7 @@ export const inlineWithLayer = () => {
   );
 };
 
-export const multilineWithLayer = () => {
+export const MultilineWithLayer = () => {
   return (
     <>
       <CodeSnippet type="multi" feedback="Copied to clipboard">
@@ -185,7 +185,7 @@ export const multilineWithLayer = () => {
   );
 };
 
-export const singlelineWithLayer = () => {
+export const SinglelineWithLayer = () => {
   return (
     <>
       <CodeSnippet type="single" feedback="Copied to clipboard">
@@ -208,7 +208,7 @@ export const singlelineWithLayer = () => {
   );
 };
 
-export const skeleton = () => (
+export const Skeleton = () => (
   <div>
     <CodeSnippetSkeleton type="single" style={{ marginBottom: 8 }} />
     <CodeSnippetSkeleton type="multi" />
