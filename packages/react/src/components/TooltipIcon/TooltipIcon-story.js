@@ -60,10 +60,9 @@ const props = () => {
 
 export default {
   title: 'Components/TooltipIcon',
+  component: TooltipIcon,
   decorators: [withKnobs],
-
   parameters: {
-    component: TooltipIcon,
     docs: {
       page: mdx,
     },

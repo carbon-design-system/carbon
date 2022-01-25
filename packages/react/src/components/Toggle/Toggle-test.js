@@ -7,131 +7,86 @@
 
 import React from 'react';
 import Toggle from '../Toggle';
-import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '../../../../components/scss/components/toggle/_toggle.scss';
 
-const { prefix } = settings;
-describe('Toggle', () => {
-  const commonProps = {
-    'aria-label': 'Toggle label',
-    labelA: 'Off',
-    labelB: 'On',
-    labelText: 'Toggle label',
-  };
-
-  describe('Renders as expected', () => {
-    const wrapper = mount(<Toggle {...commonProps} id="toggle-1" />);
-
-    const input = wrapper.find('input');
-
-    it('Switch and label Ids should match', () => {
-      const toggleLabel = wrapper.find(`.${prefix}--toggle__label`);
-      expect(input.id).toEqual(toggleLabel.htmlFor);
+describe('Toggle RTL', () => {
+  describe('Behaviors', () => {
+    it('toggles on click', () => {
+      render(<Toggle id="test-id" />);
+      expect(screen.getByText('Off')).toBeVisible();
+      expect(screen.getByText('On')).not.toBeVisible();
+      userEvent.click(screen.getByRole('checkbox'));
+      expect(screen.getByText('On')).toBeVisible();
+      expect(screen.getByText('Off')).not.toBeVisible();
     });
 
-    it('should set defaultChecked as expected', () => {
-      expect(input.props().defaultChecked).toEqual(false);
-      wrapper.setProps({ defaultToggled: true });
-      expect(wrapper.find('input').props().defaultChecked).toEqual(true);
+    it('toggles on keydown - enter', () => {
+      render(<Toggle id="test-id" />);
+      expect(screen.getByText('Off')).toBeVisible();
+      expect(screen.getByText('On')).not.toBeVisible();
+      userEvent.type(screen.getByRole('checkbox'), 'enter');
+      expect(screen.getByText('On')).toBeVisible();
+      expect(screen.getByText('Off')).not.toBeVisible();
     });
 
-    it('Can set defaultToggled state', () => {
-      wrapper.setProps({ defaultToggled: true });
-      expect(
-        wrapper.find(`.${prefix}--toggle-input`).props().defaultChecked
-      ).toEqual(true);
-    });
-
-    it('Should add extra classes that are passed via className', () => {
-      wrapper.setProps({ className: 'extra-class' });
-      expect(wrapper.find('div').hasClass('extra-class')).toEqual(true);
-    });
-
-    it('Can be disabled', () => {
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.find(`.${prefix}--toggle-input`).props().disabled).toEqual(
-        true
-      );
-    });
-
-    it('Can have a labelA', () => {
-      wrapper.setProps({ labelA: 'labelA-test' });
-      expect(wrapper.find(`.${prefix}--toggle__text--off`).text()).toEqual(
-        'labelA-test'
-      );
-    });
-
-    it('Can have a labelB', () => {
-      wrapper.setProps({ labelB: 'labelB-test' });
-      expect(wrapper.find(`.${prefix}--toggle__text--on`).text()).toEqual(
-        'labelB-test'
-      );
+    it('toggles on keydown - space', () => {
+      render(<Toggle id="test-id" />);
+      expect(screen.getByText('Off')).toBeVisible();
+      expect(screen.getByText('On')).not.toBeVisible();
+      userEvent.type(screen.getByRole('checkbox'), 'space');
+      expect(screen.getByText('On')).toBeVisible();
+      expect(screen.getByText('Off')).not.toBeVisible();
     });
   });
 
-  it('toggled prop sets checked prop on input', () => {
-    const wrapper = mount(<Toggle {...commonProps} id="test" toggled />);
+  describe('Props', () => {
+    it('add custom class name to wrapper div', () => {
+      const { container } = render(
+        <Toggle id="test-id" className="custom-class" />
+      );
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
 
-    const input = () => wrapper.find('input');
-    expect(input().props().checked).toEqual(true);
+    it('sets toggled based on defaultToggled on render', () => {
+      render(<Toggle id="test-id" defaultToggled={true} />);
+      expect(screen.getByText('On')).toBeVisible();
+    });
 
-    wrapper.setProps({ toggled: false });
-    expect(input().props().checked).toEqual(false);
-  });
-
-  describe('events', () => {
-    it('passes along onChange to <input>', () => {
+    it('calls onChange when the control is changed', () => {
       const onChange = jest.fn();
-      const id = 'test-input';
-      const wrapper = mount(
-        <Toggle {...commonProps} id={id} onChange={onChange} />
-      );
-
-      const input = wrapper.find('input');
-      const inputElement = input.instance();
-
-      inputElement.checked = true;
-      wrapper.find('input').simulate('change');
-
-      expect(
-        onChange.mock.calls.map((call) =>
-          call.map((arg, i) => (i > 0 ? arg : arg.target))
-        )
-      ).toEqual([[inputElement]]);
+      render(<Toggle id="test-id" onChange={onChange} />);
+      userEvent.click(screen.getByRole('checkbox'));
+      expect(onChange).toHaveBeenCalled();
     });
 
-    it('should invoke onToggle with expected arguments', () => {
+    it('calls onToggle when toggled', () => {
       const onToggle = jest.fn();
-      const id = 'test-input';
-      const wrapper = mount(
-        <Toggle {...commonProps} id={id} onToggle={onToggle} />
+      render(<Toggle id="test-id" onToggle={onToggle} />);
+      userEvent.click(screen.getByRole('checkbox'));
+      expect(onToggle).toHaveBeenCalled();
+    });
+
+    it('takes in custom labels for toggled and untoggled states', () => {
+      render(<Toggle id="test-id" labelA="test On" labelB="test Off" />);
+      expect(screen.getByText('test On')).toBeInTheDocument();
+      expect(screen.getByText('test Off')).toBeInTheDocument();
+    });
+
+    it('sets toggled based on toggled prop', () => {
+      const { rerender } = render(<Toggle id="test-id" toggled={false} />);
+      expect(screen.getByText('Off')).toBeVisible();
+      rerender(<Toggle id="test-id" toggled={true} />);
+      expect(screen.getByText('On')).toBeVisible();
+    });
+
+    it('passes extra props to input', () => {
+      render(<Toggle id="test-id" aria-disabled={true} />);
+      expect(screen.getByRole('checkbox')).toHaveAttribute(
+        'aria-disabled',
+        'true'
       );
-
-      const input = wrapper.find('input');
-      const inputElement = input.instance();
-
-      inputElement.checked = true;
-      wrapper.find('input').simulate('change');
-
-      const call = onToggle.mock.calls[0];
-
-      expect(call[0]).toEqual(true);
-      expect(call[1]).toEqual(id);
-      expect(call[2].target).toBe(inputElement);
-    });
-  });
-
-  describe('ToggleSmall', () => {
-    const wrapper = mount(<Toggle {...commonProps} id="toggle-1" size="sm" />);
-
-    it('Sets the `ToggleSmall` className', () => {
-      const input = wrapper.find('input');
-      expect(input.hasClass(`${prefix}--toggle-input--small`)).toEqual(true);
-    });
-
-    it('Renders a checkmark SVG', () => {
-      const svg = wrapper.find(`.${prefix}--toggle__check`);
-      expect(svg.length).toBe(1);
     });
   });
 });

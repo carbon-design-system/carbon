@@ -58,13 +58,12 @@ const props = () => ({
 
 export default {
   title: 'Components/Pagination',
+  component: Pagination,
   decorators: [
     withKnobs,
     (story) => <div style={{ maxWidth: '800px' }}>{story()}</div>,
   ],
-
   parameters: {
-    component: Pagination,
     docs: {
       page: mdx,
     },

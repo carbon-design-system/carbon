@@ -109,15 +109,15 @@ const TabContentRenderedOnlyWhenSelected = ({
 
 export default {
   title: 'Components/Tabs',
+  component: Tabs,
   decorators: [withKnobs],
+  subcomponents: {
+    Tab,
+    TabsSkeleton,
+  },
   parameters: {
-    component: Tabs,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      Tab,
-      TabsSkeleton,
     },
   },
 };

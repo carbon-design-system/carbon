@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable storybook/story-exports */
+
 import React from 'react';
 import {
   ContentSwitcher,
@@ -16,6 +18,13 @@ import {
 
 export default {
   title: 'Experimental/unstable_ContentSwitcher',
+  component: ContentSwitcher,
+  subcomponents: {
+    ContentTabs,
+    ContentTab,
+    ContentPanels,
+    ContentPanel,
+  },
   includeStories: [],
 };
 
