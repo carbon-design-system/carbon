@@ -9,6 +9,7 @@ import {
   // Blue
   blue40,
   blue60,
+  blue70,
   blue80,
 
   // Gray
@@ -33,7 +34,7 @@ import {
   green50,
   yellow30,
   orange40,
-  red30,
+  red40,
   red50,
   red60,
   purple40,
@@ -45,6 +46,8 @@ import {
 
   // Tools
   rgba,
+  gray100Hover,
+  gray10Hover,
 } from '@carbon/colors';
 import { adjustLightness, adjustAlpha } from '../tools';
 
@@ -53,16 +56,16 @@ export const background = gray100;
 export const backgroundInverse = gray10;
 export const backgroundBrand = blue60;
 export const backgroundActive = gray80;
-export const backgroundHover = adjustLightness(background, 7);
-export const backgroundInverseHover = adjustLightness(backgroundInverse, -5);
+export const backgroundHover = gray100Hover;
+export const backgroundInverseHover = gray10Hover;
 export const backgroundSelected = gray90;
-export const backgroundSelectedHover = adjustLightness(backgroundSelected, 5);
+export const backgroundSelectedHover = gray90Hover;
 
 // Layer
 // layer-01
 export const layer01 = gray90;
 export const layerActive01 = gray70;
-export const layerHover01 = adjustLightness(layer01, 5);
+export const layerHover01 = gray90Hover;
 export const layerSelected01 = gray80;
 export const layerSelectedHover01 = gray80Hover;
 
@@ -88,7 +91,7 @@ export const layerSelectedDisabled = gray40;
 // layer-accent-01
 export const layerAccent01 = gray80;
 export const layerAccentActive01 = gray60;
-export const layerAccentHover01 = adjustLightness(layerAccent01, 6);
+export const layerAccentHover01 = gray80Hover;
 
 // layer-accent-02
 export const layerAccent02 = gray70;
@@ -151,7 +154,7 @@ export const textPrimary = gray10;
 export const textSecondary = gray30;
 export const textPlaceholder = adjustAlpha(textPrimary, 0.4);
 export const textHelper = gray40;
-export const textError = red30;
+export const textError = red40;
 export const textInverse = gray100;
 export const textOnColor = white;
 export const textOnColorDisabled = adjustAlpha(textOnColor, 0.25);
@@ -170,7 +173,7 @@ export const iconSecondary = gray30;
 export const iconInverse = gray100;
 export const iconOnColor = white;
 export const iconOnColorDisabled = adjustAlpha(iconOnColor, 0.25);
-export const iconDisabled = gray70;
+export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
 
 // Support
 export const supportError = red50;
@@ -180,7 +183,7 @@ export const supportInfo = blue50;
 export const supportErrorInverse = red60;
 export const supportSuccessInverse = green50;
 export const supportWarningInverse = yellow30;
-export const supportInfoInverse = blue60;
+export const supportInfoInverse = blue70;
 export const supportCautionMinor = yellow30;
 export const supportCautionMajor = orange40;
 export const supportCautionUndefined = purple50;
