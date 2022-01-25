@@ -23,17 +23,15 @@ import './tile-story.scss';
 
 export default {
   title: 'Components/Tile',
-  parameters: {
-    component: Tile,
-    subcomponents: {
-      ClickableTile,
-      SelectableTile,
-      ExpandableTile,
-      RadioTile,
-      TileGroup,
-      TileAboveTheFoldContent,
-      TileBelowTheFoldContent,
-    },
+  component: Tile,
+  subcomponents: {
+    ClickableTile,
+    SelectableTile,
+    ExpandableTile,
+    RadioTile,
+    TileGroup,
+    TileAboveTheFoldContent,
+    TileBelowTheFoldContent,
   },
 };
 

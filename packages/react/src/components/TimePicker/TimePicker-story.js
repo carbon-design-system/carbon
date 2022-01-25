@@ -64,15 +64,15 @@ const props = {
 
 export default {
   title: 'Components/TimePicker',
+  component: TimePicker,
   decorators: [withKnobs],
+  subcomponents: {
+    TimePickerSelect,
+    SelectItem,
+  },
   parameters: {
-    component: TimePicker,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      TimePickerSelect,
-      SelectItem,
     },
   },
 };
