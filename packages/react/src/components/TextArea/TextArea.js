@@ -68,7 +68,6 @@ const TextArea = React.forwardRef(function TextArea(
 
   const counterClasses = classNames(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--text-area__counter`]: true,
   });
 
   const counter =

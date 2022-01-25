@@ -101,11 +101,11 @@
   }
 
   .#{$prefix}--text-area__counter-wrapper {
+    display: flex;
     width: 100%;
-  }
-
-  .#{$prefix}--text-area__counter {
-    float: right;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
