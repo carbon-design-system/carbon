@@ -9,13 +9,14 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import React from 'react';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 function Accordion({
-  align,
+  align = 'end',
   children,
   className: customClassName,
-  disabled,
-  size,
+  disabled = false,
+  size = 'md',
   ...rest
 }) {
   const prefix = usePrefix();
@@ -33,10 +34,6 @@ function Accordion({
     </ul>
   );
 }
-
-Accordion.defaultProps = {
-  align: 'end',
-};
 
 Accordion.propTypes = {
   /**
@@ -60,10 +57,11 @@ Accordion.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify the size of the Accordion. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-   * TODO V11: remove `xl` (replaced with lg)
+   * Specify the size of the Accordion. Currently supports the following:
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg'])
+    : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
 export default Accordion;
