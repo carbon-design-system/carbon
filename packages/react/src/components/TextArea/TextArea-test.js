@@ -158,7 +158,7 @@ describe('TextArea', () => {
       it('should have label and counter disabled', () => {
         counterTestWrapper1.setProps({ disabled: true });
         const wrapper = counterTestWrapper1.find(
-          `.${prefix}--text-area__counter-wrapper`
+          `.${prefix}--text-area__label-wrapper`
         );
         const labels = wrapper.find(`.${prefix}--label`);
 

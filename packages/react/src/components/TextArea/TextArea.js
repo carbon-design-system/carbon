@@ -119,7 +119,7 @@ const TextArea = React.forwardRef(function TextArea(
           ? classNames(`${prefix}--form-item`, className)
           : `${prefix}--form-item`
       }>
-      <div className={`${prefix}--text-area__counter-wrapper`}>
+      <div className={`${prefix}--text-area__label-wrapper`}>
         {label}
         {counter}
       </div>

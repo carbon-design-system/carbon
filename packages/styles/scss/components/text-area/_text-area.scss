@@ -103,11 +103,9 @@
     }
   }
 
-  .#{$prefix}--text-area__counter-wrapper {
+  .#{$prefix}--text-area__label-wrapper {
+    display: flex;
     width: 100%;
-  }
-
-  .#{$prefix}--text-area__counter {
-    float: right;
+    justify-content: space-between;
   }
 }
