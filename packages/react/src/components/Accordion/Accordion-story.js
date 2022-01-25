@@ -39,7 +39,7 @@ export default {
   },
 };
 
-export const accordion = () => (
+export const AccordionStory = () => (
   <Accordion>
     <AccordionItem title="Section 1 title">
       <p>
@@ -76,9 +76,11 @@ export const accordion = () => (
   </Accordion>
 );
 
-export const skeleton = () => <AccordionSkeleton open count={4} />;
+AccordionStory.storyName = 'Accordion';
 
-skeleton.decorators = [
+export const Skeleton = () => <AccordionSkeleton open count={4} />;
+
+Skeleton.decorators = [
   (story) => <div style={{ width: '500px' }}>{story()}</div>,
 ];
 
@@ -93,7 +95,7 @@ const sizes = {
   'Large  (lg)': 'lg',
 };
 
-export const playground = () => (
+export const Playground = () => (
   <Accordion
     disabled={boolean('Disable entire Accordion (disabled)', false)}
     size={
@@ -146,7 +148,7 @@ export const playground = () => (
   </Accordion>
 );
 
-export const skeletonPlayground = () => (
+export const SkeletonPlayground = () => (
   <div style={{ width: '500px' }}>
     <AccordionSkeleton
       align={select(

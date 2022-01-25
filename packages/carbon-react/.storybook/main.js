@@ -29,6 +29,9 @@ module.exports = {
   core: {
     builder: 'webpack5',
   },
+  features: {
+    previewCsfV3: true,
+  },
   stories: [
     './Welcome/Welcome.stories.js',
     '../src/**/*.stories.js',
