@@ -12,7 +12,6 @@ import path from 'path';
 let jscodeshift;
 
 function run(transformFileName, options) {
-  console.log(options);
   if (!jscodeshift) {
     jscodeshift = which.sync('jscodeshift', {
       cwd: __dirname,

@@ -54,19 +54,8 @@ export async function migrate(options, upgrades = []) {
     }
 
     return;
-  }
-
-  // Prompt for something to run when just 'migrate' is ran
-  const selectedMigrations = await getSelectedMigrations(migrations);
-  if (selectedMigrations.length === 0) {
-    logger.info('No migrations selected');
-    return;
-  }
-
-  if (selectedMigrations.length > 0) {
-    for (const migration of selectedMigrations) {
-      await runMigration(migration, workspaces, options);
-    }
+  } else {
+    logger.error('A migration must be specified');
   }
 }
 
@@ -77,7 +66,7 @@ export async function migrate(options, upgrades = []) {
 function listMigrations(migrations) {
   logger.info('Available migrations:');
   for (const migration of migrations) {
-    logger.info('%s (%s)', migration.name, migration.description);
+    logger.log('\t- %s (%s)', migration.name, migration.description);
   }
 }
 
@@ -120,51 +109,4 @@ async function getSelectedWorkspace(workspaces) {
   ]);
 
   return await Workspace.load(answers.workspace);
-}
-
-/**
- * @param {Array<Migration>} migrations
- * @returns {Array<Migration>}
- */
-async function getSelectedMigrations(migrations) {
-  if (migrations.length === 1) {
-    const [migration] = migrations;
-    const answers = await inquirer.prompt([
-      {
-        type: 'confirm',
-        name: 'confirm',
-        message: `There is one migration available. Would you like to run the ${migration.name} migration?
-         (${migration.description})`,
-      },
-    ]);
-
-    if (answers.confirm === false) {
-      return [];
-    }
-
-    return [migration];
-  }
-
-  const answers = await inquirer.prompt([
-    {
-      type: 'list',
-      name: 'migration',
-      message: 'Which migration would you like to run?',
-      choices: migrations.map((migration) => {
-        return {
-          name: `${migration.name} (${migration.description})`,
-          value: migration.name,
-        };
-      }),
-      default: 0,
-    },
-  ]);
-
-  if (answers.migration === undefined || answers.migration === null) {
-    return [];
-  }
-
-  return migrations.filter((migration) => {
-    return answers.migration.includes(migration.name);
-  });
 }

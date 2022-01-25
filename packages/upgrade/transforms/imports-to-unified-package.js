@@ -24,8 +24,6 @@
 export const parser = 'babel';
 
 export default function transformer(file, api) {
-  console.log(`howdy partner!`);
-
   const j = api.jscodeshift;
 
   return j(file.source)

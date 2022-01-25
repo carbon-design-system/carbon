@@ -62,8 +62,8 @@ export async function main({ argv, cwd }) {
     })
   );
 
-  cli.usage('Usage: migrate').command(
-    'migrate [migration]',
+  cli.command(
+    'migrate <migration>',
     'run a Carbon migration on your source files',
     async (cli) => {
       cli.command(
