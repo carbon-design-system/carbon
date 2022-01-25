@@ -12,7 +12,7 @@ import { match, keys } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useId } from '../../../internal/useId';
 
-function DefinitionTooltip({ children, definition, openOnClick, ...rest }) {
+function DefinitionTooltip({ children, definition }) {
   const [isOpen, setOpen] = useState(false);
   const prefix = usePrefix();
   const id = useId();
@@ -22,26 +22,29 @@ function DefinitionTooltip({ children, definition, openOnClick, ...rest }) {
       event.stopPropagation();
       setOpen(false);
     }
-    if (openOnClick && match(event, [keys.Enter, keys.Space])) {
-      event.stopPropagation();
-      setOpen(!isOpen);
-    }
   }
 
   return (
-    <Popover open={isOpen} highContrast dropShadow={false} align="bottom-left">
+    <Popover
+      align="bottom-left"
+      dropShadow={false}
+      highContrast
+      onMouseLeave={() => {
+        setOpen(false);
+      }}
+      open={isOpen}>
       <button
-        type="button"
-        className={`${prefix}--definition-term`}
-        aria-controls="definition-id"
+        aria-controls={id}
         aria-expanded={isOpen}
-        onMouseOut={() => !openOnClick && setOpen(false)}
-        onMouseOver={() => !openOnClick && setOpen(true)}
-        onBlur={() => setOpen(false)}
+        className={`${prefix}--definition-term`}
+        onBlur={() => {
+          setOpen(false);
+        }}
+        onClick={() => {
+          setOpen(!isOpen);
+        }}
         onKeyDown={handleKeyDown}
-        onClick={() => setOpen(!isOpen)}
-        onFocus={() => !openOnClick && setOpen(true)}
-        {...rest}>
+        type="button">
         {children}
       </button>
       <PopoverContent className={`${prefix}--definition-tooltip`} id={id}>
@@ -61,10 +64,6 @@ DefinitionTooltip.propTypes = {
    * Provide the content being defined
    */
   definition: PropTypes.string.isRequired,
-  /**
-   * Specify whether the tooltip should toggle on click and NOT on mouse enter/leave
-   */
-  openOnClick: PropTypes.bool,
 };
 
 export { DefinitionTooltip };
