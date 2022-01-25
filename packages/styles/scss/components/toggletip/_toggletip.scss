@@ -49,6 +49,10 @@
 
   .#{$prefix}--toggletip-content {
     @include custom-property.declaration(
+      'button-focus-color',
+      theme.$focus-inverse
+    );
+    @include custom-property.declaration(
       'link-text-color',
       theme.$link-inverse
     );
