@@ -149,27 +149,22 @@ describe('TextArea', () => {
         ).toEqual(false);
       });
 
-      it('should be rendered with both enableCounter and maxCount props passed in', () => {
-        counterTestWrapper1.setProps({ maxCount: 5 });
-
-        expect(
-          counterTestWrapper1.exists(`.${prefix}--text-area__counter`)
-        ).toEqual(true);
-      });
-
       it('has the expected classes', () => {
         const counterTextarea = () =>
           counterTestWrapper1.find(`.${prefix}--text-area__counter`);
         expect(counterTextarea).not.toBeNull();
       });
 
-      it('should be disabled with expected classes', () => {
+      it('should have label and counter disabled', () => {
         counterTestWrapper1.setProps({ disabled: true });
-        const counterTextarea = () =>
-          counterTestWrapper1.find(`.${prefix}--text-area__counter`);
-        expect(
-          counterTextarea().hasClass(`${prefix}--label--disabled`)
-        ).toEqual(true);
+        const wrapper = counterTestWrapper1.find(
+          `.${prefix}--text-area__counter-wrapper`
+        );
+        const labels = wrapper.find(`.${prefix}--label`);
+
+        labels.forEach((node) => {
+          expect(node.hasClass(`${prefix}--label--disabled`)).toEqual(true);
+        });
       });
     });
   });
