@@ -7,9 +7,9 @@
 
 import {
   // Blue
-  blue20,
   blue40,
   blue60,
+  blue80,
 
   // Gray
   gray10,
@@ -196,9 +196,9 @@ export const skeletonElement = gray80;
 
 // Misc
 export const interactive = blue50;
-export const highlight = blue20;
+export const highlight = blue80;
 export const overlay = rgba(black, 0.65);
-export const toggleOff = gray50;
+export const toggleOff = gray60;
 export const shadow = rgba(black, 0.8);
 
 export {
