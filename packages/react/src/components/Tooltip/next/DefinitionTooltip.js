@@ -12,7 +12,7 @@ import { match, keys } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useId } from '../../../internal/useId';
 
-function DefinitionTooltip({ children, definition }) {
+function DefinitionTooltip({ children, definition, ...rest }) {
   const [isOpen, setOpen] = useState(false);
   const prefix = usePrefix();
   const id = useId();
@@ -34,9 +34,10 @@ function DefinitionTooltip({ children, definition }) {
       }}
       open={isOpen}>
       <button
+        className={`${prefix}--definition-term`}
+        {...rest}
         aria-controls={id}
         aria-expanded={isOpen}
-        className={`${prefix}--definition-term`}
         onBlur={() => {
           setOpen(false);
         }}
