@@ -141,17 +141,16 @@ const Button = React.forwardRef(function Button(
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
-    [`${prefix}--tooltip--visible`]: !enabled && isHovered,
-    [`${prefix}--tooltip--hidden`]:
-      !enabled && hasIconOnly && !allowTooltipVisibility,
+    [`${prefix}--tooltip--visible`]: isHovered,
+    [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
-    [`${prefix}--tooltip__trigger`]: !enabled && hasIconOnly,
-    [`${prefix}--tooltip--a11y`]: !enabled && hasIconOnly,
+    [`${prefix}--tooltip__trigger`]: hasIconOnly,
+    [`${prefix}--tooltip--a11y`]: hasIconOnly,
     [`${prefix}--btn--icon-only--${tooltipPosition}`]:
-      !enabled && hasIconOnly && tooltipPosition,
+      hasIconOnly && tooltipPosition,
     [`${prefix}--tooltip--align-${tooltipAlignment}`]:
-      !enabled && hasIconOnly && tooltipAlignment,
+      hasIconOnly && tooltipAlignment,
   });
 
   const commonProps = {
