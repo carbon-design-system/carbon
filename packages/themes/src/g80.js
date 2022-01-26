@@ -130,7 +130,6 @@ export const layerSelectedHover = adjustLightness(layerSelected, -6);
 export const layerSelectedInverse = gray10;
 export const borderSubtleSelected = gray50;
 
-export const layerDisabled = gray70;
 export const borderDisabled = gray70;
 
 export const textDisabled = gray50;
@@ -227,7 +226,7 @@ export const hoverRow = layerHover;
 
 export const visitedLink = linkVisited;
 
-export const disabled01 = layerDisabled;
+export const disabled01 = gray70;
 export const disabled02 = textDisabled;
 export const disabled03 = textOnColorDisabled;
 

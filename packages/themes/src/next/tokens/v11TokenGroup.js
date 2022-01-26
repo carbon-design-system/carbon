@@ -99,10 +99,6 @@ export const layer = TokenGroup.create({
       name: 'layer-selected-hover-03',
     },
     {
-      state: 'disabled',
-      name: 'layer-disabled',
-    },
-    {
       name: 'layer-selected-inverse',
     },
     {

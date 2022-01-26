@@ -59,7 +59,6 @@ describe('@carbon/styles/scss/theme', () => {
         "layer-hover-03",
         "layer-selected-03",
         "layer-selected-hover-03",
-        "layer-disabled",
         "layer-selected-inverse",
         "layer-selected-disabled",
         "layer-accent-01",

@@ -309,7 +309,6 @@ const tokenMappings = {
   'layer-selected-inverse': 'ui-05',
   'border-subtle-selected': 'active-ui',
 
-  'layer-disabled': 'disabled-01',
   'border-disabled': 'disabled-01',
 
   'text-disabled': 'disabled-02',

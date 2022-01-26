@@ -186,7 +186,6 @@ const colors = [
   'layerSelectedInverse',
   'borderSubtleSelected',
 
-  'layerDisabled',
   'borderDisabled',
 
   'textDisabled',
@@ -419,7 +418,6 @@ export const unstable__meta = {
         'layerSelectedInverse',
         'borderSubtleSelected',
 
-        'layerDisabled',
         'borderDisabled',
 
         'textDisabled',

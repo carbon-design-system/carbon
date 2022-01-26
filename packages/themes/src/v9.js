@@ -183,7 +183,6 @@ export const layerSelectedHover = hoverSelectedUI;
 export const layerSelectedInverse = ui05;
 export const borderSubtleSelected = activeUI;
 
-export const layerDisabled = disabled01;
 export const borderDisabled = disabled01;
 
 export const textDisabled = disabled02;
