@@ -66,7 +66,7 @@ export async function migrate(options, upgrades = []) {
 function listMigrations(migrations) {
   logger.log('Available migrations:');
   for (const migration of migrations) {
-    logger.log('\t- %s (%s)', migration.name, migration.description);
+    logger.log('  - %s (%s)', migration.name, migration.description);
   }
 }
 
