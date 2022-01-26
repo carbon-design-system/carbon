@@ -61,7 +61,7 @@ export default {
   },
 };
 
-export const combobox = () => (
+export const ComboboxStory = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
@@ -73,6 +73,8 @@ export const combobox = () => (
     />
   </div>
 );
+
+ComboboxStory.storyName = 'Combobox';
 
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
@@ -115,7 +117,7 @@ export const Playground = () => {
   );
 };
 
-export const disabled = () => (
+export const Disabled = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
@@ -129,7 +131,7 @@ export const disabled = () => (
   </div>
 );
 
-export const light = () => (
+export const Light = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}

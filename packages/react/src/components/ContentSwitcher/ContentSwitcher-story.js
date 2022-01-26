@@ -43,14 +43,12 @@ const props = {
 
 export default {
   title: 'Components/ContentSwitcher',
+  component: ContentSwitcher,
+  subcomponents: {
+    Switch,
+  },
   decorators: [withKnobs],
-
   parameters: {
-    component: ContentSwitcher,
-
-    subcomponents: {
-      Switch,
-    },
     docs: {
       page: mdx,
     },

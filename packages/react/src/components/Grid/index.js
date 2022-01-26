@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { default as Grid } from './Grid';
+export { FlexGrid } from './FlexGrid';
+export { Grid } from './Grid';
 export { default as Row } from './Row';
 export { default as Column } from './Column';

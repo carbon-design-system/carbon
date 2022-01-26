@@ -30,16 +30,12 @@ const inputProps = {
 
 export default {
   title: 'Deprecated/Toolbar',
-
-  parameters: {
-    component: Toolbar,
-
-    subcomponents: {
-      ToolbarItem,
-      ToolbarTitle,
-      ToolbarOption,
-      ToolbarDivider,
-    },
+  component: Toolbar,
+  subcomponents: {
+    ToolbarItem,
+    ToolbarTitle,
+    ToolbarOption,
+    ToolbarDivider,
   },
 };
 

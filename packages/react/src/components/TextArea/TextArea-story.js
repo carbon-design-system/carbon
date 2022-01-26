@@ -35,15 +35,14 @@ const TextAreaProps = () => ({
 
 export default {
   title: 'Components/TextArea',
+  component: TextArea,
   decorators: [withKnobs],
-
+  subcomponents: {
+    TextAreaSkeleton,
+  },
   parameters: {
-    component: TextArea,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      TextAreaSkeleton,
     },
   },
 };
@@ -52,7 +51,7 @@ export const Default = () => <TextArea {...TextAreaProps()} />;
 
 export const Skeleton = () => <TextAreaSkeleton />;
 
-export const classNameChangeTest = () => (
+export const ClassNameChangeTest = () => (
   <>
     <TextArea
       labelText="Text area label"

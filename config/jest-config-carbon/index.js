@@ -20,7 +20,7 @@ module.exports = {
     '<rootDir>/**/*-(spec|test).js?(x)',
   ],
   transform: {
-    '^.+\\.(js|jsx)$': require.resolve('./transform/jsTransform.js'),
+    '^.+\\.(mjs|cjs|js|jsx)$': require.resolve('./transform/jsTransform.js'),
     '^.+\\.s?css$': require.resolve('./transform/cssTransform.js'),
     '^(?!.*\\.(js|jsx|css|json)$)': require.resolve(
       './transform/fileTransform.js'
