@@ -54,7 +54,7 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
   }, [indeterminate]);
 
   return (
-    <>
+    <div className={`${prefix}--checkbox--inline`}>
       <input {...inputProps} />
       {
         /* eslint-disable jsx-a11y/label-has-for,jsx-a11y/label-has-associated-control,jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */
@@ -68,7 +68,7 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
           }}
         />
       }
-    </>
+    </div>
   );
 });
 
