@@ -170,10 +170,6 @@ export const field = TokenGroup.create({
       state: 'hover',
       name: 'field-hover-03',
     },
-    {
-      state: 'disabled',
-      name: 'field-disabled',
-    },
   ],
 });
 

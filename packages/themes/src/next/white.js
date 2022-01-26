@@ -105,9 +105,6 @@ export const fieldHover02 = adjustLightness(field01, -5);
 export const field03 = gray10;
 export const fieldHover03 = adjustLightness(field01, -5);
 
-// field
-export const fieldDisabled = gray10;
-
 // Border
 // border-subtle-00
 export const borderSubtle00 = gray20;

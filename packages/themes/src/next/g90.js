@@ -112,9 +112,6 @@ export const fieldHover02 = gray70Hover;
 export const field03 = gray60;
 export const fieldHover03 = gray60Hover;
 
-// field
-export const fieldDisabled = gray80;
-
 // Border
 // border-subtle-00
 export const borderSubtle00 = gray70;

@@ -147,7 +147,6 @@ const tokenMappings = {
   'border-subtle-selected': 'active-ui',
 
   'layer-disabled': 'disabled-01',
-  'field-disabled': 'disabled-01',
   'border-disabled': 'disabled-01',
 
   'text-disabled': 'disabled-02',

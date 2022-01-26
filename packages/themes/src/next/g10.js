@@ -106,9 +106,6 @@ export const fieldHover02 = gray10Hover;
 export const field03 = white;
 export const fieldHover03 = whiteHover;
 
-// field
-export const fieldDisabled = white;
-
 // Border
 // border-subtle-00
 export const borderSubtle00 = gray20;

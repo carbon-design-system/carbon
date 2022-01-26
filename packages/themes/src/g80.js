@@ -131,7 +131,6 @@ export const layerSelectedInverse = gray10;
 export const borderSubtleSelected = gray50;
 
 export const layerDisabled = gray70;
-export const fieldDisabled = gray70;
 export const borderDisabled = gray70;
 
 export const textDisabled = gray50;

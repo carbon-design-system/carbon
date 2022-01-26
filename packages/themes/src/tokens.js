@@ -187,7 +187,6 @@ const colors = [
   'borderSubtleSelected',
 
   'layerDisabled',
-  'fieldDisabled',
   'borderDisabled',
 
   'textDisabled',
@@ -421,7 +420,6 @@ export const unstable__meta = {
         'borderSubtleSelected',
 
         'layerDisabled',
-        'fieldDisabled',
         'borderDisabled',
 
         'textDisabled',
