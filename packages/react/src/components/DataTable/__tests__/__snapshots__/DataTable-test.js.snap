@@ -1851,16 +1851,9 @@ exports[`DataTable should render 1`] = `
                   </TableToolbarAction>
                 </TableToolbarMenu>
                 <Button
-                  dangerDescription="danger"
-                  disabled={false}
-                  isExpressive={false}
                   kind="primary"
                   onClick={[MockFunction]}
                   size="small"
-                  tabIndex={0}
-                  tooltipAlignment="center"
-                  tooltipPosition="top"
-                  type="button"
                 >
                   Add new
                 </Button>
@@ -2019,10 +2012,6 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
-                      dangerDescription="danger"
-                      disabled={false}
-                      isExpressive={false}
-                      kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2030,16 +2019,11 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      size="default"
-                      tabIndex={0}
-                      tooltipAlignment="center"
-                      tooltipPosition="top"
-                      type="button"
                     >
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="bx--btn bx--btn--lg bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -2099,10 +2083,6 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
-                      dangerDescription="danger"
-                      disabled={false}
-                      isExpressive={false}
-                      kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2110,16 +2090,11 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      size="default"
-                      tabIndex={0}
-                      tooltipAlignment="center"
-                      tooltipPosition="top"
-                      type="button"
                     >
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="bx--btn bx--btn--lg bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -2179,10 +2154,6 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
-                      dangerDescription="danger"
-                      disabled={false}
-                      isExpressive={false}
-                      kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2190,16 +2161,11 @@ exports[`DataTable should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      size="default"
-                      tabIndex={0}
-                      tooltipAlignment="center"
-                      tooltipPosition="top"
-                      type="button"
                     >
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="bx--btn bx--btn--lg bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -2251,21 +2217,13 @@ exports[`DataTable should render 1`] = `
                   </TableBatchAction>
                   <Button
                     className="bx--batch-summary__cancel"
-                    dangerDescription="danger"
-                    disabled={false}
-                    isExpressive={false}
-                    kind="primary"
                     onClick={[Function]}
-                    size="default"
                     tabIndex={-1}
-                    tooltipAlignment="center"
-                    tooltipPosition="top"
-                    type="button"
                   >
                     <button
                       aria-describedby={null}
                       aria-pressed={null}
-                      className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+                      className="bx--batch-summary__cancel bx--btn bx--btn--lg bx--btn--primary"
                       disabled={false}
                       onBlur={[Function]}
                       onClick={[Function]}
@@ -2521,16 +2479,9 @@ exports[`DataTable should render 1`] = `
                 </FeatureToggle(OverflowMenu)>
               </TableToolbarMenu>
               <Button
-                dangerDescription="danger"
-                disabled={false}
-                isExpressive={false}
                 kind="primary"
                 onClick={[MockFunction]}
                 size="small"
-                tabIndex={0}
-                tooltipAlignment="center"
-                tooltipPosition="top"
-                type="button"
               >
                 <button
                   aria-describedby={null}
@@ -2913,16 +2864,9 @@ exports[`DataTable sticky header should render 1`] = `
                   </TableToolbarAction>
                 </TableToolbarMenu>
                 <Button
-                  dangerDescription="danger"
-                  disabled={false}
-                  isExpressive={false}
                   kind="primary"
                   onClick={[MockFunction]}
                   size="small"
-                  tabIndex={0}
-                  tooltipAlignment="center"
-                  tooltipPosition="top"
-                  type="button"
                 >
                   Add new
                 </Button>
@@ -3084,10 +3028,6 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
-                      dangerDescription="danger"
-                      disabled={false}
-                      isExpressive={false}
-                      kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3095,16 +3035,11 @@ exports[`DataTable sticky header should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      size="default"
-                      tabIndex={0}
-                      tooltipAlignment="center"
-                      tooltipPosition="top"
-                      type="button"
                     >
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="bx--btn bx--btn--lg bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -3164,10 +3099,6 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
-                      dangerDescription="danger"
-                      disabled={false}
-                      isExpressive={false}
-                      kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3175,16 +3106,11 @@ exports[`DataTable sticky header should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      size="default"
-                      tabIndex={0}
-                      tooltipAlignment="center"
-                      tooltipPosition="top"
-                      type="button"
                     >
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="bx--btn bx--btn--lg bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -3244,10 +3170,6 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
-                      dangerDescription="danger"
-                      disabled={false}
-                      isExpressive={false}
-                      kind="primary"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3255,16 +3177,11 @@ exports[`DataTable sticky header should render 1`] = `
                           "render": [Function],
                         }
                       }
-                      size="default"
-                      tabIndex={0}
-                      tooltipAlignment="center"
-                      tooltipPosition="top"
-                      type="button"
                     >
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="bx--btn bx--btn--lg bx--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -3316,21 +3233,13 @@ exports[`DataTable sticky header should render 1`] = `
                   </TableBatchAction>
                   <Button
                     className="bx--batch-summary__cancel"
-                    dangerDescription="danger"
-                    disabled={false}
-                    isExpressive={false}
-                    kind="primary"
                     onClick={[Function]}
-                    size="default"
                     tabIndex={-1}
-                    tooltipAlignment="center"
-                    tooltipPosition="top"
-                    type="button"
                   >
                     <button
                       aria-describedby={null}
                       aria-pressed={null}
-                      className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+                      className="bx--batch-summary__cancel bx--btn bx--btn--lg bx--btn--primary"
                       disabled={false}
                       onBlur={[Function]}
                       onClick={[Function]}
@@ -3586,16 +3495,9 @@ exports[`DataTable sticky header should render 1`] = `
                 </FeatureToggle(OverflowMenu)>
               </TableToolbarMenu>
               <Button
-                dangerDescription="danger"
-                disabled={false}
-                isExpressive={false}
                 kind="primary"
                 onClick={[MockFunction]}
                 size="small"
-                tabIndex={0}
-                tooltipAlignment="center"
-                tooltipPosition="top"
-                type="button"
               >
                 <button
                   aria-describedby={null}

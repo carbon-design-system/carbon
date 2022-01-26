@@ -321,7 +321,7 @@ Button.propTypes = {
   /**
    * Specify the kind of Button you want to create
    */
-  kind: PropTypes.oneOf(ButtonKinds).isRequired,
+  kind: PropTypes.oneOf(ButtonKinds),
 
   /**
    * Provide an optional function to be called when the button element

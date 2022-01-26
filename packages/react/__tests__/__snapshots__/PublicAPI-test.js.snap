@@ -240,7 +240,6 @@ Map {
             "tertiary",
           ],
         ],
-        "isRequired": true,
         "type": "oneOf",
       },
       "onBlur": Object {
