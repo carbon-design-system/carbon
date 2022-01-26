@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -39,14 +40,28 @@ function Column({
   );
 }
 
-const spanPropType = PropTypes.oneOfType([
-  PropTypes.bool,
-  PropTypes.number,
-  PropTypes.shape({
-    span: PropTypes.number,
-    offset: PropTypes.number,
-  }),
-]);
+const spanPropType = FeatureFlags.enabled('enable-css-grid')
+  ? PropTypes.oneOfType([
+      PropTypes.number,
+      PropTypes.shape({
+        span: PropTypes.oneOfType([
+          PropTypes.number,
+          PropTypes.oneOf(['25%', '50%', '75%', '100%']),
+        ]),
+        offset: PropTypes.number,
+        // TODO:
+        // start: PropTypes.number,
+        // end: PropTypes.number,
+      }),
+    ])
+  : PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.shape({
+        span: PropTypes.number,
+        offset: PropTypes.number,
+      }),
+    ]);
 
 Column.propTypes = {
   /**
