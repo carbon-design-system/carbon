@@ -15,6 +15,7 @@ import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
+import { useFeatureFlag } from '../FeatureFlags';
 import * as FeatureFlags from '@carbon/feature-flags';
 
 const Button = React.forwardRef(function Button(
@@ -124,7 +125,7 @@ const Button = React.forwardRef(function Button(
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
-  const enabled = FeatureFlags.enabled('enable-v11-release');
+  const enabled = useFeatureFlag('enable-v11-release');
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
