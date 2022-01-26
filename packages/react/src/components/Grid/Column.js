@@ -9,8 +9,8 @@ import * as FeatureFlags from '@carbon/feature-flags';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { useGridSettings } from './GridContext';
 
 function Column({
   as: BaseComponent = 'div',
@@ -23,11 +23,12 @@ function Column({
   max,
   ...rest
 }) {
+  const { mode } = useGridSettings();
   const prefix = usePrefix();
-  const hasCSSGrid = useFeatureFlag('enable-css-grid');
-  const columnClassName = hasCSSGrid
-    ? getClassNameForBreakpoints([sm, md, lg, xlg, max], prefix)
-    : getClassNameForFlexGridBreakpoints([sm, md, lg, xlg, max], prefix);
+  const columnClassName =
+    mode === 'css-grid'
+      ? getClassNameForBreakpoints([sm, md, lg, xlg, max], prefix)
+      : getClassNameForFlexGridBreakpoints([sm, md, lg, xlg, max], prefix);
 
   const className = cx(containerClassName, columnClassName, {
     [`${prefix}--col`]: columnClassName.length === 0,
