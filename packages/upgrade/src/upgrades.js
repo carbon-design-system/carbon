@@ -8,6 +8,8 @@
 import path from 'path';
 import { run } from './jscodeshift';
 
+const TRANSFORM_DIR = path.join(__dirname, 'transforms');
+
 /**
  * @typedef Upgrade
  * @property {string} name
@@ -147,7 +149,7 @@ export const upgrades = [
         description: 'Update imports and size usage for @carbon/icons',
         migrate: async (options) => {
           const transform = path.join(
-            options.TRANSFORM_DIR,
+            TRANSFORM_DIR,
             'icons-react-size-prop.js'
           );
           console.log(options);
