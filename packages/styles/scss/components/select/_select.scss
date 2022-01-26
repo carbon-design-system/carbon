@@ -214,6 +214,11 @@
     color: $text-primary;
   }
 
+  .#{$prefix}--select--inline .#{$prefix}--select-input:focus option,
+  .#{$prefix}--select--inline .#{$prefix}--select-input:focus optgroup {
+    background-color: $background;
+  }
+
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
     background-color: $field-disabled;
