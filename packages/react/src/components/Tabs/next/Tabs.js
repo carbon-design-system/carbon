@@ -6,9 +6,16 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  useCallback,
+  useLayoutEffect,
+} from 'react';
 import cx from 'classnames';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
+import debounce from 'lodash.debounce';
 import { Tooltip } from '../../Tooltip/next';
 import { keys, match, matches } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
@@ -83,6 +90,19 @@ Tabs.propTypes = {
   selectedIndex: PropTypes.number,
 };
 
+// function debounce(fn, wait = 1000) {
+//   let timeoutId = null;
+//   return () => {
+//     if (timeoutId) {
+//       window.clearTimeout(timeoutId);
+//     }
+//     timeoutId = setTimeout(() => {
+//       fn();
+//       timeoutId = null;
+//     }, wait);
+//   };
+// }
+
 function useEffectOnce(callback) {
   const savedCallback = useRef(callback);
   const effectGuard = useRef(false);
@@ -137,7 +157,7 @@ function TabList({
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
-  const [scroll, setScroll] = useState(false);
+  const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(false);
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
@@ -174,15 +194,9 @@ function TabList({
     }
   }
 
-  useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) => {});
-    resizeObserver.observe(ref.current);
-    if (ref.current.scrollWidth > ref.current.clientWidth) {
-      setScroll(true);
-    }
-    console.log(ref.current.scrollLeft);
-    return () => resizeObserver.disconnect();
-  }, []);
+  const handleScroll = debounce((event) => {
+    setScrollLeft(event.target.scrollLeft);
+  }, 200);
 
   useEffectOnce(() => {
     const tab = tabs[selectedIndex];
@@ -207,23 +221,62 @@ function TabList({
     }
   });
 
+  useLayoutEffect(() => {
+    if (ref.current) {
+      console.log(ref.current.scrollLeft);
+      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
+    }
+
+    function handler() {
+      if (ref.current) {
+        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
+      }
+    }
+
+    const debouncedHandler = debounce(handler, 200);
+    window.addEventListener('resize', debouncedHandler);
+    return () => {
+      debouncedHandler.cancel();
+      window.removeEventListener('resize', debouncedHandler);
+    };
+  }, []);
+
+  // Previous Button
+  // VISIBLE IF:
+  //   SCROLLABLE
+  //   AND SCROLL_LEFT > 0
+  const isPreviousButtonVisible = ref.current
+    ? isScrollable && scrollLeft > 0
+    : false;
+
+  // Next Button
+  // VISIBLE IF:
+  //   SCROLLABLE
+  //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
+  const isNextButtonVisible = ref.current
+    ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
+    : false;
+
   return (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div className={className}>
-      <button
-        className={
-          (`${prefix}--tab--overflow-nav-button--left`,
-          `${prefix}--tab--overflow-nav-button`)
-        }
-        type="button">
-        <ChevronLeft16 />
-      </button>
+      {isPreviousButtonVisible ? (
+        <button
+          className={
+            (`${prefix}--tab--overflow-nav-button--left`,
+            `${prefix}--tab--overflow-nav-button`)
+          }
+          type="button">
+          <ChevronLeft16 />
+        </button>
+      ) : null}
       <div
         {...rest}
         aria-label={label}
         ref={ref}
         role="tablist"
         className={`${prefix}--tab--list`}
+        onScroll={handleScroll}
         onKeyDown={onKeyDown}>
         {React.Children.map(children, (child, index) => {
           const ref = React.createRef();
@@ -237,14 +290,16 @@ function TabList({
           );
         })}
       </div>
-      <button
-        className={
-          (`${prefix}--tab--overflow-nav-button--right`,
-          `${prefix}--tab--overflow-nav-button`)
-        }
-        type="button">
-        <ChevronRight16 />
-      </button>
+      {isNextButtonVisible ? (
+        <button
+          className={
+            (`${prefix}--tab--overflow-nav-button--right`,
+            `${prefix}--tab--overflow-nav-button`)
+          }
+          type="button">
+          <ChevronRight16 />
+        </button>
+      ) : null}
     </div>
   );
 }

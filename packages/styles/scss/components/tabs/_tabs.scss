@@ -45,13 +45,13 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     height: auto;
     min-height: rem(40px);
     max-height: 4rem;
-    overflow-x: auto;
-    overflow-y: hidden;
+    // overflow-x: auto;
+    // overflow-y: hidden;
     color: $text-primary;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    // scrollbar-width: none;
+    // &::-webkit-scrollbar {
+    //   display: none;
+    // }
 
     &.#{$prefix}--tabs--contained {
       min-height: rem(48px);
@@ -59,6 +59,11 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 
     .#{$prefix}--tab--list {
       display: flex;
+      width: 100%;
+      // flex-shrink: 0;
+      // flex-grow: 0;
+      // flex-basis: 10rem;
+      overflow-x: scroll;
     }
 
     //-----------------------------
@@ -175,6 +180,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       display: flex;
       padding: 0;
       cursor: pointer;
+      flex: 1 0 auto;
       transition: background-color $duration-fast-01
         motion(standard, productive);
     }
