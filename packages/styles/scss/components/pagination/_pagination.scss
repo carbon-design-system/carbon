@@ -30,7 +30,7 @@
 
     display: flex;
     width: calc(100% - 1px);
-    min-height: 3rem;
+    min-height: rem(40px);
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $border-subtle;
@@ -62,6 +62,14 @@
     }
   }
 
+  .#{$prefix}--pagination--sm {
+    min-height: rem(32px);
+  }
+
+  .#{$prefix}--pagination--lg {
+    min-height: rem(48px);
+  }
+
   .#{$prefix}--pagination .#{$prefix}--select {
     height: 100%;
     align-items: center;
@@ -75,7 +83,16 @@
   .#{$prefix}--pagination .#{$prefix}--select-input {
     width: auto;
     min-width: auto;
-    height: 3rem;
+    height: 100%;
+    line-height: rem(40px);
+  }
+
+  .#{$prefix}--pagination--sm .#{$prefix}--select-input {
+    line-height: rem(32px);
+  }
+
+  .#{$prefix}--pagination--lg .#{$prefix}--select-input {
+    line-height: rem(48px);
   }
 
   .#{$prefix}--pagination
@@ -119,7 +136,7 @@
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;
-    height: 3rem;
+    height: 100%;
     align-items: center;
   }
 
@@ -166,8 +183,9 @@
     @include component-reset.reset;
 
     display: flex;
-    width: $spacing-09;
-    height: 100%;
+    width: rem(40px);
+    height: rem(40px);
+    min-height: rem(32px);
     align-items: center;
     justify-content: center;
     border: none;
@@ -178,6 +196,20 @@
     fill: $icon-primary;
     transition: outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
+  .#{$prefix}--pagination--sm
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--pagination--lg .#{$prefix}--pagination__button,
+  .#{$prefix}--pagination--lg
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    width: rem(48px);
+    height: rem(48px);
   }
 
   .#{$prefix}--pagination__button:focus,
