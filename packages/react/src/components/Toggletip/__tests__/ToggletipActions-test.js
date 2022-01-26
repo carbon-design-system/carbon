@@ -5,4 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export { Grid, Column } from 'carbon-components-react';
+describe('ToggletipActions', () => {
+  describe('Component API', () => {
+    it.todo('should support a custom class name with the `className` prop');
+  });
+});
