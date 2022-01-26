@@ -23,7 +23,6 @@ export function useMatchMedia(mediaQueryString) {
     }
 
     const mediaQueryList = window.matchMedia(mediaQueryString);
-    // console.log(mediaQueryList);
     mediaQueryList.addEventListener('change', listener);
 
     // Make sure the media query list is in sync with the matches state
