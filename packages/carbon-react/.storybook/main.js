@@ -26,6 +26,9 @@ const stories = glob
       cwd: __dirname,
     }
   )
+  // Filters the stories by finding the paths that have a story file that ends
+  // in `-story.js` and checks to see if they also have a `.stories.js`,
+  // if so then defer to the `.stories.js`
   .filter((match) => {
     const filepath = path.resolve(__dirname, match);
     const basename = path.basename(match, '.js');
@@ -71,7 +74,7 @@ module.exports = {
   features: {
     previewCsfV3: true,
   },
-  stories: stories,
+  stories,
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {
