@@ -15,34 +15,34 @@ import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
-import { useFeatureFlag } from '../FeatureFlags';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const Button = React.forwardRef(function Button(
   {
-    children,
     as,
+    children,
     className,
-    disabled,
-    small,
-    size,
-    kind,
+    dangerDescription = 'danger',
+    disabled = false,
+    hasIconOnly = false,
     href,
-    isExpressive,
-    isSelected,
-    tabIndex,
-    type,
-    renderIcon: ButtonImageElement,
-    dangerDescription,
     iconDescription,
-    hasIconOnly,
-    tooltipPosition,
-    tooltipAlignment,
-    onClick,
+    isExpressive = false,
+    isSelected,
+    kind = 'primary',
     onBlur,
+    onClick,
     onFocus,
     onMouseEnter,
     onMouseLeave,
-    ...other
+    renderIcon: ButtonImageElement,
+    size = 'lg',
+    small,
+    tabIndex = 0,
+    tooltipAlignment = 'center',
+    tooltipPosition = 'top',
+    type = 'button',
+    ...rest
   },
   ref
 ) {
@@ -124,7 +124,7 @@ const Button = React.forwardRef(function Button(
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
-  const enabled = useFeatureFlag('enable-v11-release');
+  const enabled = FeatureFlags.enabled('enable-v11-release');
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
@@ -227,7 +227,7 @@ const Button = React.forwardRef(function Button(
         onBlur,
         onClick,
         type,
-        ...other,
+        ...rest,
         ...commonProps,
         ...otherProps,
       },
@@ -243,7 +243,7 @@ const Button = React.forwardRef(function Button(
       onFocus: composeEventHandlers([onFocus, handleFocus]),
       onBlur: composeEventHandlers([onBlur, handleBlur]),
       onClick: composeEventHandlers([onClick, handleClick]),
-      ...other,
+      ...rest,
       ...commonProps,
       ...otherProps,
     },
@@ -365,20 +365,20 @@ Button.propTypes = {
   role: PropTypes.string,
 
   /**
-   * Specify the size of the button, from a list of available sizes.
-   * For `default` buttons, this prop can remain unspecified or use `default`.
-   * In the next major release of Carbon, `default`, `field`, and `small` will be removed
+   * Specify the size of the button, from the following list of sizes:
    */
-  size: PropTypes.oneOf([
-    'default',
-    'field',
-    'small',
-    'sm',
-    'md',
-    'lg',
-    'xl',
-    '2xl',
-  ]),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl'])
+    : PropTypes.oneOf([
+        'default',
+        'field',
+        'small',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+      ]),
 
   /**
    * Deprecated in v10 in favor of `size`.
@@ -410,18 +410,6 @@ Button.propTypes = {
    * Optional prop to specify the type of the Button
    */
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
-};
-
-Button.defaultProps = {
-  tabIndex: 0,
-  type: 'button',
-  disabled: false,
-  kind: 'primary',
-  size: 'default',
-  dangerDescription: 'danger',
-  tooltipAlignment: 'center',
-  tooltipPosition: 'top',
-  isExpressive: false,
 };
 
 export default Button;
