@@ -88,7 +88,6 @@ export const _Filterable = () => {
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter"
         selectionFeedback="top-after-reopen"
       />
     </div>
@@ -142,7 +141,6 @@ export const _FilterableWithLayer = () => {
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter"
         selectionFeedback="top-after-reopen"
       />
       <Layer>
@@ -152,7 +150,6 @@ export const _FilterableWithLayer = () => {
           helperText="This is helper text"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          placeholder="Filter"
           selectionFeedback="top-after-reopen"
         />
         <Layer>
@@ -162,7 +159,6 @@ export const _FilterableWithLayer = () => {
             helperText="This is helper text"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            placeholder="Filter"
             selectionFeedback="top-after-reopen"
           />
         </Layer>
