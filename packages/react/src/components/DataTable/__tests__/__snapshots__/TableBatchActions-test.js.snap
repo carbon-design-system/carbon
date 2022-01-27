@@ -42,7 +42,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           <button
             aria-describedby={null}
             aria-pressed={null}
-            className="bx--batch-summary__cancel bx--btn bx--btn--lg bx--btn--primary"
+            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
@@ -103,7 +103,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           <button
             aria-describedby={null}
             aria-pressed={null}
-            className="bx--batch-summary__cancel bx--btn bx--btn--lg bx--btn--primary"
+            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
