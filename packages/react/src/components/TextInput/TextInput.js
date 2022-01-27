@@ -82,7 +82,7 @@ const TextInput = React.forwardRef(function TextInput(
     type,
     ref,
     className: textInputClasses,
-    title: labelText,
+    title: placeholder,
     disabled: normalizedProps.disabled,
     readOnly,
     ['aria-describedby']: helperText && normalizedProps.helperId,
