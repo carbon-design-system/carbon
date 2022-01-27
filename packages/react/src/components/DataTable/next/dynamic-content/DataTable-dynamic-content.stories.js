@@ -55,6 +55,7 @@ const tableProps = {
 
 export default {
   title: 'Components/DataTable/Dynamic',
+  component: DataTable,
   decorators: [withKnobs],
 };
 

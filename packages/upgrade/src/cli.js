@@ -5,96 +5,141 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
+import chalk from 'chalk';
+import isGitClean from 'is-git-clean';
+import { upgrade } from './commands/upgrade';
+import { migrate } from './commands/migrate';
+import { UpgradeError } from './error';
+import { logger } from './logger';
+import { upgrades } from './upgrades';
+import packageJson from '../package.json';
 
+// Note: for esbuild we need this import to be CommonJS
+// - https://github.com/yargs/yargs/issues/1929
+// - https://github.com/evanw/esbuild/issues/1492
+// - https://github.com/yargs/yargs/blob/main/docs/bundling.md#esbuild
 const cli = require('yargs');
-const isGitClean = require('is-git-clean');
-const packageJson = require('../package.json');
-const { UpgradeError } = require('./error');
-const { Migration } = require('./migration');
-const { Planner } = require('./planner');
-const { Project } = require('./project');
-const { Runner } = require('./runner');
 
-async function main({ argv, cwd }) {
+export async function main({ argv, cwd }) {
   cli.scriptName(packageJson.name).version(packageJson.version);
 
   cli
-    .option('verbose', {
+    .option('force', {
       default: false,
-      describe: 'display the full output while running a command',
+      describe:
+        'force execution if the cli encounters an error while doing safety checks',
+      type: 'boolean',
     })
     .option('write', {
       alias: 'w',
-      describe: 'update the files with changes found by running the migration',
       default: false,
+      describe: 'update the files with changes found by running the migration',
+      type: 'boolean',
     })
-    .option('ignore', {
-      alias: 'i',
-      describe:
-        'provide a list of glob pattern for directories you would like ignored',
-      default: [],
-      array: true,
+    .option('verbose', {
+      alias: 'v',
+      default: false,
+      describe: 'optionally include additional logs, useful for debugging',
+      type: 'boolean',
     });
 
+  // $0: the default command
   cli.usage('Usage: $0 [options]').command(
-    '$0',
-    'run to upgrade your project',
+    ['upgrade', '$0'],
+    'upgrade your project',
     {},
     run(async (args) => {
-      const { ignore, verbose, write } = args;
+      const { verbose, write } = args;
       const options = {
         cwd: cwd(),
-        ignore,
         verbose,
         write,
       };
-
-      const project = await Project.detect(options.cwd);
-      const migrationsByWorkspace = await Migration.getMigrationsByWorkspace(
-        Array.from(project.getWorkspaces()),
-        Migration.getMigrations()
-      );
-      const migrationsToRun = await Planner.getSelectedMigrations(
-        migrationsByWorkspace
-      );
-
-      await Runner.run(migrationsToRun, options);
+      await upgrade(options, upgrades);
     })
   );
 
-  cli.strict().parse(argv.slice(2)).argv;
+  cli.command(
+    'migrate <migration>',
+    'run a Carbon migration on your source files',
+    async (cli) => {
+      cli.command(
+        'list',
+        'list all migrations',
+        {},
+        run(async (args) => {
+          const { verbose } = args;
+          const options = { cwd: cwd(), verbose, list: true };
+          await migrate(options, upgrades);
+        }, true)
+      );
+    },
+    run(async (args) => {
+      const { verbose, migration, write } = args;
+      const options = {
+        cwd: cwd(),
+        verbose,
+        write,
+        migration,
+      };
+      await migrate(options, upgrades);
+    })
+  );
+
+  cli.strict().parse(argv.slice(2));
 }
 
-function run(command) {
-  return async (...args) => {
-    // checks git status on pwd, returns true if clean / false if not
-    let isClean = isGitClean.sync();
+/**
+ * @param {Function} command
+ * @returns {Function}
+ */
+function run(command, ignoreSafetyChecks = false) {
+  return async (args) => {
+    if (args.verbose === true) {
+      logger.setLevel('verbose');
+    }
 
-    console.log('Thanks for trying out @carbon/upgrade! 🙏');
-    console.log('Checking git status...👀');
+    logger.log('Thanks for trying out @carbon/upgrade! 🙏');
 
-    if (!isClean) {
-      console.error(
-        'Git directory is not clean. Please stash or commit your changes.'
+    // Inspired by react-codemod:
+    // https://github.com/reactjs/react-codemod/blob/b34b92a1f0b8ad333efe5effb50d17d46d66588b/bin/cli.js#L22
+    let clean = false;
+
+    try {
+      clean = isGitClean.sync(process.cwd());
+    } catch (error) {
+      if (
+        error &&
+        error.stderr &&
+        error.stderr.includes('Not a git repository')
+      ) {
+        clean = true;
+      }
+    }
+
+    if (!ignoreSafetyChecks && !clean && args.force !== true) {
+      logger.log(
+        chalk.yellow('[warning]'),
+        'It appears that you have untracked changes in your project. Before we continue, please stash or commit your changes to git.'
+      );
+      logger.log(
+        '\nYou may use the --force flag to override this safety check.'
       );
       process.exit(1);
     }
 
     try {
-      await command(...args);
-      console.log('Done! ✨');
+      await command(args);
+      logger.verbose('Done! ✨');
     } catch (error) {
       if (error instanceof UpgradeError) {
-        console.error(error.message);
+        logger.error(error.message);
         process.exit(1);
       }
-      console.error('Yikes, looks like something really went wrong.');
-      console.error('Please make an issue with the following info:');
-      console.log(error);
+      logger.error('Yikes, looks like something really went wrong.');
+      logger.error('Please make an issue with the following info:');
+      logger.log(error);
       process.exit(1);
     }
   };
 }
-
-module.exports = main;

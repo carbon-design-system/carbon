@@ -23,10 +23,7 @@ const props = () => ({
 export default {
   title: 'Components/DataTable',
   decorators: [withKnobs],
-
-  parameters: {
-    component: DataTableSkeleton,
-  },
+  component: DataTableSkeleton,
 };
 
 export const Skeleton = () => {
@@ -38,8 +35,6 @@ export const Skeleton = () => {
     </div>
   );
 };
-
-Skeleton.storyName = 'Skeleton';
 
 Skeleton.parameters = {
   info: {
