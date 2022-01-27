@@ -53,12 +53,10 @@ import { Layer } from '../../Layer';
 
 export default {
   title: 'Components/TimePicker',
-  parameters: {
-    component: TimePicker,
-    subcomponents: {
-      TimePickerSelect,
-      SelectItem,
-    },
+  component: TimePicker,
+  subcomponents: {
+    TimePickerSelect,
+    SelectItem,
   },
 };
 
@@ -77,7 +75,7 @@ export const Default = () => {
   );
 };
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <>
       <TimePicker id="time-picker" labelText="First layer">

@@ -59,8 +59,8 @@ OverflowMenu.displayName = 'OverflowMenu';
 
 export default {
   title: 'Components/OverflowMenu',
-  decorators: [withKnobs],
   component: OverflowMenu,
+  decorators: [withKnobs],
   subcomponents: {
     OverflowMenuItem,
   },

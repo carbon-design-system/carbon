@@ -10,6 +10,14 @@ import MultiSelect from '../';
 import FilterableMultiSelect from './FilterableMultiSelect';
 import { Layer } from '../../Layer';
 
+export default {
+  title: 'Components/MultiSelect',
+  component: MultiSelect,
+  subcomponents: {
+    'MultiSelect.Filterable': MultiSelect.Filterable,
+  },
+};
+
 const items = [
   {
     id: 'downshift-1-item-0',
@@ -38,17 +46,6 @@ const items = [
     text: 'Option 5',
   },
 ];
-
-export default {
-  title: 'Components/MultiSelect',
-
-  parameters: {
-    component: MultiSelect,
-    subcomponents: {
-      'MultiSelect.Filterable': MultiSelect.Filterable,
-    },
-  },
-};
 
 export const Default = () => {
   return (
@@ -91,14 +88,13 @@ export const _Filterable = () => {
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter"
         selectionFeedback="top-after-reopen"
       />
     </div>
   );
 };
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -145,7 +141,6 @@ export const _FilterableWithLayer = () => {
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter"
         selectionFeedback="top-after-reopen"
       />
       <Layer>
@@ -155,7 +150,6 @@ export const _FilterableWithLayer = () => {
           helperText="This is helper text"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          placeholder="Filter"
           selectionFeedback="top-after-reopen"
         />
         <Layer>
@@ -165,7 +159,6 @@ export const _FilterableWithLayer = () => {
             helperText="This is helper text"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            placeholder="Filter"
             selectionFeedback="top-after-reopen"
           />
         </Layer>

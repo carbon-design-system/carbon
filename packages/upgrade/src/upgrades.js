@@ -8,6 +8,8 @@
 import path from 'path';
 import { run } from './jscodeshift';
 
+const TRANSFORM_DIR = path.join(__dirname, 'transforms');
+
 /**
  * @typedef Upgrade
  * @property {string} name
@@ -143,13 +145,12 @@ export const upgrades = [
     ],
     migrations: [
       {
-        name: 'imports-to-unified-package',
-        description:
-          'Rewrites imports from `carbon-components-react` to `@carbon/react`',
+        name: 'icons-react-size-prop',
+        description: 'Update imports and size usage for @carbon/icons',
         migrate: async (options) => {
           const transform = path.join(
-            options.TRANSFORM_DIR,
-            'imports-to-unified-package.js'
+            TRANSFORM_DIR,
+            'icons-react-size-prop.js'
           );
           console.log(options);
           await run({

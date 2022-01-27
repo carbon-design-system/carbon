@@ -1,7 +1,7 @@
 {
   "name": "@carbon/upgrade",
   "description": "A tool for upgrading Carbon versions",
-  "version": "10.16.0",
+  "version": "10.17.0-rc.0",
   "license": "Apache-2.0",
   "bin": {
     "carbon-upgrade": "./bin/carbon-upgrade.js"
@@ -54,7 +54,6 @@
     "yargs": "^17.0.1"
   },
   "dependencies": {
-    "execa": "^6.0.0",
     "jscodeshift": "^0.13.1"
   }
 }

@@ -15,6 +15,11 @@ import Tooltip from '../../Tooltip';
 
 export default {
   title: 'Components/ProgressIndicator',
+  component: ProgressIndicator,
+  subcomponents: {
+    ProgressStep,
+    ProgressIndicatorSkeleton,
+  },
 };
 
 export const Default = () => (

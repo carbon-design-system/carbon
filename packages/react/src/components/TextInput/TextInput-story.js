@@ -62,7 +62,6 @@ const props = {
     ),
     size: select('Field size (size)', sizes, undefined) || undefined,
     labelText: text('Label text (labelText)', 'Text input label'),
-    placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),
     disabled: boolean('Disabled (disabled)', false),
     hideLabel: boolean('No label (hideLabel)', false),
@@ -110,21 +109,20 @@ TextInput.displayName = 'TextInput';
 
 export default {
   title: 'Components/TextInput',
+  component: TextInput,
   decorators: [withKnobs],
-
+  subcomponents: {
+    TextInputSkeleton,
+    'TextInput.PasswordInput': TextInput.PasswordInput,
+  },
   parameters: {
-    component: TextInput,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      TextInputSkeleton,
-      'TextInput.PasswordInput': TextInput.PasswordInput,
     },
   },
 };
 
-export const classNameChangeTest = () => (
+export const ClassNameChangeTest = () => (
   <>
     <TextInput
       defaultValue="The class should be added to the label"

@@ -7,7 +7,6 @@
 
 import chalk from 'chalk';
 import isGitClean from 'is-git-clean';
-import path from 'path';
 import { upgrade } from './commands/upgrade';
 import { migrate } from './commands/migrate';
 import { UpgradeError } from './error';
@@ -20,8 +19,6 @@ import packageJson from '../package.json';
 // - https://github.com/evanw/esbuild/issues/1492
 // - https://github.com/yargs/yargs/blob/main/docs/bundling.md#esbuild
 const cli = require('yargs');
-
-const TRANSFORM_DIR = path.join(__dirname, 'transforms');
 
 export async function main({ argv, cwd }) {
   cli.scriptName(packageJson.name).version(packageJson.version);
@@ -84,7 +81,6 @@ export async function main({ argv, cwd }) {
         verbose,
         write,
         migration,
-        TRANSFORM_DIR,
       };
       await migrate(options, upgrades);
     })

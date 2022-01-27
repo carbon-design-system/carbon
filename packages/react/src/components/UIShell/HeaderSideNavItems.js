@@ -23,7 +23,7 @@ const HeaderSideNavItems = ({
     },
     customClassName
   );
-  return <div className={className}>{children}</div>;
+  return <ul className={className}>{children}</ul>;
 };
 
 HeaderSideNavItems.propTypes = {
