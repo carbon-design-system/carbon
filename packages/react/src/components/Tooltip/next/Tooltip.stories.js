@@ -10,6 +10,7 @@ import './story.scss';
 import { Checkbox16 } from '@carbon/icons-react';
 import React from 'react';
 import { Tooltip } from '../next';
+import { DefinitionTooltip } from './DefinitionTooltip.js';
 
 export default {
   title: 'Experimental/unstable_Tooltip',
@@ -65,6 +66,22 @@ export const Duration = () => {
         </button>
       </Tooltip>
     </>
+  );
+};
+
+export const Definition = () => {
+  const definition =
+    'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.';
+  return (
+    <div>
+      <p>
+        Custom domains direct requests for your apps in this Cloud Foundry
+        organization to a{' '}
+        <DefinitionTooltip definition={definition}>URL</DefinitionTooltip> that
+        you own. A custom domain can be a shared domain, a shared subdomain, or
+        a shared domain and host.
+      </p>
+    </div>
   );
 };
 
