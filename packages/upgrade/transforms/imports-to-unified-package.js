@@ -19,7 +19,6 @@
  * import CodeSnippet from "@carbon/react";
  */
 
-'use strict';
 
 export const parser = 'babel';
 
