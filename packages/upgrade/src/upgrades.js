@@ -152,7 +152,23 @@ export const upgrades = [
             TRANSFORM_DIR,
             'icons-react-size-prop.js'
           );
-          console.log(options);
+          await run({
+            transform: transform,
+            paths: options.workspaceDir,
+            dry: !options.write,
+            ...options,
+          });
+        },
+      },
+      {
+        name: 'imports-to-unified-package',
+        description:
+          'Rewrites imports from `carbon-components-react` to `@carbon/react`',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'imports-to-unified-package.js'
+          );
           await run({
             transform: transform,
             paths: options.workspaceDir,
@@ -179,24 +195,6 @@ export const upgrades = [
             version: '~1.0.0',
           }),
         ],
-      },
-    ],
-    migrations: [
-      {
-        name: 'migration 1',
-        description: 'migration 1',
-        migrate: async (options) => {
-          console.log(`migration 1 function`);
-          console.log(options);
-        },
-      },
-      {
-        name: 'migration 2',
-        description: 'migration 2',
-        migrate: async (options) => {
-          console.log(`migration 2 function`);
-          console.log(options);
-        },
       },
     ],
   },
