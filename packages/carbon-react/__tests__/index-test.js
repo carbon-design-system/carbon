@@ -57,6 +57,7 @@ describe('Carbon Components React', () => {
         "FileUploaderItem",
         "FileUploaderSkeleton",
         "Filename",
+        "FlexGrid",
         "FluidForm",
         "Form",
         "FormGroup",

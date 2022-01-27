@@ -6,12 +6,9 @@
  */
 
 import './Grid.stories.scss';
-import {
-  Grid,
-  Column,
-  unstable_FeatureFlags as FeatureFlags,
-} from 'carbon-components-react';
+
 import React from 'react';
+import { Grid, Column } from '../../Grid';
 import mdx from './Grid.mdx';
 
 export default {
@@ -20,13 +17,6 @@ export default {
   subcomponents: {
     Column,
   },
-  decorators: [
-    (Story) => (
-      <FeatureFlags flags={{ 'enable-css-grid': true }}>
-        <Story />
-      </FeatureFlags>
-    ),
-  ],
   parameters: {
     controls: {
       include: [], // ensure props are not displayed on the controls pane
