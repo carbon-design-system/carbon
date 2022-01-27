@@ -26,8 +26,11 @@ export default function transformer(file, api) {
   const j = api.jscodeshift;
 
   return j(file.source)
-    .find(j.ImportDeclaration)
-    .filter((imp) => imp.node.source.value === 'carbon-components-react')
+    .find(j.ImportDeclaration, {
+      source: {
+        value: 'carbon-components-react',
+      },
+    })
     .forEach((path) => {
       console.log(path);
       path.value.source.value = '@carbon/react';
