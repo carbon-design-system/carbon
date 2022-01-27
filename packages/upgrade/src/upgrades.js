@@ -161,13 +161,13 @@ export const upgrades = [
         },
       },
       {
-        name: 'imports-to-unified-package',
+        name: 'update-carbon-components-react-import-to-scoped',
         description:
           'Rewrites imports from `carbon-components-react` to `@carbon/react`',
         migrate: async (options) => {
           const transform = path.join(
             TRANSFORM_DIR,
-            'imports-to-unified-package.js'
+            'update-carbon-components-react-import-to-scoped.js'
           );
           await run({
             transform: transform,
