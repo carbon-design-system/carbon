@@ -62,7 +62,6 @@ const props = {
     ),
     size: select('Field size (size)', sizes, undefined) || undefined,
     labelText: text('Label text (labelText)', 'Text input label'),
-    placeholder: text('Placeholder text (placeholder)', 'Placeholder text'),
     light: boolean('Light variant (light)', false),
     disabled: boolean('Disabled (disabled)', false),
     hideLabel: boolean('No label (hideLabel)', false),
