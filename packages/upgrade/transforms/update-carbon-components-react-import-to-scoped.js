@@ -27,7 +27,7 @@ export default function transformer(file, api) {
       },
     })
     .forEach((path) => {
-      path.get('source').replaceWith(j.stringLiteral('@carbon/react'));
+      path.get('source').replace(j.stringLiteral('@carbon/react'));
     })
     .toSource();
 }
