@@ -36,6 +36,7 @@
   .#{$prefix}--header__action {
     @include button-reset.reset();
 
+    display: inline-flex;
     width: mini-units(6);
     height: mini-units(6);
     border: rem(2px) solid transparent;
@@ -80,6 +81,7 @@
   }
 
   .#{$prefix}--header__action.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
+    align-items: center;
     justify-content: center;
   }
 

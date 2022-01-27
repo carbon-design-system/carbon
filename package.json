@@ -9,7 +9,6 @@
   },
   "workspaces": [
     "actions/*",
-    "codemods",
     "config/*",
     "packages/*",
     "www"
@@ -21,7 +20,7 @@
     "doctoc": "doctoc --title '## Table of Contents'",
     "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
     "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
-    "lint": "eslint actions config codemods packages www",
+    "lint": "eslint actions config packages www",
     "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
@@ -46,8 +45,8 @@
     "@babel/preset-react": "^7.16.7",
     "@babel/runtime": "^7.16.7",
     "@carbon/cli": "workspace:packages/cli",
-    "@commitlint/cli": "^13.1.0",
-    "@commitlint/config-conventional": "^13.1.0",
+    "@commitlint/cli": "^16.0.0",
+    "@commitlint/config-conventional": "^16.0.0",
     "@percy/cli": "^1.0.0-beta.71",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/jest-dom": "^5.16.1",

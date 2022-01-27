@@ -5,58 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
-import { usePrefix } from '../../internal/usePrefix';
+import { CSSGrid } from './CSSGrid';
+import { FlexGrid } from './FlexGrid';
 
-const SubgridContext = React.createContext(false);
-
-function Grid({
-  as: BaseComponent = 'div',
-  condensed = false,
-  narrow = false,
-  fullWidth = false,
-  columns = 16,
-  className: containerClassName,
-  children,
-  ...rest
-}) {
-  const prefix = usePrefix();
-  const hasCSSGrid = useFeatureFlag('enable-css-grid');
-  const isSubgrid = useContext(SubgridContext);
-
-  const cssGridClassNames = {
-    [`${prefix}--css-grid`]: !isSubgrid,
-    [`${prefix}--css-grid--${columns}`]: !isSubgrid && columns !== 16,
-    [`${prefix}--css-grid--condensed`]: condensed,
-    [`${prefix}--css-grid--narrow`]: narrow,
-    [`${prefix}--css-grid--full-width`]: fullWidth,
-    [`${prefix}--subgrid`]: isSubgrid,
-    [`${prefix}--col-span-${columns}`]:
-      (isSubgrid && columns !== 16) || columns !== 16,
-  };
-
-  const flexGridClassNames = {
-    [`${prefix}--grid`]: true,
-    [`${prefix}--grid--condensed`]: condensed,
-    [`${prefix}--grid--narrow`]: narrow,
-    [`${prefix}--grid--full-width`]: fullWidth,
-  };
-
-  const className = cx(
-    containerClassName,
-    hasCSSGrid ? cssGridClassNames : flexGridClassNames
-  );
-
-  return (
-    <SubgridContext.Provider value={true}>
-      <BaseComponent className={className} {...rest}>
-        {children}
-      </BaseComponent>
-    </SubgridContext.Provider>
-  );
+function Grid(props) {
+  const enableCSSGrid = useFeatureFlag('enable-css-grid');
+  if (enableCSSGrid) {
+    return <CSSGrid {...props} />;
+  }
+  return <FlexGrid {...props} />;
 }
 
 Grid.propTypes = {
@@ -98,4 +58,4 @@ Grid.propTypes = {
   narrow: PropTypes.bool,
 };
 
-export default Grid;
+export { Grid };

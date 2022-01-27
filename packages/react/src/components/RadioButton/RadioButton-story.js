@@ -65,17 +65,15 @@ const props = {
 
 export default {
   title: 'Components/RadioButton',
+  component: RadioButtonGroup,
   decorators: [withKnobs],
-
   parameters: {
-    component: RadioButtonGroup,
     docs: {
       page: mdx,
     },
-
-    subcomponents: {
-      RadioButton,
-    },
+  },
+  subcomponents: {
+    RadioButton,
   },
 };
 

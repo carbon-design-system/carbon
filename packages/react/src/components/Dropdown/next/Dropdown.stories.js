@@ -9,6 +9,14 @@ import React from 'react';
 import { default as Dropdown, DropdownSkeleton } from '../';
 import { Layer } from '../../Layer';
 
+export default {
+  title: 'Components/Dropdown',
+  component: Dropdown,
+  subcomponents: {
+    DropdownSkeleton,
+  },
+};
+
 const items = [
   {
     id: 'option-0',
@@ -37,18 +45,6 @@ const items = [
   },
 ];
 
-export default {
-  title: 'Components/Dropdown',
-
-  parameters: {
-    component: Dropdown,
-
-    subcomponents: {
-      DropdownSkeleton,
-    },
-  },
-};
-
 export const Default = () => (
   <div style={{ width: 400 }}>
     <Dropdown
@@ -75,7 +71,7 @@ export const Inline = () => (
   </div>
 );
 
-export const withLayer = () => (
+export const WithLayer = () => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
