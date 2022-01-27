@@ -230,15 +230,15 @@ $button-tertiary-active: (
 ) !default;
 
 $button-danger-hover: (
-  fallback: #b81921,
+  fallback: #b81922,
   values: (
     (
       theme: themes.$white,
-      value: #b81921,
+      value: #b81922,
     ),
     (
       theme: themes.$g10,
-      value: #b81921,
+      value: #b81922,
     ),
     (
       theme: themes.$g90,
@@ -252,59 +252,59 @@ $button-danger-hover: (
 ) !default;
 
 $button-primary-hover: (
-  fallback: #0353e9,
+  fallback: #0050e6,
   values: (
     (
       theme: themes.$white,
-      value: #0353e9,
+      value: #0050e6,
     ),
     (
       theme: themes.$g10,
-      value: #0353e9,
+      value: #0050e6,
     ),
     (
       theme: themes.$g90,
-      value: #0353e9,
+      value: #0050e6,
     ),
     (
       theme: themes.$g100,
-      value: #0353e9,
+      value: #0050e6,
     ),
   ),
 ) !default;
 
 $button-secondary-hover: (
-  fallback: #4c4c4c,
+  fallback: #474747,
   values: (
     (
       theme: themes.$white,
-      value: #4c4c4c,
+      value: #474747,
     ),
     (
       theme: themes.$g10,
-      value: #4c4c4c,
+      value: #474747,
     ),
     (
       theme: themes.$g90,
-      value: #606060,
+      value: #5e5e5e,
     ),
     (
       theme: themes.$g100,
-      value: #606060,
+      value: #5e5e5e,
     ),
   ),
 ) !default;
 
 $button-tertiary-hover: (
-  fallback: #0353e9,
+  fallback: #0050e6,
   values: (
     (
       theme: themes.$white,
-      value: #0353e9,
+      value: #0050e6,
     ),
     (
       theme: themes.$g10,
-      value: #0353e9,
+      value: #0050e6,
     ),
     (
       theme: themes.$g90,
