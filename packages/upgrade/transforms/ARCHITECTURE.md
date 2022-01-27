@@ -1,20 +1,24 @@
-# @carbon/codemods
+# transforms
 
-> An internal package for codemods for the Carbon Design System
+> A folder of codemod transforms to be ran independently or via the
+> @carbon/upgrade cli
 
 ## Usage
+
+The transforms contained within this folder are primarily intended to be used
+within @carbon/upgrade cli commands.
 
 You can run a specific transform for a path in the project by running:
 
 ```bash
-yarn jscodeshift -t codemods/transform/<name>.js 'path/to/file'
+yarn jscodeshift -t transforms/<name>.js 'path/to/file'
 ```
 
 If you want to preview changes that are being made, you should enable the `dry`
 and `print` options:
 
 ```bash
-yarn jscodeshift -d -p -t codemods/transform/<name>.js 'path/to/file'
+yarn jscodeshift -d -p -t transforms/<name>.js 'path/to/file'
 ```
 
 ## Writing transforms
