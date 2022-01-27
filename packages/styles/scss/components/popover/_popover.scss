@@ -184,12 +184,12 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--bottom-left .#{$prefix}--popover-content {
     bottom: 0;
-    left: 0;
+    left: -20%;
     transform: translate(0, calc(100% + $popover-offset));
   }
 
   .#{$prefix}--popover--bottom-right .#{$prefix}--popover-content {
-    right: 0;
+    right: -20%;
     bottom: 0;
     transform: translate(0, calc(100% + $popover-offset));
   }
@@ -230,13 +230,13 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--top-left .#{$prefix}--popover-content {
     top: 0;
-    left: 0;
+    left: -20%;
     transform: translate(0, calc(-100% - $popover-offset));
   }
 
   .#{$prefix}--popover--top-right .#{$prefix}--popover-content {
     top: 0;
-    right: 0;
+    right: -20%;
     transform: translate(0, calc(-100% - $popover-offset));
   }
 
@@ -277,13 +277,13 @@ $popover-caret-height: custom-property.get-var(
   }
 
   .#{$prefix}--popover--right-top .#{$prefix}--popover-content {
-    top: 0;
+    top: -20%;
     left: 100%;
     transform: translate($popover-offset, 0);
   }
 
   .#{$prefix}--popover--right-bottom .#{$prefix}--popover-content {
-    bottom: 0;
+    bottom: -20%;
     left: 100%;
     transform: translate($popover-offset, 0);
   }
@@ -325,7 +325,7 @@ $popover-caret-height: custom-property.get-var(
   }
 
   .#{$prefix}--popover--left-top .#{$prefix}--popover-content {
-    top: 0;
+    top: -20%;
     right: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
@@ -334,7 +334,7 @@ $popover-caret-height: custom-property.get-var(
 
   .#{$prefix}--popover--left-bottom .#{$prefix}--popover-content {
     right: 100%;
-    bottom: 0;
+    bottom: -20%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
     transform: translate(calc(-1 * $popover-offset + 0.1px), 0);
