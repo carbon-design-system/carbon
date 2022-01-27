@@ -26,7 +26,6 @@ const TextAreaProps = () => ({
     'A valid value is required'
   ),
   helperText: text('Helper text (helperText)', 'Optional helper text.'),
-  placeholder: text('Placeholder text (placeholder)', 'Placeholder text.'),
   id: 'test2',
   cols: number('Columns (columns)', 50),
   rows: number('Rows (rows)', 4),
