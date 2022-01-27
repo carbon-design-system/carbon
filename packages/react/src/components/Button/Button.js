@@ -37,7 +37,7 @@ const Button = React.forwardRef(function Button(
     onMouseEnter,
     onMouseLeave,
     renderIcon: ButtonImageElement,
-    size = 'lg',
+    size = FeatureFlags.enabled('enable-v11-release') ? 'lg' : 'md',
     small,
     tabIndex = 0,
     tooltipAlignment = 'center',
