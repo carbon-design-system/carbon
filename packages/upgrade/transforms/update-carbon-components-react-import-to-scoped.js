@@ -9,14 +9,10 @@
  * Transforms:
  *
  * import { Button } from 'carbon-components-react';
- * import { Tile, Tooltip } from 'carbon-components-react';
- * import CodeSnippet from 'carbon-components-react';
  *
  * Into:
  *
  * import { Button } from "@carbon/react";
- * import { Tile, Tooltip } from "@carbon/react";
- * import CodeSnippet from "@carbon/react";
  */
 
 export const parser = 'babel';
