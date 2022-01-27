@@ -108,7 +108,6 @@ export const Default = () => (
             <TableToolbarContent
               aria-hidden={batchActionProps.shouldShowBatchActions}>
               <TableToolbarSearch
-                persistent="true"
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 onChange={onInputChange}
               />
@@ -207,9 +206,9 @@ export const Small = () => (
             <TableToolbarContent
               aria-hidden={batchActionProps.shouldShowBatchActions}>
               <TableToolbarSearch
-                persistent="true"
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
                 onChange={onInputChange}
+                size="sm"
               />
               <TableToolbarMenu
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
@@ -233,7 +232,7 @@ export const Small = () => (
               </Button>
             </TableToolbarContent>
           </TableToolbar>
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} size="sm">
             <TableHead>
               <TableRow>
                 <TableSelectAll {...getSelectionProps()} />
