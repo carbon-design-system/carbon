@@ -222,7 +222,7 @@ export default function IndexPage() {
                             <span>
                               {getColorByValue(
                                 themes.white[exportName],
-                                'white'
+                                'gray'
                               )}
                             </span>
                             <span className="hex-value">
