@@ -14,15 +14,15 @@ const customProperties = require('postcss-custom-properties');
 const rtlcss = require('rtlcss');
 
 const {
-  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
-  CARBON_REACT_STORYBOOK_USE_RTL,
-  CARBON_REACT_STORYBOOK_USE_SASS_LOADER,
+  STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
+  STORYBOOK_USE_RTL,
+  STORYBOOK_USE_SASS_LOADER,
   NODE_ENV = 'development',
 } = process.env;
 
-const useSassLoader = CARBON_REACT_STORYBOOK_USE_SASS_LOADER === 'true';
+const useSassLoader = STORYBOOK_USE_SASS_LOADER === 'true';
 const useExternalCss = NODE_ENV === 'production';
-const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+const useRtl = STORYBOOK_USE_RTL === 'true';
 
 module.exports = {
   addons: [
@@ -89,7 +89,7 @@ module.exports = {
           return `
             $feature-flags: (
               ui-shell: true,
-              enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+              enable-css-custom-properties: ${STORYBOOK_USE_CUSTOM_PROPERTIES},
             );
             ${content}
           `;
@@ -108,7 +108,7 @@ module.exports = {
         data: `
           $feature-flags: (
             ui-shell: true,
-            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+            enable-css-custom-properties: ${STORYBOOK_USE_CUSTOM_PROPERTIES},
           );
         `,
         implementation: require('sass'),
