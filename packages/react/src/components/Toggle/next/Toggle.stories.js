@@ -10,9 +10,7 @@ import { Toggle, ToggleSkeleton } from 'carbon-components-react';
 
 export default {
   title: 'Components/Toggle',
-  parameters: {
-    component: Toggle,
-  },
+  component: Toggle,
 };
 
 export const Default = () => (

@@ -41,15 +41,14 @@ const props = () => ({
 
 export default {
   title: 'Components/Slider',
+  component: Slider,
   decorators: [withKnobs],
-
+  subcomponents: {
+    SliderSkeleton,
+  },
   parameters: {
-    component: Slider,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      SliderSkeleton,
     },
   },
 };

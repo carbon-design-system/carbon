@@ -11,11 +11,9 @@ import { Layer } from '../../Layer';
 
 export default {
   title: 'Components/TextArea',
-  parameters: {
-    component: TextArea,
-    subcomponents: {
-      TextAreaSkeleton,
-    },
+  component: TextArea,
+  subcomponents: {
+    TextAreaSkeleton,
   },
 };
 
@@ -23,20 +21,18 @@ export const Default = () => (
   <TextArea
     labelText="Text Area label"
     helperText="Optional helper text"
-    placeholder="Placeholder text"
     cols={50}
     rows={4}
     id="text-area-1"
   />
 );
 
-export const withLayer = () => {
+export const WithLayer = () => {
   return (
     <>
       <TextArea
         labelText="First layer"
         helperText="Optional helper text"
-        placeholder="Placeholder text"
         cols={50}
         rows={4}
         id="text-area-1"
@@ -45,7 +41,6 @@ export const withLayer = () => {
         <TextArea
           labelText="Second layer"
           helperText="Optional helper text"
-          placeholder="Placeholder text"
           cols={50}
           rows={4}
           id="text-area-1"
@@ -54,7 +49,6 @@ export const withLayer = () => {
           <TextArea
             labelText="Third layer"
             helperText="Optional helper text"
-            placeholder="Placeholder text"
             cols={50}
             rows={4}
             id="text-area-1"

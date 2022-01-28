@@ -5,6 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import path from 'path';
+import { run } from './jscodeshift';
+
+const TRANSFORM_DIR = path.join(__dirname, 'transforms');
+
 /**
  * @typedef Upgrade
  * @property {string} name
@@ -136,6 +141,41 @@ export const upgrades = [
           range: '7.x',
         },
         changes: [Change.uninstall],
+      },
+    ],
+    migrations: [
+      {
+        name: 'icons-react-size-prop',
+        description: 'Update imports and size usage for @carbon/icons',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'icons-react-size-prop.js'
+          );
+          await run({
+            transform: transform,
+            paths: options.workspaceDir,
+            dry: !options.write,
+            ...options,
+          });
+        },
+      },
+      {
+        name: 'update-carbon-components-react-import-to-scoped',
+        description:
+          'Rewrites imports from `carbon-components-react` to `@carbon/react`',
+        migrate: async (options) => {
+          const transform = path.join(
+            TRANSFORM_DIR,
+            'update-carbon-components-react-import-to-scoped.js'
+          );
+          await run({
+            transform: transform,
+            paths: options.workspaceDir,
+            dry: !options.write,
+            ...options,
+          });
+        },
       },
     ],
   },

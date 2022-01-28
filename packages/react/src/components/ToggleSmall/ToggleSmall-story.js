@@ -25,12 +25,8 @@ const toggleProps = () => ({
 
 export default {
   title: 'Deprecated/ToggleSmall',
+  component: ToggleSmall,
   decorators: [withKnobs],
-
-  parameters: {
-    component: ToggleSmall,
-    subcomponents: {},
-  },
 };
 
 export const Default = () => (
