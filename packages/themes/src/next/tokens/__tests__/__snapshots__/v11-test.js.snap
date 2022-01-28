@@ -39,7 +39,6 @@ Array [
   "field-hover-02",
   "field-03",
   "field-hover-03",
-  "field-disabled",
 ]
 `;
 
@@ -79,7 +78,6 @@ Array [
   "layer-hover-03",
   "layer-selected-03",
   "layer-selected-hover-03",
-  "layer-disabled",
   "layer-selected-inverse",
   "layer-selected-disabled",
   "layer-accent-01",
@@ -166,7 +164,6 @@ Array [
   "layer-hover-03",
   "layer-selected-03",
   "layer-selected-hover-03",
-  "layer-disabled",
   "layer-selected-inverse",
   "layer-selected-disabled",
   "layer-accent-01",
@@ -184,7 +181,6 @@ Array [
   "field-hover-02",
   "field-03",
   "field-hover-03",
-  "field-disabled",
   "interactive",
   "border-subtle-00",
   "border-subtle-01",
