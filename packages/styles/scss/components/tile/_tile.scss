@@ -93,7 +93,7 @@
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
-    background-color: $layer-disabled;
+    background-color: $layer;
     color: $text-disabled;
   }
 

@@ -531,7 +531,7 @@ FilterableMultiSelect.propTypes = {
    * Generic `placeholder` that will be used as the textual representation of
    * what this field is for
    */
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
 
   /**
    * Specify feedback (mode) of the selection.

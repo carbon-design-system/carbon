@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import { settings } from 'carbon-components';
 import React from 'react';
 import { Column } from '../';
@@ -13,8 +13,6 @@ import { Column } from '../';
 const { prefix } = settings;
 
 describe('Column', () => {
-  afterEach(cleanup);
-
   it('should support a custom element as the root node', () => {
     const { container } = render(<Column as="section" />);
     expect(container.firstChild.tagName).toBe('SECTION');
@@ -105,4 +103,54 @@ describe('Column', () => {
       );
     }
   );
+
+  describe('next', () => {
+    let Column;
+    let Grid;
+    let cleanup;
+    let render;
+    let screen;
+
+    beforeEach(() => {
+      jest.resetModules();
+      const FeatureFlags = require('@carbon/feature-flags');
+      FeatureFlags.enable('enable-css-grid');
+
+      cleanup = require('@testing-library/react/pure').cleanup;
+      render = require('@testing-library/react/pure').render;
+      screen = require('@testing-library/react/pure').screen;
+      Grid = require('../Grid').Grid;
+      Column = require('../Column').default;
+    });
+
+    afterEach(() => {
+      cleanup();
+    });
+
+    describe.each(['sm', 'md', 'lg', 'xlg', 'max'])('%s', (breakpoint) => {
+      it.each([
+        ['span', { span: 2 }, ['col-span-2']],
+        ['span, offset', { span: 2, offset: 1 }, ['col-span-2', 'col-start-2']],
+        ['span, start', { span: 2, start: 1 }, ['col-span-2', 'col-start-1']],
+        ['span, end', { span: 2, end: 3 }, ['col-span-2', 'col-end-3']],
+        ['start, end', { start: 1, end: 3 }, ['col-start-1', 'col-end-3']],
+      ])(
+        'should support %s in the breakpoint prop',
+        (_name, input, expected) => {
+          const props = {
+            [breakpoint]: input,
+          };
+          render(
+            <Grid>
+              <Column data-testid="column" {...props} />
+            </Grid>
+          );
+          const classes = expected.map((className) => {
+            return `${prefix}--${breakpoint}:${className}`;
+          });
+          expect(screen.getByTestId('column')).toHaveClass(...classes);
+        }
+      );
+    });
+  });
 });
