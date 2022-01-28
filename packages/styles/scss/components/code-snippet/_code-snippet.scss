@@ -38,13 +38,13 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--disabled,
   .#{$prefix}--snippet--disabled
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
-    background-color: $layer-disabled;
+    background-color: $layer;
     color: $text-disabled;
   }
 
   .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
-    background-color: $layer-disabled;
+    background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
   }
