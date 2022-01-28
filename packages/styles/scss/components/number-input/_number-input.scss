@@ -91,7 +91,7 @@
   .#{$prefix}--number input[type='number']:disabled,
   .#{$prefix}--number--readonly input[type='number'] {
     border-bottom-color: transparent;
-    background-color: $field-disabled;
+    background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
   }

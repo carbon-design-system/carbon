@@ -74,9 +74,13 @@
 
   .#{$prefix}--toolbar-search-container-expandable .#{$prefix}--search-input {
     height: 100%;
-    padding: 0;
     cursor: pointer;
     opacity: 0;
+  }
+
+  .#{$prefix}--toolbar-search-container-expandable:not(.#{$prefix}--toolbar-search-container-active)
+    .#{$prefix}--search-input {
+    padding: 0;
   }
 
   .#{$prefix}--toolbar-search-container-expandable
@@ -90,7 +94,7 @@
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
     .#{$prefix}--search-magnifier-icon {
-    background-color: $layer-disabled;
+    background-color: $layer;
     cursor: not-allowed;
     transition: background-color none;
   }

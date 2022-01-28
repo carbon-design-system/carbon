@@ -61,23 +61,23 @@ export default {
   },
 };
 
-export const combobox = () => (
+export const ComboboxStory = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
       id="carbon-combobox"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
   </div>
 );
 
+ComboboxStory.storyName = 'Combobox';
+
 const props = () => ({
   id: text('Combobox ID (id)', 'carbon-combobox-example'),
-  placeholder: text('Placeholder text (placeholder)', 'Filter...'),
   titleText: text('Title (titleText)', 'Combobox title'),
   helperText: text('Helper text (helperText)', 'Optional helper text here'),
   light: boolean('Light (light)', false),
@@ -117,7 +117,7 @@ export const Playground = () => {
   );
 };
 
-export const disabled = () => (
+export const Disabled = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
@@ -125,14 +125,13 @@ export const disabled = () => (
       disabled
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />
   </div>
 );
 
-export const light = () => (
+export const Light = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
@@ -140,7 +139,6 @@ export const light = () => (
       light
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
     />

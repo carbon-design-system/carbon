@@ -88,8 +88,6 @@ const denylist = new Set([
   'layerSelectedInverse',
   'borderSubtleSelected',
 
-  'layerDisabled',
-  'fieldDisabled',
   'borderDisabled',
 
   'textDisabled',

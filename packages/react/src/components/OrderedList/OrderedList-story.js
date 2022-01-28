@@ -14,16 +14,15 @@ const props = {
 
 export default {
   title: 'Components/OrderedList',
+  component: OrderedList,
   decorators: [withKnobs],
   parameters: {
-    component: OrderedList,
     docs: {
       page: mdx,
     },
-
-    subcomponents: {
-      ListItem,
-    },
+  },
+  subcomponents: {
+    ListItem,
   },
 };
 

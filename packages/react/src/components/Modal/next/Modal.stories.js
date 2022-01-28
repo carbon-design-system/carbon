@@ -83,8 +83,8 @@ const props = {
 
 export default {
   title: 'Components/Modal',
+  component: Modal,
   parameters: {
-    component: Modal,
     docs: {
       page: mdx,
     },

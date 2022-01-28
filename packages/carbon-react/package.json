@@ -1,7 +1,7 @@
 {
   "name": "@carbon/react",
   "description": "React components for the Carbon Design System",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -44,10 +44,10 @@
   "dependencies": {
     "@carbon/feature-flags": "^0.7.0",
     "@carbon/icons-react": "^10.45.0",
-    "@carbon/styles": "^0.12.0",
+    "@carbon/styles": "^0.13.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
-    "carbon-components": "^10.51.0",
-    "carbon-components-react": "^7.51.0",
+    "carbon-components": "^10.52.0",
+    "carbon-components-react": "^7.52.0",
     "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
@@ -58,7 +58,7 @@
     "@babel/plugin-transform-react-constant-elements": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
-    "@carbon/themes": "^10.49.0",
+    "@carbon/themes": "^10.50.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^18.0.0",
     "@rollup/plugin-node-resolve": "^11.2.1",
@@ -77,6 +77,7 @@
     "babel-preset-carbon": "^0.2.0",
     "browserslist-config-carbon": "^10.6.1",
     "css-loader": "^6.5.1",
+    "fast-glob": "^3.2.7",
     "fs-extra": "^10.0.0",
     "mini-css-extract-plugin": "^2.4.5",
     "postcss": "^8.4.5",

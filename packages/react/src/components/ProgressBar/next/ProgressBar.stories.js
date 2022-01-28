@@ -11,10 +11,7 @@ import ProgressBar from '../';
 
 export default {
   title: 'Experimental/unstable_ProgressBar',
-
-  parameters: {
-    component: ProgressBar,
-  },
+  component: ProgressBar,
 };
 
 export const _ProgressBar = () => (

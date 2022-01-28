@@ -33,12 +33,8 @@ const toggleProps = () => ({
 
 export default {
   title: 'Components/Toggle',
+  component: Toggle,
   decorators: [withKnobs],
-
-  parameters: {
-    component: Toggle,
-    subcomponents: {},
-  },
 };
 
 export const Default = () => (
