@@ -216,7 +216,7 @@
     @include focus-outline('reset');
 
     border-bottom: 1px solid transparent;
-    background-color: $field-disabled;
+    background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673

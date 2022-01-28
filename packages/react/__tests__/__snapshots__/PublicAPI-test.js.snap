@@ -3,9 +3,6 @@
 exports[`Public API should only change with a semver change 1`] = `
 Map {
   "Accordion" => Object {
-    "defaultProps": Object {
-      "align": "end",
-    },
     "propTypes": Object {
       "align": Object {
         "args": Array [
@@ -923,7 +920,6 @@ Map {
         "type": "func",
       },
       "placeholder": Object {
-        "isRequired": true,
         "type": "string",
       },
       "selectedItem": Object {
@@ -7889,6 +7885,38 @@ Map {
           },
         ],
         "type": "objectOf",
+      },
+    },
+  },
+  "unstable_FlexGrid" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "condensed": Object {
+        "type": "bool",
+      },
+      "fullWidth": Object {
+        "type": "bool",
+      },
+      "narrow": Object {
+        "type": "bool",
       },
     },
   },
