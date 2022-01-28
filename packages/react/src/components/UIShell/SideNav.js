@@ -4,13 +4,13 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import React, { useState, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { CARBON_SIDENAV_ITEMS } from './_utils';
 import { usePrefix } from '../../internal/usePrefix';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 // TO-DO: comment back in when footer is added for rails
 // import SideNavFooter from './SideNavFooter';
 
@@ -121,6 +121,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
     eventHandlers.onMouseLeave = () => handleToggle(false, false);
   }
 
+  const isSideNavCollapsed = useMatchMedia(`(max-width: 1055px)`);
+  const ariaHidden = expanded === false && isSideNavCollapsed;
+
   return (
     <>
       {isFixedNav ? null : (
@@ -128,7 +131,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        aria-hidden={!expanded}
+        aria-hidden={ariaHidden}
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}

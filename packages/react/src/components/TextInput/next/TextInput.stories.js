@@ -29,18 +29,13 @@ export const Default = () => (
   <TextInput
     type="text"
     labelText="Text input label"
-    defaultValue="This is not a default value"
     helperText="Optional help text"
   />
 );
 
 export const Fluid = () => (
   <FluidForm>
-    <TextInput
-      type="text"
-      labelText="Text input label"
-      defaultValue="This is not a default value"
-    />
+    <TextInput type="text" labelText="Text input label" />
   </FluidForm>
 );
 
@@ -48,7 +43,6 @@ export const TogglePasswordVisibility = () => {
   return (
     <TextInput.PasswordInput
       labelText="Text input label"
-      defaultValue="This is not a default value"
       helperText="Optional help text"
     />
   );
@@ -60,21 +54,18 @@ export const WithLayer = () => {
       <TextInput
         type="text"
         labelText="First layer"
-        defaultValue="This is not a default value"
         helperText="Optional help text"
       />
       <Layer>
         <TextInput
           type="text"
           labelText="Second layer"
-          defaultValue="This is not a default value"
           helperText="Optional help text"
         />
         <Layer>
           <TextInput
             type="text"
             labelText="Third layer"
-            defaultValue="This is not a default value"
             helperText="Optional help text"
           />
         </Layer>

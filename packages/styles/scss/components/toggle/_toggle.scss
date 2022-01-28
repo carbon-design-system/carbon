@@ -302,7 +302,7 @@
       + .#{$prefix}--toggle__label
       .#{$prefix}--toggle__appearance {
       &::before {
-        background-color: $layer-disabled;
+        background-color: $layer;
       }
 
       &::after {
@@ -581,7 +581,7 @@
     .#{$prefix}--toggle-input--small:disabled:checked
       + .#{$prefix}--toggle-input__label
       .#{$prefix}--toggle__check {
-      fill: $layer-disabled;
+      fill: $layer;
     }
 
     //----------------------------------------------
