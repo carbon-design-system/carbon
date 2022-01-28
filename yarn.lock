@@ -1842,7 +1842,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/elements@^10.50.0, @carbon/elements@workspace:packages/elements":
+"@carbon/elements@^10.51.0, @carbon/elements@workspace:packages/elements":
   version: 0.0.0-use.local
   resolution: "@carbon/elements@workspace:packages/elements"
   dependencies:
@@ -1853,7 +1853,7 @@ __metadata:
     "@carbon/import-once": ^10.6.0
     "@carbon/layout": ^10.35.0
     "@carbon/motion": ^10.27.0
-    "@carbon/themes": ^10.49.0
+    "@carbon/themes": ^10.50.0
     "@carbon/type": ^10.40.0
     fs-extra: ^10.0.0
     klaw-sync: ^6.0.0
@@ -2058,7 +2058,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^0.13.0-rc.0, @carbon/react@workspace:packages/carbon-react":
+"@carbon/react@^0.13.0, @carbon/react@workspace:packages/carbon-react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/carbon-react"
   dependencies:
@@ -2071,9 +2071,9 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@carbon/feature-flags": ^0.7.0
     "@carbon/icons-react": ^10.45.0
-    "@carbon/styles": ^0.13.0-rc.0
+    "@carbon/styles": ^0.13.0
     "@carbon/telemetry": 0.0.0-alpha.6
-    "@carbon/themes": ^10.49.0
+    "@carbon/themes": ^10.50.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^18.0.0
     "@rollup/plugin-node-resolve": ^11.2.1
@@ -2091,10 +2091,11 @@ __metadata:
     babel-plugin-dev-expression: ^0.2.3
     babel-preset-carbon: ^0.2.0
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.52.0-rc.0
-    carbon-components-react: ^7.52.0-rc.0
+    carbon-components: ^10.52.0
+    carbon-components-react: ^7.52.0
     carbon-icons: ^7.0.7
     css-loader: ^6.5.1
+    fast-glob: ^3.2.7
     fs-extra: ^10.0.0
     mini-css-extract-plugin: ^2.4.5
     postcss: ^8.4.5
@@ -2132,7 +2133,7 @@ __metadata:
     "@carbon/colors": ^10.35.0
     "@carbon/icon-helpers": ^10.26.0
     "@carbon/icons": ^10.45.0
-    "@carbon/themes": ^10.49.0
+    "@carbon/themes": ^10.50.0
     "@carbon/type": ^10.40.0
     "@skpm/builder": ^0.7.0
     color-string: ^1.5.3
@@ -2144,7 +2145,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^0.13.0-rc.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^0.13.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2154,7 +2155,7 @@ __metadata:
     "@carbon/layout": ^10.35.0
     "@carbon/motion": ^10.27.0
     "@carbon/test-utils": ^10.21.0
-    "@carbon/themes": ^10.49.0
+    "@carbon/themes": ^10.50.0
     "@carbon/type": ^10.40.0
     "@ibm/plex": 6.0.0-next.6
     css: ^3.0.0
@@ -2198,7 +2199,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^10.49.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@^10.50.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -11613,7 +11614,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@^7.52.0-rc.0, carbon-components-react@workspace:packages/react":
+"carbon-components-react@^7.52.0, carbon-components-react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/react"
   dependencies:
@@ -11662,7 +11663,7 @@ __metadata:
     babel-plugin-react-docgen: ^4.2.1
     babel-plugin-transform-inline-environment-variables: ^0.4.3
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.52.0-rc.0
+    carbon-components: ^10.52.0
     carbon-icons: ^7.0.5
     chalk: ^4.1.1
     classnames: 2.3.1
@@ -11749,7 +11750,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components@^10.52.0-rc.0, carbon-components@workspace:packages/components":
+"carbon-components@^10.52.0, carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
@@ -11762,7 +11763,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@carbon/cli": ^10.32.0
-    "@carbon/elements": ^10.50.0
+    "@carbon/elements": ^10.51.0
     "@carbon/icons-handlebars": ^10.45.0
     "@carbon/icons-react": ^10.45.0
     "@carbon/telemetry": 0.0.0-alpha.6
@@ -39482,7 +39483,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^0.13.0-rc.0
+    "@carbon/react": ^0.13.0
     "@octokit/core": ^3.5.1
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^3.5.2
