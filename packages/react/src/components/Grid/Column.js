@@ -51,6 +51,7 @@ const spanPropType = FeatureFlags.enabled('enable-css-grid')
         start: PropTypes.number,
         end: PropTypes.number,
       }),
+      PropTypes.arrayOf(PropTypes.oneOf(['25%', '50%', '75%', '100%'])),
     ])
   : PropTypes.oneOfType([
       PropTypes.bool,
@@ -146,6 +147,13 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
     // should be "auto" at this size
     if (breakpoint === true) {
       classNames.push(`${prefix}--${name}:col-span-auto`);
+      continue;
+    }
+
+    // If our breakpoint is a string, the user has specified a percent
+    // they'd like this column to span.
+    if (typeof breakpoint === 'string') {
+      classNames.push(`${prefix}--${name}:col-span-${breakpoint.slice(0, -1)}`);
       continue;
     }
 

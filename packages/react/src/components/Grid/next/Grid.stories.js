@@ -92,6 +92,11 @@ export const Responsive = () => (
       <p>Medium: Span 0 of 8</p>
       <p>Large: Span 4 of 16</p>
     </Column>
+    <Column sm="25%" md="50%" lg="75%">
+      <p>Small: Span 25%</p>
+      <p>Medium: Span 50%</p>
+      <p>Large: Span 75%</p>
+    </Column>
   </Grid>
 );
 
