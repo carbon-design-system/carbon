@@ -251,8 +251,12 @@
 // -----------------------------------------------------------------------------
 // Column offset
 // -----------------------------------------------------------------------------
-@for $i from 1 through 16 {
+@for $i from 1 through 17 {
   .#{$prefix}--col-start-#{$i} {
+    grid-column-start: $i;
+  }
+
+  .#{$prefix}--col-end-#{$i} {
     grid-column-start: $i;
   }
 }
@@ -275,6 +279,10 @@
     @for $i from 1 through $columns + 1 {
       .#{$prefix}--#{$name}\:col-start-#{$i} {
         grid-column-start: $i;
+      }
+
+      .#{$prefix}--#{$name}\:col-end-#{$i} {
+        grid-column-end: $i;
       }
     }
 
