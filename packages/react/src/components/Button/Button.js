@@ -215,26 +215,6 @@ const Button = React.forwardRef(function Button(
     otherProps = anchorProps;
   }
 
-  if (enabled) {
-    delete otherProps['aria-describedby'];
-
-    return React.createElement(
-      component,
-      {
-        onMouseEnter,
-        onMouseLeave,
-        onFocus,
-        onBlur,
-        onClick,
-        type,
-        ...rest,
-        ...commonProps,
-        ...otherProps,
-      },
-      children
-    );
-  }
-
   return React.createElement(
     component,
     {
