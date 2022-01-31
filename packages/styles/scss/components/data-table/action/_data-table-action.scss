@@ -172,7 +172,7 @@
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
     .#{$prefix}--search-magnifier-icon {
-    background-color: $layer-disabled;
+    background-color: $layer;
     cursor: not-allowed;
     transition: background-color none;
   }
