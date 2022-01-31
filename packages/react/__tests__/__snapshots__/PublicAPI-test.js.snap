@@ -351,9 +351,6 @@ Map {
     "render": [Function],
   },
   "ButtonSkeleton" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
