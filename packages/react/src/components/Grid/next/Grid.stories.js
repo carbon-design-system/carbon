@@ -6,12 +6,9 @@
  */
 
 import './Grid.stories.scss';
-import {
-  Grid,
-  Column,
-  unstable_FeatureFlags as FeatureFlags,
-} from 'carbon-components-react';
+
 import React from 'react';
+import { Grid, Column } from '../../Grid';
 import mdx from './Grid.mdx';
 
 export default {
@@ -20,13 +17,6 @@ export default {
   subcomponents: {
     Column,
   },
-  decorators: [
-    (Story) => (
-      <FeatureFlags flags={{ 'enable-css-grid': true }}>
-        <Story />
-      </FeatureFlags>
-    ),
-  ],
   parameters: {
     controls: {
       include: [], // ensure props are not displayed on the controls pane
@@ -187,6 +177,29 @@ export const MixedGridModes = () => {
     </Grid>
   );
 };
+
+export const GridStartEnd = () => (
+  <Grid>
+    <Column
+      sm={{ span: 1, start: 4 }}
+      md={{ span: 2, start: 7 }}
+      lg={{ span: 4, start: 13 }}>
+      span, start
+    </Column>
+    <Column
+      sm={{ span: 2, end: 5 }}
+      md={{ span: 4, end: 9 }}
+      lg={{ span: 8, end: 17 }}>
+      span, end
+    </Column>
+    <Column
+      sm={{ start: 1, end: 4 }}
+      md={{ start: 3, end: 9 }}
+      lg={{ start: 5, end: 17 }}>
+      start, end
+    </Column>
+  </Grid>
+);
 
 export const Offset = () => (
   <Grid>
