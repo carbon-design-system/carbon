@@ -30,3 +30,18 @@ body {
   grid-gap: spacing.$spacing-04 spacing.$spacing-06;
   grid-template-columns: max-content 1fr;
 }
+
+html,
+body,
+#__next {
+  height: 100%;
+}
+
+// Overrides for GraphiQL page
+#__next .graphiql-container .topBar {
+  height: initial;
+}
+
+#__next .graphiql-container .doc-explorer-title-bar {
+  height: initial;
+}
