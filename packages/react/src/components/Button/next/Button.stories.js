@@ -52,56 +52,9 @@ export default {
   },
 };
 
-export const Playground = (args) => {
-  return <Button {...args}>Button</Button>;
-};
-
 export const _Default = (args) => {
   return <Button {...args}>Button</Button>;
 };
-
-export const Secondary = (args) => {
-  return (
-    <Button kind="secondary" {...args}>
-      Button
-    </Button>
-  );
-};
-
-export const Tertiary = (args) => {
-  return (
-    <Button kind="tertiary" {...args}>
-      Button
-    </Button>
-  );
-};
-
-export const Danger = (args) => {
-  return (
-    <>
-      <Button kind="danger" {...args}>
-        Button
-      </Button>
-      &nbsp;
-      <Button kind="danger--tertiary" {...args}>
-        Tertiary Danger Button
-      </Button>
-      &nbsp;
-      <Button kind="danger--ghost" {...args}>
-        Ghost Danger Button
-      </Button>
-    </>
-  );
-};
-
-export const Ghost = (args) => {
-  return (
-    <Button kind="ghost" {...args}>
-      Button
-    </Button>
-  );
-};
-
 export const IconButton = (args) => (
   <Button
     renderIcon={Add16}
@@ -129,6 +82,6 @@ export const Skeleton = () => (
   <div>
     <ButtonSkeleton />
     &nbsp;
-    <ButtonSkeleton small />
+    <ButtonSkeleton size="sm" />
   </div>
 );
