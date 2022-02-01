@@ -6,34 +6,35 @@ import { View16, ViewOff16 } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
 const PasswordInput = React.forwardRef(function PasswordInput(
   {
-    labelText,
     className,
-    disabled,
-    id,
-    placeholder,
-    onChange,
-    onClick,
+    disabled = false,
+    helperText = '',
     hideLabel,
+    hidePasswordLabel = 'Hide password',
+    id,
     inline,
-    invalid,
-    invalidText,
-    helperText,
-    light,
+    invalid = false,
+    invalidText = '',
+    labelText,
+    light = false,
+    onChange = () => {},
+    onClick = () => {},
+    onTogglePasswordVisibility,
+    placeholder,
+    size = '',
+    showPasswordLabel = 'Show password',
     tooltipPosition = 'bottom',
     tooltipAlignment = 'center',
     type = 'password',
-    hidePasswordLabel = 'Hide password',
-    showPasswordLabel = 'Show password',
-    size,
-    onTogglePasswordVisibility,
     warn,
     warnText,
-    ...other
+    ...rest
   },
   ref
 ) {
@@ -78,7 +79,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     type: inputType,
     className: textInputClasses,
     ref,
-    ...other,
+    ...rest,
   };
   const inputWrapperClasses = classNames(
     `${prefix}--form-item`,
@@ -298,9 +299,11 @@ PasswordInput.propTypes = {
   showPasswordLabel: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
+   * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
    */
-  size: PropTypes.string,
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg'])
+    : PropTypes.string,
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
@@ -333,18 +336,6 @@ PasswordInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-PasswordInput.defaultProps = {
-  className: '${prefix}--text__input',
-  disabled: false,
-  onChange: () => {},
-  onClick: () => {},
-  invalid: false,
-  invalidText: '',
-  helperText: '',
-  light: false,
-  size: '',
 };
 
 export default PasswordInput;
