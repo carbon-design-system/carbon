@@ -549,6 +549,20 @@ async function build() {
           },
         ],
       },
+      {
+        type: 'directory',
+        filepath: 'utilities',
+        files: [
+          {
+            type: 'file',
+            filepath: '_convert.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_z-index.scss',
+          },
+        ],
+      },
     ],
   };
   const files = collect(styles);
