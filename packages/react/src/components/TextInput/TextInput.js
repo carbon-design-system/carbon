@@ -19,24 +19,24 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const TextInput = React.forwardRef(function TextInput(
   {
-    className,
-    disabled = false,
-    helperText = '',
-    hideLabel = false,
-    id,
-    inline = false,
-    invalid = false,
-    invalidText = '',
     labelText,
-    light = false,
-    onChange = () => {},
-    onClick = () => {},
+    className,
+    id,
     placeholder,
-    readOnly = true,
-    type = 'text',
-    size = 'md',
-    warn = false,
-    warnText = '',
+    type,
+    onChange,
+    onClick,
+    hideLabel,
+    disabled,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+    helperText,
+    light,
+    size,
+    inline,
+    readOnly,
     ...rest
   },
   ref
@@ -293,6 +293,20 @@ TextInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
+};
+
+TextInput.defaultProps = {
+  disabled: false,
+  type: 'text',
+  onChange: () => {},
+  onClick: () => {},
+  invalid: false,
+  invalidText: '',
+  warn: false,
+  warnText: '',
+  helperText: '',
+  light: false,
+  inline: false,
 };
 
 export default TextInput;
