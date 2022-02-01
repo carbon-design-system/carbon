@@ -26,7 +26,6 @@ const TextAreaProps = () => ({
     'A valid value is required'
   ),
   helperText: text('Helper text (helperText)', 'Optional helper text.'),
-  placeholder: text('Placeholder text (placeholder)', 'Placeholder text.'),
   enableCounter: boolean(
     'Enable character counter/limit (enableCounter)',
     false

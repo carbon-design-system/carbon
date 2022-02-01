@@ -90,6 +90,18 @@ export async function upgrade(options, availableUpgrades = []) {
       logger.log(packageJson.diff());
     }
   }
+
+  const migrations = upgrade.migrations;
+  if (migrations && migrations.length > 0) {
+    for (const migration of migrations) {
+      logger.verbose('running migration: %s', migration.name);
+
+      await migration.migrate({
+        ...options,
+        workspaceDir: workspace.directory,
+      });
+    }
+  }
 }
 
 /**

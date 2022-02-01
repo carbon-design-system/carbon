@@ -44,24 +44,27 @@ import {
 
   // Tools
   rgba,
+  gray90Hover,
+  gray10Hover,
+  gray80Hover,
 } from '@carbon/colors';
-import { adjustLightness, adjustAlpha } from '../tools';
+import { adjustAlpha } from '../tools';
 
 // Background
 export const background = gray90;
 export const backgroundInverse = gray10;
 export const backgroundBrand = blue60;
 export const backgroundActive = gray80;
-export const backgroundHover = adjustLightness(background, 5);
-export const backgroundInverseHover = adjustLightness(backgroundInverse, -5);
+export const backgroundHover = gray90Hover;
+export const backgroundInverseHover = gray10Hover;
 export const backgroundSelected = gray80;
-export const backgroundSelectedHover = adjustLightness(backgroundSelected, 6);
+export const backgroundSelectedHover = gray80Hover;
 
 // Layer
 // layer-01
 export const layer01 = gray80;
 export const layerActive01 = gray60;
-export const layerHover01 = adjustLightness(layer01, 6);
+export const layerHover01 = gray80Hover;
 export const layerSelected01 = gray70;
 export const layerSelectedHover01 = gray70Hover;
 
@@ -80,19 +83,18 @@ export const layerSelected03 = gray50;
 export const layerSelectedHover03 = gray50Hover;
 
 // layer
-export const layerDisabled = gray80;
 export const layerSelectedInverse = gray10;
 export const layerSelectedDisabled = gray40;
 
 // layer-accent-01
 export const layerAccent01 = gray70;
 export const layerAccentActive01 = gray50;
-export const layerAccentHover01 = adjustLightness(layerAccent01, 7);
+export const layerAccentHover01 = gray70Hover;
 
 // layer-accent-02
 export const layerAccent02 = gray60;
 export const layerAccentActive02 = gray80;
-export const layerAccentHover02 = adjustLightness(layerAccent01, -7);
+export const layerAccentHover02 = gray60Hover;
 
 // layer-accent-03
 export const layerAccent03 = gray50;
@@ -102,7 +104,7 @@ export const layerAccentHover03 = gray50Hover;
 // Field
 // field-01
 export const field01 = gray80;
-export const fieldHover01 = adjustLightness(field01, 6);
+export const fieldHover01 = gray80Hover;
 
 // field-02
 export const field02 = gray70;
@@ -111,9 +113,6 @@ export const fieldHover02 = gray70Hover;
 // field-03
 export const field03 = gray60;
 export const fieldHover03 = gray60Hover;
-
-// field
-export const fieldDisabled = gray80;
 
 // Border
 // border-subtle-00
@@ -169,7 +168,7 @@ export const iconSecondary = gray30;
 export const iconInverse = gray100;
 export const iconOnColor = white;
 export const iconOnColorDisabled = adjustAlpha(iconOnColor, 0.25);
-export const iconDisabled = gray60;
+export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
 
 // Support
 export const supportError = red40;
@@ -179,7 +178,7 @@ export const supportInfo = blue50;
 export const supportErrorInverse = red60;
 export const supportSuccessInverse = green50;
 export const supportWarningInverse = yellow30;
-export const supportInfoInverse = blue60;
+export const supportInfoInverse = blue70;
 export const supportCautionMinor = yellow30;
 export const supportCautionMajor = orange40;
 export const supportCautionUndefined = purple50;
@@ -190,7 +189,7 @@ export const focusInset = gray100;
 export const focusInverse = blue60;
 
 // Skeleton
-export const skeletonBackground = adjustLightness(background, 5);
+export const skeletonBackground = gray90Hover;
 export const skeletonElement = gray70;
 
 // Misc

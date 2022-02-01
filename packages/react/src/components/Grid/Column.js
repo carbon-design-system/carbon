@@ -5,11 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { useGridSettings } from './GridContext';
 
 function Column({
   as: BaseComponent = 'div',
@@ -22,11 +23,12 @@ function Column({
   max,
   ...rest
 }) {
+  const { mode } = useGridSettings();
   const prefix = usePrefix();
-  const hasCSSGrid = useFeatureFlag('enable-css-grid');
-  const columnClassName = hasCSSGrid
-    ? getClassNameForBreakpoints([sm, md, lg, xlg, max], prefix)
-    : getClassNameForFlexGridBreakpoints([sm, md, lg, xlg, max], prefix);
+  const columnClassName =
+    mode === 'css-grid'
+      ? getClassNameForBreakpoints([sm, md, lg, xlg, max], prefix)
+      : getClassNameForFlexGridBreakpoints([sm, md, lg, xlg, max], prefix);
 
   const className = cx(containerClassName, columnClassName, {
     [`${prefix}--col`]: columnClassName.length === 0,
@@ -39,14 +41,25 @@ function Column({
   );
 }
 
-const spanPropType = PropTypes.oneOfType([
-  PropTypes.bool,
-  PropTypes.number,
-  PropTypes.shape({
-    span: PropTypes.number,
-    offset: PropTypes.number,
-  }),
-]);
+const spanPropType = FeatureFlags.enabled('enable-css-grid')
+  ? PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.shape({
+        span: PropTypes.number,
+        offset: PropTypes.number,
+        start: PropTypes.number,
+        end: PropTypes.number,
+      }),
+    ])
+  : PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.shape({
+        span: PropTypes.number,
+        offset: PropTypes.number,
+      }),
+    ]);
 
 Column.propTypes = {
   /**
@@ -143,18 +156,22 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
       continue;
     }
 
-    const { span, offset } = breakpoint;
+    const { span, offset, start, end } = breakpoint;
 
     if (typeof offset === 'number' && offset > 0) {
       classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
     }
 
-    if (typeof span === 'number') {
-      classNames.push(`${prefix}--${name}:col-span-${span}`);
+    if (typeof start === 'number') {
+      classNames.push(`${prefix}--${name}:col-start-${start}`);
     }
 
-    if (span === true) {
-      classNames.push(`${prefix}--${name}:col-span-auto`);
+    if (typeof end === 'number') {
+      classNames.push(`${prefix}--${name}:col-end-${end}`);
+    }
+
+    if (typeof span === 'number') {
+      classNames.push(`${prefix}--${name}:col-span-${span}`);
     }
   }
 
