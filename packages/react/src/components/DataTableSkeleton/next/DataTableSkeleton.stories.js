@@ -10,7 +10,7 @@
 import React from 'react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import DataTableSkeleton from '../DataTableSkeleton';
-import { headers } from '../DataTable/stories/shared';
+import { headers } from '../../DataTable/stories/shared';
 
 const props = () => ({
   showHeaders: boolean('Show table headers', true),
@@ -21,9 +21,9 @@ const props = () => ({
 });
 
 export default {
-  title: 'Components/DataTable/Skeleton',
-  component: DataTableSkeleton,
+  title: 'Components/DataTable',
   decorators: [withKnobs],
+  component: DataTableSkeleton,
 };
 
 export const Skeleton = () => {
