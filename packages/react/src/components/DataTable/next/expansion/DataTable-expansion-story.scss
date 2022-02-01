@@ -1,0 +1,12 @@
+@import '~@carbon/type/scss/type';
+@import '~@carbon/themes/scss/themes';
+
+.demo-inner-container-header {
+  @include carbon--type-style('productive-heading-01');
+  color: $text-01;
+}
+
+.demo-inner-container-content {
+  @include carbon--type-style('body-long-01');
+  color: $text-02;
+}
