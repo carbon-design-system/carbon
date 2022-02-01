@@ -25,17 +25,10 @@ exports[`ModalWrapper should render 1`] = `
   >
     <Button
       className="btn-trigger"
-      dangerDescription="danger"
       disabled={false}
       iconDescription="Provide icon description if icon is used"
-      isExpressive={false}
       kind="primary"
       onClick={[Function]}
-      size="default"
-      tabIndex={0}
-      tooltipAlignment="center"
-      tooltipPosition="top"
-      type="button"
     >
       <button
         aria-describedby={null}
@@ -167,16 +160,8 @@ exports[`ModalWrapper should render 1`] = `
               className="bx--modal-footer bx--btn-set"
             >
               <Button
-                dangerDescription="danger"
-                disabled={false}
-                isExpressive={false}
                 kind="secondary"
                 onClick={[Function]}
-                size="default"
-                tabIndex={0}
-                tooltipAlignment="center"
-                tooltipPosition="top"
-                type="button"
               >
                 <button
                   aria-describedby={null}
@@ -195,16 +180,9 @@ exports[`ModalWrapper should render 1`] = `
                 </button>
               </Button>
               <Button
-                dangerDescription="danger"
                 disabled={false}
-                isExpressive={false}
                 kind="primary"
                 onClick={[Function]}
-                size="default"
-                tabIndex={0}
-                tooltipAlignment="center"
-                tooltipPosition="top"
-                type="button"
               >
                 <button
                   aria-describedby={null}

@@ -83,7 +83,6 @@ export const layerSelected03 = gray50;
 export const layerSelectedHover03 = gray50Hover;
 
 // layer
-export const layerDisabled = gray80;
 export const layerSelectedInverse = gray10;
 export const layerSelectedDisabled = gray40;
 
@@ -114,9 +113,6 @@ export const fieldHover02 = gray70Hover;
 // field-03
 export const field03 = gray60;
 export const fieldHover03 = gray60Hover;
-
-// field
-export const fieldDisabled = gray80;
 
 // Border
 // border-subtle-00
