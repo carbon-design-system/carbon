@@ -182,17 +182,6 @@ Map {
   },
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "dangerDescription": "danger",
-      "disabled": false,
-      "isExpressive": false,
-      "kind": "primary",
-      "size": "default",
-      "tabIndex": 0,
-      "tooltipAlignment": "center",
-      "tooltipPosition": "top",
-      "type": "button",
-    },
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -248,7 +237,6 @@ Map {
             "tertiary",
           ],
         ],
-        "isRequired": true,
         "type": "oneOf",
       },
       "onBlur": Object {

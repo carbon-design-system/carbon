@@ -12,7 +12,7 @@
     // https://docs.renovatebot.com/presets-npm/#npmunpublishsafe
     "npm:unpublishSafe",
     
-    // https://docs.renovatebot.com/presets-schedule/#scheduleearlymondays
-    "schedule:earlyMondays"
+    // https://docs.renovatebot.com/presets-schedule/#scheduledaily
+    "schedule:daily"
   ]
 }

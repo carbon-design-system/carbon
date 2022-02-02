@@ -34,7 +34,7 @@ import DataTable, {
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
-} from '../../../DataTable';
+} from '../..';
 import { batchActionClick, rows, headers } from '../shared';
 
 const sizes = {
@@ -53,9 +53,9 @@ const tableProps = {
   },
 };
 
-// eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/DataTable/Dynamic',
+  component: DataTable,
   decorators: [withKnobs],
 };
 
