@@ -7196,19 +7196,6 @@ Map {
       },
       "render": [Function],
     },
-    "defaultProps": Object {
-      "disabled": false,
-      "helperText": "",
-      "inline": false,
-      "invalid": false,
-      "invalidText": "",
-      "light": false,
-      "onChange": [Function],
-      "onClick": [Function],
-      "type": "text",
-      "warn": false,
-      "warnText": "",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
