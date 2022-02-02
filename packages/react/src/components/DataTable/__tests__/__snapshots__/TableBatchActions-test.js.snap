@@ -36,16 +36,8 @@ exports[`DataTable.TableBatchActions should render 1`] = `
       >
         <Button
           className="bx--batch-summary__cancel"
-          dangerDescription="danger"
-          disabled={false}
-          isExpressive={false}
-          kind="primary"
           onClick={[MockFunction]}
-          size="default"
           tabIndex={-1}
-          tooltipAlignment="center"
-          tooltipPosition="top"
-          type="button"
         >
           <button
             aria-describedby={null}
@@ -105,16 +97,8 @@ exports[`DataTable.TableBatchActions should render 2`] = `
       >
         <Button
           className="bx--batch-summary__cancel"
-          dangerDescription="danger"
-          disabled={false}
-          isExpressive={false}
-          kind="primary"
           onClick={[MockFunction]}
-          size="default"
           tabIndex={0}
-          tooltipAlignment="center"
-          tooltipPosition="top"
-          type="button"
         >
           <button
             aria-describedby={null}
