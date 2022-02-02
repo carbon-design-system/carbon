@@ -20,7 +20,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
 @mixin button-base {
   @include component-reset.reset;
-  @include type-style('body-short-01');
+  @include type-style('body-compact-01');
 
   position: relative;
   display: inline-flex;

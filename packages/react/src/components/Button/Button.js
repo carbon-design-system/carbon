@@ -294,7 +294,7 @@ Button.propTypes = {
   isExpressive: PropTypes.bool,
 
   /**
-   * Specify whether the Button is currently selected
+   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
    */
   isSelected: PropTypes.bool,
 
