@@ -30,6 +30,19 @@ const Project = {
       })
     );
   },
+  async find({ org, repo }) {
+    const project = projects.find((project) => {
+      return project.org === org && project.repo === repo;
+    });
+    if (project) {
+      return {
+        id,
+        org,
+        repo,
+      };
+    }
+    return null;
+  },
   async load(org, repo) {
     const id = getProjectID(org, repo);
     return {
@@ -48,12 +61,26 @@ const Project = {
     if (project.root) {
       const rootWorkspace = await Project.getWorkspace(project.root);
       const childWorkspaces = await Project.getWorkspacesFor(rootWorkspace);
-      return [];
-      // return [rootWorkspace, ...childWorkspaces];
+      return [rootWorkspace, ...childWorkspaces];
     }
 
     // Remote repos are currently unsupported
     return [];
+  },
+  async find({ org, repo }) {
+    const project = projects.find((project) => {
+      return project.org === org && project.repo === repo;
+    });
+    if (!project) {
+      return null;
+    }
+    return await Project.load(org, repo);
+  },
+  async getWorkspaceById(projectId, workspaceId) {
+    const workspaces = await Project.getProjectWorkspaces(projectId);
+    return workspaces.find((workspace) => {
+      return workspace.id === workspaceId;
+    });
   },
   async getWorkspace(directory) {
     const packageJsonPath = path.join(directory, 'package.json');
@@ -79,34 +106,56 @@ const Project = {
     });
 
     const workspace = {
+      id: hash(directory),
       directory,
       name: packageJson.name,
-      version: packageJson.version,
+      version: packageJson.version ?? null,
       private: packageJson.private ?? false,
-      workspaces: packageJson.workspaces,
+      description: packageJson.description ?? null,
+      workspaces: packageJson.workspaces ?? [],
       dependencies,
     };
 
     return workspace;
   },
-  async getWorkspacesFor(workspace) {
-    if (!Array.isArray(workspace.workspaces)) {
+  async getWorkspacesFor(root) {
+    if (!Array.isArray(root.workspaces)) {
       throw new Error(`Workspace has no workspaces defined`);
     }
-    return await Promise.all(
-      workspace.workspaces.map(async (pattern) => {
-        console.log(pattern, workspace.directory);
 
+    const workspaces = await Promise.all(
+      root.workspaces.map(async (pattern) => {
         const matches = await glob(pattern, {
-          cwd: workspace.directory,
+          cwd: root.directory,
+          onlyDirectories: true,
+        });
+        const directories = matches
+          .map((match) => {
+            return path.join(root.directory, match);
+          })
+          .filter((directory) => {
+            const packageJsonPath = path.join(directory, 'package.json');
+            return fs.existsSync(packageJsonPath);
+          });
+        const workspaces = await Promise.all(
+          directories.map((directory) => {
+            return Project.getWorkspace(directory);
+          })
+        ).then((workspaces) => {
+          return workspaces.map((workspace) => {
+            return {
+              ...workspace,
+              directory: path.relative(root.directory, workspace.directory),
+              parentDirectory: root.directory,
+            };
+          });
         });
 
-        console.log(matches);
-        return {};
+        return workspaces;
       })
-    ).then((workspaces) => {
-      return workspaces.flat();
-    });
+    );
+
+    return workspaces.flat();
   },
 };
 
