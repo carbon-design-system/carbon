@@ -1815,7 +1815,7 @@ __metadata:
     markdown-toc: ^1.2.0
     prettier: ^2.2.1
     prettier-config-carbon: ^0.6.0
-    progress-estimator: ^0.2.2
+    progress-estimator: ^0.3.0
     remark: ^10.0.1
     replace-in-file: ^6.1.0
     rollup: ^2.46.0
@@ -30196,15 +30196,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"progress-estimator@npm:^0.2.2":
-  version: 0.2.2
-  resolution: "progress-estimator@npm:0.2.2"
+"progress-estimator@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "progress-estimator@npm:0.3.0"
   dependencies:
     chalk: ^2.4.1
     cli-spinners: ^1.3.1
     humanize-duration: ^3.15.3
     log-update: ^2.3.0
-  checksum: 0d0466b67e63b66f8acdd64dd705c2f4f4b791160515f244c08a7d7b1026e843610450897da3e0ea715ab1125123fd175528708ae7a33b3d734c1848a228e9d1
+  checksum: 3cd787326960102746ec1a4bfd36c574a24e28273924b4bc80f3fe3f5858ad698e321ea2e4479a3eab6653d7beebdd15026ab1a758bdec2d59e9ab9d4fc1323a
   languageName: node
   linkType: hard
 
