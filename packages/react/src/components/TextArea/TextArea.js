@@ -52,7 +52,7 @@ const TextArea = React.forwardRef(function TextArea(
       }
     },
     ref,
-    maxLength: maxCount,
+    ...(enableCounter && { maxLength: maxCount }),
   };
 
   const labelClasses = classNames(`${prefix}--label`, {
