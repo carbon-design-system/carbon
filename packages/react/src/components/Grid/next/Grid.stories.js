@@ -26,6 +26,15 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <div className="sb-css-grid-container">
+          <Story />
+        </div>
+      );
+    },
+  ],
 };
 
 export const Wide = () => {
