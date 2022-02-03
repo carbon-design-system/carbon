@@ -33,7 +33,7 @@
     "@carbon/icons": "^10.45.0",
     "@carbon/themes": "^10.50.0",
     "@carbon/type": "^10.40.0",
-    "@skpm/builder": "^0.7.0",
+    "@skpm/builder": "^0.8.0",
     "color-string": "^1.5.3",
     "core-js": "^3.16.0",
     "regenerator-runtime": "^0.13.7",
