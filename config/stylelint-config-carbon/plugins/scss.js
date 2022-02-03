@@ -89,6 +89,8 @@ module.exports = {
     'scss/double-slash-comment-inline': 'never',
     // Require or disallow whitespace after the // in //-comments
     'scss/double-slash-comment-whitespace-inside': OFF,
+    // Disallow empty comments. Should be used instead of the stylelint's comment-no-empty because the core rule ignores SCSS-like comments.
+    'scss/comment-no-empty': OFF,
 
     // Declaration
     // Require or disallow properties with - in their names to be in a form of a nested group.
