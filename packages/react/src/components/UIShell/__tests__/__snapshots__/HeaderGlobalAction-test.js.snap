@@ -10,16 +10,9 @@ exports[`HeaderGlobalAction should render 1`] = `
   <Button
     aria-label="Accessibility label"
     className="custom-class bx--header__action"
-    dangerDescription="danger"
-    disabled={false}
     hasIconOnly={true}
     iconDescription="Accessibility label"
-    isExpressive={false}
-    kind="primary"
     onClick={[MockFunction]}
-    size="default"
-    tabIndex={0}
-    tooltipAlignment="center"
     tooltipPosition="bottom"
     type="button"
   >
