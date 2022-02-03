@@ -11792,7 +11792,7 @@ __metadata:
     cross-env: ^5.2.0
     css-loader: ^3.4.2
     custom-event: ^1.0.0
-    del: ~2.0.2
+    del: ~2.2.0
     diff: ^5.0.0
     express-handlebars: ^5.2.1
     fancy-log: ^1.3.0
@@ -14750,18 +14750,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"del@npm:~2.0.2":
-  version: 2.0.2
-  resolution: "del@npm:2.0.2"
+"del@npm:~2.2.0":
+  version: 2.2.2
+  resolution: "del@npm:2.2.2"
   dependencies:
-    globby: ^3.0.0
+    globby: ^5.0.0
     is-path-cwd: ^1.0.0
     is-path-in-cwd: ^1.0.0
     object-assign: ^4.0.1
     pify: ^2.0.0
-    pinkie-promise: ^1.0.0
+    pinkie-promise: ^2.0.0
     rimraf: ^2.2.8
-  checksum: 730d13ce0dda114824f428c6f2f36f206089f4cd0f1dc4976fbb6fe11891d9be4dc326ff1f36246fb6c28d04b68a8f76fc5acec1c62d20f2391ee74707d3938e
+  checksum: 053ed28031653f92365b6405a2154d1b415d2ab2f809532c64cc2de1640a694cbcce06e162d4b61d4299e303ef0301eba70dc6c5bdaca9bbe8dc0790758caf68
   languageName: node
   linkType: hard
 
@@ -19188,19 +19188,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^5.0.3":
-  version: 5.0.15
-  resolution: "glob@npm:5.0.15"
-  dependencies:
-    inflight: ^1.0.4
-    inherits: 2
-    minimatch: 2 || 3
-    once: ^1.3.0
-    path-is-absolute: ^1.0.0
-  checksum: f9742448303460672607e569457f1b57e486a79a985e269b69465834d2075b243378225f65dc54c09fcd4b75e4fb34442aec88f33f8c65fa4abccc8ee2dc2f5d
-  languageName: node
-  linkType: hard
-
 "glob@npm:^7.0.0, glob@npm:^7.0.3, glob@npm:^7.0.6, glob@npm:^7.1.1, glob@npm:^7.1.2, glob@npm:^7.1.3, glob@npm:^7.1.4, glob@npm:^7.1.6, glob@npm:~7.1.1":
   version: 7.1.6
   resolution: "glob@npm:7.1.6"
@@ -19356,17 +19343,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"globby@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "globby@npm:3.0.1"
+"globby@npm:^5.0.0":
+  version: 5.0.0
+  resolution: "globby@npm:5.0.0"
   dependencies:
     array-union: ^1.0.1
     arrify: ^1.0.0
-    glob: ^5.0.3
+    glob: ^7.0.3
     object-assign: ^4.0.1
     pify: ^2.0.0
-    pinkie-promise: ^1.0.0
-  checksum: d99f8400db6c52df9f9a3ab18ed6095d6219a8aa7a1541b84e23faf24393a3b3038d2cbaacae1aba1b6a687cb627f714e73f672577c5ac9aa9598bdaeb1e3204
+    pinkie-promise: ^2.0.0
+  checksum: c8d7fb42aa55da87c13ed1f7e0f815c566ceb1bb05257ae1349f882d7a10f3f41d1fbe5604148d6c864df3a65d0b9c9e20cbae5f22b6abc8a4924f45bdad8d8f
   languageName: node
   linkType: hard
 
@@ -26098,7 +26085,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"minimatch@npm:2 || 3, minimatch@npm:3.0.4, minimatch@npm:^3.0.0, minimatch@npm:^3.0.2, minimatch@npm:^3.0.4, minimatch@npm:~3.0.2":
+"minimatch@npm:3.0.4, minimatch@npm:^3.0.0, minimatch@npm:^3.0.2, minimatch@npm:^3.0.4, minimatch@npm:~3.0.2":
   version: 3.0.4
   resolution: "minimatch@npm:3.0.4"
   dependencies:
@@ -28801,28 +28788,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pinkie-promise@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "pinkie-promise@npm:1.0.0"
-  dependencies:
-    pinkie: ^1.0.0
-  checksum: 9dc945fd7762a9f6ed5d00388fb700df9c420e39f9bf73e7bc7f2864c39cb6bab5f9c8727f2400f66d4781eebf43c1f9ade58c33b84d6970c267d496a7df8ac7
-  languageName: node
-  linkType: hard
-
 "pinkie-promise@npm:^2.0.0":
   version: 2.0.1
   resolution: "pinkie-promise@npm:2.0.1"
   dependencies:
     pinkie: ^2.0.0
   checksum: b53a4a2e73bf56b6f421eef711e7bdcb693d6abb474d57c5c413b809f654ba5ee750c6a96dd7225052d4b96c4d053cdcb34b708a86fceed4663303abee52fcca
-  languageName: node
-  linkType: hard
-
-"pinkie@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "pinkie@npm:1.0.0"
-  checksum: 987523756f54e02f6dc101cbf22de211d40aa2cd8abc686badcb51364a3aff2e171c1790aaf56fa6d8f46acacff669f628509219b27b9cdd29a9d9587fa96721
   languageName: node
   linkType: hard
 
