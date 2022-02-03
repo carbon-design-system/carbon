@@ -161,6 +161,8 @@ export const linkPrimaryHover = blue30;
 export const linkSecondary = blue30;
 export const linkInverse = blue60;
 export const linkVisited = purple40;
+export const linkInverseActive = gray100;
+export const linkInverseHover = blue70;
 
 // Icon
 export const iconPrimary = gray10;
