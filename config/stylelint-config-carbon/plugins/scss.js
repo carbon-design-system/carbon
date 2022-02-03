@@ -61,6 +61,8 @@ module.exports = {
     // @-rule
     // Disallow unknown at-rules. Should be used instead of stylelint's at-rule-no-unknown.
     'scss/at-rule-no-unknown': true,
+    // Disallow parentheses in conditional @ rules (if, elsif, while)
+    'scss/at-rule-conditional-no-parentheses': OFF,
 
     // $-variable
     // Require a newline after the colon in $-variable declarations.
