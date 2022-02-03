@@ -23,12 +23,13 @@
     "access": "public"
   },
   "peerDependencies": {
-    "stylelint": "^13.6.0"
+    "stylelint": "^14.3.0"
   },
   "dependencies": {
     "stylelint-config-idiomatic-order": "^8.1.0",
     "stylelint-config-prettier": "^8.0.2",
     "stylelint-config-standard": "^22.0.0",
+    "stylelint-config-standard-scss": "^3.0.0",
     "stylelint-no-unsupported-browser-features": "^5.0.1",
     "stylelint-order": "^4.1.0",
     "stylelint-prettier": "^1.2.0",
@@ -36,6 +37,6 @@
   },
   "devDependencies": {
     "prettier": "^2.2.1",
-    "stylelint": "^13.13.1"
+    "stylelint": "^14.3.0"
   }
 }
