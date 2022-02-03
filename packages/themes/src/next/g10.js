@@ -8,6 +8,7 @@
 import {
   // Blue
   blue20,
+  blue30,
   blue40,
   blue60,
   blue70,
@@ -153,6 +154,8 @@ export const linkPrimaryHover = blue70;
 export const linkSecondary = blue70;
 export const linkInverse = blue40;
 export const linkVisited = purple60;
+export const linkInverseActive = gray10;
+export const linkInverseHover = blue30;
 
 // Icon
 export const iconPrimary = gray100;
