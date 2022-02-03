@@ -165,7 +165,14 @@ function TabList({
     [`${prefix}--tabs__icon--default`]: iconSize === 'default',
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
   });
-  const overflowButtonClasses = cx();
+  const previousButtonClasses = cx(
+    `${prefix}--tab--overflow-nav-button`,
+    `${prefix}--tabs__overflow-indicator--left`
+  );
+  const nextButtonClasses = cx(
+    `${prefix}--tab--overflow-nav-button`,
+    `${prefix}--tabs__overflow-indicator--right`
+  );
 
   const tabs = [];
 
@@ -262,10 +269,9 @@ function TabList({
     <div className={className}>
       {isPreviousButtonVisible ? (
         <button
-          className={
-            (`${prefix}--tab--overflow-nav-button--left`,
-            `${prefix}--tab--overflow-nav-button`)
-          }
+          aria-hidden="true"
+          aria-label="Scroll left"
+          className={previousButtonClasses}
           type="button">
           <ChevronLeft16 />
         </button>
@@ -292,10 +298,9 @@ function TabList({
       </div>
       {isNextButtonVisible ? (
         <button
-          className={
-            (`${prefix}--tab--overflow-nav-button--right`,
-            `${prefix}--tab--overflow-nav-button`)
-          }
+          aria-hidden="true"
+          aria-label="Scroll right"
+          className={nextButtonClasses}
           type="button">
           <ChevronRight16 />
         </button>
