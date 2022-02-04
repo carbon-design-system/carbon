@@ -40,7 +40,7 @@ export const globalTypes = {
     description: 'Set the global theme for displaying components',
     defaultValue: 'white',
     toolbar: {
-      icon: 'circlehollow',
+      icon: 'paintbrush',
       items: ['white', 'g10', 'g90', 'g100'],
     },
   },
