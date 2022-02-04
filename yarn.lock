@@ -9976,6 +9976,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"autoprefixer@npm:^10.0.0":
+  version: 10.4.2
+  resolution: "autoprefixer@npm:10.4.2"
+  dependencies:
+    browserslist: ^4.19.1
+    caniuse-lite: ^1.0.30001297
+    fraction.js: ^4.1.2
+    normalize-range: ^0.1.2
+    picocolors: ^1.0.0
+    postcss-value-parser: ^4.2.0
+  peerDependencies:
+    postcss: ^8.1.0
+  bin:
+    autoprefixer: bin/autoprefixer
+  checksum: dbd13e641eaa7d7e3121769c22cc439222f1a9d0371a583d12300849de7287ece1e793767ff9902842dbfd56c4b7c19ed9fe1947c9f343ba2f4f3519dbddfdef
+  languageName: node
+  linkType: hard
+
 "autoprefixer@npm:^10.4.0":
   version: 10.4.0
   resolution: "autoprefixer@npm:10.4.0"
@@ -9994,7 +10012,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"autoprefixer@npm:^9.7.4, autoprefixer@npm:^9.8.6":
+"autoprefixer@npm:^9.8.6":
   version: 9.8.6
   resolution: "autoprefixer@npm:9.8.6"
   dependencies:
@@ -11600,6 +11618,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"caniuse-lite@npm:^1.0.30001297":
+  version: 1.0.30001306
+  resolution: "caniuse-lite@npm:1.0.30001306"
+  checksum: 6e80988025b7f770479cea1331f608c9430aa097254c1a0c4a904dbcd46002934489ae00d60b87c14fe14f945d0ee1cd6703c2e1e7725e32a380301ac96a4730
+  languageName: node
+  linkType: hard
+
 "capital-case@npm:^1.0.4":
   version: 1.0.4
   resolution: "capital-case@npm:1.0.4"
@@ -11788,7 +11813,7 @@ __metadata:
     "@rollup/plugin-replace": ^2.4.2
     "@rollup/plugin-virtual": ^2.0.3
     adaro: 1.0.4
-    autoprefixer: ^9.7.4
+    autoprefixer: ^10.0.0
     babel-loader: ^8.2.3
     babel-plugin-dev-expression: ^0.2.3
     babel-plugin-istanbul: ^6.1.1
@@ -18395,7 +18420,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fraction.js@npm:^4.1.1":
+"fraction.js@npm:^4.1.1, fraction.js@npm:^4.1.2":
   version: 4.1.2
   resolution: "fraction.js@npm:4.1.2"
   checksum: a67eff2b599cb6546b77ce9c913bd0cccd646e1a525c793ba4e0bf5a399fc403f379227fca83423a6ea79d01e35c2f2b0f141ffa1d09e41377041268a53fb150
