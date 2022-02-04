@@ -52,8 +52,11 @@ const TextArea = React.forwardRef(function TextArea(
       }
     },
     ref,
-    ...(enableCounter && { maxLength: maxCount }),
   };
+
+  if (enableCounter) {
+    textareaProps.maxLength = maxCount;
+  }
 
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
