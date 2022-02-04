@@ -120,4 +120,19 @@ module.exports = {
     // Disallow redundant nesting selectors (&).
     'scss/selector-no-redundant-nesting-selector': true,
   },
+  overrides: [
+    {
+      files: [
+        './packages/components/**/*.scss',
+        './packages/type/**/*.scss',
+        './packages/motion/**/*.scss',
+        './packages/layout/**/*.scss',
+        './packages/grid/**/*.scss',
+        './packages/import-once/**/*.scss',
+      ],
+      rules: {
+        'scss/no-global-function-names': OFF,
+      },
+    },
+  ],
 };
