@@ -246,26 +246,26 @@
       grid-column: 1 / -1;
     }
 
-    $quarterGirdColumns: math.div($columns, 4);
+    $quarterGridColumns: math.div($columns, 4);
 
     .#{$prefix}--#{$name}\:col-span-75 {
-      $calc: $quarterGirdColumns * 3;
-      --cds-grid-columns: $calc;
+      $calc: $quarterGridColumns * 3;
+      --cds-grid-columns: #{$calc};
 
-      grid-column: span $calc;
+      grid-column: span $calc / span $calc;
     }
 
     .#{$prefix}--#{$name}\:col-span-50 {
-      $calc: $quarterGirdColumns * 2;
-      --cds-grid-columns: $calc;
+      $calc: $quarterGridColumns * 2;
+      --cds-grid-columns: #{$calc};
 
-      grid-column: span $calc;
+      grid-column: span $calc / span $calc;
     }
 
     .#{$prefix}--#{$name}\:col-span-25 {
-      --cds-grid-columns: $quarterGirdColumns;
+      --cds-grid-columns: #{$quarterGridColumns};
 
-      grid-column: span $quarterGirdColumns;
+      grid-column: span $quarterGridColumns / span $quarterGridColumns;
     }
   }
 }

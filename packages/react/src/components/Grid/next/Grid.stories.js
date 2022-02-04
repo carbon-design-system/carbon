@@ -224,6 +224,11 @@ export const Offset = () => (
       lg={{ span: 12, offset: 4 }}
     />
     <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} />
+    <Column
+      sm={{ span: '25%', offset: 1 }}
+      md={{ span: '50%', offset: 2 }}
+      lg={{ span: '75%', offset: 4 }}
+    />
   </Grid>
 );
 
