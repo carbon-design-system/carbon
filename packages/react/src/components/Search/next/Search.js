@@ -32,8 +32,7 @@ function Search({
   placeholder = '',
   renderIcon,
   role = 'searchbox',
-  size = !small ? 'lg' : 'sm',
-  small,
+  size = 'lg',
   type = 'text',
   value,
   ...rest
@@ -213,22 +212,9 @@ Search.propTypes = {
   role: PropTypes.string,
 
   /**
-   * Specify the search size
+   * Specify the size of the Search
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
-
-  /**
-   * Specify whether the Search should be a small variant
-   */
-
-  /**
-   * Specify whether the load was successful
-   */
-  small: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`small\` for Search has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
-  ),
-
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
   /**
    * Optional prop to specify the type of the `<input>`
    */

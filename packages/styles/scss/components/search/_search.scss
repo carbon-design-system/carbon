@@ -99,24 +99,21 @@
     left: rem(8px);
   }
 
-  // Large styles
-  // V11: change lg to md
-  .#{$prefix}--search--lg .#{$prefix}--search-input,
-  .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+  // Medium styles
+  .#{$prefix}--search--md .#{$prefix}--search-input,
+  .#{$prefix}--search--md.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
     height: rem(40px);
     // 12px padding on either side of icon + 16px icon (40px)
     padding: 0 $spacing-08;
   }
-
-  // V11: change lg to md
-  .#{$prefix}--search--lg .#{$prefix}--search-magnifier-icon {
+  .#{$prefix}--search--md .#{$prefix}--search-magnifier-icon {
     left: rem(12px);
   }
 
-  // V11: change xl to lg
-  .#{$prefix}--search--xl .#{$prefix}--search-input,
-  .#{$prefix}--search--xl.#{$prefix}--search--expandable.#{$prefix}--search--expanded
+  // Large styles
+  .#{$prefix}--search--lg .#{$prefix}--search-input,
+  .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
     .#{$prefix}--search-input {
     height: rem(48px);
     // 16px padding on either side of icon + 16px icon (48px)
@@ -245,6 +242,7 @@
     @include focus-outline('outline');
   }
 
+  // Small
   .#{$prefix}--search--sm {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
@@ -259,8 +257,8 @@
     }
   }
 
-  // V11: change lg to md
-  .#{$prefix}--search--lg {
+  // Medium
+  .#{$prefix}--search--md {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
@@ -274,8 +272,8 @@
     }
   }
 
-  // V11: change xl to lg
-  .#{$prefix}--search--xl {
+  // Large
+  .#{$prefix}--search--lg {
     .#{$prefix}--search-close,
     ~ .#{$prefix}--search-button,
     &.#{$prefix}--search--expandable,
@@ -294,9 +292,8 @@
     visibility: hidden;
   }
 
-  // V11: change xl to lg, lg to md
-  .#{$prefix}--search--xl.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--skeleton .#{$prefix}--search-input,
+  .#{$prefix}--search--md.#{$prefix}--skeleton .#{$prefix}--search-input,
   .#{$prefix}--search--sm.#{$prefix}--skeleton .#{$prefix}--search-input {
     @include skeleton;
 
