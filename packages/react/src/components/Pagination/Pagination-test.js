@@ -437,5 +437,12 @@ describe('Pagination', () => {
         });
       });
     });
+
+    it('should render with ref', () => {
+      const ref = React.createRef();
+      mount(<Pagination pageSizes={[10]} totalItems={5} forwardedRef={ref} />);
+
+      expect(ref.current).toHaveClass(`${prefix}--pagination`);
+    });
   });
 });

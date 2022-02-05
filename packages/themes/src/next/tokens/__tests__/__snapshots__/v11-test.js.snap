@@ -39,7 +39,6 @@ Array [
   "field-hover-02",
   "field-03",
   "field-hover-03",
-  "field-disabled",
 ]
 `;
 
@@ -79,7 +78,6 @@ Array [
   "layer-hover-03",
   "layer-selected-03",
   "layer-selected-hover-03",
-  "layer-disabled",
   "layer-selected-inverse",
   "layer-selected-disabled",
   "layer-accent-01",
@@ -99,8 +97,10 @@ Array [
   "link-primary",
   "link-primary-hover",
   "link-secondary",
-  "link-inverse",
   "link-visited",
+  "link-inverse",
+  "link-inverse-active",
+  "link-inverse-hover",
 ]
 `;
 
@@ -166,7 +166,6 @@ Array [
   "layer-hover-03",
   "layer-selected-03",
   "layer-selected-hover-03",
-  "layer-disabled",
   "layer-selected-inverse",
   "layer-selected-disabled",
   "layer-accent-01",
@@ -184,7 +183,6 @@ Array [
   "field-hover-02",
   "field-03",
   "field-hover-03",
-  "field-disabled",
   "interactive",
   "border-subtle-00",
   "border-subtle-01",
@@ -211,8 +209,10 @@ Array [
   "link-primary",
   "link-primary-hover",
   "link-secondary",
-  "link-inverse",
   "link-visited",
+  "link-inverse",
+  "link-inverse-active",
+  "link-inverse-hover",
   "icon-primary",
   "icon-secondary",
   "icon-inverse",

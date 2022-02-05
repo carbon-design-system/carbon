@@ -29,6 +29,7 @@ body:
         - '@carbon/motion'
         - '@carbon/pictograms'
         - '@carbon/pictograms-react'
+        - '@carbon/react'
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
