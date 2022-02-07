@@ -298,7 +298,7 @@
     width: mini-units(25);
     flex-direction: column;
     background-color: $shell-header-bg-06;
-    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 50%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
     transform: translateY(100%);
   }
 
