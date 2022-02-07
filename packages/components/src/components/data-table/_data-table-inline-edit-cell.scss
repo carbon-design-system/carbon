@@ -299,7 +299,7 @@
     padding: 1rem;
     border: 1px solid $border-subtle;
     background-color: $icon-inverse;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -4px 8px rgb(0 0 0 / 10%);
     color: $text-error;
     font-size: rem(12px);
     opacity: 0;

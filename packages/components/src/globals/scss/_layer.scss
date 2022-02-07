@@ -28,7 +28,7 @@
 /// @type Value
 /// @group global-layer
 /// @example box-shadow: 0px 3px 3px 0 $box-shadow;
-$box-shadow: rgba(0, 0, 0, 0.2);
+$box-shadow: rgb(0 0 0 / 20%);
 
 /// Raised box shadow
 /// @access private

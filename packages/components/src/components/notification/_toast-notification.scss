@@ -35,7 +35,7 @@
       margin-bottom: $carbon--spacing-03;
     }
 
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
     color: $inverse-01;
 
     @if not feature-flag-enabled('enable-v11-release') {
