@@ -20620,7 +20620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graphql-ws@npm:^5.4.1":
+"graphql-ws@npm:^5.4.1, graphql-ws@npm:^5.5.5":
   version: 5.5.5
   resolution: "graphql-ws@npm:5.5.5"
   peerDependencies:
@@ -41215,8 +41215,10 @@ resolve@^2.0.0-next.3:
     got: ^12.0.0
     graphiql: ^1.5.16
     graphql: ^16.3.0
+    graphql-ws: ^5.5.5
     lodash.merge: ^4.6.2
     micro: ^9.3.4
+    micromatch: ^4.0.4
     next: ^12.0.3
     prop-types: ^15.7.2
     react: ^17.0.2

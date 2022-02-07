@@ -11,7 +11,6 @@ import { schema } from '../../graphql';
 const server = new ApolloServer({
   schema,
 });
-
 const start = server.start();
 
 export const config = {
