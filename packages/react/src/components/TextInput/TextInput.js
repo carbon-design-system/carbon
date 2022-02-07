@@ -14,29 +14,30 @@ import ControlledPasswordInput from './ControlledPasswordInput';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { useFeatureFlag } from '../FeatureFlags';
+import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
 
 const TextInput = React.forwardRef(function TextInput(
   {
-    labelText,
     className,
-    id,
-    placeholder,
-    type,
-    onChange,
-    onClick,
-    hideLabel,
-    disabled,
-    invalid,
-    invalidText,
-    warn,
-    warnText,
+    disabled = false,
     helperText,
-    light,
-    size,
-    inline,
+    hideLabel,
+    id,
+    inline = false,
+    invalid = false,
+    invalidText,
+    labelText,
+    light = false,
+    onChange = () => {},
+    onClick = () => {},
+    placeholder,
     readOnly,
-    ...other
+    size = 'md',
+    type = 'text',
+    warn = false,
+    warnText,
+    ...rest
   },
   ref
 ) {
@@ -86,7 +87,7 @@ const TextInput = React.forwardRef(function TextInput(
     disabled: normalizedProps.disabled,
     readOnly,
     ['aria-describedby']: helperText && normalizedProps.helperId,
-    ...other,
+    ...rest,
   };
   const inputWrapperClasses = classNames(
     [
@@ -267,10 +268,11 @@ TextInput.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-   * TODO V11: remove `xl` (replaced with lg)
+   * Specify the size of the Text Input. Currently supports the following:
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg'])
+    : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
   /**
    * Specify the type of the `<input>`
@@ -291,20 +293,6 @@ TextInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-TextInput.defaultProps = {
-  disabled: false,
-  type: 'text',
-  onChange: () => {},
-  onClick: () => {},
-  invalid: false,
-  invalidText: '',
-  warn: false,
-  warnText: '',
-  helperText: '',
-  light: false,
-  inline: false,
 };
 
 export default TextInput;
