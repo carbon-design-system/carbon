@@ -205,6 +205,17 @@ function TabList({
     setScrollLeft(event.target.scrollLeft);
   }, 200);
 
+  function onOverflowClick(direction) {
+    const overflowButtonOffset = 40;
+    if (ref.current) {
+      if (direction === 'next' && !ref.current.scrollLeft) {
+        ref.current.scrollLeft += overflowButtonOffset;
+      }
+      console.log(getInteractiveContent(ref.current));
+      ref.current.scrollLeft = ref.current.scrollLeft + 1 * 10;
+    }
+  }
+
   useEffectOnce(() => {
     const tab = tabs[selectedIndex];
     if (scrollIntoView && tab) {
@@ -230,7 +241,6 @@ function TabList({
 
   useLayoutEffect(() => {
     if (ref.current) {
-      console.log(ref.current.scrollLeft);
       setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
     }
 
@@ -300,6 +310,7 @@ function TabList({
         <button
           aria-hidden="true"
           aria-label="Scroll right"
+          onClick={onOverflowClick}
           className={nextButtonClasses}
           type="button">
           <ChevronRight16 />
