@@ -1800,7 +1800,7 @@ __metadata:
     "@octokit/plugin-throttling": ^2.6.0
     "@octokit/rest": ^16.28.1
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     chalk: ^4.1.1
     change-case: ^4.1.2
@@ -2075,7 +2075,7 @@ __metadata:
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/themes": ^10.50.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     "@storybook/addon-a11y": ^6.4.9
     "@storybook/addon-actions": ^6.4.9
@@ -4994,9 +4994,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-commonjs@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "@rollup/plugin-commonjs@npm:18.0.0"
+"@rollup/plugin-commonjs@npm:^21.0.0":
+  version: 21.0.1
+  resolution: "@rollup/plugin-commonjs@npm:21.0.1"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     commondir: ^1.0.1
@@ -5006,8 +5006,8 @@ __metadata:
     magic-string: ^0.25.7
     resolve: ^1.17.0
   peerDependencies:
-    rollup: ^2.30.0
-  checksum: 1e8d2589aba7593e21bc440e48add955e26e60320abbc9255cdc6c57437312faccc47965f459c8c844728765077b58526e2959a8dc68657453944f63034a4155
+    rollup: ^2.38.3
+  checksum: 3e56be58c72d655face6f361f85923ddcc3cc07760b5a3a91cfc728115dfed358fc595781148c512d53a03be8c703133379f228e78fd2aed8655fae9d83800b6
   languageName: node
   linkType: hard
 
@@ -11654,7 +11654,7 @@ __metadata:
     "@percy/cypress": ^3.1.1
     "@percy/storybook": ^4.1.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     "@rollup/plugin-replace": ^2.4.2
     "@storybook/addon-actions": ^6.4.9
@@ -11783,7 +11783,7 @@ __metadata:
     "@carbon/test-utils": ^10.21.0
     "@frctl/fractal": ^1.1.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     "@rollup/plugin-replace": ^2.4.2
     "@rollup/plugin-virtual": ^2.0.3
