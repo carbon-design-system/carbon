@@ -274,6 +274,12 @@ const QueryType = new GraphQLObjectType({
         });
       },
     },
+    projects: {
+      type: new GraphQLNonNull(new GraphQLList(ProjectType)),
+      resolve: async () => {
+        return await Project.all();
+      },
+    },
   }),
 });
 
