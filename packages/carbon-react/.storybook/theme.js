@@ -6,51 +6,18 @@
  */
 
 import { create } from '@storybook/theming';
-import { g10 } from '@carbon/themes';
 import PackageInfo from './../package.json';
 
-const {
-  field01,
-  interactive01,
-  selectedUI,
-  text01,
-  inverse01,
-  ui01,
-  ui03,
-  uiBackground,
-} = g10;
-
+/**
+ * @see https://storybook.js.org/docs/react/configure/theming
+ */
 export default create({
   base: 'light',
-
-  colorPrimary: interactive01,
-  colorSecondary: selectedUI,
-
-  // UI
-  appBg: uiBackground,
-  appContentBg: ui01,
-  appBorderColor: ui03,
-  appBorderRadius: 0,
 
   // Typography
   fontBase: "'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif",
   fontCode:
     "'IBM Plex Mono', Menlo, 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace",
-
-  // Text colors
-  textColor: text01,
-  textInverseColor: inverse01,
-
-  // Toolbar default and active colors
-  barTextColor: text01,
-  barSelectedColor: interactive01,
-  barBg: uiBackground,
-
-  // Form colors
-  inputBg: field01,
-  inputBorder: ui03,
-  inputTextColor: text01,
-  inputBorderRadius: 0,
 
   brandTitle: `@carbon/react@${PackageInfo.version}`,
   brandUrl:
