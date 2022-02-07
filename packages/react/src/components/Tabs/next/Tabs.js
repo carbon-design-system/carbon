@@ -159,20 +159,35 @@ function TabList({
   const ref = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(false);
+
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
     [`${prefix}--tabs__icon--default`]: iconSize === 'default',
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
   });
-  const previousButtonClasses = cx(
-    `${prefix}--tab--overflow-nav-button`,
-    `${prefix}--tabs__overflow-indicator--left`
-  );
-  const nextButtonClasses = cx(
-    `${prefix}--tab--overflow-nav-button`,
-    `${prefix}--tabs__overflow-indicator--right`
-  );
+
+  // Previous Button
+  // VISIBLE IF:
+  //   SCROLLABLE
+  //   AND SCROLL_LEFT > 0
+  const isPreviousButtonVisible = ref.current
+    ? isScrollable && scrollLeft > 0
+    : false;
+  // Next Button
+  // VISIBLE IF:
+  //   SCROLLABLE
+  //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
+  const isNextButtonVisible = ref.current
+    ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
+    : false;
+
+  const previousButtonClasses = cx(`${prefix}--tab--overflow-nav-button`, {
+    [`${prefix}--tab--overflow-nav-button--hidden`]: !isPreviousButtonVisible,
+  });
+  const nextButtonClasses = cx(`${prefix}--tab--overflow-nav-button`, {
+    [`${prefix}--tab--overflow-nav-button--hidden`]: !isNextButtonVisible,
+  });
 
   const tabs = [];
 
@@ -205,14 +220,15 @@ function TabList({
     setScrollLeft(event.target.scrollLeft);
   }, 200);
 
-  function onOverflowClick(direction) {
+  function onNextOverflowClick(direction) {
     const overflowButtonOffset = 40;
+
     if (ref.current) {
-      if (direction === 'next' && !ref.current.scrollLeft) {
+      if (!ref.current.scrollLeft) {
         ref.current.scrollLeft += overflowButtonOffset;
       }
-      console.log(getInteractiveContent(ref.current));
-      ref.current.scrollLeft = ref.current.scrollLeft + 1 * 10;
+      ref.current.scrollLeft = ref.current.scrollWidth / tabs.length;
+      console.log(ref.current.scrollWidth / tabs.length);
     }
   }
 
@@ -258,34 +274,16 @@ function TabList({
     };
   }, []);
 
-  // Previous Button
-  // VISIBLE IF:
-  //   SCROLLABLE
-  //   AND SCROLL_LEFT > 0
-  const isPreviousButtonVisible = ref.current
-    ? isScrollable && scrollLeft > 0
-    : false;
-
-  // Next Button
-  // VISIBLE IF:
-  //   SCROLLABLE
-  //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
-  const isNextButtonVisible = ref.current
-    ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
-    : false;
-
   return (
     // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div className={className}>
-      {isPreviousButtonVisible ? (
-        <button
-          aria-hidden="true"
-          aria-label="Scroll left"
-          className={previousButtonClasses}
-          type="button">
-          <ChevronLeft16 />
-        </button>
-      ) : null}
+      <button
+        aria-hidden="true"
+        aria-label="Scroll left"
+        className={previousButtonClasses}
+        type="button">
+        <ChevronLeft16 />
+      </button>
       <div
         {...rest}
         aria-label={label}
@@ -306,16 +304,14 @@ function TabList({
           );
         })}
       </div>
-      {isNextButtonVisible ? (
-        <button
-          aria-hidden="true"
-          aria-label="Scroll right"
-          onClick={onOverflowClick}
-          className={nextButtonClasses}
-          type="button">
-          <ChevronRight16 />
-        </button>
-      ) : null}
+      <button
+        aria-hidden="true"
+        aria-label="Scroll right"
+        onClick={onNextOverflowClick}
+        className={nextButtonClasses}
+        type="button">
+        <ChevronRight16 />
+      </button>
     </div>
   );
 }

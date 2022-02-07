@@ -48,10 +48,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     // overflow-x: auto;
     // overflow-y: hidden;
     color: $text-primary;
-    // scrollbar-width: none;
-    // &::-webkit-scrollbar {
-    //   display: none;
-    // }
 
     &.#{$prefix}--tabs--contained {
       min-height: rem(48px);
@@ -64,6 +60,10 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       // flex-grow: 0;
       // flex-basis: 10rem;
       overflow-x: scroll;
+      // scrollbar-width: none;
+      // &::-webkit-scrollbar {
+      //   display: none;
+      // }
     }
 
     //-----------------------------
