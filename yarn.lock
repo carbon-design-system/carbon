@@ -2138,7 +2138,7 @@ __metadata:
     "@skpm/builder": ^0.8.0
     color-string: ^1.5.3
     core-js: ^3.16.0
-    cross-env: ^5.2.0
+    cross-env: ^7.0.0
     regenerator-runtime: ^0.13.7
     rimraf: ^3.0.0
     skpm: ^1.2.0
@@ -11683,7 +11683,7 @@ __metadata:
     cli-table: ^0.3.0
     copy-to-clipboard: ^3.3.1
     core-js: ^3.16.0
-    cross-env: ^5.2.0
+    cross-env: ^7.0.0
     css-loader: ^6.5.1
     cypress: ^9.2.0
     cypress-real-events: ^1.6.0
@@ -11802,7 +11802,7 @@ __metadata:
     classnames: ^2.2.0
     commander: ^2.13.0
     core-js: ^3.16.0
-    cross-env: ^5.2.0
+    cross-env: ^7.0.0
     css-loader: ^3.4.2
     custom-event: ^1.0.0
     del: ~2.2.0
@@ -11916,7 +11916,7 @@ __metadata:
     "@testing-library/react": ^12.1.2
     "@testing-library/user-event": ^13.5.0
     all-contributors-cli: ^6.19.0
-    cross-env: ^5.2.0
+    cross-env: ^7.0.0
     cross-spawn: ^6.0.5
     doctoc: ^1.4.0
     eslint: ^7.28.0
@@ -13682,15 +13682,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-env@npm:^5.2.0":
-  version: 5.2.1
-  resolution: "cross-env@npm:5.2.1"
+"cross-env@npm:^7.0.0":
+  version: 7.0.3
+  resolution: "cross-env@npm:7.0.3"
   dependencies:
-    cross-spawn: ^6.0.5
+    cross-spawn: ^7.0.1
   bin:
-    cross-env: dist/bin/cross-env.js
-    cross-env-shell: dist/bin/cross-env-shell.js
-  checksum: 364f72482f0d6b65c6d560b942ce9da7e71ea66ec2eaa8226f7127b49094355277aadd23e6ff922c1d154a6ab1ad828ebc4ec8af9b44a39936d9013fb23ae4df
+    cross-env: src/bin/cross-env.js
+    cross-env-shell: src/bin/cross-env-shell.js
+  checksum: 26f2f3ea2ab32617f57effb70d329c2070d2f5630adc800985d8b30b56e8bf7f5f439dd3a0358b79cee6f930afc23cf8e23515f17ccfb30092c6b62c6b630a79
   languageName: node
   linkType: hard
 
@@ -13713,7 +13713,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:7.0.3, cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
+"cross-spawn@npm:7.0.3, cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.1, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
   version: 7.0.3
   resolution: "cross-spawn@npm:7.0.3"
   dependencies:
