@@ -277,15 +277,21 @@ $popover-caret-height: custom-property.get-var(
   }
 
   .#{$prefix}--popover--right-top .#{$prefix}--popover-content {
-    top: 0;
+    top: 50%;
     left: 100%;
-    transform: translate($popover-offset, 0);
+    transform: translate(
+      $popover-offset,
+      calc(0.5 * $popover-caret-width * -1 - 16px)
+    );
   }
 
   .#{$prefix}--popover--right-bottom .#{$prefix}--popover-content {
-    bottom: 0;
+    bottom: 50%;
     left: 100%;
-    transform: translate($popover-offset, 0);
+    transform: translate(
+      $popover-offset,
+      calc(0.5 * $popover-caret-width + 16px)
+    );
   }
 
   // Popover hover area placement
@@ -325,19 +331,25 @@ $popover-caret-height: custom-property.get-var(
   }
 
   .#{$prefix}--popover--left-top .#{$prefix}--popover-content {
-    top: 0;
+    top: -50%;
     right: 100%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
-    transform: translate(calc(-1 * $popover-offset + 0.1px), 0);
+    transform: translate(
+      calc(0.5 * $popover-caret-width - 16px),
+      $popover-offset
+    );
   }
 
   .#{$prefix}--popover--left-bottom .#{$prefix}--popover-content {
     right: 100%;
-    bottom: 0;
+    bottom: -50%;
     // Add in 0.1px to prevent rounding errors where the content is
     // moved farther than the caret
-    transform: translate(calc(-1 * $popover-offset + 0.1px), 0);
+    transform: translate(
+      calc(0.5 * $popover-caret-width - 16px),
+      calc($popover-offset * -1)
+    );
   }
 
   // Popover hover area placement
