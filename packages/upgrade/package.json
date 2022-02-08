@@ -55,6 +55,8 @@
     "yargs": "^17.0.1"
   },
   "dependencies": {
-    "jscodeshift": "^0.13.1"
+    "jscodeshift": "^0.13.1",
+    "postcss": "^8.4.6",
+    "postcss-scss": "^4.0.3"
   }
 }
