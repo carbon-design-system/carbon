@@ -8,6 +8,7 @@
 import chalk from 'chalk';
 import isGitClean from 'is-git-clean';
 import { upgrade } from './commands/upgrade';
+import { migrate } from './commands/migrate';
 import { UpgradeError } from './error';
 import { logger } from './logger';
 import { upgrades } from './upgrades';
@@ -42,8 +43,9 @@ export async function main({ argv, cwd }) {
       type: 'boolean',
     });
 
+  // $0: the default command
   cli.usage('Usage: $0 [options]').command(
-    '$0',
+    ['upgrade', '$0'],
     'upgrade your project',
     {},
     run(async (args) => {
@@ -57,6 +59,33 @@ export async function main({ argv, cwd }) {
     })
   );
 
+  cli.command(
+    'migrate <migration>',
+    'run a Carbon migration on your source files',
+    async (cli) => {
+      cli.command(
+        'list',
+        'list all migrations',
+        {},
+        run(async (args) => {
+          const { verbose } = args;
+          const options = { cwd: cwd(), verbose, list: true };
+          await migrate(options, upgrades);
+        }, true)
+      );
+    },
+    run(async (args) => {
+      const { verbose, migration, write } = args;
+      const options = {
+        cwd: cwd(),
+        verbose,
+        write,
+        migration,
+      };
+      await migrate(options, upgrades);
+    })
+  );
+
   cli.strict().parse(argv.slice(2));
 }
 
@@ -64,7 +93,7 @@ export async function main({ argv, cwd }) {
  * @param {Function} command
  * @returns {Function}
  */
-function run(command) {
+function run(command, ignoreSafetyChecks = false) {
   return async (args) => {
     if (args.verbose === true) {
       logger.setLevel('verbose');
@@ -88,7 +117,7 @@ function run(command) {
       }
     }
 
-    if (!clean && args.force !== true) {
+    if (!ignoreSafetyChecks && !clean && args.force !== true) {
       logger.log(
         chalk.yellow('[warning]'),
         'It appears that you have untracked changes in your project. Before we continue, please stash or commit your changes to git.'
@@ -101,7 +130,7 @@ function run(command) {
 
     try {
       await command(args);
-      logger.log('Done! ✨');
+      logger.verbose('Done! ✨');
     } catch (error) {
       if (error instanceof UpgradeError) {
         logger.error(error.message);

@@ -94,7 +94,7 @@
 
   .#{$prefix}--toolbar-search-container-expandable.#{$prefix}--search--disabled
     .#{$prefix}--search-magnifier-icon {
-    background-color: $layer-disabled;
+    background-color: $layer;
     cursor: not-allowed;
     transition: background-color none;
   }
@@ -453,6 +453,7 @@
   .#{$prefix}--table-toolbar--small,
   .#{$prefix}--table-toolbar--sm {
     height: rem(32px);
+    min-height: rem(32px);
 
     .#{$prefix}--toolbar-search-container-expandable,
     .#{$prefix}--toolbar-search-container-persistent {
@@ -536,6 +537,17 @@
 
       background-color: transparent;
     }
+
+    .#{$prefix}--overflow-menu.#{$prefix}--toolbar-action {
+      width: rem(32px);
+      //:after element is 2rem but w/o this trigger button is for some reason 28px
+      min-width: rem(32px);
+      height: rem(32px);
+    }
+
+    .#{$prefix}--toolbar-content {
+      height: rem(32px);
+    }
   }
 
   .#{$prefix}--search--disabled .#{$prefix}--search-magnifier-icon:hover {
@@ -589,6 +601,12 @@
     ~ .#{$prefix}--btn {
     overflow: hidden;
     height: rem(32px);
+  }
+
+  // V11: remove --small selector block
+  .#{$prefix}--table-toolbar--small .#{$prefix}--batch-summary,
+  .#{$prefix}--table-toolbar--sm .#{$prefix}--batch-summary {
+    min-height: 2rem;
   }
 }
 

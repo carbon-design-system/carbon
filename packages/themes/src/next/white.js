@@ -8,6 +8,7 @@
 import {
   // Blue
   blue20,
+  blue30,
   blue40,
   blue60,
   blue70,
@@ -37,8 +38,10 @@ import {
   // Constants
   white,
   whiteHover,
+  gray80Hover,
+  gray10Hover,
 } from '@carbon/colors';
-import { adjustLightness, adjustAlpha } from '../tools';
+import { adjustAlpha } from '../tools';
 
 // Background
 export const background = white;
@@ -46,67 +49,63 @@ export const backgroundInverse = gray80;
 export const backgroundBrand = blue60;
 export const backgroundActive = gray30;
 export const backgroundHover = whiteHover;
-export const backgroundInverseHover = adjustLightness(backgroundInverse, 6);
+export const backgroundInverseHover = gray80Hover;
 export const backgroundSelected = gray20;
-export const backgroundSelectedHover = adjustLightness(backgroundSelected, -6);
+export const backgroundSelectedHover = gray20Hover;
 
 // Layer
 // layer-01
 export const layer01 = gray10;
 export const layerActive01 = gray30;
-export const layerHover01 = adjustLightness(layer01, -5);
+export const layerHover01 = gray10Hover;
 export const layerSelected01 = gray20;
 export const layerSelectedHover01 = gray20Hover;
 
 // layer-02
 export const layer02 = white;
 export const layerActive02 = gray30;
-export const layerHover02 = adjustLightness(layer01, -5);
+export const layerHover02 = whiteHover;
 export const layerSelected02 = gray20;
 export const layerSelectedHover02 = gray20Hover;
 
 // layer-03
 export const layer03 = gray10;
 export const layerActive03 = gray30;
-export const layerHover03 = adjustLightness(layer01, -5);
+export const layerHover03 = gray10Hover;
 export const layerSelected03 = gray20;
 export const layerSelectedHover03 = gray20Hover;
 
 // layer
-export const layerDisabled = gray10;
 export const layerSelectedInverse = gray100;
 export const layerSelectedDisabled = gray50;
 
 // layer-accent-01
 export const layerAccent01 = gray20;
 export const layerAccentActive01 = gray40;
-export const layerAccentHover01 = adjustLightness(layerAccent01, -6);
+export const layerAccentHover01 = gray20Hover;
 
 // layer-accent-02
 export const layerAccent02 = gray20;
 export const layerAccentActive02 = gray40;
-export const layerAccentHover02 = adjustLightness(layerAccent01, -6);
+export const layerAccentHover02 = gray20Hover;
 
 // layer-accent-03
 export const layerAccent03 = gray20;
 export const layerAccentActive03 = gray40;
-export const layerAccentHover03 = adjustLightness(layerAccent01, -6);
+export const layerAccentHover03 = gray20Hover;
 
 // Field
 // field-01
 export const field01 = gray10;
-export const fieldHover01 = adjustLightness(field01, -5);
+export const fieldHover01 = gray10Hover;
 
 // field-02
 export const field02 = white;
-export const fieldHover02 = adjustLightness(field01, -5);
+export const fieldHover02 = whiteHover;
 
 // field-03
 export const field03 = gray10;
-export const fieldHover03 = adjustLightness(field01, -5);
-
-// field
-export const fieldDisabled = gray10;
+export const fieldHover03 = gray10Hover;
 
 // Border
 // border-subtle-00
@@ -155,6 +154,8 @@ export const linkPrimaryHover = blue70;
 export const linkSecondary = blue70;
 export const linkInverse = blue40;
 export const linkVisited = purple60;
+export const linkInverseActive = gray10;
+export const linkInverseHover = blue30;
 
 // Icon
 export const iconPrimary = gray100;
@@ -162,7 +163,7 @@ export const iconSecondary = gray70;
 export const iconInverse = white;
 export const iconOnColor = white;
 export const iconOnColorDisabled = gray50;
-export const iconDisabled = gray30;
+export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
 
 // Support
 export const supportError = red60;

@@ -90,7 +90,7 @@
     &:disabled,
     &:hover:disabled {
       border-bottom-color: $border-disabled;
-      background-color: $field-disabled;
+      background-color: $field;
       color: $text-disabled;
       cursor: not-allowed;
     }
@@ -221,7 +221,7 @@
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled]:hover {
-    background-color: $field-disabled;
+    background-color: $field;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select__arrow {
