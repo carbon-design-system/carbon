@@ -53,7 +53,7 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "all-contributors-cli": "^6.19.0",
-    "cross-env": "^5.2.0",
+    "cross-env": "^7.0.0",
     "cross-spawn": "^6.0.5",
     "doctoc": "^1.4.0",
     "eslint": "^7.28.0",
