@@ -185,13 +185,16 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--bottom-left .#{$prefix}--popover-content {
     bottom: 0;
     left: 0;
-    transform: translate(0, calc(100% + $popover-offset));
+    transform: translate(
+      calc(-1 * $popover-offset),
+      calc(100% + $popover-offset)
+    );
   }
 
   .#{$prefix}--popover--bottom-right .#{$prefix}--popover-content {
     right: 0;
     bottom: 0;
-    transform: translate(0, calc(100% + $popover-offset));
+    transform: translate($popover-offset, calc(100% + $popover-offset));
   }
 
   // Popover hover area placement
@@ -231,13 +234,16 @@ $popover-caret-height: custom-property.get-var(
   .#{$prefix}--popover--top-left .#{$prefix}--popover-content {
     top: 0;
     left: 0;
-    transform: translate(0, calc(-100% - $popover-offset));
+    transform: translate(
+      calc(-1 * $popover-offset),
+      calc(-100% - $popover-offset)
+    );
   }
 
   .#{$prefix}--popover--top-right .#{$prefix}--popover-content {
     top: 0;
     right: 0;
-    transform: translate(0, calc(-100% - $popover-offset));
+    transform: translate($popover-offset, calc(-100% - $popover-offset));
   }
 
   // Popover hover area placement
