@@ -31,7 +31,7 @@
     "@carbon/cli-reporter": "^10.5.0",
     "@carbon/icon-helpers": "^10.26.0",
     "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-replace": "^2.4.2",
+    "@rollup/plugin-replace": "^3.0.0",
     "browserslist-config-carbon": "^10.6.1",
     "change-case": "^4.1.1",
     "core-js": "^3.16.0",
