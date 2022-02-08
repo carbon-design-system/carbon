@@ -26,6 +26,11 @@ const TextAreaProps = () => ({
     'A valid value is required'
   ),
   helperText: text('Helper text (helperText)', 'Optional helper text.'),
+  enableCounter: boolean(
+    'Enable character counter/limit (enableCounter)',
+    false
+  ),
+  maxCount: number('Character limit (maxCount)', undefined),
   id: 'test2',
   cols: number('Columns (columns)', 50),
   rows: number('Rows (rows)', 4),

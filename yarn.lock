@@ -1800,7 +1800,7 @@ __metadata:
     "@octokit/plugin-throttling": ^2.6.0
     "@octokit/rest": ^16.28.1
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     chalk: ^4.1.1
     change-case: ^4.1.2
@@ -1907,7 +1907,7 @@ __metadata:
     "@carbon/cli-reporter": ^10.5.0
     "@carbon/icon-helpers": ^10.26.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-replace": ^2.4.2
+    "@rollup/plugin-replace": ^3.0.0
     browserslist-config-carbon: ^10.6.1
     change-case: ^4.1.1
     core-js: ^3.16.0
@@ -2075,7 +2075,7 @@ __metadata:
     "@carbon/telemetry": 0.0.0-alpha.6
     "@carbon/themes": ^10.50.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     "@storybook/addon-a11y": ^6.4.9
     "@storybook/addon-actions": ^6.4.9
@@ -2138,7 +2138,7 @@ __metadata:
     "@skpm/builder": ^0.8.0
     color-string: ^1.5.3
     core-js: ^3.16.0
-    cross-env: ^5.2.0
+    cross-env: ^7.0.0
     regenerator-runtime: ^0.13.7
     rimraf: ^3.0.0
     skpm: ^1.2.0
@@ -4994,9 +4994,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-commonjs@npm:^18.0.0":
-  version: 18.0.0
-  resolution: "@rollup/plugin-commonjs@npm:18.0.0"
+"@rollup/plugin-commonjs@npm:^21.0.0":
+  version: 21.0.1
+  resolution: "@rollup/plugin-commonjs@npm:21.0.1"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     commondir: ^1.0.1
@@ -5006,8 +5006,8 @@ __metadata:
     magic-string: ^0.25.7
     resolve: ^1.17.0
   peerDependencies:
-    rollup: ^2.30.0
-  checksum: 1e8d2589aba7593e21bc440e48add955e26e60320abbc9255cdc6c57437312faccc47965f459c8c844728765077b58526e2959a8dc68657453944f63034a4155
+    rollup: ^2.38.3
+  checksum: 3e56be58c72d655face6f361f85923ddcc3cc07760b5a3a91cfc728115dfed358fc595781148c512d53a03be8c703133379f228e78fd2aed8655fae9d83800b6
   languageName: node
   linkType: hard
 
@@ -5043,7 +5043,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-replace@npm:^2.4.1, @rollup/plugin-replace@npm:^2.4.2":
+"@rollup/plugin-replace@npm:^2.4.1":
   version: 2.4.2
   resolution: "@rollup/plugin-replace@npm:2.4.2"
   dependencies:
@@ -5052,6 +5052,18 @@ __metadata:
   peerDependencies:
     rollup: ^1.20.0 || ^2.0.0
   checksum: b2f1618ee5526d288e2f8ae328dcb326e20e8dc8bd1f60d3e14d6708a5832e4aa44811f7d493f4aed2deeadca86e3b6b0503cd39bf50cfb4b595bb9da027fad0
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-replace@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "@rollup/plugin-replace@npm:3.0.1"
+  dependencies:
+    "@rollup/pluginutils": ^3.1.0
+    magic-string: ^0.25.7
+  peerDependencies:
+    rollup: ^1.20.0 || ^2.0.0
+  checksum: 0cd97439783d3d23ba4f0c74146f5cdf0965d57977cc8227a77dfdd9604930905619e405c961ae146a0e68c8239b9a3a817704fa90f7d62d5087ed84d8c33ead
   languageName: node
   linkType: hard
 
@@ -11654,9 +11666,9 @@ __metadata:
     "@percy/cypress": ^3.1.1
     "@percy/storybook": ^4.1.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^2.4.2
+    "@rollup/plugin-replace": ^3.0.0
     "@storybook/addon-actions": ^6.4.9
     "@storybook/addon-docs": ^6.4.9
     "@storybook/addon-knobs": ^6.4.0
@@ -11683,7 +11695,7 @@ __metadata:
     cli-table: ^0.3.0
     copy-to-clipboard: ^3.3.1
     core-js: ^3.16.0
-    cross-env: ^5.2.0
+    cross-env: ^7.0.0
     css-loader: ^6.5.1
     cypress: ^9.2.0
     cypress-real-events: ^1.6.0
@@ -11783,9 +11795,9 @@ __metadata:
     "@carbon/test-utils": ^10.21.0
     "@frctl/fractal": ^1.1.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^18.0.0
+    "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^2.4.2
+    "@rollup/plugin-replace": ^3.0.0
     "@rollup/plugin-virtual": ^2.0.3
     adaro: 1.0.4
     autoprefixer: ^9.7.4
@@ -11802,10 +11814,10 @@ __metadata:
     classnames: ^2.2.0
     commander: ^2.13.0
     core-js: ^3.16.0
-    cross-env: ^5.2.0
+    cross-env: ^7.0.0
     css-loader: ^3.4.2
     custom-event: ^1.0.0
-    del: ~2.2.0
+    del: ~6.0.0
     diff: ^5.0.0
     express-handlebars: ^5.2.1
     fancy-log: ^1.3.0
@@ -11916,8 +11928,8 @@ __metadata:
     "@testing-library/react": ^12.1.2
     "@testing-library/user-event": ^13.5.0
     all-contributors-cli: ^6.19.0
-    cross-env: ^5.2.0
-    cross-spawn: ^6.0.5
+    cross-env: ^7.0.0
+    cross-spawn: ^7.0.0
     doctoc: ^1.4.0
     eslint: ^7.28.0
     fs-extra: ^10.0.0
@@ -13682,15 +13694,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-env@npm:^5.2.0":
-  version: 5.2.1
-  resolution: "cross-env@npm:5.2.1"
+"cross-env@npm:^7.0.0":
+  version: 7.0.3
+  resolution: "cross-env@npm:7.0.3"
   dependencies:
-    cross-spawn: ^6.0.5
+    cross-spawn: ^7.0.1
   bin:
-    cross-env: dist/bin/cross-env.js
-    cross-env-shell: dist/bin/cross-env-shell.js
-  checksum: 364f72482f0d6b65c6d560b942ce9da7e71ea66ec2eaa8226f7127b49094355277aadd23e6ff922c1d154a6ab1ad828ebc4ec8af9b44a39936d9013fb23ae4df
+    cross-env: src/bin/cross-env.js
+    cross-env-shell: src/bin/cross-env-shell.js
+  checksum: 26f2f3ea2ab32617f57effb70d329c2070d2f5630adc800985d8b30b56e8bf7f5f439dd3a0358b79cee6f930afc23cf8e23515f17ccfb30092c6b62c6b630a79
   languageName: node
   linkType: hard
 
@@ -13713,7 +13725,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:7.0.3, cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
+"cross-spawn@npm:7.0.3, cross-spawn@npm:^7.0.0, cross-spawn@npm:^7.0.1, cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
   version: 7.0.3
   resolution: "cross-spawn@npm:7.0.3"
   dependencies:
@@ -13745,7 +13757,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^6.0.0, cross-spawn@npm:^6.0.5":
+"cross-spawn@npm:^6.0.0":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
   dependencies:
@@ -14738,7 +14750,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"del@npm:^6.0.0":
+"del@npm:^6.0.0, del@npm:~6.0.0":
   version: 6.0.0
   resolution: "del@npm:6.0.0"
   dependencies:
@@ -14751,21 +14763,6 @@ __metadata:
     rimraf: ^3.0.2
     slash: ^3.0.0
   checksum: 5742891627e91aaf62385714025233f4664da28bc55b6ab825649dcdea4691fed3cf329a2b1913fd2d2612e693e99e08a03c84cac7f36ef54bacac9390520192
-  languageName: node
-  linkType: hard
-
-"del@npm:~2.2.0":
-  version: 2.2.2
-  resolution: "del@npm:2.2.2"
-  dependencies:
-    globby: ^5.0.0
-    is-path-cwd: ^1.0.0
-    is-path-in-cwd: ^1.0.0
-    object-assign: ^4.0.1
-    pify: ^2.0.0
-    pinkie-promise: ^2.0.0
-    rimraf: ^2.2.8
-  checksum: 053ed28031653f92365b6405a2154d1b415d2ab2f809532c64cc2de1640a694cbcce06e162d4b61d4299e303ef0301eba70dc6c5bdaca9bbe8dc0790758caf68
   languageName: node
   linkType: hard
 
@@ -19344,20 +19341,6 @@ __metadata:
     merge2: ^1.3.0
     slash: ^3.0.0
   checksum: d3e02d5e459e02ffa578b45f040381c33e3c0538ed99b958f0809230c423337999867d7b0dbf752ce93c46157d3bbf154d3fff988a93ccaeb627df8e1841775b
-  languageName: node
-  linkType: hard
-
-"globby@npm:^5.0.0":
-  version: 5.0.0
-  resolution: "globby@npm:5.0.0"
-  dependencies:
-    array-union: ^1.0.1
-    arrify: ^1.0.0
-    glob: ^7.0.3
-    object-assign: ^4.0.1
-    pify: ^2.0.0
-    pinkie-promise: ^2.0.0
-  checksum: c8d7fb42aa55da87c13ed1f7e0f815c566ceb1bb05257ae1349f882d7a10f3f41d1fbe5604148d6c864df3a65d0b9c9e20cbae5f22b6abc8a4924f45bdad8d8f
   languageName: node
   linkType: hard
 
