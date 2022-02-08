@@ -36,7 +36,7 @@
     "watch": "yarn build --watch"
   },
   "devDependencies": {
-    "chalk": "^4.1.1",
+    "chalk": "^5.0.0",
     "change-case": "^4.1.2",
     "esbuild": "^0.14.10",
     "execa": "^5.1.1",
