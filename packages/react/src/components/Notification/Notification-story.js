@@ -18,7 +18,7 @@ import {
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
-} from '../Notification';
+} from './Notification';
 import mdx from './Notification.mdx';
 
 const kinds = {

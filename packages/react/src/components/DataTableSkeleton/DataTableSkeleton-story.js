@@ -36,8 +36,6 @@ export const Skeleton = () => {
   );
 };
 
-Skeleton.storyName = 'default';
-
 Skeleton.parameters = {
   info: {
     text: `
