@@ -182,17 +182,6 @@ Map {
   },
   "Button" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "dangerDescription": "danger",
-      "disabled": false,
-      "isExpressive": false,
-      "kind": "primary",
-      "size": "default",
-      "tabIndex": 0,
-      "tooltipAlignment": "center",
-      "tooltipPosition": "top",
-      "type": "button",
-    },
     "propTypes": Object {
       "as": Object {
         "args": Array [
@@ -248,7 +237,6 @@ Map {
             "tertiary",
           ],
         ],
-        "isRequired": true,
         "type": "oneOf",
       },
       "onBlur": Object {
@@ -6868,10 +6856,12 @@ Map {
     "defaultProps": Object {
       "cols": 50,
       "disabled": false,
+      "enableCounter": false,
       "helperText": "",
       "invalid": false,
       "invalidText": "",
       "light": false,
+      "maxCount": undefined,
       "onChange": [Function],
       "onClick": [Function],
       "placeholder": "",
@@ -6900,6 +6890,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "enableCounter": Object {
+        "type": "bool",
+      },
       "helperText": Object {
         "type": "node",
       },
@@ -6921,6 +6914,9 @@ Map {
       },
       "light": Object {
         "type": "bool",
+      },
+      "maxCount": Object {
+        "type": "number",
       },
       "onChange": Object {
         "type": "func",
@@ -7204,19 +7200,6 @@ Map {
         },
       },
       "render": [Function],
-    },
-    "defaultProps": Object {
-      "disabled": false,
-      "helperText": "",
-      "inline": false,
-      "invalid": false,
-      "invalidText": "",
-      "light": false,
-      "onChange": [Function],
-      "onClick": [Function],
-      "type": "text",
-      "warn": false,
-      "warnText": "",
     },
     "propTypes": Object {
       "className": Object {
