@@ -11917,7 +11917,7 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     all-contributors-cli: ^6.19.0
     cross-env: ^7.0.0
-    cross-spawn: ^6.0.5
+    cross-spawn: ^7.0.0
     doctoc: ^1.4.0
     eslint: ^7.28.0
     fs-extra: ^10.0.0
@@ -13745,7 +13745,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^6.0.0, cross-spawn@npm:^6.0.5":
+"cross-spawn@npm:^6.0.0":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
   dependencies:
