@@ -114,7 +114,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
-    background-color: $field-02;
+    background-color: $field;
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -155,21 +155,21 @@ $list-box-menu-width: rem(300px);
   // V11: Possibly deprecate
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
-    background-color: $field-02;
+    background-color: $field;
 
     &:hover {
-      background-color: $layer-hover-02;
+      background-color: $layer-hover;
     }
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
-    background: $field-02;
+    background: $field;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-02;
+    border-top-color: $border-subtle;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
@@ -183,7 +183,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
-    background-color: $field-02;
+    background-color: $field;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -561,7 +561,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
-    background-color: $layer-hover-02;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
@@ -580,7 +580,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
-    background-color: $layer-selected-02;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box--disabled
@@ -735,8 +735,8 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
-    border-bottom-color: $layer-selected-02;
-    background-color: $layer-selected-02;
+    border-bottom-color: $layer-selected;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box__menu-item--active:hover,
