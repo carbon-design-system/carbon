@@ -12,47 +12,47 @@
 /// @group @carbon/type
 $font-families: (
   'mono':
-    unquote(
+    string.unquote(
       "'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace"
     ),
   'sans':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'sans-condensed':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans Condensed', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'sans-arabic':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'sans-devanagari':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans Devanagari', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'sans-hebrew':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans Hebrew', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'sans-jp':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans JP', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'sans-kr':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans KR', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'sans-thai-looped':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans Thai Looped', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'sans-thai':
-    unquote(
+    string.unquote(
       "'IBM Plex Sans Thai', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
   'serif':
-    unquote(
+    string.unquote(
       "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif"
     ),
 ) !default;
