@@ -10,10 +10,10 @@
 @forward '@carbon/grid'
   show css-grid,
        subgrid,
+       flex-grid,
        $grid-gutter,
        $grid-gutter-condensed,
-       $grid-breakpoints,
-       flex-grid
+       $grid-breakpoints
   with (
     $prefix: config.$prefix
   );

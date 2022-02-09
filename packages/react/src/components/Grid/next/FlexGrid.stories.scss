@@ -1,6 +1,4 @@
-@use '../../../../../grid/scss/modules/flex-grid';
-
-@import '~carbon-components/scss/globals/scss/colors';
+@use '@carbon/styles/scss/colors' as *;
 
 // base of project work area
 #root > div:first-child > div:first-child {

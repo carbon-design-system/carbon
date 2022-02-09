@@ -338,7 +338,7 @@
 /// @param {Number} $condensed-gutter [$carbon--grid-gutter--condensed] - The condensed mode gutter
 /// @access public
 /// @group @carbon/grid
-@mixin carbon--flex-grid(
+@mixin flex-grid(
   $breakpoints: $carbon--grid-breakpoints,
   $grid-gutter: $carbon--grid-gutter,
   $condensed-gutter: $carbon--grid-gutter--condensed
