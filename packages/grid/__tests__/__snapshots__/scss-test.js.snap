@@ -3,7 +3,7 @@
 exports[`@carbon/grid Public API 1`] = `
 Array [
   "prefix",
-  "columns",
+  "flex-grid-columns",
   "grid-gutter",
   "grid-gutter--condensed",
   "grid-breakpoints",
