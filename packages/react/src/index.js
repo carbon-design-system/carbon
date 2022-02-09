@@ -230,7 +230,7 @@ export unstable_Menu, {
   MenuRadioGroup as unstable_MenuRadioGroup,
   MenuSelectableItem as unstable_MenuSelectableItem,
 } from './components/Menu';
-export { OverflowMenu as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
+export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
