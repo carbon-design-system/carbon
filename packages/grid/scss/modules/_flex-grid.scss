@@ -16,35 +16,6 @@
 @use 'config' as *;
 @use 'breakpoint' as *;
 
-@if $flex-grid-columns == 12 {
-  $grid-breakpoints: map-merge(
-    $grid-breakpoints,
-    (
-      lg:
-        map-merge(
-          map-get($grid-breakpoints, lg),
-          (
-            columns: 12,
-          )
-        ),
-      xlg:
-        map-merge(
-          map-get($grid-breakpoints, xlg),
-          (
-            columns: 12,
-          )
-        ),
-      max:
-        map-merge(
-          map-get($grid-breakpoints, max),
-          (
-            columns: 12,
-          )
-        ),
-    )
-  );
-}
-
 // -----------------------------------------------------------------------------
 // Columns
 // -----------------------------------------------------------------------------
@@ -369,4 +340,35 @@
   @include -hang($grid-gutter);
 }
 
-@include flex-grid();
+@if $flex-grid-columns == 12 {
+  $flex-12-column-grid: map-merge(
+    $grid-breakpoints,
+    (
+      lg:
+        map-merge(
+          map-get($grid-breakpoints, lg),
+          (
+            columns: 12,
+          )
+        ),
+      xlg:
+        map-merge(
+          map-get($grid-breakpoints, xlg),
+          (
+            columns: 12,
+          )
+        ),
+      max:
+        map-merge(
+          map-get($grid-breakpoints, max),
+          (
+            columns: 12,
+          )
+        ),
+    )
+  );
+
+  @include flex-grid($breakpoints: $flex-12-column-grid);
+} @else {
+  @include flex-grid();
+}

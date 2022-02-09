@@ -25,60 +25,7 @@ function DemoContent({ children }) {
     </div>
   );
 }
-export const Test = () => (
-  <FlexGrid>
-    <Row>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-      <Column>
-        <DemoContent>test</DemoContent>
-      </Column>
-    </Row>
-  </FlexGrid>
-);
+
 export const AutoColumns = () => (
   <FlexGrid>
     <Row>
@@ -105,21 +52,21 @@ export const ResponsiveGrid = () => (
         <DemoContent>
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
-          <p>Large: Span 6 of 12</p>
+          <p>Large: Span 6 of 16</p>
         </DemoContent>
       </Column>
       <Column sm={2} md={2} lg={3}>
         <DemoContent>
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 2 of 8</p>
-          <p>Large: Span 3 of 12</p>
+          <p>Large: Span 3 of 16</p>
         </DemoContent>
       </Column>
       <Column sm={0} md={2} lg={3}>
         <DemoContent>
           <p>Small: Span 0 of 4</p>
           <p>Medium: Span 2 of 8</p>
-          <p>Large: Span 3 of 12</p>
+          <p>Large: Span 3 of 16</p>
         </DemoContent>
       </Column>
     </Row>
