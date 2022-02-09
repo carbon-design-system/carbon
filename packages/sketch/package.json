@@ -40,7 +40,7 @@
     "skpm": "^1.2.0"
   },
   "devDependencies": {
-    "cross-env": "^5.2.0",
+    "cross-env": "^7.0.0",
     "rimraf": "^3.0.0"
   },
   "skpm": {
