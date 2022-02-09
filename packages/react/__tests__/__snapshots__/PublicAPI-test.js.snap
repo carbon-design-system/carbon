@@ -4519,85 +4519,10 @@ Map {
     },
   },
   "OverflowMenu" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "displayName": "ClassWrapper(OverflowMenu)",
   },
   "OverflowMenuItem" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-      "hasDivider": false,
-      "isDelete": false,
-      "itemText": "Provide itemText",
-      "onClick": [Function],
-      "onKeyDown": [Function],
-    },
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "closeMenu": Object {
-        "type": "func",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "handleOverflowMenuItemFocus": Object {
-        "type": "func",
-      },
-      "hasDivider": Object {
-        "type": "bool",
-      },
-      "href": Object {
-        "type": "string",
-      },
-      "index": Object {
-        "type": "number",
-      },
-      "isDelete": Object {
-        "type": "bool",
-      },
-      "itemText": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "onBlur": Object {
-        "type": "func",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "onFocus": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "onKeyUp": Object {
-        "type": "func",
-      },
-      "onMouseDown": Object {
-        "type": "func",
-      },
-      "onMouseEnter": Object {
-        "type": "func",
-      },
-      "onMouseLeave": Object {
-        "type": "func",
-      },
-      "onMouseUp": Object {
-        "type": "func",
-      },
-      "primaryFocus": [Function],
-      "requireTitle": Object {
-        "type": "bool",
-      },
-      "title": Object {
-        "type": "string",
-      },
-      "wrapperClassName": Object {
-        "type": "string",
-      },
-    },
+    "displayName": "ClassWrapper(OverflowMenuItem)",
   },
   "Pagination" => Object {
     "defaultProps": Object {
@@ -8241,6 +8166,36 @@ Map {
       },
       "onChange": Object {
         "type": "func",
+      },
+    },
+  },
+  "unstable_OverflowMenuV2" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
