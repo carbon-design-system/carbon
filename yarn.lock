@@ -1907,7 +1907,7 @@ __metadata:
     "@carbon/cli-reporter": ^10.5.0
     "@carbon/icon-helpers": ^10.26.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-replace": ^2.4.2
+    "@rollup/plugin-replace": ^3.0.0
     browserslist-config-carbon: ^10.6.1
     change-case: ^4.1.1
     core-js: ^3.16.0
@@ -5043,7 +5043,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-replace@npm:^2.4.1, @rollup/plugin-replace@npm:^2.4.2":
+"@rollup/plugin-replace@npm:^2.4.1":
   version: 2.4.2
   resolution: "@rollup/plugin-replace@npm:2.4.2"
   dependencies:
@@ -5052,6 +5052,18 @@ __metadata:
   peerDependencies:
     rollup: ^1.20.0 || ^2.0.0
   checksum: b2f1618ee5526d288e2f8ae328dcb326e20e8dc8bd1f60d3e14d6708a5832e4aa44811f7d493f4aed2deeadca86e3b6b0503cd39bf50cfb4b595bb9da027fad0
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-replace@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "@rollup/plugin-replace@npm:3.0.1"
+  dependencies:
+    "@rollup/pluginutils": ^3.1.0
+    magic-string: ^0.25.7
+  peerDependencies:
+    rollup: ^1.20.0 || ^2.0.0
+  checksum: 0cd97439783d3d23ba4f0c74146f5cdf0965d57977cc8227a77dfdd9604930905619e405c961ae146a0e68c8239b9a3a817704fa90f7d62d5087ed84d8c33ead
   languageName: node
   linkType: hard
 
@@ -11656,7 +11668,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^2.4.2
+    "@rollup/plugin-replace": ^3.0.0
     "@storybook/addon-actions": ^6.4.9
     "@storybook/addon-docs": ^6.4.9
     "@storybook/addon-knobs": ^6.4.0
@@ -11785,7 +11797,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^2.4.2
+    "@rollup/plugin-replace": ^3.0.0
     "@rollup/plugin-virtual": ^2.0.3
     adaro: 1.0.4
     autoprefixer: ^9.7.4
@@ -11917,7 +11929,7 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     all-contributors-cli: ^6.19.0
     cross-env: ^7.0.0
-    cross-spawn: ^6.0.5
+    cross-spawn: ^7.0.0
     doctoc: ^1.4.0
     eslint: ^7.28.0
     fs-extra: ^10.0.0
@@ -13745,7 +13757,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^6.0.0, cross-spawn@npm:^6.0.5":
+"cross-spawn@npm:^6.0.0":
   version: 6.0.5
   resolution: "cross-spawn@npm:6.0.5"
   dependencies:
