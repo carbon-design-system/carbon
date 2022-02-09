@@ -12,7 +12,8 @@
        subgrid,
        $grid-gutter,
        $grid-gutter-condensed,
-       $grid-breakpoints
+       $grid-breakpoints,
+       flex-grid
   with (
     $prefix: config.$prefix
   );

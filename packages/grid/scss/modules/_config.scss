@@ -10,3 +10,9 @@
 /// @access public
 /// @group @carbon/grid
 $prefix: 'bx' !default;
+
+/// Total columns
+/// @type Number
+/// @access public
+/// @group @carbon/grid
+$columns: 16 !default;

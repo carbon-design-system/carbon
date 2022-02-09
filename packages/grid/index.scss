@@ -7,6 +7,8 @@
 
 @forward 'scss/modules/config' with (
   $prefix: 'bx' !default,
+  $columns: 16 !default,
 );
 @forward 'scss/modules/breakpoint';
 @forward 'scss/modules/css-grid';
+@forward 'scss/modules/flex-grid';
