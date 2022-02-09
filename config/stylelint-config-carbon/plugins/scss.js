@@ -124,10 +124,10 @@ module.exports = {
     {
       files: [
         './packages/components/**/*.scss',
-        './packages/type/**/*.scss',
+        './packages/grid/scss/*.scss',
+        './packages/layout/scss/*.scss',
         './packages/motion/**/*.scss',
-        './packages/layout/**/*.scss',
-        './packages/grid/**/*.scss',
+        './packages/type/scss/*.scss',
         './packages/import-once/**/*.scss',
       ],
       rules: {
