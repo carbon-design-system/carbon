@@ -127,7 +127,7 @@ export default {
 
 export const Default = () => (
   <Form>
-    <Stack gap={6}>
+    <Stack gap={7}>
       <FormGroup {...fieldsetCheckboxProps()}>
         <Checkbox defaultChecked {...checkboxEvents} id="checkbox-0" />
         <Checkbox {...checkboxEvents} id="checkbox-1" />
