@@ -32,7 +32,7 @@ function Search({
   placeholder = '',
   renderIcon,
   role = 'searchbox',
-  size = 'lg',
+  size = 'md',
   type = 'text',
   value,
   ...rest
