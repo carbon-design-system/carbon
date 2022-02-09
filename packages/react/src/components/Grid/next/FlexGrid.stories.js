@@ -25,7 +25,60 @@ function DemoContent({ children }) {
     </div>
   );
 }
-
+export const Test = () => (
+  <FlexGrid>
+    <Row>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>test</DemoContent>
+      </Column>
+    </Row>
+  </FlexGrid>
+);
 export const AutoColumns = () => (
   <FlexGrid>
     <Row>

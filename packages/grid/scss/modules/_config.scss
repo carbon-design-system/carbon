@@ -11,8 +11,8 @@
 /// @group @carbon/grid
 $prefix: 'bx' !default;
 
-/// Total columns
+/// Total columns used in the flex grid
 /// @type Number
 /// @access public
 /// @group @carbon/grid
-$columns: 16 !default;
+$flex-grid-columns: 16 !default;

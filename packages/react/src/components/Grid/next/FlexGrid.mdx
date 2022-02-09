@@ -31,12 +31,12 @@ import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 Carbon's grid components help developers use the
 [2x Grid](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). The
-project provides `Grid`, `Row`, and `Column` components which can be used to
+project provides `FlexGrid`, `Row`, and `Column` components which can be used to
 build a variety of layouts. You can import these components from
-`carbon-components-react`:
+`@carbon/react`:
 
 ```js
-import { Grid, Row, Column } from 'carbon-components-react';
+import { FlexGrid, Row, Column } from '@carbon/react';
 ```
 
 <Preview>
@@ -45,14 +45,14 @@ import { Grid, Row, Column } from 'carbon-components-react';
 
 ## Overview
 
-Every layout starts with the `Grid` component. You can specify a `Grid` at the
-top-level of your project, or at different depths provided that it can span 100%
-width of its container.
+Every layout starts with the `FlexGrid` component. You can specify a `FlexGrid`
+at the top-level of your project, or at different depths provided that it can
+span 100% width of its container.
 
 Next, you will use a combination of `Row` and `Column`. You can have multiple
-`Row` components in a `Grid`, and multiple `Column` components in a `Row`. Each
-`Row` will contain all the `Column` components provided to it, as long as they
-don't span more columns than the total number of columns in the grid.
+`Row` components in a `FlexGrid`, and multiple `Column` components in a `Row`.
+Each `Row` will contain all the `Column` components provided to it, as long as
+they don't span more columns than the total number of columns in the grid.
 
 To specify how many columns the `Column` component should span, you can use the
 `sm`, `md`, `lg`, `xlg`, or `max` props. These props are shorthand versions of
@@ -63,26 +63,21 @@ number `4` to specify that each `Column` component should span 4 columns at that
 breakpoint.
 
 ```js
-import { Grid, Row, Column } from 'carbon-components-react';
+import { FlexGrid, Row, Column } from '@carbon/react';
 
 function MyComponent() {
   return (
-    <Grid>
+    <FlexGrid>
       <Row>
         <Column lg={4}>Span 4 of 12</Column>
         <Column lg={4}>Span 4 of 12</Column>
         <Column lg={4}>Span 4 of 12</Column>
         <Column lg={4}>Span 4 of 12</Column>
       </Row>
-    </Grid>
+    <FlexGrid>
   );
 }
 ```
-
-_Note: by default, `carbon-components` ships with a 12 column grid. You can
-enable a 16 column grid, which will be the default grid in the next major
-version, by using our
-[feature flags in Sass](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/sass.md#feature-flags)._
 
 You can pair up multiple breakpoint props to specify how many columns the
 `Column` component should span at different break points. In the example below,
@@ -98,11 +93,11 @@ we will use the `sm`, `md`, and `lg` prop to specify how many columns the
 There are several
 [grid modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#grid-modes)
 that you can use depending on the layout effect you're looking to achieve. By
-default, `Grid` uses the wide grid mode with a 32px gutter. However, you can use
-the `narrow` or `condensed` props to enable the narrow and condensed grid modes,
-respectively.
+default, `FlexGrid` uses the wide grid mode with a 32px gutter. However, you can
+use the `narrow` or `condensed` props to enable the narrow and condensed grid
+modes, respectively.
 
-The same way that you can pass in `narrow` or `condensed` to the `Grid`
+The same way that you can pass in `narrow` or `condensed` to the `FlexGrid`
 component, you can also pass in `narrow` or `condensed` to a `Row` component to
 enable a certain grid mode but only for a row. This can be useful when you need
 to mix-and-match certain grid modes to achieve a particular layout.
@@ -178,27 +173,27 @@ breakpoint. At the medium breakpoint, it will be offset by two columns.
 
 ### Using the `as` prop
 
-By default, `Grid`, `Row`, and `Column` will render as a `div`. However, you can
-use the `as` prop to change this to another HTML element, or a custom component
-from your project.
+By default, `FlexGrid`, `Row`, and `Column` will render as a `div`. However, you
+can use the `as` prop to change this to another HTML element, or a custom
+component from your project.
 
 In the example below, we use the `as` prop on `Row` to change it from a `div` to
 a `section`. Similarly, we use the `as` prop on `Column` to change it from a
 `div` to an `article`.
 
 ```jsx
-import { Grid, Row, Column } from 'carbon-components-react';
+import { FlexGrid, Row, Column } from '@carbon/react';
 
 function MyComponent() {
   return (
-    <Grid>
+    <FlexGrid>
       <Row as="section">
         <Column as="article">Example content</Column>
         <Column as="article">Example content</Column>
         <Column as="article">Example content</Column>
         <Column as="article">Example content</Column>
       </Row>
-    </Grid>
+    <FlexGrid>
   );
 }
 ```
@@ -207,7 +202,7 @@ You can also provide a custom component to the `as` prop. This custom component
 should accept all props passed to it, like a class name for the column.
 
 ```jsx
-import { Grid, Row, Column } from 'carbon-components-react';
+import { FlexGrid, Row, Column } from '@carbon/react';
 
 function Article({ children, ...rest }) {
   return <article {...rest}>{children}</article>;
@@ -219,14 +214,14 @@ function CustomColumn({ children, ...rest }) {
 
 function MyComponent() {
   return (
-    <Grid>
+    <FlexGrid>
       <Row>
         <CustomColumn>Example content</Column>
         <CustomColumn>Example content</Column>
         <CustomColumn>Example content</Column>
         <CustomColumn>Example content</Column>
       </Row>
-    </Grid>
+    <FlexGrid>
   );
 }
 ```
@@ -245,15 +240,10 @@ at the small breakpoint.
 <Column sm={{ span: 0 }} />
 ```
 
-### Can I nest grid components?
+### Can I nest FlexGrid components?
 
-At the moment, there is no ability to nest grid components. In the future, we
-may take advantage of CSS Grid and
-[subgrid](https://caniuse.com/#feat=css-subgrid) alongside but at the moment we
-are limited in terms of what we can support for nesting.
-
-If you would like to contribute nesting for the grid components available, we
-would love for you to get in touch!
+`FlexGrid` does not support nested grids. For nested grids, use the `Grid`
+(`CSSGrid`) component.
 
 ## Feedback
 

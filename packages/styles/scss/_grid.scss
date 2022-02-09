@@ -15,7 +15,8 @@
        $grid-gutter-condensed,
        $grid-breakpoints
   with (
-    $prefix: config.$prefix
+    $prefix: config.$prefix,
+    $flex-grid-columns: config.$flex-grid-columns,
   );
 
 @use '@carbon/grid';
