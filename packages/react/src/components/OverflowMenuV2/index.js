@@ -18,7 +18,7 @@ const { prefix } = settings;
 
 const defaultSize = 'md';
 
-function OverflowMenu({
+function OverflowMenuV2({
   children,
   renderIcon: IconElement = OverflowMenuVertical16,
   size = defaultSize,
@@ -120,7 +120,7 @@ function OverflowMenu({
   );
 }
 
-OverflowMenu.propTypes = {
+OverflowMenuV2.propTypes = {
   /**
    * Specify the children of the OverflowMenu
    */
@@ -137,4 +137,4 @@ OverflowMenu.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
-export { OverflowMenu };
+export { OverflowMenuV2 };

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { OverflowMenu } from '.';
+import { OverflowMenuV2 as OverflowMenu } from '.';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
 import { mount } from 'enzyme';

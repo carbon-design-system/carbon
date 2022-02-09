@@ -212,6 +212,7 @@ describe('Carbon Components React', () => {
         "unstable_MenuItem",
         "unstable_MenuRadioGroup",
         "unstable_MenuSelectableItem",
+        "unstable_OverflowMenuV2",
         "unstable_PageSelector",
         "unstable_Pagination",
         "unstable_Popover",

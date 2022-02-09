@@ -11,7 +11,7 @@ import { ArrowsVertical16 } from '@carbon/icons-react';
 import Menu from '../../Menu';
 import { StoryFrame, buildMenu } from '../../Menu/_storybook-utils';
 
-import { OverflowMenu as OverflowMenuV2 } from '..';
+import { OverflowMenuV2 } from '..';
 
 export default {
   title: 'Experimental/unstable_Menu/OverflowMenuV2',
