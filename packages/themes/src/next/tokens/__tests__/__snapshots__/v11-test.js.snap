@@ -97,8 +97,10 @@ Array [
   "link-primary",
   "link-primary-hover",
   "link-secondary",
-  "link-inverse",
   "link-visited",
+  "link-inverse",
+  "link-inverse-active",
+  "link-inverse-hover",
 ]
 `;
 
@@ -207,8 +209,10 @@ Array [
   "link-primary",
   "link-primary-hover",
   "link-secondary",
-  "link-inverse",
   "link-visited",
+  "link-inverse",
+  "link-inverse-active",
+  "link-inverse-hover",
   "icon-primary",
   "icon-secondary",
   "icon-inverse",

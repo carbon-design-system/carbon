@@ -102,4 +102,10 @@
       color: transparent;
     }
   }
+
+  .#{$prefix}--text-area__label-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+  }
 }
