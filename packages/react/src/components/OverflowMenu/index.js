@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import OverflowMenu from './OverflowMenu';
+import { OverflowMenu } from './OverflowMenu';
 import { createClassWrapper } from '../../internal/createClassWrapper';
 
 export default createClassWrapper(OverflowMenu);
