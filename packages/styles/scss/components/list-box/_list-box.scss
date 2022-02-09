@@ -580,8 +580,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
-    // To Do: What should this variable be?
-    // background-color: $selected-light-ui;
+    background-color: $layer-selected-02;
   }
 
   .#{$prefix}--list-box--disabled
@@ -736,9 +735,8 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
-    // To Do: What should this token be?
-    // border-bottom-color: $selected-light-ui;
-    // background-color: $selected-light-ui;
+    border-bottom-color: $layer-selected-02;
+    background-color: $layer-selected-02;
   }
 
   .#{$prefix}--list-box__menu-item--active:hover,
