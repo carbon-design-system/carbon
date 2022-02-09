@@ -6,6 +6,7 @@
 //
 
 @use '@carbon/layout';
+@use 'sass:list';
 
 /// Compute the type size for the given type scale step
 /// @param {Number} $step

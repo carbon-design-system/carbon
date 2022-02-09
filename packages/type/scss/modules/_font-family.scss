@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:string';
+
 /// Font family fallbacks for: IBM Plex Mono, IBM Plex Sans, IBM Plex Sans
 /// Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
 /// @type Map
