@@ -16,7 +16,7 @@ import {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
-} from '../StructuredList';
+} from './StructuredList';
 import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
 import { settings } from 'carbon-components';
 import mdx from './StructuredList.mdx';

@@ -16,6 +16,12 @@ export default {
   subcomponents: {
     'MultiSelect.Filterable': MultiSelect.Filterable,
   },
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
 };
 
 const items = [
@@ -47,7 +53,7 @@ const items = [
   },
 ];
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -58,12 +64,13 @@ export const Default = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
-export const WithInitialSelectedItems = () => {
+export const WithInitialSelectedItems = (args) => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -74,12 +81,13 @@ export const WithInitialSelectedItems = () => {
         itemToString={(item) => (item ? item.text : '')}
         initialSelectedItems={[items[0], items[1]]}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
-export const _Filterable = () => {
+export const _Filterable = (args) => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -89,12 +97,13 @@ export const _Filterable = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
-export const WithLayer = () => {
+export const WithLayer = (args) => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -105,6 +114,7 @@ export const WithLayer = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
       <Layer>
         <MultiSelect
@@ -115,6 +125,7 @@ export const WithLayer = () => {
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
+          {...args}
         />
         <Layer>
           <MultiSelect
@@ -125,6 +136,7 @@ export const WithLayer = () => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
+            {...args}
           />
         </Layer>
       </Layer>
@@ -132,7 +144,7 @@ export const WithLayer = () => {
   );
 };
 
-export const _FilterableWithLayer = () => {
+export const _FilterableWithLayer = (args) => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -142,6 +154,7 @@ export const _FilterableWithLayer = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
       <Layer>
         <FilterableMultiSelect
@@ -151,6 +164,7 @@ export const _FilterableWithLayer = () => {
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
+          {...args}
         />
         <Layer>
           <FilterableMultiSelect
@@ -160,6 +174,7 @@ export const _FilterableWithLayer = () => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
+            {...args}
           />
         </Layer>
       </Layer>
