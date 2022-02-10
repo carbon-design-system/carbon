@@ -7,7 +7,7 @@
     "carbon-components-react": "latest",
     "carbon-icons": "latest",
     "history": "^5.0.0",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-router": "^6.0.0-beta.0",
