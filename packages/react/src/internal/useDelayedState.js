@@ -20,6 +20,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 export function useDelayedState(initialState) {
   const [state, setState] = useState(initialState);
   const timeoutId = useRef(null);
+
   // We use `useCallback` to match the signature of React's `useState` which will
   // always return the same reference for the `setState` updater
   const setStateWithDelay = useCallback((stateToSet, delayMs = 0) => {
@@ -37,11 +38,15 @@ export function useDelayedState(initialState) {
     }, delayMs);
   }, []);
 
+  const cancel = useCallback(() => {
+    clearTimeout(timeoutId.current);
+  }, []);
+
   useEffect(() => {
     return () => {
       clearTimeout(timeoutId.current);
     };
   }, []);
 
-  return [state, setStateWithDelay];
+  return [state, setStateWithDelay, cancel];
 }

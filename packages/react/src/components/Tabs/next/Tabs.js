@@ -6,13 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useCallback,
-  useLayoutEffect,
-} from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import cx from 'classnames';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
@@ -23,6 +17,7 @@ import { useId } from '../../../internal/useId';
 import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
 import { useControllableState } from '../../../internal/useControllableState';
 import { useMergedRefs } from '../../../internal/useMergedRefs';
+import { useDelayedState } from '../../../internal/useDelayedState';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -145,6 +140,7 @@ function TabList({
   className: customClassName,
   light,
   scrollIntoView,
+  scrollDebounceWait = 200,
   contained = false,
   iconSize,
   ...rest
@@ -159,6 +155,12 @@ function TabList({
   const ref = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(false);
+  // const [nextPressed, setNextPressed] = useState(false);
+  const [nextPressed, setNextPressed, cancelNext] = useDelayedState(false);
+  const [previousPressed, setPreviousPressed, cancelPrevious] = useDelayedState(
+    false
+  );
+  const overflowInterval = useRef();
 
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
@@ -182,12 +184,20 @@ function TabList({
     ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
     : false;
 
-  const previousButtonClasses = cx(`${prefix}--tab--overflow-nav-button`, {
-    [`${prefix}--tab--overflow-nav-button--hidden`]: !isPreviousButtonVisible,
-  });
-  const nextButtonClasses = cx(`${prefix}--tab--overflow-nav-button`, {
-    [`${prefix}--tab--overflow-nav-button--hidden`]: !isNextButtonVisible,
-  });
+  const previousButtonClasses = cx(
+    `${prefix}--tab--overflow-nav-button`,
+    `${prefix}--tab--overflow-nav-button--previous`,
+    {
+      [`${prefix}--tab--overflow-nav-button--hidden`]: !isPreviousButtonVisible,
+    }
+  );
+  const nextButtonClasses = cx(
+    `${prefix}--tab--overflow-nav-button`,
+    `${prefix}--tab--overflow-nav-button--next`,
+    {
+      [`${prefix}--tab--overflow-nav-button--hidden`]: !isNextButtonVisible,
+    }
+  );
 
   const tabs = [];
 
@@ -218,19 +228,38 @@ function TabList({
 
   const handleScroll = debounce((event) => {
     setScrollLeft(event.target.scrollLeft);
-  }, 200);
+  }, scrollDebounceWait);
 
-  function onNextOverflowClick(direction) {
-    const overflowButtonOffset = 40;
+  // function onNextOverflowMouseDown() {
+  //   // add something to only happen on left mouse click
 
-    if (ref.current) {
-      if (!ref.current.scrollLeft) {
-        ref.current.scrollLeft += overflowButtonOffset;
-      }
-      ref.current.scrollLeft = ref.current.scrollWidth / tabs.length;
-      console.log(ref.current.scrollWidth / tabs.length);
-    }
-  }
+  //   overflowInterval = setInterval(() => {
+  //     const edgeReached = ref.current.scrollLeft
+  //       ? ref.current.scrollLeft + ref.current.clientWidth >=
+  //         ref.current.scrollWidth
+  //       : null;
+  //     if (edgeReached) {
+  //       clearInterval(overflowInterval);
+  //     }
+
+  //     ref.current.scrollLeft += 1 * 10;
+  //   });
+  // }
+
+  // function onPreviousOverflowMouseDown() {
+  //   // add something to only happen on left mouse click
+  //   overflowInterval = setInterval(() => {
+  //     if (ref.current.scrollLeft === 0) {
+  //       clearInterval(overflowInterval);
+  //     }
+
+  //     ref.current.scrollLeft += -10;
+  //   }, 10);
+  // }
+
+  // function onOverflowMouseUp() {
+  //   clearInterval(overflowInterval);
+  // }
 
   useEffectOnce(() => {
     const tab = tabs[selectedIndex];
@@ -274,16 +303,82 @@ function TabList({
     };
   }, []);
 
+  useLayoutEffect(() => {
+    ref.current.scrollLeft = scrollLeft;
+  }, [scrollLeft]);
+
+  // Creates an interval to continuously
+  useLayoutEffect(() => {
+    if (nextPressed) {
+      overflowInterval.current = setInterval(() => {
+        const edgeReached =
+          ref.current.scrollLeft + ref.current.clientWidth >=
+          ref.current.scrollWidth;
+        if (edgeReached) {
+          clearInterval(overflowInterval.current);
+          setNextPressed(false);
+          return;
+        }
+
+        setScrollLeft((scrollLeft) => scrollLeft + 10);
+      });
+    }
+
+    return () => {
+      if (overflowInterval.current) {
+        clearInterval(overflowInterval.current);
+      }
+    };
+  }, [nextPressed, setNextPressed]);
+
+  useLayoutEffect(() => {
+    if (previousPressed) {
+      overflowInterval.current = setInterval(() => {
+        if (ref.current.scrollLeft === 0) {
+          clearInterval(overflowInterval.current);
+          setPreviousPressed(false);
+          return;
+        }
+        setScrollLeft((scrollLeft) => scrollLeft - 10);
+      });
+    }
+
+    return () => {
+      if (overflowInterval.current) {
+        clearInterval(overflowInterval.current);
+      }
+    };
+  }, [previousPressed, setPreviousPressed]);
+
   return (
-    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
     <div className={className}>
       <button
         aria-hidden="true"
         aria-label="Scroll left"
+        onClick={() => {
+          console.log('onClick');
+          if (previousPressed) {
+            setPreviousPressed(false);
+            return;
+          }
+
+          cancelPrevious();
+          setScrollLeft(
+            Math.max(scrollLeft - ref.current.scrollWidth / tabs.length, 0)
+          );
+        }}
+        onMouseDown={(event) => {
+          console.log('onMouseDown');
+          // only change state for left mouse button click
+          if (event.button === 0) {
+            setPreviousPressed(true, 100);
+          }
+        }}
         className={previousButtonClasses}
         type="button">
         <ChevronLeft16 />
       </button>
+      {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
       <div
         {...rest}
         aria-label={label}
@@ -307,7 +402,26 @@ function TabList({
       <button
         aria-hidden="true"
         aria-label="Scroll right"
-        onClick={onNextOverflowClick}
+        onClick={() => {
+          if (nextPressed) {
+            setNextPressed(false);
+            return;
+          }
+
+          cancelNext();
+          setScrollLeft(
+            Math.min(
+              scrollLeft + ref.current.scrollWidth / tabs.length,
+              ref.current.scrollWidth - ref.current.clientWidth
+            )
+          );
+        }}
+        onMouseDown={(event) => {
+          // only change state for left mouse button click
+          if (event.button === 0) {
+            setNextPressed(true, 100);
+          }
+        }}
         className={nextButtonClasses}
         type="button">
         <ChevronRight16 />
@@ -339,19 +453,29 @@ TabList.propTypes = {
    * Specify an optional className to be added to the container node
    */
   className: PropTypes.string,
+
   /**
    * Specify whether component is contained type
    */
-
   contained: PropTypes.bool,
+
   /**
    * If using `IconTab`, specify the size of the icon being used.
    */
   iconSize: PropTypes.oneOf(['default', 'lg']),
+
   /**
    * Specify whether or not to use the light component variant
    */
   light: PropTypes.bool,
+
+  /**
+   * Optionally provide a delay (in milliseconds) passed to the lodash
+   * debounce of the onScroll handler. This will impact the responsiveness
+   * of scroll arrow buttons rendering when scrolling to the first or last tab.
+   */
+  scrollDebounceWait: PropTypes.number,
+
   /**
    * Choose whether or not to automatically scroll to newly selected tabs
    * on component rerender
