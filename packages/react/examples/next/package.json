@@ -11,7 +11,7 @@
     "carbon-components-react": "^6.48.0",
     "carbon-icons": "^7.0.7",
     "next": "^7.0.2",
-    "node-sass": "^4.7.2",
+    "node-sass": "^7.0.0",
     "react": "^16.6.1",
     "react-dom": "^16.6.1"
   }
