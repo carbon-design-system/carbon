@@ -141,26 +141,6 @@
   grid-column: 1 / -1;
 }
 
-@each $name, $value in $grid-breakpoints {
-  $columns: map.get($value, columns);
-
-  @include breakpoint($name) {
-    @for $i from 0 through $columns {
-      .#{$prefix}--#{$name}\:col-span-#{$i} {
-        @include -column-span($i);
-      }
-    }
-
-    .#{$prefix}--#{$name}\:col-span-auto {
-      grid-column: auto;
-    }
-
-    .#{$prefix}--#{$name}\:col-span-100 {
-      grid-column: 1 / -1;
-    }
-  }
-}
-
 .#{$prefix}--col-span-25 {
   --cds-grid-columns: 1;
 
@@ -212,6 +192,48 @@
     --cds-grid-columns: 12;
 
     grid-column: span 12;
+  }
+}
+
+@each $name, $value in $grid-breakpoints {
+  $columns: map.get($value, columns);
+
+  @include breakpoint($name) {
+    @for $i from 0 through $columns {
+      .#{$prefix}--#{$name}\:col-span-#{$i} {
+        @include -column-span($i);
+      }
+    }
+
+    .#{$prefix}--#{$name}\:col-span-auto {
+      grid-column: auto;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-100 {
+      grid-column: 1 / -1;
+    }
+
+    $quarterGridColumns: math.div($columns, 4);
+
+    .#{$prefix}--#{$name}\:col-span-75 {
+      $calc: $quarterGridColumns * 3;
+      --cds-grid-columns: #{$calc};
+
+      grid-column: span $calc / span $calc;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-50 {
+      $calc: $quarterGridColumns * 2;
+      --cds-grid-columns: #{$calc};
+
+      grid-column: span $calc / span $calc;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-25 {
+      --cds-grid-columns: #{$quarterGridColumns};
+
+      grid-column: span $quarterGridColumns / span $quarterGridColumns;
+    }
   }
 }
 

@@ -81,6 +81,11 @@ export const Responsive = () => (
       <p>Medium: Span 0 of 8</p>
       <p>Large: Span 4 of 16</p>
     </Column>
+    <Column sm="25%" md="50%" lg="75%">
+      <p>Small: Span 25%</p>
+      <p>Medium: Span 50%</p>
+      <p>Large: Span 75%</p>
+    </Column>
   </Grid>
 );
 
@@ -208,6 +213,11 @@ export const Offset = () => (
       lg={{ span: 12, offset: 4 }}
     />
     <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} />
+    <Column
+      sm={{ span: '25%', offset: 1 }}
+      md={{ span: '50%', offset: 2 }}
+      lg={{ span: '75%', offset: 4 }}
+    />
   </Grid>
 );
 
