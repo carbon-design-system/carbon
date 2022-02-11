@@ -97,6 +97,16 @@ async function build() {
           },
           {
             type: 'directory',
+            filepath: 'aspect-ratio',
+            files: [
+              {
+                type: 'file',
+                filepath: '_index.scss',
+              },
+            ],
+          },
+          {
+            type: 'directory',
             filepath: 'breadcrumb',
             files: [
               {

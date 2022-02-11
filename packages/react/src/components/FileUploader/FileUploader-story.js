@@ -87,6 +87,7 @@ const props = {
       ),
       buttonLabel: text('The button label (buttonLabel)', 'Add file'),
       buttonKind: buttonKind || 'primary',
+      disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
       filenameStatus: select(
         'Status for file name (filenameStatus)',

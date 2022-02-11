@@ -197,4 +197,11 @@
     // Add extra spacing when label is present
     margin: rem(1px) 0 0 rem(6px);
   }
+
+  //-----------------------------------------------
+  // InlineCheckbox
+  //-----------------------------------------------
+  .#{$prefix}--checkbox--inline {
+    position: relative;
+  }
 }
