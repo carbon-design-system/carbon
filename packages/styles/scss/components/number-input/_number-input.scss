@@ -16,6 +16,7 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/z-index' as *;
 
 /// Number input styles
 /// @access public
