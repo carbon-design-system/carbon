@@ -8472,6 +8472,15 @@ Map {
       "max": Object {
         "type": "number",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "small",
+            "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "value": Object {
         "type": "number",
       },
