@@ -29,6 +29,7 @@ const toggleProps = () => ({
   onChange: action('onChange'),
   onToggle: action('onToggle'),
   size: select('Field size (size)', sizes, undefined) || undefined,
+  toggled: boolean('Toggled (toggled)', true),
 });
 
 export default {
