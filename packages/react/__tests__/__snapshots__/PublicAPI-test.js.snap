@@ -339,9 +339,6 @@ Map {
     "render": [Function],
   },
   "ButtonSkeleton" => Object {
-    "defaultProps": Object {
-      "small": false,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -2587,6 +2584,7 @@ Map {
       "accept": Array [],
       "buttonKind": "primary",
       "buttonLabel": "",
+      "disabled": false,
       "filenameStatus": "uploading",
       "iconDescription": "Provide icon description",
       "multiple": false,
@@ -2621,6 +2619,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "filenameStatus": Object {
         "args": Array [
