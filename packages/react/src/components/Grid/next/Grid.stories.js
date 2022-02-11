@@ -39,17 +39,6 @@ export const Wide = () => {
   );
 };
 
-export const Narrow = () => {
-  return (
-    <Grid narrow>
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-    </Grid>
-  );
-};
-
 export const Condensed = () => {
   return (
     <Grid condensed>
@@ -152,9 +141,9 @@ export const MixedGridModes = () => {
   return (
     <Grid>
       <Column sm={1} md={2} lg={4}>
-        <Grid narrow>
+        <Grid>
           <Column sm={1} md={2} lg={4}>
-            <p>narrow</p>
+            <p>wide</p>
           </Column>
         </Grid>
       </Column>
@@ -173,9 +162,9 @@ export const MixedGridModes = () => {
         </Grid>
       </Column>
       <Column sm={3} md={6} lg={12}>
-        <Grid narrow>
+        <Grid>
           <Column sm={3} md={6} lg={12}>
-            <p>narrow</p>
+            <p>wide</p>
           </Column>
         </Grid>
       </Column>

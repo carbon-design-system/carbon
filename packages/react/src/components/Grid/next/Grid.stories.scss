@@ -16,11 +16,6 @@
   margin-top: 0;
 }
 
-.cds--css-grid.cds--css-grid--narrow {
-  background-color: $teal-20;
-  outline: 1px dashed $teal-40;
-}
-
 .cds--css-grid.cds--css-grid--condensed {
   background-color: $purple-20;
   outline: 1px dashed $purple-40;
@@ -44,10 +39,6 @@
 .cds--subgrid > [class*='col'] {
   background: $green-10;
   outline: 1px dashed $green-30;
-}
-
-.cds--css-grid.cds--css-grid--narrow > [class*='col'] {
-  background: $teal-10;
 }
 
 .cds--css-grid.cds--css-grid--condensed > [class*='col'] {

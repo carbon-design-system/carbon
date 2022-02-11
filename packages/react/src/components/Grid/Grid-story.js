@@ -54,22 +54,6 @@ export const ExperimentalCSSGrid = () => (
       </Grid>
     </Grid>
 
-    <Heading>Narrow</Heading>
-    <Grid narrow>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-    </Grid>
-
     <Heading>Condensed</Heading>
     <Grid condensed>
       <Column sm={1} md={2} lg={4}>
