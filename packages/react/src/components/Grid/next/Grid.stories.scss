@@ -16,11 +16,6 @@
   margin-top: 0;
 }
 
-.sb-css-grid-container .cds--css-grid.cds--css-grid--narrow {
-  background-color: $teal-20;
-  outline: 1px dashed $teal-40;
-}
-
 .sb-css-grid-container .cds--css-grid.cds--css-grid--condensed {
   background-color: $purple-20;
   outline: 1px dashed $purple-40;
@@ -46,12 +41,6 @@
   outline: 1px dashed $green-30;
 }
 
-.sb-css-grid-container .cds--css-grid.cds--css-grid--narrow > [class*='col'] {
-  background: $teal-10;
-}
-
-.sb-css-grid-container
-  .cds--css-grid.cds--css-grid--condensed
-  > [class*='col'] {
+.sb-css-grid-container.cds--css-grid.cds--css-grid--condensed > [class*='col'] {
   background: $purple-10;
 }

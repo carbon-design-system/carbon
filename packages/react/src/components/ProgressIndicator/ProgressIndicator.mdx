@@ -1,4 +1,4 @@
-import { Props } from '@storybook/addon-docs/blocks';
+import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
 
 # ProgressIndicator
 
@@ -10,7 +10,37 @@ import { Props } from '@storybook/addon-docs/blocks';
 
 ## Table of Contents
 
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [ProgressIndicator](#progressindicator)
+  - [Table of Contents](#table-of-contents)
+  - [Overview](#overview)
+  - [Component API](#component-api)
+  - [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 ## Overview
+
+<Preview>
+  <Story id="components-progressindicator--default" />
+</Preview>
+
+For React usage, `ProgressIndicator` holds the `currentIndex` state to indicate
+which `ProgressStep` is the current step. The `ProgressIndicator` component
+should always be used with `ProgressStep` components as its children.
+
+Changing the `currentIndex` prop will automatically set the `ProgressStep`
+components props (`complete`, `incomplete`, `current`). For general usage,
+Progress Indicators display steps in a process. It should indicate when steps
+have been complete, the active step, and the steps to come.
+
+If you register an `onChange` handler, the Progress Indicator will become
+interactive. Your parent component should update the `currentIndex` prop within
+the `onChange` handler.
 
 ## Component API
 
