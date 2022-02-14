@@ -1,13 +1,11 @@
-import './Grid-story.scss';
+import './FlexGrid.stories.scss';
 import React from 'react';
-import { Grid, Row, Column } from './';
-import mdx from './Grid.mdx';
-import { FeatureFlags } from '../FeatureFlags';
-import { Heading } from '../Heading';
+import { FlexGrid, Row, Column } from '../';
+import mdx from './FlexGrid.mdx';
 
 export default {
-  title: 'Components/Grid',
-  component: Grid,
+  title: 'Components/FlexGrid',
+  component: FlexGrid,
   subcomponents: {
     Row,
     Column,
@@ -28,52 +26,8 @@ function DemoContent({ children }) {
   );
 }
 
-export const ExperimentalCSSGrid = () => (
-  <FeatureFlags flags={{ 'enable-css-grid': true }}>
-    <Heading>Wide</Heading>
-    <Grid>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Grid>
-        <Column sm={2} md={4} lg={8}>
-          Subgrid
-        </Column>
-        <Column sm={2} md={4} lg={8}>
-          Subgrid
-        </Column>
-      </Grid>
-    </Grid>
-
-    <Heading>Condensed</Heading>
-    <Grid condensed>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-    </Grid>
-  </FeatureFlags>
-);
-
 export const AutoColumns = () => (
-  <Grid>
+  <FlexGrid>
     <Row>
       <Column>
         <DemoContent>Span 25%</DemoContent>
@@ -88,39 +42,39 @@ export const AutoColumns = () => (
         <DemoContent>Span 25%</DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );
 
 export const ResponsiveGrid = () => (
-  <Grid>
+  <FlexGrid>
     <Row>
       <Column sm={2} md={4} lg={6}>
         <DemoContent>
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 4 of 8</p>
-          <p>Large: Span 6 of 12</p>
+          <p>Large: Span 6 of 16</p>
         </DemoContent>
       </Column>
       <Column sm={2} md={2} lg={3}>
         <DemoContent>
           <p>Small: Span 2 of 4</p>
           <p>Medium: Span 2 of 8</p>
-          <p>Large: Span 3 of 12</p>
+          <p>Large: Span 3 of 16</p>
         </DemoContent>
       </Column>
       <Column sm={0} md={2} lg={3}>
         <DemoContent>
           <p>Small: Span 0 of 4</p>
           <p>Medium: Span 2 of 8</p>
-          <p>Large: Span 3 of 12</p>
+          <p>Large: Span 3 of 16</p>
         </DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );
 
 export const Offset = () => (
-  <Grid>
+  <FlexGrid>
     <Row>
       <Column sm={{ span: 1, offset: 3 }}>
         <DemoContent>Small: offset 3</DemoContent>
@@ -135,11 +89,11 @@ export const Offset = () => (
         <DemoContent>Small: offset 0</DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );
 
 export const Condensed = () => (
-  <Grid condensed>
+  <FlexGrid condensed>
     <Row>
       <Column>
         <DemoContent>1/4</DemoContent>
@@ -154,11 +108,11 @@ export const Condensed = () => (
         <DemoContent>1/4</DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );
 
 export const CondensedColumns = () => (
-  <Grid>
+  <FlexGrid>
     <Row>
       <Column>
         <DemoContent>1/4</DemoContent>
@@ -201,11 +155,11 @@ export const CondensedColumns = () => (
         <DemoContent>1/4</DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );
 
 export const Narrow = () => (
-  <Grid narrow>
+  <FlexGrid narrow>
     <Row>
       <Column>
         <DemoContent>1/4</DemoContent>
@@ -220,11 +174,11 @@ export const Narrow = () => (
         <DemoContent>1/4</DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );
 
 export const NarrowColumns = () => (
-  <Grid>
+  <FlexGrid>
     <Row>
       <Column>
         <DemoContent>1/4</DemoContent>
@@ -267,11 +221,11 @@ export const NarrowColumns = () => (
         <DemoContent>1/4</DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );
 
 export const FullWidth = () => (
-  <Grid fullWidth>
+  <FlexGrid fullWidth>
     <Row>
       <Column>
         <DemoContent>1/4</DemoContent>
@@ -286,11 +240,11 @@ export const FullWidth = () => (
         <DemoContent>1/4</DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );
 
 export const MixedGridModes = () => (
-  <Grid>
+  <FlexGrid>
     <Row>
       <Column>
         <DemoContent>Wide</DemoContent>
@@ -333,5 +287,5 @@ export const MixedGridModes = () => (
         <DemoContent>1/4</DemoContent>
       </Column>
     </Row>
-  </Grid>
+  </FlexGrid>
 );

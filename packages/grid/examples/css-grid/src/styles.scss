@@ -19,11 +19,6 @@
   outline: 1px dashed $blue-40;
 }
 
-.bx--css-grid.bx--css-grid--narrow {
-  background-color: $teal-20;
-  outline: 1px dashed $teal-40;
-}
-
 .bx--css-grid.bx--css-grid--condensed {
   background-color: $purple-20;
   outline: 1px dashed $purple-40;
@@ -47,10 +42,6 @@
 .bx--subgrid > [class*='col'] {
   background: $green-10;
   outline: 1px dashed $green-30;
-}
-
-.bx--css-grid.bx--css-grid--narrow > [class*='col'] {
-  background: $teal-10;
 }
 
 .bx--css-grid.bx--css-grid--condensed > [class*='col'] {
