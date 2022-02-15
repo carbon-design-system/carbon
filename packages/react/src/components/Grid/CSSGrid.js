@@ -14,7 +14,6 @@ import { GridSettings, useGridSettings } from './GridContext';
 function CSSGrid({
   as: BaseComponent = 'div',
   condensed = false,
-  narrow = false,
   fullWidth = false,
   columns = 16,
   className: containerClassName,
@@ -27,7 +26,6 @@ function CSSGrid({
     [`${prefix}--css-grid`]: !subgrid,
     [`${prefix}--css-grid--${columns}`]: !subgrid && columns !== 16,
     [`${prefix}--css-grid--condensed`]: condensed,
-    [`${prefix}--css-grid--narrow`]: narrow,
     [`${prefix}--css-grid--full-width`]: fullWidth,
     [`${prefix}--subgrid`]: subgrid,
     [`${prefix}--col-span-${columns}`]:
@@ -74,12 +72,6 @@ CSSGrid.propTypes = {
    * Remove the default max width that the grid has set
    */
   fullWidth: PropTypes.bool,
-
-  /**
-   * Container hangs 16px into the gutter. Useful for
-   * typographic alignment with and without containers.
-   */
-  narrow: PropTypes.bool,
 };
 
 export { CSSGrid };
