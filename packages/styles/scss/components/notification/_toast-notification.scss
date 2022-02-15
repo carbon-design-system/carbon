@@ -212,7 +212,7 @@
 
   @if not feature-flags.enabled('enable-v11-release') {
     .#{$prefix}--toast-notification__title {
-      @include type-style('productive-heading-01');
+      @include type-style('heading-compact-01');
 
       margin-top: $spacing-05;
       font-weight: 600;

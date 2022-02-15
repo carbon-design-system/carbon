@@ -208,7 +208,7 @@
     }
   } @else {
     .#{$prefix}--inline-notification__title {
-      @include type-style('productive-heading-01');
+      @include type-style('heading-compact-01');
 
       margin: 0 $spacing-02 0 0;
     }

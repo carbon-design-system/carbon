@@ -137,7 +137,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   //single line tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip {
-    @include type-style('body-long-01');
+    @include type-style('body-01');
 
     display: block;
     width: rem(125px);
@@ -153,7 +153,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   //multiline tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
-    @include type-style('body-long-01');
+    @include type-style('body-01');
 
     width: rem(150px);
     height: auto;

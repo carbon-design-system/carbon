@@ -102,7 +102,7 @@ $link-focus-text-color: custom-property.get-var(
   }
 
   .#{$prefix}--link--lg {
-    @include type.type-style('body-short-02');
+    @include type.type-style('body-compact-02');
   }
 
   .#{$prefix}--link__icon {

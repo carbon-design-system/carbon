@@ -298,7 +298,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       .#{$prefix}--tabs__nav-link:focus,
     .#{$prefix}--tabs__nav-item--selected:active
       .#{$prefix}--tabs__nav-link:active {
-      @include type-style('productive-heading-01');
+      @include type-style('heading-compact-01');
 
       color: $text-primary;
     }

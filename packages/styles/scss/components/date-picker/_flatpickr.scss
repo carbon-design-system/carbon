@@ -200,7 +200,7 @@
   }
 
   .flatpickr-month {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: flex;
     height: rem(40px);
@@ -247,7 +247,7 @@
   }
 
   .flatpickr-current-month {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: flex;
     height: rem(28px);

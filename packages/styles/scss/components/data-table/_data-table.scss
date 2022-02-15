@@ -43,7 +43,7 @@
   }
 
   .#{$prefix}--data-table-header__title {
-    @include type-style('productive-heading-03');
+    @include type-style('heading-03');
 
     color: $text-primary;
   }
@@ -64,7 +64,7 @@
   }
 
   .#{$prefix}--data-table thead {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     background-color: $layer-accent;
   }
