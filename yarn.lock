@@ -2967,20 +2967,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gulp-sourcemaps/identity-map@npm:1.X":
-  version: 1.0.2
-  resolution: "@gulp-sourcemaps/identity-map@npm:1.0.2"
+"@gulp-sourcemaps/identity-map@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@gulp-sourcemaps/identity-map@npm:2.0.1"
   dependencies:
-    acorn: ^5.0.3
-    css: ^2.2.1
-    normalize-path: ^2.1.1
+    acorn: ^6.4.1
+    normalize-path: ^3.0.0
+    postcss: ^7.0.16
     source-map: ^0.6.0
-    through2: ^2.0.3
-  checksum: cb3725d47b4da0f4f024bf731bc2a87cfaded1e11be7c91ab1ceeca41b871310940dfcc30c205bc304072a45ee7213b4ef444d994db55ad18f9aeb10e0451865
+    through2: ^3.0.1
+  checksum: 70cec4d5397ab7b827f11045c9fabce6ee3b7ec96840a81415120fc1a07820b988d8d4cf5257049c1a3a79d4f0f899b9ccb906f3cf96e9bbf8ef51b2ec1cdbdf
   languageName: node
   linkType: hard
 
-"@gulp-sourcemaps/map-sources@npm:1.X":
+"@gulp-sourcemaps/map-sources@npm:^1.0.0":
   version: 1.0.0
   resolution: "@gulp-sourcemaps/map-sources@npm:1.0.0"
   dependencies:
@@ -8547,15 +8547,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:5.X, acorn@npm:^5.0.3, acorn@npm:^5.5.0":
-  version: 5.7.3
-  resolution: "acorn@npm:5.7.3"
-  bin:
-    acorn: ./bin/acorn
-  checksum: 892b3066f7c01f24aed6fc5573e7303a6b63fc6d5290d9ea627597cdf6ca95e58af8a4e92fd747c3a2698505bc042d59fc37da658675c142c5a10281ab8a5814
-  languageName: node
-  linkType: hard
-
 "acorn@npm:8.5.0":
   version: 8.5.0
   resolution: "acorn@npm:8.5.0"
@@ -8571,6 +8562,15 @@ __metadata:
   bin:
     acorn: ./bin/acorn
   checksum: d24aee1c838a3467c5ab493601ed4b646e4fd0599ca19b16f47f764e7929d0ffcb4d536935283a8d823d64ca3817d27dd5f93830bb86f592249d9feb0fcf78f9
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^5.5.0":
+  version: 5.7.3
+  resolution: "acorn@npm:5.7.3"
+  bin:
+    acorn: ./bin/acorn
+  checksum: 892b3066f7c01f24aed6fc5573e7303a6b63fc6d5290d9ea627597cdf6ca95e58af8a4e92fd747c3a2698505bc042d59fc37da658675c142c5a10281ab8a5814
   languageName: node
   linkType: hard
 
@@ -11809,7 +11809,7 @@ __metadata:
     gulp-rename: ^1.4.0
     gulp-sass: ^4.1.0
     gulp-sass-lint: ^1.4.0
-    gulp-sourcemaps: ^2.6.0
+    gulp-sourcemaps: ^3.0.0
     gulp-terser: ^1.0.0
     handlebars: ^4.0.12
     handlebars-helpers: ^0.10.0
@@ -13402,12 +13402,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"convert-source-map@npm:1.7.0, convert-source-map@npm:1.X, convert-source-map@npm:^1.1.0, convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
+"convert-source-map@npm:1.7.0, convert-source-map@npm:^1.1.0, convert-source-map@npm:^1.4.0, convert-source-map@npm:^1.5.0, convert-source-map@npm:^1.6.0, convert-source-map@npm:^1.7.0":
   version: 1.7.0
   resolution: "convert-source-map@npm:1.7.0"
   dependencies:
     safe-buffer: ~5.1.1
   checksum: bcd2e3ea7d37f96b85a6e362c8a89402ccc73757256e3ee53aa2c22fe915adb854c66b1f81111be815a3a6a6ce3c58e8001858e883c9d5b4fe08a853fa865967
+  languageName: node
+  linkType: hard
+
+"convert-source-map@npm:^1.0.0":
+  version: 1.8.0
+  resolution: "convert-source-map@npm:1.8.0"
+  dependencies:
+    safe-buffer: ~5.1.1
+  checksum: 985d974a2d33e1a2543ada51c93e1ba2f73eaed608dc39f229afc78f71dcc4c8b7d7c684aa647e3c6a3a204027444d69e53e169ce94e8d1fa8d7dee80c9c8fed
   languageName: node
   linkType: hard
 
@@ -14027,18 +14036,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css@npm:2.X, css@npm:^2.2.1":
-  version: 2.2.4
-  resolution: "css@npm:2.2.4"
-  dependencies:
-    inherits: ^2.0.3
-    source-map: ^0.6.1
-    source-map-resolve: ^0.5.2
-    urix: ^0.1.0
-  checksum: a35d483c5ccc04bcde3b1e7393d58ad3eee1dd6956df0f152de38e46a17c0ee193c30eec6b1e59831ad0e74599385732000e95987fcc9cb2b16c6d951bae49e1
-  languageName: node
-  linkType: hard
-
 "css@npm:^3.0.0":
   version: 3.0.0
   resolution: "css@npm:3.0.0"
@@ -14388,7 +14385,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"debug-fabulous@npm:1.X":
+"debug-fabulous@npm:^1.0.0":
   version: 1.1.0
   resolution: "debug-fabulous@npm:1.1.0"
   dependencies:
@@ -14844,7 +14841,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detect-newline@npm:2.X":
+"detect-newline@npm:^2.0.0":
   version: 2.1.0
   resolution: "detect-newline@npm:2.1.0"
   checksum: c55146fd5b97a9ce914f17f85a01466c9e8679289e2d390588b027a58f2e090dbc38457923072369c603b8904f982f87b78fee17e48d5706f35571642f4599f8
@@ -19510,7 +19507,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"graceful-fs@npm:4.X, graceful-fs@npm:^4.0.0, graceful-fs@npm:^4.1.11, graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.1.9, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.2, graceful-fs@npm:^4.2.3, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
+"graceful-fs@npm:^4.0.0, graceful-fs@npm:^4.1.11, graceful-fs@npm:^4.1.15, graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.1.6, graceful-fs@npm:^4.1.9, graceful-fs@npm:^4.2.0, graceful-fs@npm:^4.2.2, graceful-fs@npm:^4.2.3, graceful-fs@npm:^4.2.4, graceful-fs@npm:^4.2.6":
   version: 4.2.6
   resolution: "graceful-fs@npm:4.2.6"
   checksum: 792e64aafda05a151289f83eaa16aff34ef259658cefd65393883d959409f5a2389b0ec9ebf28f3d21f1b0ddc8f594a1162ae9b18e2b507a6799a70706ec573d
@@ -19714,22 +19711,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gulp-sourcemaps@npm:^2.6.0":
-  version: 2.6.5
-  resolution: "gulp-sourcemaps@npm:2.6.5"
+"gulp-sourcemaps@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "gulp-sourcemaps@npm:3.0.0"
   dependencies:
-    "@gulp-sourcemaps/identity-map": 1.X
-    "@gulp-sourcemaps/map-sources": 1.X
-    acorn: 5.X
-    convert-source-map: 1.X
-    css: 2.X
-    debug-fabulous: 1.X
-    detect-newline: 2.X
-    graceful-fs: 4.X
-    source-map: ~0.6.0
-    strip-bom-string: 1.X
-    through2: 2.X
-  checksum: e9c872e1ef2a8109fb7eebae4688652ba8fb993b8203c9a22c37683a33846ecd4c5ca91af0b7035d537c899321f3054075fb4631ab74fb05d62ebab185faae37
+    "@gulp-sourcemaps/identity-map": ^2.0.1
+    "@gulp-sourcemaps/map-sources": ^1.0.0
+    acorn: ^6.4.1
+    convert-source-map: ^1.0.0
+    css: ^3.0.0
+    debug-fabulous: ^1.0.0
+    detect-newline: ^2.0.0
+    graceful-fs: ^4.0.0
+    source-map: ^0.6.0
+    strip-bom-string: ^1.0.0
+    through2: ^2.0.0
+  checksum: 845004dfbc47aac5395957393e66520c2aca5bdf64f17a4c2ac17f1fb2cebb5bc9839a3527e55a295d9f229362cb63d03e676517f0bd6fb22c033d24b66c5597
   languageName: node
   linkType: hard
 
@@ -34248,7 +34245,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"source-map-resolve@npm:^0.5.0, source-map-resolve@npm:^0.5.2":
+"source-map-resolve@npm:^0.5.0":
   version: 0.5.3
   resolution: "source-map-resolve@npm:0.5.3"
   dependencies:
@@ -35027,17 +35024,17 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"strip-bom-string@npm:1.X":
-  version: 1.0.0
-  resolution: "strip-bom-string@npm:1.0.0"
-  checksum: 5635a3656d8512a2c194d6c8d5dee7ef0dde6802f7be9413b91e201981ad4132506656d9cf14137f019fd50f0269390d91c7f6a2601b1bee039a4859cfce4934
-  languageName: node
-  linkType: hard
-
 "strip-bom-string@npm:^0.1.2":
   version: 0.1.2
   resolution: "strip-bom-string@npm:0.1.2"
   checksum: ad184884add5aab9fb82203e7afe5e057cd3dc562e328a14e45d608acd04ca7973d4533ae6aa1198a3e6bd036a2a707890b42cbb4dfe221bf3bdd06cc6d1aaed
+  languageName: node
+  linkType: hard
+
+"strip-bom-string@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "strip-bom-string@npm:1.0.0"
+  checksum: 5635a3656d8512a2c194d6c8d5dee7ef0dde6802f7be9413b91e201981ad4132506656d9cf14137f019fd50f0269390d91c7f6a2601b1bee039a4859cfce4934
   languageName: node
   linkType: hard
 
@@ -36201,16 +36198,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"through2@npm:2.X, through2@npm:^2.0.0, through2@npm:^2.0.2, through2@npm:^2.0.3, through2@npm:~2.0.0":
-  version: 2.0.5
-  resolution: "through2@npm:2.0.5"
-  dependencies:
-    readable-stream: ~2.3.6
-    xtend: ~4.0.1
-  checksum: beb0f338aa2931e5660ec7bf3ad949e6d2e068c31f4737b9525e5201b824ac40cac6a337224856b56bd1ddd866334bbfb92a9f57cd6f66bc3f18d3d86fc0fe50
-  languageName: node
-  linkType: hard
-
 "through2@npm:^0.6.1, through2@npm:^0.6.3, through2@npm:~0.6.1":
   version: 0.6.5
   resolution: "through2@npm:0.6.5"
@@ -36218,6 +36205,16 @@ resolve@^2.0.0-next.3:
     readable-stream: ">=1.0.33-1 <1.1.0-0"
     xtend: ">=4.0.0 <4.1.0-0"
   checksum: dfea228e3134a33219a588448847250897a9994a687807dab52f850fac8b4eb1dc18e3b2c1d3d60dd0d78eb492d2032fdf814ac6576ba5b8d5ba0dade29a3544
+  languageName: node
+  linkType: hard
+
+"through2@npm:^2.0.0, through2@npm:^2.0.2, through2@npm:^2.0.3, through2@npm:~2.0.0":
+  version: 2.0.5
+  resolution: "through2@npm:2.0.5"
+  dependencies:
+    readable-stream: ~2.3.6
+    xtend: ~4.0.1
+  checksum: beb0f338aa2931e5660ec7bf3ad949e6d2e068c31f4737b9525e5201b824ac40cac6a337224856b56bd1ddd866334bbfb92a9f57cd6f66bc3f18d3d86fc0fe50
   languageName: node
   linkType: hard
 
