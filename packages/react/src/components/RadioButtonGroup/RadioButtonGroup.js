@@ -38,6 +38,11 @@ export default class RadioButtonGroup extends React.Component {
     disabled: PropTypes.bool,
 
     /**
+     * Specify whether the legend should be hidden, or not
+     */
+    hideLegend: PropTypes.bool,
+
+    /**
      * Provide where label text should be placed
      */
     labelPosition: PropTypes.oneOf(['left', 'right']),
@@ -73,6 +78,7 @@ export default class RadioButtonGroup extends React.Component {
   static defaultProps = {
     orientation: 'horizontal',
     labelPosition: 'right',
+    hideLegend: false,
     onChange: /* istanbul ignore next */ () => {},
   };
 
@@ -133,6 +139,7 @@ export default class RadioButtonGroup extends React.Component {
     const {
       disabled,
       className,
+      hideLegend,
       orientation,
       labelPosition,
       legendText,
@@ -155,6 +162,10 @@ export default class RadioButtonGroup extends React.Component {
       }
     );
 
+    const legendClasses = classNames(`${prefix}--label`, {
+      [`${prefix}--visually-hidden`]: hideLegend,
+    });
+
     return (
       <div
         className={
@@ -164,7 +175,7 @@ export default class RadioButtonGroup extends React.Component {
         }>
         <fieldset className={wrapperClasses} disabled={disabled}>
           {legendText && (
-            <Legend className={`${prefix}--label`}>{legendText}</Legend>
+            <Legend className={legendClasses}>{legendText}</Legend>
           )}
           {this.getRadioButtons()}
         </fieldset>

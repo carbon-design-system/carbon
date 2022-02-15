@@ -4981,6 +4981,7 @@ Map {
       "$$typeof": Symbol(react.context),
     },
     "defaultProps": Object {
+      "hideLegend": false,
       "labelPosition": "right",
       "onChange": [Function],
       "orientation": "horizontal",
@@ -5006,6 +5007,9 @@ Map {
         "type": "oneOfType",
       },
       "disabled": Object {
+        "type": "bool",
+      },
+      "hideLegend": Object {
         "type": "bool",
       },
       "labelPosition": Object {
