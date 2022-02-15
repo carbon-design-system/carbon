@@ -187,7 +187,7 @@ export {
   Grid,
   Column,
   unstable_FlexGrid as FlexGrid,
-  unstable_useContextMenu,
+  unstable_useContextMenu as useContextMenu,
   unstable_FeatureFlags as FeatureFlags,
   unstable_Heading as Heading,
   unstable_HStack as HStack,
