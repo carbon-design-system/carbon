@@ -11819,7 +11819,7 @@ __metadata:
     custom-event: ^1.0.0
     del: ~6.0.0
     diff: ^5.0.0
-    express-handlebars: ^5.2.1
+    express-handlebars: ^6.0.0
     fancy-log: ^1.3.0
     flatpickr: 4.6.1
     glob: ^7.1.2
@@ -17377,14 +17377,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"express-handlebars@npm:^5.2.1":
-  version: 5.2.1
-  resolution: "express-handlebars@npm:5.2.1"
+"express-handlebars@npm:^6.0.0":
+  version: 6.0.2
+  resolution: "express-handlebars@npm:6.0.2"
   dependencies:
-    glob: ^7.1.6
-    graceful-fs: ^4.2.6
+    glob: ^7.2.0
+    graceful-fs: ^4.2.8
     handlebars: ^4.7.7
-  checksum: 4d3be0f09f0e0fb6edae799a59477fd6fcb91ed3541eebb6f07c3a001163bd46e080aa431590b580fcce077e34fc417e42bbba20da6aa498d777de1a30f6d6bb
+  checksum: f5cac557e0c4feaf27f00bdf8acd84964e84e4a51bb7e54f3096f3ab063f7a992fa88b27562bf0f5dab56dc2662fd1672a4e09b9b80cea685c95205ccd3a45d9
   languageName: node
   linkType: hard
 
@@ -19203,6 +19203,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"glob@npm:^7.2.0":
+  version: 7.2.0
+  resolution: "glob@npm:7.2.0"
+  dependencies:
+    fs.realpath: ^1.0.0
+    inflight: ^1.0.4
+    inherits: 2
+    minimatch: ^3.0.4
+    once: ^1.3.0
+    path-is-absolute: ^1.0.0
+  checksum: 78a8ea942331f08ed2e055cb5b9e40fe6f46f579d7fd3d694f3412fe5db23223d29b7fee1575440202e9a7ff9a72ab106a39fee39934c7bedafe5e5f8ae20134
+  languageName: node
+  linkType: hard
+
 "global-dirs@npm:^0.1.0, global-dirs@npm:^0.1.1":
   version: 0.1.1
   resolution: "global-dirs@npm:0.1.1"
@@ -19529,6 +19543,13 @@ __metadata:
   version: 4.2.6
   resolution: "graceful-fs@npm:4.2.6"
   checksum: 792e64aafda05a151289f83eaa16aff34ef259658cefd65393883d959409f5a2389b0ec9ebf28f3d21f1b0ddc8f594a1162ae9b18e2b507a6799a70706ec573d
+  languageName: node
+  linkType: hard
+
+"graceful-fs@npm:^4.2.8":
+  version: 4.2.9
+  resolution: "graceful-fs@npm:4.2.9"
+  checksum: 68ea4e07ff2c041ada184f9278b830375f8e0b75154e3f080af6b70f66172fabb4108d19b3863a96b53fc068a310b9b6493d86d1291acc5f3861eb4b79d26ad6
   languageName: node
   linkType: hard
 
