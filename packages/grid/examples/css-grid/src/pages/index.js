@@ -13,16 +13,6 @@ export default function IndexPage() {
       </section>
 
       <section>
-        <h2>Narrow</h2>
-        <div class="bx--css-grid bx--css-grid--narrow">
-          <div class="bx--sm:col-span-4"></div>
-          <div class="bx--sm:col-span-4"></div>
-          <div class="bx--sm:col-span-4"></div>
-          <div class="bx--sm:col-span-4"></div>
-        </div>
-      </section>
-
-      <section>
         <h2>Condensed</h2>
         <div class="bx--css-grid bx--css-grid--condensed">
           <div class="bx--sm:col-span-4"></div>
@@ -119,9 +109,9 @@ export default function IndexPage() {
         <h2>Mixed Grid Modes</h2>
         <div class="bx--css-grid">
           <div class="bx--sm:col-span-1 bx--md:col-span-2 bx--lg:col-span-4">
-            <div class="bx--css-grid--narrow bx--subgrid">
+            <div class="bx--css-grid bx--subgrid">
               <div class="bx--sm:col-span-1 bx--md:col-span-2 bx--lg:col-span-4">
-                <p>narrow</p>
+                <p>wide</p>
               </div>
             </div>
           </div>
@@ -140,9 +130,9 @@ export default function IndexPage() {
             </div>
           </div>
           <div class="bx--sm:col-span-3 bx--md:col-span-6 bx--lg:col-span-12">
-            <div class="bx--css-grid--narrow bx--subgrid">
+            <div class="bx--css-grid bx--subgrid">
               <div class="bx--sm:col-span-3 bx--md:col-span-6 bx--lg:col-span-12">
-                <p>narrow</p>
+                <p>wide</p>
               </div>
             </div>
           </div>

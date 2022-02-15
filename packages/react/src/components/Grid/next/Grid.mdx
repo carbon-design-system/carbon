@@ -15,7 +15,6 @@ import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
   - [Debugging](#debugging)
 - [Grid modes](#grid-modes)
   - [Wide grid](#wide-grid)
-  - [Narrow grid](#narrow-grid)
   - [Condensed grid](#condensed-grid)
 - [Subgrid](#subgrid)
 - [Mixed grid modes](#mixed-grid-modes)
@@ -34,8 +33,7 @@ import { Story, Preview, Props } from '@storybook/addon-docs/blocks';
 Carbon's grid components help developers use the
 [2x Grid](https://www.carbondesignsystem.com/guidelines/2x-grid/overview). The
 project provides `Grid` and `Column` components which can be used to build a
-variety of layouts. You can import these components from
-`@carbon/react`:
+variety of layouts. You can import these components from `@carbon/react`:
 
 ```js
 import { Grid, Column } from '@carbon/react';
@@ -111,19 +109,12 @@ There are several
 [grid modes](https://www.carbondesignsystem.com/guidelines/2x-grid/implementation/#grid-modes)
 that you can use depending on the layout effect you're looking to achieve. By
 default, `Grid` uses the wide grid mode with a 32px gutter. However, you can use
-the `narrow` or `condensed` props to enable the narrow and condensed grid modes,
-respectively.
+the `condensed` prop to enable the condensed grid mode.
 
 ### Wide grid
 
 <Preview>
   <Story id="components-grid--wide" />
-</Preview>
-
-### Narrow grid
-
-<Preview>
-  <Story id="components-grid--narrow" />
 </Preview>
 
 ### Condensed grid
@@ -148,15 +139,10 @@ in a `Column` enables you to define responsive parameters for the column (`sm`,
 
 ## Mixed grid modes
 
-The same way that you can pass in `narrow` or `condensed` to a root `Grid`, you
-can also pass in `narrow` or `condensed` to a nested `Grid` (subgrid) to enable
-a certain grid mode for only that subgrid. This can be useful when you need to
-mix-and-match certain grid modes to achieve a particular layout.
-
-As an example, one common use case is to define a two column layout by mixing a
-`narrow` grid in the left column with a `condensed` grid in the right column.
-This results in reduced equal grid margin to the left of the narrow, between the
-two, and to the right of the condensed.
+The same way that you can pass in `condensed` to a root `Grid`, you can also
+pass in `condensed` to a nested `Grid` (subgrid) to enable a certain grid mode
+for only that subgrid. This can be useful when you need to mix-and-match certain
+grid modes to achieve a particular layout.
 
 <Preview>
   <Story id="components-grid--mixed-grid-modes" />
@@ -212,8 +198,8 @@ By default, `Grid` and `Column` will render as a `div`. However, you can use the
 your project.
 
 In the example below, we use the `as` prop on `Column` to change it from a `div`
-to a `section`. Similarly, we use the `as` prop on `Column` to change it from
-a `div` to an `article`.
+to a `section`. Similarly, we use the `as` prop on `Column` to change it from a
+`div` to an `article`.
 
 ```jsx
 import { Grid, Column } from '@carbon/react';

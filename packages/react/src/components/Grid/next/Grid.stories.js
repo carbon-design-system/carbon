@@ -26,22 +26,20 @@ export default {
       page: mdx,
     },
   },
+  decorators: [
+    (Story) => {
+      return (
+        <div className="sb-css-grid-container">
+          <Story />
+        </div>
+      );
+    },
+  ],
 };
 
 export const Wide = () => {
   return (
     <Grid>
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-      <Column sm={4} />
-    </Grid>
-  );
-};
-
-export const Narrow = () => {
-  return (
-    <Grid narrow>
       <Column sm={4} />
       <Column sm={4} />
       <Column sm={4} />
@@ -91,6 +89,11 @@ export const Responsive = () => (
       <p>Small: Span 0 of 4</p>
       <p>Medium: Span 0 of 8</p>
       <p>Large: Span 4 of 16</p>
+    </Column>
+    <Column sm="25%" md="50%" lg="75%">
+      <p>Small: Span 25%</p>
+      <p>Medium: Span 50%</p>
+      <p>Large: Span 75%</p>
     </Column>
   </Grid>
 );
@@ -147,9 +150,9 @@ export const MixedGridModes = () => {
   return (
     <Grid>
       <Column sm={1} md={2} lg={4}>
-        <Grid narrow>
+        <Grid>
           <Column sm={1} md={2} lg={4}>
-            <p>narrow</p>
+            <p>wide</p>
           </Column>
         </Grid>
       </Column>
@@ -168,9 +171,9 @@ export const MixedGridModes = () => {
         </Grid>
       </Column>
       <Column sm={3} md={6} lg={12}>
-        <Grid narrow>
+        <Grid>
           <Column sm={3} md={6} lg={12}>
-            <p>narrow</p>
+            <p>wide</p>
           </Column>
         </Grid>
       </Column>
@@ -219,6 +222,11 @@ export const Offset = () => (
       lg={{ span: 12, offset: 4 }}
     />
     <Column sm={{ span: 4 }} md={{ span: 8 }} lg={{ span: 16 }} />
+    <Column
+      sm={{ span: '25%', offset: 1 }}
+      md={{ span: '50%', offset: 2 }}
+      lg={{ span: '75%', offset: 4 }}
+    />
   </Grid>
 );
 
