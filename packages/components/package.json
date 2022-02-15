@@ -116,7 +116,7 @@
     "gulp-axe-webdriver": "^3.1.0",
     "gulp-babel": "^8.0.0",
     "gulp-header": "^2.0.0",
-    "gulp-jsdoc3": "^2.0.0",
+    "gulp-jsdoc3": "^3.0.0",
     "gulp-nodemon": "^2.4.2",
     "gulp-postcss": "^8.0.0",
     "gulp-rename": "^1.4.0",
