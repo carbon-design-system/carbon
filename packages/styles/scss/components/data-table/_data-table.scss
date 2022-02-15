@@ -49,7 +49,7 @@
   }
 
   .#{$prefix}--data-table-header__description {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     color: $text-secondary;
   }
@@ -70,7 +70,7 @@
   }
 
   .#{$prefix}--data-table tbody {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     width: 100%;
     background-color: $layer;

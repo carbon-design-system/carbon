@@ -85,6 +85,6 @@ $tooltip-padding-inline: custom-property.get-var(
   }
 
   .#{$prefix}--icon-tooltip .#{$prefix}--tooltip-content {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
   }
 }

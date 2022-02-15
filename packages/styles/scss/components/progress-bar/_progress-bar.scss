@@ -17,7 +17,7 @@
 /// @group progress-bar
 @mixin progress-bar {
   .#{$prefix}--progress-bar__label {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: block;
     margin-bottom: $spacing-03;

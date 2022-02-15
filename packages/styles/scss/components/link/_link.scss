@@ -30,7 +30,7 @@ $link-focus-text-color: custom-property.get-var(
 @mixin link {
   .#{$prefix}--link {
     @include component-reset.reset;
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     display: inline-flex;
     color: $link-text-color;
@@ -68,7 +68,7 @@ $link-focus-text-color: custom-property.get-var(
   .#{$prefix}--link--disabled,
   .#{$prefix}--link--disabled:hover {
     @include component-reset.reset;
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     color: $text-disabled;
     cursor: not-allowed;

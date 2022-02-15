@@ -108,7 +108,7 @@
 
   .#{$prefix}--label-description {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     margin-bottom: $spacing-05;
     color: $text-secondary;
@@ -161,7 +161,7 @@
     }
 
     .#{$prefix}--file-filename {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       overflow: hidden;
       margin-left: $spacing-05;

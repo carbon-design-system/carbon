@@ -38,7 +38,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 @mixin tabs {
   .#{$prefix}--tabs {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     width: 100%;
@@ -215,7 +215,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     .#{$prefix}--tabs__nav-link {
       @include button-reset.reset($width: false);
       @include focus-outline('reset');
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       @if not feature-flag-enabled('enable-v11-release') {
         width: rem(160px);

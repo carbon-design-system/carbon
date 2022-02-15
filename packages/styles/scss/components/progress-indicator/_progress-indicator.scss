@@ -78,7 +78,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   }
 
   .#{$prefix}--progress-label {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     overflow: hidden;
     max-width: rem(88px);

@@ -202,7 +202,7 @@
 
   @if feature-flags.enabled('enable-v11-release') {
     .#{$prefix}--inline-notification__content {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       word-break: break-word;
     }
@@ -214,7 +214,7 @@
     }
 
     .#{$prefix}--inline-notification__subtitle {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       word-break: break-word;
     }

@@ -34,7 +34,7 @@ $input-label-weight: 400 !default;
   }
 
   .#{$prefix}--form-item {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     // We specify `auto` as the default value so that the form item does
