@@ -1,0 +1,17 @@
+{
+  "name": "codesandbox-styles",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build": "vite build",
+    "develop": "vite",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^2.8.0"
+  },
+  "dependencies": {
+    "@carbon/styles": "0.14.0-rc.0",
+    "sass": "^1.49.7"
+  }
+}
