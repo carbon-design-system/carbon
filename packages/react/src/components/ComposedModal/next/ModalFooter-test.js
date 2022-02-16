@@ -26,6 +26,16 @@ describe('<ModalFooter />', () => {
     it('renders extra classes passed in via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
+
+    it('should render with a ref', () => {
+      const ref = React.createRef();
+      mount(
+        <ModalFooter className="extra-class" ref={ref}>
+          <p>Test</p>
+        </ModalFooter>
+      );
+      expect(ref.current).toHaveClass(`${prefix}--modal-footer`);
+    });
   });
 
   describe('Should render buttons only if appropriate prop passed in', () => {
