@@ -46,6 +46,13 @@ describe('<ModalHeader />', () => {
         labelWrapper.find(`.${prefix}--modal-header__label`).exists()
       ).toBe(true);
     });
+
+    it('should render with ref', () => {
+      const ref = React.createRef();
+      mount(<ModalHeader title="Something" forwardedRef={ref} />);
+
+      expect(ref.current).toHaveClass(`${prefix}--modal-header`);
+    });
   });
 });
 
@@ -69,6 +76,16 @@ describe('<ModalBody />', () => {
       expect(
         wrapper.find(`.${prefix}--modal-content`).hasClass('extra-class')
       ).toEqual(true);
+    });
+    it('should render with ref', () => {
+      const ref = React.createRef();
+      mount(
+        <ModalBody className="extra-class" ref={ref}>
+          <p>Test</p>
+        </ModalBody>
+      );
+
+      expect(ref.current).toHaveClass(`${prefix}--modal-content`);
     });
   });
 });
@@ -187,6 +204,13 @@ describe('<ModalFooter />', () => {
       expect(buttonComponents.at(1).props().kind).toBe('secondary');
     });
   });
+
+  it('should render with ref', () => {
+    const ref = React.createRef();
+    mount(<ModalFooter primaryButtonText="test" forwardedRef={ref} />);
+
+    expect(ref.current).toHaveClass(`${prefix}--modal-footer`);
+  });
 });
 
 describe('<ComposedModal />', () => {
@@ -202,6 +226,18 @@ describe('<ComposedModal />', () => {
   it('renders', () => {
     const wrapper = mount(<ComposedModal open />);
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it('renders with a ref', () => {
+    const ref = React.createRef();
+    mount(<ComposedModal open forwardedRef={ref} />);
+    expect(ref.current).toHaveClass(`${prefix}--modal`);
+  });
+
+  it('renders with a callbackRef', () => {
+    const ref = jest.fn();
+    const wrapper = mount(<ComposedModal open forwardedRef={ref} />);
+    expect(ref).toHaveBeenCalledWith(wrapper.getDOMNode());
   });
 
   it('changes the open state upon change in props', () => {

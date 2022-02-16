@@ -11,20 +11,23 @@ import cx from 'classnames';
 import { Close20 } from '@carbon/icons-react';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export function ModalHeader({
-  buttonOnClick,
-  children,
-  className: customClassName,
-  closeClassName,
-  closeIconClassName,
-  closeModal,
-  iconDescription,
-  label,
-  labelClassName,
-  title,
-  titleClassName,
-  ...rest
-}) {
+export const ModalHeader = React.forwardRef(function ModalHeader(
+  {
+    buttonOnClick,
+    children,
+    className: customClassName,
+    closeClassName,
+    closeIconClassName,
+    closeModal,
+    iconDescription,
+    label,
+    labelClassName,
+    title,
+    titleClassName,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
 
   function handleCloseButtonClick(evt) {
@@ -58,7 +61,7 @@ export function ModalHeader({
   });
 
   return (
-    <div className={headerClass} {...rest}>
+    <div className={headerClass} {...rest} ref={ref}>
       {label && <h2 className={labelClass}>{label}</h2>}
 
       {title && <h3 className={titleClass}>{title}</h3>}
@@ -75,7 +78,7 @@ export function ModalHeader({
       </button>
     </div>
   );
-}
+});
 
 ModalHeader.propTypes = {
   /**
