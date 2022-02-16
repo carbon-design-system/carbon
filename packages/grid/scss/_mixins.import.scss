@@ -25,8 +25,8 @@
 
 @use 'sass:meta';
 @use 'sass:math';
-@import '@carbon/layout/scss/breakpoint'; /* stylelint-disable-line no-invalid-position-at-import-rule */
-@import 'prefix'; /* stylelint-disable-line no-invalid-position-at-import-rule */
+@import '@carbon/layout/scss/breakpoint';
+@import 'prefix';
 
 // -----------------------------------------------------------------------------
 // Columns

@@ -19,6 +19,7 @@
   0% {
     @include content-visible;
   }
+
   100% {
     @include content-hidden;
   }
@@ -28,6 +29,7 @@
   0% {
     @include content-hidden;
   }
+
   100% {
     @include content-visible;
   }

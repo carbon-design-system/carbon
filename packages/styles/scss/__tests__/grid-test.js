@@ -27,6 +27,7 @@ describe('@carbon/styles/scss/grid', () => {
         mixins: (
           css-grid: meta.mixin-exists('css-grid'),
           subgrid: meta.mixin-exists('subgrid'),
+          flex-grid: meta.mixin-exists('flex-grid'),
         ),
       ));
     `);
@@ -40,6 +41,7 @@ describe('@carbon/styles/scss/grid', () => {
       mixins: {
         'css-grid': true,
         subgrid: true,
+        'flex-grid': true,
       },
     });
   });

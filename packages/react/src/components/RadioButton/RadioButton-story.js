@@ -31,6 +31,10 @@ const labelPositions = {
 
 const props = {
   group: () => ({
+    hideLegend: boolean(
+      'Hide the legend (hideLegend) of the RadioButtonGroup (legendText)',
+      false
+    ),
     legendText: text(
       'The label (legend) of the RadioButtonGroup (legendText)',
       'Radio button heading'

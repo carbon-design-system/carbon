@@ -207,6 +207,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     0% {
       @include -content-visible;
     }
+
     100% {
       @include -content-hidden;
     }
@@ -216,6 +217,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     0% {
       @include -content-hidden;
     }
+
     100% {
       @include -content-visible;
     }

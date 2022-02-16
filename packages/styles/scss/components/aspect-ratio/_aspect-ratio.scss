@@ -1,0 +1,73 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use 'sass:math';
+@use 'sass:meta';
+@use '../../config' as *;
+
+/// The aspect ratios that are used to generate corresponding aspect ratio
+/// classes in code
+/// @type List
+/// @access public
+/// @group @carbon/grid
+$carbon--aspect-ratios: (
+  (16, 9),
+  (9, 16),
+  (2, 1),
+  (1, 2),
+  (4, 3),
+  (3, 4),
+  (3, 2),
+  (2, 3),
+  (1, 1)
+);
+
+/// Generates the CSS classname utilities for the aspect ratios
+///
+/// CSS Tricks article on aspect ratios and all the different ways it can be done.
+/// https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
+///
+/// That article references an earlier article on the topic.
+/// https://keithjgrant.com/posts/2017/03/aspect-ratios/
+///
+/// @param {Number} $width width from an aspect ratio
+/// @param {Number} $height height from an aspect ratio
+/// @access private
+/// @group @carbon/grid
+@mixin aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+  .#{$prefix}--aspect-ratio {
+    position: relative;
+  }
+
+  .#{$prefix}--aspect-ratio::before {
+    width: 1px;
+    height: 0;
+    margin-left: -1px;
+    content: '';
+    float: left;
+  }
+
+  .#{$prefix}--aspect-ratio::after {
+    display: table;
+    clear: both;
+    content: '';
+  }
+
+  @each $aspect-ratio in $aspect-ratios {
+    $width: list.nth($aspect-ratio, 1);
+    $height: list.nth($aspect-ratio, 2);
+
+    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
+      @if meta.function-exists('div', 'math') {
+        padding-top: math.percentage(math.div($height, $width));
+      } @else {
+        padding-top: math.percentage(($height / $width));
+      }
+    }
+  }
+}
