@@ -8454,6 +8454,16 @@ Map {
       "max": Object {
         "type": "number",
       },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+            "indented",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "value": Object {
         "type": "number",
       },

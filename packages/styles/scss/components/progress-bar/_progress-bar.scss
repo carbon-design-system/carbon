@@ -11,6 +11,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/visually-hidden' as *;
 
 /// Progress Bar styles
 /// @access public
@@ -78,5 +79,25 @@
     100% {
       background-position-x: -105%;
     }
+  }
+
+  .#{$prefix}--progress-bar--inline {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__label {
+    flex-shrink: 0;
+    margin-bottom: 0;
+    margin-inline-end: $spacing-05;
+  }
+
+  .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__helper-text {
+    @include visually-hidden;
+  }
+
+  .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__label,
+  .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__helper-text {
+    padding-inline: $spacing-05;
   }
 }
