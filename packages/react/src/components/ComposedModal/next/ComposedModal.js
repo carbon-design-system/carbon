@@ -11,13 +11,16 @@ import requiredIfGivenPropIsTruthy from '../../../prop-types/requiredIfGivenProp
 import wrapFocus from '../../../internal/wrapFocus';
 import { usePrefix } from '../../../internal/usePrefix';
 
-export function ModalBody({
-  className: customClassName,
-  children,
-  hasForm,
-  hasScrollingContent,
-  ...rest
-}) {
+export const ModalBody = React.forwardRef(function ModalBody(
+  {
+    className: customClassName,
+    children,
+    hasForm,
+    hasScrollingContent,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
   const contentClass = cx({
     [`${prefix}--modal-content`]: true,
@@ -33,7 +36,11 @@ export function ModalBody({
     : {};
   return (
     <>
-      <div className={contentClass} {...hasScrollingContentProps} {...rest}>
+      <div
+        className={contentClass}
+        {...hasScrollingContentProps}
+        {...rest}
+        ref={ref}>
         {children}
       </div>
       {hasScrollingContent && (
@@ -41,7 +48,7 @@ export function ModalBody({
       )}
     </>
   );
-}
+});
 
 ModalBody.propTypes = {
   /**
