@@ -5,10 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:meta';
-@use "sass:math";
-
+@use 'sass:list';
 @use 'sass:map';
+@use "sass:math";
+@use 'sass:meta';
 @use 'config' as *;
 @use 'breakpoint' as *;
 

@@ -99,9 +99,6 @@ const cloptions = commander
   .option('-ds, --use-dart-sass', 'Uses dart-sass instead of node-sass')
   .parse(process.argv);
 
-// Axe A11y Test
-const axe = require('gulp-axe-webdriver');
-
 const promisePortSassDevBuild = portscanner.findAPortNotInUse(
   cloptions.portSassDevBuild,
   cloptions.portSassDevBuild + 100
@@ -643,35 +640,7 @@ const startTest = (done) => {
 
 gulp.task('test:unit', gulp.series('html:source', startTest));
 
-const startAccessibilityTest = (done) => {
-  const componentName = cloptions.name;
-  const options = {
-    a11yCheckOptions: {
-      rules: {
-        'html-has-lang': { enabled: false },
-        bypass: { enabled: false },
-        'image-alt': { enabled: false },
-      },
-    },
-    verbose: true,
-    showOnlyViolations: true,
-    exclude: '.offleft, #flex-col, #flex-row',
-    tags: ['wcag2aa', 'wcag2a'],
-    folderOutputReport: !componentName ? 'tests/axe/allHtml' : 'tests/axe',
-    saveOutputIn: !componentName
-      ? `a11y-html.json`
-      : `a11y-${componentName}.json`,
-    urls: !componentName
-      ? ['http://localhost:3000']
-      : [`http://localhost:3000/component/${componentName}/`],
-  };
-
-  return axe(options, done);
-};
-
-gulp.task('test:a11y', gulp.series('sass:compiled', startAccessibilityTest));
-
-gulp.task('test', gulp.parallel('test:unit', 'test:a11y'));
+gulp.task('test', gulp.parallel('test:unit'));
 
 // Watch Tasks
 gulp.task('watch', () => {
