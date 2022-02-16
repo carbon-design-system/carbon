@@ -41,16 +41,19 @@ function Column({
   );
 }
 
+const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
+
 const spanPropType = FeatureFlags.enabled('enable-css-grid')
   ? PropTypes.oneOfType([
       PropTypes.bool,
       PropTypes.number,
       PropTypes.shape({
-        span: PropTypes.number,
+        span: PropTypes.oneOfType([PropTypes.number, percentSpanType]),
         offset: PropTypes.number,
         start: PropTypes.number,
         end: PropTypes.number,
       }),
+      percentSpanType,
     ])
   : PropTypes.oneOfType([
       PropTypes.bool,
@@ -149,6 +152,13 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
       continue;
     }
 
+    // If our breakpoint is a string, the user has specified a percent
+    // they'd like this column to span.
+    if (typeof breakpoint === 'string') {
+      classNames.push(`${prefix}--${name}:col-span-${breakpoint.slice(0, -1)}`);
+      continue;
+    }
+
     // If our breakpoint is a number, the user has specified the number of
     // columns they'd like this column to span
     if (typeof breakpoint === 'number') {
@@ -172,6 +182,9 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
 
     if (typeof span === 'number') {
       classNames.push(`${prefix}--${name}:col-span-${span}`);
+    } else if (typeof span === 'string') {
+      classNames.push(`${prefix}--${name}:col-span-${span.slice(0, -1)}`);
+      continue;
     }
   }
 

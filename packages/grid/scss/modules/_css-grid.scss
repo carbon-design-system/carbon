@@ -5,10 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:meta';
-@use "sass:math";
-
+@use 'sass:list';
 @use 'sass:map';
+@use "sass:math";
+@use 'sass:meta';
 @use 'config' as *;
 @use 'breakpoint' as *;
 
@@ -78,38 +78,6 @@
 }
 
 // -----------------------------------------------------------------------------
-// Narrow
-// -----------------------------------------------------------------------------
-.#{$prefix}--css-grid--narrow {
-  --cds-grid-margin: 1rem;
-
-  padding-right: var(--cds-grid-margin);
-  padding-left: var(--cds-grid-margin);
-
-  @include breakpoint(md) {
-    padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
-    padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
-  }
-}
-
-.#{$prefix}--css-grid--narrow > [class*='col'] {
-  margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
-}
-
-// Narrow subgrid inside wide
-.#{$prefix}--css-grid:not(.#{$prefix}--css-grid--condensed)
-  .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow {
-  padding: 0;
-}
-
-// Narrow subgrid column inside wide
-.#{$prefix}--css-grid
-  .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow
-  > [class*='col'] {
-  margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
-}
-
-// -----------------------------------------------------------------------------
 // Condensed
 // -----------------------------------------------------------------------------
 .#{$prefix}--css-grid--condensed {
@@ -120,8 +88,7 @@
 }
 
 // condensed subgrid inside wide
-.#{$prefix}--css-grid:not(.#{$prefix}--css-grid--narrow)
-  .bx--subgrid.#{$prefix}--css-grid--condensed {
+.#{$prefix}--css-grid .bx--subgrid.#{$prefix}--css-grid--condensed {
   margin-right: calc((var(--cds-grid-gutter-wide) / 2) * -1);
   margin-left: calc((var(--cds-grid-gutter-wide) / 2) * -1);
 }
@@ -172,26 +139,6 @@
 
 .#{$prefix}--col-span-100 {
   grid-column: 1 / -1;
-}
-
-@each $name, $value in $grid-breakpoints {
-  $columns: map.get($value, columns);
-
-  @include breakpoint($name) {
-    @for $i from 0 through $columns {
-      .#{$prefix}--#{$name}\:col-span-#{$i} {
-        @include -column-span($i);
-      }
-    }
-
-    .#{$prefix}--#{$name}\:col-span-auto {
-      grid-column: auto;
-    }
-
-    .#{$prefix}--#{$name}\:col-span-100 {
-      grid-column: 1 / -1;
-    }
-  }
 }
 
 .#{$prefix}--col-span-25 {
@@ -245,6 +192,48 @@
     --cds-grid-columns: 12;
 
     grid-column: span 12;
+  }
+}
+
+@each $name, $value in $grid-breakpoints {
+  $columns: map.get($value, columns);
+
+  @include breakpoint($name) {
+    @for $i from 0 through $columns {
+      .#{$prefix}--#{$name}\:col-span-#{$i} {
+        @include -column-span($i);
+      }
+    }
+
+    .#{$prefix}--#{$name}\:col-span-auto {
+      grid-column: auto;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-100 {
+      grid-column: 1 / -1;
+    }
+
+    $quarterGridColumns: math.div($columns, 4);
+
+    .#{$prefix}--#{$name}\:col-span-75 {
+      $calc: $quarterGridColumns * 3;
+      --cds-grid-columns: #{$calc};
+
+      grid-column: span $calc / span $calc;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-50 {
+      $calc: $quarterGridColumns * 2;
+      --cds-grid-columns: #{$calc};
+
+      grid-column: span $calc / span $calc;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-25 {
+      --cds-grid-columns: #{$quarterGridColumns};
+
+      grid-column: span $quarterGridColumns / span $quarterGridColumns;
+    }
   }
 }
 

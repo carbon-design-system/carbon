@@ -55,7 +55,7 @@
     "all-contributors-cli": "^6.19.0",
     "cross-env": "^7.0.0",
     "cross-spawn": "^7.0.0",
-    "doctoc": "^1.4.0",
+    "doctoc": "^2.0.0",
     "eslint": "^7.28.0",
     "fs-extra": "^10.0.0",
     "glob": "^7.1.4",
@@ -69,7 +69,7 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.0",
-    "stylelint": "^13.13.1"
+    "stylelint": "^14.3.0"
   },
   "commitlint": {
     "extends": [
