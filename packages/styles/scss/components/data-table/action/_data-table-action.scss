@@ -26,9 +26,8 @@
     // Need for batch actions
     position: relative;
     display: flex;
-    overflow: hidden;
     width: 100%;
-    height: $spacing-09;
+    min-height: $spacing-09;
     background-color: $layer;
   }
 
@@ -375,17 +374,16 @@
   //-------------------------------------------------
   .#{$prefix}--batch-actions {
     position: absolute;
-    top: 0;
+    right: 0;
+    bottom: 0;
     left: 0;
     display: flex;
-    width: 100%;
-    height: 100%;
     align-items: center;
+    justify-content: space-between;
     padding-right: $spacing-06;
     padding-left: $spacing-06;
     background-color: $background-brand;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    overflow-x: auto;
     pointer-events: none;
     transform: translate3d(0, 48px, 0);
     transition: transform $duration-fast-02 motion(standard, productive),
@@ -399,6 +397,7 @@
   }
 
   .#{$prefix}--batch-actions--active {
+    overflow: auto hidden;
     clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     pointer-events: all;
     transform: translate3d(0, 0, 0);
@@ -409,12 +408,14 @@
     position: absolute;
     right: 0;
     display: flex;
+    align-items: center;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn {
     min-width: 0;
     padding: $button-padding-ghost;
     color: $text-on-color;
+    white-space: nowrap;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn:disabled {
@@ -487,12 +488,20 @@
 
   // items selected text
   .#{$prefix}--batch-summary {
-    position: absolute;
+    position: sticky;
+    z-index: 100000;
     left: 0;
     display: flex;
+    min-height: 3rem;
     align-items: center;
+    padding: 0 $spacing-05;
     margin-left: $spacing-05;
+    background-color: $background-brand;
     color: $text-on-color;
+  }
+
+  .#{$prefix}--batch-summary__scroll {
+    box-shadow: 0.5px 0 0.2px $link-primary-hover;
   }
 
   .#{$prefix}--batch-summary__para {
