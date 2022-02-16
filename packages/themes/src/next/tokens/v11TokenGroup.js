@@ -253,11 +253,13 @@ export const link = TokenGroup.create({
       name: 'link-primary-hover',
     },
     'link-secondary',
-    'link-inverse',
     {
       state: 'visited',
       name: 'link-visited',
     },
+    'link-inverse',
+    'link-inverse-active',
+    'link-inverse-hover',
   ],
 });
 

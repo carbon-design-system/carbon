@@ -87,16 +87,6 @@ export const Default = () => (
   </ProgressIndicator>
 );
 
-Default.parameters = {
-  info: {
-    text: `
-        For React usage, ProgressIndicator holds the currentIndex state to indicate which ProgressStep is the current step. The ProgressIndicator component should always be used with ProgressStep components as its children. Changing currentIndex prop will automatically set the ProgressStep components props (complete, incomplete, current).
-        For general usage, Progress Indicators display steps in a process. It should indicate when steps have been complete, the active step,
-        and the steps to come.
-      `,
-  },
-};
-
 export const Interactive = () => (
   <ProgressIndicator
     currentIndex={number('Current progress (currentIndex)', 1)}
@@ -133,22 +123,6 @@ export const Interactive = () => (
 
 Interactive.storyName = 'interactive';
 
-Interactive.parameters = {
-  info: {
-    text: `
-       If you register an onChange handler, the Progress Indicator will become interactive.  Your parent component should update the currentIndex prop within the onChange handler.
-      `,
-  },
-};
-
 export const Skeleton = () => <ProgressIndicatorSkeleton />;
 
 Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-            Placeholder skeleton state to use when content is loading.
-        `,
-  },
-};

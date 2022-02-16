@@ -21,8 +21,8 @@
 
 @use 'sass:meta';
 @use "sass:math";
-@import 'breakpoint'; /* stylelint-disable-line no-invalid-position-at-import-rule */
-@import 'utilities'; /* stylelint-disable-line no-invalid-position-at-import-rule */
+@import 'breakpoint';
+@import 'utilities';
 
 /// Get the column width for a given breakpoint
 /// @param {String} $breakpoint

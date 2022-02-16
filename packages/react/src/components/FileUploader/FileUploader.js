@@ -39,6 +39,11 @@ export default class FileUploader extends React.Component {
     className: PropTypes.string,
 
     /**
+     * Specify whether file input is disabled
+     */
+    disabled: PropTypes.bool,
+
+    /**
      * Specify the status of the File Upload
      */
     filenameStatus: PropTypes.oneOf(['edit', 'complete', 'uploading'])
@@ -100,6 +105,7 @@ export default class FileUploader extends React.Component {
   static contextType = PrefixContext;
 
   static defaultProps = {
+    disabled: false,
     iconDescription: FeatureFlags.enabled('enable-v11-release')
       ? undefined
       : 'Provide icon description',
@@ -167,6 +173,7 @@ export default class FileUploader extends React.Component {
       iconDescription,
       buttonLabel,
       buttonKind,
+      disabled,
       filenameStatus,
       labelDescription,
       labelTitle,
@@ -186,6 +193,11 @@ export default class FileUploader extends React.Component {
       [className]: className,
     });
 
+    const getHelperLabelClasses = (baseClass) =>
+      classNames(baseClass, {
+        [`${prefix}--label-description--disabled`]: disabled,
+      });
+
     const selectedFileClasses = classNames(`${prefix}--file__selected-file`, {
       [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
       [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
@@ -194,10 +206,15 @@ export default class FileUploader extends React.Component {
     return (
       <div className={classes} {...other}>
         {FeatureFlags.enabled('enable-v11-release') && !labelTitle ? null : (
-          <p className={`${prefix}--file--label`}>{labelTitle}</p>
+          <p className={getHelperLabelClasses(`${prefix}--file--label`)}>
+            {labelTitle}
+          </p>
         )}
-        <p className={`${prefix}--label-description`}>{labelDescription}</p>
+        <p className={getHelperLabelClasses(`${prefix}--label-description`)}>
+          {labelDescription}
+        </p>
         <FileUploaderButton
+          disabled={disabled}
           labelText={buttonLabel}
           multiple={multiple}
           buttonKind={buttonKind}

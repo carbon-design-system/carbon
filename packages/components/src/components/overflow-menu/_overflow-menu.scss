@@ -119,6 +119,7 @@
 
   .#{$prefix}--overflow-menu-options--light {
     background-color: $field-02;
+
     &::after {
       background-color: $field-02;
     }
@@ -161,6 +162,7 @@
     &[data-floating-menu-direction='top']::after {
       width: rem(32px);
     }
+
     &[data-floating-menu-direction='left']::after,
     &[data-floating-menu-direction='right']::after {
       height: rem(32px);
@@ -174,6 +176,7 @@
     &[data-floating-menu-direction='top']::after {
       width: rem(48px);
     }
+
     &[data-floating-menu-direction='left']::after,
     &[data-floating-menu-direction='right']::after {
       height: rem(48px);

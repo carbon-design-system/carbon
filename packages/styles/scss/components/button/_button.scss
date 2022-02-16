@@ -102,9 +102,9 @@
       transparent,
       transparent,
       $link-primary,
-      $background-hover,
+      $layer-hover,
       currentColor,
-      $background-active
+      $layer-active
     );
 
     padding: $button-padding-ghost;
@@ -243,6 +243,7 @@
 
       &:active {
         border-color: $button-danger-active;
+        background-color: $button-danger-active;
         color: $text-on-color;
       }
 
@@ -334,7 +335,7 @@
 
   //expressive styles
   .#{$prefix}--btn--expressive {
-    @include type-style('body-short-02');
+    @include type-style('body-compact-02');
 
     min-height: 3rem;
   }

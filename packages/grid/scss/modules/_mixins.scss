@@ -65,11 +65,11 @@
     // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
     // do not appear to require this.
     @if meta.function-exists('div', 'math') {
-      max-width: percentage(math.div($span, $columns));
-      flex: 0 0 percentage(math.div($span, $columns));
+      max-width: math.percentage(math.div($span, $columns));
+      flex: 0 0 math.percentage(math.div($span, $columns));
     } @else {
-      max-width: percentage(($span / $columns));
-      flex: 0 0 percentage(($span / $columns));
+      max-width: math.percentage(($span / $columns));
+      flex: 0 0 math.percentage(($span / $columns));
     }
   }
 }
@@ -89,7 +89,7 @@
   @if $offset == 0 {
     margin-left: 0;
   } @else {
-    margin-left: percentage($offset);
+    margin-left: math.percentage($offset);
   }
 }
 
@@ -108,7 +108,7 @@
 
   @each $breakpoint in map-keys($breakpoints) {
     $infix: breakpoint-infix($breakpoint);
-    $columns: map-get(map-get($breakpoints, $breakpoint), columns);
+    $columns: map.get(map.get($breakpoints, $breakpoint), columns);
 
     // Allow columns to stretch full width below their breakpoints
     @for $i from 0 through $columns {
@@ -252,11 +252,11 @@
   @include -set-largest-breakpoint();
 
   @each $name, $value in $breakpoints {
-    $prev-breakpoint: map-get($breakpoints, breakpoint-prev($name));
-    $margin: map-get($value, margin);
+    $prev-breakpoint: map.get($breakpoints, breakpoint-prev($name));
+    $margin: map.get($value, margin);
 
     @if $prev-breakpoint {
-      $prev-margin: map-get($prev-breakpoint, margin);
+      $prev-margin: map.get($prev-breakpoint, margin);
       @if $prev-margin != $margin {
         @include breakpoint($name) {
           padding-right: #{($grid-gutter * 0.5) + $margin};
@@ -279,7 +279,7 @@
 @mixin -set-largest-breakpoint($breakpoints: $grid-breakpoints) {
   $largest-breakpoint: last-map-item($breakpoints);
 
-  max-width: map-get($largest-breakpoint, 'width');
+  max-width: map.get($largest-breakpoint, 'width');
 }
 
 /// Add in the max-widths for each breakpoint to the container
@@ -289,7 +289,7 @@
 @mixin -make-container-max-widths($breakpoints: $grid-breakpoints) {
   @each $name, $value in $breakpoints {
     @include breakpoint($name) {
-      max-width: map-get($value, width);
+      max-width: map.get($value, width);
     }
   }
 }
