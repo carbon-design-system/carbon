@@ -29,6 +29,20 @@ You can use this package by writing the following:
 }
 ```
 
+### Type classes
+
+The `type-classes` mixin will output a collection of utility CSS that you can
+use to style a given HTML element with type-related styles.
+
+In particular, you can use the following classes:
+
+| Class                      | Description                                                                                                                                                                                                           |
+| :------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `.cds--type-{font-family}` | Set the `font-family` property for the given font. This can include `mono`, `sans`, `sans-condensed`, `sans-arabic`, `sans-devanagari`, `sans-hebrew`, `sans-jp`, `sans-kr`, `sans-thai-looped`, `sans-thai`, `serif` |
+| `.cds--type-{font-weight}` | Set the `font-weight` property                                                                                                                                                                                        |
+| `.cds--type-italic`        | Set the `font-style` property to `italic`                                                                                                                                                                             |
+| `.cds--type-{token}`       | Style the HTML element with the given type token                                                                                                                                                                      |
+
 ## API
 
 | Export                     | Description                                                       | Link | !default |
@@ -38,7 +52,6 @@ You can use this package by writing the following:
 | `@mixin default-type`      | A mixin used to emit default styles for typographic HTML elements |      |          |
 | `@mixin type-style`        | A mixin used to emit all declarations for a type token            |      |          |
 | `$label-01`                |                                                                   |      | ✅       |
-| `$legal-01`                |                                                                   |      | ✅       |
 | `$legal-02`                |                                                                   |      | ✅       |
 | `$helper-text-01`          |                                                                   |      | ✅       |
 | `$body-short-01`           |                                                                   |      | ✅       |
