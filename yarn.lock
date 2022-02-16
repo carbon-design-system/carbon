@@ -2227,8 +2227,8 @@ __metadata:
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
     "@carbon/cli": ^10.33.0
+    "@carbon/grid": ^10.41.0
     "@carbon/import-once": ^10.6.0
-    "@carbon/layout": ^10.36.0
     "@carbon/test-utils": ^10.21.0
     change-case: ^4.1.1
     rimraf: ^3.0.0

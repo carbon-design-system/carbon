@@ -8,6 +8,6 @@
 @forward '@carbon/colors';
 @forward '@carbon/themes';
 @forward '@carbon/layout';
-@forward '@carbon/grid';
+@forward '@carbon/grid' hide $prefix;
 @forward '@carbon/type';
 @forward '@carbon/motion';
