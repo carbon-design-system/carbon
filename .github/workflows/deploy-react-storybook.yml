@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: '16.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
       - name: Install ibmcloud CLI
