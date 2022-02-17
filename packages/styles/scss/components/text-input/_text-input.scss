@@ -102,12 +102,11 @@
     // top/transform used to center invalid icon in IE11
     top: 50%;
     right: $spacing-05;
-    fill: $support-error;
     transform: translateY(-50%);
   }
 
   .#{$prefix}--text-input__invalid-icon {
-    fill: $support-01;
+    fill: $support-error;
   }
 
   .#{$prefix}--text-input__invalid-icon--warning {
