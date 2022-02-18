@@ -49,6 +49,9 @@ export const Default = () => (
         <Tab disabled>Tab Label 3</Tab>
         <Tab>Tab Label 4 with a very long long label</Tab>
         <Tab>Tab Label 5</Tab>
+        <Tab>Tab Label 6</Tab>
+        <Tab>Tab Label 7</Tab>
+        <Tab>Tab Label 8</Tab>
       </TabList>
       <TabPanels>
         <TabPanel>
@@ -58,6 +61,9 @@ export const Default = () => (
         <TabPanel>Tab Panel 3</TabPanel>
         <TabPanel>Tab Panel 4</TabPanel>
         <TabPanel>Tab Panel 5</TabPanel>
+        <TabPanel>Tab Panel 6</TabPanel>
+        <TabPanel>Tab Panel 7</TabPanel>
+        <TabPanel>Tab Panel 8</TabPanel>
       </TabPanels>
     </Tabs>
   </div>

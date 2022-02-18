@@ -17,7 +17,6 @@ import { useId } from '../../../internal/useId';
 import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
 import { useControllableState } from '../../../internal/useControllableState';
 import { useMergedRefs } from '../../../internal/useMergedRefs';
-import { useDelayedState } from '../../../internal/useDelayedState';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -85,19 +84,7 @@ Tabs.propTypes = {
   selectedIndex: PropTypes.number,
 };
 
-// function debounce(fn, wait = 1000) {
-//   let timeoutId = null;
-//   return () => {
-//     if (timeoutId) {
-//       window.clearTimeout(timeoutId);
-//     }
-//     timeoutId = setTimeout(() => {
-//       fn();
-//       timeoutId = null;
-//     }, wait);
-//   };
-// }
-
+// A useEffect hook that will only be called once, when your component is mounted.
 function useEffectOnce(callback) {
   const savedCallback = useRef(callback);
   const effectGuard = useRef(false);
@@ -112,6 +99,79 @@ function useEffectOnce(callback) {
       savedCallback.current();
     }
   }, []);
+}
+
+/**
+ * Coordinates onMouseDown, onMouseUp, and onClick events on the given ref, used for scrolling behavior in TabList
+ * @param {object} ref
+ * @param {object} config
+ * @param {Function} config.onPress
+ * @param {Function} config.onRelease
+ * @param {Function} config.onPressed
+ * @param {number} [config.delayMs]
+ */
+function usePressable(ref, { onPress, onRelease, onPressed, delayMs = 150 }) {
+  const savedOnPress = useRef(onPress);
+  const savedOnRelease = useRef(onRelease);
+  const savedOnPressed = useRef(onPressed);
+  const [pending, setPending] = useState(false);
+
+  useEffect(() => {
+    savedOnPress.current = onPress;
+  }, [onPress]);
+
+  useEffect(() => {
+    savedOnRelease.current = onRelease;
+  }, [onRelease]);
+
+  useEffect(() => {
+    savedOnPressed.current = onPressed;
+  }, [onPressed]);
+
+  useEffect(() => {
+    function onMouseDown() {
+      setPending(true);
+    }
+
+    function onMouseUp() {
+      setPending(false);
+    }
+
+    function onClick() {
+      savedOnRelease.current();
+    }
+
+    const { current: element } = ref;
+
+    element.addEventListener('mousedown', onMouseDown);
+    element.addEventListener('mouseup', onMouseUp);
+    element.addEventListener('click', onClick);
+
+    return () => {
+      element.removeEventListener('mousedown', onMouseDown);
+      element.removeEventListener('mouseup', onMouseUp);
+      element.removeEventListener('click', onClick);
+    };
+  }, [ref]);
+
+  useEffect(() => {
+    if (pending) {
+      let cleanup = null;
+      const timerId = setTimeout(() => {
+        savedOnPress.current();
+        if (savedOnPressed.current) {
+          cleanup = savedOnPressed.current();
+        }
+      }, delayMs);
+
+      return () => {
+        clearTimeout(timerId);
+        if (cleanup) {
+          cleanup();
+        }
+      };
+    }
+  }, [pending, delayMs]);
 }
 
 /**
@@ -138,11 +198,13 @@ function TabList({
   'aria-label': label,
   children,
   className: customClassName,
-  light,
-  scrollIntoView,
-  scrollDebounceWait = 200,
   contained = false,
   iconSize,
+  leftOverflowButtonProps,
+  light,
+  rightOverflowButtonProps,
+  scrollDebounceWait = 200,
+  scrollIntoView,
   ...rest
 }) {
   const {
@@ -153,14 +215,12 @@ function TabList({
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
+  const previousButton = useRef(null);
+  const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(false);
-  // const [nextPressed, setNextPressed] = useState(false);
-  const [nextPressed, setNextPressed, cancelNext] = useDelayedState(false);
-  const [previousPressed, setPreviousPressed, cancelPrevious] = useDelayedState(
-    false
-  );
-  const overflowInterval = useRef();
+  const [nextPressed, setNextPressed] = useState(false);
+  const [previousPressed, setPreviousPressed] = useState(false);
 
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
@@ -230,37 +290,6 @@ function TabList({
     setScrollLeft(event.target.scrollLeft);
   }, scrollDebounceWait);
 
-  // function onNextOverflowMouseDown() {
-  //   // add something to only happen on left mouse click
-
-  //   overflowInterval = setInterval(() => {
-  //     const edgeReached = ref.current.scrollLeft
-  //       ? ref.current.scrollLeft + ref.current.clientWidth >=
-  //         ref.current.scrollWidth
-  //       : null;
-  //     if (edgeReached) {
-  //       clearInterval(overflowInterval);
-  //     }
-
-  //     ref.current.scrollLeft += 1 * 10;
-  //   });
-  // }
-
-  // function onPreviousOverflowMouseDown() {
-  //   // add something to only happen on left mouse click
-  //   overflowInterval = setInterval(() => {
-  //     if (ref.current.scrollLeft === 0) {
-  //       clearInterval(overflowInterval);
-  //     }
-
-  //     ref.current.scrollLeft += -10;
-  //   }, 10);
-  // }
-
-  // function onOverflowMouseUp() {
-  //   clearInterval(overflowInterval);
-  // }
-
   useEffectOnce(() => {
     const tab = tabs[selectedIndex];
     if (scrollIntoView && tab) {
@@ -303,79 +332,73 @@ function TabList({
     };
   }, []);
 
+  // updates scroll location for all scroll behavior.
   useLayoutEffect(() => {
     ref.current.scrollLeft = scrollLeft;
   }, [scrollLeft]);
 
-  // Creates an interval to continuously
-  useLayoutEffect(() => {
-    if (nextPressed) {
-      overflowInterval.current = setInterval(() => {
-        const edgeReached =
-          ref.current.scrollLeft + ref.current.clientWidth >=
-          ref.current.scrollWidth;
-        if (edgeReached) {
-          clearInterval(overflowInterval.current);
-          setNextPressed(false);
-          return;
-        }
-
+  // Hook to control onClick, onMouseDown, and onMouse up scroll behavior for scrolling to the right.
+  usePressable(nextButton, {
+    onPress() {
+      setNextPressed(true);
+    },
+    onPressed() {
+      const overflowInterval = setInterval(() => {
         setScrollLeft((scrollLeft) => scrollLeft + 10);
       });
-    }
-
-    return () => {
-      if (overflowInterval.current) {
-        clearInterval(overflowInterval.current);
+      return () => {
+        clearInterval(overflowInterval);
+      };
+    },
+    onRelease() {
+      if (nextPressed) {
+        setNextPressed(false);
+        return;
       }
-    };
-  }, [nextPressed, setNextPressed]);
 
-  useLayoutEffect(() => {
-    if (previousPressed) {
-      overflowInterval.current = setInterval(() => {
-        if (ref.current.scrollLeft === 0) {
-          clearInterval(overflowInterval.current);
-          setPreviousPressed(false);
-          return;
-        }
+      setScrollLeft(
+        Math.min(
+          scrollLeft + (ref.current.scrollWidth / tabs.length) * 1.5,
+          ref.current.scrollWidth - ref.current.clientWidth
+        )
+      );
+    },
+  });
+
+  // Hook to control onClick, onMouseDown, and onMouse up scroll behavior for scrolling to the left.
+  usePressable(previousButton, {
+    onPress() {
+      setPreviousPressed(true);
+    },
+    onPressed() {
+      const overflowInterval = setInterval(() => {
         setScrollLeft((scrollLeft) => scrollLeft - 10);
       });
-    }
-
-    return () => {
-      if (overflowInterval.current) {
-        clearInterval(overflowInterval.current);
+      return () => {
+        clearInterval(overflowInterval);
+      };
+    },
+    onRelease() {
+      if (previousPressed) {
+        setPreviousPressed(false);
+        return;
       }
-    };
-  }, [previousPressed, setPreviousPressed]);
+
+      setScrollLeft(
+        Math.max(scrollLeft - (ref.current.scrollWidth / tabs.length) * 1.5, 0)
+      );
+    },
+  });
 
   return (
     <div className={className}>
       <button
         aria-hidden="true"
         aria-label="Scroll left"
-        onClick={() => {
-          console.log('onClick');
-          if (previousPressed) {
-            setPreviousPressed(false);
-            return;
-          }
-
-          cancelPrevious();
-          setScrollLeft(
-            Math.max(scrollLeft - ref.current.scrollWidth / tabs.length, 0)
-          );
-        }}
-        onMouseDown={(event) => {
-          console.log('onMouseDown');
-          // only change state for left mouse button click
-          if (event.button === 0) {
-            setPreviousPressed(true, 100);
-          }
-        }}
+        ref={previousButton}
         className={previousButtonClasses}
-        type="button">
+        type="button"
+        {...leftOverflowButtonProps}>
         <ChevronLeft16 />
       </button>
       {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
@@ -402,28 +425,10 @@ function TabList({
       <button
         aria-hidden="true"
         aria-label="Scroll right"
-        onClick={() => {
-          if (nextPressed) {
-            setNextPressed(false);
-            return;
-          }
-
-          cancelNext();
-          setScrollLeft(
-            Math.min(
-              scrollLeft + ref.current.scrollWidth / tabs.length,
-              ref.current.scrollWidth - ref.current.clientWidth
-            )
-          );
-        }}
-        onMouseDown={(event) => {
-          // only change state for left mouse button click
-          if (event.button === 0) {
-            setNextPressed(true, 100);
-          }
-        }}
+        ref={nextButton}
         className={nextButtonClasses}
-        type="button">
+        type="button"
+        {...rightOverflowButtonProps}>
         <ChevronRight16 />
       </button>
     </div>
@@ -465,9 +470,19 @@ TabList.propTypes = {
   iconSize: PropTypes.oneOf(['default', 'lg']),
 
   /**
+   * Provide the props that describe the left overflow button
+   */
+  leftOverflowButtonProps: PropTypes.object,
+
+  /**
    * Specify whether or not to use the light component variant
    */
   light: PropTypes.bool,
+
+  /**
+   * Provide the props that describe the right overflow button
+   */
+  rightOverflowButtonProps: PropTypes.object,
 
   /**
    * Optionally provide a delay (in milliseconds) passed to the lodash
