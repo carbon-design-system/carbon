@@ -154,6 +154,10 @@
       content: '';
       transition: background-color $duration-fast-02
         motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     &:hover {
