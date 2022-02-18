@@ -30,6 +30,7 @@ body:
         - '@carbon/pictograms'
         - '@carbon/pictograms-react'
         - '@carbon/react'
+        - '@carbon/styles'
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'

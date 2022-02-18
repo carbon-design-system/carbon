@@ -26,7 +26,7 @@
   }
 
   .#{$prefix}--number input[type='number'] {
-    @include type-style('body-short-01');
+    @include type-style('code-01');
     @include focus-outline('reset');
 
     display: inline-flex;

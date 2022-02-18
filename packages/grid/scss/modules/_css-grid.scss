@@ -5,10 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:meta';
-@use "sass:math";
-
+@use 'sass:list';
 @use 'sass:map';
+@use "sass:math";
+@use 'sass:meta';
 @use 'config' as *;
 @use 'breakpoint' as *;
 
@@ -78,38 +78,6 @@
 }
 
 // -----------------------------------------------------------------------------
-// Narrow
-// -----------------------------------------------------------------------------
-.#{$prefix}--css-grid--narrow {
-  --cds-grid-margin: 1rem;
-
-  padding-right: var(--cds-grid-margin);
-  padding-left: var(--cds-grid-margin);
-
-  @include breakpoint(md) {
-    padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
-    padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
-  }
-}
-
-.#{$prefix}--css-grid--narrow > [class*='col'] {
-  margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
-}
-
-// Narrow subgrid inside wide
-.#{$prefix}--css-grid:not(.#{$prefix}--css-grid--condensed)
-  .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow {
-  padding: 0;
-}
-
-// Narrow subgrid column inside wide
-.#{$prefix}--css-grid
-  .#{$prefix}--subgrid.#{$prefix}--css-grid--narrow
-  > [class*='col'] {
-  margin-left: calc(var(--cds-grid-gutter) / 2 * -1);
-}
-
-// -----------------------------------------------------------------------------
 // Condensed
 // -----------------------------------------------------------------------------
 .#{$prefix}--css-grid--condensed {
@@ -120,8 +88,7 @@
 }
 
 // condensed subgrid inside wide
-.#{$prefix}--css-grid:not(.#{$prefix}--css-grid--narrow)
-  .bx--subgrid.#{$prefix}--css-grid--condensed {
+.#{$prefix}--css-grid .bx--subgrid.#{$prefix}--css-grid--condensed {
   margin-right: calc((var(--cds-grid-gutter-wide) / 2) * -1);
   margin-left: calc((var(--cds-grid-gutter-wide) / 2) * -1);
 }
@@ -172,26 +139,6 @@
 
 .#{$prefix}--col-span-100 {
   grid-column: 1 / -1;
-}
-
-@each $name, $value in $grid-breakpoints {
-  $columns: map.get($value, columns);
-
-  @include breakpoint($name) {
-    @for $i from 0 through $columns {
-      .#{$prefix}--#{$name}\:col-span-#{$i} {
-        @include -column-span($i);
-      }
-    }
-
-    .#{$prefix}--#{$name}\:col-span-auto {
-      grid-column: auto;
-    }
-
-    .#{$prefix}--#{$name}\:col-span-100 {
-      grid-column: 1 / -1;
-    }
-  }
 }
 
 .#{$prefix}--col-span-25 {
@@ -245,6 +192,48 @@
     --cds-grid-columns: 12;
 
     grid-column: span 12;
+  }
+}
+
+@each $name, $value in $grid-breakpoints {
+  $columns: map.get($value, columns);
+
+  @include breakpoint($name) {
+    @for $i from 0 through $columns {
+      .#{$prefix}--#{$name}\:col-span-#{$i} {
+        @include -column-span($i);
+      }
+    }
+
+    .#{$prefix}--#{$name}\:col-span-auto {
+      grid-column: auto;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-100 {
+      grid-column: 1 / -1;
+    }
+
+    $quarterGridColumns: math.div($columns, 4);
+
+    .#{$prefix}--#{$name}\:col-span-75 {
+      $calc: $quarterGridColumns * 3;
+      --cds-grid-columns: #{$calc};
+
+      grid-column: span $calc / span $calc;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-50 {
+      $calc: $quarterGridColumns * 2;
+      --cds-grid-columns: #{$calc};
+
+      grid-column: span $calc / span $calc;
+    }
+
+    .#{$prefix}--#{$name}\:col-span-25 {
+      --cds-grid-columns: #{$quarterGridColumns};
+
+      grid-column: span $quarterGridColumns / span $quarterGridColumns;
+    }
   }
 }
 
@@ -356,71 +345,3 @@
 .#{$prefix}--align-items-center {
   align-items: center;
 }
-
-// -----------------------------------------------------------------------------
-// Aspect ratio -- TODO: in v11 should this move to a new file to live alongside the AspectRatio component?
-// -----------------------------------------------------------------------------
-
-/// The aspect ratios that are used to generate corresponding aspect ratio
-/// classes in code
-/// @type List
-/// @access public
-/// @group @carbon/grid
-$carbon--aspect-ratios: (
-  (16, 9),
-  (9, 16),
-  (2, 1),
-  (1, 2),
-  (4, 3),
-  (3, 4),
-  (3, 2),
-  (2, 3),
-  (1, 1)
-);
-
-/// Generates the CSS classname utilities for the aspect ratios
-///
-/// CSS Tricks article on aspect ratios and all the different ways it can be done.
-/// https://css-tricks.com/aspect-ratio-boxes/#article-header-id-6
-///
-/// That article references an earlier article on the topic.
-/// https://keithjgrant.com/posts/2017/03/aspect-ratios/
-///
-/// @param {Number} $width width from an aspect ratio
-/// @param {Number} $height height from an aspect ratio
-/// @access private
-/// @group @carbon/grid
-@mixin carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
-  .#{$prefix}--aspect-ratio {
-    position: relative;
-  }
-
-  .#{$prefix}--aspect-ratio::before {
-    width: 1px;
-    height: 0;
-    margin-left: -1px;
-    content: '';
-    float: left;
-  }
-
-  .#{$prefix}--aspect-ratio::after {
-    display: table;
-    clear: both;
-    content: '';
-  }
-
-  @each $aspect-ratio in $aspect-ratios {
-    $width: nth($aspect-ratio, 1);
-    $height: nth($aspect-ratio, 2);
-
-    .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
-      @if meta.function-exists('div', 'math') {
-        padding-top: percentage(math.div($height, $width));
-      } @else {
-        padding-top: percentage(($height / $width));
-      }
-    }
-  }
-}
-
-@include carbon--aspect-ratio();
