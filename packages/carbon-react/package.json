@@ -1,7 +1,7 @@
 {
   "name": "@carbon/react",
   "description": "React components for the Carbon Design System",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -43,11 +43,11 @@
   },
   "dependencies": {
     "@carbon/feature-flags": "^0.7.0",
-    "@carbon/icons-react": "^10.45.0",
-    "@carbon/styles": "^0.13.0",
+    "@carbon/icons-react": "^10.46.0",
+    "@carbon/styles": "^0.14.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
-    "carbon-components": "^10.52.0",
-    "carbon-components-react": "^7.52.0",
+    "carbon-components": "^10.53.0",
+    "carbon-components-react": "^7.53.0",
     "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
@@ -58,10 +58,10 @@
     "@babel/plugin-transform-react-constant-elements": "^7.16.7",
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
-    "@carbon/themes": "^10.50.0",
+    "@carbon/themes": "^10.51.0",
     "@rollup/plugin-babel": "^5.3.0",
-    "@rollup/plugin-commonjs": "^18.0.0",
-    "@rollup/plugin-node-resolve": "^11.2.1",
+    "@rollup/plugin-commonjs": "^21.0.0",
+    "@rollup/plugin-node-resolve": "^13.0.0",
     "@storybook/addon-a11y": "^6.4.9",
     "@storybook/addon-actions": "^6.4.9",
     "@storybook/addon-docs": "^6.4.9",

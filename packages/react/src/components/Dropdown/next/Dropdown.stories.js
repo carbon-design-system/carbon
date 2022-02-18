@@ -15,6 +15,12 @@ export default {
   subcomponents: {
     DropdownSkeleton,
   },
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
 };
 
 const items = [
@@ -45,7 +51,7 @@ const items = [
   },
 ];
 
-export const Default = () => (
+export const Default = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -54,11 +60,12 @@ export const Default = () => (
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
   </div>
 );
 
-export const Inline = () => (
+export const Inline = (args) => (
   <div style={{ width: 600 }}>
     <Dropdown
       id="inline"
@@ -67,11 +74,12 @@ export const Inline = () => (
       type="inline"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
   </div>
 );
 
-export const WithLayer = () => (
+export const WithLayer = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -80,6 +88,7 @@ export const WithLayer = () => (
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
     <Layer>
       <Dropdown
@@ -89,6 +98,7 @@ export const WithLayer = () => (
         label="Dropdown menu options"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
+        {...args}
       />
       <Layer>
         <Dropdown
@@ -98,13 +108,14 @@ export const WithLayer = () => (
           label="Dropdown menu options"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
+          {...args}
         />
       </Layer>
     </Layer>
   </div>
 );
 
-export const InlineWithLayer = () => (
+export const InlineWithLayer = (args) => (
   <div style={{ width: 600 }}>
     <Dropdown
       id="inline"
@@ -113,6 +124,7 @@ export const InlineWithLayer = () => (
       type="inline"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
     <Layer>
       <Dropdown
@@ -122,6 +134,7 @@ export const InlineWithLayer = () => (
         type="inline"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
+        {...args}
       />
       <Layer>
         <Dropdown
@@ -131,14 +144,15 @@ export const InlineWithLayer = () => (
           type="inline"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
+          {...args}
         />
       </Layer>
     </Layer>
   </div>
 );
 
-export const Skeleton = () => (
+export const Skeleton = (args) => (
   <div style={{ width: 300 }}>
-    <DropdownSkeleton />
+    <DropdownSkeleton {...args} />
   </div>
 );

@@ -89,6 +89,7 @@
 
   @if $tooltip-type == 'icon' {
     cursor: pointer;
+
     &:focus {
       outline: 1px solid transparent;
 
@@ -177,6 +178,7 @@
       from {
         opacity: 0;
       }
+
       to {
         opacity: 1;
       }

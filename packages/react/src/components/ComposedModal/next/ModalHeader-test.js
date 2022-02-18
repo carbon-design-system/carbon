@@ -8,6 +8,9 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { ModalHeader } from './ModalHeader';
+import { settings } from 'carbon-components';
+
+const { prefix } = settings;
 
 describe('ModalHeader', () => {
   afterEach(cleanup);
@@ -22,5 +25,12 @@ describe('ModalHeader', () => {
     const { container } = render(<ModalHeader label="Carbon label" />);
 
     expect(container.firstChild).toHaveTextContent('Carbon label');
+  });
+
+  it('should render with a ref', () => {
+    const ref = React.createRef();
+    render(<ModalHeader label="Carbon label" ref={ref} />);
+
+    expect(ref.current).toHaveClass(`${prefix}--modal-header`);
   });
 });

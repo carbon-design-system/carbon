@@ -18,7 +18,7 @@ $imported-modules: () !default;
 /// @content Declaration blocks to be imported
 /// @group @carbon/import-once
 @mixin exports($name, $warn: false) {
-  @if (index($imported-modules, $name) == null) {
+  @if not(index($imported-modules, $name)) {
     $imported-modules: append($imported-modules, $name) !global;
     @content;
   } @else if $warn == true {

@@ -21,9 +21,9 @@
 
 @use "sass:meta";
 @use "sass:math";
-@import '@carbon/layout/scss/breakpoint'; /* stylelint-disable-line no-invalid-position-at-import-rule */
-@import 'font-family'; /* stylelint-disable-line no-invalid-position-at-import-rule */
-@import 'scale'; /* stylelint-disable-line no-invalid-position-at-import-rule */
+@import '@carbon/layout/scss/breakpoint';
+@import 'font-family';
+@import 'scale';
 
 /// @type Map
 /// @access public

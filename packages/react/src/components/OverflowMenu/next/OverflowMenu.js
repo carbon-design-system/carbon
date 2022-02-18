@@ -105,7 +105,7 @@ function OverflowMenu({
         onMouseDown={handleMousedown}
         onKeyDown={handleKeyPress}
         ref={triggerRef}>
-        <IconElement />
+        <IconElement className={`${prefix}--overflow-menu__icon`} />
       </button>
       <Menu
         id={id}

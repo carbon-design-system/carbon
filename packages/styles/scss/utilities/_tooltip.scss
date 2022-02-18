@@ -51,7 +51,7 @@
   font-weight: 400;
   text-align: left;
   transform: translateX(-50%);
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 
   // IE media query
   @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
@@ -93,6 +93,7 @@
 
   @if $tooltip-type == 'icon' {
     cursor: pointer;
+
     &:focus {
       outline: 1px solid transparent;
 
@@ -181,6 +182,7 @@
       from {
         opacity: 0;
       }
+
       to {
         opacity: 1;
       }

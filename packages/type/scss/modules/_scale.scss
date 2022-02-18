@@ -6,6 +6,7 @@
 //
 
 @use '@carbon/layout';
+@use 'sass:list';
 
 /// Compute the type size for the given type scale step
 /// @param {Number} $step
@@ -26,7 +27,7 @@
 /// @group @carbon/type
 $type-scale: ();
 @for $i from 1 through 23 {
-  $type-scale: append($type-scale, layout.rem(get-type-size($i)));
+  $type-scale: list.append($type-scale, layout.rem(get-type-size($i)));
 }
 
 /// Get the value of a specific step in the type scale

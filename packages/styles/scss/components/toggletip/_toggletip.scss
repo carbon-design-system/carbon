@@ -64,7 +64,7 @@
       'link-focus-text-color',
       theme.$focus-inverse
     );
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     display: grid;
     max-width: 18rem;

@@ -29,6 +29,12 @@ describe('<ComposedModal />', () => {
     expect(wrapper).toMatchSnapshot();
   });
 
+  it('renders with a ref', () => {
+    const ref = React.createRef();
+    mount(<ComposedModal open ref={ref} />);
+    expect(ref.current).toHaveClass(`${prefix}--modal`);
+  });
+
   it('changes the open state upon change in props', () => {
     const wrapper = mount(<ComposedModal open />);
 

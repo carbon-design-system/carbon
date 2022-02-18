@@ -29,7 +29,7 @@
     grid-template: auto auto / auto min-content;
 
     .#{$prefix}--label {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
     }
 
     .#{$prefix}--label,
@@ -70,15 +70,11 @@
     text-align: left;
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--dropdown--xl,
   .#{$prefix}--dropdown--lg {
     height: rem(48px);
     max-height: rem(48px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown__arrow,
   .#{$prefix}--dropdown--lg .#{$prefix}--dropdown__arrow {
     top: rem(16px);
   }
@@ -171,7 +167,7 @@
   }
 
   .#{$prefix}--dropdown-text {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: block;
     overflow: hidden;
@@ -188,7 +184,7 @@
     @include reset;
     @include focus-outline('reset');
     @include box-shadow;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: absolute;
     z-index: z('dropdown');
@@ -277,12 +273,6 @@
     padding-bottom: rem(7px);
   }
 
-  .#{$prefix}--dropdown--xl .#{$prefix}--dropdown-link {
-    height: rem(48px);
-    padding-top: rem(15px);
-    padding-bottom: rem(15px);
-  }
-
   .#{$prefix}--dropdown--focused,
   .#{$prefix}--dropdown-link:focus {
     @include focus-outline('outline');
@@ -327,12 +317,6 @@
 
   .#{$prefix}--dropdown--open .#{$prefix}--dropdown__arrow {
     transform: rotate(-180deg);
-  }
-
-  .#{$prefix}--dropdown--open.#{$prefix}--dropdown--xl
-    .#{$prefix}--dropdown-list {
-    // 48px item height * 5.5 items shown
-    max-height: rem(264px);
   }
 
   .#{$prefix}--dropdown--open.#{$prefix}--dropdown--sm
