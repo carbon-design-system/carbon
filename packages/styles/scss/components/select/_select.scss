@@ -40,7 +40,7 @@
   }
 
   .#{$prefix}--select-input {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     display: block;
