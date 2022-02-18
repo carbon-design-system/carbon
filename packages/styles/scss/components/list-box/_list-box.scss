@@ -92,8 +92,6 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--xl,
   .#{$prefix}--list-box--lg {
     height: rem(48px);
     max-height: rem(48px);
@@ -114,7 +112,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
-    background-color: $field-02;
+    background-color: $field;
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -155,21 +153,21 @@ $list-box-menu-width: rem(300px);
   // V11: Possibly deprecate
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
-    background-color: $field-02;
+    background-color: $field;
 
     &:hover {
-      background-color: $layer-hover-02;
+      background-color: $layer-hover;
     }
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
-    background: $field-02;
+    background: $field;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-02;
+    border-top-color: $border-subtle;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
@@ -183,7 +181,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
-    background-color: $field-02;
+    background-color: $field;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -524,9 +522,6 @@ $list-box-menu-width: rem(300px);
     max-height: rem(220px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--xl
-    .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--lg
     .#{$prefix}--list-box__menu {
     // 48px item height * 5.5 items shown
@@ -561,15 +556,13 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
-    background-color: $layer-hover-02;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item,
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item {
     height: rem(48px);
   }
@@ -580,8 +573,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
-    // To Do: What should this variable be?
-    // background-color: $selected-light-ui;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box--disabled
@@ -653,8 +645,6 @@ $list-box-menu-width: rem(300px);
     padding-bottom: rem(7px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item__option {
     height: rem(48px);
     padding-top: rem(15px);
@@ -736,9 +726,8 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
-    // To Do: What should this token be?
-    // border-bottom-color: $selected-light-ui;
-    // background-color: $selected-light-ui;
+    border-bottom-color: $layer-selected;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box__menu-item--active:hover,
@@ -803,11 +792,6 @@ $list-box-menu-width: rem(300px);
     bottom: 2rem;
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--up.#{$prefix}--dropdown--xl
-    .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--up.#{$prefix}--list-box--xl
-    .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--lg
     .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--up.#{$prefix}--list-box--lg

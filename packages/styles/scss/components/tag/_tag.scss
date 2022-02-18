@@ -178,6 +178,7 @@
     cursor: pointer;
     transition: background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
+
     svg {
       fill: currentColor;
     }

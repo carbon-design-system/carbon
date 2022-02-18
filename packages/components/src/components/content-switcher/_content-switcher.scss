@@ -66,6 +66,10 @@
       transform: scaleY(0);
       transform-origin: bottom;
       transition: all $duration--moderate-01 motion(standard, productive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     &:disabled::after {
