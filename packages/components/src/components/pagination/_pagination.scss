@@ -105,6 +105,20 @@ $css--helpers: true;
     background: $hover-ui;
   }
 
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus,
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus
+    option,
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus
+    optgroup {
+    background-color: $layer;
+  }
+
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
     top: 50%;
     transform: translate(-0.5rem, -50%);

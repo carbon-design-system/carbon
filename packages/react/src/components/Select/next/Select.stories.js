@@ -56,7 +56,7 @@ export const Inline = () => {
         inline
         id="select-1"
         defaultValue="placeholder-item"
-        labelText=""
+        labelText="Select"
         helperText="Optional helper text">
         <SelectItem
           disabled
