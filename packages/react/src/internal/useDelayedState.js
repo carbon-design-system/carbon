@@ -38,15 +38,11 @@ export function useDelayedState(initialState) {
     }, delayMs);
   }, []);
 
-  const cancel = useCallback(() => {
-    clearTimeout(timeoutId.current);
-  }, []);
-
   useEffect(() => {
     return () => {
       clearTimeout(timeoutId.current);
     };
   }, []);
 
-  return [state, setStateWithDelay, cancel];
+  return [state, setStateWithDelay];
 }

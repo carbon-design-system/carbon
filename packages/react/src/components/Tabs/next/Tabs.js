@@ -193,6 +193,7 @@ function getNextIndex(event, total, index) {
     return total - 1;
   }
 }
+
 function TabList({
   activation = 'automatic',
   'aria-label': label,
