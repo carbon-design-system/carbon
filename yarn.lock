@@ -11928,7 +11928,7 @@ __metadata:
     gulp-nodemon: ^2.4.2
     gulp-postcss: ^8.0.0
     gulp-rename: ^1.4.0
-    gulp-sass: ^4.1.0
+    gulp-sass: ^5.0.0
     gulp-sass-lint: ^1.4.0
     gulp-sourcemaps: ^2.6.0
     gulp-terser: ^1.0.0
@@ -12085,7 +12085,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:2.4.2, chalk@npm:^2.0.0, chalk@npm:^2.0.1, chalk@npm:^2.1.0, chalk@npm:^2.3.0, chalk@npm:^2.3.1, chalk@npm:^2.4.1, chalk@npm:^2.4.2":
+"chalk@npm:2.4.2, chalk@npm:^2.0.0, chalk@npm:^2.0.1, chalk@npm:^2.1.0, chalk@npm:^2.3.1, chalk@npm:^2.4.1, chalk@npm:^2.4.2":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
   dependencies:
@@ -19789,19 +19789,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gulp-sass@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "gulp-sass@npm:4.1.0"
+"gulp-sass@npm:^5.0.0":
+  version: 5.1.0
+  resolution: "gulp-sass@npm:5.1.0"
   dependencies:
-    chalk: ^2.3.0
-    lodash: ^4.17.11
-    node-sass: ^4.8.3
+    lodash.clonedeep: ^4.5.0
+    picocolors: ^1.0.0
     plugin-error: ^1.0.1
-    replace-ext: ^1.0.0
-    strip-ansi: ^4.0.0
-    through2: ^2.0.0
-    vinyl-sourcemaps-apply: ^0.2.0
-  checksum: 9b1e15539820344c2424922f00b48a203840cf630fb911e6ecf7f1856da3581ff0d37c1cd5eb20a5d5058d0651da2ecb087efe4ea36a9f4428ad0c6eac45d0a7
+    replace-ext: ^2.0.0
+    strip-ansi: ^6.0.1
+    vinyl-sourcemaps-apply: ^0.2.1
+  checksum: 9aba052c76e808321f9ecf70885806a389e73b87005c3c4f47beba7050ef280d06402f1ac19105b32407170b6fdef5c9e26ed0560074dd5a949197b50e82604d
   languageName: node
   linkType: hard
 
@@ -32073,6 +32071,13 @@ __metadata:
   version: 1.0.0
   resolution: "replace-ext@npm:1.0.0"
   checksum: 123e5c28046e4f0b82e1cdedb0340058d362ddbd8e17d98e5068bbacc3b3b397b4d8e3c69d603f9c4c0f6a6494852064396570c44f9426a4673dba63850fab34
+  languageName: node
+  linkType: hard
+
+"replace-ext@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "replace-ext@npm:2.0.0"
+  checksum: ed640ac90d24cce4be977642847d138908d430049cc097633be33b072143515cc7d29699675a0c35f6dc3c3c73cb529ed352d59649cf15931740eb31ae083c1e
   languageName: node
   linkType: hard
 
