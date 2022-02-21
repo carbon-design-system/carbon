@@ -110,7 +110,7 @@
   // Modal content
   // -----------------------------
   .#{$prefix}--modal-content {
-    @include type-style('body-long-01');
+    @include type-style('body-01');
 
     position: relative;
     // Required to accommodate focus outline's negative offset:
@@ -135,7 +135,7 @@
   .#{$prefix}--modal-content p,
   .#{$prefix}--modal-content__regular-content {
     padding-right: 20%;
-    @include type-style('body-long-01');
+    @include type-style('body-01');
   }
 
   //TO-DO: remove .#{$prefix}--modal-content--with-form in v11 since hasForm has been deprecated\
@@ -164,7 +164,7 @@
   }
 
   .#{$prefix}--modal-header__heading {
-    @include type-style('productive-heading-03');
+    @include type-style('heading-03');
 
     color: $text-primary;
   }
