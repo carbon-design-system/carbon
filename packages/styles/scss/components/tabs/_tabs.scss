@@ -58,6 +58,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       overflow-x: auto;
       scroll-behavior: smooth;
       scrollbar-width: none;
+
       &::-webkit-scrollbar {
         display: none;
       }
