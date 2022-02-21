@@ -11927,7 +11927,7 @@ __metadata:
     gulp-jsdoc3: ^2.0.0
     gulp-nodemon: ^2.4.2
     gulp-postcss: ^8.0.0
-    gulp-rename: ^1.4.0
+    gulp-rename: ^2.0.0
     gulp-sass: ^4.1.0
     gulp-sass-lint: ^1.4.0
     gulp-sourcemaps: ^2.6.0
@@ -19771,10 +19771,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gulp-rename@npm:^1.4.0":
-  version: 1.4.0
-  resolution: "gulp-rename@npm:1.4.0"
-  checksum: d0c965d07df9a4f7e856e514357451f4863dcad2cea8d59a5c109e911bfb9807edfa8d35415be174dd9bab12b4b6306bb1e2550e44b9231276549fe084b69ab6
+"gulp-rename@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "gulp-rename@npm:2.0.0"
+  checksum: b9add0d130487dee6067206eebfc3867e4e254117edef154e8c270e3111b112335439ac1cac1519d6a32541343e04bd299484253a333b4e34c7d430039953e99
   languageName: node
   linkType: hard
 
