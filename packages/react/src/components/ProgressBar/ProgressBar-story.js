@@ -7,15 +7,27 @@
 
 import React, { useState, useEffect } from 'react';
 
-import { withKnobs, text, boolean, number } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  text,
+  boolean,
+  number,
+  select,
+} from '@storybook/addon-knobs';
 import ProgressBar from '../ProgressBar';
 
+const sizes = {
+  'Small  (small)': 'small',
+  'Big (big) - default': 'big',
+};
+
 const props = () => ({
-  label: text('Label text (label)', 'Progress bar label'),
   helperText: text('Helper text (helperText)', 'Optional helper text'),
   hideLabel: boolean('Hide the label (hideLabel)', false),
-  value: number('Current value (value)', 75),
+  label: text('Label text (label)', 'Progress bar label'),
   max: number('Maximum value (max)', 100),
+  size: select('Size (size)', sizes, 'big'),
+  value: number('Current value (value)', 75),
 });
 
 export default {
