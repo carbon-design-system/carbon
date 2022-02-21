@@ -19,6 +19,7 @@ function ProgressBar({
   hideLabel,
   label,
   max = 100,
+  size = 'big',
   type = 'default',
   value,
 }) {
@@ -39,6 +40,7 @@ function ProgressBar({
 
   const wrapperClasses = classNames(
     `${prefix}--progress-bar`,
+    `${prefix}--progress-bar--${size}`,
     `${prefix}--progress-bar--${type}`,
     {
       [`${prefix}--progress-bar--indeterminate`]: indeterminate,
@@ -102,6 +104,11 @@ ProgressBar.propTypes = {
    * The maximum value.
    */
   max: PropTypes.number,
+
+  /**
+   * Specify the size of the ProgressBar.
+   */
+  size: PropTypes.oneOf(['small', 'big']),
 
   /**
    * Defines the alignment variant of the progress bar.

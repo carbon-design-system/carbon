@@ -18,7 +18,7 @@
 /// @group progress-bar
 @mixin progress-bar {
   .#{$prefix}--progress-bar__label {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: block;
     margin-bottom: $spacing-03;
@@ -30,6 +30,14 @@
     width: 100%;
     height: rem(8px);
     background-color: $layer;
+  }
+
+  .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
+    height: rem(8px);
+  }
+
+  .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
+    height: rem(4px);
   }
 
   .#{$prefix}--progress-bar__bar {

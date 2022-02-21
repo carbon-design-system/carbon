@@ -52,6 +52,7 @@
     border-radius: 0;
     color: $text-01;
     cursor: pointer;
+    font-family: inherit;
     // reset disabled <select> opacity
     opacity: 1;
 
@@ -212,8 +213,14 @@
     padding-right: $spacing-07;
     padding-left: $carbon--spacing-03;
     border-bottom: none;
-    background-color: $background;
+    background-color: transparent;
     color: $text-01;
+  }
+
+  .#{$prefix}--select--inline .#{$prefix}--select-input:focus,
+  .#{$prefix}--select--inline .#{$prefix}--select-input:focus option,
+  .#{$prefix}--select--inline .#{$prefix}--select-input:focus optgroup {
+    background-color: $background;
   }
 
   .#{$prefix}--select--inline .#{$prefix}--select-input[disabled],

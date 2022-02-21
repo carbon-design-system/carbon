@@ -44,7 +44,7 @@ packages/icons-react/next/**
 **/_inlined/**
 
 # Examples
-**/examples/**
+packages/**/examples/**
 !packages/themes/examples/**
 
 # Yarn

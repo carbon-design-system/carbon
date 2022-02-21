@@ -16,6 +16,11 @@ import {
 } from '@storybook/addon-knobs';
 import ProgressBar from '../ProgressBar';
 
+const sizes = {
+  'Small  (small)': 'small',
+  'Big (big) - default': 'big',
+};
+
 const types = {
   'Default  (default)': 'default',
   'Inline (inline)': 'inline',
@@ -27,6 +32,7 @@ const props = () => ({
   hideLabel: boolean('Hide the label (hideLabel)', false),
   label: text('Label text (label)', 'Progress bar label'),
   max: number('Maximum value (max)', 100),
+  size: select('Size (size)', sizes, 'big'),
   type: select('Type (type)', types, 'default'),
   value: number('Current value (value)', 75),
 });

@@ -55,7 +55,7 @@ $list-box-menu-width: rem(300px);
     grid-template: auto auto / auto auto;
 
     .#{$prefix}--label {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
     }
 
     .#{$prefix}--label,
@@ -371,7 +371,7 @@ $list-box-menu-width: rem(300px);
 
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     overflow: hidden;
     color: $text-primary;
@@ -536,7 +536,7 @@ $list-box-menu-width: rem(300px);
 
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: relative;
     height: rem(40px);

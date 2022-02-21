@@ -76,22 +76,25 @@ SecondaryButtonSet.propTypes = {
   secondaryClassName: PropTypes.string,
 };
 
-export function ModalFooter({
-  children,
-  className: customClassName,
-  closeModal,
-  danger,
-  inputref,
-  onRequestClose,
-  onRequestSubmit,
-  primaryButtonDisabled,
-  primaryButtonText,
-  primaryClassName,
-  secondaryButtonText,
-  secondaryButtons,
-  secondaryClassName,
-  ...rest
-}) {
+export const ModalFooter = React.forwardRef(function ModalFooter(
+  {
+    children,
+    className: customClassName,
+    closeModal,
+    danger,
+    inputref,
+    onRequestClose,
+    onRequestSubmit,
+    primaryButtonDisabled,
+    primaryButtonText,
+    primaryClassName,
+    secondaryButtonText,
+    secondaryButtons,
+    secondaryClassName,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
 
   const footerClass = cx({
@@ -110,7 +113,7 @@ export function ModalFooter({
   };
 
   return (
-    <ButtonSet className={footerClass} {...rest}>
+    <ButtonSet className={footerClass} {...rest} ref={ref}>
       <SecondaryButtonSet {...secondaryButtonProps} />
       {primaryButtonText && (
         <Button
@@ -126,7 +129,7 @@ export function ModalFooter({
       {children}
     </ButtonSet>
   );
-}
+});
 
 ModalFooter.propTypes = {
   /**

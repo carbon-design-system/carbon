@@ -3732,6 +3732,7 @@ Map {
     },
   },
   "ModalBody" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "aria-label": [Function],
       "children": Object {
@@ -3747,6 +3748,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "ModalFooter" => Object {
     "contextType": Object {
@@ -8453,6 +8455,15 @@ Map {
       },
       "max": Object {
         "type": "number",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "small",
+            "big",
+          ],
+        ],
+        "type": "oneOf",
       },
       "type": Object {
         "args": Array [
