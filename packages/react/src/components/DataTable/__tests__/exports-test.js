@@ -23,6 +23,7 @@ const blocklist = new Set([
   'DataTable.js',
   'DataTable.mdx',
   'stories',
+  'next',
 ]);
 const components = fs
   .readdirSync(COMPONENT_PATH)

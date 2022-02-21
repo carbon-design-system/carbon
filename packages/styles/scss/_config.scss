@@ -48,3 +48,9 @@ $use-google-fonts: false !default;
 /// @type String
 /// @group config
 $prefix: 'cds' !default;
+
+/// Total columns used in the flex grid
+/// @type Number
+/// @access public
+/// @group @carbon/grid
+$flex-grid-columns: 16 !default;

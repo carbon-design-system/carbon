@@ -1,0 +1,87 @@
+@use '@carbon/styles/scss/colors' as *;
+
+// base of project work area
+#root > div:first-child > div:first-child {
+  width: 100%;
+}
+
+// grid styles
+.cds--grid .outside {
+  min-height: 80px;
+  height: 100%;
+}
+
+.cds--grid .inside {
+  min-height: 80px;
+  height: 100%;
+}
+
+// hack to enable zoom feature to trigger
+.cds--grid--full-width {
+  max-width: 100%;
+}
+
+.default .cds--col code {
+  display: flex;
+  justify-content: center;
+}
+
+// template hard-coded styles
+#templates .inside {
+  background-color: $blue-10;
+}
+
+#templates .cds--grid [class*='col'] {
+  background-color: $blue-20;
+  outline: 1px dashed $blue-40;
+}
+
+#templates .cds--grid--condensed,
+#templates .cds--row--condensed {
+  background-color: $warm-gray-100;
+  color: $gray-10;
+}
+
+#templates .cds--grid--condensed [class*='col'],
+#templates .cds--row--condensed [class*='col'] {
+  background: none;
+  outline: none;
+}
+
+#templates .cds--grid--condensed .outside,
+#templates .cds--row--condensed .outside {
+  background-color: $gray-80;
+  outline: none;
+}
+
+#templates .cds--grid--condensed .inside,
+#templates .cds--row--condensed .inside {
+  background: none;
+}
+
+#templates .cds--grid--narrow .inside,
+#templates .cds--row--narrow .inside {
+  background-color: $teal-10;
+}
+
+#templates .cds--grid--narrow [class*='col'],
+#templates .cds--row--narrow [class*='col'] {
+  background-color: $teal-20;
+  outline: 1px dashed $teal-40;
+}
+
+// css grid
+#templates > .cds--css-grid {
+  border: 1px dashed black;
+}
+
+#templates .cds--css-grid .cds--subgrid [class*='col'] {
+  background-color: rgba(#ffe056, 0.25);
+  outline: 1px solid #ffe056;
+}
+
+#templates .cds--css-grid [class*='col'] {
+  background-color: #edf4ff;
+  outline: 1px solid #a6c8ff;
+  min-height: 80px;
+}

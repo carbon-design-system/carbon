@@ -57,7 +57,8 @@
     .#{$prefix}--dropdown,
     .#{$prefix}--dropdown-list,
     .#{$prefix}--number input[type='number'],
-    .#{$prefix}--date-picker__input {
+    .#{$prefix}--date-picker__input,
+    .#{$prefix}--multi-select {
       background-color: $field-02;
     }
   }
@@ -67,6 +68,9 @@
     transition: transform $duration-moderate-02 motion(entrance, expressive);
   }
 
+  // -----------------------------
+  // Modal container
+  // -----------------------------
   .#{$prefix}--modal-container {
     position: fixed;
     top: 0;
@@ -90,16 +94,6 @@
       width: 84%;
       height: auto;
       max-height: 90%;
-
-      .#{$prefix}--modal-content p,
-      .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
-      }
-
-      .#{$prefix}--modal-content--with-form {
-        // Override for `.#{$prefix}--modal-content`
-        padding-right: $spacing-05;
-      }
     }
 
     @include breakpoint(lg) {
@@ -112,30 +106,81 @@
     }
   }
 
-  .#{$prefix}--modal-header,
+  // -----------------------------
+  // Modal content
+  // -----------------------------
   .#{$prefix}--modal-content {
-    padding-left: $spacing-05;
-  }
+    @include type-style('body-01');
 
-  .#{$prefix}--modal-header,
-  .#{$prefix}--modal-content,
-  .#{$prefix}--modal-content__regular-content {
+    position: relative;
+    // Required to accommodate focus outline's negative offset:
+    padding-top: $spacing-03;
+    // anything besides text/p spans full width, with just 16px padding
     padding-right: $spacing-05;
+    padding-left: $spacing-05;
+    margin-bottom: $spacing-09;
+    color: $text-primary;
+    font-weight: 400;
+    grid-column: 1/-1;
+    grid-row: 2/-2;
+    overflow-y: auto;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
   }
 
+  //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
+  // text/p gets 20% right padding
+  .#{$prefix}--modal-content p,
+  .#{$prefix}--modal-content__regular-content {
+    padding-right: 20%;
+    @include type-style('body-01');
+  }
+
+  //TO-DO: remove .#{$prefix}--modal-content--with-form in v11 since hasForm has been deprecated\
+  // anything besides text/p spans full width, with just 16px padding
   .#{$prefix}--modal-content--with-form {
     padding-right: $spacing-05;
   }
 
+  // -----------------------------
+  // Modal header
+  // -----------------------------
+  .#{$prefix}--modal-header {
+    padding-top: $spacing-05;
+    padding-right: $spacing-09;
+    padding-left: $spacing-05;
+    margin-bottom: $spacing-03;
+    grid-column: 1/-1;
+    grid-row: 1/1;
+  }
+
+  .#{$prefix}--modal-header__label {
+    @include type-style('label-01');
+
+    margin-bottom: $spacing-02;
+    color: $text-secondary;
+  }
+
+  .#{$prefix}--modal-header__heading {
+    @include type-style('heading-03');
+
+    color: $text-primary;
+  }
+
+  // -----------------------------
+  // XS Modal
+  // -----------------------------
   .#{$prefix}--modal-container--xs {
-    .#{$prefix}--modal-header {
-      padding-right: $spacing-09;
+    //text always spans full width in xs modals
+    .#{$prefix}--modal-content__regular-content {
+      padding-right: $spacing-05;
     }
 
-    .#{$prefix}--modal-content,
-    .#{$prefix}--modal-content__regular-content,
-    .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
+    .#{$prefix}--modal-content p {
+      //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
+      padding-right: 0;
     }
 
     @include breakpoint(md) {
@@ -152,15 +197,18 @@
     }
   }
 
+  // -----------------------------
+  // SM Modal
+  // -----------------------------
   .#{$prefix}--modal-container--sm {
-    .#{$prefix}--modal-header {
-      padding-right: $spacing-09;
+    //text spans full width in sm modals below 1056
+    .#{$prefix}--modal-content__regular-content {
+      padding-right: $spacing-05;
     }
 
-    .#{$prefix}--modal-content,
-    .#{$prefix}--modal-content__regular-content,
-    .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
+    .#{$prefix}--modal-content p {
+      //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
+      padding-right: 0;
     }
 
     @include breakpoint(md) {
@@ -170,46 +218,24 @@
     @include breakpoint(lg) {
       width: 42%;
       max-height: 72%;
+
+      .#{$prefix}--modal-content p,
+      .#{$prefix}--modal-content__regular-content {
+        padding-right: 20%;
+      }
     }
 
     @include breakpoint(xlg) {
       width: 36%;
-
-      .#{$prefix}--modal-content p,
-      .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
-      }
-
-      .#{$prefix}--modal-content--with-form {
-        // Override for `.#{$prefix}--modal-content`
-        padding-right: $spacing-05;
-      }
     }
   }
 
+  // -----------------------------
+  // LG Modal
+  // -----------------------------
   .#{$prefix}--modal-container--lg {
-    .#{$prefix}--modal-header {
-      padding-right: $spacing-09;
-    }
-
-    .#{$prefix}--modal-content,
-    .#{$prefix}--modal-content__regular-content,
-    .#{$prefix}--modal-content--with-form {
-      padding-right: $spacing-05;
-    }
-
     @include breakpoint(md) {
       width: 96%;
-
-      .#{$prefix}--modal-content p,
-      .#{$prefix}--modal-content__regular-content {
-        padding-right: 20%;
-      }
-
-      .#{$prefix}--modal-content--with-form {
-        // Override for `.#{$prefix}--modal-content`
-        padding-right: $spacing-05;
-      }
     }
 
     @include breakpoint(lg) {
@@ -222,49 +248,9 @@
     }
   }
 
-  .#{$prefix}--modal-header {
-    padding-top: $spacing-05;
-    padding-right: $spacing-09;
-    margin-bottom: $spacing-03;
-    grid-column: 1/-1;
-    grid-row: 1/1;
-  }
-
-  .#{$prefix}--modal-header__label {
-    @include type-style('label-01');
-
-    margin-bottom: $spacing-02;
-    color: $text-secondary;
-  }
-
-  .#{$prefix}--modal-header__heading {
-    @include type-style('productive-heading-03');
-
-    color: $text-primary;
-  }
-
-  .#{$prefix}--modal-content {
-    @include type-style('body-long-01');
-
-    position: relative;
-    // Required to accommodate focus outline's negative offset:
-    padding-top: $spacing-03;
-    margin-bottom: $spacing-09;
-    color: $text-primary;
-    font-weight: 400;
-    grid-column: 1/-1;
-    grid-row: 2/-2;
-    overflow-y: auto;
-
-    &:focus {
-      @include focus-outline('outline');
-    }
-  }
-
-  .#{$prefix}--modal-content > p {
-    @include type-style('body-long-01');
-  }
-
+  // -----------------------------
+  // Modal overflow
+  // -----------------------------
   // Required so overflow-indicator disappears at end of content
   .#{$prefix}--modal-scroll-content > *:last-child {
     padding-bottom: $spacing-07;
@@ -310,6 +296,9 @@
     }
   }
 
+  // -----------------------------
+  // Modal footer
+  // -----------------------------
   .#{$prefix}--modal-footer {
     display: flex;
     height: rem(64px);
@@ -333,6 +322,9 @@
     align-items: flex-start;
   }
 
+  // -----------------------------
+  // Modal close btn
+  // -----------------------------
   .#{$prefix}--modal-close {
     position: absolute;
     z-index: 2;

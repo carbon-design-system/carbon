@@ -38,7 +38,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 @mixin tabs {
   .#{$prefix}--tabs {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: relative;
     display: flex;
@@ -239,7 +239,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     .#{$prefix}--tabs__nav-link {
       @include button-reset.reset($width: false);
       @include focus-outline('reset');
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       @if not feature-flag-enabled('enable-v11-release') {
         width: rem(160px);
@@ -322,7 +322,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       .#{$prefix}--tabs__nav-link:focus,
     .#{$prefix}--tabs__nav-item--selected:active
       .#{$prefix}--tabs__nav-link:active {
-      @include type-style('productive-heading-01');
+      @include type-style('heading-compact-01');
 
       color: $text-primary;
     }

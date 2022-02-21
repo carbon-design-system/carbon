@@ -22,7 +22,7 @@
 @mixin text-area {
   .#{$prefix}--text-area {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style('body-01');
     @include focus-outline('reset');
 
     width: 100%;
@@ -47,7 +47,7 @@
 
   .#{$prefix}--text-area::placeholder {
     @include placeholder-colors;
-    @include type-style('body-long-01');
+    @include type-style('body-01');
   }
 
   // V11: Possibly deprecate
@@ -101,5 +101,11 @@
     &::placeholder {
       color: transparent;
     }
+  }
+
+  .#{$prefix}--text-area__label-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
   }
 }

@@ -47,31 +47,34 @@ function getPageSize(pageSizes, pageSize) {
   return pageSizes[0].value;
 }
 
-function Pagination({
-  backwardText = 'Previous page',
-  className: customClassName,
-  disabled = false,
-  forwardText = 'Next page',
-  id,
-  isLastPage = false,
-  itemText = (min, max) => `${min}–${max} items`,
-  itemRangeText = (min, max, total) => `${min}–${max} of ${total} items`,
-  itemsPerPageText = 'Items per page:',
-  onChange,
-  pageNumberText: _pageNumberText = 'Page Number',
-  pageRangeText = (_current, total) =>
-    `of ${total} ${total === 1 ? 'page' : 'pages'}`,
-  page: controlledPage = 1,
-  pageInputDisabled,
-  pageSize: controlledPageSize,
-  pageSizeInputDisabled,
-  pageSizes: controlledPageSizes,
-  pageText = (page) => `page ${page}`,
-  pagesUnknown = false,
-  size,
-  totalItems,
-  ...rest
-}) {
+const Pagination = React.forwardRef(function Pagination(
+  {
+    backwardText = 'Previous page',
+    className: customClassName,
+    disabled = false,
+    forwardText = 'Next page',
+    id,
+    isLastPage = false,
+    itemText = (min, max) => `${min}–${max} items`,
+    itemRangeText = (min, max, total) => `${min}–${max} of ${total} items`,
+    itemsPerPageText = 'Items per page:',
+    onChange,
+    pageNumberText: _pageNumberText = 'Page Number',
+    pageRangeText = (_current, total) =>
+      `of ${total} ${total === 1 ? 'page' : 'pages'}`,
+    page: controlledPage = 1,
+    pageInputDisabled,
+    pageSize: controlledPageSize,
+    pageSizeInputDisabled,
+    pageSizes: controlledPageSizes,
+    pageText = (page) => `page ${page}`,
+    pagesUnknown = false,
+    size,
+    totalItems,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
   const [pageSizes, setPageSizes] = useState(() => {
@@ -189,7 +192,7 @@ function Pagination({
   }
 
   return (
-    <div className={className} {...rest}>
+    <div className={className} ref={ref} {...rest}>
       <div className={`${prefix}--pagination__left`}>
         <label
           id={`${prefix}-pagination-select-${inputId}-count-label`}
@@ -268,7 +271,7 @@ function Pagination({
       </div>
     </div>
   );
-}
+});
 
 Pagination.propTypes = {
   /**

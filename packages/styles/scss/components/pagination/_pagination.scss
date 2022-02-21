@@ -81,10 +81,19 @@
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
+    @include type-style('body-compact-01');
+
     width: auto;
     min-width: auto;
     height: 100%;
     line-height: rem(40px);
+  }
+
+  // Extra specificity is needed to preserve padding
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input {
+    padding: 0 2.25rem 0 $spacing-05;
   }
 
   .#{$prefix}--pagination--sm .#{$prefix}--select-input {
@@ -95,16 +104,13 @@
     line-height: rem(48px);
   }
 
-  .#{$prefix}--pagination
-    .#{$prefix}--select--inline
-    .#{$prefix}--select-input {
-    padding: 0 2.25rem 0 $spacing-05;
-  }
-
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
     background: $layer-hover;
   }
 
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus,
   .#{$prefix}--pagination
     .#{$prefix}--select--inline
     .#{$prefix}--select-input:focus

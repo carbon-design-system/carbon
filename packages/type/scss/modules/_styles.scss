@@ -8,6 +8,7 @@
 // stylelint-disable number-max-precision
 
 @use 'sass:map';
+@use 'sass:math';
 @use '@carbon/layout';
 @use 'font-family';
 @use 'scale';
@@ -696,7 +697,7 @@ $tokens: (
 /// @access public
 /// @group @carbon/type
 @function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
+  @return math.div($value, $value * 0 + 1);
 }
 
 /// This helper includes fluid type styles for the given token value. Fluid type

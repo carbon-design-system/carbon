@@ -16,6 +16,7 @@
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/z-index' as *;
 
 /// Number input styles
 /// @access public
@@ -31,7 +32,7 @@
   }
 
   .#{$prefix}--number input[type='number'] {
-    @include type-style('body-short-01');
+    @include type-style('code-01');
     @include focus-outline('reset');
 
     display: inline-flex;
@@ -88,8 +89,7 @@
     padding-right: rem(112px);
   }
 
-  .#{$prefix}--number input[type='number']:disabled,
-  .#{$prefix}--number--readonly input[type='number'] {
+  .#{$prefix}--number input[type='number']:disabled {
     border-bottom-color: transparent;
     background-color: $field;
     color: $text-disabled;
@@ -301,10 +301,6 @@
     background-color: transparent;
   }
 
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
-    display: none;
-  }
-
   .#{$prefix}--number__invalid {
     position: absolute;
     right: rem(96px);
@@ -368,10 +364,7 @@
   }
 
   // V11: Possibly deprecate
-  .#{$prefix}--number--light input[type='number']:disabled,
-  .#{$prefix}--number--light
-    .#{$prefix}--number--readonly
-    input[type='number'] {
+  .#{$prefix}--number--light input[type='number']:disabled {
     background-color: $field-02;
   }
 
@@ -381,16 +374,20 @@
     background-color: $field-02;
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
-    background-color: $layer-hover-02;
-  }
-
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
     background-color: transparent;
+  }
+
+  // V11: Possibly deprecate
+  // We include `:not(:focus)` here because the pseudo elements will overlap the
+  // focus outline on the button if we set their background-color on focus
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number--light
+    .#{$prefix}--number__control-btn:not(:focus):hover::before,
+  .#{$prefix}--number--light
+    .#{$prefix}--number__control-btn:not(:focus):hover::after {
+    background-color: $layer-hover-02;
   }
 
   // Size Variant styles
@@ -449,6 +446,20 @@
   }
 
   .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
+    right: rem(16px);
+  }
+
+  // Readonly
+  .#{$prefix}--number--readonly input[type='number'] {
+    background: transparent;
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__controls {
+    display: none;
+  }
+
+  .#{$prefix}--number__readonly-icon {
+    position: absolute;
     right: rem(16px);
   }
 
