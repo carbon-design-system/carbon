@@ -52,7 +52,7 @@ Accordion.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether an individual AccordionItem should be disabled
+   * Specify whether the entire Accordion should be disabled
    */
   disabled: PropTypes.bool,
 

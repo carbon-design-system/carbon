@@ -9,13 +9,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import {
-  withKnobs,
-  boolean,
-  number,
-  select,
-  text,
-} from '@storybook/addon-knobs';
+import { boolean, number, select } from '@storybook/addon-knobs';
 import {
   default as Accordion,
   AccordionItem,
@@ -27,11 +21,33 @@ import mdx from '../Accordion.mdx';
 export default {
   title: 'Components/Accordion',
   component: Accordion,
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+    title: {
+      control: { type: 'text' },
+    },
+    disabledItem: {
+      control: { type: 'boolean' },
+    },
+    open: {
+      control: { type: 'boolean' },
+    },
+  },
+  args: {
+    children: {},
+    className: '',
+    disabled: false,
+    disabledItem: false,
+    open: false,
+    title: 'Section 1 title',
+  },
   subcomponents: {
     AccordionItem,
     AccordionSkeleton,
   },
-  decorators: [withKnobs],
   parameters: {
     docs: {
       page: mdx,
@@ -39,77 +55,14 @@ export default {
   },
 };
 
-export const AccordionStory = () => (
-  <Accordion>
-    <AccordionItem title="Section 1 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 2 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 3 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-    <AccordionItem title="Section 4 title">
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat.
-      </p>
-    </AccordionItem>
-  </Accordion>
-);
-
-AccordionStory.storyName = 'Accordion';
-
-export const Skeleton = () => <AccordionSkeleton open count={4} />;
-
-Skeleton.decorators = [
-  (story) => <div style={{ width: '500px' }}>{story()}</div>,
-];
-
 const props = {
   onClick: action('onClick'),
   onHeadingClick: action('onHeadingClick'),
 };
 
-const sizes = {
-  'Small  (sm)': 'sm',
-  'Medium (md) - default': undefined,
-  'Large  (lg)': 'lg',
-};
-
-export const Playground = () => (
-  <Accordion
-    disabled={boolean('Disable entire Accordion (disabled)', false)}
-    size={
-      select('Accordion heading size (size)', sizes, undefined) || undefined
-    }
-    align={select(
-      'Accordion heading alignment (align)',
-      ['start', 'end'],
-      'end'
-    )}>
-    <AccordionItem
-      title={text('The title (title)', 'Section 1 title')}
-      open={boolean('Open the section (open)', false)}
-      {...props}>
+export const AccordionStory = (args) => (
+  <Accordion {...args}>
+    <AccordionItem title={args.title} open={args.open} {...props}>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -118,18 +71,18 @@ export const Playground = () => (
       </p>
     </AccordionItem>
     <AccordionItem title="Section 2 title" {...props}>
+      <Button>This is a button.</Button>
+    </AccordionItem>
+    <AccordionItem
+      title="Section 3 title"
+      disabled={args.disabledItem}
+      {...props}>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
         veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
         commodo consequat.
       </p>
-    </AccordionItem>
-    <AccordionItem
-      title="Section 3 title"
-      {...props}
-      disabled={boolean('Disable Section 3 (disabled)', true)}>
-      <Button>This is a button.</Button>
     </AccordionItem>
     <AccordionItem
       title={
@@ -147,6 +100,14 @@ export const Playground = () => (
     </AccordionItem>
   </Accordion>
 );
+
+AccordionStory.storyName = 'Accordion';
+
+export const Skeleton = () => <AccordionSkeleton count={4} />;
+
+Skeleton.decorators = [
+  (story) => <div style={{ width: '500px' }}>{story()}</div>,
+];
 
 export const SkeletonPlayground = () => (
   <div style={{ width: '500px' }}>
