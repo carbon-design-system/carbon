@@ -1907,7 +1907,7 @@ __metadata:
     "@rollup/plugin-node-resolve": ^13.0.0
     change-case: ^4.1.2
     fs-extra: ^10.0.0
-    js-yaml: ^3.14.0
+    js-yaml: ^4.0.0
     rimraf: ^3.0.2
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
@@ -1944,7 +1944,7 @@ __metadata:
     core-js: ^3.16.0
     fs-extra: ^10.0.0
     joi: ^14.3.1
-    js-yaml: ^3.12.1
+    js-yaml: ^4.0.0
     klaw-sync: ^6.0.0
     memfs: ^3.4.0
     prettier: ^2.2.1
@@ -2247,7 +2247,7 @@ __metadata:
     color: ^3.1.2
     core-js: ^3.16.0
     fs-extra: ^10.0.0
-    js-yaml: ^3.13.0
+    js-yaml: ^4.0.0
     node-sass: ^7.0.1
     rimraf: ^3.0.0
   languageName: unknown
@@ -23451,7 +23451,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^3.12.1, js-yaml@npm:^3.13.0, js-yaml@npm:^3.13.1, js-yaml@npm:^3.14.0, js-yaml@npm:^3.4.6, js-yaml@npm:^3.5.1, js-yaml@npm:^3.5.4, js-yaml@npm:^3.8.1":
+"js-yaml@npm:^3.13.1, js-yaml@npm:^3.14.0, js-yaml@npm:^3.4.6, js-yaml@npm:^3.5.1, js-yaml@npm:^3.5.4, js-yaml@npm:^3.8.1":
   version: 3.14.0
   resolution: "js-yaml@npm:3.14.0"
   dependencies:
@@ -23463,7 +23463,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"js-yaml@npm:^4.1.0":
+"js-yaml@npm:^4.0.0, js-yaml@npm:^4.1.0":
   version: 4.1.0
   resolution: "js-yaml@npm:4.1.0"
   dependencies:
