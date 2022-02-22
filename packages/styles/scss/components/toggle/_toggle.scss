@@ -89,7 +89,7 @@
     }
 
     .#{$prefix}--toggle__text {
-      @include type-style('body-long-01');
+      @include type-style('body-01');
 
       color: $text-primary;
     }
@@ -244,7 +244,7 @@
 
     .#{$prefix}--toggle__text--left,
     .#{$prefix}--toggle__text--right {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       position: relative;
       margin-left: $spacing-03;
@@ -476,7 +476,7 @@
 
     .#{$prefix}--toggle__text--off,
     .#{$prefix}--toggle__text--on {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       position: absolute;
       // top offset needed to vertically center absolutely positioned flex child in IE11
