@@ -2258,8 +2258,8 @@ __metadata:
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
     "@carbon/cli": ^10.33.0
+    "@carbon/grid": ^10.41.0
     "@carbon/import-once": ^10.6.0
-    "@carbon/layout": ^10.36.0
     "@carbon/test-utils": ^10.21.0
     change-case: ^4.1.1
     rimraf: ^3.0.0
@@ -11841,7 +11841,7 @@ __metadata:
     cypress-real-events: ^1.6.0
     downshift: 5.2.1
     fast-glob: ^3.2.7
-    fast-sass-loader: ^2.0.0
+    fast-sass-loader: ^1.5.0
     flatpickr: 4.6.9
     gzip-size: ^7.0.0
     invariant: ^2.2.3
@@ -17875,9 +17875,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-sass-loader@npm:^2.0.0":
-  version: 2.0.1
-  resolution: "fast-sass-loader@npm:2.0.1"
+"fast-sass-loader@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "fast-sass-loader@npm:1.5.0"
   dependencies:
     async: ^2.0.1
     cli-source-preview: ^1.0.0
@@ -17885,9 +17885,9 @@ __metadata:
     fs-extra: 3.x
     loader-utils: ^1.1.0
   peerDependencies:
-    sass: 1.x
-    webpack: 1.x || 2.x || 3.x || 4.x || 5.x
-  checksum: 808ad855f4eaa23be2f98812383c3a7c06d3247e725b759168bcfac235f6935236fae332fbfd34795cca2481835377951ebc3dc062e34be632fcdceee399ee91
+    node-sass: 4.x || 3.x
+    webpack: 1.x || 2.x || 3.x || 4.x
+  checksum: 73ac3bba48b03179e89c4b94ddfad02c209e2cd7e5a50fe95bda8517b07c3b5d0d9b2c3b4efa6668aa86d07106bfffa6924f66c4e31754278307e74dddb14785
   languageName: node
   linkType: hard
 
