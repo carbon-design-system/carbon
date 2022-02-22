@@ -48,6 +48,7 @@
     "rollup": "^2.46.0",
     "rollup-plugin-strip-banner": "^2.0.0",
     "svg-parser": "^2.0.4",
-    "svgo": "^1.1.1"
+    "svgo": "^1.1.1",
+    "svgson": "^5.2.1"
   }
 }
