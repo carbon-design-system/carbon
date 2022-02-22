@@ -11969,7 +11969,7 @@ __metadata:
     gulp-header: ^2.0.0
     gulp-jsdoc3: ^2.0.0
     gulp-nodemon: ^2.4.2
-    gulp-postcss: ^8.0.0
+    gulp-postcss: ^9.0.0
     gulp-rename: ^2.0.0
     gulp-sass: ^4.1.0
     gulp-sass-lint: ^1.4.0
@@ -17778,7 +17778,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fancy-log@npm:^1.3.2":
+"fancy-log@npm:^1.3.2, fancy-log@npm:^1.3.3":
   version: 1.3.3
   resolution: "fancy-log@npm:1.3.3"
   dependencies:
@@ -19841,16 +19841,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"gulp-postcss@npm:^8.0.0":
-  version: 8.0.0
-  resolution: "gulp-postcss@npm:8.0.0"
+"gulp-postcss@npm:^9.0.0":
+  version: 9.0.1
+  resolution: "gulp-postcss@npm:9.0.1"
   dependencies:
-    fancy-log: ^1.3.2
+    fancy-log: ^1.3.3
     plugin-error: ^1.0.1
-    postcss: ^7.0.2
-    postcss-load-config: ^2.0.0
+    postcss-load-config: ^3.0.0
     vinyl-sourcemaps-apply: ^0.2.1
-  checksum: 2d6ca84ec03887a6fbacb1fad9ffc543c34f238e805e59e38410edf69050c01b2adb13e9b8124c8a59d26fe6dadf9a54481b8d70405d7c9be308c3dc4921930c
+  peerDependencies:
+    postcss: ^8.0.0
+  checksum: f27a7ebdb71b2bcd59ac5fbbc15ab877b22585a9352884a81395ffb8fe6230dfc8106cdf93075e54685c7bf249a0bd1ad2f6fbeb452bdf81a01c3adcc3c6fff4
   languageName: node
   linkType: hard
 
@@ -21110,15 +21111,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"import-cwd@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "import-cwd@npm:3.0.0"
-  dependencies:
-    import-from: ^3.0.0
-  checksum: f2c4230e8389605154a390124381f9136811306ae4ba1c8017398c3c6926bc5cf75cf89350372b4938f79792ea373776b4efabd27506440ec301ce34c4e867eb
-  languageName: node
-  linkType: hard
-
 "import-fresh@npm:^2.0.0":
   version: 2.0.0
   resolution: "import-fresh@npm:2.0.0"
@@ -21145,15 +21137,6 @@ __metadata:
   dependencies:
     resolve-from: ^3.0.0
   checksum: 91f6f89f46a07227920ef819181bb52eb93023ccc0bdf00224fdfb326f8f753e279ad06819f39a02bb88c9d3a4606adc85b0cc995285e5d65feeb59f1421a1d4
-  languageName: node
-  linkType: hard
-
-"import-from@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "import-from@npm:3.0.0"
-  dependencies:
-    resolve-from: ^5.0.0
-  checksum: 5040a7400e77e41e2c3bb6b1b123b52a15a284de1ffc03d605879942c00e3a87428499d8d031d554646108a0f77652549411167f6a7788e4fc7027eefccf3356
   languageName: node
   linkType: hard
 
@@ -24399,7 +24382,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lilconfig@npm:^2.0.3":
+"lilconfig@npm:^2.0.3, lilconfig@npm:^2.0.4":
   version: 2.0.4
   resolution: "lilconfig@npm:2.0.4"
   checksum: 02ae530aa49218d782eb79e92c600ea5220828987f85aa3403fa512cadc7efe38c0ac7d0cd2edf600ad3fae1f6c1752f5b4bb78c0d9950435b044d53d507c9e1
@@ -29365,19 +29348,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss-load-config@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "postcss-load-config@npm:3.1.0"
+"postcss-load-config@npm:^3.0.0, postcss-load-config@npm:^3.1.0":
+  version: 3.1.3
+  resolution: "postcss-load-config@npm:3.1.3"
   dependencies:
-    import-cwd: ^3.0.0
-    lilconfig: ^2.0.3
+    lilconfig: ^2.0.4
     yaml: ^1.10.2
   peerDependencies:
     ts-node: ">=9.0.0"
   peerDependenciesMeta:
     ts-node:
       optional: true
-  checksum: 7fd62064eab1e0e77ba315d9a782f09f4c62e1025630b53d38a936d5a2730bb632a3f259143115fc639e70d22f14744a75c7a6f471343ebdb03f6a3ef72d2f08
+  checksum: 7d187d339f259265bf1de9efff39223b94cb2cabe4610516896a16ec96f713b9b6505b4247d870f134842f8441b442a0fdc33a782b78ae3bec6db2aed4aeafec
   languageName: node
   linkType: hard
 
@@ -29996,7 +29978,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"postcss@npm:5 - 7, postcss@npm:^7.0.0, postcss@npm:^7.0.14, postcss@npm:^7.0.16, postcss@npm:^7.0.17, postcss@npm:^7.0.2, postcss@npm:^7.0.26, postcss@npm:^7.0.32, postcss@npm:^7.0.35, postcss@npm:^7.0.36, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
+"postcss@npm:5 - 7, postcss@npm:^7.0.0, postcss@npm:^7.0.14, postcss@npm:^7.0.16, postcss@npm:^7.0.17, postcss@npm:^7.0.26, postcss@npm:^7.0.32, postcss@npm:^7.0.35, postcss@npm:^7.0.36, postcss@npm:^7.0.5, postcss@npm:^7.0.6":
   version: 7.0.39
   resolution: "postcss@npm:7.0.39"
   dependencies:
