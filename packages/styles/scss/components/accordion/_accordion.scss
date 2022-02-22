@@ -151,7 +151,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__title {
-    @include type-style('body-long-01');
+    @include type-style('body-01');
 
     z-index: 1;
     width: 100%;
@@ -176,7 +176,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
 
     > p {
-      @include type-style('body-long-01');
+      @include type-style('body-01');
     }
   }
 

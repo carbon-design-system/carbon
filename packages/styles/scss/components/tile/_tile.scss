@@ -40,7 +40,7 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--tile--light {
-    background-color: $layer-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--tile--clickable,
@@ -75,7 +75,7 @@
 
   .#{$prefix}--tile--clickable {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     color: $text-primary;
     text-decoration: none;
