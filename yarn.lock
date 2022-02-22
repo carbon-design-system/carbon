@@ -11985,7 +11985,7 @@ __metadata:
     karma-firefox-launcher: ^2.1.0
     karma-html2js-preprocessor: ^1.1.0
     karma-ie-launcher: ^1.0.0
-    karma-jasmine: ^2.0.1
+    karma-jasmine: ^4.0.0
     karma-safari-launcher: ^1.0.0
     karma-sourcemap-loader: ~0.3.7
     karma-spec-reporter: 0.0.33
@@ -22721,10 +22721,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:^3.0.0, jasmine-core@npm:^3.3":
+"jasmine-core@npm:^3.0.0":
   version: 3.5.0
   resolution: "jasmine-core@npm:3.5.0"
   checksum: fb018c9021395dadfa16ab5a1b1ea05d2781ef18bb79137204e7570042083c6e5b1210654a957d5db664130400a4fc584a452ab26b3fd8f3b1f037a0b115eddc
+  languageName: node
+  linkType: hard
+
+"jasmine-core@npm:^3.6.0":
+  version: 3.99.1
+  resolution: "jasmine-core@npm:3.99.1"
+  checksum: 4e4a89739d99e471b86c7ccc4c5c244a77cc6d1e17b2b0d87d81266b8415697354d8873f7e764790a10661744f73a753a6e9bcd9b3e48c66a0c9b8a092b071b7
   languageName: node
   linkType: hard
 
@@ -23948,14 +23955,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-jasmine@npm:^2.0.1":
-  version: 2.0.1
-  resolution: "karma-jasmine@npm:2.0.1"
+"karma-jasmine@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "karma-jasmine@npm:4.0.1"
   dependencies:
-    jasmine-core: ^3.3
+    jasmine-core: ^3.6.0
   peerDependencies:
     karma: "*"
-  checksum: 47370ff20f2784e72525efa05060e2e597a479a6c95d22d7cdd1152b13c5e10a305d4d7f95d90365804cd49981f91b42a1cd5217fd27c8791bc32f3212881b77
+  checksum: 28337c82941ed6c68e0c47ef432c2c91511214e84a336e78d9068daebd61a3c1cee6209207ddc5fe3ad78124597f58054b93aa0f973ff6dcc8a8fcd1951c9851
   languageName: node
   linkType: hard
 
