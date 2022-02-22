@@ -5,19 +5,26 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Search, ExpandableSearch } from 'carbon-components-react';
+import { ExpandableSearch } from 'carbon-components-react';
+import Search from '../';
 import React from 'react';
 import { Layer } from '../../Layer';
 
 export default {
   title: 'Components/Search',
   component: Search,
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
   subcomponents: {
     ExpandableSearch,
   },
 };
 
-export const Default = () => (
+export const Default = (args) => (
   <Search
     size="lg"
     defaultValue="A default value"
@@ -26,10 +33,11 @@ export const Default = () => (
     id="search-1"
     onChange={() => {}}
     onKeyDown={() => {}}
+    {...args}
   />
 );
 
-export const Disabled = () => (
+export const Disabled = (args) => (
   <Search
     disabled
     size="lg"
@@ -39,10 +47,11 @@ export const Disabled = () => (
     id="search-1"
     onChange={() => {}}
     onKeyDown={() => {}}
+    {...args}
   />
 );
 
-export const Expandable = () => (
+export const Expandable = (args) => (
   <ExpandableSearch
     size="lg"
     labelText="Search"
@@ -50,10 +59,11 @@ export const Expandable = () => (
     id="search-expandable-1"
     onChange={() => {}}
     onKeyDown={() => {}}
+    {...args}
   />
 );
 
-export const WithLayer = () => {
+export const WithLayer = (args) => {
   return (
     <>
       <Search
@@ -64,6 +74,7 @@ export const WithLayer = () => {
         id="search-1"
         onChange={() => {}}
         onKeyDown={() => {}}
+        {...args}
       />
       <Layer>
         <Search
@@ -74,6 +85,7 @@ export const WithLayer = () => {
           id="search-1"
           onChange={() => {}}
           onKeyDown={() => {}}
+          {...args}
         />
         <Layer>
           <Search
@@ -84,6 +96,7 @@ export const WithLayer = () => {
             id="search-1"
             onChange={() => {}}
             onKeyDown={() => {}}
+            {...args}
           />
         </Layer>
       </Layer>
@@ -91,7 +104,7 @@ export const WithLayer = () => {
   );
 };
 
-export const ExpandableWithLayer = () => {
+export const ExpandableWithLayer = (args) => {
   return (
     <>
       <ExpandableSearch
@@ -101,6 +114,7 @@ export const ExpandableWithLayer = () => {
         id="search-expandable-1"
         onChange={() => {}}
         onKeyDown={() => {}}
+        {...args}
       />
       <Layer>
         <ExpandableSearch
@@ -110,6 +124,7 @@ export const ExpandableWithLayer = () => {
           id="search-expandable-1"
           onChange={() => {}}
           onKeyDown={() => {}}
+          {...args}
         />
         <Layer>
           <ExpandableSearch
@@ -119,6 +134,7 @@ export const ExpandableWithLayer = () => {
             id="search-expandable-1"
             onChange={() => {}}
             onKeyDown={() => {}}
+            {...args}
           />
         </Layer>
       </Layer>

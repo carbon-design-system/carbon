@@ -36,7 +36,7 @@
     @include reset;
     @include font-family('sans');
     @include focus-outline('reset');
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: relative;
     display: inline-flex;

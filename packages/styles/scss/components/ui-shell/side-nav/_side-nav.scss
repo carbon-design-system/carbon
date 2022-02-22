@@ -192,7 +192,7 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__submenu {
     @include button-reset.reset($width: true);
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
     @include focus-outline('reset');
 
     display: flex;
@@ -318,7 +318,7 @@
     .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     position: relative;
     display: flex;

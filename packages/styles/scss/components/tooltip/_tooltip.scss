@@ -30,7 +30,7 @@ $tooltip-padding-inline: custom-property.get-var(
   }
 
   .#{$prefix}--tooltip-content {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     max-width: convert.rem(288px);
     padding: $tooltip-padding-block $tooltip-padding-inline;
@@ -60,7 +60,7 @@ $tooltip-padding-inline: custom-property.get-var(
   }
 
   .#{$prefix}--definition-tooltip {
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     max-width: convert.rem(176px);
     padding: convert.rem(8px) convert.rem(16px);
@@ -85,6 +85,6 @@ $tooltip-padding-inline: custom-property.get-var(
   }
 
   .#{$prefix}--icon-tooltip .#{$prefix}--tooltip-content {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
   }
 }

@@ -118,7 +118,7 @@
     "cypress-real-events": "^1.6.0",
     "fast-glob": "^3.2.7",
     "fast-sass-loader": "^2.0.0",
-    "gzip-size": "^6.0.0",
+    "gzip-size": "^7.0.0",
     "lcov2badge": "^0.1.0",
     "mini-css-extract-plugin": "^2.4.5",
     "npm-which": "^3.0.1",

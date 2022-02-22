@@ -43,13 +43,13 @@
   }
 
   .#{$prefix}--data-table-header__title {
-    @include type-style('productive-heading-03');
+    @include type-style('heading-03');
 
     color: $text-primary;
   }
 
   .#{$prefix}--data-table-header__description {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     color: $text-secondary;
   }
@@ -64,13 +64,13 @@
   }
 
   .#{$prefix}--data-table thead {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     background-color: $layer-accent;
   }
 
   .#{$prefix}--data-table tbody {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     width: 100%;
     background-color: $layer;
