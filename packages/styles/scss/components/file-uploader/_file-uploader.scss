@@ -35,7 +35,7 @@
   // TODO: sync with type
   .#{$prefix}--file--label {
     @include reset;
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     margin-bottom: $spacing-03;
     color: $text-primary;
@@ -108,7 +108,7 @@
 
   .#{$prefix}--label-description {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     margin-bottom: $spacing-05;
     color: $text-secondary;
@@ -161,7 +161,7 @@
     }
 
     .#{$prefix}--file-filename {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       overflow: hidden;
       margin-left: $spacing-05;
@@ -247,7 +247,7 @@
 
   // TODO: deprecate
   .#{$prefix}--file__selected-file--invalid + .#{$prefix}--form-requirement {
-    @include type-style('caption-01');
+    @include type-style('label-01');
 
     display: block;
     overflow: visible;
