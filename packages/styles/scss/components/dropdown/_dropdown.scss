@@ -29,7 +29,7 @@
     grid-template: auto auto / auto min-content;
 
     .#{$prefix}--label {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
     }
 
     .#{$prefix}--label,
@@ -167,7 +167,7 @@
   }
 
   .#{$prefix}--dropdown-text {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: block;
     overflow: hidden;
@@ -184,7 +184,7 @@
     @include reset;
     @include focus-outline('reset');
     @include box-shadow;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: absolute;
     z-index: z('dropdown');
