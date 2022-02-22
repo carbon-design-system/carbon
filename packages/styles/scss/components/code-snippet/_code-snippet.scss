@@ -379,7 +379,7 @@ $copy-btn-feedback: $background-inverse !default;
     .#{$prefix}--snippet-btn--expand
     .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
-    transition: transform $transition--expansion;
+    transition: transform $transition-expansion;
   }
 
   // Light version
