@@ -32,11 +32,28 @@ the IBM Design Language using the `$colors` variable.
 }
 ```
 
-Each key in the `$colors` map is the name of a swatch. The value of each entry
-is a `Map` where the keys are the grade and the values are the color values for
-the swatch at that grade.
+Each key in the `$colors` map is the name of a group of colors, also known as a
+swatch. The value of each entry is a `Map` where the keys are the color grade
+and the values are the hex codes for the color at that grade. For example:
 
-## Exports
+```scss
+$colors: (
+  blue: (
+    10: #edf5ff,
+    20: #d0e2ff,
+    30: #a6c8ff,
+    40: #78a9ff,
+    50: #4589ff,
+    60: #0f62fe,
+    70: #0043ce,
+    80: #002d9c,
+    90: #001d6c,
+    100: #001141,
+  ),
+);
+```
+
+## API
 
 | Name                   | Type  |
 | :--------------------- | :---- |

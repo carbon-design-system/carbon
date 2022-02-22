@@ -298,7 +298,7 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--btn--copy__feedback {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include font-family('sans');
 
     z-index: z('overlay');
@@ -328,7 +328,7 @@ $copy-btn-feedback: $background-inverse !default;
 
   // Show more / less button
   .#{$prefix}--snippet-btn--expand {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include font-family('sans');
 
     position: absolute;
