@@ -37,8 +37,8 @@
     "clean": "rimraf css es lib umd scss/_inlined scss/vendor"
   },
   "dependencies": {
-    "@carbon/import-once": "^10.6.0",
-    "@carbon/layout": "^10.36.0"
+    "@carbon/grid": "^10.41.0",
+    "@carbon/import-once": "^10.6.0"
   },
   "devDependencies": {
     "@carbon/cli": "^10.33.0",

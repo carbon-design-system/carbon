@@ -221,7 +221,7 @@
   }
 
   .#{$prefix}--actionable-notification__content {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     word-break: break-word;
   }
