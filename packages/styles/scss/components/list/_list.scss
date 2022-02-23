@@ -25,14 +25,14 @@
   .#{$prefix}--list--ordered,
   .#{$prefix}--list--ordered--native {
     @include component-reset.reset;
-    @include type.type-style('body-long-01');
+    @include type.type-style('body-01');
 
     list-style: none;
   }
 
   .#{$prefix}--list--expressive,
   .#{$prefix}--list--expressive .#{$prefix}--list--nested {
-    @include type.type-style('body-long-02');
+    @include type.type-style('body-02');
   }
 
   .#{$prefix}--list--ordered--native {
