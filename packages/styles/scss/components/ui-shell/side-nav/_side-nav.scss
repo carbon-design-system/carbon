@@ -81,8 +81,8 @@
     height: 0;
     background-color: transparent;
     opacity: 0;
-    transition: opacity $transition--expansion $standard-easing,
-      background-color $transition--expansion $standard-easing;
+    transition: opacity $transition-expansion $standard-easing,
+      background-color $transition-expansion $standard-easing;
   }
 
   .#{$prefix}--side-nav__overlay-active {
@@ -91,8 +91,8 @@
       height: 100vh;
       background-color: $overlay;
       opacity: 1;
-      transition: opacity $transition--expansion $standard-easing,
-        background-color $transition--expansion $standard-easing;
+      transition: opacity $transition-expansion $standard-easing,
+        background-color $transition-expansion $standard-easing;
     }
   }
 
