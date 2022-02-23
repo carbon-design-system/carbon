@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { OverflowMenu } from '../OverflowMenu';
+import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../../OverflowMenuItem';
 import mdx from '../OverflowMenu.mdx';
 import { Filter16 } from '@carbon/icons-react';

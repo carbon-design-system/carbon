@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
 import { OverflowMenu } from './OverflowMenu';
 import { createClassWrapper } from '../../internal/createClassWrapper';
 
-export default createClassWrapper(OverflowMenu);
+export default FeatureFlags.enabled('enable-v11-release')
+  ? createClassWrapper(OverflowMenu)
+  : OverflowMenu;
