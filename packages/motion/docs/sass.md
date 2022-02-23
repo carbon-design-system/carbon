@@ -23,7 +23,7 @@ from the package by writing the following:
 }
 ```
 
-## Exports
+## API
 
 | Name                    | Type     |
 | :---------------------- | :------- |
@@ -33,6 +33,6 @@ from the package by writing the following:
 | `$duration-moderate-02` | Duration |
 | `$duration-slow-01`     | Duration |
 | `$duration-slow-02`     | Duration |
-| `$easings`              | Duration |
+| `$easings`              | Map      |
 | `@mixin motion`         | Mixin    |
 | `@function motion`      | Mixin    |

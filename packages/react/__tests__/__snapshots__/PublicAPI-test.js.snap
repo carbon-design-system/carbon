@@ -2584,6 +2584,7 @@ Map {
       "accept": Array [],
       "buttonKind": "primary",
       "buttonLabel": "",
+      "disabled": false,
       "filenameStatus": "uploading",
       "iconDescription": "Provide icon description",
       "multiple": false,
@@ -2618,6 +2619,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
       },
       "filenameStatus": Object {
         "args": Array [
@@ -3728,6 +3732,7 @@ Map {
     },
   },
   "ModalBody" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "aria-label": [Function],
       "children": Object {
@@ -3743,6 +3748,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "ModalFooter" => Object {
     "contextType": Object {
@@ -4687,17 +4693,6 @@ Map {
   },
   "PasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "className": "\${prefix}--text__input",
-      "disabled": false,
-      "helperText": "",
-      "invalid": false,
-      "invalidText": "",
-      "light": false,
-      "onChange": [Function],
-      "onClick": [Function],
-      "size": "",
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -4913,6 +4908,7 @@ Map {
       "$$typeof": Symbol(react.context),
     },
     "defaultProps": Object {
+      "hideLegend": false,
       "labelPosition": "right",
       "onChange": [Function],
       "orientation": "horizontal",
@@ -4938,6 +4934,9 @@ Map {
         "type": "oneOfType",
       },
       "disabled": Object {
+        "type": "bool",
+      },
+      "hideLegend": Object {
         "type": "bool",
       },
       "labelPosition": Object {
@@ -6996,17 +6995,6 @@ Map {
     },
     "PasswordInput": Object {
       "$$typeof": Symbol(react.forward_ref),
-      "defaultProps": Object {
-        "className": "\${prefix}--text__input",
-        "disabled": false,
-        "helperText": "",
-        "invalid": false,
-        "invalidText": "",
-        "light": false,
-        "onChange": [Function],
-        "onClick": [Function],
-        "size": "",
-      },
       "propTypes": Object {
         "className": Object {
           "type": "string",
@@ -8422,6 +8410,15 @@ Map {
       },
       "max": Object {
         "type": "number",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "small",
+            "big",
+          ],
+        ],
+        "type": "oneOf",
       },
       "value": Object {
         "type": "number",

@@ -55,7 +55,7 @@ $list-box-menu-width: rem(300px);
     grid-template: auto auto / auto auto;
 
     .#{$prefix}--label {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
     }
 
     .#{$prefix}--label,
@@ -112,7 +112,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
-    background-color: $field-02;
+    background-color: $field;
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -153,21 +153,21 @@ $list-box-menu-width: rem(300px);
   // V11: Possibly deprecate
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
-    background-color: $field-02;
+    background-color: $field;
 
     &:hover {
-      background-color: $layer-hover-02;
+      background-color: $layer-hover;
     }
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
-    background: $field-02;
+    background: $field;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $border-subtle-02;
+    border-top-color: $border-subtle;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
@@ -181,7 +181,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
-    background-color: $field-02;
+    background-color: $field;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -371,7 +371,7 @@ $list-box-menu-width: rem(300px);
 
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     overflow: hidden;
     color: $text-primary;
@@ -536,7 +536,7 @@ $list-box-menu-width: rem(300px);
 
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: relative;
     height: rem(40px);
@@ -556,7 +556,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
-    background-color: $layer-hover-02;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
@@ -573,8 +573,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
-    // To Do: What should this variable be?
-    // background-color: $selected-light-ui;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box--disabled
@@ -727,9 +726,8 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
-    // To Do: What should this token be?
-    // border-bottom-color: $selected-light-ui;
-    // background-color: $selected-light-ui;
+    border-bottom-color: $layer-selected;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box__menu-item--active:hover,

@@ -61,7 +61,7 @@
     min-width: rem(288px);
     max-width: rem(288px);
     flex-wrap: wrap;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 6px 0 rgb(0 0 0 / 20%);
   }
 
   .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
@@ -221,7 +221,7 @@
   }
 
   .#{$prefix}--actionable-notification__content {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     word-break: break-word;
   }

@@ -36,7 +36,7 @@
     @include reset;
     @include font-family('sans');
     @include focus-outline('reset');
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: relative;
     display: inline-flex;
@@ -67,6 +67,10 @@
       transform: scaleY(0);
       transform-origin: bottom;
       transition: all $duration-moderate-01 motion(standard, productive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     &:disabled::after {

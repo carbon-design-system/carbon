@@ -56,6 +56,7 @@ _FileUploader.args = {
   accept: ['.jpg', '.png'],
   name: '',
   multiple: true,
+  disabled: false,
   iconDescription: 'Clear file',
 };
 _FileUploader.argTypes = {
