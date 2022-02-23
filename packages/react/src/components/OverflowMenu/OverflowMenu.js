@@ -19,6 +19,7 @@ import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
+import deprecate from '../../prop-types/deprecate';
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -141,7 +142,12 @@ class OverflowMenu extends Component {
      * `true` to use the light version. For use on $ui-01 backgrounds only.
      * Don't use this to make OverflowMenu background color same as container background color.
      */
-    light: PropTypes.bool,
+    light: FeatureFlags.enabled('enable-v11-release')
+      ? deprecate(
+          PropTypes.bool,
+          'The `light` prop for `OverflowMenu` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+        )
+      : PropTypes.bool,
 
     /**
      * The adjustment in position applied to the floating menu.
