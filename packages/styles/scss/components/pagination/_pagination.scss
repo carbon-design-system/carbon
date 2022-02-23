@@ -185,6 +185,10 @@
     color: $text-primary;
   }
 
+  span.#{$prefix}--pagination__text.#{$prefix}--pagination__items-count {
+    color: $text-secondary;
+  }
+
   .#{$prefix}--pagination__button,
   .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
     @include component-reset.reset;
