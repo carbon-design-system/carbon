@@ -20,6 +20,7 @@ const defaultSize = 'md';
 
 function OverflowMenuV2({
   children,
+  className,
   renderIcon: IconElement = OverflowMenuVertical16,
   size = defaultSize,
   ...rest
@@ -89,6 +90,7 @@ function OverflowMenuV2({
     `${prefix}--overflow-menu`,
     {
       [`${prefix}--overflow-menu--open`]: open,
+      [className]: className,
     },
     size !== defaultSize && `${prefix}--overflow-menu--${size}`
   );
@@ -125,6 +127,11 @@ OverflowMenuV2.propTypes = {
    * Specify the children of the OverflowMenu
    */
   children: PropTypes.node,
+
+  /**
+   * Optional className for the trigger button
+   */
+  className: PropTypes.string,
 
   /**
    * Function called to override icon rendering.
