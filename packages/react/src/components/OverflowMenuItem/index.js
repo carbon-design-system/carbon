@@ -6,6 +6,5 @@
  */
 
 import OverflowMenuItem from './OverflowMenuItem';
-import { createClassWrapper } from '../../internal/createClassWrapper';
 
-export default createClassWrapper(OverflowMenuItem);
+export default OverflowMenuItem;
