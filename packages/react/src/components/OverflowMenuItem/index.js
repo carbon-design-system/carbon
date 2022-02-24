@@ -5,14 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
-
-import { default as OverflowMenuItemNext } from './next/OverflowMenuItem';
-
-import { default as OverflowMenuItemClassic } from './OverflowMenuItem';
-
-const OverflowMenuItem = FeatureFlags.enabled('enable-v11-release')
-  ? OverflowMenuItemNext
-  : OverflowMenuItemClassic;
+import OverflowMenuItem from './OverflowMenuItem';
 
 export default OverflowMenuItem;
