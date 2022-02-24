@@ -16,6 +16,6 @@ describe('SkeletonIcon', () => {
   const wrapper = shallow(<SkeletonIcon />);
 
   it('Has the expected classes', () => {
-    expect(wrapper.hasClass(`${prefix}--skeleton--icon`)).toEqual(true);
+    expect(wrapper.hasClass(`${prefix}--icon--skeleton`)).toEqual(true);
   });
 });
