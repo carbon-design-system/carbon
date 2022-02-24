@@ -380,8 +380,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-right: $spacing-06;
-    padding-left: $spacing-06;
     background-color: $background-brand;
     clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     pointer-events: none;
@@ -495,8 +493,8 @@
     min-height: 3rem;
     align-items: center;
     padding: 0 $spacing-05;
-    margin-left: $spacing-05;
     background-color: $background-brand;
+
     color: $text-on-color;
   }
 
