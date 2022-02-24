@@ -9,7 +9,6 @@ import React from 'react';
 import { iconAdd, iconAddSolid, iconAddOutline } from 'carbon-icons';
 import { withKnobs, select, text } from '@storybook/addon-knobs';
 import Icon from '../Icon';
-import IconSkeleton from '../Icon/Icon.Skeleton';
 
 const icons = {
   'Add (iconAdd from `carbon-icons`)': 'iconAdd',
@@ -49,20 +48,6 @@ const props = () => {
   };
 };
 
-const propsSkeleton = {
-  style: {
-    margin: '50px',
-  },
-};
-
-const propsSkeleton2 = {
-  style: {
-    margin: '50px',
-    width: '24px',
-    height: '24px',
-  },
-};
-
 export default {
   title: 'Deprecated/Icon',
   component: Icon,
@@ -76,21 +61,6 @@ export const Default = () => (
 );
 
 Default.parameters = {
-  info: {
-    text: `
-        Icons are used in the product to present common actions and commands. Modify the fill property to change the color of the icon. The name property defines which icon to display. For accessibility, provide a context-rich description with the description prop. For a full list of icon names, see https://www.carbondesignsystem.com/guidelines/iconography/library
-      `,
-  },
-};
-
-export const Skeleton = () => (
-  <div>
-    <IconSkeleton {...propsSkeleton} />
-    <IconSkeleton {...propsSkeleton2} />
-  </div>
-);
-
-Skeleton.parameters = {
   info: {
     text: `
         Icons are used in the product to present common actions and commands. Modify the fill property to change the color of the icon. The name property defines which icon to display. For accessibility, provide a context-rich description with the description prop. For a full list of icon names, see https://www.carbondesignsystem.com/guidelines/iconography/library
