@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import cx from 'classnames';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
@@ -17,6 +17,7 @@ import { useId } from '../../../internal/useId';
 import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
 import { useControllableState } from '../../../internal/useControllableState';
 import { useMergedRefs } from '../../../internal/useMergedRefs';
+import { useIsomorphicEffect } from '../../../internal/useIsomorphicEffect';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -314,7 +315,7 @@ function TabList({
     }
   });
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (ref.current) {
       setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
     }
@@ -334,7 +335,7 @@ function TabList({
   }, []);
 
   // updates scroll location for all scroll behavior.
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     ref.current.scrollLeft = scrollLeft;
   }, [scrollLeft]);
 
