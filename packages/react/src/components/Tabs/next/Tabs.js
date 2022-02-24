@@ -17,7 +17,7 @@ import { useId } from '../../../internal/useId';
 import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
 import { useControllableState } from '../../../internal/useControllableState';
 import { useMergedRefs } from '../../../internal/useMergedRefs';
-import { useIsomorphicEffect } from '../../../internal/useIsomorphicEffect';
+import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
