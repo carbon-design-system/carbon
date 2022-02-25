@@ -1,20 +1,10 @@
 # `@carbon/themes`
 
+> Sass documentation for `@carbon/themes`
+
 _Note: this documentation is used with the next version of `@carbon/themes`
 which uses Sass Modules. It will not work in the current stable version of this
 package_
-
-<!-- prettier-ignore-start -->
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-## Table of Contents
-
-- [Usage](#usage)
-- [FAQ](#faq)
-  - [Why are the themes not exported in `@carbon/themes`?](#why-are-the-themes-not-exported-in-carbonthemes)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end -->
 
 ## Usage
 
@@ -74,9 +64,114 @@ You can also extend the theme with your own custom tokens:
 );
 ```
 
-## Tokens
+## API
 
-TODO
+| Import                       | Export                       | Description                                                                           | !default |
+| :--------------------------- | :--------------------------- | :------------------------------------------------------------------------------------ | :------- |
+| `@carbon/themes/scss/themes` |                              |                                                                                       |          |
+|                              | `$white`                     |                                                                                       | ✅       |
+|                              | `$g10`                       |                                                                                       | ✅       |
+|                              | `$g90`                       |                                                                                       | ✅       |
+|                              | `$g100`                      |                                                                                       | ✅       |
+| `@carbon/themes`             |                              | The default entrypoint which re-exports values from all other modules in this package |          |
+|                              | `$fallback`                  |                                                                                       | ✅       |
+|                              | `$theme`                     |                                                                                       | ✅       |
+|                              | `$background`                |                                                                                       | ✅       |
+|                              | `$background-active`         |                                                                                       | ✅       |
+|                              | `$background-selected`       |                                                                                       | ✅       |
+|                              | `$background-selected-hover` |                                                                                       | ✅       |
+|                              | `$background-hover`          |                                                                                       | ✅       |
+|                              | `$background-brand`          |                                                                                       | ✅       |
+|                              | `$background-inverse`        |                                                                                       | ✅       |
+|                              | `$background-inverse-hover`  |                                                                                       | ✅       |
+|                              | `$layer-01`                  |                                                                                       | ✅       |
+|                              | `$layer-active-01`           |                                                                                       | ✅       |
+|                              | `$layer-hover-01`            |                                                                                       | ✅       |
+|                              | `$layer-selected-01`         |                                                                                       | ✅       |
+|                              | `$layer-selected-hover-01`   |                                                                                       | ✅       |
+|                              | `$layer-02`                  |                                                                                       | ✅       |
+|                              | `$layer-active-02`           |                                                                                       | ✅       |
+|                              | `$layer-hover-02`            |                                                                                       | ✅       |
+|                              | `$layer-selected-02`         |                                                                                       | ✅       |
+|                              | `$layer-selected-hover-02`   |                                                                                       | ✅       |
+|                              | `$layer-03`                  |                                                                                       | ✅       |
+|                              | `$layer-active-03`           |                                                                                       | ✅       |
+|                              | `$layer-hover-03`            |                                                                                       | ✅       |
+|                              | `$layer-selected-03`         |                                                                                       | ✅       |
+|                              | `$layer-selected-hover-03`   |                                                                                       | ✅       |
+|                              | `$layer-selected-inverse`    |                                                                                       | ✅       |
+|                              | `$layer-selected-disabled`   |                                                                                       | ✅       |
+|                              | `$layer-accent-01`           |                                                                                       | ✅       |
+|                              | `$layer-accent-active-01`    |                                                                                       | ✅       |
+|                              | `$layer-accent-hover-01`     |                                                                                       | ✅       |
+|                              | `$layer-accent-02`           |                                                                                       | ✅       |
+|                              | `$layer-accent-active-02`    |                                                                                       | ✅       |
+|                              | `$layer-accent-hover-02`     |                                                                                       | ✅       |
+|                              | `$layer-accent-03`           |                                                                                       | ✅       |
+|                              | `$layer-accent-active-03`    |                                                                                       | ✅       |
+|                              | `$layer-accent-hover-03`     |                                                                                       | ✅       |
+|                              | `$field-01`                  |                                                                                       | ✅       |
+|                              | `$field-hover-01`            |                                                                                       | ✅       |
+|                              | `$field-02`                  |                                                                                       | ✅       |
+|                              | `$field-hover-02`            |                                                                                       | ✅       |
+|                              | `$field-03`                  |                                                                                       | ✅       |
+|                              | `$field-hover-03`            |                                                                                       | ✅       |
+|                              | `$interactive`               |                                                                                       | ✅       |
+|                              | `$border-subtle-00`          |                                                                                       | ✅       |
+|                              | `$border-subtle-01`          |                                                                                       | ✅       |
+|                              | `$border-subtle-selected-01` |                                                                                       | ✅       |
+|                              | `$border-subtle-02`          |                                                                                       | ✅       |
+|                              | `$border-subtle-selected-02` |                                                                                       | ✅       |
+|                              | `$border-subtle-03`          |                                                                                       | ✅       |
+|                              | `$border-subtle-selected-03` |                                                                                       | ✅       |
+|                              | `$border-strong-01`          |                                                                                       | ✅       |
+|                              | `$border-strong-02`          |                                                                                       | ✅       |
+|                              | `$border-strong-03`          |                                                                                       | ✅       |
+|                              | `$border-inverse`            |                                                                                       | ✅       |
+|                              | `$border-interactive`        |                                                                                       | ✅       |
+|                              | `$border-disabled`           |                                                                                       | ✅       |
+|                              | `$text-primary`              |                                                                                       | ✅       |
+|                              | `$text-secondary`            |                                                                                       | ✅       |
+|                              | `$text-placeholder`          |                                                                                       | ✅       |
+|                              | `$text-helper`               |                                                                                       | ✅       |
+|                              | `$text-error`                |                                                                                       | ✅       |
+|                              | `$text-inverse`              |                                                                                       | ✅       |
+|                              | `$text-on-color`             |                                                                                       | ✅       |
+|                              | `$text-on-color-disabled`    |                                                                                       | ✅       |
+|                              | `$text-disabled`             |                                                                                       | ✅       |
+|                              | `$link-primary`              |                                                                                       | ✅       |
+|                              | `$link-primary-hover`        |                                                                                       | ✅       |
+|                              | `$link-secondary`            |                                                                                       | ✅       |
+|                              | `$link-inverse`              |                                                                                       | ✅       |
+|                              | `$link-visited`              |                                                                                       | ✅       |
+|                              | `$icon-primary`              |                                                                                       | ✅       |
+|                              | `$icon-secondary`            |                                                                                       | ✅       |
+|                              | `$icon-inverse`              |                                                                                       | ✅       |
+|                              | `$icon-on-color`             |                                                                                       | ✅       |
+|                              | `$icon-on-color-disabled`    |                                                                                       | ✅       |
+|                              | `$icon-disabled`             |                                                                                       | ✅       |
+|                              | `$support-error`             |                                                                                       | ✅       |
+|                              | `$support-success`           |                                                                                       | ✅       |
+|                              | `$support-warning`           |                                                                                       | ✅       |
+|                              | `$support-info`              |                                                                                       | ✅       |
+|                              | `$support-error-inverse`     |                                                                                       | ✅       |
+|                              | `$support-success-inverse`   |                                                                                       | ✅       |
+|                              | `$support-warning-inverse`   |                                                                                       | ✅       |
+|                              | `$support-info-inverse`      |                                                                                       | ✅       |
+|                              | `$support-caution-major`     |                                                                                       | ✅       |
+|                              | `$support-caution-minor`     |                                                                                       | ✅       |
+|                              | `$support-caution-undefined` |                                                                                       | ✅       |
+|                              | `$highlight`                 |                                                                                       | ✅       |
+|                              | `$overlay`                   |                                                                                       | ✅       |
+|                              | `$toggle-off`                |                                                                                       | ✅       |
+|                              | `$shadow`                    |                                                                                       | ✅       |
+|                              | `$focus`                     |                                                                                       | ✅       |
+|                              | `$focus-inset`               |                                                                                       | ✅       |
+|                              | `$focus-inverse`             |                                                                                       | ✅       |
+|                              | `$skeleton-background`       |                                                                                       | ✅       |
+|                              | `$skeleton-element`          |                                                                                       | ✅       |
+
+### Configuration
 
 ## FAQ
 

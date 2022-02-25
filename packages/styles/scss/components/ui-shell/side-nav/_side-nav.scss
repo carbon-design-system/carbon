@@ -81,8 +81,8 @@
     height: 0;
     background-color: transparent;
     opacity: 0;
-    transition: opacity $transition--expansion $standard-easing,
-      background-color $transition--expansion $standard-easing;
+    transition: opacity $transition-expansion $standard-easing,
+      background-color $transition-expansion $standard-easing;
   }
 
   .#{$prefix}--side-nav__overlay-active {
@@ -91,8 +91,8 @@
       height: 100vh;
       background-color: $overlay;
       opacity: 1;
-      transition: opacity $transition--expansion $standard-easing,
-        background-color $transition--expansion $standard-easing;
+      transition: opacity $transition-expansion $standard-easing,
+        background-color $transition-expansion $standard-easing;
     }
   }
 
@@ -192,7 +192,7 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--side-nav__submenu {
     @include button-reset.reset($width: true);
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
     @include focus-outline('reset');
 
     display: flex;
@@ -318,7 +318,7 @@
     .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     @include focus-outline('reset');
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     position: relative;
     display: flex;

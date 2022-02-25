@@ -44,7 +44,6 @@
     border-collapse: collapse;
     border-spacing: 0;
     overflow-x: auto;
-    overflow-y: hidden;
 
     // Condensed list
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
@@ -134,7 +133,7 @@
   .#{$prefix}--structured-list-th {
     @include reset;
     @include padding-th;
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: table-cell;
     height: rem(40px);
@@ -152,7 +151,7 @@
 
   .#{$prefix}--structured-list-td {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style('body-01');
     @include padding-td;
 
     position: relative;
