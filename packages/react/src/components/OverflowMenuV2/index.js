@@ -10,16 +10,17 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { OverflowMenuVertical16 } from '@carbon/icons-react';
-import { useId } from '../../../internal/useId';
-import Menu from '../../Menu';
-import { keys, matches as keyCodeMatches } from '../../../internal/keyboard';
+import { useId } from '../../internal/useId';
+import Menu from '../Menu';
+import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 
 const { prefix } = settings;
 
 const defaultSize = 'md';
 
-function OverflowMenu({
+function OverflowMenuV2({
   children,
+  className,
   renderIcon: IconElement = OverflowMenuVertical16,
   size = defaultSize,
   ...rest
@@ -89,6 +90,7 @@ function OverflowMenu({
     `${prefix}--overflow-menu`,
     {
       [`${prefix}--overflow-menu--open`]: open,
+      [className]: className,
     },
     size !== defaultSize && `${prefix}--overflow-menu--${size}`
   );
@@ -120,11 +122,16 @@ function OverflowMenu({
   );
 }
 
-OverflowMenu.propTypes = {
+OverflowMenuV2.propTypes = {
   /**
    * Specify the children of the OverflowMenu
    */
   children: PropTypes.node,
+
+  /**
+   * Optional className for the trigger button
+   */
+  className: PropTypes.string,
 
   /**
    * Function called to override icon rendering.
@@ -137,4 +144,4 @@ OverflowMenu.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
 
-export default OverflowMenu;
+export { OverflowMenuV2 };
