@@ -13,6 +13,6 @@
     "npm:unpublishSafe",
     
     // https://docs.renovatebot.com/presets-schedule/#scheduledaily
-    "schedule:daily"
+    "schedule:earlyMondays"
   ]
 }
