@@ -54,10 +54,9 @@ const props = {
 
 export default {
   title: 'Components/Select',
+  component: Select,
   decorators: [withKnobs],
-
   parameters: {
-    component: Select,
     docs: {
       page: mdx,
     },
@@ -127,7 +126,7 @@ Skeleton.parameters = {
   },
 };
 
-export const classNameChangeTest = () => {
+export const ClassNameChangeTest = () => {
   return (
     <div style={{ width: 400 }}>
       <Select

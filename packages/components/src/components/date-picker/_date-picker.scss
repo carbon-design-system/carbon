@@ -11,7 +11,7 @@
 @import '../../globals/scss/helper-mixins';
 @import '../../globals/scss/vendor/@carbon/elements/scss/import-once/import-once';
 @import '../form/form';
-@import 'flatpickr.scss';
+@import './flatpickr';
 
 @include flatpickr;
 
@@ -99,7 +99,7 @@
 
     &:disabled {
       border-bottom: 1px solid transparent;
-      background-color: $field-disabled;
+      background-color: $field;
       color: $text-disabled;
       cursor: not-allowed;
     }
@@ -134,8 +134,8 @@
     // vertically center icon within parent container on IE11
     top: 50%;
     right: 1rem;
-    cursor: pointer;
     fill: $icon-primary;
+    pointer-events: none;
     transform: translateY(-50%);
   }
 

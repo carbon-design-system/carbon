@@ -10,6 +10,20 @@ import MultiSelect from '../';
 import FilterableMultiSelect from './FilterableMultiSelect';
 import { Layer } from '../../Layer';
 
+export default {
+  title: 'Components/MultiSelect',
+  component: MultiSelect,
+  subcomponents: {
+    'MultiSelect.Filterable': MultiSelect.Filterable,
+  },
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
+};
+
 const items = [
   {
     id: 'downshift-1-item-0',
@@ -39,18 +53,7 @@ const items = [
   },
 ];
 
-export default {
-  title: 'Components/MultiSelect',
-
-  parameters: {
-    component: MultiSelect,
-    subcomponents: {
-      'MultiSelect.Filterable': MultiSelect.Filterable,
-    },
-  },
-};
-
-export const Default = () => {
+export const Default = (args) => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -61,12 +64,13 @@ export const Default = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
-export const WithInitialSelectedItems = () => {
+export const WithInitialSelectedItems = (args) => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -77,12 +81,13 @@ export const WithInitialSelectedItems = () => {
         itemToString={(item) => (item ? item.text : '')}
         initialSelectedItems={[items[0], items[1]]}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
-export const _Filterable = () => {
+export const _Filterable = (args) => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -91,14 +96,14 @@ export const _Filterable = () => {
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter"
         selectionFeedback="top-after-reopen"
+        {...args}
       />
     </div>
   );
 };
 
-export const withLayer = () => {
+export const WithLayer = (args) => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -109,6 +114,7 @@ export const withLayer = () => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
+        {...args}
       />
       <Layer>
         <MultiSelect
@@ -119,6 +125,7 @@ export const withLayer = () => {
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
+          {...args}
         />
         <Layer>
           <MultiSelect
@@ -129,6 +136,7 @@ export const withLayer = () => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
+            {...args}
           />
         </Layer>
       </Layer>
@@ -136,7 +144,7 @@ export const withLayer = () => {
   );
 };
 
-export const _FilterableWithLayer = () => {
+export const _FilterableWithLayer = (args) => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -145,8 +153,8 @@ export const _FilterableWithLayer = () => {
         helperText="This is helper text"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter"
         selectionFeedback="top-after-reopen"
+        {...args}
       />
       <Layer>
         <FilterableMultiSelect
@@ -155,8 +163,8 @@ export const _FilterableWithLayer = () => {
           helperText="This is helper text"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          placeholder="Filter"
           selectionFeedback="top-after-reopen"
+          {...args}
         />
         <Layer>
           <FilterableMultiSelect
@@ -165,8 +173,8 @@ export const _FilterableWithLayer = () => {
             helperText="This is helper text"
             items={items}
             itemToString={(item) => (item ? item.text : '')}
-            placeholder="Filter"
             selectionFeedback="top-after-reopen"
+            {...args}
           />
         </Layer>
       </Layer>

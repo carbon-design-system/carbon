@@ -236,6 +236,7 @@ export default class ComposedModal extends Component {
       selectorPrimaryFocus, // eslint-disable-line
       selectorsFloatingMenus, // eslint-disable-line
       size,
+      forwardedRef, // eslint-disable-line react/prop-types
       ...other
     } = this.props;
 
@@ -275,7 +276,16 @@ export default class ComposedModal extends Component {
       <div
         {...other}
         role="presentation"
-        ref={this.outerModal}
+        ref={(node) => {
+          if (node) {
+            this.outerModal.current = node;
+            if (typeof forwardedRef === 'function') {
+              forwardedRef(node);
+            } else if (typeof forwardedRef === 'object') {
+              forwardedRef.current = node;
+            }
+          }
+        }}
         onBlur={this.handleBlur}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
@@ -397,6 +407,7 @@ export class ModalHeader extends Component {
       closeModal, // eslint-disable-line
       buttonOnClick, // eslint-disable-line
       preventCloseOnClickOutside, // eslint-disable-line
+      forwardedRef, // eslint-disable-line react/prop-types
       ...other
     } = this.props;
 
@@ -428,7 +439,7 @@ export class ModalHeader extends Component {
     });
 
     return (
-      <div className={headerClass} {...other}>
+      <div className={headerClass} {...other} ref={forwardedRef}>
         {label && <h2 className={labelClass}>{label}</h2>}
 
         {title && <h3 className={titleClass}>{title}</h3>}
@@ -448,7 +459,7 @@ export class ModalHeader extends Component {
   }
 }
 
-export function ModalBody(props) {
+export const ModalBody = React.forwardRef(function ModalBody(props, ref) {
   const {
     className,
     children,
@@ -472,7 +483,11 @@ export function ModalBody(props) {
     : {};
   return (
     <>
-      <div className={contentClass} {...hasScrollingContentProps} {...other}>
+      <div
+        className={contentClass}
+        {...hasScrollingContentProps}
+        {...other}
+        ref={ref}>
         {children}
       </div>
       {hasScrollingContent && (
@@ -480,7 +495,8 @@ export function ModalBody(props) {
       )}
     </>
   );
-}
+});
+
 ModalBody.propTypes = {
   /**
    * Required props for the accessibility label of the header
@@ -646,6 +662,7 @@ export class ModalFooter extends Component {
       children,
       danger,
       inputref,
+      forwardedRef, // eslint-disable-line react/prop-types
       ...other
     } = this.props;
 
@@ -694,7 +711,7 @@ export class ModalFooter extends Component {
     };
 
     return (
-      <ButtonSet className={footerClass} {...other}>
+      <ButtonSet className={footerClass} {...other} ref={forwardedRef}>
         <SecondaryButtonSet />
         {primaryButtonText && (
           <Button

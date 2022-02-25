@@ -23,11 +23,14 @@
 @use '../../utilities/rotate' as *;
 @use '../../utilities/box-shadow' as *;
 @use '../../utilities/component-tokens' as *;
+@use '../../utilities/custom-property';
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
+
+$icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 
 /// Tabs styles
 /// @access public
@@ -35,7 +38,7 @@
 @mixin tabs {
   .#{$prefix}--tabs {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     width: 100%;
@@ -212,7 +215,7 @@
     .#{$prefix}--tabs__nav-link {
       @include button-reset.reset($width: false);
       @include focus-outline('reset');
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
 
       @if not feature-flag-enabled('enable-v11-release') {
         width: rem(160px);
@@ -242,6 +245,24 @@
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
       text-align: left;
+    }
+
+    //-----------------------------
+    // Icon Item
+    //-----------------------------
+
+    .#{$prefix}--tabs__nav-item--icon,
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
+      display: flex;
+      width: $icon-tab-size;
+      height: $icon-tab-size;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    &.#{$prefix}--tabs__icon--lg {
+      @include custom-property.declaration('icon-tab-size', rem(48px));
     }
 
     //-----------------------------
@@ -277,7 +298,7 @@
       .#{$prefix}--tabs__nav-link:focus,
     .#{$prefix}--tabs__nav-item--selected:active
       .#{$prefix}--tabs__nav-link:active {
-      @include type-style('productive-heading-01');
+      @include type-style('heading-compact-01');
 
       color: $text-primary;
     }

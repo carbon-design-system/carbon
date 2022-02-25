@@ -69,9 +69,12 @@ export const Usage = () => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader id="expand" />
               {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+                <TableHeader
+                  id={header.header}
+                  key={i}
+                  {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -138,9 +141,12 @@ export const ExtraSmallExpansion = () => (
         <Table {...getTableProps()} size="compact">
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader id="expand" />
               {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+                <TableHeader
+                  id={header.header}
+                  key={i}
+                  {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -186,9 +192,12 @@ export const SmallExpansion = () => (
         <Table {...getTableProps()} size="sm">
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader id="expand" />
               {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+                <TableHeader
+                  id={header.header}
+                  key={i}
+                  {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -234,9 +243,12 @@ export const MediumExpansion = () => (
         <Table {...getTableProps()} size="md">
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader id="expand" />
               {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+                <TableHeader
+                  id={header.header}
+                  key={i}
+                  {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -282,9 +294,12 @@ export const ExtraLargeExpansion = () => (
         <Table {...getTableProps()} size="xl">
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader id="expand" />
               {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+                <TableHeader
+                  id={header.header}
+                  key={i}
+                  {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}
@@ -334,11 +349,15 @@ export const BatchExpansion = () => (
           <TableHead>
             <TableRow>
               <TableExpandHeader
-                enableExpando={true}
+                id="expand"
+                enableToggle
                 {...getExpandHeaderProps()}
               />
               {headers.map((header, i) => (
-                <TableHeader key={i} {...getHeaderProps({ header })}>
+                <TableHeader
+                  id={header.header}
+                  key={i}
+                  {...getHeaderProps({ header })}>
                   {header.header}
                 </TableHeader>
               ))}

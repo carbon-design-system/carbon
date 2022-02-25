@@ -44,7 +44,7 @@ packages/icons-react/next/**
 **/_inlined/**
 
 # Examples
-**/examples/**
+packages/**/examples/**
 !packages/themes/examples/**
 
 # Yarn
@@ -58,3 +58,6 @@ packages/icons-react/next/**
 
 # Nextjs
 .next
+
+# Upgrade
+packages/upgrade/cli.js

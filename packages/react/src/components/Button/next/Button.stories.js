@@ -13,57 +13,110 @@ import ButtonSet from '../../ButtonSet';
 
 export default {
   title: 'Components/Button',
-  parameters: {
-    component: Button,
-    subcomponents: {
-      ButtonSet,
-      ButtonSkeleton,
+  component: Button,
+  subcomponents: {
+    ButtonSet,
+    ButtonSkeleton,
+  },
+  argTypes: {
+    kind: {
+      options: [
+        'primary',
+        'secondary',
+        'tertiary',
+        'ghost',
+        'danger',
+        'danger--tertiary',
+        'danger--ghost',
+      ],
+      control: { type: 'select' },
+    },
+    size: {
+      options: ['sm', 'md', 'lg', 'xl', '2xl'],
+      control: { type: 'select' },
+    },
+    children: {
+      control: false,
+    },
+    renderIcon: {
+      control: false,
+    },
+    as: {
+      control: false,
+    },
+    small: {
+      table: {
+        disable: true,
+      },
     },
   },
 };
 
-export const _Default = () => {
-  return <Button>Button</Button>;
+export const _Default = (args) => {
+  return <Button {...args}>Button</Button>;
 };
 
-export const Secondary = () => {
-  return <Button kind="secondary">Button</Button>;
+export const Secondary = (args) => {
+  return (
+    <Button kind="secondary" {...args}>
+      Button
+    </Button>
+  );
 };
 
-export const Tertiary = () => {
-  return <Button kind="tertiary">Button</Button>;
+export const Tertiary = (args) => {
+  return (
+    <Button kind="tertiary" {...args}>
+      Button
+    </Button>
+  );
 };
 
-export const Danger = () => {
+export const Danger = (args) => {
   return (
     <>
-      <Button kind="danger">Button</Button>
+      <Button kind="danger" {...args}>
+        Button
+      </Button>
       &nbsp;
-      <Button kind="danger--tertiary">Tertiary Danger Button</Button>
+      <Button kind="danger--tertiary" {...args}>
+        Tertiary Danger Button
+      </Button>
       &nbsp;
-      <Button kind="danger--ghost">Ghost Danger Button</Button>
+      <Button kind="danger--ghost" {...args}>
+        Ghost Danger Button
+      </Button>
     </>
   );
 };
 
-export const Ghost = () => {
-  return <Button kind="ghost">Button</Button>;
+export const Ghost = (args) => {
+  return (
+    <Button kind="ghost" {...args}>
+      Button
+    </Button>
+  );
 };
 
-export const IconButton = () => (
+export const IconButton = (args) => (
   <Button
     renderIcon={Add16}
     iconDescription="Icon Description"
     hasIconOnly
     onClick={action('onClick')}
+    {...args}
   />
 );
 
-export const SetOfButtons = () => {
+export const SetOfButtons = (args) => {
   return (
     <ButtonSet>
-      <Button kind="secondary">Secondary button</Button>
-      <Button kind="primary">Primary button</Button>
+      <Button kind="secondary" {...args}>
+        Secondary button
+      </Button>
+      <Button kind="primary" {...args}>
+        Primary button
+      </Button>
     </ButtonSet>
   );
 };
@@ -72,6 +125,6 @@ export const Skeleton = () => (
   <div>
     <ButtonSkeleton />
     &nbsp;
-    <ButtonSkeleton small />
+    <ButtonSkeleton size="sm" />
   </div>
 );

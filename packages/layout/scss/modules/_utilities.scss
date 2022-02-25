@@ -14,7 +14,7 @@
 /// @group @carbon/layout
 @function map-deep-get($map, $keys...) {
   @each $key in $keys {
-    $map: map-get($map, $key);
+    $map: map.get($map, $key);
   }
   @return $map;
 }
@@ -26,7 +26,7 @@
 /// @return {String} Desired value
 /// @group @carbon/layout
 @function key-by-index($map, $index) {
-  $keys: map-keys($map);
+  $keys: map.keys($map);
   @return nth($keys, $index);
 }
 
@@ -36,6 +36,6 @@
 /// @return {*} Desired value
 /// @group @carbon/layout
 @function last-map-item($map) {
-  $total-length: length($map);
+  $total-length: list.length($map);
   @return map-get($map, carbon--key-by-index($map, $total-length));
 }

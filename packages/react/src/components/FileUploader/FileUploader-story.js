@@ -87,6 +87,7 @@ const props = {
       ),
       buttonLabel: text('The button label (buttonLabel)', 'Add file'),
       buttonKind: buttonKind || 'primary',
+      disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, 'default'),
       filenameStatus: select(
         'Status for file name (filenameStatus)',
@@ -150,19 +151,17 @@ const props = {
 
 export default {
   title: 'Components/FileUploader',
+  component: FileUploader,
+  subcomponents: {
+    FileUploaderButton,
+    FileUploaderSkeleton,
+    FileUploaderItem,
+    FileUploaderDropContainer,
+  },
   decorators: [withKnobs],
-
   parameters: {
-    component: FileUploader,
     docs: {
       page: mdx,
-    },
-
-    subcomponents: {
-      FileUploaderButton,
-      FileUploaderSkeleton,
-      FileUploaderItem,
-      FileUploaderDropContainer,
     },
   },
 };

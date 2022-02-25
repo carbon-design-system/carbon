@@ -12,8 +12,6 @@ const autoprefixer = require('autoprefixer');
 const customProperties = require('postcss-custom-properties');
 // load dart-sass
 const dartSass = require('sass');
-// required for dart-sass - async builds are significantly slower without this package
-const Fiber = require('fibers');
 // require node-sass so we can explicitly set `gulp-sass`s `.compiler` property
 const nodeSass = require('node-sass');
 
@@ -101,9 +99,6 @@ const cloptions = commander
   .option('-ds, --use-dart-sass', 'Uses dart-sass instead of node-sass')
   .parse(process.argv);
 
-// Axe A11y Test
-const axe = require('gulp-axe-webdriver');
-
 const promisePortSassDevBuild = portscanner.findAPortNotInUse(
   cloptions.portSassDevBuild,
   cloptions.portSassDevBuild + 100
@@ -148,9 +143,6 @@ let sassDefaultOptions = {};
 
 if (useDartSass) {
   sass.compiler = dartSass;
-  sassDefaultOptions = {
-    fiber: Fiber,
-  };
 } else {
   sass.compiler = nodeSass;
 }
@@ -277,6 +269,8 @@ gulp.task('scripts:umd', () => {
     plugins: [
       '@babel/plugin-transform-modules-umd',
       ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ['@babel/plugin-proposal-private-methods', { loose: true }],
     ],
   };
 
@@ -307,7 +301,11 @@ gulp.task('scripts:es', () => {
         },
       ],
     ],
-    plugins: [['@babel/plugin-proposal-class-properties', { loose: true }]],
+    plugins: [
+      ['@babel/plugin-proposal-class-properties', { loose: true }],
+      ['@babel/plugin-proposal-private-property-in-object', { loose: true }],
+      ['@babel/plugin-proposal-private-methods', { loose: true }],
+    ],
   };
   return gulp
     .src(srcFiles)
@@ -360,7 +358,7 @@ const buildStyles = (prod) => {
       .pipe(
         postcss([
           autoprefixer({
-            browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+            overrideBrowserslist: ['> 1%', 'last 2 versions', 'ie >= 11'],
             grid: 'autoplace',
           }),
         ])
@@ -422,7 +420,7 @@ gulp.task('sass:dev', () => {
       postcss([
         customProperties(),
         autoprefixer({
-          browsers: ['> 1%', 'last 2 versions', 'ie >= 11'],
+          overrideBrowserslist: ['> 1%', 'last 2 versions', 'ie >= 11'],
           grid: 'autoplace',
         }),
       ])
@@ -642,35 +640,7 @@ const startTest = (done) => {
 
 gulp.task('test:unit', gulp.series('html:source', startTest));
 
-const startAccessibilityTest = (done) => {
-  const componentName = cloptions.name;
-  const options = {
-    a11yCheckOptions: {
-      rules: {
-        'html-has-lang': { enabled: false },
-        bypass: { enabled: false },
-        'image-alt': { enabled: false },
-      },
-    },
-    verbose: true,
-    showOnlyViolations: true,
-    exclude: '.offleft, #flex-col, #flex-row',
-    tags: ['wcag2aa', 'wcag2a'],
-    folderOutputReport: !componentName ? 'tests/axe/allHtml' : 'tests/axe',
-    saveOutputIn: !componentName
-      ? `a11y-html.json`
-      : `a11y-${componentName}.json`,
-    urls: !componentName
-      ? ['http://localhost:3000']
-      : [`http://localhost:3000/component/${componentName}/`],
-  };
-
-  return axe(options, done);
-};
-
-gulp.task('test:a11y', gulp.series('sass:compiled', startAccessibilityTest));
-
-gulp.task('test', gulp.parallel('test:unit', 'test:a11y'));
+gulp.task('test', gulp.parallel('test:unit'));
 
 // Watch Tasks
 gulp.task('watch', () => {

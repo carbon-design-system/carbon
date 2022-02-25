@@ -148,35 +148,35 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
   );
 };
 
+// eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/UI Shell',
-
+  subcomponents: {
+    Content,
+    Header,
+    HeaderMenuButton,
+    HeaderName,
+    HeaderNavigation,
+    HeaderMenu,
+    HeaderMenuItem,
+    HeaderGlobalBar,
+    HeaderGlobalAction,
+    HeaderPanel,
+    HeaderSideNavItems,
+    SkipToContent,
+    SideNav,
+    SideNavItems,
+    SideNavDivider,
+    SideNavLink,
+    SideNavMenu,
+    SideNavMenuItem,
+    Switcher,
+    SwitcherItem,
+    SwitcherDivider,
+  },
   parameters: {
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      Content,
-      Header,
-      HeaderMenuButton,
-      HeaderName,
-      HeaderNavigation,
-      HeaderMenu,
-      HeaderMenuItem,
-      HeaderGlobalBar,
-      HeaderGlobalAction,
-      HeaderPanel,
-      HeaderSideNavItems,
-      SkipToContent,
-      SideNav,
-      SideNavItems,
-      SideNavDivider,
-      SideNavLink,
-      SideNavMenu,
-      SideNavMenuItem,
-      Switcher,
-      SwitcherItem,
-      SwitcherDivider,
     },
   },
 };

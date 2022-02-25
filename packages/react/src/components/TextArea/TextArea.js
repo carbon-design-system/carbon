@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import { WarningFilled16 } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -25,17 +25,24 @@ const TextArea = React.forwardRef(function TextArea(
     helperText,
     light,
     placeholder,
+    enableCounter,
+    maxCount,
     ...other
   },
   ref
 ) {
   const prefix = usePrefix();
   const enabled = useFeatureFlag('enable-v11-release');
+  const { defaultValue, value, disabled } = other;
+  const [textCount, setTextCount] = useState(
+    defaultValue?.length || value?.length || 0
+  );
 
   const textareaProps = {
     id,
     onChange: (evt) => {
       if (!other.disabled) {
+        setTextCount(evt.target.value?.length);
         onChange(evt);
       }
     },
@@ -47,9 +54,13 @@ const TextArea = React.forwardRef(function TextArea(
     ref,
   };
 
+  if (enableCounter) {
+    textareaProps.maxLength = maxCount;
+  }
+
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--label--disabled`]: disabled,
   });
 
   const label = labelText ? (
@@ -57,6 +68,15 @@ const TextArea = React.forwardRef(function TextArea(
       {labelText}
     </label>
   ) : null;
+
+  const counterClasses = classNames(`${prefix}--label`, {
+    [`${prefix}--label--disabled`]: disabled,
+  });
+
+  const counter =
+    enableCounter && maxCount ? (
+      <div className={counterClasses}>{`${textCount}/${maxCount}`}</div>
+    ) : null;
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
@@ -102,7 +122,10 @@ const TextArea = React.forwardRef(function TextArea(
           ? classNames(`${prefix}--form-item`, className)
           : `${prefix}--form-item`
       }>
-      {label}
+      <div className={`${prefix}--text-area__label-wrapper`}>
+        {label}
+        {counter}
+      </div>
       <div
         className={`${prefix}--text-area__wrapper`}
         data-invalid={invalid || null}>
@@ -140,6 +163,11 @@ TextArea.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify whether to display the character counter
+   */
+  enableCounter: PropTypes.bool,
+
+  /**
    * Provide text that is used alongside the control label for additional help
    */
   helperText: PropTypes.node,
@@ -175,6 +203,11 @@ TextArea.propTypes = {
    * Don't use this to make tile background color same as container background color.
    */
   light: PropTypes.bool,
+
+  /**
+   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   */
+  maxCount: PropTypes.number,
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<textarea>`
@@ -215,6 +248,8 @@ TextArea.defaultProps = {
   invalidText: '',
   helperText: '',
   light: false,
+  enableCounter: false,
+  maxCount: undefined,
 };
 
 export default TextArea;

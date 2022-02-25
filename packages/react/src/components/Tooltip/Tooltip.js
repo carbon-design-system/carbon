@@ -492,7 +492,7 @@ class Tooltip extends Component {
     if (currentTarget !== relatedTarget) {
       this._tooltipDismissed = false;
     }
-    if (state === 'over') {
+    if (state === 'over' && !this.isControlled) {
       if (!this._tooltipDismissed) {
         this._handleUserInputOpenClose(evt, { open: true });
       }
@@ -611,6 +611,7 @@ class Tooltip extends Component {
       innerRef: ref,
       selectorPrimaryFocus, // eslint-disable-line
       tooltipId, //eslint-disable-line
+      autoOrientation, //eslint-disable-line
       ...other
     } = this.props;
 

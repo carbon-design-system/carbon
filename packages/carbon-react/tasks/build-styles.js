@@ -97,6 +97,16 @@ async function build() {
           },
           {
             type: 'directory',
+            filepath: 'aspect-ratio',
+            files: [
+              {
+                type: 'file',
+                filepath: '_index.scss',
+              },
+            ],
+          },
+          {
+            type: 'directory',
             filepath: 'breadcrumb',
             files: [
               {
@@ -546,6 +556,20 @@ async function build() {
           {
             type: 'file',
             filepath: '_serif.scss',
+          },
+        ],
+      },
+      {
+        type: 'directory',
+        filepath: 'utilities',
+        files: [
+          {
+            type: 'file',
+            filepath: '_convert.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_z-index.scss',
           },
         ],
       },

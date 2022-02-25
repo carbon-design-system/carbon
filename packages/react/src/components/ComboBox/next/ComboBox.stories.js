@@ -41,9 +41,15 @@ const items = [
 export default {
   title: 'Components/ComboBox',
   component: ComboBox,
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
 };
 
-export const Combobox = () => (
+export const Combobox = (args) => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
@@ -53,11 +59,12 @@ export const Combobox = () => (
       placeholder="Filter..."
       titleText="ComboBox title"
       helperText="Combobox helper text"
+      {...args}
     />
   </div>
 );
 
-export const withLayer = () => (
+export const WithLayer = (args) => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
@@ -67,6 +74,7 @@ export const withLayer = () => (
       placeholder="Filter..."
       titleText="First Layer"
       helperText="Combobox helper text"
+      {...args}
     />
     <Layer>
       <ComboBox
@@ -77,6 +85,7 @@ export const withLayer = () => (
         placeholder="Filter..."
         titleText="Second Layer"
         helperText="Combobox helper text"
+        {...args}
       />
       <Layer>
         <ComboBox
@@ -87,6 +96,7 @@ export const withLayer = () => (
           placeholder="Filter..."
           titleText="Third Layer"
           helperText="Combobox helper text"
+          {...args}
         />
       </Layer>
     </Layer>

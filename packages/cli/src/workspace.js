@@ -17,7 +17,12 @@ const WORKSPACE_ROOT = getProjectRoot(__dirname);
 const packageJson = fs.readJsonSync(path.join(WORKSPACE_ROOT, 'package.json'));
 const packagePaths = Array.isArray(packageJson.workspaces)
   ? glob
-      .sync(packageJson.workspaces.map((pattern) => `${pattern}/package.json`))
+      .sync(
+        packageJson.workspaces.map((pattern) => `${pattern}/package.json`),
+        {
+          cwd: WORKSPACE_ROOT,
+        }
+      )
       .map((match) => {
         const packageJsonPath = path.join(WORKSPACE_ROOT, match);
         return {

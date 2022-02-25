@@ -7,8 +7,50 @@
 
 'use strict';
 
+const fs = require('fs');
+const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const path = require('path');
+
+const stories = glob
+  .sync(
+    [
+      './Welcome/Welcome.stories.js',
+      '../src/**/*.stories.js',
+      '../src/**/*.stories.mdx',
+      '../../react/src/**/next/*.stories.js',
+      '../../react/src/**/next/*.stories.mdx',
+      '../../react/src/**/*-story.js',
+    ],
+    {
+      cwd: __dirname,
+    }
+  )
+  // Filters the stories by finding the paths that have a story file that ends
+  // in `-story.js` and checks to see if they also have a `.stories.js`,
+  // if so then defer to the `.stories.js`
+  .filter((match) => {
+    const filepath = path.resolve(__dirname, match);
+    const basename = path.basename(match, '.js');
+
+    if (basename.endsWith('-story')) {
+      const component = basename.replace(/-story$/, '');
+      const storyName = path.resolve(
+        filepath,
+        '..',
+        'next',
+        `${component}.stories.js`
+      );
+
+      if (fs.existsSync(storyName)) {
+        return false;
+      }
+
+      return true;
+    }
+
+    return true;
+  });
 
 module.exports = {
   addons: [
@@ -16,21 +58,23 @@ module.exports = {
       name: '@storybook/addon-essentials',
       options: {
         actions: true,
-        backgrounds: true,
+        backgrounds: false,
         controls: true,
         docs: true,
         toolbars: true,
         viewport: true,
       },
     },
+    '@storybook/addon-storysource',
+    '@storybook/addon-a11y',
   ],
-  stories: [
-    './Welcome/Welcome.stories.js',
-    '../src/**/*.stories.js',
-    '../src/**/*.stories.mdx',
-    '../../react/src/**/next/*.stories.js',
-    '../../react/src/**/next/*.stories.mdx',
-  ],
+  core: {
+    builder: 'webpack5',
+  },
+  features: {
+    previewCsfV3: true,
+  },
+  stories,
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {
@@ -72,7 +116,6 @@ module.exports = {
           options: {
             postcssOptions: {
               plugins: [
-                require('postcss-custom-properties')(),
                 require('autoprefixer')({
                   overrideBrowserslist: ['last 1 version'],
                 }),

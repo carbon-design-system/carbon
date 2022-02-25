@@ -15,9 +15,7 @@ import { useContextMenu } from './index';
 
 export default {
   title: 'Experimental/unstable_Menu/ContextMenu',
-  parameters: {
-    component: Menu,
-  },
+  component: Menu,
 };
 
 const Story = (items) => {
@@ -27,13 +25,13 @@ const Story = (items) => {
 
   return (
     <StoryFrame>
-      <InlineNotification
-        kind="info"
-        title="Context menu"
-        subtitle="Right-click anywhere on this page to access an example implementation of this component."
-        lowContrast
-        hideCloseButton
-      />
+      <InlineNotification kind="info" lowContrast hideCloseButton>
+        <strong>Context Menu</strong>
+        <p>
+          Right-click anywhere on this page to access an example implementation
+          of this component.
+        </p>
+      </InlineNotification>
       <Menu {...menuProps}>{renderedItems}</Menu>
     </StoryFrame>
   );

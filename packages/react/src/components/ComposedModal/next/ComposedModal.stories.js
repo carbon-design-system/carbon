@@ -183,14 +183,14 @@ const scrollingContent = (
 
 export default {
   title: 'Components/ComposedModal',
+  component: ComposedModal,
+  subcomponents: {
+    ModalHeader,
+    ModalBody,
+    ModalFooter,
+  },
   decorators: [withKnobs],
   parameters: {
-    component: ComposedModal,
-    subcomponents: {
-      ModalHeader,
-      ModalBody,
-      ModalFooter,
-    },
     docs: {
       page: mdx,
     },

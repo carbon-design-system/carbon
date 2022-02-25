@@ -123,7 +123,7 @@
   .#{$prefix}--tag--disabled,
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled,
   .#{$prefix}--tag--interactive.#{$prefix}--tag--disabled {
-    @include tag-theme($layer-disabled, $text-disabled);
+    @include tag-theme($layer, $text-disabled);
 
     &:hover {
       cursor: not-allowed;
@@ -178,6 +178,7 @@
     cursor: pointer;
     transition: background-color $duration-fast-01 motion(standard, productive),
       box-shadow $duration-fast-01 motion(standard, productive);
+
     svg {
       fill: currentColor;
     }

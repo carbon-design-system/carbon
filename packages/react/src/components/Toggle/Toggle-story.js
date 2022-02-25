@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
-import Toggle from '../Toggle';
+import Toggle from './Toggle';
 import ToggleSkeleton from '../Toggle/Toggle.Skeleton';
 import { Text } from '../Text';
 
@@ -29,16 +29,13 @@ const toggleProps = () => ({
   onChange: action('onChange'),
   onToggle: action('onToggle'),
   size: select('Field size (size)', sizes, undefined) || undefined,
+  toggled: boolean('Toggled (toggled)', true),
 });
 
 export default {
   title: 'Components/Toggle',
+  component: Toggle,
   decorators: [withKnobs],
-
-  parameters: {
-    component: Toggle,
-    subcomponents: {},
-  },
 };
 
 export const Default = () => (

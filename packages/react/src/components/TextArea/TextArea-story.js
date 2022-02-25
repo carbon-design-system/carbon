@@ -26,7 +26,11 @@ const TextAreaProps = () => ({
     'A valid value is required'
   ),
   helperText: text('Helper text (helperText)', 'Optional helper text.'),
-  placeholder: text('Placeholder text (placeholder)', 'Placeholder text.'),
+  enableCounter: boolean(
+    'Enable character counter/limit (enableCounter)',
+    false
+  ),
+  maxCount: number('Character limit (maxCount)', undefined),
   id: 'test2',
   cols: number('Columns (columns)', 50),
   rows: number('Rows (rows)', 4),
@@ -36,15 +40,14 @@ const TextAreaProps = () => ({
 
 export default {
   title: 'Components/TextArea',
+  component: TextArea,
   decorators: [withKnobs],
-
+  subcomponents: {
+    TextAreaSkeleton,
+  },
   parameters: {
-    component: TextArea,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      TextAreaSkeleton,
     },
   },
 };
@@ -53,7 +56,7 @@ export const Default = () => <TextArea {...TextAreaProps()} />;
 
 export const Skeleton = () => <TextAreaSkeleton />;
 
-export const classNameChangeTest = () => (
+export const ClassNameChangeTest = () => (
   <>
     <TextArea
       labelText="Text area label"
