@@ -129,6 +129,6 @@ jobs:
         run: yarn build --ignore '@carbon/sketch'
       - name: Run VRT
         env:
-          PERCY_TOKEN: dd3392142006a6483c8f524697f39f052755fa9dc087ff4437cac3d64227abdd
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
         run: |
           yarn run percy exec -- yarn workspace carbon-components-react test:e2e
