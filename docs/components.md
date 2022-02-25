@@ -62,7 +62,6 @@ function SampleComponent() {
   // ...
 }
 ```
-````
 
 **Props**
 
@@ -72,7 +71,4 @@ function SampleComponent() {
 **Links & Resources**
 
 <!-- Include any references or examples that are helpful -->
-
-```
-
-```
+````
