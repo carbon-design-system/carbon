@@ -43,7 +43,7 @@ function RadioTile({
       [`${prefix}--tile--disabled`]: disabled,
     }
   );
-  const inputProps = enabled ? {} : null;
+  const inputProps = enabled ? {} : rest;
   const labelProps = enabled ? rest : {};
 
   function handleOnChange(evt) {
