@@ -42,6 +42,7 @@
   // to match the specs.
   .#{$prefix}--checkbox {
     @include hidden;
+
     //even though its hidden, positioning is for native validation to be aligned to checkbox
     top: 1.25rem;
     left: 0.7rem;
@@ -197,6 +198,13 @@
 
     // Add extra spacing when label is present
     margin: rem(1px) 0 0 rem(6px);
+  }
+
+  //-----------------------------------------------
+  // InlineCheckbox
+  //-----------------------------------------------
+  .#{$prefix}--checkbox--inline {
+    position: relative;
   }
 }
 

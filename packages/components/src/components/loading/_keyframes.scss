@@ -12,6 +12,7 @@
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -34,6 +35,7 @@
   0% {
     stroke-dashoffset: loading-progress($circumference, 0);
   }
+
   100% {
     stroke-dashoffset: loading-progress($circumference, 81);
   }
@@ -43,6 +45,7 @@
   0% {
     stroke-dashoffset: loading-progress($circumference, 81);
   }
+
   100% {
     stroke-dashoffset: loading-progress($circumference, 0);
   }

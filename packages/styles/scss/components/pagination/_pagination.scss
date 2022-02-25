@@ -15,6 +15,7 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../select';
 
 /// Pagination styles
 /// @access public
@@ -26,11 +27,11 @@
 
   .#{$prefix}--pagination {
     @include component-reset.reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     width: calc(100% - 1px);
-    min-height: 3rem;
+    min-height: rem(40px);
     align-items: center;
     justify-content: space-between;
     border-top: 1px solid $border-subtle;
@@ -62,6 +63,14 @@
     }
   }
 
+  .#{$prefix}--pagination--sm {
+    min-height: rem(32px);
+  }
+
+  .#{$prefix}--pagination--lg {
+    min-height: rem(48px);
+  }
+
   .#{$prefix}--pagination .#{$prefix}--select {
     height: 100%;
     align-items: center;
@@ -73,19 +82,45 @@
   }
 
   .#{$prefix}--pagination .#{$prefix}--select-input {
+    @include type-style('body-compact-01');
+
     width: auto;
     min-width: auto;
-    height: 3rem;
+    height: 100%;
+    line-height: rem(40px);
   }
 
+  // Extra specificity is needed to preserve padding
   .#{$prefix}--pagination
     .#{$prefix}--select--inline
     .#{$prefix}--select-input {
     padding: 0 2.25rem 0 $spacing-05;
   }
 
+  .#{$prefix}--pagination--sm .#{$prefix}--select-input {
+    line-height: rem(32px);
+  }
+
+  .#{$prefix}--pagination--lg .#{$prefix}--select-input {
+    line-height: rem(48px);
+  }
+
   .#{$prefix}--pagination .#{$prefix}--select-input:hover {
-    background: $background-hover;
+    background: $layer-hover;
+  }
+
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus,
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus
+    option,
+  .#{$prefix}--pagination
+    .#{$prefix}--select--inline
+    .#{$prefix}--select-input:focus
+    optgroup {
+    background-color: $layer;
   }
 
   .#{$prefix}--pagination .#{$prefix}--select__arrow {
@@ -108,7 +143,7 @@
   .#{$prefix}--pagination__left,
   .#{$prefix}--pagination__right {
     display: flex;
-    height: 3rem;
+    height: 100%;
     align-items: center;
   }
 
@@ -155,8 +190,9 @@
     @include component-reset.reset;
 
     display: flex;
-    width: $spacing-09;
-    height: 100%;
+    width: rem(40px);
+    height: rem(40px);
+    min-height: rem(32px);
     align-items: center;
     justify-content: center;
     border: none;
@@ -167,6 +203,20 @@
     fill: $icon-primary;
     transition: outline $duration-fast-02 motion(standard, productive),
       background-color $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--pagination--sm .#{$prefix}--pagination__button,
+  .#{$prefix}--pagination--sm
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    width: rem(32px);
+    height: rem(32px);
+  }
+
+  .#{$prefix}--pagination--lg .#{$prefix}--pagination__button,
+  .#{$prefix}--pagination--lg
+    .#{$prefix}--btn--ghost.#{$prefix}--pagination__button {
+    width: rem(48px);
+    height: rem(48px);
   }
 
   .#{$prefix}--pagination__button:focus,

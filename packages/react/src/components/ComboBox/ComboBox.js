@@ -509,7 +509,7 @@ ComboBox.propTypes = {
    * Used to provide a placeholder text node before a user enters any input.
    * This is only present if the control has no items selected
    */
-  placeholder: PropTypes.string.isRequired,
+  placeholder: PropTypes.string,
 
   /**
    * For full control of the selection

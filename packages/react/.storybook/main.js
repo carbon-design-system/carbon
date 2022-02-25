@@ -14,15 +14,15 @@ const customProperties = require('postcss-custom-properties');
 const rtlcss = require('rtlcss');
 
 const {
-  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
-  CARBON_REACT_STORYBOOK_USE_RTL,
-  CARBON_REACT_STORYBOOK_USE_SASS_LOADER,
+  STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
+  STORYBOOK_USE_RTL,
+  STORYBOOK_USE_SASS_LOADER,
   NODE_ENV = 'development',
 } = process.env;
 
-const useSassLoader = CARBON_REACT_STORYBOOK_USE_SASS_LOADER === 'true';
+const useSassLoader = STORYBOOK_USE_SASS_LOADER === 'true';
 const useExternalCss = NODE_ENV === 'production';
-const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+const useRtl = STORYBOOK_USE_RTL === 'true';
 
 module.exports = {
   addons: [
@@ -36,6 +36,16 @@ module.exports = {
     require.resolve('./addon-theme/register'),
   ],
 
+  core: {
+    builder: 'webpack5',
+  },
+
+  features: {
+    previewCsfV3: true,
+  },
+
+  staticDirs: [path.join(__dirname, 'assets')],
+
   stories: glob.sync(
     [
       './Welcome/Welcome.stories.js',
@@ -48,7 +58,12 @@ module.exports = {
     }
   ),
 
-  webpack(config) {
+  webpack(config, { configType }) {
+    config.devtool =
+      configType === 'DEVELOPMENT'
+        ? 'eval-cheap-module-source-map'
+        : 'source-map';
+
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {
         return loader.includes('babel-loader');
@@ -74,7 +89,7 @@ module.exports = {
           return `
             $feature-flags: (
               ui-shell: true,
-              enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+              enable-css-custom-properties: ${STORYBOOK_USE_CUSTOM_PROPERTIES},
             );
             ${content}
           `;
@@ -93,17 +108,18 @@ module.exports = {
         data: `
           $feature-flags: (
             ui-shell: true,
-            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
+            enable-css-custom-properties: ${STORYBOOK_USE_CUSTOM_PROPERTIES},
           );
         `,
         implementation: require('sass'),
         includePaths: [path.resolve(__dirname, '..', '..', 'node_modules')],
+        sourceMap: true,
       },
     };
 
     config.module.rules.push({
       test: /-story\.jsx?$/,
-      loaders: [
+      use: [
         {
           loader: require.resolve('@storybook/source-loader'),
           options: {
@@ -138,15 +154,14 @@ module.exports = {
         {
           loader: 'postcss-loader',
           options: {
-            plugins: () => {
-              const autoPrefixer = require('autoprefixer')({
-                overrideBrowserslist: ['last 1 version', 'ie >= 11'],
-              });
-              return [
+            postcssOptions: {
+              plugins: [
                 customProperties(),
-                autoPrefixer,
+                require('autoprefixer')({
+                  overrideBrowserslist: ['last 1 version'],
+                }),
                 ...(useRtl ? [rtlcss] : []),
-              ];
+              ],
             },
             sourceMap: true,
           },

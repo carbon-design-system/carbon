@@ -64,7 +64,12 @@ export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
-export { Grid, Row, Column } from './components/Grid';
+export {
+  Grid,
+  Row,
+  Column,
+  FlexGrid as unstable_FlexGrid,
+} from './components/Grid';
 export Icon from './components/Icon';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
@@ -225,6 +230,7 @@ export unstable_Menu, {
   MenuRadioGroup as unstable_MenuRadioGroup,
   MenuSelectableItem as unstable_MenuSelectableItem,
 } from './components/Menu';
+export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
 export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
@@ -247,6 +253,7 @@ export {
   TabPanel as unstable_TabPanel,
   TabPanels as unstable_TabPanels,
   TabList as unstable_TabList,
+  IconTab as unstable_IconTab,
 } from './components/Tabs';
 export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
 export {

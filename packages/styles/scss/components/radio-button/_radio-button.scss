@@ -34,6 +34,7 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button-group {
     @include reset;
 
+    position: relative;
     display: flex;
     align-items: center;
   }
@@ -54,7 +55,7 @@ $radio-border-width: 1px !default;
 
     .#{$prefix}--radio-button__label {
       margin-right: 0;
-      line-height: carbon-mini-units(2.5);
+      line-height: 1.25;
     }
 
     .#{$prefix}--radio-button__label:not(:last-of-type) {
@@ -69,7 +70,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button__label {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     display: flex;
     align-items: center;

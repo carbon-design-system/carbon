@@ -5,8 +5,10 @@ Object {
   "css--default-type": true,
   "css--font-face": true,
   "css--reset": true,
+  "flex-grid-columns": 16,
   "font-display": "swap",
   "font-path": "~@ibm/plex",
   "prefix": "cds",
+  "use-google-fonts": false,
 }
 `;

@@ -33,14 +33,8 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                     name="select-all"
                     onClick={[MockFunction]}
                   >
-                    <InlineCheckbox
-                      ariaLabel="Aria label"
-                      checked={false}
-                      id="id"
-                      innerRef={null}
-                      name="select-all"
-                      onChange={[Function]}
-                      onClick={[MockFunction]}
+                    <div
+                      className="bx--checkbox--inline"
                     >
                       <input
                         checked={false}
@@ -57,7 +51,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                         htmlFor="id"
                         onClick={[Function]}
                       />
-                    </InlineCheckbox>
+                    </div>
                   </ForwardRef(InlineCheckbox)>
                 </td>
               </TableSelectRow>

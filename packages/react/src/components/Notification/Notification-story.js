@@ -18,7 +18,7 @@ import {
   ToastNotification,
   InlineNotification,
   NotificationActionButton,
-} from '../Notification';
+} from './Notification';
 import mdx from './Notification.mdx';
 
 const kinds = {
@@ -58,15 +58,14 @@ const toastNotificationProps = () => ({
 
 export default {
   title: 'Components/Notifications',
+  component: ToastNotification,
   decorators: [withKnobs],
-
+  subcomponents: {
+    InlineNotification,
+  },
   parameters: {
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      ToastNotification,
-      InlineNotification,
     },
   },
 };

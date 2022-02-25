@@ -15,7 +15,7 @@ import {
   CARBON_TYPE_PANEL_ID,
 } from './shared';
 
-if (process.env.CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES === 'true') {
+if (process.env.STORYBOOK_USE_CUSTOM_PROPERTIES === 'true') {
   // Disabling because storybook addons doesn't provide proptypes or display names for these panels
   /* eslint-disable react/display-name, react/prop-types */
   addons.register(CARBON_THEMES_ADDON_ID, (api) => {

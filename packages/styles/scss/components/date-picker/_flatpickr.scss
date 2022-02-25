@@ -16,66 +16,73 @@
 
 @use '../button/tokens' as *;
 
-@keyframes fpFadeInDown {
+@keyframes fp-fade-in-down {
   from {
     opacity: 0;
     transform: translate3d(0, -20px, 0);
   }
+
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes fpSlideLeft {
+@keyframes fp-slide-left {
   from {
     transform: translate3d(0, 0, 0);
   }
+
   to {
     transform: translate3d(-100%, 0, 0);
   }
 }
 
-@keyframes fpSlideLeftNew {
+@keyframes fp-slide-left-new {
   from {
     transform: translate3d(100%, 0, 0);
   }
+
   to {
     transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes fpSlideRight {
+@keyframes fp-slide-right {
   from {
     transform: translate3d(0, 0, 0);
   }
+
   to {
     transform: translate3d(100%, 0, 0);
   }
 }
 
-@keyframes fpSlideRightNew {
+@keyframes fp-slide-right-new {
   from {
     transform: translate3d(-100%, 0, 0);
   }
+
   to {
     transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes fpFadeOut {
+@keyframes fp-fade-out {
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
 }
 
-@keyframes fpFadeIn {
+@keyframes fp-fade-in {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -130,7 +137,7 @@
   }
 
   .flatpickr-calendar.animate.open {
-    animation: fpFadeInDown $duration-fast-02 motion(entrance, productive);
+    animation: fp-fade-in-down $duration-fast-02 motion(entrance, productive);
   }
 
   .flatpickr-calendar.inline {
@@ -193,7 +200,7 @@
   }
 
   .flatpickr-month {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: flex;
     height: rem(40px);
@@ -219,6 +226,7 @@
     text-decoration: none;
     transform: scale(1, 1) #{'/*rtl: scale(-1,1)*/'};
     transition: background-color $duration-fast-01 motion(standard, productive);
+    user-select: none;
     // Windows HCM fix
     @include high-contrast-mode('icon-fill');
 
@@ -239,7 +247,7 @@
   }
 
   .flatpickr-current-month {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: flex;
     height: rem(28px);
@@ -379,7 +387,7 @@
   }
 
   .flatpickr-weekday {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     flex: 1;
     color: $text-primary;
@@ -391,8 +399,8 @@
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeft {
-    animation: fpFadeOut 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
+      fp-slide-left 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeft,
@@ -401,23 +409,23 @@
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeftNew {
-    animation: fpFadeIn 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
+      fp-slide-left 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideRight {
-    animation: fpFadeOut 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      fpSlideRight 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
+      fp-slide-right 400ms cubic-bezier(0.23, 1, 0.32, 1);
     transform: translate3d(100%, 0, 0);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideRightNew {
-    animation: fpFadeIn 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      fpSlideRightNew 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
+      fp-slide-right-new 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .flatpickr-day {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     width: rem(40px);

@@ -53,8 +53,9 @@ const tableProps = {
   },
 };
 
+// eslint-disable-next-line storybook/csf-component
 export default {
-  title: 'Components/DataTable/Development',
+  title: 'Components/DataTable/Dynamic',
   decorators: [withKnobs],
 };
 

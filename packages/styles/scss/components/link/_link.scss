@@ -11,7 +11,18 @@
 @use '../../theme' as *;
 @use '../../type';
 @use '../../utilities/component-reset';
+@use '../../utilities/custom-property';
 @use '../../utilities/focus-outline' as *;
+
+$link-text-color: custom-property.get-var('link-text-color', $link-primary);
+$link-hover-text-color: custom-property.get-var(
+  'link-hover-text-color',
+  $link-primary-hover
+);
+$link-focus-text-color: custom-property.get-var(
+  'link-focus-text-color',
+  $focus
+);
 
 /// Link styles
 /// @access public
@@ -19,16 +30,16 @@
 @mixin link {
   .#{$prefix}--link {
     @include component-reset.reset;
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     display: inline-flex;
-    color: $link-primary;
+    color: $link-text-color;
     outline: none;
     text-decoration: none;
     transition: color $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      color: $link-primary-hover;
+      color: $link-hover-text-color;
       text-decoration: underline;
     }
 
@@ -41,6 +52,8 @@
 
     &:focus {
       @include focus-outline;
+
+      outline-color: $link-focus-text-color;
     }
 
     &:visited {
@@ -55,7 +68,7 @@
   .#{$prefix}--link--disabled,
   .#{$prefix}--link--disabled:hover {
     @include component-reset.reset;
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     color: $text-disabled;
     cursor: not-allowed;
@@ -89,7 +102,7 @@
   }
 
   .#{$prefix}--link--lg {
-    @include type.type-style('body-short-02');
+    @include type.type-style('body-compact-02');
   }
 
   .#{$prefix}--link__icon {

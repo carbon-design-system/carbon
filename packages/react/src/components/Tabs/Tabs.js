@@ -69,6 +69,13 @@ export default class Tabs extends React.Component {
     rightOverflowButtonProps: PropTypes.object,
 
     /**
+     * Optionally provide a delay (in milliseconds) passed to the lodash
+     * debounce of the onScroll handler. This will impact the responsiveness
+     * of scroll arrow buttons rendering when scrolling to the first or last tab.
+     */
+    scrollDebounceWait: PropTypes.number,
+
+    /**
      * Choose whether or not to automatically scroll to newly selected tabs
      * on component rerender
      */
@@ -105,6 +112,7 @@ export default class Tabs extends React.Component {
     scrollIntoView: true,
     selected: 0,
     selectionMode: 'automatic',
+    scrollDebounceWait: 150,
   };
 
   static contextType = PrefixContext;
@@ -180,7 +188,10 @@ export default class Tabs extends React.Component {
     window.addEventListener('resize', this._debouncedHandleWindowResize);
 
     if (!this._debouncedHandleScroll) {
-      this._debouncedHandleScroll = debounce(this._handleScroll, 125);
+      this._debouncedHandleScroll = debounce(
+        this._handleScroll,
+        this.props.scrollDebounceWait
+      );
     }
 
     // scroll selected tab into view on mount
@@ -417,6 +428,7 @@ export default class Tabs extends React.Component {
       type,
       light,
       onSelectionChange,
+      scrollDebounceWait, // eslint-disable-line no-unused-vars
       scrollIntoView, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       tabContentClassName,

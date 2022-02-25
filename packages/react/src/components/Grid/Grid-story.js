@@ -28,7 +28,7 @@ function DemoContent({ children }) {
   );
 }
 
-export const experimentalCSSGrid = () => (
+export const ExperimentalCSSGrid = () => (
   <FeatureFlags flags={{ 'enable-css-grid': true }}>
     <Heading>Wide</Heading>
     <Grid>
@@ -54,22 +54,6 @@ export const experimentalCSSGrid = () => (
       </Grid>
     </Grid>
 
-    <Heading>Narrow</Heading>
-    <Grid narrow>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        Column
-      </Column>
-    </Grid>
-
     <Heading>Condensed</Heading>
     <Grid condensed>
       <Column sm={1} md={2} lg={4}>
@@ -88,7 +72,7 @@ export const experimentalCSSGrid = () => (
   </FeatureFlags>
 );
 
-export const autoColumns = () => (
+export const AutoColumns = () => (
   <Grid>
     <Row>
       <Column>
@@ -107,7 +91,7 @@ export const autoColumns = () => (
   </Grid>
 );
 
-export const responsiveGrid = () => (
+export const ResponsiveGrid = () => (
   <Grid>
     <Row>
       <Column sm={2} md={4} lg={6}>
@@ -135,7 +119,7 @@ export const responsiveGrid = () => (
   </Grid>
 );
 
-export const offset = () => (
+export const Offset = () => (
   <Grid>
     <Row>
       <Column sm={{ span: 1, offset: 3 }}>
@@ -154,7 +138,7 @@ export const offset = () => (
   </Grid>
 );
 
-export const condensed = () => (
+export const Condensed = () => (
   <Grid condensed>
     <Row>
       <Column>
@@ -173,7 +157,7 @@ export const condensed = () => (
   </Grid>
 );
 
-export const condensedColumns = () => (
+export const CondensedColumns = () => (
   <Grid>
     <Row>
       <Column>
@@ -220,7 +204,7 @@ export const condensedColumns = () => (
   </Grid>
 );
 
-export const narrow = () => (
+export const Narrow = () => (
   <Grid narrow>
     <Row>
       <Column>
@@ -239,7 +223,7 @@ export const narrow = () => (
   </Grid>
 );
 
-export const narrowColumns = () => (
+export const NarrowColumns = () => (
   <Grid>
     <Row>
       <Column>
@@ -286,7 +270,7 @@ export const narrowColumns = () => (
   </Grid>
 );
 
-export const fullWidth = () => (
+export const FullWidth = () => (
   <Grid fullWidth>
     <Row>
       <Column>
@@ -305,7 +289,7 @@ export const fullWidth = () => (
   </Grid>
 );
 
-export const mixedGridModes = () => (
+export const MixedGridModes = () => (
   <Grid>
     <Row>
       <Column>

@@ -15,11 +15,12 @@ const { prefix } = settings;
 
 function ProgressBar({
   className,
+  helperText,
   hideLabel,
   label,
   max = 100,
+  size = 'big',
   value,
-  helperText,
 }) {
   const labelId = useId('progress-bar');
   const helperId = useId('progress-bar-helper');
@@ -38,6 +39,7 @@ function ProgressBar({
 
   const wrapperClasses = classNames(
     `${prefix}--progress-bar`,
+    `${prefix}--progress-bar--${size}`,
     {
       [`${prefix}--progress-bar--indeterminate`]: indeterminate,
     },
@@ -100,6 +102,11 @@ ProgressBar.propTypes = {
    * The maximum value.
    */
   max: PropTypes.number,
+
+  /**
+   * Specify the size of the ProgressBar.
+   */
+  size: PropTypes.oneOf(['small', 'big']),
 
   /**
    * The current value.

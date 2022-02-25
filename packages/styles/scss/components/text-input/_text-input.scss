@@ -32,7 +32,7 @@
 @mixin text-input {
   .#{$prefix}--text-input {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     width: 100%;
@@ -96,13 +96,17 @@
     width: 100%;
   }
 
-  .#{$prefix}--text-input__invalid-icon {
+  .#{$prefix}--text-input__invalid-icon,
+  .#{$prefix}--text-input__readonly-icon {
     position: absolute;
     // top/transform used to center invalid icon in IE11
     top: 50%;
     right: $spacing-05;
-    fill: $support-error;
     transform: translateY(-50%);
+  }
+
+  .#{$prefix}--text-input__invalid-icon {
+    fill: $support-error;
   }
 
   .#{$prefix}--text-input__invalid-icon--warning {
@@ -175,7 +179,8 @@
   }
 
   .#{$prefix}--text-input--invalid,
-  .#{$prefix}--text-input--warning {
+  .#{$prefix}--text-input--warning,
+  .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
     padding-right: $spacing-08;
   }
 
@@ -216,7 +221,7 @@
     @include focus-outline('reset');
 
     border-bottom: 1px solid transparent;
-    background-color: $field-disabled;
+    background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
@@ -379,6 +384,15 @@
   .#{$prefix}--text-input__field-outer-wrapper--inline {
     flex: 8;
     flex-direction: column;
+  }
+
+  //-----------------------------
+  // Readonly
+  //-----------------------------
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--readonly,
+  .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
+    background: transparent;
   }
 
   // Windows HCM fix

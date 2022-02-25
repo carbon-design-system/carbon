@@ -28,6 +28,14 @@
     background-color: $layer;
   }
 
+  .#{$prefix}--progress-bar--big .#{$prefix}--progress-bar__track {
+    height: rem(8px);
+  }
+
+  .#{$prefix}--progress-bar--small .#{$prefix}--progress-bar__track {
+    height: rem(4px);
+  }
+
   .#{$prefix}--progress-bar__bar {
     display: block;
     width: 100%;

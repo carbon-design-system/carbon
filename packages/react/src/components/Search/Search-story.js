@@ -51,20 +51,18 @@ const props = () => ({
 
 export default {
   title: 'Components/Search',
+  component: Search,
   decorators: [withKnobs],
-
   parameters: {
-    component: Search,
     docs: {
       page: mdx,
     },
-
-    subcomponents: {
-      SearchSkeleton,
-      SearchFilterButton,
-      SearchLayoutButton,
-      ExpandableSearch,
-    },
+  },
+  subcomponents: {
+    SearchSkeleton,
+    SearchFilterButton,
+    SearchLayoutButton,
+    ExpandableSearch,
   },
 };
 
@@ -147,5 +145,3 @@ Skeleton.parameters = {
 export const Expandable = () => (
   <ExpandableSearch {...props()} id="search-expandable-1" />
 );
-
-Expandable.storyName = 'Expandable';

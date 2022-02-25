@@ -25,18 +25,16 @@ const filenameStatuses = ['edit', 'complete', 'uploading'];
 
 export default {
   title: 'Components/FileUploader',
-
+  component: FileUploader,
+  subcomponents: {
+    FileUploaderButton,
+    FileUploaderSkeleton,
+    FileUploaderItem,
+    FileUploaderDropContainer,
+  },
   parameters: {
-    component: FileUploader,
     docs: {
       page: mdx,
-    },
-
-    subcomponents: {
-      FileUploaderButton,
-      FileUploaderSkeleton,
-      FileUploaderItem,
-      FileUploaderDropContainer,
     },
   },
 };
@@ -58,6 +56,7 @@ _FileUploader.args = {
   accept: ['.jpg', '.png'],
   name: '',
   multiple: true,
+  disabled: false,
   iconDescription: 'Clear file',
 };
 _FileUploader.argTypes = {

@@ -6,6 +6,7 @@
  */
 
 import React from 'react';
+import { settings } from 'carbon-components';
 import {
   ProgressIndicator,
   ProgressStep,
@@ -13,8 +14,15 @@ import {
 } from '../';
 import Tooltip from '../../Tooltip';
 
+const { prefix } = settings;
+
 export default {
   title: 'Components/ProgressIndicator',
+  component: ProgressIndicator,
+  subcomponents: {
+    ProgressStep,
+    ProgressIndicatorSkeleton,
+  },
 };
 
 export const Default = () => (
@@ -31,7 +39,7 @@ export const Default = () => (
         <Tooltip
           direction="bottom"
           showIcon={false}
-          triggerClassName={`bx--progress-label`}
+          triggerClassName={`${prefix}--progress-label`}
           triggerText={'Second step with tooltip'}
           tooltipId="tooltipId-0">
           <p>Overflow tooltip content.</p>
@@ -45,7 +53,7 @@ export const Default = () => (
         <Tooltip
           direction="bottom"
           showIcon={false}
-          triggerClassName={`bx--progress-label`}
+          triggerClassName={`${prefix}--progress-label`}
           triggerText={'Second step with tooltip'}
           tooltipId="tooltipId-0">
           <p>Overflow tooltip content.</p>
@@ -83,7 +91,7 @@ export const Interactive = () => (
         <Tooltip
           direction="bottom"
           showIcon={false}
-          triggerClassName={`bx--progress-label`}
+          triggerClassName={`${prefix}--progress-label`}
           triggerText="Tooltip and really long label"
           tooltipId="tooltipId-1">
           <p>

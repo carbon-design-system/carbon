@@ -120,6 +120,7 @@
 
   .#{$prefix}--overflow-menu-options--light {
     background-color: $field-02;
+
     &::after {
       background-color: $field-02;
     }
@@ -129,7 +130,7 @@
     background-color: $field-02;
   }
 
-  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(.#{$prefix}--breadcrumb-menu-options)::after {
     top: rem(-3px);
     left: 0;
     width: rem(40px);
@@ -162,6 +163,7 @@
     &[data-floating-menu-direction='top']::after {
       width: rem(32px);
     }
+
     &[data-floating-menu-direction='left']::after,
     &[data-floating-menu-direction='right']::after {
       height: rem(32px);
@@ -175,6 +177,7 @@
     &[data-floating-menu-direction='top']::after {
       width: rem(48px);
     }
+
     &[data-floating-menu-direction='left']::after,
     &[data-floating-menu-direction='right']::after {
       height: rem(48px);
@@ -242,7 +245,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__btn {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     display: inline-flex;

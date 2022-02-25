@@ -36,9 +36,10 @@
   .#{$prefix}--header__action {
     @include button-reset.reset();
 
+    display: inline-flex;
     width: mini-units(6);
     height: mini-units(6);
-    border: rem(2px) solid transparent;
+    border: rem(1px) solid transparent;
     transition: background-color $duration-fast-02,
       border-color $duration-fast-02;
   }
@@ -80,6 +81,7 @@
   }
 
   .#{$prefix}--header__action.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
+    align-items: center;
     justify-content: center;
   }
 
@@ -122,7 +124,7 @@
   // Header - Name
   //--------------------------------------------------------------------------
   a.#{$prefix}--header__name {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     height: 100%;
@@ -322,7 +324,7 @@
     width: mini-units(25);
     flex-direction: column;
     background-color: $layer;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 50%);
     transform: translateY(100%);
   }
 

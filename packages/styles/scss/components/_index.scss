@@ -6,6 +6,7 @@
 //
 
 @use 'accordion';
+@use 'aspect-ratio';
 @use 'breadcrumb';
 @use 'button';
 @use 'checkbox';
@@ -51,6 +52,7 @@
 @use 'text-input';
 @use 'tile';
 @use 'time-picker';
+@use 'toggletip';
 @use 'toggle';
 @use 'tooltip';
 @use 'treeview';

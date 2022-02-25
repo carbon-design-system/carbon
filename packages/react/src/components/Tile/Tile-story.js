@@ -85,21 +85,20 @@ const props = {
 
 export default {
   title: 'Components/Tile',
+  component: Tile,
   decorators: [withKnobs],
-
+  subcomponents: {
+    ClickableTile,
+    SelectableTile,
+    ExpandableTile,
+    RadioTile,
+    TileGroup,
+    TileAboveTheFoldContent,
+    TileBelowTheFoldContent,
+  },
   parameters: {
-    component: Tile,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      ClickableTile,
-      SelectableTile,
-      ExpandableTile,
-      RadioTile,
-      TileGroup,
-      TileAboveTheFoldContent,
-      TileBelowTheFoldContent,
     },
   },
 };

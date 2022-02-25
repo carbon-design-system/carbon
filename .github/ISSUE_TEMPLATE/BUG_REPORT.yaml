@@ -29,9 +29,12 @@ body:
         - '@carbon/motion'
         - '@carbon/pictograms'
         - '@carbon/pictograms-react'
+        - '@carbon/react'
+        - '@carbon/styles'
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - 'carbon-components-svelte'
     validations:
       required: true
   - type: dropdown

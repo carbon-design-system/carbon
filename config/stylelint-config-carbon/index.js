@@ -12,6 +12,7 @@ module.exports = {
     require.resolve('stylelint-config-standard'),
     require.resolve('stylelint-no-unsupported-browser-features'),
     require.resolve('stylelint-config-idiomatic-order'),
+    require.resolve('stylelint-config-standard-scss'),
     require.resolve('./rules/possible-errors'),
     require.resolve('./rules/limit-language-features'),
     require.resolve('./rules/stylistic-issues'),
