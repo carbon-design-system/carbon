@@ -231,7 +231,7 @@
     @include high-contrast-mode('icon-fill');
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -261,7 +261,7 @@
     margin-left: $spacing-02;
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -270,7 +270,7 @@
     width: rem(60px);
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $background-inverse-hover;
     }
   }
 
@@ -437,7 +437,7 @@
     transition: all $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background: $background-hover;
+      background: $layer-hover;
     }
 
     &:focus {
