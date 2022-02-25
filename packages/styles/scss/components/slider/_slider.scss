@@ -38,7 +38,9 @@
     width: 100%;
     min-width: rem(200px);
     max-width: rem(640px);
+    padding: $spacing-05 0;
     margin: 0 $spacing-05;
+    cursor: pointer;
   }
 
   .#{$prefix}--slider__range-label {
@@ -57,7 +59,6 @@
     width: 100%;
     height: rem(2px);
     background: $border-subtle;
-    cursor: pointer;
     transform: translate(0%, -50%);
   }
 
@@ -87,13 +88,11 @@
   .#{$prefix}--slider__thumb {
     position: absolute;
     z-index: 3;
-    top: 0;
     width: rem(14px);
     height: rem(14px);
     background: $layer-selected-inverse;
     border-radius: 50%;
     box-shadow: inset 0 0 0 1px transparent, inset 0 0 0 2px transparent;
-    cursor: pointer;
     outline: none;
     transform: translate(-50%, -50%);
     transition: transform $duration-fast-02 motion(standard, productive),
@@ -150,6 +149,10 @@
     color: $text-disabled;
   }
 
+  .#{$prefix}--slider--disabled.#{$prefix}--slider {
+    cursor: not-allowed;
+  }
+
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
     background-color: $border-subtle;
 
@@ -177,7 +180,6 @@
     .#{$prefix}--slider__thumb:focus
     ~ .#{$prefix}--slider__filled-track {
     background-color: $border-subtle;
-    cursor: not-allowed;
   }
 
   .#{$prefix}--slider--disabled

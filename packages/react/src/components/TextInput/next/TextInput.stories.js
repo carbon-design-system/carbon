@@ -48,6 +48,17 @@ export const TogglePasswordVisibility = () => {
   );
 };
 
+export const ReadOnly = () => {
+  return (
+    <TextInput
+      labelText="Text input label"
+      helperText="Optional help text"
+      value="This is read only, you can't type more."
+      readOnly
+    />
+  );
+};
+
 export const WithLayer = () => {
   return (
     <>

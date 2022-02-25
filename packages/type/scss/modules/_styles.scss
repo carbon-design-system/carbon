@@ -9,7 +9,7 @@
 
 @use 'sass:map';
 @use 'sass:math';
-@use '@carbon/layout';
+@use '@carbon/grid/scss/modules/breakpoint' as grid;
 @use 'font-family';
 @use 'scale';
 
@@ -716,7 +716,7 @@ $tokens: (
 /// @param {Map} $breakpoints [$grid-breakpoints] - Custom breakpoints to use
 /// @access public
 /// @group @carbon/type
-@mixin fluid-type($type-styles, $breakpoints: layout.$grid-breakpoints) {
+@mixin fluid-type($type-styles, $breakpoints: grid.$grid-breakpoints) {
   // Include the initial styles for the given token by default without any
   // media query guard. This includes `font-size` as a fallback in the case
   // that a browser does not support `calc()`
@@ -729,7 +729,7 @@ $tokens: (
   // token and apply the properties and fluid type size for that given
   // breakpoint
   @each $name, $values in map.get($type-styles, breakpoints) {
-    @include layout.breakpoint($name) {
+    @include grid.breakpoint($name) {
       @include properties($values);
       @include fluid-type-size($type-styles, $name, $breakpoints);
     }
@@ -745,7 +745,7 @@ $tokens: (
 @mixin fluid-type-size(
   $type-styles,
   $name,
-  $breakpoints: layout.$grid-breakpoints
+  $breakpoints: grid.$grid-breakpoints
 ) {
   // Get the information about the breakpoint we're currently working in. Useful
   // for getting initial width information
@@ -776,7 +776,7 @@ $tokens: (
 
   // We can use `breakpoint-next` to see if there is another breakpoint we can
   // use to update `max-font-size` and `max-vw` with larger values
-  $next-breakpoint-available: layout.breakpoint-next($name, $breakpoints);
+  $next-breakpoint-available: grid.breakpoint-next($name, $breakpoints);
   $next-fluid-breakpoint-name: null;
 
   // We need to figure out what the next available fluid breakpoint is for our
@@ -788,7 +788,7 @@ $tokens: (
       $next-fluid-breakpoint-name: $next-breakpoint-available;
       $next-breakpoint-available: null;
     } @else {
-      $next-breakpoint-available: layout.breakpoint-next(
+      $next-breakpoint-available: grid.breakpoint-next(
         $next-breakpoint-available,
         $breakpoints
       );
@@ -846,11 +846,7 @@ $custom-property-prefix: 'cds' !default;
 /// @param {Map} $breakpoints [$grid-breakpoints] - Provide a custom breakpoint map to use
 /// @access public
 /// @group @carbon/type
-@mixin type-style(
-  $name,
-  $fluid: false,
-  $breakpoints: layout.$grid-breakpoints
-) {
+@mixin type-style($name, $fluid: false, $breakpoints: grid.$grid-breakpoints) {
   @if not map.has-key($tokens, $name) {
     @error 'Unable to find a token with the name: `#{$name}`';
   }

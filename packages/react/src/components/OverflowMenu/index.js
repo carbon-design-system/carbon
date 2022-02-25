@@ -5,14 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { default as OverflowMenuNext } from './next/OverflowMenu';
-import { default as OverflowMenuClassic } from './OverflowMenu';
-import { createComponentToggle } from '../../internal/ComponentToggle';
+import * as FeatureFlags from '@carbon/feature-flags';
+import { OverflowMenu } from './OverflowMenu';
+import { createClassWrapper } from '../../internal/createClassWrapper';
 
-const OverflowMenu = createComponentToggle({
-  name: 'OverflowMenu',
-  next: OverflowMenuNext,
-  classic: OverflowMenuClassic,
-});
-
-export default OverflowMenu;
+export default FeatureFlags.enabled('enable-v11-release')
+  ? createClassWrapper(OverflowMenu)
+  : OverflowMenu;
