@@ -1,7 +1,7 @@
 {
   "name": "@carbon/colors",
   "description": "Colors for digital and software products using the Carbon Design System",
-  "version": "10.36.0",
+  "version": "10.37.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -36,7 +36,7 @@
     "clean": "rimraf css es lib umd scss index.scss"
   },
   "devDependencies": {
-    "@carbon/cli": "^10.33.0",
+    "@carbon/cli": "^10.34.0",
     "@carbon/cli-reporter": "^10.5.0",
     "@carbon/scss-generator": "^10.13.0",
     "@carbon/test-utils": "^10.21.0",
