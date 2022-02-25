@@ -76,7 +76,7 @@
     height: $spacing-09;
     box-shadow: none;
     cursor: pointer;
-    transition: width $transition--expansion $standard-easing,
+    transition: width $transition-expansion $standard-easing,
       background-color $duration-fast-02 motion(entrance, productive);
 
     &:hover {
@@ -475,7 +475,7 @@
 
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
     opacity: 0;
-    transition: opacity $transition--base $standard-easing;
+    transition: opacity $transition-base $standard-easing;
   }
 
   // cancel btn
@@ -503,7 +503,7 @@
   }
 
   .#{$prefix}--batch-summary__para {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
   }
 
   //-------------------------------------------------

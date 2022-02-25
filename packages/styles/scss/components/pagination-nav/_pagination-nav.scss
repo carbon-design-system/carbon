@@ -46,7 +46,7 @@
 ) {
   .#{$prefix}--pagination-nav {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     line-height: 0;
   }
@@ -70,7 +70,7 @@
   }
 
   .#{$prefix}--pagination-nav__page {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include button-reset.reset($width: false);
 
     position: relative;
