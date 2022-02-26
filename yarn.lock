@@ -11978,7 +11978,7 @@ __metadata:
     handlebars: ^4.0.12
     handlebars-helpers: ^0.10.0
     html-loader: ^0.5.0
-    jasmine-core: ^3.0.0
+    jasmine-core: ^4.0.0
     karma: ^6.0.0
     karma-chrome-launcher: ^2.2.0
     karma-coverage: ^2.0.3
@@ -22704,10 +22704,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:^3.0.0, jasmine-core@npm:^3.3":
+"jasmine-core@npm:^3.3":
   version: 3.5.0
   resolution: "jasmine-core@npm:3.5.0"
   checksum: fb018c9021395dadfa16ab5a1b1ea05d2781ef18bb79137204e7570042083c6e5b1210654a957d5db664130400a4fc584a452ab26b3fd8f3b1f037a0b115eddc
+  languageName: node
+  linkType: hard
+
+"jasmine-core@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "jasmine-core@npm:4.0.1"
+  checksum: f097bf2c681acb55e03fb56a1569a9dfa8fcdf7c291aeb8786cb693c3a803ba2a59d6bac4c1facd239d778cc6f643d0a78920d9d278cba5d0cd46779b2546822
   languageName: node
   linkType: hard
 
