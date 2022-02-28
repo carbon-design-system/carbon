@@ -44,6 +44,7 @@ describe('Carbon Components React', () => {
         "DatePicker",
         "DatePickerInput",
         "DatePickerSkeleton",
+        "DefinitionTooltip",
         "Dropdown",
         "DropdownSkeleton",
         "ErrorBoundary",
