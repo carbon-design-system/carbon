@@ -106,6 +106,8 @@ categories:
           - brightness-contrast
           - bring-forward
           - bring-to-front
+          - button--centered
+          - button--flush-left
           - circle--solid
           - color-palette
           - color-switch
@@ -401,6 +403,7 @@ categories:
           - shuffle
           - sort--ascending
           - sort--descending
+          - sort--remove
           - split
           - split-screen
           - tag
@@ -502,6 +505,8 @@ categories:
         members:
           - bee
           - carbon
+          - carbon-for-ibm-dotcom
+          - carbon-for-ibm-product
           - cloud-app
           - edt-loop
           - ibm-cloud
@@ -566,6 +571,7 @@ categories:
           - ibm--match-360
           - ibm-cloud--dedicated-host
           - ibm-cloud--internet-services
+          - ibm-cloud--security-compliance-center
           - ibm-cloud--subnets
           - ibm-cloud--transit-gateway
           - ibm-cloud--vpc-endpoints
@@ -578,8 +584,11 @@ categories:
           - ibm-cloud-pak--system
           - ibm-cloud-pak--watson-aiops
           - ibm-security--services
+          - ibm-watson--orders
           - infrastructure--classic
           - load-balancer--vpc
+          - scis--control-tower
+          - scis--transparent-supply
           - virtual-private-cloud--alt
           - vlan--ibm
       - name: Commerce
@@ -794,12 +803,20 @@ categories:
           - U2
           - U3
           - X
-          - Y
+          - Y 
           - Z
   - name: Organization
     subcategories:
       - name: Alphanumeric
         members:
+          - character--decimal
+          - character--fraction
+          - character--integer
+          - character--lower-case
+          - character--negative-number
+          - character--sentence-case
+          - character--upper-case
+          - character--whole-number
           - letter--Aa
           - letter--Aa--large
           - letter--Bb
@@ -854,6 +871,7 @@ categories:
         members:
           - activity
           - analytics
+          - analytics--custom
           - analytics--reference
           - app-connectivity
           - archive
@@ -950,6 +968,7 @@ categories:
           - data-class
           - data-collection
           - data-definition
+          - data-enrichment
           - data-player
           - data-refinery
           - data-refinery--reference
@@ -1122,6 +1141,7 @@ categories:
           - download
           - DVR
           - export
+          - floorplan
           - folder
           - folder--add
           - folder--details
@@ -1303,6 +1323,9 @@ categories:
           - application--mobile
           - application--virtual
           - application--web
+          - assembly
+          - assembly--cluster
+          - assembly--reference
           - bare-metal-server
           - bare-metal-server--01
           - bare-metal-server--02
@@ -1371,6 +1394,14 @@ categories:
           - instance--cx
           - instance--mx
           - instance--virtual
+          - intent-request--active
+          - intent-request--create
+          - intent-request--heal
+          - intent-request--inactive
+          - intent-request--scale-in
+          - intent-request--scale-out
+          - intent-request--uninstall
+          - intent-request--upgrade
           - intrusion-prevention
           - kubernetes
           - load-balancer--application
@@ -1393,6 +1424,7 @@ categories:
           - pcn--p-node
           - pcn--z-node
           - point-of-presence
+          - property-relationship
           - router
           - router--voice
           - router--wifi
@@ -1402,6 +1434,9 @@ categories:
           - server--time
           - session-border-control
           - slisor
+          - software-resource
+          - software-resource--cluster
+          - software-resource--resource
           - subnet-acl-rules
           - switch-layer-2
           - switch-layer-3
@@ -1876,6 +1911,7 @@ categories:
           - connection--receive
           - connection--send
           - connection--two-way
+          - cookie
           - debug
           - deployment-pattern
           - deployment-policy
