@@ -127,6 +127,10 @@
   &::before,
   &::after {
     transition: opacity $duration-fast-01 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   &.#{$prefix}--tooltip--a11y::before,
