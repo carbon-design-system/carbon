@@ -13,7 +13,7 @@ import React, { useEffect } from 'react';
 function Container({ story, id }) {
   useEffect(() => {
     const originalDirection = document.documentElement.dir;
-    if (process.env.CARBON_REACT_STORYBOOK_USE_RTL === 'true') {
+    if (process.env.STORYBOOK_USE_RTL === 'true') {
       document.documentElement.dir = 'rtl';
     }
     return () => {
