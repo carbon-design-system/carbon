@@ -35408,12 +35408,22 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"stylelint-a11y@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "stylelint-a11y@npm:1.2.3"
+  peerDependencies:
+    stylelint: ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+  checksum: e6548c53ed5f1a51240e924ef783821ac91def107df4c00a901a017277c72e9372dbd274bd8073032089be686132cf458415317039ca9ab1699e98a75bd6b42c
+  languageName: node
+  linkType: hard
+
 "stylelint-config-carbon@workspace:config/stylelint-config-carbon":
   version: 0.0.0-use.local
   resolution: "stylelint-config-carbon@workspace:config/stylelint-config-carbon"
   dependencies:
     prettier: ^2.2.1
     stylelint: ^14.3.0
+    stylelint-a11y: ^1.2.3
     stylelint-config-idiomatic-order: ^8.1.0
     stylelint-config-prettier: ^9.0.3
     stylelint-config-standard: ^24.0.0
