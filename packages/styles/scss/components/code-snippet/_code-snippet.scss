@@ -131,13 +131,13 @@ $copy-btn-feedback: $background-inverse !default;
     display: inline-block;
 
     &:hover {
-      background-color: $field;
+      background-color: $layer;
       cursor: auto;
     }
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
-    background-color: $field-02;
+    background-color: $layer-hover;
     cursor: auto;
   }
 
@@ -271,7 +271,7 @@ $copy-btn-feedback: $background-inverse !default;
     justify-content: center;
     padding: 0;
     border: none;
-    background-color: $field;
+    background-color: $layer;
     cursor: pointer;
     outline: none;
 
@@ -290,7 +290,7 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet-button:hover {
-    background: $field-hover;
+    background: $layer-hover;
   }
 
   .#{$prefix}--snippet-button:active {
@@ -387,7 +387,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
   .#{$prefix}--snippet--light .#{$prefix}--btn.#{$prefix}--snippet-btn--expand,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
-    background-color: $field-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
@@ -395,7 +395,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--light
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
-    background-color: $layer-hover-02;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
@@ -403,7 +403,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--light
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:active,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
-    background-color: $layer-active-02;
+    background-color: $layer-active;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
@@ -520,11 +520,11 @@ $copy-btn-feedback: $background-inverse !default;
   @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--snippet__overflow-indicator--left {
-        background-image: linear-gradient(to left, rgba($field, 0), $layer);
+        background-image: linear-gradient(to left, rgba($layer, 0), $layer);
       }
 
       .#{$prefix}--snippet__overflow-indicator--right {
-        background-image: linear-gradient(to right, rgba($field, 0), $layer);
+        background-image: linear-gradient(to right, rgba($layer, 0), $layer);
       }
     }
   }
