@@ -138,6 +138,10 @@
 
   .flatpickr-calendar.animate.open {
     animation: fp-fade-in-down $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   .flatpickr-calendar.inline {
@@ -229,6 +233,10 @@
     user-select: none;
     // Windows HCM fix
     @include high-contrast-mode('icon-fill');
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
 
     &:hover {
       background-color: $layer-hover;

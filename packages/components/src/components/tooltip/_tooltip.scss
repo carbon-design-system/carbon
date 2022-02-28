@@ -38,6 +38,10 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity $duration--fast-01 motion(standard, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   &::before {
