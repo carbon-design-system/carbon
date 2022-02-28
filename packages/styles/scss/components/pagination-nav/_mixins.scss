@@ -22,7 +22,7 @@
       display: block;
       width: 0;
       height: $spacing-02;
-      background-color: $background-brand;
+      background-color: $border-interactive;
       content: '';
       opacity: 0;
       transition: width $duration-fast-02 motion(standard, productive);
