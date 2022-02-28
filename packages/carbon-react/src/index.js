@@ -214,6 +214,7 @@ export {
   unstable_ThemeContext,
   unstable_Theme as Theme,
   unstable_Tooltip as Tooltip,
+  unstable_DefinitionTooltip as DefinitionTooltip,
   unstable_TreeNode,
   unstable_TreeView,
   unstable_useFeatureFlag as useFeatureFlag,
