@@ -7991,6 +7991,17 @@ Map {
       },
     },
   },
+  "unstable_DefinitionTooltip" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "definition": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+    },
+  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {
