@@ -11980,7 +11980,7 @@ __metadata:
     html-loader: ^0.5.0
     jasmine-core: ^4.0.0
     karma: ^6.0.0
-    karma-chrome-launcher: ^2.2.0
+    karma-chrome-launcher: ^3.0.0
     karma-coverage: ^2.0.3
     karma-firefox-launcher: ^2.1.0
     karma-html2js-preprocessor: ^1.1.0
@@ -18634,15 +18634,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-access@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "fs-access@npm:1.0.1"
-  dependencies:
-    null-check: ^1.0.0
-  checksum: 6792b115a5fc5095b3dbc42ea329afff372e0056fde8214a5b0c9c7559806378db9316660bac1682b295cc576bab3c19571f50f8a39ab4605c3d194bee0087c9
-  languageName: node
-  linkType: hard
-
 "fs-constants@npm:^1.0.0":
   version: 1.0.0
   resolution: "fs-constants@npm:1.0.0"
@@ -23884,13 +23875,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-chrome-launcher@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "karma-chrome-launcher@npm:2.2.0"
+"karma-chrome-launcher@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "karma-chrome-launcher@npm:3.1.0"
   dependencies:
-    fs-access: ^1.0.0
     which: ^1.2.1
-  checksum: 08f319ad51c70016f5f6a7c38f32cdb85a1c1bb03b6c440830b09a0e097cce87c1bd52879acbfbd613181e07f5d26ca2c1645b8f0072528ce542bf557aa00321
+  checksum: 63431ddec9aa40e2a0439d9e2bcfa58a6822efd08e2666bdbc3f55dfbe8fcc0b401035b71b1f6f21340339dc56c172edaed8e8c0ddc6949873318ad1666b2dd9
   languageName: node
   linkType: hard
 
@@ -27477,13 +27467,6 @@ __metadata:
   dependencies:
     boolbase: ^1.0.0
   checksum: 5386d035c48438ff304fe687704d93886397349d1bed136de97aeae464caba10e8ffac55a04b215b86b3bc8897f33e0a5aa1045a9d8b2f251ae61b2a3ad3e450
-  languageName: node
-  linkType: hard
-
-"null-check@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "null-check@npm:1.0.0"
-  checksum: 6569fb2d74399e436eb4b05c7fdd341f22e87f3e0598a97309681073a364d6684997100cd329f2107d149663c506b2bfa47a0afdff23739ac1ba6ca5c4c6aa19
   languageName: node
   linkType: hard
 
@@ -35408,12 +35391,22 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"stylelint-a11y@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "stylelint-a11y@npm:1.2.3"
+  peerDependencies:
+    stylelint: ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+  checksum: e6548c53ed5f1a51240e924ef783821ac91def107df4c00a901a017277c72e9372dbd274bd8073032089be686132cf458415317039ca9ab1699e98a75bd6b42c
+  languageName: node
+  linkType: hard
+
 "stylelint-config-carbon@workspace:config/stylelint-config-carbon":
   version: 0.0.0-use.local
   resolution: "stylelint-config-carbon@workspace:config/stylelint-config-carbon"
   dependencies:
     prettier: ^2.2.1
     stylelint: ^14.3.0
+    stylelint-a11y: ^1.2.3
     stylelint-config-idiomatic-order: ^8.1.0
     stylelint-config-prettier: ^9.0.3
     stylelint-config-standard: ^24.0.0
