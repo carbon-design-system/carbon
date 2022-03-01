@@ -374,8 +374,6 @@ function TabList({
         block: 'nearest',
         inline: 'nearest',
       });
-
-      setScrollLeft(ref.current.scrollLeft);
     }
   }, [selectedIndex]);
 
