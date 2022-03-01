@@ -53,7 +53,7 @@
     height: rem(40px);
     border: none;
     border-bottom: 1px solid $border-strong;
-    background-color: $field;
+    background-color: $layer;
     color: $text-primary;
     cursor: pointer;
     list-style: none;
@@ -61,7 +61,7 @@
     transition: background-color $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -115,7 +115,7 @@
   }
 
   .#{$prefix}--dropdown--open:hover {
-    background-color: $field;
+    background-color: $layer;
   }
 
   .#{$prefix}--dropdown--open:focus {
@@ -132,10 +132,10 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--dropdown--light {
-    background-color: $field-02;
+    background-color: $layer;
 
     &:hover {
-      background-color: $layer-hover-02;
+      background-color: $layer-hover;
     }
   }
 
@@ -202,7 +202,7 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list {
-    background-color: $field-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
@@ -333,7 +333,7 @@
     border-bottom-color: transparent;
 
     &:hover {
-      background-color: $field;
+      background-color: $layer;
     }
 
     &:focus {
@@ -354,7 +354,7 @@
 
     // V11: Possibly deprecate
     &.#{$prefix}--dropdown--light:hover {
-      background-color: $field-02;
+      background-color: $layer;
     }
   }
 
@@ -377,7 +377,7 @@
     transition: background $duration-fast-01 motion(entrance, productive);
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $layer-hover;
     }
 
     &.#{$prefix}--dropdown--disabled {
@@ -433,11 +433,11 @@
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
     display: block;
-    background-color: $layer-hover;
+    background-color: $layer-selected;
     color: $text-primary;
 
     &:hover {
-      background-color: $layer-selected;
+      background-color: $layer-selected-hover;
     }
 
     .#{$prefix}--dropdown-link {

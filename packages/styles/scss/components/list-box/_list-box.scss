@@ -82,13 +82,13 @@ $list-box-menu-width: rem(300px);
     max-height: rem(40px);
     border: none;
     border-bottom: 1px solid $border-strong;
-    background-color: $field;
+    background-color: $layer;
     color: $text-primary;
     cursor: pointer;
     transition: all $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -107,12 +107,12 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--expanded:hover {
-    background-color: $field;
+    background-color: $layer;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
-    background-color: $field;
+    background-color: $layer;
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -153,7 +153,7 @@ $list-box-menu-width: rem(300px);
   // V11: Possibly deprecate
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
-    background-color: $field;
+    background-color: $layer;
 
     &:hover {
       background-color: $layer-hover;
@@ -162,7 +162,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
-    background: $field;
+    background: $layer;
   }
 
   // V11: Possibly deprecate
@@ -176,12 +176,12 @@ $list-box-menu-width: rem(300px);
 
   // Disabled state for `list-box`
   .#{$prefix}--list-box--disabled:hover {
-    background-color: $field;
+    background-color: $layer;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
-    background-color: $field;
+    background-color: $layer;
   }
 
   .#{$prefix}--list-box--disabled,
@@ -237,7 +237,7 @@ $list-box-menu-width: rem(300px);
     background-color: transparent;
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -477,7 +477,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
-    @include tag-theme($text-disabled, $field);
+    @include tag-theme($text-disabled, $layer);
 
     > svg {
       fill: $icon-disabled;
@@ -701,7 +701,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--highlighted {
     border-color: transparent;
-    background-color: $layer-hover;
+    background-color: $layer-selected;
     color: $text-primary;
   }
 
@@ -730,8 +730,7 @@ $list-box-menu-width: rem(300px);
     background-color: $layer-selected;
   }
 
-  .#{$prefix}--list-box__menu-item--active:hover,
-  .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
+  .#{$prefix}--list-box__menu-item--active:hover {
     border-bottom-color: $layer-selected-hover;
     background-color: $layer-selected-hover;
   }
