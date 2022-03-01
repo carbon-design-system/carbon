@@ -1,7 +1,7 @@
 {
   "name": "@carbon/react",
   "description": "React components for the Carbon Design System",
-  "version": "0.15.0",
+  "version": "0.15.1",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -47,7 +47,7 @@
     "@carbon/styles": "^0.15.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
     "carbon-components": "^10.54.0",
-    "carbon-components-react": "^7.54.0",
+    "carbon-components-react": "^7.54.1",
     "carbon-icons": "^7.0.7"
   },
   "devDependencies": {
