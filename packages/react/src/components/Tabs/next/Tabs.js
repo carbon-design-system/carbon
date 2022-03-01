@@ -370,10 +370,28 @@ function TabList({
   useIsomorphicEffect(() => {
     const tab = tabs[selectedIndex];
     if (tab) {
-      tab.current.scrollIntoView({
-        block: 'nearest',
-        inline: 'nearest',
-      });
+      // The width of the "scroll buttons"
+      const buttonWidth = 44;
+
+      // The start and end position of the selected tab
+      const { width: tabWidth } = tab.current.getBoundingClientRect();
+      const start = tab.current.offsetLeft;
+      const end = tab.current.offsetLeft + tabWidth;
+
+      // The start and end of the visible area for the tabs
+      const visibleStart = ref.current.scrollLeft + buttonWidth;
+      const visibleEnd =
+        ref.current.scrollLeft + ref.current.clientWidth - buttonWidth;
+
+      // The beginning of the tab is clipped and not visible
+      if (start < visibleStart) {
+        setScrollLeft(start - buttonWidth);
+      }
+
+      // The end of teh tab is clipped and not visible
+      if (end > visibleEnd) {
+        setScrollLeft(end + buttonWidth - ref.current.clientWidth);
+      }
     }
   }, [selectedIndex]);
 
