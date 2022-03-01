@@ -15,6 +15,7 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../select';
 
 /// Pagination styles
 /// @access public
