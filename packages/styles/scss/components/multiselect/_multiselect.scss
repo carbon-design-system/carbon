@@ -86,7 +86,7 @@
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--list-box--disabled:hover
     .#{$prefix}--text-input {
-    background-color: $field;
+    background-color: $layer;
   }
 
   .#{$prefix}--multi-select--filterable
