@@ -62,6 +62,10 @@
         border-radius: 50%;
         content: '';
         transition: transform $duration--fast-01 motion(exit, productive);
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
     }
 
@@ -197,6 +201,10 @@
         transition: box-shadow $duration--fast-01 motion(exit, productive),
           background-color $duration--fast-01 motion(exit, productive);
         will-change: box-shadow;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
 
       // Toggle circle
@@ -311,6 +319,10 @@
       &::after {
         cursor: not-allowed;
         transition: $duration--fast-01 motion(exit, productive);
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
     }
 
@@ -430,6 +442,10 @@
         transition: box-shadow $duration--fast-01 motion(exit, productive),
           background-color $duration--fast-01 motion(exit, productive);
         will-change: box-shadow;
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
 
       // Toggle circle
@@ -529,6 +545,10 @@
       &::after {
         cursor: not-allowed;
         transition: $duration--fast-01 motion(exit, productive);
+
+        @media screen and (prefers-reduced-motion: reduce) {
+          transition: none;
+        }
       }
     }
 
