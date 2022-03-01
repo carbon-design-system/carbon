@@ -10,7 +10,7 @@ import React from 'react';
 import { IconButton } from '../';
 
 export default {
-  title: 'IconButton',
+  title: 'Components/IconButton',
   component: IconButton,
   parameters: {
     controls: {
