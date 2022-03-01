@@ -367,6 +367,18 @@ function TabList({
     },
   });
 
+  useIsomorphicEffect(() => {
+    const tab = tabs[selectedIndex];
+    if (tab) {
+      tab.current.scrollIntoView({
+        block: 'nearest',
+        inline: 'nearest',
+      });
+
+      setScrollLeft(ref.current.scrollLeft);
+    }
+  }, [selectedIndex]);
+
   // Hook to control onClick, onMouseDown, and onMouse up scroll behavior for scrolling to the left.
   usePressable(previousButton, {
     onPress() {
