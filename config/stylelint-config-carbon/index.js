@@ -16,6 +16,7 @@ module.exports = {
     require.resolve('./rules/possible-errors'),
     require.resolve('./rules/limit-language-features'),
     require.resolve('./rules/stylistic-issues'),
+    require.resolve('./plugins/a11y'),
     require.resolve('./plugins/prettier'),
     require.resolve('./plugins/scss'),
   ],
