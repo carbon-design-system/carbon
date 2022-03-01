@@ -25,6 +25,10 @@
     animation-duration: 10ms;
     animation-name: init-stroke;
     animation-timing-function: $carbon--standard-easing;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 }
 
@@ -42,5 +46,9 @@
     animation-fill-mode: forwards;
     animation-name: stroke-end;
     animation-timing-function: $carbon--ease-out;
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 }
