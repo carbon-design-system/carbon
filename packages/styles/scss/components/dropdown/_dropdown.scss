@@ -53,7 +53,7 @@
     height: rem(40px);
     border: none;
     border-bottom: 1px solid $border-strong;
-    background-color: $layer;
+    background-color: $field;
     color: $text-primary;
     cursor: pointer;
     list-style: none;
@@ -61,7 +61,7 @@
     transition: background-color $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $layer-hover;
+      background-color: $field-hover;
     }
   }
 
@@ -115,7 +115,7 @@
   }
 
   .#{$prefix}--dropdown--open:hover {
-    background-color: $layer;
+    background-color: $field;
   }
 
   .#{$prefix}--dropdown--open:focus {
@@ -132,10 +132,10 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--dropdown--light {
-    background-color: $layer;
+    background-color: $field;
 
     &:hover {
-      background-color: $layer-hover;
+      background-color: $field-hover;
     }
   }
 
@@ -333,7 +333,7 @@
     border-bottom-color: transparent;
 
     &:hover {
-      background-color: $layer;
+      background-color: $field;
     }
 
     &:focus {
@@ -354,7 +354,7 @@
 
     // V11: Possibly deprecate
     &.#{$prefix}--dropdown--light:hover {
-      background-color: $layer;
+      background-color: $field;
     }
   }
 

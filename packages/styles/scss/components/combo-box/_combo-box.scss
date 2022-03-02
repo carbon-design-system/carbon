@@ -14,12 +14,12 @@
 /// @group combo-box
 @mixin combo-box {
   .#{$prefix}--combo-box:hover {
-    background-color: $layer-hover;
+    background-color: $field;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--combo-box.#{$prefix}--list-box--light:hover {
-    background-color: $layer-hover;
+    background-color: $field;
   }
 
   .#{$prefix}--combo-box .#{$prefix}--text-input::-ms-clear {
