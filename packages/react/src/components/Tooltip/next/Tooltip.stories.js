@@ -9,8 +9,8 @@ import './story.scss';
 
 import { Checkbox16 } from '@carbon/icons-react';
 import React from 'react';
-import { Tooltip } from '../next';
-import { DefinitionTooltip } from './DefinitionTooltip.js';
+import { Tooltip } from './';
+import mdx from './Tooltip.mdx';
 
 export default {
   title: 'Components/Tooltip',
@@ -20,6 +20,9 @@ export default {
       hideNoControlsWarning: true,
     },
     layout: 'centered',
+    docs: {
+      page: mdx,
+    },
   },
   argTypes: {
     children: {
@@ -39,7 +42,17 @@ export const Default = () => {
   const label =
     'Occassionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
-    <Tooltip align="bottom" defaultOpen label={label}>
+    <Tooltip align="bottom" label={label}>
+      <button className="demo-tooltip-trigger" type="button">
+        <Checkbox16 />
+      </button>
+    </Tooltip>
+  );
+};
+
+export const Alignment = () => {
+  return (
+    <Tooltip label="Tooltip alignment" align="bottom-left">
       <button className="demo-tooltip-trigger" type="button">
         <Checkbox16 />
       </button>
@@ -49,39 +62,11 @@ export const Default = () => {
 
 export const Duration = () => {
   return (
-    <>
-      <Tooltip label="Label one" enterDelayMs={500} leaveDelayMs={500}>
-        <button className="demo-tooltip-trigger" type="button">
-          <Checkbox16 />
-        </button>
-      </Tooltip>
-      <Tooltip label="Label two" enterDelayMs={500} leaveDelayMs={500}>
-        <button className="demo-tooltip-trigger" type="button">
-          <Checkbox16 />
-        </button>
-      </Tooltip>
-      <Tooltip label="Label three" enterDelayMs={500} leaveDelayMs={500}>
-        <button className="demo-tooltip-trigger" type="button">
-          <Checkbox16 />
-        </button>
-      </Tooltip>
-    </>
-  );
-};
-
-export const Definition = () => {
-  const definition =
-    'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.';
-  return (
-    <div>
-      <p>
-        Custom domains direct requests for your apps in this Cloud Foundry
-        organization to a{' '}
-        <DefinitionTooltip definition={definition}>URL</DefinitionTooltip> that
-        you own. A custom domain can be a shared domain, a shared subdomain, or
-        a shared domain and host.
-      </p>
-    </div>
+    <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
+      <button className="demo-tooltip-trigger" type="button">
+        <Checkbox16 />
+      </button>
+    </Tooltip>
   );
 };
 
