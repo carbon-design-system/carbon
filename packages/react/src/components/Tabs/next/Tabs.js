@@ -180,6 +180,8 @@ function TabList({
     if (
       matches(event, [keys.ArrowRight, keys.ArrowLeft, keys.Home, keys.End])
     ) {
+      event.preventDefault();
+
       const activeTabs = tabs.filter((tab) => {
         return !tab.current.disabled;
       });
@@ -249,7 +251,8 @@ function TabList({
   }, [scrollLeft]);
 
   useIsomorphicEffect(() => {
-    const tab = tabs[selectedIndex];
+    const tab =
+      activation === 'manual' ? tabs[activeIndex] : tabs[selectedIndex];
     if (tab) {
       // The width of the "scroll buttons"
       const buttonWidth = 44;
@@ -274,7 +277,7 @@ function TabList({
         setScrollLeft(end + buttonWidth - ref.current.clientWidth);
       }
     }
-  }, [selectedIndex]);
+  }, [activation, activeIndex, selectedIndex]);
 
   usePressable(previousButton, {
     onPress({ longPress }) {
@@ -288,12 +291,7 @@ function TabList({
       }
     },
     onLongPress() {
-      const intervalId = setInterval(() => {
-        setScrollLeft((scrollLeft) => scrollLeft - 10);
-      }, 50);
-      return () => {
-        clearInterval(intervalId);
-      };
+      return createLongPressBehavior(ref, 'backward', setScrollLeft);
     },
   });
 
@@ -309,12 +307,7 @@ function TabList({
       }
     },
     onLongPress() {
-      const intervalId = setInterval(() => {
-        setScrollLeft((scrollLeft) => scrollLeft + 10);
-      }, 50);
-      return () => {
-        clearInterval(intervalId);
-      };
+      return createLongPressBehavior(ref, 'forward', setScrollLeft);
     },
   });
 
@@ -425,6 +418,50 @@ TabList.propTypes = {
    */
   scrollIntoView: PropTypes.bool,
 };
+
+/**
+ * Helper function to setup the behavior when a button is "long pressed". This
+ * function will take a ref to the tablist, a direction, and a setter for
+ * scrollLeft and will update the scroll position within a
+ * requestAnimationFrame.
+ *
+ * It returns a cleanup function to be run when the long press is
+ * deactivated
+ *
+ * @param {RefObject} ref
+ * @param {'forward' | 'backward'} direction
+ * @param {Function} setScrollLeft
+ * @returns {Function}
+ */
+function createLongPressBehavior(ref, direction, setScrollLeft) {
+  // We manually override the scroll behavior to be "auto". If it is set as
+  // smooth, this animation does not update correctly
+  let defaultScrollBehavior = ref.current.style['scroll-behavior'];
+  ref.current.style['scroll-behavior'] = 'auto';
+
+  const scrollDelta = direction === 'forward' ? 5 : -5;
+  let frameId = null;
+
+  function tick() {
+    ref.current.scrollLeft = ref.current.scrollLeft + scrollDelta;
+    frameId = requestAnimationFrame(tick);
+  }
+
+  frameId = requestAnimationFrame(tick);
+
+  return () => {
+    // Restore the previous scroll behavior
+    ref.current.style['scroll-behavior'] = defaultScrollBehavior;
+
+    // Make sure that our `scrollLeft` value is in sync with the existing
+    // `ref` after our requestAnimationFrame loop above
+    setScrollLeft(ref.current.scrollLeft);
+
+    if (frameId) {
+      cancelAnimationFrame(frameId);
+    }
+  };
+}
 
 const Tab = React.forwardRef(function Tab(
   {

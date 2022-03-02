@@ -81,6 +81,13 @@ export function usePressable(
       state.current.longPress = false;
     }
 
+    function onTouchStart(event) {
+      // We prevent the default event on touchstart so that text selection is
+      // disabled on iOS  Safari when interacting with a "pressable" element
+      event.preventDefault();
+    }
+
+    element.addEventListener('touchstart', onTouchStart);
     element.addEventListener('pointerdown', onPointerDown);
     element.addEventListener('pointerup', onPointerUp);
     element.addEventListener('pointercancel', onPointerCancel);
@@ -88,6 +95,7 @@ export function usePressable(
     element.addEventListener('click', onClick);
 
     return () => {
+      element.removeEventListener('touchstart', onTouchStart);
       element.removeEventListener('pointerdown', onPointerDown);
       element.removeEventListener('pointerup', onPointerUp);
       element.removeEventListener('pointercancel', onPointerCancel);
@@ -116,3 +124,8 @@ export function usePressable(
     }
   }, [longPress]);
 }
+
+// mouse down -> onPressIn
+// mouse out  -> onPressOut
+// click      -> onPress
+//            -> onLongPress
