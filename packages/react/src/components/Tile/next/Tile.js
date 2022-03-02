@@ -12,6 +12,7 @@ import deprecate from '../../../prop-types/deprecate';
 import { composeEventHandlers } from '../../../tools/events';
 import { usePrefix } from '../../../internal/usePrefix';
 import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
+import useNoInteractiveChildren from '../../../internal/useNoInteractiveChildren';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
