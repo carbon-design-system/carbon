@@ -39,10 +39,10 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
   return (
     <li className={className}>
       <Link
+        tabIndex={0}
         {...rest}
         ref={ref}
         className={linkClassName}
-        tabIndex={0}
         {...accessibilityLabel}>
         {children}
       </Link>
