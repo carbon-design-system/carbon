@@ -63,8 +63,7 @@
     "prop-types": "^15.7.2",
     "react-is": "^17.0.2",
     "use-resize-observer": "^6.0.0",
-    "wicg-inert": "^3.1.1",
-    "window-or-global": "^1.0.1"
+    "wicg-inert": "^3.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.7",
