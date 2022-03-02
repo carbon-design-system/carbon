@@ -16,6 +16,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
     className="custom-class bx--toolbar-action bx--overflow-menu"
     direction="bottom"
     flipped={true}
+    focusTrap={true}
     iconDescription="Add"
     light={false}
     menuOffset={[Function]}

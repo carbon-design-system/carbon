@@ -799,6 +799,11 @@
     - arrow graph
   sizes:
     - 32
+- name: analytics--custom
+  friendly_name: analytics--custom
+  aliases: []
+  sizes:
+    - 32
 - name: analytics--reference
   friendly_name: Analytics reference
   aliases:
@@ -1217,6 +1222,21 @@
     - dark moon
     - cresent dark
     - cresent filled
+- name: assembly
+  friendly_name: assembly
+  aliases: []
+  sizes:
+    - 32
+- name: assembly--cluster
+  friendly_name: assembly--cluster
+  aliases: []
+  sizes:
+    - 32
+- name: assembly--reference
+  friendly_name: assembly--reference
+  aliases: []
+  sizes:
+    - 32
 - name: asset
   friendly_name: Asset
   aliases:
@@ -1998,6 +2018,16 @@
     - bus
   sizes:
     - 32
+- name: button--centered
+  friendly_name: button--centered
+  aliases: []
+  sizes:
+    - 32
+- name: button--flush-left
+  friendly_name: button--flush-left
+  aliases: []
+  sizes:
+    - 32
 - name: cabin-care
   friendly_name: Cabin care
   aliases:
@@ -2273,6 +2303,16 @@
     - CO2
     - footprint
     - weather
+  sizes:
+    - 32
+- name: carbon-for-ibm-dotcom
+  friendly_name: carbon-for-ibm-dotcom
+  aliases: []
+  sizes:
+    - 32
+- name: carbon-for-ibm-product
+  friendly_name: carbon-for-ibm-product
+  aliases: []
   sizes:
     - 32
 - name: caret--down
@@ -2609,6 +2649,46 @@
     - change catalog
     - edit
     - edit catalog
+  sizes:
+    - 32
+- name: character--decimal
+  friendly_name: character--decimal
+  aliases: []
+  sizes:
+    - 32
+- name: character--fraction
+  friendly_name: character--fraction
+  aliases: []
+  sizes:
+    - 32
+- name: character--integer
+  friendly_name: character--integer
+  aliases: []
+  sizes:
+    - 32
+- name: character--lower-case
+  friendly_name: character--lower-case
+  aliases: []
+  sizes:
+    - 32
+- name: character--negative-number
+  friendly_name: character--negative-number
+  aliases: []
+  sizes:
+    - 32
+- name: character--sentence-case
+  friendly_name: character--sentence-case
+  aliases: []
+  sizes:
+    - 32
+- name: character--upper-case
+  friendly_name: character--upper-case
+  aliases: []
+  sizes:
+    - 32
+- name: character--whole-number
+  friendly_name: character--whole-number
+  aliases: []
   sizes:
     - 32
 - name: character-patterns
@@ -3235,7 +3315,7 @@
   aliases:
     - chat
     - operations
-    - off
+    - 'off'
     - message
     - text
     - instant message
@@ -4543,6 +4623,11 @@
     - send
   sizes:
     - 32
+- name: cookie
+  friendly_name: cookie
+  aliases: []
+  sizes:
+    - 32
 - name: copy
   friendly_name: Copy
   aliases:
@@ -5214,6 +5299,11 @@
   aliases:
     - data
     - diode
+- name: data-enrichment
+  friendly_name: data-enrichment
+  aliases: []
+  sizes:
+    - 32
 - name: data-player
   friendly_name: Data player
   aliases:
@@ -7531,6 +7621,11 @@
     - disaster
   sizes:
     - 32
+- name: floorplan
+  friendly_name: floorplan
+  aliases: []
+  sizes:
+    - 32
 - name: flow
   friendly_name: Flow
   aliases:
@@ -8783,6 +8878,11 @@
     - cloud
   sizes:
     - 32
+- name: ibm-cloud--security-compliance-center
+  friendly_name: ibm-cloud--security-compliance-center
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud--subnets
   friendly_name: IBM Cloud® subnets
   aliases:
@@ -8919,6 +9019,11 @@
     - applications
     - cybersecurity
     - security
+  sizes:
+    - 32
+- name: ibm-watson--orders
+  friendly_name: ibm-watson--orders
+  aliases: []
   sizes:
     - 32
 - name: iCA-2D
@@ -9358,6 +9463,46 @@
     - union
     - join
     - integration
+  sizes:
+    - 32
+- name: intent-request--active
+  friendly_name: intent-request--active
+  aliases: []
+  sizes:
+    - 32
+- name: intent-request--create
+  friendly_name: intent-request--create
+  aliases: []
+  sizes:
+    - 32
+- name: intent-request--heal
+  friendly_name: intent-request--heal
+  aliases: []
+  sizes:
+    - 32
+- name: intent-request--inactive
+  friendly_name: intent-request--inactive
+  aliases: []
+  sizes:
+    - 32
+- name: intent-request--scale-in
+  friendly_name: intent-request--scale-in
+  aliases: []
+  sizes:
+    - 32
+- name: intent-request--scale-out
+  friendly_name: intent-request--scale-out
+  aliases: []
+  sizes:
+    - 32
+- name: intent-request--uninstall
+  friendly_name: intent-request--uninstall
+  aliases: []
+  sizes:
+    - 32
+- name: intent-request--upgrade
+  friendly_name: intent-request--upgrade
+  aliases: []
   sizes:
     - 32
 - name: interactions
@@ -13640,6 +13785,11 @@
     - loading
   sizes:
     - 32
+- name: property-relationship
+  friendly_name: property-relationship
+  aliases: []
+  sizes:
+    - 32
 - name: purchase
   friendly_name: Purchase
   aliases:
@@ -14777,6 +14927,16 @@
     - process
   sizes:
     - 32
+- name: scis--control-tower
+  friendly_name: scis--control-tower
+  aliases: []
+  sizes:
+    - 32
+- name: scis--transparent-supply
+  friendly_name: scis--transparent-supply
+  aliases: []
+  sizes:
+    - 32
 - name: scooter
   friendly_name: Scooter
   aliases:
@@ -15693,6 +15853,21 @@
     - football
   sizes:
     - 32
+- name: software-resource
+  friendly_name: software-resource
+  aliases: []
+  sizes:
+    - 32
+- name: software-resource--cluster
+  friendly_name: software-resource--cluster
+  aliases: []
+  sizes:
+    - 32
+- name: software-resource--resource
+  friendly_name: software-resource--resource
+  aliases: []
+  sizes:
+    - 32
 - name: soil-moisture
   friendly_name: Soil moisture
   aliases:
@@ -15771,6 +15946,11 @@
     - order
     - descending
     - operations
+  sizes:
+    - 32
+- name: sort--remove
+  friendly_name: sort--remove
+  aliases: []
   sizes:
     - 32
 - name: spell-check

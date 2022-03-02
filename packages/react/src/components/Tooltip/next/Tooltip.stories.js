@@ -13,7 +13,7 @@ import { Tooltip } from '../next';
 import { DefinitionTooltip } from './DefinitionTooltip.js';
 
 export default {
-  title: 'Experimental/unstable_Tooltip',
+  title: 'Components/Tooltip',
   component: Tooltip,
   parameters: {
     controls: {

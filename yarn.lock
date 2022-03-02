@@ -1938,7 +1938,7 @@ __metadata:
     "@carbon/cli-reporter": ^10.5.0
     "@carbon/icon-helpers": ^10.28.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-replace": ^3.0.0
+    "@rollup/plugin-replace": ^4.0.0
     browserslist-config-carbon: ^10.6.1
     change-case: ^4.1.1
     core-js: ^3.16.0
@@ -5110,15 +5110,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-replace@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "@rollup/plugin-replace@npm:3.0.1"
+"@rollup/plugin-replace@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@rollup/plugin-replace@npm:4.0.0"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     magic-string: ^0.25.7
   peerDependencies:
     rollup: ^1.20.0 || ^2.0.0
-  checksum: 0cd97439783d3d23ba4f0c74146f5cdf0965d57977cc8227a77dfdd9604930905619e405c961ae146a0e68c8239b9a3a817704fa90f7d62d5087ed84d8c33ead
+  checksum: b61701e612661a46da06ca88f390c3839b586708abc0329a476411b90aa8ac59fe94437ede4c3fe53fea268b3054ea9d7d4ee851d7bd0cb7a5f06906002067cb
   languageName: node
   linkType: hard
 
@@ -11808,7 +11808,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^3.0.0
+    "@rollup/plugin-replace": ^4.0.0
     "@storybook/addon-actions": ^6.4.9
     "@storybook/addon-docs": ^6.4.9
     "@storybook/addon-knobs": ^6.4.0
@@ -11937,7 +11937,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^3.0.0
+    "@rollup/plugin-replace": ^4.0.0
     "@rollup/plugin-virtual": ^2.0.3
     adaro: 1.0.4
     autoprefixer: ^9.7.4
@@ -11978,9 +11978,9 @@ __metadata:
     handlebars: ^4.0.12
     handlebars-helpers: ^0.10.0
     html-loader: ^0.5.0
-    jasmine-core: ^3.0.0
+    jasmine-core: ^4.0.0
     karma: ^6.0.0
-    karma-chrome-launcher: ^2.2.0
+    karma-chrome-launcher: ^3.0.0
     karma-coverage: ^2.0.3
     karma-firefox-launcher: ^2.1.0
     karma-html2js-preprocessor: ^1.1.0
@@ -11991,7 +11991,7 @@ __metadata:
     karma-spec-reporter: 0.0.33
     karma-webpack: ^3.0.0
     lodash.debounce: ^4.0.8
-    lolex: ^3.0.0
+    lolex: ^5.0.0
     markdown-it: ^12.0.4
     minimatch: ^3.0.4
     mkdirp: ^0.5.0
@@ -18633,15 +18633,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-access@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "fs-access@npm:1.0.1"
-  dependencies:
-    null-check: ^1.0.0
-  checksum: 6792b115a5fc5095b3dbc42ea329afff372e0056fde8214a5b0c9c7559806378db9316660bac1682b295cc576bab3c19571f50f8a39ab4605c3d194bee0087c9
-  languageName: node
-  linkType: hard
-
 "fs-constants@npm:^1.0.0":
   version: 1.0.0
   resolution: "fs-constants@npm:1.0.0"
@@ -22703,10 +22694,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:^3.0.0, jasmine-core@npm:^3.3":
+"jasmine-core@npm:^3.3":
   version: 3.5.0
   resolution: "jasmine-core@npm:3.5.0"
   checksum: fb018c9021395dadfa16ab5a1b1ea05d2781ef18bb79137204e7570042083c6e5b1210654a957d5db664130400a4fc584a452ab26b3fd8f3b1f037a0b115eddc
+  languageName: node
+  linkType: hard
+
+"jasmine-core@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "jasmine-core@npm:4.0.1"
+  checksum: f097bf2c681acb55e03fb56a1569a9dfa8fcdf7c291aeb8786cb693c3a803ba2a59d6bac4c1facd239d778cc6f643d0a78920d9d278cba5d0cd46779b2546822
   languageName: node
   linkType: hard
 
@@ -23869,13 +23867,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-chrome-launcher@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "karma-chrome-launcher@npm:2.2.0"
+"karma-chrome-launcher@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "karma-chrome-launcher@npm:3.1.0"
   dependencies:
-    fs-access: ^1.0.0
     which: ^1.2.1
-  checksum: 08f319ad51c70016f5f6a7c38f32cdb85a1c1bb03b6c440830b09a0e097cce87c1bd52879acbfbd613181e07f5d26ca2c1645b8f0072528ce542bf557aa00321
+  checksum: 63431ddec9aa40e2a0439d9e2bcfa58a6822efd08e2666bdbc3f55dfbe8fcc0b401035b71b1f6f21340339dc56c172edaed8e8c0ddc6949873318ad1666b2dd9
   languageName: node
   linkType: hard
 
@@ -25161,14 +25158,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lolex@npm:^3.0.0":
-  version: 3.1.0
-  resolution: "lolex@npm:3.1.0"
-  checksum: 7fa8d5b4c0c20adbc8990203af5305ffb9f42bd53fd92fe141ac3ca2e583ee7595a98abe2adb7decf8341f6729f7a8be7097d568e5429a078c121f8ca79de541
-  languageName: node
-  linkType: hard
-
-"lolex@npm:^5.0.1":
+"lolex@npm:^5.0.0, lolex@npm:^5.0.1":
   version: 5.1.2
   resolution: "lolex@npm:5.1.2"
   dependencies:
@@ -27462,13 +27452,6 @@ __metadata:
   dependencies:
     boolbase: ^1.0.0
   checksum: 5386d035c48438ff304fe687704d93886397349d1bed136de97aeae464caba10e8ffac55a04b215b86b3bc8897f33e0a5aa1045a9d8b2f251ae61b2a3ad3e450
-  languageName: node
-  linkType: hard
-
-"null-check@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "null-check@npm:1.0.0"
-  checksum: 6569fb2d74399e436eb4b05c7fdd341f22e87f3e0598a97309681073a364d6684997100cd329f2107d149663c506b2bfa47a0afdff23739ac1ba6ca5c4c6aa19
   languageName: node
   linkType: hard
 
@@ -35393,12 +35376,22 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"stylelint-a11y@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "stylelint-a11y@npm:1.2.3"
+  peerDependencies:
+    stylelint: ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+  checksum: e6548c53ed5f1a51240e924ef783821ac91def107df4c00a901a017277c72e9372dbd274bd8073032089be686132cf458415317039ca9ab1699e98a75bd6b42c
+  languageName: node
+  linkType: hard
+
 "stylelint-config-carbon@workspace:config/stylelint-config-carbon":
   version: 0.0.0-use.local
   resolution: "stylelint-config-carbon@workspace:config/stylelint-config-carbon"
   dependencies:
     prettier: ^2.2.1
     stylelint: ^14.3.0
+    stylelint-a11y: ^1.2.3
     stylelint-config-idiomatic-order: ^8.1.0
     stylelint-config-prettier: ^9.0.3
     stylelint-config-standard: ^24.0.0
