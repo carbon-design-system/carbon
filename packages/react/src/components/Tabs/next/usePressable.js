@@ -124,8 +124,3 @@ export function usePressable(
     }
   }, [longPress]);
 }
-
-// mouse down -> onPressIn
-// mouse out  -> onPressOut
-// click      -> onPress
-//            -> onLongPress
