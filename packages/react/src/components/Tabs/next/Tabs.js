@@ -5,19 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
-import cx from 'classnames';
 import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
+import cx from 'classnames';
 import debounce from 'lodash.debounce';
+import PropTypes from 'prop-types';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { Tooltip } from '../../Tooltip/next';
-import { keys, match, matches } from '../../../internal/keyboard';
-import { usePrefix } from '../../../internal/usePrefix';
-import { useId } from '../../../internal/useId';
-import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
 import { useControllableState } from '../../../internal/useControllableState';
-import { useMergedRefs } from '../../../internal/useMergedRefs';
+import { useEffectOnce } from '../../../internal/useEffectOnce';
+import { useId } from '../../../internal/useId';
 import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
+import { useMergedRefs } from '../../../internal/useMergedRefs';
+import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
+import { usePrefix } from '../../../internal/usePrefix';
+import { keys, match, matches } from '../../../internal/keyboard';
+import { usePressable } from './usePressable';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -85,96 +87,6 @@ Tabs.propTypes = {
   selectedIndex: PropTypes.number,
 };
 
-// A useEffect hook that will only be called once, when your component is mounted.
-function useEffectOnce(callback) {
-  const savedCallback = useRef(callback);
-  const effectGuard = useRef(false);
-
-  useEffect(() => {
-    savedCallback.current = callback;
-  });
-
-  useEffect(() => {
-    if (effectGuard.current !== true) {
-      effectGuard.current = true;
-      savedCallback.current();
-    }
-  }, []);
-}
-
-/**
- * Coordinates onMouseDown, onMouseUp, and onClick events on the given ref, used for scrolling behavior in TabList
- * @param {object} ref
- * @param {object} config
- * @param {Function} config.onPress
- * @param {Function} config.onRelease
- * @param {Function} config.onPressed
- * @param {number} [config.delayMs]
- */
-function usePressable(ref, { onPress, onRelease, onPressed, delayMs = 150 }) {
-  const savedOnPress = useRef(onPress);
-  const savedOnRelease = useRef(onRelease);
-  const savedOnPressed = useRef(onPressed);
-  const [pending, setPending] = useState(false);
-
-  useEffect(() => {
-    savedOnPress.current = onPress;
-  }, [onPress]);
-
-  useEffect(() => {
-    savedOnRelease.current = onRelease;
-  }, [onRelease]);
-
-  useEffect(() => {
-    savedOnPressed.current = onPressed;
-  }, [onPressed]);
-
-  useEffect(() => {
-    function onMouseDown() {
-      setPending(true);
-    }
-
-    function onMouseUp() {
-      setPending(false);
-    }
-
-    function onClick() {
-      savedOnRelease.current();
-    }
-
-    const { current: element } = ref;
-
-    element.addEventListener('mousedown', onMouseDown);
-    element.addEventListener('mouseup', onMouseUp);
-    element.addEventListener('click', onClick);
-
-    return () => {
-      element.removeEventListener('mousedown', onMouseDown);
-      element.removeEventListener('mouseup', onMouseUp);
-      element.removeEventListener('click', onClick);
-    };
-  }, [ref]);
-
-  useEffect(() => {
-    if (pending) {
-      let cleanup = null;
-      const timerId = setTimeout(() => {
-        savedOnPress.current();
-        if (savedOnPressed.current) {
-          cleanup = savedOnPressed.current();
-        }
-      }, delayMs);
-
-      return () => {
-        clearTimeout(timerId);
-        if (cleanup) {
-          cleanup();
-        }
-      };
-    }
-  }, [pending, delayMs]);
-}
-
 /**
  * Get the next index for a given keyboard event given a count of the total
  * items and the current index
@@ -221,9 +133,6 @@ function TabList({
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(false);
-  const [nextPressed, setNextPressed] = useState(false);
-  const [previousPressed, setPreviousPressed] = useState(false);
-
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
@@ -245,7 +154,6 @@ function TabList({
   const isNextButtonVisible = ref.current
     ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
     : false;
-
   const previousButtonClasses = cx(
     `${prefix}--tab--overflow-nav-button`,
     `${prefix}--tab--overflow-nav-button--previous`,
@@ -262,6 +170,11 @@ function TabList({
   );
 
   const tabs = [];
+  const debouncedOnScroll = useCallback(() => {
+    return debounce((event) => {
+      setScrollLeft(event.target.scrollLeft);
+    }, scrollDebounceWait);
+  }, [scrollDebounceWait]);
 
   function onKeyDown(event) {
     if (
@@ -287,10 +200,6 @@ function TabList({
       tabs[nextIndex].current.focus();
     }
   }
-
-  const handleScroll = debounce((event) => {
-    setScrollLeft(event.target.scrollLeft);
-  }, scrollDebounceWait);
 
   useEffectOnce(() => {
     const tab = tabs[selectedIndex];
@@ -339,34 +248,6 @@ function TabList({
     ref.current.scrollLeft = scrollLeft;
   }, [scrollLeft]);
 
-  // Hook to control onClick, onMouseDown, and onMouse up scroll behavior for scrolling to the right.
-  usePressable(nextButton, {
-    onPress() {
-      setNextPressed(true);
-    },
-    onPressed() {
-      const overflowInterval = setInterval(() => {
-        setScrollLeft((scrollLeft) => scrollLeft + 10);
-      });
-      return () => {
-        clearInterval(overflowInterval);
-      };
-    },
-    onRelease() {
-      if (nextPressed) {
-        setNextPressed(false);
-        return;
-      }
-
-      setScrollLeft(
-        Math.min(
-          scrollLeft + (ref.current.scrollWidth / tabs.length) * 1.5,
-          ref.current.scrollWidth - ref.current.clientWidth
-        )
-      );
-    },
-  });
-
   useIsomorphicEffect(() => {
     const tab = tabs[selectedIndex];
     if (tab) {
@@ -395,28 +276,45 @@ function TabList({
     }
   }, [selectedIndex]);
 
-  // Hook to control onClick, onMouseDown, and onMouse up scroll behavior for scrolling to the left.
   usePressable(previousButton, {
-    onPress() {
-      setPreviousPressed(true);
+    onPress({ longPress }) {
+      if (!longPress) {
+        setScrollLeft(
+          Math.max(
+            scrollLeft - (ref.current.scrollWidth / tabs.length) * 1.5,
+            0
+          )
+        );
+      }
     },
-    onPressed() {
-      const overflowInterval = setInterval(() => {
+    onLongPress() {
+      const intervalId = setInterval(() => {
         setScrollLeft((scrollLeft) => scrollLeft - 10);
-      });
+      }, 50);
       return () => {
-        clearInterval(overflowInterval);
+        clearInterval(intervalId);
       };
     },
-    onRelease() {
-      if (previousPressed) {
-        setPreviousPressed(false);
-        return;
-      }
+  });
 
-      setScrollLeft(
-        Math.max(scrollLeft - (ref.current.scrollWidth / tabs.length) * 1.5, 0)
-      );
+  usePressable(nextButton, {
+    onPress({ longPress }) {
+      if (!longPress) {
+        setScrollLeft(
+          Math.min(
+            scrollLeft + (ref.current.scrollWidth / tabs.length) * 1.5,
+            ref.current.scrollWidth - ref.current.clientWidth
+          )
+        );
+      }
+    },
+    onLongPress() {
+      const intervalId = setInterval(() => {
+        setScrollLeft((scrollLeft) => scrollLeft + 10);
+      }, 50);
+      return () => {
+        clearInterval(intervalId);
+      };
     },
   });
 
@@ -438,7 +336,7 @@ function TabList({
         ref={ref}
         role="tablist"
         className={`${prefix}--tab--list`}
-        onScroll={handleScroll}
+        onScroll={debouncedOnScroll}
         onKeyDown={onKeyDown}>
         {React.Children.map(children, (child, index) => {
           const ref = React.createRef();
@@ -590,26 +488,32 @@ Tab.propTypes = {
    * Provide a custom element to render instead of the default button
    */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
   /**
    * Provide child elements to be rendered inside of `Tab`.
    */
   children: PropTypes.node,
+
   /**
    * Specify an optional className to be added to your Tab
    */
   className: PropTypes.string,
+
   /**
    * Whether your Tab is disabled.
    */
   disabled: PropTypes.bool,
+
   /**
    * Provide a handler that is invoked when a user clicks on the control
    */
   onClick: PropTypes.func,
+
   /**
    * Provide a handler that is invoked on the key down event for the control
    */
   onKeyDown: PropTypes.func,
+
   /*
    * An optional parameter to allow overriding the anchor rendering.
    * Useful for using Tab along with react-router or other client
@@ -726,6 +630,7 @@ TabPanel.propTypes = {
    * Provide child elements to be rendered inside of `TabPanel`.
    */
   children: PropTypes.node,
+
   /**
    * Specify an optional className to be added to TabPanel.
    */
@@ -748,7 +653,3 @@ TabPanels.propTypes = {
 };
 
 export { Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };
-
-// TO DO: implement horizontal scroll and the following props:
-// leftOverflowButtonProps
-// rightOverflowButtonProps
