@@ -110,13 +110,21 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       left: -$spacing-03;
       width: $spacing-03;
       height: 100%;
-      background: linear-gradient(to right, transparent, $background);
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $background
+      );
       content: '';
     }
 
     &.#{$prefix}--tabs--contained
       .#{$prefix}--tab--overflow-nav-button--next::before {
-      background-image: linear-gradient(to right, transparent, $layer-accent);
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $layer-accent
+      );
     }
 
     .#{$prefix}--tab--overflow-nav-button--previous {
@@ -132,29 +140,49 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       right: -$spacing-03;
       width: $spacing-03;
       height: 100%;
-      background: linear-gradient(to left, transparent, $background);
+      background: linear-gradient(to left, rgba(255, 255, 255, 0), $background);
       content: '';
     }
 
     &.#{$prefix}--tabs--contained
       .#{$prefix}--tab--overflow-nav-button--previous::before {
-      background-image: linear-gradient(to left, transparent, $layer-accent);
+      background-image: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0),
+        $layer-accent
+      );
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
-      background-image: linear-gradient(to left, transparent, $layer);
+      background-image: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0),
+        $layer
+      );
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
-      background-image: linear-gradient(to right, transparent, $layer);
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $layer
+      );
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--left {
-      background-image: linear-gradient(to left, transparent, $layer-accent);
+      background-image: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0),
+        $layer-accent
+      );
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--right {
-      background-image: linear-gradient(to right, transparent, $layer-accent);
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $layer-accent
+      );
     }
 
     // Safari-only media query

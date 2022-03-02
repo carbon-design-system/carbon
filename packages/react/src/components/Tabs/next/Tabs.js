@@ -144,6 +144,7 @@ function TabList({
   // VISIBLE IF:
   //   SCROLLABLE
   //   AND SCROLL_LEFT > 0
+  const buttonWidth = 44;
   const isPreviousButtonVisible = ref.current
     ? isScrollable && scrollLeft > 0
     : false;
@@ -152,7 +153,8 @@ function TabList({
   //   SCROLLABLE
   //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
   const isNextButtonVisible = ref.current
-    ? scrollLeft + ref.current.clientWidth < ref.current.scrollWidth
+    ? scrollLeft + buttonWidth + ref.current.clientWidth <
+      ref.current.scrollWidth
     : false;
   const previousButtonClasses = cx(
     `${prefix}--tab--overflow-nav-button`,
@@ -255,7 +257,6 @@ function TabList({
       activation === 'manual' ? tabs[activeIndex] : tabs[selectedIndex];
     if (tab) {
       // The width of the "scroll buttons"
-      const buttonWidth = 44;
 
       // The start and end position of the selected tab
       const { width: tabWidth } = tab.current.getBoundingClientRect();
