@@ -182,6 +182,10 @@
 
   span.#{$prefix}--pagination__text {
     margin-left: $spacing-05;
+    color: $text-primary;
+  }
+
+  span.#{$prefix}--pagination__text.#{$prefix}--pagination__items-count {
     color: $text-secondary;
   }
 
