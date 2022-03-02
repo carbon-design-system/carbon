@@ -6,13 +6,16 @@ on:
   pull_request:
     branches:
       - main
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 jobs:
   dedupe:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - name: Run yarn dedupe
@@ -23,7 +26,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - name: Install dependencies
@@ -36,7 +39,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - name: Install dependencies
@@ -51,7 +54,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - uses: actions/cache@v2.1.7
@@ -77,7 +80,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - uses: actions/cache@v2.1.7
@@ -113,7 +116,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js 16.x
-        uses: actions/setup-node@v2.5.1
+        uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - uses: actions/cache@v2.1.7
@@ -128,7 +131,8 @@ jobs:
       - name: Build project
         run: yarn build --ignore '@carbon/sketch'
       - name: Run VRT
+        if: github.repository == 'carbon-design-system/carbon'
         env:
-          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
         run: |
           yarn run percy exec -- yarn workspace carbon-components-react test:e2e

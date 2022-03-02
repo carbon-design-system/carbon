@@ -246,6 +246,7 @@ export {
   VStack as unstable_VStack,
 } from './components/Stack';
 export { Tooltip as unstable_Tooltip } from './components/Tooltip/next';
+export { DefinitionTooltip as unstable_DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';

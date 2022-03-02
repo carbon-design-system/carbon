@@ -4532,6 +4532,7 @@ Map {
       "ariaLabel": "open and close list of options",
       "direction": "bottom",
       "flipped": false,
+      "focusTrap": true,
       "iconDescription": "open and close list of options",
       "light": false,
       "menuOffset": [Function],
@@ -4567,6 +4568,9 @@ Map {
         "type": "oneOf",
       },
       "flipped": Object {
+        "type": "bool",
+      },
+      "focusTrap": Object {
         "type": "bool",
       },
       "iconClass": Object {
@@ -7988,6 +7992,17 @@ Map {
       },
       "nested": Object {
         "type": "bool",
+      },
+    },
+  },
+  "unstable_DefinitionTooltip" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "definition": Object {
+        "isRequired": true,
+        "type": "string",
       },
     },
   },
