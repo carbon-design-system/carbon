@@ -10,7 +10,7 @@ import React, { useState, useEffect } from 'react';
 import ProgressBar from '../';
 
 export default {
-  title: 'Experimental/unstable_ProgressBar',
+  title: 'Components/ProgressBar',
   component: ProgressBar,
 };
 
