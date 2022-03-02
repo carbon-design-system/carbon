@@ -8763,8 +8763,17 @@ Map {
         ],
         "type": "oneOf",
       },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
       "light": Object {
         "type": "bool",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollDebounceWait": Object {
+        "type": "number",
       },
       "scrollIntoView": Object {
         "type": "bool",
