@@ -124,6 +124,11 @@ class OverflowMenu extends Component {
     flipped: PropTypes.bool,
 
     /**
+     * Enable or disable focus trap behavior
+     */
+    focusTrap: PropTypes.bool,
+
+    /**
      * The CSS class for the icon.
      */
     iconClass: PropTypes.string,
@@ -234,6 +239,7 @@ class OverflowMenu extends Component {
     open: false,
     direction: DIRECTION_BOTTOM,
     flipped: false,
+    focusTrap: true,
     renderIcon: OverflowMenuVertical16,
     onClick: () => {},
     onKeyDown: () => {},
@@ -461,6 +467,7 @@ class OverflowMenu extends Component {
       iconDescription,
       direction,
       flipped,
+      focusTrap,
       menuOffset,
       menuOffsetFlip,
       iconClass,
@@ -528,7 +535,7 @@ class OverflowMenu extends Component {
 
     const wrappedMenuBody = (
       <FloatingMenu
-        focusTrap
+        focusTrap={focusTrap}
         triggerRef={this._triggerRef}
         menuDirection={direction}
         menuOffset={flipped ? menuOffsetFlip : menuOffset}
