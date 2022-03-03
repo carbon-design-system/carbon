@@ -12,7 +12,14 @@ import { match, keys } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 import { useId } from '../../../internal/useId';
 
-function DefinitionTooltip({ children, definition, ...rest }) {
+function DefinitionTooltip({
+  align,
+  className,
+  children,
+  defaultOpen,
+  definition,
+  ...rest
+}) {
   const [isOpen, setOpen] = useState(false);
   const prefix = usePrefix();
   const id = useId();
@@ -26,7 +33,9 @@ function DefinitionTooltip({ children, definition, ...rest }) {
 
   return (
     <Popover
-      align="bottom-left"
+      align={align}
+      className={className}
+      defaultOpen={defaultOpen}
       dropShadow={false}
       highContrast
       onMouseLeave={() => {
@@ -34,8 +43,8 @@ function DefinitionTooltip({ children, definition, ...rest }) {
       }}
       open={isOpen}>
       <button
-        className={`${prefix}--definition-term`}
         {...rest}
+        className={`${prefix}--definition-term`}
         aria-controls={id}
         aria-expanded={isOpen}
         onBlur={() => {
@@ -57,14 +66,45 @@ function DefinitionTooltip({ children, definition, ...rest }) {
 
 DefinitionTooltip.propTypes = {
   /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+
+    'left',
+    'left-bottom',
+    'left-top',
+
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
+
+  /**
    * Provide the content being defined
    */
   children: PropTypes.node,
 
   /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the tooltip should be open when it first renders
+   */
+  defaultOpen: PropTypes.bool,
+
+  /**
    * Provide the content being defined
    */
-  definition: PropTypes.string.isRequired,
+  definition: PropTypes.node.isRequired,
 };
 
 export { DefinitionTooltip };

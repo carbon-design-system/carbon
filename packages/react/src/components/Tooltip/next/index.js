@@ -14,6 +14,10 @@ import { useDelayedState } from '../../../internal/useDelayedState';
 import { useId } from '../../../internal/useId';
 import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../../internal/usePrefix';
+import { safeCloneElement } from '../../../internal/cloneElement';
+
+import { useControllableState } from '../../../internal/useControllableState';
+import { useTimeout } from '../../../internal/useTimeout';
 
 function Tooltip({
   align = 'top',
@@ -24,11 +28,25 @@ function Tooltip({
   enterDelayMs = 100,
   leaveDelayMs = 300,
   defaultOpen = false,
+  open: controlledOpen,
+  onDismiss,
   ...rest
 }) {
+  const [open, setOpen] = useControllableState({
+    name: 'Tooltip',
+    defaultValue: defaultOpen,
+    value: controlledOpen,
+    onChange: (value) => {
+      if (value === false) {
+        onDismiss();
+      }
+    },
+  });
+  const [timeout] = useTimeout();
+
   const containerRef = useRef(null);
   const tooltipRef = useRef(null);
-  const [open, setOpen] = useDelayedState(defaultOpen);
+  // const [open, setOpen] = useDelayedState(defaultOpen);
   const id = useId('tooltip');
   const prefix = usePrefix();
   const child = React.Children.only(children);
@@ -54,11 +72,17 @@ function Tooltip({
   }
 
   function onMouseEnter() {
-    setOpen(true, enterDelayMs);
+    timeout(() => {
+      setOpen(true);
+    }, enterDelayMs);
+    // setOpen(true, enterDelayMs);
   }
 
   function onMouseLeave() {
-    setOpen(false, leaveDelayMs);
+    timeout(() => {
+      setOpen(false);
+    }, leaveDelayMs);
+    // setOpen(false, leaveDelayMs);
   }
 
   useNoInteractiveChildren(
@@ -78,7 +102,7 @@ function Tooltip({
       onMouseLeave={onMouseLeave}
       open={open}
       ref={containerRef}>
-      {React.cloneElement(child, triggerProps)}
+      {safeCloneElement(child, triggerProps)}
       <PopoverContent
         aria-hidden="true"
         className={`${prefix}--tooltip-content`}

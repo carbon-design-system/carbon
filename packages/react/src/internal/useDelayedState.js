@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useTimeout } from './useTimeout';
 
 /**
  * `useDelayedState` mirrors `useState` but also allows you to add a delay to
@@ -19,29 +20,20 @@ import { useCallback, useEffect, useRef, useState } from 'react';
  */
 export function useDelayedState(initialState) {
   const [state, setState] = useState(initialState);
-  const timeoutId = useRef(null);
-  // We use `useCallback` to match the signature of React's `useState` which will
-  // always return the same reference for the `setState` updater
-  const setStateWithDelay = useCallback((stateToSet, delayMs = 0) => {
-    clearTimeout(timeoutId.current);
-    timeoutId.current = null;
+  const [timeout] = useTimeout();
+  const setStateWithDelay = useCallback(
+    (stateToSet, delayMs = 0) => {
+      if (delayMs === 0) {
+        setState(stateToSet);
+        return;
+      }
 
-    if (delayMs === 0) {
-      setState(stateToSet);
-      return;
-    }
-
-    timeoutId.current = setTimeout(() => {
-      setState(stateToSet);
-      timeoutId.current = null;
-    }, delayMs);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(timeoutId.current);
-    };
-  }, []);
+      timeout(() => {
+        setState(stateToSet);
+      }, delayMs);
+    },
+    [timeout]
+  );
 
   return [state, setStateWithDelay];
 }

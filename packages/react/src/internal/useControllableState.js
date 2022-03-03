@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { warning } from './warning';
 
 /**
@@ -37,12 +37,8 @@ export function useControllableState({
 }) {
   const [state, internalSetState] = useState(value ?? defaultValue);
   const controlled = useRef(null);
-
-  if (controlled.current === null) {
-    controlled.current = value !== undefined;
-  }
-
-  function setState(stateOrUpdater) {
+  const savedOnChange = useRef(onChange);
+  const setState = useCallback((stateOrUpdater) => {
     const value =
       typeof stateOrUpdater === 'function'
         ? stateOrUpdater(state)
@@ -52,10 +48,16 @@ export function useControllableState({
       internalSetState(value);
     }
 
-    if (onChange) {
-      onChange(value);
-    }
+    savedOnChange.current?.(value);
+  }, []);
+
+  if (controlled.current === null) {
+    controlled.current = value !== undefined;
   }
+
+  useEffect(() => {
+    savedOnChange.current = onChange;
+  }, [onChange]);
 
   useEffect(() => {
     const controlledValue = value !== undefined;

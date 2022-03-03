@@ -10,12 +10,17 @@
 @use '@carbon/styles/scss/type';
 @use '@carbon/styles/scss/utilities/button-reset';
 
-.sb-show-main.sb-main-centered #root {
+// This is a utility class to make sure that tooltip stories have a minimum
+// height when used in MDX docs
+.sb-tooltip-story {
   display: flex;
+  align-items: center;
   justify-content: center;
+  min-height: 250px;
+  margin: auto;
 }
 
-.demo-tooltip-trigger {
+.sb-tooltip-trigger {
   @include button-reset.reset();
 
   display: flex;
@@ -26,6 +31,15 @@
   border: 1px solid theme.$border-subtle;
 }
 
-.demo-tooltip-trigger svg {
+.sb-tooltip-trigger svg {
   fill: theme.$background-inverse;
+}
+
+// DefinitionTooltip
+.sb-definition-tooltip {
+  max-width: 60ch;
+}
+
+.sb-definition-tooltip p {
+  @include type.type-style('body-short-02');
 }
