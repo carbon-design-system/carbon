@@ -36,6 +36,13 @@ export default {
       },
     },
   },
+  decorators: [
+    (Story) => (
+      <div className="sb-tooltip-story">
+        <Story />
+      </div>
+    ),
+  ],
 };
 
 export const Default = () => {
@@ -43,7 +50,7 @@ export const Default = () => {
     'Occassionally, services are updated in a specified time window to ensure no down time for customers.';
   return (
     <Tooltip align="bottom" label={label}>
-      <button className="demo-tooltip-trigger" type="button">
+      <button className="sb-tooltip-trigger" type="button">
         <Checkbox16 />
       </button>
     </Tooltip>
@@ -53,7 +60,7 @@ export const Default = () => {
 export const Alignment = () => {
   return (
     <Tooltip label="Tooltip alignment" align="bottom-left">
-      <button className="demo-tooltip-trigger" type="button">
+      <button className="sb-tooltip-trigger" type="button">
         <Checkbox16 />
       </button>
     </Tooltip>
@@ -63,7 +70,7 @@ export const Alignment = () => {
 export const Duration = () => {
   return (
     <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
-      <button className="demo-tooltip-trigger" type="button">
+      <button className="sb-tooltip-trigger" type="button">
         <Checkbox16 />
       </button>
     </Tooltip>
@@ -87,7 +94,7 @@ const PlaygroundStory = (props) => {
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
-      <button className="demo-tooltip-trigger" type="button">
+      <button className="sb-tooltip-trigger" type="button">
         <Checkbox16 />
       </button>
     </Tooltip>
