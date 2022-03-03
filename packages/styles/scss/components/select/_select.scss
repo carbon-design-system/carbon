@@ -62,7 +62,7 @@
     transition: outline $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $field-hover;
     }
 
     // Hide default select arrow in IE10+
@@ -89,7 +89,7 @@
 
     &:disabled,
     &:hover:disabled {
-      border-bottom-color: $border-disabled;
+      border-bottom-color: transparent;
       background-color: $field;
       color: $text-disabled;
       cursor: not-allowed;
@@ -115,7 +115,7 @@
 
   .#{$prefix}--select-input__wrapper[data-invalid] .#{$prefix}--select-input,
   .#{$prefix}--select--warning .#{$prefix}--select-input {
-    padding-right: carbon--mini-units(9);
+    padding-right: $spacing-10;
   }
 
   .#{$prefix}--select-input:disabled ~ .#{$prefix}--select__arrow {
@@ -123,7 +123,7 @@
   }
 
   .#{$prefix}--select--light .#{$prefix}--select-input {
-    background-color: $field-02;
+    background-color: $field;
 
     &:hover {
       background-color: $background-hover;
@@ -131,7 +131,7 @@
 
     &:disabled,
     &:hover:disabled {
-      background-color: $field-02;
+      background-color: $field;
       color: $text-disabled;
       cursor: not-allowed;
     }
