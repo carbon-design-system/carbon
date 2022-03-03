@@ -198,7 +198,22 @@ export const Expandable = () => (
       <div style={{ height: '200px' }}>Above the fold content here</div>
     </TileAboveTheFoldContent>
     <TileBelowTheFoldContent>
-      <div style={{ height: '400px' }}>
+      <div style={{ height: '400px' }}>Below the fold content here</div>
+    </TileBelowTheFoldContent>
+  </ExpandableTile>
+);
+
+export const ExpandableWithInteractive = () => (
+  <ExpandableTile
+    tileCollapsedIconText="Interact to Expand tile"
+    tileExpandedIconText="Interact to Collapse tile">
+    <TileAboveTheFoldContent>
+      <div style={{ height: '200px', width: '200px' }}>
+        Above the fold content here
+      </div>
+    </TileAboveTheFoldContent>
+    <TileBelowTheFoldContent>
+      <div style={{ height: '200px', width: '200px' }}>
         Below the fold content here
         <TextInput id="test2" invalidText="A valid value is required" />
       </div>

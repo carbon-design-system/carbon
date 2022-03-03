@@ -12,7 +12,7 @@ import deprecate from '../../../prop-types/deprecate';
 import { composeEventHandlers } from '../../../tools/events';
 import { usePrefix } from '../../../internal/usePrefix';
 import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
-import useNoInteractiveChildren from '../../../internal/useNoInteractiveChildren';
+import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
@@ -406,7 +406,6 @@ export function ExpandableTile({
   tileExpandedIconText,
   tileCollapsedLabel,
   tileExpandedLabel,
-  onBeforeClick,
   light,
   ...rest
 }) {
@@ -417,6 +416,7 @@ export function ExpandableTile({
   const [prevTilePadding, setPrevTilePadding] = useState(tilePadding);
   const [isExpanded, setIsExpanded] = useState(expanded);
   const aboveTheFold = useRef(null);
+  const belowTheFold = useRef(null);
   const tileContent = useRef(null);
   const tile = useRef(null);
   const prefix = usePrefix();
@@ -437,6 +437,12 @@ export function ExpandableTile({
     setPrevTilePadding(tilePadding);
   }
 
+  let interactiveContent;
+
+  if (belowTheFold.current) {
+    interactiveContent = getInteractiveContent(belowTheFold.current);
+  }
+
   function setMaxHeight() {
     if (isExpanded) {
       setIsTileMaxHeight(tileContent.current.getBoundingClientRect().height);
@@ -446,10 +452,7 @@ export function ExpandableTile({
   }
 
   function handleClick(evt) {
-    if (!onBeforeClick(evt) || evt.target.tagName === 'INPUT') {
-      return;
-    }
-
+    console.log('yooo0oo');
     evt.persist();
     setIsExpanded(!isExpanded);
     setMaxHeight();
@@ -471,7 +474,7 @@ export function ExpandableTile({
     return React.Children.toArray(children);
   }
 
-  const classes = cx(
+  const classNames = cx(
     `${prefix}--tile`,
     `${prefix}--tile--expandable`,
     {
@@ -479,6 +482,22 @@ export function ExpandableTile({
       [`${prefix}--tile--light`]: light,
     },
     className
+  );
+
+  const interactiveClassNames = cx(
+    `${prefix}--tile`,
+    `${prefix}--tile--expandable`,
+    `${prefix}--tile--expandable--interactive`,
+    {
+      [`${prefix}--tile--is-expanded`]: isExpanded,
+      [`${prefix}--tile--light`]: light,
+    },
+    className
+  );
+
+  const chevronInteractiveClassNames = cx(
+    `${prefix}--tile__chevron`,
+    `${prefix}--tile__chevron--interactive`
   );
 
   const tileStyle = {
@@ -511,12 +530,37 @@ export function ExpandableTile({
 
     return () => resizeObserver.disconnect();
   }, []);
-  return (
+  return interactiveContent ? (
+    <div
+      ref={tile}
+      style={tileStyle}
+      className={interactiveClassNames}
+      aria-expanded={isExpanded}
+      {...rest}>
+      <div ref={tileContent}>
+        <div ref={aboveTheFold} className={`${prefix}--tile-content`}>
+          {childrenAsArray[0]}
+        </div>
+        <button
+          type="button"
+          aria-expanded={isExpanded}
+          onKeyUp={composeEventHandlers([onKeyUp, handleKeyUp])}
+          onClick={composeEventHandlers([onClick, handleClick])}
+          aria-label={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
+          className={chevronInteractiveClassNames}>
+          <ChevronDown16 />
+        </button>
+        <div ref={belowTheFold} className={`${prefix}--tile-content`}>
+          {childrenAsArray[1]}
+        </div>
+      </div>
+    </div>
+  ) : (
     <button
       type="button"
       ref={tile}
       style={tileStyle}
-      className={classes}
+      className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
       {...rest}
@@ -531,7 +575,9 @@ export function ExpandableTile({
           <span>{isExpanded ? tileExpandedLabel : tileCollapsedLabel}</span>
           <ChevronDown16 />
         </div>
-        <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
+        <div ref={belowTheFold} className={`${prefix}--tile-content`}>
+          {childrenAsArray[1]}
+        </div>
       </div>
     </button>
   );
@@ -566,11 +612,6 @@ ExpandableTile.propTypes = {
     PropTypes.bool,
     'The `light` prop for `ExpandableTile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
   ),
-
-  /**
-   * optional handler to decide whether to ignore a click. returns false if click should be ignored
-   */
-  onBeforeClick: PropTypes.func,
 
   /**
    * Specify the function to run when the ExpandableTile is clicked
@@ -613,7 +654,6 @@ ExpandableTile.defaultProps = {
   expanded: false,
   tileMaxHeight: 0,
   tilePadding: 0,
-  onBeforeClick: () => true,
   onClick: () => {},
   tileCollapsedIconText: 'Interact to expand Tile',
   tileExpandedIconText: 'Interact to collapse Tile',
