@@ -20,6 +20,7 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
     className: customClassName,
     children,
     isSelected,
+    tabIndex = 0,
     ...rest
   } = props;
 
@@ -39,10 +40,10 @@ const SwitcherItem = React.forwardRef(function SwitcherItem(props, ref) {
   return (
     <li className={className}>
       <Link
-        tabIndex={0}
         {...rest}
         ref={ref}
         className={linkClassName}
+        tabIndex={tabIndex}
         {...accessibilityLabel}>
         {children}
       </Link>
@@ -66,6 +67,11 @@ SwitcherItem.propTypes = {
    * Optionally provide a custom class to apply to the underlying `<li>` node
    */
   className: PropTypes.string,
+
+  /**
+   * Specify the tab index of the Link
+   */
+  tabIndex: PropTypes.number,
 };
 
 export default SwitcherItem;
