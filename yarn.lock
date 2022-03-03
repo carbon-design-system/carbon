@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 5
+  version: 6
   cacheKey: 8
 
 "@actions/core@npm:^1.2.3":
@@ -757,7 +757,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-proposal-private-property-in-object@npm:^7.16.7":
+"@babel/plugin-proposal-private-property-in-object@npm:^7.16.0, @babel/plugin-proposal-private-property-in-object@npm:^7.16.7":
   version: 7.16.7
   resolution: "@babel/plugin-proposal-private-property-in-object@npm:7.16.7"
   dependencies:
@@ -1938,7 +1938,7 @@ __metadata:
     "@carbon/cli-reporter": ^10.5.0
     "@carbon/icon-helpers": ^10.28.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-replace": ^3.0.0
+    "@rollup/plugin-replace": ^4.0.0
     browserslist-config-carbon: ^10.6.1
     change-case: ^4.1.1
     core-js: ^3.16.0
@@ -2792,14 +2792,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@es-joy/jsdoccomment@npm:0.10.2":
-  version: 0.10.2
-  resolution: "@es-joy/jsdoccomment@npm:0.10.2"
+"@es-joy/jsdoccomment@npm:~0.20.1":
+  version: 0.20.1
+  resolution: "@es-joy/jsdoccomment@npm:0.20.1"
   dependencies:
-    comment-parser: 1.2.1
+    comment-parser: 1.3.0
     esquery: ^1.4.0
-    jsdoc-type-pratt-parser: 1.0.4
-  checksum: 5790d13b74cdc647ea2e3e7df7b7c593ed69d86682aecf54db6da5644c82f360867961579e4e85fbf648d6ccf286279f4adb4cafb355996c93e2dd2839ccf0d8
+    jsdoc-type-pratt-parser: ~2.2.3
+  checksum: b64afeaddccbc8da185c640e608496f6d6f8ee564c6255cdb44b16e00fe441e1f0552b5748033df2baf42187cfbfa9f31c46716982945d4343f8eaf44e253087
   languageName: node
   linkType: hard
 
@@ -5044,15 +5044,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-replace@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "@rollup/plugin-replace@npm:3.0.1"
+"@rollup/plugin-replace@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "@rollup/plugin-replace@npm:4.0.0"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     magic-string: ^0.25.7
   peerDependencies:
     rollup: ^1.20.0 || ^2.0.0
-  checksum: 0cd97439783d3d23ba4f0c74146f5cdf0965d57977cc8227a77dfdd9604930905619e405c961ae146a0e68c8239b9a3a817704fa90f7d62d5087ed84d8c33ead
+  checksum: b61701e612661a46da06ca88f390c3839b586708abc0329a476411b90aa8ac59fe94437ede4c3fe53fea268b3054ea9d7d4ee851d7bd0cb7a5f06906002067cb
   languageName: node
   linkType: hard
 
@@ -8692,12 +8692,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.2.4, acorn@npm:^8.4.1, acorn@npm:^8.6.0":
-  version: 8.6.0
-  resolution: "acorn@npm:8.6.0"
+"acorn@npm:^8.2.4, acorn@npm:^8.4.1, acorn@npm:^8.5.0, acorn@npm:^8.6.0":
+  version: 8.7.0
+  resolution: "acorn@npm:8.7.0"
   bin:
     acorn: bin/acorn
-  checksum: 9d0de73b73cb6ea8ccd8263a8144d9e2c4b6af90ea0c429997538af0ebbe83c5addecee814b2a7f91f7f615d0bd1547cc7137b3fa236ce058adc64feccee850b
+  checksum: e0f79409d68923fbf1aa6d4166f3eedc47955320d25c89a20cc822e6ba7c48c5963d5bc657bc242d68f7a4ac9faf96eef033e8f73656da6c640d4219935fdfd0
   languageName: node
   linkType: hard
 
@@ -10891,6 +10891,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"brace-expansion@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "brace-expansion@npm:2.0.1"
+  dependencies:
+    balanced-match: ^1.0.0
+  checksum: a61e7cd2e8a8505e9f0036b3b6108ba5e926b4b55089eeb5550cd04a471fe216c96d4fe7e4c7f995c728c554ae20ddfc4244cad10aef255e72b62930afd233d1
+  languageName: node
+  linkType: hard
+
 "braces@npm:^1.8.2":
   version: 1.8.5
   resolution: "braces@npm:1.8.5"
@@ -11705,7 +11714,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^3.0.0
+    "@rollup/plugin-replace": ^4.0.0
     "@storybook/addon-actions": ^6.4.9
     "@storybook/addon-docs": ^6.4.9
     "@storybook/addon-knobs": ^6.4.0
@@ -11778,7 +11787,6 @@ __metadata:
     webpack-dev-server: ^4.6.0
     whatwg-fetch: ^3.6.2
     wicg-inert: ^3.1.1
-    window-or-global: ^1.0.1
   peerDependencies:
     carbon-components: ^10.30.0
     carbon-icons: ^7.0.7
@@ -11834,7 +11842,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^3.0.0
+    "@rollup/plugin-replace": ^4.0.0
     "@rollup/plugin-virtual": ^2.0.3
     adaro: 1.0.4
     autoprefixer: ^9.7.4
@@ -11875,9 +11883,9 @@ __metadata:
     handlebars: ^4.0.12
     handlebars-helpers: ^0.10.0
     html-loader: ^0.5.0
-    jasmine-core: ^3.0.0
+    jasmine-core: ^4.0.0
     karma: ^6.0.0
-    karma-chrome-launcher: ^2.2.0
+    karma-chrome-launcher: ^3.0.0
     karma-coverage: ^2.0.3
     karma-firefox-launcher: ^2.1.0
     karma-html2js-preprocessor: ^1.1.0
@@ -11888,9 +11896,9 @@ __metadata:
     karma-spec-reporter: 0.0.33
     karma-webpack: ^3.0.0
     lodash.debounce: ^4.0.8
-    lolex: ^3.0.0
+    lolex: ^5.0.0
     markdown-it: ^12.0.4
-    minimatch: ^3.0.4
+    minimatch: ^5.0.0
     mkdirp: ^0.5.0
     mock-raf: ^1.0.0
     node-sass: ^7.0.1
@@ -13065,10 +13073,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"comment-parser@npm:1.2.1":
-  version: 1.2.1
-  resolution: "comment-parser@npm:1.2.1"
-  checksum: 3057a7304c6a06148e7aeae79db7b8dc326ba80c4caf1ed41ab30bdc2d55191d2d65a9c2b5370a6c86f89d95d502013c64a8c691d681b22860fc8a7fcb2d8a3a
+"comment-parser@npm:1.3.0":
+  version: 1.3.0
+  resolution: "comment-parser@npm:1.3.0"
+  checksum: e7b41b8a5f3d8b974e5b4bd8796acd41ec6635989f2a402bbf13098ad459c0598275a7b75b98d29c48d8f0b340a828d1a5d6948c8cf65ab41ae7e00040fb082a
   languageName: node
   linkType: hard
 
@@ -16656,7 +16664,7 @@ __metadata:
     eslint-plugin-cypress: ^2.11.3
     eslint-plugin-import: ^2.23.4
     eslint-plugin-jest: ^26.0.0
-    eslint-plugin-jsdoc: ^36.0.3
+    eslint-plugin-jsdoc: ^37.0.0
     eslint-plugin-jsx-a11y: ^6.4.1
     eslint-plugin-prettier: ^3.4.0
     eslint-plugin-react: ^7.24.0
@@ -16807,22 +16815,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsdoc@npm:^36.0.3":
-  version: 36.0.3
-  resolution: "eslint-plugin-jsdoc@npm:36.0.3"
+"eslint-plugin-jsdoc@npm:^37.0.0":
+  version: 37.9.4
+  resolution: "eslint-plugin-jsdoc@npm:37.9.4"
   dependencies:
-    "@es-joy/jsdoccomment": 0.10.2
-    comment-parser: 1.2.1
-    debug: ^4.3.2
+    "@es-joy/jsdoccomment": ~0.20.1
+    comment-parser: 1.3.0
+    debug: ^4.3.3
+    escape-string-regexp: ^4.0.0
     esquery: ^1.4.0
-    jsdoc-type-pratt-parser: ^1.0.4
-    lodash: ^4.17.21
     regextras: ^0.8.0
     semver: ^7.3.5
     spdx-expression-parse: ^3.0.1
   peerDependencies:
-    eslint: ^6.0.0 || ^7.0.0
-  checksum: f15e1d2e1e4b5e5e3c09597e2866976c3cb4e71329c8eed3522f4fbff430d89942b6a752b37875e4fc772ffddc87609e7090a5e92f9fcbcc8ed8dba8e76d06ed
+    eslint: ^7.0.0 || ^8.0.0
+  checksum: 1e338f03020b2efab6077c91f2a8c251f1ee8be4a2299fa49db84ecb1f8f1e362be2d005ac7b9d9ceff5596bd7c0a9a5ed816edb8b3e904ed3edb0aab8b88799
   languageName: node
   linkType: hard
 
@@ -18543,15 +18550,6 @@ __metadata:
   dependencies:
     js-yaml: ^3.4.6
   checksum: 0ea88921f85b469357c9a3a93f858c2b5007c35f72970d60b4dfa8279190bb142f7323f9a96397690baf56606f466eb3fd0f4c7365c10955abaccb4958a47aa3
-  languageName: node
-  linkType: hard
-
-"fs-access@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "fs-access@npm:1.0.1"
-  dependencies:
-    null-check: ^1.0.0
-  checksum: 6792b115a5fc5095b3dbc42ea329afff372e0056fde8214a5b0c9c7559806378db9316660bac1682b295cc576bab3c19571f50f8a39ab4605c3d194bee0087c9
   languageName: node
   linkType: hard
 
@@ -22556,10 +22554,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jasmine-core@npm:^3.0.0, jasmine-core@npm:^3.3":
+"jasmine-core@npm:^3.3":
   version: 3.5.0
   resolution: "jasmine-core@npm:3.5.0"
   checksum: fb018c9021395dadfa16ab5a1b1ea05d2781ef18bb79137204e7570042083c6e5b1210654a957d5db664130400a4fc584a452ab26b3fd8f3b1f037a0b115eddc
+  languageName: node
+  linkType: hard
+
+"jasmine-core@npm:^4.0.0":
+  version: 4.0.1
+  resolution: "jasmine-core@npm:4.0.1"
+  checksum: f097bf2c681acb55e03fb56a1569a9dfa8fcdf7c291aeb8786cb693c3a803ba2a59d6bac4c1facd239d778cc6f643d0a78920d9d278cba5d0cd46779b2546822
   languageName: node
   linkType: hard
 
@@ -23356,17 +23361,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jsdoc-type-pratt-parser@npm:1.0.4":
-  version: 1.0.4
-  resolution: "jsdoc-type-pratt-parser@npm:1.0.4"
-  checksum: f80df71fc5d90714a035283136485c518dca74f1aa263e66d7ea79d563dd04fe73602156a6683f32a6218bc9d0d15d1a767a7d3e8b67227ec663183296250330
-  languageName: node
-  linkType: hard
-
-"jsdoc-type-pratt-parser@npm:^1.0.4":
-  version: 1.0.8
-  resolution: "jsdoc-type-pratt-parser@npm:1.0.8"
-  checksum: 21f8c08918c885df70cad4e8c625351e3bcea6d1c918d438fb02f5aaf274d4cd3309899216985df044462bf3d1e1d4a391dff8a23fc5c75da36ecb586d4385b4
+"jsdoc-type-pratt-parser@npm:~2.2.3":
+  version: 2.2.3
+  resolution: "jsdoc-type-pratt-parser@npm:2.2.3"
+  checksum: 202a6c1f884234f0927fea82648f2401c24477231e127f28cdf4f5e169ca37535e694379eb440c627f7032504b5225155d8113a67499bec07cf8ce131265f1ed
   languageName: node
   linkType: hard
 
@@ -23729,13 +23727,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"karma-chrome-launcher@npm:^2.2.0":
-  version: 2.2.0
-  resolution: "karma-chrome-launcher@npm:2.2.0"
+"karma-chrome-launcher@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "karma-chrome-launcher@npm:3.1.0"
   dependencies:
-    fs-access: ^1.0.0
     which: ^1.2.1
-  checksum: 08f319ad51c70016f5f6a7c38f32cdb85a1c1bb03b6c440830b09a0e097cce87c1bd52879acbfbd613181e07f5d26ca2c1645b8f0072528ce542bf557aa00321
+  checksum: 63431ddec9aa40e2a0439d9e2bcfa58a6822efd08e2666bdbc3f55dfbe8fcc0b401035b71b1f6f21340339dc56c172edaed8e8c0ddc6949873318ad1666b2dd9
   languageName: node
   linkType: hard
 
@@ -25045,14 +25042,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lolex@npm:^3.0.0":
-  version: 3.1.0
-  resolution: "lolex@npm:3.1.0"
-  checksum: 7fa8d5b4c0c20adbc8990203af5305ffb9f42bd53fd92fe141ac3ca2e583ee7595a98abe2adb7decf8341f6729f7a8be7097d568e5429a078c121f8ca79de541
-  languageName: node
-  linkType: hard
-
-"lolex@npm:^5.0.1":
+"lolex@npm:^5.0.0, lolex@npm:^5.0.1":
   version: 5.1.2
   resolution: "lolex@npm:5.1.2"
   dependencies:
@@ -25991,6 +25981,15 @@ __metadata:
   dependencies:
     brace-expansion: ^1.1.7
   checksum: 66ac295f8a7b59788000ea3749938b0970344c841750abd96694f80269b926ebcafad3deeb3f1da2522978b119e6ae3a5869b63b13a7859a456b3408bd18a078
+  languageName: node
+  linkType: hard
+
+"minimatch@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "minimatch@npm:5.0.1"
+  dependencies:
+    brace-expansion: ^2.0.1
+  checksum: b34b98463da4754bc526b244d680c69d4d6089451ebe512edaf6dd9eeed0279399cfa3edb19233513b8f830bf4bfcad911dddcdf125e75074100d52f724774f0
   languageName: node
   linkType: hard
 
@@ -27268,13 +27267,6 @@ __metadata:
   dependencies:
     boolbase: ^1.0.0
   checksum: 5386d035c48438ff304fe687704d93886397349d1bed136de97aeae464caba10e8ffac55a04b215b86b3bc8897f33e0a5aa1045a9d8b2f251ae61b2a3ad3e450
-  languageName: node
-  linkType: hard
-
-"null-check@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "null-check@npm:1.0.0"
-  checksum: 6569fb2d74399e436eb4b05c7fdd341f22e87f3e0598a97309681073a364d6684997100cd329f2107d149663c506b2bfa47a0afdff23739ac1ba6ca5c4c6aa19
   languageName: node
   linkType: hard
 
@@ -35182,12 +35174,22 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"stylelint-a11y@npm:^1.2.3":
+  version: 1.2.3
+  resolution: "stylelint-a11y@npm:1.2.3"
+  peerDependencies:
+    stylelint: ^8.0.0 || ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+  checksum: e6548c53ed5f1a51240e924ef783821ac91def107df4c00a901a017277c72e9372dbd274bd8073032089be686132cf458415317039ca9ab1699e98a75bd6b42c
+  languageName: node
+  linkType: hard
+
 "stylelint-config-carbon@workspace:config/stylelint-config-carbon":
   version: 0.0.0-use.local
   resolution: "stylelint-config-carbon@workspace:config/stylelint-config-carbon"
   dependencies:
     prettier: ^2.2.1
     stylelint: ^14.3.0
+    stylelint-a11y: ^1.2.3
     stylelint-config-idiomatic-order: ^8.1.0
     stylelint-config-prettier: ^9.0.3
     stylelint-config-standard: ^24.0.0
@@ -36835,11 +36837,11 @@ resolve@^2.0.0-next.3:
 
 "typescript@patch:typescript@^4.4.3#~builtin<compat/typescript>":
   version: 4.5.4
-  resolution: "typescript@patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=493e53"
+  resolution: "typescript@patch:typescript@npm%3A4.5.4#~builtin<compat/typescript>::version=4.5.4&hash=bda367"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 2e488dde7d2c4a2fa2e79cf2470600f8ce81bc0563c276b72df8ff412d74456ae532ba824650ae936ce207440c79720ddcfaa25e3cb4477572b8534fa4e34d49
+  checksum: eda87927f9cfb94aca9b5e47842daf37347ad3073133e17f556fbb6c18f3493c5b551eedab0f4b26774235ddb7acbe0087250d5285f72ce6819a0891dd5a74ed
   languageName: node
   linkType: hard
 
