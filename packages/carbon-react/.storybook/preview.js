@@ -11,7 +11,7 @@ import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
-import { ThemeContext } from '../src';
+import { ThemeContext, Layer } from '../src';
 import { addParameters } from '@storybook/react';
 
 export const globalTypes = {
@@ -42,6 +42,15 @@ export const globalTypes = {
     toolbar: {
       icon: 'paintbrush',
       items: ['white', 'g10', 'g90', 'g100'],
+    },
+  },
+  layer: {
+    name: 'Layer',
+    description: 'Set the current layer for the story',
+    defaultValue: 'Default',
+    toolbar: {
+      icon: 'category',
+      items: ['Default', 'Layer 1', 'Layer 2', 'Layer 3'],
     },
   },
 };
@@ -206,9 +215,11 @@ configureActions({
   limit: 10,
 });
 
+const layerMappings = ['Layer 1', 'Layer 2', 'Layer 3'];
+
 export const decorators = [
   (Story, context) => {
-    const { locale, theme } = context.globals;
+    const { locale, layer, theme } = context.globals;
 
     React.useEffect(() => {
       document.documentElement.setAttribute('data-carbon-theme', theme);
@@ -218,9 +229,21 @@ export const decorators = [
       document.documentElement.lang = locale;
     }, [locale]);
 
+    if (layer === 'Default') {
+      return (
+        <ThemeContext.Provider value={{ theme }}>
+          <Story {...context} />
+        </ThemeContext.Provider>
+      );
+    }
+
     return (
       <ThemeContext.Provider value={{ theme }}>
-        <Story {...context} />
+        <Layer level={layerMappings.indexOf(layer)}>
+          <div className="sb-layer-background">
+            <Story {...context} />
+          </div>
+        </Layer>
       </ThemeContext.Provider>
     );
   },

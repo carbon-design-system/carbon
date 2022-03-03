@@ -27,3 +27,11 @@ body {
   background: styles.$background;
   color: styles.$text-primary;
 }
+
+.sb-layer-background {
+  display: flex;
+  background: styles.$layer;
+  flex-direction: column;
+  align-items: center;
+  padding: 42px;
+}

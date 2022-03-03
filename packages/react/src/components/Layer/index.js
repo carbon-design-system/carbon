@@ -18,15 +18,20 @@ export function Layer({
   as: BaseComponent = 'div',
   className: customClassName,
   children,
+  level: overrideLevel,
   ...rest
 }) {
   const level = React.useContext(LayerContext);
   const prefix = usePrefix();
-  const className = cx(`${prefix}--layer-${levels[level]}`, customClassName);
+  const className = cx(
+    `${prefix}--layer-${levels[overrideLevel ?? level]}`,
+    customClassName
+  );
+  // The level should be between 0 and MAX_LEVEL
+  const value = overrideLevel ?? Math.max(0, Math.min(level + 1, MAX_LEVEL));
 
   return (
-    // The level should be between 0 and MAX_LEVEL
-    <LayerContext.Provider value={Math.max(0, Math.min(level + 1, MAX_LEVEL))}>
+    <LayerContext.Provider value={value}>
       <BaseComponent {...rest} className={className}>
         {children}
       </BaseComponent>
@@ -55,4 +60,9 @@ Layer.propTypes = {
    * the component
    */
   className: PropTypes.string,
+
+  /**
+   * Provide a level value that will override the existing value in context
+   */
+  level: PropTypes.oneOf([0, 1, 2]),
 };
