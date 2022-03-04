@@ -45,7 +45,7 @@
     height: 100%;
     background-color: $interactive;
     transform: scaleX(0);
-    transform-origin: 0 50%;
+    transform-origin: 0 center #{'/*rtl:100% center*/'};
     transition: transform $duration-fast-02 motion(standard, productive);
   }
 
