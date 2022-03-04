@@ -145,6 +145,14 @@ DatePickerInput.propTypes = {
   hideLabel: PropTypes.bool,
 
   /**
+   * The description of the calendar icon.
+   */
+  iconDescription: deprecate(
+    PropTypes.string,
+    `\nThe prop \`iconDescriptionInput\` for DatePickerInput has been deprecated and is no longer used`
+  ),
+
+  /**
    * Specify an id that uniquely identifies the `<input>`
    */
   id: PropTypes.string.isRequired,
