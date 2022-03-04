@@ -210,7 +210,7 @@ export {
   unstable_TabPanels as TabPanels,
   unstable_TabList as TabList,
   unstable_IconTab as IconTab,
-  unstable_ThemeContext as ThemeContext,
+  unstable_GlobalTheme as GlobalTheme,
   unstable_Theme as Theme,
   unstable_Tooltip as Tooltip,
   unstable_DefinitionTooltip as DefinitionTooltip,

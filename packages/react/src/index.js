@@ -258,7 +258,7 @@ export {
 } from './components/Tabs';
 export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
 export {
-  ThemeContext as unstable_ThemeContext,
+  GlobalTheme as unstable_GlobalTheme,
   Theme as unstable_Theme,
   useTheme as unstable_useTheme,
 } from './components/Theme';
