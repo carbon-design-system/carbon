@@ -21,16 +21,6 @@ $input-label-weight: 400 !default;
 @mixin form {
   .#{$prefix}--fieldset {
     @include reset;
-
-    @if not enabled('enable-v11-release') {
-      margin-bottom: $spacing-07;
-    }
-  }
-
-  @if not enabled('enable-v11-release') {
-    .#{$prefix}--fieldset--no-margin {
-      margin-bottom: 0;
-    }
   }
 
   .#{$prefix}--form-item {
