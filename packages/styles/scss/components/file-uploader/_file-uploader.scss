@@ -170,8 +170,6 @@
     }
   }
 
-  // V11: Remove --field
-  .#{$prefix}--file__selected-file--field,
   .#{$prefix}--file__selected-file--md {
     min-height: rem(40px);
     gap: $spacing-03 $spacing-05;
@@ -202,8 +200,6 @@
     padding: $spacing-02 0;
   }
 
-  // V11: Remove --field
-  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field,
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md {
     padding: $spacing-03 0;
   }
@@ -218,9 +214,6 @@
     padding-top: rem(7px);
   }
 
-  // V11: Remove --field
-  .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--field
-    .#{$prefix}--form-requirement,
   .#{$prefix}--file__selected-file--invalid.#{$prefix}--file__selected-file--md
     .#{$prefix}--form-requirement {
     padding-top: rem(11px);
