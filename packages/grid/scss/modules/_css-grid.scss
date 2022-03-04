@@ -13,26 +13,26 @@
 @use 'breakpoint' as *;
 
 @mixin css-grid() {
-  display: grid;
-  max-width: 99rem;
-  padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
-  padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
-  margin-right: auto;
-  margin-left: auto;
-  column-gap: var(--cds-grid-gutter);
-  grid-template-columns: repeat(
-    var(--cds-grid-columns),
-    minmax(0, var(--cds-grid-column-size))
-  );
+  // display: grid;
+  // max-width: 99rem;
+  // padding-right: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+  // padding-left: calc(var(--cds-grid-margin) + var(--cds-grid-gutter) / 2);
+  // margin-right: auto;
+  // margin-left: auto;
+  // column-gap: var(--cds-grid-gutter);
+  // grid-template-columns: repeat(
+  // var(--cds-grid-columns),
+  // minmax(0, var(--cds-grid-column-size))
+  // );
 }
 
 @mixin subgrid() {
-  display: grid;
-  column-gap: var(--cds-grid-gutter);
-  grid-template-columns: repeat(
-    var(--cds-grid-columns),
-    minmax(0, var(--cds-grid-column-size))
-  );
+  // display: grid;
+  // column-gap: var(--cds-grid-gutter);
+  // grid-template-columns: repeat(
+  // var(--cds-grid-columns),
+  // minmax(0, var(--cds-grid-column-size))
+  // );
 }
 
 :root {

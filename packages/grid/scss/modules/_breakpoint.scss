@@ -5,46 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_breakpoints.scss
 @use 'sass:list';
 @use 'sass:map';
 @use 'sass:meta';
 @use '@carbon/layout/scss/modules/convert';
-
-/// Map deep get
-/// @author Hugo Giraudel
-/// @access public
-/// @param {Map} $map - Map
-/// @param {Arglist} $keys - Key chain
-/// @return {*} Desired value
-/// @group @carbon/layout
-@function map-deep-get($map, $keys...) {
-  @each $key in $keys {
-    $map: map.get($map, $key);
-  }
-  @return $map;
-}
-
-/// Provide a map and index, and get back the relevant key value
-/// @access public
-/// @param {Map} $map - Map
-/// @param {Integer} $index - Key chain
-/// @return {String} Desired value
-/// @group @carbon/layout
-@function key-by-index($map, $index) {
-  $keys: map.keys($map);
-  @return nth($keys, $index);
-}
-
-/// Pass in a map, and get the last one in the list back
-/// @access public
-/// @param {Map} $map - Map
-/// @return {*} Desired value
-/// @group @carbon/layout
-@function last-map-item($map) {
-  $total-length: list.length($map);
-  @return map-get($map, key-by-index($map, $total-length));
-}
 
 /// Carbon gutter size in rem
 /// @type Number
@@ -89,6 +53,17 @@ $grid-breakpoints: (
     width: convert.rem(1584px),
   ),
 ) !default;
+
+/// Provide a map and index, and get back the relevant key value
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Integer} $index - Key chain
+/// @return {String} Desired value
+/// @group @carbon/layout
+@function -key-by-index($map, $index) {
+  $keys: map.keys($map);
+  @return nth($keys, $index);
+}
 
 /// Get the value of the next breakpoint, or null for the last breakpoint
 /// @param {String} $name - The name of the breakpoint
@@ -145,7 +120,7 @@ $grid-breakpoints: (
 /// @group @carbon/layout
 @function largest-breakpoint-name($breakpoints: $grid-breakpoints) {
   $total-breakpoints: list.length($breakpoints);
-  @return key-by-index($breakpoints, $total-breakpoints);
+  @return -key-by-index($breakpoints, $total-breakpoints);
 }
 
 /// Get the infix for a given breakpoint in a list of breakpoints. Useful for generating the size part in a selector, for example: `.prefix--col-sm-2`.
