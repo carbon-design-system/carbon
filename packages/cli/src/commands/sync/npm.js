@@ -15,6 +15,7 @@ const defaultIgnorePatterns = [
   '**/__tests__/**',
   '**/examples/**',
   '**/tasks/**',
+  '**/.turbo/**',
 ];
 
 function run({ packagePaths }) {

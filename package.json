@@ -15,7 +15,7 @@
     "www"
   ],
   "scripts": {
-    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "build": "turbo run build",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
@@ -70,7 +70,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.0",
-    "stylelint": "^14.3.0"
+    "stylelint": "^14.3.0",
+    "turbo": "^1.1.5"
   },
   "commitlint": {
     "extends": [

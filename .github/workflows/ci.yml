@@ -64,6 +64,11 @@ jobs:
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - uses: actions/cache@v2.1.7
+        id: turbo-cache
+        with:
+          path: node_modules/.cache/turbo
+          key: ${{ runner.os }}-turbo-${{ hashFiles('turbo.json') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
@@ -90,6 +95,11 @@ jobs:
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - uses: actions/cache@v2.1.7
+        id: turbo-cache
+        with:
+          path: node_modules/.cache/turbo
+          key: ${{ runner.os }}-turbo-${{ hashFiles('turbo.json') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - uses: dorny/paths-filter@v2.10.2
@@ -126,6 +136,11 @@ jobs:
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - uses: actions/cache@v2.1.7
+        id: turbo-cache
+        with:
+          path: node_modules/.cache/turbo
+          key: ${{ runner.os }}-turbo-${{ hashFiles('turbo.json') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
