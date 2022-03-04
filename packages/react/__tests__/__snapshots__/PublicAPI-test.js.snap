@@ -7999,11 +7999,38 @@ Map {
   },
   "unstable_DefinitionTooltip" => Object {
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "children": Object {
+        "isRequired": true,
         "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
       },
       "definition": Object {
         "isRequired": true,
+        "type": "node",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "tooltipText": [Function],
+      "triggerClassName": Object {
         "type": "string",
       },
     },
