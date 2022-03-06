@@ -11748,7 +11748,7 @@ __metadata:
     downshift: 5.2.1
     fast-glob: ^3.2.7
     fast-sass-loader: ^1.5.0
-    flatpickr: 4.6.9
+    flatpickr: 4.6.10
     gzip-size: ^7.0.0
     invariant: ^2.2.3
     lcov2badge: ^0.1.0
@@ -18283,10 +18283,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"flatpickr@npm:4.6.9":
-  version: 4.6.9
-  resolution: "flatpickr@npm:4.6.9"
-  checksum: 4702ad182531af0524b2fc74a70e06d276ff91918449092b3a11c464cb5a5e010df6c7cc9ff92e8b8373f81b238ea85d911ce9b3b883ee8df5085180cc3aea13
+"flatpickr@npm:4.6.10":
+  version: 4.6.10
+  resolution: "flatpickr@npm:4.6.10"
+  checksum: b344077c27e549ba518e183aabb57fc95c8b5e36c3dbb32cedd723a2741bc1cb469650125b7f96d24177af4db7a4bf65ed75af7379b0ae7525ed45e1b790fc29
   languageName: node
   linkType: hard
 
