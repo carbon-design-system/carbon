@@ -211,7 +211,6 @@
     cursor: pointer;
     transition: background-color $duration--fast-01 motion(standard, productive);
     fill: $icon-01;
-    user-select: none;
 
     &:hover {
       background-color: $hover-ui;
