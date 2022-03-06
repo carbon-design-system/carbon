@@ -230,6 +230,7 @@
     text-decoration: none;
     transform: scale(1, 1) #{'/*rtl: scale(-1,1)*/'};
     transition: background-color $duration-fast-01 motion(standard, productive);
+    user-select: none;
     // Windows HCM fix
     @include high-contrast-mode('icon-fill');
 
