@@ -5,20 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
-import uid from '../../tools/uniqueId';
-import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { CheckmarkFilled16 as CheckmarkFilled } from '@carbon/icons-react';
+import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { keys, matches } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
+import { useFallbackId } from '../../internal/useId';
+import { useFeatureFlag } from '../FeatureFlags';
+import { usePrefix } from '../../internal/usePrefix';
 
 function RadioTile({
   children,
-  className,
+  className: customClassName,
   disabled,
   // eslint-disable-next-line no-unused-vars
   iconDescription,
@@ -29,11 +28,13 @@ function RadioTile({
   id,
   onChange,
   tabIndex,
-  ...other
+  ...rest
 }) {
-  const { current: inputId } = useRef(id || uid());
-  const classes = classNames(
-    className,
+  const prefix = usePrefix();
+  const inputId = useFallbackId(id);
+  const enabled = useFeatureFlag('enable-v11-release');
+  const className = cx(
+    customClassName,
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
     {
@@ -42,6 +43,8 @@ function RadioTile({
       [`${prefix}--tile--disabled`]: disabled,
     }
   );
+  const inputProps = enabled ? {} : rest;
+  const labelProps = enabled ? rest : {};
 
   function handleOnChange(evt) {
     onChange(value, name, evt);
@@ -57,19 +60,19 @@ function RadioTile({
   return (
     <>
       <input
-        {...other}
-        type="radio"
+        {...inputProps}
         checked={checked}
-        disabled={disabled}
-        name={name}
-        value={value}
         className={`${prefix}--tile-input`}
-        tabIndex={!disabled ? tabIndex : null}
+        disabled={disabled}
+        id={inputId}
+        name={name}
         onChange={!disabled ? handleOnChange : null}
         onKeyDown={!disabled ? handleOnKeyDown : null}
-        id={inputId}
+        tabIndex={!disabled ? tabIndex : null}
+        type="radio"
+        value={value}
       />
-      <label htmlFor={inputId} className={classes}>
+      <label {...labelProps} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>
           <CheckmarkFilled />
         </span>
