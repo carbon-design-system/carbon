@@ -64,7 +64,7 @@
   },
   "dependencies": {
     "@carbon/telemetry": "0.0.0-alpha.6",
-    "flatpickr": "4.6.1",
+    "flatpickr": "4.6.10",
     "lodash.debounce": "^4.0.8",
     "warning": "^3.0.0"
   },
