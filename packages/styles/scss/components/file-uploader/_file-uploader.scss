@@ -10,6 +10,7 @@
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
+
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
@@ -323,6 +324,7 @@
     justify-content: space-between;
     padding: $spacing-05;
     border: 1px dashed $border-strong;
+    @include type-style('body-compact-01');
   }
 
   .#{$prefix}--file__drop-container--drag-over {
