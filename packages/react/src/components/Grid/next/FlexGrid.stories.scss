@@ -1,7 +1,7 @@
 @use '@carbon/styles/scss/colors' as *;
 
 // base of project work area
-#root > div:first-child > div:first-child {
+#root > #templates > div:first-child {
   width: 100%;
 }
 

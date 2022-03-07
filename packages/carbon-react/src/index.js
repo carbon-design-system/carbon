@@ -129,6 +129,7 @@ export {
   ToolbarDivider,
   ToolbarSearch,
   UnorderedList,
+  SkeletonIcon,
   SkeletonText,
   SkeletonPlaceholder,
   DataTableSkeleton,
