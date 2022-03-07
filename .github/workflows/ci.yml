@@ -67,12 +67,12 @@ jobs:
       - uses: actions/cache@v2.1.7
         id: turbo-cache
         with:
-          path: node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo-${{ hashFiles('turbo.json') }}
+          path: .turbo-cache
+          key: ${{ runner.os }}-turbo-${{ hashFiles('.turbo-cache/**') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
-        run: yarn build --ignore='@carbon/sketch'
+        run: yarn build --cache-dir='./.turbo-cache'
       - name: Check generated styles
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
@@ -98,8 +98,8 @@ jobs:
       - uses: actions/cache@v2.1.7
         id: turbo-cache
         with:
-          path: node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo-${{ hashFiles('turbo.json') }}
+          path: .turbo-cache
+          key: ${{ runner.os }}-turbo-${{ hashFiles('.turbo-cache/**') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - uses: dorny/paths-filter@v2.10.2
@@ -116,7 +116,7 @@ jobs:
               - 'packages/icon-build-helpers/**'
       - name: Build project
         if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn build --ignore='@carbon/sketch'
+        run: yarn build --cache-dir='./.turbo-cache'
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
@@ -139,12 +139,12 @@ jobs:
       - uses: actions/cache@v2.1.7
         id: turbo-cache
         with:
-          path: node_modules/.cache/turbo
-          key: ${{ runner.os }}-turbo-${{ hashFiles('turbo.json') }}
+          path: .turbo-cache
+          key: ${{ runner.os }}-turbo-${{ hashFiles('.turbo-cache/**') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
-        run: yarn build --ignore='@carbon/sketch'
+        run: yarn build --cache-dir='./.turbo-cache'
       - name: Run VRT
         if: github.repository == 'carbon-design-system/carbon'
         env:
