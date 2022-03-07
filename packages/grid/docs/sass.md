@@ -22,6 +22,23 @@ grid by writing the following:
   - `$grid-gutter--condensed`
   - `$grid-breakpoints`
 
+### Classes
+
+| Name                                       | Description                                            |
+| :----------------------------------------- | :----------------------------------------------------- |
+| `cds--css-grid`                            | Grid class name                                        |
+| `cds--css-grid-column`                     | Column class name                                      |
+| `cds--col-span-{0,16}`                     | Unconditional column span                              |
+| `cds--{sm,md,lg,xlg,max}:col-span-{0,16}`  | Responsive column span                                 |
+| `cds--col-span-{25,50,75,100}`             | Percent column span across breakpoints                 |
+| `cds--col-start-{1,16}`                    | Unconditional column start                             |
+| `cds--{sm,md,lg,xlg,max}:col-start-{1,16}` | Responsive column start                                |
+| `cds--col-end-{2,17}`                      | Unconditional column end                               |
+| `cds--{sm,md,lg,xlg,max}:col-end-{2,17}`   | Responsive column end                                  |
+| `cds--col-gutter`                          | Add the grid gutter to an HTML element                 |
+| `cds--col-gutter-{start,end}`              | Add the grid gutter start/end value to an HTML element |
+| `cds--grid-column-hang`                    |                                                        |
+
 ### Breakpoints
 
 ### Configuration
@@ -30,7 +47,7 @@ grid by writing the following:
 
 #### `$grid-gutter`
 
-#### `$grid-gutter--condensed`
+#### `$grid-gutter-condensed`
 
 ## API
 

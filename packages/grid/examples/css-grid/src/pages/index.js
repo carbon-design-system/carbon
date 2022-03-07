@@ -1,56 +1,93 @@
 export default function IndexPage() {
   return (
     <>
-      <h1>Experimental CSS Grid</h1>
+      <h1>CSS Grid</h1>
+      <GridExamples />
+      <hr style={{ margin: '6rem 0' }}/>
+      <div dir="rtl">
+        <p>RTL layout</p>
+        <GridExamples />
+      </div>
+    </>
+  );
+}
+
+function GridExamples() {
+  return (
+    <>
       <section>
         <h2>Wide</h2>
         <div className="cds--css-grid">
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            Span 4
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            Span 4
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            Span 4
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            Span 4
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Narrow</h2>
+        <div className="cds--css-grid cds--css-grid--narrow">
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            <div className="cds--grid-column-hang">Span 4</div>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            <div className="cds--grid-column-hang">Span 4</div>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            <div className="cds--grid-column-hang">Span 4</div>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            <div className="cds--grid-column-hang">Span 4</div>
+          </div>
         </div>
       </section>
 
       <section>
         <h2>Condensed</h2>
         <div className="cds--css-grid cds--css-grid--condensed">
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
-        </div>
-      </section>
-
-      <section>
-        <h2>Full Width</h2>
-        <div className="cds--css-grid cds--css-grid--full-width">
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
-          <div className="cds--sm:col-span-4"></div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            <div className="cds--grid-column-hang">Span 4</div>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            <div className="cds--grid-column-hang">Span 4</div>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            <div className="cds--grid-column-hang">Span 4</div>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            <div className="cds--grid-column-hang">Span 4</div>
+          </div>
         </div>
       </section>
 
       <section>
         <h2>Responsive</h2>
         <div className="cds--css-grid">
-          <div className="cds--sm:col-span-2 cds--md:col-span-4 cds--lg:col-span-6">
+          <div className="cds--css-grid-column cds--sm:col-span-2 cds--md:col-span-4 cds--lg:col-span-6">
             <p>Small: Span 2 of 4</p>
             <p>Medium: Span 4 of 8</p>
             <p>Large: Span 6 of 16</p>
           </div>
-          <div className="cds--sm:col-span-2 cds--md:col-span-2 cds--lg:col-span-3">
+          <div className="cds--css-grid-column cds--sm:col-span-2 cds--md:col-span-2 cds--lg:col-span-3">
             <p>Small: Span 2 of 4</p>
             <p>Medium: Span 2 of 8</p>
             <p>Large: Span 3 of 16</p>
           </div>
-          <div className="cds--sm:col-span-0 cds--md:col-span-2 cds--lg:col-span-3">
+          <div className="cds--css-grid-column cds--sm:col-span-0 cds--md:col-span-2 cds--lg:col-span-3">
             <p>Small: Span 0 of 4</p>
             <p>Medium: Span 2 of 8</p>
             <p>Large: Span 3 of 16</p>
           </div>
-          <div className="cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-4">
+          <div className="cds--css-grid-column cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-4">
             <p>Small: Span 0 of 4</p>
             <p>Medium: Span 0 of 8</p>
             <p>Large: Span 4 of 16</p>
@@ -60,108 +97,344 @@ export default function IndexPage() {
 
       <section>
         <h2>Subgrid</h2>
+        <p>Wide base</p>
         <div className="cds--css-grid">
-          <div className="cds--sm:col-span-2 cds--md:col-span-4 cds--lg:col-span-3">
-            <p>Small: Span 2 of 4</p>
-            <p>Medium: Span 4 of 8</p>
-            <p>Large: Span 3 of 16</p>
+          <div className="cds--css-grid-column cds--col-span-8">
+            <div className="cds--subgrid">
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+            </div>
           </div>
-          <div className="cds--sm:col-span-2 cds--md:col-span-4 cds--lg:col-span-10">
-            <p>Small: Span 2 of 4</p>
-            <p>Medium: Span 4 of 8</p>
-            <p>Large: Span 10 of 16</p>
-            <div className="example cds--subgrid">
-              <div className="cds--sm:col-span-1 cds--md:col-span-1 cds--lg:col-span-2">
-                <p>sm=1</p> <p>md=1</p> <p>lg=2</p>
+          <div className="cds--css-grid-column cds--col-span-8">
+            <div className="cds--subgrid cds--subgrid--narrow">
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
               </div>
-              <div className="cds--sm:col-span-1 cds--md:col-span-1 cds--lg:col-span-2">
-                <p>sm=1</p> <p>md=1</p> <p>lg=2</p>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
               </div>
-              <div className="cds--sm:col-span-0 cds--md:col-span-1 cds--lg:col-span-1">
-                <p>sm=0</p> <p>md=1</p> <p>lg=1</p>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
               </div>
-              <div className="cds--sm:col-span-0 cds--md:col-span-1 cds--lg:col-span-1">
-                <p>sm=0</p> <p>md=1</p> <p>lg=1</p>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
               </div>
-              <div className="cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-1">
-                <p>sm=0</p> <p>md=0</p> <p>lg=1</p>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
               </div>
-              <div className="cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-1">
-                <p>sm=0</p> <p>md=0</p> <p>lg=1</p>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
               </div>
-              <div className="cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-1">
-                <p>sm=0</p> <p>md=0</p> <p>lg=1</p>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
               </div>
-              <div className="cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-1">
-                <p>sm=0</p> <p>md=0</p> <p>lg=1</p>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
               </div>
             </div>
           </div>
-          <div className="cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-3">
-            <p>Small: Span 0 of 4</p>
-            <p>Medium: Span 0 of 8</p>
-            <p>Large: Span 3 of 16</p>
+          <div className="cds--css-grid-column cds--col-span-8">
+            <div className="cds--subgrid cds--subgrid--condensed">
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>Narrow base</p>
+        <div className="cds--css-grid cds--css-grid--narrow">
+          <div className="cds--css-grid-column cds--col-span-8">
+            <div className="cds--subgrid cds--subgrid--wide">
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+            </div>
+            <div className="cds--subgrid cds--subgrid--narrow">
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+            </div>
+            <div className="cds--subgrid cds--subgrid--condensed">
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>Condensed base</p>
+        <div className="cds--css-grid cds--css-grid--condensed">
+          <div className="cds--css-grid-column cds--col-span-8">
+            <div className="cds--subgrid cds--subgrid--wide">
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+              <div className="cds--css-grid-column"></div>
+            </div>
+            <div className="cds--subgrid cds--subgrid--narrow">
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+            </div>
+            <div className="cds--subgrid cds--subgrid--condensed">
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+              <div className="cds--css-grid-column">
+                <div className="cds--grid-column-hang">I</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>Mix-and-match</p>
+                <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--col-span-8">
+            <div className="cds--subgrid">
+              <div className="cds--css-grid-column cds--col-span-8">
+                <div className="cds--subgrid cds--subgrid--narrow">
+                  <div className="cds--css-grid-column">
+                    <div className="cds--grid-column-hang">I</div>
+                  </div>
+                  <div className="cds--css-grid-column">
+                    <div className="cds--grid-column-hang">I</div>
+                  </div>
+                  <div className="cds--css-grid-column">
+                    <div className="cds--grid-column-hang">I</div>
+                  </div>
+                  <div className="cds--css-grid-column">
+                    <div className="cds--grid-column-hang">I</div>
+                  </div>
+                  <div className="cds--css-grid-column cds--col-span-4">
+                    <div className="cds--subgrid cds--subgrid--wide">
+                      <div className="cds--css-grid-column">I</div>
+                      <div className="cds--css-grid-column">I</div>
+                      <div className="cds--css-grid-column cds--col-span-2">
+                        <div className="cds--subgrid cds--subgrid--condensed">
+                          <div className="cds--css-grid-column">
+                            <div className="cds--grid-column-hang">I</div>
+                          </div>
+                          <div className="cds--css-grid-column">
+                            <div className="cds--grid-column-hang">I</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      <section>
-        <h2>Mixed Grid Modes</h2>
-        <div className="cds--css-grid">
-          <div className="cds--sm:col-span-1 cds--md:col-span-2 cds--lg:col-span-4">
-            <div className="cds--css-grid cds--subgrid">
-              <div className="cds--sm:col-span-1 cds--md:col-span-2 cds--lg:col-span-4">
-                <p>wide</p>
-              </div>
-            </div>
-          </div>
-          <div className="cds--sm:col-span-3 cds--md:col-span-6 cds--lg:col-span-12">
-            <div className="cds--css-grid--condensed cds--subgrid">
-              <div className="cds--sm:col-span-3 cds--md:col-span-6 cds--lg:col-span-12">
-                <p>condensed</p>
-              </div>
-            </div>
-          </div>
-          <div className="cds--sm:col-span-1 cds--md:col-span-2 cds--lg:col-span-4">
-            <div className="cds--css-grid--condensed cds--subgrid">
-              <div className="cds--sm:col-span-1 cds--md:col-span-2 cds--lg:col-span-4">
-                <p>condensed</p>
-              </div>
-            </div>
-          </div>
-          <div className="cds--sm:col-span-3 cds--md:col-span-6 cds--lg:col-span-12">
-            <div className="cds--css-grid cds--subgrid">
-              <div className="cds--sm:col-span-3 cds--md:col-span-6 cds--lg:col-span-12">
-                <p>wide</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section>
         <h2>Offset</h2>
         <div className="cds--css-grid">
-          <div className="cds--sm:col-start-4 cds--sm:col-end-5 cds--md:col-start-7 cds--md:col-end-9 cds--lg:col-start-13 cds--lg:col-end-17"></div>
-          <div className="cds--sm:col-start-3 cds--sm:col-end-5 cds--md:col-start-5 cds--md:col-end-9 cds--lg:col-start-9 cds--lg:col-end-17"></div>
-          <div className="cds--sm:col-start-2 cds--sm:col-end-5 cds--md:col-start-3 cds--md:col-end-9 cds--lg:col-start-5 cds--lg:col-end-17"></div>
-          <div className="cds--sm:col-span-4 cds--md:col-span-8 cds--lg:col-span-16"></div>
+          <div className="cds--css-grid-column cds--col-span-100 cds--col-start-6">
+            Start 6
+          </div>
+          <div className="cds--css-grid-column cds--col-span-100 cds--col-start-5">
+            Start 5
+          </div>
+          <div className="cds--css-grid-column cds--col-span-100 cds--col-start-4">
+            Start 4
+          </div>
+          <div className="cds--css-grid-column cds--col-span-100 cds--col-start-3">
+            Start 3
+          </div>
+          <div className="cds--css-grid-column cds--col-span-100 cds--col-start-2">
+            Start 2
+          </div>
+          <div className="cds--css-grid-column cds--col-span-100 cds--col-start-1">
+            Start 1
+          </div>
+        </div>
+        <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--col-start-2 cds--col-span-2">
+            column start 2, span 2
+          </div>
+        </div>
+        <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--col-end-5 cds--col-span-2">
+            span 2, column end 5
+          </div>
+        </div>
+        <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--col-start-2 cds--col-end-5">
+            column start 2, column end 5
+          </div>
         </div>
       </section>
 
       <section>
         <h2>Auto Columns</h2>
         <div className="cds--css-grid">
-          <div className="cds--col"></div>
-          <div className="cds--col"></div>
-          <div className="cds--col"></div>
-          <div className="cds--col"></div>
-          <div className="cds--col"></div>
-          <div className="cds--col"></div>
-          <div className="cds--col"></div>
-          <div className="cds--col"></div>
+          <div className="cds--css-grid-column cds--col-span-100">
+            Span 100%
+          </div>
+        </div>
+        <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--col-span-75">
+            Span 75%
+          </div>
+        </div>
+        <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--col-span-50">
+            Span 50%
+          </div>
+        </div>
+        <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--col-span-25">
+            Span 25%
+          </div>
+        </div>
+        <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--sm:col-span-100 cds--md:col-span-75 cds--lg:col-span-50 cds--xlg:col-span-25">
+            100% at sm, 75% at md, 50% at lg, 25% at xlg
+          </div>
         </div>
       </section>
+
+      <section>
+        <h2>Full Width</h2>
+        <div className="cds--css-grid cds--css-grid--full-width">
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            Span 4
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            Span 4
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            Span 4
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-4">
+            Span 4
+          </div>
+        </div>
+      </section>
+
+
     </>
   );
 }
+

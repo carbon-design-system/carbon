@@ -14,13 +14,13 @@
 /// @type Number
 /// @access public
 /// @group @carbon/layout
-$grid-gutter: convert.rem(32px);
+$grid-gutter: convert.rem(32px) !default;
 
 /// Carbon condensed gutter size in rem
 /// @type Number
 /// @access public
 /// @group @carbon/layout
-$grid-gutter--condensed: convert.rem(1px);
+$grid-gutter-condensed: convert.rem(1px) !default;
 
 // Initial map of our breakpoints and their values
 /// @type Map

@@ -46,6 +46,7 @@ packages/icons-react/next/**
 # Examples
 packages/**/examples/**
 !packages/themes/examples/**
+!packages/grid/examples/css-grid/**
 
 # Yarn
 **/.yarn/**
