@@ -11899,7 +11899,7 @@ __metadata:
     lolex: ^5.0.0
     markdown-it: ^12.0.4
     minimatch: ^5.0.0
-    mkdirp: ^0.5.0
+    mkdirp: ^1.0.0
     mock-raf: ^1.0.0
     node-sass: ^7.0.1
     nodemon: ^1.18.7
@@ -26206,7 +26206,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mkdirp@npm:^1.0.3, mkdirp@npm:^1.0.4":
+"mkdirp@npm:^1.0.0, mkdirp@npm:^1.0.3, mkdirp@npm:^1.0.4":
   version: 1.0.4
   resolution: "mkdirp@npm:1.0.4"
   bin:
