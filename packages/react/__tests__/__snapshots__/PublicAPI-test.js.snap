@@ -5927,6 +5927,16 @@ Map {
     },
     "render": [Function],
   },
+  "SkeletonIcon" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+  },
   "SkeletonPlaceholder" => Object {
     "propTypes": Object {
       "className": Object {
