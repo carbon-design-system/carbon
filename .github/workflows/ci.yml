@@ -72,7 +72,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
-        run: yarn build --ignore '@carbon/sketch'
+        run: yarn build --ignore='@carbon/sketch'
       - name: Check generated styles
         run: |
           yarn carbon-cli check --ignore '**/@(node_modules|examples|components|react|fixtures|compat)/**' 'packages/**/*.scss'
@@ -116,7 +116,7 @@ jobs:
               - 'packages/icon-build-helpers/**'
       - name: Build project
         if: ${{ steps.filter.outputs.e2e == 'true' }}
-        run: yarn build --ignore '@carbon/sketch'
+        run: yarn build --ignore='@carbon/sketch'
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
@@ -144,7 +144,7 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
-        run: yarn build --ignore '@carbon/sketch'
+        run: yarn build --ignore='@carbon/sketch'
       - name: Run VRT
         if: github.repository == 'carbon-design-system/carbon'
         env:
