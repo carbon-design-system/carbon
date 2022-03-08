@@ -11,9 +11,10 @@
 /// @group utilities
 /// Set HCM styles at the end of each file to ensure they are not overwritten
 @mixin high-contrast-mode($type: '') {
+  @media screen and (inverted-colors: inverted) {
+  }
   @media screen and (-ms-high-contrast: active),
     (forced-colors: active),
-    (inverted-colors: inverted),
     (prefers-contrast) {
     @if ($type == 'icon-fill') {
       fill: ButtonText;
