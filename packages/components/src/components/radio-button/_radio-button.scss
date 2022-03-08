@@ -65,6 +65,7 @@
     align-items: center;
     margin-right: $carbon--spacing-05;
     cursor: pointer;
+    transition: color $duration--fast-02 motion(exit, productive);
   }
 
   .#{$prefix}--radio-button__appearance {
@@ -77,15 +78,9 @@
     margin: rem(1px) $carbon--spacing-03 rem(2px) rem(2px);
     background-color: transparent;
     border-radius: 50%;
-  }
-
-  .#{$prefix}--radio-button:checked
-    + .#{$prefix}--radio-button__label
-    .#{$prefix}--radio-button__appearance {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-color: $icon-01;
+    outline: 0 solid $focus;
+    transition: border-color $duration--fast-02 motion(exit, productive),
+      outline $duration--fast-02 motion(exit, productive);
 
     &::before {
       position: relative;
@@ -95,7 +90,9 @@
       background-color: $icon-01;
       border-radius: 50%;
       content: '';
-      transform: scale(0.5);
+      transform: scale(0);
+      transition: background-color $duration--fast-02 motion(exit, productive),
+        transform $duration--moderate-01 motion(exit, productive);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -109,6 +106,21 @@
         border: 2px solid WindowText;
       }
     }
+  }
+
+  .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: $icon-01;
+  }
+
+  .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance::before {
+    transform: scale(0.5);
   }
 
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
@@ -136,6 +148,7 @@
     .#{$prefix}--radio-button__appearance {
     outline: 2px solid $focus;
     outline-offset: 1.5px;
+    transition: outline motion(entrance, productive);
   }
 
   // Skeleton State
@@ -186,6 +199,35 @@
     .#{$prefix}--radio-button__appearance {
     margin-right: 0;
     margin-left: $carbon--spacing-03;
+  }
+
+  // Hover states
+  .#{$prefix}--radio-button-wrapper:hover .#{$prefix}--radio-button__label {
+    color: $text-02;
+    transition: color $duration--fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--radio-button-wrapper:hover .#{$prefix}--radio-button__appearance,
+  .#{$prefix}--radio-button-wrapper:hover
+    .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    border-color: $ui-04;
+    transition: border-color $duration--fast-02 motion(entrance, productive);
+
+    &::before {
+      background-color: $icon-02;
+      transform: scale(0.5);
+      transition: background-color $duration--fast-02
+          motion(entrance, productive),
+        transform $duration--moderate-01 motion(entrance, productive);
+    }
+  }
+
+  // Active states
+  .#{$prefix}--radio-button-wrapper:active
+    .#{$prefix}--radio-button__appearance::before {
+    transform: scale(0.25);
   }
 }
 

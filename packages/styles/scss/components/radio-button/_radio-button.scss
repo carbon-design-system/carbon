@@ -17,6 +17,7 @@
 @use '../../utilities/visually-hidden' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/convert' as *;
+@use '../../motion' as *;
 @use '../../config' as *;
 @use '../../spacing' as *;
 
@@ -76,6 +77,7 @@ $radio-border-width: 1px !default;
     align-items: center;
     margin-right: $spacing-05;
     cursor: pointer;
+    transition: color $duration-fast-02 motion(exit, productive);
   }
 
   .#{$prefix}--radio-button__appearance {
@@ -88,15 +90,9 @@ $radio-border-width: 1px !default;
     margin: rem(1px) $spacing-03 rem(2px) rem(2px);
     background-color: transparent;
     border-radius: 50%;
-  }
-
-  .#{$prefix}--radio-button:checked
-    + .#{$prefix}--radio-button__label
-    .#{$prefix}--radio-button__appearance {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-color: $icon-primary;
+    outline: 0 solid $focus;
+    transition: border-color $duration-fast-02 motion(exit, productive),
+      outline $duration-fast-02 motion(exit, productive);
 
     &::before {
       position: relative;
@@ -106,7 +102,9 @@ $radio-border-width: 1px !default;
       background-color: $icon-primary;
       border-radius: 50%;
       content: '';
-      transform: scale(0.5);
+      transform: scale(0);
+      transition: background-color $duration-fast-02 motion(exit, productive),
+        transform $duration-moderate-01 motion(exit, productive);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -120,6 +118,21 @@ $radio-border-width: 1px !default;
         border: 2px solid WindowText;
       }
     }
+  }
+
+  .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-color: $icon-primary;
+  }
+
+  .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance::before {
+    transform: scale(0.5);
   }
 
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
@@ -147,6 +160,7 @@ $radio-border-width: 1px !default;
     .#{$prefix}--radio-button__appearance {
     outline: 2px solid $focus;
     outline-offset: 1.5px;
+    transition: outline motion(entrance, productive);
   }
 
   // Skeleton State
@@ -197,5 +211,34 @@ $radio-border-width: 1px !default;
     .#{$prefix}--radio-button__appearance {
     margin-right: 0;
     margin-left: $spacing-03;
+  }
+
+  // Hover states
+  .#{$prefix}--radio-button-wrapper:hover .#{$prefix}--radio-button__label {
+    color: $text-secondary;
+    transition: color $duration-fast-02 motion(entrance, productive);
+  }
+
+  .#{$prefix}--radio-button-wrapper:hover .#{$prefix}--radio-button__appearance,
+  .#{$prefix}--radio-button-wrapper:hover
+    .#{$prefix}--radio-button:checked
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    border-color: $toggle-off;
+    transition: border-color $duration-fast-02 motion(entrance, productive);
+
+    &::before {
+      background-color: $icon-secondary;
+      transform: scale(0.5);
+      transition: background-color $duration-fast-02
+          motion(entrance, productive),
+        transform $duration-moderate-01 motion(entrance, productive);
+    }
+  }
+
+  // Active states
+  .#{$prefix}--radio-button-wrapper:active
+    .#{$prefix}--radio-button__appearance::before {
+    transform: scale(0.25);
   }
 }
