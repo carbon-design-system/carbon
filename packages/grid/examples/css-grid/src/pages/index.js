@@ -70,32 +70,6 @@ function GridExamples() {
       </section>
 
       <section>
-        <h2>Responsive</h2>
-        <div className="cds--css-grid">
-          <div className="cds--css-grid-column cds--sm:col-span-2 cds--md:col-span-4 cds--lg:col-span-6">
-            <p>Small: Span 2 of 4</p>
-            <p>Medium: Span 4 of 8</p>
-            <p>Large: Span 6 of 16</p>
-          </div>
-          <div className="cds--css-grid-column cds--sm:col-span-2 cds--md:col-span-2 cds--lg:col-span-3">
-            <p>Small: Span 2 of 4</p>
-            <p>Medium: Span 2 of 8</p>
-            <p>Large: Span 3 of 16</p>
-          </div>
-          <div className="cds--css-grid-column cds--sm:col-span-0 cds--md:col-span-2 cds--lg:col-span-3">
-            <p>Small: Span 0 of 4</p>
-            <p>Medium: Span 2 of 8</p>
-            <p>Large: Span 3 of 16</p>
-          </div>
-          <div className="cds--css-grid-column cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-4">
-            <p>Small: Span 0 of 4</p>
-            <p>Medium: Span 0 of 8</p>
-            <p>Large: Span 4 of 16</p>
-          </div>
-        </div>
-      </section>
-
-      <section>
         <h2>Subgrid</h2>
         <p>Wide base</p>
         <div className="cds--css-grid">
@@ -306,7 +280,7 @@ function GridExamples() {
         </div>
 
         <p>Mix-and-match</p>
-                <div className="cds--css-grid">
+        <div className="cds--css-grid">
           <div className="cds--css-grid-column cds--col-span-8">
             <div className="cds--subgrid">
               <div className="cds--css-grid-column cds--col-span-8">
@@ -344,8 +318,57 @@ function GridExamples() {
             </div>
           </div>
         </div>
+        <div className="cds--css-grid cds--css-grid--narrow">
+          <div className="cds--css-grid-column cds--col-span-8">
+            <div className="cds--subgrid cds--subgrid--wide">
+              <div className="cds--css-grid-column cds--col-span-4">
+              </div>
+              <div className="cds--css-grid-column cds--col-span-4">
+                <div className="cds--subgrid cds--subgrid--narrow">
+                  <div className="cds--css-grid-column">
+                    <div className="cds--grid-column-hang">I</div>
+                  </div>
+                  <div className="cds--css-grid-column">
+                    <div className="cds--grid-column-hang">I</div>
+                  </div>
+                  <div className="cds--css-grid-column">
+                    <div className="cds--grid-column-hang">I</div>
+                  </div>
+                  <div className="cds--css-grid-column">
+                    <div className="cds--grid-column-hang">I</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
+      <section>
+        <h2>Responsive</h2>
+        <div className="cds--css-grid">
+          <div className="cds--css-grid-column cds--sm:col-span-2 cds--md:col-span-4 cds--lg:col-span-6">
+            <p>Small: Span 2 of 4</p>
+            <p>Medium: Span 4 of 8</p>
+            <p>Large: Span 6 of 16</p>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-2 cds--md:col-span-2 cds--lg:col-span-3">
+            <p>Small: Span 2 of 4</p>
+            <p>Medium: Span 2 of 8</p>
+            <p>Large: Span 3 of 16</p>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-0 cds--md:col-span-2 cds--lg:col-span-3">
+            <p>Small: Span 0 of 4</p>
+            <p>Medium: Span 2 of 8</p>
+            <p>Large: Span 3 of 16</p>
+          </div>
+          <div className="cds--css-grid-column cds--sm:col-span-0 cds--md:col-span-0 cds--lg:col-span-4">
+            <p>Small: Span 0 of 4</p>
+            <p>Medium: Span 0 of 8</p>
+            <p>Large: Span 4 of 16</p>
+          </div>
+        </div>
+      </section>
 
       <section>
         <h2>Offset</h2>

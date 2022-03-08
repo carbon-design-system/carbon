@@ -12,52 +12,40 @@
 @use 'config' as *;
 @use 'breakpoint' as *;
 
-@function get-smallest-breakpoint($breakpoints) {
-  @return list.nth($breakpoints, 1);
-}
-
-@function get-grid-width($breakpoints, $breakpoint) {
-  @return map.get(map.get($breakpoints, $breakpoint), width);
-}
-
-@function get-column-count($breakpoints, $breakpoint) {
-  @return map.get(map.get($breakpoints, $breakpoint), columns);
-}
-
-@function get-margin($breakpoints, $breakpoint) {
-  $value: map.get(map.get($breakpoints, $breakpoint), margin);
-  @if $value == 0 {
-    @return 0;
-  }
-  @return $value;
-}
-
-@function get-grid-columns($breakpoints) {
-  @return get-column-count($breakpoints, largest-breakpoint-name($breakpoints));
-}
-
-// Tests
-// 1. correct grid column count per breakpoint
-// 2. margin is correct
-// 3. gutter classes
-// 4. subgrid support
-// 5. add in gutter padding for hang
-// 6. rtl layouts
-// 7. setting background colors
-// 8. column span
-// 9. column offset
-// 10. grid modes: wide, narrow, condensed
-// 11. full width
-// 12. component support (tables)
-// 13. column classes (span, span by breakpoint, auto span, auto span by
-// breakpoint)
-// 14. mix-and-match auto span with offsets
-// 15. (column-start, column-end), (column-start, span), (column-end, span)
-// 16. alignment
+/// Emit all the styles related to the CSS Grid, these include:
+/// - The base grid class
+/// - The various grid modes
+/// - The ability to specifiy column span
+/// - The ability to specifiy column start,end position
+/// - Support for subgrid
+/// - Support for hanging content on a grid column
+/// - Support for controlling grid gutter on a cell basis
+/// - Support for specifying content alignment
+///
+///
+/// In general, this mixin is structured in a way to emit the fewest CSS styles
+/// as possible. To do this, we will (as much as possible) not emit a value if
+/// one is already defined at a previous breakpoint.
+///
+/// In addition, this mixin will break down emitting styles into several stages:
+/// 1. Emit styles for the smallest breakpoint without any breakpoint. By
+/// default, these styles will be on
+/// 2. For every other breakpoint, wrap it in a breakpoint so that it only is
+/// triggered when that breakpoint is applied
+/// 3. In situations where it is appropriate, we also will emit "unconditional"
+/// selectors that will always apply. For example, if you wanted a column to
+/// always span four columns
 @mixin css-grid($breakpoints: $grid-breakpoints) {
+  /// The :root selector is responsible for setting several top-level CSS Custom
+  /// Properties, including the overall grid gutter, grid column count, and grid
+  /// margin
   :root {
     --cds-grid-gutter: #{$grid-gutter};
 
+    // Iterate through the grid breakpoints and only emit the grid-columns and
+    // grid-margin CSS Custom Properties if they've changed from the previous
+    // breakpoint. By default, we emit the smallest breakpoint values on the
+    // :root selector
     @each $key, $value in $breakpoints {
       @if is-smallest-breakpoint($key, $breakpoints) {
         --cds-grid-columns: #{get-column-count($breakpoints, $key)};
@@ -95,15 +83,17 @@
     }
   }
 
+  // -----------------------------------------------------------------------------
+  // Base CSS Grid
+  // -----------------------------------------------------------------------------
   .#{$prefix}--css-grid {
     --cds-grid-gutter-start: calc(var(--cds-grid-gutter) / 2);
     --cds-grid-gutter-end: calc(var(--cds-grid-gutter) / 2);
     // We split out a separate "column hang" since "gutter-start" is set
-    // dynamically and we would like to add back in this value
+    // dynamically and could be 0
     --cds-grid-column-hang: calc(var(--cds-grid-gutter) / 2);
 
     display: grid;
-
     max-width: get-grid-width(
       $breakpoints,
       largest-breakpoint-name($breakpoints)
@@ -122,15 +112,21 @@
     max-width: 100%;
   }
 
+  // -----------------------------------------------------------------------------
+  // Column
+  // -----------------------------------------------------------------------------
+
   // Add gutter to columns in a CSS Grid. Unfortunately, we cannot use
   // `grid-gap`, `column-gap`, etc. as we need to conditionally remove leading
   // and trailing gutter from a column.
   .#{$prefix}--css-grid-column {
+    // grid-mode-start, grid-mode-end are meant to capture the "grid settings"
+    // so that subgrids can correctly fit in parent grids by reverting the
+    // grid's outer padding
     --cds-grid-mode-start: var(--cds-grid-gutter-start);
     --cds-grid-mode-end: var(--cds-grid-gutter-end);
 
     margin-right: var(--cds-grid-gutter-end);
-
     margin-left: var(--cds-grid-gutter-start);
 
     [dir='rtl'] & {
@@ -142,14 +138,9 @@
   // -----------------------------------------------------------------------------
   // Grid modes
   // -----------------------------------------------------------------------------
-  // Narrow
-  .#{$prefix}--css-grid--narrow .#{$prefix}--css-grid-column {
-    --cds-grid-mode-start: var(--cds-grid-gutter-start);
-    --cds-grid-mode-end: var(--cds-grid-gutter-end);
-  }
 
+  // Narrow
   .#{$prefix}--css-grid--narrow {
-    // .#{$prefix}--css-grid--narrow.#{$prefix}--subgrid > * {
     --cds-grid-gutter-start: 0;
   }
 
@@ -175,6 +166,7 @@
     }
   }
 
+  // Support the grid modes in subgrids
   .#{$prefix}--subgrid--wide {
     --cds-grid-gutter-start: #{math.div($grid-gutter, 2)};
     --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
@@ -194,14 +186,12 @@
       math.div($grid-gutter-condensed, 2)};
   }
 
-  // Wide -> {narrow,condensed}
-  // Narrow -> {wide, condensed}
-  // Condensed -> {wide, narrow}
-
   // -----------------------------------------------------------------------------
   // Column hang
   // -----------------------------------------------------------------------------
-  // Add back in gap to align type
+
+  // Helper class to allow for text alignment in columns where the leading
+  // gutter is missing (like narrow) or is reduced (like in condensed).
   .#{$prefix}--grid-column-hang {
     margin-left: var(--cds-grid-column-hang);
 
@@ -210,19 +200,6 @@
       margin-left: initial;
     }
   }
-
-  // -----------------------------------------------------------------------------
-  // No Gutter
-  // -----------------------------------------------------------------------------
-  // .#{$prefix}--css-grid--no-gutter {
-  // // This is set to 0px (versus 0) so that the calc expression for padding for
-  // // a grid container works as expected. Without the unit, the calc() will
-  // // result in a value of 0.
-  // // stylelint-disable-next-line length-zero-no-unit
-  // --cds-grid-gutter: 0px;
-
-  // column-gap: var(--cds-grid-gutter);
-  // }
 
   // -----------------------------------------------------------------------------
   // Column span
@@ -424,62 +401,9 @@
       }
     }
   }
-
-  // -----------------------------------------------------------------------------
-  // Column gutter
-  // -----------------------------------------------------------------------------
-  .#{$prefix}--col-gutter {
-    margin-right: var(--cds-grid-column-hang);
-    margin-left: var(--cds-grid-column-hang);
-  }
-
-  .#{$prefix}--col-gutter-start {
-    margin-left: var(--cds-grid-column-hang);
-
-    [dir='rtl'] & {
-      margin-right: var(--cds-grid-column-hang);
-    }
-  }
-
-  .#{$prefix}--col-gutter-end {
-    margin-right: var(--cds-grid-column-hang);
-
-    [dir='rtl'] & {
-      margin-left: var(--cds-grid-column-hang);
-    }
-  }
-
-  // -----------------------------------------------------------------------------
-  // Utilities
-  // -----------------------------------------------------------------------------
-
-  /// Justify items
-  // .#{$prefix}--justify-items-start {
-  // justify-items: start;
-  // }
-
-  // .#{$prefix}--justify-items-end {
-  // justify-items: end;
-  // }
-
-  // .#{$prefix}--justify-items-center {
-  // justify-items: center;
-  // }
-
-  // /// Align items
-  // .#{$prefix}--align-items-start {
-  // align-items: start;
-  // }
-
-  // .#{$prefix}--align-items-end {
-  // align-items: end;
-  // }
-
-  // .#{$prefix}--align-items-center {
-  // align-items: center;
-  // }
 }
 
+/// Generate the styles for a grid column
 @mixin -column-span($i) {
   @if $i == 0 {
     display: none;
@@ -491,6 +415,8 @@
   }
 }
 
+/// Generate the styles for an unconditional class that represents a percent
+/// span of a grid
 @mixin -percent-column-span($breakpoints, $percent) {
   @each $key, $value in $breakpoints {
     $columns: get-column-count($breakpoints, $key);
@@ -517,4 +443,28 @@
       }
     }
   }
+}
+
+/// Get the grid width for a specific breakpoint name
+@function get-grid-width($breakpoints, $breakpoint) {
+  @return map.get(map.get($breakpoints, $breakpoint), width);
+}
+
+/// Get the grid column count for a specific breakpoint name
+@function get-column-count($breakpoints, $breakpoint) {
+  @return map.get(map.get($breakpoints, $breakpoint), columns);
+}
+
+/// Get the grid margin for a specific breakpoint name
+@function get-margin($breakpoints, $breakpoint) {
+  $value: map.get(map.get($breakpoints, $breakpoint), margin);
+  @if $value == 0 {
+    @return 0;
+  }
+  @return $value;
+}
+
+/// Return the largest breakpoint value from a set of breakpoints
+@function get-grid-columns($breakpoints) {
+  @return get-column-count($breakpoints, largest-breakpoint-name($breakpoints));
 }

@@ -22,6 +22,10 @@
   outline: 1px dashed colors.$purple-40;
 }
 
+.cds--css-grid, .cds--subgrid--wide {
+  --grid-mode-color: #97C1FF;
+}
+
 .cds--css-grid--narrow,
 .cds--subgrid--narrow {
   --grid-mode-color: #20D5D2;
