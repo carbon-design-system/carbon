@@ -14,10 +14,18 @@ import { Filter16 } from '@carbon/icons-react';
 export default {
   title: 'Components/OverflowMenu',
   component: OverflowMenu,
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
+  args: {
+    size: 'md',
+  },
   subcomponents: {
     OverflowMenuItem,
   },
-
   parameters: {
     docs: {
       page: mdx,
@@ -25,8 +33,8 @@ export default {
   },
 };
 
-export const Default = () => (
-  <OverflowMenu>
+export const Default = (args) => (
+  <OverflowMenu {...args}>
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
     <OverflowMenuItem itemText="Rename app" />
@@ -39,8 +47,8 @@ Default.story = {
   name: 'OverflowMenu',
 };
 
-export const RenderCustomIcon = () => (
-  <OverflowMenu renderIcon={Filter16}>
+export const RenderCustomIcon = (args) => (
+  <OverflowMenu renderIcon={Filter16} {...args}>
     <OverflowMenuItem itemText="Filter A" />
     <OverflowMenuItem itemText="Filter B" />
   </OverflowMenu>
