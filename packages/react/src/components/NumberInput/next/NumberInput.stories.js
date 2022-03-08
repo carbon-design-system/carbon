@@ -13,17 +13,10 @@ import {
   number,
   text,
   object,
-  select,
 } from '@storybook/addon-knobs';
 import { NumberInput } from './';
 import NumberInputSkeleton from '../../NumberInput/NumberInput.Skeleton';
 import mdx from '../NumberInput.mdx';
-
-const sizes = {
-  'Small  (sm)': 'sm',
-  'Medium (md) - default': undefined,
-  'Large  (lg)': 'lg',
-};
 
 const props = () => ({
   className: 'some-class',
@@ -35,7 +28,6 @@ const props = () => ({
   max: number('Maximum value (max)', 100),
   value: number('Value (value)', 50),
   step: number('Step of up/down arrow (step)', 10),
-  size: select('Field size (size)', sizes, undefined) || undefined,
   disabled: boolean('Disabled (disabled)', false),
   readOnly: boolean('Read only (readOnly)', false),
   invalid: boolean('Show form validation UI (invalid)', false),
@@ -66,7 +58,15 @@ export default {
   title: 'Components/NumberInput',
   component: NumberInput,
   decorators: [withKnobs],
-
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
+  args: {
+    size: 'md',
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -78,7 +78,7 @@ export default {
   },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <NumberInput
       id="carbon-number"
@@ -88,6 +88,7 @@ export const Default = () => {
       label="NumberInput label"
       helperText="Optional helper text."
       invalidText="Number is not valid"
+      {...args}
     />
   );
 };
@@ -96,12 +97,13 @@ Default.story = {
   name: 'Number Input',
 };
 
-export const Playground = () => {
+export const Playground = (args) => {
   const { numberInputArrowTranslationIds, ...rest } = props();
   return (
     <NumberInput
       translateWithId={(id) => numberInputArrowTranslationIds[id]}
       {...rest}
+      {...args}
     />
   );
 };
