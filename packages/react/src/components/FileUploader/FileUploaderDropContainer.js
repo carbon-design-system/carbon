@@ -190,13 +190,6 @@ FileUploaderDropContainer.propTypes = {
   role: PropTypes.string,
 
   /**
-   * Specify the size of the uploaded items, from a list of available
-   * sizes. For `default` buttons, this prop can remain unspecified.
-   * V11: `default`, `field`, and `small` will be removed
-   */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
-
-  /**
    * Provide a custom tabIndex value for the <FileUploaderButton>
    */
   tabIndex: PropTypes.number,

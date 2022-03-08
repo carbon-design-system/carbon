@@ -156,13 +156,13 @@ $list-box-menu-width: rem(300px);
     background-color: $field;
 
     &:hover {
-      background-color: $layer-hover;
+      background-color: $field-hover;
     }
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
-    background: $field;
+    background: $layer;
   }
 
   // V11: Possibly deprecate
@@ -237,7 +237,7 @@ $list-box-menu-width: rem(300px);
     background-color: transparent;
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -477,7 +477,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
-    @include tag-theme($text-disabled, $field);
+    @include tag-theme($text-disabled, $layer);
 
     > svg {
       fill: $icon-disabled;
@@ -701,7 +701,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--highlighted {
     border-color: transparent;
-    background-color: $layer-hover;
+    background-color: $layer-selected;
     color: $text-primary;
   }
 
@@ -730,8 +730,7 @@ $list-box-menu-width: rem(300px);
     background-color: $layer-selected;
   }
 
-  .#{$prefix}--list-box__menu-item--active:hover,
-  .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
+  .#{$prefix}--list-box__menu-item--active:hover {
     border-bottom-color: $layer-selected-hover;
     background-color: $layer-selected-hover;
   }
