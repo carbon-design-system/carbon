@@ -2792,19 +2792,6 @@ Map {
       "role": Object {
         "type": "string",
       },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "field",
-            "small",
-            "sm",
-            "md",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -5926,6 +5913,16 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "SkeletonIcon" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
   },
   "SkeletonPlaceholder" => Object {
     "propTypes": Object {
