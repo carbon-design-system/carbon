@@ -502,9 +502,8 @@ InlineNotification.propTypes = {
   onCloseButtonClick: PropTypes.func,
 
   /**
-   * By default, this value is "alert". You can also provide an alternate
-   * role if it makes sense from the accessibility-side. If the `actions` prop is
-   * configured, this will be overridden to "alertdialog".
+   * By default, this value is "status". You can also provide an alternate
+   * role if it makes sense from the accessibility-side.
    */
   role: PropTypes.oneOf(['alert', 'log', 'status']).isRequired,
 
