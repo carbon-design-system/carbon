@@ -442,6 +442,7 @@ export function InlineNotification({
           iconDescription={iconDescription}
           notificationType="inline"
           onClick={handleCloseButtonClick}
+          aria-hidden={true}
         />
       )}
     </div>
