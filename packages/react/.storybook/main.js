@@ -112,7 +112,10 @@ module.exports = {
           );
         `,
         implementation: require('sass'),
-        includePaths: [path.resolve(__dirname, '..', '..', 'node_modules')],
+        includePaths: [
+          path.resolve(__dirname, '..', 'node_modules'),
+          path.resolve(__dirname, '..', '..', '..', 'node_modules'),
+        ],
         sourceMap: true,
       },
     };

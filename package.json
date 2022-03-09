@@ -63,7 +63,7 @@
     "husky": "^7.0.0",
     "jest": "^27.4.7",
     "jest-junit": "^13.0.0",
-    "lerna": "^3.20.2",
+    "lerna": "^4.0.0",
     "lint-staged": "^12.0.0",
     "node-gyp": "^7.1.2",
     "prettier": "^2.2.1",
@@ -133,5 +133,6 @@
     "extends": [
       "./config/stylelint-config-carbon"
     ]
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
