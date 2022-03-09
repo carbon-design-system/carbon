@@ -403,14 +403,11 @@
 
   //btns container
   .#{$prefix}--action-list {
-    position: absolute;
-    right: 0;
     display: flex;
     align-items: center;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn {
-    min-width: 0;
     padding: $button-padding-ghost;
     color: $text-on-color;
     white-space: nowrap;
@@ -476,12 +473,6 @@
   .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel:hover::before {
     opacity: 0;
     transition: opacity $transition-base $standard-easing;
-  }
-
-  // cancel btn
-  .#{$prefix}--batch-summary__cancel {
-    position: relative;
-    padding-right: $spacing-05;
   }
 
   // items selected text
