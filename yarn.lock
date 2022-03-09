@@ -20428,7 +20428,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"html-loader@npm:^0.5.5":
+"html-loader@npm:^0.5.0, html-loader@npm:^0.5.5":
   version: 0.5.5
   resolution: "html-loader@npm:0.5.5"
   dependencies:
@@ -20438,18 +20438,6 @@ __metadata:
     loader-utils: ^1.1.0
     object-assign: ^4.1.1
   checksum: 33ec6046ad4f604288513dc4008619fac9550d047a0bb87bed4f04e2b13b2c83241eed912dab2a8a235382b082199b4c70a44c6ac7ed43a39fdb63db2de91596
-  languageName: node
-  linkType: hard
-
-"html-loader@npm:^3.0.0":
-  version: 3.1.0
-  resolution: "html-loader@npm:3.1.0"
-  dependencies:
-    html-minifier-terser: ^6.0.2
-    parse5: ^6.0.1
-  peerDependencies:
-    webpack: ^5.0.0
-  checksum: 4c383d103c10465964924f31eeb2876df941df6515b52a7be517eb01d59ff8f5ae344a3ca428469029c999c73f5ae5dac3431701886ca16617a670a0991bd3a2
   languageName: node
   linkType: hard
 
@@ -28299,7 +28287,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"parse5@npm:6.0.1, parse5@npm:^6.0.0, parse5@npm:^6.0.1":
+"parse5@npm:6.0.1, parse5@npm:^6.0.0":
   version: 6.0.1
   resolution: "parse5@npm:6.0.1"
   checksum: 7d569a176c5460897f7c8f3377eff640d54132b9be51ae8a8fa4979af940830b2b0c296ce75e5bd8f4041520aadde13170dbdec44889975f906098ea0002f4bd
