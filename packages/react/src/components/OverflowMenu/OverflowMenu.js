@@ -224,9 +224,10 @@ class OverflowMenu extends Component {
 
     /**
      * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-     * TODO V11: remove `xl` (replaced with lg)
      */
-    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+    size: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.oneOf(['sm', 'md', 'lg'])
+      : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
   };
 
   static contextType = PrefixContext;
@@ -479,7 +480,7 @@ class OverflowMenu extends Component {
       innerRef: ref,
       menuOptionsClass,
       light,
-      size,
+      size = 'md',
       ...other
     } = this.props;
 

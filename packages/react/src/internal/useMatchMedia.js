@@ -23,13 +23,22 @@ export function useMatchMedia(mediaQueryString) {
     }
 
     const mediaQueryList = window.matchMedia(mediaQueryString);
-    mediaQueryList.addEventListener('change', listener);
+    // Support fallback to `addListener` for broader browser support
+    if (mediaQueryList.addEventListener) {
+      mediaQueryList.addEventListener('change', listener);
+    } else {
+      mediaQueryList.addListener(listener);
+    }
 
     // Make sure the media query list is in sync with the matches state
     setMatches(mediaQueryList.matches);
 
     return () => {
-      mediaQueryList.removeEventListener('change', listener);
+      if (mediaQueryList.addEventListener) {
+        mediaQueryList.removeEventListener('change', listener);
+      } else {
+        mediaQueryList.removeListener(listener);
+      }
     };
   }, [mediaQueryString]);
 
