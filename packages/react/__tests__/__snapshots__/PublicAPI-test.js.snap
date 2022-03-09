@@ -7994,6 +7994,29 @@ Map {
       },
     },
   },
+  "unstable_ColumnHang" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable_DefinitionTooltip" => Object {
     "propTypes": Object {
       "children": Object {
