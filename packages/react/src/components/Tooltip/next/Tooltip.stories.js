@@ -7,7 +7,7 @@
 
 import './story.scss';
 
-import { Checkbox16 } from '@carbon/icons-react';
+import { Information16 } from '@carbon/icons-react';
 import React from 'react';
 import { Tooltip } from './';
 import mdx from './Tooltip.mdx';
@@ -51,7 +51,7 @@ export const Default = () => {
   return (
     <Tooltip align="bottom" label={label}>
       <button className="sb-tooltip-trigger" type="button">
-        <Checkbox16 />
+        <Information16 />
       </button>
     </Tooltip>
   );
@@ -61,7 +61,7 @@ export const Alignment = () => {
   return (
     <Tooltip label="Tooltip alignment" align="bottom-left">
       <button className="sb-tooltip-trigger" type="button">
-        <Checkbox16 />
+        <Information16 />
       </button>
     </Tooltip>
   );
@@ -71,7 +71,7 @@ export const Duration = () => {
   return (
     <Tooltip label="Label one" enterDelayMs={0} leaveDelayMs={300}>
       <button className="sb-tooltip-trigger" type="button">
-        <Checkbox16 />
+        <Information16 />
       </button>
     </Tooltip>
   );
@@ -95,7 +95,7 @@ const PlaygroundStory = (props) => {
       label={label}
       leaveDelayMs={leaveDelayMs}>
       <button className="sb-tooltip-trigger" type="button">
-        <Checkbox16 />
+        <Information16 />
       </button>
     </Tooltip>
   );
