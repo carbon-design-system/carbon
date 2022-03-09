@@ -8,7 +8,8 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../../internal/usePrefix';
+
 import {
   default as FileUploader,
   FileUploaderButton,
@@ -18,8 +19,6 @@ import {
 } from '../';
 import mdx from './FileUploader.mdx';
 import './FileUploader-story.scss';
-
-const { prefix } = settings;
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
 
@@ -40,6 +39,8 @@ export default {
 };
 
 export const _FileUploader = (args) => {
+  const prefix = usePrefix();
+
   return (
     <div className={`${prefix}--file__container`}>
       <FileUploader {...args} />
@@ -51,7 +52,7 @@ _FileUploader.args = {
   labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
   buttonLabel: 'Add file',
   buttonKind: 'primary',
-  size: 'default',
+  size: 'md',
   filenameStatus: 'edit',
   accept: ['.jpg', '.png'],
   name: '',
@@ -80,24 +81,29 @@ _FileUploader.argTypes = {
   },
   size: {
     control: { type: 'select' },
-    options: ['field', 'small', 'default', 'sm', 'md', 'lg'],
+    options: ['sm', 'md', 'lg'],
   },
 };
 
 export const _FileUploaderItem = (args) => <FileUploaderItem {...args} />;
 _FileUploaderItem.args = {
-  name: 'README.md',
-  status: 'edit',
+  errorBody: '500kb max file size. Select a new file and try again.',
+  errorSubject: 'File size exceeds limit',
   iconDescription: 'Clear file',
   invalid: false,
-  errorSubject: 'File size exceeds limit',
-  errorBody: '500kb max file size. Select a new file and try again.',
+  name: 'README.md',
+  status: 'edit',
+  size: 'md',
 };
 _FileUploaderItem.argTypes = {
   onDelete: { action: 'onDelete' },
   status: {
     control: { type: 'select' },
     options: filenameStatuses,
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg'],
   },
 };
 

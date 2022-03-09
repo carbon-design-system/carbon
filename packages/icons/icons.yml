@@ -799,6 +799,20 @@
     - arrow graph
   sizes:
     - 32
+- name: analytics--custom
+  friendly_name: Analytics custom
+  aliases: 
+    - line chart
+    - trend
+    - graph
+    - analyze
+    - data
+    - data analytics
+    - arrow graph
+    - custom 
+    - edit
+  sizes:
+    - 32
 - name: analytics--reference
   friendly_name: Analytics reference
   aliases:
@@ -806,6 +820,13 @@
     - data
     - citation
     - source
+    - line chart
+    - trend
+    - graph
+    - analyze
+    - data
+    - data analytics
+    - arrow graph
   sizes:
     - 32
 - name: angle
@@ -1217,6 +1238,32 @@
     - dark moon
     - cresent dark
     - cresent filled
+- name: assembly
+  friendly_name: Assembly
+  aliases: 
+    - systems
+    - assembly
+    - hexagon 
+  sizes:
+    - 32
+- name: assembly--cluster
+  friendly_name: Assembly cluster
+  aliases: 
+    - systems
+    - assembly
+    - hexagon
+    - multiple 
+  sizes:
+    - 32
+- name: assembly--reference
+  friendly_name: Assembly reference
+  aliases: 
+    - systems
+    - assembly
+    - hexagon 
+    - dotted
+  sizes:
+    - 32
 - name: asset
   friendly_name: Asset
   aliases:
@@ -1998,6 +2045,22 @@
     - bus
   sizes:
     - 32
+- name: button--centered
+  friendly_name: Button centered
+  aliases: 
+    - formatting
+    - button
+    - centered
+  sizes:
+    - 32
+- name: button--flush-left
+  friendly_name: Button flush-left
+  aliases: 
+    - formatting
+    - button
+    - flush-left
+  sizes:
+    - 32
 - name: cabin-care
   friendly_name: Cabin care
   aliases:
@@ -2266,13 +2329,41 @@
   sizes:
     - 32
 - name: carbon-accounting
-  friendly_name: carbon-accounting
+  friendly_name: Carbon accounting
   aliases:
     - carbon
     - accounting
     - CO2
     - footprint
     - weather
+  sizes:
+    - 32
+- name: carbon-for-ibm-dotcom
+  friendly_name: Carbon for IBM dotcom
+  aliases: 
+    - carbon
+    - IBM
+    - digital
+    - web
+    - IBM Carbon
+    - web design system
+    - IBM digital design system
+    - design
+    - hexagon
+  sizes:
+    - 32
+- name: carbon-for-ibm-product
+  friendly_name: Carbon for IBM product
+  aliases: 
+    - carbon
+    - IBM
+    - digital
+    - product
+    - IBM Carbon
+    - product design system
+    - IBM product design system
+    - design
+    - hexagon
   sizes:
     - 32
 - name: caret--down
@@ -2609,6 +2700,73 @@
     - change catalog
     - edit
     - edit catalog
+  sizes:
+    - 32
+- name: character--decimal
+  friendly_name: Character decimal
+  aliases: 
+    - alphanumeric
+    - decimal
+    - numeral
+  sizes:
+    - 32
+- name: character--fraction
+  friendly_name: Character fraction
+  aliases: 
+    - alphanumeric
+    - fraction
+    - numeral
+    - number
+  sizes:
+    - 32
+- name: character--integer
+  friendly_name: Character integer
+  aliases: 
+    - alphanumeric
+    - integer
+    - numeral
+    - number
+  sizes:
+    - 32
+- name: character--lower-case
+  friendly_name: Character lowercase
+  aliases: 
+    - alphanumeric
+    - letter
+    - lowercase
+  sizes:
+    - 32
+- name: character--negative-number
+  friendly_name: Character negative number
+  aliases: 
+    - alphanumeric
+    - negative
+    - number
+    - numeral
+  sizes:
+    - 32
+- name: character--sentence-case
+  friendly_name: Character sentence case
+  aliases: 
+    - alphanumeric
+    - letter
+    - sentence case
+  sizes:
+    - 32
+- name: character--upper-case
+  friendly_name: Character uppercase
+  aliases: 
+    - alphanumeric
+    - uppercase
+    - letter
+  sizes:
+    - 32
+- name: character--whole-number
+  friendly_name: Character whole number
+  aliases: 
+    - alphanumeric
+    - whole number
+    - numeral
   sizes:
     - 32
 - name: character-patterns
@@ -3235,7 +3393,7 @@
   aliases:
     - chat
     - operations
-    - off
+    - 'off'
     - message
     - text
     - instant message
@@ -4543,6 +4701,15 @@
     - send
   sizes:
     - 32
+- name: cookie
+  friendly_name: Cookie
+  aliases: 
+    - technology
+    - cookie
+    - tracking
+    - data
+  sizes:
+    - 32
 - name: copy
   friendly_name: Copy
   aliases:
@@ -5214,6 +5381,15 @@
   aliases:
     - data
     - diode
+- name: data-enrichment
+  friendly_name: Data enrichment
+  aliases: 
+    - data
+    - enrichment
+    - lightbulb
+    - expanded
+  sizes:
+    - 32
 - name: data-player
   friendly_name: Data player
   aliases:
@@ -7531,6 +7707,15 @@
     - disaster
   sizes:
     - 32
+- name: floorplan
+  friendly_name: Floorplan
+  aliases: 
+    - floorplan
+    - file
+    - blueprint
+    - layout
+  sizes:
+    - 32
 - name: flow
   friendly_name: Flow
   aliases:
@@ -8783,6 +8968,16 @@
     - cloud
   sizes:
     - 32
+- name: ibm-cloud--security-compliance-center
+  friendly_name: IBM Cloud® Security and Compliance Center
+  aliases: 
+    - IBM Cloud®
+    - security
+    - compliance
+    - center
+    - app
+  sizes:
+    - 32
 - name: ibm-cloud--subnets
   friendly_name: IBM Cloud® subnets
   aliases:
@@ -8919,6 +9114,15 @@
     - applications
     - cybersecurity
     - security
+  sizes:
+    - 32
+- name: ibm-watson--orders
+  friendly_name: IBM Watson® Orders
+  aliases: 
+    - IBM Watson®
+    - enterprise
+    - app
+    - orders
   sizes:
     - 32
 - name: iCA-2D
@@ -9358,6 +9562,90 @@
     - union
     - join
     - integration
+  sizes:
+    - 32
+- name: intent-request--active
+  friendly_name: Intent request active
+  aliases: 
+    - systems
+    - intent
+    - request
+    - hexagon
+    - checkmark
+  sizes:
+    - 32
+- name: intent-request--create
+  friendly_name: Intent request create
+  aliases: 
+    - systems
+    - intent
+    - request
+    - hexagon
+    - plus sign
+  sizes:
+    - 32
+- name: intent-request--heal
+  friendly_name: Intent request heal
+  aliases: 
+    - systems
+    - intent
+    - request
+    - diamond
+    - heart
+    - heal
+  sizes:
+    - 32
+- name: intent-request--inactive
+  friendly_name: Intent request inactive
+  aliases: 
+    - systems
+    - intent
+    - request
+    - hexagon
+    - ellipsis
+  sizes:
+    - 32
+- name: intent-request--scale-in
+  friendly_name: Intent request scale-in
+  aliases: 
+    - systems
+    - intent
+    - request
+    - square
+    - arrows
+    - scale in
+  sizes:
+    - 32
+- name: intent-request--scale-out
+  friendly_name: Intent request scale-out
+  aliases: 
+    - systems
+    - intent
+    - request
+    - square
+    - arrows
+    - scale out
+  sizes:
+    - 32
+- name: intent-request--uninstall
+  friendly_name: Intent request uninstall
+  aliases: 
+    - systems
+    - intent
+    - request
+    - hexagon
+    - x 
+  sizes:
+    - 32
+- name: intent-request--upgrade
+  friendly_name: Intent request upgrade
+  aliases: 
+    - systems
+    - intent
+    - request
+    - hexagon
+    - up arrow
+    - upgrade
   sizes:
     - 32
 - name: interactions
@@ -13640,6 +13928,14 @@
     - loading
   sizes:
     - 32
+- name: property-relationship
+  friendly_name: Property relationship
+  aliases: 
+    - property
+    - relationship
+    - systems
+  sizes:
+    - 32
 - name: purchase
   friendly_name: Purchase
   aliases:
@@ -14777,6 +15073,26 @@
     - process
   sizes:
     - 32
+- name: scis--control-tower
+  friendly_name: IBM® Supply Chain Intelligence Suite Control Tower
+  aliases: 
+    - IBM
+    - supply chain intelligence suite
+    - control tower
+    - blockchain
+    - app
+  sizes:
+    - 32
+- name: scis--transparent-supply
+  friendly_name: IBM® Supply Chain Intelligence Suite transparent supply
+  aliases: 
+    - IBM
+    - supply chain intelligence suite
+    - transparent supply
+    - blockchain
+    - app
+  sizes:
+    - 32
 - name: scooter
   friendly_name: Scooter
   aliases:
@@ -15693,6 +16009,36 @@
     - football
   sizes:
     - 32
+- name: software-resource
+  friendly_name: Software resource
+  aliases: 
+    - software
+    - systems
+    - resource
+    - diamond
+  sizes:
+    - 32
+- name: software-resource--cluster
+  friendly_name: Software resource cluster
+  aliases: 
+    - software
+    - systems
+    - resource
+    - diamond
+    - cluster
+  sizes:
+    - 32
+- name: software-resource--resource
+  friendly_name: Software resource reference
+  aliases: 
+    - software
+    - systems
+    - resource
+    - diamond
+    - reference
+    - dashed
+  sizes:
+    - 32
 - name: soil-moisture
   friendly_name: Soil moisture
   aliases:
@@ -15770,6 +16116,15 @@
     - sort order
     - order
     - descending
+    - operations
+  sizes:
+    - 32
+- name: sort--remove
+  friendly_name: Sort remove
+  aliases: 
+    - sort order
+    - order
+    - remove
     - operations
   sizes:
     - 32

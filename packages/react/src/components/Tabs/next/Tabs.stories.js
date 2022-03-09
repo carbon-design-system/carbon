@@ -41,24 +41,61 @@ export default {
 };
 
 export const Default = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs">
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab>Tab Label 4 with a very long long label</Tab>
-      <Tab>Tab Label 5</Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>
-        Tab Panel 1 <Button>Example button</Button>
-      </TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
-    </TabPanels>
-  </Tabs>
+  <div style={{ width: '400px' }}>
+    <Tabs>
+      <TabList aria-label="List of tabs">
+        <Tab>Tab Label 1</Tab>
+        <Tab>Tab Label 2</Tab>
+        <Tab disabled>Tab Label 3</Tab>
+        <Tab>Tab Label 4 with a very long long label</Tab>
+        <Tab>Tab Label 5</Tab>
+        <Tab>Tab Label 6</Tab>
+        <Tab>Tab Label 7</Tab>
+        <Tab>Tab Label 8</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          Tab Panel 1 <Button>Example button</Button>
+        </TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+        <TabPanel>Tab Panel 6</TabPanel>
+        <TabPanel>Tab Panel 7</TabPanel>
+        <TabPanel>Tab Panel 8</TabPanel>
+      </TabPanels>
+    </Tabs>
+  </div>
+);
+
+export const Manual = () => (
+  <div style={{ width: '400px' }}>
+    <Tabs>
+      <TabList activation="manual" aria-label="List of tabs">
+        <Tab>Tab Label 1</Tab>
+        <Tab>Tab Label 2</Tab>
+        <Tab disabled>Tab Label 3</Tab>
+        <Tab>Tab Label 4 with a very long long label</Tab>
+        <Tab>Tab Label 5</Tab>
+        <Tab>Tab Label 6</Tab>
+        <Tab>Tab Label 7</Tab>
+        <Tab>Tab Label 8</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>
+          Tab Panel 1 <Button>Example button</Button>
+        </TabPanel>
+        <TabPanel>Tab Panel 2</TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+        <TabPanel>Tab Panel 6</TabPanel>
+        <TabPanel>Tab Panel 7</TabPanel>
+        <TabPanel>Tab Panel 8</TabPanel>
+      </TabPanels>
+    </Tabs>
+  </div>
 );
 
 export const Icon20Only = () => (
