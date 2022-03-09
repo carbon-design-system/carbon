@@ -12,7 +12,7 @@ import { Popover, PopoverContent } from '../../Popover';
 import mdx from './Popover.mdx';
 
 export default {
-  title: 'Experimental/unstable_Popover',
+  title: 'Components/Popover',
   component: Popover,
   subcomponents: {
     PopoverContent,
