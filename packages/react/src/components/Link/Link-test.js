@@ -5,71 +5,119 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { settings } from 'carbon-components';
 import React from 'react';
 import Link from '../Link';
-import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
-import { cleanup, render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { describe, document } from 'window-or-global';
 
 const { prefix } = settings;
 
 describe('Link', () => {
-  afterEach(cleanup);
+  it('should render an <a> element', () => {
+    render(<Link href="https://carbondesignsystem.com">test</Link>);
+    const link = screen.getByRole('link');
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveClass(`${prefix}--link`);
+  });
 
-  describe('Renders as expected', () => {
-    const link = shallow(
-      <Link href="www.google.com" className="some-class">
+  it('should inherit the href property', () => {
+    const href = 'https://carbondesignsystem.com';
+    render(
+      <Link data-testid="link" href={href}>
+        test
+      </Link>
+    );
+    expect(screen.getByTestId('link')).toHaveAttribute('href', href);
+  });
+
+  it('should include child content', () => {
+    const child = 'test';
+    render(
+      <Link data-testid="link" href="https://carbondesignsystem.com">
+        {child}
+      </Link>
+    );
+    expect(screen.getByTestId('link')).toHaveTextContent(child);
+  });
+
+  it('should support a custom class on the element with a link role', () => {
+    render(
+      <Link href="https://carbondesignsystem.com" className="custom-class">
+        test
+      </Link>
+    );
+    expect(screen.getByRole('link')).toHaveClass('custom-class');
+  });
+
+  it('should support being disabled', () => {
+    render(
+      <Link href="https://carbondesignsystem.com" disabled>
+        test
+      </Link>
+    );
+    expect(screen.getByRole('link')).toBeInTheDocument();
+    expect(screen.getByRole('link')).not.toHaveAttribute('href');
+    expect(screen.getByRole('link')).toHaveAttribute('aria-disabled', 'true');
+  });
+
+  it('should support the inline link variant', () => {
+    render(
+      <Link href="https://carbondesignsystem.com" inline>
+        test
+      </Link>
+    );
+    expect(screen.getByRole('link')).toHaveClass(`${prefix}--link--inline`);
+  });
+
+  it.each(['sm', 'md', 'lg'])('should support the %s size variant', (size) => {
+    render(
+      <Link href="https://carbondesignsystem.com" size={size}>
+        test
+      </Link>
+    );
+    expect(screen.getByRole('link')).toHaveClass(`${prefix}--link--${size}`);
+  });
+
+  it('should add rel="noopener" automatically if target="_blank"', () => {
+    render(
+      <Link href="https://carbondesignsystem.com" target="_blank">
+        test
+      </Link>
+    );
+    expect(screen.getByRole('link')).toHaveAttribute('rel', 'noopener');
+  });
+
+  it('should receive keyboard focus', () => {
+    render(
+      <Link href="/" className="some-class">
         A simple link
       </Link>
     );
 
-    it('should use the appropriate link class', () => {
-      expect(link.name()).toEqual('a');
-      expect(link.hasClass(`${prefix}--link`)).toEqual(true);
-    });
+    expect(document.body).toHaveFocus();
+    userEvent.tab();
+    expect(screen.getByText('A simple link')).toHaveFocus();
+  });
 
-    it('should inherit the href property', () => {
-      expect(link.props().href).toEqual('www.google.com');
-    });
-
-    it('should include child content', () => {
-      expect(link.text()).toEqual('A simple link');
-    });
-
-    it('should all for custom classes to be applied', () => {
-      expect(link.hasClass('some-class')).toEqual(true);
-    });
-
-    it('should support disabled link', () => {
-      link.setProps({ disabled: true });
-      expect(link.name()).toEqual('p');
-      expect(link.hasClass(`${prefix}--link--disabled`)).toEqual(true);
-    });
-
-    it('should support inline link', () => {
-      link.setProps({ inline: true });
-      expect(link.hasClass(`${prefix}--link--inline`)).toEqual(true);
-    });
-    it('should add support for different link sizes', () => {
-      link.setProps({ size: 'lg' });
-      expect(link.hasClass(`${prefix}--link--lg`)).toEqual(true);
-    });
-    it('should add rel="noopener" automatically if target="_blank"', () => {
-      link.setProps({ target: '_blank' });
-      expect(link.props().rel).toEqual('noopener');
-    });
+  it('should not receive keyboard focus when disabled', () => {
+    render(
+      <Link href="/" disabled className="some-class">
+        A simple link
+      </Link>
+    );
+    expect(document.body).toHaveFocus();
+    userEvent.tab();
+    expect(document.body).toHaveFocus();
   });
 
   describe('automated verification testing', () => {
-    it('should have no Axe violations', async () => {
+    it('should have no aXe violations', async () => {
       render(
         <Link href="/" className="some-class">
           A simple link
         </Link>
       );
-
       await expect(screen.getByText('A simple link')).toHaveNoAxeViolations();
     });
 
@@ -81,35 +129,21 @@ describe('Link', () => {
           </Link>
         </main>
       );
-
       await expect(screen.getByText('A simple link')).toHaveNoACViolations(
         'Link'
       );
     });
   });
 
-  describe('keyboard support', () => {
-    it('should receive keyboard focus', () => {
+  describe('Component API', () => {
+    it('should support a `ref` on the element with role of link', () => {
+      const ref = jest.fn();
       render(
-        <Link href="/" className="some-class">
+        <Link href="https://carbondesignsystem.com" ref={ref}>
           A simple link
         </Link>
       );
-
-      expect(document.body).toHaveFocus();
-      userEvent.tab();
-      expect(screen.getByText('A simple link')).toHaveFocus();
-    });
-
-    it('should not receive keyboard focus when disabled', () => {
-      render(
-        <Link href="/" disabled className="some-class">
-          A simple link
-        </Link>
-      );
-      expect(document.body).toHaveFocus();
-      userEvent.tab();
-      expect(document.body).toHaveFocus();
+      expect(ref).toHaveBeenCalledWith(screen.getByRole('link'));
     });
   });
 });

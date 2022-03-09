@@ -5,19 +5,31 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import { match, keys } from '../../../internal/keyboard';
+import { useFallbackId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
-import { useId } from '../../../internal/useId';
+import deprecate from '../../../prop-types/deprecate';
 
-function DefinitionTooltip({ children, definition, ...rest }) {
-  const [isOpen, setOpen] = useState(false);
+function DefinitionTooltip({
+  align = 'bottom-left',
+  className,
+  children,
+  definition,
+  defaultOpen = false,
+  id,
+  tooltipText,
+  triggerClassName,
+  ...rest
+}) {
+  const [isOpen, setOpen] = useState(defaultOpen);
   const prefix = usePrefix();
-  const id = useId();
+  const tooltipId = useFallbackId(id);
 
-  function handleKeyDown(event) {
+  function onKeyDown(event) {
     if (isOpen && match(event, keys.Escape)) {
       event.stopPropagation();
       setOpen(false);
@@ -26,7 +38,8 @@ function DefinitionTooltip({ children, definition, ...rest }) {
 
   return (
     <Popover
-      align="bottom-left"
+      align={align}
+      className={className}
       dropShadow={false}
       highContrast
       onMouseLeave={() => {
@@ -34,9 +47,9 @@ function DefinitionTooltip({ children, definition, ...rest }) {
       }}
       open={isOpen}>
       <button
-        className={`${prefix}--definition-term`}
         {...rest}
-        aria-controls={id}
+        className={cx(`${prefix}--definition-term`, triggerClassName)}
+        aria-controls={tooltipId}
         aria-expanded={isOpen}
         onBlur={() => {
           setOpen(false);
@@ -44,12 +57,14 @@ function DefinitionTooltip({ children, definition, ...rest }) {
         onClick={() => {
           setOpen(!isOpen);
         }}
-        onKeyDown={handleKeyDown}
+        onKeyDown={onKeyDown}
         type="button">
         {children}
       </button>
-      <PopoverContent className={`${prefix}--definition-tooltip`} id={id}>
-        {definition}
+      <PopoverContent
+        className={`${prefix}--definition-tooltip`}
+        id={tooltipId}>
+        {tooltipText ?? definition}
       </PopoverContent>
     </Popover>
   );
@@ -57,14 +72,59 @@ function DefinitionTooltip({ children, definition, ...rest }) {
 
 DefinitionTooltip.propTypes = {
   /**
-   * Provide the content being defined
+   * Specify how the trigger should align with the tooltip
    */
-  children: PropTypes.node,
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+  ]),
 
   /**
-   * Provide the content being defined
+   * The `children` prop will be used as the value that is being defined
    */
-  definition: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the tooltip should be open when it first renders
+   */
+  defaultOpen: PropTypes.bool,
+
+  /**
+   * The `definition` prop is used as the content inside of the tooltip that
+   * appears when a user interacts with the element rendered by the `children`
+   * prop
+   */
+  definition: PropTypes.node.isRequired,
+
+  /**
+   * Provide a value that will be assigned as the id of the tooltip
+   */
+  id: PropTypes.string,
+
+  /**
+   * [Deprecated] Please use the `definition` prop instead.
+   *
+   * Provide the text that will be displayed in the tooltip when it is rendered.
+   */
+  tooltipText: deprecate(
+    PropTypes.node,
+    'The tooltipText prop has been deprecated. Please use the `definition` prop instead.'
+  ),
+
+  /**
+   * The CSS class name of the trigger element
+   */
+  triggerClassName: PropTypes.string,
 };
 
 export { DefinitionTooltip };

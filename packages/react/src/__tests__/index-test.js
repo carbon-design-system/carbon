@@ -132,6 +132,7 @@ describe('Carbon Components React', () => {
         "SideNavMenu",
         "SideNavMenuItem",
         "SideNavSwitcher",
+        "SkeletonIcon",
         "SkeletonPlaceholder",
         "SkeletonText",
         "SkipToContent",
