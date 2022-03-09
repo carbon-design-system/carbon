@@ -9,14 +9,12 @@ import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import Button from '../../Button';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
 import { equals } from '../../../tools/array';
 import { useFallbackId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { IconButton } from '../../IconButton';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 function mapPageSizesToObject(sizes) {
   return typeof sizes[0] === 'object' && sizes[0] !== null
@@ -247,53 +245,24 @@ const Pagination = React.forwardRef(function Pagination(
           {pagesUnknown ? pageText(page) : pageRangeText(page, totalPages)}
         </span>
         <div className={`${prefix}--pagination__control-buttons`}>
-          {FeatureFlags.enabled('enable-v11-release') ? (
-            <>
-              <IconButton
-                align="top"
-                disabled={backButtonDisabled}
-                kind="ghost"
-                className={backButtonClasses}
-                label={backwardText}
-                onClick={decrementPage}>
-                <CaretLeft16 />
-              </IconButton>
-              <IconButton
-                align="top-right"
-                disabled={forwardButtonDisabled || isLastPage}
-                kind="ghost"
-                className={forwardButtonClasses}
-                label={forwardText}
-                onClick={incrementPage}>
-                <CaretRight16 />
-              </IconButton>
-            </>
-          ) : (
-            <>
-              <Button
-                kind="ghost"
-                className={backButtonClasses}
-                hasIconOnly
-                renderIcon={CaretLeft16}
-                iconDescription={backwardText}
-                tooltipAlignment="center"
-                tooltipPosition="top"
-                onClick={decrementPage}
-                disabled={backButtonDisabled}
-              />
-              <Button
-                kind="ghost"
-                className={forwardButtonClasses}
-                hasIconOnly
-                renderIcon={CaretRight16}
-                iconDescription={forwardText}
-                tooltipAlignment="end"
-                tooltipPosition="top"
-                onClick={incrementPage}
-                disabled={forwardButtonDisabled || isLastPage}
-              />
-            </>
-          )}
+          <IconButton
+            align="top"
+            disabled={backButtonDisabled}
+            kind="ghost"
+            className={backButtonClasses}
+            label={backwardText}
+            onClick={decrementPage}>
+            <CaretLeft16 />
+          </IconButton>
+          <IconButton
+            align="top-right"
+            disabled={forwardButtonDisabled || isLastPage}
+            kind="ghost"
+            className={forwardButtonClasses}
+            label={forwardText}
+            onClick={incrementPage}>
+            <CaretRight16 />
+          </IconButton>
         </div>
       </div>
     </div>
