@@ -2792,19 +2792,6 @@ Map {
       "role": Object {
         "type": "string",
       },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "field",
-            "small",
-            "sm",
-            "md",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -3543,6 +3530,7 @@ Map {
     "render": [Function],
   },
   "Link" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3586,6 +3574,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "ListItem" => Object {
     "propTypes": Object {
@@ -4532,6 +4521,7 @@ Map {
       "ariaLabel": "open and close list of options",
       "direction": "bottom",
       "flipped": false,
+      "focusTrap": true,
       "iconDescription": "open and close list of options",
       "light": false,
       "menuOffset": [Function],
@@ -4567,6 +4557,9 @@ Map {
         "type": "oneOf",
       },
       "flipped": Object {
+        "type": "bool",
+      },
+      "focusTrap": Object {
         "type": "bool",
       },
       "iconClass": Object {
@@ -5920,6 +5913,16 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "SkeletonIcon" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
   },
   "SkeletonPlaceholder" => Object {
     "propTypes": Object {
@@ -7991,6 +7994,17 @@ Map {
       },
     },
   },
+  "unstable_DefinitionTooltip" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "definition": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+    },
+  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {
@@ -8752,8 +8766,17 @@ Map {
         ],
         "type": "oneOf",
       },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
       "light": Object {
         "type": "bool",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollDebounceWait": Object {
+        "type": "number",
       },
       "scrollIntoView": Object {
         "type": "bool",

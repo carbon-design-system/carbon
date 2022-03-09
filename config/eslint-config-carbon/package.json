@@ -1,7 +1,7 @@
 {
   "name": "eslint-config-carbon",
   "description": "ESLint configuration for Carbon",
-  "version": "2.11.0-rc.0",
+  "version": "2.11.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -39,7 +39,7 @@
     "eslint-plugin-cypress": "^2.11.3",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-jest": "^26.0.0",
-    "eslint-plugin-jsdoc": "^36.0.3",
+    "eslint-plugin-jsdoc": "^37.0.0",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",

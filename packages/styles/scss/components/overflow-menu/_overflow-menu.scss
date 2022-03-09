@@ -52,8 +52,6 @@
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu--xl,
   .#{$prefix}--overflow-menu--lg {
     width: rem(48px);
     height: rem(48px);
@@ -111,6 +109,10 @@
       content: '';
       transition: background-color $duration-fast-02
         motion(entrance, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 
@@ -170,8 +172,6 @@
     }
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu-options--xl.#{$prefix}--overflow-menu-options,
   .#{$prefix}--overflow-menu-options--lg.#{$prefix}--overflow-menu-options {
     &[data-floating-menu-direction='bottom']::after,
     &[data-floating-menu-direction='top']::after {
@@ -221,9 +221,6 @@
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu-options--xl
-    .#{$prefix}--overflow-menu-options__option,
   .#{$prefix}--overflow-menu-options--lg
     .#{$prefix}--overflow-menu-options__option {
     height: rem(48px);

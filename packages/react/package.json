@@ -1,7 +1,7 @@
 {
   "name": "carbon-components-react",
   "description": "The Carbon Design System is IBM’s open-source design system for products and experiences.",
-  "version": "7.54.0-rc.0",
+  "version": "7.54.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -47,8 +47,8 @@
   "dependencies": {
     "@babel/runtime": "^7.16.7",
     "@carbon/feature-flags": "^0.7.0",
-    "@carbon/icons-react": "^10.47.0-rc.0",
-    "@carbon/layout": "^10.37.0-rc.0",
+    "@carbon/icons-react": "^10.47.0",
+    "@carbon/layout": "^10.37.0",
     "@carbon/telemetry": "0.0.0-alpha.6",
     "classnames": "2.3.1",
     "copy-to-clipboard": "^3.3.1",
@@ -63,8 +63,7 @@
     "prop-types": "^15.7.2",
     "react-is": "^17.0.2",
     "use-resize-observer": "^6.0.0",
-    "wicg-inert": "^3.1.1",
-    "window-or-global": "^1.0.1"
+    "wicg-inert": "^3.1.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.16.7",
@@ -87,7 +86,7 @@
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^21.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
-    "@rollup/plugin-replace": "^3.0.0",
+    "@rollup/plugin-replace": "^4.0.0",
     "@storybook/addon-actions": "^6.4.9",
     "@storybook/addon-docs": "^6.4.9",
     "@storybook/addon-knobs": "^6.4.0",
@@ -107,7 +106,7 @@
     "babel-plugin-react-docgen": "^4.2.1",
     "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "browserslist-config-carbon": "^10.6.1",
-    "carbon-components": "^10.54.0-rc.0",
+    "carbon-components": "^10.54.0",
     "carbon-icons": "^7.0.5",
     "chalk": "^4.1.1",
     "cli-table": "^0.3.0",

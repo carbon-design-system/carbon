@@ -1,18 +1,19 @@
 {
-  "extends": [   
+  "extends": [
     // https://docs.renovatebot.com/presets-config/#configjs-lib
     "config:js-lib",
 
     // https://docs.renovatebot.com/presets-default/#maintainlockfilesweekly
     ":maintainLockFilesWeekly",
-    
+
     // https://docs.renovatebot.com/presets-default/#preservesemverranges
     ":preserveSemverRanges",
-    
+
     // https://docs.renovatebot.com/presets-npm/#npmunpublishsafe
     "npm:unpublishSafe",
-    
+
     // https://docs.renovatebot.com/presets-schedule/#scheduledaily
-    "schedule:daily"
-  ]
+    "schedule:earlyMondays",
+  ],
+  "rebaseWhen": "never",
 }
