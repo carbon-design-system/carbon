@@ -170,7 +170,7 @@ TimePicker.propTypes = {
   labelText: PropTypes.node,
 
   /**
-   * The `light` prop for `TimePicker` has been deprecated. It will be removed in the next major release. Use the `Layer` component instead.
+   * The `light` prop for `TimePicker` has been deprecated. It will be removed in v12. Use the `Layer` component instead.
    */
   light: deprecate(
     PropTypes.bool,
