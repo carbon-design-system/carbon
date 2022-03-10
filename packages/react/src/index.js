@@ -68,6 +68,7 @@ export {
   Grid,
   Row,
   Column,
+  ColumnHang as unstable_ColumnHang,
   FlexGrid as unstable_FlexGrid,
 } from './components/Grid';
 export Icon from './components/Icon';

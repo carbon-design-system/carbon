@@ -5,7 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'scss/modules/config';
-@forward 'scss/modules/breakpoint';
-@forward 'scss/modules/css-grid';
-@forward 'scss/modules/flex-grid';
+@forward 'config';
+@use '@carbon/grid';
+@use '../config';
+
+@if config.$use-flexbox-grid == true {
+  @include grid.flex-grid();
+} @else {
+  @include grid.css-grid();
+}
