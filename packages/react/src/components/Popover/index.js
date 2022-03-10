@@ -19,7 +19,6 @@ const Popover = React.forwardRef(function Popover(props, ref) {
     children,
     dropShadow = true,
     highContrast = false,
-    light = false,
     open,
     ...rest
   } = props;
@@ -29,7 +28,6 @@ const Popover = React.forwardRef(function Popover(props, ref) {
     [`${prefix}--popover--caret`]: caret,
     [`${prefix}--popover--drop-shadow`]: dropShadow,
     [`${prefix}--popover--high-contrast`]: highContrast,
-    [`${prefix}--popover--light`]: light,
     [`${prefix}--popover--open`]: open,
     [`${prefix}--popover--${align}`]: true,
     [customClassName]: !!customClassName,
@@ -41,6 +39,12 @@ const Popover = React.forwardRef(function Popover(props, ref) {
     </BaseComponent>
   );
 });
+
+// Note: this displayName is temporarily set so that Storybook ArgTable
+// correctly displays the name of this component
+if (__DEV__) {
+  Popover.displayName = 'Popover';
+}
 
 Popover.propTypes = {
   /**
@@ -95,11 +99,6 @@ Popover.propTypes = {
    * Render the component using the high-contrast variant
    */
   highContrast: PropTypes.bool,
-
-  /**
-   * Render the component using the light variant
-   */
-  light: PropTypes.bool,
 
   /**
    * Specify whether the component is currently open or closed
