@@ -105,10 +105,25 @@
     color: $link-secondary;
   }
 
+  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link--disabled,
+  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link--disabled {
+    color: $text-disabled;
+  }
+
   .#{$prefix}--data-table th,
   .#{$prefix}--data-table td {
     text-align: left;
     vertical-align: middle;
+  }
+
+  .#{$prefix}--data-table th[align='right'],
+  .#{$prefix}--data-table td[align='right'] {
+    text-align: right;
+  }
+
+  .#{$prefix}--data-table th[align='center'],
+  .#{$prefix}--data-table td[align='center'] {
+    text-align: center;
   }
 
   .#{$prefix}--data-table th {
@@ -401,10 +416,6 @@
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-radio,
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-radio {
     padding-top: $spacing-05;
-  }
-
-  .#{$prefix}--date-table tbody th.#{$prefix}--table-column-checkbox:hover {
-    background: $data-table-column-hover;
   }
 
   //----------------------------------------------------------------------------
@@ -723,6 +734,10 @@
   //----------------------------------------------------------------------------
   .#{$prefix}--data-table--static {
     width: auto;
+  }
+
+  .#{$prefix}--data-table-container--static {
+    width: fit-content;
   }
 
   // -------------
