@@ -452,7 +452,6 @@ export function ExpandableTile({
   }
 
   function handleClick(evt) {
-    console.log('yooo0oo');
     evt.persist();
     setIsExpanded(!isExpanded);
     setMaxHeight();
