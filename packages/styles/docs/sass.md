@@ -122,26 +122,43 @@ to `false`:
 
 ## Grid
 
-| Import                             | Filepath          |
-| :--------------------------------- | :---------------- |
-| `@use '@carbon/styles/scss/grid';` | `scss/_grid.scss` |
+| Import                                     | Filepath                  |
+| :----------------------------------------- | :------------------------ |
+| `@use '@carbon/styles/scss/grid';`         | `scss/grid/_index.scss`   |
+| `@use '@carbon/styles/scss/grid/flexbox';` | `scss/grid/_flexbox.scss` |
 
 ### Using the grid
 
 This package `@forward`s the styles defined in the
 [`@carbon/grid`](https://github.com/carbon-design-system/carbon/tree/main/packages/grid)
-package. The full source for Carbon grid styles can be found there alongside
-more comprehensive documentation on package contents, configuration, and usage.
+package. For full documentation, visit the
+[Sass Documentation](../../grid/docs/sass.md) for the package.
 
 To use the grid via `@carbon/styles`, it must be brought in directly or the grid
 specific style sheet must be imported:
 
 ```scss
-/* All the grid styles are included through this central entrypoint */
+// All the grid styles are included through this central entrypoint
 @use '@carbon/styles';
 
-/* Alternatively, the grid styles can be brought in on their own */
+// Alternatively, the grid styles can be brought in on their own
 @use '@carbon/styles/scss/grid';
+```
+
+By default, the emitted grid will be a CSS Grid based implementation. If you
+prefer to use flexbox version, you can configure the package by writing the
+following:
+
+```scss
+@use '@carbon/styles' with (
+  $use-flexbox-grid: true,
+);
+```
+
+Or you can import the flexbox grid directly:
+
+```scss
+@use '@carbon/styles/scss/grid/flexbox';
 ```
 
 ### Classes provided
@@ -170,22 +187,6 @@ prefix:
   <div class="cds--col-span-4"></div>
   <div class="cds--col-span-4"></div>
 </div>
-```
-
-### Grid Mixins
-
-In the event that you'd like to configure your own classes for portions of the
-grid, there are a few mixins that can be used.
-
-- `css-grid()` provides the base grid definition
-- `subgrid()` provides the subgrid definition
-- `carbon--aspect-ratio($aspect-ratios: $carbon--aspect-ratios)` generates the
-  CSS classname utilities for the aspect ratios
-
-```scss
-.custom-grid-class {
-  @include css-grid();
-}
 ```
 
 ## Motion

@@ -13,23 +13,41 @@ import { GridSettings, useGridSettings } from './GridContext';
 
 function CSSGrid({
   as: BaseComponent = 'div',
+  children,
+  className: customClassName,
   condensed = false,
   fullWidth = false,
-  columns = 16,
-  className: containerClassName,
-  children,
+  narrow = false,
   ...rest
 }) {
   const prefix = usePrefix();
   const { subgrid } = useGridSettings();
-  const className = cx(containerClassName, {
-    [`${prefix}--css-grid`]: !subgrid,
-    [`${prefix}--css-grid--${columns}`]: !subgrid && columns !== 16,
-    [`${prefix}--css-grid--condensed`]: condensed,
+  let mode = 'wide';
+  if (narrow) {
+    mode = 'narrow';
+  } else if (condensed) {
+    mode = 'condensed';
+  }
+
+  if (subgrid) {
+    return (
+      <GridSettings mode="css-grid" subgrid>
+        <Subgrid
+          as={BaseComponent}
+          className={customClassName}
+          mode={mode}
+          {...rest}>
+          {children}
+        </Subgrid>
+      </GridSettings>
+    );
+  }
+
+  const className = cx(customClassName, {
+    [`${prefix}--css-grid`]: true,
+    [`${prefix}--css-grid--condensed`]: mode === 'condensed',
+    [`${prefix}--css-grid--narrow`]: mode === 'narrow',
     [`${prefix}--css-grid--full-width`]: fullWidth,
-    [`${prefix}--subgrid`]: subgrid,
-    [`${prefix}--col-span-${columns}`]:
-      (subgrid && columns !== 16) || columns !== 16,
   });
 
   return (
@@ -58,11 +76,6 @@ CSSGrid.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify how many columns wide the Grid should span
-   */
-  columns: PropTypes.number,
-
-  /**
    * Collapse the gutter to 1px. Useful for fluid layouts.
    * Rows have 1px of margin between them to match gutter.
    */
@@ -72,6 +85,55 @@ CSSGrid.propTypes = {
    * Remove the default max width that the grid has set
    */
   fullWidth: PropTypes.bool,
+
+  /**
+   * Container hangs 16px into the gutter. Useful for
+   * typographic alignment with and without containers.
+   */
+  narrow: PropTypes.bool,
+};
+
+function Subgrid({
+  as: BaseComponent = 'div',
+  className: customClassName,
+  children,
+  mode,
+  ...rest
+}) {
+  const prefix = usePrefix();
+  const className = cx(customClassName, {
+    [`${prefix}--subgrid`]: true,
+    [`${prefix}--subgrid--condensed`]: mode === 'condensed',
+    [`${prefix}--subgrid--narrow`]: mode === 'narrow',
+    [`${prefix}--subgrid--wide`]: mode === 'wide',
+  });
+  return (
+    <BaseComponent {...rest} className={className}>
+      {children}
+    </BaseComponent>
+  );
+}
+
+Subgrid.propTypes = {
+  /**
+   * Provide a custom element to render instead of the default <div>
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * Pass in content that will be rendered within the `Subgrid`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify a custom className to be applied to the `Subgrid`
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify the grid mode for the subgrid
+   */
+  mode: PropTypes.oneOf(['wide', 'narrow', 'condensed']),
 };
 
 export { CSSGrid };
