@@ -99,19 +99,15 @@
     border: 1px solid transparent;
   }
 
-  .#{$prefix}--tile__checkmark,
-  .#{$prefix}--tile__chevron {
-    position: absolute;
-    border: none;
-    background: transparent;
-    //   transition: $duration-fast-02 motion(standard, productive);
-  }
-
   .#{$prefix}--tile__checkmark {
+    position: absolute;
     top: 1rem;
     right: 1rem;
     height: 1rem;
+    border: none;
+    background: transparent;
     opacity: 0;
+    transition: $duration-fast-02 motion(standard, productive);
 
     svg {
       border-radius: 50%;
