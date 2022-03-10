@@ -32,6 +32,11 @@ const stories = glob
   .filter((match) => {
     const filepath = path.resolve(__dirname, match);
     const basename = path.basename(match, '.js');
+    const denylist = new Set(['TooltipDefinition-story']);
+
+    if (denylist.has(basename)) {
+      return false;
+    }
 
     if (basename.endsWith('-story')) {
       const component = basename.replace(/-story$/, '');
