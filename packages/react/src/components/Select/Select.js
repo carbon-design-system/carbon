@@ -16,6 +16,7 @@ import {
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const Select = React.forwardRef(function Select(
   {
@@ -236,10 +237,11 @@ Select.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * Specify the size of the Select Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-   * TODO V11: remove `xl` (replaced with lg)
+   * Specify the size of the Select Input.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg'])
+    : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 
   /**
    * Specify whether the control is currently in warning state
