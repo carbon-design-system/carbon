@@ -93,13 +93,11 @@
     color: $text-primary;
   }
 
-  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link,
-  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link {
+  .#{$prefix}--data-table tr:hover .#{$prefix}--link {
     color: $link-secondary;
   }
 
-  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link--disabled,
-  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link--disabled {
+  .#{$prefix}--data-table tr:hover .#{$prefix}--link--disabled {
     color: $disabled-02;
   }
 
@@ -242,7 +240,8 @@
     }
   }
 
-  .#{$prefix}--data-table--selected .#{$prefix}--link {
+  .#{$prefix}--data-table--selected
+    .#{$prefix}--link:not(.#{$prefix}--link--disabled) {
     color: $link-secondary;
   }
 
@@ -413,7 +412,8 @@
     + .#{$prefix}--radio-button__label,
   tr.#{$prefix}--data-table--selected:hover
     .#{$prefix}--checkbox[disabled]
-    + .#{$prefix}--checkbox-label {
+    + .#{$prefix}--checkbox-label,
+  tr.#{$prefix}--data-table--selected:hover .#{$prefix}--link--disabled {
     color: $disabled-03;
   }
 
