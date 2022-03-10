@@ -29,6 +29,7 @@ installed:
     version manager for Node.
 - Git
 - [Yarn](https://yarnpkg.com/en/docs/install)
+- [WSL](../docs/guides/setup/windows.md) (Windows Only)
 
 You'll also need a code editor to make changes to Carbon. There are many to
 choose from but some popular options are
