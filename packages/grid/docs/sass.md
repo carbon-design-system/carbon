@@ -25,7 +25,7 @@ following:
 </div>
 ```
 
-There is also support for responsive classes that are including with the
+There is also support for responsive classes that are included with the
 `css-grid` mixin. These responsive classes allow you to do the following for
 each breakpoint:
 

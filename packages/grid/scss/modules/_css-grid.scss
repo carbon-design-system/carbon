@@ -464,7 +464,7 @@
   @return $value;
 }
 
-/// Return the largest breakpoint value from a set of breakpoints
+/// Return the largest column count from a set of breakpoints
 @function get-grid-columns($breakpoints) {
   @return get-column-count($breakpoints, largest-breakpoint-name($breakpoints));
 }
