@@ -8570,9 +8570,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^3.1.13":
-  version: 3.1.13
-  resolution: "accessibility-checker@npm:3.1.13"
+"accessibility-checker@npm:^3.1.18":
+  version: 3.1.18
+  resolution: "accessibility-checker@npm:3.1.18"
   dependencies:
     chromedriver: "*"
     deep-diff: ^0.3.4
@@ -8581,7 +8581,7 @@ __metadata:
     request: ^2.88.2
   bin:
     achecker: bin/achecker.js
-  checksum: c31de81e4b0e6da0b31596f9ef2e5abefdb01f6b17193b7153dafe30a0d587b3e9c2ed24989a4dd8a65d20d5e8f704685a58107be7c35e55e2ac2b381d3c41c9
+  checksum: e859f3ee4de316e8c1902bb702558e2c86a3490ed8da6a12fd92752365288295cf413688dbfca6dfb5058eac89115c7572cdd07795ecf59f80dcbbe3375edc1c
   languageName: node
   linkType: hard
 
@@ -22677,7 +22677,7 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@wojtekmaj/enzyme-adapter-react-17": ^0.6.5
-    accessibility-checker: ^3.1.13
+    accessibility-checker: ^3.1.18
     axe-core: ^4.3.5
     babel-jest: ^27.4.6
     chalk: ^4.1.1
