@@ -96,10 +96,11 @@ export default class FileUploader extends React.Component {
 
     /**
      * Specify the size of the FileUploaderButton, from a list of available
-     * sizes. For `default` buttons, this prop can remain unspecified.
-     * V11: `default`, `field`, and `small` will be removed
+     * sizes.
      */
-    size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+    size: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.oneOf(['sm', 'md', 'lg'])
+      : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
   };
 
   static contextType = PrefixContext;
@@ -181,7 +182,7 @@ export default class FileUploader extends React.Component {
       multiple,
       accept,
       name,
-      size,
+      size = 'md',
       onDelete, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
