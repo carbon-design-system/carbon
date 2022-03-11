@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 5
+  version: 6
   cacheKey: 8
 
 "@babel/code-frame@npm:^7.0.0, @babel/code-frame@npm:^7.16.0":
@@ -1220,6 +1220,15 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: 44b07053729db7f44d28343eed32247ed56dc4a6ec6dff2b743141ecd6b861406bbc1c20bf9d4f143ea7dd08add5dc8c290582756539bc03a8db605050ce2fb4
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.5.0":
+  version: 8.7.0
+  resolution: "acorn@npm:8.7.0"
+  bin:
+    acorn: bin/acorn
+  checksum: e0f79409d68923fbf1aa6d4166f3eedc47955320d25c89a20cc822e6ba7c48c5963d5bc657bc242d68f7a4ac9faf96eef033e8f73656da6c640d4219935fdfd0
   languageName: node
   linkType: hard
 

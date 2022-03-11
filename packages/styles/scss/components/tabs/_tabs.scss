@@ -40,69 +40,153 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     @include reset;
     @include type-style('body-compact-01');
 
+    position: relative;
     display: flex;
     width: 100%;
     height: auto;
     min-height: rem(40px);
+    max-height: 4rem;
     color: $text-primary;
 
     &.#{$prefix}--tabs--contained {
       min-height: rem(48px);
     }
 
-    .#{$prefix}--tabs__nav {
+    .#{$prefix}--tab--list {
       display: flex;
-      overflow: auto hidden;
-      width: auto;
-      max-width: 100%;
-      flex-direction: row;
-      padding: 0;
-      margin: 0;
-      list-style: none;
-      outline: 0;
-      // hide scroll bars
+      width: 100%;
+      overflow-x: auto;
+      scroll-behavior: smooth;
       scrollbar-width: none;
-      transition: max-height $duration-fast-01 motion(standard, productive);
+      will-change: scroll-position;
 
       &::-webkit-scrollbar {
         display: none;
       }
     }
 
+    .#{$prefix}--tabs__nav {
+      display: flex;
+    }
+
     //-----------------------------
     // Overflow Nav Buttons
     //-----------------------------
-    .#{$prefix}--tabs__overflow-indicator--left,
-    .#{$prefix}--tabs__overflow-indicator--right {
+    .#{$prefix}--tab--overflow-nav-button {
+      @include button-reset.reset;
+
+      display: flex;
+      width: $spacing-08;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+      background-color: $background;
+
+      &:focus {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button--hidden {
+      display: none;
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tab--overflow-nav-button {
+      width: $spacing-09;
+      margin: 0;
+      background-color: $layer-accent;
+    }
+
+    .#{$prefix}--tab--overflow-nav-button svg {
+      fill: $icon-primary;
+    }
+
+    .#{$prefix}--tab--overflow-nav-button--next {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+
+    .#{$prefix}--tab--overflow-nav-button--next::before {
+      position: absolute;
       z-index: 1;
+      left: -$spacing-03;
       width: $spacing-03;
-      flex: 1 0 auto;
+      height: 100%;
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $background
+      );
+      content: '';
     }
 
-    .#{$prefix}--tabs__overflow-indicator--left {
-      margin-right: -$spacing-03;
-      background-image: linear-gradient(to left, transparent, $background);
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tab--overflow-nav-button--next::before {
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $layer-accent
+      );
     }
 
-    .#{$prefix}--tabs__overflow-indicator--right {
-      margin-left: -$spacing-03;
-      background-image: linear-gradient(to right, transparent, $background);
+    .#{$prefix}--tab--overflow-nav-button--previous {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    .#{$prefix}--tab--overflow-nav-button--previous::before {
+      position: absolute;
+      z-index: 1;
+      right: -$spacing-03;
+      width: $spacing-03;
+      height: 100%;
+      background: linear-gradient(to left, rgba(255, 255, 255, 0), $background);
+      content: '';
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tab--overflow-nav-button--previous::before {
+      background-image: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0),
+        $layer-accent
+      );
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
-      background-image: linear-gradient(to left, transparent, $layer);
+      background-image: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0),
+        $layer
+      );
     }
 
     .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
-      background-image: linear-gradient(to right, transparent, $layer);
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $layer
+      );
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--left {
-      background-image: linear-gradient(to left, transparent, $layer-accent);
+      background-image: linear-gradient(
+        to left,
+        rgba(255, 255, 255, 0),
+        $layer-accent
+      );
     }
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--right {
-      background-image: linear-gradient(to right, transparent, $layer-accent);
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        $layer-accent
+      );
     }
 
     // Safari-only media query
@@ -146,34 +230,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       }
     }
 
-    .#{$prefix}--tab--overflow-nav-button {
-      @include button-reset.reset;
-
-      display: flex;
-      width: $spacing-08;
-      flex-shrink: 0;
-      align-items: center;
-      justify-content: center;
-
-      &:focus {
-        @include focus-outline('outline');
-      }
-    }
-
-    .#{$prefix}--tab--overflow-nav-button--hidden {
-      display: none;
-    }
-
-    &.#{$prefix}--tabs--contained .#{$prefix}--tab--overflow-nav-button {
-      width: $spacing-09;
-      margin: 0;
-      background-color: $layer-accent;
-    }
-
-    .#{$prefix}--tab--overflow-nav-button svg {
-      fill: $icon-primary;
-    }
-
     //-----------------------------
     // Item
     //-----------------------------
@@ -181,6 +237,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       @include reset;
 
       display: flex;
+      flex: 1 0 auto;
       padding: 0;
       cursor: pointer;
       transition: background-color $duration-fast-01
