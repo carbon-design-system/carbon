@@ -30,7 +30,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     onChange = () => {},
     pattern = '\\d{1,2}\\/\\d{1,2}\\/\\d{4}',
     placeholder,
-    size,
+    size = 'md',
     type = 'text',
     warn,
     warnText,
@@ -214,10 +214,9 @@ DatePickerInput.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Specify the size of the Date Picker Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-   * TODO V11: remove `xl` (replaced with lg)
+   * Specify the size of the Date Picker Input. Currently supports either `sm`, `md`, or `lg` as an option.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify the type of the `<input>`
