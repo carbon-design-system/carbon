@@ -192,16 +192,27 @@ function renderTree({ nodes, expanded, withIcons = false }) {
 export default {
   title: 'Experimental/unstable_TreeView',
   component: TreeView,
+  argTypes: {
+    size: {
+      options: ['xs', 'sm'],
+      control: { type: 'select' },
+    },
+  },
+  args: {
+    size: 'sm',
+  },
 };
 
-export const Default = () => (
+export const Default = (args) => (
   <>
     <InlineNotification
       kind="info"
       title="Experimental component"
       subtitle="An accessibility review of this component is in progress"
     />
-    <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
+    <TreeView {...props()} {...args}>
+      {renderTree({ nodes })}
+    </TreeView>
   </>
 );
 
@@ -212,20 +223,22 @@ Default.parameters = {
   },
 };
 
-export const WithIcons = () => (
+export const WithIcons = (args) => (
   <>
     <InlineNotification
       kind="info"
       title="Experimental component"
       subtitle="An accessibility review of this component is in progress"
     />
-    <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
+    <TreeView {...props()} {...args}>
+      {renderTree({ nodes, withIcons: true })}
+    </TreeView>
   </>
 );
 
 WithIcons.storyName = 'with icons';
 
-export const WithControlledExpansion = () => {
+export const WithControlledExpansion = (args) => {
   const [expanded, setExpanded] = useState(undefined);
   return (
     <>
@@ -242,7 +255,9 @@ export const WithControlledExpansion = () => {
           collapse all
         </button>
       </div>
-      <TreeView {...props()}>{renderTree({ nodes, expanded })}</TreeView>
+      <TreeView {...props()} {...args}>
+        {renderTree({ nodes, expanded })}
+      </TreeView>
     </>
   );
 };
