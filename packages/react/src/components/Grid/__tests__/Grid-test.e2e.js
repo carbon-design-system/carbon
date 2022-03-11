@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/globals/scss/vendor/@carbon/grid/scss/modules/_css-grid.scss';
 import './Grid-test.e2e.scss';
 
 import React from 'react';
