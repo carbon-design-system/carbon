@@ -200,6 +200,7 @@ describe('Carbon Components React', () => {
         "TooltipDefinition",
         "TooltipIcon",
         "UnorderedList",
+        "unstable_ColumnHang",
         "unstable_DefinitionTooltip",
         "unstable_FeatureFlags",
         "unstable_FlexGrid",
