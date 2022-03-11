@@ -32,6 +32,7 @@ describe('Carbon Components React', () => {
         "CodeSnippet",
         "CodeSnippetSkeleton",
         "Column",
+        "ColumnHang",
         "ComboBox",
         "ComposedModal",
         "Content",
