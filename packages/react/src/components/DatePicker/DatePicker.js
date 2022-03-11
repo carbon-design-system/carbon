@@ -614,7 +614,7 @@ export default class DatePicker extends Component {
             onChange, // eslint-disable-line
             locale, // eslint-disable-line
             value, // eslint-disable-line
-            onOpen,
+            onOpen, // eslint-disable-line
             ...other
           } = this.props;
 
@@ -679,7 +679,7 @@ export default class DatePicker extends Component {
             }
           });
           return (
-            <div onOpen={onOpen} className={wrapperClasses}>
+            <div className={wrapperClasses}>
               <div className={datePickerClasses} {...other}>
                 {childrenWithProps}
               </div>
