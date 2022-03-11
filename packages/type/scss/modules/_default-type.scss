@@ -1,0 +1,55 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'styles' as *;
+
+/// Include default type styles
+/// @access public
+/// @group @carbon/type
+@mixin default-type {
+  h1 {
+    @include type-style('productive-heading-06');
+  }
+
+  h2 {
+    @include type-style('productive-heading-05');
+  }
+
+  h3 {
+    @include type-style('productive-heading-04');
+  }
+
+  h4 {
+    @include type-style('productive-heading-03');
+  }
+
+  h5 {
+    @include type-style('productive-heading-02');
+  }
+
+  h6 {
+    @include type-style('productive-heading-01');
+  }
+
+  p {
+    @include type-style('body-long-02');
+  }
+
+  a {
+    @if meta.global-variable-exists('carbon--theme') and
+      map.has-key($carbon--theme, 'link-01')
+    {
+      color: map.get($carbon--theme, 'link-01');
+    } @else {
+      color: #0062fe;
+    }
+  }
+
+  em {
+    font-style: italic;
+  }
+}

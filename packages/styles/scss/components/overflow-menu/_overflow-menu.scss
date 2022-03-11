@@ -52,8 +52,6 @@
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu--xl,
   .#{$prefix}--overflow-menu--lg {
     width: rem(48px);
     height: rem(48px);
@@ -80,7 +78,7 @@
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $field-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--overflow-menu__icon {
@@ -123,15 +121,15 @@
   }
 
   .#{$prefix}--overflow-menu-options--light {
-    background-color: $field-02;
+    background-color: $layer;
 
     &::after {
-      background-color: $field-02;
+      background-color: $layer;
     }
   }
 
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
-    background-color: $field-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(.#{$prefix}--breadcrumb-menu-options)::after {
@@ -174,8 +172,6 @@
     }
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu-options--xl.#{$prefix}--overflow-menu-options,
   .#{$prefix}--overflow-menu-options--lg.#{$prefix}--overflow-menu-options {
     &[data-floating-menu-direction='bottom']::after,
     &[data-floating-menu-direction='top']::after {
@@ -225,9 +221,6 @@
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu-options--xl
-    .#{$prefix}--overflow-menu-options__option,
   .#{$prefix}--overflow-menu-options--lg
     .#{$prefix}--overflow-menu-options__option {
     height: rem(48px);
@@ -238,7 +231,7 @@
   }
 
   .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
-    border-top: 1px solid $border-subtle-02;
+    border-top: 1px solid $border-subtle;
   }
 
   a.#{$prefix}--overflow-menu-options__btn::before {
