@@ -229,7 +229,7 @@ const ComboBox = React.forwardRef((props, ref) => {
       onInputValueChange={handleOnInputValueChange}
       onStateChange={(...args) => {
         handleOnStateChange(...args);
-        downshiftProps?.onStateChange(...args);
+        downshiftProps.onStateChange?.(...args);
       }}
       inputValue={inputValue || ''}
       itemToString={itemToString}
