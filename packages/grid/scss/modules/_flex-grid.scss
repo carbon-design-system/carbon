@@ -9,6 +9,7 @@
 // and often derived from, bootstrap:
 // https://github.com/twbs/bootstrap/blob/v4-dev/scss/mixins/_grid.scss
 
+@use 'sass:list';
 @use 'sass:meta';
 @use 'sass:math';
 @use 'sass:map';
@@ -24,12 +25,12 @@
 /// for setting width and default gutters when a column's breakpoint has not been
 /// hit yet.
 /// @param {Number} $gutter [$grid-gutter] - The gutter for the grid system
-/// @param {Number} $collapsed-gutter [$grid-gutter--condensed] - The condensed mode gutter
+/// @param {Number} $collapsed-gutter [$grid-gutter-condensed] - The condensed mode gutter
 /// @access private
 /// @group @carbon/grid
 @mixin -make-col-ready(
   $gutter: $grid-gutter,
-  $condensed-gutter: $grid-gutter--condensed
+  $condensed-gutter: $grid-gutter-condensed
 ) {
   // Prevent columns from becoming too narrow when at smaller grid tiers by
   // always setting `width: 100%;`. This works because we use `flex` values
@@ -254,7 +255,7 @@
   margin-right: auto;
   margin-left: auto;
 
-  @include -set-largest-breakpoint();
+  @include -set-largest-breakpoint($breakpoints);
 
   @each $name, $value in $breakpoints {
     $prev-breakpoint: map.get($breakpoints, breakpoint-prev($name));
@@ -282,7 +283,7 @@
 /// @access private
 /// @group @carbon/grid
 @mixin -set-largest-breakpoint($breakpoints: $grid-breakpoints) {
-  $largest-breakpoint: last-map-item($breakpoints);
+  $largest-breakpoint: -last-map-item($breakpoints);
 
   max-width: map.get($largest-breakpoint, 'width');
 }
@@ -299,16 +300,37 @@
   }
 }
 
+/// Pass in a map, and get the last one in the list back
+/// @access public
+/// @param {Map} $map - Map
+/// @return {*} Desired value
+/// @group @carbon/layout
+@function -last-map-item($map) {
+  $total-length: list.length($map);
+  @return map-get($map, -key-by-index($map, $total-length));
+}
+
+/// Provide a map and index, and get back the relevant key value
+/// @access public
+/// @param {Map} $map - Map
+/// @param {Integer} $index - Key chain
+/// @return {String} Desired value
+/// @group @carbon/layout
+@function -key-by-index($map, $index) {
+  $keys: map.keys($map);
+  @return nth($keys, $index);
+}
+
 /// Generate the CSS for a grid for the given breakpoints and gutters
 /// @param {Map} $breakpoints [$grid-breakpoints] - The default breakpoints
 /// @param {Number} $grid-gutter [$grid-gutter] - The default gutters
-/// @param {Number} $condensed-gutter [$grid-gutter--condensed] - The condensed mode gutter
+/// @param {Number} $condensed-gutter [$grid-gutter-condensed] - The condensed mode gutter
 /// @access public
 /// @group @carbon/grid
 @mixin flex-grid(
   $breakpoints: $grid-breakpoints,
   $grid-gutter: $grid-gutter,
-  $condensed-gutter: $grid-gutter--condensed
+  $condensed-gutter: $grid-gutter-condensed
 ) {
   .#{$prefix}--grid {
     @include -make-container($breakpoints);
@@ -338,37 +360,4 @@
   @include -make-grid-columns($breakpoints, $grid-gutter);
   @include -no-gutter();
   @include -hang($grid-gutter);
-}
-
-@if $flex-grid-columns == 12 {
-  $flex-12-column-grid: map.merge(
-    $grid-breakpoints,
-    (
-      lg:
-        map.merge(
-          map.get($grid-breakpoints, lg),
-          (
-            columns: 12,
-          )
-        ),
-      xlg:
-        map.merge(
-          map.get($grid-breakpoints, xlg),
-          (
-            columns: 12,
-          )
-        ),
-      max:
-        map.merge(
-          map.get($grid-breakpoints, max),
-          (
-            columns: 12,
-          )
-        ),
-    )
-  );
-
-  @include flex-grid($breakpoints: $flex-12-column-grid);
-} @else {
-  @include flex-grid();
 }

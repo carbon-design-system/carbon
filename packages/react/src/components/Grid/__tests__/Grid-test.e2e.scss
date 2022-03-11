@@ -1,3 +1,8 @@
+@use '~@carbon/styles/scss/config' with (
+  $prefix: 'bx',
+);
+@use '~@carbon/styles/scss/grid';
+
 @import '~carbon-components/scss/globals/scss/vars';
 @import '~carbon-components/scss/globals/scss/colors';
 @import '~carbon-components/scss/globals/scss/typography';

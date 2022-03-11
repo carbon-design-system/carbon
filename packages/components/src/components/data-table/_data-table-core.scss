@@ -93,13 +93,11 @@
     color: $text-primary;
   }
 
-  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link,
-  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link {
+  .#{$prefix}--data-table tr:hover .#{$prefix}--link {
     color: $link-secondary;
   }
 
-  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link--disabled,
-  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link--disabled {
+  .#{$prefix}--data-table tr:hover .#{$prefix}--link--disabled {
     color: $disabled-02;
   }
 
@@ -242,7 +240,8 @@
     }
   }
 
-  .#{$prefix}--data-table--selected .#{$prefix}--link {
+  .#{$prefix}--data-table--selected
+    .#{$prefix}--link:not(.#{$prefix}--link--disabled) {
     color: $link-secondary;
   }
 
@@ -405,6 +404,28 @@
   .#{$prefix}--data-table--tall .#{$prefix}--table-column-radio,
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-radio {
     padding-top: $spacing-05;
+  }
+
+  // Disabled radio button, checkbox fix #10913
+  tr.#{$prefix}--data-table--selected:hover
+    .#{$prefix}--radio-button[disabled]
+    + .#{$prefix}--radio-button__label,
+  tr.#{$prefix}--data-table--selected:hover
+    .#{$prefix}--checkbox[disabled]
+    + .#{$prefix}--checkbox-label,
+  tr.#{$prefix}--data-table--selected:hover .#{$prefix}--link--disabled {
+    color: $disabled-03;
+  }
+
+  // Disabled radio button, checkbox fix #10913
+  tr.#{$prefix}--data-table--selected:hover
+    .#{$prefix}--radio-button[disabled]
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance,
+  tr.#{$prefix}--data-table--selected:hover
+    .#{$prefix}--checkbox[disabled]
+    + .#{$prefix}--checkbox-label:before {
+    border-color: $disabled-03;
   }
 
   //----------------------------------------------------------------------------
