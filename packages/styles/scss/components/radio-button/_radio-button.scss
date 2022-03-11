@@ -86,7 +86,7 @@ $radio-border-width: 1px !default;
     flex-shrink: 0;
     border: $radio-border-width solid $icon-primary;
     margin: rem(1px) $spacing-03 rem(2px) rem(2px);
-    background-color: transparent;
+    background-color: $background;
     border-radius: 50%;
   }
 
