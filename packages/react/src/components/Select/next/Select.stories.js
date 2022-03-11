@@ -14,6 +14,15 @@ import { Layer } from '../../Layer';
 export default {
   title: 'Components/Select',
   component: Select,
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
+  args: {
+    size: 'md',
+  },
   decorators: [(story) => <div style={{ width: '400px' }}>{story()}</div>],
   subcomponents: {
     SelectItem,
@@ -22,10 +31,11 @@ export default {
   },
 };
 
-export const _Default = () => {
+export const _Default = (args) => {
   return (
     <div>
       <Select
+        {...args}
         id="select-1"
         defaultValue="placeholder-item"
         labelText="Select an option"
@@ -49,10 +59,11 @@ export const _Default = () => {
   );
 };
 
-export const Inline = () => {
+export const Inline = (args) => {
   return (
     <div>
       <Select
+        {...args}
         inline
         id="select-1"
         defaultValue="placeholder-item"
@@ -88,10 +99,11 @@ export const _Skeleton = () => (
   </div>
 );
 
-export const WithLayer = () => {
+export const WithLayer = (args) => {
   return (
     <>
       <Select
+        {...args}
         id="select-1"
         defaultValue="placeholder-item"
         labelText=""
@@ -107,6 +119,7 @@ export const WithLayer = () => {
       </Select>
       <Layer>
         <Select
+          {...args}
           id="select-1"
           defaultValue="placeholder-item"
           labelText=""
@@ -124,6 +137,7 @@ export const WithLayer = () => {
         </Select>
         <Layer>
           <Select
+            {...args}
             id="select-1"
             defaultValue="placeholder-item"
             labelText=""
