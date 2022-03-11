@@ -54,3 +54,8 @@ $prefix: 'cds' !default;
 /// @access public
 /// @group @carbon/grid
 $flex-grid-columns: 16 !default;
+
+/// Specify if the default grid type should be the flexbox grid
+/// @type Boolean
+/// @group config
+$use-flexbox-grid: false !default;
