@@ -53,7 +53,7 @@
     "classnames": "2.3.1",
     "copy-to-clipboard": "^3.3.1",
     "downshift": "5.2.1",
-    "flatpickr": "4.6.10",
+    "flatpickr": "4.6.11",
     "invariant": "^2.2.3",
     "lodash.debounce": "^4.0.8",
     "lodash.findlast": "^4.5.0",
