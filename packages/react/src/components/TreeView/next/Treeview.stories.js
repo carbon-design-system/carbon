@@ -205,11 +205,9 @@ export default {
 
 export const Default = (args) => (
   <>
-    <InlineNotification
-      kind="info"
-      title="Experimental component"
-      subtitle="An accessibility review of this component is in progress"
-    />
+    <InlineNotification kind="info">
+      Experimental component: An accessibility review of this component is in progress
+    </InlineNotification>
     <TreeView {...props()} {...args}>
       {renderTree({ nodes })}
     </TreeView>
