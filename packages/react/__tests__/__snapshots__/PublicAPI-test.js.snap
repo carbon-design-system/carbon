@@ -3341,6 +3341,9 @@ Map {
       "role": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -6200,6 +6203,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
     },
     "render": [Function],
