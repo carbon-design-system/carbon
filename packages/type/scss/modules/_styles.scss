@@ -9,6 +9,7 @@
 
 @use 'sass:map';
 @use 'sass:math';
+@use '@carbon/grid/scss/modules/config' as gridconfig;
 @use '@carbon/grid/scss/modules/breakpoint' as grid;
 @use 'font-family';
 @use 'scale';
@@ -716,7 +717,7 @@ $tokens: (
 /// @param {Map} $breakpoints [$grid-breakpoints] - Custom breakpoints to use
 /// @access public
 /// @group @carbon/type
-@mixin fluid-type($type-styles, $breakpoints: grid.$grid-breakpoints) {
+@mixin fluid-type($type-styles, $breakpoints: gridconfig.$grid-breakpoints) {
   // Include the initial styles for the given token by default without any
   // media query guard. This includes `font-size` as a fallback in the case
   // that a browser does not support `calc()`
@@ -745,7 +746,7 @@ $tokens: (
 @mixin fluid-type-size(
   $type-styles,
   $name,
-  $breakpoints: grid.$grid-breakpoints
+  $breakpoints: gridconfig.$grid-breakpoints
 ) {
   // Get the information about the breakpoint we're currently working in. Useful
   // for getting initial width information
@@ -846,7 +847,11 @@ $custom-property-prefix: 'cds' !default;
 /// @param {Map} $breakpoints [$grid-breakpoints] - Provide a custom breakpoint map to use
 /// @access public
 /// @group @carbon/type
-@mixin type-style($name, $fluid: false, $breakpoints: grid.$grid-breakpoints) {
+@mixin type-style(
+  $name,
+  $fluid: false,
+  $breakpoints: gridconfig.$grid-breakpoints
+) {
   @if not map.has-key($tokens, $name) {
     @error 'Unable to find a token with the name: `#{$name}`';
   }

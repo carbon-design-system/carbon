@@ -3341,6 +3341,9 @@ Map {
       "role": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -6201,6 +6204,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -7991,6 +7997,29 @@ Map {
       },
       "nested": Object {
         "type": "bool",
+      },
+    },
+  },
+  "unstable_ColumnHang" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
       },
     },
   },

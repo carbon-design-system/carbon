@@ -32,8 +32,22 @@ async function build() {
         filepath: '_feature-flags.scss',
       },
       {
-        type: 'file',
-        filepath: '_grid.scss',
+        type: 'directory',
+        filepath: 'grid',
+        files: [
+          {
+            type: 'file',
+            filepath: '_config.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_flexbox.scss',
+          },
+          {
+            type: 'file',
+            filepath: '_index.scss',
+          },
+        ],
       },
       {
         type: 'file',

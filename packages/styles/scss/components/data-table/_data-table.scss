@@ -100,13 +100,11 @@
     color: $text-primary;
   }
 
-  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link,
-  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link {
+  .#{$prefix}--data-table tr:hover .#{$prefix}--link {
     color: $link-secondary;
   }
 
-  .#{$prefix}--data-table tbody tr:hover td .#{$prefix}--link--disabled,
-  .#{$prefix}--data-table tbody tr:hover th .#{$prefix}--link--disabled {
+  .#{$prefix}--data-table tr:hover .#{$prefix}--link--disabled {
     color: $text-disabled;
   }
 
@@ -253,7 +251,8 @@
     }
   }
 
-  .#{$prefix}--data-table--selected .#{$prefix}--link {
+  .#{$prefix}--data-table--selected
+    .#{$prefix}--link:not(.#{$prefix}--link--disabled) {
     color: $link-secondary;
   }
 
