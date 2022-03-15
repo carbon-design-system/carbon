@@ -139,7 +139,7 @@
     min-height: $spacing-09;
     align-items: center;
     margin-bottom: $spacing-03;
-    background-color: $field;
+    background-color: $layer;
     gap: rem(12px) $spacing-05;
     grid-auto-rows: auto;
     grid-template-columns: 1fr auto;
@@ -187,7 +187,7 @@
 
     max-width: rem(320px);
     margin-bottom: $spacing-03;
-    background-color: $field;
+    background-color: $layer;
     outline-width: 1px;
   }
 
@@ -280,7 +280,7 @@
 
     // for checkmark contrast
     [data-icon-path='inner-path'] {
-      fill: $icon-on-color;
+      fill: $icon-inverse;
       opacity: 1;
     }
   }
