@@ -27,9 +27,12 @@ describe('Tabs', () => {
   });
 
   it('should set a className from props on outermost element in TabList', () => {
-    render(
+    const { container } = render(
       <Tabs>
-        <TabList aria-label="List of tabs" className="custom-class">
+        <TabList
+          aria-label="List of tabs"
+          className="custom-class"
+          data-test-id="test-id">
           <Tab disabled>Tab Label 1</Tab>
           <Tab>Tab Label 2</Tab>
           <Tab>Tab Label 3</Tab>
@@ -42,7 +45,7 @@ describe('Tabs', () => {
       </Tabs>
     );
 
-    expect(screen.getByRole('tablist')).toHaveClass('custom-class');
+    expect(container.firstChild).toHaveClass('custom-class');
   });
 });
 

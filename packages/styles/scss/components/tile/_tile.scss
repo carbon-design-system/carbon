@@ -144,6 +144,10 @@
       transform-origin: center;
       transition: $duration-fast-02 motion(standard, productive);
 
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
+
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
         screen and (prefers-contrast) {

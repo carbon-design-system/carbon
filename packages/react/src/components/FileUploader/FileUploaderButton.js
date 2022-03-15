@@ -12,6 +12,7 @@ import { matches, keys } from '../../internal/keyboard';
 import { ButtonKinds } from '../../prop-types/types';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 function noop() {}
 
@@ -27,7 +28,7 @@ function FileUploaderButton({
   onChange = noop,
   role = 'button',
   name,
-  size,
+  size = 'md',
   tabIndex = 0,
   ...other
 }) {
@@ -170,10 +171,11 @@ FileUploaderButton.propTypes = {
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available
-   * sizes. For `default` buttons, this prop can remain unspecified.
-   * V11: `default`, `field`, and `small` will be removed
+   * sizes.
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg'])
+    : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
 
   /**
    * Provide a custom tabIndex value for the <FileUploaderButton>

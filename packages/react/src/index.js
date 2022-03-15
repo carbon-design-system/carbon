@@ -68,6 +68,7 @@ export {
   Grid,
   Row,
   Column,
+  ColumnHang as unstable_ColumnHang,
   FlexGrid as unstable_FlexGrid,
 } from './components/Grid';
 export Icon from './components/Icon';
@@ -155,6 +156,7 @@ export TooltipIcon from './components/TooltipIcon';
 export UnorderedList from './components/UnorderedList';
 export SkeletonText from './components/SkeletonText';
 export SkeletonPlaceholder from './components/SkeletonPlaceholder';
+export SkeletonIcon from './components/SkeletonIcon';
 export DataTableSkeleton from './components/DataTableSkeleton';
 export AccordionSkeleton from './components/Accordion/Accordion.Skeleton';
 export BreadcrumbSkeleton from './components/Breadcrumb/Breadcrumb.Skeleton';
@@ -246,6 +248,7 @@ export {
   VStack as unstable_VStack,
 } from './components/Stack';
 export { Tooltip as unstable_Tooltip } from './components/Tooltip/next';
+export { DefinitionTooltip as unstable_DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';

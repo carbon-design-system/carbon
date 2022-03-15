@@ -138,6 +138,10 @@
 
   .flatpickr-calendar.animate.open {
     animation: fp-fade-in-down $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   .flatpickr-calendar.inline {
@@ -230,8 +234,12 @@
     // Windows HCM fix
     @include high-contrast-mode('icon-fill');
 
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
     &:hover {
-      background-color: $background-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -261,7 +269,7 @@
     margin-left: $spacing-02;
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -313,7 +321,7 @@
     border-bottom: 0;
 
     &::after {
-      border-bottom: rem(4px) solid $border-subtle;
+      border-bottom: rem(4px) solid $icon-primary;
     }
   }
 
@@ -321,7 +329,7 @@
     top: rem(11px);
 
     &::after {
-      border-top: rem(4px) solid $border-subtle;
+      border-top: rem(4px) solid $icon-primary;
     }
   }
 
@@ -437,7 +445,7 @@
     transition: all $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background: $background-hover;
+      background: $layer-hover;
     }
 
     &:focus {

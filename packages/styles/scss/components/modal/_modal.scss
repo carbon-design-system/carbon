@@ -45,6 +45,10 @@
       transition: opacity $duration-moderate-02 motion(entrance, expressive),
         visibility 0ms linear;
       visibility: inherit;
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
 
     // V11: Question for design: do we have an updated tokens for fields that exist on `layer`?

@@ -1,7 +1,7 @@
 {
   "name": "stylelint-config-carbon",
   "description": "Stylelint configuration for Carbon",
-  "version": "1.8.0",
+  "version": "1.9.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -26,6 +26,7 @@
     "stylelint": "^14.3.0"
   },
   "dependencies": {
+    "stylelint-a11y": "^1.2.3",
     "stylelint-config-idiomatic-order": "^8.1.0",
     "stylelint-config-prettier": "^9.0.3",
     "stylelint-config-standard": "^24.0.0",

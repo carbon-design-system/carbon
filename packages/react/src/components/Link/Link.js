@@ -5,47 +5,60 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const Link = ({
-  children,
-  className,
-  href,
-  disabled,
-  inline,
-  visited,
-  renderIcon: Icon,
-  size,
-  ...other
-}) => {
+const Link = React.forwardRef(function Link(
+  {
+    children,
+    className: customClassName,
+    href,
+    disabled,
+    inline,
+    visited,
+    renderIcon: Icon,
+    size,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
-  const classNames = classnames(`${prefix}--link`, className, {
+  const className = cx(`${prefix}--link`, customClassName, {
     [`${prefix}--link--disabled`]: disabled,
     [`${prefix}--link--inline`]: inline,
     [`${prefix}--link--visited`]: visited,
     [`${prefix}--link--${size}`]: size,
   });
+  const rel = rest.target === '_blank' ? 'noopener' : null;
+  const linkProps = {
+    className,
+    rel,
+  };
 
-  const Tag = disabled ? 'p' : 'a';
-  const rel = other.target === '_blank' ? 'noopener' : null;
+  // Reference for disabled links:
+  // https://www.scottohara.me/blog/2021/05/28/disabled-links.html
+  if (!disabled) {
+    linkProps.href = href;
+  } else {
+    linkProps.role = 'link';
+    linkProps['aria-disabled'] = true;
+  }
+
   return (
-    <Tag
-      href={disabled ? null : href}
-      className={classNames}
-      rel={rel}
-      {...other}>
+    <a ref={ref} {...linkProps} {...rest}>
       {children}
       {!inline && Icon && (
         <div className={`${prefix}--link__icon`}>
           <Icon />
         </div>
       )}
-    </Tag>
+    </a>
   );
-};
+});
+
+Link.displayName = 'Link';
 
 Link.propTypes = {
   /**

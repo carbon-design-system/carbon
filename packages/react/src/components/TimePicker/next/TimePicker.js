@@ -28,7 +28,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     onBlur = () => {},
     pattern = '(1[012]|[1-9]):[0-5][0-9](\\s)?',
     placeholder = 'hh:mm',
-    size,
+    size = 'md',
     type = 'text',
     value,
     ...rest
@@ -170,11 +170,11 @@ TimePicker.propTypes = {
   labelText: PropTypes.node,
 
   /**
-   * `true` to use the light version. TODO: V12 remove this.
+   * The `light` prop for `TimePicker` has been deprecated. It will be removed in v12. Use the `Layer` component instead.
    */
   light: deprecate(
     PropTypes.bool,
-    'The `light` prop for `Tile` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    'The `light` prop for `TimePicker` is no longer needed and has been deprecated. It will be removed in the next major release. Use the `Layer` component instead.'
   ),
 
   /**
@@ -211,7 +211,7 @@ TimePicker.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Specify the size of the Time Picker. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Time Picker.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
