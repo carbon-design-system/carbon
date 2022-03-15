@@ -47,7 +47,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     onChange,
     onClick,
     readOnly,
-    size,
+    size = 'md',
     step = 1,
     translateWithId: t = (id) => defaultTranslations[id],
     warn = false,
@@ -341,10 +341,9 @@ NumberInput.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
-   * Specify the size of the Number Input. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-   * TODO V11: remove `xl` (replaced with lg)
+   * Specify the size of the Number Input.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify how much the values should increase/decrease upon clicking on up/down button

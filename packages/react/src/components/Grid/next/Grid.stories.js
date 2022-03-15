@@ -8,7 +8,7 @@
 import './Grid.stories.scss';
 
 import React from 'react';
-import { Grid, Column } from '../../Grid';
+import { Grid, Column, ColumnHang } from '../../Grid';
 import mdx from './Grid.mdx';
 
 export default {
@@ -19,7 +19,6 @@ export default {
   },
   parameters: {
     controls: {
-      include: [], // ensure props are not displayed on the controls pane
       hideNoControlsWarning: true,
     },
     docs: {
@@ -37,9 +36,20 @@ export default {
   ],
 };
 
-export const Wide = () => {
+export const Default = () => {
   return (
     <Grid>
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+      <Column sm={4} />
+    </Grid>
+  );
+};
+
+export const Narrow = () => {
+  return (
+    <Grid narrow>
       <Column sm={4} />
       <Column sm={4} />
       <Column sm={4} />
@@ -148,36 +158,69 @@ export const Subgrid = () => {
 
 export const MixedGridModes = () => {
   return (
-    <Grid>
-      <Column sm={1} md={2} lg={4}>
-        <Grid>
-          <Column sm={1} md={2} lg={4}>
-            <p>wide</p>
-          </Column>
-        </Grid>
-      </Column>
-      <Column sm={3} md={6} lg={12}>
-        <Grid condensed>
-          <Column sm={3} md={6} lg={12}>
-            <p>condensed</p>
-          </Column>
-        </Grid>
-      </Column>
-      <Column sm={1} md={2} lg={4}>
-        <Grid condensed>
-          <Column sm={1} md={2} lg={4}>
-            <p>condensed</p>
-          </Column>
-        </Grid>
-      </Column>
-      <Column sm={3} md={6} lg={12}>
-        <Grid>
-          <Column sm={3} md={6} lg={12}>
-            <p>wide</p>
-          </Column>
-        </Grid>
-      </Column>
-    </Grid>
+    <>
+      <Grid>
+        <Column span={8}>
+          <Grid>
+            <Column span={8}>
+              <Grid narrow>
+                <Column>
+                  <ColumnHang>Text</ColumnHang>
+                </Column>
+                <Column>
+                  <ColumnHang>Text</ColumnHang>
+                </Column>
+                <Column>
+                  <ColumnHang>Text</ColumnHang>
+                </Column>
+                <Column>
+                  <ColumnHang>Text</ColumnHang>
+                </Column>
+                <Column span={4}>
+                  <Grid>
+                    <Column>Text</Column>
+                    <Column>Text</Column>
+                    <Column span={2}>
+                      <Grid condensed>
+                        <Column>
+                          <ColumnHang>Text</ColumnHang>
+                        </Column>
+                        <Column>
+                          <ColumnHang>Text</ColumnHang>
+                        </Column>
+                      </Grid>
+                    </Column>
+                  </Grid>
+                </Column>
+              </Grid>
+            </Column>
+          </Grid>
+        </Column>
+      </Grid>
+      <Grid narrow>
+        <Column span={8}>
+          <Grid>
+            <Column span={4} />
+            <Column span={4}>
+              <Grid narrow>
+                <Column>
+                  <ColumnHang>Text</ColumnHang>
+                </Column>
+                <Column>
+                  <ColumnHang>Text</ColumnHang>
+                </Column>
+                <Column>
+                  <ColumnHang>Text</ColumnHang>
+                </Column>
+                <Column>
+                  <ColumnHang>Text</ColumnHang>
+                </Column>
+              </Grid>
+            </Column>
+          </Grid>
+        </Column>
+      </Grid>
+    </>
   );
 };
 
@@ -229,18 +272,3 @@ export const Offset = () => (
     />
   </Grid>
 );
-
-export const AutoColumns = () => {
-  return (
-    <Grid>
-      <Column></Column>
-      <Column></Column>
-      <Column></Column>
-      <Column></Column>
-      <Column></Column>
-      <Column></Column>
-      <Column></Column>
-      <Column></Column>
-    </Grid>
-  );
-};

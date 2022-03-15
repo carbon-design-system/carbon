@@ -6,6 +6,7 @@
 //
 
 @use '../index.scss' as styles;
+@use '../scss/grid/flexbox';
 
 :root {
   @include styles.theme(styles.$white);

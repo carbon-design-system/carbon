@@ -390,7 +390,7 @@ export default class Tabs extends React.Component {
   };
 
   handleOverflowNavMouseDown = (event, { direction }) => {
-    // disregard mouse buttons aside from LMB
+    // disregard mouse buttons aside from left mouse button
     if (event.buttons !== 1) {
       return;
     }

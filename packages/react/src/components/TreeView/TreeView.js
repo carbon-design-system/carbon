@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
@@ -23,7 +24,7 @@ export default function TreeView({
   multiselect,
   onSelect,
   selected: preselected = [],
-  size = 'default',
+  size = FeatureFlags.enabled('enable-v11-release') ? 'sm' : 'default',
   ...rest
 }) {
   const { current: treeId } = useRef(rest.id || uniqueId());
@@ -219,5 +220,7 @@ TreeView.propTypes = {
   /**
    * Specify the size of the tree from a list of available sizes.
    */
-  size: PropTypes.oneOf(['default', 'compact']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['xs', 'sm'])
+    : PropTypes.oneOf(['default', 'compact']),
 };

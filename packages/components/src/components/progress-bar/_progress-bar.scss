@@ -42,7 +42,7 @@
     height: 100%;
     background-color: $interactive;
     transform: scaleX(0);
-    transform-origin: 0 50%;
+    transform-origin: 0 center #{'/*rtl:100% center*/'};
     transition: transform $duration--fast-02 motion(standard, productive);
   }
 
@@ -83,6 +83,27 @@
     100% {
       background-position-x: -105%;
     }
+  }
+
+  .#{$prefix}--progress-bar--inline {
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__label {
+    flex-shrink: 0;
+    margin-right: $spacing-05;
+    margin-bottom: 0;
+  }
+
+  .#{$prefix}--progress-bar--inline .#{$prefix}--progress-bar__helper-text {
+    @include hidden;
+  }
+
+  .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__label,
+  .#{$prefix}--progress-bar--indented .#{$prefix}--progress-bar__helper-text {
+    padding-right: $spacing-05;
+    padding-left: $spacing-05;
   }
 }
 

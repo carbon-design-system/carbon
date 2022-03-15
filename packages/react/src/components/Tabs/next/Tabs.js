@@ -5,16 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { useState, useRef, useEffect } from 'react';
+import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
 import cx from 'classnames';
+import debounce from 'lodash.debounce';
+import PropTypes from 'prop-types';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { Tooltip } from '../../Tooltip/next';
-import { keys, match, matches } from '../../../internal/keyboard';
-import { usePrefix } from '../../../internal/usePrefix';
-import { useId } from '../../../internal/useId';
-import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
 import { useControllableState } from '../../../internal/useControllableState';
+import { useEffectOnce } from '../../../internal/useEffectOnce';
+import { useId } from '../../../internal/useId';
+import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../../internal/useMergedRefs';
+import { getInteractiveContent } from '../../../internal/useNoInteractiveChildren';
+import { usePrefix } from '../../../internal/usePrefix';
+import { keys, match, matches } from '../../../internal/keyboard';
+import { usePressable } from './usePressable';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -82,22 +87,6 @@ Tabs.propTypes = {
   selectedIndex: PropTypes.number,
 };
 
-function useEffectOnce(callback) {
-  const savedCallback = useRef(callback);
-  const effectGuard = useRef(false);
-
-  useEffect(() => {
-    savedCallback.current = callback;
-  });
-
-  useEffect(() => {
-    if (effectGuard.current !== true) {
-      effectGuard.current = true;
-      savedCallback.current();
-    }
-  }, []);
-}
-
 /**
  * Get the next index for a given keyboard event given a count of the total
  * items and the current index
@@ -123,10 +112,13 @@ function TabList({
   'aria-label': label,
   children,
   className: customClassName,
-  light,
-  scrollIntoView,
   contained = false,
   iconSize,
+  leftOverflowButtonProps,
+  light,
+  rightOverflowButtonProps,
+  scrollDebounceWait = 200,
+  scrollIntoView,
   ...rest
 }) {
   const {
@@ -137,6 +129,10 @@ function TabList({
   } = React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
+  const previousButton = useRef(null);
+  const nextButton = useRef(null);
+  const [isScrollable, setIsScrollable] = useState(false);
+  const [scrollLeft, setScrollLeft] = useState(false);
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
@@ -144,12 +140,50 @@ function TabList({
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
   });
 
+  // Previous Button
+  // VISIBLE IF:
+  //   SCROLLABLE
+  //   AND SCROLL_LEFT > 0
+  const buttonWidth = 44;
+  const isPreviousButtonVisible = ref.current
+    ? isScrollable && scrollLeft > 0
+    : false;
+  // Next Button
+  // VISIBLE IF:
+  //   SCROLLABLE
+  //   AND SCROLL_LEFT + CLIENT_WIDTH < SCROLL_WIDTH
+  const isNextButtonVisible = ref.current
+    ? scrollLeft + buttonWidth + ref.current.clientWidth <
+      ref.current.scrollWidth
+    : false;
+  const previousButtonClasses = cx(
+    `${prefix}--tab--overflow-nav-button`,
+    `${prefix}--tab--overflow-nav-button--previous`,
+    {
+      [`${prefix}--tab--overflow-nav-button--hidden`]: !isPreviousButtonVisible,
+    }
+  );
+  const nextButtonClasses = cx(
+    `${prefix}--tab--overflow-nav-button`,
+    `${prefix}--tab--overflow-nav-button--next`,
+    {
+      [`${prefix}--tab--overflow-nav-button--hidden`]: !isNextButtonVisible,
+    }
+  );
+
   const tabs = [];
+  const debouncedOnScroll = useCallback(() => {
+    return debounce((event) => {
+      setScrollLeft(event.target.scrollLeft);
+    }, scrollDebounceWait);
+  }, [scrollDebounceWait]);
 
   function onKeyDown(event) {
     if (
       matches(event, [keys.ArrowRight, keys.ArrowLeft, keys.Home, keys.End])
     ) {
+      event.preventDefault();
+
       const activeTabs = tabs.filter((tab) => {
         return !tab.current.disabled;
       });
@@ -194,26 +228,131 @@ function TabList({
     }
   });
 
-  return (
-    // eslint-disable-next-line jsx-a11y/interactive-supports-focus
-    <div
-      {...rest}
-      aria-label={label}
-      ref={ref}
-      role="tablist"
-      className={className}
-      onKeyDown={onKeyDown}>
-      {React.Children.map(children, (child, index) => {
-        const ref = React.createRef();
-        tabs.push(ref);
-        return (
-          <TabContext.Provider value={index}>
-            {React.cloneElement(child, {
-              ref,
-            })}
-          </TabContext.Provider>
+  useIsomorphicEffect(() => {
+    if (ref.current) {
+      setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
+    }
+
+    function handler() {
+      if (ref.current) {
+        setIsScrollable(ref.current.scrollWidth > ref.current.clientWidth);
+      }
+    }
+
+    const debouncedHandler = debounce(handler, 200);
+    window.addEventListener('resize', debouncedHandler);
+    return () => {
+      debouncedHandler.cancel();
+      window.removeEventListener('resize', debouncedHandler);
+    };
+  }, []);
+
+  // updates scroll location for all scroll behavior.
+  useIsomorphicEffect(() => {
+    ref.current.scrollLeft = scrollLeft;
+  }, [scrollLeft]);
+
+  useIsomorphicEffect(() => {
+    const tab =
+      activation === 'manual' ? tabs[activeIndex] : tabs[selectedIndex];
+    if (tab) {
+      // The width of the "scroll buttons"
+
+      // The start and end position of the selected tab
+      const { width: tabWidth } = tab.current.getBoundingClientRect();
+      const start = tab.current.offsetLeft;
+      const end = tab.current.offsetLeft + tabWidth;
+
+      // The start and end of the visible area for the tabs
+      const visibleStart = ref.current.scrollLeft + buttonWidth;
+      const visibleEnd =
+        ref.current.scrollLeft + ref.current.clientWidth - buttonWidth;
+
+      // The beginning of the tab is clipped and not visible
+      if (start < visibleStart) {
+        setScrollLeft(start - buttonWidth);
+      }
+
+      // The end of teh tab is clipped and not visible
+      if (end > visibleEnd) {
+        setScrollLeft(end + buttonWidth - ref.current.clientWidth);
+      }
+    }
+  }, [activation, activeIndex, selectedIndex]);
+
+  usePressable(previousButton, {
+    onPress({ longPress }) {
+      if (!longPress) {
+        setScrollLeft(
+          Math.max(
+            scrollLeft - (ref.current.scrollWidth / tabs.length) * 1.5,
+            0
+          )
         );
-      })}
+      }
+    },
+    onLongPress() {
+      return createLongPressBehavior(ref, 'backward', setScrollLeft);
+    },
+  });
+
+  usePressable(nextButton, {
+    onPress({ longPress }) {
+      if (!longPress) {
+        setScrollLeft(
+          Math.min(
+            scrollLeft + (ref.current.scrollWidth / tabs.length) * 1.5,
+            ref.current.scrollWidth - ref.current.clientWidth
+          )
+        );
+      }
+    },
+    onLongPress() {
+      return createLongPressBehavior(ref, 'forward', setScrollLeft);
+    },
+  });
+
+  return (
+    <div className={className}>
+      <button
+        aria-hidden="true"
+        aria-label="Scroll left"
+        ref={previousButton}
+        className={previousButtonClasses}
+        type="button"
+        {...leftOverflowButtonProps}>
+        <ChevronLeft16 />
+      </button>
+      {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
+      <div
+        {...rest}
+        aria-label={label}
+        ref={ref}
+        role="tablist"
+        className={`${prefix}--tab--list`}
+        onScroll={debouncedOnScroll}
+        onKeyDown={onKeyDown}>
+        {React.Children.map(children, (child, index) => {
+          const ref = React.createRef();
+          tabs.push(ref);
+          return (
+            <TabContext.Provider value={index}>
+              {React.cloneElement(child, {
+                ref,
+              })}
+            </TabContext.Provider>
+          );
+        })}
+      </div>
+      <button
+        aria-hidden="true"
+        aria-label="Scroll right"
+        ref={nextButton}
+        className={nextButtonClasses}
+        type="button"
+        {...rightOverflowButtonProps}>
+        <ChevronRight16 />
+      </button>
     </div>
   );
 }
@@ -241,25 +380,89 @@ TabList.propTypes = {
    * Specify an optional className to be added to the container node
    */
   className: PropTypes.string,
+
   /**
    * Specify whether component is contained type
    */
-
   contained: PropTypes.bool,
+
   /**
    * If using `IconTab`, specify the size of the icon being used.
    */
   iconSize: PropTypes.oneOf(['default', 'lg']),
+
+  /**
+   * Provide the props that describe the left overflow button
+   */
+  leftOverflowButtonProps: PropTypes.object,
+
   /**
    * Specify whether or not to use the light component variant
    */
   light: PropTypes.bool,
+
+  /**
+   * Provide the props that describe the right overflow button
+   */
+  rightOverflowButtonProps: PropTypes.object,
+
+  /**
+   * Optionally provide a delay (in milliseconds) passed to the lodash
+   * debounce of the onScroll handler. This will impact the responsiveness
+   * of scroll arrow buttons rendering when scrolling to the first or last tab.
+   */
+  scrollDebounceWait: PropTypes.number,
+
   /**
    * Choose whether or not to automatically scroll to newly selected tabs
    * on component rerender
    */
   scrollIntoView: PropTypes.bool,
 };
+
+/**
+ * Helper function to setup the behavior when a button is "long pressed". This
+ * function will take a ref to the tablist, a direction, and a setter for
+ * scrollLeft and will update the scroll position within a
+ * requestAnimationFrame.
+ *
+ * It returns a cleanup function to be run when the long press is
+ * deactivated
+ *
+ * @param {RefObject} ref
+ * @param {'forward' | 'backward'} direction
+ * @param {Function} setScrollLeft
+ * @returns {Function}
+ */
+function createLongPressBehavior(ref, direction, setScrollLeft) {
+  // We manually override the scroll behavior to be "auto". If it is set as
+  // smooth, this animation does not update correctly
+  let defaultScrollBehavior = ref.current.style['scroll-behavior'];
+  ref.current.style['scroll-behavior'] = 'auto';
+
+  const scrollDelta = direction === 'forward' ? 5 : -5;
+  let frameId = null;
+
+  function tick() {
+    ref.current.scrollLeft = ref.current.scrollLeft + scrollDelta;
+    frameId = requestAnimationFrame(tick);
+  }
+
+  frameId = requestAnimationFrame(tick);
+
+  return () => {
+    // Restore the previous scroll behavior
+    ref.current.style['scroll-behavior'] = defaultScrollBehavior;
+
+    // Make sure that our `scrollLeft` value is in sync with the existing
+    // `ref` after our requestAnimationFrame loop above
+    setScrollLeft(ref.current.scrollLeft);
+
+    if (frameId) {
+      cancelAnimationFrame(frameId);
+    }
+  };
+}
 
 const Tab = React.forwardRef(function Tab(
   {
@@ -323,26 +526,32 @@ Tab.propTypes = {
    * Provide a custom element to render instead of the default button
    */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
   /**
    * Provide child elements to be rendered inside of `Tab`.
    */
   children: PropTypes.node,
+
   /**
    * Specify an optional className to be added to your Tab
    */
   className: PropTypes.string,
+
   /**
    * Whether your Tab is disabled.
    */
   disabled: PropTypes.bool,
+
   /**
    * Provide a handler that is invoked when a user clicks on the control
    */
   onClick: PropTypes.func,
+
   /**
    * Provide a handler that is invoked on the key down event for the control
    */
   onKeyDown: PropTypes.func,
+
   /*
    * An optional parameter to allow overriding the anchor rendering.
    * Useful for using Tab along with react-router or other client
@@ -459,6 +668,7 @@ TabPanel.propTypes = {
    * Provide child elements to be rendered inside of `TabPanel`.
    */
   children: PropTypes.node,
+
   /**
    * Specify an optional className to be added to TabPanel.
    */
@@ -481,7 +691,3 @@ TabPanels.propTypes = {
 };
 
 export { Tabs, Tab, IconTab, TabPanel, TabPanels, TabList };
-
-// TO DO: implement horizontal scroll and the following props:
-// leftOverflowButtonProps
-// rightOverflowButtonProps
