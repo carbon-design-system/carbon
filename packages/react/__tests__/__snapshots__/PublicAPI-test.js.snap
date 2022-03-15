@@ -8718,6 +8718,16 @@ Map {
         ],
         "type": "oneOf",
       },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+            "indented",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "value": Object {
         "type": "number",
       },
