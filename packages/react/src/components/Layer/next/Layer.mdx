@@ -24,6 +24,16 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs/blocks';
 
 ## Overview
 
+The `Layer` component complements the layering model for the Carbon Design
+System. It is used to render components on different "layers" in order to
+correctly map contextual tokens to their correct values. In general, this means
+that areas of a page that are "on top of" other areas of a page will need to use
+this component.
+
+Any component that is rendered as a child to `Layer` will automatically map the
+correct colors. For your own custom components to follow this model, make sure
+they're using the contextual tokens.
+
 <Canvas>
   <Story id="components-layer--default" />
 </Canvas>
