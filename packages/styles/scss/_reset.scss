@@ -6,7 +6,7 @@
 //
 
 @use 'config';
-@use 'type';
+@use 'type/reset' as type;
 
 @mixin reset {
   /// http://meyerweb.com/eric/tools/css/reset/

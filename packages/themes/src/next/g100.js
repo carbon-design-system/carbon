@@ -46,7 +46,6 @@ import {
 
   // Tools
   rgba,
-  gray100Hover,
   gray10Hover,
 } from '@carbon/colors';
 import { adjustLightness, adjustAlpha } from '../tools';
@@ -55,11 +54,11 @@ import { adjustLightness, adjustAlpha } from '../tools';
 export const background = gray100;
 export const backgroundInverse = gray10;
 export const backgroundBrand = blue60;
-export const backgroundActive = gray80;
-export const backgroundHover = gray100Hover;
+export const backgroundActive = adjustAlpha(gray50, 0.4);
+export const backgroundHover = adjustAlpha(gray50, 0.16);
 export const backgroundInverseHover = gray10Hover;
-export const backgroundSelected = gray90;
-export const backgroundSelectedHover = gray90Hover;
+export const backgroundSelected = adjustAlpha(gray50, 0.24);
+export const backgroundSelectedHover = adjustAlpha(gray50, 0.32);
 
 // Layer
 // layer-01

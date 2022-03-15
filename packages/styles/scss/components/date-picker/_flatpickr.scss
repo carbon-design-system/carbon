@@ -321,7 +321,7 @@
     border-bottom: 0;
 
     &::after {
-      border-bottom: rem(4px) solid $border-subtle;
+      border-bottom: rem(4px) solid $icon-primary;
     }
   }
 
@@ -329,7 +329,7 @@
     top: rem(11px);
 
     &::after {
-      border-top: rem(4px) solid $border-subtle;
+      border-top: rem(4px) solid $icon-primary;
     }
   }
 

@@ -21,12 +21,19 @@ const sizes = {
   'Big (big) - default': 'big',
 };
 
+const types = {
+  'Default  (default)': 'default',
+  'Inline (inline)': 'inline',
+  'indented (indented)': 'indented',
+};
+
 const props = () => ({
   helperText: text('Helper text (helperText)', 'Optional helper text'),
   hideLabel: boolean('Hide the label (hideLabel)', false),
   label: text('Label text (label)', 'Progress bar label'),
   max: number('Maximum value (max)', 100),
   size: select('Size (size)', sizes, 'big'),
+  type: select('Type (type)', types, 'default'),
   value: number('Current value (value)', 75),
 });
 

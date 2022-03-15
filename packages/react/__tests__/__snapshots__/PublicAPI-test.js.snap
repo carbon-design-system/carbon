@@ -3341,6 +3341,9 @@ Map {
       "role": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -6201,6 +6204,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -7994,6 +8000,29 @@ Map {
       },
     },
   },
+  "unstable_ColumnHang" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable_DefinitionTooltip" => Object {
     "propTypes": Object {
       "align": Object {
@@ -8682,6 +8711,16 @@ Map {
           Array [
             "small",
             "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+            "indented",
           ],
         ],
         "type": "oneOf",
