@@ -5,7 +5,7 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'config';
+@use '../config';
 @forward '@carbon/type' show
   // Mixins
   reset,
