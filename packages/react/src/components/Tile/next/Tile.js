@@ -415,6 +415,7 @@ export function ExpandableTile({
   const [prevTileMaxHeight, setPrevTileMaxHeight] = useState(tileMaxHeight);
   const [prevTilePadding, setPrevTilePadding] = useState(tilePadding);
   const [isExpanded, setIsExpanded] = useState(expanded);
+  const [interactive, setInteractive] = useState(false);
   const aboveTheFold = useRef(null);
   const belowTheFold = useRef(null);
   const tileContent = useRef(null);
@@ -435,12 +436,6 @@ export function ExpandableTile({
   if (tilePadding !== prevTilePadding) {
     setIsTilePadding(tilePadding);
     setPrevTilePadding(tilePadding);
-  }
-
-  let interactiveContent;
-
-  if (belowTheFold.current) {
-    interactiveContent = getInteractiveContent(belowTheFold.current);
   }
 
   function setMaxHeight() {
@@ -519,6 +514,15 @@ export function ExpandableTile({
     setIsTilePadding(paddingTop + paddingBottom);
   }, []);
 
+  useIsomorphicEffect(() => {
+    const belowInteractiveContent = getInteractiveContent(belowTheFold.current);
+    const aboveInteractiveContent = getInteractiveContent(aboveTheFold.current);
+
+    if (belowInteractiveContent || aboveInteractiveContent) {
+      setInteractive(true);
+    }
+  });
+
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       const [aboveTheFold] = entries;
@@ -529,7 +533,7 @@ export function ExpandableTile({
 
     return () => resizeObserver.disconnect();
   }, []);
-  return interactiveContent ? (
+  return interactive ? (
     <div
       ref={tile}
       style={tileStyle}
