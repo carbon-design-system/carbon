@@ -3341,6 +3341,9 @@ Map {
       "role": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -6201,6 +6204,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -8708,6 +8714,16 @@ Map {
           Array [
             "small",
             "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+            "indented",
           ],
         ],
         "type": "oneOf",
