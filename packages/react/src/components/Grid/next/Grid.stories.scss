@@ -1,46 +1,101 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
 @use '@carbon/styles/scss/colors' as *;
 @use '@carbon/styles/scss/type' as *;
 
-// Grid modes
-.sb-css-grid-container .cds--css-grid {
-  background-color: $blue-20;
-  outline: 1px dashed $blue-40;
-}
+.sb-css-grid-container {
+  // Grid modes
+  .cds--css-grid {
+    background-color: $blue-20;
+    outline: 1px dashed $blue-40;
+  }
 
-.sb-css-grid-container .cds--css-grid p {
-  @include type-style('code-02');
-}
+  .cds--css-grid p {
+    @include type-style('code-02');
+  }
 
-.sb-css-grid-container .cds--css-grid p:first-of-type {
-  //messing up progress indicator stories
-  margin-top: 0;
-}
+  .cds--css-grid p:first-of-type {
+    margin-top: 0;
+  }
 
-.sb-css-grid-container .cds--css-grid.cds--css-grid--condensed {
-  background-color: $purple-20;
-  outline: 1px dashed $purple-40;
-}
+  // Narrow
+  .cds--css-grid.cds--css-grid--narrow {
+    background-color: #d6f9f9;
+    outline: 1px dashed $green-40;
+  }
 
-// Only use background for subgrid example, not other subgrids in "mixed modes" story or others
-.sb-css-grid-container .cds--subgrid.example {
-  background-color: $green-20;
-}
+  // Condensed
+  .cds--css-grid.cds--css-grid--condensed {
+    background-color: $purple-10;
+    outline: 1px dashed $purple-40;
+  }
 
-// Columns
-.sb-css-grid-container .cds--css-grid > [class*='col'],
-.sb-css-grid-container .cds--subgrid > [class*='col'] {
-  min-height: 80px;
-}
+  .cds--subgrid {
+    outline: 1px solid black;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    position: relative;
+    background: #eef4ff;
+  }
 
-.sb-css-grid-container .cds--css-grid > [class*='col'] {
-  background: $blue-10;
-}
+  .cds--css-grid,
+  .cds--subgrid--wide {
+    --grid-mode-color: #97c1ff;
+  }
 
-.sb-css-grid-container .cds--subgrid > [class*='col'] {
-  background: $green-10;
-  outline: 1px dashed $green-30;
-}
+  .cds--css-grid--narrow,
+  .cds--subgrid--narrow {
+    --grid-mode-color: #20d5d2;
+    background: $green-10;
+  }
 
-.sb-css-grid-container.cds--css-grid.cds--css-grid--condensed > [class*='col'] {
-  background: $purple-10;
+  .cds--css-grid--condensed,
+  .cds--subgrid--condensed {
+    --grid-mode-color: #bb8eff;
+    background: $purple-10;
+  }
+
+  .cds--subgrid--narrow {
+    background: #d6f9f9;
+  }
+
+  .cds--subgrid--condensed {
+    background: #f7f2ff;
+  }
+
+  .cds--subgrid::before {
+    @include type-style('code-01');
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    display: block;
+    content: 'subgrid';
+    background: var(--grid-mode-color, #97c1ff);
+    color: $black;
+    padding: 0.125rem 0.25rem;
+  }
+
+  // Column
+  .cds--css-grid-column {
+    --border-color: #97c1ff;
+
+    background: $white;
+    box-shadow: 0 0 0 1px var(--border-color);
+    min-height: 80px;
+  }
+
+  .cds--css-grid--narrow .cds--css-grid-column,
+  .cds--subgrid--narrow .cds--css-grid-column {
+    --border-color: #20d5d2;
+  }
+
+  .cds--css-grid--condensed .cds--css-grid-column,
+  .cds--subgrid--condensed .cds--css-grid-column {
+    --border-color: #bb8eff;
+  }
 }

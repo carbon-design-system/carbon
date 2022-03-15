@@ -11,40 +11,68 @@ import React from 'react';
 import { DefinitionTooltip } from '../../next/DefinitionTooltip';
 
 describe('DefintiionTooltip', () => {
-  it('should support a custom className with the `className` prop', () => {
-    const definition = 'Uniform Resource Locator';
-    render(
-      <DefinitionTooltip definition={definition} className="tooltip-class">
-        URL
-      </DefinitionTooltip>
-    );
-    expect(screen.getByText('URL')).toHaveClass('tooltip-class');
-  });
-
-  it('should apply additional props to the outermost element', () => {
-    const definition = 'Uniform Resource Locator';
-    render(
-      <DefinitionTooltip
-        data-testid="test"
-        definition={definition}
-        className="tooltip-class">
-        URL
-      </DefinitionTooltip>
-    );
-    expect(screen.getByText('URL')).toHaveAttribute('data-testid', 'test');
-  });
-
   it('should display onClick a defintion provided via prop', () => {
     const definition = 'Uniform Resource Locator';
+    render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
+    userEvent.click(screen.getByText('URL'));
+    expect(screen.getByText(definition)).toBeVisible();
+  });
+
+  it('should have a visible tooltip if `defaultOpen` is set to true', () => {
+    const definition = 'test-definition';
     render(
-      <DefinitionTooltip
-        data-testid="test"
-        definition={definition}
-        className="tooltip-class">
-        URL
+      <DefinitionTooltip definition={definition} defaultOpen>
+        term
       </DefinitionTooltip>
     );
-    userEvent.click(screen.getByText('URL'));
-    expect(screen.getByText(definition)).toHaveTextContent(definition);
+    expect(screen.getByText(definition)).toBeVisible();
+  });
+
+  describe('Component API', () => {
+    it('should apply additional props to the underlying button element', () => {
+      const definition = 'Uniform Resource Locator';
+      render(
+        <DefinitionTooltip
+          data-testid="test"
+          definition={definition}
+          className="tooltip-class">
+          URL
+        </DefinitionTooltip>
+      );
+      expect(screen.getByText('URL')).toHaveAttribute('data-testid', 'test');
+    });
+
+    it('should support a custom className with the `className` prop', () => {
+      const definition = 'Uniform Resource Locator';
+      const { container } = render(
+        <DefinitionTooltip definition={definition} className="custom-class">
+          URL
+        </DefinitionTooltip>
+      );
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should support a custom id for the tooltip', () => {
+      const id = 'test-id';
+      const definition = 'test-definition';
+      render(
+        <DefinitionTooltip definition={definition} id={id}>
+          term
+        </DefinitionTooltip>
+      );
+      expect(document.getElementById(id)).toBeInTheDocument();
+      expect(document.getElementById(id)).toHaveTextContent(definition);
+    });
+
+    it('should support a custom className for the tooltip trigger', () => {
+      render(
+        <DefinitionTooltip
+          definition="test-definition"
+          triggerClassName="custom-class">
+          term
+        </DefinitionTooltip>
+      );
+      expect(screen.getByRole('button')).toHaveClass('custom-class');
+    });
   });
 });

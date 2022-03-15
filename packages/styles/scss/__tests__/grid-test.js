@@ -22,11 +22,11 @@ describe('@carbon/styles/scss/grid', () => {
       $_: get('api', (
         variables: (
           grid-gutter: meta.variable-exists('grid-gutter'),
+          grid-gutter-condensed: meta.variable-exists('grid-gutter-condensed'),
           grid-breakpoints: meta.variable-exists('grid-breakpoints'),
         ),
         mixins: (
           css-grid: meta.mixin-exists('css-grid'),
-          subgrid: meta.mixin-exists('subgrid'),
           flex-grid: meta.mixin-exists('flex-grid'),
         ),
       ));
@@ -36,11 +36,11 @@ describe('@carbon/styles/scss/grid', () => {
     expect(api).toEqual({
       variables: {
         'grid-gutter': true,
+        'grid-gutter-condensed': true,
         'grid-breakpoints': true,
       },
       mixins: {
         'css-grid': true,
-        subgrid: true,
         'flex-grid': true,
       },
     });
