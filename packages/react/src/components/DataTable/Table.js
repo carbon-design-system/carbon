@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate.js';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
@@ -80,19 +81,20 @@ Table.propTypes = {
 
   /**
    *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
-   *  The previous terms (`compact`, `short`, `normal`, and `tall`) will be removed in the next major release.
    */
-  size: PropTypes.oneOf([
-    'compact',
-    'short',
-    'normal',
-    'tall',
-    'xs',
-    'sm',
-    'md',
-    'lg',
-    'xl',
-  ]),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
+    : PropTypes.oneOf([
+        'compact',
+        'short',
+        'normal',
+        'tall',
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+      ]),
 
   /**
    * `false` If true, will keep the header sticky (only data rows will scroll)

@@ -40,6 +40,27 @@ export default {
     TableBody,
     TableCell,
   },
+  argTypes: {
+    size: {
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      control: { type: 'select' },
+    },
+    useZebraStyles: {
+      control: { type: 'boolean' },
+    },
+    radio: {
+      control: { type: 'boolean' },
+    },
+    isSortable: { control: { type: 'boolean' } },
+    persistent: { control: { type: 'boolean' } },
+  },
+  args: {
+    size: 'lg',
+    useZebraStyles: false,
+    radio: false,
+    isSortable: false,
+    persistent: false,
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -47,8 +68,8 @@ export default {
   },
 };
 
-export const DefaultToolbar = () => (
-  <DataTable rows={rows} headers={headers}>
+export const DefaultToolbar = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
@@ -65,7 +86,7 @@ export const DefaultToolbar = () => (
         {...getTableContainerProps()}>
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarSearch onChange={onInputChange} {...args} />
             <TableToolbarMenu light>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
