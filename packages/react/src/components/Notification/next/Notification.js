@@ -292,6 +292,7 @@ export function ToastNotification({
           notificationType="toast"
           onClick={handleCloseButtonClick}
           aria-hidden="true"
+          tab-index="-1"
         />
       )}
     </div>
@@ -442,6 +443,8 @@ export function InlineNotification({
           iconDescription={iconDescription}
           notificationType="inline"
           onClick={handleCloseButtonClick}
+          aria-hidden="true"
+          tabIndex="-1"
         />
       )}
     </div>
