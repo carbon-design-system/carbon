@@ -198,29 +198,27 @@ const files = [
 
 module.exports = {
   files: files.map((filepath) => {
+    const basename = path.basename(filepath);
     // The path used for the `@forward` rule in the file itself
     let importPath = '';
 
     // If we have an `_index.scss` entrypoint, we can re-export from the
     // directory itself
-    if (filepath.endsWith('_index.scss') || filepath.endsWith('index.scss')) {
-      // Special case for the "root" index.scss
-      if (path.dirname(filepath) !== '.') {
-        importPath = path.dirname(filepath);
-      }
-    } else {
+    if (basename === '_index.scss') {
+      importPath = path.dirname(filepath);
+    } else if (filepath !== 'index.scss') {
       // Otherwise, let's drop the leading `_` and trailing `.scss` from the
       // file name to get the import
       const basename = path
         .basename(filepath)
         .replace(/^_/, '')
         .replace(/\.scss$/, '');
-      importPath = '/' + path.join(path.dirname(filepath), basename);
+      importPath = path.join(path.dirname(filepath), basename);
     }
 
     return {
       filepath,
-      importPath: `@carbon/styles${importPath}`,
+      importPath: path.join('@carbon/styles', importPath),
     };
   }),
 };
