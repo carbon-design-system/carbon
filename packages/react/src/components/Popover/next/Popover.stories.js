@@ -50,14 +50,13 @@ export default {
 };
 
 const PlaygroundStory = (props) => {
-  const { align, caret, dropShadow, highContrast, light, open } = props;
+  const { align, caret, dropShadow, highContrast, open } = props;
   return (
     <Popover
       align={align}
       caret={caret}
       dropShadow={dropShadow}
       highContrast={highContrast}
-      light={light}
       open={open}>
       <div className="playground-trigger">
         <Checkbox16 />
@@ -110,12 +109,6 @@ Playground.argTypes = {
     defaultValue: true,
   },
   highContrast: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  light: {
     control: {
       type: 'boolean',
     },
