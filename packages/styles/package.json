@@ -16,6 +16,10 @@
     "components",
     "react"
   ],
+  "files": [
+    "scss",
+    "index.scss"
+  ],
   "publishConfig": {
     "access": "public"
   },
