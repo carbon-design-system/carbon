@@ -23,8 +23,8 @@
 ## Overview
 
 The Carbon Design System uses [IBM Plex](https://www.ibm.com/plex) as its
-typeface. For teams using Carbon, this font is loaded by default through Google
-Fonts if you are using any of our projects, or if you are using
+typeface. For teams using Carbon, this font is loaded by default through an
+Akamai CDN if you are using any of our projects, or if you are using
 [`@carbon/type`](../packages/type) directly.
 
 However, the Google Fonts strategy loaded by default is not recommended for
