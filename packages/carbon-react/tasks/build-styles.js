@@ -27,7 +27,7 @@ async function build() {
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward '@carbon/styles/${file.importPath}';
+@forward '${file.importPath}';
 `
       );
     })
