@@ -12,7 +12,7 @@ import {
   ProgressStep,
   ProgressIndicatorSkeleton,
 } from '../';
-import Tooltip from '../../Tooltip';
+import Tooltip from '../../Tooltip/next';
 
 const { prefix } = settings;
 
@@ -35,30 +35,10 @@ export const Default = () => (
     <ProgressStep
       label="Second step with tooltip"
       description="Step 2: Getting started with Carbon Design System"
-      renderLabel={() => (
-        <Tooltip
-          direction="bottom"
-          showIcon={false}
-          triggerClassName={`${prefix}--progress-label`}
-          triggerText={'Second step with tooltip'}
-          tooltipId="tooltipId-0">
-          <p>Overflow tooltip content.</p>
-        </Tooltip>
-      )}
     />
     <ProgressStep
       label="Third step with tooltip"
       description="Step 3: Getting started with Carbon Design System"
-      renderLabel={() => (
-        <Tooltip
-          direction="bottom"
-          showIcon={false}
-          triggerClassName={`${prefix}--progress-label`}
-          triggerText={'Second step with tooltip'}
-          tooltipId="tooltipId-0">
-          <p>Overflow tooltip content.</p>
-        </Tooltip>
-      )}
     />
     <ProgressStep
       label="Fourth step"
