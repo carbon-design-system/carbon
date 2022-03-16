@@ -79,14 +79,6 @@ $popover-caret-height: custom-property.get-var(
 
   /// Modifiers
 
-  // Light modifier
-  .#{$prefix}--popover--light .#{$prefix}--popover-content {
-    @include custom-property.declaration(
-      'popover-background-color',
-      theme.$layer-02
-    );
-  }
-
   // High contrast modifier
   .#{$prefix}--popover--high-contrast .#{$prefix}--popover {
     @include custom-property.declaration(
