@@ -54,15 +54,24 @@ import { Layer } from '../../Layer';
 export default {
   title: 'Components/TimePicker',
   component: TimePicker,
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
+  args: {
+    size: 'md',
+  },
   subcomponents: {
     TimePickerSelect,
     SelectItem,
   },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
-    <TimePicker id="time-picker" labelText="Select a time">
+    <TimePicker id="time-picker" labelText="Select a time" {...args}>
       <TimePickerSelect id="time-picker-select-1">
         <SelectItem value="AM" text="AM" />
         <SelectItem value="PM" text="PM" />
@@ -75,10 +84,10 @@ export const Default = () => {
   );
 };
 
-export const WithLayer = () => {
+export const WithLayer = (args) => {
   return (
     <>
-      <TimePicker id="time-picker" labelText="First layer">
+      <TimePicker id="time-picker" labelText="First layer" {...args}>
         <TimePickerSelect id="time-picker-select-1">
           <SelectItem value="AM" text="AM" />
           <SelectItem value="PM" text="PM" />
@@ -89,7 +98,7 @@ export const WithLayer = () => {
         </TimePickerSelect>
       </TimePicker>
       <Layer>
-        <TimePicker id="time-picker" labelText="Second layer">
+        <TimePicker id="time-picker" labelText="Second layer" {...args}>
           <TimePickerSelect id="time-picker-select-1">
             <SelectItem value="AM" text="AM" />
             <SelectItem value="PM" text="PM" />
@@ -100,7 +109,7 @@ export const WithLayer = () => {
           </TimePickerSelect>
         </TimePicker>
         <Layer>
-          <TimePicker id="time-picker" labelText="Third layer">
+          <TimePicker id="time-picker" labelText="Third layer" {...args}>
             <TimePickerSelect id="time-picker-select-1">
               <SelectItem value="AM" text="AM" />
               <SelectItem value="PM" text="PM" />

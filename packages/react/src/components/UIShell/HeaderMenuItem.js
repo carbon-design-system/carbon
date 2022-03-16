@@ -18,6 +18,7 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
     'aria-current': ariaCurrent,
     children,
     role,
+    tabIndex = 0,
     ...rest
   },
   ref
@@ -38,7 +39,7 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
         aria-current={ariaCurrent}
         className={linkClassName}
         ref={ref}
-        tabIndex={0}>
+        tabIndex={tabIndex}>
         <span className={`${prefix}--text-truncate--end`}>{children}</span>
       </Link>
     </li>
@@ -74,6 +75,11 @@ HeaderMenuItem.propTypes = {
    * `<ul>` semantics for menus.
    */
   role: PropTypes.string,
+
+  /**
+   * Specify the tab index of the Link
+   */
+  tabIndex: PropTypes.number,
 };
 
 export default HeaderMenuItem;

@@ -1,8 +1,11 @@
-import { Preview, Props, Story } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Canvas, Story } from '@storybook/addon-docs/blocks';
 
-# [Unstable] Popover
+# Popover
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Popover)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/popover/usage)
+&nbsp;|&nbsp;
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -17,14 +20,77 @@ import { Preview, Props, Story } from '@storybook/addon-docs/blocks';
 
 ## Overview
 
-**Note: this component is currently experimental and does not follow semver.**
+`Popover` is a primitive component used to build custom components which render
+over other elements on the page. For example, `Popover` is used to build
+our popover components in Carbon.
 
-The Popover component is used to build layers that appear on top of the current
-surface.
+The `Popover` component accepts two items as `children`: a trigger element and
+a `PopoverContent` component which contains the content to be rendered inside of the
+`Popover`.
+
+```jsx
+import { Popover, PopoverContent } from '@carbon/react';
+import React from 'react';
+
+function CustomComponent() {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <Popover open={open}>
+      <button
+        type="button"
+        onClick={() => {
+          setOpen(!open);
+        }}>
+        Toggle
+      </button>
+      <PopoverContent>
+        The content that is revealed by interacting with the Toggle button
+      </PopoverContent>
+    </Popover>
+  );
+}
+```
+
+## Visibility
+
+The `open` prop allows you to control the visibility of the `Popover`. This is
+often tracked in state and is toggled based on the trigger render inside of the
+`Popover`. A trigger must be an interactive element and in most cases it will be
+a `<button>`.
+
+## Alignment
+
+The `align` prop allows you to specify where your content should be placed
+relative to the popover. For example, if you provide `align="top"` to the
+`Popover` component then the popover will render above your component.
+Similarly, if you provide `align="bottom"` then the popover will render below
+your component.
+
+You can also configure the placement of the caret, if it is enabled, by choosing
+between `left` and `right` or `bottom` and `top`, depending on where your
+popover is being rendered.
+
+If you are using `align="top"`, then you can choose between `align="top-left"`
+and `align="top-right"`. These options will place the caret closer to the left
+or right edges of the popover.
+
+If you are using `align="left"` or `align="right"`, you can use `top` or
+`bottom` to control this alignment.
+
+## Appearance
+
+The `Popover` component has several props which you can use to customize its
+appearance, including:
+
+- `caret`: to conditionally display a `caret` or render the popover directly
+beside the trigger element
+- `dropShadow`: to display a drop shadow on the popover content
+- `highContrast`: to display a high contrast variant of the popover
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 
