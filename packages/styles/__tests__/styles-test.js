@@ -91,36 +91,51 @@ const filepaths = [
   'scss/components/treeview',
   'scss/components/ui-shell',
 ];
-describe.each(filepaths)('%s', (filepath) => {
-  it('should be importable', async () => {
-    await expect(render(`@use '../${filepath}';`)).resolves.toBeDefined();
-  });
-});
 
-describe('Snapshot Tests', () => {
-  it('should match snapshots', async () => {
+describe('@carbon/styles', () => {
+  describe.each(filepaths)('%s', (filepath) => {
+    it('should be importable', async () => {
+      await expect(render(`@use '../${filepath}';`)).resolves.toBeDefined();
+    });
+  });
+
+  it('should have stable public scss entrypoints', async () => {
     expect(filepaths).toMatchSnapshot();
   });
-});
 
-describe('@carbon/styles/scss/config', () => {
-  test('Config overrides', async () => {
-    const { get } = await render(`
-      @use 'sass:meta';
-      @use '../scss/config' with (
-        $prefix: 'custom-prefix',
-        $css--font-face: false,
-      );
+  describe('scss/config', () => {
+    test('config overrides', async () => {
+      const { get } = await render(`
+        @use 'sass:meta';
+        @use '../scss/config' with (
+          $prefix: 'custom-prefix',
+          $css--font-face: false,
+        );
 
-      $_: get('config', (
-        prefix: config.$prefix,
-        css--font-face: config.$css--font-face,
-      ));
-    `);
+        $_: get('config', (
+          prefix: config.$prefix,
+          css--font-face: config.$css--font-face,
+        ));
+      `);
 
-    expect(get('config').value).toEqual({
-      prefix: 'custom-prefix',
-      ['css--font-face']: false,
+      expect(get('config').value).toEqual({
+        prefix: 'custom-prefix',
+        ['css--font-face']: false,
+      });
+    });
+  });
+
+  describe('import order', () => {
+    it('should support bringing in stylesheets independently', async () => {
+      await expect(
+        render(`
+          @use '../scss/reset';
+          @use '../scss/grid';
+          @use '../scss/breakpoint';
+          @use '../scss/colors';
+          @use '../scss/components';
+        `)
+      ).resolves.not.toThrow();
     });
   });
 });

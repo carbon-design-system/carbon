@@ -5,7 +5,7 @@ Array [
   "prefix",
   "flex-grid-columns",
   "grid-gutter",
-  "grid-gutter--condensed",
+  "grid-gutter-condensed",
   "grid-breakpoints",
 ]
 `;

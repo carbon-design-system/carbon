@@ -115,7 +115,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
-    color: $button-disabled;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
@@ -125,10 +125,11 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button:disabled:checked
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
-    border-color: $border-disabled;
+    // Disabled radio button, checkbox fix #10913
+    border-color: $icon-disabled;
 
     &::before {
-      background-color: $button-disabled;
+      background-color: $text-disabled;
     }
   }
 
