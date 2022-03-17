@@ -218,6 +218,7 @@ module.exports = {
 
     return {
       filepath,
+      relativePath: importPath,
       importPath: path.join('@carbon/styles', importPath),
     };
   }),
