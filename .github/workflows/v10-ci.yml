@@ -1,4 +1,4 @@
-name: v10-ci
+name: v10 - ci
 on:
   push:
     branches:
