@@ -292,6 +292,7 @@ export function ToastNotification({
           notificationType="toast"
           onClick={handleCloseButtonClick}
           aria-hidden="true"
+          tab-index="-1"
         />
       )}
     </div>
@@ -442,7 +443,8 @@ export function InlineNotification({
           iconDescription={iconDescription}
           notificationType="inline"
           onClick={handleCloseButtonClick}
-          aria-hidden={true}
+          aria-hidden="true"
+          tabIndex="-1"
         />
       )}
     </div>
@@ -503,9 +505,8 @@ InlineNotification.propTypes = {
   onCloseButtonClick: PropTypes.func,
 
   /**
-   * By default, this value is "alert". You can also provide an alternate
-   * role if it makes sense from the accessibility-side. If the `actions` prop is
-   * configured, this will be overridden to "alertdialog".
+   * By default, this value is "status". You can also provide an alternate
+   * role if it makes sense from the accessibility-side.
    */
   role: PropTypes.oneOf(['alert', 'log', 'status']).isRequired,
 
