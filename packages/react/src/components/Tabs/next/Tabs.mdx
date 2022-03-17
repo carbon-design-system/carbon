@@ -1,0 +1,78 @@
+import { Props, Preview, Story } from '@storybook/addon-docs/blocks';
+import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
+
+# Tabs
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tabs)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/tabs/usage)
+&nbsp;|&nbsp;
+[Accessibility](https://www.carbondesignsystem.com/components/tabs/accessibility)
+
+## Table of Contents
+
+- [Overview](#overview)
+  - [Line Tabs](#line-tabs)
+  - [Container Tabs](#container-tabs)
+- [Component API](#component-api)
+  - [Tab `renderContent`](#tab-rendercontent)
+- [Feedback](#feedback)
+
+## Overview
+
+Use tabs to allow users to navigate easily between views within the same
+context. Tabs are now more composable, meaning that you have more flexibility in
+what is in rendered inside of `Tab` and `TabPanel`.
+
+### Default Tabs
+
+<Preview>
+  <Story id="components-tabs--line" />
+</Preview>
+
+### Container Tabs
+
+<Preview>
+  <Story id="components-tabs--contained" />
+</Preview>
+
+### Icon Tabs
+
+<Preview>
+  <Story id="components-tabs--icon-only" />
+</Preview>
+
+<Preview>
+  <Story id="components-tabs--icon-20-only" />
+</Preview>
+
+## Component API
+
+<Props />
+
+### Tab - render content on click
+
+You will occasionally run into a situation where you only want Tab content to be
+loaded when the Tab is clicked. In v11, to do this, you can this by setting
+`activation` to `manual`:
+
+```jsx
+<Tabs>
+  <TabList aria-label="List of tabs" activation="manual">
+    <Tab>Tab Label 1</Tab>
+    <Tab>Tab Label 2</Tab>
+    <Tab>Tab Label 3</Tab>
+  </TabList>
+  <TabPanels>
+    <TabPanel>Tab Panel 1</TabPanel>
+    <TabPanel>Tab Panel 2</TabPanel>
+    <TabPanel>Tab Panel 3</TabPanel>
+  </TabPanels>
+</Tabs>
+```
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Tabs/Tabs.mdx).

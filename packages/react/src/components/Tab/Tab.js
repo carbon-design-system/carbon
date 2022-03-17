@@ -55,9 +55,7 @@ export default class Tab extends React.Component {
     /**
      * Provide the contents of your Tab
      */
-    label: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.node.isRequired
-      : PropTypes.node,
+    label: PropTypes.node,
 
     /**
      * Provide a handler that is invoked when a user clicks on the control

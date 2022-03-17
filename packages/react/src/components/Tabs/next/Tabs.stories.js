@@ -8,6 +8,7 @@
 import React from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import Button from '../../Button';
+import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
 import {
@@ -37,10 +38,14 @@ export default {
     TabPanels,
     TabPanel,
   },
-  parameters: {},
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
+export const Line = () => (
   <div style={{ width: '400px' }}>
     <Tabs>
       <TabList aria-label="List of tabs">
@@ -76,7 +81,9 @@ export const Manual = () => (
         <Tab>Tab Label 1</Tab>
         <Tab>Tab Label 2</Tab>
         <Tab disabled>Tab Label 3</Tab>
-        <Tab>Tab Label 4 with a very long long label</Tab>
+        <Tab title="Tab Label 4 with a very long long label">
+          Tab Label 4 with a very long long label
+        </Tab>
         <Tab>Tab Label 5</Tab>
         <Tab>Tab Label 6</Tab>
         <Tab>Tab Label 7</Tab>
@@ -146,7 +153,9 @@ export const Contained = () => (
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
       <Tab disabled>Tab Label 3</Tab>
-      <Tab>Tab Label 4 with a very long long title</Tab>
+      <Tab title="Tab Label 4 with a very long long title">
+        Tab Label 4 with a very long long title
+      </Tab>
       <Tab>Tab Label 5</Tab>
     </TabList>
     <TabPanels>
