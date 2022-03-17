@@ -8669,9 +8669,6 @@ Map {
       "highContrast": Object {
         "type": "bool",
       },
-      "light": Object {
-        "type": "bool",
-      },
       "open": Object {
         "isRequired": true,
         "type": "bool",
@@ -8714,6 +8711,16 @@ Map {
           Array [
             "small",
             "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+            "indented",
           ],
         ],
         "type": "oneOf",
