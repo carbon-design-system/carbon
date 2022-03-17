@@ -132,10 +132,10 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--dropdown--light {
-    background-color: $field-02;
+    background-color: $field;
 
     &:hover {
-      background-color: $layer-hover-02;
+      background-color: $field-hover;
     }
   }
 
@@ -202,7 +202,7 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--dropdown--light .#{$prefix}--dropdown-list {
-    background-color: $field-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--open)
@@ -354,7 +354,7 @@
 
     // V11: Possibly deprecate
     &.#{$prefix}--dropdown--light:hover {
-      background-color: $field-02;
+      background-color: $field;
     }
   }
 
@@ -377,7 +377,7 @@
     transition: background $duration-fast-01 motion(entrance, productive);
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $layer-hover;
     }
 
     &.#{$prefix}--dropdown--disabled {
@@ -433,11 +433,11 @@
 
   .#{$prefix}--dropdown--show-selected .#{$prefix}--dropdown--selected {
     display: block;
-    background-color: $layer-hover;
+    background-color: $layer-selected;
     color: $text-primary;
 
     &:hover {
-      background-color: $layer-selected;
+      background-color: $layer-selected-hover;
     }
 
     .#{$prefix}--dropdown-link {

@@ -2792,19 +2792,6 @@ Map {
       "role": Object {
         "type": "string",
       },
-      "size": Object {
-        "args": Array [
-          Array [
-            "default",
-            "field",
-            "small",
-            "sm",
-            "md",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
       "tabIndex": Object {
         "type": "number",
       },
@@ -3354,6 +3341,9 @@ Map {
       "role": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -3543,6 +3533,7 @@ Map {
     "render": [Function],
   },
   "Link" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3586,6 +3577,7 @@ Map {
         "type": "bool",
       },
     },
+    "render": [Function],
   },
   "ListItem" => Object {
     "propTypes": Object {
@@ -5925,6 +5917,16 @@ Map {
     },
     "render": [Function],
   },
+  "SkeletonIcon" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "style": Object {
+        "type": "object",
+      },
+    },
+  },
   "SkeletonPlaceholder" => Object {
     "propTypes": Object {
       "className": Object {
@@ -6201,6 +6203,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
     },
     "render": [Function],
@@ -7995,13 +8000,63 @@ Map {
       },
     },
   },
-  "unstable_DefinitionTooltip" => Object {
+  "unstable_ColumnHang" => Object {
     "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "children": Object {
         "type": "node",
       },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "unstable_DefinitionTooltip" => Object {
+    "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
       "definition": Object {
         "isRequired": true,
+        "type": "node",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "tooltipText": [Function],
+      "triggerClassName": Object {
         "type": "string",
       },
     },
@@ -8614,9 +8669,6 @@ Map {
       "highContrast": Object {
         "type": "bool",
       },
-      "light": Object {
-        "type": "bool",
-      },
       "open": Object {
         "isRequired": true,
         "type": "bool",
@@ -8659,6 +8711,16 @@ Map {
           Array [
             "small",
             "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+            "indented",
           ],
         ],
         "type": "oneOf",
@@ -8767,8 +8829,17 @@ Map {
         ],
         "type": "oneOf",
       },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
       "light": Object {
         "type": "bool",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollDebounceWait": Object {
+        "type": "number",
       },
       "scrollIntoView": Object {
         "type": "bool",

@@ -20,6 +20,7 @@ function ProgressBar({
   label,
   max = 100,
   size = 'big',
+  type = 'default',
   value,
 }) {
   const labelId = useId('progress-bar');
@@ -40,6 +41,7 @@ function ProgressBar({
   const wrapperClasses = classNames(
     `${prefix}--progress-bar`,
     `${prefix}--progress-bar--${size}`,
+    `${prefix}--progress-bar--${type}`,
     {
       [`${prefix}--progress-bar--indeterminate`]: indeterminate,
     },
@@ -107,6 +109,11 @@ ProgressBar.propTypes = {
    * Specify the size of the ProgressBar.
    */
   size: PropTypes.oneOf(['small', 'big']),
+
+  /**
+   * Defines the alignment variant of the progress bar.
+   */
+  type: PropTypes.oneOf(['default', 'inline', 'indented']),
 
   /**
    * The current value.

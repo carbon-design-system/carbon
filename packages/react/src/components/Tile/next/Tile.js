@@ -72,7 +72,6 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
   ref
 ) {
   const prefix = usePrefix();
-
   const classes = cx(
     `${prefix}--tile`,
     `${prefix}--tile--clickable`,
