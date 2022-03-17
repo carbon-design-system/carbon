@@ -19,6 +19,7 @@ const stories = glob
       '../src/**/*.stories.js',
       '../src/**/*.stories.mdx',
       '../../react/src/**/next/*.stories.js',
+      '../../react/src/**/next/**/*.stories.js',
       '../../react/src/**/next/*.stories.mdx',
       '../../react/src/**/*-story.js',
     ],
