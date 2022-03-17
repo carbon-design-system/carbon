@@ -22,14 +22,13 @@
     "access": "public"
   },
   "peerDependencies": {
-    "node-sass": "^4.13.1",
     "react-dom": "^16.9.0 || ^17.0.1"
   },
   "dependencies": {
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "resolve": "^1.12.0",
-    "sass": "^1.43.3",
+    "sass": "^1.45.0",
     "tabbable": "^4.0.0"
   },
   "devDependencies": {
