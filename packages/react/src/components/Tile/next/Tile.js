@@ -514,13 +514,13 @@ export function ExpandableTile({
   }, []);
 
   useIsomorphicEffect(() => {
-    const belowInteractiveContent = getInteractiveContent(belowTheFold.current);
-    const aboveInteractiveContent = getInteractiveContent(aboveTheFold.current);
-
-    if (belowInteractiveContent || aboveInteractiveContent) {
+    if (getInteractiveContent(belowTheFold.current)) {
+      setInteractive(true);
+      return;
+    } else if (getInteractiveContent(aboveTheFold.current)) {
       setInteractive(true);
     }
-  });
+  }, []);
 
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
