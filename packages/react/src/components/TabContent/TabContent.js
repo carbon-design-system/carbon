@@ -8,11 +8,9 @@
 import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { selectorTabbable } from '../../internal/keyboard/navigation';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * Determine if the node within the provided ref contains content that is tabbable.
@@ -36,6 +34,7 @@ const TabContent = (props) => {
   });
   const ref = useRef(null);
   const hasTabbableContent = useTabbableContent(ref);
+  const prefix = usePrefix();
   return (
     <div
       role="tabpanel"

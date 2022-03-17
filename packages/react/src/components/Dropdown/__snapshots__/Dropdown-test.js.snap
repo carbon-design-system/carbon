@@ -85,7 +85,7 @@ exports[`Dropdown should render 1`] = `
             translateWithId={[Function]}
           >
             <div
-              className="bx--list-box__menu-icon"
+              className="undefined--list-box__menu-icon"
             >
               <ForwardRef(ChevronDown16)
                 aria-label="Open menu"
@@ -236,7 +236,7 @@ exports[`Dropdown should render custom item components 1`] = `
             translateWithId={[Function]}
           >
             <div
-              className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+              className="undefined--list-box__menu-icon undefined--list-box__menu-icon--open"
             >
               <ForwardRef(ChevronDown16)
                 aria-label="Close menu"
@@ -545,7 +545,7 @@ exports[`Dropdown should render with strings as items 1`] = `
             translateWithId={[Function]}
           >
             <div
-              className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+              className="undefined--list-box__menu-icon undefined--list-box__menu-icon--open"
             >
               <ForwardRef(ChevronDown16)
                 aria-label="Close menu"
