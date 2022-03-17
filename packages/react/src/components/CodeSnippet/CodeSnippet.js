@@ -33,7 +33,6 @@ function CodeSnippet({
   onClick,
   ariaLabel,
   copyText,
-  copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
   copyButtonDescription,
   light,
   showMoreText,
@@ -183,7 +182,7 @@ function CodeSnippet({
       <Copy
         {...rest}
         onClick={handleCopyClick}
-        aria-label={copyLabel || ariaLabel}
+        aria-label={ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
         feedback={feedback}
@@ -227,7 +226,7 @@ function CodeSnippet({
         role={type === 'single' ? 'textbox' : null}
         tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
-        aria-label={ariaLabel || copyLabel || 'code-snippet'}
+        aria-label={ariaLabel || 'code-snippet'}
         onScroll={(type === 'single' && handleScroll) || null}
         {...containerStyle}>
         <pre
@@ -298,12 +297,6 @@ CodeSnippet.propTypes = {
    * Specify the description for the Copy Button
    */
   copyButtonDescription: PropTypes.string,
-
-  /**
-   * Specify a label to be read by screen readers on the containing <textbox>
-   * node
-   */
-  copyLabel: PropTypes.string,
 
   /**
    * Optional text to copy. If not specified, the `children` node's `innerText`
