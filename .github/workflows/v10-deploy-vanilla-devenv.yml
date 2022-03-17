@@ -1,7 +1,6 @@
-name: Deploy React storybook to IBM Cloud
+name: Deploy vanilla devenv to IBM Cloud
 
 on:
-  workflow_dispatch:
   push:
     tags:
       # Matches tags that have the shape `vX.Y.Z`. Reference:
@@ -11,19 +10,20 @@ on:
       # Ignore tags that use a preid after `vX.Y.Z`, for example: vX.Y.Z-alpha.0
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns
       - '!v[0-9]+.[0-9]+.[0-9]+-*'
-      - '!v10*'
 
 jobs:
   build:
     runs-on: macOS-latest
     steps:
       - uses: actions/checkout@main
+        with:
+          ref: v10
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
+        run: yarn install --immutable --immutable-cache --check-cache
       - name: Build project
         run: yarn build
       - name: Install ibmcloud CLI
@@ -39,13 +39,14 @@ jobs:
           ibmcloud target -o 'carbon-design-system' -s 'production'
       - name: Install IBM Cloud plugins
         run: |
-          ibmcloud cf install
+          # We use v6.50.0 as v6.51.0 and v6.52.0 have a bug where we are unable to set
+          # the CF API
+          ibmcloud cf install -v 6.50.0
           ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
-      - name: Deploy React storybook
+      - name: Deploy vanilla devenv
         run: |
-          cd packages/react
-          yarn build-storybook
-          ibmcloud cf blue-green-deploy carbon-storybook \
+          cd packages/components
+          ibmcloud cf blue-green-deploy carbon-dev-environment \
             -f manifest.yml \
             --delete-old-apps
