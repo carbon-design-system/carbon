@@ -37,6 +37,7 @@
     "access": "public"
   },
   "scripts": {
+    "build": "node tasks/build-styles.js",
     "postinstall": "carbon-telemetry collect --install"
   },
   "peerDependencies": {
