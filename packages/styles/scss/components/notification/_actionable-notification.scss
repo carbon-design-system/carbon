@@ -78,7 +78,7 @@
   }
 
   .#{$prefix}--actionable-notification a:focus {
-    outline: 1px solid $link-inverse;
+    outline: 1px solid $focus-inverse;
   }
 
   .#{$prefix}--actionable-notification.#{$prefix}--actionable-notification--low-contrast
@@ -217,7 +217,7 @@
   .#{$prefix}--actionable-notification__text-wrapper {
     display: flex;
     flex-wrap: wrap;
-    padding: rem(15px) 0;
+    padding: rem(15px) 0 rem(23px) 0;
   }
 
   .#{$prefix}--actionable-notification__content {
@@ -273,7 +273,7 @@
 
   /* Tertiary action button when not inline (toast) */
   .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
-    margin-bottom: $spacing-03;
+    margin-bottom: $spacing-05;
 
     // Button should be left aligned with text. 20px is the width of the notification icon
     margin-left: calc(#{$spacing-07} + #{rem(20px)});

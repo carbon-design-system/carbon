@@ -96,7 +96,6 @@ Toast.args = {
 };
 
 const InlineStory = (args) => {
-  console.log(args);
   return (
     <>
       <InlineNotification {...args} />
