@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { settings } from 'carbon-components';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const { prefix } = settings;
 
@@ -37,10 +38,11 @@ TableToolbar.propTypes = {
   children: PropTypes.node,
 
   /**
-   * `normal` Change the row height of table
-   * V11: remove small, normal
+   * `lg` Change the row height of table
    */
-  size: PropTypes.oneOf(['small', 'sm', 'normal', 'lg']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'lg'])
+    : PropTypes.oneOf(['small', 'sm', 'normal', 'lg']),
 };
 
 TableToolbar.defaultProps = {
