@@ -7,7 +7,7 @@
 
 import { cleanup, render } from '@testing-library/react';
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import {
   assertMenuOpen,
   assertMenuClosed,
@@ -216,12 +216,15 @@ describe('Dropdown', () => {
 
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<DropdownSkeleton size="sm" />);
-
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--dropdown-v2`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--list-box--sm`)).toEqual(true);
+      const wrapper = mount(<DropdownSkeleton size="sm" />);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--dropdown-v2`)).toEqual(
+        true
+      );
+      expect(wrapper.childAt(0).hasClass(`${prefix}--list-box--sm`)).toEqual(
+        true
+      );
     });
   });
 });
