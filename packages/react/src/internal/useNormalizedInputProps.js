@@ -11,9 +11,7 @@ import {
   WarningAltFilled16,
   EditOff16,
 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * @typedef {object} InputProps
@@ -59,6 +57,7 @@ export function useNormalizedInputProps({
   warn,
   warnText,
 }) {
+  const prefix = usePrefix();
   const normalizedProps = {
     disabled: !readOnly && disabled,
     invalid: !readOnly && invalid,
