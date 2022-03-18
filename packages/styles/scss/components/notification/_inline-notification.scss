@@ -34,10 +34,6 @@
     height: auto;
     min-height: rem(48px);
     flex-wrap: wrap;
-    @if not enabled('enable-v11-release') {
-      margin-top: $spacing-05;
-      margin-bottom: $spacing-05;
-    }
 
     color: $text-inverse;
 
@@ -200,24 +196,16 @@
     padding: rem(15px) 0;
   }
 
-  @if feature-flags.enabled('enable-v11-release') {
-    .#{$prefix}--inline-notification__content {
-      @include type-style('body-compact-01');
+  .#{$prefix}--inline-notification__title {
+    @include type-style('heading-compact-01');
 
-      word-break: break-word;
-    }
-  } @else {
-    .#{$prefix}--inline-notification__title {
-      @include type-style('heading-compact-01');
+    margin: 0 $spacing-02 0 0;
+  }
 
-      margin: 0 $spacing-02 0 0;
-    }
+  .#{$prefix}--inline-notification__subtitle {
+    @include type-style('body-compact-01');
 
-    .#{$prefix}--inline-notification__subtitle {
-      @include type-style('body-compact-01');
-
-      word-break: break-word;
-    }
+    word-break: break-word;
   }
 
   .#{$prefix}--inline-notification__action-button.#{$prefix}--btn--ghost {
