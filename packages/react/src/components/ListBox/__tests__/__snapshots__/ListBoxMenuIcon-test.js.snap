@@ -6,7 +6,7 @@ exports[`ListBoxMenuIcon should render 1`] = `
   translateWithId={[Function]}
 >
   <div
-    className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+    className="undefined--list-box__menu-icon undefined--list-box__menu-icon--open"
   >
     <ForwardRef(ChevronDown16)
       aria-label="Close menu"
@@ -53,7 +53,7 @@ exports[`ListBoxMenuIcon should render 2`] = `
   translateWithId={[Function]}
 >
   <div
-    className="bx--list-box__menu-icon"
+    className="undefined--list-box__menu-icon"
   >
     <ForwardRef(ChevronDown16)
       aria-label="Open menu"
