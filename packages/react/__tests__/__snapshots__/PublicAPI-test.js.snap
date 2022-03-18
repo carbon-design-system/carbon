@@ -901,6 +901,9 @@ Map {
       "onInputChange": Object {
         "type": "func",
       },
+      "onStateChange": Object {
+        "type": "func",
+      },
       "onToggleClick": Object {
         "type": "func",
       },
