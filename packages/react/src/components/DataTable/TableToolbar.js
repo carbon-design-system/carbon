@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -36,10 +37,11 @@ TableToolbar.propTypes = {
   children: PropTypes.node,
 
   /**
-   * `normal` Change the row height of table
-   * V11: remove small, normal
+   * `lg` Change the row height of table
    */
-  size: PropTypes.oneOf(['small', 'sm', 'normal', 'lg']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'lg'])
+    : PropTypes.oneOf(['small', 'sm', 'normal', 'lg']),
 };
 
 TableToolbar.defaultProps = {

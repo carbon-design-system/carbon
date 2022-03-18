@@ -5,15 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-/// Windows HCM Mixin
+/// High Contrast Mode mixin for Windows and macOS
 /// @access public
 /// @example @include high-contrast-mode;
 /// @group utilities
 /// Set HCM styles at the end of each file to ensure they are not overwritten
 @mixin high-contrast-mode($type: '') {
-  @media screen and (-ms-high-contrast: active),
-    (forced-colors: active),
-    (prefers-contrast) {
+  @media screen and (-ms-high-contrast: active), (forced-colors: active) {
     @if ($type == 'icon-fill') {
       fill: ButtonText;
     }

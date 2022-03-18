@@ -45,7 +45,7 @@
     "@carbon/feature-flags": "^0.7.0",
     "@carbon/icons-react": "^10.48.0",
     "@carbon/styles": "^0.16.0",
-    "@carbon/telemetry": "0.0.0-alpha.6",
+    "@carbon/telemetry": "0.1.0",
     "carbon-components": "^10.55.0",
     "carbon-components-react": "^7.55.0",
     "carbon-icons": "^7.0.7"
