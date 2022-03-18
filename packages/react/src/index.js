@@ -4,6 +4,9 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import './feature-flags';
+
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
 export { AspectRatio } from './components/AspectRatio';
