@@ -48,7 +48,7 @@ async function build() {
         preserveModules: true,
         preserveModulesRoot: path.dirname(entrypoint.filepath),
         banner,
-        exports: 'auto',
+        exports: 'named',
       });
     }
   }

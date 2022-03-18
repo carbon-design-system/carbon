@@ -1647,12 +1647,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.13.17, @babel/runtime@npm:^7.13.8, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.2":
-  version: 7.16.7
-  resolution: "@babel/runtime@npm:7.16.7"
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.10, @babel/runtime@npm:^7.13.17, @babel/runtime@npm:^7.13.8, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.9.1, @babel/runtime@npm:^7.9.2":
+  version: 7.17.8
+  resolution: "@babel/runtime@npm:7.17.8"
   dependencies:
     regenerator-runtime: ^0.13.4
-  checksum: 47912f0aaacd1cab2e2552aaf3e6eaffbcaf2d5ac9b07a89a12ac0d42029cb92c070b0d16f825e4277c4a34677c54d8ffe85e1f7c6feb57de58f700eec67ce2f
+  checksum: 68d195c1630bb91ac20e86635d292a17ebab7f361cfe79406b3f5a6cc2e59fa283ae5006568899abf869312c2b35b744bd407aea8ffdb650f1a68d07785d47e9
   languageName: node
   linkType: hard
 
@@ -2024,8 +2024,10 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.16.7
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
+    "@babel/runtime": ^7.16.7
     "@carbon/feature-flags": ^0.7.0
     "@carbon/icons-react": ^10.48.0
+    "@carbon/layout": ^10.37.0
     "@carbon/styles": ^0.16.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.21.0
@@ -2047,18 +2049,26 @@ __metadata:
     babel-plugin-dev-expression: ^0.2.3
     babel-preset-carbon: ^0.2.0
     browserslist-config-carbon: ^10.6.1
-    carbon-components: ^10.55.0
-    carbon-components-react: ^7.55.0
-    carbon-icons: ^7.0.7
+    classnames: 2.3.1
+    copy-to-clipboard: ^3.3.1
     css-loader: ^6.5.1
+    downshift: 5.2.1
     fast-glob: ^3.2.7
+    flatpickr: 4.6.9
     fs-extra: ^10.0.0
+    invariant: ^2.2.3
+    lodash.debounce: ^4.0.8
+    lodash.findlast: ^4.5.0
+    lodash.isequal: ^4.5.0
+    lodash.omit: ^4.5.0
+    lodash.throttle: ^4.1.1
     mini-css-extract-plugin: ^2.4.5
     postcss: ^8.4.5
     postcss-loader: ^6.2.1
     prop-types: ^15.7.2
     react: ^17.0.2
     react-dom: ^17.0.2
+    react-is: ^17.0.2
     rimraf: ^3.0.2
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
@@ -2066,7 +2076,10 @@ __metadata:
     sass: ^1.45.0
     sass-loader: ^12.4.0
     style-loader: ^3.3.1
+    use-resize-observer: ^6.0.0
     webpack: ^5.65.0
+    wicg-inert: ^3.1.1
+    window-or-global: ^1.0.1
   peerDependencies:
     react: ^16.8.6 || ^17.0.1
     react-dom: ^16.8.6 || ^17.0.1
@@ -10561,7 +10574,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"carbon-components-react@^7.55.0, carbon-components-react@workspace:packages/carbon-components-react":
+"carbon-components-react@npm:^6.0.0":
+  version: 6.116.2
+  resolution: "carbon-components-react@npm:6.116.2"
+  dependencies:
+    "@carbon/icons-react": ^0.0.1-beta.2
+    classnames: 2.2.6
+    downshift: ^1.31.14
+    flatpickr: 4.5.5
+    focus-trap-react: ^6.0.0
+    invariant: ^2.2.3
+    lodash.debounce: ^4.0.8
+    lodash.isequal: ^4.5.0
+    lodash.omit: ^4.5.0
+    react-is: ^16.8.2
+    warning: ^3.0.0
+    window-or-global: ^1.0.1
+  peerDependencies:
+    carbon-components: ^9.87.2
+    carbon-icons: ^7.0.7
+    react: ^16.4.0
+    react-dom: ^16.4.0
+  checksum: 8381face7fa24b56fc1c4e6ba86721c0c551afccbb9998d580ff6956e67d02db819477199a57c79fb9d1b601c9bc44c5e2b932867729cdd9bd4e1e1f5f14b2d7
+  languageName: node
+  linkType: hard
+
+"carbon-components-react@workspace:packages/carbon-components-react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/carbon-components-react"
   dependencies:
@@ -10592,32 +10630,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"carbon-components-react@npm:^6.0.0":
-  version: 6.116.2
-  resolution: "carbon-components-react@npm:6.116.2"
+"carbon-components@npm:^9.0.0":
+  version: 9.91.5
+  resolution: "carbon-components@npm:9.91.5"
   dependencies:
-    "@carbon/icons-react": ^0.0.1-beta.2
-    classnames: 2.2.6
-    downshift: ^1.31.14
-    flatpickr: 4.5.5
-    focus-trap-react: ^6.0.0
-    invariant: ^2.2.3
-    lodash.debounce: ^4.0.8
-    lodash.isequal: ^4.5.0
-    lodash.omit: ^4.5.0
-    react-is: ^16.8.2
-    warning: ^3.0.0
-    window-or-global: ^1.0.1
-  peerDependencies:
-    carbon-components: ^9.87.2
     carbon-icons: ^7.0.7
-    react: ^16.4.0
-    react-dom: ^16.4.0
-  checksum: 8381face7fa24b56fc1c4e6ba86721c0c551afccbb9998d580ff6956e67d02db819477199a57c79fb9d1b601c9bc44c5e2b932867729cdd9bd4e1e1f5f14b2d7
+    flatpickr: 4.5.7
+    lodash.debounce: ^4.0.8
+    warning: ^3.0.0
+  checksum: 81f86f1e3bc141bae779ef7850a1329ed13e6a01ab3961ef0580624bd2a209edccfaa0383b68b11f3498dbbb812f1bec2ab7e73eb70f0bb8dd7b0dc833ec068f
   languageName: node
   linkType: hard
 
-"carbon-components@^10.55.0, carbon-components@workspace:packages/components":
+"carbon-components@workspace:packages/components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/components"
   dependencies:
@@ -10728,18 +10753,6 @@ __metadata:
     whatwg-fetch: ^3.6.2
   languageName: unknown
   linkType: soft
-
-"carbon-components@npm:^9.0.0":
-  version: 9.91.5
-  resolution: "carbon-components@npm:9.91.5"
-  dependencies:
-    carbon-icons: ^7.0.7
-    flatpickr: 4.5.7
-    lodash.debounce: ^4.0.8
-    warning: ^3.0.0
-  checksum: 81f86f1e3bc141bae779ef7850a1329ed13e6a01ab3961ef0580624bd2a209edccfaa0383b68b11f3498dbbb812f1bec2ab7e73eb70f0bb8dd7b0dc833ec068f
-  languageName: node
-  linkType: hard
 
 "carbon-icons@npm:^7.0.7":
   version: 7.0.7
@@ -11190,7 +11203,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"classnames@npm:^2.2.0, classnames@npm:^2.2.5":
+"classnames@npm:2.3.1, classnames@npm:^2.2.0, classnames@npm:^2.2.5":
   version: 2.3.1
   resolution: "classnames@npm:2.3.1"
   checksum: 14db8889d56c267a591f08b0834989fe542d47fac659af5a539e110cc4266694e8de86e4e3bbd271157dbd831361310a8293e0167141e80b0f03a0f175c80960
@@ -11902,7 +11915,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"compute-scroll-into-view@npm:^1.0.17":
+"compute-scroll-into-view@npm:^1.0.13, compute-scroll-into-view@npm:^1.0.17":
   version: 1.0.17
   resolution: "compute-scroll-into-view@npm:1.0.17"
   checksum: b20c05a10c37813c5a6e4bf053c00f65c88d23afed7a6bd7a2a69e05e2ffc2df3483ecfe407d36bf16b8cec8be21ae1966c9c523093a03117e567156cd79a51e
@@ -13838,6 +13851,20 @@ __metadata:
     tslib: ^1.10.0
     xml2js: 0.4.19
   checksum: faa5881a00a37c984494c26a38a73d415faba782b403a0a0f5905f07acbbb3020b9a3815ef2cfe05f391a949b2ba6adb69dd6cbd6fa689766a3fc1ccc1a814a3
+  languageName: node
+  linkType: hard
+
+"downshift@npm:5.2.1":
+  version: 5.2.1
+  resolution: "downshift@npm:5.2.1"
+  dependencies:
+    "@babel/runtime": ^7.9.1
+    compute-scroll-into-view: ^1.0.13
+    prop-types: ^15.7.2
+    react-is: ^16.13.1
+  peerDependencies:
+    react: ">=0.14.9"
+  checksum: fc8e731106cdaa9bfcd1d855d8b25dbaaa6fb22dfb51a3c32e51f460c199730a6ddfbd311891bbdc4bba642238d2239f1fb7642ce5d3f616f09fc68abd6a76f4
   languageName: node
   linkType: hard
 
@@ -16355,6 +16382,13 @@ __metadata:
   version: 4.6.1
   resolution: "flatpickr@npm:4.6.1"
   checksum: 66ea82084a70570a0dcf5a46a3b7e6a6551ec06fd1238f544226540feae69d2c3fd7af69f77c73023059e1a0d50e2f6ed0a6c4d4c390794cc4c8dd3c50002338
+  languageName: node
+  linkType: hard
+
+"flatpickr@npm:4.6.9":
+  version: 4.6.9
+  resolution: "flatpickr@npm:4.6.9"
+  checksum: 4702ad182531af0524b2fc74a70e06d276ff91918449092b3a11c464cb5a5e010df6c7cc9ff92e8b8373f81b238ea85d911ce9b3b883ee8df5085180cc3aea13
   languageName: node
   linkType: hard
 
@@ -22404,6 +22438,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.findlast@npm:^4.5.0":
+  version: 4.6.0
+  resolution: "lodash.findlast@npm:4.6.0"
+  checksum: 0bd608c3f704859c4c5e2073d13b1ef8e69ba4ddf1a03388163484e6ec5e55c9d1020489a9231cb3eef0a28704502d5fa80efcb61a410b4af2646662730fd854
+  languageName: node
+  linkType: hard
+
 "lodash.flatten@npm:^4.4.0":
   version: 4.4.0
   resolution: "lodash.flatten@npm:4.4.0"
@@ -22568,6 +22609,13 @@ __metadata:
   dependencies:
     lodash._reinterpolate: ^3.0.0
   checksum: 863e025478b092997e11a04e9d9e735875eeff1ffcd6c61742aa8272e3c2cddc89ce795eb9726c4e74cef5991f722897ff37df7738a125895f23fc7d12a7bb59
+  languageName: node
+  linkType: hard
+
+"lodash.throttle@npm:^4.1.1":
+  version: 4.1.1
+  resolution: "lodash.throttle@npm:4.1.1"
+  checksum: 129c0a28cee48b348aef146f638ef8a8b197944d4e9ec26c1890c19d9bf5a5690fe11b655c77a4551268819b32d27f4206343e30c78961f60b561b8608c8c805
   languageName: node
   linkType: hard
 
@@ -28520,6 +28568,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"resize-observer-polyfill@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "resize-observer-polyfill@npm:1.5.1"
+  checksum: 57e7f79489867b00ba43c9c051524a5c8f162a61d5547e99333549afc23e15c44fd43f2f318ea0261ea98c0eb3158cca261e6f48d66e1ed1cd1f340a43977094
+  languageName: node
+  linkType: hard
+
 "resolve-cwd@npm:^3.0.0":
   version: 3.0.0
   resolution: "resolve-cwd@npm:3.0.0"
@@ -33605,6 +33660,18 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
+"use-resize-observer@npm:^6.0.0":
+  version: 6.1.0
+  resolution: "use-resize-observer@npm:6.1.0"
+  dependencies:
+    resize-observer-polyfill: ^1.5.1
+  peerDependencies:
+    react: ">=16.8.0"
+    react-dom: ">=16.8.0"
+  checksum: a4135446ed1c022f89c8ed21bc98aad96db823489cd9ca8a7c69b99e0bbd81d804adec5ab4418cddc6512e6f2fa974541da54acb1f93af5579cd19457de2ea7c
+  languageName: node
+  linkType: hard
+
 "use-subscription@npm:1.5.1":
   version: 1.5.1
   resolution: "use-subscription@npm:1.5.1"
@@ -34504,6 +34571,13 @@ resolve@^2.0.0-next.3:
   bin:
     node-which: ./bin/node-which
   checksum: 1a5c563d3c1b52d5f893c8b61afe11abc3bab4afac492e8da5bde69d550de701cf9806235f20a47b5c8fa8a1d6a9135841de2596535e998027a54589000e66d1
+  languageName: node
+  linkType: hard
+
+"wicg-inert@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "wicg-inert@npm:3.1.1"
+  checksum: d4553ea762ad5808b2d20990f05695d3272cf5d24ee9b0008d0edb0c69466eb6a24824ed932070553a2dc8b25eee8fcde780e073de89d640882d9da99f874944
   languageName: node
   linkType: hard
 
