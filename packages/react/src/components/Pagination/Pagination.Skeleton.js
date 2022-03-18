@@ -8,12 +8,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import SkeletonText from '../SkeletonText';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function PaginationSkeleton({ className, ...rest }) {
+  const prefix = usePrefix();
   return (
     <div
       className={cx(`${prefix}--pagination`, `${prefix}--skeleton`, className)}
