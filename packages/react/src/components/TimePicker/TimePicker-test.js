@@ -113,39 +113,52 @@ describe('TimePicker', () => {
     });
 
     describe('enabled textinput', () => {
-      const onClick = jest.fn();
-      const onChange = jest.fn();
-      const onBlur = jest.fn();
+      let onClick;
+      let onChange;
+      let onBlur;
+      let wrapper;
+      let input;
+      let eventObject;
 
-      const wrapper = shallow(
-        <TimePicker
-          id="test"
-          onClick={onClick}
-          onChange={onChange}
-          onBlur={onBlur}
-        />
-      );
-
-      const input = wrapper.find('input');
-      const eventObject = {
-        target: {
-          defaultValue: 'test',
-        },
-      };
+      beforeEach(() => {
+        onClick = jest.fn();
+        onChange = jest.fn();
+        onBlur = jest.fn();
+        wrapper = mount(
+          <TimePicker
+            id="test"
+            onClick={onClick}
+            onChange={onChange}
+            onBlur={onBlur}
+          />
+        );
+        input = wrapper.find('input');
+        eventObject = {
+          target: {
+            defaultValue: 'test',
+          },
+        };
+      });
 
       it('should invoke onBlur when input is clicked', () => {
         input.simulate('blur', eventObject);
-        expect(onBlur).toHaveBeenCalledWith(eventObject);
+        expect(onBlur).toHaveBeenCalledWith(
+          expect.objectContaining(eventObject)
+        );
       });
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click', eventObject);
-        expect(onClick).toHaveBeenCalledWith(eventObject);
+        expect(onClick).toHaveBeenCalledWith(
+          expect.objectContaining(eventObject)
+        );
       });
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toHaveBeenCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining(eventObject)
+        );
       });
     });
   });

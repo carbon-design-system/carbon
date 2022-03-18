@@ -26,10 +26,10 @@ const defaultTranslations = {
  * state of the menu for a given `ListBox`
  */
 const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--list-box__menu-icon`, {
     [`${prefix}--list-box__menu-icon--open`]: isOpen,
   });
-  const prefix = usePrefix();
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
     <div className={className}>

@@ -3618,6 +3618,9 @@ Map {
     },
   },
   "Modal" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "hasScrollingContent": false,
       "modalHeading": "",
@@ -5408,6 +5411,9 @@ Map {
     },
   },
   "SearchLayoutButton" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "iconDescriptionGrid": "grid",
       "iconDescriptionList": "list",
@@ -6211,6 +6217,9 @@ Map {
     "render": [Function],
   },
   "Tab" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "label": "provide a label",
       "onClick": [Function],
@@ -7492,6 +7501,9 @@ Map {
     },
   },
   "TileGroup" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "onChange": [Function],
     },
@@ -7627,6 +7639,9 @@ Map {
     },
   },
   "TimePickerSelect" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "disabled": false,
     },
@@ -7800,6 +7815,9 @@ Map {
     "render": [Function],
   },
   "ToolbarSearch" => Object {
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
     "defaultProps": Object {
       "id": "search__input",
       "labelId": "search__label",
