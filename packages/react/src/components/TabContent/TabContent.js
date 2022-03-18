@@ -29,12 +29,12 @@ function useTabbableContent(ref) {
 
 const TabContent = (props) => {
   const { className, selected, children, ...other } = props;
+  const prefix = usePrefix();
   const tabContentClasses = classNames(`${prefix}--tab-content`, {
     [className]: className,
   });
   const ref = useRef(null);
   const hasTabbableContent = useTabbableContent(ref);
-  const prefix = usePrefix();
   return (
     <div
       role="tabpanel"
