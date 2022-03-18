@@ -98,6 +98,7 @@ const ComboBox = React.forwardRef((props, ref) => {
     type, // eslint-disable-line no-unused-vars
     warn,
     warnText,
+    onStateChange, // eslint-disable-line no-unused-vars
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -226,7 +227,10 @@ const ComboBox = React.forwardRef((props, ref) => {
       {...mapDownshiftProps(downshiftProps)}
       onChange={handleOnChange}
       onInputValueChange={handleOnInputValueChange}
-      onStateChange={handleOnStateChange}
+      onStateChange={(...args) => {
+        handleOnStateChange(...args);
+        downshiftProps?.onStateChange?.(...args);
+      }}
       inputValue={inputValue || ''}
       itemToString={itemToString}
       initialSelectedItem={initialSelectedItem}
@@ -498,6 +502,12 @@ ComboBox.propTypes = {
    * @param {string} inputText
    */
   onInputChange: PropTypes.func,
+
+  /**
+   * Helper function passed to Downshift that allows the user to observe internal
+   * state changes
+   */
+  onStateChange: PropTypes.func,
 
   /**
    * Callback function that fires when the combobox menu toggle is clicked

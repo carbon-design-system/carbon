@@ -1,12 +1,10 @@
-name: Release
+name: v10 - Release
 
 on:
   push:
     tags:
-      # Push events to matching v*, i.e. v1.0, v20.15.10
-      - 'v*'
-      # Ignore tags for v10, there is a separate v10-release.yml workflow for v10
-      - '!v10*'
+      # Push events to matching v10*, i.e. v10.55.0, v10.55.1
+      - 'v10*'
 
 jobs:
   build:
@@ -15,6 +13,8 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: v10
 
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
