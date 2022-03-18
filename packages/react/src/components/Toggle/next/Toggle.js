@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useControllableState } from '../../../internal/useControllableState';
-import { usePrefix } from '../../internal/usePrefix';
+import { usePrefix } from '../../../internal/usePrefix';
 
 export function Toggle({
   className,
