@@ -1,11 +1,12 @@
-name: Deploy vanilla devenv to IBM Cloud
+name: v10 - Deploy React storybook to IBM Cloud
 
 on:
+  workflow_dispatch:
   push:
     tags:
-      # Matches tags that have the shape `vX.Y.Z`. Reference:
+      # Matches tags that have the shape `v10.Y.Z`. Reference:
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
-      - 'v[0-9]+.[0-9]+.[0-9]+'
+      - 'v10.[0-9]+.[0-9]+'
 
       # Ignore tags that use a preid after `vX.Y.Z`, for example: vX.Y.Z-alpha.0
       # https://help.github.com/en/articles/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns
@@ -15,13 +16,15 @@ jobs:
   build:
     runs-on: macOS-latest
     steps:
-      - uses: actions/checkout@main
+      - uses: actions/checkout@v3
+        with:
+          ref: v10
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
       - name: Install dependencies
-        run: yarn install --immutable --immutable-cache --check-cache
+        run: yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
       - name: Install ibmcloud CLI
@@ -37,14 +40,13 @@ jobs:
           ibmcloud target -o 'carbon-design-system' -s 'production'
       - name: Install IBM Cloud plugins
         run: |
-          # We use v6.50.0 as v6.51.0 and v6.52.0 have a bug where we are unable to set
-          # the CF API
-          ibmcloud cf install -v 6.50.0
+          ibmcloud cf install
           ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
           ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
-      - name: Deploy vanilla devenv
+      - name: Deploy React storybook
         run: |
-          cd packages/components
-          ibmcloud cf blue-green-deploy carbon-dev-environment \
+          cd packages/react
+          yarn build-storybook
+          ibmcloud cf blue-green-deploy carbon-storybook \
             -f manifest.yml \
             --delete-old-apps
