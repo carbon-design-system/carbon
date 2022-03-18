@@ -84,12 +84,12 @@
 }
 
 .popover-title {
-  @include type.type-style('productive-heading-01');
+  @include type.type-style('heading-compact-01');
   margin-bottom: spacing.$spacing-01;
 }
 
 .popover-details {
-  @include type.type-style('body-short-01');
+  @include type.type-style('body-compact-01');
 }
 
 .popover-story {

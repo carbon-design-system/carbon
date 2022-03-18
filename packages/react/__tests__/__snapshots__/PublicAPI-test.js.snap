@@ -901,6 +901,9 @@ Map {
       "onInputChange": Object {
         "type": "func",
       },
+      "onStateChange": Object {
+        "type": "func",
+      },
       "onToggleClick": Object {
         "type": "func",
       },
@@ -3340,6 +3343,9 @@ Map {
       },
       "role": Object {
         "type": "string",
+      },
+      "tabIndex": Object {
+        "type": "number",
       },
     },
     "render": [Function],
@@ -6201,6 +6207,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "tabIndex": Object {
+        "type": "number",
+      },
     },
     "render": [Function],
   },
@@ -8663,9 +8672,6 @@ Map {
       "highContrast": Object {
         "type": "bool",
       },
-      "light": Object {
-        "type": "bool",
-      },
       "open": Object {
         "isRequired": true,
         "type": "bool",
@@ -8708,6 +8714,16 @@ Map {
           Array [
             "small",
             "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+            "indented",
           ],
         ],
         "type": "oneOf",

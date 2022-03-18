@@ -83,9 +83,6 @@
     max-height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--time-picker--xl .#{$prefix}--select-input,
-  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field,
   .#{$prefix}--time-picker--lg .#{$prefix}--select-input,
   .#{$prefix}--time-picker--lg .#{$prefix}--time-picker__input-field {
     height: rem(48px);
