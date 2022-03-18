@@ -8,12 +8,11 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableToolbar = ({ children, size, ...rest }) => {
+  const prefix = usePrefix();
   const className = cx({
     [`${prefix}--table-toolbar`]: true,
     [`${prefix}--table-toolbar--${size}`]: size,

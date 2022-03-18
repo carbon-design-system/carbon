@@ -8,10 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { useControllableState } from '../../../internal/useControllableState';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export function Toggle({
   className,
@@ -28,6 +26,7 @@ export function Toggle({
   toggled,
   ...other
 }) {
+  const prefix = usePrefix();
   const [checked, setChecked] = useControllableState({
     value: toggled,
     onChange: onToggle,

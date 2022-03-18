@@ -11,9 +11,7 @@ import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsT
 import deprecate from '../../prop-types/deprecate';
 import React from 'react';
 import { ChevronRight16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableExpandHeader = ({
   ariaLabel,
@@ -26,6 +24,7 @@ const TableExpandHeader = ({
   children,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--table-expand`, headerClassName);
   const previousValue = isExpanded ? 'collapsed' : undefined;
 

@@ -8,9 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableContainer = ({
   className,
@@ -21,6 +19,7 @@ const TableContainer = ({
   useStaticWidth,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const tableContainerClasses = cx(
     className,
     `${prefix}--data-table-container`,

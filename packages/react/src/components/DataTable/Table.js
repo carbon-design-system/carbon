@@ -8,10 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate.js';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export const Table = ({
   className,
@@ -25,6 +23,7 @@ export const Table = ({
   overflowMenuOnHover,
   ...other
 }) => {
+  const prefix = usePrefix();
   const componentClass = cx(`${prefix}--data-table`, className, {
     [`${prefix}--data-table--${size}`]: size,
     [`${prefix}--data-table--sort`]: isSortable,
