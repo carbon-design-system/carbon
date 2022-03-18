@@ -49,12 +49,8 @@
     "@carbon/feature-flags": "^0.7.0",
     "@carbon/icons-react": "^10.48.0",
     "@carbon/layout": "^10.37.0",
-<<<<<<< HEAD
     "@carbon/styles": "^0.16.0",
-    "@carbon/telemetry": "0.0.0-alpha.6",
-=======
     "@carbon/telemetry": "0.1.0",
->>>>>>> cc938b9ad3ca02e1780c97b199ad9df051067e42
     "classnames": "2.3.1",
     "copy-to-clipboard": "^3.3.1",
     "downshift": "5.2.1",
