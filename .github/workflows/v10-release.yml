@@ -1,0 +1,63 @@
+name: v10 - Release
+
+on:
+  push:
+    tags:
+      # Push events to matching v10*, i.e. v10.55.0, v10.55.1
+      - 'v10*'
+
+jobs:
+  build:
+    name: Create Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          ref: v10
+
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+
+      - name: Build project
+        run: yarn build
+
+      - name: Run Continuous Integration checks
+        run: yarn ci-check
+
+      - name: Publish packages under the `next` dist tag
+        run: yarn lerna publish from-package --dist-tag next --yes
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Prepare artifacts for release
+        run: |
+          zip -r --junk-paths carbon-elements.sketchplugin.zip packages/sketch/carbon-elements.sketchplugin
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          draft: false
+          prerelease: true
+
+      - name: Upload Release Asset
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./carbon-elements.sketchplugin.zip
+          asset_name: carbon-elements.sketchplugin.zip
+          asset_content_type: application/zip
