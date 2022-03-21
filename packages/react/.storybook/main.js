@@ -108,7 +108,11 @@ module.exports = {
     //
     // This results in these files being included in `babel-loader` and causing
     // the build times to increase dramatically
-    babelLoader.exclude = [/node_modules/, /packages\/.*\/(es|lib|umd)/];
+    babelLoader.exclude = [
+      /node_modules/,
+      /packages\/.*\/(es|lib|umd)/,
+      /packages\/icons-react\/next/,
+    ];
 
     config.module.rules.push({
       test: /\.s?css$/,

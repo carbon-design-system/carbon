@@ -87,7 +87,7 @@ For a full list of icons available, checkout our
 If you're looking for `@carbon/react` API documentation, check out:
 
 - [Storybook](https://carbon-react-next.netlify.app/)
-- [Icon Library](https://www.carbondesignsystem.com/guidelines/icons/library/).
+- [Icon Library](https://www.carbondesignsystem.com/guidelines/icons/library/)
 
 ## 🙌 Contributing
 
