@@ -69,7 +69,7 @@ const Pagination = React.forwardRef(function Pagination(
     pageSizes: controlledPageSizes,
     pageText = (page) => `page ${page}`,
     pagesUnknown = false,
-    size,
+    size = 'md',
     totalItems,
     ...rest
   },
@@ -373,7 +373,7 @@ Pagination.propTypes = {
   pagesUnknown: PropTypes.bool,
 
   /**
-   * Specify the size of the Pagination. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Pagination.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 

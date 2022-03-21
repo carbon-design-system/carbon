@@ -13,12 +13,10 @@ import {
   CaretLeft16,
   OverflowMenuHorizontal16,
 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
 import * as FeatureFlags from '@carbon/feature-flags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const translationIds = {
   'carbon.pagination-nav.next': 'Next',
@@ -73,6 +71,7 @@ function getCuts(page, totalItems, itemsThatFit, splitPoint = null) {
 }
 
 function DirectionButton({ direction, label, disabled, onClick }) {
+  const prefix = usePrefix();
   const icon = direction === 'forward' ? CaretRight16 : CaretLeft16;
 
   return (
@@ -108,6 +107,7 @@ function PaginationItem({
   onClick,
   translateWithId: t = translateWithId,
 }) {
+  const prefix = usePrefix();
   const itemLabel = t('carbon.pagination-nav.item');
 
   return (
@@ -137,6 +137,7 @@ function PaginationOverflow({
   onSelect,
   translateWithId: t = translateWithId,
 }) {
+  const prefix = usePrefix();
   if (count > 1) {
     return (
       <li className={`${prefix}--pagination-nav__list-item`}>
@@ -206,6 +207,7 @@ const PaginationNav = React.forwardRef(function PaginationNav(
     getCuts(currentPage, totalItems, itemsThatFit)
   );
   const prevPage = usePrevious(currentPage);
+  const prefix = usePrefix();
 
   function jumpToItem(index) {
     if (index >= 0 && index < totalItems) {

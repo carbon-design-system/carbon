@@ -8,15 +8,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import Button from '../../Button';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
 import { IconButton } from '../../IconButton';
 import * as FeatureFlags from '@carbon/feature-flags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../../internal/usePrefix';
 
 function Pagination({
   backwardText,
@@ -40,6 +38,7 @@ function Pagination({
 }) {
   const [currentPage, setCurrentPage] = useState(initialPage);
   const [currentPageSize, setCurrentPageSize] = useState(pageSize);
+  const prefix = usePrefix();
 
   const totalPages = totalItems
     ? Math.max(Math.ceil(totalItems / currentPageSize), 1)

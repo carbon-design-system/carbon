@@ -8,20 +8,21 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useMemo, useRef, useState, useEffect } from 'react';
-import { settings } from 'carbon-components';
 import Search from '../Search';
 import setupGetInstanceId from './tools/instanceId';
 import deprecate from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 const translationKeys = {
   'carbon.table.toolbar.search.label': 'Filter table',
   'carbon.table.toolbar.search.placeholder': 'Filter table',
 };
+
 const translateWithId = (id) => {
   return translationKeys[id];
 };
+
 const TableToolbarSearch = ({
   className,
   searchContainerClass,
@@ -50,8 +51,8 @@ const TableToolbarSearch = ({
   const expanded = controlled ? expandedProp : expandedState;
   const [value, setValue] = useState(defaultValue || '');
   const uniqueId = useMemo(getInstanceId, []);
-
   const [focusTarget, setFocusTarget] = useState(null);
+  const prefix = usePrefix();
 
   useEffect(() => {
     if (focusTarget) {

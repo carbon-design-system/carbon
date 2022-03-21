@@ -8,12 +8,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import setupGetInstanceId from '../../../tools/setupGetInstanceId';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
+import { usePrefix } from '../../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 
 function PageSelector({
@@ -24,6 +23,7 @@ function PageSelector({
   totalPages,
   ...other
 }) {
+  const prefix = usePrefix();
   const namespace = `${prefix}--unstable-pagination__page-selector`;
   const instanceId = `${namespace}__select-${getInstanceId()}`;
 

@@ -5,45 +5,87 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/colors';
+@use '@carbon/grid';
 @use 'scss/reset';
-@use '@carbon/grid/scss/modules/css-grid';
-@use 'scss/components';
-@import '@carbon/layout/scss/spacing';
-@import '@carbon/type/scss/styles';
 
-@import '~carbon-components/scss/globals/scss/vars';
+@include grid.css-grid();
 
 // Grid
-.bx--css-grid {
-  background-color: $blue-20;
-  outline: 1px dashed $blue-40;
+.cds--css-grid {
+  background-color: colors.$blue-20;
+  outline: 1px dashed colors.$blue-40;
 }
 
-.bx--css-grid.bx--css-grid--condensed {
-  background-color: $purple-20;
-  outline: 1px dashed $purple-40;
+.cds--css-grid.cds--css-grid--condensed {
+  background-color: colors.$purple-20;
+  outline: 1px dashed colors.$purple-40;
 }
 
-// Only use background for subgrid example, not other subgrids in "mixed modes" example or others
-.bx--subgrid.example {
-  background-color: $green-20;
+.cds--css-grid, .cds--subgrid--wide {
+  --grid-mode-color: #97C1FF;
+}
+
+.cds--css-grid--narrow,
+.cds--subgrid--narrow {
+  --grid-mode-color: #20D5D2;
+  background: colors.$green-10;
+}
+
+.cds--css-grid--condensed,
+.cds--subgrid--condensed {
+  --grid-mode-color: #BB8EFF;
+  background: colors.$purple-10;
 }
 
 // Columns
-.bx--css-grid > [class*='col'],
-.bx--subgrid > [class*='col'] {
+.cds--css-grid > [class*='col'],
+.cds--subgrid > [class*='col'] {
   min-height: 80px;
 }
 
-.bx--css-grid > [class*='col'] {
-  background: $blue-10;
+.cds--subgrid {
+  outline: 1px solid black;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  position: relative;
+  background: #EEF4FF;
 }
 
-.bx--subgrid > [class*='col'] {
-  background: $green-10;
-  outline: 1px dashed $green-30;
+.cds--subgrid--narrow {
+  background: #D6F9F9;
 }
 
-.bx--css-grid.bx--css-grid--condensed > [class*='col'] {
-  background: $purple-10;
+.cds--subgrid--condensed {
+  background: #F7F2FF;
+}
+
+.cds--subgrid::before {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  height: 1.25rem;
+  display: block;
+  content: 'subgrid';
+  background: var(--grid-mode-color, #97C1FF);
+  color: black;
+  font-size: 12px;
+  padding: 0 0.25rem;
+}
+
+.cds--css-grid-column {
+  --border-color: #97C1FF;
+
+  background: white;
+  box-shadow: 0 0 0 1px var(--border-color);
+}
+
+.cds--css-grid--narrow .cds--css-grid-column,
+.cds--subgrid--narrow .cds--css-grid-column {
+  --border-color: #20D5D2;
+}
+
+.cds--css-grid--condensed .cds--css-grid-column,
+.cds--subgrid--condensed .cds--css-grid-column {
+  --border-color: #BB8EFF;
 }

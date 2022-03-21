@@ -68,6 +68,7 @@ export {
   Grid,
   Row,
   Column,
+  ColumnHang as unstable_ColumnHang,
   FlexGrid as unstable_FlexGrid,
 } from './components/Grid';
 export Icon from './components/Icon';
@@ -251,12 +252,7 @@ export { DefinitionTooltip as unstable_DefinitionTooltip } from './components/To
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
-export {
-  TabPanel as unstable_TabPanel,
-  TabPanels as unstable_TabPanels,
-  TabList as unstable_TabList,
-  IconTab as unstable_IconTab,
-} from './components/Tabs';
+export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
 export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
 export {
   ThemeContext as unstable_ThemeContext,

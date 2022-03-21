@@ -9,15 +9,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Search16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import ClickListener from '../../internal/ClickListener';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
 export default class ToolbarSearch extends Component {
+  static contextType = PrefixContext;
+
   static propTypes = {
     /**
      * The child nodes.
@@ -103,6 +103,7 @@ export default class ToolbarSearch extends Component {
   };
 
   render() {
+    const { context: prefix } = this;
     const {
       className,
       type,
