@@ -217,10 +217,10 @@ exports[`Dropdown should render custom item components 1`] = `
           aria-disabled={false}
           aria-expanded={true}
           aria-haspopup="listbox"
-          aria-labelledby="downshift-0-label downshift-0-toggle-button"
+          aria-labelledby="downshift-6-label downshift-6-toggle-button"
           className="cds--list-box__field"
           disabled={false}
-          id="downshift-0-toggle-button"
+          id="downshift-6-toggle-button"
           onClick={[Function]}
           onKeyDown={[Function]}
           title="input"
@@ -277,8 +277,8 @@ exports[`Dropdown should render custom item components 1`] = `
           </ListBoxMenuIcon>
         </button>
         <ListBoxMenu
-          aria-labelledby="downshift-0-label"
-          id="downshift-0-menu"
+          aria-labelledby="downshift-6-label"
+          id="downshift-6-menu"
           onBlur={[Function]}
           onKeyDown={[Function]}
           onMouseLeave={[Function]}
@@ -286,9 +286,9 @@ exports[`Dropdown should render custom item components 1`] = `
           tabIndex={-1}
         >
           <div
-            aria-labelledby="downshift-0-label"
+            aria-labelledby="downshift-6-label"
             className="cds--list-box__menu"
-            id="downshift-0-menu"
+            id="downshift-6-menu"
             onBlur={[Function]}
             onKeyDown={[Function]}
             onMouseLeave={[Function]}
@@ -297,10 +297,10 @@ exports[`Dropdown should render custom item components 1`] = `
           >
             <ListBoxMenuItem
               aria-selected="false"
-              id="downshift-0-item-0"
+              id="downshift-6-item-0"
               isActive={false}
               isHighlighted={false}
-              key="downshift-0-item-0"
+              key="downshift-6-item-0"
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
@@ -308,7 +308,7 @@ exports[`Dropdown should render custom item components 1`] = `
               <div
                 aria-selected="false"
                 className="cds--list-box__menu-item"
-                id="downshift-0-item-0"
+                id="downshift-6-item-0"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
@@ -318,7 +318,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 >
                   <itemToElement
                     id="id-0"
-                    key="downshift-0-item-0"
+                    key="downshift-6-item-0"
                     label="Item 0"
                     value={0}
                   >
@@ -333,10 +333,10 @@ exports[`Dropdown should render custom item components 1`] = `
             </ListBoxMenuItem>
             <ListBoxMenuItem
               aria-selected="false"
-              id="downshift-0-item-1"
+              id="downshift-6-item-1"
               isActive={false}
               isHighlighted={false}
-              key="downshift-0-item-1"
+              key="downshift-6-item-1"
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
@@ -344,7 +344,7 @@ exports[`Dropdown should render custom item components 1`] = `
               <div
                 aria-selected="false"
                 className="cds--list-box__menu-item"
-                id="downshift-0-item-1"
+                id="downshift-6-item-1"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
@@ -354,7 +354,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 >
                   <itemToElement
                     id="id-1"
-                    key="downshift-0-item-1"
+                    key="downshift-6-item-1"
                     label="Item 1"
                     value={1}
                   >
@@ -369,10 +369,10 @@ exports[`Dropdown should render custom item components 1`] = `
             </ListBoxMenuItem>
             <ListBoxMenuItem
               aria-selected="false"
-              id="downshift-0-item-2"
+              id="downshift-6-item-2"
               isActive={false}
               isHighlighted={false}
-              key="downshift-0-item-2"
+              key="downshift-6-item-2"
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
@@ -380,7 +380,7 @@ exports[`Dropdown should render custom item components 1`] = `
               <div
                 aria-selected="false"
                 className="cds--list-box__menu-item"
-                id="downshift-0-item-2"
+                id="downshift-6-item-2"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
@@ -390,7 +390,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 >
                   <itemToElement
                     id="id-2"
-                    key="downshift-0-item-2"
+                    key="downshift-6-item-2"
                     label="Item 2"
                     value={2}
                   >
@@ -405,10 +405,10 @@ exports[`Dropdown should render custom item components 1`] = `
             </ListBoxMenuItem>
             <ListBoxMenuItem
               aria-selected="false"
-              id="downshift-0-item-3"
+              id="downshift-6-item-3"
               isActive={false}
               isHighlighted={false}
-              key="downshift-0-item-3"
+              key="downshift-6-item-3"
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
@@ -416,7 +416,7 @@ exports[`Dropdown should render custom item components 1`] = `
               <div
                 aria-selected="false"
                 className="cds--list-box__menu-item"
-                id="downshift-0-item-3"
+                id="downshift-6-item-3"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
@@ -426,7 +426,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 >
                   <itemToElement
                     id="id-3"
-                    key="downshift-0-item-3"
+                    key="downshift-6-item-3"
                     label="Item 3"
                     value={3}
                   >
@@ -441,10 +441,10 @@ exports[`Dropdown should render custom item components 1`] = `
             </ListBoxMenuItem>
             <ListBoxMenuItem
               aria-selected="false"
-              id="downshift-0-item-4"
+              id="downshift-6-item-4"
               isActive={false}
               isHighlighted={false}
-              key="downshift-0-item-4"
+              key="downshift-6-item-4"
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
@@ -452,7 +452,7 @@ exports[`Dropdown should render custom item components 1`] = `
               <div
                 aria-selected="false"
                 className="cds--list-box__menu-item"
-                id="downshift-0-item-4"
+                id="downshift-6-item-4"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
@@ -462,7 +462,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 >
                   <itemToElement
                     id="id-4"
-                    key="downshift-0-item-4"
+                    key="downshift-6-item-4"
                     label="Item 4"
                     value={4}
                   >
@@ -526,10 +526,10 @@ exports[`Dropdown should render with strings as items 1`] = `
           aria-disabled={false}
           aria-expanded={true}
           aria-haspopup="listbox"
-          aria-labelledby="downshift-0-label downshift-0-toggle-button"
+          aria-labelledby="downshift-4-label downshift-4-toggle-button"
           className="cds--list-box__field"
           disabled={false}
-          id="downshift-0-toggle-button"
+          id="downshift-4-toggle-button"
           onClick={[Function]}
           onKeyDown={[Function]}
           title="input"
@@ -586,8 +586,8 @@ exports[`Dropdown should render with strings as items 1`] = `
           </ListBoxMenuIcon>
         </button>
         <ListBoxMenu
-          aria-labelledby="downshift-0-label"
-          id="downshift-0-menu"
+          aria-labelledby="downshift-4-label"
+          id="downshift-4-menu"
           onBlur={[Function]}
           onKeyDown={[Function]}
           onMouseLeave={[Function]}
@@ -595,9 +595,9 @@ exports[`Dropdown should render with strings as items 1`] = `
           tabIndex={-1}
         >
           <div
-            aria-labelledby="downshift-0-label"
+            aria-labelledby="downshift-4-label"
             className="cds--list-box__menu"
-            id="downshift-0-menu"
+            id="downshift-4-menu"
             onBlur={[Function]}
             onKeyDown={[Function]}
             onMouseLeave={[Function]}
@@ -606,10 +606,10 @@ exports[`Dropdown should render with strings as items 1`] = `
           >
             <ListBoxMenuItem
               aria-selected="false"
-              id="downshift-0-item-0"
+              id="downshift-4-item-0"
               isActive={false}
               isHighlighted={false}
-              key="downshift-0-item-0"
+              key="downshift-4-item-0"
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
@@ -617,7 +617,7 @@ exports[`Dropdown should render with strings as items 1`] = `
               <div
                 aria-selected="false"
                 className="cds--list-box__menu-item"
-                id="downshift-0-item-0"
+                id="downshift-4-item-0"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
@@ -631,10 +631,10 @@ exports[`Dropdown should render with strings as items 1`] = `
             </ListBoxMenuItem>
             <ListBoxMenuItem
               aria-selected="false"
-              id="downshift-0-item-1"
+              id="downshift-4-item-1"
               isActive={false}
               isHighlighted={false}
-              key="downshift-0-item-1"
+              key="downshift-4-item-1"
               onClick={[Function]}
               onMouseMove={[Function]}
               role="option"
@@ -642,7 +642,7 @@ exports[`Dropdown should render with strings as items 1`] = `
               <div
                 aria-selected="false"
                 className="cds--list-box__menu-item"
-                id="downshift-0-item-1"
+                id="downshift-4-item-1"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"

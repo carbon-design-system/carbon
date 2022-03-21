@@ -38,26 +38,26 @@ describe('<ComposedModal />', () => {
     const wrapper = mount(<ComposedModal open />);
 
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(true);
     wrapper.setProps({ open: false });
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(false);
   });
 
   it('should change class of <body> upon open state', () => {
     const wrapper = mount(<ComposedModal open />);
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(true);
     wrapper.unmount();
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(false);
     mount(<ComposedModal open={false} />);
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(false);
   });
 
@@ -71,7 +71,7 @@ describe('<ComposedModal />', () => {
     const button = wrapper.find(`.${prefix}--modal-close`).first();
     button.simulate('click');
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(false);
     expect(onClose.mock.calls.length).toBe(1);
   });
@@ -86,7 +86,7 @@ describe('<ComposedModal />', () => {
     const button = wrapper.find(`.${prefix}--modal-close`).first();
     button.simulate('click');
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(true);
   });
 

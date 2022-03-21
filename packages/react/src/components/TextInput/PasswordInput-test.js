@@ -101,13 +101,13 @@ describe('PasswordInput', () => {
         const { hidePasswordLabel, showPasswordLabel } = wrapper.props();
         wrapper.setProps({ disabled: false });
         expect(
-          wrapper.find('.bx--text-input--password__visibility__toggle').text()
+          wrapper.find('.cds--text-input--password__visibility__toggle').text()
         ).toEqual(showPasswordLabel);
         wrapper
-          .find('.bx--text-input--password__visibility__toggle')
+          .find('.cds--text-input--password__visibility__toggle')
           .simulate('click');
         expect(
-          wrapper.find('.bx--text-input--password__visibility__toggle').text()
+          wrapper.find('.cds--text-input--password__visibility__toggle').text()
         ).toEqual(hidePasswordLabel);
       });
     });

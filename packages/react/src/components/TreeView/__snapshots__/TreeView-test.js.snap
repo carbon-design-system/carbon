@@ -367,14 +367,14 @@ exports[`TreeView should render with icons 1`] = `
   <TreeLabel>
     <label
       className="cds--label"
-      id="id2__label"
+      id="id3__label"
     >
       Tree view
     </label>
   </TreeLabel>
   <ul
     aria-label={null}
-    aria-labelledby="id2__label"
+    aria-labelledby="id3__label"
     aria-multiselectable={null}
     className="cds--tree"
     onKeyDown={[Function]}

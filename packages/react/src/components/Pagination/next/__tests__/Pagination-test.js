@@ -12,7 +12,7 @@ import Pagination from '../Pagination';
 import Select from '../../../Select';
 import SelectItem from '../../../SelectItem';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 /**
  * For the given EnzymeWrapper, find the corresponding <select> element for

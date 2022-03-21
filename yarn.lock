@@ -2047,6 +2047,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     react-is: ^17.0.2
+    requestanimationframe: ^0.0.23
     rimraf: ^3.0.2
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
@@ -23963,6 +23964,13 @@ fsevents@^1.2.7:
     tunnel-agent: ^0.6.0
     uuid: ^3.3.2
   checksum: 4e112c087f6eabe7327869da2417e9d28fcd0910419edd2eb17b6acfc4bfa1dad61954525949c228705805882d8a98a86a0ea12d7f739c01ee92af7062996983
+  languageName: node
+  linkType: hard
+
+"requestanimationframe@npm:^0.0.23":
+  version: 0.0.23
+  resolution: "requestanimationframe@npm:0.0.23"
+  checksum: 01550c1bf5b05994418e8b589184010086abee81a2078d8f1f24f094409e3d13219fcf67ac73f17ff7b6bf0901d7bb51253c71f775dfedbb9d7aa5b150b46840
   languageName: node
   linkType: hard
 
