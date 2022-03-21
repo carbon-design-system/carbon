@@ -3497,6 +3497,31 @@ Map {
       },
     },
   },
+  "IconTab" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultOpen": Object {
+        "type": "bool",
+      },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "leaveDelayMs": Object {
+        "type": "number",
+      },
+    },
+    "render": [Function],
+  },
   "InlineLoading" => Object {
     "defaultProps": Object {
       "successDelay": 1500,
@@ -6293,6 +6318,75 @@ Map {
       },
     },
   },
+  "TabList" => Object {
+    "propTypes": Object {
+      "activation": Object {
+        "args": Array [
+          Array [
+            "automatic",
+            "manual",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "aria-label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "contained": Object {
+        "type": "bool",
+      },
+      "iconSize": Object {
+        "args": Array [
+          Array [
+            "default",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "leftOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "rightOverflowButtonProps": Object {
+        "type": "object",
+      },
+      "scrollDebounceWait": Object {
+        "type": "number",
+      },
+      "scrollIntoView": Object {
+        "type": "bool",
+      },
+    },
+  },
+  "TabPanel" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "TabPanels" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+    },
+  },
   "Table" => Object {
     "defaultProps": Object {
       "isSortable": false,
@@ -8201,31 +8295,6 @@ Map {
     },
     "render": [Function],
   },
-  "unstable_IconTab" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "defaultOpen": Object {
-        "type": "bool",
-      },
-      "enterDelayMs": Object {
-        "type": "number",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "leaveDelayMs": Object {
-        "type": "number",
-      },
-    },
-    "render": [Function],
-  },
   "unstable_Layer" => Object {
     "propTypes": Object {
       "as": Object {
@@ -8816,75 +8885,6 @@ Map {
       },
     },
     "render": [Function],
-  },
-  "unstable_TabList" => Object {
-    "propTypes": Object {
-      "activation": Object {
-        "args": Array [
-          Array [
-            "automatic",
-            "manual",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "aria-label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "contained": Object {
-        "type": "bool",
-      },
-      "iconSize": Object {
-        "args": Array [
-          Array [
-            "default",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "leftOverflowButtonProps": Object {
-        "type": "object",
-      },
-      "light": Object {
-        "type": "bool",
-      },
-      "rightOverflowButtonProps": Object {
-        "type": "object",
-      },
-      "scrollDebounceWait": Object {
-        "type": "number",
-      },
-      "scrollIntoView": Object {
-        "type": "bool",
-      },
-    },
-  },
-  "unstable_TabPanel" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-    "render": [Function],
-  },
-  "unstable_TabPanels" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-    },
   },
   "unstable_Theme" => Object {
     "propTypes": Object {
