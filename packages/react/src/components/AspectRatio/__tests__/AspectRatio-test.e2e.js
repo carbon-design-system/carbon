@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/globals/grid/_grid.scss';
+import '../../../../scss/components/aspect-ratio/_index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';

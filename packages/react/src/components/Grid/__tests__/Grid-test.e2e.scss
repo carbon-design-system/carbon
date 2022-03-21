@@ -1,11 +1,10 @@
-@use '~@carbon/styles/scss/config' with (
+@use '../../../../scss/config' with (
   $prefix: 'bx',
 );
-@use '~@carbon/styles/scss/grid';
-
-@import '~carbon-components/scss/globals/scss/vars';
-@import '~carbon-components/scss/globals/scss/colors';
-@import '~carbon-components/scss/globals/scss/typography';
+@use '../../../../scss/grid';
+@use '../../../../scss/colors' as *;
+@use '../../../../scss/spacing' as *;
+@use '../../../../scss/type' as *;
 
 p {
   @include type-style('body-short-02');
