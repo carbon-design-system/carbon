@@ -11,9 +11,8 @@ import CodeSnippet from '../';
 import Copy from '../../Copy';
 import CopyButton from '../../CopyButton';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 jest.mock('copy-to-clipboard', () => {
   return jest.fn();

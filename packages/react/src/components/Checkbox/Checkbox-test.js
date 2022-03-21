@@ -9,11 +9,10 @@ import React from 'react';
 import Checkbox from '../Checkbox';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Checkbox', () => {
   describe('Renders as expected', () => {

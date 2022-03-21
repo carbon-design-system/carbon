@@ -8,9 +8,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { Filter16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('[Deprecated] SearchFilterButton', () => {
   let SearchFilterButton;

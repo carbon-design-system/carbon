@@ -9,9 +9,8 @@ import React from 'react';
 import InlineLoading from '../InlineLoading';
 import Loading from '../Loading';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Loading', () => {
   describe('Default state renders as expected', () => {

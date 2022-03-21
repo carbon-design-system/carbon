@@ -105,18 +105,18 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     title="DataTable with selection"
   >
     <div
-      className="bx--data-table-container"
+      className="cds--data-table-container"
     >
       <div
-        className="bx--data-table-header"
+        className="cds--data-table-header"
       >
         <h4
-          className="bx--data-table-header__title"
+          className="cds--data-table-header__title"
         >
           DataTable with selection
         </h4>
         <p
-          className="bx--data-table-header__description"
+          className="cds--data-table-header__description"
         />
       </div>
       <Table
@@ -124,10 +124,10 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
         overflowMenuOnHover={true}
       >
         <div
-          className="bx--data-table-content"
+          className="cds--data-table-content"
         >
           <table
-            className="bx--data-table bx--data-table--no-border"
+            className="cds--data-table cds--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -146,7 +146,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field A
                         </div>
@@ -165,7 +165,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field B
                         </div>
@@ -376,7 +376,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-b"
+                    id="data-table-1__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={true}
@@ -393,7 +393,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-a"
+                    id="data-table-1__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={true}
@@ -410,7 +410,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-14__select-row-c"
+                    id="data-table-1__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={true}
@@ -456,18 +456,18 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
     title="DataTable with selection"
   >
     <div
-      className="bx--data-table-container"
+      className="cds--data-table-container"
     >
       <div
-        className="bx--data-table-header"
+        className="cds--data-table-header"
       >
         <h4
-          className="bx--data-table-header__title"
+          className="cds--data-table-header__title"
         >
           DataTable with selection
         </h4>
         <p
-          className="bx--data-table-header__description"
+          className="cds--data-table-header__description"
         />
       </div>
       <Table
@@ -475,10 +475,10 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
         overflowMenuOnHover={true}
       >
         <div
-          className="bx--data-table-content"
+          className="cds--data-table-content"
         >
           <table
-            className="bx--data-table bx--data-table--no-border"
+            className="cds--data-table cds--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -497,7 +497,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field A
                         </div>
@@ -516,7 +516,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field B
                         </div>
@@ -540,19 +540,19 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       ariaLabel="Select row"
                       checked={false}
                       disabled={false}
-                      id="data-table-14__select-row-b"
+                      id="data-table-1__select-row-b"
                       name="select-row-b"
                       onSelect={[Function]}
                       radio={true}
                     >
                       <td
-                        className="bx--table-column-checkbox bx--table-column-radio"
+                        className="cds--table-column-checkbox cds--table-column-radio"
                       >
                         <ForwardRef(RadioButton)
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-14__select-row-b"
+                          id="data-table-1__select-row-b"
                           labelText="Select row"
                           name="select-row-b"
                           onClick={[Function]}
@@ -561,7 +561,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             checked={false}
                             disabled={false}
                             hideLabel={true}
-                            id="data-table-14__select-row-b"
+                            id="data-table-1__select-row-b"
                             innerRef={null}
                             labelPosition="right"
                             labelText="Select row"
@@ -571,13 +571,13 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             value=""
                           >
                             <div
-                              className="bx--radio-button-wrapper"
+                              className="cds--radio-button-wrapper"
                             >
                               <input
                                 checked={false}
-                                className="bx--radio-button"
+                                className="cds--radio-button"
                                 disabled={false}
-                                id="data-table-14__select-row-b"
+                                id="data-table-1__select-row-b"
                                 name="select-row-b"
                                 onChange={[Function]}
                                 onClick={[Function]}
@@ -585,17 +585,17 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 value=""
                               />
                               <label
-                                className="bx--radio-button__label"
-                                htmlFor="data-table-14__select-row-b"
+                                className="cds--radio-button__label"
+                                htmlFor="data-table-1__select-row-b"
                               >
                                 <span
-                                  className="bx--radio-button__appearance"
+                                  className="cds--radio-button__appearance"
                                 />
                                 <Text
-                                  className="bx--visually-hidden"
+                                  className="cds--visually-hidden"
                                 >
                                   <span
-                                    className="bx--visually-hidden"
+                                    className="cds--visually-hidden"
                                     dir="auto"
                                   >
                                     Select row
@@ -631,19 +631,19 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       ariaLabel="Select row"
                       checked={false}
                       disabled={false}
-                      id="data-table-14__select-row-a"
+                      id="data-table-1__select-row-a"
                       name="select-row-a"
                       onSelect={[Function]}
                       radio={true}
                     >
                       <td
-                        className="bx--table-column-checkbox bx--table-column-radio"
+                        className="cds--table-column-checkbox cds--table-column-radio"
                       >
                         <ForwardRef(RadioButton)
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-14__select-row-a"
+                          id="data-table-1__select-row-a"
                           labelText="Select row"
                           name="select-row-a"
                           onClick={[Function]}
@@ -652,7 +652,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             checked={false}
                             disabled={false}
                             hideLabel={true}
-                            id="data-table-14__select-row-a"
+                            id="data-table-1__select-row-a"
                             innerRef={null}
                             labelPosition="right"
                             labelText="Select row"
@@ -662,13 +662,13 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             value=""
                           >
                             <div
-                              className="bx--radio-button-wrapper"
+                              className="cds--radio-button-wrapper"
                             >
                               <input
                                 checked={false}
-                                className="bx--radio-button"
+                                className="cds--radio-button"
                                 disabled={false}
-                                id="data-table-14__select-row-a"
+                                id="data-table-1__select-row-a"
                                 name="select-row-a"
                                 onChange={[Function]}
                                 onClick={[Function]}
@@ -676,17 +676,17 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 value=""
                               />
                               <label
-                                className="bx--radio-button__label"
-                                htmlFor="data-table-14__select-row-a"
+                                className="cds--radio-button__label"
+                                htmlFor="data-table-1__select-row-a"
                               >
                                 <span
-                                  className="bx--radio-button__appearance"
+                                  className="cds--radio-button__appearance"
                                 />
                                 <Text
-                                  className="bx--visually-hidden"
+                                  className="cds--visually-hidden"
                                 >
                                   <span
-                                    className="bx--visually-hidden"
+                                    className="cds--visually-hidden"
                                     dir="auto"
                                   >
                                     Select row
@@ -722,19 +722,19 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       ariaLabel="Select row"
                       checked={false}
                       disabled={false}
-                      id="data-table-14__select-row-c"
+                      id="data-table-1__select-row-c"
                       name="select-row-c"
                       onSelect={[Function]}
                       radio={true}
                     >
                       <td
-                        className="bx--table-column-checkbox bx--table-column-radio"
+                        className="cds--table-column-checkbox cds--table-column-radio"
                       >
                         <ForwardRef(RadioButton)
                           checked={false}
                           disabled={false}
                           hideLabel={true}
-                          id="data-table-14__select-row-c"
+                          id="data-table-1__select-row-c"
                           labelText="Select row"
                           name="select-row-c"
                           onClick={[Function]}
@@ -743,7 +743,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             checked={false}
                             disabled={false}
                             hideLabel={true}
-                            id="data-table-14__select-row-c"
+                            id="data-table-1__select-row-c"
                             innerRef={null}
                             labelPosition="right"
                             labelText="Select row"
@@ -753,13 +753,13 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                             value=""
                           >
                             <div
-                              className="bx--radio-button-wrapper"
+                              className="cds--radio-button-wrapper"
                             >
                               <input
                                 checked={false}
-                                className="bx--radio-button"
+                                className="cds--radio-button"
                                 disabled={false}
-                                id="data-table-14__select-row-c"
+                                id="data-table-1__select-row-c"
                                 name="select-row-c"
                                 onChange={[Function]}
                                 onClick={[Function]}
@@ -767,17 +767,17 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 value=""
                               />
                               <label
-                                className="bx--radio-button__label"
-                                htmlFor="data-table-14__select-row-c"
+                                className="cds--radio-button__label"
+                                htmlFor="data-table-1__select-row-c"
                               >
                                 <span
-                                  className="bx--radio-button__appearance"
+                                  className="cds--radio-button__appearance"
                                 />
                                 <Text
-                                  className="bx--visually-hidden"
+                                  className="cds--visually-hidden"
                                 >
                                   <span
-                                    className="bx--visually-hidden"
+                                    className="cds--visually-hidden"
                                     dir="auto"
                                   >
                                     Select row
@@ -882,7 +882,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                   <TableSelectAll
                     ariaLabel="Select all rows"
                     checked={false}
-                    id="data-table-7__select-all"
+                    id="data-table-1__select-all"
                     indeterminate={false}
                     name="select-all"
                     onSelect={[Function]}
@@ -927,18 +927,18 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     title="DataTable with selection"
   >
     <div
-      className="bx--data-table-container"
+      className="cds--data-table-container"
     >
       <div
-        className="bx--data-table-header"
+        className="cds--data-table-header"
       >
         <h4
-          className="bx--data-table-header__title"
+          className="cds--data-table-header__title"
         >
           DataTable with selection
         </h4>
         <p
-          className="bx--data-table-header__description"
+          className="cds--data-table-header__description"
         />
       </div>
       <Table
@@ -946,10 +946,10 @@ exports[`DataTable selection should have select-all default to un-checked if no 
         overflowMenuOnHover={true}
       >
         <div
-          className="bx--data-table-content"
+          className="cds--data-table-content"
         >
           <table
-            className="bx--data-table bx--data-table--no-border"
+            className="cds--data-table cds--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -958,30 +958,30 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                     <TableSelectAll
                       ariaLabel="Select all rows"
                       checked={false}
-                      id="data-table-7__select-all"
+                      id="data-table-1__select-all"
                       indeterminate={false}
                       name="select-all"
                       onSelect={[Function]}
                     >
                       <th
-                        className="bx--table-column-checkbox"
+                        className="cds--table-column-checkbox"
                         scope="col"
                       >
                         <ForwardRef(InlineCheckbox)
                           ariaLabel="Select all rows"
                           checked={false}
-                          id="data-table-7__select-all"
+                          id="data-table-1__select-all"
                           indeterminate={false}
                           name="select-all"
                           onClick={[Function]}
                         >
                           <div
-                            className="bx--checkbox--inline"
+                            className="cds--checkbox--inline"
                           >
                             <input
                               checked={false}
-                              className="bx--checkbox"
-                              id="data-table-7__select-all"
+                              className="cds--checkbox"
+                              id="data-table-1__select-all"
                               name="select-all"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -989,8 +989,8 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                             />
                             <label
                               aria-label="Select all rows"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-7__select-all"
+                              className="cds--checkbox-label"
+                              htmlFor="data-table-1__select-all"
                               onClick={[Function]}
                             />
                           </div>
@@ -1010,7 +1010,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field A
                         </div>
@@ -1029,7 +1029,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field B
                         </div>
@@ -1212,7 +1212,7 @@ exports[`DataTable selection should render 1`] = `
                   <TableSelectAll
                     ariaLabel="Select all rows"
                     checked={false}
-                    id="data-table-6__select-all"
+                    id="data-table-1__select-all"
                     indeterminate={false}
                     name="select-all"
                     onSelect={[Function]}
@@ -1247,7 +1247,7 @@ exports[`DataTable selection should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-6__select-row-b"
+                    id="data-table-1__select-row-b"
                     name="select-row-b"
                     onSelect={[Function]}
                     radio={null}
@@ -1264,7 +1264,7 @@ exports[`DataTable selection should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-6__select-row-a"
+                    id="data-table-1__select-row-a"
                     name="select-row-a"
                     onSelect={[Function]}
                     radio={null}
@@ -1281,7 +1281,7 @@ exports[`DataTable selection should render 1`] = `
                     ariaLabel="Select row"
                     checked={false}
                     disabled={false}
-                    id="data-table-6__select-row-c"
+                    id="data-table-1__select-row-c"
                     name="select-row-c"
                     onSelect={[Function]}
                     radio={null}
@@ -1327,18 +1327,18 @@ exports[`DataTable selection should render 1`] = `
     title="DataTable with selection"
   >
     <div
-      className="bx--data-table-container"
+      className="cds--data-table-container"
     >
       <div
-        className="bx--data-table-header"
+        className="cds--data-table-header"
       >
         <h4
-          className="bx--data-table-header__title"
+          className="cds--data-table-header__title"
         >
           DataTable with selection
         </h4>
         <p
-          className="bx--data-table-header__description"
+          className="cds--data-table-header__description"
         />
       </div>
       <Table
@@ -1346,10 +1346,10 @@ exports[`DataTable selection should render 1`] = `
         overflowMenuOnHover={true}
       >
         <div
-          className="bx--data-table-content"
+          className="cds--data-table-content"
         >
           <table
-            className="bx--data-table bx--data-table--no-border"
+            className="cds--data-table cds--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -1358,30 +1358,30 @@ exports[`DataTable selection should render 1`] = `
                     <TableSelectAll
                       ariaLabel="Select all rows"
                       checked={false}
-                      id="data-table-6__select-all"
+                      id="data-table-1__select-all"
                       indeterminate={false}
                       name="select-all"
                       onSelect={[Function]}
                     >
                       <th
-                        className="bx--table-column-checkbox"
+                        className="cds--table-column-checkbox"
                         scope="col"
                       >
                         <ForwardRef(InlineCheckbox)
                           ariaLabel="Select all rows"
                           checked={false}
-                          id="data-table-6__select-all"
+                          id="data-table-1__select-all"
                           indeterminate={false}
                           name="select-all"
                           onClick={[Function]}
                         >
                           <div
-                            className="bx--checkbox--inline"
+                            className="cds--checkbox--inline"
                           >
                             <input
                               checked={false}
-                              className="bx--checkbox"
-                              id="data-table-6__select-all"
+                              className="cds--checkbox"
+                              id="data-table-1__select-all"
                               name="select-all"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -1389,8 +1389,8 @@ exports[`DataTable selection should render 1`] = `
                             />
                             <label
                               aria-label="Select all rows"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-6__select-all"
+                              className="cds--checkbox-label"
+                              htmlFor="data-table-1__select-all"
                               onClick={[Function]}
                             />
                           </div>
@@ -1410,7 +1410,7 @@ exports[`DataTable selection should render 1`] = `
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field A
                         </div>
@@ -1429,7 +1429,7 @@ exports[`DataTable selection should render 1`] = `
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field B
                         </div>
@@ -1453,30 +1453,30 @@ exports[`DataTable selection should render 1`] = `
                       ariaLabel="Select row"
                       checked={false}
                       disabled={false}
-                      id="data-table-6__select-row-b"
+                      id="data-table-1__select-row-b"
                       name="select-row-b"
                       onSelect={[Function]}
                       radio={null}
                     >
                       <td
-                        className="bx--table-column-checkbox"
+                        className="cds--table-column-checkbox"
                       >
                         <ForwardRef(InlineCheckbox)
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
-                          id="data-table-6__select-row-b"
+                          id="data-table-1__select-row-b"
                           name="select-row-b"
                           onClick={[Function]}
                         >
                           <div
-                            className="bx--checkbox--inline"
+                            className="cds--checkbox--inline"
                           >
                             <input
                               checked={false}
-                              className="bx--checkbox"
+                              className="cds--checkbox"
                               disabled={false}
-                              id="data-table-6__select-row-b"
+                              id="data-table-1__select-row-b"
                               name="select-row-b"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -1484,8 +1484,8 @@ exports[`DataTable selection should render 1`] = `
                             />
                             <label
                               aria-label="Select row"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-6__select-row-b"
+                              className="cds--checkbox-label"
+                              htmlFor="data-table-1__select-row-b"
                               onClick={[Function]}
                             />
                           </div>
@@ -1516,30 +1516,30 @@ exports[`DataTable selection should render 1`] = `
                       ariaLabel="Select row"
                       checked={false}
                       disabled={false}
-                      id="data-table-6__select-row-a"
+                      id="data-table-1__select-row-a"
                       name="select-row-a"
                       onSelect={[Function]}
                       radio={null}
                     >
                       <td
-                        className="bx--table-column-checkbox"
+                        className="cds--table-column-checkbox"
                       >
                         <ForwardRef(InlineCheckbox)
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
-                          id="data-table-6__select-row-a"
+                          id="data-table-1__select-row-a"
                           name="select-row-a"
                           onClick={[Function]}
                         >
                           <div
-                            className="bx--checkbox--inline"
+                            className="cds--checkbox--inline"
                           >
                             <input
                               checked={false}
-                              className="bx--checkbox"
+                              className="cds--checkbox"
                               disabled={false}
-                              id="data-table-6__select-row-a"
+                              id="data-table-1__select-row-a"
                               name="select-row-a"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -1547,8 +1547,8 @@ exports[`DataTable selection should render 1`] = `
                             />
                             <label
                               aria-label="Select row"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-6__select-row-a"
+                              className="cds--checkbox-label"
+                              htmlFor="data-table-1__select-row-a"
                               onClick={[Function]}
                             />
                           </div>
@@ -1579,30 +1579,30 @@ exports[`DataTable selection should render 1`] = `
                       ariaLabel="Select row"
                       checked={false}
                       disabled={false}
-                      id="data-table-6__select-row-c"
+                      id="data-table-1__select-row-c"
                       name="select-row-c"
                       onSelect={[Function]}
                       radio={null}
                     >
                       <td
-                        className="bx--table-column-checkbox"
+                        className="cds--table-column-checkbox"
                       >
                         <ForwardRef(InlineCheckbox)
                           ariaLabel="Select row"
                           checked={false}
                           disabled={false}
-                          id="data-table-6__select-row-c"
+                          id="data-table-1__select-row-c"
                           name="select-row-c"
                           onClick={[Function]}
                         >
                           <div
-                            className="bx--checkbox--inline"
+                            className="cds--checkbox--inline"
                           >
                             <input
                               checked={false}
-                              className="bx--checkbox"
+                              className="cds--checkbox"
                               disabled={false}
-                              id="data-table-6__select-row-c"
+                              id="data-table-1__select-row-c"
                               name="select-row-c"
                               onChange={[Function]}
                               onClick={[Function]}
@@ -1610,8 +1610,8 @@ exports[`DataTable selection should render 1`] = `
                             />
                             <label
                               aria-label="Select row"
-                              className="bx--checkbox-label"
-                              htmlFor="data-table-6__select-row-c"
+                              className="cds--checkbox-label"
+                              htmlFor="data-table-1__select-row-c"
                               onClick={[Function]}
                             />
                           </div>
@@ -1969,18 +1969,18 @@ exports[`DataTable should render 1`] = `
     title="DataTable with toolbar"
   >
     <div
-      className="bx--data-table-container"
+      className="cds--data-table-container"
     >
       <div
-        className="bx--data-table-header"
+        className="cds--data-table-header"
       >
         <h4
-          className="bx--data-table-header__title"
+          className="cds--data-table-header__title"
         >
           DataTable with toolbar
         </h4>
         <p
-          className="bx--data-table-header__description"
+          className="cds--data-table-header__description"
         />
       </div>
       <TableToolbar
@@ -1988,7 +1988,7 @@ exports[`DataTable should render 1`] = `
       >
         <section
           aria-label="data table toolbar"
-          className="bx--table-toolbar"
+          className="cds--table-toolbar"
         >
           <TableBatchActions
             onCancel={[Function]}
@@ -1998,14 +1998,14 @@ exports[`DataTable should render 1`] = `
           >
             <div
               aria-hidden={true}
-              className="bx--batch-actions"
+              className="cds--batch-actions"
               onScroll={[Function]}
             >
               <div
-                className="bx--batch-summary"
+                className="cds--batch-summary"
               >
                 <p
-                  className="bx--batch-summary__para"
+                  className="cds--batch-summary__para"
                 >
                   <Text
                     as="span"
@@ -2020,7 +2020,7 @@ exports[`DataTable should render 1`] = `
               </div>
               <TableActionList>
                 <div
-                  className="bx--action-list"
+                  className="cds--action-list"
                 >
                   <TableBatchAction
                     onClick={[MockFunction]}
@@ -2043,7 +2043,7 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -2056,11 +2056,11 @@ exports[`DataTable should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          className="bx--btn__icon"
+                          className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            className="bx--btn__icon"
+                            className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -2070,7 +2070,7 @@ exports[`DataTable should render 1`] = `
                           >
                             <svg
                               aria-hidden={true}
-                              className="bx--btn__icon"
+                              className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
@@ -2114,7 +2114,7 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -2127,11 +2127,11 @@ exports[`DataTable should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          className="bx--btn__icon"
+                          className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            className="bx--btn__icon"
+                            className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -2141,7 +2141,7 @@ exports[`DataTable should render 1`] = `
                           >
                             <svg
                               aria-hidden={true}
-                              className="bx--btn__icon"
+                              className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
@@ -2185,7 +2185,7 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -2198,11 +2198,11 @@ exports[`DataTable should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          className="bx--btn__icon"
+                          className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            className="bx--btn__icon"
+                            className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -2212,7 +2212,7 @@ exports[`DataTable should render 1`] = `
                           >
                             <svg
                               aria-hidden={true}
-                              className="bx--btn__icon"
+                              className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
@@ -2236,14 +2236,14 @@ exports[`DataTable should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <Button
-                    className="bx--batch-summary__cancel"
+                    className="cds--batch-summary__cancel"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <button
                       aria-describedby={null}
                       aria-pressed={null}
-                      className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+                      className="cds--batch-summary__cancel cds--btn cds--btn--primary"
                       disabled={false}
                       onBlur={[Function]}
                       onClick={[Function]}
@@ -2262,7 +2262,7 @@ exports[`DataTable should render 1`] = `
           </TableBatchActions>
           <TableToolbarContent>
             <div
-              className="bx--toolbar-content"
+              className="cds--toolbar-content"
             >
               <TableToolbarSearch
                 id="custom-id"
@@ -2273,7 +2273,7 @@ exports[`DataTable should render 1`] = `
                 translateWithId={[Function]}
               >
                 <Search
-                  className="bx--toolbar-search-container-persistent"
+                  className="cds--toolbar-search-container-persistent"
                   closeButtonLabelText="Clear search input"
                   id="custom-id"
                   labelText="Filter table"
@@ -2288,17 +2288,17 @@ exports[`DataTable should render 1`] = `
                 >
                   <div
                     aria-labelledby="custom-id-search"
-                    className="bx--search bx--search--xl bx--toolbar-search-container-persistent"
+                    className="cds--search cds--search--xl cds--toolbar-search-container-persistent"
                     role="search"
                   >
                     <div
-                      className="bx--search-magnifier"
+                      className="cds--search-magnifier"
                     >
                       <ForwardRef(Search16)
-                        className="bx--search-magnifier-icon"
+                        className="cds--search-magnifier-icon"
                       >
                         <Icon
-                          className="bx--search-magnifier-icon"
+                          className="cds--search-magnifier-icon"
                           fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
@@ -2308,7 +2308,7 @@ exports[`DataTable should render 1`] = `
                         >
                           <svg
                             aria-hidden={true}
-                            className="bx--search-magnifier-icon"
+                            className="cds--search-magnifier-icon"
                             fill="currentColor"
                             focusable="false"
                             height={16}
@@ -2325,7 +2325,7 @@ exports[`DataTable should render 1`] = `
                       </ForwardRef(Search16)>
                     </div>
                     <label
-                      className="bx--label"
+                      className="cds--label"
                       htmlFor="custom-id"
                       id="custom-id-search"
                     >
@@ -2333,7 +2333,7 @@ exports[`DataTable should render 1`] = `
                     </label>
                     <input
                       autoComplete="off"
-                      className="bx--search-input"
+                      className="cds--search-input"
                       id="custom-id"
                       onBlur={[Function]}
                       onChange={[Function]}
@@ -2347,7 +2347,7 @@ exports[`DataTable should render 1`] = `
                     />
                     <button
                       aria-label="Clear search input"
-                      className="bx--search-close bx--search-close--hidden"
+                      className="cds--search-close cds--search-close--hidden"
                       onClick={[Function]}
                       type="button"
                     >
@@ -2391,7 +2391,7 @@ exports[`DataTable should render 1`] = `
               >
                 <OverflowMenu
                   ariaLabel="Settings"
-                  className="bx--toolbar-action bx--overflow-menu"
+                  className="cds--toolbar-action cds--overflow-menu"
                   direction="bottom"
                   flipped={true}
                   focusTrap={true}
@@ -2420,7 +2420,7 @@ exports[`DataTable should render 1`] = `
                       aria-expanded={false}
                       aria-haspopup={true}
                       aria-label="Settings"
-                      className="bx--toolbar-action bx--overflow-menu bx--overflow-menu bx--overflow-menu--md"
+                      className="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md"
                       onClick={[Function]}
                       onClose={[Function]}
                       onKeyDown={[Function]}
@@ -2430,11 +2430,11 @@ exports[`DataTable should render 1`] = `
                     >
                       <ForwardRef(Settings16)
                         aria-label="Settings"
-                        className="bx--overflow-menu__icon"
+                        className="cds--overflow-menu__icon"
                       >
                         <Icon
                           aria-label="Settings"
-                          className="bx--overflow-menu__icon"
+                          className="cds--overflow-menu__icon"
                           fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
@@ -2444,7 +2444,7 @@ exports[`DataTable should render 1`] = `
                         >
                           <svg
                             aria-label="Settings"
-                            className="bx--overflow-menu__icon"
+                            className="cds--overflow-menu__icon"
                             fill="currentColor"
                             focusable="false"
                             height={16}
@@ -2478,7 +2478,7 @@ exports[`DataTable should render 1`] = `
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
-                  className="bx--btn bx--btn--sm bx--btn--primary"
+                  className="cds--btn cds--btn--sm cds--btn--primary"
                   disabled={false}
                   onBlur={[Function]}
                   onClick={[Function]}
@@ -2501,10 +2501,10 @@ exports[`DataTable should render 1`] = `
         size="normal"
       >
         <div
-          className="bx--data-table-content"
+          className="cds--data-table-content"
         >
           <table
-            className="bx--data-table bx--data-table--normal bx--data-table--no-border"
+            className="cds--data-table cds--data-table--normal cds--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -2523,7 +2523,7 @@ exports[`DataTable should render 1`] = `
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field A
                         </div>
@@ -2542,7 +2542,7 @@ exports[`DataTable should render 1`] = `
                         scope="col"
                       >
                         <div
-                          className="bx--table-header-label"
+                          className="cds--table-header-label"
                         >
                           Field B
                         </div>
@@ -2957,18 +2957,18 @@ exports[`DataTable sticky header should render 1`] = `
     title="DataTable with toolbar"
   >
     <div
-      className="bx--data-table-container bx--data-table--max-width"
+      className="cds--data-table-container cds--data-table--max-width"
     >
       <div
-        className="bx--data-table-header"
+        className="cds--data-table-header"
       >
         <h4
-          className="bx--data-table-header__title"
+          className="cds--data-table-header__title"
         >
           DataTable with toolbar
         </h4>
         <p
-          className="bx--data-table-header__description"
+          className="cds--data-table-header__description"
         />
       </div>
       <TableToolbar
@@ -2976,7 +2976,7 @@ exports[`DataTable sticky header should render 1`] = `
       >
         <section
           aria-label="data table toolbar"
-          className="bx--table-toolbar"
+          className="cds--table-toolbar"
         >
           <TableBatchActions
             onCancel={[Function]}
@@ -2986,14 +2986,14 @@ exports[`DataTable sticky header should render 1`] = `
           >
             <div
               aria-hidden={true}
-              className="bx--batch-actions"
+              className="cds--batch-actions"
               onScroll={[Function]}
             >
               <div
-                className="bx--batch-summary"
+                className="cds--batch-summary"
               >
                 <p
-                  className="bx--batch-summary__para"
+                  className="cds--batch-summary__para"
                 >
                   <Text
                     as="span"
@@ -3008,7 +3008,7 @@ exports[`DataTable sticky header should render 1`] = `
               </div>
               <TableActionList>
                 <div
-                  className="bx--action-list"
+                  className="cds--action-list"
                 >
                   <TableBatchAction
                     onClick={[MockFunction]}
@@ -3031,7 +3031,7 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -3044,11 +3044,11 @@ exports[`DataTable sticky header should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          className="bx--btn__icon"
+                          className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            className="bx--btn__icon"
+                            className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -3058,7 +3058,7 @@ exports[`DataTable sticky header should render 1`] = `
                           >
                             <svg
                               aria-hidden={true}
-                              className="bx--btn__icon"
+                              className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
@@ -3102,7 +3102,7 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -3115,11 +3115,11 @@ exports[`DataTable sticky header should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          className="bx--btn__icon"
+                          className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            className="bx--btn__icon"
+                            className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -3129,7 +3129,7 @@ exports[`DataTable sticky header should render 1`] = `
                           >
                             <svg
                               aria-hidden={true}
-                              className="bx--btn__icon"
+                              className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
@@ -3173,7 +3173,7 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="bx--btn bx--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onBlur={[Function]}
                         onClick={[Function]}
@@ -3186,11 +3186,11 @@ exports[`DataTable sticky header should render 1`] = `
                         Ghost
                         <ForwardRef(AddFilled16)
                           aria-hidden="true"
-                          className="bx--btn__icon"
+                          className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
-                            className="bx--btn__icon"
+                            className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
@@ -3200,7 +3200,7 @@ exports[`DataTable sticky header should render 1`] = `
                           >
                             <svg
                               aria-hidden={true}
-                              className="bx--btn__icon"
+                              className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
@@ -3224,14 +3224,14 @@ exports[`DataTable sticky header should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <Button
-                    className="bx--batch-summary__cancel"
+                    className="cds--batch-summary__cancel"
                     onClick={[Function]}
                     tabIndex={-1}
                   >
                     <button
                       aria-describedby={null}
                       aria-pressed={null}
-                      className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+                      className="cds--batch-summary__cancel cds--btn cds--btn--primary"
                       disabled={false}
                       onBlur={[Function]}
                       onClick={[Function]}
@@ -3250,7 +3250,7 @@ exports[`DataTable sticky header should render 1`] = `
           </TableBatchActions>
           <TableToolbarContent>
             <div
-              className="bx--toolbar-content"
+              className="cds--toolbar-content"
             >
               <TableToolbarSearch
                 id="custom-id"
@@ -3261,7 +3261,7 @@ exports[`DataTable sticky header should render 1`] = `
                 translateWithId={[Function]}
               >
                 <Search
-                  className="bx--toolbar-search-container-persistent"
+                  className="cds--toolbar-search-container-persistent"
                   closeButtonLabelText="Clear search input"
                   id="custom-id"
                   labelText="Filter table"
@@ -3276,17 +3276,17 @@ exports[`DataTable sticky header should render 1`] = `
                 >
                   <div
                     aria-labelledby="custom-id-search"
-                    className="bx--search bx--search--xl bx--toolbar-search-container-persistent"
+                    className="cds--search cds--search--xl cds--toolbar-search-container-persistent"
                     role="search"
                   >
                     <div
-                      className="bx--search-magnifier"
+                      className="cds--search-magnifier"
                     >
                       <ForwardRef(Search16)
-                        className="bx--search-magnifier-icon"
+                        className="cds--search-magnifier-icon"
                       >
                         <Icon
-                          className="bx--search-magnifier-icon"
+                          className="cds--search-magnifier-icon"
                           fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
@@ -3296,7 +3296,7 @@ exports[`DataTable sticky header should render 1`] = `
                         >
                           <svg
                             aria-hidden={true}
-                            className="bx--search-magnifier-icon"
+                            className="cds--search-magnifier-icon"
                             fill="currentColor"
                             focusable="false"
                             height={16}
@@ -3313,7 +3313,7 @@ exports[`DataTable sticky header should render 1`] = `
                       </ForwardRef(Search16)>
                     </div>
                     <label
-                      className="bx--label"
+                      className="cds--label"
                       htmlFor="custom-id"
                       id="custom-id-search"
                     >
@@ -3321,7 +3321,7 @@ exports[`DataTable sticky header should render 1`] = `
                     </label>
                     <input
                       autoComplete="off"
-                      className="bx--search-input"
+                      className="cds--search-input"
                       id="custom-id"
                       onBlur={[Function]}
                       onChange={[Function]}
@@ -3335,7 +3335,7 @@ exports[`DataTable sticky header should render 1`] = `
                     />
                     <button
                       aria-label="Clear search input"
-                      className="bx--search-close bx--search-close--hidden"
+                      className="cds--search-close cds--search-close--hidden"
                       onClick={[Function]}
                       type="button"
                     >
@@ -3379,7 +3379,7 @@ exports[`DataTable sticky header should render 1`] = `
               >
                 <OverflowMenu
                   ariaLabel="Settings"
-                  className="bx--toolbar-action bx--overflow-menu"
+                  className="cds--toolbar-action cds--overflow-menu"
                   direction="bottom"
                   flipped={true}
                   focusTrap={true}
@@ -3408,7 +3408,7 @@ exports[`DataTable sticky header should render 1`] = `
                       aria-expanded={false}
                       aria-haspopup={true}
                       aria-label="Settings"
-                      className="bx--toolbar-action bx--overflow-menu bx--overflow-menu bx--overflow-menu--md"
+                      className="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md"
                       onClick={[Function]}
                       onClose={[Function]}
                       onKeyDown={[Function]}
@@ -3418,11 +3418,11 @@ exports[`DataTable sticky header should render 1`] = `
                     >
                       <ForwardRef(Settings16)
                         aria-label="Settings"
-                        className="bx--overflow-menu__icon"
+                        className="cds--overflow-menu__icon"
                       >
                         <Icon
                           aria-label="Settings"
-                          className="bx--overflow-menu__icon"
+                          className="cds--overflow-menu__icon"
                           fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
@@ -3432,7 +3432,7 @@ exports[`DataTable sticky header should render 1`] = `
                         >
                           <svg
                             aria-label="Settings"
-                            className="bx--overflow-menu__icon"
+                            className="cds--overflow-menu__icon"
                             fill="currentColor"
                             focusable="false"
                             height={16}
@@ -3466,7 +3466,7 @@ exports[`DataTable sticky header should render 1`] = `
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
-                  className="bx--btn bx--btn--sm bx--btn--primary"
+                  className="cds--btn cds--btn--sm cds--btn--primary"
                   disabled={false}
                   onBlur={[Function]}
                   onClick={[Function]}
@@ -3490,13 +3490,13 @@ exports[`DataTable sticky header should render 1`] = `
         stickyHeader={true}
       >
         <section
-          className="bx--data-table_inner-container"
+          className="cds--data-table_inner-container"
         >
           <div
-            className="bx--data-table-content"
+            className="cds--data-table-content"
           >
             <table
-              className="bx--data-table bx--data-table--normal bx--data-table--no-border bx--data-table--sticky-header"
+              className="cds--data-table cds--data-table--normal cds--data-table--no-border cds--data-table--sticky-header"
             >
               <TableHead>
                 <thead>
@@ -3515,7 +3515,7 @@ exports[`DataTable sticky header should render 1`] = `
                           scope="col"
                         >
                           <div
-                            className="bx--table-header-label"
+                            className="cds--table-header-label"
                           >
                             Field A
                           </div>
@@ -3534,7 +3534,7 @@ exports[`DataTable sticky header should render 1`] = `
                           scope="col"
                         >
                           <div
-                            className="bx--table-header-label"
+                            className="cds--table-header-label"
                           >
                             Field B
                           </div>

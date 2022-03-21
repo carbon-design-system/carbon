@@ -11,9 +11,8 @@ import Pagination from '../Pagination';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 jest.useFakeTimers();
 

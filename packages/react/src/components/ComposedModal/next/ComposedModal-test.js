@@ -10,9 +10,8 @@ import { mount } from 'enzyme';
 import ComposedModal from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from '../ComposedModal';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('<ComposedModal />', () => {
   let container;

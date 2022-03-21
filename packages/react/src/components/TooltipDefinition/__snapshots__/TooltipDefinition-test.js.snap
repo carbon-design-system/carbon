@@ -8,13 +8,13 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
   tooltipText="tooltip text"
 >
   <span
-    className="bx--tooltip--definition bx--tooltip--a11y custom-class"
+    className="cds--tooltip--definition cds--tooltip--a11y custom-class"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <button
-      aria-describedby="definition-tooltip-3"
-      className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--top bx--tooltip--align-start"
+      aria-describedby="definition-tooltip-1"
+      className="cds--tooltip__trigger cds--tooltip--a11y cds--tooltip__trigger--definition cds--tooltip--top cds--tooltip--align-start"
       onBlur={[Function]}
       onFocus={[Function]}
       type="button"
@@ -22,8 +22,8 @@ exports[`TooltipDefinition should allow the user to specify the direction 1`] = 
       tooltip trigger
     </button>
     <span
-      className="bx--assistive-text"
-      id="definition-tooltip-3"
+      className="cds--assistive-text"
+      id="definition-tooltip-1"
       role="tooltip"
     >
       tooltip text
@@ -40,13 +40,13 @@ exports[`TooltipDefinition should render 1`] = `
   tooltipText="tooltip text"
 >
   <span
-    className="bx--tooltip--definition bx--tooltip--a11y custom-class"
+    className="cds--tooltip--definition cds--tooltip--a11y custom-class"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <button
       aria-describedby="definition-tooltip-1"
-      className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition bx--tooltip--bottom bx--tooltip--align-start"
+      className="cds--tooltip__trigger cds--tooltip--a11y cds--tooltip__trigger--definition cds--tooltip--bottom cds--tooltip--align-start"
       onBlur={[Function]}
       onFocus={[Function]}
       type="button"
@@ -54,7 +54,7 @@ exports[`TooltipDefinition should render 1`] = `
       tooltip trigger
     </button>
     <span
-      className="bx--assistive-text"
+      className="cds--assistive-text"
       id="definition-tooltip-1"
       role="tooltip"
     >
@@ -73,13 +73,13 @@ exports[`TooltipDefinition should support a custom trigger element class 1`] = `
   triggerClassName="custom-trigger-class"
 >
   <span
-    className="bx--tooltip--definition bx--tooltip--a11y custom-class"
+    className="cds--tooltip--definition cds--tooltip--a11y custom-class"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <button
-      aria-describedby="definition-tooltip-2"
-      className="bx--tooltip__trigger bx--tooltip--a11y bx--tooltip__trigger--definition custom-trigger-class bx--tooltip--bottom bx--tooltip--align-start"
+      aria-describedby="definition-tooltip-1"
+      className="cds--tooltip__trigger cds--tooltip--a11y cds--tooltip__trigger--definition custom-trigger-class cds--tooltip--bottom cds--tooltip--align-start"
       onBlur={[Function]}
       onFocus={[Function]}
       type="button"
@@ -87,8 +87,8 @@ exports[`TooltipDefinition should support a custom trigger element class 1`] = `
       tooltip trigger
     </button>
     <span
-      className="bx--assistive-text"
-      id="definition-tooltip-2"
+      className="cds--assistive-text"
+      id="definition-tooltip-1"
       role="tooltip"
     >
       tooltip text

@@ -14,9 +14,8 @@ import ComposedModal, {
   ModalFooter,
 } from '../ComposedModal';
 import InlineLoading from '../InlineLoading';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('<ModalHeader />', () => {
   describe('Renders as expected', () => {

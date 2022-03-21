@@ -17,9 +17,8 @@ import {
 } from '../ListBox/test-helpers';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Dropdown', () => {
   let mockProps;

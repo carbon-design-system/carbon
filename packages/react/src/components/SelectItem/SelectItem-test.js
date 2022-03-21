@@ -8,9 +8,8 @@
 import React from 'react';
 import SelectItem from '../SelectItem';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('SelectItem', () => {
   describe('Renders as expected', () => {

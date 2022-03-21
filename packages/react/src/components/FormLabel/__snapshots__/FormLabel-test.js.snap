@@ -2,6 +2,6 @@
 
 exports[`FormLabel should render 1`] = `
 <label
-  className="bx--label"
+  className="cds--label"
 />
 `;
