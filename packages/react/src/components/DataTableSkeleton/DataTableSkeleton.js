@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const DataTableSkeleton = ({
   headers,
@@ -23,6 +21,7 @@ const DataTableSkeleton = ({
   showToolbar,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const dataTableSkeletonClasses = cx(className, {
     [`${prefix}--skeleton`]: true,
     [`${prefix}--data-table`]: true,

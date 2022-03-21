@@ -6,12 +6,10 @@
  */
 
 import { Filter16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
@@ -19,6 +17,7 @@ let didWarnAboutDeprecation = false;
  * The filter button for `<Search>`.
  */
 const SearchFilterButton = ({ labelText, iconDescription, ...other }) => {
+  const prefix = usePrefix();
   if (__DEV__) {
     warning(
       didWarnAboutDeprecation,

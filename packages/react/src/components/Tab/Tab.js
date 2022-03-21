@@ -9,11 +9,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import * as FeatureFlags from '@carbon/feature-flags';
-import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
+import { PrefixContext } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 export default class Tab extends React.Component {
+  static contextType = PrefixContext;
+
   static propTypes = {
     /**
      * Specify an optional className to be added to your Tab
@@ -107,6 +108,7 @@ export default class Tab extends React.Component {
   };
 
   render() {
+    const { context: prefix } = this;
     const {
       id,
       className,

@@ -5,19 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import RadioTile from '../RadioTile';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class TileGroup extends React.Component {
   state = {
     selected: this.props.valueSelected || this.props.defaultSelected || null,
     prevValueSelected: this.props.valueSelected,
   };
+
+  static contextType = PrefixContext;
 
   static propTypes = {
     /**
@@ -113,11 +113,12 @@ export default class TileGroup extends React.Component {
 
   renderLegend = (legend) => {
     if (legend) {
-      return <legend className={`${prefix}--label`}>{legend}</legend>;
+      return <legend className={`${this.prefix}--label`}>{legend}</legend>;
     }
   };
 
   render() {
+    const { context: prefix } = this;
     const {
       disabled,
       className = `${prefix}--tile-group`,
