@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { Tag } from 'carbon-components-react';
 import { Add16 } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
+import React from 'react';
+import Tag from './';
 
 describe('Tag', () => {
   describe('automated accessibility testing', () => {

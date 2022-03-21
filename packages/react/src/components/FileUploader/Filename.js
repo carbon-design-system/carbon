@@ -10,14 +10,13 @@ import {
   WarningFilled16,
   CheckmarkFilled16,
 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Loading from '../Loading';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function Filename({ iconDescription, status, invalid, ...rest }) {
+  const prefix = usePrefix();
   switch (status) {
     case 'uploading':
       return (

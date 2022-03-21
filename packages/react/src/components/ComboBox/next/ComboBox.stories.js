@@ -55,6 +55,11 @@ export const Combobox = (args) => (
       onChange={() => {}}
       id="carbon-combobox"
       items={items}
+      downshiftProps={{
+        onStateChange: () => {
+          console.log('the state has changed');
+        },
+      }}
       itemToString={(item) => (item ? item.text : '')}
       placeholder="Filter..."
       titleText="ComboBox title"

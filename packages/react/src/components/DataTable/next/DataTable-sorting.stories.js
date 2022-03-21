@@ -30,6 +30,25 @@ export default {
     TableHeader,
     TableRow,
   },
+  argTypes: {
+    size: {
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      control: { type: 'select' },
+    },
+    useZebraStyles: {
+      control: { type: 'boolean' },
+    },
+    radio: {
+      control: { type: 'boolean' },
+    },
+    isSortable: { control: { type: 'boolean' } },
+  },
+  args: {
+    size: 'lg',
+    useZebraStyles: false,
+    radio: false,
+    isSortable: true,
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -37,8 +56,8 @@ export default {
   },
 };
 
-export const Usage = () => (
-  <DataTable rows={rows} headers={headers} isSortable>
+export const Usage = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With sorting">
         <Table {...getTableProps()}>

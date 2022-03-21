@@ -63,7 +63,7 @@
     "semantic-release": "semantic-release"
   },
   "dependencies": {
-    "@carbon/telemetry": "0.0.0-alpha.6",
+    "@carbon/telemetry": "0.1.0",
     "flatpickr": "4.6.1",
     "lodash.debounce": "^4.0.8",
     "warning": "^3.0.0"

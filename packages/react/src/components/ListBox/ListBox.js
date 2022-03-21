@@ -8,10 +8,8 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
@@ -45,6 +43,7 @@ const ListBox = React.forwardRef(function ListBox(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const showWarning = !invalid && warn;
 
   const className = cx({
