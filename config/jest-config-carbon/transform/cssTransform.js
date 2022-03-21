@@ -13,12 +13,44 @@ const sass = require('sass');
 const path = require('path');
 
 const THIS_FILE = fs.readFileSync(__filename);
+const { root: ROOT_DIR } = path.parse(__dirname);
+
+/**
+ * Returns an array of the the directory and its ancestors
+ * @param {string} directory
+ * @returns {Array<string>}
+ */
+function ancestors(directory) {
+  const result = [directory];
+  let current = directory;
+
+  while (current !== '') {
+    result.push(current);
+
+    if (current !== ROOT_DIR) {
+      current = path.dirname(current);
+    } else {
+      current = '';
+    }
+  }
+
+  return result;
+}
 
 module.exports = {
   process(_file, filepath) {
+    const nodeModules = ancestors(path.dirname(filepath))
+      .map((directory) => {
+        return path.join(directory, 'node_modules');
+      })
+      .filter((directory) => {
+        return fs.existsSync(directory);
+      });
+
     const result = sass.renderSync({
       file: filepath,
       outputStyle: 'compressed',
+      includePaths: [...nodeModules],
     });
     return `
       const css = \`${result.css.toString()}\`;
