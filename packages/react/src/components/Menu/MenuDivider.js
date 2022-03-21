@@ -6,11 +6,10 @@
  */
 
 import React from 'react';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function MenuDivider() {
+  const prefix = usePrefix();
   return <li role="separator" className={`${prefix}--menu-divider`} />;
 }
 

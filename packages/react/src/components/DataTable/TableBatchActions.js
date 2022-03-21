@@ -8,12 +8,10 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
 import Button from '../Button';
 import TableActionList from './TableActionList';
 import { Text } from '../Text';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const translationKeys = {
   'carbon.table.batch.cancel': 'Cancel',
@@ -38,6 +36,7 @@ const TableBatchActions = ({
   ...rest
 }) => {
   const [isScrolling, setIsScrolling] = React.useState();
+  const prefix = usePrefix();
   const batchActionsClasses = cx(
     {
       [`${prefix}--batch-actions`]: true,

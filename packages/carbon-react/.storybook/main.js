@@ -19,6 +19,7 @@ const stories = glob
       '../src/**/*.stories.js',
       '../src/**/*.stories.mdx',
       '../../react/src/**/next/*.stories.js',
+      '../../react/src/**/next/**/*.stories.js',
       '../../react/src/**/next/*.stories.mdx',
       '../../react/src/**/*-story.js',
     ],
@@ -32,7 +33,17 @@ const stories = glob
   .filter((match) => {
     const filepath = path.resolve(__dirname, match);
     const basename = path.basename(match, '.js');
-    const denylist = new Set(['TooltipDefinition-story']);
+    const denylist = new Set([
+      'TooltipDefinition-story',
+      'DataTable-basic-story',
+      'DataTable-batch-actions-story',
+      'DataTable-filtering-story',
+      'DataTable-selection-story',
+      'DataTable-sorting-story',
+      'DataTable-toolbar-story',
+      'DataTable-dynamic-content-story',
+      'DataTable-expansion-story',
+    ]);
 
     if (denylist.has(basename)) {
       return false;

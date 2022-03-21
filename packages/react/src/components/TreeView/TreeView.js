@@ -8,12 +8,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
 import * as FeatureFlags from '@carbon/feature-flags';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export default function TreeView({
   active: prespecifiedActive,
@@ -28,6 +26,7 @@ export default function TreeView({
   ...rest
 }) {
   const { current: treeId } = useRef(rest.id || uniqueId());
+  const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
     [`${prefix}--tree--${size}`]: size !== 'default',
   });
@@ -137,7 +136,7 @@ export default function TreeView({
           return NodeFilter.FILTER_SKIP;
         },
       });
-  }, []);
+  }, [prefix]);
 
   useEffect(() => {
     if (preselected.length) {

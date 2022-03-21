@@ -1,12 +1,10 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
 import { View16, ViewOff16, WarningFilled16 } from '@carbon/icons-react';
 import { textInputProps } from './util';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
@@ -37,6 +35,8 @@ const ControlledPasswordInput = React.forwardRef(
     },
     ref
   ) {
+    const prefix = usePrefix();
+
     if (__DEV__) {
       warning(
         didWarnAboutDeprecation,

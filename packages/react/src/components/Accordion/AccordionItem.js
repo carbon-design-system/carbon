@@ -6,7 +6,6 @@
  */
 
 import { ChevronRight16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -14,8 +13,8 @@ import { Text } from '../Text';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const defaultRenderToggle = (props) => <button type="button" {...props} />;
 
 function AccordionItem({
@@ -34,6 +33,7 @@ function AccordionItem({
   const [prevIsOpen, setPrevIsOpen] = useState(open);
   const [animation, setAnimation] = useState('');
   const id = useId('accordion-item');
+  const prefix = usePrefix();
   const className = cx({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
