@@ -89,6 +89,7 @@ module.exports = {
       string_decoder: false,
       sys: false,
       timers: false,
+      tls: false,
       tty: false,
       url: false,
       util: false,
