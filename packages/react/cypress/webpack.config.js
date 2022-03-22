@@ -72,6 +72,7 @@ module.exports = {
     fallback: {
       assert: false,
       buffer: false,
+      bufferutil: false,
       console: false,
       constants: false,
       crypto: false,
@@ -92,6 +93,7 @@ module.exports = {
       tls: false,
       tty: false,
       url: false,
+      'utf-8-validate': false,
       util: false,
       vm: false,
       zlib: false,
