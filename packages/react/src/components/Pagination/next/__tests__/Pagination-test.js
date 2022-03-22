@@ -53,7 +53,7 @@ const selectPage = (wrapper, pageNumber) => {
  * @returns {void}
  */
 const incrementPage = (wrapper) => {
-  wrapper.find('[children="Next page"]').simulate('click');
+  wrapper.find('button.bx--pagination__button--forward').simulate('click');
 };
 
 /**
@@ -63,7 +63,7 @@ const incrementPage = (wrapper) => {
  * @returns {void}
  */
 const decrementPage = (wrapper) => {
-  wrapper.find('[children="Previous page"]').simulate('click');
+  wrapper.find('button.bx--pagination__button--backward').simulate('click');
 };
 
 /**
@@ -225,6 +225,7 @@ describe('Pagination', () => {
         const pager = mount(
           <Pagination pageSizes={[5, 10]} totalItems={50} onChange={handler} />
         );
+
         incrementPage(pager);
         expect(getCurrentPage(pager)).toBe(2);
         pager
