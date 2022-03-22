@@ -14,6 +14,8 @@ import {
   OverflowMenuHorizontal16,
 } from '@carbon/icons-react';
 import Button from '../Button';
+import { IconButton } from '../IconButton';
+import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
 
 const translationIds = {
@@ -74,16 +76,27 @@ function DirectionButton({ direction, label, disabled, onClick }) {
 
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
-      <Button
-        disabled={disabled}
-        renderIcon={icon}
-        kind="ghost"
-        hasIconOnly
-        iconDescription={label}
-        tooltipAlignment="center"
-        tooltipPosition="bottom"
-        onClick={onClick}
-      />
+      {FeatureFlags.enabled('enable-v11-release') ? (
+        <IconButton
+          align="bottom"
+          disabled={disabled}
+          kind="ghost"
+          label={label}
+          onClick={onClick}>
+          {direction === 'forward' ? <CaretRight16 /> : <CaretLeft16 />}
+        </IconButton>
+      ) : (
+        <Button
+          disabled={disabled}
+          renderIcon={icon}
+          kind="ghost"
+          hasIconOnly
+          iconDescription={label}
+          tooltipAlignment="center"
+          tooltipPosition="bottom"
+          onClick={onClick}
+        />
+      )}
     </li>
   );
 }
