@@ -7,6 +7,7 @@
 
 import '../../../index.scss';
 
+import '../../feature-flags';
 import React from 'react';
 import { mount } from '@cypress/react';
 import {
