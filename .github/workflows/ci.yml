@@ -135,4 +135,4 @@ jobs:
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
         run: |
-          yarn run percy exec -- yarn workspace carbon-components-react test:e2e
+          yarn run percy exec -- yarn workspace @carbon/react test:e2e
