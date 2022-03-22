@@ -21,19 +21,15 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
 ) {
   const prefix = usePrefix();
 
-  const [selected, setSelected] = useState(
-    valueSelected !== 'undefined' ? valueSelected : defaultSelected
-  );
-  const [prevValueSelected, setPrevValueSelected] = useState(selected);
+  const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
+  const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
   /**
    * prop + state alignment - getDerivedStateFromProps
    * only update if selected prop changes
    */
-  if (prevValueSelected !== valueSelected) {
-    setSelected(
-      valueSelected !== 'undefined' ? valueSelected : defaultSelected
-    );
+  if (valueSelected !== prevValueSelected) {
+    setSelected(valueSelected);
     setPrevValueSelected(valueSelected);
   }
 
@@ -81,7 +77,7 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
 
 RadioButtonGroup.propTypes = {
   /**
-   * Provide a collection of <RadioButton> components to render in the group
+   * Provide a collection of `<RadioButton>` components to render in the group
    */
   children: PropTypes.node,
 
@@ -91,7 +87,7 @@ RadioButtonGroup.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify the <RadioButton> to be selected by default
+   * Specify the `<RadioButton>` to be selected by default
    */
   defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 

@@ -63,7 +63,7 @@ const RadioButton = React.forwardRef(function RadioButton(
 
 RadioButton.propTypes = {
   /**
-   * Specify whether the <RadioButton> is currently checked
+   * Specify whether the `<RadioButton>` is currently checked
    */
   checked: PropTypes.bool,
 
@@ -73,7 +73,7 @@ RadioButton.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify whether the <RadioButton> should be checked by default
+   * Specify whether the `<RadioButton>` should be checked by default
    */
   defaultChecked: PropTypes.bool,
 
@@ -121,7 +121,7 @@ RadioButton.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Specify the value of the <RadioButton>
+   * Specify the value of the `<RadioButton>`
    */
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
