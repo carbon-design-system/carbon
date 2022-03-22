@@ -5,16 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import wrapComponent from '../../tools/wrapComponent';
-
-const { prefix } = settings;
 
 /**
  * Generic container for `HeaderGlobalAction` components
  */
 export default wrapComponent({
   name: 'HeaderGlobalBar',
-  className: `${prefix}--header__global`,
+  className: `cds--header__global`,
   type: 'div',
 });

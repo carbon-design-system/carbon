@@ -9,14 +9,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ToolbarSearch from '../ToolbarSearch';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
 const Toolbar = ({ children, className, ...other }) => {
+  const prefix = usePrefix();
   const wrapperClasses = classNames(`${prefix}--toolbar`, className);
 
   if (__DEV__) {
@@ -80,11 +79,14 @@ ToolbarItem.defaultProps = {
 };
 
 // eslint-disable-next-line react/display-name
-export const ToolbarTitle = React.forwardRef(({ title }, ref) => (
-  <li ref={ref} className={`${prefix}--toolbar-menu__title`}>
-    {title}
-  </li>
-));
+export const ToolbarTitle = React.forwardRef(({ title }, ref) => {
+  const prefix = usePrefix();
+  return (
+    <li ref={ref} className={`${prefix}--toolbar-menu__title`}>
+      {title}
+    </li>
+  );
+});
 
 ToolbarTitle.displayName = 'ToolbarTitle';
 ToolbarTitle.propTypes = {
@@ -95,11 +97,14 @@ ToolbarTitle.propTypes = {
 };
 
 // eslint-disable-next-line react/display-name
-export const ToolbarOption = React.forwardRef(({ children }, ref) => (
-  <li ref={ref} className={`${prefix}--toolbar-menu__option`}>
-    {children}
-  </li>
-));
+export const ToolbarOption = React.forwardRef(({ children }, ref) => {
+  const prefix = usePrefix();
+  return (
+    <li ref={ref} className={`${prefix}--toolbar-menu__option`}>
+      {children}
+    </li>
+  );
+});
 
 ToolbarOption.displayName = 'ToolbarOption';
 ToolbarOption.propTypes = {
@@ -110,9 +115,10 @@ ToolbarOption.propTypes = {
 };
 
 // eslint-disable-next-line react/display-name
-export const ToolbarDivider = React.forwardRef((props, ref) => (
-  <hr ref={ref} className={`${prefix}--toolbar-menu__divider`} />
-));
+export const ToolbarDivider = React.forwardRef((props, ref) => {
+  const prefix = usePrefix();
+  return <hr ref={ref} className={`${prefix}--toolbar-menu__divider`} />;
+});
 
 ToolbarDivider.displayName = 'ToolbarDivider';
 

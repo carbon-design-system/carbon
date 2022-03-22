@@ -54,11 +54,11 @@ import { adjustAlpha } from '../tools';
 export const background = gray90;
 export const backgroundInverse = gray10;
 export const backgroundBrand = blue60;
-export const backgroundActive = gray80;
-export const backgroundHover = gray90Hover;
+export const backgroundActive = adjustAlpha(gray50, 0.4);
+export const backgroundHover = adjustAlpha(gray50, 0.16);
 export const backgroundInverseHover = gray10Hover;
-export const backgroundSelected = gray80;
-export const backgroundSelectedHover = gray80Hover;
+export const backgroundSelected = adjustAlpha(gray50, 0.24);
+export const backgroundSelectedHover = adjustAlpha(gray50, 0.32);
 
 // Layer
 // layer-01

@@ -5,7 +5,7 @@ exports[`ListBoxField should render 1`] = `
   id="test-listbox"
 >
   <div
-    className="bx--list-box__field"
+    className="cds--list-box__field"
     id="test-listbox"
     tabIndex={-1}
   >
@@ -15,7 +15,7 @@ exports[`ListBoxField should render 1`] = `
     >
       <div
         aria-label="Clear selected item"
-        className="bx--list-box__selection"
+        className="cds--list-box__selection"
         onClick={[Function]}
         onKeyDown={[Function]}
         role="button"

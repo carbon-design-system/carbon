@@ -35,7 +35,7 @@ exports[`ListBoxSelection should render 1`] = `
 >
   <div
     aria-label="translation"
-    className="bx--list-box__selection"
+    className="cds--list-box__selection"
     onClick={[Function]}
     onKeyDown={[Function]}
     role="button"
@@ -106,17 +106,17 @@ exports[`ListBoxSelection should render 2`] = `
   }
 >
   <div
-    className="bx--tag bx--tag--filter bx--tag--high-contrast"
+    className="cds--tag cds--tag--filter cds--tag--high-contrast"
   >
     <span
-      className="bx--tag__label"
+      className="cds--tag__label"
       title={3}
     >
       3
     </span>
     <div
       aria-label="translation"
-      className="bx--tag__close-icon"
+      className="cds--tag__close-icon"
       onClick={[Function]}
       onKeyDown={[Function]}
       role="button"

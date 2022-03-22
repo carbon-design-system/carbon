@@ -7,20 +7,20 @@ exports[`SideNavMenuItem should render 1`] = `
   isActive={false}
 >
   <li
-    className="bx--side-nav__menu-item custom-classname"
+    className="cds--side-nav__menu-item custom-classname"
   >
     <Link
-      className="bx--side-nav__link"
+      className="cds--side-nav__link"
       element="a"
       href="#"
     >
       <a
-        className="bx--side-nav__link"
+        className="cds--side-nav__link"
         href="#"
       >
         <SideNavLinkText>
           <span
-            className="bx--side-nav__link-text"
+            className="cds--side-nav__link-text"
           >
             link
           </span>
@@ -38,20 +38,20 @@ exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria
   isActive={true}
 >
   <li
-    className="bx--side-nav__menu-item custom-classname"
+    className="cds--side-nav__menu-item custom-classname"
   >
     <Link
-      className="bx--side-nav__link bx--side-nav__link--current"
+      className="cds--side-nav__link cds--side-nav__link--current"
       element="a"
       href="#"
     >
       <a
-        className="bx--side-nav__link bx--side-nav__link--current"
+        className="cds--side-nav__link cds--side-nav__link--current"
         href="#"
       >
         <SideNavLinkText>
           <span
-            className="bx--side-nav__link-text"
+            className="cds--side-nav__link-text"
           >
             link
           </span>
@@ -70,22 +70,22 @@ exports[`SideNavMenuItem should render active styles with \`isActive\` or \`aria
   isActive={false}
 >
   <li
-    className="bx--side-nav__menu-item custom-classname"
+    className="cds--side-nav__menu-item custom-classname"
   >
     <Link
       aria-current="page"
-      className="bx--side-nav__link"
+      className="cds--side-nav__link"
       element="a"
       href="#"
     >
       <a
         aria-current="page"
-        className="bx--side-nav__link"
+        className="cds--side-nav__link"
         href="#"
       >
         <SideNavLinkText>
           <span
-            className="bx--side-nav__link-text"
+            className="cds--side-nav__link-text"
           >
             link
           </span>

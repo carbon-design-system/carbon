@@ -9,11 +9,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { warning } from '../../internal/warning';
-import { settings } from 'carbon-components';
 import { Legend } from '../Text';
 import { FeatureFlagContext } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class RadioButtonGroup extends React.Component {
   static propTypes = {
@@ -152,34 +150,40 @@ export default class RadioButtonGroup extends React.Component {
       enabled = scope.enabled('enable-v11-release');
     }
 
-    const wrapperClasses = classNames(
-      `${prefix}--radio-button-group`,
-      [enabled ? null : className],
-      {
-        [`${prefix}--radio-button-group--${orientation}`]:
-          orientation === 'vertical',
-        [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
-      }
-    );
-
-    const legendClasses = classNames(`${prefix}--label`, {
-      [`${prefix}--visually-hidden`]: hideLegend,
-    });
-
     return (
-      <div
-        className={
-          enabled
-            ? classNames(`${prefix}--form-item`, className)
-            : `${prefix}--form-item`
-        }>
-        <fieldset className={wrapperClasses} disabled={disabled}>
-          {legendText && (
-            <Legend className={legendClasses}>{legendText}</Legend>
-          )}
-          {this.getRadioButtons()}
-        </fieldset>
-      </div>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const wrapperClasses = classNames(
+            `${prefix}--radio-button-group`,
+            [enabled ? null : className],
+            {
+              [`${prefix}--radio-button-group--${orientation}`]:
+                orientation === 'vertical',
+              [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
+            }
+          );
+
+          const legendClasses = classNames(`${prefix}--label`, {
+            [`${prefix}--visually-hidden`]: hideLegend,
+          });
+
+          return (
+            <div
+              className={
+                enabled
+                  ? classNames(`${prefix}--form-item`, className)
+                  : `${prefix}--form-item`
+              }>
+              <fieldset className={wrapperClasses} disabled={disabled}>
+                {legendText && (
+                  <Legend className={legendClasses}>{legendText}</Legend>
+                )}
+                {this.getRadioButtons()}
+              </fieldset>
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

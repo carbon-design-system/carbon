@@ -10,10 +10,9 @@ import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
 import Pagination from '../Pagination';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
-import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import { mount } from 'enzyme';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 jest.useFakeTimers();
 
@@ -249,7 +248,7 @@ describe('Pagination', () => {
       });
 
       it('should disable forward navigation for the last page', () => {
-        const smallPage = shallow(
+        const smallPage = mount(
           <Pagination
             className="extra-class"
             pageSizes={[100]}
@@ -299,7 +298,7 @@ describe('Pagination', () => {
         });
 
         it('should disable forward navigation for the last page', () => {
-          const smallPage = shallow(
+          const smallPage = mount(
             <Pagination
               pageSizes={[100]}
               pagesUnknown={true}
@@ -312,7 +311,7 @@ describe('Pagination', () => {
         });
 
         it('should hide text input if disabled', () => {
-          const noTextInput = shallow(
+          const noTextInput = mount(
             <Pagination pageSizes={[100]} pagesUnknown={true} disabled={true} />
           );
           const right = noTextInput.find(
@@ -322,7 +321,7 @@ describe('Pagination', () => {
         });
 
         it('should append `pagination__button--no-index` class if input is disabled', () => {
-          const pagination = shallow(
+          const pagination = mount(
             <Pagination
               page={2}
               pageSizes={[100]}
@@ -330,12 +329,12 @@ describe('Pagination', () => {
               disabled={true}
             />
           );
-          const forwardButton = pagination.find(
-            `.${prefix}--pagination__button--forward`
-          );
-          const backwardButton = pagination.find(
-            `.${prefix}--pagination__button--backward`
-          );
+          const forwardButton = pagination
+            .find(`.${prefix}--pagination__button--forward`)
+            .first();
+          const backwardButton = pagination
+            .find(`.${prefix}--pagination__button--backward`)
+            .first();
           expect(
             backwardButton.hasClass(`${prefix}--pagination__button--no-index`)
           ).toEqual(true);

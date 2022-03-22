@@ -29,6 +29,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   testRunner: 'jest-circus/runner',
   testPathIgnorePatterns: [
+    '/.avt/',
     '/cjs/',
     '/dist/',
     '/es/',
@@ -47,6 +48,7 @@ module.exports = {
     '[/\\\\]node_modules[/\\\\].+\\.(js|jsx)$',
   ],
   watchPathIgnorePatterns: [
+    '/.avt/',
     '/cjs/',
     '/dist/',
     '/es/',

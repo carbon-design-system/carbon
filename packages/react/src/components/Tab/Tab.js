@@ -9,11 +9,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import * as FeatureFlags from '@carbon/feature-flags';
-import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate';
+import { PrefixContext } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 export default class Tab extends React.Component {
+  static contextType = PrefixContext;
+
   static propTypes = {
     /**
      * Specify an optional className to be added to your Tab
@@ -55,9 +56,7 @@ export default class Tab extends React.Component {
     /**
      * Provide the contents of your Tab
      */
-    label: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.node.isRequired
-      : PropTypes.node,
+    label: PropTypes.node,
 
     /**
      * Provide a handler that is invoked when a user clicks on the control
@@ -109,6 +108,7 @@ export default class Tab extends React.Component {
   };
 
   render() {
+    const { context: prefix } = this;
     const {
       id,
       className,
@@ -122,7 +122,6 @@ export default class Tab extends React.Component {
       tabIndex = 0,
       onClick,
       onKeyDown,
-      // TODO: rename renderAnchor to renderButton in next major version
       renderAnchor,
       renderButton,
       renderContent, // eslint-disable-line no-unused-vars
@@ -132,13 +131,10 @@ export default class Tab extends React.Component {
 
     const classes = classNames(
       className,
-      // TODO: remove scrollable in next major release
-      // `${prefix}--tabs__nav-item`,
       `${prefix}--tabs--scrollable__nav-item`,
       {
         [`${prefix}--tabs__nav-item--disabled`]: disabled,
         [`${prefix}--tabs__nav-item--selected`]: selected,
-        // TODO: remove scrollable in next major release
         [`${prefix}--tabs--scrollable__nav-item--disabled`]: disabled,
         [`${prefix}--tabs--scrollable__nav-item--selected`]: selected,
       }
@@ -148,9 +144,6 @@ export default class Tab extends React.Component {
       ['aria-selected']: selected,
       ['aria-disabled']: disabled,
       ['aria-controls']: id && `${id}__panel`,
-      id,
-      // TODO: remove scrollable in next major release
-      // className:  `${prefix}--tabs__nav-link`,
       className: `${prefix}--tabs--scrollable__nav-link`,
       href,
       tabIndex: !disabled ? tabIndex : -1,

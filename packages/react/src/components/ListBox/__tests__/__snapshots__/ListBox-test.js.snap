@@ -2,13 +2,13 @@
 
 exports[`ListBox should render 1`] = `
 <ListBox
-  className="bx--list-box__container"
+  className="cds--list-box__container"
   disabled={false}
   id="test-listbox"
   type="default"
 >
   <div
-    className="bx--list-box__container bx--list-box"
+    className="cds--list-box__container cds--list-box"
     id="test-listbox"
     onClick={[Function]}
     onKeyDown={[Function]}
@@ -17,7 +17,7 @@ exports[`ListBox should render 1`] = `
       id="test-listbox"
     >
       <div
-        className="bx--list-box__field"
+        className="cds--list-box__field"
         id="test-listbox"
         tabIndex={-1}
       />

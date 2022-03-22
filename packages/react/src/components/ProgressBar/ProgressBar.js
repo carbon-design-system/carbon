@@ -8,10 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { useId } from '../../internal/useId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function ProgressBar({
   className,
@@ -20,10 +18,12 @@ function ProgressBar({
   label,
   max = 100,
   size = 'big',
+  type = 'default',
   value,
 }) {
   const labelId = useId('progress-bar');
   const helperId = useId('progress-bar-helper');
+  const prefix = usePrefix();
 
   const indeterminate = value === null || value === undefined;
 
@@ -40,6 +40,7 @@ function ProgressBar({
   const wrapperClasses = classNames(
     `${prefix}--progress-bar`,
     `${prefix}--progress-bar--${size}`,
+    `${prefix}--progress-bar--${type}`,
     {
       [`${prefix}--progress-bar--indeterminate`]: indeterminate,
     },
@@ -107,6 +108,11 @@ ProgressBar.propTypes = {
    * Specify the size of the ProgressBar.
    */
   size: PropTypes.oneOf(['small', 'big']),
+
+  /**
+   * Defines the alignment variant of the progress bar.
+   */
+  type: PropTypes.oneOf(['default', 'inline', 'indented']),
 
   /**
    * The current value.

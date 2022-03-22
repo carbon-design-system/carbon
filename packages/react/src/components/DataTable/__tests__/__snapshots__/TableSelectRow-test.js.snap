@@ -6,10 +6,10 @@ exports[`DataTable.TableSelectRow should render 1`] = `
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      className="cds--data-table cds--data-table--no-border"
     >
       <TableHead>
         <thead>
@@ -24,7 +24,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                 onSelect={[MockFunction]}
               >
                 <td
-                  className="bx--table-column-checkbox custom-class-name"
+                  className="cds--table-column-checkbox custom-class-name"
                 >
                   <ForwardRef(InlineCheckbox)
                     ariaLabel="Aria label"
@@ -34,11 +34,11 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                     onClick={[MockFunction]}
                   >
                     <div
-                      className="bx--checkbox--inline"
+                      className="cds--checkbox--inline"
                     >
                       <input
                         checked={false}
-                        className="bx--checkbox"
+                        className="cds--checkbox"
                         id="id"
                         name="select-all"
                         onChange={[Function]}
@@ -47,7 +47,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                       />
                       <label
                         aria-label="Aria label"
-                        className="bx--checkbox-label"
+                        className="cds--checkbox-label"
                         htmlFor="id"
                         onClick={[Function]}
                       />

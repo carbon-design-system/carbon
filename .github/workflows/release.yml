@@ -5,6 +5,8 @@ on:
     tags:
       # Push events to matching v*, i.e. v1.0, v20.15.10
       - 'v*'
+      # Ignore tags for v10, there is a separate v10-release.yml workflow for v10
+      - '!v10*'
 
 jobs:
   build:
