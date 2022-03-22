@@ -233,7 +233,7 @@ export const Small = () => (
               </Button>
             </TableToolbarContent>
           </TableToolbar>
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} size="sm">
             <TableHead>
               <TableRow>
                 <TableSelectAll {...getSelectionProps()} />
