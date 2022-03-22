@@ -1,66 +1,93 @@
-# carbon-components-react
+# @carbon/react
 
-> A collection of
-> [Carbon Components](https://github.com/carbon-design-system/carbon/tree/main/packages/components)
-> built with [React](https://reactjs.org/).
-
-If you're new to React.js or Carbon, check out our
-[guide](https://medium.com/carbondesign/up-running-with-carbon-react-in-less-than-5-minutes-25d43cca059e)
-to help get you up and running.
+> React components for the Carbon Design System
 
 ## Getting started
 
-To install `carbon-components-react` in your project, you will need to run the
-following command using [npm](https://www.npmjs.com/):
+To install `@carbon/react` in your project, you will need to run the following
+command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install -S carbon-components carbon-components-react carbon-icons
+npm install -S @carbon/react
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add carbon-components carbon-components-react carbon-icons
+yarn add @carbon/react
 ```
 
-If you want to try out `carbon-components-react`, you can also use
-[CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox).
+This package requires [Dart Sass](http://npmjs.com/package/sass) in order to
+compile styles.
 
-[![Edit carbon-components-react](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox)
+If you're new to Sass, or are wondering how to configure Sass for your project,
+we recommend checking out the following resources and links:
+
+- [Sass Basics](https://sass-lang.com/guide)
+- [Webpack with Sass](https://webpack.js.org/loaders/sass-loader/)
+- [Next.js with Sass](https://nextjs.org/docs/basic-features/built-in-css-support#sass-support)
+- [Create React App with Sass](https://create-react-app.dev/docs/adding-a-sass-stylesheet/)
+- [Parcel with Sass](https://v2.parceljs.org/languages/sass/)
+- [Vite with Sass](https://vitejs.dev/guide/features.html#css-pre-processors)
+- [Snowpack with Sass](https://www.snowpack.dev/guides/sass/)
+
+Once you get Sass up and running in your project, configure Sass to include
+`node_modules` in its `includePaths` option. For more information, checkout the
+[configuration](../styles/docs/sass.md#configuration) section in our Sass docs.
 
 ## Usage
 
-```js
-import { Button } from 'carbon-components-react';
+The `@carbon/react` package provides components and icons for the Carbon Design
+System.
+
+To use a component, you can import it directly from the package:
+
+```jsx
+import { Button } from '@carbon/react';
 
 function MyComponent() {
   return <Button>Example usage</Button>;
 }
 ```
 
-For more information about each component, check out our
-[Storybook](https://react.carbondesignsystem.com). For guides on getting
-started, head on over to our
-[Website](https://www.carbondesignsystem.com/get-started/develop/react) or check
-out our
-[Tutorial](https://www.carbondesignsystem.com/developing/react-tutorial/overview/)
+To include the styles for a specific component, you can either import all the
+styles from the project or include the styles for a specific component:
 
-# :books: Documentation
+```scss
+// Bring in all the styles for Carbon
+@use '@carbon/react';
 
-- [Storybook](https://react.carbondesignsystem.com)
-- [Getting started](https://www.carbondesignsystem.com/get-started/develop/react)
-- [🏃‍♀️ Migration Guides](./docs/migration)
-  - [v6 to v7](./docs/migration/migrate-to-7.x.md)
+// Preferred: bring in the styles for one component
+@use '@carbon/react/scss/components/button';
+```
 
-## 📚 Examples
+For a full list of components available, checkout our
+[Storybook](https://carbon-react-next.netlify.app/).
 
-If you're looking for more examples on how to use `carbon-components-react`, we
-have some examples that you can check out:
+### Icons
 
-- [Create React App](./examples/create-react-app)
-- [Next.js](./examples/next)
-- [React Router](./examples/react-router)
+The `@carbon/react` package also provides icon components that you can include
+in your project. You can import these icon components from the
+`@carbon/react/icons` entrypoint:
+
+```jsx
+import { Add } from '@carbon/react/icons';
+
+function MyComponent() {
+  return <Add />;
+}
+```
+
+For a full list of icons available, checkout our
+[website](https://www.carbondesignsystem.com/guidelines/icons/library/).
+
+## 📖 API Documentation
+
+If you're looking for `@carbon/react` API documentation, check out:
+
+- [Storybook](https://carbon-react-next.netlify.app/)
+- [Icon Library](https://www.carbondesignsystem.com/guidelines/icons/library/)
 
 ## 🙌 Contributing
 

@@ -11,9 +11,9 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import SelectSkeleton from '../Select/Select.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
+
 describe('Select', () => {
   describe('Renders as expected', () => {
     const wrapper = mount(

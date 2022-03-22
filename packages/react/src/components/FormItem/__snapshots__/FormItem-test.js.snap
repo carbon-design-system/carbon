@@ -2,6 +2,6 @@
 
 exports[`FormItem should render 1`] = `
 <div
-  className="bx--form-item"
+  className="cds--form-item"
 />
 `;

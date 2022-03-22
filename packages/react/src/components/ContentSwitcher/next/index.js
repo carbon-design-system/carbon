@@ -5,15 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { match, matches, keys } from '../../../internal/keyboard';
 import { useId } from '../../../internal/useId';
 import { useControllableState } from '../../../internal/useControllableState';
-
-const { prefix } = settings;
+import { usePrefix } from '../../../internal/usePrefix';
 
 // Used to manage the overall state of the ContentSwitcher
 const ContentSwitcherContext = React.createContext();
@@ -105,6 +103,7 @@ function ContentTabs({
     setActiveIndex,
   } = React.useContext(ContentSwitcherContext);
   const ref = React.useRef(null);
+  const prefix = usePrefix();
   const className = cx(customClassName, `${prefix}--content-switcher`, {
     [`${prefix}--content-switcher--${size}`]: size,
   });
@@ -215,6 +214,7 @@ const ContentTab = React.forwardRef(function ContentTab(
   const index = React.useContext(ContentTabContext);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
+  const prefix = usePrefix();
   const className = cx(`${prefix}--content-switcher-btn`, {
     [`${prefix}--content-switcher--selected`]: selectedIndex === index,
   });

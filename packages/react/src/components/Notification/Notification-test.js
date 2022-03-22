@@ -14,9 +14,8 @@ import {
   InlineNotification,
 } from './Notification';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('NotificationButton', () => {
   describe('Renders as expected', () => {

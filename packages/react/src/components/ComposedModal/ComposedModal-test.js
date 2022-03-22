@@ -14,9 +14,8 @@ import ComposedModal, {
   ModalFooter,
 } from '../ComposedModal';
 import InlineLoading from '../InlineLoading';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('<ModalHeader />', () => {
   describe('Renders as expected', () => {
@@ -250,15 +249,15 @@ describe('<ComposedModal />', () => {
   it('should change class of <body> upon open state', () => {
     const wrapper = mount(<ComposedModal open />);
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(true);
     wrapper.unmount();
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(false);
     mount(<ComposedModal open={false} />);
     expect(
-      document.body.classList.contains('bx--body--with-modal-open')
+      document.body.classList.contains('cds--body--with-modal-open')
     ).toEqual(false);
   });
 

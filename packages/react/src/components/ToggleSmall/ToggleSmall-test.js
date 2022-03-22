@@ -8,9 +8,8 @@
 import React from 'react';
 import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('ToggleSmall', () => {
   let ToggleSmall;

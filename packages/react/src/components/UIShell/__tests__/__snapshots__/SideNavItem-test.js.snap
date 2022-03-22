@@ -5,7 +5,7 @@ exports[`SideNavItem should render 1`] = `
   className="custom-classname"
 >
   <li
-    className="bx--side-nav__item custom-classname"
+    className="cds--side-nav__item custom-classname"
   >
     <span>
       foo
