@@ -1,10 +1,10 @@
-name: Release
+name: v10 - Release
 
 on:
   push:
     tags:
-      # Push events to matching v*, i.e. v1.0, v20.15.10
-      - 'v*'
+      # Push events to matching v10*, i.e. v10.55.0, v10.55.1
+      - 'v10*'
 
 jobs:
   build:

@@ -1,11 +1,11 @@
-name: ci
+name: v10 - ci
 on:
   push:
     branches:
-      - main
+      - v10
   pull_request:
     branches:
-      - main
+      - v10
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: v10
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
@@ -25,6 +27,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: v10
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
@@ -38,6 +42,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: v10
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
@@ -53,6 +59,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: v10
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
@@ -79,6 +87,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: v10
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
@@ -110,29 +120,3 @@ jobs:
       - name: Run e2e tests
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
-
-  vrt:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js 16.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16.x'
-      - uses: actions/cache@v2.1.7
-        id: cache
-        with:
-          path: |
-            node_modules
-            */**/node_modules
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-      - name: Install dependencies
-        run: yarn install --immutable --immutable-cache
-      - name: Build project
-        run: yarn build --ignore '@carbon/sketch'
-      - name: Run VRT
-        if: github.repository == 'carbon-design-system/carbon'
-        env:
-          PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
-        run: |
-          yarn run percy exec -- yarn workspace carbon-components-react test:e2e
