@@ -79,6 +79,7 @@ module.exports = {
       events: false,
       http: false,
       https: false,
+      net: false,
       os: false,
       path: false,
       punycode: false,
