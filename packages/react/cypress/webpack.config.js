@@ -10,6 +10,7 @@
 const path = require('path');
 
 module.exports = {
+  mode: 'development',
   module: {
     rules: [
       {
@@ -49,10 +50,10 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          'style-loader',
-          'css-loader',
+          require.resolve('style-loader'),
+          require.resolve('css-loader'),
           {
-            loader: 'sass-loader',
+            loader: require.resolve('sass-loader'),
             options: {
               implementation: require('sass'),
               sassOptions: {
@@ -67,23 +68,4 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    fallback: {
-      bufferutil: false,
-      crypto: false,
-      http: false,
-      https: false,
-      net: false,
-      stream: false,
-      tls: false,
-      'utf-8-validate': false,
-      zlib: false,
-    },
-  },
-  // resolve: {
-  // fallback: {
-  // stream: require.resolve('stream-browserify'),
-  // zlib: require.resolve('browserify-zlib'),
-  // },
-  // },
 };

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/components/tabs/_tabs.scss';
+import '../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';

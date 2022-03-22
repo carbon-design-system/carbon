@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/styles/scss/_layer.scss';
-import '@carbon/styles/scss/components/popover/_index.scss';
-import '../next/story.scss';
+import '../../../../index.scss';
 
 import { Checkbox16 } from '@carbon/icons-react';
 import { mount } from '@cypress/react';

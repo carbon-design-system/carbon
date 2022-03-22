@@ -62,5 +62,9 @@
     "rollup": "^2.46.0",
     "rollup-plugin-strip-banner": "^2.0.0"
   },
-  "sideEffects": false
+  "sideEffects": [
+    "index.scss",
+    "scss/**/*.scss",
+    "scss/**/*.css"
+  ]
 }

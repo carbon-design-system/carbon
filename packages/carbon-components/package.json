@@ -51,6 +51,7 @@
   },
   "sideEffects": [
     "index.scss",
-    "scss/**"
+    "scss/**/*.scss",
+    "scss/**/*.css"
   ]
 }
