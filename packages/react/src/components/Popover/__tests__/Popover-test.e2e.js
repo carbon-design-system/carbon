@@ -344,7 +344,7 @@ describe('Popover', () => {
                       <div className="playground-trigger">
                         <Checkbox16 />
                       </div>
-                      <PopoverContent className="p-3">
+                      <PopoverContent style={{ padding: '1rem' }}>
                         <p className="popover-title">Available storage</p>
                         <p className="popover-details">
                           This server has 150 GB of block storage remaining.

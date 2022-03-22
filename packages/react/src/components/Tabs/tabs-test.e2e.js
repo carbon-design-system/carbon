@@ -9,45 +9,36 @@ import '../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
-import Tabs from './Tabs';
-import Tab from '../Tab/Tab';
-import TabsSkeleton from './Tabs.Skeleton';
+import {
+  default as Tabs,
+  TabList,
+  Tab,
+  TabPanels,
+  TabPanel,
+  TabsSkeleton,
+} from '../Tabs';
 
 describe('Tabs', () => {
   beforeEach(() => {
     mount(
       <>
         <Tabs>
-          <Tab label="Tab label 1">
-            <p>Content for first tab goes here.</p>
-          </Tab>
-          <Tab label="Tab label 2">
-            <p>Content for second tab goes here.</p>
-          </Tab>
-          <Tab label="Tab label 3" disabled>
-            <p>Content for third tab goes here.</p>
-          </Tab>
-          <Tab
-            label="Tab label 4 shows truncation"
-            title="Tab label 4 shows truncation">
-            <p>Content for fourth tab goes here.</p>
-          </Tab>
-        </Tabs>
-        <Tabs type="container">
-          <Tab label="Tab label 1">
-            <p>Yellow</p>
-          </Tab>
-          <Tab label="Tab label 2">
-            <p>Content for second tab goes here.</p>
-          </Tab>
-          <Tab
-            label="Tab label 3 shows truncation"
-            title="Tab label 3 shows truncation">
-            <p>Content for third tab goes here.</p>
-          </Tab>
-          <Tab label="Tab label 4" disabled>
-            <p>Content for fourth container tab goes here.</p>
-          </Tab>
+          <TabList>
+            <Tab>Tab label 1</Tab>
+            <Tab>Tab label 2</Tab>
+            <Tab disabled>Tab label 3</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel>
+              <p>Content for first tab goes here.</p>
+            </TabPanel>
+            <TabPanel>
+              <p>Content for second tab goes here.</p>
+            </TabPanel>
+            <TabPanel>
+              <p>Content for third tab goes here.</p>
+            </TabPanel>
+          </TabPanels>
         </Tabs>
         <TabsSkeleton type="default" />
         <TabsSkeleton type="container" />
@@ -56,8 +47,6 @@ describe('Tabs', () => {
   });
 
   it('should render', () => {
-    cy.findByText('Yellow').should('be.visible');
-
     // snapshots should always be taken _after_ an assertion that
     // a element/component should be visible. This is to ensure
     // the DOM has settled and the element has fully loaded.
