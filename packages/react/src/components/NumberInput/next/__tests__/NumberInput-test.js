@@ -6,13 +6,12 @@
  */
 
 import { Subtract16, Add16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { NumberInput } from '../NumberInput';
 import NumberInputSkeleton from '../../NumberInput.Skeleton';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('NumberInput', () => {
   describe('should render as expected', () => {

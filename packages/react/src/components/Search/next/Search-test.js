@@ -9,9 +9,8 @@ import React from 'react';
 import { Search16, Close16 } from '@carbon/icons-react';
 import Search from './Search';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Search', () => {
   describe('renders as expected', () => {

@@ -8,9 +8,8 @@
 import React from 'react';
 import { ListBulleted16, Grid16 } from '@carbon/icons-react';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('[Deprecated] SearchLayoutButton', () => {
   let SearchLayoutButton;

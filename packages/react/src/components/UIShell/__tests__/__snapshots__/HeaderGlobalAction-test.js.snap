@@ -9,7 +9,7 @@ exports[`HeaderGlobalAction should render 1`] = `
 >
   <Button
     aria-label="Accessibility label"
-    className="custom-class bx--header__action"
+    className="custom-class cds--header__action"
     hasIconOnly={true}
     iconDescription="Accessibility label"
     onClick={[MockFunction]}
@@ -20,7 +20,7 @@ exports[`HeaderGlobalAction should render 1`] = `
       aria-describedby={null}
       aria-label="Accessibility label"
       aria-pressed={null}
-      className="custom-class bx--header__action bx--btn bx--btn--primary bx--tooltip--hidden bx--btn--icon-only bx--tooltip__trigger bx--tooltip--a11y bx--btn--icon-only--bottom bx--tooltip--align-center"
+      className="custom-class cds--header__action cds--btn cds--btn--primary cds--tooltip--hidden cds--btn--icon-only cds--tooltip__trigger cds--tooltip--a11y cds--btn--icon-only--bottom cds--tooltip--align-center"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -31,7 +31,7 @@ exports[`HeaderGlobalAction should render 1`] = `
       type="button"
     >
       <div
-        className="bx--assistive-text"
+        className="cds--assistive-text"
         onMouseEnter={[Function]}
       >
         Accessibility label

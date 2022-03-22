@@ -9,9 +9,8 @@ import React from 'react';
 import Toggle from './Toggle';
 import { render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Toggle', () => {
   const props = {

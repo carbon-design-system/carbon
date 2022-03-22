@@ -18,10 +18,9 @@ import {
   StructuredListCell,
 } from './StructuredList';
 import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
-import { settings } from 'carbon-components';
 import mdx from './StructuredList.mdx';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 const props = () => ({
   isCondensed: boolean('Condensed', false),

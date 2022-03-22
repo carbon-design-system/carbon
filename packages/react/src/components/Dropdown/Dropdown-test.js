@@ -7,7 +7,7 @@
 
 import { cleanup, render } from '@testing-library/react';
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import {
   assertMenuOpen,
   assertMenuClosed,
@@ -17,9 +17,8 @@ import {
 } from '../ListBox/test-helpers';
 import Dropdown from '../Dropdown';
 import DropdownSkeleton from '../Dropdown/Dropdown.Skeleton';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Dropdown', () => {
   let mockProps;
@@ -96,7 +95,7 @@ describe('Dropdown', () => {
 
     beforeEach(() => {
       wrapper = mount(<Dropdown titleText="Email Input" {...mockProps} />);
-      renderedLabel = wrapper.find('label[className="bx--label"]');
+      renderedLabel = wrapper.find('label[className="cds--label"]');
     });
 
     it('renders a title', () => {
@@ -216,12 +215,15 @@ describe('Dropdown', () => {
 
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<DropdownSkeleton size="sm" />);
-
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--dropdown-v2`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--list-box--sm`)).toEqual(true);
+      const wrapper = mount(<DropdownSkeleton size="sm" />);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--skeleton`)).toEqual(true);
+      expect(wrapper.childAt(0).hasClass(`${prefix}--dropdown-v2`)).toEqual(
+        true
+      );
+      expect(wrapper.childAt(0).hasClass(`${prefix}--list-box--sm`)).toEqual(
+        true
+      );
     });
   });
 });

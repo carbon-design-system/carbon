@@ -80,22 +80,22 @@ exports[`FilterableMultiSelect should render 1`] = `
       suppressRefError={false}
     >
       <div
-        className="bx--multi-select__wrapper bx--list-box__wrapper"
+        className="cds--multi-select__wrapper cds--list-box__wrapper"
       >
         <ListBox
-          className="bx--multi-select bx--combo-box bx--multi-select--filterable"
+          className="cds--multi-select cds--combo-box cds--multi-select--filterable"
           disabled={false}
           isOpen={false}
           light={false}
           type="default"
         >
           <div
-            className="bx--multi-select bx--combo-box bx--multi-select--filterable bx--list-box"
+            className="cds--multi-select cds--combo-box cds--multi-select--filterable cds--list-box"
             onClick={[Function]}
             onKeyDown={[Function]}
           >
             <div
-              className="bx--list-box__field"
+              className="cds--list-box__field"
             >
               <input
                 aria-activedescendant={null}
@@ -107,7 +107,7 @@ exports[`FilterableMultiSelect should render 1`] = `
                 aria-labelledby={null}
                 aria-owns={null}
                 autoComplete="off"
-                className="bx--text-input bx--text-input--empty"
+                className="cds--text-input cds--text-input--empty"
                 disabled={false}
                 id="test-filterable-multiselect-input"
                 onBlur={[Function]}
@@ -137,7 +137,7 @@ exports[`FilterableMultiSelect should render 1`] = `
                 <button
                   aria-haspopup={true}
                   aria-label="Open"
-                  className="bx--list-box__menu-icon"
+                  className="cds--list-box__menu-icon"
                   data-toggle={true}
                   disabled={false}
                   onBlur={[Function]}

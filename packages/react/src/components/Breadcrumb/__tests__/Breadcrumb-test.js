@@ -8,11 +8,10 @@
 import React from 'react';
 import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { settings } from 'carbon-components';
 import Breadcrumb from '../';
 import BreadcrumbItem from '../BreadcrumbItem';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Breadcrumb', () => {
   it('should accept a `aria-label` for nav element', () => {

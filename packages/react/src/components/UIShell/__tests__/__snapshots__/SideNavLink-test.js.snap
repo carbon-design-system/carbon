@@ -16,10 +16,10 @@ exports[`SideNavLink should render 1`] = `
     large={false}
   >
     <li
-      className="bx--side-nav__item"
+      className="cds--side-nav__item"
     >
       <Link
-        className="bx--side-nav__link custom-classname"
+        className="cds--side-nav__link custom-classname"
         element="a"
         icon={
           <div>
@@ -28,7 +28,7 @@ exports[`SideNavLink should render 1`] = `
         }
       >
         <a
-          className="bx--side-nav__link custom-classname"
+          className="cds--side-nav__link custom-classname"
           icon={
             <div>
               icon
@@ -37,7 +37,7 @@ exports[`SideNavLink should render 1`] = `
         >
           <SideNavLinkText>
             <span
-              className="bx--side-nav__link-text"
+              className="cds--side-nav__link-text"
             >
               link
             </span>
@@ -65,10 +65,10 @@ exports[`SideNavLink should render 2`] = `
     large={false}
   >
     <li
-      className="bx--side-nav__item"
+      className="cds--side-nav__item"
     >
       <Link
-        className="bx--side-nav__link bx--side-nav__link--current custom-classname"
+        className="cds--side-nav__link cds--side-nav__link--current custom-classname"
         element="a"
         icon={
           <div>
@@ -77,7 +77,7 @@ exports[`SideNavLink should render 2`] = `
         }
       >
         <a
-          className="bx--side-nav__link bx--side-nav__link--current custom-classname"
+          className="cds--side-nav__link cds--side-nav__link--current custom-classname"
           icon={
             <div>
               icon
@@ -86,7 +86,7 @@ exports[`SideNavLink should render 2`] = `
         >
           <SideNavLinkText>
             <span
-              className="bx--side-nav__link-text"
+              className="cds--side-nav__link-text"
             >
               link
             </span>

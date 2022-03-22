@@ -15,10 +15,9 @@ import {
 } from '../next/Notification';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { settings } from 'carbon-components';
 import { it } from 'window-or-global';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('NotificationButton', () => {
   it('should place the `className` prop on the outermost DOM node', () => {

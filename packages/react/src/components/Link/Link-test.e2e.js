@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/components/link/_link.scss';
+import '../../../index.scss';
+
 import { Download16 } from '@carbon/icons-react';
 
 import React from 'react';
