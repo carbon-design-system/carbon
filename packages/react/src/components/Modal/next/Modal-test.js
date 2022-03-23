@@ -11,11 +11,11 @@ import Modal from './Modal';
 import InlineLoading from '../../InlineLoading';
 import { mount } from 'enzyme';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
-const getModal = (wrapper) => wrapper.find('.bx--modal');
-const getModalBody = (wrapper) => wrapper.find('.bx--modal-container');
+const getModal = (wrapper) => wrapper.find('.cds--modal');
+const getModalBody = (wrapper) => wrapper.find('.cds--modal-container');
 
 describe('Modal', () => {
   describe('Renders as expected', () => {

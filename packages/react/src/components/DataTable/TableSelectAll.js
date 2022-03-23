@@ -9,10 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import InlineCheckbox from '../InlineCheckbox';
 import cx from 'classnames';
-
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableSelectAll = ({
   ariaLabel,
@@ -23,19 +20,24 @@ const TableSelectAll = ({
   onSelect,
   disabled,
   className,
-}) => (
-  <th scope="col" className={cx(`${prefix}--table-column-checkbox`, className)}>
-    <InlineCheckbox
-      ariaLabel={ariaLabel}
-      checked={checked}
-      id={id}
-      indeterminate={indeterminate}
-      name={name}
-      onClick={onSelect}
-      disabled={disabled}
-    />
-  </th>
-);
+}) => {
+  const prefix = usePrefix();
+  return (
+    <th
+      scope="col"
+      className={cx(`${prefix}--table-column-checkbox`, className)}>
+      <InlineCheckbox
+        ariaLabel={ariaLabel}
+        checked={checked}
+        id={id}
+        indeterminate={indeterminate}
+        name={name}
+        onClick={onSelect}
+        disabled={disabled}
+      />
+    </th>
+  );
+};
 
 TableSelectAll.propTypes = {
   /**

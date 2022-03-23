@@ -6,7 +6,7 @@ exports[`SideNavIcon should render 1`] = `
   small={false}
 >
   <div
-    className="bx--side-nav__icon custom-classname"
+    className="cds--side-nav__icon custom-classname"
   >
     <span>
       foo
@@ -21,7 +21,7 @@ exports[`SideNavIcon should render 2`] = `
   small={true}
 >
   <div
-    className="bx--side-nav__icon bx--side-nav__icon--small custom-classname"
+    className="cds--side-nav__icon cds--side-nav__icon--small custom-classname"
   >
     <span>
       foo

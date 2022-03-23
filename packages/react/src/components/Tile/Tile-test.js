@@ -16,7 +16,7 @@ import {
 } from '../Tile';
 import { shallow, mount } from 'enzyme';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 describe('Tile', () => {
   describe('Renders default tile as expected', () => {
@@ -195,10 +195,10 @@ describe('Tile', () => {
     it('supports light version', () => {
       const wrapper = mount(<SelectableTile>Test</SelectableTile>);
       expect(wrapper.props().light).toEqual(false);
-      expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(false);
+      expect(wrapper.childAt(1).hasClass('cds--tile--light')).toEqual(false);
       wrapper.setProps({ light: true });
       expect(wrapper.props().light).toEqual(true);
-      expect(wrapper.childAt(1).hasClass('bx--tile--light')).toEqual(true);
+      expect(wrapper.childAt(1).hasClass('cds--tile--light')).toEqual(true);
     });
 
     it('should call onChange when the checkbox value changes', () => {

@@ -8,7 +8,6 @@
 import './story.scss';
 
 import React from 'react';
-import { withKnobs, select } from '@storybook/addon-knobs';
 import {
   Delete16 as Delete,
   Save16 as Save,
@@ -37,29 +36,29 @@ import DataTable, {
 } from '../..';
 import { batchActionClick, rows, headers } from '../shared';
 
-const sizes = {
-  Compact: 'compact',
-  Short: 'short',
-  Medium: 'md',
-  Default: null,
-  Tall: 'tall',
-};
-
-const tableProps = {
-  sizeProp: () => {
-    return {
-      size: select('Row size (size)', sizes, null),
-    };
-  },
-};
-
 export default {
   title: 'Components/DataTable/Dynamic',
   component: DataTable,
-  decorators: [withKnobs],
+  argTypes: {
+    size: {
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      control: { type: 'select' },
+    },
+    useZebraStyles: {
+      control: { type: 'boolean' },
+    },
+    radio: {
+      control: { type: 'boolean' },
+    },
+    isSortable: { control: { type: 'boolean' } },
+  },
+  args: {
+    size: 'lg',
+    useZebraStyles: false,
+  },
 };
 
-export const Example = (props) => {
+export const Example = (args) => {
   const insertInRandomPosition = (array, element) => {
     const index = Math.floor(Math.random() * (array.length + 1));
     return [...array.slice(0, index), element, ...array.slice(index)];
@@ -121,12 +120,11 @@ export const Example = (props) => {
     };
 
     render() {
-      const sizeProp = tableProps.sizeProp();
       return (
         <DataTable
+          {...args}
           rows={this.state.rows}
           headers={this.state.headers}
-          {...this.props}
           render={({
             rows,
             headers,
@@ -177,7 +175,7 @@ export const Example = (props) => {
                   </TableToolbarMenu>
                 </TableToolbarContent>
               </TableToolbar>
-              <Table {...getTableProps()} {...sizeProp}>
+              <Table {...getTableProps()}>
                 <TableHead>
                   <TableRow>
                     <TableExpandHeader />
@@ -214,5 +212,5 @@ export const Example = (props) => {
       );
     }
   }
-  return <DynamicRows {...props} />;
+  return <DynamicRows />;
 };

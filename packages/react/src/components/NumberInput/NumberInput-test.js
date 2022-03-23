@@ -10,9 +10,9 @@ import { mount, shallow } from 'enzyme';
 import { Subtract16, Add16 } from '@carbon/icons-react';
 import NumberInput from '../NumberInput';
 import NumberInputSkeleton from '../NumberInput/NumberInput.Skeleton';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
+
 describe('NumberInput', () => {
   describe('should render as expected', () => {
     let wrapper;

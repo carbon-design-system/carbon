@@ -5,7 +5,7 @@ exports[`DataTable.TableToolbarContent should render 1`] = `
   className="custom-class"
 >
   <div
-    className="bx--toolbar-content custom-class"
+    className="cds--toolbar-content custom-class"
   />
 </TableToolbarContent>
 `;

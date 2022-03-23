@@ -9,9 +9,8 @@ import React from 'react';
 import DangerButton from '../DangerButton';
 import { shallow, mount } from 'enzyme';
 import { Search16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('DangerButton', () => {
   describe('Renders as expected', () => {

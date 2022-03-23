@@ -9,9 +9,8 @@ import React from 'react';
 import { Search16 } from '@carbon/icons-react';
 import SecondaryButton from '../SecondaryButton';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('SecondaryButton', () => {
   describe('Renders as expected', () => {

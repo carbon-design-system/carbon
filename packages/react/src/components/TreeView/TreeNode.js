@@ -9,11 +9,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { CaretDown16 } from '@carbon/icons-react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export default function TreeNode({
   active,
@@ -36,6 +34,7 @@ export default function TreeNode({
   const [expanded, setExpanded] = useState(isExpanded);
   const currentNode = useRef(null);
   const currentNodeLabel = useRef(null);
+  const prefix = usePrefix();
   const nodesWithProps = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node, {

@@ -5,7 +5,7 @@ exports[`ListBoxMenu should render 1`] = `
   id="test-listbox"
 >
   <div
-    className="bx--list-box__menu"
+    className="cds--list-box__menu"
     id="test-listbox"
     role="listbox"
   >
@@ -14,10 +14,10 @@ exports[`ListBoxMenu should render 1`] = `
       isHighlighted={false}
     >
       <div
-        className="bx--list-box__menu-item"
+        className="cds--list-box__menu-item"
       >
         <div
-          className="bx--list-box__menu-item__option"
+          className="cds--list-box__menu-item__option"
         >
           Hello
         </div>

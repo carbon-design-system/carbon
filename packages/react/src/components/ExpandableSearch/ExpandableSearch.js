@@ -7,15 +7,13 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-
 import Search from '../Search';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function ExpandableSearch(props) {
   const [expanded, setExpanded] = useState(false);
   const searchRef = useRef(null);
+  const prefix = usePrefix();
 
   function handleFocus() {
     if (!expanded) {

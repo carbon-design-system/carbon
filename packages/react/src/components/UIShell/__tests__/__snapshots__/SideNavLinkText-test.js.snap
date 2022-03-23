@@ -5,7 +5,7 @@ exports[`SideNavLinkText should render 1`] = `
   className="custom-classname"
 >
   <span
-    className="bx--side-nav__link-text custom-classname"
+    className="cds--side-nav__link-text custom-classname"
   >
     text
   </span>
