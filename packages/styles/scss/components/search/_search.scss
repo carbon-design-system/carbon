@@ -107,8 +107,14 @@
     // 12px padding on either side of icon + 16px icon (40px)
     padding: 0 $spacing-08;
   }
+
   .#{$prefix}--search--md .#{$prefix}--search-magnifier-icon {
     left: rem(12px);
+  }
+
+  .#{$prefix}--search--md:not(.#{$prefix}--toolbar-search-container-active)
+    .#{$prefix}--search-magnifier-icon {
+    left: 0;
   }
 
   // Large styles

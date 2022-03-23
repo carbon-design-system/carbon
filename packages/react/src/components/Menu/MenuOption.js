@@ -8,9 +8,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import { CaretRight16 } from '@carbon/icons-react';
 import { keys, match } from '../../internal/keyboard';
+import { usePrefix } from '../../internal/usePrefix';
 
 import {
   getFirstSubNode,
@@ -21,11 +21,10 @@ import {
 
 import Menu from './Menu';
 
-const { prefix } = settings;
-
 const hoverIntentDelay = 150; // in ms
 
 function MenuOptionContent({ label, info, disabled, icon: Icon, indented }) {
+  const prefix = usePrefix();
   const classes = classnames(`${prefix}--menu-option__content`, {
     [`${prefix}--menu-option__content--disabled`]: disabled,
   });
@@ -59,6 +58,7 @@ function MenuOption({
   const [submenuOpenedByKeyboard, setSubmenuOpenedByKeyboard] = useState(false);
   const rootRef = useRef(null);
   const hoverIntentTimeout = useRef(null);
+  const prefix = usePrefix();
 
   const subOptions = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {

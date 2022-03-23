@@ -9,14 +9,12 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import deprecate from '../../prop-types/deprecate';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import {
   Calendar16,
   WarningFilled16,
   WarningAltFilled16,
 } from '@carbon/icons-react';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class DatePickerInput extends Component {
   static propTypes = {
@@ -182,114 +180,128 @@ export default class DatePickerInput extends Component {
       pattern,
     };
 
-    const wrapperClasses = classNames(`${prefix}--date-picker-input__wrapper`, {
-      [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
-      [`${prefix}--date-picker-input__wrapper--warn`]: warn,
-    });
-
-    const labelClasses = classNames(`${prefix}--label`, {
-      [`${prefix}--visually-hidden`]: hideLabel,
-      [`${prefix}--label--disabled`]: disabled,
-    });
-
-    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: disabled,
-    });
-
-    const inputClasses = classNames(`${prefix}--date-picker__input`, {
-      [`${prefix}--date-picker__input--${size}`]: size,
-      [`${prefix}--date-picker__input--invalid`]: invalid,
-    });
-
-    const datePickerIcon = (() => {
-      if (datePickerType === 'simple' && !invalid && !warn) {
-        return;
-      }
-
-      if (invalid) {
-        return (
-          <WarningFilled16
-            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
-          />
-        );
-      }
-
-      if (!invalid && warn) {
-        return (
-          <WarningAltFilled16
-            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
-          />
-        );
-      }
-
-      return (
-        <Calendar16
-          className={`${prefix}--date-picker__icon`}
-          aria-label={iconDescription}
-          onClick={openCalendar}
-          role="img"
-          aria-hidden="true">
-          {iconDescription && <title>{iconDescription}</title>}
-        </Calendar16>
-      );
-    })();
-
-    const label = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
-
-    const helper = helperText ? (
-      <div className={helperTextClasses}>{helperText}</div>
-    ) : null;
-
-    let error = null;
-    if (invalid) {
-      error = (
-        <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-      );
-    } else if (warn) {
-      error = <div className={`${prefix}--form-requirement`}>{warnText}</div>;
-    }
-
-    const containerClasses = classNames(`${prefix}--date-picker-container`, {
-      [`${prefix}--date-picker--nolabel`]: !label,
-    });
-
-    const input = invalid ? (
-      <input
-        {...other}
-        {...datePickerInputProps}
-        disabled={disabled}
-        ref={(input) => {
-          this.input = input;
-        }}
-        data-invalid
-        className={inputClasses}
-      />
-    ) : (
-      <input
-        ref={(input) => {
-          this.input = input;
-        }}
-        {...other}
-        {...datePickerInputProps}
-        disabled={disabled}
-        className={inputClasses}
-      />
-    );
-
     return (
-      <div className={containerClasses}>
-        {label}
-        <div className={wrapperClasses}>
-          {input}
-          {datePickerIcon}
-        </div>
-        {error}
-        {helper}
-      </div>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const wrapperClasses = classNames(
+            `${prefix}--date-picker-input__wrapper`,
+            {
+              [`${prefix}--date-picker-input__wrapper--invalid`]: invalid,
+              [`${prefix}--date-picker-input__wrapper--warn`]: warn,
+            }
+          );
+
+          const labelClasses = classNames(`${prefix}--label`, {
+            [`${prefix}--visually-hidden`]: hideLabel,
+            [`${prefix}--label--disabled`]: disabled,
+          });
+
+          const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+            [`${prefix}--form__helper-text--disabled`]: disabled,
+          });
+
+          const inputClasses = classNames(`${prefix}--date-picker__input`, {
+            [`${prefix}--date-picker__input--${size}`]: size,
+            [`${prefix}--date-picker__input--invalid`]: invalid,
+          });
+
+          const datePickerIcon = (() => {
+            if (datePickerType === 'simple' && !invalid && !warn) {
+              return;
+            }
+
+            if (invalid) {
+              return (
+                <WarningFilled16
+                  className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
+                />
+              );
+            }
+
+            if (!invalid && warn) {
+              return (
+                <WarningAltFilled16
+                  className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
+                />
+              );
+            }
+
+            return (
+              <Calendar16
+                className={`${prefix}--date-picker__icon`}
+                aria-label={iconDescription}
+                onClick={openCalendar}
+                role="img"
+                aria-hidden="true">
+                {iconDescription && <title>{iconDescription}</title>}
+              </Calendar16>
+            );
+          })();
+
+          const label = labelText ? (
+            <label htmlFor={id} className={labelClasses}>
+              {labelText}
+            </label>
+          ) : null;
+
+          const helper = helperText ? (
+            <div className={helperTextClasses}>{helperText}</div>
+          ) : null;
+
+          let error = null;
+          if (invalid) {
+            error = (
+              <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+            );
+          } else if (warn) {
+            error = (
+              <div className={`${prefix}--form-requirement`}>{warnText}</div>
+            );
+          }
+
+          const containerClasses = classNames(
+            `${prefix}--date-picker-container`,
+            {
+              [`${prefix}--date-picker--nolabel`]: !label,
+            }
+          );
+
+          const input = invalid ? (
+            <input
+              {...other}
+              {...datePickerInputProps}
+              disabled={disabled}
+              ref={(input) => {
+                this.input = input;
+              }}
+              data-invalid
+              className={inputClasses}
+            />
+          ) : (
+            <input
+              ref={(input) => {
+                this.input = input;
+              }}
+              {...other}
+              {...datePickerInputProps}
+              disabled={disabled}
+              className={inputClasses}
+            />
+          );
+
+          return (
+            <div className={containerClasses}>
+              {label}
+              <div className={wrapperClasses}>
+                {input}
+                {datePickerIcon}
+              </div>
+              {error}
+              {helper}
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

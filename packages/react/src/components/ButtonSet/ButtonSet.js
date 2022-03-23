@@ -8,13 +8,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const ButtonSet = React.forwardRef(function ButtonSet(
   { children, className, stacked, ...rest },
   ref
 ) {
+  const prefix = usePrefix();
   const buttonSetClasses = classNames(className, `${prefix}--btn-set`, {
     [`${prefix}--btn-set--stacked`]: stacked,
   });

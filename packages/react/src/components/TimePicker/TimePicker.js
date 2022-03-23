@@ -8,10 +8,8 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { FeatureFlagContext } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class TimePicker extends Component {
   state = {};
@@ -167,91 +165,97 @@ export default class TimePicker extends Component {
       enabled = scope.enabled('enable-v11-release');
     }
 
-    const timePickerInputProps = {
-      className: classNames(
-        `${prefix}--time-picker__input-field`,
-        `${prefix}--text-input`,
-        [enabled ? null : className],
-        {
-          [`${prefix}--text-input--light`]: light,
-        }
-      ),
-
-      onChange: (evt) => {
-        if (!other.disabled) {
-          this.setState({
-            value: evt.target.value,
-          });
-          onChange(evt);
-        }
-      },
-      onClick: (evt) => {
-        if (!other.disabled) {
-          this.setState({
-            value: evt.target.value,
-          });
-          onClick(evt);
-        }
-      },
-      onBlur: (evt) => {
-        if (!other.disabled) {
-          this.setState({
-            value: evt.target.value,
-          });
-          onBlur(evt);
-        }
-      },
-      pattern,
-      placeholder,
-      maxLength,
-      id,
-      type,
-      value: this.state.value,
-    };
-
-    const timePickerClasses = classNames({
-      [`${prefix}--time-picker`]: true,
-      [`${prefix}--time-picker--light`]: light,
-      [`${prefix}--time-picker--invalid`]: invalid,
-      [`${prefix}--time-picker--${size}`]: size,
-      [className]: className,
-    });
-
-    const labelClasses = classNames(`${prefix}--label`, {
-      [`${prefix}--visually-hidden`]: hideLabel,
-      [`${prefix}--label--disabled`]: other.disabled,
-    });
-
-    const label = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
-
-    const error = invalid ? (
-      <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-    ) : null;
-
     return (
-      <div
-        className={
-          enabled
-            ? classNames(`${prefix}--form-item`, className)
-            : `${prefix}--form-item`
-        }>
-        {label}
-        <div className={timePickerClasses}>
-          <div className={`${prefix}--time-picker__input`}>
-            <input
-              {...other}
-              {...timePickerInputProps}
-              data-invalid={invalid ? invalid : undefined}
-            />
-          </div>
-          {children}
-        </div>
-        {error}
-      </div>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const timePickerInputProps = {
+            className: classNames(
+              `${prefix}--time-picker__input-field`,
+              `${prefix}--text-input`,
+              [enabled ? null : className],
+              {
+                [`${prefix}--text-input--light`]: light,
+              }
+            ),
+
+            onChange: (evt) => {
+              if (!other.disabled) {
+                this.setState({
+                  value: evt.target.value,
+                });
+                onChange(evt);
+              }
+            },
+            onClick: (evt) => {
+              if (!other.disabled) {
+                this.setState({
+                  value: evt.target.value,
+                });
+                onClick(evt);
+              }
+            },
+            onBlur: (evt) => {
+              if (!other.disabled) {
+                this.setState({
+                  value: evt.target.value,
+                });
+                onBlur(evt);
+              }
+            },
+            pattern,
+            placeholder,
+            maxLength,
+            id,
+            type,
+            value: this.state.value,
+          };
+
+          const timePickerClasses = classNames({
+            [`${prefix}--time-picker`]: true,
+            [`${prefix}--time-picker--light`]: light,
+            [`${prefix}--time-picker--invalid`]: invalid,
+            [`${prefix}--time-picker--${size}`]: size,
+            [className]: className,
+          });
+
+          const labelClasses = classNames(`${prefix}--label`, {
+            [`${prefix}--visually-hidden`]: hideLabel,
+            [`${prefix}--label--disabled`]: other.disabled,
+          });
+
+          const label = labelText ? (
+            <label htmlFor={id} className={labelClasses}>
+              {labelText}
+            </label>
+          ) : null;
+
+          const error = invalid ? (
+            <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+          ) : null;
+
+          return (
+            <div
+              className={
+                enabled
+                  ? classNames(`${prefix}--form-item`, className)
+                  : `${prefix}--form-item`
+              }>
+              {label}
+              <div className={timePickerClasses}>
+                <div className={`${prefix}--time-picker__input`}>
+                  <input
+                    {...other}
+                    {...timePickerInputProps}
+                    data-invalid={invalid ? invalid : undefined}
+                  />
+                </div>
+                {children}
+              </div>
+              {error}
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

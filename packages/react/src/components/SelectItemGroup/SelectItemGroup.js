@@ -9,9 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import * as FeatureFlags from '@carbon/feature-flags';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SelectItemGroup = ({
   children,
@@ -20,6 +18,7 @@ const SelectItemGroup = ({
   label,
   ...other
 }) => {
+  const prefix = usePrefix();
   const classNames = classnames(`${prefix}--select-optgroup`, className);
   return (
     <optgroup
