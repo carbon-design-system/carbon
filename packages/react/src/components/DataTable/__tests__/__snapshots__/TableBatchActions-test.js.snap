@@ -10,14 +10,14 @@ exports[`DataTable.TableBatchActions should render 1`] = `
 >
   <div
     aria-hidden={true}
-    className="bx--batch-actions custom-class"
+    className="cds--batch-actions custom-class"
     onScroll={[Function]}
   >
     <div
-      className="bx--batch-summary"
+      className="cds--batch-summary"
     >
       <p
-        className="bx--batch-summary__para"
+        className="cds--batch-summary__para"
       >
         <Text
           as="span"
@@ -32,17 +32,17 @@ exports[`DataTable.TableBatchActions should render 1`] = `
     </div>
     <TableActionList>
       <div
-        className="bx--action-list"
+        className="cds--action-list"
       >
         <Button
-          className="bx--batch-summary__cancel"
+          className="cds--batch-summary__cancel"
           onClick={[MockFunction]}
           tabIndex={-1}
         >
           <button
             aria-describedby={null}
             aria-pressed={null}
-            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+            className="cds--batch-summary__cancel cds--btn cds--btn--primary"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}
@@ -71,14 +71,14 @@ exports[`DataTable.TableBatchActions should render 2`] = `
 >
   <div
     aria-hidden={false}
-    className="bx--batch-actions bx--batch-actions--active custom-class"
+    className="cds--batch-actions cds--batch-actions--active custom-class"
     onScroll={[Function]}
   >
     <div
-      className="bx--batch-summary"
+      className="cds--batch-summary"
     >
       <p
-        className="bx--batch-summary__para"
+        className="cds--batch-summary__para"
       >
         <Text
           as="span"
@@ -93,17 +93,17 @@ exports[`DataTable.TableBatchActions should render 2`] = `
     </div>
     <TableActionList>
       <div
-        className="bx--action-list"
+        className="cds--action-list"
       >
         <Button
-          className="bx--batch-summary__cancel"
+          className="cds--batch-summary__cancel"
           onClick={[MockFunction]}
           tabIndex={0}
         >
           <button
             aria-describedby={null}
             aria-pressed={null}
-            className="bx--batch-summary__cancel bx--btn bx--btn--primary"
+            className="cds--batch-summary__cancel cds--btn cds--btn--primary"
             disabled={false}
             onBlur={[Function]}
             onClick={[Function]}

@@ -13,9 +13,8 @@ import Menu, {
   MenuDivider,
 } from '../Menu';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Menu', () => {
   describe('renders as expected', () => {

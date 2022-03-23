@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/components/combo-box/_combo-box.scss';
-import 'carbon-components/scss/components/list-box/_list-box.scss';
-import 'carbon-components/scss/components/text-input/_text-input.scss';
+import '../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';

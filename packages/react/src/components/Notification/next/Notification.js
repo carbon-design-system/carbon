@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import {
   Close20,
   ErrorFilled20,
@@ -23,8 +22,7 @@ import Button from '../../Button';
 import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
 import { keys, matches } from '../../../internal/keyboard';
-
-const { prefix } = settings;
+import { usePrefix } from '../../../internal/usePrefix';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -57,6 +55,7 @@ export function NotificationActionButton({
   inline,
   ...rest
 }) {
+  const prefix = usePrefix();
   const className = cx(customClassName, {
     [`${prefix}--actionable-notification__action-button`]: true,
   });
@@ -105,6 +104,7 @@ export function NotificationButton({
   notificationType,
   ...rest
 }) {
+  const prefix = usePrefix();
   const buttonClassName = cx(className, {
     [`${prefix}--${notificationType}-notification__close-button`]: notificationType,
   });
@@ -184,6 +184,7 @@ const iconTypes = {
 };
 
 function NotificationIcon({ iconDescription, kind, notificationType }) {
+  const prefix = usePrefix();
   const IconForKind = iconTypes[kind];
   if (!IconForKind) {
     return null;
@@ -227,6 +228,7 @@ export function ToastNotification({
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const prefix = usePrefix();
   const containerClassName = cx(className, {
     [`${prefix}--toast-notification`]: true,
     [`${prefix}--toast-notification--low-contrast`]: lowContrast,
@@ -417,6 +419,7 @@ export function InlineNotification({
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const prefix = usePrefix();
   const containerClassName = cx(className, {
     [`${prefix}--inline-notification`]: true,
     [`${prefix}--inline-notification--low-contrast`]: lowContrast,
@@ -579,6 +582,7 @@ export function ActionableNotification({
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
+  const prefix = usePrefix();
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--toast`]: !inline,

@@ -9,10 +9,8 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Close16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import { match, keys } from '../../../internal/keyboard';
-
-const { prefix } = settings;
+import { usePrefix } from '../../../internal/usePrefix';
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
@@ -27,6 +25,7 @@ function ListBoxSelection({
   onClearSelection,
   ...rest
 }) {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,

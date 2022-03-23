@@ -7,7 +7,7 @@ exports[`DataTable.TableToolbar should render 1`] = `
 >
   <section
     aria-label="data table toolbar"
-    className="bx--table-toolbar"
+    className="cds--table-toolbar"
   />
 </TableToolbar>
 `;

@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import { mount } from 'enzyme';
 import React from 'react';
 import AccordionSkeleton from '../Accordion.Skeleton';
 import SkeletonText from '../../SkeletonText';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('AccordionSkeleton', () => {
   it('should render', () => {

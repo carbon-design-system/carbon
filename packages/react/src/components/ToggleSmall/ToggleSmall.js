@@ -5,14 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { keys, match } from '../../internal/keyboard';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
@@ -28,6 +26,8 @@ const ToggleSmall = ({
   labelB,
   ...other
 }) => {
+  const prefix = usePrefix();
+
   if (__DEV__) {
     warning(
       didWarnAboutDeprecation,

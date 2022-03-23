@@ -5,10 +5,10 @@ exports[`SideNavDetails should render 1`] = `
   title="foo"
 >
   <div
-    className="bx--side-nav__details"
+    className="cds--side-nav__details"
   >
     <h2
-      className="bx--side-nav__title"
+      className="cds--side-nav__title"
       title="foo"
     >
       foo

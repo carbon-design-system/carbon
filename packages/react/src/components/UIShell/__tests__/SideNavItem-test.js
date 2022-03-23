@@ -9,7 +9,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import SideNavItem from '../SideNavItem';
 
-const prefix = 'bx';
+const prefix = 'cds';
+
 describe('SideNavItem', () => {
   let mockProps, wrapper;
 

@@ -8,10 +8,9 @@
 import React from 'react';
 import UnorderedList from '../UnorderedList';
 import ListItem from '../ListItem';
-import { settings } from 'carbon-components';
 import { render, screen } from '@testing-library/react';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('UnorderedList', () => {
   it('should render children as expected', () => {

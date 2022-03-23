@@ -8,9 +8,8 @@
 import React from 'react';
 import Copy from '../Copy';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 jest.useFakeTimers();
 
