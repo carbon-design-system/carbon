@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import glob from 'fast-glob';
 import path from 'path';
 import { run } from './jscodeshift';
 
@@ -146,17 +147,31 @@ export const upgrades = [
     migrations: [
       {
         name: 'icons-react-size-prop',
-        description: 'Update imports and size usage for @carbon/icons',
+        description: 'Update imports and size usage for @carbon/icons-react',
         migrate: async (options) => {
           const transform = path.join(
             TRANSFORM_DIR,
             'icons-react-size-prop.js'
           );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
           await run({
-            transform: transform,
-            paths: options.workspaceDir,
             dry: !options.write,
-            ...options,
+            transform,
+            paths,
+            verbose: options.verbose,
           });
         },
       },
@@ -169,11 +184,25 @@ export const upgrades = [
             TRANSFORM_DIR,
             'update-carbon-components-react-import-to-scoped.js'
           );
+          const paths =
+            Array.isArray(options.paths) && options.paths.length > 0
+              ? options.paths
+              : await glob(['**/*.js', '**/*.jsx'], {
+                  cwd: options.workspaceDir,
+                  ignore: [
+                    '**/es/**',
+                    '**/lib/**',
+                    '**/umd/**',
+                    '**/node_modules/**',
+                    '**/storybook-static/**',
+                  ],
+                });
+
           await run({
-            transform: transform,
-            paths: options.workspaceDir,
             dry: !options.write,
-            ...options,
+            transform,
+            paths,
+            verbose: options.verbose,
           });
         },
       },
