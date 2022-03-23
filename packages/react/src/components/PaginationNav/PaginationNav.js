@@ -9,9 +9,9 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect, useRef } from 'react';
 import classnames from 'classnames';
 import {
-  CaretRight16,
-  CaretLeft16,
-  OverflowMenuHorizontal16,
+  CaretRight,
+  CaretLeft,
+  OverflowMenuHorizontal,
 } from '@carbon/icons-react';
 import Button from '../Button';
 import { IconButton } from '../IconButton';
@@ -72,7 +72,7 @@ function getCuts(page, totalItems, itemsThatFit, splitPoint = null) {
 
 function DirectionButton({ direction, label, disabled, onClick }) {
   const prefix = usePrefix();
-  const icon = direction === 'forward' ? CaretRight16 : CaretLeft16;
+  const icon = direction === 'forward' ? CaretRight : CaretLeft;
 
   return (
     <li className={`${prefix}--pagination-nav__list-item`}>
@@ -83,7 +83,7 @@ function DirectionButton({ direction, label, disabled, onClick }) {
           kind="ghost"
           label={label}
           onClick={onClick}>
-          {direction === 'forward' ? <CaretRight16 /> : <CaretLeft16 />}
+          {direction === 'forward' ? <CaretRight /> : <CaretLeft />}
         </IconButton>
       ) : (
         <Button
@@ -162,7 +162,7 @@ function PaginationOverflow({
             ))}
           </select>
           <div className={`${prefix}--pagination-nav__select-icon-wrapper`}>
-            <OverflowMenuHorizontal16
+            <OverflowMenuHorizontal
               className={`${prefix}--pagination-nav__select-icon`}
             />
           </div>

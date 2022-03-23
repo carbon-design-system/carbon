@@ -18,9 +18,9 @@ import Dropdown from '../Dropdown';
 import DropdownSkeleton from './Dropdown.Skeleton';
 import mdx from './Dropdown.mdx';
 import {
-  ChartBubble16,
-  ChartColumnFloating16,
-  ChartVennDiagram16,
+  ChartBubble,
+  ChartColumnFloating,
+  ChartVennDiagram,
 } from '@carbon/icons-react';
 
 const items = [
@@ -135,17 +135,17 @@ export const RenderSelectedItem = () => (
       items={[
         {
           id: 'option-0',
-          icon: ChartColumnFloating16,
+          icon: ChartColumnFloating,
           text: 'Column Chart',
         },
         {
           id: 'option-1',
-          icon: ChartBubble16,
+          icon: ChartBubble,
           text: 'Bubble Chart',
         },
         {
           id: 'option-2',
-          icon: ChartVennDiagram16,
+          icon: ChartVennDiagram,
           text: 'Venn Diagram',
         },
       ]}

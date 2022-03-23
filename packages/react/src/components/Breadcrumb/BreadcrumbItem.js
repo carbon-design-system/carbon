@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import Link from '../Link';
-import { OverflowMenuHorizontal16 } from '@carbon/icons-react';
+import { OverflowMenuHorizontal } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 
 const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
@@ -39,7 +39,7 @@ const BreadcrumbItem = React.forwardRef(function BreadcrumbItem(
     children.type.displayName.includes('OverflowMenu')
   ) {
     const horizontalOverflowIcon = (
-      <OverflowMenuHorizontal16 className={`${prefix}--overflow-menu__icon`} />
+      <OverflowMenuHorizontal className={`${prefix}--overflow-menu__icon`} />
     );
     return (
       <li className={className} {...rest}>

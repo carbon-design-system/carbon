@@ -7,7 +7,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { CaretDown16 } from '@carbon/icons-react';
+import { CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
@@ -203,7 +203,7 @@ export default function TreeNode({
           className={`${prefix}--tree-parent-node__toggle`}
           disabled={disabled}
           onClick={handleToggleClick}>
-          <CaretDown16 className={toggleClasses} />
+          <CaretDown className={toggleClasses} />
         </span>
         <span className={`${prefix}--tree-node__label__details`}>
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}

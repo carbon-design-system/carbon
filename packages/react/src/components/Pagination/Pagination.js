@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
+import { CaretRight, CaretLeft } from '@carbon/icons-react';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { equals } from '../../tools/array';
@@ -379,7 +379,7 @@ export default class Pagination extends Component {
                     kind="ghost"
                     className={backButtonClasses}
                     hasIconOnly
-                    renderIcon={CaretLeft16}
+                    renderIcon={CaretLeft}
                     iconDescription={backwardText}
                     tooltipAlignment="center"
                     tooltipPosition="top"
@@ -390,7 +390,7 @@ export default class Pagination extends Component {
                     kind="ghost"
                     className={forwardButtonClasses}
                     hasIconOnly
-                    renderIcon={CaretRight16}
+                    renderIcon={CaretRight}
                     iconDescription={forwardText}
                     tooltipAlignment="end"
                     tooltipPosition="top"

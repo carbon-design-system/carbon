@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import {
-  Checkbox16,
-  CheckboxCheckedFilled16,
-  ChevronDown16,
+  Checkbox,
+  CheckboxCheckedFilled,
+  ChevronDown,
 } from '@carbon/icons-react';
 import Link from '../../Link';
 import { keys, matches } from '../../../internal/keyboard';
@@ -286,7 +286,7 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
         {...rest}>
         <span
           className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
-          {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
+          {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
         </span>
         <span className={`${prefix}--tile-content`}>{children}</span>
       </label>
@@ -527,7 +527,7 @@ export function ExpandableTile({
         </div>
         <div className={`${prefix}--tile__chevron`}>
           <span>{isExpanded ? tileExpandedLabel : tileCollapsedLabel}</span>
-          <ChevronDown16 />
+          <ChevronDown />
         </div>
         <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
       </div>
