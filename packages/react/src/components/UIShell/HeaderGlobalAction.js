@@ -9,7 +9,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
-import Button from '../Button';
+import TooltipIcon from '../TooltipIcon';
 import { usePrefix } from '../../internal/usePrefix';
 
 /**
@@ -44,19 +44,17 @@ const HeaderGlobalAction = React.forwardRef(function HeaderGlobalAction(
     'aria-labelledby': ariaLabelledBy,
   };
   return (
-    <Button
+    <TooltipIcon
       {...rest}
       {...accessibilityLabel}
-      className={className}
+      tooltipText={ariaLabel}
       onClick={onClick}
-      type="button"
-      hasIconOnly
-      iconDescription={ariaLabel}
-      tooltipPosition="bottom"
-      tooltipAlignment={tooltipAlignment}
+      className={className}
+      direction="bottom"
+      alignment={tooltipAlignment}
       ref={ref}>
       {children}
-    </Button>
+    </TooltipIcon>
   );
 });
 

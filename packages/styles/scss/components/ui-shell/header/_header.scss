@@ -36,7 +36,6 @@
   .#{$prefix}--header__action {
     @include button-reset.reset();
 
-    display: inline-flex;
     width: mini-units(6);
     height: mini-units(6);
     border: rem(1px) solid transparent;
