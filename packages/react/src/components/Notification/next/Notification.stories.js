@@ -96,13 +96,7 @@ Toast.args = {
 };
 
 const InlineStory = (args) => {
-  return (
-    <>
-      <InlineNotification {...args} />
-      <InlineNotification {...args} />
-      <InlineNotification {...args} />
-    </>
-  );
+  return <InlineNotification {...args} />;
 };
 
 export const Inline = InlineStory.bind({});
@@ -137,4 +131,6 @@ Actionable.args = {
   actionButtonLabel: 'Action',
   inline: false,
   closeOnEscape: true,
+  title: 'Notification title',
+  subtitle: 'Subtitle text goes here',
 };

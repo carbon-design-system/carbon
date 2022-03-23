@@ -284,10 +284,14 @@ export function ToastNotification({
       <div
         ref={contentRef}
         className={`${prefix}--toast-notification__details`}>
-        <h3 className={`${prefix}--toast-notification__title`}>{title}</h3>
-        <div className={`${prefix}--toast-notification__subtitle`}>
-          {subtitle}
-        </div>
+        {title && (
+          <div className={`${prefix}--toast-notification__title`}>{title}</div>
+        )}
+        {subtitle && (
+          <div className={`${prefix}--toast-notification__subtitle`}>
+            {subtitle}
+          </div>
+        )}
         {caption && (
           <div className={`${prefix}--toast-notification__caption`}>
             {caption}
@@ -312,7 +316,7 @@ ToastNotification.propTypes = {
   /**
    * Specify the caption
    */
-  caption: PropTypes.node,
+  caption: PropTypes.string,
 
   /**
    * Specify the content
@@ -375,7 +379,7 @@ ToastNotification.propTypes = {
   /**
    * Specify the sub-title
    */
-  subtitle: PropTypes.node,
+  subtitle: PropTypes.string,
 
   /**
    * Specify an optional duration the notification should be closed in
@@ -450,10 +454,16 @@ export function InlineNotification({
         <div
           ref={contentRef}
           className={`${prefix}--inline-notification__text-wrapper`}>
-          <p className={`${prefix}--inline-notification__title`}>{title}</p>
-          <div className={`${prefix}--inline-notification__subtitle`}>
-            {subtitle}
-          </div>
+          {title && (
+            <div className={`${prefix}--inline-notification__title`}>
+              {title}
+            </div>
+          )}
+          {subtitle && (
+            <div className={`${prefix}--inline-notification__subtitle`}>
+              {subtitle}
+            </div>
+          )}
           {children}
         </div>
       </div>
@@ -537,7 +547,7 @@ InlineNotification.propTypes = {
   /**
    * Specify the title
    */
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
 };
 
 InlineNotification.defaultProps = {
@@ -564,6 +574,8 @@ export function ActionableNotification({
   hideCloseButton,
   hasFocus,
   closeOnEscape,
+  title,
+  subtitle,
   ...rest
 }) {
   const [isOpen, setIsOpen] = useState(true);
@@ -608,6 +620,16 @@ export function ActionableNotification({
         />
         <div className={`${prefix}--actionable-notification__text-wrapper`}>
           <div className={`${prefix}--actionable-notification__content`}>
+            {title && (
+              <div className={`${prefix}--actionable-notification__title`}>
+                {title}
+              </div>
+            )}
+            {subtitle && (
+              <div className={`${prefix}--actionable-notification__subtitle`}>
+                {subtitle}
+              </div>
+            )}
             {children}
           </div>
         </div>
@@ -633,6 +655,11 @@ ActionableNotification.propTypes = {
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
   actionButtonLabel: PropTypes.string.isRequired,
+
+  /**
+   * Specify the caption
+   */
+  caption: PropTypes.string,
 
   /**
    * Specify the content
@@ -711,11 +738,20 @@ ActionableNotification.propTypes = {
    * Provide a description for "status" icon that can be read by screen readers
    */
   statusIconDescription: PropTypes.string,
+
+  /**
+   * Specify the sub-title
+   */
+  subtitle: PropTypes.string,
+
+  /**
+   * Specify the title
+   */
+  title: PropTypes.string,
 };
 
 ActionableNotification.defaultProps = {
   kind: 'error',
-  children: 'provide content',
   role: 'alertdialog',
   iconDescription: 'closes notification',
   onCloseButtonClick: () => {},

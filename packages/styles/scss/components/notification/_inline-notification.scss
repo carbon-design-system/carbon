@@ -177,10 +177,10 @@
   .#{$prefix}--inline-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $spacing-09 0 $spacing-05;
+    margin: 0 $spacing-09 0 rem(13px);
 
     @include breakpoint(md) {
-      margin: 0 $spacing-05;
+      margin: 0 rem(13px);
     }
   }
 
