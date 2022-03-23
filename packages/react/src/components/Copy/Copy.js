@@ -11,6 +11,8 @@ import debounce from 'lodash.debounce';
 import classnames from 'classnames';
 import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
+import { IconButton } from '../IconButton';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 export default function Copy({
   children,
@@ -39,6 +41,7 @@ export default function Copy({
     setAnimation('fade-in');
     handleFadeOut();
   }, [handleFadeOut]);
+
   const handleAnimationEnd = (event) => {
     if (event.animationName === 'hide-feedback') {
       setAnimation('');
@@ -51,6 +54,27 @@ export default function Copy({
     },
     [handleFadeOut]
   );
+
+  if (FeatureFlags.enabled('enable-v11-release')) {
+    return (
+      <IconButton
+        align="bottom"
+        className={classNames}
+        label={animation ? feedback : other['aria-label']}
+        onClick={composeEventHandlers([onClick, handleClick])}
+        onAnimationEnd={composeEventHandlers([
+          onAnimationEnd,
+          handleAnimationEnd,
+        ])}
+        {...other}
+        aria-live="polite"
+        aria-label={
+          (!children && (animation ? feedback : other['aria-label'])) || null
+        }>
+        {children}
+      </IconButton>
+    );
+  }
 
   return (
     <button
