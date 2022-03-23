@@ -4,23 +4,11 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-//-------------------------------------------
-// Compatibility notes
-// ------------------------------------------
-//
-// This file is intended to be consumed and processed with node-sass/libsass.
-// Sass language features only available in dart-sass, such as `math.div`,
-// should not be used.
-//
-// The `.import` suffixed version of this file eg. `_filename.import.scss`
-// is intended to be compatible with dart-sass.
-//
-// Styles authored within this file must be duplicated to the corresponding
-// compatibility file to ensure we continue to support node-sass and dart-sass
-// in v10.
 
 // stylelint-disable number-max-precision
 
+@use "sass:meta";
+@use "sass:math";
 @import '@carbon/layout/scss/breakpoint';
 @import 'font-family';
 @import 'scale';
@@ -745,7 +733,7 @@ $tokens: (
 /// @access public
 /// @group @carbon/type
 @function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
+  @return math.div($value, $value * 0 + 1);
 }
 
 /// This helper includes fluid type styles for the given token value. Fluid type

@@ -70,13 +70,8 @@
     // Add a `max-width` to ensure content within each column does not blow out
     // the width of the column. Applies to IE10+ and Firefox. Chrome and Safari
     // do not appear to require this.
-    @if meta.function-exists('div', 'math') {
-      max-width: math.percentage(math.div($span, $columns));
-      flex: 0 0 math.percentage(math.div($span, $columns));
-    } @else {
-      max-width: math.percentage(($span / $columns));
-      flex: 0 0 math.percentage(($span / $columns));
-    }
+    max-width: math.percentage(math.div($span, $columns));
+    flex: 0 0 math.percentage(math.div($span, $columns));
   }
 }
 
@@ -87,11 +82,7 @@
 /// @group @carbon/grid
 @mixin -make-col-offset($span, $columns) {
   $offset: 0;
-  @if meta.function-exists('div', 'math') {
-    $offset: math.div($span, $columns);
-  } @else {
-    $offset: ($span / $columns);
-  }
+  $offset: math.div($span, $columns);
   @if $offset == 0 {
     margin-left: 0;
   } @else {
