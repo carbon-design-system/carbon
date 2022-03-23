@@ -387,6 +387,8 @@ CodeSnippet.propTypes = {
 };
 
 CodeSnippet.defaultProps = {
+  ariaLabel: 'Copy to clipboard',
+  copyLabel: 'Copy to clipboard',
   type: 'single',
   showMoreText: 'Show more',
   showLessText: 'Show less',
