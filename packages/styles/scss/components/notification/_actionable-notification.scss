@@ -312,7 +312,7 @@
     padding: 0 $spacing-05;
     margin-bottom: $spacing-05;
 
-    // Button should be left aligned with text. 
+    // Button should be left aligned with text.
     // 20px is the width of the notification icon
     // 2px is the width of the left border that should be negated
     margin-left: calc(#{$spacing-07} + #{rem(20px)} - #{rem(2px)});
