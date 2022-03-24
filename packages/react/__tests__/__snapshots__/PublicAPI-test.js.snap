@@ -454,6 +454,8 @@ Map {
   },
   "CodeSnippet" => Object {
     "defaultProps": Object {
+      "ariaLabel": "Copy to clipboard",
+      "copyLabel": "Copy to clipboard",
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
