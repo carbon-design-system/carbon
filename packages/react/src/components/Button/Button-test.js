@@ -11,11 +11,10 @@ import Button from '../Button';
 import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Button', () => {
   describe('Renders common props as expected', () => {

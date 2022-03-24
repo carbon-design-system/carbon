@@ -8,9 +8,8 @@
 import React from 'react';
 import SkeletonPlaceholder from '../SkeletonPlaceholder';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('SkeletonPlaceholder', () => {
   const wrapper = shallow(<SkeletonPlaceholder />);

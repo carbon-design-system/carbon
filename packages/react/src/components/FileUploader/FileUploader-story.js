@@ -17,7 +17,6 @@ import {
   select,
   text,
 } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
 import FileUploader, { FileUploaderButton } from '../FileUploader';
 import FileUploaderSkeleton from '../FileUploader/FileUploader.Skeleton';
 import FileUploaderItem from './FileUploaderItem';
@@ -25,7 +24,7 @@ import FileUploaderDropContainer from './FileUploaderDropContainer';
 import mdx from './FileUploader.mdx';
 import './FileUploader-story.scss';
 
-const { prefix } = settings;
+const prefix = 'cds';
 const buttonKinds = {
   'Primary (primary)': 'primary',
   'Secondary (secondary)': 'secondary',

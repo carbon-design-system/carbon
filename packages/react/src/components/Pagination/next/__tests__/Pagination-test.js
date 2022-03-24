@@ -12,7 +12,7 @@ import Pagination from '../Pagination';
 import Select from '../../../Select';
 import SelectItem from '../../../SelectItem';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 /**
  * For the given EnzymeWrapper, find the corresponding <select> element for
@@ -53,7 +53,7 @@ const selectPage = (wrapper, pageNumber) => {
  * @returns {void}
  */
 const incrementPage = (wrapper) => {
-  wrapper.find('button.bx--pagination__button--forward').simulate('click');
+  wrapper.find('button.cds--pagination__button--forward').simulate('click');
 };
 
 /**
@@ -63,7 +63,7 @@ const incrementPage = (wrapper) => {
  * @returns {void}
  */
 const decrementPage = (wrapper) => {
-  wrapper.find('button.bx--pagination__button--backward').simulate('click');
+  wrapper.find('button.cds--pagination__button--backward').simulate('click');
 };
 
 /**

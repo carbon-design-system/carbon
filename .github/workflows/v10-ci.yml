@@ -65,7 +65,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v3
         id: cache
         with:
           path: |
@@ -93,7 +93,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
-      - uses: actions/cache@v2.1.7
+      - uses: actions/cache@v3
         id: cache
         with:
           path: |

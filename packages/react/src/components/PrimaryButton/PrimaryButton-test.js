@@ -9,9 +9,8 @@ import React from 'react';
 import PrimaryButton from '../PrimaryButton';
 import { shallow, mount } from 'enzyme';
 import { Search16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('PrimaryButton', () => {
   describe('Renders as expected', () => {

@@ -8,9 +8,8 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import ListBox from '../';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('ListBox', () => {
   let mockProps;

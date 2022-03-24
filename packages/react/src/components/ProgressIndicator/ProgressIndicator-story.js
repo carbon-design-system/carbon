@@ -11,10 +11,9 @@ import { action } from '@storybook/addon-actions';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
 import Tooltip from '../Tooltip';
-import { settings } from 'carbon-components';
 import mdx from './ProgressIndicator.mdx';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 export default {
   title: 'Components/ProgressIndicator',

@@ -11,7 +11,7 @@ import Tabs from '../Tabs';
 import Tab from '../Tab';
 import TabsSkeleton from '../Tabs/Tabs.Skeleton';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 Element.prototype.scrollIntoView = jest.fn();
 

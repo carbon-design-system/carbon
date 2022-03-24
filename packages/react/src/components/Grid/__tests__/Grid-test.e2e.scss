@@ -1,11 +1,10 @@
-@use '~@carbon/styles/scss/config' with (
-  $prefix: 'bx',
+@use '../../../../scss/config' with (
+  $prefix: 'cds',
 );
-@use '~@carbon/styles/scss/grid';
-
-@import '~carbon-components/scss/globals/scss/vars';
-@import '~carbon-components/scss/globals/scss/colors';
-@import '~carbon-components/scss/globals/scss/typography';
+@use '../../../../scss/grid';
+@use '../../../../scss/colors' as *;
+@use '../../../../scss/spacing' as *;
+@use '../../../../scss/type' as *;
 
 p {
   @include type-style('body-short-02');
@@ -14,45 +13,45 @@ p {
 }
 
 // Grid modes
-.bx--css-grid {
+.cds--css-grid {
   background-color: $blue-20;
   outline: 1px dashed $blue-40;
 }
 
-.bx--css-grid p {
+.cds--css-grid p {
   @include type-style('code-02');
 }
 
-p:first-of-type:not(.bx--progress-label) {
+p:first-of-type:not(.cds--progress-label) {
   //messing up progress indicator stories
   margin-top: 0;
 }
 
-.bx--css-grid.bx--css-grid--condensed {
+.cds--css-grid.cds--css-grid--condensed {
   background-color: $purple-20;
   outline: 1px dashed $purple-40;
 }
 
 // Only use background for subgrid example, not other subgrids in "mixed modes" story or others
-.bx--subgrid.example {
+.cds--subgrid.example {
   background-color: $green-20;
 }
 
 // Columns
-.bx--css-grid > [class*='col'],
-.bx--subgrid > [class*='col'] {
+.cds--css-grid > [class*='col'],
+.cds--subgrid > [class*='col'] {
   min-height: 80px;
 }
 
-.bx--css-grid > [class*='col'] {
+.cds--css-grid > [class*='col'] {
   background: $blue-10;
 }
 
-.bx--subgrid > [class*='col'] {
+.cds--subgrid > [class*='col'] {
   background: $green-10;
   outline: 1px dashed $green-30;
 }
 
-.bx--css-grid.bx--css-grid--condensed > [class*='col'] {
+.cds--css-grid.cds--css-grid--condensed > [class*='col'] {
   background: $purple-10;
 }

@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Tab', () => {
   describe('renders as expected', () => {

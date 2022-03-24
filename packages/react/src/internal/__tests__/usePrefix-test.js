@@ -21,7 +21,7 @@ describe('usePrefix', () => {
     }
 
     render(<TestComponent />);
-    expect(value).toBe('bx');
+    expect(value).toBe('cds');
   });
 
   it('should emit the prefix in context', () => {

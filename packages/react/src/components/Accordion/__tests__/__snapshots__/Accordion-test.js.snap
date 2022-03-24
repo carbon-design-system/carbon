@@ -3,20 +3,20 @@
 exports[`Accordion should render 1`] = `
 <DocumentFragment>
   <ul
-    class="bx--accordion extra-class bx--accordion--end bx--accordion--md"
+    class="cds--accordion extra-class cds--accordion--end cds--accordion--md"
   >
     <li
-      class="bx--accordion__item child"
+      class="cds--accordion__item child"
     >
       <button
         aria-controls="accordion-item-1"
         aria-expanded="false"
-        class="bx--accordion__heading"
+        class="cds--accordion__heading"
         type="button"
       >
         <svg
           aria-hidden="true"
-          class="bx--accordion__arrow"
+          class="cds--accordion__arrow"
           fill="currentColor"
           focusable="false"
           height="16"
@@ -30,31 +30,31 @@ exports[`Accordion should render 1`] = `
           />
         </svg>
         <div
-          class="bx--accordion__title"
+          class="cds--accordion__title"
           dir="auto"
         >
           Heading A
         </div>
       </button>
       <div
-        class="bx--accordion__content"
+        class="cds--accordion__content"
         id="accordion-item-1"
       >
         Panel A
       </div>
     </li>
     <li
-      class="bx--accordion__item child"
+      class="cds--accordion__item child"
     >
       <button
         aria-controls="accordion-item-2"
         aria-expanded="false"
-        class="bx--accordion__heading"
+        class="cds--accordion__heading"
         type="button"
       >
         <svg
           aria-hidden="true"
-          class="bx--accordion__arrow"
+          class="cds--accordion__arrow"
           fill="currentColor"
           focusable="false"
           height="16"
@@ -68,31 +68,31 @@ exports[`Accordion should render 1`] = `
           />
         </svg>
         <div
-          class="bx--accordion__title"
+          class="cds--accordion__title"
           dir="auto"
         >
           Heading B
         </div>
       </button>
       <div
-        class="bx--accordion__content"
+        class="cds--accordion__content"
         id="accordion-item-2"
       >
         Panel B
       </div>
     </li>
     <li
-      class="bx--accordion__item child"
+      class="cds--accordion__item child"
     >
       <button
         aria-controls="accordion-item-3"
         aria-expanded="false"
-        class="bx--accordion__heading"
+        class="cds--accordion__heading"
         type="button"
       >
         <svg
           aria-hidden="true"
-          class="bx--accordion__arrow"
+          class="cds--accordion__arrow"
           fill="currentColor"
           focusable="false"
           height="16"
@@ -106,14 +106,14 @@ exports[`Accordion should render 1`] = `
           />
         </svg>
         <div
-          class="bx--accordion__title"
+          class="cds--accordion__title"
           dir="auto"
         >
           Heading C
         </div>
       </button>
       <div
-        class="bx--accordion__content"
+        class="cds--accordion__content"
         id="accordion-item-3"
       >
         Panel C

@@ -8,9 +8,8 @@
 import React from 'react';
 import TextInput from '../TextInput';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('TextInput', () => {
   describe('renders as expected', () => {
