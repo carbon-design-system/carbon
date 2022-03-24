@@ -5,9 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'config';
-@use '@carbon/grid';
 @use '../config';
+@use '@carbon/grid';
 
 @if config.$use-flexbox-grid == true {
   @include grid.flex-grid();
