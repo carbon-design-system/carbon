@@ -77,10 +77,10 @@ const props = {
   iconOnly: () => {
     let iconToUse;
 
-    if (iconMap[select('Icon (icon)', icons, 'Add16')] == undefined) {
+    if (iconMap[select('Icon (icon)', icons, 'Add')] == undefined) {
       iconToUse = Add;
     } else {
-      iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+      iconToUse = iconMap[select('Icon (icon)', icons, 'Add')];
     }
     return {
       className: 'some-class',
