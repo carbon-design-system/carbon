@@ -57,11 +57,24 @@ describe('@carbon/styles', () => {
       await expect(
         render(`
           @use '../scss/reset';
-          @use '../scss/type';
           @use '../scss/grid';
           @use '../scss/breakpoint';
           @use '../scss/colors';
           @use '../scss/components';
+        `)
+      ).resolves.not.toThrow();
+
+      await expect(
+        render(`
+          @use '../scss/type';
+          @use '../scss/grid';
+        `)
+      ).resolves.not.toThrow();
+
+      await expect(
+        render(`
+          @use '../scss/themes';
+          @use '../scss/theme';
         `)
       ).resolves.not.toThrow();
     });

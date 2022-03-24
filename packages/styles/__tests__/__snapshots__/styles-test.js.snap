@@ -728,9 +728,19 @@ Array [
     "relativePath": "scss/fonts/src",
   },
   Object {
+    "filepath": "scss/grid/_css-grid.scss",
+    "importPath": "@carbon/styles/scss/grid/css-grid",
+    "relativePath": "scss/grid/css-grid",
+  },
+  Object {
     "filepath": "scss/grid/_flexbox.scss",
     "importPath": "@carbon/styles/scss/grid/flexbox",
     "relativePath": "scss/grid/flexbox",
+  },
+  Object {
+    "filepath": "scss/grid/_mixins.scss",
+    "importPath": "@carbon/styles/scss/grid/mixins",
+    "relativePath": "scss/grid/mixins",
   },
   Object {
     "filepath": "scss/grid/_index.scss",

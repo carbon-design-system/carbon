@@ -170,6 +170,7 @@ const files = [
   // Grid
   'scss/grid/_css-grid.scss',
   'scss/grid/_flexbox.scss',
+  'scss/grid/_mixins.scss',
   'scss/grid/_index.scss',
 
   // Type
