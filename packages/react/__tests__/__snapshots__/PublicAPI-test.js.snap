@@ -3279,6 +3279,24 @@ Map {
       },
     },
   },
+  "GlobalTheme" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "theme": Object {
+        "args": Array [
+          Array [
+            "white",
+            "g10",
+            "g90",
+            "g100",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "Grid" => Object {
     "propTypes": Object {
       "as": Object {
@@ -3655,6 +3673,16 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "level": Object {
+        "args": Array [
+          Array [
+            0,
+            1,
+            2,
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -7563,11 +7591,6 @@ Map {
         "type": "oneOf",
       },
     },
-  },
-  "ThemeContext" => Object {
-    "$$typeof": Symbol(react.context),
-    "Consumer": "React.Consumer",
-    "Provider": "React.Provider",
   },
   "Tile" => Object {
     "$$typeof": Symbol(react.forward_ref),
