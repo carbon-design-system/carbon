@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Canvas, Story } from '@storybook/addon-docs/blocks';
 
 # Layer
 
@@ -16,6 +16,33 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
+
+- You can nest layer components, up to the max
+- TODO: can you explicitly set the layer
+- What styles do I need to bring into my project for this to work
+- How do I set the layer background?
+
+## Overview
+
+The `Layer` component complements the layering model for the Carbon Design
+System. It is used to render components on different "layers" in order to
+correctly map contextual tokens to their correct values. In general, this means
+that areas of a page that are "on top of" other areas of a page will need to use
+this component.
+
+Any component that is rendered as a child to `Layer` will automatically map the
+correct colors. For your own custom components to follow this model, make sure
+they're using the contextual tokens.
+
+<Canvas>
+  <Story id="components-layer--default" />
+</Canvas>
+
+## Setting a custom level
+
+<Canvas>
+  <Story id="components-layer--custom-level" />
+</Canvas>
 
 ## Overview
 
@@ -42,7 +69,7 @@ can be nested indefinitely, but the token sets typically end after 3 layers.
 
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Layer as
 
