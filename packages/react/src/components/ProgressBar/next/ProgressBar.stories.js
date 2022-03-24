@@ -59,6 +59,7 @@ export const Example = () => {
     <ProgressBar
       value={running ? progress : null}
       max={size}
+      status={progress === size ? 'finished' : 'active'}
       label="Export data"
       helperText={helperText}
     />
