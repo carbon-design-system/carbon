@@ -5,15 +5,39 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import PropTypes from 'prop-types';
 import cx from 'classnames';
+import PropTypes from 'prop-types';
+import React, { useMemo } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { LayerContext } from '../Layer/LayerContext';
 
 export const ThemeContext = React.createContext({
   theme: 'white',
 });
+
+export function GlobalTheme({ children, theme }) {
+  const value = useMemo(() => {
+    return {
+      theme,
+    };
+  }, [theme]);
+  return (
+    <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
+  );
+}
+
+GlobalTheme.propTypes = {
+  /**
+   * Provide child elements to be rendered inside of `GlobalTheme`, this is
+   * typically the root of your app
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify the global theme for your app
+   */
+  theme: PropTypes.oneOf(['white', 'g10', 'g90', 'g100']),
+};
 
 /**
  * Specify the theme to be applied to a page, or a region in a page
