@@ -9,13 +9,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import { equals } from '../../tools/array';
 import Button from '../Button';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 let instanceId = 0;
 
@@ -287,115 +285,124 @@ export default class Pagination extends Component {
       ...other
     } = this.props;
 
-    const classNames = classnames(`${prefix}--pagination`, className, {
-      [`${prefix}--pagination--${size}`]: size,
-    });
-    const inputId = id || this.uniqueId;
-    const { page: statePage, pageSize: statePageSize } = this.state;
-    const totalPages = Math.max(Math.ceil(totalItems / statePageSize), 1);
-    const backButtonDisabled = disabled || statePage === 1;
-    const backButtonClasses = classnames(
-      `${prefix}--pagination__button`,
-      `${prefix}--pagination__button--backward`,
-      {
-        [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
-      }
-    );
-    const forwardButtonDisabled = disabled || statePage === totalPages;
-    const forwardButtonClasses = classnames(
-      `${prefix}--pagination__button`,
-      `${prefix}--pagination__button--forward`,
-      {
-        [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
-      }
-    );
-    const selectItems = this.renderSelectItems(totalPages);
-    const pageSizes = mapPageSizesToObject(_pageSizes);
-
     return (
-      <div className={classNames} ref={forwardedRef} {...other}>
-        <div className={`${prefix}--pagination__left`}>
-          <label
-            id={`${prefix}-pagination-select-${inputId}-count-label`}
-            className={`${prefix}--pagination__text`}
-            htmlFor={`${prefix}-pagination-select-${inputId}`}>
-            {itemsPerPageText}
-          </label>
-          <Select
-            id={`${prefix}-pagination-select-${inputId}`}
-            className={`${prefix}--select__item-count`}
-            labelText=""
-            hideLabel
-            noLabel
-            inline
-            onChange={this.handleSizeChange}
-            disabled={pageSizeInputDisabled || disabled}
-            value={statePageSize}>
-            {pageSizes.map((sizeObj) => (
-              <SelectItem
-                key={sizeObj.value}
-                value={sizeObj.value}
-                text={String(sizeObj.text)}
-              />
-            ))}
-          </Select>
-          <span
-            className={`${prefix}--pagination__text ${prefix}--pagination__items-count`}>
-            {pagesUnknown
-              ? itemText(
-                  statePageSize * (statePage - 1) + 1,
-                  statePage * statePageSize
-                )
-              : itemRangeText(
-                  Math.min(statePageSize * (statePage - 1) + 1, totalItems),
-                  Math.min(statePage * statePageSize, totalItems),
-                  totalItems
-                )}
-          </span>
-        </div>
-        <div className={`${prefix}--pagination__right`}>
-          <Select
-            id={`${prefix}-pagination-select-${inputId}-right`}
-            className={`${prefix}--select__page-number`}
-            labelText={`Page number, of ${totalPages} pages`}
-            inline
-            hideLabel
-            onChange={this.handlePageInputChange}
-            value={statePage}
-            disabled={pageInputDisabled || disabled}>
-            {selectItems}
-          </Select>
-          <span className={`${prefix}--pagination__text`}>
-            {pagesUnknown
-              ? pageText(statePage)
-              : pageRangeText(statePage, totalPages)}
-          </span>
-          <div className={`${prefix}--pagination__control-buttons`}>
-            <Button
-              kind="ghost"
-              className={backButtonClasses}
-              hasIconOnly
-              renderIcon={CaretLeft16}
-              iconDescription={backwardText}
-              tooltipAlignment="center"
-              tooltipPosition="top"
-              onClick={this.decrementPage}
-              disabled={backButtonDisabled}
-            />
-            <Button
-              kind="ghost"
-              className={forwardButtonClasses}
-              hasIconOnly
-              renderIcon={CaretRight16}
-              iconDescription={forwardText}
-              tooltipAlignment="end"
-              tooltipPosition="top"
-              onClick={this.incrementPage}
-              disabled={forwardButtonDisabled || isLastPage}
-            />
-          </div>
-        </div>
-      </div>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const classNames = classnames(`${prefix}--pagination`, className, {
+            [`${prefix}--pagination--${size}`]: size,
+          });
+          const inputId = id || this.uniqueId;
+          const { page: statePage, pageSize: statePageSize } = this.state;
+          const totalPages = Math.max(Math.ceil(totalItems / statePageSize), 1);
+          const backButtonDisabled = disabled || statePage === 1;
+          const backButtonClasses = classnames(
+            `${prefix}--pagination__button`,
+            `${prefix}--pagination__button--backward`,
+            {
+              [`${prefix}--pagination__button--no-index`]: backButtonDisabled,
+            }
+          );
+          const forwardButtonDisabled = disabled || statePage === totalPages;
+          const forwardButtonClasses = classnames(
+            `${prefix}--pagination__button`,
+            `${prefix}--pagination__button--forward`,
+            {
+              [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
+            }
+          );
+          const selectItems = this.renderSelectItems(totalPages);
+          const pageSizes = mapPageSizesToObject(_pageSizes);
+
+          return (
+            <div className={classNames} ref={forwardedRef} {...other}>
+              <div className={`${prefix}--pagination__left`}>
+                <label
+                  id={`${prefix}-pagination-select-${inputId}-count-label`}
+                  className={`${prefix}--pagination__text`}
+                  htmlFor={`${prefix}-pagination-select-${inputId}`}>
+                  {itemsPerPageText}
+                </label>
+                <Select
+                  id={`${prefix}-pagination-select-${inputId}`}
+                  className={`${prefix}--select__item-count`}
+                  labelText=""
+                  hideLabel
+                  noLabel
+                  inline
+                  onChange={this.handleSizeChange}
+                  disabled={pageSizeInputDisabled || disabled}
+                  value={statePageSize}>
+                  {pageSizes.map((sizeObj) => (
+                    <SelectItem
+                      key={sizeObj.value}
+                      value={sizeObj.value}
+                      text={String(sizeObj.text)}
+                    />
+                  ))}
+                </Select>
+                <span
+                  className={`${prefix}--pagination__text ${prefix}--pagination__items-count`}>
+                  {pagesUnknown
+                    ? itemText(
+                        statePageSize * (statePage - 1) + 1,
+                        statePage * statePageSize
+                      )
+                    : itemRangeText(
+                        Math.min(
+                          statePageSize * (statePage - 1) + 1,
+                          totalItems
+                        ),
+                        Math.min(statePage * statePageSize, totalItems),
+                        totalItems
+                      )}
+                </span>
+              </div>
+              <div className={`${prefix}--pagination__right`}>
+                <Select
+                  id={`${prefix}-pagination-select-${inputId}-right`}
+                  className={`${prefix}--select__page-number`}
+                  labelText={`Page number, of ${totalPages} pages`}
+                  inline
+                  hideLabel
+                  onChange={this.handlePageInputChange}
+                  value={statePage}
+                  disabled={pageInputDisabled || disabled}>
+                  {selectItems}
+                </Select>
+                <span className={`${prefix}--pagination__text`}>
+                  {pagesUnknown
+                    ? pageText(statePage)
+                    : pageRangeText(statePage, totalPages)}
+                </span>
+                <div className={`${prefix}--pagination__control-buttons`}>
+                  <Button
+                    kind="ghost"
+                    className={backButtonClasses}
+                    hasIconOnly
+                    renderIcon={CaretLeft16}
+                    iconDescription={backwardText}
+                    tooltipAlignment="center"
+                    tooltipPosition="top"
+                    onClick={this.decrementPage}
+                    disabled={backButtonDisabled}
+                  />
+                  <Button
+                    kind="ghost"
+                    className={forwardButtonClasses}
+                    hasIconOnly
+                    renderIcon={CaretRight16}
+                    iconDescription={forwardText}
+                    tooltipAlignment="end"
+                    tooltipPosition="top"
+                    onClick={this.incrementPage}
+                    disabled={forwardButtonDisabled || isLastPage}
+                  />
+                </div>
+              </div>
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

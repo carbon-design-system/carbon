@@ -5,13 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
 import deprecate from '../../prop-types/deprecate.js';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export const Table = ({
   className,
@@ -25,6 +24,7 @@ export const Table = ({
   overflowMenuOnHover,
   ...other
 }) => {
+  const prefix = usePrefix();
   const componentClass = cx(`${prefix}--data-table`, className, {
     [`${prefix}--data-table--${size}`]: size,
     [`${prefix}--data-table--sort`]: isSortable,
@@ -80,19 +80,20 @@ Table.propTypes = {
 
   /**
    *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
-   *  The previous terms (`compact`, `short`, `normal`, and `tall`) will be removed in the next major release.
    */
-  size: PropTypes.oneOf([
-    'compact',
-    'short',
-    'normal',
-    'tall',
-    'xs',
-    'sm',
-    'md',
-    'lg',
-    'xl',
-  ]),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
+    : PropTypes.oneOf([
+        'compact',
+        'short',
+        'normal',
+        'tall',
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+      ]),
 
   /**
    * `false` If true, will keep the header sticky (only data rows will scroll)

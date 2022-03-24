@@ -9,13 +9,11 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Search16, Close16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, match } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class Search extends Component {
   static propTypes = {
@@ -204,73 +202,85 @@ export default class Search extends Component {
       enabled = scope.enabled('enable-v11-release');
     }
 
-    const searchClasses = classNames({
-      [`${prefix}--search`]: true,
-      [`${prefix}--search--sm`]: size === 'sm',
-      // V11: change to md
-      [`${prefix}--search--lg`]: enabled ? size === 'md' : size === 'lg',
-      // V11: change to lg
-      [`${prefix}--search--xl`]: enabled ? size === 'lg' : size === 'xl',
-      [`${prefix}--search--light`]: light,
-      [`${prefix}--search--disabled`]: disabled,
-      [className]: className,
-    });
-
-    const clearClasses = classNames({
-      [`${prefix}--search-close`]: true,
-      [`${prefix}--search-close--hidden`]: !hasContent,
-    });
-
-    let customIcon;
-    if (renderIcon) {
-      customIcon = React.cloneElement(renderIcon, {
-        className: `${prefix}--search-magnifier-icon`,
-      });
-    }
-
-    const searchId = `${id}-search`;
-    const searchIcon = renderIcon ? (
-      customIcon
-    ) : (
-      <Search16 className={`${prefix}--search-magnifier-icon`} />
-    );
-
     return (
-      <div role="search" aria-labelledby={searchId} className={searchClasses}>
-        <div
-          className={`${prefix}--search-magnifier`}
-          ref={(magnifier) => {
-            this.magnifier = magnifier;
-          }}>
-          {searchIcon}
-        </div>
-        <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
-          {labelText}
-        </label>
-        <input
-          role="searchbox"
-          autoComplete="off"
-          {...other}
-          type={type}
-          disabled={disabled}
-          className={`${prefix}--search-input`}
-          id={id}
-          placeholder={placeHolderText || placeholder}
-          onChange={composeEventHandlers([onChange, this.handleChange])}
-          onKeyDown={composeEventHandlers([onKeyDown, this.handleKeyDown])}
-          ref={(input) => {
-            this.input = input;
-          }}
-        />
-        <button
-          className={clearClasses}
-          disabled={disabled}
-          onClick={this.clearInput}
-          type="button"
-          aria-label={closeButtonLabelText}>
-          <Close16 />
-        </button>
-      </div>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const searchClasses = classNames({
+            [`${prefix}--search`]: true,
+            [`${prefix}--search--sm`]: size === 'sm',
+            // V11: change to md
+            [`${prefix}--search--lg`]: enabled ? size === 'md' : size === 'lg',
+            // V11: change to lg
+            [`${prefix}--search--xl`]: enabled ? size === 'lg' : size === 'xl',
+            [`${prefix}--search--light`]: light,
+            [`${prefix}--search--disabled`]: disabled,
+            [className]: className,
+          });
+
+          const clearClasses = classNames({
+            [`${prefix}--search-close`]: true,
+            [`${prefix}--search-close--hidden`]: !hasContent,
+          });
+
+          let customIcon;
+          if (renderIcon) {
+            customIcon = React.cloneElement(renderIcon, {
+              className: `${prefix}--search-magnifier-icon`,
+            });
+          }
+
+          const searchId = `${id}-search`;
+          const searchIcon = renderIcon ? (
+            customIcon
+          ) : (
+            <Search16 className={`${prefix}--search-magnifier-icon`} />
+          );
+
+          return (
+            <div
+              role="search"
+              aria-labelledby={searchId}
+              className={searchClasses}>
+              <div
+                className={`${prefix}--search-magnifier`}
+                ref={(magnifier) => {
+                  this.magnifier = magnifier;
+                }}>
+                {searchIcon}
+              </div>
+              <label id={searchId} htmlFor={id} className={`${prefix}--label`}>
+                {labelText}
+              </label>
+              <input
+                role="searchbox"
+                autoComplete="off"
+                {...other}
+                type={type}
+                disabled={disabled}
+                className={`${prefix}--search-input`}
+                id={id}
+                placeholder={placeHolderText || placeholder}
+                onChange={composeEventHandlers([onChange, this.handleChange])}
+                onKeyDown={composeEventHandlers([
+                  onKeyDown,
+                  this.handleKeyDown,
+                ])}
+                ref={(input) => {
+                  this.input = input;
+                }}
+              />
+              <button
+                className={clearClasses}
+                disabled={disabled}
+                onClick={this.clearInput}
+                type="button"
+                aria-label={closeButtonLabelText}>
+                <Close16 />
+              </button>
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

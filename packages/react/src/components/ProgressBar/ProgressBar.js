@@ -8,10 +8,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { useId } from '../../internal/useId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function ProgressBar({
   className,
@@ -25,6 +23,7 @@ function ProgressBar({
 }) {
   const labelId = useId('progress-bar');
   const helperId = useId('progress-bar-helper');
+  const prefix = usePrefix();
 
   const indeterminate = value === null || value === undefined;
 

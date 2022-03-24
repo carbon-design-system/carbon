@@ -7,7 +7,7 @@
 
 import React from 'react';
 import ToggleSmallSkeleton from '../ToggleSmall/ToggleSmall.Skeleton';
-import { mount, shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import { settings } from 'carbon-components';
 
 const { prefix } = settings;
@@ -126,7 +126,7 @@ describe('ToggleSmall', () => {
 
 describe('ToggleSmallSkeleton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<ToggleSmallSkeleton />);
+    const wrapper = mount(<ToggleSmallSkeleton />);
     const input = wrapper.find('input');
     const toggleLabel = wrapper.find(`.${prefix}--toggle__label`);
 

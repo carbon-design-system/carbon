@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class ToggleSkeleton extends React.Component {
   static propTypes = {
@@ -47,26 +45,39 @@ export default class ToggleSkeleton extends React.Component {
   render() {
     const { id, labelText, className, size, ...rest } = this.props;
 
-    const toggleInputClassNames = cx(`${prefix}--toggle ${prefix}--skeleton`, {
-      [`${prefix}--toggle-input--small`]: size === 'sm',
-    });
-
     return (
-      <div className={cx(`${prefix}--form-item`, className)} {...rest}>
-        <input type="checkbox" id={id} className={toggleInputClassNames} />
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const toggleInputClassNames = cx(
+            `${prefix}--toggle ${prefix}--skeleton`,
+            {
+              [`${prefix}--toggle-input--small`]: size === 'sm',
+            }
+          );
 
-        <label
-          className={`${prefix}--toggle-input__label`}
-          htmlFor={id}
-          aria-label={labelText ? null : this.props['aria-label']}>
-          {labelText ? <div>{labelText}</div> : null}
-          <span className={`${prefix}--toggle__switch`}>
-            <span className={`${prefix}--toggle__text--left`} />
-            <span className={`${prefix}--toggle__appearance`} />
-            <span className={`${prefix}--toggle__text--right`} />
-          </span>
-        </label>
-      </div>
+          return (
+            <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+              <input
+                type="checkbox"
+                id={id}
+                className={toggleInputClassNames}
+              />
+
+              <label
+                className={`${prefix}--toggle-input__label`}
+                htmlFor={id}
+                aria-label={labelText ? null : this.props['aria-label']}>
+                {labelText ? <div>{labelText}</div> : null}
+                <span className={`${prefix}--toggle__switch`}>
+                  <span className={`${prefix}--toggle__text--left`} />
+                  <span className={`${prefix}--toggle__appearance`} />
+                  <span className={`${prefix}--toggle__text--right`} />
+                </span>
+              </label>
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }
