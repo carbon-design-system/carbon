@@ -8,9 +8,9 @@
 import React from 'react';
 import SelectItemGroup from '../SelectItemGroup';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
+
 describe('SelectItemGroup', () => {
   describe('Renders as expected', () => {
     const wrapper = shallow(

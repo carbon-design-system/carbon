@@ -19,10 +19,9 @@ import {
   Add16 as Add,
   OverflowMenuVertical16,
 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import '@testing-library/jest-dom';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 jest.mock('lodash.debounce', () => (fn) => {
   fn.cancel = jest.fn();

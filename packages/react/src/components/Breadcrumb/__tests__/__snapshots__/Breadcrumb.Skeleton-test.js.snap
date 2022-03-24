@@ -3,14 +3,14 @@
 exports[`BreadcrumbSkeleton should render 1`] = `
 <BreadcrumbSkeleton>
   <div
-    className="bx--breadcrumb bx--skeleton"
+    className="cds--breadcrumb cds--skeleton"
   >
     <Item>
       <div
-        className="bx--breadcrumb-item"
+        className="cds--breadcrumb-item"
       >
         <span
-          className="bx--link"
+          className="cds--link"
         >
            
         </span>
@@ -18,10 +18,10 @@ exports[`BreadcrumbSkeleton should render 1`] = `
     </Item>
     <Item>
       <div
-        className="bx--breadcrumb-item"
+        className="cds--breadcrumb-item"
       >
         <span
-          className="bx--link"
+          className="cds--link"
         >
            
         </span>
@@ -29,10 +29,10 @@ exports[`BreadcrumbSkeleton should render 1`] = `
     </Item>
     <Item>
       <div
-        className="bx--breadcrumb-item"
+        className="cds--breadcrumb-item"
       >
         <span
-          className="bx--link"
+          className="cds--link"
         >
            
         </span>

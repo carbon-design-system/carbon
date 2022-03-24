@@ -6,16 +6,16 @@
  */
 
 import { ChevronDown20 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export class SideNavMenu extends React.Component {
+  static contextType = PrefixContext;
+
   static propTypes = {
     buttonRef: PropTypes.oneOfType([
       PropTypes.func,
@@ -115,6 +115,7 @@ export class SideNavMenu extends React.Component {
   };
 
   render() {
+    const { context: prefix } = this;
     const {
       buttonRef,
       className: customClassName,

@@ -9,9 +9,8 @@ import React from 'react';
 import RadioButton from '../RadioButton';
 import RadioButtonSkeleton from '../../RadioButton/RadioButton.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 const render = (props) =>
   mount(

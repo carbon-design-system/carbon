@@ -65,6 +65,10 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       }
     }
 
+    .#{$prefix}--tabs__nav {
+      display: flex;
+    }
+
     //-----------------------------
     // Overflow Nav Buttons
     //-----------------------------
@@ -279,6 +283,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       padding: $spacing-04 $spacing-05 $spacing-03;
       border-bottom: $tab-underline-color;
       color: $text-secondary;
+      text-align: left;
       text-decoration: none;
       text-overflow: ellipsis;
       transition: border $duration-fast-01 motion(standard, productive),
@@ -297,7 +302,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       border-bottom: 0;
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
-      text-align: left;
     }
 
     //-----------------------------

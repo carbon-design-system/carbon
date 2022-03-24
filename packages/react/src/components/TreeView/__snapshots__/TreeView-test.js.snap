@@ -12,7 +12,7 @@ exports[`TreeView should render 1`] = `
 >
   <TreeLabel>
     <label
-      className="bx--label"
+      className="cds--label"
       id="id1__label"
     >
       Tree view
@@ -22,7 +22,7 @@ exports[`TreeView should render 1`] = `
     aria-label={null}
     aria-labelledby="id1__label"
     aria-multiselectable={null}
-    className="bx--tree"
+    className="cds--tree"
     onKeyDown={[Function]}
     role="tree"
   >
@@ -44,7 +44,7 @@ exports[`TreeView should render 1`] = `
       <li
         aria-current={null}
         aria-selected={true}
-        className="bx--tree-node bx--tree-node--selected bx--tree-leaf-node"
+        className="cds--tree-node cds--tree-node--selected cds--tree-leaf-node"
         id="1"
         onBlur={[Function]}
         onClick={[Function]}
@@ -54,7 +54,7 @@ exports[`TreeView should render 1`] = `
         tabIndex={0}
       >
         <div
-          className="bx--tree-node__label"
+          className="cds--tree-node__label"
         >
           1
         </div>
@@ -79,7 +79,7 @@ exports[`TreeView should render 1`] = `
       <li
         aria-current={null}
         aria-selected={false}
-        className="bx--tree-node bx--tree-leaf-node"
+        className="cds--tree-node cds--tree-leaf-node"
         id="2"
         onBlur={[Function]}
         onClick={[Function]}
@@ -89,7 +89,7 @@ exports[`TreeView should render 1`] = `
         tabIndex={-1}
       >
         <div
-          className="bx--tree-node__label"
+          className="cds--tree-node__label"
         >
           2
         </div>
@@ -115,7 +115,7 @@ exports[`TreeView should render 1`] = `
         aria-current={null}
         aria-expanded={true}
         aria-selected={false}
-        className="bx--tree-node bx--tree-parent-node"
+        className="cds--tree-node cds--tree-parent-node"
         id="5"
         onBlur={[Function]}
         onClick={[Function]}
@@ -125,17 +125,17 @@ exports[`TreeView should render 1`] = `
         tabIndex={-1}
       >
         <div
-          className="bx--tree-node__label"
+          className="cds--tree-node__label"
         >
           <span
-            className="bx--tree-parent-node__toggle"
+            className="cds--tree-parent-node__toggle"
             onClick={[Function]}
           >
             <ForwardRef(CaretDown16)
-              className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+              className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
             >
               <Icon
-                className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                 fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -145,7 +145,7 @@ exports[`TreeView should render 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                  className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                   fill="currentColor"
                   focusable="false"
                   height={16}
@@ -162,13 +162,13 @@ exports[`TreeView should render 1`] = `
             </ForwardRef(CaretDown16)>
           </span>
           <span
-            className="bx--tree-node__label__details"
+            className="cds--tree-node__label__details"
           >
             5
           </span>
         </div>
         <ul
-          className="bx--tree-node__children"
+          className="cds--tree-node__children"
           role="group"
         >
           <TreeNode
@@ -188,7 +188,7 @@ exports[`TreeView should render 1`] = `
             <li
               aria-current={null}
               aria-selected={false}
-              className="bx--tree-node bx--tree-leaf-node"
+              className="cds--tree-node cds--tree-leaf-node"
               id="5-1"
               onBlur={[Function]}
               onClick={[Function]}
@@ -198,7 +198,7 @@ exports[`TreeView should render 1`] = `
               tabIndex={-1}
             >
               <div
-                className="bx--tree-node__label"
+                className="cds--tree-node__label"
               >
                 5-1
               </div>
@@ -221,7 +221,7 @@ exports[`TreeView should render 1`] = `
             <li
               aria-current={null}
               aria-selected={false}
-              className="bx--tree-node bx--tree-leaf-node"
+              className="cds--tree-node cds--tree-leaf-node"
               id="5-2"
               onBlur={[Function]}
               onClick={[Function]}
@@ -231,7 +231,7 @@ exports[`TreeView should render 1`] = `
               tabIndex={-1}
             >
               <div
-                className="bx--tree-node__label"
+                className="cds--tree-node__label"
               >
                 5-2
               </div>
@@ -256,7 +256,7 @@ exports[`TreeView should render 1`] = `
               aria-current={null}
               aria-expanded={true}
               aria-selected={false}
-              className="bx--tree-node bx--tree-parent-node"
+              className="cds--tree-node cds--tree-parent-node"
               id="5-3"
               onBlur={[Function]}
               onClick={[Function]}
@@ -266,17 +266,17 @@ exports[`TreeView should render 1`] = `
               tabIndex={-1}
             >
               <div
-                className="bx--tree-node__label"
+                className="cds--tree-node__label"
               >
                 <span
-                  className="bx--tree-parent-node__toggle"
+                  className="cds--tree-parent-node__toggle"
                   onClick={[Function]}
                 >
                   <ForwardRef(CaretDown16)
-                    className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                    className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                   >
                     <Icon
-                      className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                      className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                       fill="currentColor"
                       height={16}
                       preserveAspectRatio="xMidYMid meet"
@@ -286,7 +286,7 @@ exports[`TreeView should render 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                        className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                         fill="currentColor"
                         focusable="false"
                         height={16}
@@ -303,13 +303,13 @@ exports[`TreeView should render 1`] = `
                   </ForwardRef(CaretDown16)>
                 </span>
                 <span
-                  className="bx--tree-node__label__details"
+                  className="cds--tree-node__label__details"
                 >
                   5-3
                 </span>
               </div>
               <ul
-                className="bx--tree-node__children"
+                className="cds--tree-node__children"
                 role="group"
               >
                 <TreeNode
@@ -329,7 +329,7 @@ exports[`TreeView should render 1`] = `
                   <li
                     aria-current={null}
                     aria-selected={false}
-                    className="bx--tree-node bx--tree-leaf-node"
+                    className="cds--tree-node cds--tree-leaf-node"
                     id="5-4"
                     onBlur={[Function]}
                     onClick={[Function]}
@@ -339,7 +339,7 @@ exports[`TreeView should render 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="bx--tree-node__label"
+                      className="cds--tree-node__label"
                     >
                       5-4
                     </div>
@@ -366,7 +366,7 @@ exports[`TreeView should render with icons 1`] = `
 >
   <TreeLabel>
     <label
-      className="bx--label"
+      className="cds--label"
       id="id3__label"
     >
       Tree view
@@ -376,7 +376,7 @@ exports[`TreeView should render with icons 1`] = `
     aria-label={null}
     aria-labelledby="id3__label"
     aria-multiselectable={null}
-    className="bx--tree"
+    className="cds--tree"
     onKeyDown={[Function]}
     role="tree"
   >
@@ -404,7 +404,7 @@ exports[`TreeView should render with icons 1`] = `
       <li
         aria-current={null}
         aria-selected={true}
-        className="bx--tree-node bx--tree-node--selected bx--tree-node--with-icon bx--tree-leaf-node"
+        className="cds--tree-node cds--tree-node--selected cds--tree-node--with-icon cds--tree-leaf-node"
         id="1"
         onBlur={[Function]}
         onClick={[Function]}
@@ -414,13 +414,13 @@ exports[`TreeView should render with icons 1`] = `
         tabIndex={0}
       >
         <div
-          className="bx--tree-node__label"
+          className="cds--tree-node__label"
         >
           <ForwardRef(Document16)
-            className="bx--tree-node__icon"
+            className="cds--tree-node__icon"
           >
             <Icon
-              className="bx--tree-node__icon"
+              className="cds--tree-node__icon"
               fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -430,7 +430,7 @@ exports[`TreeView should render with icons 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="bx--tree-node__icon"
+                className="cds--tree-node__icon"
                 fill="currentColor"
                 focusable="false"
                 height={16}
@@ -476,7 +476,7 @@ exports[`TreeView should render with icons 1`] = `
       <li
         aria-current={null}
         aria-selected={false}
-        className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+        className="cds--tree-node cds--tree-node--with-icon cds--tree-leaf-node"
         id="2"
         onBlur={[Function]}
         onClick={[Function]}
@@ -486,13 +486,13 @@ exports[`TreeView should render with icons 1`] = `
         tabIndex={-1}
       >
         <div
-          className="bx--tree-node__label"
+          className="cds--tree-node__label"
         >
           <ForwardRef(Document16)
-            className="bx--tree-node__icon"
+            className="cds--tree-node__icon"
           >
             <Icon
-              className="bx--tree-node__icon"
+              className="cds--tree-node__icon"
               fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -502,7 +502,7 @@ exports[`TreeView should render with icons 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="bx--tree-node__icon"
+                className="cds--tree-node__icon"
                 fill="currentColor"
                 focusable="false"
                 height={16}
@@ -550,7 +550,7 @@ exports[`TreeView should render with icons 1`] = `
         aria-current={null}
         aria-expanded={true}
         aria-selected={false}
-        className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
+        className="cds--tree-node cds--tree-node--with-icon cds--tree-parent-node"
         id="5"
         onBlur={[Function]}
         onClick={[Function]}
@@ -560,17 +560,17 @@ exports[`TreeView should render with icons 1`] = `
         tabIndex={-1}
       >
         <div
-          className="bx--tree-node__label"
+          className="cds--tree-node__label"
         >
           <span
-            className="bx--tree-parent-node__toggle"
+            className="cds--tree-parent-node__toggle"
             onClick={[Function]}
           >
             <ForwardRef(CaretDown16)
-              className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+              className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
             >
               <Icon
-                className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                 fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -580,7 +580,7 @@ exports[`TreeView should render with icons 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                  className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                   fill="currentColor"
                   focusable="false"
                   height={16}
@@ -597,13 +597,13 @@ exports[`TreeView should render with icons 1`] = `
             </ForwardRef(CaretDown16)>
           </span>
           <span
-            className="bx--tree-node__label__details"
+            className="cds--tree-node__label__details"
           >
             <ForwardRef(Folder16)
-              className="bx--tree-node__icon"
+              className="cds--tree-node__icon"
             >
               <Icon
-                className="bx--tree-node__icon"
+                className="cds--tree-node__icon"
                 fill="currentColor"
                 height={16}
                 preserveAspectRatio="xMidYMid meet"
@@ -613,7 +613,7 @@ exports[`TreeView should render with icons 1`] = `
               >
                 <svg
                   aria-hidden={true}
-                  className="bx--tree-node__icon"
+                  className="cds--tree-node__icon"
                   fill="currentColor"
                   focusable="false"
                   height={16}
@@ -632,7 +632,7 @@ exports[`TreeView should render with icons 1`] = `
           </span>
         </div>
         <ul
-          className="bx--tree-node__children"
+          className="cds--tree-node__children"
           role="group"
         >
           <TreeNode
@@ -658,7 +658,7 @@ exports[`TreeView should render with icons 1`] = `
             <li
               aria-current={null}
               aria-selected={false}
-              className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+              className="cds--tree-node cds--tree-node--with-icon cds--tree-leaf-node"
               id="5-1"
               onBlur={[Function]}
               onClick={[Function]}
@@ -668,13 +668,13 @@ exports[`TreeView should render with icons 1`] = `
               tabIndex={-1}
             >
               <div
-                className="bx--tree-node__label"
+                className="cds--tree-node__label"
               >
                 <ForwardRef(Document16)
-                  className="bx--tree-node__icon"
+                  className="cds--tree-node__icon"
                 >
                   <Icon
-                    className="bx--tree-node__icon"
+                    className="cds--tree-node__icon"
                     fill="currentColor"
                     height={16}
                     preserveAspectRatio="xMidYMid meet"
@@ -684,7 +684,7 @@ exports[`TreeView should render with icons 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="bx--tree-node__icon"
+                      className="cds--tree-node__icon"
                       fill="currentColor"
                       focusable="false"
                       height={16}
@@ -729,7 +729,7 @@ exports[`TreeView should render with icons 1`] = `
             <li
               aria-current={null}
               aria-selected={false}
-              className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+              className="cds--tree-node cds--tree-node--with-icon cds--tree-leaf-node"
               id="5-2"
               onBlur={[Function]}
               onClick={[Function]}
@@ -739,13 +739,13 @@ exports[`TreeView should render with icons 1`] = `
               tabIndex={-1}
             >
               <div
-                className="bx--tree-node__label"
+                className="cds--tree-node__label"
               >
                 <ForwardRef(Document16)
-                  className="bx--tree-node__icon"
+                  className="cds--tree-node__icon"
                 >
                   <Icon
-                    className="bx--tree-node__icon"
+                    className="cds--tree-node__icon"
                     fill="currentColor"
                     height={16}
                     preserveAspectRatio="xMidYMid meet"
@@ -755,7 +755,7 @@ exports[`TreeView should render with icons 1`] = `
                   >
                     <svg
                       aria-hidden={true}
-                      className="bx--tree-node__icon"
+                      className="cds--tree-node__icon"
                       fill="currentColor"
                       focusable="false"
                       height={16}
@@ -802,7 +802,7 @@ exports[`TreeView should render with icons 1`] = `
               aria-current={null}
               aria-expanded={true}
               aria-selected={false}
-              className="bx--tree-node bx--tree-node--with-icon bx--tree-parent-node"
+              className="cds--tree-node cds--tree-node--with-icon cds--tree-parent-node"
               id="5-3"
               onBlur={[Function]}
               onClick={[Function]}
@@ -812,17 +812,17 @@ exports[`TreeView should render with icons 1`] = `
               tabIndex={-1}
             >
               <div
-                className="bx--tree-node__label"
+                className="cds--tree-node__label"
               >
                 <span
-                  className="bx--tree-parent-node__toggle"
+                  className="cds--tree-parent-node__toggle"
                   onClick={[Function]}
                 >
                   <ForwardRef(CaretDown16)
-                    className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                    className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                   >
                     <Icon
-                      className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                      className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                       fill="currentColor"
                       height={16}
                       preserveAspectRatio="xMidYMid meet"
@@ -832,7 +832,7 @@ exports[`TreeView should render with icons 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="bx--tree-parent-node__toggle-icon bx--tree-parent-node__toggle-icon--expanded"
+                        className="cds--tree-parent-node__toggle-icon cds--tree-parent-node__toggle-icon--expanded"
                         fill="currentColor"
                         focusable="false"
                         height={16}
@@ -849,13 +849,13 @@ exports[`TreeView should render with icons 1`] = `
                   </ForwardRef(CaretDown16)>
                 </span>
                 <span
-                  className="bx--tree-node__label__details"
+                  className="cds--tree-node__label__details"
                 >
                   <ForwardRef(Folder16)
-                    className="bx--tree-node__icon"
+                    className="cds--tree-node__icon"
                   >
                     <Icon
-                      className="bx--tree-node__icon"
+                      className="cds--tree-node__icon"
                       fill="currentColor"
                       height={16}
                       preserveAspectRatio="xMidYMid meet"
@@ -865,7 +865,7 @@ exports[`TreeView should render with icons 1`] = `
                     >
                       <svg
                         aria-hidden={true}
-                        className="bx--tree-node__icon"
+                        className="cds--tree-node__icon"
                         fill="currentColor"
                         focusable="false"
                         height={16}
@@ -884,7 +884,7 @@ exports[`TreeView should render with icons 1`] = `
                 </span>
               </div>
               <ul
-                className="bx--tree-node__children"
+                className="cds--tree-node__children"
                 role="group"
               >
                 <TreeNode
@@ -910,7 +910,7 @@ exports[`TreeView should render with icons 1`] = `
                   <li
                     aria-current={null}
                     aria-selected={false}
-                    className="bx--tree-node bx--tree-node--with-icon bx--tree-leaf-node"
+                    className="cds--tree-node cds--tree-node--with-icon cds--tree-leaf-node"
                     id="5-4"
                     onBlur={[Function]}
                     onClick={[Function]}
@@ -920,13 +920,13 @@ exports[`TreeView should render with icons 1`] = `
                     tabIndex={-1}
                   >
                     <div
-                      className="bx--tree-node__label"
+                      className="cds--tree-node__label"
                     >
                       <ForwardRef(Document16)
-                        className="bx--tree-node__icon"
+                        className="cds--tree-node__icon"
                       >
                         <Icon
-                          className="bx--tree-node__icon"
+                          className="cds--tree-node__icon"
                           fill="currentColor"
                           height={16}
                           preserveAspectRatio="xMidYMid meet"
@@ -936,7 +936,7 @@ exports[`TreeView should render with icons 1`] = `
                         >
                           <svg
                             aria-hidden={true}
-                            className="bx--tree-node__icon"
+                            className="cds--tree-node__icon"
                             fill="currentColor"
                             focusable="false"
                             height={16}

@@ -8,9 +8,8 @@
 import React from 'react';
 import SkeletonText from '../SkeletonText';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('SkeletonText', () => {
   describe('Renders as expected', () => {

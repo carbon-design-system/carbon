@@ -9,8 +9,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import ReactDOM from 'react-dom';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
 import { keys, match } from '../../internal/keyboard';
+import { usePrefix } from '../../internal/usePrefix';
 
 import {
   capWithinRange,
@@ -28,8 +28,6 @@ import MenuGroup from './MenuGroup';
 import MenuRadioGroup from './MenuRadioGroup';
 import MenuRadioGroupOptions from './MenuRadioGroupOptions';
 import MenuSelectableItem from './MenuSelectableItem';
-
-const { prefix } = settings;
 
 const margin = 16; // distance to keep to body edges, in px
 const defaultSize = 'sm';
@@ -52,6 +50,7 @@ const Menu = function Menu({
   const [position, setPosition] = useState([x, y]);
   const isRootMenu = level === 1;
   const focusReturn = useRef(null);
+  const prefix = usePrefix();
 
   function returnFocus() {
     if (focusReturn.current) {

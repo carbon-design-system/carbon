@@ -9,7 +9,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import SideNavLink from '../SideNavLink';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 describe('SideNavLink', () => {
   let mockProps, wrapper;

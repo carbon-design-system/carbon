@@ -8,9 +8,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import TextArea from '../TextArea';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('TextArea', () => {
   describe('should render as expected', () => {

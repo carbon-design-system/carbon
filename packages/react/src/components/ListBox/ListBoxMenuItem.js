@@ -8,9 +8,7 @@
 import cx from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function useIsTruncated(ref) {
   const [isTruncated, setIsTruncated] = useState(false);
@@ -32,6 +30,7 @@ const ListBoxMenuItem = React.forwardRef(function ListBoxMenuItem(
   { children, isActive, isHighlighted, title, ...rest },
   forwardedRef
 ) {
+  const prefix = usePrefix();
   const ref = useRef(null);
   const isTruncated = useIsTruncated(forwardedRef?.menuItemOptionRef || ref);
   const className = cx(`${prefix}--list-box__menu-item`, {

@@ -7,14 +7,14 @@ exports[`<ComposedModal /> renders 1`] = `
   selectorPrimaryFocus="[data-modal-primary-focus]"
 >
   <div
-    className="bx--modal is-visible"
+    className="cds--modal is-visible"
     onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
     role="presentation"
   >
     <span
-      className="bx--visually-hidden"
+      className="cds--visually-hidden"
       role="link"
       tabIndex="0"
     >
@@ -22,11 +22,11 @@ exports[`<ComposedModal /> renders 1`] = `
     </span>
     <div
       aria-modal="true"
-      className="bx--modal-container"
+      className="cds--modal-container"
       role="dialog"
     />
     <span
-      className="bx--visually-hidden"
+      className="cds--visually-hidden"
       role="link"
       tabIndex="0"
     >

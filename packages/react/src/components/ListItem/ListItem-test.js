@@ -8,9 +8,8 @@
 import React from 'react';
 import ListItem from '../ListItem';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('ListItem', () => {
   describe('Renders as expected', () => {

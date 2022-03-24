@@ -8,10 +8,8 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
-import { settings } from 'carbon-components';
 import TableCell from './TableCell';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableExpandedRow = ({
   className: customClassName,
@@ -20,6 +18,7 @@ const TableExpandedRow = ({
   ...rest
 }) => {
   const rowRef = useRef(null);
+  const prefix = usePrefix();
   const className = cx(`${prefix}--expandable-row`, customClassName);
 
   const toggleParentHoverClass = (eventType) => {

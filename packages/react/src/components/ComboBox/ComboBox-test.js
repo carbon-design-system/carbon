@@ -18,9 +18,8 @@ import {
   generateGenericItem,
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 const findInputNode = (wrapper) => wrapper.find(`.${prefix}--text-input`);
 const openMenu = (wrapper) => {
   wrapper.find(`[role="combobox"]`).simulate('click');

@@ -6,12 +6,10 @@
  */
 
 import { ListBulleted16, Grid16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
@@ -20,6 +18,8 @@ let didWarnAboutDeprecation = false;
  */
 class SearchLayoutButton extends Component {
   state = { format: 'list' };
+
+  static contextType = PrefixContext;
 
   static propTypes = {
     /**
@@ -90,6 +90,7 @@ class SearchLayoutButton extends Component {
   };
 
   render() {
+    const { context: prefix } = this;
     const { labelText, iconDescriptionList, iconDescriptionGrid } = this.props;
     const SearchLayoutButtonIcon = () => {
       if (this.state.format === 'list') {

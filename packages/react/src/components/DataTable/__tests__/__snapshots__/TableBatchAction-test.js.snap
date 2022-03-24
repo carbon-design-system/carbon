@@ -24,7 +24,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     <button
       aria-describedby={null}
       aria-pressed={null}
-      className="custom-class bx--btn bx--btn--primary"
+      className="custom-class cds--btn cds--btn--primary"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -37,12 +37,12 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       <ForwardRef(AddFilled16)
         aria-hidden="true"
         aria-label="test"
-        className="bx--btn__icon"
+        className="cds--btn__icon"
       >
         <Icon
           aria-hidden="true"
           aria-label="test"
-          className="bx--btn__icon"
+          className="cds--btn__icon"
           fill="currentColor"
           height={16}
           preserveAspectRatio="xMidYMid meet"
@@ -53,7 +53,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
           <svg
             aria-hidden="true"
             aria-label="test"
-            className="bx--btn__icon"
+            className="cds--btn__icon"
             fill="currentColor"
             focusable="false"
             height={16}

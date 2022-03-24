@@ -10,9 +10,8 @@ import { Search16, Close16 } from '@carbon/icons-react';
 import Search from '../Search';
 import SearchSkeleton from '../Search/Search.Skeleton';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Search', () => {
   describe('renders as expected', () => {
@@ -180,26 +179,35 @@ describe('Search', () => {
 
   describe('events', () => {
     describe('enabled textinput', () => {
-      const onClick = jest.fn();
-      const onChange = jest.fn();
-      const onClear = jest.fn();
+      let onClick;
+      let onChange;
+      let onClear;
+      let wrapper;
+      let input;
+      let eventObject;
 
-      const wrapper = shallow(
-        <Search
-          id="test"
-          labelText="testlabel"
-          onClick={onClick}
-          onChange={onChange}
-          onClear={onClear}
-        />
-      );
+      beforeEach(() => {
+        onClick = jest.fn();
+        onChange = jest.fn();
+        onClear = jest.fn();
 
-      const input = wrapper.find('input');
-      const eventObject = {
-        target: {
-          defaultValue: 'test',
-        },
-      };
+        wrapper = mount(
+          <Search
+            id="test"
+            labelText="testlabel"
+            onClick={onClick}
+            onChange={onChange}
+            onClear={onClear}
+          />
+        );
+
+        input = wrapper.find('input');
+        eventObject = {
+          target: {
+            defaultValue: 'test',
+          },
+        };
+      });
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click');
@@ -208,18 +216,24 @@ describe('Search', () => {
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toHaveBeenCalledWith(eventObject);
+        expect(onChange).toHaveBeenCalledWith(
+          expect.objectContaining(eventObject)
+        );
       });
 
       it('should invoke onClear when input value is cleared', () => {
-        wrapper.setProps({ value: 'test' });
-        const focus = jest.fn();
-        input.getElement().ref({
-          focus,
-        });
+        const wrapper = mount(
+          <Search
+            id="test"
+            labelText="testlabel"
+            onClick={onClick}
+            onChange={onChange}
+            onClear={onClear}
+            value="test"
+          />
+        );
         wrapper.find('button').simulate('click', { target: { value: 'test' } });
         expect(onClear).toHaveBeenCalled();
-        expect(focus).toHaveBeenCalled();
       });
     });
   });
@@ -227,9 +241,8 @@ describe('Search', () => {
 
 describe('SearchSkeleton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<SearchSkeleton />);
-
     it('Has the expected classes', () => {
+      const wrapper = shallow(<SearchSkeleton />);
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--search--xl`)).toEqual(true);
     });
@@ -238,9 +251,8 @@ describe('SearchSkeleton', () => {
 
 describe('SearchSkeleton Small', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<SearchSkeleton small />);
-
     it('Has the expected classes', () => {
+      const wrapper = shallow(<SearchSkeleton small />);
       expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
       expect(wrapper.hasClass(`${prefix}--search--sm`)).toEqual(true);
     });
@@ -249,7 +261,7 @@ describe('SearchSkeleton Small', () => {
 
 describe('Detecting change in value from props', () => {
   it('changes the hasContent state upon change in props', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <Search
         id="test"
         className="extra-class"
@@ -264,7 +276,7 @@ describe('Detecting change in value from props', () => {
   });
 
   it('avoids change the hasContent state upon setting props, unless the value actually changes', () => {
-    const wrapper = shallow(
+    const wrapper = mount(
       <Search
         id="test"
         className="extra-class"

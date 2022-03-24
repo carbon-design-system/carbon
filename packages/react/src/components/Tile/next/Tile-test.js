@@ -21,7 +21,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { mount } from 'enzyme';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 describe('Default', () => {
   afterEach(cleanup);

@@ -22,7 +22,7 @@ describe('wrapFocus', () => {
         id="start-sentinel"
         tabIndex="0"
         role="link"
-        class="bx--visually-hidden">
+        class="cds--visually-hidden">
       </span>
       <div id="inner-modal" tabindex="-1">
         <button id="button-0">Button 0</button>
@@ -33,10 +33,10 @@ describe('wrapFocus', () => {
         id="end-sentinel"
         tabIndex="0"
         role="link"
-        class="bx--visually-hidden">
+        class="cds--visually-hidden">
       </span>
       <button id="outer-following"></button>
-      <div class="bx--tooltip" tabindex="0"></div>
+      <div class="cds--tooltip" tabindex="0"></div>
     `;
     document.body.appendChild(node);
     spyInnerModal = jest.spyOn(node.querySelector('#inner-modal'), 'focus');
@@ -112,7 +112,7 @@ describe('wrapFocus', () => {
       bodyNode: node.querySelector('#inner-modal'),
       startSentinelNode: node.querySelector('#start-sentinel'),
       endSentinelNode: node.querySelector('#end-sentinel'),
-      currentActiveNode: node.querySelector('.bx--tooltip'),
+      currentActiveNode: node.querySelector('.cds--tooltip'),
       oldActiveNode: node.querySelector('#button-2'),
     });
     expect(spyInnerModal).not.toHaveBeenCalled();

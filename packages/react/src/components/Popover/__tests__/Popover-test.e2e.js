@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/styles/scss/_layer.scss';
-import '@carbon/styles/scss/components/popover/_index.scss';
-import '../next/story.scss';
+import '../../../../index.scss';
 
 import { Checkbox16 } from '@carbon/icons-react';
 import { mount } from '@cypress/react';
@@ -346,7 +344,7 @@ describe('Popover', () => {
                       <div className="playground-trigger">
                         <Checkbox16 />
                       </div>
-                      <PopoverContent className="p-3">
+                      <PopoverContent style={{ padding: '1rem' }}>
                         <p className="popover-title">Available storage</p>
                         <p className="popover-details">
                           This server has 150 GB of block storage remaining.

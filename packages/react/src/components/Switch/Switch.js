@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const Switch = React.forwardRef(function Switch(props, tabRef) {
   const {
@@ -25,6 +23,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     text,
     ...other
   } = props;
+  const prefix = usePrefix();
 
   const handleClick = (e) => {
     e.preventDefault();

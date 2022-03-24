@@ -12,6 +12,7 @@ import {
   TabPanels,
   TabList,
   IconTab,
+  Tab,
 } from './next/Tabs';
 import { default as TabsClassic } from './Tabs';
 import { default as TabsSkeletonClassic } from './Tabs.Skeleton';
@@ -25,6 +26,6 @@ const TabsSkeleton = FeatureFlags.enabled('enable-v11-release')
   ? TabsSkeletonNext
   : TabsSkeletonClassic;
 
-export { TabsSkeleton, TabPanels, TabPanel, TabList, IconTab };
+export { TabsSkeleton, TabPanels, TabPanel, TabList, IconTab, Tab };
 
 export default Tabs;
