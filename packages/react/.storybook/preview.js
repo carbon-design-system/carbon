@@ -11,7 +11,7 @@ import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
-import { ThemeContext } from '../src';
+import { GlobalTheme } from '../src';
 import { addParameters } from '@storybook/react';
 
 export const globalTypes = {
@@ -219,9 +219,9 @@ export const decorators = [
     }, [locale]);
 
     return (
-      <ThemeContext.Provider value={{ theme }}>
+      <GlobalTheme theme={theme}>
         <Story {...context} />
-      </ThemeContext.Provider>
+      </GlobalTheme>
     );
   },
 ];
