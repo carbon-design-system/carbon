@@ -37,7 +37,7 @@
     "postinstall": "carbon-telemetry collect --install"
   },
   "peerDependencies": {
-    "sass": "^1.32.12"
+    "sass": "^1.33.0"
   },
   "dependencies": {
     "@carbon/styles": "^0.17.0",

@@ -19,7 +19,6 @@
     @include type.type-style('label-01');
 
     margin-right: spacing.$spacing-03;
-
     color: theme.$text-secondary;
   }
 
@@ -64,7 +63,7 @@
       'link-focus-text-color',
       theme.$focus-inverse
     );
-    @include type.type-style('body-compact-01');
+    @include type.type-style('body-01');
 
     display: grid;
     max-width: 18rem;

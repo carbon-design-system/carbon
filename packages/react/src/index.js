@@ -244,4 +244,4 @@ export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
 export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
-export { ThemeContext, Theme, useTheme } from './components/Theme';
+export { GlobalTheme, Theme, useTheme } from './components/Theme';
