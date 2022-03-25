@@ -25,7 +25,7 @@
   },
   "scripts": {
     "ci-check": "carbon-cli check \"scss/**/*.scss\" -i \"**/generated/**\" -i \"**/compat/**\"",
-    "clean": "rimraf es lib umd scss/generated",
+    "clean": "rimraf es lib umd scss/generated scss/compat/generated",
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonThemes && babel-node --presets '@babel/preset-env' tasks/build.js && carbon-cli check \"scss/*.scss\""
   },
   "dependencies": {

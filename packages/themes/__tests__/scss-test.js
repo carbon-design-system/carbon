@@ -10,7 +10,8 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
-const { group, themes } = require('../src/next');
+const { themes } = require('../src');
+const { group } = require('../src/tokens');
 
 const { render } = SassRenderer.create(__dirname);
 const tokens = group.getTokens();
@@ -55,7 +56,7 @@ describe('@carbon/themes/scss', () => {
 
   test('scss/_themes.scss', async () => {
     const { unwrap } = await render(`
-      @use '../scss/modules/themes';
+      @use '../scss/themes';
 
       // Themes
       $_: get('themes.$white', themes.$white);
@@ -75,7 +76,7 @@ describe('@carbon/themes/scss', () => {
     test('$theme', async () => {
       const { unwrap } = await render(`
         @use 'sass:map';
-        @use '../scss/modules/themes' as *;
+        @use '../scss/themes' as *;
         @use '../' as themes with (
           $theme: $g100
         );
@@ -106,7 +107,7 @@ describe('@carbon/themes/scss', () => {
     test('$fallback', async () => {
       const { unwrap } = await render(`
         @use 'sass:map';
-        @use '../scss/modules/themes' as *;
+        @use '../scss/themes' as *;
         @use '../' as themes with (
           $fallback: $g100,
           $theme: (

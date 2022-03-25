@@ -5,110 +5,146 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { adjustLightness } from './tools';
-import { white, red60, gray40, black, rgba } from '@carbon/colors';
+import { adjustLightness } from '../tools';
 
-export const interactive01 = '#3d70b2';
-export const interactive02 = '#4d5358';
-export const interactive03 = '#3d70b2';
-export const interactive04 = '#3d70b2';
-export const uiBackground = '#f4f7fb';
+import {
+  // Blue
+  blue30,
+  blue40,
+  blue50,
+  blue60,
+  blue80,
 
-export const ui01 = white;
-export const ui02 = '#f4f7fb';
-export const ui03 = '#dfe3e6';
-export const ui04 = '#8897a2';
-export const ui05 = '#5a6872';
+  // Gray
+  gray10,
+  gray30,
+  gray50,
+  gray60,
+  gray70,
+  gray80,
+  gray90,
+  gray100,
 
-export const text01 = '#152935';
-export const text02 = '#5a6872';
-export const text03 = '#cdd1d4';
+  // Support
+  green40,
+  green50,
+  yellow30,
+  red40,
+  red50,
+  red60,
+  red80,
+  purple40,
+
+  // Constants
+  white,
+  black,
+
+  // Tools
+  rgba,
+} from '@carbon/colors';
+
+export const interactive01 = blue60;
+export const interactive02 = gray60;
+export const interactive03 = white;
+export const interactive04 = blue50;
+
+export const uiBackground = gray100;
+
+export const ui01 = gray90;
+export const ui02 = gray80;
+export const ui03 = gray80;
+export const ui04 = gray60;
+export const ui05 = gray10;
+
+export const text01 = gray10;
+export const text02 = gray30;
+export const text03 = gray60;
 export const text04 = white;
-export const text05 = '#5a6872';
-export const textError = '#e0182d';
+export const text05 = gray50;
+export const textError = red40;
 
-export const icon01 = '#3d70b2';
-export const icon02 = '#5a6872';
+export const icon01 = gray10;
+export const icon02 = gray30;
 export const icon03 = white;
 
-export const link01 = '#3d70b2';
-export const link02 = '#3d70b2';
+export const link01 = blue40;
+export const link02 = blue30;
 
-export const inverseLink = '#5596e6';
+export const inverseLink = blue60;
 
-export const field01 = white;
-export const field02 = '#f4f7fb';
+export const field01 = gray90;
+export const field02 = gray80;
 
-export const inverse01 = white;
-export const inverse02 = '#272d33';
+export const inverse01 = gray100;
+export const inverse02 = gray10;
 
-export const support01 = '#e0182d';
-export const support02 = '#5aa700';
-export const support03 = '#efc100';
-export const support04 = '#5aaafa';
+export const support01 = red50;
+export const support02 = green40;
+export const support03 = yellow30;
+export const support04 = blue50;
 
-export const inverseSupport01 = '#ff5050';
-export const inverseSupport02 = '#8cd211';
-export const inverseSupport03 = '#FDD600';
-export const inverseSupport04 = '#5aaafa';
+export const inverseSupport01 = red60;
+export const inverseSupport02 = green50;
+export const inverseSupport03 = yellow30;
+export const inverseSupport04 = blue60;
 
-export const overlay01 = 'rgba(223, 227, 230, 0.5)';
+export const overlay01 = rgba(black, 0.65);
 
 export const danger01 = red60;
-export const danger02 = red60;
+export const danger02 = red50;
 
 // Interaction states
-export const focus = '#3d70b2';
-export const inverseFocusUi = '#3d70b2';
+export const focus = white;
+export const inverseFocusUi = blue60;
 
-export const hoverPrimary = '#30588c';
-export const activePrimary = '#30588c';
+export const hoverPrimary = '#0353e9';
+export const activePrimary = blue80;
 
-export const hoverPrimaryText = '#294c86';
+export const hoverPrimaryText = blue30;
 
-export const hoverSecondary = '#4d5b65';
-export const activeSecondary = '#414f59';
+export const hoverSecondary = '#606060';
+export const activeSecondary = gray80;
 
-export const hoverTertiary = '#5a6872';
-export const activeTertiary = '#414f59';
+export const hoverTertiary = gray10;
+export const activeTertiary = gray30;
 
-export const hoverUI = '#EEF4FC';
-export const hoverLightUI = '#EEF4FC';
-export const activeUI = '#DFEAFA';
-export const activeLightUI = '#DFEAFA';
-export const selectedUI = '#EEF4FC';
-export const selectedLightUI = '#EEF4FC';
-export const inverseHoverUI = '#4c4c4c';
+export const hoverUI = '#353535';
+export const hoverLightUI = '#4c4c4c';
+export const activeUI = gray70;
+export const activeLightUI = gray60;
+export const selectedUI = gray80;
+export const selectedLightUI = gray70;
+export const inverseHoverUI = '#e5e5e5';
 
-export const hoverSelectedUI = '#DFEAFA';
+export const hoverSelectedUI = '#4c4c4c';
 
-export const hoverDanger = '#c70014';
-export const activeDanger = '#AD1625';
+export const hoverDanger = adjustLightness(danger01, -8);
+export const activeDanger = red80;
 
-export const hoverRow = '#eef4fc';
+export const hoverRow = '#353535';
 
-export const visitedLink = '#294c86';
+export const visitedLink = purple40;
 
-export const disabled01 = '#fafbfd';
-export const disabled02 = '#dfe3e6';
-export const disabled03 = '#cdd1d4';
+export const disabled01 = gray90;
+export const disabled02 = gray70;
+export const disabled03 = gray50;
 
-export const highlight = '#f4f7fb';
+export const highlight = blue80;
 
-export const decorative01 = '#EEF4FC';
+export const decorative01 = gray70;
 
-export const buttonSeparator = '#e0e0e0';
+export const buttonSeparator = '#161616';
 
-export const skeleton01 = 'rgba(61, 112, 178, .1)';
-export const skeleton02 = 'rgba(61, 112, 178, .1)';
+export const skeleton01 = '#353535';
+export const skeleton02 = gray70;
 
 // New color tokens
 // TO-DO: remove fallback color when v11 is released and assign carbon colors to new tokens
 export const background = uiBackground;
 export const layer = ui01;
 export const layerAccent = ui03;
-export const layerAccentActive = gray40;
-export const layerAccentHover = adjustLightness(layerAccent, -6);
+export const layerAccentActive = gray60;
+export const layerAccentHover = adjustLightness(layerAccent, +6);
 export const field = field01;
 export const backgroundInverse = inverse02;
 export const backgroundBrand = interactive01;
@@ -147,7 +183,7 @@ export const supportInfoInverse = inverseSupport04;
 
 export const overlay = overlay01;
 export const toggleOff = ui04;
-export const shadow = rgba(black, 0.3);
+export const shadow = rgba(black, 0.8);
 
 export const buttonPrimary = interactive01;
 export const buttonSecondary = interactive02;
@@ -277,15 +313,6 @@ export {
   fluidSpacing02,
   fluidSpacing03,
   fluidSpacing04,
-  // Layout
-  // Deprecated -- Remove in v11
-  layout01,
-  layout02,
-  layout03,
-  layout04,
-  layout05,
-  layout06,
-  layout07,
   // Containers
   container01,
   container02,

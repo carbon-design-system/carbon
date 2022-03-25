@@ -8,7 +8,8 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { TokenFormat, themes, group } = require('../../src/next');
+const { TokenFormat, group } = require('../../src/tokens');
+const { themes } = require('../../src');
 const { FILE_BANNER, primitive } = require('./shared');
 
 function buildThemesFile() {
