@@ -9,7 +9,7 @@ Object {
   "font-display": "swap",
   "font-path": "~@ibm/plex",
   "prefix": "cds",
+  "use-akamai-cdn": false,
   "use-flexbox-grid": false,
-  "use-google-fonts": false,
 }
 `;
