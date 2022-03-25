@@ -5,14 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { colors, unstable_hoverColors } from '@carbon/colors';
+import { colors, hoverColors } from '@carbon/colors';
 import React from 'react';
+import { themes } from '../../../../src';
 import {
   themes,
   TokenFormat,
   group,
   set as tokenSet,
-} from '../../../../src/next';
+} from '../../../../src/tokens';
 
 const tokens = group.getTokens();
 const groups = group.getTokenGroups();

@@ -8,6 +8,7 @@
     "develop": "parcel index.html --no-cache"
   },
   "dependencies": {
+    "@carbon/themes": "10.52.0",
     "classnames": "^2.2.6",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
