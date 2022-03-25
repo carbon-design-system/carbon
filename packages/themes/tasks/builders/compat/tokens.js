@@ -43,8 +43,8 @@ function buildCompatFile() {
 
     // Modules
     t.SassModule('sass:map'),
-    t.SassModule('../../modules/config'),
-    t.SassModule('../../modules/theme'),
+    t.SassModule('../../config'),
+    t.SassModule('../../theme'),
     t.Newline(),
 
     t.Comment('/ Internal helper for generating CSS Custom Properties'),
