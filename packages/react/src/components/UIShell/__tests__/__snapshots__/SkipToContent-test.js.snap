@@ -7,7 +7,7 @@ exports[`SkipToContent should render 1`] = `
   tabIndex="0"
 >
   <a
-    className="bx--skip-to-content custom-classname"
+    className="cds--skip-to-content custom-classname"
     href="#main-content"
     tabIndex="0"
   >

@@ -11,9 +11,8 @@ import {
   WarningAltFilled16,
   EditOff16,
 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 /**
  * @typedef {object} InputProps

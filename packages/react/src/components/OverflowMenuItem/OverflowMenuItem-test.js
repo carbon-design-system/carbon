@@ -8,9 +8,8 @@
 import React from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 const render = (props) =>
   mount(<OverflowMenuItem closeMenu={jest.fn()} {...props} />);
 

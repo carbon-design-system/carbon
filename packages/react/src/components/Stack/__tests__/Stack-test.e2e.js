@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/styles/scss/components/stack/_index.scss';
+import '../../../../index.scss';
 
 import { mount } from '@cypress/react';
 import { spacing } from '@carbon/layout';

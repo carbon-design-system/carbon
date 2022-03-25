@@ -8,9 +8,8 @@
 import React from 'react';
 import DataTableSkeleton from '../DataTableSkeleton/';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('DataTableSkeleton', () => {
   describe('Renders as expected', () => {

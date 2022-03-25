@@ -3,9 +3,8 @@ import { shallow, mount } from 'enzyme';
 import Button from '../../Button';
 import { ModalFooter } from './ModalFooter';
 import InlineLoading from '../../InlineLoading';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('<ModalFooter />', () => {
   describe('Renders as expected', () => {

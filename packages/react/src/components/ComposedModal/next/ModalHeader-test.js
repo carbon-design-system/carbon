@@ -8,9 +8,8 @@
 import React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import { ModalHeader } from './ModalHeader';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('ModalHeader', () => {
   afterEach(cleanup);

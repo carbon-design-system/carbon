@@ -12,11 +12,11 @@ import ModalWrapper from '../ModalWrapper';
 import InlineLoading from '../InlineLoading';
 import { mount } from 'enzyme';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
-const getModal = (wrapper) => wrapper.find('.bx--modal');
-const getModalBody = (wrapper) => wrapper.find('.bx--modal-container');
+const getModal = (wrapper) => wrapper.find('.cds--modal');
+const getModalBody = (wrapper) => wrapper.find('.cds--modal-container');
 
 describe('Modal', () => {
   describe('Renders as expected', () => {
@@ -153,18 +153,18 @@ describe('Modal', () => {
 
       expect(modalContainer.hasClass(openClass)).not.toEqual(true);
       expect(
-        document.body.classList.contains('bx--body--with-modal-open')
+        document.body.classList.contains('cds--body--with-modal-open')
       ).not.toEqual(true);
       wrapper.setState({ isOpen: true });
       expect(wrapper.find(`.${prefix}--modal`).hasClass(openClass)).toEqual(
         true
       );
       expect(
-        document.body.classList.contains('bx--body--with-modal-open')
+        document.body.classList.contains('cds--body--with-modal-open')
       ).toEqual(true);
       wrapper.unmount();
       expect(
-        document.body.classList.contains('bx--body--with-modal-open')
+        document.body.classList.contains('cds--body--with-modal-open')
       ).toEqual(false);
     });
 
