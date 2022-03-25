@@ -41,9 +41,10 @@ export function usePressable(
     const { current: element } = ref;
 
     // Fired when a pointer becomes active buttons state.
-    function onPointerDown() {
+    function onPointerDown(event) {
       setPendingLongPress(true);
       savedOnPressIn.current?.();
+      event.preventDefault();
     }
 
     // Fired when a pointer is no longer active buttons state.
@@ -81,26 +82,25 @@ export function usePressable(
       state.current.longPress = false;
     }
 
-    function onTouchStart(event) {
-      // We prevent the default event on touchstart so that text selection is
-      // disabled on iOS  Safari when interacting with a "pressable" element
+    // Certain devices treat long press events as context menu triggers
+    function onContextMenu(event) {
       event.preventDefault();
     }
 
-    element.addEventListener('touchstart', onTouchStart);
     element.addEventListener('pointerdown', onPointerDown);
     element.addEventListener('pointerup', onPointerUp);
     element.addEventListener('pointercancel', onPointerCancel);
     element.addEventListener('pointerleave', onPointerLeave);
     element.addEventListener('click', onClick);
+    element.addEventListener('contextmenu', onContextMenu);
 
     return () => {
-      element.removeEventListener('touchstart', onTouchStart);
       element.removeEventListener('pointerdown', onPointerDown);
       element.removeEventListener('pointerup', onPointerUp);
       element.removeEventListener('pointercancel', onPointerCancel);
       element.removeEventListener('pointerleave', onPointerLeave);
       element.removeEventListener('click', onClick);
+      element.removeEventListener('contextmenu', onContextMenu);
     };
   }, [ref]);
 
