@@ -38,6 +38,9 @@ export default {
       },
     },
   },
+  args: {
+    level: 0,
+  },
 };
 
 export const Default = () => {
@@ -57,3 +60,29 @@ export const Default = () => {
     </>
   );
 };
+
+export const CustomLevel = () => {
+  function TestComponent() {
+    return <div className="example-layer-test-component">Test component</div>;
+  }
+
+  return (
+    <Layer level={2}>
+      <TestComponent />
+    </Layer>
+  );
+};
+
+const PlaygroundStory = (args) => {
+  function TestComponent() {
+    return <div className="example-layer-test-component">Test component</div>;
+  }
+
+  return (
+    <Layer {...args}>
+      <TestComponent />
+    </Layer>
+  );
+};
+
+export const Playground = PlaygroundStory.bind({});

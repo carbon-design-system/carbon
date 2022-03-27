@@ -24,7 +24,7 @@
     "access": "public"
   },
   "peerDependencies": {
-    "sass": "^1.32.12"
+    "sass": "^1.33.0"
   },
   "dependencies": {
     "@carbon/colors": "^10.37.0",
