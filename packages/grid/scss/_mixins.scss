@@ -200,17 +200,6 @@
   .#{$prefix}--row.#{$prefix}--no-gutter--end [class*='#{$prefix}--col'] {
     padding-right: 0;
   }
-
-  // Deprecated ☠️
-  .#{$prefix}--no-gutter--left,
-  .#{$prefix}--row.#{$prefix}--no-gutter--left [class*='#{$prefix}--col'] {
-    padding-left: 0;
-  }
-
-  .#{$prefix}--no-gutter--right,
-  .#{$prefix}--row.#{$prefix}--no-gutter--right [class*='#{$prefix}--col'] {
-    padding-right: 0;
-  }
 }
 
 // -----------------------------------------------------------------------------
@@ -228,15 +217,6 @@
   }
 
   .#{$prefix}--hang--end {
-    padding-right: ($gutter / 2);
-  }
-
-  // Deprecated ☠️
-  .#{$prefix}--hang--left {
-    padding-left: ($gutter / 2);
-  }
-
-  .#{$prefix}--hang--right {
     padding-right: ($gutter / 2);
   }
 }
