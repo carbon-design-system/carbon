@@ -233,7 +233,6 @@ categories:
           - add--alt
           - add--filled
           - apps
-          - app-switcher
           - arrow--down
           - arrow--down-left
           - arrow--down-right
@@ -242,7 +241,6 @@ categories:
           - arrow--up
           - arrow--up-left
           - arrow--up-right
-          - back-to-top
           - caret--down
           - caret--left
           - caret--right
@@ -280,7 +278,6 @@ categories:
           - area
           - area--custom
           - arrow-shift-down
-          - arrows
           - arrows--horizontal
           - arrows--vertical
           - automatic
@@ -314,7 +311,6 @@ categories:
           - connect--source
           - connect--target
           - convert-to-cloud
-          - delete
           - deploy
           - deploy-rules
           - drag--horizontal
@@ -322,7 +318,6 @@ categories:
           - drill-back
           - drill-down
           - drill-through
-          - edit-filter
           - exit
           - expand-all
           - expand-categories
@@ -432,8 +427,6 @@ categories:
           - checkbox
           - checkbox--checked
           - checkbox--checked--filled
-          - checkbox--undeterminate
-          - checkbox--undeterminate--filled
           - checkbox--indeterminate
           - checkbox--indeterminate--filled
           - column
@@ -515,14 +508,12 @@ categories:
           - watson--machine-learning
       - name: Social
         members:
-          - logo--delicious
           - logo--digg
           - logo--discord
           - logo--facebook
           - logo--flickr
           - logo--github
           - logo--glassdoor
-          - logo--google
           - logo--instagram
           - logo--linkedin
           - logo--livestream
@@ -538,7 +529,6 @@ categories:
           - logo--xing
           - logo--yelp
           - logo--youtube
-          - logo--stumbleupon
   - name: Enterprise
     subcategories:
       - name: App catalogue
@@ -721,7 +711,6 @@ categories:
           - launch-study--3
           - magnify
           - mammogram
-          - mammogram--stacked
           - medication
           - medication--alert
           - medication--reminder
@@ -792,9 +781,6 @@ categories:
           - operation
           - operation--gauge
           - operation--if
-          - research--bloch-sphere
-          - research--hinton-plot
-          - research--matrix
           - S
           - S--alt
           - T
@@ -803,7 +789,7 @@ categories:
           - U2
           - U3
           - X
-          - Y 
+          - Y
           - Z
   - name: Organization
     subcategories:
@@ -818,7 +804,6 @@ categories:
           - character--upper-case
           - character--whole-number
           - letter--Aa
-          - letter--Aa--large
           - letter--Bb
           - letter--Cc
           - letter--Dd
@@ -1264,24 +1249,15 @@ categories:
           - error
           - error--filled
           - error--outline
-          - glyph--caution
           - caution
-          - glyph--caution-inverted
           - caution-inverted
-          - glyph--circle-fill
           - circle-fill
-          - glyph--circle-stroke
           - circle-stroke
-          - glyph--critical
           - critical-severity
-          - glyph--incomplete
           - low-severity
           - critical
-          - glyph--incomplete
           - incomplete
-          - glyph--square-fill
           - square-fill
-          - glyph--undefined
           - undefined
           - help
           - help--filled
@@ -1298,7 +1274,6 @@ categories:
           - information--square
           - information--square--filled
           - misuse
-          - misuse--alt
           - misuse--outline
           - pending
           - pending--filled
@@ -1737,9 +1712,6 @@ categories:
           - buoy
           - carbon-accounting
           - cloud
-          - cloud--lightning
-          - cloud--rain
-          - cloud--snow
           - cloud-ceiling
           - cloudy
           - crop-growth
@@ -1815,7 +1787,6 @@ categories:
           - stay-inside
           - storm-tracker
           - sun
-          - sunny
           - sunrise
           - sunset
           - temperature
