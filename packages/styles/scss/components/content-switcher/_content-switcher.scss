@@ -26,8 +26,6 @@
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--content-switcher--xl,
   .#{$prefix}--content-switcher--lg {
     height: rem(48px);
   }
