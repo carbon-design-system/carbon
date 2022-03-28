@@ -30,12 +30,11 @@ export const Default = () => (
       secondaryLabel="Optional label"
     />
     <ProgressStep
-      complete
+      current
       label="Second step with tooltip"
       description="Step 2: Getting started with Carbon Design System"
     />
     <ProgressStep
-      current
       label="Third step with tooltip"
       description="Step 3: Getting started with Carbon Design System"
     />
