@@ -10,7 +10,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { keys, matches } from '../../internal/keyboard';
-import deprecate from '../../prop-types/deprecate';
 import { useFallbackId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
@@ -20,7 +19,6 @@ function RadioTile({
   className: customClassName,
   disabled,
   // eslint-disable-next-line no-unused-vars
-  iconDescription,
   light,
   checked,
   name,
@@ -107,15 +105,6 @@ RadioTile.propTypes = {
    * Specify whether the RadioTile should be disabled
    */
   disabled: PropTypes.bool,
-
-  /**
-   * The description of the tile checkmark icon.
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop for `RadioTile` is no longer needed and has ' +
-      'been deprecated. It will be moved in the next major release.'
-  ),
 
   /**
    * The ID of the `<input>`.
