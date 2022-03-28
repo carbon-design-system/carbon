@@ -29,7 +29,6 @@ const Select = React.forwardRef(function Select(
     // reserved for use with <Pagination> component
     noLabel,
     // eslint-disable-next-line no-unused-vars
-    iconDescription,
     hideLabel,
     invalid,
     invalidText,
@@ -184,15 +183,6 @@ Select.propTypes = {
   hideLabel: PropTypes.bool,
 
   /**
-   * Provide a description for the twistie icon that can be read by screen readers
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop for `Select` is no longer needed and has ' +
-      'been deprecated. It will be moved in the next major release.'
-  ),
-
-  /**
    * Specify a custom `id` for the `<select>`
    */
   id: PropTypes.string.isRequired,
@@ -222,7 +212,13 @@ Select.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: FeatureFlags.enabled('enable-v11-release')
+    ? deprecate(
+        PropTypes.bool,
+        'The `light` prop for `Select` is no longer needed and has ' +
+          'been deprecated in v11. It will be moved in the next major release.'
+      )
+    : PropTypes.bool,
 
   /**
    * Reserved for use with <Pagination> component. Will not render a label for the
