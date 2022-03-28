@@ -13,9 +13,7 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
-    "lib",
-    "umd",
-    "next"
+    "lib"
   ],
   "keywords": [
     "ibm",
@@ -31,7 +29,7 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib umd next",
+    "clean": "rimraf es lib",
     "postinstall": "carbon-telemetry collect --install"
   },
   "peerDependencies": {

@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 
-import { Search20, Notification20, AppSwitcher20 } from '@carbon/icons-react';
+import { Search, Notification, AppSwitcher } from '@carbon/icons-react';
 
 import { action } from '@storybook/addon-actions';
 
@@ -245,18 +245,18 @@ export const HeaderBaseWActions = withReadme(readme, () => (
     </HeaderName>
     <HeaderGlobalBar>
       <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search20 />
+        <Search size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="Notifications"
         onClick={action('notification click')}>
-        <Notification20 />
+        <Notification size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
         onClick={action('app-switcher click')}
         tooltipAlignment="end">
-        <AppSwitcher20 />
+        <AppSwitcher size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
   </Header>
@@ -275,18 +275,18 @@ export const HeaderBaseWSkipToContent = withReadme(readme, () => (
         <HeaderGlobalAction
           aria-label="Search"
           onClick={action('search click')}>
-          <Search20 />
+          <Search size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction
           aria-label="Notifications"
           onClick={action('notification click')}>
-          <Notification20 />
+          <Notification size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction
           aria-label="App Switcher"
           onClick={action('app-switcher click')}
           tooltipAlignment="end">
-          <AppSwitcher20 />
+          <AppSwitcher size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
     </Header>
@@ -323,18 +323,18 @@ export const HeaderBaseWNavigationAndActions = withReadme(readme, () => (
           <HeaderGlobalAction
             aria-label="Search"
             onClick={action('search click')}>
-            <Search20 />
+            <Search size={20} />
           </HeaderGlobalAction>
           <HeaderGlobalAction
             aria-label="Notifications"
             onClick={action('notification click')}>
-            <Notification20 />
+            <Notification size={20} />
           </HeaderGlobalAction>
           <HeaderGlobalAction
             aria-label="App Switcher"
             onClick={action('app-switcher click')}
             tooltipAlignment="end">
-            <AppSwitcher20 />
+            <AppSwitcher size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         <SideNav
@@ -390,18 +390,18 @@ export const HeaderBaseWNavigationActionsAndSideNav = withReadme(readme, () => (
             <HeaderGlobalAction
               aria-label="Search"
               onClick={action('search click')}>
-              <Search20 />
+              <Search size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="Notifications"
               onClick={action('notification click')}>
-              <Notification20 />
+              <Notification size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="App Switcher"
               onClick={action('app-switcher click')}
               tooltipAlignment="end">
-              <AppSwitcher20 />
+              <AppSwitcher size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
           <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
@@ -557,7 +557,7 @@ export const HeaderBaseWActionsAndRightPanel = withReadme(readme, () => {
           isActive={expanded}
           aria-label="Notifications"
           onClick={toggleRightPanel}>
-          <Notification20 />
+          <Notification size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
       <HeaderPanel aria-label="Header Panel" expanded={expanded} />
@@ -575,19 +575,19 @@ export const HeaderBaseWActionsAndSwitcher = withReadme(readme, () => (
     </HeaderName>
     <HeaderGlobalBar>
       <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search20 />
+        <Search size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="Notifications"
         onClick={action('notification click')}>
-        <Notification20 />
+        <Notification size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
         isActive
         onClick={action('app-switcher click')}
         tooltipAlignment="end">
-        <AppSwitcher20 />
+        <AppSwitcher size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
     <HeaderPanel aria-label="Header Panel" expanded>
@@ -825,18 +825,18 @@ export const SideNavRailWHeader = withReadme(readme, () => (
             <HeaderGlobalAction
               aria-label="Search"
               onClick={action('search click')}>
-              <Search20 />
+              <Search size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="Notifications"
               onClick={action('notification click')}>
-              <Notification20 />
+              <Notification size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="App Switcher"
               onClick={action('app-switcher click')}
               tooltipAlignment="end">
-              <AppSwitcher20 />
+              <AppSwitcher size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
           <SideNav

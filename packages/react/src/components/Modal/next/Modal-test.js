@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Close20 } from '@carbon/icons-react';
+import { Close } from '@carbon/icons-react';
 import Modal from './Modal';
 import InlineLoading from '../../InlineLoading';
 import { mount } from 'enzyme';
@@ -47,12 +47,12 @@ describe('Modal', () => {
     });
 
     it('should not place the svg icon in the accessibility tree', () => {
-      const ariaHidden = mounted.find(Close20).props()['aria-hidden'];
+      const ariaHidden = mounted.find(Close).props()['aria-hidden'];
       expect(ariaHidden).toEqual('true');
     });
 
     it("icon isn't a focusable tab stop", () => {
-      const icon = mounted.find(Close20).props().tabIndex;
+      const icon = mounted.find(Close).props().tabIndex;
       expect(icon).toEqual('-1');
     });
 

@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { Filter16 } from '@carbon/icons-react';
+import { Filter } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
@@ -40,7 +40,7 @@ describe('[Deprecated] SearchFilterButton', () => {
 
   describe('icons', () => {
     it('should use "filter" icon', () => {
-      const icon = wrapper.find(Filter16);
+      const icon = wrapper.find(Filter);
       expect(icon.length).toBe(1);
     });
   });
