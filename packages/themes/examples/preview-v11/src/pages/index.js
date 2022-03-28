@@ -8,12 +8,7 @@
 import { colors, hoverColors } from '@carbon/colors';
 import React from 'react';
 import { themes } from '../../../../src';
-import {
-  themes,
-  TokenFormat,
-  group,
-  set as tokenSet,
-} from '../../../../src/tokens';
+import { TokenFormat, group, set as tokenSet } from '../../../../src/tokens';
 
 const tokens = group.getTokens();
 const groups = group.getTokenGroups();
@@ -61,7 +56,7 @@ for (const [swatch, grades] of Object.entries(colors)) {
   }
 }
 
-for (const [swatch, grades] of Object.entries(unstable_hoverColors)) {
+for (const [swatch, grades] of Object.entries(hoverColors)) {
   if (typeof grades !== 'object') {
     addColorByValue(
       grades,
