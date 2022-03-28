@@ -13,7 +13,6 @@ import { useFeatureFlag } from '../../FeatureFlags';
 import { useMergedRefs } from '../../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../../internal/usePrefix';
-import deprecate from '../../../prop-types/deprecate';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -40,7 +39,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     label,
     invalid = false,
     invalidText = enabled ? undefined : 'Provide invalidText',
-    isMobile,
     light = false,
     max,
     min,
@@ -77,7 +75,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     [`${prefix}--number--light`]: light,
     [`${prefix}--number--nolabel`]: hideLabel,
     [`${prefix}--number--nosteppers`]: hideSteppers,
-    [`${prefix}--number--mobile`]: isMobile,
     [`${prefix}--number--${size}`]: size,
     [customClassName]: !enabled,
   });
@@ -293,14 +290,6 @@ NumberInput.propTypes = {
    * Message which is displayed if the value is invalid.
    */
   invalidText: PropTypes.node,
-
-  /**
-   * `true` to use the mobile variant.
-   */
-  isMobile: deprecate(
-    PropTypes.bool,
-    `The \`isMobile\` prop no longer needed as the default NumberInput styles are now identical to the mobile variant styles. This prop will be removed in the next major version of \`carbon-components-react\``
-  ),
 
   /**
    * Generic `label` that will be used as the textual representation of what
