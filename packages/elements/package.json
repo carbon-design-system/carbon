@@ -31,8 +31,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonElements && node tasks/build.js && carbon-cli check \"scss/*.scss\"",
-    "clean": "rimraf es lib umd && node tasks/clean.js"
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonElements",
+    "clean": "rimraf es lib umd"
   },
   "dependencies": {
     "@carbon/colors": "^10.37.0",
