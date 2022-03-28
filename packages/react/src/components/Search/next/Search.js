@@ -13,7 +13,6 @@ import { focus } from '../../../internal/focus';
 import { keys, match } from '../../../internal/keyboard';
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
-import deprecate from '../../../prop-types/deprecate';
 import { composeEventHandlers } from '../../../tools/events';
 
 function Search({
@@ -28,7 +27,6 @@ function Search({
   onChange = () => {},
   onClear = () => {},
   onKeyDown,
-  placeHolderText,
   placeholder = '',
   renderIcon,
   role = 'searchbox',
@@ -112,7 +110,7 @@ function Search({
         id={uniqueId}
         onChange={composeEventHandlers([onChange, handleChange])}
         onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
-        placeholder={placeHolderText || placeholder}
+        placeholder={placeholder}
         type={type}
         value={value}
       />
@@ -184,14 +182,6 @@ Search.propTypes = {
    * Provide a handler that is invoked on the key down event for the input
    */
   onKeyDown: PropTypes.func,
-
-  /**
-   * Deprecated in favor of `placeholder`
-   */
-  placeHolderText: deprecate(
-    PropTypes.string,
-    `\nThe prop \`placeHolderText\` for Search has been deprecated in favor of \`placeholder\`. Please use \`placeholder\` instead.`
-  ),
 
   /**
    * Provide an optional placeholder text for the Search.
