@@ -187,11 +187,6 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
     children,
     className,
     disabled,
-    handleClick,
-    handleKeyDown,
-    // TODO: Remove iconDescription prop in the next major release
-    // eslint-disable-next-line no-unused-vars
-    iconDescription,
     id,
     light = false,
     name,
@@ -208,11 +203,9 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
 ) {
   const prefix = usePrefix();
 
-  // TODO: replace with onClick when handleClick prop is deprecated
-  const clickHandler = handleClick || onClick;
+  const clickHandler = onClick;
 
-  // TODO: replace with onKeyDown when handleKeyDown prop is deprecated
-  const keyDownHandler = handleKeyDown || onKeyDown;
+  const keyDownHandler = onKeyDown;
 
   const [isSelected, setIsSelected] = useState(selected);
   const [prevSelected, setPrevSelected] = useState(selected);
@@ -311,31 +304,6 @@ SelectableTile.propTypes = {
    * Specify whether the SelectableTile should be disabled
    */
   disabled: PropTypes.bool,
-
-  /**
-   * Specify the function to run when the SelectableTile is clicked
-   */
-  handleClick: deprecate(
-    PropTypes.func,
-    'The `handleClick` prop for `SelectableTile` has been deprecated in favor of `onClick`. It will be removed in the next major release.'
-  ),
-
-  /**
-   * Specify the function to run when the SelectableTile is interacted with via a keyboard
-   */
-  handleKeyDown: deprecate(
-    PropTypes.func,
-    'The `handleKeyDown` prop for `SelectableTile` has been deprecated in favor of `onKeyDown`. It will be removed in the next major release.'
-  ),
-
-  /**
-   * The description of the checkmark icon.
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop for `SelectableTile` is no longer needed and has ' +
-      'been deprecated. It will be removed in the next major release.'
-  ),
 
   /**
    * The ID of the `<input>`.
