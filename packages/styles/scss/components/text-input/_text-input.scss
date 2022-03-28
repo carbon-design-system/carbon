@@ -56,8 +56,6 @@
     }
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--text-input--xl,
   .#{$prefix}--text-input--lg {
     height: rem(48px);
   }
@@ -124,8 +122,6 @@
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
-  .#{$prefix}--text-input--password__visibility,
-  // TODO: remove selector above
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     @include focus-outline('reset');
 
@@ -188,11 +184,8 @@
     padding-right: rem(64px);
   }
 
-  .#{$prefix}--text-input--invalid +
-    .#{$prefix}--text-input--password__visibility,
-  // TODO: remove selector above
-  .#{$prefix}--text-input--invalid +
-    .#{$prefix}--text-input--password__visibility__toggle {
+  .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input--password__visibility__toggle {
     right: $spacing-05;
   }
 
@@ -201,11 +194,8 @@
   }
 
   .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility
-    svg,
-  // TODO: remove selector above
-  .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger svg {
+    + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg {
     cursor: not-allowed;
     fill: $icon-disabled;
 
@@ -246,8 +236,6 @@
 
     box-shadow: none;
 
-    .#{$prefix}--text-input--password__visibility,
-    // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle {
       right: $spacing-08;
     }
@@ -355,8 +343,6 @@
     margin-top: rem(9px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--xl,
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--lg {
     margin-top: rem(17px);
   }
@@ -396,10 +382,9 @@
   }
 
   // Windows HCM fix
-  .#{$prefix}--text-input--password__visibility,
-    // TODO: remove selector above
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger svg,
-    .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
     svg {
     @include high-contrast-mode('icon-fill');
   }
