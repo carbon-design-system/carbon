@@ -91,7 +91,13 @@ export default class Slider extends PureComponent {
     /**
      * `true` to use the light version.
      */
-    light: PropTypes.bool,
+    light: FeatureFlags.enabled('enable-v11-release')
+      ? deprecate(
+          PropTypes.bool,
+          'The `light` prop for `Select` is no longer needed and has ' +
+            'been deprecated in v11. It will be moved in the next major release.'
+        )
+      : PropTypes.bool,
 
     /**
      * The maximum value.
@@ -137,15 +143,6 @@ export default class Slider extends PureComponent {
      * A value determining how much the value should increase/decrease by moving the thumb by mouse.
      */
     step: PropTypes.number,
-
-    /**
-     * A value determining how much the value should increase/decrease by Shift+arrow keys,
-     * which will be `(max - min) / stepMuliplier`.
-     */
-    stepMuliplier: deprecate(
-      PropTypes.number,
-      ' The `stepMuliplier` prop has been deprecated in favor of `stepMultiplier`. It will be removed in the next major release.'
-    ),
 
     /**
      * A value determining how much the value should increase/decrease by Shift+arrow keys,
@@ -371,8 +368,7 @@ export default class Slider extends PureComponent {
 
     // If shift was held, account for the stepMultiplier
     if (evt.shiftKey) {
-      const stepMultiplier =
-        this.props.stepMultiplier || this.props.stepMuliplier;
+      const stepMultiplier = this.props.stepMultiplier;
       delta *= stepMultiplier;
     }
 
@@ -542,7 +538,6 @@ export default class Slider extends PureComponent {
       formatLabel = defaultFormatLabel,
       labelText,
       step,
-      stepMuliplier, // eslint-disable-line no-unused-vars
       stepMultiplier, // eslint-disable-line no-unused-vars
       inputType,
       required,
