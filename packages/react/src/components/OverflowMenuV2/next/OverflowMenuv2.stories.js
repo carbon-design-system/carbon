@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { ArrowsVertical16 } from '@carbon/icons-react';
+import { ArrowsVertical } from '@carbon/icons-react';
 
 import Menu from '../../Menu';
 import { StoryFrame, buildMenu } from '../../Menu/_storybook-utils';
@@ -52,7 +52,7 @@ export const CustomIcon = () =>
       },
     ],
     {
-      renderIcon: ArrowsVertical16,
+      renderIcon: ArrowsVertical,
     }
   );
 

@@ -7,13 +7,16 @@
 
 import './Theme-story.scss';
 import React from 'react';
-import { Theme, useTheme } from '../../Theme';
+import { GlobalTheme, Theme, useTheme } from '../../Theme';
 import { Layer } from '../../Layer';
 import mdx from './Theme.mdx';
 
 export default {
   title: 'Components/Theme',
   component: Theme,
+  subcomponents: {
+    GlobalTheme,
+  },
   parameters: {
     controls: {
       hideNoControlsWarning: true,

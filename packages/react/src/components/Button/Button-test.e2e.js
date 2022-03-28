@@ -10,7 +10,7 @@ import '../../../index.scss';
 import React from 'react';
 import { mount } from '@cypress/react';
 import { default as Button } from './Button';
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 
 describe('Button', () => {
   beforeEach(() => {
@@ -45,7 +45,7 @@ describe('Button', () => {
         <Button kind="danger--ghost" dangerDescription="sample">
           danger--ghost
         </Button>
-        <Button hasIconOnly renderIcon={Add16} data-testid="icon-only" />
+        <Button hasIconOnly renderIcon={Add} data-testid="icon-only" />
       </>
     );
   });

@@ -1,8 +1,10 @@
-import { Preview, Props, Story } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Canvas, Story } from '@storybook/addon-docs/blocks';
 
 # Toggletip
 
 [Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Toggletip)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/toggletip/usage)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -17,9 +19,65 @@ import { Preview, Props, Story } from '@storybook/addon-docs/blocks';
 
 ## Overview
 
+The Toggletip component provides an accessible way to render interactive content
+within a popover. To use this component, you'll need to include a `Toggletip`,
+`ToggletipButton` for the trigger, and `ToggletipContent` for the content you
+would like to render within the popover.
+
+```jsx
+import { Toggletip, ToggletipButton, ToggletipContent } from '@carbon/react';
+import { Information} from '@carbon/react/icons';
+
+<Toggletip>
+  <ToggletipButton label="Additional information">
+    <Information />
+  </ToggletipButton>
+  <ToggletipContent>
+    <p>Custom content here</p>
+  </ToggletipContent>
+</Toggletip>
+```
+
+## Alignment
+
+The Toggletip component provies four options for alignment: `top`, `bottom`,
+`left`, and `right`. These options will correspond to where the popover will
+render relative to the ToggletipButton. For example, when choosing `align="top"`
+the ToggletipContent will render above the ToggletipButton.
+
+## Customizing content
+
+You can customize the contents of a Toggletip with the ToggletipContent
+component. You can render any kind of child element or component inside of this
+component as `children`.
+
+## Actions
+
+If your Toggletip includes actions, you can make use of the ToggletipActions
+component to render them underneath the content of your ToggletipContent. For
+example:
+
+```jsx
+<Toggletip>
+  <ToggletipButton label="Show information">
+    <Information />
+  </ToggletipButton>
+  <ToggletipContent>
+    <p>
+      Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+      do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
+    </p>
+    <ToggletipActions>
+      <Link href="custom-link">Custom link</Link>
+      <Button size="sm">Custom action</Button>
+    </ToggletipActions>
+  </ToggletipContent>
+</Toggletip>
+```
+
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ## Feedback
 

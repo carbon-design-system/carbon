@@ -1469,6 +1469,21 @@ Map {
       "defaultProps": Object {
         "renderIcon": Object {
           "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "size": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "number",
+                  },
+                  Object {
+                    "type": "string",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
           "render": [Function],
         },
       },
@@ -1861,6 +1876,21 @@ Map {
         "iconDescription": "Settings",
         "renderIcon": Object {
           "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "size": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "number",
+                  },
+                  Object {
+                    "type": "string",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
           "render": [Function],
         },
       },
@@ -2702,7 +2732,6 @@ Map {
   "ExpandableTile" => Object {
     "defaultProps": Object {
       "expanded": false,
-      "onBeforeClick": [Function],
       "onClick": [Function],
       "tabIndex": 0,
       "tileCollapsedIconText": "Interact to expand Tile",
@@ -2725,9 +2754,6 @@ Map {
         "type": "string",
       },
       "light": [Function],
-      "onBeforeClick": Object {
-        "type": "func",
-      },
       "onClick": Object {
         "type": "func",
       },
@@ -3279,6 +3305,24 @@ Map {
       },
     },
   },
+  "GlobalTheme" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "theme": Object {
+        "args": Array [
+          Array [
+            "white",
+            "g10",
+            "g90",
+            "g100",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "Grid" => Object {
     "propTypes": Object {
       "as": Object {
@@ -3655,6 +3699,16 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "level": Object {
+        "args": Array [
+          Array [
+            0,
+            1,
+            2,
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -6465,6 +6519,21 @@ Map {
     "defaultProps": Object {
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "number",
+                },
+                Object {
+                  "type": "string",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        },
         "render": [Function],
       },
     },
@@ -6857,6 +6926,21 @@ Map {
       "iconDescription": "Settings",
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "number",
+                },
+                Object {
+                  "type": "string",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        },
         "render": [Function],
       },
     },
@@ -7563,11 +7647,6 @@ Map {
         "type": "oneOf",
       },
     },
-  },
-  "ThemeContext" => Object {
-    "$$typeof": Symbol(react.context),
-    "Consumer": "React.Consumer",
-    "Provider": "React.Provider",
   },
   "Tile" => Object {
     "$$typeof": Symbol(react.forward_ref),

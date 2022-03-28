@@ -31,21 +31,10 @@
     display: flex;
     width: rem(288px);
     height: auto;
-    padding-left: $spacing-05;
-    @if not enabled('enable-v11-release') {
-      margin-top: $spacing-03;
-      margin-right: $spacing-05;
-      margin-bottom: $spacing-03;
-    }
+    padding-left: rem(13px);
 
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     color: $text-inverse;
-
-    @if not enabled('enable-v11-release') {
-      &:first-child {
-        margin-top: $spacing-05;
-      }
-    }
 
     @include breakpoint(max) {
       width: rem(352px);
@@ -151,24 +140,8 @@
     margin-right: $spacing-05;
   }
 
-  @if feature-flags.enabled('enable-v11-release') {
-    .#{$prefix}--toast-notification__content {
-      @include type-style('body-compact-01');
-
-      margin-top: $spacing-05;
-      margin-right: $spacing-05;
-      margin-bottom: $spacing-05;
-      word-break: break-word;
-    }
-
-    .#{$prefix}--toast-notification--low-contrast
-      .#{$prefix}--toast-notification__content {
-      color: $text-primary;
-    }
-  } @else {
-    .#{$prefix}--toast-notification__details {
-      margin-right: $spacing-05;
-    }
+  .#{$prefix}--toast-notification__details {
+    margin-right: $spacing-05;
   }
 
   .#{$prefix}--toast-notification__close-button {
@@ -210,41 +183,39 @@
     fill: $icon-primary;
   }
 
-  @if not feature-flags.enabled('enable-v11-release') {
-    .#{$prefix}--toast-notification__title {
-      @include type-style('heading-compact-01');
+  .#{$prefix}--toast-notification__title {
+    @include type-style('heading-compact-01');
 
-      margin-top: $spacing-05;
-      font-weight: 600;
-      word-break: break-word;
-    }
+    margin-top: $spacing-05;
+    font-weight: 600;
+    word-break: break-word;
+  }
 
+  .#{$prefix}--toast-notification__subtitle {
+    @include type-style('body-compact-01');
+
+    margin-top: 0;
+    margin-bottom: $spacing-05;
+    color: $text-inverse;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__subtitle {
-      @include type-style('body-compact-01');
+    color: $text-primary;
+  }
 
-      margin-top: 0;
-      margin-bottom: $spacing-05;
-      color: $text-inverse;
-      word-break: break-word;
-    }
+  .#{$prefix}--toast-notification__caption {
+    @include type-style('body-compact-01');
 
-    .#{$prefix}--toast-notification--low-contrast
-      .#{$prefix}--toast-notification__subtitle {
-      color: $text-primary;
-    }
+    padding-top: $spacing-03;
+    margin-bottom: $spacing-05;
+    color: $text-inverse;
+  }
 
+  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__caption {
-      @include type-style('body-compact-01');
-
-      padding-top: $spacing-03;
-      margin-bottom: $spacing-05;
-      color: $text-inverse;
-    }
-
-    .#{$prefix}--toast-notification--low-contrast
-      .#{$prefix}--toast-notification__caption {
-      color: $text-primary;
-    }
+    color: $text-primary;
   }
 
   // Windows HCM fix
