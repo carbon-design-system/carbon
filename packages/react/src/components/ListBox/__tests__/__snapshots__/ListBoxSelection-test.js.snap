@@ -42,7 +42,7 @@ exports[`ListBoxSelection should render 1`] = `
     tabIndex={0}
     title="translation"
   >
-    <ForwardRef(Close16)>
+    <ForwardRef(Close)>
       <Icon
         fill="currentColor"
         height={16}
@@ -66,7 +66,7 @@ exports[`ListBoxSelection should render 1`] = `
           />
         </svg>
       </Icon>
-    </ForwardRef(Close16)>
+    </ForwardRef(Close)>
   </div>
 </ListBoxSelection>
 `;
@@ -123,7 +123,7 @@ exports[`ListBoxSelection should render 2`] = `
       tabIndex={0}
       title="translation"
     >
-      <ForwardRef(Close16)>
+      <ForwardRef(Close)>
         <Icon
           fill="currentColor"
           height={16}
@@ -147,7 +147,7 @@ exports[`ListBoxSelection should render 2`] = `
             />
           </svg>
         </Icon>
-      </ForwardRef(Close16)>
+      </ForwardRef(Close)>
     </div>
   </div>
 </ListBoxSelection>

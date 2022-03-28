@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import deprecate from '../../prop-types/deprecate';
 import { PrefixContext } from '../../internal/usePrefix';
 
@@ -117,7 +117,7 @@ export default class TimePickerSelect extends Component {
           {...rest}>
           {children}
         </select>
-        <ChevronDown16
+        <ChevronDown
           className={`${prefix}--select__arrow`}
           aria-label={ariaLabel ? ariaLabel : iconDescription}
         />

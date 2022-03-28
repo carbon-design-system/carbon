@@ -14,7 +14,7 @@ import FloatingMenu, {
   DIRECTION_TOP,
   DIRECTION_BOTTOM,
 } from '../../internal/FloatingMenu';
-import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { OverflowMenuVertical } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
@@ -241,7 +241,7 @@ class OverflowMenu extends Component {
     direction: DIRECTION_BOTTOM,
     flipped: false,
     focusTrap: true,
-    renderIcon: OverflowMenuVertical16,
+    renderIcon: OverflowMenuVertical,
     onClick: () => {},
     onKeyDown: () => {},
     onClose: () => {},

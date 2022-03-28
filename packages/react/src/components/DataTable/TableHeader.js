@@ -9,8 +9,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  ArrowUp20 as Arrow,
-  ArrowsVertical20 as Arrows,
+  ArrowUp as Arrow,
+  ArrowsVertical as Arrows,
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
@@ -118,8 +118,11 @@ const TableHeader = React.forwardRef(function TableHeader(
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
-          <Arrow className={`${prefix}--table-sort__icon`} />
-          <Arrows className={`${prefix}--table-sort__icon-unsorted`} />
+          <Arrow size={20} className={`${prefix}--table-sort__icon`} />
+          <Arrows
+            size={20}
+            className={`${prefix}--table-sort__icon-unsorted`}
+          />
         </span>
       </button>
     </th>

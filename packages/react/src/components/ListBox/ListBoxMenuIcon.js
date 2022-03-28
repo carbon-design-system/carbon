@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 
 export const translationIds = {
@@ -33,9 +33,9 @@ const ListBoxMenuIcon = ({ isOpen, translateWithId: t }) => {
   const description = isOpen ? t('close.menu') : t('open.menu');
   return (
     <div className={className}>
-      <ChevronDown16 name="chevron--down" aria-label={description}>
+      <ChevronDown name="chevron--down" aria-label={description}>
         <title>{description}</title>
-      </ChevronDown16>
+      </ChevronDown>
     </div>
   );
 };

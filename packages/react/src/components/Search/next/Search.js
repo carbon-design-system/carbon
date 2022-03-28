@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Search16, Close16 } from '@carbon/icons-react';
+import { Search as SearchIcon, Close } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
@@ -96,7 +96,7 @@ function Search({
   return (
     <div role="search" aria-labelledby={searchId} className={searchClasses}>
       <div className={`${prefix}--search-magnifier`} ref={magnifier}>
-        <SearchIcon icon={renderIcon} />
+        <CustomSearchIcon icon={renderIcon} />
       </div>
       <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
         {labelText}
@@ -122,7 +122,7 @@ function Search({
         disabled={disabled}
         onClick={clearInput}
         type="button">
-        <Close16 />
+        <Close />
       </button>
     </div>
   );
@@ -226,7 +226,7 @@ Search.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-function SearchIcon({ icon }) {
+function CustomSearchIcon({ icon }) {
   const prefix = usePrefix();
 
   if (icon) {
@@ -234,10 +234,10 @@ function SearchIcon({ icon }) {
       className: `${prefix}--search-magnifier-icon`,
     });
   }
-  return <Search16 className={`${prefix}--search-magnifier-icon`} />;
+  return <SearchIcon className={`${prefix}--search-magnifier-icon`} />;
 }
 
-SearchIcon.propTypes = {
+CustomSearchIcon.propTypes = {
   /**
    * Rendered icon for the Search. Can be a React component class
    */

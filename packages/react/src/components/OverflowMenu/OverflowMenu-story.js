@@ -11,7 +11,7 @@ import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { OverflowMenu } from './OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import mdx from './OverflowMenu.mdx';
-import { Filter16 } from '@carbon/icons-react';
+import { Filter } from '@carbon/icons-react';
 
 const directions = {
   'Bottom of the trigger button (bottom)': 'bottom',
@@ -87,7 +87,7 @@ _Default.story = {
 };
 
 export const RenderCustomIcon = () => (
-  <OverflowMenu renderIcon={Filter16}>
+  <OverflowMenu renderIcon={Filter}>
     <OverflowMenuItem itemText="Filter A" />
     <OverflowMenuItem itemText="Filter B" />
   </OverflowMenu>

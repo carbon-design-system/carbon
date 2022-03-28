@@ -10,9 +10,9 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import Link from '../Link';
 import {
-  Checkbox16,
-  CheckboxCheckedFilled16,
-  ChevronDown16,
+  Checkbox,
+  CheckboxCheckedFilled,
+  ChevronDown,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 import deprecate from '../../prop-types/deprecate';
@@ -309,7 +309,7 @@ export function SelectableTile(props) {
         onKeyDown={!disabled ? handleOnKeyDown : null}>
         <span
           className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
-          {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
+          {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
         </span>
         <span className={`${prefix}--tile-content`}>{children}</span>
       </label>
@@ -690,7 +690,7 @@ export class ExpandableTile extends Component {
           </div>
           <div className={`${prefix}--tile__chevron`}>
             <span>{isExpanded ? tileExpandedLabel : tileCollapsedLabel}</span>
-            <ChevronDown16 />
+            <ChevronDown />
           </div>
           <div className={`${prefix}--tile-content`}>{childrenAsArray[1]}</div>
         </div>
