@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { match, keys } from '../../internal/keyboard';
 import { warning } from '../../internal/warning';
-import deprecate from '../../prop-types/deprecate.js';
 import * as FeatureFlags from '@carbon/feature-flags';
 import { PrefixContext } from '../../internal/usePrefix';
 
@@ -67,17 +66,6 @@ export default class OverflowMenuItem extends React.Component {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onMouseUp: PropTypes.func,
-
-    /**
-     * `true` if this menu item should get focus when the menu gets open.
-     */
-    primaryFocus: deprecate(
-      PropTypes.bool,
-      'The `primaryFocus` prop has been deprecated as it is no longer used. ' +
-        'Feel free to remove this prop from <OverflowMenuItem>. This prop will ' +
-        'be removed in the next major release of `carbon-components-react`. ' +
-        'Opt for `selectorPrimaryFocus` in `<OverflowMenu>` instead'
-    ),
 
     /**
      * `true` if this menu item has long text and requires a browser tooltip
@@ -145,7 +133,6 @@ export default class OverflowMenuItem extends React.Component {
       // eslint-disable-next-line no-unused-vars
       handleOverflowMenuItemFocus,
       onKeyDown,
-      primaryFocus,
       wrapperClassName,
       requireTitle,
       index,
@@ -195,7 +182,10 @@ export default class OverflowMenuItem extends React.Component {
               <TagToUse
                 {...other}
                 {...{
-                  'data-floating-menu-primary-focus': primaryFocus || null,
+                  'data-floating-menu-primary-focus':
+                    (FeatureFlags.enabled('enable-v11-release') &&
+                      other.primaryFocus) ||
+                    null,
                 }}
                 role="menuitem"
                 href={href}
