@@ -7,8 +7,8 @@
 
 import React from 'react';
 import { default as Checkbox, CheckboxSkeleton } from '../';
-import { settings } from 'carbon-components';
-const { prefix } = settings;
+
+const prefix = 'cds';
 
 export default {
   title: 'Components/Checkbox',

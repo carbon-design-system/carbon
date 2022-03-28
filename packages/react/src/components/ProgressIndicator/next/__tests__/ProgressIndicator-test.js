@@ -10,7 +10,7 @@ import React from 'react';
 import { ProgressIndicator } from '../ProgressIndicator';
 import { ProgressStep } from '../../';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 function getActiveIndex(wrapper) {
   return wrapper

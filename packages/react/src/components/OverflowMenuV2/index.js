@@ -8,20 +8,18 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { OverflowMenuVertical } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import Menu from '../Menu';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const defaultSize = 'md';
 
 function OverflowMenuV2({
   children,
   className,
-  renderIcon: IconElement = OverflowMenuVertical16,
+  renderIcon: IconElement = OverflowMenuVertical,
   size = defaultSize,
   ...rest
 }) {
@@ -32,6 +30,7 @@ function OverflowMenuV2({
     [0, 0],
   ]);
   const triggerRef = useRef(null);
+  const prefix = usePrefix();
 
   function openMenu() {
     if (triggerRef.current) {

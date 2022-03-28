@@ -4,6 +4,9 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+
+import './feature-flags';
+
 export Accordion from './components/Accordion';
 export AccordionItem from './components/AccordionItem';
 export { AspectRatio } from './components/AspectRatio';
@@ -71,7 +74,6 @@ export {
   ColumnHang as unstable_ColumnHang,
   FlexGrid as unstable_FlexGrid,
 } from './components/Grid';
-export Icon from './components/Icon';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
 export ListItem from './components/ListItem';
@@ -150,7 +152,6 @@ export Toolbar, {
   ToolbarDivider,
 } from './components/Toolbar';
 export ToolbarSearch from './components/ToolbarSearch';
-export Tooltip from './components/Tooltip';
 export TooltipDefinition from './components/TooltipDefinition';
 export TooltipIcon from './components/TooltipIcon';
 export UnorderedList from './components/UnorderedList';
@@ -219,12 +220,9 @@ export {
   useFeatureFlag as unstable_useFeatureFlag,
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
-export {
-  Heading as unstable_Heading,
-  Section as unstable_Section,
-} from './components/Heading';
-export { IconButton as unstable_IconButton } from './components/IconButton';
-export { Layer as unstable_Layer } from './components/Layer';
+export { Heading, Section } from './components/Heading';
+export { IconButton } from './components/IconButton';
+export { Layer } from './components/Layer';
 export unstable_Menu, {
   MenuDivider as unstable_MenuDivider,
   MenuGroup as unstable_MenuGroup,
@@ -237,30 +235,13 @@ export {
   PageSelector as unstable_PageSelector,
   Pagination as unstable_Pagination,
 } from './components/Pagination/experimental';
-export {
-  Popover as unstable_Popover,
-  PopoverContent as unstable_PopoverContent,
-} from './components/Popover';
+export { Popover, PopoverContent } from './components/Popover';
 export { default as unstable_ProgressBar } from './components/ProgressBar';
-export {
-  HStack as unstable_HStack,
-  Stack as unstable_Stack,
-  VStack as unstable_VStack,
-} from './components/Stack';
-export { Tooltip as unstable_Tooltip } from './components/Tooltip/next';
-export { DefinitionTooltip as unstable_DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
+export { HStack, Stack, VStack } from './components/Stack';
+export { Tooltip } from './components/Tooltip/next';
+export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
-export {
-  TabPanel as unstable_TabPanel,
-  TabPanels as unstable_TabPanels,
-  TabList as unstable_TabList,
-  IconTab as unstable_IconTab,
-} from './components/Tabs';
-export { usePrefix as unstable_usePrefix } from './internal/usePrefix';
-export {
-  ThemeContext as unstable_ThemeContext,
-  Theme as unstable_Theme,
-  useTheme as unstable_useTheme,
-} from './components/Theme';
+export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
+export { GlobalTheme, Theme, useTheme } from './components/Theme';

@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import { settings } from 'carbon-components';
 import {
   ProgressIndicator,
   ProgressStep,
@@ -14,7 +13,7 @@ import {
 } from '../';
 import Tooltip from '../../Tooltip/next';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 export default {
   title: 'Components/ProgressIndicator',

@@ -8,9 +8,8 @@
 import React from 'react';
 import SkeletonIcon from '../SkeletonIcon';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('SkeletonIcon', () => {
   const wrapper = shallow(<SkeletonIcon />);

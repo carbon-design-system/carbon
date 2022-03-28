@@ -500,8 +500,7 @@
   //-------------------------------------------------
   //SMALL TOOLBAR
   //-------------------------------------------------
-  // V11: remove --small
-  .#{$prefix}--table-toolbar--small,
+
   .#{$prefix}--table-toolbar--sm {
     height: rem(32px);
     min-height: rem(32px);
@@ -605,26 +604,19 @@
   //-------------------------------------------------
   // SMALL BATCH ACTIONS
   //-------------------------------------------------
-  // V11: remove --small selector block
-  .#{$prefix}--table-toolbar--small
-    .#{$prefix}--batch-actions
-    .#{$prefix}--action-list,
+
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--batch-actions
     .#{$prefix}--action-list {
     height: rem(32px);
   }
 
-  // V11: remove --small selector block
-  .#{$prefix}--table-toolbar--small .#{$prefix}--toolbar-action,
   .#{$prefix}--table-toolbar--sm .#{$prefix}--toolbar-action {
     width: rem(32px);
     height: rem(32px);
     padding: $spacing-03 0;
   }
 
-  // V11: remove --small selector block
-  .#{$prefix}--table-toolbar--small .#{$prefix}--btn--primary,
   .#{$prefix}--table-toolbar--sm .#{$prefix}--btn--primary {
     height: rem(32px);
     min-height: auto;
@@ -632,18 +624,11 @@
     padding-bottom: calc(0.375rem - 3px);
   }
 
-  // V11: remove --small selector block
-  .#{$prefix}--table-toolbar--small
-    .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before,
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--btn--primary.#{$prefix}--batch-summary__cancel::before {
     top: rem(8px);
   }
 
-  // V11: remove --small selector block
-  .#{$prefix}--table-toolbar--small
-    .#{$prefix}--toolbar-action
-    ~ .#{$prefix}--btn,
   .#{$prefix}--table-toolbar--sm
     .#{$prefix}--toolbar-action
     ~ .#{$prefix}--btn {
@@ -651,8 +636,6 @@
     height: rem(32px);
   }
 
-  // V11: remove --small selector block
-  .#{$prefix}--table-toolbar--small .#{$prefix}--batch-summary,
   .#{$prefix}--table-toolbar--sm .#{$prefix}--batch-summary {
     min-height: 2rem;
   }

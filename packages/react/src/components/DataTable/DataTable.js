@@ -16,6 +16,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -116,19 +117,20 @@ export default class DataTable extends React.Component {
 
     /**
      *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
-     *  The previous terms (`compact`, `short`, `normal`, and `tall`) will be removed in the next major release.
      */
-    size: PropTypes.oneOf([
-      'compact',
-      'short',
-      'normal',
-      'tall',
-      'xs',
-      'sm',
-      'md',
-      'lg',
-      'xl',
-    ]),
+    size: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
+      : PropTypes.oneOf([
+          'compact',
+          'short',
+          'normal',
+          'tall',
+          'xs',
+          'sm',
+          'md',
+          'lg',
+          'xl',
+        ]),
 
     /**
      * Optional hook to manually control sorting of the rows.
@@ -163,7 +165,7 @@ export default class DataTable extends React.Component {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
     locale: 'en',
-    size: 'normal',
+    size: FeatureFlags.enabled('enable-v11-release') ? 'lg' : 'normal',
     overflowMenuOnHover: true,
     translateWithId,
   };

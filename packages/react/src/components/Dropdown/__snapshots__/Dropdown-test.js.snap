@@ -45,11 +45,11 @@ exports[`Dropdown should render 1`] = `
   type="default"
 >
   <div
-    className="bx--dropdown__wrapper bx--list-box__wrapper"
+    className="cds--dropdown__wrapper cds--list-box__wrapper"
     placeholder="Filter..."
   >
     <ListBox
-      className="bx--dropdown"
+      className="cds--dropdown"
       disabled={false}
       id="test-dropdown"
       isOpen={false}
@@ -57,7 +57,7 @@ exports[`Dropdown should render 1`] = `
       type="default"
     >
       <div
-        className="bx--dropdown bx--list-box"
+        className="cds--dropdown cds--list-box"
         id="test-dropdown"
         onClick={[Function]}
         onKeyDown={[Function]}
@@ -67,7 +67,7 @@ exports[`Dropdown should render 1`] = `
           aria-expanded={false}
           aria-haspopup="listbox"
           aria-labelledby="downshift-0-label downshift-0-toggle-button"
-          className="bx--list-box__field"
+          className="cds--list-box__field"
           disabled={false}
           id="downshift-0-toggle-button"
           onClick={[Function]}
@@ -76,7 +76,7 @@ exports[`Dropdown should render 1`] = `
           type="button"
         >
           <span
-            className="bx--list-box__label"
+            className="cds--list-box__label"
           >
             input
           </span>
@@ -85,9 +85,9 @@ exports[`Dropdown should render 1`] = `
             translateWithId={[Function]}
           >
             <div
-              className="bx--list-box__menu-icon"
+              className="cds--list-box__menu-icon"
             >
-              <ForwardRef(ChevronDown16)
+              <ForwardRef(ChevronDown)
                 aria-label="Open menu"
                 name="chevron--down"
               >
@@ -121,7 +121,7 @@ exports[`Dropdown should render 1`] = `
                     </title>
                   </svg>
                 </Icon>
-              </ForwardRef(ChevronDown16)>
+              </ForwardRef(ChevronDown)>
             </div>
           </ListBoxMenuIcon>
         </button>
@@ -136,7 +136,7 @@ exports[`Dropdown should render 1`] = `
         >
           <div
             aria-labelledby="downshift-0-label"
-            className="bx--list-box__menu"
+            className="cds--list-box__menu"
             id="downshift-0-menu"
             onBlur={[Function]}
             onKeyDown={[Function]}
@@ -196,11 +196,11 @@ exports[`Dropdown should render custom item components 1`] = `
   type="default"
 >
   <div
-    className="bx--dropdown__wrapper bx--list-box__wrapper"
+    className="cds--dropdown__wrapper cds--list-box__wrapper"
     placeholder="Filter..."
   >
     <ListBox
-      className="bx--dropdown bx--dropdown--open"
+      className="cds--dropdown cds--dropdown--open"
       disabled={false}
       id="test-dropdown"
       isOpen={true}
@@ -208,7 +208,7 @@ exports[`Dropdown should render custom item components 1`] = `
       type="default"
     >
       <div
-        className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
+        className="cds--dropdown cds--dropdown--open cds--list-box cds--list-box--expanded"
         id="test-dropdown"
         onClick={[Function]}
         onKeyDown={[Function]}
@@ -218,7 +218,7 @@ exports[`Dropdown should render custom item components 1`] = `
           aria-expanded={true}
           aria-haspopup="listbox"
           aria-labelledby="downshift-6-label downshift-6-toggle-button"
-          className="bx--list-box__field"
+          className="cds--list-box__field"
           disabled={false}
           id="downshift-6-toggle-button"
           onClick={[Function]}
@@ -227,7 +227,7 @@ exports[`Dropdown should render custom item components 1`] = `
           type="button"
         >
           <span
-            className="bx--list-box__label"
+            className="cds--list-box__label"
           >
             input
           </span>
@@ -236,9 +236,9 @@ exports[`Dropdown should render custom item components 1`] = `
             translateWithId={[Function]}
           >
             <div
-              className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+              className="cds--list-box__menu-icon cds--list-box__menu-icon--open"
             >
-              <ForwardRef(ChevronDown16)
+              <ForwardRef(ChevronDown)
                 aria-label="Close menu"
                 name="chevron--down"
               >
@@ -272,7 +272,7 @@ exports[`Dropdown should render custom item components 1`] = `
                     </title>
                   </svg>
                 </Icon>
-              </ForwardRef(ChevronDown16)>
+              </ForwardRef(ChevronDown)>
             </div>
           </ListBoxMenuIcon>
         </button>
@@ -287,7 +287,7 @@ exports[`Dropdown should render custom item components 1`] = `
         >
           <div
             aria-labelledby="downshift-6-label"
-            className="bx--list-box__menu"
+            className="cds--list-box__menu"
             id="downshift-6-menu"
             onBlur={[Function]}
             onKeyDown={[Function]}
@@ -307,14 +307,14 @@ exports[`Dropdown should render custom item components 1`] = `
             >
               <div
                 aria-selected="false"
-                className="bx--list-box__menu-item"
+                className="cds--list-box__menu-item"
                 id="downshift-6-item-0"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
               >
                 <div
-                  className="bx--list-box__menu-item__option"
+                  className="cds--list-box__menu-item__option"
                 >
                   <itemToElement
                     id="id-0"
@@ -343,14 +343,14 @@ exports[`Dropdown should render custom item components 1`] = `
             >
               <div
                 aria-selected="false"
-                className="bx--list-box__menu-item"
+                className="cds--list-box__menu-item"
                 id="downshift-6-item-1"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
               >
                 <div
-                  className="bx--list-box__menu-item__option"
+                  className="cds--list-box__menu-item__option"
                 >
                   <itemToElement
                     id="id-1"
@@ -379,14 +379,14 @@ exports[`Dropdown should render custom item components 1`] = `
             >
               <div
                 aria-selected="false"
-                className="bx--list-box__menu-item"
+                className="cds--list-box__menu-item"
                 id="downshift-6-item-2"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
               >
                 <div
-                  className="bx--list-box__menu-item__option"
+                  className="cds--list-box__menu-item__option"
                 >
                   <itemToElement
                     id="id-2"
@@ -415,14 +415,14 @@ exports[`Dropdown should render custom item components 1`] = `
             >
               <div
                 aria-selected="false"
-                className="bx--list-box__menu-item"
+                className="cds--list-box__menu-item"
                 id="downshift-6-item-3"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
               >
                 <div
-                  className="bx--list-box__menu-item__option"
+                  className="cds--list-box__menu-item__option"
                 >
                   <itemToElement
                     id="id-3"
@@ -451,14 +451,14 @@ exports[`Dropdown should render custom item components 1`] = `
             >
               <div
                 aria-selected="false"
-                className="bx--list-box__menu-item"
+                className="cds--list-box__menu-item"
                 id="downshift-6-item-4"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
               >
                 <div
-                  className="bx--list-box__menu-item__option"
+                  className="cds--list-box__menu-item__option"
                 >
                   <itemToElement
                     id="id-4"
@@ -505,11 +505,11 @@ exports[`Dropdown should render with strings as items 1`] = `
   type="default"
 >
   <div
-    className="bx--dropdown__wrapper bx--list-box__wrapper"
+    className="cds--dropdown__wrapper cds--list-box__wrapper"
     placeholder="Filter..."
   >
     <ListBox
-      className="bx--dropdown bx--dropdown--open"
+      className="cds--dropdown cds--dropdown--open"
       disabled={false}
       id="test-dropdown"
       isOpen={true}
@@ -517,7 +517,7 @@ exports[`Dropdown should render with strings as items 1`] = `
       type="default"
     >
       <div
-        className="bx--dropdown bx--dropdown--open bx--list-box bx--list-box--expanded"
+        className="cds--dropdown cds--dropdown--open cds--list-box cds--list-box--expanded"
         id="test-dropdown"
         onClick={[Function]}
         onKeyDown={[Function]}
@@ -527,7 +527,7 @@ exports[`Dropdown should render with strings as items 1`] = `
           aria-expanded={true}
           aria-haspopup="listbox"
           aria-labelledby="downshift-4-label downshift-4-toggle-button"
-          className="bx--list-box__field"
+          className="cds--list-box__field"
           disabled={false}
           id="downshift-4-toggle-button"
           onClick={[Function]}
@@ -536,7 +536,7 @@ exports[`Dropdown should render with strings as items 1`] = `
           type="button"
         >
           <span
-            className="bx--list-box__label"
+            className="cds--list-box__label"
           >
             input
           </span>
@@ -545,9 +545,9 @@ exports[`Dropdown should render with strings as items 1`] = `
             translateWithId={[Function]}
           >
             <div
-              className="bx--list-box__menu-icon bx--list-box__menu-icon--open"
+              className="cds--list-box__menu-icon cds--list-box__menu-icon--open"
             >
-              <ForwardRef(ChevronDown16)
+              <ForwardRef(ChevronDown)
                 aria-label="Close menu"
                 name="chevron--down"
               >
@@ -581,7 +581,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                     </title>
                   </svg>
                 </Icon>
-              </ForwardRef(ChevronDown16)>
+              </ForwardRef(ChevronDown)>
             </div>
           </ListBoxMenuIcon>
         </button>
@@ -596,7 +596,7 @@ exports[`Dropdown should render with strings as items 1`] = `
         >
           <div
             aria-labelledby="downshift-4-label"
-            className="bx--list-box__menu"
+            className="cds--list-box__menu"
             id="downshift-4-menu"
             onBlur={[Function]}
             onKeyDown={[Function]}
@@ -616,14 +616,14 @@ exports[`Dropdown should render with strings as items 1`] = `
             >
               <div
                 aria-selected="false"
-                className="bx--list-box__menu-item"
+                className="cds--list-box__menu-item"
                 id="downshift-4-item-0"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
               >
                 <div
-                  className="bx--list-box__menu-item__option"
+                  className="cds--list-box__menu-item__option"
                 >
                   zar
                 </div>
@@ -641,14 +641,14 @@ exports[`Dropdown should render with strings as items 1`] = `
             >
               <div
                 aria-selected="false"
-                className="bx--list-box__menu-item"
+                className="cds--list-box__menu-item"
                 id="downshift-4-item-1"
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
               >
                 <div
-                  className="bx--list-box__menu-item__option"
+                  className="cds--list-box__menu-item__option"
                 >
                   doz
                 </div>

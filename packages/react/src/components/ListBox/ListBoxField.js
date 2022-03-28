@@ -6,10 +6,8 @@
  */
 
 import React from 'react';
-import { settings } from 'carbon-components';
 import PropTypes from 'prop-types';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 // No longer used, left export for backward-compatibility
 export const translationIds = {};
@@ -20,6 +18,8 @@ export const translationIds = {};
  * `role` to make sure a user can focus the given field.
  */
 function ListBoxField({ children, disabled, tabIndex, ...rest }) {
+  const prefix = usePrefix();
+
   return (
     <div
       className={`${prefix}--list-box__field`}

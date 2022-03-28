@@ -5,13 +5,13 @@ exports[`SideNavHeader should render 1`] = `
   renderIcon={[Function]}
 >
   <header
-    className="bx--side-nav__header"
+    className="cds--side-nav__header"
   >
     <SideNavIcon
       small={false}
     >
       <div
-        className="bx--side-nav__icon"
+        className="cds--side-nav__icon"
       >
         <renderIcon>
           <div>

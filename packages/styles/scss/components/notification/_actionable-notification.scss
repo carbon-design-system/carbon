@@ -78,7 +78,7 @@
   }
 
   .#{$prefix}--actionable-notification a:focus {
-    outline: 1px solid $link-inverse;
+    outline: 1px solid $focus-inverse;
   }
 
   .#{$prefix}--actionable-notification.#{$prefix}--actionable-notification--low-contrast
@@ -88,20 +88,20 @@
 
   .#{$prefix}--actionable-notification--low-contrast {
     color: $text-primary;
+  }
 
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-      border-width: 1px 1px 1px 0;
-      border-style: solid;
-      content: '';
-      filter: opacity(0.4);
-      pointer-events: none;
-    }
+  .#{$prefix}--actionable-notification--low-contrast:not(.#{$prefix}--actionable-notification--toast)::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    border-width: 1px 1px 1px 0;
+    border-style: solid;
+    content: '';
+    filter: opacity(0.4);
+    pointer-events: none;
   }
 
   .#{$prefix}--actionable-notification--error {
@@ -192,13 +192,13 @@
   .#{$prefix}--actionable-notification__details {
     display: flex;
     flex-grow: 1;
-    margin: 0 $spacing-09 0 $spacing-05;
+    margin: 0 $spacing-09 0 rem(13px);
   }
 
   .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--toast)
     .#{$prefix}--actionable-notification__details {
     @include breakpoint(md) {
-      margin: 0 $spacing-05;
+      margin: 0 rem(13px);
     }
   }
 
@@ -220,12 +220,48 @@
     padding: rem(15px) 0;
   }
 
+  .#{$prefix}--actionable-notification--toast
+    .#{$prefix}--actionable-notification__text-wrapper {
+    padding: rem(15px) 0 rem(23px) 0;
+  }
+
   .#{$prefix}--actionable-notification__content {
     @include type-style('body-compact-01');
 
+    display: flex;
     word-break: break-word;
   }
 
+  .#{$prefix}--actionable-notification--toast
+    .#{$prefix}--actionable-notification__content {
+    display: block;
+  }
+
+  .#{$prefix}--actionable-notification__title {
+    @include type-style('heading-compact-01');
+
+    margin-right: $spacing-02;
+    font-weight: 600;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--actionable-notification--toast
+    .#{$prefix}--actionable-notification__title {
+    margin-right: 0;
+  }
+
+  .#{$prefix}--actionable-notification__subtitle {
+    @include type-style('body-compact-01');
+
+    margin-top: 0;
+    color: $text-inverse;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast
+    .#{$prefix}--actionable-notification__subtitle {
+    color: $text-primary;
+  }
   /* Ghost action button when inline */
   .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
     height: rem(32px);
@@ -273,10 +309,13 @@
 
   /* Tertiary action button when not inline (toast) */
   .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
-    margin-bottom: $spacing-03;
+    padding: 0 $spacing-05;
+    margin-bottom: $spacing-05;
 
-    // Button should be left aligned with text. 20px is the width of the notification icon
-    margin-left: calc(#{$spacing-07} + #{rem(20px)});
+    // Button should be left aligned with text.
+    // 20px is the width of the notification icon
+    // 2px is the width of the left border that should be negated
+    margin-left: calc(#{$spacing-07} + #{rem(20px)} - #{rem(2px)});
   }
 
   // Tertiary button styles by default use mostly "inverse" tokens. Since the non-low-contrast notification

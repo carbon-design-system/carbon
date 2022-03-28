@@ -8,9 +8,8 @@
 import React from 'react';
 import ProgressBar from './ProgressBar';
 import { render } from '@testing-library/react';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('ProgressBar', () => {
   const props = {

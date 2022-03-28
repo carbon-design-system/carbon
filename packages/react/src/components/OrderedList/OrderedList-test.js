@@ -9,9 +9,8 @@ import React from 'react';
 import OrderedList from '../OrderedList';
 import ListItem from '../ListItem';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('OrderedList', () => {
   describe('Renders as expected', () => {

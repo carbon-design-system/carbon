@@ -6,14 +6,11 @@
  */
 
 import findLast from 'lodash.findlast';
-import { settings } from 'carbon-components';
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
   DOCUMENT_POSITION_BROAD_FOLLOWING,
   selectorTabbable,
 } from './keyboard/navigation';
-
-const { prefix } = settings;
 
 /**
  * @param {Node} node A DOM node.
@@ -23,8 +20,8 @@ const { prefix } = settings;
 function elementOrParentIsFloatingMenu(node, selectorsFloatingMenus = []) {
   if (node && typeof node.closest === 'function') {
     const allSelectorsFloatingMenus = [
-      `.${prefix}--overflow-menu-options`,
-      `.${prefix}--tooltip`,
+      `.cds--overflow-menu-options`,
+      `.cds--tooltip`,
       '.flatpickr-calendar',
       ...selectorsFloatingMenus,
     ];

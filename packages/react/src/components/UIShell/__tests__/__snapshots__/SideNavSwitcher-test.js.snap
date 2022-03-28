@@ -14,23 +14,23 @@ exports[`SideNavSwitcher should render 1`] = `
   }
 >
   <div
-    className="bx--side-nav__switcher custom-classname"
+    className="cds--side-nav__switcher custom-classname"
   >
     <label
-      className="bx--assistive-text"
+      className="cds--assistive-text"
       htmlFor="side-nav-switcher"
     >
       label
     </label>
     <select
-      className="bx--side-nav__select"
+      className="cds--side-nav__select"
       defaultValue=""
       id="carbon-side-nav-switcher"
       onBlur={[MockFunction]}
       onChange={[MockFunction]}
     >
       <option
-        className="bx--side-nav__option"
+        className="cds--side-nav__option"
         disabled={true}
         hidden={true}
         value=""
@@ -38,21 +38,21 @@ exports[`SideNavSwitcher should render 1`] = `
         label
       </option>
       <option
-        className="bx--side-nav__option"
+        className="cds--side-nav__option"
         key="Option 1"
         value="Option 1"
       >
         Option 1
       </option>
       <option
-        className="bx--side-nav__option"
+        className="cds--side-nav__option"
         key="Option 2"
         value="Option 2"
       >
         Option 2
       </option>
       <option
-        className="bx--side-nav__option"
+        className="cds--side-nav__option"
         key="Option 3"
         value="Option 3"
       >
@@ -60,9 +60,11 @@ exports[`SideNavSwitcher should render 1`] = `
       </option>
     </select>
     <div
-      className="bx--side-nav__switcher-chevron"
+      className="cds--side-nav__switcher-chevron"
     >
-      <ForwardRef(ChevronDown20)>
+      <ForwardRef(ChevronDown)
+        size={20}
+      >
         <Icon
           fill="currentColor"
           height={20}
@@ -86,7 +88,7 @@ exports[`SideNavSwitcher should render 1`] = `
             />
           </svg>
         </Icon>
-      </ForwardRef(ChevronDown20)>
+      </ForwardRef(ChevronDown)>
     </div>
   </div>
 </SideNavSwitcher>

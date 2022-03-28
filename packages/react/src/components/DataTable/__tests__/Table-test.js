@@ -8,9 +8,8 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { Table } from '../';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('DataTable.Table', () => {
   it('should render', () => {

@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronDown20 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export class SideNavMenu extends React.Component {
+  static contextType = PrefixContext;
+
   static propTypes = {
     buttonRef: PropTypes.oneOfType([
       PropTypes.func,
@@ -115,6 +115,7 @@ export class SideNavMenu extends React.Component {
   };
 
   render() {
+    const { context: prefix } = this;
     const {
       buttonRef,
       className: customClassName,
@@ -167,7 +168,7 @@ export class SideNavMenu extends React.Component {
           )}
           <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
           <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
-            <ChevronDown20 />
+            <ChevronDown size={20} />
           </SideNavIcon>
         </button>
         <ul className={`${prefix}--side-nav__menu`}>{children}</ul>

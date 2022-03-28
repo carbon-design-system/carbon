@@ -9,10 +9,8 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect, useCallback } from 'react';
 import debounce from 'lodash.debounce';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import { composeEventHandlers } from '../../tools/events';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export default function Copy({
   children,
@@ -24,6 +22,7 @@ export default function Copy({
   ...other
 }) {
   const [animation, setAnimation] = useState('');
+  const prefix = usePrefix();
   const classNames = classnames(className, `${prefix}--copy`, {
     [`${prefix}--copy-btn--animating`]: animation,
     [`${prefix}--copy-btn--${animation}`]: animation,

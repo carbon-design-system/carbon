@@ -5,19 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  Close16,
-  WarningFilled16,
-  CheckmarkFilled16,
-} from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Close, WarningFilled, CheckmarkFilled } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 import Loading from '../Loading';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function Filename({ iconDescription, status, invalid, ...rest }) {
+  const prefix = usePrefix();
   switch (status) {
     case 'uploading':
       return (
@@ -26,24 +21,24 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
     case 'edit':
       return (
         <>
-          {invalid && <WarningFilled16 className={`${prefix}--file-invalid`} />}
+          {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
           <button
             aria-label={iconDescription}
             className={`${prefix}--file-close`}
             type="button"
             {...rest}>
-            <Close16 />
+            <Close />
           </button>
         </>
       );
     case 'complete':
       return (
-        <CheckmarkFilled16
+        <CheckmarkFilled
           aria-label={iconDescription}
           className={`${prefix}--file-complete`}
           {...rest}>
           {iconDescription && <title>{iconDescription}</title>}
-        </CheckmarkFilled16>
+        </CheckmarkFilled>
       );
     default:
       return null;

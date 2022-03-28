@@ -7,7 +7,7 @@ exports[`Header should render 1`] = `
 >
   <header
     aria-label="label"
-    className="bx--header custom-class"
+    className="cds--header custom-class"
   />
 </Header>
 `;

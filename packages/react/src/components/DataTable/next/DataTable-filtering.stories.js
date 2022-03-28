@@ -42,6 +42,19 @@ export default {
     TableHeader,
     TableRow,
   },
+  argTypes: {
+    size: {
+      options: ['xs', 'sm', 'md', 'lg', 'xl'],
+      control: { type: 'select' },
+    },
+    useZebraStyles: {
+      control: { type: 'boolean' },
+    },
+  },
+  args: {
+    size: 'lg',
+    useZebraStyles: false,
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -49,8 +62,8 @@ export default {
   },
 };
 
-export const Usage = () => (
-  <DataTable rows={rows} headers={headers}>
+export const Usage = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
     {({
       rows,
       headers,
