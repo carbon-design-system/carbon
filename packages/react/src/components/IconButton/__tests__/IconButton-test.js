@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Edit16 } from '@carbon/icons-react';
+import { Edit } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { IconButton } from '../';
@@ -16,7 +16,7 @@ describe('IconButton', () => {
     render(
       <FeatureFlags flags={{ 'enable-v11-release': true }}>
         <IconButton label="edit">
-          <Edit16 />
+          <Edit />
         </IconButton>
       </FeatureFlags>
     );
@@ -27,7 +27,7 @@ describe('IconButton', () => {
     render(
       <FeatureFlags flags={{ 'enable-v11-release': true }}>
         <IconButton label="edit" data-testid="icon-button">
-          <Edit16 />
+          <Edit />
         </IconButton>
       </FeatureFlags>
     );
@@ -40,7 +40,7 @@ describe('IconButton', () => {
     render(
       <FeatureFlags flags={{ 'enable-v11-release': true }}>
         <IconButton label="edit" data-testid="icon-button" disabled>
-          <Edit16 />
+          <Edit />
         </IconButton>
       </FeatureFlags>
     );
@@ -52,7 +52,7 @@ describe('IconButton', () => {
     render(
       <FeatureFlags flags={{ 'enable-v11-release': true }}>
         <IconButton label="edit" data-testid="icon-button" ref={ref}>
-          <Edit16 />
+          <Edit />
         </IconButton>
       </FeatureFlags>
     );

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
+import { ChevronLeft, ChevronRight } from '@carbon/icons-react';
 import cx from 'classnames';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
@@ -321,7 +321,7 @@ function TabList({
         className={previousButtonClasses}
         type="button"
         {...leftOverflowButtonProps}>
-        <ChevronLeft16 />
+        <ChevronLeft />
       </button>
       {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
       <div
@@ -351,7 +351,7 @@ function TabList({
         className={nextButtonClasses}
         type="button"
         {...rightOverflowButtonProps}>
-        <ChevronRight16 />
+        <ChevronRight />
       </button>
     </div>
   );

@@ -11,7 +11,7 @@ import React from 'react';
 import { mount } from '@cypress/react';
 import Tag from './Tag';
 import TagSkeleton from './Tag.Skeleton';
-import { Tag16 } from '@carbon/icons-react';
+import { Tag as TagIcon } from '@carbon/icons-react';
 
 describe('Tag', () => {
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('Tag', () => {
         <Tag onClick={() => {}}>This is an interactive tag</Tag>
         <Tag size="sm">This is a small tag</Tag>
         <Tag filter>This is a filter tag</Tag>
-        <Tag renderIcon={Tag16}>Custom icon</Tag>
+        <Tag renderIcon={TagIcon}>Custom icon</Tag>
         <Tag filter disabled>
           Disabled filter tag
         </Tag>

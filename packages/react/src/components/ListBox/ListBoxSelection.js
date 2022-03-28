@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Close16 } from '@carbon/icons-react';
+import { Close } from '@carbon/icons-react';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -76,7 +76,7 @@ const ListBoxSelection = ({
         disabled={disabled}
         aria-label={t('clear.all')}
         title={description}>
-        <Close16 />
+        <Close />
       </div>
     </div>
   ) : (
@@ -89,7 +89,7 @@ const ListBoxSelection = ({
       aria-label={description}
       title={description}>
       {selectionCount}
-      <Close16 />
+      <Close />
     </div>
   );
 };

@@ -69,7 +69,6 @@ function getRollupConfig(input) {
       ...Object.keys(packageJson.peerDependencies),
       ...Object.keys(packageJson.dependencies),
       ...Object.keys(packageJson.devDependencies),
-      '@carbon/icons-react/next',
     ],
     plugins: [
       nodeResolve(),

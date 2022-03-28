@@ -8,7 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { Close20 } from '@carbon/icons-react';
+import { Close } from '@carbon/icons-react';
 import { usePrefix } from '../../../internal/usePrefix';
 
 export const ModalHeader = React.forwardRef(function ModalHeader(
@@ -74,7 +74,7 @@ export const ModalHeader = React.forwardRef(function ModalHeader(
         title={iconDescription}
         aria-label={iconDescription}
         type="button">
-        <Close20 className={closeIconClass} />
+        <Close size={20} className={closeIconClass} />
       </button>
     </div>
   );

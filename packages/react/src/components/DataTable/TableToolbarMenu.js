@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
-import { Settings16 } from '@carbon/icons-react';
+import { Settings } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
 
 const TableToolbarMenu = ({
@@ -39,7 +39,7 @@ const TableToolbarMenu = ({
 };
 
 TableToolbarMenu.defaultProps = {
-  renderIcon: Settings16,
+  renderIcon: Settings,
   iconDescription: 'Settings',
 };
 

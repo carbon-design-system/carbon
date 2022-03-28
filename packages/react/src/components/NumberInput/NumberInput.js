@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Add16, Subtract16 } from '@carbon/icons-react';
+import { Add, Subtract } from '@carbon/icons-react';
 import * as FeatureFlags from '@carbon/feature-flags';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
@@ -514,7 +514,7 @@ class NumberInput extends Component {
                               title={decrementNumLabel || iconDescription}
                               aria-label={decrementNumLabel || iconDescription}
                               tabIndex="-1">
-                              <Subtract16 className="down-icon" />
+                              <Subtract className="down-icon" />
                             </button>
                             <div
                               className={`${prefix}--number__rule-divider`}></div>
@@ -528,7 +528,7 @@ class NumberInput extends Component {
                               title={incrementNumLabel || iconDescription}
                               aria-label={incrementNumLabel || iconDescription}
                               tabIndex="-1">
-                              <Add16 className="up-icon" />
+                              <Add className="up-icon" />
                             </button>
                             <div
                               className={`${prefix}--number__rule-divider`}></div>
