@@ -1469,6 +1469,21 @@ Map {
       "defaultProps": Object {
         "renderIcon": Object {
           "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "size": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "number",
+                  },
+                  Object {
+                    "type": "string",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
           "render": [Function],
         },
       },
@@ -1861,6 +1876,21 @@ Map {
         "iconDescription": "Settings",
         "renderIcon": Object {
           "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "size": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "number",
+                  },
+                  Object {
+                    "type": "string",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
           "render": [Function],
         },
       },
@@ -2702,7 +2732,6 @@ Map {
   "ExpandableTile" => Object {
     "defaultProps": Object {
       "expanded": false,
-      "onBeforeClick": [Function],
       "onClick": [Function],
       "tabIndex": 0,
       "tileCollapsedIconText": "Interact to expand Tile",
@@ -2725,9 +2754,6 @@ Map {
         "type": "string",
       },
       "light": [Function],
-      "onBeforeClick": Object {
-        "type": "func",
-      },
       "onClick": Object {
         "type": "func",
       },
@@ -6493,6 +6519,21 @@ Map {
     "defaultProps": Object {
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "number",
+                },
+                Object {
+                  "type": "string",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        },
         "render": [Function],
       },
     },
@@ -6885,6 +6926,21 @@ Map {
       "iconDescription": "Settings",
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "number",
+                },
+                Object {
+                  "type": "string",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        },
         "render": [Function],
       },
     },

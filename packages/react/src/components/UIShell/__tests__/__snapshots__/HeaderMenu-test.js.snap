@@ -69,7 +69,7 @@ exports[`HeaderMenu should render 1`] = `
         tabIndex={0}
       >
         test
-        <ForwardRef(ChevronDown16)
+        <ForwardRef(ChevronDown)
           className="cds--header__menu-arrow"
         >
           <Icon
@@ -97,7 +97,7 @@ exports[`HeaderMenu should render 1`] = `
               />
             </svg>
           </Icon>
-        </ForwardRef(ChevronDown16)>
+        </ForwardRef(ChevronDown)>
       </a>
       <ul
         aria-label="Accessibility label"

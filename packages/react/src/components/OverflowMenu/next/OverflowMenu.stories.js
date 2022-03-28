@@ -9,7 +9,7 @@ import React from 'react';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../../OverflowMenuItem';
 import mdx from '../OverflowMenu.mdx';
-import { Filter16 } from '@carbon/icons-react';
+import { Filter } from '@carbon/icons-react';
 
 export default {
   title: 'Components/OverflowMenu',
@@ -48,7 +48,7 @@ Default.story = {
 };
 
 export const RenderCustomIcon = (args) => (
-  <OverflowMenu renderIcon={Filter16} {...args}>
+  <OverflowMenu renderIcon={Filter} {...args}>
     <OverflowMenuItem itemText="Filter A" />
     <OverflowMenuItem itemText="Filter B" />
   </OverflowMenu>

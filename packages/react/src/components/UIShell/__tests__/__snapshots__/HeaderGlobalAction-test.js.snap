@@ -36,7 +36,9 @@ exports[`HeaderGlobalAction should render 1`] = `
       >
         Accessibility label
       </div>
-      <ForwardRef(Fade32)>
+      <ForwardRef(Fade)
+        size={32}
+      >
         <Icon
           fill="currentColor"
           height={32}
@@ -60,7 +62,7 @@ exports[`HeaderGlobalAction should render 1`] = `
             />
           </svg>
         </Icon>
-      </ForwardRef(Fade32)>
+      </ForwardRef(Fade)>
     </button>
   </Button>
 </HeaderGlobalAction>

@@ -8,7 +8,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
+import { CaretRight, CaretLeft } from '@carbon/icons-react';
 import Button from '../../Button';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
@@ -158,7 +158,7 @@ function Pagination({
               )}
               label={backwardText}
               onClick={() => decrementPage()}>
-              <CaretLeft16 />
+              <CaretLeft />
             </IconButton>
             <IconButton
               align="top-right"
@@ -173,7 +173,7 @@ function Pagination({
               )}
               label={forwardText}
               onClick={() => incrementPage()}>
-              <CaretRight16 />
+              <CaretRight />
             </IconButton>
           </>
         ) : (
@@ -189,7 +189,7 @@ function Pagination({
               onClick={() => decrementPage()}
               disabled={backButtonDisabled}
               hasIconOnly
-              renderIcon={CaretLeft16}
+              renderIcon={CaretLeft}
               tooltipAlignment="center"
               tooltipPosition="top"
               iconDescription={backwardText}
@@ -205,7 +205,7 @@ function Pagination({
               onClick={() => incrementPage()}
               disabled={forwardButtonDisabled}
               hasIconOnly
-              renderIcon={CaretRight16}
+              renderIcon={CaretRight}
               tooltipAlignment="center"
               tooltipPosition="top"
               iconDescription={forwardText}

@@ -138,62 +138,28 @@ async function builder(metadata, { output }) {
         ...files,
       }),
       babel(babelConfig),
-      // Add a custom plugin to emit a `package.json` file. This includes the
-      // settings for the "main" and "module" entrypoints for packages, along
-      // with the new "exports" field for Node.js v14+
-      //
-      // When this bundle becomes the default, this logic will live in
-      // icons-react/package.json
-      {
-        name: 'generate-package-json',
-        generateBundle() {
-          const packageJson = {
-            main: 'index.js',
-            module: 'index.esm.js',
-            exports: {
-              import: 'index.esm.js',
-              require: 'index.js',
-            },
-          };
-          this.emitFile({
-            type: 'asset',
-            name: 'package.json',
-            fileName: 'package.json',
-            source: JSON.stringify(packageJson, null, 2),
-          });
-        },
-      },
     ],
   });
+  const targets = [
+    {
+      directory: path.join(output, 'es'),
+      format: 'esm',
+    },
+    {
+      directory: path.join(output, 'lib'),
+      format: 'commonjs',
+    },
+  ];
 
-  await bundle.write({
-    dir: path.join(output, 'next'),
-    format: 'commonjs',
-    entryFileNames: '[name]',
-    banner: templates.banner,
-    exports: 'auto',
-  });
-
-  // We create a separate rollup for our ESM bundle since this will only emit
-  // one file: `index.esm.js`
-  const esmBundle = await rollup({
-    input: 'index.js',
-    external: ['@carbon/icon-helpers', 'react', 'prop-types'],
-    plugins: [
-      virtual({
-        ...defaultVirtualOptions,
-        'index.js': files['index.js'],
-      }),
-      babel(babelConfig),
-    ],
-  });
-
-  await esmBundle.write({
-    file: path.join(output, 'next', 'index.esm.js'),
-    format: 'esm',
-    banner: templates.banner,
-    exports: 'auto',
-  });
+  for (const target of targets) {
+    await bundle.write({
+      dir: target.directory,
+      format: target.format,
+      entryFileNames: '[name]',
+      banner: templates.banner,
+      exports: 'auto',
+    });
+  }
 }
 
 /**

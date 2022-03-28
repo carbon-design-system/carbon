@@ -15,8 +15,6 @@
 /// @access public
 /// @group @carbon/type
 @mixin carbon--type-reset(
-  // TODO: remove in next major release. This has been replaced with 100%
-  $base-font-size: $carbon--base-font-size,
   $body-font-family: carbon--font-family('sans'),
   $mono-font-family: carbon--font-family('mono')
 ) {
