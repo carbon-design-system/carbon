@@ -62,17 +62,23 @@ describe('NotificationButton', () => {
 
 describe('ToastNotification', () => {
   it('should have role=status by default', () => {
-    const { container } = render(<ToastNotification />);
+    const { container } = render(
+      <ToastNotification title="Notification title" />
+    );
     expect(container.firstChild).toHaveAttribute('role', 'status');
   });
 
   it('should place the `className` prop on the outermost DOM node', () => {
-    const { container } = render(<ToastNotification className="test" />);
+    const { container } = render(
+      <ToastNotification title="Notification title" className="test" />
+    );
     expect(container.firstChild).toHaveClass('test');
   });
 
   it('interpolates matching className based on kind prop', () => {
-    const { rerender } = render(<ToastNotification />);
+    const { rerender } = render(
+      <ToastNotification title="Notification title" />
+    );
     const kinds = [
       'error',
       'info',
@@ -91,7 +97,7 @@ describe('ToastNotification', () => {
 
   it('allows non-interactive elements as children', () => {
     render(
-      <ToastNotification>
+      <ToastNotification title="Notification title">
         <p>Sample text</p>
       </ToastNotification>
     );
@@ -103,7 +109,7 @@ describe('ToastNotification', () => {
 
     expect(() => {
       render(
-        <ToastNotification>
+        <ToastNotification title="Notification title">
           <button type="button">Sample button text</button>
         </ToastNotification>
       );
@@ -114,7 +120,7 @@ describe('ToastNotification', () => {
   });
 
   it('close button is rendered by default and includes aria-hidden=true', () => {
-    render(<ToastNotification />);
+    render(<ToastNotification title="Notification title" />);
 
     const closeButton = screen.queryByRole('button', {
       hidden: true,
@@ -125,7 +131,7 @@ describe('ToastNotification', () => {
   });
 
   it('does not render close button when `hideCloseButton` is provided', () => {
-    render(<ToastNotification hideCloseButton />);
+    render(<ToastNotification title="Notification title" hideCloseButton />);
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
@@ -134,7 +140,7 @@ describe('ToastNotification', () => {
 
   it('calls `onClose` when notification is closed', async () => {
     const onClose = jest.fn();
-    render(<ToastNotification onClose={onClose} />);
+    render(<ToastNotification title="Notification title" onClose={onClose} />);
 
     const closeButton = screen.queryByRole('button', {
       hidden: true,
@@ -147,7 +153,9 @@ describe('ToastNotification', () => {
   });
 
   it('keeps notification open if `onClose` returns false', () => {
-    render(<ToastNotification onClose={() => false} />);
+    render(
+      <ToastNotification title="Notification title" onClose={() => false} />
+    );
 
     const closeButton = screen.queryByRole('button', {
       hidden: true,
@@ -158,7 +166,12 @@ describe('ToastNotification', () => {
 
   it('calls `onCloseButtonClick` when notification is closed', () => {
     const onCloseButtonClick = jest.fn();
-    render(<ToastNotification onCloseButtonClick={onCloseButtonClick} />);
+    render(
+      <ToastNotification
+        title="Notification title"
+        onCloseButtonClick={onCloseButtonClick}
+      />
+    );
 
     const closeButton = screen.queryByRole('button', {
       hidden: true,
@@ -166,47 +179,27 @@ describe('ToastNotification', () => {
     userEvent.click(closeButton);
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
   });
-
-  it('closes notification via escape button', async () => {
-    const onCloseButtonClick = jest.fn();
-    const onClose = jest.fn();
-    render(
-      <ToastNotification
-        onClose={onClose}
-        onCloseButtonClick={onCloseButtonClick}
-      />
-    );
-
-    // without focus being on/in the notification, it should not close via escape
-    userEvent.keyboard('{Escape}');
-    expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
-    expect(onClose).toHaveBeenCalledTimes(0);
-
-    // after focus is placed, the notification should close via escape
-    userEvent.tab();
-    userEvent.keyboard('{Escape}');
-    expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
-    expect(onClose).toHaveBeenCalledTimes(1);
-
-    await waitFor(() => {
-      expect(screen.queryByRole('status')).not.toBeInTheDocument();
-    });
-  });
 });
 
 describe('InlineNotification', () => {
   it('should have role=status by default', () => {
-    const { container } = render(<InlineNotification />);
+    const { container } = render(
+      <InlineNotification title="Notification title" />
+    );
     expect(container.firstChild).toHaveAttribute('role', 'status');
   });
 
   it('should place the `className` prop on the outermost DOM node', () => {
-    const { container } = render(<InlineNotification className="test" />);
+    const { container } = render(
+      <InlineNotification title="Notification title" className="test" />
+    );
     expect(container.firstChild).toHaveClass('test');
   });
 
   it('interpolates matching className based on kind prop', () => {
-    const { rerender } = render(<InlineNotification />);
+    const { rerender } = render(
+      <InlineNotification title="Notification title" />
+    );
     const kinds = [
       'error',
       'info',
@@ -216,7 +209,7 @@ describe('InlineNotification', () => {
       'warning-alt',
     ];
     kinds.forEach((kind) => {
-      rerender(<InlineNotification kind={kind} />);
+      rerender(<InlineNotification title="Notification title" kind={kind} />);
       expect(screen.queryByRole('status')).toHaveClass(
         `${prefix}--inline-notification--${kind}`
       );
@@ -225,7 +218,7 @@ describe('InlineNotification', () => {
 
   it('allows non-interactive elements as children', () => {
     render(
-      <InlineNotification>
+      <InlineNotification title="Notification title">
         <p>Sample text</p>
       </InlineNotification>
     );
@@ -237,7 +230,7 @@ describe('InlineNotification', () => {
 
     expect(() => {
       render(
-        <InlineNotification>
+        <InlineNotification title="Notification title">
           <button type="button">Sample button text</button>
         </InlineNotification>
       );
@@ -248,7 +241,7 @@ describe('InlineNotification', () => {
   });
 
   it('close button is rendered by default and includes aria-hidden=true', () => {
-    render(<InlineNotification />);
+    render(<InlineNotification title="Notification title" />);
 
     const closeButton = screen.queryByRole('button', {
       hidden: true,
@@ -258,7 +251,7 @@ describe('InlineNotification', () => {
   });
 
   it('does not render close button when `hideCloseButton` is provided', () => {
-    render(<InlineNotification hideCloseButton />);
+    render(<InlineNotification title="Notification title" hideCloseButton />);
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
@@ -267,7 +260,7 @@ describe('InlineNotification', () => {
 
   it('calls `onClose` when notification is closed', async () => {
     const onClose = jest.fn();
-    render(<InlineNotification onClose={onClose} />);
+    render(<InlineNotification title="Notification title" onClose={onClose} />);
 
     const closeButton = screen.queryByRole('button', {
       hidden: true,
@@ -280,7 +273,9 @@ describe('InlineNotification', () => {
   });
 
   it('keeps notification open if `onClose` returns false', () => {
-    render(<InlineNotification onClose={() => false} />);
+    render(
+      <InlineNotification title="Notification title" onClose={() => false} />
+    );
 
     const closeButton = screen.queryByRole('button', {
       hidden: true,
@@ -291,39 +286,18 @@ describe('InlineNotification', () => {
 
   it('calls `onCloseButtonClick` when notification is closed', () => {
     const onCloseButtonClick = jest.fn();
-    render(<InlineNotification onCloseButtonClick={onCloseButtonClick} />);
+    render(
+      <InlineNotification
+        title="Notification title"
+        onCloseButtonClick={onCloseButtonClick}
+      />
+    );
 
     const closeButton = screen.queryByRole('button', {
       hidden: true,
     });
     userEvent.click(closeButton);
     expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
-  });
-
-  it('closes notification via escape button', async () => {
-    const onCloseButtonClick = jest.fn();
-    const onClose = jest.fn();
-    render(
-      <InlineNotification
-        onClose={onClose}
-        onCloseButtonClick={onCloseButtonClick}
-      />
-    );
-
-    // without focus being on/in the notification, it should not close via escape
-    userEvent.keyboard('{Escape}');
-    expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
-    expect(onClose).toHaveBeenCalledTimes(0);
-
-    // after focus is placed, the notification should close via escape
-    userEvent.tab();
-    userEvent.keyboard('{Escape}');
-    expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
-    expect(onClose).toHaveBeenCalledTimes(1);
-
-    await waitFor(() => {
-      expect(screen.queryByRole('status')).not.toBeInTheDocument();
-    });
   });
 });
 
