@@ -19,4 +19,4 @@ const themes = {
 };
 
 export * from './white';
-export { themes, v10 };
+export { white, g10, g90, g100, themes, v10 };
