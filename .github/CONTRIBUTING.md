@@ -30,7 +30,9 @@ installed:
 - Git
 - [Yarn](https://yarnpkg.com/en/docs/install)
 
-If you're using Windows, there are some [additional steps](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/setup/windows.md) you'll need to take.
+If you're using Windows, there are some
+[additional steps](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/setup/windows.md)
+you'll need to take.
 
 You'll also need a code editor to make changes to Carbon. There are many to
 choose from but some popular options are
