@@ -5,7 +5,7 @@ import {
   DownArrow,
   Search as SearchIcon,
   Zone as CustomZone,
-} from '@carbon/icons-react/next';
+} from '@carbon/icons-react';
 import { Search } from 'test';
 
 function RendersIconDirectly() {

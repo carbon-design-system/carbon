@@ -9,10 +9,10 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import {
-  CheckmarkOutline16,
-  Warning16,
-  CircleDash16,
-  Incomplete16,
+  CheckmarkOutline,
+  Warning,
+  CircleDash,
+  Incomplete,
 } from '@carbon/icons-react';
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix, PrefixContext } from '../../internal/usePrefix';
@@ -64,29 +64,29 @@ export function ProgressStep({
   const SVGIcon = ({ complete, current, description, invalid, prefix }) => {
     if (invalid) {
       return (
-        <Warning16 className={`${prefix}--progress__warning`}>
+        <Warning className={`${prefix}--progress__warning`}>
           <title>{description}</title>
-        </Warning16>
+        </Warning>
       );
     }
     if (current) {
       return (
-        <Incomplete16>
+        <Incomplete>
           <title>{description}</title>
-        </Incomplete16>
+        </Incomplete>
       );
     }
     if (complete) {
       return (
-        <CheckmarkOutline16>
+        <CheckmarkOutline>
           <title>{description}</title>
-        </CheckmarkOutline16>
+        </CheckmarkOutline>
       );
     }
     return (
-      <CircleDash16>
+      <CircleDash>
         <title>{description}</title>
-      </CircleDash16>
+      </CircleDash>
     );
   };
 

@@ -14,11 +14,7 @@ import Button from '../Button';
 import { mount } from 'enzyme';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  Information16 as Information,
-  Add16 as Add,
-  OverflowMenuVertical16,
-} from '@carbon/icons-react';
+import { Information, Add, OverflowMenuVertical } from '@carbon/icons-react';
 import '@testing-library/jest-dom';
 
 const prefix = 'cds';
@@ -129,10 +125,10 @@ describe('Tooltip', () => {
   });
 
   describe('Renders as expected when custom icon component with inner forwardRef is provided', () => {
-    const wrapper = mount(<Tooltip renderIcon={OverflowMenuVertical16} />);
+    const wrapper = mount(<Tooltip renderIcon={OverflowMenuVertical} />);
 
     it('does render provided custom icon component instance', () => {
-      const icon = wrapper.find(OverflowMenuVertical16);
+      const icon = wrapper.find(OverflowMenuVertical);
       expect(icon.exists()).toBe(true);
     });
   });

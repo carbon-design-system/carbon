@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { ChevronLeft16, ChevronRight16 } from '@carbon/icons-react';
+import { ChevronLeft, ChevronRight } from '@carbon/icons-react';
 import debounce from 'lodash.debounce';
 import { keys, match, matches } from '../../internal/keyboard';
 import TabContent from '../TabContent';
@@ -531,7 +531,7 @@ export default class Tabs extends React.Component {
             tabIndex="-1"
             type="button"
             {...leftOverflowButtonProps}>
-            <ChevronLeft16 />
+            <ChevronLeft />
           </button>
           {!leftOverflowNavButtonHidden && (
             <div className={`${prefix}--tabs__overflow-indicator--left`} />
@@ -560,7 +560,7 @@ export default class Tabs extends React.Component {
             tabIndex="-1"
             type="button"
             {...rightOverflowButtonProps}>
-            <ChevronRight16 />
+            <ChevronRight />
           </button>
         </div>
         {tabContentWithProps}

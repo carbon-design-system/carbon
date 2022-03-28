@@ -87,7 +87,7 @@ exports[`Dropdown should render 1`] = `
             <div
               className="cds--list-box__menu-icon"
             >
-              <ForwardRef(ChevronDown16)
+              <ForwardRef(ChevronDown)
                 aria-label="Open menu"
                 name="chevron--down"
               >
@@ -121,7 +121,7 @@ exports[`Dropdown should render 1`] = `
                     </title>
                   </svg>
                 </Icon>
-              </ForwardRef(ChevronDown16)>
+              </ForwardRef(ChevronDown)>
             </div>
           </ListBoxMenuIcon>
         </button>
@@ -238,7 +238,7 @@ exports[`Dropdown should render custom item components 1`] = `
             <div
               className="cds--list-box__menu-icon cds--list-box__menu-icon--open"
             >
-              <ForwardRef(ChevronDown16)
+              <ForwardRef(ChevronDown)
                 aria-label="Close menu"
                 name="chevron--down"
               >
@@ -272,7 +272,7 @@ exports[`Dropdown should render custom item components 1`] = `
                     </title>
                   </svg>
                 </Icon>
-              </ForwardRef(ChevronDown16)>
+              </ForwardRef(ChevronDown)>
             </div>
           </ListBoxMenuIcon>
         </button>
@@ -547,7 +547,7 @@ exports[`Dropdown should render with strings as items 1`] = `
             <div
               className="cds--list-box__menu-icon cds--list-box__menu-icon--open"
             >
-              <ForwardRef(ChevronDown16)
+              <ForwardRef(ChevronDown)
                 aria-label="Close menu"
                 name="chevron--down"
               >
@@ -581,7 +581,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                     </title>
                   </svg>
                 </Icon>
-              </ForwardRef(ChevronDown16)>
+              </ForwardRef(ChevronDown)>
             </div>
           </ListBoxMenuIcon>
         </button>

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import Tag from './';
@@ -50,7 +50,7 @@ describe('Tag', () => {
 
   it('should allow for a custom icon', () => {
     render(
-      <Tag type="red" renderIcon={() => <Add16 data-testid="test" />}>
+      <Tag type="red" renderIcon={() => <Add data-testid="test" />}>
         Dee Dee Ramone
       </Tag>
     );

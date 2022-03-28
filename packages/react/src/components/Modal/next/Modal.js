@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useRef, useEffect } from 'react';
 import classNames from 'classnames';
-import { Close20 } from '@carbon/icons-react';
+import { Close } from '@carbon/icons-react';
 import toggleClass from '../../../tools/toggleClass';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
@@ -150,7 +150,8 @@ const Modal = React.forwardRef(function Modal(
       title={ariaLabel ? ariaLabel : iconDescription}
       aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
       ref={button}>
-      <Close20
+      <Close
+        size={20}
         aria-hidden="true"
         tabIndex="-1"
         className={`${modalCloseButtonClass}__icon`}

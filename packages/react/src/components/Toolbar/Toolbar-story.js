@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Filter16 } from '@carbon/icons-react';
+import { Filter } from '@carbon/icons-react';
 import Toolbar, {
   ToolbarItem,
   ToolbarTitle,
@@ -43,7 +43,7 @@ export const Default = () => (
   <Toolbar {...toolbarProps} className="some-class">
     <ToolbarItem type="search" placeHolderText="Search" />
     <ToolbarItem>
-      <OverflowMenu renderIcon={Filter16}>
+      <OverflowMenu renderIcon={Filter}>
         <ToolbarTitle title="FILTER BY" />
         <ToolbarOption>
           <Checkbox {...inputProps} id="opt-1" labelText="Filter option 1" />

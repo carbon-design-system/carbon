@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../';
 import ButtonSet from '../../ButtonSet';
 
@@ -100,7 +100,7 @@ export const Ghost = (args) => {
 
 export const IconButton = (args) => (
   <Button
-    renderIcon={Add16}
+    renderIcon={Add}
     iconDescription="Icon Description"
     hasIconOnly
     onClick={action('onClick')}

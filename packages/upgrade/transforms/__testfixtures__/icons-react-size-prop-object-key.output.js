@@ -1,4 +1,4 @@
-import { Add } from '@carbon/icons-react/next';
+import { Add } from '@carbon/icons-react';
 
 const icons = {
   Add16: Add,

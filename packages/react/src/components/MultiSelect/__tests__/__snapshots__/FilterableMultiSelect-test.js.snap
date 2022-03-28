@@ -150,7 +150,7 @@ exports[`FilterableMultiSelect should render 1`] = `
                   title="Open"
                   type="button"
                 >
-                  <ForwardRef(ChevronDown16)>
+                  <ForwardRef(ChevronDown)>
                     <Icon
                       fill="currentColor"
                       height={16}
@@ -174,7 +174,7 @@ exports[`FilterableMultiSelect should render 1`] = `
                         />
                       </svg>
                     </Icon>
-                  </ForwardRef(ChevronDown16)>
+                  </ForwardRef(ChevronDown)>
                 </button>
               </ListBoxTrigger>
             </div>

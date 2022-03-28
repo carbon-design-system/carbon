@@ -9,13 +9,13 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useRef, useState } from 'react';
 import cx from 'classnames';
 import {
-  Close20,
-  ErrorFilled20,
-  CheckmarkFilled20,
-  WarningFilled20,
-  WarningAltFilled20,
-  InformationFilled20,
-  InformationSquareFilled20,
+  Close,
+  ErrorFilled,
+  CheckmarkFilled,
+  WarningFilled,
+  WarningAltFilled,
+  InformationFilled,
+  InformationSquareFilled,
 } from '@carbon/icons-react';
 
 import Button from '../../Button';
@@ -171,16 +171,16 @@ NotificationButton.defaultProps = {
   notificationType: 'toast',
   type: 'button',
   iconDescription: 'close icon',
-  renderIcon: Close20,
+  renderIcon: Close,
 };
 
 const iconTypes = {
-  error: ErrorFilled20,
-  success: CheckmarkFilled20,
-  warning: WarningFilled20,
-  ['warning-alt']: WarningAltFilled20,
-  info: InformationFilled20,
-  ['info-square']: InformationSquareFilled20,
+  error: ErrorFilled,
+  success: CheckmarkFilled,
+  warning: WarningFilled,
+  ['warning-alt']: WarningAltFilled,
+  info: InformationFilled,
+  ['info-square']: InformationSquareFilled,
 };
 
 function NotificationIcon({ iconDescription, kind, notificationType }) {

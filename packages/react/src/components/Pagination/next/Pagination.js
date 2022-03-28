@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
+import { CaretRight, CaretLeft } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -252,7 +252,7 @@ const Pagination = React.forwardRef(function Pagination(
             className={backButtonClasses}
             label={backwardText}
             onClick={decrementPage}>
-            <CaretLeft16 />
+            <CaretLeft />
           </IconButton>
           <IconButton
             align="top-right"
@@ -261,7 +261,7 @@ const Pagination = React.forwardRef(function Pagination(
             className={forwardButtonClasses}
             label={forwardText}
             onClick={incrementPage}>
-            <CaretRight16 />
+            <CaretRight />
           </IconButton>
         </div>
       </div>

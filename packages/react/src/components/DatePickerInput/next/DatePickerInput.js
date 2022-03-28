@@ -5,11 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import {
-  Calendar16,
-  WarningFilled16,
-  WarningAltFilled16,
-} from '@carbon/icons-react';
+import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -243,7 +239,7 @@ function DatePickerIcon({ datePickerType, invalid, warn, ...rest }) {
 
   if (invalid) {
     return (
-      <WarningFilled16
+      <WarningFilled
         className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
       />
     );
@@ -251,21 +247,21 @@ function DatePickerIcon({ datePickerType, invalid, warn, ...rest }) {
 
   if (!invalid && warn) {
     return (
-      <WarningAltFilled16
+      <WarningAltFilled
         className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
       />
     );
   }
 
   return (
-    <Calendar16
+    <Calendar
       className={`${prefix}--date-picker__icon`}
       aria-label={rest.iconDescription}
       onClick={rest.openCalendar}
       role="img"
       aria-hidden="true">
       {rest.iconDescription && <title>{rest.iconDescription}</title>}
-    </Calendar16>
+    </Calendar>
   );
 }
 
