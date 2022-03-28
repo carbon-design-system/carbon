@@ -21,6 +21,12 @@ const sizes = {
   'Big (big) - default': 'big',
 };
 
+const statuses = {
+  'Active  (active) - default': 'active',
+  'Finished (finished)': 'finished',
+  'Error (error)': 'error',
+};
+
 const types = {
   'Default  (default)': 'default',
   'Inline (inline)': 'inline',
@@ -33,6 +39,7 @@ const props = () => ({
   label: text('Label text (label)', 'Progress bar label'),
   max: number('Maximum value (max)', 100),
   size: select('Size (size)', sizes, 'big'),
+  status: select('Status (status)', statuses, 'active'),
   type: select('Type (type)', types, 'default'),
   value: number('Current value (value)', 75),
 });
@@ -89,6 +96,7 @@ export const Example = () => {
     <ProgressBar
       value={running ? progress : null}
       max={size}
+      status={progress === size ? 'finished' : 'active'}
       label="Export data"
       helperText={helperText}
     />
