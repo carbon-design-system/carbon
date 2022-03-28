@@ -550,7 +550,7 @@ export function ExpandableTile({
           onClick={composeEventHandlers([onClick, handleClick])}
           aria-label={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
           className={chevronInteractiveClassNames}>
-          <ChevronDown16 />
+          <ChevronDown />
         </button>
         <div ref={belowTheFold} className={`${prefix}--tile-content`}>
           {childrenAsArray[1]}
