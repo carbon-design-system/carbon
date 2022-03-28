@@ -122,14 +122,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/generator@npm:^7.12.11, @babel/generator@npm:^7.12.5, @babel/generator@npm:^7.16.7, @babel/generator@npm:^7.17.0, @babel/generator@npm:^7.7.2":
-  version: 7.17.0
-  resolution: "@babel/generator@npm:7.17.0"
+"@babel/generator@npm:^7.12.11, @babel/generator@npm:^7.12.5, @babel/generator@npm:^7.16.7, @babel/generator@npm:^7.17.0, @babel/generator@npm:^7.17.3, @babel/generator@npm:^7.7.2":
+  version: 7.17.7
+  resolution: "@babel/generator@npm:7.17.7"
   dependencies:
     "@babel/types": ^7.17.0
     jsesc: ^2.5.1
     source-map: ^0.5.0
-  checksum: 2987dbebb484727a227f1ce3db90810320986cfb3ffd23e6d1d87f75bbd8e7871b5bc44252822d4d5f048a2d872a5702b2a9bf7bab7e07f087d7f306f0ea6c0a
+  checksum: e7344b9b4559115f2754ecc2ae9508412ea6a8f617544cd3d3f17cabc727bd30630765f96c8a4ebc8901ded1492a3a6c23d695a4f1e8f3042f860b30c891985c
   languageName: node
   linkType: hard
 
@@ -452,12 +452,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.12.11, @babel/parser@npm:^7.12.7, @babel/parser@npm:^7.13.16, @babel/parser@npm:^7.14.7, @babel/parser@npm:^7.16.7, @babel/parser@npm:^7.17.0, @babel/parser@npm:^7.7.0":
-  version: 7.17.0
-  resolution: "@babel/parser@npm:7.17.0"
+"@babel/parser@npm:^7.1.0, @babel/parser@npm:^7.12.11, @babel/parser@npm:^7.12.7, @babel/parser@npm:^7.13.16, @babel/parser@npm:^7.14.7, @babel/parser@npm:^7.16.7, @babel/parser@npm:^7.17.0, @babel/parser@npm:^7.17.3, @babel/parser@npm:^7.7.0":
+  version: 7.17.8
+  resolution: "@babel/parser@npm:7.17.8"
   bin:
     parser: ./bin/babel-parser.js
-  checksum: d0ac5ffba0b234dde516f867edf5da5d92d6f841592b370ae3244cd7c8f27a7f5e3e3d4e90ca9c15ea58bc46823f1643f3f75b6eb9a9f676ae16e8b2365e922a
+  checksum: 1771808491982cc47baa888a997aef6b58308e3844c8c00f730f8fd97defe57d32cdbf46075cd49aaee310fa31f3d2c80a0d41b41a4ee0ff336ee09e2ff6c222
   languageName: node
   linkType: hard
 
@@ -1661,20 +1661,20 @@ __metadata:
   linkType: hard
 
 "@babel/traverse@npm:^7.12.11, @babel/traverse@npm:^7.12.9, @babel/traverse@npm:^7.13.0, @babel/traverse@npm:^7.16.7, @babel/traverse@npm:^7.17.0, @babel/traverse@npm:^7.7.0, @babel/traverse@npm:^7.7.2":
-  version: 7.17.0
-  resolution: "@babel/traverse@npm:7.17.0"
+  version: 7.17.3
+  resolution: "@babel/traverse@npm:7.17.3"
   dependencies:
     "@babel/code-frame": ^7.16.7
-    "@babel/generator": ^7.17.0
+    "@babel/generator": ^7.17.3
     "@babel/helper-environment-visitor": ^7.16.7
     "@babel/helper-function-name": ^7.16.7
     "@babel/helper-hoist-variables": ^7.16.7
     "@babel/helper-split-export-declaration": ^7.16.7
-    "@babel/parser": ^7.17.0
+    "@babel/parser": ^7.17.3
     "@babel/types": ^7.17.0
     debug: ^4.1.0
     globals: ^11.1.0
-  checksum: 9b7de053d8a29453fd7b9614a028d8dc811817f02948eaee02093274b67927a1cfb0513b521bc4a9328c9b6e5b021fd343b358c3526bbb6ee61ec078d4110c0c
+  checksum: 780d7ecf711758174989794891af08d378f81febdb8932056c0d9979524bf0298e28f8e7708a872d7781151506c28f56c85c63ea3f1f654662c2fcb8a3eb9fdc
   languageName: node
   linkType: hard
 
@@ -1801,8 +1801,8 @@ __metadata:
     "@carbon/import-once": ^10.7.0
     "@carbon/layout": ^10.37.0
     "@carbon/motion": ^10.29.0
-    "@carbon/themes": ^10.53.0
-    "@carbon/type": ^10.43.0
+    "@carbon/themes": ^10.54.0
+    "@carbon/type": ^10.44.0
     fs-extra: ^10.0.0
     klaw-sync: ^6.0.0
     replace-in-file: ^3.4.2
@@ -1898,7 +1898,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-react@^10.48.0, @carbon/icons-react@workspace:packages/icons-react":
+"@carbon/icons-react@^10.49.0, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
@@ -1989,7 +1989,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^0.16.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^0.17.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2002,12 +2002,12 @@ __metadata:
     "@babel/preset-react": ^7.16.7
     "@babel/runtime": ^7.16.7
     "@carbon/feature-flags": ^0.7.0
-    "@carbon/icons-react": ^10.48.0
+    "@carbon/icons-react": ^10.49.0
     "@carbon/layout": ^10.37.0
-    "@carbon/styles": ^0.16.0
+    "@carbon/styles": ^0.17.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.21.0
-    "@carbon/themes": ^10.53.0
+    "@carbon/themes": ^10.54.0
     "@cypress/react": ^5.11.0
     "@cypress/webpack-dev-server": 1.7.0
     "@percy/cypress": ^3.1.1
@@ -2093,8 +2093,8 @@ __metadata:
     "@carbon/colors": ^10.37.0
     "@carbon/icon-helpers": ^10.28.0
     "@carbon/icons": ^10.48.0
-    "@carbon/themes": ^10.53.0
-    "@carbon/type": ^10.43.0
+    "@carbon/themes": ^10.54.0
+    "@carbon/type": ^10.44.0
     "@skpm/builder": ^0.8.0
     color-string: ^1.5.3
     core-js: ^3.16.0
@@ -2105,7 +2105,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^0.16.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^0.17.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2115,8 +2115,8 @@ __metadata:
     "@carbon/layout": ^10.37.0
     "@carbon/motion": ^10.29.0
     "@carbon/test-utils": ^10.21.0
-    "@carbon/themes": ^10.53.0
-    "@carbon/type": ^10.43.0
+    "@carbon/themes": ^10.54.0
+    "@carbon/type": ^10.44.0
     "@ibm/plex": 6.0.0-next.6
     css: ^3.0.0
     sass: ^1.45.0
@@ -2150,7 +2150,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^10.53.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@^10.54.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -2162,7 +2162,7 @@ __metadata:
     "@carbon/layout": ^10.37.0
     "@carbon/scss-generator": ^10.13.0
     "@carbon/test-utils": ^10.21.0
-    "@carbon/type": ^10.43.0
+    "@carbon/type": ^10.44.0
     change-case: ^4.1.1
     color: ^3.1.2
     core-js: ^3.16.0
@@ -2173,7 +2173,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@^10.43.0, @carbon/type@workspace:packages/type":
+"@carbon/type@^10.44.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
@@ -7021,11 +7021,11 @@ __metadata:
   linkType: hard
 
 "@types/keyv@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "@types/keyv@npm:3.1.1"
+  version: 3.1.4
+  resolution: "@types/keyv@npm:3.1.4"
   dependencies:
     "@types/node": "*"
-  checksum: ee0d098693bf4af44be756eed02daf95f5d0fd4b5b02da952a5952e08842baddf6a986a9ea5f9e460729782f1a0a47848c892ad96ea188b66a363feb49a1536f
+  checksum: e009a2bfb50e90ca9b7c6e8f648f8464067271fd99116f881073fa6fa76dc8d0133181dd65e6614d5fb1220d671d67b0124aef7d97dc02d7e342ab143a47779d
   languageName: node
   linkType: hard
 
@@ -10025,8 +10025,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.16.7
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
-    "@carbon/react": ^0.16.0
-    "@carbon/styles": ^0.16.0
+    "@carbon/react": ^0.17.0
+    "@carbon/styles": ^0.17.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.21.0
     "@rollup/plugin-babel": ^5.3.0
@@ -10051,7 +10051,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^0.16.0
+    "@carbon/styles": ^0.17.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.21.0
     fs-extra: ^10.0.0
@@ -10802,7 +10802,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^0.16.0
+    "@carbon/styles": ^0.17.0
     sass: ^1.49.7
     vite: ^2.8.0
   languageName: unknown
@@ -10812,7 +10812,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^0.16.0
+    "@carbon/react": ^0.17.0
     "@vitejs/plugin-react": ^1.0.7
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -10855,7 +10855,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-convert@npm:^1.9.0, color-convert@npm:^1.9.1":
+"color-convert@npm:^1.9.0, color-convert@npm:^1.9.3":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
   dependencies:
@@ -10887,13 +10887,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-string@npm:^1.5.3, color-string@npm:^1.5.4":
-  version: 1.5.4
-  resolution: "color-string@npm:1.5.4"
+"color-string@npm:^1.5.3, color-string@npm:^1.6.0":
+  version: 1.9.0
+  resolution: "color-string@npm:1.9.0"
   dependencies:
     color-name: ^1.0.0
     simple-swizzle: ^0.2.2
-  checksum: ae53f205d7a757ce7e1256dc4c8873675a8d3a5f136963183b94bbe725184239e0c19002177ee71488884abb7db958b1744cf83095c5b2b95d0b8937839162b7
+  checksum: 93c6678b847f8cfa47d19677fd19e1d4b19d7a33f100644400357c298266080b5bca64e5f874fa8ac8cc0aa0606ad44f7a838b4e6fd05e6affea190a68555bb4
   languageName: node
   linkType: hard
 
@@ -10907,12 +10907,12 @@ __metadata:
   linkType: hard
 
 "color@npm:^3.1.2":
-  version: 3.1.3
-  resolution: "color@npm:3.1.3"
+  version: 3.2.1
+  resolution: "color@npm:3.2.1"
   dependencies:
-    color-convert: ^1.9.1
-    color-string: ^1.5.4
-  checksum: d52a77ae239e1cdb55d9920e73d730df69a05cec9cb5d9b83a3e311b23009fd4053f4a88e7f6152207db498838f10e3ba4b1661a64a3acb41a50b14944214f26
+    color-convert: ^1.9.3
+    color-string: ^1.6.0
+  checksum: f81220e8b774d35865c2561be921f5652117638dcda7ca4029262046e37fc2444ac7bbfdd110cf1fd9c074a4ee5eda8f85944ffbdda26186b602dd9bb05f6400
   languageName: node
   linkType: hard
 
@@ -30243,7 +30243,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^0.16.0
+    "@carbon/react": ^0.17.0
     "@octokit/core": ^3.5.1
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^3.5.2

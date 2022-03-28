@@ -59,3 +59,10 @@ $flex-grid-columns: 16 !default;
 /// @type Boolean
 /// @group config
 $use-flexbox-grid: false !default;
+
+@forward '@carbon/grid/scss/modules/config'
+  hide $prefix, $flex-grid-columns
+  with (
+  $prefix: $prefix,
+  $flex-grid-columns: $flex-grid-columns,
+);

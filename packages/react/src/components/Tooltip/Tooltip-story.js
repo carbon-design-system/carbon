@@ -16,7 +16,7 @@ import {
 import Tooltip from '../Tooltip';
 import { Tooltip as OGTooltip } from './Tooltip';
 import Button from '../Button';
-import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { OverflowMenuVertical } from '@carbon/icons-react';
 import mdx from './Tooltip.mdx';
 
 const prefix = 'cds';
@@ -94,7 +94,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       ''
     ),
-    renderIcon: OverflowMenuVertical16,
+    renderIcon: OverflowMenuVertical,
   }),
 };
 
