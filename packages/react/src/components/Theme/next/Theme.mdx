@@ -1,4 +1,4 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { ArgsTable, Story, Canvas } from '@storybook/addon-docs/blocks';
 
 # Theme
 
@@ -20,48 +20,89 @@ import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
 
 ## Overview
 
-The `Theme` component allows you to specify the theme for a page, or a portion
-of a page. It is most often used to implement inline theming in order to specify
-what theme a section of the page should render with.
+The `GlobalTheme` and `Theme` components allow you to specify the theme for a
+page, or for a part of a page, respectively. `Theme` is most often used to
+implement inline theming where you can style a portion of your page with a
+particular theme.
 
-The `Theme` component accepts a `theme` prop which allows you to specify the
-theme. This value is propagated to the entire sub-tree of components and can be
-accessed by any child component using the `useTheme` hook.
+In order for the styles of `Theme` to be correctly applied in your project, you
+need to make sure that you have included `@carbon/react/scss/zone` in your Sass
+files by writing:
 
-```jsx
-<Theme theme="g100">
-  <ChildComponent />
-</Theme>
+```scss
+@use '@carbon/react/scss/zone';
 ```
 
-The `Theme` component will render a wrapper element on which all of the values
-of the given theme will be applied as CSS Custom Properties. These CSS Custom
-Properties can be accessed directly, or you can use the Sass Variables provided
-in the styles from the Carbon Design System to refer to these properties in your
-styles.
+You also get this file when you import `@carbon/react` directly in your Sass.
 
-### `useTheme`
+<Canvas>
+  <Story id="components-theme--default" />
+</Canvas>
 
-The `useTheme` hook allows you to access the current theme in a component. This
-can be useful if you need to conditionally render something based on the theme.
-For example, if you have an illustration that needs to be rendered differently
-in a light or dark theme.
+## Setting the global theme
 
-You can use this hook in any component by calling `useTheme`:
+Use the `GlobalTheme` component to set the theme for your entire project. By
+default, the global theme will be set to the `white` theme. You can change the
+global theme value by using the `theme` prop on `GlobalTheme`:
 
 ```jsx
-function ExampleComponent() {
-  const { theme } = useTheme();
+import { GlobalTheme } from '@carbon/react';
 
-  if (theme === 'g100') {
-    // ...
-  }
+<GlobalTheme theme="g100">
+  <YourApp />
+</GlobalTheme>
+```
+
+Note: this component should be used at the root of your app.
+
+## Setting an inline theme
+
+Use the `Theme` component to set an inline theme for a part of the UI in your
+project. All components that you render as `children` of `Theme` will now use
+the design token values from that theme.
+
+```jsx
+import { Theme } from '@carbon/react';
+
+function ExamplePage() {
+  return (
+    <GlobalTheme theme="white">
+      <h1>Page title</h1>
+      <p>Display in the white theme</p>
+      <Theme theme="g100">
+        <p>Display in the g100 theme</p>
+      </Theme>
+    <GlobalTheme>
+  );
 }
 ```
 
+<Canvas>
+  <Story id="components-theme--default" />
+</Canvas>
+
+## Getting the current theme in a component
+
+The `useTheme` hook provides the current theme for a component. This can be
+helpful if you need to conditionally render items based on the current theme.
+
+```jsx
+import { useTheme } from '@carbon/react';
+
+function ExampleComponent() {
+  const { theme } = useTheme();
+
+  // Use the current theme in your component
+}
+```
+
+<Canvas>
+  <Story id="components-theme--use-theme" />
+</Canvas>
+
 ## Component API
 
-<Props />
+<ArgsTable />
 
 ### Theme as
 

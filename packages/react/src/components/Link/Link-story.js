@@ -10,7 +10,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
-import { Download16 } from '@carbon/icons-react';
+import { Download } from '@carbon/icons-react';
 import Link from '../Link';
 import mdx from './Link.mdx';
 
@@ -53,7 +53,7 @@ _Default.story = {
 };
 
 export const PairedWithIcon = () => (
-  <Link href="http://www.carbondesignsystem.com" renderIcon={Download16}>
+  <Link href="http://www.carbondesignsystem.com" renderIcon={Download}>
     Download
   </Link>
 );

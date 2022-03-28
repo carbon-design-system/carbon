@@ -8,11 +8,7 @@
 import './story.scss';
 
 import React from 'react';
-import {
-  Delete16 as Delete,
-  Save16 as Save,
-  Download16 as Download,
-} from '@carbon/icons-react';
+import { Delete, Save, Download } from '@carbon/icons-react';
 import DataTable, {
   Table,
   TableBatchAction,

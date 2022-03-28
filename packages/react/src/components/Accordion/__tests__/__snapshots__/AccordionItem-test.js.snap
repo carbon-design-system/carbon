@@ -25,7 +25,7 @@ exports[`AccordionItem should render 1`] = `
         onKeyDown={[Function]}
         type="button"
       >
-        <ForwardRef(ChevronRight16)
+        <ForwardRef(ChevronRight)
           className="cds--accordion__arrow"
         >
           <Icon
@@ -53,7 +53,7 @@ exports[`AccordionItem should render 1`] = `
               />
             </svg>
           </Icon>
-        </ForwardRef(ChevronRight16)>
+        </ForwardRef(ChevronRight)>
         <Text
           as="div"
           className="cds--accordion__title"

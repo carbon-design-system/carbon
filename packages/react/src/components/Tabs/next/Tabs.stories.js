@@ -11,14 +11,7 @@ import Button from '../../Button';
 import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
-import {
-  Monster20,
-  Corn20,
-  Bat20,
-  Monster16,
-  Corn16,
-  Bat16,
-} from '@carbon/icons-react';
+import { Monster, Corn, Bat } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tabs',
@@ -82,13 +75,13 @@ export const Icon20Only = (args) => (
   <Tabs>
     <TabList iconSize="lg" aria-label="List of tabs" {...args}>
       <IconTab label="Monster" disabled>
-        <Monster20 aria-label="Monster" />
+        <Monster size={20} aria-label="Monster" />
       </IconTab>
       <IconTab label="Corn">
-        <Corn20 aria-label="Corn" />
+        <Corn size={20} aria-label="Corn" />
       </IconTab>
       <IconTab label="Bat">
-        <Bat20 aria-label="Bat" />
+        <Bat size={20} aria-label="Bat" />
       </IconTab>
     </TabList>
     <TabPanels>
@@ -103,13 +96,13 @@ export const IconOnly = (args) => (
   <Tabs>
     <TabList iconSize="default" aria-label="List of tabs" {...args}>
       <IconTab label="Monster" disabled>
-        <Monster16 aria-label="Monster" />
+        <Monster aria-label="Monster" />
       </IconTab>
       <IconTab label="Corn">
-        <Corn16 aria-label="Corn" />
+        <Corn aria-label="Corn" />
       </IconTab>
       <IconTab label="Bat">
-        <Bat16 aria-label="Bat" />
+        <Bat aria-label="Bat" />
       </IconTab>
     </TabList>
     <TabPanels>

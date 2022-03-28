@@ -60,7 +60,7 @@ export async function main({ argv, cwd }) {
   );
 
   cli.command(
-    'migrate <migration>',
+    'migrate <migration> [paths...]',
     'run a Carbon migration on your source files',
     async (cli) => {
       cli.command(
@@ -75,12 +75,13 @@ export async function main({ argv, cwd }) {
       );
     },
     run(async (args) => {
-      const { verbose, migration, write } = args;
+      const { verbose, migration, write, paths } = args;
       const options = {
         cwd: cwd(),
         verbose,
         write,
         migration,
+        paths,
       };
       await migrate(options, upgrades);
     })
