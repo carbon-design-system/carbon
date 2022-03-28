@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -130,7 +130,7 @@ const TextArea = React.forwardRef(function TextArea(
         className={`${prefix}--text-area__wrapper`}
         data-invalid={invalid || null}>
         {invalid && (
-          <WarningFilled16 className={`${prefix}--text-area__invalid-icon`} />
+          <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}
         {input}
       </div>

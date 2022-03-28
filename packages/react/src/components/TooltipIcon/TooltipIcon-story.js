@@ -7,11 +7,11 @@
 
 import React from 'react';
 import {
-  Add16,
-  AddFilled16,
-  Filter16,
-  Search16,
-  Information16,
+  Add,
+  AddFilled,
+  Filter,
+  Search,
+  Information,
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, select, boolean, text } from '@storybook/addon-knobs';
@@ -39,10 +39,10 @@ const icons = {
 };
 
 const iconMap = {
-  Add16,
-  AddFilled16,
-  Filter16,
-  Search16,
+  Add,
+  AddFilled,
+  Filter,
+  Search,
 };
 
 const props = () => {
@@ -80,11 +80,11 @@ export const Default = () => (
     <TooltipIcon
       tooltipText="Interactive tooltip"
       onClick={action('onClick')}
-      renderIcon={Filter16}
+      renderIcon={Filter}
     />
     <TooltipIcon
       tooltipText="Non-interactive tooltip"
-      renderIcon={Information16}
+      renderIcon={Information}
     />
   </div>
 );
