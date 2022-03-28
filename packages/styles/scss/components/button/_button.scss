@@ -219,8 +219,6 @@
       color: $text-on-color;
     }
 
-    // TODO: deprecate single dash tertiary
-    &-tertiary,
     &--tertiary {
       @include button-theme(
         transparent,
@@ -259,8 +257,6 @@
       }
     }
 
-    // TODO: deprecate single dash ghost
-    &-ghost,
     &--ghost {
       @include button-theme(
         transparent,

@@ -2702,7 +2702,6 @@ Map {
   "ExpandableTile" => Object {
     "defaultProps": Object {
       "expanded": false,
-      "onBeforeClick": [Function],
       "onClick": [Function],
       "tabIndex": 0,
       "tileCollapsedIconText": "Interact to expand Tile",
@@ -2725,9 +2724,6 @@ Map {
         "type": "string",
       },
       "light": [Function],
-      "onBeforeClick": Object {
-        "type": "func",
-      },
       "onClick": Object {
         "type": "func",
       },

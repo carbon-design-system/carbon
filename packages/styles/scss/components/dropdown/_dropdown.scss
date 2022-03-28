@@ -130,7 +130,6 @@
     transition: max-height $duration-fast-02 motion(entrance, productive);
   }
 
-  // V11: Possibly deprecate
   .#{$prefix}--dropdown--light {
     background-color: $field;
 
