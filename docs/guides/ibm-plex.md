@@ -23,13 +23,13 @@
 ## Overview
 
 The Carbon Design System uses [IBM Plex](https://www.ibm.com/plex) as its
-typeface. For teams using Carbon, this font is loaded by default through Google
-Fonts if you are using any of our projects, or if you are using
+typeface. For teams using Carbon, this font is loaded by default from the
+`@ibm/plex` package. Alternatively, the font can be loaded from an Akamai CDN if
+you are using any of our projects, or if you are using
 [`@carbon/type`](../packages/type) directly.
 
-However, the Google Fonts strategy loaded by default is not recommended for
-production use-cases. Below, we offer several alternative ways to include IBM
-Plex in your project for a variety of situations.
+Below, we offer several alternative ways to include IBM Plex in your project for
+a variety of situations.
 
 If you feel like a situation isn't fully covered, or you have an idea for
 another one to add, please
@@ -202,8 +202,8 @@ update to this document with guidance!
 
 ### unpkg
 
-If you're looking for a quick way to include IBM Plex, and the default Google
-Font solution from `@carbon/type` isn't working for you, you can use the hosted
+If you're looking for a quick way to include IBM Plex, and the default Akamai
+CDN solution from `@carbon/type` isn't working for you, you can use the hosted
 assets from [`unpkg`](https://unpkg.com).
 
 You can see the URL for a given font face by visiting the URL for the package
@@ -254,7 +254,7 @@ or `url-loader` in your webpack config.
 
 If hosting in a CDN, you will need to manually extract the files that you need
 and publish them to your CDN. For an example of how to structure these, you can
-view how Google Fonts does this in
+view how Akamai does this in
 [`@carbon/type`](https://github.com/IBM/carbon-elements/blob/master/packages/type/scss/font-face/_sans.scss).
 
 ## FAQ
