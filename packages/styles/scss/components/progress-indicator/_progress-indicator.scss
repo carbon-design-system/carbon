@@ -57,7 +57,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     position: absolute;
     left: 0;
     width: rem(128px);
-    height: 1px;
+    height: 2px;
     border: $progress-indicator-bar-width;
   }
 
@@ -97,8 +97,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   }
 
   .#{$prefix}--progress-label:hover {
-    box-shadow: 0 rem(1px) $link-primary;
-    color: $link-primary;
+    box-shadow: 0 rem(1px) $link-primary-hover;
+    color: $link-primary-hover;
     cursor: pointer;
   }
 
@@ -115,8 +115,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable)
     .#{$prefix}--progress-label:active {
-    box-shadow: 0 rem(3px) 0 0 $background-brand;
-    color: $background-brand;
+    box-shadow: 0 rem(3px) 0 0 $text-primary;
+    color: $text-primary;
   }
 
   //OVERFLOW STYLING

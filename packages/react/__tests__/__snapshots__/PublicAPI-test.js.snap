@@ -441,6 +441,8 @@ Map {
   },
   "CodeSnippet" => Object {
     "defaultProps": Object {
+      "ariaLabel": "Copy to clipboard",
+      "copyLabel": "Copy to clipboard",
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
@@ -5155,7 +5157,6 @@ Map {
   },
   "ProgressStep" => Object {
     "defaultProps": Object {
-      "renderLabel": [Function],
       "translateWithId": [Function],
     },
     "propTypes": Object {
@@ -5189,9 +5190,6 @@ Map {
       },
       "overflowTooltipProps": Object {
         "type": "object",
-      },
-      "renderLabel": Object {
-        "type": "func",
       },
       "secondaryLabel": Object {
         "type": "string",
