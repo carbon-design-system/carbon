@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../../config' as *;
 @use 'vars' as *;
 @use 'mixins' as *;
-@use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;

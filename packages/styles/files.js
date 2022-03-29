@@ -168,8 +168,9 @@ const files = [
   'scss/fonts/_src.scss',
 
   // Grid
-  'scss/grid/_config.scss',
+  'scss/grid/_css-grid.scss',
   'scss/grid/_flexbox.scss',
+  'scss/grid/_mixins.scss',
   'scss/grid/_index.scss',
 
   // Type
