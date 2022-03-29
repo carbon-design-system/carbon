@@ -1,7 +1,7 @@
 {
   "name": "@carbon/icons-react",
   "description": "React components for icons in digital and software products using the Carbon Design System",
-  "version": "10.48.0",
+  "version": "10.49.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -13,9 +13,7 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
-    "lib",
-    "umd",
-    "next"
+    "lib"
   ],
   "keywords": [
     "ibm",
@@ -31,7 +29,7 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build.js",
-    "clean": "rimraf es lib umd next",
+    "clean": "rimraf es lib",
     "postinstall": "carbon-telemetry collect --install"
   },
   "peerDependencies": {

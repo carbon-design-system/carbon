@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Information16 } from '@carbon/icons-react';
+import { Information } from '@carbon/icons-react';
 import React from 'react';
 import { default as Button } from '../../Button';
 import { default as Link } from '../../Link';
@@ -55,7 +55,7 @@ export const Default = () => {
       <ToggletipLabel>Toggletip label</ToggletipLabel>
       <Toggletip defaultOpen>
         <ToggletipButton label="Show information">
-          <Information16 />
+          <Information />
         </ToggletipButton>
         <ToggletipContent>
           <p>
@@ -79,7 +79,7 @@ const PlaygroundStory = (controls) => {
       <ToggletipLabel>Toggletip label</ToggletipLabel>
       <Toggletip align={align} defaultOpen>
         <ToggletipButton label="Show information">
-          <Information16 />
+          <Information />
         </ToggletipButton>
         <ToggletipContent>
           <p>

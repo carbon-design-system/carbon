@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
+import { CaretRight, CaretLeft } from '@carbon/icons-react';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import Pagination from '../Pagination';
@@ -111,7 +111,7 @@ describe('Pagination', () => {
   });
 
   it('should have 2 icons', () => {
-    const iconTypes = [CaretLeft16, CaretRight16];
+    const iconTypes = [CaretLeft, CaretRight];
     const icons = pagination.findWhere((n) => iconTypes.includes(n.type()));
     expect(icons.length).toEqual(2);
   });

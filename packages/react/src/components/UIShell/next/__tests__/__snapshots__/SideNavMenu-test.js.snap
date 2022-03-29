@@ -42,7 +42,9 @@ exports[`SideNavMenu should render 1`] = `
         <div
           className="cds--side-nav__icon cds--side-nav__icon--small cds--side-nav__submenu-chevron"
         >
-          <ForwardRef(ChevronDown20)>
+          <ForwardRef(ChevronDown)
+            size={20}
+          >
             <Icon
               fill="currentColor"
               height={20}
@@ -66,7 +68,7 @@ exports[`SideNavMenu should render 1`] = `
                 />
               </svg>
             </Icon>
-          </ForwardRef(ChevronDown20)>
+          </ForwardRef(ChevronDown)>
         </div>
       </SideNavIcon>
     </button>

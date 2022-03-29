@@ -9,11 +9,7 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import deprecate from '../../prop-types/deprecate';
 import classNames from 'classnames';
-import {
-  Calendar16,
-  WarningFilled16,
-  WarningAltFilled16,
-} from '@carbon/icons-react';
+import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { PrefixContext } from '../../internal/usePrefix';
 
 export default class DatePickerInput extends Component {
@@ -212,7 +208,7 @@ export default class DatePickerInput extends Component {
 
             if (invalid) {
               return (
-                <WarningFilled16
+                <WarningFilled
                   className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
                 />
               );
@@ -220,21 +216,21 @@ export default class DatePickerInput extends Component {
 
             if (!invalid && warn) {
               return (
-                <WarningAltFilled16
+                <WarningAltFilled
                   className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
                 />
               );
             }
 
             return (
-              <Calendar16
+              <Calendar
                 className={`${prefix}--date-picker__icon`}
                 aria-label={iconDescription}
                 onClick={openCalendar}
                 role="img"
                 aria-hidden="true">
                 {iconDescription && <title>{iconDescription}</title>}
-              </Calendar16>
+              </Calendar>
             );
           })();
 

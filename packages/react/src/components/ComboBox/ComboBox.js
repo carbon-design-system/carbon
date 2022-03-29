@@ -11,9 +11,9 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState, useRef } from 'react';
 import { Text } from '../Text';
 import {
-  Checkmark16,
-  WarningAltFilled16,
-  WarningFilled16,
+  Checkmark,
+  WarningAltFilled,
+  WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
@@ -328,12 +328,12 @@ const ComboBox = React.forwardRef((props, ref) => {
                   ref={mergeRefs(textInput, ref)}
                 />
                 {invalid && (
-                  <WarningFilled16
+                  <WarningFilled
                     className={`${prefix}--list-box__invalid-icon`}
                   />
                 )}
                 {showWarning && (
-                  <WarningAltFilled16
+                  <WarningAltFilled
                     className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
                   />
                 )}
@@ -384,7 +384,7 @@ const ComboBox = React.forwardRef((props, ref) => {
                               itemToString(item)
                             )}
                             {selectedItem === item && (
-                              <Checkmark16
+                              <Checkmark
                                 className={`${prefix}--list-box__menu-item__selected-icon`}
                               />
                             )}

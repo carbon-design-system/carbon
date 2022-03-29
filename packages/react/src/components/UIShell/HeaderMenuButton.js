@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Close20, Menu20 } from '@carbon/icons-react';
+import { Close, Menu } from '@carbon/icons-react';
 
 import cx from 'classnames';
 import React from 'react';
@@ -37,8 +37,8 @@ const HeaderMenuButton = ({
     'aria-label': ariaLabel,
     'aria-labelledby': ariaLabelledBy,
   };
-  const menuIcon = renderMenuIcon ? renderMenuIcon : <Menu20 />;
-  const closeIcon = renderCloseIcon ? renderCloseIcon : <Close20 />;
+  const menuIcon = renderMenuIcon ? renderMenuIcon : <Menu size={20} />;
+  const closeIcon = renderCloseIcon ? renderCloseIcon : <Close size={20} />;
 
   return (
     <button

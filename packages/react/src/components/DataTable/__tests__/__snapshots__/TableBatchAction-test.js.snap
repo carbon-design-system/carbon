@@ -7,6 +7,9 @@ exports[`DataTable.TableBatchAction should render 1`] = `
   renderIcon={
     Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "size": [Function],
+      },
       "render": [Function],
     }
   }
@@ -17,6 +20,9 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     renderIcon={
       Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": [Function],
+        },
         "render": [Function],
       }
     }
@@ -34,7 +40,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       tabIndex={0}
       type="button"
     >
-      <ForwardRef(AddFilled16)
+      <ForwardRef(AddFilled)
         aria-hidden="true"
         aria-label="test"
         className="cds--btn__icon"
@@ -73,7 +79,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
             />
           </svg>
         </Icon>
-      </ForwardRef(AddFilled16)>
+      </ForwardRef(AddFilled)>
     </button>
   </Button>
 </TableBatchAction>

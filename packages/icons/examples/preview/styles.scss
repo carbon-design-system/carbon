@@ -1,6 +1,6 @@
-@import '../../../elements/scss/elements';
-@import '../../../elements/scss/type/font-face/mono';
-@import '../../../elements/scss/type/font-face/sans';
+@import '@carbon/elements/scss/elements';
+@import '@carbon/elements/scss/type/font-face/mono';
+@import '@carbon/elements/scss/type/font-face/sans';
 
 @include carbon--font-face-sans();
 @include carbon--font-face-mono();
