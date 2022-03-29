@@ -6,7 +6,7 @@
  */
 
 import './story.scss';
-import { Checkbox16 } from '@carbon/icons-react';
+import { Checkbox } from '@carbon/icons-react';
 import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import mdx from './Popover.mdx';
@@ -59,7 +59,7 @@ const PlaygroundStory = (props) => {
       highContrast={highContrast}
       open={open}>
       <div className="playground-trigger">
-        <Checkbox16 />
+        <Checkbox />
       </div>
       <PopoverContent className="p-3">
         <p className="popover-title">Available storage</p>

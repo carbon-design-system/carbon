@@ -8,145 +8,120 @@
 import React from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import Button from '../../Button';
+import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
-import {
-  Monster20,
-  Corn20,
-  Bat20,
-  Monster16,
-  Corn16,
-  Bat16,
-} from '@carbon/icons-react';
-
-import { unstable_FeatureFlags as FeatureFlags } from 'carbon-components-react';
+import { Monster, Corn, Bat } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Tabs',
   component: Tabs,
-  decorators: [
-    (Story) => (
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <Story />
-      </FeatureFlags>
-    ),
-  ],
   subcomponents: {
     TabList,
     Tab,
     TabPanels,
     TabPanel,
   },
-  parameters: {},
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => (
-  <div style={{ width: '400px' }}>
-    <Tabs>
-      <TabList aria-label="List of tabs">
-        <Tab>Tab Label 1</Tab>
-        <Tab>Tab Label 2</Tab>
-        <Tab disabled>Tab Label 3</Tab>
-        <Tab>Tab Label 4 with a very long long label</Tab>
-        <Tab>Tab Label 5</Tab>
-        <Tab>Tab Label 6</Tab>
-        <Tab>Tab Label 7</Tab>
-        <Tab>Tab Label 8</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          Tab Panel 1 <Button>Example button</Button>
-        </TabPanel>
-        <TabPanel>Tab Panel 2</TabPanel>
-        <TabPanel>Tab Panel 3</TabPanel>
-        <TabPanel>Tab Panel 4</TabPanel>
-        <TabPanel>Tab Panel 5</TabPanel>
-        <TabPanel>Tab Panel 6</TabPanel>
-        <TabPanel>Tab Panel 7</TabPanel>
-        <TabPanel>Tab Panel 8</TabPanel>
-      </TabPanels>
-    </Tabs>
-  </div>
-);
-
-export const Manual = () => (
-  <div style={{ width: '400px' }}>
-    <Tabs>
-      <TabList activation="manual" aria-label="List of tabs">
-        <Tab>Tab Label 1</Tab>
-        <Tab>Tab Label 2</Tab>
-        <Tab disabled>Tab Label 3</Tab>
-        <Tab>Tab Label 4 with a very long long label</Tab>
-        <Tab>Tab Label 5</Tab>
-        <Tab>Tab Label 6</Tab>
-        <Tab>Tab Label 7</Tab>
-        <Tab>Tab Label 8</Tab>
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          Tab Panel 1 <Button>Example button</Button>
-        </TabPanel>
-        <TabPanel>Tab Panel 2</TabPanel>
-        <TabPanel>Tab Panel 3</TabPanel>
-        <TabPanel>Tab Panel 4</TabPanel>
-        <TabPanel>Tab Panel 5</TabPanel>
-        <TabPanel>Tab Panel 6</TabPanel>
-        <TabPanel>Tab Panel 7</TabPanel>
-        <TabPanel>Tab Panel 8</TabPanel>
-      </TabPanels>
-    </Tabs>
-  </div>
-);
-
-export const Icon20Only = () => (
+export const Line = (args) => (
   <Tabs>
-    <TabList iconSize="lg" aria-label="List of tabs">
-      <IconTab label="Monster" disabled>
-        <Monster20 aria-label="Monster" />
-      </IconTab>
-      <IconTab label="Corn">
-        <Corn20 aria-label="Corn" />
-      </IconTab>
-      <IconTab label="Bat">
-        <Bat20 aria-label="Bat" />
-      </IconTab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-export const IconOnly = () => (
-  <Tabs>
-    <TabList iconSize="default" aria-label="List of tabs">
-      <IconTab label="Monster" disabled>
-        <Monster16 aria-label="Monster" />
-      </IconTab>
-      <IconTab label="Corn">
-        <Corn16 aria-label="Corn" />
-      </IconTab>
-      <IconTab label="Bat">
-        <Bat16 aria-label="Bat" />
-      </IconTab>
-    </TabList>
-    <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-    </TabPanels>
-  </Tabs>
-);
-
-export const Contained = () => (
-  <Tabs>
-    <TabList aria-label="List of tabs" contained>
+    <TabList aria-label="List of tabs" {...args}>
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
       <Tab disabled>Tab Label 3</Tab>
-      <Tab>Tab Label 4 with a very long long title</Tab>
+      <Tab>Tab Label 4 with a very long long label</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        Tab Panel 1 <Button>Example button</Button>
+      </TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const Manual = (args) => (
+  <Tabs>
+    <TabList activation="manual" aria-label="List of tabs" {...args}>
+      <Tab>Tab Label 1</Tab>
+      <Tab>Tab Label 2</Tab>
+      <Tab disabled>Tab Label 3</Tab>
+      <Tab title="Tab Label 4 with a very long long label">
+        Tab Label 4 with a very long long label
+      </Tab>
+      <Tab>Tab Label 5</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>
+        Tab Panel 1 <Button>Example button</Button>
+      </TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const Icon20Only = (args) => (
+  <Tabs>
+    <TabList iconSize="lg" aria-label="List of tabs" {...args}>
+      <IconTab label="Monster" disabled>
+        <Monster size={20} aria-label="Monster" />
+      </IconTab>
+      <IconTab label="Corn">
+        <Corn size={20} aria-label="Corn" />
+      </IconTab>
+      <IconTab label="Bat">
+        <Bat size={20} aria-label="Bat" />
+      </IconTab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const IconOnly = (args) => (
+  <Tabs>
+    <TabList iconSize="default" aria-label="List of tabs" {...args}>
+      <IconTab label="Monster" disabled>
+        <Monster aria-label="Monster" />
+      </IconTab>
+      <IconTab label="Corn">
+        <Corn aria-label="Corn" />
+      </IconTab>
+      <IconTab label="Bat">
+        <Bat aria-label="Bat" />
+      </IconTab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>Tab Panel 2</TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
+export const Contained = (args) => (
+  <Tabs>
+    <TabList aria-label="List of tabs" contained {...args}>
+      <Tab>Tab Label 1</Tab>
+      <Tab>Tab Label 2</Tab>
+      <Tab disabled>Tab Label 3</Tab>
+      <Tab title="Tab Label 4 with a very long long title">
+        Tab Label 4 with a very long long title
+      </Tab>
       <Tab>Tab Label 5</Tab>
     </TabList>
     <TabPanels>
@@ -161,9 +136,9 @@ export const Contained = () => (
   </Tabs>
 );
 
-export const Skeleton = () => {
+export const Skeleton = (args) => {
   return (
-    <div style={{ maxWidth: '100%' }}>
+    <div style={{ maxWidth: '100%' }} {...args}>
       <TabsSkeleton />
     </div>
   );

@@ -8,15 +8,13 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
 import {
-  ArrowUp20 as Arrow,
-  ArrowsVertical20 as Arrows,
+  ArrowUp as Arrow,
+  ArrowsVertical as Arrows,
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const translationKeys = {
   buttonDescription: 'carbon.table.header.icon.description',
@@ -67,6 +65,7 @@ const TableHeader = React.forwardRef(function TableHeader(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const uniqueId = useId('table-sort');
 
   if (!isSortable) {
@@ -119,8 +118,11 @@ const TableHeader = React.forwardRef(function TableHeader(
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
-          <Arrow className={`${prefix}--table-sort__icon`} />
-          <Arrows className={`${prefix}--table-sort__icon-unsorted`} />
+          <Arrow size={20} className={`${prefix}--table-sort__icon`} />
+          <Arrows
+            size={20}
+            className={`${prefix}--table-sort__icon-unsorted`}
+          />
         </span>
       </button>
     </th>

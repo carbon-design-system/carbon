@@ -10,10 +10,8 @@ import PropTypes from 'prop-types';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
 import deprecate from '../../prop-types/deprecate';
 import React from 'react';
-import { ChevronRight16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { ChevronRight } from '@carbon/icons-react';
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableExpandHeader = ({
   ariaLabel,
@@ -26,6 +24,7 @@ const TableExpandHeader = ({
   children,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const className = cx(`${prefix}--table-expand`, headerClassName);
   const previousValue = isExpanded ? 'collapsed' : undefined;
 
@@ -42,7 +41,7 @@ const TableExpandHeader = ({
           onClick={onExpand}
           title={expandIconDescription}
           aria-label={ariaLabel}>
-          <ChevronRight16
+          <ChevronRight
             className={`${prefix}--table-expand__svg`}
             aria-label={expandIconDescription}
           />

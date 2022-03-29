@@ -7,7 +7,6 @@
 
 import React, { useState, useCallback, useEffect } from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
 import {
   FileUploaderItem,
   FileUploaderDropContainer,
@@ -16,7 +15,7 @@ import {
 // import uid from '../../../tools/uniqueId';
 import '../FileUploader-story.scss';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 // -- copied from internal/tools/uniqueId.js
 let lastId = 0;

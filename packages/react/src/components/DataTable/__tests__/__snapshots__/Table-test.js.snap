@@ -7,10 +7,10 @@ exports[`DataTable.Table should render 1`] = `
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table custom-class bx--data-table--no-border"
+      className="cds--data-table custom-class cds--data-table--no-border"
     />
   </div>
 </Table>
@@ -18,13 +18,13 @@ exports[`DataTable.Table should render 1`] = `
 
 exports[`DataTable.Table should support enable sticky header 1`] = `
 <section
-  className="bx--data-table_inner-container"
+  className="cds--data-table_inner-container"
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border bx--data-table--sticky-header"
+      className="cds--data-table cds--data-table--no-border cds--data-table--sticky-header"
     />
   </div>
 </section>

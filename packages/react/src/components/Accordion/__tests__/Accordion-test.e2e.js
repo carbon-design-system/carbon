@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/components/accordion/_accordion.scss';
+import '../../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
@@ -30,7 +30,6 @@ describe('Accordion', () => {
     cy.findByText(/Section 1/).should('be.visible');
     cy.findByText(/Section 2/).should('be.visible');
     cy.findByText(/Section 3/).should('be.visible');
-
     cy.findByText(/Panel 1/).should('not.be.visible');
     cy.findByText(/Panel 2/).should('not.be.visible');
     cy.findByText(/Panel 3/).should('not.be.visible');
@@ -38,7 +37,7 @@ describe('Accordion', () => {
     // snapshots should always be taken _after_ an assertion that
     // a element/component should be visible. This is to ensure
     // the DOM has settled and the element has fully loaded.
-    cy.percySnapshot();
+    // cy.percySnapshot();
   });
 
   it('should tab between items and open on space', () => {
@@ -60,7 +59,7 @@ describe('Accordion', () => {
     // snapshots should always be taken _after_ an assertion that
     // a element/component should be visible. This is to ensure
     // the DOM has settled and the element has fully loaded.
-    cy.percySnapshot();
+    // cy.percySnapshot();
 
     cy.realPress(['Shift', 'Tab']);
     cy.realPress('Space');

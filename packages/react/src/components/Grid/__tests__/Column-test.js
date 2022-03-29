@@ -6,11 +6,10 @@
  */
 
 import { render } from '@testing-library/react';
-import { settings } from 'carbon-components';
 import React from 'react';
 import { Column } from '../';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Column', () => {
   it('should support a custom element as the root node', () => {

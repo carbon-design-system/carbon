@@ -20,7 +20,7 @@ describe('@carbon/motion', () => {
   test('@carbon/motion/scss/motion.scss', async () => {
     const { getValue } = await render(`
       @use 'sass:meta';
-      @use '../scss/motion';
+      @use '../index.scss' as motion;
 
       $_: get-value(meta.module-variables('motion'));
     `);

@@ -18,6 +18,8 @@ body:
       description: Which package(s) are you using?
       multiple: true
       options:
+        - '@carbon/react'
+        - '@carbon/styles'
         - 'carbon-components'
         - 'carbon-components-react'
         - '@carbon/colors'

@@ -6,10 +6,10 @@ exports[`DataTable.TableHead should render 1`] = `
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      className="cds--data-table cds--data-table--no-border"
     >
       <TableHead
         className="custom-class"

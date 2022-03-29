@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Filter16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Filter } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
@@ -19,6 +17,7 @@ let didWarnAboutDeprecation = false;
  * The filter button for `<Search>`.
  */
 const SearchFilterButton = ({ labelText, iconDescription, ...other }) => {
+  const prefix = usePrefix();
   if (__DEV__) {
     warning(
       didWarnAboutDeprecation,
@@ -33,7 +32,7 @@ const SearchFilterButton = ({ labelText, iconDescription, ...other }) => {
       aria-label={labelText}
       title={labelText}
       {...other}>
-      <Filter16
+      <Filter
         className={`${prefix}--search-filter`}
         aria-label={iconDescription}
       />

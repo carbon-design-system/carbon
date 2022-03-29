@@ -7,11 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import {
-  Delete16 as Delete,
-  Save16 as Save,
-  Download16 as Download,
-} from '@carbon/icons-react';
+import { Delete, Save, Download } from '@carbon/icons-react';
 
 import Button from '../../Button';
 import DataTable, {
@@ -233,7 +229,7 @@ export const Small = () => (
               </Button>
             </TableToolbarContent>
           </TableToolbar>
-          <Table {...getTableProps()}>
+          <Table {...getTableProps()} size="sm">
             <TableHead>
               <TableRow>
                 <TableSelectAll {...getSelectionProps()} />

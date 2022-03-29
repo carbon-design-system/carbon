@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronDown20 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -47,7 +47,7 @@ const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
         ))}
       </select>
       <div className={`${prefix}--side-nav__switcher-chevron`}>
-        <ChevronDown20 />
+        <ChevronDown size={20} />
       </div>
     </div>
   );

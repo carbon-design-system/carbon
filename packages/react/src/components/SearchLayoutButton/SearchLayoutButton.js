@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ListBulleted16, Grid16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { ListBulleted, Grid } from '@carbon/icons-react';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
@@ -20,6 +18,8 @@ let didWarnAboutDeprecation = false;
  */
 class SearchLayoutButton extends Component {
   state = { format: 'list' };
+
+  static contextType = PrefixContext;
 
   static propTypes = {
     /**
@@ -90,18 +90,19 @@ class SearchLayoutButton extends Component {
   };
 
   render() {
+    const { context: prefix } = this;
     const { labelText, iconDescriptionList, iconDescriptionGrid } = this.props;
     const SearchLayoutButtonIcon = () => {
       if (this.state.format === 'list') {
         return (
-          <ListBulleted16
+          <ListBulleted
             className={`${prefix}--search-view`}
             aria-label={iconDescriptionList}
           />
         );
       }
       return (
-        <Grid16
+        <Grid
           className={`${prefix}--search-view`}
           aria-label={iconDescriptionGrid}
         />

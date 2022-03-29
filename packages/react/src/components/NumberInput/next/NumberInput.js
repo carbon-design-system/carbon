@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Add16, Subtract16 } from '@carbon/icons-react';
+import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
@@ -197,7 +197,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 tabIndex="-1"
                 title={decrementNumLabel || iconDescription}
                 type="button">
-                <Subtract16 className="down-icon" />
+                <Subtract className="down-icon" />
               </button>
               <div className={`${prefix}--number__rule-divider`} />
               <button
@@ -222,7 +222,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 tabIndex="-1"
                 title={incrementNumLabel || iconDescription}
                 type="button">
-                <Add16 className="up-icon" />
+                <Add className="up-icon" />
               </button>
               <div className={`${prefix}--number__rule-divider`} />
             </div>
