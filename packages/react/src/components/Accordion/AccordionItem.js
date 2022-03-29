@@ -12,10 +12,7 @@ import React, { useState } from 'react';
 import { Text } from '../Text';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
-import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
-
-const defaultRenderToggle = (props) => <button type="button" {...props} />;
 
 function AccordionItem({
   children,
@@ -23,7 +20,6 @@ function AccordionItem({
   iconDescription, // eslint-disable-line
   open = false,
   onHeadingClick,
-  renderExpando = defaultRenderToggle, // remove renderExpando in next major release
   renderToggle,
   title = 'title',
   disabled,
@@ -42,7 +38,7 @@ function AccordionItem({
     [customClassName]: !!customClassName,
   });
 
-  const Toggle = renderToggle || renderExpando; // remove renderExpando in next major release
+  const Toggle = renderToggle;
 
   if (open !== prevIsOpen) {
     setAnimation(isOpen ? 'collapsing' : 'expanding');
@@ -116,17 +112,6 @@ AccordionItem.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * The description of the expand icon.
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop has been deprecated as it is no longer ' +
-      'required. Feel free to remove this prop from <AccordionItem>. This ' +
-      'prop will be removed in the next major release of ' +
-      '`carbon-components-react`'
-  ),
-
-  /**
    * The handler of the massaged `click` event.
    */
   onClick: PropTypes.func,
@@ -140,15 +125,6 @@ AccordionItem.propTypes = {
    * `true` to open the expand.
    */
   open: PropTypes.bool,
-
-  /**
-   * The callback function to render the expand button.
-   * Can be a React component class.
-   */
-  renderExpando: deprecate(
-    PropTypes.func,
-    'The `renderExpando` prop has been deprecated and will be removed in the next major release of Carbon. Use the `renderToggle` prop instead.'
-  ),
 
   /**
    * The callback function to render the expand button.

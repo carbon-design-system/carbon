@@ -10,7 +10,7 @@ exports[`DataTable.Table should render 1`] = `
     className="cds--data-table-content"
   >
     <table
-      className="cds--data-table custom-class cds--data-table--no-border"
+      className="cds--data-table custom-class"
     />
   </div>
 </Table>
@@ -24,7 +24,7 @@ exports[`DataTable.Table should support enable sticky header 1`] = `
     className="cds--data-table-content"
   >
     <table
-      className="cds--data-table cds--data-table--no-border cds--data-table--sticky-header"
+      className="cds--data-table cds--data-table--sticky-header"
     />
   </div>
 </section>

@@ -12,7 +12,6 @@ import { Close } from '@carbon/icons-react';
 import toggleClass from '../../../tools/toggleClass';
 import Button from '../../Button';
 import ButtonSet from '../../ButtonSet';
-import deprecate from '../../../prop-types/deprecate';
 import requiredIfGivenPropIsTruthy from '../../../prop-types/requiredIfGivenPropIsTruthy';
 import wrapFocus, {
   elementOrParentIsFloatingMenu,
@@ -30,14 +29,12 @@ const Modal = React.forwardRef(function Modal(
     modalLabel,
     modalAriaLabel,
     passiveModal,
-    hasForm,
     secondaryButtonText,
     primaryButtonText,
     open,
     onRequestClose,
     onRequestSubmit,
     onSecondarySubmit,
-    iconDescription,
     primaryButtonDisabled,
     danger,
     alert,
@@ -133,7 +130,6 @@ const Modal = React.forwardRef(function Modal(
   });
 
   const contentClasses = classNames(`${prefix}--modal-content`, {
-    [`${prefix}--modal-content--with-form`]: hasForm, //TO-DO: deprecate & remove this with v11
     [`${prefix}--modal-scroll-content`]: hasScrollingContent,
   });
 
@@ -147,7 +143,7 @@ const Modal = React.forwardRef(function Modal(
       className={modalCloseButtonClass}
       type="button"
       onClick={onRequestClose}
-      title={ariaLabel ? ariaLabel : iconDescription}
+      title={ariaLabel}
       aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
       ref={button}>
       <Close
@@ -347,35 +343,9 @@ Modal.propTypes = {
   danger: PropTypes.bool,
 
   /**
-   * Deprecated; Used for advanced focus-wrapping feature using 3rd party library,
-   * but it's now achieved without a 3rd party library.
-   */
-  focusTrap: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`focusTrap\` for Modal has been deprecated, as the feature of \`focusTrap\` runs by default.`
-  ),
-
-  /**
-   * Deprecated: Used to determine whether the modal content has a form element to adjust spacing,
-   * but now spacing styles account for all types of elements
-   */
-  hasForm: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`hasForm\` for Modal has been deprecated, as the feature of \`hasForm\` runs by default.`
-  ),
-
-  /**
    * Specify whether the modal contains scrolling content
    */
   hasScrollingContent: PropTypes.bool,
-
-  /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The iconDescription prop is no longer needed and can be safely removed. This prop will be removed in the next major release of Carbon.'
-  ),
 
   /**
    * Specify the DOM element ID of the top-level node.

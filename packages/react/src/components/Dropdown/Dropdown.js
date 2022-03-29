@@ -17,7 +17,6 @@ import {
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
-import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -278,15 +277,6 @@ Dropdown.propTypes = {
     PropTypes.string,
     PropTypes.number,
   ]),
-
-  /**
-   * Specify whether you want the inline version of this control
-   */
-  inline: deprecate(
-    PropTypes.bool,
-    `The \`inline\` prop has been deprecated and will
-    be removed in the next major release. To specify the inline variant of Dropdown, please use the \`type\` prop.`
-  ),
 
   /**
    * Specify if the currently selected value is invalid.

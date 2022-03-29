@@ -9,14 +9,11 @@ import PropTypes from 'prop-types';
 import React, { useState, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import { ButtonKinds } from '../../prop-types/types';
-import deprecate from '../../prop-types/deprecate';
 import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
 import toggleClass from '../../tools/toggleClass';
-import { useFeatureFlag } from '../FeatureFlags';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 const Button = React.forwardRef(function Button(
   {
@@ -37,8 +34,7 @@ const Button = React.forwardRef(function Button(
     onMouseEnter,
     onMouseLeave,
     renderIcon: ButtonImageElement,
-    size = FeatureFlags.enabled('enable-v11-release') ? 'lg' : 'default',
-    small,
+    size = 'lg',
     tabIndex = 0,
     tooltipAlignment = 'center',
     tooltipPosition = 'top',
@@ -125,20 +121,13 @@ const Button = React.forwardRef(function Button(
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
-  const enabled = useFeatureFlag('enable-v11-release');
-
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]:
-      (size === 'small' && !isExpressive) ||
-      (size === 'sm' && !isExpressive) ||
-      (small && !isExpressive),
+    [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive,
     [`${prefix}--btn--md`]:
       (size === 'field' && !isExpressive) || (size === 'md' && !isExpressive),
-    // V11: change lg to xl
-    [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
-    // V11: change xl to 2xl
-    [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
+    [`${prefix}--btn--lg`]: size === 'xl',
+    [`${prefix}--btn--xl`]: size === '2xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
@@ -347,27 +336,7 @@ Button.propTypes = {
   /**
    * Specify the size of the button, from the following list of sizes:
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl'])
-    : PropTypes.oneOf([
-        'default',
-        'field',
-        'small',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-        '2xl',
-      ]),
-
-  /**
-   * Deprecated in v10 in favor of `size`.
-   * Specify whether the Button should be a small variant
-   */
-  small: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
-  ),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Optional prop to specify the tabIndex of the Button
