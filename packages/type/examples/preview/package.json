@@ -8,6 +8,7 @@
     "develop": "parcel index.html --no-cache"
   },
   "devDependencies": {
+    "@carbon/type": "^10.44.0",
     "@parcel/transformer-sass": "^2.0.1",
     "parcel": "^2.0.1"
   },

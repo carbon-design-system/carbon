@@ -5,25 +5,26 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '@carbon/layout/scss/convert';
-@import 'font-family';
-@import 'styles';
+@use 'sass:map';
+@use 'sass:meta';
+@use '@carbon/layout';
+@use 'font-family' as *;
 
 /// Include a type reset for a given body and mono font family
-/// @param {String} $body-font-family [carbon--font-family('sans')] - The font family used on the `<body>` element
-/// @param {String} $mono-font-family [carbon--font-family('mono')] - The font family used on elements that require mono fonts, like the `<code>` element
+/// @param {String} $body-font-family [font-family('sans')] - The font family used on the `<body>` element
+/// @param {String} $mono-font-family [font-family('mono')] - The font family used on elements that require mono fonts, like the `<code>` element
 /// @access public
 /// @group @carbon/type
-@mixin carbon--type-reset(
-  $body-font-family: carbon--font-family('sans'),
-  $mono-font-family: carbon--font-family('mono')
+@mixin reset(
+  $body-font-family: font-family('sans'),
+  $mono-font-family: font-family('mono')
 ) {
   html {
     font-size: 100%;
   }
 
   body {
-    @include carbon--font-weight('regular');
+    @include font-weight('regular');
 
     font-family: $body-font-family;
     -moz-osx-font-smoothing: grayscale;
@@ -36,53 +37,6 @@
   }
 
   strong {
-    @include carbon--font-weight('semibold');
-  }
-}
-
-/// Include default type styles
-/// @access public
-/// @group @carbon/type
-@mixin carbon--default-type {
-  h1 {
-    @include carbon--type-style('productive-heading-06');
-  }
-
-  h2 {
-    @include carbon--type-style('productive-heading-05');
-  }
-
-  h3 {
-    @include carbon--type-style('productive-heading-04');
-  }
-
-  h4 {
-    @include carbon--type-style('productive-heading-03');
-  }
-
-  h5 {
-    @include carbon--type-style('productive-heading-02');
-  }
-
-  h6 {
-    @include carbon--type-style('productive-heading-01');
-  }
-
-  p {
-    @include carbon--type-style('body-long-02');
-  }
-
-  a {
-    @if global-variable-exists('carbon--theme') and
-      map-has-key($carbon--theme, 'link-01')
-    {
-      color: map-get($carbon--theme, 'link-01');
-    } @else {
-      color: #0062fe;
-    }
-  }
-
-  em {
-    font-style: italic;
+    @include font-weight('semibold');
   }
 }
