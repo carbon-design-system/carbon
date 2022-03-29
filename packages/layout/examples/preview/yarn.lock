@@ -309,6 +309,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/layout@npm:10.36.0":
+  version: 10.36.0
+  resolution: "@carbon/layout@npm:10.36.0"
+  checksum: 4efece45c3d09fa4c231fdeff79f50069506bca632d847cc83dd3c3de30c9d63d57f212753218d1813e311080ee7c91a4c5b396187e587833e0f28655ccc15a7
+  languageName: node
+  linkType: hard
+
 "@iarna/toml@npm:^2.2.0":
   version: 2.2.5
   resolution: "@iarna/toml@npm:2.2.5"
@@ -4085,6 +4092,7 @@ fsevents@~2.3.2:
   version: 0.0.0-use.local
   resolution: "layout-basic-example@workspace:."
   dependencies:
+    "@carbon/layout": 10.36.0
     "@parcel/transformer-sass": ^2.0.1
     parcel: ^2.0.1
   languageName: unknown

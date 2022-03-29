@@ -155,7 +155,7 @@ Object {
 }
 `;
 
-exports[`unstable_hoverColors 1`] = `
+exports[`hoverColors 1`] = `
 Object {
   "blackHover": "#212121",
   "blueHover": Object {

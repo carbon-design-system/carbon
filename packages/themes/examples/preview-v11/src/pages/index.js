@@ -5,14 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { colors, unstable_hoverColors } from '@carbon/colors';
+import { colors, hoverColors } from '@carbon/colors';
 import React from 'react';
-import {
-  themes,
-  TokenFormat,
-  group,
-  set as tokenSet,
-} from '../../../../src/next';
+import { themes } from '../../../../src';
+import { TokenFormat, group, set as tokenSet } from '../../../../src/tokens';
 
 const tokens = group.getTokens();
 const groups = group.getTokenGroups();
@@ -60,7 +56,7 @@ for (const [swatch, grades] of Object.entries(colors)) {
   }
 }
 
-for (const [swatch, grades] of Object.entries(unstable_hoverColors)) {
+for (const [swatch, grades] of Object.entries(hoverColors)) {
   if (typeof grades !== 'object') {
     addColorByValue(
       grades,
