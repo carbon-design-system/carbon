@@ -441,6 +441,8 @@ Map {
   },
   "CodeSnippet" => Object {
     "defaultProps": Object {
+      "ariaLabel": "Copy to clipboard",
+      "copyLabel": "Copy to clipboard",
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
@@ -1469,6 +1471,21 @@ Map {
       "defaultProps": Object {
         "renderIcon": Object {
           "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "size": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "number",
+                  },
+                  Object {
+                    "type": "string",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
           "render": [Function],
         },
       },
@@ -1861,6 +1878,21 @@ Map {
         "iconDescription": "Settings",
         "renderIcon": Object {
           "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "size": Object {
+              "args": Array [
+                Array [
+                  Object {
+                    "type": "number",
+                  },
+                  Object {
+                    "type": "string",
+                  },
+                ],
+              ],
+              "type": "oneOfType",
+            },
+          },
           "render": [Function],
         },
       },
@@ -6489,6 +6521,21 @@ Map {
     "defaultProps": Object {
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "number",
+                },
+                Object {
+                  "type": "string",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        },
         "render": [Function],
       },
     },
@@ -6881,6 +6928,21 @@ Map {
       "iconDescription": "Settings",
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "number",
+                },
+                Object {
+                  "type": "string",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        },
         "render": [Function],
       },
     },

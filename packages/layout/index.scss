@@ -5,5 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'scss/modules/convert';
-@forward 'scss/modules/spacing';
+@forward 'scss/convert';
+@forward 'scss/spacing';
+@forward 'scss/generated/container';
+@forward 'scss/generated/icon-size';
+@forward 'scss/generated/size';

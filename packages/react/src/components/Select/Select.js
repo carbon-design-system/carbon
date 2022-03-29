@@ -9,9 +9,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import {
-  ChevronDown16,
-  WarningFilled16,
-  WarningAltFilled16,
+  ChevronDown,
+  WarningFilled,
+  WarningAltFilled,
 } from '@carbon/icons-react';
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -102,12 +102,12 @@ const Select = React.forwardRef(function Select(
           ref={ref}>
           {children}
         </select>
-        <ChevronDown16 className={`${prefix}--select__arrow`} />
+        <ChevronDown className={`${prefix}--select__arrow`} />
         {invalid && (
-          <WarningFilled16 className={`${prefix}--select__invalid-icon`} />
+          <WarningFilled className={`${prefix}--select__invalid-icon`} />
         )}
         {!invalid && warn && (
-          <WarningAltFilled16
+          <WarningAltFilled
             className={`${prefix}--select__invalid-icon ${prefix}--select__invalid-icon--warning`}
           />
         )}

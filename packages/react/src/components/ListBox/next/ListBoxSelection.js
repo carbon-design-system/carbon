@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Close16 } from '@carbon/icons-react';
+import { Close } from '@carbon/icons-react';
 import { match, keys } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 
@@ -81,7 +81,7 @@ function ListBoxSelection({
           tabIndex={disabled ? -1 : 0}
           title={description}
           type="button">
-          <Close16 />
+          <Close />
         </button>
       </div>
     );
@@ -97,7 +97,7 @@ function ListBoxSelection({
       tabIndex={disabled ? -1 : 0}
       title={description}
       type="button">
-      <Close16 />
+      <Close />
     </button>
   );
 }

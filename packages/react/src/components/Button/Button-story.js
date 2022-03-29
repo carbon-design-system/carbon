@@ -8,13 +8,7 @@
 import React from 'react';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import { iconAddSolid, iconSearch } from 'carbon-icons';
-import {
-  Add16,
-  AddFilled16,
-  Search16,
-  PlayOutlineFilled32,
-  PlayOutlineFilled16,
-} from '@carbon/icons-react';
+import { Add, AddFilled, Search, PlayOutlineFilled } from '@carbon/icons-react';
 import Button from '../Button';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import ButtonSet from '../ButtonSet';
@@ -22,23 +16,19 @@ import mdx from './Button.mdx';
 
 const icons = {
   None: 'None',
-  'Add (Add16 from `@carbon/icons-react`)': 'Add16',
-  'Add (Filled) (AddFilled16 from `@carbon/icons-react`)': 'AddFilled16',
-  'Search (Search16 from `@carbon/icons-react`)': 'Search16',
-  'PlayOutlineFilled16 (PlayOutlineFilled16 from `@carbon/icons-react`)':
-    'PlayOutlineFilled16',
-  'PlayOutlineFilled32 (PlayOutlineFilled32 from `@carbon/icons-react`)':
-    'PlayOutlineFilled32',
+  Add: 'Add',
+  'Add (Filled)': 'AddFilled',
+  Search: 'Search',
+  'PlayOutline (Filled)': 'PlayOutlineFilled',
 };
 
 const iconMap = {
   iconAddSolid,
   iconSearch,
-  Add16,
-  AddFilled16,
-  Search16,
-  PlayOutlineFilled16,
-  PlayOutlineFilled32,
+  Add,
+  AddFilled,
+  Search,
+  PlayOutlineFilled,
 };
 
 const kinds = {
@@ -87,10 +77,10 @@ const props = {
   iconOnly: () => {
     let iconToUse;
 
-    if (iconMap[select('Icon (icon)', icons, 'Add16')] == undefined) {
-      iconToUse = Add16;
+    if (iconMap[select('Icon (icon)', icons, 'Add')] == undefined) {
+      iconToUse = Add;
     } else {
-      iconToUse = iconMap[select('Icon (icon)', icons, 'Add16')];
+      iconToUse = iconMap[select('Icon (icon)', icons, 'Add')];
     }
     return {
       className: 'some-class',
@@ -220,7 +210,7 @@ export const Playground = () => {
 };
 
 export const IconButton = () => (
-  <Button renderIcon={Add16} iconDescription="Icon Description" hasIconOnly />
+  <Button renderIcon={Add} iconDescription="Icon Description" hasIconOnly />
 );
 
 IconButton.story = {
@@ -267,7 +257,7 @@ export const ExpressiveButtons = () => {
         style={{
           margin: '1rem',
         }}>
-        <Button isExpressive size="default" renderIcon={Add16}>
+        <Button isExpressive size="default" renderIcon={Add}>
           Button
         </Button>
       </div>
@@ -277,7 +267,7 @@ export const ExpressiveButtons = () => {
         }}>
         <Button
           isExpressive
-          renderIcon={Add16}
+          renderIcon={Add}
           hasIconOnly
           iconDescription="Icon description"
         />

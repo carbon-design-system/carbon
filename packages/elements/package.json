@@ -1,7 +1,7 @@
 {
   "name": "@carbon/elements",
   "description": "A collection of design elements in code for the IBM Design Language",
-  "version": "10.54.0",
+  "version": "10.55.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -31,18 +31,17 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonElements && node tasks/build.js && carbon-cli check \"scss/*.scss\"",
-    "clean": "rimraf es lib umd && node tasks/clean.js"
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonElements",
+    "clean": "rimraf es lib umd"
   },
   "dependencies": {
     "@carbon/colors": "^10.37.0",
     "@carbon/grid": "^10.43.0",
     "@carbon/icons": "^10.48.0",
-    "@carbon/import-once": "^10.7.0",
     "@carbon/layout": "^10.37.0",
     "@carbon/motion": "^10.29.0",
-    "@carbon/themes": "^10.53.0",
-    "@carbon/type": "^10.43.0"
+    "@carbon/themes": "^10.54.0",
+    "@carbon/type": "^10.44.0"
   },
   "devDependencies": {
     "@carbon/cli": "^10.34.0",

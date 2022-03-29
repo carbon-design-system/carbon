@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Edit16 } from '@carbon/icons-react';
+import { Edit } from '@carbon/icons-react';
 import React from 'react';
 import { IconButton } from '../';
 
@@ -41,7 +41,7 @@ const PlaygroundStory = (props) => {
       disabled={disabled}
       kind={kind}
       label={label}>
-      <Edit16 />
+      <Edit />
     </IconButton>
   );
 };
