@@ -309,6 +309,89 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/colors@npm:^10.37.0":
+  version: 10.37.1
+  resolution: "@carbon/colors@npm:10.37.1"
+  checksum: 7cdc38370d1a51d968f28de951a180211b33db14f6dee5cd55c1d965ebe74c19c55924898df7c344f72dfa2c46a764ad16696038911e77b43d9b701d34c56514
+  languageName: node
+  linkType: hard
+
+"@carbon/elements@npm:^10.55.0":
+  version: 10.55.0
+  resolution: "@carbon/elements@npm:10.55.0"
+  dependencies:
+    "@carbon/colors": ^10.37.0
+    "@carbon/grid": ^10.43.0
+    "@carbon/icons": ^10.48.0
+    "@carbon/import-once": ^10.7.0
+    "@carbon/layout": ^10.37.0
+    "@carbon/motion": ^10.29.0
+    "@carbon/themes": ^10.54.0
+    "@carbon/type": ^10.44.0
+  checksum: 8aa548120f5257b018a89f98cf41225271574e68686aa4145ea52e73dced92f58edd22f76daaf8c7bd199ca9e1abab19e7dee78868523ec12d08103b679a86a4
+  languageName: node
+  linkType: hard
+
+"@carbon/grid@npm:^10.43.0":
+  version: 10.43.1
+  resolution: "@carbon/grid@npm:10.43.1"
+  dependencies:
+    "@carbon/import-once": ^10.7.0
+    "@carbon/layout": ^10.37.1
+  checksum: d59818f5602b1cada5188982a687ef861c63a2e165ed3266496b0a0b7e2e12528e55d4ac9d7d4134a4f4c19e7e16fd48425e5982279ac86ff914ba879c120a32
+  languageName: node
+  linkType: hard
+
+"@carbon/icons@npm:^10.48.0":
+  version: 10.48.0
+  resolution: "@carbon/icons@npm:10.48.0"
+  checksum: 38c0a89c3a70d56e0490e34ad6c5bb35007a422a7697c419c460c0c2d22135eb1bcf39c54c1cf39f12a4b2d6184eecbdc9b4beeaca84330dcc2638db84a3d92f
+  languageName: node
+  linkType: hard
+
+"@carbon/import-once@npm:^10.7.0":
+  version: 10.7.0
+  resolution: "@carbon/import-once@npm:10.7.0"
+  checksum: c92625bc34833073a2b113a9cf014353210570ed1105225e70c6c6d06e5203407aa472d95685a53b6460794408897641b8d8cd5fd6416f8b0fa36c28919bf5f0
+  languageName: node
+  linkType: hard
+
+"@carbon/layout@npm:^10.37.0, @carbon/layout@npm:^10.37.1":
+  version: 10.37.1
+  resolution: "@carbon/layout@npm:10.37.1"
+  checksum: baabf7e70e4779f0e5000e700bcafe96f272debaac490a4345e39fedf8d0970636f7099e2607aeb9ca6170a56bbacdff69d8181c2a46ed8adac38fadc08332b6
+  languageName: node
+  linkType: hard
+
+"@carbon/motion@npm:^10.29.0":
+  version: 10.29.0
+  resolution: "@carbon/motion@npm:10.29.0"
+  checksum: 15894d6bc7c3cbe575ad8b0ac422846777558be1577b1c63da4ce401f5abd821cc278a302f83b5643262f3ca6348c9ba10d9fc48b735e6dcbb6e407c2424b6df
+  languageName: node
+  linkType: hard
+
+"@carbon/themes@npm:^10.54.0":
+  version: 10.54.0
+  resolution: "@carbon/themes@npm:10.54.0"
+  dependencies:
+    "@carbon/colors": ^10.37.0
+    "@carbon/layout": ^10.37.0
+    "@carbon/type": ^10.44.0
+    color: ^3.1.2
+  checksum: 532e52d3d9e9981513954fe611729f3fbe6dc109dca44a092e520e69c7458d9c27c5c21ca6275bde2934ade529adbfd549adf65633680bdca1ace5f07f7b8b27
+  languageName: node
+  linkType: hard
+
+"@carbon/type@npm:^10.44.0":
+  version: 10.44.0
+  resolution: "@carbon/type@npm:10.44.0"
+  dependencies:
+    "@carbon/grid": ^10.43.0
+    "@carbon/import-once": ^10.7.0
+  checksum: 58315618107527fc26315e87c924267d3f8e1ea1e9deef76327adc8822c9edca0e2b752d0e9ce8684c93a223e25c80109571476c075570ec64c31423b5d26a9f
+  languageName: node
+  linkType: hard
+
 "@iarna/toml@npm:^2.2.0":
   version: 2.2.5
   resolution: "@iarna/toml@npm:2.2.5"
@@ -1944,7 +2027,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-convert@npm:^1.9.0":
+"color-convert@npm:^1.9.0, color-convert@npm:^1.9.3":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
   dependencies:
@@ -1969,10 +2052,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:~1.1.4":
+"color-name@npm:^1.0.0, color-name@npm:~1.1.4":
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
+  languageName: node
+  linkType: hard
+
+"color-string@npm:^1.6.0":
+  version: 1.9.0
+  resolution: "color-string@npm:1.9.0"
+  dependencies:
+    color-name: ^1.0.0
+    simple-swizzle: ^0.2.2
+  checksum: 93c6678b847f8cfa47d19677fd19e1d4b19d7a33f100644400357c298266080b5bca64e5f874fa8ac8cc0aa0606ad44f7a838b4e6fd05e6affea190a68555bb4
+  languageName: node
+  linkType: hard
+
+"color@npm:^3.1.2":
+  version: 3.2.1
+  resolution: "color@npm:3.2.1"
+  dependencies:
+    color-convert: ^1.9.3
+    color-string: ^1.6.0
+  checksum: f81220e8b774d35865c2561be921f5652117638dcda7ca4029262046e37fc2444ac7bbfdd110cf1fd9c074a4ee5eda8f85944ffbdda26186b602dd9bb05f6400
   languageName: node
   linkType: hard
 
@@ -2776,6 +2879,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "esm@workspace:."
   dependencies:
+    "@carbon/elements": ^10.55.0
     "@parcel/transformer-sass": ^2.0.1
     parcel: ^2.0.1
     prismjs: ^1.20.0
@@ -3649,6 +3753,13 @@ fsevents@~2.3.2:
   version: 0.2.1
   resolution: "is-arrayish@npm:0.2.1"
   checksum: eef4417e3c10e60e2c810b6084942b3ead455af16c4509959a27e490e7aee87cfb3f38e01bbde92220b528a0ee1a18d52b787e1458ee86174d8c7f0e58cd488f
+  languageName: node
+  linkType: hard
+
+"is-arrayish@npm:^0.3.1":
+  version: 0.3.2
+  resolution: "is-arrayish@npm:0.3.2"
+  checksum: 977e64f54d91c8f169b59afcd80ff19227e9f5c791fa28fa2e5bce355cbaf6c2c356711b734656e80c9dd4a854dd7efcf7894402f1031dfc5de5d620775b4d5f
   languageName: node
   linkType: hard
 
@@ -6170,6 +6281,15 @@ fsevents@~2.3.2:
   version: 3.0.3
   resolution: "signal-exit@npm:3.0.3"
   checksum: f0169d3f1263d06df32ca072b0bf33b34c6f8f0341a7a1621558a2444dfbe8f5fec76b35537fcc6f0bc4944bdb5336fe0bdcf41a5422c4e45a1dba3f45475e6c
+  languageName: node
+  linkType: hard
+
+"simple-swizzle@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "simple-swizzle@npm:0.2.2"
+  dependencies:
+    is-arrayish: ^0.3.1
+  checksum: a7f3f2ab5c76c4472d5c578df892e857323e452d9f392e1b5cf74b74db66e6294a1e1b8b390b519fa1b96b5b613f2a37db6cffef52c3f1f8f3c5ea64eb2d54c0
   languageName: node
   linkType: hard
 

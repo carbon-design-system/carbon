@@ -6,4 +6,4 @@
 //
 
 @use './config';
-@forward '@carbon/themes/scss/modules/themes' show $white, $g10, $g90, $g100;
+@forward '@carbon/themes/scss/themes' show $white, $g10, $g90, $g100;
