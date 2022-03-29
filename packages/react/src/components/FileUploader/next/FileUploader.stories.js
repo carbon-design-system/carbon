@@ -17,7 +17,6 @@ import {
   FileUploaderItem,
   FileUploaderSkeleton,
 } from '../';
-import mdx from './FileUploader.mdx';
 import './FileUploader-story.scss';
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
@@ -31,11 +30,6 @@ export default {
     FileUploaderItem,
     FileUploaderDropContainer,
   },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
 export const _FileUploader = (args) => {
@@ -47,6 +41,7 @@ export const _FileUploader = (args) => {
     </div>
   );
 };
+
 _FileUploader.args = {
   labelTitle: 'Upload files',
   labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',

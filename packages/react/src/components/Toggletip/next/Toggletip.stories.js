@@ -15,8 +15,7 @@ import {
   ToggletipButton,
   ToggletipContent,
   ToggletipActions,
-} from '../../Toggletip';
-import mdx from './Toggletip.mdx';
+} from '../';
 
 export default {
   title: 'Components/Toggletip',
@@ -40,11 +39,6 @@ export default {
       table: {
         disable: true,
       },
-    },
-  },
-  parameters: {
-    docs: {
-      page: mdx,
     },
   },
 };

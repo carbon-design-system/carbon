@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { CheckmarkFilled } from '@carbon/icons-react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import {
   StructuredListWrapper,
@@ -18,30 +17,18 @@ import {
   StructuredListCell,
   StructuredListSkeleton,
 } from '../../StructuredList';
-import mdx from './StructuredList.mdx';
 
 const prefix = 'cds';
-
-const props = () => ({
-  isCondensed: boolean('Condensed', false),
-  isFlush: boolean('Flush alignment', false),
-});
 
 export default {
   title: 'Components/StructuredList',
   component: StructuredListWrapper,
-  decorators: [withKnobs],
   subcomponents: {
     StructuredListHead,
     StructuredListBody,
     StructuredListRow,
     StructuredListInput,
     StructuredListCell,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
   },
 };
 
@@ -88,7 +75,7 @@ Simple.parameters = {
 };
 
 export const Playground = () => (
-  <StructuredListWrapper {...props()}>
+  <StructuredListWrapper>
     <StructuredListHead>
       <StructuredListRow head>
         <StructuredListCell head>ColumnA</StructuredListCell>
@@ -159,7 +146,7 @@ export const Selection = () => {
     ));
   };
   return (
-    <StructuredListWrapper selection {...props()}>
+    <StructuredListWrapper selection>
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>

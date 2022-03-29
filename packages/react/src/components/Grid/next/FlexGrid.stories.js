@@ -1,7 +1,6 @@
 import './FlexGrid.stories.scss';
 import React from 'react';
 import { FlexGrid, Row, Column } from '../';
-import mdx from './FlexGrid.mdx';
 
 export default {
   title: 'Components/FlexGrid',
@@ -11,11 +10,6 @@ export default {
     Column,
   },
   decorators: [(storyFn) => <div id="templates">{storyFn()}</div>],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
 function DemoContent({ children }) {

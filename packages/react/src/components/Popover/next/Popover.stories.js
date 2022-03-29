@@ -9,7 +9,6 @@ import './story.scss';
 import { Checkbox } from '@carbon/icons-react';
 import React from 'react';
 import { Popover, PopoverContent } from '../../Popover';
-import mdx from './Popover.mdx';
 
 export default {
   title: 'Components/Popover',
@@ -42,9 +41,6 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
-    },
-    docs: {
-      page: mdx,
     },
   },
 };

@@ -8,8 +8,7 @@
 import './Grid.stories.scss';
 
 import React from 'react';
-import { Grid, Column, ColumnHang } from '../../Grid';
-import mdx from './Grid.mdx';
+import { Grid, Column, ColumnHang } from '../';
 
 export default {
   title: 'Elements/Grid',
@@ -20,9 +19,6 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
-    },
-    docs: {
-      page: mdx,
     },
   },
   decorators: [
