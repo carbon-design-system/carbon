@@ -12,7 +12,6 @@
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "keywords": [
-    "eyeglass-module",
     "ibm",
     "elements",
     "carbon",
@@ -26,7 +25,7 @@
   },
   "scripts": {
     "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonLayout && node tasks/build.js",
-    "clean": "rimraf es lib umd scss/generated scss/modules/generated"
+    "clean": "rimraf es lib umd scss/generated"
   },
   "devDependencies": {
     "@carbon/cli": "^10.34.0",
@@ -35,11 +34,5 @@
     "@carbon/test-utils": "^10.21.0",
     "core-js": "^3.16.0",
     "rimraf": "^3.0.0"
-  },
-  "eyeglass": {
-    "exports": false,
-    "name": "@carbon/layout",
-    "sassDir": "scss",
-    "needs": "^1.3.0"
   }
 }
