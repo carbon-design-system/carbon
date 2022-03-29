@@ -79,8 +79,8 @@ export const layerSelectedHover02 = gray60Hover;
 export const layer03 = gray60;
 export const layerActive03 = gray80;
 export const layerHover03 = gray60Hover;
-export const layerSelected03 = gray50;
-export const layerSelectedHover03 = gray50Hover;
+export const layerSelected03 = gray70;
+export const layerSelectedHover03 = gray70Hover;
 
 // layer
 export const layerSelectedInverse = gray10;
