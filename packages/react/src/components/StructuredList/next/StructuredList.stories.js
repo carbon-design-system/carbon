@@ -17,8 +17,7 @@ import {
   StructuredListInput,
   StructuredListCell,
   StructuredListSkeleton,
-} from '../../StructuredList';
-import mdx from './StructuredList.mdx';
+} from '../';
 
 const prefix = 'cds';
 
@@ -37,11 +36,6 @@ export default {
     StructuredListRow,
     StructuredListInput,
     StructuredListCell,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
   },
 };
 

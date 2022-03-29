@@ -8,7 +8,6 @@
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../../OverflowMenuItem';
-import mdx from '../OverflowMenu.mdx';
 import { Filter } from '@carbon/icons-react';
 
 export default {
@@ -25,11 +24,6 @@ export default {
   },
   subcomponents: {
     OverflowMenuItem,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
   },
 };
 

@@ -12,18 +12,12 @@ import React, { useState } from 'react';
 import { default as Slider, SliderSkeleton } from '../../Slider';
 // import { sliderValuePropSync } from '../../../../react/src/internal/FeatureFlags';
 import { Layer } from '../../Layer';
-import mdx from './Slider.mdx';
 
 export default {
   title: 'Components/Slider',
   component: Slider,
   subcomponents: {
     SliderSkeleton,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
   },
 };
 

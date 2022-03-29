@@ -12,6 +12,7 @@ import {
   ProgressIndicatorSkeleton,
 } from '../';
 import Tooltip from '../../Tooltip';
+import mdx from '../ProgressIndicator.mdx';
 
 const prefix = 'cds';
 
@@ -21,6 +22,11 @@ export default {
   subcomponents: {
     ProgressStep,
     ProgressIndicatorSkeleton,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

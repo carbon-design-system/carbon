@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Tag } from 'carbon-components-react';
+import { default as Tag } from '../';
 
 export default {
   title: 'Components/Tag',
