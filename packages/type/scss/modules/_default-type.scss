@@ -4,7 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
+@use 'sass:meta';
 @use 'styles' as *;
 
 /// Include default type styles
@@ -40,13 +40,17 @@
   }
 
   a {
-    @if meta.global-variable-exists('carbon--theme') and
-      map.has-key($carbon--theme, 'link-01')
-    {
-      color: map.get($carbon--theme, 'link-01');
-    } @else {
-      color: #0062fe;
-    }
+    // Is this still needed? To re-enable this behavior in v11 we will have to have
+    // the type package to depend on @carbon/theme so this can @use the theme() mixin
+    // to provide the value configured for `link-primary`.
+    //
+    //   @if meta.global-variable-exists('carbon--theme') and
+    //     map.has-key($carbon--theme, 'link-primary')
+    //   {
+    //     color: map.get($carbon--theme, 'link-primary');
+    //   } @else {
+    color: #0062fe;
+    //   }
   }
 
   em {
