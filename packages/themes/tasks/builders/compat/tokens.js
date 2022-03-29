@@ -8,8 +8,8 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { TokenFormat } = require('../../../src/next');
-const { tokens } = require('../../../src');
+const { TokenFormat } = require('../../../src/tokens');
+const { tokens } = require('../../../src/v10');
 const { FILE_BANNER } = require('../shared');
 const { shouldIncludeToken } = require('./shared');
 
@@ -43,8 +43,8 @@ function buildCompatFile() {
 
     // Modules
     t.SassModule('sass:map'),
-    t.SassModule('../../modules/config'),
-    t.SassModule('../../modules/theme'),
+    t.SassModule('../../config'),
+    t.SassModule('../../theme'),
     t.Newline(),
 
     t.Comment('/ Internal helper for generating CSS Custom Properties'),
