@@ -21,7 +21,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "node tasks/build.js && cross-env NODE_ENV=production skpm-build",
+    "build:plugin": "node tasks/build.js && cross-env NODE_ENV=production skpm-build",
     "clean": "rimraf carbon-elements.sketchplugin generated",
     "develop": "cross-env NODE_ENV=development skpm-build --watch",
     "log": "skpm log -f",
