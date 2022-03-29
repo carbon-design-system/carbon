@@ -40,17 +40,7 @@
   }
 
   a {
-    // Is this still needed? To re-enable this behavior in v11 we will have to have
-    // the type package to depend on @carbon/theme so this can @use the theme() mixin
-    // to provide the value configured for `link-primary`.
-    //
-    //   @if meta.global-variable-exists('carbon--theme') and
-    //     map.has-key($carbon--theme, 'link-primary')
-    //   {
-    //     color: map.get($carbon--theme, 'link-primary');
-    //   } @else {
-    color: #0062fe;
-    //   }
+    color: var(--cds-link-primary, #0062fe);
   }
 
   em {
