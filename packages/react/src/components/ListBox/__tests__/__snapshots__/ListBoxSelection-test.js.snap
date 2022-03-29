@@ -35,14 +35,14 @@ exports[`ListBoxSelection should render 1`] = `
 >
   <div
     aria-label="translation"
-    className="bx--list-box__selection"
+    className="cds--list-box__selection"
     onClick={[Function]}
     onKeyDown={[Function]}
     role="button"
     tabIndex={0}
     title="translation"
   >
-    <ForwardRef(Close16)>
+    <ForwardRef(Close)>
       <Icon
         fill="currentColor"
         height={16}
@@ -66,7 +66,7 @@ exports[`ListBoxSelection should render 1`] = `
           />
         </svg>
       </Icon>
-    </ForwardRef(Close16)>
+    </ForwardRef(Close)>
   </div>
 </ListBoxSelection>
 `;
@@ -106,24 +106,24 @@ exports[`ListBoxSelection should render 2`] = `
   }
 >
   <div
-    className="bx--tag bx--tag--filter bx--tag--high-contrast"
+    className="cds--tag cds--tag--filter cds--tag--high-contrast"
   >
     <span
-      className="bx--tag__label"
+      className="cds--tag__label"
       title={3}
     >
       3
     </span>
     <div
       aria-label="translation"
-      className="bx--tag__close-icon"
+      className="cds--tag__close-icon"
       onClick={[Function]}
       onKeyDown={[Function]}
       role="button"
       tabIndex={0}
       title="translation"
     >
-      <ForwardRef(Close16)>
+      <ForwardRef(Close)>
         <Icon
           fill="currentColor"
           height={16}
@@ -147,7 +147,7 @@ exports[`ListBoxSelection should render 2`] = `
             />
           </svg>
         </Icon>
-      </ForwardRef(Close16)>
+      </ForwardRef(Close)>
     </div>
   </div>
 </ListBoxSelection>

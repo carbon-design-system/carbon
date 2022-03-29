@@ -6,10 +6,10 @@ exports[`ListBoxMenuItem should render 1`] = `
   isHighlighted={false}
 >
   <div
-    className="bx--list-box__menu-item"
+    className="cds--list-box__menu-item"
   >
     <div
-      className="bx--list-box__menu-item__option"
+      className="cds--list-box__menu-item__option"
     >
       <span>
         ListBox.MenuItem
@@ -25,10 +25,10 @@ exports[`ListBoxMenuItem should render 2`] = `
   isHighlighted={false}
 >
   <div
-    className="bx--list-box__menu-item bx--list-box__menu-item--active"
+    className="cds--list-box__menu-item cds--list-box__menu-item--active"
   >
     <div
-      className="bx--list-box__menu-item__option"
+      className="cds--list-box__menu-item__option"
     >
       <span>
         ListBox.MenuItem
@@ -44,10 +44,10 @@ exports[`ListBoxMenuItem should render 3`] = `
   isHighlighted={true}
 >
   <div
-    className="bx--list-box__menu-item bx--list-box__menu-item--highlighted"
+    className="cds--list-box__menu-item cds--list-box__menu-item--highlighted"
   >
     <div
-      className="bx--list-box__menu-item__option"
+      className="cds--list-box__menu-item__option"
     >
       <span>
         ListBox.MenuItem

@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { CaretDown } from '@carbon/icons-react';
 import React from 'react';
 import { mount } from 'enzyme';
-import { Document16, Folder16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Document, Folder } from '@carbon/icons-react';
 import TreeView, { TreeNode } from './';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('TreeView', () => {
   let wrapper;
@@ -43,23 +43,18 @@ describe('TreeView', () => {
   it('should render with icons', () => {
     wrapper = mount(
       <TreeView label="Tree view" selected={['1']}>
-        <TreeNode renderIcon={Document16} id="1" value="1" label="1" />
-        <TreeNode renderIcon={Document16} id="2" value="2" label="2" />
-        <TreeNode renderIcon={Folder16} id="5" value="5" label="5" isExpanded>
-          <TreeNode renderIcon={Document16} id="5-1" value="5-1" label="5-1" />
-          <TreeNode renderIcon={Document16} id="5-2" value="5-2" label="5-2" />
+        <TreeNode renderIcon={Document} id="1" value="1" label="1" />
+        <TreeNode renderIcon={Document} id="2" value="2" label="2" />
+        <TreeNode renderIcon={Folder} id="5" value="5" label="5" isExpanded>
+          <TreeNode renderIcon={Document} id="5-1" value="5-1" label="5-1" />
+          <TreeNode renderIcon={Document} id="5-2" value="5-2" label="5-2" />
           <TreeNode
-            renderIcon={Folder16}
+            renderIcon={Folder}
             id="5-3"
             value="5-3"
             label="5-3"
             isExpanded>
-            <TreeNode
-              renderIcon={Document16}
-              id="5-4"
-              value="5-4"
-              label="5-4"
-            />
+            <TreeNode renderIcon={Document} id="5-4" value="5-4" label="5-4" />
           </TreeNode>
         </TreeNode>
       </TreeView>
@@ -94,7 +89,7 @@ describe('TreeView', () => {
 
   describe('Tree node expansion', () => {
     it('Caret icon should not render in leaf nodes', () => {
-      expect(wrapper.find('ForwardRef(CaretDown16)').length).toBe(2);
+      expect(wrapper.find(CaretDown).length).toBe(2);
     });
   });
 });

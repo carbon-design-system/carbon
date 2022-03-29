@@ -10,7 +10,7 @@ import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
 import { shallow, mount } from 'enzyme';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 describe('ProgressIndicator', () => {
   describe('Renders as expected', () => {

@@ -21,7 +21,7 @@ import userEvent from '@testing-library/user-event';
 import '@testing-library/jest-dom';
 import { mount } from 'enzyme';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 describe('Default', () => {
   afterEach(cleanup);
@@ -139,9 +139,6 @@ describe('ExpandableTile', () => {
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent className="child">
         <div style={{ height: '500px' }}>Test</div>
-        <a id="test-link" href="/">
-          Test Link
-        </a>
       </TileBelowTheFoldContent>
     </ExpandableTile>
   );
@@ -170,39 +167,6 @@ describe('ExpandableTile', () => {
     );
   });
 
-  it('allows click events to be ignored using onBeforeClick', () => {
-    const wrapper = mount(
-      <ExpandableTile className="extra-class">
-        <TileAboveTheFoldContent className="child">
-          <div style={{ height: '200px' }}>Test</div>
-        </TileAboveTheFoldContent>
-        <TileBelowTheFoldContent className="child">
-          <div style={{ height: '500px' }}>Test</div>
-          <a id="test-link" href="/">
-            Test Link
-          </a>
-        </TileBelowTheFoldContent>
-      </ExpandableTile>
-    );
-    wrapper.setProps({ expanded: false });
-    wrapper.setProps({
-      onBeforeClick: (evt) => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
-    });
-
-    wrapper.simulate('click');
-    expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
-      true
-    );
-    wrapper.find('#test-link').simulate('click');
-    expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
-      true
-    );
-    wrapper.simulate('click');
-    expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
-      false
-    );
-  });
-
   it('displays the default tooltip for the button', () => {
     const wrapper = mount(
       <ExpandableTile className="extra-class">
@@ -211,9 +175,6 @@ describe('ExpandableTile', () => {
         </TileAboveTheFoldContent>
         <TileBelowTheFoldContent className="child">
           <div style={{ height: '500px' }}>Test</div>
-          <a id="test-link" href="/">
-            Test Link
-          </a>
         </TileBelowTheFoldContent>
       </ExpandableTile>
     );
@@ -241,9 +202,6 @@ describe('ExpandableTile', () => {
         </TileAboveTheFoldContent>
         <TileBelowTheFoldContent className="child">
           <div style={{ height: '500px' }}>Test</div>
-          <a id="test-link" href="/">
-            Test Link
-          </a>
         </TileBelowTheFoldContent>
       </ExpandableTile>
     );

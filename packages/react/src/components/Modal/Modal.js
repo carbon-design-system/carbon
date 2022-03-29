@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Close20 } from '@carbon/icons-react';
+import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
@@ -430,7 +430,8 @@ export default class Modal extends Component {
         title={ariaLabel ? ariaLabel : iconDescription}
         aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
         ref={this.button}>
-        <Close20
+        <Close
+          size={20}
           aria-hidden="true"
           tabIndex="-1"
           className={`${this.modalCloseButtonClass}__icon`}

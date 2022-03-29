@@ -1,4 +1,5 @@
-@import '~carbon-components/scss/globals/scss/typography';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
 
 .container-welcome {
   /* stylelint-disable-next-line declaration-no-important */
@@ -15,9 +16,9 @@
 }
 
 .welcome__heading {
-  @include type-style('productive-heading-07');
+  @include type.type-style('productive-heading-07');
 
-  color: $inverse-01;
+  color: theme.$text-inverse;
 }
 
 .welcome__heading--subtitle {

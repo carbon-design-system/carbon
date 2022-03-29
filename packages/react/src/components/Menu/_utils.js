@@ -1,6 +1,4 @@
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+const prefix = 'cds';
 
 export function resetFocus(el) {
   if (el) {

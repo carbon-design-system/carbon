@@ -7,11 +7,10 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { settings } from 'carbon-components';
 import React from 'react';
 import Link from '../Link';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Link', () => {
   it('should render an <a> element', () => {

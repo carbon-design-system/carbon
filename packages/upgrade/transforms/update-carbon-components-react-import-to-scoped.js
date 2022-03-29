@@ -15,9 +15,7 @@
  * import { Button } from "@carbon/react";
  */
 
-export const parser = 'babel';
-
-export default function transformer(file, api) {
+function transformer(file, api) {
   const j = api.jscodeshift;
 
   return j(file.source)
@@ -31,3 +29,5 @@ export default function transformer(file, api) {
     })
     .toSource();
 }
+
+module.exports = transformer;

@@ -11,13 +11,13 @@ import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { mount, shallow } from 'enzyme';
 import 'requestanimationframe';
 import throttle from 'lodash.throttle';
-import { settings } from 'carbon-components';
 
 jest.mock('lodash.throttle');
 
 throttle.mockImplementation((fn) => Object.assign(fn, { throttled: true }));
 
-const { prefix } = settings;
+const prefix = 'cds';
+
 describe('Slider', () => {
   const id = 'slider';
   let wrapper;

@@ -12,11 +12,10 @@ import { withKnobs, boolean, text } from '@storybook/addon-knobs';
 import Checkbox from '../Checkbox';
 import Button from '../../components/Button';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
-import { settings } from 'carbon-components';
 import mdx from './Checkbox.mdx';
 import { FeatureFlags } from '../FeatureFlags';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 export default {
   title: 'Components/Checkbox',

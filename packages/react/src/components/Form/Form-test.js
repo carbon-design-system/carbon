@@ -8,9 +8,8 @@
 import React from 'react';
 import Form from '../Form';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Form', () => {
   describe('Renders as expected', () => {

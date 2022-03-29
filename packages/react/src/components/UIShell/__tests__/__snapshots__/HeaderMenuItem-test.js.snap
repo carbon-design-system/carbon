@@ -10,16 +10,16 @@ exports[`HeaderMenuItem should render 1`] = `
     role="none"
   >
     <Link
-      className="bx--header__menu-item"
+      className="cds--header__menu-item"
       element="a"
       tabIndex={0}
     >
       <a
-        className="bx--header__menu-item"
+        className="cds--header__menu-item"
         tabIndex={0}
       >
         <span
-          className="bx--text-truncate--end"
+          className="cds--text-truncate--end"
         >
           Menu Item
         </span>

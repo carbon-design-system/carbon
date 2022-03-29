@@ -7,16 +7,16 @@ exports[`HeaderName should render 1`] = `
   prefix="IBM"
 >
   <Link
-    className="bx--header__name custom-class"
+    className="cds--header__name custom-class"
     element="a"
     href="/"
   >
     <a
-      className="bx--header__name custom-class"
+      className="cds--header__name custom-class"
       href="/"
     >
       <span
-        className="bx--header__name--prefix"
+        className="cds--header__name--prefix"
       >
         IBM
       </span>

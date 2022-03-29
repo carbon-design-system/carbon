@@ -8,7 +8,7 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { OverflowMenuVertical } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import Menu from '../Menu';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
@@ -19,7 +19,7 @@ const defaultSize = 'md';
 function OverflowMenuV2({
   children,
   className,
-  renderIcon: IconElement = OverflowMenuVertical16,
+  renderIcon: IconElement = OverflowMenuVertical,
   size = defaultSize,
   ...rest
 }) {
