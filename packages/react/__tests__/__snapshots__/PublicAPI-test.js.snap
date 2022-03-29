@@ -5154,7 +5154,6 @@ Map {
   },
   "ProgressStep" => Object {
     "defaultProps": Object {
-      "renderLabel": [Function],
       "translateWithId": [Function],
     },
     "propTypes": Object {
@@ -5188,9 +5187,6 @@ Map {
       },
       "overflowTooltipProps": Object {
         "type": "object",
-      },
-      "renderLabel": Object {
-        "type": "func",
       },
       "secondaryLabel": Object {
         "type": "string",
