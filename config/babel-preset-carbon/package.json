@@ -1,7 +1,7 @@
 {
   "name": "babel-preset-carbon",
   "private": true,
-  "version": "0.2.0",
+  "version": "0.2.1-rc.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -26,6 +26,6 @@
     "@babel/preset-env": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "babel-plugin-dev-expression": "^0.2.3",
-    "browserslist-config-carbon": "^10.6.1"
+    "browserslist-config-carbon": "^11.0.0-rc.0"
   }
 }
