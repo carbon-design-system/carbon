@@ -36,6 +36,27 @@ and is typically used when there are a large amount of options to choose from.
 
 <Props sort="asc" />
 
+## Disabled
+
+A disabled combobox is available but should not be used as the sole means of
+conveying information. For example, if the user must complete a previous form
+input before moving on to the combobox, make sure to make that clear to the user
+via an error state on the previous form element in addition to disabling the
+next element.
+
+```jsx
+<Combobox disabled />
+```
+
+## Light
+
+The light prop should never be used against a light background. The form element
+must have proper contrast against the pages background.
+
+```jsx
+<Combobox light />
+```
+
 ## Combobox `downshiftProps`
 
 Our `Combobox` component utilizes [Downshift](https://www.downshift-js.com/)
