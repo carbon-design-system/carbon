@@ -16,7 +16,6 @@ import {
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 const Select = React.forwardRef(function Select(
   {
@@ -212,13 +211,11 @@ Select.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: FeatureFlags.enabled('enable-v11-release')
-    ? deprecate(
-        PropTypes.bool,
-        'The `light` prop for `Select` is no longer needed and has ' +
-          'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
-      )
-    : PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Select` is no longer needed and has ' +
+      'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+  ),
 
   /**
    * Reserved for use with <Pagination> component. Will not render a label for the
@@ -235,9 +232,7 @@ Select.propTypes = {
   /**
    * Specify the size of the Select Input.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify whether the control is currently in warning state

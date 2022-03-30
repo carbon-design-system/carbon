@@ -181,12 +181,6 @@ export default class OverflowMenuItem extends React.Component {
             <li className={overflowMenuItemClasses} role="none">
               <TagToUse
                 {...other}
-                {...{
-                  'data-floating-menu-primary-focus':
-                    (FeatureFlags.enabled('enable-v11-release') &&
-                      other.primaryFocus) ||
-                    null,
-                }}
                 role="menuitem"
                 href={href}
                 className={overflowMenuBtnClasses}

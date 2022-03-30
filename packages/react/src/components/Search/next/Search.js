@@ -14,6 +14,7 @@ import { keys, match } from '../../../internal/keyboard';
 import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import { composeEventHandlers } from '../../../tools/events';
+import deprecate from '../../../prop-types/deprecate';
 
 function Search({
   autoComplete = 'off',
@@ -166,13 +167,11 @@ Search.propTypes = {
   /**
    * Specify light version or default version of this control
    */
-   light: FeatureFlags.enabled('enable-v11-release')
-   ? deprecate(
-       PropTypes.bool,
-       'The `light` prop for `Search` is no longer needed and has ' +
-         'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
-     )
-   : PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Search` is no longer needed and has ' +
+      'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+  ),
 
   /**
    * Optional callback called when the search value changes.
