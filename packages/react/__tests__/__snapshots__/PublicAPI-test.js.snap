@@ -1207,50 +1207,7 @@ Map {
     },
   },
   "ContentSwitcher" => Object {
-    "contextType": Object {
-      "$$typeof": Symbol(react.context),
-    },
-    "defaultProps": Object {
-      "onChange": [Function],
-      "selectedIndex": 0,
-      "selectionMode": "automatic",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "light": [Function],
-      "onChange": Object {
-        "isRequired": true,
-        "type": "func",
-      },
-      "selectedIndex": Object {
-        "type": "number",
-      },
-      "selectionMode": Object {
-        "args": Array [
-          Array [
-            "automatic",
-            "manual",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-            "lg",
-            "xl",
-          ],
-        ],
-        "type": "oneOf",
-      },
-    },
+    "displayName": "ClassWrapper(ContentSwitcher)",
   },
   "ControlledPasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -1324,7 +1281,14 @@ Map {
         "type": "string",
       },
       "size": Object {
-        "type": "string",
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
       "tooltipAlignment": Object {
         "args": Array [
@@ -7339,7 +7303,14 @@ Map {
           "type": "string",
         },
         "size": Object {
-          "type": "string",
+          "args": Array [
+            Array [
+              "sm",
+              "md",
+              "lg",
+            ],
+          ],
+          "type": "oneOf",
         },
         "tooltipAlignment": Object {
           "args": Array [
@@ -7678,59 +7649,7 @@ Map {
     "render": [Function],
   },
   "TileGroup" => Object {
-    "contextType": Object {
-      "$$typeof": Symbol(react.context),
-    },
-    "defaultProps": Object {
-      "onChange": [Function],
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "defaultSelected": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "legend": Object {
-        "type": "string",
-      },
-      "name": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "valueSelected": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-    },
+    "displayName": "ClassWrapper(TileGroup)",
   },
   "TimePicker" => Object {
     "$$typeof": Symbol(react.forward_ref),
