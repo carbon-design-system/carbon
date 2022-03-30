@@ -15,13 +15,12 @@ import ComboBox from '../ComboBox';
 
 - [Overview](#overview)
 - [Component API](#component-api)
-- [Disabled](#disabled)
-- [Light](#light)
 - [downshiftProps](#combobox-downshiftprops)
 - [Placeholder and labeling](#placeholders-and-labeling)
 - [initialSelectedItem](#initialselecteditem)
 - [itemToElement](#itemtoelement)
 - [itemToString](#itemtostring)
+- [With Layer](#with-layer)
 - [Feedback](#feedback)
 
 ## Overview
@@ -42,21 +41,12 @@ and is typically used when there are a large amount of options to choose from.
 A disabled combobox is available but should not be used as the sole means of
 conveying information. For example, if the user must complete a previous form
 input before moving on to the combobox, make sure to make that clear to the user
-via an error state on the previous form element in addition to disabling the next
-element.
+via an error state on the previous form element in addition to disabling the
+next element.
 
-<Preview>
-  <Story id="components-combobox--disabled" />
-</Preview>
-
-## Light
-
-The light prop should never be used against a light background. The form element
-must have proper contrast against the pages background.
-
-<Preview>
-  <Story id="components-combobox--light" />
-</Preview>
+```jsx
+<Combobox disabled />
+```
 
 ## Combobox `downshiftProps`
 
@@ -125,6 +115,12 @@ If the `items` array is not an array of strings, you'll need to use
   itemToString={(item) => (item ? item.text : '')}
 />
 ```
+
+## With Layer
+
+<Preview>
+  <Story id="components-combobox--with-layer" />
+</Preview>
 
 ## Feedback
 

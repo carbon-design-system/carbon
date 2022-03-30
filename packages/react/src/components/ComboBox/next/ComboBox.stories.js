@@ -8,6 +8,7 @@
 import React from 'react';
 import ComboBox from '../';
 import { Layer } from '../../Layer';
+import mdx from '../ComboBox.mdx';
 
 const items = [
   {
@@ -45,6 +46,11 @@ export default {
     size: {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
     },
   },
 };
