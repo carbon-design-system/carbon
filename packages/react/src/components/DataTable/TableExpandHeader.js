@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import requiredIfGivenPropIsTruthy from '../../prop-types/requiredIfGivenPropIsTruthy';
+import deprecate from '../../prop-types/deprecate';
 import React from 'react';
 import { ChevronRight } from '@carbon/icons-react';
 import { usePrefix } from '../../internal/usePrefix';
@@ -15,6 +16,7 @@ import { usePrefix } from '../../internal/usePrefix';
 const TableExpandHeader = ({
   ariaLabel,
   className: headerClassName,
+  enableExpando,
   enableToggle,
   isExpanded,
   onExpand,
@@ -32,7 +34,7 @@ const TableExpandHeader = ({
       className={className}
       data-previous-value={previousValue}
       {...rest}>
-      {enableToggle ? (
+      {enableExpando || enableToggle ? (
         <button
           type="button"
           className={`${prefix}--table-expand__button`}
@@ -55,11 +57,22 @@ TableExpandHeader.propTypes = {
    * Specify the string read by a voice reader when the expand trigger is
    * focused
    */
-  ariaLabel: requiredIfGivenPropIsTruthy('enableToggle', PropTypes.string),
+  ariaLabel: PropTypes.oneOfType([
+    requiredIfGivenPropIsTruthy('enableExpando', PropTypes.string),
+    requiredIfGivenPropIsTruthy('enableToggle', PropTypes.string),
+  ]),
 
   children: PropTypes.node,
 
   className: PropTypes.string,
+
+  /**
+   * The enableExpando prop is being replaced by enableToggle
+   */
+  enableExpando: deprecate(
+    PropTypes.bool,
+    'The `enableExpando` prop has been deprecated in favor of `enableToggle`. This prop will be removed in the next major release.'
+  ),
 
   /**
    * Specify whether an expand all button should be displayed
@@ -80,7 +93,10 @@ TableExpandHeader.propTypes = {
   /**
    * Hook for when a listener initiates a request to expand the given row
    */
-  onExpand: requiredIfGivenPropIsTruthy('enableToggle', PropTypes.func),
+  onExpand: PropTypes.oneOfType([
+    requiredIfGivenPropIsTruthy('enableExpando', PropTypes.func),
+    requiredIfGivenPropIsTruthy('enableToggle', PropTypes.func),
+  ]),
 };
 
 export default TableExpandHeader;
