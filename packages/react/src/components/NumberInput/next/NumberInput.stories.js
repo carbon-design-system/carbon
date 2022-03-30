@@ -16,7 +16,6 @@ import {
 } from '@storybook/addon-knobs';
 import { NumberInput } from './';
 import NumberInputSkeleton from '../../NumberInput/NumberInput.Skeleton';
-import mdx from '../NumberInput.mdx';
 
 const props = () => ({
   className: 'some-class',
@@ -68,10 +67,6 @@ export default {
     size: 'md',
   },
   parameters: {
-    docs: {
-      page: mdx,
-    },
-
     subcomponents: {
       NumberInputSkeleton,
     },

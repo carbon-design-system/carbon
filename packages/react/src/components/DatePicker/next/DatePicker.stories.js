@@ -11,6 +11,7 @@ import DatePicker from './DatePicker';
 import DatePickerSkeleton from '../DatePicker.Skeleton';
 import DatePickerInput from '../../DatePickerInput';
 import { Layer } from '../../Layer';
+import mdx from '../DatePicker.mdx';
 
 const props = {
   datePicker: () => ({
@@ -58,6 +59,11 @@ export default {
   subcomponents: {
     DatePickerInput,
     DatePickerSkeleton,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

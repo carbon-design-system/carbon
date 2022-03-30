@@ -8,10 +8,16 @@
 import React from 'react';
 import { default as CodeSnippet, CodeSnippetSkeleton } from '../';
 import { Layer } from '../../Layer';
+import mdx from '../CodeSnippet.mdx';
 
 export default {
   title: 'Components/CodeSnippet',
   component: CodeSnippet,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Inline = () => (

@@ -213,8 +213,6 @@ describe('Carbon Components React', () => {
         "ToolbarSearch",
         "ToolbarTitle",
         "Tooltip",
-        "TooltipDefinition",
-        "TooltipIcon",
         "UnorderedList",
         "VStack",
         "unstable_FeatureFlags",

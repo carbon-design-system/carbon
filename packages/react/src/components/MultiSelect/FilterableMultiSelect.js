@@ -17,7 +17,6 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import Selection from '../../internal/Selection';
-import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -384,7 +383,7 @@ export default class FilterableMultiSelect extends React.Component {
               initialSelectedItems={initialSelectedItems}
               render={({ selectedItems, onItemChange, clearSelection }) => (
                 <Downshift
-                  {...mapDownshiftProps(downshiftProps)}
+                  {...downshiftProps}
                   highlightedIndex={highlightedIndex}
                   id={id}
                   isOpen={isOpen}

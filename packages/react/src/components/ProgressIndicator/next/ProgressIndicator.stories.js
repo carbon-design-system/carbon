@@ -11,6 +11,7 @@ import {
   ProgressStep,
   ProgressIndicatorSkeleton,
 } from '../';
+import mdx from '../ProgressIndicator.mdx';
 
 export default {
   title: 'Components/ProgressIndicator',
@@ -18,6 +19,11 @@ export default {
   subcomponents: {
     ProgressStep,
     ProgressIndicatorSkeleton,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
