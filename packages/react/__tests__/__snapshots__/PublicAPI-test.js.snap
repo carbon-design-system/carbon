@@ -442,7 +442,6 @@ Map {
   "CodeSnippet" => Object {
     "defaultProps": Object {
       "ariaLabel": "Copy to clipboard",
-      "copyLabel": "Copy to clipboard",
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
@@ -459,9 +458,6 @@ Map {
         "type": "string",
       },
       "copyButtonDescription": Object {
-        "type": "string",
-      },
-      "copyLabel": Object {
         "type": "string",
       },
       "copyText": Object {
@@ -1469,6 +1465,7 @@ Map {
     },
     "TableBatchAction": Object {
       "defaultProps": Object {
+        "iconDescription": "Add",
         "renderIcon": Object {
           "$$typeof": Symbol(react.forward_ref),
           "propTypes": Object {
@@ -2606,7 +2603,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "inline": [Function],
       "size": Object {
         "args": Array [
           Array [
@@ -3265,9 +3261,6 @@ Map {
       },
       "className": Object {
         "type": "string",
-      },
-      "hasMargin": Object {
-        "type": "bool",
       },
       "invalid": Object {
         "type": "bool",
@@ -6523,6 +6516,7 @@ Map {
   },
   "TableBatchAction" => Object {
     "defaultProps": Object {
+      "iconDescription": "Add",
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
         "propTypes": Object {
@@ -8062,135 +8056,6 @@ Map {
       },
       "leaveDelayMs": Object {
         "type": "number",
-      },
-    },
-  },
-  "TooltipDefinition" => Object {
-    "defaultProps": Object {
-      "align": "start",
-      "direction": "bottom",
-    },
-    "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "start",
-            "center",
-            "end",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "children": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "direction": Object {
-        "args": Array [
-          Array [
-            "top",
-            "bottom",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "onBlur": Object {
-        "type": "func",
-      },
-      "onFocus": Object {
-        "type": "func",
-      },
-      "onMouseEnter": Object {
-        "type": "func",
-      },
-      "onMouseLeave": Object {
-        "type": "func",
-      },
-      "tooltipText": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "triggerClassName": Object {
-        "type": "string",
-      },
-    },
-  },
-  "TooltipIcon" => Object {
-    "defaultProps": Object {
-      "align": "center",
-      "direction": "bottom",
-    },
-    "propTypes": Object {
-      "align": Object {
-        "args": Array [
-          Array [
-            "start",
-            "center",
-            "end",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "direction": Object {
-        "args": Array [
-          Array [
-            "top",
-            "right",
-            "left",
-            "bottom",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "onBlur": Object {
-        "type": "func",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "onFocus": Object {
-        "type": "func",
-      },
-      "onMouseEnter": Object {
-        "type": "func",
-      },
-      "onMouseLeave": Object {
-        "type": "func",
-      },
-      "renderIcon": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "func",
-            },
-            Object {
-              "type": "object",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "tooltipText": Object {
-        "isRequired": true,
-        "type": "node",
       },
     },
   },

@@ -234,11 +234,11 @@ export function StructuredListInput(props) {
       type="radio"
       tabIndex={0}
       checked={row && row.id === selectedRow}
-      value={row ? row.id : ''}
+      value={row?.id ?? ''}
       onChange={(event) => {
         setSelectedRow(event.target.value);
       }}
-      id={!id && defaultId}
+      id={id ?? defaultId}
       className={classes}
       name={name}
       title={title}

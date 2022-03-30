@@ -34,7 +34,6 @@ describe('NotificationButton', () => {
       const iconButton = mount(
         <NotificationButton
           renderIcon={(props) => <Close size={20} {...props} />}
-          iconDescription="Close"
         />
       );
       const originalIcon = mount(<Close size={20} />).find('svg');
@@ -309,12 +308,7 @@ describe('InlineNotification', () => {
 
     it('sets open state to false when close button is clicked', () => {
       const wrapper = mount(
-        <InlineNotification
-          kind="success"
-          title="title"
-          subtitle="subtitle"
-          iconDescription="description"
-        />
+        <InlineNotification kind="success" title="title" subtitle="subtitle" />
       );
 
       wrapper.find('button').simulate('click');
@@ -327,7 +321,6 @@ describe('InlineNotification', () => {
           kind="success"
           title="title"
           subtitle="subtitle"
-          iconDescription="description"
           onClose={() => {}}
         />
       );
@@ -342,7 +335,6 @@ describe('InlineNotification', () => {
           kind="success"
           title="title"
           subtitle="subtitle"
-          iconDescription="description"
           onClose={() => false}
         />
       );

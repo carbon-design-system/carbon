@@ -33,7 +33,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
-      <Button {...rest} hasIconOnly kind={kind} ref={ref} size={size}>
+      <Button {...rest} kind={kind} ref={ref} size={size}>
         {children}
       </Button>
     </Tooltip>
