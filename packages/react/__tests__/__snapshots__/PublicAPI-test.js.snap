@@ -1469,6 +1469,7 @@ Map {
     },
     "TableBatchAction": Object {
       "defaultProps": Object {
+        "iconDescription": "Add",
         "renderIcon": Object {
           "$$typeof": Symbol(react.forward_ref),
           "propTypes": Object {
@@ -6515,6 +6516,7 @@ Map {
   },
   "TableBatchAction" => Object {
     "defaultProps": Object {
+      "iconDescription": "Add",
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
         "propTypes": Object {
