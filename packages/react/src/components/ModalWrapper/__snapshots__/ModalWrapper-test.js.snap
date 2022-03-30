@@ -33,13 +33,9 @@ exports[`ModalWrapper should render 1`] = `
       <button
         aria-describedby={null}
         aria-pressed={null}
-        className="btn-trigger cds--btn cds--btn--primary"
+        className="btn-trigger cds--btn cds--btn--lg cds--btn--primary"
         disabled={false}
-        onBlur={[Function]}
         onClick={[Function]}
-        onFocus={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
         tabIndex={0}
         type="button"
       >
@@ -167,13 +163,9 @@ exports[`ModalWrapper should render 1`] = `
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
-                  className="cds--btn cds--btn--secondary"
+                  className="cds--btn cds--btn--lg cds--btn--secondary"
                   disabled={false}
-                  onBlur={[Function]}
                   onClick={[Function]}
-                  onFocus={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >
@@ -188,13 +180,9 @@ exports[`ModalWrapper should render 1`] = `
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
-                  className="cds--btn cds--btn--primary"
+                  className="cds--btn cds--btn--lg cds--btn--primary"
                   disabled={false}
-                  onBlur={[Function]}
                   onClick={[Function]}
-                  onFocus={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
                   tabIndex={0}
                   type="button"
                 >

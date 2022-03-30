@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { default as Checkbox, CheckboxSkeleton } from '../';
+import mdx from '../Checkbox.mdx';
 
 const prefix = 'cds';
 
@@ -15,6 +16,11 @@ export default {
   component: Checkbox,
   subcomponents: {
     CheckboxSkeleton,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
