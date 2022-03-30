@@ -159,7 +159,7 @@ NotificationButton.propTypes = {
 };
 
 NotificationButton.defaultProps = {
-  ariaLabel: 'closes notification',
+  ariaLabel: 'close notification',
   notificationType: 'toast',
   type: 'button',
   renderIcon: Close,
