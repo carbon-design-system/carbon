@@ -7,18 +7,20 @@ exports[`SideNavFooter should render 1`] = `
   onToggle={[MockFunction]}
 >
   <footer
-    className="bx--side-nav__footer"
+    className="cds--side-nav__footer"
   >
     <button
-      className="bx--side-nav__toggle"
+      className="cds--side-nav__toggle"
       onClick={[Function]}
       title="open"
       type="button"
     >
       <div
-        className="bx--side-nav__icon"
+        className="cds--side-nav__icon"
       >
-        <ForwardRef(ChevronRight20)>
+        <ForwardRef(ChevronRight)
+          size={20}
+        >
           <Icon
             fill="currentColor"
             height={20}
@@ -42,10 +44,10 @@ exports[`SideNavFooter should render 1`] = `
               />
             </svg>
           </Icon>
-        </ForwardRef(ChevronRight20)>
+        </ForwardRef(ChevronRight)>
       </div>
       <span
-        className="bx--assistive-text"
+        className="cds--assistive-text"
       >
         open
       </span>
@@ -62,18 +64,20 @@ exports[`SideNavFooter should render 2`] = `
   onToggle={[MockFunction]}
 >
   <footer
-    className="bx--side-nav__footer"
+    className="cds--side-nav__footer"
   >
     <button
-      className="bx--side-nav__toggle"
+      className="cds--side-nav__toggle"
       onClick={[Function]}
       title="close"
       type="button"
     >
       <div
-        className="bx--side-nav__icon"
+        className="cds--side-nav__icon"
       >
-        <ForwardRef(ChevronRight20)>
+        <ForwardRef(ChevronRight)
+          size={20}
+        >
           <Icon
             fill="currentColor"
             height={20}
@@ -97,10 +101,10 @@ exports[`SideNavFooter should render 2`] = `
               />
             </svg>
           </Icon>
-        </ForwardRef(ChevronRight20)>
+        </ForwardRef(ChevronRight)>
       </div>
       <span
-        className="bx--assistive-text"
+        className="cds--assistive-text"
       >
         close
       </span>

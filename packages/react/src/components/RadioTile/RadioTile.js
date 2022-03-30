@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CheckmarkFilled16 as CheckmarkFilled } from '@carbon/icons-react';
+import { CheckmarkFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';

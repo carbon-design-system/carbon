@@ -1,9 +1,8 @@
 import React from 'react';
 import PasswordInput from './PasswordInput';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('PasswordInput', () => {
   describe('renders as expected', () => {
@@ -102,13 +101,13 @@ describe('PasswordInput', () => {
         const { hidePasswordLabel, showPasswordLabel } = wrapper.props();
         wrapper.setProps({ disabled: false });
         expect(
-          wrapper.find('.bx--text-input--password__visibility__toggle').text()
+          wrapper.find('.cds--text-input--password__visibility__toggle').text()
         ).toEqual(showPasswordLabel);
         wrapper
-          .find('.bx--text-input--password__visibility__toggle')
+          .find('.cds--text-input--password__visibility__toggle')
           .simulate('click');
         expect(
-          wrapper.find('.bx--text-input--password__visibility__toggle').text()
+          wrapper.find('.cds--text-input--password__visibility__toggle').text()
         ).toEqual(hidePasswordLabel);
       });
     });

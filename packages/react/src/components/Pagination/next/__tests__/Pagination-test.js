@@ -5,14 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { CaretRight16, CaretLeft16 } from '@carbon/icons-react';
+import { CaretRight, CaretLeft } from '@carbon/icons-react';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
 import Pagination from '../Pagination';
 import Select from '../../../Select';
 import SelectItem from '../../../SelectItem';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 /**
  * For the given EnzymeWrapper, find the corresponding <select> element for
@@ -53,7 +53,7 @@ const selectPage = (wrapper, pageNumber) => {
  * @returns {void}
  */
 const incrementPage = (wrapper) => {
-  wrapper.find('[children="Next page"]').simulate('click');
+  wrapper.find('button.cds--pagination__button--forward').simulate('click');
 };
 
 /**
@@ -63,7 +63,7 @@ const incrementPage = (wrapper) => {
  * @returns {void}
  */
 const decrementPage = (wrapper) => {
-  wrapper.find('[children="Previous page"]').simulate('click');
+  wrapper.find('button.cds--pagination__button--backward').simulate('click');
 };
 
 /**
@@ -111,7 +111,7 @@ describe('Pagination', () => {
   });
 
   it('should have 2 icons', () => {
-    const iconTypes = [CaretLeft16, CaretRight16];
+    const iconTypes = [CaretLeft, CaretRight];
     const icons = pagination.findWhere((n) => iconTypes.includes(n.type()));
     expect(icons.length).toEqual(2);
   });
@@ -225,6 +225,7 @@ describe('Pagination', () => {
         const pager = mount(
           <Pagination pageSizes={[5, 10]} totalItems={50} onChange={handler} />
         );
+
         incrementPage(pager);
         expect(getCurrentPage(pager)).toBe(2);
         pager

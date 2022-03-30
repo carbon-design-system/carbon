@@ -1,4 +1,4 @@
-import { Add, Bee, Chevron as chevron } from '@carbon/icons-react/next';
+import { Add, Bee, Chevron as chevron } from '@carbon/icons-react';
 
 const mapped = {
   default: Add,

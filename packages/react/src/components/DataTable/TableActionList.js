@@ -5,15 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import wrapComponent from '../../tools/wrapComponent';
-
-const { prefix } = settings;
 
 const TableActionList = wrapComponent({
   name: 'TableActionList',
   type: 'div',
-  className: `${prefix}--action-list`,
+  className: `cds--action-list`,
 });
 
 export default TableActionList;

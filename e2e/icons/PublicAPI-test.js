@@ -9,7 +9,7 @@
 
 'use strict';
 
-const CarbonIcons = require('@carbon/icons-react');
+const CarbonIcons = require('@carbon/icons');
 
 describe('@carbon/icons', () => {
   it('should not update exports without a semver change', () => {

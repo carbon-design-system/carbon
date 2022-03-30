@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import React from 'react';
 
-export const PrefixContext = React.createContext(settings.prefix);
+export const PrefixContext = React.createContext('cds');
 
 export function usePrefix() {
   return React.useContext(PrefixContext);

@@ -1,9 +1,9 @@
-@import '../../scss/type';
-@import '../../scss/font-face/sans';
-@import '../../scss/font-face/sans-condensed';
-@import '../../scss/font-face/serif';
-@import '../../scss/font-face/mono';
-@import '../../scss/classes';
+@import '@carbon/type/scss/type';
+@import '@carbon/type/scss/font-face/sans';
+@import '@carbon/type/scss/font-face/sans-condensed';
+@import '@carbon/type/scss/font-face/serif';
+@import '@carbon/type/scss/font-face/mono';
+@import '@carbon/type/scss/classes';
 
 @include carbon--type-reset();
 @include carbon--type-classes();

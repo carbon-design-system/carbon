@@ -10,9 +10,9 @@ import { useSelect } from 'downshift';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
-  Checkmark16,
-  WarningAltFilled16,
-  WarningFilled16,
+  Checkmark,
+  WarningAltFilled,
+  WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { mapDownshiftProps } from '../../tools/createPropAdapter';
@@ -159,10 +159,10 @@ const Dropdown = React.forwardRef(function Dropdown(
         isOpen={isOpen}
         id={id}>
         {invalid && (
-          <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
+          <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
         )}
         {showWarning && (
-          <WarningAltFilled16
+          <WarningAltFilled
             className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
           />
         )}
@@ -212,7 +212,7 @@ const Dropdown = React.forwardRef(function Dropdown(
                     itemToString(item)
                   )}
                   {selectedItem === item && (
-                    <Checkmark16
+                    <Checkmark
                       className={`${prefix}--list-box__menu-item__selected-icon`}
                     />
                   )}

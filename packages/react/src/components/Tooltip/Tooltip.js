@@ -10,8 +10,7 @@ import PropTypes from 'prop-types';
 import { isForwardRef } from 'react-is';
 import debounce from 'lodash.debounce';
 import classNames from 'classnames';
-import { Information16 as Information } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Information } from '@carbon/icons-react';
 import FloatingMenu, {
   DIRECTION_LEFT,
   DIRECTION_TOP,
@@ -24,8 +23,7 @@ import { keys, matches as keyDownMatch } from '../../internal/keyboard';
 import isRequiredOneOf from '../../prop-types/isRequiredOneOf';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 /**
  * @param {Element} menuBody The menu body with the menu arrow.
@@ -618,116 +616,126 @@ class Tooltip extends Component {
     const { open } = this.isControlled ? this.props : this.state;
     const { storedDirection, storedAlign } = this.state;
 
-    const tooltipClasses = classNames(
-      `${prefix}--tooltip`,
-      {
-        [`${prefix}--tooltip--shown`]: open,
-        [`${prefix}--tooltip--${storedDirection}`]: storedDirection,
-        [`${prefix}--tooltip--align-${storedAlign}`]: storedAlign,
-      },
-      className
-    );
-
-    const triggerClasses = classNames(
-      `${prefix}--tooltip__label`,
-      triggerClassName
-    );
-
-    const refProp = mergeRefs(this._triggerRef, ref);
-    const iconProperties = { name: iconName, role: null, description: null };
-
-    const properties = {
-      role: 'button',
-      tabIndex: tabIndex,
-      onClick: this.handleMouse,
-      onContextMenu: this.handleMouse,
-      onKeyDown: this.handleKeyPress,
-      onMouseOver: this.handleMouse,
-      onMouseOut: this.handleMouse,
-      onFocus: this.handleMouse,
-      onBlur: this.handleMouse,
-      'aria-controls': !open ? undefined : this._tooltipId,
-      'aria-expanded': open,
-      'aria-describedby': open ? this._tooltipId : null,
-      // if the user provides property `triggerText`,
-      // then the button should use aria-labelledby to point to its id,
-      // if the user doesn't provide property `triggerText`,
-      // then an aria-label will be provided via the `iconDescription` property.
-      ...(triggerText
-        ? {
-            'aria-labelledby': triggerId,
-          }
-        : {
-            'aria-label': iconDescription,
-          }),
-    };
-
     return (
-      <>
-        <ClickListener onClickOutside={this.handleClickOutside}>
-          {showIcon ? (
-            <div id={triggerId} className={triggerClasses}>
-              {triggerText}
-              <div
-                className={`${prefix}--tooltip__trigger`}
-                {...properties}
-                ref={refProp}
-                aria-describedby={
-                  tooltipBodyId || properties['aria-describedby']
-                }>
-                <IconCustomElement {...iconProperties} />
-              </div>
-            </div>
-          ) : (
-            <div
-              id={triggerId}
-              className={triggerClasses}
-              ref={refProp}
-              {...properties}
-              aria-describedby={
-                tooltipBodyId || properties['aria-describedby']
-              }>
-              {triggerText}
-            </div>
-          )}
-        </ClickListener>
-        {open && (
-          <FloatingMenu
-            focusTrap={focusTrap}
-            selectorPrimaryFocus={this.props.selectorPrimaryFocus}
-            target={this._getTarget}
-            triggerRef={this._triggerRef}
-            menuDirection={storedDirection}
-            menuOffset={menuOffset}
-            menuRef={(node) => {
-              this._tooltipEl = node;
-            }}
-            updateOrientation={this.updateOrientation}>
-            {/* This rule is disabled because the onKeyDown event handler is only
-             * being used to capture and prevent the event from bubbling: */}
-            {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
-            <div
-              className={tooltipClasses}
-              onKeyDown={this.handleEscKeyPress}
-              {...other}
-              id={this._tooltipId}
-              data-floating-menu-direction={storedDirection}
-              onMouseOver={this.handleMouse}
-              onMouseOut={this.handleMouse}
-              onFocus={this.handleMouse}
-              onBlur={this.handleMouse}
-              onContextMenu={this.handleMouse}>
-              <span className={`${prefix}--tooltip__caret`} />
-              <div
-                className={`${prefix}--tooltip__content`}
-                aria-labelledby={this._tooltipId}
-                role="dialog">
-                {children}
-              </div>
-            </div>
-          </FloatingMenu>
-        )}
-      </>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const tooltipClasses = classNames(
+            `${prefix}--tooltip`,
+            {
+              [`${prefix}--tooltip--shown`]: open,
+              [`${prefix}--tooltip--${storedDirection}`]: storedDirection,
+              [`${prefix}--tooltip--align-${storedAlign}`]: storedAlign,
+            },
+            className
+          );
+
+          const triggerClasses = classNames(
+            `${prefix}--tooltip__label`,
+            triggerClassName
+          );
+
+          const refProp = mergeRefs(this._triggerRef, ref);
+          const iconProperties = {
+            name: iconName,
+            role: null,
+            description: null,
+          };
+
+          const properties = {
+            role: 'button',
+            tabIndex: tabIndex,
+            onClick: this.handleMouse,
+            onContextMenu: this.handleMouse,
+            onKeyDown: this.handleKeyPress,
+            onMouseOver: this.handleMouse,
+            onMouseOut: this.handleMouse,
+            onFocus: this.handleMouse,
+            onBlur: this.handleMouse,
+            'aria-controls': !open ? undefined : this._tooltipId,
+            'aria-expanded': open,
+            'aria-describedby': open ? this._tooltipId : null,
+            // if the user provides property `triggerText`,
+            // then the button should use aria-labelledby to point to its id,
+            // if the user doesn't provide property `triggerText`,
+            // then an aria-label will be provided via the `iconDescription` property.
+            ...(triggerText
+              ? {
+                  'aria-labelledby': triggerId,
+                }
+              : {
+                  'aria-label': iconDescription,
+                }),
+          };
+
+          return (
+            <>
+              <ClickListener onClickOutside={this.handleClickOutside}>
+                {showIcon ? (
+                  <div id={triggerId} className={triggerClasses}>
+                    {triggerText}
+                    <div
+                      className={`${prefix}--tooltip__trigger`}
+                      {...properties}
+                      ref={refProp}
+                      aria-describedby={
+                        tooltipBodyId || properties['aria-describedby']
+                      }>
+                      <IconCustomElement {...iconProperties} />
+                    </div>
+                  </div>
+                ) : (
+                  <div
+                    id={triggerId}
+                    className={triggerClasses}
+                    ref={refProp}
+                    {...properties}
+                    aria-describedby={
+                      tooltipBodyId || properties['aria-describedby']
+                    }>
+                    {triggerText}
+                  </div>
+                )}
+              </ClickListener>
+              {open && (
+                <FloatingMenu
+                  focusTrap={focusTrap}
+                  selectorPrimaryFocus={this.props.selectorPrimaryFocus}
+                  target={this._getTarget}
+                  triggerRef={this._triggerRef}
+                  menuDirection={storedDirection}
+                  menuOffset={menuOffset}
+                  menuRef={(node) => {
+                    this._tooltipEl = node;
+                  }}
+                  updateOrientation={this.updateOrientation}>
+                  {/* This rule is disabled because the onKeyDown event handler is only
+                   * being used to capture and prevent the event from bubbling: */}
+                  {/* eslint-disable-next-line jsx-a11y/no-static-element-interactions */}
+                  <div
+                    className={tooltipClasses}
+                    onKeyDown={this.handleEscKeyPress}
+                    {...other}
+                    id={this._tooltipId}
+                    data-floating-menu-direction={storedDirection}
+                    onMouseOver={this.handleMouse}
+                    onMouseOut={this.handleMouse}
+                    onFocus={this.handleMouse}
+                    onBlur={this.handleMouse}
+                    onContextMenu={this.handleMouse}>
+                    <span className={`${prefix}--tooltip__caret`} />
+                    <div
+                      className={`${prefix}--tooltip__content`}
+                      aria-labelledby={this._tooltipId}
+                      role="dialog">
+                      {children}
+                    </div>
+                  </div>
+                </FloatingMenu>
+              )}
+            </>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

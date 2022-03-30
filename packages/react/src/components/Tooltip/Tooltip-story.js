@@ -6,7 +6,6 @@
  */
 
 import React, { useState } from 'react';
-import { settings } from 'carbon-components';
 import {
   withKnobs,
   select,
@@ -17,10 +16,10 @@ import {
 import Tooltip from '../Tooltip';
 import { Tooltip as OGTooltip } from './Tooltip';
 import Button from '../Button';
-import { OverflowMenuVertical16 } from '@carbon/icons-react';
+import { OverflowMenuVertical } from '@carbon/icons-react';
 import mdx from './Tooltip.mdx';
 
-const { prefix } = settings;
+const prefix = 'cds';
 const directions = {
   'Bottom (bottom)': 'bottom',
   'Left (left)': 'left',
@@ -95,7 +94,7 @@ const props = {
       'Primary focus element selector (selectorPrimaryFocus)',
       ''
     ),
-    renderIcon: OverflowMenuVertical16,
+    renderIcon: OverflowMenuVertical,
   }),
 };
 

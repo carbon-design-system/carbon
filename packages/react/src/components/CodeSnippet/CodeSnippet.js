@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
@@ -264,7 +264,7 @@ function CodeSnippet({
           <span className={`${prefix}--snippet-btn--text`}>
             {expandCodeBtnText}
           </span>
-          <ChevronDown16
+          <ChevronDown
             aria-label={expandCodeBtnText}
             className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
             name="chevron--down"
@@ -380,6 +380,8 @@ CodeSnippet.propTypes = {
 };
 
 CodeSnippet.defaultProps = {
+  ariaLabel: 'Copy to clipboard',
+  copyLabel: 'Copy to clipboard',
   type: 'single',
   showMoreText: 'Show more',
   showLessText: 'Show less',

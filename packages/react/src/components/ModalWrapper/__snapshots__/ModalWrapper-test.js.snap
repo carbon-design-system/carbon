@@ -33,7 +33,7 @@ exports[`ModalWrapper should render 1`] = `
       <button
         aria-describedby={null}
         aria-pressed={null}
-        className="btn-trigger bx--btn bx--btn--primary"
+        className="btn-trigger cds--btn cds--btn--primary"
         disabled={false}
         onBlur={[Function]}
         onClick={[Function]}
@@ -65,7 +65,7 @@ exports[`ModalWrapper should render 1`] = `
     >
       <div
         aria-label="test modal"
-        className="bx--modal bx--modal-tall"
+        className="cds--modal cds--modal-tall"
         id="modal"
         onBlur={[Function]}
         onKeyDown={[Function]}
@@ -73,7 +73,7 @@ exports[`ModalWrapper should render 1`] = `
         role="presentation"
       >
         <span
-          className="bx--visually-hidden"
+          className="cds--visually-hidden"
           role="link"
           tabIndex="0"
         >
@@ -82,39 +82,40 @@ exports[`ModalWrapper should render 1`] = `
         <div
           aria-label="Test Modal Label"
           aria-modal="true"
-          className="bx--modal-container"
+          className="cds--modal-container"
           role="dialog"
           tabIndex="-1"
         >
           <div
-            className="bx--modal-header"
+            className="cds--modal-header"
           >
             <h2
-              className="bx--modal-header__label"
-              id="bx--modal-header__label--modal-1"
+              className="cds--modal-header__label"
+              id="cds--modal-header__label--modal-1"
             >
               Test Modal Label
             </h2>
             <h3
-              className="bx--modal-header__heading"
-              id="bx--modal-header__heading--modal-1"
+              className="cds--modal-header__heading"
+              id="cds--modal-header__heading--modal-1"
             >
               Transactional Modal
             </h3>
             <button
               aria-label="close"
-              className="bx--modal-close"
+              className="cds--modal-close"
               onClick={[Function]}
               type="button"
             >
-              <ForwardRef(Close20)
+              <ForwardRef(Close)
                 aria-hidden="true"
-                className="bx--modal-close__icon"
+                className="cds--modal-close__icon"
+                size={20}
                 tabIndex="-1"
               >
                 <Icon
                   aria-hidden="true"
-                  className="bx--modal-close__icon"
+                  className="cds--modal-close__icon"
                   fill="currentColor"
                   height={20}
                   preserveAspectRatio="xMidYMid meet"
@@ -125,7 +126,7 @@ exports[`ModalWrapper should render 1`] = `
                 >
                   <svg
                     aria-hidden={true}
-                    className="bx--modal-close__icon"
+                    className="cds--modal-close__icon"
                     fill="currentColor"
                     focusable="false"
                     height={20}
@@ -139,25 +140,25 @@ exports[`ModalWrapper should render 1`] = `
                     />
                   </svg>
                 </Icon>
-              </ForwardRef(Close20)>
+              </ForwardRef(Close)>
             </button>
           </div>
           <div
-            aria-labelledby="bx--modal-header__label--modal-1"
-            className="bx--modal-content"
-            id="bx--modal-body--modal-1"
+            aria-labelledby="cds--modal-header__label--modal-1"
+            className="cds--modal-content"
+            id="cds--modal-body--modal-1"
           >
             <p
-              className="bx--modal-content__text"
+              className="cds--modal-content__text"
             >
               Text
             </p>
           </div>
           <ButtonSet
-            className="bx--modal-footer"
+            className="cds--modal-footer"
           >
             <div
-              className="bx--modal-footer bx--btn-set"
+              className="cds--modal-footer cds--btn-set"
             >
               <Button
                 kind="secondary"
@@ -166,7 +167,7 @@ exports[`ModalWrapper should render 1`] = `
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
-                  className="bx--btn bx--btn--secondary"
+                  className="cds--btn cds--btn--secondary"
                   disabled={false}
                   onBlur={[Function]}
                   onClick={[Function]}
@@ -187,7 +188,7 @@ exports[`ModalWrapper should render 1`] = `
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
-                  className="bx--btn bx--btn--primary"
+                  className="cds--btn cds--btn--primary"
                   disabled={false}
                   onBlur={[Function]}
                   onClick={[Function]}
@@ -204,7 +205,7 @@ exports[`ModalWrapper should render 1`] = `
           </ButtonSet>
         </div>
         <span
-          className="bx--visually-hidden"
+          className="cds--visually-hidden"
           role="link"
           tabIndex="0"
         >

@@ -8,8 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { Close20 } from '@carbon/icons-react';
+import { Close } from '@carbon/icons-react';
 import toggleClass from '../../tools/toggleClass';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
@@ -19,11 +18,13 @@ import wrapFocus, {
   elementOrParentIsFloatingMenu,
 } from '../../internal/wrapFocus';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import { PrefixContext } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const getInstanceId = setupGetInstanceId();
 
 export default class Modal extends Component {
+  static contextType = PrefixContext;
+
   static propTypes = {
     /**
      * Specify whether the Modal is displaying an alert, error or warning
@@ -242,10 +243,10 @@ export default class Modal extends Component {
   startTrap = React.createRef();
   endTrap = React.createRef();
   modalInstanceId = `modal-${getInstanceId()}`;
-  modalLabelId = `${prefix}--modal-header__label--${this.modalInstanceId}`;
-  modalHeadingId = `${prefix}--modal-header__heading--${this.modalInstanceId}`;
-  modalBodyId = `${prefix}--modal-body--${this.modalInstanceId}`;
-  modalCloseButtonClass = `${prefix}--modal-close`;
+  modalLabelId = `${this.context}--modal-header__label--${this.modalInstanceId}`;
+  modalHeadingId = `${this.context}--modal-header__heading--${this.modalInstanceId}`;
+  modalBodyId = `${this.context}--modal-body--${this.modalInstanceId}`;
+  modalCloseButtonClass = `${this.context}--modal-close`;
 
   isCloseButton = (element) => {
     return (
@@ -312,7 +313,7 @@ export default class Modal extends Component {
     }
     toggleClass(
       document.body,
-      `${prefix}--body--with-modal-open`,
+      `${this.context}--body--with-modal-open`,
       this.props.open
     );
   }
@@ -338,13 +339,13 @@ export default class Modal extends Component {
   };
 
   componentWillUnmount() {
-    toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
+    toggleClass(document.body, `${this.context}--body--with-modal-open`, false);
   }
 
   componentDidMount() {
     toggleClass(
       document.body,
-      `${prefix}--body--with-modal-open`,
+      `${this.context}--body--with-modal-open`,
       this.props.open
     );
     if (!this.props.open) {
@@ -393,6 +394,7 @@ export default class Modal extends Component {
       preventCloseOnClickOutside, // eslint-disable-line
       ...other
     } = this.props;
+    const { context: prefix } = this;
 
     const onSecondaryButtonClick = onSecondarySubmit
       ? onSecondarySubmit
@@ -428,7 +430,8 @@ export default class Modal extends Component {
         title={ariaLabel ? ariaLabel : iconDescription}
         aria-label={closeButtonLabel ? closeButtonLabel : 'close'}
         ref={this.button}>
-        <Close20
+        <Close
+          size={20}
           aria-hidden="true"
           tabIndex="-1"
           className={`${this.modalCloseButtonClass}__icon`}

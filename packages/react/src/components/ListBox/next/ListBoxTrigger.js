@@ -8,10 +8,8 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { ChevronDown16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { ChevronDown } from '@carbon/icons-react';
+import { usePrefix } from '../../../internal/usePrefix';
 
 export const translationIds = {
   'close.menu': 'close.menu',
@@ -28,6 +26,7 @@ const defaultTranslations = {
  * state of the menu for a given `ListBox`
  */
 const ListBoxTrigger = ({ isOpen, translateWithId: t, ...rest }) => {
+  const prefix = usePrefix();
   const className = cx({
     [`${prefix}--list-box__menu-icon`]: true,
     [`${prefix}--list-box__menu-icon--open`]: isOpen,
@@ -41,7 +40,7 @@ const ListBoxTrigger = ({ isOpen, translateWithId: t, ...rest }) => {
       className={className}
       type="button"
       tabIndex="-1">
-      <ChevronDown16 />
+      <ChevronDown />
     </button>
   );
 };

@@ -11,7 +11,7 @@ import DatePickerSkeleton from '../DatePicker/DatePicker.Skeleton';
 import { mount, shallow } from 'enzyme';
 import DatePickerInput from '../DatePickerInput/DatePickerInput';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 describe('DatePicker', () => {
   describe('Renders as expected', () => {

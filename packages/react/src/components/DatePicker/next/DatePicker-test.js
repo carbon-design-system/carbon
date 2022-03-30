@@ -10,7 +10,7 @@ import DatePicker from './DatePicker';
 import { mount } from 'enzyme';
 import DatePickerInput from '../../DatePickerInput/next/DatePickerInput';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 function getFlatpickrCalendar() {
   return document.querySelector(`.${prefix}--date-picker__calendar`);

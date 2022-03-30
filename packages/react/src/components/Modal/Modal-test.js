@@ -6,17 +6,17 @@
  */
 
 import React from 'react';
-import { Close20 } from '@carbon/icons-react';
+import { Close } from '@carbon/icons-react';
 import Modal from '../Modal';
 import ModalWrapper from '../ModalWrapper';
 import InlineLoading from '../InlineLoading';
 import { mount } from 'enzyme';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 // The modal is the 0th child inside the wrapper on account of focus-trap-react
-const getModal = (wrapper) => wrapper.find('.bx--modal');
-const getModalBody = (wrapper) => wrapper.find('.bx--modal-container');
+const getModal = (wrapper) => wrapper.find('.cds--modal');
+const getModalBody = (wrapper) => wrapper.find('.cds--modal-container');
 
 describe('Modal', () => {
   describe('Renders as expected', () => {
@@ -48,12 +48,12 @@ describe('Modal', () => {
     });
 
     it('should not place the svg icon in the accessibility tree', () => {
-      const ariaHidden = mounted.find(Close20).props()['aria-hidden'];
+      const ariaHidden = mounted.find(Close).props()['aria-hidden'];
       expect(ariaHidden).toEqual('true');
     });
 
     it("icon isn't a focusable tab stop", () => {
-      const icon = mounted.find(Close20).props().tabIndex;
+      const icon = mounted.find(Close).props().tabIndex;
       expect(icon).toEqual('-1');
     });
 
@@ -153,18 +153,18 @@ describe('Modal', () => {
 
       expect(modalContainer.hasClass(openClass)).not.toEqual(true);
       expect(
-        document.body.classList.contains('bx--body--with-modal-open')
+        document.body.classList.contains('cds--body--with-modal-open')
       ).not.toEqual(true);
       wrapper.setState({ isOpen: true });
       expect(wrapper.find(`.${prefix}--modal`).hasClass(openClass)).toEqual(
         true
       );
       expect(
-        document.body.classList.contains('bx--body--with-modal-open')
+        document.body.classList.contains('cds--body--with-modal-open')
       ).toEqual(true);
       wrapper.unmount();
       expect(
-        document.body.classList.contains('bx--body--with-modal-open')
+        document.body.classList.contains('cds--body--with-modal-open')
       ).toEqual(false);
     });
 

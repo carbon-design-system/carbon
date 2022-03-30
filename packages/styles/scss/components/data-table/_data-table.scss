@@ -256,18 +256,13 @@
     color: $link-secondary;
   }
 
-  // V11: Remove compact, short styles
-  .#{$prefix}--data-table--compact td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--xs td.#{$prefix}--table-column-menu,
-  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
     height: rem(24px);
     padding-top: 0;
     padding-bottom: 0;
   }
 
-  // V11: Remove short styles
-  .#{$prefix}--data-table--short td.#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--sm td.#{$prefix}--table-column-menu {
     height: rem(32px);
   }
@@ -276,8 +271,6 @@
     height: rem(40px);
   }
 
-  // V11: Remove tall styles
-  .#{$prefix}--data-table--tall .#{$prefix}--table-column-menu,
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-menu {
     padding-top: $spacing-03;
   }
@@ -367,9 +360,6 @@
     height: rem(32px);
   }
 
-  // V11: Remove compact
-  .#{$prefix}--data-table--compact thead th.#{$prefix}--table-expand,
-  .#{$prefix}--data-table--compact tbody td.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xs thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xs tbody td.#{$prefix}--table-expand {
     width: rem(24px);
@@ -377,9 +367,6 @@
     padding: 0 0 0 0.5rem;
   }
 
-  // V11: remove short
-  .#{$prefix}--data-table--short thead th.#{$prefix}--table-expand,
-  .#{$prefix}--data-table--short tbody td.#{$prefix}--table-expand,
   .#{$prefix}--data-table--sm thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--sm tbody td.#{$prefix}--table-expand {
     width: rem(32px);
@@ -395,9 +382,6 @@
     padding: rem(4px) 0 rem(4px) rem(8px);
   }
 
-  // V11: remove tall
-  .#{$prefix}--data-table--tall thead th.#{$prefix}--table-expand,
-  .#{$prefix}--data-table--tall tbody td.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xl thead th.#{$prefix}--table-expand,
   .#{$prefix}--data-table--xl tbody td.#{$prefix}--table-expand {
     height: rem(64px);
@@ -405,14 +389,10 @@
     padding-bottom: rem(22px);
   }
 
-  // V11: remove tall
-  .#{$prefix}--data-table--tall .#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-checkbox {
     padding-top: rem(13px);
   }
 
-  // V11: remove tall
-  .#{$prefix}--data-table--tall .#{$prefix}--table-column-radio,
   .#{$prefix}--data-table--xl .#{$prefix}--table-column-radio {
     padding-top: $spacing-05;
   }
@@ -448,7 +428,7 @@
     td,
   tr.#{$prefix}--data-table--selected:first-of-type td {
     // Top border acts as separator from thead
-    border-top: 1px solid $layer-active;
+    border-top: 1px solid $border-subtle-selected;
   }
 
   // last row + zebra select last
@@ -500,46 +480,6 @@
     opacity: 1;
   }
 
-  // V11: Remove this compact block
-  //----------------------------------------------------------------------------
-  // Compact
-  //----------------------------------------------------------------------------
-  .#{$prefix}--data-table--compact thead tr,
-  .#{$prefix}--data-table--compact tbody tr,
-  .#{$prefix}--data-table--compact tbody tr th {
-    height: rem(24px);
-  }
-
-  .#{$prefix}--data-table--compact .#{$prefix}--table-header-label {
-    padding-top: rem(2px);
-    padding-bottom: rem(2px);
-  }
-
-  .#{$prefix}--data-table--compact td,
-  .#{$prefix}--data-table--compact tbody tr th {
-    padding-top: rem(2px);
-    padding-bottom: rem(2px);
-  }
-
-  .#{$prefix}--data-table--compact .#{$prefix}--overflow-menu {
-    width: rem(32px);
-    height: 100%;
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact
-    .#{$prefix}--table-column-checkbox {
-    padding-top: 0;
-    padding-bottom: 0;
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--compact
-    .#{$prefix}--table-column-checkbox
-    .#{$prefix}--checkbox-label {
-    height: rem(23px);
-    // 24px row - 1px border
-    min-height: rem(23px);
-  }
-
   //----------------------------------------------------------------------------
   // Extra Small
   //----------------------------------------------------------------------------
@@ -577,37 +517,6 @@
     height: rem(23px);
     // 24px row - 1px border
     min-height: rem(23px);
-  }
-
-  // V11: Remove this short block
-  //----------------------------------------------------------------------------
-  // Short
-  //----------------------------------------------------------------------------
-  .#{$prefix}--data-table--short thead tr,
-  .#{$prefix}--data-table--short tbody tr,
-  .#{$prefix}--data-table--short tbody tr th {
-    height: rem(32px);
-  }
-
-  .#{$prefix}--data-table--short .#{$prefix}--table-header-label {
-    padding-top: rem(7px);
-    padding-bottom: rem(7px);
-  }
-
-  .#{$prefix}--data-table--short td,
-  .#{$prefix}--data-table--short tbody tr th {
-    padding-top: rem(7px);
-    padding-bottom: rem(6px);
-  }
-
-  .#{$prefix}--data-table.#{$prefix}--data-table--short
-    .#{$prefix}--table-column-checkbox {
-    padding-top: rem(3px);
-    padding-bottom: rem(3px);
-  }
-
-  .#{$prefix}--data-table--short .#{$prefix}--overflow-menu {
-    height: 100%;
   }
 
   //----------------------------------------------------------------------------
@@ -669,35 +578,6 @@
   .#{$prefix}--data-table--md .#{$prefix}--table-column-menu {
     padding-top: rem(3px);
     padding-bottom: rem(3px);
-  }
-
-  // V11: remove this tall block
-  //----------------------------------------------------------------------------
-  // Tall
-  //----------------------------------------------------------------------------
-  .#{$prefix}--data-table--tall thead tr,
-  .#{$prefix}--data-table--tall tbody tr,
-  .#{$prefix}--data-table--tall tbody tr th {
-    height: rem(64px);
-  }
-
-  .#{$prefix}--data-table--tall .#{$prefix}--table-header-label {
-    padding-top: $spacing-05;
-    padding-bottom: $spacing-05;
-  }
-
-  .#{$prefix}--data-table--tall td,
-  .#{$prefix}--data-table--tall tbody tr th {
-    padding-top: 1rem;
-  }
-
-  .#{$prefix}--data-table--tall th,
-  .#{$prefix}--data-table--tall td {
-    vertical-align: top;
-  }
-
-  .#{$prefix}--data-table--tall .#{$prefix}--data-table--cell-secondary-text {
-    @include type-style('label-01');
   }
 
   //----------------------------------------------------------------------------
@@ -803,8 +683,7 @@
       min-height: 3rem;
     }
 
-    // V11: remove compact, tall, and short
-    &:not(.#{$prefix}--data-table--compact):not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--tall):not(.#{$prefix}--data-table--xl):not(.#{$prefix}--data-table--short):not(.#{$prefix}--data-table--sm)
+    &:not(.#{$prefix}--data-table--xs):not(.#{$prefix}--data-table--xl):not(.#{$prefix}--data-table--sm)
       td:not(.#{$prefix}--table-column-menu):not(.#{$prefix}--table-column-checkbox) {
       padding-top: rem(14px);
     }
@@ -833,10 +712,7 @@
       align-items: center;
     }
 
-    // V11: remove tall
-    &.#{$prefix}--data-table--tall thead th.#{$prefix}--table-column-checkbox,
     &.#{$prefix}--data-table--xl thead th.#{$prefix}--table-column-checkbox,
-    &.#{$prefix}--data-table--tall td.#{$prefix}--table-column-checkbox,
     &.#{$prefix}--data-table--xl td.#{$prefix}--table-column-checkbox {
       align-items: flex-start;
     }
@@ -881,46 +757,29 @@
       min-width: 0;
     }
 
-    // V11: remove compact, short, tall
-    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row),
     &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row),
-    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row),
     &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row),
-    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row),
     &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
       height: auto;
     }
 
-    // Compact
-    // V11: remove compact
-    &.#{$prefix}--data-table--compact tr:not(.#{$prefix}--expandable-row),
     &.#{$prefix}--data-table--xs tr:not(.#{$prefix}--expandable-row) {
       min-height: rem(24px);
     }
 
-    // Short
-    // V11: remove short
-    &.#{$prefix}--data-table--short tr:not(.#{$prefix}--expandable-row),
     &.#{$prefix}--data-table--sm tr:not(.#{$prefix}--expandable-row) {
       min-height: rem(32px);
     }
 
-    // Tall
-    // V11: remove tall
-    &.#{$prefix}--data-table--tall tr:not(.#{$prefix}--expandable-row),
     &.#{$prefix}--data-table--xl tr:not(.#{$prefix}--expandable-row) {
       min-height: rem(64px);
     }
 
     // Expansion overrides
-    // V11: remove compact
-    &.#{$prefix}--data-table--compact tr td.#{$prefix}--table-expand,
     &.#{$prefix}--data-table--xs tr td.#{$prefix}--table-expand {
       padding-top: rem(4px);
     }
 
-    // V11: remove short
-    &.#{$prefix}--data-table--short tr td.#{$prefix}--table-expand,
     &.#{$prefix}--data-table--sm tr td.#{$prefix}--table-expand {
       padding-top: rem(8px);
     }
@@ -935,41 +794,25 @@
       overflow-y: hidden;
     }
 
-    // V11: remove compact
-    &.#{$prefix}--data-table--compact th .#{$prefix}--table-header-label,
     &.#{$prefix}--data-table--xs th .#{$prefix}--table-header-label {
       padding-top: rem(3px);
       padding-bottom: 0;
     }
 
-    // V11: remove short
-    &.#{$prefix}--data-table--short th .#{$prefix}--table-header-label,
     &.#{$prefix}--data-table--sm th .#{$prefix}--table-header-label {
       padding-top: rem(8px);
       padding-bottom: 0;
     }
 
-    // V11: remove tall
-    &.#{$prefix}--data-table--tall th .#{$prefix}--table-header-label,
     &.#{$prefix}--data-table--xl th .#{$prefix}--table-header-label {
       padding-top: 1rem;
     }
 
-    // V11: remove tall
-    &.#{$prefix}--data-table--tall th.#{$prefix}--table-expand,
     &.#{$prefix}--data-table--xl th.#{$prefix}--table-expand {
       display: flex;
       align-items: flex-start;
     }
 
-    // With dynamic content overrides
-    // V11: remove compact, short
-    &.#{$prefix}--data-table--compact
-      tr.#{$prefix}--parent-row
-      .#{$prefix}--table-column-checkbox,
-    &.#{$prefix}--data-table--short
-      tr.#{$prefix}--parent-row
-      .#{$prefix}--table-column-checkbox,
     &.#{$prefix}--data-table--xs
       tr.#{$prefix}--parent-row
       .#{$prefix}--table-column-checkbox,
@@ -990,11 +833,6 @@
     margin: 0;
   }
 
-  // V11: remove short, compact
-  .#{$prefix}--data-table--short
-    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
-  .#{$prefix}--data-table--compact
-    .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
   .#{$prefix}--data-table--xs
     .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper:last-of-type,
   .#{$prefix}--data-table--sm

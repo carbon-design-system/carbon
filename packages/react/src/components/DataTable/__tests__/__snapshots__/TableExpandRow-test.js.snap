@@ -6,10 +6,10 @@ exports[`DataTable.TableExpandRow should render 1`] = `
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      className="cds--data-table cds--data-table--no-border"
     >
       <TableBody
         aria-live="polite"
@@ -25,28 +25,28 @@ exports[`DataTable.TableExpandRow should render 1`] = `
             onExpand={[MockFunction]}
           >
             <tr
-              className="bx--parent-row custom-class"
+              className="cds--parent-row custom-class"
               data-parent-row={true}
             >
               <TableCell
-                className="bx--table-expand"
+                className="cds--table-expand"
                 headers="expand"
               >
                 <td
-                  className="bx--table-expand"
+                  className="cds--table-expand"
                   headers="expand"
                 >
                   <button
                     aria-label="Aria label"
-                    className="bx--table-expand__button"
+                    className="cds--table-expand__button"
                     onClick={[MockFunction]}
                     type="button"
                   >
-                    <ForwardRef(ChevronRight16)
-                      className="bx--table-expand__svg"
+                    <ForwardRef(ChevronRight)
+                      className="cds--table-expand__svg"
                     >
                       <Icon
-                        className="bx--table-expand__svg"
+                        className="cds--table-expand__svg"
                         fill="currentColor"
                         height={16}
                         preserveAspectRatio="xMidYMid meet"
@@ -56,7 +56,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                       >
                         <svg
                           aria-hidden={true}
-                          className="bx--table-expand__svg"
+                          className="cds--table-expand__svg"
                           fill="currentColor"
                           focusable="false"
                           height={16}
@@ -70,7 +70,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                           />
                         </svg>
                       </Icon>
-                    </ForwardRef(ChevronRight16)>
+                    </ForwardRef(ChevronRight)>
                   </button>
                 </td>
               </TableCell>
@@ -80,7 +80,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
             colSpan={1}
           >
             <tr
-              className="bx--expandable-row"
+              className="cds--expandable-row"
               data-child-row={true}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
@@ -92,7 +92,7 @@ exports[`DataTable.TableExpandRow should render 1`] = `
                   colSpan={1}
                 >
                   <div
-                    className="bx--child-row-inner-container"
+                    className="cds--child-row-inner-container"
                   />
                 </td>
               </TableCell>

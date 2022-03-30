@@ -8,9 +8,8 @@
 import React from 'react';
 import OverflowMenu from '../OverflowMenu';
 import { shallow, mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('[Deprecated] Toolbar', () => {
   let Toolbar;
