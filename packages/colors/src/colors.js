@@ -69,7 +69,7 @@ export const orange70 = '#8a3800';
 export const orange80 = '#5e2900';
 export const orange90 = '#3e1a00';
 export const orange100 = '#231000';
-const const orange = {
+export const orange = {
   10: orange10,
   20: orange20,
   30: orange30,
