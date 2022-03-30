@@ -205,7 +205,6 @@ export function ToastNotification({
   role,
   onClose,
   onCloseButtonClick,
-  iconDescription,
   statusIconDescription,
   className,
   children,
@@ -294,7 +293,6 @@ export function ToastNotification({
       </div>
       {!hideCloseButton && (
         <NotificationButton
-          iconDescription={iconDescription}
           notificationType="toast"
           onClick={handleCloseButtonClick}
           aria-hidden="true"
@@ -306,6 +304,11 @@ export function ToastNotification({
 }
 
 ToastNotification.propTypes = {
+  /**
+   * Provide a description for "close" icon button that can be read by screen readers
+   */
+  ariaLabel: PropTypes.string,
+
   /**
    * Specify the caption
    */
@@ -325,11 +328,6 @@ ToastNotification.propTypes = {
    * Specify the close button should be disabled, or not
    */
   hideCloseButton: PropTypes.bool,
-
-  /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string,
 
   /**
    * Specify what state the notification represents
@@ -388,7 +386,6 @@ ToastNotification.propTypes = {
 ToastNotification.defaultProps = {
   kind: 'error',
   role: 'status',
-  iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
   timeout: 0,
@@ -401,7 +398,6 @@ export function InlineNotification({
   role,
   onClose,
   onCloseButtonClick,
-  iconDescription,
   statusIconDescription,
   className,
   kind,
@@ -463,7 +459,6 @@ export function InlineNotification({
       </div>
       {!hideCloseButton && (
         <NotificationButton
-          iconDescription={iconDescription}
           notificationType="inline"
           onClick={handleCloseButtonClick}
           aria-hidden="true"
@@ -489,11 +484,6 @@ InlineNotification.propTypes = {
    * Specify the close button should be disabled, or not
    */
   hideCloseButton: PropTypes.bool,
-
-  /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string,
 
   /**
    * Specify what state the notification represents
@@ -547,19 +537,18 @@ InlineNotification.propTypes = {
 InlineNotification.defaultProps = {
   kind: 'error',
   role: 'status',
-  iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
 };
 
 export function ActionableNotification({
   actionButtonLabel,
+  ariaLabel,
   children,
   role,
   onActionButtonClick,
   onClose,
   onCloseButtonClick,
-  iconDescription,
   statusIconDescription,
   className,
   inline,
@@ -636,7 +625,7 @@ export function ActionableNotification({
 
       {!hideCloseButton && (
         <NotificationButton
-          iconDescription={iconDescription}
+          aria-label={ariaLabel}
           notificationType="actionable"
           onClick={handleCloseButtonClick}
         />
@@ -650,6 +639,11 @@ ActionableNotification.propTypes = {
    * Pass in the action button label that will be rendered within the ActionableNotification.
    */
   actionButtonLabel: PropTypes.string.isRequired,
+
+  /**
+   * Provide a description for "close" icon button that can be read by screen readers
+   */
+  ariaLabel: PropTypes.string,
 
   /**
    * Specify the caption
@@ -680,11 +674,6 @@ ActionableNotification.propTypes = {
    * Specify the close button should be disabled, or not
    */
   hideCloseButton: PropTypes.bool,
-
-  /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string,
 
   /*
    * Specify if the notification should have inline styling applied instead of toast
@@ -748,7 +737,6 @@ ActionableNotification.propTypes = {
 ActionableNotification.defaultProps = {
   kind: 'error',
   role: 'alertdialog',
-  iconDescription: 'closes notification',
   onCloseButtonClick: () => {},
   hideCloseButton: false,
   hasFocus: true,

@@ -16,7 +16,6 @@ import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -153,7 +152,7 @@ export default class DataTable extends React.Component {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
     locale: 'en',
-    size: FeatureFlags.enabled('enable-v11-release') ? 'lg' : 'normal',
+    size: 'lg',
     overflowMenuOnHover: true,
     translateWithId,
   };

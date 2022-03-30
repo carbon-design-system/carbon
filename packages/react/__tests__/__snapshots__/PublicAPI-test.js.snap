@@ -442,7 +442,6 @@ Map {
   "CodeSnippet" => Object {
     "defaultProps": Object {
       "ariaLabel": "Copy to clipboard",
-      "copyLabel": "Copy to clipboard",
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
@@ -459,9 +458,6 @@ Map {
         "type": "string",
       },
       "copyButtonDescription": Object {
-        "type": "string",
-      },
-      "copyLabel": Object {
         "type": "string",
       },
       "copyText": Object {
@@ -2606,7 +2602,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "inline": [Function],
       "size": Object {
         "args": Array [
           Array [
@@ -3262,9 +3257,6 @@ Map {
       },
       "className": Object {
         "type": "string",
-      },
-      "hasMargin": Object {
-        "type": "bool",
       },
       "invalid": Object {
         "type": "bool",

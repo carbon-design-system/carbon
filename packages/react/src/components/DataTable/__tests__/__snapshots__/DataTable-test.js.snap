@@ -97,7 +97,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     }
   }
   rows={Array []}
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -448,7 +448,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -919,7 +919,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     }
   }
   rows={Array []}
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1319,7 +1319,7 @@ exports[`DataTable selection should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1894,7 +1894,7 @@ exports[`DataTable should render 1`] = `
             <Table
               isSortable={false}
               overflowMenuOnHover={true}
-              size="normal"
+              size="lg"
             >
               <TableHead>
                 <TableRow>
@@ -1973,7 +1973,7 @@ exports[`DataTable should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -2534,13 +2534,13 @@ exports[`DataTable should render 1`] = `
       <Table
         isSortable={false}
         overflowMenuOnHover={true}
-        size="normal"
+        size="lg"
       >
         <div
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--normal cds--data-table--no-border"
+            className="cds--data-table cds--data-table--lg cds--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -2915,7 +2915,7 @@ exports[`DataTable sticky header should render 1`] = `
             <Table
               isSortable={false}
               overflowMenuOnHover={true}
-              size="normal"
+              size="lg"
               stickyHeader={true}
             >
               <TableHead>
@@ -2995,7 +2995,7 @@ exports[`DataTable sticky header should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   stickyHeader={true}
   translateWithId={[Function]}
@@ -3558,7 +3558,7 @@ exports[`DataTable sticky header should render 1`] = `
       <Table
         isSortable={false}
         overflowMenuOnHover={true}
-        size="normal"
+        size="lg"
         stickyHeader={true}
       >
         <section
@@ -3568,7 +3568,7 @@ exports[`DataTable sticky header should render 1`] = `
             className="cds--data-table-content"
           >
             <table
-              className="cds--data-table cds--data-table--normal cds--data-table--no-border cds--data-table--sticky-header"
+              className="cds--data-table cds--data-table--lg cds--data-table--no-border cds--data-table--sticky-header"
             >
               <TableHead>
                 <thead>
