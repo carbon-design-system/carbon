@@ -71,8 +71,8 @@ export {
   Grid,
   Row,
   Column,
-  ColumnHang as unstable_ColumnHang,
-  FlexGrid as unstable_FlexGrid,
+  ColumnHang,
+  FlexGrid,
 } from './components/Grid';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
