@@ -10,6 +10,7 @@ import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../';
 import ButtonSet from '../../ButtonSet';
+import mdx from '../Button.mdx';
 
 export default {
   title: 'Components/Button',
@@ -48,6 +49,11 @@ export default {
       table: {
         disable: true,
       },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
     },
   },
 };
