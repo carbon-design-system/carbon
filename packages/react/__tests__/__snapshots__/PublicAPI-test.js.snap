@@ -2676,6 +2676,9 @@ Map {
       "onClear": Object {
         "type": "func",
       },
+      "onExpand": Object {
+        "type": "func",
+      },
       "onKeyDown": Object {
         "type": "func",
       },
@@ -5414,6 +5417,7 @@ Map {
     },
   },
   "Search" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "autoComplete": Object {
         "type": "string",
@@ -5454,6 +5458,9 @@ Map {
         "type": "func",
       },
       "onClear": Object {
+        "type": "func",
+      },
+      "onExpand": Object {
         "type": "func",
       },
       "onKeyDown": Object {
@@ -5506,6 +5513,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "SearchFilterButton" => Object {
     "defaultProps": Object {
