@@ -166,7 +166,13 @@ Search.propTypes = {
   /**
    * Specify light version or default version of this control
    */
-  light: PropTypes.bool,
+   light: FeatureFlags.enabled('enable-v11-release')
+   ? deprecate(
+       PropTypes.bool,
+       'The `light` prop for `Search` is no longer needed and has ' +
+         'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+     )
+   : PropTypes.bool,
 
   /**
    * Optional callback called when the search value changes.

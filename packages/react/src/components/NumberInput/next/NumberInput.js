@@ -300,7 +300,13 @@ NumberInput.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+   light: FeatureFlags.enabled('enable-v11-release')
+   ? deprecate(
+       PropTypes.bool,
+       'The `light` prop for `NumberInput` is no longer needed and has ' +
+         'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+     )
+   : PropTypes.bool,
 
   /**
    * The maximum value.
