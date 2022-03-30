@@ -9,12 +9,18 @@ import React from 'react';
 import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../../Switch';
 import { Layer } from '../../Layer';
+import mdx from '../ContentSwitcher.mdx';
 
 export default {
   title: 'Components/ContentSwitcher',
   component: ContentSwitcher,
   subcomponents: {
     Switch,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

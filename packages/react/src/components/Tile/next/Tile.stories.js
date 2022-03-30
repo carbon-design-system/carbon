@@ -8,8 +8,8 @@
 import React from 'react';
 import Link from '../../Link';
 import Button from '../../Button';
-import TextInput from '../../TextInput';
-import RadioTile from '../../RadioTile';
+import { default as TextInput } from '../../TextInput';
+import { default as RadioTile } from '../../RadioTile';
 import {
   ClickableTile,
   ExpandableTile,

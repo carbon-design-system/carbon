@@ -2,7 +2,6 @@ import React from 'react';
 import OrderedList from '../OrderedList';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 import ListItem from '../ListItem';
-import mdx from './OrderedList.mdx';
 
 const props = {
   regular: () => {
@@ -16,11 +15,6 @@ export default {
   title: 'Components/OrderedList',
   component: OrderedList,
   decorators: [withKnobs],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
   subcomponents: {
     ListItem,
   },
