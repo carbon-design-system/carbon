@@ -38,7 +38,7 @@ Object {
   "grid-gutter": "2rem",
   "grid-gutter-condensed": "0.0625rem",
   "prefix": "cds",
+  "use-akamai-cdn": false,
   "use-flexbox-grid": false,
-  "use-google-fonts": false,
 }
 `;
