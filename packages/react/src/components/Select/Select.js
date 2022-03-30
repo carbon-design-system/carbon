@@ -216,7 +216,7 @@ Select.propTypes = {
     ? deprecate(
         PropTypes.bool,
         'The `light` prop for `Select` is no longer needed and has ' +
-          'been deprecated in v11. It will be moved in the next major release.'
+          'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
       )
     : PropTypes.bool,
 

@@ -115,7 +115,13 @@ RadioTile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: FeatureFlags.enabled('enable-v11-release')
+  ? deprecate(
+      PropTypes.bool,
+      'The `light` prop for `RadioTile` is no longer needed and has ' +
+        'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+    )
+  : PropTypes.bool,
 
   /**
    * The `name` of the `<input>`.
