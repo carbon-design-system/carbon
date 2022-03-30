@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import ContentSwitcher from '../';
+import ContentSwitcher from '../ContentSwitcher';
 import Switch from '../../Switch';
 import { Layer } from '../../Layer';
 
