@@ -19,24 +19,25 @@ import deprecate from '../../../prop-types/deprecate';
 
 const Search = React.forwardRef(function Search(
   {
-  autoComplete = 'off',
-  className,
-  closeButtonLabelText = 'Clear search input',
-  defaultValue,
-  disabled,
-  id,
-  labelText,
-  light,
-  onChange = () => {},
-  onClear = () => {},
-  onKeyDown,
-  placeholder = '',
-  renderIcon,
-  role = 'searchbox',
-  size = 'md',
-  type = 'text',
-  value,
-  ...rest
+    autoComplete = 'off',
+    className,
+    closeButtonLabelText = 'Clear search input',
+    defaultValue,
+    disabled,
+    id,
+    labelText,
+    light,
+    onChange = () => {},
+    onClear = () => {},
+    onKeyDown,
+    onExpand,
+    placeholder = '',
+    renderIcon,
+    role = 'searchbox',
+    size = 'md',
+    type = 'text',
+    value,
+    ...rest
   },
   forwardRef
 ) {
