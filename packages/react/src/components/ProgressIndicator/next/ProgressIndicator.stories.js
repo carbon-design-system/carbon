@@ -11,10 +11,7 @@ import {
   ProgressStep,
   ProgressIndicatorSkeleton,
 } from '../';
-import Tooltip from '../../Tooltip';
 import mdx from '../ProgressIndicator.mdx';
-
-const prefix = 'cds';
 
 export default {
   title: 'Components/ProgressIndicator',
