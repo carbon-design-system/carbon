@@ -100,6 +100,8 @@ const Search = React.forwardRef(function Search(
 
   return (
     <div role="search" aria-labelledby={searchId} className={searchClasses}>
+      {/* the magnifier is used in ExpandableSearch as a click target to expand, 
+      however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <div
         role={onExpand ? 'button' : null}
