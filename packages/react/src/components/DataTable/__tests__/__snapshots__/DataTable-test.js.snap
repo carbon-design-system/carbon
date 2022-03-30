@@ -2514,7 +2514,7 @@ exports[`DataTable should render 1`] = `
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
-                  className="cds--btn cds--btn--sm cds--btn--primary"
+                  className="cds--btn cds--btn--primary"
                   disabled={false}
                   onBlur={[Function]}
                   onClick={[Function]}
@@ -2540,7 +2540,7 @@ exports[`DataTable should render 1`] = `
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--normal cds--data-table--no-border"
+            className="cds--data-table cds--data-table--normal"
           >
             <TableHead>
               <thead>
