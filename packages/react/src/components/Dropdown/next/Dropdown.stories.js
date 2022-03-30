@@ -153,6 +153,6 @@ export const InlineWithLayer = (args) => (
 
 export const Skeleton = (args) => (
   <div style={{ width: 300 }}>
-    <DropdownSkeleton inline {...args} />
+    <DropdownSkeleton {...args} />
   </div>
 );

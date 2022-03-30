@@ -19,7 +19,6 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
-import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
@@ -224,7 +223,7 @@ const ComboBox = React.forwardRef((props, ref) => {
   const ItemToElement = itemToElement;
   return (
     <Downshift
-      {...mapDownshiftProps(downshiftProps)}
+      {...downshiftProps}
       onChange={handleOnChange}
       onInputValueChange={handleOnInputValueChange}
       onStateChange={(...args) => {

@@ -95,8 +95,8 @@ NotificationActionButton.propTypes = {
 };
 
 export function NotificationButton({
+  ariaLabel,
   className,
-  iconDescription,
   type,
   renderIcon: IconTag,
   name,
@@ -116,8 +116,8 @@ export function NotificationButton({
       {...rest}
       // eslint-disable-next-line react/button-has-type
       type={type}
-      aria-label={iconDescription}
-      title={iconDescription}
+      aria-label={ariaLabel}
+      title={ariaLabel}
       className={buttonClassName}>
       {IconTag && <IconTag className={iconClassName} name={name} />}
     </button>
@@ -126,14 +126,14 @@ export function NotificationButton({
 
 NotificationButton.propTypes = {
   /**
+   * Specify a label to be read by screen readers on the notification button
+   */
+  ariaLabel: PropTypes.string,
+
+  /**
    * Specify an optional className to be applied to the notification button
    */
   className: PropTypes.string,
-
-  /**
-   * Provide a description for "close" icon that can be read by screen readers
-   */
-  iconDescription: PropTypes.string,
 
   /**
    * Specify an optional icon for the Button through a string,
@@ -159,9 +159,9 @@ NotificationButton.propTypes = {
 };
 
 NotificationButton.defaultProps = {
+  ariaLabel: 'closes notification',
   notificationType: 'toast',
   type: 'button',
-  iconDescription: 'close icon',
   renderIcon: Close,
 };
 
