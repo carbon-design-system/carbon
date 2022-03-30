@@ -234,9 +234,9 @@ ControlledPasswordInput.propTypes = {
   showPasswordLabel: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
+   * Specify the size of the Text Input.
    */
-  size: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.

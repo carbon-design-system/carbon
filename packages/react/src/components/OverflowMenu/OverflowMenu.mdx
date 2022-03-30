@@ -1,4 +1,4 @@
-import { Props } from '@storybook/addon-docs/blocks';
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
 
 # OverflowMenu
 
@@ -15,12 +15,22 @@ import { Props } from '@storybook/addon-docs/blocks';
 The overflow menu component is a clickable element that contains additional
 options that are available to the user, but there is a space constraint.
 
+<Preview>
+  <Story id="components-overflowmenu--default" />
+</Preview>
+
 ### `data-floating-menu-container`
 
 `OverflowMenu` uses React Portals to render the overflow menu into the DOM. To
 determine where in the DOM the menu will be placed, it looks for a parent
 element with the `data-floating-menu-container` attribute. If no parent with
 this attribute is found, the menu will be placed on `document.body`.
+
+## Render Custon Icon
+
+<Preview>
+  <Story id="components-overflowmenu--render-custom-icon" />
+</Preview>
 
 ## Component API
 

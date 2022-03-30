@@ -13,6 +13,7 @@ export function createComponentToggle(spec) {
 
   function ComponentToggle(props, ref) {
     const enabled = useFeatureFlag(flag);
+    console.log('ComponentToggle', enabled);
     if (enabled) {
       if (next) {
         return React.createElement(next, { ...props, ref: ref });

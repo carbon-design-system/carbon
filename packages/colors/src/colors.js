@@ -23,7 +23,7 @@ export const yellow70 = '#684e00';
 export const yellow80 = '#483700';
 export const yellow90 = '#302400';
 export const yellow100 = '#1c1500';
-const yellow = {
+export const yellow = {
   10: yellow10,
   20: yellow20,
   30: yellow30,
@@ -69,7 +69,7 @@ export const orange70 = '#8a3800';
 export const orange80 = '#5e2900';
 export const orange90 = '#3e1a00';
 export const orange100 = '#231000';
-const orange = {
+export const orange = {
   10: orange10,
   20: orange20,
   30: orange30,

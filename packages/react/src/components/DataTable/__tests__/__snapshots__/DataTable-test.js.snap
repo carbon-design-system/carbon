@@ -97,7 +97,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     }
   }
   rows={Array []}
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -448,7 +448,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -919,7 +919,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     }
   }
   rows={Array []}
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1319,7 +1319,7 @@ exports[`DataTable selection should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1803,6 +1803,7 @@ exports[`DataTable should render 1`] = `
                 translateWithId={[Function]}
               >
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1817,6 +1818,7 @@ exports[`DataTable should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1831,6 +1833,7 @@ exports[`DataTable should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1894,7 +1897,7 @@ exports[`DataTable should render 1`] = `
             <Table
               isSortable={false}
               overflowMenuOnHover={true}
-              size="normal"
+              size="lg"
             >
               <TableHead>
                 <TableRow>
@@ -1973,7 +1976,7 @@ exports[`DataTable should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -2035,6 +2038,7 @@ exports[`DataTable should render 1`] = `
                   className="cds--action-list"
                 >
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -2047,6 +2051,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2061,23 +2066,21 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
+                        className="cds--btn cds--btn--lg cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -2087,12 +2090,14 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2112,6 +2117,7 @@ exports[`DataTable should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -2124,6 +2130,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2138,23 +2145,21 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
+                        className="cds--btn cds--btn--lg cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -2164,12 +2169,14 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2189,6 +2196,7 @@ exports[`DataTable should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -2201,6 +2209,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2215,23 +2224,21 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
+                        className="cds--btn cds--btn--lg cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -2241,12 +2248,14 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2273,13 +2282,9 @@ exports[`DataTable should render 1`] = `
                     <button
                       aria-describedby={null}
                       aria-pressed={null}
-                      className="cds--batch-summary__cancel cds--btn cds--btn--primary"
+                      className="cds--batch-summary__cancel cds--btn cds--btn--lg cds--btn--primary"
                       disabled={false}
-                      onBlur={[Function]}
                       onClick={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -2516,11 +2521,7 @@ exports[`DataTable should render 1`] = `
                   aria-pressed={null}
                   className="cds--btn cds--btn--sm cds--btn--primary"
                   disabled={false}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onClick={[MockFunction]}
                   tabIndex={0}
                   type="button"
                 >
@@ -2534,13 +2535,13 @@ exports[`DataTable should render 1`] = `
       <Table
         isSortable={false}
         overflowMenuOnHover={true}
-        size="normal"
+        size="lg"
       >
         <div
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--normal cds--data-table--no-border"
+            className="cds--data-table cds--data-table--lg cds--data-table--no-border"
           >
             <TableHead>
               <thead>
@@ -2824,6 +2825,7 @@ exports[`DataTable sticky header should render 1`] = `
                 translateWithId={[Function]}
               >
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -2838,6 +2840,7 @@ exports[`DataTable sticky header should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -2852,6 +2855,7 @@ exports[`DataTable sticky header should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -2915,7 +2919,7 @@ exports[`DataTable sticky header should render 1`] = `
             <Table
               isSortable={false}
               overflowMenuOnHover={true}
-              size="normal"
+              size="lg"
               stickyHeader={true}
             >
               <TableHead>
@@ -2995,7 +2999,7 @@ exports[`DataTable sticky header should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   stickyHeader={true}
   translateWithId={[Function]}
@@ -3059,6 +3063,7 @@ exports[`DataTable sticky header should render 1`] = `
                   className="cds--action-list"
                 >
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -3071,6 +3076,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3085,23 +3091,21 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
+                        className="cds--btn cds--btn--lg cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -3111,12 +3115,14 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3136,6 +3142,7 @@ exports[`DataTable sticky header should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -3148,6 +3155,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3162,23 +3170,21 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
+                        className="cds--btn cds--btn--lg cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -3188,12 +3194,14 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3213,6 +3221,7 @@ exports[`DataTable sticky header should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -3225,6 +3234,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3239,23 +3249,21 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
+                        className="cds--btn cds--btn--lg cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -3265,12 +3273,14 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3297,13 +3307,9 @@ exports[`DataTable sticky header should render 1`] = `
                     <button
                       aria-describedby={null}
                       aria-pressed={null}
-                      className="cds--batch-summary__cancel cds--btn cds--btn--primary"
+                      className="cds--batch-summary__cancel cds--btn cds--btn--lg cds--btn--primary"
                       disabled={false}
-                      onBlur={[Function]}
                       onClick={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -3540,11 +3546,7 @@ exports[`DataTable sticky header should render 1`] = `
                   aria-pressed={null}
                   className="cds--btn cds--btn--sm cds--btn--primary"
                   disabled={false}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onClick={[MockFunction]}
                   tabIndex={0}
                   type="button"
                 >
@@ -3558,7 +3560,7 @@ exports[`DataTable sticky header should render 1`] = `
       <Table
         isSortable={false}
         overflowMenuOnHover={true}
-        size="normal"
+        size="lg"
         stickyHeader={true}
       >
         <section
@@ -3568,7 +3570,7 @@ exports[`DataTable sticky header should render 1`] = `
             className="cds--data-table-content"
           >
             <table
-              className="cds--data-table cds--data-table--normal cds--data-table--no-border cds--data-table--sticky-header"
+              className="cds--data-table cds--data-table--lg cds--data-table--no-border cds--data-table--sticky-header"
             >
               <TableHead>
                 <thead>
