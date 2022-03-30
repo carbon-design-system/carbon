@@ -118,19 +118,7 @@ export default class DataTable extends React.Component {
     /**
      *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
      */
-    size: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
-      : PropTypes.oneOf([
-          'compact',
-          'short',
-          'normal',
-          'tall',
-          'xs',
-          'sm',
-          'md',
-          'lg',
-          'xl',
-        ]),
+    size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 
     /**
      * Optional hook to manually control sorting of the rows.
@@ -384,9 +372,7 @@ export default class DataTable extends React.Component {
 
   getToolbarProps = (props = {}) => {
     const { size } = this.props;
-    // Remove compact, short in V11
-    let isSmall =
-      size === 'compact' || size === 'short' || size === 'xs' || size === 'sm';
+    let isSmall = size === 'xs' || size === 'sm';
     return {
       ...props,
       size: isSmall ? 'small' : 'normal',

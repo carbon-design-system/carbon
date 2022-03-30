@@ -95,7 +95,6 @@ NotificationActionButton.propTypes = {
 };
 
 export function NotificationButton({
-  ariaLabel,
   className,
   iconDescription,
   type,
@@ -120,19 +119,12 @@ export function NotificationButton({
       aria-label={iconDescription}
       title={iconDescription}
       className={buttonClassName}>
-      {IconTag && (
-        <IconTag aria-label={ariaLabel} className={iconClassName} name={name} />
-      )}
+      {IconTag && <IconTag className={iconClassName} name={name} />}
     </button>
   );
 }
 
 NotificationButton.propTypes = {
-  /**
-   * Specify a label to be read by screen readers on the notification button
-   */
-  ariaLabel: PropTypes.string,
-
   /**
    * Specify an optional className to be applied to the notification button
    */
@@ -167,7 +159,6 @@ NotificationButton.propTypes = {
 };
 
 NotificationButton.defaultProps = {
-  ariaLabel: 'close notification', // TODO: deprecate this prop
   notificationType: 'toast',
   type: 'button',
   iconDescription: 'close icon',

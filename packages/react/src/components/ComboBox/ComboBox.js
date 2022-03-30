@@ -43,7 +43,7 @@ const getInputValue = ({
   if (selectedItem) {
     return itemToString(selectedItem);
   }
-  // TODO: consistent `initialSelectedItem` behavior with other listbox components in v11
+
   if (initialSelectedItem) {
     return itemToString(initialSelectedItem);
   }

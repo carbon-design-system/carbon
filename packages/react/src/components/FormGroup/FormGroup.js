@@ -7,8 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import classnames from 'classnames';
-import { useFeatureFlag } from '../FeatureFlags';
+import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
 const FormGroup = ({
@@ -19,18 +18,11 @@ const FormGroup = ({
   className,
   message,
   messageText,
-  hasMargin, // TODO - remove in v11
   ...other
 }) => {
   const prefix = usePrefix();
-  const enabled = useFeatureFlag('enable-v11-release');
-  const classNamesLegend = classnames(`${prefix}--label`, [
-    enabled ? null : className,
-  ]);
-  // TODO - remove `fieldset--no-margin` in v11
-  const classNamesFieldset = classnames(`${prefix}--fieldset`, className, {
-    [`${prefix}--fieldset--no-margin`]: !hasMargin,
-  });
+
+  const classNamesFieldset = cx(`${prefix}--fieldset`, className);
 
   return (
     <fieldset
@@ -39,7 +31,7 @@ const FormGroup = ({
       {...other}
       aria-labelledby={other['aria-labelledby'] || legendId}>
       <legend
-        className={classNamesLegend}
+        className={`${prefix}--label`}
         id={legendId || other['aria-labelledby']}>
         {legendText}
       </legend>
@@ -61,11 +53,6 @@ FormGroup.propTypes = {
    * Provide a custom className to be applied to the containing <fieldset> node
    */
   className: PropTypes.string,
-
-  /**
-   * Specify whether or not the FormGroup should provide bottom margin
-   */
-  hasMargin: PropTypes.bool,
 
   /**
    * Specify whether the <FormGroup> is invalid
