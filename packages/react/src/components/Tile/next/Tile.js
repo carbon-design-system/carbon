@@ -102,10 +102,10 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     <Link
       className={classes}
       href={href}
-      {...rest}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      ref={ref}>
+      ref={ref}
+      {...rest}>
       {children}
     </Link>
   );
