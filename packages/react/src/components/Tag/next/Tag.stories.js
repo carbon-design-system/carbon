@@ -6,62 +6,116 @@
  */
 
 import React from 'react';
-import { Tag } from 'carbon-components-react';
+import { default as Tag } from '../';
 
 export default {
   title: 'Components/Tag',
   component: Tag,
+  argTypes: {
+    size: {
+      options: ['sm', 'md'],
+      control: { type: 'select' },
+    },
+  },
 };
 
-export const Default = () => {
+export const Default = (args) => {
   return (
     <>
-      <Tag className="some-class" type="red" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="red"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="magenta" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="magenta"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="purple" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="purple"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="blue" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="blue"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="cyan" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="cyan"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="teal" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="teal"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="green" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="green"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="gray" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="gray"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
       <Tag
         className="some-class"
         type="cool-gray"
         size="sm"
-        title="Clear Filter">
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
       <Tag
         className="some-class"
         type="warm-gray"
         size="sm"
-        title="Clear Filter">
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
       <Tag
         className="some-class"
         type="high-contrast"
         size="sm"
-        title="Clear Filter">
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
-      <Tag className="some-class" type="outline" size="sm" title="Clear Filter">
+      <Tag
+        className="some-class"
+        type="outline"
+        size="sm"
+        title="Clear Filter"
+        {...args}>
         {'Tag content'}
       </Tag>
     </>

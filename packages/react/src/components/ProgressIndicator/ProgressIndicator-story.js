@@ -10,10 +10,7 @@ import { withKnobs, number, boolean, text } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
 import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
-import Tooltip from '../Tooltip';
 import mdx from './ProgressIndicator.mdx';
-
-const prefix = 'cds';
 
 export default {
   title: 'Components/ProgressIndicator',
@@ -42,35 +39,10 @@ export const Default = () => (
     <ProgressStep
       label="Second step with tooltip"
       description="Step 2: Getting started with Carbon Design System"
-      renderLabel={() => (
-        <Tooltip
-          direction="bottom"
-          showIcon={false}
-          triggerClassName={`${prefix}--progress-label`}
-          triggerText={'Second step with tooltip'}
-          tooltipId="tooltipId-0">
-          <p>Overflow tooltip content.</p>
-        </Tooltip>
-      )}
     />
     <ProgressStep
       label="Third step with tooltip"
       description="Step 3: Getting started with Carbon Design System"
-      renderLabel={() => (
-        <Tooltip
-          direction="bottom"
-          showIcon={false}
-          triggerClassName={`${prefix}--progress-label`}
-          triggerText={'Third step with tooltip'}
-          tooltipId="tooltipId-1">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
-            consequuntur hic ratione aliquid cupiditate, nesciunt saepe iste
-            blanditiis cumque maxime tenetur veniam est illo deserunt sint quae
-            pariatur. Laboriosam, consequatur.
-          </p>
-        </Tooltip>
-      )}
     />
     <ProgressStep
       label="Fourth step"
@@ -101,21 +73,6 @@ export const Interactive = () => (
     <ProgressStep
       label="Tooltip and really long label"
       description="The progress indicator will listen for clicks on the steps"
-      renderLabel={() => (
-        <Tooltip
-          direction="bottom"
-          showIcon={false}
-          triggerClassName={`${prefix}--progress-label`}
-          triggerText="Tooltip and really long label"
-          tooltipId="tooltipId-1">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
-            consequuntur hic ratione aliquid cupiditate, nesciunt saepe iste
-            blanditiis cumque maxime tenetur veniam est illo deserunt sint quae
-            pariatur. Laboriosam, consequatur.
-          </p>
-        </Tooltip>
-      )}
     />
   </ProgressIndicator>
 );

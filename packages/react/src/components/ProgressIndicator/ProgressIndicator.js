@@ -17,8 +17,6 @@ import {
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix, PrefixContext } from '../../internal/usePrefix';
 
-const defaultRenderLabel = (props) => <p {...props} />;
-
 const defaultTranslations = {
   'carbon.progress-step.complete': 'Complete',
   'carbon.progress-step.incomplete': 'Incomplete',
@@ -40,7 +38,6 @@ export function ProgressStep({
   secondaryLabel,
   disabled,
   onClick,
-  renderLabel: ProgressStepLabel,
   translateWithId: t,
   ...rest
 }) {
@@ -127,9 +124,7 @@ export function ProgressStep({
           prefix={prefix}
         />
         <div className={`${prefix}--progress-text`}>
-          <ProgressStepLabel className={`${prefix}--progress-label`}>
-            {label}
-          </ProgressStepLabel>
+          <p className={`${prefix}--progress-label`}>{label}</p>
           {secondaryLabel !== null && secondaryLabel !== undefined ? (
             <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
           ) : null}
@@ -157,7 +152,7 @@ ProgressStep.propTypes = {
   current: PropTypes.bool,
 
   /**
-   * Provide a description for the <ProgressStep>
+   * Provide a description for the `<ProgressStep>`
    */
   description: PropTypes.string,
 
@@ -177,7 +172,7 @@ ProgressStep.propTypes = {
   invalid: PropTypes.bool,
 
   /**
-   * Provide the label for the <ProgressStep>
+   * Provide the label for the `<ProgressStep>`
    */
   label: PropTypes.node.isRequired,
 
@@ -190,12 +185,6 @@ ProgressStep.propTypes = {
    * Provide the props that describe a progress step tooltip
    */
   overflowTooltipProps: PropTypes.object,
-
-  /*
-   * An optional parameter to allow for overflow content to be rendered in a
-   * tooltip.
-   */
-  renderLabel: PropTypes.func,
 
   /**
    * Provide an optional secondary label
@@ -215,7 +204,6 @@ ProgressStep.propTypes = {
 };
 
 ProgressStep.defaultProps = {
-  renderLabel: defaultRenderLabel,
   translateWithId,
 };
 
@@ -224,8 +212,8 @@ export class ProgressIndicator extends Component {
 
   static propTypes = {
     /**
-     * Provide <ProgressStep> components to be rendered in the
-     * <ProgressIndicator>
+     * Provide `<ProgressStep>` components to be rendered in the
+     * `<ProgressIndicator>`
      */
     children: PropTypes.node,
 

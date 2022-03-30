@@ -55,6 +55,7 @@ describe('@carbon/styles/scss/fonts', () => {
         emitted.set(fontFamily, {
           weights: new Set(),
           styles: new Set(),
+          src: new Set(),
         });
       }
 
@@ -67,6 +68,10 @@ describe('@carbon/styles/scss/fonts', () => {
 
         if (declaration.property === 'font-style') {
           entry.styles.add(declaration.value);
+        }
+
+        if (declaration.property === 'src') {
+          entry.src.add(declaration.value);
         }
       }
     }
@@ -91,6 +96,56 @@ describe('@carbon/styles/scss/fonts', () => {
     expect(emitted.get('IBM Plex Serif').styles).toEqual(
       new Set(['normal', 'italic'])
     );
+
+    expect(emitted).toMatchSnapshot();
+  });
+
+  it('should emit src from akamai cdn if $use-akamai-cdn is true', async () => {
+    const { result } = await render(`
+      @use '../../config' with (
+        $use-akamai-cdn: true,
+      );
+      @use '../' as fonts;
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+    const atRules = stylesheet.rules.filter((rule) => {
+      return rule.type === 'font-face';
+    });
+    const emitted = new Map();
+
+    for (const rule of atRules) {
+      const fontFamily = rule.declarations
+        .find((declaration) => {
+          return declaration.property === 'font-family';
+        })
+        .value.replace(/['"]/g, '');
+
+      if (!emitted.has(fontFamily)) {
+        emitted.set(fontFamily, {
+          weights: new Set(),
+          styles: new Set(),
+          src: new Set(),
+        });
+      }
+
+      const entry = emitted.get(fontFamily);
+
+      for (const declaration of rule.declarations) {
+        if (declaration.property === 'font-weight') {
+          entry.weights.add(declaration.value);
+        }
+
+        if (declaration.property === 'font-style') {
+          entry.styles.add(declaration.value);
+        }
+
+        if (declaration.property === 'src') {
+          entry.src.add(declaration.value);
+        }
+      }
+    }
+
+    expect(emitted).toMatchSnapshot();
   });
 
   it('should emit no @font-face blocks if $css--font-face is false', async () => {
