@@ -15,31 +15,36 @@ import { useId } from '../../../internal/useId';
 import { usePrefix } from '../../../internal/usePrefix';
 import deprecate from '../../../prop-types/deprecate';
 import { composeEventHandlers } from '../../../tools/events';
+import { useMergedRefs } from '../../../internal/useMergedRefs';
 
-function Search({
-  autoComplete = 'off',
-  className,
-  closeButtonLabelText = 'Clear search input',
-  defaultValue,
-  disabled,
-  id,
-  labelText,
-  light,
-  onChange = () => {},
-  onClear = () => {},
-  onKeyDown,
-  placeHolderText,
-  placeholder = '',
-  renderIcon,
-  role = 'searchbox',
-  size = 'md',
-  type = 'text',
-  value,
-  ...rest
-}) {
+const Search = React.forwardRef(function Search(
+  {
+    autoComplete = 'off',
+    className,
+    closeButtonLabelText = 'Clear search input',
+    defaultValue,
+    disabled,
+    id,
+    labelText,
+    light,
+    onChange = () => {},
+    onClear = () => {},
+    onExpand,
+    onKeyDown,
+    placeHolderText,
+    placeholder = '',
+    renderIcon,
+    role = 'searchbox',
+    size = 'md',
+    type = 'text',
+    value,
+    ...rest
+  },
+  forwardRef
+) {
   const prefix = usePrefix();
-  const input = useRef(null);
-  const magnifier = useRef(null);
+  const inputRef = useRef(null);
+  const ref = useMergedRefs([forwardRef, inputRef]);
   const inputId = useId('search-input');
   const uniqueId = id || inputId;
   const searchId = `${uniqueId}-search`;
@@ -66,7 +71,7 @@ function Search({
 
   function clearInput(event) {
     if (!value) {
-      input.current.value = '';
+      inputRef.current.value = '';
       onChange(event);
     } else {
       const clearedEvt = Object.assign({}, event.target, {
@@ -79,7 +84,7 @@ function Search({
 
     onClear();
     setHasContent(false);
-    focus(input);
+    focus(inputRef);
   }
 
   function handleChange(event) {
@@ -95,7 +100,15 @@ function Search({
 
   return (
     <div role="search" aria-labelledby={searchId} className={searchClasses}>
-      <div className={`${prefix}--search-magnifier`} ref={magnifier}>
+      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
+      <div
+        role={onExpand ? 'button' : null}
+        className={`${prefix}--search-magnifier`}
+        onClick={() => {
+          if (onExpand) {
+            onExpand();
+          }
+        }}>
         <CustomSearchIcon icon={renderIcon} />
       </div>
       <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
@@ -108,7 +121,7 @@ function Search({
         defaultValue={defaultValue}
         disabled={disabled}
         role={role}
-        ref={input}
+        ref={ref}
         id={uniqueId}
         onChange={composeEventHandlers([onChange, handleChange])}
         onKeyDown={composeEventHandlers([onKeyDown, handleKeyDown])}
@@ -126,7 +139,7 @@ function Search({
       </button>
     </div>
   );
-}
+});
 
 Search.propTypes = {
   /**
@@ -179,6 +192,11 @@ Search.propTypes = {
    * Optional callback called when the search value is cleared.
    */
   onClear: PropTypes.func,
+
+  /**
+   * Optional callback called when the magnifier icon is clicked in ExpandableSearch.
+   */
+  onExpand: PropTypes.func,
 
   /**
    * Provide a handler that is invoked on the key down event for the input
