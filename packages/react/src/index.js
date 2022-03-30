@@ -152,8 +152,6 @@ export Toolbar, {
   ToolbarDivider,
 } from './components/Toolbar';
 export ToolbarSearch from './components/ToolbarSearch';
-export TooltipDefinition from './components/TooltipDefinition';
-export TooltipIcon from './components/TooltipIcon';
 export UnorderedList from './components/UnorderedList';
 export SkeletonText from './components/SkeletonText';
 export SkeletonPlaceholder from './components/SkeletonPlaceholder';

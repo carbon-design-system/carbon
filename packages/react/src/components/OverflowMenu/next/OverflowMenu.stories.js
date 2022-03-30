@@ -6,10 +6,10 @@
  */
 
 import React from 'react';
-import OverflowMenu from '../OverflowMenu';
-import OverflowMenuItem from '../../OverflowMenuItem';
-import mdx from '../OverflowMenu.mdx';
+import { OverflowMenu } from '../OverflowMenu';
+import { default as OverflowMenuItem } from '../../OverflowMenuItem';
 import { Filter } from '@carbon/icons-react';
+import mdx from '../OverflowMenu.mdx';
 
 export default {
   title: 'Components/OverflowMenu',
@@ -34,7 +34,7 @@ export default {
 };
 
 export const Default = (args) => (
-  <OverflowMenu {...args}>
+  <OverflowMenu ariaLabel="overflow-menu" {...args}>
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
     <OverflowMenuItem itemText="Rename app" />
