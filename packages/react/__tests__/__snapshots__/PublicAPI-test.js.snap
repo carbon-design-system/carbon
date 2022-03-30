@@ -858,6 +858,29 @@ Map {
       },
     },
   },
+  "ColumnHang" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "ComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
@@ -3227,6 +3250,38 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "FlexGrid" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "condensed": Object {
+        "type": "bool",
+      },
+      "fullWidth": Object {
+        "type": "bool",
+      },
+      "narrow": Object {
+        "type": "bool",
+      },
+    },
   },
   "FluidForm" => Object {
     "propTypes": Object {
@@ -8083,29 +8138,6 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
-  "unstable_ColumnHang" => Object {
-    "propTypes": Object {
-      "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {
@@ -8118,38 +8150,6 @@ Map {
           },
         ],
         "type": "objectOf",
-      },
-    },
-  },
-  "unstable_FlexGrid" => Object {
-    "propTypes": Object {
-      "as": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "elementType",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "condensed": Object {
-        "type": "bool",
-      },
-      "fullWidth": Object {
-        "type": "bool",
-      },
-      "narrow": Object {
-        "type": "bool",
       },
     },
   },

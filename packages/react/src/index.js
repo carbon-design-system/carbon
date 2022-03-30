@@ -67,13 +67,7 @@ export FluidForm from './components/FluidForm';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
-export {
-  Grid,
-  Row,
-  Column,
-  ColumnHang as unstable_ColumnHang,
-  FlexGrid as unstable_FlexGrid,
-} from './components/Grid';
+export { Grid, Row, Column, ColumnHang, FlexGrid } from './components/Grid';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
 export ListItem from './components/ListItem';
