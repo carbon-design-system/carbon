@@ -15,7 +15,7 @@
 /// @type List
 /// @access public
 /// @group @carbon/grid
-$carbon--aspect-ratios: (
+$aspect-ratios: (
   (16, 9),
   (9, 16),
   (2, 1),
@@ -39,7 +39,7 @@ $carbon--aspect-ratios: (
 /// @param {Number} $height height from an aspect ratio
 /// @access private
 /// @group @carbon/grid
-@mixin aspect-ratio($aspect-ratios: $carbon--aspect-ratios) {
+@mixin aspect-ratio($aspect-ratios: $aspect-ratios) {
   .#{$prefix}--aspect-ratio {
     position: relative;
   }

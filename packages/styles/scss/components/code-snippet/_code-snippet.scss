@@ -67,7 +67,7 @@ $copy-btn-feedback: $background-inverse !default;
     position: relative;
     display: inline;
     padding: 0;
-    border: 2px solid transparent;
+    border: 1px solid transparent;
     background-color: $layer;
     border-radius: 4px;
     color: $text-primary;
@@ -82,7 +82,7 @@ $copy-btn-feedback: $background-inverse !default;
     }
 
     &:focus {
-      border: 2px solid $focus;
+      border: 1px solid $focus;
       outline: none;
     }
 
@@ -90,6 +90,8 @@ $copy-btn-feedback: $background-inverse !default;
       @include tooltip--caret;
 
       display: none;
+
+      border: none;
     }
 
     .#{$prefix}--copy-btn__feedback {
@@ -101,8 +103,6 @@ $copy-btn-feedback: $background-inverse !default;
       margin: auto;
       clip: auto;
     }
-
-    @include tooltip--placement('icon', 'bottom', 'center');
   }
 
   .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating::before,
@@ -257,12 +257,9 @@ $copy-btn-feedback: $background-inverse !default;
     transition: all $duration-fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--snippet-button {
+  .#{$prefix}--copy-btn {
     @include reset;
 
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
     overflow: visible;
     width: $spacing-08;
@@ -282,48 +279,44 @@ $copy-btn-feedback: $background-inverse !default;
     }
   }
 
-  .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
-    top: $spacing-03;
-    right: $spacing-03;
-    width: $spacing-07;
-    height: $spacing-07;
-  }
-
-  .#{$prefix}--snippet-button:hover {
-    background: $layer-hover;
-  }
-
-  .#{$prefix}--snippet-button:active {
-    background-color: $copy-active;
-  }
-
-  .#{$prefix}--btn--copy__feedback {
-    @include type-style('body-compact-01');
-    @include font-family('sans');
-
-    z-index: z('overlay');
-    top: 0.75rem;
-    right: 1.25rem;
-    left: inherit;
-    font-weight: 400;
-  }
-
-  .#{$prefix}--btn--copy__feedback::before,
-  .#{$prefix}--btn--copy__feedback::after {
-    background: $copy-btn-feedback;
-  }
-
-  .#{$prefix}--btn--copy__feedback::after {
-    border: none;
-  }
-
   // TODO: remove copy button styles above
-  .#{$prefix}--snippet .#{$prefix}--copy-btn {
+  .#{$prefix}--snippet .#{$prefix}--popover-container {
     @include font-family('sans');
 
     position: absolute;
     top: 0;
     right: 0;
+  }
+
+  // Overrides for codesnippet copy btn
+  // TLDR: Copy/CopyButton now uses IconButton, which uses Carbon buttons under the hood
+  // v10 opy just used native html button so it didn't have extra carbon styles that needed overriding
+  .#{$prefix}--snippet--inline.#{$prefix}--btn--md.#{$prefix}--btn--icon-only {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--btn--md {
+    min-height: 1.25rem;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--btn--primary:hover {
+    color: $text-primary;
+  }
+
+  // override multi copy btn styles
+  .#{$prefix}--snippet.#{$prefix}--snippet--multi
+    .#{$prefix}--popover-container {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn.#{$prefix}--btn--md {
+    z-index: 10;
+    width: $spacing-07;
+    height: $spacing-07;
+    min-height: $spacing-07;
+    padding: 0;
   }
 
   // Show more / less button
@@ -433,14 +426,6 @@ $copy-btn-feedback: $background-inverse !default;
     &::after {
       top: rem(-4px);
     }
-  }
-
-  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
-    z-index: 10;
-    top: $spacing-03;
-    right: $spacing-03;
-    width: $spacing-07;
-    height: $spacing-07;
   }
 
   .#{$prefix}--snippet--multi

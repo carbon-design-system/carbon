@@ -32,7 +32,6 @@
     "clean": "rimraf scss/_inlined scss/vendor"
   },
   "dependencies": {
-    "@carbon/import-once": "^10.7.0",
     "@carbon/layout": "^10.37.0"
   },
   "devDependencies": {
