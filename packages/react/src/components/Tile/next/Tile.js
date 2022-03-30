@@ -61,8 +61,6 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     children,
     className,
     clicked = false,
-    handleClick,
-    handleKeyDown,
     href,
     light = false,
     onClick = () => {},
@@ -84,16 +82,10 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
 
   const [isSelected, setIsSelected] = useState(clicked);
 
-  // TODO: replace with onClick when handleClick prop is deprecated
-  const clickHandler = handleClick || onClick;
-
-  // TODO: replace with onClick when handleClick prop is deprecated
-  const keyDownHandler = handleKeyDown || onKeyDown;
-
   function handleOnClick(evt) {
     evt.persist();
     setIsSelected(!isSelected);
-    clickHandler(evt);
+    onClick(evt);
   }
 
   function handleOnKeyDown(evt) {
@@ -101,19 +93,19 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     if (matches(evt, [keys.Enter, keys.Space])) {
       evt.preventDefault();
       setIsSelected(!isSelected);
-      keyDownHandler(evt);
+      onKeyDown(evt);
     }
-    keyDownHandler(evt);
+    onKeyDown(evt);
   }
 
   return (
     <Link
       className={classes}
       href={href}
+      {...rest}
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      ref={ref}
-      {...rest}>
+      ref={ref}>
       {children}
     </Link>
   );
@@ -135,22 +127,6 @@ ClickableTile.propTypes = {
    * Boolean for whether a tile has been clicked.
    */
   clicked: PropTypes.bool,
-
-  /**
-   * Deprecated in v11. Use 'onClick' instead.
-   */
-  handleClick: deprecate(
-    PropTypes.func,
-    'The handleClick prop for ClickableTile has been deprecated in favor of onClick. It will be removed in the next major release.'
-  ),
-
-  /**
-   * Specify the function to run when the ClickableTile is interacted with via a keyboard
-   */
-  handleKeyDown: deprecate(
-    PropTypes.func,
-    'The handleKeyDown prop for ClickableTile has been deprecated in favor of onKeyDown. It will be removed in the next major release.'
-  ),
 
   /**
    * The href for the link.

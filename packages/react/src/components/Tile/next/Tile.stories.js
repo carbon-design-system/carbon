@@ -77,7 +77,11 @@ export const DefaultWithLayer = () => {
 };
 
 export const Clickable = () => {
-  return <ClickableTile>Clickable Tile</ClickableTile>;
+  return (
+    <ClickableTile href="https://www.carbondesignsystem.com/">
+      Clickable Tile
+    </ClickableTile>
+  );
 };
 
 export const ClickableWithLayer = () => {
