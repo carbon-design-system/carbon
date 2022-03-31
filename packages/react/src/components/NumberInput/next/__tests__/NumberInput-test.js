@@ -111,11 +111,6 @@ describe('NumberInput', () => {
         expect(invalidText.text()).toEqual('invalid text');
       });
 
-      it('should specify light number input as expected', () => {
-        wrapper.setProps({ light: true });
-        expect(wrapper.find(NumberInput).props().light).toEqual(true);
-      });
-
       it('should hide label as expected', () => {
         expect(numberInput.prop('min')).toEqual(0);
         wrapper.setProps({ hideLabel: true });
