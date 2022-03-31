@@ -10,6 +10,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
+import ListBoxField from './ListBoxField';
+import ListBoxMenu from './ListBoxMenu';
+import ListBoxMenuIcon from './ListBoxMenuIcon';
+import ListBoxMenuItem from './ListBoxMenuItem';
+import ListBoxSelection from './ListBoxSelection';
 
 const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
@@ -142,5 +147,11 @@ ListBox.defaultProps = {
   disabled: false,
   type: 'default',
 };
+
+ListBox.Field = ListBoxField;
+ListBox.Menu = ListBoxMenu;
+ListBox.MenuIcon = ListBoxMenuIcon;
+ListBox.MenuItem = ListBoxMenuItem;
+ListBox.Selection = ListBoxSelection;
 
 export default ListBox;
