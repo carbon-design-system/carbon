@@ -384,12 +384,10 @@ export default class DataTable extends React.Component {
 
   getToolbarProps = (props = {}) => {
     const { size } = this.props;
-    // Remove compact, short in V11
-    let isSmall =
-      size === 'compact' || size === 'short' || size === 'xs' || size === 'sm';
+    let isSmall = size === 'xs' || size === 'sm';
     return {
       ...props,
-      size: isSmall ? 'small' : 'normal',
+      size: isSmall ? 'sm' : undefined,
     };
   };
 
