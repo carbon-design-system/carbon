@@ -82,6 +82,10 @@
     transition: border-color $duration--fast-02 motion(exit, productive),
       outline $duration--fast-02 motion(exit, productive);
 
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
     &::before {
       position: relative;
       display: inline-block;
@@ -93,6 +97,10 @@
       transform: scale(0);
       transition: background-color $duration--fast-02 motion(exit, productive),
         transform $duration--moderate-01 motion(exit, productive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
       @media screen and (-ms-high-contrast: active) {
@@ -147,7 +155,7 @@
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
     outline: 2px solid $focus;
-    outline-offset: 1.5px;
+    outline-offset: 1px;
     transition: outline motion(entrance, productive);
   }
 
@@ -205,6 +213,10 @@
   .#{$prefix}--radio-button-wrapper:hover .#{$prefix}--radio-button__label {
     color: $text-02;
     transition: color $duration--fast-02 motion(entrance, productive);
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
   }
 
   .#{$prefix}--radio-button-wrapper:hover .#{$prefix}--radio-button__appearance,
@@ -221,7 +233,17 @@
       transition: background-color $duration--fast-02
           motion(entrance, productive),
         transform $duration--moderate-01 motion(entrance, productive);
+
+      @media (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
+  }
+
+  .#{$prefix}--radio-button-wrapper:hover
+    .#{$prefix}--radio-button:disabled
+    + .#{$prefix}--radio-button__label {
+    color: $disabled;
   }
 
   // Active states
