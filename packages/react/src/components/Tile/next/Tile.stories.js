@@ -18,7 +18,7 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from '../';
-import TileGroup from '../../TileGroup';
+import TileGroup from '../../TileGroup/TileGroup';
 import { Layer } from '../../Layer';
 import './tile-story.scss';
 

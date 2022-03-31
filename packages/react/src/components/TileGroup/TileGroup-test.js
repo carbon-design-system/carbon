@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import TileGroup from '../TileGroup';
+import TileGroup from './TileGroup';
 import RadioTile from '../RadioTile';
 
 describe('TileGroup', () => {
