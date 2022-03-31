@@ -56,10 +56,9 @@ const Button = React.forwardRef(function Button(
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive,
-    [`${prefix}--btn--md`]:
-      (size === 'field' && !isExpressive) || (size === 'md' && !isExpressive),
-    [`${prefix}--btn--lg`]: size === 'xl',
-    [`${prefix}--btn--xl`]: size === '2xl',
+    [`${prefix}--btn--md`]: size === 'md' && !isExpressive,
+    [`${prefix}--btn--xl`]: size === 'xl',
+    [`${prefix}--btn--2xl`]: size === '2xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,

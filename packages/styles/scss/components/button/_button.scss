@@ -308,15 +308,13 @@
     padding: $button-padding-sm;
   }
 
-  // V11: change xl to 2xl
-  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+  .#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(80px);
   }
 
-  // V11: change lg to xl
-  .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(64px);
