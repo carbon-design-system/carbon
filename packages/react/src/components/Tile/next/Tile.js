@@ -64,7 +64,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     handleClick,
     handleKeyDown,
     href,
-    light = false,
+    light,
     onClick = () => {},
     onKeyDown = () => {},
     ...rest
@@ -188,7 +188,7 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
     className,
     disabled,
     id,
-    light = false,
+    light,
     name,
     onClick = () => {},
     onChange = () => {},

@@ -252,7 +252,6 @@ Select.defaultProps = {
   invalid: false,
   invalidText: '',
   helperText: '',
-  light: false,
 };
 
 export default Select;

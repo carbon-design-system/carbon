@@ -165,7 +165,6 @@ export default class Slider extends PureComponent {
     ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
       ? undefined
       : 'Slider number input',
-    light: false,
   };
 
   static contextType = FeatureFlagContext;

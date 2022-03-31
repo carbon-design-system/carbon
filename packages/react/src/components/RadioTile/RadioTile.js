@@ -146,7 +146,6 @@ RadioTile.propTypes = {
 RadioTile.defaultProps = {
   onChange: () => {},
   tabIndex: 0,
-  light: false,
 };
 
 export default RadioTile;

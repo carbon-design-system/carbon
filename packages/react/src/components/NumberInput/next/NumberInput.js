@@ -40,7 +40,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     label,
     invalid = false,
     invalidText = enabled ? undefined : 'Provide invalidText',
-    light = false,
+    light,
     max,
     min,
     onChange,
