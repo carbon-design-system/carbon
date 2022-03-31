@@ -16,7 +16,6 @@ import {
 import { action } from '@storybook/addon-actions';
 import { withKnobs, select, boolean, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
-import mdx from './TooltipIcon.mdx';
 
 const directions = {
   'Top (top)': 'top',
@@ -62,11 +61,6 @@ export default {
   title: 'Components/TooltipIcon',
   component: TooltipIcon,
   decorators: [withKnobs],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
 export const Default = () => (
