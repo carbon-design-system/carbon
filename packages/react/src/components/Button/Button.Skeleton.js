@@ -8,7 +8,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
 
@@ -19,7 +18,6 @@ const ButtonSkeleton = ({
   size = FeatureFlags.enabled('enable-v11-release') ? 'lg' : 'default',
   ...rest
 }) => {
-  const enabled = useFeatureFlag('enable-v11-release');
   const prefix = usePrefix();
 
   const buttonClasses = cx(className, {
@@ -27,10 +25,8 @@ const ButtonSkeleton = ({
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: small || size === 'sm',
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
-    // V11: change lg to xl
-    [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
-    // V11: change xl to 2xl
-    [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
+    [`${prefix}--btn--xl`]: size === 'xl',
+    [`${prefix}--btn--2xl`]: size === '2xl',
   });
 
   const commonProps = {

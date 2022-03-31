@@ -362,16 +362,16 @@ describe('ButtonSkeleton', () => {
       expect(wrapperMd.hasClass(`${prefix}--btn--md`)).toEqual(true);
     });
 
-    const wrapperLg = shallow(<ButtonSkeleton size="lg" />);
+    const wrapperLg = shallow(<ButtonSkeleton size="xl" />);
 
     it('renders the large size', () => {
-      expect(wrapperLg.hasClass(`${prefix}--btn--lg`)).toEqual(true);
+      expect(wrapperLg.hasClass(`${prefix}--btn--xl`)).toEqual(true);
     });
 
-    const wrapperXl = shallow(<ButtonSkeleton size="xl" />);
+    const wrapperXl = shallow(<ButtonSkeleton size="2xl" />);
 
     it('renders the extra-large size', () => {
-      expect(wrapperXl.hasClass(`${prefix}--btn--xl`)).toEqual(true);
+      expect(wrapperXl.hasClass(`${prefix}--btn--2xl`)).toEqual(true);
     });
   });
 

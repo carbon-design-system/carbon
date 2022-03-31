@@ -2040,9 +2040,6 @@ Map {
         "isRequired": true,
         "type": "arrayOf",
       },
-      "shouldShowBorder": Object {
-        "type": "bool",
-      },
       "size": Object {
         "args": Array [
           Array [
