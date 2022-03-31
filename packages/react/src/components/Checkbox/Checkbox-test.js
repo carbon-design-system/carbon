@@ -103,9 +103,11 @@ describe('Checkbox', () => {
 
       const call = onChange.mock.calls[0];
 
-      expect(call[0]).toEqual(true);
-      expect(call[1]).toEqual(id);
-      expect(call[2].target).toBe(inputElement);
+      expect(call[0].target).toBe(inputElement);
+      expect(call[1]).toEqual({
+        id,
+        checked: true,
+      });
     });
   });
 });
