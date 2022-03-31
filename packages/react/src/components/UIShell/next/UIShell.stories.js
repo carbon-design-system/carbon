@@ -33,7 +33,13 @@ import {
   SwitcherDivider,
 } from '../';
 import { Modal, Button } from 'carbon-components-react';
-import { Search, Notification, AppSwitcher, Fade } from '@carbon/icons-react';
+import {
+  Search,
+  Notification,
+  Fade,
+  Switcher as SwitcherIcon,
+} from '@carbon/icons-react';
+import mdx from './UIShell.mdx';
 
 /* eslint-disable react/prop-types */
 const StoryContent = ({ useResponsiveOffset = true }) => {
@@ -148,6 +154,11 @@ export default {
     SwitcherItem,
     SwitcherDivider,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const HeaderBase = () => (
@@ -225,7 +236,7 @@ export const HeaderBaseWActions = () => (
         aria-label="App Switcher"
         onClick={action('app-switcher click')}
         tooltipAlignment="end">
-        <AppSwitcher size={20} />
+        <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
   </Header>
@@ -255,7 +266,7 @@ export const HeaderBaseWSkipToContent = () => (
           aria-label="App Switcher"
           onClick={action('app-switcher click')}
           tooltipAlignment="end">
-          <AppSwitcher size={20} />
+          <SwitcherIcon size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
     </Header>
@@ -303,7 +314,7 @@ export const HeaderBaseWNavigationAndActions = () => (
             aria-label="App Switcher"
             onClick={action('app-switcher click')}
             tooltipAlignment="end">
-            <AppSwitcher size={20} />
+            <SwitcherIcon size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         <SideNav
@@ -370,7 +381,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
               aria-label="App Switcher"
               onClick={action('app-switcher click')}
               tooltipAlignment="end">
-              <AppSwitcher size={20} />
+              <SwitcherIcon size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
           <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
@@ -539,7 +550,7 @@ export const HeaderBaseWActionsAndRightPanel = () => (
         aria-label="App Switcher"
         onClick={action('app-switcher click')}
         tooltipAlignment="end">
-        <AppSwitcher size={20} />
+        <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
     <HeaderPanel aria-label="Header Panel" expanded />
@@ -568,7 +579,7 @@ export const HeaderBaseWActionsAndSwitcher = () => (
         isActive
         onClick={action('app-switcher click')}
         tooltipAlignment="end">
-        <AppSwitcher size={20} />
+        <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
     <HeaderPanel aria-label="Header Panel" expanded>
@@ -873,7 +884,7 @@ export const SideNavRailWHeader = () => (
               aria-label="App Switcher"
               onClick={action('app-switcher click')}
               tooltipAlignment="end">
-              <AppSwitcher size={20} />
+              <SwitcherIcon size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
           <SideNav
@@ -886,9 +897,7 @@ export const SideNavRailWHeader = () => (
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
-                <SideNavMenuItem
-                  aria-current="page"
-                  href="https://www.carbondesignsystem.com/">
+                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -912,9 +921,7 @@ export const SideNavRailWHeader = () => (
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
-                <SideNavMenuItem
-                  aria-current="page"
-                  href="https://www.carbondesignsystem.com/">
+                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
