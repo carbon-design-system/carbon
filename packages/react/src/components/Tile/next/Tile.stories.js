@@ -77,17 +77,27 @@ export const DefaultWithLayer = () => {
 };
 
 export const Clickable = () => {
-  return <ClickableTile>Clickable Tile</ClickableTile>;
+  return (
+    <ClickableTile href="https://www.carbondesignsystem.com/">
+      Clickable Tile
+    </ClickableTile>
+  );
 };
 
 export const ClickableWithLayer = () => {
   return (
     <>
-      <ClickableTile>First layer</ClickableTile>
+      <ClickableTile href="https://www.carbondesignsystem.com/">
+        First layer
+      </ClickableTile>
       <Layer>
-        <ClickableTile>Second layer</ClickableTile>
+        <ClickableTile href="https://www.carbondesignsystem.com/">
+          Second layer
+        </ClickableTile>
         <Layer>
-          <ClickableTile>Third layer</ClickableTile>
+          <ClickableTile href="https://www.carbondesignsystem.com/">
+            Third layer
+          </ClickableTile>
         </Layer>
       </Layer>
     </>
