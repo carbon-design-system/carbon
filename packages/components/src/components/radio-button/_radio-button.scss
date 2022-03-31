@@ -146,6 +146,7 @@
 
     &::before {
       background-color: $disabled;
+      transform: scale(0);
     }
   }
 
