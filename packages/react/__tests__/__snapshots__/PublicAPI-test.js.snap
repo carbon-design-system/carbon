@@ -417,8 +417,6 @@ Map {
       "clicked": Object {
         "type": "bool",
       },
-      "handleClick": [Function],
-      "handleKeyDown": [Function],
       "href": Object {
         "type": "string",
       },
