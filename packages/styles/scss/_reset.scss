@@ -6,7 +6,7 @@
 //
 
 @use 'config';
-@use 'type/reset' as type;
+@use 'type' as type;
 
 @mixin reset {
   /// http://meyerweb.com/eric/tools/css/reset/
@@ -169,4 +169,8 @@
 
 @if config.$css--reset == true {
   @include reset;
+}
+
+@if config.$css--default-type == true {
+  @include type.default-type();
 }
