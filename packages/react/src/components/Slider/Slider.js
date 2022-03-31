@@ -91,7 +91,11 @@ export default class Slider extends PureComponent {
     /**
      * `true` to use the light version.
      */
-    light: PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop for `Slider` is no longer needed and has ' +
+        'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+    ),
 
     /**
      * The maximum value.
@@ -140,15 +144,6 @@ export default class Slider extends PureComponent {
 
     /**
      * A value determining how much the value should increase/decrease by Shift+arrow keys,
-     * which will be `(max - min) / stepMuliplier`.
-     */
-    stepMuliplier: deprecate(
-      PropTypes.number,
-      ' The `stepMuliplier` prop has been deprecated in favor of `stepMultiplier`. It will be removed in the next major release.'
-    ),
-
-    /**
-     * A value determining how much the value should increase/decrease by Shift+arrow keys,
      * which will be `(max - min) / stepMultiplier`.
      */
     stepMultiplier: PropTypes.number,
@@ -170,7 +165,6 @@ export default class Slider extends PureComponent {
     ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
       ? undefined
       : 'Slider number input',
-    light: false,
   };
 
   static contextType = FeatureFlagContext;
@@ -369,8 +363,7 @@ export default class Slider extends PureComponent {
 
     // If shift was held, account for the stepMultiplier
     if (evt.shiftKey) {
-      const stepMultiplier =
-        this.props.stepMultiplier || this.props.stepMuliplier;
+      const stepMultiplier = this.props.stepMultiplier;
       delta *= stepMultiplier;
     }
 
@@ -540,7 +533,6 @@ export default class Slider extends PureComponent {
       formatLabel = defaultFormatLabel,
       labelText,
       step,
-      stepMuliplier, // eslint-disable-line no-unused-vars
       stepMultiplier, // eslint-disable-line no-unused-vars
       inputType,
       required,

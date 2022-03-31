@@ -2654,9 +2654,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -2669,7 +2667,6 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
-      "placeHolderText": [Function],
       "placeholder": Object {
         "type": "string",
       },
@@ -4781,7 +4778,6 @@ Map {
       "onMouseUp": Object {
         "type": "func",
       },
-      "primaryFocus": [Function],
       "requireTitle": Object {
         "type": "bool",
       },
@@ -5354,7 +5350,6 @@ Map {
   },
   "RadioTile" => Object {
     "defaultProps": Object {
-      "light": false,
       "onChange": [Function],
       "tabIndex": 0,
     },
@@ -5374,13 +5369,10 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "iconDescription": [Function],
       "id": Object {
         "type": "string",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "name": Object {
         "type": "string",
       },
@@ -5470,9 +5462,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -5485,7 +5475,6 @@ Map {
       "onKeyDown": Object {
         "type": "func",
       },
-      "placeHolderText": [Function],
       "placeholder": Object {
         "type": "string",
       },
@@ -5617,7 +5606,6 @@ Map {
       "invalid": false,
       "invalidText": "",
       "labelText": "Select",
-      "light": false,
     },
     "propTypes": Object {
       "children": Object {
@@ -5638,7 +5626,6 @@ Map {
       "hideLabel": Object {
         "type": "bool",
       },
-      "iconDescription": [Function],
       "id": Object {
         "isRequired": true,
         "type": "string",
@@ -5655,9 +5642,7 @@ Map {
       "labelText": Object {
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "noLabel": Object {
         "type": "bool",
       },
@@ -5753,9 +5738,6 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "handleClick": [Function],
-      "handleKeyDown": [Function],
-      "iconDescription": [Function],
       "id": Object {
         "type": "string",
       },
@@ -7789,7 +7771,6 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
-      "iconDescription": [Function],
       "id": Object {
         "isRequired": true,
         "type": "string",
