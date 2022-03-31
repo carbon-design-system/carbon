@@ -49,12 +49,6 @@ describe('Select', () => {
       it('applies extra classes specified via className', () => {
         expect(selectContainer.hasClass('extra-class')).toEqual(true);
       });
-
-      it('should specify light select as expected', () => {
-        expect(selectWrapper().props().light).toEqual(false);
-        wrapper.setProps({ light: true });
-        expect(selectWrapper().props().light).toEqual(true);
-      });
     });
 
     describe('select', () => {

@@ -5386,7 +5386,6 @@ Map {
   },
   "RadioTile" => Object {
     "defaultProps": Object {
-      "light": false,
       "onChange": [Function],
       "tabIndex": 0,
     },
@@ -5643,7 +5642,6 @@ Map {
       "invalid": false,
       "invalidText": "",
       "labelText": "Select",
-      "light": false,
     },
     "propTypes": Object {
       "children": Object {
