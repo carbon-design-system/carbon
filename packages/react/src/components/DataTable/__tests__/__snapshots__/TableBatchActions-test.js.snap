@@ -42,7 +42,7 @@ exports[`DataTable.TableBatchActions should render 1`] = `
           <button
             aria-describedby={null}
             aria-pressed={null}
-            className="cds--batch-summary__cancel cds--btn cds--btn--lg cds--btn--primary"
+            className="cds--batch-summary__cancel cds--btn cds--btn--primary"
             disabled={false}
             onClick={[MockFunction]}
             tabIndex={-1}
@@ -99,7 +99,7 @@ exports[`DataTable.TableBatchActions should render 2`] = `
           <button
             aria-describedby={null}
             aria-pressed={null}
-            className="cds--batch-summary__cancel cds--btn cds--btn--lg cds--btn--primary"
+            className="cds--batch-summary__cancel cds--btn cds--btn--primary"
             disabled={false}
             onClick={[MockFunction]}
             tabIndex={0}

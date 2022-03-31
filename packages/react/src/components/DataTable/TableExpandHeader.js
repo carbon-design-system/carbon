@@ -88,10 +88,7 @@ TableExpandHeader.propTypes = {
    * Specify whether this row is expanded or not. This helps coordinate data
    * attributes so that `TableExpandRow` and `TableExpandedRow` work together
    */
-  isExpanded: PropTypes.oneOfType([
-    requiredIfGivenPropIsTruthy('enableExpando', PropTypes.bool),
-    requiredIfGivenPropIsTruthy('enableToggle', PropTypes.bool),
-  ]),
+  isExpanded: requiredIfGivenPropIsTruthy('enableToggle', PropTypes.bool),
 
   /**
    * Hook for when a listener initiates a request to expand the given row

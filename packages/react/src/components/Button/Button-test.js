@@ -211,15 +211,12 @@ describe('Ghost Button', () => {
   });
 });
 
-// V11: update this to `Extra Large Button`
-describe('Large Button', () => {
+describe('Extra Large Button', () => {
   describe('Renders as expected', () => {
-    // V11: update this size to `xl`
-    const wrapper = shallow(<Button size="lg" className="extra-class" />);
+    const wrapper = shallow(<Button size="xl" className="extra-class" />);
 
     it('has the expected classes', () => {
-      // V11: update this to `xl`
-      expect(wrapper.hasClass(`${prefix}--btn--lg`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--xl`)).toEqual(true);
     });
 
     it('should add extra classes that are passed via className', () => {
@@ -228,15 +225,12 @@ describe('Large Button', () => {
   });
 });
 
-// V11: update this to `Extra Extra Large Button`
-describe('Extra Large Button', () => {
+describe('Extra Extra Large Button', () => {
   describe('Renders as expected', () => {
-    // V11: update this size to `2xl`
-    const wrapper = shallow(<Button size="xl" className="extra-class" />);
+    const wrapper = shallow(<Button size="2xl" className="extra-class" />);
 
     it('has the expected classes', () => {
-      // V11: update to 2xl
-      expect(wrapper.hasClass(`${prefix}--btn--xl`)).toEqual(true);
+      expect(wrapper.hasClass(`${prefix}--btn--2xl`)).toEqual(true);
     });
 
     it('should add extra classes that are passed via className', () => {
@@ -247,7 +241,7 @@ describe('Extra Large Button', () => {
 
 describe('Small Button', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(<Button size="small" className="extra-class" />);
+    const wrapper = shallow(<Button size="sm" className="extra-class" />);
 
     it('has the expected classes for small', () => {
       expect(wrapper.hasClass(`${prefix}--btn--sm`)).toEqual(true);
@@ -368,16 +362,16 @@ describe('ButtonSkeleton', () => {
       expect(wrapperMd.hasClass(`${prefix}--btn--md`)).toEqual(true);
     });
 
-    const wrapperLg = shallow(<ButtonSkeleton size="lg" />);
+    const wrapperLg = shallow(<ButtonSkeleton size="xl" />);
 
     it('renders the large size', () => {
-      expect(wrapperLg.hasClass(`${prefix}--btn--lg`)).toEqual(true);
+      expect(wrapperLg.hasClass(`${prefix}--btn--xl`)).toEqual(true);
     });
 
-    const wrapperXl = shallow(<ButtonSkeleton size="xl" />);
+    const wrapperXl = shallow(<ButtonSkeleton size="2xl" />);
 
     it('renders the extra-large size', () => {
-      expect(wrapperXl.hasClass(`${prefix}--btn--xl`)).toEqual(true);
+      expect(wrapperXl.hasClass(`${prefix}--btn--2xl`)).toEqual(true);
     });
   });
 

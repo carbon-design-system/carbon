@@ -5,11 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
 import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import deprecate from '../../prop-types/deprecate.js';
 import { usePrefix } from '../../internal/usePrefix';
 
 export const Table = ({
@@ -19,7 +17,6 @@ export const Table = ({
   size,
   isSortable,
   useStaticWidth,
-  shouldShowBorder,
   stickyHeader,
   overflowMenuOnHover,
   ...other
@@ -30,7 +27,6 @@ export const Table = ({
     [`${prefix}--data-table--sort`]: isSortable,
     [`${prefix}--data-table--zebra`]: useZebraStyles,
     [`${prefix}--data-table--static`]: useStaticWidth,
-    [`${prefix}--data-table--no-border`]: !shouldShowBorder,
     [`${prefix}--data-table--sticky-header`]: stickyHeader,
     [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
@@ -69,31 +65,9 @@ Table.propTypes = {
   overflowMenuOnHover: PropTypes.bool,
 
   /**
-   * `false` If true, will remove the table border
-   */
-  shouldShowBorder: deprecate(
-    PropTypes.bool,
-    'The `shouldShowBorder` prop has been deprecated and can be safely removed.' +
-      'This prop will be removed in the next major release of ' +
-      '`carbon-components-react`'
-  ),
-
-  /**
    *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
-    : PropTypes.oneOf([
-        'compact',
-        'short',
-        'normal',
-        'tall',
-        'xs',
-        'sm',
-        'md',
-        'lg',
-        'xl',
-      ]),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
    * `false` If true, will keep the header sticky (only data rows will scroll)

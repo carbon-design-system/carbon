@@ -9,8 +9,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
-import { useFeatureFlag } from '../FeatureFlags';
-import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 const Checkbox = React.forwardRef(function Checkbox(
@@ -21,18 +19,14 @@ const Checkbox = React.forwardRef(function Checkbox(
     onChange,
     indeterminate,
     hideLabel,
-    wrapperClassName,
     title = '',
     ...other
   },
   ref
 ) {
-  const enabled = useFeatureFlag('enable-v11-release');
   const prefix = usePrefix();
 
-  const labelClasses = classNames(`${prefix}--checkbox-label`, [
-    enabled ? null : className,
-  ]);
+  const labelClasses = classNames(`${prefix}--checkbox-label`, [className]);
   const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
     [`${prefix}--visually-hidden`]: hideLabel,
   });
@@ -40,7 +34,7 @@ const Checkbox = React.forwardRef(function Checkbox(
   const wrapperClasses = classNames(
     `${prefix}--form-item`,
     `${prefix}--checkbox-wrapper`,
-    [enabled ? className : wrapperClassName]
+    [className]
   );
 
   return (
@@ -49,11 +43,7 @@ const Checkbox = React.forwardRef(function Checkbox(
         {...other}
         type="checkbox"
         onChange={(evt) => {
-          if (enabled) {
-            onChange(evt, { checked: evt.target.checked, id });
-          } else {
-            onChange(evt.target.checked, id, evt);
-          }
+          onChange(evt, { checked: evt.target.checked, id });
         }}
         className={`${prefix}--checkbox`}
         id={id}
@@ -127,14 +117,6 @@ Checkbox.propTypes = {
    * Specify a title for the <label> node for the Checkbox
    */
   title: PropTypes.string,
-
-  /**
-   * The CSS class name to be placed on the wrapping element
-   */
-  wrapperClassName: deprecate(
-    PropTypes.string,
-    `\nThe prop \`wrapperClassName\` for Checkbox will be deprecated in V11 in favor of \`className\`. \`className\` will then be placed on the outer wrapper.`
-  ),
 };
 
 Checkbox.defaultProps = {

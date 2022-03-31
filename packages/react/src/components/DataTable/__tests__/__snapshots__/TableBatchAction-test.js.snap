@@ -30,7 +30,7 @@ exports[`DataTable.TableBatchAction should render 1`] = `
     <button
       aria-describedby={null}
       aria-pressed={null}
-      className="custom-class cds--btn cds--btn--lg cds--btn--primary"
+      className="custom-class cds--btn cds--btn--primary"
       disabled={false}
       tabIndex={0}
       type="button"

@@ -116,17 +116,6 @@ AccordionItem.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * The description of the expand icon.
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop has been deprecated as it is no longer ' +
-      'required. Feel free to remove this prop from <AccordionItem>. This ' +
-      'prop will be removed in the next major release of ' +
-      '`carbon-components-react`'
-  ),
-
-  /**
    * The handler of the massaged `click` event.
    */
   onClick: PropTypes.func,

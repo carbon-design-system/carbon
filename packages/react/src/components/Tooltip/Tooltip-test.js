@@ -254,7 +254,7 @@ describe('Tooltip', () => {
             </p>
             <div className="bx--tooltip__footer">
               <Link href="#">Learn more</Link>
-              <Button size="small" onClick={() => setTipOpen(false)}>
+              <Button size="sm" onClick={() => setTipOpen(false)}>
                 Create
               </Button>
             </div>

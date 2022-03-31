@@ -127,7 +127,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--no-border"
+            className="cds--data-table"
           >
             <TableHead>
               <thead>
@@ -478,7 +478,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--no-border"
+            className="cds--data-table"
           >
             <TableHead>
               <thead>
@@ -949,7 +949,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--no-border"
+            className="cds--data-table"
           >
             <TableHead>
               <thead>
@@ -1349,7 +1349,7 @@ exports[`DataTable selection should render 1`] = `
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--no-border"
+            className="cds--data-table"
           >
             <TableHead>
               <thead>
@@ -1888,7 +1888,7 @@ exports[`DataTable should render 1`] = `
                 <Button
                   kind="primary"
                   onClick={[MockFunction]}
-                  size="small"
+                  size="sm"
                 >
                   Add new
                 </Button>
@@ -2066,7 +2066,7 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--lg cds--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
                         tabIndex={0}
@@ -2145,7 +2145,7 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--lg cds--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
                         tabIndex={0}
@@ -2224,7 +2224,7 @@ exports[`DataTable should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--lg cds--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
                         tabIndex={0}
@@ -2282,7 +2282,7 @@ exports[`DataTable should render 1`] = `
                     <button
                       aria-describedby={null}
                       aria-pressed={null}
-                      className="cds--batch-summary__cancel cds--btn cds--btn--lg cds--btn--primary"
+                      className="cds--batch-summary__cancel cds--btn cds--btn--primary"
                       disabled={false}
                       onClick={[Function]}
                       tabIndex={-1}
@@ -2514,7 +2514,7 @@ exports[`DataTable should render 1`] = `
               <Button
                 kind="primary"
                 onClick={[MockFunction]}
-                size="small"
+                size="sm"
               >
                 <button
                   aria-describedby={null}
@@ -2541,7 +2541,7 @@ exports[`DataTable should render 1`] = `
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--lg cds--data-table--no-border"
+            className="cds--data-table cds--data-table--lg"
           >
             <TableHead>
               <thead>
@@ -2812,7 +2812,6 @@ exports[`DataTable sticky header should render 1`] = `
         Object {
           "type": "return",
           "value": <TableContainer
-            stickyHeader={true}
             title="DataTable with toolbar"
           >
             <TableToolbar
@@ -2910,7 +2909,7 @@ exports[`DataTable sticky header should render 1`] = `
                 <Button
                   kind="primary"
                   onClick={[MockFunction]}
-                  size="small"
+                  size="sm"
                 >
                   Add new
                 </Button>
@@ -2920,7 +2919,6 @@ exports[`DataTable sticky header should render 1`] = `
               isSortable={false}
               overflowMenuOnHover={true}
               size="lg"
-              stickyHeader={true}
             >
               <TableHead>
                 <TableRow>
@@ -3001,15 +2999,13 @@ exports[`DataTable sticky header should render 1`] = `
   }
   size="lg"
   sortRow={[Function]}
-  stickyHeader={true}
   translateWithId={[Function]}
 >
   <TableContainer
-    stickyHeader={true}
     title="DataTable with toolbar"
   >
     <div
-      className="cds--data-table-container cds--data-table--max-width"
+      className="cds--data-table-container"
     >
       <div
         className="cds--data-table-header"
@@ -3091,7 +3087,7 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--lg cds--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
                         tabIndex={0}
@@ -3170,7 +3166,7 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--lg cds--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
                         tabIndex={0}
@@ -3249,7 +3245,7 @@ exports[`DataTable sticky header should render 1`] = `
                       <button
                         aria-describedby={null}
                         aria-pressed={null}
-                        className="cds--btn cds--btn--lg cds--btn--primary"
+                        className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
                         tabIndex={0}
@@ -3307,7 +3303,7 @@ exports[`DataTable sticky header should render 1`] = `
                     <button
                       aria-describedby={null}
                       aria-pressed={null}
-                      className="cds--batch-summary__cancel cds--btn cds--btn--lg cds--btn--primary"
+                      className="cds--batch-summary__cancel cds--btn cds--btn--primary"
                       disabled={false}
                       onClick={[Function]}
                       tabIndex={-1}
@@ -3539,7 +3535,7 @@ exports[`DataTable sticky header should render 1`] = `
               <Button
                 kind="primary"
                 onClick={[MockFunction]}
-                size="small"
+                size="sm"
               >
                 <button
                   aria-describedby={null}
@@ -3561,134 +3557,129 @@ exports[`DataTable sticky header should render 1`] = `
         isSortable={false}
         overflowMenuOnHover={true}
         size="lg"
-        stickyHeader={true}
       >
-        <section
-          className="cds--data-table_inner-container"
+        <div
+          className="cds--data-table-content"
         >
-          <div
-            className="cds--data-table-content"
+          <table
+            className="cds--data-table cds--data-table--lg"
           >
-            <table
-              className="cds--data-table cds--data-table--lg cds--data-table--no-border cds--data-table--sticky-header"
+            <TableHead>
+              <thead>
+                <TableRow>
+                  <tr>
+                    <TableHeader
+                      isSortHeader={false}
+                      isSortable={false}
+                      key="fieldA"
+                      onClick={[Function]}
+                      scope="col"
+                      sortDirection="NONE"
+                      translateWithId={[Function]}
+                    >
+                      <th
+                        scope="col"
+                      >
+                        <div
+                          className="cds--table-header-label"
+                        >
+                          Field A
+                        </div>
+                      </th>
+                    </TableHeader>
+                    <TableHeader
+                      isSortHeader={false}
+                      isSortable={false}
+                      key="fieldB"
+                      onClick={[Function]}
+                      scope="col"
+                      sortDirection="NONE"
+                      translateWithId={[Function]}
+                    >
+                      <th
+                        scope="col"
+                      >
+                        <div
+                          className="cds--table-header-label"
+                        >
+                          Field B
+                        </div>
+                      </th>
+                    </TableHeader>
+                  </tr>
+                </TableRow>
+              </thead>
+            </TableHead>
+            <TableBody
+              aria-live="polite"
             >
-              <TableHead>
-                <thead>
-                  <TableRow>
-                    <tr>
-                      <TableHeader
-                        isSortHeader={false}
-                        isSortable={false}
-                        key="fieldA"
-                        onClick={[Function]}
-                        scope="col"
-                        sortDirection="NONE"
-                        translateWithId={[Function]}
-                      >
-                        <th
-                          scope="col"
-                        >
-                          <div
-                            className="cds--table-header-label"
-                          >
-                            Field A
-                          </div>
-                        </th>
-                      </TableHeader>
-                      <TableHeader
-                        isSortHeader={false}
-                        isSortable={false}
-                        key="fieldB"
-                        onClick={[Function]}
-                        scope="col"
-                        sortDirection="NONE"
-                        translateWithId={[Function]}
-                      >
-                        <th
-                          scope="col"
-                        >
-                          <div
-                            className="cds--table-header-label"
-                          >
-                            Field B
-                          </div>
-                        </th>
-                      </TableHeader>
-                    </tr>
-                  </TableRow>
-                </thead>
-              </TableHead>
-              <TableBody
+              <tbody
                 aria-live="polite"
               >
-                <tbody
-                  aria-live="polite"
+                <TableRow
+                  key="b"
                 >
-                  <TableRow
-                    key="b"
-                  >
-                    <tr>
-                      <TableCell
-                        key="b:fieldA"
-                      >
-                        <td>
-                          Field 2:A
-                        </td>
-                      </TableCell>
-                      <TableCell
-                        key="b:fieldB"
-                      >
-                        <td>
-                          Field 2:B
-                        </td>
-                      </TableCell>
-                    </tr>
-                  </TableRow>
-                  <TableRow
-                    key="a"
-                  >
-                    <tr>
-                      <TableCell
-                        key="a:fieldA"
-                      >
-                        <td>
-                          Field 1:A
-                        </td>
-                      </TableCell>
-                      <TableCell
-                        key="a:fieldB"
-                      >
-                        <td>
-                          Field 1:B
-                        </td>
-                      </TableCell>
-                    </tr>
-                  </TableRow>
-                  <TableRow
-                    key="c"
-                  >
-                    <tr>
-                      <TableCell
-                        key="c:fieldA"
-                      >
-                        <td>
-                          Field 3:A
-                        </td>
-                      </TableCell>
-                      <TableCell
-                        key="c:fieldB"
-                      >
-                        <td>
-                          Field 3:B
-                        </td>
-                      </TableCell>
-                    </tr>
-                  </TableRow>
-                </tbody>
-              </TableBody>
-            </table>
-          </div>
-        </section>
+                  <tr>
+                    <TableCell
+                      key="b:fieldA"
+                    >
+                      <td>
+                        Field 2:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="b:fieldB"
+                    >
+                      <td>
+                        Field 2:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+                <TableRow
+                  key="a"
+                >
+                  <tr>
+                    <TableCell
+                      key="a:fieldA"
+                    >
+                      <td>
+                        Field 1:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="a:fieldB"
+                    >
+                      <td>
+                        Field 1:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+                <TableRow
+                  key="c"
+                >
+                  <tr>
+                    <TableCell
+                      key="c:fieldA"
+                    >
+                      <td>
+                        Field 3:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="c:fieldB"
+                    >
+                      <td>
+                        Field 3:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+              </tbody>
+            </TableBody>
+          </table>
+        </div>
       </Table>
     </div>
   </TableContainer>

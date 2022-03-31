@@ -110,11 +110,6 @@ export default class DataTable extends React.Component {
     ).isRequired,
 
     /**
-     * `false` If true, will remove the table border
-     */
-    shouldShowBorder: PropTypes.bool,
-
-    /**
      *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
      */
     size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
@@ -374,7 +369,7 @@ export default class DataTable extends React.Component {
     let isSmall = size === 'xs' || size === 'sm';
     return {
       ...props,
-      size: isSmall ? 'small' : 'normal',
+      size: isSmall ? 'sm' : undefined,
     };
   };
 
@@ -397,7 +392,6 @@ export default class DataTable extends React.Component {
       size,
       isSortable,
       useStaticWidth,
-      shouldShowBorder,
       stickyHeader,
       overflowMenuOnHover,
     } = this.props;
@@ -406,7 +400,6 @@ export default class DataTable extends React.Component {
       size,
       isSortable,
       useStaticWidth,
-      shouldShowBorder,
       stickyHeader,
       overflowMenuOnHover,
     };
