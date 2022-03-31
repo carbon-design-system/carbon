@@ -10,17 +10,16 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { keys, matches } from '../../internal/keyboard';
-import deprecate from '../../prop-types/deprecate';
 import { useFallbackId } from '../../internal/useId';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 function RadioTile({
   children,
   className: customClassName,
   disabled,
   // eslint-disable-next-line no-unused-vars
-  iconDescription,
   light,
   checked,
   name,
@@ -109,15 +108,6 @@ RadioTile.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * The description of the tile checkmark icon.
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop for `RadioTile` is no longer needed and has ' +
-      'been deprecated. It will be moved in the next major release.'
-  ),
-
-  /**
    * The ID of the `<input>`.
    */
   id: PropTypes.string,
@@ -126,7 +116,11 @@ RadioTile.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `RadioTile` is no longer needed and has ' +
+      'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+  ),
 
   /**
    * The `name` of the `<input>`.
@@ -152,7 +146,6 @@ RadioTile.propTypes = {
 RadioTile.defaultProps = {
   onChange: () => {},
   tabIndex: 0,
-  light: false,
 };
 
 export default RadioTile;

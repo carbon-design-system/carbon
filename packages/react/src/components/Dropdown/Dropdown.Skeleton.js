@@ -13,13 +13,16 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const DropdownSkeleton = ({ className, size, ...rest }) => {
   const prefix = usePrefix();
-  const wrapperClasses = cx(className, {
-    [`${prefix}--skeleton`]: true,
-    [`${prefix}--dropdown-v2`]: true,
-    [`${prefix}--list-box`]: true,
-    [`${prefix}--form-item`]: true,
-    [`${prefix}--list-box--${size}`]: size,
-  });
+  const wrapperClasses = cx(
+    className,
+    `${prefix}--skeleton`,
+    `${prefix}--dropdown-v2`,
+    `${prefix}--list-box`,
+    `${prefix}--form-item`,
+    {
+      [`${prefix}--list-box--${size}`]: size,
+    }
+  );
 
   return (
     <div className={wrapperClasses} {...rest}>

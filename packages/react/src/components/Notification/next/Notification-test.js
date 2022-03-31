@@ -25,21 +25,16 @@ describe('NotificationButton', () => {
     expect(container.firstChild).toHaveClass('test');
   });
 
-  it('renders only one icon', () => {
-    render(<NotificationButton />);
-    expect(screen.queryAllByRole('img').length).toEqual(1);
-  });
-
   it('supports custom icon', () => {
     const { rerender } = render(<NotificationButton />);
-    const defaultIcon = screen.queryByRole('img').innerHTML;
+    const defaultIcon = screen.queryByRole('button').innerHTML;
 
     rerender(
       <NotificationButton
         renderIcon={(props) => <ErrorFilled size={20} {...props} />}
       />
     );
-    const customIcon = screen.queryByRole('img').innerHTML;
+    const customIcon = screen.queryByRole('button').innerHTML;
 
     expect(defaultIcon).not.toEqual(customIcon);
   });
@@ -53,7 +48,7 @@ describe('NotificationButton', () => {
       expect(container.firstChild).toHaveClass(
         `${prefix}--${notificationType}-notification__close-button`
       );
-      expect(screen.queryByRole('img')).toHaveClass(
+      expect(screen.queryByRole('button').firstChild).toHaveClass(
         `${prefix}--${notificationType}-notification__close-icon`
       );
     });

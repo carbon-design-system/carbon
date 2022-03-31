@@ -23,12 +23,6 @@ export default {
       },
       defaultValue: false,
     },
-    // TODO remove hasMargin in v11
-    hasMargin: {
-      table: {
-        disable: true,
-      },
-    },
     legendText: {
       control: { type: 'text' },
       defaultValue: 'FormGroup Legend',

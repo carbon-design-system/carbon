@@ -112,7 +112,7 @@ DefinitionTooltip.propTypes = {
   id: PropTypes.string,
 
   /**
-   * [Deprecated] Please use the `definition` prop instead.
+   * [Deprecated in v11] Please use the `definition` prop instead.
    *
    * Provide the text that will be displayed in the tooltip when it is rendered.
    */

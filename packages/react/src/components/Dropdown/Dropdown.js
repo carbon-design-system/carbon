@@ -15,7 +15,6 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
@@ -60,13 +59,13 @@ const Dropdown = React.forwardRef(function Dropdown(
   ref
 ) {
   const prefix = usePrefix();
-  const selectProps = mapDownshiftProps({
+  const selectProps = {
     ...downshiftProps,
     items,
     itemToString,
     initialSelectedItem,
     onSelectedItemChange,
-  });
+  };
 
   // only set selectedItem if the prop is defined. Setting if it is undefined
   // will overwrite default selected items from useSelect

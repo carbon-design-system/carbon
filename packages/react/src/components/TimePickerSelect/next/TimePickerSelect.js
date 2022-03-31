@@ -11,7 +11,6 @@ import cx from 'classnames';
 import { ChevronDown } from '@carbon/icons-react';
 
 import { usePrefix } from '../../../internal/usePrefix';
-import deprecate from '../../../prop-types/deprecate';
 
 const TimePickerSelect = React.forwardRef(function TimePickerSelect(
   {
@@ -68,15 +67,6 @@ TimePickerSelect.propTypes = {
    * Specify whether the control is disabled
    */
   disabled: PropTypes.bool,
-
-  /**
-   * Provide a description for the twistie icon that can be read by screen readers
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop for `TimePickerSelect` is no longer needed and has ' +
-      'been deprecated. It will be moved in the next major release. Use "aria-label" instead'
-  ),
 
   /**
    * Specify a custom `id` for the `<select>`

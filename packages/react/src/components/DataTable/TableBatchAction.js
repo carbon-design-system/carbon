@@ -39,6 +39,7 @@ TableBatchAction.propTypes = {
 
 TableBatchAction.defaultProps = {
   renderIcon: iconAddSolid,
+  iconDescription: 'Add',
 };
 
 export default TableBatchAction;

@@ -17,7 +17,6 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
-import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -95,19 +94,17 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     getMenuProps,
     getItemProps,
     selectedItem: selectedItems,
-  } = useSelect(
-    mapDownshiftProps({
-      ...downshiftProps,
-      highlightedIndex,
-      isOpen,
-      itemToString: (items) => {
-        return items.map((item) => itemToString(item)).join(', ');
-      },
-      onStateChange,
-      selectedItem: controlledSelectedItems,
-      items,
-    })
-  );
+  } = useSelect({
+    ...downshiftProps,
+    highlightedIndex,
+    isOpen,
+    itemToString: (items) => {
+      return items.map((item) => itemToString(item)).join(', ');
+    },
+    onStateChange,
+    selectedItem: controlledSelectedItems,
+    items,
+  });
 
   /**
    * wrapper function to forward changes to consumer

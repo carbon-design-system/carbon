@@ -7,7 +7,7 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import ContentSwitcher from '../ContentSwitcher';
+import ContentSwitcher from './ContentSwitcher';
 import Switch from '../Switch';
 import { mount, shallow } from 'enzyme';
 
