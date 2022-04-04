@@ -4,7 +4,7 @@
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
-
+@use 'sass:meta';
 @use 'styles' as *;
 
 /// Include default type styles
@@ -40,13 +40,7 @@
   }
 
   a {
-    @if meta.global-variable-exists('carbon--theme') and
-      map.has-key($carbon--theme, 'link-01')
-    {
-      color: map.get($carbon--theme, 'link-01');
-    } @else {
-      color: #0062fe;
-    }
+    color: var(--cds-link-primary, #0062fe);
   }
 
   em {

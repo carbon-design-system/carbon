@@ -8,7 +8,7 @@
 import './story.scss';
 
 import React from 'react';
-import { Delete, Save, Download } from '@carbon/icons-react';
+import { TrashCan, Save, Download } from '@carbon/icons-react';
 import DataTable, {
   Table,
   TableBatchAction,
@@ -141,7 +141,7 @@ export const Example = (args) => {
               <TableToolbar {...getToolbarProps()}>
                 <TableBatchActions {...getBatchActionProps()}>
                   <TableBatchAction
-                    renderIcon={Delete}
+                    renderIcon={TrashCan}
                     iconDescription="Delete the selected rows"
                     onClick={batchActionClick(selectedRows)}>
                     Delete

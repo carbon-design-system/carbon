@@ -9,7 +9,7 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
     className="cds--data-table-content"
   >
     <table
-      className="cds--data-table cds--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -51,7 +51,7 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
     className="cds--data-table-content"
   >
     <table
-      className="cds--data-table cds--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -93,7 +93,7 @@ exports[`DataTable.TableHeader should render 1`] = `
     className="cds--data-table-content"
   >
     <table
-      className="cds--data-table cds--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -135,7 +135,7 @@ exports[`DataTable.TableHeader should render 2`] = `
     className="cds--data-table-content"
   >
     <table
-      className="cds--data-table cds--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead>
         <thead>

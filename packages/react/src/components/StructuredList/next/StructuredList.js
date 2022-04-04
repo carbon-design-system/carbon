@@ -16,14 +16,7 @@ const GridSelectedRowStateContext = React.createContext(null);
 const GridSelectedRowDispatchContext = React.createContext(null);
 
 export function StructuredListWrapper(props) {
-  const {
-    children,
-    selection,
-    className,
-    ariaLabel,
-    border: _border,
-    ...other
-  } = props;
+  const { children, selection, className, ariaLabel, ...other } = props;
   const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list`, className, {
     [`${prefix}--structured-list--selection`]: selection,
@@ -46,14 +39,6 @@ StructuredListWrapper.propTypes = {
    * Specify a label to be read by screen readers on the container node
    */
   ariaLabel: PropTypes.string,
-
-  /**
-   * Specify whether a border should be added to your StructuredListWrapper
-   */
-  border: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`border\` will be removed in the next major version of Carbon.`
-  ),
 
   /**
    * Provide the contents of your StructuredListWrapper
@@ -234,11 +219,11 @@ export function StructuredListInput(props) {
       type="radio"
       tabIndex={0}
       checked={row && row.id === selectedRow}
-      value={row ? row.id : ''}
+      value={row?.id ?? ''}
       onChange={(event) => {
         setSelectedRow(event.target.value);
       }}
-      id={!id && defaultId}
+      id={id ?? defaultId}
       className={classes}
       name={name}
       title={title}

@@ -9,16 +9,10 @@ import React from 'react';
 
 import FormLabel from './FormLabel';
 import Tooltip from '../Tooltip';
-import mdx from './FormLabel.mdx';
 
 export default {
   title: 'Components/FormLabel',
   component: FormLabel,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
 export const _Default = () => <FormLabel>Form label</FormLabel>;

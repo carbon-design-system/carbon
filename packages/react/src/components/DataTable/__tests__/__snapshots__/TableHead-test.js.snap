@@ -9,7 +9,7 @@ exports[`DataTable.TableHead should render 1`] = `
     className="cds--data-table-content"
   >
     <table
-      className="cds--data-table cds--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead
         className="custom-class"

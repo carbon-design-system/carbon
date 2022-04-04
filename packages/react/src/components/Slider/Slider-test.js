@@ -71,12 +71,6 @@ describe('Slider', () => {
       expect(wrapper.state().left).toEqual(0);
     });
 
-    it('should specify light version as expected', () => {
-      expect(wrapper.props().light).toEqual(false);
-      wrapper.setProps({ light: true });
-      expect(wrapper.props().light).toEqual(true);
-    });
-
     it('marks input field as hidden if hidden via props', () => {
       wrapper.setProps({ hideTextInput: true });
       expect(wrapper.find(`#${id}-input-for-slider`).props().type).toEqual(

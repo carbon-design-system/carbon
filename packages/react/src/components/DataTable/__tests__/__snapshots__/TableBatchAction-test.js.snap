@@ -32,11 +32,6 @@ exports[`DataTable.TableBatchAction should render 1`] = `
       aria-pressed={null}
       className="custom-class cds--btn cds--btn--primary"
       disabled={false}
-      onBlur={[Function]}
-      onClick={[Function]}
-      onFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
       tabIndex={0}
       type="button"
     >

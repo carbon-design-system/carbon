@@ -16,7 +16,6 @@ import { composeEventHandlers } from '../../tools/events';
 import { defaultFilterRows } from './tools/filter';
 import { defaultSortRow } from './tools/sorting';
 import setupGetInstanceId from './tools/instanceId';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 const getInstanceId = setupGetInstanceId();
 
@@ -111,26 +110,9 @@ export default class DataTable extends React.Component {
     ).isRequired,
 
     /**
-     * `false` If true, will remove the table border
-     */
-    shouldShowBorder: PropTypes.bool,
-
-    /**
      *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
      */
-    size: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
-      : PropTypes.oneOf([
-          'compact',
-          'short',
-          'normal',
-          'tall',
-          'xs',
-          'sm',
-          'md',
-          'lg',
-          'xl',
-        ]),
+    size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 
     /**
      * Optional hook to manually control sorting of the rows.
@@ -165,7 +147,7 @@ export default class DataTable extends React.Component {
     sortRow: defaultSortRow,
     filterRows: defaultFilterRows,
     locale: 'en',
-    size: FeatureFlags.enabled('enable-v11-release') ? 'lg' : 'normal',
+    size: 'lg',
     overflowMenuOnHover: true,
     translateWithId,
   };
@@ -384,12 +366,10 @@ export default class DataTable extends React.Component {
 
   getToolbarProps = (props = {}) => {
     const { size } = this.props;
-    // Remove compact, short in V11
-    let isSmall =
-      size === 'compact' || size === 'short' || size === 'xs' || size === 'sm';
+    let isSmall = size === 'xs' || size === 'sm';
     return {
       ...props,
-      size: isSmall ? 'small' : 'normal',
+      size: isSmall ? 'sm' : undefined,
     };
   };
 
@@ -412,7 +392,6 @@ export default class DataTable extends React.Component {
       size,
       isSortable,
       useStaticWidth,
-      shouldShowBorder,
       stickyHeader,
       overflowMenuOnHover,
     } = this.props;
@@ -421,7 +400,6 @@ export default class DataTable extends React.Component {
       size,
       isSortable,
       useStaticWidth,
-      shouldShowBorder,
       stickyHeader,
       overflowMenuOnHover,
     };

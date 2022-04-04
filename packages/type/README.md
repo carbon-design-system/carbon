@@ -26,7 +26,7 @@ These features include:
 
 | Feature                       | Description                                                                                                  |
 | ----------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| [Font face](#font-face)       | Include IBM Plex™ font faces in your application. Uses Google fonts                                          |
+| [Font face](#font-face)       | Include IBM Plex™ font faces in your application. Uses Akamai CDN                                            |
 | [Type classes](#type-classes) | Helpers to use type styles directly. Not included by default                                                 |
 | [Font family](#font-family)   | Defines the font stack for IBM Plex™ in your application, provides helpers for working with font definitions |
 | [Reset](#reset)               | Provides a high-level CSS Reset to use in your project                                                       |
@@ -118,11 +118,7 @@ Plex to your project. These font-face definitions include support for:
 For most projects, only IBM Plex Mono and IBM Plex Sans is necessary. We also
 provide IBM Plex Serif if you are building an editorial or marketing project.
 
-These font-face definitions are pulling the above fonts from Google Fonts. As a
-result, they are not intended to be used as a production asset for your project.
-While you can depend on these for bootstrapping your project, we highly
-recommend using the fonts from the `@ibm/plex` package and hosting them on a
-global CDN.
+These font-face definitions are pulling the above fonts from an Akamai CDN.
 
 You can include each font-face definition by including the corresponding file
 and calling its mixin. For example, if you wanted to include IBM Plex Mono in

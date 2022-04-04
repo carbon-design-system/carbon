@@ -10,7 +10,6 @@ import React from 'react';
 import ListItem from '../ListItem';
 import UnorderedList from '../UnorderedList';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
-import mdx from './UnorderedList.mdx';
 
 const props = {
   regular: () => {
@@ -27,11 +26,6 @@ export default {
     ListItem,
   },
   decorators: [withKnobs],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
 export const Default = () => (

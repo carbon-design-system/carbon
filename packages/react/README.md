@@ -63,7 +63,7 @@ styles from the project or include the styles for a specific component:
 ```
 
 For a full list of components available, checkout our
-[Storybook](https://carbon-react-next.netlify.app/).
+[Storybook](https://react.carbondesignsystem.com/).
 
 ### Icons
 
@@ -86,7 +86,7 @@ For a full list of icons available, checkout our
 
 If you're looking for `@carbon/react` API documentation, check out:
 
-- [Storybook](https://carbon-react-next.netlify.app/)
+- [Storybook](https://react.carbondesignsystem.com/)
 - [Icon Library](https://www.carbondesignsystem.com/guidelines/icons/library/)
 
 ## 🙌 Contributing

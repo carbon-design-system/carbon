@@ -53,7 +53,7 @@ export default {
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
-    iconDescription: 'closes notification',
+    ariaLabel: 'closes notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),

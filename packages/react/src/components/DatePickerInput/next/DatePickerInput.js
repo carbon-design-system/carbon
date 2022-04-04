@@ -10,7 +10,6 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../../internal/usePrefix';
-import deprecate from '../../../prop-types/deprecate';
 
 const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const {
@@ -68,11 +67,9 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     [`${prefix}--date-picker--nolabel`]: !labelText,
   });
 
-  const { openCalendar, iconDescription, ...other } = { ...rest };
-
   const input = invalid ? (
     <input
-      {...other}
+      {...rest}
       {...datePickerInputProps}
       disabled={disabled}
       ref={ref}
@@ -81,7 +78,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     />
   ) : (
     <input
-      {...other}
+      {...rest}
       {...datePickerInputProps}
       disabled={disabled}
       className={inputClasses}
@@ -100,9 +97,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
         {input}
         <DatePickerIcon
           datePickerType={datePickerType}
-          iconDescription={iconDescription}
           invalid={invalid}
-          openCalendar={openCalendar}
           warn={warn}
         />
       </div>
@@ -141,14 +136,6 @@ DatePickerInput.propTypes = {
   hideLabel: PropTypes.bool,
 
   /**
-   * The description of the calendar icon.
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    `\nThe prop \`iconDescriptionInput\` for DatePickerInput has been deprecated and is no longer used`
-  ),
-
-  /**
    * Specify an id that uniquely identifies the `<input>`
    */
   id: PropTypes.string.isRequired,
@@ -179,14 +166,6 @@ DatePickerInput.propTypes = {
    * Provide a function to be called when the input field is clicked
    */
   onClick: PropTypes.func,
-
-  /**
-   * Provide a function to be called when the input field is clicked
-   */
-  openCalendar: deprecate(
-    PropTypes.func,
-    `\nThe prop \`openCalendar\` for DatePickerInput has been deprecated and is no longer used`
-  ),
 
   /**
    * Provide a regular expression that the input value must match
@@ -230,7 +209,7 @@ DatePickerInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-function DatePickerIcon({ datePickerType, invalid, warn, ...rest }) {
+function DatePickerIcon({ datePickerType, invalid, warn }) {
   const prefix = usePrefix();
 
   if (datePickerType === 'simple' && !invalid && !warn) {
@@ -256,12 +235,8 @@ function DatePickerIcon({ datePickerType, invalid, warn, ...rest }) {
   return (
     <Calendar
       className={`${prefix}--date-picker__icon`}
-      aria-label={rest.iconDescription}
-      onClick={rest.openCalendar}
       role="img"
-      aria-hidden="true">
-      {rest.iconDescription && <title>{rest.iconDescription}</title>}
-    </Calendar>
+      aria-hidden="true"></Calendar>
   );
 }
 

@@ -10,7 +10,6 @@ import React from 'react';
 import cx from 'classnames';
 import { ChevronRight } from '@carbon/icons-react';
 import SkeletonText from '../SkeletonText';
-import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 function AccordionSkeleton({ align, open, count, className, ...rest }) {
@@ -62,11 +61,6 @@ AccordionSkeleton.propTypes = {
    * `false` to not display the first item opened
    */
   open: PropTypes.bool,
-
-  /**
-   * Set unique identifier to generate unique item keys
-   */
-  uid: deprecate(PropTypes.any),
 };
 
 AccordionSkeleton.defaultProps = {

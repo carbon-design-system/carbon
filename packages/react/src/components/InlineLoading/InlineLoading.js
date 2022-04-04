@@ -9,14 +9,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
-import deprecate from '../../prop-types/deprecate';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
 export default function InlineLoading({
   className,
-  success,
-  status = success ? 'finished' : 'active',
+  status = 'active',
   iconDescription,
   description,
   onSuccess,
@@ -102,14 +100,6 @@ InlineLoading.propTypes = {
    * Specify the loading status
    */
   status: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
-
-  /**
-   * Specify whether the load was successful
-   */
-  success: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`success\` for InlineLoading has been deprecated in favor of \`status\`. Please use \`status="finished"\` instead.`
-  ),
 
   /**
    * Provide a delay for the `setTimeout` for success

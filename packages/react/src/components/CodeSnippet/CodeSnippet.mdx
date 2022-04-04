@@ -1,6 +1,5 @@
 import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
-import * as stories from './CodeSnippet-story.js';
 import CodeSnippet from '../CodeSnippet';
 
 # CodeSnippet
@@ -75,6 +74,10 @@ invocations, expressions etc.
 ## Component API
 
 <Props />
+
+## Migration notes
+
+- `copyLabel` has been deprecated in favor of `ariaLabel`.
 
 ## Feedback
 

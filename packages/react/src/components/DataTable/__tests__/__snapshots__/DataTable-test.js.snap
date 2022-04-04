@@ -97,7 +97,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
     }
   }
   rows={Array []}
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -127,7 +127,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--no-border"
+            className="cds--data-table"
           >
             <TableHead>
               <thead>
@@ -448,7 +448,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -478,7 +478,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--no-border"
+            className="cds--data-table"
           >
             <TableHead>
               <thead>
@@ -919,7 +919,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
     }
   }
   rows={Array []}
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -949,7 +949,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--no-border"
+            className="cds--data-table"
           >
             <TableHead>
               <thead>
@@ -1319,7 +1319,7 @@ exports[`DataTable selection should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -1349,7 +1349,7 @@ exports[`DataTable selection should render 1`] = `
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--no-border"
+            className="cds--data-table"
           >
             <TableHead>
               <thead>
@@ -1803,6 +1803,7 @@ exports[`DataTable should render 1`] = `
                 translateWithId={[Function]}
               >
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1817,6 +1818,7 @@ exports[`DataTable should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1831,6 +1833,7 @@ exports[`DataTable should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -1885,7 +1888,7 @@ exports[`DataTable should render 1`] = `
                 <Button
                   kind="primary"
                   onClick={[MockFunction]}
-                  size="small"
+                  size="sm"
                 >
                   Add new
                 </Button>
@@ -1894,7 +1897,7 @@ exports[`DataTable should render 1`] = `
             <Table
               isSortable={false}
               overflowMenuOnHover={true}
-              size="normal"
+              size="lg"
             >
               <TableHead>
                 <TableRow>
@@ -1973,7 +1976,7 @@ exports[`DataTable should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
   translateWithId={[Function]}
 >
@@ -2035,6 +2038,7 @@ exports[`DataTable should render 1`] = `
                   className="cds--action-list"
                 >
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -2047,6 +2051,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2063,21 +2068,19 @@ exports[`DataTable should render 1`] = `
                         aria-pressed={null}
                         className="cds--btn cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -2087,12 +2090,14 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2112,6 +2117,7 @@ exports[`DataTable should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -2124,6 +2130,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2140,21 +2147,19 @@ exports[`DataTable should render 1`] = `
                         aria-pressed={null}
                         className="cds--btn cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -2164,12 +2169,14 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2189,6 +2196,7 @@ exports[`DataTable should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -2201,6 +2209,7 @@ exports[`DataTable should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -2217,21 +2226,19 @@ exports[`DataTable should render 1`] = `
                         aria-pressed={null}
                         className="cds--btn cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -2241,12 +2248,14 @@ exports[`DataTable should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -2275,11 +2284,7 @@ exports[`DataTable should render 1`] = `
                       aria-pressed={null}
                       className="cds--batch-summary__cancel cds--btn cds--btn--primary"
                       disabled={false}
-                      onBlur={[Function]}
                       onClick={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -2509,18 +2514,14 @@ exports[`DataTable should render 1`] = `
               <Button
                 kind="primary"
                 onClick={[MockFunction]}
-                size="small"
+                size="sm"
               >
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
                   className="cds--btn cds--btn--sm cds--btn--primary"
                   disabled={false}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onClick={[MockFunction]}
                   tabIndex={0}
                   type="button"
                 >
@@ -2534,13 +2535,13 @@ exports[`DataTable should render 1`] = `
       <Table
         isSortable={false}
         overflowMenuOnHover={true}
-        size="normal"
+        size="lg"
       >
         <div
           className="cds--data-table-content"
         >
           <table
-            className="cds--data-table cds--data-table--normal cds--data-table--no-border"
+            className="cds--data-table cds--data-table--lg"
           >
             <TableHead>
               <thead>
@@ -2811,7 +2812,6 @@ exports[`DataTable sticky header should render 1`] = `
         Object {
           "type": "return",
           "value": <TableContainer
-            stickyHeader={true}
             title="DataTable with toolbar"
           >
             <TableToolbar
@@ -2824,6 +2824,7 @@ exports[`DataTable sticky header should render 1`] = `
                 translateWithId={[Function]}
               >
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -2838,6 +2839,7 @@ exports[`DataTable sticky header should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -2852,6 +2854,7 @@ exports[`DataTable sticky header should render 1`] = `
                   Ghost
                 </TableBatchAction>
                 <TableBatchAction
+                  iconDescription="Add"
                   onClick={[MockFunction]}
                   renderIcon={
                     Object {
@@ -2906,7 +2909,7 @@ exports[`DataTable sticky header should render 1`] = `
                 <Button
                   kind="primary"
                   onClick={[MockFunction]}
-                  size="small"
+                  size="sm"
                 >
                   Add new
                 </Button>
@@ -2915,8 +2918,7 @@ exports[`DataTable sticky header should render 1`] = `
             <Table
               isSortable={false}
               overflowMenuOnHover={true}
-              size="normal"
-              stickyHeader={true}
+              size="lg"
             >
               <TableHead>
                 <TableRow>
@@ -2995,17 +2997,15 @@ exports[`DataTable sticky header should render 1`] = `
       },
     ]
   }
-  size="normal"
+  size="lg"
   sortRow={[Function]}
-  stickyHeader={true}
   translateWithId={[Function]}
 >
   <TableContainer
-    stickyHeader={true}
     title="DataTable with toolbar"
   >
     <div
-      className="cds--data-table-container cds--data-table--max-width"
+      className="cds--data-table-container"
     >
       <div
         className="cds--data-table-header"
@@ -3059,6 +3059,7 @@ exports[`DataTable sticky header should render 1`] = `
                   className="cds--action-list"
                 >
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -3071,6 +3072,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3087,21 +3089,19 @@ exports[`DataTable sticky header should render 1`] = `
                         aria-pressed={null}
                         className="cds--btn cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -3111,12 +3111,14 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3136,6 +3138,7 @@ exports[`DataTable sticky header should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -3148,6 +3151,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3164,21 +3168,19 @@ exports[`DataTable sticky header should render 1`] = `
                         aria-pressed={null}
                         className="cds--btn cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -3188,12 +3190,14 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3213,6 +3217,7 @@ exports[`DataTable sticky header should render 1`] = `
                     </Button>
                   </TableBatchAction>
                   <TableBatchAction
+                    iconDescription="Add"
                     onClick={[MockFunction]}
                     renderIcon={
                       Object {
@@ -3225,6 +3230,7 @@ exports[`DataTable sticky header should render 1`] = `
                     }
                   >
                     <Button
+                      iconDescription="Add"
                       onClick={[MockFunction]}
                       renderIcon={
                         Object {
@@ -3241,21 +3247,19 @@ exports[`DataTable sticky header should render 1`] = `
                         aria-pressed={null}
                         className="cds--btn cds--btn--primary"
                         disabled={false}
-                        onBlur={[Function]}
-                        onClick={[Function]}
-                        onFocus={[Function]}
-                        onMouseEnter={[Function]}
-                        onMouseLeave={[Function]}
+                        onClick={[MockFunction]}
                         tabIndex={0}
                         type="button"
                       >
                         Ghost
                         <ForwardRef(AddFilled)
                           aria-hidden="true"
+                          aria-label="Add"
                           className="cds--btn__icon"
                         >
                           <Icon
                             aria-hidden="true"
+                            aria-label="Add"
                             className="cds--btn__icon"
                             fill="currentColor"
                             height={16}
@@ -3265,12 +3269,14 @@ exports[`DataTable sticky header should render 1`] = `
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <svg
-                              aria-hidden={true}
+                              aria-hidden="true"
+                              aria-label="Add"
                               className="cds--btn__icon"
                               fill="currentColor"
                               focusable="false"
                               height={16}
                               preserveAspectRatio="xMidYMid meet"
+                              role="img"
                               viewBox="0 0 32 32"
                               width={16}
                               xmlns="http://www.w3.org/2000/svg"
@@ -3299,11 +3305,7 @@ exports[`DataTable sticky header should render 1`] = `
                       aria-pressed={null}
                       className="cds--batch-summary__cancel cds--btn cds--btn--primary"
                       disabled={false}
-                      onBlur={[Function]}
                       onClick={[Function]}
-                      onFocus={[Function]}
-                      onMouseEnter={[Function]}
-                      onMouseLeave={[Function]}
                       tabIndex={-1}
                       type="button"
                     >
@@ -3533,18 +3535,14 @@ exports[`DataTable sticky header should render 1`] = `
               <Button
                 kind="primary"
                 onClick={[MockFunction]}
-                size="small"
+                size="sm"
               >
                 <button
                   aria-describedby={null}
                   aria-pressed={null}
                   className="cds--btn cds--btn--sm cds--btn--primary"
                   disabled={false}
-                  onBlur={[Function]}
-                  onClick={[Function]}
-                  onFocus={[Function]}
-                  onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onClick={[MockFunction]}
                   tabIndex={0}
                   type="button"
                 >
@@ -3558,135 +3556,130 @@ exports[`DataTable sticky header should render 1`] = `
       <Table
         isSortable={false}
         overflowMenuOnHover={true}
-        size="normal"
-        stickyHeader={true}
+        size="lg"
       >
-        <section
-          className="cds--data-table_inner-container"
+        <div
+          className="cds--data-table-content"
         >
-          <div
-            className="cds--data-table-content"
+          <table
+            className="cds--data-table cds--data-table--lg"
           >
-            <table
-              className="cds--data-table cds--data-table--normal cds--data-table--no-border cds--data-table--sticky-header"
+            <TableHead>
+              <thead>
+                <TableRow>
+                  <tr>
+                    <TableHeader
+                      isSortHeader={false}
+                      isSortable={false}
+                      key="fieldA"
+                      onClick={[Function]}
+                      scope="col"
+                      sortDirection="NONE"
+                      translateWithId={[Function]}
+                    >
+                      <th
+                        scope="col"
+                      >
+                        <div
+                          className="cds--table-header-label"
+                        >
+                          Field A
+                        </div>
+                      </th>
+                    </TableHeader>
+                    <TableHeader
+                      isSortHeader={false}
+                      isSortable={false}
+                      key="fieldB"
+                      onClick={[Function]}
+                      scope="col"
+                      sortDirection="NONE"
+                      translateWithId={[Function]}
+                    >
+                      <th
+                        scope="col"
+                      >
+                        <div
+                          className="cds--table-header-label"
+                        >
+                          Field B
+                        </div>
+                      </th>
+                    </TableHeader>
+                  </tr>
+                </TableRow>
+              </thead>
+            </TableHead>
+            <TableBody
+              aria-live="polite"
             >
-              <TableHead>
-                <thead>
-                  <TableRow>
-                    <tr>
-                      <TableHeader
-                        isSortHeader={false}
-                        isSortable={false}
-                        key="fieldA"
-                        onClick={[Function]}
-                        scope="col"
-                        sortDirection="NONE"
-                        translateWithId={[Function]}
-                      >
-                        <th
-                          scope="col"
-                        >
-                          <div
-                            className="cds--table-header-label"
-                          >
-                            Field A
-                          </div>
-                        </th>
-                      </TableHeader>
-                      <TableHeader
-                        isSortHeader={false}
-                        isSortable={false}
-                        key="fieldB"
-                        onClick={[Function]}
-                        scope="col"
-                        sortDirection="NONE"
-                        translateWithId={[Function]}
-                      >
-                        <th
-                          scope="col"
-                        >
-                          <div
-                            className="cds--table-header-label"
-                          >
-                            Field B
-                          </div>
-                        </th>
-                      </TableHeader>
-                    </tr>
-                  </TableRow>
-                </thead>
-              </TableHead>
-              <TableBody
+              <tbody
                 aria-live="polite"
               >
-                <tbody
-                  aria-live="polite"
+                <TableRow
+                  key="b"
                 >
-                  <TableRow
-                    key="b"
-                  >
-                    <tr>
-                      <TableCell
-                        key="b:fieldA"
-                      >
-                        <td>
-                          Field 2:A
-                        </td>
-                      </TableCell>
-                      <TableCell
-                        key="b:fieldB"
-                      >
-                        <td>
-                          Field 2:B
-                        </td>
-                      </TableCell>
-                    </tr>
-                  </TableRow>
-                  <TableRow
-                    key="a"
-                  >
-                    <tr>
-                      <TableCell
-                        key="a:fieldA"
-                      >
-                        <td>
-                          Field 1:A
-                        </td>
-                      </TableCell>
-                      <TableCell
-                        key="a:fieldB"
-                      >
-                        <td>
-                          Field 1:B
-                        </td>
-                      </TableCell>
-                    </tr>
-                  </TableRow>
-                  <TableRow
-                    key="c"
-                  >
-                    <tr>
-                      <TableCell
-                        key="c:fieldA"
-                      >
-                        <td>
-                          Field 3:A
-                        </td>
-                      </TableCell>
-                      <TableCell
-                        key="c:fieldB"
-                      >
-                        <td>
-                          Field 3:B
-                        </td>
-                      </TableCell>
-                    </tr>
-                  </TableRow>
-                </tbody>
-              </TableBody>
-            </table>
-          </div>
-        </section>
+                  <tr>
+                    <TableCell
+                      key="b:fieldA"
+                    >
+                      <td>
+                        Field 2:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="b:fieldB"
+                    >
+                      <td>
+                        Field 2:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+                <TableRow
+                  key="a"
+                >
+                  <tr>
+                    <TableCell
+                      key="a:fieldA"
+                    >
+                      <td>
+                        Field 1:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="a:fieldB"
+                    >
+                      <td>
+                        Field 1:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+                <TableRow
+                  key="c"
+                >
+                  <tr>
+                    <TableCell
+                      key="c:fieldA"
+                    >
+                      <td>
+                        Field 3:A
+                      </td>
+                    </TableCell>
+                    <TableCell
+                      key="c:fieldB"
+                    >
+                      <td>
+                        Field 3:B
+                      </td>
+                    </TableCell>
+                  </tr>
+                </TableRow>
+              </tbody>
+            </TableBody>
+          </table>
+        </div>
       </Table>
     </div>
   </TableContainer>
