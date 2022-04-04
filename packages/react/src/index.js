@@ -138,14 +138,13 @@ export TileGroup from './components/TileGroup';
 export TimePicker from './components/TimePicker';
 export TimePickerSelect from './components/TimePickerSelect';
 export Toggle from './components/Toggle';
-export ToggleSmall from './components/ToggleSmall';
-export Toolbar, {
-  ToolbarItem,
-  ToolbarTitle,
-  ToolbarOption,
-  ToolbarDivider,
-} from './components/Toolbar';
-export ToolbarSearch from './components/ToolbarSearch';
+export {
+  ToggletipLabel,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
+  ToggletipActions,
+} from './components/Toggletip';
 export UnorderedList from './components/UnorderedList';
 export SkeletonText from './components/SkeletonText';
 export SkeletonPlaceholder from './components/SkeletonPlaceholder';
