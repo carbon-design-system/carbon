@@ -7778,50 +7778,6 @@ Map {
       },
     },
   },
-  "ToggleSmall" => Object {
-    "defaultProps": Object {
-      "defaultToggled": false,
-      "labelA": "Off",
-      "labelB": "On",
-      "onToggle": [Function],
-    },
-    "propTypes": Object {
-      "aria-label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "defaultToggled": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "labelA": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "labelB": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "labelText": Object {
-        "type": "node",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onToggle": Object {
-        "type": "func",
-      },
-      "toggled": Object {
-        "type": "bool",
-      },
-    },
-  },
   "ToggleSmallSkeleton" => Object {
     "defaultProps": Object {
       "aria-label": "Toggle is loading",
@@ -7842,95 +7798,98 @@ Map {
       },
     },
   },
-  "Toolbar" => Object {
+  "Toggletip" => Object {
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "children": Object {
         "type": "node",
       },
       "className": Object {
         "type": "string",
       },
-    },
-  },
-  "ToolbarDivider" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
-  },
-  "ToolbarItem" => Object {
-    "defaultProps": Object {
-      "placeHolderText": "Provide placeHolderText",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "placeHolderText": Object {
-        "type": "string",
-      },
-      "type": Object {
-        "type": "string",
-      },
-    },
-  },
-  "ToolbarOption" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-    },
-    "render": [Function],
-  },
-  "ToolbarSearch" => Object {
-    "contextType": Object {
-      "$$typeof": Symbol(react.context),
-    },
-    "defaultProps": Object {
-      "id": "search__input",
-      "labelId": "search__label",
-      "labelText": "",
-      "placeHolderText": "",
-      "role": "search",
-      "type": "search",
-    },
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "labelId": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "type": "node",
-      },
-      "placeHolderText": Object {
-        "type": "string",
-      },
-      "role": Object {
-        "type": "string",
-      },
-      "small": Object {
+      "defaultOpen": Object {
         "type": "bool",
       },
-      "type": Object {
+    },
+  },
+  "ToggletipActions" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
         "type": "string",
       },
     },
   },
-  "ToolbarTitle" => Object {
-    "$$typeof": Symbol(react.forward_ref),
+  "ToggletipButton" => Object {
     "propTypes": Object {
-      "title": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "label": Object {
         "type": "string",
       },
     },
-    "render": [Function],
+  },
+  "ToggletipContent" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
+  "ToggletipLabel" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
   },
   "Tooltip" => Object {
     "propTypes": Object {
