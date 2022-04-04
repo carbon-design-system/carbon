@@ -14,9 +14,9 @@
   "files": [
     "es",
     "lib",
-    "scss",
     "src",
-    "umd"
+    "umd",
+    "index.scss"
   ],
   "keywords": [
     "ibm",
