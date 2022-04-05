@@ -80,21 +80,20 @@
     background-color: $background-active;
   }
 
-  .#{$prefix}--header__action.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
+  .#{$prefix}--header__action.#{$prefix}--btn--icon-only {
     align-items: center;
     justify-content: center;
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action
-    svg {
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action svg {
     fill: $icon-secondary;
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action:hover
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:hover
     svg,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action:active
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:active
     svg,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action--active
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action--active
     svg {
     fill: $icon-primary;
   }
