@@ -85,27 +85,63 @@ async function builder(metadata, { output }) {
   // the `files` object
   const files = {
     'index.js': template.ast(`
-      import React from 'react';
       import Icon from './Icon.js';
-      import { iconPropTypes } from './iconPropTypes.js';
       export { Icon };
-      const didWarnAboutDeprecation = {};
     `),
   };
   const input = {
     'index.js': 'index.js',
   };
+  const BUCKET_SIZE = 125;
+  const buckets = [
+    {
+      id: 'bucket-0',
+      modules: [],
+    },
+  ];
+  let bucket = buckets[0];
+  let bucketIndex = 0;
+
+  for (const m of modules) {
+    if (bucket.modules.length === BUCKET_SIZE) {
+      bucketIndex++;
+      bucket = {
+        id: `bucket-${bucketIndex}`,
+        modules: [],
+      };
+      buckets.push(bucket);
+    }
+
+    bucket.modules.push(m);
+  }
 
   for (const m of modules) {
     files[m.filepath] = m.entrypoint;
     input[m.filepath] = m.filepath;
-
-    files['index.js'].push(...m.source);
-    files['index.js'].push(template.ast(`export { ${m.name} };`));
+    // files['index.js'].push(...m.source);
+    // files['index.js'].push(template.ast(`export { ${m.name} };`));
   }
 
-  files['index.js'] = t.file(t.program(files['index.js']));
-  files['index.js'] = generate(files['index.js']).code;
+  for (const bucket of buckets) {
+    const filename = `generated/${bucket.id}.js`;
+
+    input[filename] = filename;
+    files[filename] = template.ast(`
+      import React from 'react';
+      import { iconPropTypes } from './iconPropTypes.js';
+      const didWarnAboutDeprecation = {};
+    `);
+
+    for (const m of bucket.modules) {
+      files[filename].push(...m.source, template.ast(`export { ${m.name} };`));
+    }
+
+    files[filename] = t.file(t.program(files[filename]));
+    files[filename] = generate(files[filename]).code;
+    files['index.js'].push(template.ast(`export * from '${filename}';`));
+  }
+
+  files['index.js'] = generate(t.file(t.program(files['index.js']))).code;
 
   const defaultVirtualOptions = {
     // Each of our Icon modules use the "./Icon.js" path to import this base
