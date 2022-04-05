@@ -118,8 +118,6 @@ async function builder(metadata, { output }) {
   for (const m of modules) {
     files[m.filepath] = m.entrypoint;
     input[m.filepath] = m.filepath;
-    // files['index.js'].push(...m.source);
-    // files['index.js'].push(template.ast(`export { ${m.name} };`));
   }
 
   for (const bucket of buckets) {
