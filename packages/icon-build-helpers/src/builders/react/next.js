@@ -126,6 +126,7 @@ async function builder(metadata, { output }) {
     input[filename] = filename;
     files[filename] = template.ast(`
       import React from 'react';
+      import Icon from './Icon.js';
       import { iconPropTypes } from './iconPropTypes.js';
       const didWarnAboutDeprecation = {};
     `);
