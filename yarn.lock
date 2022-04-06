@@ -1891,18 +1891,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-handlebars@workspace:packages/icons-handlebars":
-  version: 0.0.0-use.local
-  resolution: "@carbon/icons-handlebars@workspace:packages/icons-handlebars"
-  dependencies:
-    "@carbon/icon-helpers": ^10.29.0
-    "@carbon/icons": ^11.0.2
-    handlebars: ^4.0.12
-  peerDependencies:
-    handlebars: ^4.0.12
-  languageName: unknown
-  linkType: soft
-
 "@carbon/icons-react@^11.0.2, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
@@ -16640,7 +16628,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"handlebars@npm:^4.0.12, handlebars@npm:^4.7.7":
+"handlebars@npm:^4.7.7":
   version: 4.7.7
   resolution: "handlebars@npm:4.7.7"
   dependencies:
