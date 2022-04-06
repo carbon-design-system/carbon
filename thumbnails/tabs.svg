@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>tabs</title>
+    <g id="tabs" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-7-Copy-4" fill="#BEBEBE" x="56" y="47" width="130" height="85"></rect>
+        <rect id="Rectangle-7-Copy-4" fill="#F3F3F3" x="56" y="72" width="208" height="61"></rect>
+        <rect id="Rectangle-2-Copy-134" fill="#F3F3F3" x="56" y="47" width="65" height="25"></rect>
+        <rect id="Rectangle" fill="#0062FF" x="56" y="47" width="65" height="2"></rect>
+        <rect id="Rectangle-2-Copy-80" fill="#DCDCDC" x="122" y="47" width="64" height="24"></rect>
+        <rect id="Rectangle-Copy-31" fill="#8D8D8D" x="68" y="57" width="41" height="5"></rect>
+        <rect id="Rectangle-Copy-33" fill="#A8A8A8" x="133" y="57" width="41" height="5"></rect>
+        <rect id="Rectangle-Copy-13" fill="#A8A8A8" x="68" y="84" width="137" height="5"></rect>
+        <rect id="Rectangle-Copy-19" fill="#A8A8A8" x="68" y="104" width="137" height="5"></rect>
+        <rect id="Rectangle-Copy-21" fill="#A8A8A8" x="68" y="94" width="112" height="5"></rect>
+    </g>
+</svg>
