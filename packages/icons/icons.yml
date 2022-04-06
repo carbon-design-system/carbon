@@ -15668,9 +15668,11 @@
   sizes:
     - 32
 - name: slisor
-  friendly_name: slisor
+  friendly_name: slicestor
   aliases:
     - analysis
+    - slisor
+    - slicestor
     - communication
     - messaging
     - systems
