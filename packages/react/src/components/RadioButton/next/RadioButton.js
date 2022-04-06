@@ -52,6 +52,7 @@ const RadioButton = React.forwardRef(function RadioButton(
         id={uniqueId}
         ref={ref}
         disabled={disabled}
+        value={value}
       />
       <label htmlFor={uniqueId} className={`${prefix}--radio-button__label`}>
         <span className={`${prefix}--radio-button__appearance`} />
