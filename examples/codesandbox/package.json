@@ -1,9 +1,9 @@
 {
   "name": "codesandbox",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "dependencies": {
-    "@carbon/react": "^1.0.2",
+    "@carbon/react": "^1.0.3",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
