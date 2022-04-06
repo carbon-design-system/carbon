@@ -5,11 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'sass:list';
 @use 'sass:map';
-@use './config' as *;
-@use './theme';
-@use './utilities/custom-property';
+@use '../theme/theme';
 
 $-default-layer-sets: (
   layer: (
@@ -85,28 +82,3 @@ $-default-layer-sets: (
 /// @type {Map}
 $layer-sets: () !default;
 $layer-sets: map.deep-merge($-default-layer-sets, $layer-sets);
-
-/// Emit the layer tokens defined in $layer-sets for the given $level
-/// @param {Number} $level
-@mixin -emit-layer-tokens($level) {
-  @each $key, $layer-set in $layer-sets {
-    $value: list.nth($layer-set, $level);
-    @include custom-property.declaration($key, $value);
-  }
-}
-
-:root {
-  @include -emit-layer-tokens(1);
-}
-
-.#{$prefix}--layer-one {
-  @include -emit-layer-tokens(1);
-}
-
-.#{$prefix}--layer-two {
-  @include -emit-layer-tokens(2);
-}
-
-.#{$prefix}--layer-three {
-  @include -emit-layer-tokens(3);
-}

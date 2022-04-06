@@ -28,7 +28,7 @@ Array [
     "relativePath": "scss/feature-flags",
   },
   Object {
-    "filepath": "scss/_layer.scss",
+    "filepath": "scss/layer/_index.scss",
     "importPath": "@carbon/styles/scss/layer",
     "relativePath": "scss/layer",
   },
@@ -48,7 +48,7 @@ Array [
     "relativePath": "scss/spacing",
   },
   Object {
-    "filepath": "scss/_theme.scss",
+    "filepath": "scss/theme/_index.scss",
     "importPath": "@carbon/styles/scss/theme",
     "relativePath": "scss/theme",
   },
