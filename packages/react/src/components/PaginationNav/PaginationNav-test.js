@@ -8,10 +8,9 @@
 import React from 'react';
 import PaginationNav from '../PaginationNav';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 import { expect } from 'window-or-global';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('PaginationNav', () => {
   const props = {
@@ -39,28 +38,6 @@ describe('PaginationNav', () => {
       it('should render n page items, where n = props.itemsShown', () => {
         const pages = pagination.find(`.${prefix}--pagination-nav__page`);
         expect(pages.length).toBe(props.itemsShown);
-      });
-
-      it('should render a "previous" button as first item', () => {
-        const button = pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
-          .first()
-          .childAt(0)
-          .render();
-
-        expect(button.hasClass(`${prefix}--btn`)).toBe(true);
-        expect(button.text()).toBe('Previous');
-      });
-
-      it('should render a "Next" button as last item', () => {
-        const button = pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
-          .last()
-          .childAt(0)
-          .render();
-
-        expect(button.hasClass(`${prefix}--btn`)).toBe(true);
-        expect(button.text()).toBe('Next');
       });
 
       it('should render the expected classes for the active page', () => {
@@ -129,11 +106,7 @@ describe('PaginationNav', () => {
         );
         expect(activePage.matchesElement(pages.get(props.page))).toBe(true);
 
-        pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
-          .last()
-          .childAt(0)
-          .simulate('click');
+        pagination.find(`.${prefix}--btn`).last().simulate('click');
 
         pages = pagination.find(`.${prefix}--pagination-nav__page`);
         activePage = pagination.find(
@@ -152,7 +125,7 @@ describe('PaginationNav', () => {
         expect(activePage.matchesElement(pages.get(props.page))).toBe(true);
 
         pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
+          .find(`.${prefix}--popover-container`)
           .first()
           .childAt(0)
           .simulate('click');
@@ -196,16 +169,12 @@ describe('PaginationNav', () => {
 
         expect(i).toBe(0);
         pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
+          .find(`.${prefix}--popover-container`)
           .first()
           .childAt(0)
           .simulate('click');
         expect(i).toBe(1);
-        pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
-          .last()
-          .childAt(0)
-          .simulate('click');
+        pagination.find(`.${prefix}--btn`).last().simulate('click');
         expect(i).toBe(2);
         pagination
           .find(`.${prefix}--pagination-nav__list-item`)
@@ -228,7 +197,7 @@ describe('PaginationNav', () => {
         expect(activePage.matchesElement(pages.get(0))).toBe(true);
 
         pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
+          .find(`.${prefix}--popover-container`)
           .first()
           .childAt(0)
           .simulate('click');
@@ -255,12 +224,7 @@ describe('PaginationNav', () => {
         expect(activePage.matchesElement(pages.get(pages.length - 1))).toBe(
           true
         );
-
-        pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
-          .last()
-          .childAt(0)
-          .simulate('click');
+        pagination.find(`.${prefix}--btn`).last().simulate('click');
 
         pages = pagination.find(`.${prefix}--pagination-nav__page`);
         activePage = pagination.find(

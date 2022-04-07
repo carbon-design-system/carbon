@@ -1,0 +1,59 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div data-tabs class="bx--tabs bx--tabs--container">
+  <div class="bx--tabs-trigger" tabindex="0">
+    <a href="javascript:void(0)" class="bx--tabs-trigger-text" tabindex="-1"></a>
+    <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 11L3 6 3.7 5.3 8 9.6 12.3 5.3 13 6z"></path></svg>
+  </div>
+  <ul class="bx--tabs__nav bx--tabs__nav--hidden" role="tablist">
+    <li
+      class="bx--tabs__nav-item bx--tabs__nav-item--selected "
+      data-target=".tab-1-container" role="tab"  aria-selected="true"  >
+      <a tabindex="0" id="tab-link-1-container" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab"
+        aria-controls="tab-panel-1-container">Tab label 1</a>
+    </li>
+    <li
+      class="bx--tabs__nav-item "
+      data-target=".tab-2-container" role="tab"  >
+      <a tabindex="0" id="tab-link-2-container" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab"
+        aria-controls="tab-panel-2-container">Tab label 2</a>
+    </li>
+    <li
+      class="bx--tabs__nav-item "
+      data-target=".tab-3-container" role="tab"  >
+      <a tabindex="0" id="tab-link-3-container" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab"
+        aria-controls="tab-panel-3-container">Tab label 3</a>
+    </li>
+    <li
+      class="bx--tabs__nav-item  bx--tabs__nav-item--disabled "
+      data-target=".tab-4-container" role="tab"  
+      aria-disabled="true" >
+      <a tabindex="0" id="tab-link-4-container" class="bx--tabs__nav-link" href="javascript:void(0)" role="tab"
+        aria-controls="tab-panel-4-container">Tab label 4</a>
+    </li>
+  </ul>
+</div>
+<!-- The markup below is for demonstration purposes only -->
+<div class="bx--tab-content">
+  <div id="tab-panel-1-container" class="tab-1-container" role="tabpanel" aria-labelledby="tab-link-1-container"
+    aria-hidden="false" >
+    <div>Content for first tab goes here.</div>
+  </div>
+  <div id="tab-panel-2-container" class="tab-2-container" role="tabpanel" aria-labelledby="tab-link-2-container"
+    aria-hidden="true"  hidden>
+    <div>Content for second tab goes here.</div>
+  </div>
+  <div id="tab-panel-3-container" class="tab-3-container" role="tabpanel" aria-labelledby="tab-link-3-container"
+    aria-hidden="true"  hidden>
+    <div>Content for third tab goes here.</div>
+  </div>
+  <div id="tab-panel-4-container" class="tab-4-container" role="tabpanel" aria-labelledby="tab-link-4-container"
+    aria-hidden="true"  hidden>
+    <div>Content for fourth tab goes here.</div>
+  </div>
+</div>

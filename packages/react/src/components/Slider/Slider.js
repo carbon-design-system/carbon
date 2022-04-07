@@ -8,16 +8,14 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import throttle from 'lodash.throttle';
 import * as FeatureFlags from '@carbon/feature-flags';
 
 import * as keys from '../../internal/keyboard/keys';
 import { matches } from '../../internal/keyboard/match';
+import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
-
-const { prefix } = settings;
 
 const defaultFormatLabel = (value, label) => {
   return typeof label === 'function' ? label(value) : `${value}${label}`;
@@ -93,7 +91,11 @@ export default class Slider extends PureComponent {
     /**
      * `true` to use the light version.
      */
-    light: PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop for `Slider` is no longer needed and has ' +
+        'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+    ),
 
     /**
      * The maximum value.
@@ -142,15 +144,6 @@ export default class Slider extends PureComponent {
 
     /**
      * A value determining how much the value should increase/decrease by Shift+arrow keys,
-     * which will be `(max - min) / stepMuliplier`.
-     */
-    stepMuliplier: deprecate(
-      PropTypes.number,
-      ' The `stepMuliplier` prop has been deprecated in favor of `stepMultiplier`. It will be removed in the next major release.'
-    ),
-
-    /**
-     * A value determining how much the value should increase/decrease by Shift+arrow keys,
      * which will be `(max - min) / stepMultiplier`.
      */
     stepMultiplier: PropTypes.number,
@@ -172,7 +165,6 @@ export default class Slider extends PureComponent {
     ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
       ? undefined
       : 'Slider number input',
-    light: false,
   };
 
   static contextType = FeatureFlagContext;
@@ -212,7 +204,6 @@ export default class Slider extends PureComponent {
       prevState.value !== this.state.value &&
       typeof this.props.onChange === 'function'
     ) {
-      // TODO: pass event object as first param (breaking change/feat for v11)
       this.props.onChange({ value: this.state.value });
     }
 
@@ -221,7 +212,6 @@ export default class Slider extends PureComponent {
       this.state.needsOnRelease &&
       typeof this.props.onRelease === 'function'
     ) {
-      // TODO: pass event object as first param (breaking change/feat for v11)
       this.props.onRelease({ value: this.state.value });
       // Reset the flag
       this.setState({ needsOnRelease: false });
@@ -373,8 +363,7 @@ export default class Slider extends PureComponent {
 
     // If shift was held, account for the stepMultiplier
     if (evt.shiftKey) {
-      const stepMultiplier =
-        this.props.stepMultiplier || this.props.stepMuliplier;
+      const stepMultiplier = this.props.stepMultiplier;
       delta *= stepMultiplier;
     }
 
@@ -544,7 +533,6 @@ export default class Slider extends PureComponent {
       formatLabel = defaultFormatLabel,
       labelText,
       step,
-      stepMuliplier, // eslint-disable-line no-unused-vars
       stepMultiplier, // eslint-disable-line no-unused-vars
       inputType,
       required,
@@ -566,107 +554,113 @@ export default class Slider extends PureComponent {
       enabled = scope.enabled('enable-v11-release');
     }
 
-    const labelId = `${id}-label`;
-    const labelClasses = classNames(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: disabled,
-    });
-
-    const sliderClasses = classNames(
-      `${prefix}--slider`,
-      { [`${prefix}--slider--disabled`]: disabled },
-      [enabled ? null : className]
-    );
-
-    const inputClasses = classNames(
-      `${prefix}--text-input`,
-      `${prefix}--slider-text-input`,
-      {
-        [`${prefix}--text-input--light`]: light,
-        [`${prefix}--text-input--invalid`]: isValid === false,
-      }
-    );
-
-    const filledTrackStyle = {
-      transform: `translate(0%, -50%) scaleX(${left / 100})`,
-    };
-    const thumbStyle = {
-      left: `${left}%`,
-    };
-    const hiddenInputStyle = {
-      display: 'none',
-    };
-
     return (
-      <div
-        className={
-          enabled
-            ? classNames(`${prefix}--form-item`, className)
-            : `${prefix}--form-item`
-        }>
-        <label htmlFor={id} className={labelClasses} id={labelId}>
-          {labelText}
-        </label>
-        <div className={`${prefix}--slider-container`}>
-          <span className={`${prefix}--slider__range-label`}>
-            {formatLabel(min, minLabel)}
-          </span>
-          <div
-            className={sliderClasses}
-            ref={(node) => {
-              this.element = node;
-            }}
-            onMouseDown={this.onDragStart}
-            onTouchStart={this.onDragStart}
-            onKeyDown={this.onKeyDown}
-            role="presentation"
-            tabIndex={-1}
-            data-invalid={isValid ? null : true}
-            {...other}>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const labelId = `${id}-label`;
+          const labelClasses = classNames(`${prefix}--label`, {
+            [`${prefix}--label--disabled`]: disabled,
+          });
+
+          const sliderClasses = classNames(
+            `${prefix}--slider`,
+            { [`${prefix}--slider--disabled`]: disabled },
+            [enabled ? null : className]
+          );
+
+          const inputClasses = classNames(
+            `${prefix}--text-input`,
+            `${prefix}--slider-text-input`,
+            {
+              [`${prefix}--text-input--light`]: light,
+              [`${prefix}--text-input--invalid`]: isValid === false,
+            }
+          );
+
+          const filledTrackStyle = {
+            transform: `translate(0%, -50%) scaleX(${left / 100})`,
+          };
+          const thumbStyle = {
+            left: `${left}%`,
+          };
+          const hiddenInputStyle = {
+            display: 'none',
+          };
+
+          return (
             <div
-              className={`${prefix}--slider__thumb`}
-              role="slider"
-              id={id}
-              tabIndex={0}
-              aria-valuemax={max}
-              aria-valuemin={min}
-              aria-valuenow={value}
-              style={thumbStyle}
-            />
-            <div
-              className={`${prefix}--slider__track`}
-              ref={(node) => {
-                this.track = node;
-              }}
-            />
-            <div
-              className={`${prefix}--slider__filled-track`}
-              style={filledTrackStyle}
-            />
-          </div>
-          <span className={`${prefix}--slider__range-label`}>
-            {formatLabel(max, maxLabel)}
-          </span>
-          <input
-            type={hideTextInput ? 'hidden' : inputType}
-            style={hideTextInput ? hiddenInputStyle : null}
-            id={`${id}-input-for-slider`}
-            name={name}
-            className={inputClasses}
-            value={value}
-            aria-labelledby={!ariaLabelInput ? labelId : null}
-            aria-label={ariaLabelInput ? ariaLabelInput : null}
-            disabled={disabled}
-            required={required}
-            min={min}
-            max={max}
-            step={step}
-            onChange={this.onChange}
-            onBlur={this.onBlur}
-            data-invalid={isValid ? null : true}
-            aria-invalid={isValid ? null : true}
-          />
-        </div>
-      </div>
+              className={
+                enabled
+                  ? classNames(`${prefix}--form-item`, className)
+                  : `${prefix}--form-item`
+              }>
+              <label htmlFor={id} className={labelClasses} id={labelId}>
+                {labelText}
+              </label>
+              <div className={`${prefix}--slider-container`}>
+                <span className={`${prefix}--slider__range-label`}>
+                  {formatLabel(min, minLabel)}
+                </span>
+                <div
+                  className={sliderClasses}
+                  ref={(node) => {
+                    this.element = node;
+                  }}
+                  onMouseDown={this.onDragStart}
+                  onTouchStart={this.onDragStart}
+                  onKeyDown={this.onKeyDown}
+                  role="presentation"
+                  tabIndex={-1}
+                  data-invalid={isValid ? null : true}
+                  {...other}>
+                  <div
+                    className={`${prefix}--slider__thumb`}
+                    role="slider"
+                    id={id}
+                    tabIndex={0}
+                    aria-valuemax={max}
+                    aria-valuemin={min}
+                    aria-valuenow={value}
+                    style={thumbStyle}
+                  />
+                  <div
+                    className={`${prefix}--slider__track`}
+                    ref={(node) => {
+                      this.track = node;
+                    }}
+                  />
+                  <div
+                    className={`${prefix}--slider__filled-track`}
+                    style={filledTrackStyle}
+                  />
+                </div>
+                <span className={`${prefix}--slider__range-label`}>
+                  {formatLabel(max, maxLabel)}
+                </span>
+                <input
+                  type={hideTextInput ? 'hidden' : inputType}
+                  style={hideTextInput ? hiddenInputStyle : null}
+                  id={`${id}-input-for-slider`}
+                  name={name}
+                  className={inputClasses}
+                  value={value}
+                  aria-labelledby={!ariaLabelInput ? labelId : null}
+                  aria-label={ariaLabelInput ? ariaLabelInput : null}
+                  disabled={disabled}
+                  required={required}
+                  min={min}
+                  max={max}
+                  step={step}
+                  onChange={this.onChange}
+                  onBlur={this.onBlur}
+                  data-invalid={isValid ? null : true}
+                  aria-invalid={isValid ? null : true}
+                />
+              </div>
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

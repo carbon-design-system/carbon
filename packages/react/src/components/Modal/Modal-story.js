@@ -16,7 +16,6 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
 import Modal from '../Modal';
 import Button from '../Button';
 import Select from '../Select';
@@ -27,7 +26,7 @@ import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
 import Tooltip from '../Tooltip';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 const sizes = {
   'Extra small (xs)': 'xs',

@@ -1,0 +1,128 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="bx--form-item">
+  <div data-numberinput class="
+    bx--number
+     bx--number--light 
+     bx--number--mobile 
+    ">
+    <label for="mobile-number-input0" class="bx--label">Number input label</label>
+    <div class="bx--number__input-wrapper">
+      <button aria-label="decrease number input" class="bx--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M8 0L4 4 0 0z"></path></svg>
+      </button>
+      <input id="mobile-number-input0" type="number" pattern="\d*" min="0" max="100" value="1">
+      <button aria-label="increase number input" class="bx--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M0 4L4 0 8 4z"></path></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="bx--form-item">
+  <div data-invalid data-numberinput class="
+    bx--number
+     bx--number--light 
+     bx--number--mobile 
+  ">
+    <label for="mobile-number-input1" class="bx--label">Number input label</label>
+    <div class="bx--number__input-wrapper">
+      <button aria-label="decrease number input" class="bx--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M8 0L4 4 0 0z"></path></svg>
+      </button>
+      <input id="mobile-number-input1" type="number" pattern="\d*" min="0" max="100" value="1" role="alert"
+        aria-atomic="true">
+      <button aria-label="increase number input" class="bx--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M0 4L4 0 8 4z"></path></svg>
+      </button>
+    </div>
+    <div class="bx--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>
+
+<div class="bx--form-item">
+  <div data-invalid data-numberinput class="
+      bx--number
+       bx--number--light 
+       bx--number--mobile 
+      bx--number--nolabel
+    ">
+    <div class="bx--number__input-wrapper">
+      <button aria-label="decrease number input" class="bx--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M8 0L4 4 0 0z"></path></svg>
+      </button>
+      <input id="mobile-number-input2" type="number" pattern="\d*" min="0" max="100" value="1" role="alert"
+        aria-atomic="true">
+      <button aria-label="increase number input" class="bx--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M0 4L4 0 8 4z"></path></svg>
+      </button>
+    </div>
+    <div class="bx--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>
+
+<div class="bx--form-item">
+  <div data-numberinput class="
+    bx--number
+     bx--number--light
+     bx--number--mobile 
+    bx--number--helpertext
+  ">
+    <label for="mobile-number-input3" class="bx--label">Number input label</label>
+    <div class="bx--number__input-wrapper">
+      <button aria-label="decrease number input" class="bx--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M8 0L4 4 0 0z"></path></svg>
+      </button>
+      <input id="mobile-number-input3" type="number" pattern="\d*" min="0" max="100" value="1">
+      <button aria-label="increase number input" class="bx--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M0 4L4 0 8 4z"></path></svg>
+      </button>
+    </div>
+    <div class="bx--form__helper-text">
+      Optional helper text here; if message is more than one line text should wrap (~100 character count maximum)
+    </div>
+  </div>
+</div>
+
+<div class="bx--form-item">
+  <div data-invalid data-numberinput class="
+    bx--number
+     bx--number--light 
+     bx--number--mobile 
+    bx--number--helpertext
+  ">
+    <label for="mobile-number-input4" class="bx--label">Number input label</label>
+    <div class="bx--number__input-wrapper">
+      <button aria-label="decrease number input" class="bx--number__control-btn down-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M8 0L4 4 0 0z"></path></svg>
+      </button>
+      <input id="mobile-number-input4" type="number" pattern="\d*" min="0" max="100" value="1" role="alert"
+        aria-atomic="true">
+      <button aria-label="increase number input" class="bx--number__control-btn up-icon" type="button"
+        aria-live="polite" aria-atomic="true">
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="8" height="4" viewBox="0 0 8 4" aria-hidden="true"><path d="M0 4L4 0 8 4z"></path></svg>
+      </button>
+    </div>
+    <div class="bx--form-requirement">
+      Invalid number
+    </div>
+  </div>
+</div>

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';
 import isEqual from 'lodash.isequal';
@@ -17,7 +17,6 @@ import { defaultItemToString } from './tools/itemToString';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
-import { mapDownshiftProps } from '../../tools/createPropAdapter';
 import mergeRefs from '../../tools/mergeRefs';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -95,19 +94,17 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     getMenuProps,
     getItemProps,
     selectedItem: selectedItems,
-  } = useSelect(
-    mapDownshiftProps({
-      ...downshiftProps,
-      highlightedIndex,
-      isOpen,
-      itemToString: (items) => {
-        return items.map((item) => itemToString(item)).join(', ');
-      },
-      onStateChange,
-      selectedItem: controlledSelectedItems,
-      items,
-    })
-  );
+  } = useSelect({
+    ...downshiftProps,
+    highlightedIndex,
+    isOpen,
+    itemToString: (items) => {
+      return items.map((item) => itemToString(item)).join(', ');
+    },
+    onStateChange,
+    selectedItem: controlledSelectedItems,
+    items,
+  });
 
   /**
    * wrapper function to forward changes to consumer
@@ -248,10 +245,10 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         isOpen={isOpen}
         id={id}>
         {invalid && (
-          <WarningFilled16 className={`${prefix}--list-box__invalid-icon`} />
+          <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
         )}
         {showWarning && (
-          <WarningAltFilled16
+          <WarningAltFilled
             className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
           />
         )}

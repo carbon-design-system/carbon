@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@carbon/styles/scss/motion Public API 1`] = `
+Object {
+  "functions": Object {
+    "motion": true,
+  },
+  "mixins": Object {
+    "motion": true,
+  },
+  "variables": Object {
+    "duration-fast-01": "70ms",
+    "duration-fast-02": "110ms",
+    "duration-moderate-01": "150ms",
+    "duration-moderate-02": "240ms",
+    "duration-slow-01": "400ms",
+    "duration-slow-02": "700ms",
+    "ease-in": "cubic-bezier(0.25, 0, 1, 1)",
+    "ease-out": "cubic-bezier(0, 0, 0.25, 1)",
+    "easings": Object {
+      "entrance": Object {
+        "expressive": "cubic-bezier(0, 0, 0.3, 1)",
+        "productive": "cubic-bezier(0, 0, 0.38, 0.9)",
+      },
+      "exit": Object {
+        "expressive": "cubic-bezier(0.4, 0.14, 1, 1)",
+        "productive": "cubic-bezier(0.2, 0, 1, 0.9)",
+      },
+      "standard": Object {
+        "expressive": "cubic-bezier(0.4, 0.14, 0.3, 1)",
+        "productive": "cubic-bezier(0.2, 0, 0.38, 0.9)",
+      },
+    },
+    "standard-easing": "cubic-bezier(0.5, 0, 0.1, 1)",
+    "transition-base": "250ms",
+    "transition-expansion": "300ms",
+  },
+}
+`;

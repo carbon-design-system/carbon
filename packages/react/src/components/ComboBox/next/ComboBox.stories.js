@@ -8,6 +8,7 @@
 import React from 'react';
 import ComboBox from '../';
 import { Layer } from '../../Layer';
+import mdx from '../ComboBox.mdx';
 
 const items = [
   {
@@ -47,6 +48,11 @@ export default {
       control: { type: 'select' },
     },
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Combobox = (args) => (
@@ -55,6 +61,11 @@ export const Combobox = (args) => (
       onChange={() => {}}
       id="carbon-combobox"
       items={items}
+      downshiftProps={{
+        onStateChange: () => {
+          console.log('the state has changed');
+        },
+      }}
       itemToString={(item) => (item ? item.text : '')}
       placeholder="Filter..."
       titleText="ComboBox title"

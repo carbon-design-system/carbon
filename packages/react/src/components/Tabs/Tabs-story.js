@@ -14,7 +14,6 @@ import {
   select,
   text,
 } from '@storybook/addon-knobs';
-import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import './Tabs-story.scss';
 import CodeSnippet from '../CodeSnippet';
@@ -34,7 +33,7 @@ const types = {
   Container: 'container',
 };
 
-const { prefix } = settings;
+const prefix = 'cds';
 const props = {
   tabs: () => ({
     type: select('Type of Tabs (type)', types, 'default'),

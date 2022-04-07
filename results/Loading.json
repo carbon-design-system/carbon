@@ -1,0 +1,86 @@
+{
+    "results": [],
+    "numExecuted": 52,
+    "nls": {
+        "RPT_Block_ShouldBeHeading": {
+            "0": "Heading text must use a heading element",
+            "Pass_0": "Rule Passed"
+        },
+        "HAAC_BackgroundImg_HasTextOrTitle": {
+            "0": "Background images that convey important information must have a text alternative that describes the image",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_List_UseMarkup": {
+            "0": "Use proper HTML list elements to create lists",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Text_SensoryReference": {
+            "0": "Instructions must be meaningful without shape or location words",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_Text_Emoticons": {
+            "0": "Emoticons must have a short text alternative that describes their purpose",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_Text_LetterSpacing": {
+            "0": "Use CSS 'letter-spacing' to control spacing within a word",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Blockquote_WrapsTextQuote": {
+            "0": "Quotations should be marked with <q> or <blockquote> elements",
+            "Pass_0": "Rule Passed"
+        },
+        "IBMA_Color_Contrast_WCAG2AA_PV": {
+            "0": "The contrast ratio of text with its background (i.e. background with a color gradient or a background image) must meet WCAG 2.1 AA requirements",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_ValidProperty": {
+            "0": "ARIA attributes must be valid for the element's role",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_ValidPropertyValue": {
+            "0": "ARIA property values must be valid",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_ValidIdRef": {
+            "0": "The ARIA property must reference a non-empty unique id of an existing element that is visible",
+            "Pass_0": "Rule Passed"
+        },
+        "aria_semantics_attribute": {
+            "0": "ARIA attributes must be valid for the element and ARIA role to which they are assigned",
+            "Pass_0": "Rule Passed"
+        },
+        "Valerie_Label_HasContent": {
+            "0": "A <label> element must have non-empty descriptive text that identifies the purpose of the interactive component",
+            "Pass_Regular": "<label> element has accessible name with inner content"
+        },
+        "RPT_Elem_UniqueId": {
+            "0": "Element 'id' attribute values must be unique within a document",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_OrphanedContent_Native_Host_Sematics": {
+            "0": "All content must reside within an element with a landmark role",
+            "Pass_0": "Rule Passed"
+        }
+    },
+    "summary": {
+        "counts": {
+            "violation": 0,
+            "potentialviolation": 0,
+            "ignored": 0
+        },
+        "scanTime": 240,
+        "ruleArchive": "Latest Deployment (latest)",
+        "policies": [
+            "IBM_Accessibility"
+        ],
+        "reportLevels": [
+            "violation",
+            "potentialviolation"
+        ],
+        "startScan": 1645551275016
+    },
+    "scanID": "100ad41a-cbe3-4081-9495-12365ab0db22",
+    "toolID": "accessibility-checker-v3.1.13",
+    "label": "Loading"
+}

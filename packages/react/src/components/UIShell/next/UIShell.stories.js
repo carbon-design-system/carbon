@@ -34,11 +34,12 @@ import {
 } from '../';
 import { Modal, Button } from 'carbon-components-react';
 import {
-  Search20,
-  Notification20,
-  AppSwitcher20,
-  Fade16,
+  Search,
+  Notification,
+  Fade,
+  Switcher as SwitcherIcon,
 } from '@carbon/icons-react';
+import mdx from './UIShell.mdx';
 
 /* eslint-disable react/prop-types */
 const StoryContent = ({ useResponsiveOffset = true }) => {
@@ -153,6 +154,11 @@ export default {
     SwitcherItem,
     SwitcherDivider,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const HeaderBase = () => (
@@ -219,18 +225,18 @@ export const HeaderBaseWActions = () => (
     </HeaderName>
     <HeaderGlobalBar>
       <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search20 />
+        <Search size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="Notifications"
         onClick={action('notification click')}>
-        <Notification20 />
+        <Notification size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
         onClick={action('app-switcher click')}
         tooltipAlignment="end">
-        <AppSwitcher20 />
+        <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
   </Header>
@@ -249,18 +255,18 @@ export const HeaderBaseWSkipToContent = () => (
         <HeaderGlobalAction
           aria-label="Search"
           onClick={action('search click')}>
-          <Search20 />
+          <Search size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction
           aria-label="Notifications"
           onClick={action('notification click')}>
-          <Notification20 />
+          <Notification size={20} />
         </HeaderGlobalAction>
         <HeaderGlobalAction
           aria-label="App Switcher"
           onClick={action('app-switcher click')}
           tooltipAlignment="end">
-          <AppSwitcher20 />
+          <SwitcherIcon size={20} />
         </HeaderGlobalAction>
       </HeaderGlobalBar>
     </Header>
@@ -297,18 +303,18 @@ export const HeaderBaseWNavigationAndActions = () => (
           <HeaderGlobalAction
             aria-label="Search"
             onClick={action('search click')}>
-            <Search20 />
+            <Search size={20} />
           </HeaderGlobalAction>
           <HeaderGlobalAction
             aria-label="Notifications"
             onClick={action('notification click')}>
-            <Notification20 />
+            <Notification size={20} />
           </HeaderGlobalAction>
           <HeaderGlobalAction
             aria-label="App Switcher"
             onClick={action('app-switcher click')}
             tooltipAlignment="end">
-            <AppSwitcher20 />
+            <SwitcherIcon size={20} />
           </HeaderGlobalAction>
         </HeaderGlobalBar>
         <SideNav
@@ -364,18 +370,18 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
             <HeaderGlobalAction
               aria-label="Search"
               onClick={action('search click')}>
-              <Search20 />
+              <Search size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="Notifications"
               onClick={action('notification click')}>
-              <Notification20 />
+              <Notification size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="App Switcher"
               onClick={action('app-switcher click')}
               tooltipAlignment="end">
-              <AppSwitcher20 />
+              <SwitcherIcon size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
           <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
@@ -390,7 +396,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
                   <HeaderMenuItem href="#">Sub-link 3</HeaderMenuItem>
                 </HeaderMenu>
               </HeaderSideNavItems>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
@@ -401,7 +407,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
                   Link
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
@@ -413,7 +419,7 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu
-                renderIcon={Fade16}
+                renderIcon={Fade}
                 title="Category title"
                 isActive={true}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -429,12 +435,12 @@ export const HeaderBaseWNavigationActionsAndSideNav = () => (
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavLink
-                renderIcon={Fade16}
+                renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
                 Link
               </SideNavLink>
               <SideNavLink
-                renderIcon={Fade16}
+                renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
                 Link
               </SideNavLink>
@@ -466,7 +472,7 @@ export const HeaderBaseWSideNav = () => (
           </HeaderName>
           <SideNav aria-label="Side navigation" expanded={isSideNavExpanded}>
             <SideNavItems>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
@@ -478,7 +484,7 @@ export const HeaderBaseWSideNav = () => (
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavMenu
-                renderIcon={Fade16}
+                renderIcon={Fade}
                 title="Category title"
                 isActive={true}>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -493,7 +499,7 @@ export const HeaderBaseWSideNav = () => (
                   Link
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
@@ -505,12 +511,12 @@ export const HeaderBaseWSideNav = () => (
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavLink
-                renderIcon={Fade16}
+                renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
                 Link
               </SideNavLink>
               <SideNavLink
-                renderIcon={Fade16}
+                renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
                 Link
               </SideNavLink>
@@ -532,19 +538,19 @@ export const HeaderBaseWActionsAndRightPanel = () => (
     </HeaderName>
     <HeaderGlobalBar>
       <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search20 />
+        <Search size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="Notifications"
         isActive
         onClick={action('notification click')}>
-        <Notification20 />
+        <Notification size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
         onClick={action('app-switcher click')}
         tooltipAlignment="end">
-        <AppSwitcher20 />
+        <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
     <HeaderPanel aria-label="Header Panel" expanded />
@@ -561,19 +567,19 @@ export const HeaderBaseWActionsAndSwitcher = () => (
     </HeaderName>
     <HeaderGlobalBar>
       <HeaderGlobalAction aria-label="Search" onClick={action('search click')}>
-        <Search20 />
+        <Search size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="Notifications"
         onClick={action('notification click')}>
-        <Notification20 />
+        <Notification size={20} />
       </HeaderGlobalAction>
       <HeaderGlobalAction
         aria-label="App Switcher"
         isActive
         onClick={action('app-switcher click')}
         tooltipAlignment="end">
-        <AppSwitcher20 />
+        <SwitcherIcon size={20} />
       </HeaderGlobalAction>
     </HeaderGlobalBar>
     <HeaderPanel aria-label="Header Panel" expanded>
@@ -670,7 +676,7 @@ export const FixedSideNavWIcons = () => (
       isChildOfHeader={false}
       aria-label="Side navigation">
       <SideNavItems>
-        <SideNavMenu renderIcon={Fade16} title="Category title">
+        <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             Link
           </SideNavMenuItem>
@@ -681,7 +687,7 @@ export const FixedSideNavWIcons = () => (
             Link
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu renderIcon={Fade16} title="Category title" isActive={true}>
+        <SideNavMenu renderIcon={Fade} title="Category title" isActive={true}>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             Link
           </SideNavMenuItem>
@@ -694,7 +700,7 @@ export const FixedSideNavWIcons = () => (
             Link
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu renderIcon={Fade16} title="Category title">
+        <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             Link
           </SideNavMenuItem>
@@ -706,12 +712,12 @@ export const FixedSideNavWIcons = () => (
           </SideNavMenuItem>
         </SideNavMenu>
         <SideNavLink
-          renderIcon={Fade16}
+          renderIcon={Fade}
           href="https://www.carbondesignsystem.com/">
           Link
         </SideNavLink>
         <SideNavLink
-          renderIcon={Fade16}
+          renderIcon={Fade}
           href="https://www.carbondesignsystem.com/">
           Link
         </SideNavLink>
@@ -785,7 +791,7 @@ export const SideNavRail = () => (
   <>
     <SideNav aria-label="Side navigation" isRail>
       <SideNavItems>
-        <SideNavMenu renderIcon={Fade16} title="Category title">
+        <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             Link
           </SideNavMenuItem>
@@ -798,7 +804,7 @@ export const SideNavRail = () => (
             Link
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu renderIcon={Fade16} title="Category title">
+        <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             Link
           </SideNavMenuItem>
@@ -809,7 +815,7 @@ export const SideNavRail = () => (
             Link
           </SideNavMenuItem>
         </SideNavMenu>
-        <SideNavMenu renderIcon={Fade16} title="Category title">
+        <SideNavMenu renderIcon={Fade} title="Category title">
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             Link
           </SideNavMenuItem>
@@ -821,12 +827,12 @@ export const SideNavRail = () => (
           </SideNavMenuItem>
         </SideNavMenu>
         <SideNavLink
-          renderIcon={Fade16}
+          renderIcon={Fade}
           href="https://www.carbondesignsystem.com/">
           Link
         </SideNavLink>
         <SideNavLink
-          renderIcon={Fade16}
+          renderIcon={Fade}
           href="https://www.carbondesignsystem.com/">
           Link
         </SideNavLink>
@@ -867,18 +873,18 @@ export const SideNavRailWHeader = () => (
             <HeaderGlobalAction
               aria-label="Search"
               onClick={action('search click')}>
-              <Search20 />
+              <Search size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="Notifications"
               onClick={action('notification click')}>
-              <Notification20 />
+              <Notification size={20} />
             </HeaderGlobalAction>
             <HeaderGlobalAction
               aria-label="App Switcher"
               onClick={action('app-switcher click')}
               tooltipAlignment="end">
-              <AppSwitcher20 />
+              <SwitcherIcon size={20} />
             </HeaderGlobalAction>
           </HeaderGlobalBar>
           <SideNav
@@ -887,7 +893,18 @@ export const SideNavRailWHeader = () => (
             expanded={isSideNavExpanded}
             onOverlayClick={onClickSideNavExpand}>
             <SideNavItems>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenu renderIcon={Fade} title="Category title">
+                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                  Link
+                </SideNavMenuItem>
+                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                  Link
+                </SideNavMenuItem>
+                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
+                  Link
+                </SideNavMenuItem>
+              </SideNavMenu>
+              <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
@@ -900,26 +917,11 @@ export const SideNavRailWHeader = () => (
                   Link
                 </SideNavMenuItem>
               </SideNavMenu>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
+              <SideNavMenu renderIcon={Fade} title="Category title">
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
-                <SideNavMenuItem
-                  aria-current="page"
-                  href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-              </SideNavMenu>
-              <SideNavMenu renderIcon={Fade16} title="Category title">
-                <SideNavMenuItem href="https://www.carbondesignsystem.com/">
-                  Link
-                </SideNavMenuItem>
-                <SideNavMenuItem
-                  aria-current="page"
-                  href="https://www.carbondesignsystem.com/">
                   Link
                 </SideNavMenuItem>
                 <SideNavMenuItem href="https://www.carbondesignsystem.com/">
@@ -927,12 +929,12 @@ export const SideNavRailWHeader = () => (
                 </SideNavMenuItem>
               </SideNavMenu>
               <SideNavLink
-                renderIcon={Fade16}
+                renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
                 Link
               </SideNavLink>
               <SideNavLink
-                renderIcon={Fade16}
+                renderIcon={Fade}
                 href="https://www.carbondesignsystem.com/">
                 Link
               </SideNavLink>
@@ -968,7 +970,7 @@ export const SideNavWLargeSideNavItems = () => (
         <SideNavLink href="https://www.carbondesignsystem.com/" large>
           Large link
         </SideNavLink>
-        <SideNavMenu renderIcon={Fade16} title="Large menu w/icon" large>
+        <SideNavMenu renderIcon={Fade} title="Large menu w/icon" large>
           <SideNavMenuItem href="https://www.carbondesignsystem.com/">
             Menu 1
           </SideNavMenuItem>
@@ -980,7 +982,7 @@ export const SideNavWLargeSideNavItems = () => (
           </SideNavMenuItem>
         </SideNavMenu>
         <SideNavLink
-          renderIcon={Fade16}
+          renderIcon={Fade}
           href="https://www.carbondesignsystem.com/"
           large>
           Large link w/icon

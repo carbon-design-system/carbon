@@ -8,15 +8,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { CheckmarkFilled16, ErrorFilled16 } from '@carbon/icons-react';
-import deprecate from '../../prop-types/deprecate';
+import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
 export default function InlineLoading({
   className,
-  success,
-  status = success ? 'finished' : 'active',
+  status = 'active',
   iconDescription,
   description,
   onSuccess,
@@ -28,9 +26,9 @@ export default function InlineLoading({
   const getLoading = () => {
     if (status === 'error') {
       return (
-        <ErrorFilled16 className={`${prefix}--inline-loading--error`}>
+        <ErrorFilled className={`${prefix}--inline-loading--error`}>
           <title>{iconDescription}</title>
-        </ErrorFilled16>
+        </ErrorFilled>
       );
     }
     if (status === 'finished') {
@@ -40,10 +38,10 @@ export default function InlineLoading({
         }
       }, successDelay);
       return (
-        <CheckmarkFilled16
+        <CheckmarkFilled
           className={`${prefix}--inline-loading__checkmark-container`}>
           <title>{iconDescription}</title>
-        </CheckmarkFilled16>
+        </CheckmarkFilled>
       );
     }
     if (status === 'inactive' || status === 'active') {
@@ -102,14 +100,6 @@ InlineLoading.propTypes = {
    * Specify the loading status
    */
   status: PropTypes.oneOf(['inactive', 'active', 'finished', 'error']),
-
-  /**
-   * Specify whether the load was successful
-   */
-  success: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`success\` for InlineLoading has been deprecated in favor of \`status\`. Please use \`status="finished"\` instead.`
-  ),
 
   /**
    * Provide a delay for the `setTimeout` for success

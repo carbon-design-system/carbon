@@ -5,16 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { match, keys } from '../../internal/keyboard';
 import { warning } from '../../internal/warning';
-import deprecate from '../../prop-types/deprecate.js';
 import * as FeatureFlags from '@carbon/feature-flags';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class OverflowMenuItem extends React.Component {
   static propTypes = {
@@ -69,17 +66,6 @@ export default class OverflowMenuItem extends React.Component {
     onMouseEnter: PropTypes.func,
     onMouseLeave: PropTypes.func,
     onMouseUp: PropTypes.func,
-
-    /**
-     * `true` if this menu item should get focus when the menu gets open.
-     */
-    primaryFocus: deprecate(
-      PropTypes.bool,
-      'The `primaryFocus` prop has been deprecated as it is no longer used. ' +
-        'Feel free to remove this prop from <OverflowMenuItem>. This prop will ' +
-        'be removed in the next major release of `carbon-components-react`. ' +
-        'Opt for `selectorPrimaryFocus` in `<OverflowMenu>` instead'
-    ),
 
     /**
      * `true` if this menu item has long text and requires a browser tooltip
@@ -147,7 +133,6 @@ export default class OverflowMenuItem extends React.Component {
       // eslint-disable-next-line no-unused-vars
       handleOverflowMenuItemFocus,
       onKeyDown,
-      primaryFocus,
       wrapperClassName,
       requireTitle,
       index,
@@ -164,53 +149,57 @@ export default class OverflowMenuItem extends React.Component {
       );
     }
 
-    const overflowMenuBtnClasses = classNames(
-      `${prefix}--overflow-menu-options__btn`,
-      className
-    );
-    const overflowMenuItemClasses = classNames(
-      `${prefix}--overflow-menu-options__option`,
-      {
-        [`${prefix}--overflow-menu--divider`]: hasDivider,
-        [`${prefix}--overflow-menu-options__option--danger`]: isDelete,
-        [`${prefix}--overflow-menu-options__option--disabled`]: disabled,
-      },
-      wrapperClassName
-    );
-    const TagToUse = href ? 'a' : 'button';
-    const OverflowMenuItemContent = (() => {
-      if (typeof itemText !== 'string') {
-        return itemText;
-      }
-      return (
-        <div className={`${prefix}--overflow-menu-options__option-content`}>
-          {itemText}
-        </div>
-      );
-    })();
     return (
-      <li className={overflowMenuItemClasses} role="none">
-        <TagToUse
-          {...other}
-          {...{
-            'data-floating-menu-primary-focus': primaryFocus || null,
-          }}
-          role="menuitem"
-          href={href}
-          className={overflowMenuBtnClasses}
-          disabled={disabled}
-          onClick={this.handleClick}
-          onKeyDown={(evt) => {
-            this.setTabFocus(evt);
-            onKeyDown(evt);
-          }}
-          ref={this.overflowMenuItem}
-          title={requireTitle ? title || itemText : null}
-          tabIndex="-1"
-          index={index}>
-          {OverflowMenuItemContent}
-        </TagToUse>
-      </li>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const overflowMenuBtnClasses = classNames(
+            `${prefix}--overflow-menu-options__btn`,
+            className
+          );
+          const overflowMenuItemClasses = classNames(
+            `${prefix}--overflow-menu-options__option`,
+            {
+              [`${prefix}--overflow-menu--divider`]: hasDivider,
+              [`${prefix}--overflow-menu-options__option--danger`]: isDelete,
+              [`${prefix}--overflow-menu-options__option--disabled`]: disabled,
+            },
+            wrapperClassName
+          );
+          const TagToUse = href ? 'a' : 'button';
+          const OverflowMenuItemContent = (() => {
+            if (typeof itemText !== 'string') {
+              return itemText;
+            }
+            return (
+              <div
+                className={`${prefix}--overflow-menu-options__option-content`}>
+                {itemText}
+              </div>
+            );
+          })();
+          return (
+            <li className={overflowMenuItemClasses} role="none">
+              <TagToUse
+                {...other}
+                role="menuitem"
+                href={href}
+                className={overflowMenuBtnClasses}
+                disabled={disabled}
+                onClick={this.handleClick}
+                onKeyDown={(evt) => {
+                  this.setTabFocus(evt);
+                  onKeyDown(evt);
+                }}
+                ref={this.overflowMenuItem}
+                title={requireTitle ? title || itemText : null}
+                tabIndex="-1"
+                index={index}>
+                {OverflowMenuItemContent}
+              </TagToUse>
+            </li>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

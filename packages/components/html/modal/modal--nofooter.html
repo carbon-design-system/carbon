@@ -1,0 +1,37 @@
+<!-- 
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<button class="bx--btn bx--btn--primary" type="button" data-modal-target="#modal-4r5l7t1cicb">Show
+  modal</button>
+
+<div data-modal id="modal-4r5l7t1cicb" class="bx--modal " role="dialog"
+  aria-modal="true" aria-labelledby="modal-4r5l7t1cicb-label" aria-describedby="modal-4r5l7t1cicb-heading" tabindex="-1">
+  <div class="bx--modal-container">
+    <div class="bx--modal-header">
+      <p class="bx--modal-header__label bx--type-delta" id="modal-4r5l7t1cicb-label">Optional label</p>
+      <p class="bx--modal-header__heading bx--type-beta" id="modal-4r5l7t1cicb-heading">Modal heading</p>
+      <button class="bx--modal-close" type="button" data-modal-close aria-label="close modal"  data-modal-primary-focus>
+        <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bx--modal-close__icon" width="16" height="16" viewBox="0 0 32 32" aria-hidden="true"><path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"></path></svg>
+      </button>
+    </div>
+
+    <!-- Note: Modals with content that scrolls, at any viewport, requires `tabindex="0"` on the `bx--modal-content` element -->
+
+    <div class="bx--modal-content" >
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean id accumsan augue. Phasellus consequat augue
+        vitae
+        tellus tincidunt posuere. Curabitur justo urna, consectetur vel elit iaculis, ultrices condimentum risus. Nulla
+        facilisi.
+        Etiam venenatis molestie tellus. Quisque consectetur non risus eu rutrum. </p>
+
+          </div>
+    <div class="bx--modal-content--overflow-indicator"></div>
+
+  </div>
+  <!-- Note: focusable span allows for focus wrap feature within Modals -->
+  <span tabindex="0"></span>
+</div>

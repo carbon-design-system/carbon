@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './ContentSwitcher';
+import { createClassWrapper } from '../../internal/createClassWrapper';
+import ContentSwitcher from './ContentSwitcher';
+
+export default createClassWrapper(ContentSwitcher);

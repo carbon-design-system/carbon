@@ -1,0 +1,57 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="bx--form-item">
+  <strong class="bx--file--label">Account
+    photo</strong>
+  <p class="bx--label-description">Only .jpg and .png files. 500kb max file size.</p>
+  <div class="bx--file" data-file data-file-demo-state-manager>
+    <label for="prepopulated-file-uploader" class="bx--file-browse-btn" role="button" tabindex="0">
+      <div data-file-drop-container class="bx--file__drop-container">
+        Drag and drop files here or
+        upload
+        <input type="file" class="bx--file-input" id="prepopulated-file-uploader" data-file-uploader
+          data-target="[data-file-container]" multiple />
+      </div>
+    </label>
+    <div data-file-container class="bx--file-container">
+      <div class="bx--file__selected-file">
+        <p class="bx--file-filename">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero vero
+          sapiente illum reprehenderit molestiae perferendis voluptatem temporibus laudantium ducimus magni voluptatum
+          veniam, odit nesciunt corporis numquam maxime sunt excepturi sint!</p>
+        <span data-for="prepopulated-file-uploader" class="bx--file__state-container">
+          <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bx--file-complete" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1C4.1,1,1,4.1,1,8c0,3.9,3.1,7,7,7s7-3.1,7-7C15,4.1,11.9,1,8,1z M7,11L4.3,8.3l0.9-0.8L7,9.3l4-3.9l0.9,0.8L7,11z"></path><path d="M7,11L4.3,8.3l0.9-0.8L7,9.3l4-3.9l0.9,0.8L7,11z" data-icon-path="inner-path" opacity="0"></path></svg>
+        </span>
+      </div>
+      <div class="bx--file__selected-file bx--file__selected-file--invalid" data-invalid>
+        <p class="bx--file-filename">color.jpeg</p>
+        <span data-for="prepopulated-file-uploader" class="bx--file__state-container">
+          <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="bx--file--invalid" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M8,1C4.2,1,1,4.2,1,8s3.2,7,7,7s7-3.1,7-7S11.9,1,8,1z M7.5,4h1v5h-1C7.5,9,7.5,4,7.5,4z M8,12.2	c-0.4,0-0.8-0.4-0.8-0.8s0.3-0.8,0.8-0.8c0.4,0,0.8,0.4,0.8,0.8S8.4,12.2,8,12.2z"></path><path d="M7.5,4h1v5h-1C7.5,9,7.5,4,7.5,4z M8,12.2c-0.4,0-0.8-0.4-0.8-0.8s0.3-0.8,0.8-0.8	c0.4,0,0.8,0.4,0.8,0.8S8.4,12.2,8,12.2z" data-icon-path="inner-path" opacity="0"></path></svg>
+          <svg focusable="true" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" aria-label="Remove uploaded file" class="bx--file-close" width="16" height="16" viewBox="0 0 32 32" role="img" tabindex="0"><path d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"></path></svg>
+        </span>
+        <div class="bx--form-requirement">
+          <div class="bx--form-requirement__title">File size exceeds limit.</div>
+          <p class="bx--form-requirement__supplement">500 kb max file size. Select a new file and try
+            again.</p>
+        </div>
+      </div>
+      <div class="bx--file__selected-file">
+        <p class="bx--file-filename">color.jpeg</p>
+        <span data-for="prepopulated-file-uploader" class="bx--file__state-container">
+          <div class="bx--inline-loading__animation">
+            <div data-inline-loading-spinner="" class="bx--loading bx--loading--small">
+              <svg class="bx--loading__svg" viewBox="-75 -75 150 150">
+                <circle class="bx--loading__background" cx="0" cy="0" r="26.8125"></circle>
+                <circle class="bx--loading__stroke" cx="0" cy="0" r="26.8125"></circle>
+              </svg>
+            </div>
+          </div>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

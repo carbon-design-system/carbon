@@ -7,16 +7,15 @@
 
 import React from 'react';
 import {
-  Add16,
-  AddFilled16,
-  Filter16,
-  Search16,
-  Information16,
+  Add,
+  AddFilled,
+  Filter,
+  Search,
+  Information,
 } from '@carbon/icons-react';
 import { action } from '@storybook/addon-actions';
 import { withKnobs, select, boolean, text } from '@storybook/addon-knobs';
 import TooltipIcon from '../TooltipIcon';
-import mdx from './TooltipIcon.mdx';
 
 const directions = {
   'Top (top)': 'top',
@@ -39,10 +38,10 @@ const icons = {
 };
 
 const iconMap = {
-  Add16,
-  AddFilled16,
-  Filter16,
-  Search16,
+  Add,
+  AddFilled,
+  Filter,
+  Search,
 };
 
 const props = () => {
@@ -62,11 +61,6 @@ export default {
   title: 'Components/TooltipIcon',
   component: TooltipIcon,
   decorators: [withKnobs],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
 export const Default = () => (
@@ -80,11 +74,11 @@ export const Default = () => (
     <TooltipIcon
       tooltipText="Interactive tooltip"
       onClick={action('onClick')}
-      renderIcon={Filter16}
+      renderIcon={Filter}
     />
     <TooltipIcon
       tooltipText="Non-interactive tooltip"
-      renderIcon={Information16}
+      renderIcon={Information}
     />
   </div>
 );

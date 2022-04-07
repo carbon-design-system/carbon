@@ -6,13 +6,13 @@ exports[`AccordionItem should render 1`] = `
   title="A heading"
 >
   <li
-    className="bx--accordion__item extra-class"
+    className="cds--accordion__item extra-class"
     onAnimationEnd={[Function]}
   >
     <defaultRenderToggle
       aria-controls="accordion-item-1"
       aria-expanded={false}
-      className="bx--accordion__heading"
+      className="cds--accordion__heading"
       onClick={[Function]}
       onKeyDown={[Function]}
       type="button"
@@ -20,16 +20,16 @@ exports[`AccordionItem should render 1`] = `
       <button
         aria-controls="accordion-item-1"
         aria-expanded={false}
-        className="bx--accordion__heading"
+        className="cds--accordion__heading"
         onClick={[Function]}
         onKeyDown={[Function]}
         type="button"
       >
-        <ForwardRef(ChevronRight16)
-          className="bx--accordion__arrow"
+        <ForwardRef(ChevronRight)
+          className="cds--accordion__arrow"
         >
           <Icon
-            className="bx--accordion__arrow"
+            className="cds--accordion__arrow"
             fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
@@ -39,7 +39,7 @@ exports[`AccordionItem should render 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="bx--accordion__arrow"
+              className="cds--accordion__arrow"
               fill="currentColor"
               focusable="false"
               height={16}
@@ -53,13 +53,13 @@ exports[`AccordionItem should render 1`] = `
               />
             </svg>
           </Icon>
-        </ForwardRef(ChevronRight16)>
+        </ForwardRef(ChevronRight)>
         <Text
           as="div"
-          className="bx--accordion__title"
+          className="cds--accordion__title"
         >
           <div
-            className="bx--accordion__title"
+            className="cds--accordion__title"
             dir="auto"
           >
             A heading
@@ -68,7 +68,7 @@ exports[`AccordionItem should render 1`] = `
       </button>
     </defaultRenderToggle>
     <div
-      className="bx--accordion__content"
+      className="cds--accordion__content"
       id="accordion-item-1"
     >
       Lorem ipsum.

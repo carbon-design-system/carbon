@@ -1,0 +1,174 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../config';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:meta';
+
+$-filenames: (
+  IBM-Plex-Mono: 'IBMPlexMono',
+  IBM-Plex-Sans-Arabic: 'IBMPlexSansArabic',
+  IBM-Plex-Sans-Devanagari: 'IBMPlexSansDevanagari',
+  IBM-Plex-Sans-Hebrew: 'IBMPlexSansHebrew',
+  IBM-Plex-Sans-Thai-Looped: 'IBMPlexSansThaiLooped',
+  IBM-Plex-Sans-Thai: 'IBMPlexSansThai',
+  IBM-Plex-Sans: 'IBMPlexSans',
+  IBM-Plex-Serif: 'IBMPlexSerif',
+);
+
+$-google-filenames: (
+  IBM-Plex-Mono: (
+    name: 'ibmplexmono',
+    version: 'v7',
+    hash: '-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-otFQ',
+  ),
+  IBM-Plex-Sans-Arabic: (
+    name: 'ibmplexsansarabic',
+    version: 'v5',
+    hash: 'Qw3CZRtWPQCuHme67tEYUIx3Kh0PHR9N6Ys43PW5fslBEg0',
+  ),
+  IBM-Plex-Sans-Devanagari: (
+    name: 'ibmplexsansdevanagari',
+    version: 'v5',
+    hash: 'XRXH3JCMvG4IDoS9SubXB6W-UX5iehIMBFR2-O_PX0j1Uc7wCWQq',
+  ),
+  IBM-Plex-Sans-Hebrew: (
+    name: 'ibmplexsanshebrew',
+    version: 'v5',
+    hash: 'BCa2qYENg9Kw1mpLpO0bGM5lfHAAZHhDXE2v-lgVrjaNzC4',
+  ),
+  IBM-Plex-Sans-Thai-Looped: (
+    name: 'ibmplexsansthailooped',
+    version: 'v5',
+    hash: 'tss_AoJJRAhL3BTrK3r2xxbFhvKfyBB6l7hHT30L9BiKoXOrFCUb6Q',
+  ),
+  IBM-Plex-Sans-Thai: (
+    name: 'ibmplexsansthai',
+    version: 'v5',
+    hash: 'm8JPje1VVIzcq1HzJq2AEdo2Tj_qvLqMBNYgR8BKU4cX',
+  ),
+  IBM-Plex-Sans: (
+    name: 'ibmplexsans',
+    version: 'v9',
+    hash: 'zYXgKVElMYYaJe8bpLHnCwDKhdzeFaxOedfTDw',
+  ),
+  IBM-Plex-Serif: (
+    name: 'ibmplexserif',
+    version: 'v10',
+    hash: 'jizDREVNn1dOx-zrZ2X3pZvkTiUS2zcZiVbJsNo',
+  ),
+);
+
+@function -get-google-filename($map, $keys...) {
+  @each $key in $keys {
+    $map: map.get($map, $key);
+  }
+
+  @return $map;
+}
+
+@function -get-base-filename($name) {
+  @return map.get($-filenames, $name);
+}
+
+/// The default resolver for locating a font file in the `@ibm/plex` package.
+/// This function will return a path that will work in bundling tools like
+/// webpack but will not work without a tool that understands paths that are
+/// prefixed with `~`
+///
+/// @param {String} $name
+/// @param {String} $weight
+/// @param {String} $style
+/// @param {String} $unicode-range
+/// @param {List} $formats
+/// @returns List
+@function -default-resolver($name, $weight, $style, $unicode-range, $formats) {
+  @if (config.$use-google-fonts) {
+    $filename: -get-google-filename($-google-filenames, $name, 'name');
+    $version: -get-google-filename($-google-filenames, $name, 'version');
+    $hash: -get-google-filename($-google-filenames, $name, 'hash');
+
+    $filenames: ();
+
+    @each $format in $formats {
+      $url: 'https://fonts.gstatic.com/s/#{$filename}/#{$version}/#{$hash}';
+
+      // Add extension
+      $url: '#{$url}.#{$format}';
+      $filenames: list.append(
+        $filenames,
+        url('#{$url}') format('#{$format}'),
+        $separator: comma
+      );
+    }
+
+    @return $filenames;
+  } @else {
+    $filename: -get-base-filename($name);
+
+    // Special case for weight = Regular (400)
+    @if $weight == Regular {
+      @if $style == italic {
+        $filename: '#{$filename}-Italic';
+      } @else {
+        $filename: '#{$filename}-Regular';
+      }
+    } @else {
+      // Otherwise add weight + optional style (italic)
+      $filename: '#{$filename}-#{$weight}';
+      @if $style == italic {
+        $filename: '#{$filename}Italic';
+      }
+    }
+
+    $filenames: ();
+
+    @each $format in $formats {
+      $url: $filename;
+      @if $unicode-range {
+        $url: '#{config.$font-path}/#{$name}/fonts/split/#{$format}/#{$filename}-#{$unicode-range}';
+      } @else {
+        $url: '#{config.$font-path}/#{$name}/fonts/complete/#{$format}/#{$filename}';
+      }
+
+      // Add extension
+      $url: '#{$url}.#{$format}';
+      $filenames: list.append(
+        $filenames,
+        url('#{$url}') format('#{$format}'),
+        $separator: comma
+      );
+    }
+
+    @return $filenames;
+  }
+}
+
+/// The resolver used for locating the filepaths in `url() format()` values in
+/// @font-face blocks
+$resolver: meta.get-function('-default-resolver') !default;
+
+/// Retrieve the list of `url() format()` values used in the `src` property in
+/// an `@font-face` block
+
+/// @param {String} $name
+/// @param {String} $weight
+/// @param {String} $style
+/// @param {String} $unicode-range
+/// @param {List} $formats
+/// @returns List
+@function get($name, $weight, $style, $unicode-range: null, $formats) {
+  @return meta.call(
+    $resolver,
+    $name: $name,
+    $weight: $weight,
+    $style: $style,
+    $unicode-range: $unicode-range,
+    $formats: $formats
+  );
+}

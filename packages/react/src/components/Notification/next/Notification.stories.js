@@ -10,16 +10,17 @@ import {
   ActionableNotification,
   ToastNotification,
   InlineNotification,
-} from '../';
+} from './Notification';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
+// eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/Notifications',
-  component: ToastNotification,
   subscomponents: {
     ActionableNotification,
     InlineNotification,
+    ToastNotification,
   },
   decorators: [
     (Story) => (
@@ -50,18 +51,19 @@ export default {
   },
   args: {
     kind: 'error',
-    children: 'Notification content',
     lowContrast: false,
-    closeOnEscape: false,
     hideCloseButton: false,
-    iconDescription: 'closes notification',
+    ariaLabel: 'closes notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
   },
 };
 
-export const Toast = (args) => <ToastNotification {...args} />;
+const ToastStory = (args) => <ToastNotification {...args} />;
+
+export const Toast = ToastStory.bind({});
+
 Toast.argTypes = {
   role: {
     options: ['alert', 'log', 'status'],
@@ -69,16 +71,36 @@ Toast.argTypes = {
       type: 'select',
     },
   },
+  caption: {
+    control: {
+      type: 'text',
+    },
+  },
+  title: {
+    control: {
+      type: 'text',
+    },
+  },
+  subtitle: {
+    control: {
+      type: 'text',
+    },
+  },
 };
-Toast.args = { role: 'status', timeout: 0 };
+Toast.args = {
+  role: 'status',
+  caption: '00:00:00 AM',
+  timeout: 0,
+  title: 'Notification title',
+  subtitle: 'Subtitle text goes here',
+};
 
-export const Inline = (args) => (
-  <>
-    <InlineNotification {...args} />
-    <InlineNotification {...args} />
-    <InlineNotification {...args} />
-  </>
-);
+const InlineStory = (args) => {
+  return <InlineNotification {...args} />;
+};
+
+export const Inline = InlineStory.bind({});
+
 Inline.argTypes = {
   role: {
     options: ['alert', 'log', 'status'],
@@ -86,12 +108,29 @@ Inline.argTypes = {
       type: 'select',
     },
   },
+  title: {
+    control: {
+      type: 'text',
+    },
+  },
+  subtitle: {
+    control: {
+      type: 'text',
+    },
+  },
 };
-Inline.args = { role: 'status' };
+
+Inline.args = {
+  title: 'Notification title',
+  subtitle: 'Subtitle text goes here',
+};
 
 export const Actionable = (args) => <ActionableNotification {...args} />;
 
 Actionable.args = {
   actionButtonLabel: 'Action',
   inline: false,
+  closeOnEscape: true,
+  title: 'Notification title',
+  subtitle: 'Subtitle text goes here',
 };

@@ -36,11 +36,11 @@ $font-display: 'swap' !default;
 /// @group config
 $font-path: '~@ibm/plex' !default;
 
-/// Specify if IBM Plex should be provided by Google Fonts
+/// Specify if IBM Plex should be provided by the IBM Akamai CDN
 /// @access public
 /// @type String
 /// @group config
-$use-google-fonts: false !default;
+$use-akamai-cdn: false !default;
 
 /// The value used to prefix selectors and CSS Custom Properties across the
 /// codebase
@@ -59,3 +59,10 @@ $flex-grid-columns: 16 !default;
 /// @type Boolean
 /// @group config
 $use-flexbox-grid: false !default;
+
+@forward '@carbon/grid/scss/config'
+  hide $prefix, $flex-grid-columns
+  with (
+  $prefix: $prefix,
+  $flex-grid-columns: $flex-grid-columns,
+);

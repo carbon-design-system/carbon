@@ -5,7 +5,7 @@ exports[`HeaderGlobalBar should render 1`] = `
   className="custom-class"
 >
   <div
-    className="bx--header__global custom-class"
+    className="cds--header__global custom-class"
   />
 </HeaderGlobalBar>
 `;

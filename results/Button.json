@@ -1,0 +1,70 @@
+{
+    "results": [],
+    "numExecuted": 11,
+    "nls": {
+        "HAAC_BackgroundImg_HasTextOrTitle": {
+            "0": "Background images that convey important information must have a text alternative that describes the image",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_OrphanedContent_Native_Host_Sematics": {
+            "0": "All content must reside within an element with a landmark role",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_List_UseMarkup": {
+            "0": "Use proper HTML list elements to create lists",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Text_SensoryReference": {
+            "0": "Instructions must be meaningful without shape or location words",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_Text_Emoticons": {
+            "0": "Emoticons must have a short text alternative that describes their purpose",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_Text_LetterSpacing": {
+            "0": "Use CSS 'letter-spacing' to control spacing within a word",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Blockquote_WrapsTextQuote": {
+            "0": "Quotations should be marked with <q> or <blockquote> elements",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_Input_ExplicitLabel": {
+            "0": "Each form control must have an associated label",
+            "Pass_0": "Rule Passed"
+        },
+        "IBMA_Focus_Tabbable": {
+            "0": "Component must have at least one tabbable element",
+            "Pass_0": "Rule Passed"
+        },
+        "IBMA_Focus_MultiTab": {
+            "0": "Certain components must have no more than one tabbable element",
+            "Pass_0": "Rule Passed"
+        },
+        "IBMA_Color_Contrast_WCAG2AA_PV": {
+            "0": "The contrast ratio of text with its background (i.e. background with a color gradient or a background image) must meet WCAG 2.1 AA requirements",
+            "Pass_0": "Rule Passed"
+        }
+    },
+    "summary": {
+        "counts": {
+            "violation": 0,
+            "potentialviolation": 0,
+            "ignored": 0
+        },
+        "scanTime": 92,
+        "ruleArchive": "Latest Deployment (latest)",
+        "policies": [
+            "IBM_Accessibility"
+        ],
+        "reportLevels": [
+            "violation",
+            "potentialviolation"
+        ],
+        "startScan": 1645551239274
+    },
+    "scanID": "4e523ca4-4cce-4a98-a7ce-c66ffdd09836",
+    "toolID": "accessibility-checker-v3.1.13",
+    "label": "Button"
+}

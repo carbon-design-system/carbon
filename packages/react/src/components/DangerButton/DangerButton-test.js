@@ -8,10 +8,9 @@
 import React from 'react';
 import DangerButton from '../DangerButton';
 import { shallow, mount } from 'enzyme';
-import { Search16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Search } from '@carbon/icons-react';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('DangerButton', () => {
   describe('Renders as expected', () => {
@@ -38,7 +37,7 @@ describe('DangerButton', () => {
 
     describe('Renders icon buttons', () => {
       const iconButton = mount(
-        <DangerButton renderIcon={Search16} iconDescription="Search">
+        <DangerButton renderIcon={Search} iconDescription="Search">
           Search
         </DangerButton>
       );

@@ -7,14 +7,20 @@
 
 import React from 'react';
 import { default as Checkbox, CheckboxSkeleton } from '../';
-import { settings } from 'carbon-components';
-const { prefix } = settings;
+import mdx from '../Checkbox.mdx';
+
+const prefix = 'cds';
 
 export default {
   title: 'Components/Checkbox',
   component: Checkbox,
   subcomponents: {
     CheckboxSkeleton,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

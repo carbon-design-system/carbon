@@ -8,9 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class ToggleSmallSkeleton extends React.Component {
   static propTypes = {
@@ -41,30 +39,38 @@ export default class ToggleSmallSkeleton extends React.Component {
   render() {
     const { id, labelText, className, ...rest } = this.props;
     return (
-      <div className={cx(`${prefix}--form-item`, className)} {...rest}>
-        <input
-          type="checkbox"
-          id={id}
-          className={`${prefix}--toggle ${prefix}--toggle--small ${prefix}--skeleton`}
-        />
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          return (
+            <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+              <input
+                type="checkbox"
+                id={id}
+                className={`${prefix}--toggle ${prefix}--toggle--small ${prefix}--skeleton`}
+              />
 
-        <label
-          className={`${prefix}--toggle__label ${prefix}--skeleton`}
-          htmlFor={id}>
-          {labelText && (
-            <span className={`${prefix}--toggle__label-text`}>{labelText}</span>
-          )}
-          <span className={`${prefix}--toggle__appearance`}>
-            <svg
-              className={`${prefix}--toggle__check`}
-              width="6px"
-              height="5px"
-              viewBox="0 0 6 5">
-              <path d="M2.2403 2.7299L4.9245 0 6 1.1117 2.2384 5 0 2.6863 1.0612 1.511z" />
-            </svg>
-          </span>
-        </label>
-      </div>
+              <label
+                className={`${prefix}--toggle__label ${prefix}--skeleton`}
+                htmlFor={id}>
+                {labelText && (
+                  <span className={`${prefix}--toggle__label-text`}>
+                    {labelText}
+                  </span>
+                )}
+                <span className={`${prefix}--toggle__appearance`}>
+                  <svg
+                    className={`${prefix}--toggle__check`}
+                    width="6px"
+                    height="5px"
+                    viewBox="0 0 6 5">
+                    <path d="M2.2403 2.7299L4.9245 0 6 1.1117 2.2384 5 0 2.6863 1.0612 1.511z" />
+                  </svg>
+                </span>
+              </label>
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

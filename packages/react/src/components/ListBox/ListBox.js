@@ -8,10 +8,13 @@
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
+import ListBoxField from './ListBoxField';
+import ListBoxMenu from './ListBoxMenu';
+import ListBoxMenuIcon from './ListBoxMenuIcon';
+import ListBoxMenuItem from './ListBoxMenuItem';
+import ListBoxSelection from './ListBoxSelection';
 
 const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
@@ -45,6 +48,7 @@ const ListBox = React.forwardRef(function ListBox(
   },
   ref
 ) {
+  const prefix = usePrefix();
   const showWarning = !invalid && warn;
 
   const className = cx({
@@ -143,5 +147,11 @@ ListBox.defaultProps = {
   disabled: false,
   type: 'default',
 };
+
+ListBox.Field = ListBoxField;
+ListBox.Menu = ListBoxMenu;
+ListBox.MenuIcon = ListBoxMenuIcon;
+ListBox.MenuItem = ListBoxMenuItem;
+ListBox.Selection = ListBoxSelection;
 
 export default ListBox;

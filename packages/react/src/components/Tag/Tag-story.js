@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { withKnobs, select, text, boolean } from '@storybook/addon-knobs';
-import { Carbon16, Compass16, Tag16 } from '@carbon/icons-react';
+import { Carbon, Compass, Tag as TagIcon } from '@carbon/icons-react';
 import Tag, { types as typesList } from '../Tag';
 import TagSkeleton from '../Tag/Tag.Skeleton';
 import { action } from '@storybook/addon-actions';
@@ -20,9 +20,9 @@ const icons = {
 };
 
 const iconMap = {
-  Carbon16,
-  Compass16,
-  Tag16,
+  Carbon,
+  Compass,
+  TagIcon,
 };
 
 const sizes = {

@@ -282,6 +282,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/colors@npm:^10.37.1":
+  version: 10.37.1
+  resolution: "@carbon/colors@npm:10.37.1"
+  checksum: 7cdc38370d1a51d968f28de951a180211b33db14f6dee5cd55c1d965ebe74c19c55924898df7c344f72dfa2c46a764ad16696038911e77b43d9b701d34c56514
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.0.1":
   version: 1.1.2
   resolution: "@gar/promisify@npm:1.1.2"
@@ -1949,6 +1956,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "colors-examples-preview@workspace:."
   dependencies:
+    "@carbon/colors": ^10.37.1
     "@parcel/transformer-sass": ^2.0.1
     parcel: ^2.0.1
     react: ^16.13.1

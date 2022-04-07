@@ -2,7 +2,7 @@
   "name": "@carbon/sketch",
   "private": true,
   "description": "Tooling for generating a sketch plugin to bring code to design",
-  "version": "10.53.0-rc.0",
+  "version": "11.0.3",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -21,18 +21,18 @@
     "access": "public"
   },
   "scripts": {
-    "build": "node tasks/build.js && cross-env NODE_ENV=production skpm-build",
+    "build:plugin": "node tasks/build.js && cross-env NODE_ENV=production skpm-build",
     "clean": "rimraf carbon-elements.sketchplugin generated",
     "develop": "cross-env NODE_ENV=development skpm-build --watch",
     "log": "skpm log -f",
     "skpm:link": "skpm-link"
   },
   "dependencies": {
-    "@carbon/colors": "^10.37.0",
-    "@carbon/icon-helpers": "^10.28.0",
-    "@carbon/icons": "^10.48.0-rc.0",
-    "@carbon/themes": "^10.52.0",
-    "@carbon/type": "^10.42.0",
+    "@carbon/colors": "^11.0.0",
+    "@carbon/icon-helpers": "^10.29.0",
+    "@carbon/icons": "^11.0.2",
+    "@carbon/themes": "^11.0.1",
+    "@carbon/type": "^11.0.0",
     "@skpm/builder": "^0.8.0",
     "color-string": "^1.5.3",
     "core-js": "^3.16.0",

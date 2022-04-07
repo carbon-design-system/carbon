@@ -13,21 +13,12 @@ import {
   array,
   boolean,
   number,
-  select,
   text,
 } from '@storybook/addon-knobs';
 import Pagination from './Pagination';
-import mdx from '../Pagination.mdx';
-
-const sizes = {
-  'Small  (sm)': 'sm',
-  'Medium (md) - default': undefined,
-  'Large  (lg)': 'lg',
-};
 
 const props = () => ({
   disabled: boolean('Disable page inputs (disabled)', false),
-  size: select('Size (size)', sizes, undefined) || undefined,
   page: number('The current page (page)', 1),
   totalItems: number('Total number of items (totalItems)', 103),
   pagesUnknown: boolean('Total number of items unknown (pagesUnknown)', false),
@@ -59,18 +50,22 @@ const props = () => ({
 export default {
   title: 'Components/Pagination',
   component: Pagination,
+  argTypes: {
+    size: {
+      options: ['sm', 'md', 'lg'],
+      control: { type: 'select' },
+    },
+  },
+  args: {
+    size: 'md',
+  },
   decorators: [
     withKnobs,
     (story) => <div style={{ maxWidth: '800px' }}>{story()}</div>,
   ],
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
-export const _Pagination = () => <Pagination {...props()} />;
+export const _Pagination = (args) => <Pagination {...props()} {...args} />;
 
 _Pagination.parameters = {
   info: {
@@ -80,11 +75,11 @@ _Pagination.parameters = {
   },
 };
 
-export const MultiplePaginationComponents = () => {
+export const MultiplePaginationComponents = (args) => {
   return (
     <div>
-      <Pagination {...props()} />
-      <Pagination {...props()} />
+      <Pagination {...props()} {...args} />
+      <Pagination {...props()} {...args} />
     </div>
   );
 };
@@ -97,7 +92,7 @@ MultiplePaginationComponents.parameters = {
   },
 };
 
-export const PaginationWithCustomPageSizesLabel = () => {
+export const PaginationWithCustomPageSizesLabel = (args) => {
   return (
     <div>
       <Pagination
@@ -109,6 +104,7 @@ export const PaginationWithCustomPageSizesLabel = () => {
           { text: 'Forty', value: 40 },
           { text: 'Fifty', value: 50 },
         ]}
+        {...args}
       />
     </div>
   );

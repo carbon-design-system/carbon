@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -208,7 +208,7 @@ class HeaderMenu extends React.Component {
           {MenuContent ? (
             <MenuContent />
           ) : (
-            <ChevronDown16 className={`${this.context}--header__menu-arrow`} />
+            <ChevronDown className={`${this.context}--header__menu-arrow`} />
           )}
         </a>
         <ul

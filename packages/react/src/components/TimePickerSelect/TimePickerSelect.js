@@ -8,13 +8,13 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { ChevronDown16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { ChevronDown } from '@carbon/icons-react';
 import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
+import { PrefixContext } from '../../internal/usePrefix';
 
 export default class TimePickerSelect extends Component {
+  static contextType = PrefixContext;
+
   static propTypes = {
     /**
      * Provide aria-label to the <select> element
@@ -76,6 +76,7 @@ export default class TimePickerSelect extends Component {
   };
 
   render() {
+    const { context: prefix } = this;
     const {
       ['aria-label']: ariaLabel = 'open list of options',
       children,
@@ -116,7 +117,7 @@ export default class TimePickerSelect extends Component {
           {...rest}>
           {children}
         </select>
-        <ChevronDown16
+        <ChevronDown
           className={`${prefix}--select__arrow`}
           aria-label={ariaLabel ? ariaLabel : iconDescription}
         />

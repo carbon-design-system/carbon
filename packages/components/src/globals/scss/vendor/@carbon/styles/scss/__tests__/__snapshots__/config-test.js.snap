@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`@carbon/styles/scss/config Public API 1`] = `
+Object {
+  "css--default-type": true,
+  "css--font-face": true,
+  "css--reset": true,
+  "flex-grid-columns": 16,
+  "font-display": "swap",
+  "font-path": "~@ibm/plex",
+  "prefix": "cds",
+  "use-flexbox-grid": false,
+  "use-google-fonts": false,
+}
+`;

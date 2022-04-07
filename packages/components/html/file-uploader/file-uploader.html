@@ -1,0 +1,24 @@
+<!--
+  Copyright IBM Corp. 2016, 2018
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+<div class="bx--form-item">
+  <strong class="bx--file--label">Account
+    photo</strong>
+  <p class="bx--label-description">Only .jpg and .png files. 500kb max file size.</p>
+  <div class="bx--file" data-file data-file-demo-state-manager>
+    <label for="file-uploader" class="bx--file-browse-btn" role="button" tabindex="0">
+      <div data-file-drop-container class="bx--file__drop-container">
+        Drag and drop files here or
+        upload
+        <input type="file" class="bx--file-input" id="file-uploader" data-file-uploader
+          data-target="[data-file-container]" multiple />
+      </div>
+    </label>
+    <div data-file-container class="bx--file-container">
+    </div>
+  </div>
+</div>

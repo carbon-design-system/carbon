@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { WarningFilled16, WarningAltFilled16 } from '@carbon/icons-react';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
@@ -17,7 +17,6 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../../ListBox/next';
 import { match, keys } from '../../../internal/keyboard';
 import Selection from '../../../internal/Selection';
-import { mapDownshiftProps } from '../../../tools/createPropAdapter';
 import { defaultItemToString } from '../tools/itemToString';
 import mergeRefs from '../../../tools/mergeRefs';
 import { useId } from '../../../internal/useId';
@@ -197,7 +196,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
       initialSelectedItems={initialSelectedItems}
       render={({ selectedItems, onItemChange, clearSelection }) => (
         <Downshift
-          {...mapDownshiftProps(downshiftProps)}
+          {...downshiftProps}
           highlightedIndex={highlightedIndex}
           id={id}
           isOpen={isOpen}
@@ -342,12 +341,12 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                       ref={mergeRefs(textInput, rootProps.ref)}
                     />
                     {invalid && (
-                      <WarningFilled16
+                      <WarningFilled
                         className={`${prefix}--list-box__invalid-icon`}
                       />
                     )}
                     {showWarning && (
-                      <WarningAltFilled16
+                      <WarningAltFilled
                         className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
                       />
                     )}

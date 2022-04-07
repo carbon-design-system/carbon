@@ -8,9 +8,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { ChevronRight16 } from '@carbon/icons-react';
+import { ChevronRight } from '@carbon/icons-react';
 import SkeletonText from '../SkeletonText';
-import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 function AccordionSkeleton({ align, open, count, className, ...rest }) {
@@ -25,7 +24,7 @@ function AccordionSkeleton({ align, open, count, className, ...rest }) {
         <li
           className={`${prefix}--accordion__item ${prefix}--accordion__item--active`}>
           <span className={`${prefix}--accordion__heading`}>
-            <ChevronRight16 className={`${prefix}--accordion__arrow`} />
+            <ChevronRight className={`${prefix}--accordion__arrow`} />
             <SkeletonText className={`${prefix}--accordion__title`} />
           </span>
           <div className={`${prefix}--accordion__content`}>
@@ -62,11 +61,6 @@ AccordionSkeleton.propTypes = {
    * `false` to not display the first item opened
    */
   open: PropTypes.bool,
-
-  /**
-   * Set unique identifier to generate unique item keys
-   */
-  uid: deprecate(PropTypes.any),
 };
 
 AccordionSkeleton.defaultProps = {
@@ -80,7 +74,7 @@ function AccordionSkeletonItem() {
   return (
     <li className={`${prefix}--accordion__item`}>
       <span className={`${prefix}--accordion__heading`}>
-        <ChevronRight16 className={`${prefix}--accordion__arrow`} />
+        <ChevronRight className={`${prefix}--accordion__arrow`} />
         <SkeletonText className={`${prefix}--accordion__title`} />
       </span>
     </li>

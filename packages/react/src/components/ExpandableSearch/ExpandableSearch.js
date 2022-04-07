@@ -5,17 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-
 import Search from '../Search';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 function ExpandableSearch(props) {
   const [expanded, setExpanded] = useState(false);
+  const [hasContent, setHasContent] = useState(false);
   const searchRef = useRef(null);
+  const prefix = usePrefix();
 
   function handleFocus() {
     if (!expanded) {
@@ -28,31 +27,10 @@ function ExpandableSearch(props) {
       evt.relatedTarget &&
       evt.relatedTarget.classList.contains(`${prefix}--search-close`);
 
-    if (
-      expanded &&
-      !relatedTargetIsAllowed &&
-      !searchRef.current.state.hasContent
-    ) {
+    if (expanded && !relatedTargetIsAllowed && !hasContent) {
       setExpanded(false);
     }
   }
-
-  useEffect(() => {
-    function focusInput() {
-      if (!expanded && searchRef.current?.input) {
-        searchRef.current.input.focus();
-      }
-    }
-
-    if (searchRef.current?.magnifier) {
-      const { magnifier } = searchRef.current;
-      magnifier.addEventListener('click', focusInput);
-
-      return () => {
-        magnifier.removeEventListener('click', focusInput);
-      };
-    }
-  }, [expanded, searchRef]);
 
   const classes = classnames(
     `${prefix}--search--expandable`,
@@ -69,6 +47,12 @@ function ExpandableSearch(props) {
       className={classes}
       onFocus={handleFocus}
       onBlur={handleBlur}
+      onChange={(event) => {
+        setHasContent(event.target.value !== '');
+      }}
+      onExpand={() => {
+        searchRef.current.focus?.();
+      }}
     />
   );
 }

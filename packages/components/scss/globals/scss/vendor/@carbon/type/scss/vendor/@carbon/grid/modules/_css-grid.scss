@@ -1,0 +1,470 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'config' as *;
+@use 'breakpoint' as *;
+
+/// Emit all the styles related to the CSS Grid, these include:
+/// - The base grid class
+/// - The various grid modes
+/// - The ability to specifiy column span
+/// - The ability to specifiy column start,end position
+/// - Support for subgrid
+/// - Support for hanging content on a grid column
+/// - Support for controlling grid gutter on a cell basis
+/// - Support for specifying content alignment
+///
+///
+/// In general, this mixin is structured in a way to emit the fewest CSS styles
+/// as possible. To do this, we will (as much as possible) not emit a value if
+/// one is already defined at a previous breakpoint.
+///
+/// In addition, this mixin will break down emitting styles into several stages:
+/// 1. Emit styles for the smallest breakpoint without any breakpoint. By
+/// default, these styles will be on
+/// 2. For every other breakpoint, wrap it in a breakpoint so that it only is
+/// triggered when that breakpoint is applied
+/// 3. In situations where it is appropriate, we also will emit "unconditional"
+/// selectors that will always apply. For example, if you wanted a column to
+/// always span four columns
+@mixin css-grid($breakpoints: $grid-breakpoints) {
+  /// The :root selector is responsible for setting several top-level CSS Custom
+  /// Properties, including the overall grid gutter, grid column count, and grid
+  /// margin
+  :root {
+    --cds-grid-gutter: #{$grid-gutter};
+
+    // Iterate through the grid breakpoints and only emit the grid-columns and
+    // grid-margin CSS Custom Properties if they've changed from the previous
+    // breakpoint. By default, we emit the smallest breakpoint values on the
+    // :root selector
+    @each $key, $value in $breakpoints {
+      @if is-smallest-breakpoint($key, $breakpoints) {
+        --cds-grid-columns: #{get-column-count($breakpoints, $key)};
+        --cds-grid-margin: #{get-margin($breakpoints, $key)};
+      } @else {
+        $previous-breakpoint: breakpoint-prev($key, $breakpoints);
+        $changes: ();
+
+        @if get-column-count($breakpoints, $key) !=
+          get-column-count($breakpoints, $previous-breakpoint)
+        {
+          $changes: map.set(
+            $changes,
+            grid-columns,
+            get-column-count($breakpoints, $key)
+          );
+        }
+
+        @if get-margin($breakpoints, $key) !=
+          get-margin($breakpoints, $previous-breakpoint)
+        {
+          $changes: map.set(
+            $changes,
+            grid-margin,
+            get-margin($breakpoints, $key)
+          );
+        }
+
+        @include breakpoint($key) {
+          @each $name, $value in $changes {
+            --cds-#{$name}: #{$value};
+          }
+        }
+      }
+    }
+  }
+
+  // -----------------------------------------------------------------------------
+  // Base CSS Grid
+  // -----------------------------------------------------------------------------
+  .#{$prefix}--css-grid {
+    --cds-grid-gutter-start: calc(var(--cds-grid-gutter) / 2);
+    --cds-grid-gutter-end: calc(var(--cds-grid-gutter) / 2);
+    // We split out a separate "column hang" since "gutter-start" is set
+    // dynamically and could be 0
+    --cds-grid-column-hang: calc(var(--cds-grid-gutter) / 2);
+
+    display: grid;
+    max-width: get-grid-width(
+      $breakpoints,
+      largest-breakpoint-name($breakpoints)
+    );
+    padding-right: var(--cds-grid-margin);
+    padding-left: var(--cds-grid-margin);
+    margin-right: auto;
+    margin-left: auto;
+    grid-template-columns: repeat(var(--cds-grid-columns), minmax(0, 1fr));
+  }
+
+  // -----------------------------------------------------------------------------
+  // Full width
+  // -----------------------------------------------------------------------------
+  .#{$prefix}--css-grid--full-width {
+    max-width: 100%;
+  }
+
+  // -----------------------------------------------------------------------------
+  // Column
+  // -----------------------------------------------------------------------------
+
+  // Add gutter to columns in a CSS Grid. Unfortunately, we cannot use
+  // `grid-gap`, `column-gap`, etc. as we need to conditionally remove leading
+  // and trailing gutter from a column.
+  .#{$prefix}--css-grid-column {
+    // grid-mode-start, grid-mode-end are meant to capture the "grid settings"
+    // so that subgrids can correctly fit in parent grids by reverting the
+    // grid's outer padding
+    --cds-grid-mode-start: var(--cds-grid-gutter-start);
+    --cds-grid-mode-end: var(--cds-grid-gutter-end);
+
+    margin-right: var(--cds-grid-gutter-end);
+    margin-left: var(--cds-grid-gutter-start);
+
+    [dir='rtl'] & {
+      margin-right: var(--cds-grid-gutter-start);
+      margin-left: var(--cds-grid-gutter-end);
+    }
+  }
+
+  // -----------------------------------------------------------------------------
+  // Grid modes
+  // -----------------------------------------------------------------------------
+
+  // Narrow
+  .#{$prefix}--css-grid--narrow {
+    --cds-grid-gutter-start: 0;
+  }
+
+  // Condensed
+  .#{$prefix}--css-grid--condensed {
+    --cds-grid-gutter: #{$grid-gutter-condensed};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2) -
+      math.div($grid-gutter-condensed, 2)};
+  }
+
+  // -----------------------------------------------------------------------------
+  // Subgrid
+  // -----------------------------------------------------------------------------
+  .#{$prefix}--subgrid {
+    display: grid;
+    margin-right: calc(var(--cds-grid-mode-end) * -1);
+    margin-left: calc(var(--cds-grid-mode-start) * -1);
+    grid-template-columns: repeat(var(--cds-grid-columns), minmax(0, 1fr));
+
+    [dir='rtl'] & {
+      margin-right: calc(var(--cds-grid-mode-start) * -1);
+      margin-left: calc(var(--cds-grid-mode-end) * -1);
+    }
+  }
+
+  // Support the grid modes in subgrids
+  .#{$prefix}--subgrid--wide {
+    --cds-grid-gutter-start: #{math.div($grid-gutter, 2)};
+    --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
+    --cds-grid-column-hang: 0;
+  }
+
+  .#{$prefix}--subgrid--narrow {
+    --cds-grid-gutter-start: 0;
+    --cds-grid-gutter-end: #{math.div($grid-gutter, 2)};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2)};
+  }
+
+  .#{$prefix}--subgrid--condensed {
+    --cds-grid-gutter-start: #{math.div($grid-gutter-condensed, 2)};
+    --cds-grid-gutter-end: #{math.div($grid-gutter-condensed, 2)};
+    --cds-grid-column-hang: #{math.div($grid-gutter, 2) -
+      math.div($grid-gutter-condensed, 2)};
+  }
+
+  // -----------------------------------------------------------------------------
+  // Column hang
+  // -----------------------------------------------------------------------------
+
+  // Helper class to allow for text alignment in columns where the leading
+  // gutter is missing (like narrow) or is reduced (like in condensed).
+  .#{$prefix}--grid-column-hang {
+    margin-left: var(--cds-grid-column-hang);
+
+    [dir='rtl'] & {
+      margin-right: var(--cds-grid-column-hang);
+      margin-left: initial;
+    }
+  }
+
+  // -----------------------------------------------------------------------------
+  // Column span
+  // -----------------------------------------------------------------------------
+
+  // Generate col-span-{0-16} classes which unconditionally set column span
+  // regardless of breakpoint
+  @for $i from 0 through get-grid-columns($breakpoints) {
+    .#{$prefix}--col-span-#{$i} {
+      @include -column-span($i);
+    }
+  }
+
+  // Responsive column span
+  @each $name, $value in $breakpoints {
+    // Column span per breakpoint
+    @for $i from 0 through get-column-count($breakpoints, $name) {
+      @if is-smallest-breakpoint($name, $breakpoints) {
+        .#{$prefix}--#{$name}\:col-span-#{$i} {
+          @include -column-span($i);
+        }
+      } @else {
+        @include breakpoint($name) {
+          .#{$prefix}--#{$name}\:col-span-#{$i} {
+            @include -column-span($i);
+          }
+        }
+      }
+    }
+
+    // Percent column span per breakpoint
+    @if is-smallest-breakpoint($name, $breakpoints) {
+      .#{$prefix}--#{$name}\:col-span-auto {
+        grid-column: auto;
+      }
+
+      .#{$prefix}--#{$name}\:col-span-100 {
+        grid-column: 1 / -1;
+      }
+
+      $columns: get-column-count($breakpoints, $name);
+
+      .#{$prefix}--#{$name}\:col-span-75 {
+        $span: $columns * 0.75;
+        --cds-grid-columns: #{$span};
+
+        grid-column: span #{$span} / span #{$span};
+      }
+
+      .#{$prefix}--#{$name}\:col-span-50 {
+        $span: $columns * 0.5;
+        --cds-grid-columns: #{$span};
+
+        grid-column: span #{$span} / span #{$span};
+      }
+
+      .#{$prefix}--#{$name}\:col-span-25 {
+        $span: $columns * 0.25;
+        --cds-grid-columns: #{$span};
+
+        grid-column: span #{$span} / span #{$span};
+      }
+    } @else {
+      @include breakpoint($name) {
+        .#{$prefix}--#{$name}\:col-span-auto {
+          grid-column: auto;
+        }
+
+        .#{$prefix}--#{$name}\:col-span-100 {
+          grid-column: 1 / -1;
+        }
+
+        $columns: get-column-count($breakpoints, $name);
+
+        .#{$prefix}--#{$name}\:col-span-75 {
+          $span: $columns * 0.75;
+          --cds-grid-columns: #{$span};
+
+          grid-column: span #{$span} / span #{$span};
+        }
+
+        .#{$prefix}--#{$name}\:col-span-50 {
+          $span: $columns * 0.5;
+          --cds-grid-columns: #{$span};
+
+          grid-column: span #{$span} / span #{$span};
+        }
+
+        .#{$prefix}--#{$name}\:col-span-25 {
+          $span: $columns * 0.25;
+          --cds-grid-columns: #{$span};
+
+          grid-column: span #{$span} / span #{$span};
+        }
+      }
+    }
+  }
+
+  // -----------------------------------------------------------------------------
+  // Column percent span
+  // -----------------------------------------------------------------------------
+  .#{$prefix}--col-span-auto {
+    grid-column: auto;
+  }
+
+  .#{$prefix}--col-span-100 {
+    grid-column: 1 / -1;
+  }
+
+  .#{$prefix}--col-span-75 {
+    @include -percent-column-span($breakpoints, 0.75);
+  }
+
+  .#{$prefix}--col-span-50 {
+    @include -percent-column-span($breakpoints, 0.5);
+  }
+
+  .#{$prefix}--col-span-25 {
+    @include -percent-column-span($breakpoints, 0.25);
+  }
+
+  // -----------------------------------------------------------------------------
+  // Column offset
+  // -----------------------------------------------------------------------------
+  // Unconditional column start
+  // Note: we start at 1 and end at column-count to match grid lines. We do not
+  // start at column-count + 1 since starting at the end of the grid would mean
+  // a column would have no width available
+  @for $i from 1 through get-grid-columns($breakpoints) {
+    .#{$prefix}--col-start-#{$i} {
+      grid-column-start: $i;
+    }
+  }
+
+  // Unconditional column end
+  // Note: we start at 2 since a column ending at line 1 would have no width. We
+  // end at column-count + 1 since grid lines start at 1
+  @for $i from 2 through get-grid-columns($breakpoints) + 1 {
+    .#{$prefix}--col-end-#{$i} {
+      grid-column-end: $i;
+    }
+  }
+
+  .#{$prefix}--col-start-auto {
+    grid-column-start: auto;
+  }
+
+  .#{$prefix}--col-end-auto {
+    grid-column-end: auto;
+  }
+
+  // Responsive column start, end
+  @each $name, $value in $breakpoints {
+    @if is-smallest-breakpoint($name, $breakpoints) {
+      // Responsive column start
+      @for $i from 1 through get-grid-columns($breakpoints) {
+        .#{$prefix}--#{$name}\:col-start-#{$i} {
+          grid-column-start: $i;
+        }
+      }
+
+      // Responsive column end
+      @for $i from 2 through get-grid-columns($breakpoints) + 1 {
+        .#{$prefix}--#{$name}\:col-end-#{$i} {
+          grid-column-end: $i;
+        }
+      }
+
+      .#{$prefix}--#{$name}\:col-start-auto {
+        grid-column-start: auto;
+      }
+
+      .#{$prefix}--#{$name}\:col-end-auto {
+        grid-column-end: auto;
+      }
+    } @else {
+      @include breakpoint($name) {
+        // Responsive column start
+        @for $i from 1 through get-grid-columns($breakpoints) {
+          .#{$prefix}--#{$name}\:col-start-#{$i} {
+            grid-column-start: $i;
+          }
+        }
+
+        // Responsive column end
+        @for $i from 2 through get-grid-columns($breakpoints) + 1 {
+          .#{$prefix}--#{$name}\:col-end-#{$i} {
+            grid-column-end: $i;
+          }
+        }
+
+        .#{$prefix}--#{$name}\:col-start-auto {
+          grid-column-start: auto;
+        }
+
+        .#{$prefix}--#{$name}\:col-end-auto {
+          grid-column-end: auto;
+        }
+      }
+    }
+  }
+}
+
+/// Generate the styles for a grid column
+@mixin -column-span($i) {
+  @if $i == 0 {
+    display: none;
+  } @else {
+    --cds-grid-columns: #{$i};
+
+    display: block;
+    grid-column: span $i / span $i;
+  }
+}
+
+/// Generate the styles for an unconditional class that represents a percent
+/// span of a grid
+@mixin -percent-column-span($breakpoints, $percent) {
+  @each $key, $value in $breakpoints {
+    $columns: get-column-count($breakpoints, $key);
+    $span: $columns * $percent;
+
+    @if is-smallest-breakpoint($key, $breakpoints) {
+      --cds-grid-columns: #{$span};
+
+      grid-column: span #{$span} / span #{$span};
+    } @else {
+      $previous-breakpoint: breakpoint-prev($key, $breakpoints);
+      $previous-column-count: get-column-count(
+        $breakpoints,
+        $previous-breakpoint
+      );
+      $previous-span: $previous-column-count * $percent;
+
+      @if $span != $previous-span {
+        @include breakpoint($key) {
+          --cds-grid-columns: #{$span};
+
+          grid-column: span #{$span} / span #{$span};
+        }
+      }
+    }
+  }
+}
+
+/// Get the grid width for a specific breakpoint name
+@function get-grid-width($breakpoints, $breakpoint) {
+  @return map.get(map.get($breakpoints, $breakpoint), width);
+}
+
+/// Get the grid column count for a specific breakpoint name
+@function get-column-count($breakpoints, $breakpoint) {
+  @return map.get(map.get($breakpoints, $breakpoint), columns);
+}
+
+/// Get the grid margin for a specific breakpoint name
+@function get-margin($breakpoints, $breakpoint) {
+  $value: map.get(map.get($breakpoints, $breakpoint), margin);
+  @if $value == 0 {
+    @return 0;
+  }
+  @return $value;
+}
+
+/// Return the largest column count from a set of breakpoints
+@function get-grid-columns($breakpoints) {
+  @return get-column-count($breakpoints, largest-breakpoint-name($breakpoints));
+}

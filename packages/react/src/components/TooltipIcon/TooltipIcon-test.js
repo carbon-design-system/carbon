@@ -33,7 +33,7 @@ describe('TooltipIcon', () => {
 
   it('should have an ID on the content container by default', () => {
     const wrapper = mount(<TooltipIcon {...mockProps} />);
-    expect(wrapper.find('.bx--assistive-text').props().id).toBeTruthy();
+    expect(wrapper.find('.cds--assistive-text').props().id).toBeTruthy();
   });
 
   it('should allow the user to specify the direction', () => {

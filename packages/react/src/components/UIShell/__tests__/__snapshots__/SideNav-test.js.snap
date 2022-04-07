@@ -11,12 +11,12 @@ exports[`SideNav should render 1`] = `
   isPersistent={true}
 >
   <div
-    className="bx--side-nav__overlay"
+    className="cds--side-nav__overlay"
   />
   <nav
     aria-hidden={false}
     aria-label="Navigation"
-    className="bx--side-nav__navigation bx--side-nav bx--side-nav--ux"
+    className="cds--side-nav__navigation cds--side-nav cds--side-nav--ux"
     onBlur={[Function]}
     onFocus={[Function]}
   >
@@ -29,20 +29,20 @@ exports[`SideNav should render 1`] = `
         large={false}
       >
         <li
-          className="bx--side-nav__item"
+          className="cds--side-nav__item"
         >
           <Link
-            className="bx--side-nav__link"
+            className="cds--side-nav__link"
             element="a"
             href="/"
           >
             <a
-              className="bx--side-nav__link"
+              className="cds--side-nav__link"
               href="/"
             >
               <SideNavLinkText>
                 <span
-                  className="bx--side-nav__link-text"
+                  className="cds--side-nav__link-text"
                 >
                   Navigation
                 </span>
