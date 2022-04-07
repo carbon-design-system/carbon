@@ -6,19 +6,19 @@
 
 There are several entrypoints that you can use with `@carbon/themes`, including:
 
-| Filename                                     | Description                                            |
-| -------------------------------------------- | ------------------------------------------------------ |
-| `@use '@carbon/themes';`                     | Package entrypoint                                     |
-| `@use '@carbon/themes/scss/config';`         | Specify config options for the package                 |
-| `@use '@carbon/themes/scss/themes';`         | Theme definitions for white, g10, g90, and g100        |
-| `@use '@carbon/themes/scss/theme';`          | Set the current theme, get token values from the theme |
-| `@use '@carbon/themes/scss/tokens';`         | Access theme tokens                                    |
-| `@use '@carbon/themes/scss/compat/themes';`  | v10 Theme definitions for white, g10, g90, and g100    |
-| `@use '@carbon/themes/scss/compat/tokens';`  | v10 theme tokens                                       |
+| Filename                                    | Description                                            |
+| ------------------------------------------- | ------------------------------------------------------ |
+| `@use '@carbon/themes';`                    | Package entrypoint                                     |
+| `@use '@carbon/themes/scss/config';`        | Specify config options for the package                 |
+| `@use '@carbon/themes/scss/themes';`        | Theme definitions for white, g10, g90, and g100        |
+| `@use '@carbon/themes/scss/theme';`         | Set the current theme, get token values from the theme |
+| `@use '@carbon/themes/scss/tokens';`        | Access theme tokens                                    |
+| `@use '@carbon/themes/scss/compat/themes';` | v10 Theme definitions for white, g10, g90, and g100    |
+| `@use '@carbon/themes/scss/compat/tokens';` | v10 theme tokens                                       |
 
 _Note: the white, g10, g90, and g100 themes are only available in the
-`scss/themes` file and are not re-exported in `@carbon/themes`. To learn
-more, checkout our [FAQ](#why-are-the-themes-not-exported-in-carbonthemes)._
+`scss/themes` file and are not re-exported in `@carbon/themes`. To learn more,
+checkout our [FAQ](#why-are-the-themes-not-exported-in-carbonthemes)._
 
 You can bring in `@carbon/themes` by using `@use`:
 
