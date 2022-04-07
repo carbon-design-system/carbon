@@ -397,7 +397,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    thumbnailPath: ./thumbnails/ui-shell.svg
+    thumbnailPath: ./thumbnails/ui-shell-left-panel.svg
     tags:
       - shell
   ui-shell-right-panel:
@@ -408,7 +408,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    thumbnailPath: ./thumbnails/ui-shell.svg
+    thumbnailPath: ./thumbnails/ui-shell-right-panel.svg
     tags:
       - shell
   aspect-ratio:
@@ -418,8 +418,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: do not have a thumbnail for this yet
-    # thumbnailPath: ./thumbnails/.svg
+    thumbnailPath: ./thumbnails/aspect-ratio.svg
     tags:
       - content-element
   progress-bar:
@@ -430,7 +429,6 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: do not have a thumbnail for this yet
-    # thumbnailPath: ./thumbnails/.svg
+    thumbnailPath: ./thumbnails/progress-bar.svg
     tags:
       - content-element
