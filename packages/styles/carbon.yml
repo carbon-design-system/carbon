@@ -532,7 +532,6 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/grid.svg
     # TODO: confirm with aubrey
     tags:
@@ -544,7 +543,6 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/popover.svg
     # TODO: confirm with aubrey
     tags:
