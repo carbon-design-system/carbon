@@ -432,3 +432,121 @@ assets:
     thumbnailPath: ./thumbnails/progress-bar.svg
     tags:
       - content-element
+  copy-button:
+    name: Copy button
+    description: The copy button should be accompanied by a tooltip. Tooltip feedback text should be concise and describe the action taken when the user clicks the copy button. By default we display the text “Copied!”.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/copy-button.svg
+    # TODO: confirm with aubrey
+    tags:
+      - input-control
+  combo-box:
+    name: Combo box
+    description: A combobox allows the user to make a selection from a predefined list of options and is typically used when there are a large amount of options to choose from.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/combo-box.svg
+    # TODO: confirm with aubrey
+    tags:
+      - input-control
+  text-area:
+    name: Text area
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/text-area.svg
+    # TODO: confirm with aubrey
+    tags:
+      - input-control
+  time-picker:
+    name: Time picker
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/time-picker.svg
+    # TODO: confirm with aubrey
+    tags:
+     - input-control
+  tooltip-definition:
+    name: Tooltip definition
+    description: The DefinitionTooltip component is used to provide additional information about a particular term or phrase in text content. It is similar to a Tooltip component but has fewer alignment options and has a slightly different interaction pattern.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/tooltip-definition.svg
+    # TODO: confirm with aubrey
+    tags:
+      - content-element
+  tree-view:
+    name: Tree view
+    status: experimental
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/tree-view.svg
+    # TODO: confirm with aubrey
+    tags:
+      - contextual-navigation
+  theme:
+    name: Theme
+    description: The GlobalTheme and Theme components allow you to specify the theme for a page, or for a part of a page, respectively. Theme is most often used to implement inline theming where you can style a portion of your page with a particular theme.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/theme.svg
+    # TODO: confirm with aubrey
+    tags:
+      - data-display
+  pagination-nav:
+    name: Pagination nav
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/pagination-nav.svg
+    # TODO: confirm with aubrey
+    tags:
+      - data-display
+      - contextual-navigation
+  grid:
+    name: Grid
+    description: Carbon's grid components help developers use the 2x Grid. The project provides Grid and Column components which can be used to build a variety of layouts. You can import these components from @carbon/react
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/grid.svg
+    # TODO: confirm with aubrey
+    tags:
+      - content-block
+  popover:
+    name: Popover
+    description: Popover is a primitive component used to build custom components which render over other elements on the page. For example, Popover is used to build our popover components in Carbon.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm this
+    thumbnailPath: ./thumbnails/popover.svg
+    # TODO: confirm with aubrey
+    tags:
+      - content-block
+      - data-display
