@@ -2,11 +2,13 @@
 <svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>progress-bar</title>
     <g id="progress-bar" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(56.000000, 74.000000)">
-            <rect id="Rectangle" fill="#D8D8D8" x="0" y="12" width="208" height="8"></rect>
-            <rect id="Rectangle-Copy" fill="#697077" x="0" y="0" width="51" height="5"></rect>
-            <rect id="Rectangle-Copy-2" x="0" y="27" width="51" height="5"></rect>
-            <rect id="Rectangle" fill="#0F62FE" x="0" y="12" width="133" height="8"></rect>
+        <g id="Group" transform="translate(56.000000, 68.000000)">
+            <rect id="Rectangle" fill="#E0E0E0" x="0" y="23" width="208" height="8"></rect>
+            <rect id="Rectangle" fill="#0F62FE" x="0" y="23" width="156" height="8"></rect>
+            <text id="Progress-bar" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
+                <tspan x="0" y="12">Progress bar</tspan>
+            </text>
         </g>
+        <rect id="Rectangle" x="59" y="101" width="44" height="9"></rect>
     </g>
 </svg>

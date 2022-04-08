@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>pagination-nav</title>
+    <defs>
+        <polygon id="path-1" points="5.5 4.5 9.5 8 5.5 11.5"></polygon>
+        <polygon id="path-3" points="5.5 4.5 9.5 8 5.5 11.5"></polygon>
+    </defs>
+    <g id="pagination-nav" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(56.000000, 70.000000)">
+            <g transform="translate(0.000000, 12.000000)" id="icon/navigation/caret/left/16">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="icon-color" fill="#8C8C8C" transform="translate(7.500000, 8.000000) scale(-1, 1) translate(-7.500000, -8.000000) " xlink:href="#path-1"></use>
+            </g>
+            <g transform="translate(192.000000, 12.000000)" id="icon/navigation/caret/left/16-copy">
+                <g transform="translate(8.000000, 8.000000) scale(-1, 1) translate(-8.000000, -8.000000) ">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="icon-color" fill="#171717" transform="translate(7.500000, 8.000000) scale(-1, 1) translate(-7.500000, -8.000000) " xlink:href="#path-3"></use>
+                </g>
+            </g>
+            <text id="1" font-family="IBMPlexSans-SemiBold, IBM Plex Sans" font-size="12" font-weight="500" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
+                <tspan x="45" y="23">1</tspan>
+            </text>
+            <text id="2" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
+                <tspan x="82" y="23">2</tspan>
+            </text>
+            <text id="3" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
+                <tspan x="119" y="23">3</tspan>
+            </text>
+            <text id="4" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
+                <tspan x="156" y="23">4</tspan>
+            </text>
+            <rect id="Rectangle" fill="#0F62FE" x="41" y="35" width="16" height="4"></rect>
+            <rect id="Rectangle-Copy" x="41" y="0" width="16" height="4"></rect>
+        </g>
+    </g>
+</svg>
