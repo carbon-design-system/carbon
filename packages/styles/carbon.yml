@@ -439,9 +439,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/copy-button.svg
-    # TODO: confirm with aubrey
     tags:
       - input-control
   combo-box:
@@ -451,9 +449,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/combo-box.svg
-    # TODO: confirm with aubrey
     tags:
       - input-control
   text-area:
@@ -462,9 +458,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/text-area.svg
-    # TODO: confirm with aubrey
     tags:
       - input-control
   time-picker:
@@ -473,9 +467,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/time-picker.svg
-    # TODO: confirm with aubrey
     tags:
      - input-control
   tooltip-definition:
@@ -485,9 +477,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/tooltip-definition.svg
-    # TODO: confirm with aubrey
     tags:
       - content-element
   tree-view:
@@ -496,9 +486,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/tree-view.svg
-    # TODO: confirm with aubrey
     tags:
       - contextual-navigation
   theme:
@@ -508,9 +496,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/theme.svg
-    # TODO: confirm with aubrey
     tags:
       - data-display
   pagination-nav:
@@ -519,9 +505,7 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm this
     thumbnailPath: ./thumbnails/pagination-nav.svg
-    # TODO: confirm with aubrey
     tags:
       - data-display
       - contextual-navigation
@@ -533,7 +517,6 @@ assets:
     platform: web
     noIndex: true
     thumbnailPath: ./thumbnails/grid.svg
-    # TODO: confirm with aubrey
     tags:
       - content-block
   popover:
@@ -544,7 +527,6 @@ assets:
     platform: web
     noIndex: true
     thumbnailPath: ./thumbnails/popover.svg
-    # TODO: confirm with aubrey
     tags:
       - content-block
       - data-display
