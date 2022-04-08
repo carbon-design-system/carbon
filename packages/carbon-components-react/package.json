@@ -33,8 +33,8 @@
     "postinstall": "carbon-telemetry collect --install"
   },
   "peerDependencies": {
-    "react": "^16.8.6 || ^17.0.1",
-    "react-dom": "^16.8.6 || ^17.0.1",
+    "react": "^16.8.6 || ^17.0.1 || ^18.0.0",
+    "react-dom": "^16.8.6 || ^17.0.1 || ^18.0.0",
     "sass": "^1.33.0"
   },
   "dependencies": {

@@ -2059,8 +2059,8 @@ __metadata:
     wicg-inert: ^3.1.1
     window-or-global: ^1.0.1
   peerDependencies:
-    react: ^16.8.6 || ^17.0.1
-    react-dom: ^16.8.6 || ^17.0.1
+    react: ^16.8.6 || ^17.0.1 || ^18.0.0
+    react-dom: ^16.8.6 || ^17.0.1 || ^18.0.0
     sass: ^1.33.0
   languageName: unknown
   linkType: soft
@@ -10439,8 +10439,8 @@ __metadata:
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
   peerDependencies:
-    react: ^16.8.6 || ^17.0.1
-    react-dom: ^16.8.6 || ^17.0.1
+    react: ^16.8.6 || ^17.0.1 || ^18.0.0
+    react-dom: ^16.8.6 || ^17.0.1 || ^18.0.0
     sass: ^1.33.0
   languageName: unknown
   linkType: soft
