@@ -21,6 +21,11 @@ export default {
   subcomponents: {
     SliderSkeleton,
   },
+  argTypes: {
+    disabled: {
+      control: { type: 'boolean' },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -28,8 +33,9 @@ export default {
   },
 };
 
-export const Default = () => (
+export const Default = (args) => (
   <Slider
+    {...args}
     labelText="Slider Label"
     value={50}
     min={0}

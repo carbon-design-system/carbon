@@ -154,7 +154,7 @@
   }
 
   .#{$prefix}--slider--disabled .#{$prefix}--slider__thumb {
-    background-color: $border-subtle;
+    background-color: $border-disabled;
 
     &:hover {
       cursor: not-allowed;
@@ -162,14 +162,14 @@
     }
 
     &:focus {
-      background-color: $border-subtle;
+      background-color: $border-disabled;
       box-shadow: none;
       outline: none;
       transform: translate(-50%, -50%);
     }
 
     &:active {
-      background: $border-subtle;
+      background: $border-disabled;
       transform: translate(-50%, -50%);
     }
   }
@@ -179,7 +179,7 @@
   .#{$prefix}--slider--disabled
     .#{$prefix}--slider__thumb:focus
     ~ .#{$prefix}--slider__filled-track {
-    background-color: $border-subtle;
+    background-color: $border-disabled;
   }
 
   .#{$prefix}--slider--disabled
