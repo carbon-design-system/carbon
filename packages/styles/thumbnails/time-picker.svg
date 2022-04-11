@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>time-picker</title>
+    <defs>
+        <polygon id="path-1" points="3.75 0 7.5 3.75 6.96975 4.28025 3.75 1.0605 0.53025 4.28025 0 3.75"></polygon>
+        <polygon id="path-3" points="3.75 0 7.5 3.75 6.96975 4.28025 3.75 1.0605 0.53025 4.28025 0 3.75"></polygon>
+    </defs>
+    <g id="time-picker" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-11-Copy" fill="#F3F3F3" x="56" y="74" width="57" height="32"></rect>
+        <rect id="Rectangle-11-Copy-2" fill="#F3F3F3" x="115" y="74" width="56" height="32"></rect>
+        <rect id="Rectangle-11-Copy-3" fill="#F3F3F3" x="173" y="74" width="91" height="32"></rect>
+        <line x1="56" y1="105.5" x2="113" y2="105.5" id="Path-3-Copy-8" stroke="#8C8C8C"></line>
+        <line x1="115" y1="105.5" x2="171" y2="105.5" id="Path-3-Copy-9" stroke="#8C8C8C"></line>
+        <line x1="173" y1="105.5" x2="264" y2="105.5" id="Path-3-Copy-10" stroke="#8C8C8C"></line>
+        <text id="hh:mm" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" fill="#525252">
+            <tspan x="65.956" y="94">hh:mm</tspan>
+        </text>
+        <text id="Timezone" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" fill="#161616">
+            <tspan x="180.78" y="94">Timezone</tspan>
+        </text>
+        <text id="AM" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" fill="#161616">
+            <tspan x="124.282" y="94">AM</tspan>
+        </text>
+        <g id="Group" transform="translate(244.000000, 84.000000)">
+            <g id="Group" transform="translate(6.000000, 6.000000) scale(1, -1) translate(-6.000000, -6.000000) ">
+                <g id="chevron--up" transform="translate(2.250000, 3.750000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="Group" mask="url(#mask-2)">
+                        <g transform="translate(-2.250000, -3.750000)" id="icon-color">
+                            <rect id="Rectangle" fill="#171717" x="0" y="0" width="30" height="30"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(6.000000, 6.000000) rotate(-90.000000) translate(-6.000000, -6.000000) " points="8.8817842e-16 7.34788079e-16 12 7.34788079e-16 12 12 8.8817842e-16 12"></polygon>
+            </g>
+        </g>
+        <g id="Group" transform="translate(151.000000, 84.000000)">
+            <g id="Group" transform="translate(6.000000, 6.000000) scale(1, -1) translate(-6.000000, -6.000000) ">
+                <g id="chevron--up" transform="translate(2.250000, 3.750000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <g id="Group" mask="url(#mask-4)">
+                        <g transform="translate(-2.250000, -3.750000)" id="icon-color">
+                            <rect id="Rectangle" fill="#171717" x="0" y="0" width="30" height="30"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(6.000000, 6.000000) rotate(-90.000000) translate(-6.000000, -6.000000) " points="8.8817842e-16 7.34788079e-16 12 7.34788079e-16 12 12 8.8817842e-16 12"></polygon>
+            </g>
+        </g>
+        <rect id="Rectangle-3-Copy-9" fill="#8D8D8D" x="56" y="63" width="43" height="5"></rect>
+        <rect id="Rectangle-3-Copy-10" x="56" y="111" width="50" height="5"></rect>
+    </g>
+</svg>
