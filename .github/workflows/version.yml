@@ -9,7 +9,7 @@ on:
         default: prerelease
         options:
           - prerelease
-          - graduate
+          - stable
 jobs:
   version:
     name: Create version
@@ -26,7 +26,5 @@ jobs:
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Create prerelease versions
         if: ${{ github.event.inputs.type == 'prerelease' }}
-        run: yarn lerna version preminor --preid rc --no-changelog --yes
-      - name: Graduate prerelease versions
-        if: ${{ github.event.inputs.type == 'graduate' }}
-        run: yarn lerna version --conventional-graduate --no-changelog --yes
+        run: |
+          yarn lerna version preminor --no-git-tag-version --no-push --preid rc --yes
