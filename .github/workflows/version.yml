@@ -1,4 +1,9 @@
 name: Version
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   workflow_dispatch:
     inputs:
@@ -10,13 +15,16 @@ on:
         options:
           - prerelease
           - stable
+
 jobs:
   version:
-    name: Create version
     runs-on: ubuntu-latest
+    if: github.repository == 'carbon-design-system/carbon'
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v3
+        with:
+          ref: ${{ github.event.inputs.ref }}
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
@@ -24,7 +32,13 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
-      - name: Create prerelease versions
+      - name: Create prerelease
         if: ${{ github.event.inputs.type == 'prerelease' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Setup credentials for git author
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+
           yarn lerna version preminor --no-git-tag-version --no-push --preid rc --yes
