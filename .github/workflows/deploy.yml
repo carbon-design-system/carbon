@@ -38,4 +38,4 @@ jobs:
       - name: Deploy to GitHub Pages
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          npx gh-pages -d gh-pages -u "github-actions <github-actions@github.com>"
+          npx gh-pages -d gh-pages -u "github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
