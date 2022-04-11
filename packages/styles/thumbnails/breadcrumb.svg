@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>breadcrumb</title>
+    <g id="breadcrumb" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal">
+        <text id="Crumb-3" fill="#171717">
+            <tspan x="199" y="92">Crumb 3</tspan>
+        </text>
+        <text id="Crumb-1" fill="#0062FF">
+            <tspan x="65" y="92">Crumb 1</tspan>
+        </text>
+        <text id="Crumb-1-Copy" fill="#171717">
+            <tspan x="132" y="92">Crumb 1</tspan>
+        </text>
+        <text id="/-copy-26" fill="#171717">
+            <tspan x="119" y="92">/</tspan>
+        </text>
+        <text id="/-copy-122" fill="#171717">
+            <tspan x="186" y="92">/</tspan>
+        </text>
+    </g>
+</svg>
