@@ -1,0 +1,32 @@
+name: Version
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        required: true
+        description: 'Specify the type of release'
+        type: choice
+        default: prerelease
+        options:
+          - prerelease
+          - graduate
+jobs:
+  version:
+    name: Create version
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Create prerelease versions
+        if: ${{ github.event.inputs.bump == 'prerelease' }}
+        run: yarn lerna version preminor --preid rc --no-changelog --yes
+      - name: Graduate prerelease versions
+        if: ${{ github.event.inputs.bump == 'graduate' }}
+        run: yarn lerna version --conventional-graduate --no-changelog --yes
