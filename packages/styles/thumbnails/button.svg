@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>button</title>
+    <defs>
+        <polygon id="path-1" points="7.96875 7.03125 7.96875 3.28125 7.03125 3.28125 7.03125 7.03125 3.28125 7.03125 3.28125 7.96875 7.03125 7.96875 7.03125 11.71875 7.96875 11.71875 7.96875 7.96875 11.71875 7.96875 11.71875 7.03125"></polygon>
+    </defs>
+    <g id="button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="button-/-01-primary-/-field-/-02-text-and-icon-/-01-enabled" transform="translate(72.000000, 74.000000)">
+            <g id="Button">
+                <rect id="Background" fill="#0F62FE" x="0" y="0" width="176" height="32"></rect>
+                <text id="Label" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="16" letter-spacing="0.137142854" fill="#FFFFFF">
+                    <tspan x="16" y="20">Primary button</tspan>
+                </text>
+            </g>
+            <g id="Icon" transform="translate(146.000000, 9.000000)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="icon-color" fill="#FFFFFF" xlink:href="#path-1"></use>
+            </g>
+        </g>
+    </g>
+</svg>

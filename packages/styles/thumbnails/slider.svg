@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>slider</title>
+    <g id="slider" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M64.5522388,92 L64.4829671,91.9922086 C64.2106709,91.930502 64,91.5098013 64,91 C64,90.4477153 64.2472457,90 64.5522388,90 L64.5522388,90 L211.447761,90 C211.752754,90 212,90.4477153 212,91 C212,91.5522847 211.752754,92 211.447761,92 L211.447761,92 L64.5522388,92 Z" id="Combined-Shape-Copy-3" fill="#C6C6C6" transform="translate(138.000000, 91.000000) scale(1, -1) translate(-138.000000, -91.000000) "></path>
+        <path d="M57.0281219,91.9941321 C56.4500112,91.9398399 56,91.5154658 56,91 C56,90.4477153 56.5165945,90 57.1538462,90 L57.1538462,90 L101,90 L101,92 L57.1538462,92 Z" id="Combined-Shape-Copy-4" fill="#3D3D3D"></path>
+        <circle id="Oval-Copy-61" fill="#3D3D3D" cx="106" cy="91" r="7"></circle>
+        <g id="color/gray/20-copy-2" transform="translate(138.000000, 85.000000)" fill="#BEBEBE">
+            <rect id="gray-30" x="0" y="0" width="2" height="4"></rect>
+        </g>
+        <rect id="Rectangle-Copy-16" fill="#F3F3F3" x="222" y="74" width="42" height="32"></rect>
+        <rect id="Rectangle-Copy-15" fill="#A8A8A8" x="234" y="87" width="18" height="7"></rect>
+        <line x1="222" y1="106" x2="264" y2="106" id="Path-3-Copy" stroke="#8C8C8C"></line>
+    </g>
+</svg>
