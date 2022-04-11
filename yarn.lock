@@ -1996,7 +1996,7 @@ __metadata:
     "@carbon/test-utils": ^10.22.0
     "@carbon/themes": ^11.0.1
     "@cypress/react": ^5.11.0
-    "@cypress/webpack-dev-server": 1.8.3
+    "@cypress/webpack-dev-server": 1.8.4
     "@percy/cypress": ^3.1.1
     "@percy/storybook": ^4.1.0
     "@rollup/plugin-babel": ^5.3.0
@@ -2584,18 +2584,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cypress/webpack-dev-server@npm:1.8.3":
-  version: 1.8.3
-  resolution: "@cypress/webpack-dev-server@npm:1.8.3"
+"@cypress/webpack-dev-server@npm:1.8.4":
+  version: 1.8.4
+  resolution: "@cypress/webpack-dev-server@npm:1.8.4"
   dependencies:
     debug: ^4.3.2
+    lodash: ^4.17.21
     semver: ^7.3.4
     webpack-merge: ^5.4.0
   peerDependencies:
     html-webpack-plugin: ">=4"
     webpack: ">=4"
     webpack-dev-server: ">=3.0.0"
-  checksum: f304baeb69946bb10b9eadce6e4140cc4765a3166e18f31aee54fcd3e0969cbc9c8b3432a2bf11bcceb0375934958d1b9ebe7d95fabf373a8c501ff4175c4ad2
+  checksum: cfe2638b95a15cbe0271478c90062ff891cd2aad4b8cf23efb9d2c1d1e118c62db267b6b9a2953164ad3f5e735a5fa0a8d4811b87e8cce21b841ffec8c6464f7
   languageName: node
   linkType: hard
 
