@@ -1,0 +1,41 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+  # push:
+  # tags:
+  # # Matches tags that have the shape `vX.Y.Z`. Reference:
+  # # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requesttagsbranches
+  # - 'v[0-9]+.[0-9]+.[0-9]+'
+
+  # # Ignore tags that use a preid after `vX.Y.Z`, for example: vX.Y.Z-alpha.0
+  # # https://help.github.com/en/articles/workflow-syntax-for-github-actions#example-using-positive-and-negative-patterns
+  # - '!v[0-9]+.[0-9]+.[0-9]+-*'
+  # - '!v10*'
+
+jobs:
+  gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+      - name: Build project
+        run: yarn build
+      - name: Build React storybook
+        run: yarn workspace @carbon/react build-storybook
+      - name: Setup GitHub Pages folder
+        run: |
+          # Move static assets to the react subdirectory
+          mv packages/react/storybook-static gh-pages
+
+          # Setup CNAME record for React storybook
+          echo 'staging.react.carbondesignsystem.com' > gh-pages/CNAME
+      - name: Deploy to GitHub Pages
+        run: |
+          git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          npx gh-pages -d gh-pages -u "github-actions <github-actions@github.com>"
