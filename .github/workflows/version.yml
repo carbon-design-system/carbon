@@ -25,8 +25,8 @@ jobs:
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Create prerelease versions
-        if: ${{ github.event.inputs.bump == 'prerelease' }}
+        if: ${{ github.event.inputs.type == 'prerelease' }}
         run: yarn lerna version preminor --preid rc --no-changelog --yes
       - name: Graduate prerelease versions
-        if: ${{ github.event.inputs.bump == 'graduate' }}
+        if: ${{ github.event.inputs.type == 'graduate' }}
         run: yarn lerna version --conventional-graduate --no-changelog --yes
