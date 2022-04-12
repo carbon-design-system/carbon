@@ -39,4 +39,4 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
-          yarn lerna version preminor --preid rc --yes
+          yarn lerna version preminor --no-git-tag-version --preid rc --yes
