@@ -673,7 +673,7 @@ assets:
       tags:
         - content-element
     tree-view:
-      status: stable
+      status: experimental
       framework: react
       demoLinks:
         - type: storybook
