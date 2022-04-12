@@ -57,23 +57,15 @@ assets:
         - type: storybook
           name: Storybook
           action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-codesnippet--inline
+          url: https://react.carbondesignsystem.com/?path=/docs/components-codesnippet
     combo-box:
-      name: Combobox
-      framework: react
       status: stable
-      type: component
-      platform: web
-      # TODO: add thumbnail
-      thumbnailPath: 
+      framework: react
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-combobox
-      # TODO: double check with Aubrey
-      tags:
-        - data-display
     composed-modal:
       name: Composed modal
       framework: react
@@ -87,7 +79,7 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-composedmodal
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - input-control
     content-switcher:
@@ -147,7 +139,7 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-errorboundary
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - system-feedback
     file-uploader:
@@ -172,7 +164,7 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - shell
     form:
@@ -197,9 +189,9 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
-        # TODO: double check with Aubrey
+        # TODO: @Aubrey - double check tags
         tags:
-          - form-group
+          - form
           - input-control  
     form-label:
         name: Form label
@@ -214,7 +206,7 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
-        # TODO: double check with Aubrey
+        # TODO: @Aubrey - double check tags
         tags:
           - content-element
     icon-button:
@@ -230,7 +222,7 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-iconbutton
-        # TODO: double check with Aubrey
+        # TODO: @Aubrey - double check tags
         tags:
           - content-element
           - input-control
@@ -256,7 +248,7 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-layer
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - shell 
     link:
@@ -326,7 +318,7 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-orderedlist
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - data-display
     overlow-menu:
@@ -358,6 +350,7 @@ assets:
     popover:
       status: stable
       framework: react
+      externalDocsUrl: https://www.carbondesignsystem.com/components/popover/usage
       demoLinks:
         - type: storybook
           name: Storybook
@@ -421,7 +414,7 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-skeleton
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - shell
     slider:
@@ -511,7 +504,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-toggle
-    # TODO: ask francine is it okay to add external docs?
     toggletip:
       name: Toggletip
       framework: react
@@ -526,7 +518,7 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-toggletip
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - content-element 
     tooltip:
@@ -559,27 +551,19 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-tooltipicon
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - content-block
         - data-display 
-    ui-shell:
-      name: UI shell
+    ui-shell-header:
       framework: react
+      externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
       status: stable
-      type: component
-      platform: web
-      # TODO: add thumbnail
-      thumbnailPath: 
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
-      # TODO: double check with Aubrey
-      tags:
-        - content-block
-        - data-display 
     unordered-list:
       name: Unordered list
       framework: react
@@ -593,7 +577,155 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
-      # TODO: double check with Aubrey
+      # TODO: @Aubrey - double check tags
       tags:
         - content-block
         - data-display 
+    # TODO: @Matt (component or element) is element still a type?
+    grid:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/elements-grid
+    IBM Plex:
+      name: IBM Plex
+      framework: react
+      status: stable
+      type: element
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/elements-ibm-plex
+      # TODO: @Aubrey - double check tags
+      tags:
+        - content-element
+    icons:
+      name: icons
+      framework: react
+      status: stable
+      type: element
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/elements-icons
+      # TODO: @Aubrey - double check tags
+      tags:
+        - content-element
+    fluid-form:
+      name: Fluid form
+      framework: react
+      status: experimental
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/experimental-fluidform
+      # TODO: @Aubrey - double check tags
+      tags:
+        - content-block
+    unstable-heading:
+      name: Unstable heading
+      framework: react
+      status: experimental
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-heading
+      # TODO: @Aubrey - double check tags
+      tags:
+        - content-element
+    unstable-menu:
+      name: Unstable menu
+      framework: react
+      status: experimental
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu
+      # TODO: @Aubrey - double check tags
+      tags:
+        - content-block
+        - data-display
+    unstable-pagination:
+      name: Unstable pagination
+      framework: react
+      status: experimental
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-pagination
+      # TODO: @Aubrey - double check tags
+      tags:
+        - data-display
+        - contextual-navigation
+    unstable-text:
+      name: Unstable text
+      framework: react
+      status: experimental
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
+      # TODO: @Aubrey - double check tags
+      tags:
+        - content-element
+    tree-view:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
+    # TODO: @Matt how do we categorize layout?
+    stack:
+      name: stack
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
+      # TODO: @Aubrey - double check tags
+      tags:
+        - data-display
