@@ -23,8 +23,6 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.ref }}
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
