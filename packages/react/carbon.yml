@@ -73,7 +73,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -133,7 +133,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -158,7 +158,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -183,7 +183,7 @@ assets:
         type: component
         platform: web
         # TODO: add thumbnail
-        thumbnailPath: 
+        thumbnailPath: '' 
         demoLinks:
           - type: storybook
             name: Storybook
@@ -200,7 +200,7 @@ assets:
         type: component
         platform: web
         # TODO: add thumbnail
-        thumbnailPath: 
+        thumbnailPath: '' 
         demoLinks:
           - type: storybook
             name: Storybook
@@ -216,7 +216,7 @@ assets:
         type: component
         platform: web
         # TODO: add thumbnail
-        thumbnailPath: 
+        thumbnailPath: '' 
         demoLinks:
           - type: storybook
             name: Storybook
@@ -242,7 +242,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -312,7 +312,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -321,7 +321,7 @@ assets:
       # TODO: @Aubrey - double check tags
       tags:
         - data-display
-    overlow-menu:
+    overflow-menu:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
       framework: react
@@ -408,7 +408,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -512,7 +512,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -545,7 +545,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -571,7 +571,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -597,7 +597,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -613,7 +613,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -629,7 +629,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -646,7 +646,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -663,7 +663,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -688,7 +688,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: 
+      thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
