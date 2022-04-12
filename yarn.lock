@@ -6935,7 +6935,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/jest-dom@npm:^5.16.1, @testing-library/jest-dom@npm:^5.16.3":
+"@testing-library/jest-dom@npm:^5.16.1":
   version: 5.16.3
   resolution: "@testing-library/jest-dom@npm:5.16.3"
   dependencies:
@@ -6952,7 +6952,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:^12.1.2, @testing-library/react@npm:^12.1.4":
+"@testing-library/react@npm:^12.1.2":
   version: 12.1.4
   resolution: "@testing-library/react@npm:12.1.4"
   dependencies:
@@ -11225,14 +11225,10 @@ __metadata:
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
     "@carbon/react": ^1.0.3
-    "@testing-library/jest-dom": ^5.16.3
-    "@testing-library/react": ^12.1.4
-    "@testing-library/user-event": ^13.5.0
-    react: ^18.0.0
-    react-dom: ^18.0.0
+    react: ^17.0.0
+    react-dom: ^17.0.0
     react-scripts: 5.0.0
     sass: ^1.49.11
-    web-vitals: ^2.1.4
   languageName: unknown
   linkType: soft
 
@@ -31505,13 +31501,6 @@ resolve@^2.0.0-next.3:
   version: 1.1.4
   resolution: "web-namespaces@npm:1.1.4"
   checksum: 5149842ccbfbc56fe4f8758957b3f8c8616a281874a5bb84aa1b305e4436a9bad853d21c629a7b8f174902449e1489c7a6c724fccf60965077c5636bd8aed42b
-  languageName: node
-  linkType: hard
-
-"web-vitals@npm:^2.1.4":
-  version: 2.1.4
-  resolution: "web-vitals@npm:2.1.4"
-  checksum: 03d3f47dbf55c3dce07beb0ff5de8ddd52e2d0a53a8df5c84e7a16dda93543341d67231fa79b1d9772b091419af4ec0fd395b8bcf451a0e26846e3f76b3d0efc
   languageName: node
   linkType: hard
 
