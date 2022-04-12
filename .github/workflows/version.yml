@@ -15,6 +15,10 @@ on:
         options:
           - prerelease
           - stable
+      tag:
+        required: true
+        description: 'Specify the tag for this release'
+        type: string
 
 jobs:
   version:
@@ -25,7 +29,6 @@ jobs:
       - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
-          ref: 'main'
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
@@ -45,12 +48,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Setup credentials for git author
-          git config user.name 'github-actions[bot]'
-          git config user.email 'github-actions[bot]@users.noreply.github.com'
-
           yarn lerna version preminor --no-git-tag-version --preid rc --yes
-          
-          git add -A
-          git commit -m 'chore(release): version packages for prerelease'
-          git push
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: 'release/${{ github.event.inputs.tag }}'
+          commit-message: 'chore(release): ${{ github.event.inputs.tag }}'
+          delete-branch: true
+          title: 'Release ${{ github.event.inputs.tag }}'
+          body: 'Automated release PR for ${{ github.event.inputs.tag }}'
