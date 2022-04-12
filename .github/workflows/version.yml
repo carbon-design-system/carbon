@@ -49,6 +49,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn lerna version preminor --no-git-tag-version --preid rc --yes
+          yarn
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
