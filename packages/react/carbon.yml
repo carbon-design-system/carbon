@@ -119,7 +119,7 @@ assets:
           url: https://react.carbondesignsystem.com/?path=/docs/components-datepicker
     dropdown:
       status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/
+      externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage
       framework: react
       demoLinks:
         - type: storybook
