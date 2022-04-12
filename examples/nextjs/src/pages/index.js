@@ -18,11 +18,11 @@ export default function Home() {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
+          This is the Button component from Carbon
+          <div>
+            <Button>Hello world</Button>
+          </div>
         </p>
-
-        <Button>Hello world</Button>
 
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>

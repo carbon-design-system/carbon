@@ -1,1 +1,17 @@
-@use '@carbon/react';
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/scss/grid';
+@use '@carbon/react/scss/layer';
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/components/button';
+
+body {
+  background: theme.$background;
+  color: theme.$text-primary;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include theme.theme(themes.$g100);
+  }
+}
