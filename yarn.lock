@@ -4026,6 +4026,14 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/swc-linux-x64-gnu@npm:^11.1.2":
+  version: 11.1.4
+  resolution: "@next/swc-linux-x64-gnu@npm:11.1.4"
+  checksum: fbe748fa5c6c5abd601a6c1edc323b2617e7e68973bfd5fded5b7cf216dbc7c04db229b08f5b60c00d462c473801f664164182e59f46ea29ce1eeb548e6793b5
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
 "@next/swc-linux-x64-musl@npm:12.1.4":
   version: 12.1.4
   resolution: "@next/swc-linux-x64-musl@npm:12.1.4"
@@ -21828,6 +21836,7 @@ fsevents@^1.2.7:
   resolution: "nextjs@workspace:examples/nextjs"
   dependencies:
     "@carbon/react": ^1.0.3
+    "@next/swc-linux-x64-gnu": ^11.1.2
     eslint: 8.12.0
     eslint-config-next: 12.1.4
     next: 12.1.4
