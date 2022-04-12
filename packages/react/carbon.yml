@@ -306,7 +306,7 @@ assets:
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-numberinput
     ordered-list:
-      name: Unordered list
+      name: Ordered list
       framework: react
       status: stable
       type: component
