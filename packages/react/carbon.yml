@@ -234,7 +234,7 @@ assets:
         - type: storybook
           name: Storybook
           action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-fileuploader
+          url: https://react.carbondesignsystem.com/?path=/docs/components-inlineloading
     layer:
       name: Layer
       framework: react
