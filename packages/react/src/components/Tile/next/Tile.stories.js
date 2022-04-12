@@ -21,6 +21,7 @@ import {
 import TileGroup from '../../TileGroup/TileGroup';
 import { Layer } from '../../Layer';
 import './tile-story.scss';
+import mdx from '../Tile.mdx';
 
 export default {
   title: 'Components/Tile',
@@ -33,6 +34,11 @@ export default {
     TileGroup,
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

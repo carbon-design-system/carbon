@@ -1,0 +1,532 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
+library:
+  id: carbon-styles
+  name: Carbon Styles
+  description: Common component Sass styles
+  noIndex: true
+  externalDocsUrl: https://www.carbondesignsystem.com/
+assets:
+  accordion:
+    name: Accordion
+    description: An accordion is a vertically stacked list of headers that reveal or hide associated sections of content.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/accordion.svg
+    tags:
+      - data-display
+      - content-element
+  breadcrumb:
+    name: Breadcrumb
+    description: The breadcrumb is a secondary navigation pattern that helps a user understand the hierarchy among levels and navigate back through them.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/breadcrumb.svg
+    tags:
+      - structural-navigation
+      - contextual-navigation
+  button:
+    name: Button
+    description: Buttons are used to initialize an action. Button labels express what action will occur when the user interacts with it.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/button/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/button.svg
+    tags:
+      - input-control
+  checkbox:
+    name: Checkbox
+    description: Checkboxes are used when there are multiple items to select in a list. Users can select zero, one, or any number of items.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/checkbox/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/checkbox.svg
+    tags:
+      - input-control
+  code-snippet:
+    name: Code snippet
+    description: Code snippets are strings or small blocks of reusable code that can be copied and inserted in a code file.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/code-snippet.svg
+    tags:
+      - content-element
+  content-switcher:
+    name: Content switcher
+    description: Content switchers allow users to toggle between two or more content sections within the same space on screen.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/content-switcher/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/content-switcher.svg
+    tags:
+      - input-control
+      - contextual-navigation
+  data-table:
+    name: Data table
+    description: Data tables are used to organize and display data efficiently. The data table component allows for customization with additional functionality, as needed by your product’s users.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/data-table.svg
+    tags:
+      - input-control
+  date-picker:
+    name: Date picker
+    description: Date and time pickers allow users to select a single or a range of dates and times.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/date-picker/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/date-picker.svg
+    tags:
+      - input-control
+  dropdown:
+    name: Dropdown
+    description: Dropdowns present a list of options from which a user can select one option, or several. A selected option can represent a value in a form, or can be used as an action to filter or sort existing content.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/dropdown.svg
+    tags:
+      - input-control
+  file-uploader:
+    name: File uploader
+    description: File uploaders allow users to select one or more files to upload to a specific location.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/file-uploader.svg
+    tags:
+      - input-control
+  form:
+    name: Form
+    description: A form is a group of related input controls that allows users to provide data or configure options.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/form.svg
+    tags:
+      - form
+  inline-loading:
+    name: Inline loading
+    description: The inline loading component provides visual feedback that data is being processed.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/inline-loading.svg
+    tags:
+      - system-feedback
+  link:
+    name: Link
+    description: Links are used as navigational elements. They may appear on their own, within a sentence or paragraph, or directly following the content.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/link.svg
+    tags:
+      - contextual-navigation
+      - content-element
+  list:
+    name: List
+    description: Lists are vertical groupings of related content. List items begin with either a number or a bullet.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/list/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/list.svg
+    tags:
+      - data-display
+      - content-element
+  loading:
+    name: Loading
+    description: Loading spinners are used when retrieving data or performing slow computations, and help to notify users that loading is underway.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/loading.svg
+    tags:
+      - system-feedback
+  modal:
+    name: Modal
+    description: Modals focus the user’s attention exclusively on one task or piece of information via a window that sits on top of the page content.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/modal.svg
+    tags:
+      - system-feedback
+  multiselect:
+    name: Multiselect
+    description: Use when you can select multiple options from a list or to filter information.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/multiselect.svg
+    tags:
+      - input-control
+  notification:
+    name: Notification
+    description: Notifications are messages that communicate information to the user. The three variants of notifications are toast notifications, inline notifications, and actionable notifications.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/notification/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/notification.svg
+    tags:
+      - system-feedback
+  number-input:
+    name: Number input
+    description: The number input component is used for entering numeric values and includes controls for incrementally increasing or decreasing the value.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/number-input.svg
+    tags:
+      - input-control
+  pagination:
+    name: Pagination
+    description: Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/pagination.svg
+    tags:
+      - data-display
+      - contextual-navigation
+  progress-indicator:
+    name: Progress indicator
+    description: A progress indicator is a visual representation of a user’s progress through a set of steps, guiding toward the completion of a specified process.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/progress-indicator/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/progress-indicator.svg
+    tags:
+      - system-feedback
+  overflow-menu:
+    name: Overflow menu
+    description: Use the overflow menu component when additional options are available to the user but there is a space constraint.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/overflow-menu.svg
+    tags:
+      - input-control
+  radio-button:
+    name: Radio button
+    description: Use radio buttons when you have a group of mutually exclusive choices and only one selection from the group is allowed.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/radio-button.svg
+    tags:
+      - input-control
+  search:
+    name: Search
+    description: Search enables users to specify a word or a phrase to find relevant pieces of content without the use of navigation.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/search.svg
+    tags:
+      - input-control
+  select:
+    name: Select
+    description: The select component allows users to choose one option from a list. It is used in forms for users to submit data.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/select.svg
+    tags:
+      - input-control
+  slider:
+    name: Slider
+    description: Sliders provide a visual indication of adjustable content, where the user can increase or decrease the value by moving the handle along a horizontal track.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/slider.svg
+    tags:
+      - input-control
+  structured-list:
+    name: Structured list
+    description: Structured lists group content that is similar or related, such as terms and definitions.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/structured-list.svg
+    tags:
+      - data-display
+  tabs:
+    name: Tabs
+    description: Tabs are used to organize related content. They allow the user to navigate between groups of information that appear within the same context.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tabs.svg
+    tags:
+      - structural-navigation
+  tag:
+    name: Tag
+    description: Use tags to label, categorize, or organize items using keywords that describe them.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tag.svg
+    tags:
+      - contextual-navigation
+      - data-display
+      - input-control
+  text-input:
+    name: Text input
+    description: Text inputs enable the user to interact with and input content and data. This component can be used for long and short form entries.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/text-input.svg
+    tags:
+      - input-control
+  tile:
+    name: Tile
+    description: Tiles are a highly flexible component for displaying a wide variety of content, including information, getting started, how-to, next steps, and more.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tile.svg
+    tags:
+      - content-element
+  toggle:
+    name: Toggle
+    description: A toggle is used to quickly switch between two possible states. They are commonly used for “on/off” switches.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/toggle/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/toggle.svg
+    tags:
+      - input-control
+  tooltip:
+    name: Tooltip
+    description: Tooltips display additional information upon hover or focus. The information included should be contextual, helpful, and nonessential while providing that extra ability to communicate and give clarity to a user.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tooltip.svg
+    tags:
+      - content-element
+  ui-shell-header:
+    name: UI shell header
+    description: This header is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/ui-shell-header.svg
+    tags:
+      - structural-navigation
+      - shell
+  ui-shell-left-panel:
+    name: UI shell left panel
+    description: This left panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-left-panel/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/ui-shell-left-panel.svg
+    tags:
+      - shell
+  ui-shell-right-panel:
+    name: UI shell right panel
+    description: The right panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/ui-shell-right-panel.svg
+    tags:
+      - shell
+  aspect-ratio:
+    name: Aspect ratio
+    description: The AspectRatio component supports rendering your content in a specific aspect ratio through the ratio prop. This prop will specify the proportion between the width and the height of your content. The width will be determined by spanning 100% of the space available in your layout, and the height will be determined by the ratio that you specified.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/aspect-ratio.svg
+    tags:
+      - content-element
+  progress-bar:
+    name: Progress bar
+    description: A progress bar provides feedback about the duration and progression of a process, such as a download, file transfer, or installation, to indicate how long a user will be waiting.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/progress-bar.svg
+    tags:
+      - content-element
+  copy-button:
+    name: Copy button
+    description: The copy button should be accompanied by a tooltip. Tooltip feedback text should be concise and describe the action taken when the user clicks the copy button. By default we display the text “Copied!”.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/copy-button.svg
+    tags:
+      - input-control
+  combo-box:
+    name: Combo box
+    description: A combobox allows the user to make a selection from a predefined list of options and is typically used when there are a large amount of options to choose from.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/combo-box.svg
+    tags:
+      - input-control
+  text-area:
+    name: Text area
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/text-area.svg
+    tags:
+      - input-control
+  time-picker:
+    name: Time picker
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/time-picker.svg
+    tags:
+     - input-control
+  tooltip-definition:
+    name: Tooltip definition
+    description: The DefinitionTooltip component is used to provide additional information about a particular term or phrase in text content. It is similar to a Tooltip component but has fewer alignment options and has a slightly different interaction pattern.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tooltip-definition.svg
+    tags:
+      - content-element
+  tree-view:
+    name: Tree view
+    status: experimental
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/tree-view.svg
+    tags:
+      - contextual-navigation
+  theme:
+    name: Theme
+    description: The GlobalTheme and Theme components allow you to specify the theme for a page, or for a part of a page, respectively. Theme is most often used to implement inline theming where you can style a portion of your page with a particular theme.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/theme.svg
+    tags:
+      - data-display
+  pagination-nav:
+    name: Pagination nav
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/pagination-nav.svg
+    tags:
+      - data-display
+      - contextual-navigation
+  grid:
+    name: Grid
+    description: Carbon's grid components help developers use the 2x Grid. The project provides Grid and Column components which can be used to build a variety of layouts. You can import these components from @carbon/react
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/grid.svg
+    tags:
+      - content-block
+  popover:
+    name: Popover
+    description: Popover is a primitive component used to build custom components which render over other elements on the page. For example, Popover is used to build our popover components in Carbon.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/popover.svg
+    tags:
+      - content-block
+      - data-display
