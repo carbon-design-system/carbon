@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>progress-indicator</title>
+    <defs>
+        <path d="M10.5,5.2 L9.8,4.5 L6,8.3 L4.2,6.5 L3.5,7.2 L6,9.7 L10.5,5.2 Z M7,0 C3.15,0 0,3.15 0,7 C0,10.85 3.15,14 7,14 C10.85,14 14,10.85 14,7 C14,3.15 10.85,0 7,0 Z M7,13 C3.7,13 1,10.3 1,7 C1,3.7 3.7,1 7,1 C10.3,1 13,3.7 13,7 C13,10.3 10.3,13 7,13 Z" id="path-1"></path>
+        <path d="M148,12 C144.134007,12 141,15.1340068 141,19 C141,22.8659932 144.134007,26 148,26 C151.865993,26 155,22.8659932 155,19 C155,17.1434846 154.262502,15.3630072 152.949747,14.0502525 C151.636993,12.7374979 149.856515,12 148,12 Z M148,25 C144.686292,25 142,22.3137085 142,19 C142,15.6862915 144.686292,13 148,13 C151.313708,13 154,15.6862915 154,19 C154,20.5912989 153.367859,22.1174224 152.242641,23.2426407 C151.117422,24.367859 149.591299,25 148,25 Z" id="path-3"></path>
+    </defs>
+    <g id="progress-indicator" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(56.000000, 77.000000)">
+            <g transform="translate(70.000000, 11.000000)" id="icon/status/checkmark/16-copy-7">
+                <g id="checkmark" transform="translate(1.000000, 1.000000)">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                    <g id="Group" mask="url(#mask-2)">
+                        <g transform="translate(-1.000000, -1.000000)" id="icon-color">
+                            <rect id="Rectangle" fill="#0062FF" x="0" y="0" width="40" height="40"></rect>
+                        </g>
+                    </g>
+                </g>
+            </g>
+            <rect id="Rectangle-15-Copy-85" fill="#0062FF" x="0" y="0" width="70" height="2"></rect>
+            <circle id="Oval-9-Copy" stroke="#0F6DFF" stroke-width="2.114048" fill="#0F6DFF" cx="8" cy="19" r="6"></circle>
+            <rect id="Rectangle-15-Copy-86" fill="#0062FF" x="70" y="0" width="69" height="2"></rect>
+            <rect id="Rectangle-15-Copy-87" fill="#DCDCDC" x="139" y="0" width="69" height="2"></rect>
+            <mask id="mask-4" fill="white">
+                <use xlink:href="#path-3"></use>
+            </mask>
+            <use id="Mask-Copy" fill="#525252" fill-rule="nonzero" xlink:href="#path-3"></use>
+            <rect id="transparent-rectangle-copy" mask="url(#mask-4)" x="141" y="11" width="16" height="16"></rect>
+        </g>
+    </g>
+</svg>
