@@ -1,0 +1,599 @@
+library:
+  id: carbon-react
+  name: Carbon React
+  description: React implementation of Carbon Components.
+  externalDocsUrl: https://react.carbondesignsystem.com
+  inherits: carbon-styles
+assets:
+    accordion:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-accordion
+    aspect-ratio:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-aspectratio
+    breadcrumb:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-breadcrumb
+    button:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/button/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-button
+    checkbox:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/checkbox/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-checkbox
+    code-snippet:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-codesnippet--inline
+    combo-box:
+      name: Combobox
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-combobox
+      # TODO: double check with Aubrey
+      tags:
+        - data-display
+    composed-modal:
+      name: Composed modal
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-composedmodal
+      # TODO: double check with Aubrey
+      tags:
+        - input-control
+    content-switcher:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/content-switcher/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-contentswitcher
+    copy-button:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-copybutton
+    data-table:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-datatable
+    date-picker:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/date-picker/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-datepicker
+    dropdown:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-dropdown
+    error-boundary:
+      name: Error boundary
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-errorboundary
+      # TODO: double check with Aubrey
+      tags:
+        - system-feedback
+    file-uploader:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-fileuploader--file-uploader
+    flex-grid:
+      name: Flex grid
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
+      # TODO: double check with Aubrey
+      tags:
+        - shell
+    form:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-form
+    form-group:
+        name: Form group
+        framework: react
+        status: stable
+        type: component
+        platform: web
+        # TODO: add thumbnail
+        thumbnailPath: 
+        demoLinks:
+          - type: storybook
+            name: Storybook
+            action: link
+            url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
+        # TODO: double check with Aubrey
+        tags:
+          - form-group
+          - input-control  
+    form-label:
+        name: Form label
+        framework: react
+        status: stable
+        type: component
+        platform: web
+        # TODO: add thumbnail
+        thumbnailPath: 
+        demoLinks:
+          - type: storybook
+            name: Storybook
+            action: link
+            url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
+        # TODO: double check with Aubrey
+        tags:
+          - content-element
+    icon-button:
+        name: Icon button
+        framework: react
+        status: stable
+        type: component
+        platform: web
+        # TODO: add thumbnail
+        thumbnailPath: 
+        demoLinks:
+          - type: storybook
+            name: Storybook
+            action: link
+            url: https://react.carbondesignsystem.com/?path=/docs/components-iconbutton
+        # TODO: double check with Aubrey
+        tags:
+          - content-element
+          - input-control
+    inline-loading:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-fileuploader
+    layer:
+      name: Layer
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-layer
+      # TODO: double check with Aubrey
+      tags:
+        - shell 
+    link:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-link
+    loading:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-loading
+    modal:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-modal
+    multiselect:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-multiselect
+    notification:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/notification/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-notifications
+    number-input:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-numberinput
+    ordered-list:
+      name: Unordered list
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-orderedlist
+      # TODO: double check with Aubrey
+      tags:
+        - data-display
+    overlow-menu:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu
+    pagination:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-pagination
+    pagination-nav:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-paginationnav
+    popover:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-popover
+    progress-bar:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage 
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-progressbar
+    progress-indicator:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/progress-indicator/usage 
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-progressindicator
+    radio-button: 
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-radiobutton
+    search:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage 
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-search
+    select:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage 
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-select
+    skeleton:
+      name: Skeleton
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-skeleton
+      # TODO: double check with Aubrey
+      tags:
+        - shell
+    slider:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage 
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-slider
+    structured-list:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage 
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-structuredlist
+    tabs:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-tabs
+    tag:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-tag
+    text-area:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-textarea
+    text-input:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-textinput
+    theme:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-theme--default
+    tile:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-tile
+    time-picker:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-timepicker
+    toggle:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/toggle/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-toggle
+    # TODO: ask francine is it okay to add external docs?
+    toggletip:
+      name: Toggletip
+      framework: react
+      externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage/
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-toggletip
+      # TODO: double check with Aubrey
+      tags:
+        - content-element 
+    tooltip:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-tooltip
+    tooltip-definition:
+      status: stable
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-definitiontooltip
+    tooltip-icon:
+      name: Tooltip icon
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-tooltipicon
+      # TODO: double check with Aubrey
+      tags:
+        - content-block
+        - data-display 
+    ui-shell:
+      name: UI shell
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
+      # TODO: double check with Aubrey
+      tags:
+        - content-block
+        - data-display 
+    unordered-list:
+      name: Unordered list
+      framework: react
+      status: stable
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: 
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
+      # TODO: double check with Aubrey
+      tags:
+        - content-block
+        - data-display 
