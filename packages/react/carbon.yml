@@ -581,47 +581,15 @@ assets:
       tags:
         - content-block
         - data-display 
-    # TODO: @Matt (component or element) is element still a type?
     grid:
       status: stable
+      type: component
       framework: react
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/elements-grid
-    IBM Plex:
-      name: IBM Plex
-      framework: react
-      status: stable
-      type: element
-      platform: web
-      # TODO: add thumbnail
-      thumbnailPath: 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/elements-ibm-plex
-      # TODO: @Aubrey - double check tags
-      tags:
-        - content-element
-    icons:
-      name: icons
-      framework: react
-      status: stable
-      type: element
-      platform: web
-      # TODO: add thumbnail
-      thumbnailPath: 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/elements-icons
-      # TODO: @Aubrey - double check tags
-      tags:
-        - content-element
     fluid-form:
       name: Fluid form
       framework: react
@@ -728,4 +696,4 @@ assets:
           url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
       # TODO: @Aubrey - double check tags
       tags:
-        - data-display
+        - content-block
