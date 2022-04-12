@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>select</title>
+    <defs>
+        <polygon id="path-1" points="0 0 4.95238095 4.30769231 0 8.61538462"></polygon>
+    </defs>
+    <g id="select" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(56.000000, 74.000000)">
+            <rect id="Rectangle-2-Copy-61" fill="#F3F3F3" x="0" y="0" width="208" height="31.5076923"></rect>
+            <line x1="0" y1="31" x2="208" y2="31" id="Path-4" stroke="#979797"></line>
+            <rect id="Rectangle-Copy-13" fill="#A8A8A8" x="15.847619" y="12.8" width="95.0857143" height="6.89230769"></rect>
+            <g id="Group" transform="translate(188.190476, 17.357509) scale(1, -1) rotate(90.000000) translate(-188.190476, -17.357509) translate(185.714286, 13.049817)">
+                <mask id="mask-2" fill="white">
+                    <use xlink:href="#path-1"></use>
+                </mask>
+                <use id="Mask" fill="#000000" fill-rule="nonzero" transform="translate(2.476190, 4.307692) scale(-1, 1) translate(-2.476190, -4.307692) " xlink:href="#path-1"></use>
+                <rect id="transparent-rectangle" mask="url(#mask-2)" x="-6.80952381" y="-5.53846154" width="19.8095238" height="19.6923077"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

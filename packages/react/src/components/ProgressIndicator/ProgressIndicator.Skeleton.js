@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { CircleDash } from '@carbon/icons-react';
 
 function Step() {
   const prefix = usePrefix();
@@ -17,9 +18,7 @@ function Step() {
       className={`${prefix}--progress-step ${prefix}--progress-step--incomplete`}>
       <div
         className={`${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable`}>
-        <svg>
-          <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
-        </svg>
+        <CircleDash />
         <p className={`${prefix}--progress-label`} />
         <span className={`${prefix}--progress-line`} />
       </div>

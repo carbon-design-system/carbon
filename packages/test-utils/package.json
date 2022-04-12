@@ -32,7 +32,6 @@
     "tabbable": "^4.0.0"
   },
   "devDependencies": {
-    "node-sass": "^7.0.1",
     "react-dom": "^16.9.0"
   }
 }
