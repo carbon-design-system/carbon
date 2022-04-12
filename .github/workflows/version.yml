@@ -49,7 +49,10 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           yarn lerna version preminor --no-git-tag-version --preid rc --yes
-          yarn
+
+          # We want the following command to update the lockfile since
+          # the package versions have been changed
+          yarn install --no-immutable
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
