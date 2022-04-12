@@ -507,7 +507,7 @@ assets:
     toggletip:
       name: Toggletip
       framework: react
-      externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage/
+      externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage
       status: stable
       type: component
       platform: web
