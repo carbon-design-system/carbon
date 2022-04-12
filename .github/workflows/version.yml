@@ -51,6 +51,6 @@ jobs:
 
           yarn lerna version preminor --no-git-tag-version --preid rc --yes
           
-          git add -A
-          git commit -m 'chore(release): version packages for prerelease'
-          git push
+          # git add -A
+          # git commit -m 'chore(release): version packages for prerelease'
+          # git push
