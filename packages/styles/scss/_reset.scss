@@ -7,6 +7,7 @@
 
 @use 'config';
 @use 'type' as type;
+@use './utilities/custom-property';
 
 @mixin reset {
   /// http://meyerweb.com/eric/tools/css/reset/
@@ -154,6 +155,11 @@
   *::before,
   *::after {
     box-sizing: inherit;
+  }
+  
+  body {
+    background-color: custom-property.get-var('background', #ffffff);
+    color: custom-property.get-var('text-primary', #161616);
   }
 
   @include type.reset();
