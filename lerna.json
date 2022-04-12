@@ -15,7 +15,6 @@
   ],
   "command": {
     "version": {
-      "exact": true,
       "message": "chore(release): %s"
     }
   }

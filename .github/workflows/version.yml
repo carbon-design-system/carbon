@@ -24,12 +24,20 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-          ref: ${{ github.event.inputs.ref }}
+          fetch-depth: '0'
+          ref: 'main'
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache --check-cache
       - name: Create prerelease
@@ -41,4 +49,8 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
 
-          yarn lerna version preminor --no-git-tag-version --no-push --preid rc --yes
+          yarn lerna version preminor --no-git-tag-version --preid rc --yes
+          
+          git add -A
+          git commit -m 'chore(release): version packages for prerelease'
+          git push
