@@ -33,8 +33,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonType && carbon-cli inline && carbon-cli check \"scss/*.scss\"",
-    "clean": "rimraf css es lib umd scss/_inlined scss/vendor"
+    "build": "yarn clean && carbon-cli bundle src/index.js --name CarbonType && carbon-cli check \"scss/*.scss\"",
+    "clean": "rimraf css es lib umd"
   },
   "dependencies": {
     "@carbon/grid": "^11.1.0-rc.0"

@@ -72,17 +72,16 @@ describe('@carbon/styles/scss/type', () => {
         "display-03",
         "display-04",
         "tokens",
-        "prefix",
-        "custom-property-prefix",
       ]
     `);
   });
 
   test('prefix', async () => {
     const { result } = await render(`
-      @use '../type' with (
+      @use '../config' with (
         $prefix: 'custom',
       );
+      @use '../type';
 
       .my-selector {
         @include type.type-style('label-01');
