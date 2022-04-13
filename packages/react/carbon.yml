@@ -679,7 +679,7 @@ assets:
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
     # TODO: @Matt how do we categorize layout?
     stack:
-      name: stack
+      name: Stack
       framework: react
       status: stable
       type: component
