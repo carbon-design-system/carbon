@@ -6,6 +6,9 @@
 //
 
 @use '../config';
+
+$prefix: config.$prefix !default;
+
 @forward '@carbon/type' show
   // Mixins
   reset,
@@ -46,4 +49,11 @@
   $display-02,
   $display-03,
   $display-04,
-  $tokens;
+  $tokens,
+  // Include $prefix, $custom-property-prefix so `@forward with` works with them
+  $prefix,
+  $custom-property-prefix
+  with (
+  $prefix: $prefix,
+  $custom-property-prefix: $prefix,
+);
