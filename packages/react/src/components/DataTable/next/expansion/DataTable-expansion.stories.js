@@ -131,7 +131,7 @@ export const BatchExpansion = (args) => (
           <TableHead>
             <TableRow>
               <TableExpandHeader
-                id="expanded"
+                id="expand"
                 enableExpando={true}
                 {...getExpandHeaderProps()}
               />
@@ -145,7 +145,7 @@ export const BatchExpansion = (args) => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow {...getRowProps({ row })}>
+                <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
