@@ -192,7 +192,6 @@ assets:
         # TODO: @Aubrey - double check tags
         tags:
           - form
-          - input-control  
     form-label:
         name: Form label
         framework: react
@@ -224,8 +223,8 @@ assets:
             url: https://react.carbondesignsystem.com/?path=/docs/components-iconbutton
         # TODO: @Aubrey - double check tags
         tags:
-          - content-element
           - input-control
+          - media
     inline-loading:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
@@ -579,7 +578,6 @@ assets:
           url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
       # TODO: @Aubrey - double check tags
       tags:
-        - content-block
         - data-display 
     grid:
       status: stable
@@ -605,7 +603,7 @@ assets:
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-fluidform
       # TODO: @Aubrey - double check tags
       tags:
-        - content-block
+        - form
     unstable-heading:
       name: Unstable heading
       framework: react
@@ -637,8 +635,7 @@ assets:
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu
       # TODO: @Aubrey - double check tags
       tags:
-        - content-block
-        - data-display
+        - system-feedback
     unstable-pagination:
       name: Unstable pagination
       framework: react
@@ -671,7 +668,7 @@ assets:
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
       # TODO: @Aubrey - double check tags
       tags:
-        - content-element
+        - input-control
     tree-view:
       status: experimental
       framework: react
