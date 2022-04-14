@@ -1,0 +1,86 @@
+name: Version
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+    inputs:
+      type:
+        required: true
+        description: 'Specify the type of release'
+        type: choice
+        default: prerelease
+        options:
+          - prerelease
+          - stable
+      tag:
+        required: true
+        description: 'Specify the tag for this release'
+        type: string
+
+jobs:
+  version:
+    runs-on: ubuntu-latest
+    if: github.repository == 'carbon-design-system/carbon'
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache --check-cache
+      - name: Create prerelease
+        if: ${{ github.event.inputs.type == 'prerelease' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn lerna version preminor --no-git-tag-version --preid rc --yes
+
+          # We want the following command to update the lockfile since
+          # the package versions have been changed
+          yarn install --no-immutable
+      - name: Create stable release
+        if: ${{ github.event.inputs.type == 'stable' }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn lerna version --conventional-commits --conventional-graduate --no-changelog --no-git-tag-version --preid rc --yes
+
+          # We want the following command to update the lockfile since
+          # the package versions have been changed
+          yarn install --no-immutable
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          branch: 'release/${{ github.event.inputs.tag }}'
+          commit-message: 'chore(release): ${{ github.event.inputs.tag }}'
+          delete-branch: true
+          title: 'chore(release): ${{ github.event.inputs.tag }}'
+          token: ${{ steps.generate_token.outputs.token }}
+          body: |
+            Automated release PR for ${{ github.event.inputs.tag }}
+            
+            **Checklist**
+            
+            - [ ] Verify package version bumps are accurate
+            - [ ] Verify CI passes as expected
