@@ -21660,7 +21660,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": ^1.1.0-rc.0
+    "@carbon/react": ^1.1.0
     eslint: 8.12.0
     eslint-config-next: 12.1.4
     next: 12.1.4
