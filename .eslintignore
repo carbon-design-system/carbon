@@ -13,10 +13,10 @@ packages/*/examples/*
 # Components
 packages/components/demo/*.css
 packages/components/demo/*.map
-packages/components/demo/*.js
-packages/components/demo/js/prism.js
+packages/components/demo/*.jsx
+packages/components/demo/js/prism.jsx
 packages/components/demo/hot
-!packages/components/demo/index.js
+!packages/components/demo/index.jsx
 packages/components/dist
 packages/components/examples/codesandbox
 packages/components/tests/a11y-results

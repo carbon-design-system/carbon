@@ -16,11 +16,11 @@ const blocklist = new Set([
   'state',
   'tools',
   '.DS_Store',
-  'index.js',
-  'DataTable-story.js',
+  'index.jsx',
+  'DataTable-story.jsx',
   '__tests__',
   '__mocks__',
-  'DataTable.js',
+  'DataTable.jsx',
   'DataTable.mdx',
   'stories',
   'next',
@@ -28,7 +28,7 @@ const blocklist = new Set([
 const components = fs
   .readdirSync(COMPONENT_PATH)
   .filter((name) => !blocklist.has(name))
-  .map((name) => path.basename(name, '.js'));
+  .map((name) => path.basename(name, '.jsx'));
 
 describe('DataTable exports', () => {
   it('should export DataTable by default', () => {
