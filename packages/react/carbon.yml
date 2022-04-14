@@ -79,7 +79,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-composedmodal
-      # TODO: @Aubrey - double check tags
       tags:
         - input-control
     content-switcher:
@@ -139,7 +138,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-errorboundary
-      # TODO: @Aubrey - double check tags
       tags:
         - system-feedback
     file-uploader:
@@ -164,7 +162,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
-      # TODO: @Aubrey - double check tags
       tags:
         - shell
     form:
@@ -189,7 +186,7 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
-        # TODO: @Aubrey - double check tags
+
         tags:
           - form
     form-label:
@@ -205,7 +202,7 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
-        # TODO: @Aubrey - double check tags
+
         tags:
           - content-element
     icon-button:
@@ -221,7 +218,7 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-iconbutton
-        # TODO: @Aubrey - double check tags
+
         tags:
           - input-control
           - media
@@ -247,7 +244,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-layer
-      # TODO: @Aubrey - double check tags
       tags:
         - shell 
     link:
@@ -317,7 +313,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-orderedlist
-      # TODO: @Aubrey - double check tags
       tags:
         - data-display
     overflow-menu:
@@ -413,7 +408,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-skeleton
-      # TODO: @Aubrey - double check tags
       tags:
         - shell
     slider:
@@ -517,7 +511,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-toggletip
-      # TODO: @Aubrey - double check tags
       tags:
         - content-element 
     tooltip:
@@ -550,7 +543,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-tooltipicon
-      # TODO: @Aubrey - double check tags
       tags:
         - content-block
         - data-display 
@@ -576,7 +568,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
-      # TODO: @Aubrey - double check tags
       tags:
         - data-display 
     grid:
@@ -601,7 +592,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-fluidform
-      # TODO: @Aubrey - double check tags
       tags:
         - form
     unstable-heading:
@@ -617,7 +607,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-heading
-      # TODO: @Aubrey - double check tags
       tags:
         - content-element
     unstable-menu:
@@ -633,7 +622,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu
-      # TODO: @Aubrey - double check tags
       tags:
         - system-feedback
     unstable-pagination:
@@ -649,7 +637,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-pagination
-      # TODO: @Aubrey - double check tags
       tags:
         - data-display
         - contextual-navigation
@@ -666,7 +653,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
-      # TODO: @Aubrey - double check tags
       tags:
         - input-control
     tree-view:
@@ -677,7 +663,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
-    # TODO: @Matt how do we categorize layout?
     stack:
       name: Stack
       framework: react
@@ -691,6 +676,38 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
-      # TODO: @Aubrey - double check tags
       tags:
         - content-block
+    use-feature-flag:
+      name: unstable_useFeatureFlag
+      framework: react
+      status: stable
+      type: function
+      platform: web
+      tags:
+        - hooks
+    use-feature-flags:
+      name: unstable_useFeatureFlags
+      framework: react
+      status: stable
+      type: function
+      platform: web
+      tags:
+        - hooks
+    use-context-menu:
+      name: unstable_useContextMenu
+      framework: react
+      status: stable
+      type: function
+      platform: web
+      tags:
+        - hooks
+    use-theme:
+      name: useTheme
+      framework: react
+      status: stable
+      type: function
+      platform: web
+      tags:
+        - hooks
+    
