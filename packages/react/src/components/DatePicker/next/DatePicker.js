@@ -328,7 +328,11 @@ function DatePicker({
       clickOpens: true,
       nextArrow: rightArrowHTML,
       prevArrow: leftArrowHTML,
-      onChange: savedOnChange,
+      onChange: (...args) => {
+        if (savedOnChange) {
+          savedOnChange(...args);
+        }
+      },
       onClose: savedOnClose,
       onReady: onHook,
       onMonthChange: onHook,

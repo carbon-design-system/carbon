@@ -1,22 +1,17 @@
 {
   "name": "codesandbox",
-  "version": "0.1.2",
+  "version": "0.2.0-rc.0",
   "private": true,
   "dependencies": {
-    "@carbon/react": "^1.0.3",
-    "@testing-library/jest-dom": "^5.16.3",
-    "@testing-library/react": "^12.1.4",
-    "@testing-library/user-event": "^13.5.0",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "@carbon/react": "^1.1.0-rc.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
     "react-scripts": "5.0.0",
-    "sass": "^1.49.11",
-    "web-vitals": "^2.1.4"
+    "sass": "^1.49.11"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
