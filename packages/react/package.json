@@ -89,7 +89,7 @@
     "@storybook/addon-knobs": "^6.4.0",
     "@storybook/addon-notes": "^6.0.0-alpha.6",
     "@storybook/addon-storysource": "^6.5.0-alpha.63",
-    "@storybook/builder-webpack5": "^6.5.0-alpha.63",
+    "@storybook/builder-vite": "^0.1.28",
     "@storybook/manager-webpack5": "^6.5.0-alpha.63",
     "@storybook/react": "^6.5.0-alpha.63",
     "@storybook/theming": "^6.5.0-alpha.63",
@@ -122,6 +122,7 @@
     "storybook-readme": "^5.0.9",
     "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.1",
+    "vite": "^2.9.5",
     "webpack": "^5.65.0",
     "webpack-dev-server": "^4.7.4"
   },
