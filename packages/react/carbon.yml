@@ -186,7 +186,6 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
-
         tags:
           - form
     form-label:
@@ -202,7 +201,6 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
-
         tags:
           - content-element
     icon-button:
@@ -218,7 +216,6 @@ assets:
             name: Storybook
             action: link
             url: https://react.carbondesignsystem.com/?path=/docs/components-iconbutton
-
         tags:
           - input-control
           - media
@@ -681,27 +678,27 @@ assets:
     use-feature-flag:
       name: unstable_useFeatureFlag
       framework: react
-      status: stable
+      status: experimental
       type: function
       platform: web
       tags:
-        - hooks
+        - hook
     use-feature-flags:
       name: unstable_useFeatureFlags
       framework: react
-      status: stable
+      status: experimental
       type: function
       platform: web
       tags:
-        - hooks
+        - hook
     use-context-menu:
       name: unstable_useContextMenu
       framework: react
-      status: stable
+      status: experimental
       type: function
       platform: web
       tags:
-        - hooks
+        - hook
     use-theme:
       name: useTheme
       framework: react
@@ -709,5 +706,5 @@ assets:
       type: function
       platform: web
       tags:
-        - hooks
+        - hook
     
