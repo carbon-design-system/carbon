@@ -9,4 +9,5 @@
 
 module.exports = {
   presets: ['babel-preset-carbon'],
+  plugins: [],
 };
