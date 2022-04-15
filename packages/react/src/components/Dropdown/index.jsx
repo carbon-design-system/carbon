@@ -6,4 +6,4 @@
  */
 
 export { default as DropdownSkeleton } from './Dropdown.Skeleton';
-export default from './Dropdown';
+export { default } from './Dropdown';

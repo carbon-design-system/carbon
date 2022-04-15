@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export Pagination from './Pagination';
-export PageSelector from './PageSelector';
+export { default as Pagination } from './Pagination';
+export { default as PageSelector } from './PageSelector';

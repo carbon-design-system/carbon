@@ -6,4 +6,4 @@
  */
 
 export { default as ButtonSkeleton } from './Button.Skeleton';
-export default from './Button';
+export { default } from './Button';
