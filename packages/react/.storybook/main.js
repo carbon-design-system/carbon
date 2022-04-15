@@ -15,13 +15,13 @@ const path = require('path');
 const stories = glob
   .sync(
     [
-      './Welcome/Welcome.stories.js',
-      '../src/**/*.stories.js',
+      './Welcome/Welcome.stories.jsx',
+      '../src/**/*.stories.jsx',
       '../src/**/*.stories.mdx',
-      '../src/**/next/*.stories.js',
-      '../src/**/next/**/*.stories.js',
+      '../src/**/next/*.stories.jsx',
+      '../src/**/next/**/*.stories.jsx',
       '../src/**/next/*.stories.mdx',
-      '../src/**/*-story.js',
+      '../src/**/*-story.jsx',
     ],
     {
       cwd: __dirname,
@@ -32,7 +32,7 @@ const stories = glob
   // if so then defer to the `.stories.js`
   .filter((match) => {
     const filepath = path.resolve(__dirname, match);
-    const basename = path.basename(match, '.js');
+    const basename = path.basename(match, '.jsx');
     const denylist = new Set([
       'TooltipDefinition-story',
       'DataTable-basic-story',
@@ -55,7 +55,7 @@ const stories = glob
         filepath,
         '..',
         'next',
-        `${component}.stories.js`
+        `${component}.stories.jsx`
       );
 
       if (fs.existsSync(storyName)) {
