@@ -2135,26 +2135,22 @@ __metadata:
     "@storybook/addon-notes": ^6.0.0-alpha.6
     "@storybook/addon-storysource": ^6.5.0-alpha.63
     "@storybook/builder-vite": ^0.1.28
-    "@storybook/manager-webpack5": ^6.5.0-alpha.63
     "@storybook/react": ^6.5.0-alpha.63
     "@storybook/theming": ^6.5.0-alpha.63
     "@testing-library/cypress": ^8.0.2
     autoprefixer: ^10.4.0
-    babel-loader: ^8.2.3
     babel-plugin-dev-expression: ^0.2.3
     babel-preset-carbon: ^0.2.1
     browserify-zlib: ^0.2.0
     browserslist-config-carbon: ^11.0.0
     classnames: 2.3.1
     copy-to-clipboard: ^3.3.1
-    css-loader: ^6.5.1
     cypress: 9.5.3
     cypress-real-events: 1.6.0
     downshift: 5.2.1
     fast-glob: ^3.2.7
     flatpickr: 4.6.9
     fs-extra: ^10.0.0
-    html-webpack-plugin: ^5.5.0
     invariant: ^2.2.3
     lodash.debounce: ^4.0.8
     lodash.findlast: ^4.5.0
@@ -2163,7 +2159,6 @@ __metadata:
     lodash.throttle: ^4.1.1
     mini-css-extract-plugin: ^2.4.5
     postcss: ^8.4.5
-    postcss-loader: ^6.2.1
     prop-types: ^15.7.2
     react: ^17.0.2
     react-dom: ^17.0.2
@@ -2174,14 +2169,10 @@ __metadata:
     rollup-plugin-strip-banner: ^2.0.0
     rtlcss: ^3.5.0
     sass: ^1.45.0
-    sass-loader: ^12.4.0
     storybook-readme: ^5.0.9
     stream-browserify: ^3.0.0
-    style-loader: ^3.3.1
     use-resize-observer: ^6.0.0
     vite: ^2.9.5
-    webpack: ^5.65.0
-    webpack-dev-server: ^4.7.4
     wicg-inert: ^3.1.1
     window-or-global: ^1.0.1
   peerDependencies:
@@ -6501,52 +6492,6 @@ __metadata:
     typescript:
       optional: true
   checksum: 554511fc4170e0d11386bec1e25a2e6c5e2c96f6201c88555ddf2e50d7a5114cbf50c7aff5f2459f25d5597a327e7f6d175cbcdd5209138666d18c0c044f0d4b
-  languageName: node
-  linkType: hard
-
-"@storybook/manager-webpack5@npm:^6.5.0-alpha.63":
-  version: 6.5.0-alpha.63
-  resolution: "@storybook/manager-webpack5@npm:6.5.0-alpha.63"
-  dependencies:
-    "@babel/core": ^7.12.10
-    "@babel/plugin-transform-template-literals": ^7.12.1
-    "@babel/preset-react": ^7.12.10
-    "@storybook/addons": 6.5.0-alpha.63
-    "@storybook/core-client": 6.5.0-alpha.63
-    "@storybook/core-common": 6.5.0-alpha.63
-    "@storybook/node-logger": 6.5.0-alpha.63
-    "@storybook/theming": 6.5.0-alpha.63
-    "@storybook/ui": 6.5.0-alpha.63
-    "@types/node": ^14.0.10 || ^16.0.0
-    babel-loader: ^8.0.0
-    case-sensitive-paths-webpack-plugin: ^2.3.0
-    chalk: ^4.1.0
-    core-js: ^3.8.2
-    css-loader: ^5.0.1
-    express: ^4.17.1
-    find-up: ^5.0.0
-    fs-extra: ^9.0.1
-    html-webpack-plugin: ^5.0.0
-    node-fetch: ^2.6.7
-    process: ^0.11.10
-    read-pkg-up: ^7.0.1
-    regenerator-runtime: ^0.13.7
-    resolve-from: ^5.0.0
-    style-loader: ^2.0.0
-    telejson: ^5.3.3
-    terser-webpack-plugin: ^5.0.3
-    ts-dedent: ^2.0.0
-    util-deprecate: ^1.0.2
-    webpack: ^5.9.0
-    webpack-dev-middleware: ^4.1.0
-    webpack-virtual-modules: ^0.4.1
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0 || ^18.0.0
-    react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  checksum: 90de4b7f2536900ee5e9008ad98ee4972c5f7bbd2dc9f56bfa11cccddf6006b3095737fcbd0c9ea8684de9010d6630a97ea40674a8dc9fff0ae7bc90c523ff58
   languageName: node
   linkType: hard
 
@@ -12369,26 +12314,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"css-loader@npm:^5.0.1":
-  version: 5.2.7
-  resolution: "css-loader@npm:5.2.7"
-  dependencies:
-    icss-utils: ^5.1.0
-    loader-utils: ^2.0.0
-    postcss: ^8.2.15
-    postcss-modules-extract-imports: ^3.0.0
-    postcss-modules-local-by-default: ^4.0.0
-    postcss-modules-scope: ^3.0.0
-    postcss-modules-values: ^4.0.0
-    postcss-value-parser: ^4.1.0
-    schema-utils: ^3.0.0
-    semver: ^7.3.5
-  peerDependencies:
-    webpack: ^4.27.0 || ^5.0.0
-  checksum: fb0742b30ac0919f94b99a323bdefe6d48ae46d66c7d966aae59031350532f368f8bba5951fcd268f2e053c5e6e4655551076268e9073ccb58e453f98ae58f8e
-  languageName: node
-  linkType: hard
-
 "css-loader@npm:^6.5.1":
   version: 6.5.1
   resolution: "css-loader@npm:6.5.1"
@@ -17696,7 +17621,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"html-webpack-plugin@npm:^5.0.0, html-webpack-plugin@npm:^5.5.0":
+"html-webpack-plugin@npm:^5.5.0":
   version: 5.5.0
   resolution: "html-webpack-plugin@npm:5.5.0"
   dependencies:
@@ -21452,15 +21377,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"map-age-cleaner@npm:^0.1.3":
-  version: 0.1.3
-  resolution: "map-age-cleaner@npm:0.1.3"
-  dependencies:
-    p-defer: ^1.0.0
-  checksum: cb2804a5bcb3cbdfe4b59066ea6d19f5e7c8c196cd55795ea4c28f792b192e4c442426ae52524e5e1acbccf393d3bddacefc3d41f803e66453f6c4eda3650bc1
-  languageName: node
-  linkType: hard
-
 "map-cache@npm:^0.2.2":
   version: 0.2.2
   resolution: "map-cache@npm:0.2.2"
@@ -21684,17 +21600,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mem@npm:^8.1.1":
-  version: 8.1.1
-  resolution: "mem@npm:8.1.1"
-  dependencies:
-    map-age-cleaner: ^0.1.3
-    mimic-fn: ^3.1.0
-  checksum: c41bc97f6f82b91899206058989e34bcb1543af40413c2ab59e5a8e97e4f8f2188d62e7bd95b2d575d5b0d823d5034a0f274a0676f6d11a0e0b973898b06c8b1
-  languageName: node
-  linkType: hard
-
-"memfs@npm:^3.1.2, memfs@npm:^3.2.2, memfs@npm:^3.4.0, memfs@npm:^3.4.1":
+"memfs@npm:^3.1.2, memfs@npm:^3.4.0, memfs@npm:^3.4.1":
   version: 3.4.1
   resolution: "memfs@npm:3.4.1"
   dependencies:
@@ -21904,7 +21810,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mime-types@npm:^2.1.12, mime-types@npm:^2.1.27, mime-types@npm:^2.1.30, mime-types@npm:^2.1.31, mime-types@npm:^2.1.34, mime-types@npm:~2.1.17, mime-types@npm:~2.1.19, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
+"mime-types@npm:^2.1.12, mime-types@npm:^2.1.27, mime-types@npm:^2.1.31, mime-types@npm:^2.1.34, mime-types@npm:~2.1.17, mime-types@npm:~2.1.19, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
   dependencies:
@@ -21942,13 +21848,6 @@ fsevents@^1.2.7:
   version: 2.1.0
   resolution: "mimic-fn@npm:2.1.0"
   checksum: d2421a3444848ce7f84bd49115ddacff29c15745db73f54041edc906c14b131a38d05298dae3081667627a59b2eb1ca4b436ff2e1b80f69679522410418b478a
-  languageName: node
-  linkType: hard
-
-"mimic-fn@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "mimic-fn@npm:3.1.0"
-  checksum: f7b167f9115b8bbdf2c3ee55dce9149d14be9e54b237259c4bc1d8d0512ea60f25a1b323f814eb1fe8f5a541662804bcfcfff3202ca58df143edb986849d58db
   languageName: node
   linkType: hard
 
@@ -23486,13 +23385,6 @@ fsevents@^1.2.7:
   version: 1.1.0
   resolution: "p-cancelable@npm:1.1.0"
   checksum: 2db3814fef6d9025787f30afaee4496a8857a28be3c5706432cbad76c688a6db1874308f48e364a42f5317f5e41e8e7b4f2ff5c8ff2256dbb6264bc361704ece
-  languageName: node
-  linkType: hard
-
-"p-defer@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "p-defer@npm:1.0.0"
-  checksum: 4271b935c27987e7b6f229e5de4cdd335d808465604644cb7b4c4c95bef266735859a93b16415af8a41fd663ee9e3b97a1a2023ca9def613dba1bad2a0da0c7b
   languageName: node
   linkType: hard
 
@@ -27678,7 +27570,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^12.3.0, sass-loader@npm:^12.4.0":
+"sass-loader@npm:^12.3.0":
   version: 12.6.0
   resolution: "sass-loader@npm:12.6.0"
   dependencies:
@@ -29298,18 +29190,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"style-loader@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "style-loader@npm:2.0.0"
-  dependencies:
-    loader-utils: ^2.0.0
-    schema-utils: ^3.0.0
-  peerDependencies:
-    webpack: ^4.0.0 || ^5.0.0
-  checksum: 21425246a5a8f14d1625a657a3a56f8a323193fa341a71af818a2ed2a429efa2385a328b4381cf2f12c2d0e6380801eb9e0427ed9c3a10ff95c86e383184d632
-  languageName: node
-  linkType: hard
-
 "style-loader@npm:^3.3.1":
   version: 3.3.1
   resolution: "style-loader@npm:3.3.1"
@@ -30013,7 +29893,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"terser-webpack-plugin@npm:^5.0.3, terser-webpack-plugin@npm:^5.1.3, terser-webpack-plugin@npm:^5.2.5":
+"terser-webpack-plugin@npm:^5.1.3, terser-webpack-plugin@npm:^5.2.5":
   version: 5.3.1
   resolution: "terser-webpack-plugin@npm:5.3.1"
   dependencies:
@@ -31950,22 +31830,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack-dev-middleware@npm:^4.1.0":
-  version: 4.3.0
-  resolution: "webpack-dev-middleware@npm:4.3.0"
-  dependencies:
-    colorette: ^1.2.2
-    mem: ^8.1.1
-    memfs: ^3.2.2
-    mime-types: ^2.1.30
-    range-parser: ^1.2.1
-    schema-utils: ^3.0.0
-  peerDependencies:
-    webpack: ^4.0.0 || ^5.0.0
-  checksum: 113389f9aa488312758b329f9fdd34ff646a50822c197d0e1dc7ce171b1d826a607c92702a60439fead24e495d5b2c9959d90948fc272f7472a301d37cec1e8d
-  languageName: node
-  linkType: hard
-
 "webpack-dev-middleware@npm:^5.3.1":
   version: 5.3.1
   resolution: "webpack-dev-middleware@npm:5.3.1"
@@ -31981,7 +31845,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack-dev-server@npm:^4.6.0, webpack-dev-server@npm:^4.7.4":
+"webpack-dev-server@npm:^4.6.0":
   version: 4.7.4
   resolution: "webpack-dev-server@npm:4.7.4"
   dependencies:
@@ -32124,13 +31988,6 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack-virtual-modules@npm:^0.4.1":
-  version: 0.4.3
-  resolution: "webpack-virtual-modules@npm:0.4.3"
-  checksum: 158d30633e0d9be3cfcde10fe959b28df5d5adb1068e0f057fcfb10b0b16ede6c892eba438f6ced089c7c442087748c2fcd1e3f035e4e2dc6760517a8c227714
-  languageName: node
-  linkType: hard
-
 "webpack@npm:4, webpack@npm:^4.29.6":
   version: 4.46.0
   resolution: "webpack@npm:4.46.0"
@@ -32206,7 +32063,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.64.4, webpack@npm:^5.65.0, webpack@npm:^5.9.0":
+"webpack@npm:^5.64.4":
   version: 5.71.0
   resolution: "webpack@npm:5.71.0"
   dependencies:
