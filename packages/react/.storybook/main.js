@@ -89,6 +89,7 @@ module.exports = {
   features: {
     previewCsfV3: true,
   },
+  framework: '@storybook/react',
   stories,
   async viteFinal(config) {
     // Annoying way to add babel plugin,
