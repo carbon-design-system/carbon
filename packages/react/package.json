@@ -89,7 +89,7 @@
     "@storybook/addon-knobs": "^6.4.0",
     "@storybook/addon-notes": "^6.0.0-alpha.6",
     "@storybook/addon-storysource": "^6.5.0-alpha.63",
-    "@storybook/builder-vite": "^0.1.28",
+    "@storybook/builder-vite": "^0.1.29",
     "@storybook/react": "^6.5.0-alpha.63",
     "@storybook/theming": "^6.5.0-alpha.63",
     "@testing-library/cypress": "^8.0.2",

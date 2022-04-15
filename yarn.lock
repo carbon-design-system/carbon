@@ -2134,7 +2134,7 @@ __metadata:
     "@storybook/addon-knobs": ^6.4.0
     "@storybook/addon-notes": ^6.0.0-alpha.6
     "@storybook/addon-storysource": ^6.5.0-alpha.63
-    "@storybook/builder-vite": ^0.1.28
+    "@storybook/builder-vite": ^0.1.29
     "@storybook/react": ^6.5.0-alpha.63
     "@storybook/theming": ^6.5.0-alpha.63
     "@testing-library/cypress": ^8.0.2
@@ -5842,9 +5842,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:^0.1.28":
-  version: 0.1.28
-  resolution: "@storybook/builder-vite@npm:0.1.28"
+"@storybook/builder-vite@npm:^0.1.29":
+  version: 0.1.29
+  resolution: "@storybook/builder-vite@npm:0.1.29"
   dependencies:
     "@joshwooding/vite-plugin-react-docgen-typescript": 0.0.4
     "@mdx-js/mdx": ^1.6.22
@@ -5862,7 +5862,7 @@ __metadata:
   peerDependencies:
     "@storybook/core-common": ^6.4.3
     vite: ">=2.6.7"
-  checksum: 0580df47a76ad3bf791fb9fe09149d64426e6215d3d4b16a64bef4ff98b2373f2974ff28efc6621afb6d73a7de6fa017dc7d1a9214e6c5b0a1fbb2bb1130d0db
+  checksum: f2fa111004be676c51369202781366b3f545f3914fbb780bb9741dcb95033752f2aeff75f9a795a1fcdb2f2922005dea89e780d0e9c3142f9654f5d256bf9ce9
   languageName: node
   linkType: hard
 
