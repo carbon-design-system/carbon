@@ -105,6 +105,13 @@ module.exports = {
         babel: { presets: ['babel-preset-carbon'] },
       }),
     ];
+    config.optimizeDeps = {
+      ...config.optimizeDeps,
+      include: [
+        ...(config.optimizeDeps?.include || []),
+        'color', // Used in @carbon/themes
+      ],
+    };
     config.define = {
       __DEV__: process.env.NODE_ENV !== 'production',
     };
