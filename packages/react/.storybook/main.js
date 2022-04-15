@@ -95,10 +95,14 @@ module.exports = {
     // Annoying way to add babel plugin,
     // until https://github.com/storybookjs/builder-vite/issues/286 is fixed
     config.plugins = [
+      require('@storybook/builder-vite/dist/plugins/react-docgen').reactDocgen({
+        exclude: [/^\.\.\//, /node_modules/],
+        include: /\.(jsx?)$/,
+      }),
       ...config.plugins.filter((plugin) => {
-        return !(
-          Array.isArray(plugin) && plugin[0].name === 'vite:react-babel'
-        );
+        return !(Array.isArray(plugin)
+          ? plugin[0].name === 'vite:react-babel'
+          : plugin.name === 'react-docgen');
       }),
       require('@vitejs/plugin-react')({
         exclude: [/\.stories\.(t|j)sx?$/, /node_modules/],
