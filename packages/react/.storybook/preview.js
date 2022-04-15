@@ -11,7 +11,7 @@ import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
-import { GlobalTheme } from '../src';
+import { GlobalTheme } from '../src/components/Theme';
 
 export const globalTypes = {
   locale: {
