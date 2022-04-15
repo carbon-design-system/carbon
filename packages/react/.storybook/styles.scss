@@ -5,6 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '@carbon/styles/scss/config' with (
+  $font-path: '@ibm/plex',
+);
 @use '../index.scss' as styles;
 @use '../scss/grid/flexbox';
 
