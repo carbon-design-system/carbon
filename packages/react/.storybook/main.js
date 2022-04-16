@@ -96,7 +96,7 @@ module.exports = {
     // until https://github.com/storybookjs/builder-vite/issues/286 is fixed
     config.plugins = [
       require('@storybook/builder-vite/dist/plugins/react-docgen').reactDocgen({
-        exclude: [/^\.\.\//, /node_modules/],
+        exclude: [/^\.\.\//, /^es\//, /node_modules/],
         include: /\.(jsx?)$/,
       }),
       ...config.plugins.filter((plugin) => {
