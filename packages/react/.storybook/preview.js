@@ -132,15 +132,12 @@ export const parameters = {
   },
   options: {
     storySort: (storyA, storyB) => {
-      // By default, sort by the story "kind". The "kind" refers to the
-      // top-level title of the story, either through Component Story Format
-      // with the default export, or the `storiesOf('kind', module)` format
-      if (storyA[1].kind !== storyB[1].kind) {
-        return storyA[1].kind.localeCompare(storyB[1].kind);
+      if (storyA.title !== storyB.title) {
+        return storyA.title.localeCompare(storyB.title);
       }
 
-      const idA = storyA[0];
-      const idB = storyB[0];
+      const idA = storyA.id;
+      const idB = storyB.id;
 
       // To story the stories, we first build up a list of matches based on
       // keywords. Each keyword has a specific weight that will be used to

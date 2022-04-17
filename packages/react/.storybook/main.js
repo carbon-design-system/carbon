@@ -85,10 +85,17 @@ module.exports = {
     '@storybook/addon-a11y',
   ],
   core: {
-    builder: 'webpack5',
+    builder: {
+      name: 'webpack5',
+      options: {
+        lazyCompilation: true,
+        fsCache: true,
+      },
+    },
   },
   features: {
     previewCsfV3: true,
+    storyStoreV7: true,
   },
   framework: '@storybook/react',
   stories,
