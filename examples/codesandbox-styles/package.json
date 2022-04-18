@@ -10,6 +10,6 @@
   },
   "dependencies": {
     "@carbon/styles": "^1.1.0",
-    "sass": "^1.49.7"
+    "sass": "^1.50.0"
   }
 }

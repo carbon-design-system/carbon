@@ -1744,7 +1744,7 @@ __metadata:
     remark: ^10.0.1
     replace-in-file: ^6.1.0
     rollup: ^2.46.0
-    sass: ^1.43.3
+    sass: ^1.50.0
     sassdoc: ^2.7.3
     yargs: ^17.0.1
   bin:
@@ -2017,7 +2017,7 @@ __metadata:
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
     rtlcss: ^3.5.0
-    sass: ^1.45.0
+    sass: ^1.50.0
     sass-loader: ^12.4.0
     storybook-readme: ^5.0.9
     stream-browserify: ^3.0.0
@@ -2075,7 +2075,7 @@ __metadata:
     "@carbon/type": ^11.1.0
     "@ibm/plex": 6.0.0-next.6
     css: ^3.0.0
-    sass: ^1.45.0
+    sass: ^1.50.0
   peerDependencies:
     sass: ^1.33.0
   languageName: unknown
@@ -2098,7 +2098,7 @@ __metadata:
     react: ^17.0.1
     react-dom: ^16.9.0
     resolve: ^1.12.0
-    sass: ^1.45.0
+    sass: ^1.50.0
     tabbable: ^4.0.0
   peerDependencies:
     react-dom: ^16.9.0 || ^17.0.1
@@ -10330,7 +10330,7 @@ __metadata:
     "@carbon/test-utils": ^10.23.0
     fs-extra: ^10.0.0
     rimraf: ^3.0.2
-    sass: ^1.45.0
+    sass: ^1.50.0
   peerDependencies:
     sass: ^1.33.0
   languageName: unknown
@@ -11042,7 +11042,7 @@ __metadata:
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
     "@carbon/styles": ^1.1.0
-    sass: ^1.49.7
+    sass: ^1.50.0
     vite: ^2.8.0
   languageName: unknown
   linkType: soft
@@ -11055,7 +11055,7 @@ __metadata:
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
-    sass: ^1.49.11
+    sass: ^1.50.0
   languageName: unknown
   linkType: soft
 
@@ -18654,7 +18654,7 @@ fsevents@^1.2.7:
     jest-watch-typeahead: ^1.0.0
     react: ^17.0.1
     react-dom: ^17.0.1
-    sass: ^1.45.0
+    sass: ^1.50.0
   languageName: unknown
   linkType: soft
 
@@ -26772,16 +26772,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass@npm:^1.43.3, sass@npm:^1.43.4, sass@npm:^1.45.0, sass@npm:^1.49.11, sass@npm:^1.49.7":
-  version: 1.49.11
-  resolution: "sass@npm:1.49.11"
+"sass@npm:^1.50.0":
+  version: 1.50.0
+  resolution: "sass@npm:1.50.0"
   dependencies:
     chokidar: ">=3.0.0 <4.0.0"
     immutable: ^4.0.0
     source-map-js: ">=0.6.2 <2.0.0"
   bin:
     sass: sass.js
-  checksum: f81cabfc43d6baf710979d647e24019f7cfb68242f8421d20dfc8c864cf83512b0b74a89098331696f758756829cb736f7b8aca70a11cff365928393ae351bcc
+  checksum: 43738cc83a3921731456f769aba190277f0620f8b80c14426ab098be9ab8dc8465957f5bf2edbcffda189edb3024ed83dee2cb8cd580459ca4984a9fc88c18f7
   languageName: node
   linkType: hard
 
@@ -31720,7 +31720,7 @@ resolve@^2.0.0-next.3:
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.2
-    sass: ^1.43.4
+    sass: ^1.50.0
     semver: ^7.3.5
   languageName: unknown
   linkType: soft
