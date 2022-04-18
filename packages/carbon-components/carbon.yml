@@ -12,7 +12,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-accordion
     aspect-ratio:
@@ -24,7 +24,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=breadcrumb
     button:
@@ -33,7 +33,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=button
     checkbox:
@@ -42,7 +42,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=checkbox
     code-snippet:
@@ -51,7 +51,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=code-snippet
     combo-box:
@@ -59,7 +59,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=combo-box
     content-switcher:
@@ -68,7 +68,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=content-switcher
     copy-button:
@@ -76,7 +76,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-copybutton
     data-table:
@@ -85,7 +85,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=data-table
     date-picker:
@@ -94,7 +94,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=date-picker
     dropdown:
@@ -103,7 +103,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=dropdown
     file-uploader:
@@ -112,7 +112,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=file-uploader
     form:
@@ -121,7 +121,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=form
     inline-loading:
@@ -130,7 +130,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=inline-loading
     link:
@@ -139,7 +139,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=link
     list:
@@ -148,7 +148,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=list
     list-box:
@@ -161,7 +161,7 @@ assets:
       thumbnailPath: '' 
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=list-box
       # TODO: @aubrey check tag
@@ -173,7 +173,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=loading
     menu:
@@ -186,7 +186,7 @@ assets:
       thumbnailPath: ''
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=loading
       # TODO: @aubrey check tag
@@ -198,7 +198,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=modal
     multiselect:
@@ -207,7 +207,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=multi-select
     notification:
@@ -216,7 +216,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=notification
     number-input:
@@ -225,7 +225,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=number-input
     overflow-menu:
@@ -234,7 +234,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=overflow-menu
     pagination:
@@ -243,7 +243,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=pagination
     pagination-nav:
@@ -251,7 +251,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=pagination-nav
     popover:
@@ -268,7 +268,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=progress-indicator
     radio-button: 
@@ -277,7 +277,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=radio-button
     search:
@@ -286,7 +286,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=search
     select:
@@ -295,7 +295,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=select
     skeleton:
@@ -308,7 +308,7 @@ assets:
       thumbnailPath: '' 
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=skeleton
       # TODO: @aubrey check tag
@@ -320,7 +320,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=slider
     structured-list:
@@ -329,7 +329,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=structured-list
     tabs:
@@ -338,7 +338,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=tabs
     tag:
@@ -347,7 +347,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=tag
     text-area:
@@ -355,7 +355,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=text-area
     text-input:
@@ -364,7 +364,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=text-input
     tile:
@@ -373,7 +373,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=tile
     time-picker:
@@ -381,7 +381,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=time-picker
     toggle:
@@ -390,7 +390,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=toggle
     tooltip:
@@ -399,7 +399,7 @@ assets:
       framework: vanilla
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=tooltip
     tree-view:
@@ -411,6 +411,6 @@ assets:
       status: stable
       demoLinks:
         - type: storybook
-          name: Storybook
+          name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=ui-shell
