@@ -1714,9 +1714,9 @@ __metadata:
     "@octokit/plugin-retry": ^3.0.7
     "@octokit/plugin-throttling": ^2.6.0
     "@octokit/rest": ^16.28.1
-    "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-babel": ^5.3.1
+    "@rollup/plugin-commonjs": ^21.1.0
+    "@rollup/plugin-node-resolve": ^13.2.1
     chalk: ^4.1.1
     change-case: ^4.1.2
     child-process-promise: ^2.2.1
@@ -1785,8 +1785,8 @@ __metadata:
     "@babel/template": ^7.16.7
     "@babel/types": ^7.17.0
     "@carbon/scss-generator": ^10.13.0
-    "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-babel": ^5.3.1
+    "@rollup/plugin-node-resolve": ^13.2.1
     change-case: ^4.1.2
     fs-extra: ^10.0.0
     js-yaml: ^3.14.0
@@ -1818,7 +1818,7 @@ __metadata:
     "@babel/types": ^7.17.0
     "@carbon/cli-reporter": ^10.5.0
     "@carbon/icon-helpers": ^10.29.0
-    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-babel": ^5.3.1
     "@rollup/plugin-replace": ^4.0.0
     browserslist-config-carbon: ^11.0.0
     change-case: ^4.1.1
@@ -1958,9 +1958,9 @@ __metadata:
     "@cypress/webpack-dev-server": 1.8.4
     "@percy/cypress": ^3.1.1
     "@percy/storybook": ^4.1.0
-    "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-babel": ^5.3.1
+    "@rollup/plugin-commonjs": ^21.1.0
+    "@rollup/plugin-node-resolve": ^13.2.1
     "@storybook/addon-a11y": ^6.4.9
     "@storybook/addon-actions": ^6.4.9
     "@storybook/addon-docs": ^6.4.9
@@ -4803,7 +4803,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-babel@npm:^5.2.0, @rollup/plugin-babel@npm:^5.3.0":
+"@rollup/plugin-babel@npm:^5.2.0, @rollup/plugin-babel@npm:^5.3.1":
   version: 5.3.1
   resolution: "@rollup/plugin-babel@npm:5.3.1"
   dependencies:
@@ -4820,9 +4820,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-commonjs@npm:^21.0.0":
-  version: 21.0.1
-  resolution: "@rollup/plugin-commonjs@npm:21.0.1"
+"@rollup/plugin-commonjs@npm:^21.1.0":
+  version: 21.1.0
+  resolution: "@rollup/plugin-commonjs@npm:21.1.0"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     commondir: ^1.0.1
@@ -4833,7 +4833,7 @@ __metadata:
     resolve: ^1.17.0
   peerDependencies:
     rollup: ^2.38.3
-  checksum: 3e56be58c72d655face6f361f85923ddcc3cc07760b5a3a91cfc728115dfed358fc595781148c512d53a03be8c703133379f228e78fd2aed8655fae9d83800b6
+  checksum: e8280f4b6192729f2bdf878c48c451dc441075f2a12f22c688393f48a6b95e8ff83caaacc3df4eb1d81516e08a0e3a669213632879910d85dd630b37bb284df7
   languageName: node
   linkType: hard
 
@@ -4853,9 +4853,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-node-resolve@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "@rollup/plugin-node-resolve@npm:13.0.0"
+"@rollup/plugin-node-resolve@npm:^13.2.1":
+  version: 13.2.1
+  resolution: "@rollup/plugin-node-resolve@npm:13.2.1"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     "@types/resolve": 1.17.1
@@ -4865,7 +4865,7 @@ __metadata:
     resolve: ^1.19.0
   peerDependencies:
     rollup: ^2.42.0
-  checksum: c0237e65f50d593efc176e07a2ddf734918bc7344f739fe2254a3bfaa4be37c6d4787d045ab79d741811d3658f7e8bbb1484e6aa25bbb9fe2a3c33472b3f371d
+  checksum: d0ba3b6f35440b5ebc203a4f62a6c0d2c565491aed9746448288b71d0cd603d1d12fdd9d1381c1be0a4b192f167412e53c34b89fd25413db4ba7d1fa910a29a2
   languageName: node
   linkType: hard
 
@@ -10291,9 +10291,9 @@ __metadata:
     "@carbon/styles": ^1.1.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.23.0
-    "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-babel": ^5.3.1
+    "@rollup/plugin-commonjs": ^21.1.0
+    "@rollup/plugin-node-resolve": ^13.2.1
     babel-plugin-dev-expression: ^0.2.3
     babel-preset-carbon: ^0.2.1
     browserslist-config-carbon: ^11.0.0
