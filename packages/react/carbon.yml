@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
 library:
   id: carbon-react
   name: Carbon React
