@@ -1,15 +1,15 @@
+# yaml-language-server: $schema=https://unpkg.com/@carbon-platform/schemas@v1/carbon-resources.schema.json
 library:
   id: carbon-components
   name: Carbon Components
-  description: Styles for the Carbon Design System
-  externalDocsUrl: https://react.carbondesignsystem.com
+  description: Vanilla JavaScript Carbon components
+  externalDocsUrl: https://the-carbon-components.netlify.app/
   inherits: carbon-styles
 assets:
     accordion:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
-      framework: react
-      # TODO: what to replace type with
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -17,17 +17,11 @@ assets:
           url: https://react.carbondesignsystem.com/?path=/docs/components-accordion
     aspect-ratio:
       status: stable
-      framework: react
-    # TODO: with none?
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-aspectratio
+      framework: vanilla
     breadcrumb:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -36,7 +30,7 @@ assets:
     button:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/button/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -45,7 +39,7 @@ assets:
     checkbox:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/checkbox/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -54,7 +48,7 @@ assets:
     code-snippet:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -62,7 +56,7 @@ assets:
           url: https://the-carbon-components.netlify.app/?nav=code-snippet
     combo-box:
       status: stable
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -71,7 +65,7 @@ assets:
     content-switcher:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/content-switcher/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -79,7 +73,7 @@ assets:
           url: https://the-carbon-components.netlify.app/?nav=content-switcher
     copy-button:
       status: stable
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -88,7 +82,7 @@ assets:
     data-table:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -97,7 +91,7 @@ assets:
     date-picker:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/date-picker/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -106,7 +100,7 @@ assets:
     dropdown:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -115,7 +109,7 @@ assets:
     file-uploader:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -124,7 +118,7 @@ assets:
     form:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -133,7 +127,7 @@ assets:
     inline-loading:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -142,7 +136,7 @@ assets:
     link:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -151,7 +145,7 @@ assets:
     list:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/list/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -159,7 +153,7 @@ assets:
           url: https://the-carbon-components.netlify.app/?nav=list
     list-box:
       name: List box
-      framework: react
+      framework: vanilla
       status: stable
       type: component
       platform: web
@@ -170,28 +164,38 @@ assets:
           name: Storybook
           action: link
           url: https://the-carbon-components.netlify.app/?nav=list-box
+      # TODO: @aubrey check tag
+      tags:
+        - data-display 
     loading:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://the-carbon-components.netlify.app/?nav=loading
     menu:
+      name: Menu
+      framework: vanilla
       status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
-      framework: react
+      type: component
+      platform: web
+      # TODO: add thumbnail
+      thumbnailPath: ''
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://the-carbon-components.netlify.app/?nav=loading
+      # TODO: @aubrey check tag
+      tags: 
+        - input-control
     modal:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -200,7 +204,7 @@ assets:
     multiselect:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -209,7 +213,7 @@ assets:
     notification:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/notification/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -218,7 +222,7 @@ assets:
     number-input:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -227,7 +231,7 @@ assets:
     overflow-menu:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -236,7 +240,7 @@ assets:
     pagination:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -244,7 +248,7 @@ assets:
           url: https://the-carbon-components.netlify.app/?nav=pagination
     pagination-nav:
       status: stable
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -254,26 +258,14 @@ assets:
       status: stable
       framework: react
       externalDocsUrl: https://www.carbondesignsystem.com/components/popover/usage
-      # TODO: no link
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-popover
     progress-bar:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage 
-      framework: react
-      demoLinks:
-      # TODO: no link
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-progressbar
+      framework: vanilla
     progress-indicator:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/progress-indicator/usage 
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -282,16 +274,16 @@ assets:
     radio-button: 
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
-          url: https://the-carbon-components.netlify.app/?nav=radio-buttonv
+          url: https://the-carbon-components.netlify.app/?nav=radio-button
     search:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage 
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -300,47 +292,41 @@ assets:
     select:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage 
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://the-carbon-components.netlify.app/?nav=select
     skeleton:
-      name: Skeleton styles
-      framework: react
-      # TODO: double check with skeleton
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://the-carbon-components.netlify.app/?nav=skeleton
-    slider:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage 
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://the-carbon-components.netlify.app/?nav=slider
-    stack:
-      name: Stack
-      framework: react
+      name: Skeleton
+      framework: vanilla
       status: stable
       type: component
       platform: web
-      # TODO: no link / not in styles?
+      # TODO: add thumbnail
       thumbnailPath: '' 
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
+          url: https://the-carbon-components.netlify.app/?nav=skeleton
+      # TODO: @aubrey check tag
+      tags:
+        - shell
+    slider:
+      status: stable
+      externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage 
+      framework: vanilla
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://the-carbon-components.netlify.app/?nav=slider
     structured-list:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage 
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -349,7 +335,7 @@ assets:
     tabs:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -358,7 +344,7 @@ assets:
     tag:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -366,7 +352,7 @@ assets:
           url: https://the-carbon-components.netlify.app/?nav=tag
     text-area:
       status: stable
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -375,7 +361,7 @@ assets:
     text-input:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -384,7 +370,7 @@ assets:
     tile:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -392,7 +378,7 @@ assets:
           url: https://the-carbon-components.netlify.app/?nav=tile
     time-picker:
       status: stable
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
@@ -401,48 +387,26 @@ assets:
     toggle:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/toggle/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://the-carbon-components.netlify.app/?nav=toggle
-    toggletip:
-      name: Toggletip
-      framework: react
-      externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage
-      status: stable
-      type: component
-      platform: web
-      # TODO: no link / no 
-      thumbnailPath: '' 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-toggletip
     tooltip:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
-      framework: react
+      framework: vanilla
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://the-carbon-components.netlify.app/?nav=tooltip
-    # TODO: doublecheck id / name
     tree-view:
-      status: experimental
-      framework: react
-    # TODO: no link
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
-    # TODO: double check ui shell
+      status: stable
+      framework: vanilla
     ui-shell-header:
-      framework: react
+      framework: vanilla
       externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
       status: stable
       demoLinks:
