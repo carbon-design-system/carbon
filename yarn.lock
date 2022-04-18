@@ -1992,7 +1992,7 @@ __metadata:
     classnames: 2.3.1
     copy-to-clipboard: ^3.3.1
     css-loader: ^6.5.1
-    cypress: 9.5.3
+    cypress: 9.5.4
     cypress-real-events: 1.6.0
     downshift: 5.2.1
     fast-glob: ^3.2.7
@@ -12342,9 +12342,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress@npm:9.5.3":
-  version: 9.5.3
-  resolution: "cypress@npm:9.5.3"
+"cypress@npm:9.5.4":
+  version: 9.5.4
+  resolution: "cypress@npm:9.5.4"
   dependencies:
     "@cypress/request": ^2.88.10
     "@cypress/xvfb": ^1.2.4
@@ -12390,7 +12390,7 @@ __metadata:
     yauzl: ^2.10.0
   bin:
     cypress: bin/cypress
-  checksum: cfd2333fede054a61c1a8d5f3ec0f08b661ff814bff61a418855b542acc8c2d43f3b24dbda849cd9bcce618bf59ce1c5d0abf86a985daaffc0f187db424a5fc8
+  checksum: 55c61f33db5658da8e5af5c6de64f40a85aeb7cba1219f2772675406f6431b7aa7512e13173d0f475af026fffe9878289229b4f5c74d307eac22d8f51fc29f77
   languageName: node
   linkType: hard
 
