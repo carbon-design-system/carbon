@@ -1993,7 +1993,7 @@ __metadata:
     copy-to-clipboard: ^3.3.1
     css-loader: ^6.5.1
     cypress: 9.5.3
-    cypress-real-events: 1.6.0
+    cypress-real-events: 1.7.0
     downshift: 5.2.1
     fast-glob: ^3.2.7
     flatpickr: 4.6.9
@@ -12333,12 +12333,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cypress-real-events@npm:1.6.0":
-  version: 1.6.0
-  resolution: "cypress-real-events@npm:1.6.0"
+"cypress-real-events@npm:1.7.0":
+  version: 1.7.0
+  resolution: "cypress-real-events@npm:1.7.0"
   peerDependencies:
     cypress: ^4.x || ^5.x || ^6.x || ^7.x || ^8.x || ^9.x
-  checksum: 5d9fc4497ce897190a52e098c945ad7e7a6c74aba03127dd86c942c907610cac0cc8a487fe211c593ec341a05eabed525708ef0c0211a99e408f79b864e7ea9b
+  checksum: 92981b05c44faa72e9785bc6d748a29a77373c3c784261b4e3b0e9e67f055a1d502c7573e786a4e25df040fc50961e5897f6d55ffa33ae08246f8a9518ca9a4b
   languageName: node
   linkType: hard
 
