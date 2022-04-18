@@ -47,3 +47,12 @@
   $display-03,
   $display-04,
   $tokens;
+
+@use '@carbon/type';
+
+@include type.configure(
+  (
+    prefix: config.$prefix,
+    custom-property-prefix: config.$prefix,
+  )
+);
