@@ -14,7 +14,7 @@ assets:
         - type: storybook
           name: Demo
           action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-accordion
+          url: https://the-carbon-components.netlify.app/?nav=accordion
     aspect-ratio:
       status: stable
       framework: vanilla
