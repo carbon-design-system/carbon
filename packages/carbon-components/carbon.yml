@@ -74,11 +74,6 @@ assets:
     copy-button:
       status: stable
       framework: vanilla
-      demoLinks:
-        - type: storybook
-          name: Demo
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-copybutton
     data-table:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
