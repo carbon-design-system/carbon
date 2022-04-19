@@ -256,7 +256,7 @@ assets:
           url: https://the-carbon-components.netlify.app/?nav=pagination-nav
     popover:
       status: stable
-      framework: react
+      framework: vanilla
       externalDocsUrl: https://www.carbondesignsystem.com/components/popover/usage
     progress-bar:
       status: stable
