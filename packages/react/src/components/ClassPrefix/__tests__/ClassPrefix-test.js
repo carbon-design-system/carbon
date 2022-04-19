@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-utils/react';
+import { render } from '@testing-library/react';
 import React from 'react';
 import { ClassPrefix } from '../../ClassPrefix';
 import { usePrefix } from '../../../internal/usePrefix';
