@@ -78,7 +78,6 @@ $radio-border-width: 1px !default;
     align-items: center;
     margin-right: $spacing-05;
     cursor: pointer;
-    transition: color $duration-fast-02 motion(exit, productive);
   }
 
   .#{$prefix}--radio-button__appearance {
@@ -215,15 +214,6 @@ $radio-border-width: 1px !default;
   }
 
   // Hover states
-  .#{$prefix}--radio-button-wrapper:hover .#{$prefix}--radio-button__label {
-    color: $text-secondary;
-    transition: color $duration-fast-02 motion(entrance, productive);
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
-  }
-
   .#{$prefix}--radio-button-wrapper:hover .#{$prefix}--radio-button__appearance,
   .#{$prefix}--radio-button-wrapper:hover
     .#{$prefix}--radio-button:checked
