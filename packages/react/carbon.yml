@@ -189,21 +189,6 @@ assets:
             url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
         tags:
           - form
-    form-label:
-        name: Form label
-        framework: react
-        status: stable
-        type: component
-        platform: web
-        # TODO: add thumbnail
-        thumbnailPath: '' 
-        demoLinks:
-          - type: storybook
-            name: Storybook
-            action: link
-            url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
-        tags:
-          - content-element
     icon-button:
         name: Icon button
         framework: react
@@ -528,22 +513,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-definitiontooltip
-    tooltip-icon:
-      name: Tooltip icon
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-tooltipicon
-      tags:
-        - content-block
-        - data-display 
     ui-shell-header:
       framework: react
       externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
