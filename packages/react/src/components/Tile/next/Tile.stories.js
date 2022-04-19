@@ -21,6 +21,7 @@ import {
 import TileGroup from '../../TileGroup/TileGroup';
 import { Layer } from '../../Layer';
 import './tile-story.scss';
+import mdx from '../Tile.mdx';
 
 export default {
   title: 'Components/Tile',
@@ -33,6 +34,11 @@ export default {
     TileGroup,
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
@@ -104,6 +110,14 @@ export const ClickableWithLayer = () => {
   );
 };
 
+export const Selectable = () => {
+  return (
+    <SelectableTile id="tile-1" name="tiles">
+      Selectable
+    </SelectableTile>
+  );
+};
+
 export const MultiSelect = () => {
   return (
     <div role="group" aria-label="selectable tiles">
@@ -118,24 +132,6 @@ export const MultiSelect = () => {
       </SelectableTile>
     </div>
   );
-};
-
-export const SelectableWithLayer = () => {
-  <>
-    <SelectableTile id="tile-3" name="tiles">
-      First layer
-    </SelectableTile>
-    <Layer>
-      <SelectableTile id="tile-3" name="tiles">
-        Second layer
-      </SelectableTile>
-      <Layer>
-        <SelectableTile id="tile-3" name="tiles">
-          Third layer
-        </SelectableTile>
-      </Layer>
-    </Layer>
-  </>;
 };
 
 export const Radio = () => {

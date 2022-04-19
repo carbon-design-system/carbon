@@ -85,7 +85,7 @@ what we call type styles. These tokens have a variety of properties for styling
 how text is rendered on a page.
 
 You can find a full reference of the type styles that are available on the
-[Carbon Design System website](https://www.carbondesignsystem.com/guidelines/typography/productive)
+[Carbon Design System website](https://www.carbondesignsystem.com/guidelines/typography/type-sets)
 .
 
 You can include a token in your Sass file by writing:
