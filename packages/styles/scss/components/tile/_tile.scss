@@ -34,6 +34,8 @@
     outline: 2px solid transparent;
     outline-offset: -2px;
 
+    @include type-style('body-compact-01');
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -56,7 +58,6 @@
 
   .#{$prefix}--tile--clickable {
     @include reset;
-    @include type-style('body-compact-01');
 
     color: $text-primary;
     text-decoration: none;
@@ -185,6 +186,8 @@
     font-size: inherit;
     text-align: left;
     transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    @include type-style('body-compact-01');
 
     &:hover {
       background: $layer-hover;
