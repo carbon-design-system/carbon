@@ -3,7 +3,7 @@ library:
   id: carbon-components
   name: Carbon Components
   description: Vanilla JavaScript Carbon components
-  externalDocsUrl: https://the-carbon-components.netlify.app/
+  externalDocsUrl: https://the-carbon-components.netlify.app
   inherits: carbon-styles
 assets:
     accordion:
