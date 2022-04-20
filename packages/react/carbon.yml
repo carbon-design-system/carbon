@@ -572,7 +572,7 @@ assets:
       status: experimental
       type: component
       platform: web
-      thumbnailPath: ./thumbnails/unstable-menu.svg
+      thumbnailPath: ./thumbnails/unstable-menu.png
       demoLinks:
         - type: storybook
           name: Storybook
