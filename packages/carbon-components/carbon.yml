@@ -171,17 +171,6 @@ assets:
           name: Demo
           action: link
           url: https://the-carbon-components.netlify.app/?nav=loading
-    menu:
-      name: Menu
-      framework: vanilla
-      status: stable
-      type: component
-      platform: web
-      # TODO: add thumbnail
-      thumbnailPath: ''
-      # TODO: @aubrey check tag
-      tags: 
-        - input-control
     modal:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
