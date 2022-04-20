@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>list-box</title>
+    <defs>
+        <rect id="path-1" x="2" y="32" width="174" height="66"></rect>
+        <filter x="-5.7%" y="-12.1%" width="111.5%" height="130.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.862745106   0 0 0 0 0.862745106   0 0 0 0 0.862745106  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <polygon id="path-3" points="3.75 0 7.5 3.75 6.96975 4.28025 3.75 1.0605 0.53025 4.28025 0 3.75"></polygon>
+    </defs>
+    <g id="list-box" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-25-Copy" transform="translate(72.000000, 41.000000)">
+            <polygon id="Shape" fill="#FFFFFF" fill-rule="nonzero" points="143.875 15.625 143.875 10 142.625 10 142.625 15.625 137 15.625 137 16.875 142.625 16.875 142.625 22.5 143.875 22.5 143.875 16.875 149.5 16.875 149.5 15.625"></polygon>
+            <polygon id="Rectangle-Copy-22" fill="#F4F4F4" points="0 0 176 0 176 24 0 24"></polygon>
+            <g id="Rectangle">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                <use fill="#D8D8D8" fill-rule="evenodd" xlink:href="#path-1"></use>
+            </g>
+            <polygon id="Rectangle-Copy-28" fill="#F3F3F3" points="0 47 176 47 176 73 0 73"></polygon>
+            <polygon id="Rectangle-Copy-24" fill="#E0E0E0" points="0 24 176 24 176 48 0 48"></polygon>
+            <g id="Organization-/-Status-/-checkmark-/-16" transform="translate(152.000000, 30.000000)" fill="#000000">
+                <polygon id="Fill" points="4.875 9 1.5 5.625 2.03025 5.09475 4.875 7.939125 9.96975 2.84475 10.5 3.375"></polygon>
+            </g>
+            <rect id="Rectangle-3-Copy-6" fill="#8D8D8D" x="12" y="34" width="99" height="5"></rect>
+            <polygon id="Rectangle-Copy-29" fill="#F3F3F3" points="0 70 176 70 176 98 0 98"></polygon>
+            <rect id="Rectangle-8-Copy" fill="#C6C6C6" x="12" y="73" width="152" height="1"></rect>
+            <g id="Group" transform="translate(152.000000, 6.000000)">
+                <g id="chevron--up" transform="translate(2.250000, 3.750000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                    <g id="Group" mask="url(#mask-4)">
+                        <g transform="translate(-2.250000, -3.750000)" id="icon-color">
+                            <rect id="Rectangle" fill="#171717" x="0" y="0" width="30" height="30"></rect>
+                        </g>
+                    </g>
+                </g>
+                <polygon id="transparent-rectangle" transform="translate(6.000000, 6.000000) rotate(-90.000000) translate(-6.000000, -6.000000) " points="-2.44249065e-15 4.28750176e-15 12 4.28750176e-15 12 12 -2.44249065e-15 12"></polygon>
+            </g>
+            <rect id="Rectangle-3-Copy-5" fill="#A8A8A8" x="12" y="10" width="72" height="5"></rect>
+            <rect id="Rectangle-3-Copy-7" fill="#A8A8A8" opacity="0.754768008" x="12" y="59" width="72" height="5"></rect>
+            <rect id="Rectangle-3-Copy-8" fill="#A8A8A8" opacity="0.754768008" x="12" y="84" width="99" height="5"></rect>
+        </g>
+    </g>
+</svg>

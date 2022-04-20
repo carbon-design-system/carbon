@@ -72,8 +72,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/composed-modal.svg
       demoLinks:
         - type: storybook
           name: Storybook
@@ -131,8 +130,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/error-boundary.svg 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -155,8 +153,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/flex-grid.svg 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -179,8 +176,7 @@ assets:
         status: stable
         type: component
         platform: web
-        # TODO: add thumbnail
-        thumbnailPath: '' 
+        thumbnailPath: ./thumbnails/form-group.svg
         demoLinks:
           - type: storybook
             name: Storybook
@@ -188,29 +184,13 @@ assets:
             url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
         tags:
           - form
-    form-label:
-        name: Form label
-        framework: react
-        status: stable
-        type: component
-        platform: web
-        # TODO: add thumbnail
-        thumbnailPath: '' 
-        demoLinks:
-          - type: storybook
-            name: Storybook
-            action: link
-            url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
-        tags:
-          - content-element
     icon-button:
         name: Icon button
         framework: react
         status: stable
         type: component
         platform: web
-        # TODO: add thumbnail
-        thumbnailPath: '' 
+        thumbnailPath: ./thumbnails/icon-button.svg 
         demoLinks:
           - type: storybook
             name: Storybook
@@ -234,8 +214,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/layer.svg 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -303,8 +282,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/ordered-list.svg
       demoLinks:
         - type: storybook
           name: Storybook
@@ -398,8 +376,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/skeleton.svg
       demoLinks:
         - type: storybook
           name: Storybook
@@ -502,7 +479,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ''
       demoLinks:
         - type: storybook
           name: Storybook
@@ -527,22 +504,6 @@ assets:
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-definitiontooltip
-    tooltip-icon:
-      name: Tooltip icon
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-tooltipicon
-      tags:
-        - content-block
-        - data-display 
     ui-shell-header:
       framework: react
       externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
@@ -558,8 +519,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/unordered-list.svg 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -583,7 +543,7 @@ assets:
       type: component
       platform: web
       # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ''
       demoLinks:
         - type: storybook
           name: Storybook
@@ -597,8 +557,7 @@ assets:
       status: experimental
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/unstable-heading.svg  
       demoLinks:
         - type: storybook
           name: Storybook
@@ -612,8 +571,7 @@ assets:
       status: experimental
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/menus.svg
       demoLinks:
         - type: storybook
           name: Storybook
@@ -627,8 +585,7 @@ assets:
       status: experimental
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/unstable-pagination.svg 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -643,8 +600,7 @@ assets:
       status: experimental
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/unstable-text.svg 
       demoLinks:
         - type: storybook
           name: Storybook
@@ -666,8 +622,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: '' 
+      thumbnailPath: ./thumbnails/stack.svg  
       demoLinks:
         - type: storybook
           name: Storybook
