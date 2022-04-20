@@ -15,9 +15,8 @@ import {
   StructuredListCell,
 } from '../StructuredList';
 import { mount, shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('StructuredListWrapper', () => {
   describe('Renders as expected', () => {

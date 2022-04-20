@@ -1,18 +1,33 @@
 {
   "name": "codesandbox",
-  "private": true,
   "version": "0.2.0",
-  "scripts": {
-    "develop": "vite"
-  },
+  "private": true,
   "dependencies": {
-    "@carbon/react": "^0.16.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@carbon/react": "^1.1.0",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0",
+    "react-scripts": "5.0.0",
+    "sass": "^1.49.11"
   },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^1.0.7",
-    "sass": "^1.49.7",
-    "vite": "^2.8.0"
-  }
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": []
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "packageManager": "yarn@3.2.0"
 }

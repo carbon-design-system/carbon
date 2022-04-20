@@ -6,10 +6,10 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -27,7 +27,7 @@ exports[`DataTable.TableHeader should have an active and ascending class if sort
                   scope="col"
                 >
                   <div
-                    className="bx--table-header-label"
+                    className="cds--table-header-label"
                   >
                     Header
                   </div>
@@ -48,10 +48,10 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -69,7 +69,7 @@ exports[`DataTable.TableHeader should have an active class if it is the sort hea
                   scope="col"
                 >
                   <div
-                    className="bx--table-header-label"
+                    className="cds--table-header-label"
                   >
                     Header
                   </div>
@@ -90,10 +90,10 @@ exports[`DataTable.TableHeader should render 1`] = `
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -111,7 +111,7 @@ exports[`DataTable.TableHeader should render 1`] = `
                   scope="col"
                 >
                   <div
-                    className="bx--table-header-label"
+                    className="cds--table-header-label"
                   >
                     Header
                   </div>
@@ -132,10 +132,10 @@ exports[`DataTable.TableHeader should render 2`] = `
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -153,7 +153,7 @@ exports[`DataTable.TableHeader should render 2`] = `
                   scope="col"
                 >
                   <div
-                    className="bx--table-header-label"
+                    className="cds--table-header-label"
                   >
                     Header
                   </div>

@@ -876,6 +876,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "jakubfaliszewski",
+      "name": "Jakub Faliszewski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25402419?v=4",
+      "profile": "http://jakubfaliszewski.github.io/portfolio/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -801,7 +801,7 @@
     - 32
 - name: analytics--custom
   friendly_name: Analytics custom
-  aliases: 
+  aliases:
     - line chart
     - trend
     - graph
@@ -809,7 +809,7 @@
     - data
     - data analytics
     - arrow graph
-    - custom 
+    - custom
     - edit
   sizes:
     - 32
@@ -929,14 +929,6 @@
     - network
     - network connection
     - relational
-  sizes:
-    - 32
-- name: app-switcher
-  friendly_name: App switcher
-  aliases:
-    - switcher
-    - drawer
-    - 9 dot
   sizes:
     - 32
 - name: apple
@@ -1171,16 +1163,6 @@
     - arrow down
   sizes:
     - 32
-- name: arrows
-  friendly_name: Arrows
-  aliases:
-    - direction
-    - point
-    - pointers
-    - arrows
-    - directional arrows
-  sizes:
-    - 32
 - name: arrows--horizontal
   friendly_name: Arrows horizontal
   sizes:
@@ -1240,27 +1222,27 @@
     - cresent filled
 - name: assembly
   friendly_name: Assembly
-  aliases: 
+  aliases:
     - systems
     - assembly
-    - hexagon 
+    - hexagon
   sizes:
     - 32
 - name: assembly--cluster
   friendly_name: Assembly cluster
-  aliases: 
+  aliases:
     - systems
     - assembly
     - hexagon
-    - multiple 
+    - multiple
   sizes:
     - 32
 - name: assembly--reference
   friendly_name: Assembly reference
-  aliases: 
+  aliases:
     - systems
     - assembly
-    - hexagon 
+    - hexagon
     - dotted
   sizes:
     - 32
@@ -1401,16 +1383,6 @@
     - active computer screen
   sizes:
     - 16
-    - 32
-- name: back-to-top
-  friendly_name: Back to top
-  aliases:
-    - up
-    - scroll up
-    - back to top
-    - top
-    - go to top
-  sizes:
     - 32
 - name: badge
   friendly_name: Badge
@@ -2047,7 +2019,7 @@
     - 32
 - name: button--centered
   friendly_name: Button centered
-  aliases: 
+  aliases:
     - formatting
     - button
     - centered
@@ -2055,7 +2027,7 @@
     - 32
 - name: button--flush-left
   friendly_name: Button flush-left
-  aliases: 
+  aliases:
     - formatting
     - button
     - flush-left
@@ -2340,7 +2312,7 @@
     - 32
 - name: carbon-for-ibm-dotcom
   friendly_name: Carbon for IBM dotcom
-  aliases: 
+  aliases:
     - carbon
     - IBM
     - digital
@@ -2354,7 +2326,7 @@
     - 32
 - name: carbon-for-ibm-product
   friendly_name: Carbon for IBM product
-  aliases: 
+  aliases:
     - carbon
     - IBM
     - digital
@@ -2704,7 +2676,7 @@
     - 32
 - name: character--decimal
   friendly_name: Character decimal
-  aliases: 
+  aliases:
     - alphanumeric
     - decimal
     - numeral
@@ -2712,7 +2684,7 @@
     - 32
 - name: character--fraction
   friendly_name: Character fraction
-  aliases: 
+  aliases:
     - alphanumeric
     - fraction
     - numeral
@@ -2721,7 +2693,7 @@
     - 32
 - name: character--integer
   friendly_name: Character integer
-  aliases: 
+  aliases:
     - alphanumeric
     - integer
     - numeral
@@ -2730,7 +2702,7 @@
     - 32
 - name: character--lower-case
   friendly_name: Character lowercase
-  aliases: 
+  aliases:
     - alphanumeric
     - letter
     - lowercase
@@ -2738,7 +2710,7 @@
     - 32
 - name: character--negative-number
   friendly_name: Character negative number
-  aliases: 
+  aliases:
     - alphanumeric
     - negative
     - number
@@ -2747,7 +2719,7 @@
     - 32
 - name: character--sentence-case
   friendly_name: Character sentence case
-  aliases: 
+  aliases:
     - alphanumeric
     - letter
     - sentence case
@@ -2755,7 +2727,7 @@
     - 32
 - name: character--upper-case
   friendly_name: Character uppercase
-  aliases: 
+  aliases:
     - alphanumeric
     - uppercase
     - letter
@@ -2763,7 +2735,7 @@
     - 32
 - name: character--whole-number
   friendly_name: Character whole number
-  aliases: 
+  aliases:
     - alphanumeric
     - whole number
     - numeral
@@ -3470,24 +3442,6 @@
     - box
     - checkbox indeterminate filled
     - filled indeterminate checkbox
-- name: checkbox--undeterminate
-  friendly_name: Checkbox undeterminate
-  sizes:
-    - 32
-  aliases:
-    - check
-    - box
-    - checkbox undeterminate
-    - undeterminate checkbox
-- name: checkbox--undeterminate--filled
-  friendly_name: Checkbox undeterminate filled
-  sizes:
-    - 32
-  aliases:
-    - check
-    - box
-    - checkbox undeterminate filled
-    - filled undeterminate checkbox
 - name: checkmark
   friendly_name: Checkmark
   aliases:
@@ -4063,15 +4017,6 @@
     - compute
     - data
     - hybrid
-- name: cloud--lightning
-  friendly_name: Cloud lightning
-  sizes:
-    - 32
-  aliases:
-    - weather
-    - cloud
-    - lightning
-    - forecast
 - name: cloud--logging
   friendly_name: IBM Cloud® Log Analysis
   aliases:
@@ -4110,16 +4055,6 @@
     - disconnected
   sizes:
     - 32
-- name: cloud--rain
-  friendly_name: Cloud rain
-  sizes:
-    - 32
-  aliases:
-    - weather
-    - cloud
-    - rain
-    - precipitation
-    - forecast
 - name: cloud--service-management
   friendly_name: Cloud service management
   aliases:
@@ -4135,16 +4070,6 @@
     - catalogue
   sizes:
     - 32
-- name: cloud--snow
-  friendly_name: Cloud snow
-  sizes:
-    - 32
-  aliases:
-    - weather
-    - cloud
-    - snow
-    - precipitation
-    - forecast
 - name: cloud--upload
   friendly_name: Cloud upload
   sizes:
@@ -4703,7 +4628,7 @@
     - 32
 - name: cookie
   friendly_name: Cookie
-  aliases: 
+  aliases:
     - technology
     - cookie
     - tracking
@@ -5383,7 +5308,7 @@
     - diode
 - name: data-enrichment
   friendly_name: Data enrichment
-  aliases: 
+  aliases:
     - data
     - enrichment
     - lightbulb
@@ -5610,15 +5535,6 @@
     - decision
     - tree
     - hierarchy
-  sizes:
-    - 32
-- name: delete
-  friendly_name: Delete
-  aliases:
-    - trash can
-    - remove
-    - trash
-    - edit
   sizes:
     - 32
 - name: delivery
@@ -6861,13 +6777,6 @@
     - modify
     - pencil
     - change
-- name: edit-filter
-  friendly_name: Edit filter
-  aliases:
-    - pencil
-    - funnel
-  sizes:
-    - 32
 - name: edt-loop
   friendly_name: EDT loop
   aliases:
@@ -7709,7 +7618,7 @@
     - 32
 - name: floorplan
   friendly_name: Floorplan
-  aliases: 
+  aliases:
     - floorplan
     - file
     - blueprint
@@ -8270,77 +8179,6 @@
     - globe
   sizes:
     - 32
-- name: glyph--caution
-  friendly_name: Glyph caution
-  aliases:
-    - caution
-    - warning
-    - triangle
-    - filled
-  sizes:
-    - glyph
-- name: glyph--caution-inverted
-  friendly_name: Glyph caution inverted
-  aliases:
-    - caution
-    - warning
-    - inverted
-    - triangle
-    - filled
-  sizes:
-    - glyph
-- name: glyph--circle-fill
-  friendly_name: Glyph circle fill
-  aliases:
-    - circle
-    - filled
-    - solid
-    - round
-  sizes:
-    - glyph
-- name: glyph--circle-stroke
-  friendly_name: Glyph circle stroke
-  aliases:
-    - stroke
-    - circle
-    - round
-    - outlined
-  sizes:
-    - glyph
-- name: glyph--critical
-  friendly_name: Glyph critical
-  aliases:
-    - critical
-    - warning
-    - caution
-    - slash
-  sizes:
-    - glyph
-- name: glyph--incomplete
-  friendly_name: Glyph incomplete
-  aliases:
-    - incomplete
-    - round
-    - half filled
-    - circle
-  sizes:
-    - glyph
-- name: glyph--square-fill
-  friendly_name: Glyph square fill
-  aliases:
-    - square
-    - filled
-    - box
-  sizes:
-    - glyph
-- name: glyph--undefined
-  friendly_name: Glyph undefined
-  aliases:
-    - square
-    - filled
-    - diamond
-  sizes:
-    - glyph
 - name: gradient
   friendly_name: Gradient
   aliases:
@@ -8970,7 +8808,7 @@
     - 32
 - name: ibm-cloud--security-compliance-center
   friendly_name: IBM Cloud® Security and Compliance Center
-  aliases: 
+  aliases:
     - IBM Cloud®
     - security
     - compliance
@@ -9118,7 +8956,7 @@
     - 32
 - name: ibm-watson--orders
   friendly_name: IBM Watson® Orders
-  aliases: 
+  aliases:
     - IBM Watson®
     - enterprise
     - app
@@ -9566,7 +9404,7 @@
     - 32
 - name: intent-request--active
   friendly_name: Intent request active
-  aliases: 
+  aliases:
     - systems
     - intent
     - request
@@ -9576,7 +9414,7 @@
     - 32
 - name: intent-request--create
   friendly_name: Intent request create
-  aliases: 
+  aliases:
     - systems
     - intent
     - request
@@ -9586,7 +9424,7 @@
     - 32
 - name: intent-request--heal
   friendly_name: Intent request heal
-  aliases: 
+  aliases:
     - systems
     - intent
     - request
@@ -9597,7 +9435,7 @@
     - 32
 - name: intent-request--inactive
   friendly_name: Intent request inactive
-  aliases: 
+  aliases:
     - systems
     - intent
     - request
@@ -9607,7 +9445,7 @@
     - 32
 - name: intent-request--scale-in
   friendly_name: Intent request scale-in
-  aliases: 
+  aliases:
     - systems
     - intent
     - request
@@ -9618,7 +9456,7 @@
     - 32
 - name: intent-request--scale-out
   friendly_name: Intent request scale-out
-  aliases: 
+  aliases:
     - systems
     - intent
     - request
@@ -9629,17 +9467,17 @@
     - 32
 - name: intent-request--uninstall
   friendly_name: Intent request uninstall
-  aliases: 
+  aliases:
     - systems
     - intent
     - request
     - hexagon
-    - x 
+    - x
   sizes:
     - 32
 - name: intent-request--upgrade
   friendly_name: Intent request upgrade
-  aliases: 
+  aliases:
     - systems
     - intent
     - request
@@ -10002,16 +9840,6 @@
     - alphabet
     - language
     - english
-- name: letter--Aa--large
-  friendly_name: Letter Aa large
-  aliases:
-    - letter
-    - alphabet
-    - language
-    - english
-    - large
-  sizes:
-    - 32
 - name: letter--Bb
   friendly_name: Letter Bb
   sizes:
@@ -10774,11 +10602,6 @@
     - username
   sizes:
     - 32
-- name: logo--delicious
-  friendly_name: logo--delicious
-  aliases: []
-  sizes:
-    - 32
 - name: logo--digg
   friendly_name: Logo Digg
   sizes:
@@ -10846,19 +10669,6 @@
     - identification
 - name: logo--glassdoor
   friendly_name: Logo Glassdoor
-  sizes:
-    - 32
-  aliases:
-    - brand
-    - emblem
-    - logotype
-    - symbol
-    - id
-    - avatar
-    - tag
-    - identification
-- name: logo--google
-  friendly_name: Logo Google
   sizes:
     - 32
   aliases:
@@ -11053,11 +10863,6 @@
     - avatar
     - tag
     - identification
-- name: logo--stumbleupon
-  friendly_name: logo--stumbleupon
-  aliases: []
-  sizes:
-    - 32
 - name: logo--tumblr
   friendly_name: Logo Tumblr
   sizes:
@@ -11282,11 +11087,6 @@
     - healthcare
     - health
     - medical
-  sizes:
-    - 32
-- name: mammogram--stacked
-  friendly_name: mammogram--stacked
-  aliases: []
   sizes:
     - 32
 - name: manage-protection
@@ -11666,15 +11466,6 @@
     - 20
     - 24
     - 32
-- name: misuse--alt
-  friendly_name: Misuse alt
-  sizes:
-    - 32
-  aliases:
-    - X
-    - close
-    - error
-    - don't
 - name: misuse--outline
   friendly_name: Misuse outline
   sizes:
@@ -13930,7 +13721,7 @@
     - 32
 - name: property-relationship
   friendly_name: Property relationship
-  aliases: 
+  aliases:
     - property
     - relationship
     - systems
@@ -14325,34 +14116,6 @@
     - modify
   sizes:
     - 32
-- name: research--bloch-sphere
-  friendly_name: Research Bloch sphere
-  sizes:
-    - 32
-  aliases:
-    - study
-    - sphere
-    - research
-    - Bloch
-- name: research--hinton-plot
-  friendly_name: Research Hinton plot
-  sizes:
-    - 32
-  aliases:
-    - study
-    - sphere
-    - Hinton
-    - research
-    - plot
-- name: research--matrix
-  friendly_name: Research matrix
-  sizes:
-    - 32
-  aliases:
-    - study
-    - sphere
-    - research
-    - matrix
 - name: reset
   friendly_name: Reset
   aliases:
@@ -15075,7 +14838,7 @@
     - 32
 - name: scis--control-tower
   friendly_name: IBM® Supply Chain Intelligence Suite Control Tower
-  aliases: 
+  aliases:
     - IBM
     - supply chain intelligence suite
     - control tower
@@ -15085,7 +14848,7 @@
     - 32
 - name: scis--transparent-supply
   friendly_name: IBM® Supply Chain Intelligence Suite transparent supply
-  aliases: 
+  aliases:
     - IBM
     - supply chain intelligence suite
     - transparent supply
@@ -15905,9 +15668,11 @@
   sizes:
     - 32
 - name: slisor
-  friendly_name: slisor
+  friendly_name: slicestor
   aliases:
     - analysis
+    - slisor
+    - slicestor
     - communication
     - messaging
     - systems
@@ -16011,7 +15776,7 @@
     - 32
 - name: software-resource
   friendly_name: Software resource
-  aliases: 
+  aliases:
     - software
     - systems
     - resource
@@ -16020,7 +15785,7 @@
     - 32
 - name: software-resource--cluster
   friendly_name: Software resource cluster
-  aliases: 
+  aliases:
     - software
     - systems
     - resource
@@ -16030,7 +15795,7 @@
     - 32
 - name: software-resource--resource
   friendly_name: Software resource reference
-  aliases: 
+  aliases:
     - software
     - systems
     - resource
@@ -16121,7 +15886,7 @@
     - 32
 - name: sort--remove
   friendly_name: Sort remove
-  aliases: 
+  aliases:
     - sort order
     - order
     - remove
@@ -16660,13 +16425,6 @@
   friendly_name: Sun
   aliases:
     - sun
-    - solar
-  sizes:
-    - 32
-- name: sunny
-  friendly_name: Sunny
-  aliases:
-    - sunny
     - solar
   sizes:
     - 32

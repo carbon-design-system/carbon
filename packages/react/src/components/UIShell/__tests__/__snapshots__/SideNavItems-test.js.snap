@@ -5,13 +5,13 @@ exports[`SideNavItems should render 1`] = `
   className="custom-classname"
 >
   <ul
-    className="bx--side-nav__items custom-classname"
+    className="cds--side-nav__items custom-classname"
   >
     <SideNavItem
       key=".0"
     >
       <li
-        className="bx--side-nav__item"
+        className="cds--side-nav__item"
       >
         test
       </li>

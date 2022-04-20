@@ -8,10 +8,9 @@
 import React from 'react';
 import PrimaryButton from '../PrimaryButton';
 import { shallow, mount } from 'enzyme';
-import { Search16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Search } from '@carbon/icons-react';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('PrimaryButton', () => {
   describe('Renders as expected', () => {
@@ -38,7 +37,7 @@ describe('PrimaryButton', () => {
 
     describe('Renders icon buttons', () => {
       const iconButton = mount(
-        <PrimaryButton renderIcon={Search16} iconDescription="Search">
+        <PrimaryButton renderIcon={Search} iconDescription="Search">
           Search
         </PrimaryButton>
       );

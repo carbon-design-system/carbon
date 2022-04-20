@@ -5,14 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Subtract16, Add16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Subtract, Add } from '@carbon/icons-react';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 import { NumberInput } from '../NumberInput';
 import NumberInputSkeleton from '../../NumberInput.Skeleton';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('NumberInput', () => {
   describe('should render as expected', () => {
@@ -44,7 +43,7 @@ describe('NumberInput', () => {
 
       wrapper = mount(<NumberInput {...mockProps} />);
 
-      const iconTypes = [Subtract16, Add16];
+      const iconTypes = [Subtract, Add];
       label = wrapper.find('label');
       numberInput = wrapper.find('input');
       container = wrapper.find(`.${prefix}--number`);
@@ -110,11 +109,6 @@ describe('NumberInput', () => {
         const invalidText = wrapper.find(`.${prefix}--form-requirement`);
         expect(invalidText.length).toEqual(1);
         expect(invalidText.text()).toEqual('invalid text');
-      });
-
-      it('should specify light number input as expected', () => {
-        wrapper.setProps({ light: true });
-        expect(wrapper.find(NumberInput).props().light).toEqual(true);
       });
 
       it('should hide label as expected', () => {
@@ -276,8 +270,8 @@ describe('NumberInput', () => {
       });
 
       it('should use correct icons', () => {
-        expect(icons.at(0).type()).toBe(Subtract16);
-        expect(icons.at(1).type()).toBe(Add16);
+        expect(icons.at(0).type()).toBe(Subtract);
+        expect(icons.at(1).type()).toBe(Add);
       });
 
       it('adds new iconDescription when passed via props', () => {
@@ -388,8 +382,8 @@ describe('NumberInput', () => {
         );
 
         input = wrapper.find('input');
-        upArrow = wrapper.find(Add16).closest('button');
-        downArrow = wrapper.find(Subtract16).closest('button');
+        upArrow = wrapper.find(Add).closest('button');
+        downArrow = wrapper.find(Subtract).closest('button');
       });
 
       it('should invoke onClick when numberInput is clicked', () => {

@@ -9,11 +9,10 @@ import React from 'react';
 import Checkbox from '../Checkbox';
 import CheckboxSkeleton from '../Checkbox/Checkbox.Skeleton';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 import { cleanup, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('Checkbox', () => {
   describe('Renders as expected', () => {
@@ -104,9 +103,11 @@ describe('Checkbox', () => {
 
       const call = onChange.mock.calls[0];
 
-      expect(call[0]).toEqual(true);
-      expect(call[1]).toEqual(id);
-      expect(call[2].target).toBe(inputElement);
+      expect(call[0].target).toBe(inputElement);
+      expect(call[1]).toEqual({
+        id,
+        checked: true,
+      });
     });
   });
 });

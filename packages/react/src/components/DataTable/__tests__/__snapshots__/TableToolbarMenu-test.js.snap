@@ -7,13 +7,16 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
   renderIcon={
     Object {
       "$$typeof": Symbol(react.forward_ref),
+      "propTypes": Object {
+        "size": [Function],
+      },
       "render": [Function],
     }
   }
 >
   <OverflowMenu
     ariaLabel="Add"
-    className="custom-class bx--toolbar-action bx--overflow-menu"
+    className="custom-class cds--toolbar-action cds--overflow-menu"
     direction="bottom"
     flipped={true}
     focusTrap={true}
@@ -29,6 +32,9 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
     renderIcon={
       Object {
         "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": [Function],
+        },
         "render": [Function],
       }
     }
@@ -42,7 +48,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
         aria-expanded={false}
         aria-haspopup={true}
         aria-label="Add"
-        className="custom-class bx--toolbar-action bx--overflow-menu bx--overflow-menu bx--overflow-menu--md"
+        className="custom-class cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md"
         onClick={[Function]}
         onClose={[Function]}
         onKeyDown={[Function]}
@@ -50,13 +56,13 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
         title="Add"
         type="button"
       >
-        <ForwardRef(Download16)
+        <ForwardRef(Download)
           aria-label="Add"
-          className="bx--overflow-menu__icon"
+          className="cds--overflow-menu__icon"
         >
           <Icon
             aria-label="Add"
-            className="bx--overflow-menu__icon"
+            className="cds--overflow-menu__icon"
             fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
@@ -66,7 +72,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
           >
             <svg
               aria-label="Add"
-              className="bx--overflow-menu__icon"
+              className="cds--overflow-menu__icon"
               fill="currentColor"
               focusable="false"
               height={16}
@@ -84,7 +90,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
               </title>
             </svg>
           </Icon>
-        </ForwardRef(Download16)>
+        </ForwardRef(Download)>
       </button>
     </ClickListener>
   </OverflowMenu>

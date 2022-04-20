@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
@@ -33,7 +33,6 @@ function CodeSnippet({
   onClick,
   ariaLabel,
   copyText,
-  copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
   copyButtonDescription,
   light,
   showMoreText,
@@ -183,7 +182,7 @@ function CodeSnippet({
       <Copy
         {...rest}
         onClick={handleCopyClick}
-        aria-label={copyLabel || ariaLabel}
+        aria-label={ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
         feedback={feedback}
@@ -227,7 +226,7 @@ function CodeSnippet({
         role={type === 'single' ? 'textbox' : null}
         tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
-        aria-label={ariaLabel || copyLabel || 'code-snippet'}
+        aria-label={ariaLabel || 'code-snippet'}
         onScroll={(type === 'single' && handleScroll) || null}
         {...containerStyle}>
         <pre
@@ -265,7 +264,7 @@ function CodeSnippet({
           <span className={`${prefix}--snippet-btn--text`}>
             {expandCodeBtnText}
           </span>
-          <ChevronDown16
+          <ChevronDown
             aria-label={expandCodeBtnText}
             className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
             name="chevron--down"
@@ -298,12 +297,6 @@ CodeSnippet.propTypes = {
    * Specify the description for the Copy Button
    */
   copyButtonDescription: PropTypes.string,
-
-  /**
-   * Specify a label to be read by screen readers on the containing <textbox>
-   * node
-   */
-  copyLabel: PropTypes.string,
 
   /**
    * Optional text to copy. If not specified, the `children` node's `innerText`
@@ -387,6 +380,7 @@ CodeSnippet.propTypes = {
 };
 
 CodeSnippet.defaultProps = {
+  ariaLabel: 'Copy to clipboard',
   type: 'single',
   showMoreText: 'Show more',
   showLessText: 'Show less',

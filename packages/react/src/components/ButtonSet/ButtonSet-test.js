@@ -8,9 +8,8 @@
 import React from 'react';
 import ButtonSet from '../ButtonSet';
 import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('ButtonSet', () => {
   let wrapper;

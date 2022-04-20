@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "0.16.0",
+  "version": "1.1.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -16,21 +16,34 @@
     "components",
     "react"
   ],
+  "files": [
+    "scss",
+    "index.scss"
+  ],
   "publishConfig": {
     "access": "public"
   },
+  "peerDependencies": {
+    "sass": "^1.33.0"
+  },
   "dependencies": {
-    "@carbon/colors": "^10.37.0",
+    "@carbon/colors": "^11.1.0",
     "@carbon/feature-flags": "^0.7.0",
-    "@carbon/grid": "^10.43.0",
-    "@carbon/layout": "^10.37.0",
-    "@carbon/motion": "^10.29.0",
-    "@carbon/themes": "^10.53.0",
-    "@carbon/type": "^10.43.0",
+    "@carbon/grid": "^11.1.0",
+    "@carbon/layout": "^11.1.0",
+    "@carbon/motion": "^11.0.0",
+    "@carbon/themes": "^11.1.0",
+    "@carbon/type": "^11.1.0",
     "@ibm/plex": "6.0.0-next.6"
   },
   "devDependencies": {
-    "@carbon/test-utils": "^10.21.0",
-    "css": "^3.0.0"
-  }
+    "@carbon/test-utils": "^10.23.0",
+    "css": "^3.0.0",
+    "sass": "^1.45.0"
+  },
+  "sideEffects": [
+    "index.scss",
+    "scss/**/*.scss",
+    "scss/**/*.css"
+  ]
 }

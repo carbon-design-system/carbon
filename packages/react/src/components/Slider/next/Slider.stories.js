@@ -9,7 +9,8 @@ import React, { useState } from 'react';
 // import { action } from '@storybook/addon-actions';
 
 // import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
-import { default as Slider, SliderSkeleton } from '../../Slider';
+import { SliderSkeleton } from '../../Slider';
+import Slider from '../Slider';
 // import { sliderValuePropSync } from '../../../../react/src/internal/FeatureFlags';
 import { Layer } from '../../Layer';
 import mdx from './Slider.mdx';
@@ -20,6 +21,11 @@ export default {
   subcomponents: {
     SliderSkeleton,
   },
+  argTypes: {
+    disabled: {
+      control: { type: 'boolean' },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -27,15 +33,16 @@ export default {
   },
 };
 
-export const Default = () => (
+export const Default = (args) => (
   <Slider
+    {...args}
     labelText="Slider Label"
     value={50}
     min={0}
     max={100}
     step={1}
     stepMultiplier={10}
-    novalidate
+    noValidate
   />
 );
 
@@ -73,7 +80,7 @@ export const WithLayer = () => {
         max={100}
         step={1}
         stepMultiplier={10}
-        novalidate
+        noValidate
       />
       <Layer>
         <Slider
@@ -83,7 +90,7 @@ export const WithLayer = () => {
           max={100}
           step={1}
           stepMultiplier={10}
-          novalidate
+          noValidate
         />
         <Layer>
           <Slider
@@ -93,7 +100,7 @@ export const WithLayer = () => {
             max={100}
             step={1}
             stepMultiplier={10}
-            novalidate
+            noValidate
           />
         </Layer>
       </Layer>

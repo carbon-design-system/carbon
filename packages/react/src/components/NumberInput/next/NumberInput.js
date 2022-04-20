@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Add16, Subtract16 } from '@carbon/icons-react';
+import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState } from 'react';
@@ -40,8 +40,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     label,
     invalid = false,
     invalidText = enabled ? undefined : 'Provide invalidText',
-    isMobile,
-    light = false,
+    light,
     max,
     min,
     onChange,
@@ -77,7 +76,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     [`${prefix}--number--light`]: light,
     [`${prefix}--number--nolabel`]: hideLabel,
     [`${prefix}--number--nosteppers`]: hideSteppers,
-    [`${prefix}--number--mobile`]: isMobile,
     [`${prefix}--number--${size}`]: size,
     [customClassName]: !enabled,
   });
@@ -197,7 +195,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 tabIndex="-1"
                 title={decrementNumLabel || iconDescription}
                 type="button">
-                <Subtract16 className="down-icon" />
+                <Subtract className="down-icon" />
               </button>
               <div className={`${prefix}--number__rule-divider`} />
               <button
@@ -222,7 +220,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 tabIndex="-1"
                 title={incrementNumLabel || iconDescription}
                 type="button">
-                <Add16 className="up-icon" />
+                <Add className="up-icon" />
               </button>
               <div className={`${prefix}--number__rule-divider`} />
             </div>
@@ -295,14 +293,6 @@ NumberInput.propTypes = {
   invalidText: PropTypes.node,
 
   /**
-   * `true` to use the mobile variant.
-   */
-  isMobile: deprecate(
-    PropTypes.bool,
-    `The \`isMobile\` prop no longer needed as the default NumberInput styles are now identical to the mobile variant styles. This prop will be removed in the next major version of \`carbon-components-react\``
-  ),
-
-  /**
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
@@ -311,7 +301,11 @@ NumberInput.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `NumberInput` is no longer needed and has ' +
+      'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+  ),
 
   /**
    * The maximum value.

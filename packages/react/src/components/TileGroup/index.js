@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './TileGroup';
+import { createClassWrapper } from '../../internal/createClassWrapper';
+import TileGroup from './TileGroup';
+
+export default createClassWrapper(TileGroup);

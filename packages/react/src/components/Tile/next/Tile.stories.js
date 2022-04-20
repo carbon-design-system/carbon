@@ -7,8 +7,9 @@
 
 import React from 'react';
 import Link from '../../Link';
-import TextInput from '../../TextInput';
-import RadioTile from '../../RadioTile';
+import Button from '../../Button';
+import { default as TextInput } from '../../TextInput';
+import { default as RadioTile } from '../../RadioTile';
 import {
   ClickableTile,
   ExpandableTile,
@@ -17,9 +18,10 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from '../';
-import TileGroup from '../../TileGroup';
+import TileGroup from '../../TileGroup/TileGroup';
 import { Layer } from '../../Layer';
 import './tile-story.scss';
+import mdx from '../Tile.mdx';
 
 export default {
   title: 'Components/Tile',
@@ -32,6 +34,11 @@ export default {
     TileGroup,
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
@@ -76,20 +83,38 @@ export const DefaultWithLayer = () => {
 };
 
 export const Clickable = () => {
-  return <ClickableTile>Clickable Tile</ClickableTile>;
+  return (
+    <ClickableTile href="https://www.carbondesignsystem.com/">
+      Clickable Tile
+    </ClickableTile>
+  );
 };
 
 export const ClickableWithLayer = () => {
   return (
     <>
-      <ClickableTile>First layer</ClickableTile>
+      <ClickableTile href="https://www.carbondesignsystem.com/">
+        First layer
+      </ClickableTile>
       <Layer>
-        <ClickableTile>Second layer</ClickableTile>
+        <ClickableTile href="https://www.carbondesignsystem.com/">
+          Second layer
+        </ClickableTile>
         <Layer>
-          <ClickableTile>Third layer</ClickableTile>
+          <ClickableTile href="https://www.carbondesignsystem.com/">
+            Third layer
+          </ClickableTile>
         </Layer>
       </Layer>
     </>
+  );
+};
+
+export const Selectable = () => {
+  return (
+    <SelectableTile id="tile-1" name="tiles">
+      Selectable
+    </SelectableTile>
   );
 };
 
@@ -107,24 +132,6 @@ export const MultiSelect = () => {
       </SelectableTile>
     </div>
   );
-};
-
-export const SelectableWithLayer = () => {
-  <>
-    <SelectableTile id="tile-3" name="tiles">
-      First layer
-    </SelectableTile>
-    <Layer>
-      <SelectableTile id="tile-3" name="tiles">
-        Second layer
-      </SelectableTile>
-      <Layer>
-        <SelectableTile id="tile-3" name="tiles">
-          Third layer
-        </SelectableTile>
-      </Layer>
-    </Layer>
-  </>;
 };
 
 export const Radio = () => {
@@ -191,32 +198,54 @@ export const RadioWithLayer = () => {
 };
 
 export const Expandable = () => (
-  <ExpandableTile
-    tileCollapsedIconText="Interact to Expand tile"
-    tileExpandedIconText="Interact to Collapse tile">
-    <TileAboveTheFoldContent>
-      <div style={{ height: '200px' }}>Above the fold content here</div>
-    </TileAboveTheFoldContent>
-    <TileBelowTheFoldContent>
-      <div style={{ height: '400px' }}>
-        Below the fold content here
-        <TextInput id="test2" invalidText="A valid value is required" />
-      </div>
-    </TileBelowTheFoldContent>
-  </ExpandableTile>
+  <div style={{ width: '400px' }}>
+    <ExpandableTile
+      tileCollapsedIconText="Interact to Expand tile"
+      tileExpandedIconText="Interact to Collapse tile">
+      <TileAboveTheFoldContent>
+        <div style={{ height: '200px' }}>Above the fold content here</div>
+      </TileAboveTheFoldContent>
+      <TileBelowTheFoldContent>
+        <div style={{ height: '400px' }}>Below the fold content here</div>
+      </TileBelowTheFoldContent>
+    </ExpandableTile>
+  </div>
+);
+
+export const ExpandableWithInteractive = () => (
+  <div style={{ width: '400px' }}>
+    <ExpandableTile
+      tileCollapsedIconText="Interact to Expand tile"
+      tileExpandedIconText="Interact to Collapse tile">
+      <TileAboveTheFoldContent>
+        <div style={{ height: '200px', width: '200px' }}>
+          Above the fold content here
+          <div style={{ paddingTop: '1rem' }}>
+            <Button>Example</Button>
+          </div>
+        </div>
+      </TileAboveTheFoldContent>
+      <TileBelowTheFoldContent>
+        <div style={{ height: '200px', width: '200px' }}>
+          Below the fold content here
+          <TextInput id="test2" invalidText="A valid value is required" />
+        </div>
+      </TileBelowTheFoldContent>
+    </ExpandableTile>
+  </div>
 );
 
 export const ExpandableWithLayer = () => {
   return (
-    <>
+    <div style={{ width: '400px' }}>
       <ExpandableTile
         tileCollapsedIconText="Interact to Expand tile"
         tileExpandedIconText="Interact to Collapse tile">
         <TileAboveTheFoldContent>
-          <div style={{ height: '200px' }}>First layer</div>
+          <div style={{ height: '100px', width: '200px' }}>First layer</div>
         </TileAboveTheFoldContent>
         <TileBelowTheFoldContent>
-          <div style={{ height: '400px' }}>
+          <div style={{ height: '200px', width: '200px' }}>
             Below the fold content here
             <TextInput id="test2" invalidText="A valid value is required" />
           </div>
@@ -227,10 +256,10 @@ export const ExpandableWithLayer = () => {
           tileCollapsedIconText="Interact to Expand tile"
           tileExpandedIconText="Interact to Collapse tile">
           <TileAboveTheFoldContent>
-            <div style={{ height: '200px' }}>Second layer</div>
+            <div style={{ height: '100px' }}>Second layer</div>
           </TileAboveTheFoldContent>
           <TileBelowTheFoldContent>
-            <div style={{ height: '400px' }}>
+            <div style={{ height: '200px' }}>
               Below the fold content here
               <TextInput id="test2" invalidText="A valid value is required" />
             </div>
@@ -241,10 +270,10 @@ export const ExpandableWithLayer = () => {
             tileCollapsedIconText="Interact to Expand tile"
             tileExpandedIconText="Interact to Collapse tile">
             <TileAboveTheFoldContent>
-              <div style={{ height: '200px' }}>Third layer</div>
+              <div style={{ height: '100px' }}>Third layer</div>
             </TileAboveTheFoldContent>
             <TileBelowTheFoldContent>
-              <div style={{ height: '400px' }}>
+              <div style={{ height: '100px' }}>
                 Below the fold content here
                 <TextInput id="test2" invalidText="A valid value is required" />
               </div>
@@ -252,6 +281,6 @@ export const ExpandableWithLayer = () => {
           </ExpandableTile>
         </Layer>
       </Layer>
-    </>
+    </div>
   );
 };

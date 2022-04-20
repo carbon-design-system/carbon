@@ -11,6 +11,7 @@
 @use '../../theme' as *;
 @use '../../type' as *;
 @use '../button/tokens' as button;
+@use '../../utilities/button-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
@@ -33,6 +34,8 @@
     outline: 2px solid transparent;
     outline-offset: -2px;
 
+    @include type-style('body-compact-01');
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -44,8 +47,7 @@
   }
 
   .#{$prefix}--tile--clickable,
-  .#{$prefix}--tile--selectable,
-  .#{$prefix}--tile--expandable {
+  .#{$prefix}--tile--selectable {
     cursor: pointer;
     transition: $duration-moderate-01 motion(standard, productive);
 
@@ -54,8 +56,12 @@
     }
   }
 
-  .#{$prefix}--tile--clickable,
-  .#{$prefix}--tile--expandable {
+  .#{$prefix}--tile--clickable {
+    @include reset;
+
+    color: $text-primary;
+    text-decoration: none;
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -71,14 +77,6 @@
   // Removes Firefox automatic border on buttons
   .#{$prefix}--tile--expandable::-moz-focus-inner {
     border: 0;
-  }
-
-  .#{$prefix}--tile--clickable {
-    @include reset;
-    @include type-style('body-compact-01');
-
-    color: $text-primary;
-    text-decoration: none;
   }
 
   .#{$prefix}--tile--clickable:hover,
@@ -102,19 +100,15 @@
     border: 1px solid transparent;
   }
 
-  .#{$prefix}--tile__checkmark,
-  .#{$prefix}--tile__chevron {
-    position: absolute;
-    border: none;
-    background: transparent;
-    transition: $duration-fast-02 motion(standard, productive);
-  }
-
   .#{$prefix}--tile__checkmark {
+    position: absolute;
     top: 1rem;
     right: 1rem;
     height: 1rem;
+    border: none;
+    background: transparent;
     opacity: 0;
+    transition: $duration-fast-02 motion(standard, productive);
 
     svg {
       border-radius: 50%;
@@ -132,14 +126,15 @@
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: $spacing-05;
-    bottom: $spacing-05;
+    right: 0;
+    bottom: 0;
     display: flex;
-    height: 1rem;
-    align-items: flex-end;
+    width: $spacing-09;
+    height: $spacing-09;
+    align-items: center;
+    justify-content: center;
 
     svg {
-      margin-left: $spacing-03;
       fill: $icon-primary;
       transform-origin: center;
       transition: $duration-fast-02 motion(standard, productive);
@@ -155,13 +150,28 @@
         fill: ButtonText;
       }
     }
+  }
 
-    &:hover {
-      cursor: pointer;
-    }
+  .#{$prefix}--tile__chevron--interactive {
+    @include button-reset.reset;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    width: $spacing-09;
+    height: $spacing-09;
+    align-items: center;
+    justify-content: center;
 
     &:focus {
-      outline: none;
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+
+    &:hover {
+      background-color: $layer-hover;
+      cursor: pointer;
     }
   }
 
@@ -171,10 +181,34 @@
     width: 100%;
     border: 0;
     color: inherit;
+    cursor: pointer;
     font-family: inherit;
     font-size: inherit;
     text-align: left;
     transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    @include type-style('body-compact-01');
+
+    &:hover {
+      background: $layer-hover;
+    }
+  }
+
+  .#{$prefix}--tile--expandable.#{$prefix}--tile--expandable--interactive {
+    cursor: default;
+    transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .#{$prefix}--tile--expandable--interactive:focus {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--tile-content__above-the-fold {

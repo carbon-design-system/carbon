@@ -28,7 +28,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     onBlur = () => {},
     pattern = '(1[012]|[1-9]):[0-5][0-9](\\s)?',
     placeholder = 'hh:mm',
-    size,
+    size = 'md',
     type = 'text',
     value,
     ...rest
@@ -211,7 +211,7 @@ TimePicker.propTypes = {
   placeholder: PropTypes.string,
 
   /**
-   * Specify the size of the Time Picker. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
+   * Specify the size of the Time Picker.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 

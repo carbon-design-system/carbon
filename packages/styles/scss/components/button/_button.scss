@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../../config' as *;
 @use 'vars' as *;
 @use 'mixins' as *;
-@use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
@@ -219,8 +219,6 @@
       color: $text-on-color;
     }
 
-    // TODO: deprecate single dash tertiary
-    &-tertiary,
     &--tertiary {
       @include button-theme(
         transparent,
@@ -259,8 +257,6 @@
       }
     }
 
-    // TODO: deprecate single dash ghost
-    &-ghost,
     &--ghost {
       @include button-theme(
         transparent,
@@ -312,15 +308,13 @@
     padding: $button-padding-sm;
   }
 
-  // V11: change xl to 2xl
-  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+  .#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(80px);
   }
 
-  // V11: change lg to xl
-  .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(64px);

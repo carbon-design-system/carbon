@@ -11,7 +11,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   translateWithId={[Function]}
 >
   <Search
-    className="custom-class bx--toolbar-search-container-expandable"
+    className="custom-class cds--toolbar-search-container-expandable"
     closeButtonLabelText="Clear search input"
     id="custom-id"
     labelText="Filter table"
@@ -26,17 +26,17 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   >
     <div
       aria-labelledby="custom-id-search"
-      className="bx--search bx--search--xl custom-class bx--toolbar-search-container-expandable"
+      className="cds--search cds--search--xl custom-class cds--toolbar-search-container-expandable"
       role="search"
     >
       <div
-        className="bx--search-magnifier"
+        className="cds--search-magnifier"
       >
-        <ForwardRef(Search16)
-          className="bx--search-magnifier-icon"
+        <ForwardRef(Search)
+          className="cds--search-magnifier-icon"
         >
           <Icon
-            className="bx--search-magnifier-icon"
+            className="cds--search-magnifier-icon"
             fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
@@ -46,7 +46,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="bx--search-magnifier-icon"
+              className="cds--search-magnifier-icon"
               fill="currentColor"
               focusable="false"
               height={16}
@@ -56,14 +56,14 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5	C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
               />
             </svg>
           </Icon>
-        </ForwardRef(Search16)>
+        </ForwardRef(Search)>
       </div>
       <label
-        className="bx--label"
+        className="cds--label"
         htmlFor="custom-id"
         id="custom-id-search"
       >
@@ -71,7 +71,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       </label>
       <input
         autoComplete="off"
-        className="bx--search-input"
+        className="cds--search-input"
         id="custom-id"
         onBlur={[Function]}
         onChange={[Function]}
@@ -85,11 +85,11 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
       />
       <button
         aria-label="Clear search input"
-        className="bx--search-close bx--search-close--hidden"
+        className="cds--search-close cds--search-close--hidden"
         onClick={[Function]}
         type="button"
       >
-        <ForwardRef(Close16)>
+        <ForwardRef(Close)>
           <Icon
             fill="currentColor"
             height={16}
@@ -113,7 +113,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
               />
             </svg>
           </Icon>
-        </ForwardRef(Close16)>
+        </ForwardRef(Close)>
       </button>
     </div>
   </Search>

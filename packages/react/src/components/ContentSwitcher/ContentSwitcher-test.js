@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
-import ContentSwitcher from '../ContentSwitcher';
+import ContentSwitcher from './ContentSwitcher';
 import Switch from '../Switch';
 import { mount, shallow } from 'enzyme';
 
@@ -217,6 +218,28 @@ describe('ContentSwitcher', () => {
         name: 'third',
         text: 'third',
       });
+    });
+  });
+
+  describe('automated verification testing', () => {
+    it('should have no aXe violations', async () => {
+      const { container } = render(
+        <ContentSwitcher>
+          <Switch kind="anchor" text="one" />
+          <Switch kind="anchor" text="two" />
+        </ContentSwitcher>
+      );
+      await expect(container).toHaveNoAxeViolations();
+    });
+
+    it('should have no AC violations', async () => {
+      const { container } = render(
+        <ContentSwitcher>
+          <Switch kind="anchor" text="one" />
+          <Switch kind="anchor" text="two" />
+        </ContentSwitcher>
+      );
+      await expect(container).toHaveNoACViolations('ContentSwitcher');
     });
   });
 });

@@ -11,13 +11,12 @@ import React from 'react';
 import { usePrefix } from '../../../internal/usePrefix';
 
 import {
-  default as FileUploader,
+  FileUploader,
   FileUploaderButton,
   FileUploaderDropContainer,
   FileUploaderItem,
   FileUploaderSkeleton,
 } from '../';
-import mdx from './FileUploader.mdx';
 import './FileUploader-story.scss';
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
@@ -30,11 +29,6 @@ export default {
     FileUploaderSkeleton,
     FileUploaderItem,
     FileUploaderDropContainer,
-  },
-  parameters: {
-    docs: {
-      page: mdx,
-    },
   },
 };
 

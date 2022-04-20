@@ -18,14 +18,14 @@ exports[`HeaderMenu should render 1`] = `
               aria-expanded="false"
               aria-haspopup="menu"
               aria-label="Accessibility label"
-              class="bx--header__menu-item bx--header__menu-title"
+              class="cds--header__menu-item cds--header__menu-title"
               href="#"
               tabindex="0"
             >
               test
               <svg
                 aria-hidden="true"
-                class="bx--header__menu-arrow"
+                class="cds--header__menu-arrow"
                 fill="currentColor"
                 focusable="false"
                 height="16"
@@ -53,7 +53,7 @@ exports[`HeaderMenu should render 1`] = `
     tabIndex={-1}
   >
     <li
-      className="bx--header__submenu custom-class"
+      className="cds--header__submenu custom-class"
       onBlur={[Function]}
       onClick={[Function]}
       onKeyDown={[Function]}
@@ -63,17 +63,17 @@ exports[`HeaderMenu should render 1`] = `
         aria-expanded={false}
         aria-haspopup="menu"
         aria-label="Accessibility label"
-        className="bx--header__menu-item bx--header__menu-title"
+        className="cds--header__menu-item cds--header__menu-title"
         href="#"
         onKeyDown={[Function]}
         tabIndex={0}
       >
         test
-        <ForwardRef(ChevronDown16)
-          className="bx--header__menu-arrow"
+        <ForwardRef(ChevronDown)
+          className="cds--header__menu-arrow"
         >
           <Icon
-            className="bx--header__menu-arrow"
+            className="cds--header__menu-arrow"
             fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
@@ -83,7 +83,7 @@ exports[`HeaderMenu should render 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="bx--header__menu-arrow"
+              className="cds--header__menu-arrow"
               fill="currentColor"
               focusable="false"
               height={16}
@@ -97,11 +97,11 @@ exports[`HeaderMenu should render 1`] = `
               />
             </svg>
           </Icon>
-        </ForwardRef(ChevronDown16)>
+        </ForwardRef(ChevronDown)>
       </a>
       <ul
         aria-label="Accessibility label"
-        className="bx--header__menu"
+        className="cds--header__menu"
       >
         <HeaderMenuItem
           href="/a"
@@ -109,18 +109,18 @@ exports[`HeaderMenu should render 1`] = `
         >
           <li>
             <Link
-              className="bx--header__menu-item"
+              className="cds--header__menu-item"
               element="a"
               href="/a"
               tabIndex={0}
             >
               <a
-                className="bx--header__menu-item"
+                className="cds--header__menu-item"
                 href="/a"
                 tabIndex={0}
               >
                 <span
-                  className="bx--text-truncate--end"
+                  className="cds--text-truncate--end"
                 >
                   A
                 </span>
@@ -134,18 +134,18 @@ exports[`HeaderMenu should render 1`] = `
         >
           <li>
             <Link
-              className="bx--header__menu-item"
+              className="cds--header__menu-item"
               element="a"
               href="/b"
               tabIndex={0}
             >
               <a
-                className="bx--header__menu-item"
+                className="cds--header__menu-item"
                 href="/b"
                 tabIndex={0}
               >
                 <span
-                  className="bx--text-truncate--end"
+                  className="cds--text-truncate--end"
                 >
                   B
                 </span>
@@ -159,18 +159,18 @@ exports[`HeaderMenu should render 1`] = `
         >
           <li>
             <Link
-              className="bx--header__menu-item"
+              className="cds--header__menu-item"
               element="a"
               href="/c"
               tabIndex={0}
             >
               <a
-                className="bx--header__menu-item"
+                className="cds--header__menu-item"
                 href="/c"
                 tabIndex={0}
               >
                 <span
-                  className="bx--text-truncate--end"
+                  className="cds--text-truncate--end"
                 >
                   C
                 </span>

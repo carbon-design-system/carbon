@@ -8,8 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { Add16, Subtract16 } from '@carbon/icons-react';
+import { Add, Subtract } from '@carbon/icons-react';
 import * as FeatureFlags from '@carbon/feature-flags';
 import mergeRefs from '../../tools/mergeRefs';
 import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
@@ -17,10 +16,9 @@ import requiredIfValueExists from '../../prop-types/requiredIfValueExists';
 // can only be placed in a function component
 import { useNormalizedInputProps as getNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { useControlledStateWithValue } from '../../internal/FeatureFlags';
+import { PrefixContext } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { FeatureFlagContext } from '../FeatureFlags';
-
-const { prefix } = settings;
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -361,177 +359,192 @@ class NumberInput extends Component {
       enabled = scope.enabled('enable-v11-release');
     }
 
-    const numberInputClasses = classNames(
-      `${prefix}--number ${prefix}--number--helpertext`,
-      [enabled ? null : className],
-      {
-        [`${prefix}--number--readonly`]: readOnly,
-        [`${prefix}--number--light`]: light,
-        [`${prefix}--number--nolabel`]: hideLabel,
-        [`${prefix}--number--nosteppers`]: hideSteppers,
-        [`${prefix}--number--mobile`]: isMobile,
-        [`${prefix}--number--${size}`]: size,
-      }
-    );
-
-    let isInputInvalid;
-
-    // If the user supplied `invalid` through props, we'll defer to the passed in value
-    if (invalid) {
-      isInputInvalid = true;
-    } else {
-      // Otherwise, if we don't allow an empty value then we check to see
-      // if the value is empty, or if it is out of range
-      if (!allowEmpty && this.state.value === '') {
-        isInputInvalid = true;
-      } else {
-        if (
-          this.state.value !== '' &&
-          (this.state.value > max || this.state.value < min)
-        ) {
-          isInputInvalid = true;
-        }
-      }
-    }
-
-    const normalizedProps = getNormalizedInputProps({
-      id,
-      readOnly,
-      disabled,
-      invalid: isInputInvalid,
-      invalidText,
-      warn,
-      warnText,
-    });
-
-    const props = {
-      disabled: normalizedProps.disabled,
-      id,
-      max,
-      min,
-      step,
-      onChange: this.handleChange,
-      value:
-        useControlledStateWithValue && this.isControlled
-          ? value
-          : this.state.value,
-      readOnly,
-      'aria-label': label ? null : ariaLabel,
-    };
-
-    const buttonProps = {
-      disabled,
-    };
-
-    const inputWrapperProps = {};
-
-    if (normalizedProps.invalid) {
-      inputWrapperProps['data-invalid'] = true;
-    }
-
-    const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-      [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
-    });
-
-    const helper = helperText ? (
-      <div className={helperTextClasses}>{helperText}</div>
-    ) : null;
-
-    const labelClasses = classNames(`${prefix}--label`, {
-      [`${prefix}--label--disabled`]: normalizedProps.disabled,
-      [`${prefix}--visually-hidden`]: hideLabel,
-    });
-
-    const labelText = label ? (
-      <label htmlFor={id} className={labelClasses}>
-        {label}
-      </label>
-    ) : null;
-
-    const [incrementNumLabel, decrementNumLabel] = [
-      t('increment.number'),
-      t('decrement.number'),
-    ];
-
-    const wrapperClasses = classNames(`${prefix}--number__input-wrapper`, {
-      [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
-    });
-
-    const iconClasses = classNames({
-      [`${prefix}--number__invalid`]:
-        normalizedProps.invalid || normalizedProps.warn,
-      [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
-      [`${prefix}--number__readonly-icon`]: readOnly,
-    });
-
-    let ariaDescribedBy = null;
-    if (normalizedProps.invalid) {
-      ariaDescribedBy = normalizedProps.invalidId;
-    }
-    if (normalizedProps.warn) {
-      ariaDescribedBy = normalizedProps.warnId;
-    }
-
     return (
-      <div
-        className={
-          enabled
-            ? classNames(`${prefix}--form-item`, className)
-            : `${prefix}--form-item`
-        }>
-        <div className={numberInputClasses} {...inputWrapperProps}>
-          {(() => {
-            return (
-              <>
-                {labelText}
-                <div className={wrapperClasses}>
-                  <input
-                    data-invalid={normalizedProps.invalid}
-                    aria-invalid={normalizedProps.invalid}
-                    aria-describedby={ariaDescribedBy}
-                    type="number"
-                    pattern="[0-9]*"
-                    {...other}
-                    {...props}
-                    ref={mergeRefs(ref, this._handleInputRef)}
-                  />
-                  {normalizedProps.icon && (
-                    <normalizedProps.icon className={iconClasses} />
-                  )}
-                  {!hideSteppers && (
-                    <div className={`${prefix}--number__controls`}>
-                      <button
-                        type="button"
-                        className={`${prefix}--number__control-btn down-icon`}
-                        {...buttonProps}
-                        onClick={(evt) => this.handleArrowClick(evt, 'down')}
-                        title={decrementNumLabel || iconDescription}
-                        aria-label={decrementNumLabel || iconDescription}
-                        tabIndex="-1">
-                        <Subtract16 className="down-icon" />
-                      </button>
-                      <div className={`${prefix}--number__rule-divider`}></div>
-                      <button
-                        type="button"
-                        className={`${prefix}--number__control-btn up-icon`}
-                        {...buttonProps}
-                        onClick={(evt) => this.handleArrowClick(evt, 'up')}
-                        title={incrementNumLabel || iconDescription}
-                        aria-label={incrementNumLabel || iconDescription}
-                        tabIndex="-1">
-                        <Add16 className="up-icon" />
-                      </button>
-                      <div className={`${prefix}--number__rule-divider`}></div>
-                    </div>
-                  )}
-                </div>
-                {normalizedProps.validation ? null : helper}
-              </>
-            );
-          })()}
-          {normalizedProps.validation}
-        </div>
-      </div>
+      <PrefixContext.Consumer>
+        {(prefix) => {
+          const numberInputClasses = classNames(
+            `${prefix}--number ${prefix}--number--helpertext`,
+            [enabled ? null : className],
+            {
+              [`${prefix}--number--readonly`]: readOnly,
+              [`${prefix}--number--light`]: light,
+              [`${prefix}--number--nolabel`]: hideLabel,
+              [`${prefix}--number--nosteppers`]: hideSteppers,
+              [`${prefix}--number--mobile`]: isMobile,
+              [`${prefix}--number--${size}`]: size,
+            }
+          );
+
+          let isInputInvalid;
+
+          // If the user supplied `invalid` through props, we'll defer to the passed in value
+          if (invalid) {
+            isInputInvalid = true;
+          } else {
+            // Otherwise, if we don't allow an empty value then we check to see
+            // if the value is empty, or if it is out of range
+            if (!allowEmpty && this.state.value === '') {
+              isInputInvalid = true;
+            } else {
+              if (
+                this.state.value !== '' &&
+                (this.state.value > max || this.state.value < min)
+              ) {
+                isInputInvalid = true;
+              }
+            }
+          }
+
+          const normalizedProps = getNormalizedInputProps({
+            id,
+            readOnly,
+            disabled,
+            invalid: isInputInvalid,
+            invalidText,
+            warn,
+            warnText,
+          });
+
+          const props = {
+            disabled: normalizedProps.disabled,
+            id,
+            max,
+            min,
+            step,
+            onChange: this.handleChange,
+            value:
+              useControlledStateWithValue && this.isControlled
+                ? value
+                : this.state.value,
+            readOnly,
+            'aria-label': label ? null : ariaLabel,
+          };
+
+          const buttonProps = {
+            disabled,
+          };
+
+          const inputWrapperProps = {};
+
+          if (normalizedProps.invalid) {
+            inputWrapperProps['data-invalid'] = true;
+          }
+
+          const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
+            [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
+          });
+
+          const helper = helperText ? (
+            <div className={helperTextClasses}>{helperText}</div>
+          ) : null;
+
+          const labelClasses = classNames(`${prefix}--label`, {
+            [`${prefix}--label--disabled`]: normalizedProps.disabled,
+            [`${prefix}--visually-hidden`]: hideLabel,
+          });
+
+          const labelText = label ? (
+            <label htmlFor={id} className={labelClasses}>
+              {label}
+            </label>
+          ) : null;
+
+          const [incrementNumLabel, decrementNumLabel] = [
+            t('increment.number'),
+            t('decrement.number'),
+          ];
+
+          const wrapperClasses = classNames(
+            `${prefix}--number__input-wrapper`,
+            {
+              [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
+            }
+          );
+
+          const iconClasses = classNames({
+            [`${prefix}--number__invalid`]:
+              normalizedProps.invalid || normalizedProps.warn,
+            [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
+            [`${prefix}--number__readonly-icon`]: readOnly,
+          });
+
+          let ariaDescribedBy = null;
+          if (normalizedProps.invalid) {
+            ariaDescribedBy = normalizedProps.invalidId;
+          }
+          if (normalizedProps.warn) {
+            ariaDescribedBy = normalizedProps.warnId;
+          }
+
+          return (
+            <div
+              className={
+                enabled
+                  ? classNames(`${prefix}--form-item`, className)
+                  : `${prefix}--form-item`
+              }>
+              <div className={numberInputClasses} {...inputWrapperProps}>
+                {(() => {
+                  return (
+                    <>
+                      {labelText}
+                      <div className={wrapperClasses}>
+                        <input
+                          data-invalid={normalizedProps.invalid}
+                          aria-invalid={normalizedProps.invalid}
+                          aria-describedby={ariaDescribedBy}
+                          type="number"
+                          pattern="[0-9]*"
+                          {...other}
+                          {...props}
+                          ref={mergeRefs(ref, this._handleInputRef)}
+                        />
+                        {normalizedProps.icon && (
+                          <normalizedProps.icon className={iconClasses} />
+                        )}
+                        {!hideSteppers && (
+                          <div className={`${prefix}--number__controls`}>
+                            <button
+                              type="button"
+                              className={`${prefix}--number__control-btn down-icon`}
+                              {...buttonProps}
+                              onClick={(evt) =>
+                                this.handleArrowClick(evt, 'down')
+                              }
+                              title={decrementNumLabel || iconDescription}
+                              aria-label={decrementNumLabel || iconDescription}
+                              tabIndex="-1">
+                              <Subtract className="down-icon" />
+                            </button>
+                            <div
+                              className={`${prefix}--number__rule-divider`}></div>
+                            <button
+                              type="button"
+                              className={`${prefix}--number__control-btn up-icon`}
+                              {...buttonProps}
+                              onClick={(evt) =>
+                                this.handleArrowClick(evt, 'up')
+                              }
+                              title={incrementNumLabel || iconDescription}
+                              aria-label={incrementNumLabel || iconDescription}
+                              tabIndex="-1">
+                              <Add className="up-icon" />
+                            </button>
+                            <div
+                              className={`${prefix}--number__rule-divider`}></div>
+                          </div>
+                        )}
+                      </div>
+                      {normalizedProps.validation ? null : helper}
+                    </>
+                  );
+                })()}
+                {normalizedProps.validation}
+              </div>
+            </div>
+          );
+        }}
+      </PrefixContext.Consumer>
     );
   }
 }

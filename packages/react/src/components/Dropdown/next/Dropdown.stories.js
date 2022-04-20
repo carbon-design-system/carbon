@@ -8,6 +8,7 @@
 import React from 'react';
 import { default as Dropdown, DropdownSkeleton } from '../';
 import { Layer } from '../../Layer';
+import mdx from '../Dropdown.mdx';
 
 export default {
   title: 'Components/Dropdown',
@@ -19,6 +20,11 @@ export default {
     size: {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
     },
   },
 };

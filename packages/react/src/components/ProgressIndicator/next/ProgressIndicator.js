@@ -43,7 +43,8 @@ function ProgressIndicator({
         const onClick = onChange ? () => onChange(index) : undefined;
         if (index === currentIndex) {
           return React.cloneElement(child, {
-            current: true,
+            complete: child.props.complete,
+            current: child.props.complete ? false : true,
             index,
             onClick,
           });
@@ -70,8 +71,8 @@ function ProgressIndicator({
 
 ProgressIndicator.propTypes = {
   /**
-   * Provide <ProgressStep> components to be rendered in the
-   * <ProgressIndicator>
+   * Provide `<ProgressStep>` components to be rendered in the
+   * `<ProgressIndicator>`
    */
   children: PropTypes.node,
 

@@ -16,6 +16,7 @@ import { createClassWrapper } from '../../internal/createClassWrapper';
 
 export {
   Filename,
+  FileUploader,
   FileUploaderSkeleton,
   FileUploaderButton,
   FileUploaderDropContainer,

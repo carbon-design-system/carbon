@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { CheckmarkFilled16 } from '@carbon/icons-react';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
+import { CheckmarkFilled } from '@carbon/icons-react';
+import mdx from './StructuredList.mdx';
 
 import {
   StructuredListWrapper,
@@ -17,21 +17,13 @@ import {
   StructuredListInput,
   StructuredListCell,
   StructuredListSkeleton,
-} from '../../StructuredList';
-import { settings } from 'carbon-components';
-import mdx from './StructuredList.mdx';
+} from './StructuredList';
 
-const { prefix } = settings;
-
-const props = () => ({
-  isCondensed: boolean('Condensed', false),
-  isFlush: boolean('Flush alignment', false),
-});
+const prefix = 'cds';
 
 export default {
   title: 'Components/StructuredList',
   component: StructuredListWrapper,
-  decorators: [withKnobs],
   subcomponents: {
     StructuredListHead,
     StructuredListBody,
@@ -89,7 +81,7 @@ Simple.parameters = {
 };
 
 export const Playground = () => (
-  <StructuredListWrapper {...props()}>
+  <StructuredListWrapper>
     <StructuredListHead>
       <StructuredListRow head>
         <StructuredListCell head>ColumnA</StructuredListCell>
@@ -133,7 +125,7 @@ Playground.parameters = {
 export const Selection = () => {
   const structuredListBodyRowGenerator = (numRows) => {
     return Array.apply(null, Array(numRows)).map((n, i) => (
-      <StructuredListRow label key={`row-${i}`}>
+      <StructuredListRow key={`row-${i}`}>
         <StructuredListCell>Row {i}</StructuredListCell>
         <StructuredListCell>Row {i}</StructuredListCell>
         <StructuredListCell>
@@ -147,20 +139,19 @@ export const Selection = () => {
           value={`row-${i}`}
           title={`row-${i}`}
           name="row-0"
-          defaultChecked={!i || null}
         />
         <StructuredListCell>
-          <CheckmarkFilled16
+          <CheckmarkFilled
             className={`${prefix}--structured-list-svg`}
             aria-label="select an option">
             <title>select an option</title>
-          </CheckmarkFilled16>
+          </CheckmarkFilled>
         </StructuredListCell>
       </StructuredListRow>
     ));
   };
   return (
-    <StructuredListWrapper selection {...props()}>
+    <StructuredListWrapper selection>
       <StructuredListHead>
         <StructuredListRow head>
           <StructuredListCell head>ColumnA</StructuredListCell>

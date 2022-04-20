@@ -11,13 +11,13 @@ import SliderSkeleton from '../Slider/Slider.Skeleton';
 import { mount, shallow } from 'enzyme';
 import 'requestanimationframe';
 import throttle from 'lodash.throttle';
-import { settings } from 'carbon-components';
 
 jest.mock('lodash.throttle');
 
 throttle.mockImplementation((fn) => Object.assign(fn, { throttled: true }));
 
-const { prefix } = settings;
+const prefix = 'cds';
+
 describe('Slider', () => {
   const id = 'slider';
   let wrapper;
@@ -69,12 +69,6 @@ describe('Slider', () => {
 
     it('should accurately position slider on mount', () => {
       expect(wrapper.state().left).toEqual(0);
-    });
-
-    it('should specify light version as expected', () => {
-      expect(wrapper.props().light).toEqual(false);
-      wrapper.setProps({ light: true });
-      expect(wrapper.props().light).toEqual(true);
     });
 
     it('marks input field as hidden if hidden via props', () => {

@@ -9,7 +9,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { HeaderMenu, HeaderMenuItem } from '../';
 
-const prefix = 'bx';
+const prefix = 'cds';
 
 describe('HeaderMenu', () => {
   let mountNode;

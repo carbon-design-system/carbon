@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>accordion</title>
+    <defs>
+        <polygon id="path-1" points="3.125 0 6.25 3.125 5.808125 3.566875 3.125 0.88375 0.441875 3.566875 0 3.125"></polygon>
+        <polygon id="path-3" points="3.125 0 6.25 3.125 5.808125 3.566875 3.125 0.88375 0.441875 3.566875 0 3.125"></polygon>
+        <polygon id="path-5" points="3.125 0 6.25 3.125 5.808125 3.566875 3.125 0.88375 0.441875 3.566875 0 3.125"></polygon>
+    </defs>
+    <g id="accordion" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(72.000000, 54.000000)">
+            <rect id="Rectangle-6-Copy-23" fill="#A8A8A8" x="7" y="58" width="60" height="5"></rect>
+            <g transform="translate(13.000000, 48.000000)" fill="#DCDCDC" id="color/gray/20-copy-87">
+                <g transform="translate(69.000000, 0.500000) scale(1, -1) translate(-69.000000, -0.500000) ">
+                    <rect id="Rectangle" x="0" y="0" width="138" height="1"></rect>
+                </g>
+            </g>
+            <g transform="translate(0.000000, 72.000000)" fill="#BEBEBE" id="color/gray/20-copy-88">
+                <g transform="translate(88.000000, 0.500000) scale(1, -1) translate(-88.000000, -0.500000) ">
+                    <rect id="gray-30" x="0" y="0" width="176" height="1"></rect>
+                </g>
+            </g>
+            <g transform="translate(161.000000, 56.000000)" id="icon/navigation/chevron/up/16-copy-43">
+                <g transform="translate(5.000000, 5.000000) scale(1, -1) translate(-5.000000, -5.000000) " id="Group">
+                    <g id="chevron--up" transform="translate(1.875000, 3.125000)">
+                        <mask id="mask-2" fill="white">
+                            <use xlink:href="#path-1"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-1"></use>
+                        <g id="Group" mask="url(#mask-2)">
+                            <g transform="translate(-1.875000, -3.125000)" id="icon-color">
+                                <rect id="Rectangle" fill="#000000" x="0" y="0" width="25" height="25"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <polygon id="transparent-rectangle" transform="translate(5.000000, 5.000000) rotate(-90.000000) translate(-5.000000, -5.000000) " points="-3.55271368e-15 1.21586429e-14 10 1.21586429e-14 10 10 -3.55271368e-15 10"></polygon>
+                </g>
+            </g>
+            <rect id="Rectangle-6-Copy-24" fill="#A8A8A8" x="7" y="10" width="60" height="5"></rect>
+            <rect id="Rectangle-6-Copy-25" fill="#A8A8A8" x="7" y="34" width="85" height="5"></rect>
+            <g fill="#BEBEBE" id="color/gray/20-copy-88" transform="translate(88.000000, 0.500000) scale(1, -1) translate(-88.000000, -0.500000) ">
+                <rect id="gray-30" x="0" y="0" width="176" height="1"></rect>
+            </g>
+            <g transform="translate(0.000000, 24.000000)" fill="#BEBEBE" id="color/gray/20-copy-88">
+                <g transform="translate(88.000000, 0.500000) scale(1, -1) translate(-88.000000, -0.500000) ">
+                    <rect id="gray-30" x="0" y="0" width="176" height="1"></rect>
+                </g>
+            </g>
+            <g transform="translate(0.000000, 48.000000)" fill="#BEBEBE" id="color/gray/20-copy-88">
+                <g transform="translate(88.000000, 0.500000) scale(1, -1) translate(-88.000000, -0.500000) ">
+                    <rect id="gray-30" x="0" y="0" width="176" height="1"></rect>
+                </g>
+            </g>
+            <g transform="translate(161.000000, 7.000000)" id="icon/navigation/chevron/up/16-copy-43">
+                <g transform="translate(5.000000, 5.000000) scale(1, -1) translate(-5.000000, -5.000000) " id="Group">
+                    <g id="chevron--up" transform="translate(1.875000, 3.125000)">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
+                        <g id="Group" mask="url(#mask-4)">
+                            <g transform="translate(-1.875000, -3.125000)" id="icon-color">
+                                <rect id="Rectangle" fill="#000000" x="0" y="0" width="25" height="25"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <polygon id="transparent-rectangle" transform="translate(5.000000, 5.000000) rotate(-90.000000) translate(-5.000000, -5.000000) " points="-3.55271368e-15 1.21586429e-14 10 1.21586429e-14 10 10 -3.55271368e-15 10"></polygon>
+                </g>
+            </g>
+            <g transform="translate(161.000000, 31.000000)" id="icon/navigation/chevron/up/16-copy-43">
+                <g transform="translate(5.000000, 5.000000) scale(1, -1) translate(-5.000000, -5.000000) " id="Group">
+                    <g id="chevron--up" transform="translate(1.875000, 3.125000)">
+                        <mask id="mask-6" fill="white">
+                            <use xlink:href="#path-5"></use>
+                        </mask>
+                        <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-5"></use>
+                        <g id="Group" mask="url(#mask-6)">
+                            <g transform="translate(-1.875000, -3.125000)" id="icon-color">
+                                <rect id="Rectangle" fill="#000000" x="0" y="0" width="25" height="25"></rect>
+                            </g>
+                        </g>
+                    </g>
+                    <polygon id="transparent-rectangle" transform="translate(5.000000, 5.000000) rotate(-90.000000) translate(-5.000000, -5.000000) " points="-3.55271368e-15 1.21586429e-14 10 1.21586429e-14 10 10 -3.55271368e-15 10"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

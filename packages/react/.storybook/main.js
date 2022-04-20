@@ -7,63 +7,91 @@
 
 'use strict';
 
+const fs = require('fs');
 const glob = require('fast-glob');
-const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const customProperties = require('postcss-custom-properties');
-const rtlcss = require('rtlcss');
+const path = require('path');
 
-const {
-  STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
-  STORYBOOK_USE_RTL,
-  STORYBOOK_USE_SASS_LOADER,
-  NODE_ENV = 'development',
-} = process.env;
-
-const useSassLoader = STORYBOOK_USE_SASS_LOADER === 'true';
-const useExternalCss = NODE_ENV === 'production';
-const useRtl = STORYBOOK_USE_RTL === 'true';
-
-module.exports = {
-  addons: [
-    '@storybook/addon-storysource',
-    '@storybook/addon-knobs',
-    '@storybook/addon-actions',
-    '@storybook/addon-docs',
-    '@storybook/addon-notes/register',
-    'storybook-readme/register',
-    '@storybook/addon-links',
-    require.resolve('./addon-theme/register'),
-  ],
-
-  core: {
-    builder: 'webpack5',
-  },
-
-  features: {
-    previewCsfV3: true,
-  },
-
-  staticDirs: [path.join(__dirname, 'assets')],
-
-  stories: glob.sync(
+const stories = glob
+  .sync(
     [
       './Welcome/Welcome.stories.js',
-      '../src/**/*-story.js',
+      '../src/**/*.stories.js',
       '../src/**/*.stories.mdx',
+      '../src/**/next/*.stories.js',
+      '../src/**/next/**/*.stories.js',
+      '../src/**/next/*.stories.mdx',
+      '../src/**/*-story.js',
     ],
     {
       cwd: __dirname,
-      ignore: ['../**/next/**'],
     }
-  ),
+  )
+  // Filters the stories by finding the paths that have a story file that ends
+  // in `-story.js` and checks to see if they also have a `.stories.js`,
+  // if so then defer to the `.stories.js`
+  .filter((match) => {
+    const filepath = path.resolve(__dirname, match);
+    const basename = path.basename(match, '.js');
+    const denylist = new Set([
+      'TooltipDefinition-story',
+      'DataTable-basic-story',
+      'DataTable-batch-actions-story',
+      'DataTable-filtering-story',
+      'DataTable-selection-story',
+      'DataTable-sorting-story',
+      'DataTable-toolbar-story',
+      'DataTable-dynamic-content-story',
+      'DataTable-expansion-story',
+    ]);
 
-  webpack(config, { configType }) {
-    config.devtool =
-      configType === 'DEVELOPMENT'
-        ? 'eval-cheap-module-source-map'
-        : 'source-map';
+    if (denylist.has(basename)) {
+      return false;
+    }
 
+    if (basename.endsWith('-story')) {
+      const component = basename.replace(/-story$/, '');
+      const storyName = path.resolve(
+        filepath,
+        '..',
+        'next',
+        `${component}.stories.js`
+      );
+
+      if (fs.existsSync(storyName)) {
+        return false;
+      }
+
+      return true;
+    }
+
+    return true;
+  });
+
+module.exports = {
+  addons: [
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        actions: true,
+        backgrounds: false,
+        controls: true,
+        docs: true,
+        toolbars: true,
+        viewport: true,
+      },
+    },
+    '@storybook/addon-storysource',
+    '@storybook/addon-a11y',
+  ],
+  core: {
+    builder: 'webpack5',
+  },
+  features: {
+    previewCsfV3: true,
+  },
+  stories,
+  webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {
         return loader.includes('babel-loader');
@@ -80,72 +108,21 @@ module.exports = {
     //
     // This results in these files being included in `babel-loader` and causing
     // the build times to increase dramatically
-    babelLoader.exclude = [/node_modules/, /packages\/.*\/(es|lib|umd)/];
-
-    const sassLoader = {
-      loader: require.resolve('sass-loader'),
-      options: {
-        additionalData(content) {
-          return `
-            $feature-flags: (
-              ui-shell: true,
-              enable-css-custom-properties: ${STORYBOOK_USE_CUSTOM_PROPERTIES},
-            );
-            ${content}
-          `;
-        },
-        sassOptions: {
-          implementation: require('sass'),
-          includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-        },
-        sourceMap: true,
-      },
-    };
-
-    const fastSassLoader = {
-      loader: require.resolve('fast-sass-loader'),
-      options: {
-        data: `
-          $feature-flags: (
-            ui-shell: true,
-            enable-css-custom-properties: ${STORYBOOK_USE_CUSTOM_PROPERTIES},
-          );
-        `,
-        implementation: require('sass'),
-        includePaths: [
-          path.resolve(__dirname, '..', 'node_modules'),
-          path.resolve(__dirname, '..', '..', '..', 'node_modules'),
-        ],
-        sourceMap: true,
-      },
-    };
+    babelLoader.exclude = [
+      /node_modules/,
+      /packages\/.*\/(es|lib|umd)/,
+      /packages\/icons-react\/next/,
+    ];
 
     config.module.rules.push({
-      test: /-story\.jsx?$/,
-      use: [
-        {
-          loader: require.resolve('@storybook/source-loader'),
-          options: {
-            prettierConfig: {
-              parser: 'babylon',
-              printWidth: 80,
-              tabWidth: 2,
-              bracketSpacing: true,
-              trailingComma: 'es5',
-              singleQuote: true,
-            },
-          },
-        },
-      ],
-      enforce: 'pre',
-    });
-
-    config.module.rules.push({
-      test: /\.scss$/,
+      test: /\.s?css$/,
       sideEffects: true,
       use: [
         {
-          loader: useExternalCss ? MiniCssExtractPlugin.loader : 'style-loader',
+          loader:
+            process.env.NODE_ENV === 'production'
+              ? MiniCssExtractPlugin.loader
+              : 'style-loader',
         },
         {
           loader: 'css-loader',
@@ -159,23 +136,32 @@ module.exports = {
           options: {
             postcssOptions: {
               plugins: [
-                customProperties(),
                 require('autoprefixer')({
                   overrideBrowserslist: ['last 1 version'],
                 }),
-                ...(useRtl ? [rtlcss] : []),
               ],
             },
             sourceMap: true,
           },
         },
-        NODE_ENV === 'production' || useSassLoader
-          ? sassLoader
-          : fastSassLoader,
+        {
+          loader: 'sass-loader',
+          options: {
+            implementation: require('sass'),
+            sassOptions: {
+              includePaths: [
+                path.resolve(__dirname, '..', 'node_modules'),
+                path.resolve(__dirname, '..', '..', '..', 'node_modules'),
+              ],
+            },
+            warnRuleAsWarning: true,
+            sourceMap: true,
+          },
+        },
       ],
     });
 
-    if (useExternalCss) {
+    if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
         new MiniCssExtractPlugin({
           filename: '[name].[contenthash].css',

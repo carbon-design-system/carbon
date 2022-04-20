@@ -8,24 +8,27 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const SliderSkeleton = ({ hideLabel, className, ...rest }) => (
-  <div className={cx(`${prefix}--form-item`, className)} {...rest}>
-    {!hideLabel && <span className={`${prefix}--label ${prefix}--skeleton`} />}
-    <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
-      <span className={`${prefix}--slider__range-label`} />
-      <div className={`${prefix}--slider`}>
-        <div className={`${prefix}--slider__track`} />
-        <div className={`${prefix}--slider__filled-track`} />
-        <div className={`${prefix}--slider__thumb`} />
+const SliderSkeleton = ({ hideLabel, className, ...rest }) => {
+  const prefix = usePrefix();
+  return (
+    <div className={cx(`${prefix}--form-item`, className)} {...rest}>
+      {!hideLabel && (
+        <span className={`${prefix}--label ${prefix}--skeleton`} />
+      )}
+      <div className={`${prefix}--slider-container ${prefix}--skeleton`}>
+        <span className={`${prefix}--slider__range-label`} />
+        <div className={`${prefix}--slider`}>
+          <div className={`${prefix}--slider__track`} />
+          <div className={`${prefix}--slider__filled-track`} />
+          <div className={`${prefix}--slider__thumb`} />
+        </div>
+        <span className={`${prefix}--slider__range-label`} />
       </div>
-      <span className={`${prefix}--slider__range-label`} />
     </div>
-  </div>
-);
+  );
+};
 
 SliderSkeleton.propTypes = {
   /**

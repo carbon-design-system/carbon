@@ -34,7 +34,7 @@ function createPropAdapter(spec) {
 }
 
 /**
- * TODO: REMOVE IN v11
+ *
  * props staring with "default..." were changed to "initial..." in Downshift v3
  *
  * @see https://github.com/downshift-js/downshift/releases/tag/v3.0.0

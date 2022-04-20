@@ -14,15 +14,10 @@ import Button from '../Button';
 import { mount } from 'enzyme';
 import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {
-  Information16 as Information,
-  Add16 as Add,
-  OverflowMenuVertical16,
-} from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { Information, Add, OverflowMenuVertical } from '@carbon/icons-react';
 import '@testing-library/jest-dom';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 jest.mock('lodash.debounce', () => (fn) => {
   fn.cancel = jest.fn();
@@ -130,10 +125,10 @@ describe('Tooltip', () => {
   });
 
   describe('Renders as expected when custom icon component with inner forwardRef is provided', () => {
-    const wrapper = mount(<Tooltip renderIcon={OverflowMenuVertical16} />);
+    const wrapper = mount(<Tooltip renderIcon={OverflowMenuVertical} />);
 
     it('does render provided custom icon component instance', () => {
-      const icon = wrapper.find(OverflowMenuVertical16);
+      const icon = wrapper.find(OverflowMenuVertical);
       expect(icon.exists()).toBe(true);
     });
   });
@@ -259,7 +254,7 @@ describe('Tooltip', () => {
             </p>
             <div className="bx--tooltip__footer">
               <Link href="#">Learn more</Link>
-              <Button size="small" onClick={() => setTipOpen(false)}>
+              <Button size="sm" onClick={() => setTipOpen(false)}>
                 Create
               </Button>
             </div>

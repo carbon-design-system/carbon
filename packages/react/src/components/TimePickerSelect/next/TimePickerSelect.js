@@ -8,10 +8,9 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 
 import { usePrefix } from '../../../internal/usePrefix';
-import deprecate from '../../../prop-types/deprecate';
 
 const TimePickerSelect = React.forwardRef(function TimePickerSelect(
   {
@@ -43,10 +42,7 @@ const TimePickerSelect = React.forwardRef(function TimePickerSelect(
         {...rest}>
         {children}
       </select>
-      <ChevronDown16
-        className={`${prefix}--select__arrow`}
-        aria-hidden="true"
-      />
+      <ChevronDown className={`${prefix}--select__arrow`} aria-hidden="true" />
     </div>
   );
 });
@@ -71,15 +67,6 @@ TimePickerSelect.propTypes = {
    * Specify whether the control is disabled
    */
   disabled: PropTypes.bool,
-
-  /**
-   * Provide a description for the twistie icon that can be read by screen readers
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop for `TimePickerSelect` is no longer needed and has ' +
-      'been deprecated. It will be moved in the next major release. Use "aria-label" instead'
-  ),
 
   /**
    * Specify a custom `id` for the `<select>`

@@ -32,23 +32,22 @@
 
 ## Getting started
 
-If you're just getting started, check out
-[`carbon-components`](./packages/components). If you're looking for React
-components, take a look at [`carbon-components-react`](./packages/react).
+If you're just getting started, check out [`@carbon/react`](./packages/react).
 
 We also have community-contributed components for the following technologies:
 
 - [Angular](https://github.com/IBM/carbon-components-angular)
-- [Vue](https://github.com/carbon-design-system/carbon-components-vue)
 - [Svelte](https://github.com/IBM/carbon-components-svelte)
+- [Vue](https://github.com/carbon-design-system/carbon-components-vue)
+- [Web Components](https://github.com/carbon-design-system/carbon-web-components)
 
 If you're trying to find something specific, here's a full list of packages that
 we support!
 
 | Package name                                  | Description                                                                                                                                                                                                                                   |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [`carbon-components`](./packages/components)  | Component styles and Vanilla JavaScript                                                                                                                                                                                                       |
-| [`carbon-components-react`](./packages/react) | React components                                                                                                                                                                                                                              |
+| [`@carbon/react`](./packages/react)           | React components and styles                                                                                                                                                                                                                   |
+| [`@carbon/styles`](./packages/styles)         | Sass styles for components                                                                                                                                                                                                                    |
 | [`@carbon/elements`](./packages/elements)     | IBM Design Language elements like colors, type, iconography, and more                                                                                                                                                                         |
 | [`@carbon/colors`](./packages/colors)         | Work with IBM Design Language colors                                                                                                                                                                                                          |
 | [`@carbon/grid`](./packages/grid)             | Build layouts using the new 16 column grid system                                                                                                                                                                                             |
@@ -67,7 +66,8 @@ we support!
 - [Contributing](/.github/CONTRIBUTING.md): Guidelines for making contributions
   to this repo.
 - 🏃‍♀️ Migration Guides
-  - [v9 to v10 (vanilla)](./packages/components/docs/migration/migrate-to-10.x.md)
+  - [v10 to v11](./docs/migration/v11.md)
+  - [v9 to v10 (vanilla)](./packages/carbon-components/docs/migration/migrate-to-10.x.md)
   - [v9 to v10 (v6 to v7 React)](./packages/react/docs/migration/migrate-to-7.x.md)
 
 ## 🙌 Contributing
@@ -197,6 +197,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/Kman316"><img src="https://avatars.githubusercontent.com/u/25666525?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Cathal Kenneally</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Kman316" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/dezkareid"><img src="https://avatars.githubusercontent.com/u/1269896?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Joel Humberto Gómez Paredes</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=dezkareid" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/NashJames"><img src="https://avatars.githubusercontent.com/u/37304960?v=4?s=100" width="100px;" alt=""/><br /><sub><b>James Nash</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=NashJames" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=NashJames" title="Documentation">📖</a></td>
+    <td align="center"><a href="http://jakubfaliszewski.github.io/portfolio/"><img src="https://avatars.githubusercontent.com/u/25402419?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Faliszewski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jakubfaliszewski" title="Code">💻</a></td>
   </tr>
 </table>
 

@@ -84,7 +84,7 @@ export const headers = [
   },
   {
     key: 'attached_groups',
-    header: 'Attached Groups',
+    header: 'Attached groups',
   },
   {
     key: 'status',

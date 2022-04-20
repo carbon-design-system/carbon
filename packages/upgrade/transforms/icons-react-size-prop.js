@@ -40,7 +40,7 @@ function transform(fileInfo, api, options) {
   // For now, these icons are available under @carbon/icons-react/next
   // TODO: remove in v11
   matches.forEach((path) => {
-    path.get('source').get('value').replace('@carbon/icons-react/next');
+    path.get('source').get('value').replace('@carbon/icons-react');
   });
 
   // Otherwise, we will get our import to icons and update the imported icons to

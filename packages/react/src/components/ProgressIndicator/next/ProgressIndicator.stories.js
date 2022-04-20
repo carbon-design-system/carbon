@@ -6,15 +6,12 @@
  */
 
 import React from 'react';
-import { settings } from 'carbon-components';
 import {
   ProgressIndicator,
   ProgressStep,
   ProgressIndicatorSkeleton,
 } from '../';
-import Tooltip from '../../Tooltip';
-
-const { prefix } = settings;
+import mdx from '../ProgressIndicator.mdx';
 
 export default {
   title: 'Components/ProgressIndicator',
@@ -23,42 +20,29 @@ export default {
     ProgressStep,
     ProgressIndicatorSkeleton,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Default = () => (
   <ProgressIndicator>
     <ProgressStep
+      complete
       label="First step"
       description="Step 1: Getting started with Carbon Design System"
       secondaryLabel="Optional label"
     />
     <ProgressStep
+      current
       label="Second step with tooltip"
       description="Step 2: Getting started with Carbon Design System"
-      renderLabel={() => (
-        <Tooltip
-          direction="bottom"
-          showIcon={false}
-          triggerClassName={`${prefix}--progress-label`}
-          triggerText={'Second step with tooltip'}
-          tooltipId="tooltipId-0">
-          <p>Overflow tooltip content.</p>
-        </Tooltip>
-      )}
     />
     <ProgressStep
       label="Third step with tooltip"
       description="Step 3: Getting started with Carbon Design System"
-      renderLabel={() => (
-        <Tooltip
-          direction="bottom"
-          showIcon={false}
-          triggerClassName={`${prefix}--progress-label`}
-          triggerText={'Second step with tooltip'}
-          tooltipId="tooltipId-0">
-          <p>Overflow tooltip content.</p>
-        </Tooltip>
-      )}
     />
     <ProgressStep
       label="Fourth step"
@@ -85,23 +69,8 @@ export const Interactive = () => (
       description="The progress indicator will listen for clicks on the steps"
     />
     <ProgressStep
-      label="Tooltip and really long label"
+      label="Third step"
       description="The progress indicator will listen for clicks on the steps"
-      renderLabel={() => (
-        <Tooltip
-          direction="bottom"
-          showIcon={false}
-          triggerClassName={`${prefix}--progress-label`}
-          triggerText="Tooltip and really long label"
-          tooltipId="tooltipId-1">
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Animi
-            consequuntur hic ratione aliquid cupiditate, nesciunt saepe iste
-            blanditiis cumque maxime tenetur veniam est illo deserunt sint quae
-            pariatur. Laboriosam, consequatur.
-          </p>
-        </Tooltip>
-      )}
     />
   </ProgressIndicator>
 );

@@ -85,27 +85,62 @@ async function builder(metadata, { output }) {
   // the `files` object
   const files = {
     'index.js': template.ast(`
-      import React from 'react';
       import Icon from './Icon.js';
-      import { iconPropTypes } from './iconPropTypes.js';
       export { Icon };
-      const didWarnAboutDeprecation = {};
     `),
   };
   const input = {
     'index.js': 'index.js',
   };
+  const BUCKET_SIZE = 125;
+  const buckets = [
+    {
+      id: 'bucket-0',
+      modules: [],
+    },
+  ];
+  let bucket = buckets[0];
+  let bucketIndex = 0;
+
+  for (const m of modules) {
+    if (bucket.modules.length === BUCKET_SIZE) {
+      bucketIndex++;
+      bucket = {
+        id: `bucket-${bucketIndex}`,
+        modules: [],
+      };
+      buckets.push(bucket);
+    }
+
+    bucket.modules.push(m);
+  }
 
   for (const m of modules) {
     files[m.filepath] = m.entrypoint;
     input[m.filepath] = m.filepath;
-
-    files['index.js'].push(...m.source);
-    files['index.js'].push(template.ast(`export { ${m.name} };`));
   }
 
-  files['index.js'] = t.file(t.program(files['index.js']));
-  files['index.js'] = generate(files['index.js']).code;
+  for (const bucket of buckets) {
+    const filename = `generated/${bucket.id}.js`;
+
+    input[filename] = filename;
+    files[filename] = template.ast(`
+      import React from 'react';
+      import Icon from './Icon.js';
+      import { iconPropTypes } from './iconPropTypes.js';
+      const didWarnAboutDeprecation = {};
+    `);
+
+    for (const m of bucket.modules) {
+      files[filename].push(...m.source, template.ast(`export { ${m.name} };`));
+    }
+
+    files[filename] = t.file(t.program(files[filename]));
+    files[filename] = generate(files[filename]).code;
+    files['index.js'].push(template.ast(`export * from '${filename}';`));
+  }
+
+  files['index.js'] = generate(t.file(t.program(files['index.js']))).code;
 
   const defaultVirtualOptions = {
     // Each of our Icon modules use the "./Icon.js" path to import this base
@@ -138,62 +173,28 @@ async function builder(metadata, { output }) {
         ...files,
       }),
       babel(babelConfig),
-      // Add a custom plugin to emit a `package.json` file. This includes the
-      // settings for the "main" and "module" entrypoints for packages, along
-      // with the new "exports" field for Node.js v14+
-      //
-      // When this bundle becomes the default, this logic will live in
-      // icons-react/package.json
-      {
-        name: 'generate-package-json',
-        generateBundle() {
-          const packageJson = {
-            main: 'index.js',
-            module: 'index.esm.js',
-            exports: {
-              import: 'index.esm.js',
-              require: 'index.js',
-            },
-          };
-          this.emitFile({
-            type: 'asset',
-            name: 'package.json',
-            fileName: 'package.json',
-            source: JSON.stringify(packageJson, null, 2),
-          });
-        },
-      },
     ],
   });
+  const targets = [
+    {
+      directory: path.join(output, 'es'),
+      format: 'esm',
+    },
+    {
+      directory: path.join(output, 'lib'),
+      format: 'commonjs',
+    },
+  ];
 
-  await bundle.write({
-    dir: path.join(output, 'next'),
-    format: 'commonjs',
-    entryFileNames: '[name]',
-    banner: templates.banner,
-    exports: 'auto',
-  });
-
-  // We create a separate rollup for our ESM bundle since this will only emit
-  // one file: `index.esm.js`
-  const esmBundle = await rollup({
-    input: 'index.js',
-    external: ['@carbon/icon-helpers', 'react', 'prop-types'],
-    plugins: [
-      virtual({
-        ...defaultVirtualOptions,
-        'index.js': files['index.js'],
-      }),
-      babel(babelConfig),
-    ],
-  });
-
-  await esmBundle.write({
-    file: path.join(output, 'next', 'index.esm.js'),
-    format: 'esm',
-    banner: templates.banner,
-    exports: 'auto',
-  });
+  for (const target of targets) {
+    await bundle.write({
+      dir: target.directory,
+      format: target.format,
+      entryFileNames: '[name]',
+      banner: templates.banner,
+      exports: 'auto',
+    });
+  }
 }
 
 /**

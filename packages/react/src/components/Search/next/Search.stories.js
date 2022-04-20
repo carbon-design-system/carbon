@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ExpandableSearch } from 'carbon-components-react';
+import ExpandableSearch from '../../ExpandableSearch';
 import Search from '../';
 import React from 'react';
 import { Layer } from '../../Layer';

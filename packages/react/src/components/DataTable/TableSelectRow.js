@@ -8,11 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import InlineCheckbox from '../InlineCheckbox';
 import RadioButton from '../RadioButton';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
 const TableSelectRow = ({
   ariaLabel,
   checked,
@@ -24,6 +23,7 @@ const TableSelectRow = ({
   radio,
   className,
 }) => {
+  const prefix = usePrefix();
   const selectionInputProps = {
     id,
     name,
