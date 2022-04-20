@@ -11,7 +11,7 @@ import React from 'react';
 import { usePrefix } from '../../../internal/usePrefix';
 
 import {
-  default as FileUploader,
+  FileUploader,
   FileUploaderButton,
   FileUploaderDropContainer,
   FileUploaderItem,
