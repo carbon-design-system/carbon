@@ -11,6 +11,7 @@
 @use 'sass:math';
 @use '@carbon/grid/scss/config' as gridconfig;
 @use '@carbon/grid/scss/breakpoint' as grid;
+@use 'prefix' as *;
 @use 'font-family';
 @use 'scale';
 
@@ -809,10 +810,6 @@ $tokens: (
 
 // TODO move following variable and `custom-property` mixin into shared file for
 // both `@carbon/type` and `@carbon/themes`
-
-/// @access private
-/// @group @carbon/type
-$custom-property-prefix: 'cds' !default;
 
 /// @access private
 /// @group @carbon/type
