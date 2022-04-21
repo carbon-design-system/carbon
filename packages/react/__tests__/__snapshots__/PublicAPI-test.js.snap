@@ -405,6 +405,17 @@ Map {
       },
     },
   },
+  "ClassPrefix" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "prefix": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+    },
+  },
   "ClickableTile" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
