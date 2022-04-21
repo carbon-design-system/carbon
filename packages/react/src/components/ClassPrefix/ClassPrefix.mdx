@@ -1,0 +1,71 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { ClassPrefix } from '../ClassPrefix';
+
+# ClassPrefix
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ClassPrefix)
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+The `ClassPrefix` component is used to change the prefix in the classes used by
+components in Carbon.
+
+<Preview>
+  <Story id="components-classprefix--default" />
+</Preview>
+
+By default, the prefix used by components is `cds`. However, you can change this
+prefix in Sass and coordinate that change to React using the `ClassPrefix`
+component.
+
+In Sass, you can customize this prefix by writing the following:
+
+```scss
+@use '@carbon/react' with (
+  $prefix: 'custom'
+);
+```
+
+Similarly, you can configure `scss/config` directly:
+
+```scss
+@use '@carbon/react/scss/config' with (
+  $prefix: 'custom'
+);
+```
+
+In React, you use `ClassPrefix` at the top-level of your project and
+specify the prefix with the `prefix` prop:
+
+```jsx
+import { ClassPrefix } from '@carbon/react';
+
+export default function MyApp() {
+  return (
+    <ClassPrefix prefix="custom">
+      <Page />
+    </ClassPrefix>
+  );
+}
+```
+
+## Component API
+
+<Props />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/ClassPrefix/ClassPrefix.mdx).
+
