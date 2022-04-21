@@ -479,8 +479,7 @@ assets:
       status: stable
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: ''
+      thumbnailPath: ./thumbnails/toggle-tip.svg
       demoLinks:
         - type: storybook
           name: Storybook
@@ -543,8 +542,7 @@ assets:
       status: experimental
       type: component
       platform: web
-      # TODO: add thumbnail
-      thumbnailPath: ''
+      thumbnailPath: ./thumbnails/fluid-form.svg
       demoLinks:
         - type: storybook
           name: Storybook
