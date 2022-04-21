@@ -20,6 +20,9 @@ on:
         description: 'Specify the tag for this release'
         type: string
 
+permissions:
+  contents: read
+
 jobs:
   version:
     runs-on: ubuntu-latest

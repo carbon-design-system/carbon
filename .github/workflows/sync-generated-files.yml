@@ -3,8 +3,13 @@ on:
   push:
     branches:
       - main
+permissions:
+  contents: read
+
 jobs:
   release:
+    permissions:
+      contents: write  # for Git to git push
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3

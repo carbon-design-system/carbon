@@ -9,6 +9,9 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
+permissions:
+  contents: read
+
 jobs:
   dedupe:
     runs-on: ubuntu-latest
@@ -75,6 +78,9 @@ jobs:
         run: yarn test --ci
 
   e2e:
+    permissions:
+      contents: read  # for dorny/paths-filter to fetch a list of changed files
+      pull-requests: read  # for dorny/paths-filter to read pull requests
     name: 'test:e2e'
     runs-on: ubuntu-latest
     steps:

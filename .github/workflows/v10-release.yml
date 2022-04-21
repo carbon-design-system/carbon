@@ -6,8 +6,13 @@ on:
       # Push events to matching v10*, i.e. v10.55.0, v10.55.1
       - 'v10*'
 
+permissions:
+  contents: read
+
 jobs:
   build:
+    permissions:
+      contents: write  # for actions/create-release to create a release
     name: Create Release
     runs-on: ubuntu-latest
     timeout-minutes: 60
