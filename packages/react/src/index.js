@@ -14,6 +14,7 @@ export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
 export ButtonSet from './components/ButtonSet';
 export Checkbox from './components/Checkbox';
+export { ClassPrefix } from './components/ClassPrefix';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
 export ComposedModal, {

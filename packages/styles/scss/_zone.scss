@@ -12,7 +12,11 @@
 @use './theme';
 // Inline themes depend on layer styles to property reset the layer level
 @use './layer';
+@use './utilities/component-tokens';
 @use './utilities/custom-property';
+@use './components/button/tokens' as button;
+@use './components/notification/tokens' as notification;
+@use './components/tag/tokens' as tag;
 
 /// Specify a Map of zones where the key will be used as part of the selector
 /// and the value will be a map used to emit CSS Custom Properties for all color
@@ -24,11 +28,39 @@ $zones: (
   g100: themes.$g100,
 ) !default;
 
+$-components: (
+  button.$button-tokens,
+  notification.$notification-tokens,
+  tag.$tag-tokens
+);
+
 @each $name, $theme in $zones {
   .#{config.$prefix}--#{'' + $name} {
     @each $key, $value in $theme {
       @if type-of($value) == color {
         @include custom-property.declaration($key, $value);
+      }
+    }
+
+    @each $group in $-components {
+      @each $key, $value in $group {
+        @if meta.type-of($value) == map {
+          $fallback: map.get($value, fallback);
+          $theme-values: map.get($value, values);
+
+          @each $theme-value in $theme-values {
+            $theme: map.get($theme-value, theme);
+            $value: map.get($theme-value, value);
+            @if theme.matches($theme, theme.$theme) and
+              meta.type-of($value) ==
+              color
+            {
+              @include custom-property.declaration($key, $value);
+            }
+          }
+        } @else if meta.type-of($value) == color {
+          @include custom-property.declaration($key, $value);
+        }
       }
     }
   }

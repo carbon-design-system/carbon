@@ -5,12 +5,10 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'scss/prefix' with (
-  $prefix: 'bx' !default,
-);
-@forward 'scss/classes';
+@forward 'scss/prefix';
 @forward 'scss/font-family';
-@forward 'scss/reset';
 @forward 'scss/scale';
+@forward 'scss/reset';
 @forward 'scss/styles';
+@forward 'scss/classes';
 @forward 'scss/default-type';
