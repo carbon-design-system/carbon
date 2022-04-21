@@ -12,5 +12,10 @@
     "**/e2e/**",
     "**/examples/**",
     "**/*.md"
-  ]
+  ],
+  "command": {
+    "version": {
+      "message": "chore(release): %s"
+    }
+  }
 }

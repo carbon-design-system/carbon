@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>file-uploader</title>
+    <g id="file-uploader" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(90.000000, 42.000000)">
+            <rect id="Rectangle-Copy-4" fill="#A8A8A8" x="0" y="0" width="58" height="7"></rect>
+            <rect id="Rectangle-Copy-12" fill="#C6C6C6" x="0" y="16" width="140" height="5"></rect>
+            <rect id="Rectangle-Copy-17" fill="#0F6DFF" x="0" y="46" width="69" height="16"></rect>
+            <rect id="Rectangle-Copy-18" fill="#C6C6C6" x="0" y="26" width="114" height="5"></rect>
+            <g id="Group-Copy" transform="translate(0.000000, 77.000000)">
+                <rect id="Rectangle-Copy-42" stroke="#0062FF" stroke-width="0.53865" fill="#F3F3F3" x="0.269325" y="0.269325" width="139.46135" height="18.46135"></rect>
+                <ellipse id="Oval-2-Copy-2" stroke="#C6C6C6" stroke-width="1.61595" cx="126.946607" cy="9.796875" rx="3.82794541" ry="3.64515"></ellipse>
+                <path d="M127.255668,13.0625 C129.303947,13.0625 130.964405,11.4675144 130.964405,9.5 C130.964405,7.53248558 129.303947,5.9375 127.255668,5.9375 C125.20739,5.9375 123.546932,7.53248558 123.546932,9.5" id="Oval-2-Copy-3" stroke="#0062FF" stroke-width="1.61595"></path>
+                <rect id="Rectangle-3-Copy-11" fill="#A8A8A8" x="7.41747265" y="7.71875" width="59.3397812" height="5"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

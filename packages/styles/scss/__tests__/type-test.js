@@ -10,6 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
+const css = require('css');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -73,5 +74,25 @@ describe('@carbon/styles/scss/type', () => {
         "tokens",
       ]
     `);
+  });
+
+  test('prefix', async () => {
+    const { result } = await render(`
+      @use '../config' with (
+        $prefix: 'custom',
+      );
+      @use '../type';
+
+      .my-selector {
+        @include type.type-style('label-01');
+      }
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+    const [rule] = stylesheet.rules;
+    for (const declaration of rule.declarations) {
+      expect(declaration.value).toEqual(
+        expect.stringContaining('var(--custom-')
+      );
+    }
   });
 });
