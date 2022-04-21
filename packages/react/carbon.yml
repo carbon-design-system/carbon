@@ -479,7 +479,7 @@ assets:
       status: stable
       type: component
       platform: web
-      thumbnailPath: ./thumbnails/toggle-tip.svg
+      thumbnailPath: ./thumbnails/toggletip.svg
       demoLinks:
         - type: storybook
           name: Storybook
