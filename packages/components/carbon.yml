@@ -380,7 +380,7 @@ assets:
         action: link
         url: https://the-carbon-components.netlify.app/?nav=toolbar
     tags:
-      - data-visualization
+      - input-control
   tooltip:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
@@ -396,15 +396,14 @@ assets:
     status: stable
     type: component
     platform: web
-    # TODO: add thumbnail
-    thumbnailPath: ''  
+    thumbnailPath: ./thumbnails/type.svg
     demoLinks:
       - type: storybook
         name: Demo
         action: link
         url: https://the-carbon-components.netlify.app/?nav=type
     tags:
-      - data-visualization
+      - content-element
   ui-shell-header:
     framework: vanilla
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
