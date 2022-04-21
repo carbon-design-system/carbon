@@ -4,12 +4,21 @@
 
 ## Website
 
-- Publish to GitHub under the `gh-pages` branch
-- Enable through GitHub settings
-- CNAME record for apex domain should exist in `gh-pages` branch
-- DNS on Cloudflare
-  - Configure the apex domain by setting A records
-  - Configure the www domain by adding a CNAME record
+We use GitHub Pages to publish our website and make this website available under
+https://carbondesignsystem.com.
+
+In order to do so, we have the following checklist in terms of what the project
+must do on GitHub along with the DNS configuration through our DNS provider.
+
+**Checklist**
+
+- The GitHub repository has enabled GitHub Pages
+- The repository has published the site under the `gh-pages` branch
+- The `gh-pages` branch has a CNAME record for `carbondesignsystem.com`
+- The DNS provider has A records for the apex domain
+  - [IP Addresses for GitHub Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site#configuring-an-apex-domain)
+- The DNS provider has a CNAME record that points to
+  carbon-design-system.github.io
 
 **Links & Resources**
 
