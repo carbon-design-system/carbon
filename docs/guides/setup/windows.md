@@ -49,7 +49,8 @@ but can be unexpected.
 
 ## Commits on Windows 10
 
-Unfortunately, there is a known bug on Windows GitHub Desktop with pre-commit hooks. The current workaround is to use a `--no-verify` tag on git CLI.
+Unfortunately, there is a known bug on Windows GitHub Desktop with pre-commit
+hooks. The current workaround is to use a `--no-verify` tag on git CLI.
 
 To commit all staged changes:
 
