@@ -29,6 +29,7 @@ installed:
     version manager for Node.
 - Git
 - [Yarn](https://yarnpkg.com/en/docs/install)
+- [WSL](../docs/guides/setup/windows.md) (Windows Only)
 
 If you're using Windows, there are some
 [additional steps](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/setup/windows.md)
@@ -163,15 +164,15 @@ run the following commands from the root of the repo:
 
 ```sh
 # Add new contributor <username>, who made a contribution of type <contribution>
-all-contributors add <username> <contribution>
+yarn all-contributors add <username> <contribution>
 # Example:
-all-contributors add tw15egan code,doc
+yarn all-contributors add tw15egan code,doc
 ```
 
 Then, you'll need to generate the updated `all-contributors` table by running
 
 ```sh
-all-contributors generate
+yarn all-contributors generate
 ```
 
 ### 8. Make a pull request

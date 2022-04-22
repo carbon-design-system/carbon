@@ -45,6 +45,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     min,
     onChange,
     onClick,
+    onKeyUp,
     readOnly,
     size = 'md',
     step = 1,
@@ -162,6 +163,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             min={min}
             onClick={onClick}
             onChange={handleOnChange}
+            onKeyUp={onKeyUp}
             pattern="[0-9]*"
             readOnly={readOnly}
             step={step}
@@ -328,6 +330,11 @@ NumberInput.propTypes = {
    * Provide an optional function to be called when the up/down button is clicked
    */
   onClick: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when a key is pressed in the number input
+   */
+  onKeyUp: PropTypes.func,
 
   /**
    * Specify if the component should be read-only
