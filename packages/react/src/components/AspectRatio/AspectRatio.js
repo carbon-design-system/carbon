@@ -62,7 +62,7 @@ AspectRatio.propTypes = {
    * Specify the ratio to be used by the aspect ratio container. This will
    * determine what aspect ratio your content will be displayed in.
    */
-  ratio: PropTypes.oneOf(['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1']),
+  ratio: PropTypes.oneOf(['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '3x2', '1x1']),
 };
 
 export default AspectRatio;
