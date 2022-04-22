@@ -54,9 +54,7 @@ export default function TreeView({
       setSelected([nodeId]);
       setActive(nodeId);
     }
-    if (onSelect) {
-      onSelect(event, node);
-    }
+    onSelect?.(event, node);
   }
   function handleFocusEvent(event) {
     if (event.type === 'blur') {
@@ -117,9 +115,7 @@ export default function TreeView({
       nextFocusNode.tabIndex = 0;
       nextFocusNode.focus();
     }
-    if (rest.onKeyDown) {
-      rest.onKeyDown(event);
-    }
+    rest?.onKeyDown?.(event);
   }
 
   useEffect(() => {
