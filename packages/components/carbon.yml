@@ -376,8 +376,7 @@ assets:
     status: stable
     type: component
     platform: web
-    # TODO: add thumbnail
-    thumbnailPath: ''  
+    thumbnailPath: ./thumbnails/toolbar.svg 
     demoLinks:
       - type: storybook
         name: Demo
