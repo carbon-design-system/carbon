@@ -95,7 +95,7 @@ export default function TreeNode({
         return findParentTreeNode(node.parentNode);
       };
       if (children && expanded) {
-        onToggle(event, { id, isExpanded: false, label, value });
+        onToggle?.(event, { id, isExpanded: false, label, value });
         setExpanded(false);
       } else {
         /**
@@ -113,7 +113,7 @@ export default function TreeNode({
          */
         currentNode.current.lastChild.firstChild.focus();
       } else {
-        onToggle(event, { id, isExpanded: true, label, value });
+        onToggle?.(event, { id, isExpanded: true, label, value });
         setExpanded(true);
       }
     }
