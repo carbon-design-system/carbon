@@ -71,6 +71,11 @@ assets:
   copy-button:
     status: stable
     framework: vanilla
+    demoLinks:
+      - type: storybook
+        name: Demo
+        action: link
+        url: https://the-carbon-components.netlify.app/?nav=copy-button
   data-table:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
@@ -118,13 +123,12 @@ assets:
         url: https://the-carbon-components.netlify.app/?nav=form
   grid:
     status: stable 
-    externalDocsUrl: https://the-carbon-components.netlify.app/?nav=grid
     framework: vanilla
     demoLinks:
       - type: storybook
         name: Demo
         action: link
-        url: https://the-carbon-components.netlify.app/?nav=form
+        url: https://the-carbon-components.netlify.app/?nav=grid
   inline-loading:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
@@ -372,8 +376,7 @@ assets:
     status: stable
     type: component
     platform: web
-    # TODO: add thumbnail
-    thumbnailPath: ''  
+    thumbnailPath: ./thumbnails/toolbar.svg 
     demoLinks:
       - type: storybook
         name: Demo
