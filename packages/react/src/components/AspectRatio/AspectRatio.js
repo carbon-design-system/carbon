@@ -70,6 +70,7 @@ AspectRatio.propTypes = {
     '4x3',
     '3x4',
     '3x2',
+    '2x3',
     '1x1',
   ]),
 };
