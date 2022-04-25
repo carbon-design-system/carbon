@@ -17,6 +17,13 @@ export default {
   subcomponents: {
     Switch,
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
