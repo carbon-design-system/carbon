@@ -128,6 +128,11 @@ export default class Slider extends PureComponent {
     onChange: PropTypes.func,
 
     /**
+     * Provide an optional function to be called when a key is pressed in the number input
+     */
+    onInputKeyUp: PropTypes.func,
+
+    /**
      * The callback to get notified of value on handle release.
      */
     onRelease: PropTypes.func,
@@ -653,6 +658,7 @@ export default class Slider extends PureComponent {
                   step={step}
                   onChange={this.onChange}
                   onBlur={this.onBlur}
+                  onKeyUp={this.onInputKeyUp}
                   data-invalid={isValid ? null : true}
                   aria-invalid={isValid ? null : true}
                 />
