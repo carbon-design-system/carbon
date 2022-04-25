@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>heading-unstable</title>
+    <g id="heading-unstable" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <text id="h1" font-family="IBMPlexSans-Light, IBM Plex Sans" font-size="42" font-weight="300" line-spacing="50" fill="#161616">
+            <tspan x="136" y="75">h1</tspan>
+        </text>
+        <text id="h2" font-family="IBMPlexSans, IBM Plex Sans" font-size="28" font-weight="normal" line-spacing="36" fill="#161616">
+            <tspan x="136" y="112">h2</tspan>
+        </text>
+        <text id="h3" font-family="IBMPlexSans, IBM Plex Sans" font-size="20" font-weight="normal" line-spacing="26" fill="#000000">
+            <tspan x="136" y="142">h3</tspan>
+        </text>
+    </g>
+</svg>

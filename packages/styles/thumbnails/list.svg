@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>list</title>
+    <g id="list" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(90.000000, 42.000000)">
+            <rect id="Rectangle-6-Copy-31" fill="#A8A8A8" x="20" y="8" width="120" height="5"></rect>
+            <rect id="Rectangle-6-Copy-35" fill="#A8A8A8" x="20" y="68" width="101" height="5"></rect>
+            <rect id="Rectangle-6-Copy-36" fill="#A8A8A8" x="20" y="83" width="120" height="5"></rect>
+            <rect id="Rectangle-6-Copy-32" fill="#A8A8A8" x="34.7315789" y="23" width="47.924466" height="5"></rect>
+            <rect id="Rectangle-6-Copy-33" fill="#A8A8A8" x="34.7315789" y="38" width="62.098684" height="5"></rect>
+            <text id="—" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="20" letter-spacing="0.1" fill="#252525">
+                <tspan x="0" y="14">—</tspan>
+            </text>
+            <text id="—-copy" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="20" letter-spacing="0.1" fill="#252525">
+                <tspan x="0" y="74">—</tspan>
+            </text>
+            <text id="—-copy-2" font-family="IBMPlexSans, IBM Plex Sans" font-size="14" font-weight="normal" line-spacing="20" letter-spacing="0.1" fill="#252525">
+                <tspan x="0" y="89">—</tspan>
+            </text>
+            <rect id="Rectangle-Copy-35" fill="#171717" x="21" y="23" width="4" height="4"></rect>
+            <rect id="Rectangle-Copy-36" fill="#171717" x="21" y="38" width="4" height="4"></rect>
+            <rect id="Rectangle-6-Copy-34" fill="#A8A8A8" x="34.7315789" y="53" width="47.924466" height="5"></rect>
+            <rect id="Rectangle-Copy-37" fill="#171717" x="21" y="53" width="4" height="4"></rect>
+        </g>
+    </g>
+</svg>

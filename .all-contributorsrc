@@ -829,8 +829,8 @@
       "contributions": [
         "code"
       ]
-     },
-     {
+    },
+    {
       "login": "TannerS",
       "name": "Tanner Summers",
       "avatar_url": "https://avatars.githubusercontent.com/u/8866319?v=4",
@@ -863,6 +863,25 @@
       "name": "Joel Humberto Gómez Paredes",
       "avatar_url": "https://avatars.githubusercontent.com/u/1269896?v=4",
       "profile": "https://github.com/dezkareid",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "NashJames",
+      "name": "James Nash",
+      "avatar_url": "https://avatars.githubusercontent.com/u/37304960?v=4",
+      "profile": "https://github.com/NashJames",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "jakubfaliszewski",
+      "name": "Jakub Faliszewski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/25402419?v=4",
+      "profile": "http://jakubfaliszewski.github.io/portfolio/",
       "contributions": [
         "code"
       ]

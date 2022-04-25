@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>flex-grid</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="167.962441" height="52"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="167.962441" height="52" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <rect id="path-3" x="103.511737" y="0" width="52.7323944" height="52"></rect>
+        <mask id="mask-4" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="52.7323944" height="52" fill="white">
+            <use xlink:href="#path-3"></use>
+        </mask>
+        <rect id="path-5" x="51.7558685" y="0" width="52.7323944" height="52"></rect>
+        <mask id="mask-6" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="52.7323944" height="52" fill="white">
+            <use xlink:href="#path-5"></use>
+        </mask>
+        <rect id="path-7" x="155.267606" y="0" width="52.7323944" height="52"></rect>
+        <mask id="mask-8" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="52.7323944" height="52" fill="white">
+            <use xlink:href="#path-7"></use>
+        </mask>
+    </defs>
+    <g id="flex-grid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(56.000000, 64.000000)">
+            <use id="Rectangle" stroke="#78A9FF" mask="url(#mask-2)" stroke-width="2" fill="#EDF5FF" stroke-dasharray="2,2" xlink:href="#path-1"></use>
+            <use id="Rectangle-Copy-5" stroke="#78A9FF" mask="url(#mask-4)" stroke-width="2" fill="#EDF5FF" stroke-dasharray="2,2" xlink:href="#path-3"></use>
+            <use id="Rectangle-Copy-2" stroke="#78A9FF" mask="url(#mask-6)" stroke-width="2" fill="#EDF5FF" stroke-dasharray="2,2" xlink:href="#path-5"></use>
+            <use id="Rectangle-Copy-6" stroke="#78A9FF" mask="url(#mask-8)" stroke-width="2" fill="#EDF5FF" stroke-dasharray="2,2" xlink:href="#path-7"></use>
+            <rect id="Rectangle" fill="#D0E2FF" style="mix-blend-mode: multiply;" x="0.976525822" y="0" width="4.88262911" height="50.5142857"></rect>
+            <rect id="Rectangle-Copy-7" fill="#D0E2FF" style="mix-blend-mode: multiply;" x="104.488263" y="0" width="4.88262911" height="50.5142857"></rect>
+            <rect id="Rectangle-Copy-3" fill="#D0E2FF" style="mix-blend-mode: multiply;" x="52.7323944" y="0" width="4.88262911" height="50.5142857"></rect>
+            <rect id="Rectangle-Copy-8" fill="#D0E2FF" style="mix-blend-mode: multiply;" x="156.244131" y="0" width="4.88262911" height="50.5142857"></rect>
+            <rect id="Rectangle-Copy" fill="#D0E2FF" style="mix-blend-mode: multiply;" x="46.8732394" y="0" width="4.88262911" height="50.5142857"></rect>
+            <rect id="Rectangle-Copy-9" fill="#D0E2FF" style="mix-blend-mode: multiply;" x="150.384977" y="0" width="4.88262911" height="50.5142857"></rect>
+            <rect id="Rectangle-Copy-4" fill="#D0E2FF" style="mix-blend-mode: multiply;" x="98.629108" y="0" width="4.88262911" height="50.5142857"></rect>
+            <rect id="Rectangle-Copy-10" fill="#D0E2FF" style="mix-blend-mode: multiply;" x="202.140845" y="0" width="4.88262911" height="50.5142857"></rect>
+        </g>
+    </g>
+</svg>
