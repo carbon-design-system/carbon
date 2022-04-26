@@ -12,9 +12,10 @@
   },
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
-    "lib/**/*",
-    "es/**/*",
-    "umd/**/*"
+    "es",
+    "lib",
+    "scss",
+    "index.scss"
   ],
   "keywords": [
     "react",
