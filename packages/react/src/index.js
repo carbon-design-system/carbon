@@ -14,6 +14,7 @@ export { Breadcrumb, BreadcrumbItem } from './components/Breadcrumb';
 export Button from './components/Button';
 export ButtonSet from './components/ButtonSet';
 export Checkbox from './components/Checkbox';
+export { ClassPrefix } from './components/ClassPrefix';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
 export ComposedModal, {
@@ -227,7 +228,7 @@ export {
   Pagination as unstable_Pagination,
 } from './components/Pagination/experimental';
 export { Popover, PopoverContent } from './components/Popover';
-export { default as unstable_ProgressBar } from './components/ProgressBar';
+export { default as ProgressBar } from './components/ProgressBar';
 export { HStack, Stack, VStack } from './components/Stack';
 export { Tooltip } from './components/Tooltip/next';
 export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';

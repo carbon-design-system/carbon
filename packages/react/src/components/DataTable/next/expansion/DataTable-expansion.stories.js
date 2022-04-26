@@ -78,7 +78,7 @@ export const Usage = (args) => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              <TableExpandHeader />
+              <TableExpandHeader id="expand" />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
@@ -89,7 +89,7 @@ export const Usage = (args) => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow {...getRowProps({ row })}>
+                <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
@@ -131,6 +131,7 @@ export const BatchExpansion = (args) => (
           <TableHead>
             <TableRow>
               <TableExpandHeader
+                id="expand"
                 enableExpando={true}
                 {...getExpandHeaderProps()}
               />
@@ -144,7 +145,7 @@ export const BatchExpansion = (args) => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow {...getRowProps({ row })}>
+                <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ordered-list</title>
+    <g id="ordered-list" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" letter-spacing="0.137142854" line-spacing="16">
+        <text id="1.-Ordered-List-2.-O" fill="#161616">
+            <tspan x="113" y="70">1.    Ordered List</tspan>
+            <tspan x="113" y="86">2.    Ordered List </tspan>
+            <tspan x="113" y="102">3.    Ordered List</tspan>
+            <tspan x="113" y="118">4.    Ordered List </tspan>
+        </text>
+    </g>
+</svg>

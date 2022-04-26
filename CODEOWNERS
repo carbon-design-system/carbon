@@ -2,11 +2,11 @@
 * @carbon-design-system/developers-system
 
 # Core icons and pictograms
-/packages/icons/src/svg/ @laurenmrice @conradennis @dudley-ibm @carbon-design-system/developers-system
-/packages/pictograms/src/svg/ @laurenmrice @conradennis @dudley-ibm @carbon-design-system/developers-system
+/packages/icons/src/svg/ @laurenmrice @carbon-design-system/brand-icons @carbon-design-system/developers-system
+/packages/pictograms/src/svg/ @laurenmrice @carbon-design-system/brand-pictograms @carbon-design-system/developers-system
 
 # Angular icons
-/packages/icons-angular/ @cal-smith @carbon-design-system/developers-system
+/packages/icons-angular/ @carbon-design-system/developers-system
 
 # Brand
 /packages/colors/artifacts/ @lisalind-ibm
