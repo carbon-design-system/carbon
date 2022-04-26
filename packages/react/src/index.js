@@ -228,7 +228,7 @@ export {
   Pagination as unstable_Pagination,
 } from './components/Pagination/experimental';
 export { Popover, PopoverContent } from './components/Popover';
-export { default as unstable_ProgressBar } from './components/ProgressBar';
+export { default as ProgressBar } from './components/ProgressBar';
 export { HStack, Stack, VStack } from './components/Stack';
 export { Tooltip } from './components/Tooltip/next';
 export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';

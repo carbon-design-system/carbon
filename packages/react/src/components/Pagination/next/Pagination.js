@@ -8,7 +8,7 @@
 import { CaretRight, CaretLeft } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Select from '../../Select';
 import SelectItem from '../../SelectItem';
 import { equals } from '../../../tools/array';
@@ -77,6 +77,8 @@ const Pagination = React.forwardRef(function Pagination(
 ) {
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
+  const backBtnRef = useRef(null);
+  const forwardBtnRef = useRef(null);
   const [pageSizes, setPageSizes] = useState(() => {
     return mapPageSizesToObject(controlledPageSizes);
   });
@@ -172,10 +174,20 @@ const Pagination = React.forwardRef(function Pagination(
   function incrementPage() {
     const nextPage = page + 1;
     setPage(nextPage);
+
+    // when the increment button reaches the last page,
+    // the icon button becomes disabled and the focus shifts to `main`
+    // this presents an a11y problem for keyboard & screen reader users
+    // instead, we want the focus to shift to the other pagination btn
+    if (nextPage === totalPages) {
+      backBtnRef.current.focus();
+    }
+
     if (onChange) {
       onChange({
         page: nextPage,
         pageSize,
+        backBtnRef,
       });
     }
   }
@@ -183,10 +195,20 @@ const Pagination = React.forwardRef(function Pagination(
   function decrementPage() {
     const nextPage = page - 1;
     setPage(nextPage);
+
+    // when the decrement button reaches the first page,
+    // the icon button becomes disabled and the focus shifts to `main`
+    // this presents an a11y problem for keyboard & screen reader users
+    // instead, we want the focus to shift to the other pagination btn
+    if (nextPage === 1) {
+      forwardBtnRef.current.focus();
+    }
+
     if (onChange) {
       onChange({
         page: nextPage,
         pageSize,
+        forwardBtnRef,
       });
     }
   }
@@ -251,7 +273,8 @@ const Pagination = React.forwardRef(function Pagination(
             kind="ghost"
             className={backButtonClasses}
             label={backwardText}
-            onClick={decrementPage}>
+            onClick={decrementPage}
+            ref={backBtnRef}>
             <CaretLeft />
           </IconButton>
           <IconButton
@@ -260,7 +283,8 @@ const Pagination = React.forwardRef(function Pagination(
             kind="ghost"
             className={forwardButtonClasses}
             label={forwardText}
-            onClick={incrementPage}>
+            onClick={incrementPage}
+            ref={forwardBtnRef}>
             <CaretRight />
           </IconButton>
         </div>
