@@ -2034,39 +2034,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@carbon/react@npm:1.1.0"
-  dependencies:
-    "@babel/runtime": ^7.16.7
-    "@carbon/feature-flags": ^0.7.0
-    "@carbon/icons-react": ^11.1.0
-    "@carbon/layout": ^11.1.0
-    "@carbon/styles": ^1.1.0
-    "@carbon/telemetry": 0.1.0
-    classnames: 2.3.1
-    copy-to-clipboard: ^3.3.1
-    downshift: 5.2.1
-    flatpickr: 4.6.9
-    invariant: ^2.2.3
-    lodash.debounce: ^4.0.8
-    lodash.findlast: ^4.5.0
-    lodash.isequal: ^4.5.0
-    lodash.omit: ^4.5.0
-    lodash.throttle: ^4.1.1
-    prop-types: ^15.7.2
-    react-is: ^17.0.2
-    use-resize-observer: ^6.0.0
-    wicg-inert: ^3.1.1
-    window-or-global: ^1.0.1
-  peerDependencies:
-    react: ^16.8.6 || ^17.0.1
-    react-dom: ^16.8.6 || ^17.0.1
-    sass: ^1.33.0
-  checksum: 0004c853a51f74c1ef888dbcbd0c847c8e625e4256c77b63fabacf8d87cacdcd4ec7a595ee58f3394de5b0f9d4a71a5a3fbd2a7ddcb6aa22cd1f773043c25481
-  languageName: node
-  linkType: hard
-
 "@carbon/scss-generator@^10.13.0, @carbon/scss-generator@workspace:packages/scss-generator":
   version: 0.0.0-use.local
   resolution: "@carbon/scss-generator@workspace:packages/scss-generator"
@@ -2114,24 +2081,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@carbon/styles@npm:1.1.0"
-  dependencies:
-    "@carbon/colors": ^11.1.0
-    "@carbon/feature-flags": ^0.7.0
-    "@carbon/grid": ^11.1.0
-    "@carbon/layout": ^11.1.0
-    "@carbon/motion": ^11.0.0
-    "@carbon/themes": ^11.1.0
-    "@carbon/type": ^11.1.0
-    "@ibm/plex": 6.0.0-next.6
-  peerDependencies:
-    sass: ^1.33.0
-  checksum: 9b5500e57b61e924ef4e20cd999d8c3c3a93ae94818108e4f87f290dd75c759e8c700d73b43083593eed32722c7c83c4a2b425b031a67611ef968af765973bdc
-  languageName: node
-  linkType: hard
-
 "@carbon/telemetry@npm:0.1.0":
   version: 0.1.0
   resolution: "@carbon/telemetry@npm:0.1.0"
@@ -2178,18 +2127,6 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "@carbon/themes@npm:11.1.0"
-  dependencies:
-    "@carbon/colors": ^11.1.0
-    "@carbon/layout": ^11.1.0
-    "@carbon/type": ^11.1.0
-    color: ^3.1.2
-  checksum: 5e1909fffa4a7a05597e5e58d6403205667e88654157e1b5fbaa5e0a23cc6e7b8731e1419d8533761ac920d9069bf2fd401e53c6f846620b10357dc0db6d2705
-  languageName: node
-  linkType: hard
-
 "@carbon/type@^11.2.0-rc.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
@@ -2202,15 +2139,6 @@ __metadata:
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
-
-"@carbon/type@npm:^11.1.0":
-  version: 11.1.0
-  resolution: "@carbon/type@npm:11.1.0"
-  dependencies:
-    "@carbon/grid": ^11.1.0
-  checksum: 0074fe978a43504f854aadba1ef3e52039a9f2c499b539ad81c2644d8c0c1ab85c330383669a5b8867fce2c4bf73ba6db883684796cbb3be9af70657728d4f9d
-  languageName: node
-  linkType: hard
 
 "@carbon/upgrade@workspace:packages/upgrade":
   version: 0.0.0-use.local
@@ -14840,6 +14768,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"examples-nextjs@workspace:examples/nextjs":
+  version: 0.0.0-use.local
+  resolution: "examples-nextjs@workspace:examples/nextjs"
+  dependencies:
+    "@carbon/react": ^1.2.0-rc.0
+    eslint: 8.12.0
+    eslint-config-next: 12.1.4
+    next: 12.1.4
+    react: 18.0.0
+    react-dom: 18.0.0
+    sass: ^1.50.1
+  languageName: unknown
+  linkType: soft
+
 "exec-sh@npm:^0.3.2":
   version: 0.3.4
   resolution: "exec-sh@npm:0.3.4"
@@ -21727,20 +21669,6 @@ fsevents@^1.2.7:
   checksum: d19354cf4e5bc58473e922c38a5a282de62c0b78bebdd31617b9e958b6f6877bcc2df371b7368db2110e098f87722e084c950f9229d35e4c06842de79cd90d20
   languageName: node
   linkType: hard
-
-"nextjs@workspace:examples/nextjs":
-  version: 0.0.0-use.local
-  resolution: "nextjs@workspace:examples/nextjs"
-  dependencies:
-    "@carbon/react": ^1.1.0
-    eslint: 8.12.0
-    eslint-config-next: 12.1.4
-    next: 12.1.4
-    react: 18.0.0
-    react-dom: 18.0.0
-    sass: ^1.50.1
-  languageName: unknown
-  linkType: soft
 
 "nice-try@npm:^1.0.4":
   version: 1.0.5
