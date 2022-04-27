@@ -282,6 +282,38 @@ the following components:
 
 _Note: press "Show code" above to view a code snippet of this example_
 
+## Toolbar
+
+<Preview>
+  <Story id="components-datatable-toolbar--default-toolbar" />
+</Preview>
+
+### Overflow Menu
+
+An overflow menu can be added to the toolbar table. To add an overflow menu,
+simply add a `TableCell` with the class `cds--table-column-menu` (replace the
+prefix if you have added a custom prefix). Then add the overflow menu into the
+cell.
+
+```jsx
+<TableBody>
+  {rows.map((row) => (
+    <TableRow key={row.id} {...getRowProps({ row })}>
+      {row.cells.map((cell) => (
+        <TableCell key={cell.id}>{cell.value}</TableCell>
+      ))}
+      <TableCell className="cds--table-column-menu">
+        <OverflowMenu size="sm" flipped>
+          <OverflowMenuItem>Action 1</OverflowMenuItem>
+          <OverflowMenuItem>Action 2</OverflowMenuItem>
+          <OverflowMenuItem>Action 3</OverflowMenuItem>
+        </OverflowMenu>
+      </TableCell>
+    </TableRow>
+  ))}
+</TableBody>
+```
+
 ## Props
 
 <Props />

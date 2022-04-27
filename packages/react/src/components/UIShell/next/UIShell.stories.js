@@ -45,12 +45,12 @@ import mdx from './UIShell.mdx';
 const StoryContent = ({ useResponsiveOffset = true }) => {
   const [open, setOpen] = useState(false);
   const classNameFirstColumn = cx({
-    'bx--col-lg-13': true,
-    'bx--offset-lg-3': useResponsiveOffset,
+    'cds--col-lg-13': true,
+    'cds--offset-lg-3': useResponsiveOffset,
   });
   const content = (
-    <div className="bx--grid">
-      <div className="bx--row">
+    <div className="cds--grid">
+      <div className="cds--row">
         <div className={classNameFirstColumn}>
           <h2 style={{ margin: '0 0 30px' }}>Purpose and function</h2>
           <p>

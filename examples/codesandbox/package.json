@@ -1,11 +1,13 @@
 {
   "name": "codesandbox",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "private": true,
   "dependencies": {
-    "@carbon/react": "^1.0.3",
+    "@carbon/react": "^1.1.0",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0",
+    "react-dom": "^17.0.0"
+  },
+  "devDependencies": {
     "react-scripts": "5.0.0",
     "sass": "^1.49.11"
   },
@@ -28,5 +30,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "packageManager": "yarn@3.2.0"
 }
