@@ -7,28 +7,17 @@
 
 'use strict';
 
-const snapshot = require('@percy/playwright');
 const { test } = require('@playwright/test');
-const { themes, visitStory } = require('../../test-utils/storybook');
+const { themes, snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('accordion', () => {
   themes.forEach((theme) => {
     test(theme, async ({ page }, testInfo) => {
-      await visitStory(page, {
+      await snapshotStory(page, testInfo, {
         component: 'accordion',
         story: 'accordion-story',
-        globals: {
-          theme,
-        },
-      });
-      const id = [
-        testInfo.project.name,
         theme,
-        'component',
-        'accordion',
-        testInfo.snapshotSuffix,
-      ].join('.');
-      await snapshot(page, id);
+      });
     });
   });
 });

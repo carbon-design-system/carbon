@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const percySnapshot = require('@percy/playwright');
+
 const themes = ['white', 'g10', 'g90', 'g100'];
 
 async function visitStory(page, options) {
@@ -27,7 +29,28 @@ async function visitStory(page, options) {
   await page.goto(url);
 }
 
+async function snapshotStory(page, testInfo, storyOptions) {
+  const { component, story, theme } = storyOptions;
+  const id = [
+    testInfo.project.name,
+    theme,
+    'component',
+    'accordion',
+    testInfo.snapshotSuffix,
+  ].join('.');
+
+  await visitStory(page, {
+    component,
+    story,
+    globals: {
+      theme,
+    },
+  });
+  await percySnapshot(page, id);
+}
+
 module.exports = {
-  visitStory,
+  snapshotStory,
   themes,
+  visitStory,
 };
