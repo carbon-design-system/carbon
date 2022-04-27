@@ -46,9 +46,9 @@ $custom-variable: rgba(themes.get('token-01'), 0.25);
 You can configure the current theme with the `$theme` option:
 
 ```scss
-@use '@carbon/react/scss/themes';
-@use '@carbon/react/scss/theme' with (
-  $theme: themes.$g100
+@use '@carbon/themes/scss/themes' as *;
+@use '@carbon/themes' with (
+  $theme: $g100
 );
 ```
 
