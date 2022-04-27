@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>aspect-ratio</title>
+    <g id="aspect-ratio" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#F6F2FF" x="72" y="40" width="176" height="100"></rect>
+        <rect id="Rectangle-Copy-30" stroke="#8A3FFC" x="72" y="40" width="175" height="99"></rect>
+        <text id="16:9" font-family="IBMPlexSans, IBM Plex Sans" font-size="10" font-weight="normal" fill="#8A3FFC">
+            <tspan x="192.54" y="117">16:9</tspan>
+        </text>
+        <text id="16:9" font-family="IBMPlexSans, IBM Plex Sans" font-size="10" font-weight="normal" fill="#8A3FFC">
+            <tspan x="105.54" y="117">16:9</tspan>
+        </text>
+        <text id="16:9" font-family="IBMPlexSans, IBM Plex Sans" font-size="10" font-weight="normal" fill="#8A3FFC">
+            <tspan x="192.54" y="69">16:9</tspan>
+        </text>
+        <text id="16:9" font-family="IBMPlexSans, IBM Plex Sans" font-size="10" font-weight="normal" fill="#8A3FFC">
+            <tspan x="105.54" y="69">16:9</tspan>
+        </text>
+        <rect id="Rectangle" fill="#8A3FFC" x="159" y="40" width="1" height="98"></rect>
+        <rect id="Rectangle-Copy-2" fill="#8A3FFC" transform="translate(160.000000, 89.500000) rotate(90.000000) translate(-160.000000, -89.500000) " x="159.5" y="1.5" width="1" height="176"></rect>
+    </g>
+</svg>

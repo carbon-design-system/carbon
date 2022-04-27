@@ -2,27 +2,23 @@
 
 > Sass documentation for `@carbon/themes`
 
-_Note: this documentation is used with the next version of `@carbon/themes`
-which uses Sass Modules. It will not work in the current stable version of this
-package_
-
 ## Usage
 
 There are several entrypoints that you can use with `@carbon/themes`, including:
 
-| Filename                                     | Description                                            |
-| -------------------------------------------- | ------------------------------------------------------ |
-| `@use '@carbon/themes';`                     | Package entrypoint                                     |
-| `@use '@carbon/themes/scss/modules/config';` | Specify config options for the package                 |
-| `@use '@carbon/themes/scss/modules/themes';` | Theme definitions for white, g10, g90, and g100        |
-| `@use '@carbon/themes/scss/modules/theme';`  | Set the current theme, get token values from the theme |
-| `@use '@carbon/themes/scss/modules/tokens';` | Access theme tokens                                    |
-| `@use '@carbon/themes/scss/compat/themes';`  | v10 Theme definitions for white, g10, g90, and g100    |
-| `@use '@carbon/themes/scss/compat/tokens';`  | v10 theme tokens                                       |
+| Filename                                    | Description                                            |
+| ------------------------------------------- | ------------------------------------------------------ |
+| `@use '@carbon/themes';`                    | Package entrypoint                                     |
+| `@use '@carbon/themes/scss/config';`        | Specify config options for the package                 |
+| `@use '@carbon/themes/scss/themes';`        | Theme definitions for white, g10, g90, and g100        |
+| `@use '@carbon/themes/scss/theme';`         | Set the current theme, get token values from the theme |
+| `@use '@carbon/themes/scss/tokens';`        | Access theme tokens                                    |
+| `@use '@carbon/themes/scss/compat/themes';` | v10 Theme definitions for white, g10, g90, and g100    |
+| `@use '@carbon/themes/scss/compat/tokens';` | v10 theme tokens                                       |
 
 _Note: the white, g10, g90, and g100 themes are only available in the
-`scss/modules/themes` file and are not re-exported in `@carbon/themes`. To learn
-more, checkout our [FAQ](#why-are-the-themes-not-exported-in-carbonthemes)._
+`scss/themes` file and are not re-exported in `@carbon/themes`. To learn more,
+checkout our [FAQ](#why-are-the-themes-not-exported-in-carbonthemes)._
 
 You can bring in `@carbon/themes` by using `@use`:
 
@@ -55,7 +51,7 @@ You can configure the current theme with the `$theme` option:
 You can also extend the theme with your own custom tokens:
 
 ```scss
-@use '@carbon/themes/scss/modules/themes';
+@use '@carbon/themes/scss/themes';
 @use '@carbon/themes' with (
   $fallback: themes.$g100,
   $theme: (

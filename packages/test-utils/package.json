@@ -1,7 +1,7 @@
 {
   "name": "@carbon/test-utils",
   "private": true,
-  "version": "10.22.0",
+  "version": "10.23.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -32,7 +32,6 @@
     "tabbable": "^4.0.0"
   },
   "devDependencies": {
-    "node-sass": "^7.0.1",
     "react-dom": "^16.9.0"
   }
 }

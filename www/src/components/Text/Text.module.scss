@@ -9,6 +9,6 @@
 
 @each $token, $value in type.$tokens {
   .#{$token} {
-    @include type.type-style($token);
+    @include type.type-style($token, true);
   }
 }

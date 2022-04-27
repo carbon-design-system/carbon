@@ -254,7 +254,7 @@ export const WithOverflowMenu = () => (
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
-                <TableCell className="bx--table-column-menu">
+                <TableCell className="cds--table-column-menu">
                   <OverflowMenu size="sm" light flipped>
                     <OverflowMenuItem>Action 1</OverflowMenuItem>
                     <OverflowMenuItem>Action 2</OverflowMenuItem>
