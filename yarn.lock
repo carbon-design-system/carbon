@@ -1994,7 +1994,7 @@ __metadata:
     "@cypress/react": ^5.11.0
     "@cypress/webpack-dev-server": 1.8.4
     "@percy/cypress": ^3.1.1
-    "@percy/storybook": ^4.1.0
+    "@percy/storybook": ^4.2.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
@@ -4438,7 +4438,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/cli-command@npm:1.1.0, @percy/cli-command@npm:^1.0.0-beta.69":
+"@percy/cli-command@npm:1.1.0, @percy/cli-command@npm:^1.0.5":
   version: 1.1.0
   resolution: "@percy/cli-command@npm:1.1.0"
   dependencies:
@@ -4532,7 +4532,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/core@npm:1.1.0, @percy/core@npm:^1.0.0-beta.69":
+"@percy/core@npm:1.1.0":
   version: 1.1.0
   resolution: "@percy/core@npm:1.1.0"
   dependencies:
@@ -4578,7 +4578,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/logger@npm:1.1.0, @percy/logger@npm:^1.0.0-beta.69":
+"@percy/logger@npm:1.1.0":
   version: 1.1.0
   resolution: "@percy/logger@npm:1.1.0"
   checksum: 9a99cbd7a9ddea75fd11177ddf8fd14a846723db3324053030a726e564a541db9ee55cd5b7a58564b93669b46ce9a8a72bdf0ec7a154e0e2536c3a61c7d61826
@@ -4605,20 +4605,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@percy/storybook@npm:^4.1.0":
-  version: 4.1.0
-  resolution: "@percy/storybook@npm:4.1.0"
+"@percy/storybook@npm:^4.2.0":
+  version: 4.2.0
+  resolution: "@percy/storybook@npm:4.2.0"
   dependencies:
-    "@percy/cli-command": ^1.0.0-beta.69
-    "@percy/core": ^1.0.0-beta.69
-    "@percy/logger": ^1.0.0-beta.69
-    "@storybook/router": ^6.3.12
+    "@percy/cli-command": ^1.0.5
+    "@storybook/router": ^6.4.19
     cross-spawn: ^7.0.3
-    qs: ^6.10.1
-    serve-handler: ^6.1.3
+    qs: ^6.10.3
   bin:
-    percy-storybook: bin/percy-storybook
-  checksum: c5378c14dd88c6a091e9d9dc3a3012df19c6c7e72811491f6eb9975c358c46a7b6e5c7f20d7e148488e06bc61d82408d7fd6051a61883318c464a98ff6c7605f
+    percy-storybook: bin/percy-storybook.cjs
+  checksum: 37407421e687ae43f3c0fc2eb00f3761c2ffb3a7f0d3db34852a2988f9d6cb277a889848143742cb07ca6807b49eaa6920f0085243caa78f8bff4c23806500cc
   languageName: node
   linkType: hard
 
@@ -5766,13 +5763,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/client-logger@npm:6.4.19":
-  version: 6.4.19
-  resolution: "@storybook/client-logger@npm:6.4.19"
+"@storybook/client-logger@npm:6.4.22":
+  version: 6.4.22
+  resolution: "@storybook/client-logger@npm:6.4.22"
   dependencies:
     core-js: ^3.8.2
     global: ^4.4.0
-  checksum: 06eb583d05c951d526c7a7e2de461a693d2b491fc35f35a716762e031b3978d4d479c9dcdd81c855d3051318ee4fbd43fe0718b66d560b9d97e28bde1ce7378c
+  checksum: ed615b4f4e022830565b47fe850fa4dc7f75169b84710b5807e95cb75e45b58cba3f514154e039e3fe6ad96519faacaa096e3fd26af5b31322c29946e066c5b2
   languageName: node
   linkType: hard
 
@@ -6386,11 +6383,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/router@npm:^6.3.12":
-  version: 6.4.19
-  resolution: "@storybook/router@npm:6.4.19"
+"@storybook/router@npm:^6.4.19":
+  version: 6.4.22
+  resolution: "@storybook/router@npm:6.4.22"
   dependencies:
-    "@storybook/client-logger": 6.4.19
+    "@storybook/client-logger": 6.4.22
     core-js: ^3.8.2
     fast-deep-equal: ^3.1.3
     global: ^4.4.0
@@ -6404,7 +6401,7 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0
     react-dom: ^16.8.0 || ^17.0.0
-  checksum: 80aafb3f492113e49ead84e5ad6458df5e49c09adad72d63db4fb6218309cd11160109b0b07f9f17199717fe30313a2831b516200d206c6023368610d6868211
+  checksum: 107f7e6fa244325f053bbd32a36c891db513d2c6802908964a5fa2f03302256d33c3a85b95e999f36dc8097fb89503999881f56affc8c542874a1dc0468781c7
   languageName: node
   linkType: hard
 
@@ -11372,13 +11369,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"content-disposition@npm:0.5.2":
-  version: 0.5.2
-  resolution: "content-disposition@npm:0.5.2"
-  checksum: 298d7da63255a38f7858ee19c7b6aae32b167e911293174b4c1349955e97e78e1d0b0d06c10e229405987275b417cf36ff65cbd4821a98bc9df4e41e9372cde7
-  languageName: node
-  linkType: hard
-
 "content-disposition@npm:0.5.3":
   version: 0.5.3
   resolution: "content-disposition@npm:0.5.3"
@@ -15048,15 +15038,6 @@ __metadata:
   version: 2.0.6
   resolution: "fast-levenshtein@npm:2.0.6"
   checksum: 92cfec0a8dfafd9c7a15fba8f2cc29cd0b62b85f056d99ce448bbcd9f708e18ab2764bda4dd5158364f4145a7c72788538994f0d1787b956ef0d1062b0f7c24c
-  languageName: node
-  linkType: hard
-
-"fast-url-parser@npm:1.1.3":
-  version: 1.1.3
-  resolution: "fast-url-parser@npm:1.1.3"
-  dependencies:
-    punycode: ^1.3.2
-  checksum: 5043d0c4a8d775ff58504d56c096563c11b113e4cb8a2668c6f824a1cd4fb3812e2fdf76537eb24a7ce4ae7def6bd9747da630c617cf2a4b6ce0c42514e4f21c
   languageName: node
   linkType: hard
 
@@ -20998,22 +20979,6 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"mime-db@npm:~1.33.0":
-  version: 1.33.0
-  resolution: "mime-db@npm:1.33.0"
-  checksum: 281a0772187c9b8f6096976cb193ac639c6007ac85acdbb8dc1617ed7b0f4777fa001d1b4f1b634532815e60717c84b2f280201d55677fb850c9d45015b50084
-  languageName: node
-  linkType: hard
-
-"mime-types@npm:2.1.18":
-  version: 2.1.18
-  resolution: "mime-types@npm:2.1.18"
-  dependencies:
-    mime-db: ~1.33.0
-  checksum: 729265eff1e5a0e87cb7f869da742a610679585167d2f2ec997a7387fc6aedf8e5cad078e99b0164a927bdf3ace34fca27430d6487456ad090cba5594441ba43
-  languageName: node
-  linkType: hard
-
 "mime-types@npm:^2.1.12, mime-types@npm:^2.1.27, mime-types@npm:^2.1.30, mime-types@npm:^2.1.31, mime-types@npm:^2.1.34, mime-types@npm:~2.1.17, mime-types@npm:~2.1.19, mime-types@npm:~2.1.24, mime-types@npm:~2.1.34":
   version: 2.1.35
   resolution: "mime-types@npm:2.1.35"
@@ -23043,7 +23008,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"path-is-inside@npm:1.0.2, path-is-inside@npm:^1.0.1":
+"path-is-inside@npm:^1.0.1":
   version: 1.0.2
   resolution: "path-is-inside@npm:1.0.2"
   checksum: 0b5b6c92d3018b82afb1f74fe6de6338c4c654de4a96123cb343f2b747d5606590ac0c890f956ed38220a4ab59baddfd7b713d78a62d240b20b14ab801fa02cb
@@ -23082,13 +23047,6 @@ fsevents@^1.2.7:
   version: 0.1.7
   resolution: "path-to-regexp@npm:0.1.7"
   checksum: 69a14ea24db543e8b0f4353305c5eac6907917031340e5a8b37df688e52accd09e3cebfe1660b70d76b6bd89152f52183f28c74813dbf454ba1a01c82a38abce
-  languageName: node
-  linkType: hard
-
-"path-to-regexp@npm:2.2.1":
-  version: 2.2.1
-  resolution: "path-to-regexp@npm:2.2.1"
-  checksum: b921a74e7576e25b06ad1635abf7e8125a29220d2efc2b71d74b9591f24a27e6f09078fa9a1b27516a097ea0637b7cab79d19b83d7f36a8ef3ef5422770e89d9
   languageName: node
   linkType: hard
 
@@ -24726,7 +24684,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"punycode@npm:^1.2.4, punycode@npm:^1.3.2":
+"punycode@npm:^1.2.4":
   version: 1.4.1
   resolution: "punycode@npm:1.4.1"
   checksum: fa6e698cb53db45e4628559e557ddaf554103d2a96a1d62892c8f4032cd3bc8871796cae9eabc1bc700e2b6677611521ce5bb1d9a27700086039965d0cf34518
@@ -24776,7 +24734,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"qs@npm:^6.10.0, qs@npm:^6.10.1, qs@npm:^6.6.0":
+"qs@npm:^6.10.0, qs@npm:^6.10.3, qs@npm:^6.6.0":
   version: 6.10.3
   resolution: "qs@npm:6.10.3"
   dependencies:
@@ -24896,13 +24854,6 @@ fsevents@^1.2.7:
     randombytes: ^2.0.5
     safe-buffer: ^5.1.0
   checksum: 33734bb578a868d29ee1b8555e21a36711db084065d94e019a6d03caa67debef8d6a1bfd06a2b597e32901ddc761ab483a85393f0d9a75838f1912461d4dbfc7
-  languageName: node
-  linkType: hard
-
-"range-parser@npm:1.2.0":
-  version: 1.2.0
-  resolution: "range-parser@npm:1.2.0"
-  checksum: bdf397f43fedc15c559d3be69c01dedf38444ca7a1610f5bf5955e3f3da6057a892f34691e7ebdd8c7e1698ce18ef6c4d4811f70e658dda3ff230ef741f8423a
   languageName: node
   linkType: hard
 
@@ -27112,22 +27063,6 @@ resolve@^2.0.0-next.3:
     parseurl: ~1.3.2
     safe-buffer: 5.1.1
   checksum: f4dd0fbee3b7e18d0a27ba6ba01d2f585f23f533010c9e8c74aad74615b19b12d8fbe714f14cb3579803f0bacecd67cdc858714cb56c6e28f8dd07ccc997aea4
-  languageName: node
-  linkType: hard
-
-"serve-handler@npm:^6.1.3":
-  version: 6.1.3
-  resolution: "serve-handler@npm:6.1.3"
-  dependencies:
-    bytes: 3.0.0
-    content-disposition: 0.5.2
-    fast-url-parser: 1.1.3
-    mime-types: 2.1.18
-    minimatch: 3.0.4
-    path-is-inside: 1.0.2
-    path-to-regexp: 2.2.1
-    range-parser: 1.2.0
-  checksum: 384c1bc10add07a554207f918acaa75af47fcfd8fb89e070faa3468ab45ec5bbc9f976e62d659b6b63404edcf5c54efb7e0a48f3f55946eec83b62b283b9837e
   languageName: node
   linkType: hard
 
