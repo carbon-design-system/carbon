@@ -41,48 +41,26 @@ const config = {
     // Desktop
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+      },
     },
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+      },
     },
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+      },
     },
     {
       name: 'edge',
-      use: { ...devices['Desktop Edge'] },
-    },
-
-    // Tablet
-    {
-      name: 'iPad Pro',
       use: {
-        ...devices['iPad Prop 11'],
-      },
-    },
-    {
-      name: 'Galaxy Tab S4',
-      use: {
-        ...devices['Galaxy Tab S4'],
-      },
-    },
-
-    // Mobile
-    {
-      name: 'Pixel 4',
-      use: {
-        browserName: 'chromium',
-        ...devices['Pixel 4'],
-      },
-    },
-    {
-      name: 'iPhone 11',
-      use: {
-        browserName: 'webkit',
-        ...devices['iPhone 11'],
+        ...devices['Desktop Edge'],
       },
     },
   ],
