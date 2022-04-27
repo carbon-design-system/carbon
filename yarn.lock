@@ -14782,6 +14782,20 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"examples-theme@workspace:examples/theme-example":
+  version: 0.0.0-use.local
+  resolution: "examples-theme@workspace:examples/theme-example"
+  dependencies:
+    "@carbon/react": ^1.2.0-rc.0
+    eslint: 8.12.0
+    eslint-config-next: 12.1.4
+    next: 12.1.4
+    react: 18.0.0
+    react-dom: 18.0.0
+    sass: ^1.50.1
+  languageName: unknown
+  linkType: soft
+
 "exec-sh@npm:^0.3.2":
   version: 0.3.4
   resolution: "exec-sh@npm:0.3.4"
