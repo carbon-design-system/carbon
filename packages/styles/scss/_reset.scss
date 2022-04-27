@@ -119,6 +119,11 @@
   }
 
   body {
+    @if config.$css--body == true {
+      background-color: custom-property.get-var('background', #ffffff);
+      color: custom-property.get-var('text-primary', #161616);
+    }
+
     line-height: 1;
   }
 
@@ -155,11 +160,6 @@
   *::before,
   *::after {
     box-sizing: inherit;
-  }
-  
-  body {
-    background-color: custom-property.get-var('background', #ffffff);
-    color: custom-property.get-var('text-primary', #161616);
   }
 
   @include type.reset();
