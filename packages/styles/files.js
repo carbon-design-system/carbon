@@ -20,11 +20,11 @@ const files = [
   'scss/_colors.scss',
   'scss/_config.scss',
   'scss/_feature-flags.scss',
-  'scss/layer/_index.scss',
+  'scss/_layer.scss',
   'scss/_motion.scss',
   'scss/_reset.scss',
   'scss/_spacing.scss',
-  'scss/theme/_index.scss',
+  'scss/_theme.scss',
   'scss/_themes.scss',
   'scss/_zone.scss',
 

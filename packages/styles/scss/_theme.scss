@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@forward 'theme' hide theme;
-@use 'theme';
-@use '../layer/layer-tokens';
+@forward './theme/theme' hide theme;
+@use './theme/theme';
+@use './layer/layer-tokens';
 
 /// Include the CSS Custom Properties for the active theme or a given theme on
 /// a selector
