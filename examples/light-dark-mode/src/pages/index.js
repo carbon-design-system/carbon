@@ -20,9 +20,11 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../scss/Home.module.css';
+import { useThemePreference } from '../ThemePreference';
 
 export default function Home() {
-  const [theme, setTheme] = React.useState('g10');
+  // const [theme, setTheme] = React.useState('g10');
+  const { theme, setTheme } = useThemePreference();
   const checkboxEvents = {
     className: 'some-class',
     labelText: 'Checkbox label',
@@ -132,10 +134,10 @@ export default function Home() {
         <Toggle
           onToggle={() => {
             if (theme === 'g10') {
-              setTheme(() => 'g100');
+              setTheme('g100');
             }
             if (theme === 'g100') {
-              setTheme(() => 'g10');
+              setTheme('g10');
             }
           }}
           labelText="Theme Switcher"
@@ -143,7 +145,7 @@ export default function Home() {
           labelB="Dark"
           id="toggle-1"
         />
-        <Theme preference={theme}>
+        <Theme theme={theme}>
           <section className="theme-section">
             <Form>
               <Stack gap={7}>

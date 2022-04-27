@@ -14768,9 +14768,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"examples-nextjs@workspace:examples/nextjs":
+"examples-light-dark@workspace:examples/light-dark-mode":
   version: 0.0.0-use.local
-  resolution: "examples-nextjs@workspace:examples/nextjs"
+  resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
     "@carbon/react": ^1.2.0-rc.0
     eslint: 8.12.0
@@ -14782,9 +14782,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"examples-theme@workspace:examples/theme-example":
+"examples-nextjs@workspace:examples/nextjs":
   version: 0.0.0-use.local
-  resolution: "examples-theme@workspace:examples/theme-example"
+  resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
     "@carbon/react": ^1.2.0-rc.0
     eslint: 8.12.0
