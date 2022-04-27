@@ -7,12 +7,15 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Popover, PopoverContent } from '../../Popover';
 import { keys, match } from '../../../internal/keyboard';
 import { useDelayedState } from '../../../internal/useDelayedState';
 import { useId } from '../../../internal/useId';
-import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
+import {
+  useNoInteractiveChildren,
+  getInteractiveContent,
+} from '../../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../../internal/usePrefix';
 
 function Tooltip({
@@ -66,6 +69,13 @@ function Tooltip({
     'The Tooltip component must have no interactive content rendered by the' +
       '`label` or `description` prop'
   );
+
+  useEffect(() => {
+    const interactiveContent = getInteractiveContent(containerRef.current);
+    if (!interactiveContent) {
+      setOpen(false);
+    }
+  });
 
   return (
     <Popover
