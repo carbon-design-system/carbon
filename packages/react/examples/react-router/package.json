@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "carbon-components": "latest",
-    "carbon-components-react": "latest",
+    "carbon-components": "v10",
+    "carbon-components-react": "v7",
     "carbon-icons": "latest",
     "history": "^5.0.0",
     "node-sass": "^4.11.0",
