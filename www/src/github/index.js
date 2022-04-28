@@ -204,7 +204,7 @@ export async function getIssueStatistics(owner, repo) {
   }
 
   const open = apply(details.issues, filters.open);
-  const sprints = getSprintsByYear(2021)
+  const sprints = getSprintsByYear(2022)
     .map((sprint) => {
       const itemsWithActivity = apply(
         details.issues,

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>stack</title>
+    <g id="stack" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-2-Copy-31" fill="#F4F4F4" opacity="0.6" x="106" y="34" width="108" height="16"></rect>
+        <rect id="Rectangle-2-Copy-32" fill="#F4F4F4" opacity="0.6" x="106" y="66" width="108" height="16"></rect>
+        <rect id="Rectangle-3-Copy-18" fill="#C6C6C6" x="115" y="40" width="43.05" height="4"></rect>
+        <rect id="Rectangle-3-Copy-19" fill="#C6C6C6" x="115" y="72" width="43.05" height="4"></rect>
+        <rect id="Rectangle-2-Copy-31" fill="#8D8D8D" opacity="0.6" x="106" y="49" width="108" height="1"></rect>
+        <rect id="Rectangle-2-Copy-33" fill="#8D8D8D" opacity="0.6" x="106" y="81" width="108" height="1"></rect>
+        <rect id="Rectangle" fill="#8A3FFC" x="106" y="50" width="16" height="16"></rect>
+        <rect id="Rectangle-Copy-3" fill="#E8DAFF" opacity="0.75" x="122" y="50" width="92" height="16"></rect>
+        <rect id="Rectangle-Copy" fill="#8A3FFC" x="106" y="82" width="16" height="16"></rect>
+        <rect id="Rectangle-Copy-4" fill="#E8DAFF" opacity="0.75" x="122" y="82" width="92" height="16"></rect>
+        <rect id="Rectangle-2-Copy-35" fill="#F4F4F4" opacity="0.6" x="106" y="98" width="108" height="16"></rect>
+        <rect id="Rectangle-2-Copy-36" fill="#F4F4F4" opacity="0.6" x="106" y="130" width="108" height="16"></rect>
+        <rect id="Rectangle-3-Copy-20" fill="#C6C6C6" x="115" y="104" width="43.05" height="4"></rect>
+        <rect id="Rectangle-3-Copy-21" fill="#C6C6C6" x="115" y="136" width="43.05" height="4"></rect>
+        <rect id="Rectangle-2-Copy-34" fill="#8D8D8D" opacity="0.6" x="106" y="113" width="108" height="1"></rect>
+        <rect id="Rectangle-2-Copy-37" fill="#8D8D8D" opacity="0.6" x="106" y="145" width="108" height="1"></rect>
+        <rect id="Rectangle-Copy-2" fill="#8A3FFC" x="106" y="114" width="16" height="16"></rect>
+        <rect id="Rectangle-Copy-5" fill="#E8DAFF" opacity="0.75" x="122" y="114" width="92" height="16"></rect>
+    </g>
+</svg>

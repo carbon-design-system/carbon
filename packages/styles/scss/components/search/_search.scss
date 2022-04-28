@@ -112,11 +112,6 @@
     left: rem(12px);
   }
 
-  .#{$prefix}--search--md:not(.#{$prefix}--toolbar-search-container-active)
-    .#{$prefix}--search-magnifier-icon {
-    left: 0;
-  }
-
   // Large styles
   .#{$prefix}--search--lg .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
