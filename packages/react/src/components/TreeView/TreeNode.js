@@ -61,23 +61,15 @@ export default function TreeNode({
     [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
   });
   function handleToggleClick(event) {
-    if (onToggle) {
-      onToggle(event, { id, isExpanded: !expanded, label, value });
-    }
+    onToggle?.(event, { id, isExpanded: !expanded, label, value });
     setExpanded(!expanded);
   }
   function handleClick(event) {
     event.stopPropagation();
     if (!disabled) {
-      if (onTreeSelect) {
-        onTreeSelect(event, { id, label, value });
-      }
-      if (onNodeSelect) {
-        onNodeSelect(event, { id, label, value });
-      }
-      if (rest.onClick) {
-        rest.onClick(event);
-      }
+      onTreeSelect?.(event, { id, label, value });
+      onNodeSelect?.(event, { id, label, value });
+      rest?.onClick?.(event);
     }
   }
   function handleKeyDown(event) {
@@ -95,7 +87,7 @@ export default function TreeNode({
         return findParentTreeNode(node.parentNode);
       };
       if (children && expanded) {
-        onToggle(event, { id, isExpanded: false, label, value });
+        onToggle?.(event, { id, isExpanded: false, label, value });
         setExpanded(false);
       } else {
         /**
@@ -113,7 +105,7 @@ export default function TreeNode({
          */
         currentNode.current.lastChild.firstChild.focus();
       } else {
-        onToggle(event, { id, isExpanded: true, label, value });
+        onToggle?.(event, { id, isExpanded: true, label, value });
         setExpanded(true);
       }
     }
@@ -121,18 +113,16 @@ export default function TreeNode({
       event.preventDefault();
       handleClick(event);
     }
-    if (rest.onKeyDown) {
-      rest.onKeyDown(event);
-    }
+    rest?.onKeyDown?.(event);
   }
   function handleFocusEvent(event) {
-    if (event.type === 'blur' && rest.onBlur) {
-      rest.onBlur(event);
+    if (event.type === 'blur') {
+      rest?.onBlur?.(event);
     }
-    if (event.type === 'focus' && rest.onFocus) {
-      rest.onFocus(event);
+    if (event.type === 'focus') {
+      rest?.onFocus?.(event);
     }
-    onNodeFocusEvent && onNodeFocusEvent(event);
+    onNodeFocusEvent?.(event);
   }
 
   useEffect(() => {
