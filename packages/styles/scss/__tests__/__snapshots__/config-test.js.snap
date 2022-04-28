@@ -2,6 +2,7 @@
 
 exports[`@carbon/styles/scss/config Public API 1`] = `
 Object {
+  "css--body": true,
   "css--default-type": true,
   "css--font-face": true,
   "css--reset": true,
