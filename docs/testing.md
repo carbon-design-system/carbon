@@ -41,12 +41,61 @@ These tests are authored within the `e2e` directory and match the file pattern:
 
 When working with Playwright locally, it's important to start up the service
 that you're testing against. For components in React, this will mean starting up
-the React storybook locally.
+the React storybook locally by doing the following from the root of the project:
+
+```bash
+cd packages/react
+yarn storybook
+```
 
 One the storybook is loaded, you can run tests against is using the storybook
 test-utils found in `e2e/test-utils/storybook`. A common use-case for testing a
 component is to use Percy to take a snapshot of a component in a particular
 theme from a specific story in storybook.
+
+You can do this by writing the following:
+
+```js
+// e2e/components/component/component-test.e2e.js
+
+'use strict';
+
+const { test } = require('@playwright/test');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory } = require('../../test-utils/storybook');
+
+test('component-name @vrt', ({ page }) => {
+  await snapshotStory(page, {
+    component: 'component',
+    story: 'story-name',
+    theme: 'white',
+  });
+});
+```
+
+You can test this component in multiple themes by writing the following:
+
+```js
+// e2e/components/component/component-test.e2e.js
+
+'use strict';
+
+const { test } = require('@playwright/test');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory } = require('../../test-utils/storybook');
+
+test.describe('component-name @vrt', () => {
+  themes.forEach((theme) => {
+    test(theme, async ({ page }) => {
+      await snapshotStory(page, {
+        component: 'component',
+        story: 'story-name',
+        theme,
+      });
+    });
+  });
+});
+```
 
 If you would like to debug or interact with the test suite, you can use
 Playwright's VS Code integration or run `yarn playwright test` with the
@@ -54,6 +103,27 @@ Playwright's VS Code integration or run `yarn playwright test` with the
 test step-by-step to debug what's going on. It will also allow you to interact
 with the page to quickly find selectors you can use to find items to run tests
 against.
+
+#### Working with snapshots locally
+
+Sometimes you'll want to debug snapshots locally instead of relying on an
+externaly service to get feedback. To do so, you can use the
+`ENABLE_LOCAL_SNAPSHOTS` environment variable to store snapshots locally. Almost
+any playwright command you run can be prefixed with this value in order to store
+screenshots locally.
+
+```bash
+ENABLE_LOCAL_SNAPSHOTS=1 yarn playwright test --project chromium --grep @vrt component-test.e2e.js
+```
+
+**Note: it's important to narrow down tests in order to not generate a lot of
+screenshots locally**
+
+The first time you'll run this command, it will need to generate the baseline
+snapshots for this component. The second time you run it, it will compare the
+snapshots for the current page with what is stored in the screenshot. If the two
+do not match, playwright will report a failure and will provide a link to the
+diff image on your machine.
 
 ## FAQ
 
