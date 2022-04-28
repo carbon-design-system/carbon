@@ -54,7 +54,13 @@ function serialize(object) {
       return `${acc}-${key}=${object[key]}`;
     }, '');
   }
-  return JSON.stringify(object);
+
+  return Object.keys(object).reduce((acc, key, index) => {
+    if (index === 0) {
+      return `${key}:${object[key]}`;
+    }
+    return `${acc}, ${key}=${object[key]}`;
+  }, '');
 }
 
 module.exports = {
