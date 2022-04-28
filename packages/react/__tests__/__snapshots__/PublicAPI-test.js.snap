@@ -114,6 +114,8 @@ Map {
             "1x2",
             "4x3",
             "3x4",
+            "3x2",
+            "2x3",
             "1x1",
           ],
         ],
@@ -5120,6 +5122,48 @@ Map {
     "render": [Function],
   },
   "PrimaryButton" => Object {},
+  "ProgressBar" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "helperText": Object {
+        "type": "string",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "max": Object {
+        "type": "number",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "small",
+            "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "type": Object {
+        "args": Array [
+          Array [
+            "default",
+            "inline",
+            "indented",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "value": Object {
+        "type": "number",
+      },
+    },
+  },
   "ProgressIndicator" => Object {
     "propTypes": Object {
       "children": Object {
@@ -8369,48 +8413,6 @@ Map {
         "type": "bool",
       },
       "totalItems": Object {
-        "type": "number",
-      },
-    },
-  },
-  "unstable_ProgressBar" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-      "helperText": Object {
-        "type": "string",
-      },
-      "hideLabel": Object {
-        "type": "bool",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "max": Object {
-        "type": "number",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "small",
-            "big",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "type": Object {
-        "args": Array [
-          Array [
-            "default",
-            "inline",
-            "indented",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "value": Object {
         "type": "number",
       },
     },

@@ -8,7 +8,7 @@
 import {
   Grid,
   Column,
-  unstable_Heading as Heading,
+  Heading,
   Stack,
   Table,
   TableHead,

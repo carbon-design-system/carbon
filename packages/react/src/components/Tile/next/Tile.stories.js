@@ -35,6 +35,13 @@ export default {
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
