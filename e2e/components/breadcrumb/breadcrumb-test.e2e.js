@@ -8,21 +8,31 @@
 'use strict';
 
 const { test } = require('@playwright/test');
-const { themes, snapshotStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshot } = require('../../test-utils/snapshot');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('breadcrumb @vrt', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('breadcrumb', async ({ page }, testInfo) => {
-        await snapshotStory(page, testInfo, {
+      test('breadcrumb', async ({ page }) => {
+        await snapshotStory(page, {
           component: 'breadcrumb',
           story: 'breadcrumb-story',
           theme,
         });
       });
 
-      test('breadcrumb with overflow menu', async ({ page }, testInfo) => {
-        await snapshotStory(page, testInfo, {
+      test('breadcrumb with overflow menu', async ({ page }) => {
+        await visitStory(page, {
+          component: 'breadcrumb',
+          story: 'breadcrumb-with-overflow-menu',
+          theme,
+        });
+        await page
+          .locator('button[aria-haspopup="true"][aria-expanded="false"]')
+          .click();
+        await snapshot(page, {
           component: 'breadcrumb',
           story: 'breadcrumb-with-overflow-menu',
           theme,

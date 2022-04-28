@@ -8,12 +8,13 @@
 'use strict';
 
 const { test } = require('@playwright/test');
-const { themes, snapshotStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory } = require('../../test-utils/storybook');
 
 test.describe('accordion @vrt', () => {
   themes.forEach((theme) => {
-    test(theme, async ({ page }, testInfo) => {
-      await snapshotStory(page, testInfo, {
+    test(theme, async ({ page }) => {
+      await snapshotStory(page, {
         component: 'accordion',
         story: 'accordion-story',
         theme,
