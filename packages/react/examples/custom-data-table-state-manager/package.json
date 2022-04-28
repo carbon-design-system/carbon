@@ -4,8 +4,8 @@
   "private": true,
   "description": "Sample project for creating fully customized state management of carbon-components-react data table",
   "dependencies": {
-    "carbon-components": "latest",
-    "carbon-components-react": "latest",
+    "carbon-components": "10.x",
+    "carbon-components-react": "7.x",
     "carbon-icons": "latest",
     "lodash-es": "^4.17.0",
     "node-sass": "^4.14.1",
