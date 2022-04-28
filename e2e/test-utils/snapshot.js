@@ -35,9 +35,9 @@ function getSnapshotId(context) {
 
   const { component, story, theme } = context;
   return serialize({
+    theme,
     component,
     story,
-    theme,
   });
 }
 
@@ -57,9 +57,9 @@ function serialize(object) {
 
   return Object.keys(object).reduce((acc, key, index) => {
     if (index === 0) {
-      return `${key}:${object[key]}`;
+      return `${key}: ${object[key]}`;
     }
-    return `${acc}, ${key}=${object[key]}`;
+    return `${acc}, ${key}: ${object[key]}`;
   }, '');
 }
 
