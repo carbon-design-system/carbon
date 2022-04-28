@@ -2,10 +2,7 @@
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
   "version": "0.18.0",
-<<<<<<< HEAD
   "private": true,
-=======
->>>>>>> b3a7589139580dc9a8e4eaec130dbebcc8ccde78
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
