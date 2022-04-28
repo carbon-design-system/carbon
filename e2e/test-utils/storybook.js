@@ -35,7 +35,8 @@ async function snapshotStory(page, testInfo, storyOptions) {
     testInfo.project.name,
     theme,
     'component',
-    'accordion',
+    component,
+    story,
     testInfo.snapshotSuffix,
   ].join('.');
 

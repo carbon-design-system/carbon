@@ -10,15 +10,17 @@
 
 ## Overview
 
-| Task                                       | Command                                            |
-| :----------------------------------------- | :------------------------------------------------- |
-| Run package test                           | `yarn test:e2e`                                    |
-| Run playwright tests                       | `yarn playwright test`                             |
-| Run a specific playwright test             | `yarn playwright test path/to/test-e2e.js`         |
-| Run playwright tests in a specific browser | `yarn playwright test --browser=chromium`          |
-| Run playwright tests in a specific project | `yarn playwright test --project=chromium`          |
-| Debug playwright tests                     | `yarn playwright test --debug`                     |
-| Run playwright with browser visible        | `yarn playwright test --project=chromium --headed` |
+| Task                                                  | Command                                            |
+| :---------------------------------------------------- | :------------------------------------------------- |
+| Run package test                                      | `yarn test:e2e`                                    |
+| Run playwright tests                                  | `yarn playwright test`                             |
+| Run a specific playwright test                        | `yarn playwright test path/to/test-e2e.js`         |
+| Run playwright tests in a specific browser            | `yarn playwright test --browser=chromium`          |
+| Run playwright tests in a specific project            | `yarn playwright test --project=chromium`          |
+| Debug playwright tests                                | `yarn playwright test --debug`                     |
+| Run playwright with browser visible                   | `yarn playwright test --project=chromium --headed` |
+| Run playwright tests that match a specific tag        | `yarn playwright test --grep @tag-name`            |
+| Run playwright tests that do not match a specific tag | `yarn playwright test --grep-invert @tag-name`     |
 
 ## End-to-end
 
@@ -52,3 +54,11 @@ Playwright's VS Code integration or run `yarn playwright test` with the
 test step-by-step to debug what's going on. It will also allow you to interact
 with the page to quickly find selectors you can use to find items to run tests
 against.
+
+## FAQ
+
+### Why am I seeing `browserType.launch: Executable doesn't exist at ../path`?
+
+The browser executables need to be installed so that playwright can run tests
+inside chromium, firefox, etc. They can be installed by running
+`yarn playwright install`
