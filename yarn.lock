@@ -1776,8 +1776,8 @@ __metadata:
     "@carbon/icons": ^11.1.0
     "@carbon/layout": ^11.1.0
     "@carbon/motion": ^11.0.0
-    "@carbon/themes": ^11.1.0
-    "@carbon/type": ^11.1.0
+    "@carbon/themes": ^11.2.0-rc.0
+    "@carbon/type": ^11.2.0-rc.0
     fs-extra: ^10.0.0
     klaw-sync: ^6.0.0
     replace-in-file: ^3.4.2
@@ -1945,7 +1945,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.1.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.2.0-rc.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -1960,10 +1960,10 @@ __metadata:
     "@carbon/feature-flags": ^0.7.0
     "@carbon/icons-react": ^11.1.0
     "@carbon/layout": ^11.1.0
-    "@carbon/styles": ^1.1.0
+    "@carbon/styles": ^1.2.0-rc.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.23.0
-    "@carbon/themes": ^11.1.0
+    "@carbon/themes": ^11.2.0-rc.0
     "@cypress/react": ^5.11.0
     "@cypress/webpack-dev-server": 1.8.4
     "@percy/cypress": ^3.1.1
@@ -2049,8 +2049,8 @@ __metadata:
     "@carbon/colors": ^11.1.0
     "@carbon/icon-helpers": ^10.29.0
     "@carbon/icons": ^11.1.0
-    "@carbon/themes": ^11.1.0
-    "@carbon/type": ^11.1.0
+    "@carbon/themes": ^11.2.0-rc.0
+    "@carbon/type": ^11.2.0-rc.0
     "@skpm/builder": ^0.8.0
     color-string: ^1.5.3
     core-js: ^3.16.0
@@ -2061,7 +2061,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^1.1.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^1.2.0-rc.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2071,8 +2071,8 @@ __metadata:
     "@carbon/layout": ^11.1.0
     "@carbon/motion": ^11.0.0
     "@carbon/test-utils": ^10.23.0
-    "@carbon/themes": ^11.1.0
-    "@carbon/type": ^11.1.0
+    "@carbon/themes": ^11.2.0-rc.0
+    "@carbon/type": ^11.2.0-rc.0
     "@ibm/plex": 6.0.0-next.6
     css: ^3.0.0
     sass: ^1.45.0
@@ -2105,7 +2105,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^11.1.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@^11.2.0-rc.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -2117,7 +2117,7 @@ __metadata:
     "@carbon/layout": ^11.1.0
     "@carbon/scss-generator": ^10.13.0
     "@carbon/test-utils": ^10.23.0
-    "@carbon/type": ^11.1.0
+    "@carbon/type": ^11.2.0-rc.0
     change-case: ^4.1.1
     color: ^3.1.2
     core-js: ^3.16.0
@@ -2127,7 +2127,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@^11.1.0, @carbon/type@workspace:packages/type":
+"@carbon/type@^11.2.0-rc.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
@@ -10298,8 +10298,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.16.7
     "@babel/preset-env": ^7.16.7
     "@babel/preset-react": ^7.16.7
-    "@carbon/react": ^1.1.0
-    "@carbon/styles": ^1.1.0
+    "@carbon/react": ^1.2.0-rc.0
+    "@carbon/styles": ^1.2.0-rc.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.23.0
     "@rollup/plugin-babel": ^5.3.0
@@ -10325,7 +10325,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^1.1.0
+    "@carbon/styles": ^1.2.0-rc.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.23.0
     fs-extra: ^10.0.0
@@ -11041,7 +11041,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^1.1.0
+    "@carbon/styles": ^1.2.0-rc.0
     sass: ^1.49.7
     vite: ^2.8.0
   languageName: unknown
@@ -11051,7 +11051,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^1.1.0
+    "@carbon/react": ^1.2.0-rc.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -14767,6 +14767,20 @@ __metadata:
   checksum: ad4e1577f1a6b721c7800dcc7c733fe01f6c310732bb5bf2240245c2a5b45a38518b91d8be2c610611623160b9d1c0e91f1ce96d639f8b53e8894625cf20fa45
   languageName: node
   linkType: hard
+
+"examples-nextjs@workspace:examples/nextjs":
+  version: 0.0.0-use.local
+  resolution: "examples-nextjs@workspace:examples/nextjs"
+  dependencies:
+    "@carbon/react": ^1.2.0-rc.0
+    eslint: 8.12.0
+    eslint-config-next: 12.1.4
+    next: 12.1.4
+    react: 18.0.0
+    react-dom: 18.0.0
+    sass: ^1.50.1
+  languageName: unknown
+  linkType: soft
 
 "exec-sh@npm:^0.3.2":
   version: 0.3.4
@@ -21655,20 +21669,6 @@ fsevents@^1.2.7:
   checksum: d19354cf4e5bc58473e922c38a5a282de62c0b78bebdd31617b9e958b6f6877bcc2df371b7368db2110e098f87722e084c950f9229d35e4c06842de79cd90d20
   languageName: node
   linkType: hard
-
-"nextjs@workspace:examples/nextjs":
-  version: 0.0.0-use.local
-  resolution: "nextjs@workspace:examples/nextjs"
-  dependencies:
-    "@carbon/react": ^1.1.0
-    eslint: 8.12.0
-    eslint-config-next: 12.1.4
-    next: 12.1.4
-    react: 18.0.0
-    react-dom: 18.0.0
-    sass: ^1.50.1
-  languageName: unknown
-  linkType: soft
 
 "nice-try@npm:^1.0.4":
   version: 1.0.5
@@ -31706,7 +31706,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^1.1.0
+    "@carbon/react": ^1.2.0-rc.0
     "@octokit/core": ^3.5.1
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^3.5.2
