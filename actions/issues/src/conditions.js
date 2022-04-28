@@ -58,6 +58,15 @@ const states = {
   },
 };
 
+function or(a, b) {
+  return {
+    key: `or(${a.key}, ${b.key})`,
+    run(context) {
+      return a.run(context) ?? b.run(context);
+    },
+  };
+}
+
 /**
  * Check if a specific action was triggered for a given action context
  * @param {string} name
@@ -70,4 +79,5 @@ function action(name) {
 module.exports = {
   events,
   states,
+  or,
 };

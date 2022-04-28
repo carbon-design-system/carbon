@@ -15,6 +15,7 @@ module.exports = {
     readyToMerge: 'status: ready to merge 🎉',
 
     // Triage
+    needsMoreInfo: 'status: needs more info',
     needsTriage: 'status: needs triage 🕵️‍♀️',
     waitingForAuthor: `status: waiting for author's response 💬`,
     waitingForMaintainer: 'status: waiting for maintainer response 💬',
