@@ -1,14 +1,14 @@
 {
   "name": "codesandbox",
-  "version": "0.2.0",
+  "version": "0.3.0-rc.0",
   "private": true,
   "dependencies": {
-    "@carbon/react": "^1.1.0",
+    "@carbon/react": "^1.2.0-rc.0",
     "react": "^17.0.0",
-    "react-dom": "^17.0.0",
-    "react-scripts": "5.0.0"
+    "react-dom": "^17.0.0"
   },
   "devDependencies": {
+    "react-scripts": "5.0.0",
     "sass": "^1.49.11"
   },
   "scripts": {
