@@ -11,7 +11,7 @@
 @use './themes';
 @use './theme';
 // Inline themes depend on layer styles to property reset the layer level
-@use './layer';
+@use './layer/layer-tokens';
 @use './utilities/component-tokens';
 @use './utilities/custom-property';
 @use './components/button/tokens' as button;
@@ -41,6 +41,35 @@ $-components: (
         @include custom-property.declaration($key, $value);
       }
     }
+
+    // Note: we need to re-emit the contextual layer tokens as part of the theme
+    // mixin. Otherwise, the layer tokens are defined at the :root level and will
+    // not pick up the theme-specific, or zone-specific, value from the first
+    // layer.
+    //
+    // For example, in this situation:
+    //
+    // ```
+    // :root {
+    //   --layer-one: #000000;
+    //   --layer: var(--layer-one);
+    // }
+    // ```
+    //
+    // This will always evaluate to the value of `--layer-one` at the `:root`
+    // selector, even if `--layer-one` is redefined layer on in the cascade.
+    //
+    // ```
+    // .zone {
+    //   --layer-one: #ffffff;
+    // }
+    // ```
+    //
+    // Even though you would expect `--layer` to be redefined, it will keep the
+    // value defined at the `:root` level.
+    //
+    // @see https://github.com/carbon-design-system/carbon/issues/11138
+    @include layer-tokens.emit-layer-tokens(1);
 
     @each $group in $-components {
       @each $key, $value in $group {
