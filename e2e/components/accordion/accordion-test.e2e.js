@@ -10,7 +10,7 @@
 const { test } = require('@playwright/test');
 const { themes, snapshotStory } = require('../../test-utils/storybook');
 
-test.describe('accordion', () => {
+test.describe('accordion @vrt', () => {
   themes.forEach((theme) => {
     test(theme, async ({ page }, testInfo) => {
       await snapshotStory(page, testInfo, {

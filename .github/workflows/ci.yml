@@ -149,7 +149,7 @@ jobs:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
           PERCY_PARALLEL_TOTAL: 2
         run: |
-          yarn percy exec --parallel -- yarn playwright test --shard="${{ matrix.shard }}/2"
+          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shard }}/2"
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
