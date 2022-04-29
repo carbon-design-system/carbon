@@ -159,8 +159,6 @@ categories:
           - page-number
           - paint-brush
           - paint-brush--alt
-          - page-break
-          - page-number
           - paragraph
           - pen
           - pen--fountain
@@ -1256,9 +1254,7 @@ categories:
           - critical-severity
           - low-severity
           - critical
-          - incomplete
           - square-fill
-          - undefined
           - help
           - help--filled
           - in-progress
@@ -1728,7 +1724,6 @@ categories:
           - forecast--hail-30
           - forecast--lightning
           - forecast--lightning-30
-          - ice--accretion
           - hail
           - haze
           - haze--night

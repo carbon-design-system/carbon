@@ -28,6 +28,7 @@ describe('@carbon/styles/scss/type', () => {
           type-style: meta.mixin-exists('type-style', 'type'),
           font-family: meta.mixin-exists('font-family', 'type'),
           default-type: meta.mixin-exists('default-type', 'type'),
+          type-classes: meta.mixin-exists('type-classes', 'type'),
         ),
       ));
     `);
@@ -38,6 +39,7 @@ describe('@carbon/styles/scss/type', () => {
       'type-style': true,
       'font-family': true,
       'default-type': true,
+      'type-classes': true,
     });
     expect(api.variables).toMatchInlineSnapshot(`
       Array [
@@ -94,5 +96,19 @@ describe('@carbon/styles/scss/type', () => {
         expect.stringContaining('var(--custom-')
       );
     }
+  });
+
+  test('type-classes mixin', async () => {
+    const { result } = await render(`
+      @use '../type';
+
+      @include type.type-classes();
+
+      .my-selector {
+        @include type.type-style('label-01');
+      }
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+    expect(stylesheet).toMatchSnapshot();
   });
 });
