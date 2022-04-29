@@ -14834,6 +14834,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"examples-light-dark@workspace:examples/light-dark-mode":
+  version: 0.0.0-use.local
+  resolution: "examples-light-dark@workspace:examples/light-dark-mode"
+  dependencies:
+    "@carbon/react": ^1.2.0
+    eslint: 8.12.0
+    next: 12.1.4
+    react: 18.0.0
+    react-dom: 18.0.0
+    sass: ^1.50.1
+  languageName: unknown
+  linkType: soft
+
 "examples-nextjs@workspace:examples/nextjs":
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
