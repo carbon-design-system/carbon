@@ -14838,7 +14838,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": ^1.2.0-rc.0
+    "@carbon/react": ^1.2.0
     eslint: 8.12.0
     next: 12.1.4
     react: 18.0.0

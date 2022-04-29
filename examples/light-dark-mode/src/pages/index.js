@@ -20,10 +20,9 @@ import React from 'react';
 import Head from 'next/head';
 import Image from 'next/image';
 import styles from '../scss/Home.module.css';
-import { useThemePreference } from '../ThemePreference';
+import { useThemePreference } from '../components/ThemePreference';
 
 export default function Home() {
-  // const [theme, setTheme] = React.useState('g10');
   const { theme, setTheme } = useThemePreference();
   const checkboxEvents = {
     className: 'some-class',

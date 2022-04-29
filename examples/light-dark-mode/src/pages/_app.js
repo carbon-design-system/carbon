@@ -1,6 +1,6 @@
 import '../scss/styles.scss';
 
-import { ThemePreference } from '../ThemePreference';
+import { ThemePreference } from '../components/ThemePreference';
 
 function MyApp({ Component, pageProps }) {
   return (
