@@ -15,6 +15,7 @@ const {
   needsMoreInfo,
   waitingForAuthor,
   waitingForMaintainer,
+  question,
 } = labels.status;
 
 const teams = ['design', 'developers-system'];
@@ -24,7 +25,11 @@ const plugin = {
   conditions: [
     events.comments.created,
     states.issues.open,
-    or(states.issues.has(needsTriage), states.issues.has(needsMoreInfo)),
+    or(
+      states.issues.has(needsTriage),
+      states.issues.has(needsMoreInfo),
+      states.issues.has(question)
+    ),
   ],
   async run(context, octokit) {
     const { comment, issue, repository } = context.payload;

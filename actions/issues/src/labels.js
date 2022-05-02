@@ -19,5 +19,8 @@ module.exports = {
     needsTriage: 'status: needs triage 🕵️‍♀️',
     waitingForAuthor: `status: waiting for author's response 💬`,
     waitingForMaintainer: 'status: waiting for maintainer response 💬',
+
+    // Questions
+    question: 'type: question ❓',
   },
 };

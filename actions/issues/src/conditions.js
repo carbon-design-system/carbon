@@ -58,11 +58,19 @@ const states = {
   },
 };
 
-function or(a, b) {
+function or(...conditions) {
+  const key = conditions
+    .map((condition) => {
+      return condition.key;
+    })
+    .join(', ');
   return {
-    key: `or(${a.key}, ${b.key})`,
+    key: `or(${key})`,
     run(context) {
-      return a.run(context) ?? b.run(context);
+      const condition = conditions.find((condition) => {
+        return condition.run(context);
+      });
+      return condition !== null;
     },
   };
 }
