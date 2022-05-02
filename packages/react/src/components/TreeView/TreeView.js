@@ -115,12 +115,18 @@ export default function TreeView({
     }
     if (matches(event, [keys.Home, keys.End])) {
       const nodeIds = [];
+      if (multiselect && event.shiftKey) {
+        nodeIds.push(treeWalker.current.currentNode?.id);
+      }
       while (
         match(event, keys.Home)
           ? treeWalker.current.previousNode()
           : treeWalker.current.nextNode()
       ) {
         nextFocusNode = treeWalker.current.currentNode;
+        if (multiselect && event.shiftKey) {
+          nodeIds.push(nextFocusNode?.id);
+        }
       }
       setSelected(selected.concat(nodeIds));
     }
