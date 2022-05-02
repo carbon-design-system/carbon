@@ -102,30 +102,51 @@ export default function TreeView({
 
   function handleKeyDown(event) {
     event.stopPropagation();
-    if (matches(event, [keys.ArrowUp, keys.ArrowDown, keys.Home, keys.End])) {
+    if (
+      matches(event, [
+        keys.ArrowUp,
+        keys.ArrowDown,
+        keys.Home,
+        keys.End,
+        { code: 'KeyA' },
+      ])
+    ) {
       event.preventDefault();
     }
+
     treeWalker.current.currentNode = event.target;
     let nextFocusNode;
+
     if (match(event, keys.ArrowUp)) {
       nextFocusNode = treeWalker.current.previousNode();
     }
     if (match(event, keys.ArrowDown)) {
       nextFocusNode = treeWalker.current.nextNode();
     }
-    if (matches(event, [keys.Home, keys.End])) {
+    if (matches(event, [keys.Home, keys.End, { code: 'KeyA' }])) {
       const nodeIds = [];
-      if (multiselect && event.shiftKey) {
-        nodeIds.push(treeWalker.current.currentNode?.id);
-      }
-      while (
-        match(event, keys.Home)
-          ? treeWalker.current.previousNode()
-          : treeWalker.current.nextNode()
-      ) {
-        nextFocusNode = treeWalker.current.currentNode;
+
+      if (matches(event, [keys.Home, keys.End])) {
         if (multiselect && event.shiftKey) {
-          nodeIds.push(nextFocusNode?.id);
+          nodeIds.push(treeWalker.current.currentNode?.id);
+        }
+        while (
+          match(event, keys.Home)
+            ? treeWalker.current.previousNode()
+            : treeWalker.current.nextNode()
+        ) {
+          nextFocusNode = treeWalker.current.currentNode;
+
+          if (multiselect && event.shiftKey) {
+            nodeIds.push(nextFocusNode?.id);
+          }
+        }
+      }
+      if (match(event, { code: 'KeyA' }) && event.ctrlKey) {
+        treeWalker.current.currentNode = treeWalker.current.root;
+
+        while (treeWalker.current.nextNode()) {
+          nodeIds.push(treeWalker.current.currentNode?.id);
         }
       }
       setSelected(selected.concat(nodeIds));
