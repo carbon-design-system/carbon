@@ -252,15 +252,13 @@
   }
 }
 
-/// Windows HCM Mixin
+/// High Contrast Mode mixin for Windows and macOS
 /// @access public
 /// @example @include high-contrast-mode;
 /// @group global-helpers
 /// We should set HCM styles at the end of each file to ensure they are not overridden
 @mixin high-contrast-mode($type: '') {
-  @media screen and (-ms-high-contrast: active),
-    (forced-colors: active),
-    (prefers-contrast) {
+  @media screen and (-ms-high-contrast: active), (forced-colors: active) {
     @if ($type == 'icon-fill') {
       fill: ButtonText;
     }
