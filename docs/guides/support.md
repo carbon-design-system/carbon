@@ -1,4 +1,4 @@
-# Carbon core support and maintenance
+# Carbon system squad support and maintenance
 
 <!-- prettier-ignore-start -->
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
@@ -29,8 +29,8 @@
 
 ## Overview
 
-Ongoing support for Carbon latest and previous version (which will be
-prioritized in that order)
+Ongoing support for Carbon and previous version (which will be prioritized in
+that order)
 
 ### What does "ongoing support" mean?
 
@@ -39,16 +39,12 @@ prioritized in that order)
   team)
 - Triage and shepherd issues to close. Answer questions and help our users find
   solutions to their problems
-- Does not include feature enhancements or new feature requests, which currently
-  fall under https://github.com/orgs/carbon-design-system/projects/8 (as of
-  4/30/19)
+- Does not include feature enhancements or new feature requests
 
 ### What repositories do we support?
 
-- carbon-components
-- carbon-components-react
-- carbon-website
-- carbon-elements
+- carbon-design-system/carbon
+- carbon-design-system/carbon-website
 
 ## Issues
 
@@ -291,8 +287,8 @@ There is a large collection of labels that can help communicate the nature of an
 issue at a glance to developers and designers. Here's a few that you might add
 that can be particularly helpful:
 
-- v9 - any issue or question pertaining to legacy versions of Carbon Components
-  should be tagged v9
+- v10 - any issue or question pertaining to legacy versions of Carbon Components
+  should be tagged v10
 - good first issue 👋 - these issues don't require a deep knowledge or
   understanding of our code base and would be great for someone looking to help
   out for the first time with some code

@@ -5,6 +5,13 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+/// Specify whether default styles should be emitted for the <body> element,
+/// specifically background and text color
+/// @access public
+/// @type Bool
+/// @group config
+$css--body: true !default;
+
 /// If true, includes font face mixins from scss/fonts
 /// @access public
 /// @type Bool
