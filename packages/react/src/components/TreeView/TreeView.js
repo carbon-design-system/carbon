@@ -42,6 +42,7 @@ export default function TreeView({
       }
     );
   }
+
   function handleTreeSelect(event, node = {}) {
     const { id: nodeId } = node;
     if (multiselect && (event.metaKey || event.ctrlKey)) {
@@ -56,6 +57,7 @@ export default function TreeView({
     }
     onSelect?.(event, node);
   }
+
   function handleFocusEvent(event) {
     if (event.type === 'blur') {
       const {
@@ -78,6 +80,7 @@ export default function TreeView({
       currentFocusedNode.tabIndex = 0;
     }
   }
+
   let focusTarget = false;
   const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
@@ -99,7 +102,7 @@ export default function TreeView({
 
   function handleKeyDown(event) {
     event.stopPropagation();
-    if (matches(event, [keys.ArrowUp, keys.ArrowDown])) {
+    if (matches(event, [keys.ArrowUp, keys.ArrowDown, keys.Home, keys.End])) {
       event.preventDefault();
     }
     treeWalker.current.currentNode = event.target;
@@ -109,6 +112,17 @@ export default function TreeView({
     }
     if (match(event, keys.ArrowDown)) {
       nextFocusNode = treeWalker.current.nextNode();
+    }
+    if (matches(event, [keys.Home, keys.End])) {
+      const nodeIds = [];
+      while (
+        match(event, keys.Home)
+          ? treeWalker.current.previousNode()
+          : treeWalker.current.nextNode()
+      ) {
+        nextFocusNode = treeWalker.current.currentNode;
+      }
+      setSelected(selected.concat(nodeIds));
     }
     if (nextFocusNode && nextFocusNode !== event.target) {
       resetNodeTabIndices();
