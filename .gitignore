@@ -54,3 +54,6 @@ package-lock.json
 
 # Accessibility Verification Testing
 .avt/
+
+# Playwright
+.playwright
