@@ -111,7 +111,7 @@ jobs:
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
 
-  vrt:
+  vrt-runner:
     strategy:
       matrix:
         shard: [1, 2]
@@ -158,3 +158,12 @@ jobs:
         with:
           name: playwright-report
           path: .playwright
+
+  vrt:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: vrt-runner
+    steps:
+      - name: Check VRT Runner job status
+        if: ${{ needs.vrt-runner.result != 'success' }}
+        run: exit 1
