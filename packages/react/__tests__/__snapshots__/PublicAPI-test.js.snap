@@ -5149,6 +5149,16 @@ Map {
         ],
         "type": "oneOf",
       },
+      "status": Object {
+        "args": Array [
+          Array [
+            "active",
+            "finished",
+            "error",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "type": Object {
         "args": Array [
           Array [
