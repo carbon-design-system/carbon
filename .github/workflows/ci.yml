@@ -111,7 +111,10 @@ jobs:
         if: ${{ steps.filter.outputs.e2e == 'true' }}
         run: yarn test:e2e
 
-  vrt:
+  vrt-runner:
+    strategy:
+      matrix:
+        shard: [1, 2]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -128,11 +131,39 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
+      - name: Install browsers
+        run: yarn playwright install --with-deps
       - name: Build project
         run: yarn build --ignore '@carbon/sketch'
+      - name: Build storybook
+        run: yarn workspace @carbon/react build-storybook
+      - name: Run storybook
+        id: storybook
+        run: |
+          npx serve -l 3000 packages/react/storybook-static &
+          pid=$!
+          echo ::set-output name=pid::"$pid"
       - name: Run VRT
         if: github.repository == 'carbon-design-system/carbon'
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
+          PERCY_PARALLEL_TOTAL: 2
         run: |
-          yarn run percy exec -- yarn workspace @carbon/react test:e2e
+          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shard }}/2"
+      - name: Stop storybook
+        run: kill ${{ steps.storybook.outputs.pid }}
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: playwright-report
+          path: .playwright
+
+  vrt:
+    if: ${{ always() }}
+    runs-on: ubuntu-latest
+    needs: vrt-runner
+    steps:
+      - name: Check VRT Runner job status
+        if: ${{ needs.vrt-runner.result != 'success' }}
+        run: exit 1
