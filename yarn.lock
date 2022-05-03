@@ -8041,7 +8041,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^3.1.18, accessibility-checker@npm:^3.1.28":
+"accessibility-checker@npm:^3.1.18":
   version: 3.1.28
   resolution: "accessibility-checker@npm:3.1.28"
   dependencies:
@@ -8053,6 +8053,22 @@ __metadata:
   bin:
     achecker: bin/achecker.js
   checksum: 913dc0d787ca83e4c6eacc48cf7d8334abdcd88e0523a2fcdb99b4f953c4fe141548f8c0759a198ec9ed3c46753a2671b0988ddf5d4424b4c7c9479c1e37b264
+  languageName: node
+  linkType: hard
+
+"accessibility-checker@npm:^3.1.29-rc.0":
+  version: 3.1.29-rc.0
+  resolution: "accessibility-checker@npm:3.1.29-rc.0"
+  dependencies:
+    chromedriver: "*"
+    deep-diff: ^1.0.2
+    js-yaml: ^4.1.0
+    puppeteer: ^13.0.0
+    request: ^2.88.2
+    uuid: ^8.3.2
+  bin:
+    achecker: bin/achecker.js
+  checksum: 1c85d991100deec9fc32d72aeeb5b2f42b2e1c4b744174e48646a89c1ddd17b5ef7cee69ac3f47817e3277147b180ec66b03e4855a6c453ff45e105f543b8f4d
   languageName: node
   linkType: hard
 
@@ -10119,7 +10135,7 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.1
     "@testing-library/react": ^12.1.2
     "@testing-library/user-event": ^13.5.0
-    accessibility-checker: ^3.1.28
+    accessibility-checker: ^3.1.29-rc.0
     all-contributors-cli: ^6.19.0
     cross-env: ^7.0.0
     cross-spawn: ^7.0.0
