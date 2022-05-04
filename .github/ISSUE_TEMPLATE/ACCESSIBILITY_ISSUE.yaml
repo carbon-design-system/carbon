@@ -110,7 +110,7 @@ body:
       label: CodeSandbox example
       description:
         'Use our
-        [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox)
+        [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/packages/react/examples/codesandbox)
         to re-create the issue'
     validations:
       required: true
