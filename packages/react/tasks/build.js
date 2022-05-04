@@ -16,16 +16,14 @@ const stripBanner = require('rollup-plugin-strip-banner');
 const packageJson = require('../package.json');
 
 async function build() {
-  const entrypoints = [
-    {
-      filepath: path.resolve(__dirname, '..', 'src', 'index.js'),
-      outputDirectory: path.resolve(__dirname, '..'),
-    },
-    {
-      filepath: path.resolve(__dirname, '..', 'icons', 'index.js'),
-      outputDirectory: path.resolve(__dirname, '..', 'icons'),
-    },
-  ];
+  const reactEntrypoint = {
+    filepath: path.resolve(__dirname, '..', 'src', 'index.js'),
+    outputDirectory: path.resolve(__dirname, '..'),
+  };
+  const iconsEntrypoint = {
+    filepath: path.resolve(__dirname, '..', 'icons', 'src', 'index.js'),
+    outputDirectory: path.resolve(__dirname, '..', 'icons'),
+  };
   const formats = [
     {
       type: 'esm',
@@ -37,25 +35,35 @@ async function build() {
     },
   ];
 
-  for (const entrypoint of entrypoints) {
-    const inputConfig = getRollupConfig(entrypoint.filepath);
-    const bundle = await rollup(inputConfig);
+  const reactInputConfig = getRollupConfig(reactEntrypoint.filepath);
+  const reactBundle = await rollup(reactInputConfig);
 
-    for (const format of formats) {
-      await bundle.write({
-        dir: path.join(entrypoint.outputDirectory, format.directory),
-        format: format.type,
-        preserveModules: true,
-        preserveModulesRoot: path.dirname(entrypoint.filepath),
-        banner,
-        exports: 'named',
-      });
-    }
+  for (const format of formats) {
+    await reactBundle.write({
+      dir: path.join(reactEntrypoint.outputDirectory, format.directory),
+      format: format.type,
+      preserveModules: true,
+      preserveModulesRoot: path.dirname(reactEntrypoint.filepath),
+      banner,
+      exports: 'named',
+    });
+  }
+
+  const iconsInputConfig = getRollupConfig(iconsEntrypoint.filepath);
+  const iconsBundle = await rollup(iconsInputConfig);
+  for (const format of formats) {
+    await iconsBundle.write({
+      file:
+        format.type === 'commonjs' ? 'icons/index.js' : 'icons/index.esm.js',
+      format: format.type,
+      banner,
+      exports: 'named',
+    });
   }
 }
 
 const banner = `/**
- * Copyright IBM Corp. 2016, 2021
+ * Copyright IBM Corp. 2016, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.

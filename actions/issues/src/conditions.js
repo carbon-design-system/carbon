@@ -58,6 +58,23 @@ const states = {
   },
 };
 
+function or(...conditions) {
+  const key = conditions
+    .map((condition) => {
+      return condition.key;
+    })
+    .join(', ');
+  return {
+    key: `or(${key})`,
+    run(context) {
+      const condition = conditions.find((condition) => {
+        return condition.run(context);
+      });
+      return condition !== null;
+    },
+  };
+}
+
 /**
  * Check if a specific action was triggered for a given action context
  * @param {string} name
@@ -70,4 +87,5 @@ function action(name) {
 module.exports = {
   events,
   states,
+  or,
 };

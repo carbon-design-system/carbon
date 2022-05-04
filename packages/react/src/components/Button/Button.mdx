@@ -1,8 +1,8 @@
-import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 import { withKnobs, boolean, select, text } from '@storybook/addon-knobs';
 import Button from '../Button';
 import ButtonSet from '../ButtonSet';
-import { Add16, Delete16 } from '@carbon/icons-react';
+import { Add, TrashCan } from '@carbon/icons-react';
 
 # Button
 
@@ -144,10 +144,10 @@ you can configure both the `tooltipAlignment`
 tooltip should be rendered. These props default to `center` and `bottom`,
 respectively.
 
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add" />
+<Button hasIconOnly renderIcon={Add} iconDescription="Add" />
 
 ```jsx
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add" />
+<Button hasIconOnly renderIcon={Add} iconDescription="Add" />
 ```
 
 ### Button `href`
@@ -169,7 +169,7 @@ accessibility reasons. The text provided here populates the internal
 button is interacted with.
 
 ```jsx
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add" />
+<Button hasIconOnly renderIcon={Add} iconDescription="Add" />
 ```
 
 ### Button `kind`
@@ -204,7 +204,7 @@ button. Before you pass in the icon, you'll need to import the icon(s) you would
 like to render, like so:
 
 ```js
-import { Add16, Delete16 } from '@carbon/icons-react';
+import { Add, TrashCan } from '@carbon/react/icons';
 ```
 
 Once the icons are imported, you can pass them directly in to the `Button`
@@ -213,15 +213,39 @@ with screen-reader support if you use the `renderIcon` prop. If you are trying
 to render icon-only buttons, please refer to the section on the
 [hasIconOnly](#button-hasicononly) prop
 
-<Button renderIcon={Add16} iconDescription="Add">
+<Button renderIcon={Add} iconDescription="Add">
   Add
-</Button> <Button renderIcon={Delete16} kind="danger" iconDescription="Delete">
+</Button> <Button
+  renderIcon={TrashCan}
+  kind="danger"
+  iconDescription="TrashCan">
   Delete
 </Button>
 
 ```jsx
-<Button renderIcon={Add16} iconDescription="Add">Add</Button>
-<Button renderIcon={Delete16} kind="danger"  iconDescription="Delete">Delete</Button>
+<Button renderIcon={Add} iconDescription="Add">Add</Button>
+<Button renderIcon={TrashCan} kind="danger" iconDescription="TrashCan">Delete</Button>
+```
+
+To render an icon of a different `size`, pass a function that spreads props on
+the Icon to ensure the proper classes are applied:
+
+<Button
+  renderIcon={(props) => <Add size={24} {...props} />}
+  iconDescription="Add">
+  Add
+</Button>
+
+<Button
+  renderIcon={(props) => <TrashCan size={24} {...props} />}
+  kind="danger"
+  iconDescription="TrashCan">
+  Delete
+</Button>
+
+```jsx
+<Button renderIcon={(props) => <Add size={24} {...props} />} iconDescription="Add">Add</Button>
+<Button renderIcon={(props) => <TrashCan size={24} {...props} />} kind="danger"  iconDescription="TrashCan">Delete</Button>
 ```
 
 ### Button `role`
@@ -247,8 +271,6 @@ This prop specifies which size the `Button` should be rendered at. Valid values
 are `field`, `sm`, `lg`, `xl` and `default`. If no `size` is specified, it
 renders as `default`.
 
-{' '}
-
 <Button>Submit</Button> <Button size="field">Submit</Button> <Button size="sm">
   Submit
 </Button> <Button size="lg">Submit</Button> <Button size="xl">Submit</Button>
@@ -269,20 +291,20 @@ and `end`. The default alignment is `center`.
 
 <Button
   hasIconOnly
-  renderIcon={Add16}
+  renderIcon={Add}
   iconDescription="Add to selection"
   tooltipAlignment="start"
-/> <Button hasIconOnly renderIcon={Add16} iconDescription="Add to selection" /> <Button
+/> <Button hasIconOnly renderIcon={Add} iconDescription="Add to selection" /> <Button
   hasIconOnly
-  renderIcon={Add16}
+  renderIcon={Add}
   iconDescription="Add to selection"
   tooltipAlignment="end"
 />
 
 ```jsx
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add to selection" tooltipAlignment="start" />
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add to selection" />
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add to selection" tooltipAlignment="end"/>
+<Button hasIconOnly renderIcon={Add} iconDescription="Add to selection" tooltipAlignment="start" />
+<Button hasIconOnly renderIcon={Add} iconDescription="Add to selection" />
+<Button hasIconOnly renderIcon={Add} iconDescription="Add to selection" tooltipAlignment="end"/>
 ```
 
 ### Button `tooltipPosition`
@@ -292,28 +314,31 @@ change where the tooltip is positioned on the screen. `tooltipPosition` takes in
 a position and will render the tooltip accordingly. Accepted options are `top`,
 `bottom`, `left`, and `right`. The default is position is `top`.
 
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add" /> <Button
+<Button hasIconOnly renderIcon={Add} iconDescription="Add" />
+<Button
   hasIconOnly
-  renderIcon={Add16}
+  renderIcon={Add}
   iconDescription="Add"
   tooltipPosition="right"
-/> <Button
+/>
+<Button
   hasIconOnly
-  renderIcon={Add16}
+  renderIcon={Add}
   iconDescription="Add"
   tooltipPosition="bottom"
-/> <Button
+/>
+<Button
   hasIconOnly
-  renderIcon={Add16}
+  renderIcon={Add}
   iconDescription="Add"
   tooltipPosition="left"
 />
 
 ```jsx
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add" />
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="right"/>
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="bottom"/>
-<Button hasIconOnly renderIcon={Add16} iconDescription="Add" tooltipPosition="left" />
+<Button hasIconOnly renderIcon={Add} iconDescription="Add" />
+<Button hasIconOnly renderIcon={Add} iconDescription="Add" tooltipPosition="right"/>
+<Button hasIconOnly renderIcon={Add} iconDescription="Add" tooltipPosition="bottom"/>
+<Button hasIconOnly renderIcon={Add} iconDescription="Add" tooltipPosition="left" />
 ```
 
 ### ButtonSet `stacked`
@@ -346,3 +371,4 @@ By passing in `stacked` to the `ButtonSet` component, you can arrange your two
 Help us improve this component by providing feedback, asking questions on Slack,
 or updating this file on
 [GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/Button/Button.mdx)
+-->

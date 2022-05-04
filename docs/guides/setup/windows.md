@@ -46,3 +46,21 @@ but can be unexpected.
 15. In the root folder of your freshly cloned repo install and build
     - `yarn install`
     - `yarn build`
+
+## Commits on Windows 10
+
+Unfortunately, there is a known bug on Windows GitHub Desktop with pre-commit
+hooks. The current workaround is to use a `--no-verify` tag on git CLI.
+
+To commit all staged changes:
+
+```
+git commit -am "commit message" --no-verify
+```
+
+To commit specific files:
+
+```
+git add file_name
+git commit -m "commit message" --no-verify
+```

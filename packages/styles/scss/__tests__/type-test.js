@@ -10,6 +10,7 @@
 'use strict';
 
 const { SassRenderer } = require('@carbon/test-utils/scss');
+const css = require('css');
 
 const { render } = SassRenderer.create(__dirname);
 
@@ -27,6 +28,7 @@ describe('@carbon/styles/scss/type', () => {
           type-style: meta.mixin-exists('type-style', 'type'),
           font-family: meta.mixin-exists('font-family', 'type'),
           default-type: meta.mixin-exists('default-type', 'type'),
+          type-classes: meta.mixin-exists('type-classes', 'type'),
         ),
       ));
     `);
@@ -37,6 +39,7 @@ describe('@carbon/styles/scss/type', () => {
       'type-style': true,
       'font-family': true,
       'default-type': true,
+      'type-classes': true,
     });
     expect(api.variables).toMatchInlineSnapshot(`
       Array [
@@ -73,5 +76,39 @@ describe('@carbon/styles/scss/type', () => {
         "tokens",
       ]
     `);
+  });
+
+  test('prefix', async () => {
+    const { result } = await render(`
+      @use '../config' with (
+        $prefix: 'custom',
+      );
+      @use '../type';
+
+      .my-selector {
+        @include type.type-style('label-01');
+      }
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+    const [rule] = stylesheet.rules;
+    for (const declaration of rule.declarations) {
+      expect(declaration.value).toEqual(
+        expect.stringContaining('var(--custom-')
+      );
+    }
+  });
+
+  test('type-classes mixin', async () => {
+    const { result } = await render(`
+      @use '../type';
+
+      @include type.type-classes();
+
+      .my-selector {
+        @include type.type-style('label-01');
+      }
+    `);
+    const { stylesheet } = css.parse(result.css.toString());
+    expect(stylesheet).toMatchSnapshot();
   });
 });

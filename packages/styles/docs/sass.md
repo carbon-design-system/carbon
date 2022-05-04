@@ -309,7 +309,7 @@ your project. The type package includes various type tokens and mixins.
 @use '@carbon/styles/scss/type';
 
 .my-selector {
-  @include type.style(type.$productive-heading-01);
+  @include type.type-style('productive-heading-01');
 }
 ```
 

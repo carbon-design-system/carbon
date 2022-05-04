@@ -90,6 +90,7 @@ module.exports = {
   features: {
     previewCsfV3: true,
   },
+  framework: '@storybook/react',
   stories,
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
@@ -147,16 +148,14 @@ module.exports = {
         {
           loader: 'sass-loader',
           options: {
-            additionalData(content) {
-              return content;
-            },
+            implementation: require('sass'),
             sassOptions: {
-              implementation: require('sass'),
               includePaths: [
                 path.resolve(__dirname, '..', 'node_modules'),
                 path.resolve(__dirname, '..', '..', '..', 'node_modules'),
               ],
             },
+            warnRuleAsWarning: true,
             sourceMap: true,
           },
         },
