@@ -1,5 +1,5 @@
 {
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "index.js",
+  "module": "index.esm.js",
   "sideEffects": false
 }
