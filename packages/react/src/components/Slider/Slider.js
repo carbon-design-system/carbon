@@ -123,6 +123,12 @@ export default class Slider extends PureComponent {
     name: PropTypes.string,
 
     /**
+     * Provide an optional function to be called when the input element
+     * loses focus
+     */
+    onBlur: PropTypes.func,
+
+    /**
      * The callback to get notified of change in value.
      */
     onChange: PropTypes.func,
@@ -437,6 +443,7 @@ export default class Slider extends PureComponent {
     const validity = evt.target.checkValidity();
     this.setState({
       isValid: validity,
+      value: evt.target.value,
     });
   };
 
