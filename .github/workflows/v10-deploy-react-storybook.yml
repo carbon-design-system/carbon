@@ -45,6 +45,6 @@ jobs:
         run: |
           cd packages/react
           yarn build-storybook
-          ibmcloud cf blue-green-deploy carbon-storybook \
+          ibmcloud cf blue-green-deploy v7-carbon-storybook \
             -f manifest.yml \
             --delete-old-apps
