@@ -1,8 +1,7 @@
 ---
 applications:
-- name: carbon-storybook
+- name: v7-carbon-storybook
   memory: 64M
   buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
   routes:
-  - route: react.carbondesignsystem.com
-  - route: carbon-react-storybook.mybluemix.net
+  - route: v10-react.carbondesignsystem.com
