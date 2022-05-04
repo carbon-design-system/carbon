@@ -127,7 +127,7 @@ export default function TreeView({
       const nodeIds = [];
 
       if (matches(event, [keys.Home, keys.End])) {
-        if (multiselect && event.shiftKey) {
+        if (multiselect && event.shiftKey && event.ctrlKey) {
           nodeIds.push(treeWalker.current.currentNode?.id);
         }
         while (
@@ -137,7 +137,7 @@ export default function TreeView({
         ) {
           nextFocusNode = treeWalker.current.currentNode;
 
-          if (multiselect && event.shiftKey) {
+          if (multiselect && event.shiftKey && event.ctrlKey) {
             nodeIds.push(nextFocusNode?.id);
           }
         }
