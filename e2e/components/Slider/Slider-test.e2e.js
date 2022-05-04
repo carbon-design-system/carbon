@@ -22,26 +22,10 @@ test.describe('Slider', () => {
         });
       });
 
-      test('controlled slider @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'Slider',
-          id: 'components-slider--controlled-slider',
-          theme,
-        });
-      });
-
       test('with layer @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Slider',
           id: 'components-slider--with-layer',
-          theme,
-        });
-      });
-
-      test('controlled slider with layer @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'Slider',
-          id: 'components-slider--controlled-slider-with-layer',
           theme,
         });
       });
