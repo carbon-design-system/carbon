@@ -25,6 +25,7 @@ async function visitStory(page, options) {
   }
 
   await page.goto(url);
+  await page.waitForSelector('.sb-show-main');
 }
 
 async function snapshotStory(page, storyOptions) {
