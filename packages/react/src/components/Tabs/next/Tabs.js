@@ -121,12 +121,8 @@ function TabList({
   scrollIntoView,
   ...rest
 }) {
-  const {
-    activeIndex,
-    selectedIndex,
-    setSelectedIndex,
-    setActiveIndex,
-  } = React.useContext(TabsContext);
+  const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
+    React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
   const previousButton = useRef(null);
@@ -477,9 +473,8 @@ const Tab = React.forwardRef(function Tab(
   ref
 ) {
   const prefix = usePrefix();
-  const { selectedIndex, setSelectedIndex, baseId } = React.useContext(
-    TabsContext
-  );
+  const { selectedIndex, setSelectedIndex, baseId } =
+    React.useContext(TabsContext);
   const index = React.useContext(TabContext);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
