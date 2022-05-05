@@ -138,14 +138,17 @@ const ComposedModal = React.forwardRef(function ComposedModal(
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }) {
+    console.log('target', oldActiveNode);
+    console.log('currentActiveNode outside', currentActiveNode);
+    console.log('active element', document.activeElement);
     if (open && currentActiveNode && oldActiveNode) {
       const { current: bodyNode } = innerModal;
       const { current: startSentinelNode } = startSentinel;
       const { current: endSentinelNode } = endSentinel;
       wrapFocus({
         bodyNode,
-        startSentinelNode,
-        endSentinelNode,
+        startTrapNode: startSentinelNode,
+        endTrapNode: endSentinelNode,
         currentActiveNode,
         oldActiveNode,
         selectorsFloatingMenus,
@@ -241,13 +244,13 @@ const ComposedModal = React.forwardRef(function ComposedModal(
       onKeyDown={handleKeyDown}
       className={modalClass}>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
+      <button
+        type="button"
         ref={startSentinel}
         tabIndex="0"
-        role="link"
         className={`${prefix}--visually-hidden`}>
         Focus sentinel
-      </span>
+      </button>
       <div
         ref={innerModal}
         className={containerClass}
@@ -258,13 +261,9 @@ const ComposedModal = React.forwardRef(function ComposedModal(
         {childrenWithProps}
       </div>
       {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <span
-        ref={endSentinel}
-        tabIndex="0"
-        role="link"
-        className={`${prefix}--visually-hidden`}>
+      <button type="button" ref={endSentinel} tabIndex="0">
         Focus sentinel
-      </span>
+      </button>
     </div>
   );
 });

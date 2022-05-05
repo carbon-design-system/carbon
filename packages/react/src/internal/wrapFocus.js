@@ -47,6 +47,14 @@ function wrapFocus({
   oldActiveNode,
   selectorsFloatingMenus,
 }) {
+  console.log('_________________________');
+  console.log('bodyNode', bodyNode);
+  console.log('currentActiveNode', currentActiveNode);
+  console.log('oldActiveNode', oldActiveNode);
+  console.log(
+    'body contains current active node',
+    bodyNode.contains(currentActiveNode)
+  );
   if (
     bodyNode &&
     currentActiveNode &&
@@ -54,6 +62,7 @@ function wrapFocus({
     !bodyNode.contains(currentActiveNode) &&
     !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
   ) {
+    console.log('in here!');
     const comparisonResult = oldActiveNode.compareDocumentPosition(
       currentActiveNode
     );
