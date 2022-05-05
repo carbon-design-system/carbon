@@ -127,3 +127,80 @@ Playground.story = {
     (story) => <div className="mt-10 flex justify-center">{story()}</div>,
   ],
 };
+
+const AutomateStory = (props) => {
+  const { align, caret, dropShadow, highContrast, open } = props;
+  return (
+    <Popover
+      align={align}
+      caret={caret}
+      dropShadow={dropShadow}
+      highContrast={highContrast}
+      open={open}>
+      <div className="playground-trigger">
+        <Checkbox />
+      </div>
+      <PopoverContent className="p-3">
+        <p className="popover-title">Available storage</p>
+        <p className="popover-details">
+          This server has 150 GB of block storage remaining.
+        </p>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+export const Automate = AutomateStory.bind({});
+
+Automate.argTypes = {
+  align: {
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+
+      'left',
+      'left-bottom',
+      'left-top',
+
+      'right',
+      'right-bottom',
+      'right-top',
+    ],
+    control: {
+      type: 'select',
+    },
+  },
+  caret: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  dropShadow: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  highContrast: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  open: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+};
+
+Automate.story = {
+  decorators: [(story) => <div>{story()}</div>],
+};
