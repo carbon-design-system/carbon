@@ -9,14 +9,6 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const prettier = require('prettier');
-const lerna = require('../lerna.json');
-const packageJson = require('../package.json');
-
-const prettierOptions = {
-  ...packageJson.prettier,
-  parser: 'markdown',
-};
 
 const PACKAGES_DIR = path.resolve(__dirname, '../packages');
 const REPO_URL_BASE =
@@ -143,7 +135,7 @@ async function sync() {
     '**/tasks/**',
   ];
   await Promise.all(
-    packages.map(async ({ packageJson, packagePath }) => {
+    packages.map(async ({ packagePath }) => {
       const ignorePath = path.join(packagePath, '.npmignore');
       const ignorePatterns = [...defaultIgnorePatterns];
 
