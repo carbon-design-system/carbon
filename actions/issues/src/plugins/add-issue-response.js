@@ -44,7 +44,7 @@ const plugin = {
       // Check if the `comment.body` contains a mention to another team member
       const members = await Promise.all(
         teams.map((slug) => {
-          return octokit.rest.teams.listMembersInOrg({
+          return octokit.teams.listMembersInOrg({
             org: 'carbon-design-system',
             team_slug: slug,
           });

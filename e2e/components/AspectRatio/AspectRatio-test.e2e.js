@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('AspectRatio', () => {
   themes.forEach((theme) => {
@@ -22,5 +22,16 @@ test.describe('AspectRatio', () => {
         });
       });
     });
+  });
+
+  test('accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'AspectRatio',
+      id: 'components-aspectratio--aspect-ratio-story',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('AspectRatio');
   });
 });

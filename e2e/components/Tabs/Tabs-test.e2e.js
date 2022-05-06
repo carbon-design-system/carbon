@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('Tabs', () => {
   themes.forEach((theme) => {
@@ -54,5 +54,16 @@ test.describe('Tabs', () => {
         });
       });
     });
+  });
+
+  test('accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tabs',
+      id: 'components-tabs--line',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Tabs');
   });
 });

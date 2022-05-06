@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('Tooltip', () => {
   themes.forEach((theme) => {
@@ -38,5 +38,16 @@ test.describe('Tooltip', () => {
         });
       });
     });
+  });
+
+  test('accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Tooltip',
+      id: 'components-tooltip--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Tooltip');
   });
 });

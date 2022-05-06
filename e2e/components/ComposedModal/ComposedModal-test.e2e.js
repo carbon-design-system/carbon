@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('ComposedModal', () => {
   themes.forEach((theme) => {
@@ -38,5 +38,16 @@ test.describe('ComposedModal', () => {
         });
       });
     });
+  });
+
+  test('accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ComposedModal',
+      id: 'components-composedmodal--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('ComposedModal');
   });
 });

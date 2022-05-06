@@ -16,8 +16,8 @@ import {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
-  StructuredListSkeleton,
 } from './StructuredList';
+import StructuredListSkeleton from '../StructuredList.Skeleton';
 
 const prefix = 'cds';
 

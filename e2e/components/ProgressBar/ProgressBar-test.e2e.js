@@ -7,9 +7,9 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
-const { snapshotStory } = require('../../test-utils/storybook');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('ProgressBar', () => {
   themes.forEach((theme) => {
@@ -38,5 +38,16 @@ test.describe('ProgressBar', () => {
         });
       });
     });
+  });
+
+  test('accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'ProgressBar',
+      id: 'components-progressbar--progress-bar',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('ProgressBar');
   });
 });
