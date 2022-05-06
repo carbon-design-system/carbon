@@ -8,6 +8,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -18,6 +19,7 @@ function ProgressBar({
   label,
   max = 100,
   size = 'big',
+  status = 'active',
   type = 'default',
   value,
 }) {
@@ -25,7 +27,11 @@ function ProgressBar({
   const helperId = useId('progress-bar-helper');
   const prefix = usePrefix();
 
-  const indeterminate = value === null || value === undefined;
+  const isFinished = status === 'finished';
+  const isError = status === 'error';
+
+  const indeterminate =
+    !isFinished && !isError && (value === null || value === undefined);
 
   let cappedValue = value;
   if (cappedValue > max) {
@@ -33,6 +39,11 @@ function ProgressBar({
   }
   if (cappedValue < 0) {
     cappedValue = 0;
+  }
+  if (isError) {
+    cappedValue = 0;
+  } else if (isFinished) {
+    cappedValue = max;
   }
 
   const percentage = cappedValue / max;
@@ -43,6 +54,8 @@ function ProgressBar({
     `${prefix}--progress-bar--${type}`,
     {
       [`${prefix}--progress-bar--indeterminate`]: indeterminate,
+      [`${prefix}--progress-bar--finished`]: isFinished,
+      [`${prefix}--progress-bar--error`]: isError,
     },
     className
   );
@@ -51,14 +64,31 @@ function ProgressBar({
     [`${prefix}--visually-hidden`]: hideLabel,
   });
 
+  let StatusIcon = null;
+
+  if (isError) {
+    StatusIcon = React.forwardRef(function ErrorFilled16(props, ref) {
+      return <ErrorFilled ref={ref} size={16} {...props} />;
+    });
+  } else if (isFinished) {
+    StatusIcon = React.forwardRef(function CheckmarkFilled16(props, ref) {
+      return <CheckmarkFilled ref={ref} size={16} {...props} />;
+    });
+  }
+
   return (
     <div className={wrapperClasses}>
-      <span className={labelClasses} id={labelId}>
-        {label}
-      </span>
+      <div className={labelClasses} id={labelId}>
+        <span className={`${prefix}--progress-bar__label-text`}>{label}</span>
+        {StatusIcon && (
+          <StatusIcon className={`${prefix}--progress-bar__status-icon`} />
+        )}
+      </div>
+      {/* eslint-disable-next-line jsx-a11y/role-supports-aria-props */}
       <div
         className={`${prefix}--progress-bar__track`}
         role="progressbar"
+        aria-invalid={isError}
         aria-labelledby={labelId}
         aria-describedby={helperText ? helperId : null}
         aria-valuemin={!indeterminate ? 0 : null}
@@ -66,7 +96,11 @@ function ProgressBar({
         aria-valuenow={!indeterminate ? cappedValue : null}>
         <div
           className={`${prefix}--progress-bar__bar`}
-          style={{ transform: `scaleX(${percentage})` }}
+          style={
+            !isFinished && !isError
+              ? { transform: `scaleX(${percentage})` }
+              : null
+          }
         />
       </div>
       {helperText && (
@@ -108,6 +142,11 @@ ProgressBar.propTypes = {
    * Specify the size of the ProgressBar.
    */
   size: PropTypes.oneOf(['small', 'big']),
+
+  /**
+   * Specify the status.
+   */
+  status: PropTypes.oneOf(['active', 'finished', 'error']),
 
   /**
    * Defines the alignment variant of the progress bar.

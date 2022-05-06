@@ -9,7 +9,6 @@ import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { boolean, object, select, text } from '@storybook/addon-knobs';
 import ComboBox from '../ComboBox';
-import mdx from './ComboBox.mdx';
 
 const items = [
   {
@@ -54,11 +53,6 @@ const directions = {
 export default {
   title: 'Components/ComboBox',
   component: ComboBox,
-  parameters: {
-    docs: {
-      page: mdx,
-    },
-  },
 };
 
 export const ComboboxStory = () => (

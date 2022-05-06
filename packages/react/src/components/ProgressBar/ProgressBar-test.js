@@ -24,7 +24,9 @@ describe('ProgressBar', () => {
   describe('renders as expected', () => {
     it('progress bar and label ids match', () => {
       const bar = wrapper.getByRole('progressbar');
-      const label = wrapper.container.querySelector('span');
+      const label = wrapper.container.querySelector(
+        `.${prefix}--progress-bar__label`
+      );
       expect(bar.getAttribute('aria-labelledby')).toBe(label.id);
     });
 
@@ -41,9 +43,11 @@ describe('ProgressBar', () => {
       ).toBe(helperText.id);
     });
 
-    it('still renders accessible when hideLabel is passed', () => {
+    it('still renders accessible label when hideLabel is passed', () => {
       wrapper.rerender(<ProgressBar {...props} hideLabel />);
-      const label = wrapper.container.querySelector('span');
+      const label = wrapper.container.querySelector(
+        `.${prefix}--progress-bar__label`
+      );
 
       expect(label.textContent).toBe(props.label);
       expect(label.classList.contains(`${prefix}--visually-hidden`)).toBe(true);
@@ -89,6 +93,38 @@ describe('ProgressBar', () => {
           .querySelector(`.${prefix}--progress-bar`)
           .classList.contains(className)
       ).toBe(true);
+    });
+
+    it('supports finished status', () => {
+      wrapper.rerender(<ProgressBar {...props} status="finished" />);
+
+      expect(
+        wrapper.container
+          .querySelector(`.${prefix}--progress-bar`)
+          .classList.contains(`${prefix}--progress-bar--finished`)
+      ).toBe(true);
+
+      expect(
+        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
+      ).toBe('100');
+    });
+
+    it('supports error status', () => {
+      wrapper.rerender(<ProgressBar {...props} status="error" />);
+
+      expect(
+        wrapper.container
+          .querySelector(`.${prefix}--progress-bar`)
+          .classList.contains(`${prefix}--progress-bar--error`)
+      ).toBe(true);
+
+      expect(
+        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
+      ).toBe('0');
+
+      expect(
+        wrapper.getByRole('progressbar').getAttribute('aria-invalid')
+      ).toBe('true');
     });
   });
 
