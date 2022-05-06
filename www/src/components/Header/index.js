@@ -26,6 +26,11 @@ function Header() {
               <a>Insights</a>
             </Link>
           </li>
+          <li>
+            <Link href="/avt">
+              <a>AVT</a>
+            </Link>
+          </li>
         </ul>
       </nav>
     </header>

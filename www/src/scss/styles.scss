@@ -16,6 +16,7 @@
 @use '@carbon/react/scss/grid';
 @use '@carbon/react/scss/components/data-table';
 @use '@carbon/react/scss/components/stack';
+@use './pages/avt/id';
 
 body {
   background: theme.$background;
