@@ -122,7 +122,7 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   }
 
   const isSideNavCollapsed = useMatchMedia(`(max-width: 1055px)`);
-  const ariaHidden = expanded === false && isSideNavCollapsed;
+  const ariaHidden = isRail ? false : expanded === false && isSideNavCollapsed;
 
   return (
     <>
