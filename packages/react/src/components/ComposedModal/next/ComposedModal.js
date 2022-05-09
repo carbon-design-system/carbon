@@ -138,9 +138,6 @@ const ComposedModal = React.forwardRef(function ComposedModal(
     target: oldActiveNode,
     relatedTarget: currentActiveNode,
   }) {
-    console.log('target', oldActiveNode);
-    console.log('currentActiveNode outside', currentActiveNode);
-    console.log('active element', document.activeElement);
     if (open && currentActiveNode && oldActiveNode) {
       const { current: bodyNode } = innerModal;
       const { current: startSentinelNode } = startSentinel;
@@ -243,27 +240,32 @@ const ComposedModal = React.forwardRef(function ComposedModal(
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       className={modalClass}>
-      {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <button
-        type="button"
-        ref={startSentinel}
-        tabIndex="0"
-        className={`${prefix}--visually-hidden`}>
-        Focus sentinel
-      </button>
       <div
-        ref={innerModal}
         className={containerClass}
         role="dialog"
         aria-modal="true"
         aria-label={ariaLabel ? ariaLabel : generatedAriaLabel}
         aria-labelledby={ariaLabelledBy}>
-        {childrenWithProps}
+        {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+        <button
+          type="button"
+          ref={startSentinel}
+          tabIndex="0"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </button>
+        <div ref={innerModal} className={`${prefix}--modal-container-body`}>
+          {childrenWithProps}
+        </div>
+        {/* Non-translatable: Focus-wrap code makes this `<button>` not actually read by screen readers */}
+        <button
+          type="button"
+          ref={endSentinel}
+          tabIndex="0"
+          className={`${prefix}--visually-hidden`}>
+          Focus sentinel
+        </button>
       </div>
-      {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
-      <button type="button" ref={endSentinel} tabIndex="0">
-        Focus sentinel
-      </button>
     </div>
   );
 });
