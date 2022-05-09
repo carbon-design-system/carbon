@@ -144,8 +144,8 @@ const ComposedModal = React.forwardRef(function ComposedModal(
       const { current: endSentinelNode } = endSentinel;
       wrapFocus({
         bodyNode,
-        startTrapNode: startSentinelNode,
-        endTrapNode: endSentinelNode,
+        startSentinelNode,
+        endSentinelNode,
         currentActiveNode,
         oldActiveNode,
         selectorsFloatingMenus,
