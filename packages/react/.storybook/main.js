@@ -90,6 +90,7 @@ module.exports = {
   features: {
     previewCsfV3: true,
   },
+  framework: '@storybook/react',
   stories,
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {

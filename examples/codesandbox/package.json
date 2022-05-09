@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "react-scripts": "5.0.0",
-    "sass": "^1.49.11"
+    "sass": "^1.51.0"
   },
   "scripts": {
     "start": "react-scripts start",

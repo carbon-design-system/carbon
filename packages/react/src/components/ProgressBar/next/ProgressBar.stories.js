@@ -22,6 +22,23 @@ export const _ProgressBar = () => (
   />
 );
 
+const PlaygroundStory = (args) => (
+  <ProgressBar
+    label="Progress bar label"
+    helperText="Optional helper text"
+    {...args}
+  />
+);
+
+export const Playground = PlaygroundStory.bind({});
+
+Playground.argTypes = {
+  status: {
+    options: ['active', 'finished', 'error'],
+    control: { type: 'select' },
+  },
+};
+
 export const Indeterminate = () => (
   <ProgressBar label="Progress bar label" helperText="Optional helper text" />
 );
@@ -59,6 +76,7 @@ export const Example = () => {
     <ProgressBar
       value={running ? progress : null}
       max={size}
+      status={progress === size ? 'finished' : 'active'}
       label="Export data"
       helperText={helperText}
     />
