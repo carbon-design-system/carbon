@@ -75,7 +75,7 @@ body:
     attributes:
       label: CodeSandbox example
       description: |
-        Re-create the issue using [CodeSandbox](https://codesandbox.io/). We have templates for [@carbon/react](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/examples/codesandbox), [@carbon/styles](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/examples/codesandbox-styles), and [carbon-components-react](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v10/packages/react/examples/codesandbox)
+        Re-create the issue using [CodeSandbox](https://codesandbox.io/). We have templates for [@carbon/react](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox), [@carbon/styles](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox-styles), and [carbon-components-react](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v10/packages/react/examples/codesandbox)
     validations:
       required: true
   - type: textarea
