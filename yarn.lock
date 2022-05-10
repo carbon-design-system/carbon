@@ -10143,7 +10143,7 @@ __metadata:
     eslint: ^7.28.0
     fs-extra: ^10.0.0
     glob: ^7.1.4
-    husky: ^7.0.0
+    husky: ^8.0.0
     jest: ^27.4.7
     jest-junit: ^13.0.0
     lerna: ^4.0.0
@@ -16809,12 +16809,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"husky@npm:^7.0.0":
-  version: 7.0.1
-  resolution: "husky@npm:7.0.1"
+"husky@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "husky@npm:8.0.0"
   bin:
     husky: lib/bin.js
-  checksum: b2ea1460f1126ed7161779b1b89f7ec8ae66fb6723e0e9fd47c522f454f4a2ea7e31a21d6ce2eb5d32e9837d232fb0245783425c109df0adab53668f8c8d8fc8
+  checksum: b6b842abdd1bbc9322ad0c2003471fa35f94c9c01fccef3a6b5262f53e3f1bde1d78787f8a96ed8ef8a15ab3a7d56c83f576afd1cf7618588df77940044081df
   languageName: node
   linkType: hard
 
