@@ -1,6 +1,3 @@
-deprecated: []
-- name: Organization
-    subcategories:
-      - name: Systems
-        members:
-          - kubernetes
+deprecated:
+- name: kubernetes
+  reason: The current kubernetes icon has been replaced by logo--kubernetes
