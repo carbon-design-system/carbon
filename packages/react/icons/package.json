@@ -1,5 +1,4 @@
 {
-  "main": "index.js",
   "module": "index.esm.js",
   "sideEffects": false
 }
