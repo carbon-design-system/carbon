@@ -5325,6 +5325,11 @@
     - expanded
   sizes:
     - 32
+- name: data-enrichment--add
+  friendly_name: data-enrichment--add
+  aliases: []
+  sizes:
+    - 32
 - name: data-player
   friendly_name: Data player
   aliases:
@@ -8878,6 +8883,11 @@
     - cloud
     - hybrid
     - internet
+  sizes:
+    - 32
+- name: ibm-cloud-pak--business-automation
+  friendly_name: ibm-cloud-pak--business-automation
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud-pak--data
