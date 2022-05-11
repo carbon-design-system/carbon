@@ -13,25 +13,29 @@ exports[`<ComposedModal /> renders 1`] = `
     onKeyDown={[Function]}
     role="presentation"
   >
-    <span
-      className="cds--visually-hidden"
-      role="link"
-      tabIndex="0"
-    >
-      Focus sentinel
-    </span>
     <div
       aria-modal="true"
       className="cds--modal-container"
       role="dialog"
-    />
-    <span
-      className="cds--visually-hidden"
-      role="link"
-      tabIndex="0"
     >
-      Focus sentinel
-    </span>
+      <button
+        className="cds--visually-hidden"
+        tabIndex="0"
+        type="button"
+      >
+        Focus sentinel
+      </button>
+      <div
+        className="cds--modal-container-body"
+      />
+      <button
+        className="cds--visually-hidden"
+        tabIndex="0"
+        type="button"
+      >
+        Focus sentinel
+      </button>
+    </div>
   </div>
 </ForwardRef(ComposedModal)>
 `;
