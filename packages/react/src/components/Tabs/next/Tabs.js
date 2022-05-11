@@ -255,7 +255,7 @@ function TabList({
   useIsomorphicEffect(() => {
     const tab =
       activation === 'manual' ? tabs[activeIndex] : tabs[selectedIndex];
-    if (tab) {
+    if (tab && tab.current) {
       // The width of the "scroll buttons"
 
       // The start and end position of the selected tab
