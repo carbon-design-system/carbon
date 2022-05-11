@@ -20,7 +20,6 @@ exports[`<ComposedModal /> renders 1`] = `
     >
       <button
         className="cds--visually-hidden"
-        tabIndex="0"
         type="button"
       >
         Focus sentinel
@@ -30,7 +29,6 @@ exports[`<ComposedModal /> renders 1`] = `
       />
       <button
         className="cds--visually-hidden"
-        tabIndex="0"
         type="button"
       >
         Focus sentinel

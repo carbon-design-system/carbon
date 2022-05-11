@@ -250,7 +250,6 @@ const ComposedModal = React.forwardRef(function ComposedModal(
         <button
           type="button"
           ref={startSentinel}
-          tabIndex="0"
           className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </button>
@@ -261,7 +260,6 @@ const ComposedModal = React.forwardRef(function ComposedModal(
         <button
           type="button"
           ref={endSentinel}
-          tabIndex="0"
           className={`${prefix}--visually-hidden`}>
           Focus sentinel
         </button>
