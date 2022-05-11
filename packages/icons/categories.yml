@@ -565,6 +565,7 @@ categories:
           - ibm-cloud--transit-gateway
           - ibm-cloud--vpc-endpoints
           - ibm-cloud-pak--applications
+          - ibm-cloud-pak--business-automation
           - ibm-cloud-pak--data
           - ibm-cloud-pak--integration
           - ibm-cloud-pak--MANTA-automated-data-lineage
@@ -957,6 +958,7 @@ categories:
           - data-collection
           - data-definition
           - data-enrichment
+          - data-enrichment--add
           - data-player
           - data-quality-definition
           - data-refinery
