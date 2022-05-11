@@ -22,14 +22,6 @@ test.describe('Modal', () => {
         });
       });
 
-      test('with state manager @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'Modal',
-          id: 'components-modal--with-state-manager',
-          theme,
-        });
-      });
-
       test('passive modal @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Modal',
