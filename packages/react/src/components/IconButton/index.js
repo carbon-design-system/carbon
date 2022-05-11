@@ -10,11 +10,13 @@ import React from 'react';
 import Button from '../Button';
 import { Tooltip } from '../Tooltip/next';
 import { usePrefix } from '../../internal/usePrefix';
+import cx from 'classnames';
 
 const IconButton = React.forwardRef(function IconButton(props, ref) {
   const {
     align,
     children,
+    className,
     defaultOpen = false,
     enterDelayMs,
     kind,
@@ -33,7 +35,12 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
       enterDelayMs={enterDelayMs}
       label={label}
       leaveDelayMs={leaveDelayMs}>
-      <Button {...rest} kind={kind} ref={ref} size={size}>
+      <Button
+        {...rest}
+        kind={kind}
+        ref={ref}
+        size={size}
+        className={cx(`${prefix}--btn--icon-only`, { [className]: className })}>
         {children}
       </Button>
     </Tooltip>
@@ -59,6 +66,11 @@ IconButton.propTypes = {
    * Provide an icon or asset to be rendered inside of the IconButton
    */
   children: PropTypes.node,
+
+  /**
+   * Specify an optional className to be added to your Button
+   */
+  className: PropTypes.string,
 
   /**
    * Specify whether the tooltip should be open when it first renders
