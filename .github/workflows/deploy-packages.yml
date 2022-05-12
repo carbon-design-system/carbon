@@ -1,4 +1,4 @@
-name: deploy-packages
+name: Deploy Packages
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -6,10 +6,10 @@ concurrency:
 
 on:
   workflow_dispatch:
-  # workflow_run:
-  # workflows: [Release]
-  # types:
-  # - completed
+  workflow_run:
+    workflows: [Release]
+    types:
+      - completed
 
 jobs:
   carbon-website:
@@ -42,13 +42,13 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
-          branch: 'release/update-carbon-deps'
+          branch: 'release/update-carbon-deps-${{ github.ref }}'
           commit-message: 'chore(release): update carbon deps'
           delete-branch: true
           title: 'chore(release): update carbon deps'
           token: ${{ steps.generate_token.outputs.token }}
           body: |
-            Automated release PR for Carbon on the website
+            Automated pull request to update Carbon on the website
 
             **Checklist**
 
