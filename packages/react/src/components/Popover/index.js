@@ -6,9 +6,13 @@
  */
 
 import cx from 'classnames';
+import { runInContext } from 'lodash';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+
+const PopoverContext = React.createContext();
 
 const Popover = React.forwardRef(function Popover(props, ref) {
   const {
@@ -23,6 +27,7 @@ const Popover = React.forwardRef(function Popover(props, ref) {
     ...rest
   } = props;
   const prefix = usePrefix();
+  const floating = useRef();
   const className = cx({
     [`${prefix}--popover-container`]: true,
     [`${prefix}--popover--caret`]: caret,
@@ -33,10 +38,20 @@ const Popover = React.forwardRef(function Popover(props, ref) {
     [customClassName]: !!customClassName,
   });
 
+  useLayoutEffect(() => {
+    if (floating.current) {
+      const rect = floating.current.getBoundingClientRect();
+
+      console.log(rect.x);
+    }
+  }, [floating.current]);
+
   return (
-    <BaseComponent {...rest} className={className} ref={ref}>
-      {children}
-    </BaseComponent>
+    <PopoverContext.Provider value={{ floating }}>
+      <BaseComponent {...rest} className={className} ref={ref}>
+        {children}
+      </BaseComponent>
+    </PopoverContext.Provider>
   );
 });
 
@@ -111,9 +126,14 @@ const PopoverContent = React.forwardRef(function PopoverContent(
   ref
 ) {
   const prefix = usePrefix();
+  const { floating } = React.useContext(PopoverContext);
+
+  const mergedRef = useMergedRefs([floating, ref]);
   return (
     <span {...rest} className={`${prefix}--popover`}>
-      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
+      <span
+        className={cx(`${prefix}--popover-content`, className)}
+        ref={mergedRef}>
         {children}
       </span>
       <span className={`${prefix}--popover-caret`} />
