@@ -557,6 +557,7 @@ categories:
           - flow-logs-vpc
           - ibm--data-replication
           - ibm--match-360
+          - ibm--open-enterprise-languages
           - ibm-cloud--dedicated-host
           - ibm-cloud--internet-services
           - ibm-cloud--security-compliance-center
@@ -564,8 +565,10 @@ categories:
           - ibm-cloud--transit-gateway
           - ibm-cloud--vpc-endpoints
           - ibm-cloud-pak--applications
+          - ibm-cloud-pak--business-automation
           - ibm-cloud-pak--data
           - ibm-cloud-pak--integration
+          - ibm-cloud-pak--MANTA-automated-data-lineage
           - ibm-cloud-pak--multicloud-mgmt
           - ibm-cloud-pak--network-automation
           - ibm-cloud-pak--security
@@ -573,6 +576,9 @@ categories:
           - ibm-cloud-pak--watson-aiops
           - ibm-security--services
           - ibm-watson--orders
+          - ibm-z--cloud-mod-stack
+          - ibm-z-cloud--provisioning
+          - ibm-z-os--package-manager
           - infrastructure--classic
           - load-balancer--vpc
           - scis--control-tower
@@ -952,7 +958,9 @@ categories:
           - data-collection
           - data-definition
           - data-enrichment
+          - data-enrichment--add
           - data-player
+          - data-quality-definition
           - data-refinery
           - data-refinery--reference
           - data-share
@@ -1192,6 +1200,7 @@ categories:
           - roadmap
           - rule
           - rule--cancelled
+          - rule--data-quality
           - rule--draft
           - rule--filled
           - rule--test
@@ -1384,6 +1393,8 @@ categories:
           - load-balancer--pool
           - logical-partition
           - message-queue
+          - microservices--1
+          - microservices--2
           - mobility--services
           - network--admin-control
           - network--enterprise
@@ -1428,6 +1439,7 @@ categories:
           - wifi-bridge--alt
           - wifi--not-secure
           - wifi--secure
+          - workflow-automation
   - name: Person
     subcategories:
       - name: Senses
@@ -1523,6 +1535,8 @@ categories:
           - alarm--add
           - alarm--subtract
           - calendar
+          - calendar--add
+          - calendar--add--alt
           - calendar--settings
           - calendar--tools
           - event
@@ -1912,6 +1926,7 @@ categories:
           - location--current
           - logo--jupyter
           - logo--keybase
+          - logo--kubernetes
           - logo--openshift
           - logo--python
           - logo--r-script
@@ -1943,6 +1958,7 @@ categories:
           - share
           - signal-strength
           - sim-card
+          - service-id
           - tablet
           - tablet--landscape
           - terminal
