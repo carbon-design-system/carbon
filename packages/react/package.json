@@ -16,8 +16,8 @@
     "lib",
     "scss",
     "index.scss",
-    "icons/es",
-    "icons/lib",
+    "icons/index.js",
+    "icons/index.esm.js",
     "icons/package.json"
   ],
   "keywords": [
@@ -32,7 +32,7 @@
   },
   "scripts": {
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
-    "clean": "rimraf es lib icons/es icons/lib storybook-static",
+    "clean": "rimraf es lib icons/index.js icons/index.esm.js storybook-static",
     "postinstall": "carbon-telemetry collect --install",
     "storybook": "start-storybook -p 3000"
   },
