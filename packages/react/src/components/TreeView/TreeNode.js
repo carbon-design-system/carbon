@@ -43,7 +43,7 @@ export default function TreeNode({
         disabled,
         onTreeSelect,
         selected,
-        tabIndex: (!node.props.disabled && -1) || null,
+        tabIndex: -1,
       });
     }
   });

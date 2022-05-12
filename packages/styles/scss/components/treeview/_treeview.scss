@@ -36,10 +36,6 @@
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--tree-node--disabled:focus > .#{$prefix}--tree-node__label {
-    outline: none;
-  }
-
   .#{$prefix}--tree-node--disabled,
   .#{$prefix}--tree-node--disabled .#{$prefix}--tree-node__label:hover,
   .#{$prefix}--tree-node--disabled

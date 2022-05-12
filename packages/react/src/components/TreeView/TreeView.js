@@ -89,9 +89,9 @@ export default function TreeView({
       onNodeFocusEvent: handleFocusEvent,
       onTreeSelect: handleTreeSelect,
       selected,
-      tabIndex: (!node.props.disabled && -1) || null,
+      tabIndex: -1,
     };
-    if (!focusTarget && !node.props.disabled) {
+    if (!focusTarget) {
       sharedNodeProps.tabIndex = 0;
       focusTarget = true;
     }
@@ -163,10 +163,7 @@ export default function TreeView({
     treeWalker.current =
       treeWalker.current ??
       document.createTreeWalker(treeRootRef?.current, NodeFilter.SHOW_ELEMENT, {
-        acceptNode: function (node) {
-          if (node.classList.contains(`${prefix}--tree-node--disabled`)) {
-            return NodeFilter.FILTER_REJECT;
-          }
+        acceptNode(node) {
           if (node.matches(`li.${prefix}--tree-node`)) {
             return NodeFilter.FILTER_ACCEPT;
           }
