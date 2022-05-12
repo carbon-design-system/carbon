@@ -218,6 +218,11 @@ export default class Slider extends PureComponent {
       this.props.onChange({ value: this.state.value });
     }
 
+    // Fire onBlur event handler if present
+    if (typeof this.props.onBlur === 'function') {
+      this.props.onBlur({ value: this.state.value });
+    }
+
     // Fire onRelease event handler if present and if needed
     if (
       this.state.needsOnRelease &&
