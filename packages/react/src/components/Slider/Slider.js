@@ -440,12 +440,11 @@ export default class Slider extends PureComponent {
       return;
     }
 
+    // determine validity of input change after clicking out of input
+    const validity = evt.target.checkValidity();
     const { value } = evt.target;
-    this.setState({
-      // determine validity of input change after clicking out of input
-      isValid: evt.target.checkValidity(),
-      value,
-    });
+
+    this.setState({ isValid: validity });
     this.props.onBlur({ value });
   };
 
