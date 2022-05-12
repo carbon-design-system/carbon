@@ -140,14 +140,6 @@ function TabList({
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
   });
 
-  console.group('TabList#render');
-  console.log({
-    activeIndex,
-    selectedIndex,
-    scrollLeft,
-  });
-  console.groupEnd();
-
   // Previous Button
   // VISIBLE IF:
   //   SCROLLABLE
