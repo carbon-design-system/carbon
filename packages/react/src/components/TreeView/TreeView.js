@@ -127,7 +127,12 @@ export default function TreeView({
       const nodeIds = [];
 
       if (matches(event, [keys.Home, keys.End])) {
-        if (multiselect && event.shiftKey && event.ctrlKey) {
+        if (
+          multiselect &&
+          event.shiftKey &&
+          event.ctrlKey &&
+          !treeWalker.current.currentNode.getAttribute('aria-disabled')
+        ) {
           nodeIds.push(treeWalker.current.currentNode?.id);
         }
         while (
@@ -137,7 +142,12 @@ export default function TreeView({
         ) {
           nextFocusNode = treeWalker.current.currentNode;
 
-          if (multiselect && event.shiftKey && event.ctrlKey) {
+          if (
+            multiselect &&
+            event.shiftKey &&
+            event.ctrlKey &&
+            !nextFocusNode.getAttribute('aria-disabled')
+          ) {
             nodeIds.push(nextFocusNode?.id);
           }
         }
