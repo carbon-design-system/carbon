@@ -13,8 +13,9 @@ on:
         type: choice
         default: preminor
         options:
-          - preminor
           - minor
+          - preminor
+          - prerelease
       tag:
         required: true
         description: 'Specify the tag for this release'
@@ -47,15 +48,16 @@ jobs:
         if: ${{ github.event.inputs.type == 'preminor' }}
         run: |
           yarn lerna version preminor --no-git-tag-version --preid rc --yes
-
-          # We want the following command to update the lockfile since
-          # the package versions have been changed
-          yarn install --no-immutable
+      - name: Create prerelease
+        if: ${{ github.event.inputs.type == 'prerelease' }}
+        run: |
+          yarn lerna version prerelease --no-git-tag-version --preid rc --yes
       - name: Create minor release
         if: ${{ github.event.inputs.type == 'minor' }}
         run: |
           yarn lerna version minor --no-git-tag-version --no-push --yes
-
+      - name: Update lockfile
+        run: |
           # We want the following command to update the lockfile since
           # the package versions have been changed
           yarn install --no-immutable
@@ -75,8 +77,8 @@ jobs:
           token: ${{ steps.generate_token.outputs.token }}
           body: |
             Automated release PR for ${{ github.event.inputs.tag }}
-            
+
             **Checklist**
-            
+
             - [ ] Verify package version bumps are accurate
             - [ ] Verify CI passes as expected
