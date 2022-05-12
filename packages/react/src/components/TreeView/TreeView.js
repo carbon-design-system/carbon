@@ -146,7 +146,9 @@ export default function TreeView({
         treeWalker.current.currentNode = treeWalker.current.root;
 
         while (treeWalker.current.nextNode()) {
-          nodeIds.push(treeWalker.current.currentNode?.id);
+          if (!treeWalker.current.currentNode.getAttribute('aria-disabled')) {
+            nodeIds.push(treeWalker.current.currentNode?.id);
+          }
         }
       }
       setSelected(selected.concat(nodeIds));
