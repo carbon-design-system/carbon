@@ -3570,6 +3570,9 @@ Map {
       "children": Object {
         "type": "node",
       },
+      "className": Object {
+        "type": "string",
+      },
       "defaultOpen": Object {
         "type": "bool",
       },
@@ -5145,6 +5148,16 @@ Map {
           Array [
             "small",
             "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "status": Object {
+        "args": Array [
+          Array [
+            "active",
+            "finished",
+            "error",
           ],
         ],
         "type": "oneOf",
