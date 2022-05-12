@@ -73,6 +73,9 @@ export default function TreeNode({
     }
   }
   function handleKeyDown(event) {
+    if (disabled) {
+      return;
+    }
     if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
       event.stopPropagation();
     }
