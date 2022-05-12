@@ -43,7 +43,6 @@ export const Default = (args) => (
     step={1}
     stepMultiplier={10}
     noValidate
-    onBlur={() => console.log('onBlur')}
   />
 );
 

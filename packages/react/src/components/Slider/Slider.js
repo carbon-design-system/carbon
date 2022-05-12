@@ -218,11 +218,6 @@ export default class Slider extends PureComponent {
       this.props.onChange({ value: this.state.value });
     }
 
-    // Fire onBlur event handler if present
-    if (typeof this.props.onBlur === 'function') {
-      this.props.onBlur({ value: this.state.value });
-    }
-
     // Fire onRelease event handler if present and if needed
     if (
       this.state.needsOnRelease &&
@@ -444,12 +439,14 @@ export default class Slider extends PureComponent {
     if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
       return;
     }
-    // determine validity of input change after clicking out of input
-    const validity = evt.target.checkValidity();
+
+    const { value } = evt.target;
     this.setState({
-      isValid: validity,
-      value: evt.target.value,
+      // determine validity of input change after clicking out of input
+      isValid: evt.target.checkValidity(),
+      value,
     });
+    this.props.onBlur({ value });
   };
 
   /**
