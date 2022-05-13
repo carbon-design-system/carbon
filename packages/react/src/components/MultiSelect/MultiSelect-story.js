@@ -94,6 +94,7 @@ const props = () => ({
   ),
   onChange: action('onChange'),
   onMenuChange: action('onMenuChange'),
+  onInputValueChange: action('onInputValueChange'),
   listBoxMenuIconTranslationIds: object(
     'Listbox menu icon translation IDs (for translateWithId callback)',
     {
