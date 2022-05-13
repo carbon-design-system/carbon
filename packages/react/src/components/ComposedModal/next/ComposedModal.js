@@ -236,6 +236,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
       {...rest}
       role="presentation"
       ref={ref}
+      aria-hidden={!open}
       onBlur={handleBlur}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
