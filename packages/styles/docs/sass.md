@@ -342,10 +342,10 @@ like to see changed. For example, if you wanted to change the component token
 If you'd like to use these component tokens, you'll need to `@use` them:
 
 ```
-@use '@carbon/styles/scss/components/button/tokens';
+@use '@carbon/styles/scss/components/button';
 
 .my-selector {
-  background: tokens.$button-primary;
+  background: button.$button-primary;
 }
 ```
 
