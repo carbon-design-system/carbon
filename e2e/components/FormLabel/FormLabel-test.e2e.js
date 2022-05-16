@@ -8,9 +8,30 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('FormLabel', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'FormLabel',
+          id: 'components-formlabel--default',
+          theme,
+        });
+      });
+
+      test('with tooltip @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'FormLabel',
+          id: 'components-formlabel--with-tooltip',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'FormLabel',

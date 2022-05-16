@@ -8,9 +8,62 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('CodeSnippet', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('inline @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'CodeSnippet',
+          id: 'components-codesnippet--inline',
+          theme,
+        });
+      });
+
+      test('multiline @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'CodeSnippet',
+          id: 'components-codesnippet--multiline',
+          theme,
+        });
+      });
+
+      test('singleline @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'CodeSnippet',
+          id: 'components-codesnippet--singleline',
+          theme,
+        });
+      });
+
+      test('inline with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'CodeSnippet',
+          id: 'components-codesnippet--inline-with-layer',
+          theme,
+        });
+      });
+
+      test('multiline with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'CodeSnippet',
+          id: 'components-codesnippet--multiline-with-layer',
+          theme,
+        });
+      });
+
+      test('singleline with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'CodeSnippet',
+          id: 'components-codesnippet--singleline-with-layer',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'CodeSnippet',
