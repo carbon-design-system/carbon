@@ -36,6 +36,7 @@ export const CheckboxStory = () => {
         labelText={`Checkbox label`}
         id="checkbox-label-3"
       />
+      <Checkbox disabled labelText={`Checkbox label`} id="checkbox-label-4" />
     </fieldset>
   );
 };
