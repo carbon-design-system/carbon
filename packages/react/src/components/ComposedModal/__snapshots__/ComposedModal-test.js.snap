@@ -7,6 +7,7 @@ exports[`<ComposedModal /> renders 1`] = `
   selectorPrimaryFocus="[data-modal-primary-focus]"
 >
   <div
+    aria-hidden={false}
     className="bx--modal is-visible"
     onBlur={[Function]}
     onClick={[Function]}
@@ -15,25 +16,27 @@ exports[`<ComposedModal /> renders 1`] = `
     open={true}
     role="presentation"
   >
-    <span
-      className="bx--visually-hidden"
-      role="link"
-      tabIndex="0"
-    >
-      Focus sentinel
-    </span>
     <div
       aria-modal="true"
       className="bx--modal-container"
       role="dialog"
-    />
-    <span
-      className="bx--visually-hidden"
-      role="link"
-      tabIndex="0"
     >
-      Focus sentinel
-    </span>
+      <button
+        className="bx--visually-hidden"
+        type="button"
+      >
+        Focus sentinel
+      </button>
+      <div
+        className="bx--modal-container-body"
+      />
+      <button
+        className="bx--visually-hidden"
+        type="button"
+      >
+        Focus sentinel
+      </button>
+    </div>
   </div>
 </ComposedModal>
 `;
