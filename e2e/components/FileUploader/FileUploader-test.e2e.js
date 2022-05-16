@@ -8,9 +8,49 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('FileUploader', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('file uploader @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'FileUploader',
+          id: 'components-fileuploader--file-uploader',
+          theme,
+        });
+      });
+
+      test('file uploader item @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'FileUploader',
+          id: 'components-fileuploader--file-uploader-item',
+          theme,
+        });
+      });
+
+      test('file uploader drop container @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'FileUploader',
+          id: 'components-fileuploader--file-uploader-drop-container',
+          theme,
+        });
+      });
+
+      test('drag and drop upload container example application @vrt', async ({
+        page,
+      }) => {
+        await snapshotStory(page, {
+          component: 'FileUploader',
+          id:
+            'components-fileuploader--drag-and-drop-upload-container-example-application',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',

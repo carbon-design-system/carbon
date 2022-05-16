@@ -8,9 +8,38 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('Pagination', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('pagination @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Pagination',
+          id: 'components-pagination--pagination',
+          theme,
+        });
+      });
+
+      test('multiple pagination components @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Pagination',
+          id: 'components-pagination--multiple-pagination-components',
+          theme,
+        });
+      });
+
+      test('pagination with custom page sizes label @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Pagination',
+          id: 'components-pagination--pagination-with-custom-page-sizes-label',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'Pagination',

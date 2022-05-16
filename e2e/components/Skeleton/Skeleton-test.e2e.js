@@ -8,9 +8,38 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('Skeleton', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('skeletonicon - default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Skeleton',
+          id: 'components-skeleton-skeletonicon--default',
+          theme,
+        });
+      });
+
+      test('skeletonplaceholder - default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Skeleton',
+          id: 'components-skeleton-skeletonplaceholder--default',
+          theme,
+        });
+      });
+
+      test('skeletontext - default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Skeleton',
+          id: 'components-skeleton-skeletontext--default',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'Skeleton',

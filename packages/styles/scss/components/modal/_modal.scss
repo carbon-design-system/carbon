@@ -108,6 +108,10 @@
     @include breakpoint(xlg) {
       width: 48%;
     }
+
+    .#{$prefix}--modal-container-body {
+      display: contents;
+    }
   }
 
   // -----------------------------
