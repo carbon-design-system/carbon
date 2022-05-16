@@ -168,7 +168,7 @@ npm dist-tag add @carbon/themes@11.3.0 latest && \
 npm dist-tag add @carbon/type@11.3.0 latest
 ```
 
-_Note: this stage is a great candidate for next steps in automation_
+- [ ] Run this command to tag the published versions as the latest release
 
 ### Post release
 
