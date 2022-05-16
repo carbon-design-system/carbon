@@ -8,9 +8,30 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('ComboBox', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('combobox @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ComboBox',
+          id: 'components-combobox--combobox',
+          theme,
+        });
+      });
+
+      test('with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ComboBox',
+          id: 'components-combobox--with-layer',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboBox',

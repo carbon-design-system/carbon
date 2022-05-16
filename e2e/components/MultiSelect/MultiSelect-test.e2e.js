@@ -8,9 +8,54 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('MultiSelect', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'MultiSelect',
+          id: 'components-multiselect--default',
+          theme,
+        });
+      });
+
+      test('with initial selected items @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'MultiSelect',
+          id: 'components-multiselect--with-initial-selected-items',
+          theme,
+        });
+      });
+
+      test('filterable @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'MultiSelect',
+          id: 'components-multiselect--filterable',
+          theme,
+        });
+      });
+
+      test('with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'MultiSelect',
+          id: 'components-multiselect--with-layer',
+          theme,
+        });
+      });
+
+      test('filterable with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'MultiSelect',
+          id: 'components-multiselect--filterable-with-layer',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'MultiSelect',
