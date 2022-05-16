@@ -8,9 +8,30 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('ProgressIndicator', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ProgressIndicator',
+          id: 'components-progressindicator--default',
+          theme,
+        });
+      });
+
+      test('interactive @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ProgressIndicator',
+          id: 'components-progressindicator--interactive',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressIndicator',
