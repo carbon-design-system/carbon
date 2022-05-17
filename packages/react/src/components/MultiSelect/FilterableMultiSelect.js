@@ -266,7 +266,7 @@ export default class FilterableMultiSelect extends React.Component {
 
   handleOnInputValueChange = (inputValue, { type }) => {
     if (this.props.onInputValueChange) {
-      this.props.onInputValueChange(inputValue, { type });
+      this.props.onInputValueChange(inputValue);
     }
 
     if (type !== Downshift.stateChangeTypes.changeInput) {

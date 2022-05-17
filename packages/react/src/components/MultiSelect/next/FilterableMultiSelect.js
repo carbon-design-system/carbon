@@ -167,7 +167,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
   function handleOnInputValueChange(inputValue, { type }) {
     if (onInputValueChange) {
-      onInputValueChange(inputValue, { type });
+      onInputValueChange(inputValue);
     }
 
     if (type !== Downshift.stateChangeTypes.changeInput) {
