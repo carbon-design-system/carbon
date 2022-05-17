@@ -339,7 +339,8 @@ like to see changed. For example, if you wanted to change the component token
 );
 ```
 
-If you'd like to use these component tokens in your stylesheet, you'll need to `@use` them:
+If you'd like to use these component tokens in your stylesheet, you'll need to
+`@use` them:
 
 ```scss
 @use '@carbon/styles/scss/components/button';
