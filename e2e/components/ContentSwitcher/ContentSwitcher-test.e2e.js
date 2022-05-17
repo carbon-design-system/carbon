@@ -8,9 +8,30 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('ContentSwitcher', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ContentSwitcher',
+          id: 'components-contentswitcher--default',
+          theme,
+        });
+      });
+
+      test('with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ContentSwitcher',
+          id: 'components-contentswitcher--with-layer',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'ContentSwitcher',

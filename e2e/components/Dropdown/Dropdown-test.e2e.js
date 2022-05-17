@@ -8,9 +8,46 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('Dropdown', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Dropdown',
+          id: 'components-dropdown--default',
+          theme,
+        });
+      });
+
+      test('inline @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Dropdown',
+          id: 'components-dropdown--inline',
+          theme,
+        });
+      });
+
+      test('with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Dropdown',
+          id: 'components-dropdown--with-layer',
+          theme,
+        });
+      });
+
+      test('inline with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Dropdown',
+          id: 'components-dropdown--inline-with-layer',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'Dropdown',

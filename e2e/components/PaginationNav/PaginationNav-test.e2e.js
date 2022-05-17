@@ -8,9 +8,22 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('PaginationNav', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('pagination nav @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'PaginationNav',
+          id: 'components-paginationnav--pagination-nav',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'PaginationNav',
