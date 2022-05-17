@@ -3154,6 +3154,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "onInputValueChange": Object {
+        "type": "func",
+      },
       "onMenuChange": Object {
         "type": "func",
       },
@@ -4337,6 +4340,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onInputValueChange": Object {
           "type": "func",
         },
         "onMenuChange": Object {
