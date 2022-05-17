@@ -6,13 +6,13 @@
  */
 
 import './styles.scss';
+import '../src/feature-flags';
 
 import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
-import { GlobalTheme } from '../src';
-import { addParameters } from '@storybook/react';
+import { GlobalTheme } from '../src/components/Theme';
 
 export const globalTypes = {
   locale: {
@@ -131,9 +131,6 @@ export const parameters = {
       },
     },
   },
-};
-
-addParameters({
   options: {
     storySort: (storyA, storyB) => {
       // By default, sort by the story "kind". The "kind" refers to the
@@ -199,7 +196,7 @@ addParameters({
       return idA.localeCompare(idB);
     },
   },
-});
+};
 
 configureActions({
   depth: 3,

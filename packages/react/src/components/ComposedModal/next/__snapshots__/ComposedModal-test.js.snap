@@ -7,31 +7,34 @@ exports[`<ComposedModal /> renders 1`] = `
   selectorPrimaryFocus="[data-modal-primary-focus]"
 >
   <div
+    aria-hidden={false}
     className="cds--modal is-visible"
     onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
     role="presentation"
   >
-    <span
-      className="cds--visually-hidden"
-      role="link"
-      tabIndex="0"
-    >
-      Focus sentinel
-    </span>
     <div
       aria-modal="true"
       className="cds--modal-container"
       role="dialog"
-    />
-    <span
-      className="cds--visually-hidden"
-      role="link"
-      tabIndex="0"
     >
-      Focus sentinel
-    </span>
+      <button
+        className="cds--visually-hidden"
+        type="button"
+      >
+        Focus sentinel
+      </button>
+      <div
+        className="cds--modal-container-body"
+      />
+      <button
+        className="cds--visually-hidden"
+        type="button"
+      >
+        Focus sentinel
+      </button>
+    </div>
   </div>
 </ForwardRef(ComposedModal)>
 `;
