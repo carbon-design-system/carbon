@@ -8,9 +8,38 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('OrderedList', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('native styles @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'OrderedList',
+          id: 'components-orderedlist--default',
+          theme,
+        });
+      });
+
+      test('nested @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'OrderedList',
+          id: 'components-orderedlist--nested',
+          theme,
+        });
+      });
+
+      test('native list styles @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'OrderedList',
+          id: 'components-orderedlist--native-list-styles',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'OrderedList',

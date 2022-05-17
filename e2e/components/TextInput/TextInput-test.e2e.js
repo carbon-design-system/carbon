@@ -8,9 +8,54 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('TextInput', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('default @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'TextInput',
+          id: 'components-textinput--default',
+          theme,
+        });
+      });
+
+      test('fluid @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'TextInput',
+          id: 'components-textinput--fluid',
+          theme,
+        });
+      });
+
+      test('toggle password visibility @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'TextInput',
+          id: 'components-textinput--toggle-password-visibility',
+          theme,
+        });
+      });
+
+      test('read only @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'TextInput',
+          id: 'components-textinput--read-only',
+          theme,
+        });
+      });
+
+      test('with layer @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'TextInput',
+          id: 'components-textinput--with-layer',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'TextInput',
