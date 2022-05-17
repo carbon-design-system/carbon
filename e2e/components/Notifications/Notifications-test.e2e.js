@@ -8,9 +8,38 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('Notifications', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('toast @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Notifications',
+          id: 'components-notifications--toast',
+          theme,
+        });
+      });
+
+      test('inline @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Notifications',
+          id: 'components-notifications--inline',
+          theme,
+        });
+      });
+
+      test('actionable @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Notifications',
+          id: 'components-notifications--actionable',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'Notifications',
