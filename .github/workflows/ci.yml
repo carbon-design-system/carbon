@@ -114,7 +114,7 @@ jobs:
   vrt-runner:
     strategy:
       matrix:
-        shard: [1, 2]
+        shard: [1, 2, 3, 4]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -147,9 +147,9 @@ jobs:
         if: github.repository == 'carbon-design-system/carbon'
         env:
           PERCY_TOKEN: c9a21a3fde4fda0a0f822d633426ab26e2ab2c1cba55221d342d4047744c8c24
-          PERCY_PARALLEL_TOTAL: 2
+          PERCY_PARALLEL_TOTAL: 4
         run: |
-          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shard }}/2"
+          yarn percy exec --parallel -- yarn playwright test --project chromium --grep @vrt --shard="${{ matrix.shard }}/4"
       - name: Stop storybook
         run: kill ${{ steps.storybook.outputs.pid }}
       - name: Upload test results
