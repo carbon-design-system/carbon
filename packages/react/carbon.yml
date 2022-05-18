@@ -556,7 +556,7 @@ assets:
       status: experimental
       type: component
       platform: web
-      thumbnailPath: ./thumbnails/heading-unstable.svg  
+      thumbnailPath: ./thumbnails/unstable-heading.svg  
       demoLinks:
         - type: storybook
           name: Storybook
@@ -599,7 +599,7 @@ assets:
       status: experimental
       type: component
       platform: web
-      thumbnailPath: ./thumbnails/text-unstable-updated.svg 
+      thumbnailPath: ./thumbnails/unstable-text.svg
       demoLinks:
         - type: storybook
           name: Storybook
