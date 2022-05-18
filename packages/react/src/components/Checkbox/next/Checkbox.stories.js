@@ -30,13 +30,6 @@ export const CheckboxStory = () => {
       <legend className={`${prefix}--label`}>Checkbox heading</legend>
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-      <Checkbox
-        checked
-        disabled
-        labelText={`Checkbox label`}
-        id="checkbox-label-3"
-      />
-      <Checkbox disabled labelText={`Checkbox label`} id="checkbox-label-4" />
     </fieldset>
   );
 };
