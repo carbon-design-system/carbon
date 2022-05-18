@@ -11,91 +11,71 @@ import Button from '../Button';
 import Link from '../Link';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { shallow, mount } from 'enzyme';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
 describe('Button', () => {
-  describe('Renders common props as expected', () => {
-    const wrapper = shallow(
-      // eslint-disable-next-line jsx-a11y/tabindex-no-positive
-      <Button tabIndex={2} className="extra-class">
-        <div className="child">child</div>
-        <div className="child">child</div>
+  it('should support rendering elements within the button through the `children` prop', () => {
+    render(
+      <Button>
+        <span>child</span>
       </Button>
     );
-
-    const wrapperHref = shallow(
-      // eslint-disable-next-line jsx-a11y/tabindex-no-positive
-      <Button tabIndex={2} className="extra-class" href="/home">
-        <div className="child">child</div>
-        <div className="child">child</div>
-      </Button>
-    );
-
-    it('renders children as expected', () => {
-      expect(wrapper.find('.child').length).toBe(2);
-      expect(wrapperHref.find('.child').length).toBe(2);
-    });
-
-    it('should set tabIndex if one is passed via props', () => {
-      expect(wrapper.props().tabIndex).toEqual(2);
-      expect(wrapperHref.props().tabIndex).toEqual(2);
-    });
-
-    it('should add extra classes via className', () => {
-      expect(wrapper.hasClass('extra-class')).toBe(true);
-      expect(wrapperHref.hasClass('extra-class')).toBe(true);
-    });
+    expect(screen.getByText('child')).toBeInTheDocument();
   });
 
-  describe('Renders <button> props as expected', () => {
-    const wrapper = shallow(
-      // eslint-disable-next-line jsx-a11y/tabindex-no-positive
-      <Button tabIndex={2}>
-        <div className="child">child</div>
-        <div className="child">child</div>
-      </Button>
-    );
-
-    it('renders as a <button> element without an href', () => {
-      expect(wrapper.is('button')).toBe(true);
-    });
-
-    it('should set disabled to false by default', () => {
-      expect(wrapper.props().disabled).toBe(false);
-    });
-
-    it('should set disabled if one is passed via props', () => {
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.props().disabled).toBe(true);
-    });
-
-    it('should set type to button by default', () => {
-      expect(wrapper.props().type).toEqual('button');
-    });
-
-    it('should only set type to [button, reset or submit] if one is passed via props', () => {
-      wrapper.setProps({ type: 'reset' });
-      expect(wrapper.props().type).toEqual('reset');
-      wrapper.setProps({ type: 'submit' });
-      expect(wrapper.props().type).toEqual('submit');
-    });
+  it('should support a custom tabIndex through props', () => {
+    render(<Button tabIndex={-1}>test</Button>);
+    expect(screen.getByRole('button')).toHaveAttribute('tabindex', '-1');
   });
 
-  describe('Renders <a> props as expected', () => {
-    const wrapper = shallow(
-      // eslint-disable-next-line jsx-a11y/tabindex-no-positive
-      <Button href="#" tabIndex={2}>
-        <div className="child">child</div>
-        <div className="child">child</div>
-      </Button>
+  it('should support a custom className on the outermost element', () => {
+    const { container } = render(
+      <Button className="custom-class">test</Button>
     );
+    expect(container.firstChild).toHaveClass('custom-class');
+  });
 
-    it('renders as an <a> element with an href', () => {
-      expect(wrapper.is('a')).toBe(true);
-    });
+  it('should render an element with the button role', () => {
+    render(<Button>test</Button>);
+    expect(screen.getByRole('button')).toBeInTheDocument();
+  });
+
+  it('should use the disabled prop to set disabled on the <button>', () => {
+    const { rerender } = render(<Button>test</Button>);
+    expect(screen.getByRole('button')).not.toHaveAttribute('disabled');
+
+    rerender(<Button disabled>test</Button>);
+    expect(screen.getByRole('button')).toHaveAttribute('disabled');
+  });
+
+  it('should render with a default button type of button', () => {
+    render(<Button>test</Button>);
+    expect(screen.getByRole('button')).toHaveAttribute('type', 'button');
+  });
+
+  test.each(['button', 'submit', 'reset'])(
+    'it should support changing the button type to %s with the `type` prop',
+    (type) => {
+      render(<Button type={type}>test</Button>);
+      expect(screen.getByRole('button')).toHaveAttribute('type', type);
+    }
+  );
+
+  it('should render as an element with the role of `link` when the `href` prop is used', () => {
+    render(<Button href="/">test</Button>);
+    expect(screen.getByRole('link')).toBeInTheDocument();
+  });
+
+  it('should support rendering as a custom element with the `as` prop', () => {
+    function CustomComponent(props) {
+      return <div data-testid="custom-component" {...props} />;
+    }
+
+    render(<Button as={CustomComponent}>test</Button>);
+    expect(screen.getByTestId('custom-component')).toBeInTheDocument();
   });
 
   describe('Renders arbitrary component with correct props', () => {
@@ -403,8 +383,6 @@ describe('Small ButtonSkeleton', () => {
 });
 
 describe('Button accessibility', () => {
-  afterEach(cleanup);
-
   it('should have no Axe violations', async () => {
     render(<Button>Button Label</Button>);
 
