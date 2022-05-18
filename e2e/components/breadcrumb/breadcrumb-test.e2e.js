@@ -7,15 +7,15 @@
 
 'use strict';
 
-const { test } = require('@playwright/test');
+const { expect, test } = require('@playwright/test');
 const { themes } = require('../../test-utils/env');
 const { snapshot } = require('../../test-utils/snapshot');
 const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
-test.describe('breadcrumb @vrt', () => {
+test.describe('breadcrumb', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('breadcrumb', async ({ page }) => {
+      test('breadcrumb @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'breadcrumb',
           story: 'breadcrumb-story',
@@ -23,7 +23,7 @@ test.describe('breadcrumb @vrt', () => {
         });
       });
 
-      test('breadcrumb with overflow menu', async ({ page }) => {
+      test('breadcrumb with overflow menu @vrt', async ({ page }) => {
         await visitStory(page, {
           component: 'breadcrumb',
           story: 'breadcrumb-with-overflow-menu',
@@ -39,5 +39,16 @@ test.describe('breadcrumb @vrt', () => {
         });
       });
     });
+  });
+
+  test('accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'breadcrumb',
+      story: 'breadcrumb-story',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('breadcrumb');
   });
 });

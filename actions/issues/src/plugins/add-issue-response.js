@@ -43,14 +43,19 @@ const plugin = {
 
       // Check if the `comment.body` contains a mention to another team member
       const members = await Promise.all(
-        teams.map((slug) => {
-          return octokit.rest.teams.listMembersInOrg({
+        teams.map(async (slug) => {
+          const { data } = await octokit.teams.listMembersInOrg({
             org: 'carbon-design-system',
             team_slug: slug,
           });
+          return data.map((member) => {
+            return member.login;
+          });
         })
-      ).then((members) => {
-        return members.flatten();
+      ).then((responses) => {
+        // Deduplicate members in case the same member is on different teams
+        const members = new Set(responses.flat());
+        return Array.from(members);
       });
       const doesNotMentionAnotherMember = members.every((member) => {
         return !comment.body.includes(`@${member.slug}`);

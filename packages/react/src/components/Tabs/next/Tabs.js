@@ -132,7 +132,7 @@ function TabList({
   const previousButton = useRef(null);
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
-  const [scrollLeft, setScrollLeft] = useState(false);
+  const [scrollLeft, setScrollLeft] = useState(null);
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
@@ -171,7 +171,7 @@ function TabList({
     }
   );
 
-  const tabs = [];
+  const tabs = useRef([]);
   const debouncedOnScroll = useCallback(() => {
     return debounce((event) => {
       setScrollLeft(event.target.scrollLeft);
@@ -184,14 +184,14 @@ function TabList({
     ) {
       event.preventDefault();
 
-      const activeTabs = tabs.filter((tab) => {
-        return !tab.current.disabled;
+      const activeTabs = tabs.current.filter((tab) => {
+        return !tab.disabled;
       });
 
       const currentIndex = activeTabs.indexOf(
-        tabs[activation === 'automatic' ? selectedIndex : activeIndex]
+        tabs.current[activation === 'automatic' ? selectedIndex : activeIndex]
       );
-      const nextIndex = tabs.indexOf(
+      const nextIndex = tabs.current.indexOf(
         activeTabs[getNextIndex(event, activeTabs.length, currentIndex)]
       );
 
@@ -201,14 +201,14 @@ function TabList({
         setActiveIndex(nextIndex);
       }
 
-      tabs[nextIndex].current.focus();
+      tabs.current[nextIndex].focus();
     }
   }
 
   useEffectOnce(() => {
-    const tab = tabs[selectedIndex];
+    const tab = tabs.current[selectedIndex];
     if (scrollIntoView && tab) {
-      tab.current.scrollIntoView({
+      tab.scrollIntoView({
         block: 'nearest',
         inline: 'nearest',
       });
@@ -216,14 +216,14 @@ function TabList({
   });
 
   useEffectOnce(() => {
-    if (tabs[selectedIndex].current.disabled) {
-      const activeTabs = tabs.filter((tab) => {
-        return !tab.current.disabled;
+    if (tabs.current[selectedIndex].disabled) {
+      const activeTabs = tabs.current.filter((tab) => {
+        return !tab.disabled;
       });
 
       if (activeTabs.length > 0) {
         const tab = activeTabs[0];
-        setSelectedIndex(tabs.indexOf(tab));
+        setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
   });
@@ -249,19 +249,27 @@ function TabList({
 
   // updates scroll location for all scroll behavior.
   useIsomorphicEffect(() => {
-    ref.current.scrollLeft = scrollLeft;
+    if (scrollLeft !== null) {
+      ref.current.scrollLeft = scrollLeft;
+    }
   }, [scrollLeft]);
 
   useIsomorphicEffect(() => {
+    if (!isScrollable) {
+      return;
+    }
+
     const tab =
-      activation === 'manual' ? tabs[activeIndex] : tabs[selectedIndex];
+      activation === 'manual'
+        ? tabs.current[activeIndex]
+        : tabs.current[selectedIndex];
     if (tab) {
       // The width of the "scroll buttons"
 
       // The start and end position of the selected tab
-      const { width: tabWidth } = tab.current.getBoundingClientRect();
-      const start = tab.current.offsetLeft;
-      const end = tab.current.offsetLeft + tabWidth;
+      const { width: tabWidth } = tab.getBoundingClientRect();
+      const start = tab.offsetLeft;
+      const end = tab.offsetLeft + tabWidth;
 
       // The start and end of the visible area for the tabs
       const visibleStart = ref.current.scrollLeft + buttonWidth;
@@ -278,14 +286,14 @@ function TabList({
         setScrollLeft(end + buttonWidth - ref.current.clientWidth);
       }
     }
-  }, [activation, activeIndex, selectedIndex]);
+  }, [activation, activeIndex, selectedIndex, isScrollable]);
 
   usePressable(previousButton, {
     onPress({ longPress }) {
       if (!longPress) {
         setScrollLeft(
           Math.max(
-            scrollLeft - (ref.current.scrollWidth / tabs.length) * 1.5,
+            scrollLeft - (ref.current.scrollWidth / tabs.current.length) * 1.5,
             0
           )
         );
@@ -301,7 +309,7 @@ function TabList({
       if (!longPress) {
         setScrollLeft(
           Math.min(
-            scrollLeft + (ref.current.scrollWidth / tabs.length) * 1.5,
+            scrollLeft + (ref.current.scrollWidth / tabs.current.length) * 1.5,
             ref.current.scrollWidth - ref.current.clientWidth
           )
         );
@@ -333,12 +341,12 @@ function TabList({
         onScroll={debouncedOnScroll}
         onKeyDown={onKeyDown}>
         {React.Children.map(children, (child, index) => {
-          const ref = React.createRef();
-          tabs.push(ref);
           return (
             <TabContext.Provider value={index}>
               {React.cloneElement(child, {
-                ref,
+                ref: (node) => {
+                  tabs.current[index] = node;
+                },
               })}
             </TabContext.Provider>
           );
