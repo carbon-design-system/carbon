@@ -14,6 +14,9 @@
   - [Prerelease](#prerelease)
   - [Stable release](#stable-release)
   - [Post release](#post-release)
+- [Previous releases](#previous-releases)
+  - [How to determine if the previous major version needs to be released](#how-to-determine-if-the-previous-major-version-needs-to-be-released)
+  - [Releasing the previous major version](#releasing-the-previous-major-version)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -188,3 +191,39 @@ categories:
 - Revert to previous stable release: this strategy is helpful if the issue that
   has been identified is not able to be quickly remediated or the timeline is
   unknown
+
+## Previous releases
+
+We currently support the current and previous major version of the Design
+System. While the current major version will receive features and bug fixes, the
+previous major version will only receive bug fixes along with any critical
+security updates.
+
+### How to determine if the previous major version needs to be released
+
+To help determine if there has been code merged into the v10 branch since the
+last v10 release:
+
+- [ ] Go to https://github.com/carbon-design-system/carbon/compare/
+- [ ] Open the "base" ref dropdown
+- [ ] Choose the "tags" tab
+- [ ] Select the most recent v10.x tag
+- [ ] Open the "compare" ref dropdown
+- [ ] Select the `v10` branch
+- [ ] View the diff
+  - [ ] If the diff is empty, v10 does not need released
+  - [ ] If the diff contains a list of commits, we need to release a new v10.x
+        version
+
+Additionally, check
+[the PR queue against the v10 base branch](https://github.com/carbon-design-system/carbon/pulls?q=is%3Apr+base%3Av10+sort%3Aupdated-desc).
+It might be that there is a PR open and waiting to merge that we could get in to
+include in the release.
+
+### Releasing the previous major version
+
+You can use the [prerelease](#prerelease) and [stable release](#stablerelease)
+steps above to release the previous major version of the Design System. The only
+significant difference will occur when you run a workflow for versioning or
+releasing. In these situations, you will need to select the correct tag to the
+run the workflow from instead of using the default `main`.
