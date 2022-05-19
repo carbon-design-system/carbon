@@ -339,6 +339,39 @@ like to see changed. For example, if you wanted to change the component token
 );
 ```
 
+If you'd like to use these component tokens in your stylesheet, you'll need to
+`@use` them:
+
+```scss
+@use '@carbon/styles/scss/components/button';
+
+.my-selector {
+  background: button.$button-primary;
+}
+```
+
+You can also include these when configuring themes using the theme mixin:
+
+```scss
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/components/button/tokens' as button;
+@use '@carbon/react/scss/components/notification/tokens' as notification;
+@use '@carbon/react/scss/components/tag/tokens' as tag;
+
+@include theme.add-component-tokens(button.$button-tokens);
+@include theme.add-component-tokens(notification.$notification-tokens);
+@include theme.add-component-tokens(tag.$tag-tokens);
+
+.white {
+  @include theme(themes.$white);
+}
+
+.g10 {
+  @include theme(themes.$g10);
+}
+```
+
 **Files**
 
 | Component | Import                                             | File                                                        |
