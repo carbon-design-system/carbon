@@ -6,6 +6,7 @@
  */
 
 import './styles.scss';
+import '../src/feature-flags';
 
 import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';

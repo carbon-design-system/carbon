@@ -8,9 +8,38 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('ProgressBar', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('progress bar @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ProgressBar',
+          id: 'components-progressbar--progress-bar',
+          theme,
+        });
+      });
+
+      test('indeterminate @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ProgressBar',
+          id: 'components-progressbar--indeterminate',
+          theme,
+        });
+      });
+
+      test('example @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ProgressBar',
+          id: 'components-progressbar--example',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressBar',
