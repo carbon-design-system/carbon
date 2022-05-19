@@ -162,7 +162,8 @@
       border-top: 1px solid $border-subtle;
     }
 
-    transition: color motion.$duration-fast-02 motion.motion(standard, productive);
+    transition: color motion.$duration-fast-02
+      motion.motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-content--nowrap {
