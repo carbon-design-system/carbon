@@ -47,7 +47,8 @@ Each markdown file will tend to take on the following initial structure:
 - Steps around installing and using the component
 - Details around any special cases with component prop types
 - Details around common use-cases for the components, either with embedded code
-  or links to [codesandbox.io](http://codesandbox.io) playgrounds
+  or links to [codesandbox.io](http://codesandbox.io) or
+  [stackblitz.com](https://stackblitz.com)playgrounds
 
 You can use the template available [here](/docs/component-template.md) to help
 with filling out each of these steps.

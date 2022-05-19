@@ -2158,6 +2158,16 @@
     - timetable
   sizes:
     - 32
+- name: calendar--add
+  friendly_name: calendar--add
+  aliases: []
+  sizes:
+    - 32
+- name: calendar--add--alt
+  friendly_name: calendar--add--alt
+  aliases: []
+  sizes:
+    - 32
 - name: calendar--heat-map
   friendly_name: Calendar heat map
   aliases:
@@ -5315,12 +5325,22 @@
     - expanded
   sizes:
     - 32
+- name: data-enrichment--add
+  friendly_name: data-enrichment--add
+  aliases: []
+  sizes:
+    - 32
 - name: data-player
   friendly_name: Data player
   aliases:
     - data
     - player
     - control
+  sizes:
+    - 32
+- name: data-quality-definition
+  friendly_name: data-quality-definition
+  aliases: []
   sizes:
     - 32
 - name: data-refinery
@@ -8768,6 +8788,11 @@
     - Match 360
   sizes:
     - 32
+- name: ibm--open-enterprise-languages
+  friendly_name: ibm--open-enterprise-languages
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud
   friendly_name: IBM Cloud®
   aliases:
@@ -8860,6 +8885,11 @@
     - internet
   sizes:
     - 32
+- name: ibm-cloud-pak--business-automation
+  friendly_name: ibm-cloud-pak--business-automation
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud-pak--data
   friendly_name: IBM Cloud Pak® for Data
   aliases:
@@ -8878,6 +8908,11 @@
     - catalogue
     - integration
     - IBM Cloud Pak®
+  sizes:
+    - 32
+- name: ibm-cloud-pak--MANTA-automated-data-lineage
+  friendly_name: ibm-cloud-pak--MANTA-automated-data-lineage
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud-pak--multicloud-mgmt
@@ -8961,6 +8996,21 @@
     - enterprise
     - app
     - orders
+  sizes:
+    - 32
+- name: ibm-z--cloud-mod-stack
+  friendly_name: ibm-z--cloud-mod-stack
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-z-cloud--provisioning
+  friendly_name: ibm-z-cloud--provisioning
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-z-os--package-manager
+  friendly_name: ibm-z-os--package-manager
+  aliases: []
   sizes:
     - 32
 - name: iCA-2D
@@ -10717,6 +10767,11 @@
     - identification
   sizes:
     - 32
+- name: logo--kubernetes
+  friendly_name: logo--kubernetes
+  aliases: []
+  sizes:
+    - 32
 - name: logo--linkedin
   friendly_name: Logo LinkedIn
   sizes:
@@ -11398,6 +11453,16 @@
     - research
     - laboratory
     - lab
+  sizes:
+    - 32
+- name: microservices--1
+  friendly_name: microservices--1
+  aliases: []
+  sizes:
+    - 32
+- name: microservices--2
+  friendly_name: microservices--2
+  aliases: []
   sizes:
     - 32
 - name: migrate
@@ -14503,6 +14568,11 @@
     - shield
   sizes:
     - 32
+- name: rule--data-quality
+  friendly_name: rule--data-quality
+  aliases: []
+  sizes:
+    - 32
 - name: rule--draft
   friendly_name: Rule draft
   aliases:
@@ -15110,6 +15180,11 @@
     - service-desk
     - concierge
     - front desk
+  sizes:
+    - 32
+- name: service-id
+  friendly_name: service-id
+  aliases: []
   sizes:
     - 32
 - name: session-border-control
@@ -19324,6 +19399,11 @@
     - chart
     - plot
     - data analytics
+  sizes:
+    - 32
+- name: workflow-automation
+  friendly_name: workflow-automation
+  aliases: []
   sizes:
     - 32
 - name: workspace

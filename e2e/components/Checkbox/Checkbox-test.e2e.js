@@ -8,9 +8,22 @@
 'use strict';
 
 const { expect, test } = require('@playwright/test');
-const { visitStory } = require('../../test-utils/storybook');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 
 test.describe('Checkbox', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('checkbox @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Checkbox',
+          id: 'components-checkbox--checkbox-story',
+          theme,
+        });
+      });
+    });
+  });
+
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'Checkbox',
