@@ -1,0 +1,347 @@
+{
+    "results": [
+        {
+            "ruleId": "WCAG20_Input_ExplicitLabel",
+            "value": [
+                "VIOLATION",
+                "FAIL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[5]/div[1]/button[1]",
+                "aria": "/document[1]/switch[1]"
+            },
+            "ruleTime": 0,
+            "reasonId": "Fail_2",
+            "message": "Form control with \"switch\" role has no associated label",
+            "messageArgs": [
+                "switch"
+            ],
+            "apiArgs": [],
+            "bounds": {
+                "left": 41,
+                "top": 41,
+                "height": 1,
+                "width": 1
+            },
+            "snippet": "<button aria-checked=\"true\" type=\"button\" role=\"switch\" class=\"cds--toggle__button\" id=\"toggle-1\">",
+            "category": "Accessibility",
+            "ignored": false,
+            "level": "violation"
+        },
+        {
+            "ruleId": "WCAG20_Style_BeforeAfter",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/head[1]/style[4]",
+                "aria": "/document[1]"
+            },
+            "ruleTime": 71,
+            "reasonId": "Potential_1",
+            "message": "Verify the '::before' and '::after' pseudo-elements do not insert non-decorative content",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<style>",
+            "category": "Accessibility",
+            "ignored": false,
+            "level": "potentialviolation"
+        },
+        {
+            "ruleId": "WCAG20_Style_BeforeAfter",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/head[1]/style[12]",
+                "aria": "/document[1]"
+            },
+            "ruleTime": 1,
+            "reasonId": "Potential_1",
+            "message": "Verify the '::before' and '::after' pseudo-elements do not insert non-decorative content",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<style>",
+            "category": "Accessibility",
+            "ignored": false,
+            "level": "potentialviolation"
+        },
+        {
+            "ruleId": "RPT_Style_HinderFocus1",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/body[1]/div[5]/div[1]/button[1]",
+                "aria": "/document[1]/switch[1]"
+            },
+            "ruleTime": 130,
+            "reasonId": "Potential_1",
+            "message": "Check the keyboard focus indicator is highly visible when using CSS declaration for 'border' or 'outline'",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 41,
+                "top": 41,
+                "height": 1,
+                "width": 1
+            },
+            "snippet": "<button aria-checked=\"true\" type=\"button\" role=\"switch\" class=\"cds--toggle__button\" id=\"toggle-1\">",
+            "category": "Accessibility",
+            "ignored": false,
+            "level": "potentialviolation"
+        },
+        {
+            "ruleId": "RPT_Style_ColorSemantics1",
+            "value": [
+                "VIOLATION",
+                "POTENTIAL"
+            ],
+            "path": {
+                "dom": "/html[1]/head[1]/style[1]",
+                "aria": "/document[1]"
+            },
+            "ruleTime": 2,
+            "reasonId": "Potential_1",
+            "message": "Verify color is not used as the only visual means of conveying information",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<style>",
+            "category": "Accessibility",
+            "ignored": false,
+            "level": "potentialviolation"
+        },
+        {
+            "ruleId": "RPT_Style_Trigger2",
+            "value": [
+                "VIOLATION",
+                "MANUAL"
+            ],
+            "path": {
+                "dom": "/html[1]/head[1]/style[1]",
+                "aria": "/document[1]"
+            },
+            "ruleTime": 1,
+            "reasonId": "Manual_1",
+            "message": "Confirm Windows high contrast mode is supported when using CSS to include, position or alter non-decorative content",
+            "messageArgs": [],
+            "apiArgs": [],
+            "bounds": {
+                "left": 0,
+                "top": 0,
+                "height": 0,
+                "width": 0
+            },
+            "snippet": "<style>",
+            "category": "Accessibility",
+            "ignored": false,
+            "level": "manual"
+        }
+    ],
+    "numExecuted": 353,
+    "nls": {
+        "HAAC_BackgroundImg_HasTextOrTitle": {
+            "0": "Background images that convey important information must have a text alternative that describes the image",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Blockquote_WrapsTextQuote": {
+            "0": "Quotations should be marked with <q> or <blockquote> elements",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_List_UseMarkup": {
+            "0": "Use proper HTML list elements to create lists",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_Elem_Lang_Valid": {
+            "0": "The language of content must be valid and specified in accordance with BCP 47",
+            "Pass_0": "Lang has a valid primary lang and conforms to BCP 47"
+        },
+        "WCAG20_Text_Emoticons": {
+            "0": "Emoticons must have a short text alternative that describes their purpose",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_Text_LetterSpacing": {
+            "0": "Use CSS 'letter-spacing' to control spacing within a word",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_MultipleDocumentRoles": {
+            "0": "All elements with a \"document\" role must have unique labels",
+            "Pass_0": "Rule Passed"
+        },
+        "IBMA_Color_Contrast_WCAG2AA_PV": {
+            "0": "The contrast ratio of text with its background (i.e. background with a color gradient or a background image) must meet WCAG 2.1 AA requirements",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Title_Valid": {
+            "0": "Page <title> should be a descriptive title, rather than a filename",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_A_TargetAndText": {
+            "0": "Users should be warned in advance if their input action will open a new window or otherwise change their context",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Blink_CSSTrigger1": {
+            "0": "Do not use the \"blink\" value of the 'text-decoration' property for longer than five seconds",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Style_BackgroundImage": {
+            "0": "Images included by using CSS alone must not convey important information",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Style_ColorSemantics1": {
+            "0": "Combine color and descriptive markup to convey information",
+            "Potential_1": "Verify color is not used as the only visual means of conveying information",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Style_Trigger2": {
+            "0": "Windows high contrast mode must be supported when using CSS to include, position or alter non-decorative content",
+            "Manual_1": "Confirm Windows high contrast mode is supported when using CSS to include, position or alter non-decorative content",
+            "Pass_0": "Rule Passed"
+        },
+        "WCAG20_Style_BeforeAfter": {
+            "0": "Do not use CSS '::before' and '::after' pseudo-elements to insert non-decorative content",
+            "Pass_0": "Rule Passed",
+            "Potential_1": "Verify the '::before' and '::after' pseudo-elements do not insert non-decorative content"
+        },
+        "WCAG21_Style_Viewport": {
+            "0": "Text must scale up to 200% without loss of content or functionality",
+            "Pass_0": "Rule Passed"
+        },
+        "style_hover_persistent": {
+            "0": "The pointer should be able to move over content displayed on hover",
+            "Pass_0": "the hover: pseudo-class is not used to display content"
+        },
+        "RPT_Elem_UniqueId": {
+            "0": "Element 'id' attribute values must be unique within a document",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Text_SensoryReference": {
+            "0": "Instructions must be meaningful without shape or location words",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Block_ShouldBeHeading": {
+            "0": "Heading text must use a heading element",
+            "Pass_0": "Rule Passed"
+        },
+        "aria_attribute_deprecated": {
+            "0": "No deprecated ARIA role or attribute should be used",
+            "pass": "The ARIA roles and attribute are used per specification"
+        },
+        "aria_role_redundant": {
+            "0": "An explicitly-assigned ARIA role should not be redundant with the implicit role of the element",
+            "pass": "An explicitly-assigned ARIA role is not redundant with the implicit role of the element"
+        },
+        "Rpt_Aria_ValidProperty": {
+            "0": "ARIA attributes must be valid for the element's role",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_ValidPropertyValue": {
+            "0": "ARIA property values must be valid",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_ValidRole": {
+            "0": "Elements must have a valid 'role' per ARIA specification",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Style_HinderFocus1": {
+            "0": "The keyboard focus indicator must be highly visible when default border or outline is modified by CSS",
+            "Potential_1": "Check the keyboard focus indicator is highly visible when using CSS declaration for 'border' or 'outline'"
+        },
+        "WCAG20_Input_ExplicitLabel": {
+            "0": "Each form control must have an associated label",
+            "Fail_2": "Form control with \"{0}\" role has no associated label"
+        },
+        "aria_semantics_role": {
+            "0": "ARIA roles must be valid for the element to which they are assigned",
+            "Pass_0": "Rule Passed"
+        },
+        "aria_semantics_attribute": {
+            "0": "ARIA attributes must be valid for the element and ARIA role to which they are assigned",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_EmptyPropertyValue": {
+            "0": "When specifying a required ARIA attribute, the value must not be empty",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_MissingKeyboardHandler": {
+            "0": "Interactive WAI_ARIA UI components must provide keyboard access",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_RequiredChildren_Native_Host_Sematics": {
+            "0": "An element with a ARIA role must contain required children",
+            "Pass_0": "Rule Passed"
+        },
+        "Rpt_Aria_RequiredProperties": {
+            "0": "When using a ARIA role on an element, the required attributes for that role must be defined",
+            "Pass_0": "Rule Passed"
+        },
+        "RPT_Label_UniqueFor": {
+            "0": "Form controls should have exactly one label",
+            "Pass_0": "Rule Passed"
+        },
+        "Valerie_Label_HasContent": {
+            "0": "A <label> element must have non-empty descriptive text that identifies the purpose of the interactive component",
+            "Pass_Regular": "<label> element has accessible name with inner content"
+        },
+        "WCAG20_Label_RefValid": {
+            "0": "The 'for' attribute must reference a non-empty, unique 'id' attribute of an <input> element",
+            "Pass_0": "Rule Passed"
+        },
+        "IBMA_Color_Contrast_WCAG2AA": {
+            "0": "The contrast ratio of text with its background must meet WCAG 2.1 AA requirements",
+            "Pass_0": "Rule Passed"
+        },
+        "aria_hidden_focus_misuse": {
+            "0": "A focusable element should not be within the subtree of an element with 'aria-hidden' set to \"true\"",
+            "Pass_0": "Rule Passed"
+        }
+    },
+    "summary": {
+        "counts": {
+            "violation": 1,
+            "potentialviolation": 4,
+            "recommendation": 0,
+            "potentialrecommendation": 0,
+            "manual": 1,
+            "ignored": 0
+        },
+        "scanTime": 851,
+        "ruleArchive": "Latest Deployment (latest)",
+        "policies": [
+            "Custom_Ruleset"
+        ],
+        "reportLevels": [
+            "violation",
+            "potentialviolation",
+            "recommendation",
+            "potentialrecommendation",
+            "manual"
+        ],
+        "startScan": 1652992566174,
+        "URL": "http://localhost:3000/iframe.html?id=components-toggle--default&viewMode=story&globals=theme:white"
+    },
+    "scanID": "4f6cdda7-30a7-4cd7-92e8-0b3ae0d4bacc",
+    "toolID": "accessibility-checker-v3.1.29-rc.0",
+    "label": "Toggle"
+}

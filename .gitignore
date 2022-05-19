@@ -53,7 +53,7 @@ package-lock.json
 .next
 
 # Accessibility Verification Testing
-.avt/
+.avt/reports
 
 # Playwright
 .playwright

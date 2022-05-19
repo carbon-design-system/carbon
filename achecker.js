@@ -10,6 +10,7 @@
 const path = require('path');
 
 module.exports = {
+  // Reference for archive id: https://github.com/IBMa/equal-access/blob/master/rule-server/src/static/archives.json
   ruleArchive: 'latest',
   policies: ['Custom_Ruleset'],
   failLevels: ['violation'],
