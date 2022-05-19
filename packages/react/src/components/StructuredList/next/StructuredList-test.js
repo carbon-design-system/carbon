@@ -46,6 +46,20 @@ describe('StructuredListWrapper', () => {
         wrapper.find('div').hasClass(`${prefix}--structured-list--selection`)
       ).toEqual(true);
     });
+
+    it('Should add the modifier class for condensed when isCondensed prop is true', () => {
+      wrapper.setProps({ isCondensed: true });
+      expect(
+        wrapper.find('div').hasClass(`${prefix}--structured-list--condensed`)
+      ).toEqual(true);
+    });
+
+    it('Should add the modifier class for flush when isFlush prop is true', () => {
+      wrapper.setProps({ isFlush: true });
+      expect(
+        wrapper.find('div').hasClass(`${prefix}--structured-list--flush`)
+      ).toEqual(true);
+    });
   });
 });
 

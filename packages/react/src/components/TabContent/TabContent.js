@@ -18,6 +18,7 @@ import { usePrefix } from '../../internal/usePrefix';
 function useTabbableContent(ref) {
   const [hasTabbableContent, setHasTabbableContent] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useIsomorphicEffect(() => {
     if (ref.current) {
       setHasTabbableContent(ref.current.querySelector(selectorTabbable));
