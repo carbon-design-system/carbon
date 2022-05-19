@@ -69,9 +69,12 @@ release team will need to do the following:
 - [ ] Run the
       [Version Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/version.yml)
       to automatically generate the prerelease versions for packages
-  - [ ] Specify `preminor` as the release type
-  - [ ] Provide the tag for the release. For example, if the previous release
-        was `v11.1.0` this tag would be `v11.2.0-rc.0`
+
+![Screenshot of the version workflow with a way to manually trigger the action](https://user-images.githubusercontent.com/3901764/169147024-32b18e39-ab9a-4048-a3f6-75d4ab94d37e.png)
+
+- [ ] Specify `preminor` as the release type
+- [ ] Provide the tag for the release. For example, if the previous release was
+      `v11.1.0` this tag would be `v11.2.0-rc.0`
 - [ ] Review and approve the Pull Request generated from this action
 - [ ] When the Pull Request is merged, pull down the latest code from
       `upstream`, tag it, and push it to `upstream`
