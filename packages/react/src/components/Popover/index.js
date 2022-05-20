@@ -6,7 +6,6 @@
  */
 
 import cx from 'classnames';
-import { runInContext } from 'lodash';
 import PropTypes from 'prop-types';
 import React, { useLayoutEffect, useRef, useState } from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
@@ -14,9 +13,9 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const PopoverContext = React.createContext();
 
-const Popover = React.forwardRef(function Popover(props, ref) {
+const Popover = React.forwardRef(function Popover(props, forwardRef) {
   const {
-    align = 'bottom',
+    align = 'top',
     as: BaseComponent = 'span',
     caret = true,
     className: customClassName,
@@ -28,23 +27,121 @@ const Popover = React.forwardRef(function Popover(props, ref) {
   } = props;
   const prefix = usePrefix();
   const floating = useRef();
+  const popover = useRef();
+  const ref = useMergedRefs([forwardRef, popover]);
+  const [autoAligned, setAutoAligned] = useState(false);
+  const [autoAlignment, setAutoAlignment] = useState(align);
   const className = cx({
     [`${prefix}--popover-container`]: true,
     [`${prefix}--popover--caret`]: caret,
     [`${prefix}--popover--drop-shadow`]: dropShadow,
     [`${prefix}--popover--high-contrast`]: highContrast,
     [`${prefix}--popover--open`]: open,
-    [`${prefix}--popover--${align}`]: true,
+    [`${prefix}--popover--${autoAlignment}`]: autoAligned,
+    [`${prefix}--popover--${align}`]: !autoAligned,
     [customClassName]: !!customClassName,
   });
 
   useLayoutEffect(() => {
-    if (floating.current) {
-      const rect = floating.current.getBoundingClientRect();
-
-      console.log(rect.x);
+    if (!floating.current) {
+      return;
     }
-  }, [floating.current]);
+
+    //  const rect = floating.current.getBoundingClientRect();
+    // if (rect.x > 0 && rect.y > 0) {
+    //   console.log('yo');
+    //   console.log(autoAligned);
+    //   return;
+    // }
+
+    // floating.current.style.visibility = 'hidden';
+
+    const alignments = [
+      'top',
+      'top-left',
+      'top-right',
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+      'left',
+      'left-bottom',
+      'left-top',
+      'right',
+      'right-bottom',
+      'right-top',
+    ];
+
+    // Creates the priotritzed list of options depending on ideal alignment coming from `align`
+    const options = [align];
+    let option =
+      alignments[(alignments.indexOf(align) + 1) % alignments.length];
+
+    while (option) {
+      if (options.includes(option)) {
+        break;
+      }
+      options.push(option);
+      option = alignments[(alignments.indexOf(option) + 1) % alignments.length];
+    }
+
+    function isVisible(alignment) {
+      popover.current.classList.add(`${prefix}--popover--${alignment}`);
+
+      const rect = floating.current.getBoundingClientRect();
+      // console.log(rect.x);
+      if (rect.x < 0) {
+        // console.log(popover.current.classList);
+        // console.log(alignment);
+        console.log('x', rect.x);
+        console.log('y', rect.y);
+        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
+        return false;
+      }
+
+      popover.current.classList.remove(`${prefix}--popover--${alignment}`);
+      console.log(alignment);
+      return true;
+    }
+
+    let alignment = null;
+
+    for (let i = 0; i < options.length; i++) {
+      const option = options[i];
+      //  console.log(i);
+      if (isVisible(option)) {
+        alignment = option;
+        break;
+      }
+    }
+
+    // console.log(alignment);
+    // console.log(autoAligned);
+
+    if (alignment) {
+      setAutoAligned(true);
+      setAutoAlignment(alignment);
+    }
+
+    // const rect = floating.current.getBoundingClientRect();
+    // console.log('1', autoAlignment, rect.x, rect.y);
+
+    // // if (rect.x < 0) {
+    // //   setAutoAligned(() => true);
+    // //   setAutoAlignment(() => 'top-left');
+    // //   console.log('2', autoAlignment, rect.x, rect.y);
+    // // }
+
+    // if (rect.x < 0 || rect.y < 0) {
+    //   setAutoAligned(true);
+    //   setAutoAlignment(alignments[currentAlignment + 1]);
+    //   console.log('2', autoAlignment, rect.x, rect.y);
+    //   currentAlignment += 1;
+    // }
+
+    // // console.log(autoAlignment);
+
+    // console.log('3', autoAlignment, rect.x, rect.y);
+  });
 
   return (
     <PopoverContext.Provider value={{ floating }}>
