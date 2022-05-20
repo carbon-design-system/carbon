@@ -42,6 +42,7 @@ export default function TreeView({
       }
     );
   }
+
   function handleTreeSelect(event, node = {}) {
     const { id: nodeId } = node;
     if (multiselect && (event.metaKey || event.ctrlKey)) {
@@ -54,10 +55,9 @@ export default function TreeView({
       setSelected([nodeId]);
       setActive(nodeId);
     }
-    if (onSelect) {
-      onSelect(event, node);
-    }
+    onSelect?.(event, node);
   }
+
   function handleFocusEvent(event) {
     if (event.type === 'blur') {
       const {
@@ -80,6 +80,7 @@ export default function TreeView({
       currentFocusedNode.tabIndex = 0;
     }
   }
+
   let focusTarget = false;
   const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
@@ -101,25 +102,61 @@ export default function TreeView({
 
   function handleKeyDown(event) {
     event.stopPropagation();
-    if (matches(event, [keys.ArrowUp, keys.ArrowDown])) {
+    if (
+      matches(event, [
+        keys.ArrowUp,
+        keys.ArrowDown,
+        keys.Home,
+        keys.End,
+        { code: 'KeyA' },
+      ])
+    ) {
       event.preventDefault();
     }
+
     treeWalker.current.currentNode = event.target;
     let nextFocusNode;
+
     if (match(event, keys.ArrowUp)) {
       nextFocusNode = treeWalker.current.previousNode();
     }
     if (match(event, keys.ArrowDown)) {
       nextFocusNode = treeWalker.current.nextNode();
     }
+    if (matches(event, [keys.Home, keys.End, { code: 'KeyA' }])) {
+      const nodeIds = [];
+
+      if (matches(event, [keys.Home, keys.End])) {
+        if (multiselect && event.shiftKey && event.ctrlKey) {
+          nodeIds.push(treeWalker.current.currentNode?.id);
+        }
+        while (
+          match(event, keys.Home)
+            ? treeWalker.current.previousNode()
+            : treeWalker.current.nextNode()
+        ) {
+          nextFocusNode = treeWalker.current.currentNode;
+
+          if (multiselect && event.shiftKey && event.ctrlKey) {
+            nodeIds.push(nextFocusNode?.id);
+          }
+        }
+      }
+      if (match(event, { code: 'KeyA' }) && event.ctrlKey) {
+        treeWalker.current.currentNode = treeWalker.current.root;
+
+        while (treeWalker.current.nextNode()) {
+          nodeIds.push(treeWalker.current.currentNode?.id);
+        }
+      }
+      setSelected(selected.concat(nodeIds));
+    }
     if (nextFocusNode && nextFocusNode !== event.target) {
       resetNodeTabIndices();
       nextFocusNode.tabIndex = 0;
       nextFocusNode.focus();
     }
-    if (rest.onKeyDown) {
-      rest.onKeyDown(event);
-    }
+    rest?.onKeyDown?.(event);
   }
 
   useEffect(() => {

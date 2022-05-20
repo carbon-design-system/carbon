@@ -107,10 +107,10 @@ body:
   - type: input
     id: example-url
     attributes:
-      label: CodeSandbox example
+      label: Reproduction/example
       description:
         'Use our
-        [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox)
+        [template](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx)
         to re-create the issue'
     validations:
       required: true
@@ -120,7 +120,7 @@ body:
       label: Steps to reproduce
       description:
         'How do we reproduce the accessibility violation you described using the
-        CodeSandbox link above?'
+        reproduction/example link above?'
     validations:
       required: true
   - type: checkboxes

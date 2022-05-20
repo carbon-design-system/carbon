@@ -2,7 +2,7 @@
   "name": "jest-config-carbon",
   "private": true,
   "description": "Jest configuration and preset for Carbon",
-  "version": "1.0.0",
+  "version": "1.1.0-rc.0",
   "license": "Apache-2.0",
   "main": "index.js",
   "repository": {
@@ -36,7 +36,7 @@
     "enzyme-to-json": "^3.6.2",
     "jest-circus": "^27.4.6",
     "jest-watch-typeahead": "^1.0.0",
-    "sass": "^1.45.0"
+    "sass": "^1.51.0"
   },
   "devDependencies": {
     "react": "^17.0.1",
