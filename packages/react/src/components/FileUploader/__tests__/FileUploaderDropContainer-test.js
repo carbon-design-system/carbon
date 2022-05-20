@@ -130,6 +130,44 @@ describe('FileUploaderDropContainer', () => {
     );
   });
 
+  it('should be case insensitive when marking files invalid', () => {
+    const onAddFiles = jest.fn();
+    const { container } = render(
+      <FileUploaderDropContainer onAddFiles={onAddFiles} accept={['.jpeg']} />
+    );
+    const input = container.querySelector('input');
+
+    const files = [
+      new File(['foo'], 'foo.JPEG', { type: 'image/jpeg' }),
+      new File(['bar'], 'bar.a_a', { type: 'text/plain' }),
+    ];
+
+    uploadFiles(input, files);
+
+    expect(onAddFiles).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: {
+          files,
+        },
+      }),
+      { addedFiles: files }
+    );
+
+    expect(onAddFiles).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: {
+          files,
+        },
+      }),
+      {
+        addedFiles: expect.arrayContaining([
+          expect.not.objectContaining({ invalidFileType: false }),
+          expect.objectContaining({ invalidFileType: true }),
+        ]),
+      }
+    );
+  });
+
   it('should not mark any invalid files using custom pattern', () => {
     const onAddFiles = jest.fn();
     const { container } = render(
