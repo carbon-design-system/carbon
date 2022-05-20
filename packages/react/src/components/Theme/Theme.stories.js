@@ -7,8 +7,9 @@
 
 import './Theme-story.scss';
 import React from 'react';
-import { GlobalTheme, Theme, useTheme } from '../../Theme';
-import { Layer } from '../../Layer';
+import { default as Accordion, AccordionItem } from '../Accordion';
+import { GlobalTheme, Theme, useTheme, Zone } from '../Theme';
+import { Layer } from '../Layer';
 import mdx from './Theme.mdx';
 
 export default {
@@ -16,6 +17,7 @@ export default {
   component: Theme,
   subcomponents: {
     GlobalTheme,
+    Zone,
   },
   parameters: {
     controls: {
@@ -86,6 +88,35 @@ export const UseTheme = () => {
 };
 
 UseTheme.storyName = 'useTheme';
+
+export const ZoneStory = () => {
+  return (
+    <>
+      <Zone className="theme-zone-example" theme="g10">
+        <p className="theme-zone-heading">g10 Zone</p>
+        <Accordion>
+          <AccordionItem title="Section one">Section one content</AccordionItem>
+          <AccordionItem title="Section two">Section two content</AccordionItem>
+          <AccordionItem title="Section three">
+            Section three content
+          </AccordionItem>
+        </Accordion>
+      </Zone>
+      <Zone className="theme-zone-example" theme="g90">
+        <p className="theme-zone-heading">g90 Zone</p>
+        <Accordion>
+          <AccordionItem title="Section one">Section one content</AccordionItem>
+          <AccordionItem title="Section two">Section two content</AccordionItem>
+          <AccordionItem title="Section three">
+            Section three content
+          </AccordionItem>
+        </Accordion>
+      </Zone>
+    </>
+  );
+};
+
+ZoneStory.storyName = 'Zone';
 
 export const WithLayer = () => {
   function Layers() {

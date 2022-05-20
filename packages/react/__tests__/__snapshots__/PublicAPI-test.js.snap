@@ -8033,6 +8033,27 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
+  "Zone" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "theme": Object {
+        "args": Array [
+          Array [
+            "white",
+            "g10",
+            "g90",
+            "g100",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {

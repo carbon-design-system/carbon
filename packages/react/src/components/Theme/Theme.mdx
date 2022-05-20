@@ -10,7 +10,9 @@ import { ArgsTable, Story, Canvas } from '@storybook/addon-docs';
 ## Table of Contents
 
 - [Overview](#overview)
-  - [`useTheme`](#usetheme)
+- [Setting the global theme](#setting-the-global-theme)
+- [Setting an inline theme](#setting-an-inline-theme)
+- [Getting the current theme in a component](#getting-the-current-theme-in-a-component)
 - [Component API](#component-api)
   - [Theme as](#theme-as)
 - [Feedback](#feedback)
@@ -23,9 +25,11 @@ import { ArgsTable, Story, Canvas } from '@storybook/addon-docs';
 The `GlobalTheme` and `Theme` components allow you to specify the theme for a
 page, or for a part of a page, respectively. `Theme` is most often used to
 implement inline theming where you can style a portion of your page with a
-particular theme.
+particular theme. A `Zone` component is available to both set the theme for a
+portion of a page along with setting common styles like background and text
+color automatically.
 
-In order for the styles of `Theme` to be correctly applied in your project, you
+In order for the styles of `Theme` and `Zone` to be correctly applied in your project, you
 need to make sure that you have included `@carbon/react/scss/zone` in your Sass
 files by writing:
 
@@ -77,8 +81,31 @@ function ExamplePage() {
 }
 ```
 
+Note: the `Theme` component only sets the value of the CSS Custom Properties
+used by the theme. It will not automatically set the background or text color of
+a part of a page. For this use-case, you can use the `Zone` component.
+
+This component has the same signature as `Theme` and will also set the
+background and text color for the part of a page.
+
+```jsx
+import { Zone } from '@carbon/react';
+
+function ExamplePage() {
+  return (
+    <GlobalTheme theme="white">
+      <h1>Page title</h1>
+      <p>Display in the white theme</p>
+      <Zone theme="g100">
+        <p>Display in the g100 theme</p>
+      </Zone>
+    <GlobalTheme>
+  );
+}
+```
+
 <Canvas>
-  <Story id="components-theme--default" />
+  <Story id="components-theme--zone-story" />
 </Canvas>
 
 ## Getting the current theme in a component

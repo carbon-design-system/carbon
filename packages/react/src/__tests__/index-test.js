@@ -215,6 +215,7 @@ describe('Carbon Components React', () => {
         "Tooltip",
         "UnorderedList",
         "VStack",
+        "Zone",
         "unstable_FeatureFlags",
         "unstable_Menu",
         "unstable_MenuDivider",

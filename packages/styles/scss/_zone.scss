@@ -94,3 +94,8 @@ $-components: (
     }
   }
 }
+
+.#{config.$prefix}--zone {
+  background: theme.$background;
+  color: theme.$text-primary;
+}
