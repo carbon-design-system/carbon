@@ -125,7 +125,7 @@ describe('Search', () => {
           expect(type2).toEqual('button');
         });
 
-        it('button should have title', () => {
+        it('button should have clear title', () => {
           expect(btns.prop('title')).toBe('Clear');
         });
       });
