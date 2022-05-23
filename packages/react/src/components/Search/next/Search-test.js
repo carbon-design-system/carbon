@@ -124,6 +124,10 @@ describe('Search', () => {
           expect(type1).toEqual('button');
           expect(type2).toEqual('button');
         });
+
+        it('button should have title', () => {
+          expect(btns.prop('title')).toBe('Clear');
+        });
       });
 
       describe('icons', () => {
