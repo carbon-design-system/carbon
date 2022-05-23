@@ -97,11 +97,17 @@ $link-focus-text-color: custom-property.get-var(
     text-decoration: underline;
   }
 
-  .#{$prefix}--link--sm {
+  // .#{$prefix}--link--disabled {
+  //   @include type.type-style('body-compact-01');
+  // }
+
+  .#{$prefix}--link--sm,
+  .#{$prefix}--link--sm.#{$prefix}--link--disabled:hover {
     @include type.type-style('helper-text-01');
   }
 
-  .#{$prefix}--link--lg {
+  .#{$prefix}--link--lg,
+  .#{$prefix}--link--lg.#{$prefix}--link--disabled:hover {
     @include type.type-style('body-compact-02');
   }
 
