@@ -47,6 +47,9 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
       return;
     }
 
+    if (autoAligned === true) {
+      return;
+    }
     //  const rect = floating.current.getBoundingClientRect();
     // if (rect.x > 0 && rect.y > 0) {
     //   console.log('yo');
