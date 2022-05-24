@@ -25,17 +25,14 @@ const Checkbox = React.forwardRef(function Checkbox(
   ref
 ) {
   const prefix = usePrefix();
-
-  const labelClasses = classNames(`${prefix}--checkbox-label`, [className]);
-  const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
-  });
-
   const wrapperClasses = classNames(
     `${prefix}--form-item`,
     `${prefix}--checkbox-wrapper`,
     [className]
   );
+  const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
+    [`${prefix}--visually-hidden`]: hideLabel,
+  });
 
   return (
     <div className={wrapperClasses}>
@@ -58,7 +55,10 @@ const Checkbox = React.forwardRef(function Checkbox(
           }
         }}
       />
-      <label htmlFor={id} className={labelClasses} title={title || null}>
+      <label
+        htmlFor={id}
+        className={`${prefix}--checkbox-label`}
+        title={title || null}>
         <Text className={innerLabelClasses}>{labelText}</Text>
       </label>
     </div>
