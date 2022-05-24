@@ -23,13 +23,13 @@ export default class FileUploader extends React.Component {
     accept: PropTypes.arrayOf(PropTypes.string),
 
     /**
-     * Specify the type of the <FileUploaderButton>
+     * Specify the type of the `<FileUploaderButton>`
      */
     buttonKind: PropTypes.oneOf(ButtonKinds),
 
     /**
      * Provide the label text to be read by screen readers when interacting with
-     * the <FileUploaderButton>
+     * the `<FileUploaderButton>`
      */
     buttonLabel: PropTypes.string,
 
@@ -62,7 +62,7 @@ export default class FileUploader extends React.Component {
     labelDescription: PropTypes.string,
 
     /**
-     * Specify the title text of this <FileUploader>
+     * Specify the title text of this `<FileUploader>`
      */
     labelTitle: PropTypes.string,
 
