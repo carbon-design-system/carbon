@@ -59,9 +59,14 @@ function FileUploaderDropContainer({
         return acc;
       }
       const [fileExtension] = name.match(fileExtensionRegExp);
-      if (acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension)) {
+
+      if (
+        acceptedTypes.has(mimeType) ||
+        acceptedTypes.has(fileExtension.toLowerCase())
+      ) {
         return acc.concat([curr]);
       }
+
       curr.invalidFileType = true;
       return acc.concat([curr]);
     }, []);
@@ -185,12 +190,12 @@ FileUploaderDropContainer.propTypes = {
   pattern: PropTypes.string,
 
   /**
-   * Provide an accessibility role for the <FileUploaderButton>
+   * Provide an accessibility role for the `<FileUploaderButton>`
    */
   role: PropTypes.string,
 
   /**
-   * Provide a custom tabIndex value for the <FileUploaderButton>
+   * Provide a custom tabIndex value for the `<FileUploaderButton>`
    */
   tabIndex: PropTypes.number,
 };

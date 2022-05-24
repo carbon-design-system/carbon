@@ -148,12 +148,12 @@ FileUploaderButton.propTypes = {
   multiple: PropTypes.bool,
 
   /**
-   * Provide a name for the underlying <input> node
+   * Provide a name for the underlying `<input>` node
    */
   name: PropTypes.string,
 
   /**
-   * Provide an optional `onChange` hook that is called each time the <input>
+   * Provide an optional `onChange` hook that is called each time the `<input>`
    * value changes
    */
   onChange: PropTypes.func,
@@ -165,7 +165,7 @@ FileUploaderButton.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Provide an accessibility role for the <FileUploaderButton>
+   * Provide an accessibility role for the `<FileUploaderButton>`
    */
   role: PropTypes.string,
 
@@ -178,7 +178,7 @@ FileUploaderButton.propTypes = {
     : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
 
   /**
-   * Provide a custom tabIndex value for the <FileUploaderButton>
+   * Provide a custom tabIndex value for the `<FileUploaderButton>`
    */
   tabIndex: PropTypes.number,
 };
