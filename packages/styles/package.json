@@ -1,7 +1,7 @@
 {
   "name": "@carbon/styles",
   "description": "Styles for the Carbon Design System",
-  "version": "0.18.1",
+  "version": "0.18.2-rc.0",
   "private": true,
   "license": "Apache-2.0",
   "repository": {
