@@ -85,6 +85,7 @@ FormGroup.defaultProps = {
   invalid: false,
   message: false,
   messageText: '',
+  hasMargin: true,
 };
 
 export default FormGroup;
