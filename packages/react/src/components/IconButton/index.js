@@ -40,7 +40,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
         kind={kind}
         ref={ref}
         size={size}
-        className={cx(`${prefix}--btn--icon-only`, { [className]: className })}>
+        className={cx(`${prefix}--btn--icon-only`, className)}>
         {children}
       </Button>
     </Tooltip>

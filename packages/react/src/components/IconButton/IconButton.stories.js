@@ -7,7 +7,8 @@
 
 import { Edit } from '@carbon/icons-react';
 import React from 'react';
-import { IconButton } from '../';
+import { IconButton } from '../IconButton';
+import mdx from './IconButton.mdx';
 
 export default {
   title: 'Components/IconButton',
@@ -15,6 +16,9 @@ export default {
   parameters: {
     controls: {
       hideNoControlsWarning: true,
+    },
+    docs: {
+      page: mdx,
     },
     layout: 'centered',
   },
