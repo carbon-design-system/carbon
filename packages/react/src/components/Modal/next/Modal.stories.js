@@ -127,6 +127,7 @@ export const Default = () => {
       <MultiSelect
         id="test"
         label="Multiselect"
+        titleText="Multiselect"
         items={[
           {
             id: 'downshift-1-item-0',
