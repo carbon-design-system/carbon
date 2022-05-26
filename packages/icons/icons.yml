@@ -2159,13 +2159,36 @@
   sizes:
     - 32
 - name: calendar--add
-  friendly_name: calendar--add
-  aliases: []
+  friendly_name: Calendar add
+  aliases:
+    - date
+    - schedule
+    - day
+    - time
+    - month
+    - year
+    - scheduler
+    - agenda
+    - docket
+    - timetable
+    - add
   sizes:
     - 32
 - name: calendar--add--alt
-  friendly_name: calendar--add--alt
-  aliases: []
+  friendly_name: Calendar add alt
+  aliases:
+    - date
+    - schedule
+    - day
+    - time
+    - month
+    - year
+    - scheduler
+    - agenda
+    - docket
+    - timetable
+    - add
+    - alternative
   sizes:
     - 32
 - name: calendar--heat-map
@@ -5326,8 +5349,15 @@
   sizes:
     - 32
 - name: data-enrichment--add
-  friendly_name: data-enrichment--add
-  aliases: []
+  friendly_name: Data enrichment add
+  aliases:
+    - data
+    - enrichment
+    - lightbulb
+    - expanded
+    - add
+    - plus symbol
+    - plus sign
   sizes:
     - 32
 - name: data-player
@@ -5339,8 +5369,11 @@
   sizes:
     - 32
 - name: data-quality-definition
-  friendly_name: data-quality-definition
-  aliases: []
+  friendly_name: Data quality definition
+  aliases: 
+    - data quality
+    - definition
+    - data
   sizes:
     - 32
 - name: data-refinery
@@ -8789,8 +8822,10 @@
   sizes:
     - 32
 - name: ibm--open-enterprise-languages
-  friendly_name: ibm--open-enterprise-languages
-  aliases: []
+  friendly_name: IBM® Open Enterprise Languages
+  aliases: 
+    - Open Enterprise Languages
+    - z16
   sizes:
     - 32
 - name: ibm-cloud
@@ -8886,8 +8921,14 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--business-automation
-  friendly_name: ibm-cloud-pak--business-automation
-  aliases: []
+  friendly_name: IBM Cloud Pak® for Business Automation
+  aliases: 
+    - enterprise
+    - app
+    - automation
+    - IBM Cloud Pak®
+    - cloud
+    - hybrid    
   sizes:
     - 32
 - name: ibm-cloud-pak--data
@@ -8911,8 +8952,14 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--MANTA-automated-data-lineage
-  friendly_name: ibm-cloud-pak--MANTA-automated-data-lineage
-  aliases: []
+  friendly_name: MANTA Automated Data Lineage for IBM Cloud Pak® for Data 
+  aliases: 
+    - data
+    - IBM Cloud Pak® for Data
+    - data lineage
+    - automation
+    - MANTA
+    - data fabric
   sizes:
     - 32
 - name: ibm-cloud-pak--multicloud-mgmt
@@ -8999,18 +9046,33 @@
   sizes:
     - 32
 - name: ibm-z--cloud-mod-stack
-  friendly_name: ibm-z--cloud-mod-stack
-  aliases: []
+  friendly_name: IBM Z® Cloud Modernization Stack 
+  aliases: 
+    - cloud
+    - modernization
+    - IBM Z®
+    - mainframe
+    - app
   sizes:
     - 32
 - name: ibm-z-cloud--provisioning
-  friendly_name: ibm-z-cloud--provisioning
-  aliases: []
+  friendly_name: 	IBM Z® and Cloud Modernization Stack Provisioning
+  aliases: 
+    - IBM Z®
+    - cloud
+    - provisioning
+    - mainframe
+    - app
   sizes:
     - 32
 - name: ibm-z-os--package-manager
-  friendly_name: ibm-z-os--package-manager
-  aliases: []
+  friendly_name: IBM® z/OS Package Manager 
+  aliases: 
+    - IBM Z®
+    - cloud
+    - mainframe
+    - modernization
+    - app
   sizes:
     - 32
 - name: iCA-2D
@@ -10768,8 +10830,18 @@
   sizes:
     - 32
 - name: logo--kubernetes
-  friendly_name: logo--kubernetes
-  aliases: []
+  friendly_name: Logo Kubernetes
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
+    - Kubernetes
+    - container
   sizes:
     - 32
 - name: logo--linkedin
@@ -11456,13 +11528,17 @@
   sizes:
     - 32
 - name: microservices--1
-  friendly_name: microservices--1
-  aliases: []
+  friendly_name: Microservices 1
+  aliases: 
+    - microservices 1
+    - systems
   sizes:
     - 32
 - name: microservices--2
-  friendly_name: microservices--2
-  aliases: []
+  friendly_name: Microservices 2
+  aliases: 
+    - microservices 2
+    - systems
   sizes:
     - 32
 - name: migrate
@@ -14569,8 +14645,16 @@
   sizes:
     - 32
 - name: rule--data-quality
-  friendly_name: rule--data-quality
-  aliases: []
+  friendly_name: Rule data quality
+  aliases: 
+    - rule
+    - governance
+    - control
+    - policy
+    - quality
+    - security
+    - shield
+    - data
   sizes:
     - 32
 - name: rule--draft
@@ -15183,8 +15267,13 @@
   sizes:
     - 32
 - name: service-id
-  friendly_name: service-id
-  aliases: []
+  friendly_name: Service ID
+  aliases: 
+    - service ID
+    - identification
+    - settings
+    - badge
+    - gear
   sizes:
     - 32
 - name: session-border-control
@@ -19402,8 +19491,13 @@
   sizes:
     - 32
 - name: workflow-automation
-  friendly_name: workflow-automation
-  aliases: []
+  friendly_name: Workflow automation
+  aliases: 
+    - workflow
+    - automation
+    - gear
+    - arrows
+    - cycle
   sizes:
     - 32
 - name: workspace

@@ -27,19 +27,27 @@ describe('@carbon/styles/scss/type', () => {
           reset: meta.mixin-exists('reset', 'type'),
           type-style: meta.mixin-exists('type-style', 'type'),
           font-family: meta.mixin-exists('font-family', 'type'),
+          font-weight: meta.mixin-exists('font-family', 'type'),
           default-type: meta.mixin-exists('default-type', 'type'),
           type-classes: meta.mixin-exists('type-classes', 'type'),
+        ),
+        functions: (
+          font-weight: meta.function-exists('font-family', 'type'),
         ),
       ));
     `);
 
     const { value: api } = get('api');
+    expect(api.functions).toEqual({
+      'font-weight': true,
+    });
     expect(api.mixins).toEqual({
       reset: true,
       'type-style': true,
       'font-family': true,
       'default-type': true,
       'type-classes': true,
+      'font-weight': true,
     });
     expect(api.variables).toMatchInlineSnapshot(`
       Array [
@@ -73,6 +81,8 @@ describe('@carbon/styles/scss/type', () => {
         "display-02",
         "display-03",
         "display-04",
+        "font-families",
+        "font-weights",
         "tokens",
       ]
     `);
