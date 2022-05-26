@@ -19,7 +19,7 @@ const flexbugs = require('postcss-flexbugs-fixes');
 async function build() {
   const filepath = path.resolve(__dirname, '..', 'index.scss');
   const loadPaths = [
-    path.resolve(__dirname),
+    __dirname,
     path.resolve(__dirname, '..'),
     path.resolve(__dirname, '..', '..', '..', 'node_modules'),
   ];
