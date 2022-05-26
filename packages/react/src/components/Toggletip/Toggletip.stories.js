@@ -7,15 +7,15 @@
 
 import { Information } from '@carbon/icons-react';
 import React from 'react';
-import { default as Button } from '../../Button';
-import { default as Link } from '../../Link';
+import { default as Button } from '../Button';
+import { default as Link } from '../Link';
 import {
   ToggletipLabel,
   Toggletip,
   ToggletipButton,
   ToggletipContent,
   ToggletipActions,
-} from '../../Toggletip';
+} from '../Toggletip';
 import mdx from './Toggletip.mdx';
 
 export default {
