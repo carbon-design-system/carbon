@@ -76,7 +76,7 @@ class RadioButton extends React.Component {
     /**
      * Specify the value of the <RadioButton>
      */
-    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   };
 
   static contextType = PrefixContext;

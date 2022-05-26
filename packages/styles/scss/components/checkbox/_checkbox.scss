@@ -187,6 +187,9 @@
   //-----------------------------------------------
   // Skeleton
   //-----------------------------------------------
+  .#{$prefix}--checkbox-skeleton .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
 
   .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
     @include skeleton;
