@@ -108,10 +108,6 @@
     padding: 0 $spacing-08;
   }
 
-  .#{$prefix}--search--md .#{$prefix}--search-magnifier-icon {
-    left: rem(12px);
-  }
-
   // Large styles
   .#{$prefix}--search--lg .#{$prefix}--search-input,
   .#{$prefix}--search--lg.#{$prefix}--search--expandable.#{$prefix}--search--expanded
@@ -125,7 +121,6 @@
     position: absolute;
     z-index: 2;
     top: 50%;
-    left: $spacing-05;
     width: rem(16px);
     height: rem(16px);
     fill: $icon-secondary;
