@@ -7,6 +7,7 @@
 
 'use strict';
 
+const core = require('@actions/core');
 const execa = require('execa');
 const glob = require('fast-glob');
 const fs = require('fs-extra');
@@ -15,14 +16,14 @@ const path = require('path');
 
 const denylist = new Set(['carbon-components', '@carbon/icons-vue']);
 
-const { NPM_TOKEN } = process.env;
-
 async function main() {
-  if (!NPM_TOKEN) {
-    throw new Error('NPM_TOKEN is not defined as an environment variable');
-  }
+  const npmToken = core.getInput('NPM_TOKEN', {
+    required: true,
+  });
+  const dryRun =
+    core.getInput('DRY_RUN') !== '' ? Boolean(core.getInput('DRY_RUN')) : false;
 
-  const ROOT_DIRECTORY = path.resolve(__dirname, '..', '..');
+  const ROOT_DIRECTORY = process.cwd();
   const workspaces = [];
   const queue = [ROOT_DIRECTORY];
 
@@ -63,18 +64,22 @@ async function main() {
   const NPMRC_FILEPATH = path.join(ROOT_DIRECTORY, '.npmrc');
   await fs.writeFile(
     NPMRC_FILEPATH,
-    `//registry.npmjs.org/:_authToken=${NPM_TOKEN}`
+    `//registry.npmjs.org/:_authToken=${npmToken}`
   );
 
   try {
     for (const workspace of workspaces) {
+      const { name, version } = workspace.packageJson;
+
+      core.info(`Checking workspace: ${workspace.name}`);
+
       if (workspace.packageJson.private) {
+        core.debug(`Skipping workspace ${workspace.name} due to private field`);
         continue;
       }
 
-      const { name, version } = workspace.packageJson;
-
       if (denylist.has(name)) {
+        core.debug(`Skipping workspace ${workspace.name} due to denylist`);
         continue;
       }
 
@@ -83,14 +88,23 @@ async function main() {
       }).json();
 
       if (version === npm['dist-tags'].latest) {
+        core.debug(
+          `Skipping workspace ${workspace.name} due to dist-tags are in sync`
+        );
         continue;
       }
 
-      console.log(`npm dist-tag add ${name}@${version} latest`);
-      await execa('npm', ['dist-tag', 'add', `${name}@${version}`, 'latest'], {
-        stdio: 'inherit',
-        cwd: ROOT_DIRECTORY,
-      });
+      core.info(`npm dist-tag add ${name}@${version} latest`);
+      if (!dryRun) {
+        await execa(
+          'npm',
+          ['dist-tag', 'add', `${name}@${version}`, 'latest'],
+          {
+            stdio: 'inherit',
+            cwd: ROOT_DIRECTORY,
+          }
+        );
+      }
     }
   } finally {
     await fs.remove(NPMRC_FILEPATH);
