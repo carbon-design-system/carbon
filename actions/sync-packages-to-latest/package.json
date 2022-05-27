@@ -1,0 +1,10 @@
+{
+  "name": "sync-packages-to-latest",
+  "private": true,
+  "dependencies": {
+    "execa": "^5.1.1",
+    "fast-glob": "^3.2.11",
+    "fs-extra": "^10.1.0",
+    "got": "^11.8.0"
+  }
+}
