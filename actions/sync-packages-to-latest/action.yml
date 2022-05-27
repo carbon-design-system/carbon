@@ -1,0 +1,9 @@
+name: Sync Packages to Latest
+description: A custom action for promoting packages on npm to the latest version
+inputs:
+  NPM_TOKEN:
+    description: A token to execute npm tasks
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
