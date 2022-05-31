@@ -50,6 +50,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
 
   useIsomorphicEffect(() => {
     if (!autoAlign) {
+      setAutoAligned(false);
       return;
     }
 
@@ -158,7 +159,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
       setAutoAligned(true);
       setAutoAlignment(alignment);
     }
-  });
+  }, [autoAligned, align, autoAlign, prefix]);
 
   return (
     <PopoverContext.Provider value={{ floating }}>
