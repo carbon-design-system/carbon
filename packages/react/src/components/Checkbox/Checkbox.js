@@ -108,8 +108,9 @@ Checkbox.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * Receives three arguments: true/false, the checkbox's id, and the dom event.
-   * `(value, id, event) => console.log({value, id, event})`
+   * Provide an optional handler that is called when the internal state of
+   * Checkbox changes. This handler is called with event and state info.
+   * `(event, { checked, id }) => void`
    */
   onChange: PropTypes.func,
 
