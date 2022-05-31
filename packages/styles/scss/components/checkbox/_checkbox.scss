@@ -123,8 +123,8 @@
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
+    border: none;
     border-width: 1px;
-    border-color: $icon-primary;
     background-color: $icon-primary;
   }
 
@@ -187,6 +187,9 @@
   //-----------------------------------------------
   // Skeleton
   //-----------------------------------------------
+  .#{$prefix}--checkbox-skeleton .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
 
   .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
     @include skeleton;

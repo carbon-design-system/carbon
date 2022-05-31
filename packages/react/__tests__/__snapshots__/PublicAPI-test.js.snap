@@ -3154,6 +3154,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "onInputValueChange": Object {
+        "type": "func",
+      },
       "onMenuChange": Object {
         "type": "func",
       },
@@ -3256,7 +3259,6 @@ Map {
   },
   "FormGroup" => Object {
     "defaultProps": Object {
-      "hasMargin": true,
       "invalid": false,
       "message": false,
       "messageText": "",
@@ -3569,6 +3571,9 @@ Map {
       },
       "children": Object {
         "type": "node",
+      },
+      "className": Object {
+        "type": "string",
       },
       "defaultOpen": Object {
         "type": "bool",
@@ -4334,6 +4339,9 @@ Map {
           "type": "string",
         },
         "onChange": Object {
+          "type": "func",
+        },
+        "onInputValueChange": Object {
           "type": "func",
         },
         "onMenuChange": Object {
@@ -5148,6 +5156,16 @@ Map {
           Array [
             "small",
             "big",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "status": Object {
+        "args": Array [
+          Array [
+            "active",
+            "finished",
+            "error",
           ],
         ],
         "type": "oneOf",
