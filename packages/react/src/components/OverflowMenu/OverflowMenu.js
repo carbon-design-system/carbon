@@ -569,9 +569,7 @@ class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           ref={mergeRefs(this._triggerRef, ref)}>
-          <IconElement {...iconProps}>
-            {iconDescription && <title>{iconDescription}</title>}
-          </IconElement>
+          <IconElement {...iconProps} />
           {open && wrappedMenuBody}
         </button>
       </ClickListener>
