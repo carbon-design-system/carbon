@@ -20,7 +20,7 @@ const PopoverContext = React.createContext({
 
 const Popover = React.forwardRef(function Popover(props, forwardRef) {
   const {
-    align = 'bottom-left',
+    align = 'bottom',
     as: BaseComponent = 'span',
     autoAlign,
     caret = true,
