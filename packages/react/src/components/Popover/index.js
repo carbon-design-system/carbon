@@ -22,7 +22,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
   const {
     align = 'bottom',
     as: BaseComponent = 'span',
-    autoAlign,
+    autoAlign = false,
     caret = true,
     className: customClassName,
     children,
