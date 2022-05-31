@@ -42,10 +42,17 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    disabled: {
+      control: { type: 'boolean' },
+    },
+  },
 };
 
-export const _Default = () => (
-  <Link href="http://www.carbondesignsystem.com">Link</Link>
+export const _Default = (args) => (
+  <Link href="http://www.carbondesignsystem.com" {...args}>
+    Link
+  </Link>
 );
 
 _Default.story = {
