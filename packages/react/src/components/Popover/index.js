@@ -96,7 +96,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
       'top-right',
     ];
 
-    // Creates the priotritzed list of options depending on ideal alignment coming from `align`
+    // Creates the prioritized list of options depending on ideal alignment coming from `align`
     const options = [align];
     let option =
       alignments[(alignments.indexOf(align) + 1) % alignments.length];
