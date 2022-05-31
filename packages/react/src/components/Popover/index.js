@@ -7,16 +7,22 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 
-const PopoverContext = React.createContext();
+const PopoverContext = React.createContext({
+  floating: {
+    current: null,
+  },
+});
 
 const Popover = React.forwardRef(function Popover(props, forwardRef) {
   const {
-    align = 'top',
+    align = 'bottom-left',
     as: BaseComponent = 'span',
+    autoAlign,
     caret = true,
     className: customClassName,
     children,
@@ -42,7 +48,11 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
     [customClassName]: !!customClassName,
   });
 
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
+    if (!autoAlign) {
+      return;
+    }
+
     if (!floating.current) {
       return;
     }
@@ -50,28 +60,40 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
     if (autoAligned === true) {
       return;
     }
-    //  const rect = floating.current.getBoundingClientRect();
-    // if (rect.x > 0 && rect.y > 0) {
-    //   console.log('yo');
-    //   console.log(autoAligned);
-    //   return;
-    // }
 
-    // floating.current.style.visibility = 'hidden';
+    const rect = floating.current.getBoundingClientRect();
+
+    const conditions = {
+      left: rect.x < -16,
+      top: rect.y < -16,
+      right: rect.x + (rect.width - 16) > document.documentElement.clientWidth,
+      bottom:
+        rect.y + (rect.height - 16) > document.documentElement.clientHeight,
+    };
+
+    if (
+      !conditions.left &&
+      !conditions.top &&
+      !conditions.right &&
+      !conditions.bottom
+    ) {
+      setAutoAligned(false);
+      return;
+    }
 
     const alignments = [
       'top',
       'top-left',
-      'top-right',
-      'bottom',
+      'right-bottom',
+      'right',
+      'right-top',
       'bottom-left',
+      'bottom',
       'bottom-right',
+      'left-top',
       'left',
       'left-bottom',
-      'left-top',
-      'right',
-      'right-bottom',
-      'right-top',
+      'top-right',
     ];
 
     // Creates the priotritzed list of options depending on ideal alignment coming from `align`
@@ -91,18 +113,32 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
       popover.current.classList.add(`${prefix}--popover--${alignment}`);
 
       const rect = floating.current.getBoundingClientRect();
-      // console.log(rect.x);
-      if (rect.x < 0) {
-        // console.log(popover.current.classList);
-        // console.log(alignment);
-        console.log('x', rect.x);
-        console.log('y', rect.y);
+
+      // Check if popover is not visible to the left of the screen
+      if (rect.x < -16) {
+        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
+        return false;
+      }
+
+      // Check if popover is not visible at the top of the screen
+      if (rect.y < -16) {
+        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
+        return false;
+      }
+
+      // Check if popover is not visible to right of screen
+      if (rect.x + (rect.width - 16) > document.documentElement.clientWidth) {
+        popover.current.classList.remove(`${prefix}--popover--${alignment}`);
+        return false;
+      }
+
+      // Check if popover is not visible to bottom of screen
+      if (rect.y + (rect.height - 16) > document.documentElement.clientHeight) {
         popover.current.classList.remove(`${prefix}--popover--${alignment}`);
         return false;
       }
 
       popover.current.classList.remove(`${prefix}--popover--${alignment}`);
-      console.log(alignment);
       return true;
     }
 
@@ -110,40 +146,18 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
 
     for (let i = 0; i < options.length; i++) {
       const option = options[i];
-      //  console.log(i);
+
       if (isVisible(option)) {
         alignment = option;
         break;
       }
+      alignment = align;
     }
-
-    // console.log(alignment);
-    // console.log(autoAligned);
 
     if (alignment) {
       setAutoAligned(true);
       setAutoAlignment(alignment);
     }
-
-    // const rect = floating.current.getBoundingClientRect();
-    // console.log('1', autoAlignment, rect.x, rect.y);
-
-    // // if (rect.x < 0) {
-    // //   setAutoAligned(() => true);
-    // //   setAutoAlignment(() => 'top-left');
-    // //   console.log('2', autoAlignment, rect.x, rect.y);
-    // // }
-
-    // if (rect.x < 0 || rect.y < 0) {
-    //   setAutoAligned(true);
-    //   setAutoAlignment(alignments[currentAlignment + 1]);
-    //   console.log('2', autoAlignment, rect.x, rect.y);
-    //   currentAlignment += 1;
-    // }
-
-    // // console.log(autoAlignment);
-
-    // console.log('3', autoAlignment, rect.x, rect.y);
   });
 
   return (
@@ -188,6 +202,11 @@ Popover.propTypes = {
    * component.
    */
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * Will auto-align the popover on first render if it is not visible.
+   */
+  autoAlign: PropTypes.bool,
 
   /**
    * Specify whether a caret should be rendered

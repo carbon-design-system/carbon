@@ -128,79 +128,60 @@ Playground.story = {
   ],
 };
 
-const AutomateStory = (props) => {
-  const { align, caret, dropShadow, highContrast, open } = props;
+export const Automate = () => {
   return (
-    <Popover
-      align={align}
-      caret={caret}
-      dropShadow={dropShadow}
-      highContrast={highContrast}
-      open={open}>
-      <div className="playground-trigger">
-        <Checkbox />
+    <div>
+      <Popover open autoAlign>
+        <div className="playground-trigger">
+          <Checkbox />
+        </div>
+        <PopoverContent className="p-3">
+          <p className="popover-title">Available storage</p>
+          <p className="popover-details">
+            This server has 150 GB of block storage remaining.
+          </p>
+        </PopoverContent>
+      </Popover>
+      <div style={{ position: 'absolute', top: 0, right: 0, margin: '3rem' }}>
+        <Popover open autoAlign>
+          <div className="playground-trigger">
+            <Checkbox />
+          </div>
+          <PopoverContent className="p-3">
+            <p className="popover-title">Available storage</p>
+            <p className="popover-details">
+              This server has 350 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
       </div>
-      <PopoverContent className="p-3">
-        <p className="popover-title">Available storage</p>
-        <p className="popover-details">
-          This server has 150 GB of block storage remaining.
-        </p>
-      </PopoverContent>
-    </Popover>
+      <div
+        style={{ position: 'absolute', bottom: 0, right: 0, margin: '3rem' }}>
+        <Popover open autoAlign>
+          <div className="playground-trigger">
+            <Checkbox />
+          </div>
+          <PopoverContent className="p-3">
+            <p className="popover-title">Available storage</p>
+            <p className="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
+      </div>
+      <div style={{ position: 'absolute', bottom: 0, left: 0, margin: '3rem' }}>
+        <Popover open autoAlign>
+          <div className="playground-trigger">
+            <Checkbox />
+          </div>
+          <PopoverContent className="p-3">
+            <p className="popover-title">Available storage</p>
+            <p className="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </div>
   );
-};
-
-export const Automate = AutomateStory.bind({});
-
-Automate.argTypes = {
-  align: {
-    options: [
-      'top',
-      'top-left',
-      'top-right',
-
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-
-      'left',
-      'left-bottom',
-      'left-top',
-
-      'right',
-      'right-bottom',
-      'right-top',
-    ],
-    control: {
-      type: 'select',
-    },
-  },
-  caret: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: true,
-  },
-  dropShadow: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: true,
-  },
-  highContrast: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  open: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: true,
-  },
-};
-
-Automate.story = {
-  decorators: [(story) => <div>{story()}</div>],
 };
