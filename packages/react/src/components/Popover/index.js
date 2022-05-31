@@ -64,6 +64,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
 
     const rect = floating.current.getBoundingClientRect();
 
+    // The conditions, per side, of when the popover is not visible, excluding the popover's internal padding(16)
     const conditions = {
       left: rect.x < -16,
       top: rect.y < -16,
