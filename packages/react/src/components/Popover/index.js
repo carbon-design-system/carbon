@@ -251,9 +251,7 @@ const PopoverContent = React.forwardRef(function PopoverContent(
   const ref = useMergedRefs([floating, forwardRef]);
   return (
     <span {...rest} className={`${prefix}--popover`}>
-      <span
-        className={cx(`${prefix}--popover-content`, className)}
-        ref={mergedRef}>
+      <span className={cx(`${prefix}--popover-content`, className)} ref={ref}>
         {children}
       </span>
       <span className={`${prefix}--popover-caret`} />
