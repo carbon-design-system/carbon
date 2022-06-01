@@ -244,12 +244,11 @@ Popover.propTypes = {
 
 const PopoverContent = React.forwardRef(function PopoverContent(
   { className, children, ...rest },
-  ref
+  forwardRef
 ) {
   const prefix = usePrefix();
   const { floating } = React.useContext(PopoverContext);
-
-  const mergedRef = useMergedRefs([floating, ref]);
+  const ref = useMergedRefs([floating, forwardRef]);
   return (
     <span {...rest} className={`${prefix}--popover`}>
       <span
