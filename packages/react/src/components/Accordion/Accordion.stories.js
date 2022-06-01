@@ -8,17 +8,13 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-// import { action } from '@storybook/addon-actions';
-// import {
-//   withKnobs,
-//   boolean,
-//   number,
-//   select,
-//   text,
-// } from '@storybook/addon-knobs';
-import { default as Accordion, AccordionItem, AccordionSkeleton } from '.';
+import {
+  default as Accordion,
+  AccordionItem,
+  AccordionSkeleton,
+} from '../Accordion';
 import Button from '../Button';
-import mdx from '../Accordion.mdx';
+import mdx from './Accordion.mdx';
 
 export default {
   title: 'Components/Accordion',
@@ -26,28 +22,6 @@ export default {
   subcomponents: {
     AccordionItem,
     AccordionSkeleton,
-  },
-  argTypes: {
-    align: {
-      options: ['start', 'end'],
-      control: { type: 'select' },
-    },
-    children: {
-      control: false,
-    },
-    className: {
-      control: false,
-    },
-    disabled: {
-      control: {
-        type: 'boolean',
-      },
-      defaultValue: false,
-    },
-    size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'select' },
-    },
   },
   parameters: {
     docs: {
@@ -138,8 +112,25 @@ export const Playground = (args) => (
   </Accordion>
 );
 
-export const SkeletonPlayground = () => (
-  <div style={{ width: '500px' }}>
-    <AccordionSkeleton />
-  </div>
-);
+Playground.argTypes = {
+  align: {
+    options: ['start', 'end'],
+    control: { type: 'select' },
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+};
