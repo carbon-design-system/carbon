@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
@@ -34,6 +34,13 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
   const prefix = usePrefix();
   const floating = useRef();
   const popover = useRef();
+
+  const value = useMemo(() => {
+    return {
+      floating,
+    };
+  }, []);
+
   const ref = useMergedRefs([forwardRef, popover]);
   const [autoAligned, setAutoAligned] = useState(false);
   const [autoAlignment, setAutoAlignment] = useState(align);
@@ -153,7 +160,6 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
         alignment = option;
         break;
       }
-      alignment = align;
     }
 
     if (alignment) {
@@ -163,7 +169,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
   }, [autoAligned, align, autoAlign, prefix]);
 
   return (
-    <PopoverContext.Provider value={{ floating }}>
+    <PopoverContext.Provider value={value}>
       <BaseComponent {...rest} className={className} ref={ref}>
         {children}
       </BaseComponent>

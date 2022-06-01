@@ -128,7 +128,7 @@ Playground.story = {
   ],
 };
 
-export const Automate = () => {
+export const AutoAlign = () => {
   return (
     <div>
       <Popover open autoAlign>
