@@ -642,19 +642,27 @@ const TabPanel = React.forwardRef(function TabPanel(
   const ref = useMergedRefs([forwardRef, panel]);
 
   const [tabIndex, setTabIndex] = useState('0');
+  const [interactiveContent, setInteractiveContent] = useState(false);
   const { selectedIndex, baseId } = React.useContext(TabsContext);
   const index = React.useContext(TabPanelContext);
   const id = `${baseId}-tabpanel-${index}`;
   const tabId = `${baseId}-tab-${index}`;
-  const className = cx(`${prefix}--tab-content`, customClassName);
+  const className = cx(`${prefix}--tab-content`, customClassName, {
+    [`${prefix}--tab-content--interactive`]: interactiveContent,
+  });
 
   // tabindex should only be 0 if no interactive content in children
   useEffect(() => {
-    const interactiveContent = getInteractiveContent(panel.current);
-    if (interactiveContent) {
-      setTabIndex('-1');
+    if (!panel.current) {
+      return;
     }
-  }, []);
+
+    const content = getInteractiveContent(panel.current);
+    if (content) {
+      setTabIndex('-1');
+      setInteractiveContent(true);
+    }
+  }, [interactiveContent]);
 
   return (
     <div
