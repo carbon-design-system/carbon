@@ -13,7 +13,9 @@
   "bugs": "https://github.com/carbon-design-system/carbon/issues",
   "files": [
     "es",
-    "lib"
+    "lib",
+    "index.d.ts",
+    "types"
   ],
   "keywords": [
     "ibm",
@@ -32,6 +34,7 @@
     "clean": "rimraf es lib",
     "postinstall": "carbon-telemetry collect --install"
   },
+  "types": "./index.d.ts",
   "peerDependencies": {
     "react": ">=16"
   },
