@@ -195,6 +195,18 @@ async function builder(metadata, { output }) {
       exports: 'auto',
     });
   }
+
+  let declarationFile = `${templates.banner}
+
+import { Icon } from './types/Icon.d.ts';
+
+`;
+
+  for (const m of modules) {
+    declarationFile += `export const ${m.name} = Icon;\n`;
+  }
+
+  await fs.writeFile(path.join(output, 'index.d.ts'), declarationFile);
 }
 
 /**
