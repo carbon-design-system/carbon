@@ -25,6 +25,7 @@ const ButtonSkeleton = ({
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: small || size === 'sm',
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
+    [`${prefix}--btn--lg`]: size === 'lg',
     [`${prefix}--btn--xl`]: size === 'xl',
     [`${prefix}--btn--2xl`]: size === '2xl',
   });
