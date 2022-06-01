@@ -168,6 +168,27 @@ jobs:
         if: ${{ needs.vrt-runner.result != 'success' }}
         run: exit 1
 
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Use Node.js 16.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+      - uses: actions/cache@v3
+        id: cache
+        with:
+          path: |
+            node_modules
+            */**/node_modules
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Install dependencies
+        run: yarn install --immutable --immutable-cache
+      - name: Build project
+        run: yarn build --ignore '@carbon/sketch'
+      - name: Typecheck TypeScript files
+        run: yarn typecheck
 #   avt:
 #     runs-on: ubuntu-latest
 #     steps:

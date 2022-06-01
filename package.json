@@ -26,6 +26,7 @@
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
+    "typecheck": "tsc --skipLibCheck --noEmit",
     "postinstall": "husky install"
   },
   "resolutions": {
@@ -73,7 +74,8 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.0",
-    "stylelint": "^14.3.0"
+    "stylelint": "^14.3.0",
+    "typescript": "^4.7.2"
   },
   "commitlint": {
     "extends": [
