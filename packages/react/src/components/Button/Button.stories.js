@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/icons-react';
-import { default as Button, ButtonSkeleton } from './Button.js';
+import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
 import mdx from './Button.mdx';
 
