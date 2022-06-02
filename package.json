@@ -69,7 +69,7 @@
     "lerna": "^4.0.0",
     "lint-staged": "^12.0.0",
     "node-gyp": "^7.1.2",
-    "prettier": "^2.2.1",
+    "prettier": "^2.6.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.0",
