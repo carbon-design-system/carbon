@@ -26,7 +26,7 @@
     "sync": "carbon-cli sync",
     "test": "cross-env BABEL_ENV=test jest",
     "test:e2e": "cross-env BABEL_ENV=test jest -c jest.e2e.config.js",
-    "typecheck": "tsc --skipLibCheck --noEmit",
+    "typecheck": "tsc -b",
     "postinstall": "husky install"
   },
   "resolutions": {
