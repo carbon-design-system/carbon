@@ -126,7 +126,7 @@ describe('Search', () => {
         });
 
         it('should have clear title', () => {
-          expect(btns.prop('title')).toBe('Clear');
+          expect(btns.prop('title')).toBe('Clear search input');
         });
       });
 
