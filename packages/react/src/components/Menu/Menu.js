@@ -191,17 +191,15 @@ const Menu = function Menu({
     const elementDimensions = [elementRect.width, elementRect.height];
     const targetBoundaries = getTargetBoundaries();
     const containerBoundaries = getContainerBoundaries();
-    const {
-      position: correctedPosition,
-      direction: correctedDirection,
-    } = getPosition(
-      elementDimensions,
-      targetBoundaries,
-      containerBoundaries,
-      preferredDirection,
-      isRootMenu,
-      rootRef.current
-    );
+    const { position: correctedPosition, direction: correctedDirection } =
+      getPosition(
+        elementDimensions,
+        targetBoundaries,
+        containerBoundaries,
+        preferredDirection,
+        isRootMenu,
+        rootRef.current
+      );
 
     setDirection(correctedDirection);
 

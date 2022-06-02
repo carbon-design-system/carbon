@@ -6,6 +6,8 @@
 //
 
 @use '../config';
+
+// prettier-ignore
 @forward '@carbon/type' show
   // Mixins
   reset,
@@ -47,7 +49,7 @@
   $display-02,
   $display-03,
   $display-04,
-  $font-families, 
+  $font-families,
   $font-weights,
   $tokens;
 
