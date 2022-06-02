@@ -10,12 +10,19 @@ import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
+// eslint-disable-next-line no-unused-vars
 function useIsTruncated(ref) {
   const [isTruncated, setIsTruncated] = useState(false);
 
   useEffect(() => {
     const { offsetWidth, scrollWidth } = ref.current;
+    const rect = ref.current.getBoundingClientRect;
+    console.log(rect);
     setIsTruncated(offsetWidth < scrollWidth);
+    console.log(offsetWidth < scrollWidth);
+    console.log('clientWidth', ref.current.clientWidth);
+    console.log('scrollWidth', ref.current.scrollWidth);
+    console.log('offsetWidth', ref.current.offsetWidth);
   }, [ref, setIsTruncated]);
 
   return isTruncated;
@@ -32,17 +39,13 @@ const ListBoxMenuItem = React.forwardRef(function ListBoxMenuItem(
 ) {
   const prefix = usePrefix();
   const ref = useRef(null);
-  const isTruncated = useIsTruncated(forwardedRef?.menuItemOptionRef || ref);
   const className = cx(`${prefix}--list-box__menu-item`, {
     [`${prefix}--list-box__menu-item--active`]: isActive,
     [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
   });
 
   return (
-    <div
-      {...rest}
-      className={className}
-      title={isTruncated ? title : undefined}>
+    <div {...rest} className={className} title={title}>
       <div
         className={`${prefix}--list-box__menu-item__option`}
         ref={forwardedRef?.menuItemOptionRef || ref}>
