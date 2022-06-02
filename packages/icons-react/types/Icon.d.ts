@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as React from 'react';
+
 type IconSize = 16 | 20 | 24 | 32 | '16' | '20' | '24' | '32' | number | string;
 
 // Inspired by the original types defined in DefinitelyTyped:

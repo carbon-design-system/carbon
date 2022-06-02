@@ -1,4 +1,9 @@
 {
-  "extends": "./tsconfig.base.json",
-  "include": ["packages/icons-react"]
+  "files": [],
+  "include": [],
+  "references": [
+    {
+      "path": "./packages/icons-react"
+    }
+  ]
 }
