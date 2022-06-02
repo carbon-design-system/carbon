@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { default as Tag } from '../';
+import { default as Tag } from '../Tag';
 
 export default {
   title: 'Components/Tag',
