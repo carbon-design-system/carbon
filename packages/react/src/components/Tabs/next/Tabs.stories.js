@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
-import Button from '../../Button';
+import Link from '../../Link';
 import mdx from './Tabs.mdx';
 
 import TabsSkeleton from './Tabs.Skeleton';
@@ -29,21 +29,53 @@ export default {
   },
 };
 
+const tabPanelEnums = {
+  tab1: {
+    labelText: 'Tab Label 1',
+    panelText: 'Tab Panel 1',
+  },
+  tab2: {
+    labelText: 'Tab Label 2',
+    panelText: 'Tab Panel 2 with',
+    linkText: 'interactive content',
+  },
+  tab3: {
+    labelText: 'Tab Label 3',
+    panelText: 'Tab Panel 3',
+  },
+  tab4: {
+    labelText: 'Tab Label 4 with a very long long title',
+    panelText: 'Tab Panel 4',
+  },
+  tab5: {
+    labelText: 'Tab Label 5',
+    panelText: 'Tab Panel 5',
+  },
+};
 export const Line = (args) => (
   <Tabs>
     <TabList aria-label="List of tabs" {...args}>
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab>Tab Label 4 with a very long long label</Tab>
+      <Tab>{tabPanelEnums.tab1.labelText}</Tab>
+      <Tab>{tabPanelEnums.tab2.labelText}</Tab>
+      <Tab disabled>{tabPanelEnums.tab3.labelText}</Tab>
+      <Tab>{tabPanelEnums.tab4.labelText}</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>
-        Tab Panel 1 <Button>Example button</Button>
+        <p>{tabPanelEnums.tab1.panelText}</p>
       </TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>
+        <p>
+          {tabPanelEnums.tab2.panelText}{' '}
+          <Link size="lg">{tabPanelEnums.tab2.linkText}</Link>
+        </p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab3.panelText}</p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab4.panelText}</p>
+      </TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -51,22 +83,33 @@ export const Line = (args) => (
 export const Manual = (args) => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs" {...args}>
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab title="Tab Label 4 with a very long long label">
-        Tab Label 4 with a very long long label
+      <Tab>{tabPanelEnums.tab1.linkText}</Tab>
+      <Tab>{tabPanelEnums.tab2.labelText}</Tab>
+      <Tab disabled>{tabPanelEnums.tab3.labelText}</Tab>
+      <Tab title={tabPanelEnums.tab4.labelText}>
+        {tabPanelEnums.tab4.labelText}
       </Tab>
-      <Tab>Tab Label 5</Tab>
+      <Tab>{tabPanelEnums.tab5.labelText}</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>
-        Tab Panel 1 <Button>Example button</Button>
+        <p>{tabPanelEnums.tab1.panelText}</p>
       </TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
+      <TabPanel>
+        <p>
+          {tabPanelEnums.tab2.panelText}{' '}
+          <Link size="lg">{tabPanelEnums.tab2.linkText}</Link>
+        </p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab3.panelText}</p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab4.panelText}</p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab5.panelText}</p>
+      </TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -85,9 +128,18 @@ export const Icon20Only = (args) => (
       </IconTab>
     </TabList>
     <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab1.panelText}</p>
+      </TabPanel>
+      <TabPanel>
+        <p>
+          {tabPanelEnums.tab2.panelText}{' '}
+          <Link size="lg">{tabPanelEnums.tab2.linkText}</Link>
+        </p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab3.panelText}</p>
+      </TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -106,9 +158,18 @@ export const IconOnly = (args) => (
       </IconTab>
     </TabList>
     <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab1.panelText}</p>
+      </TabPanel>
+      <TabPanel>
+        <p>
+          {tabPanelEnums.tab2.panelText}{' '}
+          <Link size="lg">{tabPanelEnums.tab2.linkText}</Link>
+        </p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab3.panelText}</p>
+      </TabPanel>
     </TabPanels>
   </Tabs>
 );
@@ -116,22 +177,33 @@ export const IconOnly = (args) => (
 export const Contained = (args) => (
   <Tabs>
     <TabList aria-label="List of tabs" contained {...args}>
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab title="Tab Label 4 with a very long long title">
-        Tab Label 4 with a very long long title
+      <Tab>{tabPanelEnums.tab1.linkText}</Tab>
+      <Tab>{tabPanelEnums.tab2.labelText}</Tab>
+      <Tab disabled>{tabPanelEnums.tab3.labelText}</Tab>
+      <Tab title={tabPanelEnums.tab4.labelText}>
+        {tabPanelEnums.tab4.labelText}
       </Tab>
-      <Tab>Tab Label 5</Tab>
+      <Tab>{tabPanelEnums.tab5.labelText}</Tab>
     </TabList>
     <TabPanels>
-      <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        Tab Panel 2 <Button>Example button</Button>
+        <p>{tabPanelEnums.tab1.panelText}</p>
       </TabPanel>
-      <TabPanel>Tab Panel 3</TabPanel>
-      <TabPanel>Tab Panel 4</TabPanel>
-      <TabPanel>Tab Panel 5</TabPanel>
+      <TabPanel>
+        <p>
+          {tabPanelEnums.tab2.panelText}{' '}
+          <Link size="lg">{tabPanelEnums.tab2.linkText}</Link>
+        </p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab3.panelText}</p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab4.panelText}</p>
+      </TabPanel>
+      <TabPanel>
+        <p>{tabPanelEnums.tab5.panelText}</p>
+      </TabPanel>
     </TabPanels>
   </Tabs>
 );
