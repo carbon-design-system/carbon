@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, within, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   findListBoxNode,
@@ -108,6 +108,23 @@ describe('ComboBox', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
     });
+  });
+
+  it('should clear the selectedItem when clicking on the clear option', () => {
+    render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
+    expect(screen.getByRole('combobox').value).toEqual(
+      mockProps.items[0].label
+    );
+
+    fireEvent.click(screen.getByTitle('Clear selected item'));
+    expect(screen.getByRole('combobox').value).toEqual('');
+  });
+
+  it('should show listbox on selected item clear', () => {
+    render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
+
+    fireEvent.click(screen.getByTitle('Clear selected item'));
+    expect(screen.getAllByRole('option').length).toBe(mockProps.items.length);
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {

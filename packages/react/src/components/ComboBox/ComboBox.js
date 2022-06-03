@@ -341,7 +341,10 @@ const ComboBox = React.forwardRef((props, ref) => {
                     clearSelection={clearSelection}
                     translateWithId={translateWithId}
                     disabled={disabled}
-                    onClearSelection={handleSelectionClear}
+                    onClearSelection={() => {
+                      toggleMenu();
+                      handleSelectionClear();
+                    }}
                   />
                 )}
                 <ListBoxTrigger
