@@ -37,14 +37,14 @@
     "react-test-renderer": "~17.0.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.16.7",
-    "@babel/plugin-proposal-class-properties": "^7.16.7",
-    "@babel/plugin-proposal-export-default-from": "^7.16.7",
-    "@babel/plugin-proposal-export-namespace-from": "^7.16.7",
-    "@babel/plugin-transform-runtime": "^7.16.7",
-    "@babel/preset-env": "^7.16.7",
-    "@babel/preset-react": "^7.16.7",
-    "@babel/runtime": "^7.16.7",
+    "@babel/core": "^7.18.2",
+    "@babel/plugin-proposal-class-properties": "^7.17.12",
+    "@babel/plugin-proposal-export-default-from": "^7.17.12",
+    "@babel/plugin-proposal-export-namespace-from": "^7.17.12",
+    "@babel/plugin-transform-runtime": "^7.18.2",
+    "@babel/preset-env": "^7.18.2",
+    "@babel/preset-react": "^7.17.12",
+    "@babel/runtime": "^7.18.3",
     "@carbon/cli": "workspace:packages/cli",
     "@commitlint/cli": "^16.0.0",
     "@commitlint/config-conventional": "^16.0.0",
@@ -69,7 +69,7 @@
     "lerna": "^4.0.0",
     "lint-staged": "^12.0.0",
     "node-gyp": "^7.1.2",
-    "prettier": "^2.2.1",
+    "prettier": "^2.6.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "rimraf": "^3.0.0",
@@ -137,5 +137,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@3.2.0"
+  "packageManager": "yarn@3.2.1"
 }

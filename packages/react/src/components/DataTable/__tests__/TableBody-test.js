@@ -5,17 +5,29 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import { Table, TableBody } from '../';
 
-describe('DataTable.TableBody', () => {
-  it('should render', () => {
-    const wrapper = mount(
-      <Table>
+describe('TableBody', () => {
+  it('should support a custom className on the outermost element', () => {
+    render(
+      <Table data-testid="table">
         <TableBody className="custom-class" />
       </Table>
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(screen.getByTestId('table').firstChild).toHaveClass('custom-class');
+  });
+
+  it('should spread props onto the outermost element', () => {
+    render(
+      <Table data-testid="table">
+        <TableBody data-testid="test" />
+      </Table>
+    );
+    expect(screen.getByTestId('table').firstChild).toHaveAttribute(
+      'data-testid',
+      'test'
+    );
   });
 });

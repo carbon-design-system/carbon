@@ -146,15 +146,8 @@ StructuredListBody.defaultProps = {
 };
 
 export function StructuredListRow(props) {
-  const {
-    onKeyDown,
-    tabIndex,
-    children,
-    className,
-    head,
-    label,
-    ...other
-  } = props;
+  const { onKeyDown, tabIndex, children, className, head, label, ...other } =
+    props;
   const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list-row`, className, {
     [`${prefix}--structured-list-row--header-row`]: head,
