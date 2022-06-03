@@ -6,10 +6,10 @@
  */
 
 import React from 'react';
-import { default as Select, SelectSkeleton } from '../';
-import SelectItem from '../../SelectItem';
-import SelectItemGroup from '../../SelectItemGroup';
-import { Layer } from '../../Layer';
+import { default as Select, SelectSkeleton } from '../Select';
+import SelectItem from '../SelectItem';
+import SelectItemGroup from '../SelectItemGroup';
+import { Layer } from '../Layer';
 
 export default {
   title: 'Components/Select',

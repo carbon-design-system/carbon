@@ -30,13 +30,12 @@ async function run() {
     return;
   }
 
-  const {
-    data: permissionLevel,
-  } = await octokit.repos.getCollaboratorPermissionLevel({
-    owner: repository.owner.login,
-    repo: repository.name,
-    username: review.user.login,
-  });
+  const { data: permissionLevel } =
+    await octokit.repos.getCollaboratorPermissionLevel({
+      owner: repository.owner.login,
+      repo: repository.name,
+      username: review.user.login,
+    });
 
   // If the reviewer doesn't have one of the following permission levels
   // then ignore the event

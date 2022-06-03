@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { default as Checkbox, CheckboxSkeleton } from '../';
-import mdx from '../Checkbox.mdx';
+import { default as Checkbox, CheckboxSkeleton } from './';
+import mdx from './Checkbox.mdx';
 
 const prefix = 'cds';
 

@@ -43,8 +43,7 @@ test.describe('FileUploader', () => {
       }) => {
         await snapshotStory(page, {
           component: 'FileUploader',
-          id:
-            'components-fileuploader--drag-and-drop-upload-container-example-application',
+          id: 'components-fileuploader--drag-and-drop-upload-container-example-application',
           theme,
         });
       });
