@@ -83,7 +83,7 @@ export const Line = (args) => (
 export const Manual = (args) => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs" {...args}>
-      <Tab>{tabPanelEnums.tab1.linkText}</Tab>
+      <Tab>{tabPanelEnums.tab1.labelText}</Tab>
       <Tab>{tabPanelEnums.tab2.labelText}</Tab>
       <Tab disabled>{tabPanelEnums.tab3.labelText}</Tab>
       <Tab title={tabPanelEnums.tab4.labelText}>
