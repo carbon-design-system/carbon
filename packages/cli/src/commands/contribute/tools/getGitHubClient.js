@@ -26,8 +26,7 @@ async function getGitHubClient() {
         type: 'password',
         name: 'token',
         message: 'Provide a GitHub access token',
-        hint:
-          'Help: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line',
+        hint: 'Help: https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line',
       },
     ];
     const answers = await prompt(question);
