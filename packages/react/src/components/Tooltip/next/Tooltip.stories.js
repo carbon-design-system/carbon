@@ -78,14 +78,8 @@ export const Duration = () => {
 };
 
 const PlaygroundStory = (props) => {
-  const {
-    align,
-    defaultOpen,
-    description,
-    enterDelayMs,
-    label,
-    leaveDelayMs,
-  } = props;
+  const { align, defaultOpen, description, enterDelayMs, label, leaveDelayMs } =
+    props;
   return (
     <Tooltip
       align={align}

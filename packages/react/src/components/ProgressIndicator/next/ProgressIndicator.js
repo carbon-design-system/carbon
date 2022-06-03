@@ -21,9 +21,8 @@ function ProgressIndicator({
 }) {
   const prefix = usePrefix();
   const [currentIndex, setCurrentIndex] = useState(controlledIndex);
-  const [prevControlledIndex, setPrevControlledIndex] = useState(
-    controlledIndex
-  );
+  const [prevControlledIndex, setPrevControlledIndex] =
+    useState(controlledIndex);
   const className = cx({
     [`${prefix}--progress`]: true,
     [`${prefix}--progress--vertical`]: vertical,

@@ -1787,7 +1787,7 @@ __metadata:
     klaw-sync: ^6.0.0
     lodash.template: ^4.5.0
     markdown-toc: ^1.2.0
-    prettier: ^2.2.1
+    prettier: ^2.6.2
     prettier-config-carbon: ^0.6.0
     progress-estimator: ^0.3.0
     remark: ^10.0.1
@@ -1887,7 +1887,7 @@ __metadata:
     js-yaml: ^3.12.1
     klaw-sync: ^6.0.0
     memfs: ^3.4.0
-    prettier: ^2.2.1
+    prettier: ^2.6.2
     prop-types: ^15.6.2
     react: ^16.6.0
     react-dom: ^16.6.0
@@ -1932,7 +1932,7 @@ __metadata:
     "@carbon/icon-helpers": ^10.30.0-rc.0
     "@carbon/icons": ^11.4.0
     fs-extra: ^10.0.0
-    prettier: ^2.2.1
+    prettier: ^2.6.2
     rimraf: ^3.0.0
     rollup: ^2.46.0
     vue: ^2.6.8
@@ -2081,7 +2081,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/scss-generator@workspace:packages/scss-generator"
   dependencies:
-    prettier: ^2.2.1
+    prettier: ^2.6.2
   languageName: unknown
   linkType: soft
 
@@ -2143,7 +2143,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
-    prettier: ^2.2.1
+    prettier: ^2.6.2
     react: ^17.0.1
     react-dom: ^16.9.0
     resolve: ^1.12.0
@@ -10155,7 +10155,7 @@ __metadata:
     lerna: ^4.0.0
     lint-staged: ^12.0.0
     node-gyp: ^7.1.2
-    prettier: ^2.2.1
+    prettier: ^2.6.2
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.0
@@ -13768,7 +13768,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-storybook: ^0.5.7
     eslint-restricted-globals: ^0.2.0
-    prettier: ^2.2.1
+    prettier: ^2.6.2
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0
   languageName: unknown
@@ -23884,7 +23884,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "prettier-config-carbon@workspace:config/prettier-config-carbon"
   dependencies:
-    prettier: ^2.2.1
+    prettier: ^2.6.2
   peerDependencies:
     prettier: ^2.1.0
   languageName: unknown
@@ -23899,12 +23899,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.2.1":
-  version: 2.2.1
-  resolution: "prettier@npm:2.2.1"
+"prettier@npm:^2.2.1, prettier@npm:^2.6.2":
+  version: 2.6.2
+  resolution: "prettier@npm:2.6.2"
   bin:
     prettier: bin-prettier.js
-  checksum: 800de2df3d37067ab24478c7f32c60ca0c57b01742133287829feeb4a70d239a7bf6bccb56196784777af591ad80fb9ba70c1a49b0fcecf9f5622a764d513edb
+  checksum: 48d08dde8e9fb1f5bccdd205baa7f192e9fc8bc98f86e1b97d919de804e28c806b0e6cc685e4a88211aa7987fa9668f30baae19580d87ced3ed0f2ec6572106f
   languageName: node
   linkType: hard
 
@@ -27949,7 +27949,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "stylelint-config-carbon@workspace:config/stylelint-config-carbon"
   dependencies:
-    prettier: ^2.2.1
+    prettier: ^2.6.2
     stylelint: ^14.3.0
     stylelint-a11y: ^1.2.3
     stylelint-config-idiomatic-order: ^8.1.0
