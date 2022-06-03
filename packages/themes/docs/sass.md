@@ -56,7 +56,7 @@ You can also extend the theme with your own custom tokens:
   $fallback: themes.$g100,
   $theme: (
     token-01: #000000,
-  ),
+  )
 );
 ```
 
@@ -181,7 +181,7 @@ Sass would not compile when doing the following:
 ```scss
 @use '@carbon/themes/scss/modules/themes';
 @use '@carbon/themes' with (
-  $theme: themes.$g100,
+  $theme: themes.$g100
 );
 ```
 

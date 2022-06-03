@@ -116,7 +116,7 @@ to `false`:
 
 ```scss
 @use '@carbon/styles/scss/config' with (
-  $css--font-face: false,
+  $css--font-face: false
 );
 ```
 
@@ -151,7 +151,7 @@ following:
 
 ```scss
 @use '@carbon/styles' with (
-  $use-flexbox-grid: true,
+  $use-flexbox-grid: true
 );
 ```
 
@@ -335,7 +335,7 @@ like to see changed. For example, if you wanted to change the component token
 
 ```scss
 @use '@carbon/styles/scss/components/button' with (
-  $button-separator: #e4e4e4,
+  $button-separator: #e4e4e4
 );
 ```
 
@@ -401,7 +401,7 @@ you're using from `scss/compat/themes` and set that as your theme.
 ```scss
 @use '@carbon/styles/scss/compat/themes' as compat;
 @use '@carbon/styles/scss/compat/theme' with (
-  $theme: compat.$g100,
+  $theme: compat.$g100
 );
 ```
 
