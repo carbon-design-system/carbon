@@ -36,7 +36,7 @@ export function StructuredListWrapper(props) {
   return (
     <GridSelectedRowStateContext.Provider value={selectedRow}>
       <GridSelectedRowDispatchContext.Provider value={setSelectedRow}>
-        <div role="grid" className={classes} {...other} aria-label={ariaLabel}>
+        <div role="table" className={classes} {...other} aria-label={ariaLabel}>
           {children}
         </div>
       </GridSelectedRowDispatchContext.Provider>

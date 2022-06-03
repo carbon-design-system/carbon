@@ -393,9 +393,8 @@ class OverflowMenu extends Component {
           return nextIndex;
       }
     })();
-    const { overflowMenuItem } = this[
-      `overflowMenuItem${enabledIndices[nextValidIndex]}`
-    ];
+    const { overflowMenuItem } =
+      this[`overflowMenuItem${enabledIndices[nextValidIndex]}`];
     overflowMenuItem?.current?.focus();
   };
 
@@ -569,9 +568,7 @@ class OverflowMenu extends Component {
           aria-label={ariaLabel}
           id={id}
           ref={mergeRefs(this._triggerRef, ref)}>
-          <IconElement {...iconProps}>
-            {iconDescription && <title>{iconDescription}</title>}
-          </IconElement>
+          <IconElement {...iconProps} />
           {open && wrappedMenuBody}
         </button>
       </ClickListener>
