@@ -159,7 +159,8 @@ export default class RadioButtonGroup extends React.Component {
             {
               [`${prefix}--radio-button-group--${orientation}`]:
                 orientation === 'vertical',
-              [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
+              [`${prefix}--radio-button-group--label-${labelPosition}`]:
+                labelPosition,
             }
           );
 

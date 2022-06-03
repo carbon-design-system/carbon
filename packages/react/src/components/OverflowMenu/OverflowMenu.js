@@ -393,9 +393,8 @@ class OverflowMenu extends Component {
           return nextIndex;
       }
     })();
-    const { overflowMenuItem } = this[
-      `overflowMenuItem${enabledIndices[nextValidIndex]}`
-    ];
+    const { overflowMenuItem } =
+      this[`overflowMenuItem${enabledIndices[nextValidIndex]}`];
     overflowMenuItem?.current?.focus();
   };
 
