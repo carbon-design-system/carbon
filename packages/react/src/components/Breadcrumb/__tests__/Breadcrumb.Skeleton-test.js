@@ -7,11 +7,16 @@
 
 import React from 'react';
 import { BreadcrumbSkeleton } from '../';
-import { mount } from 'enzyme';
+import { render } from '@testing-library/react';
 
 describe('BreadcrumbSkeleton', () => {
-  it('should render', () => {
-    const wrapper = mount(<BreadcrumbSkeleton />);
-    expect(wrapper).toMatchSnapshot();
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(<BreadcrumbSkeleton className="test" />);
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should spread additional props on the outermost element', () => {
+    const { container } = render(<BreadcrumbSkeleton data-testid="test" />);
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });

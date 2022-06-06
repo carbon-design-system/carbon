@@ -34,12 +34,8 @@ function OverflowMenuV2({
 
   function openMenu() {
     if (triggerRef.current) {
-      const {
-        left,
-        top,
-        right,
-        bottom,
-      } = triggerRef.current.getBoundingClientRect();
+      const { left, top, right, bottom } =
+        triggerRef.current.getBoundingClientRect();
       setPosition([
         [left, right],
         [top, bottom],
