@@ -380,7 +380,7 @@ function DatePicker({
       // Flatpickr's calendar dialog is not rendered in a landmark causing an
       // error with IBM Equal Access Accessibility Checker so we add an aria
       // role to the container div.
-      calendar.calendarContainer.setAttribute('role', 'region');
+      calendar.calendarContainer.setAttribute('role', 'application');
       // IBM EAAC requires an aria-label on a role='region'
       calendar.calendarContainer.setAttribute(
         'aria-label',
