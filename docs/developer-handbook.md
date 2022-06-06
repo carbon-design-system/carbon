@@ -322,8 +322,7 @@ prefix prevents potential conflicts with class names from the user.
 ```html
 <div
   class="bx--inline-notification bx--inline-notification--error"
-  role="alert"
->
+  role="alert">
   <div class="bx--inline-notification__details">...</div>
 </div>
 ```
