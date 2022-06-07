@@ -8,7 +8,7 @@
 'use strict';
 
 module.exports = {
-  jsxBracketSameLine: true,
+  bracketSameLine: true,
   printWidth: 80,
   singleQuote: true,
   trailingComma: 'es5',

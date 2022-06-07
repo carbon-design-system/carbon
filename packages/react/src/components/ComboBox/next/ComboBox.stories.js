@@ -13,8 +13,7 @@ import mdx from '../ComboBox.mdx';
 const items = [
   {
     id: 'option-0',
-    text:
-      'An example option that is really long to show what should be done to handle long text',
+    text: 'An example option that is really long to show what should be done to handle long text',
   },
   {
     id: 'option-1',

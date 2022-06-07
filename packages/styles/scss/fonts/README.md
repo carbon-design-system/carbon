@@ -25,7 +25,7 @@ Plex Sans, and IBM Plex Serif. To bring in additional fonts, you can include the
 @use '@carbon/styles/scss/fonts' with (
   $fonts: (
     IBM-Plex-Sans-Arabic: true,
-  ),
+  )
 );
 ```
 
@@ -35,7 +35,7 @@ You can also configure it to disable specific fonts:
 @use '@carbon/styles/scss/fonts' with (
   $fonts: (
     IBM-Plex-Sans: false,
-  ),
+  )
 );
 ```
 
@@ -44,7 +44,7 @@ in:
 
 ```scss
 @use '@carbon/styles/scss/config' with (
-  $css--font-face: false,
+  $css--font-face: false
 );
 ```
 
@@ -88,7 +88,7 @@ The `$font-path` options is available in `scss/config`:
 
 ```scss
 @use '@carbon/styles/scss/config' with (
-  $font-path: 'https://cdn.custom-font-path.com/fonts',
+  $font-path: 'https://cdn.custom-font-path.com/fonts'
 );
 ```
 

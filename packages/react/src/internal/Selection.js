@@ -33,9 +33,8 @@ export function useSelection({
 }) {
   const isMounted = useRef(false);
   const savedOnChange = useRef(onChange);
-  const [uncontrolledItems, setUncontrolledItems] = useState(
-    initialSelectedItems
-  );
+  const [uncontrolledItems, setUncontrolledItems] =
+    useState(initialSelectedItems);
   const isControlled = !!controlledItems;
   const selectedItems = isControlled ? controlledItems : uncontrolledItems;
   const onItemChange = useCallback(

@@ -38,9 +38,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
-  const [expandedViaHoverState, setExpandedViaHoverState] = useState(
-    defaultExpanded
-  );
+  const [expandedViaHoverState, setExpandedViaHoverState] =
+    useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
