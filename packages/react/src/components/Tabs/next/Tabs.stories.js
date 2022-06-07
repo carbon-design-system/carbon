@@ -184,3 +184,57 @@ export const Skeleton = (args) => {
     </div>
   );
 };
+
+export const InteractiveContentUpdates = (args) => {
+  const [interactiveAdded, setInteractiveAdded] = React.useState(false);
+  return (
+    <div>
+      <Tabs>
+        <TabList aria-label="List of tabs" {...args}>
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab disabled>Tab Label 3</Tab>
+          <Tab>Tab Label 4 with a very long long label</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel>
+            {' '}
+            {interactiveAdded ? (
+              <form style={{ margin: '2em' }}>
+                <legend className={`cds--label`}>Validation example</legend>
+                <Checkbox id="cb" labelText="Accept privacy policy" />
+                <Button
+                  style={{ marginTop: '1rem', marginBottom: '1rem' }}
+                  type="submit">
+                  Submit
+                </Button>
+                <TextInput
+                  type="text"
+                  id="text-input-2"
+                  labelText="Text input label"
+                  helperText="Optional help text"
+                />
+              </form>
+            ) : (
+              <p>Tab Panel 1</p>
+            )}
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+          <TabPanel>Tab Panel 4</TabPanel>
+        </TabPanels>
+      </Tabs>
+      <div>
+        <button
+          type="button"
+          onClick={() => {
+            setInteractiveAdded(!interactiveAdded);
+          }}>
+          {interactiveAdded
+            ? 'Remove interactive content'
+            : 'Add interactive content'}
+        </button>
+      </div>
+    </div>
+  );
+};

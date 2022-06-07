@@ -651,18 +651,48 @@ const TabPanel = React.forwardRef(function TabPanel(
     [`${prefix}--tab-content--interactive`]: interactiveContent,
   });
 
-  // tabindex should only be 0 if no interactive content in children
-  useEffect(() => {
+  useEffectOnce(() => {
     if (!panel.current) {
       return;
     }
 
     const content = getInteractiveContent(panel.current);
     if (content) {
-      setTabIndex('-1');
       setInteractiveContent(true);
+      setTabIndex('-1');
     }
-  }, [interactiveContent]);
+  });
+
+  // tabindex should only be 0 if no interactive content in children
+  useEffect(() => {
+    if (!panel.current) {
+      return;
+    }
+
+    const { current: node } = panel;
+
+    function callback() {
+      const content = getInteractiveContent(node);
+      if (content) {
+        setInteractiveContent(true);
+        setTabIndex('-1');
+      }
+
+      setInteractiveContent(false);
+      setTabIndex('0');
+    }
+
+    const observer = new MutationObserver(callback);
+
+    observer.observe(node, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect(node);
+    };
+  }, []);
 
   return (
     <div
