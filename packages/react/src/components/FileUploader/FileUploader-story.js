@@ -205,8 +205,7 @@ _FileUploaderDropContainer.storyName = 'FileUploaderDropContainer';
 
 _FileUploaderDropContainer.parameters = {
   info: {
-    text:
-      '<FileUploaderDropContainer /> is a drag and drop file uploader which allows users to upload files via both the normal file selection dialog and by dragging and dropping files.',
+    text: '<FileUploaderDropContainer /> is a drag and drop file uploader which allows users to upload files via both the normal file selection dialog and by dragging and dropping files.',
   },
 };
 
