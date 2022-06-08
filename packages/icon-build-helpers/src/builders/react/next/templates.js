@@ -40,7 +40,9 @@ const component = template(
       }
     );
 
-    %%moduleName%%.propTypes = iconPropTypes;
+    if (__DEV__) {
+      %%moduleName%%.propTypes = iconPropTypes;
+    }
   `,
   {
     plugins: ['jsx'],
