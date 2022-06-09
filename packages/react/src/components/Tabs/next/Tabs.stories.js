@@ -198,7 +198,6 @@ export const InteractiveContentUpdates = (args) => {
         </TabList>
         <TabPanels>
           <TabPanel>
-            {' '}
             {interactiveAdded ? (
               <form style={{ margin: '2em' }}>
                 <legend className={`cds--label`}>Validation example</legend>

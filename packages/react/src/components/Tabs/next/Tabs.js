@@ -676,10 +676,10 @@ const TabPanel = React.forwardRef(function TabPanel(
       if (content) {
         setInteractiveContent(true);
         setTabIndex('-1');
+      } else {
+        setInteractiveContent(false);
+        setTabIndex('0');
       }
-
-      setInteractiveContent(false);
-      setTabIndex('0');
     }
 
     const observer = new MutationObserver(callback);
