@@ -143,6 +143,10 @@ jobs:
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
           echo ::set-output name=pid::"$pid"
+      - run: ./actions/wait-for-it
+        with:
+          URL: 'http://localhost:3000'
+          MAX_ATTEMPTS: 10
       - name: Run VRT
         if: github.repository == 'carbon-design-system/carbon'
         env:
@@ -197,7 +201,11 @@ jobs:
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
           echo ::set-output name=pid::"$pid"
-      - name: Run VRT
+      - run: ./actions/wait-for-it
+        with:
+          URL: 'http://localhost:3000'
+          MAX_ATTEMPTS: 10
+      - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
         run: |
           yarn playwright test --project chromium --grep @avt

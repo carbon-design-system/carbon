@@ -1,0 +1,10 @@
+name: wait-for-it
+description: Wait for a service to be available before proceeding
+inputs:
+  URL:
+    required: true
+  MAX_ATTEMPTS:
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
