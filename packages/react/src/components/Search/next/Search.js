@@ -135,6 +135,7 @@ const Search = React.forwardRef(function Search(
         className={clearClasses}
         disabled={disabled}
         onClick={clearInput}
+        title={closeButtonLabelText}
         type="button">
         <Close />
       </button>
