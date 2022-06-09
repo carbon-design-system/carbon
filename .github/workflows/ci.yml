@@ -143,7 +143,7 @@ jobs:
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
           echo ::set-output name=pid::"$pid"
-      - run: ./actions/wait-for-it
+      - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
           MAX_ATTEMPTS: 10
@@ -201,7 +201,7 @@ jobs:
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
           echo ::set-output name=pid::"$pid"
-      - run: ./actions/wait-for-it
+      - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
           MAX_ATTEMPTS: 10
