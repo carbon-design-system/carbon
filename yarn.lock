@@ -24271,6 +24271,18 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"promote-packages-to-latest@workspace:actions/promote-packages-to-latest":
+  version: 0.0.0-use.local
+  resolution: "promote-packages-to-latest@workspace:actions/promote-packages-to-latest"
+  dependencies:
+    "@actions/core": ^1.8.2
+    execa: ^5.1.1
+    fast-glob: ^3.2.11
+    fs-extra: ^10.1.0
+    got: ^11.8.0
+  languageName: unknown
+  linkType: soft
+
 "prompts@npm:2.4.0":
   version: 2.4.0
   resolution: "prompts@npm:2.4.0"
@@ -28457,18 +28469,6 @@ resolve@^2.0.0-next.3:
   checksum: 7ad14bb407d072ab25fd50bf140113036735eddfb8f7b709a95f8bef5d4db5c44c71b4a2d38c5e45cad0c2f40d46d1c738d27fb57daf14bed40360576481ab9c
   languageName: node
   linkType: hard
-
-"sync-packages-to-latest@workspace:actions/sync-packages-to-latest":
-  version: 0.0.0-use.local
-  resolution: "sync-packages-to-latest@workspace:actions/sync-packages-to-latest"
-  dependencies:
-    "@actions/core": ^1.8.2
-    execa: ^5.1.1
-    fast-glob: ^3.2.11
-    fs-extra: ^10.1.0
-    got: ^11.8.0
-  languageName: unknown
-  linkType: soft
 
 "synchronous-promise@npm:^2.0.15":
   version: 2.0.15

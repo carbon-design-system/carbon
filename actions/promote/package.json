@@ -1,5 +1,5 @@
 {
-  "name": "sync-packages-to-latest",
+  "name": "promote-packages-to-latest",
   "private": true,
   "dependencies": {
     "@actions/core": "^1.8.2",

@@ -1,4 +1,4 @@
-name: Sync Packages to Latest
+name: Promote Packages
 description: A custom action for promoting packages on npm to the latest version
 inputs:
   NPM_TOKEN:
