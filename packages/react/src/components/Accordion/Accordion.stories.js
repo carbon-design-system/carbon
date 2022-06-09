@@ -8,21 +8,13 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-import {
-  withKnobs,
-  boolean,
-  number,
-  select,
-  text,
-} from '@storybook/addon-knobs';
 import {
   default as Accordion,
   AccordionItem,
   AccordionSkeleton,
-} from '../../Accordion';
-import Button from '../../Button';
-import mdx from '../Accordion.mdx';
+} from '../Accordion';
+import Button from '../Button';
+import mdx from './Accordion.mdx';
 
 export default {
   title: 'Components/Accordion',
@@ -31,7 +23,6 @@ export default {
     AccordionItem,
     AccordionSkeleton,
   },
-  decorators: [withKnobs],
   parameters: {
     docs: {
       page: mdx,
@@ -84,32 +75,9 @@ Skeleton.decorators = [
   (story) => <div style={{ width: '500px' }}>{story()}</div>,
 ];
 
-const props = {
-  onClick: action('onClick'),
-  onHeadingClick: action('onHeadingClick'),
-};
-
-const sizes = {
-  'Small  (sm)': 'sm',
-  'Medium (md) - default': undefined,
-  'Large  (lg)': 'lg',
-};
-
-export const Playground = () => (
-  <Accordion
-    disabled={boolean('Disable entire Accordion (disabled)', false)}
-    size={
-      select('Accordion heading size (size)', sizes, undefined) || undefined
-    }
-    align={select(
-      'Accordion heading alignment (align)',
-      ['start', 'end'],
-      'end'
-    )}>
-    <AccordionItem
-      title={text('The title (title)', 'Section 1 title')}
-      open={boolean('Open the section (open)', false)}
-      {...props}>
+export const Playground = (args) => (
+  <Accordion {...args}>
+    <AccordionItem title="Section 1 title">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -117,7 +85,7 @@ export const Playground = () => (
         commodo consequat.
       </p>
     </AccordionItem>
-    <AccordionItem title="Section 2 title" {...props}>
+    <AccordionItem title="Section 2 title">
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -125,10 +93,7 @@ export const Playground = () => (
         commodo consequat.
       </p>
     </AccordionItem>
-    <AccordionItem
-      title="Section 3 title"
-      {...props}
-      disabled={boolean('Disable Section 3 (disabled)', true)}>
+    <AccordionItem title="Section 3 title">
       <Button>This is a button.</Button>
     </AccordionItem>
     <AccordionItem
@@ -136,8 +101,7 @@ export const Playground = () => (
         <span>
           Section 4 title (<em>the title can be a node</em>)
         </span>
-      }
-      {...props}>
+      }>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -148,16 +112,25 @@ export const Playground = () => (
   </Accordion>
 );
 
-export const SkeletonPlayground = () => (
-  <div style={{ width: '500px' }}>
-    <AccordionSkeleton
-      align={select(
-        'Accordion heading alignment (align)',
-        ['start', 'end'],
-        'end'
-      )}
-      open={boolean('Show first item opened (open)', true)}
-      count={number('Set number of items (count)', 4)}
-    />
-  </div>
-);
+Playground.argTypes = {
+  align: {
+    options: ['start', 'end'],
+    control: { type: 'select' },
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+};
