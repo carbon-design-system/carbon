@@ -14,9 +14,6 @@ async function main() {
   const url = core.getInput('URL', {
     required: true,
   });
-  const maxAttempts = core.getInput('MAX_ATTEMPTS', {
-    required: true,
-  });
 
   core.info(`Waiting for a 200 response from ${url}`);
 
@@ -24,9 +21,10 @@ async function main() {
     await got(url, {
       method: 'GET',
       retry: {
-        limit: maxAttempts,
+        limit: 10,
         maxRetryAfter: 1000,
       },
+      timeout: 1000,
     });
     core.info(`Received a 200 response from ${url}`);
   } catch (error) {
