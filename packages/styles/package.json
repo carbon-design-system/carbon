@@ -47,6 +47,7 @@
     "browserslist-config-carbon": "^11.0.0",
     "css": "^3.0.0",
     "cssnano": "^5.1.9",
+    "lodash.isequal": "^4.5.0",
     "postcss": "^8.4.14",
     "postcss-flexbugs-fixes": "^5.0.2",
     "rimraf": "^3.0.2",
