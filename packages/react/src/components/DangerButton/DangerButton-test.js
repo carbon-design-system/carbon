@@ -5,46 +5,75 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import DangerButton from '../DangerButton';
-import { shallow, mount } from 'enzyme';
 import { Search } from '@carbon/icons-react';
 
-const prefix = 'cds';
-
 describe('DangerButton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <DangerButton size="sm" className="extra-class">
+  it('should render children as expected', () => {
+    render(
+      <DangerButton>
         <div className="child">Test</div>
         <div className="child">Test</div>
       </DangerButton>
     );
 
-    it('Renders children as expected', () => {
-      expect(wrapper.find('.child').length).toBe(2);
-      expect(wrapper.find('svg').length).toBe(0);
-    });
-    it('Renders wrapper as expected', () => {
-      expect(wrapper.length).toBe(1);
-    });
-    it('Has kind="danger"', () => {
-      expect(wrapper.props().kind).toEqual('danger');
-    });
-    it('Should add extra classes that are passed via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
-    });
+    const childrenArray = screen.getAllByText('Test');
+    expect(childrenArray.length).toEqual(2);
+  });
 
-    describe('Renders icon buttons', () => {
-      const iconButton = mount(
-        <DangerButton renderIcon={Search} iconDescription="Search">
-          Search
-        </DangerButton>
-      );
-      const icon = iconButton.find('svg');
-      it('should have the appropriate icon', () => {
-        expect(icon.hasClass(`${prefix}--btn__icon`)).toBe(true);
-      });
-    });
+  it('should add extra classes passed via className prop', () => {
+    render(
+      <DangerButton className="extra-class" data-testid="danger-btn-1">
+        <div className="child">Test</div>
+        <div className="child">Test</div>
+      </DangerButton>
+    );
+
+    expect(screen.getByTestId('danger-btn-1')).toHaveClass('extra-class');
+  });
+
+  it('should be kind danger', () => {
+    render(
+      <DangerButton data-testid="danger-btn-2">
+        <div className="child">Test</div>
+        <div className="child">Test</div>
+      </DangerButton>
+    );
+
+    expect(screen.getByTestId('danger-btn-2')).toHaveClass('cds--btn--danger');
+  });
+
+  it('should render an icon if an icon is passed in via prop', () => {
+    render(
+      <DangerButton
+        renderIcon={() => {
+          return <Search title="search-icon" />;
+        }}
+        iconDescription="search">
+        <div className="child">Test</div>
+        <div className="child">Test</div>
+      </DangerButton>
+    );
+
+    const icon = screen.getByTitle('search-icon');
+    expect(icon).toBeInTheDocument();
+  });
+
+  it('should call onClick when button is clicked', () => {
+    const onClick = jest.fn();
+
+    render(
+      <DangerButton data-testid="danger-btn-3" onClick={onClick}>
+        <div className="child">Test</div>
+        <div className="child">Test</div>
+      </DangerButton>
+    );
+
+    const button = screen.getByTestId('danger-btn-3');
+    userEvent.click(button);
+    expect(onClick).toHaveBeenCalled();
   });
 });

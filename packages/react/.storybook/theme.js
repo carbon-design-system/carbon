@@ -21,5 +21,5 @@ export default create({
 
   brandTitle: `@carbon/react@${PackageInfo.version}`,
   brandUrl:
-    'https://github.com/carbon-design-system/carbon/tree/main/packages/carbon-react',
+    'https://github.com/carbon-design-system/carbon/tree/main/packages/react',
 });

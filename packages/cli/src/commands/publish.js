@@ -221,8 +221,7 @@ async function getLastGitTag() {
 
 module.exports = {
   command: 'publish <tag>',
-  desc:
-    'publish packages that have different versions from the package registry',
+  desc: 'publish packages that have different versions from the package registry',
   builder(yargs) {
     yargs.positional('tag', {
       describe: 'the version tag associated with the release',

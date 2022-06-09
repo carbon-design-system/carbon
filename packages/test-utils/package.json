@@ -1,7 +1,7 @@
 {
   "name": "@carbon/test-utils",
   "private": true,
-  "version": "10.24.0",
+  "version": "10.25.0-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -25,7 +25,7 @@
     "react-dom": "^16.9.0 || ^17.0.1"
   },
   "dependencies": {
-    "prettier": "^2.2.1",
+    "prettier": "^2.6.2",
     "react": "^17.0.1",
     "resolve": "^1.12.0",
     "sass": "^1.51.0",

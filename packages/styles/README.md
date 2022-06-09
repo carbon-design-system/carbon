@@ -81,7 +81,7 @@ You can change the default theme of Carbon by doing the following:
 ```scss
 @use '@carbon/styles/scss/themes';
 @use '@carbon/styles/scss/theme' with (
-  $theme: themes.$g100,
+  $theme: themes.$g100
 );
 ```
 
@@ -95,7 +95,7 @@ extend the theme.
   $theme: (
     background: #e2e2e2,
     text-primary: #ffffff,
-  ),
+  )
 );
 ```
 
@@ -106,7 +106,7 @@ extend the theme.
   $fallback: themes.$g100,
   $theme: (
     custom-token-01: #000000,
-  ),
+  )
 );
 ```
 
