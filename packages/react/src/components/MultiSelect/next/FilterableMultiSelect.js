@@ -240,7 +240,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                 [`${prefix}--multi-select--open`]: isOpen,
                 [`${prefix}--multi-select--inline`]: inline,
                 [`${prefix}--multi-select--selected`]: selectedItem.length > 0,
-                [`${prefix}--multi-select--filterable--input-focused`]: inputFocused,
+                [`${prefix}--multi-select--filterable--input-focused`]:
+                  inputFocused,
               }
             );
             const rootProps = getRootProps(
