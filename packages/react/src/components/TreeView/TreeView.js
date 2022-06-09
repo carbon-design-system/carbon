@@ -60,20 +60,16 @@ export default function TreeView({
 
   function handleFocusEvent(event) {
     if (event.type === 'blur') {
-      const {
-        relatedTarget: currentFocusedNode,
-        target: prevFocusedNode,
-      } = event;
+      const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
+        event;
       if (treeRootRef?.current?.contains(currentFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
     }
     if (event.type === 'focus') {
       resetNodeTabIndices();
-      const {
-        relatedTarget: prevFocusedNode,
-        target: currentFocusedNode,
-      } = event;
+      const { relatedTarget: prevFocusedNode, target: currentFocusedNode } =
+        event;
       if (treeRootRef?.current?.contains(prevFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
@@ -127,7 +123,12 @@ export default function TreeView({
       const nodeIds = [];
 
       if (matches(event, [keys.Home, keys.End])) {
-        if (multiselect && event.shiftKey && event.ctrlKey) {
+        if (
+          multiselect &&
+          event.shiftKey &&
+          event.ctrlKey &&
+          !treeWalker.current.currentNode.getAttribute('aria-disabled')
+        ) {
           nodeIds.push(treeWalker.current.currentNode?.id);
         }
         while (
@@ -137,7 +138,12 @@ export default function TreeView({
         ) {
           nextFocusNode = treeWalker.current.currentNode;
 
-          if (multiselect && event.shiftKey && event.ctrlKey) {
+          if (
+            multiselect &&
+            event.shiftKey &&
+            event.ctrlKey &&
+            !nextFocusNode.getAttribute('aria-disabled')
+          ) {
             nodeIds.push(nextFocusNode?.id);
           }
         }
@@ -146,7 +152,9 @@ export default function TreeView({
         treeWalker.current.currentNode = treeWalker.current.root;
 
         while (treeWalker.current.nextNode()) {
-          nodeIds.push(treeWalker.current.currentNode?.id);
+          if (!treeWalker.current.currentNode.getAttribute('aria-disabled')) {
+            nodeIds.push(treeWalker.current.currentNode?.id);
+          }
         }
       }
       setSelected(selected.concat(nodeIds));

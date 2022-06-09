@@ -24,9 +24,8 @@ export function generate() {
     const sharedStyles = syncThemeColorStyles(document);
 
     const tokens = groupByKey(sharedStyles, (sharedStyle) => {
-      const [_namespace, _category, _group, token] = sharedStyle.name.split(
-        '/'
-      );
+      const [_namespace, _category, _group, token] =
+        sharedStyle.name.split('/');
       return token.trim();
     });
 
