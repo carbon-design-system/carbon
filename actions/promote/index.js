@@ -20,8 +20,7 @@ async function main() {
   const npmToken = core.getInput('NPM_TOKEN', {
     required: true,
   });
-  const dryRun =
-    core.getInput('DRY_RUN') !== '' ? Boolean(core.getInput('DRY_RUN')) : false;
+  const dryRun = core.getInput('DRY_RUN') === 'true';
 
   const ROOT_DIRECTORY = process.cwd();
   const workspaces = [];
