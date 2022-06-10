@@ -14,6 +14,11 @@ async function main() {
   let url = core.getInput('URL', {
     required: true,
   });
+
+  // Since this file is being run within a Docker container, `localhost` will
+  // not correctly map to the host's network. As a result, we replace instances
+  // of `localhost` with the IP Address for the host's network so we can resolve
+  // correctly
   if (url.includes('localhost')) {
     url = url.replace('localhost', '172.17.0.1');
   }
