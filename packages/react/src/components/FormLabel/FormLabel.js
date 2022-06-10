@@ -16,9 +16,8 @@ function FormLabel({ className: customClassName, children, id, ...rest }) {
   const className = cx(
     `${prefix}--label`,
     {
-      [`${prefix}--label--no-margin`]: FeatureFlags.enabled(
-        'enable-v11-release'
-      ),
+      [`${prefix}--label--no-margin`]:
+        FeatureFlags.enabled('enable-v11-release'),
     },
     customClassName
   );

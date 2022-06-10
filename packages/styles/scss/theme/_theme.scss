@@ -7,14 +7,14 @@
 
 @use '../config' as *;
 @use '@carbon/themes/scss/config' with (
-  $prefix: $prefix,
+  $prefix: $prefix
 );
 @use '../compat/themes' as compat;
 @use '../themes';
 
 @forward '@carbon/themes/scss/theme' with (
   $fallback: themes.$white !default,
-  $theme: compat.$white !default,
+  $theme: compat.$white !default
 );
 @forward '@carbon/themes/scss/tokens';
 
