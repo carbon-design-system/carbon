@@ -68,18 +68,20 @@ async function main() {
   );
 
   try {
+    const updates = [];
+
     for (const workspace of workspaces) {
       const { name, version } = workspace.packageJson;
 
-      core.info(`Checking workspace: ${workspace.name}`);
+      core.info(`Checking workspace: ${name}`);
 
       if (workspace.packageJson.private) {
-        core.debug(`Skipping workspace ${workspace.name} due to private field`);
+        core.info(`Skipping workspace ${name} due to private field`);
         continue;
       }
 
       if (denylist.has(name)) {
-        core.debug(`Skipping workspace ${workspace.name} due to denylist`);
+        core.info(`Skipping workspace ${name} due to denylist`);
         continue;
       }
 
@@ -88,13 +90,18 @@ async function main() {
       }).json();
 
       if (version === npm['dist-tags'].latest) {
-        core.debug(
-          `Skipping workspace ${workspace.name} due to dist-tags are in sync`
-        );
+        core.info(`Skipping workspace ${name} due to dist-tags are in sync`);
         continue;
       }
 
+      updates.push({
+        name,
+        latest: version,
+        previous: npm['dist-tags'].latest,
+      });
+
       core.info(`npm dist-tag add ${name}@${version} latest`);
+
       if (!dryRun) {
         await execa(
           'npm',
@@ -106,6 +113,38 @@ async function main() {
         );
       }
     }
+
+    await core.summary
+      .addHeading('Packages')
+      .addTable([
+        [
+          {
+            data: 'Package',
+            header: true,
+          },
+          {
+            data: 'Previous',
+            header: true,
+          },
+          {
+            data: 'Latest',
+            header: true,
+          },
+          {
+            data: 'Link',
+            header: true,
+          },
+        ],
+        ...updates.map((update) => {
+          return [
+            update.name,
+            update.previous,
+            update.latest,
+            `https://npmjs.com/package/${update.name}/v/${update.latest}`,
+          ];
+        }),
+      ])
+      .write();
   } finally {
     await fs.remove(NPMRC_FILEPATH);
   }
