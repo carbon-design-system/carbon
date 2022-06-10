@@ -1864,6 +1864,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/actions-wait-for-it@workspace:actions/wait-for-it":
+  version: 0.0.0-use.local
+  resolution: "@carbon/actions-wait-for-it@workspace:actions/wait-for-it"
+  dependencies:
+    "@actions/core": ^1.2.3
+    got: ^11.8.5
+  languageName: unknown
+  linkType: soft
+
 "@carbon/cli-reporter@^10.5.0, @carbon/cli-reporter@workspace:packages/cli-reporter":
   version: 0.0.0-use.local
   resolution: "@carbon/cli-reporter@workspace:packages/cli-reporter"
@@ -16576,7 +16585,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"got@npm:^11.8.0":
+"got@npm:^11.8.0, got@npm:^11.8.5":
   version: 11.8.5
   resolution: "got@npm:11.8.5"
   dependencies:
