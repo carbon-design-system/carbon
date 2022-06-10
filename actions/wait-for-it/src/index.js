@@ -11,9 +11,12 @@ const core = require('@actions/core');
 const got = require('got');
 
 async function main() {
-  const url = core.getInput('URL', {
+  let url = core.getInput('URL', {
     required: true,
   });
+  if (url.includes('localhost')) {
+    url = url.replace('localhost', '172.17.0.1');
+  }
 
   core.info(`Waiting for a 200 response from ${url}`);
 

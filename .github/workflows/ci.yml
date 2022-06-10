@@ -147,7 +147,7 @@ jobs:
           echo ::set-output name=pid::"$pid"
       - uses: ./actions/wait-for-it
         with:
-          URL: 'http://host.docker.internal:3000'
+          URL: 'http://localhost:3000'
         timeout-minutes: 1
       - name: Run VRT
         if: github.repository == 'carbon-design-system/carbon'
@@ -205,7 +205,7 @@ jobs:
           echo ::set-output name=pid::"$pid"
       - uses: ./actions/wait-for-it
         with:
-          URL: 'http://host.docker.internal:3000'
+          URL: 'http://localhost:3000'
         timeout-minutes: 1
       - name: Run AVT
         if: github.repository == 'carbon-design-system/carbon'
