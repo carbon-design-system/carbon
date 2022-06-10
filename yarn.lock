@@ -5,10 +5,12 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@actions/core@npm:^1.2.3":
-  version: 1.2.3
-  resolution: "@actions/core@npm:1.2.3"
-  checksum: 61ca1973ae9a9eabc1a113075f69fedc7dfb99bf47c52dd67aff0b51934140aa20dd9b6351f4f0cf945ea4a9b84393e1269d4a5c707811fd0d444f3f8a4f3210
+"@actions/core@npm:^1.2.3, @actions/core@npm:^1.8.2":
+  version: 1.8.2
+  resolution: "@actions/core@npm:1.8.2"
+  dependencies:
+    "@actions/http-client": ^2.0.1
+  checksum: 1cd1a47f751501900a579e641565bbe13a09d626507a4fa46b51e6a959a74a89134490ae7311570ed8ec1735ada83bcfde81a456ea4d2e24e323c16e94e39fd1
   languageName: node
   linkType: hard
 
@@ -29,6 +31,15 @@ __metadata:
   dependencies:
     tunnel: 0.0.6
   checksum: ee3eafa28b208ca1604561c3012384105b78396960d6dfbca2ec05c818a010dd4009bcfa247c0b77c5bb911145655940af33140fd464ad28a4d05a194e5c421f
+  languageName: node
+  linkType: hard
+
+"@actions/http-client@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "@actions/http-client@npm:2.0.1"
+  dependencies:
+    tunnel: ^0.0.6
+  checksum: 799ec3df91e28a9da91ce6592e94f8b8923ccf6cc21a2f72c7429be5af5273f1625335411adc2a1bb222d56c852d5767214dfa6fa32a6da7e81dba8290e08f17
   languageName: node
   linkType: hard
 
@@ -15920,14 +15931,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fs-extra@npm:^10.0.0":
-  version: 10.0.0
-  resolution: "fs-extra@npm:10.0.0"
+"fs-extra@npm:^10.0.0, fs-extra@npm:^10.1.0":
+  version: 10.1.0
+  resolution: "fs-extra@npm:10.1.0"
   dependencies:
     graceful-fs: ^4.2.0
     jsonfile: ^6.0.1
     universalify: ^2.0.0
-  checksum: 5285a3d8f34b917cf2b66af8c231a40c1623626e9d701a20051d3337be16c6d7cac94441c8b3732d47a92a2a027886ca93c69b6a4ae6aee3c89650d2a8880c0a
+  checksum: dc94ab37096f813cc3ca12f0f1b5ad6744dfed9ed21e953d72530d103cea193c2f81584a39e9dee1bea36de5ee66805678c0dddc048e8af1427ac19c00fffc50
   languageName: node
   linkType: hard
 
@@ -16574,7 +16585,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"got@npm:^11.8.5":
+"got@npm:^11.8.0, got@npm:^11.8.5":
   version: 11.8.5
   resolution: "got@npm:11.8.5"
   dependencies:
@@ -25406,6 +25417,18 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"promote-packages-to-latest@workspace:actions/promote":
+  version: 0.0.0-use.local
+  resolution: "promote-packages-to-latest@workspace:actions/promote"
+  dependencies:
+    "@actions/core": ^1.8.2
+    execa: ^5.1.1
+    fast-glob: ^3.2.11
+    fs-extra: ^10.1.0
+    got: ^11.8.0
+  languageName: unknown
+  linkType: soft
+
 "prompts@npm:^2.0.1, prompts@npm:^2.4.0, prompts@npm:^2.4.2":
   version: 2.4.2
   resolution: "prompts@npm:2.4.2"
@@ -30315,7 +30338,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"tunnel@npm:0.0.6":
+"tunnel@npm:0.0.6, tunnel@npm:^0.0.6":
   version: 0.0.6
   resolution: "tunnel@npm:0.0.6"
   checksum: c362948df9ad34b649b5585e54ce2838fa583aa3037091aaed66793c65b423a264e5229f0d7e9a95513a795ac2bd4cb72cda7e89a74313f182c1e9ae0b0994fa
