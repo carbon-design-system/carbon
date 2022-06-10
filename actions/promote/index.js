@@ -132,11 +132,7 @@ async function main() {
           },
         ],
         ...updates.map((update) => {
-          return [
-            `\`${update.name}\``,
-            `[${update.previous}](https://npmjs.com/package/${update.name}/v/${update.previous})`,
-            `[${update.latest}](https://npmjs.com/package/${update.name}/v/${update.latest})`,
-          ];
+          return [update.name, update.previous, update.latest];
         }),
       ])
       .write();
