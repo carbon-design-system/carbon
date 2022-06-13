@@ -6,356 +6,337 @@
  */
 
 import React from 'react';
-import { Close, ErrorFilled, CheckmarkFilled } from '@carbon/icons-react';
+import { ErrorFilled } from '@carbon/icons-react';
 import {
   NotificationButton,
-  NotificationTextDetails,
   ToastNotification,
   InlineNotification,
+  ActionableNotification,
 } from './Notification';
-import { shallow, mount } from 'enzyme';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { it } from 'window-or-global';
 
 const prefix = 'cds';
 
 describe('NotificationButton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<NotificationButton className="some-class" />);
-
-    it('renders given className', () => {
-      expect(wrapper.hasClass('some-class')).toBe(true);
-    });
-
-    it('renders only one Icon', () => {
-      const icon = wrapper.find(Close);
-      expect(icon.length).toEqual(1);
-    });
-
-    it('supports custom icon', () => {
-      const iconButton = mount(
-        <NotificationButton
-          renderIcon={(props) => <Close size={20} {...props} />}
-        />
-      );
-      const originalIcon = mount(<Close size={20} />).find('svg');
-      const icon = iconButton.find('svg');
-      expect(icon.find(':not(svg):not(title)').html()).toBe(
-        originalIcon.children().html()
-      );
-    });
-
-    describe('When notificationType equals "toast"', () => {
-      it('button should have correct className by default', () => {
-        expect(
-          wrapper.hasClass(`${prefix}--toast-notification__close-button`)
-        ).toBe(true);
-      });
-
-      it('icon should have correct className by default', () => {
-        const icon = wrapper.find(Close);
-        expect(icon.hasClass(`${prefix}--toast-notification__close-icon`)).toBe(
-          true
-        );
-      });
-    });
-
-    describe('When notificationType equals "inline"', () => {
-      it('button should have correct className', () => {
-        wrapper.setProps({ notificationType: 'inline' });
-        expect(
-          wrapper.hasClass(`${prefix}--inline-notification__close-button`)
-        ).toBe(true);
-      });
-
-      it('icon should have correct className', () => {
-        const icon = wrapper.find(Close);
-        expect(
-          icon.hasClass(`${prefix}--inline-notification__close-icon`)
-        ).toBe(true);
-      });
-    });
+  it('should place the `className` prop on the outermost DOM node', () => {
+    const { container } = render(<NotificationButton className="test" />);
+    expect(container.firstChild).toHaveClass('test');
   });
-});
 
-describe('NotificationTextDetails', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<NotificationTextDetails />);
+  it('supports custom icon', () => {
+    const { rerender } = render(<NotificationButton />);
+    const defaultIcon = screen.queryByRole('button').innerHTML;
 
-    describe('When notificationType equals "toast"', () => {
-      it('div should have correct className by default', () => {
-        expect(wrapper.hasClass(`${prefix}--toast-notification__details`)).toBe(
-          true
-        );
-      });
-    });
+    rerender(
+      <NotificationButton
+        renderIcon={(props) => <ErrorFilled size={20} {...props} />}
+      />
+    );
+    const customIcon = screen.queryByRole('button').innerHTML;
 
-    describe('When notificationType equals "inline"', () => {
-      it('div should have correct className', () => {
-        wrapper.setProps({ notificationType: 'inline' });
-        expect(
-          wrapper.hasClass(`${prefix}--inline-notification__text-wrapper`)
-        ).toBe(true);
-      });
+    expect(defaultIcon).not.toEqual(customIcon);
+  });
+
+  it('interpolates matching className based on notificationType prop', () => {
+    const { rerender, container } = render(<NotificationButton />);
+    const notificationTypes = ['toast', 'inline'];
+
+    notificationTypes.forEach((notificationType) => {
+      rerender(<NotificationButton notificationType={notificationType} />);
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--${notificationType}-notification__close-button`
+      );
+      expect(screen.queryByRole('button').firstChild).toHaveClass(
+        `${prefix}--${notificationType}-notification__close-icon`
+      );
     });
   });
 });
 
 describe('ToastNotification', () => {
-  describe('Renders as expected', () => {
-    const toast = shallow(
-      <ToastNotification
-        kind="error"
-        title="this is a title"
-        subtitle="this is a subtitle"
-        caption="this is a caption"
-      />
+  it('should have role=status by default', () => {
+    const { container } = render(
+      <ToastNotification title="Notification title" />
     );
-    it('renders itself', () => {
-      expect(toast.length).toEqual(1);
-    });
+    expect(container.firstChild).toHaveAttribute('role', 'status');
+  });
 
-    it('renders HTML for toast notifications when caption exists', () => {
-      expect(toast.hasClass(`${prefix}--toast-notification`)).toBe(true);
-    });
+  it('should place the `className` prop on the outermost DOM node', () => {
+    const { container } = render(
+      <ToastNotification title="Notification title" className="test" />
+    );
+    expect(container.firstChild).toHaveClass('test');
+  });
 
-    it('adds extra classes via className', () => {
-      toast.setProps({ className: 'extra-class' });
-
-      expect(toast.hasClass('extra-class')).toBe(true);
-    });
-
-    it('interpolates matching className based on kind prop', () => {
-      const kinds = ['error', 'info', 'success', 'warning'];
-
-      kinds.forEach((kind) => {
-        toast.setProps({ kind });
-        expect(
-          toast.hasClass(`${prefix}--toast-notification--${kind}`)
-        ).toEqual(true);
-      });
-    });
-
-    it('has [role="alert"] on wrapping <div>', () => {
-      expect(toast.props().role).toEqual('alert');
-    });
-
-    it('sets a new kind when passed in via props', () => {
-      toast.setProps({ kind: 'success' });
-      expect(toast.props().kind).toEqual('success');
-    });
-
-    it('can render any node for the subtitle and caption', () => {
-      toast.setProps({
-        subtitle: <button type="button" />,
-        caption: <button type="button" />,
-      });
-      expect(toast.length).toEqual(1);
+  it('interpolates matching className based on kind prop', () => {
+    const { rerender } = render(
+      <ToastNotification title="Notification title" />
+    );
+    const kinds = [
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ];
+    kinds.forEach((kind) => {
+      rerender(<ToastNotification kind={kind} />);
+      expect(screen.queryByRole('status')).toHaveClass(
+        `${prefix}--toast-notification--${kind}`
+      );
     });
   });
-  describe('events and state', () => {
-    it('initial open state set to true', () => {
-      const wrapper = mount(
-        <ToastNotification
-          kind="error"
-          title="this is a title"
-          subtitle="this is a subtitle"
-          caption="this is a caption"
-        />
-      );
 
-      expect(wrapper.children().length > 0).toBe(true);
+  it('allows non-interactive elements as children', () => {
+    render(
+      <ToastNotification title="Notification title">
+        <p>Sample text</p>
+      </ToastNotification>
+    );
+    expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
+  });
+
+  it('does not allow interactive elements as children', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <ToastNotification title="Notification title">
+          <button type="button">Sample button text</button>
+        </ToastNotification>
+      );
+    }).toThrow();
+
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+  });
+
+  it('close button is rendered by default and includes aria-hidden=true', () => {
+    render(<ToastNotification title="Notification title" />);
+
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
     });
 
-    it('sets open state to false when close button is clicked', () => {
-      const wrapper = mount(
-        <ToastNotification
-          kind="error"
-          title="this is a title"
-          subtitle="this is a subtitle"
-          caption="this is a caption"
-        />
-      );
+    expect(closeButton).toBeInTheDocument();
+    expect(closeButton).toHaveAttribute('aria-hidden', 'true');
+  });
 
-      wrapper.find('button').simulate('click');
-      expect(wrapper.children().length).toBe(0);
+  it('does not render close button when `hideCloseButton` is provided', () => {
+    render(<ToastNotification title="Notification title" hideCloseButton />);
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
     });
+    expect(closeButton).not.toBeInTheDocument();
+  });
 
-    it('closes notification if `onClose` is provided', () => {
-      const wrapper = mount(
-        <ToastNotification
-          kind="error"
-          title="this is a title"
-          subtitle="this is a subtitle"
-          caption="this is a caption"
-          onClose={() => {}}
-        />
-      );
+  it('calls `onClose` when notification is closed', async () => {
+    const onClose = jest.fn();
+    render(<ToastNotification title="Notification title" onClose={onClose} />);
 
-      wrapper.find('button').simulate('click');
-      expect(wrapper.children().length).toBe(0);
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
     });
-
-    it('keeps notification open if `onClose` returns false', () => {
-      const wrapper = mount(
-        <ToastNotification
-          kind="error"
-          title="this is a title"
-          subtitle="this is a subtitle"
-          caption="this is a caption"
-          onClose={() => false}
-        />
-      );
-
-      wrapper.find('button').simulate('click');
-      expect(wrapper.children().length).not.toBe(0);
+    userEvent.click(closeButton);
+    expect(onClose).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(screen.queryByRole('status')).not.toBeInTheDocument();
     });
+  });
 
-    it('renders null when open state is false', () => {
-      const wrapper = mount(
-        <ToastNotification
-          kind="error"
-          title="this is a title"
-          subtitle="this is a subtitle"
-          caption="this is a caption"
-        />
-      );
+  it('keeps notification open if `onClose` returns false', () => {
+    render(
+      <ToastNotification title="Notification title" onClose={() => false} />
+    );
 
-      wrapper.find('button').simulate('click');
-      expect(wrapper.html()).toBeNull();
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
     });
+    userEvent.click(closeButton);
+    expect(screen.queryByRole('status')).toBeInTheDocument();
+  });
+
+  it('calls `onCloseButtonClick` when notification is closed', () => {
+    const onCloseButtonClick = jest.fn();
+    render(
+      <ToastNotification
+        title="Notification title"
+        onCloseButtonClick={onCloseButtonClick}
+      />
+    );
+
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
+    });
+    userEvent.click(closeButton);
+    expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
   });
 });
 
 describe('InlineNotification', () => {
-  describe('Renders as expected', () => {
-    const inline = mount(
+  it('should have role=status by default', () => {
+    const { container } = render(
+      <InlineNotification title="Notification title" />
+    );
+    expect(container.firstChild).toHaveAttribute('role', 'status');
+  });
+
+  it('should place the `className` prop on the outermost DOM node', () => {
+    const { container } = render(
+      <InlineNotification title="Notification title" className="test" />
+    );
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('interpolates matching className based on kind prop', () => {
+    const { rerender } = render(
+      <InlineNotification title="Notification title" />
+    );
+    const kinds = [
+      'error',
+      'info',
+      'info-square',
+      'success',
+      'warning',
+      'warning-alt',
+    ];
+    kinds.forEach((kind) => {
+      rerender(<InlineNotification title="Notification title" kind={kind} />);
+      expect(screen.queryByRole('status')).toHaveClass(
+        `${prefix}--inline-notification--${kind}`
+      );
+    });
+  });
+
+  it('allows non-interactive elements as children', () => {
+    render(
+      <InlineNotification title="Notification title">
+        <p>Sample text</p>
+      </InlineNotification>
+    );
+    expect(screen.queryByText(/Sample text/i)).toBeInTheDocument();
+  });
+
+  it('does not allow interactive elements as children', () => {
+    const spy = jest.spyOn(console, 'error').mockImplementation(() => {});
+
+    expect(() => {
+      render(
+        <InlineNotification title="Notification title">
+          <button type="button">Sample button text</button>
+        </InlineNotification>
+      );
+    }).toThrow();
+
+    expect(spy).toHaveBeenCalled();
+    spy.mockRestore();
+  });
+
+  it('close button is rendered by default and includes aria-hidden=true', () => {
+    render(<InlineNotification title="Notification title" />);
+
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
+    });
+    expect(closeButton).toBeInTheDocument();
+    expect(closeButton).toHaveAttribute('aria-hidden', 'true');
+  });
+
+  it('does not render close button when `hideCloseButton` is provided', () => {
+    render(<InlineNotification title="Notification title" hideCloseButton />);
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
+    });
+    expect(closeButton).not.toBeInTheDocument();
+  });
+
+  it('calls `onClose` when notification is closed', async () => {
+    const onClose = jest.fn();
+    render(<InlineNotification title="Notification title" onClose={onClose} />);
+
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
+    });
+    userEvent.click(closeButton);
+    expect(onClose).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(screen.queryByRole('status')).not.toBeInTheDocument();
+    });
+  });
+
+  it('keeps notification open if `onClose` returns false', () => {
+    render(
+      <InlineNotification title="Notification title" onClose={() => false} />
+    );
+
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
+    });
+    userEvent.click(closeButton);
+    expect(screen.queryByRole('status')).toBeInTheDocument();
+  });
+
+  it('calls `onCloseButtonClick` when notification is closed', () => {
+    const onCloseButtonClick = jest.fn();
+    render(
       <InlineNotification
-        title="this is a title"
-        subtitle="this is a subtitle"
-        kind="error"
+        title="Notification title"
+        onCloseButtonClick={onCloseButtonClick}
       />
     );
 
-    it('renders itself', () => {
-      expect(inline.length).toEqual(1);
+    const closeButton = screen.queryByRole('button', {
+      hidden: true,
     });
-
-    it('renders success notification with matching kind and <icon name=""> values', () => {
-      inline.setProps({ kind: 'success' });
-      expect(inline.find(CheckmarkFilled).length).toBe(1);
-    });
-
-    it('renders error notification with matching kind and <icon name=""> values', () => {
-      inline.setProps({ kind: 'error' });
-      expect(inline.find(ErrorFilled).length).toBe(1);
-    });
-
-    it('renders warning notification with matching kind and <icon name=""> values', () => {
-      inline.setProps({ kind: 'warning' });
-      expect(
-        inline.find(`.${prefix}--inline-notification__icon`).exists()
-      ).toBe(true);
-    });
-
-    it('renders HTML for inline notifications when caption does not exist', () => {
-      expect(inline.find(`.${prefix}--inline-notification`).exists()).toBe(
-        true
-      );
-    });
-
-    it('adds extra classes via className', () => {
-      inline.setProps({ className: 'extra-class' });
-      expect(inline.find('.extra-class').exists()).toBe(true);
-    });
-
-    it('interpolates matching className based on kind prop', () => {
-      const kinds = ['error', 'info', 'success', 'warning'];
-
-      kinds.forEach((kind) => {
-        inline.setProps({ kind });
-        expect(
-          inline.find(`.${prefix}--inline-notification--${kind}`).exists()
-        ).toEqual(true);
-      });
-    });
-
-    it('has [role="alert"] on wrapping <div>', () => {
-      expect(inline.props().role).toEqual('alert');
-    });
-
-    it('sets a new kind when passed in via props', () => {
-      inline.setProps({ kind: 'success' });
-      expect(inline.props().kind).toEqual('success');
-    });
-
-    it('can render any node for the subtitle', () => {
-      inline.setProps({ subtitle: <button type="button" /> });
-      expect(inline.length).toEqual(1);
-    });
-  });
-
-  describe('events and state', () => {
-    it('initial open state set to true', () => {
-      const wrapper = mount(
-        <InlineNotification
-          title="this is a title"
-          subtitle="this is a subtitle"
-          kind="error"
-        />
-      );
-
-      expect(wrapper.children().length > 0).toBe(true);
-    });
-
-    it('sets open state to false when close button is clicked', () => {
-      const wrapper = mount(
-        <InlineNotification kind="success" title="title" subtitle="subtitle" />
-      );
-
-      wrapper.find('button').simulate('click');
-      expect(wrapper.children().length).toBe(0);
-    });
-
-    it('closes notification if `onClose` is provided', () => {
-      const wrapper = mount(
-        <InlineNotification
-          kind="success"
-          title="title"
-          subtitle="subtitle"
-          onClose={() => {}}
-        />
-      );
-
-      wrapper.find('button').simulate('click');
-      expect(wrapper.children().length).toBe(0);
-    });
-
-    it('keeps notification open if `onClose` returns false', () => {
-      const wrapper = mount(
-        <InlineNotification
-          kind="success"
-          title="title"
-          subtitle="subtitle"
-          onClose={() => false}
-        />
-      );
-
-      wrapper.find('button').simulate('click');
-      expect(wrapper.children().length).not.toBe(0);
-    });
-
-    it('renders null when open state is false', () => {
-      const wrapper = mount(
-        <InlineNotification
-          title="this is a title"
-          subtitle="this is a subtitle"
-          kind="error"
-        />
-      );
-
-      wrapper.find('button').simulate('click');
-      expect(wrapper.html()).toBeNull();
-    });
+    userEvent.click(closeButton);
+    expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
   });
 });
 
-// Deprecated
+describe('ActionableNotification', () => {
+  it('uses role=alertdialog', () => {
+    const { container } = render(
+      <ActionableNotification actionButtonLabel="My custom action" />
+    );
+
+    expect(container.firstChild).toHaveAttribute('role', 'alertdialog');
+  });
+
+  it('renders correct action label', () => {
+    render(<ActionableNotification actionButtonLabel="My custom action" />);
+    const actionButton = screen.queryByRole('button', {
+      name: 'My custom action',
+    });
+    expect(actionButton).toBeInTheDocument();
+  });
+
+  it('closes notification via escape button when focus is placed on the notification', async () => {
+    const onCloseButtonClick = jest.fn();
+    const onClose = jest.fn();
+    render(
+      <ActionableNotification
+        onClose={onClose}
+        onCloseButtonClick={onCloseButtonClick}
+        actionButtonLabel="My custom action"
+      />
+    );
+
+    // without focus being on/in the notification, it should not close via escape
+    userEvent.keyboard('{Escape}');
+    expect(onCloseButtonClick).toHaveBeenCalledTimes(0);
+    expect(onClose).toHaveBeenCalledTimes(0);
+
+    // after focus is placed, the notification should close via escape
+    userEvent.tab();
+    userEvent.keyboard('{Escape}');
+    expect(onCloseButtonClick).toHaveBeenCalledTimes(1);
+    expect(onClose).toHaveBeenCalledTimes(1);
+
+    await waitFor(() => {
+      expect(screen.queryByRole('alertdialog')).not.toBeInTheDocument();
+    });
+  });
+});

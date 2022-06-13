@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { FeatureFlags } from '../../FeatureFlags';
 import {
   ActionableNotification,
   ToastNotification,
@@ -22,13 +21,13 @@ export default {
     InlineNotification,
     ToastNotification,
   },
-  decorators: [
-    (Story) => (
-      <FeatureFlags flags={{ 'enable-v11-release': true }}>
-        <Story />
-      </FeatureFlags>
-    ),
-  ],
+  // decorators: [
+  //   (Story) => (
+  //     <FeatureFlags flags={{ 'enable-v11-release': true }}>
+  //       <Story />
+  //     </FeatureFlags>
+  //   ),
+  // ],
   argTypes: {
     kind: {
       options: [
