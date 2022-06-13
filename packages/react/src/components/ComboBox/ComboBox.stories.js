@@ -6,9 +6,9 @@
  */
 
 import React from 'react';
-import ComboBox from '../';
-import { Layer } from '../../Layer';
-import mdx from '../ComboBox.mdx';
+import ComboBox from '../ComboBox';
+import { Layer } from '../Layer';
+import mdx from './ComboBox.mdx';
 
 const items = [
   {
@@ -54,7 +54,62 @@ export default {
   },
 };
 
-export const Combobox = (args) => (
+export const Combobox = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      downshiftProps={{
+        onStateChange: () => {
+          console.log('the state has changed');
+        },
+      }}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="ComboBox title"
+      helperText="Combobox helper text"
+    />
+  </div>
+);
+
+export const WithLayer = () => (
+  <div style={{ width: 300 }}>
+    <ComboBox
+      onChange={() => {}}
+      id="carbon-combobox"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+      placeholder="Filter..."
+      titleText="First Layer"
+      helperText="Combobox helper text"
+    />
+    <Layer>
+      <ComboBox
+        onChange={() => {}}
+        id="carbon-combobox"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        placeholder="Filter..."
+        titleText="Second Layer"
+        helperText="Combobox helper text"
+      />
+      <Layer>
+        <ComboBox
+          onChange={() => {}}
+          id="carbon-combobox"
+          items={items}
+          itemToString={(item) => (item ? item.text : '')}
+          placeholder="Filter..."
+          titleText="Third Layer"
+          helperText="Combobox helper text"
+        />
+      </Layer>
+    </Layer>
+  </div>
+);
+
+export const Playground = (args) => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}
@@ -74,41 +129,100 @@ export const Combobox = (args) => (
   </div>
 );
 
-export const WithLayer = (args) => (
-  <div style={{ width: 300 }}>
-    <ComboBox
-      onChange={() => {}}
-      id="carbon-combobox"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
-      titleText="First Layer"
-      helperText="Combobox helper text"
-      {...args}
-    />
-    <Layer>
-      <ComboBox
-        onChange={() => {}}
-        id="carbon-combobox"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter..."
-        titleText="Second Layer"
-        helperText="Combobox helper text"
-        {...args}
-      />
-      <Layer>
-        <ComboBox
-          onChange={() => {}}
-          id="carbon-combobox"
-          items={items}
-          itemToString={(item) => (item ? item.text : '')}
-          placeholder="Filter..."
-          titleText="Third Layer"
-          helperText="Combobox helper text"
-          {...args}
-        />
-      </Layer>
-    </Layer>
-  </div>
-);
+Playground.argTypes = {
+  ariaLabel: {
+    table: {
+      disable: true,
+    },
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  downshiftProps: {
+    table: {
+      disable: true,
+    },
+  },
+  initialSelectedItem: {
+    table: {
+      disable: true,
+    },
+  },
+  invalidText: {
+    table: {
+      disable: true,
+    },
+  },
+  items: {
+    table: {
+      disable: true,
+    },
+  },
+  itemToElement: {
+    table: {
+      disable: true,
+    },
+  },
+  itemToString: {
+    table: {
+      disable: true,
+    },
+  },
+  light: {
+    table: {
+      disable: true,
+    },
+  },
+  onChange: {
+    table: {
+      disable: true,
+    },
+  },
+  onInputChange: {
+    table: {
+      disable: true,
+    },
+  },
+  onStateChange: {
+    table: {
+      disable: true,
+    },
+  },
+  onToggleClick: {
+    table: {
+      disable: true,
+    },
+  },
+  selectedItem: {
+    table: {
+      disable: true,
+    },
+  },
+  shouldFilterItem: {
+    table: {
+      disable: true,
+    },
+  },
+  translateWithId: {
+    table: {
+      disable: true,
+    },
+  },
+  titleText: {
+    table: {
+      disable: true,
+    },
+  },
+  type: {
+    table: {
+      disable: true,
+    },
+  },
+  warnText: {
+    table: {
+      disable: true,
+    },
+  },
+};
