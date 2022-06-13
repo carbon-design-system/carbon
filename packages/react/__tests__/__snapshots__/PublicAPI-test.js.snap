@@ -2232,6 +2232,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeOnSelect": Object {
+        "type": "bool",
+      },
       "dateFormat": Object {
         "type": "string",
       },
