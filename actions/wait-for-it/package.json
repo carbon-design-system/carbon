@@ -1,0 +1,23 @@
+{
+  "name": "@carbon/actions-wait-for-it",
+  "private": true,
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/carbon-design-system/carbon.git",
+    "directory": "actions/wait-for-it"
+  },
+  "bugs": "https://github.com/carbon-design-system/carbon/issues",
+  "keywords": [
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
+  ],
+  "dependencies": {
+    "@actions/core": "^1.2.3",
+    "got": "^11.8.5"
+  }
+}

@@ -7818,8 +7818,52 @@ Map {
     "render": [Function],
   },
   "Toggle" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "defaultToggled": Object {
+        "type": "bool",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "labelA": Object {
+        "type": "node",
+      },
+      "labelB": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onToggle": Object {
+        "type": "func",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "toggled": Object {
+        "type": "bool",
+      },
+    },
   },
   "ToggleSkeleton" => Object {
     "defaultProps": Object {
