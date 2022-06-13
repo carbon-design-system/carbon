@@ -455,6 +455,12 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     }
   }
 
+  .#{$prefix}--tab-content--interactive {
+    &:focus {
+      outline: none;
+    }
+  }
+
   //-----------------------------
   // Skeleton state
   //-----------------------------
