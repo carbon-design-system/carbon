@@ -18,23 +18,6 @@ export default {
       page: mdx,
     },
   },
-  // argTypes: {
-  //   ariaLabel: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  //   children: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  //   type: {
-  //     table: {
-  //       disable: true,
-  //     },
-  //   },
-  // },
 };
 
 export const Inline = () => (
