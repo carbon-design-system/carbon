@@ -9,25 +9,24 @@ import {
   ActionableNotification,
   ToastNotification,
   InlineNotification,
-} from './Notification';
+} from '../Notification';
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import mdx from './Notification.mdx';
 
 // eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/Notifications',
-  subscomponents: {
+  subcomponents: {
     ActionableNotification,
     InlineNotification,
     ToastNotification,
   },
-  // decorators: [
-  //   (Story) => (
-  //     <FeatureFlags flags={{ 'enable-v11-release': true }}>
-  //       <Story />
-  //     </FeatureFlags>
-  //   ),
-  // ],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
   argTypes: {
     kind: {
       options: [

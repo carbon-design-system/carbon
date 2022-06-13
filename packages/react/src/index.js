@@ -82,7 +82,6 @@ export {
   InlineNotification,
   NotificationActionButton,
   NotificationButton,
-  NotificationTextDetails,
 } from './components/Notification';
 export NumberInput from './components/NumberInput';
 export OrderedList from './components/OrderedList';

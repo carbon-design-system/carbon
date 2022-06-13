@@ -1,4 +1,9 @@
-import { Props } from '@storybook/addon-docs';
+import { Story, Preview, Props } from '@storybook/addon-docs';
+import {
+  ActionableNotification,
+  ToastNotification,
+  InlineNotification,
+} from '../Notification';
 
 # Notification
 
@@ -10,11 +15,38 @@ import { Props } from '@storybook/addon-docs';
 
 ## Table of Contents
 
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Actionable](#actionable)
+- [References](#references)
+- [Feedback](#feedback)
+
 ## Overview
+
+There are 3 different types of notification components:
+`ActionableNotification`, `InlineNotification`, and `ToastNotification`.
 
 ## Component API
 
 <Props />
+
+## Actionable
+
+<Preview>
+  <Story id="components-notifications--actionable" />
+</Preview>
+
+## Inline
+
+<Preview>
+  <Story id="components-notifications--inline" />
+</Preview>
+
+## Toast
+
+<Preview>
+  <Story id="components-notifications--toast" />
+</Preview>
 
 ## Feedback
 

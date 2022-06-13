@@ -18,11 +18,11 @@ import {
   InformationSquareFilled,
 } from '@carbon/icons-react';
 
-import Button from '../../Button';
-import useIsomorphicEffect from '../../../internal/useIsomorphicEffect';
-import { useNoInteractiveChildren } from '../../../internal/useNoInteractiveChildren';
-import { keys, matches } from '../../../internal/keyboard';
-import { usePrefix } from '../../../internal/usePrefix';
+import Button from '../Button';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
+import { keys, matches } from '../../internal/keyboard';
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * Conditionally call a callback when the escape key is pressed
