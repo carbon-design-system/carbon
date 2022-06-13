@@ -112,7 +112,7 @@ example, you can change the `$prefix` used by writing the following:
 
 ```scss
 @use '@carbon/type' with (
-  $prefix: 'custom-prefix',
+  $prefix: 'custom-prefix'
 );
 ```
 
