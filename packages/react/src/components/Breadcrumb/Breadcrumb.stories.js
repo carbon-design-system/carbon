@@ -72,15 +72,8 @@ export const Playground = (args) => (
 
 Playground.argTypes = {
   children: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  noTrailingSlash: {
-    control: {
-      type: 'boolean',
+    table: {
+      disable: true,
     },
-    defaultValue: false,
   },
 };
