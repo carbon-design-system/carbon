@@ -8,8 +8,6 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbSkeleton } from '../Breadcrumb';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
@@ -22,7 +20,6 @@ export default {
     BreadcrumbItem,
     BreadcrumbSkeleton,
   },
-  decorators: [withKnobs],
   parameters: {
     docs: {
       page: mdx,
@@ -62,24 +59,21 @@ export const BreadcrumbWithOverflowMenu = () => (
 
 export const Skeleton = () => <BreadcrumbSkeleton />;
 
-const props = () => ({
-  className: 'some-class',
-  noTrailingSlash: boolean('No trailing slash (noTrailingSlash)', false),
-  onClick: action('onClick'),
-});
-
-export const Playground = () => (
-  <Breadcrumb {...props()}>
+export const Playground = (args) => (
+  <Breadcrumb {...args}>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
     </BreadcrumbItem>
     <BreadcrumbItem href="#">Breadcrumb 2</BreadcrumbItem>
-    <BreadcrumbItem
-      href="#"
-      {...props()}
-      isCurrentPage={boolean('Is current page (isCurrentPage)', false)}>
-      Breadcrumb 3
-    </BreadcrumbItem>
+    <BreadcrumbItem href="#">Breadcrumb 3</BreadcrumbItem>
     <BreadcrumbItem>Breadcrumb 4</BreadcrumbItem>
   </Breadcrumb>
 );
+
+Playground.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+};
