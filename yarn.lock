@@ -11295,6 +11295,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation":
+  version: 0.0.0-use.local
+  resolution: "codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation"
+  dependencies:
+    "@carbon/react": ^1.5.0
+    react: ^17.0.0
+    react-dom: ^17.0.0
+    react-scripts: 5.0.0
+    sass: ^1.51.0
+  languageName: unknown
+  linkType: soft
+
 "codesandbox@workspace:examples/codesandbox":
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
