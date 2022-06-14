@@ -68,18 +68,19 @@ export default {
 };
 
 export const ForTesting = () => {
-  const [date, setDate] = useState(null);
+  const [date, setDate] = useState('');
   return (
     <>
-      <DatePicker datePickerType="single">
+      <DatePicker
+        datePickerType="single"
+        value={date}
+        onChange={(value) => {
+          setDate(value);
+        }}>
         <DatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="Date Picker label"
           id="date-picker-simple"
-          value={date}
-          onChange={(value) => {
-            setDate(value);
-          }}
         />
       </DatePicker>
       <button
