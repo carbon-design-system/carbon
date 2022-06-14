@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import DatePicker from './DatePicker';
 import DatePickerSkeleton from './DatePicker.Skeleton';
@@ -65,6 +65,32 @@ export default {
       page: mdx,
     },
   },
+};
+
+export const ForTesting = () => {
+  const [date, setDate] = useState(null);
+  return (
+    <>
+      <DatePicker datePickerType="single">
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          id="date-picker-simple"
+          value={date}
+          onChange={(value) => {
+            setDate(value);
+          }}
+        />
+      </DatePicker>
+      <button
+        type="button"
+        onClick={() => {
+          setDate('');
+        }}>
+        clear
+      </button>
+    </>
+  );
 };
 
 export const Simple = (args) => (

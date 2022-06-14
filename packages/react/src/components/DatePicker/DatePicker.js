@@ -453,7 +453,7 @@ function DatePicker({
 
   useEffect(() => {
     if (calendarRef.current) {
-      calendarRef.current.set({ value });
+      calendarRef.current.setDate({ value });
       updateClassNames(calendarRef.current, prefix);
       //for simple date picker w/o calendar; initial mount may not have value
     } else if (!calendarRef.current && value) {
