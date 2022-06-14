@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 import React from 'react';
 import { Download } from '@carbon/icons-react';
 import Link from './Link';
@@ -39,11 +37,7 @@ export default {
   },
 };
 
-export const Default = () => (
-  <Link href="#" disabled="false">
-    Link
-  </Link>
-);
+export const Default = () => <Link href="#">Link</Link>;
 
 export const PairedWithIcon = () => (
   <Link href="#" renderIcon={Download}>
@@ -56,4 +50,3 @@ export const Playground = (args) => (
     Link
   </Link>
 );
-Playground.argTypes = {};
