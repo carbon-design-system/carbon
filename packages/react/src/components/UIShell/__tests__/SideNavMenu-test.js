@@ -8,76 +8,79 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { SideNavMenu } from '../SideNavMenu';
-import { SideNavMenuItem } from '../';
+import { SideNavMenuItem } from '../../';
 
 const prefix = 'cds';
 
 describe('SideNavMenu', () => {
-  let mockProps, wrapper;
+  let mockProps;
 
   beforeEach(() => {
     mockProps = {
-      buttonRef: jest.fn(),
+      ref: jest.fn(),
       className: 'custom-classname',
-      children: 'text',
+      children: <span data-testid="children">test</span>,
       renderIcon: () => <div>icon</div>,
       isActive: false,
       title: 'title',
     };
   });
 
-  afterEach(() => {
-    wrapper && wrapper.unmount();
-  });
-
   it('should render', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
+    const wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(wrapper).toMatchSnapshot();
   });
 
   it('should expand the menu when the button ref is clicked', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    expect(wrapper.state('isExpanded')).toBe(false);
-    expect(mockProps.buttonRef).toHaveBeenCalledTimes(1);
+    const wrapper = mount(<SideNavMenu {...mockProps} />);
+
+    expect(wrapper.find('button').prop('aria-expanded')).toBe(false);
+    expect(mockProps.ref).toHaveBeenCalledTimes(1);
+
     wrapper.find('button').simulate('click');
-    expect(wrapper.state('isExpanded')).toBe(true);
+
+    expect(wrapper.find('button').prop('aria-expanded')).toBe(true);
   });
 
   it('should collapse the menu when the Esc key is pressed', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} defaultExpanded={true} />);
-    expect(wrapper.state('isExpanded')).toBe(true);
+    const wrapper = mount(<SideNavMenu {...mockProps} defaultExpanded />);
+
+    expect(wrapper.find('button').prop('aria-expanded')).toBe(true);
+
     wrapper.simulate('keydown', {
       key: 'Escape',
       keyCode: 27,
       which: 27,
     });
-    expect(wrapper.state('isExpanded')).toBe(false);
+
+    expect(wrapper.find('button').prop('aria-expanded')).toBe(false);
   });
 
   it('should reset expanded state if the isSideNavExpanded prop is false', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    expect(wrapper.state('isExpanded')).toBe(false);
-    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
-    wrapper.setState({ isExpanded: true });
-    expect(wrapper.state('isExpanded')).toBe(true);
-    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
+    const wrapper = mount(<SideNavMenu {...mockProps} />);
+
+    expect(wrapper.find('button').prop('aria-expanded')).toBe(false);
+    wrapper.find('button').simulate('click');
+    expect(wrapper.find('button').prop('aria-expanded')).toBe(true);
+
     // set the prop to false. This should force isExpanded from true to false, and update wasPreviouslyExpanded to true
     wrapper.setProps({ isSideNavExpanded: false });
-    expect(wrapper.state('isExpanded')).toBe(false);
-    expect(wrapper.state('wasPreviouslyExpanded')).toBe(true);
+    expect(wrapper.find('button').prop('aria-expanded')).toBe(false);
   });
 
   it('should reset expanded state if the SideNav was collapsed/expanded', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    wrapper.setState({ isExpanded: false, wasPreviouslyExpanded: true });
+    const wrapper = mount(
+      <SideNavMenu {...mockProps} defaultExpanded isSideNavExpanded={false} />
+    );
+
     // set the prop to false. This should force isExpanded from true to false, and update wasPreviouslyExpanded to true
     wrapper.setProps({ isSideNavExpanded: true });
-    expect(wrapper.state('isExpanded')).toBe(true);
-    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
+
+    expect(wrapper.find('button').prop('aria-expanded')).toBe(true);
   });
 
   it('should add the correct active class if a child is active', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
+    const wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(
       wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
     ).toBe(false);
@@ -102,7 +105,7 @@ describe('SideNavMenu', () => {
   });
 
   it('should include a css class to render the large variant is large prop is set', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
+    const wrapper = mount(<SideNavMenu {...mockProps} />);
     expect(
       wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
     ).toBe(false);
