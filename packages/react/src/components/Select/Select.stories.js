@@ -197,10 +197,3 @@ export const Playground = (args) => {
     </div>
   );
 };
-
-Playground.argTypes = {
-  // size: {
-  //   options: ['sm', 'md', 'lg'],
-  //   control: { type: 'select' },
-  // },
-};
