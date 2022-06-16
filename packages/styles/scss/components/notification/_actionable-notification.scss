@@ -227,6 +227,7 @@
     @include type-style('body-compact-01');
 
     display: flex;
+    flex-wrap: wrap;
     word-break: break-word;
   }
 
