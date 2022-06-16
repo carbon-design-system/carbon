@@ -5,22 +5,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import SideNavLinkText from '../SideNavLinkText';
 
 describe('SideNavLinkText', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      className: 'custom-classname',
-      children: 'text',
-    };
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <SideNavLinkText className="test">test</SideNavLinkText>
+    );
+    expect(container.firstChild).toHaveClass('test');
   });
 
-  it('should render', () => {
-    const wrapper = mount(<SideNavLinkText {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should spread extra props on the outermost element', () => {
+    const { container } = render(
+      <SideNavLinkText data-testid="test">test</SideNavLinkText>
+    );
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });
