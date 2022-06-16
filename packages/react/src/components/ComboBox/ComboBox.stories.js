@@ -135,6 +135,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
   id: {
     table: {
       disable: true,
@@ -151,9 +156,7 @@ Playground.argTypes = {
     },
   },
   invalidText: {
-    table: {
-      disable: true,
-    },
+    control: 'text',
   },
   items: {
     table: {
@@ -176,9 +179,10 @@ Playground.argTypes = {
     },
   },
   onChange: {
-    table: {
-      disable: true,
-    },
+    action: 'clicked',
+  },
+  onClick: {
+    action: 'clicked',
   },
   onInputChange: {
     table: {
@@ -221,8 +225,6 @@ Playground.argTypes = {
     },
   },
   warnText: {
-    table: {
-      disable: true,
-    },
+    control: 'text',
   },
 };
