@@ -179,6 +179,7 @@ function DatePicker({
   appendTo,
   children,
   className,
+  closeOnSelect = true,
   dateFormat = 'm/d/Y',
   datePickerType,
   disable,
@@ -286,6 +287,7 @@ function DatePicker({
       inline: inline ?? false,
       disableMobile: true,
       defaultDate: value,
+      closeOnSelect: closeOnSelect,
       mode: datePickerType,
       allowInput: allowInput ?? true,
       dateFormat: dateFormat,
@@ -487,6 +489,11 @@ DatePicker.propTypes = {
    * The CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * flatpickr prop passthrough. Controls whether the calendar dropdown closes upon selection.
+   */
+  closeOnSelect: PropTypes.bool,
 
   /**
    * The date format.
