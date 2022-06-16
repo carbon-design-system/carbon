@@ -31,7 +31,7 @@
     "access": "public"
   },
   "scripts": {
-    "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14 --external:jscodeshift",
+    "build": "esbuild src/cli.js --bundle --platform=node --outfile=cli.js --target=node14",
     "clean": "rimraf cli.js",
     "watch": "yarn build --watch"
   },
