@@ -59,8 +59,7 @@ test.describe('UIShell', () => {
       }) => {
         await snapshotStory(page, {
           component: 'UIShell',
-          id:
-            'components-ui-shell--header-base-w-navigation-actions-and-side-nav',
+          id: 'components-ui-shell--header-base-w-navigation-actions-and-side-nav',
           theme,
         });
       });

@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
+import TextInput from '../../TextInput';
+import Checkbox from '../../Checkbox';
 import Button from '../../Button';
 import mdx from './Tabs.mdx';
 
@@ -38,10 +40,23 @@ export const Line = (args) => (
       <Tab>Tab Label 4 with a very long long label</Tab>
     </TabList>
     <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        Tab Panel 1 <Button>Example button</Button>
+        <form style={{ margin: '2em' }}>
+          <legend className={`cds--label`}>Validation example</legend>
+          <Checkbox id="cb" labelText="Accept privacy policy" />
+          <Button
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+            type="submit">
+            Submit
+          </Button>
+          <TextInput
+            type="text"
+            labelText="Text input label"
+            helperText="Optional help text"
+          />
+        </form>
       </TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
     </TabPanels>
@@ -60,10 +75,23 @@ export const Manual = (args) => (
       <Tab>Tab Label 5</Tab>
     </TabList>
     <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        Tab Panel 1 <Button>Example button</Button>
+        <form style={{ margin: '2em' }}>
+          <legend className={`cds--label`}>Validation example</legend>
+          <Checkbox id="cb" labelText="Accept privacy policy" />
+          <Button
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+            type="submit">
+            Submit
+          </Button>
+          <TextInput
+            type="text"
+            labelText="Text input label"
+            helperText="Optional help text"
+          />
+        </form>
       </TabPanel>
-      <TabPanel>Tab Panel 2</TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>
       <TabPanel>Tab Panel 5</TabPanel>
@@ -127,7 +155,20 @@ export const Contained = (args) => (
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
       <TabPanel>
-        Tab Panel 2 <Button>Example button</Button>
+        <form style={{ margin: '2em' }}>
+          <legend className={`cds--label`}>Validation example</legend>
+          <Checkbox id="cb" labelText="Accept privacy policy" />
+          <Button
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+            type="submit">
+            Submit
+          </Button>
+          <TextInput
+            type="text"
+            labelText="Text input label"
+            helperText="Optional help text"
+          />
+        </form>
       </TabPanel>
       <TabPanel>Tab Panel 3</TabPanel>
       <TabPanel>Tab Panel 4</TabPanel>

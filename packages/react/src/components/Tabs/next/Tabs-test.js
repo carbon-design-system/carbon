@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tabs, Tab, TabPanel, TabPanels, TabList } from './Tabs';
+import { act } from 'react-dom/test-utils';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -177,5 +178,85 @@ describe('TabPanel', () => {
       </Tabs>
     );
     expect(screen.getByText('Tab Panel 1')).toHaveClass('custom-class');
+  });
+
+  it('should recieve focus if there is no interactive content', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="custom-class">Tab Panel 1</TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '0');
+  });
+
+  it('should not recieve focus if there is interactive content', () => {
+    render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="custom-class">
+            Tab Panel 1<button type="button">Submit</button>
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
+  });
+
+  it('should update focus appropriately if tab panel content changes', async () => {
+    const { rerender } = render(
+      <Tabs>
+        <TabList aria-label="List of tabs">
+          <Tab>Tab Label 1</Tab>
+          <Tab>Tab Label 2</Tab>
+          <Tab>Tab Label 3</Tab>
+        </TabList>
+        <TabPanels>
+          <TabPanel className="custom-class">
+            Tab Panel 1<button type="button">Submit</button>
+          </TabPanel>
+          <TabPanel>Tab Panel 2</TabPanel>
+          <TabPanel>Tab Panel 3</TabPanel>
+        </TabPanels>
+      </Tabs>
+    );
+
+    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '-1');
+
+    await act(async () => {
+      rerender(
+        <Tabs>
+          <TabList aria-label="List of tabs">
+            <Tab>Tab Label 1</Tab>
+            <Tab>Tab Label 2</Tab>
+            <Tab>Tab Label 3</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel className="custom-class">Tab Panel 1</TabPanel>
+            <TabPanel>Tab Panel 2</TabPanel>
+            <TabPanel>Tab Panel 3</TabPanel>
+          </TabPanels>
+        </Tabs>
+      );
+    });
+
+    expect(screen.getByText('Tab Panel 1')).toHaveAttribute('tabIndex', '0');
   });
 });
