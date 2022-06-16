@@ -52,11 +52,20 @@ For example:
 Inline theming can be done by using the mixin. For example:
 
 ```scss
-@use @carbon/themes';
+@use '@carbon/themes/scss/themes';
+
+// Use the default white theme here
 
 .my-dark-theme {
-  @include themes.theme();
-  // Use the theme here
+  @include theme($theme--g90) {
+    // Use the dark theme here
+  }
+}
+
+.my-darker-theme {
+  @include theme($theme--g100) {
+    // Use the darker theme here
+  }
 }
 ```
 
