@@ -78,9 +78,9 @@ $-components: (
           $theme-values: map.get($value, values);
 
           @each $theme-value in $theme-values {
-            $theme: map.get($theme-value, theme);
             $value: map.get($theme-value, value);
-            @if theme.matches($theme, theme.$theme) and
+
+            @if theme.matches(map.get($theme-value, theme), $theme) and
               meta.type-of($value) ==
               color
             {

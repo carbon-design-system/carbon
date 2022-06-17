@@ -121,12 +121,8 @@ function TabList({
   scrollIntoView,
   ...rest
 }) {
-  const {
-    activeIndex,
-    selectedIndex,
-    setSelectedIndex,
-    setActiveIndex,
-  } = React.useContext(TabsContext);
+  const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
+    React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
   const previousButton = useRef(null);
@@ -485,9 +481,8 @@ const Tab = React.forwardRef(function Tab(
   ref
 ) {
   const prefix = usePrefix();
-  const { selectedIndex, setSelectedIndex, baseId } = React.useContext(
-    TabsContext
-  );
+  const { selectedIndex, setSelectedIndex, baseId } =
+    React.useContext(TabsContext);
   const index = React.useContext(TabContext);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
@@ -642,18 +637,56 @@ const TabPanel = React.forwardRef(function TabPanel(
   const ref = useMergedRefs([forwardRef, panel]);
 
   const [tabIndex, setTabIndex] = useState('0');
+  const [interactiveContent, setInteractiveContent] = useState(false);
   const { selectedIndex, baseId } = React.useContext(TabsContext);
   const index = React.useContext(TabPanelContext);
   const id = `${baseId}-tabpanel-${index}`;
   const tabId = `${baseId}-tab-${index}`;
-  const className = cx(`${prefix}--tab-content`, customClassName);
+  const className = cx(`${prefix}--tab-content`, customClassName, {
+    [`${prefix}--tab-content--interactive`]: interactiveContent,
+  });
+
+  useEffectOnce(() => {
+    if (!panel.current) {
+      return;
+    }
+
+    const content = getInteractiveContent(panel.current);
+    if (content) {
+      setInteractiveContent(true);
+      setTabIndex('-1');
+    }
+  });
 
   // tabindex should only be 0 if no interactive content in children
   useEffect(() => {
-    const interactiveContent = getInteractiveContent(panel.current);
-    if (interactiveContent) {
-      setTabIndex('-1');
+    if (!panel.current) {
+      return;
     }
+
+    const { current: node } = panel;
+
+    function callback() {
+      const content = getInteractiveContent(node);
+      if (content) {
+        setInteractiveContent(true);
+        setTabIndex('-1');
+      } else {
+        setInteractiveContent(false);
+        setTabIndex('0');
+      }
+    }
+
+    const observer = new MutationObserver(callback);
+
+    observer.observe(node, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect(node);
+    };
   }, []);
 
   return (

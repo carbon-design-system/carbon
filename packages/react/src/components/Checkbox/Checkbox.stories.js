@@ -37,3 +37,46 @@ export const CheckboxStory = () => {
 CheckboxStory.storyName = 'Checkbox';
 
 export const Skeleton = () => <CheckboxSkeleton />;
+
+export const Playground = (args) => (
+  <fieldset className={`${prefix}--fieldset`}>
+    <legend className={`${prefix}--label`}>Checkbox heading</legend>
+    <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" {...args} />
+    <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" {...args} />
+  </fieldset>
+);
+
+Playground.argTypes = {
+  checked: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  className: {
+    control: false,
+  },
+  defaultChecked: {
+    control: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  id: {
+    control: false,
+  },
+  indeterminate: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  labelText: {
+    control: false,
+  },
+};
