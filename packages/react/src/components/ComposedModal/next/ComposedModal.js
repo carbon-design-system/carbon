@@ -239,7 +239,8 @@ const ComposedModal = React.forwardRef(function ComposedModal(
       onBlur={handleBlur}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className={modalClass}>
+      className={modalClass}
+      tabIndex="-1">
       <div
         className={containerClass}
         role="dialog"
