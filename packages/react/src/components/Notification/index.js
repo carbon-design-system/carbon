@@ -5,4 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Notification';
+export {
+  NotificationActionButton,
+  NotificationButton,
+  ToastNotification,
+  InlineNotification,
+  ActionableNotification,
+} from './Notification';
