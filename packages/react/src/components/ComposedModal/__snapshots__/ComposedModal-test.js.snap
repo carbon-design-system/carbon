@@ -14,6 +14,7 @@ exports[`<ComposedModal /> renders 1`] = `
     onTransitionEnd={[Function]}
     open={true}
     role="presentation"
+    tabIndex="-1"
   >
     <span
       className="cds--visually-hidden"
