@@ -237,3 +237,4 @@ export unstable_TreeView, {
 } from './components/TreeView';
 export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
+export { usePrefix } from './internal/usePrefix';
