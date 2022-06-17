@@ -62,7 +62,7 @@ Filename.propTypes = {
   status: PropTypes.oneOf(['edit', 'complete', 'uploading']),
 
   /**
-   * Provide a custom tabIndex value for the <Filename>
+   * Provide a custom tabIndex value for the `<Filename>`
    */
   tabIndex: PropTypes.string,
 };
