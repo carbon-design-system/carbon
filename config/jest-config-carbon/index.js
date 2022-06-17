@@ -9,6 +9,13 @@
 
 module.exports = {
   moduleFileExtensions: ['js', 'json', 'node'],
+  moduleNameMapper: {
+    // This mapping is the result of updating to Jest 28. We currently require
+    // this as the version of uuid that gets resolved is ESM but we would like
+    // to work in CommonJS until Jest lands support for ESM in stable
+    // Reference: https://github.com/microsoft/accessibility-insights-web/pull/5421#issuecomment-1109168149
+    '^uuid$': require.resolve('uuid'),
+  },
   modulePathIgnorePatterns: ['/build/', '/es/', '/lib/', '/umd/', '/examples/'],
   reporters: ['default'],
   setupFiles: [require.resolve('./setup/setup.js')],
