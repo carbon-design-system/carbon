@@ -290,7 +290,8 @@ export default class ComposedModal extends Component {
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         onTransitionEnd={open ? this.handleTransitionEnd : undefined}
-        className={modalClass}>
+        className={modalClass}
+        tabIndex="-1">
         {/* Non-translatable: Focus-wrap code makes this `<span>` not actually read by screen readers */}
         <span
           ref={this.startSentinel}
