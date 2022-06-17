@@ -8443,34 +8443,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"accessibility-checker@npm:^3.1.18":
-  version: 3.1.28
-  resolution: "accessibility-checker@npm:3.1.28"
+"accessibility-checker@npm:^3.1.32":
+  version: 3.1.32
+  resolution: "accessibility-checker@npm:3.1.32"
   dependencies:
+    axios: ^0.27.2
     chromedriver: "*"
     deep-diff: ^1.0.2
     js-yaml: ^4.1.0
     puppeteer: ^13.0.0
-    request: ^2.88.2
-  bin:
-    achecker: bin/achecker.js
-  checksum: 913dc0d787ca83e4c6eacc48cf7d8334abdcd88e0523a2fcdb99b4f953c4fe141548f8c0759a198ec9ed3c46753a2671b0988ddf5d4424b4c7c9479c1e37b264
-  languageName: node
-  linkType: hard
-
-"accessibility-checker@npm:^3.1.29-rc.0":
-  version: 3.1.29-rc.0
-  resolution: "accessibility-checker@npm:3.1.29-rc.0"
-  dependencies:
-    chromedriver: "*"
-    deep-diff: ^1.0.2
-    js-yaml: ^4.1.0
-    puppeteer: ^13.0.0
-    request: ^2.88.2
     uuid: ^8.3.2
   bin:
     achecker: bin/achecker.js
-  checksum: 1c85d991100deec9fc32d72aeeb5b2f42b2e1c4b744174e48646a89c1ddd17b5ef7cee69ac3f47817e3277147b180ec66b03e4855a6c453ff45e105f543b8f4d
+  checksum: 6e3590648800ba35eb2a15d02ab73bde34ce526cace841db5b07b562bfb490b085f08f7b68b215076ae5fa9a2c4e7f30123a1864975ee76532bb85f99ae3296c
   languageName: node
   linkType: hard
 
@@ -9377,6 +9362,16 @@ __metadata:
   dependencies:
     follow-redirects: ^1.10.0
   checksum: c87915fa0b18c15c63350112b6b3563a3e2ae524d7707de0a73d2e065e0d30c5d3da8563037bc29d4cc1b7424b5a350cb7274fa52525c6c04a615fe561c6ab11
+  languageName: node
+  linkType: hard
+
+"axios@npm:^0.27.2":
+  version: 0.27.2
+  resolution: "axios@npm:0.27.2"
+  dependencies:
+    follow-redirects: ^1.14.9
+    form-data: ^4.0.0
+  checksum: 38cb7540465fe8c4102850c4368053c21683af85c5fdf0ea619f9628abbcb59415d1e22ebc8a6390d2bbc9b58a9806c874f139767389c862ec9b772235f06854
   languageName: node
   linkType: hard
 
@@ -10633,7 +10628,7 @@ __metadata:
     "@testing-library/jest-dom": ^5.16.1
     "@testing-library/react": ^12.1.2
     "@testing-library/user-event": ^13.5.0
-    accessibility-checker: ^3.1.29-rc.0
+    accessibility-checker: ^3.1.32
     all-contributors-cli: ^6.19.0
     cross-env: ^7.0.0
     cross-spawn: ^7.0.0
@@ -15773,13 +15768,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.10.0":
-  version: 1.14.9
-  resolution: "follow-redirects@npm:1.14.9"
+"follow-redirects@npm:^1.0.0, follow-redirects@npm:^1.10.0, follow-redirects@npm:^1.14.9":
+  version: 1.15.1
+  resolution: "follow-redirects@npm:1.15.1"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: f5982e0eb481818642492d3ca35a86989c98af1128b8e1a62911a3410621bc15d2b079e8170b35b19d3bdee770b73ed431a257ed86195af773771145baa57845
+  checksum: 6aa4e3e3cdfa3b9314801a1cd192ba756a53479d9d8cca65bf4db3a3e8834e62139245cd2f9566147c8dfe2efff1700d3e6aefd103de4004a7b99985e71dd533
   languageName: node
   linkType: hard
 
@@ -18973,7 +18968,7 @@ fsevents@^1.2.7:
     "@babel/preset-react": ^7.17.12
     "@babel/runtime": ^7.18.3
     "@wojtekmaj/enzyme-adapter-react-17": ^0.6.5
-    accessibility-checker: ^3.1.18
+    accessibility-checker: ^3.1.32
     axe-core: ^4.3.5
     babel-jest: ^28.1.0
     chalk: ^4.1.1

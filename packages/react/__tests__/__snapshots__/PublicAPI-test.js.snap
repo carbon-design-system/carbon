@@ -2157,6 +2157,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeOnSelect": Object {
+        "type": "bool",
+      },
       "dateFormat": Object {
         "type": "string",
       },
@@ -5872,9 +5875,6 @@ Map {
       "onToggle": Object {
         "type": "func",
       },
-      "translateById": Object {
-        "type": "func",
-      },
     },
     "render": [Function],
   },
@@ -8707,6 +8707,7 @@ Map {
   "unstable_useContextMenu" => Object {},
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
+  "usePrefix" => Object {},
   "useTheme" => Object {},
 }
 `;
