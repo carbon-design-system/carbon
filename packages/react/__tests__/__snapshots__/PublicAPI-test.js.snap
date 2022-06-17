@@ -5875,9 +5875,6 @@ Map {
       "onToggle": Object {
         "type": "func",
       },
-      "translateById": Object {
-        "type": "func",
-      },
     },
     "render": [Function],
   },
