@@ -15,9 +15,9 @@ const Link = React.forwardRef(function Link(
     children,
     className: customClassName,
     href,
-    disabled,
-    inline,
-    visited,
+    disabled = false,
+    inline = false,
+    visited = false,
     renderIcon: Icon,
     size,
     ...rest
