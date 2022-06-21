@@ -5,43 +5,60 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import SideNavLink from '../SideNavLink';
 
-const prefix = 'cds';
-
 describe('SideNavLink', () => {
-  let mockProps, wrapper;
-
-  beforeEach(() => {
-    mockProps = {
-      className: 'custom-classname',
-      children: 'link',
-      icon: <div>icon</div>,
-      isActive: false,
-    };
+  it('should set the current class when `isActive` is true', () => {
+    render(
+      <SideNavLink href="/" isActive>
+        test
+      </SideNavLink>
+    );
+    expect(screen.getByRole('link')).toHaveClass(
+      'cds--side-nav__link--current'
+    );
   });
 
-  afterEach(() => {
-    wrapper && wrapper.unmount();
+  it('should support a custom icon through `renderIcon`', () => {
+    const CustomIcon = jest.fn(() => {
+      return <svg data-testid="custom-icon" />;
+    });
+    render(
+      <SideNavLink href="/" renderIcon={CustomIcon}>
+        test
+      </SideNavLink>
+    );
+    expect(CustomIcon).toHaveBeenCalled();
+    expect(screen.getByTestId('custom-icon')).toBeInTheDocument();
   });
 
-  it('should render', () => {
-    const inactive = mount(<SideNavLink {...mockProps} />);
-    expect(inactive).toMatchSnapshot();
-    const active = mount(<SideNavLink {...mockProps} isActive />);
-    expect(active).toMatchSnapshot();
+  it('should support a custom `className` prop on the element with role="link"', () => {
+    render(
+      <SideNavLink href="/" className="test">
+        test
+      </SideNavLink>
+    );
+    expect(screen.getByRole('link')).toHaveClass('test');
   });
 
-  it('should include a css class to render the large variant is large prop is set', () => {
-    wrapper = mount(<SideNavLink {...mockProps} />);
-    expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
-    ).toBe(false);
-    wrapper.setProps({ large: true });
-    expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
-    ).toBe(true);
+  it('should spread extra props on the element with role="link"', () => {
+    render(
+      <SideNavLink href="/" data-testid="test">
+        test
+      </SideNavLink>
+    );
+    expect(screen.getByRole('link')).toHaveAttribute('data-testid', 'test');
+  });
+
+  it('should set a `ref` on the element with role="link"', () => {
+    const ref = jest.fn();
+    render(
+      <SideNavLink href="/" ref={ref}>
+        test
+      </SideNavLink>
+    );
+    expect(ref).toHaveBeenCalledWith(screen.getByRole('link'));
   });
 });
