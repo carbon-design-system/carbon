@@ -14,6 +14,18 @@ import { LayerContext } from './LayerContext';
 const levels = ['one', 'two', 'three'];
 const MAX_LEVEL = levels.length - 1;
 
+/**
+ * A custom hook that will return information about the current layer. A common
+ * field to pull from this is the `level` for the layer that the component that
+ * calls this hook is currently in
+ */
+export function useLayer() {
+  const level = React.useContext(LayerContext);
+  return {
+    level,
+  };
+}
+
 export function Layer({
   as: BaseComponent = 'div',
   className: customClassName,
