@@ -6,9 +6,9 @@
  */
 
 import React from 'react';
-import { default as CodeSnippet, CodeSnippetSkeleton } from '../';
-import { Layer } from '../../Layer';
-import mdx from '../CodeSnippet.mdx';
+import { default as CodeSnippet, CodeSnippetSkeleton } from '.';
+import { Layer } from '../Layer';
+import mdx from './CodeSnippet.mdx';
 
 export default {
   title: 'Components/CodeSnippet',
@@ -220,3 +220,32 @@ export const Skeleton = () => (
     <CodeSnippetSkeleton type="multi" />
   </div>
 );
+
+export const Playground = (args) => (
+  <CodeSnippet feedback="Copied to clipboard" {...args}>
+    {'node -v'}
+  </CodeSnippet>
+);
+
+Playground.argTypes = {
+  ariaLabel: {
+    table: {
+      disable: true,
+    },
+  },
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+  type: {
+    table: {
+      disable: true,
+    },
+  },
+};
