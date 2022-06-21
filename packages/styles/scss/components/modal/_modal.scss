@@ -142,8 +142,9 @@
   // text/p gets 20% right padding
   .#{$prefix}--modal-content p,
   .#{$prefix}--modal-content__regular-content {
-    padding-right: 20%;
     @include type-style('body-01');
+    // padding should take into account the left and right padding of modal container
+    padding-right: calc(20% - $spacing-07);
   }
 
   //TO-DO: remove .#{$prefix}--modal-content--with-form in v11 since hasForm has been deprecated\
