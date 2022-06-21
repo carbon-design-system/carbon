@@ -8704,6 +8704,7 @@ Map {
   "unstable_useContextMenu" => Object {},
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
+  "useLayer" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
 }
