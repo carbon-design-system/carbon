@@ -127,6 +127,7 @@ export const Default = () => (
           id="file-1"
           labelDescription="Choose Files..."
           iconDescription="Dismiss file"
+          role="button"
         />
       </FormGroup>
 
