@@ -31,8 +31,9 @@ import {
   Switcher,
   SwitcherItem,
   SwitcherDivider,
-} from '../';
-import { Modal, Button } from 'carbon-components-react';
+} from './';
+import Modal from '../Modal';
+import Button from '../Button';
 import {
   Search,
   Notification,

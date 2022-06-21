@@ -5,39 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import SideNavItem from '../SideNavItem';
 
-const prefix = 'cds';
-
 describe('SideNavItem', () => {
-  let mockProps, wrapper;
-
-  beforeEach(() => {
-    mockProps = {
-      className: 'custom-classname',
-      children: <span>foo</span>,
-    };
+  it('should set the large class when `large` is true', () => {
+    const { container } = render(<SideNavItem large>test</SideNavItem>);
+    expect(container.firstChild).toHaveClass('cds--side-nav__item--large');
   });
 
-  afterEach(() => {
-    wrapper && wrapper.unmount();
-  });
-
-  it('should render', () => {
-    wrapper = mount(<SideNavItem {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
-  it('should include a css class to render the large variant is large prop is set', () => {
-    wrapper = mount(<SideNavItem {...mockProps} />);
-    expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
-    ).toBe(false);
-    wrapper.setProps({ large: true });
-    expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
-    ).toBe(true);
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <SideNavItem className="test">test</SideNavItem>
+    );
+    expect(container.firstChild).toHaveClass('test');
   });
 });

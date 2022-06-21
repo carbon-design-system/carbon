@@ -5915,9 +5915,6 @@ Map {
         "isRequired": true,
         "type": "bool",
       },
-      "isSideNavExpanded": Object {
-        "type": "bool",
-      },
       "onToggle": Object {
         "isRequired": true,
         "type": "func",
