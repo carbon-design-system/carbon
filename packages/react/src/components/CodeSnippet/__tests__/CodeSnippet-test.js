@@ -10,6 +10,10 @@ import CodeSnippet from '../';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+jest.mock('copy-to-clipboard', () => {
+  return jest.fn();
+});
+
 const inline = `node -v`;
 
 const single = `yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest`;
@@ -184,8 +188,6 @@ describe('Show more button', () => {
   it.skip('should have show more button when more than 15 rows', () => {
     render(<CodeSnippet type="multi">{multiLong}</CodeSnippet>);
 
-    expect(
-      document.querySelector('button.cds--snippet-btn--expand')
-    ).toBeInTheDocument();
+    expect(screen.getByText('Show more')).toBeInTheDocument();
   });
 });
