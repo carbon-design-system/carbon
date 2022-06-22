@@ -2317,13 +2317,14 @@ exports[`DataTable should render 1`] = `
                   onClear={[Function]}
                   onFocus={[Function]}
                   placeholder="Filter table"
+                  size="lg"
                   tabIndex="0"
                   type="text"
                   value=""
                 >
                   <div
                     aria-labelledby="custom-id-search"
-                    className="cds--search cds--search--xl cds--toolbar-search-container-persistent"
+                    className="cds--search cds--search--lg cds--toolbar-search-container-persistent"
                     role="search"
                   >
                     <div
@@ -3335,13 +3336,14 @@ exports[`DataTable sticky header should render 1`] = `
                   onClear={[Function]}
                   onFocus={[Function]}
                   placeholder="Filter table"
+                  size="lg"
                   tabIndex="0"
                   type="text"
                   value=""
                 >
                   <div
                     aria-labelledby="custom-id-search"
-                    className="cds--search cds--search--xl cds--toolbar-search-container-persistent"
+                    className="cds--search cds--search--lg cds--toolbar-search-container-persistent"
                     role="search"
                   >
                     <div
