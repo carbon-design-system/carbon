@@ -5885,9 +5885,6 @@ Map {
       "onToggle": Object {
         "type": "func",
       },
-      "translateById": Object {
-        "type": "func",
-      },
     },
     "render": [Function],
   },
@@ -5926,9 +5923,6 @@ Map {
       },
       "expanded": Object {
         "isRequired": true,
-        "type": "bool",
-      },
-      "isSideNavExpanded": Object {
         "type": "bool",
       },
       "onToggle": Object {
@@ -8730,6 +8724,8 @@ Map {
   "unstable_useContextMenu" => Object {},
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
+  "useLayer" => Object {},
+  "usePrefix" => Object {},
   "useTheme" => Object {},
 }
 `;

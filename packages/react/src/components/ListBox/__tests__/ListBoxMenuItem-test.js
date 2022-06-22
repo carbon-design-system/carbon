@@ -5,31 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import ListBox from '../';
 
 describe('ListBoxMenuItem', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      isActive: false,
-      isHighlighted: false,
-      children: <span>ListBox.MenuItem</span>,
-    };
+  it('should set the active class when `isActive` is true', () => {
+    const { container } = render(<ListBox.MenuItem isActive />);
+    expect(container.firstChild).toHaveClass(
+      'cds--list-box__menu-item--active'
+    );
   });
 
-  it('should render', () => {
-    const wrapper = mount(<ListBox.MenuItem {...mockProps} />);
-    const activeWrapper = mount(
-      <ListBox.MenuItem {...mockProps} isActive={true} />
+  it('should set the highlighted class when `isHighlighted` is true', () => {
+    const { container } = render(<ListBox.MenuItem isHighlighted />);
+    expect(container.firstChild).toHaveClass(
+      'cds--list-box__menu-item--highlighted'
     );
-    const highlightedWrapper = mount(
-      <ListBox.MenuItem {...mockProps} isHighlighted={true} />
-    );
-    expect(wrapper).toMatchSnapshot();
-    expect(activeWrapper).toMatchSnapshot();
-    expect(highlightedWrapper).toMatchSnapshot();
+  });
+
+  it('should spread extra props on the outermost element', () => {
+    const { container } = render(<ListBox.MenuItem data-testid="test" />);
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });
