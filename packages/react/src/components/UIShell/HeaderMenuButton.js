@@ -13,7 +13,7 @@ import PropTypes from 'prop-types';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 
-const HeaderMenuButton = ({
+function HeaderMenuButton({
   'aria-label': ariaLabel,
   'aria-labelledby': ariaLabelledBy,
   className: customClassName,
@@ -23,7 +23,7 @@ const HeaderMenuButton = ({
   isActive,
   isCollapsible,
   ...rest
-}) => {
+}) {
   const prefix = usePrefix();
   const className = cx({
     [customClassName]: !!customClassName,
@@ -51,7 +51,7 @@ const HeaderMenuButton = ({
       {isActive ? closeIcon : menuIcon}
     </button>
   );
-};
+}
 
 HeaderMenuButton.propTypes = {
   /**

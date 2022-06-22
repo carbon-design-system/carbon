@@ -5,21 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import SideNavDetails from '../SideNavDetails';
 
 describe('SideNavDetails', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      title: 'foo',
-    };
+  it('should support rendering a title through `title`', () => {
+    const { container } = render(<SideNavDetails title="test" />);
+    expect(container.firstChild).toHaveTextContent('test');
   });
 
-  it('should render', () => {
-    const wrapper = mount(<SideNavDetails {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <SideNavDetails className="test" title="test" />
+    );
+    expect(container.firstChild).toHaveClass('test');
   });
 });
