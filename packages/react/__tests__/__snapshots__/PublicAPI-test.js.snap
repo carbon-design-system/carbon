@@ -1961,6 +1961,16 @@ Map {
         "searchContainerClass": Object {
           "type": "string",
         },
+        "size": Object {
+          "args": Array [
+            Array [
+              "sm",
+              "md",
+              "lg",
+            ],
+          ],
+          "type": "oneOf",
+        },
         "tabIndex": Object {
           "args": Array [
             Array [
@@ -7062,6 +7072,16 @@ Map {
       "searchContainerClass": Object {
         "type": "string",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "tabIndex": Object {
         "args": Array [
           Array [
@@ -8704,6 +8724,7 @@ Map {
   "unstable_useContextMenu" => Object {},
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
+  "useLayer" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
 }
