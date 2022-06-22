@@ -17,13 +17,13 @@ import { usePrefix } from '../../internal/usePrefix';
  * addition to conditionally rendering a badge if the control has more than one
  * selection.
  */
-const ListBoxSelection = ({
+function ListBoxSelection({
   clearSelection,
   selectionCount,
   translateWithId: t,
   disabled,
   onClearSelection,
-}) => {
+}) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
@@ -92,7 +92,7 @@ const ListBoxSelection = ({
       <Close />
     </div>
   );
-};
+}
 
 export const translationIds = {
   'clear.all': 'clear.all',

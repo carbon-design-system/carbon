@@ -5,29 +5,82 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { Fade } from '@carbon/icons-react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { mount } from 'enzyme';
 import { HeaderGlobalAction } from '../';
 
 describe('HeaderGlobalAction', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      'aria-label': 'Accessibility label',
-      className: 'custom-class',
-      onClick: jest.fn(),
-      isActive: false,
-    };
-  });
-
-  it('should render', () => {
-    const wrapper = mount(
-      <HeaderGlobalAction {...mockProps}>
-        <Fade size={32} />
+  it('should support labeling through aria-label', () => {
+    render(
+      <HeaderGlobalAction aria-label="test">
+        <svg />
       </HeaderGlobalAction>
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(screen.getByLabelText('test')).toBeInTheDocument();
+  });
+
+  it('should support a custom `className` prop on the button element', () => {
+    render(
+      <HeaderGlobalAction aria-label="test" className="test">
+        <svg />
+      </HeaderGlobalAction>
+    );
+    expect(screen.getByLabelText('test')).toHaveClass('test');
+  });
+
+  it('should spread extra props on the button element', () => {
+    render(
+      <HeaderGlobalAction aria-label="test" data-testid="test">
+        <svg />
+      </HeaderGlobalAction>
+    );
+    expect(screen.getByLabelText('test')).toHaveAttribute(
+      'data-testid',
+      'test'
+    );
+  });
+
+  it('should support a `ref` that is placed on the <button> element', () => {
+    const ref = jest.fn();
+    render(
+      <HeaderGlobalAction aria-label="test" ref={ref}>
+        <svg />
+      </HeaderGlobalAction>
+    );
+    expect(ref).toHaveBeenCalledWith(screen.getByLabelText('test'));
+  });
+
+  it('should toggle the active class when `isActive` is set', () => {
+    const { rerender } = render(
+      <HeaderGlobalAction aria-label="test">
+        <svg />
+      </HeaderGlobalAction>
+    );
+    expect(screen.getByLabelText('test')).not.toHaveClass(
+      'cds--header__action--active'
+    );
+
+    rerender(
+      <HeaderGlobalAction aria-label="test" isActive>
+        <svg />
+      </HeaderGlobalAction>
+    );
+    expect(screen.getByLabelText('test')).toHaveClass(
+      'cds--header__action--active'
+    );
+  });
+
+  it('should call `onClick` when the <button> is clicked', () => {
+    const onClick = jest.fn();
+    render(
+      <HeaderGlobalAction aria-label="test" onClick={onClick}>
+        <svg />
+      </HeaderGlobalAction>
+    );
+
+    userEvent.click(screen.getByLabelText('test'));
+
+    expect(onClick).toHaveBeenCalled();
   });
 });

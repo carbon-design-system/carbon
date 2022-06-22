@@ -5,44 +5,66 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import ListBox from '../';
 
-const prefix = 'cds';
-
 describe('ListBox', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      type: 'default',
-      id: 'test-listbox',
-      children: <ListBox.Field id="test-listbox" />,
-      className: `${prefix}--list-box__container`,
-      disabled: false,
-    };
+  it('should set the inline class when type="inline"', () => {
+    const { container } = render(<ListBox type="inline" />);
+    expect(container.firstChild).toHaveClass('cds--list-box--inline');
   });
 
-  it('should render', () => {
-    const wrapper = mount(<ListBox {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should set the disabled class when `disabled` is true', () => {
+    const { container } = render(<ListBox disabled />);
+    expect(container.firstChild).toHaveClass('cds--list-box--disabled');
   });
 
-  it('should render an inline class if the type=`inline`', () => {
-    const wrapper = mount(<ListBox {...mockProps} type="inline" />);
-    expect(wrapper.find(`.${prefix}--list-box--inline`).length).toBe(1);
+  it('should set the light class when `light` is true', () => {
+    const { container } = render(<ListBox light />);
+    expect(container.firstChild).toHaveClass('cds--list-box--light');
   });
 
-  it('should render a disabled class if disabled is true', () => {
-    const wrapper = mount(<ListBox {...mockProps} disabled />);
-    expect(wrapper.find(`.${prefix}--list-box--disabled`).length).toBe(1);
+  it('should set the expanded class when `isOpen` is true', () => {
+    const { container } = render(<ListBox isOpen />);
+    expect(container.firstChild).toHaveClass('cds--list-box--expanded');
   });
 
-  it('should add the provided `className` to the root node', () => {
-    const wrapper = mount(<ListBox {...mockProps} />);
-    expect(
-      wrapper.children().prop('className').includes(mockProps.className)
-    ).toBe(true);
+  it('should set the warning class when `warn` is true and invalid is false', () => {
+    const { container } = render(<ListBox warn />);
+    expect(container.firstChild).toHaveClass('cds--list-box--warning');
+  });
+
+  it('should render `invalidText` when `invalid` is true', () => {
+    render(<ListBox invalid invalidText="test" />);
+    expect(screen.getByText('test')).toBeInTheDocument();
+  });
+
+  it('should render `warnText` when `warn` is true', () => {
+    render(<ListBox warn warnText="test" />);
+    expect(screen.getByText('test')).toBeInTheDocument();
+  });
+
+  describe('sizes', () => {
+    it.each(['sm', 'md', 'lg'])('should set the %s class', (size) => {
+      const { container } = render(<ListBox size={size} />);
+      expect(container.firstChild).toHaveClass(`cds--list-box--${size}`);
+    });
+  });
+
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(<ListBox className="test" />);
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should spread extra props on the outermost element', () => {
+    const { container } = render(<ListBox data-testid="test" />);
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+  });
+
+  it('should support a `ref` on the outermost element', () => {
+    const ref = jest.fn();
+    const { container } = render(<ListBox ref={ref} />);
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 });
