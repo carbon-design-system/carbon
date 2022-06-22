@@ -110,13 +110,13 @@ describe('CodeSnippet', () => {
   });
 
   it('should allow custom classes to be applied when passed in via className', () => {
-    render(
+    const { container } = render(
       <CodeSnippet type="inline" data-testid="code-5" className="custom-class">
         {inline}
       </CodeSnippet>
     );
 
-    expect(screen.getByTestId('code-5')).toHaveClass('custom-class');
+    expect(container.firstChild).toHaveClass('custom-class');
   });
 
   it('should allow hiding the copy button', () => {
