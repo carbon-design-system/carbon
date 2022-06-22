@@ -24,9 +24,10 @@ import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 
 ## Overview
 
-You can use the `Tooltip` component to display a popup for an interactive
-element that you provide. You can provide the interactive element as a child to
-`Tooltip`, for example:
+You can use the `Tooltip` component as a wrapper to display a popup for an
+interactive element that you provide. If you are trying to place interactive
+content inside of the `Tooltip` itself, consider using `Toggletip` instead. You
+can provide the interactive element as a child to `Tooltip`, for example:
 
 ```jsx
 <Tooltip label="Close">
