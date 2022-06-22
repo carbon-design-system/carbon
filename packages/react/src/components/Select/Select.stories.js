@@ -24,14 +24,31 @@ export default {
     size: 'md',
   },
   argTypes: {
-    onChange: { action: 'onChange' },
+    onChange: {
+      action: 'onChange',
+      table: {
+        disable: true,
+      },
+    },
     children: {
       table: {
         disable: true,
       },
     },
-    helperText: {
-      control: 'text',
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+    defaultValue: {
+      table: {
+        disable: true,
+      },
+    },
+    id: {
+      table: {
+        disable: true,
+      },
     },
     light: {
       table: {
@@ -196,4 +213,13 @@ export const Playground = (args) => {
       </Select>
     </div>
   );
+};
+
+Playground.argTypes = {
+  helperText: {
+    control: 'text',
+  },
+  invalidText: { control: 'text' },
+  labelText: { control: 'text' },
+  warnText: { control: 'text' },
 };
