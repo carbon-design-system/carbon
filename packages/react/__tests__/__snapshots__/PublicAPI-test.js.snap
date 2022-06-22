@@ -1961,6 +1961,16 @@ Map {
         "searchContainerClass": Object {
           "type": "string",
         },
+        "size": Object {
+          "args": Array [
+            Array [
+              "sm",
+              "md",
+              "lg",
+            ],
+          ],
+          "type": "oneOf",
+        },
         "tabIndex": Object {
           "args": Array [
             Array [
@@ -7067,6 +7077,16 @@ Map {
       },
       "searchContainerClass": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
       "tabIndex": Object {
         "args": Array [
