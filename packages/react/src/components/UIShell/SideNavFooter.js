@@ -17,12 +17,12 @@ import { usePrefix } from '../../internal/usePrefix';
  * navigation that is a part of the UI Shell. It is responsible for handling the
  * user interaction to expand or collapse the side navigation.
  */
-const SideNavFooter = ({
+function SideNavFooter({
   assistiveText,
   className: customClassName,
   expanded,
   onToggle,
-}) => {
+}) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--side-nav__footer`, customClassName);
   return (
@@ -39,7 +39,7 @@ const SideNavFooter = ({
       </button>
     </footer>
   );
-};
+}
 
 SideNavFooter.propTypes = {
   /**
@@ -55,11 +55,6 @@ SideNavFooter.propTypes = {
    */
   expanded: PropTypes.bool.isRequired,
 
-  /**
-   * Property to indicate if the side nav container is open (or not). Use to
-   * keep local state and styling in step with the SideNav expansion state.
-   */
-  isSideNavExpanded: PropTypes.bool,
   /**
    * Provide a function that is called when the toggle button is interacted
    * with. Useful for controlling the expansion state of the side navigation.
