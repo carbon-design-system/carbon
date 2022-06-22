@@ -13,6 +13,7 @@ exports[`<ComposedModal /> renders 1`] = `
     onClick={[Function]}
     onKeyDown={[Function]}
     role="presentation"
+    tabIndex="-1"
   >
     <div
       aria-modal="true"

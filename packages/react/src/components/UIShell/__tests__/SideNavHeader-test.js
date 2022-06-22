@@ -5,22 +5,27 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import SideNavHeader from '../SideNavHeader';
 
 describe('SideNavHeader', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      renderIcon: () => <div>mock icon</div>,
-      children: <span>foo</span>,
-    };
+  it('should render a <header> element', () => {
+    const { container } = render(<SideNavHeader renderIcon={() => <svg />} />);
+    expect(container.firstChild.tagName).toBe('HEADER');
   });
 
-  it('should render', () => {
-    const wrapper = mount(<SideNavHeader {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should support a custom icon through `renderIcon`', () => {
+    const CustomIcon = jest.fn(() => <svg data-testid="test" />);
+    render(<SideNavHeader renderIcon={CustomIcon} />);
+    expect(CustomIcon).toHaveBeenCalled();
+    expect(screen.getByTestId('test')).toBeInTheDocument();
+  });
+
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <SideNavHeader className="test" renderIcon={() => <svg />} />
+    );
+    expect(container.firstChild).toHaveClass('test');
   });
 });
