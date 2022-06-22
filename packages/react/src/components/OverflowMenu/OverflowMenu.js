@@ -248,7 +248,6 @@ class OverflowMenu extends Component {
     onOpen: () => {},
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
-    light: false,
     selectorPrimaryFocus: '[data-overflow-menu-primary-focus]',
   };
 
