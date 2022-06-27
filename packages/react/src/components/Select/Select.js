@@ -21,20 +21,20 @@ const Select = React.forwardRef(function Select(
   {
     className,
     id,
-    inline,
+    inline = false,
     labelText,
-    disabled,
+    disabled = false,
     children,
     // reserved for use with <Pagination> component
-    noLabel,
+    noLabel = false,
     // eslint-disable-next-line no-unused-vars
-    hideLabel,
-    invalid,
+    hideLabel = false,
+    invalid = false,
     invalidText,
     helperText,
-    light,
+    light = false,
     size,
-    warn,
+    warn = false,
     warnText,
     ...other
   },

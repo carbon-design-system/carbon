@@ -21,7 +21,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
     flipped={true}
     focusTrap={true}
     iconDescription="Add"
-    light={false}
     menuOffset={[Function]}
     menuOffsetFlip={[Function]}
     onClick={[Function]}
