@@ -212,7 +212,7 @@ Popover.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Will auto-align the popover on first render if it is not visible.
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to futurue changes.
    */
   autoAlign: PropTypes.bool,
 
