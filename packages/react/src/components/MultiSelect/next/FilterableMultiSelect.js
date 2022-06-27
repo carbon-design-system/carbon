@@ -45,6 +45,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     itemToString,
     light,
     locale,
+    onInputValueChange,
     open,
     onChange,
     onMenuChange,
@@ -166,6 +167,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   }
 
   function handleOnInputValueChange(inputValue, { type }) {
+    if (onInputValueChange) {
+      onInputValueChange(inputValue);
+    }
+
     if (type !== Downshift.stateChangeTypes.changeInput) {
       return;
     }
@@ -515,6 +520,12 @@ FilterableMultiSelect.propTypes = {
    * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func,
+
+  /**
+   * `onInputValueChange` is a utility for this controlled component to communicate to
+   * the currently typed input.
+   */
+  onInputValueChange: PropTypes.func,
 
   /**
    * `onMenuChange` is a utility for this controlled component to communicate to a
