@@ -8,178 +8,147 @@
 import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import SideNavIcon from './SideNavIcon';
 import { keys, match } from '../../internal/keyboard';
-import { PrefixContext } from '../../internal/usePrefix';
+import { usePrefix } from '../../internal/usePrefix';
 
-export class SideNavMenu extends React.Component {
-  static contextType = PrefixContext;
+const SideNavMenu = React.forwardRef(function SideNavMenu(props, ref) {
+  const {
+    className: customClassName,
+    children,
+    defaultExpanded = false,
+    isActive = false,
+    large = false,
+    renderIcon: IconElement,
+    isSideNavExpanded,
+    title,
+  } = props;
+  const prefix = usePrefix();
+  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [prevExpanded, setPrevExpanded] = useState(defaultExpanded);
+  const className = cx({
+    [`${prefix}--side-nav__item`]: true,
+    [`${prefix}--side-nav__item--active`]:
+      isActive || (hasActiveChild(children) && !isExpanded),
+    [`${prefix}--side-nav__item--icon`]: IconElement,
+    [`${prefix}--side-nav__item--large`]: large,
+    [customClassName]: !!customClassName,
+  });
 
-  static propTypes = {
-    buttonRef: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.shape({
-        current: PropTypes.any,
-      }),
-    ]),
-
-    /**
-     * Provide <SideNavMenuItem>'s inside of the `SideNavMenu`
-     */
-    children: PropTypes.node,
-
-    /**
-     * Provide an optional class to be applied to the containing node
-     */
-    className: PropTypes.string,
-
-    /**
-     * Specify whether the menu should default to expanded. By default, it will
-     * be closed.
-     */
-    defaultExpanded: PropTypes.bool,
-
-    /**
-     * Specify whether the `SideNavMenu` is "active". `SideNavMenu` should be
-     * considered active if one of its menu items are a link for the current
-     * page.
-     */
-    isActive: PropTypes.bool,
-
-    /**
-     * Property to indicate if the side nav container is open (or not). Use to
-     * keep local state and styling in step with the SideNav expansion state.
-     */
-    isSideNavExpanded: PropTypes.bool,
-
-    /**
-     * Specify if this is a large variation of the SideNavMenu
-     */
-    large: PropTypes.bool,
-
-    /**
-     * Pass in a custom icon to render next to the `SideNavMenu` title
-     */
-    renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-
-    /**
-     * Provide the text for the overall menu name
-     */
-    title: PropTypes.string.isRequired,
-  };
-
-  static defaultProps = {
-    defaultExpanded: false,
-    isActive: false,
-    large: false,
-  };
-
-  static getDerivedStateFromProps = (props, state) => {
-    let derivedState = null;
-
-    if (props.isSideNavExpanded === false && state.isExpanded === true) {
-      derivedState = {
-        isExpanded: props.isSideNavExpanded,
-        wasPreviouslyExpanded: true,
-      };
-    } else if (
-      props.isSideNavExpanded === true &&
-      state.wasPreviouslyExpanded === true
-    ) {
-      derivedState = {
-        isExpanded: props.isSideNavExpanded,
-        wasPreviouslyExpanded: false,
-      };
-    }
-
-    return derivedState;
-  };
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      isExpanded: props.defaultExpanded || false,
-      wasPreviouslyExpanded: props.defaultExpanded || false,
-    };
+  if (isSideNavExpanded === false && isExpanded === true) {
+    setIsExpanded(false);
+    setPrevExpanded(true);
+  } else if (isSideNavExpanded === true && prevExpanded === true) {
+    setIsExpanded(true);
+    setPrevExpanded(false);
   }
 
-  handleToggleExpand = () => {
-    this.setState((state) => ({ isExpanded: !state.isExpanded }));
-  };
-
-  handleKeyDown = (event) => {
-    if (match(event, keys.Escape)) {
-      this.setState(() => ({ isExpanded: false }));
-    }
-  };
-
-  render() {
-    const { context: prefix } = this;
-    const {
-      buttonRef,
-      className: customClassName,
-      children,
-      renderIcon: IconElement,
-      isActive,
-      title,
-      large,
-    } = this.props;
-    const { isExpanded } = this.state;
-
-    let hasActiveChild;
-    if (children) {
-      // if we have children, either a single or multiple, find if it is active
-      hasActiveChild = Array.isArray(children)
-        ? children.some((child) => {
-            if (
-              child.props &&
-              (child.props.isActive === true || child.props['aria-current'])
-            ) {
-              return true;
-            }
-            return false;
-          })
-        : children.props &&
-          (children.props.isActive === true || children.props['aria-current']);
-    }
-
-    const className = cx({
-      [`${prefix}--side-nav__item`]: true,
-      [`${prefix}--side-nav__item--active`]:
-        isActive || (hasActiveChild && !isExpanded),
-      [`${prefix}--side-nav__item--icon`]: IconElement,
-      [`${prefix}--side-nav__item--large`]: large,
-      [customClassName]: !!customClassName,
-    });
-    return (
-      // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-      <li className={className} onKeyDown={this.handleKeyDown}>
-        <button
-          aria-expanded={isExpanded}
-          className={`${prefix}--side-nav__submenu`}
-          onClick={this.handleToggleExpand}
-          ref={buttonRef}
-          type="button">
-          {IconElement && (
-            <SideNavIcon>
-              <IconElement />
-            </SideNavIcon>
-          )}
-          <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
-          <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
-            <ChevronDown size={20} />
+  return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+    <li
+      className={className}
+      onKeyDown={(event) => {
+        if (match(event, keys.Escape)) {
+          setIsExpanded(false);
+        }
+      }}>
+      <button
+        aria-expanded={isExpanded}
+        className={`${prefix}--side-nav__submenu`}
+        onClick={() => {
+          setIsExpanded(!isExpanded);
+        }}
+        ref={ref}
+        type="button">
+        {IconElement && (
+          <SideNavIcon>
+            <IconElement />
           </SideNavIcon>
-        </button>
-        <ul className={`${prefix}--side-nav__menu`}>{children}</ul>
-      </li>
-    );
-  }
-}
-
-const SideNavMenuForwardRef = React.forwardRef((props, ref) => {
-  return <SideNavMenu {...props} buttonRef={ref} />;
+        )}
+        <span className={`${prefix}--side-nav__submenu-title`}>{title}</span>
+        <SideNavIcon className={`${prefix}--side-nav__submenu-chevron`} small>
+          <ChevronDown size={20} />
+        </SideNavIcon>
+      </button>
+      <ul className={`${prefix}--side-nav__menu`}>{children}</ul>
+    </li>
+  );
 });
 
-SideNavMenuForwardRef.displayName = 'SideNavMenu';
-export default SideNavMenuForwardRef;
+SideNavMenu.propTypes = {
+  /**
+   * Provide <SideNavMenuItem>'s inside of the `SideNavMenu`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide an optional class to be applied to the containing node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify whether the menu should default to expanded. By default, it will
+   * be closed.
+   */
+  defaultExpanded: PropTypes.bool,
+
+  /**
+   * Specify whether the `SideNavMenu` is "active". `SideNavMenu` should be
+   * considered active if one of its menu items are a link for the current
+   * page.
+   */
+  isActive: PropTypes.bool,
+
+  /**
+   * Property to indicate if the side nav container is open (or not). Use to
+   * keep local state and styling in step with the SideNav expansion state.
+   */
+  isSideNavExpanded: PropTypes.bool,
+
+  /**
+   * Specify if this is a large variation of the SideNavMenu
+   */
+  large: PropTypes.bool,
+
+  /**
+   * Pass in a custom icon to render next to the `SideNavMenu` title
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
+
+  /**
+   * Provide the text for the overall menu name
+   */
+  title: PropTypes.string.isRequired,
+};
+
+function hasActiveChild(children) {
+  // if we have children, either a single or multiple, find if it is active
+  if (Array.isArray(children)) {
+    return children.some((child) => {
+      if (!child.props) {
+        return false;
+      }
+
+      if (child.props.isActive === true) {
+        return true;
+      }
+
+      if (child.props['aria-current']) {
+        return true;
+      }
+
+      return false;
+    });
+  }
+
+  if (children.props) {
+    if (children.props.isActive === true || children.props['aria-current']) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+export { SideNavMenu };

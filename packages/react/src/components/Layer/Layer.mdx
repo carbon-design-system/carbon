@@ -10,6 +10,8 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 ## Table of Contents
 
 - [Overview](#overview)
+- [Setting a custom level](#setting-a-custom-level)
+- [Get the current layer](#get-the-current-layer)
 - [Component API](#component-api)
   - [Layer as](#layer-as)
 - [Feedback](#feedback)
@@ -17,39 +19,17 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
 
-- You can nest layer components, up to the max
-- TODO: can you explicitly set the layer
-- What styles do I need to bring into my project for this to work
-- How do I set the layer background?
-
-## Overview
-
-The `Layer` component complements the layering model for the Carbon Design
-System. It is used to render components on different "layers" in order to
-correctly map contextual tokens to their correct values. In general, this means
-that areas of a page that are "on top of" other areas of a page will need to use
-this component.
-
-Any component that is rendered as a child to `Layer` will automatically map the
-correct colors. For your own custom components to follow this model, make sure
-they're using the contextual tokens.
-
-<Canvas>
-  <Story id="components-layer--default" />
-</Canvas>
-
-## Setting a custom level
-
-<Canvas>
-  <Story id="components-layer--custom-level" />
-</Canvas>
-
 ## Overview
 
 The `Layer` component is used to render components on different layers. Each
 layer has a specific set of token values associated with it. You can use these
 tokens directly, or use contextual tokens from our styles package like `$layer`
 or `$field`.
+
+<Canvas>
+  <Story id="components-layer--default" />
+</Canvas>
+
 
 The `Layer` component accepts `children` as a prop. Each child of a `Layer`
 component is rendered using the layer tokens at that layer. `Layer` components
@@ -66,6 +46,41 @@ can be nested indefinitely, but the token sets typically end after 3 layers.
   </Layer>
 </Layer>
 ```
+
+## Setting a custom level
+
+You can override the `level` of a `Layer` if you would like to change the presentation of a layer in your application. This is particularly helpful if you would like to reset the `Layer` level back to `0` or if you want to make sure a part of a page always renders in a certain level.
+
+To do this, you can use the `level` prop:
+
+```jsx
+<Layer>
+  <ChildComponent />
+  <Layer level={0}>
+    <ChildComponent />
+  </Layer>
+</Layer>
+```
+
+## Get the current layer
+
+If you are building a component and would like to know what layer the component
+resides within, you can use the `useLayer` hook.
+
+This hook returns an object with the current `level` of the layer:
+
+```jsx
+function ExampleComponent() {
+  const { level } = useLayer();
+
+  // ...
+}
+```
+
+If the structure of `Layer` components in your app change, the hook will automatically update with the new `level`.
+
+The `level` value can be one of: `0`, `1`, or `2` and will correspond to the level of
+the current layer. This value mirrors the `level` prop on the `Layer` component.
 
 ## Component API
 

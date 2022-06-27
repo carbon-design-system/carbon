@@ -7,7 +7,7 @@
 
 import './Layer-story.scss';
 import React from 'react';
-import { Layer } from '../../Layer';
+import { Layer, useLayer } from '../Layer';
 import mdx from './Layer.mdx';
 
 export default {
@@ -71,6 +71,30 @@ export const CustomLevel = () => {
       <TestComponent />
     </Layer>
   );
+};
+
+export const UseLayer = () => {
+  function ExampleComponent() {
+    const { level } = useLayer();
+    return (
+      <div style={{ padding: '1rem', background: 'var(--cds-layer)' }}>
+        The current layer level is: {level}
+      </div>
+    );
+  }
+
+  return (
+    <>
+      <ExampleComponent />
+      <Layer>
+        <ExampleComponent />
+      </Layer>
+    </>
+  );
+};
+
+UseLayer.story = {
+  name: 'useLayer',
 };
 
 const PlaygroundStory = (args) => {

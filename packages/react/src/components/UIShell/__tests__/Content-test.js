@@ -7,16 +7,24 @@
 
 import { render } from '@testing-library/react';
 import React from 'react';
-import { HeaderGlobalBar } from '../';
+import { Content } from '../';
 
-describe('HeaderGlobalBar', () => {
+describe('Content', () => {
+  it('should support customizing the tag of the outermost element with `tagName`', () => {
+    const { container, rerender } = render(<Content />);
+    expect(container.firstChild.tagName).toBe('MAIN');
+
+    rerender(<Content tagName="section" />);
+    expect(container.firstChild.tagName).toBe('SECTION');
+  });
+
   it('should support a custom `className` prop on the outermost element', () => {
-    const { container } = render(<HeaderGlobalBar className="test" />);
+    const { container } = render(<Content className="test" />);
     expect(container.firstChild).toHaveClass('test');
   });
 
   it('should spread extra props on the outermost element', () => {
-    const { container } = render(<HeaderGlobalBar data-testid="test" />);
+    const { container } = render(<Content data-testid="test" />);
     expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });
