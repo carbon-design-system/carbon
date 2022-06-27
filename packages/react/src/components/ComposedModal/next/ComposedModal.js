@@ -209,9 +209,8 @@ const ComposedModal = React.forwardRef(function ComposedModal(
   useEffect(() => {
     const focusButton = (focusContainerElement) => {
       if (focusContainerElement) {
-        const primaryFocusElement = focusContainerElement.querySelector(
-          selectorPrimaryFocus
-        );
+        const primaryFocusElement =
+          focusContainerElement.querySelector(selectorPrimaryFocus);
         if (primaryFocusElement) {
           primaryFocusElement.focus();
           return;
@@ -240,7 +239,8 @@ const ComposedModal = React.forwardRef(function ComposedModal(
       onBlur={handleBlur}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      className={modalClass}>
+      className={modalClass}
+      tabIndex="-1">
       <div
         className={containerClass}
         role="dialog"

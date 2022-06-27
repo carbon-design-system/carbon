@@ -431,7 +431,8 @@ class NumberInput extends Component {
           }
 
           const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
-            [`${prefix}--form__helper-text--disabled`]: normalizedProps.disabled,
+            [`${prefix}--form__helper-text--disabled`]:
+              normalizedProps.disabled,
           });
 
           const helper = helperText ? (
@@ -457,7 +458,8 @@ class NumberInput extends Component {
           const wrapperClasses = classNames(
             `${prefix}--number__input-wrapper`,
             {
-              [`${prefix}--number__input-wrapper--warning`]: normalizedProps.warn,
+              [`${prefix}--number__input-wrapper--warning`]:
+                normalizedProps.warn,
             }
           );
 

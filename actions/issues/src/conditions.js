@@ -47,7 +47,7 @@ const states = {
         key: `has_issue_label_${label}`,
         run(context) {
           if (!context.payload.issue) {
-            return;
+            return false;
           }
           return context.payload.issue.labels.find(({ name }) => {
             return name === label;
@@ -67,10 +67,9 @@ function or(...conditions) {
   return {
     key: `or(${key})`,
     run(context) {
-      const condition = conditions.find((condition) => {
+      return conditions.some((condition) => {
         return condition.run(context);
       });
-      return condition !== null;
     },
   };
 }

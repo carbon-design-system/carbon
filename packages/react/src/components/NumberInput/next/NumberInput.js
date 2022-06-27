@@ -65,9 +65,8 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
     return 0;
   });
-  const [prevControlledValue, setPrevControlledValue] = useState(
-    controlledValue
-  );
+  const [prevControlledValue, setPrevControlledValue] =
+    useState(controlledValue);
   const inputRef = useRef(null);
   const ref = useMergedRefs([forwardRef, inputRef]);
   const numberInputClasses = cx({

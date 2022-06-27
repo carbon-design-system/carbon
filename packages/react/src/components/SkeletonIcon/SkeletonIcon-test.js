@@ -7,14 +7,11 @@
 
 import React from 'react';
 import SkeletonIcon from '../SkeletonIcon';
-import { shallow } from 'enzyme';
-
-const prefix = 'cds';
+import { render, screen } from '@testing-library/react';
 
 describe('SkeletonIcon', () => {
-  const wrapper = shallow(<SkeletonIcon />);
-
-  it('Has the expected classes', () => {
-    expect(wrapper.hasClass(`${prefix}--icon--skeleton`)).toEqual(true);
+  it('should pass in an extra className when one is given', () => {
+    render(<SkeletonIcon className="custom-class" data-testid="skeleton" />);
+    expect(screen.getByTestId('skeleton')).toHaveClass('custom-class');
   });
 });

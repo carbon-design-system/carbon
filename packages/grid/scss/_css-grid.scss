@@ -94,6 +94,7 @@
     --cds-grid-column-hang: calc(var(--cds-grid-gutter) / 2);
 
     display: grid;
+    width: 100%;
     max-width: get-grid-width(
       $breakpoints,
       largest-breakpoint-name($breakpoints)
