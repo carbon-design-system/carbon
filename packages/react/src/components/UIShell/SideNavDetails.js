@@ -10,11 +10,16 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SideNavDetails = ({ children, className: customClassName, title }) => {
+const SideNavDetails = ({
+  children,
+  className: customClassName,
+  title,
+  ...rest
+}) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--side-nav__details`, customClassName);
   return (
-    <div className={className}>
+    <div className={className} {...rest}>
       <h2 className={`${prefix}--side-nav__title`} title={title}>
         {title}
       </h2>
