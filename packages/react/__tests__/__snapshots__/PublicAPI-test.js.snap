@@ -5108,6 +5108,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "caret": Object {
         "type": "bool",
       },
