@@ -10,16 +10,16 @@ import React from 'react';
 import classnames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const FormItem = ({ className, children, ...other }) => {
+function FormItem({ className, children, ...rest }) {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--form-item`, className);
 
   return (
-    <div className={classNames} {...other}>
+    <div className={classNames} {...rest}>
       {children}
     </div>
   );
-};
+}
 
 FormItem.propTypes = {
   /**

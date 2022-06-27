@@ -7,9 +7,46 @@
 
 import React from 'react';
 import FormGroup from '../FormGroup';
+import { render, screen } from '@testing-library/react';
 import { shallow } from 'enzyme';
 
 const prefix = 'cds';
+
+describe('FormGroup - RTL', () => {
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <FormGroup className="test" legendText="legendtest" />
+    );
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should be set data-invalid when invalid prop is true', () => {
+    const { container } = render(
+      <FormGroup invalid={true} legendText="legendtest">
+        FormGroup Test
+      </FormGroup>
+    );
+
+    expect(container.firstChild).toHaveAttribute('data-invalid', '');
+  });
+
+  it('should set the id for legend based on legendId', () => {
+    const { container } = render(
+      <FormGroup
+        invalid={true}
+        legendId="legend-testid"
+        legendText="legendtest"
+      >
+        FormGroup Test
+      </FormGroup>
+    );
+
+    console.log(container);
+
+    // console.log(screen.getByElement('legendtest'));
+    expect(screen.getByText('legendtest'));
+  });
+});
 
 describe('FormGroup', () => {
   describe('Renders as expected', () => {

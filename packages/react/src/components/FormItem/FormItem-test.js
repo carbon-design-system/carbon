@@ -6,12 +6,19 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import FormItem from '../FormItem';
 
 describe('FormItem', () => {
-  it('should render', () => {
-    const wrapper = shallow(<FormItem />);
-    expect(wrapper).toMatchSnapshot();
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(<FormItem className="test" />);
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should spread extra props on the outermost element', () => {
+    const { container } = render(
+      <FormItem aria-label="test" data-testid="test" />
+    );
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });
