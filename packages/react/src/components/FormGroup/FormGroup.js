@@ -29,12 +29,10 @@ const FormGroup = ({
       {...(invalid && { 'data-invalid': '' })}
       className={classNamesFieldset}
       {...rest}
-      aria-labelledby={rest['aria-labelledby'] || legendId}
-    >
+      aria-labelledby={rest['aria-labelledby'] || legendId}>
       <legend
         className={`${prefix}--label`}
-        id={legendId || rest['aria-labelledby']}
-      >
+        id={legendId || rest['aria-labelledby']}>
         {legendText}
       </legend>
       {children}
