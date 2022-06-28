@@ -14,6 +14,7 @@ import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 ## Table of Contents
 
 - [Overview](#overview)
+  - [Toggletips vs Tooltips](#toggletips-vs-tooltips)
   - [Customizing the content of a tooltip](#customizing-the-content-of-a-tooltip)
   - [Tooltip alignment](#tooltip-alignment)
   - [Customizing the duration of a tooltip](#customizing-the-duration-of-a-tooltip)
@@ -24,9 +25,10 @@ import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 
 ## Overview
 
-You can use the `Tooltip` component to display a popup for an interactive
-element that you provide. You can provide the interactive element as a child to
-`Tooltip`, for example:
+You can use the `Tooltip` component as a wrapper to display a popup for an
+interactive element that you provide. If you are trying to place interactive
+content inside of the `Tooltip` itself, consider using `Toggletip` instead. You
+can provide the interactive element as a child to `Tooltip`, for example:
 
 ```jsx
 <Tooltip label="Close">
@@ -41,6 +43,16 @@ specify the contents of the popup through the `label` or `description` prop.
 <Canvas>
   <Story id="components-tooltip--default" />
 </Canvas>
+
+### Toggletips vs Tooltips
+
+Toggletips and tooltips are similar visually and both contain a popover and
+interactive trigger element. The two components differ in the way they are
+invoked and dismissed and if the user must interact with the contents. A tooltip
+is exposed on hover or focus when you need to expose brief, supplemental
+information that is not interactive. A toggletip is used on click or enter when
+you need to expose interactive elements, such as button, that a user needs to
+interact with.
 
 ### Customizing the content of a tooltip
 
