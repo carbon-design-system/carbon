@@ -51,11 +51,12 @@ export default function TreeView({
       } else {
         setSelected(selected.filter((selectedId) => selectedId !== nodeId));
       }
+      onSelect?.(event, node);
     } else {
       setSelected([nodeId]);
       setActive(nodeId);
+      onSelect?.(event, { activeNodeId: nodeId, ...node });
     }
-    onSelect?.(event, node);
   }
 
   function handleFocusEvent(event) {
