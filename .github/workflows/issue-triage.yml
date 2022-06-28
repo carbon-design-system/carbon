@@ -10,7 +10,7 @@ on:
         required: true
       APP_PRIVATE_KEY:
         required: true
-      APP_TO_PROJECT_PAT:
+      ADD_TO_PROJECT_PAT:
         required: true
 
 jobs:
