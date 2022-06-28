@@ -521,6 +521,21 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/style.mdx
       codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/accessibility.mdx
+  toggletip:
+    name: Toggletip
+    description: Toggletips use the disclosure pattern to toggle the visibility of a popover. They display additional, hidden information upon the click of a UI trigger element and can contain interactive elements.
+    externalDocsUrl: https://carbondesignsystem.com/components/toggletip/usage/
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/toggletip.svg
+    tags:
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/style.mdx
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/code.mdx
   tooltip:
     name: Tooltip
     description: Tooltips display additional information upon hover or focus. The information included should be contextual, helpful, and nonessential while providing that extra ability to communicate and give clarity to a user.

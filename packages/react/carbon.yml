@@ -490,20 +490,16 @@ assets:
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-toggle
     toggletip:
-      name: Toggletip
-      framework: react
-      externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage
       status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/toggletip.svg
+      externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage
+      framework: react
       demoLinks:
         - type: storybook
           name: Storybook
           action: link
           url: https://react.carbondesignsystem.com/?path=/docs/components-toggletip
       tags:
-        - content-element 
+        - content-element
     tooltip:
       status: stable
       externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
