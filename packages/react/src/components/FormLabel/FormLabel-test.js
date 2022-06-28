@@ -24,7 +24,6 @@ describe('FormLabel', () => {
 
   it('should support a unique id prop on the outermost element', () => {
     const { container } = render(<FormLabel id="test-1" />);
-    console.log(container.firstChild);
     expect(container.firstChild).toHaveProperty('htmlFor', 'test-1');
   });
 });
