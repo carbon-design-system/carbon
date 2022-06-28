@@ -88,9 +88,9 @@ function ProgressBar({
       <div
         className={`${prefix}--progress-bar__track`}
         role="progressbar"
+        aria-busy={!isFinished}
         aria-invalid={isError}
         aria-labelledby={labelId}
-        aria-describedby={helperText ? helperId : null}
         aria-valuemin={!indeterminate ? 0 : null}
         aria-valuemax={!indeterminate ? max : null}
         aria-valuenow={!indeterminate ? cappedValue : null}>
@@ -104,8 +104,14 @@ function ProgressBar({
         />
       </div>
       {helperText && (
-        <div id={helperId} className={`${prefix}--progress-bar__helper-text`}>
+        <div className={`${prefix}--progress-bar__helper-text`}>
           {helperText}
+          <div
+            className={`${prefix}--visually-hidden`}
+            aria-live="polite"
+            id={helperId}>
+            {isFinished ? 'Done' : 'Loading'}
+          </div>
         </div>
       )}
     </div>
