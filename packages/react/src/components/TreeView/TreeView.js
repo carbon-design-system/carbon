@@ -184,14 +184,17 @@ export default function TreeView({
       });
   }, [prefix]);
 
-  useEffect(() => {
-    if (preselected.length) {
-      setSelected(preselected);
-    }
-    if (prespecifiedActive) {
-      setActive(prespecifiedActive);
-    }
-  }, [preselected, prespecifiedActive]);
+  const useActiveAndSelectedOnMount = () =>
+    useEffect(() => {
+      if (preselected.length) {
+        setSelected(preselected);
+      }
+      if (prespecifiedActive) {
+        setActive(prespecifiedActive);
+      }
+    }, []);
+
+  useActiveAndSelectedOnMount();
 
   const labelId = `${treeId}__label`;
   const TreeLabel = () =>
@@ -200,6 +203,7 @@ export default function TreeView({
         {label}
       </label>
     );
+
   return (
     <>
       <TreeLabel />
