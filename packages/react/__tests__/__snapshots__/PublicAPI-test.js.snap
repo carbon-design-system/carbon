@@ -2036,6 +2036,16 @@ Map {
         "searchContainerClass": Object {
           "type": "string",
         },
+        "size": Object {
+          "args": Array [
+            Array [
+              "sm",
+              "md",
+              "lg",
+            ],
+          ],
+          "type": "oneOf",
+        },
         "tabIndex": Object {
           "args": Array [
             Array [
@@ -5296,6 +5306,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "autoAlign": Object {
+        "type": "bool",
+      },
       "caret": Object {
         "type": "bool",
       },
@@ -6073,9 +6086,6 @@ Map {
       "onToggle": Object {
         "type": "func",
       },
-      "translateById": Object {
-        "type": "func",
-      },
     },
     "render": [Function],
   },
@@ -6114,9 +6124,6 @@ Map {
       },
       "expanded": Object {
         "isRequired": true,
-        "type": "bool",
-      },
-      "isSideNavExpanded": Object {
         "type": "bool",
       },
       "onToggle": Object {
@@ -7265,6 +7272,16 @@ Map {
       },
       "searchContainerClass": Object {
         "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
       "tabIndex": Object {
         "args": Array [
@@ -8974,6 +8991,8 @@ Map {
   "unstable_useContextMenu" => Object {},
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
+  "useLayer" => Object {},
+  "usePrefix" => Object {},
   "useTheme" => Object {},
 }
 `;

@@ -229,6 +229,8 @@ describe('Carbon Components React', () => {
         "unstable_useContextMenu",
         "unstable_useFeatureFlag",
         "unstable_useFeatureFlags",
+        "useLayer",
+        "usePrefix",
         "useTheme",
       ]
     `);

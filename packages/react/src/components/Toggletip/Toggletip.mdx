@@ -12,6 +12,7 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 ## Table of Contents
 
 - [Overview](#overview)
+  - [Toggletips vs Tooltips](#toggletips-vs-tooltips)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
@@ -19,10 +20,11 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 
 ## Overview
 
-The Toggletip component provides an accessible way to render interactive content
-within a popover. To use this component, you'll need to include a `Toggletip`,
-`ToggletipButton` for the trigger, and `ToggletipContent` for the content you
-would like to render within the popover.
+The `Toggletip` component provides an accessible way to render interactive
+content within a popover. If you do not have any interactive content inside of
+your `Toggletip`, consider using `Tooltip` instead. To use this component,
+you'll need to include a `Toggletip`, `ToggletipButton` for the trigger, and
+`ToggletipContent` for the content you would like to render within the popover.
 
 ```jsx
 import { Toggletip, ToggletipButton, ToggletipContent } from '@carbon/react';
@@ -38,9 +40,19 @@ import { Information } from '@carbon/react/icons';
 </Toggletip>;
 ```
 
+### Toggletips vs Tooltips
+
+Toggletips and tooltips are similar visually and both contain a popover and
+interactive trigger element. The two components differ in the way they are
+invoked and dismissed and if the user must interact with the contents. A tooltip
+is exposed on hover or focus when you need to expose brief, supplemental
+information that is not interactive. A toggletip is used on click or enter when
+you need to expose interactive elements, such as button, that a user needs to
+interact with.
+
 ## Alignment
 
-The Toggletip component provies four options for alignment: `top`, `bottom`,
+The Toggletip component provides four options for alignment: `top`, `bottom`,
 `left`, and `right`. These options will correspond to where the popover will
 render relative to the ToggletipButton. For example, when choosing `align="top"`
 the ToggletipContent will render above the ToggletipButton.

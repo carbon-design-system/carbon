@@ -130,51 +130,16 @@ git push upstream v11.2.0
 The packages that have been published will be switched to latest on the first
 Friday of a sprint. To make the switch, you will need to:
 
-- [ ] View the last of the
-      [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
-      which published the packages under the `next` tag
+- [ ] Run the
+      [Promotion Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/promote.yml)
+      to automatically promote Carbon packages with new release versions to
+      latest
+- [ ] Verify the packages have been promoted to latest
+      [on NPM](https://www.npmjs.com/package/@carbon/react)
+- [ ] Update the latest release notes with the generated output from Carbon Cli
+      by running at /carbon
 
-```
- - carbon-components-react => 8.3.0
- - @carbon/cli => 11.1.0
- - @carbon/colors => 11.2.0
- - @carbon/elements => 11.3.0
- - @carbon/grid => 11.2.0
- - @carbon/icon-helpers => 10.30.0
- - @carbon/icons-react => 11.3.0
- - @carbon/icons => 11.3.0
- - @carbon/layout => 11.2.0
- - @carbon/motion => 11.1.0
- - @carbon/pictograms-react => 11.27.0
- - @carbon/pictograms => 12.1.0
- - @carbon/react => 1.3.0
- - @carbon/styles => 1.3.0
- - @carbon/themes => 11.3.0
- - @carbon/type => 11.3.0
-```
-
-- [ ] Transform this list into a series of `npm dist-tag` commands
-
-```
-npm dist-tag add carbon-components-react@8.3.0 latest && \
-npm dist-tag add @carbon/cli@11.1.0 latest && \
-npm dist-tag add @carbon/colors@11.2.0 latest && \
-npm dist-tag add @carbon/elements@11.3.0 latest && \
-npm dist-tag add @carbon/grid@11.2.0 latest && \
-npm dist-tag add @carbon/icon-helpers@10.30.0 latest && \
-npm dist-tag add @carbon/icons-react@11.3.0 latest && \
-npm dist-tag add @carbon/icons@11.3.0 latest && \
-npm dist-tag add @carbon/layout@11.2.0 latest && \
-npm dist-tag add @carbon/motion@11.1.0 latest && \
-npm dist-tag add @carbon/pictograms-react@11.27.0 latest && \
-npm dist-tag add @carbon/pictograms@12.1.0 latest && \
-npm dist-tag add @carbon/react@1.3.0 latest && \
-npm dist-tag add @carbon/styles@1.3.0 latest && \
-npm dist-tag add @carbon/themes@11.3.0 latest && \
-npm dist-tag add @carbon/type@11.3.0 latest
-```
-
-- [ ] Run this command to tag the published versions as the latest release
+`./packages/cli/bin/carbon-cli.js changelog v11.5.0..v11.6.0`
 
 ### Post release
 

@@ -7,26 +7,22 @@
 
 import React from 'react';
 import SkeletonText from '../SkeletonText';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
 describe('SkeletonText', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<SkeletonText />);
-
-    it('Has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--skeleton__text`)).toEqual(true);
-    });
+  it('should pass in an extra className when one is given', () => {
+    render(<SkeletonText className="custom-class" data-testid="skeleton" />);
+    expect(screen.getByTestId('skeleton')).toHaveClass('custom-class');
   });
 });
 
 describe('SkeletonText Heading', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<SkeletonText heading />);
-
-    it('Has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--skeleton__heading`)).toEqual(true);
-    });
+  it('should add heading classNames when the heading prop is passed in', () => {
+    render(<SkeletonText heading data-testid="skeleton2" />);
+    expect(screen.getByTestId('skeleton2')).toHaveClass(
+      `${prefix}--skeleton__heading`
+    );
   });
 });

@@ -20,13 +20,14 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
     onClear={[Function]}
     onFocus={[Function]}
     placeholder="Filter table"
+    size="lg"
     tabIndex="0"
     type="text"
     value=""
   >
     <div
       aria-labelledby="custom-id-search"
-      className="cds--search cds--search--xl custom-class cds--toolbar-search-container-expandable"
+      className="cds--search cds--search--lg custom-class cds--toolbar-search-container-expandable"
       role="search"
     >
       <div

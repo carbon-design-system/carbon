@@ -10,13 +10,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SkipToContent = ({
+function SkipToContent({
   children,
   className: customClassName,
   href,
   tabIndex,
   ...rest
-}) => {
+}) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--skip-to-content`, customClassName);
   return (
@@ -24,7 +24,7 @@ const SkipToContent = ({
       {children}
     </a>
   );
-};
+}
 
 SkipToContent.propTypes = {
   /**
