@@ -86,18 +86,33 @@ export const WithInitialSelectedItems = (args) => {
   );
 };
 
-export const _Filterable = (args) => {
+export const _Filterable = () => {
   return (
-    <div style={{ width: 300 }}>
-      <FilterableMultiSelect
-        id="carbon-multiselect-example-3"
-        titleText="Multiselect title"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-        {...args}
-      />
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '300px', padding: '1rem' }}>
+        <FilterableMultiSelect
+          id="multiselect-1"
+          titleText="FilterableMultiSelect"
+          itemToString={(item) => (item ? item.text : '')}
+          items={items}
+        />
+      </div>
+      <div style={{ width: '300px', padding: '1rem' }}>
+        <FilterableMultiSelect
+          id="multiselect-2"
+          titleText="FilterableMultiSelect"
+          itemToString={(item) => (item ? item.text : '')}
+          items={items}
+        />
+      </div>
+      <div style={{ width: '300px', padding: '1rem' }}>
+        <FilterableMultiSelect
+          id="multiselect-3"
+          titleText="FilterableMultiSelect"
+          itemToString={(item) => (item ? item.text : '')}
+          items={items}
+        />
+      </div>
     </div>
   );
 };
