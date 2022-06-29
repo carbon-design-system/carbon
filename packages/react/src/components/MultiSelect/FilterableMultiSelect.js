@@ -453,7 +453,9 @@ export default class FilterableMultiSelect extends React.Component {
                       // toggleMenu behavior for the toggleButton to correctly open and
                       // close the menu.
                       onMouseUp(event) {
-                        event.stopPropagation();
+                        if (isOpen) {
+                          event.stopPropagation();
+                        }
                       },
                     });
                     const inputProps = getInputProps({
