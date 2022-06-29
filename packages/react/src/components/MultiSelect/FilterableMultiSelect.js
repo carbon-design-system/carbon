@@ -112,6 +112,12 @@ export default class FilterableMultiSelect extends React.Component {
     onChange: PropTypes.func,
 
     /**
+     * `onInputValueChange` is a utility for this controlled component to communicate to
+     * the currently typed input.
+     */
+    onInputValueChange: PropTypes.func,
+
+    /**
      * `onMenuChange` is a utility for this controlled component to communicate to a
      * consuming component that the menu was opened(`true`)/closed(`false`).
      */
@@ -260,6 +266,10 @@ export default class FilterableMultiSelect extends React.Component {
   };
 
   handleOnInputValueChange = (inputValue, { type }) => {
+    if (this.props.onInputValueChange) {
+      this.props.onInputValueChange(inputValue);
+    }
+
     if (type !== Downshift.stateChangeTypes.changeInput) {
       return;
     }
