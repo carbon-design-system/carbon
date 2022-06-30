@@ -179,6 +179,7 @@ function DatePicker({
   appendTo,
   children,
   className,
+  closeOnSelect = true,
   dateFormat = 'm/d/Y',
   datePickerType,
   disable,
@@ -286,6 +287,7 @@ function DatePicker({
       inline: inline ?? false,
       disableMobile: true,
       defaultDate: value,
+      closeOnSelect: closeOnSelect,
       mode: datePickerType,
       allowInput: allowInput ?? true,
       dateFormat: dateFormat,
@@ -380,7 +382,7 @@ function DatePicker({
       // Flatpickr's calendar dialog is not rendered in a landmark causing an
       // error with IBM Equal Access Accessibility Checker so we add an aria
       // role to the container div.
-      calendar.calendarContainer.setAttribute('role', 'region');
+      calendar.calendarContainer.setAttribute('role', 'application');
       // IBM EAAC requires an aria-label on a role='region'
       calendar.calendarContainer.setAttribute(
         'aria-label',
@@ -451,7 +453,9 @@ function DatePicker({
 
   useEffect(() => {
     if (calendarRef.current) {
-      calendarRef.current.set({ value });
+      if (value !== undefined) {
+        calendarRef.current.setDate(value);
+      }
       updateClassNames(calendarRef.current, prefix);
       //for simple date picker w/o calendar; initial mount may not have value
     } else if (!calendarRef.current && value) {
@@ -487,6 +491,11 @@ DatePicker.propTypes = {
    * The CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * flatpickr prop passthrough. Controls whether the calendar dropdown closes upon selection.
+   */
+  closeOnSelect: PropTypes.bool,
 
   /**
    * The date format.

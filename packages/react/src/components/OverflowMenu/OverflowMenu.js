@@ -248,7 +248,6 @@ class OverflowMenu extends Component {
     onOpen: () => {},
     menuOffset: getMenuOffset,
     menuOffsetFlip: getMenuOffset,
-    light: false,
     selectorPrimaryFocus: '[data-overflow-menu-primary-focus]',
   };
 
@@ -393,9 +392,8 @@ class OverflowMenu extends Component {
           return nextIndex;
       }
     })();
-    const { overflowMenuItem } = this[
-      `overflowMenuItem${enabledIndices[nextValidIndex]}`
-    ];
+    const { overflowMenuItem } =
+      this[`overflowMenuItem${enabledIndices[nextValidIndex]}`];
     overflowMenuItem?.current?.focus();
   };
 
