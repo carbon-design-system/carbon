@@ -48,12 +48,11 @@
 
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable {
-    border: 1px solid $border-subtle;
+    border: 1px solid $border-strong;
     cursor: pointer;
     transition: $duration-moderate-01 motion(standard, productive);
 
     &:hover {
-      border: 1px solid $border-subtle-selected;
       background: $layer-hover;
     }
   }
@@ -185,7 +184,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    border: 1px solid $border-subtle;
+    border: 1px solid $border-strong;
     color: inherit;
     cursor: pointer;
     font-family: inherit;
@@ -196,12 +195,11 @@
     @include type-style('body-compact-01');
 
     &:hover {
-      border: 1px solid $border-subtle-selected;
       background: $layer-hover;
     }
 
     &:active {
-      border: 1px solid $border-strong;
+      border: 1px solid $border-inverse;
     }
   }
 
