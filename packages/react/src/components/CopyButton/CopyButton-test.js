@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import CopyButton from '../CopyButton';
@@ -67,6 +67,8 @@ describe('Button props', () => {
 
 describe('Feedback', () => {
   it('should make the feedback visible for a limited amount of time', () => {
+    jest.useFakeTimers();
+
     render(
       <CopyButton iconDescription="icon description" data-testid="copy-btn-5" />
     );
@@ -75,9 +77,10 @@ describe('Feedback', () => {
     userEvent.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
-    setTimeout(() => {
-      expect(button).not.toHaveClass('cds--copy-btn--animating');
-    }, 2000); // default feedback timeout
+
+    act(() => jest.runAllTimers());
+    expect(button).not.toHaveClass('cds--copy-btn--animating');
+    jest.useRealTimers();
   });
 
   it('should be able to specify the feedback message', () => {
@@ -91,12 +94,13 @@ describe('Feedback', () => {
 
     const button = screen.getByTestId('copy-btn-6');
     userEvent.click(button);
-    setTimeout(() => {
-      expect(screen.getByLabelText('custom-feedback')).toBeInTheDocument();
-    }, 1000); //testing during the feedback window
+    // returns array of 2 for visible tooltip text and assistive text
+    expect(screen.getAllByText('custom-feedback').length).toBe(2);
   });
 
   it('should allow users to override default feedback timeout via prop', () => {
+    jest.useFakeTimers();
+
     render(
       <CopyButton
         iconDescription="icon description"
@@ -109,8 +113,9 @@ describe('Feedback', () => {
     userEvent.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
-    setTimeout(() => {
-      expect(button).not.toHaveClass('cds--copy-btn--animating');
-    }, 5000); // custom feedback timeout
+
+    act(() => jest.runAllTimers());
+    expect(button).not.toHaveClass('cds--copy-btn--animating');
+    jest.useRealTimers();
   });
 });
