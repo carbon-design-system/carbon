@@ -48,10 +48,12 @@
 
   .#{$prefix}--tile--clickable,
   .#{$prefix}--tile--selectable {
+    border: 1px solid $border-subtle;
     cursor: pointer;
     transition: $duration-moderate-01 motion(standard, productive);
 
     &:hover {
+      border: 1px solid $border-subtle-selected;
       background: $layer-hover;
     }
   }
@@ -71,6 +73,10 @@
       .#{$prefix}--tile__checkmark {
         opacity: 1;
       }
+    }
+
+    &:active {
+      border: 1px solid transparent;
     }
   }
 
@@ -98,7 +104,6 @@
 
   .#{$prefix}--tile--selectable {
     padding-right: $spacing-09;
-    border: 1px solid transparent;
   }
 
   .#{$prefix}--tile__checkmark {
@@ -180,7 +185,7 @@
     position: relative;
     overflow: hidden;
     width: 100%;
-    border: 0;
+    border: 1px solid $border-subtle;
     color: inherit;
     cursor: pointer;
     font-family: inherit;
@@ -191,11 +196,17 @@
     @include type-style('body-compact-01');
 
     &:hover {
+      border: 1px solid $border-subtle-selected;
       background: $layer-hover;
+    }
+
+    &:active {
+      border: 1px solid $border-strong;
     }
   }
 
   .#{$prefix}--tile--expandable.#{$prefix}--tile--expandable--interactive {
+    border: 0;
     cursor: default;
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
