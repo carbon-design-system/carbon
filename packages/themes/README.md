@@ -64,7 +64,7 @@ Inline theming can be done by using the mixin. For example:
 }
 
 .my-darker-theme {
-  @include theme($theme--g100) {
+  @include theme.theme(themes.$g100) {
     // Use the darker theme here
   }
 }
