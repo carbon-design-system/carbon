@@ -58,7 +58,7 @@ Inline theming can be done by using the mixin. For example:
 // Use the default white theme here
 
 .my-dark-theme {
-  @include theme($theme--g90) {
+  @include theme.theme(themes.$g90) {
     // Use the dark theme here
   }
 }
