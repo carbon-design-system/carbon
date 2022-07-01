@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, act } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import Copy from '../Copy';
@@ -79,6 +79,7 @@ describe('Button props', () => {
 
 describe('Feedback', () => {
   it('should make the feedback visible for a limited amount of time', () => {
+    jest.useFakeTimers();
     render(
       <Copy
         aria-label="Copy button"
@@ -92,9 +93,9 @@ describe('Feedback', () => {
     userEvent.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
-    setTimeout(() => {
-      expect(button).not.toHaveClass('cds--copy-btn--animating');
-    }, 2000); // default feedback timeout
+    act(() => jest.runAllTimers());
+    expect(button).not.toHaveClass('cds--copy-btn--animating');
+    jest.useRealTimers();
   });
 
   it('should be able to specify the feedback message', () => {
@@ -109,14 +110,11 @@ describe('Feedback', () => {
 
     const button = screen.getByTestId('copy-button-6');
     userEvent.click(button);
-    setTimeout(() => {
-      expect(
-        screen.getByLabelText('overriding-default-feedback')
-      ).toBeInTheDocument();
-    }, 1000); //testing during the feedback window
+    expect(screen.getAllByText('overriding-default-feedback').length).toBe(2);
   });
 
   it('should allow users to override default feedback timeout via prop', () => {
+    jest.useFakeTimers();
     render(
       <Copy
         title="Copy title"
@@ -130,8 +128,8 @@ describe('Feedback', () => {
     userEvent.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
-    setTimeout(() => {
-      expect(button).not.toHaveClass('cds--copy-btn--animating');
-    }, 5000); // custom feedback timeout
+    act(() => jest.runAllTimers());
+    expect(button).not.toHaveClass('cds--copy-btn--animating');
+    jest.useRealTimers();
   });
 });
