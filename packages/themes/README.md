@@ -53,6 +53,7 @@ Inline theming can be done by using the mixin. For example:
 
 ```scss
 @use '@carbon/themes/scss/themes';
+@use '@carbon/themes/scss/theme';
 
 // Use the default white theme here
 
