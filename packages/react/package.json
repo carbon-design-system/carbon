@@ -111,7 +111,7 @@
     "rollup-plugin-strip-banner": "^2.0.0",
     "rtlcss": "^3.5.0",
     "sass": "^1.51.0",
-    "sass-loader": "^12.4.0",
+    "sass-loader": "^13.0.0",
     "storybook-readme": "^5.0.9",
     "stream-browserify": "^3.0.0",
     "style-loader": "^3.3.1",
