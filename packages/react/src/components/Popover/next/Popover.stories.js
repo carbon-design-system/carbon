@@ -127,3 +127,61 @@ Playground.story = {
     (story) => <div className="mt-10 flex justify-center">{story()}</div>,
   ],
 };
+
+export const AutoAlign = () => {
+  return (
+    <div>
+      <Popover open autoAlign>
+        <div className="playground-trigger">
+          <Checkbox />
+        </div>
+        <PopoverContent className="p-3">
+          <p className="popover-title">Available storage</p>
+          <p className="popover-details">
+            This server has 150 GB of block storage remaining.
+          </p>
+        </PopoverContent>
+      </Popover>
+      <div style={{ position: 'absolute', top: 0, right: 0, margin: '3rem' }}>
+        <Popover open autoAlign>
+          <div className="playground-trigger">
+            <Checkbox />
+          </div>
+          <PopoverContent className="p-3">
+            <p className="popover-title">Available storage</p>
+            <p className="popover-details">
+              This server has 350 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
+      </div>
+      <div
+        style={{ position: 'absolute', bottom: 0, right: 0, margin: '3rem' }}>
+        <Popover open autoAlign>
+          <div className="playground-trigger">
+            <Checkbox />
+          </div>
+          <PopoverContent className="p-3">
+            <p className="popover-title">Available storage</p>
+            <p className="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
+      </div>
+      <div style={{ position: 'absolute', bottom: 0, left: 0, margin: '3rem' }}>
+        <Popover open autoAlign>
+          <div className="playground-trigger">
+            <Checkbox />
+          </div>
+          <PopoverContent className="p-3">
+            <p className="popover-title">Available storage</p>
+            <p className="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
+      </div>
+    </div>
+  );
+};

@@ -7,91 +7,85 @@
 
 import React from 'react';
 import InlineLoading from '../InlineLoading';
-import Loading from '../Loading';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
-const prefix = 'cds';
+describe('InlineLoading', () => {
+  it('should pass in extra classes that are passed via className', () => {
+    render(<InlineLoading className="custom-class" data-testid="loading-1" />);
 
-describe('Loading', () => {
-  describe('Default state renders as expected', () => {
-    const wrapper = mount(<InlineLoading className="extra-class" />);
-    const container = wrapper.find(`.${prefix}--inline-loading`);
-
-    it('should render with a container', () => {
-      expect(container.length).toEqual(1);
-    });
-
-    it('should render a loader by default', () => {
-      expect(wrapper.find(Loading).length).toEqual(1);
-    });
-
-    it('container has the expected classes', () => {
-      expect(container.hasClass(`${prefix}--inline-loading`)).toEqual(true);
-    });
-
-    it('should add extra classes that are passed via className', () => {
-      expect(container.hasClass('extra-class')).toEqual(true);
-    });
-
-    it('should render an animation container', () => {
-      expect(
-        wrapper.find(`.${prefix}--inline-loading__animation`).length
-      ).toEqual(1);
-    });
-
-    it('should not render any text', () => {
-      expect(wrapper.find(`.${prefix}--inline-loading__text`).length).toEqual(
-        0
-      );
-    });
-
-    it('should not render the SUCCESS state', () => {
-      expect(
-        wrapper.find(`.${prefix}--inline-loading__checkmark-container`).length
-      ).toEqual(0);
-    });
+    expect(screen.getByTestId('loading-1')).toHaveClass('custom-class');
   });
 
-  describe('Text rendered as expected', () => {
-    const wrapper = mount(
-      <InlineLoading className="extra-class" description="Loading Things..." />
+  it('should render a loader by default', () => {
+    render(<InlineLoading />);
+
+    expect(
+      screen.getByLabelText('Active loading indicator')
+    ).toBeInTheDocument();
+  });
+
+  it('should render a loader if the status is inactive', () => {
+    render(<InlineLoading status="inactive" />);
+
+    expect(
+      screen.getByLabelText('Active loading indicator')
+    ).toBeInTheDocument();
+  });
+
+  it('should render the success state if status is finished', () => {
+    render(<InlineLoading status="finished" />);
+
+    expect(document.querySelector('svg')).toHaveClass(
+      'cds--inline-loading__checkmark-container'
+    );
+  });
+
+  it('should render the error state if status is error', () => {
+    render(<InlineLoading status="error" />);
+
+    expect(document.querySelector('svg')).toHaveClass(
+      'cds--inline-loading--error'
+    );
+  });
+
+  it('should not render any text by default', () => {
+    render(<InlineLoading />);
+
+    expect(
+      document.querySelector('.cds--inline-loading__text')
+    ).not.toBeInTheDocument();
+  });
+
+  it('should render text when the description prop is passed', () => {
+    render(<InlineLoading description="Loading" />);
+    expect(screen.getByText('Loading')).toBeInTheDocument();
+  });
+
+  it('should call the onSuccess prop after a delay', () => {
+    jest.useFakeTimers();
+    const onSuccess = jest.fn();
+
+    render(<InlineLoading status="finished" onSuccess={onSuccess} />);
+
+    jest.runAllTimers();
+    expect(onSuccess).toHaveBeenCalled();
+    jest.useRealTimers();
+  });
+
+  it('should allow users to override the onSuccess timeout', () => {
+    jest.useFakeTimers();
+    const onSuccess = jest.fn();
+
+    render(
+      <InlineLoading
+        status="finished"
+        onSuccess={onSuccess}
+        successDelay={2500}
+      />
     );
 
-    it('should render the provided description', () => {
-      expect(wrapper.find(`.${prefix}--inline-loading__text`).length).toEqual(
-        1
-      );
-      expect(wrapper.find(`.${prefix}--inline-loading__text`).text()).toEqual(
-        'Loading Things...'
-      );
-    });
-  });
-
-  describe('Success state should render properly', () => {
-    const wrapper = mount(<InlineLoading status="finished" />);
-
-    it('should render the success animation', () => {
-      expect(
-        wrapper.find(`svg.${prefix}--inline-loading__checkmark-container`)
-          .length
-      ).toEqual(1);
-    });
-
-    it('should not render the loading component', () => {
-      expect(wrapper.find(Loading).length).toEqual(0);
-    });
-
-    it('should call the onSuccess function after a delay', () => {
-      jest.useFakeTimers();
-
-      const onSuccess = jest.fn();
-
-      mount(<InlineLoading status="finished" onSuccess={onSuccess} />);
-
-      jest.runAllTimers();
-      expect(onSuccess).toHaveBeenCalled();
-
-      jest.useRealTimers();
-    });
+    jest.runAllTimers();
+    expect(onSuccess).toHaveBeenCalled();
+    jest.useRealTimers();
   });
 });

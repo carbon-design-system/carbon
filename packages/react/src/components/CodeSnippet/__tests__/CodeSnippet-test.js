@@ -6,102 +6,178 @@
  */
 
 import React from 'react';
-import Button from '../../Button';
 import CodeSnippet from '../';
-import Copy from '../../Copy';
-import CopyButton from '../../CopyButton';
-import { shallow, mount } from 'enzyme';
-
-const prefix = 'cds';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 jest.mock('copy-to-clipboard', () => {
   return jest.fn();
 });
 
-describe('Code Snippet', () => {
-  describe('Renders as expected', () => {
-    let snippet;
+const inline = `node -v`;
 
-    beforeEach(() => {
-      snippet = shallow(
-        <CodeSnippet className="some-class" type="single">
-          {'node -v'}
-        </CodeSnippet>
-      );
-    });
+const single = `yarn add carbon-components@latest carbon-components-react@latest @carbon/icons-react@latest carbon-icons@latest`;
 
-    it('should use the appropriate snippet class', () => {
-      expect(snippet.hasClass(`${prefix}--snippet`)).toEqual(true);
-      expect(snippet.hasClass(`${prefix}--snippet--single`)).toEqual(true);
-    });
+const multiLong = `  "scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "carbon-cli ci-check",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint actions config codemods packages",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
+    "sync": "carbon-cli sync",
+    "test": "cross-env BABEL_ENV=test jest",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
+  },
+  "resolutions": {
+    "react": "~16.9.0",
+    "react-dom": "~16.9.0",
+    "react-is": "~16.9.0",
+    "react-test-renderer": "~16.9.0"
+  },
+  `;
 
-    it('should render children as expected', () => {
-      expect(snippet.find(`.${prefix}--snippet-container`).length).toBe(1);
-    });
+const multiShort = `  "scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "carbon-cli ci-check",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint actions config codemods packages",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
+    "sync": "carbon-cli sync",
+    "test": "cross-env BABEL_ENV=test jest",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
+  },`;
 
-    it('should all for custom classes to be applied', () => {
-      expect(snippet.hasClass('some-class')).toEqual(true);
-    });
+const multi15 = `  "scripts": {
+    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "ci-check": "carbon-cli ci-check",
+    "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
+    "doctoc": "doctoc --title '## Table of Contents'",
+    "format": "prettier --write '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**'",
+    "format:diff": "prettier --list-different '**/*.{js,md,scss,ts}' '!**/{build,es,lib,storybook,ts,umd}/**' '!packages/components/**'",
+    "lint": "eslint actions config codemods packages",
+    "lint:styles": "stylelint '**/*.{css,scss}' --report-needless-disables --report-invalid-scope-disables",
+    "sync": "carbon-cli sync",
+    "test": "cross-env BABEL_ENV=test jest",
+    "test:e2e": "cross-env BABEL_ENV=test jest --testPathPattern=e2e --testPathIgnorePatterns='examples,/packages/components/,/packages/react/'"
+  },
+  "resolutions": {
+    "react": "~16.9.0",`;
 
-    it('should allow hiding of the copy button', () => {
-      expect(snippet.find(CopyButton).length).toBe(1);
-      snippet.setProps({ hideCopyButton: true });
-      expect(snippet.find(CopyButton).length).toBe(0);
-    });
-
-    it('should set disabled if one is passed via props', () => {
-      snippet.setProps({ disabled: true });
-      expect(snippet.find(`.${prefix}--snippet--disabled`).length).toBe(1);
-    });
+describe('CodeSnippet', () => {
+  it('should use the appropriate snippet class when it is type single', () => {
+    render(
+      <CodeSnippet type="single" data-testid="code-1">
+        {single}
+      </CodeSnippet>
+    );
+    expect(screen.getByTestId('code-1')).toHaveClass('cds--snippet--single');
   });
 
-  describe('Triggers appropriate events', () => {
-    it('should call the click handler', () => {
-      const onClick = jest.fn();
-      const clickWrapper = mount(<CodeSnippet onClick={onClick} />);
-      clickWrapper.find(CopyButton).simulate('click');
-      expect(onClick).toHaveBeenCalled();
-    });
+  it('should use the appropriate snippet class when it is type multi', () => {
+    render(
+      <CodeSnippet type="multi" data-testid="code-2">
+        {multiLong}
+      </CodeSnippet>
+    );
 
-    it('should call the click handler with type="inline"', () => {
-      const onClick = jest.fn();
-      const clickWrapper = mount(
-        <CodeSnippet type={'inline'} onClick={onClick} />
-      );
-      clickWrapper.find(Copy).simulate('click');
-      expect(onClick).toHaveBeenCalled();
-    });
+    expect(screen.getByTestId('code-2')).toHaveClass('cds--snippet--multi');
   });
 
-  describe('check for showMoreBtn', () => {
-    let wrapper;
+  it('should use the appropriate snippet class when it is type inline', () => {
+    render(
+      <CodeSnippet type="inline" data-testid="code-3">
+        {inline}
+      </CodeSnippet>
+    );
 
-    beforeEach(() => {
-      wrapper = mount(<CodeSnippet type={'multi'} />);
-    });
+    expect(screen.getByTestId('code-3')).toHaveClass('cds--snippet--inline');
+  });
 
-    it('when less then 15 rows', () => {
-      wrapper.setProps({
-        children: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14',
-      });
+  it('should render children as expected', () => {
+    render(
+      <CodeSnippet type="inline" data-testid="code-4">
+        {inline}
+      </CodeSnippet>
+    );
 
-      expect(wrapper.find(Button).length).toBe(0);
-    });
+    expect(screen.getByTestId('code-4')).toHaveTextContent(inline);
+  });
 
-    it('when exactly 15 rows', () => {
-      wrapper.setProps({
-        children: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15',
-      });
+  it('should allow custom classes to be applied when passed in via className', () => {
+    const { container } = render(
+      <CodeSnippet type="inline" data-testid="code-5" className="custom-class">
+        {inline}
+      </CodeSnippet>
+    );
 
-      expect(wrapper.find(Button).length).toBe(0);
-    });
+    expect(container.firstChild).toHaveClass('custom-class');
+  });
 
-    it.skip('when more then 15 rows', () => {
-      wrapper.setProps({
-        children: '1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n15\n16',
-      });
+  it('should allow hiding the copy button', () => {
+    render(
+      <CodeSnippet type="single" hideCopyButton>
+        {single}
+      </CodeSnippet>
+    );
 
-      expect(wrapper.find(Button).length).toBe(1);
-    });
+    expect(document.querySelector('button')).not.toBeInTheDocument();
+  });
+
+  it('should set disabled on copy button if it is passed via props', () => {
+    render(
+      <CodeSnippet type="single" disabled>
+        {single}
+      </CodeSnippet>
+    );
+
+    expect(screen.getByTitle('Copy to clipboard')).toHaveAttribute('disabled');
+  });
+});
+
+describe('CodeSnippet events', () => {
+  it('should call the click handler when the copy button is clicked', () => {
+    const onClick = jest.fn();
+    render(
+      <CodeSnippet type="single" onClick={onClick}>
+        {single}
+      </CodeSnippet>
+    );
+
+    const button = screen.getByTitle('Copy to clipboard');
+    userEvent.click(button);
+    expect(onClick).toHaveBeenCalled();
+  });
+
+  it('should call the click handler with type inline', () => {
+    const onClick = jest.fn();
+    render(
+      <CodeSnippet type="inline" data-testid="code-6" onClick={onClick}>
+        {inline}
+      </CodeSnippet>
+    );
+
+    const button = screen.getByTestId('code-6');
+    userEvent.click(button);
+    expect(onClick).toHaveBeenCalled();
+  });
+});
+
+describe('Show more button', () => {
+  it('should not have show more button when less then 15 rows', () => {
+    render(<CodeSnippet type="multi">{multiShort}</CodeSnippet>);
+
+    expect(screen.queryByText('Show more')).toBe(null);
+  });
+
+  it('should not have show more button when exactly 15 rows', () => {
+    render(<CodeSnippet type="multi">{multi15}</CodeSnippet>);
+
+    expect(screen.queryByText('Show more')).toBe(null);
   });
 });
