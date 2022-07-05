@@ -5,11 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, screen, act } from '@testing-library/react';
+import { render, screen, act, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
 import Copy from '../Copy';
 import { Copy as CopyIcon } from '@carbon/icons-react';
+
+jest.useFakeTimers();
 
 describe('Copy', () => {
   it('should set tabIndex if one is passed via props', () => {
@@ -79,7 +81,6 @@ describe('Button props', () => {
 
 describe('Feedback', () => {
   it('should make the feedback visible for a limited amount of time', () => {
-    jest.useFakeTimers();
     render(
       <Copy
         aria-label="Copy button"
@@ -93,9 +94,13 @@ describe('Feedback', () => {
     userEvent.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
-    act(() => jest.runAllTimers());
+    act(() => {
+      jest.runAllTimers();
+      fireEvent.animationEnd(screen.getByTestId('copy-button-5'), {
+        animationName: 'hide-feedback',
+      });
+    });
     expect(button).not.toHaveClass('cds--copy-btn--animating');
-    jest.useRealTimers();
   });
 
   it('should be able to specify the feedback message', () => {
@@ -114,7 +119,6 @@ describe('Feedback', () => {
   });
 
   it('should allow users to override default feedback timeout via prop', () => {
-    jest.useFakeTimers();
     render(
       <Copy
         title="Copy title"
@@ -128,8 +132,12 @@ describe('Feedback', () => {
     userEvent.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
-    act(() => jest.runAllTimers());
+    act(() => {
+      jest.runAllTimers();
+      fireEvent.animationEnd(screen.getByTestId('copy-button-7'), {
+        animationName: 'hide-feedback',
+      });
+    });
     expect(button).not.toHaveClass('cds--copy-btn--animating');
-    jest.useRealTimers();
   });
 });
