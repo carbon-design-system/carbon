@@ -132,9 +132,9 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 // eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/UI Shell',
+  component: Header,
   subcomponents: {
     Content,
-    Header,
     HeaderMenuButton,
     HeaderName,
     HeaderNavigation,
@@ -160,35 +160,47 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
-export const HeaderBase = () => (
-  <Header aria-label="IBM Platform Name">
-    <HeaderName href="#" prefix="IBM">
+export const HeaderBase = (args) => (
+  <Header aria-label="IBM Platform Name" {...args}>
+    <HeaderName href="#" prefix="IBM" {...args}>
       [Platform]
     </HeaderName>
   </Header>
 );
 
-export const HeaderBaseWNavigation = () => (
+export const HeaderBaseWNavigation = (args) => (
   <HeaderContainer
     render={({ isSideNavExpanded, onClickSideNavExpand }) => (
-      <Header aria-label="IBM Platform Name">
+      <Header aria-label="IBM Platform Name" {...args}>
         <SkipToContent />
         <HeaderMenuButton
           aria-label="Open menu"
           onClick={onClickSideNavExpand}
           isActive={isSideNavExpanded}
+          {...args}
         />
-        <HeaderName href="#" prefix="IBM">
+        <HeaderName href="#" prefix="IBM" {...args}>
           [Platform]
         </HeaderName>
-        <HeaderNavigation aria-label="IBM [Platform]">
-          <HeaderMenuItem isCurrentPage href="#">
+        <HeaderNavigation aria-label="IBM [Platform]" {...args}>
+          <HeaderMenuItem isCurrentPage href="#" {...args}>
             Link 1
           </HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 2</HeaderMenuItem>
-          <HeaderMenuItem href="#">Link 3</HeaderMenuItem>
+          <HeaderMenuItem href="#" {...args}>
+            Link 2
+          </HeaderMenuItem>
+          <HeaderMenuItem href="#" {...args}>
+            Link 3
+          </HeaderMenuItem>
           <HeaderMenu aria-label="Link 4" menuLinkName="Link 4">
             <HeaderMenuItem href="#">Sub-link 1</HeaderMenuItem>
             <HeaderMenuItem href="#">Sub-link 2</HeaderMenuItem>
