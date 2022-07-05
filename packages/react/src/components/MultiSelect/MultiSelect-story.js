@@ -269,25 +269,41 @@ WithInitialSelectedItems.parameters = {
 };
 
 export const _Filterable = withReadme(readme, () => {
-  const {
-    listBoxMenuIconTranslationIds,
-    selectionFeedback,
-    ...multiSelectProps
-  } = props();
+  // const {
+  //   listBoxMenuIconTranslationIds,
+  //   selectionFeedback,
+  //   ...multiSelectProps
+  // } = props();
 
   return (
-    <div style={{ width: 300 }}>
-      <FilterableMultiSelect
-        {...multiSelectProps}
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        placeholder={defaultPlaceholder}
-        translateWithId={(id) => listBoxMenuIconTranslationIds[id]}
-        selectionFeedback={selectionFeedback}
-        onMenuChange={(e) => {
-          multiSelectProps.onMenuChange(e);
-        }}
-      />
+    <div style={{ display: 'flex' }}>
+      <div style={{ width: '300px', padding: '1rem' }}>
+        <FilterableMultiSelect
+          titleText="FilterableMultiSelect"
+          placeholder={defaultPlaceholder}
+          itemToString={(item) => (item ? item.text : '')}
+          items={items}
+          id="filterable-1"
+        />
+      </div>
+      <div style={{ width: '300px', padding: '1rem' }}>
+        <FilterableMultiSelect
+          titleText="FilterableMultiSelect"
+          placeholder={defaultPlaceholder}
+          itemToString={(item) => (item ? item.text : '')}
+          items={items}
+          id="filterable-2"
+        />
+      </div>
+      <div style={{ width: '300px', padding: '1rem' }}>
+        <FilterableMultiSelect
+          titleText="FilterableMultiSelect"
+          placeholder={defaultPlaceholder}
+          itemToString={(item) => (item ? item.text : '')}
+          items={items}
+          id="filterable-3"
+        />
+      </div>
     </div>
   );
 });
