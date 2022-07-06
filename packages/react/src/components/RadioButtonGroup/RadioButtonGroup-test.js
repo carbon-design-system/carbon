@@ -6,8 +6,8 @@
  */
 
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { shallow, mount } from 'enzyme';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';
 
@@ -23,7 +23,7 @@ describe('RadioButtonGroup', () => {
     const legend = screen.getByText('test', {
       selector: 'legend',
     });
-    expect(legend).toBeDefined();
+    expect(legend).toBeInTheDocument();
   });
 
   it('should render `legendText` in a <fieldset>', () => {
@@ -60,8 +60,8 @@ describe('RadioButtonGroup', () => {
   });
 
   describe('Component API', () => {
-    it('should support a custom className on the <fieldset>', () => {
-      render(
+    it('should support a custom className on the outermost element', () => {
+      const { container } = render(
         <RadioButtonGroup
           className="custom-class"
           defaultSelected="test-1"
@@ -71,13 +71,7 @@ describe('RadioButtonGroup', () => {
           <RadioButton labelText="test-2" value="test-2" />
         </RadioButtonGroup>
       );
-
-      const fieldset = screen
-        .getByText('test', {
-          selector: 'legend',
-        })
-        .closest('fieldset');
-      expect(fieldset).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should support passing in disabled to disable the <fieldset>', () => {
@@ -161,65 +155,64 @@ describe('RadioButtonGroup', () => {
     });
 
     describe('onChange event', () => {
-      const onChange = jest.fn();
-      const wrapper = mount(
-        <RadioButtonGroup onChange={onChange} name="gender">
-          <RadioButton labelText="Male" value="male" />
-          <RadioButton labelText="Female" value="female" />
-        </RadioButtonGroup>
-      );
-
-      const firstRadio = wrapper.find(RadioButton).first();
-      const args = ['male', 'gender', { test: 'test event' }];
-
-      it('first child should not have checked set initially', () => {
-        expect(firstRadio.props().checked).toEqual(false);
+      it('should not set the first child to checked', () => {
+        render(
+          <RadioButtonGroup name="test">
+            <RadioButton labelText="option-one" value="one" />
+            <RadioButton labelText="option-two" value="two" />
+          </RadioButtonGroup>
+        );
+        expect(screen.getByLabelText('option-one')).not.toBeChecked();
       });
 
-      it('invoking onChange sets checked on correct child', () => {
-        firstRadio.props().onChange(...args);
-        wrapper.update();
-        expect(wrapper.find(RadioButton).first().props().checked).toEqual(true);
-      });
+      it('should call onChange when a radio button is selected', () => {
+        const onChange = jest.fn();
+        render(
+          <RadioButtonGroup name="test" onChange={onChange}>
+            <RadioButton labelText="option-one" value="one" />
+            <RadioButton labelText="option-two" value="two" />
+          </RadioButtonGroup>
+        );
 
-      it('should invoke onChange with correct arguments', () => {
-        expect(onChange).toHaveBeenCalledWith(...args);
-      });
-
-      it('calling onChange with same args should not call onChange prop', () => {
-        onChange.mockClear();
-        firstRadio.props().onChange(...args);
-        expect(onChange).not.toHaveBeenCalled();
+        userEvent.click(screen.getByLabelText('option-one'));
+        expect(onChange).toHaveBeenCalled();
+        expect(onChange).toHaveBeenCalledWith(
+          'one',
+          'test',
+          expect.objectContaining({
+            target: screen.getByLabelText('option-one'),
+          })
+        );
       });
     });
 
     describe('Getting derived state from props', () => {
-      const wrapper = shallow(
-        <RadioButtonGroup
-          valueSelected="male"
-          defaultSelected="female"
-          name="gender">
-          <RadioButton labelText="Male" value="male" />
-          <RadioButton labelText="Female" value="female" />
-        </RadioButtonGroup>
-      );
-
       it('should initialize the current selection from props', () => {
-        expect(wrapper.state().selected).toEqual('male');
+        render(
+          <RadioButtonGroup valueSelected="one" name="test">
+            <RadioButton labelText="option-one" value="one" />
+            <RadioButton labelText="option-two" value="two" />
+          </RadioButtonGroup>
+        );
+        expect(screen.getByLabelText('option-one')).toBeChecked();
       });
 
       it('should change the current selection upon change in props', () => {
-        wrapper.setProps({ valueSelected: 'male' });
-        wrapper.setState({ selected: 'male' });
-        wrapper.setProps({ valueSelected: undefined });
-        expect(wrapper.state().selected).toEqual('female');
-      });
+        const { rerender } = render(
+          <RadioButtonGroup valueSelected="one" name="test">
+            <RadioButton labelText="option-one" value="one" />
+            <RadioButton labelText="option-two" value="two" />
+          </RadioButtonGroup>
+        );
+        expect(screen.getByLabelText('option-one')).toBeChecked();
 
-      it('should avoid change the current selection upon setting props, unless there the value actually changes', () => {
-        wrapper.setProps({ valueSelected: 'female' });
-        wrapper.setState({ selected: 'male' });
-        wrapper.setProps({ valueSelected: 'female' });
-        expect(wrapper.state().selected).toEqual('male');
+        rerender(
+          <RadioButtonGroup valueSelected="two" name="test">
+            <RadioButton labelText="option-one" value="one" />
+            <RadioButton labelText="option-two" value="two" />
+          </RadioButtonGroup>
+        );
+        expect(screen.getByLabelText('option-two')).toBeChecked();
       });
     });
   });
