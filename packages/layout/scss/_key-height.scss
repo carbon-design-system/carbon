@@ -19,6 +19,8 @@
 // compatibility file to ensure we continue to support node-sass and dart-sass
 // in v10.
 
+@use "sass:math";
+
 @import 'breakpoint';
 @import 'utilities';
 
@@ -38,7 +40,7 @@
     $margin: map-get($values, margin);
     $columns: map-get($values, columns);
 
-    @return ($width - (2 * $margin)) / $columns;
+    @return math.div($width - (2 * $margin), $columns);
   } @else {
     @warn 'Breakpoint: `#{$breakpoint}` is not a valid breakpoint.';
   }

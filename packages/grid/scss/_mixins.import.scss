@@ -85,8 +85,8 @@
       max-width: percentage(math.div($span, $columns));
       flex: 0 0 percentage(math.div($span, $columns));
     } @else {
-      max-width: percentage(($span / $columns));
-      flex: 0 0 percentage(($span / $columns));
+      max-width: percentage(math.div($span, $columns));
+      flex: 0 0 percentage(math.div($span, $columns));
     }
   }
 }
@@ -101,7 +101,7 @@
   @if meta.function-exists('div', 'math') {
     $offset: math.div($span, $columns);
   } @else {
-    $offset: ($span / $columns);
+    $offset: math.div($span, $columns);
   }
   @if $offset == 0 {
     margin-left: 0;
@@ -313,7 +313,7 @@ $carbon--aspect-ratios: (
       @if meta.function-exists('div', 'math') {
         padding-top: percentage(math.div($height, $width));
       } @else {
-        padding-top: percentage(($height / $width));
+        padding-top: percentage(math.div($height, $width));
       }
     }
   }

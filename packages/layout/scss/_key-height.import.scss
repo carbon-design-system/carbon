@@ -43,7 +43,7 @@
     @if meta.function-exists('div', 'math') {
       @return math.div($width - (2 * $margin), $columns);
     } @else {
-      @return (($width - (2 * $margin)) / $columns);
+      @return math.div($width - (2 * $margin), $columns);
     }
   } @else {
     @warn 'Breakpoint: `#{$breakpoint}` is not a valid breakpoint.';

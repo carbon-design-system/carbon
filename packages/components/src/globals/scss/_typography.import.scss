@@ -46,7 +46,7 @@ $base-font-size: 16px !default;
   @if meta.function-exists('div', 'math') {
     @return math.div($px, $base-font-size) * 1rem;
   } @else {
-    @return ($px / $base-font-size) * 1rem;
+    @return math.div($px, $base-font-size) * 1rem;
   }
 }
 
@@ -66,7 +66,7 @@ $base-font-size: 16px !default;
   @if meta.function-exists('div', 'math') {
     @return math.div($px, $base-font-size) * 1em;
   } @else {
-    @return ($px / $base-font-size) * 1em;
+    @return math.div($px, $base-font-size) * 1em;
   }
 }
 

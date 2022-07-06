@@ -74,8 +74,8 @@
       max-width: math.percentage(math.div($span, $columns));
       flex: 0 0 math.percentage(math.div($span, $columns));
     } @else {
-      max-width: math.percentage(($span / $columns));
-      flex: 0 0 math.percentage(($span / $columns));
+      max-width: math.percentage(math.div($span, $columns));
+      flex: 0 0 math.percentage(math.div($span, $columns));
     }
   }
 }
@@ -90,7 +90,7 @@
   @if meta.function-exists('div', 'math') {
     $offset: math.div($span, $columns);
   } @else {
-    $offset: ($span / $columns);
+    $offset: math.div($span, $columns);
   }
   @if $offset == 0 {
     margin-left: 0;

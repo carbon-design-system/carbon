@@ -21,6 +21,8 @@
 
 // stylelint-disable number-max-precision
 
+@use "sass:math";
+
 @import '@carbon/layout/scss/breakpoint';
 @import 'font-family';
 @import 'scale';
@@ -745,7 +747,7 @@ $tokens: (
 /// @access public
 /// @group @carbon/type
 @function strip-unit($value) {
-  @return $value / ($value * 0 + 1);
+  @return math.div($value, $value * 0 + 1);
 }
 
 /// This helper includes fluid type styles for the given token value. Fluid type

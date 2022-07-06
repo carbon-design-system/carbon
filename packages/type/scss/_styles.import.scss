@@ -586,7 +586,7 @@ $tokens: (
   @if meta.function-exists('div', 'math') {
     @return math.div($value, $value * 0 + 1);
   } @else {
-    @return $value / ($value * 0 + 1);
+    @return math.div($value, $value * 0 + 1);
   }
 }
 
