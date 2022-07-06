@@ -44,6 +44,11 @@ module.exports = {
     ],
   },
   overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      plugins: ['@typescript-eslint'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+    },
     // Sometimes we'll want to define a quick component in a story to use as a
     // wrapper for a component we're documenting. For example:
     //
