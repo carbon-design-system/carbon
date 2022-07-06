@@ -9,6 +9,8 @@ exports[`DataTable.TableExpandHeader should render 1`] = `
     className="cds--data-table-content"
   >
     <table
+      aria-describedby={null}
+      aria-labelledby={null}
       className="cds--data-table"
     >
       <TableHead>
