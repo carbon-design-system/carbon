@@ -11,11 +11,11 @@ import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 export default function InlineLoading({
   className,
   status = 'active',
-  iconDescription,
   description,
   onSuccess,
   successDelay,
@@ -27,7 +27,7 @@ export default function InlineLoading({
     if (status === 'error') {
       return (
         <ErrorFilled className={`${prefix}--inline-loading--error`}>
-          <title>{iconDescription}</title>
+          <title>{status}</title>
         </ErrorFilled>
       );
     }
@@ -40,7 +40,7 @@ export default function InlineLoading({
       return (
         <CheckmarkFilled
           className={`${prefix}--inline-loading__checkmark-container`}>
-          <title>{iconDescription}</title>
+          <title>{status}</title>
         </CheckmarkFilled>
       );
     }
@@ -48,7 +48,7 @@ export default function InlineLoading({
       return (
         <Loading
           small
-          description={iconDescription}
+          description={status === 'active' ? 'loading' : 'not loading'}
           withOverlay={false}
           active={status === 'active'}
         />
@@ -88,7 +88,10 @@ InlineLoading.propTypes = {
   /**
    * Specify the description for the inline loading text
    */
-  iconDescription: PropTypes.string,
+  iconDescription: deprecate(
+    PropTypes.string,
+    `\nThe prop \`iconDescription\` is now calculated by loading automatically, and is no longer needed.`
+  ),
 
   /**
    * Provide an optional handler to be invoked when <InlineLoading> is

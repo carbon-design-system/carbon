@@ -42,11 +42,13 @@ function Loading({
       aria-labelledby={loadingId}
       aria-live={active ? 'assertive' : 'off'}
       className={loadingClassName}>
-      <label id={loadingId} className={`${prefix}--visually-hidden`}>
-        {description}
-      </label>
+      {small ? null : (
+        <label id={loadingId} className={`${prefix}--visually-hidden`}>
+          {description}
+        </label>
+      )}
       <svg className={`${prefix}--loading__svg`} viewBox="0 0 100 100">
-        <title>{description}</title>
+        {small ? <title>{description}</title> : null}
         {small ? (
           <circle
             className={`${prefix}--loading__background`}
@@ -108,7 +110,7 @@ Loading.defaultProps = {
   active: true,
   withOverlay: true,
   small: false,
-  description: 'Active loading indicator',
+  description: 'loading',
 };
 
 export default Loading;

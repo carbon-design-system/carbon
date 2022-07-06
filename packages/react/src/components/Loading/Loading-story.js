@@ -13,7 +13,7 @@ const props = () => ({
   active: boolean('Active (active)', true),
   withOverlay: boolean('With overlay (withOverlay)', false),
   small: boolean('Small (small)', false),
-  description: text('Description (description)', 'Active loading indicator'),
+  description: text('Description (description)', 'Loading'),
 });
 
 export default {
