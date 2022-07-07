@@ -14,7 +14,7 @@ import {
   findMenuIconNode,
   generateItems,
   generateGenericItem,
-} from '../../../ListBox/test-helpers';
+} from '../../ListBox/test-helpers';
 
 const listItemName = 'ListBoxMenuItem';
 const openMenu = (wrapper) => {

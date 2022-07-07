@@ -9,10 +9,7 @@ import '../../../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
-import {
-  generateItems,
-  generateGenericItem,
-} from '../../../ListBox/test-helpers';
+import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
 import FilterableMultiSelect from '../FilterableMultiSelect';
 
 describe('FilterableMultiSelect', () => {

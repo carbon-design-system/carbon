@@ -4159,9 +4159,7 @@ Map {
   "MultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "Filterable": Object {
-      "contextType": Object {
-        "$$typeof": Symbol(react.context),
-      },
+      "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "ariaLabel": "Choose an item",
         "compareItems": [Function],
@@ -4364,7 +4362,6 @@ Map {
           "type": "bool",
         },
         "placeholder": Object {
-          "isRequired": true,
           "type": "string",
         },
         "selectionFeedback": Object {
@@ -4404,6 +4401,7 @@ Map {
           "type": "node",
         },
       },
+      "render": [Function],
     },
     "defaultProps": Object {
       "clearSelectionDescription": "Total items selected: ",
