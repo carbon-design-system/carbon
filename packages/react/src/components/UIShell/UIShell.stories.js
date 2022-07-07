@@ -32,6 +32,7 @@ import {
   SwitcherItem,
   SwitcherDivider,
 } from './';
+import { HeaderMenu as HeaderMenuNative } from './HeaderMenu';
 import Modal from '../Modal';
 import Button from '../Button';
 import {
@@ -138,7 +139,7 @@ export default {
     HeaderMenuButton,
     HeaderName,
     HeaderNavigation,
-    HeaderMenu,
+    HeaderMenu: HeaderMenuNative,
     HeaderMenuItem,
     HeaderGlobalBar,
     HeaderGlobalAction,
