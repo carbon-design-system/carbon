@@ -6,12 +6,24 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from '@testing-library/react';
 import FormLabel from '../FormLabel';
 
 describe('FormLabel', () => {
-  it('should render', () => {
-    const wrapper = shallow(<FormLabel />);
-    expect(wrapper).toMatchSnapshot();
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(<FormLabel className="test" />);
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should spread extra props on the outermost element', () => {
+    const { container } = render(
+      <FormLabel aria-label="test" data-testid="test" />
+    );
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+  });
+
+  it('should support a unique id prop on the outermost element', () => {
+    const { container } = render(<FormLabel id="test-1" />);
+    expect(container.firstChild).toHaveProperty('htmlFor', 'test-1');
   });
 });
