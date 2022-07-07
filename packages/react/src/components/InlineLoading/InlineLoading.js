@@ -11,11 +11,11 @@ import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
-import deprecate from '../../prop-types/deprecate';
 
 export default function InlineLoading({
   className,
   status = 'active',
+  iconDescription,
   description,
   onSuccess,
   successDelay,
@@ -24,10 +24,11 @@ export default function InlineLoading({
   const prefix = usePrefix();
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
   const getLoading = () => {
+    let iconLabel = iconDescription ? iconDescription : status;
     if (status === 'error') {
       return (
         <ErrorFilled className={`${prefix}--inline-loading--error`}>
-          <title>{status}</title>
+          <title>{iconLabel}</title>
         </ErrorFilled>
       );
     }
@@ -40,15 +41,18 @@ export default function InlineLoading({
       return (
         <CheckmarkFilled
           className={`${prefix}--inline-loading__checkmark-container`}>
-          <title>{status}</title>
+          <title>{iconLabel}</title>
         </CheckmarkFilled>
       );
     }
     if (status === 'inactive' || status === 'active') {
+      if (!iconDescription) {
+        iconLabel = status === 'active' ? 'loading' : 'not loading';
+      }
       return (
         <Loading
           small
-          description={status === 'active' ? 'loading' : 'not loading'}
+          description={iconLabel}
           withOverlay={false}
           active={status === 'active'}
         />
@@ -88,10 +92,7 @@ InlineLoading.propTypes = {
   /**
    * Specify the description for the inline loading text
    */
-  iconDescription: deprecate(
-    PropTypes.string,
-    `\nThe prop \`iconDescription\` is now calculated by loading automatically, and is no longer needed.`
-  ),
+  iconDescription: PropTypes.string,
 
   /**
    * Provide an optional handler to be invoked when <InlineLoading> is
