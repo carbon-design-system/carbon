@@ -4,6 +4,15 @@ on:
     types: [opened]
   issue_comment:
     types: [created]
+  workflow_call:
+    secrets:
+      APP_ID:
+        required: true
+      APP_PRIVATE_KEY:
+        required: true
+      ADD_TO_PROJECT_PAT:
+        required: true
+
 jobs:
   comment:
     runs-on: ubuntu-latest
