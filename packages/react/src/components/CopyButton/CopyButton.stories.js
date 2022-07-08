@@ -8,7 +8,7 @@
 
 import React from 'react';
 import CopyButton from './CopyButton';
-import mdx from './CopyButton';
+import mdx from './CopyButton.mdx';
 
 export default {
   title: 'Components/CopyButton',
@@ -20,9 +20,7 @@ export default {
   },
 };
 
-export const CopyButtonStory = () => <CopyButton />;
-
-CopyButtonStory.storyName = 'Default';
+export const _Default = () => <CopyButton />;
 
 export const Playground = (args) => <CopyButton {...args} />;
 
