@@ -2111,7 +2111,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.6.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.7.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2126,7 +2126,7 @@ __metadata:
     "@carbon/feature-flags": ^0.8.0
     "@carbon/icons-react": ^11.5.0
     "@carbon/layout": ^11.3.0
-    "@carbon/styles": ^1.6.0
+    "@carbon/styles": ^1.7.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.25.0
     "@carbon/themes": ^11.4.0
@@ -2178,7 +2178,7 @@ __metadata:
     rollup-plugin-strip-banner: ^2.0.0
     rtlcss: ^3.5.0
     sass: ^1.51.0
-    sass-loader: ^12.4.0
+    sass-loader: ^13.0.0
     storybook-readme: ^5.0.9
     stream-browserify: ^3.0.0
     style-loader: ^3.3.1
@@ -2221,7 +2221,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^1.6.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^1.7.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -10568,8 +10568,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.17.12
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
-    "@carbon/react": ^1.6.0
-    "@carbon/styles": ^1.6.0
+    "@carbon/react": ^1.7.0
+    "@carbon/styles": ^1.7.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.25.0
     "@rollup/plugin-babel": ^5.3.0
@@ -10595,7 +10595,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^1.6.0
+    "@carbon/styles": ^1.7.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.25.0
     fs-extra: ^10.0.0
@@ -11284,7 +11284,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^1.6.0
+    "@carbon/styles": ^1.7.0
     sass: ^1.51.0
     vite: ^2.8.0
   languageName: unknown
@@ -11294,7 +11294,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation"
   dependencies:
-    "@carbon/react": ^1.6.0
+    "@carbon/react": ^1.7.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -11306,7 +11306,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^1.6.0
+    "@carbon/react": ^1.7.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -15051,7 +15051,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": ^1.6.0
+    "@carbon/react": ^1.7.0
     eslint: 8.12.0
     next: 12.1.4
     react: 18.0.0
@@ -15064,7 +15064,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": ^1.6.0
+    "@carbon/react": ^1.7.0
     eslint: 8.12.0
     eslint-config-next: 12.1.4
     next: 12.1.4
@@ -27548,7 +27548,7 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"sass-loader@npm:^12.3.0, sass-loader@npm:^12.4.0":
+"sass-loader@npm:^12.3.0":
   version: 12.6.0
   resolution: "sass-loader@npm:12.6.0"
   dependencies:
@@ -27570,6 +27570,31 @@ resolve@^2.0.0-next.3:
     sass-embedded:
       optional: true
   checksum: 5d73a428588150f704016aa27397941bb9246cecd2ee083b573e95d969fc080ac6a16f2fe1cc64aca08f6e70da6f3c586ee68f0efc9f527fecc360e5f1c299ec
+  languageName: node
+  linkType: hard
+
+"sass-loader@npm:^13.0.0":
+  version: 13.0.2
+  resolution: "sass-loader@npm:13.0.2"
+  dependencies:
+    klona: ^2.0.4
+    neo-async: ^2.6.2
+  peerDependencies:
+    fibers: ">= 3.1.0"
+    node-sass: ^4.0.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
+    sass: ^1.3.0
+    sass-embedded: "*"
+    webpack: ^5.0.0
+  peerDependenciesMeta:
+    fibers:
+      optional: true
+    node-sass:
+      optional: true
+    sass:
+      optional: true
+    sass-embedded:
+      optional: true
+  checksum: 6306712cc75bd4b4260ce67178778c92110089485f358b5956b6b12aba15a55e5c7287154daaf8b32678891df915b7bcda7356991afe8bf08ca7356ed30eb448
   languageName: node
   linkType: hard
 
@@ -31485,7 +31510,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": ^1.6.0
+    "@carbon/react": ^1.7.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -32549,7 +32574,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^1.6.0
+    "@carbon/react": ^1.7.0
     "@octokit/core": ^3.5.1
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^3.5.2
