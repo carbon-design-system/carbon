@@ -3793,7 +3793,7 @@ Map {
   "Loading" => Object {
     "defaultProps": Object {
       "active": true,
-      "description": "Active loading indicator",
+      "description": "loading",
       "small": false,
       "withOverlay": true,
     },
@@ -3807,9 +3807,7 @@ Map {
       "description": Object {
         "type": "string",
       },
-      "id": Object {
-        "type": "string",
-      },
+      "id": [Function],
       "small": Object {
         "type": "bool",
       },
