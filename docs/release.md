@@ -63,7 +63,7 @@ checkpoints:
 | [Prerelease](#prerelease)        | Publish a prerelease that will be used to test out the release candidate before becoming stabilized                      |
 | [Stable release](#stablerelease) | Graduate the prerelease into a stable release that is available through packages on NPM                                  |
 | [Post release](#postrelease)     | Support the latest stable release and address any issues that may come up as a result of promoting the release to stable |
-| [Previous release](#postrelease)     | Determine if new changes to v10 are present and need published, and do so if needed.  |
+| [Previous release](#postrelease) | Determine if new changes to v10 are present and need published, and do so if needed.                                     |
 
 ### Prerelease
 
