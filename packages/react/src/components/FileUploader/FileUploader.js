@@ -234,10 +234,13 @@ export default class FileUploader extends React.Component {
                   className={selectedFileClasses}
                   ref={(node) => (this.nodes[index] = node)} // eslint-disable-line
                   {...other}>
-                  <p className={`${prefix}--file-filename`}>{name}</p>
+                  <p className={`${prefix}--file-filename`} id={name}>
+                    {name}
+                  </p>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
                       iconDescription={iconDescription}
+                      aria-describedby={name}
                       status={filenameStatus}
                       onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {
