@@ -124,6 +124,8 @@ export default class FileUploader extends React.Component {
 
   nodes = [];
 
+  uploaderButton = React.createRef();
+
   static getDerivedStateFromProps({ filenameStatus }, state) {
     const { prevFilenameStatus } = state;
     return prevFilenameStatus === filenameStatus
@@ -159,6 +161,7 @@ export default class FileUploader extends React.Component {
       this.setState({ filenames: filteredArray });
       if (this.props.onDelete) {
         this.props.onDelete(evt);
+        this.uploaderButton.current.focus();
       }
       this.props.onClick(evt);
     }
@@ -215,6 +218,7 @@ export default class FileUploader extends React.Component {
           {labelDescription}
         </p>
         <FileUploaderButton
+          innerRef={this.uploaderButton}
           disabled={disabled}
           labelText={buttonLabel}
           multiple={multiple}
