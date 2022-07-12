@@ -54,7 +54,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 
     .#{$prefix}--tab--list {
       display: flex;
-      width: 100%;
+      width: auto;
       overflow-x: auto;
       scroll-behavior: smooth;
       scrollbar-width: none;
