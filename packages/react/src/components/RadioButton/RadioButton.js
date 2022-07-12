@@ -69,6 +69,8 @@ const RadioButton = React.forwardRef(function RadioButton(
   );
 });
 
+RadioButton.displayName = 'RadioButton';
+
 RadioButton.propTypes = {
   /**
    * Specify whether the `<RadioButton>` is currently checked
