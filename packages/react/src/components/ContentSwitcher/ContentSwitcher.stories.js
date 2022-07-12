@@ -6,10 +6,10 @@
  */
 
 import React from 'react';
-import ContentSwitcher from '../ContentSwitcher';
-import Switch from '../../Switch';
-import { Layer } from '../../Layer';
-import mdx from '../ContentSwitcher.mdx';
+import ContentSwitcher from './ContentSwitcher';
+import Switch from '../Switch';
+import { Layer } from '../Layer';
+import mdx from './ContentSwitcher.mdx';
 
 export default {
   title: 'Components/ContentSwitcher',
@@ -63,4 +63,31 @@ export const WithLayer = () => {
       </Layer>
     </>
   );
+};
+
+export const Playground = (args) => (
+  <ContentSwitcher {...args}>
+    <Switch name="one" text="First section" />
+    <Switch name="two" text="Second section" />
+    <Switch name="three" text="Third section" />
+  </ContentSwitcher>
+);
+
+Playground.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  onChange: {
+    action: 'onChange',
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+  },
 };
