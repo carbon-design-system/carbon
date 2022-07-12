@@ -49,3 +49,35 @@ if (global.window) {
     };
   });
 }
+
+if (global.window && global.AnimationEvent === undefined) {
+  // Reference: https://github.com/testing-library/react-testing-library/issues/892#issuecomment-808703402
+  class AnimationEvent extends Event {
+    constructor(type, animationEventInitDict = {}) {
+      const {
+        animationName = '',
+        elapsedTime = 0,
+        pseudoElement = '',
+        ...eventInitDict
+      } = animationEventInitDict;
+      super(type, eventInitDict);
+
+      this._animationName = animationName;
+      this._elapsedTime = elapsedTime;
+      this._pseudoElement = pseudoElement;
+    }
+
+    get animationName() {
+      return this._animationName;
+    }
+
+    get elapsedTime() {
+      return this._elapsedTime;
+    }
+
+    get pseudoElement() {
+      return this._pseudoElement;
+    }
+  }
+  global.AnimationEvent = AnimationEvent;
+}
