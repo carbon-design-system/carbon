@@ -1,0 +1,43 @@
+@use '../breakpoint' as *;
+@use '../config';
+
+div[class*='hidden--'] {
+  padding: 2rem 1rem;
+}
+
+// Classes that are used to hide elements only at specific breakpoints.
+// Helpful for when you would like to hide elements outside of a Grid
+.#{config.$prefix}__hidden--sm-only {
+  background: #8a3ffc;
+  @include breakpoint-between('sm', 'md') {
+    display: none;
+  }
+}
+
+.#{config.$prefix}__hidden--md-only {
+  background: #4589ff;
+  @include breakpoint-between('md', 'lg') {
+    display: none;
+  }
+}
+
+.#{config.$prefix}__hidden--lg-only {
+  background: #42be65;
+  @include breakpoint-between('lg', 'xlg') {
+    display: none;
+  }
+}
+
+.#{config.$prefix}__hidden--xlg-only {
+  background: #f1c21b;
+  @include breakpoint-between('xlg', 'max') {
+    display: none;
+  }
+}
+
+.#{config.$prefix}__hidden--max-only {
+  background: #da1e28;
+  @include breakpoint-up('max') {
+    display: none;
+  }
+}
