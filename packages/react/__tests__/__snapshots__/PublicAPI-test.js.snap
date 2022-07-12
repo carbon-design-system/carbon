@@ -6009,10 +6009,6 @@ Map {
   },
   "SideNavLink" => Object {
     "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "element": "a",
-      "large": false,
-    },
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
