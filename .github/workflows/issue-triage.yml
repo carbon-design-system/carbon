@@ -24,7 +24,7 @@ jobs:
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
-      - uses: ./actions/issues
+      - uses: carbon-design-system/carbon/actions/issues@main
         with:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           enabled: true
