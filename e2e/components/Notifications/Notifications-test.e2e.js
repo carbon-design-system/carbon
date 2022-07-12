@@ -33,7 +33,7 @@ test.describe('Notifications', () => {
       test('actionable @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Actionable',
-          id: 'components-notifications-actionable--actionable',
+          id: 'components-notifications-actionable--default',
           theme,
         });
       });
