@@ -2,6 +2,5 @@ version: 2
 snapshot:
   widths:
     - 360
-    - 672
     - 1366
   minHeight: 1024

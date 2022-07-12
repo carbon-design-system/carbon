@@ -5,13 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import { HeaderGlobalBar } from '../';
 
 describe('HeaderGlobalBar', () => {
-  it('should render', () => {
-    const wrapper = mount(<HeaderGlobalBar className="custom-class" />);
-    expect(wrapper).toMatchSnapshot();
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(<HeaderGlobalBar className="test" />);
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should spread extra props on the outermost element', () => {
+    const { container } = render(<HeaderGlobalBar data-testid="test" />);
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });

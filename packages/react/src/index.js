@@ -214,7 +214,7 @@ export {
 } from './components/FeatureFlags';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
-export { Layer } from './components/Layer';
+export { Layer, useLayer } from './components/Layer';
 export unstable_Menu, {
   MenuDivider as unstable_MenuDivider,
   MenuGroup as unstable_MenuGroup,

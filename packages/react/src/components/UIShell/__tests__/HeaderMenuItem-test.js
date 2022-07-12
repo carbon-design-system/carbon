@@ -5,25 +5,41 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import { HeaderMenuItem } from '../';
 
 describe('HeaderMenuItem', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      className: 'custom-class',
-      children: 'Menu Item',
-      role: 'none',
-      ref: jest.fn(),
-    };
+  it('should set the current class based on isCurrentPage', () => {
+    render(
+      <HeaderMenuItem data-testid="test" isCurrentPage>
+        test
+      </HeaderMenuItem>
+    );
+    expect(screen.getByTestId('test')).toHaveClass(
+      'cds--header__menu-item--current'
+    );
   });
 
-  it('should render', () => {
-    const wrapper = mount(<HeaderMenuItem {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
-    expect(mockProps.ref).toHaveBeenCalledTimes(1);
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <HeaderMenuItem className="test">test</HeaderMenuItem>
+    );
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should spread extra props on the <a> element', () => {
+    render(<HeaderMenuItem data-testid="test">test</HeaderMenuItem>);
+    expect(screen.getByTestId('test').tagName).toBe('A');
+  });
+
+  it('should support a `ref` on the <a> element', () => {
+    const ref = jest.fn();
+    render(
+      <HeaderMenuItem ref={ref} data-testid="test">
+        test
+      </HeaderMenuItem>
+    );
+    expect(ref).toHaveBeenCalledWith(screen.getByTestId('test'));
   });
 });

@@ -5,31 +5,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import ListBox from '../';
 
 describe('ListBoxField', () => {
-  it('should render', () => {
-    const wrapper = mount(
-      <ListBox.Field id="test-listbox">
-        <ListBox.Selection clearSelection={jest.fn()} />
-      </ListBox.Field>
-    );
-    expect(wrapper).toMatchSnapshot();
+  it('should set tabIndex to -1 when disabled', () => {
+    const { container } = render(<ListBox.Field disabled />);
+    expect(container.firstChild).toHaveAttribute('tabindex', '-1');
   });
 
-  it('should be focusable via custom tabindex value', () => {
-    const wrapper = mount(
-      <ListBox.Field tabIndex="0" id="test-listbox">
-        <ListBox.Selection clearSelection={jest.fn()} />
-      </ListBox.Field>
-    );
-    expect(wrapper.children().prop('tabIndex')).toBe('0');
+  it('should set tabIndex to the `tabIndex` prop', () => {
+    const { container } = render(<ListBox.Field tabIndex="0" />);
+    expect(container.firstChild).toHaveAttribute('tabindex', '0');
   });
 
-  it('should not be focusable when ListBox is `disabled`', () => {
-    const wrapper = mount(<ListBox.Field id="test-listbox" disabled />);
-    expect(wrapper.children().prop('tabIndex')).toBe(-1);
+  it('should spread extra props on the outermost element', () => {
+    const { container } = render(<ListBox.Field data-testid="test" />);
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });

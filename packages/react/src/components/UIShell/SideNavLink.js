@@ -16,11 +16,11 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const SideNavLink = React.forwardRef(function SideNavLink(
   {
-    className: customClassName,
     children,
+    className: customClassName,
     renderIcon: IconElement,
     isActive,
-    large,
+    large = false,
     ...rest
   },
   ref
@@ -61,12 +61,6 @@ SideNavLink.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Property to indicate if the side nav container is open (or not). Use to
-   * keep local state and styling in step with the SideNav expansion state.
-   */
-  isSideNavExpanded: PropTypes.bool,
-
-  /**
    * Specify if this is a large variation of the SideNavLink
    */
   large: PropTypes.bool,
@@ -75,11 +69,6 @@ SideNavLink.propTypes = {
    * Provide an icon to render in the side navigation link. Should be a React class.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-};
-
-SideNavLink.defaultProps = {
-  element: 'a',
-  large: false,
 };
 
 // eslint-disable-next-line react/display-name

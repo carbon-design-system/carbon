@@ -177,8 +177,8 @@ class HeaderMenu extends React.Component {
     };
     const className = cx({
       [`${prefix}--header__submenu`]: true,
-      [customClassName]: true,
       [`${prefix}--header__submenu--current`]: isCurrentPage,
+      [customClassName]: !!customClassName,
     });
 
     // Notes on eslint comments and based on the examples in:
@@ -241,4 +241,6 @@ const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
 });
 
 HeaderMenuForwardRef.displayName = 'HeaderMenu';
+
+export { HeaderMenu };
 export default HeaderMenuForwardRef;

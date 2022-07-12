@@ -51,11 +51,12 @@ export default function TreeView({
       } else {
         setSelected(selected.filter((selectedId) => selectedId !== nodeId));
       }
+      onSelect?.(event, node);
     } else {
       setSelected([nodeId]);
       setActive(nodeId);
+      onSelect?.(event, { activeNodeId: nodeId, ...node });
     }
-    onSelect?.(event, node);
   }
 
   function handleFocusEvent(event) {
@@ -183,14 +184,17 @@ export default function TreeView({
       });
   }, [prefix]);
 
-  useEffect(() => {
-    if (preselected.length) {
-      setSelected(preselected);
-    }
-    if (prespecifiedActive) {
-      setActive(prespecifiedActive);
-    }
-  }, [preselected, prespecifiedActive]);
+  const useActiveAndSelectedOnMount = () =>
+    useEffect(() => {
+      if (preselected.length) {
+        setSelected(preselected);
+      }
+      if (prespecifiedActive) {
+        setActive(prespecifiedActive);
+      }
+    }, []);
+
+  useActiveAndSelectedOnMount();
 
   const labelId = `${treeId}__label`;
   const TreeLabel = () =>
@@ -199,6 +203,7 @@ export default function TreeView({
         {label}
       </label>
     );
+
   return (
     <>
       <TreeLabel />

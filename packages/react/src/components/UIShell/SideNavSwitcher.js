@@ -10,21 +10,21 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { useId } from '../../internal/useId';
 
 const SideNavSwitcher = React.forwardRef(function SideNavSwitcher(props, ref) {
+  const id = useId('side-nav-switcher');
   const prefix = usePrefix();
   const { className: customClassName, labelText, onChange, options } = props;
   const className = cx(`${prefix}--side-nav__switcher`, customClassName);
   // Note for usage around `onBlur`: https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/no-onchange.md
   return (
     <div className={className}>
-      <label
-        htmlFor="side-nav-switcher"
-        className={`${prefix}--assistive-text`}>
+      <label htmlFor={id} className={`${prefix}--assistive-text`}>
         {labelText}
       </label>
       <select
-        id="carbon-side-nav-switcher"
+        id={id}
         className={`${prefix}--side-nav__select`}
         defaultValue=""
         onBlur={onChange}
