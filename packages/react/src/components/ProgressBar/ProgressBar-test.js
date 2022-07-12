@@ -33,14 +33,12 @@ describe('ProgressBar', () => {
     it('renders helper text when passed', () => {
       const text = 'ProgressBar helper text';
       wrapper.rerender(<ProgressBar {...props} helperText={text} />);
-      const helperText = wrapper.container.querySelector(
+      const helperTextNode = wrapper.container.querySelector(
         `.${prefix}--progress-bar__helper-text`
       );
+      const helperText = helperTextNode.firstChild.textContent;
 
-      expect(helperText.textContent).toBe(text);
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-describedby')
-      ).toBe(helperText.id);
+      expect(helperText).toBe(text);
     });
 
     it('still renders accessible label when hideLabel is passed', () => {
