@@ -30,7 +30,7 @@ export default {
   },
 };
 
-export const Actionable = () => (
+export const Default = () => (
   <ActionableNotification
     title="Notification title"
     subtitle="Subtitle text goes here"
