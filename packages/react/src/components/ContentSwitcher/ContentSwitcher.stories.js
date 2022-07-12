@@ -34,7 +34,7 @@ export default {
 export const Default = () => (
   <ContentSwitcher onChange={() => {}}>
     <Switch name="one" text="First section" />
-    <Switch name="two" text="Second section" />
+    <Switch name="two">Second section</Switch>
     <Switch name="three" text="Third section" />
   </ContentSwitcher>
 );
