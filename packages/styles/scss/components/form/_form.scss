@@ -12,6 +12,7 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/skeleton' as *;
+@use '../..//utilities/button-reset';
 
 /// @type Number
 /// @access public
@@ -51,10 +52,42 @@ $input-label-weight: 400 !default;
     margin-bottom: 0;
   }
 
-  .#{$prefix}--label .#{$prefix}--tooltip__trigger {
-    // When tooltip trigger is put in form label the trigger button should fit in the size of label
-    // https://github.com/IBM/carbon-components-react/issues/115
+  .#{$prefix}--label + .#{$prefix}--tooltip {
+    position: relative;
+    top: 0.2rem;
+    left: 0.5rem;
+  }
+
+  .#{$prefix}--label + .#{$prefix}--tooltip .#{$prefix}--tooltip__trigger {
+    @include button-reset.reset();
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
     @include type-style('label-01');
+  }
+
+  .#{$prefix}--label
+    + .#{$prefix}--tooltip
+    .#{$prefix}--tooltip__trigger:focus {
+    outline: 1px solid $focus;
+  }
+
+  .#{$prefix}--label + .#{$prefix}--tooltip .#{$prefix}--tooltip__trigger svg {
+    fill: $icon-secondary;
+  }
+
+  .#{$prefix}--label
+    + .#{$prefix}--tooltip
+    .#{$prefix}--tooltip__trigger
+    svg
+    :hover {
+    fill: $icon-primary;
+  }
+
+  .#{$prefix}--label + .#{$prefix}--toggletip {
+    top: 0.2rem;
+    left: 0.5rem;
   }
 
   // Skeleton State
