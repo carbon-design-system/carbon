@@ -8,7 +8,8 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import Button from '../Button';
-import ComposedModal, {
+import {
+  ComposedModal,
   ModalHeader,
   ModalBody,
   ModalFooter,
