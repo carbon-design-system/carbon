@@ -6310,7 +6310,6 @@ Map {
       "onClick": [Function],
       "onKeyDown": [Function],
       "selected": false,
-      "text": "Provide text",
     },
     "propTypes": Object {
       "children": Object {
