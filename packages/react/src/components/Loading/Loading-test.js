@@ -36,13 +36,6 @@ describe('Loading', () => {
       const { container } = render(<Loading />);
       const liveRegion = container.querySelector('[aria-live]');
       expect(liveRegion).toBeInstanceOf(HTMLElement);
-
-      const id = liveRegion.getAttribute('aria-labelledby');
-      expect(id).toBeDefined();
-
-      const label = document.getElementById(id);
-      expect(label).toBeDefined();
-      expect(typeof label.textContent).toBe('string');
     });
 
     // https://www.w3.org/TR/WCAG21/#status-messages

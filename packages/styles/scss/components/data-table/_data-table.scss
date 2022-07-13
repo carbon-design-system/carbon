@@ -348,7 +348,7 @@
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
-    width: 2.5rem;
+    min-width: 2.5rem;
     // spacing between checkbox / chevron and next cell should be 8px / 0.5rem
     padding-right: rem(4px);
     padding-left: 1rem;
