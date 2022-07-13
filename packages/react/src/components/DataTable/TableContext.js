@@ -5,6 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import RadioButtonGroup from './RadioButtonGroup';
+import { createContext } from 'react';
 
-export default RadioButtonGroup;
+export const TableContext = createContext({
+  titleId: null,
+  descriptionId: null,
+});

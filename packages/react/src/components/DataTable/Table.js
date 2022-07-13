@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { TableContext } from './TableContext';
 
 export const Table = ({
   className,
@@ -21,6 +22,7 @@ export const Table = ({
   overflowMenuOnHover,
   ...other
 }) => {
+  const { titleId, descriptionId } = useContext(TableContext);
   const prefix = usePrefix();
   const componentClass = cx(`${prefix}--data-table`, className, {
     [`${prefix}--data-table--${size}`]: size,
@@ -32,7 +34,11 @@ export const Table = ({
   });
   const table = (
     <div className={`${prefix}--data-table-content`}>
-      <table {...other} className={componentClass}>
+      <table
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        {...other}
+        className={componentClass}>
         {children}
       </table>
     </div>

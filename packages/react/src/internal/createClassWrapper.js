@@ -19,10 +19,8 @@ export function createClassWrapper(Component) {
     return <Component {...props} />;
   }
 
-  if (__DEV__) {
-    const name = Component.displayName || Component.name;
-    ClassWrapper.displayName = `ClassWrapper(${name})`;
-  }
+  const name = Component.displayName || Component.name;
+  ClassWrapper.displayName = `ClassWrapper(${name})`;
 
   return ClassWrapper;
 }

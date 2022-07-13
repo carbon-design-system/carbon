@@ -18,7 +18,7 @@ const FormGroup = ({
   className,
   message,
   messageText,
-  ...other
+  ...rest
 }) => {
   const prefix = usePrefix();
 
@@ -28,11 +28,11 @@ const FormGroup = ({
     <fieldset
       {...(invalid && { 'data-invalid': '' })}
       className={classNamesFieldset}
-      {...other}
-      aria-labelledby={other['aria-labelledby'] || legendId}>
+      {...rest}
+      aria-labelledby={rest['aria-labelledby'] || legendId}>
       <legend
         className={`${prefix}--label`}
-        id={legendId || other['aria-labelledby']}>
+        id={legendId || rest['aria-labelledby']}>
         {legendText}
       </legend>
       {children}
