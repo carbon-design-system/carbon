@@ -3793,7 +3793,7 @@ Map {
   "Loading" => Object {
     "defaultProps": Object {
       "active": true,
-      "description": "Active loading indicator",
+      "description": "loading",
       "small": false,
       "withOverlay": true,
     },
@@ -3807,9 +3807,7 @@ Map {
       "description": Object {
         "type": "string",
       },
-      "id": Object {
-        "type": "string",
-      },
+      "id": [Function],
       "small": Object {
         "type": "bool",
       },
@@ -4159,9 +4157,7 @@ Map {
   "MultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "Filterable": Object {
-      "contextType": Object {
-        "$$typeof": Symbol(react.context),
-      },
+      "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
         "ariaLabel": "Choose an item",
         "compareItems": [Function],
@@ -4364,7 +4360,6 @@ Map {
           "type": "bool",
         },
         "placeholder": Object {
-          "isRequired": true,
           "type": "string",
         },
         "selectionFeedback": Object {
@@ -4404,6 +4399,7 @@ Map {
           "type": "node",
         },
       },
+      "render": [Function],
     },
     "defaultProps": Object {
       "clearSelectionDescription": "Total items selected: ",
@@ -6311,7 +6307,6 @@ Map {
       "onClick": [Function],
       "onKeyDown": [Function],
       "selected": false,
-      "text": "Provide text",
     },
     "propTypes": Object {
       "children": Object {
