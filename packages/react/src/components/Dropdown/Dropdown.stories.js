@@ -1,14 +1,14 @@
 /**
  * Copyright IBM Corp. 2016, 2018
- *
+ *dropdow.stor
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { default as Dropdown, DropdownSkeleton } from '../';
-import { Layer } from '../../Layer';
-import mdx from '../Dropdown.mdx';
+import { default as Dropdown, DropdownSkeleton } from './';
+import { Layer } from '../Layer';
+import mdx from './Dropdown.mdx';
 
 export default {
   title: 'Components/Dropdown',
@@ -16,12 +16,12 @@ export default {
   subcomponents: {
     DropdownSkeleton,
   },
-  argTypes: {
-    size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'select' },
-    },
-  },
+  // argTypes: {
+  //   size: {
+  //     options: ['sm', 'md', 'lg'],
+  //     control: { type: 'select' },
+  //   },
+  // },
   parameters: {
     docs: {
       page: mdx,
@@ -57,7 +57,83 @@ const items = [
   },
 ];
 
-export const Default = (args) => (
+export const Playground = (args) => (
+  <div style={{ width: 400 }}>
+    <Dropdown
+      {...args}
+      id="default"
+      titleText="Dropdown label"
+      helperText="This is some helper text"
+      label="Dropdown menu options"
+      items={items}
+      itemToString={(item) => (item ? item.text : '')}
+    />
+  </div>
+);
+
+Playground.argTypes = {
+  items: {
+    control: false,
+  },
+  initialSelectedItem: {
+    control: false,
+  },
+  itemToElement: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  id: {
+    control: false,
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  light: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  helperText: {
+    control: {
+      type: 'text',
+    },
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  type: {
+    control: { type: 'select' },
+    options: ['default', 'inline'],
+    defaultValue: 'default',
+  },
+};
+
+export const Default = () => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -66,12 +142,11 @@ export const Default = (args) => (
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      {...args}
     />
   </div>
 );
 
-export const Inline = (args) => (
+export const Inline = () => (
   <div style={{ width: 600 }}>
     <Dropdown
       id="inline"
@@ -80,12 +155,11 @@ export const Inline = (args) => (
       type="inline"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      {...args}
     />
   </div>
 );
 
-export const WithLayer = (args) => (
+export const WithLayer = () => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -94,7 +168,6 @@ export const WithLayer = (args) => (
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      {...args}
     />
     <Layer>
       <Dropdown
@@ -104,7 +177,6 @@ export const WithLayer = (args) => (
         label="Dropdown menu options"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        {...args}
       />
       <Layer>
         <Dropdown
@@ -114,14 +186,13 @@ export const WithLayer = (args) => (
           label="Dropdown menu options"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          {...args}
         />
       </Layer>
     </Layer>
   </div>
 );
 
-export const InlineWithLayer = (args) => (
+export const InlineWithLayer = () => (
   <div style={{ width: 600 }}>
     <Dropdown
       id="inline"
@@ -130,7 +201,6 @@ export const InlineWithLayer = (args) => (
       type="inline"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
-      {...args}
     />
     <Layer>
       <Dropdown
@@ -140,7 +210,6 @@ export const InlineWithLayer = (args) => (
         type="inline"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
-        {...args}
       />
       <Layer>
         <Dropdown
@@ -150,15 +219,14 @@ export const InlineWithLayer = (args) => (
           type="inline"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
-          {...args}
         />
       </Layer>
     </Layer>
   </div>
 );
 
-export const Skeleton = (args) => (
+export const Skeleton = () => (
   <div style={{ width: 300 }}>
-    <DropdownSkeleton {...args} />
+    <DropdownSkeleton />
   </div>
 );
