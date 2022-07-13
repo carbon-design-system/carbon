@@ -1,17 +1,14 @@
 import * as React from 'react';
 
-export interface ReactAttr<T = HTMLElement> extends React.HTMLAttributes<T> {}
-export interface ReactAnchorAttr<T = HTMLAnchorElement>
-  extends React.AnchorHTMLAttributes<T> {}
-export interface ReactButtonAttr<T = HTMLButtonElement>
-  extends React.ButtonHTMLAttributes<T> {}
-export interface ReactDivAttr extends ReactAttr<HTMLDivElement> {}
-export interface ReactInputAttr<T = HTMLInputElement>
-  extends React.InputHTMLAttributes<T> {}
-export interface ReactLabelAttr<T = HTMLLabelElement>
-  extends React.LabelHTMLAttributes<T> {}
-export interface ReactLIAttr<T = HTMLLIElement>
-  extends React.LiHTMLAttributes<T> {}
+export type ReactAttr<T = HTMLElement> = React.HTMLAttributes<T>;
+export type ReactAnchorAttr<T = HTMLAnchorElement> =
+  React.AnchorHTMLAttributes<T>;
+export type ReactButtonAttr<T = HTMLButtonElement> =
+  React.ButtonHTMLAttributes<T>;
+export type ReactDivAttr = ReactAttr<HTMLDivElement>;
+export type ReactInputAttr<T = HTMLInputElement> = React.InputHTMLAttributes<T>;
+export type ReactLabelAttr<T = HTMLLabelElement> = React.LabelHTMLAttributes<T>;
+export type ReactLIAttr<T = HTMLLIElement> = React.LiHTMLAttributes<T>;
 
 // export type ShapeOf<
 //   B extends object,
@@ -84,13 +81,13 @@ export interface SideNavSizingProps {
 //  forwardRef component with no generics: export declare const Comp: ForwardRefReturn<HTMLElement, PropsInterface>;
 //  forwardRef component with generics: export declare function Comp<T extends SomeType>(props: ForwardRefProps<HTMLElement, PropsInterface<T>>): FCReturn;
 //
-export type FCProps<P = {}> = Parameters<React.FC<P>>[0];
+export type FCProps<P = unknown> = Parameters<React.FC<P>>[0];
 export type FCReturn = ReturnType<React.FC>;
-export type ForwardRefProps<T, P = {}> = React.PropsWithoutRef<
+export type ForwardRefProps<T, P = unknown> = React.PropsWithoutRef<
   React.PropsWithChildren<P>
 > &
   React.RefAttributes<T>;
-export type ForwardRefReturn<T, P = {}> = React.ForwardRefExoticComponent<
+export type ForwardRefReturn<T, P = unknown> = React.ForwardRefExoticComponent<
   ForwardRefProps<T, P>
 >;
 
