@@ -5,10 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
+import './HelperClasses-story.scss';
 import React from 'react';
-import { usePrefix } from '../../internal/usePrefix';
 
 export default {
   title: 'Helpers/BreakpointClasses',
@@ -16,24 +14,13 @@ export default {
 };
 
 export const BreakpointClasses = () => {
-  const prefix = usePrefix();
   return (
     <>
-      <div className={`${prefix}__hidden--sm-only`}>
-        Only hidden on sm breakpoint
-      </div>
-      <div className={`${prefix}__hidden--md-only`}>
-        Only hidden on md breakpoint
-      </div>
-      <div className={`${prefix}__hidden--lg-only`}>
-        Only hidden on lg breakpoint
-      </div>
-      <div className={`${prefix}__hidden--xlg-only`}>
-        Only hidden on xlg breakpoint
-      </div>
-      <div className={`${prefix}__hidden--max-only`}>
-        Only hidden on max breakpoint
-      </div>
+      <div className="hide-at-sm">Only hidden on sm breakpoint</div>
+      <div className="hide-at-md">Only hidden on md breakpoint</div>
+      <div className="hide-at-lg">Only hidden on lg breakpoint</div>
+      <div className="hide-at-xlg">Only hidden on xlg breakpoint</div>
+      <div className="hide-at-max">Only hidden on max breakpoint</div>
     </>
   );
 };
