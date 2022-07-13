@@ -112,13 +112,13 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       >
         <h4
           className="cds--data-table-header__title"
-          id="tc-71-title"
+          id="tc-74-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
-          id="tc-71-description"
+          id="tc-74-description"
         />
       </div>
       <Table
@@ -130,7 +130,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
         >
           <table
             aria-describedby={null}
-            aria-labelledby="tc-71-title"
+            aria-labelledby="tc-74-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -556,7 +556,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       <td
                         className="cds--table-column-checkbox cds--table-column-radio"
                       >
-                        <ForwardRef(RadioButton)
+                        <RadioButton
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -565,54 +565,40 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           name="select-row-b"
                           onClick={[Function]}
                         >
-                          <RadioButton
-                            checked={false}
-                            disabled={false}
-                            hideLabel={true}
-                            id="data-table-14__select-row-b"
-                            innerRef={null}
-                            labelPosition="right"
-                            labelText="Select row"
-                            name="select-row-b"
-                            onChange={[Function]}
-                            onClick={[Function]}
-                            value=""
+                          <div
+                            className="cds--radio-button-wrapper"
                           >
-                            <div
-                              className="cds--radio-button-wrapper"
+                            <input
+                              checked={false}
+                              className="cds--radio-button"
+                              disabled={false}
+                              id="data-table-14__select-row-b"
+                              name="select-row-b"
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              type="radio"
+                              value=""
+                            />
+                            <label
+                              className="cds--radio-button__label"
+                              htmlFor="data-table-14__select-row-b"
                             >
-                              <input
-                                checked={false}
-                                className="cds--radio-button"
-                                disabled={false}
-                                id="data-table-14__select-row-b"
-                                name="select-row-b"
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                type="radio"
-                                value=""
+                              <span
+                                className="cds--radio-button__appearance"
                               />
-                              <label
-                                className="cds--radio-button__label"
-                                htmlFor="data-table-14__select-row-b"
+                              <Text
+                                className="cds--visually-hidden"
                               >
                                 <span
-                                  className="cds--radio-button__appearance"
-                                />
-                                <Text
                                   className="cds--visually-hidden"
+                                  dir="auto"
                                 >
-                                  <span
-                                    className="cds--visually-hidden"
-                                    dir="auto"
-                                  >
-                                    Select row
-                                  </span>
-                                </Text>
-                              </label>
-                            </div>
-                          </RadioButton>
-                        </ForwardRef(RadioButton)>
+                                  Select row
+                                </span>
+                              </Text>
+                            </label>
+                          </div>
+                        </RadioButton>
                       </td>
                     </TableSelectRow>
                     <TableCell
@@ -647,7 +633,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       <td
                         className="cds--table-column-checkbox cds--table-column-radio"
                       >
-                        <ForwardRef(RadioButton)
+                        <RadioButton
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -656,54 +642,40 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           name="select-row-a"
                           onClick={[Function]}
                         >
-                          <RadioButton
-                            checked={false}
-                            disabled={false}
-                            hideLabel={true}
-                            id="data-table-14__select-row-a"
-                            innerRef={null}
-                            labelPosition="right"
-                            labelText="Select row"
-                            name="select-row-a"
-                            onChange={[Function]}
-                            onClick={[Function]}
-                            value=""
+                          <div
+                            className="cds--radio-button-wrapper"
                           >
-                            <div
-                              className="cds--radio-button-wrapper"
+                            <input
+                              checked={false}
+                              className="cds--radio-button"
+                              disabled={false}
+                              id="data-table-14__select-row-a"
+                              name="select-row-a"
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              type="radio"
+                              value=""
+                            />
+                            <label
+                              className="cds--radio-button__label"
+                              htmlFor="data-table-14__select-row-a"
                             >
-                              <input
-                                checked={false}
-                                className="cds--radio-button"
-                                disabled={false}
-                                id="data-table-14__select-row-a"
-                                name="select-row-a"
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                type="radio"
-                                value=""
+                              <span
+                                className="cds--radio-button__appearance"
                               />
-                              <label
-                                className="cds--radio-button__label"
-                                htmlFor="data-table-14__select-row-a"
+                              <Text
+                                className="cds--visually-hidden"
                               >
                                 <span
-                                  className="cds--radio-button__appearance"
-                                />
-                                <Text
                                   className="cds--visually-hidden"
+                                  dir="auto"
                                 >
-                                  <span
-                                    className="cds--visually-hidden"
-                                    dir="auto"
-                                  >
-                                    Select row
-                                  </span>
-                                </Text>
-                              </label>
-                            </div>
-                          </RadioButton>
-                        </ForwardRef(RadioButton)>
+                                  Select row
+                                </span>
+                              </Text>
+                            </label>
+                          </div>
+                        </RadioButton>
                       </td>
                     </TableSelectRow>
                     <TableCell
@@ -738,7 +710,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       <td
                         className="cds--table-column-checkbox cds--table-column-radio"
                       >
-                        <ForwardRef(RadioButton)
+                        <RadioButton
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -747,54 +719,40 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                           name="select-row-c"
                           onClick={[Function]}
                         >
-                          <RadioButton
-                            checked={false}
-                            disabled={false}
-                            hideLabel={true}
-                            id="data-table-14__select-row-c"
-                            innerRef={null}
-                            labelPosition="right"
-                            labelText="Select row"
-                            name="select-row-c"
-                            onChange={[Function]}
-                            onClick={[Function]}
-                            value=""
+                          <div
+                            className="cds--radio-button-wrapper"
                           >
-                            <div
-                              className="cds--radio-button-wrapper"
+                            <input
+                              checked={false}
+                              className="cds--radio-button"
+                              disabled={false}
+                              id="data-table-14__select-row-c"
+                              name="select-row-c"
+                              onChange={[Function]}
+                              onClick={[Function]}
+                              type="radio"
+                              value=""
+                            />
+                            <label
+                              className="cds--radio-button__label"
+                              htmlFor="data-table-14__select-row-c"
                             >
-                              <input
-                                checked={false}
-                                className="cds--radio-button"
-                                disabled={false}
-                                id="data-table-14__select-row-c"
-                                name="select-row-c"
-                                onChange={[Function]}
-                                onClick={[Function]}
-                                type="radio"
-                                value=""
+                              <span
+                                className="cds--radio-button__appearance"
                               />
-                              <label
-                                className="cds--radio-button__label"
-                                htmlFor="data-table-14__select-row-c"
+                              <Text
+                                className="cds--visually-hidden"
                               >
                                 <span
-                                  className="cds--radio-button__appearance"
-                                />
-                                <Text
                                   className="cds--visually-hidden"
+                                  dir="auto"
                                 >
-                                  <span
-                                    className="cds--visually-hidden"
-                                    dir="auto"
-                                  >
-                                    Select row
-                                  </span>
-                                </Text>
-                              </label>
-                            </div>
-                          </RadioButton>
-                        </ForwardRef(RadioButton)>
+                                  Select row
+                                </span>
+                              </Text>
+                            </label>
+                          </div>
+                        </RadioButton>
                       </td>
                     </TableSelectRow>
                     <TableCell
@@ -3029,13 +2987,13 @@ exports[`DataTable sticky header should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
-          id="tc-111-title"
+          id="tc-120-title"
         >
           DataTable with toolbar
         </h4>
         <p
           className="cds--data-table-header__description"
-          id="tc-111-description"
+          id="tc-120-description"
         />
       </div>
       <TableToolbar
@@ -3579,7 +3537,7 @@ exports[`DataTable sticky header should render 1`] = `
         >
           <table
             aria-describedby={null}
-            aria-labelledby="tc-111-title"
+            aria-labelledby="tc-120-title"
             className="cds--data-table cds--data-table--lg"
           >
             <TableHead>

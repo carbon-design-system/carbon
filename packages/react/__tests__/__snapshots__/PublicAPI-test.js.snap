@@ -5324,7 +5324,6 @@ Map {
             },
           ],
         ],
-        "isRequired": true,
         "type": "oneOfType",
       },
     },
