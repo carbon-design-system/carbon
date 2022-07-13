@@ -112,11 +112,13 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       >
         <h4
           className="cds--data-table-header__title"
+          id="tc-71-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
+          id="tc-71-description"
         />
       </div>
       <Table
@@ -127,6 +129,8 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
           className="cds--data-table-content"
         >
           <table
+            aria-describedby={null}
+            aria-labelledby="tc-71-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -463,11 +467,13 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
+          id="tc-68-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
+          id="tc-68-description"
         />
       </div>
       <Table
@@ -478,6 +484,8 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
           className="cds--data-table-content"
         >
           <table
+            aria-describedby={null}
+            aria-labelledby="tc-68-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -934,11 +942,13 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       >
         <h4
           className="cds--data-table-header__title"
+          id="tc-44-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
+          id="tc-44-description"
         />
       </div>
       <Table
@@ -949,6 +959,8 @@ exports[`DataTable selection should have select-all default to un-checked if no 
           className="cds--data-table-content"
         >
           <table
+            aria-describedby={null}
+            aria-labelledby="tc-44-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -1334,11 +1346,13 @@ exports[`DataTable selection should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
+          id="tc-41-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
+          id="tc-41-description"
         />
       </div>
       <Table
@@ -1349,6 +1363,8 @@ exports[`DataTable selection should render 1`] = `
           className="cds--data-table-content"
         >
           <table
+            aria-describedby={null}
+            aria-labelledby="tc-41-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -1991,11 +2007,13 @@ exports[`DataTable should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
+          id="tc-8-title"
         >
           DataTable with toolbar
         </h4>
         <p
           className="cds--data-table-header__description"
+          id="tc-8-description"
         />
       </div>
       <TableToolbar
@@ -2538,6 +2556,8 @@ exports[`DataTable should render 1`] = `
           className="cds--data-table-content"
         >
           <table
+            aria-describedby={null}
+            aria-labelledby="tc-8-title"
             className="cds--data-table cds--data-table--lg"
           >
             <TableHead>
@@ -3009,11 +3029,13 @@ exports[`DataTable sticky header should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
+          id="tc-111-title"
         >
           DataTable with toolbar
         </h4>
         <p
           className="cds--data-table-header__description"
+          id="tc-111-description"
         />
       </div>
       <TableToolbar
@@ -3556,6 +3578,8 @@ exports[`DataTable sticky header should render 1`] = `
           className="cds--data-table-content"
         >
           <table
+            aria-describedby={null}
+            aria-labelledby="tc-111-title"
             className="cds--data-table cds--data-table--lg"
           >
             <TableHead>
