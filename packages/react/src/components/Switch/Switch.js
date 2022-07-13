@@ -117,7 +117,6 @@ Switch.propTypes = {
 
 Switch.defaultProps = {
   selected: false,
-  text: 'Provide text',
   onClick: () => {},
   onKeyDown: () => {},
 };
