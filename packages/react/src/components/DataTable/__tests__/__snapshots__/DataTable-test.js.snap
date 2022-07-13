@@ -556,7 +556,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       <td
                         className="cds--table-column-checkbox cds--table-column-radio"
                       >
-                        <ForwardRef(RadioButton)
+                        <RadioButton
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -598,7 +598,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               </Text>
                             </label>
                           </div>
-                        </ForwardRef(RadioButton)>
+                        </RadioButton>
                       </td>
                     </TableSelectRow>
                     <TableCell
@@ -633,7 +633,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       <td
                         className="cds--table-column-checkbox cds--table-column-radio"
                       >
-                        <ForwardRef(RadioButton)
+                        <RadioButton
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -675,7 +675,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               </Text>
                             </label>
                           </div>
-                        </ForwardRef(RadioButton)>
+                        </RadioButton>
                       </td>
                     </TableSelectRow>
                     <TableCell
@@ -710,7 +710,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                       <td
                         className="cds--table-column-checkbox cds--table-column-radio"
                       >
-                        <ForwardRef(RadioButton)
+                        <RadioButton
                           checked={false}
                           disabled={false}
                           hideLabel={true}
@@ -752,7 +752,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                               </Text>
                             </label>
                           </div>
-                        </ForwardRef(RadioButton)>
+                        </RadioButton>
                       </td>
                     </TableSelectRow>
                     <TableCell
