@@ -241,4 +241,6 @@ const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
 });
 
 HeaderMenuForwardRef.displayName = 'HeaderMenu';
+
+export { HeaderMenu };
 export default HeaderMenuForwardRef;
