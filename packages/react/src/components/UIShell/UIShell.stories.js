@@ -32,6 +32,7 @@ import {
   SwitcherItem,
   SwitcherDivider,
 } from './';
+import { HeaderMenu as HeaderMenuNative } from './HeaderMenu';
 import Modal from '../Modal';
 import Button from '../Button';
 import {
@@ -132,13 +133,13 @@ const StoryContent = ({ useResponsiveOffset = true }) => {
 // eslint-disable-next-line storybook/csf-component
 export default {
   title: 'Components/UI Shell',
+  component: Header,
   subcomponents: {
     Content,
-    Header,
     HeaderMenuButton,
     HeaderName,
     HeaderNavigation,
-    HeaderMenu,
+    HeaderMenu: HeaderMenuNative,
     HeaderMenuItem,
     HeaderGlobalBar,
     HeaderGlobalAction,
@@ -158,6 +159,13 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+  },
+  argTypes: {
+    className: {
+      table: {
+        disable: true,
+      },
     },
   },
 };
