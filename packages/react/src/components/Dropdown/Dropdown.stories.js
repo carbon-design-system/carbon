@@ -16,12 +16,23 @@ export default {
   subcomponents: {
     DropdownSkeleton,
   },
-  // argTypes: {
-  //   size: {
-  //     options: ['sm', 'md', 'lg'],
-  //     control: { type: 'select' },
-  //   },
-  // },
+  argTypes: {
+    items: {
+      table: { disable: true },
+    },
+    initialSelectedItem: {
+      table: { disable: true },
+    },
+    itemToElement: {
+      table: { disable: true },
+    },
+    className: {
+      table: { disable: true },
+    },
+    id: {
+      table: { disable: true },
+    },
+  },
   parameters: {
     docs: {
       page: mdx,
@@ -72,21 +83,6 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
-  items: {
-    control: false,
-  },
-  initialSelectedItem: {
-    control: false,
-  },
-  itemToElement: {
-    control: false,
-  },
-  className: {
-    control: false,
-  },
-  id: {
-    control: false,
-  },
   invalid: {
     control: {
       type: 'boolean',
