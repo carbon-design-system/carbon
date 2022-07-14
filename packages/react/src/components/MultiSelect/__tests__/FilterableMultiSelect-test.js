@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
-import FilterableMultiSelect from '../../MultiSelect/FilterableMultiSelect';
+import FilterableMultiSelect from '../FilterableMultiSelect';
 import {
   assertMenuOpen,
   assertMenuClosed,
@@ -25,8 +25,6 @@ describe('FilterableMultiSelect', () => {
   let mockProps;
 
   beforeEach(() => {
-    // jest.mock('../../../internal/deprecateFieldOnObject');
-
     mockProps = {
       id: 'test-filterable-multiselect',
       disabled: false,

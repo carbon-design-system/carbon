@@ -6,185 +6,134 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
-import { warning } from '../../internal/warning';
 import { Legend } from '../Text';
-import { FeatureFlagContext } from '../FeatureFlags';
-import { PrefixContext } from '../../internal/usePrefix';
+import { usePrefix } from '../../internal/usePrefix';
 
-export default class RadioButtonGroup extends React.Component {
-  static propTypes = {
-    /**
-     * Provide a collection of <RadioButton> components to render in the group
-     */
-    children: PropTypes.node,
+const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
+  {
+    children,
+    className,
+    defaultSelected,
+    disabled,
+    labelPosition = 'right',
+    legendText,
+    name,
+    onChange = () => {},
+    orientation = 'horizontal',
+    valueSelected,
+  },
+  ref
+) {
+  const prefix = usePrefix();
 
-    /**
-     * Provide an optional className to be applied to the container node
-     */
-    className: PropTypes.string,
+  const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
+  const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
-    /**
-     * Specify the <RadioButton> to be selected by default
-     */
-    defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-    /**
-     * Specify whether the group is disabled
-     */
-    disabled: PropTypes.bool,
-
-    /**
-     * Specify whether the legend should be hidden, or not
-     */
-    hideLegend: PropTypes.bool,
-
-    /**
-     * Provide where label text should be placed
-     */
-    labelPosition: PropTypes.oneOf(['left', 'right']),
-
-    /**
-     * Provide a legend to the RadioButtonGroup input that you are
-     * exposing to the user
-     */
-    legendText: PropTypes.node,
-
-    /**
-     * Specify the name of the underlying `<input>` nodes
-     */
-    name: PropTypes.string.isRequired,
-
-    /**
-     * Provide an optional `onChange` hook that is called whenever the value of
-     * the group changes
-     */
-    onChange: PropTypes.func,
-
-    /**
-     * Provide where radio buttons should be placed
-     */
-    orientation: PropTypes.oneOf(['horizontal', 'vertical']),
-
-    /**
-     * Specify the value that is currently selected in the group
-     */
-    valueSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  };
-
-  static defaultProps = {
-    orientation: 'horizontal',
-    labelPosition: 'right',
-    hideLegend: false,
-    onChange: /* istanbul ignore next */ () => {},
-  };
-
-  static contextType = FeatureFlagContext;
-
-  static getDerivedStateFromProps({ valueSelected, defaultSelected }, state) {
-    const { prevValueSelected } = state;
-    return prevValueSelected === valueSelected
-      ? null
-      : {
-          selected:
-            typeof valueSelected !== 'undefined'
-              ? valueSelected
-              : defaultSelected,
-          prevValueSelected: valueSelected,
-        };
+  /**
+   * prop + state alignment - getDerivedStateFromProps
+   * only update if selected prop changes
+   */
+  if (valueSelected !== prevValueSelected) {
+    setSelected(valueSelected);
+    setPrevValueSelected(valueSelected);
   }
 
-  state = {
-    selected:
-      typeof this.props.valueSelected !== 'undefined'
-        ? this.props.valueSelected
-        : this.props.defaultSelected,
-  };
-
-  getRadioButtons = () => {
-    const children = React.Children.map(this.props.children, (radioButton) => {
+  function getRadioButtons() {
+    const mappedChildren = React.Children.map(children, (radioButton) => {
       const { value } = radioButton.props;
-      /* istanbul ignore if */
-      if (typeof radioButton.props.checked !== 'undefined') {
-        warning(
-          false,
-          `Instead of using the checked property on the RadioButton, set
-            the defaultSelected property or valueSelected property on the RadioButtonGroup.`
-        );
-      }
-
       return React.cloneElement(radioButton, {
-        name: this.props.name,
+        name: name,
         key: value,
         value: value,
-        onChange: this.handleChange,
-        checked: value === this.state.selected,
+        onChange: handleOnChange,
+        checked: value === selected,
       });
     });
 
-    return children;
-  };
-
-  handleChange = (newSelection, value, evt) => {
-    if (newSelection !== this.state.selected) {
-      this.setState({ selected: newSelection });
-      this.props.onChange(newSelection, this.props.name, evt);
-    }
-  };
-
-  render() {
-    const {
-      disabled,
-      className,
-      hideLegend,
-      orientation,
-      labelPosition,
-      legendText,
-    } = this.props;
-
-    const scope = this.context;
-    let enabled;
-
-    if (scope.enabled) {
-      enabled = scope.enabled('enable-v11-release');
-    }
-
-    return (
-      <PrefixContext.Consumer>
-        {(prefix) => {
-          const wrapperClasses = classNames(
-            `${prefix}--radio-button-group`,
-            [enabled ? null : className],
-            {
-              [`${prefix}--radio-button-group--${orientation}`]:
-                orientation === 'vertical',
-              [`${prefix}--radio-button-group--label-${labelPosition}`]:
-                labelPosition,
-            }
-          );
-
-          const legendClasses = classNames(`${prefix}--label`, {
-            [`${prefix}--visually-hidden`]: hideLegend,
-          });
-
-          return (
-            <div
-              className={
-                enabled
-                  ? classNames(`${prefix}--form-item`, className)
-                  : `${prefix}--form-item`
-              }>
-              <fieldset className={wrapperClasses} disabled={disabled}>
-                {legendText && (
-                  <Legend className={legendClasses}>{legendText}</Legend>
-                )}
-                {this.getRadioButtons()}
-              </fieldset>
-            </div>
-          );
-        }}
-      </PrefixContext.Consumer>
-    );
+    return mappedChildren;
   }
-}
+
+  function handleOnChange(newSelection, value, evt) {
+    if (newSelection !== selected) {
+      setSelected(newSelection);
+      onChange(newSelection, name, evt);
+    }
+  }
+
+  const fieldsetClasses = classNames(`${prefix}--radio-button-group`, {
+    [`${prefix}--radio-button-group--${orientation}`]:
+      orientation === 'vertical',
+    [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
+  });
+
+  const wrapperClasses = classNames(`${prefix}--form-item`, className);
+
+  return (
+    <div className={wrapperClasses} ref={ref}>
+      <fieldset className={fieldsetClasses} disabled={disabled}>
+        {legendText && (
+          <Legend className={`${prefix}--label`}>{legendText}</Legend>
+        )}
+        {getRadioButtons()}
+      </fieldset>
+    </div>
+  );
+});
+
+RadioButtonGroup.propTypes = {
+  /**
+   * Provide a collection of `<RadioButton>` components to render in the group
+   */
+  children: PropTypes.node,
+
+  /**
+   * Provide an optional className to be applied to the container node
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify the `<RadioButton>` to be selected by default
+   */
+  defaultSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Specify whether the group is disabled
+   */
+  disabled: PropTypes.bool,
+
+  /**
+   * Provide where label text should be placed
+   */
+  labelPosition: PropTypes.oneOf(['left', 'right']),
+
+  /**
+   * Provide a legend to the RadioButtonGroup input that you are
+   * exposing to the user
+   */
+  legendText: PropTypes.node,
+
+  /**
+   * Specify the name of the underlying `<input>` nodes
+   */
+  name: PropTypes.string.isRequired,
+
+  /**
+   * Provide an optional `onChange` hook that is called whenever the value of
+   * the group changes
+   */
+  onChange: PropTypes.func,
+
+  /**
+   * Provide where radio buttons should be placed
+   */
+  orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+  /**
+   * Specify the value that is currently selected in the group
+   */
+  valueSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+};
+
+export default RadioButtonGroup;

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`FilterableMultiSelect should render 1`] = `
-<FilterableMultiSelect
+<ForwardRef(FilterableMultiSelect)
   ariaLabel="Choose an item"
   compareItems={[Function]}
   direction="bottom"
@@ -183,5 +183,5 @@ exports[`FilterableMultiSelect should render 1`] = `
       </div>
     </Downshift>
   </Selection>
-</FilterableMultiSelect>
+</ForwardRef(FilterableMultiSelect)>
 `;
