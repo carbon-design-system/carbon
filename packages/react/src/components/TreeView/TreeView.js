@@ -8,10 +8,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Keyboard } from '@carbon/icons-react';
+import * as FeatureFlags from '@carbon/feature-flags';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
-import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
+import { Tooltip } from '../Tooltip/next';
+
+// TODO: OS dependent
+const defaultMultiselectHelpText = `Use Cmd + Enter to make a selection`;
 
 export default function TreeView({
   active: prespecifiedActive,
@@ -20,6 +25,7 @@ export default function TreeView({
   hideLabel = false,
   label,
   multiselect,
+  multiselectHelpText = defaultMultiselectHelpText,
   onSelect,
   selected: preselected = [],
   size = FeatureFlags.enabled('enable-v11-release') ? 'sm' : 'default',
@@ -197,12 +203,22 @@ export default function TreeView({
   useActiveAndSelectedOnMount();
 
   const labelId = `${treeId}__label`;
-  const TreeLabel = () =>
-    !hideLabel && (
-      <label id={labelId} className={`${prefix}--label`}>
-        {label}
-      </label>
-    );
+  const TreeLabel = () => (
+    <div className={`${prefix}--tree__label`}>
+      {!hideLabel && (
+        <label id={labelId} className={`${prefix}--label`}>
+          {label}
+        </label>
+      )}
+      {multiselect && (
+        <Tooltip align="bottom" description={multiselectHelpText}>
+          <button className="sb-tooltip-trigger" type="button">
+            <Keyboard />
+          </button>
+        </Tooltip>
+      )}
+    </div>
+  );
 
   return (
     <>

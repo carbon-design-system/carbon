@@ -22,6 +22,13 @@
     overflow: hidden;
   }
 
+  .#{$prefix}--tree__label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 16rem;
+  }
+
   .#{$prefix}--tree-node {
     padding-left: $spacing-05;
     background-color: $layer-01;
