@@ -9,12 +9,9 @@ const prefix = 'cds';
 import userEvent from '@testing-library/user-event';
 
 // Finding nodes in a ListBox
-
 export const findListBoxNode = () => {
   return document.querySelector('.cds--list-box');
 };
-// export const findListBoxNode = (container) =>
-//   container.find(`.${prefix}--list-box`);
 
 export const findMenuNode = () => {
   return document.querySelector(`.${prefix}--list-box__menu`);
@@ -45,24 +42,18 @@ export const findPopupNode = () => {
 };
 
 // Actions
-// export const openMenu = (wrapper) => findFieldNode(wrapper).simulate('click');
 export const openMenu = () => {
   userEvent.click(findFieldNode());
 };
 
 // Common assertions, useful for validating a11y props are set when needed
 export const assertMenuOpen = (mockProps) => {
-  // expect(findMenuNode(wrapper).children().length).toBe(mockProps.items.length);
   expect(findMenuNode().childNodes.length).toBe(mockProps.items.length);
 
-  // expect(findMenuIconNode().prop('className')).toEqual(
-  //   expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
-  // );
   expect(findMenuIconNode()).toHaveClass(
     `${prefix}--list-box__menu-icon--open`
   );
 
-  // expect(findPopupNode().prop('aria-expanded')).toBe(true);
   expect(findPopupNode()).toHaveAttribute('aria-expanded', 'true');
 };
 
