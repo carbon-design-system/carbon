@@ -71,13 +71,13 @@ const items = [
 export const Playground = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
-      {...args}
       id="default"
       titleText="Dropdown label"
       helperText="This is some helper text"
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
+      {...args}
     />
   </div>
 );
