@@ -99,7 +99,6 @@ describe('Carbon Components React', () => {
         "MultiSelect",
         "NotificationActionButton",
         "NotificationButton",
-        "NotificationTextDetails",
         "NumberInput",
         "NumberInputSkeleton",
         "OrderedList",
