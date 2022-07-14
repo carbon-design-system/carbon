@@ -91,8 +91,83 @@ Map {
     },
   },
   "ActionableNotification" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "closeOnEscape": true,
+      "hasFocus": true,
+      "hideCloseButton": false,
+      "inline": false,
+      "kind": "error",
+      "onCloseButtonClick": [Function],
+      "role": "alertdialog",
+    },
+    "propTypes": Object {
+      "actionButtonLabel": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "ariaLabel": Object {
+        "type": "string",
+      },
+      "caption": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "closeOnEscape": Object {
+        "type": "bool",
+      },
+      "hasFocus": Object {
+        "type": "bool",
+      },
+      "hideCloseButton": Object {
+        "type": "bool",
+      },
+      "inline": Object {
+        "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "onActionButtonClick": Object {
+        "type": "func",
+      },
+      "onClose": Object {
+        "type": "func",
+      },
+      "onCloseButtonClick": Object {
+        "type": "func",
+      },
+      "role": Object {
+        "type": "string",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "string",
+      },
+      "title": Object {
+        "type": "string",
+      },
+    },
   },
   "AspectRatio" => Object {
     "propTypes": Object {
@@ -3694,8 +3769,64 @@ Map {
     },
   },
   "InlineNotification" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "hideCloseButton": false,
+      "kind": "error",
+      "onCloseButtonClick": [Function],
+      "role": "status",
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hideCloseButton": Object {
+        "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "onClose": Object {
+        "type": "func",
+      },
+      "onCloseButtonClick": Object {
+        "type": "func",
+      },
+      "role": Object {
+        "args": Array [
+          Array [
+            "alert",
+            "log",
+            "status",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "string",
+      },
+      "title": Object {
+        "type": "string",
+      },
+    },
   },
   "Layer" => Object {
     "propTypes": Object {
@@ -4664,16 +4795,83 @@ Map {
     "render": [Function],
   },
   "NotificationActionButton" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "inline": Object {
+        "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+    },
   },
   "NotificationButton" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
-  },
-  "NotificationTextDetails" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "ariaLabel": "close notification",
+      "notificationType": "toast",
+      "renderIcon": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "propTypes": Object {
+          "size": Object {
+            "args": Array [
+              Array [
+                Object {
+                  "type": "number",
+                },
+                Object {
+                  "type": "string",
+                },
+              ],
+            ],
+            "type": "oneOfType",
+          },
+        },
+        "render": [Function],
+      },
+      "type": "button",
+    },
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "notificationType": Object {
+        "args": Array [
+          Array [
+            "toast",
+            "inline",
+            "actionable",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "type": Object {
+        "type": "string",
+      },
+    },
   },
   "NumberInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -7824,8 +8022,74 @@ Map {
     "render": [Function],
   },
   "ToastNotification" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "hideCloseButton": false,
+      "kind": "error",
+      "onCloseButtonClick": [Function],
+      "role": "status",
+      "timeout": 0,
+    },
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
+      "caption": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "hideCloseButton": Object {
+        "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "error",
+            "info",
+            "info-square",
+            "success",
+            "warning",
+            "warning-alt",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "lowContrast": Object {
+        "type": "bool",
+      },
+      "onClose": Object {
+        "type": "func",
+      },
+      "onCloseButtonClick": Object {
+        "type": "func",
+      },
+      "role": Object {
+        "args": Array [
+          Array [
+            "alert",
+            "log",
+            "status",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "statusIconDescription": Object {
+        "type": "string",
+      },
+      "subtitle": Object {
+        "type": "string",
+      },
+      "timeout": Object {
+        "type": "number",
+      },
+      "title": Object {
+        "type": "string",
+      },
+    },
   },
   "Toggle" => Object {
     "propTypes": Object {
