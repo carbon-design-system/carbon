@@ -635,6 +635,7 @@ export default class Slider extends PureComponent {
                     aria-valuemin={min}
                     aria-valuenow={value}
                     style={thumbStyle}
+                    aria-labelledby={labelId}
                   />
                   <div
                     className={`${prefix}--slider__track`}
