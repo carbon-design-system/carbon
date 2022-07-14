@@ -63,11 +63,7 @@ $aspect-ratios: (
     $height: list.nth($aspect-ratio, 2);
 
     .#{$prefix}--aspect-ratio--#{$width}x#{$height}::before {
-      @if meta.function-exists('div', 'math') {
-        padding-top: math.percentage(math.div($height, $width));
-      } @else {
-        padding-top: math.percentage(($height / $width));
-      }
+      padding-top: math.percentage(math.div($height, $width));
     }
   }
 }
