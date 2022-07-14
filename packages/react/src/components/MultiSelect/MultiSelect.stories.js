@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import MultiSelect from './';
+import MultiSelect from '.';
 import FilterableMultiSelect from './FilterableMultiSelect';
 import { Layer } from '../Layer';
 

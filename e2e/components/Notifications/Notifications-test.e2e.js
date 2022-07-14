@@ -16,24 +16,24 @@ test.describe('Notifications', () => {
     test.describe(theme, () => {
       test('toast @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Notifications',
-          id: 'components-notifications--toast',
+          component: 'Toast',
+          id: 'components-notifications-toast--default',
           theme,
         });
       });
 
       test('inline @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Notifications',
-          id: 'components-notifications--inline',
+          component: 'Inline',
+          id: 'components-notifications-inline--default',
           theme,
         });
       });
 
       test('actionable @vrt', async ({ page }) => {
         await snapshotStory(page, {
-          component: 'Notifications',
-          id: 'components-notifications--actionable',
+          component: 'Actionable',
+          id: 'components-notifications-actionable--default',
           theme,
         });
       });
@@ -42,8 +42,8 @@ test.describe('Notifications', () => {
 
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
-      component: 'Notifications',
-      id: 'components-notifications--toast',
+      component: 'Toast',
+      id: 'components-notifications-toast--default',
       globals: {
         theme: 'white',
       },
