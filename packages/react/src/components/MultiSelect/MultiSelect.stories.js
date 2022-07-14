@@ -21,6 +21,51 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    downshiftProps: {
+      table: { disable: true },
+    },
+    compareItems: {
+      table: { disable: true },
+    },
+    sortItems: {
+      table: { disable: true },
+    },
+    initialSelectedItems: {
+      table: { disable: true },
+    },
+    id: {
+      table: { disable: true },
+    },
+    items: {
+      table: { disable: true },
+    },
+    local: {
+      table: { disable: true },
+    },
+    onChange: {
+      table: { disable: true },
+    },
+    onMenuChange: {
+      table: { disable: true },
+    },
+    itemToElement: {
+      table: { disable: true },
+    },
+    itemToString: {
+      table: { disable: true },
+    },
+    selectedItems: {
+      table: { disable: true },
+    },
+    open: {
+      table: { disable: true },
+    },
+    title: {
+      table: { disable: true },
+    },
+    translateWithId: {
+      table: { disable: true },
+    },
   },
 };
 
@@ -70,20 +115,6 @@ export const Playground = (args) => {
 };
 
 Playground.argTypes = {
-  // align: {
-  //   options: ['start', 'end'],
-  //   control: { type: 'select' },
-  // },
-  // children: {
-  //   control: false,
-  // },
-  // className: {
-  //   control: false,
-  // },
-  // size: {
-  //   options: ['sm', 'md', 'lg'],
-  //   control: { type: 'select' },
-  // },
   selectionFeedback: {
     options: ['top', 'fixed', 'top-after-reopen'],
     control: { type: 'select' },
@@ -101,54 +132,6 @@ Playground.argTypes = {
     options: ['inline', 'default'],
     control: { type: 'radio' },
     defaultValue: 'default',
-  },
-  downshiftProps: {
-    control: false,
-  },
-  compareItems: {
-    control: false,
-  },
-  sortItems: {
-    control: false,
-  },
-  initialSelectedItems: {
-    control: false,
-  },
-  id: {
-    control: false,
-  },
-  items: {
-    control: false,
-  },
-  locale: {
-    control: false,
-  },
-  onChange: {
-    control: false,
-  },
-  onMenuChange: {
-    control: false,
-  },
-  itemToElement: {
-    control: false,
-  },
-  itemToString: {
-    control: false,
-  },
-  selectedItems: {
-    control: false,
-  },
-  open: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  title: {
-    control: false,
-  },
-  translateWithId: {
-    control: false,
   },
   titleText: {
     control: {
