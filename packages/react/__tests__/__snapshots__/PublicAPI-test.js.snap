@@ -1229,9 +1229,7 @@ Map {
     "render": [Function],
   },
   "ComposedModal" => Object {
-    "contextType": Object {
-      "$$typeof": Symbol(react.context),
-    },
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "onKeyDown": [Function],
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
@@ -1271,12 +1269,7 @@ Map {
         "type": "string",
       },
       "selectorsFloatingMenus": Object {
-        "args": Array [
-          Object {
-            "type": "string",
-          },
-        ],
-        "type": "arrayOf",
+        "type": "string",
       },
       "size": Object {
         "args": Array [
@@ -1290,6 +1283,7 @@ Map {
         "type": "oneOf",
       },
     },
+    "render": [Function],
   },
   "Content" => Object {
     "defaultProps": Object {

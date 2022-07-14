@@ -17,7 +17,8 @@ export Checkbox from './components/Checkbox';
 export { ClassPrefix } from './components/ClassPrefix';
 export CodeSnippet from './components/CodeSnippet';
 export ComboBox from './components/ComboBox';
-export ComposedModal, {
+export {
+  ComposedModal,
   ModalHeader,
   ModalBody,
   ModalFooter,
