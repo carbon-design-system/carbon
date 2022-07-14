@@ -89,6 +89,12 @@ Playground.argTypes = {
     },
     defaultValue: false,
   },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'invalid selection',
+  },
   disabled: {
     control: {
       type: 'boolean',
@@ -101,22 +107,34 @@ Playground.argTypes = {
     },
     defaultValue: false,
   },
-  light: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   helperText: {
     control: {
       type: 'text',
     },
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'this is an example label',
   },
   warn: {
     control: {
       type: 'boolean',
     },
     defaultValue: false,
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'please notice the warning',
+  },
+  titleText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'this is an example title',
   },
   size: {
     options: ['sm', 'md', 'lg'],
