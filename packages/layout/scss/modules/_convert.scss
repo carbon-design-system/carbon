@@ -24,11 +24,7 @@ $base-font-size: 16px !default;
     @error "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }
 
-  @if meta.function-exists('div', 'math') {
-    @return math.div($px, $base-font-size) * 1rem;
-  } @else {
-    @return ($px / $base-font-size) * 1rem;
-  }
+  @return math.div($px, $base-font-size) * 1rem;
 }
 
 /// Convert a given px unit to a em unit
@@ -41,9 +37,5 @@ $base-font-size: 16px !default;
     @error "Expected argument $px to be of type `px`, instead received: `#{unit($px)}`";
   }
 
-  @if meta.function-exists('div', 'math') {
-    @return math.div($px, $base-font-size) * 1em;
-  } @else {
-    @return ($px / $base-font-size) * 1em;
-  }
+  @return math.div($px, $base-font-size) * 1em;
 }

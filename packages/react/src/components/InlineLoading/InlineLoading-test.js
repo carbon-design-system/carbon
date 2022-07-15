@@ -19,17 +19,13 @@ describe('InlineLoading', () => {
   it('should render a loader by default', () => {
     render(<InlineLoading />);
 
-    expect(
-      screen.getByLabelText('Active loading indicator')
-    ).toBeInTheDocument();
+    expect(screen.getByTitle('loading')).toBeInTheDocument();
   });
 
   it('should render a loader if the status is inactive', () => {
     render(<InlineLoading status="inactive" />);
 
-    expect(
-      screen.getByLabelText('Active loading indicator')
-    ).toBeInTheDocument();
+    expect(screen.getByTitle('not loading')).toBeInTheDocument();
   });
 
   it('should render the success state if status is finished', () => {

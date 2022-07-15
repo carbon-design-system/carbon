@@ -6,7 +6,8 @@
  */
 
 import React from 'react';
-import { default as Checkbox, CheckboxSkeleton } from './';
+import { default as Checkbox, CheckboxSkeleton } from '.';
+import { ComponentStory } from '@storybook/react';
 import mdx from './Checkbox.mdx';
 
 const prefix = 'cds';
@@ -24,7 +25,7 @@ export default {
   },
 };
 
-export const CheckboxStory = () => {
+export const CheckboxStory: ComponentStory<typeof Checkbox> = () => {
   return (
     <fieldset className={`${prefix}--fieldset`}>
       <legend className={`${prefix}--label`}>Checkbox heading</legend>

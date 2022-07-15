@@ -4,19 +4,16 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
+import fs from 'fs';
+import glob from 'fast-glob';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
 
-'use strict';
-
-const fs = require('fs');
-const glob = require('fast-glob');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const path = require('path');
-
-const stories = glob
+const stories: string[] = glob
   .sync(
     [
       './Welcome/Welcome.stories.js',
-      '../src/**/*.stories.js',
+      '../src/**/*.stories.@(js|tsx|ts)',
       '../src/**/*.stories.mdx',
       '../src/**/next/*.stories.js',
       '../src/**/next/**/*.stories.js',
@@ -30,7 +27,7 @@ const stories = glob
   // Filters the stories by finding the paths that have a story file that ends
   // in `-story.js` and checks to see if they also have a `.stories.js`,
   // if so then defer to the `.stories.js`
-  .filter((match) => {
+  .filter((match: string) => {
     const filepath = path.resolve(__dirname, match);
     const basename = path.basename(match, '.js');
     const denylist = new Set([
@@ -92,9 +89,10 @@ module.exports = {
   },
   framework: '@storybook/react',
   stories,
-  webpack(config) {
-    const babelLoader = config.module.rules.find((rule) => {
-      return rule.use.some(({ loader }) => {
+  // TODO: Fix typings for this function
+  webpack(config: any) {
+    const babelLoader = config.module.rules.find((rule: any) => {
+      return rule.use.some(({ loader }: { loader: string }) => {
         return loader.includes('babel-loader');
       });
     });
