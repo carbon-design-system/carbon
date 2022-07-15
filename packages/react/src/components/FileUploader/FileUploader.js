@@ -57,7 +57,7 @@ export default class FileUploader extends React.Component {
       : PropTypes.string,
 
     /**
-     * Specify the description text of this <FileUploader>
+     * Specify the description text of this `<FileUploader>`
      */
     labelDescription: PropTypes.string,
 

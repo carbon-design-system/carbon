@@ -5,110 +5,97 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { mount } from 'enzyme';
-import { SideNavMenu } from '../SideNavMenu';
-import { SideNavMenuItem } from '../';
-
-const prefix = 'cds';
+import { SideNavMenu, SideNavMenuItem } from '../';
 
 describe('SideNavMenu', () => {
-  let mockProps, wrapper;
-
-  beforeEach(() => {
-    mockProps = {
-      buttonRef: jest.fn(),
-      className: 'custom-classname',
-      children: 'text',
-      renderIcon: () => <div>icon</div>,
-      isActive: false,
-      title: 'title',
-    };
+  it('should be expanded by default if `defaultExpanded` is true', () => {
+    render(
+      <SideNavMenu defaultExpanded title="test-title">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
-  afterEach(() => {
-    wrapper && wrapper.unmount();
+  it('should set the active class if `isActive` is true and the component has an active child', () => {
+    const { container } = render(
+      <SideNavMenu isActive title="test-title">
+        <SideNavMenuItem isActive>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass('cds--side-nav__item--active');
   });
 
-  it('should render', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should set the large class if `large` is true', () => {
+    const { container } = render(
+      <SideNavMenu large title="test-title">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass('cds--side-nav__item--large');
   });
 
-  it('should expand the menu when the button ref is clicked', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    expect(wrapper.state('isExpanded')).toBe(false);
-    expect(mockProps.buttonRef).toHaveBeenCalledTimes(1);
-    wrapper.find('button').simulate('click');
-    expect(wrapper.state('isExpanded')).toBe(true);
-  });
-
-  it('should collapse the menu when the Esc key is pressed', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} defaultExpanded={true} />);
-    expect(wrapper.state('isExpanded')).toBe(true);
-    wrapper.simulate('keydown', {
-      key: 'Escape',
-      keyCode: 27,
-      which: 27,
+  it('should support rendering an icon through `renderIcon`', () => {
+    const CustomIcon = jest.fn(() => {
+      return <svg data-testid="test-icon" />;
     });
-    expect(wrapper.state('isExpanded')).toBe(false);
+    render(
+      <SideNavMenu title="test-title" renderIcon={CustomIcon}>
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(CustomIcon).toHaveBeenCalled();
+    expect(screen.getByTestId('test-icon')).toBeInTheDocument();
   });
 
-  it('should reset expanded state if the isSideNavExpanded prop is false', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    expect(wrapper.state('isExpanded')).toBe(false);
-    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
-    wrapper.setState({ isExpanded: true });
-    expect(wrapper.state('isExpanded')).toBe(true);
-    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
-    // set the prop to false. This should force isExpanded from true to false, and update wasPreviouslyExpanded to true
-    wrapper.setProps({ isSideNavExpanded: false });
-    expect(wrapper.state('isExpanded')).toBe(false);
-    expect(wrapper.state('wasPreviouslyExpanded')).toBe(true);
+  it('should toggle the menu on click', () => {
+    render(
+      <SideNavMenu title="test-title">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-expanded',
+      'false'
+    );
+
+    userEvent.click(screen.getByRole('button'));
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
   });
 
-  it('should reset expanded state if the SideNav was collapsed/expanded', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    wrapper.setState({ isExpanded: false, wasPreviouslyExpanded: true });
-    // set the prop to false. This should force isExpanded from true to false, and update wasPreviouslyExpanded to true
-    wrapper.setProps({ isSideNavExpanded: true });
-    expect(wrapper.state('isExpanded')).toBe(true);
-    expect(wrapper.state('wasPreviouslyExpanded')).toBe(false);
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <SideNavMenu className="test" title="test-title">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(container.firstChild).toHaveClass('test');
   });
 
-  it('should add the correct active class if a child is active', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--active`)
-    ).toBe(false);
-    // add a (single) child which is active
-    wrapper.setProps({
-      children: <SideNavMenuItem isActive={true}>Test</SideNavMenuItem>,
-    });
-    expect(
-      wrapper.find('li').at(0).hasClass(`${prefix}--side-nav__item--active`)
-    ).toBe(true);
-    wrapper.setProps({
-      children: [
-        <SideNavMenuItem key="first">entry one</SideNavMenuItem>,
-        <SideNavMenuItem key="second" aria-current="page">
-          entry two
-        </SideNavMenuItem>,
-      ],
-    });
-    expect(
-      wrapper.find('li').at(0).hasClass(`${prefix}--side-nav__item--active`)
-    ).toBe(true);
-  });
-
-  it('should include a css class to render the large variant is large prop is set', () => {
-    wrapper = mount(<SideNavMenu {...mockProps} />);
-    expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
-    ).toBe(false);
-    wrapper.setProps({ large: true });
-    expect(
-      wrapper.find('li').hasClass(`${prefix}--side-nav__item--large`)
-    ).toBe(true);
+  it('should support a `ref` on the <button> element', () => {
+    const ref = jest.fn();
+    render(
+      <SideNavMenu ref={ref} title="test-title">
+        <SideNavMenuItem>a</SideNavMenuItem>
+        <SideNavMenuItem>b</SideNavMenuItem>
+        <SideNavMenuItem>c</SideNavMenuItem>
+      </SideNavMenu>
+    );
+    expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
   });
 });

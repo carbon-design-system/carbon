@@ -4,6 +4,15 @@ on:
     types: [opened]
   issue_comment:
     types: [created]
+  workflow_call:
+    secrets:
+      APP_ID:
+        required: true
+      APP_PRIVATE_KEY:
+        required: true
+      ADD_TO_PROJECT_PAT:
+        required: true
+
 jobs:
   comment:
     runs-on: ubuntu-latest
@@ -15,7 +24,7 @@ jobs:
         with:
           app_id: ${{ secrets.APP_ID }}
           private_key: ${{ secrets.APP_PRIVATE_KEY }}
-      - uses: ./actions/issues
+      - uses: carbon-design-system/carbon/actions/issues@main
         with:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           enabled: true
@@ -23,7 +32,7 @@ jobs:
     name: Add issue to Design System project
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/add-to-project@v0.0.3
+      - uses: actions/add-to-project@v0.1.0
         with:
           project-url: https://github.com/orgs/carbon-design-system/projects/39
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}

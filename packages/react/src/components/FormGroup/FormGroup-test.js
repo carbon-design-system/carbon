@@ -7,52 +7,74 @@
 
 import React from 'react';
 import FormGroup from '../FormGroup';
-import { shallow } from 'enzyme';
-
-const prefix = 'cds';
+import { render, screen } from '@testing-library/react';
 
 describe('FormGroup', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <FormGroup className="extra-class" legendText="legendtest" />
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <FormGroup className="test" legendText="legendtest" />
+    );
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should be set data-invalid when invalid prop is true', () => {
+    const { container } = render(
+      <FormGroup invalid={true} legendText="legendtest">
+        FormGroup Test
+      </FormGroup>
     );
 
-    it('renders children as expected', () => {
-      expect(wrapper.find('.child').length).toBe(0);
-    });
-    it('renders wrapper as expected', () => {
-      expect(wrapper.length).toBe(1);
-    });
-    it('has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--fieldset`)).toEqual(true);
-    });
-    it('renders extra classes passed in via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
-    });
-    it('should not render the data-invalid property by default', () => {
-      expect(wrapper.props()['data-invalid']).toBe(undefined);
-    });
-    it('should render the data-invalid attribute when invalid is set', () => {
-      const formgroup = shallow(<FormGroup legendText="legendtest" invalid />);
-      expect(formgroup.props()['data-invalid']).toBe('');
-    });
-    it('should render wrapper as expected', () => {
-      const formGroup = shallow(
-        <FormGroup legendText="legendtest">
-          <div className="test-child1" />
-          <div className="test-child2" />
-        </FormGroup>
-      );
-      expect(formGroup.length).toEqual(1);
-    });
-    it('should render children as expected', () => {
-      const formGroup1 = shallow(
-        <FormGroup legendText="legendtest">
-          <div className="test-child" />
-          <div className="test-child" />
-        </FormGroup>
-      );
-      expect(formGroup1.find('.test-child').length).toBe(2);
-    });
+    expect(container.firstChild).toHaveAttribute('data-invalid', '');
+  });
+
+  it('should render legendText', () => {
+    render(
+      <FormGroup legendId="legend-testid" legendText="legendtest">
+        FormGroup Test
+      </FormGroup>
+    );
+
+    expect(screen.queryByText('legendtest')).toBeDefined();
+  });
+
+  it('should set the id for legend based on legendId', () => {
+    render(
+      <FormGroup legendId="legend-testid" legendText="legendtest">
+        FormGroup Test
+      </FormGroup>
+    );
+
+    expect(screen.getByText('legendtest')).toHaveAttribute(
+      'id',
+      'legend-testid'
+    );
+  });
+
+  it('should display messageText if message is true', () => {
+    render(
+      <FormGroup
+        legendId="legend-testid"
+        legendText="legendtest"
+        message={true}
+        messageText="Message text">
+        FormGroup Test
+      </FormGroup>
+    );
+
+    expect(screen.queryByText('Message text')).toBeDefined();
+  });
+
+  it('should not display the messageText if message is false', () => {
+    render(
+      <FormGroup
+        legendId="legend-testid"
+        legendText="legendtest"
+        message={false}
+        messageText="Message text">
+        FormGroup Test
+      </FormGroup>
+    );
+
+    expect(screen.queryByText('Message text')).toBeNull();
   });
 });

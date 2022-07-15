@@ -10,11 +10,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SideNavItem = ({
-  className: customClassName,
-  children,
-  large = false,
-}) => {
+function SideNavItem({ className: customClassName, children, large = false }) {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--side-nav__item`]: true,
@@ -22,11 +18,11 @@ const SideNavItem = ({
     [customClassName]: !!customClassName,
   });
   return <li className={className}>{children}</li>;
-};
+}
 
 SideNavItem.propTypes = {
   /**
-   * Provide a single icon as the child to `SideNavIcon` to render in the
+   * Provide a single icon as the child to `SideNavItem` to render in the
    * container
    */
   children: PropTypes.node.isRequired,

@@ -6,9 +6,6 @@
  */
 
 import PropTypes from 'prop-types';
-import * as FeatureFlags from '@carbon/feature-flags';
 
 export const ListBoxType = PropTypes.oneOf(['default', 'inline']);
-export const ListBoxSize = FeatureFlags.enabled('enable-v11-release')
-  ? PropTypes.oneOf(['sm', 'md', 'lg'])
-  : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']);
+export const ListBoxSize = PropTypes.oneOf(['sm', 'md', 'lg']);

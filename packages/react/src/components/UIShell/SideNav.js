@@ -234,7 +234,7 @@ SideNav.propTypes = {
    * state of the component. From this, you should return a string representing
    * the label you want displayed or read by screen readers.
    */
-  translateById: PropTypes.func,
+  // translateById: PropTypes.func,
 };
 
 export default SideNav;

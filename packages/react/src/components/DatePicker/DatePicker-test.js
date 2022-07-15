@@ -5,10 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import DatePicker from './DatePicker';
 import { mount } from 'enzyme';
 import DatePickerInput from '../DatePickerInput';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 const prefix = 'cds';
 
@@ -224,5 +226,48 @@ describe('DatePicker', () => {
     it('should not have "console.error" being created', () => {
       expect(mockConsoleError).not.toHaveBeenCalled();
     });
+  });
+
+  it('single supports controlled value', () => {
+    const DatePickerExample = () => {
+      const [date, setDate] = useState('');
+      return (
+        <>
+          <DatePicker
+            datePickerType="single"
+            value={date}
+            onChange={(value) => {
+              setDate(value);
+            }}>
+            <DatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-simple"
+            />
+          </DatePicker>
+          <button
+            type="button"
+            onClick={() => {
+              setDate('');
+            }}>
+            clear
+          </button>
+        </>
+      );
+    };
+
+    render(<DatePickerExample />);
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
+
+    userEvent.type(
+      screen.getByLabelText('Date Picker label'),
+      '01/20/1989{enter}'
+    );
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/20/1989'
+    );
+
+    userEvent.click(screen.getByText('clear'));
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
   });
 });

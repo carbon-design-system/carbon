@@ -99,7 +99,6 @@ describe('Carbon Components React', () => {
         "MultiSelect",
         "NotificationActionButton",
         "NotificationButton",
-        "NotificationTextDetails",
         "NumberInput",
         "NumberInputSkeleton",
         "OrderedList",
@@ -230,6 +229,7 @@ describe('Carbon Components React', () => {
         "unstable_useContextMenu",
         "unstable_useFeatureFlag",
         "unstable_useFeatureFlags",
+        "useLayer",
         "usePrefix",
         "useTheme",
       ]

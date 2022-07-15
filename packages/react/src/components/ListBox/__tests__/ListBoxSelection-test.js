@@ -5,68 +5,150 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { mount } from 'enzyme';
 import ListBox from '../';
 
+function translateWithId(id) {
+  if (id === 'clear.all') {
+    return 'test-clear-all';
+  }
+
+  if (id === 'clear.selection') {
+    return 'test-clear-selection';
+  }
+
+  throw new Error(`Unknown message id: ${id}`);
+}
+
 describe('ListBoxSelection', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      clearSelection: jest.fn(),
-      translateWithId: jest.fn(() => 'translation'),
-    };
-  });
-
-  it('should render', () => {
-    const singleSelectionWrapper = mount(<ListBox.Selection {...mockProps} />);
-    const multiSelectionWrapper = mount(
-      <ListBox.Selection selectionCount={3} {...mockProps} />
+  it('should render a clear button if no `selectionCount` is provided', () => {
+    render(
+      <ListBox.Selection
+        clearSelection={jest.fn()}
+        translateWithId={translateWithId}
+      />
     );
-    expect(singleSelectionWrapper).toMatchSnapshot();
-    expect(multiSelectionWrapper).toMatchSnapshot();
+    expect(screen.getByLabelText('test-clear-selection')).toBeInTheDocument();
   });
 
-  it('should call `translateWithId` with the id strings needed to translate', () => {
-    mount(<ListBox.Selection {...mockProps} />);
-    expect(mockProps.translateWithId).toHaveBeenCalledWith('clear.selection');
-
-    mockProps.translateWithId.mockClear();
-
-    mount(<ListBox.Selection {...mockProps} selectionCount={3} />);
-    expect(mockProps.translateWithId).toHaveBeenCalledWith('clear.all');
+  it('should render a clear all button if `selectionCount` is provided', () => {
+    render(
+      <ListBox.Selection
+        selectionCount={10}
+        clearSelection={jest.fn()}
+        translateWithId={translateWithId}
+      />
+    );
+    expect(screen.getByLabelText('test-clear-all')).toBeInTheDocument();
   });
 
-  it('should call clearSelection when clicked', () => {
-    const wrapper = mount(<ListBox.Selection {...mockProps} />);
-    wrapper.simulate('click');
-    expect(mockProps.clearSelection).toHaveBeenCalled();
+  it('should call `clearSelection` when the clear button is clicked', () => {
+    const clearSelection = jest.fn();
+    render(
+      <ListBox.Selection
+        clearSelection={clearSelection}
+        translateWithId={translateWithId}
+      />
+    );
+    userEvent.click(screen.getByLabelText('test-clear-selection'));
+    expect(clearSelection).toHaveBeenCalled();
   });
 
-  it('should call clearSelection on Enter keydown', () => {
-    const wrapper = mount(<ListBox.Selection {...mockProps} />);
-    wrapper.simulate('keydown', {
-      key: 'Enter',
-      keyCode: 13,
-      which: 13,
-    });
-    expect(mockProps.clearSelection).toHaveBeenCalled();
+  it('should not call `clearSelection` when the clear button is disabled', () => {
+    const clearSelection = jest.fn();
+    render(
+      <ListBox.Selection
+        disabled
+        clearSelection={clearSelection}
+        translateWithId={translateWithId}
+      />
+    );
+    userEvent.click(screen.getByLabelText('test-clear-selection'));
+    expect(clearSelection).not.toHaveBeenCalled();
   });
 
-  it('should not clearSelection on click when disabled', () => {
-    const wrapper = mount(<ListBox.Selection {...mockProps} disabled={true} />);
-    wrapper.simulate('click');
-    expect(mockProps.clearSelection).toHaveBeenCalledTimes(0);
+  it('should call `onClearSelection` when the clear button is clicked', () => {
+    const onClearSelection = jest.fn();
+    render(
+      <ListBox.Selection
+        clearSelection={jest.fn()}
+        onClearSelection={onClearSelection}
+        translateWithId={translateWithId}
+      />
+    );
+    userEvent.click(screen.getByLabelText('test-clear-selection'));
+    expect(onClearSelection).toHaveBeenCalled();
   });
 
-  it('should not call clearSelection on Enter keydown when disabled', () => {
-    const wrapper = mount(<ListBox.Selection {...mockProps} disabled={true} />);
-    wrapper.simulate('keydown', {
-      key: 'Enter',
-      keyCode: 13,
-      which: 13,
-    });
-    expect(mockProps.clearSelection).toHaveBeenCalledTimes(0);
+  it('should not call `onClearSelection` when the clear button is disabled', () => {
+    const onClearSelection = jest.fn();
+    render(
+      <ListBox.Selection
+        disabled
+        clearSelection={jest.fn()}
+        onClearSelection={onClearSelection}
+        translateWithId={translateWithId}
+      />
+    );
+    userEvent.click(screen.getByLabelText('test-clear-selection'));
+    expect(onClearSelection).not.toHaveBeenCalled();
+  });
+
+  it('should call `clearSelection` when the clear all button is clicked', () => {
+    const clearSelection = jest.fn();
+    render(
+      <ListBox.Selection
+        selectionCount={10}
+        clearSelection={clearSelection}
+        translateWithId={translateWithId}
+      />
+    );
+    userEvent.click(screen.getByLabelText('test-clear-all'));
+    expect(clearSelection).toHaveBeenCalled();
+  });
+
+  it('should not call `clearSelection` when the clear all button is disabled', () => {
+    const clearSelection = jest.fn();
+    render(
+      <ListBox.Selection
+        disabled
+        selectionCount={10}
+        clearSelection={clearSelection}
+        translateWithId={translateWithId}
+      />
+    );
+    userEvent.click(screen.getByLabelText('test-clear-all'));
+    expect(clearSelection).not.toHaveBeenCalled();
+  });
+
+  it('should call `onClearSelection` when the clear all button is clicked', () => {
+    const onClearSelection = jest.fn();
+    render(
+      <ListBox.Selection
+        selectionCount={10}
+        clearSelection={jest.fn()}
+        onClearSelection={onClearSelection}
+        translateWithId={translateWithId}
+      />
+    );
+    userEvent.click(screen.getByLabelText('test-clear-all'));
+    expect(onClearSelection).toHaveBeenCalled();
+  });
+
+  it('should not call `onClearSelection` when the clear all button is disabled', () => {
+    const onClearSelection = jest.fn();
+    render(
+      <ListBox.Selection
+        disabled
+        selectionCount={10}
+        clearSelection={jest.fn()}
+        onClearSelection={onClearSelection}
+        translateWithId={translateWithId}
+      />
+    );
+    userEvent.click(screen.getByLabelText('test-clear-all'));
+    expect(onClearSelection).not.toHaveBeenCalled();
   });
 });

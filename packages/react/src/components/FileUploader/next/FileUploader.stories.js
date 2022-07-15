@@ -50,6 +50,7 @@ _FileUploader.args = {
   filenameStatus: 'edit',
   accept: ['.jpg', '.png'],
   name: '',
+  role: 'button',
   multiple: true,
   disabled: false,
   iconDescription: 'Clear file',
