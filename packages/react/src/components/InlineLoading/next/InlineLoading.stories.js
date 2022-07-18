@@ -17,7 +17,7 @@ export default {
 export const _InlineLoading = () => (
   <InlineLoading
     status="active"
-    iconDescription="Active loading indicator"
+    iconDescription="Loading"
     description="Loading data..."
   />
 );

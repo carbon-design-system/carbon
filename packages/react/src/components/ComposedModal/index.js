@@ -29,4 +29,3 @@ export const ComposedModal = FeatureFlags.enabled('enable-v11-release')
   : ComposedModalClassic;
 
 export { ModalBody };
-export default from './ComposedModal';
