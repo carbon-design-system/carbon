@@ -784,6 +784,7 @@ Array [
   "IbmCloud",
   "IbmCloudDedicatedHost",
   "IbmCloudInternetServices",
+  "IbmCloudKubernetesService",
   "IbmCloudPakApplications",
   "IbmCloudPakBusinessAutomation",
   "IbmCloudPakData",

@@ -5370,7 +5370,7 @@
     - 32
 - name: data-quality-definition
   friendly_name: Data quality definition
-  aliases: 
+  aliases:
     - data quality
     - definition
     - data
@@ -8823,7 +8823,7 @@
     - 32
 - name: ibm--open-enterprise-languages
   friendly_name: IBM® Open Enterprise Languages
-  aliases: 
+  aliases:
     - Open Enterprise Languages
     - z16
   sizes:
@@ -8864,6 +8864,16 @@
     - IBM Cloud®
     - internet
     - cloud
+  sizes:
+    - 32
+- name: ibm-cloud--kubernetes-service
+  friendly_name: IBM Cloud® Kubernetes Services
+  aliases:
+    - services
+    - cloud
+    - hybrid
+    - IBM Cloud®
+    - Kubernetes
   sizes:
     - 32
 - name: ibm-cloud--security-compliance-center
@@ -8922,13 +8932,13 @@
     - 32
 - name: ibm-cloud-pak--business-automation
   friendly_name: IBM Cloud Pak® for Business Automation
-  aliases: 
+  aliases:
     - enterprise
     - app
     - automation
     - IBM Cloud Pak®
     - cloud
-    - hybrid    
+    - hybrid
   sizes:
     - 32
 - name: ibm-cloud-pak--data
@@ -8952,8 +8962,8 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--MANTA-automated-data-lineage
-  friendly_name: MANTA Automated Data Lineage for IBM Cloud Pak® for Data 
-  aliases: 
+  friendly_name: MANTA Automated Data Lineage for IBM Cloud Pak® for Data
+  aliases:
     - data
     - IBM Cloud Pak® for Data
     - data lineage
@@ -9046,8 +9056,8 @@
   sizes:
     - 32
 - name: ibm-z--cloud-mod-stack
-  friendly_name: IBM Z® Cloud Modernization Stack 
-  aliases: 
+  friendly_name: IBM Z® Cloud Modernization Stack
+  aliases:
     - cloud
     - modernization
     - IBM Z®
@@ -9056,8 +9066,8 @@
   sizes:
     - 32
 - name: ibm-z-cloud--provisioning
-  friendly_name: 	IBM Z® and Cloud Modernization Stack Provisioning
-  aliases: 
+  friendly_name: IBM Z® and Cloud Modernization Stack Provisioning
+  aliases:
     - IBM Z®
     - cloud
     - provisioning
@@ -9066,8 +9076,8 @@
   sizes:
     - 32
 - name: ibm-z-os--package-manager
-  friendly_name: IBM® z/OS Package Manager 
-  aliases: 
+  friendly_name: IBM® z/OS Package Manager
+  aliases:
     - IBM Z®
     - cloud
     - mainframe
@@ -10831,7 +10841,7 @@
     - 32
 - name: logo--kubernetes
   friendly_name: Logo Kubernetes
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -11529,14 +11539,14 @@
     - 32
 - name: microservices--1
   friendly_name: Microservices 1
-  aliases: 
+  aliases:
     - microservices 1
     - systems
   sizes:
     - 32
 - name: microservices--2
   friendly_name: Microservices 2
-  aliases: 
+  aliases:
     - microservices 2
     - systems
   sizes:
@@ -14646,7 +14656,7 @@
     - 32
 - name: rule--data-quality
   friendly_name: Rule data quality
-  aliases: 
+  aliases:
     - rule
     - governance
     - control
@@ -15268,7 +15278,7 @@
     - 32
 - name: service-id
   friendly_name: Service ID
-  aliases: 
+  aliases:
     - service ID
     - identification
     - settings
@@ -19492,7 +19502,7 @@
     - 32
 - name: workflow-automation
   friendly_name: Workflow automation
-  aliases: 
+  aliases:
     - workflow
     - automation
     - gear

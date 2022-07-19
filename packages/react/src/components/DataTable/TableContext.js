@@ -5,10 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export {
-  NotificationActionButton,
-  NotificationButton,
-  ToastNotification,
-  InlineNotification,
-  ActionableNotification,
-} from './Notification';
+import { createContext } from 'react';
+
+export const TableContext = createContext({
+  titleId: null,
+  descriptionId: null,
+});
