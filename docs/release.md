@@ -144,6 +144,8 @@ Friday of a sprint. To make the switch, you will need to:
 
 ### Post release
 
+Update the [release radar wiki page](https://github.com/carbon-design-system/carbon/wiki/Release-radar)
+
 After a release has switched packages from `next` to `latest`, it is important
 to monitor channels on Slack and issues on GitHub in case breaking changes may
 have occurred in the release.
