@@ -44,7 +44,7 @@
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "eslint-plugin-storybook": "^0.5.7",
+    "eslint-plugin-storybook": "^0.6.0",
     "eslint-restricted-globals": "^0.2.0"
   },
   "devDependencies": {

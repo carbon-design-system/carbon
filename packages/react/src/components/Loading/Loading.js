@@ -7,14 +7,11 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
-import setupGetInstanceId from '../../tools/setupGetInstanceId';
+import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-
-const getInstanceId = setupGetInstanceId();
+import deprecate from '../../prop-types/deprecate';
 
 function Loading({
-  id,
   active,
   className: customClassName,
   withOverlay,
@@ -23,7 +20,6 @@ function Loading({
   ...rest
 }) {
   const prefix = usePrefix();
-  const { current: instanceId } = useRef(getInstanceId());
   const loadingClassName = cx(customClassName, {
     [`${prefix}--loading`]: true,
     [`${prefix}--loading--small`]: small,
@@ -33,18 +29,13 @@ function Loading({
     [`${prefix}--loading-overlay`]: true,
     [`${prefix}--loading-overlay--stop`]: !active,
   });
-  const loadingId = id || `loading-id-${instanceId}`;
 
   const loading = (
     <div
       {...rest}
       aria-atomic="true"
-      aria-labelledby={loadingId}
       aria-live={active ? 'assertive' : 'off'}
       className={loadingClassName}>
-      <label id={loadingId} className={`${prefix}--visually-hidden`}>
-        {description}
-      </label>
       <svg className={`${prefix}--loading__svg`} viewBox="0 0 100 100">
         <title>{description}</title>
         {small ? (
@@ -91,7 +82,7 @@ Loading.propTypes = {
   /**
    * Provide an `id` to uniquely identify the label
    */
-  id: PropTypes.string,
+  id: deprecate(PropTypes.string, `\nThe prop \`id\` is no longer needed.`),
 
   /**
    * Specify whether you would like the small variant of <Loading>
@@ -108,7 +99,7 @@ Loading.defaultProps = {
   active: true,
   withOverlay: true,
   small: false,
-  description: 'Active loading indicator',
+  description: 'loading',
 };
 
 export default Loading;
