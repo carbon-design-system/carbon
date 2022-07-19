@@ -247,21 +247,21 @@
         $span: $columns * 0.75;
         --cds-grid-columns: #{$span};
 
-        grid-column: span #{$span} / span #{$span};
+        grid-column: span list.slash($span, span) #{$span};
       }
 
       .#{$prefix}--#{$name}\:col-span-50 {
         $span: $columns * 0.5;
         --cds-grid-columns: #{$span};
 
-        grid-column: span #{$span} / span #{$span};
+        grid-column: span list.slash($span, span) #{$span};
       }
 
       .#{$prefix}--#{$name}\:col-span-25 {
         $span: $columns * 0.25;
         --cds-grid-columns: #{$span};
 
-        grid-column: span #{$span} / span #{$span};
+        grid-column: span list.slash($span, span) #{$span};
       }
     } @else {
       @include breakpoint($name) {
@@ -279,21 +279,21 @@
           $span: $columns * 0.75;
           --cds-grid-columns: #{$span};
 
-          grid-column: span #{$span} / span #{$span};
+          grid-column: span list.slash($span, span) #{$span};
         }
 
         .#{$prefix}--#{$name}\:col-span-50 {
           $span: $columns * 0.5;
           --cds-grid-columns: #{$span};
 
-          grid-column: span #{$span} / span #{$span};
+          grid-column: span list.slash($span, span) #{$span};
         }
 
         .#{$prefix}--#{$name}\:col-span-25 {
           $span: $columns * 0.25;
           --cds-grid-columns: #{$span};
 
-          grid-column: span #{$span} / span #{$span};
+          grid-column: span list.slash($span, span) #{$span};
         }
       }
     }
@@ -426,7 +426,7 @@
     @if is-smallest-breakpoint($key, $breakpoints) {
       --cds-grid-columns: #{$span};
 
-      grid-column: span #{$span} / span #{$span};
+      grid-column: span list.slash($span, span) #{$span};
     } @else {
       $previous-breakpoint: breakpoint-prev($key, $breakpoints);
       $previous-column-count: get-column-count(
@@ -439,7 +439,7 @@
         @include breakpoint($key) {
           --cds-grid-columns: #{$span};
 
-          grid-column: span #{$span} / span #{$span};
+          grid-column: span list.slash($span, span) #{$span};
         }
       }
     }
