@@ -1,4 +1,4 @@
-@use '../../../../styles/scss/utilities/helper-classes' as *;
+@use '../../../../styles/scss/utilities/hide-at-breakpoint' as *;
 
 .hide-at-sm {
   @include hide-at-sm;

@@ -3,7 +3,6 @@
 
 // Mixins that can be used to hide elements only at specific breakpoints.
 // Helpful for when you would like to hide elements outside of a Grid context
-
 @mixin hide-at-sm {
   padding: 2rem 1rem;
   background: #8a3ffc;
