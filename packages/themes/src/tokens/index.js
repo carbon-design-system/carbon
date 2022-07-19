@@ -9,7 +9,7 @@ import { Token } from './Token';
 import { TokenFormat } from './TokenFormat';
 import { TokenGroup } from './TokenGroup';
 import { TokenSet } from './TokenSet';
-import { group } from './v11TokenGroup';
+import { group, contextual } from './v11TokenGroup';
 import { set } from './v11TokenSet';
 import * as components from './components';
 import { type } from './type';
@@ -21,6 +21,14 @@ export { Token, TokenFormat, TokenGroup, TokenSet, group, set };
 const v11 = [
   // Base color tokens
   ...group.getTokens().map((token) => {
+    return {
+      name: token.name,
+      type: 'color',
+    };
+  }),
+
+  // Contextual tokens
+  ...contextual.getTokens().map((token) => {
     return {
       name: token.name,
       type: 'color',

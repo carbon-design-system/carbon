@@ -946,6 +946,58 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "layer",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-active",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-selected-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-accent",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-accent-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "layer-accent-active",
+          "type": "color",
+        },
+        Object {
+          "name": "field",
+          "type": "color",
+        },
+        Object {
+          "name": "field-hover",
+          "type": "color",
+        },
+        Object {
+          "name": "border-subtle",
+          "type": "color",
+        },
+        Object {
+          "name": "border-subtle-selected",
+          "type": "color",
+        },
+        Object {
+          "name": "border-strong",
+          "type": "color",
+        },
+        Object {
           "name": "button-separator",
           "type": "color",
         },
