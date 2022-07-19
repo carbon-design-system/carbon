@@ -24,6 +24,8 @@ function FileUploaderDropContainer({
   pattern,
   role,
   tabIndex,
+  // eslint-disable-next-line react/prop-types
+  innerRef,
   ...rest
 }) {
   const prefix = usePrefix();
@@ -109,6 +111,7 @@ function FileUploaderDropContainer({
       }}>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
+        ref={innerRef}
         className={labelClasses}
         htmlFor={uid}
         tabIndex={tabIndex || 0}

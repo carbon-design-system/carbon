@@ -53,7 +53,7 @@ _FileUploader.args = {
   role: 'button',
   multiple: true,
   disabled: false,
-  iconDescription: 'Clear file',
+  iconDescription: 'Delete file',
 };
 _FileUploader.argTypes = {
   onChange: { action: 'onChange' },
@@ -84,7 +84,7 @@ export const _FileUploaderItem = (args) => <FileUploaderItem {...args} />;
 _FileUploaderItem.args = {
   errorBody: '500kb max file size. Select a new file and try again.',
   errorSubject: 'File size exceeds limit',
-  iconDescription: 'Clear file',
+  iconDescription: 'Delete file',
   invalid: false,
   name: 'README.md',
   status: 'edit',

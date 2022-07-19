@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useRef } from 'react';
 import classnames from 'classnames';
 import FileUploaderItem from '../../FileUploaderItem';
 import FileUploaderDropContainer from '../../FileUploaderDropContainer';
@@ -26,6 +26,7 @@ function uid(prefix = 'id') {
 
 const ExampleDropContainerApp = (props) => {
   const [files, setFiles] = useState([]);
+  const uploaderButton = useRef(null);
   const handleDrop = (e) => {
     e.preventDefault();
   };
@@ -135,8 +136,10 @@ const ExampleDropContainerApp = (props) => {
   );
 
   const handleFileUploaderItemClick = useCallback(
-    (_, { uuid: clickedUuid }) =>
-      setFiles(files.filter(({ uuid }) => clickedUuid !== uuid)),
+    (_, { uuid: clickedUuid }) => {
+      uploaderButton.current.focus();
+      return setFiles(files.filter(({ uuid }) => clickedUuid !== uuid));
+    },
     [files]
   );
 
@@ -156,7 +159,11 @@ const ExampleDropContainerApp = (props) => {
       <p className={helperTextClasses}>
         Max file size is 500kb. Supported file types are .jpg and .png.
       </p>
-      <FileUploaderDropContainer {...props} onAddFiles={onAddFiles} />
+      <FileUploaderDropContainer
+        {...props}
+        onAddFiles={onAddFiles}
+        innerRef={uploaderButton}
+      />
       <div className={`${prefix}--file-container`} style={{ width: '100%' }}>
         {files.map(
           ({
