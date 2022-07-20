@@ -7,8 +7,10 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useMemo } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { useId } from '../../internal/useId';
+import { TableContext } from './TableContext';
 
 const TableContainer = ({
   className,
@@ -19,6 +21,9 @@ const TableContainer = ({
   useStaticWidth,
   ...rest
 }) => {
+  const baseId = useId('tc');
+  const titleId = `${baseId}-title`;
+  const descriptionId = `${baseId}-description`;
   const prefix = usePrefix();
   const tableContainerClasses = cx(
     className,
@@ -28,19 +33,31 @@ const TableContainer = ({
       [`${prefix}--data-table-container--static`]: useStaticWidth,
     }
   );
+  const value = useMemo(() => {
+    return {
+      titleId: title ? titleId : null,
+      descriptionId: description ? descriptionId : null,
+    };
+  }, [title, description, titleId, descriptionId]);
 
   return (
-    <div {...rest} className={tableContainerClasses}>
-      {title && (
-        <div className={`${prefix}--data-table-header`}>
-          <h4 className={`${prefix}--data-table-header__title`}>{title}</h4>
-          <p className={`${prefix}--data-table-header__description`}>
-            {description}
-          </p>
-        </div>
-      )}
-      {children}
-    </div>
+    <TableContext.Provider value={value}>
+      <div {...rest} className={tableContainerClasses}>
+        {title && (
+          <div className={`${prefix}--data-table-header`}>
+            <h4 className={`${prefix}--data-table-header__title`} id={titleId}>
+              {title}
+            </h4>
+            <p
+              className={`${prefix}--data-table-header__description`}
+              id={descriptionId}>
+              {description}
+            </p>
+          </div>
+        )}
+        {children}
+      </div>
+    </TableContext.Provider>
   );
 };
 
