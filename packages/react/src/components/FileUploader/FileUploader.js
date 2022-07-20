@@ -124,6 +124,8 @@ export default class FileUploader extends React.Component {
 
   nodes = [];
 
+  uploaderButton = React.createRef();
+
   static getDerivedStateFromProps({ filenameStatus }, state) {
     const { prevFilenameStatus } = state;
     return prevFilenameStatus === filenameStatus
@@ -159,6 +161,7 @@ export default class FileUploader extends React.Component {
       this.setState({ filenames: filteredArray });
       if (this.props.onDelete) {
         this.props.onDelete(evt);
+        this.uploaderButton.current.focus();
       }
       this.props.onClick(evt);
     }
@@ -215,6 +218,7 @@ export default class FileUploader extends React.Component {
           {labelDescription}
         </p>
         <FileUploaderButton
+          innerRef={this.uploaderButton}
           disabled={disabled}
           labelText={buttonLabel}
           multiple={multiple}
@@ -234,10 +238,13 @@ export default class FileUploader extends React.Component {
                   className={selectedFileClasses}
                   ref={(node) => (this.nodes[index] = node)} // eslint-disable-line
                   {...other}>
-                  <p className={`${prefix}--file-filename`}>{name}</p>
+                  <p className={`${prefix}--file-filename`} id={name}>
+                    {name}
+                  </p>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
                       iconDescription={iconDescription}
+                      aria-describedby={name}
                       status={filenameStatus}
                       onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {
