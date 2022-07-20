@@ -68,5 +68,29 @@ describe('OrderedList', () => {
         `${prefix}--list--ordered`
       );
     });
+
+    it('should render native lists', () => {
+      const { container } = render(
+        <OrderedList native>
+          <ListItem>Item</ListItem>
+        </OrderedList>
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--list--ordered--native`
+      );
+      expect(container.firstChild).not.toHaveClass(`${prefix}--list--nested`);
+    });
+
+    it('should render expressive lists', () => {
+      const { container } = render(
+        <OrderedList isExpressive>
+          <ListItem>Item</ListItem>
+        </OrderedList>
+      );
+
+      expect(container.firstChild).toHaveClass(`${prefix}--list--ordered`);
+      expect(container.firstChild).toHaveClass(`${prefix}--list--expressive`);
+    });
   });
 });
