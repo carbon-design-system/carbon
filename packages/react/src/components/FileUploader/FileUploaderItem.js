@@ -35,12 +35,13 @@ function FileUploaderItem({
   });
   return (
     <span className={classes} {...other}>
-      <p className={`${prefix}--file-filename`} title={name}>
+      <p className={`${prefix}--file-filename`} title={name} id={name}>
         {name}
       </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
           iconDescription={iconDescription}
+          aria-describedby={name}
           status={status}
           invalid={invalid}
           onKeyDown={(evt) => {

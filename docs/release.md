@@ -63,7 +63,7 @@ checkpoints:
 | [Prerelease](#prerelease)        | Publish a prerelease that will be used to test out the release candidate before becoming stabilized                      |
 | [Stable release](#stablerelease) | Graduate the prerelease into a stable release that is available through packages on NPM                                  |
 | [Post release](#postrelease)     | Support the latest stable release and address any issues that may come up as a result of promoting the release to stable |
-| [Previous release](#postrelease)     | Determine if new changes to v10 are present and need published, and do so if needed.  |
+| [Previous release](#postrelease) | Determine if new changes to v10 are present and need published, and do so if needed.                                     |
 
 ### Prerelease
 
@@ -124,7 +124,8 @@ git push upstream v11.2.0
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
 - [ ] Review and approve the Pull Request generated from this action on the
       [Carbon Website](https://github.com/carbon-design-system/carbon-website)
-      to verify no breaking changes have occurred in this release
+      to verify no breaking changes have occurred in this release. If the PR
+      from the previous release was not merged, the existing PR will be updated.
 
 **Friday**
 
@@ -143,6 +144,9 @@ Friday of a sprint. To make the switch, you will need to:
 `./packages/cli/bin/carbon-cli.js changelog v11.5.0..v11.6.0`
 
 ### Post release
+
+- [ ] Update the
+      [release radar wiki page](https://github.com/carbon-design-system/carbon/wiki/Release-radar)
 
 After a release has switched packages from `next` to `latest`, it is important
 to monitor channels on Slack and issues on GitHub in case breaking changes may
