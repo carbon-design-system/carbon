@@ -42,6 +42,7 @@ export default class ModalWrapper extends React.Component {
   };
 
   static defaultProps = {
+    shouldCloseAfterSubmit: true,
     primaryButtonText: 'Save',
     secondaryButtonText: 'Cancel',
     triggerButtonIconDescription: 'Provide icon description if icon is used',

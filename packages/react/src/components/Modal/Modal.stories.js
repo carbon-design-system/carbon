@@ -303,8 +303,7 @@ export const Wrapper = () => {
       buttonTriggerText="Launch modal"
       modalHeading="Modal heading"
       modalLabel="Label"
-      handleSubmit={() => {}}
-      shouldCloseAfterSubmit>
+      handleSubmit={() => {}}>
       <p>Modal content here</p>
     </ModalWrapper>
   );
