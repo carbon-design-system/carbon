@@ -66,9 +66,11 @@ export default class ModalWrapper extends React.Component {
   };
 
   handleClose = (evt) => {
+    const innerModal = this.modal.current.querySelector('div');
     if (
+      this.modal.current &&
       evt &&
-      !this.modal.current.innerModal.current.contains(evt.target) &&
+      !innerModal.contains(evt.target) &&
       this.props.preventCloseOnClickOutside
     ) {
       return;
@@ -82,11 +84,12 @@ export default class ModalWrapper extends React.Component {
   handleOnRequestSubmit = () => {
     const { handleSubmit, shouldCloseAfterSubmit } = this.props;
 
-    if (handleSubmit()) {
-      if (shouldCloseAfterSubmit) {
-        this.handleClose();
-      }
+    if (handleSubmit && shouldCloseAfterSubmit) {
+      handleSubmit();
+      this.handleClose();
     }
+
+    handleSubmit();
   };
 
   render() {
