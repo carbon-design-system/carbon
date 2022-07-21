@@ -124,7 +124,7 @@ git push upstream v11.2.0
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
 - [ ] Review and approve the Pull Request generated from this action on the
       [Carbon Website](https://github.com/carbon-design-system/carbon-website)
-      to verify no breaking changes have occurred in this release. If the PR 
+      to verify no breaking changes have occurred in this release. If the PR
       from the previous release was not merged, the existing PR will be updated.
 
 **Friday**
