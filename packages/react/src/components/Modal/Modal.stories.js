@@ -9,6 +9,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
+import ModalWrapper from '../ModalWrapper';
 import Button from '../Button';
 import Select from '../Select';
 import MultiSelect from '../MultiSelect';
@@ -293,5 +294,18 @@ export const PassiveModal = () => {
       open
       passiveModal
       modalHeading="You have been successfully signed out"></Modal>
+  );
+};
+
+export const Wrapper = () => {
+  return (
+    <ModalWrapper
+      buttonTriggerText="Launch modal"
+      modalHeading="Modal heading"
+      modalLabel="Label"
+      handleSubmit={() => {}}
+      shouldCloseAfterSubmit>
+      <p>Modal content here</p>
+    </ModalWrapper>
   );
 };
