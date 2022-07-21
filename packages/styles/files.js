@@ -185,6 +185,7 @@ const files = [
   'scss/utilities/_convert.scss',
   'scss/utilities/_custom-property.scss',
   'scss/utilities/_focus-outline.scss',
+  'scss/utilities/_hide-at-breakpoint.scss',
   'scss/utilities/_high-contrast-mode.scss',
   'scss/utilities/_index.scss',
   'scss/utilities/_keyframes.scss',
