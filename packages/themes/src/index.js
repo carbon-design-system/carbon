@@ -10,6 +10,7 @@ import * as g10 from './g10';
 import * as g90 from './g90';
 import * as g100 from './g100';
 import * as v10 from './v10';
+import { unstable_metadata } from './tokens';
 
 const themes = {
   white,
@@ -19,4 +20,4 @@ const themes = {
 };
 
 export * from './white';
-export { white, g10, g90, g100, themes, v10 };
+export { white, g10, g90, g100, themes, v10, unstable_metadata };
