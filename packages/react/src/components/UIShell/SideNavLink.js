@@ -16,11 +16,11 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const SideNavLink = React.forwardRef(function SideNavLink(
   {
-    className: customClassName,
     children,
+    className: customClassName,
     renderIcon: IconElement,
     isActive,
-    large,
+    large = false,
     ...rest
   },
   ref
@@ -69,11 +69,6 @@ SideNavLink.propTypes = {
    * Provide an icon to render in the side navigation link. Should be a React class.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
-};
-
-SideNavLink.defaultProps = {
-  element: 'a',
-  large: false,
 };
 
 // eslint-disable-next-line react/display-name
