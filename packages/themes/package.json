@@ -1,7 +1,7 @@
 {
   "name": "@carbon/themes",
   "description": "Themes for applying color in the Carbon Design System",
-  "version": "11.5.0-rc.0",
+  "version": "11.5.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -30,8 +30,8 @@
   },
   "dependencies": {
     "@carbon/colors": "^11.3.0",
-    "@carbon/layout": "^11.4.0-rc.0",
-    "@carbon/type": "^11.5.0-rc.0",
+    "@carbon/layout": "^11.4.0",
+    "@carbon/type": "^11.5.0",
     "color": "^3.1.2"
   },
   "devDependencies": {
