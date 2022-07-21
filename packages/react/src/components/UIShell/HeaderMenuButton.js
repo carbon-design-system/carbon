@@ -65,6 +65,9 @@ HeaderMenuButton.propTypes = {
    */
   className: PropTypes.string,
 
+  /**
+   * Specify whether the menu button is "active".
+   */
   isActive: PropTypes.bool,
 
   /**

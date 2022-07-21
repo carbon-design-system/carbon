@@ -24,10 +24,11 @@ export default function InlineLoading({
   const prefix = usePrefix();
   const loadingClasses = classNames(`${prefix}--inline-loading`, className);
   const getLoading = () => {
+    let iconLabel = iconDescription ? iconDescription : status;
     if (status === 'error') {
       return (
         <ErrorFilled className={`${prefix}--inline-loading--error`}>
-          <title>{iconDescription}</title>
+          <title>{iconLabel}</title>
         </ErrorFilled>
       );
     }
@@ -40,15 +41,18 @@ export default function InlineLoading({
       return (
         <CheckmarkFilled
           className={`${prefix}--inline-loading__checkmark-container`}>
-          <title>{iconDescription}</title>
+          <title>{iconLabel}</title>
         </CheckmarkFilled>
       );
     }
     if (status === 'inactive' || status === 'active') {
+      if (!iconDescription) {
+        iconLabel = status === 'active' ? 'loading' : 'not loading';
+      }
       return (
         <Loading
           small
-          description={iconDescription}
+          description={iconLabel}
           withOverlay={false}
           active={status === 'active'}
         />

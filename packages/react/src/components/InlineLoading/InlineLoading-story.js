@@ -18,10 +18,7 @@ const props = () => ({
     ['inactive', 'active', 'finished', 'error'],
     'active'
   ),
-  iconDescription: text(
-    'Icon description (iconDescription)',
-    'Active loading indicator'
-  ),
+  iconDescription: text('Icon description (iconDescription)', 'loading'),
   description: text(
     'Loading progress description (description)',
     'Loading data...'

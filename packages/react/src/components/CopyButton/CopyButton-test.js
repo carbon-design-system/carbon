@@ -5,97 +5,119 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen, act, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import CopyButton from '../CopyButton';
-import { Copy } from '@carbon/icons-react';
-import { shallow, mount } from 'enzyme';
 
-const prefix = 'cds';
 jest.useFakeTimers();
 
 describe('CopyButton', () => {
-  describe('Renders common props as expected', () => {
-    const wrapper = shallow(
-      // eslint-disable-next-line jsx-a11y/tabindex-no-positive
-      <CopyButton tabIndex={2} className="extra-class" />
+  it('should set tabIndex if one is passed via props', () => {
+    render(
+      <CopyButton
+        //eslint-disable-next-line jsx-a11y/tabindex-no-positive
+        tabIndex={2}
+        iconDescription="icon description"
+        data-testid="copy-btn-1"
+      />
+    );
+    expect(screen.getByTestId('copy-btn-1')).toHaveAttribute('tabindex', '2');
+  });
+
+  it('should add extra classes passed via className', () => {
+    render(
+      <CopyButton
+        className="extra-class"
+        iconDescription="icon description"
+        data-testid="copy-btn-2"
+      />
     );
 
-    it('Should set tabIndex if one is passed via props', () => {
-      expect(wrapper.props().tabIndex).toEqual(2);
-    });
+    expect(screen.getByTestId('copy-btn-2')).toHaveClass('extra-class');
+  });
+});
 
-    it('Should add extra classes via className', () => {
-      expect(wrapper.hasClass('extra-class')).toBe(true);
+describe('Button props', () => {
+  it('should disable button if disabled prop is passed', () => {
+    render(
+      <CopyButton
+        disabled
+        iconDescription="icon description"
+        data-testid="copy-btn-3"
+      />
+    );
+
+    expect(screen.getByTestId('copy-btn-3')).toHaveAttribute('disabled');
+  });
+
+  it('should call the click handler', () => {
+    const onClick = jest.fn();
+
+    render(
+      <CopyButton
+        iconDescription="icon description"
+        data-testid="copy-btn-4"
+        onClick={onClick}
+      />
+    );
+    const button = screen.getByTestId('copy-btn-4');
+    userEvent.click(button);
+    expect(onClick).toHaveBeenCalled();
+  });
+});
+
+describe('Feedback', () => {
+  it('should make the feedback visible for a limited amount of time', () => {
+    render(
+      <CopyButton iconDescription="icon description" data-testid="copy-btn-5" />
+    );
+
+    const button = screen.getByTestId('copy-btn-5');
+    userEvent.click(button);
+
+    expect(button).toHaveClass('cds--copy-btn--animating');
+    act(() => {
+      jest.runAllTimers();
+      fireEvent.animationEnd(screen.getByTestId('copy-btn-5'), {
+        animationName: 'hide-feedback',
+      });
     });
   });
 
-  describe('Renders button props as expected', () => {
-    let wrapper;
+  it('should be able to specify the feedback message', () => {
+    render(
+      <CopyButton
+        iconDescription="icon description"
+        data-testid="copy-btn-6"
+        feedback="custom-feedback"
+      />
+    );
 
-    beforeEach(() => {
-      wrapper = mount(<CopyButton />);
-    });
-
-    it('Renders children as expected', () => {
-      expect(wrapper.find('button').hasClass(`${prefix}--copy-btn`)).toBe(true);
-      expect(wrapper.find(`.${prefix}--copy-btn__feedback`).length).toBe(1);
-      expect(wrapper.find(Copy).length).toBe(1);
-    });
-
-    it('Should be able to disable the button', () => {
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.props().disabled).toBe(true);
-      wrapper.setProps({ disabled: false });
-    });
-
-    it('Should have a default feedback timeout', () => {
-      const timeoutWrapper = mount(<CopyButton />);
-      expect(timeoutWrapper.props().feedbackTimeout).toBe(2000);
-    });
-
-    it('Should be able to set the timeout for displaying feedback', () => {
-      const timeoutWrapper = mount(<CopyButton feedbackTimeout={5000} />);
-      expect(timeoutWrapper.props().feedbackTimeout).toBe(5000);
-    });
-
-    it('Should be able to specify the feedback message', () => {
-      const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
-      expect(
-        feedbackWrapper.find(`.${prefix}--copy-btn__feedback`).text()
-      ).toBe('Copied!');
-    });
+    const button = screen.getByTestId('copy-btn-6');
+    userEvent.click(button);
+    // returns array of 2 for visible tooltip text and assistive text
+    expect(screen.getAllByText('custom-feedback').length).toBe(2);
   });
 
-  describe('Renders feedback as expected', () => {
-    it('Should make the feedback visible', () => {
-      const feedbackWrapper = mount(<CopyButton feedback="Copied!" />);
-      const feedback = feedbackWrapper.find(`.${prefix}--copy-btn__feedback`);
-      expect(feedback).toEqual({});
-      feedbackWrapper.simulate('click');
-      expect(feedback).toBeTruthy();
-    });
+  it('should allow users to override default feedback timeout via prop', () => {
+    render(
+      <CopyButton
+        iconDescription="icon description"
+        data-testid="copy-btn-7"
+        feedbackTimeout={5000}
+      />
+    );
 
-    it('Should show feedback for a limited amount of time', () => {
-      const feedbackWrapper = mount(
-        <CopyButton feedback="Copied!" feedbackTimeout={5000} />
-      );
-      feedbackWrapper.simulate('click');
-      const copyButton = feedbackWrapper.find('button');
-      expect(copyButton.hasClass(`${prefix}--copy-btn--animating`)).toBe(true);
-      setTimeout(() => {
-        expect(copyButton.hasClass(`${prefix}--copy-btn--animating`)).toBe(
-          false
-        );
-      }, 5220); // 5000 + 2 * 110 (transition duration)
-    });
-  });
+    const button = screen.getByTestId('copy-btn-7');
+    userEvent.click(button);
 
-  describe('Triggers appropriate events', () => {
-    it('should call the click handler', () => {
-      const onClick = jest.fn();
-      const clickWrapper = mount(<CopyButton onClick={onClick} />);
-      clickWrapper.simulate('click');
-      expect(onClick).toHaveBeenCalled();
+    expect(button).toHaveClass('cds--copy-btn--animating');
+    act(() => {
+      jest.runAllTimers();
+      fireEvent.animationEnd(screen.getByTestId('copy-btn-7'), {
+        animationName: 'hide-feedback',
+      });
     });
   });
 });
