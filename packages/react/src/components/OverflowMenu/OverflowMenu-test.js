@@ -63,7 +63,7 @@ describe('OverflowMenu', () => {
       );
 
       userEvent.click(screen.getByRole('button'));
-      screen.debug();
+
       expect(
         document.querySelector('.cds--overflow-menu--flip')
       ).toBeInTheDocument();
