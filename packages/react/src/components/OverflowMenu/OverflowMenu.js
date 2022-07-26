@@ -116,7 +116,7 @@ class OverflowMenu extends Component {
     /**
      * The menu direction.
      */
-    direction: PropTypes.oneOf([DIRECTION_TOP, DIRECTION_BOTTOM]),
+    direction: PropTypes.oneOf(['top', 'bottom']),
 
     /**
      * `true` if the menu alignment should be flipped.
@@ -443,6 +443,7 @@ class OverflowMenu extends Component {
         !hasFocusin
       );
       this.props.onOpen();
+      console.log('would this be CALLED');
     }
   };
 
