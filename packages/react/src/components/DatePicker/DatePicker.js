@@ -467,14 +467,12 @@ export default class DatePicker extends Component {
     }
   };
 
-  /**
-   * Flatpickr's calendar dialog is not rendered in a landmark causing an
-   * error with IBM Equal Access Accessibility Checker so we add an aria
-   * role to the container div.
-   */
+  // Flatpickr's calendar dialog is not rendered in a landmark causing an
+  // error with IBM Equal Access Accessibility Checker so we add an aria
+  // role to the container div.
   addRoleAttributeToDialog = () => {
     if (this.inputField) {
-      this.cal.calendarContainer.setAttribute('role', 'region');
+      this.cal.calendarContainer.setAttribute('role', 'application');
       // IBM EAAC requires an aria-label on a role='region'
       this.cal.calendarContainer.setAttribute(
         'aria-label',
