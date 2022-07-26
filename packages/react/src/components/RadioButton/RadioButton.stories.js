@@ -28,7 +28,7 @@ export default {
 export const Default = () => {
   return (
     <RadioButtonGroup
-      legendText="Radio button heading"
+      legendText="Group label"
       name="radio-button-group"
       defaultSelected="radio-1">
       <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
