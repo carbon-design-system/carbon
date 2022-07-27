@@ -4016,7 +4016,7 @@
   sizes:
     - 32
 - name: cloud--auditing
-  friendly_name: Cloud auditing
+  friendly_name: IBM Cloud® Activity Tracker
   aliases:
     - cloud
     - auditing
@@ -8867,7 +8867,7 @@
   sizes:
     - 32
 - name: ibm-cloud--kubernetes-service
-  friendly_name: IBM Cloud® Kubernetes Services
+  friendly_name: IBM Cloud® Kubernetes Service
   aliases:
     - services
     - cloud
