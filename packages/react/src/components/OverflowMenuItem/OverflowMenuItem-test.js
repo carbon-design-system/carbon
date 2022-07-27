@@ -97,6 +97,8 @@ describe('OverflowMenuItem - RTL', () => {
       expect(container.firstChild).toHaveClass(
         'cds--overflow-menu-options__option--disabled'
       );
+
+      expect(container.firstChild.firstChild).toHaveProperty('disabled', true);
     });
 
     it('should have divider', () => {
