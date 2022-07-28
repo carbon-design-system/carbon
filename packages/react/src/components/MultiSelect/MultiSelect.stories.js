@@ -17,10 +17,21 @@ export default {
     'MultiSelect.Filterable': MultiSelect.Filterable,
   },
   argTypes: {
+    invalid: {
+      control: 'boolean',
+    },
     size: {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    type: {
+      options: ['default', 'inline'],
+      control: { type: 'select' },
+    },
+    warn: {
+      control: 'boolean',
+    },
+    warnText: { control: 'text' },
   },
 };
 
