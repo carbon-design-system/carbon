@@ -1269,7 +1269,12 @@ Map {
         "type": "string",
       },
       "selectorsFloatingMenus": Object {
-        "type": "string",
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "type": "arrayOf",
       },
       "size": Object {
         "args": Array [
