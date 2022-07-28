@@ -115,7 +115,9 @@ const items = ['Option 1', 'Option 2', 'Option 3']
 
 The `Dropdown` takes in an `items` array and can then be formatted by
 `itemToElement` and `itemToString`. `itemToElement` allows you to wrap each
-dropdown item in a custom element.
+dropdown item in a custom element. The
+[`itemToString` prop](#dropdown-itemtostring) can be used with this to provide
+the text of the item in the input on selection.
 
 <Dropdown
   items={[
@@ -161,6 +163,26 @@ dropdown item in a custom element.
 If the `items` array is not an array of strings, you'll need to use
 `itemToString` to grab the text to be used as the `Dropdown` item text.
 
+<Dropdown
+  items={[
+    { id: 'option-0', text: 'Option 0' },
+    { id: 'option-1', text: 'Option 1' },
+    { id: 'option-2', text: 'Option 2' },
+  ]}
+  itemToString={(item) => (item ? item.text : '')}
+  itemToElement={(item) =>
+    item ? (
+      <span className="test" style={{ color: 'red' }}>
+        {item.text} 🔥
+      </span>
+    ) : (
+      ''
+    )
+  }
+  label="Select an option..."
+  id="item-to-element"
+/>
+
 ```jsx
 <Dropdown
   items={[
@@ -169,6 +191,17 @@ If the `items` array is not an array of strings, you'll need to use
     { id: 'option-2', text: 'Option 2' },
   ]}
   itemToString={(item) => (item ? item.text : '')}
+  itemToElement={(item) =>
+    item ? (
+      <span className="test" style={{ color: 'red' }}>
+        {item.text} 🔥
+      </span>
+    ) : (
+      ''
+    )
+  }
+  label="Select an option..."
+  id="item-to-element"
 />
 ```
 

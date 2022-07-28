@@ -6,42 +6,64 @@
  */
 
 const prefix = 'cds';
+import userEvent from '@testing-library/user-event';
 
 // Finding nodes in a ListBox
-export const findListBoxNode = (wrapper) =>
-  wrapper.find(`.${prefix}--list-box`);
-export const findMenuNode = (wrapper) =>
-  wrapper.find(`.${prefix}--list-box__menu`);
-export const findMenuItemNode = (wrapper, index) =>
-  wrapper.find('ListBoxMenuItem').at(index);
-export const findMenuIconNode = (wrapper) =>
-  wrapper.find(`.${prefix}--list-box__menu-icon`);
-export const findFieldNode = (wrapper) =>
-  wrapper.find(`.${prefix}--list-box__field`);
-export const findComboboxNode = (wrapper) =>
-  wrapper.find(`.${prefix}--list-box[role="combobox"]`);
-export const findPopupNode = (wrapper) =>
-  wrapper.find('[aria-haspopup="listbox"]').hostNodes();
+export const findListBoxNode = () => {
+  return document.querySelector('.cds--list-box');
+};
+
+export const findMenuNode = () => {
+  return document.querySelector(`.${prefix}--list-box__menu`);
+};
+
+export const findMenuItemNode = (index) => {
+  const nodes = document.querySelectorAll(`.${prefix}--list-box__menu-item`);
+  if (nodes[index]) {
+    return nodes[index];
+  }
+  throw new Error(`Unable to find node at index: ${index} in: ${nodes}`);
+};
+
+export const findMenuIconNode = () => {
+  return document.querySelector(`.${prefix}--list-box__menu-icon`);
+};
+
+export const findFieldNode = () => {
+  return document.querySelector(`.${prefix}--list-box__field`);
+};
+
+export const findComboboxNode = () => {
+  return document.querySelector(`.${prefix}--list-box[role="combobox"]`);
+};
+
+export const findPopupNode = () => {
+  return document.querySelector('[aria-haspopup="listbox"]');
+};
 
 // Actions
-export const openMenu = (wrapper) => findFieldNode(wrapper).simulate('click');
+export const openMenu = () => {
+  userEvent.click(findFieldNode());
+};
 
 // Common assertions, useful for validating a11y props are set when needed
-export const assertMenuOpen = (wrapper, mockProps) => {
-  expect(findMenuNode(wrapper).children().length).toBe(mockProps.items.length);
-  expect(findMenuIconNode(wrapper).prop('className')).toEqual(
-    expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
+export const assertMenuOpen = (mockProps) => {
+  expect(findMenuNode().childNodes.length).toBe(mockProps.items.length);
+
+  expect(findMenuIconNode()).toHaveClass(
+    `${prefix}--list-box__menu-icon--open`
   );
-  expect(findPopupNode(wrapper).prop('aria-expanded')).toBe(true);
+
+  expect(findPopupNode()).toHaveAttribute('aria-expanded', 'true');
 };
-export const assertMenuClosed = (wrapper) => {
-  expect(findMenuIconNode(wrapper).prop('className')).toEqual(
-    expect.stringContaining(`${prefix}--list-box__menu-icon`)
+
+export const assertMenuClosed = () => {
+  expect(findMenuIconNode()).toHaveClass(`${prefix}--list-box__menu-icon`);
+
+  expect(findMenuIconNode()).not.toHaveClass(
+    `${prefix}--list-box__menu-icon--open`
   );
-  expect(findMenuIconNode(wrapper).prop('className')).not.toEqual(
-    expect.stringContaining(`${prefix}--list-box__menu-icon--open`)
-  );
-  expect(findPopupNode(wrapper).prop('aria-expanded')).toBe(false);
+  expect(findPopupNode()).toHaveAttribute('aria-expanded', 'false');
 };
 
 /**

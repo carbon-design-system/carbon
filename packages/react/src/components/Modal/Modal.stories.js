@@ -9,13 +9,13 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
-import Button from '../../Button';
-import Select from '../../Select';
-import MultiSelect from '../../MultiSelect';
-import Dropdown from '../../Dropdown';
-import SelectItem from '../../SelectItem';
-import TextInput from '../../TextInput';
-import mdx from '../Modal.mdx';
+import Button from '../Button';
+import Select from '../Select';
+import MultiSelect from '../MultiSelect';
+import Dropdown from '../Dropdown';
+import SelectItem from '../SelectItem';
+import TextInput from '../TextInput';
+import mdx from './Modal.mdx';
 
 const buttons = {
   'None (0)': '0',
