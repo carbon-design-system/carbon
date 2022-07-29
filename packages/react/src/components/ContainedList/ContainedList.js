@@ -14,7 +14,7 @@ import { usePrefix } from '../../internal/usePrefix';
 const variants = ['variantone', 'varianttwo'];
 
 function ContainedList({ children, className, kind = variants[0], label }) {
-  const labelId = useId('progress-bar');
+  const labelId = useId('contained-list');
   const prefix = usePrefix();
 
   const classes = classNames(

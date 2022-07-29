@@ -7,28 +7,24 @@
 
 import React from 'react';
 
-import ContainedList from '../';
+import ContainedList, { ContainedListItem } from '../';
 
 export default {
   title: 'Experimental/unstable_ContainedList',
   component: ContainedList,
 };
 
-export const VariantOne = () => (
+const PlaygroundStory = (args) => (
   <>
-    <ContainedList kind="variantone" label="Heading" />
-    <ContainedList kind="variantone" label="Heading" />
+    {[...Array(20)].map((_, i) => (
+      <ContainedList key={i} {...args}>
+        {[...Array(3)].map((_, j) => (
+          <ContainedListItem key={`${i}-${j}`}>List item</ContainedListItem>
+        ))}
+      </ContainedList>
+    ))}
   </>
 );
-
-export const VariantTwo = () => (
-  <>
-    <ContainedList kind="varianttwo" label="Heading" />
-    <ContainedList kind="varianttwo" label="Heading" />
-  </>
-);
-
-const PlaygroundStory = (args) => <ContainedList {...args} />;
 
 export const Playground = PlaygroundStory.bind({});
 

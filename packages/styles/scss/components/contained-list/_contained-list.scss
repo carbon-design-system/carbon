@@ -16,6 +16,9 @@
 /// @group contained-list
 @mixin contained-list {
   .#{$prefix}--contained-list__header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
     display: flex;
     align-items: center;
     padding-inline: $spacing-05;
@@ -44,5 +47,25 @@
     height: $spacing-07;
     background-color: $layer;
     color: $text-secondary;
+  }
+
+  // List item
+
+  .#{$prefix}--contained-list-item {
+    @include type-style('body-01');
+
+    position: relative;
+    padding: calc(#{$spacing-05} - #{rem(2px)}) $spacing-05;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--contained-list-item:not(:last-of-type)::after {
+    position: absolute;
+    right: $spacing-05;
+    bottom: 0;
+    left: $spacing-05;
+    height: 1px;
+    background-color: $border-subtle;
+    content: '';
   }
 }
