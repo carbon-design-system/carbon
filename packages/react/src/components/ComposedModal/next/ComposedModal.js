@@ -329,7 +329,7 @@ ComposedModal.propTypes = {
   /**
    * Specify the CSS selectors that match the floating menus
    */
-  selectorsFloatingMenus: PropTypes.string,
+  selectorsFloatingMenus: PropTypes.arrayOf(PropTypes.string),
 
   /**
    * Specify the size variant.
