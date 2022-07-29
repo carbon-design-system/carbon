@@ -1,0 +1,48 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert' as *;
+
+/// Contained List styles
+/// @access public
+/// @group contained-list
+@mixin contained-list {
+  .#{$prefix}--contained-list__header {
+    display: flex;
+    align-items: center;
+    padding-inline: $spacing-05;
+  }
+
+  // Variant one
+
+  .#{$prefix}--contained-list--variantone
+    + .#{$prefix}--contained-list--variantone {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--contained-list--variantone .#{$prefix}--contained-list__header {
+    @include type-style('heading-compact-01');
+
+    height: $spacing-09;
+    border-bottom: 1px solid $border-subtle;
+    color: $text-primary;
+  }
+
+  // Variant two
+
+  .#{$prefix}--contained-list--varianttwo .#{$prefix}--contained-list__header {
+    @include type-style('label-01');
+
+    height: $spacing-07;
+    background-color: $layer;
+    color: $text-secondary;
+  }
+}
