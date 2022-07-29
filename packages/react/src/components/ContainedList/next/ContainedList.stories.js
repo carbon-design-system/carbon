@@ -16,9 +16,9 @@ export default {
 
 const PlaygroundStory = (args) => (
   <>
-    {[...Array(20)].map((_, i) => (
+    {[...Array(4)].map((_, i) => (
       <ContainedList key={i} {...args}>
-        {[...Array(3)].map((_, j) => (
+        {[...Array(8)].map((_, j) => (
           <ContainedListItem key={`${i}-${j}`}>List item</ContainedListItem>
         ))}
       </ContainedList>
