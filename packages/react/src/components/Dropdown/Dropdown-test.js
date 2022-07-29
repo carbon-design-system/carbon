@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { cleanup, render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
+import { render, screen, cleanup } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {
   assertMenuOpen,
   assertMenuClosed,
@@ -33,39 +33,38 @@ describe('Dropdown', () => {
     };
   });
 
-  it('should render', () => {
-    const wrapper = mount(<Dropdown {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
-  });
-
   it('should initially render with the menu not open', () => {
-    const wrapper = mount(<Dropdown {...mockProps} />);
-    assertMenuClosed(wrapper);
+    render(<Dropdown {...mockProps} />);
+    assertMenuClosed();
   });
 
   it('should let the user open the menu by clicking on the control', () => {
-    const wrapper = mount(<Dropdown {...mockProps} />);
-    openMenu(wrapper);
-    assertMenuOpen(wrapper, mockProps);
+    render(<Dropdown {...mockProps} />);
+    openMenu();
+    assertMenuOpen(mockProps);
   });
 
   it('should render with strings as items', () => {
-    const wrapper = mount(<Dropdown {...mockProps} items={['zar', 'doz']} />);
-    openMenu(wrapper);
-    expect(wrapper).toMatchSnapshot();
+    render(<Dropdown {...mockProps} items={['zar', 'doz']} />);
+    openMenu();
+
+    expect(screen.getByText('zar')).toBeInTheDocument();
+    expect(screen.getByText('doz')).toBeInTheDocument();
   });
 
   it('should render custom item components', () => {
-    const wrapper = mount(<Dropdown {...mockProps} />);
-    wrapper.setProps({
-      itemToElement: (item) => <div className="mock-item">{item.label}</div>,
+    const itemToElement = jest.fn((item) => {
+      return <div className="mock-item">{item.label}</div>;
     });
-    openMenu(wrapper);
-    expect(wrapper).toMatchSnapshot();
+
+    render(<Dropdown itemToElement={itemToElement} {...mockProps} />);
+    openMenu();
+
+    expect(itemToElement).toHaveBeenCalled();
   });
 
   it('should render selectedItem as an element', () => {
-    const wrapper = mount(
+    render(
       <Dropdown
         {...mockProps}
         selectedItem={{
@@ -81,47 +80,34 @@ describe('Dropdown', () => {
       />
     );
     // custom element should be rendered for the selected item
-    expect(wrapper.find('#a-custom-element-for-selected-item')).toHaveLength(1);
+    expect(
+      document.querySelector('#a-custom-element-for-selected-item')
+    ).toBeDefined();
     // the title should use the normal itemToString method
-    expect(wrapper.find('button').instance()).toHaveAttribute(
-      'title',
-      'Item 1'
-    );
+
+    expect(screen.getByText('Item 1')).toBeInTheDocument();
   });
 
   describe('title', () => {
-    let wrapper;
-    let renderedLabel;
-
-    beforeEach(() => {
-      wrapper = mount(<Dropdown titleText="Email Input" {...mockProps} />);
-      renderedLabel = wrapper.find('label[className="cds--label"]');
-    });
-
     it('renders a title', () => {
-      expect(renderedLabel.length).toBe(1);
+      render(<Dropdown titleText="Email Input" {...mockProps} />);
+      expect(screen.getByText('Email Input')).toBeInTheDocument();
     });
 
     it('has the expected classes', () => {
-      expect(renderedLabel.hasClass(`${prefix}--label`)).toEqual(true);
-    });
-
-    it('should set title as expected', () => {
-      expect(renderedLabel.text()).toEqual('Email Input');
+      render(<Dropdown titleText="Email Input" {...mockProps} />);
+      expect(screen.getByText('Email Input')).toHaveClass(`${prefix}--label`);
     });
   });
 
   describe('helper', () => {
     it('renders a helper', () => {
-      const wrapper = mount(
-        <Dropdown helperText="Email Input" {...mockProps} />
-      );
-      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
-      expect(renderedHelper.length).toEqual(1);
+      render(<Dropdown helperText="Email Input" {...mockProps} />);
+      expect(screen.getByText('Email Input')).toBeInTheDocument();
     });
 
     it('renders children as expected', () => {
-      const wrapper = mount(
+      render(
         <Dropdown
           helperText={
             <span>
@@ -131,43 +117,35 @@ describe('Dropdown', () => {
           {...mockProps}
         />
       );
-      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
-      expect(renderedHelper.props().children).toEqual(
-        <span>
-          This helper text has <a href="/">a link</a>.
-        </span>
-      );
-    });
 
-    it('should set helper text as expected', () => {
-      const wrapper = mount(<Dropdown {...mockProps} />);
-      wrapper.setProps({ helperText: 'Helper text' });
-      const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
-      expect(renderedHelper.text()).toEqual('Helper text');
+      expect(screen.getByRole('link')).toBeInTheDocument();
     });
   });
 
   it('should specify light version as expected', () => {
-    const wrapper = mount(<Dropdown {...mockProps} />);
-    expect(wrapper.props().light).toEqual(false);
-    wrapper.setProps({ light: true });
-    expect(wrapper.props().light).toEqual(true);
+    render(<Dropdown light={true} {...mockProps} />);
+
+    expect(document.querySelector('.cds--list-box')).toHaveClass(
+      'cds--dropdown--light'
+    );
   });
 
   it('should let the user select an option by clicking on the option node', () => {
-    const wrapper = mount(<Dropdown {...mockProps} />);
-    openMenu(wrapper);
-    wrapper.find('ListBoxMenuItem').at(0).simulate('click');
+    render(<Dropdown {...mockProps} />);
+    openMenu();
+
+    userEvent.click(screen.getByText('Item 0'));
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
     });
-    assertMenuClosed(wrapper);
+    assertMenuClosed();
 
     mockProps.onChange.mockClear();
 
-    openMenu(wrapper);
-    wrapper.find('ListBoxMenuItem').at(1).simulate('click');
+    openMenu();
+    userEvent.click(screen.getByText('Item 1'));
+
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
@@ -176,13 +154,11 @@ describe('Dropdown', () => {
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', () => {
-      const wrapper = mount(
+      render(
         <Dropdown {...mockProps} initialSelectedItem={mockProps.items[0]} />
       );
 
-      expect(wrapper.find(`span.${prefix}--list-box__label`).text()).toEqual(
-        mockProps.items[0].label
-      );
+      expect(screen.getByText(mockProps.items[0].label)).toBeInTheDocument();
     });
 
     it('using a string type for the `initialSelectedItem` prop', () => {
@@ -192,13 +168,11 @@ describe('Dropdown', () => {
         items: ['1', '2', '3'],
       };
 
-      const wrapper = mount(
+      render(
         <Dropdown {...mockProps} initialSelectedItem={mockProps.items[1]} />
       );
 
-      expect(wrapper.find(`span.${prefix}--list-box__label`).text()).toEqual(
-        mockProps.items[1]
-      );
+      expect(screen.getByText(mockProps.items[1])).toBeInTheDocument();
     });
   });
 
@@ -216,14 +190,9 @@ describe('Dropdown', () => {
 describe('DropdownSkeleton', () => {
   describe('Renders as expected', () => {
     it('Has the expected classes', () => {
-      const wrapper = mount(<DropdownSkeleton size="sm" />);
-      expect(wrapper.childAt(0).hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.childAt(0).hasClass(`${prefix}--dropdown-v2`)).toEqual(
-        true
-      );
-      expect(wrapper.childAt(0).hasClass(`${prefix}--list-box--sm`)).toEqual(
-        true
-      );
+      render(<DropdownSkeleton size="sm" />);
+
+      expect(document.querySelector(`${prefix}--skeleton`)).toBeDefined();
     });
   });
 });
