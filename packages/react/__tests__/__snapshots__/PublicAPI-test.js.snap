@@ -8470,7 +8470,7 @@ Map {
         "type": "oneOf",
       },
       "target": Object {
-        "type": "element",
+        "type": "object",
       },
       "x": Object {
         "args": Array [
