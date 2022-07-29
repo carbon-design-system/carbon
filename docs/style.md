@@ -499,45 +499,7 @@ the function as `handleOnClick`.
 
 #### Naming experimental code
 
-The team occasionally will author code, or accept contributions, that is
-considered experimental or unstable. The goal for this code is to ship it as
-unstable for sponsor groups to leverage. During this time, the team can get
-feedback around what is working and what does not work so that changes can be
-made before an official release.
-
-For experimental or unstable code, we use the `unstable_` prefix. For example:
-
-```js
-// An unstable method
-function unstable_layout() {
-  // ...
-}
-
-// An unstable variable
-const unstable_meta = {
-  // ...
-};
-
-// An unstable component will retain its name, specifically for things like
-// the rules of hooks plugin which depend on the correct casing of the name
-function Pagination(props) {
-  // ...
-}
-
-// However, when we export the component we will export it with the `unstable_`
-// prefix. (Similar to React.unstable_Suspense, React.unstable_Profiler)
-export { default as unstable_Pagination } from './components/Pagination';
-```
-
-For teams using these features, they will need to import the functionality by
-using the `unstable_` prefix. For example:
-
-```jsx
-import { unstable_Pagination as Pagination } from 'carbon-components-react';
-```
-
-This code should be treated as experimental and will break between release
-versions for the package that it is being imported from.
+See [Experimental Code](./experimental-code.md#naming-experimental-code);
 
 ### Testing
 
