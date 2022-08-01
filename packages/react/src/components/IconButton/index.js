@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '../Button';
+import { ButtonKinds } from '../../prop-types/types';
 import { Tooltip } from '../Tooltip/next';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
@@ -85,7 +86,7 @@ IconButton.propTypes = {
   /**
    * Specify the type of button to be used as the base for the IconButton
    */
-  kind: PropTypes.oneOf(['primary', 'secondary', 'ghost', 'tertiary']),
+  kind: PropTypes.oneOf(ButtonKinds),
 
   /**
    * Provide the label to be rendered inside of the Tooltip. The label will use
