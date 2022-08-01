@@ -84,7 +84,7 @@ export {
   NotificationActionButton,
   NotificationButton,
 } from './components/Notification';
-export NumberInput from './components/NumberInput';
+export { NumberInput, NumberInputSkeleton } from './components/NumberInput';
 export OrderedList from './components/OrderedList';
 export OverflowMenu from './components/OverflowMenu';
 export OverflowMenuItem from './components/OverflowMenuItem';
@@ -158,7 +158,6 @@ export CheckboxSkeleton from './components/Checkbox/Checkbox.Skeleton';
 export CodeSnippetSkeleton from './components/CodeSnippet/CodeSnippet.Skeleton';
 export DropdownSkeleton from './components/Dropdown/Dropdown.Skeleton';
 export FileUploaderSkeleton from './components/FileUploader/FileUploader.Skeleton';
-export NumberInputSkeleton from './components/NumberInput/NumberInput.Skeleton';
 export PaginationSkeleton from './components/Pagination/Pagination.Skeleton';
 export ProgressIndicatorSkeleton from './components/ProgressIndicator/ProgressIndicator.Skeleton';
 export RadioButtonSkeleton from './components/RadioButton/RadioButton.Skeleton';
