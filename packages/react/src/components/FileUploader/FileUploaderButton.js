@@ -30,6 +30,8 @@ function FileUploaderButton({
   name,
   size = 'md',
   tabIndex = 0,
+  // eslint-disable-next-line react/prop-types
+  innerRef,
   ...other
 }) {
   const prefix = usePrefix();
@@ -78,6 +80,7 @@ function FileUploaderButton({
     <>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
+        ref={innerRef}
         tabIndex={disabled ? -1 : tabIndex || 0}
         className={classes}
         onKeyDown={onKeyDown}

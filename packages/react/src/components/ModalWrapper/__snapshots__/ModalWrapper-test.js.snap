@@ -42,7 +42,7 @@ exports[`ModalWrapper should render 1`] = `
         Test Modal
       </button>
     </Button>
-    <Modal
+    <ForwardRef(Modal)
       aria-label="test modal"
       hasScrollingContent={false}
       id="modal"
@@ -200,7 +200,7 @@ exports[`ModalWrapper should render 1`] = `
           Focus sentinel
         </span>
       </div>
-    </Modal>
+    </ForwardRef(Modal)>
   </div>
 </ModalWrapper>
 `;

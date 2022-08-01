@@ -124,7 +124,8 @@ git push upstream v11.2.0
       [Release Workflow](https://github.com/carbon-design-system/carbon/actions/workflows/release.yml)
 - [ ] Review and approve the Pull Request generated from this action on the
       [Carbon Website](https://github.com/carbon-design-system/carbon-website)
-      to verify no breaking changes have occurred in this release
+      to verify no breaking changes have occurred in this release. If the PR
+      from the previous release was not merged, the existing PR will be updated.
 
 **Friday**
 
@@ -144,7 +145,8 @@ Friday of a sprint. To make the switch, you will need to:
 
 ### Post release
 
-- [ ] Update the [release radar wiki page](https://github.com/carbon-design-system/carbon/wiki/Release-radar)
+- [ ] Update the
+      [release radar wiki page](https://github.com/carbon-design-system/carbon/wiki/Release-radar)
 
 After a release has switched packages from `next` to `latest`, it is important
 to monitor channels on Slack and issues on GitHub in case breaking changes may

@@ -25,7 +25,9 @@ body:
     id: justification
     attributes:
       label: Justification
-      description: 'Provide the business reasons for this request.'
+      description: 'Provide the business reasons for this request. Provide screenshots of what you are unable to accomplish that this enhancement would make possible.'
+    validations:
+      required: true
   - type: textarea
     id: metrics
     attributes:
@@ -48,6 +50,13 @@ body:
       description:
         'Do you want this work within a specific time period? Is it related to
         an upcoming release?'
+  - type: input
+    id: team
+    attributes:
+      label: Your team
+      description: 'Please provide the requesting team you are apart of. @mention design and development members from your team that should be aware of this request.'
+    validations:
+      required: true
   - type: input
     id: resources
     attributes:
