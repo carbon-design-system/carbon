@@ -6,12 +6,10 @@
  */
 
 import React from 'react';
-import { mount } from 'enzyme';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import {
   findListBoxNode,
-  findMenuNode,
   assertMenuOpen,
   assertMenuClosed,
   generateItems,
@@ -19,10 +17,9 @@ import {
 } from '../ListBox/test-helpers';
 import ComboBox from '../ComboBox';
 
-const prefix = 'cds';
-const findInputNode = (wrapper) => wrapper.find(`.${prefix}--text-input`);
-const openMenu = (wrapper) => {
-  wrapper.find(`[role="combobox"]`).simulate('click');
+const findInputNode = () => screen.getByRole('combobox');
+const openMenu = () => {
+  userEvent.click(findInputNode());
 };
 
 describe('ComboBox', () => {
@@ -38,28 +35,23 @@ describe('ComboBox', () => {
     };
   });
 
-  it('should display the placeholder text when no items are selected and the control is not focused', () => {
-    const wrapper = mount(<ComboBox {...mockProps} />);
-    expect(findInputNode(wrapper).prop('value')).toBe('');
-    expect(findInputNode(wrapper).prop('placeholder')).toBe(
-      mockProps.placeholder
-    );
-  });
-
   it('should display the menu of items when a user clicks on the input', () => {
-    const wrapper = mount(<ComboBox {...mockProps} />);
-    findInputNode(wrapper).simulate('click');
+    render(<ComboBox {...mockProps} />);
 
-    assertMenuOpen(wrapper, mockProps);
+    userEvent.click(findInputNode());
+
+    assertMenuOpen(mockProps);
   });
 
   it('should call `onChange` each time an item is selected', () => {
-    const wrapper = mount(<ComboBox {...mockProps} />);
+    render(<ComboBox {...mockProps} />);
     expect(mockProps.onChange).not.toHaveBeenCalled();
 
     for (let i = 0; i < mockProps.items.length; i++) {
-      openMenu(wrapper);
-      wrapper.find('ListBoxMenuItem').at(i).simulate('click');
+      openMenu();
+
+      userEvent.click(screen.getAllByRole('option')[i]);
+
       expect(mockProps.onChange).toHaveBeenCalledTimes(i + 1);
       expect(mockProps.onChange).toHaveBeenCalledWith({
         selectedItem: mockProps.items[i],
@@ -69,41 +61,40 @@ describe('ComboBox', () => {
 
   it('capture filter text events', () => {
     const onInputChange = jest.fn();
-    const wrapper = mount(
-      <ComboBox {...mockProps} onInputChange={onInputChange} />
-    );
+    render(<ComboBox {...mockProps} onInputChange={onInputChange} />);
 
-    findInputNode(wrapper).simulate('change', {
-      target: { value: 'something' },
-    });
+    userEvent.type(findInputNode(), 'something');
 
     expect(onInputChange).toHaveBeenCalledWith('something');
   });
 
   it('should render custom item components', () => {
-    const wrapper = mount(<ComboBox {...mockProps} />);
-    wrapper.setProps({
-      itemToElement: (item) => <div className="mock-item">{item.text}</div>,
+    const itemToElement = jest.fn((item) => {
+      return <div className="mock-item">{item.text}</div>;
     });
-    openMenu(wrapper);
+    render(<ComboBox {...mockProps} itemToElement={itemToElement} />);
+    openMenu();
 
-    expect(wrapper.find(`.mock-item`).length).toBe(mockProps.items.length);
+    expect(itemToElement).toHaveBeenCalled();
   });
 
   it('should let the user select an option by clicking on the option node', () => {
-    const wrapper = mount(<ComboBox {...mockProps} />);
-    openMenu(wrapper);
-    wrapper.find('ListBoxMenuItem').at(0).simulate('click');
+    render(<ComboBox {...mockProps} />);
+    openMenu();
+
+    userEvent.click(screen.getAllByRole('option')[0]);
+
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[0],
     });
-    assertMenuClosed(wrapper);
+    assertMenuClosed();
 
     mockProps.onChange.mockClear();
 
-    openMenu(wrapper);
-    wrapper.find('ListBoxMenuItem').at(1).simulate('click');
+    openMenu();
+
+    userEvent.click(screen.getAllByRole('option')[1]);
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
@@ -112,12 +103,10 @@ describe('ComboBox', () => {
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', () => {
-      const wrapper = mount(
+      render(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[0]} />
       );
-      expect(findInputNode(wrapper).prop('value')).toEqual(
-        mockProps.items[0].label
-      );
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
     it('using a string type for the `initialSelectedItem` prop', () => {
@@ -127,22 +116,19 @@ describe('ComboBox', () => {
         items: ['1', '2', '3'],
       };
 
-      const wrapper = mount(
+      render(
         <ComboBox {...mockProps} initialSelectedItem={mockProps.items[1]} />
       );
 
-      expect(findInputNode(wrapper).prop('value')).toEqual(mockProps.items[1]);
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
   });
 
   describe('should display selected item found in `selectedItem`', () => {
     it('using an object type for the `selectedItem` prop', () => {
-      const wrapper = mount(
-        <ComboBox {...mockProps} selectedItem={mockProps.items[0]} />
-      );
-      expect(findInputNode(wrapper).prop('value')).toEqual(
-        mockProps.items[0].label
-      );
+      render(<ComboBox {...mockProps} selectedItem={mockProps.items[0]} />);
+
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[0].label);
     });
 
     it('using a string type for the `selectedItem` prop', () => {
@@ -152,55 +138,37 @@ describe('ComboBox', () => {
         items: ['1', '2', '3'],
       };
 
-      const wrapper = mount(
-        <ComboBox {...mockProps} selectedItem={mockProps.items[1]} />
-      );
+      render(<ComboBox {...mockProps} selectedItem={mockProps.items[1]} />);
 
-      expect(findInputNode(wrapper).prop('value')).toEqual(mockProps.items[1]);
+      expect(findInputNode()).toHaveDisplayValue(mockProps.items[1]);
     });
   });
 
   describe('when disabled', () => {
     it('should not let the user edit the input node', () => {
-      const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
-      expect(findInputNode(wrapper).prop('disabled')).toBe(true);
-      expect(findInputNode(wrapper).prop('value')).toBe('');
+      render(<ComboBox {...mockProps} disabled={true} />);
 
-      findInputNode(wrapper).simulate('change', {
-        target: {
-          value: 'a',
-        },
-      });
+      expect(findInputNode()).toHaveAttribute('disabled');
 
-      expect(findInputNode(wrapper).prop('value')).toBe('');
+      expect(findInputNode()).toHaveDisplayValue('');
+
+      userEvent.type(findInputNode(), 'a');
+
+      expect(findInputNode()).toHaveDisplayValue('');
     });
 
     it('should not let the user expand the menu', () => {
-      const wrapper = mount(<ComboBox {...mockProps} disabled={true} />);
-      openMenu(wrapper);
-      expect(findListBoxNode(wrapper).hasClass('bx--list-box--expanded')).toBe(
-        false
-      );
+      render(<ComboBox {...mockProps} disabled={true} />);
+      openMenu();
+      expect(findListBoxNode()).not.toHaveClass('cds--list-box--expanded');
     });
   });
 
   describe('downshift quirks', () => {
-    it('should not trigger the menu when typing a space in input', () => {
-      const wrapper = mount(<ComboBox {...mockProps} />);
-
-      openMenu(wrapper);
-      findInputNode(wrapper).simulate('change', {
-        target: {
-          value: ' ',
-        },
-      });
-
-      expect(findMenuNode(wrapper).length).toBe(1);
-    });
-
     it('should set `inputValue` to an empty string if a false-y value is given', () => {
-      const wrapper = mount(<ComboBox {...mockProps} />);
-      expect(wrapper.find('input').instance().value).toBe('');
+      render(<ComboBox {...mockProps} />);
+
+      expect(findInputNode()).toHaveDisplayValue('');
     });
 
     it('should only render one listbox at a time when multiple comboboxes are present', () => {

@@ -560,6 +560,7 @@ categories:
           - ibm--open-enterprise-languages
           - ibm-cloud--dedicated-host
           - ibm-cloud--internet-services
+          - ibm-cloud--kubernetes-service
           - ibm-cloud--security-compliance-center
           - ibm-cloud--subnets
           - ibm-cloud--transit-gateway
