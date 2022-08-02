@@ -254,6 +254,23 @@ export const _Filterable = () => {
   );
 };
 
+export const _FilterableTest = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <FilterableMultiSelect
+        id="carbon-multiselect-example-3"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+        disabled
+        type="inline"
+      />
+    </div>
+  );
+};
+
 export const WithLayer = () => {
   return (
     <div style={{ width: 300 }}>
