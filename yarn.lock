@@ -1888,7 +1888,7 @@ __metadata:
     "@babel/core": ^7.18.2
     "@carbon/cli-reporter": ^10.5.0
     "@octokit/plugin-retry": ^3.0.7
-    "@octokit/plugin-throttling": ^2.6.0
+    "@octokit/plugin-throttling": ^4.0.0
     "@octokit/rest": ^16.28.1
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
@@ -4610,24 +4610,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-throttling@npm:^2.6.0":
-  version: 2.7.1
-  resolution: "@octokit/plugin-throttling@npm:2.7.1"
-  dependencies:
-    bottleneck: ^2.15.3
-  checksum: d07a84e02e29e3a691ab404bbfa6313c7ba9a177fa8678d39c48d5fad8f6e1cb610ced765f897006d6c84e62f7bf977739f4d310bc56eefc526fb8023d0bd6f0
-  languageName: node
-  linkType: hard
-
-"@octokit/plugin-throttling@npm:^3.5.2":
-  version: 3.5.2
-  resolution: "@octokit/plugin-throttling@npm:3.5.2"
+"@octokit/plugin-throttling@npm:^4.0.0":
+  version: 4.1.0
+  resolution: "@octokit/plugin-throttling@npm:4.1.0"
   dependencies:
     "@octokit/types": ^6.0.1
     bottleneck: ^2.15.3
   peerDependencies:
-    "@octokit/core": ^3.5.0
-  checksum: 5b4339d12106b7a7250009d169234785136c3542473738f12649bfc958ac509d6f3f5729ab1c64dbc3829f8ebfdd76b57be0bc3928fb9efbf7d96037ca40518f
+    "@octokit/core": ^4.0.0
+  checksum: 2ac2f8373595c242d73fe55383429ee13069ab4223ddf63cf1fd62266e46ee45dad21307132ba4c2dc1463fee13591a3c89a6f8155596277bf0fe9570bcb2a68
   languageName: node
   linkType: hard
 
@@ -32591,7 +32582,7 @@ resolve@^2.0.0-next.3:
     "@carbon/react": ^1.8.0
     "@octokit/core": ^3.5.1
     "@octokit/plugin-retry": ^3.0.9
-    "@octokit/plugin-throttling": ^3.5.2
+    "@octokit/plugin-throttling": ^4.0.0
     "@octokit/rest": ^18.12.0
     clsx: ^1.1.1
     date-fns: ^2.25.0
