@@ -19,11 +19,11 @@ import {
 import ComposedModal, { ModalBody } from './ComposedModal';
 import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
-import Select from '../../Select';
-import SelectItem from '../../SelectItem';
-import TextInput from '../../TextInput';
-import Button from '../../Button';
-import mdx from '../ComposedModal.mdx';
+import Select from '../Select';
+import SelectItem from '../SelectItem';
+import TextInput from '../TextInput';
+import Button from '../Button';
+import mdx from './ComposedModal.mdx';
 
 const sizes = {
   'Extra small (xs)': 'xs',
