@@ -25,7 +25,7 @@ You can use this package by writing the following:
 
 .selector {
   // Include a type style
-  @include type.style('productive-heading-01');
+  @include type.type-style('productive-heading-01');
 }
 ```
 
