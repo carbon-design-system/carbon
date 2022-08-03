@@ -1,8 +1,8 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import Button from '../../Button';
+import Button from '../Button';
 import { ModalFooter } from './ModalFooter';
-import InlineLoading from '../../InlineLoading';
+import InlineLoading from '../InlineLoading';
 
 const prefix = 'cds';
 
