@@ -5,10 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { default as Dropdown, DropdownSkeleton } from './';
 import { Layer } from '../Layer';
 import mdx from './Dropdown.mdx';
+import Button from '../Button';
 
 export default {
   title: 'Components/Dropdown',
@@ -244,3 +245,55 @@ export const Skeleton = () => (
     <DropdownSkeleton />
   </div>
 );
+
+export const AddItems = () => {
+  const default_items = [
+    {
+      id: 'option-0',
+      text: 'Default item, has tooltip.',
+    },
+  ];
+
+  const [items, setItems] = useState(default_items);
+
+  const more_items = [
+    {
+      id: 'option-6',
+      text: "New item 1, doesn't have a tooltip.",
+    },
+  ];
+
+  const handleAddItems = () => setItems([...items, ...more_items]);
+
+  return (
+    <>
+      <h4>All menu items should have a title, even ones added dynamically</h4>
+      <br />
+      <br />
+      <Button onClick={handleAddItems}>
+        Click to add more items to the dropdown
+      </Button>
+      <br /> <br />
+      <div style={{ width: '200px', height: '100px' }}>
+        <Dropdown
+          ariaLabel="Dropdown"
+          id="carbon-dropdown-example"
+          items={items}
+          itemToString={(item) => item.text}
+          label="Dropdown menu options"
+          titleText="Dropdown title"
+        />
+      </div>
+      <h4>With full-width, menu items should not show any tooltips</h4>
+      <p>(current behavior)</p>
+      <Dropdown
+        ariaLabel="Dropdown"
+        id="carbon-dropdown-example"
+        items={items}
+        itemToString={(item) => item.text}
+        label="Dropdown menu options"
+        titleText="Dropdown title"
+      />
+    </>
+  );
+};
