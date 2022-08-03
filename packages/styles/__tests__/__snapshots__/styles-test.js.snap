@@ -793,6 +793,11 @@ Array [
     "relativePath": "scss/utilities/focus-outline",
   },
   Object {
+    "filepath": "scss/utilities/_hide-at-breakpoint.scss",
+    "importPath": "@carbon/styles/scss/utilities/hide-at-breakpoint",
+    "relativePath": "scss/utilities/hide-at-breakpoint",
+  },
+  Object {
     "filepath": "scss/utilities/_high-contrast-mode.scss",
     "importPath": "@carbon/styles/scss/utilities/high-contrast-mode",
     "relativePath": "scss/utilities/high-contrast-mode",
