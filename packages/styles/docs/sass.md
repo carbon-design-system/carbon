@@ -364,22 +364,62 @@ You can also change the component token definition for each theme via the theme
 mixin:
 
 ```scss
-@use '@carbon/styles/scss/themes';
-@use '@carbon/styles/scss/theme';
-@use '@carbon/styles/scss/components/button/tokens' as button;
-@use '@carbon/styles/scss/components/notification/tokens' as notification;
-@use '@carbon/styles/scss/components/tag/tokens' as tag;
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/theme';
+@use '@carbon/react/scss/components/button/tokens' as button-tokens;
+@use '@carbon/themes/scss/utilities';
+@use '@carbon/react';
 
-@include theme.add-component-tokens(button.$button-tokens);
-@include theme.add-component-tokens(notification.$notification-tokens);
-@include theme.add-component-tokens(tag.$tag-tokens);
+// Set new token values. Follow this format, each theme has a specification
+$button-token-overrides: (
+  button-primary: (
+    fallback: #3f51b5,
+    values: (
+      (
+        theme: themes.$white,
+        value: #3f51b5,
+      ),
+      (
+        theme: themes.$g10,
+        value: #3fb557,
+      ),
+      (
+        theme: themes.$g90,
+        value: #3f9ab5,
+      ),
+      (
+        theme: themes.$g100,
+        value: #ab3fb5,
+      ),
+    ),
+  ),
+);
 
-.white {
-  @include theme(themes.$white);
+// The new tokens must be merged into the existing tokens
+$button-tokens: utilities.merge(
+  button-tokens.$button-tokens,
+  $button-token-overrides
+);
+
+// Add the new component tokens which will be included any time the theme mixin is called
+@include theme.add-component-tokens($button-tokens);
+
+// Ensure that the theme() mixin is called to set the new token values
+// You can override the existing `.cds--{theme}` classes for each theme
+:root {
+  @include theme.theme();
 }
 
-.g10 {
-  @include theme(themes.$g10);
+.cds--g10 {
+  @include theme.theme(themes.$g10);
+}
+
+.cds--g90 {
+  @include theme.theme(themes.$g90);
+}
+
+.cds--g100 {
+  @include theme.theme(themes.$g100);
 }
 ```
 
