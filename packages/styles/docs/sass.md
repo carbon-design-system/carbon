@@ -329,14 +329,24 @@ can import, check out the files table below.
 **Component tokens**
 
 In some situations, you may want to change the tokens for a specific component.
-To do so you will need to configure the module and provide the tokens you would
+To do so you will need to configure the modules and provide the tokens you would
 like to see changed. For example, if you wanted to change the component token
-`button-separator` for `button` you would do the following:
+`button-primary` for `button` you would do the following:
 
 ```scss
-@use '@carbon/styles/scss/components/button' with (
-  $button-separator: #e4e4e4
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/components/button/tokens' with (
+  $button-primary: (
+    fallback: #3f51b5,
+    values: (
+      (theme: themes.$white, value: #3f51b5),
+      (theme: themes.$g10, value: #3f51b5),
+      (theme: themes.$g90, value: #3f51b5),
+      (theme: themes.$g100, value: #3f51b5),
+    ),
+  )
 );
+@use '@carbon/react/scss/components/button';
 ```
 
 If you'd like to use these component tokens in your stylesheet, you'll need to
@@ -350,14 +360,15 @@ If you'd like to use these component tokens in your stylesheet, you'll need to
 }
 ```
 
-You can also include these when configuring themes using the theme mixin:
+You can also change the component token definition for each theme via the theme
+mixin:
 
 ```scss
-@use '@carbon/react/scss/themes';
-@use '@carbon/react/scss/theme';
-@use '@carbon/react/scss/components/button/tokens' as button;
-@use '@carbon/react/scss/components/notification/tokens' as notification;
-@use '@carbon/react/scss/components/tag/tokens' as tag;
+@use '@carbon/styles/scss/themes';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/components/button/tokens' as button;
+@use '@carbon/styles/scss/components/notification/tokens' as notification;
+@use '@carbon/styles/scss/components/tag/tokens' as tag;
 
 @include theme.add-component-tokens(button.$button-tokens);
 @include theme.add-component-tokens(notification.$notification-tokens);
