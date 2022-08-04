@@ -37,6 +37,11 @@ The `@carbon/styles` package provides the Sass files needed to include every
 style for the Carbon Design System. It includes entrypoints for themes, tokens,
 CSS helpers, components, and more.
 
+**Note: You may not need this package! If you're using `@carbon/react` you do
+not need to install `@carbon/styles`. Module paths in `@carbon/styles` and
+`@carbon/react` are synonymous - `@carbon/react` re-exports everything from
+`@carbon/styles`.**
+
 ### Files
 
 The following is a table of all files that are available to use. While there may
@@ -322,9 +327,14 @@ For more information, check out our [type](#todo) docs.
 ## Components
 
 All of the styles for the components in the Carbon Design System live in the
-`scss/components` directory. You can include all of the styles for a component
-by including its entrypoint file. For a full list of component styles that you
-can import, check out the files table below.
+`scss/components` directory.
+
+**Reminder: Module paths in `@carbon/styles` and `@carbon/react` are
+synonymous - `@carbon/react` re-exports everything from `@carbon/styles`.**
+
+You can include all of the styles for a component by including its entrypoint
+file. For a full list of component styles that you can import, check out the
+files table below.
 
 **Component tokens**
 
