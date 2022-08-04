@@ -10,7 +10,6 @@ import { action } from '@storybook/addon-actions';
 import { Add } from '@carbon/icons-react';
 import { default as Button, ButtonSkeleton } from '../Button';
 import ButtonSet from '../ButtonSet';
-import { Theme } from '../Theme';
 import mdx from './Button.mdx';
 
 export default {
@@ -76,25 +75,6 @@ export const Tertiary = (args) => {
     <Button kind="tertiary" {...args}>
       Button
     </Button>
-  );
-};
-
-export const ThemeTest = () => {
-  return (
-    <Theme theme="g100">
-      <Button kind="primary" disabled>
-        Hello world
-      </Button>
-      <Button kind="secondary" disabled>
-        Hello world
-      </Button>
-      <Button kind="tertiary" disabled>
-        Hello world
-      </Button>
-      <Button kind="ghost" disabled>
-        Hello world
-      </Button>
-    </Theme>
   );
 };
 
