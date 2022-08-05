@@ -15,7 +15,7 @@ import {
   object,
 } from '@storybook/addon-knobs';
 import { NumberInput } from './';
-import NumberInputSkeleton from '../../NumberInput/NumberInput.Skeleton';
+import NumberInputSkeleton from './NumberInput.Skeleton';
 
 const props = () => ({
   className: 'some-class',
