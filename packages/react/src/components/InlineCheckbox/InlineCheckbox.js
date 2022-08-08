@@ -46,7 +46,6 @@ const InlineCheckbox = React.forwardRef(function InlineCheckbox(
 
   if (indeterminate) {
     inputProps.checked = false;
-    inputProps['aria-checked'] = 'mixed';
   }
 
   useEffect(() => {
