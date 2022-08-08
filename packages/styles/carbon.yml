@@ -2,7 +2,7 @@
 library:
   id: carbon-styles
   name: Carbon Styles
-  description: Common component Sass styles
+  description: Build user interfaces with Carbon's core components.
   noIndex: true
   externalDocsUrl: https://www.carbondesignsystem.com/
 assets:
@@ -21,7 +21,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/accessibility.mdx
   breadcrumb:
     name: Breadcrumb
@@ -38,7 +37,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/breadcrumb/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/breadcrumb/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/breadcrumb/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/breadcrumb/accessibility.mdx
   button:
     name: Button
@@ -54,7 +52,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/button/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/button/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/button/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/button/accessibility.mdx
   checkbox:
     name: Checkbox
@@ -70,7 +67,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/accessibility.mdx
   code-snippet:
     name: Code snippet
@@ -86,7 +82,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/accessibility.mdx
   content-switcher:
     name: Content switcher
@@ -103,7 +98,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/accessibility.mdx
   data-table:
     name: Data table
@@ -119,7 +113,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/data-table/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/data-table/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/data-table/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/data-table/accessibility.mdx
   date-picker:
     name: Date picker
@@ -135,7 +128,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/accessibility.mdx
   dropdown:
     name: Dropdown
@@ -151,7 +143,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/accessibility.mdx
   file-uploader:
     name: File uploader
@@ -167,7 +158,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/accessibility.mdx
   form:
     name: Form
@@ -183,7 +173,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/accessibility.mdx
   inline-loading:
     name: Inline loading
@@ -199,7 +188,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/accessibility.mdx
   link:
     name: Link
@@ -216,7 +204,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/accessibility.mdx
   list:
     name: List
@@ -233,7 +220,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/accessibility.mdx
   loading:
     name: Loading
@@ -249,7 +235,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/loading/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/loading/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/loading/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/loading/accessibility.mdx
   modal:
     name: Modal
@@ -265,7 +250,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/accessibility.mdx
   multiselect:
     name: Multiselect
@@ -292,7 +276,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/notification/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/notification/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/notification/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/notification/accessibility.mdx
   number-input:
     name: Number input
@@ -308,7 +291,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/accessibility.mdx
   pagination:
     name: Pagination
@@ -325,7 +307,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/accessibility.mdx
   progress-indicator:
     name: Progress indicator
@@ -341,7 +322,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/accessibility.mdx
   overflow-menu:
     name: Overflow menu
@@ -357,7 +337,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/accessibility.mdx
   radio-button:
     name: Radio button
@@ -373,7 +352,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/accessibility.mdx
   search:
     name: Search
@@ -389,7 +367,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/accessibility.mdx
   select:
     name: Select
@@ -405,7 +382,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/accessibility.mdx
   slider:
     name: Slider
@@ -421,7 +397,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/accessibility.mdx
   structured-list:
     name: Structured list
@@ -437,7 +412,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/accessibility.mdx
   tabs:
     name: Tabs
@@ -453,7 +427,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/accessibility.mdx
   tag:
     name: Tag
@@ -471,7 +444,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/accessibility.mdx
   text-input:
     name: Text input
@@ -487,7 +459,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/accessibility.mdx
   tile:
     name: Tile
@@ -503,7 +474,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/accessibility.mdx
   toggle:
     name: Toggle
@@ -519,7 +489,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/accessibility.mdx
   toggletip:
     name: Toggletip
@@ -535,7 +504,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/code.mdx
   tooltip:
     name: Tooltip
     description: Tooltips display additional information upon hover or focus. The information included should be contextual, helpful, and nonessential while providing that extra ability to communicate and give clarity to a user.
@@ -550,7 +518,6 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/code.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/accessibility.mdx
   ui-shell-header:
     name: UI shell header
@@ -724,4 +691,3 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/code.mdx
