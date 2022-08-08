@@ -57,6 +57,17 @@ $helper-text-01: (
 
 /// @type Map
 /// @access public
+/// @deprecated
+/// @group @carbon/type
+$helper-text-02: (
+  font-size: carbon--type-scale(2),
+  font-weight: carbon--font-weight('regular'),
+  line-height: 1.28572,
+  letter-spacing: 0.16px,
+) !default;
+
+/// @type Map
+/// @access public
 /// @group @carbon/type
 $body-short-01: (
   font-size: scale.type-scale(2),
@@ -618,6 +629,7 @@ $fluid-display-04: $display-04 !default;
 $tokens: (
   label-01: $label-01,
   helper-text-01: $helper-text-01,
+  helper-text-02: $helper-text-02,
   body-short-01: $body-short-01,
   body-short-02: $body-short-02,
   body-long-01: $body-long-01,
