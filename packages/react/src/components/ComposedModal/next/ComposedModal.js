@@ -200,7 +200,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
   useEffect(() => {
     return () =>
       toggleClass(document.body, `${prefix}--body--with-modal-open`, false);
-  });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     toggleClass(document.body, `${prefix}--body--with-modal-open`, open);

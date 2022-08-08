@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import {
@@ -334,5 +334,50 @@ export const WithStateManager = () => {
         </ComposedModal>
       )}
     </ModalStateManager>
+  );
+};
+
+export const Testing = () => {
+  const [open, setOpen] = useState(false);
+  const [testValue, setTestValue] = useState(null);
+
+  // This is an abstracted version of our issue we're having with the Composed modal in v11
+  // We have some logic inside of a useEffect like below, and we noticed that the class added to the body (cds--body--with-modal-open) does not get applied on the first opening of the modal. However, it does get applied on subsequent openings of the modal. Because of this, we've noticed some stacking/layering issues because of the missing class.
+  useEffect(() => {
+    if (open) {
+      setTestValue('abc');
+    }
+  }, [open]);
+
+  return (
+    <div>
+      <Button onClick={() => setOpen((prev) => !prev)}>Open modal</Button>
+      <ComposedModal open={open} onClose={() => setOpen(false)}>
+        <ModalHeader label="Account resources" title="Add a custom domain" />
+        <ModalBody>
+          <p style={{ marginBottom: '1rem' }}>
+            Custom domains direct requests for your apps in this Cloud Foundry
+            organization to a URL that you own. A custom domain can be a shared
+            domain, a shared subdomain, or a shared domain and host.
+          </p>
+          <TextInput
+            data-modal-primary-focus
+            id="text-input-1"
+            labelText="Domain name"
+            placeholder="e.g. github.com"
+            style={{ marginBottom: '1rem' }}
+          />
+          <Select id="select-1" defaultValue="us-south" labelText="Region">
+            <SelectItem value="us-south" text="US South" />
+            <SelectItem value="us-east" text="US East" />
+          </Select>
+        </ModalBody>
+        <ModalFooter
+          primaryButtonText="Add"
+          secondaryButtonText="Cancel"
+          onRequestClose={() => setOpen(false)}
+        />
+      </ComposedModal>
+    </div>
   );
 };
