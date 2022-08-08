@@ -1896,7 +1896,7 @@ __metadata:
     chalk: ^4.1.1
     change-case: ^4.1.2
     child-process-promise: ^2.2.1
-    clipboardy: ^2.1.0
+    clipboardy: ^3.0.0
     enquirer: ^2.3.6
     fast-glob: ^3.2.7
     fs-extra: ^10.0.0
@@ -8977,7 +8977,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"arch@npm:^2.1.1":
+"arch@npm:^2.2.0":
   version: 2.2.0
   resolution: "arch@npm:2.2.0"
   checksum: e21b7635029fe8e9cdd5a026f9a6c659103e63fff423834323cdf836a1bb240a72d0c39ca8c470f84643385cf581bd8eda2cad8bf493e27e54bd9783abe9101f
@@ -11158,13 +11158,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clipboardy@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "clipboardy@npm:2.1.0"
+"clipboardy@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "clipboardy@npm:3.0.0"
   dependencies:
-    arch: ^2.1.1
-    execa: ^1.0.0
-  checksum: 57b0478dabd77cc39cc57bdae66f93fe388304c7b519fa38fbc8eda0874b411aec8ca979028727c95f974581a8b39566fc635f22b8f829e6d2ea2fe09b295df5
+    arch: ^2.2.0
+    execa: ^5.1.1
+    is-wsl: ^2.2.0
+  checksum: 2c292acb59705494cbe07d7df7c8becff4f01651514d32ebd80f4aec2d20946d8f3824aac67ecdf2d09ef21fdf0eb24b6a7f033c137ccdceedc4661c54455c94
   languageName: node
   linkType: hard
 
