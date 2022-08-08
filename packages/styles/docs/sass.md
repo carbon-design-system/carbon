@@ -350,12 +350,14 @@ like to see changed. For example, if you wanted to change the component token
     fallback: #3f51b5,
     values: (
       (theme: themes.$white, value: #3f51b5),
-      (theme: themes.$g10, value: #3f51b5),
-      (theme: themes.$g90, value: #3f51b5),
-      (theme: themes.$g100, value: #3f51b5),
+      (theme: themes.$g10, value: #d55bff),
+      (theme: themes.$g90, value: #d0b2ff),
+      (theme: themes.$g100, value: #cfd2ff),
     ),
   )
 );
+
+@use '@carbon/react/scss/reset';
 @use '@carbon/react/scss/components/button';
 ```
 
