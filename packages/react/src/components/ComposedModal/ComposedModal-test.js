@@ -15,7 +15,7 @@ import { ModalHeader } from './ModalHeader';
 import { ModalFooter } from './ModalFooter';
 import { TextInput } from '../../';
 
-describe('ComposedModal - RTL', () => {
+describe('ComposedModal', () => {
   describe('it renders as expected', () => {
     it('supports a custom class on the outermost div', () => {
       render(<ComposedModal className="custom-class" />);
@@ -56,10 +56,7 @@ describe('ComposedModal - RTL', () => {
           <label id="label-modal-id">Label for modal</label>
           <ComposedModal aria-labelledby="label-modal-id">
             <ModalHeader>Modal header</ModalHeader>
-            <ModalBody>
-              This is the modal body content
-              <input type="checkbox" aria-labelledby="label-modal-id" />
-            </ModalBody>
+            <ModalBody>This is the modal body content</ModalBody>
             <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
           </ComposedModal>
         </div>
@@ -98,7 +95,6 @@ describe('ComposedModal - RTL', () => {
         </ComposedModal>
       );
 
-      screen.debug();
       userEvent.click(screen.getByTitle('Close'));
 
       expect(onClose).toHaveBeenCalled();
@@ -114,7 +110,6 @@ describe('ComposedModal - RTL', () => {
       );
 
       userEvent.click(screen.getByTitle('Close'));
-      screen.debug();
 
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
@@ -151,7 +146,6 @@ describe('ComposedModal - RTL', () => {
 
       userEvent.click(screen.getByText('Click me'));
 
-      screen.debug();
       expect(screen.getByRole('presentation', { hidden: true })).toHaveClass(
         'is-visible'
       );
@@ -204,8 +198,6 @@ describe('ComposedModal - RTL', () => {
           <ModalBody>This is the modal body content</ModalBody>
         </ComposedModal>
       );
-
-      screen.debug();
 
       expect(screen.getByRole('dialog', { hidden: true })).toHaveClass(
         'cds--modal-container--lg'
