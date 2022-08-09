@@ -9,7 +9,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { Close } from '@carbon/icons-react';
-import { usePrefix } from '../../../internal/usePrefix';
+import { usePrefix } from '../../internal/usePrefix';
 
 export const ModalHeader = React.forwardRef(function ModalHeader(
   {
