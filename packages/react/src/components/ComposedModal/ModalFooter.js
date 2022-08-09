@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../../Button';
-import ButtonSet from '../../ButtonSet';
+import Button from '../Button';
+import ButtonSet from '../ButtonSet';
 import cx from 'classnames';
-import { usePrefix } from '../../../internal/usePrefix';
+import { usePrefix } from '../../internal/usePrefix';
 
 function SecondaryButtonSet({
   secondaryButtons,
