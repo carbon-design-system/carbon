@@ -41,7 +41,6 @@ describe('ModalFooter', () => {
       />
     );
 
-    screen.debug();
     expect(screen.getByText('Submit')).toHaveProperty('disabled', true);
   });
 
