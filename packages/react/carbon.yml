@@ -179,6 +179,20 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
     tags:
       - shell
+  fluid-form:
+    name: Fluid form
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/fluid-form.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-fluidform
+    tags:
+      - form
   form:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
@@ -202,6 +216,29 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
     tags:
       - form
+  grid:
+    status: stable
+    type: component
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/elements-grid
+  heading:
+    name: Unstable heading
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/heading.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-heading
+    tags:
+      - content-element
   icon-button:
     name: Icon button
     framework: react
@@ -258,6 +295,20 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-loading
+  menu:
+    name: Unstable menu
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/menu.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu
+    tags:
+      - system-feedback
   modal:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
@@ -334,6 +385,21 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-paginationnav
+  pagination-v2:
+    name: Unstable pagination
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/pagination-v2.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-pagination
+    tags:
+      - data-display
+      - contextual-navigation
   popover:
     status: stable
     framework: react
@@ -411,6 +477,20 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-slider
+  stack:
+    name: Stack
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/stack.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
+    tags:
+      - content-block
   structured-list:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage
@@ -438,6 +518,20 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tag
+  text:
+    name: Unstable text
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/text.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
+    tags:
+      - input-control
   text-area:
     status: stable
     framework: react
@@ -517,6 +611,14 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-definitiontooltip
+  tree-view:
+    status: experimental
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
   ui-shell-header:
     framework: react
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
@@ -526,6 +628,30 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
+    docs:
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/code.mdx
+  ui-shell-left-panel:
+    framework: react
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-left-panel/usage
+    status: stable
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
+    docs:
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/code.mdx
+  ui-shell-right-panel:
+    framework: react
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
+    status: stable
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
+    docs:
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/code.mdx
   unordered-list:
     name: Unordered list
     framework: react
@@ -540,108 +666,14 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
     tags:
       - data-display
-  grid:
-    status: stable
-    type: component
-    framework: react
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/elements-grid
-  fluid-form:
-    name: Fluid form
+  use-context-menu:
+    name: unstable_useContextMenu
     framework: react
     status: experimental
-    type: component
+    type: function
     platform: web
-    thumbnailPath: ./thumbnails/fluid-form.svg
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-fluidform
     tags:
-      - form
-  unstable-heading:
-    name: Unstable heading
-    framework: react
-    status: experimental
-    type: component
-    platform: web
-    thumbnailPath: ./thumbnails/unstable-heading.svg
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-heading
-    tags:
-      - content-element
-  unstable-menu:
-    name: Unstable menu
-    framework: react
-    status: experimental
-    type: component
-    platform: web
-    thumbnailPath: ./thumbnails/unstable-menu.svg
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu
-    tags:
-      - system-feedback
-  unstable-pagination:
-    name: Unstable pagination
-    framework: react
-    status: experimental
-    type: component
-    platform: web
-    thumbnailPath: ./thumbnails/unstable-pagination.svg
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-pagination
-    tags:
-      - data-display
-      - contextual-navigation
-  unstable-text:
-    name: Unstable text
-    framework: react
-    status: experimental
-    type: component
-    platform: web
-    thumbnailPath: ./thumbnails/unstable-text.svg
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
-    tags:
-      - input-control
-  tree-view:
-    status: experimental
-    framework: react
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
-  stack:
-    name: Stack
-    framework: react
-    status: stable
-    type: component
-    platform: web
-    thumbnailPath: ./thumbnails/stack.svg
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
-    tags:
-      - content-block
+      - hook
   use-feature-flag:
     name: unstable_useFeatureFlag
     framework: react
@@ -652,14 +684,6 @@ assets:
       - hook
   use-feature-flags:
     name: unstable_useFeatureFlags
-    framework: react
-    status: experimental
-    type: function
-    platform: web
-    tags:
-      - hook
-  use-context-menu:
-    name: unstable_useContextMenu
     framework: react
     status: experimental
     type: function

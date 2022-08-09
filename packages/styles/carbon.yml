@@ -2,7 +2,7 @@
 library:
   id: carbon-styles
   name: Carbon Styles
-  description: Build user interfaces with Carbon's core components.
+  description: Build user interfaces with Carbon's framework-agnostic asset documentation and styles.
   noIndex: true
   externalDocsUrl: https://www.carbondesignsystem.com/
 assets:
@@ -22,6 +22,16 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/accessibility.mdx
+  aspect-ratio:
+    name: Aspect ratio
+    description: The AspectRatio component supports rendering your content in a specific aspect ratio through the ratio prop. This prop will specify the proportion between the width and the height of your content. The width will be determined by spanning 100% of the space available in your layout, and the height will be determined by the ratio that you specified.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/aspect-ratio.svg
+    tags:
+      - content-element
   breadcrumb:
     name: Breadcrumb
     description: The breadcrumb is a secondary navigation pattern that helps a user understand the hierarchy among levels and navigate back through them.
@@ -83,6 +93,16 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/accessibility.mdx
+  combo-box:
+    name: Combo box
+    description: A combobox allows the user to make a selection from a predefined list of options and is typically used when there are a large amount of options to choose from.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/combo-box.svg
+    tags:
+      - input-control
   content-switcher:
     name: Content switcher
     description: Content switchers allow users to toggle between two or more content sections within the same space on screen.
@@ -99,6 +119,16 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/accessibility.mdx
+  copy-button:
+    name: Copy button
+    description: The copy button should be accompanied by a tooltip. Tooltip feedback text should be concise and describe the action taken when the user clicks the copy button. By default we display the text “Copied!”.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/copy-button.svg
+    tags:
+      - input-control
   data-table:
     name: Data table
     description: Data tables are used to organize and display data efficiently. The data table component allows for customization with additional functionality, as needed by your product’s users.
@@ -174,6 +204,16 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/accessibility.mdx
+  grid:
+    name: Grid
+    description: Carbon's grid components help developers use the 2x Grid. The project provides Grid and Column components which can be used to build a variety of layouts. You can import these components from @carbon/react
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/grid.svg
+    tags:
+      - content-block
   inline-loading:
     name: Inline loading
     description: The inline loading component provides visual feedback that data is being processed.
@@ -292,6 +332,21 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/accessibility.mdx
+  overflow-menu:
+    name: Overflow menu
+    description: Use the overflow menu component when additional options are available to the user but there is a space constraint.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/overflow-menu.svg
+    tags:
+      - input-control
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/accessibility.mdx
   pagination:
     name: Pagination
     description: Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
@@ -308,6 +363,44 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/accessibility.mdx
+  pagination-nav:
+    name: Pagination nav
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/pagination-nav.svg
+    tags:
+      - data-display
+      - contextual-navigation
+  popover:
+    name: Popover
+    description: Popover is a primitive component used to build custom components which render over other elements on the page. For example, Popover is used to build our popover components in Carbon.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/popover.svg
+    tags:
+      - content-block
+      - data-display
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/style.mdx
+  progress-bar:
+    name: Progress bar
+    description: A progress bar provides feedback about the duration and progression of a process, such as a download, file transfer, or installation, to indicate how long a user will be waiting.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/progress-bar.svg
+    tags:
+      - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/style.mdx
   progress-indicator:
     name: Progress indicator
     description: A progress indicator is a visual representation of a user’s progress through a set of steps, guiding toward the completion of a specified process.
@@ -323,21 +416,6 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/accessibility.mdx
-  overflow-menu:
-    name: Overflow menu
-    description: Use the overflow menu component when additional options are available to the user but there is a space constraint.
-    externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/overflow-menu.svg
-    tags:
-      - input-control
-    docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/accessibility.mdx
   radio-button:
     name: Radio button
     description: Use radio buttons when you have a group of mutually exclusive choices and only one selection from the group is allowed.
@@ -445,6 +523,15 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/accessibility.mdx
+  text-area:
+    name: Text area
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/text-area.svg
+    tags:
+      - input-control
   text-input:
     name: Text input
     description: Text inputs enable the user to interact with and input content and data. This component can be used for long and short form entries.
@@ -460,6 +547,16 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/accessibility.mdx
+  theme:
+    name: Theme
+    description: The GlobalTheme and Theme components allow you to specify the theme for a page, or for a part of a page, respectively. Theme is most often used to implement inline theming where you can style a portion of your page with a particular theme.
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/theme.svg
+    tags:
+      - data-display
   tile:
     name: Tile
     description: Tiles are a highly flexible component for displaying a wide variety of content, including information, getting started, how-to, next steps, and more.
@@ -475,6 +572,15 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/accessibility.mdx
+  time-picker:
+    name: Time picker
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/time-picker.svg
+    tags:
+     - input-control
   toggle:
     name: Toggle
     description: A toggle is used to quickly switch between two possible states. They are commonly used for “on/off” switches.
@@ -519,115 +625,6 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/accessibility.mdx
-  ui-shell-header:
-    name: UI shell header
-    description: This header is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
-    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/ui-shell-header.svg
-    tags:
-      - structural-navigation
-      - shell
-    docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/code.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/accessibility.mdx
-  ui-shell-left-panel:
-    name: UI shell left panel
-    description: This left panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
-    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-left-panel/usage
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/ui-shell-left-panel.svg
-    tags:
-      - shell
-    docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/code.mdx
-  ui-shell-right-panel:
-    name: UI shell right panel
-    description: The right panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
-    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/ui-shell-right-panel.svg
-    tags:
-      - shell
-    docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/style.mdx
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/code.mdx
-  aspect-ratio:
-    name: Aspect ratio
-    description: The AspectRatio component supports rendering your content in a specific aspect ratio through the ratio prop. This prop will specify the proportion between the width and the height of your content. The width will be determined by spanning 100% of the space available in your layout, and the height will be determined by the ratio that you specified.
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/aspect-ratio.svg
-    tags:
-      - content-element
-  progress-bar:
-    name: Progress bar
-    description: A progress bar provides feedback about the duration and progression of a process, such as a download, file transfer, or installation, to indicate how long a user will be waiting.
-    externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/progress-bar.svg
-    tags:
-      - content-element
-    docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/style.mdx
-  copy-button:
-    name: Copy button
-    description: The copy button should be accompanied by a tooltip. Tooltip feedback text should be concise and describe the action taken when the user clicks the copy button. By default we display the text “Copied!”.
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/copy-button.svg
-    tags:
-      - input-control
-  combo-box:
-    name: Combo box
-    description: A combobox allows the user to make a selection from a predefined list of options and is typically used when there are a large amount of options to choose from.
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/combo-box.svg
-    tags:
-      - input-control
-  text-area:
-    name: Text area
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/text-area.svg
-    tags:
-      - input-control
-  time-picker:
-    name: Time picker
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/time-picker.svg
-    tags:
-     - input-control
   tooltip-definition:
     name: Tooltip definition
     description: The DefinitionTooltip component is used to provide additional information about a particular term or phrase in text content. It is similar to a Tooltip component but has fewer alignment options and has a slightly different interaction pattern.
@@ -647,47 +644,47 @@ assets:
     thumbnailPath: ./thumbnails/tree-view.svg
     tags:
       - contextual-navigation
-  theme:
-    name: Theme
-    description: The GlobalTheme and Theme components allow you to specify the theme for a page, or for a part of a page, respectively. Theme is most often used to implement inline theming where you can style a portion of your page with a particular theme.
+  ui-shell-header:
+    name: UI shell header
+    description: This header is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
     status: stable
     type: component
     platform: web
     noIndex: true
-    thumbnailPath: ./thumbnails/theme.svg
+    thumbnailPath: ./thumbnails/ui-shell-header.svg
     tags:
-      - data-display
-  pagination-nav:
-    name: Pagination nav
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/pagination-nav.svg
-    tags:
-      - data-display
-      - contextual-navigation
-  grid:
-    name: Grid
-    description: Carbon's grid components help developers use the 2x Grid. The project provides Grid and Column components which can be used to build a variety of layouts. You can import these components from @carbon/react
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/grid.svg
-    tags:
-      - content-block
-  popover:
-    name: Popover
-    description: Popover is a primitive component used to build custom components which render over other elements on the page. For example, Popover is used to build our popover components in Carbon.
-    status: stable
-    type: component
-    platform: web
-    noIndex: true
-    thumbnailPath: ./thumbnails/popover.svg
-    tags:
-      - content-block
-      - data-display
+      - structural-navigation
+      - shell
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/style.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/accessibility.mdx
+  ui-shell-left-panel:
+    name: UI shell left panel
+    description: This left panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-left-panel/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/ui-shell-left-panel.svg
+    tags:
+      - shell
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/style.mdx
+  ui-shell-right-panel:
+    name: UI shell right panel
+    description: The right panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
+    status: stable
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/ui-shell-right-panel.svg
+    tags:
+      - shell
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/style.mdx
