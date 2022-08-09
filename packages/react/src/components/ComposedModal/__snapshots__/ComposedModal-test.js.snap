@@ -1,40 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ComposedModal /> renders 1`] = `
-<ComposedModal
+<ForwardRef(ComposedModal)
   onKeyDown={[Function]}
   open={true}
   selectorPrimaryFocus="[data-modal-primary-focus]"
 >
   <div
+    aria-hidden={false}
     className="cds--modal is-visible"
     onBlur={[Function]}
     onClick={[Function]}
     onKeyDown={[Function]}
-    onTransitionEnd={[Function]}
-    open={true}
     role="presentation"
     tabIndex="-1"
   >
-    <span
-      className="cds--visually-hidden"
-      role="link"
-      tabIndex="0"
-    >
-      Focus sentinel
-    </span>
     <div
       aria-modal="true"
       className="cds--modal-container"
       role="dialog"
-    />
-    <span
-      className="cds--visually-hidden"
-      role="link"
-      tabIndex="0"
     >
-      Focus sentinel
-    </span>
+      <button
+        className="cds--visually-hidden"
+        type="button"
+      >
+        Focus sentinel
+      </button>
+      <div
+        className="cds--modal-container-body"
+      />
+      <button
+        className="cds--visually-hidden"
+        type="button"
+      >
+        Focus sentinel
+      </button>
+    </div>
   </div>
-</ComposedModal>
+</ForwardRef(ComposedModal)>
 `;
