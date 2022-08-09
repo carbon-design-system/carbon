@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import { action } from '@storybook/addon-actions';
 import {
@@ -16,11 +16,9 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-import ComposedModal, {
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from '../ComposedModal';
+import ComposedModal, { ModalBody } from './ComposedModal';
+import { ModalHeader } from './ModalHeader';
+import { ModalFooter } from './ModalFooter';
 import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
@@ -122,8 +120,8 @@ const props = {
         false
       ),
       ...secondaryButtons(numberOfButtons),
-      onRequestClose: action('onRequestClose'),
-      onRequestSubmit: action('onRequestSubmit'),
+      onRequestClose: () => action('onRequestClose')(),
+      onRequestSubmit: () => action('onRequestSubmit')(),
     };
   },
 };
@@ -275,6 +273,8 @@ export const PassiveModal = () => {
 };
 
 export const WithStateManager = () => {
+  const closeButton = useRef();
+
   /**
    * Simple state manager for modals.
    */
@@ -298,10 +298,19 @@ export const WithStateManager = () => {
   return (
     <ModalStateManager
       renderLauncher={({ setOpen }) => (
-        <Button onClick={() => setOpen(true)}>Launch composed modal</Button>
+        <Button ref={closeButton} onClick={() => setOpen(true)}>
+          Launch composed modal
+        </Button>
       )}>
       {({ open, setOpen }) => (
-        <ComposedModal open={open} onClose={() => setOpen(false)}>
+        <ComposedModal
+          open={open}
+          onClose={() => {
+            setOpen(false);
+            setTimeout(() => {
+              closeButton.current.focus();
+            });
+          }}>
           <ModalHeader label="Account resources" title="Add a custom domain" />
           <ModalBody>
             <p style={{ marginBottom: '1rem' }}>

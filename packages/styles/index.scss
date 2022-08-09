@@ -6,6 +6,7 @@
 //
 
 @forward 'scss/config';
+@forward 'scss/spacing';
 @forward 'scss/colors' hide $white;
 @forward 'scss/motion';
 @forward 'scss/type';

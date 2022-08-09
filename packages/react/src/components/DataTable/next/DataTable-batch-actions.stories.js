@@ -91,7 +91,7 @@ export const Default = (args) => (
       return (
         <TableContainer
           title="DataTable"
-          description="With batch actions"
+          description="With batch actions. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas accumsan mauris sed congue egestas. Integer varius mauris vel arcu pulvinar bibendum non sit amet ligula. Nullam ut nisi eu tellus aliquet vestibulum vel sit amet odio."
           {...getTableContainerProps()}>
           <TableToolbar {...getToolbarProps()}>
             <TableBatchActions {...batchActionProps}>
