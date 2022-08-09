@@ -37,6 +37,12 @@ The `@carbon/styles` package provides the Sass files needed to include every
 style for the Carbon Design System. It includes entrypoints for themes, tokens,
 CSS helpers, components, and more.
 
+**Note: You may not need this package! If you're using `@carbon/react` you do
+not need to install `@carbon/styles`. Module paths in `@carbon/styles` and
+`@carbon/react` are synonymous - `@carbon/react` re-exports everything from
+`@carbon/styles`. For example, `@carbon/styles/scss/components/button` is the
+same as `@carbon/react/scss/components/button`.**
+
 ### Files
 
 The following is a table of all files that are available to use. While there may
@@ -326,17 +332,125 @@ All of the styles for the components in the Carbon Design System live in the
 by including its entrypoint file. For a full list of component styles that you
 can import, check out the files table below.
 
+**Reminder: Module paths in `@carbon/styles` and `@carbon/react` are
+synonymous - `@carbon/react` re-exports everything from `@carbon/styles`.**
+
+**Files**
+
+| Component             | Import                                                         | File                                                                                |
+| :-------------------- | :------------------------------------------------------------- | :---------------------------------------------------------------------------------- |
+| accordion             | `@use '@carbon/styles/scss/components/accordion';`             | [`scss/components/accordion`](../scss/components/accordion)                         |
+| aspect-ratio          | `@use '@carbon/styles/scss/components/aspect-ratio';`          | [`scss/components/aspect-ratio`](../scss/components/aspect-ratio)                   |
+| breadcrumb            | `@use '@carbon/styles/scss/components/breadcrumb';`            | [`scss/components/breadcrumb`](../scss/components/breadcrumb)                       |
+| button                | `@use '@carbon/styles/scss/components/button';`                | [`scss/components/button`](../scss/components/button)                               |
+| checkbox              | `@use '@carbon/styles/scss/components/checkbox';`              | [`scss/components/checkbox`](../scss/components/checkbox)                           |
+| code-snippet          | `@use '@carbon/styles/scss/components/code-snippet';`          | [`scss/components/code-snippet`](../scss/components/code-snippet)                   |
+| combo-box             | `@use '@carbon/styles/scss/components/combo-box';`             | [`scss/components/combo-box`](../scss/components/combo-box)                         |
+| content-switcher      | `@use '@carbon/styles/scss/components/content-switcher';`      | [`scss/components/content-switcher`](../scss/components/content-switcher)           |
+| copy-button           | `@use '@carbon/styles/scss/components/copy-button';`           | [`scss/components/copy-button`](../scss/components/copy-button)                     |
+| data-table            | `@use '@carbon/styles/scss/components/data-table';`            | [`scss/components/data-table`](../scss/components/data-table)                       |
+| data-table/action     | `@use '@carbon/styles/scss/components/data-table/action';`     | [`scss/components/data-table/action`](../scss/components/data-table/action)         |
+| data-table/expandable | `@use '@carbon/styles/scss/components/data-table/expandable';` | [`scss/components/data-table/expandable`](../scss/components/data-table/expandable) |
+| data-table/skeleton   | `@use '@carbon/styles/scss/components/data-table/skeleton';`   | [`scss/components/data-table/skeleton`](../scss/components/data-table/skeleton)     |
+| data-table/sort       | `@use '@carbon/styles/scss/components/data-table/sort';`       | [`scss/components/data-table/sort`](../scss/components/data-table/sort)             |
+| date-picker           | `@use '@carbon/styles/scss/components/date-picker';`           | [`scss/components/date-picker`](../scss/components/date-picker)                     |
+| dropdown              | `@use '@carbon/styles/scss/components/dropdown';`              | [`scss/components/dropdown`](../scss/components/dropdown)                           |
+| file-uploader         | `@use '@carbon/styles/scss/components/file-uploader';`         | [`scss/components/file-uploader`](../scss/components/file-uploader)                 |
+| form                  | `@use '@carbon/styles/scss/components/form';`                  | [`scss/components/form`](../scss/components/form)                                   |
+| inline-loading        | `@use '@carbon/styles/scss/components/inline-loading';`        | [`scss/components/inline-loading`](../scss/components/inline-loading)               |
+| link                  | `@use '@carbon/styles/scss/components/link';`                  | [`scss/components/link`](../scss/components/link)                                   |
+| list                  | `@use '@carbon/styles/scss/components/list';`                  | [`scss/components/list`](../scss/components/list)                                   |
+| list-box              | `@use '@carbon/styles/scss/components/list-box';`              | [`scss/components/list-box`](../scss/components/list-box)                           |
+| loading               | `@use '@carbon/styles/scss/components/loading';`               | [`scss/components/loading`](../scss/components/loading)                             |
+| menu                  | `@use '@carbon/styles/scss/components/menu';`                  | [`scss/components/menu`](../scss/components/menu)                                   |
+| modal                 | `@use '@carbon/styles/scss/components/modal';`                 | [`scss/components/modal`](../scss/components/modal)                                 |
+| multiselect           | `@use '@carbon/styles/scss/components/multiselect';`           | [`scss/components/multiselect`](../scss/components/multiselect)                     |
+| notification          | `@use '@carbon/styles/scss/components/notification';`          | [`scss/components/notification`](../scss/components/notification)                   |
+| number-input          | `@use '@carbon/styles/scss/components/number-input';`          | [`scss/components/number-input`](../scss/components/number-input)                   |
+| overflow-menu         | `@use '@carbon/styles/scss/components/overflow-menu';`         | [`scss/components/overflow-menu`](../scss/components/overflow-menu)                 |
+| pagination            | `@use '@carbon/styles/scss/components/pagination';`            | [`scss/components/pagination`](../scss/components/pagination)                       |
+| pagination-nav        | `@use '@carbon/styles/scss/components/pagination-nav';`        | [`scss/components/pagination-nav`](../scss/components/pagination-nav)               |
+| popover               | `@use '@carbon/styles/scss/components/popover';`               | [`scss/components/popover`](../scss/components/popover)                             |
+| progress-bar          | `@use '@carbon/styles/scss/components/progress-bar';`          | [`scss/components/progress-bar`](../scss/components/progress-bar)                   |
+| progress-indicator    | `@use '@carbon/styles/scss/components/progress-indicator';`    | [`scss/components/progress-indicator`](../scss/components/progress-indicator)       |
+| radio-button          | `@use '@carbon/styles/scss/components/radio-button';`          | [`scss/components/radio-button`](../scss/components/radio-button)                   |
+| search                | `@use '@carbon/styles/scss/components/search';`                | [`scss/components/search`](../scss/components/search)                               |
+| select                | `@use '@carbon/styles/scss/components/select';`                | [`scss/components/select`](../scss/components/select)                               |
+| skeleton-styles       | `@use '@carbon/styles/scss/components/skeleton-styles';`       | [`scss/components/skeleton-styles`](../scss/components/skeleton-styles)             |
+| slider                | `@use '@carbon/styles/scss/components/slider';`                | [`scss/components/slider`](../scss/components/slider)                               |
+| stack                 | `@use '@carbon/styles/scss/components/stack';`                 | [`scss/components/stack`](../scss/components/stack)                                 |
+| structured-list       | `@use '@carbon/styles/scss/components/structured-list';`       | [`scss/components/structured-list`](../scss/components/structured-list)             |
+| tabs                  | `@use '@carbon/styles/scss/components/tabs';`                  | [`scss/components/tabs`](../scss/components/tabs)                                   |
+| tag                   | `@use '@carbon/styles/scss/components/tag';`                   | [`scss/components/tag`](../scss/components/tag)                                     |
+| text-area             | `@use '@carbon/styles/scss/components/text-area';`             | [`scss/components/text-area`](../scss/components/text-area)                         |
+| text-input            | `@use '@carbon/styles/scss/components/text-input';`            | [`scss/components/text-input`](../scss/components/text-input)                       |
+| tile                  | `@use '@carbon/styles/scss/components/tile';`                  | [`scss/components/tile`](../scss/components/tile)                                   |
+| time-picker           | `@use '@carbon/styles/scss/components/time-picker';`           | [`scss/components/time-picker`](../scss/components/time-picker)                     |
+| toggletip             | `@use '@carbon/styles/scss/components/toggletip';`             | [`scss/components/toggletip`](../scss/components/toggletip)                         |
+| toggle                | `@use '@carbon/styles/scss/components/toggle';`                | [`scss/components/toggle`](../scss/components/toggle)                               |
+| tooltip               | `@use '@carbon/styles/scss/components/tooltip';`               | [`scss/components/tooltip`](../scss/components/tooltip)                             |
+| treeview              | `@use '@carbon/styles/scss/components/treeview';`              | [`scss/components/treeview`](../scss/components/treeview)                           |
+| ui-shell              | `@use '@carbon/styles/scss/components/ui-shell';`              | [`scss/components/ui-shell`](../scss/components/ui-shell)                           |
+
 **Component tokens**
 
 In some situations, you may want to change the tokens for a specific component.
-To do so you will need to configure the module and provide the tokens you would
-like to see changed. For example, if you wanted to change the component token
-`button-separator` for `button` you would do the following:
+To do so you will need to configure the modules and provide the tokens you would
+like to see changed.
+
+Component tokens are available for the following components:
+
+| Component    | Import                                                       | File                                                                            |
+| :----------- | :----------------------------------------------------------- | :------------------------------------------------------------------------------ |
+| button       | `@use '@carbon/styles/scss/components/button/tokens';`       | [`scss/components/button/tokens`](../scss/components/button/tokens)             |
+| notification | `@use '@carbon/styles/scss/components/notification/tokens';` | [`scss/components/notification/tokens`](../scss/components/notification/tokens) |
+| tag          | `@use '@carbon/styles/scss/components/tag/tokens';`          | [`scss/components/tag/tokens`](../scss/components/tag/tokens)                   |
+
+For example, if you wanted to change the component token `button-primary` for
+`button` you could do the following:
 
 ```scss
-@use '@carbon/styles/scss/components/button' with (
-  $button-separator: #e4e4e4
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/components/button/tokens' with (
+  $button-primary: #3f51b5
 );
+
+@use '@carbon/react';
+```
+
+The same as above can also be done without using the central entrypoint, instead
+bringing in only the button component styles. This applies to all the examples
+here regarding component tokens:
+
+```diff
+  @use '@carbon/react/scss/themes';
+  @use '@carbon/react/scss/components/button/tokens' with (
+    $button-primary: #3f51b5
+  );
+
+- @use '@carbon/react';
++ @use '@carbon/react/scss/reset';
++ @use '@carbon/react/scss/components/button';
+```
+
+You can alternatively override the values for each theme:
+
+```scss
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/components/button/tokens' with (
+  $button-primary: (
+    fallback: #3f51b5,
+    values: (
+      (theme: themes.$white, value: #3f51b5),
+      (theme: themes.$g10, value: #d55bff),
+      (theme: themes.$g90, value: #d0b2ff),
+      (theme: themes.$g100, value: #cfd2ff),
+    ),
+  )
+);
+
+@use '@carbon/react/scss/reset';
+@use '@carbon/react/scss/components/button';
 ```
 
 If you'd like to use these component tokens in your stylesheet, you'll need to
@@ -350,33 +464,68 @@ If you'd like to use these component tokens in your stylesheet, you'll need to
 }
 ```
 
-You can also include these when configuring themes using the theme mixin:
+You can also change the component token definition for each theme for multiple
+tokens at the same time via the theme mixin:
 
 ```scss
 @use '@carbon/react/scss/themes';
 @use '@carbon/react/scss/theme';
-@use '@carbon/react/scss/components/button/tokens' as button;
-@use '@carbon/react/scss/components/notification/tokens' as notification;
-@use '@carbon/react/scss/components/tag/tokens' as tag;
+@use '@carbon/react/scss/components/button/tokens' as button-tokens;
+@use '@carbon/themes/scss/utilities';
+@use '@carbon/react';
 
-@include theme.add-component-tokens(button.$button-tokens);
-@include theme.add-component-tokens(notification.$notification-tokens);
-@include theme.add-component-tokens(tag.$tag-tokens);
+// Set new token values. Follow this format, each theme has a specification
+$button-token-overrides: (
+  button-primary: (
+    fallback: #3f51b5,
+    values: (
+      (
+        theme: themes.$white,
+        value: #3f51b5,
+      ),
+      (
+        theme: themes.$g10,
+        value: #3fb557,
+      ),
+      (
+        theme: themes.$g90,
+        value: #3f9ab5,
+      ),
+      (
+        theme: themes.$g100,
+        value: #ab3fb5,
+      ),
+    ),
+  ),
+);
 
-.white {
-  @include theme(themes.$white);
+// The new tokens must be merged into the existing tokens
+$button-tokens: utilities.merge(
+  button-tokens.$button-tokens,
+  $button-token-overrides
+);
+
+// Add the new component tokens which will be included any time the theme mixin is called
+@include theme.add-component-tokens($button-tokens);
+
+// Ensure that the theme() mixin is called to set the new token values
+// You can override the existing `.cds--{theme}` classes for each theme
+:root {
+  @include theme.theme();
 }
 
-.g10 {
-  @include theme(themes.$g10);
+.cds--g10 {
+  @include theme.theme(themes.$g10);
+}
+
+.cds--g90 {
+  @include theme.theme(themes.$g90);
+}
+
+.cds--g100 {
+  @include theme.theme(themes.$g100);
 }
 ```
-
-**Files**
-
-| Component | Import                                             | File                                                        |
-| :-------- | :------------------------------------------------- | :---------------------------------------------------------- |
-| Accordion | `@use '@carbon/styles/scss/components/accordion';` | [`scss/components/accordion`](../scss/components/accordion) |
 
 ## Utilities
 
