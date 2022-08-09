@@ -646,14 +646,6 @@
     - life science
     - science
     - biology
-- name: chart--two-y-axis
-  friendly_name: Chart 2 y axis 
-  aliases:
-    - double axes
-    - two axis
-    - 2 axes
-    - 2 axis
-    - multiple axes
 - name: chart--3D
   friendly_name: Chart 3D
   aliases:
@@ -890,6 +882,14 @@
     - data
     - analytics
     - data analytics
+- name: chart--two-y-axis
+  friendly_name: Chart 2 y axis
+  aliases:
+    - double axes
+    - two axis
+    - 2 axes
+    - 2 axis
+    - multiple axes
 - name: cheese
   friendly_name: Cheese
   aliases:
@@ -1411,9 +1411,11 @@
 - name: cookie
   friendly_name: Cookie
   aliases:
-    - cookie, cookies, cookies tracking
+    - cookie
+    - cookies
+    - cookies tracking
 - name: copenhagen--planetarium
-  friendly_name: Copenhagan planetarium
+  friendly_name: Copenhagen planetarium
   aliases:
     - copenhagen planetarium
     - copenhage
@@ -2714,6 +2716,25 @@
   friendly_name: IBM z16
   aliases:
     - IBM z16
+- name: ibm--z16--multi-frame
+  friendly_name: ibm--z16--multi-frame
+  aliases: []
+  sizes:
+    - glyph
+- name: ibm--z16--plus-cloud
+  friendly_name: IBM z16 plus cloud
+  aliases:
+    - z16
+    - ibm z
+    - z
+    - cloud
+    - cloud infrastructure
+    - hybrid cloud
+- name: ibm--z16--single-frame
+  friendly_name: ibm--z16--single-frame
+  aliases: []
+  sizes:
+    - glyph
 - name: ibm--z16-multi-frame
   friendly_name: IBM z16 multi-frame
   aliases:
@@ -2724,15 +2745,6 @@
     - linux
     - multi-frame
     - ibm z
-- name: ibm--z16--plus-cloud
-  friendly_name: IBM z16 plus cloud
-  aliases:
-    - z16
-    - ibm z
-    - z
-    - cloud
-    - cloud infrastructure
-    - hybrid cloud
 - name: ibm--z16-single-frame
   friendly_name: IBM z16 single frame
   aliases:
@@ -4040,6 +4052,13 @@
     - qr code
     - code
     - ID
+- name: quantum--safe
+  friendly_name: Quantum safe
+  aliases:
+    - quantum safe
+    - future safe
+    - future secure
+    - quantum
 - name: quantum-computing
   friendly_name: Quantum computing
   aliases:
@@ -4047,13 +4066,6 @@
     - computing
     - AI
     - Q
-    - quantum
-- name: quantum--safe
-  friendly_name: Quantum safe
-  aliases:
-    - quantum safe
-    - future safe
-    - future secure
     - quantum
 - name: question
   friendly_name: Question
@@ -4858,11 +4870,6 @@
     - optimization
     - optimize
     - blockchain
-- name: sustainability
-  friendly_name: Sustainability
-  aliases:
-    - sustainability
-    - environmental
 - name: support--services
   friendly_name: Support services
   aliases:
@@ -4871,6 +4878,11 @@
     - services
     - networking
     - network
+- name: sustainability
+  friendly_name: Sustainability
+  aliases:
+    - sustainability
+    - environmental
 - name: swipe--left
   friendly_name: Swipe left
   aliases:
