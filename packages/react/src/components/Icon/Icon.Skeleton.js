@@ -10,10 +10,9 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const IconSkeleton = ({ style, className, ...rest }) => {
+const IconSkeleton = ({ className, ...rest }) => {
   const prefix = usePrefix();
   const props = {
-    style,
     ...rest,
   };
 
@@ -27,11 +26,6 @@ IconSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
-
-  /**
-   * The CSS styles.
-   */
-  style: PropTypes.object,
 };
 
 export default IconSkeleton;

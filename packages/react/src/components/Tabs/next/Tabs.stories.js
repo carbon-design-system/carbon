@@ -31,7 +31,7 @@ export default {
   },
 };
 
-export const Line = (args) => (
+export const Default = (args) => (
   <Tabs>
     <TabList aria-label="List of tabs" {...args}>
       <Tab>Tab Label 1</Tab>
