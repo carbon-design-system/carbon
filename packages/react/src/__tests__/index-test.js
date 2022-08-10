@@ -227,6 +227,8 @@ describe('Carbon Components React', () => {
         "unstable_OverflowMenuV2",
         "unstable_PageSelector",
         "unstable_Pagination",
+        "unstable_Text",
+        "unstable_TextDirection",
         "unstable_useContextMenu",
         "unstable_useFeatureFlag",
         "unstable_useFeatureFlags",
