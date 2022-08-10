@@ -229,6 +229,7 @@ categories:
       - analyze
       - blockchain
       - box--plot
+      - chart--two-y-axis
       - chart--3D
       - chart--area
       - chart--bar
@@ -282,20 +283,32 @@ categories:
     members:
       - accelerated-computing
       - archive
+      - availability
       - business--continuity
+      - cloud--infrastructure-management
       - containers-and-cloud-native
       - data--backup
       - data--privacy
+      - data--privacy--key
       - data--processing
       - data--storage
       - flash--storage
+      - flexible--compute
+      - flexible--infrastructure
+      - flexibility
       - hard--drive
       - hard--drive--network
       - hybrid--cloud--02
       - ibm--z-and-linuxone-single-frame
       - ibm--z-and-linuxone-multi-frame
+      - ibm--z16
+      - ibm--z16--single-frame
+      - ibm--z16--multi-frame
+      - ibm--z16--plus-cloud
       - infrastructure-security
       - it--infrastructure-software
+      - reliability
+      - resilience
       - sap--hana
       - server--operating-systems
       - server--rack
@@ -303,6 +316,8 @@ categories:
       - storage--area-networks
       - storage--product
       - tape--storage
+      - virtualization
+      - zero-trust
   - name: Design and Development
     members:
       - app--developer
@@ -337,6 +352,7 @@ categories:
       - augmented--reality
       - color--contrast
       - device--pairing
+      - devices-at-ibm
       - flashing--content
       - keyboard
       - mobile--add
@@ -490,6 +506,7 @@ categories:
       - farmer--01
       - farmer--02
       - fragile
+      - green-energy
       - insurance
       - keep-dry
       - oil--pump
@@ -504,6 +521,7 @@ categories:
       - sprout
       - stack-limitation
       - steel
+      - sustainability
       - telecom
       - this-side-up
       - tractor
@@ -527,6 +545,7 @@ categories:
       - ai--robustness
       - ai--transparency
       - ai--trust
+      - decision-velocity
       - intelligence
       - machine--learning--01
       - machine--learning--02
@@ -534,6 +553,7 @@ categories:
       - machine--learning--04
       - machine--learning--05
       - machine--learning--06
+      - technical-owner
   - name: Life Science
     members:
       - cell
@@ -557,6 +577,7 @@ categories:
       - blender
       - cafe
       - cherries
+      - cookie
       - dining
       - hard--ice--cream
       - flower--01
@@ -735,6 +756,7 @@ categories:
       - master--threat--hunting
       - network--protection
       - protect--critical--assets
+      - quantum--safe
       - secure--hybrid--cloud
       - secure--profile
       - security
