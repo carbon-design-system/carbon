@@ -16,7 +16,7 @@ import { warning } from './warning';
  * owners of controlled components.
  *
  * Note: this hook will warn if a component is switching from controlled to
- * uncontrolled, or vice-verse.
+ * uncontrolled, or vice-versa.
  *
  * @param {object} config
  * @param {string} config.name - the name of the custom component

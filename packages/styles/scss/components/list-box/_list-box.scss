@@ -146,6 +146,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box.#{$prefix}--list-box--warning.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
     padding-right: rem(56px);
   }
