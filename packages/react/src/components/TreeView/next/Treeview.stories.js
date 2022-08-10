@@ -7,7 +7,6 @@
 
 import React, { useState } from 'react';
 import { Document, Folder } from '@carbon/icons-react';
-import { InlineNotification } from '../../Notification';
 import { default as TreeView, TreeNode } from '../';
 import './story.scss';
 
@@ -190,7 +189,7 @@ function renderTree({ nodes, expanded, withIcons = false }) {
 }
 
 export default {
-  title: 'Experimental/unstable_TreeView',
+  title: 'components/TreeView',
   component: TreeView,
   argTypes: {
     size: {
@@ -204,15 +203,9 @@ export default {
 };
 
 export const Default = (args) => (
-  <>
-    <InlineNotification kind="info">
-      Experimental component: An accessibility review of this component is in
-      progress
-    </InlineNotification>
-    <TreeView {...props()} {...args}>
-      {renderTree({ nodes })}
-    </TreeView>
-  </>
+  <TreeView {...props()} {...args}>
+    {renderTree({ nodes })}
+  </TreeView>
 );
 
 Default.storyName = 'default';
@@ -223,16 +216,9 @@ Default.parameters = {
 };
 
 export const WithIcons = (args) => (
-  <>
-    <InlineNotification
-      kind="info"
-      title="Experimental component"
-      subtitle="An accessibility review of this component is in progress"
-    />
-    <TreeView {...props()} {...args}>
-      {renderTree({ nodes, withIcons: true })}
-    </TreeView>
-  </>
+  <TreeView {...props()} {...args}>
+    {renderTree({ nodes, withIcons: true })}
+  </TreeView>
 );
 
 WithIcons.storyName = 'with icons';
@@ -241,11 +227,6 @@ export const WithControlledExpansion = (args) => {
   const [expanded, setExpanded] = useState(undefined);
   return (
     <>
-      <InlineNotification
-        kind="info"
-        title="Experimental component"
-        subtitle="An accessibility review of this component is in progress"
-      />
       <div style={{ marginBottom: '1rem' }}>
         <button type="button" onClick={() => setExpanded(true)}>
           expand all

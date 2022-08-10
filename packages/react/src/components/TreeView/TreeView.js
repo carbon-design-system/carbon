@@ -249,7 +249,7 @@ TreeView.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * Specify the selection mode of the tree.
+   * **[Experimental]** Specify the selection mode of the tree.
    * If `multiselect` is `false` then only one node can be selected at a time
    */
   multiselect: PropTypes.bool,

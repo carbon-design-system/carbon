@@ -15,7 +15,6 @@ import {
   text,
   withKnobs,
 } from '@storybook/addon-knobs';
-import { InlineNotification } from '../Notification';
 import TreeView, { TreeNode } from '../TreeView';
 import './story.scss';
 
@@ -28,7 +27,7 @@ const props = () => ({
   hideLabel: boolean('Visible label (hideLabel)', false),
   label: text('Label (label)', 'Tree view'),
   multiselect: boolean(
-    'Allow selection of multiple tree nodes (multiselect)',
+    '[Experimental] Allow selection of multiple tree nodes (multiselect)',
     false
   ),
   onSelect: action('onSelect (TreeView onSelect)'),
@@ -250,20 +249,13 @@ function renderTree({ nodes, expanded, withIcons = false }) {
 }
 
 export default {
-  title: 'Experimental/unstable_TreeView',
+  title: 'TreeView',
   component: TreeView,
   decorators: [withKnobs],
 };
 
 export const Default = () => (
-  <>
-    <InlineNotification
-      kind="info"
-      title="Experimental component"
-      subtitle="An accessibility review of this component is in progress"
-    />
-    <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
-  </>
+  <TreeView {...props()}>{renderTree({ nodes })}</TreeView>
 );
 
 Default.storyName = 'default';
@@ -274,14 +266,7 @@ Default.parameters = {
 };
 
 export const WithIcons = () => (
-  <>
-    <InlineNotification
-      kind="info"
-      title="Experimental component"
-      subtitle="An accessibility review of this component is in progress"
-    />
-    <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
-  </>
+  <TreeView {...props()}>{renderTree({ nodes, withIcons: true })}</TreeView>
 );
 
 WithIcons.storyName = 'with icons';
@@ -290,11 +275,6 @@ export const WithControlledExpansion = () => {
   const [expanded, setExpanded] = useState(undefined);
   return (
     <>
-      <InlineNotification
-        kind="info"
-        title="Experimental component"
-        subtitle="An accessibility review of this component is in progress"
-      />
       <div style={{ marginBottom: '1rem' }}>
         <button type="button" onClick={() => setExpanded(true)}>
           expand all

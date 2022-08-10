@@ -147,6 +147,7 @@ export {
   ToggletipContent,
   ToggletipActions,
 } from './components/Toggletip';
+export TreeView, { TreeNode } from './components/TreeView';
 export UnorderedList from './components/UnorderedList';
 export SkeletonText from './components/SkeletonText';
 export SkeletonPlaceholder from './components/SkeletonPlaceholder';
@@ -240,8 +241,5 @@ export {
   TextDirection as unstable_TextDirection,
 } from './components/Text';
 export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
-export unstable_TreeView, {
-  TreeNode as unstable_TreeNode,
-} from './components/TreeView';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
