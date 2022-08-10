@@ -14,10 +14,10 @@ const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 test.describe('Tabs', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('line @vrt', async ({ page }) => {
+      test('default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Tabs',
-          id: 'components-tabs--line',
+          id: 'components-tabs--default',
           theme,
         });
       });

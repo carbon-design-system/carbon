@@ -28,12 +28,25 @@ export default {
 export const Default = () => {
   return (
     <RadioButtonGroup
-      legendText="Radio button heading"
+      legendText="Group label"
       name="radio-button-group"
       defaultSelected="radio-1">
-      <RadioButton labelText="Option 1" value="radio-1" id="radio-1" />
-      <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
-      <RadioButton labelText="Option 3" value="radio-3" id="radio-3" disabled />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-1"
+        id="radio-1"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-2"
+        id="radio-2"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-3"
+        id="radio-3"
+        disabled
+      />
     </RadioButtonGroup>
   );
 };
@@ -45,9 +58,21 @@ export const Skeleton = () => {
 export const Playground = (args) => {
   return (
     <RadioButtonGroup labelText="Radio Button group" {...args}>
-      <RadioButton value="radio-1" id="radio-1" />
-      <RadioButton labelText="Option 2" value="radio-2" id="radio-2" />
-      <RadioButton labelText="Option 3" value="radio-3" id="radio-3" />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-1"
+        id="radio-1"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-2"
+        id="radio-2"
+      />
+      <RadioButton
+        labelText="Radio button label"
+        value="radio-3"
+        id="radio-3"
+      />
     </RadioButtonGroup>
   );
 };

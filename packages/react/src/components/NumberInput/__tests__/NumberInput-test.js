@@ -160,6 +160,15 @@ describe('NumberInput', () => {
 
     userEvent.click(screen.getByLabelText('increment'));
     expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.any(Object),
+      }),
+      expect.objectContaining({
+        value: 11,
+        direction: 'up',
+      })
+    );
 
     userEvent.click(screen.getByLabelText('decrement'));
     expect(onChange).toHaveBeenCalledTimes(2);
