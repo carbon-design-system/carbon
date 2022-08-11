@@ -21,6 +21,51 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    downshiftProps: {
+      table: { disable: true },
+    },
+    compareItems: {
+      table: { disable: true },
+    },
+    sortItems: {
+      table: { disable: true },
+    },
+    initialSelectedItems: {
+      table: { disable: true },
+    },
+    id: {
+      table: { disable: true },
+    },
+    items: {
+      table: { disable: true },
+    },
+    local: {
+      table: { disable: true },
+    },
+    onChange: {
+      table: { disable: true },
+    },
+    onMenuChange: {
+      table: { disable: true },
+    },
+    itemToElement: {
+      table: { disable: true },
+    },
+    itemToString: {
+      table: { disable: true },
+    },
+    selectedItems: {
+      table: { disable: true },
+    },
+    open: {
+      table: { disable: true },
+    },
+    title: {
+      table: { disable: true },
+    },
+    translateWithId: {
+      table: { disable: true },
+    },
   },
 };
 
@@ -52,7 +97,7 @@ const items = [
   },
 ];
 
-export const Default = (args) => {
+export const Playground = (args) => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -69,7 +114,116 @@ export const Default = (args) => {
   );
 };
 
-export const WithInitialSelectedItems = (args) => {
+Playground.argTypes = {
+  selectionFeedback: {
+    options: ['top', 'fixed', 'top-after-reopen'],
+    control: { type: 'select' },
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+    defaultValue: 'md',
+  },
+  direction: {
+    options: ['top', 'bottom'],
+    control: { type: 'radio' },
+  },
+  type: {
+    options: ['inline', 'default'],
+    control: { type: 'radio' },
+    defaultValue: 'default',
+  },
+  titleText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'This is a MultiSelect Title',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  light: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'whoopsie!',
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'whoopsie!',
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'This is a label',
+  },
+  clearSelectionDescription: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Total items selected: ',
+  },
+  useTitleInItem: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'this is the item title',
+  },
+  clearSelectionText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'To clear selection, press Delete or Backspace,',
+  },
+};
+
+export const Default = () => {
+  return (
+    <div style={{ width: 300 }}>
+      <MultiSelect
+        label="Multiselect Label"
+        id="carbon-multiselect-example"
+        titleText="Multiselect title"
+        helperText="This is helper text"
+        items={items}
+        itemToString={(item) => (item ? item.text : '')}
+        selectionFeedback="top-after-reopen"
+      />
+    </div>
+  );
+};
+
+export const WithInitialSelectedItems = () => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -80,13 +234,12 @@ export const WithInitialSelectedItems = (args) => {
         itemToString={(item) => (item ? item.text : '')}
         initialSelectedItems={[items[0], items[1]]}
         selectionFeedback="top-after-reopen"
-        {...args}
       />
     </div>
   );
 };
 
-export const _Filterable = (args) => {
+export const _Filterable = () => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -96,13 +249,12 @@ export const _Filterable = (args) => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
-        {...args}
       />
     </div>
   );
 };
 
-export const WithLayer = (args) => {
+export const WithLayer = () => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
@@ -113,7 +265,6 @@ export const WithLayer = (args) => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
-        {...args}
       />
       <Layer>
         <MultiSelect
@@ -124,7 +275,6 @@ export const WithLayer = (args) => {
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
-          {...args}
         />
         <Layer>
           <MultiSelect
@@ -135,7 +285,6 @@ export const WithLayer = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
-            {...args}
           />
         </Layer>
       </Layer>
@@ -143,7 +292,7 @@ export const WithLayer = (args) => {
   );
 };
 
-export const _FilterableWithLayer = (args) => {
+export const _FilterableWithLayer = () => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
@@ -153,7 +302,6 @@ export const _FilterableWithLayer = (args) => {
         items={items}
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
-        {...args}
       />
       <Layer>
         <FilterableMultiSelect
@@ -163,7 +311,6 @@ export const _FilterableWithLayer = (args) => {
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           selectionFeedback="top-after-reopen"
-          {...args}
         />
         <Layer>
           <FilterableMultiSelect
@@ -173,7 +320,6 @@ export const _FilterableWithLayer = (args) => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             selectionFeedback="top-after-reopen"
-            {...args}
           />
         </Layer>
       </Layer>

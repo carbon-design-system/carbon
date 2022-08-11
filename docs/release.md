@@ -143,6 +143,12 @@ Friday of a sprint. To make the switch, you will need to:
 
 `./packages/cli/bin/carbon-cli.js changelog v11.5.0..v11.6.0`
 
+- [ ] Post the release announcement in slack
+  - [ ] #carbon-announcements
+  - [ ] #carbon-components
+  - [ ] #carbon-design-system
+  - [ ] #carbon-react
+
 ### Post release
 
 - [ ] Update the

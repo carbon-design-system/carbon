@@ -13,7 +13,7 @@ import Checkbox from '../Checkbox';
 import Form from '../Form';
 import FormGroup from '../FormGroup';
 import FileUploader from '../FileUploader';
-import NumberInput from '../NumberInput';
+import { NumberInput } from '../NumberInput';
 import RadioButton from '../RadioButton';
 import RadioButtonGroup from '../RadioButtonGroup';
 import Button from '../Button';
