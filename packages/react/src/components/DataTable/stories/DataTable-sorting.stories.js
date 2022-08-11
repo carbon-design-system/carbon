@@ -30,25 +30,6 @@ export default {
     TableHeader,
     TableRow,
   },
-  argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: { type: 'select' },
-    },
-    useZebraStyles: {
-      control: { type: 'boolean' },
-    },
-    radio: {
-      control: { type: 'boolean' },
-    },
-    isSortable: { control: { type: 'boolean' } },
-  },
-  args: {
-    size: 'lg',
-    useZebraStyles: false,
-    radio: false,
-    isSortable: true,
-  },
   parameters: {
     docs: {
       page: mdx,
@@ -56,7 +37,36 @@ export default {
   },
 };
 
-export const Usage = (args) => (
+export const Default = () => (
+  <DataTable rows={rows} headers={headers} isSortable>
+    {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
+      <TableContainer title="DataTable" description="With sorting">
+        <Table {...getTableProps()}>
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+export const Playground = (args) => (
   <DataTable rows={rows} headers={headers} {...args}>
     {({ rows, headers, getHeaderProps, getRowProps, getTableProps }) => (
       <TableContainer title="DataTable" description="With sorting">
@@ -84,3 +94,36 @@ export const Usage = (args) => (
     )}
   </DataTable>
 );
+
+Playground.argTypes = {
+  filterRows: {
+    table: {
+      disable: true,
+    },
+  },
+  headers: {
+    table: {
+      disable: true,
+    },
+  },
+  overflowMenuOnHover: {
+    table: {
+      disable: true,
+    },
+  },
+  rows: {
+    table: {
+      disable: true,
+    },
+  },
+  translateWithId: {
+    table: {
+      disable: true,
+    },
+  },
+  sortRow: {
+    table: {
+      disable: true,
+    },
+  },
+};
