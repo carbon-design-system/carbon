@@ -83,7 +83,7 @@ function writeTestFile(props, componentName, isSubComponent) {
   });
   `;
 
-  return prettier.format(testFile, { parser: 'babel' });
+  return prettier.format(testFile, { parser: 'babel', singleQuote: true });
 }
 
 async function main() {
@@ -116,19 +116,8 @@ async function main() {
 
   // Generate path to the component's tests
   let pathToComponent = '';
-  let isSubComponent;
+  let isSubComponent = false;
 
-  // if component is not a subcomponent
-  if (files.includes(componentName)) {
-    pathToComponent = path.join(
-      __dirname,
-      `../src/components/${componentName}/${componentName}-test__copy.js`
-    );
-
-    isSubComponent = false;
-  }
-
-  // if component is a subcomponent
   for await (const file of files) {
     const subFiles = await fs.readdir(
       path.join(__dirname, `../src/components/${file}`)
@@ -136,12 +125,35 @@ async function main() {
 
     const found = subFiles.find((subFile) => subFile === `${componentName}.js`);
 
-    if (found) {
+    const testFolderExists = await fs.pathExists(
+      path.join(__dirname, `../src/components/${file}/__tests__/`)
+    );
+
+    // if true, component is a "base" component (i.e Button, CheckBox, etc) otherwise it is a sub-component (i.e Table, Header, TableToolBar, etc)
+    const componentPathExists = await fs.pathExists(
+      path.join(
+        __dirname,
+        `../src/components/${componentName}/${componentName}.js`
+      )
+    );
+
+    if (!componentPathExists) {
+      isSubComponent = true;
+    }
+
+    if (found && testFolderExists) {
       pathToComponent = path.join(
         __dirname,
         `../src/components/${file}/__tests__/${componentName}-test__copy.js`
       );
-      isSubComponent = true;
+      break;
+    }
+
+    if (found && !testFolderExists) {
+      pathToComponent = path.join(
+        __dirname,
+        `../src/components/${file}/${componentName}-test__copy.js`
+      );
       break;
     }
   }
