@@ -508,6 +508,12 @@
     - Budapest
     - Hungary
     - chain-bridge
+- name: budapest--citadella
+  friendly_name: budapest--citadella
+  aliases: []
+- name: budapest--lab-skyline
+  friendly_name: budapest--lab-skyline
+  aliases: []
 - name: bug--virus--malware
   friendly_name: Bug Virus Malware
   aliases:
@@ -1140,7 +1146,13 @@
 - name: cloud--platform
   friendly_name: Cloud platform
   aliases:
-    - platform, cloud, service, offering, process, automate, hyperscaler
+    - platform
+    - cloud
+    - service
+    - offering
+    - process
+    - automate
+    - hyperscaler
 - name: cloud--sap
   friendly_name: Cloud SAP
   aliases:
