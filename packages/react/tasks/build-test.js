@@ -16,13 +16,13 @@ function writeTestFile(props, componentName, isSubComponent) {
                 render(<${componentName}>add appropriate children</${componentName}>)
 
                 expect(); 
-            });`;
+            });\n\n`;
     } else if (prop === 'className') {
       test = `it('should support a custom \`className\` prop on the outermost element', () => {
             const { container } = render(<${componentName} className="custom-class" />)
 
             expect(container.firstChild).toHaveClass('custom-class'); 
-        });`;
+        });\n\n`;
     } else if (
       prop === 'onClick' ||
       prop === 'onKeyDown' ||
@@ -38,13 +38,13 @@ function writeTestFile(props, componentName, isSubComponent) {
             // perform action to call ${prop}
 
             expect($prop).toHaveBeenCalled(); 
-        });`;
+        });\n\n`;
     } else {
       test = `it('should respect ${prop} prop', () => {
             render(<${componentName} ${prop} />); 
     
             expect();
-        });`;
+        });\n\n`;
     }
 
     propTests = propTests + test;
