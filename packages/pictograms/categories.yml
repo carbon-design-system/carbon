@@ -74,6 +74,8 @@ categories:
       - berlin--tower
       - boston--zakim-bridge
       - budapest
+      - budapest--lab-skyline
+      - budapest--citadella
       - cairo--giza-plateau
       - canada--maple-leaf
       - chicago
@@ -147,8 +149,10 @@ categories:
       - washington-dc--monument
   - name: Cloud
     members:
+      - accelerating-transformation
       - access-management
       - active--server
+      - agility-with-hybrid-multicloud
       - api
       - apps
       - audio-data
@@ -170,6 +174,7 @@ categories:
       - cloud--oracle
       - cloud--partners
       - cloud--planning
+      - cloud--platform
       - cloud--sap
       - cloud--services
       - cloud--services--pricing
@@ -190,10 +195,12 @@ categories:
       - cognos--analytics
       - compliant
       - condition--builder
+      - confidential-computing
       - construct
       - connectivity
       - continuous
       - control
+      - controls-framework
       - customizable
       - data--privacy--02
       - data--transfer
@@ -209,6 +216,7 @@ categories:
       - extend-the-data-center
       - extensible
       - fast
+      - faster-innovation-with-partners
       - fault-tolerant
       - filter-and-group-data
       - filter--variable
@@ -228,15 +236,19 @@ categories:
       - integration--02
       - java
       - javascript
+      - keep-your-own-key
       - leader
       - lift-and-shift
       - list--bullet
       - list--checkbox
+      - lowering-risk
       - marketplace
       - mas
       - modernize
       - monitor
       - mqa
+      - new-financial-customer-experiences
+      - new-revenue-streams
       - operate-offline
       - operational-efficiency
       - pay-for-what-you-use
@@ -250,6 +262,8 @@ categories:
       - random--samples
       - react-to-data
       - real-time
+      - redefining-financial-services
+      - reducing-cost
       - reliability--02
       - resource-health
       - saas--enablement
@@ -263,6 +277,7 @@ categories:
       - softlayer--enablement
       - start-for-free
       - streaming-data
+      - streamline--operations
       - subsecond
       - text--data
       - transform-data
@@ -377,7 +392,7 @@ categories:
       - tape--storage
       - virtualization
       - zero-trust
-  - name: Design and Development
+  - name: Design and development
     members:
       - app--developer
       - application
@@ -393,6 +408,7 @@ categories:
       - hills
       - idea
       - ideate
+      - inner-source
       - organization
       - overview
       - path
