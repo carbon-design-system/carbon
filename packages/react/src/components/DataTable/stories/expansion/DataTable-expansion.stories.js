@@ -37,23 +37,6 @@ export default {
     TableHeader,
     TableRow,
   },
-  argTypes: {
-    size: {
-      options: ['xs', 'sm', 'md', 'lg', 'xl'],
-      control: { type: 'select' },
-    },
-    useZebraStyles: {
-      control: { type: 'boolean' },
-    },
-    radio: {
-      control: { type: 'boolean' },
-    },
-    isSortable: { control: { type: 'boolean' } },
-  },
-  args: {
-    size: 'lg',
-    useZebraStyles: false,
-  },
   parameters: {
     docs: {
       page: mdx,
@@ -61,8 +44,8 @@ export default {
   },
 };
 
-export const Usage = (args) => (
-  <DataTable rows={rows} headers={headers} {...args}>
+export const Default = () => (
+  <DataTable rows={rows} headers={headers}>
     {({
       rows,
       headers,
@@ -109,9 +92,8 @@ export const Usage = (args) => (
   </DataTable>
 );
 
-export const BatchExpansion = (args) => (
+export const BatchExpansion = () => (
   <DataTable
-    {...args}
     rows={rows}
     headers={headers}
     render={({
@@ -163,4 +145,52 @@ export const BatchExpansion = (args) => (
       </TableContainer>
     )}
   />
+);
+
+export const Playground = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With expansion"
+        {...getTableContainerProps()}>
+        <Table {...getTableProps()}>
+          <TableHead>
+            <TableRow>
+              <TableExpandHeader id="expand" />
+              {headers.map((header, i) => (
+                <TableHeader key={i} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <React.Fragment key={row.id}>
+                <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>
+                  {row.cells.map((cell) => (
+                    <TableCell key={cell.id}>{cell.value}</TableCell>
+                  ))}
+                </TableExpandRow>
+                <TableExpandedRow
+                  colSpan={headers.length + 1}
+                  className="demo-expanded-td">
+                  <h6>Expandable row content</h6>
+                  <div>Description here</div>
+                </TableExpandedRow>
+              </React.Fragment>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
 );
