@@ -54,6 +54,7 @@ In particular, you can use the following classes:
 | `$label-01`                |                                                                   |      | ✅       |
 | `$legal-02`                |                                                                   |      | ✅       |
 | `$helper-text-01`          |                                                                   |      | ✅       |
+| `$helper-text-02`          |                                                                   |      | ✅       |
 | `$body-short-01`           |                                                                   |      | ✅       |
 | `$body-compact-01`         |                                                                   |      | ✅       |
 | `$body-long-01`            |                                                                   |      | ✅       |

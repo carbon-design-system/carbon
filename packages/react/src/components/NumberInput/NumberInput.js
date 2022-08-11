@@ -319,9 +319,9 @@ NumberInput.propTypes = {
   min: PropTypes.number,
 
   /**
-   * The new value is available in 'imaginaryTarget.value'
-   * i.e. to get the value: evt.imaginaryTarget.value
-   *
+   * Provide an optional handler that is called when the internal state of
+   * NumberInput changes. This handler is called with event and state info.
+   * `(event, { value, direction }) => void`
    */
   onChange: PropTypes.func,
 
