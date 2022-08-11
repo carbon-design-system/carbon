@@ -315,6 +315,10 @@
     - vehicle
     - travel
     - transportation
+- name: availability
+  friendly_name: Availability
+  aliases:
+    - availability
 - name: baby--bottle
   friendly_name: Baby bottle
   aliases:
@@ -878,6 +882,14 @@
     - data
     - analytics
     - data analytics
+- name: chart--two-y-axis
+  friendly_name: Chart 2 y axis
+  aliases:
+    - double axes
+    - two axis
+    - 2 axes
+    - 2 axis
+    - multiple axes
 - name: cheese
   friendly_name: Cheese
   aliases:
@@ -1029,6 +1041,11 @@
     - cloud
     - guidelines
     - best practices
+- name: cloud--infrastructure-management
+  friendly_name: Cloud infrastructure management
+  aliases:
+    - cloud infrastructure management
+    - hybrid cloud management
 - name: cloud--managed--services
   friendly_name: Cloud managed services
   aliases:
@@ -1391,8 +1408,14 @@
   aliases:
     - conversation
     - watson
+- name: cookie
+  friendly_name: Cookie
+  aliases:
+    - cookie
+    - cookies
+    - cookies tracking
 - name: copenhagen--planetarium
-  friendly_name: Copenhagan planetarium
+  friendly_name: Copenhagen planetarium
   aliases:
     - copenhagen planetarium
     - copenhage
@@ -1470,6 +1493,12 @@
     - data privacy
     - data protection
     - shield
+- name: data--privacy--key
+  friendly_name: Data privacy key
+  aliases:
+    - data privacy
+    - key
+    - data security
 - name: data--processing
   friendly_name: Data processing
   aliases:
@@ -1497,6 +1526,12 @@
     - data storage
     - data
     - storage
+- name: decision-velocity
+  friendly_name: Decision velocity
+  aliases:
+    - decision velocity
+    - ai
+    - decision making
 - name: delete
   friendly_name: Delete
   aliases:
@@ -1571,6 +1606,13 @@
     - device pairing
     - transformation
     - orientation
+- name: devices-at-ibm
+  friendly_name: Devices@IBM
+  aliases:
+    - laptop
+    - laptop delivery
+    - laptop service
+    - laptop deployment
 - name: devops
   friendly_name: Devops
   aliases:
@@ -2109,6 +2151,20 @@
   friendly_name: Flashing content
   aliases:
     - flashing content
+- name: flexibility
+  friendly_name: Flexibility
+  aliases:
+    - flexibility
+- name: flexible--compute
+  friendly_name: Flexible compute
+  aliases:
+    - flexible compute
+- name: flexible--infrastructure
+  friendly_name: Flexible infrastructure
+  aliases:
+    - flexible infrastructure
+    - storage flexibility
+    - server flexibility
 - name: flow--chart
   friendly_name: Flow chart
   aliases:
@@ -2354,6 +2410,12 @@
     - users
     - identities
     - security
+- name: green-energy
+  friendly_name: Green energy
+  aliases:
+    - green energy
+    - green electric
+    - energy consumption
 - name: group
   friendly_name: Group
   aliases:
@@ -2650,6 +2712,39 @@
     - Linux
     - single frame
     - IBM Z
+- name: ibm--z16
+  friendly_name: IBM z16
+  aliases:
+    - IBM z16
+- name: ibm--z16--multi-frame
+  friendly_name: IBM z16 multi-frame
+  aliases:
+    - linuxone
+    - z
+    - server
+    - tower
+    - linux
+    - multi-frame
+    - ibm z
+- name: ibm--z16--plus-cloud
+  friendly_name: IBM z16 plus cloud
+  aliases:
+    - z16
+    - ibm z
+    - z
+    - cloud
+    - cloud infrastructure
+    - hybrid cloud
+- name: ibm--z16--single-frame
+  friendly_name: IBM z16 single frame
+  aliases:
+    - linuxone
+    - z
+    - server
+    - tower
+    - linux
+    - single frame
+    - ibm z
 - name: id--badge
   friendly_name: ID badge
   aliases:
@@ -3947,6 +4042,13 @@
     - qr code
     - code
     - ID
+- name: quantum--safe
+  friendly_name: Quantum safe
+  aliases:
+    - quantum safe
+    - future safe
+    - future secure
+    - quantum
 - name: quantum-computing
   friendly_name: Quantum computing
   aliases:
@@ -4089,6 +4191,10 @@
     - relationship
     - watson
     - AI
+- name: reliability
+  friendly_name: Reliability
+  aliases:
+    - reliability
 - name: renew
   friendly_name: Renew
   aliases:
@@ -4153,6 +4259,10 @@
     - settings
     - networking
     - network
+- name: resilience
+  friendly_name: Resilience
+  aliases:
+    - resilience
 - name: retrieve--and--rank
   friendly_name: Retrieve and rank
   aliases:
@@ -4758,6 +4868,11 @@
     - services
     - networking
     - network
+- name: sustainability
+  friendly_name: Sustainability
+  aliases:
+    - sustainability
+    - environmental
 - name: swipe--left
   friendly_name: Swipe left
   aliases:
@@ -4906,6 +5021,15 @@
     - teammates
     - team
     - people
+- name: technical-owner
+  friendly_name: Technical owner
+  aliases:
+    - learning
+    - technical owner
+    - technical
+    - education
+    - technique
+    - security
 - name: tel-aviv
   friendly_name: Tel Aviv
   aliases:
@@ -5473,6 +5597,10 @@
     - speed
     - storage
     - cloud
+- name: virtualization
+  friendly_name: Virtualization
+  aliases:
+    - virtualization
 - name: virus
   friendly_name: Virus
   aliases:
@@ -5705,3 +5833,9 @@
     - exercise
     - health
     - active
+- name: zero-trust
+  friendly_name: Zero trust
+  aliases:
+    - zero trust
+    - user security
+    - trusted user
