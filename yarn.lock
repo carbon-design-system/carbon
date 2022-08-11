@@ -2154,6 +2154,7 @@ __metadata:
     copy-to-clipboard: ^3.3.1
     css-loader: ^6.5.1
     downshift: 5.2.1
+    enquirer: ^2.3.6
     fast-glob: ^3.2.7
     flatpickr: 4.6.9
     fs-extra: ^10.0.0
