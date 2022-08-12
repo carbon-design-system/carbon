@@ -4184,6 +4184,7 @@ Map {
       "primaryButtonText": "Save",
       "secondaryButtonText": "Cancel",
       "selectorPrimaryFocus": "[data-modal-primary-focus]",
+      "shouldCloseAfterSubmit": true,
       "triggerButtonIconDescription": "Provide icon description if icon is used",
       "triggerButtonKind": "primary",
     },

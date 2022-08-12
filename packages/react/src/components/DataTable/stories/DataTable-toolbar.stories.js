@@ -24,7 +24,7 @@ import {
   TableToolbarContent,
   TableToolbarSearch,
   TableToolbarMenu,
-} from '../../DataTable';
+} from '..';
 import mdx from '../DataTable.mdx';
 import { headers, rows } from './shared';
 
@@ -47,7 +47,7 @@ export default {
   },
 };
 
-export const DefaultToolbar = () => (
+export const Default = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -65,21 +65,7 @@ export const DefaultToolbar = () => (
         {...getTableContainerProps()}>
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch
-              onChange={onInputChange}
-              onClear={action('onClear')}
-              onFocus={(event, handleExpand) => {
-                action('onFocus')();
-                handleExpand(event, true);
-              }}
-              onBlur={(event, handleExpand) => {
-                action('onBlur')();
-                const { value } = event.target;
-                if (!value) {
-                  handleExpand(event, false);
-                }
-              }}
-            />
+            <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu light>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
@@ -119,7 +105,7 @@ export const DefaultToolbar = () => (
   </DataTable>
 );
 
-export const SmallToolbar = () => (
+export const PersistentToolbar = () => (
   <DataTable rows={rows} headers={headers}>
     {({
       rows,
@@ -135,27 +121,10 @@ export const SmallToolbar = () => (
         title="DataTable"
         description="With toolbar"
         {...getTableContainerProps()}>
-        <TableToolbar
-          {...getToolbarProps()}
-          aria-label="data table toolbar"
-          size="sm">
+        <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch
-              onChange={onInputChange}
-              onClear={action('onClear')}
-              onFocus={(event, handleExpand) => {
-                action('onFocus')();
-                handleExpand(event, true);
-              }}
-              onBlur={(event, handleExpand) => {
-                action('onBlur')();
-                const { value } = event.target;
-                if (!value) {
-                  handleExpand(event, false);
-                }
-              }}
-            />
-            <TableToolbarMenu light size="sm">
+            <TableToolbarSearch onChange={onInputChange} persistent />
+            <TableToolbarMenu light>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
               </TableToolbarAction>
@@ -194,6 +163,67 @@ export const SmallToolbar = () => (
   </DataTable>
 );
 
+export const SmallPersistentToolbar = () => (
+  <DataTable rows={rows} headers={headers}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getToolbarProps,
+      onInputChange,
+      getTableContainerProps,
+    }) => (
+      <TableContainer
+        title="DataTable"
+        description="With toolbar"
+        {...getTableContainerProps()}>
+        <TableToolbar
+          {...getToolbarProps()}
+          aria-label="data table toolbar"
+          size="sm">
+          <TableToolbarContent>
+            <TableToolbarSearch onChange={onInputChange} persistent size="sm" />
+            <TableToolbarMenu light size="sm">
+              <TableToolbarAction onClick={action('Action 1 Click')}>
+                Action 1
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 2 Click')}>
+                Action 2
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 3 Click')}>
+                Action 3
+              </TableToolbarAction>
+            </TableToolbarMenu>
+            <Button onClick={action('Button click')}>Primary Button</Button>
+          </TableToolbarContent>
+        </TableToolbar>
+        <Table {...getTableProps()} size="sm">
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
 export const WithOverflowMenu = () => (
   <DataTable rows={rows} headers={headers}>
     {({
@@ -208,21 +238,7 @@ export const WithOverflowMenu = () => (
       <TableContainer title="DataTable" description="With overflow menu">
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch
-              onChange={onInputChange}
-              onClear={action('onClear')}
-              onFocus={(event, handleExpand) => {
-                action('onFocus')();
-                handleExpand(event, true);
-              }}
-              onBlur={(event, handleExpand) => {
-                action('onBlur')();
-                const { value } = event.target;
-                if (!value) {
-                  handleExpand(event, false);
-                }
-              }}
-            />
+            <TableToolbarSearch onChange={onInputChange} />
             <TableToolbarMenu light>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
@@ -269,3 +285,83 @@ export const WithOverflowMenu = () => (
     )}
   </DataTable>
 );
+
+export const Playground = (args) => (
+  <DataTable rows={rows} headers={headers} {...args}>
+    {({
+      rows,
+      headers,
+      getHeaderProps,
+      getRowProps,
+      getTableProps,
+      getToolbarProps,
+      onInputChange,
+    }) => (
+      <TableContainer title="DataTable" description="With overflow menu">
+        <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
+          <TableToolbarContent>
+            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarMenu light>
+              <TableToolbarAction onClick={action('Action 1 Click')}>
+                Action 1
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 2 Click')}>
+                Action 2
+              </TableToolbarAction>
+              <TableToolbarAction onClick={action('Action 3 Click')}>
+                Action 3
+              </TableToolbarAction>
+            </TableToolbarMenu>
+            <Button onClick={action('Button click')}>Primary Button</Button>
+          </TableToolbarContent>
+        </TableToolbar>
+        <Table {...getTableProps()}>
+          <TableHead>
+            <TableRow>
+              {headers.map((header) => (
+                <TableHeader key={header.key} {...getHeaderProps({ header })}>
+                  {header.header}
+                </TableHeader>
+              ))}
+              <TableHeader />
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {rows.map((row) => (
+              <TableRow key={row.id} {...getRowProps({ row })}>
+                {row.cells.map((cell) => (
+                  <TableCell key={cell.id}>{cell.value}</TableCell>
+                ))}
+                <TableCell className="cds--table-column-menu">
+                  <OverflowMenu size="sm" flipped>
+                    <OverflowMenuItem>Action 1</OverflowMenuItem>
+                    <OverflowMenuItem>Action 2</OverflowMenuItem>
+                    <OverflowMenuItem>Action 3</OverflowMenuItem>
+                  </OverflowMenu>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    )}
+  </DataTable>
+);
+
+Playground.argTypes = {
+  size: {
+    options: ['xs', 'sm', 'md', 'lg', 'xl'],
+    control: { type: 'select' },
+  },
+  useZebraStyles: {
+    control: { type: 'boolean' },
+  },
+  radio: {
+    control: { type: 'boolean' },
+  },
+  isSortable: { control: { type: 'boolean' } },
+  persistent: { control: { type: 'boolean' } },
+  overflowMenuOnHover: {
+    control: { type: 'boolean' },
+  },
+};
