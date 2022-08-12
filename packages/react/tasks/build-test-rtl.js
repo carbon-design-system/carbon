@@ -119,11 +119,26 @@ async function main() {
   let isSubComponent = false;
 
   for await (const file of files) {
+    let skeletonComponent;
+    if (componentName.includes('Skeleton')) {
+      skeletonComponent = componentName.slice(
+        0,
+        componentName.length - 'Skeleton'.length
+      );
+    }
+
     const subFiles = await fs.readdir(
       path.join(__dirname, `../src/components/${file}`)
     );
 
-    const found = subFiles.find((subFile) => subFile === `${componentName}.js`);
+    const skeletonFound = subFiles.find(
+      (subFile) => subFile === `${skeletonComponent}.Skeleton.js`
+    );
+
+    let found;
+    if (!skeletonFound) {
+      found = subFiles.find((subFile) => subFile === `${componentName}.js`);
+    }
 
     const testFolderExists = await fs.pathExists(
       path.join(__dirname, `../src/components/${file}/__tests__/`)
@@ -139,6 +154,22 @@ async function main() {
 
     if (!componentPathExists) {
       isSubComponent = true;
+    }
+
+    if (skeletonFound && testFolderExists) {
+      pathToComponent = path.join(
+        __dirname,
+        `../src/components/${skeletonComponent}/__tests__/${componentName}-test__copy.js`
+      );
+      break;
+    }
+
+    if (skeletonFound && !testFolderExists) {
+      pathToComponent = path.join(
+        __dirname,
+        `../src/components/${skeletonComponent}/${componentName}-test__copy.js`
+      );
+      break;
     }
 
     if (found && testFolderExists) {
