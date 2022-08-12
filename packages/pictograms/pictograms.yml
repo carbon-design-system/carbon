@@ -2692,26 +2692,6 @@
     - Z LPAR
     - Z partition
     - Z DPM mode partition
-- name: ibm--z-and-linuxone-multi-frame
-  friendly_name: IBM Z® and LinuxONE multi-frame
-  aliases:
-    - LinuxONE
-    - Z
-    - server
-    - tower
-    - Linux
-    - multi-frame
-    - IBM Z
-- name: ibm--z-and-linuxone-single-frame
-  friendly_name: IBM Z® and LinuxONE single frame
-  aliases:
-    - LinuxONE
-    - Z
-    - server
-    - tower
-    - Linux
-    - single frame
-    - IBM Z
 - name: ibm--z16
   friendly_name: IBM z16
   aliases:
