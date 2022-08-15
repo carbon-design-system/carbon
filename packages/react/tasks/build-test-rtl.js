@@ -104,9 +104,7 @@ async function main() {
   // Gets component props
   const propTypes = CarbonComponents[componentName].propTypes;
   if (!propTypes) {
-    console.error(
-      'This component might not be suited for auto-test creation :('
-    );
+    console.error('This component might not be suited for test generation :(');
     return;
   }
 
