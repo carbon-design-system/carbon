@@ -1,3 +1,11 @@
-@use '@carbon/react' with (
-  $font-path: '@ibm/plex'
+@use '@carbon/react/scss/compat/themes' as compat;
+@use '@carbon/react/scss/themes';
+@use '@carbon/react/scss/theme' with (
+  $fallback: compat.$g100,
+  $theme: themes.$g100
 );
+@use '@carbon/react';
+
+:root {
+  @include theme.theme();
+}
