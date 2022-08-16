@@ -14,6 +14,11 @@ describe('FluidForm', () => {
       expect(screen.getAllByText('Text')).toHaveLength(2);
     });
 
+    it('should be a fluid form', () => {
+      const { container } = render(<FluidForm />);
+      expect(container.firstChild).toHaveClass('cds--form--fluid');
+    });
+
     it('should spread extra props onto outermost container', () => {
       const { container } = render(<FluidForm data-testid="test-id" />);
 
