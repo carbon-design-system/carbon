@@ -7,17 +7,9 @@
 
 import React, { useState } from 'react';
 import { Document, Folder } from '@carbon/icons-react';
-import { default as TreeView, TreeNode } from '../';
+import { default as TreeView, TreeNode } from './';
 import './story.scss';
 
-const props = () => ({
-  active: '5',
-  hideLabel: false,
-  label: 'Tree view',
-  multiselect: false,
-  selected: ['5'],
-  size: 'default',
-});
 const nodes = [
   {
     id: '1',
@@ -191,39 +183,48 @@ function renderTree({ nodes, expanded, withIcons = false }) {
 export default {
   title: 'components/TreeView',
   component: TreeView,
+  subcomponents: {
+    TreeNode,
+  },
+  args: {},
   argTypes: {
-    size: {
-      options: ['xs', 'sm'],
-      control: { type: 'select' },
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+
+    label: {
+      table: {
+        disable: true,
+      },
+    },
+
+    onSelect: {
+      table: {
+        disable: true,
+      },
     },
   },
-  args: {
-    size: 'sm',
-  },
 };
 
-export const Default = (args) => (
-  <TreeView {...props()} {...args}>
-    {renderTree({ nodes })}
-  </TreeView>
+export const Default = () => (
+  <TreeView label="Tree View">{renderTree({ nodes })}</TreeView>
 );
 
-Default.storyName = 'default';
-Default.parameters = {
-  info: {
-    text: ``,
-  },
-};
-
-export const WithIcons = (args) => (
-  <TreeView {...props()} {...args}>
+export const WithIcons = () => (
+  <TreeView label="Tree View">
     {renderTree({ nodes, withIcons: true })}
   </TreeView>
 );
 
-WithIcons.storyName = 'with icons';
-
-export const WithControlledExpansion = (args) => {
+export const WithControlledExpansion = () => {
   const [expanded, setExpanded] = useState(undefined);
   return (
     <>
@@ -235,9 +236,23 @@ export const WithControlledExpansion = (args) => {
           collapse all
         </button>
       </div>
-      <TreeView {...props()} {...args}>
-        {renderTree({ nodes, expanded })}
-      </TreeView>
+      <TreeView label="Tree View">{renderTree({ nodes, expanded })}</TreeView>
     </>
   );
+};
+
+export const Playground = (args) => (
+  <TreeView label="Tree View" {...args}>
+    {renderTree({ nodes })}
+  </TreeView>
+);
+
+Playground.argTypes = {
+  active: { control: { type: 'text' } },
+  hideLabel: { defaultValue: false },
+  multiselect: { defaultValue: false },
+  size: {
+    options: ['xs', 'sm'],
+    control: { type: 'select' },
+  },
 };
