@@ -9,17 +9,17 @@ library:
     - title: Tutorial
       items:
         - title: Overview
-          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/overview.mdx'
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/overview.mdx'
         - title: Step 1
-          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-1.mdx'
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/step-1.mdx'
         - title: Step 2
-          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-2.mdx'
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/step-2.mdx'
         - title: Step 3
-          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-3.mdx'
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/step-3.mdx'
         - title: Step 4
-          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-4.mdx'
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/step-4.mdx'
         - title: Step 5
-          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-5.mdx'
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/step-5.mdx'
         - title: Wrapping up
           path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/wrapping-up.mdx'
 assets:
@@ -276,7 +276,7 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-layer
     tags:
-      - shell 
+      - shell
   link:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
@@ -427,7 +427,7 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-progressindicator
-  radio-button: 
+  radio-button:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
     framework: react
