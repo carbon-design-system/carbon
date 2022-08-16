@@ -19,8 +19,6 @@ describe('PrimaryButton', () => {
     it('should be of kind primary', () => {
       render(<PrimaryButton>Submit</PrimaryButton>);
 
-      screen.debug();
-
       expect(screen.getByText('Submit')).toHaveClass('cds--btn--primary');
     });
   });
