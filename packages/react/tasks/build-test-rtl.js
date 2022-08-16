@@ -58,6 +58,12 @@ function writeTestFile(props, componentName, isSubComponent) {
   
   describe('${componentName}', () => {
     describe('renders as expected - Component API', () => {
+      it('should spread extra props onto outermost element', () => {
+        const { container } = render(<${componentName} data-testid="test-id" />)
+
+        expect(container.firstChild).toHaveAttribute('data-testid', 'test-id'); 
+      })
+
       ${propTests}
     });
 
@@ -74,6 +80,12 @@ function writeTestFile(props, componentName, isSubComponent) {
   
   describe('${componentName}', () => {
     describe('renders as expected - Component API', () => {
+      it('should spread extra props onto outermost element', () => {
+        const { container } = render(<${componentName} data-testid="test-id" />)
+
+        expect(container.firstChild).toHaveAttribute('data-testid', 'test-id'); 
+      })
+      
       ${propTests}
     });
 
