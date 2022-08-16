@@ -163,7 +163,6 @@ categories:
       - cloud--ecosystem
       - cloud--guidelines
       - cloud--managed--services
-      - cloud--native
       - cloud--oracle
       - cloud--partners
       - cloud--planning
@@ -714,6 +713,7 @@ categories:
       - build-applications-anywhere
       - cloud--native--01
       - cloud--native--02
+      - cloud--native--03
       - cluster
       - connect--applications
       - container

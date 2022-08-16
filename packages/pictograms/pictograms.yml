@@ -1494,7 +1494,7 @@
   friendly_name: Customizable
   aliases:
     - customizable
-    - Cloud 
+    - Cloud
 - name: dashboard
   friendly_name: Dashboard
   aliases:
@@ -3075,7 +3075,7 @@
   friendly_name: Lift and shift
   aliases:
     - lift and shift
-    - Cloud 
+    - Cloud
 - name: lightning
   friendly_name: Lightning
   aliases:
@@ -5847,17 +5847,17 @@
   aliases:
     - webcast
     - controls
+- name: websites
+  friendly_name: Websites
+  aliases:
+    - websites
+    - Cloud
 - name: wedding--cake
   friendly_name: Wedding cake
   aliases:
     - wedding cake
     - cake
     - creative
-- name: websites
-  friendly_name: Websites
-  aliases:
-    - websites
-    - Cloud
 - name: wheat
   friendly_name: Wheat
   aliases:
