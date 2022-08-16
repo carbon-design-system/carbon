@@ -2190,17 +2190,17 @@
     - file
     - transfer
     - move
-- name: filter-and-group-data
-  friendly_name: Filter and group data
-  aliases:
-    - filter and group data
-    - Cloud
 - name: filter--variable
   friendly_name: Filter variable
   aliases:
     - filter variable
     - variable
     - define variable
+- name: filter-and-group-data
+  friendly_name: Filter and group data
+  aliases:
+    - filter and group data
+    - Cloud
 - name: finance--strategy
   friendly_name: Finance strategy
   aliases:
@@ -4123,7 +4123,7 @@
   friendly_name: Predictability
   aliases:
     - predictability
-    -Cloud
+    - Cloud
 - name: pregnant
   friendly_name: Pregnant
   aliases:
