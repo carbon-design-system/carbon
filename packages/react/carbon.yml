@@ -2,676 +2,699 @@
 library:
   id: carbon-react
   name: Carbon React
-  description: React implementation of Carbon Components.
+  description: Build user interfaces with core components using Carbon's primary library.
   externalDocsUrl: https://react.carbondesignsystem.com
   inherits: carbon-styles
   navData:
-   - title: Tutorial
-     items:
-       - title: Overview
-         path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/overview.mdx'
-       - title: Step 1
-         path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-1.mdx'
-       - title: Step 2
-         path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-2.mdx'
-       - title: Step 3
-         path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-3.mdx'
-       - title: Step 4
-         path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-4.mdx'
-       - title: Step 5
-         path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-5.mdx'
-       - title: Wrapping up
-         path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/wrapping-up.mdx'
+    - title: Tutorial
+      items:
+        - title: Overview
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/overview.mdx'
+        - title: Step 1
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-1.mdx'
+        - title: Step 2
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-2.mdx'
+        - title: Step 3
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-3.mdx'
+        - title: Step 4
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-4.mdx'
+        - title: Step 5
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/step-5.mdx'
+        - title: Wrapping up
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/wrapping-up.mdx'
 assets:
-    accordion:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-accordion
-    aspect-ratio:
-      status: stable
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-aspectratio
-    breadcrumb:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-breadcrumb
-    button:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/button/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-button
-    checkbox:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/checkbox/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-checkbox
-    code-snippet:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-codesnippet
-    combo-box:
-      status: stable
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-combobox
-    composed-modal:
-      name: Composed modal
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/composed-modal.svg
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-composedmodal
-      tags:
-        - input-control
-    content-switcher:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/content-switcher/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-contentswitcher
-    copy-button:
-      status: stable
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-copybutton
-    data-table:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-datatable
-    date-picker:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/date-picker/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-datepicker
-    dropdown:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-dropdown
-    error-boundary:
-      name: Error boundary
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/error-boundary.svg 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-errorboundary
-      tags:
-        - system-feedback
-    file-uploader:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-fileuploader--file-uploader
-    flex-grid:
-      name: Flex grid
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/flex-grid.svg 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
-      tags:
-        - shell
-    form:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-form
-    form-group:
-        name: Form group
-        framework: react
-        status: stable
-        type: component
-        platform: web
-        thumbnailPath: ./thumbnails/form-group.svg
-        demoLinks:
-          - type: storybook
-            name: Storybook
-            action: link
-            url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
-        tags:
-          - form
-    icon-button:
-        name: Icon button
-        framework: react
-        status: stable
-        type: component
-        platform: web
-        thumbnailPath: ./thumbnails/icon-button.svg 
-        demoLinks:
-          - type: storybook
-            name: Storybook
-            action: link
-            url: https://react.carbondesignsystem.com/?path=/docs/components-iconbutton
-        tags:
-          - input-control
-          - media
-    inline-loading:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-inlineloading
-    layer:
-      name: Layer
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/layer.svg 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-layer
-      tags:
-        - shell 
-    link:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-link
-    loading:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-loading
-    modal:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-modal
-    multiselect:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-multiselect
-    notification:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/notification/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-notifications
-    number-input:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-numberinput
-    ordered-list:
-      name: Ordered list
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/ordered-list.svg
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-orderedlist
-      tags:
-        - data-display
-    overflow-menu:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu
-    pagination:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-pagination
-    pagination-nav:
-      status: stable
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-paginationnav
-    popover:
-      status: stable
-      framework: react
-      externalDocsUrl: https://www.carbondesignsystem.com/components/popover/usage
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-popover
-    progress-bar:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage 
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-progressbar
-    progress-indicator:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/progress-indicator/usage 
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-progressindicator
-    radio-button: 
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-radiobutton
-    search:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage 
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-search
-    select:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage 
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-select
-    skeleton:
-      name: Skeleton
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/skeleton.svg
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-skeleton
-      tags:
-        - shell
-    slider:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage 
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-slider
-    structured-list:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage 
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-structuredlist
-    tabs:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-tabs
-    tag:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-tag
-    text-area:
-      status: stable
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-textarea
-    text-input:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-textinput
-    theme:
-      status: stable
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-theme--default
-    tile:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-tile
-    time-picker:
-      status: stable
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-timepicker
-    toggle:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/toggle/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-toggle
-    toggletip:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-toggletip
-      tags:
-        - content-element
-    tooltip:
-      status: stable
-      externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-tooltip
-    tooltip-definition:
-      status: stable
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-definitiontooltip
-    ui-shell-header:
-      framework: react
-      externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
-      status: stable
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
-    unordered-list:
-      name: Unordered list
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/unordered-list.svg 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
-      tags:
-        - data-display 
-    grid:
-      status: stable
-      type: component
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/elements-grid
-    fluid-form:
-      name: Fluid form
-      framework: react
-      status: experimental
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/fluid-form.svg
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/experimental-fluidform
-      tags:
-        - form
-    unstable-heading:
-      name: Unstable heading
-      framework: react
-      status: experimental
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/unstable-heading.svg  
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-heading
-      tags:
-        - content-element
-    unstable-menu:
-      name: Unstable menu
-      framework: react
-      status: experimental
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/unstable-menu.svg
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu
-      tags:
-        - system-feedback
-    unstable-pagination:
-      name: Unstable pagination
-      framework: react
-      status: experimental
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/unstable-pagination.svg 
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-pagination
-      tags:
-        - data-display
-        - contextual-navigation
-    unstable-text:
-      name: Unstable text
-      framework: react
-      status: experimental
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/unstable-text.svg
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
-      tags:
-        - input-control
-    tree-view:
-      status: experimental
-      framework: react
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
-    stack:
-      name: Stack
-      framework: react
-      status: stable
-      type: component
-      platform: web
-      thumbnailPath: ./thumbnails/stack.svg  
-      demoLinks:
-        - type: storybook
-          name: Storybook
-          action: link
-          url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
-      tags:
-        - content-block
-    use-feature-flag:
-      name: unstable_useFeatureFlag
-      framework: react
-      status: experimental
-      type: function
-      platform: web
-      tags:
-        - hook
-    use-feature-flags:
-      name: unstable_useFeatureFlags
-      framework: react
-      status: experimental
-      type: function
-      platform: web
-      tags:
-        - hook
-    use-context-menu:
-      name: unstable_useContextMenu
-      framework: react
-      status: experimental
-      type: function
-      platform: web
-      tags:
-        - hook
-    use-theme:
-      name: useTheme
-      framework: react
-      status: stable
-      type: function
-      platform: web
-      tags:
-        - hook
-    
+  accordion:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/accordion/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-accordion
+  aspect-ratio:
+    status: stable
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-aspectratio
+  breadcrumb:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-breadcrumb
+  button:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/button/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-button
+  checkbox:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/checkbox/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-checkbox
+  code-snippet:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-codesnippet
+  combo-box:
+    status: stable
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-combobox
+  composed-modal:
+    name: Composed modal
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/composed-modal.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-composedmodal
+    tags:
+      - input-control
+  content-switcher:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/content-switcher/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-contentswitcher
+  copy-button:
+    status: stable
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-copybutton
+  data-table:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-datatable
+  date-picker:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/date-picker/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-datepicker
+  dropdown:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-dropdown
+  error-boundary:
+    name: Error boundary
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/error-boundary.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-errorboundary
+    tags:
+      - system-feedback
+  file-uploader:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-fileuploader--file-uploader
+  flex-grid:
+    name: Flex grid
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/flex-grid.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
+    tags:
+      - shell
+  fluid-form:
+    name: Fluid form
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/fluid-form.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-fluidform
+    tags:
+      - form
+  form:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-form
+  form-group:
+    name: Form group
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/form-group.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
+    tags:
+      - form
+  grid:
+    status: stable
+    type: component
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/elements-grid
+  heading:
+    name: Unstable heading
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/heading.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-heading
+    tags:
+      - content-element
+  icon-button:
+    name: Icon button
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/icon-button.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-iconbutton
+    tags:
+      - input-control
+      - media
+  inline-loading:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/inline-loading/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-inlineloading
+  layer:
+    name: Layer
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/layer.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-layer
+    tags:
+      - shell 
+  link:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-link
+  loading:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-loading
+  menu:
+    name: Unstable menu
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/menu.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu
+    tags:
+      - system-feedback
+  modal:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-modal
+  multiselect:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-multiselect
+  notification:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/notification/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-notifications
+  number-input:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-numberinput
+  ordered-list:
+    name: Ordered list
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/ordered-list.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-orderedlist
+    tags:
+      - data-display
+  overflow-menu:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu
+  pagination:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-pagination
+  pagination-nav:
+    status: stable
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-paginationnav
+  pagination-v2:
+    name: Unstable pagination
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/pagination-v2.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-pagination
+    tags:
+      - data-display
+      - contextual-navigation
+  popover:
+    status: stable
+    framework: react
+    externalDocsUrl: https://www.carbondesignsystem.com/components/popover/usage
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-popover
+  progress-bar:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-progressbar
+  progress-indicator:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/progress-indicator/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-progressindicator
+  radio-button: 
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-radiobutton
+  search:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-search
+  select:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-select
+  skeleton:
+    name: Skeleton
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/skeleton.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-skeleton
+    tags:
+      - shell
+  slider:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-slider
+  stack:
+    name: Stack
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/stack.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
+    tags:
+      - content-block
+  structured-list:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-structuredlist
+  tabs:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-tabs
+  tag:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-tag
+  text:
+    name: Unstable text
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/text.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
+    tags:
+      - input-control
+  text-area:
+    status: stable
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-textarea
+  text-input:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-textinput
+  theme:
+    status: stable
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-theme--default
+  tile:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-tile
+  time-picker:
+    status: stable
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-timepicker
+  toggle:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/toggle/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-toggle
+  toggletip:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-toggletip
+    tags:
+      - content-element
+  tooltip:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-tooltip
+  tooltip-definition:
+    status: stable
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-definitiontooltip
+  tree-view:
+    status: experimental
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
+  ui-shell-header:
+    framework: react
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
+    status: stable
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
+    docs:
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/code.mdx
+  ui-shell-left-panel:
+    framework: react
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-left-panel/usage
+    status: stable
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
+    docs:
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/code.mdx
+  ui-shell-right-panel:
+    framework: react
+    externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
+    status: stable
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
+    docs:
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/code.mdx
+  unordered-list:
+    name: Unordered list
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/unordered-list.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
+    tags:
+      - data-display
+  use-context-menu:
+    name: unstable_useContextMenu
+    framework: react
+    status: experimental
+    type: function
+    platform: web
+    tags:
+      - hook
+  use-feature-flag:
+    name: unstable_useFeatureFlag
+    framework: react
+    status: experimental
+    type: function
+    platform: web
+    tags:
+      - hook
+  use-feature-flags:
+    name: unstable_useFeatureFlags
+    framework: react
+    status: experimental
+    type: function
+    platform: web
+    tags:
+      - hook
+  use-theme:
+    name: useTheme
+    framework: react
+    status: stable
+    type: function
+    platform: web
+    tags:
+      - hook
