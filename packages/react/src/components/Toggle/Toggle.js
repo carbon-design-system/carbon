@@ -75,6 +75,7 @@ export function Toggle({
         aria-checked={checked}
         disabled={disabled}
         onClick={handleClick}
+        aria-labelledby={id}
       />
       <label htmlFor={id} className={`${prefix}--toggle__label`}>
         <span className={labelTextClasses}>{labelText}</span>
