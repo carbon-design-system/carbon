@@ -6,6 +6,11 @@
     - accelerated
     - acceleration
     - fast
+- name: access-management
+  friendly_name: Access management
+  aliases:
+    - access management
+    - Cloud
 - name: active--server
   friendly_name: Active server
   aliases:
@@ -282,6 +287,11 @@
     - georgia
     - city
     - cities
+- name: audio-data
+  friendly_name: Audio data
+  aliases:
+    - Audio data
+    - Cloud
 - name: audit-trail
   friendly_name: Audit Trail
   aliases:
@@ -311,6 +321,12 @@
     - modular
     - management
     - cloud
+- name: automated
+  friendly_name: Automated
+  aliases:
+    - automated
+    - automate
+    - Cloud
 - name: automation--decision
   friendly_name: Automation decision
   aliases:
@@ -543,6 +559,14 @@
     - consistency
     - business consistency
     - infinity
+- name: business--continuity--02
+  friendly_name: Business continuity 02
+  aliases:
+    - continuity
+    - consistency
+    - business consistency
+    - infinity
+    - Cloud
 - name: c--language
   friendly_name: C
   aliases:
@@ -1251,6 +1275,11 @@
   aliases:
     - cobol
     - coding language
+- name: code
+  friendly_name: Code
+  aliases:
+    - code
+    - cloud
 - name: code--syntax
   friendly_name: Code syntax
   aliases:
@@ -1356,6 +1385,11 @@
   aliases:
     - connected nodes to the cloud
     - nodes
+- name: connectivity
+  friendly_name: Connectivity
+  aliases:
+    - connectivity
+    - Cloud
 - name: console
   friendly_name: Console
   aliases:
@@ -1417,6 +1451,11 @@
   friendly_name: Content design
   aliases:
     - content design
+- name: continuous
+  friendly_name: Continuous
+  aliases:
+    - continuous
+    - Cloud
 - name: continuous--security
   friendly_name: Continuous Security
   aliases:
@@ -1528,6 +1567,15 @@
     - data privacy
     - data protection
     - shield
+- name: data--privacy--02
+  friendly_name: Data privacy 02
+  aliases:
+    - data privacy
+    - data protection
+    - shield
+    - user
+    - user privacy
+    - Cloud
 - name: data--privacy--key
   friendly_name: Data privacy key
   aliases:
@@ -1561,6 +1609,12 @@
     - data storage
     - data
     - storage
+- name: data--transfer
+  friendly_name: Data transfer
+  aliases:
+    - data
+    - data transfer
+    - Cloud
 - name: decision-velocity
   friendly_name: Decision velocity
   aliases:
@@ -1894,6 +1948,11 @@
   friendly_name: Employee insights
   aliases:
     - employee insights
+- name: encryption
+  friendly_name: Encryption
+  aliases:
+    - encryption
+    - Cloud
 - name: endpoint--protection
   friendly_name: Endpoint Protection
   aliases:
@@ -1954,6 +2013,11 @@
     - africa
     - continent
     - location
+- name: event-driven
+  friendly_name: Event driven
+  aliases:
+    - event driven
+    - Cloud
 - name: expand--horz
   friendly_name: Expand horz
   aliases:
@@ -1988,6 +2052,10 @@
     - send
     - ship
     - transmit
+- name: extend-the-data-center
+  friendly_name: Extend the data center
+  aliases:
+    - alias
 - name: extensible
   friendly_name: Extensible
   aliases:
@@ -2080,6 +2148,11 @@
     - water
     - spigot
     - plumbing
+- name: fault-tolerant
+  friendly_name: Fault tolerant
+  aliases:
+    - fault tolerant
+    - Cloud
 - name: feedback--01
   friendly_name: Feedback 01
   aliases:
@@ -2123,6 +2196,11 @@
     - filter variable
     - variable
     - define variable
+- name: filter-and-group-data
+  friendly_name: Filter and group data
+  aliases:
+    - filter and group data
+    - Cloud
 - name: finance--strategy
   friendly_name: Finance strategy
   aliases:
@@ -2621,6 +2699,11 @@
     - greeting
     - gesture
     - people
+- name: high--performance
+  friendly_name: High performance
+  aliases:
+    - high performance
+    - Cloud
 - name: high--risk--users
   friendly_name: High Risk Users
   aliases:
@@ -2629,6 +2712,17 @@
     - risk
     - users
     - security
+- name: high-volume-data
+  friendly_name: High volume data
+  aliases:
+    - high volume data
+    - Cloud
+- name: highly-available
+  friendly_name: Highly available
+  aliases:
+    - highly available
+    - high availability
+    - Cloud
 - name: hills
   friendly_name: Hills
   aliases:
@@ -3712,6 +3806,11 @@
   aliases:
     - operational efficiency
     - Cloud
+- name: operate-offline
+  friendly_name: Operate offline
+  aliases:
+    - operate offline
+    - Cloud
 - name: optimize--cash-flow--01
   friendly_name: Optimize cash flow 01
   aliases:
@@ -4020,6 +4119,11 @@
     - Czechia
     - city
     - cities
+- name: predictability
+  friendly_name: Predictability
+  aliases:
+    - predictability
+    - Cloud
 - name: pregnant
   friendly_name: Pregnant
   aliases:
@@ -4236,11 +4340,21 @@
     - data analytics
     - data
     - analytics
+- name: react-to-data
+  friendly_name: React to data
+  aliases:
+    - react to data
+    - Cloud
 - name: read-only
   friendly_name: Read only
   aliases:
     - read
     - read only
+- name: real-time
+  friendly_name: Real time
+  aliases:
+    - real time
+    - Cloud
 - name: receipt
   friendly_name: Receipt
   aliases:
@@ -4305,6 +4419,11 @@
   friendly_name: Reliability
   aliases:
     - reliability
+- name: reliability--02
+  friendly_name: Reliability 02
+  aliases:
+    - reliability
+    - Cloud
 - name: renew
   friendly_name: Renew
   aliases:
@@ -4373,6 +4492,11 @@
   friendly_name: Resilience
   aliases:
     - resilience
+- name: resource-health
+  friendly_name: Resource health
+  aliases:
+    - resource health
+    - Cloud
 - name: retrieve--and--rank
   friendly_name: Retrieve and rank
   aliases:
@@ -4556,6 +4680,12 @@
   aliases:
     - security
     - shield
+- name: security--02
+  friendly_name: Security 02
+  aliases:
+    - security
+    - shield
+    - Cloud
 - name: security--as--a--service
   friendly_name: Security as a Service
   aliases:
@@ -4634,6 +4764,11 @@
     - data
     - storage
     - backup
+- name: sharing-data
+  friendly_name: Sharing data
+  aliases:
+    - sharing data
+    - Cloud
 - name: shirt
   friendly_name: Shirt
   aliases:
@@ -4941,6 +5076,12 @@
     - strategy
     - business
     - plan
+- name: streaming-data
+  friendly_name: Streaming data
+  aliases:
+    - streaming data
+    - data
+    - Cloud
 - name: streamline
   friendly_name: Streamline
   aliases:
@@ -5246,6 +5387,12 @@
     - lab
     - laboratory
     - research
+- name: text--data
+  friendly_name: Text data
+  aliases:
+    - text data
+    - data
+    - Cloud
 - name: text--equivalent
   friendly_name: Text equivalent
   aliases:
@@ -5452,6 +5599,12 @@
     - transform
     - networking
     - network
+- name: transform-data
+  friendly_name: Transform data
+  aliases:
+    - transform data
+    - data
+    - Cloud
 - name: transparency--01
   friendly_name: Transparency 01
   aliases:
@@ -5584,6 +5737,12 @@
     - unlock
     - security
     - open
+- name: unstructured-data
+  friendly_name: Unstructured data
+  aliases:
+    - unstructured data
+    - data
+    - Cloud
 - name: upload--01
   friendly_name: Upload 01
   aliases:
@@ -5757,6 +5916,12 @@
   aliases:
     - vision
     - visionary
+    - Cloud
+- name: visual--data
+  friendly_name: Visual data
+  aliases:
+    - visual data
+    - data
     - Cloud
 - name: visual--design
   friendly_name: Visual design

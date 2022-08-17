@@ -147,11 +147,15 @@ categories:
       - washington-dc--monument
   - name: Cloud
     members:
+      - access-management
       - active--server
       - api
       - apps
+      - audio-data
       - audit-trail
       - automate--modular--management
+      - automated
+      - business--continuity--02
       - c--language
       - c-plus-plus--language
       - choose-how-to-get-started
@@ -182,21 +186,31 @@ categories:
       - cloud-pak--for-security
       - cloud-pak--system
       - cobol--language
+      - code
       - cognos--analytics
       - compliant
       - condition--builder
       - construct
+      - connectivity
+      - continuous
       - control
       - customizable
+      - data--privacy--02
+      - data--transfer
       - devops
       - digital
       - docker
       - ease-of-use
       - efficient
+      - encryption
+      - event-driven
       - expand--horz
       - expand--vert
+      - extend-the-data-center
       - extensible
       - fast
+      - fault-tolerant
+      - filter-and-group-data
       - filter--variable
       - flexibility--02
       - free--trial
@@ -204,6 +218,9 @@ categories:
       - global--business--services
       - global--technology--services
       - go--language
+      - high--performance
+      - high-volume-data
+      - highly-available
       - hybrid--cloud
       - hybrid--cloud--services
       - ibm--automation-platform
@@ -220,27 +237,40 @@ categories:
       - modernize
       - monitor
       - mqa
+      - operate-offline
       - operational-efficiency
       - pay-for-what-you-use
       - php--language
       - planning--analytics
       - pli--language
+      - predictability
       - productivity
       - proven-technology
       - r--language
       - random--samples
+      - react-to-data
+      - real-time
+      - reliability--02
+      - resource-health
       - saas--enablement
       - save-time
       - scale--02
+      - security--02
       - select--range
       - serverless
+      - sharing-data
       - single--sign-on
       - softlayer--enablement
       - start-for-free
+      - streaming-data
       - subsecond
+      - text--data
+      - transform-data
       - trusted
+      - unstructured-data
       - visibility
       - visionary
+      - visual--data
       - websites
   - name: Controls
     members:
