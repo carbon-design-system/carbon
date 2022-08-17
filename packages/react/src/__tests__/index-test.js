@@ -63,6 +63,7 @@ describe('Carbon Components React', () => {
         "FilterableMultiSelect",
         "FlexGrid",
         "FluidForm",
+        "FluidTextInput",
         "Form",
         "FormGroup",
         "FormItem",
