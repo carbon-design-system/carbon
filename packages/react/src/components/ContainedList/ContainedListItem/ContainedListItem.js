@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 
-function ContainedListItem({ children, className, onClick }) {
+function ContainedListItem({ children, className, disabled = false, onClick }) {
   const prefix = usePrefix();
 
   const isClickable = onClick !== undefined;
@@ -23,6 +23,7 @@ function ContainedListItem({ children, className, onClick }) {
     <button
       className={`${prefix}--contained-list-item__content`}
       type="button"
+      disabled={disabled}
       onClick={onClick}>
       {children}
     </button>
@@ -43,6 +44,11 @@ ContainedListItem.propTypes = {
    * Additional CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * Whether this item is disabled.
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Provide an optional function to be called when the item is clicked

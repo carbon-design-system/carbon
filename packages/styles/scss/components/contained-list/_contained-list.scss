@@ -39,7 +39,20 @@
 
     height: $spacing-09;
     border-bottom: 1px solid $border-subtle;
+    background-color: $background;
     color: $text-primary;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--contained-list--variantone
+    .#{$prefix}--contained-list__header {
+    background-color: $layer-01;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--contained-list--variantone
+    .#{$prefix}--contained-list__header {
+    background-color: $layer-02;
   }
 
   // Variant two
@@ -91,8 +104,19 @@
   }
 
   .#{$prefix}--contained-list-item--clickable
-    .#{$prefix}--contained-list-item__content:hover {
+    .#{$prefix}--contained-list-item__content:not(:disabled):hover {
     background-color: $layer-hover;
+  }
+
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content:not(:disabled):active {
+    background-color: $layer-active;
+  }
+
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content:disabled {
+    color: $text-disabled;
+    cursor: not-allowed;
   }
 
   .#{$prefix}--contained-list-item--clickable

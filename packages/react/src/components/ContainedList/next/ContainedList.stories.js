@@ -19,7 +19,12 @@ const PlaygroundStory = (args) => (
     {[...Array(4)].map((_, i) => (
       <ContainedList key={i} {...args}>
         {[...Array(8)].map((_, j) => (
-          <ContainedListItem key={`${i}-${j}`}>List item</ContainedListItem>
+          <ContainedListItem
+            disabled={j === 3}
+            key={`${i}-${j}`}
+            onClick={() => {}}>
+            List item
+          </ContainedListItem>
         ))}
       </ContainedList>
     ))}
