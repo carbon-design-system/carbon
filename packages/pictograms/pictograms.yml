@@ -6,6 +6,10 @@
     - accelerated
     - acceleration
     - fast
+- name: accelerating-transformation
+  friendly_name: Accelerating transformation
+  aliases:
+    - accelerating transformation
 - name: access-management
   friendly_name: Access management
   aliases:
@@ -57,6 +61,10 @@
     - heart
     - human
     - person
+- name: agility-with-hybrid-multicloud
+  friendly_name: Agility with hybrid multicloud
+  aliases:
+    - agility with hybrid multicloud
 - name: agriculture
   friendly_name: Agriculture
   aliases:
@@ -500,6 +508,12 @@
     - Budapest
     - Hungary
     - chain-bridge
+- name: budapest--citadella
+  friendly_name: budapest--citadella
+  aliases: []
+- name: budapest--lab-skyline
+  friendly_name: budapest--lab-skyline
+  aliases: []
 - name: bug--virus--malware
   friendly_name: Bug Virus Malware
   aliases:
@@ -1129,6 +1143,16 @@
     - cloud planning
     - cloud
     - planning
+- name: cloud--platform
+  friendly_name: Cloud platform
+  aliases:
+    - platform
+    - cloud
+    - service
+    - offering
+    - process
+    - automate
+    - hyperscaler
 - name: cloud--sap
   friendly_name: Cloud SAP
   aliases:
@@ -1362,6 +1386,10 @@
     - if
     - condition
     - code
+- name: confidential-computing
+  friendly_name: Confidential computing
+  aliases:
+    - confidential computing
 - name: connect
   friendly_name: Connect
   aliases:
@@ -1472,6 +1500,10 @@
   aliases:
     - control
     - Cloud
+- name: controls-framework
+  friendly_name: Controls framework
+  aliases:
+    - controls framework
 - name: conversation
   friendly_name: Conversation
   aliases:
@@ -2141,6 +2173,10 @@
   aliases:
     - fast
     - Cloud
+- name: faster-innovation-with-partners
+  friendly_name: Faster innovation with partners
+  aliases:
+    - faster innovation with partners
 - name: faucet
   friendly_name: Faucet
   aliases:
@@ -2950,6 +2986,10 @@
     - secure servers
     - secure storage
     - secure hardware
+- name: inner-source
+  friendly_name: Inner source
+  aliases:
+    - inner source
 - name: innovate
   friendly_name: Innovate
   aliases:
@@ -3072,6 +3112,10 @@
   aliases:
     - keep dry
     - packaging
+- name: keep-your-own-key
+  friendly_name: Keep your own key
+  aliases:
+    - keep your own key
 - name: key--users
   friendly_name: Key users
   aliases:
@@ -3242,6 +3286,10 @@
     - love
     - like
     - heart
+- name: lowering-risk
+  friendly_name: Lowering risk
+  aliases:
+    - lowering risk
 - name: luggage
   friendly_name: Luggage
   aliases:
@@ -3688,6 +3736,14 @@
     - networking 06
     - network
     - connect
+- name: new-financial-customer-experiences
+  friendly_name: New financial customer experiences
+  aliases:
+    - new financial customer experiences
+- name: new-revenue-streams
+  friendly_name: New revenue streams
+  aliases:
+    - new revenue streams
 - name: nice
   friendly_name: Nice
   aliases:
@@ -4385,6 +4441,14 @@
     - applications
     - software
     - services
+- name: redefining-financial-services
+  friendly_name: Redefining financial services
+  aliases:
+    - redefining financial services
+- name: reducing-cost
+  friendly_name: Reducing cost
+  aliases:
+    - reducing cost
 - name: refinery
   friendly_name: Refinery
   aliases:
@@ -5088,6 +5152,10 @@
     - streamline
     - strategy
     - business
+- name: streamline--operations
+  friendly_name: Streamline operations
+  aliases:
+    - streamline operations
 - name: subsecond
   friendly_name: Subsecond
   aliases:
