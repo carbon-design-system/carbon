@@ -238,6 +238,11 @@
     - application security
     - application
     - security
+- name: apps
+  friendly_name: Apps
+  aliases:
+    - apps
+    - Cloud
 - name: archive
   friendly_name: Archive
   aliases:
@@ -277,6 +282,11 @@
     - georgia
     - city
     - cities
+- name: audit-trail
+  friendly_name: Audit Trail
+  aliases:
+    - audit trail
+    - Cloud
 - name: augmented--reality
   friendly_name: Augmented reality
   aliases:
@@ -939,6 +949,11 @@
     - chip debit
     - debit
     - chip
+- name: choose-how-to-get-started
+  friendly_name: Choose how to get started
+  aliases:
+    - choose how to get started
+    - Cloud
 - name: circle--packing
   friendly_name: Circle packing
   aliases:
@@ -1067,6 +1082,11 @@
     - cloud
     - native
     - applications
+- name: cloud--native--03
+  friendly_name: Cloud native 03
+  aliases:
+    - Cloud native
+    - Cloud
 - name: cloud--oracle
   friendly_name: Cloud Oracle
   aliases:
@@ -1279,6 +1299,11 @@
     - commercial financing 02
     - financing
     - finance
+- name: compliant
+  friendly_name: Compliant
+  aliases:
+    - compliant
+    - Cloud
 - name: compost--bin
   friendly_name: Copmpost bin
   aliases:
@@ -1403,6 +1428,11 @@
   aliases:
     - contract
     - agreement
+- name: control
+  friendly_name: Control
+  aliases:
+    - control
+    - Cloud
 - name: conversation
   friendly_name: Conversation
   aliases:
@@ -1460,6 +1490,11 @@
     - customer
     - service
     - retail
+- name: customizable
+  friendly_name: Customizable
+  aliases:
+    - customizable
+    - Cloud
 - name: dashboard
   friendly_name: Dashboard
   aliases:
@@ -1780,6 +1815,11 @@
     - global
     - location
     - map
+- name: ease-of-use
+  friendly_name: Ease of use
+  aliases:
+    - ease of use
+    - Cloud
 - name: ecuador--quito
   friendly_name: Ecuador Quito
   aliases:
@@ -1804,6 +1844,11 @@
     - people
     - person
     - pupil
+- name: efficient
+  friendly_name: Efficient
+  aliases:
+    - efficient
+    - Cloud
 - name: electric
   friendly_name: Electric
   aliases:
@@ -1943,6 +1988,11 @@
     - send
     - ship
     - transmit
+- name: extensible
+  friendly_name: Extensible
+  aliases:
+    - extensible
+    - Cloud
 - name: eye
   friendly_name: Eye
   aliases:
@@ -2018,6 +2068,11 @@
   friendly_name: Farmer 02
   aliases:
     - farmer 02
+- name: fast
+  friendly_name: Fast
+  aliases:
+    - fast
+    - Cloud
 - name: faucet
   friendly_name: Faucet
   aliases:
@@ -2155,6 +2210,11 @@
   friendly_name: Flexibility
   aliases:
     - flexibility
+- name: flexibility--02
+  friendly_name: Flexibility 02
+  aliases:
+    - flexibility
+    - Cloud
 - name: flexible--compute
   friendly_name: Flexible compute
   aliases:
@@ -2230,6 +2290,11 @@
     - fuel
     - gas
     - gasoline
+- name: fully-managed
+  friendly_name: Fully managed
+  aliases:
+    - fully managed
+    - Cloud
 - name: gear
   friendly_name: Gear
   aliases:
@@ -2830,6 +2895,11 @@
     - networking
     - network
     - integrate
+- name: integration--02
+  friendly_name: Integration 02
+  aliases:
+    - integration
+    - Cloud
 - name: intelligence
   friendly_name: Intelligence
   aliases:
@@ -2996,6 +3066,16 @@
     - launch
     - start
     - open
+- name: leader
+  friendly_name: Leader
+  aliases:
+    - leader
+    - Cloud
+- name: lift-and-shift
+  friendly_name: Lift and shift
+  aliases:
+    - lift and shift
+    - Cloud
 - name: lightning
   friendly_name: Lightning
   aliases:
@@ -3350,6 +3430,16 @@
     - device interaction
     - device
     - phone
+- name: modernize
+  friendly_name: Modernize
+  aliases:
+    - modernize
+    - Cloud
+- name: monitor
+  friendly_name: Monitor
+  aliases:
+    - monitor
+    - Cloud
 - name: monitored--item--on--conveyor
   friendly_name: Monitored item on conveyor
   aliases:
@@ -3617,6 +3707,11 @@
     - code
     - applications
     - developer
+- name: operational-efficiency
+  friendly_name: Operational efficiency
+  aliases:
+    - operational efficiency
+    - Cloud
 - name: optimize--cash-flow--01
   friendly_name: Optimize cash flow 01
   aliases:
@@ -3730,6 +3825,11 @@
     - design
     - development
     - design and development
+- name: pay-for-what-you-use
+  friendly_name: Pay for what you use
+  aliases:
+    - pay for what you use
+    - Cloud
 - name: perfume
   friendly_name: Perfume
   aliases:
@@ -4003,6 +4103,11 @@
     - process
     - working
     - cycle
+- name: productivity
+  friendly_name: Productivity
+  aliases:
+    - productivity
+    - Cloud
 - name: professional--marketplace
   friendly_name: Professional marketplace
   aliases:
@@ -4022,6 +4127,11 @@
     - critical
     - assets
     - security
+- name: proven-technology
+  friendly_name: Proven technology
+  aliases:
+    - proven technology
+    - Cloud
 - name: puzzle
   friendly_name: Puzzle
   aliases:
@@ -4376,12 +4486,22 @@
     - satellite
     - industry
     - space
+- name: save-time
+  friendly_name: Save time
+  aliases:
+    - save time
+    - Cloud
 - name: scale
   friendly_name: Scale
   aliases:
     - scale
     - weight
     - healthcare
+- name: scale--02
+  friendly_name: Scale 02
+  aliases:
+    - scale
+    - Cloud
 - name: scatter--matrix
   friendly_name: Scatter matrix
   aliases:
@@ -4718,6 +4838,11 @@
     - stairs
     - stairs up
     - stairwell
+- name: start-for-free
+  friendly_name: Start for free
+  aliases:
+    - start for free
+    - Cloud
 - name: stationary--bicycle
   friendly_name: Stationary bicycle
   aliases:
@@ -4822,6 +4947,11 @@
     - streamline
     - strategy
     - business
+- name: subsecond
+  friendly_name: Subsecond
+  aliases:
+    - subsecond
+    - Cloud
 - name: summit
   friendly_name: Summit
   aliases:
@@ -5383,6 +5513,11 @@
   aliases:
     - trust
     - blockchain
+- name: trusted
+  friendly_name: Trusted
+  aliases:
+    - trusted
+    - Cloud
 - name: trusted--user
   friendly_name: Trusted User
   aliases:
@@ -5606,12 +5741,23 @@
   aliases:
     - virus
     - life science
+- name: visibility
+  friendly_name: Visibility
+  aliases:
+    - visibility
+    - Cloud
 - name: vision
   friendly_name: Vision
   aliases:
     - vision
     - watson
     - AI
+- name: visionary
+  friendly_name: Visionary
+  aliases:
+    - vision
+    - visionary
+    - Cloud
 - name: visual--design
   friendly_name: Visual design
   aliases:
@@ -5701,6 +5847,11 @@
   aliases:
     - webcast
     - controls
+- name: websites
+  friendly_name: Websites
+  aliases:
+    - websites
+    - Cloud
 - name: wedding--cake
   friendly_name: Wedding cake
   aliases:

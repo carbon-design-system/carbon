@@ -149,9 +149,12 @@ categories:
     members:
       - active--server
       - api
+      - apps
+      - audit-trail
       - automate--modular--management
       - c--language
       - c-plus-plus--language
+      - choose-how-to-get-started
       - cloud--analytics
       - cloud--assets
       - cloud--builder--professional--services
@@ -180,15 +183,24 @@ categories:
       - cloud-pak--system
       - cobol--language
       - cognos--analytics
+      - compliant
       - condition--builder
       - construct
+      - control
+      - customizable
       - devops
       - digital
       - docker
+      - ease-of-use
+      - efficient
       - expand--horz
       - expand--vert
+      - extensible
+      - fast
       - filter--variable
+      - flexibility--02
       - free--trial
+      - fully-managed
       - global--business--services
       - global--technology--services
       - go--language
@@ -196,23 +208,40 @@ categories:
       - hybrid--cloud--services
       - ibm--automation-platform
       - ibm--cloud
+      - integration--02
       - java
       - javascript
+      - leader
+      - lift-and-shift
       - list--bullet
       - list--checkbox
       - marketplace
       - mas
+      - modernize
+      - monitor
       - mqa
+      - operational-efficiency
+      - pay-for-what-you-use
       - php--language
       - planning--analytics
       - pli--language
+      - productivity
+      - proven-technology
       - r--language
       - random--samples
       - saas--enablement
+      - save-time
+      - scale--02
       - select--range
       - serverless
       - single--sign-on
       - softlayer--enablement
+      - start-for-free
+      - subsecond
+      - trusted
+      - visibility
+      - visionary
+      - websites
   - name: Controls
     members:
       - gear
@@ -684,6 +713,7 @@ categories:
       - build-applications-anywhere
       - cloud--native--01
       - cloud--native--02
+      - cloud--native--03
       - cluster
       - connect--applications
       - container
