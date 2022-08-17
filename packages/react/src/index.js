@@ -66,6 +66,7 @@ export FileUploader, {
 export { FilterableMultiSelect } from './components/FilterableMultiSelect';
 export Form from './components/Form';
 export FluidForm from './components/FluidForm';
+export FluidTextInput from './components/FluidTextInput';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
