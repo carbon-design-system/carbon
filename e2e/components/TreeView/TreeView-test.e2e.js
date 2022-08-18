@@ -27,7 +27,7 @@ test.describe('TreeView', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'TreeView',
-      id: 'components-treeview--treeview-story',
+      id: 'components-treeview--default',
       globals: {
         theme: 'white',
       },
