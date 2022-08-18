@@ -131,7 +131,7 @@ export const productiveHeading03 = {
 
 export const productiveHeading04 = {
   fontSize: rem(scale[6]),
-  fontWeight: fontWeights.regular,
+  fontWeight: fontWeights.light,
   lineHeight: 1.28572,
   letterSpacing: 0,
 };
@@ -193,40 +193,38 @@ export const expressiveHeading04 = {
     xlg: {
       fontSize: rem(scale[6]),
       lineHeight: 1.25,
+      fontWeight: fontWeights.light,
     },
     max: {
       fontSize: rem(scale[7]),
+      fontWeight: fontWeights.light,
     },
   },
 };
 
 export const expressiveHeading05 = {
   fontSize: rem(scale[7]),
-  fontWeight: fontWeights.regular,
+  fontWeight: fontWeights.light,
   lineHeight: 1.25,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
-      fontWeight: fontWeights.light,
       lineHeight: 1.22,
       letterSpacing: 0,
     },
     lg: {
       fontSize: rem(scale[9]),
-      fontWeight: fontWeights.light,
       lineHeight: 1.19,
       letterSpacing: 0,
     },
     xlg: {
       fontSize: rem(scale[10]),
-      fontWeight: fontWeights.light,
       lineHeight: 1.17,
       letterSpacing: 0,
     },
     max: {
       fontSize: rem(scale[12]),
-      fontWeight: fontWeights.light,
       letterSpacing: 0,
     },
   },
@@ -386,55 +384,54 @@ export const display02 = {
 };
 
 export const display03 = {
-  fontSize: rem(scale[9]),
+  fontSize: rem(scale[42]),
   fontWeight: fontWeights.light,
-  lineHeight: 1.19,
+  lineHeight: 3.125,
   letterSpacing: 0,
   breakpoints: {
     md: {
-      fontSize: rem(scale[13]),
-      lineHeight: 1.15,
+      fontSize: rem(scale[54]),
+      lineHeight: 4,
     },
     lg: {
-      fontSize: rem(scale[16]),
-      lineHeight: 1.11,
+      fontSize: rem(scale[60]),
+      lineHeight: 4.375,
       letterSpacing: px(-0.64),
     },
     xlg: {
-      fontSize: rem(scale[19]),
-      lineHeight: 1.07,
+      fontSize: rem(scale[76]),
+      lineHeight: 5.375,
     },
     max: {
-      fontSize: rem(scale[22]),
-      lineHeight: 1.05,
+      fontSize: rem(scale[84]),
+      lineHeight: 5.875,
       letterSpacing: px(-0.96),
     },
   },
 };
 
 export const display04 = {
-  fontSize: rem(scale[9]),
-  fontWeight: fontWeights.semibold,
-  lineHeight: 1.19,
+  fontSize: rem(scale[42]),
+  fontWeight: fontWeights.light,
+  lineHeight: 3.125,
   letterSpacing: 0,
   breakpoints: {
     md: {
-      fontSize: rem(scale[13]),
-      lineHeight: 1.15,
+      fontSize: rem(scale[68]),
+      lineHeight: 4.875,
     },
     lg: {
-      fontSize: rem(scale[16]),
-      lineHeight: 1.11,
+      fontSize: rem(scale[92]),
+      lineHeight: 6.375,
       letterSpacing: px(-0.64),
     },
     xlg: {
-      fontSize: rem(scale[19]),
-      lineHeight: 1.07,
-      letterSpacing: px(-0.64),
+      fontSize: rem(scale[122]),
+      lineHeight: 8.125,
     },
     max: {
-      fontSize: rem(scale[22]),
-      lineHeight: 1.05,
+      fontSize: rem(scale[156]),
+      lineHeight: 10.25,
       letterSpacing: px(-0.96),
     },
   },
