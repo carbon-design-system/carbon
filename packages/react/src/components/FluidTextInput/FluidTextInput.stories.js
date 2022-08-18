@@ -14,6 +14,7 @@ import {
   ToggletipContent,
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
+import './test.scss';
 
 export default {
   title: 'Components/FluidTextInput',
@@ -26,13 +27,7 @@ export const Default = () => (
 
 export const Test = () => (
   <>
-    <div
-      style={{
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-        marginBottom: '2rem',
-      }}>
+    <div className="fluid-input-wrapper">
       <FluidTextInput labelText="Label" placeholder="Placeholder text" />
 
       <FluidTextInput
@@ -48,15 +43,8 @@ export const Test = () => (
         labelText="Label"
         placeholder="Placeholder text"
       />
-      <br />
     </div>
-    <br />
-    <div
-      style={{
-        width: '100%',
-        display: 'flex',
-        justifyContent: 'space-between',
-      }}>
+    <div className="fluid-input-wrapper">
       <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
 
       <FluidTextInput
@@ -79,7 +67,7 @@ export const Test = () => (
 const ToggleTip = (
   <>
     <ToggletipLabel>Label</ToggletipLabel>
-    <Toggletip>
+    <Toggletip align="top-left">
       <ToggletipButton label="Show information">
         <Information />
       </ToggletipButton>

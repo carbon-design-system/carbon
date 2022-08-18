@@ -263,6 +263,9 @@
     z-index: 1;
     top: rem(13px);
     left: $spacing-05;
+    display: flex;
+    height: rem(16px);
+    align-items: center;
     margin: 0;
   }
 
