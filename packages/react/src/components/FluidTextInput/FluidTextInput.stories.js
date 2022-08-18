@@ -24,6 +24,58 @@ export const Default = () => (
   <FluidTextInput labelText="Label" placeholder="Placeholder text" />
 );
 
+export const Test = () => (
+  <>
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+        marginBottom: '2rem',
+      }}>
+      <FluidTextInput labelText="Label" placeholder="Placeholder text" />
+
+      <FluidTextInput
+        invalid
+        invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
+        labelText="Label"
+        placeholder="Placeholder text"
+      />
+
+      <FluidTextInput
+        warn
+        warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
+        labelText="Label"
+        placeholder="Placeholder text"
+      />
+      <br />
+    </div>
+    <br />
+    <div
+      style={{
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'space-between',
+      }}>
+      <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
+
+      <FluidTextInput
+        invalid
+        invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
+        labelText={ToggleTip}
+        placeholder="Placeholder text"
+      />
+
+      <FluidTextInput
+        warn
+        warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
+        labelText={ToggleTip}
+        placeholder="Placeholder text"
+      />
+    </div>
+  </>
+);
+
 const ToggleTip = (
   <>
     <ToggletipLabel>Label</ToggletipLabel>
