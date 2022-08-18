@@ -17,7 +17,7 @@ test.describe('TreeView', () => {
       test('treeview @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'TreeView',
-          id: 'components-treeview--treeview-story',
+          id: 'components-treeview--default',
           theme,
         });
       });
