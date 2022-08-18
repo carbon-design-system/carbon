@@ -13,7 +13,13 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const variants = ['variantone', 'varianttwo'];
 
-function ContainedList({ children, className, kind = variants[0], label }) {
+function ContainedList({
+  action,
+  children,
+  className,
+  kind = variants[0],
+  label,
+}) {
   const labelId = useId('contained-list');
   const prefix = usePrefix();
 
@@ -25,15 +31,21 @@ function ContainedList({ children, className, kind = variants[0], label }) {
 
   return (
     <div className={classes}>
-      <span id={labelId} className={`${prefix}--contained-list__header`}>
-        {label}
-      </span>
+      <div className={`${prefix}--contained-list__header`}>
+        <span id={labelId}>{label}</span>
+        <div className={`${prefix}--contained-list__action`}>{action}</div>
+      </div>
       <ul aria-labelledby={labelId}>{children}</ul>
     </div>
   );
 }
 
 ContainedList.propTypes = {
+  /**
+   * A slot for a possible interactive element to render.
+   */
+  action: PropTypes.node,
+
   /**
    * A collection of ContainedListItems to be rendered in the ContainedList
    */

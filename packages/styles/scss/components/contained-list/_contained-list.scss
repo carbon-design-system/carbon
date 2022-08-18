@@ -135,4 +135,11 @@
     left: 0;
     content: '';
   }
+
+  .#{$prefix}--contained-list__action,
+  .#{$prefix}--contained-list-item__action {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
 }

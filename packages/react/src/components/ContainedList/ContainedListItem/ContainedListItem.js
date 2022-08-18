@@ -10,7 +10,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { usePrefix } from '../../../internal/usePrefix';
 
-function ContainedListItem({ children, className, disabled = false, onClick }) {
+function ContainedListItem({
+  action,
+  children,
+  className,
+  disabled = false,
+  onClick,
+}) {
   const prefix = usePrefix();
 
   const isClickable = onClick !== undefined;
@@ -20,21 +26,34 @@ function ContainedListItem({ children, className, disabled = false, onClick }) {
   });
 
   const content = isClickable ? (
-    <button
-      className={`${prefix}--contained-list-item__content`}
-      type="button"
-      disabled={disabled}
-      onClick={onClick}>
-      {children}
-    </button>
+    <>
+      <button
+        className={`${prefix}--contained-list-item__content`}
+        type="button"
+        disabled={disabled}
+        onClick={onClick}>
+        {children}
+      </button>
+      <div className={`${prefix}--contained-list-item__action`}>{action}</div>
+    </>
   ) : (
-    <div className={`${prefix}--contained-list-item__content`}>{children}</div>
+    <>
+      <div className={`${prefix}--contained-list-item__content`}>
+        {children}
+      </div>
+      <div className={`${prefix}--contained-list-item__action`}>{action}</div>
+    </>
   );
 
   return <li className={classes}>{content}</li>;
 }
 
 ContainedListItem.propTypes = {
+  /**
+   * A slot for a possible interactive element to render.
+   */
+  action: PropTypes.node,
+
   /**
    * The content of this item
    */
