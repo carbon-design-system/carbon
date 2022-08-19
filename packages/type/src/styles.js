@@ -384,26 +384,26 @@ export const display02 = {
 };
 
 export const display03 = {
-  fontSize: rem(scale[10]),
+  fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
   lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
-      fontSize: rem(scale[12]),
+      fontSize: rem(scale[11]),
       lineHeight: 1.18,
     },
     lg: {
-      fontSize: rem(scale[13]),
+      fontSize: rem(scale[12]),
       lineHeight: 1.16,
       letterSpacing: px(-0.64),
     },
     xlg: {
-      fontSize: rem(scale[15]),
+      fontSize: rem(scale[14]),
       lineHeight: 1.13,
     },
     max: {
-      fontSize: rem(scale[16]),
+      fontSize: rem(scale[15]),
       lineHeight: 1.11,
       letterSpacing: px(-0.96),
     },
@@ -411,26 +411,26 @@ export const display03 = {
 };
 
 export const display04 = {
-  fontSize: rem(scale[10]),
+  fontSize: rem(scale[9]),
   fontWeight: fontWeights.light,
   lineHeight: 1.19,
   letterSpacing: 0,
   breakpoints: {
     md: {
-      fontSize: rem(scale[14]),
+      fontSize: rem(scale[13]),
       lineHeight: 1.14,
     },
     lg: {
-      fontSize: rem(scale[17]),
+      fontSize: rem(scale[16]),
       lineHeight: 1.1,
       letterSpacing: px(-0.64),
     },
     xlg: {
-      fontSize: rem(scale[20]),
+      fontSize: rem(scale[19]),
       lineHeight: 1.06,
     },
     max: {
-      fontSize: rem(scale[23]),
+      fontSize: rem(scale[22]),
       lineHeight: 1.05,
       letterSpacing: px(-0.96),
     },

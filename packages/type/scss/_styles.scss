@@ -599,27 +599,27 @@ $fluid-display-02: $display-02 !default;
 /// @access public
 /// @group @carbon/type
 $display-03: (
-  font-size: carbon--type-scale(11),
+  font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
   line-height: 1.19,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: carbon--type-scale(13),
+      font-size: carbon--type-scale(12),
       line-height: 1.18,
     ),
     lg: (
-      font-size: carbon--type-scale(14),
+      font-size: carbon--type-scale(13),
       line-height: 1.16,
       letter-spacing: -0.64px,
     ),
     xlg: (
-      font-size: carbon--type-scale(16),
+      font-size: carbon--type-scale(15),
       line-height: 1.13,
       letter-spacing: -0.64px,
     ),
     max: (
-      font-size: carbon--type-scale(17),
+      font-size: carbon--type-scale(16),
       line-height: 1.11,
       letter-spacing: -0.96px,
     ),
@@ -635,26 +635,26 @@ $fluid-display-03: $display-03 !default;
 /// @access public
 /// @group @carbon/type
 $display-04: (
-  font-size: carbon--type-scale(11),
+  font-size: carbon--type-scale(10),
   font-weight: carbon--font-weight('light'),
   line-height: 1.19,
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: carbon--type-scale(15),
+      font-size: carbon--type-scale(14),
       line-height: 1.14,
     ),
     lg: (
-      font-size: carbon--type-scale(18),
+      font-size: carbon--type-scale(17),
       line-height: 1.1,
       letter-spacing: -0.64px,
     ),
     xlg: (
-      font-size: carbon--type-scale(21),
+      font-size: carbon--type-scale(20),
       line-height: 1.06,
     ),
     max: (
-      font-size: carbon--type-scale(24),
+      font-size: carbon--type-scale(23),
       line-height: 1.05,
       letter-spacing: -0.96px,
     ),
