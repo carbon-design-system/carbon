@@ -27,6 +27,10 @@
     padding-inline: $spacing-05;
   }
 
+  .#{$prefix}--contained-list__label {
+    width: 100%;
+  }
+
   // Variant one
 
   .#{$prefix}--contained-list--variantone
@@ -141,5 +145,14 @@
     position: absolute;
     top: 0;
     right: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--contained-list__action > *,
+  .#{$prefix}--contained-list-item__action > * {
+    pointer-events: all;
   }
 }

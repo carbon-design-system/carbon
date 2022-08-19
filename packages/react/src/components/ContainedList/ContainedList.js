@@ -20,7 +20,7 @@ function ContainedList({
   kind = variants[0],
   label,
 }) {
-  const labelId = useId('contained-list');
+  const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
   const classes = classNames(
@@ -32,7 +32,9 @@ function ContainedList({
   return (
     <div className={classes}>
       <div className={`${prefix}--contained-list__header`}>
-        <span id={labelId}>{label}</span>
+        <div id={labelId} className={`${prefix}--contained-list__label`}>
+          {label}
+        </div>
         <div className={`${prefix}--contained-list__action`}>{action}</div>
       </div>
       <ul aria-labelledby={labelId}>{children}</ul>
