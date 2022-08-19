@@ -131,14 +131,14 @@ export const productiveHeading03 = {
 
 export const productiveHeading04 = {
   fontSize: rem(scale[6]),
-  fontWeight: fontWeights.light,
+  fontWeight: fontWeights.regular,
   lineHeight: 1.28572,
   letterSpacing: 0,
 };
 
 export const productiveHeading05 = {
   fontSize: rem(scale[7]),
-  fontWeight: fontWeights.regular,
+  fontWeight: fontWeights.light,
   lineHeight: 1.25,
   letterSpacing: 0,
 };
