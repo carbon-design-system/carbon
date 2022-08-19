@@ -76,6 +76,12 @@
     - sow
     - hand
     - soil
+- name: ai
+  friendly_name: AI
+  aliases:
+    - AI
+    - Cloud
+    - artificial intelligence
 - name: ai--ethics
   friendly_name: AI ethics
   aliases:
@@ -112,12 +118,6 @@
   aliases:
     - AI trust
     - trust
-- name: ai
-  friendly_name: AI
-  aliases:
-    - AI
-    - Cloud
-    - artificial intelligence
 - name: air--conditioner
   friendly_name: Air conditioner
   aliases:
@@ -3967,25 +3967,25 @@
     - code
     - applications
     - developer
-- name: operating-system
-  friendly_name: Operating system
-  aliases:
-    - operating system
-    - Cloud
-- name: operational-efficiency
-  friendly_name: Operational efficiency
-  aliases:
-    - operational efficiency
-    - Cloud
 - name: operate-offline
   friendly_name: Operate offline
   aliases:
     - operate offline
     - Cloud
+- name: operating-system
+  friendly_name: Operating system
+  aliases:
+    - operating system
+    - Cloud
 - name: operational--metrics
   friendly_name: Operational metrics
   aliases:
     - operational metrics
+    - Cloud
+- name: operational-efficiency
+  friendly_name: Operational efficiency
+  aliases:
+    - operational efficiency
     - Cloud
 - name: optimize--cash-flow--01
   friendly_name: Optimize cash flow 01
@@ -5019,12 +5019,6 @@
   aliases:
     - slack
     - communication app
-- name: small-components-making-a-larger-whole
-  friendly_name: Small components making a larger whole
-  aliases:
-    - small components
-    - larger whole
-    - Cloud
 - name: slider
   friendly_name: Slider
   aliases:
@@ -5032,6 +5026,12 @@
     - controls
     - equalizer
     - dashboard
+- name: small-components-making-a-larger-whole
+  friendly_name: Small components making a larger whole
+  aliases:
+    - small components
+    - larger whole
+    - Cloud
 - name: sneaker
   friendly_name: Sneaker
   aliases:
