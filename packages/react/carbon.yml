@@ -284,7 +284,6 @@ assets:
     status: experimental
     type: component
     platform: web
-    thumbnailPath: ./thumbnails/text.svg
     demoLinks:
       - type: storybook
         name: Storybook
@@ -460,13 +459,12 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-search
-    section:
+  section:
     name: Section
     framework: react
     status: stable
     type: component
     platform: web
-    thumbnailPath: ./thumbnails/section.svg
     demoLinks:
       - type: storybook
         name: Storybook
@@ -567,7 +565,6 @@ assets:
     status: experimental
     type: component
     platform: web
-    thumbnailPath: ./thumbnails/text.svg
     demoLinks:
       - type: storybook
         name: Storybook
