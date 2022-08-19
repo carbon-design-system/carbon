@@ -8,7 +8,14 @@
 import React from 'react';
 
 import { action } from '@storybook/addon-actions';
-import { SubtractAlt, Information } from '@carbon/icons-react';
+import {
+  Apple,
+  Fish,
+  Information,
+  Strawberry,
+  SubtractAlt,
+  Wheat,
+} from '@carbon/icons-react';
 import { VStack } from '../../Stack';
 import Button from '../../Button';
 import ExpandableSearch from '../../ExpandableSearch';
@@ -216,6 +223,25 @@ export const HeadingDecorators = () => {
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
+      </ContainedList>
+    </VStack>
+  );
+};
+
+export const Icons = () => {
+  return (
+    <VStack gap={12}>
+      <ContainedList label="Heading" kind="variantone">
+        <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
+        <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
+        <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
+        <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
+      </ContainedList>
+      <ContainedList label="Heading" kind="varianttwo">
+        <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
+        <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
+        <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
+        <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
       </ContainedList>
     </VStack>
   );

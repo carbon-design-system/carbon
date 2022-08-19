@@ -155,4 +155,15 @@
   .#{$prefix}--contained-list-item__action > * {
     pointer-events: all;
   }
+
+  .#{$prefix}--contained-list-item--with-icon
+    .#{$prefix}--contained-list-item__content {
+    display: grid;
+    column-gap: $spacing-04;
+    grid-template-columns: 1rem 1fr;
+  }
+
+  .#{$prefix}--contained-list-item__icon {
+    padding-top: $spacing-01;
+  }
 }
