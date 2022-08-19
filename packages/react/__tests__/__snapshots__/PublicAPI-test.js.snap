@@ -8465,6 +8465,39 @@ Map {
       },
     },
   },
+  "unstable_LayoutDirection" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "dir": Object {
+        "args": Array [
+          Array [
+            "ltr",
+            "rtl",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+    },
+  },
   "unstable_Menu" => Object {
     "MenuDivider": Object {},
     "MenuGroup": Object {
@@ -8853,6 +8886,60 @@ Map {
       },
     },
   },
+  "unstable_Text" => Object {
+    "propTypes": Object {
+      "as": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "elementType",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "dir": Object {
+        "args": Array [
+          Array [
+            "ltr",
+            "rtl",
+            "auto",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
+  "unstable_TextDirection" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "dir": Object {
+        "args": Array [
+          Array [
+            "ltr",
+            "rtl",
+            "auto",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "getTextDirection": Object {
+        "type": "func",
+      },
+    },
+  },
   "unstable_TreeNode" => Object {
     "propTypes": Object {
       "active": Object {
@@ -9081,6 +9168,7 @@ Map {
   "unstable_useContextMenu" => Object {},
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
+  "unstable_useLayoutDirection" => Object {},
   "useLayer" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
