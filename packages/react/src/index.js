@@ -123,6 +123,7 @@ export {
 export Tab from './components/Tab';
 export TabContent from './components/TabContent';
 export Tabs from './components/Tabs';
+export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
 export Tag from './components/Tag';
 export TextArea from './components/TextArea';
 export TextInput from './components/TextInput';
@@ -214,6 +215,10 @@ export {
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';
+export {
+  LayoutDirection as unstable_LayoutDirection,
+  useLayoutDirection as unstable_useLayoutDirection,
+} from './components/Layout';
 export unstable_Menu, {
   MenuDivider as unstable_MenuDivider,
   MenuGroup as unstable_MenuGroup,
@@ -230,10 +235,13 @@ export { Popover, PopoverContent } from './components/Popover';
 export { default as ProgressBar } from './components/ProgressBar';
 export { HStack, Stack, VStack } from './components/Stack';
 export { Tooltip } from './components/Tooltip/next';
+export {
+  Text as unstable_Text,
+  TextDirection as unstable_TextDirection,
+} from './components/Text';
 export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
 export unstable_TreeView, {
   TreeNode as unstable_TreeNode,
 } from './components/TreeView';
-export { TabPanel, TabPanels, TabList, IconTab } from './components/Tabs';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';

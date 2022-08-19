@@ -10,7 +10,7 @@ import { Section, Heading } from '../Heading';
 import mdx from './Heading.mdx';
 
 export default {
-  title: 'Experimental/unstable_Heading',
+  title: 'Components/Heading',
   component: Heading,
   subcomponents: {
     Section,
