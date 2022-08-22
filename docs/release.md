@@ -110,12 +110,26 @@ following:
   - [ ] Provide the tag for the release. For example, if the previous release
         was `v11.1.0-rc.0` this tag would be `v11.2.0`
 - [ ] Review and approve the Pull Request generated from this action
-- [ ] When the Pull Request is merged, pull down the latest code from
-      `upstream`, tag it, and push it to `upstream`
+- [ ] 🛑 Wait for the Pull Request to be merged
+- [ ] Once merged, pull down the latest code from `upstream`
 
 ```bash
 git checkout main
 git pull upstream main
+```
+
+- [ ] View the most recent commits
+
+```bash
+git log
+```
+
+- [ ] Validate the most recent commit is the release commit from the PR. If it
+      is not, ensure the PR has been merged and try pulling again.
+- [ ] Exit the log by pressing <kbd>q</kbd>
+- [ ] Tag the commit, and push it to `upstream`
+
+```bash
 git tag -a v11.2.0 -m 'v11.2.0'
 git push upstream v11.2.0
 ```
