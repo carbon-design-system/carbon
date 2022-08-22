@@ -29,6 +29,13 @@ body:
     validations:
       required: true
   - type: textarea
+    id: Screenshots
+    attributes:
+      label: Screenshots
+      description: 'Provide screenshots or a screen capture video of the proposed idea, or what you are unable to accomplish that this enhancement would make possible.'
+    validations:
+      required: true
+  - type: textarea
     id: metrics
     attributes:
       label: Desired UX and success metrics
