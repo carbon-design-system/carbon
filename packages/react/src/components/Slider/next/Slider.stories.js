@@ -46,32 +46,37 @@ export const Default = (args) => (
   />
 );
 
-export const StepTest = (args) => (
-  <>
-    <Slider
-      {...args}
-      labelText="Slider Label"
-      value={50}
-      min={0}
-      max={100}
-      step={5}
-      stepMultiplier={2}
-      noValidate
-    />
-    <br />
-    <Slider
-      {...args}
-      hideTextInput
-      labelText="Slider Label"
-      value={50}
-      min={0}
-      max={100}
-      step={5}
-      stepMultiplier={2}
-      noValidate
-    />
-  </>
-);
+export const StepTest = (args) => {
+  const [val, setVal] = useState(0.5);
+  return (
+    <>
+      <Slider
+        {...args}
+        labelText="Slider Label"
+        value={0.5}
+        min={0}
+        max={1}
+        step={0.1}
+        stepMultiplier={2}
+        noValidate
+      />
+      <br />
+      <p>Slider value: {val.toFixed(1)}</p>
+      <Slider
+        {...args}
+        onChange={(evt) => setVal(evt.value)}
+        hideTextInput
+        labelText="Slider Label"
+        value={val}
+        min={0}
+        max={1}
+        step={0.1}
+        stepMultiplier={2}
+        noValidate
+      />
+    </>
+  );
+};
 
 Default.story = {
   name: 'Slider',
