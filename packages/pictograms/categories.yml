@@ -153,6 +153,9 @@ categories:
       - access-management
       - active--server
       - agility-with-hybrid-multicloud
+      - ai--ready
+      - ai
+      - analyzing--containers
       - api
       - apps
       - audio-data
@@ -195,20 +198,32 @@ categories:
       - cognos--analytics
       - compliant
       - condition--builder
+      - connected--devices
       - confidential-computing
       - construct
       - connectivity
+      - containers
       - continuous
       - control
+      - control-panel
       - controls-framework
+      - custom-reports
       - customizable
+      - data--centers
       - data--privacy--02
       - data--transfer
+      - deep-learning
+      - deploying-containers
+      - deployment
       - devops
       - digital
       - docker
+      - drag-and-drop-interface
+      - dynamic-workloads
       - ease-of-use
+      - ecosystem
       - efficient
+      - elements-of-the-cloud
       - encryption
       - event-driven
       - expand--horz
@@ -223,9 +238,11 @@ categories:
       - flexibility--02
       - free--trial
       - fully-managed
+      - geographic-flexibility
       - global--business--services
       - global--technology--services
       - go--language
+      - graphic-intensive-workloads
       - high--performance
       - high-volume-data
       - highly-available
@@ -242,20 +259,27 @@ categories:
       - list--bullet
       - list--checkbox
       - lowering-risk
+      - machine--learning--07
+      - managing--containers
       - marketplace
       - mas
       - modernize
       - monitor
       - mqa
+      - network--of-devices
       - new-financial-customer-experiences
       - new-revenue-streams
+      - notifications
       - operate-offline
+      - operating-system
       - operational-efficiency
+      - operational--metrics
       - pay-for-what-you-use
       - php--language
       - planning--analytics
       - pli--language
       - predictability
+      - predictive-analytics
       - productivity
       - proven-technology
       - r--language
@@ -266,14 +290,17 @@ categories:
       - reducing-cost
       - reliability--02
       - resource-health
+      - rocket
       - saas--enablement
       - save-time
       - scale--02
+      - scaling--containers
       - security--02
       - select--range
       - serverless
       - sharing-data
       - single--sign-on
+      - small-components-making-a-larger-whole
       - softlayer--enablement
       - start-for-free
       - streaming-data
@@ -281,8 +308,11 @@ categories:
       - subsecond
       - text--data
       - transform-data
+      - troubleshooting
       - trusted
       - unstructured-data
+      - use-the-language-of-your-choice
+      - virtualization--02
       - visibility
       - visionary
       - visual--data
