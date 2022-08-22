@@ -118,14 +118,14 @@ git checkout main
 git pull upstream main
 ```
 
-- [ ] View the most recent commits
-
-```bash
-git log
-```
-
+- [ ] Run `git log` to view the most recent commits
 - [ ] Validate the most recent commit is the release commit from the PR. If it
       is not, ensure the PR has been merged and try pulling again.
+
+```
+chore(release): v11.10.0
+```
+
 - [ ] Exit the log by pressing <kbd>q</kbd>
 - [ ] Tag the commit, and push it to `upstream`
 
