@@ -25,7 +25,7 @@ body:
     id: justification
     attributes:
       label: Justification
-      description: 'Provide the business reasons for this request. Provide screenshots of what you are unable to accomplish that this enhancement would make possible.'
+      description: 'Provide the business reasons for this request.'
     validations:
       required: true
   - type: textarea
