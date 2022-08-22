@@ -24,31 +24,6 @@
 /// @type Map
 /// @access public
 /// @group @carbon/type
-/* 
-  12px = carbon--type-scale(1)
-  14px = carbon--type-scale(2)
-  16px = carbon--type-scale(3)
-  18px = carbon--type-scale(4)
-  20px = carbon--type-scale(5)
-  24px = carbon--type-scale(6)
-  28px = carbon--type-scale(7)
-  32px = carbon--type-scale(8)
-  36px = carbon--type-scale(9)
-  42px = carbon--type-scale(10)
-  48px = carbon--type-scale(11)
-  54px = carbon--type-scale(12)
-  60px = carbon--type-scale(13)
-  68px = carbon--type-scale(14)
-  76px = carbon--type-scale(15)
-  84px = carbon--type-scale(16)
-  92px = carbon--type-scale(17)
-  102px = carbon--type-scale(18)
-  112px = carbon--type-scale(19)
-  122px = carbon--type-scale(20)
-  132px = carbon--type-scale(21)
-  144px = carbon--type-scale(22)
-  156px = carbon--type-scale(23)
-*/
 $carbon--type-scale: ();
 @for $i from 1 through 23 {
   $carbon--type-scale: append(
@@ -62,6 +37,30 @@ $carbon--type-scale: ();
 /// @return {Number} In rem
 /// @access public
 /// @group @carbon/type
+/// 12px = carbon--type-scale(1)
+/// 14px = carbon--type-scale(2)
+/// 16px = carbon--type-scale(3)
+/// 18px = carbon--type-scale(4)
+/// 20px = carbon--type-scale(5)
+/// 24px = carbon--type-scale(6)
+/// 28px = carbon--type-scale(7)
+/// 32px = carbon--type-scale(8)
+/// 36px = carbon--type-scale(9)
+/// 42px = carbon--type-scale(10)
+/// 48px = carbon--type-scale(11)
+/// 54px = carbon--type-scale(12)
+/// 60px = carbon--type-scale(13)
+/// 68px = carbon--type-scale(14)
+/// 76px = carbon--type-scale(15)
+/// 84px = carbon--type-scale(16)
+/// 92px = carbon--type-scale(17)
+///102px = carbon--type-scale(18)
+///112px = carbon--type-scale(19)
+///122px = carbon--type-scale(20)
+///132px = carbon--type-scale(21)
+///144px = carbon--type-scale(22)
+///156px = carbon--type-scale(23)
+
 @function carbon--type-scale($step) {
   @return nth($carbon--type-scale, $step);
 }
