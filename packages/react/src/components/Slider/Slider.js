@@ -545,7 +545,7 @@ export default class Slider extends PureComponent {
       maxLabel,
       formatLabel = defaultFormatLabel,
       labelText,
-      step,
+      step, // eslint-disable-line no-unused-vars
       stepMultiplier, // eslint-disable-line no-unused-vars
       inputType,
       required,
@@ -664,7 +664,7 @@ export default class Slider extends PureComponent {
                   required={required}
                   min={min}
                   max={max}
-                  step={step}
+                  step={1}
                   onChange={this.onChange}
                   onBlur={this.onBlur}
                   onKeyUp={this.onInputKeyUp}

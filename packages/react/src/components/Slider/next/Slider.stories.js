@@ -46,6 +46,33 @@ export const Default = (args) => (
   />
 );
 
+export const StepTest = (args) => (
+  <>
+    <Slider
+      {...args}
+      labelText="Slider Label"
+      value={50}
+      min={0}
+      max={100}
+      step={5}
+      stepMultiplier={2}
+      noValidate
+    />
+    <br />
+    <Slider
+      {...args}
+      hideTextInput
+      labelText="Slider Label"
+      value={50}
+      min={0}
+      max={100}
+      step={5}
+      stepMultiplier={2}
+      noValidate
+    />
+  </>
+);
+
 Default.story = {
   name: 'Slider',
 };
