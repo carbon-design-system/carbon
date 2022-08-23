@@ -10,12 +10,6 @@ export type ReactInputAttr<T = HTMLInputElement> = React.InputHTMLAttributes<T>;
 export type ReactLabelAttr<T = HTMLLabelElement> = React.LabelHTMLAttributes<T>;
 export type ReactLIAttr<T = HTMLLIElement> = React.LiHTMLAttributes<T>;
 
-// export type ShapeOf<
-//   B extends object,
-//   E extends object = { [key: string]: any }
-// > = (E extends never ? {} : E) & B;
-// export type Overwrite<T, U> = [T] extends [never] ? U : Omit<T, keyof U> & U;
-
 export type VerticalDirection = 'bottom' | 'top';
 export type HorizontalDirection = 'left' | 'right';
 export type Direction = HorizontalDirection | VerticalDirection;
