@@ -2,7 +2,8 @@
 library:
   id: carbon-react
   name: Carbon React
-  description: Build user interfaces with core components using Carbon's primary library.
+  description:
+    Build user interfaces with core components using Carbon's primary library.
   externalDocsUrl: https://react.carbondesignsystem.com
   inherits: carbon-styles
   navData:
@@ -226,9 +227,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/elements-grid
   heading:
-    name: Unstable heading
+    name: Heading
     framework: react
-    status: experimental
+    status: stable
     type: component
     platform: web
     thumbnailPath: ./thumbnails/heading.svg
@@ -236,7 +237,7 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-heading
+        url: https://react.carbondesignsystem.com/?path=/docs/heading
     tags:
       - content-element
   icon-button:
@@ -277,6 +278,19 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-layer
     tags:
       - shell
+  layout-direction:
+    name: Unstable layout direction
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text--layout-and-text
+    tags:
+      - input-control
   link:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
@@ -445,6 +459,19 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-search
+  section:
+    name: Section
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/heading
+    tags:
+      - content-element
   select:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage
@@ -530,6 +557,19 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
+    tags:
+      - input-control
+  text-direction:
+    name: Unstable text direction
+    framework: react
+    status: experimental
+    type: component
+    platform: web
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text--set-text-direction
     tags:
       - input-control
   text-area:
@@ -684,6 +724,14 @@ assets:
       - hook
   use-feature-flags:
     name: unstable_useFeatureFlags
+    framework: react
+    status: experimental
+    type: function
+    platform: web
+    tags:
+      - hook
+  use-layout-direction:
+    name: unstable_useLayoutDirection
     framework: react
     status: experimental
     type: function
