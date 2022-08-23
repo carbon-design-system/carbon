@@ -3,32 +3,48 @@ import { ForwardRefReturn, ReactInputAttr } from '../../typings/shared';
 
 type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type';
 
-// variant when "enable-2021-release" feature flag is enabled
-export type CheckboxOnChangeDataVariant = (
-  evt: React.ChangeEvent<HTMLInputElement>,
-  data: { checked: boolean; id: string }
-) => void;
-export type CheckboxOnChangeDefaultVariant = (
-  checked: boolean,
-  id: string,
-  event: React.ChangeEvent<HTMLInputElement>
-) => void;
-
 export interface CheckboxProps
   extends Omit<ReactInputAttr, ExcludedAttributes> {
-  defaultChecked?: boolean | undefined;
-  hideLabel?: boolean | undefined;
-  id: string;
-  indeterminate?: boolean | undefined;
-  labelText: NonNullable<React.ReactNode>;
-  onChange?:
-    | CheckboxOnChangeDataVariant
-    | CheckboxOnChangeDefaultVariant
-    | undefined;
   /**
-   * @deprecated
+   * Provide an `id` to uniquely identify the Checkbox input
    */
-  wrapperClassName?: string | undefined;
+  id: string;
+
+  /**
+   * Provide a label to provide a description of the Checkbox input that you are
+   * exposing to the user
+   */
+  labelText: NonNullable<React.ReactNode>;
+
+  /**
+   * Specify whether the underlying input should be checked by default
+   */
+  defaultChecked?: boolean;
+
+  /**
+   * Specify whether the Checkbox should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Specify whether the Checkbox is in an indeterminate state
+   */
+  indeterminate?: boolean;
+
+  /**
+   * Provide an optional handler that is called when the internal state of
+   * Checkbox changes. This handler is called with event and state info.
+   * `(event, { checked, id }) => void`
+   */
+  onChange?: (
+    evt: React.ChangeEvent<HTMLInputElement>,
+    data: { checked: boolean; id: string }
+  ) => void;
 }
 
 declare const Checkbox: ForwardRefReturn<HTMLInputElement, CheckboxProps>;

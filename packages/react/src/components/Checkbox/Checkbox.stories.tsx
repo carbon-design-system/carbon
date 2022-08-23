@@ -9,6 +9,7 @@ import React from 'react';
 import { default as Checkbox, CheckboxSkeleton } from '.';
 import { ComponentStory } from '@storybook/react';
 import mdx from './Checkbox.mdx';
+import { CheckboxProps } from './Checkbox';
 
 const prefix = 'cds';
 
@@ -39,11 +40,22 @@ CheckboxStory.storyName = 'Checkbox';
 
 export const Skeleton = () => <CheckboxSkeleton />;
 
-export const Playground = (args) => (
+export const Playground = ({
+  labelText,
+  ...args
+}: Omit<CheckboxProps, 'id'>) => (
   <fieldset className={`${prefix}--fieldset`}>
     <legend className={`${prefix}--label`}>Group label</legend>
-    <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" {...args} />
-    <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" {...args} />
+    <Checkbox
+      labelText={labelText ?? 'Checkbox label'}
+      id="checkbox-label-1"
+      {...args}
+    />
+    <Checkbox
+      labelText={labelText ?? 'Checkbox label'}
+      id="checkbox-label-2"
+      {...args}
+    />
   </fieldset>
 );
 
