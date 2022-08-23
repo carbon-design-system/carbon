@@ -142,6 +142,8 @@
   .#{$prefix}--tree-node__icon {
     min-width: 1rem;
     min-height: 1rem;
+    align-self: flex-start;
+    margin-top: rem(1px);
     margin-right: $spacing-03;
     fill: $icon-secondary;
   }
@@ -180,5 +182,7 @@
 
   .#{$prefix}--tree--xs .#{$prefix}--tree-node__label {
     min-height: rem(24px);
+    padding-top: rem(4px);
+    padding-bottom: rem(4px);
   }
 }
