@@ -76,6 +76,12 @@
     - sow
     - hand
     - soil
+- name: ai
+  friendly_name: AI
+  aliases:
+    - AI
+    - Cloud
+    - artificial intelligence
 - name: ai--ethics
   friendly_name: AI ethics
   aliases:
@@ -91,6 +97,12 @@
   aliases:
     - AI privacy
     - privacy
+- name: ai--ready
+  friendly_name: AI ready
+  aliases:
+    - AI ready
+    - Cloud
+    - artificial intelligence
 - name: ai--robustness
   friendly_name: AI robustness
   aliases:
@@ -200,6 +212,11 @@
     - group
     - review
     - study
+- name: analyzing--containers
+  friendly_name: Analyzing containers
+  aliases:
+    - analyzing containers
+    - Cloud
 - name: anonymous--users
   friendly_name: Anonymous Users
   aliases:
@@ -1402,6 +1419,11 @@
     - Red Hat
     - connection
     - application
+- name: connected--devices
+  friendly_name: Connected devices
+  aliases:
+    - connected devices
+    - Cloud
 - name: connected--ecosystem
   friendly_name: Connected ecosystem
   aliases:
@@ -1468,6 +1490,11 @@
     - security
     - storage
     - data
+- name: containers
+  friendly_name: Containers
+  aliases:
+    - containers
+    - Cloud
 - name: containers-and-cloud-native
   friendly_name: Containers and Cloud Native
   aliases:
@@ -1499,6 +1526,11 @@
   friendly_name: Control
   aliases:
     - control
+    - Cloud
+- name: control-panel
+  friendly_name: Control panel
+  aliases:
+    - control panel
     - Cloud
 - name: controls-framework
   friendly_name: Controls framework
@@ -1554,6 +1586,11 @@
     - cupcake
     - cake
     - creative
+- name: custom-reports
+  friendly_name: Custom reports
+  aliases:
+    - custom reports
+    - Cloud
 - name: customer--service
   friendly_name: Customer service
   aliases:
@@ -1585,6 +1622,11 @@
     - backup
     - storage
     - data storage
+- name: data--centers
+  friendly_name: Data centers
+  aliases:
+    - data centers
+    - Cloud
 - name: data--insights
   friendly_name: Data insights
   aliases:
@@ -1653,6 +1695,11 @@
     - decision velocity
     - ai
     - decision making
+- name: deep-learning
+  friendly_name: Deep learning
+  aliases:
+    - deep learning
+    - Cloud
 - name: delete
   friendly_name: Delete
   aliases:
@@ -1672,6 +1719,16 @@
     - truck
     - delivery
     - manufacturing
+- name: deploying-containers
+  friendly_name: Deploying containers
+  aliases:
+    - deploying containers
+    - Cloud
+- name: deployment
+  friendly_name: Deployment
+  aliases:
+    - deployment
+    - Cloud
 - name: design--leadership
   friendly_name: Design leadership
   aliases:
@@ -1846,6 +1903,11 @@
     - download alt
     - download 02
     - download
+- name: drag-and-drop-interface
+  friendly_name: Drag and drop interface
+  aliases:
+    - drag and drop interface
+    - Cloud
 - name: dropper
   friendly_name: Dropper
   aliases:
@@ -1892,6 +1954,11 @@
     - duplicate
     - copy
     - copy file
+- name: dynamic-workloads
+  friendly_name: Dynamic workloads
+  aliases:
+    - dynamic workloads
+    - Cloud
 - name: earth
   friendly_name: Earth
   aliases:
@@ -1905,6 +1972,11 @@
   friendly_name: Ease of use
   aliases:
     - ease of use
+    - Cloud
+- name: ecosystem
+  friendly_name: Ecosystem
+  aliases:
+    - ecosystem
     - Cloud
 - name: ecuador--quito
   friendly_name: Ecuador Quito
@@ -1963,6 +2035,11 @@
     - charger
     - charging station
     - charging
+- name: elements-of-the-cloud
+  friendly_name: Elements of the cloud
+  aliases:
+    - elements of the cloud
+    - Cloud
 - name: elevator
   friendly_name: Elevator
   aliases:
@@ -2415,6 +2492,11 @@
     - gear
     - settings
     - machinery
+- name: geographic-flexibility
+  friendly_name: Geographic flexibility
+  aliases:
+    - geographic flexibility
+    - Cloud
 - name: get--ahead--of--risk--and--compliance
   friendly_name: Get Ahead Of Risk and Compliance
   aliases:
@@ -2589,6 +2671,11 @@
     - users
     - identities
     - security
+- name: graphic-intensive-workloads
+  friendly_name: Graphic intensive workloads
+  aliases:
+    - graphic intensive workloads
+    - Cloud
 - name: green-energy
   friendly_name: Green energy
   aliases:
@@ -3345,6 +3432,14 @@
     - ML
     - learning
     - learn
+- name: machine--learning--07
+  friendly_name: Machine learning 07
+  aliases:
+    - machine learning
+    - Cloud
+    - learning
+    - learn
+    - ML
 - name: madrid--cathedral
   friendly_name: Madrid cathedral
   aliases:
@@ -3391,6 +3486,11 @@
     - anywhere
     - virtual
     - cloud
+- name: managing--containers
+  friendly_name: Managing Containers
+  aliases:
+    - managing containers
+    - Cloud
 - name: managing--contractual--flow
   friendly_name: Managing contractual flow
   aliases:
@@ -3685,6 +3785,11 @@
     - network
     - networking
     - connect
+- name: network--of-devices
+  friendly_name: Network of devices
+  aliases:
+    - network of devices
+    - Cloud
 - name: network--protection
   friendly_name: Network Protection
   aliases:
@@ -3764,6 +3869,11 @@
   aliases:
     - no smoking
     - smoke-free area
+- name: notifications
+  friendly_name: Notifications
+  aliases:
+    - notifications
+    - Cloud
 - name: nyc--brooklyn
   friendly_name: NYC Brooklyn
   aliases:
@@ -3857,15 +3967,25 @@
     - code
     - applications
     - developer
-- name: operational-efficiency
-  friendly_name: Operational efficiency
-  aliases:
-    - operational efficiency
-    - Cloud
 - name: operate-offline
   friendly_name: Operate offline
   aliases:
     - operate offline
+    - Cloud
+- name: operating-system
+  friendly_name: Operating system
+  aliases:
+    - operating system
+    - Cloud
+- name: operational--metrics
+  friendly_name: Operational metrics
+  aliases:
+    - operational metrics
+    - Cloud
+- name: operational-efficiency
+  friendly_name: Operational efficiency
+  aliases:
+    - operational efficiency
     - Cloud
 - name: optimize--cash-flow--01
   friendly_name: Optimize cash flow 01
@@ -4179,6 +4299,11 @@
   friendly_name: Predictability
   aliases:
     - predictability
+    - Cloud
+- name: predictive-analytics
+  friendly_name: Predictive analytics
+  aliases:
+    - predictive analytics
     - Cloud
 - name: pregnant
   friendly_name: Pregnant
@@ -4604,6 +4729,11 @@
     - love
     - ASL
     - sign language
+- name: rocket
+  friendly_name: Rocket
+  aliases:
+    - rocket
+    - Cloud
 - name: rome
   friendly_name: Rome
   aliases:
@@ -4689,6 +4819,11 @@
   friendly_name: Scale 02
   aliases:
     - scale
+    - Cloud
+- name: scaling--containers
+  friendly_name: Scaling containers
+  aliases:
+    - scaling containers
     - Cloud
 - name: scatter--matrix
   friendly_name: Scatter matrix
@@ -4891,6 +5026,12 @@
     - controls
     - equalizer
     - dashboard
+- name: small-components-making-a-larger-whole
+  friendly_name: Small components making a larger whole
+  aliases:
+    - small components
+    - larger whole
+    - Cloud
 - name: sneaker
   friendly_name: Sneaker
   aliases:
@@ -5720,6 +5861,11 @@
     - data
     - analytics
     - data analytics
+- name: troubleshooting
+  friendly_name: Troubleshooting
+  aliases:
+    - troubleshooting
+    - Cloud
 - name: trousers
   friendly_name: Trousers
   aliases:
@@ -5844,6 +5990,11 @@
     - sun
     - sol
     - may
+- name: use-the-language-of-your-choice
+  friendly_name: Use the language of your choice
+  aliases:
+    - use the language of your choice
+    - Cloud
 - name: user
   friendly_name: User
   aliases:
@@ -5963,6 +6114,11 @@
   friendly_name: Virtualization
   aliases:
     - virtualization
+- name: virtualization--02
+  friendly_name: Virtualization 02
+  aliases:
+    - virtualization
+    - Cloud
 - name: virus
   friendly_name: Virus
   aliases:
