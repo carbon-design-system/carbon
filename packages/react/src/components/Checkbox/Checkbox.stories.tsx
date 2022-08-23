@@ -28,7 +28,7 @@ export default {
 export const CheckboxStory: ComponentStory<typeof Checkbox> = () => {
   return (
     <fieldset className={`${prefix}--fieldset`}>
-      <legend className={`${prefix}--label`}>Checkbox heading</legend>
+      <legend className={`${prefix}--label`}>Group label</legend>
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
     </fieldset>
@@ -41,7 +41,7 @@ export const Skeleton = () => <CheckboxSkeleton />;
 
 export const Playground = (args) => (
   <fieldset className={`${prefix}--fieldset`}>
-    <legend className={`${prefix}--label`}>Checkbox heading</legend>
+    <legend className={`${prefix}--label`}>Group label</legend>
     <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" {...args} />
     <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" {...args} />
   </fieldset>

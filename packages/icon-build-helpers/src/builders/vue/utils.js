@@ -16,6 +16,7 @@ function getVueExport(key) {
 }
 
 const h = getVueExport('h');
+const createApp = getVueExport('createApp');
 
 const getSvgAttrs = (title, svgAttrs, componentAttrs) => {
   return getAttributes({
@@ -59,7 +60,7 @@ const createSVGComponent = (name, svgAttrs, svgContent) => ({
   // as it is not a valid attribute for an SVG HTML element
   props: { title: String },
   name: name,
-  ...(h
+  ...(createApp
     ? {
         // Vue 3 component
         setup({ title }, { attrs: componentAttrs, slots }) {

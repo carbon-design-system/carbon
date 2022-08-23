@@ -98,7 +98,7 @@ const props = {
       multiple: boolean('Supports multiple files (multiple)', true),
       iconDescription: text(
         'Close button icon description (iconDescription)',
-        'Clear file'
+        'Delete file'
       ),
       onChange: action('onChange'),
       onClick: action('onClick'),
@@ -110,7 +110,7 @@ const props = {
     status: select('Status for file name (status)', filenameStatuses, 'edit'),
     iconDescription: text(
       'Close button icon description (iconDescription)',
-      'Clear file'
+      'Delete file'
     ),
     onDelete: action('onDelete'),
     invalid: boolean('Invalid (invalid)', false),
