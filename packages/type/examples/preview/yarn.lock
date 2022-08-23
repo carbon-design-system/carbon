@@ -52,6 +52,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@carbon/styles@link:../../../styles::locator=type-preview-example%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@carbon/styles@link:../../../styles::locator=type-preview-example%40workspace%3A."
+  languageName: node
+  linkType: soft
+
 "@carbon/type@link:../../::locator=type-preview-example%40workspace%3A.":
   version: 0.0.0-use.local
   resolution: "@carbon/type@link:../../::locator=type-preview-example%40workspace%3A."
@@ -3226,6 +3232,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "type-preview-example@workspace:."
   dependencies:
+    "@carbon/styles": "link:../../../styles"
     "@carbon/type": "link:../../"
     change-case: ^4.1.1
     next: ^10.0.7
