@@ -682,6 +682,14 @@ original name and add it to the corresponding `deprecated.yml` file. They can
 still contribute the newly named asset, and it is recommended that they specify
 the replacement for the icon in `deprecated.yml` under the `reason` field.
 
+In the event that a change needs to be reflected immediately due to a change in
+business relationship or other matter, the asset must still be deprecated and
+not removed to avoid a breaking change.
+
+To reflect the change immediately, both the Carbon website and the IDL website
+should be updated to no longer show the file in the icon or pictogram library.
+[Here's an example PR](https://github.com/carbon-design-system/carbon-website/pull/2781)
+
 ### Code Patterns
 
 #### Deprecating a component

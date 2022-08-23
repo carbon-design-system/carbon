@@ -121,8 +121,7 @@
   // Update properties for checked checkbox
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before {
     border: none;
     border-width: 1px;
     background-color: $icon-primary;
@@ -135,8 +134,7 @@
   }
 
   // Indeterminate symbol
-  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after {
     top: rem(11px);
     width: rem(8px);
     border-bottom: 2px solid $icon-inverse;
@@ -155,8 +153,7 @@
   .#{$prefix}--checkbox:checked:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'].#{$prefix}--checkbox-label__focus::before,
   // Indeterminate
-  .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
+  .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before {
     outline: 2px solid $focus;
     outline-offset: 1px;
   }
@@ -179,8 +176,7 @@
   .#{$prefix}--checkbox:checked:disabled + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox:indeterminate:disabled
     + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before {
     background-color: $icon-disabled;
   }
 
