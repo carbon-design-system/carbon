@@ -2032,7 +2032,8 @@ __metadata:
     "@storybook/manager-webpack5": ^6.5.6
     "@storybook/react": ^6.5.6
     "@storybook/theming": ^6.5.6
-    "@typescript-eslint/eslint-plugin": ^5.30.5
+    "@typescript-eslint/eslint-plugin": ^5.34.0
+    "@typescript-eslint/parser": ^5.34.0
     autoprefixer: ^10.4.0
     babel-loader: ^8.2.3
     babel-plugin-dev-expression: ^0.2.3
@@ -8042,7 +8043,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:^5.30.5, @typescript-eslint/eslint-plugin@npm:^5.5.0":
+"@typescript-eslint/eslint-plugin@npm:^5.34.0, @typescript-eslint/eslint-plugin@npm:^5.5.0":
   version: 5.34.0
   resolution: "@typescript-eslint/eslint-plugin@npm:5.34.0"
   dependencies:
@@ -8093,7 +8094,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:^5.5.0":
+"@typescript-eslint/parser@npm:^5.34.0, @typescript-eslint/parser@npm:^5.5.0":
   version: 5.34.0
   resolution: "@typescript-eslint/parser@npm:5.34.0"
   dependencies:
