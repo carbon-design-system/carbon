@@ -1,8 +1,15 @@
+/**
+ * Copyright IBM Corp. 2016, 2018
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
 import React from 'react';
-import TextInput from './TextInput';
+import TextInput from '../TextInput';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../FeatureFlags';
+import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
