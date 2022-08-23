@@ -1,209 +1,317 @@
-/**
- * Copyright IBM Corp. 2016, 2018
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import React from 'react';
-import TextInput from '../TextInput';
-import { mount, shallow } from 'enzyme';
+import TextInput from './TextInput';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+import { FeatureFlags } from '../FeatureFlags';
 
 const prefix = 'cds';
 
 describe('TextInput', () => {
-  describe('renders as expected', () => {
-    const wrapper = mount(
-      <TextInput
-        id="test"
-        className="extra-class"
-        labelText="testlabel"
-        helperText="testHelper"
-        light
-      />
-    );
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto the input element', () => {
+      render(
+        <TextInput
+          data-testid="test-id"
+          id="input-1"
+          labelText="TextInput label"
+        />
+      );
 
-    const textInput = () => wrapper.find('input');
-
-    describe('input', () => {
-      let container;
-
-      afterEach(() => {
-        if (container && container.parentNode) {
-          container.parentNode.removeChild(container);
-        }
-        container = null;
-      });
-
-      it('renders as expected', () => {
-        expect(textInput().length).toBe(1);
-      });
-
-      it('should accept refs', () => {
-        class MyComponent extends React.Component {
-          constructor(props) {
-            super(props);
-            this.textInput = React.createRef();
-            this.focus = this.focus.bind(this);
-          }
-          focus() {
-            this.textInput.current.focus();
-          }
-          render() {
-            return (
-              <TextInput id="test" labelText="testlabel" ref={this.textInput} />
-            );
-          }
-        }
-        container = document.createElement('div');
-        container.id = 'container';
-        document.body.appendChild(container);
-        const wrapper = mount(<MyComponent />, {
-          attachTo: document.querySelector('#container'),
-        });
-        expect(document.activeElement.type).toBeUndefined();
-        wrapper.instance().focus();
-        expect(document.activeElement.type).toEqual('text');
-      });
-
-      it('has the expected classes', () => {
-        expect(textInput().hasClass(`${prefix}--text-input`)).toEqual(true);
-      });
-
-      it('should add extra classes that are passed via className', () => {
-        expect(textInput().hasClass('extra-class')).toEqual(true);
-      });
-
-      it('has the expected classes for light', () => {
-        wrapper.setProps({ light: true });
-        expect(textInput().hasClass(`${prefix}--text-input--light`)).toEqual(
-          true
-        );
-      });
-
-      it('should set type as expected', () => {
-        expect(textInput().props().type).toEqual('text');
-        wrapper.setProps({ type: 'email' });
-        expect(textInput().props().type).toEqual('email');
-      });
-
-      it('should set value as expected', () => {
-        expect(textInput().props().defaultValue).toEqual(undefined);
-        wrapper.setProps({ defaultValue: 'test' });
-        expect(textInput().props().defaultValue).toEqual('test');
-      });
-
-      it('should set disabled as expected', () => {
-        expect(textInput().props().disabled).toEqual(false);
-        wrapper.setProps({ disabled: true });
-        expect(textInput().props().disabled).toEqual(true);
-      });
-
-      it('should set placeholder as expected', () => {
-        expect(textInput().props().placeholder).not.toBeDefined();
-        wrapper.setProps({ placeholder: 'Enter text' });
-        expect(textInput().props().placeholder).toEqual('Enter text');
-      });
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
     });
 
-    describe('label', () => {
-      wrapper.setProps({ labelText: 'Email Input' });
-      const renderedLabel = wrapper.find('label');
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <FeatureFlags flags={{ 'enable-v11-release': true }}>
+          <TextInput
+            id="input-1"
+            labelText="TextInput label"
+            className="custom-class"
+          />
+        </FeatureFlags>
+      );
 
-      it('renders a label', () => {
-        expect(renderedLabel.length).toBe(1);
-      });
-
-      it('has the expected classes', () => {
-        expect(renderedLabel.hasClass(`${prefix}--label`)).toEqual(true);
-      });
-
-      it('should set label as expected', () => {
-        expect(renderedLabel.text()).toEqual('Email Input');
-      });
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
-    describe('helper', () => {
-      it('renders a helper', () => {
-        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
-        expect(renderedHelper.length).toEqual(1);
-      });
+    it('should support a custom `className` prop on the input element (V10)', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          className="custom-class"
+        />
+      );
 
-      it('renders children as expected', () => {
-        wrapper.setProps({
-          helperText: <span>This is helper text.</span>,
-        });
-        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
-        expect(renderedHelper.props().children).toEqual(
-          <span>This is helper text.</span>
-        );
-      });
+      expect(screen.getByRole('textbox')).toHaveClass('custom-class');
+    });
 
-      it('should set helper text as expected', () => {
-        wrapper.setProps({ helperText: 'Helper text' });
-        const renderedHelper = wrapper.find(`.${prefix}--form__helper-text`);
-        expect(renderedHelper.text()).toEqual('Helper text');
-      });
+    it('should respect defaultValue prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          defaultValue="This is default text"
+        />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'value',
+        'This is default text'
+      );
+    });
+
+    it('should respect disabled prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" disabled />);
+
+      expect(screen.getByRole('textbox')).toBeDisabled();
+    });
+
+    it('should respect helperText prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          helperText="This is helper text"
+        />
+      );
+
+      expect(screen.getByText('This is helper text')).toBeInTheDocument();
+      expect(screen.getByText('This is helper text')).toHaveClass(
+        `${prefix}--form__helper-text`
+      );
+    });
+
+    it('should respect hideLabel prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" hideLabel />);
+
+      expect(screen.getByText('TextInput label')).toBeInTheDocument();
+      expect(screen.getByText('TextInput label')).toHaveClass(
+        `${prefix}--visually-hidden`
+      );
+    });
+
+    it('should respect id prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" />);
+
+      expect(screen.getByRole('textbox')).toHaveAttribute('id', 'input-1');
+    });
+
+    it('should respect inline prop', () => {
+      const { container } = render(
+        <TextInput id="input-1" labelText="TextInput label" inline />
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--text-input-wrapper--inline`
+      );
+    });
+
+    it('should respect invalid prop', () => {
+      const { container } = render(
+        <TextInput id="input-1" labelText="TextInput" invalid />
+      );
+
+      const invalidIcon = container.querySelector(
+        `svg.${prefix}--text-input__invalid-icon`
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
+      expect(screen.getByRole('textbox')).toHaveClass(
+        `${prefix}--text-input--invalid`
+      );
+      expect(invalidIcon).toBeInTheDocument();
+    });
+
+    it('should respect invalidText prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput"
+          invalid
+          invalidText="This is invalid text"
+        />
+      );
+
+      expect(screen.getByText('This is invalid text')).toBeInTheDocument();
+      expect(screen.getByText('This is invalid text')).toHaveClass(
+        `${prefix}--form-requirement`
+      );
+    });
+
+    it('should respect labelText prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" />);
+
+      expect(screen.getByText('TextInput label')).toBeInTheDocument();
+      expect(screen.getByText('TextInput label')).toHaveClass(
+        `${prefix}--label`
+      );
+    });
+
+    it('should respect placeholder prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          placeholder="Placeholder text"
+        />
+      );
+
+      expect(
+        screen.getByPlaceholderText('Placeholder text')
+      ).toBeInTheDocument();
+    });
+
+    it('should respect size prop', () => {
+      render(<TextInput id="input-1" labelText="TextInput label" size="sm" />);
+
+      expect(screen.getByRole('textbox')).toHaveClass(
+        `${prefix}--text-input--sm`
+      );
+    });
+
+    it('should respect type prop', () => {
+      render(
+        <TextInput id="input-1" labelText="TextInput label" type="text" />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute(`type`, 'text');
+    });
+
+    it('should respect value prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          value="This is a test value"
+        />
+      );
+
+      expect(screen.getByRole('textbox')).toHaveAttribute(
+        'value',
+        'This is a test value'
+      );
+    });
+
+    it('should respect warn prop', () => {
+      const { container } = render(
+        <TextInput id="input-1" labelText="TextInput label" warn />
+      );
+
+      const warnIcon = container.querySelector(
+        `svg.${prefix}--text-input__invalid-icon--warning`
+      );
+
+      expect(screen.getByRole('textbox')).toHaveClass(
+        `${prefix}--text-input--warning`
+      );
+      expect(warnIcon).toBeInTheDocument();
+    });
+
+    it('should respect warnText prop', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          warn
+          warnText="This is warning text"
+        />
+      );
+
+      expect(screen.getByText('This is warning text')).toBeInTheDocument();
+      expect(screen.getByText('This is warning text')).toHaveClass(
+        `${prefix}--form-requirement`
+      );
     });
   });
 
-  describe('events', () => {
-    describe('disabled textinput', () => {
-      const onClick = jest.fn();
+  describe('behaves as expected - Component API', () => {
+    it('should respect onChange prop', () => {
       const onChange = jest.fn();
-
-      const wrapper = shallow(
+      render(
         <TextInput
-          id="test"
-          labelText="testlabel"
-          onClick={onClick}
+          id="input-1"
+          labelText="TextInput label"
+          data-testid-="input-1"
           onChange={onChange}
+        />
+      );
+
+      userEvent.type(screen.getByRole('textbox'), 'x');
+      expect(screen.getByRole('textbox')).toHaveValue('x');
+      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(onChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        })
+      );
+    });
+
+    it('should respect onClick prop', () => {
+      const onClick = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          data-testid-="input-1"
+          onClick={onClick}
+        />
+      );
+
+      userEvent.click(screen.getByRole('textbox'));
+      expect(onClick).toHaveBeenCalledTimes(1);
+      expect(onClick).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        })
+      );
+    });
+
+    it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
+      const onClick = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          onClick={onClick}
           disabled
         />
       );
 
-      const input = wrapper.find('input');
-
-      it('should not invoke onClick', () => {
-        input.simulate('click');
-        expect(onClick).not.toHaveBeenCalled();
-      });
-
-      it('should not invoke onChange', () => {
-        input.simulate('change');
-        expect(onChange).not.toHaveBeenCalled();
-      });
+      userEvent.click(screen.getByRole('textbox'));
+      expect(onClick).not.toHaveBeenCalled();
     });
 
-    describe('enabled textinput', () => {
-      const onClick = jest.fn();
+    it('should respect readOnly prop', () => {
       const onChange = jest.fn();
-
-      const wrapper = shallow(
+      const onClick = jest.fn();
+      const { container } = render(
         <TextInput
-          labelText="testlabel"
-          id="test"
+          id="input-1"
+          labelText="TextInput label"
           onClick={onClick}
           onChange={onChange}
+          readOnly
         />
       );
 
-      const input = wrapper.find('input');
-      const eventObject = {
-        target: {
-          defaultValue: 'test',
-        },
-      };
+      // Click events should fire
+      userEvent.click(screen.getByRole('textbox'));
+      expect(onClick).toHaveBeenCalledTimes(1);
 
-      it('should invoke onClick when input is clicked', () => {
-        input.simulate('click');
-        expect(onClick).toHaveBeenCalled();
-      });
+      // Change events should *not* fire
+      userEvent.type(screen.getByRole('textbox'), 'x');
+      expect(screen.getByRole('textbox')).not.toHaveValue('x');
+      expect(onChange).toHaveBeenCalledTimes(0);
 
-      it('should invoke onChange when input value is changed', () => {
-        input.simulate('change', eventObject);
-        expect(onChange).toHaveBeenCalledWith(eventObject);
-      });
+      // Should display the "read-only" icon
+      const icon = container.querySelector(
+        `svg.${prefix}--text-input__readonly-icon`
+      );
+      expect(icon).toBeInTheDocument();
     });
   });
 });
