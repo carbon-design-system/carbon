@@ -6,12 +6,8 @@
  */
 
 import React, { useState } from 'react';
-// import { action } from '@storybook/addon-actions';
-
-// import { withKnobs, boolean, number, text } from '@storybook/addon-knobs';
 import { SliderSkeleton } from '../../Slider';
 import Slider from '../Slider';
-// import { sliderValuePropSync } from '../../../../react/src/internal/FeatureFlags';
 import { Layer } from '../../Layer';
 import mdx from './Slider.mdx';
 
@@ -22,8 +18,45 @@ export default {
     SliderSkeleton,
   },
   argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+    children: {
+      table: {
+        disable: true,
+      },
+    },
     disabled: {
       control: { type: 'boolean' },
+    },
+    labelText: {
+      control: { type: 'string' },
+      defaultValue: 'Slider (must be an increment of 5)',
+    },
+    min: {
+      control: { type: 'number' },
+      defaultValue: 0,
+    },
+    max: {
+      control: { type: 'number' },
+      defaultValue: 100,
+    },
+    required: {
+      control: { type: 'boolean' },
+    },
+    step: {
+      control: { type: 'number' },
+      defaultValue: 5,
+    },
+    stepMultiplier: {
+      control: { type: 'number' },
+      defaultValue: 5,
+    },
+    value: {
+      control: { type: 'number' },
+      defaultValue: 50,
     },
   },
   parameters: {
@@ -43,6 +76,13 @@ export const Default = (args) => (
     step={1}
     stepMultiplier={10}
     noValidate
+  />
+);
+
+export const Playground = (args) => (
+  <Slider
+    {...args}
+    labelText={`Slider (must be an increment of ${args.step})`}
   />
 );
 
