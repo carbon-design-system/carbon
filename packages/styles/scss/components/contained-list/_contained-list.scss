@@ -164,6 +164,7 @@
   }
 
   .#{$prefix}--contained-list-item__icon {
+    display: inline-flex;
     padding-top: $spacing-01;
   }
 }

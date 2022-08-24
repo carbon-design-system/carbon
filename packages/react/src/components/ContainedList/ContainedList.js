@@ -35,7 +35,9 @@ function ContainedList({
         <div id={labelId} className={`${prefix}--contained-list__label`}>
           {label}
         </div>
-        <div className={`${prefix}--contained-list__action`}>{action}</div>
+        {action && (
+          <div className={`${prefix}--contained-list__action`}>{action}</div>
+        )}
       </div>
       <ul aria-labelledby={labelId}>{children}</ul>
     </div>
