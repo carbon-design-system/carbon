@@ -16,17 +16,27 @@ const GridSelectedRowStateContext = React.createContext(null);
 const GridSelectedRowDispatchContext = React.createContext(null);
 
 export function StructuredListWrapper(props) {
-  const { children, selection, className, ariaLabel, ...other } = props;
+  const {
+    children,
+    selection,
+    className,
+    ariaLabel,
+    isCondensed,
+    isFlush,
+    ...other
+  } = props;
   const prefix = usePrefix();
   const classes = classNames(`${prefix}--structured-list`, className, {
     [`${prefix}--structured-list--selection`]: selection,
+    [`${prefix}--structured-list--condensed`]: isCondensed,
+    [`${prefix}--structured-list--flush`]: isFlush,
   });
   const [selectedRow, setSelectedRow] = React.useState(null);
 
   return (
     <GridSelectedRowStateContext.Provider value={selectedRow}>
       <GridSelectedRowDispatchContext.Provider value={setSelectedRow}>
-        <div role="grid" className={classes} {...other} aria-label={ariaLabel}>
+        <div role="table" className={classes} {...other} aria-label={ariaLabel}>
           {children}
         </div>
       </GridSelectedRowDispatchContext.Provider>
@@ -51,6 +61,16 @@ StructuredListWrapper.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify if structured list is condensed, default is false
+   */
+  isCondensed: PropTypes.bool,
+
+  /**
+   * Specify if structured list is flush, default is false
+   */
+  isFlush: PropTypes.bool,
+
+  /**
    * Specify whether your StructuredListWrapper should have selections
    */
   selection: PropTypes.bool,
@@ -58,6 +78,8 @@ StructuredListWrapper.propTypes = {
 
 StructuredListWrapper.defaultProps = {
   selection: false,
+  isCondensed: false,
+  isFlush: false,
   ariaLabel: 'Structured list section',
 };
 

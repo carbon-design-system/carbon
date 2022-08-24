@@ -8,12 +8,12 @@
 const { snapshot } = require('./snapshot');
 
 async function visitStory(page, options) {
-  const { component, story, globals } = options;
-  // Note: We serve a static storybook in CI that will trim .html extensions
-  // from the URL
-  let url = process.env.CI
-    ? `/iframe?id=components-${component}--${story}&viewMode=story`
-    : `/iframe.html?id=components-${component}--${story}&viewMode=story`;
+  const { component, story, id, globals } = options;
+  let url = getStoryUrl({
+    component,
+    story,
+    id,
+  });
 
   if (globals) {
     const values = Object.entries(globals)
@@ -27,11 +27,23 @@ async function visitStory(page, options) {
   await page.goto(url);
 }
 
+function getStoryUrl({ component, story, id }) {
+  const normalized = id ? id : `components-${component}--${story}`;
+
+  // Note: We serve a static storybook in CI that will trim .html extensions
+  // from the URL
+  if (process.env.CI) {
+    return `/iframe?id=${normalized}&viewMode=story`;
+  }
+  return `/iframe.html?id=${normalized}&viewMode=story`;
+}
+
 async function snapshotStory(page, storyOptions) {
-  const { component, story, theme } = storyOptions;
+  const { component, story, id, theme } = storyOptions;
   await visitStory(page, {
     component,
     story,
+    id,
     globals: {
       theme,
     },
@@ -40,6 +52,7 @@ async function snapshotStory(page, storyOptions) {
     theme,
     component,
     story,
+    id,
   });
 }
 

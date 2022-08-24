@@ -6,26 +6,31 @@
  */
 
 import React from 'react';
-import ListItem from '../ListItem';
-import { shallow } from 'enzyme';
+import ListItem from './ListItem';
+import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
 describe('ListItem', () => {
   describe('Renders as expected', () => {
-    const item = shallow(<ListItem className="some-class">An Item</ListItem>);
+    it('should be an li element', () => {
+      render(<ListItem>Item</ListItem>);
 
-    it('should render as an li element', () => {
-      expect(item.find('li').length).toEqual(1);
+      expect(screen.getByRole('listitem')).toBeInTheDocument();
     });
 
     it('should render with the appropriate classes', () => {
-      expect(item.hasClass(`${prefix}--list__item`)).toEqual(true);
-      expect(item.hasClass('some-class')).toEqual(true);
+      const { container } = render(
+        <ListItem className="custom-class">Item</ListItem>
+      );
+
+      expect(container.firstChild).toHaveClass(`${prefix}--list__item`);
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
-    it('should include child content', () => {
-      expect(item.text()).toEqual('An Item');
+    it('should render children as expected', () => {
+      render(<ListItem>Item</ListItem>);
+      expect(screen.getByText('Item')).toBeInTheDocument();
     });
   });
 });

@@ -5,28 +5,36 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import ListBox from '../';
 
 describe('ListBoxMenuIcon', () => {
-  it('should render', () => {
-    const openWrapper = mount(<ListBox.MenuIcon isOpen={true} />);
-    const closedWrapper = mount(<ListBox.MenuIcon isOpen={false} />);
-    expect(openWrapper).toMatchSnapshot();
-    expect(closedWrapper).toMatchSnapshot();
+  it('should support translating the close menu message', () => {
+    const translateWithId = jest.fn((id) => {
+      if (id === 'close.menu') {
+        return 'test';
+      }
+      throw new Error(`Unsupported id: ${id}`);
+    });
+
+    render(<ListBox.MenuIcon isOpen translateWithId={translateWithId} />);
+
+    expect(screen.getByLabelText('test')).toBeInTheDocument();
   });
 
-  it('should call `translateWithId` to determine the description', () => {
-    const translateWithId = jest.fn(() => 'message');
-    mount(<ListBox.MenuIcon isOpen={true} translateWithId={translateWithId} />);
-    expect(translateWithId).toHaveBeenCalledWith('close.menu');
+  it('should support translating the open menu message', () => {
+    const translateWithId = jest.fn((id) => {
+      if (id === 'open.menu') {
+        return 'test';
+      }
+      throw new Error(`Unsupported id: ${id}`);
+    });
 
-    translateWithId.mockClear();
-
-    mount(
+    render(
       <ListBox.MenuIcon isOpen={false} translateWithId={translateWithId} />
     );
-    expect(translateWithId).toHaveBeenCalledWith('open.menu');
+
+    expect(screen.getByLabelText('test')).toBeInTheDocument();
   });
 });

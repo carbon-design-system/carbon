@@ -47,7 +47,7 @@ const states = {
         key: `has_issue_label_${label}`,
         run(context) {
           if (!context.payload.issue) {
-            return;
+            return false;
           }
           return context.payload.issue.labels.find(({ name }) => {
             return name === label;
@@ -57,6 +57,22 @@ const states = {
     },
   },
 };
+
+function or(...conditions) {
+  const key = conditions
+    .map((condition) => {
+      return condition.key;
+    })
+    .join(', ');
+  return {
+    key: `or(${key})`,
+    run(context) {
+      return conditions.some((condition) => {
+        return condition.run(context);
+      });
+    },
+  };
+}
 
 /**
  * Check if a specific action was triggered for a given action context
@@ -70,4 +86,5 @@ function action(name) {
 module.exports = {
   events,
   states,
+  or,
 };

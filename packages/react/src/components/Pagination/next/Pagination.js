@@ -90,9 +90,8 @@ const Pagination = React.forwardRef(function Pagination(
   const [pageSize, setPageSize] = useState(() => {
     return getPageSize(pageSizes, controlledPageSize);
   });
-  const [prevControlledPageSize, setPrevControlledPageSize] = useState(
-    controlledPageSize
-  );
+  const [prevControlledPageSize, setPrevControlledPageSize] =
+    useState(controlledPageSize);
 
   const className = cx({
     [`${prefix}--pagination`]: true,

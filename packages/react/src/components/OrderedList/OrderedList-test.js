@@ -6,38 +6,91 @@
  */
 
 import React from 'react';
-import OrderedList from '../OrderedList';
+import { render, screen } from '@testing-library/react';
+import OrderedList from './OrderedList';
 import ListItem from '../ListItem';
-import { shallow } from 'enzyme';
 
 const prefix = 'cds';
 
 describe('OrderedList', () => {
   describe('Renders as expected', () => {
-    const list = shallow(
-      <OrderedList className="some-class">
-        <ListItem>Item</ListItem>
-      </OrderedList>
-    );
-
     it('should be an ol element', () => {
-      expect(list.find('ol').length).toEqual(1);
+      render(
+        <OrderedList>
+          <ListItem>Item</ListItem>
+        </OrderedList>
+      );
+
+      expect(screen.getByRole('list')).toBeInTheDocument();
     });
 
     it('should render with the appropriate classes', () => {
-      expect(list.hasClass(`${prefix}--list--ordered`)).toEqual(true);
-      expect(list.hasClass('some-class')).toEqual(true);
+      const { container } = render(
+        <OrderedList className="custom-class">
+          <ListItem>Item</ListItem>
+        </OrderedList>
+      );
+
+      expect(container.firstChild).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass(`${prefix}--list--ordered`);
     });
 
     it('should render children as expected', () => {
-      expect(list.find(ListItem).length).toEqual(1);
+      render(
+        <OrderedList>
+          <ListItem>Item 1</ListItem>
+        </OrderedList>
+      );
+      expect(screen.getByRole('listitem')).toBeInTheDocument();
+      expect(screen.getByText('Item 1')).toBeInTheDocument();
     });
 
     it('should render nested lists', () => {
-      list.setProps({ nested: true });
-      expect(list.hasClass(`${prefix}--list--nested`)).toEqual(true);
-      list.setProps({ nested: false });
-      expect(list.hasClass(`${prefix}--list--nested`)).toEqual(false);
+      render(
+        <OrderedList data-testid="not-nested">
+          <ListItem>
+            Ordered List level 1
+            <OrderedList nested data-testid="nested">
+              <ListItem>Ordered List level 2</ListItem>
+              <ListItem>Ordered List level 2</ListItem>
+            </OrderedList>
+          </ListItem>
+        </OrderedList>
+      );
+
+      expect(screen.getByTestId('not-nested')).not.toHaveClass(
+        `${prefix}--list--nested`
+      );
+      expect(screen.getByTestId('nested')).toHaveClass(
+        `${prefix}--list--nested`
+      );
+      expect(screen.getByTestId('nested')).toHaveClass(
+        `${prefix}--list--ordered`
+      );
+    });
+
+    it('should render native lists', () => {
+      const { container } = render(
+        <OrderedList native>
+          <ListItem>Item</ListItem>
+        </OrderedList>
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--list--ordered--native`
+      );
+      expect(container.firstChild).not.toHaveClass(`${prefix}--list--nested`);
+    });
+
+    it('should render expressive lists', () => {
+      const { container } = render(
+        <OrderedList isExpressive>
+          <ListItem>Item</ListItem>
+        </OrderedList>
+      );
+
+      expect(container.firstChild).toHaveClass(`${prefix}--list--ordered`);
+      expect(container.firstChild).toHaveClass(`${prefix}--list--expressive`);
     });
   });
 });

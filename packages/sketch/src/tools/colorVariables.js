@@ -22,9 +22,8 @@ export function syncColorVariable({ document, name, color }) {
   const documentColorVariables = document.swatches;
   const colorVariable = documentColorVariables.find((swatch) => {
     //todo clean this up yuck
-    const rootSwatchName = swatch.name.split('/')[
-      swatch.name.split('/').length - 1
-    ];
+    const rootSwatchName =
+      swatch.name.split('/')[swatch.name.split('/').length - 1];
     const rootName = name.split('/')[name.split('/').length - 1];
     return rootSwatchName === rootName;
   });

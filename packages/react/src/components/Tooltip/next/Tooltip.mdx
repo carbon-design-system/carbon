@@ -1,9 +1,8 @@
-import { Story, ArgsTable, Canvas } from '@storybook/addon-docs/blocks';
+import { Story, ArgsTable, Canvas } from '@storybook/addon-docs';
 
 # Tooltip
 
-[Source
-code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tooltip/next)
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/Tooltip/next)
 &nbsp;|&nbsp;
 [Usage guidelines](https://www.carbondesignsystem.com/components/tooltip/usage)
 &nbsp;|&nbsp;
@@ -11,9 +10,11 @@ code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/sr
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 ## Table of Contents
 
 - [Overview](#overview)
+  - [Toggletips vs Tooltips](#toggletips-vs-tooltips)
   - [Customizing the content of a tooltip](#customizing-the-content-of-a-tooltip)
   - [Tooltip alignment](#tooltip-alignment)
   - [Customizing the duration of a tooltip](#customizing-the-duration-of-a-tooltip)
@@ -24,9 +25,10 @@ code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/sr
 
 ## Overview
 
-You can use the `Tooltip` component to display a popup for an interactive
-element that you provide. You can provide the interactive element as a child to
-`Tooltip`, for example:
+You can use the `Tooltip` component as a wrapper to display a popup for an
+interactive element that you provide. If you are trying to place interactive
+content inside of the `Tooltip` itself, consider using `Toggletip` instead. You
+can provide the interactive element as a child to `Tooltip`, for example:
 
 ```jsx
 <Tooltip label="Close">
@@ -42,16 +44,26 @@ specify the contents of the popup through the `label` or `description` prop.
   <Story id="components-tooltip--default" />
 </Canvas>
 
+### Toggletips vs Tooltips
+
+Toggletips and tooltips are similar visually and both contain a popover and
+interactive trigger element. The two components differ in the way they are
+invoked and dismissed and if the user must interact with the contents. A tooltip
+is exposed on hover or focus when you need to expose brief, supplemental
+information that is not interactive. A toggletip is used on click or enter when
+you need to expose interactive elements, such as button, that a user needs to
+interact with.
+
 ### Customizing the content of a tooltip
 
-The `Tooltip` component supports tooltip customization through the `label`
-and `description` props. Under the hood, `label` will map to `aria-labelledby`
-and `description` will map to `aria-describedby`.
+The `Tooltip` component supports tooltip customization through the `label` and
+`description` props. Under the hood, `label` will map to `aria-labelledby` and
+`description` will map to `aria-describedby`.
 
 It's important to consider the type of content that you provide through the
 tooltip in order to know whether to use `label` or `description`. If the
-information shown is the only content that describes your component, you should use a
-`label`. If the information is secondary or adds additional information,
+information shown is the only content that describes your component, you should
+use a `label`. If the information is secondary or adds additional information,
 `description` would be a good pick.
 
 While the `label` and `description` props accept any arbitrary React element,

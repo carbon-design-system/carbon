@@ -61,6 +61,9 @@ export default function TreeNode({
     [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
   });
   function handleToggleClick(event) {
+    if (disabled) {
+      return;
+    }
     onToggle?.(event, { id, isExpanded: !expanded, label, value });
     setExpanded(!expanded);
   }
@@ -73,6 +76,9 @@ export default function TreeNode({
     }
   }
   function handleKeyDown(event) {
+    if (disabled) {
+      return;
+    }
     if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
       event.stopPropagation();
     }

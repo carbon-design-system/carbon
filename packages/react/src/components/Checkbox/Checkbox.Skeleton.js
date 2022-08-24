@@ -17,11 +17,15 @@ const CheckboxSkeleton = ({ className, ...rest }) => {
       className={cx(
         `${prefix}--form-item`,
         `${prefix}--checkbox-wrapper`,
-        `${prefix}--checkbox-label`,
+        `${prefix}--checkbox-skeleton`,
         className
       )}
       {...rest}>
-      <span className={`${prefix}--checkbox-label-text ${prefix}--skeleton`} />
+      <div className={`${prefix}--checkbox-label`}>
+        <span
+          className={`${prefix}--checkbox-label-text ${prefix}--skeleton`}
+        />
+      </div>
     </div>
   );
 };

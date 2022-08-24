@@ -5,91 +5,63 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import SideNav from '../SideNav';
-import SideNavLink from '../SideNavLink';
+
+Object.defineProperty(window, 'matchMedia', {
+  writable: true,
+  value: jest.fn().mockImplementation((query) => ({
+    matches: false,
+    media: query,
+    onchange: null,
+    addListener: jest.fn(), // deprecated
+    removeListener: jest.fn(), // deprecated
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    dispatchEvent: jest.fn(),
+  })),
+});
 
 describe('SideNav', () => {
-  let mockProps, wrapper;
-
-  beforeEach(() => {
-    mockProps = {
-      'aria-label': 'Navigation',
-      children: <SideNavLink href="/">Navigation</SideNavLink>,
-    };
+  it('should label the <nav> through `aria-label`', () => {
+    render(<SideNav aria-label="test" />);
+    expect(screen.getByRole('navigation')).toEqual(
+      screen.getByLabelText('test')
+    );
   });
 
-  Object.defineProperty(window, 'matchMedia', {
-    writable: true,
-    value: jest.fn().mockImplementation((query) => ({
-      matches: false,
-      media: query,
-      onchange: null,
-      addListener: jest.fn(), // deprecated
-      removeListener: jest.fn(), // deprecated
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
-    })),
+  it('should render an overlay if `isFixedNav` is false', () => {
+    const { container } = render(<SideNav aria-label="test" />);
+    expect(container.childNodes.length).toBe(2);
   });
 
-  afterEach(() => {
-    wrapper && wrapper.unmount();
+  it('should toggle the overlay-active class when `expanded` is true', () => {
+    const { container } = render(<SideNav aria-label="test" expanded />);
+    expect(container.firstChild).toHaveClass('cds--side-nav__overlay-active');
   });
 
-  it('should render', () => {
-    wrapper = mount(<SideNav {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should toggle the overlay-active class when `defaultExpanded` is true', () => {
+    const { container } = render(<SideNav aria-label="test" defaultExpanded />);
+    expect(container.firstChild).toHaveClass('cds--side-nav__overlay-active');
   });
 
-  it('by default, focus event listeners are added', () => {
-    wrapper = mount(<SideNav {...mockProps} />);
-    expect(wrapper.find('nav').props().onFocus).toBeDefined();
-    expect(wrapper.find('nav').props().onBlur).toBeDefined();
+  it('should support a custom `className` prop on the element with role="navigation"', () => {
+    render(<SideNav aria-label="test" className="test" />);
+    expect(screen.getByRole('navigation')).toHaveClass('test');
   });
 
-  it('by default, mouse event listeners are not added', () => {
-    wrapper = mount(<SideNav {...mockProps} />);
-    expect(wrapper.find('nav').props().onFocus).toBeDefined();
-    expect(wrapper.find('nav').props().onBlur).toBeDefined();
-    expect(wrapper.find('nav').props().onMouseEnter).not.toBeDefined();
-    expect(wrapper.find('nav').props().onMouseLeave).not.toBeDefined();
+  it('should spread extra props on the outermost element', () => {
+    render(<SideNav aria-label="test" data-testid="test" />);
+    expect(screen.getByRole('navigation')).toHaveAttribute(
+      'data-testid',
+      'test'
+    );
   });
 
-  it('if addFocusListeners is specified as false, no focus event listeners props are added', () => {
-    wrapper = mount(<SideNav {...mockProps} />);
-    wrapper.setProps({ addFocusListeners: false });
-    expect(wrapper.find('nav').props().onFocus).not.toBeDefined();
-    expect(wrapper.find('nav').props().onBlur).not.toBeDefined();
-    expect(wrapper.find('nav').props().onMouseEnter).not.toBeDefined();
-    expect(wrapper.find('nav').props().onMouseLeave).not.toBeDefined();
-  });
-
-  it('if addFocusListeners is specified as false in rail SideNav, no event listeners props are added', () => {
-    wrapper = mount(<SideNav {...mockProps} isRail />);
-    wrapper.setProps({ addFocusListeners: false });
-    expect(wrapper.find('nav').props().onFocus).not.toBeDefined();
-    expect(wrapper.find('nav').props().onBlur).not.toBeDefined();
-    expect(wrapper.find('nav').props().onMouseEnter).toBeDefined();
-    expect(wrapper.find('nav').props().onMouseLeave).toBeDefined();
-  });
-
-  it('if addMouseListeners is specified as false, no mouse listener props are added', () => {
-    wrapper = mount(<SideNav {...mockProps} />);
-    wrapper.setProps({ addMouseListeners: false });
-    expect(wrapper.find('nav').props().onFocus).toBeDefined();
-    expect(wrapper.find('nav').props().onBlur).toBeDefined();
-    expect(wrapper.find('nav').props().onMouseEnter).not.toBeDefined();
-    expect(wrapper.find('nav').props().onMouseLeave).not.toBeDefined();
-  });
-
-  it('if both addFocusListeners and addMouseListeners are specified as false, no mouse or focus listener props are added', () => {
-    wrapper = mount(<SideNav {...mockProps} />);
-    wrapper.setProps({ addFocusListeners: false, addMouseListeners: false });
-    expect(wrapper.find('nav').props().onFocus).not.toBeDefined();
-    expect(wrapper.find('nav').props().onBlur).not.toBeDefined();
-    expect(wrapper.find('nav').props().onMouseEnter).not.toBeDefined();
-    expect(wrapper.find('nav').props().onMouseLeave).not.toBeDefined();
+  it('should support a `ref` on the element with role="navigation"', () => {
+    const ref = jest.fn();
+    render(<SideNav aria-label="test" ref={ref} />);
+    expect(ref).toHaveBeenCalledWith(screen.getByRole('navigation'));
   });
 });

@@ -23,13 +23,13 @@ export default class FileUploader extends React.Component {
     accept: PropTypes.arrayOf(PropTypes.string),
 
     /**
-     * Specify the type of the <FileUploaderButton>
+     * Specify the type of the `<FileUploaderButton>`
      */
     buttonKind: PropTypes.oneOf(ButtonKinds),
 
     /**
      * Provide the label text to be read by screen readers when interacting with
-     * the <FileUploaderButton>
+     * the `<FileUploaderButton>`
      */
     buttonLabel: PropTypes.string,
 
@@ -57,12 +57,12 @@ export default class FileUploader extends React.Component {
       : PropTypes.string,
 
     /**
-     * Specify the description text of this <FileUploader>
+     * Specify the description text of this `<FileUploader>`
      */
     labelDescription: PropTypes.string,
 
     /**
-     * Specify the title text of this <FileUploader>
+     * Specify the title text of this `<FileUploader>`
      */
     labelTitle: PropTypes.string,
 
@@ -124,6 +124,8 @@ export default class FileUploader extends React.Component {
 
   nodes = [];
 
+  uploaderButton = React.createRef();
+
   static getDerivedStateFromProps({ filenameStatus }, state) {
     const { prevFilenameStatus } = state;
     return prevFilenameStatus === filenameStatus
@@ -159,6 +161,7 @@ export default class FileUploader extends React.Component {
       this.setState({ filenames: filteredArray });
       if (this.props.onDelete) {
         this.props.onDelete(evt);
+        this.uploaderButton.current.focus();
       }
       this.props.onClick(evt);
     }
@@ -215,6 +218,7 @@ export default class FileUploader extends React.Component {
           {labelDescription}
         </p>
         <FileUploaderButton
+          innerRef={this.uploaderButton}
           disabled={disabled}
           labelText={buttonLabel}
           multiple={multiple}
@@ -234,10 +238,13 @@ export default class FileUploader extends React.Component {
                   className={selectedFileClasses}
                   ref={(node) => (this.nodes[index] = node)} // eslint-disable-line
                   {...other}>
-                  <p className={`${prefix}--file-filename`}>{name}</p>
+                  <p className={`${prefix}--file-filename`} id={name}>
+                    {name}
+                  </p>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
                       iconDescription={iconDescription}
+                      aria-describedby={name}
                       status={filenameStatus}
                       onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {

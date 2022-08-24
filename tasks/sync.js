@@ -81,7 +81,9 @@ function sortFields(a, b) {
 
 async function sync() {
   const packagePaths = await Promise.all(
-    (await fs.readdir(PACKAGES_DIR)).map(async (pkg) => {
+    (
+      await fs.readdir(PACKAGES_DIR)
+    ).map(async (pkg) => {
       const packageJsonPath = path.join(PACKAGES_DIR, pkg, 'package.json');
       return {
         basename: pkg,

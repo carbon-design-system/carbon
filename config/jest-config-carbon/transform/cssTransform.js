@@ -52,18 +52,20 @@ module.exports = {
       outputStyle: 'compressed',
       includePaths: [...nodeModules],
     });
-    return `
-      const css = \`${result.css.toString()}\`;
-      let style;
-      beforeAll(() => {
-        style = document.createElement('style');
-        style.textContent = css;
-        document.head.appendChild(style);
-      });
-      afterAll(() => {
-        document.head.removeChild(style);
-      });
-    `;
+    return {
+      code: `
+        const css = \`${result.css.toString()}\`;
+        let style;
+        beforeAll(() => {
+          style = document.createElement('style');
+          style.textContent = css;
+          document.head.appendChild(style);
+        });
+        afterAll(() => {
+          document.head.removeChild(style);
+        });
+      `,
+    };
   },
   getCacheKey(sourceText, sourcePath, transformOptions) {
     const { config, configString, instrument } = transformOptions;

@@ -5,22 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
 import { deprecateFieldOnObject } from '../../internal/deprecateFieldOnObject';
 
 import MultiSelect from './MultiSelect';
-import { default as FilterableMultiSelectClassic } from './FilterableMultiSelect';
-import { default as FilterableMultiSelectNext } from './next/FilterableMultiSelect';
+import { default as FilterableMultiSelect } from './FilterableMultiSelect';
 
-FilterableMultiSelectNext.displayName = 'MultiSelect.Filterable';
-MultiSelect.Filterable = FilterableMultiSelectClassic;
-
-export const FilterableMultiSelect = FeatureFlags.enabled('enable-v11-release')
-  ? FilterableMultiSelectNext
-  : FilterableMultiSelectClassic;
+FilterableMultiSelect.displayName = 'MultiSelect.Filterable';
+MultiSelect.Filterable = FilterableMultiSelect;
 
 if (__DEV__) {
   deprecateFieldOnObject(MultiSelect, 'Filterable', FilterableMultiSelect);
 }
 
+export { FilterableMultiSelect };
 export default MultiSelect;

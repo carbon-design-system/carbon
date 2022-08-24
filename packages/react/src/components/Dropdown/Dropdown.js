@@ -190,8 +190,6 @@ const Dropdown = React.forwardRef(function Dropdown(
                 disabled: item.disabled,
               });
               const title = itemToElement ? item.text : itemToString(item);
-              const { offsetWidth, scrollWidth } =
-                menuItemOptionRefs?.current[index]?.current || {};
               return (
                 <ListBox.MenuItem
                   key={itemProps.id}
@@ -199,7 +197,7 @@ const Dropdown = React.forwardRef(function Dropdown(
                   isHighlighted={
                     highlightedIndex === index || selectedItem === item
                   }
-                  title={(offsetWidth < scrollWidth && title) || undefined}
+                  title={title}
                   ref={{
                     menuItemOptionRef: menuItemOptionRefs.current[index],
                   }}

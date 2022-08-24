@@ -41,6 +41,8 @@ packages/upgrade/cli.js
 
 # React
 **/storybook-static/**
+packages/react/icons/index.js
+packages/react/icons/index.esm.js
 
 # Icons React
 packages/icons-react/next/**

@@ -5,54 +5,65 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { mount } from 'enzyme';
 import { TableBatchActions } from '../';
 
-const prefix = 'cds';
-
-describe('DataTable.TableBatchActions', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      className: 'custom-class',
-      shouldShowBatchActions: false,
-      totalSelected: 10,
-      onCancel: jest.fn(),
-    };
+describe('TableBatchActions', () => {
+  it('should set the active class when `shouldShowBatchActions` is true', () => {
+    const { container } = render(
+      <TableBatchActions
+        shouldShowBatchActions
+        totalSelected={10}
+        onCancel={jest.fn()}
+      />
+    );
+    expect(container.firstChild).toHaveClass('cds--batch-actions--active');
   });
 
-  it('should render', () => {
-    const hiddenWrapper = mount(<TableBatchActions {...mockProps} />);
-    expect(hiddenWrapper).toMatchSnapshot();
-    const visibleWrapper = mount(
-      <TableBatchActions {...mockProps} shouldShowBatchActions />
+  it('should support a custom className on the outermost element', () => {
+    const { container } = render(
+      <TableBatchActions
+        className="custom-class"
+        totalSelected={10}
+        onCancel={jest.fn()}
+      />
     );
-    expect(visibleWrapper).toMatchSnapshot();
+    expect(container.firstChild).toHaveClass('custom-class');
+  });
+
+  it('should spread props onto the outermost element', () => {
+    const { container } = render(
+      <TableBatchActions
+        data-testid="test"
+        totalSelected={10}
+        onCancel={jest.fn()}
+      />
+    );
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 
   it('should show a different message depending on count of items selected', () => {
-    const singleWrapper = mount(
-      <TableBatchActions {...mockProps} totalSelected={1} />
-    );
-    expect(singleWrapper.find(`p.${prefix}--batch-summary__para`).text()).toBe(
-      '1 item selected'
-    );
+    render(<TableBatchActions onCancel={jest.fn()} totalSelected={1} />);
+    expect(screen.getByText('1 item selected')).toBeInTheDocument();
 
-    const multiWrapper = mount(
-      <TableBatchActions {...mockProps} totalSelected={2} />
-    );
-    expect(multiWrapper.find(`p.${prefix}--batch-summary__para`).text()).toBe(
-      '2 items selected'
-    );
+    render(<TableBatchActions onCancel={jest.fn()} totalSelected={2} />);
+    expect(screen.getByText('2 items selected')).toBeInTheDocument();
   });
 
   it('should invoke the `onCancel` hook if the action is canceled', () => {
-    const wrapper = mount(
-      <TableBatchActions {...mockProps} shouldShowBatchActions />
+    const onCancel = jest.fn();
+
+    render(
+      <TableBatchActions
+        shouldShowBatchActions
+        onCancel={onCancel}
+        totalSelected={10}
+      />
     );
-    wrapper.find('button').simulate('click');
-    expect(mockProps.onCancel).toHaveBeenCalledTimes(1);
+
+    userEvent.click(screen.getByText('Cancel'));
+    expect(onCancel).toHaveBeenCalled();
   });
 });

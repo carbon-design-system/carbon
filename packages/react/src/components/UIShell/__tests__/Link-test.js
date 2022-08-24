@@ -5,34 +5,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import Link from '../Link';
 
-describe('UI Shell - Link', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      element: 'a',
-      children: 'foo',
-      href: '#',
-    };
+describe('Link', () => {
+  it('should render an element with role="link"', () => {
+    render(<Link href="/">test</Link>);
+    expect(screen.getByRole('link')).toBeInTheDocument();
+    expect(screen.getByRole('link')).toHaveTextContent('test');
   });
 
-  it('should render', () => {
-    const wrapper = mount(<Link {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <Link className="test" href="/">
+        test
+      </Link>
+    );
+    expect(container.firstChild).toHaveClass('test');
   });
 
-  it('should support rendering a string element', () => {
-    const wrapper = mount(<Link {...mockProps} element="div" />);
-    expect(wrapper).toMatchSnapshot();
+  it('should spread extra props on the outermost element', () => {
+    const { container } = render(
+      <Link data-testid="test" href="/">
+        test
+      </Link>
+    );
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 
-  it('should support rendering a component as the element', () => {
-    const mockComponent = (props) => <a {...props}>link</a>;
-    const wrapper = mount(<Link {...mockProps} element={mockComponent} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should support a `ref` that is placed on the outermost element', () => {
+    const ref = jest.fn();
+    const { container } = render(
+      <Link ref={ref} href="/">
+        test
+      </Link>
+    );
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 });

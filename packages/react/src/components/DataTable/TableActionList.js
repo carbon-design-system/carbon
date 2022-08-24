@@ -10,7 +10,7 @@ import wrapComponent from '../../tools/wrapComponent';
 const TableActionList = wrapComponent({
   name: 'TableActionList',
   type: 'div',
-  className: `cds--action-list`,
+  className: (prefix) => `${prefix}--action-list`,
 });
 
 export default TableActionList;

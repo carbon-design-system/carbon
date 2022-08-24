@@ -307,7 +307,8 @@ export default class Pagination extends Component {
             `${prefix}--pagination__button`,
             `${prefix}--pagination__button--forward`,
             {
-              [`${prefix}--pagination__button--no-index`]: forwardButtonDisabled,
+              [`${prefix}--pagination__button--no-index`]:
+                forwardButtonDisabled,
             }
           );
           const selectItems = this.renderSelectItems(totalPages);

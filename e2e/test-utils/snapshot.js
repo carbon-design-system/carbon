@@ -33,7 +33,15 @@ function getSnapshotId(context) {
     return context;
   }
 
-  const { component, story, theme } = context;
+  const { component, story, id, theme } = context;
+  if (id) {
+    return serialize({
+      theme,
+      component,
+      id,
+    });
+  }
+
   return serialize({
     theme,
     component,

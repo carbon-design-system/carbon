@@ -7,17 +7,29 @@
 
 'use strict';
 
-const { events, states } = require('../conditions');
+const { events, states, or } = require('../conditions');
 const labels = require('../labels');
 
-const { needsTriage, waitingForAuthor, waitingForMaintainer } = labels.status;
+const {
+  needsTriage,
+  needsMoreInfo,
+  waitingForAuthor,
+  waitingForMaintainer,
+  question,
+} = labels.status;
+
+const teams = ['design', 'developers-system'];
 
 const plugin = {
   name: 'Add triage response',
   conditions: [
     events.comments.created,
     states.issues.open,
-    states.issues.has(needsTriage),
+    or(
+      states.issues.has(needsTriage),
+      states.issues.has(needsMoreInfo),
+      states.issues.has(question)
+    ),
   ],
   async run(context, octokit) {
     const { comment, issue, repository } = context.payload;
@@ -28,7 +40,28 @@ const plugin = {
       const hasMaintainerLabel = issue.labels.find((label) => {
         return label.name === waitingForMaintainer;
       });
-      if (hasMaintainerLabel) {
+
+      // Check if the `comment.body` contains a mention to another team member
+      const members = await Promise.all(
+        teams.map(async (slug) => {
+          const { data } = await octokit.teams.listMembersInOrg({
+            org: 'carbon-design-system',
+            team_slug: slug,
+          });
+          return data.map((member) => {
+            return member.login;
+          });
+        })
+      ).then((responses) => {
+        // Deduplicate members in case the same member is on different teams
+        const members = new Set(responses.flat());
+        return Array.from(members);
+      });
+      const doesNotMentionAnotherMember = members.every((member) => {
+        return !comment.body.includes(`@${member.slug}`);
+      });
+
+      if (hasMaintainerLabel && doesNotMentionAnotherMember) {
         await octokit.issues.removeLabel({
           owner: repository.owner.login,
           repo: repository.name,

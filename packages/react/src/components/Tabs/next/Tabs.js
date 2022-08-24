@@ -121,18 +121,14 @@ function TabList({
   scrollIntoView,
   ...rest
 }) {
-  const {
-    activeIndex,
-    selectedIndex,
-    setSelectedIndex,
-    setActiveIndex,
-  } = React.useContext(TabsContext);
+  const { activeIndex, selectedIndex, setSelectedIndex, setActiveIndex } =
+    React.useContext(TabsContext);
   const prefix = usePrefix();
   const ref = useRef(null);
   const previousButton = useRef(null);
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
-  const [scrollLeft, setScrollLeft] = useState(false);
+  const [scrollLeft, setScrollLeft] = useState(null);
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
@@ -171,7 +167,7 @@ function TabList({
     }
   );
 
-  const tabs = [];
+  const tabs = useRef([]);
   const debouncedOnScroll = useCallback(() => {
     return debounce((event) => {
       setScrollLeft(event.target.scrollLeft);
@@ -184,14 +180,14 @@ function TabList({
     ) {
       event.preventDefault();
 
-      const activeTabs = tabs.filter((tab) => {
-        return !tab.current.disabled;
+      const activeTabs = tabs.current.filter((tab) => {
+        return !tab.disabled;
       });
 
       const currentIndex = activeTabs.indexOf(
-        tabs[activation === 'automatic' ? selectedIndex : activeIndex]
+        tabs.current[activation === 'automatic' ? selectedIndex : activeIndex]
       );
-      const nextIndex = tabs.indexOf(
+      const nextIndex = tabs.current.indexOf(
         activeTabs[getNextIndex(event, activeTabs.length, currentIndex)]
       );
 
@@ -201,14 +197,14 @@ function TabList({
         setActiveIndex(nextIndex);
       }
 
-      tabs[nextIndex].current.focus();
+      tabs.current[nextIndex].focus();
     }
   }
 
   useEffectOnce(() => {
-    const tab = tabs[selectedIndex];
+    const tab = tabs.current[selectedIndex];
     if (scrollIntoView && tab) {
-      tab.current.scrollIntoView({
+      tab.scrollIntoView({
         block: 'nearest',
         inline: 'nearest',
       });
@@ -216,14 +212,14 @@ function TabList({
   });
 
   useEffectOnce(() => {
-    if (tabs[selectedIndex].current.disabled) {
-      const activeTabs = tabs.filter((tab) => {
-        return !tab.current.disabled;
+    if (tabs.current[selectedIndex].disabled) {
+      const activeTabs = tabs.current.filter((tab) => {
+        return !tab.disabled;
       });
 
       if (activeTabs.length > 0) {
         const tab = activeTabs[0];
-        setSelectedIndex(tabs.indexOf(tab));
+        setSelectedIndex(tabs.current.indexOf(tab));
       }
     }
   });
@@ -249,19 +245,27 @@ function TabList({
 
   // updates scroll location for all scroll behavior.
   useIsomorphicEffect(() => {
-    ref.current.scrollLeft = scrollLeft;
+    if (scrollLeft !== null) {
+      ref.current.scrollLeft = scrollLeft;
+    }
   }, [scrollLeft]);
 
   useIsomorphicEffect(() => {
+    if (!isScrollable) {
+      return;
+    }
+
     const tab =
-      activation === 'manual' ? tabs[activeIndex] : tabs[selectedIndex];
+      activation === 'manual'
+        ? tabs.current[activeIndex]
+        : tabs.current[selectedIndex];
     if (tab) {
       // The width of the "scroll buttons"
 
       // The start and end position of the selected tab
-      const { width: tabWidth } = tab.current.getBoundingClientRect();
-      const start = tab.current.offsetLeft;
-      const end = tab.current.offsetLeft + tabWidth;
+      const { width: tabWidth } = tab.getBoundingClientRect();
+      const start = tab.offsetLeft;
+      const end = tab.offsetLeft + tabWidth;
 
       // The start and end of the visible area for the tabs
       const visibleStart = ref.current.scrollLeft + buttonWidth;
@@ -278,14 +282,14 @@ function TabList({
         setScrollLeft(end + buttonWidth - ref.current.clientWidth);
       }
     }
-  }, [activation, activeIndex, selectedIndex]);
+  }, [activation, activeIndex, selectedIndex, isScrollable]);
 
   usePressable(previousButton, {
     onPress({ longPress }) {
       if (!longPress) {
         setScrollLeft(
           Math.max(
-            scrollLeft - (ref.current.scrollWidth / tabs.length) * 1.5,
+            scrollLeft - (ref.current.scrollWidth / tabs.current.length) * 1.5,
             0
           )
         );
@@ -301,7 +305,7 @@ function TabList({
       if (!longPress) {
         setScrollLeft(
           Math.min(
-            scrollLeft + (ref.current.scrollWidth / tabs.length) * 1.5,
+            scrollLeft + (ref.current.scrollWidth / tabs.current.length) * 1.5,
             ref.current.scrollWidth - ref.current.clientWidth
           )
         );
@@ -333,12 +337,12 @@ function TabList({
         onScroll={debouncedOnScroll}
         onKeyDown={onKeyDown}>
         {React.Children.map(children, (child, index) => {
-          const ref = React.createRef();
-          tabs.push(ref);
           return (
             <TabContext.Provider value={index}>
               {React.cloneElement(child, {
-                ref,
+                ref: (node) => {
+                  tabs.current[index] = node;
+                },
               })}
             </TabContext.Provider>
           );
@@ -477,9 +481,8 @@ const Tab = React.forwardRef(function Tab(
   ref
 ) {
   const prefix = usePrefix();
-  const { selectedIndex, setSelectedIndex, baseId } = React.useContext(
-    TabsContext
-  );
+  const { selectedIndex, setSelectedIndex, baseId } =
+    React.useContext(TabsContext);
   const index = React.useContext(TabContext);
   const id = `${baseId}-tab-${index}`;
   const panelId = `${baseId}-tabpanel-${index}`;
@@ -634,18 +637,56 @@ const TabPanel = React.forwardRef(function TabPanel(
   const ref = useMergedRefs([forwardRef, panel]);
 
   const [tabIndex, setTabIndex] = useState('0');
+  const [interactiveContent, setInteractiveContent] = useState(false);
   const { selectedIndex, baseId } = React.useContext(TabsContext);
   const index = React.useContext(TabPanelContext);
   const id = `${baseId}-tabpanel-${index}`;
   const tabId = `${baseId}-tab-${index}`;
-  const className = cx(`${prefix}--tab-content`, customClassName);
+  const className = cx(`${prefix}--tab-content`, customClassName, {
+    [`${prefix}--tab-content--interactive`]: interactiveContent,
+  });
+
+  useEffectOnce(() => {
+    if (!panel.current) {
+      return;
+    }
+
+    const content = getInteractiveContent(panel.current);
+    if (content) {
+      setInteractiveContent(true);
+      setTabIndex('-1');
+    }
+  });
 
   // tabindex should only be 0 if no interactive content in children
   useEffect(() => {
-    const interactiveContent = getInteractiveContent(panel.current);
-    if (interactiveContent) {
-      setTabIndex('-1');
+    if (!panel.current) {
+      return;
     }
+
+    const { current: node } = panel;
+
+    function callback() {
+      const content = getInteractiveContent(node);
+      if (content) {
+        setInteractiveContent(true);
+        setTabIndex('-1');
+      } else {
+        setInteractiveContent(false);
+        setTabIndex('0');
+      }
+    }
+
+    const observer = new MutationObserver(callback);
+
+    observer.observe(node, {
+      childList: true,
+      subtree: true,
+    });
+
+    return () => {
+      observer.disconnect(node);
+    };
   }, []);
 
   return (

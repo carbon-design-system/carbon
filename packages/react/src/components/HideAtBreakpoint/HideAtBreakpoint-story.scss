@@ -1,0 +1,21 @@
+@use '../../../../styles/scss/utilities/hide-at-breakpoint' as *;
+
+.hide-at-sm {
+  @include hide-at-sm;
+}
+
+.hide-at-md {
+  @include hide-at-md;
+}
+
+.hide-at-lg {
+  @include hide-at-lg;
+}
+
+.hide-at-xlg {
+  @include hide-at-xlg;
+}
+
+.hide-at-max {
+  @include hide-at-max;
+}

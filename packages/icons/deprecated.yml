@@ -1,1 +1,3 @@
-deprecated: []
+deprecated:
+- name: kubernetes
+  reason: The current kubernetes icon has been replaced by logo--kubernetes

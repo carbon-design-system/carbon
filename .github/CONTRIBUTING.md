@@ -347,3 +347,25 @@ may not be true for the other way around. If you're contributing a bug fix in a
 vanilla component which also exists in the React version, you can either
 contribute a fix for the React version as well or open an issue so that we can
 update the React component accordingly.
+
+### How can I test-drive components or provide a bug reproduction?
+
+There are some fantastic tools out there today that provide a near fully-fledged
+development environment in the browser. These are incredibly helpful for trying
+out simple configurations or providing working code demonstrating bugs or
+problems with the libraries.
+
+We've created a few templates, housed in the repo, that can be used on these
+services:
+
+#### Stackblitz
+
+- [`@carbon/react` template](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx),
+  supporting faster sass compilation and react component usage
+
+#### Codesandbox
+
+- [`@carbon/react` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox)
+- [`@carbon/styles` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox-styles)
+- [`carbon-components-react` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v10/packages/react/examples/codesandbox),
+  configured to use v10.x assets

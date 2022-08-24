@@ -25,7 +25,7 @@ You can use this package by writing the following:
 
 .selector {
   // Include a type style
-  @include type.style('productive-heading-01');
+  @include type.type-style('productive-heading-01');
 }
 ```
 
@@ -54,6 +54,7 @@ In particular, you can use the following classes:
 | `$label-01`                |                                                                   |      | ✅       |
 | `$legal-02`                |                                                                   |      | ✅       |
 | `$helper-text-01`          |                                                                   |      | ✅       |
+| `$helper-text-02`          |                                                                   |      | ✅       |
 | `$body-short-01`           |                                                                   |      | ✅       |
 | `$body-compact-01`         |                                                                   |      | ✅       |
 | `$body-long-01`            |                                                                   |      | ✅       |
@@ -112,7 +113,7 @@ example, you can change the `$prefix` used by writing the following:
 
 ```scss
 @use '@carbon/type' with (
-  $prefix: 'custom-prefix',
+  $prefix: 'custom-prefix'
 );
 ```
 

@@ -16,8 +16,8 @@ import {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
-  StructuredListSkeleton,
 } from './StructuredList';
+import StructuredListSkeleton from '../StructuredList.Skeleton';
 
 const prefix = 'cds';
 
@@ -34,6 +34,13 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+  },
+  argTypes: {
+    children: {
+      table: {
+        disable: true,
+      },
     },
   },
 };
@@ -80,45 +87,65 @@ Simple.parameters = {
   },
 };
 
-export const Playground = () => (
-  <StructuredListWrapper>
-    <StructuredListHead>
-      <StructuredListRow head>
-        <StructuredListCell head>ColumnA</StructuredListCell>
-        <StructuredListCell head>ColumnB</StructuredListCell>
-        <StructuredListCell head>ColumnC</StructuredListCell>
-      </StructuredListRow>
-    </StructuredListHead>
-    <StructuredListBody>
-      <StructuredListRow>
-        <StructuredListCell noWrap>Row 1</StructuredListCell>
-        <StructuredListCell>Row 1</StructuredListCell>
-        <StructuredListCell>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-          vulputate nisl a porttitor interdum.
-        </StructuredListCell>
-      </StructuredListRow>
-      <StructuredListRow>
-        <StructuredListCell noWrap>Row 2</StructuredListCell>
-        <StructuredListCell>Row 2</StructuredListCell>
-        <StructuredListCell>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
-          magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-          sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
-          vulputate nisl a porttitor interdum.
-        </StructuredListCell>
-      </StructuredListRow>
-    </StructuredListBody>
-  </StructuredListWrapper>
-);
+export const Playground = (props) => {
+  const { className, selection, isCondensed, isFlush } = props;
+  return (
+    <StructuredListWrapper
+      className={className}
+      selection={selection}
+      isCondensed={isCondensed}
+      isFlush={isFlush}>
+      <StructuredListHead>
+        <StructuredListRow head>
+          <StructuredListCell head>ColumnA</StructuredListCell>
+          <StructuredListCell head>ColumnB</StructuredListCell>
+          <StructuredListCell head>ColumnC</StructuredListCell>
+        </StructuredListRow>
+      </StructuredListHead>
+      <StructuredListBody>
+        <StructuredListRow>
+          <StructuredListCell noWrap>Row 1</StructuredListCell>
+          <StructuredListCell>Row 1</StructuredListCell>
+          <StructuredListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+            vulputate nisl a porttitor interdum.
+          </StructuredListCell>
+        </StructuredListRow>
+        <StructuredListRow>
+          <StructuredListCell noWrap>Row 2</StructuredListCell>
+          <StructuredListCell>Row 2</StructuredListCell>
+          <StructuredListCell>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim. Nulla ut cursus dolor. Pellentesque
+            vulputate nisl a porttitor interdum.
+          </StructuredListCell>
+        </StructuredListRow>
+      </StructuredListBody>
+    </StructuredListWrapper>
+  );
+};
 
-Playground.parameters = {
-  info: {
-    text: `
-        Structured Lists group content that is similar or related, such as terms or definitions.
-      `,
+Playground.argTypes = {
+  selection: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  isCondensed: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
 };
 

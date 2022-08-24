@@ -57,7 +57,7 @@ export function matches(event, keysToMatch) {
  * @param {Key} key
  * @returns {boolean}
  */
-export function match(eventOrCode, { key, which, keyCode } = {}) {
+export function match(eventOrCode, { key, which, keyCode, code } = {}) {
   if (typeof eventOrCode === 'string') {
     return eventOrCode === key;
   }
@@ -73,7 +73,8 @@ export function match(eventOrCode, { key, which, keyCode } = {}) {
   return (
     eventOrCode.key === key ||
     eventOrCode.which === which ||
-    eventOrCode.keyCode === keyCode
+    eventOrCode.keyCode === keyCode ||
+    eventOrCode.code === code
   );
 }
 

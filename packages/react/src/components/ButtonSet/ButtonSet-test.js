@@ -5,44 +5,42 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import ButtonSet from '../ButtonSet';
-import { shallow } from 'enzyme';
-
-const prefix = 'cds';
 
 describe('ButtonSet', () => {
-  let wrapper;
-
-  beforeEach(() => {
-    wrapper = shallow(<ButtonSet className="extra-class" />);
-  });
-
-  it('should render empty set as expected', () => {
-    expect(wrapper.find('.child').length).toBe(0);
-  });
-
-  it('should render nonempty set as expected', () => {
-    wrapper = shallow(
-      <ButtonSet>
-        <div className="test-child" />
-        <div className="test-child" />
+  it('should support rendering elements through the `children` prop', () => {
+    render(
+      <ButtonSet data-testid="test">
+        <span data-testid="child">child</span>
       </ButtonSet>
     );
-    expect(wrapper.find('.test-child').length).toBe(2);
+    expect(screen.getByTestId('test')).toContainElement(
+      screen.getByTestId('child')
+    );
   });
 
-  it('should render wrapper as expected', () => {
-    expect(wrapper.length).toBe(1);
+  it('should support a custom className on the outermost element', () => {
+    const { container } = render(<ButtonSet className="test" />);
+    expect(container.firstChild).toHaveClass('test');
   });
 
-  it('should have the expected classes in a horizontal set', () => {
-    expect(wrapper.hasClass(`${prefix}--btn-set`)).toEqual(true);
+  it('should spread props onto the outermost element', () => {
+    const { container } = render(<ButtonSet data-testid="test" />);
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 
-  it('should have the expected classes in a vertical set', () => {
-    wrapper.setProps({ stacked: true });
-    expect(wrapper.hasClass(`${prefix}--btn-set`)).toEqual(true);
-    expect(wrapper.hasClass(`${prefix}--btn-set--stacked`)).toEqual(true);
+  it('should support a `ref` that is placed on the outermost element', () => {
+    const ref = jest.fn();
+    const { container } = render(<ButtonSet ref={ref} />);
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
+
+  describe('stacked', () => {
+    it('should set the stacked class when stacked is provided', () => {
+      render(<ButtonSet data-testid="test" stacked />);
+      expect(screen.getByTestId('test')).toHaveClass('cds--btn-set--stacked');
+    });
   });
 });

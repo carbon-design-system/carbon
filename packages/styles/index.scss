@@ -6,8 +6,8 @@
 //
 
 @forward 'scss/config';
+@forward 'scss/spacing';
 @forward 'scss/colors' hide $white;
-@forward 'scss/grid';
 @forward 'scss/motion';
 @forward 'scss/type';
 @forward 'scss/themes';
@@ -15,6 +15,7 @@
 
 @use 'scss/reset';
 @forward 'scss/fonts';
+@forward 'scss/grid';
 @forward 'scss/layer';
 @forward 'scss/zone';
 @use 'scss/components';

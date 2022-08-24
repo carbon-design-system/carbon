@@ -12,6 +12,6 @@ import wrapComponent from '../../tools/wrapComponent';
  */
 export default wrapComponent({
   name: 'HeaderGlobalBar',
-  className: `cds--header__global`,
+  className: (prefix) => `${prefix}--header__global`,
   type: 'div',
 });

@@ -6,6 +6,8 @@
 //
 
 @use '../config';
+
+// prettier-ignore
 @forward '@carbon/type' show
   // Mixins
   reset,
@@ -13,11 +15,13 @@
   font-family,
   default-type,
   type-classes,
+  font-weight,
 
   // Variables
   $caption-01,
   $label-01,
   $helper-text-01,
+  $helper-text-02,
   $body-short-01,
   $body-short-02,
   $body-long-01,
@@ -46,6 +50,8 @@
   $display-02,
   $display-03,
   $display-04,
+  $font-families,
+  $font-weights,
   $tokens;
 
 @use '@carbon/type';

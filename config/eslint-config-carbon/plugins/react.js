@@ -36,7 +36,12 @@ module.exports = {
 
     // react-hooks
     'react-hooks/rules-of-hooks': 2,
-    'react-hooks/exhaustive-deps': 2,
+    'react-hooks/exhaustive-deps': [
+      2,
+      {
+        additionalHooks: 'useIsomorphicEffect',
+      },
+    ],
   },
   overrides: [
     // Sometimes we'll want to define a quick component in a story to use as a

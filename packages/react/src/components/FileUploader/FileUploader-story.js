@@ -98,7 +98,7 @@ const props = {
       multiple: boolean('Supports multiple files (multiple)', true),
       iconDescription: text(
         'Close button icon description (iconDescription)',
-        'Clear file'
+        'Delete file'
       ),
       onChange: action('onChange'),
       onClick: action('onClick'),
@@ -110,7 +110,7 @@ const props = {
     status: select('Status for file name (status)', filenameStatuses, 'edit'),
     iconDescription: text(
       'Close button icon description (iconDescription)',
-      'Clear file'
+      'Delete file'
     ),
     onDelete: action('onDelete'),
     invalid: boolean('Invalid (invalid)', false),
@@ -205,8 +205,7 @@ _FileUploaderDropContainer.storyName = 'FileUploaderDropContainer';
 
 _FileUploaderDropContainer.parameters = {
   info: {
-    text:
-      '<FileUploaderDropContainer /> is a drag and drop file uploader which allows users to upload files via both the normal file selection dialog and by dragging and dropping files.',
+    text: '<FileUploaderDropContainer /> is a drag and drop file uploader which allows users to upload files via both the normal file selection dialog and by dragging and dropping files.',
   },
 };
 

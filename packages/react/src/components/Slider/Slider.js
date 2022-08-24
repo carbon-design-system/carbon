@@ -123,6 +123,12 @@ export default class Slider extends PureComponent {
     name: PropTypes.string,
 
     /**
+     * Provide an optional function to be called when the input element
+     * loses focus
+     */
+    onBlur: PropTypes.func,
+
+    /**
      * The callback to get notified of change in value.
      */
     onChange: PropTypes.func,
@@ -143,7 +149,7 @@ export default class Slider extends PureComponent {
     required: PropTypes.bool,
 
     /**
-     * A value determining how much the value should increase/decrease by moving the thumb by mouse.
+     * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside of the `step` increment will be considered invalid.
      */
     step: PropTypes.number,
 
@@ -433,11 +439,13 @@ export default class Slider extends PureComponent {
     if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
       return;
     }
+
     // determine validity of input change after clicking out of input
     const validity = evt.target.checkValidity();
-    this.setState({
-      isValid: validity,
-    });
+    const { value } = evt.target;
+
+    this.setState({ isValid: validity });
+    this.props.onBlur({ value });
   };
 
   /**
@@ -627,6 +635,7 @@ export default class Slider extends PureComponent {
                     aria-valuemin={min}
                     aria-valuenow={value}
                     style={thumbStyle}
+                    aria-labelledby={labelId}
                   />
                   <div
                     className={`${prefix}--slider__track`}

@@ -1,0 +1,64 @@
+import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
+
+# IconButton
+
+[Source
+code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/IconButton)
+&nbsp;|&nbsp;
+[Usage guidelines](https://www.carbondesignsystem.com/components/button/usage)
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+The `IconButton` component is useful when you have a button where the
+content is an icon. In this situation, it's important that the button itself is
+labeled in a way that can be understandable by mouse, keyboard, and screen
+readers. As a result, this component makes it easy to create accessible icon buttons
+
+```jsx
+import { IconButton } from '@carbon/react';
+import { Add } from '@carbon/react/icons';
+
+function ExampleComponent() {
+  return (
+    <IconButton label="Add">
+      <Add />
+    </IconButton>
+  );
+}
+```
+
+## Alignment
+
+The `align` prop allows you to specify where your content should be placed
+relative to the `IconButton`. For example, if you provide `align="top"` to the
+`IconButton` component then the tooltip will render above your component.
+Similarly, if you provide `align="bottom"` then the tooltip will render below
+your component.
+
+## Customizing the label
+
+You can customize the label, or tooltip, of the `IconButton` with the `label`
+prop. However, it's important that this label contain no interactive content so
+that the component remains accessible.
+
+## Component API
+
+<ArgsTable />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/IconButton/IconButton.mdx).
+

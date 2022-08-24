@@ -8,6 +8,7 @@
 @use 'mixins' as *;
 @use 'vars' as *;
 @use '../../config' as *;
+@use '../../breakpoint' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -52,6 +53,14 @@
     @include type-style('body-compact-01');
 
     color: $text-secondary;
+
+    @include breakpoint(md) {
+      max-width: 50ch;
+    }
+
+    @include breakpoint(lg) {
+      max-width: 80ch;
+    }
   }
 
   //----------------------------------------------------------------------------
@@ -348,7 +357,7 @@
 
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox {
-    width: 2.5rem;
+    min-width: 2.5rem;
     // spacing between checkbox / chevron and next cell should be 8px / 0.5rem
     padding-right: rem(4px);
     padding-left: 1rem;

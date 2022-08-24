@@ -191,17 +191,15 @@ const Menu = function Menu({
     const elementDimensions = [elementRect.width, elementRect.height];
     const targetBoundaries = getTargetBoundaries();
     const containerBoundaries = getContainerBoundaries();
-    const {
-      position: correctedPosition,
-      direction: correctedDirection,
-    } = getPosition(
-      elementDimensions,
-      targetBoundaries,
-      containerBoundaries,
-      preferredDirection,
-      isRootMenu,
-      rootRef.current
-    );
+    const { position: correctedPosition, direction: correctedDirection } =
+      getPosition(
+        elementDimensions,
+        targetBoundaries,
+        containerBoundaries,
+        preferredDirection,
+        isRootMenu,
+        rootRef.current
+      );
 
     setDirection(correctedDirection);
 
@@ -353,7 +351,7 @@ Menu.propTypes = {
   /**
    * Optionally pass an element the Menu should be appended to as a child. Defaults to document.body.
    */
-  target: PropTypes.element,
+  target: PropTypes.object,
 
   /**
    * Specify the x position where this menu is rendered

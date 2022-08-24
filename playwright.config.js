@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const { devices } = require('@playwright/test');
+const { devices, expect } = require('@playwright/test');
 const path = require('path');
 
 const config = {
@@ -45,24 +45,6 @@ const config = {
         ...devices['Desktop Chrome'],
       },
     },
-    {
-      name: 'firefox',
-      use: {
-        ...devices['Desktop Firefox'],
-      },
-    },
-    {
-      name: 'webkit',
-      use: {
-        ...devices['Desktop Safari'],
-      },
-    },
-    {
-      name: 'edge',
-      use: {
-        ...devices['Desktop Edge'],
-      },
-    },
   ],
   reporter: [
     ['line'],
@@ -74,5 +56,48 @@ const config = {
     ],
   ],
 };
+
+let aChecker;
+
+expect.extend({
+  async toHaveNoACViolations(page, id) {
+    if (!aChecker) {
+      aChecker = require('accessibility-checker');
+      const denylist = new Set([
+        'WCAG20_Html_HasLang',
+        'WCAG20_Doc_HasTitle',
+        'WCAG20_Body_FirstASkips_Native_Host_Sematics',
+        'RPT_Html_SkipNav',
+        'Rpt_Aria_OrphanedContent_Native_Host_Sematics',
+      ]);
+      const ruleset = await aChecker.getRuleset('IBM_Accessibility');
+      const customRuleset = JSON.parse(JSON.stringify(ruleset));
+
+      customRuleset.id = 'Custom_Ruleset';
+      customRuleset.checkpoints = customRuleset.checkpoints.map(
+        (checkpoint) => {
+          checkpoint.rules = checkpoint.rules.filter((rule) => {
+            return !denylist.has(rule.id);
+          });
+          return checkpoint;
+        }
+      );
+
+      aChecker.addRuleset(customRuleset);
+    }
+
+    const result = await aChecker.getCompliance(page, id);
+    if (aChecker.assertCompliance(result.report) === 0) {
+      return {
+        pass: true,
+      };
+    } else {
+      return {
+        pass: false,
+        message: () => aChecker.stringifyResults(result.report),
+      };
+    }
+  },
+});
 
 module.exports = config;

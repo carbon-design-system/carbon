@@ -10,7 +10,7 @@ import Checkbox from '../../Checkbox';
 import Form from '../';
 import FormGroup from '../../FormGroup';
 import FileUploader from '../../FileUploader';
-import NumberInput from '../../NumberInput';
+import { NumberInput } from '../../NumberInput';
 import RadioButton from '../../RadioButton';
 import RadioButtonGroup from '../../RadioButtonGroup';
 import Button from '../../Button';
@@ -19,7 +19,6 @@ import Select from '../../Select';
 import SelectItem from '../../SelectItem';
 import TextArea from '../../TextArea';
 import TextInput from '../../TextInput';
-import Toggle from '../../Toggle';
 import { Stack } from '../../Stack';
 
 const checkboxEvents = {
@@ -40,16 +39,7 @@ const numberInputProps = {
   max: 100,
   value: 50,
   step: 10,
-};
-
-const toggleProps = {
-  className: 'some-class',
-  hideLabel: true,
-};
-
-const fieldsetToggleProps = {
-  className: 'some-class',
-  legendText: 'Toggle heading',
+  iconDescription: 'Add/decrement number',
 };
 
 const fileUploaderEvents = {
@@ -64,11 +54,6 @@ const fieldsetFileUploaderProps = {
 
 const radioProps = {
   className: 'some-class',
-};
-
-const fieldsetRadioProps = {
-  className: 'some-class',
-  legendText: 'Radio Button heading',
 };
 
 const searchProps = {
@@ -136,52 +121,46 @@ export const Default = () => (
 
       <NumberInput {...numberInputProps} />
 
-      <FormGroup {...fieldsetToggleProps}>
-        <Stack gap={3}>
-          <Toggle {...toggleProps} id="toggle-1" />
-          <Toggle disabled {...toggleProps} id="toggle-2" />
-        </Stack>
-      </FormGroup>
-
       <FormGroup {...fieldsetFileUploaderProps}>
         <FileUploader
           {...fileUploaderEvents}
           id="file-1"
           labelDescription="Choose Files..."
+          iconDescription="Dismiss file"
+          role="button"
         />
       </FormGroup>
 
-      <FormGroup {...fieldsetRadioProps}>
-        <RadioButtonGroup
-          name="radio-button-group"
-          defaultSelected="default-selected">
-          <RadioButton
-            value="standard"
-            id="radio-1"
-            labelText="Standard Radio Button"
-            {...radioProps}
-          />
-          <RadioButton
-            value="default-selected"
-            labelText="Default Selected Radio Button"
-            id="radio-2"
-            {...radioProps}
-          />
-          <RadioButton
-            value="blue"
-            labelText="Standard Radio Button"
-            id="radio-3"
-            {...radioProps}
-          />
-          <RadioButton
-            value="disabled"
-            labelText="Disabled Radio Button"
-            id="radio-4"
-            disabled
-            {...radioProps}
-          />
-        </RadioButtonGroup>
-      </FormGroup>
+      <RadioButtonGroup
+        name="radio-button-group"
+        defaultSelected="default-selected"
+        legendText="Radio Button heading">
+        <RadioButton
+          value="standard"
+          id="radio-1"
+          labelText="Standard Radio Button"
+          {...radioProps}
+        />
+        <RadioButton
+          value="default-selected"
+          labelText="Default Selected Radio Button"
+          id="radio-2"
+          {...radioProps}
+        />
+        <RadioButton
+          value="blue"
+          labelText="Standard Radio Button"
+          id="radio-3"
+          {...radioProps}
+        />
+        <RadioButton
+          value="disabled"
+          labelText="Disabled Radio Button"
+          id="radio-4"
+          disabled
+          {...radioProps}
+        />
+      </RadioButtonGroup>
 
       <FormGroup {...fieldsetSearchProps}>
         <Search

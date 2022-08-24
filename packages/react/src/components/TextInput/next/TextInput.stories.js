@@ -21,6 +21,7 @@ export default {
 
 export const Default = () => (
   <TextInput
+    id="text-input-1"
     type="text"
     labelText="Text input label"
     helperText="Optional help text"

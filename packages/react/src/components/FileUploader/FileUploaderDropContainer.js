@@ -24,6 +24,8 @@ function FileUploaderDropContainer({
   pattern,
   role,
   tabIndex,
+  // eslint-disable-next-line react/prop-types
+  innerRef,
   ...rest
 }) {
   const prefix = usePrefix();
@@ -59,9 +61,14 @@ function FileUploaderDropContainer({
         return acc;
       }
       const [fileExtension] = name.match(fileExtensionRegExp);
-      if (acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension)) {
+
+      if (
+        acceptedTypes.has(mimeType) ||
+        acceptedTypes.has(fileExtension.toLowerCase())
+      ) {
         return acc.concat([curr]);
       }
+
       curr.invalidFileType = true;
       return acc.concat([curr]);
     }, []);
@@ -104,6 +111,7 @@ function FileUploaderDropContainer({
       }}>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
+        ref={innerRef}
         className={labelClasses}
         htmlFor={uid}
         tabIndex={tabIndex || 0}
@@ -185,12 +193,12 @@ FileUploaderDropContainer.propTypes = {
   pattern: PropTypes.string,
 
   /**
-   * Provide an accessibility role for the <FileUploaderButton>
+   * Provide an accessibility role for the `<FileUploaderButton>`
    */
   role: PropTypes.string,
 
   /**
-   * Provide a custom tabIndex value for the <FileUploaderButton>
+   * Provide a custom tabIndex value for the `<FileUploaderButton>`
    */
   tabIndex: PropTypes.number,
 };

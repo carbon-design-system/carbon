@@ -54,9 +54,8 @@ function wrapFocus({
     !bodyNode.contains(currentActiveNode) &&
     !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
   ) {
-    const comparisonResult = oldActiveNode.compareDocumentPosition(
-      currentActiveNode
-    );
+    const comparisonResult =
+      oldActiveNode.compareDocumentPosition(currentActiveNode);
     if (
       currentActiveNode === startTrapNode ||
       comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING

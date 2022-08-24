@@ -39,6 +39,7 @@ const TableToolbarSearch = ({
   id,
   onBlur,
   onFocus,
+  size = 'lg',
   ...rest
 }) => {
   const { current: controlled } = useRef(expandedProp !== undefined);
@@ -111,6 +112,7 @@ const TableToolbarSearch = ({
         onFocus ? (event) => onFocus(event, handleExpand) : handleOnFocus
       }
       onBlur={onBlur ? (event) => onBlur(event, handleExpand) : handleOnBlur}
+      size={size}
       {...rest}
     />
   );
@@ -197,6 +199,11 @@ TableToolbarSearch.propTypes = {
    * Provide an optional className for the overall container of the Search
    */
   searchContainerClass: PropTypes.string,
+
+  /**
+   * Specify the size of the Search
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Optional prop to specify the tabIndex of the <Search> (in expanded state) or the container (in collapsed state)
