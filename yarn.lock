@@ -2045,7 +2045,7 @@ __metadata:
     classnames: 2.3.1
     copy-to-clipboard: ^3.3.1
     css-loader: ^6.5.1
-    downshift: 6.1.7
+    downshift: 6.1.9
     fast-glob: ^3.2.7
     flatpickr: 4.6.9
     fs-extra: ^10.0.0
@@ -12906,9 +12906,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"downshift@npm:6.1.7":
-  version: 6.1.7
-  resolution: "downshift@npm:6.1.7"
+"downshift@npm:6.1.9":
+  version: 6.1.9
+  resolution: "downshift@npm:6.1.9"
   dependencies:
     "@babel/runtime": ^7.14.8
     compute-scroll-into-view: ^1.0.17
@@ -12917,7 +12917,7 @@ __metadata:
     tslib: ^2.3.0
   peerDependencies:
     react: ">=16.12.0"
-  checksum: 0904ed8f285d31ee00e471dcddd57e72468bee354b191167bcaebe690ec292647fe4c31f483665094d750e72dd71e5d7db695acef33ab5dba6a39fed0112bab6
+  checksum: 5b888b6ebd2083334758d49e9e7b669eb8d0475273cdb5af2aa5f8c363b62f56c79aeca43758c99642056e94f68cbd8086f79a0a96726b3e8b8726cb24fd1d1b
   languageName: node
   linkType: hard
 
