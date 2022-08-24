@@ -38,14 +38,6 @@ export const Default = () => (
   </OrderedList>
 );
 
-Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text: `Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.`,
-  },
-};
-
 export const Nested = () => {
   const regularProps = props.regular();
 
@@ -68,14 +60,6 @@ export const Nested = () => {
       <ListItem>Ordered List level 1</ListItem>
     </OrderedList>
   );
-};
-
-Nested.storyName = 'nested';
-
-Nested.parameters = {
-  info: {
-    text: `Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.`,
-  },
 };
 
 export const NativeListStyles = () => {
@@ -105,12 +89,4 @@ export const NativeListStyles = () => {
       <ListItem>Ordered List level 1</ListItem>
     </OrderedList>
   );
-};
-
-Default.storyName = 'native styles';
-
-NativeListStyles.parameters = {
-  info: {
-    text: `Lists consist of related content grouped together and organized vertically. Ordered lists are used to present content in a numbered list.`,
-  },
 };
