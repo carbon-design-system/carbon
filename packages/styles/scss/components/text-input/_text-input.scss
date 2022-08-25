@@ -248,6 +248,8 @@
     @include skeleton;
   }
 
+  // Deprecated -- Styles have been moved to `fluid-text-input.scss`
+  // V12 - Remove this block
   //-----------------------------
   // Fluid Text Input
   //-----------------------------
@@ -303,11 +305,6 @@
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
     top: rem(80px);
-  }
-
-  // V11: Possibly deprecate
-  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
-    background: $field-02;
   }
 
   .#{$prefix}--form--fluid
