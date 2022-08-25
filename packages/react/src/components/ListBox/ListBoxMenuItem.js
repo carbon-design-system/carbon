@@ -43,12 +43,10 @@ const ListBoxMenuItem = React.forwardRef(function ListBoxMenuItem(
       {...rest}
       className={className}
       title={isTruncated ? title : undefined}
-      tabIndex="-1"
-    >
+      tabIndex="-1">
       <div
         className={`${prefix}--list-box__menu-item__option`}
-        ref={forwardedRef?.menuItemOptionRef || ref}
-      >
+        ref={forwardedRef?.menuItemOptionRef || ref}>
         {children}
       </div>
     </div>
