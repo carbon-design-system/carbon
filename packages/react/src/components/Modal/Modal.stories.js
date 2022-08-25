@@ -153,7 +153,6 @@ export const DangerModal = () => {
       modalLabel="Account resources"
       primaryButtonText="Delete"
       secondaryButtonText="Cancel"
-      selectorPrimaryFocus=".cds--btn--secondary"
     />
   );
 };
