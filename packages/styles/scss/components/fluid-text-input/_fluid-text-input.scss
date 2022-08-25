@@ -17,14 +17,15 @@
 @use '../text-input';
 
 @mixin fluid-text-input {
-  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper {
+  .#{$prefix}--text-input--fluid.#{$prefix}--text-input-wrapper {
     position: relative;
+    height: 100%;
     background: $field;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--label {
+  .#{$prefix}--text-input--fluid .#{$prefix}--label {
     position: absolute;
     z-index: 1;
     top: rem(13px);
@@ -35,29 +36,45 @@
     margin: 0;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--form__helper-text {
+  .#{$prefix}--text-input--fluid .#{$prefix}--form__helper-text {
     display: none;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input {
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input {
     min-height: rem(64px);
     padding: rem(32px) $spacing-05 rem(13px);
   }
 
   .#{$prefix}--text-input__divider,
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__divider {
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input__divider {
     display: none;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--warning {
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid],
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning {
+    display: block;
+  }
+
+  .#{$prefix}--text-input--fluid input[data-invalid] {
+    outline: none;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--form-requirement {
+    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    margin: 0;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input--invalid,
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input--warning {
     border-bottom: none;
   }
 
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input--invalid
     + .#{$prefix}--text-input__divider,
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input--warning
     + .#{$prefix}--text-input__divider {
     display: block;
@@ -67,39 +84,40 @@
     margin: 0 1rem;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__invalid-icon {
+  .#{$prefix}--text-input--fluid .#{$prefix}--text-input__invalid-icon {
     top: rem(80px);
   }
 
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper[data-invalid]
     > .#{$prefix}--text-input--invalid,
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--warning
     > .#{$prefix}--text-input--warning {
     outline: none;
   }
 
-  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input__field-wrapper--warning {
     border-bottom: 1px solid $border-strong;
   }
 
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper[data-invalid]:not(:focus) {
     @include focus-outline('invalid');
   }
 
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within,
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--warning:focus-within {
     @include focus-outline('outline');
   }
 
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper[data-invalid]
     > .#{$prefix}--text-input--invalid:focus,
-  .#{$prefix}--form--fluid
+  .#{$prefix}--text-input--fluid
     .#{$prefix}--text-input__field-wrapper--warning
     > .#{$prefix}--text-input--warning:focus {
     outline: none;

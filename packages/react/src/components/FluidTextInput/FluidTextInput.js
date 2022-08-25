@@ -7,14 +7,19 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import FluidForm from '../FluidForm';
+import classnames from 'classnames';
 import TextInput from '../TextInput';
+import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm/FormContext';
 
 function FluidTextInput({ className, ...other }) {
+  const prefix = usePrefix();
+  const classNames = classnames(`${prefix}--text-input--fluid`, className);
+
   return (
-    <FluidForm className={className}>
-      <TextInput {...other} />
-    </FluidForm>
+    <FormContext.Provider value={{ isFluid: true }}>
+      <TextInput className={classNames} {...other} />
+    </FormContext.Provider>
   );
 }
 
