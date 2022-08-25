@@ -235,7 +235,8 @@ const ComboBox = React.forwardRef((props, ref) => {
       itemToString={itemToString}
       initialSelectedItem={initialSelectedItem}
       inputId={id}
-      selectedItem={selectedItem}>
+      selectedItem={selectedItem}
+    >
       {({
         getInputProps,
         getItemProps,
@@ -310,7 +311,8 @@ const ComboBox = React.forwardRef((props, ref) => {
               light={light}
               size={size}
               warn={warn}
-              warnText={warnText}>
+              warnText={warnText}
+            >
               <div className={`${prefix}--list-box__field`}>
                 <input
                   role="combobox"
@@ -367,7 +369,6 @@ const ComboBox = React.forwardRef((props, ref) => {
                           <ListBox.MenuItem
                             key={itemProps.id}
                             isActive={selectedItem === item}
-                            tabIndex="-1"
                             isHighlighted={
                               highlightedIndex === index ||
                               (selectedItem?.id &&
@@ -377,7 +378,8 @@ const ComboBox = React.forwardRef((props, ref) => {
                             title={
                               itemToElement ? item.text : itemToString(item)
                             }
-                            {...itemProps}>
+                            {...itemProps}
+                          >
                             {itemToElement ? (
                               <ItemToElement key={itemProps.id} {...item} />
                             ) : (
