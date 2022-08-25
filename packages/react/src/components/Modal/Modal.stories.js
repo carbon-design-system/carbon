@@ -144,6 +144,20 @@ export const Default = () => {
   );
 };
 
+export const DangerModal = () => {
+  return (
+    <Modal
+      open
+      danger
+      modalHeading="Are you sure you want to delete this custom domain?"
+      modalLabel="Account resources"
+      primaryButtonText="Delete"
+      secondaryButtonText="Cancel"
+      selectorPrimaryFocus=".cds--btn--secondary"
+    />
+  );
+};
+
 export const Playground = () => {
   const { size, numberOfButtons, hasScrollingContent, ...modalProps } =
     props.modal();
