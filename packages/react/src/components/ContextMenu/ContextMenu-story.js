@@ -71,6 +71,7 @@ const Text = () => (
         <ListItem>onClose</ListItem>
         <ListItem>className</ListItem>
         <ListItem>id</ListItem>
+        <ListItem>target</ListItem>
       </UnorderedList>
     </p>
     <p>
