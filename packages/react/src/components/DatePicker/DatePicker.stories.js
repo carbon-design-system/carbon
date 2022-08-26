@@ -12,34 +12,6 @@ import DatePickerInput from '../DatePickerInput';
 import { Layer } from '../Layer';
 import mdx from './DatePicker.mdx';
 
-// const props = {
-//   datePicker: () => ({
-//     dateFormat: 'm/d/Y',
-//     id: 'date-picker',
-//     light: false,
-//     datePickerType: 'single',
-//     minDate: '11/15/2020',
-//     maxDate: '11/01/2040',
-//     disable: ['07/15/2021'],
-//     onClose: action('onClose'),
-//     onOpen: action('onOpen'),
-//   }),
-//   datePickerInput: () => ({
-//     id: 'date-picker-input-id',
-//     className: 'some-class',
-//     size: undefined,
-//     labelText: 'Date Picker label',
-//     pattern: 'd{1,2}/d{4}',
-//     placeholder: 'mm/dd/yyyy',
-//     disabled: false,
-//     invalid: false,
-//     invalidText: 'A valid date is required',
-//     warn: false,
-//     warnText: 'Selected dates may cause conflicts',
-//     iconDescription: 'Icon description',
-//   }),
-// };
-
 export default {
   title: 'Components/DatePicker',
   component: DatePicker,
@@ -219,9 +191,7 @@ export const RangeWithCalendarWithLayer = () => {
 
 export const Skeleton = () => <DatePickerSkeleton range />;
 
-/* eslint-disable react/prop-types */
 export const Playground = (args) => {
-  console.log(args);
   return (
     <DatePicker datePickerType="single" {...args}>
       <DatePickerInput
@@ -232,17 +202,16 @@ export const Playground = (args) => {
       />
       {args.datePickerType === 'range' && (
         <DatePickerInput
-          {...args}
           placeholder="mm/dd/yyyy"
           labelText="End date"
           size="md"
           id="date-picker-input-2"
+          {...args}
         />
       )}
     </DatePicker>
   );
 };
-/* eslint-enable react/prop-types */
 
 Playground.argTypes = {
   appendTo: {
