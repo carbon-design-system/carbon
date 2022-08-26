@@ -61,15 +61,15 @@
     - heart
     - human
     - person
-- name: agility-with-hybrid-multicloud
-  friendly_name: Agility with hybrid multicloud
-  aliases:
-    - agility with hybrid multicloud
 - name: agility
   friendly_name: Agility
   aliases:
     - agility
     - Cloud
+- name: agility-with-hybrid-multicloud
+  friendly_name: Agility with hybrid multicloud
+  aliases:
+    - agility with hybrid multicloud
 - name: agriculture
   friendly_name: Agriculture
   aliases:
@@ -1616,15 +1616,15 @@
     - cupcake
     - cake
     - creative
-- name: custom-reports
-  friendly_name: Custom reports
-  aliases:
-    - custom reports
-    - Cloud
 - name: custom--workloads
   friendly_name: Custom workloads
   aliases:
     - custom workloads
+    - Cloud
+- name: custom-reports
+  friendly_name: Custom reports
+  aliases:
+    - custom reports
     - Cloud
 - name: customer--service
   friendly_name: Customer service
@@ -1837,16 +1837,16 @@
     - laptop delivery
     - laptop service
     - laptop deployment
-- name: devops--toolchain
-  friendly_name: Devops toolchain
-  aliases:
-    - devops toolchain
-    - Cloud
 - name: devops
   friendly_name: Devops
   aliases:
     - devops
     - cloud
+- name: devops--toolchain
+  friendly_name: Devops toolchain
+  aliases:
+    - devops toolchain
+    - Cloud
 - name: dialogue
   friendly_name: Dialogue
   aliases:
@@ -2201,7 +2201,7 @@
     - expand vert
     - expand
     - vertical
-- name: Expansion
+- name: expansion
   friendly_name: expansion
   aliases:
     - expansion
@@ -3138,7 +3138,7 @@
     - design
     - development
     - design and development
-- name: indentify-and-access
+- name: identify-and-access
   friendly_name: Identify and access
   aliases:
     - identify and access
@@ -4059,15 +4059,15 @@
     - Okinawa
     - Shurijo
     - Japan
-- name: on-premise--to-cloud
-  friendly_name: On-premise to cloud
-  aliases:
-    - on-premise to cloud
-    - Cloud
 - name: on-premise
   friendly_name: On-premise
   aliases:
     - on-premise
+    - Cloud
+- name: on-premise--to-cloud
+  friendly_name: On-premise to cloud
+  aliases:
+    - on-premise to cloud
     - Cloud
 - name: open-source
   friendly_name: Open source
