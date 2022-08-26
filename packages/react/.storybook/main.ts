@@ -90,7 +90,6 @@ const config: StorybookConfig = {
   },
   framework: '@storybook/react',
   stories,
-  // TODO: Fix typings for this function
   webpackFinal: (config) => {
     const babelLoader = config?.module?.rules?.find((rule: any) => {
       return rule.use.some(({ loader }: { loader: string }) => {
