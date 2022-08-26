@@ -8,6 +8,7 @@ import fs from 'fs';
 import glob from 'fast-glob';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
+import { StorybookConfig } from '@storybook/core-common';
 
 const stories: string[] = glob
   .sync(
@@ -65,7 +66,7 @@ const stories: string[] = glob
     return true;
   });
 
-module.exports = {
+const config: StorybookConfig = {
   addons: [
     {
       name: '@storybook/addon-essentials',
@@ -90,8 +91,8 @@ module.exports = {
   framework: '@storybook/react',
   stories,
   // TODO: Fix typings for this function
-  webpack(config: any) {
-    const babelLoader = config.module.rules.find((rule: any) => {
+  webpackFinal: (config) => {
+    const babelLoader = config?.module?.rules?.find((rule: any) => {
       return rule.use.some(({ loader }: { loader: string }) => {
         return loader.includes('babel-loader');
       });
@@ -107,13 +108,15 @@ module.exports = {
     //
     // This results in these files being included in `babel-loader` and causing
     // the build times to increase dramatically
-    babelLoader.exclude = [
-      /node_modules/,
-      /packages\/.*\/(es|lib|umd)/,
-      /packages\/icons-react\/next/,
-    ];
+    if (babelLoader && babelLoader !== '...') {
+      babelLoader.exclude = [
+        /node_modules/,
+        /packages\/.*\/(es|lib|umd)/,
+        /packages\/icons-react\/next/,
+      ];
+    }
 
-    config.module.rules.push({
+    config?.module?.rules?.push({
       test: /\.s?css$/,
       sideEffects: true,
       use: [
@@ -161,7 +164,7 @@ module.exports = {
     });
 
     if (process.env.NODE_ENV === 'production') {
-      config.plugins.push(
+      config?.plugins?.push(
         new MiniCssExtractPlugin({
           filename: '[name].[contenthash].css',
         })
@@ -171,3 +174,4 @@ module.exports = {
     return config;
   },
 };
+module.exports = config;
