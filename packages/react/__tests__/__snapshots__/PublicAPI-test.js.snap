@@ -1310,7 +1310,10 @@ Map {
     },
     "TableBatchAction": Object {
       "defaultProps": Object {
-        "renderIcon": undefined,
+        "renderIcon": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "render": [Function],
+        },
       },
       "propTypes": Object {
         "hasIconOnly": Object {
@@ -1701,7 +1704,10 @@ Map {
     "TableToolbarMenu": Object {
       "defaultProps": Object {
         "iconDescription": "Settings",
-        "renderIcon": undefined,
+        "renderIcon": Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "render": [Function],
+        },
       },
       "propTypes": Object {
         "children": Object {
@@ -4540,7 +4546,10 @@ Map {
       "onKeyDown": [Function],
       "onOpen": [Function],
       "open": false,
-      "renderIcon": undefined,
+      "renderIcon": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
       "selectorPrimaryFocus": "[data-overflow-menu-primary-focus]",
     },
     "propTypes": Object {
@@ -6345,7 +6354,10 @@ Map {
   },
   "TableBatchAction" => Object {
     "defaultProps": Object {
-      "renderIcon": undefined,
+      "renderIcon": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
     },
     "propTypes": Object {
       "hasIconOnly": Object {
@@ -6736,7 +6748,10 @@ Map {
   "TableToolbarMenu" => Object {
     "defaultProps": Object {
       "iconDescription": "Settings",
-      "renderIcon": undefined,
+      "renderIcon": Object {
+        "$$typeof": Symbol(react.forward_ref),
+        "render": [Function],
+      },
     },
     "propTypes": Object {
       "children": Object {

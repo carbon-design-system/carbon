@@ -7,7 +7,6 @@ exports[`ListBoxMenuItem should render 1`] = `
 >
   <div
     className="bx--list-box__menu-item"
-    tabIndex="-1"
   >
     <div
       className="bx--list-box__menu-item__option"
@@ -27,7 +26,6 @@ exports[`ListBoxMenuItem should render 2`] = `
 >
   <div
     className="bx--list-box__menu-item bx--list-box__menu-item--active"
-    tabIndex="-1"
   >
     <div
       className="bx--list-box__menu-item__option"
@@ -47,7 +45,6 @@ exports[`ListBoxMenuItem should render 3`] = `
 >
   <div
     className="bx--list-box__menu-item bx--list-box__menu-item--highlighted"
-    tabIndex="-1"
   >
     <div
       className="bx--list-box__menu-item__option"
