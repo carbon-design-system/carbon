@@ -15,6 +15,7 @@ exports[`ListBoxMenu should render 1`] = `
     >
       <div
         className="bx--list-box__menu-item"
+        tabIndex="-1"
       >
         <div
           className="bx--list-box__menu-item__option"
