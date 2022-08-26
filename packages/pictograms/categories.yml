@@ -152,16 +152,20 @@ categories:
       - accelerating-transformation
       - access-management
       - active--server
+      - agility
       - agility-with-hybrid-multicloud
       - ai--ready
       - ai
       - analyzing--containers
       - api
       - apps
+      - assessment-used
       - audio-data
       - audit-trail
       - automate--modular--management
       - automated
+      - big-data
+      - build-and-deploy-pipeline
       - business--continuity--02
       - c--language
       - c-plus-plus--language
@@ -196,8 +200,10 @@ categories:
       - cobol--language
       - code
       - cognos--analytics
+      - collaborate-with-teams
       - compliant
       - condition--builder
+      - connect--to-cloud
       - connected--devices
       - confidential-computing
       - construct
@@ -208,16 +214,21 @@ categories:
       - control-panel
       - controls-framework
       - custom-reports
+      - custom--workloads
       - customizable
       - data--centers
       - data--privacy--02
+      - data--protection-data--security
       - data--transfer
       - deep-learning
       - deploying-containers
       - deployment
+      - developer-tools
       - devops
+      - devops--toolchain
       - digital
       - docker
+      - documentation
       - drag-and-drop-interface
       - dynamic-workloads
       - ease-of-use
@@ -228,21 +239,27 @@ categories:
       - event-driven
       - expand--horz
       - expand--vert
+      - expansion
       - extend-the-data-center
       - extensible
+      - extract-text
       - fast
       - faster-innovation-with-partners
       - fault-tolerant
       - filter-and-group-data
       - filter--variable
       - flexibility--02
+      - focus-on-code
+      - forecasting
       - free--trial
       - fully-managed
       - geographic-flexibility
       - global--business--services
+      - global--footprint
       - global--technology--services
       - go--language
       - graphic-intensive-workloads
+      - help-desk
       - high--performance
       - high-volume-data
       - highly-available
@@ -250,6 +267,8 @@ categories:
       - hybrid--cloud--services
       - ibm--automation-platform
       - ibm--cloud
+      - identify-and-access
+      - identify-and-resolve-issues
       - integration--02
       - java
       - javascript
@@ -267,13 +286,18 @@ categories:
       - monitor
       - mqa
       - network--of-devices
+      - network--traffic
       - new-financial-customer-experiences
       - new-revenue-streams
       - notifications
+      - on-premise--to-cloud
+      - on-premise
       - operate-offline
       - operating-system
       - operational-efficiency
       - operational--metrics
+      - optimize
+      - partnership
       - pay-for-what-you-use
       - php--language
       - planning--analytics
@@ -282,6 +306,7 @@ categories:
       - predictive-analytics
       - productivity
       - proven-technology
+      - public-cloud-to-private-cloud
       - r--language
       - random--samples
       - react-to-data
@@ -290,6 +315,7 @@ categories:
       - reducing-cost
       - reliability--02
       - resource-health
+      - resources
       - rocket
       - saas--enablement
       - save-time
@@ -306,17 +332,21 @@ categories:
       - streaming-data
       - streamline--operations
       - subsecond
+      - support
       - text--data
+      - training
       - transform-data
       - troubleshooting
       - trusted
       - unstructured-data
       - use-the-language-of-your-choice
+      - view-graphs-and-dashboard
       - virtualization--02
       - visibility
       - visionary
       - visual--data
       - websites
+      - workflows
   - name: Controls
     members:
       - gear
