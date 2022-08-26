@@ -61,6 +61,11 @@
     - heart
     - human
     - person
+- name: agility
+  friendly_name: Agility
+  aliases:
+    - agility
+    - Cloud
 - name: agility-with-hybrid-multicloud
   friendly_name: Agility with hybrid multicloud
   aliases:
@@ -300,6 +305,11 @@
     - Australia
     - globe
     - continent
+- name: assessment-used
+  friendly_name: Assessment used
+  aliases:
+    - assessment used
+    - Cloud
 - name: assets
   friendly_name: Assets
   aliases:
@@ -472,6 +482,11 @@
     - bike
     - travel
     - transportation
+- name: big-data
+  friendly_name: Big data
+  aliases:
+    - big data
+    - Cloud
 - name: birthday--cake
   friendly_name: Birthday cake
   aliases:
@@ -553,6 +568,11 @@
     - leadership
     - culture
     - security
+- name: build-and-deploy-pipeline
+  friendly_name: Build and deploy pipeline
+  aliases:
+    - build and deploy pipeline
+    - Cloud
 - name: build-applications-anywhere
   friendly_name: Build applications anywhere
   aliases:
@@ -1333,6 +1353,11 @@
     - cognos analytics
     - cognos
     - analytics
+- name: collaborate-with-teams
+  friendly_name: Collaborate with teams
+  aliases:
+    - collaborate with teams
+    - Cloud
 - name: collaboration
   friendly_name: Collaboration
   aliases:
@@ -1419,6 +1444,11 @@
     - Red Hat
     - connection
     - application
+- name: connect--to-cloud
+  friendly_name: Connect to cloud
+  aliases:
+    - connect to cloud
+    - Cloud
 - name: connected--devices
   friendly_name: Connected devices
   aliases:
@@ -1586,6 +1616,11 @@
     - cupcake
     - cake
     - creative
+- name: custom--workloads
+  friendly_name: Custom workloads
+  aliases:
+    - custom workloads
+    - Cloud
 - name: custom-reports
   friendly_name: Custom reports
   aliases:
@@ -1664,6 +1699,12 @@
     - processing
     - storage
     - data storage
+- name: data--protection-data--security
+  friendly_name: Data protection data security
+  aliases:
+    - data protection
+    - data security
+    - Cloud
 - name: data--security
   friendly_name: Data Security
   aliases:
@@ -1773,6 +1814,11 @@
     - advancing
     - threats
     - security
+- name: developer-tools
+  friendly_name: Developer tools
+  aliases:
+    - developer tools
+    - Cloud
 - name: developer-z-os
   friendly_name: Developer z/OS®
   aliases:
@@ -1796,6 +1842,11 @@
   aliases:
     - devops
     - cloud
+- name: devops--toolchain
+  friendly_name: Devops toolchain
+  aliases:
+    - devops toolchain
+    - Cloud
 - name: dialogue
   friendly_name: Dialogue
   aliases:
@@ -1886,6 +1937,11 @@
   friendly_name: Document security
   aliases:
     - document security
+- name: documentation
+  friendly_name: Documentation
+  aliases:
+    - documentation
+    - Cloud
 - name: door--handle
   friendly_name: Door handle
   aliases:
@@ -2145,6 +2201,11 @@
     - expand vert
     - expand
     - vertical
+- name: expansion
+  friendly_name: expansion
+  aliases:
+    - expansion
+    - Cloud
 - name: export--01
   friendly_name: Export 01
   aliases:
@@ -2169,6 +2230,11 @@
   friendly_name: Extensible
   aliases:
     - extensible
+    - Cloud
+- name: extract-text
+  friendly_name: Extract text
+  aliases:
+    - extract text
     - Cloud
 - name: eye
   friendly_name: Eye
@@ -2444,6 +2510,10 @@
     - flower
     - bloom
     - blossom
+- name: focus-on-code
+  friendly_name: Focus on code
+  aliases:
+    - alias
 - name: fog
   friendly_name: Fog
   aliases:
@@ -2458,6 +2528,11 @@
     - file
     - document
     - catalog
+- name: forecasting
+  friendly_name: Forecasting
+  aliases:
+    - forecasting
+    - Cloud
 - name: forklift
   friendly_name: Forklift
   aliases:
@@ -2585,6 +2660,11 @@
     - sterling
     - currency
     - money
+- name: global--footprint
+  friendly_name: Global footprint
+  aliases:
+    - global footprint
+    - Cloud
 - name: global--markets
   friendly_name: Global markets
   aliases:
@@ -2815,6 +2895,11 @@
     - chart
     - data analytics
     - analytics
+- name: help-desk
+  friendly_name: Help desk
+  aliases:
+    - help desk
+    - Cloud
 - name: high--five
   friendly_name: High five
   aliases:
@@ -3053,6 +3138,16 @@
     - design
     - development
     - design and development
+- name: identify-and-access
+  friendly_name: Identify and access
+  aliases:
+    - identify and access
+    - Cloud
+- name: identify-and-resolve-issues
+  friendly_name: Identify and resolve issues
+  aliases:
+    - identify and resolve issues
+    - Cloud
 - name: identity--trust--assessment
   friendly_name: Identity Trust Assessment
   aliases:
@@ -3805,6 +3900,11 @@
     - networking
     - services
     - connect
+- name: network--traffic
+  friendly_name: Network traffic
+  aliases:
+    - network traffic
+    - Cloud
 - name: networking--01
   friendly_name: Networking 01
   aliases:
@@ -3959,6 +4059,16 @@
     - Okinawa
     - Shurijo
     - Japan
+- name: on-premise
+  friendly_name: On-premise
+  aliases:
+    - on-premise
+    - Cloud
+- name: on-premise--to-cloud
+  friendly_name: On-premise to cloud
+  aliases:
+    - on-premise to cloud
+    - Cloud
 - name: open-source
   friendly_name: Open source
   aliases:
@@ -3986,6 +4096,11 @@
   friendly_name: Operational efficiency
   aliases:
     - operational efficiency
+    - Cloud
+- name: optimize
+  friendly_name: Optimize
+  aliases:
+    - optimize
     - Cloud
 - name: optimize--cash-flow--01
   friendly_name: Optimize cash flow 01
@@ -4082,6 +4197,11 @@
     - contract
     - deal
     - business
+- name: partnership
+  friendly_name: Partnership
+  aliases:
+    - partnership
+    - Cloud
 - name: path
   friendly_name: Path
   aliases:
@@ -4417,6 +4537,11 @@
   aliases:
     - proven technology
     - Cloud
+- name: public-cloud-to-private-cloud
+  friendly_name: Public cloud to private cloud
+  aliases:
+    - public cloud to private cloud
+    - Cloud
 - name: puzzle
   friendly_name: Puzzle
   aliases:
@@ -4685,6 +4810,11 @@
   friendly_name: Resource health
   aliases:
     - resource health
+    - Cloud
+- name: resources
+  friendly_name: Resources
+  aliases:
+    - resources
     - Cloud
 - name: retrieve--and--rank
   friendly_name: Retrieve and rank
@@ -5340,6 +5470,11 @@
     - optimization
     - optimize
     - blockchain
+- name: support
+  friendly_name: Support
+  aliases:
+    - support
+    - Cloud
 - name: support--services
   friendly_name: Support services
   aliases:
@@ -5786,6 +5921,11 @@
     - train
     - transportation
     - travel
+- name: training
+  friendly_name: Training
+  aliases:
+    - training
+    - Cloud
 - name: transactional--blockchain
   friendly_name: Transactional blockchain
   aliases:
@@ -6094,6 +6234,11 @@
     - video play
     - video
     - controls
+- name: view-graphs-and-dashboard
+  friendly_name: View graphs and dashboard
+  aliases:
+    - view graphs and dashboard
+    - Cloud
 - name: virtual--server
   friendly_name: Virtual server
   aliases:
@@ -6314,6 +6459,11 @@
   friendly_name: Workday
   aliases:
     - workday
+- name: workflows
+  friendly_name: Workflows
+  aliases:
+    - workflows
+    - Cloud
 - name: world--community--grid
   friendly_name: World Community Grid
   aliases:
