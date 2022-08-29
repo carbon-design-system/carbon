@@ -309,3 +309,12 @@ $content-padding: 0 0 0 $spacing-05 !default;
   opacity: 0;
   visibility: hidden;
 }
+
+// flush
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__title {
+  margin-left: 0;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__content {
+  padding-left: 0;
+}
