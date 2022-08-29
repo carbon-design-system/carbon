@@ -6,4 +6,4 @@
  */
 
 export default from './FluidTextInput';
-export { FluidTextInput } from './FluidTextInput';
+export FluidTextInput from './FluidTextInput';

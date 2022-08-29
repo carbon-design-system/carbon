@@ -17,7 +17,7 @@ test.describe('FluidTextInput', () => {
       test('fluid text input @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidTextInput',
-          id: 'components-fluidtextinput--default',
+          id: 'experimental-unstable-fluidtextinput--default',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('FluidTextInput', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'FluidTextInput',
-      id: 'components-fluidtextinput--default',
+      id: 'experimental-unstable-fluidtextinput--default',
       globals: {
         theme: 'white',
       },
