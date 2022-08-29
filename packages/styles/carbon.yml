@@ -195,6 +195,7 @@ assets:
     status: stable
     type: pattern
     platform: web
+    thumbnailPath: ./thumbnails/disclosure.svg
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/patterns/disclosures-pattern/index.mdx
   dropdown:
