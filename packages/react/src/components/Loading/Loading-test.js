@@ -61,9 +61,6 @@ describe('Loading', () => {
       expect(container.firstChild).not.toHaveClass('cds--loading-overlay');
     });
   });
-  describe('behaves as expected', () => {
-    // Add tests for relevant component behavior. For more information, visit https://github.com/carbon-design-system/carbon/issues/10184#issuecomment-992978122
-  });
 
   describe('with a screenreader', () => {
     // https://www.w3.org/TR/WCAG21/#headings-and-labels
