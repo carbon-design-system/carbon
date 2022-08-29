@@ -249,6 +249,15 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
   }
 
+  //flush
+  .#{$prefix}--accordion--flush .#{$prefix}--accordion__title {
+    margin-left: 0;
+  }
+
+  .#{$prefix}--accordion--flush .#{$prefix}--accordion__content {
+    padding-left: 0;
+  }
+
   // Skeleton state
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__heading,
   .#{$prefix}--accordion.#{$prefix}--skeleton .#{$prefix}--accordion__button {
