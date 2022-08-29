@@ -66,7 +66,6 @@ export FileUploader, {
 export { FilterableMultiSelect } from './components/FilterableMultiSelect';
 export Form from './components/Form';
 export FluidForm from './components/FluidForm';
-export FluidTextInput from './components/FluidTextInput';
 export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
@@ -214,6 +213,7 @@ export {
   useFeatureFlag as unstable_useFeatureFlag,
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
+export { FluidTextInput as unstable__FluidTextInput } from './components/FluidTextInput';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';
