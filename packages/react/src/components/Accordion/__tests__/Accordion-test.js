@@ -159,9 +159,9 @@ describe('Accordion', () => {
   });
 
   describe('Flush align', () => {
-    it('should align to the left if prop flush is passed', () => {
+    it('should align to the left if prop isFlush is passed', () => {
       render(
-        <Accordion data-testid="accordion" flush>
+        <Accordion data-testid="accordion" isFlush>
           <AccordionItem className="child" title="Heading A">
             Panel A
           </AccordionItem>
@@ -181,7 +181,7 @@ describe('Accordion', () => {
 
     it('should not align to left if align="start"', () => {
       render(
-        <Accordion data-testid="accordion-2" flush align="start">
+        <Accordion data-testid="accordion-2" isFlush align="start">
           <AccordionItem className="child" title="Heading A">
             Panel A
           </AccordionItem>
