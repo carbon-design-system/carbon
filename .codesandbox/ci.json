@@ -10,7 +10,6 @@
     "packages/elements",
     "packages/feature-flags",
     "packages/grid",
-    "packages/icon-build-helpers",
     "packages/icon-helpers",
     "packages/icons",
     "packages/icons-react",
@@ -20,10 +19,7 @@
     "packages/pictograms",
     "packages/pictograms-react",
     "packages/react",
-    "packages/scss-generator",
-    "packages/sketch",
     "packages/styles",
-    "packages/test-utils",
     "packages/themes",
     "packages/type",
     "packages/upgrade"
