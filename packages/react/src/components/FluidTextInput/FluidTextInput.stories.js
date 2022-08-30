@@ -25,57 +25,6 @@ export const Default = () => (
   <FluidTextInput labelText="Label" placeholder="Placeholder text" />
 );
 
-export const Test = () => (
-  <>
-    <div className="fluid-input-wrapper">
-      <FluidTextInput
-        id="input-1"
-        labelText="Label"
-        placeholder="Placeholder text"
-      />
-
-      <FluidTextInput
-        id="input-2"
-        invalid
-        invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
-        labelText="Label"
-        placeholder="Placeholder text"
-      />
-
-      <FluidTextInput
-        id="input-3"
-        warn
-        warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
-        labelText="Label"
-        placeholder="Placeholder text"
-      />
-    </div>
-    <div className="fluid-input-wrapper">
-      <FluidTextInput
-        id="input-4"
-        labelText={ToggleTip}
-        placeholder="Placeholder text"
-      />
-
-      <FluidTextInput
-        id="input-5"
-        invalid
-        invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
-        labelText={ToggleTip}
-        placeholder="Placeholder text"
-      />
-
-      <FluidTextInput
-        id="input-6"
-        warn
-        warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
-        labelText={ToggleTip}
-        placeholder="Placeholder text"
-      />
-    </div>
-  </>
-);
-
 const ToggleTip = (
   <>
     <ToggletipLabel>Label</ToggletipLabel>
