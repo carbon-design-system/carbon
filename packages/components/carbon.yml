@@ -2,7 +2,7 @@
 library:
   id: carbon-components
   name: Carbon Vanilla
-  description: Vanilla JavaScript Carbon components
+  description: Build user interfaces with Carbon's core components.
   externalDocsUrl: https://the-carbon-components.netlify.app
   inherits: carbon-styles
 assets:
