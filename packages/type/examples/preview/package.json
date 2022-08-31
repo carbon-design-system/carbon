@@ -1,20 +1,17 @@
 {
   "name": "type-preview-example",
   "private": true,
-  "version": "0.0.0",
-  "license": "Apache-2.0",
   "scripts": {
-    "build": "parcel build --dist-dir build --public-url \"/type/examples/preview\" index.html",
-    "develop": "parcel index.html --no-cache"
-  },
-  "devDependencies": {
-    "@carbon/type": "^10.44.0",
-    "@parcel/transformer-sass": "^2.0.1",
-    "parcel": "^2.0.1"
+    "develop": "next",
+    "build": "next build && next export -o build"
   },
   "dependencies": {
+    "@carbon/styles": "link:../../../styles",
+    "@carbon/type": "link:../../",
     "change-case": "^4.1.1",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "next": "^10.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass": "^1.36.0"
   }
 }
