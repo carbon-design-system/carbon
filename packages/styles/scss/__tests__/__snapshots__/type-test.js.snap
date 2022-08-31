@@ -1822,7 +1822,7 @@ Object {
           },
           "property": "font-weight",
           "type": "declaration",
-          "value": "var(--cds-productive-heading-05-font-weight, 400)",
+          "value": "var(--cds-productive-heading-05-font-weight, 300)",
         },
         Object {
           "position": Position {
@@ -1878,7 +1878,7 @@ Object {
         Object {
           "position": Position {
             "end": Object {
-              "column": 62,
+              "column": 66,
               "line": 175,
             },
             "source": undefined,
@@ -1889,7 +1889,7 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-productive-heading-06-font-size, 2rem)",
+          "value": "var(--cds-productive-heading-06-font-size, 2.625rem)",
         },
         Object {
           "position": Position {
@@ -1972,7 +1972,7 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-productive-heading-07-font-size, 2.625rem)",
+          "value": "var(--cds-productive-heading-07-font-size, 3.375rem)",
         },
         Object {
           "position": Position {
@@ -7462,7 +7462,7 @@ Object {
           },
           "property": "font-weight",
           "type": "declaration",
-          "value": "var(--cds-heading-05-font-weight, 400)",
+          "value": "var(--cds-heading-05-font-weight, 300)",
         },
         Object {
           "position": Position {
@@ -7518,7 +7518,7 @@ Object {
         Object {
           "position": Position {
             "end": Object {
-              "column": 51,
+              "column": 55,
               "line": 748,
             },
             "source": undefined,
@@ -7529,7 +7529,7 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-heading-06-font-size, 2rem)",
+          "value": "var(--cds-heading-06-font-size, 2.625rem)",
         },
         Object {
           "position": Position {
@@ -7612,7 +7612,7 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-heading-07-font-size, 2.625rem)",
+          "value": "var(--cds-heading-07-font-size, 3.375rem)",
         },
         Object {
           "position": Position {
