@@ -325,6 +325,7 @@ $expressive-heading-04: (
     ),
     max: (
       font-size: scale.type-scale(8),
+      font-weight: font-family.font-weight('light'),
     ),
   ),
 ) !default;
@@ -349,7 +350,6 @@ $expressive-heading-05: (
     ),
     lg: (
       font-size: scale.type-scale(10),
-      font-weight: font-family.font-weight('regular'),
       line-height: 1.19,
     ),
     xlg: (
