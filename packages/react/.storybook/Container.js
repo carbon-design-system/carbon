@@ -30,7 +30,6 @@ function Container({ story, id }) {
       <div
         className={id.toLowerCase()}
         data-floating-menu-container
-        role="main"
         style={{
           padding: '3em',
           display: 'flex',
