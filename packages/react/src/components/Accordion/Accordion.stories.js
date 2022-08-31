@@ -129,6 +129,12 @@ Playground.argTypes = {
     },
     defaultValue: false,
   },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
