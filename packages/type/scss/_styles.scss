@@ -233,7 +233,7 @@ $heading-04: $productive-heading-04 !default;
 /// @group @carbon/type
 $productive-heading-05: (
   font-size: scale.type-scale(8),
-  font-weight: font-family.font-weight('regular'),
+  font-weight: font-family.font-weight('light'),
   line-height: 1.25,
   letter-spacing: 0,
 ) !default;
@@ -321,9 +321,11 @@ $expressive-heading-04: (
     xlg: (
       font-size: scale.type-scale(7),
       line-height: 1.25,
+      font-weight: font-family.font-weight('light'),
     ),
     max: (
       font-size: scale.type-scale(8),
+      font-weight: font-family.font-weight('light'),
     ),
   ),
 ) !default;
@@ -338,13 +340,12 @@ $fluid-heading-04: $expressive-heading-04 !default;
 /// @group @carbon/type
 $expressive-heading-05: (
   font-size: scale.type-scale(8),
-  font-weight: font-family.font-weight('regular'),
+  font-weight: font-family.font-weight('light'),
   line-height: 1.25,
   letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: scale.type-scale(9),
-      font-weight: font-family.font-weight('light'),
       line-height: 1.22,
     ),
     lg: (
@@ -561,22 +562,22 @@ $display-03: (
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: scale.type-scale(14),
-      line-height: 1.15,
+      font-size: scale.type-scale(12),
+      line-height: 1.18,
     ),
     lg: (
-      font-size: scale.type-scale(17),
-      line-height: 1.11,
+      font-size: scale.type-scale(13),
+      line-height: 1.16,
       letter-spacing: -0.64px,
     ),
     xlg: (
-      font-size: scale.type-scale(20),
-      line-height: 1.07,
+      font-size: scale.type-scale(15),
+      line-height: 1.13,
       letter-spacing: -0.64px,
     ),
     max: (
-      font-size: scale.type-scale(23),
-      line-height: 1.05,
+      font-size: scale.type-scale(16),
+      line-height: 1.11,
       letter-spacing: -0.96px,
     ),
   ),
@@ -592,7 +593,7 @@ $fluid-display-03: $display-03 !default;
 /// @group @carbon/type
 $display-04: (
   font-size: scale.type-scale(10),
-  font-weight: font-family.font-weight('semibold'),
+  font-weight: font-family.font-weight('light'),
   line-height: 1.19,
   letter-spacing: 0,
   breakpoints: (

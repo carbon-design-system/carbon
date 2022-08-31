@@ -73,6 +73,9 @@
     min-height: rem(32px);
     flex: 1;
     align-items: center;
+    // (min-height 32px - single line text height 18px) / 2 = 7px
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
 
     &:hover {
       background-color: $layer-hover-01;
@@ -109,7 +112,11 @@
   }
 
   .#{$prefix}--tree-parent-node__toggle {
-    padding: 0;
+    display: flex;
+    align-items: center;
+    align-self: flex-start;
+    // increase 16px container height to 18px to match text bounding box
+    padding: rem(1px) 0;
     border: 0;
     margin-right: $spacing-03;
 
@@ -135,6 +142,8 @@
   .#{$prefix}--tree-node__icon {
     min-width: 1rem;
     min-height: 1rem;
+    align-self: flex-start;
+    margin-top: rem(1px);
     margin-right: $spacing-03;
     fill: $icon-secondary;
   }
@@ -173,5 +182,7 @@
 
   .#{$prefix}--tree--xs .#{$prefix}--tree-node__label {
     min-height: rem(24px);
+    padding-top: rem(4px);
+    padding-bottom: rem(4px);
   }
 }

@@ -22,7 +22,7 @@ exports[`TreeView should render 1`] = `
     aria-label={null}
     aria-labelledby="id1__label"
     aria-multiselectable={null}
-    className="cds--tree"
+    className="cds--tree cds--tree--sm"
     onKeyDown={[Function]}
     role="tree"
   >
@@ -376,7 +376,7 @@ exports[`TreeView should render with icons 1`] = `
     aria-label={null}
     aria-labelledby="id3__label"
     aria-multiselectable={null}
-    className="cds--tree"
+    className="cds--tree cds--tree--sm"
     onKeyDown={[Function]}
     role="tree"
   >
