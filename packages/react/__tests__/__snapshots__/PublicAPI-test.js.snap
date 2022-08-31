@@ -88,6 +88,9 @@ Map {
       "count": Object {
         "type": "number",
       },
+      "isFlush": Object {
+        "type": "bool",
+      },
       "open": Object {
         "type": "bool",
       },
