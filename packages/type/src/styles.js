@@ -197,6 +197,7 @@ export const expressiveHeading04 = {
     },
     max: {
       fontSize: rem(scale[7]),
+      fontWeight: fontWeights.light,
     },
   },
 };
@@ -214,7 +215,6 @@ export const expressiveHeading05 = {
     },
     lg: {
       fontSize: rem(scale[9]),
-      fontWeight: fontWeights.regular,
       lineHeight: 1.19,
       letterSpacing: 0,
     },

@@ -2961,7 +2961,7 @@ Object {
       "position": Position {
         "end": Object {
           "column": 2,
-          "line": 284,
+          "line": 285,
         },
         "source": undefined,
         "start": Object {
@@ -2991,13 +2991,29 @@ Object {
             Object {
               "position": Position {
                 "end": Object {
-                  "column": 20,
+                  "column": 21,
                   "line": 282,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
                   "line": 282,
+                },
+              },
+              "property": "font-weight",
+              "type": "declaration",
+              "value": "300",
+            },
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 20,
+                  "line": 283,
+                },
+                "source": undefined,
+                "start": Object {
+                  "column": 5,
+                  "line": 283,
                 },
               },
               "property": "font-size",
@@ -3008,7 +3024,7 @@ Object {
           "position": Position {
             "end": Object {
               "column": 4,
-              "line": 283,
+              "line": 284,
             },
             "source": undefined,
             "start": Object {
@@ -3030,12 +3046,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 18,
-              "line": 287,
+              "line": 288,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 287,
+              "line": 288,
             },
           },
           "property": "font-size",
@@ -3046,12 +3062,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 19,
-              "line": 288,
+              "line": 289,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 288,
+              "line": 289,
             },
           },
           "property": "font-weight",
@@ -3062,12 +3078,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 20,
-              "line": 289,
+              "line": 290,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 289,
+              "line": 290,
             },
           },
           "property": "line-height",
@@ -3078,12 +3094,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 20,
-              "line": 290,
+              "line": 291,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 290,
+              "line": 291,
             },
           },
           "property": "letter-spacing",
@@ -3094,12 +3110,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 6,
-              "line": 294,
+              "line": 295,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 291,
+              "line": 292,
             },
           },
           "property": "font-size",
@@ -3113,12 +3129,12 @@ Object {
       "position": Position {
         "end": Object {
           "column": 2,
-          "line": 295,
+          "line": 296,
         },
         "source": undefined,
         "start": Object {
           "column": 1,
-          "line": 286,
+          "line": 287,
         },
       },
       "selectors": Array [
@@ -3131,12 +3147,12 @@ Object {
       "position": Position {
         "end": Object {
           "column": 2,
-          "line": 305,
+          "line": 306,
         },
         "source": undefined,
         "start": Object {
           "column": 1,
-          "line": 296,
+          "line": 297,
         },
       },
       "rules": Array [
@@ -3146,12 +3162,12 @@ Object {
               "position": Position {
                 "end": Object {
                   "column": 23,
-                  "line": 298,
+                  "line": 299,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
-                  "line": 298,
+                  "line": 299,
                 },
               },
               "property": "font-size",
@@ -3162,12 +3178,12 @@ Object {
               "position": Position {
                 "end": Object {
                   "column": 22,
-                  "line": 299,
+                  "line": 300,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
-                  "line": 299,
+                  "line": 300,
                 },
               },
               "property": "line-height",
@@ -3178,12 +3194,12 @@ Object {
               "position": Position {
                 "end": Object {
                   "column": 6,
-                  "line": 303,
+                  "line": 304,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
-                  "line": 300,
+                  "line": 301,
                 },
               },
               "property": "font-size",
@@ -3197,12 +3213,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 4,
-              "line": 304,
+              "line": 305,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 297,
+              "line": 298,
             },
           },
           "selectors": Array [
@@ -3223,7 +3239,7 @@ Object {
         "source": undefined,
         "start": Object {
           "column": 1,
-          "line": 306,
+          "line": 307,
         },
       },
       "rules": Array [
@@ -3233,33 +3249,17 @@ Object {
               "position": Position {
                 "end": Object {
                   "column": 24,
-                  "line": 308,
+                  "line": 309,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
-                  "line": 308,
+                  "line": 309,
                 },
               },
               "property": "font-size",
               "type": "declaration",
               "value": "2.625rem",
-            },
-            Object {
-              "position": Position {
-                "end": Object {
-                  "column": 21,
-                  "line": 309,
-                },
-                "source": undefined,
-                "start": Object {
-                  "column": 5,
-                  "line": 309,
-                },
-              },
-              "property": "font-weight",
-              "type": "declaration",
-              "value": "400",
             },
             Object {
               "position": Position {
@@ -3305,7 +3305,7 @@ Object {
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 307,
+              "line": 308,
             },
           },
           "selectors": Array [
@@ -8178,7 +8178,7 @@ Object {
       "position": Position {
         "end": Object {
           "column": 2,
-          "line": 816,
+          "line": 817,
         },
         "source": undefined,
         "start": Object {
@@ -8208,13 +8208,29 @@ Object {
             Object {
               "position": Position {
                 "end": Object {
-                  "column": 20,
+                  "column": 21,
                   "line": 814,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
                   "line": 814,
+                },
+              },
+              "property": "font-weight",
+              "type": "declaration",
+              "value": "300",
+            },
+            Object {
+              "position": Position {
+                "end": Object {
+                  "column": 20,
+                  "line": 815,
+                },
+                "source": undefined,
+                "start": Object {
+                  "column": 5,
+                  "line": 815,
                 },
               },
               "property": "font-size",
@@ -8225,7 +8241,7 @@ Object {
           "position": Position {
             "end": Object {
               "column": 4,
-              "line": 815,
+              "line": 816,
             },
             "source": undefined,
             "start": Object {
@@ -8247,12 +8263,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 18,
-              "line": 819,
+              "line": 820,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 819,
+              "line": 820,
             },
           },
           "property": "font-size",
@@ -8263,12 +8279,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 19,
-              "line": 820,
+              "line": 821,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 820,
+              "line": 821,
             },
           },
           "property": "font-weight",
@@ -8279,12 +8295,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 20,
-              "line": 821,
+              "line": 822,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 821,
+              "line": 822,
             },
           },
           "property": "line-height",
@@ -8295,12 +8311,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 20,
-              "line": 822,
+              "line": 823,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 822,
+              "line": 823,
             },
           },
           "property": "letter-spacing",
@@ -8311,12 +8327,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 6,
-              "line": 826,
+              "line": 827,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 823,
+              "line": 824,
             },
           },
           "property": "font-size",
@@ -8330,12 +8346,12 @@ Object {
       "position": Position {
         "end": Object {
           "column": 2,
-          "line": 827,
+          "line": 828,
         },
         "source": undefined,
         "start": Object {
           "column": 1,
-          "line": 818,
+          "line": 819,
         },
       },
       "selectors": Array [
@@ -8348,12 +8364,12 @@ Object {
       "position": Position {
         "end": Object {
           "column": 2,
-          "line": 837,
+          "line": 838,
         },
         "source": undefined,
         "start": Object {
           "column": 1,
-          "line": 828,
+          "line": 829,
         },
       },
       "rules": Array [
@@ -8363,12 +8379,12 @@ Object {
               "position": Position {
                 "end": Object {
                   "column": 23,
-                  "line": 830,
+                  "line": 831,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
-                  "line": 830,
+                  "line": 831,
                 },
               },
               "property": "font-size",
@@ -8379,12 +8395,12 @@ Object {
               "position": Position {
                 "end": Object {
                   "column": 22,
-                  "line": 831,
+                  "line": 832,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
-                  "line": 831,
+                  "line": 832,
                 },
               },
               "property": "line-height",
@@ -8395,12 +8411,12 @@ Object {
               "position": Position {
                 "end": Object {
                   "column": 6,
-                  "line": 835,
+                  "line": 836,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
-                  "line": 832,
+                  "line": 833,
                 },
               },
               "property": "font-size",
@@ -8414,12 +8430,12 @@ Object {
           "position": Position {
             "end": Object {
               "column": 4,
-              "line": 836,
+              "line": 837,
             },
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 829,
+              "line": 830,
             },
           },
           "selectors": Array [
@@ -8440,7 +8456,7 @@ Object {
         "source": undefined,
         "start": Object {
           "column": 1,
-          "line": 838,
+          "line": 839,
         },
       },
       "rules": Array [
@@ -8450,33 +8466,17 @@ Object {
               "position": Position {
                 "end": Object {
                   "column": 24,
-                  "line": 840,
+                  "line": 841,
                 },
                 "source": undefined,
                 "start": Object {
                   "column": 5,
-                  "line": 840,
+                  "line": 841,
                 },
               },
               "property": "font-size",
               "type": "declaration",
               "value": "2.625rem",
-            },
-            Object {
-              "position": Position {
-                "end": Object {
-                  "column": 21,
-                  "line": 841,
-                },
-                "source": undefined,
-                "start": Object {
-                  "column": 5,
-                  "line": 841,
-                },
-              },
-              "property": "font-weight",
-              "type": "declaration",
-              "value": "400",
             },
             Object {
               "position": Position {
@@ -8522,7 +8522,7 @@ Object {
             "source": undefined,
             "start": Object {
               "column": 3,
-              "line": 839,
+              "line": 840,
             },
           },
           "selectors": Array [
