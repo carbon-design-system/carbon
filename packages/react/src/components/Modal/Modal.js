@@ -156,7 +156,7 @@ const Modal = React.forwardRef(function Modal(
   );
 
   const ariaLabel =
-    modalLabel || ['aria-label'] || modalAriaLabel || modalHeading;
+    modalLabel || rest['aria-label'] || modalAriaLabel || modalHeading;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
   const hasScrollingContentProps = hasScrollingContent
@@ -191,7 +191,9 @@ const Modal = React.forwardRef(function Modal(
     const initialFocus = (focusContainerElement) => {
       const containerElement = focusContainerElement || innerModal.current;
       const primaryFocusElement = containerElement
-        ? containerElement.querySelector(selectorPrimaryFocus)
+        ? containerElement.querySelector(
+            danger ? `.${prefix}--btn--secondary` : selectorPrimaryFocus
+          )
         : null;
 
       if (primaryFocusElement) {
@@ -211,7 +213,7 @@ const Modal = React.forwardRef(function Modal(
     if (open) {
       focusButton(innerModal.current);
     }
-  }, [open, selectorPrimaryFocus]);
+  }, [open, selectorPrimaryFocus, danger, prefix]);
 
   const modalBody = (
     <div
