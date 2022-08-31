@@ -5,6 +5,41 @@ library:
   description: Build user interfaces with Carbon's core components.
   externalDocsUrl: https://the-carbon-components.netlify.app
   inherits: carbon-styles
+  designKits:
+    carbon-white-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-white-sketch
+    carbon-g10-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g10-sketch
+    carbon-g90-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g90-sketch
+    carbon-g100-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g100-sketch
+    carbon-shell-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-shell-sketch
+    carbon-white-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-white-adobe-xd
+    carbon-g10-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g10-adobe-xd
+    carbon-g90-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g90-adobe-xd
+    carbon-g100-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g100-adobe-xd
+    axure-widget-library:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/axure-widget-library
+    text-toolbar-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/text-toolbar-sketch
+    carbon-mid-fi-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-mid-fi-sketch
+    carbon-wireframe-invision-freehand:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-wireframe-invision-freehand
+    carbon-white-figma:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-white-figma
+    carbon-g10-figma:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g10-figma
+    carbon-g90-figma:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g90-figma
+    carbon-g100-figma:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g100-figma
 assets:
   accordion:
     status: stable
