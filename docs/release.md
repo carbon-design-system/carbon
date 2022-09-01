@@ -99,7 +99,7 @@ chore(release): v11.2.0-rc.0
 ```
 
 - [ ] Exit the log by pressing <kbd>q</kbd>
-- [ ] Tag the commit, and push it to `upstream`
+- [ ] Tag the release commit, and push it to `upstream`
 
 ```bash
 git tag -a v11.2.0-rc.0 -m 'v11.2.0-rc.0'
@@ -151,7 +151,7 @@ chore(release): v11.10.0
 ```
 
 - [ ] Exit the log by pressing <kbd>q</kbd>
-- [ ] Tag the commit, and push it to `upstream`
+- [ ] Tag the release commit, and push it to `upstream`
 
 ```bash
 git tag -a v11.2.0 -m 'v11.2.0'
@@ -291,7 +291,7 @@ chore(release): v10.59.1
 ```
 
 - [ ] Exit the log by pressing <kbd>q</kbd>
-- [ ] Tag the commit, and push it to `upstream`
+- [ ] Tag the release commit, and push it to `upstream`
 
 ```bash
 git tag -a vX.Y.Z -m 'vX.Y.Z'
