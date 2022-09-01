@@ -2177,7 +2177,7 @@ __metadata:
     rimraf: ^3.0.2
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
-    rtlcss: ^3.5.0
+    rtlcss: ^4.0.0
     sass: ^1.51.0
     sass-loader: ^13.0.0
     storybook-readme: ^5.0.9
@@ -27698,17 +27698,17 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rtlcss@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "rtlcss@npm:3.5.0"
+"rtlcss@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "rtlcss@npm:4.0.0"
   dependencies:
-    find-up: ^5.0.0
+    escalade: ^3.1.1
     picocolors: ^1.0.0
-    postcss: ^8.3.11
+    postcss: ^8.4.6
     strip-json-comments: ^3.1.1
   bin:
     rtlcss: bin/rtlcss.js
-  checksum: a3763cad2cb58ce1b950de155097c3c294e7aefc8bf328b58d0cc8d5efb88bf800865edc158a78ace6d1f7f99fea6fd66fb4a354d859b172dadd3dab3e0027b3
+  checksum: cd8fe728489cc8a066a58ea518ac2089c245dede9bda376c1b33ae0c119fa9dbdb6808eee27697ecad3bfed8f338d10bfeb42c1efa60c262a9def0246233484c
   languageName: node
   linkType: hard
 
