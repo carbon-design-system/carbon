@@ -80,7 +80,8 @@ release team will need to do the following:
   - If [releasing another prerelease](#releasing-another-prerelease), specify
     `prerelease` as the release type
 - [ ] Provide the tag for the release. For example, if the previous release was
-      `v11.1.0` this tag would be `v11.2.0-rc.0`
+      `v11.1.0` this tag would be `v11.2.0-rc.0`. To find the previous release,
+      view the [tag list](https://github.com/carbon-design-system/carbon/tags).
 - [ ] Review and approve the Pull Request generated from this action
 - [ ] 🛑 Wait for the Pull Request to be merged
 - [ ] Once merged, pull down the latest code from `upstream`
@@ -132,7 +133,9 @@ following:
       to automatically generate the prerelease versions for packages
   - [ ] Specify `minor` as the release type
   - [ ] Provide the tag for the release. For example, if the previous release
-        was `v11.1.0-rc.0` this tag would be `v11.2.0`
+        was `v11.1.0-rc.0` this tag would be `v11.2.0`. To find the previous
+        release, view the
+        [tag list](https://github.com/carbon-design-system/carbon/tags).
 - [ ] Review and approve the Pull Request generated from this action
 - [ ] 🛑 Wait for the Pull Request to be merged
 - [ ] Once merged, pull down the latest code from `upstream`
@@ -239,7 +242,9 @@ include in the release.
 - [ ] Go to your local version of the monorepo
 - [ ] Checkout v10 `git checkout v10`
 - [ ] Run `git pull upstream v10 --tags`
-- [ ] Create a new release branch from main
+- [ ] Create a new release branch from main with the intended version to be
+      released. To find the previous release, view the
+      [tag list](https://github.com/carbon-design-system/carbon/tags).
   - [ ] `git checkout -b release/vX.Y.Z`
 - [ ] Run `yarn install`
 - [ ] Ensure your working directory is clean via `git status`,
@@ -292,6 +297,9 @@ chore(release): v10.59.1
 
 - [ ] Exit the log by pressing <kbd>q</kbd>
 - [ ] Tag the release commit, and push it to `upstream`
+  - [ ] Make sure you're setting the correct tag version number. To find the
+        previous release, view the
+        [tag list](https://github.com/carbon-design-system/carbon/tags).
 
 ```bash
 git tag -a vX.Y.Z -m 'vX.Y.Z'
