@@ -51,6 +51,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion__item {
+    display: list-item;
     overflow: visible;
     border-top: 1px solid $border-subtle;
     transition: all $duration-fast-02 motion(standard, productive);
