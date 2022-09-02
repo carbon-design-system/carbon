@@ -4,10 +4,10 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import fs from 'fs';
+import fs from 'node:fs';
+import path from 'node:path';
 import glob from 'fast-glob';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
-import path from 'path';
 import { StorybookConfig } from '@storybook/core-common';
 
 const stories: string[] = glob
