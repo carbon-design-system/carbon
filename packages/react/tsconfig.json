@@ -9,7 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "isolatedModules": true,
     "resolveJsonModule": true,
@@ -23,6 +23,6 @@
     "incremental": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "icons/**/*"],
   "exclude": ["node_modules", "build"]
 }
