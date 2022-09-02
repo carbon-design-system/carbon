@@ -49,6 +49,10 @@ categories:
           - settings--view
           - shrink-screen
           - shrink-screen--filled
+          - side-panel--close
+          - side-panel--close--filled
+          - side-panel--open
+          - side-panel--open--filled
           - skip--back
           - skip--back--filled
           - skip--back--outline
@@ -224,6 +228,7 @@ categories:
           - trash-can
           - ungroup-objects
           - unlink
+          - unsaved
           - vertical-view
       - name: Navigation
         members:
@@ -283,9 +288,11 @@ categories:
           - bookmark--add
           - bookmark--filled
           - branch
+          - build-tool
           - caret--sort
           - caret--sort--down
           - caret--sort--up
+          - catalog--publish
           - center--circle
           - center--square
           - change-catalog
@@ -308,6 +315,8 @@ categories:
           - connect--recursive
           - connect--source
           - connect--target
+          - continuous-deployment
+          - continuous-integration
           - convert-to-cloud
           - deploy
           - deploy-rules
@@ -364,6 +373,7 @@ categories:
           - pause-past
           - pin
           - pin--filled
+          - promote
           - query
           - recently-viewed
           - recommend
@@ -405,6 +415,7 @@ categories:
           - tag--group
           - tag--import
           - tag--none
+          - test-tool
           - translate
           - transpose
           - undo
@@ -492,6 +503,23 @@ categories:
           - view--off--filled
   - name: Brand
     subcategories:
+      - name: Design and development
+        members:
+          - logo--angular
+          - logo--figma
+          - logo--invision
+          - logo--jupyter
+          - logo--keybase
+          - logo--kubernetes
+          - logo--npm
+          - logo--openshift
+          - logo--python
+          - logo--r-script
+          - logo--react
+          - logo--sketch
+          - logo--svelte
+          - logo--vmware
+          - logo--vue
       - name: IBM
         members:
           - bee
@@ -556,13 +584,35 @@ categories:
           - dns-services
           - flow-logs-vpc
           - ibm--data-replication
+          - ibm--datastage
           - ibm--match-360
+          - ibm--mq
           - ibm--open-enterprise-languages
+          - ibm--power-vs
+          - ibm-cloud--citrix-daas
           - ibm-cloud--dedicated-host
+          - ibm-cloud--direct-link-1--connect
+          - ibm-cloud--direct-link-1--dedicated
+          - ibm-cloud--direct-link-1--dedicated-hosting
+          - ibm-cloud--direct-link-1--exchange
+          - ibm-cloud--direct-link-2--connect
+          - ibm-cloud--direct-link-2--dedicated
+          - ibm-cloud--direct-link-2--dedicated-hosting
+          - ibm-cloud--event-notification
+          - ibm-cloud--event-streams
+          - ibm-cloud--hyper-protect-crypto-services
+          - ibm-cloud--hyper-protect-dbaas
+          - ibm-cloud--hyper-protect-vs
           - ibm-cloud--internet-services
+          - ibm-cloud--key-protect
           - ibm-cloud--kubernetes-service
+          - ibm-cloud--logging
+          - ibm-cloud--mass-data-migration
+          - ibm-cloud--pal
+          - ibm-cloud--secrets-manager
           - ibm-cloud--security-compliance-center
           - ibm-cloud--subnets
+          - ibm-cloud--sysdig-secure
           - ibm-cloud--transit-gateway
           - ibm-cloud--vpc-endpoints
           - ibm-cloud-pak--applications
@@ -571,12 +621,27 @@ categories:
           - ibm-cloud-pak--integration
           - ibm-cloud-pak--MANTA-automated-data-lineage
           - ibm-cloud-pak--multicloud-mgmt
+          - ibm-cloud-pak--netezza
           - ibm-cloud-pak--network-automation
           - ibm-cloud-pak--security
           - ibm-cloud-pak--system
           - ibm-cloud-pak--watson-aiops
           - ibm-security--services
+          - ibm-watson--assistant
+          - ibm-watson--discovery
+          - ibm-watson--knowledge-catalog
+          - ibm-watson--knowledge-studio
+          - ibm-watson--language-translator
+          - ibm-watson--machine-learning
+          - ibm-watson--natural-language-classifier
+          - ibm-watson--natural-language-understanding
+          - ibm-watson--openscale
           - ibm-watson--orders
+          - ibm-watson--query
+          - ibm-watson--speech-to-text
+          - ibm-watson--studio
+          - ibm-watson--text-to-speech
+          - ibm-watson--tone-analyzer
           - ibm-z--cloud-mod-stack
           - ibm-z-cloud--provisioning
           - ibm-z-os--package-manager
@@ -1198,6 +1263,8 @@ categories:
           - PPT
           - product
           - RAW
+          - repo--artifact
+          - repo--source-code
           - roadmap
           - rule
           - rule--cancelled
@@ -1923,15 +1990,9 @@ categories:
           - iot--connect
           - iot--platform
           - keyboard
+          - keyboard--off
           - laptop
           - location--current
-          - logo--jupyter
-          - logo--keybase
-          - logo--kubernetes
-          - logo--openshift
-          - logo--python
-          - logo--r-script
-          - logo--vmware
           - machine-learning
           - machine-learning-model
           - mail--all
