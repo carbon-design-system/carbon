@@ -1942,8 +1942,8 @@ __metadata:
     "@carbon/icons": ^11.7.0
     "@carbon/layout": ^11.5.0
     "@carbon/motion": ^11.3.0
-    "@carbon/themes": ^11.7.0
-    "@carbon/type": ^11.7.0
+    "@carbon/themes": ^11.8.0
+    "@carbon/type": ^11.8.0
     fs-extra: ^10.0.0
     klaw-sync: ^6.0.0
     replace-in-file: ^3.4.2
@@ -2094,7 +2094,7 @@ __metadata:
   dependencies:
     "@carbon/icon-build-helpers": ^1.3.0
     "@carbon/icon-helpers": ^10.32.0
-    "@carbon/pictograms": ^12.4.0
+    "@carbon/pictograms": ^12.5.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
@@ -2102,7 +2102,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@^12.4.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@^12.5.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
@@ -2111,7 +2111,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.11.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.12.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2126,10 +2126,10 @@ __metadata:
     "@carbon/feature-flags": ^0.8.0
     "@carbon/icons-react": ^11.7.0
     "@carbon/layout": ^11.5.0
-    "@carbon/styles": ^1.11.0
+    "@carbon/styles": ^1.12.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.25.0
-    "@carbon/themes": ^11.7.0
+    "@carbon/themes": ^11.8.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
@@ -2179,7 +2179,7 @@ __metadata:
     rimraf: ^3.0.2
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
-    rtlcss: ^3.5.0
+    rtlcss: ^4.0.0
     sass: ^1.51.0
     sass-loader: ^13.0.0
     storybook-readme: ^5.0.9
@@ -2214,8 +2214,8 @@ __metadata:
     "@carbon/colors": ^11.4.0
     "@carbon/icon-helpers": ^10.32.0
     "@carbon/icons": ^11.7.0
-    "@carbon/themes": ^11.7.0
-    "@carbon/type": ^11.7.0
+    "@carbon/themes": ^11.8.0
+    "@carbon/type": ^11.8.0
     "@skpm/builder": ^0.8.0
     color-string: ^1.5.3
     core-js: ^3.16.0
@@ -2226,7 +2226,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^1.11.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^1.12.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -2236,8 +2236,8 @@ __metadata:
     "@carbon/layout": ^11.5.0
     "@carbon/motion": ^11.3.0
     "@carbon/test-utils": ^10.25.0
-    "@carbon/themes": ^11.7.0
-    "@carbon/type": ^11.7.0
+    "@carbon/themes": ^11.8.0
+    "@carbon/type": ^11.8.0
     "@ibm/plex": 6.0.0-next.6
     autoprefixer: ^10.4.7
     browserslist-config-carbon: ^11.0.0
@@ -2277,7 +2277,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^11.7.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@^11.8.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
@@ -2289,7 +2289,7 @@ __metadata:
     "@carbon/layout": ^11.5.0
     "@carbon/scss-generator": ^10.14.0
     "@carbon/test-utils": ^10.25.0
-    "@carbon/type": ^11.7.0
+    "@carbon/type": ^11.8.0
     change-case: ^4.1.1
     color: ^3.1.2
     core-js: ^3.16.0
@@ -2299,7 +2299,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@^11.7.0, @carbon/type@workspace:packages/type":
+"@carbon/type@^11.8.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
@@ -2318,7 +2318,7 @@ __metadata:
   dependencies:
     chalk: ^4.1.1
     change-case: ^4.1.2
-    esbuild: ^0.14.10
+    esbuild: ^0.15.0
     execa: ^5.1.1
     fast-glob: ^3.2.11
     fs-extra: ^10.0.0
@@ -2807,6 +2807,13 @@ __metadata:
     esquery: ^1.4.0
     jsdoc-type-pratt-parser: ~2.2.3
   checksum: b64afeaddccbc8da185c640e608496f6d6f8ee564c6255cdb44b16e00fe441e1f0552b5748033df2baf42187cfbfa9f31c46716982945d4343f8eaf44e253087
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-loong64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "@esbuild/linux-loong64@npm:0.15.3"
+  conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
 
@@ -10696,8 +10703,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.17.12
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
-    "@carbon/react": ^1.11.0
-    "@carbon/styles": ^1.11.0
+    "@carbon/react": ^1.12.0
+    "@carbon/styles": ^1.12.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.25.0
     "@rollup/plugin-babel": ^5.3.0
@@ -10723,7 +10730,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^1.11.0
+    "@carbon/styles": ^1.12.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.25.0
     fs-extra: ^10.0.0
@@ -11412,7 +11419,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^1.11.0
+    "@carbon/styles": ^1.12.0
     sass: ^1.51.0
     vite: ^2.8.0
   languageName: unknown
@@ -11422,7 +11429,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.12.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -11434,7 +11441,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.12.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -14171,9 +14178,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-android-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-android-64@npm:0.15.3"
+  conditions: os=android & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-android-arm64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-android-arm64@npm:0.14.38"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"esbuild-android-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-android-arm64@npm:0.15.3"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -14185,9 +14206,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-darwin-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-darwin-64@npm:0.15.3"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-darwin-arm64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-darwin-arm64@npm:0.14.38"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"esbuild-darwin-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-darwin-arm64@npm:0.15.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
@@ -14199,9 +14234,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-freebsd-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-freebsd-64@npm:0.15.3"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-freebsd-arm64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-freebsd-arm64@npm:0.14.38"
+  conditions: os=freebsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"esbuild-freebsd-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-freebsd-arm64@npm:0.15.3"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
@@ -14213,9 +14262,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-linux-32@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-32@npm:0.15.3"
+  conditions: os=linux & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "esbuild-linux-64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-linux-64@npm:0.14.38"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-64@npm:0.15.3"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
@@ -14227,9 +14290,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-linux-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-arm64@npm:0.15.3"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "esbuild-linux-arm@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-linux-arm@npm:0.14.38"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-arm@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-arm@npm:0.15.3"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -14241,9 +14318,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-linux-mips64le@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-mips64le@npm:0.15.3"
+  conditions: os=linux & cpu=mips64el
+  languageName: node
+  linkType: hard
+
 "esbuild-linux-ppc64le@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-linux-ppc64le@npm:0.14.38"
+  conditions: os=linux & cpu=ppc64
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-ppc64le@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-ppc64le@npm:0.15.3"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
@@ -14255,9 +14346,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-linux-riscv64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-riscv64@npm:0.15.3"
+  conditions: os=linux & cpu=riscv64
+  languageName: node
+  linkType: hard
+
 "esbuild-linux-s390x@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-linux-s390x@npm:0.14.38"
+  conditions: os=linux & cpu=s390x
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-s390x@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-s390x@npm:0.15.3"
   conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
@@ -14269,9 +14374,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-netbsd-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-netbsd-64@npm:0.15.3"
+  conditions: os=netbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-openbsd-64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-openbsd-64@npm:0.14.38"
+  conditions: os=openbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"esbuild-openbsd-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-openbsd-64@npm:0.15.3"
   conditions: os=openbsd & cpu=x64
   languageName: node
   linkType: hard
@@ -14283,9 +14402,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-sunos-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-sunos-64@npm:0.15.3"
+  conditions: os=sunos & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-windows-32@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-windows-32@npm:0.14.38"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"esbuild-windows-32@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-windows-32@npm:0.15.3"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
@@ -14297,6 +14430,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-windows-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-windows-64@npm:0.15.3"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-windows-arm64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-windows-arm64@npm:0.14.38"
@@ -14304,7 +14444,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.14.10, esbuild@npm:^0.14.27":
+"esbuild-windows-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-windows-arm64@npm:0.15.3"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"esbuild@npm:^0.14.27":
   version: 0.14.38
   resolution: "esbuild@npm:0.14.38"
   dependencies:
@@ -14372,6 +14519,80 @@ __metadata:
   bin:
     esbuild: bin/esbuild
   checksum: d7523a36bd28016c010829c527386dbc0c6b9f514920abf5ac8003f346665161aa61026fd6822c5091fc1c1af52fe26c9281a81740fc06f2994cdbb7c2880297
+  languageName: node
+  linkType: hard
+
+"esbuild@npm:^0.15.0":
+  version: 0.15.3
+  resolution: "esbuild@npm:0.15.3"
+  dependencies:
+    "@esbuild/linux-loong64": 0.15.3
+    esbuild-android-64: 0.15.3
+    esbuild-android-arm64: 0.15.3
+    esbuild-darwin-64: 0.15.3
+    esbuild-darwin-arm64: 0.15.3
+    esbuild-freebsd-64: 0.15.3
+    esbuild-freebsd-arm64: 0.15.3
+    esbuild-linux-32: 0.15.3
+    esbuild-linux-64: 0.15.3
+    esbuild-linux-arm: 0.15.3
+    esbuild-linux-arm64: 0.15.3
+    esbuild-linux-mips64le: 0.15.3
+    esbuild-linux-ppc64le: 0.15.3
+    esbuild-linux-riscv64: 0.15.3
+    esbuild-linux-s390x: 0.15.3
+    esbuild-netbsd-64: 0.15.3
+    esbuild-openbsd-64: 0.15.3
+    esbuild-sunos-64: 0.15.3
+    esbuild-windows-32: 0.15.3
+    esbuild-windows-64: 0.15.3
+    esbuild-windows-arm64: 0.15.3
+  dependenciesMeta:
+    "@esbuild/linux-loong64":
+      optional: true
+    esbuild-android-64:
+      optional: true
+    esbuild-android-arm64:
+      optional: true
+    esbuild-darwin-64:
+      optional: true
+    esbuild-darwin-arm64:
+      optional: true
+    esbuild-freebsd-64:
+      optional: true
+    esbuild-freebsd-arm64:
+      optional: true
+    esbuild-linux-32:
+      optional: true
+    esbuild-linux-64:
+      optional: true
+    esbuild-linux-arm:
+      optional: true
+    esbuild-linux-arm64:
+      optional: true
+    esbuild-linux-mips64le:
+      optional: true
+    esbuild-linux-ppc64le:
+      optional: true
+    esbuild-linux-riscv64:
+      optional: true
+    esbuild-linux-s390x:
+      optional: true
+    esbuild-netbsd-64:
+      optional: true
+    esbuild-openbsd-64:
+      optional: true
+    esbuild-sunos-64:
+      optional: true
+    esbuild-windows-32:
+      optional: true
+    esbuild-windows-64:
+      optional: true
+    esbuild-windows-arm64:
+      optional: true
+  bin:
+    esbuild: bin/esbuild
+  checksum: d41f9c2d38fd265c3de106b9cf5d720ad20138d57669d74751b5f466c866f2d82cea39c146b100186c82b96725fd09faa88759b706ed6d8cee507d07eda35a66
   languageName: node
   linkType: hard
 
@@ -15179,7 +15400,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.12.0
     eslint: 8.12.0
     next: 12.1.4
     react: 18.0.0
@@ -15192,7 +15413,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.12.0
     eslint: 8.12.0
     eslint-config-next: 12.1.4
     next: 12.1.4
@@ -27542,17 +27763,17 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rtlcss@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "rtlcss@npm:3.5.0"
+"rtlcss@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "rtlcss@npm:4.0.0"
   dependencies:
-    find-up: ^5.0.0
+    escalade: ^3.1.1
     picocolors: ^1.0.0
-    postcss: ^8.3.11
+    postcss: ^8.4.6
     strip-json-comments: ^3.1.1
   bin:
     rtlcss: bin/rtlcss.js
-  checksum: a3763cad2cb58ce1b950de155097c3c294e7aefc8bf328b58d0cc8d5efb88bf800865edc158a78ace6d1f7f99fea6fd66fb4a354d859b172dadd3dab3e0027b3
+  checksum: cd8fe728489cc8a066a58ea518ac2089c245dede9bda376c1b33ae0c119fa9dbdb6808eee27697ecad3bfed8f338d10bfeb42c1efa60c262a9def0246233484c
   languageName: node
   linkType: hard
 
@@ -31652,7 +31873,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.12.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -32716,7 +32937,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.12.0
     "@octokit/core": ^4.0.0
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^4.0.0

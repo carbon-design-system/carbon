@@ -149,7 +149,7 @@ export default class Slider extends PureComponent {
     required: PropTypes.bool,
 
     /**
-     * A value determining how much the value should increase/decrease by moving the thumb by mouse.
+     * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside of the `step` increment will be considered invalid.
      */
     step: PropTypes.number,
 
