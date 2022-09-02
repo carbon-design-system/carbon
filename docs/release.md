@@ -370,5 +370,5 @@ git checkout vX.Y.X
 
 2. Run the same commands in order from the `Release.yml` workflow.
 
-3. On sucess, manually create a GitHub release associated with the proper tag,
+3. On success, manually create a GitHub release associated with the proper tag,
    and include the generated changelog.
