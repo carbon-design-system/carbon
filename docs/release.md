@@ -184,11 +184,38 @@ Friday of a sprint. To make the switch, you will need to:
 
 `./packages/cli/bin/carbon-cli.js changelog v11.5.0..v11.6.0`
 
+- [ ] Uncheck "this is a prerelease" on the Release
+
 - [ ] Post the release announcement in slack
   - [ ] #carbon-announcements
   - [ ] #carbon-components
   - [ ] #carbon-design-system
   - [ ] #carbon-react
+
+<details>
+  <summary>Click to view slack announcement template</summary>
+
+```
+:carbon10: :carbon10: :carbon10:
+
+Hi all! :wave: We wanted to share the release notes for [v11.X.Y](https://github.com/carbon-design-system/carbon/releases/tag/v11.X.Y) 🚀
+
+This release includes the following updates that you and your team can use today:
+
+* item
+* item
+* item
+* ... and a number of additional bugs squashed! 🐛
+
+If you want to stay up to date with our release schedule, check out our [Release Radar wiki page](https://github.com/carbon-design-system/carbon/wiki/Release-radar).
+
+If there are any issues that come up while using this release, please reach out on GitHub or Slack to let us know!
+
+Thanks :tada:
+— The Carbon team :carbon10:
+```
+
+</details>
 
 ### Post release
 
