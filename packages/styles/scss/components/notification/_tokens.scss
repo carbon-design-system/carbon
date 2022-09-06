@@ -28,11 +28,11 @@ $notification-background-error: (
     ),
     (
       theme: themes.$g90,
-      value: theme.$layer,
+      value: colors.$gray-80,
     ),
     (
       theme: themes.$g100,
-      value: theme.$layer,
+      value: colors.$gray-90,
     ),
   ),
 ) !default;
@@ -50,11 +50,11 @@ $notification-background-success: (
     ),
     (
       theme: themes.$g90,
-      value: theme.$layer,
+      value: colors.$gray-80,
     ),
     (
       theme: themes.$g100,
-      value: theme.$layer,
+      value: colors.$gray-90,
     ),
   ),
 ) !default;
@@ -72,11 +72,11 @@ $notification-background-info: (
     ),
     (
       theme: themes.$g90,
-      value: theme.$layer,
+      value: colors.$gray-80,
     ),
     (
       theme: themes.$g100,
-      value: theme.$layer,
+      value: colors.$gray-90,
     ),
   ),
 ) !default;
@@ -94,11 +94,11 @@ $notification-background-warning: (
     ),
     (
       theme: themes.$g90,
-      value: theme.$layer,
+      value: colors.$gray-80,
     ),
     (
       theme: themes.$g100,
-      value: theme.$layer,
+      value: colors.$gray-90,
     ),
   ),
 ) !default;

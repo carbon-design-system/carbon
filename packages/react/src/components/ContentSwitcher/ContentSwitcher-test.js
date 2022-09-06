@@ -5,219 +5,134 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 import ContentSwitcher from './ContentSwitcher';
 import Switch from '../Switch';
-import { mount, shallow } from 'enzyme';
 
-describe('ContentSwitcher', () => {
-  describe('component initial rendering', () => {
-    const wrapper = shallow(
-      <ContentSwitcher onChange={() => {}} className="extra-class">
-        <Switch kind="anchor" text="one" />
-        <Switch kind="anchor" text="two" />
-      </ContentSwitcher>
-    );
-
-    const children = wrapper.find(Switch);
-
-    it('should render children as expected', () => {
-      expect(children.length).toEqual(2);
-    });
-
-    it('should default "selected" property to true on first child', () => {
-      expect(children.first().props().selected).toEqual(true);
-      expect(children.last().props().selected).toEqual(false);
-    });
-
-    it('should apply extra classes passed to it', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
-    });
-
-    it('should not have a selectionMode prop', () => {
-      expect('selectionMode' in wrapper.props()).toEqual(false);
-    });
-  });
-
-  describe('Allow initial state to draw from props', () => {
-    const onChange = jest.fn();
-    const mockData = {
-      index: 0,
-    };
-
-    const wrapper = mount(
-      <ContentSwitcher
-        selectedIndex={1}
-        onChange={onChange}
-        className="extra-class">
-        <Switch kind="anchor" text="one" />
-        <Switch kind="anchor" text="two" />
-      </ContentSwitcher>
-    );
-
-    const children = wrapper.find(Switch);
-
-    it('Should apply the selected property on the selected child', () => {
-      expect(children.first().props().selected).toEqual(false);
-      expect(children.last().props().selected).toEqual(true);
-    });
-
-    it('should avoid change the selected index upon setting props, unless there the value actually changes', () => {
-      wrapper.setProps({ selectedIndex: 1 });
-      // Turns `state.selectedIndex` to `0`
-      children.first().props().onClick(mockData);
-      wrapper.setProps({ selectedIndex: 1 }); // No change in `selectedIndex` prop
-      const clonedChildren = wrapper.find(Switch);
-      expect(clonedChildren.first().props().selected).toEqual(true);
-      expect(clonedChildren.last().props().selected).toEqual(false);
-    });
-
-    it('should change the selected index upon change in props', () => {
-      wrapper.setProps({ selectedIndex: 0 });
-      children.first().props().onClick(mockData);
-      wrapper.setProps({ selectedIndex: 1 });
-      const clonedChildren = wrapper.find(Switch);
-      expect(clonedChildren.first().props().selected).toEqual(false);
-      expect(clonedChildren.last().props().selected).toEqual(true);
-    });
-  });
-
-  describe('when child component onClick is invoked', () => {
-    const onChange = jest.fn();
-    const mockData = {
-      index: 1,
-    };
-
-    const wrapper = mount(
-      <ContentSwitcher onChange={onChange}>
-        <Switch kind="anchor" text="one" />
-        <Switch kind="anchor" text="two" />
-      </ContentSwitcher>
-    );
-
-    const children = wrapper.find(Switch);
-
-    children.first().props().onClick(mockData);
-
-    it('should invoke onChange', () => {
-      expect(onChange).toHaveBeenCalledWith(mockData);
-    });
-
-    it('should set the correct selectedIndex', () => {
-      expect(wrapper.state('selectedIndex')).toEqual(mockData.index);
-    });
-
-    it('should set selected to true on the correct child', () => {
-      wrapper.update();
-      const firstChild = wrapper.find(Switch).first();
-      const secondChild = wrapper.find(Switch).last();
-      expect(firstChild.props().selected).toEqual(false);
-      expect(secondChild.props().selected).toEqual(true);
-    });
-  });
-
-  describe('when child component onKeyDown is invoked', () => {
-    const onChange = jest.fn();
-    const mockData = {
-      index: 1,
-    };
-
-    const wrapper = mount(
-      <ContentSwitcher onChange={onChange}>
-        <Switch kind="anchor" text="one" />
-        <Switch kind="anchor" text="two" />
-      </ContentSwitcher>
-    );
-
-    const children = wrapper.find(Switch);
-
-    children.first().props().onKeyDown(mockData);
-
-    it('should invoke onChange', () => {
-      expect(onChange).toHaveBeenCalledWith(mockData);
-    });
-
-    it('should set the correct selectedIndex', () => {
-      expect(wrapper.state('selectedIndex')).toEqual(mockData.index);
-    });
-
-    it('should set selected to true on the correct child', () => {
-      wrapper.update();
-      const firstChild = wrapper.find(Switch).first();
-      const secondChild = wrapper.find(Switch).last();
-      expect(firstChild.props().selected).toEqual(false);
-      expect(secondChild.props().selected).toEqual(true);
-    });
-  });
-
-  describe('onChange', () => {
-    it('should call `onChange` with the newly selected switch data when using a keyboard', () => {
-      const onChange = jest.fn();
-      const wrapper = mount(
-        <ContentSwitcher onChange={onChange}>
-          <Switch name="first" text="first" />
-          <Switch name="second" text="second" />
-          <Switch name="third" text="third" />
+describe('ContentSwitcher - RTL', () => {
+  describe('renders API as expected', () => {
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <ContentSwitcher onChange={() => {}} className="custom-class">
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
         </ContentSwitcher>
       );
 
-      wrapper.find({ name: 'first' }).simulate('keydown', {
-        key: 'ArrowRight',
-      });
-      expect(onChange).toHaveBeenCalledTimes(1);
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should spread extra props on the outermost element', () => {
+      const { container } = render(
+        <ContentSwitcher onChange={() => {}} data-testid="test-id">
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
+    });
+
+    it('should render with first item selected by default', () => {
+      render(
+        <ContentSwitcher onChange={() => {}}>
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      expect(screen.getAllByRole('tab')[0]).toHaveAttribute('tabindex', '0');
+      expect(screen.getAllByRole('tab')[0]).toHaveClass(
+        'cds--content-switcher--selected'
+      );
+    });
+
+    it('should call onChange when selected item changes through mouse click', () => {
+      const onChange = jest.fn();
+      render(
+        <ContentSwitcher onChange={onChange} data-testid="test-id">
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      userEvent.click(screen.getByText('Second section'));
+
+      expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenLastCalledWith({
         index: 1,
-        name: 'second',
-        text: 'second',
-        key: 'ArrowRight',
+        name: 'two',
+        text: 'Second section',
       });
+    });
 
-      wrapper.find({ name: 'second' }).simulate('keydown', {
-        key: 'ArrowRight',
-      });
+    it('should call onChange when selected item changes through keydown', () => {
+      const onChange = jest.fn();
+      render(
+        <ContentSwitcher onChange={onChange} data-testid="test-id">
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      userEvent.type(screen.getByText('First section'), '{arrowright}');
+
+      expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenLastCalledWith({
-        index: 2,
-        name: 'third',
-        text: 'third',
+        index: 1,
         key: 'ArrowRight',
+        name: 'two',
+        text: 'Second section',
       });
 
-      wrapper.find({ name: 'third' }).simulate('keydown', {
-        key: 'ArrowRight',
-      });
+      userEvent.type(screen.getByText('Second section'), '{arrowleft}');
+
+      expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenLastCalledWith({
         index: 0,
-        name: 'first',
-        text: 'first',
-        key: 'ArrowRight',
+        key: 'ArrowLeft',
+        name: 'one',
+        text: 'First section',
       });
     });
 
-    it('should call `onChange` with the newly selected switch data when using a mouse', () => {
-      const onChange = jest.fn();
-      const wrapper = mount(
-        <ContentSwitcher onChange={onChange}>
-          <Switch name="first" text="first" />
-          <Switch name="second" text="second" />
-          <Switch name="third" text="third" />
+    it('should selected initally selected index based on prop', () => {
+      render(
+        <ContentSwitcher
+          onChange={() => {}}
+          data-testid="test-id"
+          selectedIndex={2}>
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
         </ContentSwitcher>
       );
 
-      wrapper.find({ name: 'second' }).simulate('click');
-      expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveBeenLastCalledWith({
-        index: 1,
-        name: 'second',
-        text: 'second',
-      });
+      expect(screen.getAllByRole('tab')[2]).toHaveAttribute('tabindex', '0');
+      expect(screen.getAllByRole('tab')[2]).toHaveClass(
+        'cds--content-switcher--selected'
+      );
+    });
 
-      wrapper.find({ name: 'third' }).simulate('click');
-      expect(onChange).toHaveBeenLastCalledWith({
-        index: 2,
-        name: 'third',
-        text: 'third',
-      });
+    it('should change sizes based on prop', () => {
+      render(
+        <ContentSwitcher onChange={() => {}} data-testid="test-id" size="lg">
+          <Switch name="one" text="First section" />
+          <Switch name="two" text="Second section" />
+          <Switch name="three" text="Third section" />
+        </ContentSwitcher>
+      );
+
+      expect(screen.getByRole('tablist')).toHaveClass(
+        'cds--content-switcher--lg'
+      );
     });
   });
 

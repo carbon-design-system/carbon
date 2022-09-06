@@ -77,15 +77,32 @@ release team will need to do the following:
 ![Screenshot of the version workflow with a way to manually trigger the action](https://user-images.githubusercontent.com/3901764/169147024-32b18e39-ab9a-4048-a3f6-75d4ab94d37e.png)
 
 - [ ] Specify `preminor` as the release type
+  - If [releasing another prerelease](#releasing-another-prerelease), specify
+    `prerelease` as the release type
 - [ ] Provide the tag for the release. For example, if the previous release was
-      `v11.1.0` this tag would be `v11.2.0-rc.0`
+      `v11.1.0` this tag would be `v11.2.0-rc.0`. To find the previous release,
+      view the [tag list](https://github.com/carbon-design-system/carbon/tags).
 - [ ] Review and approve the Pull Request generated from this action
-- [ ] When the Pull Request is merged, pull down the latest code from
-      `upstream`, tag it, and push it to `upstream`
+- [ ] 🛑 Wait for the Pull Request to be merged
+- [ ] Once merged, pull down the latest code from `upstream`
 
 ```bash
 git checkout main
 git pull upstream main
+```
+
+- [ ] Run `git log` to view the most recent commits
+- [ ] Validate the most recent commit is the release commit from the PR. If it
+      is not, ensure the PR has been merged and try pulling again.
+
+```
+chore(release): v11.2.0-rc.0
+```
+
+- [ ] Exit the log by pressing <kbd>q</kbd>
+- [ ] Tag the release commit, and push it to `upstream`
+
+```bash
 git tag -a v11.2.0-rc.0 -m 'v11.2.0-rc.0'
 git push upstream v11.2.0-rc.0
 ```
@@ -95,6 +112,14 @@ git push upstream v11.2.0-rc.0
 - [ ] Review and approve the Pull Request generated from this action on the
       [Carbon Website](https://github.com/carbon-design-system/carbon-website)
       to verify no breaking changes have occurred in this release
+
+#### Releasing another prerelease
+
+After a prerelease has been published, additional prereleases can be published.
+eg. `v11.12.0-rc.0` -> `v11.12.0-rc.1`
+
+To do so, follow the above steps for [Prerelease](#prerelease) but specify
+`prerelease` as the release type instead of `preminor`.
 
 ### Stable release
 
@@ -108,14 +133,30 @@ following:
       to automatically generate the prerelease versions for packages
   - [ ] Specify `minor` as the release type
   - [ ] Provide the tag for the release. For example, if the previous release
-        was `v11.1.0-rc.0` this tag would be `v11.2.0`
+        was `v11.1.0-rc.0` this tag would be `v11.2.0`. To find the previous
+        release, view the
+        [tag list](https://github.com/carbon-design-system/carbon/tags).
 - [ ] Review and approve the Pull Request generated from this action
-- [ ] When the Pull Request is merged, pull down the latest code from
-      `upstream`, tag it, and push it to `upstream`
+- [ ] 🛑 Wait for the Pull Request to be merged
+- [ ] Once merged, pull down the latest code from `upstream`
 
 ```bash
 git checkout main
 git pull upstream main
+```
+
+- [ ] Run `git log` to view the most recent commits
+- [ ] Validate the most recent commit is the release commit from the PR. If it
+      is not, ensure the PR has been merged and try pulling again.
+
+```
+chore(release): v11.10.0
+```
+
+- [ ] Exit the log by pressing <kbd>q</kbd>
+- [ ] Tag the release commit, and push it to `upstream`
+
+```bash
 git tag -a v11.2.0 -m 'v11.2.0'
 git push upstream v11.2.0
 ```
@@ -143,11 +184,38 @@ Friday of a sprint. To make the switch, you will need to:
 
 `./packages/cli/bin/carbon-cli.js changelog v11.5.0..v11.6.0`
 
+- [ ] Uncheck "this is a prerelease" on the Release
+
 - [ ] Post the release announcement in slack
   - [ ] #carbon-announcements
   - [ ] #carbon-components
   - [ ] #carbon-design-system
   - [ ] #carbon-react
+
+<details>
+  <summary>Click to view slack announcement template</summary>
+
+```
+:carbon10: :carbon10: :carbon10:
+
+Hi all! :wave: We wanted to share the release notes for [v11.X.Y](https://github.com/carbon-design-system/carbon/releases/tag/v11.X.Y) 🚀
+
+This release includes the following updates that you and your team can use today:
+
+* item
+* item
+* item
+* ... and a number of additional bugs squashed! 🐛
+
+If you want to stay up to date with our release schedule, check out our [Release Radar wiki page](https://github.com/carbon-design-system/carbon/wiki/Release-radar).
+
+If there are any issues that come up while using this release, please reach out on GitHub or Slack to let us know!
+
+Thanks :tada:
+— The Carbon team :carbon10:
+```
+
+</details>
 
 ### Post release
 
@@ -168,7 +236,7 @@ categories:
   has been identified is not able to be quickly remediated or the timeline is
   unknown
 
-## Previous releases
+## Previous releases (v10)
 
 We currently support the current and previous major version of the Design
 System. While the current major version will receive features and bug fixes, the
@@ -198,8 +266,136 @@ include in the release.
 
 ### Releasing the previous major version
 
-You can use the [prerelease](#prerelease) and [stable release](#stablerelease)
-steps above to release the previous major version of the Design System. The only
-significant difference will occur when you run a workflow for versioning or
-releasing. In these situations, you will need to select the correct tag to the
-run the workflow from instead of using the default `main`.
+- [ ] Go to your local version of the monorepo
+- [ ] Checkout v10 `git checkout v10`
+- [ ] Run `git pull upstream v10 --tags`
+- [ ] Create a new release branch from main with the intended version to be
+      released. To find the previous release, view the
+      [tag list](https://github.com/carbon-design-system/carbon/tags).
+  - [ ] `git checkout -b release/vX.Y.Z`
+- [ ] Run `yarn install`
+- [ ] Ensure your working directory is clean via `git status`,
+- [ ] Run the following `lerna` command to version packages that have changed
+      since the last version
+
+```bash
+yarn lerna version patch \
+  --no-push \
+  --no-git-tag-version
+```
+
+- Double-check the version bumps to make sure they match what you're expecting.
+  As a patch, they should:
+  - NOT include a breaking change (e.g. it should not be v10.14.0 → v11.0.0)
+  - NOT include a minor change (e.g. it should not be v10.59.1 -> v10.60.0)
+- Hit `y` to confirm changes
+- [ ] For a quick sound check, run `yarn install --immutable --immutable-cache`
+      to make sure all the versions have been correctly bumped
+  - Note: sometimes you will need to update the root `package.json` file
+    manually
+- [ ] Run `yarn install`
+- [ ] Commit the changes to the `package.json` files by running:
+
+```bash
+git add -A
+git commit -m 'chore(release): vX.Y.Z'
+git push --set-upstream origin release/vX.Y.Z
+```
+
+- [ ] Make a Pull Request with your branch
+  - [ ] Set the `base` branch of the PR to be `v10`
+  - [ ] Title of PR: chore(release): vX.Y.Z
+  - [ ] Description: Release PR for vX.Y.Z
+- [ ] 🛑 Wait for the Pull Request to be merged
+- [ ] Once merged, pull down the latest code from `upstream`
+
+```bash
+git checkout v10
+git pull upstream v10
+```
+
+- [ ] Run `git log` to view the most recent commits
+- [ ] Validate the most recent commit is the release commit from the PR. If it
+      is not, ensure the PR has been merged and try pulling again.
+
+```
+chore(release): v10.59.1
+```
+
+- [ ] Exit the log by pressing <kbd>q</kbd>
+- [ ] Tag the release commit, and push it to `upstream`
+  - [ ] Make sure you're setting the correct tag version number. To find the
+        previous release, view the
+        [tag list](https://github.com/carbon-design-system/carbon/tags).
+
+```bash
+git tag -a vX.Y.Z -m 'vX.Y.Z'
+git push upstream vX.Y.Z
+```
+
+- [ ] Verify that your push triggered a release action
+  - [https://github.com/carbon-design-system/carbon/actions?query=workflow%3ARelease](https://github.com/carbon-design-system/carbon/actions?query=workflow%3ARelease)
+- [ ] Verify that the action succeeded and the Release was published under the
+      `v10-next` tag on npm
+- [ ] Generate the changelog by running the following command from the root of
+      the monorepo
+
+```bash
+./packages/cli/bin/carbon-cli.js changelog vA.B.C..vX.Y.Z
+```
+
+## Troubleshooting
+
+### The Version workflow succeeded, but the PR was not created
+
+Look through the logs - Lerna probably didn't detect any changes that need
+published. This can happen if there is nothing new in `main` since the most
+recent tag was published. Merging a PR and running the workflow again (don't
+re-run the previous one) should fix this.
+
+### Something failed in the Version workflow
+
+If the Version workflow fails for some reason and you can't determine the cause,
+you can always run the same commands from the workflow file in your local dev
+environment as long as you have push access to the repo.
+
+1. On a clean working directory, pull down the latest from `main` and create a
+   `release/vX.Y.Z` branch:
+
+```bash
+git checkout main
+git pull upstream main
+git checkout -b `release/vX.Y.Z`
+yarn install
+yarn build
+```
+
+2. Then run the rest of the commands specified in the `Version.yml` workflow.
+   `yarn build`, `yarn lerna ...`, `yarn install`, etc.
+
+3. Commit and push up the changes to a PR and you're at the same step in the
+   process as if the Version workflow had succeeded.
+
+```bash
+git add .
+git commit -m "chore(release): vX.Y.Z"
+git push
+```
+
+### Something failed in the Release workflow
+
+If the Version workflow fails for some reason and you can't determine the cause,
+you can always run the same commands from the workflow file in your local dev
+environment as long as you have push access to the repo and publishing access in
+npm.
+
+1. Pull down the tag locally:
+
+```bash
+git checkout vX.Y.X
+```
+
+2. Run the same commands in order from the `Release.yml` workflow.
+
+3. On success, manually create a GitHub release associated with the proper tag,
+   and include the generated changelog.
