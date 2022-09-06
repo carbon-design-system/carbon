@@ -23,7 +23,6 @@ import {
   StructuredListCell,
   Stack,
 } from '@carbon/react';
-// import { Switcher } from '@carbon/icons-react';
 import Head from 'next/head';
 import styles from '../scss/Home.module.css';
 
