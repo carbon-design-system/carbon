@@ -1,0 +1,62 @@
+<svg width="320" height="180" viewBox="0 0 320 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="60" y="41" width="200" height="109" fill="white"/>
+<rect x="60.5" y="41.5" width="199" height="109" fill="#F4F4F4" stroke="#C6C6C6"/>
+<rect x="60" y="29" width="200" height="13" fill="#171717"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M60 42H260V72V91H60V42Z" fill="#171717"/>
+<rect x="70" y="51" width="60" height="4" fill="#F4F4F4"/>
+<rect x="70" y="59" width="60" height="4" fill="#F4F4F4"/>
+<rect x="70" y="67" width="39" height="4" fill="#F4F4F4"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M66 98H127V124.327V141H66V98Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M66 146H127V148.449V150H66V146Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M114 98H157V124.327V141H114V98Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M114 146H157V148.449V150H114V146Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M162 98H205V124.327V141H162V98Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M162 146H205V148.449V150H162V146Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M210 98H253V124.327V141H210V98Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M210 146H253V148.449V150H210V146Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M60 42H260V42.6122V43H60V42Z" fill="#6F6F6F"/>
+<rect x="67" y="34.5" width="22" height="3" fill="#C6C6C6"/>
+<rect x="239" y="33" width="5" height="5" fill="#C6C6C6"/>
+<rect x="249" y="33" width="5" height="5" fill="#F4F4F4"/>
+<rect x="200.275" y="48.275" width="54.45" height="23.45" fill="#EDF5FF" stroke="#0043CE" stroke-width="0.55"/>
+<ellipse cx="207.778" cy="55.2558" rx="2.43056" ry="2.44186" fill="#0F62FE"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M207.778 54.2093C207.922 54.2093 208.038 54.0922 208.038 53.9477C208.038 53.8032 207.922 53.686 207.778 53.686C207.634 53.686 207.517 53.8032 207.517 53.9477C207.517 54.0922 207.634 54.2093 207.778 54.2093ZM207.087 56.6738H208.476V56.2814H207.978V55.1041V54.907V54.7116H207.261V55.1041H207.587V56.2814H207.087V56.6738Z" fill="white"/>
+<mask id="mask0_0_3782" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="207" y="53" width="2" height="4">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M207.778 54.2093C207.922 54.2093 208.038 54.0922 208.038 53.9477C208.038 53.8032 207.922 53.686 207.778 53.686C207.634 53.686 207.517 53.8032 207.517 53.9477C207.517 54.0922 207.634 54.2093 207.778 54.2093ZM207.087 56.6738H208.476V56.2814H207.978V55.1041V54.907V54.7116H207.261V55.1041H207.587V56.2814H207.087V56.6738Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_0_3782)">
+</g>
+<rect x="200" y="48" width="1.11111" height="23.4419" fill="#0043CE"/>
+<g style="mix-blend-mode:multiply">
+<rect x="213.889" y="54.1395" width="19.4444" height="2.23256" fill="#A8A8A8"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<rect x="213.889" y="58.0465" width="33.8889" height="2.23256" fill="#C6C6C6"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<rect x="213.889" y="61.9535" width="28.8889" height="2.23256" fill="#C6C6C6"/>
+</g>
+<rect x="200.275" y="74.275" width="54.45" height="23.45" fill="#FFF1F1" stroke="#FFB3B8" stroke-width="0.55"/>
+<ellipse cx="207.778" cy="81.2558" rx="2.43056" ry="2.44186" fill="#D12771"/>
+<mask id="mask1_0_3782" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="205" y="78" width="6" height="6">
+<ellipse cx="207.778" cy="81.2558" rx="2.43056" ry="2.44186" fill="white"/>
+</mask>
+<g mask="url(#mask1_0_3782)">
+</g>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M206.562 80.311L206.839 80.0335L208.993 82.198L208.717 82.4755L206.562 80.311Z" fill="white"/>
+<mask id="mask2_0_3782" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="206" y="80" width="3" height="3">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M206.562 80.311L206.839 80.0335L208.993 82.198L208.717 82.4755L206.562 80.311Z" fill="white"/>
+</mask>
+<g mask="url(#mask2_0_3782)">
+</g>
+<rect x="200" y="74" width="1.11111" height="23.4419" fill="#D12771"/>
+<g style="mix-blend-mode:multiply">
+<rect x="213.889" y="80.1395" width="19.4444" height="2.23256" fill="#A8A8A8"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<rect x="213.889" y="84.0465" width="33.8889" height="2.23256" fill="#C6C6C6"/>
+</g>
+<g style="mix-blend-mode:multiply">
+<rect x="213.889" y="87.9535" width="28.8889" height="2.23256" fill="#C6C6C6"/>
+</g>
+</svg>
