@@ -8,6 +8,7 @@
 @use 'mixins' as *;
 @use 'vars' as *;
 @use '../../config' as *;
+@use '../../breakpoint' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -52,6 +53,14 @@
     @include type-style('body-compact-01');
 
     color: $text-secondary;
+
+    @include breakpoint(md) {
+      max-width: 50ch;
+    }
+
+    @include breakpoint(lg) {
+      max-width: 80ch;
+    }
   }
 
   //----------------------------------------------------------------------------

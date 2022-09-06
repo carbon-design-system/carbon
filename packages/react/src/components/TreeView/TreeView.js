@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
-import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
 
 export default function TreeView({
@@ -19,10 +18,10 @@ export default function TreeView({
   className,
   hideLabel = false,
   label,
-  multiselect,
+  multiselect = false,
   onSelect,
   selected: preselected = [],
-  size = FeatureFlags.enabled('enable-v11-release') ? 'sm' : 'default',
+  size = 'sm',
   ...rest
 }) {
   const { current: treeId } = useRef(rest.id || uniqueId());
@@ -249,7 +248,7 @@ TreeView.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * Specify the selection mode of the tree.
+   * **[Experimental]** Specify the selection mode of the tree.
    * If `multiselect` is `false` then only one node can be selected at a time
    */
   multiselect: PropTypes.bool,
@@ -269,7 +268,5 @@ TreeView.propTypes = {
   /**
    * Specify the size of the tree from a list of available sizes.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['xs', 'sm'])
-    : PropTypes.oneOf(['default', 'compact']),
+  size: PropTypes.oneOf(['xs', 'sm']),
 };

@@ -351,7 +351,7 @@ Menu.propTypes = {
   /**
    * Optionally pass an element the Menu should be appended to as a child. Defaults to document.body.
    */
-  target: PropTypes.element,
+  target: PropTypes.object,
 
   /**
    * Specify the x position where this menu is rendered

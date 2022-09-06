@@ -20,6 +20,7 @@
   appearance: none;
   background: none;
   cursor: pointer;
+  text-align: start;
 
   @if ($width == true) {
     width: 100%;

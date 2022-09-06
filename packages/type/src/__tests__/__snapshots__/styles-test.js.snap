@@ -109,7 +109,7 @@ letter-spacing: 0;"
 
 exports[`styles display04 should be printable 1`] = `
 "font-size: 2.625rem;
-font-weight: 600;
+font-weight: 300;
 line-height: 1.19;
 letter-spacing: 0;"
 `;
@@ -144,7 +144,7 @@ letter-spacing: 0;"
 
 exports[`styles expressiveHeading05 should be printable 1`] = `
 "font-size: 2rem;
-font-weight: 400;
+font-weight: 300;
 line-height: 1.25;
 letter-spacing: 0;"
 `;
@@ -186,7 +186,7 @@ letter-spacing: 0;"
 
 exports[`styles fluidDisplay04 should be printable 1`] = `
 "font-size: 2.625rem;
-font-weight: 600;
+font-weight: 300;
 line-height: 1.19;
 letter-spacing: 0;"
 `;
@@ -207,7 +207,7 @@ letter-spacing: 0;"
 
 exports[`styles fluidHeading05 should be printable 1`] = `
 "font-size: 2rem;
-font-weight: 400;
+font-weight: 300;
 line-height: 1.25;
 letter-spacing: 0;"
 `;
@@ -272,7 +272,7 @@ letter-spacing: 0;"
 
 exports[`styles heading05 should be printable 1`] = `
 "font-size: 2rem;
-font-weight: 400;
+font-weight: 300;
 line-height: 1.25;
 letter-spacing: 0;"
 `;
@@ -375,7 +375,7 @@ letter-spacing: 0;"
 
 exports[`styles productiveHeading05 should be printable 1`] = `
 "font-size: 2rem;
-font-weight: 400;
+font-weight: 300;
 line-height: 1.25;
 letter-spacing: 0;"
 `;
