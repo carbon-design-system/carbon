@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { InlineNotification } from '../../Notification';
-import { Theme } from '../../Theme';
 import { action } from '@storybook/addon-actions';
 import mdx from '../Notification.mdx';
 
@@ -36,30 +35,6 @@ export const Default = () => (
     title="Notification title"
     subtitle="Subtitle text goes here"
   />
-);
-
-export const LowContrastDarkTest = () => (
-  // <div className="cds--g100" style={{ padding: '2rem' }}>
-  <>
-    <Theme theme="g90" style={{ padding: '2rem' }}>
-      <InlineNotification
-        kind="warning"
-        lowContrast
-        title="Notification title"
-        subtitle="Subtitle text goes here"
-      />
-    </Theme>
-
-    <Theme theme="g100" style={{ padding: '2rem' }}>
-      <InlineNotification
-        kind="warning"
-        lowContrast
-        title="Notification title"
-        subtitle="Subtitle text goes here"
-      />
-    </Theme>
-  </>
-  // </div>
 );
 
 export const Playground = (args) => <InlineNotification {...args} />;

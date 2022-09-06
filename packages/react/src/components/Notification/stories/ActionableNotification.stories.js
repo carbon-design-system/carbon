@@ -7,7 +7,6 @@
 
 import React from 'react';
 import { ActionableNotification } from '../../Notification';
-import { Theme } from '../../Theme';
 import { action } from '@storybook/addon-actions';
 import mdx from '../Notification.mdx';
 
@@ -32,16 +31,13 @@ export default {
 };
 
 export const Default = () => (
-  <Theme theme="g100">
-    <ActionableNotification
-      lowContrast
-      title="Notification title"
-      subtitle="Subtitle text goes here"
-      closeOnEscape
-      inline={false}
-      actionButtonLabel="Action"
-    />
-  </Theme>
+  <ActionableNotification
+    title="Notification title"
+    subtitle="Subtitle text goes here"
+    closeOnEscape
+    inline={false}
+    actionButtonLabel="Action"
+  />
 );
 
 export const Playground = (args) => <ActionableNotification {...args} />;
