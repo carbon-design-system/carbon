@@ -1,28 +1,21 @@
-import * as CarbonType from '@carbon/type';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { paramCase } from 'change-case';
+import {useState} from "react";
+import * as CarbonType from "@carbon/type";
+import { paramCase } from "change-case";
 
-function render(element) {
-  ReactDOM.render(element, document.getElementById('root'));
-}
-
-render(<App />);
-
-function App() {
+export default function IndexPage() {
   return (
-    <React.Fragment>
+    <>
       <TableOfContents />
       <FontFaces />
       <TypeStyles />
       <TypeScale />
-    </React.Fragment>
+    </>
   );
 }
 
 function TableOfContents() {
   return (
-    <React.Fragment>
+    <>
       <h2>Table of contents</h2>
       <ul>
         <li>
@@ -35,7 +28,7 @@ function TableOfContents() {
           <a href="#type-scale">Type scale</a>
         </li>
       </ul>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -57,19 +50,19 @@ function FontFaces() {
         <tbody>
           <tr>
             <td>Light</td>
-            <td className="bx--type-sans bx--type-light">Light</td>
+            <td className="cds--type-sans cds--type-light">Light</td>
           </tr>
           <tr>
             <td>Regular</td>
-            <td className="bx--type-sans">Regular</td>
+            <td className="cds--type-sans">Regular</td>
           </tr>
           <tr>
             <td>Regular Italic</td>
-            <td className="bx--type-sans bx--type-italic">Regular</td>
+            <td className="cds--type-sans cds--type-italic">Regular</td>
           </tr>
           <tr>
             <td>Semibold</td>
-            <td className="bx--type-sans bx--type-semibold">Semibold</td>
+            <td className="cds--type-sans cds--type-semibold">Semibold</td>
           </tr>
         </tbody>
       </table>
@@ -84,19 +77,21 @@ function FontFaces() {
         <tbody>
           <tr>
             <td>Light</td>
-            <td className="bx--type-sans-condensed bx--type-light">Light</td>
+            <td className="cds--type-sans-condensed cds--type-light">Light</td>
           </tr>
           <tr>
             <td>Regular</td>
-            <td className="bx--type-sans-condensed">Regular</td>
+            <td className="cds--type-sans-condensed">Regular</td>
           </tr>
           <tr>
             <td>Regular Italic</td>
-            <td className="bx--type-sans-condensed bx--type-italic">Regular</td>
+            <td className="cds--type-sans-condensed cds--type-italic">
+              Regular
+            </td>
           </tr>
           <tr>
             <td>Semibold</td>
-            <td className="bx--type-sans-condensed bx--type-semibold">
+            <td className="cds--type-sans-condensed cds--type-semibold">
               Semibold
             </td>
           </tr>
@@ -113,15 +108,15 @@ function FontFaces() {
         <tbody>
           <tr>
             <td>Light</td>
-            <td className="bx--type-serif bx--type-light">Light</td>
+            <td className="cds--type-serif cds--type-light">Light</td>
           </tr>
           <tr>
             <td>Regular</td>
-            <td className="bx--type-serif">Regular</td>
+            <td className="cds--type-serif">Regular</td>
           </tr>
           <tr>
             <td>Semibold</td>
-            <td className="bx--type-serif bx--type-semibold">Semibold</td>
+            <td className="cds--type-serif cds--type-semibold">Semibold</td>
           </tr>
         </tbody>
       </table>
@@ -136,15 +131,15 @@ function FontFaces() {
         <tbody>
           <tr>
             <td>Light</td>
-            <td className="bx--type-mono bx--type-light">Light</td>
+            <td className="cds--type-mono cds--type-light">Light</td>
           </tr>
           <tr>
             <td>Regular</td>
-            <td className="bx--type-mono">Regular</td>
+            <td className="cds--type-mono">Regular</td>
           </tr>
           <tr>
             <td>Semibold</td>
-            <td className="bx--type-mono bx--type-semibold">Semibold</td>
+            <td className="cds--type-mono cds--type-semibold">Semibold</td>
           </tr>
         </tbody>
       </table>
@@ -186,35 +181,40 @@ function TypeScale() {
 function TypeStyles() {
   const fontFamilies = [
     {
-      title: 'Arabic',
-      fontFamily: 'IBM Plex Arabic',
-      sample: 'السادس',
-      dir: 'rtl',
+      title: "Arabic",
+      fontFamily: "IBM Plex Arabic",
+      sample: "السادس",
+      dir: "rtl",
     },
     {
-      title: 'Devanagari',
-      fontFamily: 'IBM Plex Devanagari',
-      sample: 'कारन प्रदान',
+      title: "Devanagari",
+      fontFamily: "IBM Plex Devanagari",
+      sample: "कारन प्रदान",
     },
     {
-      title: 'Hebrew',
-      fontFamily: 'IBM Plex Sans Hebrew',
-      sample: 'אחרים בהתייחסות',
-      dir: 'rtl',
+      title: "Hebrew",
+      fontFamily: "IBM Plex Sans Hebrew",
+      sample: "אחרים בהתייחסות",
+      dir: "rtl",
     },
     {
-      title: 'Thai',
-      fontFamily: 'IBM Plex Thai',
-      sample: 'บลูเบอร์รีแอคทีฟซู',
+      title: "Thai",
+      fontFamily: "IBM Plex Thai",
+      sample: "บลูเบอร์รีแอคทีฟซู",
     },
   ];
-
+ const [expandAll, setExpandAll] = useState(false);
   return (
     <article>
       <header>
         <h2 id="type-styles">Type styles</h2>
       </header>
       <p>Used for applying styles to a text element.</p>
+      <details onClick={() => setExpandAll(!expandAll)}>
+        <summary>
+          <small>Click to expand all token details</small>
+        </summary>
+      </details>
       <table>
         <thead>
           <tr>
@@ -223,10 +223,12 @@ function TypeStyles() {
             {fontFamilies.map(({ dir, title }) => (
               <th
                 key={title}
-                style={{ textAlign: dir === 'rtl' ? 'right' : 'left' }}>
+                style={{ textAlign: dir === "rtl" ? "right" : "left" }}
+              >
                 {title}
               </th>
             ))}
+            <th>Values</th>
           </tr>
         </thead>
         <tbody>
@@ -236,16 +238,29 @@ function TypeStyles() {
                 <pre>
                   <code>{formatTokenName(token)}</code>
                 </pre>
+                <details open={expandAll}>
+                  <summary>
+                    <small>Click to expand token details</small>
+                  </summary>
+                  <pre>
+                    <code>
+                      <small>
+                        {JSON.stringify(CarbonType.styles[token], null, 1)}
+                      </small>
+                    </code>
+                  </pre>
+                </details>
               </td>
-              <td className={`bx--type-${formatTokenName(token)}`}>
+              <td className={`cds--type-${formatTokenName(token)}`}>
                 <span>Text sample</span>
               </td>
               {fontFamilies.map(({ dir, fontFamily, title, sample }) => (
                 <td
                   key={title}
-                  className={`bx--type-${formatTokenName(token)}`}
+                  className={`cds--type-${formatTokenName(token)}`}
                   style={{ fontFamily }}
-                  dir={dir}>
+                  dir={dir}
+                >
                   <span>{sample}</span>
                 </td>
               ))}
@@ -258,5 +273,5 @@ function TypeStyles() {
 }
 
 function formatTokenName(token) {
-  return paramCase(token).replace(/(\d+)/g, '-$1');
+  return paramCase(token).replace(/(\d+)/g, "-$1");
 }
