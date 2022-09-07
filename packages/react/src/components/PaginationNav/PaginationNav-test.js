@@ -109,7 +109,5 @@ describe('PaginationNav', () => {
 
       expect(screen.getByText('4')).toHaveAttribute('aria-current', 'page');
     });
-
-    // Add tests for relevant component behavior. For more information, visit https://github.com/carbon-design-system/carbon/issues/10184#issuecomment-992978122
   });
 });
