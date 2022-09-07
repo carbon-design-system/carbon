@@ -29,7 +29,8 @@ function writeTestFile(props, componentName, isSubComponent) {
       prop === 'onBlur' ||
       prop === 'onMouseEnter' ||
       prop === 'onMouseLeave' ||
-      prop === 'onFocus'
+      prop === 'onFocus' ||
+      prop === 'onChange'
     ) {
       test = `it('should call ${prop} when expected', () => {
             const ${prop} = jest.fn();
