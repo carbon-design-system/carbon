@@ -1961,7 +1961,7 @@ Object {
         Object {
           "position": Position {
             "end": Object {
-              "column": 62,
+              "column": 66,
               "line": 182,
             },
             "source": undefined,
@@ -1972,7 +1972,7 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-productive-heading-06-font-size, 2rem)",
+          "value": "var(--cds-productive-heading-06-font-size, 2.625rem)",
         },
         Object {
           "position": Position {
@@ -2055,7 +2055,7 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-productive-heading-07-font-size, 2.625rem)",
+          "value": "var(--cds-productive-heading-07-font-size, 3.375rem)",
         },
         Object {
           "position": Position {
@@ -7617,7 +7617,7 @@ Object {
         Object {
           "position": Position {
             "end": Object {
-              "column": 51,
+              "column": 55,
               "line": 756,
             },
             "source": undefined,
@@ -7628,7 +7628,7 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-heading-06-font-size, 2rem)",
+          "value": "var(--cds-heading-06-font-size, 2.625rem)",
         },
         Object {
           "position": Position {
@@ -7711,7 +7711,7 @@ Object {
           },
           "property": "font-size",
           "type": "declaration",
-          "value": "var(--cds-heading-07-font-size, 2.625rem)",
+          "value": "var(--cds-heading-07-font-size, 3.375rem)",
         },
         Object {
           "position": Position {

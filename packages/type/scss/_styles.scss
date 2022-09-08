@@ -257,7 +257,7 @@ $heading-05: $productive-heading-05 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-06: (
-  font-size: scale.type-scale(8),
+  font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('light'),
   // Extra digit needed for precision in Chrome
   line-height: 1.199,
@@ -273,7 +273,7 @@ $heading-06: $productive-heading-06 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-07: (
-  font-size: scale.type-scale(10),
+  font-size: scale.type-scale(12),
   font-weight: font-family.font-weight('light'),
   line-height: 1.19,
   letter-spacing: 0,
