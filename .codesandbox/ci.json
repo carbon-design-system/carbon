@@ -2,7 +2,6 @@
   "node": "16",
   "buildCommand": "build",
   "packages": [
-    "./",
     "packages/carbon-components",
     "packages/carbon-components-react",
     "packages/cli",
