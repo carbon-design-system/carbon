@@ -126,7 +126,23 @@ Toggletip.propTypes = {
   /**
    * Specify how the toggletip should align with the button
    */
-  align: PropTypes.oneOf(['top', 'bottom', 'left', 'right']),
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+
+    'left',
+    'left-bottom',
+    'left-top',
+
+    'right',
+    'right-bottom',
+    'right-top',
+  ]),
 
   /**
    * Provide a custom element or component to render the top-level node for the
