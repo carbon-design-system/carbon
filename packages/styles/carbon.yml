@@ -3,7 +3,43 @@ library:
   id: carbon-styles
   name: Carbon Core
   description: Build user interfaces with Carbon's framework-agnostic asset documentation and styles.
-  externalDocsUrl: https://www.carbondesignsystem.com/
+  noIndex: true
+  externalDocsUrl: https://www.carbondesignsystem.com
+  designKits:
+    carbon-white-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-white-sketch
+    carbon-g10-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g10-sketch
+    carbon-g90-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g90-sketch
+    carbon-g100-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g100-sketch
+    carbon-shell-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-shell-sketch
+    carbon-white-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-white-adobe-xd
+    carbon-g10-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g10-adobe-xd
+    carbon-g90-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g90-adobe-xd
+    carbon-g100-adobe-xd:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-g100-adobe-xd
+    axure-widget-library:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/axure-widget-library
+    text-toolbar-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/text-toolbar-sketch
+    carbon-mid-fi-sketch:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-mid-fi-sketch
+    carbon-wireframe-invision-freehand:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/carbon-wireframe-invision-freehand
+    figma-v11-white-theme:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/figma-v11-white-theme
+    figma-v11-gray-10-theme:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/figma-v11-gray-10-theme
+    figma-v11-gray-90-theme:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/figma-v11-gray-90-theme
+    figma-v11-gray-100-theme:
+      $ref: https://unpkg.com/@carbon-platform/resources/carbon.yml#/designKits/figma-v11-gray-100-theme
 assets:
   accordion:
     name: Accordion

@@ -28,6 +28,16 @@ $label-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$label-02: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.28572,
+  letter-spacing: 0.16px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $legal-01: (
   font-size: scale.type-scale(1),
   font-weight: font-family.font-weight('regular'),
@@ -629,6 +639,7 @@ $fluid-display-04: $display-04 !default;
 /// @group @carbon/type
 $tokens: (
   label-01: $label-01,
+  label-02: $label-02,
   helper-text-01: $helper-text-01,
   helper-text-02: $helper-text-02,
   body-short-01: $body-short-01,
