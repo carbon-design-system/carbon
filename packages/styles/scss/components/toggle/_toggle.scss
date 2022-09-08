@@ -76,7 +76,7 @@
   .#{$prefix}--toggle__button:focus
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__switch,
-  .#{$prefix}--toggle__button:active
+  .#{$prefix}--toggle__button:not(:disabled):active
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__switch {
     box-shadow: 0 0 0 1px $focus-inset, 0 0 0 3px $focus;
@@ -153,7 +153,6 @@
     @include high-contrast-mode('outline');
   }
 
-  // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--toggle__button:focus
     + .#{$prefix}--toggle__label
     .#{$prefix}--toggle__switch,
