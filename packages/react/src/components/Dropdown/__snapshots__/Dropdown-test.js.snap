@@ -312,6 +312,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
+                tabIndex="-1"
               >
                 <div
                   className="bx--list-box__menu-item__option"
@@ -348,6 +349,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
+                tabIndex="-1"
               >
                 <div
                   className="bx--list-box__menu-item__option"
@@ -384,6 +386,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
+                tabIndex="-1"
               >
                 <div
                   className="bx--list-box__menu-item__option"
@@ -420,6 +423,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
+                tabIndex="-1"
               >
                 <div
                   className="bx--list-box__menu-item__option"
@@ -456,6 +460,7 @@ exports[`Dropdown should render custom item components 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
+                tabIndex="-1"
               >
                 <div
                   className="bx--list-box__menu-item__option"
@@ -621,6 +626,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
+                tabIndex="-1"
               >
                 <div
                   className="bx--list-box__menu-item__option"
@@ -646,6 +652,7 @@ exports[`Dropdown should render with strings as items 1`] = `
                 onClick={[Function]}
                 onMouseMove={[Function]}
                 role="option"
+                tabIndex="-1"
               >
                 <div
                   className="bx--list-box__menu-item__option"
