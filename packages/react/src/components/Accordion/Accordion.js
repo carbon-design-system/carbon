@@ -59,7 +59,7 @@ Accordion.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether an individual AccordionItem should be flush, default is false
+   * Specify whether Accordion text should be flush, default is false, does not work with align="start"
    */
   isFlush: PropTypes.bool,
 
