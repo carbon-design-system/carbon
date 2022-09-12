@@ -8,9 +8,9 @@
 import { CaretRight, CaretLeft } from '@carbon/icons-react';
 import { shallow, mount } from 'enzyme';
 import React from 'react';
-import Pagination from '../Pagination';
-import Select from '../../../Select';
-import SelectItem from '../../../SelectItem';
+import Pagination from '.';
+import Select from '../Select';
+import SelectItem from '../SelectItem';
 
 const prefix = 'cds';
 
