@@ -22,6 +22,12 @@
     background: $field;
   }
 
+  .#{$prefix}--modal
+    .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper {
+    background: $field-02;
+  }
+
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area__label-wrapper {
     position: relative;
     height: 100%;
@@ -114,6 +120,14 @@
     margin: 0;
     background: $field;
     color: $text-error;
+  }
+
+  .#{$prefix}--modal
+    .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area--invalid
+    + .#{$prefix}--text-area__divider
+    + .#{$prefix}--form-requirement {
+    background: $field-02;
   }
 
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area__invalid-icon {
