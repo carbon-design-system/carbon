@@ -114,14 +114,42 @@ describe('DatePicker', () => {
     expect(screen.getByLabelText('End date')).toBeInTheDocument();
   });
 
-  // eslint-disable-next-line
   it('should add the date format as expected', () => {
-    //how to test for date format? it's used for a flatpickr config but not a dom attribute or anything...
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        value="01/01/2022"
+        dateFormat="Y/m/d">
+        <DatePickerInput
+          id="date-picker-input-id"
+          placeholder="yyyy/mm/dd"
+          labelText="Date Picker label"
+        />
+      </DatePicker>
+    );
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '2022/01/01'
+    );
   });
 
-  // eslint-disable-next-line
   it('has the value as expected', () => {
-    //how to test for date value? it's used for a flatpickr config but not a dom attribute or anything...
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        value="01/03/2018">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-value"
+        />
+      </DatePicker>
+    );
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/03/2018'
+    );
   });
 });
 
@@ -227,69 +255,93 @@ describe('Single date picker', () => {
 });
 
 describe('Date picker with locale', () => {
-  // eslint-disable-next-line
   it('sets the locale when it is passed as a prop', () => {
     render(
-      <DatePicker onChange={() => {}} datePickerType="range" locale="es">
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        locale="es"
+        value="01/01/2022">
         <DatePickerInput
-          id="date-picker-input-id-start"
+          id="date-picker-input-id"
           placeholder="mm/dd/yyyy"
-          labelText="Start date"
-        />
-        <DatePickerInput
-          id="date-picker-input-id-finish"
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
+          labelText="Date picker label"
         />
       </DatePicker>
     );
-
-    //how to test for date locale? it's used for a flatpickr config but not a dom attribute or anything...
+    expect(screen.getByText('Enero')).toBeInTheDocument();
   });
 
-  // eslint-disable-next-line
-  it('does not define the locale if one is not passed as a prop', () => {
+  it('should use default locale if one is not passed as a prop', () => {
     render(
-      <DatePicker onChange={() => {}} datePickerType="range">
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        value="01/01/2022">
         <DatePickerInput
-          id="date-picker-input-id-start"
+          id="date-picker-input-id"
           placeholder="mm/dd/yyyy"
-          labelText="Start date"
-        />
-        <DatePickerInput
-          id="date-picker-input-id-finish"
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
+          labelText="Date picker label"
         />
       </DatePicker>
     );
-
-    //how to test for date locale? it's used for a flatpickr config but not a dom attribute or anything...
+    expect(screen.getByText('January')).toBeInTheDocument();
   });
 });
 
 describe('Date picker with minDate and maxDate', () => {
-  // eslint-disable-next-line
-  it('has the range date picker with min and max dates', () => {
+  it('should respect minDate', () => {
     render(
       <DatePicker
         onChange={() => {}}
-        datePickerType="range"
+        datePickerType="single"
         minDate="01/01/2018"
-        maxDate="01/30/2018">
+        maxDate="01/03/2018"
+        value="01/01/2018">
         <DatePickerInput
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
-          labelText="Start date"
-        />
-        <DatePickerInput
-          id="date-picker-input-id-finish"
-          placeholder="mm/dd/yyyy"
-          labelText="End date"
+          labelText="Date Picker label"
+          data-testid="input-min-max"
         />
       </DatePicker>
     );
-    //how to test for date min and max? it's used for a flatpickr config but not a dom attribute or anything...
+    const belowMinDate = document.querySelector(
+      '[aria-label="December 31, 2017"]'
+    );
+    userEvent.click(screen.getByTestId('input-min-max'));
+    userEvent.click(belowMinDate);
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/01/2018'
+    );
+  });
+
+  it('should respect maxDate', () => {
+    render(
+      <DatePicker
+        onChange={() => {}}
+        datePickerType="single"
+        minDate="01/01/2018"
+        maxDate="01/03/2018"
+        value="01/01/2018">
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText="Date Picker label"
+          data-testid="input-min-max-2"
+        />
+      </DatePicker>
+    );
+
+    const aboveMaxDate = document.querySelector(
+      '[aria-label="January 4, 2018"]'
+    );
+
+    userEvent.click(screen.getByTestId('input-min-max-2'));
+    userEvent.click(aboveMaxDate);
+    expect(screen.getByLabelText('Date Picker label')).toHaveValue(
+      '01/01/2018'
+    );
   });
 
   it('should not have "console.error" being created', () => {
