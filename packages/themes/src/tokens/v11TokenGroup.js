@@ -314,6 +314,26 @@ export const skeleton = TokenGroup.create({
   tokens: ['skeleton-background', 'skeleton-element'],
 });
 
+export const contextual = TokenGroup.create({
+  name: 'Contextual',
+  properties: [],
+  tokens: [
+    'layer',
+    'layer-active',
+    'layer-hover',
+    'layer-selected',
+    'layer-selected-hover',
+    'layer-accent',
+    'layer-accent-hover',
+    'layer-accent-active',
+    'field',
+    'field-hover',
+    'border-subtle',
+    'border-subtle-selected',
+    'border-strong',
+  ],
+});
+
 export const group = TokenGroup.create({
   name: 'All',
   tokens: [

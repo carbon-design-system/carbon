@@ -6,337 +6,565 @@
  */
 
 import React from 'react';
-import { Close } from '@carbon/icons-react';
-import Modal from '../Modal';
-import ModalWrapper from '../ModalWrapper';
-import InlineLoading from '../InlineLoading';
-import { mount } from 'enzyme';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-const prefix = 'cds';
-
-// The modal is the 0th child inside the wrapper on account of focus-trap-react
-const getModal = (wrapper) => wrapper.find('.cds--modal');
-const getModalBody = (wrapper) => wrapper.find('.cds--modal-container');
+import Modal from './Modal';
+import TextInput from '../TextInput';
 
 describe('Modal', () => {
-  describe('Renders as expected', () => {
-    const wrapper = mount(<Modal aria-label="test" className="extra-class" />);
-    const mounted = mount(<Modal aria-label="test" className="extra-class" />);
-
-    it('has the expected classes', () => {
-      expect(getModal(wrapper).hasClass(`${prefix}--modal`)).toEqual(true);
-    });
-
-    it('should add extra classes that are passed via className', () => {
-      expect(getModal(wrapper).hasClass('extra-class')).toEqual(true);
-    });
-
-    it('should not be a passive modal by default', () => {
-      expect(getModal(wrapper).hasClass(`${prefix}--modal-tall`)).toEqual(true);
-    });
-
-    it('should be a passive modal when passiveModal is passed', () => {
-      wrapper.setProps({ passiveModal: true });
-      expect(getModal(wrapper).hasClass(`${prefix}--modal-tall`)).toEqual(
-        false
-      );
-    });
-
-    it('should set id if one is passed via props', () => {
-      const modal = mount(<Modal aria-label="test" id="modal-1" />);
-      expect(getModal(modal).props().id).toEqual('modal-1');
-    });
-
-    it('should not place the svg icon in the accessibility tree', () => {
-      const ariaHidden = mounted.find(Close).props()['aria-hidden'];
-      expect(ariaHidden).toEqual('true');
-    });
-
-    it("icon isn't a focusable tab stop", () => {
-      const icon = mounted.find(Close).props().tabIndex;
-      expect(icon).toEqual('-1');
-    });
-
-    it('enables primary button by default', () => {
-      const primaryButton = mounted
-        .find(`.${prefix}--btn.${prefix}--btn--primary`)
-        .at(0);
-      expect(primaryButton.prop('disabled')).toEqual(false);
-    });
-
-    it('disables primary button when disablePrimaryButton prop is passed', () => {
-      mounted.setProps({ primaryButtonDisabled: true });
-      const primaryButton = mounted
-        .find(`.${prefix}--btn.${prefix}--btn--primary`)
-        .at(0);
-      expect(primaryButton.props().disabled).toEqual(true);
-    });
-
-    it('Should have node in primary', () => {
-      mounted.setProps({ primaryButtonText: <InlineLoading /> });
-      const primaryButton = mounted
-        .find(`.${prefix}--btn.${prefix}--btn--primary`)
-        .at(0);
-      expect(primaryButton.find('InlineLoading').exists()).toEqual(true);
-    });
-
-    it('Should have node in secondary', () => {
-      mounted.setProps({ secondaryButtonText: <InlineLoading /> });
-      const secondaryButton = mounted
-        .find(`.${prefix}--btn.${prefix}--btn--secondary`)
-        .at(0);
-      expect(secondaryButton.find('InlineLoading').exists()).toEqual(true);
-    });
-  });
-
-  describe('Renders as expected with secondaryButtons prop', () => {
-    const mounted = mount(<Modal aria-label="test" className="extra-class" />);
-
-    it('Should support node in secondary', () => {
-      mounted.setProps({
-        secondaryButtons: [
-          {
-            buttonText: <InlineLoading />,
-            onClick: jest.fn(),
-          },
-          {
-            buttonText: 'Cancel',
-            onClick: jest.fn(),
-          },
-        ],
-      });
-
-      const secondaryButtons = mounted.find(
-        `.${prefix}--btn.${prefix}--btn--secondary`
-      );
-      expect(secondaryButtons.length).toEqual(2);
-      expect(secondaryButtons.at(0).find('InlineLoading').exists()).toEqual(
-        true
-      );
-      expect(secondaryButtons.at(1).text()).toEqual('Cancel');
-    });
-  });
-
-  describe('Adds props as expected to the right children', () => {
-    it('should set label if one is passed via props', () => {
-      const wrapper = mount(<Modal aria-label="test" modalLabel="modal-1" />);
-      const label = wrapper.find(`.${prefix}--modal-header__label`);
-      expect(label.props().children).toEqual('modal-1');
-    });
-
-    it('should set modal heading if one is passed via props', () => {
-      const wrapper = mount(<Modal aria-label="test" modalHeading="modal-1" />);
-      const heading = wrapper.find(`.${prefix}--modal-header__heading`);
-      expect(heading.props().children).toEqual('modal-1');
-    });
-
-    it('should set button text if one is passed via props', () => {
-      const wrapper = mount(
-        <Modal
-          aria-label="test"
-          primaryButtonText="Submit"
-          secondaryButtonText="Cancel"
+  it('should add extra classes that are passed via className', () => {
+    render(
+      <Modal data-testid="modal-1" className="custom-class">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
         />
-      );
-      const modalButtons = wrapper.find(`.${prefix}--modal-footer Button`);
-      expect(modalButtons.at(0).props().children).toEqual('Cancel');
-      expect(modalButtons.at(1).props().children).toEqual('Submit');
-    });
-  });
-
-  describe('events', () => {
-    it('should set expected class when state is open', () => {
-      const wrapper = mount(<ModalWrapper aria-label="test" />);
-      const modal = wrapper.find(Modal);
-      const modalContainer = modal.find(`.${prefix}--modal`);
-      const openClass = 'is-visible';
-
-      expect(modalContainer.hasClass(openClass)).not.toEqual(true);
-      expect(
-        document.body.classList.contains('cds--body--with-modal-open')
-      ).not.toEqual(true);
-      wrapper.setState({ isOpen: true });
-      expect(wrapper.find(`.${prefix}--modal`).hasClass(openClass)).toEqual(
-        true
-      );
-      expect(
-        document.body.classList.contains('cds--body--with-modal-open')
-      ).toEqual(true);
-      wrapper.unmount();
-      expect(
-        document.body.classList.contains('cds--body--with-modal-open')
-      ).toEqual(false);
-    });
-
-    it('should set state to open when trigger button is clicked', () => {
-      const wrapper = mount(<ModalWrapper aria-label="test" />);
-      const triggerBtn = wrapper.children().childAt(0);
-      expect(wrapper.state('isOpen')).not.toEqual(true);
-      triggerBtn.simulate('click');
-      expect(wrapper.state('isOpen')).toEqual(true);
-    });
-
-    it('should set open state to false when close button is clicked', () => {
-      const wrapper = mount(<ModalWrapper aria-label="test" />);
-      const modal = wrapper.find(Modal);
-      const closeBtn = modal.find(`.${prefix}--modal-close`);
-      wrapper.setState({ isOpen: true });
-      expect(wrapper.state('isOpen')).toEqual(true);
-      closeBtn.simulate('click');
-      expect(wrapper.state('isOpen')).not.toEqual(true);
-    });
-
-    it('should stay open when "inner modal" is clicked', () => {
-      const wrapper = mount(<ModalWrapper aria-label="test" />);
-      const modal = wrapper.find(Modal);
-      const div = modal.find(`.${prefix}--modal-container`);
-      wrapper.setState({ isOpen: true });
-      div.simulate('click');
-      expect(wrapper.state('isOpen')).toEqual(true);
-    });
-
-    it('should close when "outer modal" is clicked...not "inner modal"', () => {
-      const wrapper = mount(<ModalWrapper aria-label="test" />);
-      const modal = wrapper.find(Modal);
-      const div = modal.find(`.${prefix}--modal`);
-      wrapper.setState({ isOpen: true });
-      div.simulate('mousedown');
-      expect(wrapper.state('isOpen')).toEqual(false);
-    });
-
-    it('should handle close keyDown events', () => {
-      const onRequestClose = jest.fn();
-      const wrapper = mount(
-        <Modal aria-label="test" open onRequestClose={onRequestClose} />
-      );
-      wrapper.simulate('keyDown', { which: 26 });
-      expect(onRequestClose).not.toHaveBeenCalled();
-      wrapper.simulate('keyDown', { which: 27 });
-      expect(onRequestClose).toHaveBeenCalled();
-    });
-
-    it('should handle submit keyDown events with shouldSubmitOnEnter enabled', () => {
-      const onRequestSubmit = jest.fn();
-      const wrapper = mount(
-        <Modal
-          aria-label="test"
-          open
-          onRequestSubmit={onRequestSubmit}
-          shouldSubmitOnEnter
-        />
-      );
-      wrapper.simulate('keyDown', { which: 14 });
-      expect(onRequestSubmit).not.toHaveBeenCalled();
-      wrapper.simulate('keyDown', { which: 13 });
-      expect(onRequestSubmit).toHaveBeenCalled();
-    });
-
-    it('should not handle submit keyDown events with shouldSubmitOnEnter not enabled', () => {
-      const onRequestSubmit = jest.fn();
-      const wrapper = mount(
-        <Modal aria-label="test" open onRequestSubmit={onRequestSubmit} />
-      );
-      wrapper.simulate('keyDown', { which: 14 });
-      expect(onRequestSubmit).not.toHaveBeenCalled();
-      wrapper.simulate('keyDown', { which: 13 });
-      expect(onRequestSubmit).not.toHaveBeenCalled();
-    });
-
-    it('should close by default on secondary button click', () => {
-      const onRequestClose = jest.fn();
-      const modal = mount(
-        <Modal
-          aria-label="test"
-          secondaryButtonText="Cancel"
-          onRequestClose={onRequestClose}
-        />
-      );
-      const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
-      secondaryBtn.simulate('click');
-      expect(onRequestClose).toHaveBeenCalled();
-    });
-
-    it('should handle custom secondary button events', () => {
-      const onSecondarySubmit = jest.fn();
-      const modal = mount(
-        <Modal
-          aria-label="test"
-          secondaryButtonText="Cancel"
-          onSecondarySubmit={onSecondarySubmit}
-        />
-      );
-      const secondaryBtn = modal.find(`.${prefix}--btn--secondary`);
-      secondaryBtn.simulate('click');
-      expect(onSecondarySubmit).toHaveBeenCalled();
-    });
-  });
-});
-describe('Modal Wrapper', () => {
-  describe('Renders as expected', () => {
-    const wrapper = mount(<ModalWrapper aria-label="test" />);
-
-    it('should default to primary button', () => {
-      expect(wrapper.find(`.${prefix}--btn--primary`).length).toEqual(2);
-    });
-
-    it('should render ghost button when ghost is passed', () => {
-      wrapper.setProps({ triggerButtonKind: 'ghost' });
-      expect(wrapper.find(`.${prefix}--btn--ghost`).length).toEqual(1);
-    });
-
-    it('should render danger button when danger is passed', () => {
-      wrapper.setProps({ triggerButtonKind: 'danger' });
-      expect(wrapper.find(`.${prefix}--btn--danger`).length).toEqual(1);
-    });
-
-    it('should render secondary button when secondary is passed', () => {
-      wrapper.setProps({ triggerButtonKind: 'secondary' });
-      expect(wrapper.find(`.${prefix}--btn--secondary`).length).toEqual(2);
-    });
-  });
-});
-describe('Danger Modal', () => {
-  describe('Renders as expected', () => {
-    const wrapper = mount(
-      <Modal aria-label="test" secondaryButtonText="Cancel" danger />
+      </Modal>
     );
 
-    it('has the expected classes', () => {
-      expect(getModal(wrapper).hasClass(`${prefix}--modal--danger`)).toEqual(
-        true
-      );
-    });
+    expect(screen.getByTestId('modal-1')).toHaveClass('custom-class');
+  });
 
-    it('has correct button combination', () => {
-      const modalButtons = wrapper.find(
-        `.${prefix}--modal-footer.${prefix}--btn-set Button`
-      );
-      expect(modalButtons.length).toEqual(2);
-      expect(modalButtons.at(0).props().kind).toEqual('secondary');
-      expect(modalButtons.at(1).props().kind).toEqual('danger');
-    });
+  it('should set label if one is passed via props', () => {
+    render(
+      <Modal modalLabel="Account resources">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByText('Account resources')).toBeInTheDocument();
+  });
+
+  it('should set modal heading if one is passed via props', () => {
+    render(
+      <Modal modalHeading="Add a custom domain">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByText('Add a custom domain')).toBeInTheDocument();
+  });
+
+  it('should not be a passive modal by default', () => {
+    render(
+      <Modal data-testid="modal-2">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('modal-2')).toHaveClass('cds--modal-tall');
+  });
+
+  it('should be a passive modal when passiveModal is passed', () => {
+    render(
+      <Modal data-testid="modal-3" passiveModal>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('modal-3')).not.toHaveClass('cds--modal-tall');
+  });
+
+  it('should set id if one is passed via props', () => {
+    render(
+      <Modal id="custom-modal-id" data-testid="modal-4">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('modal-4')).toHaveAttribute(
+      'id',
+      'custom-modal-id'
+    );
+  });
+
+  it('should not place the svg icon in the accessibility tree', () => {
+    render(
+      <Modal>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(document.querySelector('.cds--modal-close__icon')).toHaveAttribute(
+      'aria-hidden',
+      'true'
+    );
+  });
+
+  it('should not make the icon tabbable', () => {
+    render(
+      <Modal>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(document.querySelector('.cds--modal-close__icon')).toHaveAttribute(
+      'focusable',
+      'false'
+    );
+  });
+
+  it('enables primary button by default', () => {
+    render(
+      <Modal primaryButtonText="Primary button text">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByText('Primary button text')).not.toHaveAttribute(
+      'disabled'
+    );
+  });
+
+  it('disables primary button is disablePrimaryButton prop is passed', () => {
+    render(
+      <Modal primaryButtonText="Primary button text" primaryButtonDisabled>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByText('Primary button text')).toHaveAttribute('disabled');
+  });
+
+  it('should set button text when passed via props', () => {
+    render(
+      <Modal
+        primaryButtonText="Primary button text"
+        secondaryButtonText="Secondary button text">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByText('Primary button text')).toBeInTheDocument();
+    expect(screen.getByText('Secondary button text')).toBeInTheDocument();
+  });
+
+  it('should allow you to pass a node for the primary and secondary buttons', () => {
+    render(
+      <Modal
+        primaryButtonText={<span data-testid="primary-node">testing</span>}
+        secondaryButtonText={<span data-testid="secondary-node">testing</span>}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('primary-node')).toBeInTheDocument();
+    expect(screen.getByTestId('secondary-node')).toBeInTheDocument();
+  });
+
+  it('should support 2 secondary buttons', () => {
+    render(
+      <Modal
+        primaryButtonText="Primary button text"
+        secondaryButtons={[
+          {
+            buttonText: 'First button',
+            onClick: jest.fn(),
+          },
+          {
+            buttonText: 'Second button',
+            onClick: jest.fn(),
+          },
+        ]}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByText('First button')).toBeInTheDocument();
+    expect(screen.getByText('Second button')).toBeInTheDocument();
+  });
+
+  it('has the expected attributes when alert prop is passed', () => {
+    render(
+      <Modal alert>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByRole('alertdialog')).toBeInTheDocument();
+    expect(screen.getByRole('alertdialog')).toHaveAttribute('aria-describedby');
+  });
+
+  it('renders a danger button and appropriate classes when danger prop is passed', () => {
+    render(
+      <Modal
+        danger
+        primaryButtonText="Danger button text"
+        data-testid="modal-5">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    expect(screen.getByTestId('modal-5')).toHaveClass('cds--modal--danger');
+    expect(screen.getByText('Danger button text')).toHaveClass(
+      'cds--btn--danger'
+    );
   });
 });
-describe('Alert Modal', () => {
-  describe('Renders as expected', () => {
-    const wrapper = mount(<Modal aria-label="test" alert />);
 
-    it('has the expected attributes', () => {
-      expect(getModalBody(wrapper).props()).toEqual(
-        expect.objectContaining({
-          role: 'alertdialog',
-          'aria-describedby': expect.any(String),
-        })
-      );
-    });
+describe('events', () => {
+  it('should set expected class when state is open', () => {
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        data-testid="modal-6">
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
 
-    it('should be a passive modal when passiveModal is passed', () => {
-      wrapper.setProps({ passiveModal: true });
-      expect(getModalBody(wrapper).props()).toEqual(
-        expect.objectContaining({
-          role: 'alert',
-        })
-      );
-    });
+    expect(screen.getByTestId('modal-6')).toHaveClass('is-visible');
+  });
+
+  it('should handle close when outside of modal is clicked', () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        data-testid="modal-7"
+        onRequestClose={onRequestClose}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    const outerModal = screen.getByTestId('modal-7');
+    userEvent.click(outerModal);
+    expect(onRequestClose).toHaveBeenCalled();
+  });
+
+  it('should not handle close when inner content is clicked', () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestClose={onRequestClose}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    const innerModal = screen.getByRole('dialog');
+    userEvent.click(innerModal);
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should not handle close when outside of modal is clicked and preventCloseOnClickOutside is passed', () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        data-testid="modal-8"
+        onRequestClose={onRequestClose}
+        preventCloseOnClickOutside>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    const outerModal = screen.getByTestId('modal-8');
+    userEvent.click(outerModal);
+    expect(onRequestClose).not.toHaveBeenCalled();
+  });
+
+  it('should handle close keyDown events', () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestClose={onRequestClose}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    userEvent.keyboard('{esc}');
+    expect(onRequestClose).toHaveBeenCalled();
+  });
+
+  it('should handle submit keyDown events with shouldSubmitOnEnter enabled', () => {
+    const onRequestSubmit = jest.fn();
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestSubmit={onRequestSubmit}
+        shouldSubmitOnEnter>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    userEvent.keyboard('{Enter}');
+    expect(onRequestSubmit).toHaveBeenCalled();
+  });
+
+  it('should not handle submit keyDown events if shouldSubmitOnEnter is not enabled', () => {
+    const onRequestSubmit = jest.fn();
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestSubmit={onRequestSubmit}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    userEvent.keyboard('{Enter}');
+    expect(onRequestSubmit).not.toHaveBeenCalled();
+  });
+
+  it('should close by default on secondary button click', () => {
+    const onRequestClose = jest.fn();
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onRequestClose={onRequestClose}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    const secondaryBtn = screen.getByText('Secondary button');
+    userEvent.click(secondaryBtn);
+    expect(onRequestClose).toHaveBeenCalled();
+  });
+
+  it('should handle custom secondary button events', () => {
+    const onSecondarySubmit = jest.fn();
+    render(
+      <Modal
+        open
+        primaryButtonText="Primary button"
+        secondaryButtonText="Secondary button"
+        onSecondarySubmit={onSecondarySubmit}>
+        <p>
+          Custom domains direct requests for your apps in this Cloud Foundry
+          organization to a URL that you own. A custom domain can be a shared
+          domain, a shared subdomain, or a shared domain and host.
+        </p>
+        <TextInput
+          data-modal-primary-focus
+          id="text-input-1"
+          labelText="Domain name"
+        />
+      </Modal>
+    );
+
+    const secondaryBtn = screen.getByText('Secondary button');
+    userEvent.click(secondaryBtn);
+    expect(onSecondarySubmit).toHaveBeenCalled();
   });
 });

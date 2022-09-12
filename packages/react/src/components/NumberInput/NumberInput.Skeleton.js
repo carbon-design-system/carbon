@@ -10,7 +10,7 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const NumberInputSkeleton = ({ hideLabel, className, ...rest }) => {
+function NumberInputSkeleton({ hideLabel, className, ...rest }) {
   const prefix = usePrefix();
   return (
     <div className={cx(`${prefix}--form-item`, className)} {...rest}>
@@ -20,7 +20,7 @@ const NumberInputSkeleton = ({ hideLabel, className, ...rest }) => {
       <div className={`${prefix}--number ${prefix}--skeleton`} />
     </div>
   );
-};
+}
 
 NumberInputSkeleton.propTypes = {
   /**

@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '../../../../index.scss';
+import '../../../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
-import FilterableMultiSelect from '../../MultiSelect/FilterableMultiSelect';
+import FilterableMultiSelect from '../FilterableMultiSelect';
 
 describe('FilterableMultiSelect', () => {
   beforeEach(() => {
