@@ -1892,7 +1892,7 @@ __metadata:
     "@octokit/rest": ^16.28.1
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-node-resolve": ^14.0.0
     chalk: ^4.1.1
     change-case: ^4.1.2
     child-process-promise: ^2.2.1
@@ -1962,7 +1962,7 @@ __metadata:
     "@babel/types": ^7.18.4
     "@carbon/scss-generator": ^10.14.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-node-resolve": ^14.0.0
     change-case: ^4.1.2
     fs-extra: ^10.0.0
     js-yaml: ^3.14.0
@@ -2132,7 +2132,7 @@ __metadata:
     "@carbon/themes": ^11.8.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-node-resolve": ^14.0.0
     "@storybook/addon-a11y": ^6.5.6
     "@storybook/addon-actions": ^6.5.6
     "@storybook/addon-docs": ^6.5.6
@@ -5104,19 +5104,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-node-resolve@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "@rollup/plugin-node-resolve@npm:13.0.0"
+"@rollup/plugin-node-resolve@npm:^14.0.0":
+  version: 14.0.1
+  resolution: "@rollup/plugin-node-resolve@npm:14.0.1"
   dependencies:
     "@rollup/pluginutils": ^3.1.0
     "@types/resolve": 1.17.1
-    builtin-modules: ^3.1.0
     deepmerge: ^4.2.2
+    is-builtin-module: ^3.1.0
     is-module: ^1.0.0
     resolve: ^1.19.0
   peerDependencies:
-    rollup: ^2.42.0
-  checksum: c0237e65f50d593efc176e07a2ddf734918bc7344f739fe2254a3bfaa4be37c6d4787d045ab79d741811d3658f7e8bbb1484e6aa25bbb9fe2a3c33472b3f371d
+    rollup: ^2.78.0
+  checksum: 504ff5485f81e435d3da41d1be92cdccbb1f1cb3cab444183517b2ad2de9f9246288964783b28b121c72642cc9ac05ca945300ac65997f047141d648e6c0515b
   languageName: node
   linkType: hard
 
@@ -10329,6 +10329,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"builtin-modules@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "builtin-modules@npm:3.3.0"
+  checksum: db021755d7ed8be048f25668fe2117620861ef6703ea2c65ed2779c9e3636d5c3b82325bd912244293959ff3ae303afa3471f6a15bf5060c103e4cc3a839749d
+  languageName: node
+  linkType: hard
+
 "builtin-status-codes@npm:^3.0.0":
   version: 3.0.0
   resolution: "builtin-status-codes@npm:3.0.0"
@@ -10644,7 +10651,7 @@ __metadata:
     "@carbon/test-utils": ^10.25.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-node-resolve": ^14.0.0
     babel-plugin-dev-expression: ^0.2.3
     babel-preset-carbon: ^0.3.0
     browserslist-config-carbon: ^11.0.0
@@ -18267,6 +18274,15 @@ fsevents@^1.2.7:
   version: 2.0.4
   resolution: "is-buffer@npm:2.0.4"
   checksum: b1616ff40c1644e219d6038819044608e31edcc60eb287e5f214391222dea889a68c659f0654865ce34b6c4dcfa2c8cae0174343a0f6ae3f2150f7856326cb80
+  languageName: node
+  linkType: hard
+
+"is-builtin-module@npm:^3.1.0":
+  version: 3.2.0
+  resolution: "is-builtin-module@npm:3.2.0"
+  dependencies:
+    builtin-modules: ^3.3.0
+  checksum: 0315751b898feff0646511c896e88b608a755c5025d0ce9a3ad25783de50be870e47dafb838cebbb06fbb2a948b209ea55348eee267836c9dd40d3a11ec717d3
   languageName: node
   linkType: hard
 
