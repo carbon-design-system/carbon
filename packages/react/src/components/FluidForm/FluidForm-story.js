@@ -10,7 +10,9 @@ import { action } from '@storybook/addon-actions';
 
 import { withKnobs } from '@storybook/addon-knobs';
 import FluidForm from '../FluidForm';
-import TextInput from '../TextInput';
+import FluidTextInput from '../FluidTextInput';
+import FluidTextArea from '../FluidTextArea';
+import ModalWrapper from '../ModalWrapper';
 
 const additionalProps = {
   className: 'some-class',
@@ -27,13 +29,18 @@ const TextInputProps = {
   placeholder: 'Placeholder text',
 };
 
+const TextAreaProps = {
+  className: 'some-class',
+  id: 'test3',
+  labelText: 'Text Area label',
+  placeholder: 'Placeholder text',
+};
+
 const InvalidPasswordProps = {
   className: 'some-class',
   id: 'test4',
   labelText: 'Password',
-  invalid: true,
-  invalidText:
-    'Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.',
+  value: '0000',
 };
 
 export default {
@@ -43,26 +50,35 @@ export default {
 };
 
 export const Default = () => (
-  <FluidForm {...additionalProps}>
-    <TextInput {...TextInputProps} />
+  <>
+    <FluidForm {...additionalProps}>
+      <FluidTextInput {...TextInputProps} />
+      <FluidTextInput
+        type="password"
+        pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+        {...InvalidPasswordProps}
+      />
+      <FluidTextArea {...TextAreaProps} />
+    </FluidForm>
 
-    <TextInput
-      type="password"
-      required
-      pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-      {...InvalidPasswordProps}
-    />
-  </FluidForm>
+    <br />
+
+    <ModalWrapper
+      hasScrollingContent
+      buttonTriggerText="Fluid form in modal"
+      modalHeading="Modal heading"
+      modalLabel="Label"
+      handleSubmit={() => {}}
+      size="md">
+      <FluidForm {...additionalProps}>
+        <FluidTextInput {...TextInputProps} />
+        <FluidTextInput
+          type="password"
+          pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
+          {...InvalidPasswordProps}
+        />
+        <FluidTextArea {...TextAreaProps} />
+      </FluidForm>
+    </ModalWrapper>
+  </>
 );
-
-Default.parameters = {
-  info: {
-    text: `
-        Forms are widely used to collect user input.
-
-        Form can have any number of react components enclosed within FormGroup component. FormGroup component
-        is a wrapper for legend and fieldset component.
-
-      `,
-  },
-};
