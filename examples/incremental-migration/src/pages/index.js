@@ -60,21 +60,6 @@ export default function Home() {
     placeholder: 'Placeholder text',
   };
 
-  const PasswordProps = {
-    className: 'some-class',
-    id: 'test3',
-    labelText: 'Password',
-  };
-
-  const InvalidPasswordProps = {
-    className: 'some-class',
-    id: 'test4',
-    labelText: 'Password',
-    invalid: true,
-    invalidText:
-      'Your password must be at least 6 characters as well as contain at least one uppercase, one lowercase, and one number.',
-  };
-
   const textareaProps = {
     labelText: 'Text Area label',
     className: 'some-class',
@@ -105,9 +90,7 @@ export default function Home() {
       <Content>
         <Stack gap={6}>
           <NumberInput {...numberInputProps} />
-
           <Toggle {...toggleProps} id="toggle-1" />
-
           <RadioButtonGroup
             onChange={() => {}}
             name="radio-button-group"
@@ -138,7 +121,6 @@ export default function Home() {
               {...radioProps}
             />
           </RadioButtonGroup>
-
           <StructuredListWrapper>
             <StructuredListHead>
               <StructuredListRow head>
@@ -170,14 +152,12 @@ export default function Home() {
               </StructuredListRow>
             </StructuredListBody>
           </StructuredListWrapper>
-
           <Search
             {...searchProps}
             id="search-1"
             labelText="Search"
             placeholder="Search"
           />
-
           <Select
             {...selectProps}
             id="select-1"
@@ -192,25 +172,8 @@ export default function Home() {
             <SelectItem value="option-2" text="Option 2" />
             <SelectItem value="option-3" text="Option 3" />
           </Select>
-
           <TextInput {...TextInputProps} />
-
-          <TextInput
-            type="password"
-            required
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-            {...PasswordProps}
-          />
-
-          <TextInput
-            type="password"
-            required
-            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
-            {...InvalidPasswordProps}
-          />
-
           <TextArea {...textareaProps} />
-
           <div className={styles.someClass}>
             <Button type="submit" {...buttonEvents}>
               Submit

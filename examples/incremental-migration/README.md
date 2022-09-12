@@ -3,11 +3,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with
 
 ## Incremental migration
 
-We ave recently released a new version, v11, of our component library and a
+We have recently released a new version, v11, of our component library and a
 common question we receive is if users can adopt v11 incrementally and the
 answer is yes! If the burden of migrating to v11 is too big to take on all at
 once, but there are features of our latest release you want to take advantage
-of, it is likely that you can pull in just the parts yiu are wanting to use
+of, it is likely that you can pull in just the parts you are wanting to use
 while keeping the rest of your Carbon usage the same.
 
 This example illustrates how v11 and v10 work together.
