@@ -6,31 +6,63 @@
  */
 
 import React from 'react';
-import Loading from '../Loading';
-import { mount } from 'enzyme';
-import { render, cleanup } from '@carbon/test-utils/react';
-import { afterEach } from 'jest-circus';
-
-const prefix = 'cds';
+import Loading from './Loading';
+import { render, screen } from '@testing-library/react';
 
 describe('Loading', () => {
-  afterEach(cleanup);
+  describe('renders as expected - Component API', () => {
+    it('should change classes based on active', () => {
+      const { container, rerender } = render(<Loading active />);
 
-  describe('automated accessibility testing', () => {
-    it('should have no Axe violations', async () => {
-      const { container } = render(<Loading />);
-      await expect(container).toHaveNoAxeViolations();
+      expect(container.firstChild).not.toHaveClass(
+        'cds--loading-overlay--stop'
+      );
+
+      rerender(<Loading active={false} />);
+
+      expect(container.firstChild).toHaveClass('cds--loading-overlay--stop');
     });
 
-    it('should have no AC violations', async () => {
-      const { container } = render(<Loading />);
-      await expect(container).toHaveNoACViolations('Loading');
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <Loading className="custom-class" withOverlay={false} />
+      );
+
+      expect(container.firstChild).toHaveClass('custom-class');
+    });
+
+    it('should spread extra props on the outermost element', () => {
+      const { container } = render(
+        <Loading withOverlay={false} data-testid="test" />
+      );
+
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+    });
+
+    it('should specify a description based on prop', () => {
+      render(<Loading description="Loading description" />);
+
+      expect(screen.getByTitle('Loading description')).toBeInTheDocument();
+    });
+
+    it('should respect small prop', () => {
+      const { container } = render(<Loading small withOverlay={false} />);
+
+      expect(container.firstChild).toHaveClass('cds--loading--small');
+    });
+
+    it('should respect withOverlay prop', () => {
+      const { container, rerender } = render(<Loading withOverlay />);
+
+      expect(container.firstChild).toHaveClass('cds--loading-overlay');
+
+      rerender(<Loading withOverlay={false} />);
+
+      expect(container.firstChild).not.toHaveClass('cds--loading-overlay');
     });
   });
 
   describe('with a screenreader', () => {
-    afterEach(cleanup);
-
     // https://www.w3.org/TR/WCAG21/#headings-and-labels
     it('should have a label on the live region', () => {
       const { container } = render(<Loading />);
@@ -49,61 +81,6 @@ describe('Loading', () => {
 
       const ariaLiveValue = liveRegion.getAttribute('aria-live');
       expect(ariaLiveValue).toEqual('assertive');
-    });
-  });
-  describe('renders as expected', () => {
-    const wrapper = mount(<Loading className="extra-class" />);
-    const overlay = wrapper.find(`.${prefix}--loading-overlay`);
-    const loader = wrapper.find(`.${prefix}--loading`);
-    const svg = loader.find('svg');
-
-    it('should render with an overlay', () => {
-      expect(overlay.length).toEqual(1);
-    });
-
-    it('should render with a loader', () => {
-      expect(loader.length).toEqual(1);
-    });
-
-    it('should render an svg', () => {
-      expect(svg.length).toEqual(1);
-    });
-
-    it('overlay has the expected class', () => {
-      expect(overlay.hasClass(`${prefix}--loading-overlay`)).toEqual(true);
-    });
-
-    it('loader has the expected classes', () => {
-      expect(loader.hasClass(`${prefix}--loading`)).toEqual(true);
-    });
-
-    it('svg has the correct class', () => {
-      expect(svg.hasClass(`${prefix}--loading__svg`)).toEqual(true);
-    });
-
-    it('should add extra classes that are passed via className', () => {
-      expect(loader.hasClass('extra-class')).toEqual(true);
-    });
-  });
-
-  describe('sets props and state as expected', () => {
-    const wrapper = mount(<Loading className="extra-class" />);
-
-    it(`should remove and add ${prefix}--loading--stop class`, () => {
-      wrapper.setProps({ active: false });
-      expect(
-        wrapper.find(`.${prefix}--loading`).hasClass(`${prefix}--loading--stop`)
-      ).toEqual(true);
-      wrapper.setProps({ active: true });
-      expect(
-        wrapper.find(`.${prefix}--loading`).hasClass(`${prefix}--loading--stop`)
-      ).toEqual(false);
-    });
-
-    it('should not render overlay when withOverlay is set to false', () => {
-      wrapper.setProps({ withOverlay: false });
-      const overlay = wrapper.find(`.${prefix}--loading-overlay`);
-      expect(overlay.length).toEqual(0);
     });
   });
 });
