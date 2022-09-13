@@ -1,0 +1,26 @@
+{
+  "name": "incremental-migration",
+  "private": true,
+  "version": "0.12.0",
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "next lint",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@carbon/icons-react": "10.49.0",
+    "@carbon/react": "^1.12.0",
+    "carbon-components": "^10.57.0",
+    "carbon-components-react": "^7.57.0",
+    "carbon-icons": "^7.0.7",
+    "next": "12.1.4",
+    "react": "18.0.0",
+    "react-dom": "18.0.0"
+  },
+  "devDependencies": {
+    "eslint": "8.12.0",
+    "eslint-config-next": "12.1.4",
+    "sass": "^1.51.0"
+  }
+}
