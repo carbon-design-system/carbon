@@ -77,7 +77,7 @@ const Text = () => (
     <p>
       The
       <CodeSnippet type="inline">{`<MenuGroup>`}</CodeSnippet> and
-      <CodeSnippet type="inline">{`<MenuItem`}</CodeSnippet>
+      <CodeSnippet type="inline">{`<MenuItem>`}</CodeSnippet>
       components accept children items for nested menus, although the{' '}
       <CodeSnippet type="inline">{`<MenuItem>`}</CodeSnippet> component can also
       be used as a stand alone item. The other types of menu items ({' '}
