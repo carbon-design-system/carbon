@@ -464,7 +464,7 @@ PaginationNav.propTypes = {
   onChange: PropTypes.func,
 
   /**
-   * The current page.
+   * The index of current page.
    */
   page: PropTypes.number,
 

@@ -6,56 +6,15 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 import DatePicker from './DatePicker';
 import DatePickerSkeleton from './DatePicker.Skeleton';
 import DatePickerInput from '../DatePickerInput';
 import { Layer } from '../Layer';
 import mdx from './DatePicker.mdx';
 
-const props = {
-  datePicker: () => ({
-    dateFormat: 'm/d/Y',
-    id: 'date-picker',
-    light: false,
-    datePickerType: 'single',
-    minDate: '11/15/2020',
-    maxDate: '11/01/2040',
-    disable: ['07/15/2021'],
-    onClose: action('onClose'),
-    onOpen: action('onOpen'),
-  }),
-  datePickerInput: () => ({
-    id: 'date-picker-input-id',
-    className: 'some-class',
-    size: undefined,
-    labelText: 'Date Picker label',
-    pattern: 'd{1,2}/d{4}',
-    placeholder: 'mm/dd/yyyy',
-    disabled: false,
-    invalid: false,
-    invalidText: 'A valid date is required',
-    warn: false,
-    warnText: 'Selected dates may cause conflicts',
-    iconDescription: 'Icon description',
-  }),
-};
-
 export default {
   title: 'Components/DatePicker',
   component: DatePicker,
-  argTypes: {
-    size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'select' },
-      table: {
-        category: 'DatePickerInput',
-      },
-    },
-  },
-  args: {
-    size: 'md',
-  },
   subcomponents: {
     DatePickerInput,
     DatePickerSkeleton,
@@ -67,74 +26,73 @@ export default {
   },
 };
 
-export const Simple = (args) => (
-  <DatePicker datePickerType="simple" {...args}>
+export const Simple = () => (
+  <DatePicker datePickerType="simple">
     <DatePickerInput
       placeholder="mm/dd/yyyy"
       labelText="Date Picker label"
       id="date-picker-simple"
-      {...args}
     />
   </DatePicker>
 );
 
-export const SingleWithCalendar = (args) => (
-  <DatePicker datePickerType="single" {...args}>
+export const SingleWithCalendar = () => (
+  <DatePicker datePickerType="single">
     <DatePickerInput
       placeholder="mm/dd/yyyy"
       labelText="Date Picker label"
       id="date-picker-single"
-      {...args}
+      size="md"
     />
   </DatePicker>
 );
 
-export const RangeWithCalendar = (args) => {
+export const RangeWithCalendar = () => {
   return (
-    <DatePicker datePickerType="range" {...args}>
+    <DatePicker datePickerType="range">
       <DatePickerInput
         id="date-picker-input-id-start"
         placeholder="mm/dd/yyyy"
         labelText="Start date"
-        {...args}
+        size="md"
       />
       <DatePickerInput
         id="date-picker-input-id-finish"
         placeholder="mm/dd/yyyy"
         labelText="End date"
-        {...args}
+        size="md"
       />
     </DatePicker>
   );
 };
 
-export const SimpleWithLayer = (args) => {
+export const SimpleWithLayer = () => {
   return (
     <>
-      <DatePicker datePickerType="simple" {...args}>
+      <DatePicker datePickerType="simple">
         <DatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="Date Picker label"
           id="date-picker-simple"
-          {...args}
+          size="md"
         />
       </DatePicker>
-      <Layer {...args}>
-        <DatePicker datePickerType="simple" {...args}>
+      <Layer>
+        <DatePicker datePickerType="simple">
           <DatePickerInput
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
             id="date-picker-simple"
-            {...args}
+            size="md"
           />
         </DatePicker>
-        <Layer {...args}>
-          <DatePicker datePickerType="simple" {...args}>
+        <Layer>
+          <DatePicker datePickerType="simple">
             <DatePickerInput
               placeholder="mm/dd/yyyy"
               labelText="Date Picker label"
               id="date-picker-simple"
-              {...args}
+              size="md"
             />
           </DatePicker>
         </Layer>
@@ -143,33 +101,33 @@ export const SimpleWithLayer = (args) => {
   );
 };
 
-export const SingleWithCalendarWithLayer = (args) => {
+export const SingleWithCalendarWithLayer = () => {
   return (
     <>
-      <DatePicker datePickerType="single" {...args}>
+      <DatePicker datePickerType="single">
         <DatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="Date Picker label"
           id="date-picker-single"
-          {...args}
+          size="md"
         />
       </DatePicker>
-      <Layer {...args}>
-        <DatePicker datePickerType="single" {...args}>
+      <Layer>
+        <DatePicker datePickerType="single">
           <DatePickerInput
             placeholder="mm/dd/yyyy"
             labelText="Date Picker label"
             id="date-picker-single"
-            {...args}
+            size="md"
           />
         </DatePicker>
-        <Layer {...args}>
-          <DatePicker datePickerType="single" {...args}>
+        <Layer>
+          <DatePicker datePickerType="single">
             <DatePickerInput
               placeholder="mm/dd/yyyy"
               labelText="Date Picker label"
               id="date-picker-single"
-              {...args}
+              size="md"
             />
           </DatePicker>
         </Layer>
@@ -178,51 +136,51 @@ export const SingleWithCalendarWithLayer = (args) => {
   );
 };
 
-export const RangeWithCalendarWithLayer = (args) => {
+export const RangeWithCalendarWithLayer = () => {
   return (
     <>
-      <DatePicker datePickerType="range" {...args}>
+      <DatePicker datePickerType="range">
         <DatePickerInput
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
           labelText="Start date"
-          {...args}
+          size="md"
         />
         <DatePickerInput
           id="date-picker-input-id-finish"
           placeholder="mm/dd/yyyy"
           labelText="End date"
-          {...args}
+          size="md"
         />
       </DatePicker>
-      <Layer {...args}>
-        <DatePicker datePickerType="range" {...args}>
+      <Layer>
+        <DatePicker datePickerType="range">
           <DatePickerInput
             id="date-picker-input-id-start"
             placeholder="mm/dd/yyyy"
             labelText="Start date"
-            {...args}
+            size="md"
           />
           <DatePickerInput
             id="date-picker-input-id-finish"
             placeholder="mm/dd/yyyy"
             labelText="End date"
-            {...args}
+            size="md"
           />
         </DatePicker>
-        <Layer {...args}>
-          <DatePicker datePickerType="range" {...args}>
+        <Layer>
+          <DatePicker datePickerType="range">
             <DatePickerInput
               id="date-picker-input-id-start"
               placeholder="mm/dd/yyyy"
               labelText="Start date"
-              {...args}
+              size="md"
             />
             <DatePickerInput
               id="date-picker-input-id-finish"
               placeholder="mm/dd/yyyy"
               labelText="End date"
-              {...args}
+              size="md"
             />
           </DatePicker>
         </Layer>
@@ -231,15 +189,126 @@ export const RangeWithCalendarWithLayer = (args) => {
   );
 };
 
-/* eslint-disable react/prop-types */
-export const DatePickerPlayground = () => (
-  <DatePicker {...props.datePicker()}>
-    <DatePickerInput {...props.datePickerInput()} />
-    {props.datePicker().datePickerType === 'range' && (
-      <DatePickerInput {...props.datePickerInput()} id="date-picker-input-2" />
-    )}
-  </DatePicker>
-);
-/* eslint-enable react/prop-types */
-
 export const Skeleton = () => <DatePickerSkeleton range />;
+
+export const Playground = (args) => {
+  return (
+    <DatePicker datePickerType="single" {...args}>
+      <DatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText="Date Picker label"
+        id="date-picker-single"
+        {...args}
+      />
+      {args.datePickerType === 'range' && (
+        <DatePickerInput
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+          size="md"
+          id="date-picker-input-2"
+          {...args}
+        />
+      )}
+    </DatePicker>
+  );
+};
+
+Playground.argTypes = {
+  appendTo: {
+    table: {
+      disable: true,
+    },
+  },
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  disable: {
+    table: {
+      disable: true,
+    },
+  },
+  enable: {
+    table: {
+      disable: true,
+    },
+  },
+  inline: {
+    table: {
+      disable: true,
+    },
+  },
+  light: {
+    table: {
+      disable: true,
+    },
+  },
+  locale: {
+    table: {
+      disable: true,
+    },
+  },
+  onChange: {
+    action: 'clicked',
+  },
+  onClose: {
+    action: 'clicked',
+  },
+  onOpen: {
+    action: 'clicked',
+  },
+  value: {
+    table: {
+      disable: true,
+    },
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  invalid: {
+    control: { type: 'boolean' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  invalidText: {
+    control: { type: 'text' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  placeholder: {
+    control: { type: 'text' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  warn: {
+    control: { type: 'boolean' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+  warnText: {
+    control: { type: 'text' },
+    table: {
+      category: 'DatePickerInput',
+    },
+  },
+};
