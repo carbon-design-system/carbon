@@ -1,237 +1,113 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import PaginationNav from '../PaginationNav';
-import { mount } from 'enzyme';
-import { expect } from 'window-or-global';
-
-const prefix = 'cds';
+import PaginationNav from './PaginationNav';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 describe('PaginationNav', () => {
-  const props = {
-    className: 'extra-class',
-    totalItems: 24,
-    itemsShown: 8,
-    page: 1,
-  };
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto outermost element', () => {
+      const { container } = render(
+        <PaginationNav totalItems={10} data-testid="test-id" />
+      );
 
-  const renderPaginationNav = (additionalProps = {}) =>
-    mount(<PaginationNav {...props} {...additionalProps} />);
-
-  describe('renders as expected', () => {
-    const pagination = renderPaginationNav();
-
-    describe('container', () => {
-      it('should render the expected classes', () => {
-        const container = pagination.childAt(0);
-        expect(container.hasClass(`${prefix}--pagination-nav`)).toBe(true);
-        expect(container.hasClass(`extra-class`)).toBe(true);
-      });
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
     });
 
-    describe('items', () => {
-      it('should render n page items, where n = props.itemsShown', () => {
-        const pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        expect(pages.length).toBe(props.itemsShown);
-      });
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <PaginationNav totalItems={10} className="custom-class" />
+      );
 
-      it('should render the expected classes for the active page', () => {
-        const activePage = pagination
-          .find(`.${prefix}--pagination-nav__page`)
-          .at(props.page);
-        expect(
-          activePage.hasClass(`${prefix}--pagination-nav__page--active`)
-        ).toBe(true);
-      });
-
-      it('should disable "Previous" button when on first page and props.loop = false', () => {
-        let i = 0;
-
-        const pNav = renderPaginationNav({
-          page: 0,
-          loop: false,
-          onChange: () => {
-            i++;
-          },
-        });
-
-        const button = pNav
-          .find(`.${prefix}--pagination-nav__list-item`)
-          .first()
-          .childAt(0);
-
-        expect(button.props().disabled).toBe(true);
-        expect(i).toBe(0);
-        button.simulate('click');
-        expect(i).toBe(0);
-      });
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
-    it('should disable "Next" button when on last page and props.loop = false', () => {
-      let i = 0;
+    it('should respect itemsShown prop', () => {
+      render(<PaginationNav totalItems={10} itemsShown={4} />);
 
-      const pNav = renderPaginationNav({
-        page: 23,
-        loop: false,
-        onChange: () => {
-          i++;
-        },
-      });
+      expect(
+        document.querySelectorAll('.cds--pagination-nav__page').length
+      ).toBe(4);
+    });
 
-      const button = pNav
-        .find(`.${prefix}--pagination-nav__list-item`)
-        .last()
-        .childAt(0);
+    it('should respect loop prop', () => {
+      render(<PaginationNav totalItems={4} loop />);
 
-      expect(button.props().disabled).toBe(true);
-      expect(i).toBe(0);
-      button.simulate('click');
-      expect(i).toBe(0);
+      userEvent.click(screen.getByText('4'));
+
+      userEvent.click(screen.getByLabelText('Next'));
+      expect(screen.getByText('1')).toHaveAttribute('aria-current', 'page');
+
+      userEvent.click(screen.getByText('1'));
+      userEvent.click(screen.getByLabelText('Previous'));
+
+      expect(screen.getByText('4')).toHaveAttribute('aria-current', 'page');
+    });
+
+    it('should respect onChange prop', () => {
+      const onChange = jest.fn();
+
+      render(<PaginationNav totalItems={10} onChange={onChange} />);
+      userEvent.click(screen.getByText('4'));
+      expect(onChange).toHaveBeenCalled();
+    });
+
+    it('should respect page prop', () => {
+      render(<PaginationNav totalItems={10} page={3} />);
+
+      expect(screen.getByText('4')).toHaveAttribute('aria-current', 'page');
+    });
+
+    it('should respect totalItems prop', () => {
+      render(<PaginationNav totalItems={5} />);
+
+      expect(
+        document.querySelectorAll('.cds--pagination-nav__page').length
+      ).toBe(5);
+    });
+
+    it('should disable "Previous" button when on first page and loop is false', () => {
+      render(<PaginationNav totalItems={4} />);
+
+      expect(screen.getByLabelText('Previous')).toHaveProperty('disabled');
+    });
+
+    it('should disable "Next" button when on last page and loop is false', () => {
+      render(<PaginationNav totalItems={4} page={3} />);
+
+      expect(screen.getByLabelText('Next')).toHaveProperty('disabled');
     });
   });
 
   describe('behaves as expected', () => {
-    describe('direction buttons', () => {
-      it('should move to next page when "Next" button is pressed', () => {
-        const pagination = renderPaginationNav();
+    it('should move to next page when "Next" is pressed', () => {
+      render(<PaginationNav totalItems={4} loop />);
 
-        let pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        let activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(props.page))).toBe(true);
+      userEvent.click(screen.getByLabelText('Next'));
+      expect(screen.getByText('2')).toHaveAttribute('aria-current', 'page');
+    });
 
-        pagination.find(`.${prefix}--btn`).last().simulate('click');
+    it('should move to previous page when "Previous" is pressed', () => {
+      render(<PaginationNav totalItems={4} loop />);
 
-        pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(props.page + 1))).toBe(true);
-      });
+      userEvent.click(screen.getByText('4'));
 
-      it('should move to previous page when "Previous" button is pressed', () => {
-        const pagination = renderPaginationNav();
+      userEvent.click(screen.getByLabelText('Previous'));
+      expect(screen.getByText('3')).toHaveAttribute('aria-current', 'page');
+    });
 
-        let pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        let activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(props.page))).toBe(true);
+    it('should move to page that is pressed', () => {
+      render(<PaginationNav totalItems={4} loop />);
 
-        pagination
-          .find(`.${prefix}--popover-container`)
-          .first()
-          .childAt(0)
-          .simulate('click');
+      userEvent.click(screen.getByText('4'));
 
-        pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(props.page - 1))).toBe(true);
-      });
-
-      it('should move to page when user clicks on one', () => {
-        const pagination = renderPaginationNav();
-
-        let pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        let activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(props.page))).toBe(true);
-
-        pagination
-          .find(`.${prefix}--pagination-nav__page`)
-          .at(4)
-          .simulate('click');
-
-        pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(4))).toBe(true);
-      });
-
-      it('should emit onChange when moved to new page', () => {
-        let i = 0;
-
-        const pagination = renderPaginationNav({
-          onChange: () => {
-            i++;
-          },
-        });
-
-        expect(i).toBe(0);
-        pagination
-          .find(`.${prefix}--popover-container`)
-          .first()
-          .childAt(0)
-          .simulate('click');
-        expect(i).toBe(1);
-        pagination.find(`.${prefix}--btn`).last().simulate('click');
-        expect(i).toBe(2);
-        pagination
-          .find(`.${prefix}--pagination-nav__list-item`)
-          .at(2)
-          .childAt(0)
-          .simulate('click');
-        expect(i).toBe(3);
-      });
-
-      it('should move to last page when "Previous" button is pressed on first page and props.loop = true', () => {
-        const pagination = renderPaginationNav({
-          page: 0,
-          loop: true,
-        });
-
-        let pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        let activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(0))).toBe(true);
-
-        pagination
-          .find(`.${prefix}--popover-container`)
-          .first()
-          .childAt(0)
-          .simulate('click');
-
-        pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(pages.length - 1))).toBe(
-          true
-        );
-      });
-
-      it('should move to first page when "Next" button is pressed on last page and props.loop = true', () => {
-        const pagination = renderPaginationNav({
-          page: 23,
-          loop: true,
-        });
-
-        let pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        let activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(pages.length - 1))).toBe(
-          true
-        );
-        pagination.find(`.${prefix}--btn`).last().simulate('click');
-
-        pages = pagination.find(`.${prefix}--pagination-nav__page`);
-        activePage = pagination.find(
-          `.${prefix}--pagination-nav__page--active`
-        );
-        expect(activePage.matchesElement(pages.get(0))).toBe(true);
-      });
+      expect(screen.getByText('4')).toHaveAttribute('aria-current', 'page');
     });
   });
 });
