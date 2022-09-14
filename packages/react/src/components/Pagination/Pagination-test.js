@@ -16,7 +16,6 @@ describe('Pagination', () => {
     it('should label icon with backwardText', () => {
       render(<Pagination backwardText="Move backwards" pageSizes={[10]} />);
 
-      screen.debug();
       expect(screen.getByText('Move backwards')).toBeDefined();
     });
 
@@ -50,80 +49,131 @@ describe('Pagination', () => {
       expect(screen.getByText('forward')).toBeDefined();
     });
 
-    fit('should respect itemRangeText prop', () => {
+    it('should respect itemRangeText prop', () => {
       render(
         <Pagination
           totalItems={40}
           pageSizes={[10, 20]}
-          pageSize={3}
+          pageSize={4}
           page={1}
           itemRangeText={(min, max, total) =>
-            `${min}–${max} de ${total} elements`
+            `${min}–${max} de ${total} éléments`
           }
         />
       );
 
-      screen.debug();
-      expect(screen.getByText('1–10 de 40 elements')).toBeDefined();
+      expect(screen.getByText('1–10 de 40 éléments')).toBeDefined();
     });
 
     it('should respect itemText prop', () => {
-      render(<Pagination pageSizes={[10]} itemText />);
+      render(
+        <Pagination
+          pagesUnknown
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={1}
+          itemText={(min, max) => `${min}-${max} éléments`}
+        />
+      );
 
-      expect();
+      expect(screen.getByText('1-10 éléments')).toBeDefined();
     });
 
     it('should respect itemsPerPageText prop', () => {
-      render(<Pagination pageSizes={[10]} itemsPerPageText />);
+      render(
+        <Pagination pageSizes={[10]} itemsPerPageText={'éléments par page'} />
+      );
 
-      expect();
+      screen.debug();
+
+      expect(screen.getByText('éléments par page')).toBeDefined();
     });
 
-    it('should respect onChange prop', () => {
-      render(<Pagination pageSizes={[10]} onChange />);
+    it('should call onChange when approrpiate', () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={3}
+          onChange={onChange}
+        />
+      );
 
-      expect();
+      userEvent.click(screen.getByLabelText('Previous page'));
+      userEvent.click(screen.getByLabelText('Next page'));
+      expect(onChange).toHaveBeenCalledTimes(2);
     });
 
-    it('should respect page prop', () => {
-      render(<Pagination pageSizes={[10]} page />);
+    it('should change page based on page', () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={2}
+        />
+      );
 
-      expect();
+      expect(screen.getByText('11–20 of 40 items')).toBeDefined();
     });
 
     it('should respect pageInputDisabled prop', () => {
       render(<Pagination pageSizes={[10]} pageInputDisabled />);
 
-      expect();
-    });
-
-    it('should respect pageNumberText prop', () => {
-      render(<Pagination pageSizes={[10]} pageNumberText />);
-
-      expect();
+      expect(document.querySelectorAll('.cds--select-input')[1]).toHaveProperty(
+        'disabled'
+      );
     });
 
     it('should respect pageRangeText prop', () => {
-      render(<Pagination pageSizes={[10]} pageRangeText />);
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={2}
+          pagesUnknown={false}
+          pageRangeText={(page, totalPages) => {
+            return `${page} de ${totalPages}`;
+          }}
+        />
+      );
 
-      expect();
+      expect(screen.getByText('2 de 4')).toBeDefined();
     });
 
     it('should respect pageSize prop', () => {
-      render(<Pagination pageSizes={[10]} pageSize />);
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20, 30, 40]}
+          pageSize={20}
+          page={2}
+        />
+      );
 
-      expect();
+      expect(screen.getByText('21–40 of 40 items')).toBeDefined();
     });
 
     it('should respect pageSizeInputDisabled prop', () => {
-      render(<Pagination pageSizes={[10]} pageSizeInputDisabled />);
+      render(
+        <Pagination
+          pageSizes={[10, 20, 30, 40]}
+          totalItems={40}
+          pageSizeInputDisabled
+        />
+      );
 
-      expect();
+      expect(document.querySelectorAll('.cds--select-input')[0]).toHaveProperty(
+        'disabled'
+      );
     });
 
-    it('should respect pageSizes prop', () => {
-      render(<Pagination pageSizes={[10]} />);
+    fit('should respect pageSizes prop', () => {
+      render(<Pagination pageSizes={[10, 20, 30, 40]} totalItems={40} />);
 
+      screen.debug();
       expect();
     });
 
