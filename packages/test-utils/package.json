@@ -1,7 +1,7 @@
 {
   "name": "@carbon/test-utils",
   "private": true,
-  "version": "10.25.0",
+  "version": "10.26.0-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",

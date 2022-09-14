@@ -2915,7 +2915,7 @@ Object {
           "property": "font-size",
           "type": "declaration",
           "value": "calc(1.75rem +
-      0 *
+      0.25 *
       ((100vw - 20rem) / 62)
     )",
         },
@@ -2955,7 +2955,7 @@ Object {
             Object {
               "position": Position {
                 "end": Object {
-                  "column": 23,
+                  "column": 20,
                   "line": 277,
                 },
                 "source": undefined,
@@ -2966,7 +2966,7 @@ Object {
               },
               "property": "font-size",
               "type": "declaration",
-              "value": "1.75rem",
+              "value": "2rem",
             },
             Object {
               "position": Position {
@@ -3014,8 +3014,8 @@ Object {
               },
               "property": "font-size",
               "type": "declaration",
-              "value": "calc(1.75rem +
-      0.25 *
+              "value": "calc(2rem +
+      0 *
       ((100vw - 82rem) / 17)
     )",
             },
@@ -8132,7 +8132,7 @@ Object {
           "property": "font-size",
           "type": "declaration",
           "value": "calc(1.75rem +
-      0 *
+      0.25 *
       ((100vw - 20rem) / 62)
     )",
         },
@@ -8172,7 +8172,7 @@ Object {
             Object {
               "position": Position {
                 "end": Object {
-                  "column": 23,
+                  "column": 20,
                   "line": 809,
                 },
                 "source": undefined,
@@ -8183,7 +8183,7 @@ Object {
               },
               "property": "font-size",
               "type": "declaration",
-              "value": "1.75rem",
+              "value": "2rem",
             },
             Object {
               "position": Position {
@@ -8231,8 +8231,8 @@ Object {
               },
               "property": "font-size",
               "type": "declaration",
-              "value": "calc(1.75rem +
-      0.25 *
+              "value": "calc(2rem +
+      0 *
       ((100vw - 82rem) / 17)
     )",
             },
