@@ -2055,7 +2055,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-react@npm:10.49.0, @carbon/icons-react@npm:^10.49.0":
+"@carbon/icons-react@npm:^10.49.0":
   version: 10.49.0
   resolution: "@carbon/icons-react@npm:10.49.0"
   dependencies:
@@ -18023,7 +18023,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "incremental-migration@workspace:examples/incremental-migration"
   dependencies:
-    "@carbon/icons-react": 10.49.0
+    "@carbon/icons-react": ^10.49.0
     "@carbon/react": ^1.13.0-rc.0
     carbon-components: ^10.57.0
     carbon-components-react: ^7.57.0
