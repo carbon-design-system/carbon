@@ -1784,12 +1784,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.1, @babel/runtime@npm:^7.9.2":
-  version: 7.18.3
-  resolution: "@babel/runtime@npm:7.18.3"
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.1, @babel/runtime@npm:^7.9.2":
+  version: 7.18.9
+  resolution: "@babel/runtime@npm:7.18.9"
   dependencies:
     regenerator-runtime: ^0.13.4
-  checksum: db8526226aa02cfa35a5a7ac1a34b5f303c62a1f000c7db48cb06c6290e616483e5036ab3c4e7a84d0f3be6d4e2148d5fe5cec9564bf955f505c3e764b83d7f1
+  checksum: 36dd736baba7164e82b3cc9d43e081f0cb2d05ff867ad39cac515d99546cee75b7f782018b02a3dcf5f2ef3d27f319faa68965fdfec49d4912c60c6002353a2e
   languageName: node
   linkType: hard
 
@@ -1972,6 +1972,13 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/feature-flags@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@carbon/feature-flags@npm:0.7.0"
+  checksum: f16348fa78939e160efcbae3c4ec4ca8511593a9354457c0ed55c586c76cffd4a71c9b4d98cd5b372701a3ef965f1b6741e02939b3d0454490786ce26d8a9137
+  languageName: node
+  linkType: hard
+
 "@carbon/grid@^11.5.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
@@ -2017,7 +2024,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-helpers@^10.32.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@^10.28.0, @carbon/icon-helpers@^10.32.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
@@ -2040,6 +2047,19 @@ __metadata:
     react: ">=16"
   languageName: unknown
   linkType: soft
+
+"@carbon/icons-react@npm:10.49.0, @carbon/icons-react@npm:^10.49.0":
+  version: 10.49.0
+  resolution: "@carbon/icons-react@npm:10.49.0"
+  dependencies:
+    "@carbon/icon-helpers": ^10.28.0
+    "@carbon/telemetry": 0.1.0
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=16"
+  checksum: dd3aec2718ba80a40100f9015aea60f3cc39aa2e08580c07fa342c36034053f29ee5575446b0641692ef2555ca27a3f305561f271a2de2e0ddab564030d94de7
+  languageName: node
+  linkType: hard
 
 "@carbon/icons-vue@workspace:packages/icons-vue":
   version: 0.0.0-use.local
@@ -2078,6 +2098,13 @@ __metadata:
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
+
+"@carbon/layout@npm:^10.37.0":
+  version: 10.37.1
+  resolution: "@carbon/layout@npm:10.37.1"
+  checksum: baabf7e70e4779f0e5000e700bcafe96f272debaac490a4345e39fedf8d0970636f7099e2607aeb9ca6170a56bbacdff69d8181c2a46ed8adac38fadc08332b6
+  languageName: node
+  linkType: hard
 
 "@carbon/motion@^11.3.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
@@ -10627,6 +10654,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"carbon-components-react@npm:^7.57.0":
+  version: 7.59.0
+  resolution: "carbon-components-react@npm:7.59.0"
+  dependencies:
+    "@babel/runtime": ^7.16.7
+    "@carbon/feature-flags": ^0.7.0
+    "@carbon/icons-react": ^10.49.0
+    "@carbon/layout": ^10.37.0
+    "@carbon/telemetry": 0.1.0
+    classnames: 2.3.1
+    copy-to-clipboard: ^3.3.1
+    downshift: 5.2.1
+    flatpickr: 4.6.9
+    invariant: ^2.2.3
+    lodash.debounce: ^4.0.8
+    lodash.findlast: ^4.5.0
+    lodash.isequal: ^4.5.0
+    lodash.omit: ^4.5.0
+    lodash.throttle: ^4.1.1
+    prop-types: ^15.7.2
+    react-is: ^17.0.2
+    use-resize-observer: ^6.0.0
+    wicg-inert: ^3.1.1
+    window-or-global: ^1.0.1
+  peerDependencies:
+    carbon-components: ^10.30.0
+    carbon-icons: ^7.0.7
+    react: ^16.8.6 || ^17.0.1
+    react-dom: ^16.8.6 || ^17.0.1
+  checksum: 7762d139dfa7a9ab7186f4c3d91381ba0cdc1299b6ee202233e7f67603900e4878e86a43d9a7e6bef37e1861c2124b0c4c3c20230c74853cbae3114902ecba79
+  languageName: node
+  linkType: hard
+
 "carbon-components-react@workspace:packages/carbon-components-react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/carbon-components-react"
@@ -10661,6 +10721,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"carbon-components@npm:^10.57.0":
+  version: 10.58.0
+  resolution: "carbon-components@npm:10.58.0"
+  dependencies:
+    "@carbon/telemetry": 0.1.0
+    flatpickr: 4.6.1
+    lodash.debounce: ^4.0.8
+    warning: ^3.0.0
+  checksum: 25dbc8c50908db559cfde297d458fdb4c31aa376bd94339b2d16191751c3e2f736689a180368f6727275e45c45260b9c6b8a71ebe3bb63816b995dffbe50a861
+  languageName: node
+  linkType: hard
+
 "carbon-components@workspace:packages/carbon-components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
@@ -10675,6 +10747,13 @@ __metadata:
     sass: ^1.33.0
   languageName: unknown
   linkType: soft
+
+"carbon-icons@npm:^7.0.7":
+  version: 7.0.7
+  resolution: "carbon-icons@npm:7.0.7"
+  checksum: ecb87c4f09ef52dab4a01c3de8ab5aeee14f1c93dedd09f164e95143642a34fe7a52433ab76a3536565db14f037dd8c1bf7ff1ed45b28c9c49a1bee142ffc1b5
+  languageName: node
+  linkType: hard
 
 "carbon@workspace:.":
   version: 0.0.0-use.local
@@ -16012,6 +16091,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flatpickr@npm:4.6.1":
+  version: 4.6.1
+  resolution: "flatpickr@npm:4.6.1"
+  checksum: 66ea82084a70570a0dcf5a46a3b7e6a6551ec06fd1238f544226540feae69d2c3fd7af69f77c73023059e1a0d50e2f6ed0a6c4d4c390794cc4c8dd3c50002338
+  languageName: node
+  linkType: hard
+
 "flatpickr@npm:4.6.9":
   version: 4.6.9
   resolution: "flatpickr@npm:4.6.9"
@@ -17925,6 +18011,24 @@ fsevents@^1.2.7:
   checksum: 7cae75c8cd9a50f57dadd77482359f659eaebac0319dd9368bcd1714f55e65badd6929ca58569da2b6494ef13fdd5598cd700b1eba23f8b79c5f19d195a3ecf7
   languageName: node
   linkType: hard
+
+"incremental-migration@workspace:examples/incremental-migration":
+  version: 0.0.0-use.local
+  resolution: "incremental-migration@workspace:examples/incremental-migration"
+  dependencies:
+    "@carbon/icons-react": 10.49.0
+    "@carbon/react": ^1.12.0
+    carbon-components: ^10.57.0
+    carbon-components-react: ^7.57.0
+    carbon-icons: ^7.0.7
+    eslint: 8.12.0
+    eslint-config-next: 12.1.4
+    next: 12.1.4
+    react: 18.0.0
+    react-dom: 18.0.0
+    sass: ^1.51.0
+  languageName: unknown
+  linkType: soft
 
 "indent-string@npm:^2.1.0":
   version: 2.1.0
@@ -31875,6 +31979,15 @@ resolve@^2.0.0-next.3:
   dependencies:
     makeerror: 1.0.x
   checksum: 4038fcf92f6ab0288267ad05008aec9e089a759f1bd32e1ea45cc2eb498eb12095ec43cf8ca2bf23a465f4580a0d33b25b89f450ba521dd27083cbc695ee6bf5
+  languageName: node
+  linkType: hard
+
+"warning@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "warning@npm:3.0.0"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: c9f99a12803aab81b29858e7dc3415bf98b41baee3a4c3acdeb680d98c47b6e17490f1087dccc54432deed5711a5ce0ebcda2b27e9b5eb054c32ae50acb4419c
   languageName: node
   linkType: hard
 
