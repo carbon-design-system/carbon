@@ -1,16 +1,19 @@
 {
   "name": "incremental-migration",
   "private": true,
-  "version": "0.12.0",
+  "version": "0.13.0-rc.0",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
     "start": "next start"
   },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "dependencies": {
-    "@carbon/icons-react": "10.49.0",
-    "@carbon/react": "^1.12.0",
+    "@carbon/icons-react": "^10.49.0",
+    "@carbon/react": "^1.13.0-rc.0",
     "carbon-components": "^10.57.0",
     "carbon-components-react": "^7.57.0",
     "carbon-icons": "^7.0.7",
