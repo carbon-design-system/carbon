@@ -1935,6 +1935,11 @@
     - polygon
   sizes:
     - 32
+- name: build-tool
+  friendly_name: build-tool
+  aliases: []
+  sizes:
+    - 32
 - name: building
   friendly_name: Building
   aliases:
@@ -2507,6 +2512,11 @@
     - catagorize
     - catalog
     - file
+  sizes:
+    - 32
+- name: catalog--publish
+  friendly_name: catalog--publish
+  aliases: []
   sizes:
     - 32
 - name: categories
@@ -4602,6 +4612,16 @@
     - continue
     - resume
     - filled
+  sizes:
+    - 32
+- name: continuous-deployment
+  friendly_name: continuous-deployment
+  aliases: []
+  sizes:
+    - 32
+- name: continuous-integration
+  friendly_name: continuous-integration
+  aliases: []
   sizes:
     - 32
 - name: contour--draw
@@ -8815,10 +8835,20 @@
     - replication
   sizes:
     - 32
+- name: ibm--datastage
+  friendly_name: ibm--datastage
+  aliases: []
+  sizes:
+    - 32
 - name: ibm--match-360
   friendly_name: IBM® Match 360
   aliases:
     - Match 360
+  sizes:
+    - 32
+- name: ibm--mq
+  friendly_name: ibm--mq
+  aliases: []
   sizes:
     - 32
 - name: ibm--open-enterprise-languages
@@ -8826,6 +8856,11 @@
   aliases:
     - Open Enterprise Languages
     - z16
+  sizes:
+    - 32
+- name: ibm--power-vs
+  friendly_name: ibm--power-vs
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud
@@ -8843,6 +8878,11 @@
     - IBM Cloud
   sizes:
     - 32
+- name: ibm-cloud--citrix-daas
+  friendly_name: ibm-cloud--citrix-daas
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud--dedicated-host
   friendly_name: IBM Cloud® Dedicated Host
   aliases:
@@ -8853,6 +8893,66 @@
     - dedicated
     - host
     - cloud
+  sizes:
+    - 32
+- name: ibm-cloud--direct-link-1--connect
+  friendly_name: ibm-cloud--direct-link-1--connect
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--direct-link-1--dedicated
+  friendly_name: ibm-cloud--direct-link-1--dedicated
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--direct-link-1--dedicated-hosting
+  friendly_name: ibm-cloud--direct-link-1--dedicated-hosting
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--direct-link-1--exchange
+  friendly_name: ibm-cloud--direct-link-1--exchange
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--direct-link-2--connect
+  friendly_name: ibm-cloud--direct-link-2--connect
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--direct-link-2--dedicated
+  friendly_name: ibm-cloud--direct-link-2--dedicated
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--direct-link-2--dedicated-hosting
+  friendly_name: ibm-cloud--direct-link-2--dedicated-hosting
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--event-notification
+  friendly_name: ibm-cloud--event-notification
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--event-streams
+  friendly_name: ibm-cloud--event-streams
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--hyper-protect-crypto-services
+  friendly_name: ibm-cloud--hyper-protect-crypto-services
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--hyper-protect-dbaas
+  friendly_name: ibm-cloud--hyper-protect-dbaas
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--hyper-protect-vs
+  friendly_name: ibm-cloud--hyper-protect-vs
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud--internet-services
@@ -8866,6 +8966,11 @@
     - cloud
   sizes:
     - 32
+- name: ibm-cloud--key-protect
+  friendly_name: ibm-cloud--key-protect
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud--kubernetes-service
   friendly_name: IBM Cloud® Kubernetes Service
   aliases:
@@ -8874,6 +8979,26 @@
     - hybrid
     - IBM Cloud®
     - Kubernetes
+  sizes:
+    - 32
+- name: ibm-cloud--logging
+  friendly_name: ibm-cloud--logging
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--mass-data-migration
+  friendly_name: ibm-cloud--mass-data-migration
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--pal
+  friendly_name: ibm-cloud--pal
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--secrets-manager
+  friendly_name: ibm-cloud--secrets-manager
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud--security-compliance-center
@@ -8895,6 +9020,11 @@
     - IBM Cloud®
     - internet
     - cloud
+  sizes:
+    - 32
+- name: ibm-cloud--sysdig-secure
+  friendly_name: ibm-cloud--sysdig-secure
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud--transit-gateway
@@ -8982,6 +9112,11 @@
     - IBM Cloud Pak®
   sizes:
     - 32
+- name: ibm-cloud-pak--netezza
+  friendly_name: ibm-cloud-pak--netezza
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud-pak--network-automation
   friendly_name: IBM Cloud Pak® Network Automation
   aliases:
@@ -9046,6 +9181,51 @@
     - security
   sizes:
     - 32
+- name: ibm-watson--assistant
+  friendly_name: ibm-watson--assistant
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--discovery
+  friendly_name: ibm-watson--discovery
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--knowledge-catalog
+  friendly_name: ibm-watson--knowledge-catalog
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--knowledge-studio
+  friendly_name: ibm-watson--knowledge-studio
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--language-translator
+  friendly_name: ibm-watson--language-translator
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--machine-learning
+  friendly_name: ibm-watson--machine-learning
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--natural-language-classifier
+  friendly_name: ibm-watson--natural-language-classifier
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--natural-language-understanding
+  friendly_name: ibm-watson--natural-language-understanding
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--openscale
+  friendly_name: ibm-watson--openscale
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-watson--orders
   friendly_name: IBM Watson® Orders
   aliases:
@@ -9053,6 +9233,31 @@
     - enterprise
     - app
     - orders
+  sizes:
+    - 32
+- name: ibm-watson--query
+  friendly_name: ibm-watson--query
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--speech-to-text
+  friendly_name: ibm-watson--speech-to-text
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--studio
+  friendly_name: ibm-watson--studio
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--text-to-speech
+  friendly_name: ibm-watson--text-to-speech
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-watson--tone-analyzer
+  friendly_name: ibm-watson--tone-analyzer
+  aliases: []
   sizes:
     - 32
 - name: ibm-z--cloud-mod-stack
@@ -9849,6 +10054,11 @@
     - computer
     - word processor
     - write
+  sizes:
+    - 32
+- name: keyboard--off
+  friendly_name: keyboard--off
+  aliases: []
   sizes:
     - 32
 - name: kubernetes
@@ -10724,6 +10934,11 @@
     - username
   sizes:
     - 32
+- name: logo--angular
+  friendly_name: logo--angular
+  aliases: []
+  sizes:
+    - 32
 - name: logo--digg
   friendly_name: Logo Digg
   sizes:
@@ -10763,6 +10978,11 @@
     - avatar
     - tag
     - identification
+- name: logo--figma
+  friendly_name: logo--figma
+  aliases: []
+  sizes:
+    - 32
 - name: logo--flickr
   friendly_name: Logo Flickr
   sizes:
@@ -10815,6 +11035,11 @@
     - avatar
     - tag
     - identification
+- name: logo--invision
+  friendly_name: logo--invision
+  aliases: []
+  sizes:
+    - 32
 - name: logo--jupyter
   friendly_name: Logo Jupyter
   aliases:
@@ -10893,6 +11118,11 @@
     - avatar
     - tag
     - identification
+- name: logo--npm
+  friendly_name: logo--npm
+  aliases: []
+  sizes:
+    - 32
 - name: logo--openshift
   friendly_name: Logo OpenShift®
   sizes:
@@ -10961,6 +11191,16 @@
     - identification
   sizes:
     - 32
+- name: logo--react
+  friendly_name: logo--react
+  aliases: []
+  sizes:
+    - 32
+- name: logo--sketch
+  friendly_name: logo--sketch
+  aliases: []
+  sizes:
+    - 32
 - name: logo--skype
   friendly_name: Logo Skype
   sizes:
@@ -11000,6 +11240,11 @@
     - avatar
     - tag
     - identification
+- name: logo--svelte
+  friendly_name: logo--svelte
+  aliases: []
+  sizes:
+    - 32
 - name: logo--tumblr
   friendly_name: Logo Tumblr
   sizes:
@@ -11039,6 +11284,11 @@
     - avatar
     - tag
     - identification
+- name: logo--vue
+  friendly_name: logo--vue
+  aliases: []
+  sizes:
+    - 32
 - name: logo--wechat
   friendly_name: Logo WeChat
   aliases:
@@ -13870,6 +14120,11 @@
     - loading
   sizes:
     - 32
+- name: promote
+  friendly_name: promote
+  aliases: []
+  sizes:
+    - 32
 - name: property-relationship
   friendly_name: Property relationship
   aliases:
@@ -14238,6 +14493,16 @@
     - back
     - respond all
     - email
+  sizes:
+    - 32
+- name: repo--artifact
+  friendly_name: repo--artifact
+  aliases: []
+  sizes:
+    - 32
+- name: repo--source-code
+  friendly_name: repo--source-code
+  aliases: []
   sizes:
     - 32
 - name: report
@@ -15578,6 +15843,26 @@
     - vehicle
     - delivery
     - car
+  sizes:
+    - 32
+- name: side-panel--close
+  friendly_name: side-panel--close
+  aliases: []
+  sizes:
+    - 32
+- name: side-panel--close--filled
+  friendly_name: side-panel--close--filled
+  aliases: []
+  sizes:
+    - 32
+- name: side-panel--open
+  friendly_name: side-panel--open
+  aliases: []
+  sizes:
+    - 32
+- name: side-panel--open--filled
+  friendly_name: side-panel--open--filled
+  aliases: []
   sizes:
     - 32
 - name: sight
@@ -17169,6 +17454,11 @@
     - '3270'
   sizes:
     - 32
+- name: test-tool
+  friendly_name: test-tool
+  aliases: []
+  sizes:
+    - 32
 - name: text--align--center
   friendly_name: Text align center
   sizes:
@@ -18207,6 +18497,11 @@
     - opened
   sizes:
     - 16
+    - 32
+- name: unsaved
+  friendly_name: unsaved
+  aliases: []
+  sizes:
     - 32
 - name: up-to-top
   friendly_name: Up to top
