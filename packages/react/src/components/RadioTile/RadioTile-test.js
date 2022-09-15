@@ -15,7 +15,6 @@ describe('RadioTile', () => {
     it('should spread extra props onto outermost element', () => {
       render(<RadioTile value="standard" data-testid="test-id" />);
 
-      screen.debug();
       expect(document.querySelector('.cds--tile')).toHaveAttribute(
         'data-testid',
         'test-id'
