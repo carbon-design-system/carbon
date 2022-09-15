@@ -1,0 +1,71 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <style>
+    /* Suppress custom element until styles are loaded */
+    bx-ordered-list:not(:defined) {
+      display: none;
+    }
+
+    bx-unordered-list:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <h3>bx-ordered-list</h3>
+
+  <bx-ordered-list>
+    <bx-list-item>
+      Ordered List level 1
+      <bx-ordered-list>
+        <bx-list-item>Ordered List level 2</bx-list-item>
+        <bx-list-item>
+          Ordered List level 2
+          <bx-ordered-list>
+            <bx-list-item>Ordered List level 2</bx-list-item>
+            <bx-list-item>Ordered List level 2</bx-list-item>
+          </bx-ordered-list>
+        </bx-list-item>
+      </bx-ordered-list>
+    </bx-list-item>
+    <bx-list-item>Ordered List level 1</bx-list-item>
+    <bx-list-item>Ordered List level 1</bx-list-item>
+  </bx-ordered-list>
+
+  <hr style="margin: 3rem 0" />
+
+  <h3>bx-unordered-list</h3>
+
+  <bx-unordered-list>
+    <bx-list-item>
+      Unordered List level 1
+      <bx-unordered-list>
+        <bx-list-item>Unordered List level 2</bx-list-item>
+        <bx-list-item>
+          Unordered List level 2
+          <bx-unordered-list>
+            <bx-list-item>Unordered List level 2</bx-list-item>
+            <bx-list-item>Unordered List level 2</bx-list-item>
+          </bx-unordered-list>
+        </bx-list-item>
+      </bx-unordered-list>
+    </bx-list-item>
+    <bx-list-item>Unordered List level 1</bx-list-item>
+    <bx-list-item>Unordered List level 1</bx-list-item>
+  </bx-unordered-list>
+</body>
+</html>

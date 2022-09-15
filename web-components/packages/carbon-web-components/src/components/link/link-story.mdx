@@ -1,0 +1,52 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Link
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/link)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/link)
+
+Represents a link. Provided for convenience purpose, you can alternatively use `<a class="bx--link">` with Carbon style in place in light DOM.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/list/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['list'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-link href="https://www.ibm.com"> Link </bx-link>
+```
+
+## Paired with icon
+
+Import the desired icon and incorporate with the link text:
+
+```javascript
+import Download16 from 'carbon-web-components/es/icons/download/16';
+
+function App() {
+  return (
+    html`<bx-link href="https://www.ibm.com"> Download ${Download16({ slot: 'icon' })}</bx-link>`
+  );
+
+```
+
+## `<bx-link>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-link disabled>`) and `false` means not setting the attribute (e.g. `<bx-link>` without `disabled` attribute).
+
+<Props of="bx-link" />

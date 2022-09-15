@@ -1,0 +1,92 @@
+//
+// Copyright IBM Corp. 2019, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/tile/tile';
+@import 'carbon-components/scss/components/link/link';
+
+:host(#{$prefix}-tile) {
+  @extend .#{$prefix}--tile;
+}
+
+:host(#{$prefix}-clickable-tile) {
+  display: block;
+  display: content;
+  outline: none;
+
+  .#{$prefix}--link--disabled {
+    display: block;
+  }
+
+  .#{$prefix}--tile {
+    // Overrides what `.#{$prefix}--link` defines
+    padding: $carbon--spacing-05;
+    outline: 2px solid transparent;
+  }
+
+  .#{$prefix}--tile--clickable {
+    // Overrides what `.#{$prefix}--link` defines
+    transition: $duration--moderate-01 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+}
+
+:host(#{$prefix}-radio-tile) {
+  display: block;
+  display: content;
+  outline: none;
+}
+
+:host(#{$prefix}-selectable-tile) {
+  display: block;
+  display: content;
+  outline: none;
+}
+
+:host(#{$prefix}-radio-tile),
+:host(#{$prefix}-selectable-tile) {
+  .#{$prefix}--tile-input:checked ~ .#{$prefix}--tile--selectable .#{$prefix}--tile__checkmark {
+    opacity: 1;
+  }
+}
+
+:host(#{$prefix}-expandable-tile) {
+  @extend .#{$prefix}--tile;
+  @extend .#{$prefix}--tile--expandable;
+  position: relative;
+
+  ::slotted(#{$prefix}-tile-above-the-fold-content) {
+    @extend .#{$prefix}--tile-content__above-the-fold;
+  }
+
+  ::slotted(#{$prefix}-tile-below-the-fold-content) {
+    @extend .#{$prefix}--tile-content__below-the-fold;
+  }
+
+  .#{$prefix}-ce--expandable-tile--below-the-fold-content {
+    max-height: 0;
+    transition: max-height $duration--fast-02 motion(standard, productive);
+  }
+}
+
+:host(#{$prefix}-expandable-tile[expanded]) {
+  @extend .#{$prefix}--tile--is-expanded;
+
+  ::slotted(#{$prefix}-tile-below-the-fold-content) {
+    opacity: 1;
+    transition: $duration--fast-02 motion(standard, productive);
+  }
+}
+
+:host(#{$prefix}-tile[color-scheme='light']),
+:host(#{$prefix}-expandable-tile[color-scheme='light']) {
+  @extend .#{$prefix}--tile--light;
+}

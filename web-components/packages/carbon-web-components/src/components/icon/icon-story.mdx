@@ -1,0 +1,27 @@
+import { Props } from '@storybook/addon-docs/blocks';
+
+# Icon
+
+Icons can be utilized by specifying the icon name and size in the import.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import Add16 from 'carbon-web-components/es/icons/add/16';
+
+function App() {
+  return (
+    html`
+    ${Add16({
+     class: 'test-class',
+     'aria-label': 'add',
+     'aria-describedby': 'id-title-1',
+     children: svg`<title id="id-title-1">add</title>`, })}`
+  );
+```
+
+Icon library can be found [here](https://www.carbondesignsystem.com/guidelines/icons/library).

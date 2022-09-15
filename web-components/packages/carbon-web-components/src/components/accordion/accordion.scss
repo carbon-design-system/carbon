@@ -1,0 +1,55 @@
+//
+// Copyright IBM Corp. 2019, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/accordion/accordion';
+
+:host(#{$prefix}-accordion) {
+  @extend .#{$prefix}--accordion;
+}
+
+:host(#{$prefix}-accordion-item) {
+  @extend .#{$prefix}--accordion__item;
+
+  display: block;
+  outline: none;
+
+  .#{$prefix}--accordion__heading {
+    padding-top: calc((#{$container-03} - #{map-get($body-long-01, 'line-height')}rem) / 2);
+    min-height: $container-03;
+  }
+
+  &[size='sm'] {
+    .#{$prefix}--accordion__heading {
+      min-height: rem(32px);
+      padding: rem(5px) 0;
+    }
+  }
+
+  &[size='xl'] {
+    .#{$prefix}--accordion__heading {
+      min-height: rem(48px);
+    }
+  }
+}
+
+:host(#{$prefix}-accordion-item[open]:not([disabled])) {
+  @extend .#{$prefix}--accordion__item--active;
+
+  .#{$prefix}--accordion__content {
+    padding-right: $carbon--spacing-05;
+  }
+
+  .#{$prefix}-ce--accordion__content--sm {
+    padding-right: $carbon--spacing-09;
+  }
+
+  .#{$prefix}-ce--accordion__content--md {
+    padding-right: 25%;
+  }
+}

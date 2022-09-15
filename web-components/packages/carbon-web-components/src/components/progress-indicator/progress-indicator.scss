@@ -1,0 +1,110 @@
+//
+// Copyright IBM Corp. 2019, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+
+:host(#{$prefix}-progress-indicator),
+:host(#{$prefix}-progress-indicator-skeleton) {
+  @extend .#{$prefix}--progress;
+}
+
+:host(#{$prefix}-progress-indicator[vertical]),
+:host(#{$prefix}-progress-indicator-skeleton[vertical]) {
+  @extend .#{$prefix}--progress--vertical;
+}
+
+:host(#{$prefix}-progress-step),
+:host(#{$prefix}-progress-step-skeleton) {
+  @extend .#{$prefix}--progress-step;
+  @extend .#{$prefix}--progress-step--incomplete;
+
+  outline: none;
+
+  // Carbon core style has hard-coded width whose value is the same as `.bx--progress-step`.
+  // We override it so changing width of `<bx-progress-step>` automatically changes the width here.
+  // https://github.com/carbon-design-system/carbon-web-components/issues/325
+  .#{$prefix}--progress-line {
+    width: 100%;
+  }
+}
+
+:host(#{$prefix}-progress-step[disabled]) {
+  @extend .#{$prefix}--progress-step--disabled;
+}
+
+:host(#{$prefix}-progress-step[vertical]),
+:host(#{$prefix}-progress-step-skeleton[vertical]) {
+  display: list-item;
+  min-height: 6rem;
+  width: initial;
+  min-width: initial;
+
+  svg {
+    display: inline-block;
+    margin: 0.1rem 0.5rem;
+  }
+
+  .#{$prefix}--progress-label {
+    display: inline-block;
+    max-width: none;
+    vertical-align: top;
+    margin: 0;
+  }
+
+  .#{$prefix}--progress-line {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 1px;
+  }
+}
+
+:host(#{$prefix}-progress-step[vertical]) {
+  .#{$prefix}--progress-label {
+    width: initial;
+  }
+
+  .#{$prefix}--progress-optional {
+    margin-top: auto;
+    position: initial;
+    margin-left: 2.25rem;
+  }
+}
+
+:host(#{$prefix}-progress-step[vertical][state='current']) svg {
+  margin-left: 0.563rem;
+}
+
+:host(#{$prefix}-progress-step[state='current']) {
+  @extend .#{$prefix}--progress-step--current;
+}
+
+:host(#{$prefix}-progress-step[state='complete']) {
+  @extend .#{$prefix}--progress-step--complete;
+
+  svg {
+    fill: $interactive-01;
+  }
+}
+
+:host(#{$prefix}-progress-step-skeleton) .#{$prefix}--progress-label {
+  @include skeleton;
+  height: rem(12px);
+  width: rem(40px);
+}
+
+:host(#{$prefix}-progress-step-skeleton) {
+  svg {
+    fill: $ui-05;
+  }
+
+  .#{$prefix}--progress-line {
+    background-color: $ui-03;
+  }
+}

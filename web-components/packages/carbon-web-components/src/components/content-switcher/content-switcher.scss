@@ -1,0 +1,90 @@
+//
+// Copyright IBM Corp. 2019, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/content-switcher/content-switcher';
+
+:host(#{$prefix}-content-switcher) {
+  @extend .#{$prefix}--content-switcher;
+}
+
+:host(#{$prefix}-content-switcher[size='sm']) {
+  @extend .#{$prefix}--content-switcher--sm;
+}
+
+:host(#{$prefix}-content-switcher[size='xl']) {
+  @extend .#{$prefix}--content-switcher--xl;
+}
+
+:host(#{$prefix}-content-switcher-item) {
+  width: 100%;
+  outline: none;
+
+  .#{$prefix}--content-switcher-btn {
+    height: 100%;
+
+    &:first-child,
+    &:last-child {
+      border-radius: 0;
+      border-left: none;
+      border-right: none;
+    }
+
+    &::before {
+      content: '';
+      display: block;
+      height: rem(16px);
+      width: rem(1px);
+      background-color: $content-switcher-divider;
+      position: absolute;
+      z-index: 2;
+      left: 0;
+    }
+
+    &.#{$prefix}--content-switcher--selected,
+    &:focus,
+    &:hover {
+      &::before {
+        background-color: transparent;
+      }
+    }
+
+    &:disabled {
+      border-top-color: $ui-05;
+      border-bottom-color: $ui-05;
+    }
+  }
+}
+
+:host(#{$prefix}-content-switcher-item[hide-divider]) .#{$prefix}--content-switcher-btn::before {
+  background-color: transparent;
+}
+
+:host(#{$prefix}-content-switcher-item:first-of-type) .#{$prefix}--content-switcher-btn {
+  border-top-left-radius: rem(4px);
+  border-bottom-left-radius: rem(4px);
+  border-left: rem(1px) solid $ui-05;
+
+  &::before {
+    content: none;
+  }
+
+  &.#{$prefix}--content-switcher--selected {
+    border-left: none;
+  }
+}
+
+:host(#{$prefix}-content-switcher-item:last-of-type) .#{$prefix}--content-switcher-btn {
+  border-top-right-radius: rem(4px);
+  border-bottom-right-radius: rem(4px);
+  border-right: rem(1px) solid $ui-05;
+
+  &.#{$prefix}--content-switcher--selected {
+    border-right: none;
+  }
+}

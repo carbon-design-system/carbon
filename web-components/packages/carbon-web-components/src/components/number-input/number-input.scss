@@ -1,0 +1,21 @@
+//
+// Copyright IBM Corp. 2019, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/number-input/number-input';
+
+:host(#{$prefix}-number-input),
+:host(#{$prefix}-number-input-skeleton) {
+  // the base text-input class has a 100% so we need to propagate it up to the host element
+  width: 100%;
+  outline: none;
+
+  .bx--form-requirement[hidden] {
+    display: none;
+  }
+}

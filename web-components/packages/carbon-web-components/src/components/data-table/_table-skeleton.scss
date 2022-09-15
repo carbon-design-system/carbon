@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2019
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+
+:host(#{$prefix}-table-header-cell-skeleton),
+:host(#{$prefix}-table-cell-skeleton) {
+  span {
+    @include skeleton;
+    width: 75%;
+    height: 1rem;
+    display: block;
+  }
+}
+
+:host(#{$prefix}-table-header-cell-skeleton) {
+  border-bottom: 1px solid $brand-01;
+  vertical-align: middle;
+}

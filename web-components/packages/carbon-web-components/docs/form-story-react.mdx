@@ -1,0 +1,43 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Introduction/Form paticipation" />
+
+# Having components participate in form with `redux-form`
+
+You can use our form components with Redux Form by creating a React component that wraps our form components:
+
+```javascript
+import { Field } from 'redux-form';
+import BXFormItem from 'carbon-web-components/es/components-react/form/form-item';
+import BXInput from 'carbon-web-components/es/components-react/input/input';
+
+...
+
+// A React component that wraps form components from `carbon-web-components`
+const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
+  const validityMessage = !touched ? undefined : error;
+  return (
+    <BXFormItem>
+      <BXInput
+        {...input}
+        invalid={Boolean(validityMessage)}
+        label-text={label}
+        type={type}
+        placeholder={label}
+        validityMessage={validityMessage}
+      />
+    </BXFormItem>
+  );
+};
+
+...
+
+<Field name="username" type="text" component={FieldImpl} label="Username" />
+```
+
+<iframe
+  src="https://codesandbox.io/embed/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/form/redux-form?fontsize=14&hidenavigation=1&theme=light"
+  style={{ width: '100%', height: '500px', border: 'solid rgba(0,0,0,0.1) 1px', boxShadow: 'rgba(0,0,0,0.1) 0 1px 3px 0' }}
+  title="carbon-web-components-getting-started"
+  sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+></iframe>

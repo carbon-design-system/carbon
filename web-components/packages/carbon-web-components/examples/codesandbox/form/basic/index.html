@@ -1,0 +1,68 @@
+<!--
+@license
+
+Copyright IBM Corp. 2019
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components form example</title>
+    <meta charset="UTF-8" />
+    <style type="text/css">
+      body {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      }
+
+      form {
+        width: 640px;
+        padding: 2rem;
+      }
+
+      bx-btn + bx-btn {
+        margin: 0 1rem;
+      }
+
+      bx-form-item, bx-inline-notification {
+        margin-bottom: 2rem;
+      }
+
+      .bx-ce-demo-redux-form--btn-container {
+        display: flex;
+        align-items: center;
+      }
+
+      bx-btn,
+      bx-input,
+      bx-form-item,
+      bx-inline-notification {
+        visibility: hidden;
+      }
+
+      bx-btn:defined,
+      bx-input:defined,
+      bx-form-item:defined,
+      bx-inline-notification:defined {
+        visibility: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="form-login">
+      <bx-inline-notification id="notification" kind="error" hide-close-button title="Login failed" subtitle="Please correct below errors."></bx-inline-notification>
+      <bx-form-item>
+        <bx-input id="input-username" type="text" name="username" label-text="Username" placeholder="Username"></bx-input>
+      </bx-form-item>
+      <bx-form-item>
+        <bx-input id="input-password" type="password" name="password" label-text="Password" placeholder="Password"></bx-input>
+      </bx-form-item>
+      <div className="bx-ce-demo-redux-form--btn-container">
+        <bx-btn id="btn-login">Log in</bx-btn>
+        <bx-btn id="btn-reset" kind="secondary">Clear Values</bx-btn>
+      </div>
+    </form>
+    <script type="module" src="src/index.js"></script>
+  </body>
+</html>

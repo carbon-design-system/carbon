@@ -1,0 +1,58 @@
+//
+// Copyright IBM Corp. 2019, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/notification/toast-notification';
+@import 'carbon-components/scss/components/button/button';
+
+:host(#{$prefix}-toast-notification) {
+  @extend .#{$prefix}--toast-notification;
+
+  display: none;
+  outline: none;
+}
+
+:host(#{$prefix}-toast-notification[open]) {
+  display: flex;
+}
+
+:host(#{$prefix}-toast-notification[hide-close-button]) .#{$prefix}--toast-notification__close-button {
+  display: none;
+}
+
+:host(#{$prefix}-toast-notification[kind='success']) {
+  @extend .#{$prefix}--toast-notification--success;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--toast-notification--low-contrast, .#{$prefix}--toast-notification--success;
+  }
+}
+
+:host(#{$prefix}-toast-notification[kind='info']) {
+  @extend .#{$prefix}--toast-notification--info;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--toast-notification--low-contrast, .#{$prefix}--toast-notification--info;
+  }
+}
+
+:host(#{$prefix}-toast-notification[kind='warning']) {
+  @extend .#{$prefix}--toast-notification--warning;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--toast-notification--low-contrast, .#{$prefix}--toast-notification--warning;
+  }
+}
+
+:host(#{$prefix}-toast-notification[kind='error']) {
+  @extend .#{$prefix}--toast-notification--error;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--toast-notification--low-contrast, .#{$prefix}--toast-notification--error;
+  }
+}

@@ -1,0 +1,62 @@
+//
+// Copyright IBM Corp. 2019, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/notification/inline-notification';
+@import 'carbon-components/scss/components/button/button';
+
+:host(#{$prefix}-inline-notification) {
+  @extend .#{$prefix}--inline-notification;
+
+  display: none;
+  outline: none;
+
+  .#{$prefix}--inline-notification__close-button:focus {
+    @include focus-outline('outline');
+  }
+}
+
+:host(#{$prefix}-inline-notification[open]) {
+  display: flex;
+}
+
+:host(#{$prefix}-inline-notification[hide-close-button]) .#{$prefix}--inline-notification__close-button {
+  display: none;
+}
+
+:host(#{$prefix}-inline-notification[kind='success']) {
+  @extend .#{$prefix}--inline-notification--success;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--inline-notification--low-contrast, .#{$prefix}--inline-notification--success;
+  }
+}
+
+:host(#{$prefix}-inline-notification[kind='info']) {
+  @extend .#{$prefix}--inline-notification--info;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--inline-notification--low-contrast, .#{$prefix}--inline-notification--info;
+  }
+}
+
+:host(#{$prefix}-inline-notification[kind='warning']) {
+  @extend .#{$prefix}--inline-notification--warning;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--inline-notification--low-contrast, .#{$prefix}--inline-notification--warning;
+  }
+}
+
+:host(#{$prefix}-inline-notification[kind='error']) {
+  @extend .#{$prefix}--inline-notification--error;
+
+  &[low-contrast] {
+    @extend .#{$prefix}--inline-notification--low-contrast, .#{$prefix}--inline-notification--error;
+  }
+}

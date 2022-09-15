@@ -1,0 +1,190 @@
+//
+// Copyright IBM Corp. 2019, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//
+// Table
+//
+
+:host(#{$prefix}-table) {
+  @extend .#{$prefix}--data-table;
+  display: table;
+}
+
+//
+// Table header and table body
+//
+
+:host(#{$prefix}-table) {
+  ::slotted(#{$prefix}-table-head) {
+    @include type-style('heading-01');
+    background-color: $ui-03;
+    display: table-header-group;
+  }
+
+  ::slotted(#{$prefix}-table-body) {
+    @include type-style('body-short-01');
+    background-color: $ui-01;
+    width: 100%;
+    display: table-row-group;
+  }
+}
+
+//
+// Common style for table cell and table header cell
+//
+
+:host(#{$prefix}-table-header-row) ::slotted(#{$prefix}-table-header-cell),
+:host(#{$prefix}-table-header-row) ::slotted(#{$prefix}-table-header-cell-skeleton),
+:host(#{$prefix}-table-header-row) .#{$prefix}--table-column-checkbox,
+:host(#{$prefix}-table-header-expand-row) ::slotted(#{$prefix}-table-header-cell),
+:host(#{$prefix}-table-header-expand-row) ::slotted(#{$prefix}-table-header-cell-skeleton),
+:host(#{$prefix}-table-header-expand-row) .#{$prefix}--table-expand,
+:host(#{$prefix}-table-header-expand-row) .#{$prefix}--table-column-checkbox,
+:host(#{$prefix}-table-row) ::slotted(#{$prefix}-table-cell),
+:host(#{$prefix}-table-row) ::slotted(#{$prefix}-table-cell-skeleton),
+:host(#{$prefix}-table-row) .#{$prefix}--table-column-checkbox,
+:host(#{$prefix}-table-expand-row) ::slotted(#{$prefix}-table-cell),
+:host(#{$prefix}-table-expand-row) ::slotted(#{$prefix}-table-cell-skeleton),
+:host(#{$prefix}-table-expand-row) .#{$prefix}--table-expand,
+:host(#{$prefix}-table-expand-row) .#{$prefix}--table-column-checkbox {
+  display: table-cell;
+}
+
+//
+// Table header row
+//
+
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row),
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-expand-row) {
+  height: $layout-04;
+  display: table-row;
+}
+
+//
+// Table header cell
+//
+
+:host(#{$prefix}-table-header-row),
+:host(#{$prefix}-table-header-expand-row) {
+  outline: none;
+
+  ::slotted(#{$prefix}-table-header-cell),
+  ::slotted(#{$prefix}-table-header-cell-skeleton) {
+    color: $text-01;
+    background-color: $ui-03;
+    text-align: left;
+    display: table-cell;
+    outline: none;
+  }
+
+  ::slotted(#{$prefix}-table-header-cell:last-of-type),
+  ::slotted(#{$prefix}-table-header-cell-skeleton:last-of-type) {
+    position: relative;
+    width: auto;
+  }
+
+  ::slotted(#{$prefix}-table-header-cell),
+  ::slotted(#{$prefix}-table-header-cell-skeleton),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    padding-left: $spacing-04;
+    padding-right: $spacing-04;
+    vertical-align: middle;
+  }
+}
+
+:host(#{$prefix}-table-header-row) {
+  ::slotted(#{$prefix}-table-header-cell:first-of-type),
+  ::slotted(#{$prefix}-table-header-cell-skeleton:first-of-type) {
+    padding-left: $spacing-05;
+  }
+}
+
+//
+// Table row
+//
+
+:host(#{$prefix}-table-body) {
+  ::slotted(#{$prefix}-table-row),
+  ::slotted(#{$prefix}-table-expand-row) {
+    border: none;
+    height: $layout-04;
+    width: 100%;
+    display: table-row;
+    outline: none;
+  }
+}
+
+//
+// Table cell
+//
+
+:host(#{$prefix}-table-row),
+:host(#{$prefix}-table-expand-row) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    color: $text-02;
+    border-top: 1px solid $ui-01;
+    border-bottom: 1px solid $ui-03;
+    padding: rem(14px) $spacing-04;
+    padding-bottom: rem(13px);
+    vertical-align: middle;
+  }
+}
+
+:host(#{$prefix}-table-row) {
+  ::slotted(#{$prefix}-table-cell:first-of-type),
+  ::slotted(#{$prefix}-table-cell-skeleton:first-of-type) {
+    padding-left: $spacing-05;
+  }
+
+  ::slotted(#{$prefix}-table-cell:last-of-type),
+  ::slotted(#{$prefix}-table-cell-skeleton:last-of-type) {
+    padding-right: $spacing-05;
+  }
+}
+
+:host(#{$prefix}-table-row[even]) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    border-bottom: 1px solid $ui-01;
+  }
+}
+
+:host(#{$prefix}-table-row[odd]) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    background-color: $data-table-zebra-color;
+    border-bottom: 1px solid $data-table-zebra-color;
+    border-top: 1px solid $data-table-zebra-color;
+  }
+}
+
+:host(#{$prefix}-table-row:hover),
+:host(#{$prefix}-table-expand-row:hover) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton),
+  .#{$prefix}--table-expand,
+  .#{$prefix}--table-column-checkbox {
+    color: $text-01;
+    background-color: $hover-field;
+    border-bottom-color: $hover-field;
+    border-top-color: $hover-field;
+  }
+}
+
+:host(#{$prefix}-table-row[even]:hover),
+:host(#{$prefix}-table-row[odd]:hover) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    background-color: $hover-field;
+    border-bottom: 1px solid $hover-field;
+    border-top: 1px solid $hover-field;
+  }
+}

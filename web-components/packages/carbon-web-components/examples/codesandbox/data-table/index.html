@@ -1,0 +1,36 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+    <style type="text/css">
+      body {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+        position: relative;
+      }
+
+      bx-ce-demo-data-table {
+        visibility: hidden;
+      }
+
+      bx-ce-demo-data-table:defined {
+        visibility: inherit;
+      }
+    </style>
+    <script src="src/index.js"></script>
+  </head>
+  <body>
+    <h1>Hello World! 👋</h1>
+    <div id="app" data-floating-menu-container>
+      <bx-ce-demo-data-table id="data-table" page-size="5" start="0"></bx-ce-demo-data-table>
+    </div>
+  </body>
+</html>

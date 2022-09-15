@@ -1,0 +1,111 @@
+//
+// Copyright IBM Corp. 2019, 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/tag/tag';
+
+:host(#{$prefix}-tag) {
+  @extend .#{$prefix}--tag;
+}
+
+:host(#{$prefix}-tag[type='red']),
+:host(#{$prefix}-filter-tag[type='red']) {
+  @extend .#{$prefix}--tag--red;
+}
+
+:host(#{$prefix}-tag[type='magenta']),
+:host(#{$prefix}-filter-tag[type='magenta']) {
+  @extend .#{$prefix}--tag--magenta;
+}
+
+:host(#{$prefix}-tag[type='purple']),
+:host(#{$prefix}-filter-tag[type='purple']) {
+  @extend .#{$prefix}--tag--purple;
+}
+
+:host(#{$prefix}-tag[type='blue']),
+:host(#{$prefix}-filter-tag[type='blue']) {
+  @extend .#{$prefix}--tag--blue;
+}
+
+:host(#{$prefix}-tag[type='cyan']),
+:host(#{$prefix}-filter-tag[type='cyan']) {
+  @extend .#{$prefix}--tag--cyan;
+}
+
+:host(#{$prefix}-tag[type='teal']),
+:host(#{$prefix}-filter-tag[type='teal']) {
+  @extend .#{$prefix}--tag--teal;
+}
+
+:host(#{$prefix}-tag[type='green']),
+:host(#{$prefix}-filter-tag[type='green']) {
+  @extend .#{$prefix}--tag--green;
+}
+
+:host(#{$prefix}-tag[type='gray']),
+:host(#{$prefix}-filter-tag[type='gray']) {
+  @extend .#{$prefix}--tag--gray;
+}
+
+:host(#{$prefix}-tag[type='cool-gray']),
+:host(#{$prefix}-filter-tag[type='cool-gray']) {
+  @extend .#{$prefix}--tag--cool-gray;
+}
+
+:host(#{$prefix}-tag[type='warm-gray']),
+:host(#{$prefix}-filter-tag[type='warm-gray']) {
+  @extend .#{$prefix}--tag--warm-gray;
+}
+
+:host(#{$prefix}-tag[disabled]),
+:host(#{$prefix}-filter-tag[disabled]) {
+  @extend .#{$prefix}--tag--disabled;
+}
+
+// tags used for filtering
+:host(#{$prefix}-filter-tag) {
+  @extend .#{$prefix}--tag;
+  @extend .#{$prefix}--tag--filter;
+  display: none;
+
+  &[open] {
+    display: inline-flex;
+  }
+}
+
+:host(#{$prefix}-filter-tag[disabled]) .#{$prefix}--tag__close-icon {
+  cursor: not-allowed;
+
+  &,
+  &:hover {
+    background-color: transparent;
+  }
+}
+
+:host(#{$prefix}-tag[size='sm']),
+:host(#{$prefix}-filter-tag[size='sm']) {
+  @extend .#{$prefix}--tag--sm;
+
+  .#{$prefix}--tag__close-icon {
+    width: rem(18px);
+    height: rem(18px);
+    margin-left: rem(5px);
+  }
+}
+
+:host(#{$prefix}-filter-tag[size='sm']) {
+  padding-right: 0;
+}
+
+// Skeleton state
+:host(#{$prefix}-tag.#{$prefix}--skeleton) {
+  @include skeleton;
+  width: rem(60px);
+  overflow: hidden;
+}

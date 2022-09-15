@@ -1,0 +1,32 @@
+form {
+  width: 640px;
+  padding: 2rem;
+}
+
+bx-btn + bx-btn {
+  margin: 0 1rem;
+}
+
+bx-form-item,
+bx-inline-notification {
+  margin-bottom: 2rem;
+}
+
+.bx-ce-demo-redux-form--btn-container {
+  display: flex;
+  align-items: center;
+}
+
+bx-btn,
+bx-input,
+bx-form-item,
+bx-inline-notification {
+  visibility: hidden;
+}
+
+bx-btn:defined,
+bx-input:defined,
+bx-form-item:defined,
+bx-inline-notification:defined {
+  visibility: inherit;
+}

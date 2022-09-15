@@ -1,0 +1,18 @@
+//
+// Copyright IBM Corp. 2019
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/globals/scss/css--helpers';
+@import 'carbon-components/scss/components/form/form';
+@import 'carbon-components/scss/components/checkbox/checkbox';
+
+:host(#{$prefix}-checkbox) {
+  @extend .#{$prefix}--form-item;
+  @extend .#{$prefix}--checkbox-wrapper;
+  outline: none;
+}

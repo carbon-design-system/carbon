@@ -1,0 +1,24 @@
+//
+// Copyright IBM Corp. 2019, 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/type/font-family';
+@import 'carbon-components/scss/components/checkbox/checkbox';
+
+@import 'carbon-components/scss/components/data-table/data-table-core';
+@import 'carbon-components/scss/components/data-table/data-table-expandable';
+@import 'carbon-components/scss/components/data-table/data-table-inline-edit';
+@import 'carbon-components/scss/components/data-table/data-table-skeleton';
+
+@import 'table-action';
+@import 'table-core';
+@import 'table-expandable';
+@import 'table-sizes';
+@import 'table-selection';
+@import 'table-sort';
+@import 'table-skeleton';

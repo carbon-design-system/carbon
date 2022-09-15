@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script type="module">
+      import 'https://jspm.dev/carbon-web-components/es/components/dropdown/dropdown.js';
+      import 'https://jspm.dev/carbon-web-components/es/components/dropdown/dropdown-item.js';
+    </script>
+    <style type="text/css">
+      #app {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+        width: 300px;
+        margin: 2rem;
+      }
+
+      bx-dropdown:not(:defined),
+      bx-dropdown-item:not(:defined) {
+        visibility: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <bx-dropdown trigger-content="Select an item">
+        <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
+        <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
+        <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
+        <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
+        <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
+      </bx-dropdown>
+    </div>
+  </body>
+</html>

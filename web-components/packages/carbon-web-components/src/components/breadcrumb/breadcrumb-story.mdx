@@ -1,0 +1,68 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Breadcrumb
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/breadcrumb)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/breadcrumb)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/breadcrumb/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['breadcrumb'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-breadcrumb>
+  <bx-breadcrumb-item>
+    <bx-breadcrumb-link href="/#">Breadcrumb 1</bx-breadcrumb-link>
+  </bx-breadcrumb-item>
+  <bx-breadcrumb-item>
+    <bx-breadcrumb-link href="/#">Breadcrumb 2</bx-breadcrumb-link>
+  </bx-breadcrumb-item>
+  <bx-breadcrumb-item>
+    <bx-breadcrumb-link href="/#" aria-current="page">Breadcrumb 3</bx-breadcrumb-link>
+  </bx-breadcrumb-item>
+</bx-breadcrumb>
+```
+
+### HTML (with overflow-menu)
+
+```html
+<bx-breadcrumb>
+  <bx-breadcrumb-item>
+    <bx-breadcrumb-link href="/#">Breadcrumb 1</bx-breadcrumb-link>
+  </bx-breadcrumb-item>
+  <bx-breadcrumb-item>
+    <bx-breadcrumb-link href="/#">Breadcrumb 2</bx-breadcrumb-link>
+  </bx-breadcrumb-item>
+  <bx-breadcrumb-item>
+    <bx-breadcrumb-overflow-menu>
+      <bx-overflow-menu-body>
+        <bx-overflow-menu-item>Option 1</bx-overflow-menu-item>
+        <bx-overflow-menu-item>Option 2</bx-overflow-menu-item>
+      </bx-overflow-menu-body>
+    </bx-breadcrumb-overflow-menu>
+  </bx-breadcrumb-item>
+  <bx-breadcrumb-item>
+    <bx-breadcrumb-link href="/#" aria-current="page">Breadcrumb 3</bx-breadcrumb-link>
+  </bx-breadcrumb-item>
+</bx-breadcrumb>
+```
+
+## `<bx-breadcrumb-link>` attributes, properties and events
+
+<Props of="bx-breadcrumb-link" />

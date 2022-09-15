@@ -1,0 +1,36 @@
+{
+  "name": "carbon-web-components-getting-started-angular-forms",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Web Components from the Carbon Design System with Angular forms.",
+  "scripts": {
+    "build": "ng build",
+    "ng": "ng",
+    "start": "ng serve --port 8080"
+  },
+  "dependencies": {
+    "@angular/animations": "~8.1.0",
+    "@angular/common": "~8.1.0",
+    "@angular/compiler": "~8.1.0",
+    "@angular/core": "~8.1.0",
+    "@angular/forms": "~8.1.0",
+    "@angular/platform-browser": "~8.1.0",
+    "@angular/platform-browser-dynamic": "~8.1.0",
+    "@angular/router": "~8.1.0",
+    "@babel/runtime": "^7.8.0",
+    "carbon-web-components": "^1.19.0",
+    "rxjs": "^6.0.0",
+    "tslib": "^1.10.0",
+    "zone.js": "~0.9.0"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "^0.803.0",
+    "@angular/cli": "~8.1.0",
+    "@angular/compiler-cli": "~8.1.0",
+    "@angular/language-service": "~8.1.0",
+    "@types/node": "^8.0.0",
+    "codelyzer": "^5.0.0",
+    "ts-node": "^7.0.0",
+    "typescript": "~3.7.0"
+  }
+}

@@ -1,0 +1,27 @@
+/**
+ * @license
+ * 
+ * Copyright IBM Corp. 2020
+ * 
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+body {
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  padding: 2rem;
+}
+
+bx-btn + bx-btn {
+  margin: 0 1rem;
+}
+
+bx-form-item,
+bx-inline-notification {
+  margin-bottom: 2rem;
+}
+
+.bx-ce-demo-redux-form--btn-container {
+  display: flex;
+  align-items: center;
+}

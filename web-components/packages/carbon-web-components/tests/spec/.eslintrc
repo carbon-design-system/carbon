@@ -1,0 +1,24 @@
+{
+  "extends": [
+    "../../src/.eslintrc"
+  ],
+  "globals": {
+    "describe": true,
+    "beforeAll": true,
+    "beforeEach": true,
+    "afterAll": true,
+    "afterEach": true,
+    "it": true,
+    "expect": true,
+    "jasmine": true,
+    "spyOn": true,
+    "spyOnProperty": true
+  },
+  "rules": {
+    "func-names": 0,
+    "no-new": 0,
+    "no-underscore-dangle": 0,
+    "no-unused-expressions": 0,
+    "prefer-arrow-callback": 0
+  }
+}

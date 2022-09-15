@@ -1,0 +1,20 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "module": "es2015",
+    "target": "es2015",
+    "baseUrl": "./src/directives-angular",
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "outDir": "./es/directives-angular/esm2015",
+    "rootDir": "./src/directives-angular",
+    "lib": ["dom", "es2015"]
+  },
+  "files": ["./src/directives-angular/index.ts"],
+  "angularCompilerOptions": {
+    "annotateForClosureCompiler": true,
+    "disableTypeScriptVersionCheck": true,
+    "strictMetadataEmit": true,
+    "skipTemplateCodegen": true
+  }
+}

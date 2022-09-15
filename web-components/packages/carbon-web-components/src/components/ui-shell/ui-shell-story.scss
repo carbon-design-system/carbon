@@ -1,0 +1,40 @@
+//
+// Copyright IBM Corp. 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/layout/breakpoint';
+@import 'carbon-components/scss/components/ui-shell/functions';
+
+bx-header ~ bx-side-nav {
+  margin-top: 3rem;
+  height: calc(100% - 3rem);
+}
+
+.bx-ce-demo-devenv--container {
+  // Ref: https://github.com/carbon-design-system/carbon/blob/v10.10.0/packages/components/src/components/ui-shell/_side-nav.scss#L82
+  will-change: margin-left;
+  transition: margin-left 0.11s cubic-bezier(0.2, 0, 1, 0.9);
+
+  @include carbon--breakpoint('lg') {
+    margin-left: mini-units(32);
+  }
+}
+
+.bx-ce-demo-devenv--with-rail .bx-ce-demo-devenv--container {
+  margin-left: mini-units(6);
+}
+
+.bx-ce-demo-devenv--rail-expanded .bx-ce-demo-devenv--container {
+  @include carbon--breakpoint('lg') {
+    margin-left: mini-units(32);
+  }
+}
+
+.bx-ce-demo-devenv--with-side-nav-for-header .bx-ce-demo-devenv--container {
+  @include carbon--breakpoint('lg') {
+    margin-left: 0;
+  }
+}
