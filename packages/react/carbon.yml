@@ -191,6 +191,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-dropdown
+    docs:
+      overviewPath: ./src/components/Dropdown/docs/overview.mdx
   error-boundary:
     name: Error boundary
     framework: react
