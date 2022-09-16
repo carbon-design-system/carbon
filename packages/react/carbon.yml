@@ -99,6 +99,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-codesnippet
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/accessibility.mdx
+      overviewPath: ./src/components/CodeSnippet/docs/overview.mdx
   combo-box:
     status: stable
     framework: react
