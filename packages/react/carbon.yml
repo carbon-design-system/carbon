@@ -768,6 +768,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
     tags:
       - data-display
+    docs: 
+      overviewPath: ./src/components/UnorderedList/docs/overview.mdx
   use-context-menu:
     name: unstable_useContextMenu
     framework: react
