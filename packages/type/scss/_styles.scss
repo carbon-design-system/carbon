@@ -28,6 +28,16 @@ $label-01: (
 /// @type Map
 /// @access public
 /// @group @carbon/type
+$label-02: (
+  font-size: scale.type-scale(2),
+  font-weight: font-family.font-weight('regular'),
+  line-height: 1.28572,
+  letter-spacing: 0.16px,
+) !default;
+
+/// @type Map
+/// @access public
+/// @group @carbon/type
 $legal-01: (
   font-size: scale.type-scale(1),
   font-weight: font-family.font-weight('regular'),
@@ -233,7 +243,7 @@ $heading-04: $productive-heading-04 !default;
 /// @group @carbon/type
 $productive-heading-05: (
   font-size: scale.type-scale(8),
-  font-weight: font-family.font-weight('regular'),
+  font-weight: font-family.font-weight('light'),
   line-height: 1.25,
   letter-spacing: 0,
 ) !default;
@@ -247,7 +257,7 @@ $heading-05: $productive-heading-05 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-06: (
-  font-size: scale.type-scale(8),
+  font-size: scale.type-scale(10),
   font-weight: font-family.font-weight('light'),
   // Extra digit needed for precision in Chrome
   line-height: 1.199,
@@ -263,7 +273,7 @@ $heading-06: $productive-heading-06 !default;
 /// @access public
 /// @group @carbon/type
 $productive-heading-07: (
-  font-size: scale.type-scale(10),
+  font-size: scale.type-scale(12),
   font-weight: font-family.font-weight('light'),
   line-height: 1.19,
   letter-spacing: 0,
@@ -319,11 +329,13 @@ $expressive-heading-04: (
   letter-spacing: 0,
   breakpoints: (
     xlg: (
-      font-size: scale.type-scale(7),
+      font-size: scale.type-scale(8),
       line-height: 1.25,
+      font-weight: font-family.font-weight('light'),
     ),
     max: (
       font-size: scale.type-scale(8),
+      font-weight: font-family.font-weight('light'),
     ),
   ),
 ) !default;
@@ -338,13 +350,12 @@ $fluid-heading-04: $expressive-heading-04 !default;
 /// @group @carbon/type
 $expressive-heading-05: (
   font-size: scale.type-scale(8),
-  font-weight: font-family.font-weight('regular'),
+  font-weight: font-family.font-weight('light'),
   line-height: 1.25,
   letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: scale.type-scale(9),
-      font-weight: font-family.font-weight('light'),
       line-height: 1.22,
     ),
     lg: (
@@ -561,22 +572,22 @@ $display-03: (
   letter-spacing: 0,
   breakpoints: (
     md: (
-      font-size: scale.type-scale(14),
-      line-height: 1.15,
+      font-size: scale.type-scale(12),
+      line-height: 1.18,
     ),
     lg: (
-      font-size: scale.type-scale(17),
-      line-height: 1.11,
+      font-size: scale.type-scale(13),
+      line-height: 1.16,
       letter-spacing: -0.64px,
     ),
     xlg: (
-      font-size: scale.type-scale(20),
-      line-height: 1.07,
+      font-size: scale.type-scale(15),
+      line-height: 1.13,
       letter-spacing: -0.64px,
     ),
     max: (
-      font-size: scale.type-scale(23),
-      line-height: 1.05,
+      font-size: scale.type-scale(16),
+      line-height: 1.11,
       letter-spacing: -0.96px,
     ),
   ),
@@ -592,7 +603,7 @@ $fluid-display-03: $display-03 !default;
 /// @group @carbon/type
 $display-04: (
   font-size: scale.type-scale(10),
-  font-weight: font-family.font-weight('semibold'),
+  font-weight: font-family.font-weight('light'),
   line-height: 1.19,
   letter-spacing: 0,
   breakpoints: (
@@ -628,6 +639,7 @@ $fluid-display-04: $display-04 !default;
 /// @group @carbon/type
 $tokens: (
   label-01: $label-01,
+  label-02: $label-02,
   helper-text-01: $helper-text-01,
   helper-text-02: $helper-text-02,
   body-short-01: $body-short-01,
