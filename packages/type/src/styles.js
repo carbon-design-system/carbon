@@ -191,7 +191,7 @@ export const expressiveHeading04 = {
   letterSpacing: 0,
   breakpoints: {
     xlg: {
-      fontSize: rem(scale[6]),
+      fontSize: rem(scale[7]),
       fontWeight: fontWeights.light,
       lineHeight: 1.25,
     },
