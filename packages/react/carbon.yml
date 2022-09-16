@@ -137,6 +137,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-contentswitcher
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/accessibility.mdx
+      overviewPath: ./src/components/ContentSwitcher/docs/overview.mdx
   copy-button:
     status: stable
     framework: react
