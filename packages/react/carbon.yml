@@ -238,6 +238,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
+    docs:
+      overviewPath: ./src/components/Grid/docs/overview.mdx
     tags:
       - shell
   fluid-form:
