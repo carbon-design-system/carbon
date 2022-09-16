@@ -46,6 +46,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-aspectratio
+    docs:
+     overviewPath: './src/components/AspectRatio/docs/overview.mdx'
   breadcrumb:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
