@@ -8721,8 +8721,8 @@ Map {
       "kind": Object {
         "args": Array [
           Array [
-            "variantone",
-            "varianttwo",
+            "on-page",
+            "disclosed",
           ],
         ],
         "type": "oneOf",

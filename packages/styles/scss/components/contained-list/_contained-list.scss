@@ -31,14 +31,13 @@
     width: 100%;
   }
 
-  // Variant one
+  // "On Page" variant
 
-  .#{$prefix}--contained-list--variantone
-    + .#{$prefix}--contained-list--variantone {
+  .#{$prefix}--contained-list--on-page + .#{$prefix}--contained-list--on-page {
     margin-block-start: $spacing-05;
   }
 
-  .#{$prefix}--contained-list--variantone .#{$prefix}--contained-list__header {
+  .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
     @include type-style('heading-compact-01');
 
     height: $spacing-09;
@@ -48,20 +47,20 @@
   }
 
   .#{$prefix}--layer-two
-    .#{$prefix}--contained-list--variantone
+    .#{$prefix}--contained-list--on-page
     .#{$prefix}--contained-list__header {
     background-color: $layer-01;
   }
 
   .#{$prefix}--layer-three
-    .#{$prefix}--contained-list--variantone
+    .#{$prefix}--contained-list--on-page
     .#{$prefix}--contained-list__header {
     background-color: $layer-02;
   }
 
-  // Variant two
+  // "Disclosed" variant
 
-  .#{$prefix}--contained-list--varianttwo .#{$prefix}--contained-list__header {
+  .#{$prefix}--contained-list--disclosed .#{$prefix}--contained-list__header {
     @include type-style('label-01');
 
     height: $spacing-07;

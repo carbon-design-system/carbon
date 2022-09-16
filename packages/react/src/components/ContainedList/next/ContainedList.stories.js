@@ -29,15 +29,15 @@ export default {
   component: ContainedList,
 };
 
-export const VariantOne = () => (
+export const OnPage = () => (
   <>
-    <ContainedList label="Heading" kind="variantone">
+    <ContainedList label="Heading" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-    <ContainedList label="Heading" kind="variantone">
+    <ContainedList label="Heading" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
@@ -46,15 +46,15 @@ export const VariantOne = () => (
   </>
 );
 
-export const VariantTwo = () => (
+export const Disclosed = () => (
   <>
-    <ContainedList label="Heading" kind="varianttwo">
+    <ContainedList label="Heading" kind="disclosed">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-    <ContainedList label="Heading" kind="varianttwo">
+    <ContainedList label="Heading" kind="disclosed">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
@@ -68,7 +68,7 @@ export const Interactive = () => {
 
   return (
     <VStack gap={12}>
-      <ContainedList label="Heading" kind="variantone">
+      <ContainedList label="Heading" kind="on-page">
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
         <ContainedListItem onClick={onClick} disabled>
           List item
@@ -76,7 +76,7 @@ export const Interactive = () => {
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
       </ContainedList>
-      <ContainedList label="Heading" kind="varianttwo">
+      <ContainedList label="Heading" kind="disclosed">
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
         <ContainedListItem onClick={onClick} disabled>
           List item
@@ -102,7 +102,7 @@ export const Actions = () => {
     <VStack gap={12}>
       <ContainedList
         label="Heading"
-        kind="variantone"
+        kind="on-page"
         action={<ExpandableSearch placeholder="Find item" size="lg" />}>
         <ContainedListItem action={itemAction}>List item</ContainedListItem>
         <ContainedListItem action={itemAction}>List item</ContainedListItem>
@@ -111,7 +111,7 @@ export const Actions = () => {
       </ContainedList>
       <ContainedList
         label="Heading"
-        kind="varianttwo"
+        kind="disclosed"
         action={
           <Button kind="ghost" size="sm">
             Dismiss all
@@ -143,7 +143,7 @@ export const ActionsInteractive = () => {
     <VStack gap={12}>
       <ContainedList
         label="Heading"
-        kind="variantone"
+        kind="on-page"
         action={<ExpandableSearch placeholder="Find item" size="lg" />}>
         <ContainedListItem action={itemAction} onClick={onClick}>
           List item
@@ -160,7 +160,7 @@ export const ActionsInteractive = () => {
       </ContainedList>
       <ContainedList
         label="Heading"
-        kind="varianttwo"
+        kind="disclosed"
         action={
           <Button kind="ghost" size="sm">
             Dismiss all
@@ -198,7 +198,7 @@ export const HeadingDecorators = () => {
             <Tag size="sm">4</Tag>
           </div>
         }
-        kind="variantone">
+        kind="on-page">
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
@@ -218,7 +218,7 @@ export const HeadingDecorators = () => {
             </Tooltip>
           </div>
         }
-        kind="varianttwo">
+        kind="disclosed">
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
@@ -231,13 +231,13 @@ export const HeadingDecorators = () => {
 export const Icons = () => {
   return (
     <VStack gap={12}>
-      <ContainedList label="Heading" kind="variantone">
+      <ContainedList label="Heading" kind="on-page">
         <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
       </ContainedList>
-      <ContainedList label="Heading" kind="varianttwo">
+      <ContainedList label="Heading" kind="disclosed">
         <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
@@ -275,6 +275,6 @@ Playground.argTypes = {
     defaultValue: 'Heading',
   },
   kind: {
-    defaultValue: 'variantone',
+    defaultValue: 'on-page',
   },
 };

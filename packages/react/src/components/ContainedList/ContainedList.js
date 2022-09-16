@@ -11,7 +11,7 @@ import classNames from 'classnames';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
-const variants = ['variantone', 'varianttwo'];
+const variants = ['on-page', 'disclosed'];
 
 function ContainedList({
   action,
