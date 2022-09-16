@@ -22,10 +22,14 @@ describe('RadioTile', () => {
     });
 
     it('should respect checked prop', () => {
-      const { container } = render(<RadioTile value="standard" checked />);
+      const { container } = render(
+        <RadioTile value="standard" checked data-testid="test-id" />
+      );
 
-      expect(container.firstChild).toHaveProperty('checked');
-      expect(document.querySelector('.cds--tile--is-selected')).toBeDefined();
+      expect(container.firstChild).toHaveAttribute('checked');
+      expect(screen.getByTestId('test-id')).toHaveClass(
+        'cds--tile--is-selected'
+      );
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
@@ -45,7 +49,7 @@ describe('RadioTile', () => {
         <RadioTile value="standard" disabled data-testid="test-id" />
       );
 
-      expect(container.firstChild).toHaveProperty('disabled');
+      expect(container.firstChild).toHaveAttribute('disabled');
       expect(screen.getByTestId('test-id')).toHaveClass('cds--tile--disabled');
     });
 
