@@ -30,7 +30,7 @@ export default {
   },
 };
 
-export const Default = () => (
+export const AccordionStory = () => (
   <Accordion>
     <AccordionItem title="Section 1 title">
       <p>
@@ -66,6 +66,8 @@ export const Default = () => (
     </AccordionItem>
   </Accordion>
 );
+
+AccordionStory.storyName = 'Accordion';
 
 export const Skeleton = () => <AccordionSkeleton open count={4} />;
 
