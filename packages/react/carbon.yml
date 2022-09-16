@@ -128,6 +128,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-composedmodal
     tags:
       - input-control
+    docs:
+      overviewPath: ./src/components/ComposedModal/docs/overview.mdx
   content-switcher:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/content-switcher/usage
