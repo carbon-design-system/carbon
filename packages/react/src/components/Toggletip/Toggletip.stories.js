@@ -100,7 +100,23 @@ export const Playground = PlaygroundStory.bind({});
 
 Playground.argTypes = {
   align: {
-    options: ['top', 'bottom', 'left', 'right'],
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+
+      'left',
+      'left-bottom',
+      'left-top',
+
+      'right',
+      'right-bottom',
+      'right-top',
+    ],
     control: {
       type: 'select',
     },
