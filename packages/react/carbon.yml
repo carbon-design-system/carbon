@@ -192,6 +192,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-dropdown
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/accessibility.mdx
       overviewPath: ./src/components/Dropdown/docs/overview.mdx
   error-boundary:
     name: Error boundary
@@ -207,6 +210,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-errorboundary
     tags:
       - system-feedback
+    docs:
+      overviewPath: ./src/components/ErrorBoundary/docs/overview.mdx
   file-uploader:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/file-uploader/usage
