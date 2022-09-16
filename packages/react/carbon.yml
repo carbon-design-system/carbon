@@ -177,6 +177,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-datepicker
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/accessibility.mdx
+      overviewPath: ./src/components/DatePicker/docs/overview.mdx
   dropdown:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage
