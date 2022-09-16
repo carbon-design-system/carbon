@@ -221,6 +221,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-fileuploader--file-uploader
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/accessibility.mdx
+      overviewPath: ./src/components/FileUploader/docs/overview.mdx
   flex-grid:
     name: Flex grid
     framework: react
