@@ -45,7 +45,7 @@ export default {
   },
 };
 
-export const Simple = () => (
+export const Default = () => (
   <StructuredListWrapper>
     <StructuredListHead>
       <StructuredListRow head>
@@ -78,14 +78,6 @@ export const Simple = () => (
     </StructuredListBody>
   </StructuredListWrapper>
 );
-
-Simple.parameters = {
-  info: {
-    text: `
-        Structured Lists group content that is similar or related, such as terms or definitions.
-      `,
-  },
-};
 
 export const Playground = (props) => {
   const { className, selection, isCondensed, isFlush } = props;
