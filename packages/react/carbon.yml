@@ -152,6 +152,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-copybutton
+    docs:
+      overviewPath: ./src/components/CopyButton/docs/overview.mdx
   data-table:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/data-table/usage
