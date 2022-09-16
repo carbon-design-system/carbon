@@ -62,7 +62,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           repository: carbon-design-system/design-language-website
-          ref: main
+          ref: master
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
