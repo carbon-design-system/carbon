@@ -309,6 +309,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/heading
+    docs:
+      overviewPath: ./src/components/Heading/docs/overview.mdx
     tags:
       - content-element
   icon-button:
