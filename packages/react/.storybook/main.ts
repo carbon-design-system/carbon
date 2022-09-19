@@ -7,8 +7,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import glob from 'fast-glob';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import MiniCssExtractPlugin, { loader } from 'mini-css-extract-plugin';
 import { StorybookConfig } from '@storybook/core-common';
+
+const babelLoaderString = 'babel-loader';
 
 const stories: string[] = glob
   .sync(
@@ -28,7 +30,7 @@ const stories: string[] = glob
   // Filters the stories by finding the paths that have a story file that ends
   // in `-story.js` and checks to see if they also have a `.stories.js`,
   // if so then defer to the `.stories.js`
-  .filter((match: string) => {
+  .filter((match) => {
     const filepath = path.resolve(__dirname, match);
     const basename = path.basename(match, '.js');
     const denylist = new Set([
@@ -65,6 +67,7 @@ const stories: string[] = glob
 
     return true;
   });
+const unused = '';
 
 const config: StorybookConfig = {
   addons: [
@@ -91,10 +94,30 @@ const config: StorybookConfig = {
   framework: '@storybook/react',
   stories,
   webpackFinal: (config) => {
-    const babelLoader = config?.module?.rules?.find((rule: any) => {
-      return rule.use.some(({ loader }: { loader: string }) => {
-        return loader.includes('babel-loader');
-      });
+    const babelLoader = config?.module?.rules?.find((rule) => {
+      if (rule !== '...') {
+        const use = rule.use;
+        // Handle case when use is a string
+        if (typeof use === 'string') {
+          return use.includes(babelLoaderString);
+        }
+
+        // Handle case when use is an array
+        if (Array.isArray(use)) {
+          return use?.some((useItem) => {
+            // useItem can be an array of strings, objects, or a webpack callback method.
+            if (typeof useItem === 'function') {
+              return false;
+            }
+
+            if (typeof useItem === 'string') {
+              return useItem.includes(babelLoaderString);
+            }
+
+            return useItem?.loader?.includes(babelLoaderString);
+          });
+        }
+      }
     });
 
     // This is a temporary trick to get `babel-loader` to ignore packages that
