@@ -238,10 +238,10 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
-    docs:
-      overviewPath: ./src/components/Grid/docs/overview.mdx
     tags:
       - shell
+    docs:
+      overviewPath: ./src/components/Grid/docs/overview.mdx
   fluid-form:
     name: Fluid form
     framework: react
@@ -265,6 +265,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-form
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/accessibility.mdx
+      overviewPath: ./src/components/Form/docs/overview.mdx
   form-group:
     name: Form group
     framework: react
