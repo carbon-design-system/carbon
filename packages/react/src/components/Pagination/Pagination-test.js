@@ -31,16 +31,12 @@ describe('Pagination', () => {
       render(<Pagination disabled pageSizes={[10]} />);
 
       expect(
-        document.querySelector('#cds-pagination-select-id-5-right')
-      ).toHaveProperty('disabled');
-
-      expect(
         screen.getByLabelText('Next page', { hidden: true })
-      ).toHaveProperty('disabled');
+      ).toHaveAttribute('disabled');
 
       expect(
         screen.getByLabelText('Previous page', { hidden: true })
-      ).toHaveProperty('disabled');
+      ).toHaveAttribute('disabled');
     });
 
     it('should label icon with forwardText', () => {
@@ -84,8 +80,6 @@ describe('Pagination', () => {
         <Pagination pageSizes={[10]} itemsPerPageText={'éléments par page'} />
       );
 
-      screen.debug();
-
       expect(screen.getByText('éléments par page')).toBeDefined();
     });
 
@@ -121,9 +115,9 @@ describe('Pagination', () => {
     it('should respect pageInputDisabled prop', () => {
       render(<Pagination pageSizes={[10]} pageInputDisabled />);
 
-      expect(document.querySelectorAll('.cds--select-input')[1]).toHaveProperty(
-        'disabled'
-      );
+      expect(
+        document.querySelectorAll('.cds--select-input')[1]
+      ).toHaveAttribute('disabled');
     });
 
     it('should respect pageRangeText prop', () => {
@@ -165,44 +159,45 @@ describe('Pagination', () => {
         />
       );
 
-      expect(document.querySelectorAll('.cds--select-input')[0]).toHaveProperty(
-        'disabled'
-      );
+      expect(
+        document.querySelectorAll('.cds--select-input')[0]
+      ).toHaveAttribute('disabled');
     });
 
-    fit('should respect pageSizes prop', () => {
+    it('should respect pageSizes prop', () => {
       render(<Pagination pageSizes={[10, 20, 30, 40]} totalItems={40} />);
 
-      screen.debug();
-      expect();
+      expect(screen.getAllByRole('option')[0]).toHaveValue('10');
+      expect(screen.getAllByRole('option')[1]).toHaveValue('20');
+      expect(screen.getAllByRole('option')[2]).toHaveValue('30');
+      expect(screen.getAllByRole('option')[3]).toHaveValue('40');
     });
 
     it('should respect pageText prop', () => {
-      render(<Pagination pageText pageSizes={[10]} />);
+      const page = 1;
+      render(
+        <Pagination
+          pageText={(page) => `página ${page}`}
+          pageSizes={[10, 20]}
+          page={page}
+          pagesUnknown={true}
+        />
+      );
 
-      expect();
-    });
-
-    it('should respect pagesUnknown prop', () => {
-      render(<Pagination pagesUnknown pageSizes={[10]} />);
-
-      expect();
+      expect(screen.getByText(`página ${page}`)).toBeInTheDocument();
     });
 
     it('should respect size prop', () => {
-      render(<Pagination size pageSizes={[10]} />);
+      const { container } = render(<Pagination size="sm" pageSizes={[10]} />);
 
-      expect();
+      expect(container.firstChild).toHaveClass('cds--pagination--sm');
     });
 
     it('should respect totalItems prop', () => {
-      render(<Pagination totalItems pageSizes={[10]} />);
+      const total = 40;
+      render(<Pagination totalItems={total} pageSizes={[10]} />);
 
-      expect();
+      expect(screen.getByText(`1–10 of ${total} items`)).toBeInTheDocument();
     });
-  });
-
-  describe('behaves as expected', () => {
-    // Add tests for relevant component behavior. For more information, visit https://github.com/carbon-design-system/carbon/issues/10184#issuecomment-992978122
   });
 });
