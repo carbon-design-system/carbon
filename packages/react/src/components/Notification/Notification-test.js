@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-standalone-expect */
 /**
  * Copyright IBM Corp. 2016, 2018
  *
