@@ -284,6 +284,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-formgroup
     tags:
       - form
+    docs:
+      overviewPath: ./src/components/FormGroup/docs/overview.mdx
   grid:
     status: stable
     type: component
@@ -773,7 +775,7 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-unorderedlist
     tags:
       - data-display
-    docs: 
+    docs:
       overviewPath: ./src/components/UnorderedList/docs/overview.mdx
   use-context-menu:
     name: unstable_useContextMenu
