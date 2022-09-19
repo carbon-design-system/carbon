@@ -91,14 +91,14 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.1102.0",
-    "@angular-devkit/core": "^8.3.29",
-    "@angular/common": "^8.2.14",
-    "@angular/compiler": "^8.2.14",
-    "@angular/compiler-cli": "^8.2.14",
-    "@angular/core": "^8.2.14",
-    "@angular/forms": "^8.2.14",
-    "@angular/platform-browser": "^8.2.14",
-    "@angular/platform-browser-dynamic": "^8.2.14",
+    "@angular-devkit/core": "^14.2.3",
+    "@angular/common": "^14.2.2",
+    "@angular/compiler": "^14.2.2",
+    "@angular/compiler-cli": "^14.2.2",
+    "@angular/core": "^14.2.2",
+    "@angular/forms": "^14.2.2",
+    "@angular/platform-browser": "^14.2.2",
+    "@angular/platform-browser-dynamic": "^14.2.2",
     "@babel/core": "~7.12.17",
     "@babel/plugin-proposal-class-properties": "^7.16.0",
     "@babel/plugin-proposal-decorators": "^7.16.4",
@@ -124,17 +124,17 @@
     "@open-wc/semantic-dom-diff": "~0.18.0",
     "@percy-io/in-percy": "~0.1.11",
     "@percy/storybook": "^3.3.1",
-    "@storybook/addon-actions": "^6.3.12",
-    "@storybook/addon-docs": "^6.3.12",
-    "@storybook/addon-essentials": "^6.3.12",
-    "@storybook/addon-knobs": "^6.3.1",
-    "@storybook/addon-links": "^6.3.12",
-    "@storybook/addon-storysource": "^6.3.12",
-    "@storybook/angular": "~6.2.9",
-    "@storybook/react": "^6.3.12",
-    "@storybook/source-loader": "^6.3.12",
-    "@storybook/vue": "^6.3.12",
-    "@storybook/web-components": "^6.3.12",
+    "@storybook/addon-actions": "^6.5.12",
+    "@storybook/addon-docs": "^6.5.12",
+    "@storybook/addon-essentials": "^6.5.12",
+    "@storybook/addon-knobs": "^6.4.0",
+    "@storybook/addon-links": "^6.5.12",
+    "@storybook/addon-storysource": "^6.5.12",
+    "@storybook/angular": "~6.5.12",
+    "@storybook/react": "^6.5.12",
+    "@storybook/source-loader": "^6.5.12",
+    "@storybook/vue": "^6.5.12",
+    "@storybook/web-components": "^6.5.12",
     "@types/bluebird": "^3.5.36",
     "@types/jasmine": "^3.10.2",
     "@types/lodash-es": "^4.17.5",
@@ -257,7 +257,7 @@
     "through2": "^4.0.0",
     "ts-loader": "^6.0.0",
     "tsickle": "~0.37.1",
-    "typescript": "^3.9.10",
+    "typescript": "~4.8.0",
     "use-debounce": "^3.2.0",
     "vue": "^2.6.14",
     "vue-eslint-parser": "^8.0.1",
@@ -276,50 +276,5 @@
     "last 2 versions",
     "Firefox ESR",
     "ie > 11"
-  ],
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "header-max-length": [
-        2,
-        "always",
-        72
-      ],
-      "body-max-line-length": [
-        2,
-        "always",
-        80
-      ]
-    }
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint-staged",
-      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
-    }
-  },
-  "lint-staged": {
-    "*.{css,js,json,md,scss,ts}": [
-      "yarn format:staged"
-    ],
-    "*.{js,ts,tsx}": [
-      "yarn lint:license:staged",
-      "yarn lint:scripts:staged"
-    ],
-    "*.scss": [
-      "yarn format:staged",
-      "yarn lint:license:staged"
-    ],
-    "*.{css,md}": [
-      "yarn format:staged"
-    ]
-  },
-  "prettier": {
-    "arrowParens": "avoid",
-    "bracketSameLine": true,
-    "printWidth": 130,
-    "singleQuote": true
-  }
+  ]
 }

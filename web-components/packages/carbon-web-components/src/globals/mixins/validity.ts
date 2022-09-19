@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -46,12 +46,15 @@ const ValidityMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
     // Using `string` instead of `VALIDATION_STATUS` until we can require TypeScript 3.8
     /**
      * Checks if the value meets the constraints.
+     *
      * @returns `VALIDATION_STATUS.NO_ERROR` if the value meets the constraints. Some other values otherwise.
      * @protected
      */
     _testValidity(): string {
       const { required, value } = this;
-      return required && !value ? VALIDATION_STATUS.ERROR_REQUIRED : VALIDATION_STATUS.NO_ERROR;
+      return required && !value
+        ? VALIDATION_STATUS.ERROR_REQUIRED
+        : VALIDATION_STATUS.NO_ERROR;
     }
 
     /**
@@ -82,6 +85,7 @@ const ValidityMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
     /**
      * Checks if the value meets the constraints.
      * Fires cancelable `invalid` event if it doesn't.
+     *
      * @returns `true` if the value meets the constraints. `false` otherwise.
      */
     checkValidity() {
@@ -97,7 +101,7 @@ const ValidityMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
           )
         ) {
           this.invalid = true;
-          this.validityMessage = this._getValidityMessage(status);
+          this.validityMessage = this._getValidityMessage(status) as string;
         }
         return false;
       }
@@ -108,6 +112,7 @@ const ValidityMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
 
     /**
      * Sets the given custom validity message.
+     *
      * @param validityMessage The custom validity message
      */
     setCustomValidity(validityMessage: string) {

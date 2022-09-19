@@ -6,6 +6,8 @@
     "lib": ["es2017", "esnext.array", "dom", "dom.iterable"],
     "typeRoots": ["src/typings", "node_modules/@types"],
     "declaration": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
     "sourceMap": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -18,6 +20,12 @@
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", ".storybook/**/*.ts", ".storybook/**/*.tsx"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "tests/**/*.ts",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx"
+  ],
   "exclude": []
 }
