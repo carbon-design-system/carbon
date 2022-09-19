@@ -241,7 +241,7 @@ assets:
     tags:
       - shell
     docs:
-      overviewPath: ./src/components/Grid/docs/overview.mdx
+      overviewPath: ./src/components/FlexGrid/docs/overview.mdx
   fluid-form:
     name: Fluid form
     framework: react
@@ -295,6 +295,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/elements-grid
+    docs:
+      overviewPath: ./src/components/Grid/docs/overview.mdx
   heading:
     name: Heading
     framework: react
