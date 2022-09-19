@@ -271,7 +271,6 @@
   }
 
   .#{$prefix}--file__state-container .#{$prefix}--file-complete {
-    cursor: pointer;
     fill: $interactive;
 
     &:focus {
