@@ -325,6 +325,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-iconbutton
+    docs:
+      overviewPath: ./src/components/IconButton/docs/overview.mdx
     tags:
       - input-control
       - media
