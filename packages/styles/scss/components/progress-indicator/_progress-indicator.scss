@@ -76,6 +76,10 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     border-radius: 50%;
     fill: $interactive;
   }
+  
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-text {
+    overflow: hidden;
+  }
 
   .#{$prefix}--progress-label {
     @include type-style('body-compact-01');
