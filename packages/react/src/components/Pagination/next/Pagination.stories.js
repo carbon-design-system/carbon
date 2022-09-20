@@ -78,12 +78,6 @@ export const MultiplePaginationComponents = (args) => {
 
 MultiplePaginationComponents.storyName = 'Multiple Pagination components';
 
-MultiplePaginationComponents.parameters = {
-  info: {
-    text: `Showcasing unique ids for each pagination component`,
-  },
-};
-
 export const PaginationWithCustomPageSizesLabel = (args) => {
   return (
     <div>
@@ -104,9 +98,3 @@ export const PaginationWithCustomPageSizesLabel = (args) => {
 
 PaginationWithCustomPageSizesLabel.storyName =
   'Pagination with custom page sizes label';
-
-PaginationWithCustomPageSizesLabel.parameters = {
-  info: {
-    text: `It is also possible to use custom label in page sizes list`,
-  },
-};

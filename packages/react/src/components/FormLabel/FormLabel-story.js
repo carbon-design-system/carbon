@@ -19,11 +19,7 @@ export default {
   component: FormLabel,
 };
 
-export const _Default = () => <FormLabel>Form label</FormLabel>;
-
-_Default.story = {
-  name: 'Form Label',
-};
+export const Default = () => <FormLabel>Form label</FormLabel>;
 
 export const WithTooltip = (controls) => {
   const { align } = controls;
@@ -75,8 +71,4 @@ export const WithTooltip = (controls) => {
       </ActionableNotification>
     </>
   );
-};
-
-WithTooltip.story = {
-  name: 'Form Label with Tooltip',
 };
