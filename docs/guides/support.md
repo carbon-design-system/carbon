@@ -265,7 +265,7 @@ graph TD
     B -->|Unrelated to user task| Sev4
 ```
 
-> \* Is this major enough to need an immediate fix?
+#### > \* Is this major enough to need an immediate fix?
 
 Clearly marking what qualifies as being "major enough" to warrant an immediate
 fix is difficult. In general, you'll know these when you see them.
