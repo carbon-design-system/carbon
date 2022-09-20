@@ -268,8 +268,7 @@ graph TD
 > \* Is this major enough to need an immediate fix?
 
 Clearly marking what qualifies as being "major enough" to warrant an immediate
-fix https://github.com/carbon-design-system/carbon/labels/severity%3A%201 is
-difficult. In general, you'll know these when you see them.
+fix is difficult. In general, you'll know these when you see them.
 
 Here are some primary determining factors:
 
@@ -279,7 +278,7 @@ Here are some primary determining factors:
 
 Also consider the response a
 https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
-requires, and consider it against the bug:
+requires, and evaluate it against the bug:
 
 - The response must be swift. When a
   https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
@@ -293,6 +292,15 @@ requires, and consider it against the bug:
   [postmortem](https://github.com/carbon-design-system/carbon/tree/main/docs/postmortems)
   identifying what happened and why, with a plan of how we intend to prevent it
   from happening again.
+
+Due to this high threshold and intensity of response,
+https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issues
+should be infrequent and should not be open for a long period of time.
+
+For the vast majority of bugs that have invalid and blocking behavior with no
+workaround, a
+https://github.com/carbon-design-system/carbon/labels/severity%3A%202 or lower
+is more appropriate.
 
 ### Other labels
 
