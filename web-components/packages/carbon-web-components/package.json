@@ -27,7 +27,7 @@
     "./package.json": "./package.json"
   },
   "scripts": {
-    "build": "gulp build && yarn build:ngc && yarn wca",
+    "build": "gulp build && yarn wca",
     "build-storybook:angular": "node --max-old-space-size=8192 node_modules/@storybook/angular/bin/build.js -c .storybook/angular -o storybook-static-angular",
     "build-storybook:react": "gulp build:modules:react && node --max-old-space-size=8192 node_modules/@storybook/react/bin/build.js -c .storybook/react -o storybook-static-react",
     "build-storybook:vue": "node --max-old-space-size=8192 node_modules/@storybook/vue/bin/build.js -c .storybook/vue -o storybook-static-vue",
