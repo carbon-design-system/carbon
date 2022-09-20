@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
 import { useSelect } from 'downshift';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -18,6 +18,7 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -59,6 +60,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   ref
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const selectProps = {
     ...downshiftProps,
     items,
@@ -120,15 +122,17 @@ const Dropdown = React.forwardRef(function Dropdown(
       [`${prefix}--list-box__wrapper--inline`]: inline,
       [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+      [`${prefix}--dropdown__wrapper--fluid--invalid`]: isFluid && invalid,
     }
   );
 
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
   const toggleButtonProps = getToggleButtonProps();
-  const helper = helperText ? (
-    <div className={helperClasses}>{helperText}</div>
-  ) : null;
+  const helper =
+    helperText && !isFluid ? (
+      <div className={helperClasses}>{helperText}</div>
+    ) : null;
 
   function onSelectedItemChange({ selectedItem }) {
     if (onChange) {

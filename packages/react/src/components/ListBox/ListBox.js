@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
@@ -15,6 +15,7 @@ import ListBoxMenu from './ListBoxMenu';
 import ListBoxMenuIcon from './ListBoxMenuIcon';
 import ListBoxMenuItem from './ListBoxMenuItem';
 import ListBoxSelection from './ListBoxSelection';
+import { FormContext } from '../FluidForm';
 
 const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
@@ -49,6 +50,7 @@ const ListBox = React.forwardRef(function ListBox(
   ref
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const showWarning = !invalid && warn;
 
   const className = cx({
@@ -73,6 +75,7 @@ const ListBox = React.forwardRef(function ListBox(
         data-invalid={invalid || undefined}>
         {children}
       </div>
+      {isFluid && <hr className={`${prefix}--dropdown__divider`} />}
       {invalid ? (
         <div className={`${prefix}--form-requirement`}>{invalidText}</div>
       ) : null}
