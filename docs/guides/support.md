@@ -256,7 +256,7 @@ graph TD
     A[There is a bug!] --> B[Can the user/designer/developer </br> still complete the task?]
     B -->|No| C[Is there a workaround?]
     B -->|Yes| D[Is there a workaround?]
-    C -->|No| E[Is this major enough to need an immediate fix?]
+    C -->|No| E[Is this major enough to need an immediate fix?*]
     C -->|Yes| Sev3([Severity: 3])
     E -->|No| Sev2([Severity: 2])
     E -->|Yes| Sev1([Severity: 1])
@@ -264,6 +264,35 @@ graph TD
     D -->|Workaround not needed| Sev4([Severity: 4])
     B -->|Unrelated to user task| Sev4
 ```
+
+> - Is this major enough to need an immediate fix?
+
+Clearly marking what qualifies as being "major enough" to warrant an immediate
+fix https://github.com/carbon-design-system/carbon/labels/severity%3A%201 is
+difficult. In general, you'll know these when you see them.
+
+Here are some primary determining factors:
+
+- A large number of projects (10+) impacted by an issue
+- The degree to which something is broken (being unable to complete foundational
+  tasks like clicking a button or opening a dropdown, for instance)
+
+Also consider the response a
+https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
+requires, and consider it against the bug:
+
+- The response must be swift. When a
+  https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
+  comes in, someone from the team must drop all current work and be immediately
+  reassigned to address the issue.
+- In the worst circumstances, this person may immediately revert a change from a
+  previous release.
+- It's likely a patch must be published once the fix or revert is in - the item
+  can not wait to go out with the next scheduled release.
+- We may need to publish a
+  [postmortem](https://github.com/carbon-design-system/carbon/tree/main/docs/postmortems)
+  identifying what happened and why, with a plan of how we intend to prevent it
+  from happening again.
 
 ### Other labels
 
