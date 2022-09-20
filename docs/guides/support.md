@@ -265,7 +265,7 @@ graph TD
     B -->|Unrelated to user task| Sev4
 ```
 
-> - Is this major enough to need an immediate fix?
+> \* Is this major enough to need an immediate fix?
 
 Clearly marking what qualifies as being "major enough" to warrant an immediate
 fix https://github.com/carbon-design-system/carbon/labels/severity%3A%201 is
