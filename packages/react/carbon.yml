@@ -358,6 +358,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-layer
     tags:
       - shell
+    docs:
+      overviewPath: ./src/components/Layer/docs/overview.mdx
   layout-direction:
     name: Unstable layout direction
     framework: react
