@@ -17,15 +17,21 @@ function normalizeBrowser(browser) {
     {
       chrome: `Chrome${process.env.TRAVIS ? '_Travis' : ''}`,
       firefox: 'Firefox',
-      safari: 'Safari',
-      ie: 'IE',
     }[browser.toLowerCase()] || browser
   );
 }
 
 module.exports = function setupKarma(config) {
-  const { browsers, collectCoverage, noPruneShapshot, specs, random, updateSnapshot, useExperimentalFeatures, verbose } =
-    config.customConfig;
+  const {
+    browsers,
+    collectCoverage,
+    noPruneShapshot,
+    specs,
+    random,
+    updateSnapshot,
+    useExperimentalFeatures,
+    verbose,
+  } = config.customConfig;
 
   config.set({
     basePath: '..',
@@ -89,21 +95,6 @@ module.exports = function setupKarma(config) {
               },
             ],
           },
-          {
-            test: [/directives-angular\/.*\.ts$/, /-angular_spec\.ts$/],
-            use: [
-              {
-                loader: 'ts-loader',
-                options: {
-                  ignoreDiagnostics: [6133],
-                  compilerOptions: {
-                    sourceMap: false,
-                    inlineSourceMap: true,
-                  },
-                },
-              },
-            ],
-          },
           !collectCoverage
             ? {}
             : {
@@ -146,7 +137,7 @@ module.exports = function setupKarma(config) {
                 options: {
                   plugins: () => [
                     require('autoprefixer')({
-                      overrideBrowserslist: ['last 1 version', 'ie >= 11'],
+                      overrideBrowserslist: ['last 1 version'],
                     }),
                   ],
                 },
@@ -197,8 +188,6 @@ module.exports = function setupKarma(config) {
       require('karma-snapshot'),
       require('karma-chrome-launcher'),
       require('karma-firefox-launcher'),
-      require('karma-safari-launcher'),
-      require('karma-ie-launcher'),
     ],
 
     reporters: ['spec', ...(!collectCoverage ? [] : ['coverage-istanbul'])],

@@ -81,12 +81,12 @@ module.exports = {
     config.module.rules = deepReplace(
       config.module.rules,
       (value, key) => key === 'test' && testMatches(value, 'button.stories.mdx') && !testMatches(value, 'foo.mdx'),
-      value => [...arrayify(value), /\-story(\-(angular|react|vue))\.mdx$/]
+      value => [...arrayify(value), /\-story.mdx$/]
     );
     config.module.rules = deepReplace(
       config.module.rules,
       (value, key) => key === 'exclude' && testMatches(value, 'button.stories.mdx') && !testMatches(value, 'foo.mdx'),
-      value => [...arrayify(value), /\-story(\-(angular|react|vue))\.mdx$/]
+      value => [...arrayify(value), /\-story.mdx$/]
     );
 
     config.module.rules.push(
@@ -102,7 +102,7 @@ module.exports = {
                   '@babel/preset-env',
                   {
                     modules: false,
-                    targets: ['last 1 version', 'Firefox ESR', 'ie >= 11'],
+                    targets: ['last 1 version', 'Firefox ESR'],
                   },
                 ],
               ],

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -63,18 +63,6 @@ module.exports = {
       rules: {
         'no-unused-vars': 0,
         '@typescript-eslint/no-unused-vars': 2,
-      },
-    },
-    {
-      files: ['**/*-react.tsx'],
-      parser: '@typescript-eslint/parser',
-      plugins: ['@typescript-eslint', 'react'],
-      rules: {
-        'no-unused-vars': 0,
-        '@typescript-eslint/no-unused-vars': 2,
-        'import/no-unresolved': [2, { ignore: ['^carbon-web-components/es/(components-react|icons)/'] }],
-        'react/jsx-uses-react': 2,
-        'react/jsx-uses-vars': 2,
       },
     },
     {

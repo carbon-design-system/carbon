@@ -27,36 +27,6 @@ button.addEventListener('click', () => {
 
 [![Edit carbon-web-components with formdata event](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/form/basic)
 
-## Angular two-way binding
-
-Our form components can be used for Angular two-way binding syntax (`[(ngModel)]`), like below, by using Angular directives for them:
-
-```html
-<bx-input [(ngModel)]="model.username" #username="ngModel" type="text" name="username"></bx-input>
-```
-
-Such Angular directives can be used by importing `BXFormAccessorModule` from `carbon-web-components/es/directives-angular/esm2015` or `carbon-web-components/es/directives-angular/esm5` into your Angular module:
-
-```javascript
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { BXFormAccessorsModule } from 'carbon-web-components/es/directives-angular/esm2015';
-
-import { AppComponent } from './app.component';
-
-@NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, FormsModule, BXFormAccessorsModule],
-  providers: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  bootstrap: [AppComponent],
-})
-export class AppModule {}
-```
-
-[![Edit carbon-web-components with Angular form directives](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/form/angular)
-
 ## Redux Form
 
 You can use our form components with Redux Form by creating a React component that wraps our form components:
