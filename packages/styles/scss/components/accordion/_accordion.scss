@@ -315,6 +315,10 @@ $content-padding: 0 0 0 $spacing-05 !default;
   margin-left: 0;
 }
 
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__arrow {
+  margin-right: 0;
+}
+
 .#{$prefix}--accordion--flush .#{$prefix}--accordion__content {
   padding-left: 0;
 }
