@@ -382,6 +382,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-link
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/accessibility.mdx
+      overviewPath: ./src/components/Link/docs/overview.mdx
   loading:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/loading/usage
