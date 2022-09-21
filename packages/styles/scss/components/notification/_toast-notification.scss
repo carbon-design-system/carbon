@@ -226,10 +226,10 @@
   .#{$prefix}--toast-notification__close-button:focus {
     @include high-contrast-mode('focus');
   }
-  .#{$prefix}--toast-notification__close-icon {
+  .#{$prefix}--toast-notification .#{$prefix}--toast-notification__close-icon {
     @include high-contrast-mode('icon-fill');
   }
-  .#{$prefix}--toast-notification__icon {
+  .#{$prefix}--toast-notification .#{$prefix}--toast-notification__icon {
     @include high-contrast-mode('icon-fill');
   }
   /* stylelint-enable */
