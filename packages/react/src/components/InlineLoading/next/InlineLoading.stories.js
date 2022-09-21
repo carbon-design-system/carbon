@@ -14,7 +14,7 @@ export default {
   component: InlineLoading,
 };
 
-export const _InlineLoading = () => (
+export const Default = () => (
   <InlineLoading
     status="active"
     iconDescription="Loading"

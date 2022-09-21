@@ -50,8 +50,6 @@ export const Default = () => {
   return <DemoComponent />;
 };
 
-Default.storyName = 'default';
-
 export const WithCustomContext = () => {
   function DemoComponent() {
     const [shouldThrowError, setShouldThrowError] = useState(false);
