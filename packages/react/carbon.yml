@@ -559,7 +559,7 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/style.mdx
-      overviewPath: ./src/components/ProgressIndicator/docs/overview.mdx
+      overviewPath: ./src/components/ProgressBar/docs/overview.mdx
   progress-indicator:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/progress-indicator/usage
