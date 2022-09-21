@@ -69,7 +69,9 @@ export const AccordionStory = () => (
 
 AccordionStory.storyName = 'Accordion';
 
-export const Skeleton = () => <AccordionSkeleton open count={4} />;
+export const Skeleton = (args) => (
+  <AccordionSkeleton open count={4} {...args} />
+);
 
 Skeleton.decorators = [
   (story) => <div style={{ width: '500px' }}>{story()}</div>,
@@ -129,8 +131,39 @@ Playground.argTypes = {
     },
     defaultValue: false,
   },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
+  },
+};
+
+Skeleton.argTypes = {
+  align: {
+    options: ['start', 'end'],
+    control: { type: 'select' },
+  },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
+  disabled: {
+    control: false,
+  },
+  isFlush: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  size: {
+    control: false,
   },
 };
