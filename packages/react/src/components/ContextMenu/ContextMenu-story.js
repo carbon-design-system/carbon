@@ -35,25 +35,6 @@ export default {
   },
 };
 
-const Story = (items) => {
-  const menuProps = useContextMenu();
-
-  const renderedItems = buildMenu(items);
-
-  return (
-    <StoryFrame>
-      <InlineNotification kind="info" lowContrast hideCloseButton>
-        <strong>Context Menu</strong>
-        <p>
-          Right-click anywhere on this page to access an example implementation
-          of this component.
-        </p>
-      </InlineNotification>
-      <Menu {...menuProps}>{renderedItems}</Menu>
-    </StoryFrame>
-  );
-};
-
 const Text = () => (
   <div style={{ width: '40rem' }}>
     <h2>Right click anywere in the story frame</h2>
@@ -91,8 +72,10 @@ const Text = () => (
   </div>
 );
 
-export const _ContextMenu = () =>
-  Story([
+export const _ContextMenu = () => {
+  const menuProps = useContextMenu();
+
+  const items = [
     {
       type: 'item',
       label: 'Share with',
@@ -116,11 +99,28 @@ export const _ContextMenu = () =>
     { type: 'divider' },
     { type: 'item', label: 'Rename', shortcut: '↩︎' },
     { type: 'item', label: 'Delete', shortcut: '⌘⌫', kind: 'danger' },
-  ]);
-_ContextMenu.storyName = 'ContextMenu';
+  ];
 
-export const _MultipleGroups = () =>
-  Story([
+  const renderedItems = buildMenu(items);
+
+  return (
+    <StoryFrame>
+      <InlineNotification kind="info" lowContrast hideCloseButton>
+        <strong>Context Menu</strong>
+        <p>
+          Right-click anywhere on this page to access an example implementation
+          of this component.
+        </p>
+      </InlineNotification>
+      <Menu {...menuProps}>{renderedItems}</Menu>
+    </StoryFrame>
+  );
+};
+
+export const _MultipleGroups = () => {
+  const menuProps = useContextMenu();
+
+  const items = [
     {
       type: 'group',
       label: 'Font style',
@@ -143,8 +143,23 @@ export const _MultipleGroups = () =>
       items: ['None', 'Overline', 'Line-through', 'Underline'],
       initialSelectedItem: 'None',
     },
-  ]);
-_MultipleGroups.storyName = 'MultipleGroups';
+  ];
+
+  const renderedItems = buildMenu(items);
+
+  return (
+    <StoryFrame>
+      <InlineNotification kind="info" lowContrast hideCloseButton>
+        <strong>Context Menu</strong>
+        <p>
+          Right-click anywhere on this page to access an example implementation
+          of this component.
+        </p>
+      </InlineNotification>
+      <Menu {...menuProps}>{renderedItems}</Menu>
+    </StoryFrame>
+  );
+};
 
 export const _Playground = (args) => {
   const props = useContextMenu();
