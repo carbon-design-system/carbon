@@ -7,13 +7,13 @@
 
 import React from 'react';
 import FluidDropdown from '../FluidDropdown';
-// import {
-//   ToggletipLabel,
-//   Toggletip,
-//   ToggletipButton,
-//   ToggletipContent,
-// } from '../Toggletip';
-// import { Information } from '@carbon/icons-react';
+import {
+  ToggletipLabel,
+  Toggletip,
+  ToggletipButton,
+  ToggletipContent,
+} from '../Toggletip';
+import { Information } from '@carbon/icons-react';
 import './test.scss';
 
 export default {
@@ -49,6 +49,20 @@ const items = [
   },
 ];
 
+const ToggleTip = (
+  <>
+    <ToggletipLabel>Label</ToggletipLabel>
+    <Toggletip align="top-left">
+      <ToggletipButton label="Show information">
+        <Information />
+      </ToggletipButton>
+      <ToggletipContent>
+        <p>Additional field information here.</p>
+      </ToggletipContent>
+    </Toggletip>
+  </>
+);
+
 export const Default = () => (
   <div style={{ width: '400px' }}>
     <FluidDropdown
@@ -65,6 +79,7 @@ export const Condensed = () => (
   <div style={{ width: '400px' }}>
     <FluidDropdown
       id="default"
+      isCondensed
       titleText="Label"
       label="Choose an option"
       items={items}
@@ -86,7 +101,7 @@ export const Playground = (args) => (
 
     <FluidDropdown
       id="default-3"
-      titleText="Label"
+      titleText={ToggleTip}
       label="Choose an option"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
@@ -105,7 +120,7 @@ Playground.argTypes = {
     },
     defaultValue: 'test-class',
   },
-  condensed: {
+  isCondensed: {
     control: {
       type: 'boolean',
     },

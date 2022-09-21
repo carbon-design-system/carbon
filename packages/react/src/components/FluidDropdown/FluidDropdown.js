@@ -12,11 +12,12 @@ import Dropdown from '../Dropdown';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-function FluidDropdown({ className, ...other }) {
+function FluidDropdown({ className, isCondensed, ...other }) {
   const prefix = usePrefix();
   const classNames = classnames(
     `${prefix}--dropdown__wrapper--fluid`,
-    className
+    className,
+    { [`${prefix}--dropdown__wrapper--fluid--condensed`]: isCondensed }
   );
 
   return (
@@ -52,10 +53,15 @@ FluidDropdown.propTypes = {
   //  */
   // invalid: PropTypes.bool,
 
-  // /**
-  //  * Provide the text that is displayed when the control is in an invalid state
-  //  */
-  // invalidText: PropTypes.node,
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText: PropTypes.node,
+
+  /**
+   * Specify if the `FluidDropdown` should render its menu items in condensed mode
+   */
+  isCondensed: PropTypes.bool,
 
   // /**
   //  * Provide the text that will be read by a screen reader when visiting this

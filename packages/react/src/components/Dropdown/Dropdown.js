@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useContext } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import { useSelect } from 'downshift';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -89,6 +89,8 @@ const Dropdown = React.forwardRef(function Dropdown(
 
   const enabled = useFeatureFlag('enable-v11-release');
 
+  const [isFocused, setIsFocused] = useState(false);
+
   const className = cx(
     `${prefix}--dropdown`,
     [enabled ? null : containerClassName],
@@ -123,6 +125,8 @@ const Dropdown = React.forwardRef(function Dropdown(
       [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--dropdown__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--dropdown__wrapper--fluid--focus`]:
+        isFluid && isFocused && !isOpen,
     }
   );
 
@@ -135,12 +139,17 @@ const Dropdown = React.forwardRef(function Dropdown(
     ) : null;
 
   function onSelectedItemChange({ selectedItem }) {
+    setIsFocused(false);
     if (onChange) {
       onChange({ selectedItem });
     }
   }
 
   const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
+
+  const handleFocus = (evt) => {
+    setIsFocused(evt.type === 'focus' ? true : false);
+  };
 
   return (
     <div className={wrapperClasses} {...other}>
@@ -150,6 +159,8 @@ const Dropdown = React.forwardRef(function Dropdown(
         </label>
       )}
       <ListBox
+        onFocus={handleFocus}
+        onBlur={handleFocus}
         aria-label={ariaLabel}
         size={size}
         className={className}
