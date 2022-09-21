@@ -339,6 +339,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-inlineloading
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/accessibility.mdx
+      overviewPath: ./src/components/InlineLoading/docs/overview.mdx
   layer:
     name: Layer
     framework: react
@@ -416,6 +421,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-multiselect
+    docs:
+      overviewPath: ./src/components/Multiselect/docs/overview.mdx
   notification:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/notification/usage
@@ -425,6 +432,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-notifications
+    docs:
+      overviewPath: ./src/components/Notification/docs/overview.mdx
   number-input:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/number-input/usage
@@ -434,6 +443,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-numberinput
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/accessibility.mdx
+      overviewPath: ./src/components/NumberInput/docs/overview.mdx
   ordered-list:
     name: Ordered list
     framework: react
@@ -448,6 +462,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-orderedlist
     tags:
       - data-display
+    docs:
+      overviewPath: ./src/components/OrderedList/docs/overview.mdx
   overflow-menu:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/overflow-menu/usage
@@ -457,6 +473,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/accessibility.mdx
+      overviewPath: ./src/components/OverflowMenu/docs/overview.mdx
   pagination:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
@@ -466,6 +487,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-pagination
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/accessibility.mdx
+      overviewPath: ./src/components/Pagination/docs/overview.mdx
   pagination-nav:
     status: stable
     framework: react
@@ -498,6 +524,10 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-popover
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/style.mdx
+      overviewPath: ./src/components/Popover/docs/overview.mdx
   progress-bar:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/progress-bar/usage
@@ -507,6 +537,10 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-progressbar
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/style.mdx
+      overviewPath: ./src/components/ProgressIndicator/docs/overview.mdx
   progress-indicator:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/progress-indicator/usage
@@ -516,6 +550,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-progressindicator
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/accessibility.mdx
+      overviewPath: ./src/components/ProgressIndicator/docs/overview.mdx
   radio-button:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/radio-button/usage
@@ -525,6 +564,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-radiobutton
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/accessibility.mdx
+      overviewPath: ./src/components/RadioButton/docs/overview.mdx
   search:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/search/usage
@@ -534,6 +578,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-search
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/accessibility.mdx
+      overviewPath: ./src/components/Search/docs/overview.mdx
   section:
     name: Section
     framework: react
@@ -556,6 +605,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-select
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/accessibility.mdx
+      overviewPath: ./src/components/Select/docs/overview.mdx
   skeleton:
     name: Skeleton
     framework: react
@@ -579,6 +633,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-slider
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/accessibility.mdx
+      overviewPath: ./src/components/Slider/docs/overview.mdx
   stack:
     name: Stack
     framework: react
@@ -602,6 +661,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-structuredlist
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/accessibility.mdx
+      overviewPath: ./src/components/StructuredList/docs/overview.mdx
   tabs:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tabs/usage
@@ -611,6 +675,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tabs
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/accessibility.mdx
+      overviewPath: ./src/components/Tabs/docs/overview.mdx
   tag:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tag/usage
@@ -620,6 +689,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tag
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/accessibility.mdx
+      overviewPath: ./src/components/Tag/docs/overview.mdx
   text:
     name: Unstable text
     framework: react
@@ -655,6 +729,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-textarea
+    docs:
+      overviewPath: ./src/components/TextArea/docs/overview.mdx
   text-input:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/text-input/usage
@@ -664,6 +740,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-textinput
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/accessibility.mdx
+      overviewPath: ./src/components/TextInput/docs/overview.mdx
   theme:
     status: stable
     framework: react
@@ -672,6 +753,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-theme--default
+    docs:
+      overviewPath: ./src/components/Theme/docs/overview.mdx
   tile:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tile/usage
@@ -681,6 +764,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tile
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/accessibility.mdx
+      overviewPath: ./src/components/Tile/docs/overview.mdx
   time-picker:
     status: stable
     framework: react
@@ -689,6 +777,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-timepicker
+    docs:
+      overviewPath: ./src/components/TimePicker/docs/overview.mdx
   toggle:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/toggle/usage
@@ -698,6 +788,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-toggle
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/accessibility.mdx
+      overviewPath:  ./src/components/Toggle/docs/overview.mdx
   toggletip:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage
@@ -709,6 +804,10 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-toggletip
     tags:
       - content-element
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/style.mdx
+      overviewPath: ./src/components/Toggletip/docs/overview.mdx
   tooltip:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/tooltip/usage
@@ -718,6 +817,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tooltip
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/accessibility.mdx
+      overviewPath: ./src/components/Tooltip/docs/overview.mdx
   tooltip-definition:
     status: stable
     framework: react
@@ -734,6 +838,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
+    docs:
+      overviewPath: ./src/components/TreeView/docs/overview.mdx
   ui-shell-header:
     framework: react
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
