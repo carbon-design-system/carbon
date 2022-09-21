@@ -100,4 +100,9 @@
     border-bottom: 0;
     background-color: transparent;
   }
+
+  .#{$prefix}--multi-select:not(.#{$prefix}--list-box--expanded)
+    .#{$prefix}--list-box__menu {
+    visibility: hidden;
+  }
 }

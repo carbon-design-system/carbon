@@ -366,7 +366,6 @@ const ComboBox = React.forwardRef((props, ref) => {
                           <ListBox.MenuItem
                             key={itemProps.id}
                             isActive={selectedItem === item}
-                            tabIndex="-1"
                             isHighlighted={
                               highlightedIndex === index ||
                               (selectedItem?.id &&
