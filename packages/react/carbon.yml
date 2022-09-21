@@ -517,6 +517,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-paginationnav
+    docs:
+      overviewPath: ./src/components/PaginationNav/docs/overview.mdx
   pagination-v2:
     name: Unstable pagination
     framework: react
