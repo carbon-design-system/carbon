@@ -1,288 +1,163 @@
 /**
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2016, 2018
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import FluidDropdown from '../FluidDropdown';
+import { render, screen, cleanup } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { render, screen } from '@testing-library/react';
-import { FeatureFlags } from '../../FeatureFlags';
+import {
+  assertMenuOpen,
+  assertMenuClosed,
+  openMenu,
+  generateItems,
+  generateGenericItem,
+} from '../../ListBox/test-helpers';
+import FluidDropdown from '../FluidDropdown';
 
 const prefix = 'cds';
 
 describe('FluidDropdown', () => {
-  describe('renders as expected - Component API', () => {
-    it('should spread extra props onto the input element', () => {
-      render(
-        <FluidDropdown
-          data-testid="test-id"
-          id="input-1"
-          labelText="FluidDropdown label"
-        />
-      );
+  let mockProps;
+  beforeEach(() => {
+    mockProps = {
+      id: 'test-fluiddropdown',
+      items: generateItems(5, generateGenericItem),
+      onChange: jest.fn(),
+      label: 'input',
+      placeholder: 'Filter...',
+      type: 'default',
+    };
+  });
 
-      expect(screen.getByRole('textbox')).toHaveAttribute(
-        'data-testid',
-        'test-id'
-      );
+  it('should initially render with the menu not open', () => {
+    render(<FluidDropdown {...mockProps} />);
+    assertMenuClosed();
+  });
+
+  it('should let the user open the menu by clicking on the control', () => {
+    render(<FluidDropdown {...mockProps} />);
+    openMenu();
+    assertMenuOpen(mockProps);
+  });
+
+  it('should render with strings as items', () => {
+    render(<FluidDropdown {...mockProps} items={['zar', 'doz']} />);
+    openMenu();
+
+    expect(screen.getByText('zar')).toBeInTheDocument();
+    expect(screen.getByText('doz')).toBeInTheDocument();
+  });
+
+  it('should render custom item components', () => {
+    const itemToElement = jest.fn((item) => {
+      return <div className="mock-item">{item.label}</div>;
     });
 
-    it('should support a custom `className` prop on the outermost element', () => {
-      const { container } = render(
-        <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidDropdown
-            id="input-1"
-            labelText="FluidDropdown label"
-            className="custom-class"
-          />
-        </FeatureFlags>
-      );
+    render(<FluidDropdown itemToElement={itemToElement} {...mockProps} />);
+    openMenu();
 
-      expect(container.firstChild).toHaveClass('custom-class');
+    expect(itemToElement).toHaveBeenCalled();
+  });
+
+  it('should render selectedItem as an element', () => {
+    render(
+      <FluidDropdown
+        {...mockProps}
+        selectedItem={{
+          id: `id-1`,
+          label: `Item 1`,
+          value: 1,
+        }}
+        renderSelectedItem={(selectedItem) => (
+          <div id="a-custom-element-for-selected-item">
+            {selectedItem.label}
+          </div>
+        )}
+      />
+    );
+    // custom element should be rendered for the selected item
+    expect(
+      document.querySelector('#a-custom-element-for-selected-item')
+    ).toBeDefined();
+    // the title should use the normal itemToString method
+
+    expect(screen.getByText('Item 1')).toBeInTheDocument();
+  });
+
+  describe('title', () => {
+    it('renders a title', () => {
+      render(<FluidDropdown titleText="Email Input" {...mockProps} />);
+      expect(screen.getByText('Email Input')).toBeInTheDocument();
     });
 
-    it('should support a custom `className` prop on the input element (V10)', () => {
-      render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          className="custom-class"
-        />
-      );
-
-      expect(screen.getByRole('textbox')).toHaveClass('custom-class');
-    });
-
-    it('should respect defaultValue prop', () => {
-      render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          defaultValue="This is default text"
-        />
-      );
-
-      expect(screen.getByRole('textbox')).toHaveAttribute(
-        'value',
-        'This is default text'
-      );
-    });
-
-    it('should respect disabled prop', () => {
-      render(
-        <FluidDropdown id="input-1" labelText="FluidDropdown label" disabled />
-      );
-
-      expect(screen.getByRole('textbox')).toBeDisabled();
-    });
-
-    it('should respect id prop', () => {
-      render(<FluidDropdown id="input-1" labelText="FluidDropdown label" />);
-
-      expect(screen.getByRole('textbox')).toHaveAttribute('id', 'input-1');
-    });
-
-    it('should respect invalid prop', () => {
-      const { container } = render(
-        <FluidDropdown id="input-1" labelText="FluidDropdown" invalid />
-      );
-
-      const invalidIcon = container.querySelector(
-        `svg.${prefix}--text-input__invalid-icon`
-      );
-
-      expect(screen.getByRole('textbox')).toHaveAttribute('data-invalid');
-      expect(screen.getByRole('textbox')).toHaveClass(
-        `${prefix}--text-input--invalid`
-      );
-      expect(invalidIcon).toBeInTheDocument();
-    });
-
-    it('should respect invalidText prop', () => {
-      render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown"
-          invalid
-          invalidText="This is invalid text"
-        />
-      );
-
-      expect(screen.getByText('This is invalid text')).toBeInTheDocument();
-      expect(screen.getByText('This is invalid text')).toHaveClass(
-        `${prefix}--form-requirement`
-      );
-    });
-
-    it('should respect labelText prop', () => {
-      render(<FluidDropdown id="input-1" labelText="FluidDropdown label" />);
-
-      expect(screen.getByText('FluidDropdown label')).toBeInTheDocument();
-      expect(screen.getByText('FluidDropdown label')).toHaveClass(
-        `${prefix}--label`
-      );
-    });
-
-    it('should respect placeholder prop', () => {
-      render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          placeholder="Placeholder text"
-        />
-      );
-
-      expect(
-        screen.getByPlaceholderText('Placeholder text')
-      ).toBeInTheDocument();
-    });
-
-    it('should respect type prop', () => {
-      render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          type="text"
-        />
-      );
-
-      expect(screen.getByRole('textbox')).toHaveAttribute(`type`, 'text');
-    });
-
-    it('should respect value prop', () => {
-      render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          value="This is a test value"
-        />
-      );
-
-      expect(screen.getByRole('textbox')).toHaveAttribute(
-        'value',
-        'This is a test value'
-      );
-    });
-
-    it('should respect warn prop', () => {
-      const { container } = render(
-        <FluidDropdown id="input-1" labelText="FluidDropdown label" warn />
-      );
-
-      const warnIcon = container.querySelector(
-        `svg.${prefix}--text-input__invalid-icon--warning`
-      );
-
-      expect(screen.getByRole('textbox')).toHaveClass(
-        `${prefix}--text-input--warning`
-      );
-      expect(warnIcon).toBeInTheDocument();
-    });
-
-    it('should respect warnText prop', () => {
-      render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          warn
-          warnText="This is warning text"
-        />
-      );
-
-      expect(screen.getByText('This is warning text')).toBeInTheDocument();
-      expect(screen.getByText('This is warning text')).toHaveClass(
-        `${prefix}--form-requirement`
-      );
+    it('has the expected classes', () => {
+      render(<FluidDropdown titleText="Email Input" {...mockProps} />);
+      expect(screen.getByText('Email Input')).toHaveClass(`${prefix}--label`);
     });
   });
 
-  describe('behaves as expected - Component API', () => {
-    it('should respect onChange prop', () => {
-      const onChange = jest.fn();
+  it('should let the user select an option by clicking on the option node', () => {
+    render(<FluidDropdown {...mockProps} />);
+    openMenu();
+
+    userEvent.click(screen.getByText('Item 0'));
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[0],
+    });
+    assertMenuClosed();
+
+    mockProps.onChange.mockClear();
+
+    openMenu();
+    userEvent.click(screen.getByText('Item 1'));
+
+    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+    expect(mockProps.onChange).toHaveBeenCalledWith({
+      selectedItem: mockProps.items[1],
+    });
+  });
+
+  describe('should display initially selected item found in `initialSelectedItem`', () => {
+    it('using an object type for the `initialSelectedItem` prop', () => {
       render(
         <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          data-testid-="input-1"
-          onChange={onChange}
+          {...mockProps}
+          initialSelectedItem={mockProps.items[0]}
         />
       );
 
-      userEvent.type(screen.getByRole('textbox'), 'x');
-      expect(screen.getByRole('textbox')).toHaveValue('x');
-      expect(onChange).toHaveBeenCalledTimes(1);
-      expect(onChange).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        })
-      );
+      expect(screen.getByText(mockProps.items[0].label)).toBeInTheDocument();
     });
 
-    it('should respect onClick prop', () => {
-      const onClick = jest.fn();
+    it('using a string type for the `initialSelectedItem` prop', () => {
+      // Replace the 'items' property in mockProps with a list of strings
+      mockProps = {
+        ...mockProps,
+        items: ['1', '2', '3'],
+      };
+
       render(
         <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          data-testid-="input-1"
-          onClick={onClick}
+          {...mockProps}
+          initialSelectedItem={mockProps.items[1]}
         />
       );
 
-      userEvent.click(screen.getByRole('textbox'));
-      expect(onClick).toHaveBeenCalledTimes(1);
-      expect(onClick).toHaveBeenCalledWith(
-        expect.objectContaining({
-          target: expect.any(Object),
-        })
-      );
+      expect(screen.getByText(mockProps.items[1])).toBeInTheDocument();
     });
+  });
 
-    it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
-      const onClick = jest.fn();
-      render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          onClick={onClick}
-          disabled
-        />
-      );
+  describe('Component API', () => {
+    afterEach(cleanup);
 
-      userEvent.click(screen.getByRole('textbox'));
-      expect(onClick).not.toHaveBeenCalled();
-    });
-
-    it('should respect readOnly prop', () => {
-      const onChange = jest.fn();
-      const onClick = jest.fn();
-      const { container } = render(
-        <FluidDropdown
-          id="input-1"
-          labelText="FluidDropdown label"
-          onClick={onClick}
-          onChange={onChange}
-          readOnly
-        />
-      );
-
-      // Click events should fire
-      userEvent.click(screen.getByRole('textbox'));
-      expect(onClick).toHaveBeenCalledTimes(1);
-
-      // Change events should *not* fire
-      userEvent.type(screen.getByRole('textbox'), 'x');
-      expect(screen.getByRole('textbox')).not.toHaveValue('x');
-      expect(onChange).toHaveBeenCalledTimes(0);
-
-      // Should display the "read-only" icon
-      const icon = container.querySelector(
-        `svg.${prefix}--text-input__readonly-icon`
-      );
-      expect(icon).toBeInTheDocument();
+    it('should accept a `ref` for the underlying button element', () => {
+      const ref = React.createRef();
+      render(<FluidDropdown {...mockProps} ref={ref} />);
+      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
     });
   });
 });

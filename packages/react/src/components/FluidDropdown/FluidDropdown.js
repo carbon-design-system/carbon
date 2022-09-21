@@ -12,7 +12,10 @@ import Dropdown from '../Dropdown';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-function FluidDropdown({ className, isCondensed, ...other }) {
+const FluidDropdown = React.forwardRef(function FluidDropdown(
+  { className, isCondensed, ...other },
+  ref
+) {
   const prefix = usePrefix();
   const classNames = classnames(
     `${prefix}--dropdown__wrapper--fluid`,
@@ -22,10 +25,10 @@ function FluidDropdown({ className, isCondensed, ...other }) {
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>
-      <Dropdown className={classNames} {...other} />
+      <Dropdown ref={ref} className={classNames} {...other} />
     </FormContext.Provider>
   );
-}
+});
 
 FluidDropdown.propTypes = {
   /**
