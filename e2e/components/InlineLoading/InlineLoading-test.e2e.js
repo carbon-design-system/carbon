@@ -17,7 +17,7 @@ test.describe('InlineLoading', () => {
       test('inline loading @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'InlineLoading',
-          story: 'components-inlineloading--default',
+          id: 'components-inlineloading--default',
           theme,
         });
       });
