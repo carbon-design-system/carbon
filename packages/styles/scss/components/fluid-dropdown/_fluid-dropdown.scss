@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2018, 2018
+// Copyright IBM Corp. 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -64,6 +64,27 @@
   .#{$prefix}--dropdown__wrapper--fluid:not(.#{$prefix}--dropdown__wrapper--fluid--condensed)
     .#{$prefix}--list-box__menu-item__selected-icon {
     top: rem(20px);
+  }
+
+  // Disabled styles
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-button {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-button
+    svg {
+    fill: $icon-disabled;
   }
 
   // Focus styles
@@ -141,5 +162,12 @@
     display: block;
     border: 1px solid $border-subtle;
     margin: 0 1rem;
+  }
+
+  // direction - top
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--list-box--up
+    .#{$prefix}--list-box__menu {
+    bottom: $spacing-10;
   }
 }

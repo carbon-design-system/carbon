@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,6 @@ import {
   ToggletipContent,
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
-import './test.scss';
 
 export default {
   title: 'Experimental/unstable__FluidDropdown',
@@ -66,6 +65,7 @@ const ToggleTip = (
 export const Default = () => (
   <div style={{ width: '400px' }}>
     <FluidDropdown
+      initialSelectedItem={items[2]}
       id="default"
       titleText="Label"
       label="Choose an option"
@@ -98,8 +98,9 @@ export const Playground = (args) => (
       itemToString={(item) => (item ? item.text : '')}
       {...args}
     />
-
+    <br />
     <FluidDropdown
+      {...args}
       id="default-3"
       titleText={ToggleTip}
       label="Choose an option"

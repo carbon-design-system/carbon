@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,25 +33,35 @@ FluidDropdown.propTypes = {
    */
   className: PropTypes.string,
 
-  // /**
-  //  * Optionally provide the default value of the `<input>`
-  //  */
-  // defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * Specify the direction of the dropdown. Can be either top or bottom.
+   */
+  direction: PropTypes.oneOf(['top', 'bottom']),
 
-  // /**
-  //  * Specify whether the `<input>` should be disabled
-  //  */
-  // disabled: PropTypes.bool,
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled: PropTypes.bool,
 
-  // /**
-  //  * Specify a custom `id` for the `<input>`
-  //  */
-  // id: PropTypes.string.isRequired,
+  /**
+   * Specify a custom `id` for the `<input>`
+   */
+  id: PropTypes.string.isRequired,
 
-  // /**
-  //  * Specify whether the control is currently invalid
-  //  */
-  // invalid: PropTypes.bool,
+  /**
+   * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
+   * from their collection that are pre-selected
+   */
+  initialSelectedItem: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+
+  /**
+   * Specify if the currently selected value is invalid.
+   */
+  invalid: PropTypes.bool,
 
   /**
    * Provide the text that is displayed when the control is in an invalid state
@@ -63,43 +73,72 @@ FluidDropdown.propTypes = {
    */
   isCondensed: PropTypes.bool,
 
-  // /**
-  //  * Provide the text that will be read by a screen reader when visiting this
-  //  * control
-  //  */
-  // labelText: PropTypes.node.isRequired,
+  /**
+   * Function to render items as custom components instead of strings.
+   * Defaults to null and is overridden by a getter
+   */
+  itemToElement: PropTypes.func,
 
-  // /**
-  //  * Optionally provide an `onChange` handler that is called whenever `<input>`
-  //  * is updated
-  //  */
-  // onChange: PropTypes.func,
+  /**
+   * Helper function passed to downshift that allows the library to render a
+   * given item to a string label. By default, it extracts the `label` field
+   * from a given item to serve as the item label in the list.
+   */
+  itemToString: PropTypes.func,
 
-  // /**
-  //  * Optionally provide an `onClick` handler that is called whenever the
-  //  * `<input>` is clicked
-  //  */
-  // onClick: PropTypes.func,
+  /**
+   * We try to stay as generic as possible here to allow individuals to pass
+   * in a collection of whatever kind of data structure they prefer
+   */
+  items: PropTypes.array.isRequired,
 
-  // /**
-  //  * Specify the placeholder attribute for the `<input>`
-  //  */
-  // placeholder: PropTypes.string,
+  /**
+   * Generic `label` that will be used as the textual representation of what
+   * this field is for
+   */
+  label: PropTypes.node.isRequired,
 
-  // /**
-  //  * Specify the value of the `<input>`
-  //  */
-  // value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * `onChange` is a utility for this controlled component to communicate to a
+   * consuming component what kind of internal state changes are occurring.
+   */
+  onChange: PropTypes.func,
 
-  // /**
-  //  * Specify whether the control is currently in warning state
-  //  */
-  // warn: PropTypes.bool,
+  /**
+   * An optional callback to render the currently selected item as a react element instead of only
+   * as a string.
+   */
+  renderSelectedItem: PropTypes.func,
 
-  // /**
-  //  * Provide the text that is displayed when the control is in warning state
-  //  */
-  // warnText: PropTypes.node,
+  /**
+   * In the case you want to control the dropdown selection entirely.
+   */
+  selectedItem: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.string,
+    PropTypes.number,
+  ]),
+
+  /**
+   * Provide the title text that will be read by a screen reader when
+   * visiting this control
+   */
+  titleText: PropTypes.node,
+
+  /**
+   * Callback function for translating ListBoxMenuIcon SVG title
+   */
+  translateWithId: PropTypes.func,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 export default FluidDropdown;
