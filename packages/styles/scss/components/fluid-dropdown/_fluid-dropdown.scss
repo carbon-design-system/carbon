@@ -18,5 +18,161 @@
 @use '../fluid-list-box';
 
 @mixin fluid-dropdown {
+<<<<<<< HEAD
   // Style overrides can be added here as needed
+=======
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper {
+    position: relative;
+    height: 100%;
+    background: $field;
+    transition: background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid .#{$prefix}--dropdown {
+    min-height: rem(64px);
+    padding: rem(32px) $spacing-05 rem(13px);
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid .#{$prefix}--list-box {
+    padding: 0;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid .#{$prefix}--list-box__field {
+    padding-top: rem(33px);
+    padding-bottom: rem(13px);
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid .#{$prefix}--list-box__menu-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid:not(.#{$prefix}--dropdown__wrapper--fluid--condensed)
+    .#{$prefix}--list-box__menu-item {
+    height: $spacing-10;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid:not(.#{$prefix}--dropdown__wrapper--fluid--condensed)
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    top: rem(20px);
+  }
+
+  // Disabled styles
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-button {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-button
+    svg {
+    fill: $icon-disabled;
+  }
+
+  // Focus styles
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--focus {
+    @include focus-outline('outline');
+
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--focus
+    .#{$prefix}--dropdown:not(.#{$prefix}--dropdown--invalid) {
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid .#{$prefix}--list-box__field:focus {
+    outline: none;
+    outline-offset: 0;
+  }
+
+  // Invalid / Warning styles
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--invalid:not(.#{$prefix}--dropdown__wrapper--fluid--focus) {
+    @include focus-outline('invalid');
+
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--invalid
+    .#{$prefix}--dropdown--invalid,
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--invalid
+    .#{$prefix}--list-box__field:focus {
+    outline: none;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--invalid:focus-within {
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--invalid
+    .#{$prefix}--dropdown,
+  .#{$prefix}--dropdown__wrapper--fluid .#{$prefix}--dropdown--warning {
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--invalid
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement {
+    padding: rem(8px) 4rem rem(8px) $spacing-05;
+    margin-top: 0;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid.#{$prefix}--dropdown__wrapper--fluid--invalid
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--dropdown--warning
+    .#{$prefix}--list-box__invalid-icon {
+    top: rem(81px);
+    right: $spacing-05;
+    pointer-events: none;
+  }
+
+  // Error + Warning divider
+  .#{$prefix}--dropdown__wrapper--fluid .#{$prefix}--dropdown__divider {
+    display: none;
+  }
+
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--dropdown--invalid
+    ~ .#{$prefix}--dropdown__divider,
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--dropdown--warning
+    ~ .#{$prefix}--dropdown__divider {
+    display: block;
+    border: 1px solid $border-subtle;
+    margin: 0 1rem;
+  }
+
+  // direction - top
+  .#{$prefix}--dropdown__wrapper--fluid
+    .#{$prefix}--list-box--up
+    .#{$prefix}--list-box__menu {
+    bottom: $spacing-10;
+  }
+>>>>>>> 403eb16c7... docs(FluidDropdown): update PropType definitions
 }
