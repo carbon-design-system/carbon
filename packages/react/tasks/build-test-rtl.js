@@ -215,6 +215,10 @@ async function main() {
 
   const testFile = writeTestFile(props, componentName, isSubComponent);
 
+  if (pathToComponent === '') {
+    console.log(testFile);
+    return;
+  }
   await fs.writeFile(pathToComponent, testFile);
 
   console.log(`Test file created for ${componentName}! 🎉`);
