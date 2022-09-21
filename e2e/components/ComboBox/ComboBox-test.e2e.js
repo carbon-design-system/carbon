@@ -17,7 +17,7 @@ test.describe('ComboBox', () => {
       test('combobox @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ComboBox',
-          id: 'components-combobox--combobox',
+          id: 'components-combobox--default',
           theme,
         });
       });
@@ -35,7 +35,7 @@ test.describe('ComboBox', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'ComboBox',
-      id: 'components-combobox--combobox',
+      id: 'components-combobox--default',
       globals: {
         theme: 'white',
       },

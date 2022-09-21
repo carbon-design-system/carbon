@@ -14,7 +14,7 @@ export default {
   component: ProgressBar,
 };
 
-export const _ProgressBar = () => (
+export const Default = () => (
   <ProgressBar
     label="Progress bar label"
     helperText="Optional helper text"
