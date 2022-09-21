@@ -8,15 +8,15 @@
  */
 
 const autoprefixer = require('autoprefixer');
-const babel = require('rollup-plugin-babel');
-const commonjs = require('rollup-plugin-commonjs');
+const babel = require('@rollup/plugin-babel');
+const commonjs = require('@rollup/plugin-commonjs');
 const cssnano = require('cssnano');
 const fs = require('fs');
 const multiInput = require('rollup-plugin-multi-input').default;
 const path = require('path');
 const postcss = require('postcss');
-const replace = require('rollup-plugin-replace');
-const resolve = require('rollup-plugin-node-resolve');
+const replace = require('@rollup/plugin-replace');
+const { nodeResolve } = require('@rollup/plugin-node-resolve');
 const rtlcss = require('rtlcss');
 const { promisify } = require('util');
 const { terser } = require('rollup-plugin-terser');
@@ -113,7 +113,7 @@ function getRollupConfig({ mode = 'development', dir = 'ltr', folders = [] } = {
     input: _generateInputs(mode, dir, folders),
     plugins: [
       multiInput(),
-      resolve({
+      nodeResolve({
         browser: true,
         mainFields: ['jsnext', 'module', 'main'],
         dedupe: ['carbon-components'],
@@ -124,7 +124,7 @@ function getRollupConfig({ mode = 'development', dir = 'ltr', folders = [] } = {
         sourceMap: true,
       }),
       carbonIcons(),
-      babel({
+      babel.babel({
         extensions: ['.ts'],
         exclude: ['node_modules/**'], // only transpile our source code
         presets: ['@babel/preset-modules'],
