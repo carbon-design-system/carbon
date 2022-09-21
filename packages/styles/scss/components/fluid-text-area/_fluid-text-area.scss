@@ -61,31 +61,6 @@
     display: none;
   }
 
-  // focus
-  .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area__wrapper[data-invalid]:focus-within,
-  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper:focus-within {
-    @include focus-outline('outline');
-
-    outline-offset: 0;
-  }
-
-  .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area__wrapper[data-invalid]
-    > .#{$prefix}--text-area--invalid:focus,
-  .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area__wrapper
-    > .#{$prefix}--text-area:focus,
-  .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area__wrapper
-    > .#{$prefix}--text-area:active,
-  .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area__wrapper[data-invalid]
-    > .#{$prefix}--text-area--invalid {
-    outline: none;
-    transition: none;
-  }
-
   // invalid
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid,
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area:focus {
@@ -140,5 +115,30 @@
     @include focus-outline('invalid');
 
     outline-offset: 0;
+  }
+
+  // focus
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]:focus-within,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper:focus-within {
+    @include focus-outline('outline');
+
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    > .#{$prefix}--text-area--invalid:focus,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper
+    > .#{$prefix}--text-area:focus,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper
+    > .#{$prefix}--text-area:active,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    > .#{$prefix}--text-area--invalid {
+    outline: none;
+    transition: none;
   }
 }
