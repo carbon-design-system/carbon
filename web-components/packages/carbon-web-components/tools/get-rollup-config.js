@@ -125,10 +125,10 @@ function getRollupConfig({ mode = 'development', dir = 'ltr', folders = [] } = {
       }),
       carbonIcons(),
       babel.babel({
+        babelHelpers: 'runtime',
         extensions: ['.ts'],
         exclude: ['node_modules/**'], // only transpile our source code
         presets: ['@babel/preset-modules'],
-        runtimeHelpers: true,
         plugins: [
           '@babel/plugin-transform-typescript',
           '@babel/plugin-proposal-class-properties',

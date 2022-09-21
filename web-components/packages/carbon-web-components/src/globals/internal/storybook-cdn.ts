@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-// import packageJson from '../../../package.json';
+import packageJson from '../../../package.json';
 
 /* eslint-disable import/prefer-default-export,max-len */
 
@@ -41,7 +41,7 @@ export const cdnJs = ({ components }) => {
 
  \`\`\`html
  // SPECIFIC VERSION (available starting v1.6.0)
- ${_renderScript(components, `version/v`)}
+ ${_renderScript(components, `version/v${packageJson.version}`)}
 
  // LATEST tag
  ${_renderScript(components, 'tag/v1/latest')}
@@ -56,7 +56,7 @@ export const cdnJs = ({ components }) => {
 
  \`\`\`html
  // SPECIFIC VERSION (available starting v1.6.0)
- ${_renderScript(components, `version/v`, true)}
+ ${_renderScript(components, `version/v${packageJson.version}`, true)}
 
  // LATEST tag
  ${_renderScript(components, 'tag/v1/latest', true)}
