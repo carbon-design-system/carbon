@@ -36,17 +36,6 @@ export const Default = () => (
   </UnorderedList>
 );
 
-Default.storyName = 'default';
-
-Default.parameters = {
-  info: {
-    text:
-      'Lists consist of related content grouped together and organized ' +
-      'vertically. Unordered lists are used to present content of equal ' +
-      'status or value.',
-  },
-};
-
 export const Nested = () => {
   const regularProps = props.regular();
 
@@ -72,12 +61,3 @@ export const Nested = () => {
 };
 
 Nested.storyName = 'nested';
-
-Nested.parameters = {
-  info: {
-    text:
-      'Lists consist of related content grouped together and organized ' +
-      'vertically. Unordered lists are used to present content of equal ' +
-      'status or value.',
-  },
-};

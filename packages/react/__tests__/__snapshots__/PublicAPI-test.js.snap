@@ -22,6 +22,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "isFlush": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -84,6 +87,9 @@ Map {
       },
       "count": Object {
         "type": "number",
+      },
+      "isFlush": Object {
+        "type": "bool",
       },
       "open": Object {
         "type": "bool",
