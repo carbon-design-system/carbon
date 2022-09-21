@@ -424,6 +424,11 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-modal
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/accessibility.mdx
+      overviewPath: ./src/components/Modal/docs/overview.mdx
   multiselect:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/dropdown/usage/#multiselect
