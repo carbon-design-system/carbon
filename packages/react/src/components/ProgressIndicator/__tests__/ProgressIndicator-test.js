@@ -205,14 +205,12 @@ describe('ProgressStep', () => {
     it('should respect invalid prop', () => {
       render(<ProgressStep label="First step" invalid />);
 
-      screen.debug();
       expect(screen.getByText('Invalid')).toBeDefined();
     });
 
     it('should respect label prop', () => {
       render(<ProgressStep label="First step" />);
 
-      screen.debug();
       expect(screen.getByRole('button')).toHaveAttribute('title', 'First step');
     });
 
