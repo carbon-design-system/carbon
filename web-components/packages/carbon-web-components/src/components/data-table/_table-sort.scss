@@ -1,19 +1,11 @@
 //
-// Copyright IBM Corp. 2019, 2020
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
 @import 'carbon-components/scss/components/data-table/data-table-sort';
-
-// Height of header cell for sorting
-//
-// Ensure sort button takes 100% of the cell, by setting the same height as the parent row
-
-:host(#{$prefix}-table-header-row) ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
-  height: rem(48px);
-}
 
 :host(#{$prefix}-table-header-row[size='compact']) ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
   height: rem(24px);
@@ -27,20 +19,19 @@
   height: rem(64px);
 }
 
-:host(#{$prefix}-table-header-cell[sort-direction]) .#{$prefix}--table-sort {
-  height: 100%;
-}
-
 // Padding of header cell for sorting
 //
 // Let sort button rather than the cell define the padding
+// Ensure sort button takes 100% of the cell, by setting the same height as the parent row
 
 :host(#{$prefix}-table-header-row) ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
+  height: rem(48px);
   padding-left: 0;
   padding-right: 0;
 }
 
 :host(#{$prefix}-table-header-cell[sort-direction]) .#{$prefix}--table-sort {
+  height: 100%;
   padding-left: $spacing-04;
   padding-right: $spacing-04;
 }

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -24,6 +24,7 @@
 
   ::slotted(#{$prefix}-overflow-menu) {
     @include button-reset;
+
     display: flex;
     cursor: pointer;
     height: $layout-04;
@@ -41,7 +42,8 @@
   }
 
   .#{$prefix}--search .#{$prefix}--search-input {
-    background-color: transparent; // For tool bar animation with (esp.) persistent search box
+    // For tool bar animation with (esp.) persistent search box
+    background-color: transparent;
   }
 }
 
@@ -76,7 +78,7 @@
       height: $layout-04;
       width: $layout-04;
 
-      &:before {
+      &::before {
         top: 2px;
         height: calc(100% - 4px);
         background-color: $hover-ui;

@@ -2,9 +2,9 @@
 
 ## `bx-table-batch-action`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div class="bx--batch-summary">
@@ -24,7 +24,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div class="bx--batch-summary">
@@ -44,7 +44,7 @@
 
 ```
 
-####     `should render non-plural selected rows count`
+#### `should render non-plural selected rows count`
 
 ```
 <div class="bx--batch-summary">
@@ -66,9 +66,9 @@
 
 ## `bx-table-header-cell`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <slot>
@@ -76,7 +76,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <button
@@ -99,9 +99,9 @@
 
 ## `bx-table-row`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <slot>
@@ -109,7 +109,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div
@@ -139,9 +139,9 @@
 
 ## `bx-table-expand-row`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div class="bx--table-expand">
@@ -153,7 +153,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div class="bx--table-expand">
@@ -187,9 +187,9 @@
 
 ## `bx-table-toolbar-search`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div
@@ -221,7 +221,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div
@@ -252,4 +252,3 @@
 </div>
 
 ```
-

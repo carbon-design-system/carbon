@@ -2,9 +2,9 @@
 
 ## `bx-header-menu-button`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <button
@@ -16,7 +16,7 @@
 
 ```
 
-####     `should render with various attributes for inactive state`
+#### `should render with various attributes for inactive state`
 
 ```
 <button
@@ -29,7 +29,7 @@
 
 ```
 
-####     `should render with various attributes for active state`
+#### `should render with various attributes for active state`
 
 ```
 <button
@@ -44,9 +44,9 @@
 
 ## `bx-header-menu`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <a
@@ -68,7 +68,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <a
@@ -94,9 +94,9 @@
 
 ## `bx-header-name`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <a
@@ -109,7 +109,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <a
@@ -131,9 +131,9 @@
 
 ## `bx-header-nav`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <div
@@ -152,7 +152,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <div
@@ -173,9 +173,9 @@
 
 ## `bx-header-nav-item`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <a
@@ -194,7 +194,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <a
@@ -216,9 +216,9 @@
 
 ## `bx-side-nav-link`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <a
@@ -246,7 +246,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <a
@@ -275,9 +275,9 @@
 
 ## `bx-side-nav-menu`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <button
@@ -317,7 +317,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <button
@@ -358,7 +358,7 @@
 
 ```
 
-####     `should support collapsing side nav menu upon parent side nav is collapsed as rail`
+#### `should support collapsing side nav menu upon parent side nav is collapsed as rail`
 
 ```
 <button
@@ -400,9 +400,9 @@
 
 ## `bx-side-nav-menu-item`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <a
@@ -421,7 +421,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <a
@@ -439,4 +439,3 @@
 </a>
 
 ```
-

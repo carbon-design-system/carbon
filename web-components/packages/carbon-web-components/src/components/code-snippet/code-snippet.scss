@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -14,6 +14,7 @@ $css--plex: true !default;
 :host(#{$prefix}-code-snippet),
 :host(#{$prefix}-code-snippet-skeleton) {
   @extend .#{$prefix}--snippet--single;
+
   outline: none;
 
   &::after {
@@ -47,6 +48,7 @@ $css--plex: true !default;
   pre {
     white-space: nowrap;
     @include type-style('code-01');
+
     padding-right: $spacing-xs;
   }
 }
@@ -71,6 +73,7 @@ $css--plex: true !default;
 :host(#{$prefix}-code-snippet[type='multi']),
 :host(#{$prefix}-code-snippet-skeleton[type='multi']) {
   @extend .#{$prefix}--snippet--multi;
+
   height: auto;
 
   &::after {
@@ -140,7 +143,8 @@ $css--plex: true !default;
   }
 
   .#{$prefix}--btn--copy__feedback {
-    top: rem(6.7882px); // Half of the diagonal line of `0.6rem` square
+    // Half of the diagonal line of `0.6rem` square
+    top: rem(6.7882px);
   }
 }
 
@@ -149,6 +153,7 @@ $css--plex: true !default;
 
   span {
     @include skeleton;
+
     width: 100%;
     height: 1rem;
     display: block;

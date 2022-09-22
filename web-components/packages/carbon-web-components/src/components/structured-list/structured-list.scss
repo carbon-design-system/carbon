@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -56,6 +56,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-structured-list-header-cell-skeleton) span {
   @include skeleton;
+
   width: 75%;
   height: 1rem;
   display: block;

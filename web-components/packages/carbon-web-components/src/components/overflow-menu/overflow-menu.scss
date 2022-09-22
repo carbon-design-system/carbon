@@ -54,7 +54,7 @@ $css--plex: true !default;
 :host(#{$prefix}-overflow-menu-body) {
   @extend .#{$prefix}--overflow-menu-options;
 
-  &:after {
+  &::after {
     @extend .#{$prefix}--overflow-menu-options, [data-floating-menu-direction='bottom'], ::after;
   }
 }
@@ -63,7 +63,7 @@ $css--plex: true !default;
   margin-top: 0;
   margin-bottom: $spacing-2xs;
 
-  &:after {
+  &::after {
     @extend .#{$prefix}--overflow-menu-options, [data-floating-menu-direction='top'], ::after;
   }
 }

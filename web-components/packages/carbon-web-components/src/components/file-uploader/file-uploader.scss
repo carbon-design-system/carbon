@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -26,6 +26,7 @@
     .#{$prefix}--form-requirement__title,
     .#{$prefix}--form-requirement__supplement {
       @include type-style('label-01');
+
       padding: 0 $carbon--spacing-05;
     }
 

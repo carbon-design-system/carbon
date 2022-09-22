@@ -33,6 +33,7 @@ $caret-horizontal-position: calc(#{$caret-size * (-1)} + 1px);
 
   ::slotted(p) {
     @include type-style('body-short-01');
+
     text-align: left;
   }
 }
@@ -53,7 +54,8 @@ $caret-horizontal-position: calc(#{$caret-size * (-1)} + 1px);
   .#{$prefix}--tooltip__caret {
     right: auto;
     left: $caret-horizontal-position;
-    transform: rotate(270deg) translate(25%, -50%); // Adjust for change in Y position as caret rotates
+    // Adjust for change in Y position as caret rotates
+    transform: rotate(270deg) translate(25%, -50%);
   }
 }
 
@@ -67,7 +69,8 @@ $caret-horizontal-position: calc(#{$caret-size * (-1)} + 1px);
   .#{$prefix}--tooltip__caret {
     right: $caret-horizontal-position;
     left: auto;
-    transform: rotate(90deg) translate(-25%, -50%); // Adjust for change in Y position as caret rotates
+    // Adjust for change in Y position as caret rotates
+    transform: rotate(90deg) translate(-25%, -50%);
   }
 }
 

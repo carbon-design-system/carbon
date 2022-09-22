@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -72,6 +72,7 @@ $css--plex: true !default;
 :host(#{$prefix}-filter-tag) {
   @extend .#{$prefix}--tag;
   @extend .#{$prefix}--tag--filter;
+
   display: none;
 
   &[open] {
@@ -106,6 +107,7 @@ $css--plex: true !default;
 // Skeleton state
 :host(#{$prefix}-tag.#{$prefix}--skeleton) {
   @include skeleton;
+
   width: rem(60px);
   overflow: hidden;
 }

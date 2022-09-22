@@ -2,7 +2,7 @@
 
 ## `Misc attributes`
 
-####   `should render <bx-pagination> with minimum attributes`
+#### `should render <bx-pagination> with minimum attributes`
 
 ```
 <div class="bx--pagination__left">
@@ -36,7 +36,7 @@
 
 ```
 
-####   `should render <bx-pagination> with various attributes`
+#### `should render <bx-pagination> with various attributes`
 
 ```
 <div class="bx--pagination__left">
@@ -69,7 +69,7 @@
 
 ```
 
-####   `should render <bx-page-sizes-select> with minimum attributes`
+#### `should render <bx-page-sizes-select> with minimum attributes`
 
 ```
 <label
@@ -103,7 +103,7 @@
 
 ```
 
-####   `should render <bx-pages-select> with minimum attributes`
+#### `should render <bx-pages-select> with minimum attributes`
 
 ```
 <div class="bx--select__page-number">
@@ -154,4 +154,3 @@
 </span>
 
 ```
-

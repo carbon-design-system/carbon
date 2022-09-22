@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -62,13 +62,13 @@
   @include carbon--breakpoint(md) {
     background-color: $ui-03;
 
-    & + .#{$prefix}--tabs__nav-item {
+    + .#{$prefix}--tabs__nav-item {
       margin-left: 0;
       // Draws the border without affecting the inner-content
       box-shadow: -1px 0 0 0 $ui-04;
     }
 
-    & + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
+    + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
     &.#{$prefix}--tabs__nav-item--selected + .#{$prefix}--tabs__nav-item {
       box-shadow: none;
     }
@@ -83,7 +83,9 @@
   a.#{$prefix}--tabs__nav-link {
     @include carbon--breakpoint(md) {
       height: rem(48px);
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2)); // height - vertical padding
+      // height - vertical padding
+      /* stylelint-disable declaration-property-unit-whitelist */
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
     }
   }
 }
@@ -164,6 +166,7 @@
 
     .#{$prefix}--tabs__nav-link {
       @include type-style('heading-01');
+
       border-bottom: 3px solid $interactive-01;
 
       &:focus,
@@ -180,7 +183,8 @@
     background-color: $ui-01;
 
     .#{$prefix}--tabs__nav-link {
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2)); // height - vertical padding
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
       // Draws the border without affecting the inner-content
       box-shadow: inset 0 2px 0 0 $interactive-04;
       border-bottom: none;
@@ -263,6 +267,7 @@
 
 :host(#{$prefix}-tabs-skeleton) .#{$prefix}--tabs-trigger {
   @include skeleton;
+
   width: rem(100px);
 }
 
@@ -273,6 +278,7 @@
 
   .#{$prefix}--tabs__nav-link {
     @include skeleton;
+
     width: rem(75px);
     height: rem(12px);
   }

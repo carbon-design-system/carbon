@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -12,7 +12,8 @@
 :host(#{$prefix}-table-header-row) .#{$prefix}--table-column-checkbox {
   position: relative;
   background-color: $ui-03;
-  width: rem(44px); // 16px padding left + 8px padding right + 20px checkbox width
+  // 16px padding left + 8px padding right + 20px checkbox width
+  width: rem(44px);
   transition: background-color $duration--fast-01 motion(entrance, productive);
 }
 
@@ -41,7 +42,8 @@
     color: $text-01;
     background-color: $ui-03;
     border-top: 1px solid $ui-03;
-    border-bottom: 1px solid $active-ui; //bottom border acts as separator from other rows
+    //bottom border acts as separator from other rows
+    border-bottom: 1px solid $active-ui;
   }
 }
 

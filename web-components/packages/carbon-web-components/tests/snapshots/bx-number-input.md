@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-####   `Should render with various attributes`
+#### `Should render with various attributes`
 
 ```
 <div class="bx--number bx--number--md">
@@ -75,4 +75,3 @@
 </div>
 
 ```
-

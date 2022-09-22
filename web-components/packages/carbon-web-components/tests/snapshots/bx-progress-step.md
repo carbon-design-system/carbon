@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-####   `Should render with minimum attributes`
+#### `Should render with minimum attributes`
 
 ```
 <slot>
@@ -21,7 +21,7 @@
 
 ```
 
-####   `Should render with various attributes`
+#### `Should render with various attributes`
 
 ```
 <slot>
@@ -43,4 +43,3 @@
 </span>
 
 ```
-

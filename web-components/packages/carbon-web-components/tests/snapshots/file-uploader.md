@@ -2,9 +2,9 @@
 
 ## `bx-file-uploader`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <strong class="bx--file--label">
@@ -24,7 +24,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <strong class="bx--file--label">
@@ -48,9 +48,9 @@
 
 ## `bx-file-drop-container`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <label
@@ -75,7 +75,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <label
@@ -103,9 +103,9 @@
 
 ```
 
-##   `Handling events`
+## `Handling events`
 
-####     `Should handle drag-over`
+#### `Should handle drag-over`
 
 ```
 <label
@@ -133,9 +133,9 @@
 
 ## `bx-file-uploader-item`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <p class="bx--file-filename">
@@ -162,7 +162,7 @@
 
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <p class="bx--file-filename">
@@ -190,7 +190,7 @@
 
 ```
 
-####     `should render uploaded state`
+#### `should render uploaded state`
 
 ```
 <p class="bx--file-filename">
@@ -212,7 +212,7 @@
 
 ```
 
-####     `should render editing state`
+#### `should render editing state`
 
 ```
 <p class="bx--file-filename">
@@ -240,7 +240,7 @@
 
 ```
 
-####     `should render editing state with various attributes`
+#### `should render editing state with various attributes`
 
 ```
 <p class="bx--file-filename">
@@ -271,9 +271,9 @@
 
 ## `bx-file-uploader-shell`
 
-##   `Misc attributes`
+## `Misc attributes`
 
-####     `should render with minimum attributes`
+#### `should render with minimum attributes`
 
 ```
 <strong class="bx--file--label">
@@ -292,7 +292,7 @@
 </div>
 ```
 
-####     `should render with various attributes`
+#### `should render with various attributes`
 
 ```
 <strong class="bx--file--label">
@@ -312,4 +312,3 @@
   </slot>
 </div>
 ```
-

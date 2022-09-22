@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -16,7 +16,9 @@ $css--plex: true !default;
 
 :host(#{$prefix}-loading[type='overlay']) {
   @extend .#{$prefix}--loading-overlay;
-  animation: none; // Avoids duplicate animation of the host and the `.bx--loading` in the shadow DOM
+
+  // Avoids duplicate animation of the host and the `.bx--loading` in the shadow DOM
+  animation: none;
 }
 
 :host(#{$prefix}-loading[type='small']) {
