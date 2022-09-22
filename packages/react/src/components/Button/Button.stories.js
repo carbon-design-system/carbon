@@ -58,7 +58,7 @@ export default {
   },
 };
 
-export const _Default = (args) => {
+export const Default = (args) => {
   return <Button {...args}>Button</Button>;
 };
 

@@ -17,7 +17,7 @@ test.describe('FileUploader', () => {
       test('file uploader @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FileUploader',
-          id: 'components-fileuploader--file-uploader',
+          id: 'components-fileuploader--default',
           theme,
         });
       });
@@ -53,7 +53,7 @@ test.describe('FileUploader', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'FileUploader',
-      id: 'components-fileuploader--file-uploader',
+      id: 'components-fileuploader--default',
       globals: {
         theme: 'white',
       },

@@ -45,7 +45,7 @@ export default {
   },
 };
 
-export const Simple = () => (
+export const Default = () => (
   <StructuredListWrapper>
     <StructuredListHead>
       <StructuredListRow head>
@@ -78,14 +78,6 @@ export const Simple = () => (
     </StructuredListBody>
   </StructuredListWrapper>
 );
-
-Simple.parameters = {
-  info: {
-    text: `
-        Structured Lists group content that is similar or related, such as terms or definitions.
-      `,
-  },
-};
 
 export const Playground = (props) => {
   const { className, selection, isCondensed, isFlush } = props;
@@ -194,25 +186,9 @@ export const Selection = () => {
   );
 };
 
-Selection.parameters = {
-  info: {
-    text: `
-    Structured Lists with selection allow a row of list content to be selected.
-  `,
-  },
-};
-
 export const Skeleton = () => (
   <div style={{ width: '800px' }}>
     <StructuredListSkeleton />
     <StructuredListSkeleton />
   </div>
 );
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};

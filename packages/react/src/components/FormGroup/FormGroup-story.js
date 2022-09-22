@@ -31,7 +31,7 @@ export default {
   },
 };
 
-export const _Default = () => (
+export const Default = () => (
   <FormGroup
     legendId="formgroup-legend-id"
     legendText="FormGroup Legend"
@@ -53,10 +53,6 @@ export const _Default = () => (
     </RadioButtonGroup>
   </FormGroup>
 );
-
-_Default.story = {
-  name: 'Form Group',
-};
 
 export const Playground = () => (
   <>
