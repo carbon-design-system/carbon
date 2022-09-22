@@ -145,6 +145,7 @@
     "es6-promise": "^4.2.8",
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-carbon-base": "^1.0.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-import-resolver-node": "~0.3.6",
     "eslint-plugin-babel": "^5.3.1",

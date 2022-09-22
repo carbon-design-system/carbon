@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,7 @@
 const path = require('path');
 const readPkgUp = require('read-pkg-up');
 const MagicString = require('magic-string');
-const { createFilter } = require('rollup-pluginutils');
+const { createFilter } = require('@rollup/pluginutils');
 
 function rollupPluginLicense({ include, exclude, whitelist, sourcemap, sourceMap, licenseSelf } = {}) {
   const filter = createFilter(include, exclude);

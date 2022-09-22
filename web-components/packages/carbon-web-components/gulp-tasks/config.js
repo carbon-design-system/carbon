@@ -1,21 +1,18 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 const path = require('path');
-const commander = require('commander');
+const program = require('commander');
 
 const collect = (v, a) => a.add(v);
-const {
-  browser: browsers,
-  spec: specs,
-  ...rest
-} = commander
+
+program
   .option('-b, --browser [browser]', 'Browser to test with (ChromeHeadless or Chrome) for Karma testing', collect, new Set())
   .option(
     '-d, --debug',
@@ -29,7 +26,8 @@ const {
   .option('--update-snapshot', 'Updates snapshot')
   .option('--verbose', 'Enables verbose output')
   .parse(process.argv);
-const cloptions = { browsers: Array.from(browsers), specs: Array.from(specs), ...rest };
+
+const cloptions = { browsers: [], specs: [], ...program.opts() };
 
 module.exports = {
   ENV_PRODUCTION: 'production',

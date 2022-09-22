@@ -8,4 +8,9 @@ storybook-static*
 es
 dist
 node_modules
+docs
+storybook-static
+CHANGELOG.md
+tests/e2e/cypress/fixtures
+tests/e2e-storybook/cypress/fixtures
 custom-elements.json

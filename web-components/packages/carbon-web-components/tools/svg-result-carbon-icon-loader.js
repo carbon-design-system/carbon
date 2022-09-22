@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,6 +12,7 @@ const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
 
 /**
  * A WebPack loader to generate `lit-html`'s `SVGResult` from an icon descriptor from `@carbon/icons`.
+ *
  * @returns {string} The massaged module content.
  */
 function svgResultCarbonIconLoader() {

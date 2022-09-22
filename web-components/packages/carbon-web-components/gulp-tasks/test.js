@@ -15,8 +15,17 @@ const config = require('./config');
 const { Server } = karma;
 const { parseConfig } = karma.config;
 const { cloptions, testsDir } = config;
-const { browsers, debug, specs, keepalive, noPruneSnapshot, random, updateSnapshot, useExperimentalFeatures, verbose } =
-  cloptions;
+const {
+  browsers,
+  debug,
+  specs,
+  keepalive,
+  noPruneSnapshot,
+  random,
+  updateSnapshot,
+  useExperimentalFeatures,
+  verbose,
+} = cloptions;
 
 /**
  * Runs the unit tests

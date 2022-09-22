@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,37 +11,40 @@ const isPlainObj = require('is-plain-obj');
 
 /**
  * The parent nodes in object tree.
- * @typedef {Object} deepReplace~parent
+ *
+ * @typedef {object} deepReplace~parent
  * @property {string|number} key The object property name or the array index.
- * @property value The object property value or the array item value.
+ * @property {string|number} value The object property value or the array item value.
  */
 
 /**
  * The callback used for testing a node in object tree.
+ *
  * @callback deepReplace~matcher
  * @param itemValue The object property value or the array item value.
  * @param {string|number} key The object property name or the array index.
- * @param {Object|Array} parent The parent object or array.
+ * @param {object|Array} parent The parent object or array.
  * @param {deepReplace~parent[]} parents The parent properties.
  * @returns {boolean} `true` if this node should be replaced.
  */
 
 /**
  * The callback used for replacing a node in object tree.
+ *
  * @callback deepReplace~replacer
  * @param itemValue The object property value or the array item value.
  * @param {string|number} key The object property name or the array index.
- * @param {Object|Array} parent The parent object or array.
+ * @param {object|Array} parent The parent object or array.
  * @param {deepReplace~parent[]} parents The parent properties.
  * @returns The new value. If `deepReplace.DELETE` is returned, the node will be removed.
  */
 
 /**
- * @param value An object or an array.
+ * @param {object|Array} value An object or an array.
  * @param {deepReplace~matcher} matcher The callback to test if a node this object tree should be replaced.
  * @param {deepReplace~replacer} replacer The callback that returns the new value of a node in this object tree.
  * @param {deepReplace~parent[]} parents PRIVATE. The parent object nodes of the given `value`.
- * @returns The new object with the given `replacer` applied.
+ * @returns {object} The new object with the given `replacer` applied.
  */
 function deepReplace(value, matcher, replacer, parents = []) {
   function mapPredicate(itemValue, key, parent) {
@@ -66,7 +69,7 @@ function deepReplace(value, matcher, replacer, parents = []) {
 
 /**
  * @param {deepReplace~parent[]} nodes A list of object nodes.
- * @returns The dotted list of the property names. Array indices are omitted.
+ * @returns {Array} The dotted list of the property names. Array indices are omitted.
  */
 function getPaths(nodes) {
   return nodes

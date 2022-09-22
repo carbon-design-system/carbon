@@ -30,13 +30,13 @@ jasmine.getEnv().addReporter({
   },
 });
 
-beforeEach(function () {
+beforeEach(function() {
   jasmine.addMatchers({
     toMatchSnapshot() {
       return {
         /**
          * @param {HTMLElement} actualElem The DOM element to match the snapshot with.
-         * @param {Object} [options={}] The options.
+         * @param {object} [options={}] The options.
          * @param {string} [options.mode]
          *   `shadow` to use the `actualElem.shadowRoot.innerHTML`. Otherwise `actualElem.outerHTML` is used.
          * @returns {boolean}
