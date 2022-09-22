@@ -17,7 +17,7 @@ test.describe('ProgressBar', () => {
       test('progress bar @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ProgressBar',
-          id: 'components-progressbar--progress-bar',
+          id: 'components-progressbar--default',
           theme,
         });
       });
@@ -43,7 +43,7 @@ test.describe('ProgressBar', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'ProgressBar',
-      id: 'components-progressbar--progress-bar',
+      id: 'components-progressbar--default',
       globals: {
         theme: 'white',
       },
