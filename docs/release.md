@@ -399,3 +399,28 @@ git checkout vX.Y.X
 
 3. On success, manually create a GitHub release associated with the proper tag,
    and include the generated changelog.
+
+### We're getting reports of unpkg links not working
+
+Reports like
+[these](https://github.com/carbon-design-system/carbon/issues/12052#issuecomment-1238383908)
+can be the result of unpkg's default behavior of resolving
+`https://unpkg.com/carbon-components/*` to the version corresponding to the
+`latest` tag.
+
+It's likely that the `latest` tag was erroneously applied to a v11.x version,
+causing anyone using a non-versioned unpkg link to begin resolving to the v11
+package which does not contain a compiled stylesheet.
+
+To fix, re-apply the `latest` tag to `v10.x` instead of `v11.x`. Any
+non-versioned unpkg links should now resolve to `carbon-components@v10.x` again.
+
+```bash
+npm dist-tag add carbon-components@10.X.Y latest
+```
+
+Instruct users to prevent this in the future by appending `@10` to the package
+name to ensure unpkg resolves to the latest v10 version:
+
+`https://unpkg.com/carbon-components@10/css/carbon-components.min.css`
+`https://unpkg.com/carbon-components@10/scripts/carbon-components.min.js`

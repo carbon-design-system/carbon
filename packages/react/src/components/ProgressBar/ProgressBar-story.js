@@ -43,14 +43,13 @@ export default {
   decorators: [withKnobs],
 };
 
-export const _ProgressBar = () => (
+export const Default = () => (
   <ProgressBar
     label="Progress bar label"
     helperText="Optional helper text"
     value={75}
   />
 );
-_ProgressBar.storyName = 'ProgressBar';
 
 export const Indeterminate = () => (
   <ProgressBar label="Progress bar label" helperText="Optional helper text" />

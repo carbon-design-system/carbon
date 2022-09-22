@@ -43,10 +43,6 @@ export const Default = (args) => (
   </OverflowMenu>
 );
 
-Default.story = {
-  name: 'OverflowMenu',
-};
-
 export const RenderCustomIcon = (args) => (
   <OverflowMenu renderIcon={Filter} {...args}>
     <OverflowMenuItem itemText="Filter A" />
