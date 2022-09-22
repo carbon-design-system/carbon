@@ -81,7 +81,6 @@ describe('TableExpandHeader', () => {
       </DataTable>
     );
 
-    screen.debug();
     userEvent.click(screen.getByRole('button'));
 
     expect(onExpand).toHaveBeenCalled();
@@ -208,7 +207,6 @@ describe('TableExpandHeader', () => {
     render(<PaginationExample />);
 
     userEvent.click(screen.getByLabelText('Expand all rows'));
-    screen.debug();
 
     expect(screen.getAllByRole('button')[0]).toHaveAttribute(
       'aria-label',
