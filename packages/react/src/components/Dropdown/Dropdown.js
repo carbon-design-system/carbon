@@ -124,8 +124,8 @@ const Dropdown = React.forwardRef(function Dropdown(
       [`${prefix}--list-box__wrapper--inline`]: inline,
       [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-      [`${prefix}--dropdown__wrapper--fluid--invalid`]: isFluid && invalid,
-      [`${prefix}--dropdown__wrapper--fluid--focus`]:
+      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--list-box__wrapper--fluid--focus`]:
         isFluid && isFocused && !isOpen,
     }
   );

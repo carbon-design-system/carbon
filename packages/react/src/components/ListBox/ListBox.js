@@ -61,6 +61,7 @@ const ListBox = React.forwardRef(function ListBox(
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
     [`${prefix}--list-box--expanded`]: isOpen,
+    [`${prefix}--list-box--invalid`]: invalid,
     [`${prefix}--list-box--warning`]: showWarning,
   });
   return (
@@ -75,7 +76,7 @@ const ListBox = React.forwardRef(function ListBox(
         data-invalid={invalid || undefined}>
         {children}
       </div>
-      {isFluid && <hr className={`${prefix}--dropdown__divider`} />}
+      {isFluid && <hr className={`${prefix}--list-box__divider`} />}
       {invalid ? (
         <div className={`${prefix}--form-requirement`}>{invalidText}</div>
       ) : null}

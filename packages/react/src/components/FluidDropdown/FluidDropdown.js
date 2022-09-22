@@ -18,9 +18,9 @@ const FluidDropdown = React.forwardRef(function FluidDropdown(
 ) {
   const prefix = usePrefix();
   const classNames = classnames(
-    `${prefix}--dropdown__wrapper--fluid`,
+    `${prefix}--list-box__wrapper--fluid`,
     className,
-    { [`${prefix}--dropdown__wrapper--fluid--condensed`]: isCondensed }
+    { [`${prefix}--list-box__wrapper--fluid--condensed`]: isCondensed }
   );
 
   return (
