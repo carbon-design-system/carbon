@@ -24,7 +24,7 @@ export default {
   },
 };
 
-export const CheckboxStory = () => {
+export const Default = () => {
   return (
     <fieldset className={`${prefix}--fieldset`}>
       <legend className={`${prefix}--label`}>Group label</legend>
@@ -33,8 +33,6 @@ export const CheckboxStory = () => {
     </fieldset>
   );
 };
-
-CheckboxStory.storyName = 'Checkbox';
 
 export const Skeleton = () => <CheckboxSkeleton />;
 

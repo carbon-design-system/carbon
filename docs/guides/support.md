@@ -224,62 +224,83 @@ the issue to the backlog pipeline! 🎉
 
 There are 4 levels of severity for issues in the Carbon core repositories:
 
-- Severity 1- "_Affects major functionality, no workaround"_
-- Severity 2 - "_Affects major functionality, has a workaround"_
-- Severity 3 - "_Affects minor functionality, has a workaround"_
-- Severity 4 - "_Affects minor functionality, no workaround needed"_
+- https://github.com/carbon-design-system/carbon/labels/severity%3A%201 - _"Must
+  be fixed ASAP"_
+- https://github.com/carbon-design-system/carbon/labels/severity%3A%202 - _"User
+  cannot complete task, and/or no workaround"_
+- https://github.com/carbon-design-system/carbon/labels/severity%3A%203 - _"User
+  can complete task, and/or has a workaround"_
+- https://github.com/carbon-design-system/carbon/labels/severity%3A%204 -
+  _"Unrelated to a user task, has a workaround or does not need a workaround"_
 
-As you can see these severity levels describe two stages of broken
-functionality:
+Workarounds can be described as either of the following:
 
-- Major - major functionality is critical to the user completing the task.
-  Whatever has gone wrong has made it impossible for the user to successfully
-  complete their task or action.
+1. A workaround within the ux of a component. e.g. A MultiSelect item is not
+   selected when clicking on the _icon_, but is still selected when clicking on
+   the _text_.
 
-  _Examples of major functionality failing are menu's not opening, lack of
-  keyboard accessibility, poor contrast, or broken builds_
+2. A workaround within the implementation of a component. e.g. A `formatDate`
+   function is not working, but there is an `onKeyDown` prop that can be used
+   instead to format the date on every keystroke.
 
-- Minor - minor functionality isn't critical to the user completing the task,
-  but might make task completion frustrating or difficult.
-
-  _Examples of minor functionality failures are components lacking proper
-  styling, a SVG arrow pointing the wrong direction, or the wrong grid being
-  applied at a certain breakpoint_
+If either of these types of workarounds are available, the bug will be
+classified as
+https://github.com/carbon-design-system/carbon/labels/severity%3A%203 or
+https://github.com/carbon-design-system/carbon/labels/severity%3A%204
 
 These can be difficult (and vague!) concepts to wrap your head around. So here's
 a handy flow chart to guide you through assigning issue severity:
 
-```
-                        There is a bug!
-                              |
-                  Can the user complete the task?
-                  /                            \
-                "no"                           "yes"
-                 |                               |
-       Is there someway to                 Does the bug have
-       complete the task?                  a workaround?
-        /           \                      /           \
-     "no"          "yes"                "yes"      "none needed"
-       |             |                    |              |
- +-------------+  +-------------+    +-------------+  +-------------+
- | severity: 1 |  | severity: 2 |    | severity: 3 |  | severity: 4 |
- +-------------+  +-------------+    +-------------+  +-------------+
+```mermaid
+graph TD
+    A[There is a bug!] --> B[Can the user/designer/developer </br> still complete the task?]
+    B -->|No| C[Is there a workaround?]
+    B -->|Yes| D[Is there a workaround?]
+    C -->|No| E[Is this major enough to need an immediate fix?*]
+    C -->|Yes| Sev3([Severity: 3])
+    E -->|No| Sev2([Severity: 2])
+    E -->|Yes| Sev1([Severity: 1])
+    D -->|Yes| Sev3
+    D -->|Workaround not needed| Sev4([Severity: 4])
+    B -->|Unrelated to user task| Sev4
 ```
 
-### Impact
+> \* Is this major enough to need an immediate fix?
 
-An issue's impact talks about the _scope_ of the issue. How many people does the
-problem effect? There are three tiers:
+Clearly marking what qualifies as being "major enough" to warrant an immediate
+fix is difficult. In general, you'll know these when you see them.
 
-- Impact: high - _"Defect affects all users"_
-- Impact: medium - _"Defect affects many users"_
-- Impact: low - _"Defect affects one or a few users"_
+Here are some primary determining factors:
 
-These three issues help us prioritize _when_ we resolve these issues. High
-impact issues should happen as soon as possible, medium impact within the next
-few chunks of work, and low impact issues happening someday _(but still
-definitely happening)_. If the issue doesn't merit fixing in the foreseeable
-future no label is needed because the issue should be closed.
+- A large number of projects (10+) impacted by an issue
+- The degree to which something is broken (being unable to complete foundational
+  tasks like clicking a button or opening a dropdown, for instance)
+
+Also consider the response a
+https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
+requires, and evaluate it against the bug:
+
+- The response must be swift. When a
+  https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issue
+  comes in, someone from the team must drop all current work and be immediately
+  reassigned to address the issue.
+- In the worst circumstances, this person may immediately revert a change from a
+  previous release.
+- It's likely a patch must be published once the fix or revert is in - the item
+  can not wait to go out with the next scheduled release.
+- We may need to publish a
+  [postmortem](https://github.com/carbon-design-system/carbon/tree/main/docs/postmortems)
+  identifying what happened and why, with a plan of how we intend to prevent it
+  from happening again.
+
+Due to this high threshold and intensity of response,
+https://github.com/carbon-design-system/carbon/labels/severity%3A%201 issues
+should be infrequent and should not be open for a long period of time.
+
+For the vast majority of bugs that have invalid and blocking behavior with no
+workaround, a
+https://github.com/carbon-design-system/carbon/labels/severity%3A%202 or lower
+is more appropriate.
 
 ### Other labels
 
@@ -292,9 +313,6 @@ that can be particularly helpful:
 - good first issue 👋 - these issues don't require a deep knowledge or
   understanding of our code base and would be great for someone looking to help
   out for the first time with some code
-- status: needs first aid - if you have a general _feeling_ for the severity and
-  priority of an issue, but can tell it requires a skillful eye to better grasp
-  the true scope of the work this is a great label to add
 
 ### Alerting a team or subject matter expert
 

@@ -20,7 +20,7 @@ export default {
   },
 };
 
-export const _Default = () => <CopyButton />;
+export const Default = () => <CopyButton />;
 
 export const Playground = (args) => <CopyButton {...args} />;
 
