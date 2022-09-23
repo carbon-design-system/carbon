@@ -22,7 +22,7 @@ export default {
   },
 };
 
-export const HeadingStory = () => {
+export const Default = () => {
   return (
     <>
       <Heading>h1</Heading>
@@ -35,5 +35,3 @@ export const HeadingStory = () => {
     </>
   );
 };
-
-HeadingStory.storyName = 'Heading';
