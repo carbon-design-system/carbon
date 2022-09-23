@@ -31,13 +31,13 @@ export default {
 
 export const OnPage = () => (
   <>
-    <ContainedList label="Heading" kind="on-page">
+    <ContainedList label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-    <ContainedList label="Heading" kind="on-page">
+    <ContainedList label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
@@ -48,13 +48,13 @@ export const OnPage = () => (
 
 export const Disclosed = () => (
   <>
-    <ContainedList label="Heading" kind="disclosed">
+    <ContainedList label="List title" kind="disclosed">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-    <ContainedList label="Heading" kind="disclosed">
+    <ContainedList label="List title" kind="disclosed">
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
       <ContainedListItem>List item</ContainedListItem>
@@ -68,7 +68,7 @@ export const Interactive = () => {
 
   return (
     <VStack gap={12}>
-      <ContainedList label="Heading" kind="on-page">
+      <ContainedList label="List title" kind="on-page">
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
         <ContainedListItem onClick={onClick} disabled>
           List item
@@ -76,7 +76,7 @@ export const Interactive = () => {
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
       </ContainedList>
-      <ContainedList label="Heading" kind="disclosed">
+      <ContainedList label="List title" kind="disclosed">
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
         <ContainedListItem onClick={onClick} disabled>
           List item
@@ -101,7 +101,7 @@ export const Actions = () => {
   return (
     <VStack gap={12}>
       <ContainedList
-        label="Heading"
+        label="List title"
         kind="on-page"
         action={<ExpandableSearch placeholder="Find item" size="lg" />}>
         <ContainedListItem action={itemAction}>List item</ContainedListItem>
@@ -110,7 +110,7 @@ export const Actions = () => {
         <ContainedListItem action={itemAction}>List item</ContainedListItem>
       </ContainedList>
       <ContainedList
-        label="Heading"
+        label="List title"
         kind="disclosed"
         action={
           <Button kind="ghost" size="sm">
@@ -142,7 +142,7 @@ export const ActionsInteractive = () => {
   return (
     <VStack gap={12}>
       <ContainedList
-        label="Heading"
+        label="List title"
         kind="on-page"
         action={<ExpandableSearch placeholder="Find item" size="lg" />}>
         <ContainedListItem action={itemAction} onClick={onClick}>
@@ -159,7 +159,7 @@ export const ActionsInteractive = () => {
         </ContainedListItem>
       </ContainedList>
       <ContainedList
-        label="Heading"
+        label="List title"
         kind="disclosed"
         action={
           <Button kind="ghost" size="sm">
@@ -231,13 +231,13 @@ export const HeadingDecorators = () => {
 export const Icons = () => {
   return (
     <VStack gap={12}>
-      <ContainedList label="Heading" kind="on-page">
+      <ContainedList label="List title" kind="on-page">
         <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
       </ContainedList>
-      <ContainedList label="Heading" kind="disclosed">
+      <ContainedList label="List title" kind="disclosed">
         <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
