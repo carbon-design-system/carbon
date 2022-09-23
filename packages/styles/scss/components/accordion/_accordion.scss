@@ -88,7 +88,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
 
     &:hover::before {
-      background-color: $layer-hover;
+      background-color: $background-hover;
     }
 
     &:focus {
@@ -103,6 +103,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   // Size styles
   .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
     min-height: convert.rem(48px);
+    align-items: center;
   }
 
   .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
