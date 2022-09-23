@@ -17,7 +17,7 @@ test.describe('InlineLoading', () => {
       test('inline loading @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'InlineLoading',
-          id: 'components-inlineloading--inline-loading',
+          id: 'components-inlineloading--default',
           theme,
         });
       });
@@ -35,7 +35,7 @@ test.describe('InlineLoading', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'InlineLoading',
-      id: 'components-inlineloading--inline-loading',
+      id: 'components-inlineloading--default',
       globals: {
         theme: 'white',
       },

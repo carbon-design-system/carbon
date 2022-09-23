@@ -17,7 +17,7 @@ test.describe('accordion', () => {
       test('snapshot @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'accordion',
-          story: 'accordion-story',
+          story: 'default',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('accordion', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'accordion',
-      story: 'accordion-story',
+      story: 'default',
       globals: {
         theme: 'white',
       },

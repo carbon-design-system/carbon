@@ -157,4 +157,46 @@ describe('Accordion', () => {
       expect(screen.getByText('Panel A')).toBeDefined();
     });
   });
+
+  describe('Flush align', () => {
+    it('should align to the left if prop isFlush is passed', () => {
+      render(
+        <Accordion data-testid="accordion" isFlush>
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
+
+      expect(screen.getByTestId('accordion')).toHaveClass(
+        'cds--accordion--flush'
+      );
+    });
+
+    it('should not align to left if align="start"', () => {
+      render(
+        <Accordion data-testid="accordion-2" isFlush align="start">
+          <AccordionItem className="child" title="Heading A">
+            Panel A
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading B">
+            Panel B
+          </AccordionItem>
+          <AccordionItem className="child" title="Heading C">
+            Panel C
+          </AccordionItem>
+        </Accordion>
+      );
+
+      expect(screen.getByTestId('accordion-2')).not.toHaveClass(
+        'cds--accordion--flush'
+      );
+    });
+  });
 });

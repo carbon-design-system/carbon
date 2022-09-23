@@ -12,10 +12,18 @@ import { ChevronRight } from '@carbon/icons-react';
 import SkeletonText from '../SkeletonText';
 import { usePrefix } from '../../internal/usePrefix';
 
-function AccordionSkeleton({ align, open, count, className, ...rest }) {
+function AccordionSkeleton({
+  align,
+  className,
+  count,
+  isFlush,
+  open,
+  ...rest
+}) {
   const prefix = usePrefix();
   const classes = cx(`${prefix}--accordion`, `${prefix}--skeleton`, className, {
     [`${prefix}--accordion--${align}`]: align,
+    [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
   const numSkeletonItems = open ? count - 1 : count;
   return (
@@ -56,6 +64,11 @@ AccordionSkeleton.propTypes = {
    * Set number of items to render
    */
   count: PropTypes.number,
+
+  /**
+   * Specify whether an individual AccordionItem should be flush, default is false
+   */
+  isFlush: PropTypes.bool,
 
   /**
    * `false` to not display the first item opened

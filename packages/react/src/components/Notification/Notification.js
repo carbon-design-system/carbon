@@ -23,6 +23,7 @@ import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useNoInteractiveChildren } from '../../internal/useNoInteractiveChildren';
 import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
+import { useId } from '../../internal/useId';
 
 /**
  * Conditionally call a callback when the escape key is pressed
@@ -565,6 +566,7 @@ export function ActionableNotification({
 }) {
   const [isOpen, setIsOpen] = useState(true);
   const prefix = usePrefix();
+  const id = useId('actionable-notification');
   const containerClassName = cx(className, {
     [`${prefix}--actionable-notification`]: true,
     [`${prefix}--actionable-notification--toast`]: !inline,
@@ -597,7 +599,12 @@ export function ActionableNotification({
   }
 
   return (
-    <div {...rest} ref={ref} role={role} className={containerClassName}>
+    <div
+      {...rest}
+      ref={ref}
+      role={role}
+      className={containerClassName}
+      aria-labelledby={title ? id : undefined}>
       <div className={`${prefix}--actionable-notification__details`}>
         <NotificationIcon
           notificationType={inline ? 'inline' : 'toast'}
@@ -607,7 +614,9 @@ export function ActionableNotification({
         <div className={`${prefix}--actionable-notification__text-wrapper`}>
           <div className={`${prefix}--actionable-notification__content`}>
             {title && (
-              <div className={`${prefix}--actionable-notification__title`}>
+              <div
+                className={`${prefix}--actionable-notification__title`}
+                id={id}>
                 {title}
               </div>
             )}

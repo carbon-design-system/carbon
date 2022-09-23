@@ -17,7 +17,7 @@ test.describe('PaginationNav', () => {
       test('pagination nav @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'PaginationNav',
-          id: 'components-paginationnav--pagination-nav',
+          id: 'components-paginationnav--default',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('PaginationNav', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'PaginationNav',
-      id: 'components-paginationnav--pagination-nav',
+      id: 'components-paginationnav--default',
       globals: {
         theme: 'white',
       },
