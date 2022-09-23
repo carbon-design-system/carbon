@@ -17,7 +17,7 @@ test.describe('Pagination', () => {
       test('pagination @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Pagination',
-          id: 'components-pagination--pagination',
+          id: 'components-pagination--default',
           theme,
         });
       });
@@ -43,7 +43,7 @@ test.describe('Pagination', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'Pagination',
-      id: 'components-pagination--pagination',
+      id: 'components-pagination--default',
       globals: {
         theme: 'white',
       },

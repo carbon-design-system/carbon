@@ -18,7 +18,7 @@ test.describe('breadcrumb', () => {
       test('breadcrumb @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'breadcrumb',
-          story: 'breadcrumb-story',
+          story: 'default',
           theme,
         });
       });
