@@ -9210,6 +9210,9 @@ Map {
       "invalidText": Object {
         "type": "node",
       },
+      "isPassword": Object {
+        "type": "bool",
+      },
       "labelText": Object {
         "isRequired": true,
         "type": "node",
