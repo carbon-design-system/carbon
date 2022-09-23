@@ -139,6 +139,11 @@
     content: '';
   }
 
+  .#{$prefix}--contained-list-item--with-action
+    .#{$prefix}--contained-list-item__content {
+    padding-inline-end: $spacing-10;
+  }
+
   .#{$prefix}--contained-list__action,
   .#{$prefix}--contained-list-item__action {
     position: absolute;

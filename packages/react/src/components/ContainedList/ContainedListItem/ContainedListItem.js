@@ -25,6 +25,7 @@ function ContainedListItem({
   const classes = classNames(`${prefix}--contained-list-item`, className, {
     [`${prefix}--contained-list-item--clickable`]: isClickable,
     [`${prefix}--contained-list-item--with-icon`]: IconElement,
+    [`${prefix}--contained-list-item--with-action`]: action,
   });
 
   const content = (
