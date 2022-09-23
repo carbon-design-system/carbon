@@ -194,9 +194,13 @@
   }
 
   .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
-    svg {
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     cursor: not-allowed;
+  }
+
+  .#{$prefix}--text-input:disabled
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg {
     fill: $icon-disabled;
 
     &:hover {
