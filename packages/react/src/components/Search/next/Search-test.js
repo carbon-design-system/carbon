@@ -13,6 +13,23 @@ import { mount, shallow } from 'enzyme';
 const prefix = 'cds';
 
 describe('Search', () => {
+  let wrapper;
+
+  // const container = () => wrapper.find(`.${prefix}--search`);
+  const button = () => wrapper.find('button');
+  const input = () => wrapper.find('input');
+  // const label = () => wrapper.find('label');
+
+  const render = (props) => {
+    if (wrapper) {
+      return wrapper.setProps(props);
+    }
+
+    wrapper = mount(<Search labelText="testlabel" {...props} />);
+
+    return wrapper;
+  };
+
   describe('renders as expected', () => {
     const wrapper = mount(
       <Search
@@ -181,6 +198,39 @@ describe('Search', () => {
   });
 
   describe('events', () => {
+    describe('onChange', () => {
+      const onChange = jest.fn();
+
+      beforeEach(() => {
+        render({ onChange: (e) => onChange(e.target) });
+      });
+
+      describe('when input value is changed', () => {
+        const target = { value: 'test' };
+        const mock = { target };
+
+        beforeEach(() => {
+          input().simulate('change', mock);
+        });
+
+        it('is called', () => {
+          expect(onChange).toHaveBeenCalledWith(target);
+        });
+      });
+
+      describe('when clear button is clicked', () => {
+        const target = { value: '' };
+
+        beforeEach(() => {
+          button().simulate('click');
+        });
+
+        it('is called', () => {
+          expect(onChange).toHaveBeenCalledWith(target);
+        });
+      });
+    });
+
     describe('enabled textinput', () => {
       const onClick = jest.fn();
       const onChange = jest.fn();
