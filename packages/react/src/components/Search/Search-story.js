@@ -96,16 +96,6 @@ export const SizeStory = () => (
   </div>
 );
 
-Default.parameters = {
-  info: {
-    text: `
-            Search enables users to specify a word or a phrase to find particular relevant pieces of content
-            without the use of navigation. Search can be used as the primary means of discovering content,
-            or as a filter to aid the user in finding content.
-          `,
-  },
-};
-
 export const DeprecatedCustomButtons = () => (
   <div style={{ display: 'flex' }}>
     <Search {...props()} id="search-1" />
@@ -116,14 +106,6 @@ export const DeprecatedCustomButtons = () => (
 
 DeprecatedCustomButtons.storyName = '[Deprecated] custom buttons';
 
-DeprecatedCustomButtons.parameters = {
-  info: {
-    text: `
-        You can control what set of buttons you want.
-      `,
-  },
-};
-
 export const Skeleton = () => (
   <div style={{ width: '200px' }}>
     <SearchSkeleton />
@@ -133,14 +115,6 @@ export const Skeleton = () => (
 );
 
 Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};
 
 export const Expandable = () => (
   <ExpandableSearch {...props()} id="search-expandable-1" />

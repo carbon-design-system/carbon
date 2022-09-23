@@ -121,7 +121,7 @@ export default {
   },
 };
 
-export const _Default = () => (
+export const Default = () => (
   <Tabs>
     <Tab id="tab-1" label="Tab label 1">
       <p>Content for first tab goes here.</p>
@@ -144,10 +144,6 @@ export const _Default = () => (
     </Tab>
   </Tabs>
 );
-
-_Default.story = {
-  name: 'Tabs',
-};
 
 export const Playground = () => (
   <div className={props.tabs().light ? 'tabs-story-wrapper--light' : null}>

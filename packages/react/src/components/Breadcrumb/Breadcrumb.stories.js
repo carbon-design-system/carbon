@@ -27,7 +27,7 @@ export default {
   },
 };
 
-export const BreadcrumbStory = () => (
+export const Default = () => (
   <Breadcrumb>
     <BreadcrumbItem>
       <a href="/#">Breadcrumb 1</a>
@@ -37,8 +37,6 @@ export const BreadcrumbStory = () => (
     <BreadcrumbItem>Breadcrumb 4</BreadcrumbItem>
   </Breadcrumb>
 );
-
-BreadcrumbStory.storyName = 'Breadcrumb';
 
 export const BreadcrumbWithOverflowMenu = () => (
   <Breadcrumb>

@@ -32,7 +32,7 @@ export default {
   },
 };
 
-export const _FileUploader = (args) => {
+export const Default = (args) => {
   const prefix = usePrefix();
 
   return (
@@ -41,7 +41,7 @@ export const _FileUploader = (args) => {
     </div>
   );
 };
-_FileUploader.args = {
+Default.args = {
   labelTitle: 'Upload files',
   labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
   buttonLabel: 'Add file',
@@ -55,7 +55,7 @@ _FileUploader.args = {
   disabled: false,
   iconDescription: 'Delete file',
 };
-_FileUploader.argTypes = {
+Default.argTypes = {
   onChange: { action: 'onChange' },
   onClick: { action: 'onClick' },
   onDelete: { action: 'onDelete' },

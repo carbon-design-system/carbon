@@ -21,4 +21,4 @@ export default {
   decorators: [(story) => <div style={{ width: '800px' }}>{story()}</div>],
 };
 
-export const _PaginationNav = () => <PaginationNav {...props()} />;
+export const Default = () => <PaginationNav {...props()} />;

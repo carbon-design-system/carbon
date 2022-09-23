@@ -172,16 +172,6 @@ export const DefaultBottom = () => (
 
 DefaultBottom.storyName = 'default (bottom)';
 
-DefaultBottom.parameters = {
-  info: {
-    text: `
-        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-        By default, the tooltip will render above the element. The example below shows the default scenario.
-      `,
-  },
-};
-
 export const AutoOrientation = () => (
   <div
     style={{
@@ -259,16 +249,6 @@ export const AutoOrientation = () => (
 
 AutoOrientation.storyName = 'auto orientation';
 
-AutoOrientation.parameters = {
-  info: {
-    text: `
-        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-        By default, the tooltip will render above the element. The example below shows the default scenario.
-      `,
-  },
-};
-
 export const NoIcon = () => (
   <div style={containerStyles}>
     <Tooltip {...props.withoutIcon()}>
@@ -288,16 +268,6 @@ export const NoIcon = () => (
 );
 
 NoIcon.storyName = 'no icon';
-
-NoIcon.parameters = {
-  info: {
-    text: `
-        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-        By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
-      `,
-  },
-};
 
 export const RenderCustomIcon = () => (
   <div style={containerStyles}>
@@ -319,16 +289,6 @@ export const RenderCustomIcon = () => (
 
 RenderCustomIcon.storyName = 'render custom icon';
 
-RenderCustomIcon.parameters = {
-  info: {
-    text: `
-        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-        By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
-      `,
-  },
-};
-
 export const OnlyCustomIcon = () => (
   <div style={containerStyles}>
     <Tooltip {...props.customIconOnly()}>
@@ -348,16 +308,6 @@ export const OnlyCustomIcon = () => (
 );
 
 OnlyCustomIcon.storyName = 'only custom icon';
-
-OnlyCustomIcon.parameters = {
-  info: {
-    text: `
-        Interactive tooltip should be used if there are actions a user can take in the tooltip (e.g. a link or a button).
-        For more regular use case, e.g. giving the user more text information about something, use definition tooltip or icon tooltip.
-        By default, the tooltip will render with an information Icon. The example below shows the option to exclude the Icon.
-      `,
-  },
-};
 
 export const UncontrolledTooltip = () => <UncontrolledTooltipExample />;
 
