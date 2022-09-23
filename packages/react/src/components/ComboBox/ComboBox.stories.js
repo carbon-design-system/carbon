@@ -54,7 +54,7 @@ export default {
   },
 };
 
-export const Combobox = () => (
+export const Default = () => (
   <div style={{ width: 300 }}>
     <ComboBox
       onChange={() => {}}

@@ -1,156 +1,90 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import RadioButton from '../RadioButton';
-import { mount } from 'enzyme';
+import RadioTile from './RadioTile';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
-const prefix = 'cds';
+describe('RadioTile', () => {
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto outermost element', () => {
+      render(<RadioTile value="standard" data-testid="test-id" />);
 
-const render = (props) =>
-  mount(
-    <RadioButton
-      {...props}
-      className="extra-class"
-      name="test-name"
-      value="test-value"
-      labelText="testlabel"
-    />
-  );
-
-describe('RadioButton', () => {
-  describe('renders as expected', () => {
-    const wrapper = render({
-      checked: true,
+      expect(document.querySelector('.cds--tile')).toHaveAttribute(
+        'data-testid',
+        'test-id'
+      );
     });
 
-    const input = wrapper.find('input');
-    const label = wrapper.find('label');
-    const div = wrapper.find('div');
+    it('should respect checked prop', () => {
+      const { container } = render(
+        <RadioTile value="standard" checked data-testid="test-id" />
+      );
 
-    describe('input', () => {
-      it('is of type radio', () => {
-        expect(input.props().type).toEqual('radio');
-      });
-
-      it('has the expected class', () => {
-        expect(input.hasClass(`${prefix}--radio-button`)).toEqual(true);
-      });
-
-      it('has a unique id set by default', () => {
-        expect(input.props().id).toBeDefined();
-      });
-
-      it('should have checked set when checked is passed', () => {
-        wrapper.setProps({ checked: true });
-        expect(input.props().checked).toEqual(true);
-      });
-
-      it('should set the name prop as expected', () => {
-        expect(input.props().name).toEqual('test-name');
-      });
+      expect(container.firstChild).toHaveAttribute('checked');
+      expect(screen.getByTestId('test-id')).toHaveClass(
+        'cds--tile--is-selected'
+      );
     });
 
-    describe('label', () => {
-      it('should set htmlFor', () => {
-        expect(label.props().htmlFor).toEqual(input.props().id);
-      });
+    it('should support a custom `className` prop on the outermost element', () => {
+      render(
+        <RadioTile
+          value="standard"
+          className="custom-class"
+          data-testid="test-id"
+        />
+      );
 
-      it('should set the correct class', () => {
-        expect(label.props().className).toEqual(
-          `${prefix}--radio-button__label`
-        );
-      });
-
-      it('should render a span with the correct class for radio style', () => {
-        const span = label.find('span');
-        expect(
-          span.at(0).hasClass(`${prefix}--radio-button__appearance`)
-        ).toEqual(true);
-      });
-
-      it('should render a span for the label text', () => {
-        const span = label.find('span');
-        expect(span.at(1).hasClass('')).toEqual(true);
-        expect(span.at(1).text()).toEqual('testlabel');
-      });
-
-      it('should render label text', () => {
-        wrapper.setProps({ labelText: 'test label text' });
-        expect(label.text()).toMatch(/test label text/);
-      });
-
-      it('should not have the className when no class is passed through props', () => {
-        expect(label.hasClass(label.props.className)).toEqual(false);
-      });
-
-      it('should have the className passed through props', () => {
-        const label = render({
-          className: 'extra-class',
-        });
-        expect(label.hasClass('extra-class')).toEqual(true);
-      });
+      expect(screen.getByTestId('test-id')).toHaveClass('custom-class');
     });
 
-    describe('wrapper', () => {
-      it('should have the correct class', () => {
-        expect(div.hasClass(`${prefix}--radio-button-wrapper`)).toEqual(true);
-      });
+    it('should respect disabled prop', () => {
+      const { container } = render(
+        <RadioTile value="standard" disabled data-testid="test-id" />
+      );
 
-      it('should have extra classes applied', () => {
-        expect(div.hasClass('extra-class')).toEqual(true);
-      });
-    });
-  });
-
-  it('should set defaultChecked as expected', () => {
-    const wrapper = render({
-      defaultChecked: true,
+      expect(container.firstChild).toHaveAttribute('disabled');
+      expect(screen.getByTestId('test-id')).toHaveClass('cds--tile--disabled');
     });
 
-    const input = () => wrapper.find('input');
-    expect(input().props().defaultChecked).toEqual(true);
-    wrapper.setProps({ defaultChecked: false });
-    expect(input().props().defaultChecked).toEqual(false);
-  });
+    it('should respect id prop', () => {
+      render(<RadioTile value="standard" id="tile-1" />);
 
-  it('should set id if one is passed in', () => {
-    const wrapper = render({
-      id: 'unique-id',
+      expect(screen.getByRole('radio')).toHaveAttribute('id', 'tile-1');
     });
 
-    const input = wrapper.find('input');
-    expect(input.props().id).toEqual('unique-id');
-  });
+    it('should add name to input', () => {
+      render(<RadioTile value="standard" name="tile" />);
 
-  describe('events', () => {
-    it('should invoke onChange with expected arguments', () => {
+      expect(screen.getByRole('radio')).toHaveAttribute('name', 'tile');
+    });
+
+    it('should call onChange when expected', () => {
       const onChange = jest.fn();
-      const wrapper = render({ onChange });
-      const input = wrapper.find('input');
-      const inputElement = input.instance();
+      render(<RadioTile value="standard" onChange={onChange} />);
 
-      inputElement.checked = true;
-      wrapper.find('input').simulate('change');
+      userEvent.click(screen.getByRole('radio'));
+      userEvent.type(screen.getByRole('radio'), '{space}');
 
-      const call = onChange.mock.calls[0];
-
-      expect(call[0]).toEqual('test-value');
-      expect(call[1]).toEqual('test-name');
-      expect(call[2].target).toBe(inputElement);
-    });
-  });
-
-  it('supports disabled state', () => {
-    const wrapper = render({
-      disabled: true,
+      expect(onChange).toHaveBeenCalledTimes(2);
     });
 
-    const input = () => wrapper.find('input');
-    expect(input().props().disabled).toEqual(true);
+    it('should respect tabIndex prop', () => {
+      render(<RadioTile value="standard" tabIndex={-1} />);
+
+      expect(screen.getByRole('radio')).toHaveAttribute('tabIndex', '-1');
+    });
+
+    it('should respect value prop', () => {
+      render(<RadioTile value="standard" />);
+
+      expect(screen.getByRole('radio')).toHaveAttribute('value', 'standard');
+    });
   });
 });

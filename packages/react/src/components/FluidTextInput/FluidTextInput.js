@@ -9,16 +9,23 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
 import TextInput from '../TextInput';
+import { PasswordInput } from '../PasswordInput';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-function FluidTextInput({ className, ...other }) {
+function FluidTextInput({ className, isPassword, ...other }) {
   const prefix = usePrefix();
-  const classNames = classnames(`${prefix}--text-input--fluid`, className);
+  const classNames = classnames(className, {
+    [`${prefix}--text-input--fluid`]: !isPassword,
+  });
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>
-      <TextInput className={classNames} {...other} />
+      {isPassword ? (
+        <PasswordInput className={classNames} {...other} />
+      ) : (
+        <TextInput className={classNames} {...other} />
+      )}
     </FormContext.Provider>
   );
 }
@@ -53,6 +60,11 @@ FluidTextInput.propTypes = {
    * Provide the text that is displayed when the control is in an invalid state
    */
   invalidText: PropTypes.node,
+
+  /**
+   * Specify whether the control is a password input
+   */
+  isPassword: PropTypes.bool,
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
