@@ -30,13 +30,14 @@ export const Default = () => (
 
 export const Fluid = () => (
   <FluidForm>
-    <TextInput type="text" labelText="Text input label" />
+    <TextInput type="text" labelText="Text input label" id="text-input-1" />
   </FluidForm>
 );
 
 export const TogglePasswordVisibility = () => {
   return (
     <TextInput.PasswordInput
+      id="text-input-1"
       labelText="Text input label"
       helperText="Optional help text"
     />
@@ -61,18 +62,21 @@ export const WithLayer = () => {
         type="text"
         labelText="First layer"
         helperText="Optional help text"
+        id="text-input-1"
       />
       <Layer>
         <TextInput
           type="text"
           labelText="Second layer"
           helperText="Optional help text"
+          id="text-input-2"
         />
         <Layer>
           <TextInput
             type="text"
             labelText="Third layer"
             helperText="Optional help text"
+            id="text-input-3"
           />
         </Layer>
       </Layer>
@@ -81,3 +85,13 @@ export const WithLayer = () => {
 };
 
 export const Skeleton = () => <TextInputSkeleton />;
+
+export const Playground = (args) => (
+  <TextInput
+    {...args}
+    labelText="Text input label"
+    helperText="Optional help text"
+    id="text-input-1"
+    type="text"
+  />
+);
