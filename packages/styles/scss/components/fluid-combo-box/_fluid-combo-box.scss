@@ -1,0 +1,56 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid ComboBox
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../dropdown';
+@use '../fluid-list-box';
+
+@mixin fluid-combo-box {
+  // Style overrides can be added here as needed
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--list-box__field {
+    padding: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--text-input {
+    padding-top: rem(33px);
+    padding-bottom: rem(13px);
+    padding-left: $spacing-05;
+    transition: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--text-input:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--list-box__selection {
+    top: auto;
+    bottom: rem(10px);
+    transform: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box
+    .#{$prefix}--list-box__menu-icon {
+    bottom: rem(14px);
+  }
+}
