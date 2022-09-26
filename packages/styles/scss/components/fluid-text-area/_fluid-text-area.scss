@@ -141,4 +141,27 @@
     outline: none;
     transition: none;
   }
+
+  // Skeleton
+  .#{$prefix}--text-area--fluid__skeleton {
+    padding: $spacing-05;
+    border-bottom: 1px solid $skeleton-element;
+    background: $skeleton-background;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton .#{$prefix}--skeleton,
+  .#{$prefix}--text-area--fluid__skeleton
+    .#{$prefix}--text-area.#{$prefix}--skeleton::before {
+    height: 0.5rem;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton .#{$prefix}--label {
+    margin-bottom: $spacing-04;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton
+    .#{$prefix}--text-area.#{$prefix}--skeleton {
+    width: 80%;
+    height: 4rem;
+  }
 }
