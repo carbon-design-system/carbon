@@ -6,37 +6,33 @@
  */
 
 import React from 'react';
-import { withKnobs, number, boolean, text } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
-import { ProgressIndicator, ProgressStep } from '../ProgressIndicator';
-import ProgressIndicatorSkeleton from '../ProgressIndicator/ProgressIndicator.Skeleton';
+import { ProgressIndicator, ProgressStep, ProgressIndicatorSkeleton } from './';
 import mdx from './ProgressIndicator.mdx';
 
 export default {
   title: 'Components/ProgressIndicator',
   component: ProgressIndicator,
-  decorators: [withKnobs],
+  subcomponents: {
+    ProgressStep,
+    ProgressIndicatorSkeleton,
+  },
   parameters: {
     docs: {
       page: mdx,
     },
   },
-  subcomponents: {
-    ProgressStep,
-  },
 };
 
 export const Default = () => (
-  <ProgressIndicator
-    vertical={boolean('Vertical (vertical)', false)}
-    currentIndex={number('Current progress (currentIndex)', 1)}
-    spaceEqually={boolean('Space Equally (spaceEqually)', false)}>
+  <ProgressIndicator>
     <ProgressStep
-      label={text('Label (label)', 'First step')}
+      complete
+      label="First step"
       description="Step 1: Getting started with Carbon Design System"
       secondaryLabel="Optional label"
     />
     <ProgressStep
+      current
       label="Second step with tooltip"
       description="Step 2: Getting started with Carbon Design System"
     />
@@ -59,9 +55,7 @@ export const Default = () => (
 );
 
 export const Interactive = () => (
-  <ProgressIndicator
-    currentIndex={number('Current progress (currentIndex)', 1)}
-    onChange={action('onChange')}>
+  <ProgressIndicator currentIndex={1} onChange={() => alert('Clicked')}>
     <ProgressStep
       label="Click me"
       description="Step 1: Register a onChange event"
@@ -71,14 +65,10 @@ export const Interactive = () => (
       description="The progress indicator will listen for clicks on the steps"
     />
     <ProgressStep
-      label="Tooltip and really long label"
+      label="Third step"
       description="The progress indicator will listen for clicks on the steps"
     />
   </ProgressIndicator>
 );
 
-Interactive.storyName = 'interactive';
-
 export const Skeleton = () => <ProgressIndicatorSkeleton />;
-
-Skeleton.storyName = 'skeleton';

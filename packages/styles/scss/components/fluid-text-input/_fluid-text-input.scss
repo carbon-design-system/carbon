@@ -122,4 +122,23 @@
     > .#{$prefix}--text-input--warning:focus {
     outline: none;
   }
+
+  // Password Input
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--text-input.#{$prefix}--password-input {
+    padding-right: $spacing-08;
+  }
+
+  .#{$prefix}--text-input--fluid.#{$prefix}--password-input-wrapper
+    .#{$prefix}--text-input__invalid-icon {
+    right: $spacing-05;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
+    top: rem(26px);
+    right: $spacing-03;
+    width: rem(32px);
+    height: rem(32px);
+  }
 }

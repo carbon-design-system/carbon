@@ -17,7 +17,7 @@ test.describe('Checkbox', () => {
       test('checkbox @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'Checkbox',
-          id: 'components-checkbox--checkbox-story',
+          id: 'components-checkbox--default',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('Checkbox', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'Checkbox',
-      id: 'components-checkbox--checkbox-story',
+      id: 'components-checkbox--default',
       globals: {
         theme: 'white',
       },

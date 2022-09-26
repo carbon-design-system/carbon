@@ -45,15 +45,6 @@ export const _InlineLoading = () => <InlineLoading {...props()} />;
 
 _InlineLoading.storyName = 'Inline loading';
 
-_InlineLoading.parameters = {
-  info: {
-    text: `
-            Inline Loading spinners are used when creating, updating, or deleting an item.
-            They help notify users that their change is underway, with different states for 'loading' and 'success'.
-          `,
-  },
-};
-
 export const UxExample = () => {
   function MockSubmission({ children }) {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -120,13 +111,3 @@ export const UxExample = () => {
 };
 
 UxExample.storyName = 'UX example';
-
-UxExample.parameters = {
-  info: {
-    text: `
-        This is a full example of how to leverage the <InlineLoading /> component to create a nice user experience when submitting a form.
-
-        For the full source code of this example, check out the 'story' panel below.
-      `,
-  },
-};
