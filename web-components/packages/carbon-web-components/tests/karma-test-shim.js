@@ -8,7 +8,7 @@
  */
 
 // For generating coverage report for untested files
-const srcContext = require.context('../src/components', true, /^(?!.*story)?).*\.ts$/);
+const srcContext = require.context('../src/components', true, /^(?!.*story).*\.ts$/);
 srcContext.keys().forEach(srcContext);
 
 const specContext = require.context('.', true, /_spec\.ts$/);
