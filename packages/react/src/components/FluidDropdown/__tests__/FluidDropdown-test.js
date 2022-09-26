@@ -39,7 +39,6 @@ describe('FluidDropdown', () => {
         <FluidDropdown {...mockProps} />
       </FeatureFlags>
     );
-    console.log(container.firstChild);
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid`
     );
@@ -51,7 +50,6 @@ describe('FluidDropdown', () => {
         <FluidDropdown isCondensed {...mockProps} />
       </FeatureFlags>
     );
-    console.log(container.firstChild);
     expect(container.firstChild).toHaveClass(
       `${prefix}--list-box__wrapper--fluid--condensed`
     );
