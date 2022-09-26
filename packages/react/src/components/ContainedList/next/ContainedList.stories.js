@@ -183,7 +183,7 @@ export const ActionsInteractive = () => {
   );
 };
 
-export const HeadingDecorators = () => {
+export const ListTitleDecorators = () => {
   return (
     <VStack gap={12}>
       <ContainedList
@@ -194,7 +194,7 @@ export const HeadingDecorators = () => {
               alignItems: 'center',
               justifyContent: 'space-between',
             }}>
-            <span>Heading</span>
+            <span>List title</span>
             <Tag size="sm">4</Tag>
           </div>
         }
@@ -207,7 +207,7 @@ export const HeadingDecorators = () => {
       <ContainedList
         label={
           <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span>Heading</span>
+            <span>List title</span>
             <Tooltip align="top" label="Tooltip content">
               <button
                 className="sb-tooltip-trigger"
@@ -272,7 +272,7 @@ Playground.argTypes = {
     control: false,
   },
   label: {
-    defaultValue: 'Heading',
+    defaultValue: 'List title',
   },
   kind: {
     defaultValue: 'on-page',
