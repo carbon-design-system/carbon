@@ -26,7 +26,7 @@
     "@octokit/core": "^4.0.0",
     "@octokit/plugin-retry": "^3.0.9",
     "@octokit/plugin-throttling": "^4.0.0",
-    "@octokit/rest": "^18.12.0",
+    "@octokit/rest": "^19.0.0",
     "clsx": "^1.1.1",
     "date-fns": "^2.25.0",
     "fs-extra": "^10.0.0",

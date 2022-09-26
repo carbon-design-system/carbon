@@ -11,7 +11,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { keys, matches } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
@@ -31,7 +30,6 @@ function RadioTile({
 }) {
   const prefix = usePrefix();
   const inputId = useFallbackId(id);
-  const enabled = useFeatureFlag('enable-v11-release');
   const className = cx(
     customClassName,
     `${prefix}--tile`,
@@ -42,8 +40,6 @@ function RadioTile({
       [`${prefix}--tile--disabled`]: disabled,
     }
   );
-  const inputProps = enabled ? {} : rest;
-  const labelProps = enabled ? rest : {};
 
   function handleOnChange(evt) {
     onChange(value, name, evt);
@@ -59,7 +55,6 @@ function RadioTile({
   return (
     <>
       <input
-        {...inputProps}
         checked={checked}
         className={`${prefix}--tile-input`}
         disabled={disabled}
@@ -71,7 +66,7 @@ function RadioTile({
         type="radio"
         value={value}
       />
-      <label {...labelProps} htmlFor={inputId} className={className}>
+      <label {...rest} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>
           <CheckmarkFilled />
         </span>
@@ -96,11 +91,6 @@ RadioTile.propTypes = {
    * The CSS class names.
    */
   className: PropTypes.string,
-
-  /**
-   * `true` if the `<input>` should be checked at initialization.
-   */
-  defaultChecked: PropTypes.bool,
 
   /**
    * Specify whether the RadioTile should be disabled

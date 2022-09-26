@@ -5724,9 +5724,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "defaultChecked": Object {
-        "type": "bool",
-      },
       "disabled": Object {
         "type": "bool",
       },
@@ -9209,6 +9206,9 @@ Map {
       },
       "invalidText": Object {
         "type": "node",
+      },
+      "isPassword": Object {
+        "type": "bool",
       },
       "labelText": Object {
         "isRequired": true,

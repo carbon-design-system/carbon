@@ -38,7 +38,7 @@ function writeTestFile(props, componentName, isSubComponent) {
 
             // perform action to call ${prop}
 
-            expect($prop).toHaveBeenCalled(); 
+            expect(${prop}).toHaveBeenCalled(); 
         });\n\n`;
     } else {
       test = `it('should respect ${prop} prop', () => {
