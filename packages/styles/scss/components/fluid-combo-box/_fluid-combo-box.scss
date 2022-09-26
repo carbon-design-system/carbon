@@ -22,16 +22,18 @@
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__field {
+    overflow: visible;
     padding: 0;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--combo-box
     .#{$prefix}--text-input {
-    padding-top: rem(33px);
-    padding-bottom: rem(13px);
-    padding-left: $spacing-05;
+    overflow: hidden;
+    padding: rem(33px) $spacing-10 rem(13px) $spacing-05;
+    text-overflow: ellipsis;
     transition: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--list-box__wrapper--fluid
@@ -52,5 +54,18 @@
     .#{$prefix}--combo-box
     .#{$prefix}--list-box__menu-icon {
     bottom: rem(14px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box[data-invalid]
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input
+    + .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__field
+    .#{$prefix}--text-input
+    + .#{$prefix}--list-box__invalid-icon {
+    right: 1rem;
   }
 }

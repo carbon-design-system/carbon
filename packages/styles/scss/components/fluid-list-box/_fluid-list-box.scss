@@ -156,6 +156,18 @@
     pointer-events: none;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid]:not(.#{$prefix}--combo-box)
+    .#{$prefix}--list-box__field {
+    padding-right: $spacing-09;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid].#{$prefix}--combo-box
+    .#{$prefix}--text-input {
+    padding-right: $spacing-10;
+  }
+
   // Error + Warning divider
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__divider {
     display: none;
