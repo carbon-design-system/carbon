@@ -7,6 +7,7 @@
 
 import React from 'react';
 import FluidTextArea from '../FluidTextArea';
+import FluidTextAreaSkeleton from './FluidTextArea.Skeleton';
 import {
   ToggletipLabel,
   Toggletip,
@@ -111,6 +112,12 @@ const ToggleTip = (
 
 export const DefaultWithTooltip = () => (
   <FluidTextArea labelText={ToggleTip} placeholder="Placeholder text" />
+);
+
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTextAreaSkeleton />
+  </div>
 );
 
 export const Playground = (args) => (
