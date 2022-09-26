@@ -150,7 +150,10 @@ export const Radio = () => {
       <RadioTile value="standard" style={{ marginBottom: '.5rem' }}>
         Option 1
       </RadioTile>
-      <RadioTile value="default-selected" id="tile-2">
+      <RadioTile
+        value="default-selected"
+        id="tile-2"
+        style={{ marginBottom: '.5rem' }}>
         Option 2
       </RadioTile>
       <RadioTile value="selected" id="tile-3">
