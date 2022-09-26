@@ -2,8 +2,8 @@ name: Slack Office Hours Reminder
 
 on:
   schedule:
-    # Run every Tuesday at 09:00AM
-    - cron: '0 9 * * TUE'
+    # Run every Tuesday at 09:00AM CT, 02:00PM UTC
+    - cron: '0 14 * * TUE'
 
 jobs:
   post-reminder:
