@@ -15,6 +15,16 @@ const prefix = 'cds';
 
 describe('FluidTextInput', () => {
   describe('renders as expected - Component API', () => {
+    it('should render as expected', () => {
+      const { container } = render(
+        <FeatureFlags flags={{ 'enable-v11-release': true }}>
+          <FluidTextInput id="input-1" labelText="FluidTextInput label" />
+        </FeatureFlags>
+      );
+
+      expect(container.firstChild).toHaveClass(`${prefix}--text-input--fluid`);
+    });
+
     it('should spread extra props onto the input element', () => {
       render(
         <FluidTextInput
@@ -119,6 +129,17 @@ describe('FluidTextInput', () => {
       expect(screen.getByText('This is invalid text')).toHaveClass(
         `${prefix}--form-requirement`
       );
+    });
+
+    it('should respect isPassword prop', () => {
+      const { container } = render(
+        <FluidTextInput id="input-1" labelText="FluidTextInput" isPassword />
+      );
+
+      expect(container.firstChild).toHaveClass(
+        `${prefix}--password-input-wrapper`
+      );
+      expect(container.firstChild).toHaveClass(`${prefix}--text-input--fluid`);
     });
 
     it('should respect labelText prop', () => {

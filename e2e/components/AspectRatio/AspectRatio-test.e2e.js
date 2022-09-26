@@ -17,7 +17,7 @@ test.describe('AspectRatio', () => {
       test('aspectratio @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'AspectRatio',
-          id: 'components-aspectratio--aspect-ratio-story',
+          id: 'components-aspectratio--default',
           theme,
         });
       });
@@ -27,7 +27,7 @@ test.describe('AspectRatio', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'AspectRatio',
-      id: 'components-aspectratio--aspect-ratio-story',
+      id: 'components-aspectratio--default',
       globals: {
         theme: 'white',
       },
