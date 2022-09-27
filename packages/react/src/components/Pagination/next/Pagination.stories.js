@@ -65,15 +65,7 @@ export default {
   ],
 };
 
-export const _Pagination = (args) => <Pagination {...props()} {...args} />;
-
-_Pagination.parameters = {
-  info: {
-    text: `
-            The pagination component is used to switch through multiple pages of items, when only a maximum number of items can be displayed per page. Can be used in combination with other components like DataTable.
-          `,
-  },
-};
+export const Default = (args) => <Pagination {...props()} {...args} />;
 
 export const MultiplePaginationComponents = (args) => {
   return (
@@ -85,12 +77,6 @@ export const MultiplePaginationComponents = (args) => {
 };
 
 MultiplePaginationComponents.storyName = 'Multiple Pagination components';
-
-MultiplePaginationComponents.parameters = {
-  info: {
-    text: `Showcasing unique ids for each pagination component`,
-  },
-};
 
 export const PaginationWithCustomPageSizesLabel = (args) => {
   return (
@@ -112,9 +98,3 @@ export const PaginationWithCustomPageSizesLabel = (args) => {
 
 PaginationWithCustomPageSizesLabel.storyName =
   'Pagination with custom page sizes label';
-
-PaginationWithCustomPageSizesLabel.parameters = {
-  info: {
-    text: `It is also possible to use custom label in page sizes list`,
-  },
-};

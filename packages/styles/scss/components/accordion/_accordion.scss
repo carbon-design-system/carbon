@@ -309,3 +309,24 @@ $content-padding: 0 0 0 $spacing-05 !default;
   opacity: 0;
   visibility: hidden;
 }
+
+// flush
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__title {
+  margin-left: 0;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__arrow {
+  margin-right: 0;
+}
+
+.#{$prefix}--accordion--flush .#{$prefix}--accordion__content {
+  padding-left: 0;
+}
+
+.#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
+  .#{$prefix}--accordion__heading:hover::before,
+.#{$prefix}--accordion--flush:not(.#{$prefix}--skeleton)
+  .#{$prefix}--accordion__heading:focus::before {
+  left: -1rem;
+  width: calc(100% + 32px);
+}
