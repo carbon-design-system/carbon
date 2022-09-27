@@ -45,11 +45,3 @@ export const Default = () => (
     <SkeletonText {...props()} />
   </div>
 );
-
-Default.parameters = {
-  info: {
-    text: `
-        Skeleton states are used as a progressive loading state while the user waits for content to load.
-      `,
-  },
-};

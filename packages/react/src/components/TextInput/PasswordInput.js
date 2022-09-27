@@ -46,6 +46,8 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     warnText,
   });
 
+  const { isFluid } = useContext(FormContext);
+
   const handleTogglePasswordVisibility = (event) => {
     setInputType(inputType === 'password' ? 'text' : 'password');
     onTogglePasswordVisibility && onTogglePasswordVisibility(event);
@@ -86,6 +88,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     {
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
+      [`${prefix}--text-input--fluid`]: isFluid,
     }
   );
   const labelClasses = classNames(`${prefix}--label`, {
@@ -156,6 +159,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         disabled={disabled}
         data-toggle-password-visibility={inputType === 'password'}
       />
+      {isFluid && <hr className={`${prefix}--text-input__divider`} />}
       <button
         type="button"
         className={passwordVisibilityToggleClasses}
@@ -170,8 +174,6 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       </button>
     </>
   );
-
-  const { isFluid } = useContext(FormContext);
 
   useEffect(() => {
     setInputType(type);
