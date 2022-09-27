@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import FluidComboBox from '.';
+import { FluidComboBox, FluidComboBoxSkeleton } from '../FluidComboBox';
 import {
   ToggletipLabel,
   Toggletip,
@@ -111,6 +111,12 @@ export const Playground = (args) => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
     />
+  </div>
+);
+
+export const Skeleton = () => (
+  <div style={{ width: 400 }}>
+    <FluidComboBoxSkeleton />
   </div>
 );
 

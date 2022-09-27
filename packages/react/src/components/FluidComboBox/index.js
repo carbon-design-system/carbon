@@ -7,3 +7,4 @@
 
 export default from './FluidComboBox';
 export FluidComboBox from './FluidComboBox';
+export { default as FluidComboBoxSkeleton } from './FluidComboBox.Skeleton';

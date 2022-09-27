@@ -7,3 +7,4 @@
 
 export default from './FluidMultiSelect';
 export FluidMultiSelect from './FluidMultiSelect';
+export { default as FluidMultiSelectSkeleton } from './FluidMultiSelect.Skeleton';

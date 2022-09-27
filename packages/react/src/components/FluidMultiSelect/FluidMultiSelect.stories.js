@@ -6,7 +6,10 @@
  */
 
 import React from 'react';
-import FluidMultiSelect from '../FluidMultiSelect';
+import {
+  FluidMultiSelect,
+  FluidMultiSelectSkeleton,
+} from '../FluidMultiSelect';
 import {
   ToggletipLabel,
   Toggletip,
@@ -111,6 +114,12 @@ export const Playground = (args) => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
     />
+  </div>
+);
+
+export const Skeleton = () => (
+  <div style={{ width: 400 }}>
+    <FluidMultiSelectSkeleton />
   </div>
 );
 
