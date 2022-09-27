@@ -1,22 +1,18 @@
 import React from 'react';
 import OrderedList from '../OrderedList';
-import { withKnobs, boolean } from '@storybook/addon-knobs';
 import ListItem from '../ListItem';
-
-const props = {
-  regular: () => {
-    return {
-      isExpressive: boolean('Expressive', false),
-    };
-  },
-};
+import mdx from './OrderedList.mdx';
 
 export default {
   title: 'Components/OrderedList',
   component: OrderedList,
-  decorators: [withKnobs],
   subcomponents: {
     ListItem,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 
@@ -39,10 +35,8 @@ export const Default = () => (
 );
 
 export const Nested = () => {
-  const regularProps = props.regular();
-
   return (
-    <OrderedList {...regularProps}>
+    <OrderedList>
       <ListItem>
         Ordered List level 1
         <OrderedList nested>
@@ -63,10 +57,8 @@ export const Nested = () => {
 };
 
 export const NativeListStyles = () => {
-  const regularProps = props.regular();
-
   return (
-    <OrderedList native {...regularProps}>
+    <OrderedList native>
       <ListItem>Ordered List level 1</ListItem>
       <ListItem>Ordered List level 1</ListItem>
       <ListItem>Ordered List level 1</ListItem>
@@ -89,4 +81,53 @@ export const NativeListStyles = () => {
       <ListItem>Ordered List level 1</ListItem>
     </OrderedList>
   );
+};
+
+export const Playground = (args) => (
+  <OrderedList {...args}>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+    <ListItem>Ordered List level 1</ListItem>
+  </OrderedList>
+);
+
+Playground.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  isExpressive: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  native: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  nested: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
