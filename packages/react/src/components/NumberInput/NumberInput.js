@@ -138,6 +138,8 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
   }
 
+  console.log(`render value:`);
+  console.log(value);
   return (
     <div className={cx(`${prefix}--form-item`, { [customClassName]: enabled })}>
       <div
@@ -180,7 +182,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 disabled={disabled}
                 onClick={(event) => {
                   const state = {
-                    value: clamp(max, min, value - step),
+                    value: clamp(max, min, parseInt(value) - step),
                     direction: 'down',
                   };
                   setValue(state.value);
@@ -205,7 +207,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 disabled={disabled}
                 onClick={(event) => {
                   const state = {
-                    value: clamp(max, min, value + step),
+                    value: clamp(max, min, parseInt(value) + step),
                     direction: 'up',
                   };
                   setValue(state.value);

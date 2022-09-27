@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useState } from 'react';
 import { NumberInput } from './';
 import NumberInputSkeleton from './NumberInput.Skeleton';
 
@@ -30,6 +30,32 @@ export const Default = () => {
       helperText="Optional helper text."
       invalidText="Number is not valid"
     />
+  );
+};
+
+export const Test = () => {
+  const [val, setVal] = useState(10);
+  return (
+    <div>
+      <NumberInput
+        id="carbon-number"
+        min={0}
+        max={100}
+        step={10}
+        value={val}
+        label="NumberInput label"
+        helperText="Optional helper text."
+        invalidText="Number is not valid"
+        onClick={(event) => {
+          console.log(event);
+        }}
+        onChange={(event, state) => {
+          console.dir({ event, state });
+          setVal(state.value);
+        }}
+      />
+      <pre>Value is: {val}</pre>
+    </div>
   );
 };
 
