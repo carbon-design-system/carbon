@@ -51,6 +51,7 @@ export const ReadOnly = () => {
       helperText="Optional help text"
       value="This is read only, you can't type more."
       readOnly
+      id="text-input-1"
     />
   );
 };
@@ -87,11 +88,92 @@ export const WithLayer = () => {
 export const Skeleton = () => <TextInputSkeleton />;
 
 export const Playground = (args) => (
-  <TextInput
-    {...args}
-    labelText="Text input label"
-    helperText="Optional help text"
-    id="text-input-1"
-    type="text"
-  />
+  <div style={{ width: args.playgroundWidth }}>
+    <TextInput {...args} id="text-input-1" type="text" />
+  </div>
 );
+
+Playground.argTypes = {
+  playgroundWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+    defaultValue: 300,
+  },
+  className: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'input-test-class',
+  },
+  defaultValue: {
+    control: {
+      type: 'text',
+    },
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Placeholder text',
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Invalid text',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  labelText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Label text',
+  },
+  helperText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Helper text',
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  },
+  value: {
+    control: {
+      type: 'text',
+    },
+  },
+  onChange: {
+    action: 'clicked',
+  },
+  onClick: {
+    action: 'clicked',
+  },
+  size: {
+    defaultValue: 'md',
+    options: ['sm', 'md', 'lg', 'xl'],
+    control: {
+      type: 'select',
+    },
+  },
+};

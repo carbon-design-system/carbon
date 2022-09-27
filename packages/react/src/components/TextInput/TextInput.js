@@ -146,6 +146,7 @@ const TextInput = React.forwardRef(function TextInput(
 
   const counterClasses = classNames(`${prefix}--label`, {
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--text-input__label-counter`]: true,
   });
 
   const counter =
