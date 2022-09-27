@@ -183,7 +183,7 @@ export const WithLayer = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
     />
-    <Layer>
+    <Layer level={1}>
       <Dropdown
         id="default"
         titleText="Second Layer"

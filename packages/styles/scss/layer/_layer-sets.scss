@@ -10,9 +10,9 @@
 
 $-default-layer-sets: (
   layer: (
+    theme.$background,
     theme.$layer-01,
     theme.$layer-02,
-    theme.$layer-03,
   ),
   layer-active: (
     theme.$layer-active-01,
