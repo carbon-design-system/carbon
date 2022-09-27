@@ -102,8 +102,6 @@ export {
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
-export SearchFilterButton from './components/SearchFilterButton';
-export SearchLayoutButton from './components/SearchLayoutButton';
 export ExpandableSearch from './components/ExpandableSearch';
 export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
