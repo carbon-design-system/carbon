@@ -21,6 +21,7 @@
     "scss",
     "index.scss"
   ],
+  "type": "module",
   "publishConfig": {
     "access": "public"
   },
