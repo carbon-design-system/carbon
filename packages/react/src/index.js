@@ -211,7 +211,10 @@ export {
   useFeatureFlag as unstable_useFeatureFlag,
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
-export { FluidDropdown as unstable__FluidDropdown } from './components/FluidDropdown';
+export {
+  FluidDropdown as unstable__FluidDropdown,
+  FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
+} from './components/FluidDropdown';
 export { FluidTextArea as unstable__FluidTextArea } from './components/FluidTextArea';
 export {
   FluidTextInput as unstable__FluidTextInput,

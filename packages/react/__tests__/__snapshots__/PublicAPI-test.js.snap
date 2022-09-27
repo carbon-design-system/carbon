@@ -9227,6 +9227,13 @@ Map {
     },
     "render": [Function],
   },
+  "unstable__FluidDropdownSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable__FluidTextArea" => Object {
     "propTypes": Object {
       "className": Object {

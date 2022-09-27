@@ -7,3 +7,4 @@
 
 export default from './FluidDropdown';
 export FluidDropdown from './FluidDropdown';
+export { default as FluidDropdownSkeleton } from './FluidDropdown.Skeleton';

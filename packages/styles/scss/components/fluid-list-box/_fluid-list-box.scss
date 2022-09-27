@@ -14,6 +14,7 @@
 @use '../../theme' as *;
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
+@use '../../utilities/skeleton' as *;
 
 @mixin fluid-list-box {
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper {
@@ -174,5 +175,42 @@
     .#{$prefix}--list-box--up
     .#{$prefix}--list-box__menu {
     bottom: $spacing-10;
+  }
+
+  // Skeleton styles
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--skeleton {
+    border-bottom: 1px solid $skeleton-element;
+    background: $skeleton-background;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__field {
+    position: absolute;
+    bottom: rem(13px);
+    left: $spacing-05;
+    width: 50%;
+    height: $spacing-05;
+    padding: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__label {
+    position: absolute;
+    top: rem(13px);
+    left: $spacing-05;
+    width: 25%;
+    height: $spacing-05;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__label {
+    animation: 3000ms ease-in-out skeleton infinite;
+    background: $skeleton-element;
   }
 }

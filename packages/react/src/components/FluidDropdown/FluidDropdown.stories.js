@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import FluidDropdown from '../FluidDropdown';
+import { FluidDropdown, FluidDropdownSkeleton } from '../FluidDropdown';
 import {
   ToggletipLabel,
   Toggletip,
@@ -107,6 +107,12 @@ export const Playground = (args) => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
     />
+  </div>
+);
+
+export const Skeleton = () => (
+  <div style={{ width: 300 }}>
+    <FluidDropdownSkeleton />
   </div>
 );
 
