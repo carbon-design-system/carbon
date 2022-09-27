@@ -28,3 +28,10 @@ body {
   background: styles.$background;
   color: styles.$text-primary;
 }
+
+.cds--layer-two,
+.cds--layer-three {
+  padding: 1rem;
+  margin-top: 1rem;
+  background: styles.$layer;
+}
