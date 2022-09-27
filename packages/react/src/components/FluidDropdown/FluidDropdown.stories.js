@@ -111,7 +111,7 @@ export const Playground = (args) => (
 );
 
 export const Skeleton = () => (
-  <div style={{ width: 300 }}>
+  <div style={{ width: 400 }}>
     <FluidDropdownSkeleton />
   </div>
 );
