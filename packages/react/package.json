@@ -94,6 +94,7 @@
     "babel-preset-carbon": "^0.3.0",
     "browserify-zlib": "^0.2.0",
     "browserslist-config-carbon": "^11.0.0",
+    "clipboardy": "^2.1.0",
     "css-loader": "^6.5.1",
     "enquirer": "^2.3.6",
     "fast-glob": "^3.2.7",
