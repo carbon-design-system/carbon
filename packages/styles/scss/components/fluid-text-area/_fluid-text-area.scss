@@ -1,0 +1,167 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Text Area
+//-----------------------------
+@use '../../config' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+
+@mixin fluid-text-area {
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper {
+    position: relative;
+    height: 100%;
+    flex-direction: column;
+    background: $field;
+  }
+
+  .#{$prefix}--modal
+    .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper {
+    background: $field-02;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__label-wrapper {
+    position: relative;
+    height: 100%;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+  }
+
+  //counter
+  .#{$prefix}--text-area--fluid div.#{$prefix}--label {
+    right: 1rem;
+    left: initial;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area {
+    min-height: rem(64px);
+    padding: 0 $spacing-05 rem(13px);
+    margin-top: 2rem;
+    outline: none;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  // invalid
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area:focus {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--text-area__divider,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__divider {
+    display: none;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area--invalid
+    + .#{$prefix}--text-area__divider {
+    display: block;
+    border-style: solid;
+    border-color: $border-subtle;
+    border-bottom: none;
+    margin: 0 1rem;
+  }
+
+  // invalid error message container
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area--invalid
+    + .#{$prefix}--text-area__divider
+    + .#{$prefix}--form-requirement {
+    position: relative;
+    display: block;
+    overflow: visible;
+    max-height: 12.5rem;
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    margin: 0;
+    background: $field;
+    color: $text-error;
+  }
+
+  .#{$prefix}--modal
+    .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area--invalid
+    + .#{$prefix}--text-area__divider
+    + .#{$prefix}--form-requirement {
+    background: $field-02;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__invalid-icon {
+    top: 0.5rem;
+  }
+
+  //invalid outline
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]:not(:focus) {
+    @include focus-outline('invalid');
+
+    outline-offset: 0;
+  }
+
+  // focus
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]:focus-within,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper:focus-within {
+    @include focus-outline('outline');
+
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    > .#{$prefix}--text-area--invalid:focus,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper
+    > .#{$prefix}--text-area:focus,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper
+    > .#{$prefix}--text-area:active,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    > .#{$prefix}--text-area--invalid {
+    outline: none;
+    transition: none;
+  }
+
+  // Skeleton
+  .#{$prefix}--text-area--fluid__skeleton {
+    padding: $spacing-05;
+    border-bottom: 1px solid $skeleton-element;
+    background: $skeleton-background;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton .#{$prefix}--skeleton,
+  .#{$prefix}--text-area--fluid__skeleton
+    .#{$prefix}--text-area.#{$prefix}--skeleton::before {
+    height: 0.5rem;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton .#{$prefix}--label {
+    margin-bottom: $spacing-04;
+  }
+
+  .#{$prefix}--text-area--fluid__skeleton
+    .#{$prefix}--text-area.#{$prefix}--skeleton {
+    width: 80%;
+    height: 4rem;
+  }
+}

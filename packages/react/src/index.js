@@ -214,6 +214,7 @@ export {
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
 export { FluidTextInput as unstable__FluidTextInput } from './components/FluidTextInput';
+export { FluidTextArea as unstable__FluidTextArea } from './components/FluidTextArea';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';
