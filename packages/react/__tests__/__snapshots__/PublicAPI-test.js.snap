@@ -9176,6 +9176,85 @@ Map {
       },
     },
   },
+  "unstable__FluidTextArea" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "cols": Object {
+        "type": "number",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "enableCounter": Object {
+        "type": "bool",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "hideLabel": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "light": Object {
+        "type": "bool",
+      },
+      "maxCount": Object {
+        "type": "number",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "placeholder": Object {
+        "type": "string",
+      },
+      "rows": Object {
+        "type": "number",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
   "unstable__FluidTextInput" => Object {
     "propTypes": Object {
       "className": Object {
