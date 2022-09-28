@@ -157,7 +157,8 @@
     .#{$prefix}--list-box--warning
     ~ .#{$prefix}--list-box__divider {
     display: block;
-    border: 1px solid $border-subtle;
+    border: none;
+    border-bottom: 1px solid $border-subtle;
     margin: 0 1rem;
   }
 
