@@ -138,8 +138,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
   }
 
-  console.log(`render value:`);
-  console.log(value);
   return (
     <div className={cx(`${prefix}--form-item`, { [customClassName]: enabled })}>
       <div
