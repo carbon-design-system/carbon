@@ -9313,6 +9313,13 @@ Map {
       },
     },
   },
+  "unstable__FluidTextAreaSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable__FluidTextInput" => Object {
     "propTypes": Object {
       "className": Object {

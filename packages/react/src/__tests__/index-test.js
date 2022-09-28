@@ -230,6 +230,7 @@ describe('Carbon Components React', () => {
         "unstable__FluidDropdown",
         "unstable__FluidDropdownSkeleton",
         "unstable__FluidTextArea",
+        "unstable__FluidTextAreaSkeleton",
         "unstable__FluidTextInput",
         "unstable__FluidTextInputSkeleton",
         "unstable_useContextMenu",

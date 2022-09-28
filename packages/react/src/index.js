@@ -215,7 +215,10 @@ export {
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
 } from './components/FluidDropdown';
-export { FluidTextArea as unstable__FluidTextArea } from './components/FluidTextArea';
+export {
+  FluidTextArea as unstable__FluidTextArea,
+  FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
+} from './components/FluidTextArea';
 export {
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
