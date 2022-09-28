@@ -20,6 +20,12 @@ test.describe('FluidTextInput', () => {
           id: 'experimental-unstable-fluidtextinput--default',
           theme,
         });
+
+        await snapshotStory(page, {
+          component: 'FluidTextInput',
+          id: 'experimental-unstable-fluidtextinput--password-input',
+          theme,
+        });
       });
     });
   });
@@ -28,6 +34,13 @@ test.describe('FluidTextInput', () => {
     await visitStory(page, {
       component: 'FluidTextInput',
       id: 'experimental-unstable-fluidtextinput--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await visitStory(page, {
+      component: 'FluidTextInput',
+      id: 'experimental-unstable-fluidtextinput--password-input',
       globals: {
         theme: 'white',
       },

@@ -5,16 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
-import { default as ProgressIndicatorSkeleton } from './ProgressIndicator.Skeleton';
-import {
-  ProgressIndicator as ProgressIndicatorClassic,
-  ProgressStep,
-} from './ProgressIndicator';
-import { ProgressIndicator as ProgressIndicatorNext } from './next/ProgressIndicator';
-
-const ProgressIndicator = FeatureFlags.enabled('enable-v11-release')
-  ? ProgressIndicatorNext
-  : ProgressIndicatorClassic;
-
-export { ProgressIndicator, ProgressIndicatorSkeleton, ProgressStep };
+export { default as ProgressIndicatorSkeleton } from './ProgressIndicator.Skeleton';
+export * from './ProgressIndicator';
