@@ -1,5 +1,6 @@
 'use strict';
 
+const clipboard = require('clipboardy');
 const prettier = require('prettier');
 const CarbonComponents = require('@carbon/react');
 const enquirer = require('enquirer');
@@ -214,6 +215,22 @@ async function main() {
   }
 
   const testFile = writeTestFile(props, componentName, isSubComponent);
+
+  if (pathToComponent === '') {
+    const { copy } = await enquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'copy',
+        message:
+          'Looks like no component path was found, do you want to copy the created tests?',
+      },
+    ]);
+
+    if (copy) {
+      clipboard.writeSync(testFile);
+    }
+    return;
+  }
 
   await fs.writeFile(pathToComponent, testFile);
 
