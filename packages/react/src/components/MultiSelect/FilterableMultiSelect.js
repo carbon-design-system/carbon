@@ -297,6 +297,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                 setInputFocused(true);
               },
               onBlur: () => {
+                handleOnMenuChange(false);
                 setInputFocused(false);
               },
             });
