@@ -202,7 +202,8 @@ describe('Search', () => {
       const onChange = jest.fn();
 
       beforeEach(() => {
-        render({ onChange: (e) => onChange(e.target) });
+        onChange.mockReset();
+        render({ onChange: (e) => onChange(e.target.value) });
       });
 
       describe('when input value is changed', () => {
@@ -214,7 +215,7 @@ describe('Search', () => {
         });
 
         it('is called', () => {
-          expect(onChange).toHaveBeenCalledWith(target);
+          expect(onChange).toHaveBeenCalledWith(target.value);
         });
       });
 
@@ -226,7 +227,7 @@ describe('Search', () => {
         });
 
         it('is called', () => {
-          expect(onChange).toHaveBeenCalledWith(target);
+          expect(onChange).toHaveBeenCalledWith(target.value);
         });
       });
     });
