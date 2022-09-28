@@ -8,7 +8,7 @@ library:
   inherits: carbon-styles
   navData:
     - title: Get started
-      path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/frameworks/react.mdx'
+      path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/frameworks/react.mdx'
     - title: Tutorial
       items:
         - title: Overview
