@@ -73,12 +73,8 @@ const Search = React.forwardRef(function Search(
       inputRef.current.value = '';
     }
 
-    const clearedEvt = {
-      target: {
-        value: '',
-      },
-      type: 'change',
-    };
+    const inputTarget = Object.assign({}, inputRef.current, { value: '' });
+    const clearedEvt = { target: inputTarget, type: 'change' };
 
     onChange(clearedEvt);
     onClear();
