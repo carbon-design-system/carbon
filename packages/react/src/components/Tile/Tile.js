@@ -287,7 +287,7 @@ export function SelectableTile(props) {
     <>
       <input
         ref={input}
-        tabIndex={-1}
+        tabIndex={!disabled ? tabIndex : null}
         id={id}
         className={inputClasses}
         value={value}
@@ -297,16 +297,11 @@ export function SelectableTile(props) {
         name={name}
         title={title}
         checked={isSelected}
-      />
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        htmlFor={id}
-        className={classes}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex={!disabled ? tabIndex : null}
-        {...rest}
         onClick={!disabled ? handleOnClick : null}
-        onKeyDown={!disabled ? handleOnKeyDown : null}>
+        onKeyDown={!disabled ? handleOnKeyDown : null}
+      />
+
+      <label htmlFor={id} className={classes} {...rest}>
         <span
           className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
           {isSelected ? <CheckboxCheckedFilled16 /> : <Checkbox16 />}
