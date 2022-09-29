@@ -292,12 +292,15 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                 if (match(event, keys.Space)) {
                   event.stopPropagation();
                 }
+
+                if (match(event, keys.Tab)) {
+                  handleOnMenuChange(false);
+                }
               },
               onFocus: () => {
                 setInputFocused(true);
               },
               onBlur: () => {
-                handleOnMenuChange(false);
                 setInputFocused(false);
               },
             });
