@@ -121,8 +121,6 @@ describe('Carbon Components React', () => {
         "RadioTile",
         "Row",
         "Search",
-        "SearchFilterButton",
-        "SearchLayoutButton",
         "SearchSkeleton",
         "SecondaryButton",
         "Section",

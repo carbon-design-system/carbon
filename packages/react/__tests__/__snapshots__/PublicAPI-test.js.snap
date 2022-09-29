@@ -5881,53 +5881,6 @@ Map {
     },
     "render": [Function],
   },
-  "SearchFilterButton" => Object {
-    "defaultProps": Object {
-      "iconDescription": "filter",
-      "labelText": "Search",
-    },
-    "propTypes": Object {
-      "iconDescription": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-    },
-  },
-  "SearchLayoutButton" => Object {
-    "contextType": Object {
-      "$$typeof": Symbol(react.context),
-    },
-    "defaultProps": Object {
-      "iconDescriptionGrid": "grid",
-      "iconDescriptionList": "list",
-      "labelText": "Filter",
-    },
-    "propTypes": Object {
-      "format": Object {
-        "args": Array [
-          Array [
-            "list",
-            "grid",
-          ],
-        ],
-        "type": "oneOf",
-      },
-      "iconDescriptionGrid": Object {
-        "type": "string",
-      },
-      "iconDescriptionList": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "type": "string",
-      },
-      "onChangeFormat": Object {
-        "type": "func",
-      },
-    },
-  },
   "SearchSkeleton" => Object {
     "defaultProps": Object {
       "small": false,
