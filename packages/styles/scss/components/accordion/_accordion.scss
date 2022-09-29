@@ -88,7 +88,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     }
 
     &:hover::before {
-      background-color: $background-hover;
+      background-color: $layer-hover;
     }
 
     &:focus {
