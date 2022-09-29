@@ -37,7 +37,8 @@
     "clean": "rimraf css es lib umd"
   },
   "dependencies": {
-    "@carbon/grid": "^11.7.0-rc.0"
+    "@carbon/grid": "^11.7.0-rc.0",
+    "@carbon/layout": "^11.7.0-rc.0"
   },
   "devDependencies": {
     "@carbon/cli": "^11.5.0-rc.0",
