@@ -240,20 +240,14 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
         name={name}
         onChange={!disabled ? handleChange : null}
         ref={ref}
-        tabIndex={-1}
+        tabIndex={!disabled ? tabIndex : null}
         title={title}
         type="checkbox"
         value={value}
-      />
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        className={classes}
-        htmlFor={id}
         onClick={!disabled ? handleOnClick : null}
         onKeyDown={!disabled ? handleOnKeyDown : null}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex={!disabled ? tabIndex : null}
-        {...rest}>
+      />
+      <label className={classes} htmlFor={id} {...rest}>
         <span
           className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
           {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
