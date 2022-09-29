@@ -691,6 +691,21 @@
       .#{$prefix}--toggle__switch::before {
       border-radius: 0;
     }
+
+    // HCM Fixes
+    // stylelint-disable-next-line no-duplicate-selectors
+    .#{$prefix}--toggle__switch::before {
+      @include high-contrast-mode('outline');
+    }
+
+    .#{$prefix}--toggle__switch::after,
+    .#{$prefix}--toggle-input:checked
+      + .#{$prefix}--toggle-input__label
+      > .#{$prefix}--toggle__switch::after {
+      @include high-contrast-mode('outline') {
+        background-color: ButtonText;
+      }
+    }
   }
 }
 
