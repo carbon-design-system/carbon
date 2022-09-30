@@ -242,7 +242,7 @@ flowchart TD
     J & K & L -->|Yes| M([Your request has been labeled as an `accepted` <br />proposal and has been added to our Icebox and is <br />being prioritized against competing workstreams])
     M --> N([Labeled with `Community Contribution` <br /> on GH. Looking for contributions])
     M --> O([Added to maintainer team's roadmap <br /> and backlog for refinement])
-    N & O --> storm((fa:fa-repeat <br /><br /> Design Crits, Code Reviews,<br /> CAG, DSAG meetings when needed <br /><br />fa:fa-repeat))
+    N & O --> storm((Design Crits, Code Reviews,<br /> CAG, DSAG meetings, <br /> Office hours when needed))
     storm --> ide1
     subgraph ide1 [Evaluate against a definition of done]
     P[Storybook]
@@ -271,8 +271,19 @@ developers all aligned on the mission of delivering amazing experiences in the
 IBM Products organization. You can learn more about the guild
 [here](https://pages.github.ibm.com/cdai-design/pal/contributing/contribution-framework/intent).
 
-PAL - Pattern Access Library. These are the local systems around IBM that extend
-our core components to fit their desired business need.
+PAL - Pattern & Asset Library. These are the local systems around IBM that
+extend our core components to fit their desired business need.
+
+CAG - Carbon Accessibility Guild. A once a sprint meeting where the Carbon team
+gets together with the Accessiblity team. Our components and patterns are
+reviewed and made more accessible.
+
+Design crit - A once a sprint meeting led by Carbon designers to review patterns
+and artifacts with the intent of eliciting feedback.
+
+Office hours - A once a sprint meeting hosted by the Carbon team to answer
+questions, debug, problem-solve, and learn from the community.
+[Link to add to your calendar](https://ec.yourlearning.ibm.com/w3/series/10289694?layout=grid).
 
 Low level of effort - A small change to a component that might take a sprint or
 less. Little-to-no design or dev resources are needed to flesh out the proposal.
