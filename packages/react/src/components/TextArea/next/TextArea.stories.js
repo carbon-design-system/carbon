@@ -61,7 +61,14 @@ export const WithLayer = () => {
 
 export const Skeleton = () => <TextAreaSkeleton />;
 
-export const Playground = (args) => <TextArea {...args} id="text-area-1" />;
+export const Playground = (args) => (
+  <TextArea
+    {...args}
+    id="text-area-1"
+    labelText="Text area label"
+    helperText="Optional helper text."
+  />
+);
 
 Playground.argTypes = {
   className: {
