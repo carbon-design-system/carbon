@@ -28,7 +28,7 @@
   //----------------------------------------------------------------------------.
   .#{$prefix}--side-nav {
     position: fixed;
-    z-index: z('header');
+    z-index: z('sideNav');
     top: 0;
     bottom: 0;
     left: 0;
