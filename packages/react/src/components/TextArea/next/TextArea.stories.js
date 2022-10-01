@@ -60,3 +60,84 @@ export const WithLayer = () => {
 };
 
 export const Skeleton = () => <TextAreaSkeleton />;
+
+export const Playground = (args) => <TextArea {...args} id="text-area-1" />;
+
+Playground.argTypes = {
+  className: {
+    control: {
+      type: 'string',
+    },
+  },
+  cols: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 50,
+  },
+  defaultValue: {
+    control: {
+      type: 'text',
+    },
+  },
+  value: {
+    control: {
+      type: 'text',
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  enableCounter: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  helperText: {
+    control: {
+      type: 'text',
+    },
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  id: {
+    control: {
+      type: 'text',
+    },
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+  },
+  labelText: {
+    control: {
+      type: 'text',
+    },
+  },
+  light: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  maxCount: {
+    control: {
+      type: 'number',
+    },
+  },
+};

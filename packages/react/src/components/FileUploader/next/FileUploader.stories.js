@@ -20,42 +20,7 @@ import {
 import './FileUploader-story.scss';
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
-
-export default {
-  title: 'Components/FileUploader',
-  component: FileUploader,
-  subcomponents: {
-    FileUploaderButton,
-    FileUploaderSkeleton,
-    FileUploaderItem,
-    FileUploaderDropContainer,
-  },
-};
-
-export const Default = (args) => {
-  const prefix = usePrefix();
-
-  return (
-    <div className={`${prefix}--file__container`}>
-      <FileUploader {...args} />
-    </div>
-  );
-};
-Default.args = {
-  labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
-  buttonLabel: 'Add file',
-  buttonKind: 'primary',
-  size: 'md',
-  filenameStatus: 'edit',
-  accept: ['.jpg', '.png'],
-  name: '',
-  role: 'button',
-  multiple: true,
-  disabled: false,
-  iconDescription: 'Delete file',
-};
-Default.argTypes = {
+const argTypes = {
   onChange: { action: 'onChange' },
   onClick: { action: 'onClick' },
   onDelete: { action: 'onDelete' },
@@ -78,6 +43,47 @@ Default.argTypes = {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
   },
+};
+const args = {
+  labelTitle: 'Upload files',
+  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
+  buttonLabel: 'Add file',
+  buttonKind: 'primary',
+  size: 'md',
+  filenameStatus: 'edit',
+  accept: ['.jpg', '.png'],
+  name: '',
+  role: 'button',
+  multiple: true,
+  disabled: false,
+  iconDescription: 'Delete file',
+};
+
+export default {
+  title: 'Components/FileUploader',
+  component: FileUploader,
+  subcomponents: {
+    FileUploaderButton,
+    FileUploaderSkeleton,
+    FileUploaderItem,
+    FileUploaderDropContainer,
+  },
+};
+
+export const Default = (args) => {
+  const prefix = usePrefix();
+
+  return (
+    <div className={`${prefix}--file__container`}>
+      <FileUploader {...args} />
+    </div>
+  );
+};
+Default.args = {
+  ...args,
+};
+Default.argTypes = {
+  ...argTypes,
 };
 
 export const _FileUploaderItem = (args) => <FileUploaderItem {...args} />;
@@ -139,3 +145,26 @@ export const Skeleton = () => (
     <FileUploaderSkeleton />
   </div>
 );
+
+export const Playground = (args) => (
+  <div style={{ width: args.playgroundWidth }}>
+    <FileUploader {...args} />
+  </div>
+);
+
+Playground.args = {
+  ...args,
+};
+
+Playground.argTypes = {
+  ...argTypes,
+  accept: {
+    control: 'object',
+  },
+  name: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'file-upload',
+  },
+};

@@ -25,3 +25,40 @@ export default {
 export const Default = () => {
   return <Loading {...props()} className={'some-class'} />;
 };
+
+export const Playground = (args) => <Loading {...args} />;
+
+Playground.args = {
+  ...props(),
+};
+
+Playground.argTypes = {
+  active: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  withOverlay: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  small: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: true,
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+  },
+  id: {
+    control: {
+      type: 'text',
+    },
+  },
+};
