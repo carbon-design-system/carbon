@@ -36,7 +36,8 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
         <CheckmarkFilled
           aria-label={iconDescription}
           className={`${prefix}--file-complete`}
-          {...rest}>
+          {...rest}
+          tabIndex={null}>
           {iconDescription && <title>{iconDescription}</title>}
         </CheckmarkFilled>
       );

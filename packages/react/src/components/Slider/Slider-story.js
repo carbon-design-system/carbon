@@ -65,10 +65,6 @@ export const Default = () => (
   />
 );
 
-Default.story = {
-  name: 'Slider',
-};
-
 export const Playground = () => <Slider id="slider" {...props()} />;
 
 export const ControlledSlider = () => {

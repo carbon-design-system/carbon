@@ -1,5 +1,6 @@
 'use strict';
 
+const clipboard = require('clipboardy');
 const prettier = require('prettier');
 const CarbonComponents = require('@carbon/react');
 const enquirer = require('enquirer');
@@ -29,7 +30,8 @@ function writeTestFile(props, componentName, isSubComponent) {
       prop === 'onBlur' ||
       prop === 'onMouseEnter' ||
       prop === 'onMouseLeave' ||
-      prop === 'onFocus'
+      prop === 'onFocus' ||
+      prop === 'onChange'
     ) {
       test = `it('should call ${prop} when expected', () => {
             const ${prop} = jest.fn();
@@ -37,7 +39,7 @@ function writeTestFile(props, componentName, isSubComponent) {
 
             // perform action to call ${prop}
 
-            expect($prop).toHaveBeenCalled(); 
+            expect(${prop}).toHaveBeenCalled(); 
         });\n\n`;
     } else {
       test = `it('should respect ${prop} prop', () => {
@@ -51,7 +53,14 @@ function writeTestFile(props, componentName, isSubComponent) {
   });
 
   const testFile = isSubComponent
-    ? `import React from 'react';
+    ? `/**
+    * Copyright IBM Corp. 2022
+    *
+    * This source code is licensed under the Apache-2.0 license found in the
+    * LICENSE file in the root directory of this source tree.
+    */
+   
+  import React from 'react';
   import ${componentName} from '../${componentName}';
   import userEvent from '@testing-library/user-event';
   import { render, screen } from '@testing-library/react';
@@ -72,7 +81,13 @@ function writeTestFile(props, componentName, isSubComponent) {
     })
   });
   `
-    : `
+    : `/**
+    * Copyright IBM Corp. 2022
+    *
+    * This source code is licensed under the Apache-2.0 license found in the
+    * LICENSE file in the root directory of this source tree.
+    */
+   
   import React from 'react';
   import ${componentName} from './${componentName}';
   import userEvent from '@testing-library/user-event';
@@ -200,6 +215,22 @@ async function main() {
   }
 
   const testFile = writeTestFile(props, componentName, isSubComponent);
+
+  if (pathToComponent === '') {
+    const { copy } = await enquirer.prompt([
+      {
+        type: 'confirm',
+        name: 'copy',
+        message:
+          'Looks like no component path was found, do you want to copy the created tests?',
+      },
+    ]);
+
+    if (copy) {
+      clipboard.writeSync(testFile);
+    }
+    return;
+  }
 
   await fs.writeFile(pathToComponent, testFile);
 
