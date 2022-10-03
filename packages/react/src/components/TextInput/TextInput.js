@@ -281,7 +281,7 @@ TextInput.propTypes = {
   light: PropTypes.bool,
 
   /**
-   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   * Max character count allowed for the input. This is needed in order for enableCounter to display
    */
   maxCount: PropTypes.number,
 
