@@ -49,6 +49,7 @@ export const Default = () => {
         multiple={true}
         disabled={false}
         iconDescription="Delete file"
+        name=""
       />
     </div>
   );
