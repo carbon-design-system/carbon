@@ -13,6 +13,7 @@ const COMPONENT_PATH = path.resolve(__dirname, '../');
 const blocklist = new Set([
   'README.md',
   'migrate-to-7.x.md',
+  'docs',
   'state',
   'tools',
   '.DS_Store',
