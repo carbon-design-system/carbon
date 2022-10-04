@@ -6,11 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import classNames from 'classnames';
 import { WarningFilled } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -32,6 +33,7 @@ const TextArea = React.forwardRef(function TextArea(
   ref
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const enabled = useFeatureFlag('enable-v11-release');
   const { defaultValue, value, disabled } = other;
   const [textCount, setTextCount] = useState(
@@ -59,7 +61,7 @@ const TextArea = React.forwardRef(function TextArea(
   }
 
   const labelClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
+    [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
     [`${prefix}--label--disabled`]: disabled,
   });
 
@@ -91,6 +93,9 @@ const TextArea = React.forwardRef(function TextArea(
   const error = invalid ? (
     <div role="alert" className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
+      {isFluid && (
+        <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
+      )}
     </div>
   ) : null;
 
@@ -129,12 +134,14 @@ const TextArea = React.forwardRef(function TextArea(
       <div
         className={`${prefix}--text-area__wrapper`}
         data-invalid={invalid || null}>
-        {invalid && (
+        {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}
         {input}
+        {isFluid && <hr className={`${prefix}--text-area__divider`} />}
+        {isFluid && invalid ? error : null}
       </div>
-      {invalid ? error : helper}
+      {invalid && !isFluid ? error : helper}
     </div>
   );
 });
