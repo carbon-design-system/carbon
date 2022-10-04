@@ -68,19 +68,15 @@ const Search = React.forwardRef(function Search(
     setPrevValue(value);
   }
 
-  function clearInput(event) {
+  function clearInput() {
     if (!value) {
       inputRef.current.value = '';
-      onChange(event);
-    } else {
-      const clearedEvt = Object.assign({}, event.target, {
-        target: {
-          value: '',
-        },
-      });
-      onChange(clearedEvt);
     }
 
+    const inputTarget = Object.assign({}, inputRef.current, { value: '' });
+    const clearedEvt = { target: inputTarget, type: 'change' };
+
+    onChange(clearedEvt);
     onClear();
     setHasContent(false);
     focus(inputRef);

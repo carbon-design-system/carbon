@@ -102,8 +102,6 @@ export {
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
-export SearchFilterButton from './components/SearchFilterButton';
-export SearchLayoutButton from './components/SearchLayoutButton';
 export ExpandableSearch from './components/ExpandableSearch';
 export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
@@ -214,6 +212,7 @@ export {
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
 export { FluidTextInput as unstable__FluidTextInput } from './components/FluidTextInput';
+export { FluidTextArea as unstable__FluidTextArea } from './components/FluidTextArea';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';
