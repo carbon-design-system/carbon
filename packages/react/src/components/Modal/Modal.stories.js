@@ -14,6 +14,7 @@ import MultiSelect from '../MultiSelect';
 import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
+import { NumberInput } from '../NumberInput';
 import mdx from './Modal.mdx';
 
 export default {
@@ -39,6 +40,15 @@ export const Default = () => {
         organization to a URL that you own. A custom domain can be a shared
         domain, a shared subdomain, or a shared domain and host.
       </p>
+      <NumberInput
+        id="carbon-number"
+        min={0}
+        max={100}
+        value={50}
+        label="NumberInput label"
+        helperText="Optional helper text."
+        invalidText="Number is not valid"
+      />
       <TextInput
         data-modal-primary-focus
         id="text-input-1"
