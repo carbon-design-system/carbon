@@ -6,5 +6,6 @@
  */
 
 export { default as CheckboxSkeleton } from './Checkbox.Skeleton';
-import Checkbox from './Checkbox';
+import Checkbox, { CheckboxProps } from './Checkbox';
+export type { CheckboxProps };
 export default Checkbox;
