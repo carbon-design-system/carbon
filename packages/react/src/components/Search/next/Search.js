@@ -68,19 +68,15 @@ const Search = React.forwardRef(function Search(
     setPrevValue(value);
   }
 
-  function clearInput(event) {
+  function clearInput() {
     if (!value) {
       inputRef.current.value = '';
-      onChange(event);
-    } else {
-      const clearedEvt = Object.assign({}, event.target, {
-        target: {
-          value: '',
-        },
-      });
-      onChange(clearedEvt);
     }
 
+    const inputTarget = Object.assign({}, inputRef.current, { value: '' });
+    const clearedEvt = { target: inputTarget, type: 'change' };
+
+    onChange(clearedEvt);
     onClear();
     setHasContent(false);
     focus(inputRef);
@@ -99,17 +95,13 @@ const Search = React.forwardRef(function Search(
 
   return (
     <div role="search" aria-labelledby={searchId} className={searchClasses}>
-      {/* the magnifier is used in ExpandableSearch as a click target to expand, 
+      {/* the magnifier is used in ExpandableSearch as a click target to expand,
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
       {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
       <div
         role={onExpand ? 'button' : null}
         className={`${prefix}--search-magnifier`}
-        onClick={() => {
-          if (onExpand) {
-            onExpand();
-          }
-        }}>
+        onClick={onExpand}>
         <CustomSearchIcon icon={renderIcon} />
       </div>
       <label id={searchId} htmlFor={uniqueId} className={`${prefix}--label`}>
