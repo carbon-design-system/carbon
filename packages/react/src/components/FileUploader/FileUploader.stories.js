@@ -8,7 +8,7 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { usePrefix } from '../../../internal/usePrefix';
+import { usePrefix } from '../../internal/usePrefix';
 
 import {
   FileUploader,
@@ -16,7 +16,7 @@ import {
   FileUploaderDropContainer,
   FileUploaderItem,
   FileUploaderSkeleton,
-} from '../';
+} from '.';
 import './FileUploader-story.scss';
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
@@ -119,7 +119,7 @@ _FileUploaderDropContainer.argTypes = {
 };
 
 export const DragAndDropUploadContainerExampleApplication = (args) =>
-  require('./stories/drop-container').default(args);
+  require('./next/stories/drop-container').default(args);
 
 DragAndDropUploadContainerExampleApplication.args = {
   labelText: 'Drag and drop files here or click to upload',
@@ -139,3 +139,51 @@ export const Skeleton = () => (
     <FileUploaderSkeleton />
   </div>
 );
+
+export const Playground = (args) => {
+  const prefix = usePrefix();
+
+  return (
+    <div className={`${prefix}--file__container`}>
+      <FileUploader {...args} />
+    </div>
+  );
+};
+Playground.args = {
+  labelTitle: 'Upload files',
+  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
+  buttonLabel: 'Add file',
+  buttonKind: 'primary',
+  size: 'md',
+  filenameStatus: 'edit',
+  accept: ['.jpg', '.png'],
+  name: '',
+  role: 'button',
+  multiple: true,
+  disabled: false,
+  iconDescription: 'Delete file',
+};
+Playground.argTypes = {
+  onChange: { action: 'onChange' },
+  onClick: { action: 'onClick' },
+  onDelete: { action: 'onDelete' },
+  buttonKind: {
+    control: { type: 'select' },
+    options: [
+      'primary',
+      'secondary',
+      'danger',
+      'ghost',
+      'danger--primary',
+      'tertiary',
+    ],
+  },
+  filenameStatus: {
+    control: { type: 'select' },
+    options: filenameStatuses,
+  },
+  size: {
+    control: { type: 'select' },
+    options: ['sm', 'md', 'lg'],
+  },
+};
