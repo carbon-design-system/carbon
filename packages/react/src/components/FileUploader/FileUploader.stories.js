@@ -32,94 +32,55 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Default = () => {
   const prefix = usePrefix();
 
   return (
     <div className={`${prefix}--file__container`}>
-      <FileUploader {...args} />
+      <FileUploader
+        labelTitle="Upload files"
+        labelDescription="Max file size is 500mb. Only .jpg files are supported."
+        buttonLabel="Add file"
+        buttonKind="primary"
+        size="md"
+        filenameStatus="edit"
+        role="button"
+        accept={['.jpg', '.png']}
+        multiple={true}
+        disabled={false}
+        iconDescription="Delete file"
+      />
     </div>
   );
 };
-Default.args = {
-  labelTitle: 'Upload files',
-  labelDescription: 'Max file size is 500mb. Only .jpg files are supported.',
-  buttonLabel: 'Add file',
-  buttonKind: 'primary',
-  size: 'md',
-  filenameStatus: 'edit',
-  accept: ['.jpg', '.png'],
-  name: '',
-  role: 'button',
-  multiple: true,
-  disabled: false,
-  iconDescription: 'Delete file',
-};
-Default.argTypes = {
-  onChange: { action: 'onChange' },
-  onClick: { action: 'onClick' },
-  onDelete: { action: 'onDelete' },
-  buttonKind: {
-    control: { type: 'select' },
-    options: [
-      'primary',
-      'secondary',
-      'danger',
-      'ghost',
-      'danger--primary',
-      'tertiary',
-    ],
-  },
-  filenameStatus: {
-    control: { type: 'select' },
-    options: filenameStatuses,
-  },
-  size: {
-    control: { type: 'select' },
-    options: ['sm', 'md', 'lg'],
-  },
+
+export const _FileUploaderItem = () => {
+  return (
+    <FileUploaderItem
+      errorBody="500kb max file size. Select a new file and try again."
+      errorSubject="File size exceeds limit"
+      iconDescription="Delete file"
+      invalid={false}
+      name="README.md"
+      status="edit"
+      size="md"
+    />
+  );
 };
 
-export const _FileUploaderItem = (args) => <FileUploaderItem {...args} />;
-_FileUploaderItem.args = {
-  errorBody: '500kb max file size. Select a new file and try again.',
-  errorSubject: 'File size exceeds limit',
-  iconDescription: 'Delete file',
-  invalid: false,
-  name: 'README.md',
-  status: 'edit',
-  size: 'md',
-};
-_FileUploaderItem.argTypes = {
-  onDelete: { action: 'onDelete' },
-  status: {
-    control: { type: 'select' },
-    options: filenameStatuses,
-  },
-  size: {
-    control: { type: 'select' },
-    options: ['sm', 'md', 'lg'],
-  },
-};
-
-export const _FileUploaderDropContainer = (args) => (
-  <FileUploaderDropContainer {...args} />
+export const _FileUploaderDropContainer = () => (
+  <FileUploaderDropContainer
+    labelText="Drag and drop files here or click to upload"
+    multiple={true}
+    accept={['image/jpeg', 'image/png']}
+    disabled={false}
+    name=""
+    tabIndex={0}
+  />
 );
-_FileUploaderDropContainer.args = {
-  labelText: 'Drag and drop files here or click to upload',
-  name: '',
-  multiple: true,
-  accept: ['image/jpeg', 'image/png'],
-  disabled: false,
-  role: '',
-  tabIndex: 0,
-};
-_FileUploaderDropContainer.argTypes = {
-  onChange: { action: 'onChange' },
-};
 
 export const DragAndDropUploadContainerExampleApplication = (args) =>
-  require('./next/stories/drop-container').default(args);
+  require('./stories/drop-container').default(args);
 
 DragAndDropUploadContainerExampleApplication.args = {
   labelText: 'Drag and drop files here or click to upload',
