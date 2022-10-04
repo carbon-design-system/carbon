@@ -20,7 +20,7 @@ export default {
 };
 
 export const Default = () => {
-  return <Loading className={'some-class'} />;
+  return <Loading className={'some-class'} withOverlay={false} />;
 };
 
 export const Playground = (args) => {
