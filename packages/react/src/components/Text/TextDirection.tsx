@@ -6,12 +6,28 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useEffect, useMemo, useRef } from 'react';
-import { TextDirectionContext } from './TextDirectionContext';
+import React, { ReactNode, useEffect, useMemo, useRef } from 'react';
+import {
+  TextDirectionContext,
+  TextDirectionContextData,
+} from './TextDirectionContext';
 
-function TextDirection({ children, dir = 'auto', getTextDirection }) {
+export type TextDir = 'ltr' | 'rtl' | 'auto';
+export type GetTextDirection = (text: string | string[] | undefined) => TextDir;
+
+export interface TextDirectionProps {
+  children: ReactNode | undefined;
+  dir?: TextDir;
+  getTextDirection?: GetTextDirection;
+}
+
+function TextDirection({
+  children,
+  dir = 'auto',
+  getTextDirection,
+}: TextDirectionProps) {
   const savedCallback = useRef(getTextDirection);
-  const value = useMemo(() => {
+  const value: TextDirectionContextData = useMemo(() => {
     return {
       direction: dir,
       getTextDirection: savedCallback,

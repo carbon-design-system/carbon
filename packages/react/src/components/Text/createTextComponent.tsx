@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Text } from './Text';
+import { Text, TextProps } from './Text';
 
 /**
  * Create a text component wrapper for a given text node type. Useful for
@@ -14,8 +14,11 @@ import { Text } from './Text';
  * @param {string} element
  * @param {string} displayName
  */
-export function createTextComponent(element, displayName) {
-  function TextWrapper(props) {
+export function createTextComponent(
+  element: React.ElementType,
+  displayName: string
+) {
+  function TextWrapper(props: TextProps<React.ElementType>) {
     return <Text as={element} {...props} />;
   }
 

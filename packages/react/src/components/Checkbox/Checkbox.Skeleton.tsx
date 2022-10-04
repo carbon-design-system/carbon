@@ -6,11 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const CheckboxSkeleton = ({ className, ...rest }) => {
+const CheckboxSkeleton = ({
+  className,
+  ...rest
+}: HTMLAttributes<HTMLDivElement>) => {
   const prefix = usePrefix();
   return (
     <div
