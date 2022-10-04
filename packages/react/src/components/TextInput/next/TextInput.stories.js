@@ -7,7 +7,7 @@
 
 import React from 'react';
 import FluidForm from '../../FluidForm';
-import { default as TextInput, TextInputSkeleton } from '../../TextInput';
+import { default as TextInput, TextInputSkeleton } from '..';
 import { Layer } from '../../Layer';
 
 export default {
