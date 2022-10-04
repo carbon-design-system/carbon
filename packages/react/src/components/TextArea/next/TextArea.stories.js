@@ -60,3 +60,11 @@ export const WithLayer = () => {
 };
 
 export const Skeleton = () => <TextAreaSkeleton />;
+
+export const Playground = (args) => (
+  <TextArea
+    {...args}
+    labelText="Text area label"
+    helperText="Optional helper text."
+  />
+);
