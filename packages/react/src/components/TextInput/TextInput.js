@@ -113,7 +113,7 @@ const TextInput = React.forwardRef(function TextInput(
       [`${prefix}--text-input-wrapper--readonly`]: readOnly,
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
-      [`${prefix}--text-input-wrapper--invalid`]:
+      [`${prefix}--text-input-wrapper--inline--invalid`]:
         inline && normalizedProps.invalid,
     }
   );
