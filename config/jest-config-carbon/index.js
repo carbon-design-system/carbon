@@ -8,7 +8,7 @@
 'use strict';
 
 module.exports = {
-  moduleFileExtensions: ['js', 'json', 'node'],
+  moduleFileExtensions: ['tsx', 'ts', 'js', 'json', 'node'],
   moduleNameMapper: {
     // This mapping is the result of updating to Jest 28. We currently require
     // this as the version of uuid that gets resolved is ESM but we would like
