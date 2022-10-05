@@ -223,7 +223,5 @@ Playground.argTypes = {
     table: {
       category: 'DatePickerInput',
     },
-    defaultValue:
-      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };
