@@ -3924,12 +3924,6 @@ Map {
     },
   },
   "Loading" => Object {
-    "defaultProps": Object {
-      "active": true,
-      "description": "loading",
-      "small": false,
-      "withOverlay": true,
-    },
     "propTypes": Object {
       "active": Object {
         "type": "bool",
