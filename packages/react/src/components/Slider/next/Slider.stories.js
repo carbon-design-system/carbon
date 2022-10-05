@@ -86,10 +86,6 @@ export const Playground = (args) => (
   />
 );
 
-Default.story = {
-  name: 'Slider',
-};
-
 export const ControlledSlider = () => {
   const [val, setVal] = useState(87);
   return (

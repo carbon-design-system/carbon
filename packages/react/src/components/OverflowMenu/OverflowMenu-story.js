@@ -72,7 +72,7 @@ export default {
   },
 };
 
-export const _Default = () => (
+export const Default = () => (
   <OverflowMenu>
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
@@ -81,10 +81,6 @@ export const _Default = () => (
     <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
   </OverflowMenu>
 );
-
-_Default.story = {
-  name: 'Overflow Menu',
-};
 
 export const RenderCustomIcon = () => (
   <OverflowMenu renderIcon={Filter}>

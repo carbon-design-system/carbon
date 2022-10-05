@@ -22,7 +22,22 @@ export default {
 };
 
 export const Default = () => (
-  <FluidTextInput labelText="Label" placeholder="Placeholder text" />
+  <FluidTextInput
+    labelText="Label"
+    placeholder="Placeholder text"
+    id="input-1"
+  />
+);
+
+export const PasswordInput = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTextInput
+      id="input-2"
+      labelText="Label"
+      placeholder="Placeholder text"
+      isPassword
+    />
+  </div>
 );
 
 const ToggleTip = (
@@ -83,6 +98,12 @@ Playground.argTypes = {
     },
     defaultValue:
       'Error message that is really long can wrap to more lines but should not be excessively long.',
+  },
+  isPassword: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
   disabled: {
     control: {
