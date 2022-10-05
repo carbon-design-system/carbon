@@ -10,6 +10,7 @@
 @use '../../../breakpoint' as *;
 @use '../../../config' as *;
 @use '../../../motion' as *;
+@use '../../../spacing' as *;
 @use '../../../theme' as *;
 @use '../../../type' as *;
 @use '../../../utilities/button-reset';
@@ -43,7 +44,7 @@
     transition: background-color $duration-fast-02,
       border-color $duration-fast-02;
     @include breakpoint-down('md') {
-      min-width: mini-units(6);
+      min-width: $spacing-09;
     }
   }
 
@@ -141,7 +142,7 @@
     transition: border-color $duration-fast-02;
     user-select: none;
     @include breakpoint-down('md') {
-      padding: 0 mini-units(2);
+      padding: 0 $spacing-05;
     }
   }
 
