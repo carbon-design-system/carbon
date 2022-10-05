@@ -42,6 +42,9 @@
     border: rem(1px) solid transparent;
     transition: background-color $duration-fast-02,
       border-color $duration-fast-02;
+    @include breakpoint-down('md') {
+      min-width: mini-units(6);
+    }
   }
 
   .#{$prefix}--header__action
@@ -137,6 +140,9 @@
     text-decoration: none;
     transition: border-color $duration-fast-02;
     user-select: none;
+    @include breakpoint-down('md') {
+      padding: 0 mini-units(2);
+    }
   }
 
   a.#{$prefix}--header__name:focus {
