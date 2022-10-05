@@ -7,6 +7,7 @@
 
 import React from 'react';
 import FluidTextInput from '../FluidTextInput';
+import FluidTextInputSkeleton from './FluidTextInput.Skeleton';
 import {
   ToggletipLabel,
   Toggletip,
@@ -56,6 +57,16 @@ const ToggleTip = (
 
 export const DefaultWithTooltip = () => (
   <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
+);
+
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTextInputSkeleton
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-1"
+    />
+  </div>
 );
 
 export const Playground = (args) => (
