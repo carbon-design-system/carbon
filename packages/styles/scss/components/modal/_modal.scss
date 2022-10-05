@@ -62,8 +62,14 @@
     .#{$prefix}--dropdown-list,
     .#{$prefix}--number input[type='number'],
     .#{$prefix}--date-picker__input,
-    .#{$prefix}--multi-select {
+    .#{$prefix}--multi-select,
+    .#{$prefix}--number__control-btn::before,
+    .#{$prefix}--number__control-btn::after {
       background-color: $field-02;
+    }
+
+    .#{$prefix}--number__rule-divider {
+      background-color: $border-subtle-02;
     }
   }
 
