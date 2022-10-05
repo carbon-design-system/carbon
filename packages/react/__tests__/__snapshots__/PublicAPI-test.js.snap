@@ -3924,12 +3924,6 @@ Map {
     },
   },
   "Loading" => Object {
-    "defaultProps": Object {
-      "active": true,
-      "description": "loading",
-      "small": false,
-      "withOverlay": true,
-    },
     "propTypes": Object {
       "active": Object {
         "type": "bool",
@@ -7835,6 +7829,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "enableCounter": Object {
+        "type": "bool",
+      },
       "helperText": Object {
         "type": "node",
       },
@@ -7860,6 +7857,9 @@ Map {
       },
       "light": Object {
         "type": "bool",
+      },
+      "maxCount": Object {
+        "type": "number",
       },
       "onChange": Object {
         "type": "func",
