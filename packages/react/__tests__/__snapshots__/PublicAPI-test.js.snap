@@ -9400,6 +9400,22 @@ Map {
       },
     },
   },
+  "unstable__FluidDatePicker" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidDatePickerInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
   "unstable__FluidDropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {

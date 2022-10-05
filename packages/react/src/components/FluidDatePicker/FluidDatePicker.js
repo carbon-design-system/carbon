@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -8,103 +8,38 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import DatePicker from './DatePicker';
-import DatePickerInput from '../DatePickerInput';
+import DatePicker from '../DatePicker';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
-function FluidDatePicker({ className, isPassword, ...other }) {
+const FluidDatePicker = React.forwardRef(function FluidDatePicker(
+  { className, children, ...other },
+  ref
+) {
   const prefix = usePrefix();
   const classNames = classnames(className, {
-    [`${prefix}--text-input--fluid`]: !isPassword,
+    [`${prefix}--date-picker--fluid`]: true,
   });
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>
-      <DatePicker className={classNames} {...other}>
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id="date-picker-simple"
-        />
+      <DatePicker ref={ref} className={classNames} {...other}>
+        {children}
       </DatePicker>
     </FormContext.Provider>
   );
-}
+});
 
 FluidDatePicker.propTypes = {
+  /**
+   * The child node(s)
+   */
+  children: PropTypes.node,
+
   /**
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
   className: PropTypes.string,
-
-  /**
-   * Optionally provide the default value of the `<input>`
-   */
-  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * Specify whether the `<input>` should be disabled
-   */
-  disabled: PropTypes.bool,
-
-  /**
-   * Specify a custom `id` for the `<input>`
-   */
-  id: PropTypes.string.isRequired,
-
-  /**
-   * Specify whether the control is currently invalid
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in an invalid state
-   */
-  invalidText: PropTypes.node,
-
-  /**
-   * Specify whether the control is a password input
-   */
-  isPassword: PropTypes.bool,
-
-  /**
-   * Provide the text that will be read by a screen reader when visiting this
-   * control
-   */
-  labelText: PropTypes.node.isRequired,
-
-  /**
-   * Optionally provide an `onChange` handler that is called whenever `<input>`
-   * is updated
-   */
-  onChange: PropTypes.func,
-
-  /**
-   * Optionally provide an `onClick` handler that is called whenever the
-   * `<input>` is clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * Specify the placeholder attribute for the `<input>`
-   */
-  placeholder: PropTypes.string,
-
-  /**
-   * Specify the value of the `<input>`
-   */
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
-  /**
-   * Specify whether the control is currently in warning state
-   */
-  warn: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in warning state
-   */
-  warnText: PropTypes.node,
 };
 
 export default FluidDatePicker;
