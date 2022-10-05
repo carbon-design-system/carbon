@@ -141,4 +141,25 @@
     width: rem(32px);
     height: rem(32px);
   }
+
+  // Skeleton
+  .#{$prefix}--text-input--fluid__skeleton {
+    position: relative;
+    height: 100%;
+    padding: $spacing-05;
+    border-bottom: 1px solid $skeleton-element;
+    background: $skeleton-background;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--skeleton {
+    height: 0.5rem;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--label {
+    margin-bottom: $spacing-04;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--text-input {
+    width: 80%;
+  }
 }
