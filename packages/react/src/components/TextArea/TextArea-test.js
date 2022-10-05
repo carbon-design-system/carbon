@@ -136,13 +136,13 @@ describe('TextArea', () => {
         <TextArea id="counter2" labelText="someLabel" maxCount={5} />
       );
 
-      it('should not render element without only enableCounter prop passed in', () => {
+      it('should not render counter with only enableCounter prop passed in', () => {
         expect(
           counterTestWrapper1.exists(`${prefix}--text-area__counter`)
         ).toEqual(false);
       });
 
-      it('should not render element without only maxCount prop passed in', () => {
+      it('should not render counter with only maxCount prop passed in', () => {
         expect(
           counterTestWrapper2.exists(`${prefix}--text-area__counter`)
         ).toEqual(false);
