@@ -320,5 +320,40 @@ describe('TextInput', () => {
       );
       expect(icon).toBeInTheDocument();
     });
+
+    it('should not render counter with only enableCounter prop passed in', () => {
+      render(
+        <TextInput id="input-1" labelText="TextInput label" enableCounter />
+      );
+
+      const counter = screen.queryByText('0/5');
+
+      expect(counter).not.toBeInTheDocument();
+    });
+
+    it('should not render counter with only maxCount prop passed in', () => {
+      render(
+        <TextInput id="input-1" labelText="TextInput label" enableCounter />
+      );
+
+      const counter = screen.queryByText('0/5');
+
+      expect(counter).not.toBeInTheDocument();
+    });
+
+    it('should have the expected classes for counter', () => {
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          enableCounter
+          maxCount={5}
+        />
+      );
+
+      const counter = screen.queryByText('0/5');
+
+      expect(counter).toBeInTheDocument();
+    });
   });
 });

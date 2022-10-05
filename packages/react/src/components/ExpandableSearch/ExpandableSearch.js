@@ -9,8 +9,9 @@ import React, { useState, useRef } from 'react';
 import classnames from 'classnames';
 import Search from '../Search';
 import { usePrefix } from '../../internal/usePrefix';
+import { composeEventHandlers } from '../../tools/events';
 
-function ExpandableSearch(props) {
+function ExpandableSearch({ onBlur, onChange, onExpand, onFocus, ...props }) {
   const [expanded, setExpanded] = useState(false);
   const [hasContent, setHasContent] = useState(false);
   const searchRef = useRef(null);
@@ -32,6 +33,14 @@ function ExpandableSearch(props) {
     }
   }
 
+  function handleChange(evt) {
+    setHasContent(evt.target.value !== '');
+  }
+
+  function handleExpand() {
+    searchRef.current.focus?.();
+  }
+
   const classes = classnames(
     `${prefix}--search--expandable`,
     {
@@ -45,14 +54,10 @@ function ExpandableSearch(props) {
       {...props}
       ref={searchRef}
       className={classes}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
-      onChange={(event) => {
-        setHasContent(event.target.value !== '');
-      }}
-      onExpand={() => {
-        searchRef.current.focus?.();
-      }}
+      onFocus={composeEventHandlers([onFocus, handleFocus])}
+      onBlur={composeEventHandlers([onBlur, handleBlur])}
+      onChange={composeEventHandlers([onChange, handleChange])}
+      onExpand={composeEventHandlers([onExpand, handleExpand])}
     />
   );
 }
