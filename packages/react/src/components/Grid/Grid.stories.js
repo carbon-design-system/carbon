@@ -272,3 +272,36 @@ export const Offset = () => (
     />
   </Grid>
 );
+
+export const Playground = (args) => (
+  <Grid {...args}>
+    <Column sm={4} />
+    <Column sm={4} />
+    <Column sm={4} />
+    <Column sm={4} />
+  </Grid>
+);
+
+Playground.argTypes = {
+  fullWidth: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  columns: {
+    control: { type: 'number' },
+  },
+};

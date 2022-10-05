@@ -289,3 +289,46 @@ export const MixedGridModes = () => (
     </Row>
   </FlexGrid>
 );
+
+export const Playground = (args) => (
+  <FlexGrid {...args}>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </FlexGrid>
+);
+
+Playground.argTypes = {
+  fullWidth: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  columns: {
+    control: { type: 'number' },
+  },
+};
