@@ -12,11 +12,11 @@ import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
 function Loading({
-  active,
+  active = true,
   className: customClassName,
-  withOverlay,
-  small,
-  description,
+  withOverlay = true,
+  small = false,
+  description = 'loading',
   ...rest
 }) {
   const prefix = usePrefix();
@@ -93,13 +93,6 @@ Loading.propTypes = {
    * Specify whether you want the loader to be applied with an overlay
    */
   withOverlay: PropTypes.bool,
-};
-
-Loading.defaultProps = {
-  active: true,
-  withOverlay: true,
-  small: false,
-  description: 'loading',
 };
 
 export default Loading;
