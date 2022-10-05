@@ -408,4 +408,14 @@
     svg {
     @include high-contrast-mode('icon-fill');
   }
+
+  .#{$prefix}--text-input__label-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .#{$prefix}--text-input__label-counter {
+      align-self: end;
+    }
+  }
 }
