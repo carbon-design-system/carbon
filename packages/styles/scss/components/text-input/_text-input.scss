@@ -399,8 +399,7 @@
     font-weight: 400;
   }
 
-  .#{$prefix}--text-input-wrapper--inline.#{$prefix}--text-input-wrapper--invalid
-    .cds--form-requirement {
+  .#{$prefix}--text-input-wrapper--inline--invalid .cds--form-requirement {
     color: $text-error;
   }
 
