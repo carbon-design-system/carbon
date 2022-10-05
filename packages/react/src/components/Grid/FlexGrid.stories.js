@@ -1,6 +1,6 @@
 import './FlexGrid.stories.scss';
 import React from 'react';
-import { FlexGrid, Row, Column } from '../';
+import { FlexGrid, Row, Column } from './index';
 import mdx from './FlexGrid.mdx';
 
 export default {
@@ -310,6 +310,12 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
+  as: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'div',
+  },
   fullWidth: {
     control: {
       type: 'boolean',

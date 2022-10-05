@@ -8,7 +8,7 @@
 import './Grid.stories.scss';
 
 import React from 'react';
-import { Grid, Column, ColumnHang } from '../../Grid';
+import { Grid, Column, ColumnHang } from '../Grid';
 import mdx from './Grid.mdx';
 
 export default {
@@ -283,6 +283,12 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
+  as: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'div',
+  },
   fullWidth: {
     control: {
       type: 'boolean',
