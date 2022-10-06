@@ -8639,6 +8639,106 @@ Map {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
   },
+  "unstable_ContainedList" => Object {
+    "ContainedListItem": Object {
+      "propTypes": Object {
+        "action": Object {
+          "type": "node",
+        },
+        "children": Object {
+          "type": "node",
+        },
+        "className": Object {
+          "type": "string",
+        },
+        "disabled": Object {
+          "type": "bool",
+        },
+        "onClick": Object {
+          "type": "func",
+        },
+        "renderIcon": Object {
+          "args": Array [
+            Array [
+              Object {
+                "type": "func",
+              },
+              Object {
+                "type": "object",
+              },
+            ],
+          ],
+          "type": "oneOfType",
+        },
+      },
+    },
+    "propTypes": Object {
+      "action": Object {
+        "type": "node",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "on-page",
+            "disclosed",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "label": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "node",
+            },
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOfType",
+      },
+    },
+  },
+  "unstable_ContainedListItem" => Object {
+    "propTypes": Object {
+      "action": Object {
+        "type": "node",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "renderIcon": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+    },
+  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {
