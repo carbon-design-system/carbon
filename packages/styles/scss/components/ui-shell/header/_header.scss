@@ -10,6 +10,7 @@
 @use '../../../breakpoint' as *;
 @use '../../../config' as *;
 @use '../../../motion' as *;
+@use '../../../spacing' as *;
 @use '../../../theme' as *;
 @use '../../../type' as *;
 @use '../../../utilities/button-reset';
@@ -42,6 +43,9 @@
     border: rem(1px) solid transparent;
     transition: background-color $duration-fast-02,
       border-color $duration-fast-02;
+    @include breakpoint-down('md') {
+      min-width: $spacing-09;
+    }
   }
 
   .#{$prefix}--header__action
@@ -137,6 +141,9 @@
     text-decoration: none;
     transition: border-color $duration-fast-02;
     user-select: none;
+    @include breakpoint-down('md') {
+      padding: 0 $spacing-05;
+    }
   }
 
   a.#{$prefix}--header__name:focus {
