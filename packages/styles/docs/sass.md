@@ -279,16 +279,14 @@ There are also some helpers that you can use from this entrypoint. These
 include:
 
 - `theme.get` to get access to the value of a token from the theme
-- `theme.extend` to extend the current theme with new values
 
 You can use these in the following way:
 
 ```scss
 @use '@carbon/styles/scss/theme';
-
-@include theme.extend(
-  (
-    custom-token: #000000,
+@use '@carbon/styles/scss/theme' with (
+  $theme: (
+    custom-token: #bada44,
   )
 );
 
