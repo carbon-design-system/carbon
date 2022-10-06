@@ -21,6 +21,7 @@
 /// @group toggle
 @mixin toggle {
   .#{$prefix}--toggle {
+    display: inline-block;
     user-select: none;
   }
 
@@ -41,7 +42,7 @@
   }
 
   .#{$prefix}--toggle__appearance {
-    display: grid;
+    display: inline-grid;
     align-items: center;
     column-gap: $spacing-03;
     cursor: pointer;
