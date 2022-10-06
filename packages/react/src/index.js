@@ -205,6 +205,9 @@ export {
 } from './components/UIShell';
 
 // Experimental
+export unstable_ContainedList, {
+  ContainedListItem as unstable_ContainedListItem,
+} from './components/ContainedList';
 export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
   FeatureFlags as unstable_FeatureFlags,
