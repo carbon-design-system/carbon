@@ -414,7 +414,10 @@
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn:disabled {
-    color: $text-on-color-disabled;
+    border-color: transparent;
+    background-color: transparent;
+    color: $text-on-color;
+    opacity: 0.5;
   }
 
   .#{$prefix}--action-list .#{$prefix}--btn .#{$prefix}--btn__icon {
