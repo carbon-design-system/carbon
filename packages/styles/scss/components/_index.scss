@@ -12,6 +12,7 @@
 @use 'checkbox';
 @use 'code-snippet';
 @use 'combo-box';
+@use 'contained-list';
 @use 'content-switcher';
 @use 'copy-button';
 @use 'data-table';
@@ -22,8 +23,10 @@
 @use 'date-picker';
 @use 'dropdown';
 @use 'file-uploader';
-@use 'fluid-text-input';
+@use 'fluid-dropdown';
+@use 'fluid-list-box';
 @use 'fluid-text-area';
+@use 'fluid-text-input';
 @use 'form';
 @use 'inline-loading';
 @use 'link';
