@@ -1,11 +1,11 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef } from 'react';
+import React, { useRef, useContext, useState } from 'react';
 import { useSelect } from 'downshift';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -18,6 +18,7 @@ import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -59,6 +60,7 @@ const Dropdown = React.forwardRef(function Dropdown(
   ref
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const selectProps = {
     ...downshiftProps,
     items,
@@ -86,6 +88,8 @@ const Dropdown = React.forwardRef(function Dropdown(
   const showWarning = !invalid && warn;
 
   const enabled = useFeatureFlag('enable-v11-release');
+
+  const [isFocused, setIsFocused] = useState(false);
 
   const className = cx(
     `${prefix}--dropdown`,
@@ -120,23 +124,32 @@ const Dropdown = React.forwardRef(function Dropdown(
       [`${prefix}--list-box__wrapper--inline`]: inline,
       [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--list-box__wrapper--fluid--focus`]:
+        isFluid && isFocused && !isOpen,
     }
   );
 
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
   const toggleButtonProps = getToggleButtonProps();
-  const helper = helperText ? (
-    <div className={helperClasses}>{helperText}</div>
-  ) : null;
+  const helper =
+    helperText && !isFluid ? (
+      <div className={helperClasses}>{helperText}</div>
+    ) : null;
 
   function onSelectedItemChange({ selectedItem }) {
+    setIsFocused(false);
     if (onChange) {
       onChange({ selectedItem });
     }
   }
 
   const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
+
+  const handleFocus = (evt) => {
+    setIsFocused(evt.type === 'focus' ? true : false);
+  };
 
   return (
     <div className={wrapperClasses} {...other}>
@@ -146,6 +159,8 @@ const Dropdown = React.forwardRef(function Dropdown(
         </label>
       )}
       <ListBox
+        onFocus={handleFocus}
+        onBlur={handleFocus}
         aria-label={ariaLabel}
         size={size}
         className={className}

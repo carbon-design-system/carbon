@@ -218,7 +218,79 @@ missing info.
 
 If they have filled out the template or they have responded with the missing
 info, label the issue as an open proposal, label any relevant metadata, and move
-the issue to the backlog pipeline! 🎉
+the issue to the icebox pipeline! 🎉
+
+The journey of a feature request can be a long and arduous process, depending on
+the ask. Checkout the flow chart to see the path a given feature might take.
+
+```mermaid
+flowchart TD
+    A[Received] --> B[Does it align with the maintainer team's <br />guiding principles for building a design system at IBM?]
+    B -->|No| C[Closed]
+    B -->|Yes| D[Is it supporting a PAL in the DSAG?]
+    D -->|No| E[Is it suporting a PAL not in the DSAG?]
+    E -->|No| F[Is it supporting an IBM product without a PAL?]
+    F -->|No| G[Is it supporting a non-IBM offering that uses Carbon?]
+    G -->|No| C[Closed]
+    D & E & F & G -->|Yes| H([Great! Your request has now been labeled as an `open` proposal. <br />Now we will determine who will be working on this and when.])
+    H --> I[Is this a concept/idea?]
+    H --> J[Is this a fully fleshed out design spec <br /> or code implementation?]
+    I -->|Yes| K[Are you able to dedicate design or <br /> engineering resources to bring this to production?]
+    I <--> |No|J
+    K -->|No| L[Does your request have a low level of effort or a high business impact?]
+    L -->|No| C[Closed]
+    J & K & L -->|Yes| M([Your request has been labeled as an `accepted` <br />proposal and has been added to our Icebox and is <br />being prioritized against competing workstreams])
+    M --> N([Labeled with `Community Contribution` <br /> on GH. Looking for contributions])
+    M --> O([Added to maintainer team's roadmap <br /> and backlog for refinement])
+    N & O --> storm((Design Crits, Code Reviews,<br /> CAG, DSAG meetings, <br /> Office hours when needed))
+    storm --> ide1
+    subgraph ide1 [Evaluate against a definition of done]
+    P[Storybook]
+    Q[Tests]
+    R[Code]
+    S[Final design spec]
+    T[Website docs]
+    U[Kit tooling]
+    end
+    ide1 -->|Yes| C[Closed]
+
+    style storm fill:#6929c4,stroke:#f66,stroke-width:2px,color:#fff,stroke-dasharray: 5 5
+    style A fill:#198038,stroke:#fff,stroke-width:2px,color:#fff
+    style C fill:#da1e28,stroke:#000,stroke-width:2px,color:#fff
+    style H fill:#198038,stroke:#fff,stroke-width:2px,color:#fff
+    style M fill:#198038,stroke:#fff,stroke-width:2px,color:#fff
+```
+
+### Definitions
+
+Guiding principless -
+https://carbondesignsystem.com/all-about-carbon/what-is-carbon/#our-guiding-principles
+
+DSAG - The Design System Adoption Guild is an expansive group of designers and
+developers all aligned on the mission of delivering amazing experiences in the
+IBM Products organization. You can learn more about the guild
+[here](https://pages.github.ibm.com/cdai-design/pal/contributing/contribution-framework/intent).
+
+PAL - Pattern & Asset Library. These are the local systems around IBM that
+extend our core components to fit their desired business need.
+
+CAG - Carbon Accessibility Guild. A once a sprint meeting where the Carbon team
+gets together with the Accessiblity team. Our components and patterns are
+reviewed and made more accessible.
+
+Design crit - A once a sprint meeting led by Carbon designers to review patterns
+and artifacts with the intent of eliciting feedback.
+
+Office hours - A once a sprint meeting hosted by the Carbon team to answer
+questions, debug, problem-solve, and learn from the community.
+[Link to add to your calendar](https://ec.yourlearning.ibm.com/w3/series/10289694?layout=grid).
+
+Low level of effort - A small change to a component that might take a sprint or
+less. Little-to-no design or dev resources are needed to flesh out the proposal.
+
+High business impact - The request may not have all the pieces ready to begin
+working on it, but the maintainer team is able to see the high degree of
+business impact that the feature will bring with future research done.
 
 ### Severity
 

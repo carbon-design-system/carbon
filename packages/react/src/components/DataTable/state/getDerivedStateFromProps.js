@@ -47,6 +47,10 @@ const getDerivedStateFromProps = (props, prevState) => {
     state.rowIds = rowIds;
   }
 
+  state.isExpandedAll = state.rowIds.every((id) => {
+    return state.rowsById[id].isExpanded === true;
+  });
+
   return state;
 };
 
