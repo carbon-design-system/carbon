@@ -120,8 +120,8 @@ $progress-indicator-bar-width: 1px inset transparent !default;
       outline: rem(1px) solid $focus;
     }
     .#{$prefix}--progress-label:active {
-      box-shadow: 0 rem(3px) 0 0 $focus;
-      color: $focus;
+      box-shadow: 0 rem(1px) 0 0 $text-primary;
+      color: $text-primary;
     }
   }
 
