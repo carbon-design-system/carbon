@@ -190,6 +190,7 @@ export default class Search extends Component {
       onKeyDown,
       renderIcon,
       onClear, // eslint-disable-line no-unused-vars
+      onExpand, // eslint-disable-line no-unused-vars, react/prop-types
       ...other
     } = this.props;
 
