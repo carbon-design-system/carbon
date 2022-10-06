@@ -8,15 +8,14 @@
 /* eslint-disable no-console */
 
 import React from 'react';
-import { usePrefix } from '../../internal/usePrefix';
 
 import {
-  FileUploader,
+  default as FileUploader,
   FileUploaderButton,
   FileUploaderDropContainer,
   FileUploaderItem,
   FileUploaderSkeleton,
-} from '.';
+} from './';
 import './FileUploader-story.scss';
 
 const filenameStatuses = ['edit', 'complete', 'uploading'];
@@ -33,10 +32,8 @@ export default {
 };
 
 export const Default = () => {
-  const prefix = usePrefix();
-
   return (
-    <div className={`${prefix}--file__container`}>
+    <div className="cds--file__container">
       <FileUploader
         labelTitle="Upload files"
         labelDescription="Max file size is 500mb. Only .jpg files are supported."
@@ -103,10 +100,8 @@ export const Skeleton = () => (
 );
 
 export const Playground = (args) => {
-  const prefix = usePrefix();
-
   return (
-    <div className={`${prefix}--file__container`}>
+    <div className="cds--file__container">
       <FileUploader {...args} />
     </div>
   );
@@ -119,11 +114,11 @@ Playground.args = {
   size: 'md',
   filenameStatus: 'edit',
   accept: ['.jpg', '.png'],
-  name: '',
   role: 'button',
   multiple: true,
   disabled: false,
   iconDescription: 'Delete file',
+  name: '',
 };
 Playground.argTypes = {
   onChange: { action: 'onChange' },
@@ -147,5 +142,14 @@ Playground.argTypes = {
   size: {
     control: { type: 'select' },
     options: ['sm', 'md', 'lg'],
+  },
+  accept: {
+    table: { disable: true },
+  },
+  className: {
+    table: { disable: true },
+  },
+  role: {
+    table: { disable: true },
   },
 };
