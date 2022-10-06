@@ -8,8 +8,9 @@
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const {
@@ -32,6 +33,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     ...rest
   } = props;
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const datePickerInputProps = {
     id,
     onChange: (event) => {
@@ -65,6 +67,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   });
   const containerClasses = cx(`${prefix}--date-picker-container`, {
     [`${prefix}--date-picker--nolabel`]: !labelText,
+    [`${prefix}--date-picker--fluid--invalid`]: isFluid && invalid,
   });
 
   const input = invalid ? (

@@ -58,39 +58,81 @@ export const SingleWithCalendar = () => (
 
 export const RangeWithCalendar = () => {
   return (
-    <FluidDatePicker datePickerType="range">
-      <FluidDatePickerInput
-        id="date-picker-input-id-start"
-        placeholder="mm/dd/yyyy"
-        labelText={ToggleTip}
-        size="md"
-      />
-      <FluidDatePickerInput
-        id="date-picker-input-id-finish"
-        placeholder="mm/dd/yyyy"
-        labelText="End date"
-        size="md"
-      />
-    </FluidDatePicker>
+    <>
+      <FluidDatePicker datePickerType="range">
+        <FluidDatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText={ToggleTip}
+          size="md"
+        />
+        <FluidDatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+          size="md"
+        />
+      </FluidDatePicker>
+      <br />
+      <br />
+      <FluidDatePicker
+        datePickerType="range"
+        invalid
+        invalidText="Error message goes here">
+        <FluidDatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText={ToggleTip}
+        />
+        <FluidDatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </FluidDatePicker>
+      <br />
+      <br />
+      <FluidDatePicker
+        datePickerType="range"
+        warn
+        warnText="Warning message goes here">
+        <FluidDatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText={ToggleTip}
+        />
+        <FluidDatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </FluidDatePicker>
+    </>
   );
 };
 
 export const Playground = (args) => {
+  const { invalid, invalidText, warn, warnText, disabled, datePickerType } =
+    args;
   return (
-    <FluidDatePicker datePickerType="single" {...args}>
+    <FluidDatePicker
+      datePickerType={datePickerType}
+      invalid={invalid}
+      invalidText={invalidText}
+      warn={warn}
+      warnText={warnText}>
       <FluidDatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
         id="date-picker-single"
-        {...args}
+        disabled={disabled}
       />
       {args.datePickerType === 'range' && (
         <FluidDatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="End date"
-          size="md"
           id="date-picker-input-2"
-          {...args}
+          disabled={disabled}
         />
       )}
     </FluidDatePicker>
@@ -152,12 +194,12 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  size: {
-    options: ['sm', 'md', 'lg'],
-    control: { type: 'select' },
-    table: {
-      category: 'DatePickerInput',
+  datePickerType: {
+    control: {
+      type: 'select',
     },
+    options: ['single', 'range'],
+    defaultValue: 'range',
   },
   disabled: {
     control: { type: 'boolean' },
@@ -176,6 +218,8 @@ Playground.argTypes = {
     table: {
       category: 'DatePickerInput',
     },
+    defaultValue:
+      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   placeholder: {
     control: { type: 'text' },
@@ -194,5 +238,7 @@ Playground.argTypes = {
     table: {
       category: 'DatePickerInput',
     },
+    defaultValue:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
   },
 };

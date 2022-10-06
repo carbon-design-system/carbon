@@ -13,17 +13,19 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
 const FluidDatePicker = React.forwardRef(function FluidDatePicker(
-  { className, children, ...other },
+  { className, children, invalid, warn, ...other },
   ref
 ) {
   const prefix = usePrefix();
   const classNames = classnames(className, {
     [`${prefix}--date-picker--fluid`]: true,
+    [`${prefix}--date-picker--fluid--invalid`]: invalid,
+    [`${prefix}--date-picker--fluid--warn`]: warn,
   });
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>
-      <DatePicker ref={ref} className={classNames} {...other}>
+      <DatePicker className={classNames} ref={ref} {...other}>
         {children}
       </DatePicker>
     </FormContext.Provider>
@@ -40,6 +42,26 @@ FluidDatePicker.propTypes = {
    * Specify an optional className to be applied to the outer FluidForm wrapper
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether or not the control is invalid
+   */
+  invalid: PropTypes.boolean,
+
+  // /**
+  //  * Provide the text that is displayed when the control is in error state
+  //  */
+  // invalidText: PropTypes.node,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  // /**
+  //  * Provide the text that is displayed when the control is in warning state
+  //  */
+  // warnText: PropTypes.node,
 };
 
 export default FluidDatePicker;

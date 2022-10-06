@@ -17,5 +17,118 @@
 @use '../date-picker';
 
 @mixin fluid-date-picker {
-  // Overrides for FluidDatePicker go here
+  .#{$prefix}--date-picker--fluid {
+    display: inline-flex;
+    background: $field;
+  }
+
+  .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker {
+    position: relative;
+    height: 100%;
+    border-bottom: 1px solid $border-strong;
+    transition: background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--date-picker--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-input__wrapper
+    .#{$prefix}--date-picker__input {
+    min-width: rem(144px);
+    min-height: rem(64px);
+    padding: rem(32px) $spacing-05 rem(13px);
+    border-bottom: none;
+    background: transparent;
+  }
+
+  // Simple
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker__icon {
+    display: none;
+  }
+
+  // Single, Range
+  .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker__icon {
+    top: rem(43px);
+  }
+
+  // Range
+
+  // .#{$prefix}--date-picker--fluid
+  //   .#{$prefix}--date-picker--range
+  //   .#{$prefix}--date-picker-container:focus-within::after {
+  //   display: none;
+  // }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--range
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--range
+    .#{$prefix}--date-picker-container {
+    width: rem(144px);
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child {
+    margin-right: 0;
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child
+    .#{$prefix}--date-picker__input {
+    border-right: 1px solid $border-strong;
+  }
+
+  // Invalid
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker {
+    border-bottom: 1px solid transparent;
+  }
+
+  // .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
+  //   .#{$prefix}--form-requirement {
+  //   display: block;
+  //   overflow: visible;
+  //   max-height: 100%;
+  //   color: $text-error;
+
+  // }
+
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child
+    .#{$prefix}--date-picker__input {
+    border-right: 1px solid transparent;
+  }
+
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child::after {
+    position: absolute;
+    top: rem(8px);
+    right: 0;
+    display: block;
+    width: 1px;
+    height: calc(100% - 1rem);
+    background: $border-strong;
+    content: '';
+  }
 }
