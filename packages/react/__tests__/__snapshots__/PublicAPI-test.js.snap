@@ -9129,6 +9129,111 @@ Map {
       },
     },
   },
+  "unstable__FluidDropdown" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "direction": Object {
+        "args": Array [
+          Array [
+            "top",
+            "bottom",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "initialSelectedItem": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "object",
+            },
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "isCondensed": Object {
+        "type": "bool",
+      },
+      "itemToElement": Object {
+        "type": "func",
+      },
+      "itemToString": Object {
+        "type": "func",
+      },
+      "items": Object {
+        "isRequired": true,
+        "type": "array",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "renderSelectedItem": Object {
+        "type": "func",
+      },
+      "selectedItem": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "object",
+            },
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "titleText": Object {
+        "type": "node",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidDropdownSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable__FluidTextArea" => Object {
     "propTypes": Object {
       "className": Object {
@@ -9205,6 +9310,13 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+    },
+  },
+  "unstable__FluidTextAreaSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
       },
     },
   },
