@@ -250,15 +250,6 @@ export const _Filterable = () => {
         itemToString={(item) => (item ? item.text : '')}
         selectionFeedback="top-after-reopen"
       />
-
-      <FilterableMultiSelect
-        id="carbon-multiselect-example-4"
-        titleText="Multiselect title"
-        helperText="This is helper text"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        selectionFeedback="top-after-reopen"
-      />
     </div>
   );
 };
