@@ -444,7 +444,7 @@ export default class Slider extends PureComponent {
     const { value } = evt.target;
 
     this.setState({ isValid: validity });
-    this.props.onBlur({ value });
+    this.props.onBlur?.({ value });
   };
 
   /**
