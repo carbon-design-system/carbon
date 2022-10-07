@@ -233,9 +233,10 @@ export default class DataTable extends React.Component {
    *
    * @param {object} config
    * @param {Function} config.onClick a custom click handler for the expand header
+   * @param {Function} config.onExpand a custom click handler called when header is expanded
    * @returns {object}
    */
-  getExpandHeaderProps = ({ onClick, ...rest } = {}) => {
+  getExpandHeaderProps = ({ onClick, onExpand, ...rest } = {}) => {
     const { translateWithId: t } = this.props;
     const { isExpandedAll, rowIds, rowsById } = this.state;
     const isExpanded =
@@ -251,6 +252,7 @@ export default class DataTable extends React.Component {
       // handler
       onExpand: composeEventHandlers([
         this.handleOnExpandAll,
+        onExpand,
         onClick
           ? this.handleOnExpandHeaderClick(onClick, {
               isExpanded,

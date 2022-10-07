@@ -775,6 +775,9 @@ categories:
           - hole-filling--cursor
           - iCA-2D
           - image--medical
+          - image-availability--local
+          - image-availability--retrieving
+          - image-availability--unavailable
           - interactive-segmentation-cursor
           - launch-study--1
           - launch-study--2
@@ -1256,6 +1259,7 @@ categories:
           - paste
           - PDF
           - PDF--reference
+          - plan
           - playlist
           - PNG
           - policy

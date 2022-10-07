@@ -9447,6 +9447,21 @@
     - operations
   sizes:
     - 32
+- name: image-availability--local
+  friendly_name: image-availability--local
+  aliases: []
+  sizes:
+    - 32
+- name: image-availability--retrieving
+  friendly_name: image-availability--retrieving
+  aliases: []
+  sizes:
+    - 32
+- name: image-availability--unavailable
+  friendly_name: image-availability--unavailable
+  aliases: []
+  sizes:
+    - 32
 - name: image-service
   friendly_name: Image service
   aliases:
@@ -13832,6 +13847,11 @@
     - operations
     - keep
     - pin filled
+  sizes:
+    - 32
+- name: plan
+  friendly_name: plan
+  aliases: []
   sizes:
     - 32
 - name: plane
