@@ -82,9 +82,6 @@ export const Default = (args) => (
 export const Playground = (args) => (
   <Slider
     {...args}
-    onRelease={(...argss) => {
-      console.log(argss);
-    }}
     labelText={`Slider (must be an increment of ${args.step})`}
   />
 );
