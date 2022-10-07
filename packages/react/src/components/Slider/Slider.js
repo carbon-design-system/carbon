@@ -423,7 +423,6 @@ export default class Slider extends PureComponent {
       this.setState({
         value,
         left,
-        needsOnRelease: true,
       });
     }
   };
