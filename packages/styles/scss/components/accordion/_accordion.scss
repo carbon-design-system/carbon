@@ -103,6 +103,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
   // Size styles
   .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
     min-height: convert.rem(48px);
+    align-items: center;
   }
 
   .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
@@ -156,6 +157,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
     z-index: 1;
     width: 100%;
+    padding-right: $spacing-05;
     margin: $title-margin;
     text-align: left;
   }
