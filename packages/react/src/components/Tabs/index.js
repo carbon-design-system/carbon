@@ -13,10 +13,10 @@ import {
   TabList,
   IconTab,
   Tab,
-} from './next/Tabs';
+} from './Tabs';
 import { default as TabsClassic } from './Tabs';
 import { default as TabsSkeletonClassic } from './Tabs.Skeleton';
-import { default as TabsSkeletonNext } from './next/Tabs.Skeleton';
+import { default as TabsSkeletonNext } from './Tabs.Skeleton';
 
 const Tabs = FeatureFlags.enabled('enable-v11-release')
   ? TabsNext
