@@ -46,6 +46,7 @@
 
   .#{$prefix}--menu-option {
     position: relative;
+    display: list-item;
     // $size-sm
     height: 2rem;
     background-color: $layer;
@@ -123,6 +124,7 @@
   }
 
   .#{$prefix}--menu-divider {
+    display: list-item;
     width: 100%;
     height: 1px;
     margin: $spacing-02 0;
