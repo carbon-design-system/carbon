@@ -1,4 +1,5 @@
 name: Version
+run-name: ${{ inputs.type }} - ${{ inputs.tag }} by @${{ github.actor }}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

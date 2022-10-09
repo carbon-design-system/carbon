@@ -812,6 +812,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box input[type='text'] {
     min-width: 0;
     background-color: inherit;
+    text-overflow: ellipsis;
   }
 
   // Windows HCM fix

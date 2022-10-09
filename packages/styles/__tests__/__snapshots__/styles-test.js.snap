@@ -263,6 +263,46 @@ Array [
     "relativePath": "scss/components/form",
   },
   Object {
+    "filepath": "scss/components/fluid-dropdown/_fluid-dropdown.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-dropdown/fluid-dropdown",
+    "relativePath": "scss/components/fluid-dropdown/fluid-dropdown",
+  },
+  Object {
+    "filepath": "scss/components/fluid-dropdown/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-dropdown",
+    "relativePath": "scss/components/fluid-dropdown",
+  },
+  Object {
+    "filepath": "scss/components/fluid-list-box/_fluid-list-box.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-list-box/fluid-list-box",
+    "relativePath": "scss/components/fluid-list-box/fluid-list-box",
+  },
+  Object {
+    "filepath": "scss/components/fluid-list-box/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-list-box",
+    "relativePath": "scss/components/fluid-list-box",
+  },
+  Object {
+    "filepath": "scss/components/fluid-text-area/_fluid-text-area.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-text-area/fluid-text-area",
+    "relativePath": "scss/components/fluid-text-area/fluid-text-area",
+  },
+  Object {
+    "filepath": "scss/components/fluid-text-area/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-text-area",
+    "relativePath": "scss/components/fluid-text-area",
+  },
+  Object {
+    "filepath": "scss/components/fluid-text-input/_fluid-text-input.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-text-input/fluid-text-input",
+    "relativePath": "scss/components/fluid-text-input/fluid-text-input",
+  },
+  Object {
+    "filepath": "scss/components/fluid-text-input/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-text-input",
+    "relativePath": "scss/components/fluid-text-input",
+  },
+  Object {
     "filepath": "scss/components/inline-loading/_index.scss",
     "importPath": "@carbon/styles/scss/components/inline-loading",
     "relativePath": "scss/components/inline-loading",
