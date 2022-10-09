@@ -14,7 +14,7 @@ import {
   IconTab,
   Tab,
 } from './Tabs';
-import { default as TabsClassic } from './Tabs';
+import { Tabs as TabsClassic } from './Tabs';
 import { default as TabsSkeletonClassic } from './Tabs.Skeleton';
 import { default as TabsSkeletonNext } from './Tabs.Skeleton';
 
