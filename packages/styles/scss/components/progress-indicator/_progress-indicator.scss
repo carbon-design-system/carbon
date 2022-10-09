@@ -106,21 +106,23 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     cursor: pointer;
   }
 
-  .#{$prefix}--progress-label:focus {
-    box-shadow: 0 rem(3px) 0 0 $link-primary;
-    color: $link-primary;
-    outline: none;
-  }
-
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
     max-width: 100%;
     margin-right: 0.75rem;
   }
 
-  .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable)
+  .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable) {
+    &:focus {
+      outline: none;
+    }
+    &:focus-visible .#{$prefix}--progress-label {
+      color: $focus;
+      outline: rem(1px) solid $focus;
+    }
     .#{$prefix}--progress-label:active {
-    box-shadow: 0 rem(3px) 0 0 $text-primary;
-    color: $text-primary;
+      box-shadow: 0 rem(1px) 0 0 $text-primary;
+      color: $text-primary;
+    }
   }
 
   //OVERFLOW STYLING
@@ -244,12 +246,6 @@ $progress-indicator-bar-width: 1px inset transparent !default;
       box-shadow: none;
       color: $text-disabled;
       cursor: not-allowed;
-    }
-
-    .#{$prefix}--progress-label:focus,
-    .#{$prefix}--progress-label:active {
-      box-shadow: none;
-      outline: none;
     }
 
     .#{$prefix}--progress-line {
