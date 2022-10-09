@@ -6,8 +6,8 @@
  */
 
 import React from 'react';
-import { default as TextArea, TextAreaSkeleton } from '../';
-import { Layer } from '../../Layer';
+import { default as TextArea, TextAreaSkeleton } from './';
+import { Layer } from '../Layer';
 
 export default {
   title: 'Components/TextArea',
