@@ -7,3 +7,5 @@
 
 export default from './FluidTextInput';
 export FluidTextInput from './FluidTextInput';
+
+export { default as FluidTextInputSkeleton } from './FluidTextInput.Skeleton';
