@@ -95,6 +95,12 @@
     outline-offset: 0;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid
+    :not(.#{$prefix}--list-box--up)
+    .#{$prefix}--list-box__menu {
+    top: calc(100% + rem(3px));
+  }
+
   // Invalid / Warning styles
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:not(.#{$prefix}--list-box__wrapper--fluid--focus) {
     @include focus-outline('invalid');
@@ -144,6 +150,12 @@
     ~ .#{$prefix}--form-requirement {
     padding: rem(8px) 4rem rem(8px) $spacing-05;
     margin-top: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement {
+    border-bottom: 1px solid $border-strong;
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
