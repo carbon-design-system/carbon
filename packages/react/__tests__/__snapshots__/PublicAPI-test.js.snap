@@ -3738,9 +3738,6 @@ Map {
     "render": [Function],
   },
   "InlineLoading" => Object {
-    "defaultProps": Object {
-      "successDelay": 1500,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
