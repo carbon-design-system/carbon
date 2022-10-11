@@ -1905,7 +1905,7 @@ Object {
           },
           "property": "font-weight",
           "type": "declaration",
-          "value": "var(--cds-productive-heading-05-font-weight, 300)",
+          "value": "var(--cds-productive-heading-05-font-weight, 400)",
         },
         Object {
           "position": Position {
@@ -2698,7 +2698,7 @@ Object {
             Object {
               "position": Position {
                 "end": Object {
-                  "column": 22,
+                  "column": 21,
                   "line": 250,
                 },
                 "source": undefined,
@@ -2709,7 +2709,7 @@ Object {
               },
               "property": "line-height",
               "type": "declaration",
-              "value": "1.25",
+              "value": "1.4",
             },
             Object {
               "position": Position {
@@ -2998,7 +2998,7 @@ Object {
               },
               "property": "font-weight",
               "type": "declaration",
-              "value": "300",
+              "value": "400",
             },
             Object {
               "position": Position {
@@ -3085,7 +3085,7 @@ Object {
               },
               "property": "font-weight",
               "type": "declaration",
-              "value": "300",
+              "value": "400",
             },
             Object {
               "position": Position {
@@ -3155,7 +3155,7 @@ Object {
           },
           "property": "font-weight",
           "type": "declaration",
-          "value": "300",
+          "value": "400",
         },
         Object {
           "position": Position {
@@ -7561,7 +7561,7 @@ Object {
           },
           "property": "font-weight",
           "type": "declaration",
-          "value": "var(--cds-heading-05-font-weight, 300)",
+          "value": "var(--cds-heading-05-font-weight, 400)",
         },
         Object {
           "position": Position {
@@ -7915,7 +7915,7 @@ Object {
             Object {
               "position": Position {
                 "end": Object {
-                  "column": 22,
+                  "column": 21,
                   "line": 782,
                 },
                 "source": undefined,
@@ -7926,7 +7926,7 @@ Object {
               },
               "property": "line-height",
               "type": "declaration",
-              "value": "1.25",
+              "value": "1.4",
             },
             Object {
               "position": Position {
@@ -8215,7 +8215,7 @@ Object {
               },
               "property": "font-weight",
               "type": "declaration",
-              "value": "300",
+              "value": "400",
             },
             Object {
               "position": Position {
@@ -8302,7 +8302,7 @@ Object {
               },
               "property": "font-weight",
               "type": "declaration",
-              "value": "300",
+              "value": "400",
             },
             Object {
               "position": Position {
@@ -8372,7 +8372,7 @@ Object {
           },
           "property": "font-weight",
           "type": "declaration",
-          "value": "300",
+          "value": "400",
         },
         Object {
           "position": Position {
