@@ -1,4 +1,6 @@
 {
+  "name": "release-notifications",
+  "private": true,
   "dependencies": {
     "@octokit/request": "^6.2.1",
     "octokit": "^2.0.7"
