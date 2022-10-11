@@ -2,7 +2,7 @@ name: Release Notifications
 
 on:
   release:
-    types: [published]
+    types: [released]
 
 jobs:
   post-comments:
