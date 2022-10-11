@@ -2502,6 +2502,12 @@ Map {
             "bottom",
             "bottom-left",
             "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
           ],
         ],
         "type": "oneOf",
@@ -2522,6 +2528,9 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "openOnHover": Object {
+        "type": "bool",
       },
       "tooltipText": [Function],
       "triggerClassName": Object {

@@ -94,7 +94,7 @@ Playground.argTypes = {
     },
   },
   defaultOpen: {
-    defaultValue: false,
+    defaultValue: true,
   },
   definition: {
     control: {
