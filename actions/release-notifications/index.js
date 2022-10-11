@@ -50,7 +50,6 @@ run().catch((error) => {
 });
 
 function sendComments(orgName, repoName, issue_number, message) {
-  console.log(`Executing sendComments fn - issue Number - ${issue_number}`);
   return octokit.rest.issues
     .createComment({
       owner: orgName,
@@ -60,14 +59,18 @@ function sendComments(orgName, repoName, issue_number, message) {
     })
     .then(() =>
       console.log(
-        `Successfully posted comment on the Pull Request ${issue_number}`
+        `Posted comment to https://www.github.com/carbon-design-system/carbon/issues/${issue_number}`
       )
     )
-    .catch((err) => console.log(`Error on running sending comments ${err}`));
+    .catch((err) => {
+      console.log(
+        `Error posting comment to https://www.github.com/carbon-design-system/carbon/issues/${issue_number}`
+      );
+      console.log(err);
+    });
 }
 
 async function getReleases(owner, repo) {
-  console.log('Executing getRelease fn');
   const result = await request(`GET /repos/${owner}/${repo}/releases`, {
     owner: owner,
     repo: repo,
@@ -77,13 +80,15 @@ async function getReleases(owner, repo) {
   });
 
   let releasesArray = result.data.map((x) => x.tag_name);
+  console.log(
+    `Gathered releases for ${owner}/${repo}, ${releasesArray[0]} to ${
+      releasesArray[releasesArray.length - 1]
+    }`
+  );
   return releasesArray;
 }
 
 async function getCommitsBetweenTwoTags(startCommit, endCommit, owner, repo) {
-  console.log(
-    `Executing getCommitsBetweenTwoTags fn - ${startCommit} - ${endCommit}}`
-  );
   const result = await request(
     `GET /repos/${owner}/${repo}/compare/${startCommit}...${endCommit}`,
     {
@@ -93,13 +98,30 @@ async function getCommitsBetweenTwoTags(startCommit, endCommit, owner, repo) {
     }
   );
 
+  console.log(
+    `Gathered commits for ${owner}/${repo} from ${startCommit} to ${endCommit}`
+  );
+
   return result.data.commits;
 }
 
 async function getPullRequestForCommit(owner, repo, commit) {
-  console.log(`Executing getPullRequestForCommit fn - ${commit}`);
   const result = await request(
     `GET /repos/${owner}/${repo}/commits/${commit}/pulls`
   );
-  return result.data.map((x) => x.number);
+
+  const pullRequestList = result.data.map((x) => x.number);
+
+  console.log(
+    `Found ${pullRequestList.length} pull requests for commit ${commit} in ${owner}/${repo}:`
+  );
+  pullRequestList.forEach((pullRequestNumber, index) => {
+    console.log(
+      `${
+        index + 1
+      }. https://www.github.com/carbon-design-system/carbon/pull/${pullRequestNumber}`
+    );
+  });
+
+  return pullRequestList;
 }
