@@ -18,6 +18,7 @@ const TableExpandHeader = ({
   className: headerClassName,
   enableExpando,
   enableToggle,
+  id = 'expand',
   isExpanded,
   onExpand,
   expandIconDescription,
@@ -33,6 +34,7 @@ const TableExpandHeader = ({
       scope="col"
       className={className}
       data-previous-value={previousValue}
+      id={id}
       {...rest}>
       {enableExpando || enableToggle ? (
         <button
@@ -83,6 +85,11 @@ TableExpandHeader.propTypes = {
    * The description of the chevron right icon, to be put in its SVG `<title>` element.
    */
   expandIconDescription: PropTypes.string,
+
+  /**
+   * Supply an id to the th element.
+   */
+  id: PropTypes.string,
 
   /**
    * Specify whether this row is expanded or not. This helps coordinate data
