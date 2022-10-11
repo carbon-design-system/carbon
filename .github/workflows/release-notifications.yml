@@ -13,7 +13,7 @@ jobs:
       - name: Add release information on pull requests
         uses: ./actions/release-notifications
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
           OWNER: 'carbon-design-system'
           REPO_NAME: 'carbon'
           enabled: true
