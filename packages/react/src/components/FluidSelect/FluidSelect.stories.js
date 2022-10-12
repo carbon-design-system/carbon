@@ -90,6 +90,50 @@ export const Default = () => (
         <SelectItem value="option-4" text="Option 4" />
       </SelectItemGroup>
     </FluidSelect>
+    <br /> <br />
+    <FluidSelect
+      id="select-2"
+      defaultValue="placeholder-item"
+      labelText={ToggleTip}
+      invalid
+      invalidText="Error message that is really long can wrap to more lines but should not be excessively long.">
+      <SelectItem
+        disabled
+        hidden
+        value="placeholder-item"
+        text="Choose an option"
+      />
+      <SelectItemGroup label="Category 1">
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+      </SelectItemGroup>
+      <SelectItemGroup label="Category 2">
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
+      </SelectItemGroup>
+    </FluidSelect>
+    <br /> <br />
+    <FluidSelect
+      id="select-3"
+      defaultValue="placeholder-item"
+      labelText={ToggleTip}
+      warn
+      warnText="Warning message that is really long can wrap to more lines but should not be excessively long.">
+      <SelectItem
+        disabled
+        hidden
+        value="placeholder-item"
+        text="Choose an option"
+      />
+      <SelectItemGroup label="Category 1">
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+      </SelectItemGroup>
+      <SelectItemGroup label="Category 2">
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
+      </SelectItemGroup>
+    </FluidSelect>
   </div>
 );
 
