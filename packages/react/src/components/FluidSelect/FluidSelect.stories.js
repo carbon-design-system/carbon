@@ -7,6 +7,8 @@
 
 import React from 'react';
 import { FluidSelect, FluidSelectSkeleton } from '.';
+import SelectItem from '../SelectItem';
+import SelectItemGroup from '../SelectItemGroup';
 import {
   ToggletipLabel,
   Toggletip,
@@ -18,39 +20,44 @@ import { Information } from '@carbon/icons-react';
 export default {
   title: 'Experimental/unstable__FluidSelect',
   component: FluidSelect,
+  argTypes: {
+    onChange: {
+      action: 'onChange',
+      table: {
+        disable: true,
+      },
+    },
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+    defaultValue: {
+      table: {
+        disable: true,
+      },
+    },
+    id: {
+      table: {
+        disable: true,
+      },
+    },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
-
-const items = [
-  {
-    id: 'option-0',
-    text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
-  },
-  {
-    id: 'option-1',
-    text: 'Option 1',
-  },
-  {
-    id: 'option-2',
-    text: 'Option 2',
-  },
-  {
-    id: 'option-3',
-    text: 'Option 3 - a disabled item',
-    disabled: true,
-  },
-  {
-    id: 'option-4',
-    text: 'Option 4',
-  },
-  {
-    id: 'option-5',
-    text: 'Option 5',
-  },
-];
 
 const ToggleTip = (
   <>
-    <ToggletipLabel>Label</ToggletipLabel>
+    <ToggletipLabel>Select an option</ToggletipLabel>
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
         <Information />
@@ -65,48 +72,45 @@ const ToggleTip = (
 export const Default = () => (
   <div style={{ width: '400px' }}>
     <FluidSelect
-      initialSelectedItem={items[2]}
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
-
-export const Condensed = () => (
-  <div style={{ width: '400px' }}>
-    <FluidSelect
-      id="default"
-      isCondensed
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
+      id="select-1"
+      defaultValue="placeholder-item"
+      labelText={ToggleTip}>
+      <SelectItem
+        disabled
+        hidden
+        value="placeholder-item"
+        text="Choose an option"
+      />
+      <SelectItemGroup label="Category 1">
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+      </SelectItemGroup>
+      <SelectItemGroup label="Category 2">
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
+      </SelectItemGroup>
+    </FluidSelect>
   </div>
 );
 
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
-    <FluidSelect
-      id="default"
-      titleText="Label"
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      {...args}
-    />
-    <br />
-    <FluidSelect
-      {...args}
-      id="default-3"
-      titleText={ToggleTip}
-      label="Choose an option"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
+    <FluidSelect {...args} id="select-1" defaultValue="placeholder-item">
+      <SelectItem
+        disabled
+        hidden
+        value="placeholder-item"
+        text="Choose an option"
+      />
+      <SelectItemGroup label="Category 1">
+        <SelectItem value="option-1" text="Option 1" />
+        <SelectItem value="option-2" text="Option 2" />
+      </SelectItemGroup>
+      <SelectItemGroup label="Category 2">
+        <SelectItem value="option-3" text="Option 3" />
+        <SelectItem value="option-4" text="Option 4" />
+      </SelectItemGroup>
+    </FluidSelect>
   </div>
 );
 
@@ -127,12 +131,6 @@ Playground.argTypes = {
     },
     defaultValue: 'test-class',
   },
-  isCondensed: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   disabled: {
     control: {
       type: 'boolean',
@@ -152,17 +150,11 @@ Playground.argTypes = {
     defaultValue:
       'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
-  label: {
+  labelText: {
     control: {
       type: 'text',
     },
-    defaultValue: 'Choose an option',
-  },
-  titleText: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Label',
+    defaultValue: ToggleTip,
   },
   warn: {
     control: {

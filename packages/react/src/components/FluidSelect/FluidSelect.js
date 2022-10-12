@@ -13,7 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm/FormContext';
 
 const FluidSelect = React.forwardRef(function FluidSelect(
-  { className, ...other },
+  { className, children, ...other },
   ref
 ) {
   const prefix = usePrefix();
@@ -21,7 +21,9 @@ const FluidSelect = React.forwardRef(function FluidSelect(
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>
-      <Select ref={ref} className={classNames} {...other} />
+      <Select ref={ref} className={classNames} {...other}>
+        {children}
+      </Select>
     </FormContext.Provider>
   );
 });
