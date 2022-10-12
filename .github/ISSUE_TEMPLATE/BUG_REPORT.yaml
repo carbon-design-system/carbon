@@ -73,7 +73,7 @@ body:
   - type: dropdown
     id: severity
     attributes:
-      label: Severity
+      label: Suggested Severity
       description:
         'Read more to understand our [severity levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
       options:
