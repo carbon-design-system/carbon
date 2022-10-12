@@ -101,7 +101,7 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
-      - uses: dorny/paths-filter@v2.10.2
+      - uses: dorny/paths-filter@v2.11.0
         id: filter
         with:
           filters: |
