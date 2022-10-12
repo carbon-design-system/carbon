@@ -9,7 +9,7 @@ import React from 'react';
 import ModalWrapper from './ModalWrapper';
 
 export default {
-  title: 'Components/ModalWrapper',
+  title: 'Deprecated/ModalWrapper',
   component: ModalWrapper,
   argTypes: {
     triggerButtonKind: {
