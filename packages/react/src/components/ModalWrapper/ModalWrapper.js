@@ -10,8 +10,19 @@ import React from 'react';
 import Modal from '../Modal';
 import Button from '../Button';
 import { ButtonKinds } from '../../prop-types/types';
+import { warning } from '../../internal/warning';
+
+let didWarnAboutDeprecation = false;
 
 export default class ModalWrapper extends React.Component {
+  if(__DEV__) {
+    warning(
+      didWarnAboutDeprecation,
+      '`<ModalWrapper>` has been deprecated in favor of `<ComposedModal/>` and will be removed in the next major version, `@carbon/react@v2.x`'
+    );
+    didWarnAboutDeprecation = true;
+  }
+
   static propTypes = {
     buttonTriggerClassName: PropTypes.string,
     buttonTriggerText: PropTypes.node,
