@@ -62,7 +62,7 @@ export const Default = () => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              <TableExpandHeader id="expand" />
+              <TableExpandHeader />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
@@ -73,7 +73,7 @@ export const Default = () => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>
+                <TableExpandRow {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
@@ -114,7 +114,6 @@ export const BatchExpansion = () => (
           <TableHead>
             <TableRow>
               <TableExpandHeader
-                id="expand"
                 enableExpando={true}
                 {...getExpandHeaderProps()}
               />
@@ -128,7 +127,7 @@ export const BatchExpansion = () => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>
+                <TableExpandRow {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
@@ -278,7 +277,7 @@ export const Playground = (args) => (
         <Table {...getTableProps()}>
           <TableHead>
             <TableRow>
-              <TableExpandHeader id="expand" />
+              <TableExpandHeader />
               {headers.map((header, i) => (
                 <TableHeader key={i} {...getHeaderProps({ header })}>
                   {header.header}
@@ -289,7 +288,7 @@ export const Playground = (args) => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow expandHeader="expand" {...getRowProps({ row })}>
+                <TableExpandRow {...getRowProps({ row })}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}
