@@ -37,8 +37,6 @@ body:
     attributes:
       label: Application/PAL
       description: "What application and/or PAL do you work on?"
-    validations:
-      required: true  
   - type: dropdown
     id: priority
     attributes:
