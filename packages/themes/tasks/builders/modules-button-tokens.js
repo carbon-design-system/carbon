@@ -8,7 +8,7 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { TokenFormat, group } = require('../../src/tokens');
+const { TokenFormat } = require('../../src/tokens');
 const { buttonTokens } = require('../../src/component-tokens/button');
 const { FILE_BANNER, primitive } = require('./shared');
 const { paramCase } = require('change-case');
