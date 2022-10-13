@@ -28,6 +28,7 @@ import TileGroup from '../TileGroup';
 import RadioTile from '../RadioTile';
 import Link from '../Link';
 import mdx from './Tile.mdx';
+import { Layer } from '../Layer';
 
 const radioValues = {
   None: '',
@@ -165,7 +166,9 @@ export const Expandable = () => (
     <TileBelowTheFoldContent>
       <div style={{ height: '400px' }}>
         Below the fold content here
-        <TextInput id="test2" invalidText="A valid value is required" />
+        <Layer>
+          <TextInput id="test2" invalidText="A valid value is required" />
+        </Layer>
       </div>
     </TileBelowTheFoldContent>
   </ExpandableTile>
