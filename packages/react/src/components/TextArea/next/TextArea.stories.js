@@ -15,6 +15,13 @@ export default {
   subcomponents: {
     TextAreaSkeleton,
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => (
