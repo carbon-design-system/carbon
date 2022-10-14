@@ -5,26 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
-import {
-  Tabs as TabsNext,
-  TabPanel,
-  TabPanels,
-  TabList,
-  IconTab,
-  Tab,
-} from './Tabs';
-import { Tabs as TabsClassic } from './Tabs';
-import { default as TabsSkeletonClassic } from './Tabs.Skeleton';
-import { default as TabsSkeletonNext } from './Tabs.Skeleton';
-
-const Tabs = FeatureFlags.enabled('enable-v11-release')
-  ? TabsNext
-  : TabsClassic;
-
-const TabsSkeleton = FeatureFlags.enabled('enable-v11-release')
-  ? TabsSkeletonNext
-  : TabsSkeletonClassic;
+import { Tabs, TabPanel, TabPanels, TabList, IconTab, Tab } from './Tabs';
+import { default as TabsSkeleton } from './Tabs.Skeleton';
 
 export { TabsSkeleton, TabPanels, TabPanel, TabList, IconTab, Tab };
 
