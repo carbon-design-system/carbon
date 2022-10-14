@@ -20,7 +20,7 @@ const TableExpandRow = ({
   onExpand,
   expandIconDescription,
   isSelected,
-  expandHeader,
+  expandHeader = 'expand',
   ...rest
 }) => {
   const prefix = usePrefix();
@@ -90,10 +90,6 @@ TableExpandRow.propTypes = {
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand: PropTypes.func.isRequired,
-};
-
-TableExpandRow.defaultProps = {
-  expandHeader: 'expand',
 };
 
 export default TableExpandRow;

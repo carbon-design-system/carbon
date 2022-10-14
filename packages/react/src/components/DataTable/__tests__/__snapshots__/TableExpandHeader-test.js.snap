@@ -25,6 +25,7 @@ exports[`DataTable.TableExpandHeader should render 1`] = `
               >
                 <th
                   className="cds--table-expand custom-class"
+                  id="expand"
                   scope="col"
                 />
               </TableExpandHeader>
