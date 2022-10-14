@@ -115,7 +115,7 @@ test.describe('Tile', () => {
     await expect(page).toHaveNoACViolations('Tile');
   });
 
-  test('accessibility-checker @avt', async ({ page }) => {
+  test('accessibility-checker selectable tile @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'SelectableTile',
       id: 'components-tile--selectable',
