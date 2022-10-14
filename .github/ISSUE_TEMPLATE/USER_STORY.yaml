@@ -1,0 +1,56 @@
+name: (Carbon core team ONLY) User story
+description:
+  Write a user story to begin solving their needs.
+title: '[YOUR TITLE]: Brief description'
+body:
+  - type: markdown
+    attributes:
+      value: "Avoid any type of solutions in this user story."
+  - type: markdown
+    attributes:
+      value: "Consider the following when writing Acceptance criteria for this story:
+
+      - Each product backlog item or user story should have at least one Acceptance criteria.
+
+      - Acceptance criteria defines a deliverable that can be completed in a single sprint.
+
+      - Each Acceptance criterion is independently testable.
+
+      - Include functional as well as non-functional criteria – when relevant.
+
+      - Team members write Acceptance criteria and the Product Owner verifies it."
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User story
+      value: "> As a `[user role below]`:
+
+
+    > I need to:
+
+
+    > so that I can:"
+    validations:
+      required: true
+  - type: textarea
+    id: additional-information
+    attributes:
+      label: Additional information
+      value: "- _{{user research}}_
+
+- _{{user insights}}_
+
+- _{{user metrics}}_"
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance criteria
+      value: "- [ ] _{{State acceptance criteria}}_
+
+- [ ] _{{State another}}_
+
+- [ ] _{{And another}}_"
+    validations:
+      required: true

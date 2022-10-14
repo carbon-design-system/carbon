@@ -7,6 +7,7 @@
 
 import React from 'react';
 import FluidTextInput from '../FluidTextInput';
+import FluidTextInputSkeleton from './FluidTextInput.Skeleton';
 import {
   ToggletipLabel,
   Toggletip,
@@ -22,7 +23,22 @@ export default {
 };
 
 export const Default = () => (
-  <FluidTextInput labelText="Label" placeholder="Placeholder text" />
+  <FluidTextInput
+    labelText="Label"
+    placeholder="Placeholder text"
+    id="input-1"
+  />
+);
+
+export const PasswordInput = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTextInput
+      id="input-2"
+      labelText="Label"
+      placeholder="Placeholder text"
+      isPassword
+    />
+  </div>
 );
 
 const ToggleTip = (
@@ -41,6 +57,16 @@ const ToggleTip = (
 
 export const DefaultWithTooltip = () => (
   <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
+);
+
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTextInputSkeleton
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-1"
+    />
+  </div>
 );
 
 export const Playground = (args) => (
@@ -83,6 +109,12 @@ Playground.argTypes = {
     },
     defaultValue:
       'Error message that is really long can wrap to more lines but should not be excessively long.',
+  },
+  isPassword: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
   disabled: {
     control: {

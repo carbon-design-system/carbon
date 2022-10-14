@@ -22,7 +22,6 @@ exports[`DataTable.TableExpandRow should render 1`] = `
           <TableExpandRow
             ariaLabel="Aria label"
             className="custom-class"
-            expandHeader="expand"
             isExpanded={false}
             onExpand={[MockFunction]}
           >

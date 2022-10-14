@@ -1,0 +1,21 @@
+name: Release Notifications
+
+on:
+  release:
+    types: [released]
+
+jobs:
+  post-comments:
+    name: Post notification comments on PRs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Add release information on pull requests
+        uses: ./actions/release-notifications
+        with:
+          GITHUB_TOKEN: ${{ secrets.GH_BOT_TOKEN }}
+          OWNER: 'carbon-design-system'
+          REPO_NAME: 'carbon'
+          enabled: true
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}

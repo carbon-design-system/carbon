@@ -200,6 +200,9 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="http://jakubfaliszewski.github.io/portfolio/"><img src="https://avatars.githubusercontent.com/u/25402419?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jakub Faliszewski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jakubfaliszewski" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/francinelucca"><img src="https://avatars.githubusercontent.com/u/40550942?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Francine Lucca</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=francinelucca" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/commits?author=francinelucca" title="Documentation">📖</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/hannelevaltanen"><img src="https://avatars.githubusercontent.com/u/26527460?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hannele Valtanen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=hannelevaltanen" title="Code">💻</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->

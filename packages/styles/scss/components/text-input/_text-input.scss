@@ -194,9 +194,13 @@
   }
 
   .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
-    svg {
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     cursor: not-allowed;
+  }
+
+  .#{$prefix}--text-input:disabled
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg {
     fill: $icon-disabled;
 
     &:hover {
@@ -403,5 +407,15 @@
   .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
     svg {
     @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--text-input__label-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .#{$prefix}--text-input__label-counter {
+      align-self: end;
+    }
   }
 }
