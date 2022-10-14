@@ -104,7 +104,6 @@ export const Playground = (args) => (
       itemToString={(item) => (item ? item.text : '')}
       {...args}
     />
-    <br />
     <FluidMultiSelect
       {...args}
       onChange={() => {}}

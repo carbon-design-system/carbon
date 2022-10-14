@@ -87,6 +87,7 @@
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus {
     @include focus-outline('outline');
 
+    z-index: 2;
     outline-offset: 0;
   }
 
@@ -105,6 +106,7 @@
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:not(.#{$prefix}--list-box__wrapper--fluid--focus) {
     @include focus-outline('invalid');
 
+    z-index: 2;
     outline-offset: 0;
   }
 
