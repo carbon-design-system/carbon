@@ -139,7 +139,7 @@ export default class Pagination extends Component {
     /**
      * The translatable text showing the current page.
      */
-    pageText: PropTypes.func,
+    pageText: PropTypes.string,
 
     /**
      * `true` if the total number of items is unknown.
@@ -170,7 +170,7 @@ export default class Pagination extends Component {
     pagesUnknown: false,
     isLastPage: false,
     itemText: (min, max) => `${min}–${max} items`,
-    pageText: (page) => `page ${page}`,
+    pageText: 'page',
   };
 
   static getDerivedStateFromProps(
@@ -359,6 +359,14 @@ export default class Pagination extends Component {
                 </span>
               </div>
               <div className={`${prefix}--pagination__right`}>
+                {pagesUnknown && (
+                  <label
+                    id={`${prefix}-pagination-select-${inputId}-right-label`}
+                    className={`${prefix}--pagination__text ${prefix}--pagination__page-text`}
+                    htmlFor={`${prefix}-pagination-select-${inputId}-right`}>
+                    {pageText}
+                  </label>
+                )}
                 <Select
                   id={`${prefix}-pagination-select-${inputId}-right`}
                   className={`${prefix}--select__page-number`}
@@ -370,11 +378,11 @@ export default class Pagination extends Component {
                   disabled={pageInputDisabled || disabled}>
                   {selectItems}
                 </Select>
-                <span className={`${prefix}--pagination__text`}>
-                  {pagesUnknown
-                    ? pageText(statePage)
-                    : pageRangeText(statePage, totalPages)}
-                </span>
+                {!pagesUnknown && (
+                  <span className={`${prefix}--pagination__text`}>
+                    {pageRangeText(statePage, totalPages)}
+                  </span>
+                )}
                 <div className={`${prefix}--pagination__control-buttons`}>
                   <Button
                     kind="ghost"

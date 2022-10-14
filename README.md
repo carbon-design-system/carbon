@@ -202,6 +202,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/hannelevaltanen"><img src="https://avatars.githubusercontent.com/u/26527460?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hannele Valtanen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=hannelevaltanen" title="Code">💻</a></td>
+    <td align="center"><a href="https://61130061.github.io/llam4u-terminal/"><img src="https://avatars.githubusercontent.com/u/54393468?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Llam4u</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=61130061" title="Code">💻</a> <a href="https://github.com/carbon-design-system/carbon/issues?q=author%3A61130061" title="Bug reports">🐛</a></td>
   </tr>
 </table>
 

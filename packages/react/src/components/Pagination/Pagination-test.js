@@ -273,7 +273,7 @@ describe('Pagination', () => {
 
         it('should show the current page without the total number of pages', () => {
           const label = right.find(`.${prefix}--pagination__text`).first();
-          expect(label.text()).toBe('page 1');
+          expect(label.text()).toBe('page');
         });
 
         it('should have two buttons for navigation', () => {

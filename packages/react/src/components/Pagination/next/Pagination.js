@@ -67,7 +67,7 @@ const Pagination = React.forwardRef(function Pagination(
     pageSize: controlledPageSize,
     pageSizeInputDisabled,
     pageSizes: controlledPageSizes,
-    pageText = (page) => `page ${page}`,
+    pageText = 'page',
     pagesUnknown = false,
     size = 'md',
     totalItems,
@@ -251,6 +251,14 @@ const Pagination = React.forwardRef(function Pagination(
         </span>
       </div>
       <div className={`${prefix}--pagination__right`}>
+        {pagesUnknown && (
+          <label
+            id={`${prefix}-pagination-select-${inputId}-right-label`}
+            className={`${prefix}--pagination__text ${prefix}--pagination__page-text`}
+            htmlFor={`${prefix}-pagination-select-${inputId}-right`}>
+            {pageText}
+          </label>
+        )}
         <Select
           id={`${prefix}-pagination-select-${inputId}-right`}
           className={`${prefix}--select__page-number`}
@@ -262,9 +270,11 @@ const Pagination = React.forwardRef(function Pagination(
           disabled={pageInputDisabled || disabled}>
           {selectItems}
         </Select>
-        <span className={`${prefix}--pagination__text`}>
-          {pagesUnknown ? pageText(page) : pageRangeText(page, totalPages)}
-        </span>
+        {!pagesUnknown && (
+          <span className={`${prefix}--pagination__text`}>
+            {pageRangeText(page, totalPages)}
+          </span>
+        )}
         <div className={`${prefix}--pagination__control-buttons`}>
           <IconButton
             align="top"
@@ -388,7 +398,7 @@ Pagination.propTypes = {
   /**
    * The translatable text showing the current page.
    */
-  pageText: PropTypes.func,
+  pageText: PropTypes.string,
 
   /**
    * `true` if the total number of items is unknown.
