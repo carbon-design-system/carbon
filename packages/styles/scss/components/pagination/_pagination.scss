@@ -170,6 +170,10 @@
     margin-left: 1rem;
   }
 
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text:empty {
+    margin: 0;
+  }
+
   .#{$prefix}--pagination__left {
     padding: 0 $spacing-05 0 0;
 

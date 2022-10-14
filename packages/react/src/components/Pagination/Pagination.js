@@ -139,7 +139,7 @@ export default class Pagination extends Component {
     /**
      * The translatable text showing the current page.
      */
-    pageText: PropTypes.string,
+    pageText: PropTypes.func,
 
     /**
      * `true` if the total number of items is unknown.
@@ -170,7 +170,9 @@ export default class Pagination extends Component {
     pagesUnknown: false,
     isLastPage: false,
     itemText: (min, max) => `${min}–${max} items`,
-    pageText: 'page',
+    pageText: (page, pagesUnknown) => {
+      return `page ${pagesUnknown ? '' : page}`;
+    },
   };
 
   static getDerivedStateFromProps(
@@ -359,14 +361,14 @@ export default class Pagination extends Component {
                 </span>
               </div>
               <div className={`${prefix}--pagination__right`}>
-                {pagesUnknown && (
-                  <label
-                    id={`${prefix}-pagination-select-${inputId}-right-label`}
-                    className={`${prefix}--pagination__text ${prefix}--pagination__page-text`}
-                    htmlFor={`${prefix}-pagination-select-${inputId}-right`}>
-                    {pageText}
-                  </label>
-                )}
+                {pagesUnknown ? (
+                  <span
+                    className={`${prefix}--pagination__text ${prefix}--pagination__page-text`}>
+                    {pagesUnknown
+                      ? pageText(statePage, pagesUnknown)
+                      : pageRangeText(statePage, totalPages)}
+                  </span>
+                ) : null}
                 <Select
                   id={`${prefix}-pagination-select-${inputId}-right`}
                   className={`${prefix}--select__page-number`}
@@ -378,9 +380,11 @@ export default class Pagination extends Component {
                   disabled={pageInputDisabled || disabled}>
                   {selectItems}
                 </Select>
-                {!pagesUnknown && (
+                {pagesUnknown ? null : (
                   <span className={`${prefix}--pagination__text`}>
-                    {pageRangeText(statePage, totalPages)}
+                    {pagesUnknown
+                      ? pageText(statePage, pagesUnknown)
+                      : pageRangeText(statePage, totalPages)}
                   </span>
                 )}
                 <div className={`${prefix}--pagination__control-buttons`}>

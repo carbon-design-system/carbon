@@ -5184,7 +5184,7 @@ Map {
         "type": "oneOfType",
       },
       "pageText": Object {
-        "type": "string",
+        "type": "func",
       },
       "pagesUnknown": Object {
         "type": "bool",

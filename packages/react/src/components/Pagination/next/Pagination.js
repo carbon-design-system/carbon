@@ -67,7 +67,9 @@ const Pagination = React.forwardRef(function Pagination(
     pageSize: controlledPageSize,
     pageSizeInputDisabled,
     pageSizes: controlledPageSizes,
-    pageText = 'page',
+    pageText = (page, pagesUnknown) => {
+      return `page ${pagesUnknown ? '' : page}`;
+    },
     pagesUnknown = false,
     size = 'md',
     totalItems,
@@ -251,14 +253,14 @@ const Pagination = React.forwardRef(function Pagination(
         </span>
       </div>
       <div className={`${prefix}--pagination__right`}>
-        {pagesUnknown && (
-          <label
-            id={`${prefix}-pagination-select-${inputId}-right-label`}
-            className={`${prefix}--pagination__text ${prefix}--pagination__page-text`}
-            htmlFor={`${prefix}-pagination-select-${inputId}-right`}>
-            {pageText}
-          </label>
-        )}
+        {pagesUnknown ? (
+          <span
+            className={`${prefix}--pagination__text ${prefix}--pagination__page-text`}>
+            {pagesUnknown
+              ? pageText(page, pagesUnknown)
+              : pageRangeText(page, totalPages)}
+          </span>
+        ) : null}
         <Select
           id={`${prefix}-pagination-select-${inputId}-right`}
           className={`${prefix}--select__page-number`}
@@ -270,9 +272,11 @@ const Pagination = React.forwardRef(function Pagination(
           disabled={pageInputDisabled || disabled}>
           {selectItems}
         </Select>
-        {!pagesUnknown && (
+        {pagesUnknown ? null : (
           <span className={`${prefix}--pagination__text`}>
-            {pageRangeText(page, totalPages)}
+            {pagesUnknown
+              ? pageText(page, pagesUnknown)
+              : pageRangeText(page, totalPages)}
           </span>
         )}
         <div className={`${prefix}--pagination__control-buttons`}>
@@ -398,7 +402,7 @@ Pagination.propTypes = {
   /**
    * The translatable text showing the current page.
    */
-  pageText: PropTypes.string,
+  pageText: PropTypes.func,
 
   /**
    * `true` if the total number of items is unknown.
