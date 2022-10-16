@@ -1,6 +1,6 @@
 import './FlexGrid.stories.scss';
 import React from 'react';
-import { FlexGrid, Row, Column } from './index';
+import { FlexGrid, Row, Column } from './';
 import mdx from './FlexGrid.mdx';
 
 export default {
