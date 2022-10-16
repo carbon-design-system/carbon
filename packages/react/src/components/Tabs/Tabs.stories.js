@@ -31,9 +31,9 @@ export default {
   },
 };
 
-export const Default = (args) => (
+export const Default = () => (
   <Tabs>
-    <TabList aria-label="List of tabs" {...args}>
+    <TabList aria-label="List of tabs">
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
       <Tab disabled>Tab Label 3</Tab>
@@ -64,9 +64,9 @@ export const Default = (args) => (
   </Tabs>
 );
 
-export const Manual = (args) => (
+export const Manual = () => (
   <Tabs>
-    <TabList activation="manual" aria-label="List of tabs" {...args}>
+    <TabList activation="manual" aria-label="List of tabs">
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
       <Tab disabled>Tab Label 3</Tab>
@@ -101,9 +101,9 @@ export const Manual = (args) => (
   </Tabs>
 );
 
-export const Icon20Only = (args) => (
+export const Icon20Only = () => (
   <Tabs>
-    <TabList iconSize="lg" aria-label="List of tabs" {...args}>
+    <TabList iconSize="lg" aria-label="List of tabs">
       <IconTab label="Monster" disabled>
         <Monster size={20} aria-label="Monster" />
       </IconTab>
@@ -122,9 +122,9 @@ export const Icon20Only = (args) => (
   </Tabs>
 );
 
-export const IconOnly = (args) => (
+export const IconOnly = () => (
   <Tabs>
-    <TabList iconSize="default" aria-label="List of tabs" {...args}>
+    <TabList iconSize="default" aria-label="List of tabs">
       <IconTab label="Monster" disabled>
         <Monster aria-label="Monster" />
       </IconTab>
@@ -143,9 +143,9 @@ export const IconOnly = (args) => (
   </Tabs>
 );
 
-export const Contained = (args) => (
+export const Contained = () => (
   <Tabs>
-    <TabList aria-label="List of tabs" contained {...args}>
+    <TabList aria-label="List of tabs" contained>
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
       <Tab disabled>Tab Label 3</Tab>
@@ -179,9 +179,9 @@ export const Contained = (args) => (
   </Tabs>
 );
 
-export const Skeleton = (args) => {
+export const Skeleton = () => {
   return (
-    <div style={{ maxWidth: '100%' }} {...args}>
+    <div style={{ maxWidth: '100%' }}>
       <TabsSkeleton />
     </div>
   );
