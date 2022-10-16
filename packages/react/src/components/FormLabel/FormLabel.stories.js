@@ -8,7 +8,7 @@
 import React from 'react';
 
 import FormLabel from './FormLabel';
-import { Tooltip } from '../Tooltip/Tooltip';
+import { Tooltip } from '../Tooltip/next/Tooltip';
 import { Information } from '@carbon/icons-react';
 import { ActionableNotification } from '../Notification';
 import { Toggletip, ToggletipButton, ToggletipContent } from '../Toggletip';
