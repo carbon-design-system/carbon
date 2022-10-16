@@ -13,19 +13,30 @@ import {
   ExpandableTile,
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
-} from '../Tile';
-import { shallow, mount } from 'enzyme';
+} from './Tile';
+
+import Link from '../Link';
+import { render, cleanup, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import '@testing-library/jest-dom';
+import { mount } from 'enzyme';
 
 const prefix = 'cds';
 
-describe('Tile', () => {
-  describe('Renders default tile as expected', () => {
-    const wrapper = shallow(
-      <Tile className="extra-class">
-        <div className="child">Test</div>
+describe('Default', () => {
+  afterEach(cleanup);
+
+  it('adds extra classes that are passed via className', () => {
+    render(
+      <Tile className="🚀">
+        Default tile
+        <br />
+        <br />
+        <Link href="https://www.carbondesignsystem.com">Link</Link>
       </Tile>
     );
 
+<<<<<<< HEAD
     it('renders children as expected', () => {
       expect(wrapper.find('.child').length).toBe(1);
     });
@@ -33,14 +44,24 @@ describe('Tile', () => {
     it('renders extra classes passed in via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
+=======
+    expect(screen.getByText('Default tile').classList.contains('🚀')).toBe(
+      true
+    );
+>>>>>>> e0562a3f7... chore(react): updated tile and stories
   });
+});
 
-  describe('Renders clickable tile as expected', () => {
-    const wrapper = mount(
-      <ClickableTile className="extra-class">
-        <div className="child">Test</div>
+describe('ClickableTile', () => {
+  afterEach(cleanup);
+
+  it('renders with a link', () => {
+    render(
+      <ClickableTile href="https://www.carbondesignsystem.com">
+        Clickable Tile
       </ClickableTile>
     );
+<<<<<<< HEAD
 
     beforeEach(() => {
       wrapper.state().clicked = false;
@@ -95,77 +116,83 @@ describe('Tile', () => {
       wrapper.setProps({ clicked: true });
       expect(wrapper.state().clicked).toEqual(false);
     });
+=======
+    expect(screen.getByRole('link')).toBeInTheDocument();
+>>>>>>> e0562a3f7... chore(react): updated tile and stories
+  });
+});
+
+describe('Multi Select', () => {
+  afterEach(cleanup);
+
+  it('does not invoke the click handler if SelectableTile is disabled', () => {
+    const onClick = jest.fn();
+    render(
+      <div role="group" aria-label="selectable tiles">
+        <SelectableTile
+          id="tile-1"
+          name="tiles"
+          value="value"
+          onClick={onClick}
+          disabled>
+          <span role="img" aria-label="vertical traffic light">
+            🚦
+          </span>
+        </SelectableTile>
+      </div>
+    );
+    const tile = screen.getByText('🚦');
+    userEvent.click(tile);
+    expect(onClick).not.toHaveBeenCalled();
   });
 
-  describe('Renders selectable tile as expected', () => {
-    let wrapper;
-    let label;
-
-    beforeEach(() => {
-      wrapper = mount(
-        <SelectableTile className="extra-class" onClick={jest.fn()}>
-          <div className="child">Test</div>
+  it('should cycle elements in document tab order', () => {
+    render(
+      <div role="group" aria-label="selectable tiles">
+        <SelectableTile
+          data-testid="element"
+          id="tile-1"
+          name="tiles"
+          value="value">
+          tile 1
         </SelectableTile>
-      );
-      label = wrapper.find('label');
-    });
+        <SelectableTile
+          data-testid="element"
+          id="tile-2"
+          name="tiles"
+          value="value">
+          tile 2
+        </SelectableTile>
+        <SelectableTile
+          data-testid="element"
+          id="tile-3"
+          name="tiles"
+          value="value">
+          tile 3
+        </SelectableTile>
+      </div>
+    );
+    const [id1, id2, id3] = screen.getAllByTestId('element');
+    expect(document.body).toHaveFocus();
 
-    it('renders children as expected', () => {
-      expect(wrapper.find('.child').length).toBe(1);
-    });
+    userEvent.tab();
 
-    it('renders extra classes passed in via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
-    });
+    expect(id1).toHaveFocus();
 
-    it('toggles the selectable state on click', () => {
-      expect(wrapper.hasClass(`${prefix}--tile--is-selected`)).toEqual(false);
-      label.simulate('click');
-      expect(wrapper.props().onClick).toHaveBeenCalledTimes(1);
-      expect(wrapper.render().hasClass(`${prefix}--tile--is-selected`)).toEqual(
-        true
-      );
-    });
+    userEvent.tab();
 
-    it('toggles the selectable state when using enter or space', () => {
-      expect(wrapper.hasClass(`${prefix}--tile--is-selected`)).toEqual(false);
-      label.simulate('keydown', { which: 32 });
-      expect(wrapper.render().hasClass(`${prefix}--tile--is-selected`)).toEqual(
-        true
-      );
-      label.simulate('keydown', { which: 13 });
-      expect(wrapper.render().hasClass(`${prefix}--tile--is-selected`)).toEqual(
-        false
-      );
-    });
+    expect(id2).toHaveFocus();
 
-    it('the input should be checked when state is selected', () => {
-      label.simulate('click');
-      expect(wrapper.find('input').props().checked).toEqual(true);
-    });
+    userEvent.tab();
 
-    it('supports setting initial selected state from props', () => {
-      expect(
-        shallow(<SelectableTile selected />)
-          .render()
-          .hasClass(`${prefix}--tile--is-selected`)
-      ).toEqual(true);
-    });
+    expect(id3).toHaveFocus();
 
-    it('supports setting selected state from props', () => {
-      wrapper.setProps({ selected: true });
-      expect(wrapper.render().hasClass(`${prefix}--tile--is-selected`)).toEqual(
-        true
-      );
-    });
+    userEvent.tab();
 
-    it('avoids changing selected state upon setting props, unless actual value change is detected', () => {
-      wrapper.setProps({ selected: true });
-      label.simulate('click');
-      wrapper.setProps({ selected: true });
-      expect(wrapper.hasClass(`${prefix}--tile--is-selected`)).toEqual(false);
-    });
+    // cycle goes back to the body element
+    expect(document.body).toHaveFocus();
 
+<<<<<<< HEAD
     it('should call onChange when the checkbox value changes', () => {
       const onChange = jest.fn();
       const wrapper = mount(
@@ -173,25 +200,51 @@ describe('Tile', () => {
           <span id="test-id">test</span>
         </SelectableTile>
       );
+=======
+    userEvent.tab();
 
-      const content = wrapper.find('#test-id');
+    expect(id1).toHaveFocus();
+  });
+});
+>>>>>>> e0562a3f7... chore(react): updated tile and stories
 
-      // Tile becomes selected
-      content.simulate('click');
-      expect(onChange).toHaveBeenCalledTimes(1);
+describe('ExpandableTile', () => {
+  const wrapper = mount(
+    <ExpandableTile className="extra-class">
+      <TileAboveTheFoldContent className="child">
+        <div style={{ height: '200px' }}>Test</div>
+      </TileAboveTheFoldContent>
+      <TileBelowTheFoldContent className="child">
+        <div style={{ height: '500px' }}>Test</div>
+      </TileBelowTheFoldContent>
+    </ExpandableTile>
+  );
 
-      // Tile becomes un-selected
-      content.simulate('click');
-      expect(onChange).toHaveBeenCalledTimes(2);
-    });
-
-    it('supports disabled state', () => {
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.find('input').props().disabled).toEqual(true);
-    });
+  it('renders children as expected', () => {
+    expect(wrapper.props().children.length).toBe(2);
   });
 
-  describe('Renders expandable tile as expected', () => {
+  it('has the expected classes', () => {
+    expect(wrapper.children().hasClass(`${prefix}--tile--expandable`)).toEqual(
+      true
+    );
+  });
+
+  it('renders extra classes passed in via className', () => {
+    expect(wrapper.hasClass('extra-class')).toEqual(true);
+  });
+
+  it('toggles the expandable class on click', () => {
+    expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
+      false
+    );
+    wrapper.simulate('click');
+    expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
+      true
+    );
+  });
+
+  it('displays the default tooltip for the button', () => {
     const wrapper = mount(
       <ExpandableTile className="extra-class">
         <TileAboveTheFoldContent className="child">
@@ -199,152 +252,97 @@ describe('Tile', () => {
         </TileAboveTheFoldContent>
         <TileBelowTheFoldContent className="child">
           <div style={{ height: '500px' }}>Test</div>
-          <a id="test-link" href="/">
-            Test Link
-          </a>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    );
+    const defaultExpandedIconText = 'Interact to collapse Tile';
+    const defaultCollapsedIconText = 'Interact to expand Tile';
+
+    // Force the expanded tile to be collapsed.
+    wrapper.setProps({ expanded: false });
+    const collapsedDescription = wrapper.find('button').prop('title');
+    expect(collapsedDescription).toEqual(defaultCollapsedIconText);
+
+    // click on the item to expand it.
+    wrapper.simulate('click');
+
+    // Validate the description change
+    const expandedDescription = wrapper.find('button').prop('title');
+    expect(expandedDescription).toEqual(defaultExpandedIconText);
+  });
+
+  it('displays the custom tooltips for the button depending on state', () => {
+    const wrapper = mount(
+      <ExpandableTile className="extra-class">
+        <TileAboveTheFoldContent className="child">
+          <div style={{ height: '200px' }}>Test</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent className="child">
+          <div style={{ height: '500px' }}>Test</div>
         </TileBelowTheFoldContent>
       </ExpandableTile>
     );
 
-    beforeEach(() => {
-      wrapper.state().expanded = false;
+    const tileExpandedIconText = 'Click To Collapse';
+    const tileCollapsedIconText = 'Click To Expand';
+
+    // Force the custom icon text and the expanded tile to be collapsed.
+    wrapper.setProps({
+      tileExpandedIconText,
+      tileCollapsedIconText,
+      expanded: false,
     });
 
-    it('renders children as expected', () => {
-      expect(wrapper.props().children.length).toBe(2);
-    });
+    const collapsedDescription = wrapper.find('button').prop('title');
 
-    it('has the expected classes', () => {
-      expect(
-        wrapper.children().hasClass(`${prefix}--tile--expandable`)
-      ).toEqual(true);
-    });
+    expect(collapsedDescription).toEqual(tileCollapsedIconText);
 
-    it('renders extra classes passed in via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
-    });
+    // click on the item to expand it.
+    wrapper.simulate('click');
 
-    it('toggles the expandable class on click', () => {
-      expect(
-        wrapper.children().hasClass(`${prefix}--tile--is-expanded`)
-      ).toEqual(false);
-      wrapper.simulate('click');
-      expect(
-        wrapper.children().hasClass(`${prefix}--tile--is-expanded`)
-      ).toEqual(true);
-    });
+    // Validate the description change
+    const expandedDescription = wrapper.find('button').prop('title');
+    expect(expandedDescription).toEqual(tileExpandedIconText);
+  });
 
-    it('toggles the expandable state on click', () => {
-      expect(wrapper.state().expanded).toEqual(false);
-      wrapper.simulate('click');
-      expect(wrapper.state().expanded).toEqual(true);
-    });
+  it('supports setting initial expanded state from props', () => {
+    const wrapper = mount(
+      <ExpandableTile expanded>
+        <TileAboveTheFoldContent className="child">
+          <div style={{ height: '200px' }}>Test</div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent className="child">
+          <div style={{ height: '500px' }}>Test</div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
+    );
+    expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
+      true
+    );
+  });
 
-    it('ignores allows click events to be ignored using onBeforeClick', () => {
-      wrapper.setProps({
-        onBeforeClick: (evt) => evt.target.tagName.toLowerCase() !== 'a', // ignore link clicks
-      });
-      expect(wrapper.state().expanded).toEqual(false);
-      wrapper.simulate('click');
-      expect(wrapper.state().expanded).toEqual(true);
-      wrapper.find('#test-link').simulate('click');
-      expect(wrapper.state().expanded).toEqual(true);
-      wrapper.simulate('click');
-      expect(wrapper.state().expanded).toEqual(false);
-    });
-
-    it('displays the default tooltip for the button depending on state', () => {
-      const defaultExpandedIconText = 'Interact to collapse Tile';
-      const defaultCollapsedIconText = 'Interact to expand Tile';
-
-      // Force the expanded tile to be collapsed.
-      wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find('button').prop('title');
-      expect(collapsedDescription).toEqual(defaultCollapsedIconText);
-
-      // click on the item to expand it.
-      wrapper.simulate('click');
-
-      // Validate the description change
-      const expandedDescription = wrapper.find('button').prop('title');
-      expect(expandedDescription).toEqual(defaultExpandedIconText);
-    });
-
-    it('displays the custom tooltips for the button depending on state', () => {
-      const tileExpandedIconText = 'Click To Collapse';
-      const tileCollapsedIconText = 'Click To Expand';
-
-      // Force the custom icon text
-      wrapper.setProps({ tileExpandedIconText, tileCollapsedIconText });
-
-      // Force the expanded tile to be collapsed.
-      wrapper.setState({ expanded: false });
-      const collapsedDescription = wrapper.find('button').prop('title');
-
-      expect(collapsedDescription).toEqual(tileCollapsedIconText);
-
-      // click on the item to expand it.
-      wrapper.simulate('click');
-
-      // Validate the description change
-      const expandedDescription = wrapper.find('button').prop('title');
-      expect(expandedDescription).toEqual(tileExpandedIconText);
-    });
-
-    it('supports setting initial expanded state from props', () => {
-      const { expanded } = mount(
-        <ExpandableTile expanded>
-          <TileAboveTheFoldContent className="child">
-            <div style={{ height: '200px' }}>Test</div>
-          </TileAboveTheFoldContent>
-          <TileBelowTheFoldContent className="child">
-            <div style={{ height: '500px' }}>Test</div>
-          </TileBelowTheFoldContent>
-        </ExpandableTile>
-      ).state();
-      expect(expanded).toEqual(true);
-    });
-
-    it('supports setting expanded state from props', () => {
-      wrapper.setProps({ expanded: true });
-      wrapper.setState({ expanded: true });
-      wrapper.setProps({ expanded: false });
-      expect(wrapper.state().expanded).toEqual(false);
-    });
-
-    it('avoids changing expanded state upon setting props, unless actual value change is detected', () => {
-      wrapper.setProps({ expanded: true });
-      wrapper.setState({ expanded: false });
-      wrapper.setProps({ expanded: true });
-      expect(wrapper.state().expanded).toEqual(false);
-    });
-
-    it('supports setting max height from props', () => {
-      wrapper.setProps({ tileMaxHeight: 2 });
-      wrapper.setState({ tileMaxHeight: 2 });
-      wrapper.setProps({ tileMaxHeight: 1 });
-      expect(wrapper.state().tileMaxHeight).toEqual(1);
-    });
-
-    it('avoids changing max height upon setting props, unless actual value change is detected', () => {
-      wrapper.setProps({ tileMaxHeight: 2 });
-      wrapper.setState({ tileMaxHeight: 1 });
-      wrapper.setProps({ tileMaxHeight: 2 });
-      expect(wrapper.state().tileMaxHeight).toEqual(1);
-    });
-
-    it('supports setting padding from props', () => {
-      wrapper.setProps({ tilePadding: 2 });
-      wrapper.setState({ tilePadding: 2 });
-      wrapper.setProps({ tilePadding: 1 });
-      expect(wrapper.state().tilePadding).toEqual(1);
-    });
-
+<<<<<<< HEAD
     it('avoids changing padding upon setting props, unless actual value change is detected', () => {
       wrapper.setProps({ tilePadding: 2 });
       wrapper.setState({ tilePadding: 1 });
       wrapper.setProps({ tilePadding: 2 });
       expect(wrapper.state().tilePadding).toEqual(1);
     });
+=======
+  it('supports setting expanded state from props', () => {
+    wrapper.setProps({ expanded: true });
+    expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
+      true
+    );
+
+    wrapper.setProps({ expanded: false });
+    expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
+      false
+    );
+>>>>>>> e0562a3f7... chore(react): updated tile and stories
   });
 });
+
+// Todo: Testing for a disabled ClickableTile
+// Todo: Testing for ExpandableTile
+// Todo: Testing for RadioTile

@@ -6,10 +6,10 @@
  */
 
 import React from 'react';
-import Link from '../../Link';
-import Button from '../../Button';
-import { default as TextInput } from '../../TextInput';
-import { default as RadioTile } from '../../RadioTile';
+import Link from '../Link';
+import Button from '../Button';
+import { default as TextInput } from '../TextInput';
+import { default as RadioTile } from '../RadioTile';
 import {
   ClickableTile,
   ExpandableTile,
@@ -17,11 +17,11 @@ import {
   Tile,
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
-} from '../';
-import TileGroup from '../../TileGroup/TileGroup';
-import { Layer } from '../../Layer';
+} from './';
+import TileGroup from '../TileGroup/TileGroup';
+import { Layer } from '../Layer';
 import './tile-story.scss';
-import mdx from '../Tile.mdx';
+import mdx from './Tile.mdx';
 
 export default {
   title: 'Components/Tile',
@@ -34,13 +34,6 @@ export default {
     TileGroup,
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
-  },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
   },
   parameters: {
     docs: {
