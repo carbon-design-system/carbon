@@ -64,19 +64,7 @@ Nested.storyName = 'nested';
 
 export const Playground = (args) => (
   <UnorderedList {...args}>
-    <ListItem>
-      Unordered List level 1
-      <UnorderedList nested>
-        <ListItem>Unordered List level 2</ListItem>
-        <ListItem>
-          Unordered List level 2
-          <UnorderedList nested>
-            <ListItem>Unordered List level 2</ListItem>
-            <ListItem>Unordered List level 2</ListItem>
-          </UnorderedList>
-        </ListItem>
-      </UnorderedList>
-    </ListItem>
+    <ListItem>Unordered List level 1</ListItem>
     <ListItem>Unordered List level 1</ListItem>
     <ListItem>Unordered List level 1</ListItem>
   </UnorderedList>
