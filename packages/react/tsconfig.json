@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "composite": true,
     "target": "ES6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -14,10 +13,13 @@
     "resolveJsonModule": true,
     "jsx": "react-jsx",
     "emitDeclarationOnly": true,
+    "declaration": true,
     // use linting instead
     "noUnusedLocals": false,
     "noUnusedParameters": false,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    // TODO: Turn back on once stricter typings for internal utitlies are complete
+    "noImplicitAny": false
   },
   "include": ["src/**/*", "icons/**/*"],
   "exclude": ["node_modules", "build"]
