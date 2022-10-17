@@ -6,13 +6,10 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { PolymorphicProps } from '../../types/common';
 import { TextDir } from './TextDirection';
-import {
-  TextDirectionContext,
-  useTextDirectionContext,
-} from './TextDirectionContext';
+import { TextDirectionContext } from './TextDirectionContext';
 
 export interface TextBaseProps {
   dir?: TextDir | undefined;
@@ -28,7 +25,8 @@ function Text<T extends React.ElementType>({
   dir = 'auto',
   ...rest
 }: TextProps<T>) {
-  const context = useTextDirectionContext();
+  // TODO: Update with context typing once its been converted to TS
+  const context = useContext<any>(TextDirectionContext);
   const textProps: { dir?: TextDir } = {};
   const BaseComponent = as ?? 'span';
   const value = {
