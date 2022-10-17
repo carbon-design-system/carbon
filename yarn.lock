@@ -5,22 +5,13 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@actions/core@npm:^1.10.0":
+"@actions/core@npm:^1.10.0, @actions/core@npm:^1.2.3, @actions/core@npm:^1.8.2":
   version: 1.10.0
   resolution: "@actions/core@npm:1.10.0"
   dependencies:
     "@actions/http-client": ^2.0.1
     uuid: ^8.3.2
   checksum: 0a75621e007ab20d887434cdd165f0b9036f14c22252a2faed33543d8b9d04ec95d823e69ca636a25245574e4585d73e1e9e47a845339553c664f9f2c9614669
-  languageName: node
-  linkType: hard
-
-"@actions/core@npm:^1.2.3, @actions/core@npm:^1.8.2":
-  version: 1.8.2
-  resolution: "@actions/core@npm:1.8.2"
-  dependencies:
-    "@actions/http-client": ^2.0.1
-  checksum: 1cd1a47f751501900a579e641565bbe13a09d626507a4fa46b51e6a959a74a89134490ae7311570ed8ec1735ada83bcfde81a456ea4d2e24e323c16e94e39fd1
   languageName: node
   linkType: hard
 
@@ -4576,22 +4567,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/core@npm:^3.5.1":
-  version: 3.5.1
-  resolution: "@octokit/core@npm:3.5.1"
-  dependencies:
-    "@octokit/auth-token": ^2.4.4
-    "@octokit/graphql": ^4.5.8
-    "@octokit/request": ^5.6.0
-    "@octokit/request-error": ^2.0.5
-    "@octokit/types": ^6.0.3
-    before-after-hook: ^2.2.0
-    universal-user-agent: ^6.0.0
-  checksum: 67179739fc9712b201f2400f132287a2c56a18506e00900bc9d2a3f742b74f1ba69ad998e42f28f3964c0bd1d5478232c1ec7b485c97702b821fbe22b76afa90
-  languageName: node
-  linkType: hard
-
-"@octokit/core@npm:^3.6.0":
+"@octokit/core@npm:^3.5.1, @octokit/core@npm:^3.6.0":
   version: 3.6.0
   resolution: "@octokit/core@npm:3.6.0"
   dependencies:
@@ -4702,18 +4678,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-paginate-rest@npm:^2.16.8":
-  version: 2.17.0
-  resolution: "@octokit/plugin-paginate-rest@npm:2.17.0"
-  dependencies:
-    "@octokit/types": ^6.34.0
-  peerDependencies:
-    "@octokit/core": ">=2"
-  checksum: c8753cda6f7ede79d0e9df43a54e56020aa1c9c6887684e0e0d45cb6ee0dcabf460c3e4b8a18edabef711bb269fd826616e99e78dc29fb30d47c210c562603a0
-  languageName: node
-  linkType: hard
-
-"@octokit/plugin-paginate-rest@npm:^2.17.0":
+"@octokit/plugin-paginate-rest@npm:^2.16.8, @octokit/plugin-paginate-rest@npm:^2.17.0":
   version: 2.21.3
   resolution: "@octokit/plugin-paginate-rest@npm:2.21.3"
   dependencies:
@@ -4754,19 +4719,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-rest-endpoint-methods@npm:^5.12.0":
-  version: 5.13.0
-  resolution: "@octokit/plugin-rest-endpoint-methods@npm:5.13.0"
-  dependencies:
-    "@octokit/types": ^6.34.0
-    deprecation: ^2.3.1
-  peerDependencies:
-    "@octokit/core": ">=3"
-  checksum: f331457e4317130adb456b27df2a99609fb54a4dc2da6f87009e567c7325680c901abf18ad08483535bab4ec1c892e4236f4135a2804603aebb12c0698c678c8
-  languageName: node
-  linkType: hard
-
-"@octokit/plugin-rest-endpoint-methods@npm:^5.13.0":
+"@octokit/plugin-rest-endpoint-methods@npm:^5.12.0, @octokit/plugin-rest-endpoint-methods@npm:^5.13.0":
   version: 5.16.2
   resolution: "@octokit/plugin-rest-endpoint-methods@npm:5.16.2"
   dependencies:
@@ -4845,21 +4798,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/request@npm:^5.2.0, @octokit/request@npm:^5.6.0":
-  version: 5.6.2
-  resolution: "@octokit/request@npm:5.6.2"
-  dependencies:
-    "@octokit/endpoint": ^6.0.1
-    "@octokit/request-error": ^2.1.0
-    "@octokit/types": ^6.16.1
-    is-plain-object: ^5.0.0
-    node-fetch: ^2.6.1
-    universal-user-agent: ^6.0.0
-  checksum: 51ef3ad244b3d89ffd6d997fa0ed3e13a7a93b4c868ce5c53b0fcc93a654965135528e62d0720ebfeb7dfd586448a4a45d08fd75ba2e170cfa19d37834e49f1f
-  languageName: node
-  linkType: hard
-
-"@octokit/request@npm:^5.6.3":
+"@octokit/request@npm:^5.2.0, @octokit/request@npm:^5.6.0, @octokit/request@npm:^5.6.3":
   version: 5.6.3
   resolution: "@octokit/request@npm:5.6.3"
   dependencies:
@@ -4944,7 +4883,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^6.0.3, @octokit/types@npm:^6.16.1, @octokit/types@npm:^6.34.0, @octokit/types@npm:^6.39.0, @octokit/types@npm:^6.40.0, @octokit/types@npm:^6.41.0":
+"@octokit/types@npm:^6.0.3, @octokit/types@npm:^6.16.1, @octokit/types@npm:^6.39.0, @octokit/types@npm:^6.40.0, @octokit/types@npm:^6.41.0":
   version: 6.41.0
   resolution: "@octokit/types@npm:6.41.0"
   dependencies:
