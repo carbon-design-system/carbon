@@ -135,4 +135,24 @@
     .#{$prefix}--select--fluid--focus.#{$prefix}--select--warning {
     border-bottom: 1px solid transparent;
   }
+
+  // Disabled state
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-button {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-button
+    svg {
+    fill: $icon-disabled;
+  }
 }
