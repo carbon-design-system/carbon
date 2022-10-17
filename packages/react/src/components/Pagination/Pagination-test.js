@@ -1,447 +1,203 @@
-/**
- * Copyright IBM Corp. 2016, 2018
- *
- * This source code is licensed under the Apache-2.0 license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
 import React from 'react';
-import { CaretRight, CaretLeft } from '@carbon/icons-react';
-import Pagination from '../Pagination';
-import Select from '../Select';
-import SelectItem from '../SelectItem';
-import { mount } from 'enzyme';
-
-const prefix = 'cds';
-
-jest.useFakeTimers();
+import Pagination from './Pagination';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 describe('Pagination', () => {
-  describe('renders as expected', () => {
-    const pagination = mount(
-      <Pagination className="extra-class" pageSizes={[5, 10]} totalItems={50} />
-    );
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto outermost element', () => {
+      const { container } = render(
+        <Pagination data-testid="test-id" pageSizes={[10]} />
+      );
 
-    describe('icons', () => {
-      const iconTypes = [CaretLeft, CaretRight];
-      const icons = pagination.findWhere((n) => iconTypes.includes(n.type()));
-
-      it('should have 2 icons', () => {
-        expect(icons.length).toEqual(2);
-      });
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
     });
 
-    describe('pagination container', () => {
-      it('should render the expected classes', () => {
-        expect(pagination.childAt(0).hasClass(`${prefix}--pagination`)).toBe(
-          true
-        );
-        expect(pagination.childAt(0).hasClass('extra-class')).toBe(true);
-      });
+    it('should label icon with backwardText', () => {
+      render(<Pagination backwardText="Move backwards" pageSizes={[10]} />);
+
+      expect(screen.getByText('Move backwards')).toBeDefined();
     });
 
-    describe('pagination size container', () => {
-      const left = pagination.find(`.${prefix}--pagination__left`);
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(
+        <Pagination className="custom-class" pageSizes={[10]} />
+      );
 
-      it('should render a left container', () => {
-        expect(left.length).toBe(1);
-      });
-
-      it('should have a size dropdown', () => {
-        const select = left.find(Select);
-        const items = select.find(SelectItem);
-        expect(select.length).toBe(1);
-        expect(items.length).toBe(2);
-        expect(items.at(0).props().value).toBe(5);
-        expect(items.at(1).props().value).toBe(10);
-      });
-
-      it('should label the dropdown', () => {
-        const label = left.find(`.${prefix}--pagination__text`).first();
-        expect(label.text()).toBe('Items per page:');
-      });
-
-      it('should show the item range out of the total', () => {
-        const label = left.find(`.${prefix}--pagination__text`).at(1);
-        expect(label.text()).toBe('1–5 of 50 items');
-      });
-
-      describe('pagination size container when total pages unknown', () => {
-        const pager = mount(
-          <Pagination pageSizes={[5, 10]} pagesUnknown={true} />
-        );
-        const left = pager.find(`.${prefix}--pagination__left`);
-
-        it('should render a left container', () => {
-          expect(left.length).toBe(1);
-        });
-
-        it('should have a size dropdown', () => {
-          const select = left.find(Select);
-          const items = select.find(SelectItem);
-          expect(select.length).toBe(1);
-          expect(items.length).toBe(2);
-          expect(items.at(0).props().value).toBe(5);
-          expect(items.at(1).props().value).toBe(10);
-        });
-
-        it('should label the dropdown', () => {
-          const label = left.find(`.${prefix}--pagination__text`).first();
-          expect(label.text()).toBe('Items per page:');
-        });
-
-        it('should show the item range without the total', () => {
-          const label = left.find(`.${prefix}--pagination__text`).at(1);
-          expect(label.text()).toBe('1–5 items');
-        });
-      });
-
-      describe('pagination sizing', () => {
-        it('should respond to page size changes', () => {
-          let actualPageSize;
-          const handler = ({ pageSize }) => {
-            actualPageSize = pageSize;
-          };
-          const pager = mount(
-            <Pagination
-              pageSizes={[5, 10]}
-              totalItems={50}
-              onChange={handler}
-            />
-          );
-          expect(pager.state().pageSize).toBe(5);
-          pager
-            .find('select')
-            .first()
-            .simulate('change', { target: { value: 10 } });
-          expect(actualPageSize).toBe(10);
-          expect(pager.state().pageSize).toBe(10);
-
-          // Text updates after change
-          const labels = pager.find(`.${prefix}--pagination__text`);
-          expect(labels.at(1).text()).toBe('1–10 of 50 items');
-          expect(labels.at(2).text()).toBe('of 5 pages');
-        });
-
-        it('should reset the page when page size changes', () => {
-          let actualPage;
-          const handler = ({ page }) => {
-            actualPage = page;
-          };
-          const pager = mount(
-            <Pagination
-              pageSizes={[5, 10]}
-              totalItems={50}
-              onChange={handler}
-            />
-          );
-          pager.setState({ page: 2 });
-          expect(pager.state().page).toBe(2);
-          pager
-            .find('select')
-            .first()
-            .simulate('change', { target: { value: 10 } });
-          expect(actualPage).toBe(1);
-          expect(pager.state().page).toBe(1);
-        });
-
-        it('should return to first page on changes to pageSizes', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} />
-          );
-          pager.setState({ page: 2 });
-          pager.setProps({ pageSizes: [3, 6] });
-          expect(pager.state().page).toEqual(1);
-        });
-
-        it('should not return to first page on changes to pageSizes where current pageSize is in new list', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
-          );
-          pager.setState({ page: 2 });
-          pager.setProps({ pageSizes: [5, 10, 20] });
-          expect(pager.state().page).toEqual(2);
-        });
-
-        it('should return to first page on changes to pageSizes where current pageSize is not in new list', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
-          );
-          pager.setState({ page: 2 });
-          pager.setProps({ pageSizes: [25, 50, 100] });
-          expect(pager.state().page).toEqual(1);
-        });
-
-        it('should avoid returning to first page unless actual change in pageSizes is detected', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} />
-          );
-          pager.setState({ page: 2 });
-          pager.setProps({ pageSizes: [5, 10] });
-          expect(pager.state().page).toEqual(2);
-        });
-
-        it('should default to pageSize if pageSize is provided', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
-          );
-          expect(pager.state().pageSize).toEqual(10);
-        });
-
-        it('should default to pageSize if on change to pageSize', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} />
-          );
-          pager.setProps({ pageSize: 10 });
-          expect(pager.state().pageSize).toEqual(10);
-        });
-
-        it('should avoid defaulting to pageSize unless actual change in pageSize is detected', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} pageSize={10} totalItems={50} />
-          );
-          pager.setState({ pageSize: 20 });
-          pager.setProps({ pageSize: 10 });
-          expect(pager.state().pageSize).toEqual(20);
-        });
-      });
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
-    describe('pagination paging container', () => {
-      const right = pagination.find(`.${prefix}--pagination__right`);
+    it('should disable controls with disabled', () => {
+      render(<Pagination disabled pageSizes={[10]} />);
 
-      it('should render a right container', () => {
-        expect(right.length).toBe(1);
-      });
+      expect(
+        screen.getByLabelText('Next page', { hidden: true })
+      ).toHaveAttribute('disabled');
 
-      it('should show the current page out of the total number of pages', () => {
-        const label = right.find(`.${prefix}--pagination__text`).first();
-        expect(label.text()).toBe('of 10 pages');
-      });
-
-      it('should render ranges and pages for no items', () => {
-        const pager = mount(<Pagination pageSizes={[5, 10]} totalItems={0} />);
-        const labels = pager.find(`.${prefix}--pagination__text`);
-        expect(labels.at(1).text()).toBe('0–0 of 0 items');
-        expect(labels.at(2).text()).toBe('of 1 page');
-      });
-
-      it('should have two buttons for navigation', () => {
-        const buttons = right
-          .find(`.${prefix}--pagination__button`)
-          .hostNodes();
-        expect(buttons.length).toBe(2);
-        expect(
-          buttons.at(0).hasClass(`${prefix}--pagination__button--backward`)
-        ).toBe(true);
-        expect(
-          buttons.at(1).hasClass(`${prefix}--pagination__button--forward`)
-        ).toBe(true);
-      });
-
-      it('should disable backward navigation for the first page', () => {
-        const buttons = right
-          .find(`.${prefix}--pagination__button`)
-          .hostNodes();
-        expect(buttons.at(0).props().disabled).toBe(true);
-        expect(buttons.at(1).props().disabled).toBe(false);
-      });
-
-      it('should disable forward navigation for the last page', () => {
-        const smallPage = mount(
-          <Pagination
-            className="extra-class"
-            pageSizes={[100]}
-            totalItems={50}
-          />
-        );
-        const buttons = smallPage.find(`.${prefix}--pagination__button`);
-        expect(buttons.at(0).props().disabled).toBe(true);
-        expect(buttons.at(1).props().disabled).toBe(true);
-      });
-
-      describe('pagination paging container when total pages unknown', () => {
-        const pager = mount(
-          <Pagination pageSizes={[5, 10]} pagesUnknown={true} />
-        );
-
-        const right = pager.find(`.${prefix}--pagination__right`);
-
-        it('should render a right container', () => {
-          expect(right.length).toBe(1);
-        });
-
-        it('should show the current page without the total number of pages', () => {
-          const label = right.find(`.${prefix}--pagination__text`).first();
-          expect(label.text()).toBe('page 1');
-        });
-
-        it('should have two buttons for navigation', () => {
-          const buttons = right
-            .find(`.${prefix}--pagination__button`)
-            .hostNodes();
-          expect(buttons.length).toBe(2);
-          expect(
-            buttons.at(0).hasClass(`${prefix}--pagination__button--backward`)
-          ).toBe(true);
-          expect(
-            buttons.at(1).hasClass(`${prefix}--pagination__button--forward`)
-          ).toBe(true);
-        });
-
-        it('should disable backward navigation for the first page', () => {
-          const buttons = right
-            .find(`.${prefix}--pagination__button`)
-            .hostNodes();
-          expect(buttons.at(0).props().disabled).toBe(true);
-          expect(buttons.at(1).props().disabled).toBe(false);
-        });
-
-        it('should disable forward navigation for the last page', () => {
-          const smallPage = mount(
-            <Pagination
-              pageSizes={[100]}
-              pagesUnknown={true}
-              isLastPage={true}
-            />
-          );
-          const buttons = smallPage.find(`.${prefix}--pagination__button`);
-          expect(buttons.at(0).props().disabled).toBe(true);
-          expect(buttons.at(1).props().disabled).toBe(true);
-        });
-
-        it('should hide text input if disabled', () => {
-          const noTextInput = mount(
-            <Pagination pageSizes={[100]} pagesUnknown={true} disabled={true} />
-          );
-          const right = noTextInput.find(
-            `.${prefix}--pagination__right .${prefix}--text__input`
-          );
-          expect(right.length).toEqual(0);
-        });
-
-        it('should append `pagination__button--no-index` class if input is disabled', () => {
-          const pagination = mount(
-            <Pagination
-              page={2}
-              pageSizes={[100]}
-              pagesUnknown={true}
-              disabled={true}
-            />
-          );
-          const forwardButton = pagination
-            .find(`.${prefix}--pagination__button--forward`)
-            .first();
-          const backwardButton = pagination
-            .find(`.${prefix}--pagination__button--backward`)
-            .first();
-          expect(
-            backwardButton.hasClass(`${prefix}--pagination__button--no-index`)
-          ).toEqual(true);
-          expect(
-            forwardButton.hasClass(`${prefix}--pagination__button--no-index`)
-          ).toEqual(true);
-        });
-      });
-
-      describe('pagination navigation', () => {
-        it('should go to the next page when clicking forward', () => {
-          let actualPage;
-          const handler = ({ page }) => {
-            actualPage = page;
-          };
-          const pager = mount(
-            <Pagination
-              pageSizes={[5, 10]}
-              totalItems={50}
-              onChange={handler}
-            />
-          );
-          expect(pager.state().page).toBe(1);
-          pager
-            .find(`.${prefix}--pagination__button--forward`)
-            .hostNodes()
-            .simulate('click');
-          expect(actualPage).toBe(2);
-          expect(pager.state().page).toBe(2);
-        });
-
-        it('should go to the previous page when clicking backward', () => {
-          let actualPage;
-          const handler = ({ page }) => {
-            actualPage = page;
-          };
-          const pager = mount(
-            <Pagination
-              pageSizes={[5, 10]}
-              totalItems={50}
-              onChange={handler}
-            />
-          );
-          pager.setState({ page: 2 });
-          expect(pager.state().page).toBe(2);
-          pager
-            .find(`.${prefix}--pagination__button--backward`)
-            .hostNodes()
-            .simulate('click');
-          expect(actualPage).toBe(1);
-          expect(pager.state().page).toBe(1);
-        });
-
-        it('should jump to the page entered in the input field', () => {
-          let actualPage;
-          const handler = ({ page }) => {
-            actualPage = page;
-          };
-          const pager = mount(
-            <Pagination
-              pageSizes={[5, 10]}
-              totalItems={50}
-              onChange={handler}
-            />
-          );
-          expect(pager.state().page).toBe(1);
-          pager
-            .find('select')
-            .last()
-            .simulate('change', { target: { value: 2 } });
-          jest.runAllTimers();
-          expect(actualPage).toBe(2);
-          expect(pager.state().page).toBe(2);
-        });
-
-        it('should jump to page number if prop page is provided', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} page={3} />
-          );
-          expect(pager.state().page).toBe(3);
-          pager.setProps({ page: 2 });
-          expect(pager.state().page).toBe(2);
-        });
-
-        it('should avoid jumping to page number unless actual change in prop page is detected', () => {
-          const pager = mount(
-            <Pagination pageSizes={[5, 10]} totalItems={50} page={3} />
-          );
-          expect(pager.state().page).toBe(3);
-          pager.setState({ page: 2 });
-          pager.setProps({ page: 3 });
-          expect(pager.state().page).toBe(2);
-        });
-
-        it('should not increment page if there is only 1 page', () => {
-          const pager = mount(<Pagination pageSizes={[10]} totalItems={5} />);
-          const buttons = pager.find(`.${prefix}--pagination__button`);
-          expect(buttons.at(1).props().disabled).toBe(true);
-        });
-      });
+      expect(
+        screen.getByLabelText('Previous page', { hidden: true })
+      ).toHaveAttribute('disabled');
     });
 
-    it('should render with ref', () => {
-      const ref = React.createRef();
-      mount(<Pagination pageSizes={[10]} totalItems={5} forwardedRef={ref} />);
+    it('should label icon with forwardText', () => {
+      render(<Pagination forwardText="forward" pageSizes={[10]} />);
 
-      expect(ref.current).toHaveClass(`${prefix}--pagination`);
+      expect(screen.getByText('forward')).toBeDefined();
+    });
+
+    it('should respect itemRangeText prop', () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={1}
+          itemRangeText={(min, max, total) =>
+            `${min}–${max} de ${total} éléments`
+          }
+        />
+      );
+
+      expect(screen.getByText('1–10 de 40 éléments')).toBeDefined();
+    });
+
+    it('should respect itemText prop', () => {
+      render(
+        <Pagination
+          pagesUnknown
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={1}
+          itemText={(min, max) => `${min}-${max} éléments`}
+        />
+      );
+
+      expect(screen.getByText('1-10 éléments')).toBeDefined();
+    });
+
+    it('should respect itemsPerPageText prop', () => {
+      render(
+        <Pagination pageSizes={[10]} itemsPerPageText={'éléments par page'} />
+      );
+
+      expect(screen.getByText('éléments par page')).toBeDefined();
+    });
+
+    it('should call onChange when approrpiate', () => {
+      const onChange = jest.fn();
+      render(
+        <Pagination
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={3}
+          onChange={onChange}
+        />
+      );
+
+      userEvent.click(screen.getByLabelText('Previous page'));
+      userEvent.click(screen.getByLabelText('Next page'));
+      expect(onChange).toHaveBeenCalledTimes(2);
+    });
+
+    it('should change page based on page', () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={2}
+        />
+      );
+
+      expect(screen.getByText('11–20 of 40 items')).toBeDefined();
+    });
+
+    it('should respect pageInputDisabled prop', () => {
+      render(<Pagination pageSizes={[10]} pageInputDisabled />);
+
+      expect(
+        document.querySelectorAll('.cds--select-input')[1]
+      ).toHaveAttribute('disabled');
+    });
+
+    it('should respect pageRangeText prop', () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20]}
+          pageSize={4}
+          page={2}
+          pagesUnknown={false}
+          pageRangeText={(page, totalPages) => {
+            return `${page} de ${totalPages}`;
+          }}
+        />
+      );
+
+      expect(screen.getByText('2 de 4')).toBeDefined();
+    });
+
+    it('should respect pageSize prop', () => {
+      render(
+        <Pagination
+          totalItems={40}
+          pageSizes={[10, 20, 30, 40]}
+          pageSize={20}
+          page={2}
+        />
+      );
+
+      expect(screen.getByText('21–40 of 40 items')).toBeDefined();
+    });
+
+    it('should respect pageSizeInputDisabled prop', () => {
+      render(
+        <Pagination
+          pageSizes={[10, 20, 30, 40]}
+          totalItems={40}
+          pageSizeInputDisabled
+        />
+      );
+
+      expect(
+        document.querySelectorAll('.cds--select-input')[0]
+      ).toHaveAttribute('disabled');
+    });
+
+    it('should respect pageSizes prop', () => {
+      render(<Pagination pageSizes={[10, 20, 30, 40]} totalItems={40} />);
+
+      expect(screen.getAllByRole('option')[0]).toHaveValue('10');
+      expect(screen.getAllByRole('option')[1]).toHaveValue('20');
+      expect(screen.getAllByRole('option')[2]).toHaveValue('30');
+      expect(screen.getAllByRole('option')[3]).toHaveValue('40');
+    });
+
+    it('should respect pageText prop', () => {
+      const page = 1;
+      render(
+        <Pagination
+          pageText={(page) => `página ${page}`}
+          pageSizes={[10, 20]}
+          page={page}
+          pagesUnknown={true}
+        />
+      );
+
+      expect(screen.getByText(`página ${page}`)).toBeInTheDocument();
+    });
+
+    it('should respect size prop', () => {
+      const { container } = render(<Pagination size="sm" pageSizes={[10]} />);
+
+      expect(container.firstChild).toHaveClass('cds--pagination--sm');
+    });
+
+    it('should respect totalItems prop', () => {
+      const total = 40;
+      render(<Pagination totalItems={total} pageSizes={[10]} />);
+
+      expect(screen.getByText(`1–10 of ${total} items`)).toBeInTheDocument();
     });
   });
 });
