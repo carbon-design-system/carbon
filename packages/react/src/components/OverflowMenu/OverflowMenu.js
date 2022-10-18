@@ -235,8 +235,8 @@ class OverflowMenu extends Component {
   static defaultProps = {
     ariaLabel: FeatureFlags.enabled('enable-v11-release')
       ? null
-      : 'open and close list of options',
-    iconDescription: 'open and close list of options',
+      : 'Open and close list of options',
+    iconDescription: 'Open and close list of options',
     open: false,
     direction: DIRECTION_BOTTOM,
     flipped: false,

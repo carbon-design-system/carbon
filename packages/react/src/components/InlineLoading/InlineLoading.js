@@ -18,7 +18,7 @@ export default function InlineLoading({
   iconDescription,
   description,
   onSuccess,
-  successDelay,
+  successDelay = 1500,
   ...other
 }) {
   const prefix = usePrefix();
@@ -109,7 +109,4 @@ InlineLoading.propTypes = {
    * Provide a delay for the `setTimeout` for success
    */
   successDelay: PropTypes.number,
-};
-InlineLoading.defaultProps = {
-  successDelay: 1500,
 };

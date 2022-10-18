@@ -6,34 +6,13 @@
  */
 
 import React, { useState } from 'react';
-import { action } from '@storybook/addon-actions';
-import { withKnobs, number, select, text } from '@storybook/addon-knobs';
 import Button from '../Button';
-import InlineLoading from '../InlineLoading';
+import InlineLoading from '.';
 import mdx from './InlineLoading.mdx';
-
-const props = () => ({
-  status: select(
-    'Loading status (status)',
-    ['inactive', 'active', 'finished', 'error'],
-    'active'
-  ),
-  iconDescription: text('Icon description (iconDescription)', 'loading'),
-  description: text(
-    'Loading progress description (description)',
-    'Loading data...'
-  ),
-  successDelay: number(
-    'The duration for successful state before `onSuccess` fires (successDelay)',
-    1500
-  ),
-  onSuccess: action('onSuccess'),
-});
 
 export default {
   title: 'Components/InlineLoading',
   component: InlineLoading,
-  decorators: [withKnobs],
   parameters: {
     docs: {
       page: mdx,
@@ -41,9 +20,13 @@ export default {
   },
 };
 
-export const _InlineLoading = () => <InlineLoading {...props()} />;
-
-_InlineLoading.storyName = 'Inline loading';
+export const Default = () => (
+  <InlineLoading
+    status="active"
+    iconDescription="Loading"
+    description="Loading data..."
+  />
+);
 
 export const UxExample = () => {
   function MockSubmission({ children }) {
@@ -79,14 +62,6 @@ export const UxExample = () => {
     });
   }
 
-  MockSubmission.displayName = 'InlineLoading';
-  MockSubmission.__docgenInfo = {
-    ...InlineLoading.__docgenInfo,
-    props: {
-      ...InlineLoading.__docgenInfo.props,
-    },
-  };
-
   return (
     <MockSubmission>
       {({ handleSubmit, isSubmitting, success, description, ariaLive }) => (
@@ -110,4 +85,34 @@ export const UxExample = () => {
   );
 };
 
-UxExample.storyName = 'UX example';
+export const Playground = (args) => <InlineLoading {...args} />;
+
+Playground.argTypes = {
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  description: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Loading',
+  },
+  iconDescription: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Loading data...',
+  },
+  onSuccess: {
+    table: {
+      disable: true,
+    },
+  },
+  successDelay: {
+    table: {
+      disable: true,
+    },
+  },
+};
