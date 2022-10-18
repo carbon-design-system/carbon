@@ -16,6 +16,23 @@ import { Stack } from '../Stack';
 export default {
   title: 'Components/FormGroup',
   component: FormGroup,
+  argTypes: {
+    legendId: {
+      table: {
+        disable: true,
+      },
+    },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => (
