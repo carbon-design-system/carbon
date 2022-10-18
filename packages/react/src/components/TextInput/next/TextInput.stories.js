@@ -125,7 +125,7 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Invalid text',
+    defaultValue: 'Error message goes here',
   },
   disabled: {
     control: {
