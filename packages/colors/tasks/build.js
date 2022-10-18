@@ -117,6 +117,7 @@ async function build() {
         properties: Object.keys(colors).map((key) => {
           const swatch = paramCase(key);
           return t.SassMapProperty({
+            quoted: true,
             key: t.Identifier(swatch),
             value: t.SassMap({
               properties: Object.keys(colors[key]).map((grade) => {

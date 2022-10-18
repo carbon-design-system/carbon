@@ -114,4 +114,15 @@ test.describe('Tile', () => {
     });
     await expect(page).toHaveNoACViolations('Tile');
   });
+
+  test('accessibility-checker selectable tile @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'SelectableTile',
+      id: 'components-tile--selectable',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('SelectableTile');
+  });
 });
