@@ -16,19 +16,19 @@ $button-separator: (
   values: (
     (
       theme: themes.$white,
-      value: map.get(button.$button-primary, white-theme),
+      value: map.get(button.$button-separator, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: map.get(button.$button-primary, g-10),
+      value: map.get(button.$button-separator, g-10),
     ),
     (
       theme: themes.$g90,
-      value: map.get(button.$button-primary, g-90),
+      value: map.get(button.$button-separator, g-90),
     ),
     (
       theme: themes.$g100,
-      value: map.get(button.$button-primary, g-100),
+      value: map.get(button.$button-separator, g-100),
     ),
   ),
 ) !default;
