@@ -5,6 +5,22 @@
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "module": "es/index.js",
+  "exports": {
+    ".": {
+      "node": "./lib/index.js",
+      "import": "./es/index.js",
+      "require": "./lib/index.js",
+      "default": ["./lib/index.js", "./index.scss"]
+    },
+    "./scss": "./index.scss",
+    "./scss/*": "./scss/*",
+    "./icons": {
+      "node": "./icons/index.js",
+      "import": "./icons/index.esm.js",
+      "require": "./icons/index.js",
+      "default": "./icons/index.js"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/carbon-design-system/carbon.git",
