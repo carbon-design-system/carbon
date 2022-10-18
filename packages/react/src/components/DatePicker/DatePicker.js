@@ -422,13 +422,13 @@ function DatePicker({
   }, [dateFormat]);
 
   useEffect(() => {
-    if (calendarRef.current && minDate) {
+    if (calendarRef.current) {
       calendarRef.current.set('minDate', minDate);
     }
   }, [minDate]);
 
   useEffect(() => {
-    if (calendarRef.current && maxDate) {
+    if (calendarRef.current) {
       calendarRef.current.set('maxDate', maxDate);
     }
   }, [maxDate]);

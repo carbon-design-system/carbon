@@ -1688,6 +1688,9 @@ Map {
         "expandIconDescription": Object {
           "type": "string",
         },
+        "id": Object {
+          "type": "string",
+        },
         "isExpanded": [Function],
         "onExpand": Object {
           "args": Array [
@@ -1701,9 +1704,6 @@ Map {
       },
     },
     "TableExpandRow": Object {
-      "defaultProps": Object {
-        "expandHeader": "expand",
-      },
       "propTypes": Object {
         "ariaLabel": Object {
           "isRequired": true,
@@ -3830,9 +3830,6 @@ Map {
     "render": [Function],
   },
   "InlineLoading" => Object {
-    "defaultProps": Object {
-      "successDelay": 1500,
-    },
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -7052,6 +7049,9 @@ Map {
       "expandIconDescription": Object {
         "type": "string",
       },
+      "id": Object {
+        "type": "string",
+      },
       "isExpanded": [Function],
       "onExpand": Object {
         "args": Array [
@@ -7065,9 +7065,6 @@ Map {
     },
   },
   "TableExpandRow" => Object {
-    "defaultProps": Object {
-      "expandHeader": "expand",
-    },
     "propTypes": Object {
       "ariaLabel": Object {
         "isRequired": true,
