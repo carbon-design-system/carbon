@@ -7,6 +7,8 @@ library:
   externalDocsUrl: https://react.carbondesignsystem.com
   inherits: carbon-styles
   navData:
+    - title: Get started
+      path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/frameworks/react.mdx'
     - title: Tutorial
       items:
         - title: Overview
@@ -23,6 +25,8 @@ library:
           path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/step-5.mdx'
         - title: Wrapping up
           path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/wrapping-up.mdx'
+        - title: FAQ
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/faq.mdx'
 assets:
   accordion:
     status: stable
@@ -480,6 +484,9 @@ assets:
     tags:
       - data-display
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/accessibility.mdx
       overviewPath: ./src/components/OrderedList/docs/overview.mdx
   overflow-menu:
     status: stable
@@ -907,6 +914,9 @@ assets:
     tags:
       - data-display
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/accessibility.mdx
       overviewPath: ./src/components/UnorderedList/docs/overview.mdx
   use-context-menu:
     name: unstable_useContextMenu
