@@ -170,9 +170,7 @@ export default class Pagination extends Component {
     pagesUnknown: false,
     isLastPage: false,
     itemText: (min, max) => `${min}–${max} items`,
-    pageText: (page, pagesUnknown) => {
-      return `page ${pagesUnknown ? '' : page}`;
-    },
+    pageText: (page, pagesUnknown) => `page ${pagesUnknown ? '' : page}`,
   };
 
   static getDerivedStateFromProps(
