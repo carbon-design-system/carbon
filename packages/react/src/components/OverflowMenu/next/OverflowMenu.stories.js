@@ -19,6 +19,11 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
   },
   args: {
     size: 'md',

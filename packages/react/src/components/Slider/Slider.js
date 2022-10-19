@@ -423,7 +423,6 @@ export default class Slider extends PureComponent {
       this.setState({
         value,
         left,
-        needsOnRelease: true,
       });
     }
   };
@@ -445,7 +444,7 @@ export default class Slider extends PureComponent {
     const { value } = evt.target;
 
     this.setState({ isValid: validity });
-    this.props.onBlur({ value });
+    this.props.onBlur?.({ value });
   };
 
   /**

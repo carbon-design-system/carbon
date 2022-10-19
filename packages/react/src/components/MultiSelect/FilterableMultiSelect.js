@@ -19,6 +19,7 @@ import { match, keys } from '../../internal/keyboard';
 import Selection from '../../internal/Selection';
 import { defaultItemToString } from './tools/itemToString';
 import mergeRefs from '../../tools/mergeRefs';
+import deprecate from '../../prop-types/deprecate';
 import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -292,6 +293,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                 if (match(event, keys.Space)) {
                   event.stopPropagation();
                 }
+
+                if (match(event, keys.Tab)) {
+                  handleOnMenuChange(false);
+                }
               },
               onFocus: () => {
                 setInputFocused(true);
@@ -509,7 +514,11 @@ FilterableMultiSelect.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `FilterableMultiSelect` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the locale of the control. Used for the default `compareItems`
@@ -592,7 +601,6 @@ FilterableMultiSelect.defaultProps = {
   itemToString: defaultItemToString,
   locale: 'en',
   sortItems: defaultSortItems,
-  light: false,
   open: false,
   selectionFeedback: 'top-after-reopen',
 };
