@@ -563,9 +563,7 @@ Map {
       "hideCopyButton": Object {
         "type": "bool",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "maxCollapsedNumberOfRows": Object {
         "type": "number",
       },
@@ -977,7 +975,6 @@ Map {
       "disabled": false,
       "itemToElement": null,
       "itemToString": [Function],
-      "light": false,
       "shouldFilterItem": [Function],
       "type": "default",
     },
@@ -1162,9 +1159,7 @@ Map {
         "isRequired": true,
         "type": "array",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "isRequired": true,
         "type": "func",
@@ -1323,7 +1318,6 @@ Map {
       "helperText": "",
       "invalid": false,
       "invalidText": "",
-      "light": false,
       "onChange": [Function],
       "onClick": [Function],
       "size": "",
@@ -1371,9 +1365,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -2272,9 +2264,7 @@ Map {
       "inline": Object {
         "type": "bool",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "locale": Object {
         "args": Array [
           Array [
@@ -2537,7 +2527,6 @@ Map {
       "helperText": "",
       "itemToElement": null,
       "itemToString": [Function],
-      "light": false,
       "titleText": "",
       "type": "default",
     },
@@ -2609,9 +2598,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -3063,7 +3050,6 @@ Map {
       "filterItems": [Function],
       "initialSelectedItems": Array [],
       "itemToString": [Function],
-      "light": false,
       "locale": "en",
       "open": false,
       "selectionFeedback": "top-after-reopen",
@@ -3238,9 +3224,7 @@ Map {
         "isRequired": true,
         "type": "array",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "locale": Object {
         "type": "string",
       },
@@ -4291,7 +4275,6 @@ Map {
         "filterItems": [Function],
         "initialSelectedItems": Array [],
         "itemToString": [Function],
-        "light": false,
         "locale": "en",
         "open": false,
         "selectionFeedback": "top-after-reopen",
@@ -4466,9 +4449,7 @@ Map {
           "isRequired": true,
           "type": "array",
         },
-        "light": Object {
-          "type": "bool",
-        },
+        "light": [Function],
         "locale": Object {
           "type": "string",
         },
@@ -4534,7 +4515,6 @@ Map {
       "disabled": false,
       "initialSelectedItems": Array [],
       "itemToString": [Function],
-      "light": false,
       "locale": "en",
       "open": false,
       "selectedItems": null,
@@ -4719,9 +4699,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "locale": Object {
         "type": "string",
       },
@@ -5284,9 +5262,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -7462,7 +7438,6 @@ Map {
       "helperText": "",
       "invalid": false,
       "invalidText": "",
-      "light": false,
       "maxCount": undefined,
       "onChange": [Function],
       "onClick": [Function],
@@ -7514,9 +7489,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "maxCount": Object {
         "type": "number",
       },
@@ -7568,7 +7541,6 @@ Map {
         "helperText": "",
         "invalid": false,
         "invalidText": "",
-        "light": false,
         "onChange": [Function],
         "onClick": [Function],
         "size": "",
@@ -7616,9 +7588,7 @@ Map {
           "isRequired": true,
           "type": "node",
         },
-        "light": Object {
-          "type": "bool",
-        },
+        "light": [Function],
         "onChange": Object {
           "type": "func",
         },
@@ -7726,9 +7696,7 @@ Map {
           "isRequired": true,
           "type": "node",
         },
-        "light": Object {
-          "type": "bool",
-        },
+        "light": [Function],
         "onChange": Object {
           "type": "func",
         },
@@ -7852,9 +7820,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "maxCount": Object {
         "type": "number",
       },
@@ -9377,9 +9343,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "maxCount": Object {
         "type": "number",
       },

@@ -33,19 +33,6 @@ describe('Tile', () => {
     it('renders extra classes passed in via className', () => {
       expect(wrapper.hasClass('extra-class')).toEqual(true);
     });
-
-    it('supports light version', () => {
-      const wrapper = mount(<Tile>Test</Tile>);
-      expect(wrapper.props().light).toEqual(false);
-      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
-        false
-      );
-      wrapper.setProps({ light: true });
-      expect(wrapper.props().light).toEqual(true);
-      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
-        true
-      );
-    });
   });
 
   describe('Renders clickable tile as expected', () => {
@@ -107,19 +94,6 @@ describe('Tile', () => {
       wrapper.setState({ clicked: false });
       wrapper.setProps({ clicked: true });
       expect(wrapper.state().clicked).toEqual(false);
-    });
-
-    it('supports light version', () => {
-      const wrapper = mount(<ClickableTile>Test</ClickableTile>);
-      expect(wrapper.props().light).toEqual(false);
-      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
-        false
-      );
-      wrapper.setProps({ light: true });
-      expect(wrapper.props().light).toEqual(true);
-      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
-        true
-      );
     });
   });
 
@@ -190,15 +164,6 @@ describe('Tile', () => {
       label.simulate('click');
       wrapper.setProps({ selected: true });
       expect(wrapper.hasClass(`${prefix}--tile--is-selected`)).toEqual(false);
-    });
-
-    it('supports light version', () => {
-      const wrapper = mount(<SelectableTile>Test</SelectableTile>);
-      expect(wrapper.props().light).toEqual(false);
-      expect(wrapper.childAt(1).hasClass('cds--tile--light')).toEqual(false);
-      wrapper.setProps({ light: true });
-      expect(wrapper.props().light).toEqual(true);
-      expect(wrapper.childAt(1).hasClass('cds--tile--light')).toEqual(true);
     });
 
     it('should call onChange when the checkbox value changes', () => {
@@ -380,19 +345,6 @@ describe('Tile', () => {
       wrapper.setState({ tilePadding: 1 });
       wrapper.setProps({ tilePadding: 2 });
       expect(wrapper.state().tilePadding).toEqual(1);
-    });
-
-    it('supports light version', () => {
-      const wrapper = mount(<ExpandableTile>Test</ExpandableTile>);
-      expect(wrapper.props().light).toEqual(false);
-      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
-        false
-      );
-      wrapper.setProps({ light: true });
-      expect(wrapper.props().light).toEqual(true);
-      expect(wrapper.childAt(0).hasClass(`${prefix}--tile--light`)).toEqual(
-        true
-      );
     });
   });
 });
