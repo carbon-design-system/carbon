@@ -196,9 +196,6 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
     },
     className
   );
-  const inputClasses = cx(`${prefix}--tile-input`, {
-    [`${prefix}--tile-input--checked`]: isSelected,
-  });
 
   // TODO: rename to handleClick when handleClick prop is deprecated
   function handleOnClick(evt) {
@@ -231,36 +228,30 @@ export const SelectableTile = React.forwardRef(function SelectableTile(
   }
 
   return (
-    <>
-      <input
-        checked={isSelected}
-        className={inputClasses}
-        disabled={disabled}
-        id={id}
-        name={name}
-        onChange={!disabled ? handleChange : null}
-        ref={ref}
-        tabIndex={-1}
-        title={title}
-        type="checkbox"
-        value={value}
-      />
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        className={classes}
-        htmlFor={id}
-        onClick={!disabled ? handleOnClick : null}
-        onKeyDown={!disabled ? handleOnKeyDown : null}
-        // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
-        tabIndex={!disabled ? tabIndex : null}
-        {...rest}>
-        <span
-          className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
-          {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
-        </span>
-        <span className={`${prefix}--tile-content`}>{children}</span>
+    <div
+      className={classes}
+      onClick={!disabled ? handleOnClick : null}
+      role="checkbox"
+      aria-checked={isSelected}
+      disabled={disabled}
+      onKeyDown={!disabled ? handleOnKeyDown : null}
+      // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
+      tabIndex={!disabled ? tabIndex : null}
+      value={value}
+      name={name}
+      ref={ref}
+      id={id}
+      onChange={!disabled ? handleChange : null}
+      title={title}
+      {...rest}>
+      <span
+        className={`${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent`}>
+        {isSelected ? <CheckboxCheckedFilled /> : <Checkbox />}
+      </span>
+      <label htmlFor={id} className={`${prefix}--tile-content`}>
+        {children}
       </label>
-    </>
+    </div>
   );
 });
 
