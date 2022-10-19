@@ -67,9 +67,7 @@ const Pagination = React.forwardRef(function Pagination(
     pageSize: controlledPageSize,
     pageSizeInputDisabled,
     pageSizes: controlledPageSizes,
-    pageText = (page, pagesUnknown) => {
-      return `page ${pagesUnknown ? '' : page}`;
-    },
+    pageText = (page, pagesUnknown) => `page ${pagesUnknown ? '' : page}`,
     pagesUnknown = false,
     size = 'md',
     totalItems,
