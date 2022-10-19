@@ -46,6 +46,11 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
   },
   parameters: {
     docs: {
@@ -169,11 +174,6 @@ Playground.argTypes = {
     },
   },
   itemToString: {
-    table: {
-      disable: true,
-    },
-  },
-  light: {
     table: {
       disable: true,
     },
