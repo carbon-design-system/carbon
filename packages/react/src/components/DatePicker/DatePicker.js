@@ -175,28 +175,31 @@ function updateClassNames(calendar, prefix) {
   }
 }
 
-function DatePicker({
-  allowInput,
-  appendTo,
-  children,
-  className,
-  closeOnSelect = true,
-  dateFormat = 'm/d/Y',
-  datePickerType,
-  disable,
-  enable,
-  inline,
-  light,
-  locale = 'en',
-  maxDate,
-  minDate,
-  onChange,
-  onClose,
-  onOpen,
-  short = false,
-  value,
-  ...rest
-}) {
+const DatePicker = React.forwardRef(function DatePicker(
+  {
+    allowInput,
+    appendTo,
+    children,
+    className,
+    closeOnSelect = true,
+    dateFormat = 'm/d/Y',
+    datePickerType,
+    disable,
+    enable,
+    inline,
+    light = false,
+    locale = 'en',
+    maxDate,
+    minDate,
+    onChange,
+    onClose,
+    onOpen,
+    short = false,
+    value,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
   const startInputField = useRef(null);
   const endInputField = useRef(null);
@@ -465,11 +468,11 @@ function DatePicker({
   }, [value, prefix]);
 
   return (
-    <div className={wrapperClasses} {...rest}>
+    <div className={wrapperClasses} ref={ref} {...rest}>
       <div className={datePickerClasses}>{childrenWithProps}</div>
     </div>
   );
-}
+});
 
 DatePicker.propTypes = {
   /**
