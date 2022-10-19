@@ -88,7 +88,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     [`${prefix}--table-sort`]: true,
     [`${prefix}--table-sort--active`]:
       isSortHeader && sortDirection !== sortStates.NONE,
-    [`${prefix}--table-sort--ascending`]:
+    [`${prefix}--table-sort--descending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { Stack } from '../Stack';
+import { Stack } from './Stack';
 
 export default {
   title: 'Layout/Stack',
@@ -45,9 +45,9 @@ export const Horizontal = () => {
   );
 };
 
-const PlaygroundStory = (props) => {
+export const Playground = (args) => {
   return (
-    <Stack {...props}>
+    <Stack {...args}>
       <div>Item 1</div>
       <div>Item 2</div>
       <div>Item 3</div>
@@ -55,9 +55,13 @@ const PlaygroundStory = (props) => {
   );
 };
 
-export const Playground = PlaygroundStory.bind({});
-
 Playground.argTypes = {
+  as: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'div',
+  },
   gap: {
     options: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
     control: {

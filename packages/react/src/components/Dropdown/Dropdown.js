@@ -16,6 +16,7 @@ import {
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
+import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -328,7 +329,11 @@ Dropdown.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Dropdown` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * `onChange` is a utility for this controlled component to communicate to a
@@ -388,7 +393,6 @@ Dropdown.defaultProps = {
   type: 'default',
   itemToString: defaultItemToString,
   itemToElement: null,
-  light: false,
   titleText: '',
   helperText: '',
   direction: 'bottom',
