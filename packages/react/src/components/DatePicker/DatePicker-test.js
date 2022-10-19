@@ -151,6 +151,13 @@ describe('DatePicker', () => {
       '01/03/2018'
     );
   });
+
+  it('should accept a `ref` for the outermost element', () => {
+    const ref = jest.fn();
+    const { container } = render(<DatePicker ref={ref} />);
+
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
 });
 
 describe('Simple date picker', () => {

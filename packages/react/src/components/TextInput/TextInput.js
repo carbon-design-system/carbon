@@ -11,6 +11,7 @@ import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import PasswordInput from './PasswordInput';
 import ControlledPasswordInput from './ControlledPasswordInput';
+import deprecate from '../../prop-types/deprecate';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -28,7 +29,7 @@ const TextInput = React.forwardRef(function TextInput(
     invalid = false,
     invalidText,
     labelText,
-    light = false,
+    light,
     onChange = () => {},
     onClick = () => {},
     placeholder,
@@ -278,7 +279,11 @@ TextInput.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `TextInput` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Max character count allowed for the input. This is needed in order for enableCounter to display
