@@ -1,6 +1,7 @@
 name: Release Notifications
 
 on:
+  workflow_dispatch:
   release:
     types: [released]
 
