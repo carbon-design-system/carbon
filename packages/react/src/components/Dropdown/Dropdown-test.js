@@ -122,14 +122,6 @@ describe('Dropdown', () => {
     });
   });
 
-  it('should specify light version as expected', () => {
-    render(<Dropdown light={true} {...mockProps} />);
-
-    expect(document.querySelector('.cds--list-box')).toHaveClass(
-      'cds--dropdown--light'
-    );
-  });
-
   it('should let the user select an option by clicking on the option node', () => {
     render(<Dropdown {...mockProps} />);
     openMenu();

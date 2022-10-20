@@ -21,6 +21,7 @@ import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
 import { useFeatureFlag } from '../FeatureFlags';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 const defaultItemToString = (item) => {
@@ -485,7 +486,11 @@ ComboBox.propTypes = {
   /**
    * should use "light theme" (white background)?
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Combobox` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * `onChange` is a utility for this controlled component to communicate to a
@@ -575,7 +580,6 @@ ComboBox.defaultProps = {
   shouldFilterItem: defaultShouldFilterItem,
   type: 'default',
   ariaLabel: 'Choose an item',
-  light: false,
   direction: 'bottom',
 };
 

@@ -8,6 +8,7 @@
 import cx from 'classnames';
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import deprecate from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 import ListBoxField from './ListBoxField';
@@ -123,7 +124,11 @@ ListBox.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `ListBox` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
