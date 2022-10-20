@@ -59,17 +59,10 @@ export const Default = () => {
 };
 
 const PlaygroundStory = (props) => {
-  const { align, defaultOpen, definition } = props;
   return (
     <p>
       This sentence contains a{' '}
-      <DefinitionTooltip
-        align={align}
-        defaultOpen={defaultOpen}
-        definition={definition}>
-        definition tooltip
-      </DefinitionTooltip>
-      .
+      <DefinitionTooltip {...props}>definition tooltip</DefinitionTooltip>.
     </p>
   );
 };
@@ -87,6 +80,14 @@ Playground.argTypes = {
       'bottom',
       'bottom-left',
       'bottom-right',
+
+      'left',
+      'left-bottom',
+      'left-top',
+
+      'right',
+      'right-bottom',
+      'right-top',
     ],
     control: {
       type: 'select',
@@ -100,5 +101,11 @@ Playground.argTypes = {
       type: 'text',
     },
     defaultValue: 'Example definition',
+  },
+  openOnHover: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
   },
 };

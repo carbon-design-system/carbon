@@ -14,6 +14,7 @@ import DatePickerInput from '../DatePickerInput';
 import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
+import deprecate from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
@@ -174,28 +175,31 @@ function updateClassNames(calendar, prefix) {
   }
 }
 
-function DatePicker({
-  allowInput,
-  appendTo,
-  children,
-  className,
-  closeOnSelect = true,
-  dateFormat = 'm/d/Y',
-  datePickerType,
-  disable,
-  enable,
-  inline,
-  light = false,
-  locale = 'en',
-  maxDate,
-  minDate,
-  onChange,
-  onClose,
-  onOpen,
-  short = false,
-  value,
-  ...rest
-}) {
+const DatePicker = React.forwardRef(function DatePicker(
+  {
+    allowInput,
+    appendTo,
+    children,
+    className,
+    closeOnSelect = true,
+    dateFormat = 'm/d/Y',
+    datePickerType,
+    disable,
+    enable,
+    inline,
+    light = false,
+    locale = 'en',
+    maxDate,
+    minDate,
+    onChange,
+    onClose,
+    onOpen,
+    short = false,
+    value,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
   const startInputField = useRef(null);
   const endInputField = useRef(null);
@@ -464,11 +468,11 @@ function DatePicker({
   }, [value, prefix]);
 
   return (
-    <div className={wrapperClasses} {...rest}>
+    <div className={wrapperClasses} ref={ref} {...rest}>
       <div className={datePickerClasses}>{childrenWithProps}</div>
     </div>
   );
-}
+});
 
 DatePicker.propTypes = {
   /**
@@ -529,8 +533,11 @@ DatePicker.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
-
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `DatePicker` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
   /**
    *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
    */

@@ -21,6 +21,7 @@ function DefinitionTooltip({
   definition,
   defaultOpen = false,
   id,
+  openOnHover,
   tooltipText,
   triggerClassName,
   ...rest
@@ -44,6 +45,9 @@ function DefinitionTooltip({
       highContrast
       onMouseLeave={() => {
         setOpen(false);
+      }}
+      onMouseEnter={() => {
+        openOnHover ? setOpen(true) : null;
       }}
       open={isOpen}>
       <button
@@ -82,6 +86,14 @@ DefinitionTooltip.propTypes = {
     'bottom',
     'bottom-left',
     'bottom-right',
+
+    'left',
+    'left-bottom',
+    'left-top',
+
+    'right',
+    'right-bottom',
+    'right-top',
   ]),
 
   /**
@@ -110,6 +122,11 @@ DefinitionTooltip.propTypes = {
    * Provide a value that will be assigned as the id of the tooltip
    */
   id: PropTypes.string,
+
+  /**
+   * Specifies whether or not the `DefinitionTooltip` should open on hover or not
+   */
+  openOnHover: PropTypes.bool,
 
   /**
    * [Deprecated in v11] Please use the `definition` prop instead.
