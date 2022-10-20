@@ -19,6 +19,7 @@ import {
 import { VStack } from '../../Stack';
 import Button from '../../Button';
 import ExpandableSearch from '../../ExpandableSearch';
+import { Layer } from '../../Layer';
 import Tag from '../../Tag';
 import { Tooltip } from '../../Tooltip/next';
 
@@ -243,6 +244,53 @@ export const WithIcons = () => {
         <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
       </ContainedList>
+    </VStack>
+  );
+};
+
+export const WithLayer = () => {
+  return (
+    <VStack gap={12}>
+      <VStack gap={5}>
+        <ContainedList label="List title" kind="on-page">
+          <ContainedListItem>List item</ContainedListItem>
+          <ContainedListItem>List item</ContainedListItem>
+        </ContainedList>
+        <Layer>
+          <VStack gap={5}>
+            <ContainedList label="List title" kind="on-page">
+              <ContainedListItem>List item</ContainedListItem>
+              <ContainedListItem>List item</ContainedListItem>
+            </ContainedList>
+            <Layer>
+              <ContainedList label="List title" kind="on-page">
+                <ContainedListItem>List item</ContainedListItem>
+                <ContainedListItem>List item</ContainedListItem>
+              </ContainedList>
+            </Layer>
+          </VStack>
+        </Layer>
+      </VStack>
+      <VStack gap={5}>
+        <ContainedList label="List title" kind="disclosed">
+          <ContainedListItem>List item</ContainedListItem>
+          <ContainedListItem>List item</ContainedListItem>
+        </ContainedList>
+        <Layer>
+          <VStack gap={5}>
+            <ContainedList label="List title" kind="disclosed">
+              <ContainedListItem>List item</ContainedListItem>
+              <ContainedListItem>List item</ContainedListItem>
+            </ContainedList>
+            <Layer>
+              <ContainedList label="List title" kind="disclosed">
+                <ContainedListItem>List item</ContainedListItem>
+                <ContainedListItem>List item</ContainedListItem>
+              </ContainedList>
+            </Layer>
+          </VStack>
+        </Layer>
+      </VStack>
     </VStack>
   );
 };
