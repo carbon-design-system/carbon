@@ -29,7 +29,7 @@ export default {
   component: ContainedList,
 };
 
-export const OnPage = () => (
+export const Default = () => (
   <>
     <ContainedList label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
@@ -63,7 +63,7 @@ export const Disclosed = () => (
   </>
 );
 
-export const Interactive = () => {
+export const WithInteractiveItems = () => {
   const onClick = action('onClick (ContainedListItem)');
 
   return (
@@ -88,7 +88,7 @@ export const Interactive = () => {
   );
 };
 
-export const Actions = () => {
+export const WithActions = () => {
   const itemAction = (
     <Button
       kind="ghost"
@@ -128,7 +128,7 @@ export const Actions = () => {
   );
 };
 
-export const ActionsInteractive = () => {
+export const WithInteractiveItemsAndActions = () => {
   const onClick = action('onClick (ContainedListItem)');
   const itemAction = (
     <Button
@@ -183,7 +183,7 @@ export const ActionsInteractive = () => {
   );
 };
 
-export const ListTitleDecorators = () => {
+export const WithListTitleDecorators = () => {
   return (
     <VStack gap={12}>
       <ContainedList
@@ -228,7 +228,7 @@ export const ListTitleDecorators = () => {
   );
 };
 
-export const Icons = () => {
+export const WithIcons = () => {
   return (
     <VStack gap={12}>
       <ContainedList label="List title" kind="on-page">
