@@ -31,6 +31,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     allowEmpty = false,
     className: customClassName,
     disabled = false,
+    disableWheel = false,
     defaultValue,
     helperText = '',
     hideLabel = false,
@@ -163,6 +164,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             onClick={onClick}
             onChange={handleOnChange}
             onKeyUp={onKeyUp}
+            onWheel={disableWheel ? (e) => e.target.blur() : null}
             pattern="[0-9]*"
             readOnly={readOnly}
             step={step}
@@ -252,6 +254,11 @@ NumberInput.propTypes = {
    * Optional starting value for uncontrolled state
    */
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
+   * Specify if the wheel functionality for the input should be disabled, or not
+   */
+  disableWheel: PropTypes.bool,
 
   /**
    * Specify if the control should be disabled, or not
