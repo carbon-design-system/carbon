@@ -19,6 +19,7 @@ import {
 import { VStack } from '../../Stack';
 import Button from '../../Button';
 import ExpandableSearch from '../../ExpandableSearch';
+import { Layer } from '../../Layer';
 import Tag from '../../Tag';
 import { Tooltip } from '../../Tooltip/next';
 
@@ -29,7 +30,7 @@ export default {
   component: ContainedList,
 };
 
-export const OnPage = () => (
+export const Default = () => (
   <>
     <ContainedList label="List title" kind="on-page">
       <ContainedListItem>List item</ContainedListItem>
@@ -63,7 +64,7 @@ export const Disclosed = () => (
   </>
 );
 
-export const Interactive = () => {
+export const WithInteractiveItems = () => {
   const onClick = action('onClick (ContainedListItem)');
 
   return (
@@ -88,7 +89,7 @@ export const Interactive = () => {
   );
 };
 
-export const Actions = () => {
+export const WithActions = () => {
   const itemAction = (
     <Button
       kind="ghost"
@@ -128,7 +129,7 @@ export const Actions = () => {
   );
 };
 
-export const ActionsInteractive = () => {
+export const WithInteractiveItemsAndActions = () => {
   const onClick = action('onClick (ContainedListItem)');
   const itemAction = (
     <Button
@@ -183,7 +184,7 @@ export const ActionsInteractive = () => {
   );
 };
 
-export const ListTitleDecorators = () => {
+export const WithListTitleDecorators = () => {
   return (
     <VStack gap={12}>
       <ContainedList
@@ -228,7 +229,7 @@ export const ListTitleDecorators = () => {
   );
 };
 
-export const Icons = () => {
+export const WithIcons = () => {
   return (
     <VStack gap={12}>
       <ContainedList label="List title" kind="on-page">
@@ -243,6 +244,53 @@ export const Icons = () => {
         <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
       </ContainedList>
+    </VStack>
+  );
+};
+
+export const WithLayer = () => {
+  return (
+    <VStack gap={12}>
+      <VStack gap={5}>
+        <ContainedList label="List title" kind="on-page">
+          <ContainedListItem>List item</ContainedListItem>
+          <ContainedListItem>List item</ContainedListItem>
+        </ContainedList>
+        <Layer>
+          <VStack gap={5}>
+            <ContainedList label="List title" kind="on-page">
+              <ContainedListItem>List item</ContainedListItem>
+              <ContainedListItem>List item</ContainedListItem>
+            </ContainedList>
+            <Layer>
+              <ContainedList label="List title" kind="on-page">
+                <ContainedListItem>List item</ContainedListItem>
+                <ContainedListItem>List item</ContainedListItem>
+              </ContainedList>
+            </Layer>
+          </VStack>
+        </Layer>
+      </VStack>
+      <VStack gap={5}>
+        <ContainedList label="List title" kind="disclosed">
+          <ContainedListItem>List item</ContainedListItem>
+          <ContainedListItem>List item</ContainedListItem>
+        </ContainedList>
+        <Layer>
+          <VStack gap={5}>
+            <ContainedList label="List title" kind="disclosed">
+              <ContainedListItem>List item</ContainedListItem>
+              <ContainedListItem>List item</ContainedListItem>
+            </ContainedList>
+            <Layer>
+              <ContainedList label="List title" kind="disclosed">
+                <ContainedListItem>List item</ContainedListItem>
+                <ContainedListItem>List item</ContainedListItem>
+              </ContainedList>
+            </Layer>
+          </VStack>
+        </Layer>
+      </VStack>
     </VStack>
   );
 };
