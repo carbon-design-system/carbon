@@ -16,6 +16,7 @@ import {
   generateGenericItem,
 } from '../../ListBox/test-helpers';
 import FluidDropdown from '../FluidDropdown';
+import { FeatureFlags } from '../../FeatureFlags';
 
 const prefix = 'cds';
 
@@ -30,6 +31,28 @@ describe('FluidDropdown', () => {
       placeholder: 'Filter...',
       type: 'default',
     };
+  });
+
+  it('should render with fluid classes', () => {
+    const { container } = render(
+      <FeatureFlags flags={{ 'enable-v11-release': true }}>
+        <FluidDropdown {...mockProps} />
+      </FeatureFlags>
+    );
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--list-box__wrapper--fluid`
+    );
+  });
+
+  it('should render with condensed styles if isCondensed is provided', () => {
+    const { container } = render(
+      <FeatureFlags flags={{ 'enable-v11-release': true }}>
+        <FluidDropdown isCondensed {...mockProps} />
+      </FeatureFlags>
+    );
+    expect(container.firstChild).toHaveClass(
+      `${prefix}--list-box__wrapper--fluid--condensed`
+    );
   });
 
   it('should initially render with the menu not open', () => {

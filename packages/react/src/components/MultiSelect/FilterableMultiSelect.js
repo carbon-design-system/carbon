@@ -10,7 +10,7 @@ import cx from 'classnames';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
-import React, { useState, useRef } from 'react';
+import React, { useContext, useState, useRef } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
@@ -24,6 +24,7 @@ import { useId } from '../../internal/useId';
 import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   {
@@ -62,6 +63,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   },
   ref
 ) {
+  const { isFluid } = useContext(FormContext);
+  const [isFocused, setIsFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(open);
   const [prevOpen, setPrevOpen] = useState(open);
   const [inputValue, setInputValue] = useState('');
@@ -92,6 +95,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
       [`${prefix}--multi-select__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
     }
   );
   const helperId = !helperText
@@ -315,6 +320,17 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               }
             );
 
+            const handleFocus = (evt) => {
+              if (
+                evt.target.classList.contains(`${prefix}--tag__close-icon`) ||
+                evt.target.classList.contains(`${prefix}--list-box__selection`)
+              ) {
+                setIsFocused(false);
+              } else {
+                setIsFocused(evt.type === 'focus' ? true : false);
+              }
+            };
+
             return (
               <div className={wrapperClasses}>
                 {titleText ? (
@@ -323,6 +339,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   </label>
                 ) : null}
                 <ListBox
+                  onFocus={isFluid ? handleFocus : null}
+                  onBlur={isFluid ? handleFocus : null}
                   className={className}
                   disabled={disabled}
                   light={light}
