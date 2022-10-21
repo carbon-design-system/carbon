@@ -563,9 +563,7 @@ Map {
       "hideCopyButton": Object {
         "type": "bool",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "maxCollapsedNumberOfRows": Object {
         "type": "number",
       },
@@ -977,7 +975,6 @@ Map {
       "disabled": false,
       "itemToElement": null,
       "itemToString": [Function],
-      "light": false,
       "shouldFilterItem": [Function],
       "type": "default",
     },
@@ -1162,9 +1159,7 @@ Map {
         "isRequired": true,
         "type": "array",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "isRequired": true,
         "type": "func",
@@ -1323,7 +1318,6 @@ Map {
       "helperText": "",
       "invalid": false,
       "invalidText": "",
-      "light": false,
       "onChange": [Function],
       "onClick": [Function],
       "size": "",
@@ -1371,9 +1365,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -2234,6 +2226,7 @@ Map {
     },
   },
   "DatePicker" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "allowInput": Object {
         "type": "bool",
@@ -2272,9 +2265,7 @@ Map {
       "inline": Object {
         "type": "bool",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "locale": Object {
         "args": Array [
           Array [
@@ -2409,6 +2400,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "DatePickerInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -2502,6 +2494,12 @@ Map {
             "bottom",
             "bottom-left",
             "bottom-right",
+            "left",
+            "left-bottom",
+            "left-top",
+            "right",
+            "right-bottom",
+            "right-top",
           ],
         ],
         "type": "oneOf",
@@ -2523,6 +2521,9 @@ Map {
       "id": Object {
         "type": "string",
       },
+      "openOnHover": Object {
+        "type": "bool",
+      },
       "tooltipText": [Function],
       "triggerClassName": Object {
         "type": "string",
@@ -2537,7 +2538,6 @@ Map {
       "helperText": "",
       "itemToElement": null,
       "itemToString": [Function],
-      "light": false,
       "titleText": "",
       "type": "default",
     },
@@ -2609,9 +2609,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -3155,7 +3153,6 @@ Map {
       "filterItems": [Function],
       "initialSelectedItems": Array [],
       "itemToString": [Function],
-      "light": false,
       "locale": "en",
       "open": false,
       "selectionFeedback": "top-after-reopen",
@@ -3330,9 +3327,7 @@ Map {
         "isRequired": true,
         "type": "array",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "locale": Object {
         "type": "string",
       },
@@ -4383,7 +4378,6 @@ Map {
         "filterItems": [Function],
         "initialSelectedItems": Array [],
         "itemToString": [Function],
-        "light": false,
         "locale": "en",
         "open": false,
         "selectionFeedback": "top-after-reopen",
@@ -4558,9 +4552,7 @@ Map {
           "isRequired": true,
           "type": "array",
         },
-        "light": Object {
-          "type": "bool",
-        },
+        "light": [Function],
         "locale": Object {
           "type": "string",
         },
@@ -4626,7 +4618,6 @@ Map {
       "disabled": false,
       "initialSelectedItems": Array [],
       "itemToString": [Function],
-      "light": false,
       "locale": "en",
       "open": false,
       "selectedItems": null,
@@ -4811,9 +4802,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "locale": Object {
         "type": "string",
       },
@@ -5376,9 +5365,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "onChange": Object {
         "type": "func",
       },
@@ -7554,7 +7541,6 @@ Map {
       "helperText": "",
       "invalid": false,
       "invalidText": "",
-      "light": false,
       "maxCount": undefined,
       "onChange": [Function],
       "onClick": [Function],
@@ -7606,9 +7592,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "maxCount": Object {
         "type": "number",
       },
@@ -7660,7 +7644,6 @@ Map {
         "helperText": "",
         "invalid": false,
         "invalidText": "",
-        "light": false,
         "onChange": [Function],
         "onClick": [Function],
         "size": "",
@@ -7708,9 +7691,7 @@ Map {
           "isRequired": true,
           "type": "node",
         },
-        "light": Object {
-          "type": "bool",
-        },
+        "light": [Function],
         "onChange": Object {
           "type": "func",
         },
@@ -7818,9 +7799,7 @@ Map {
           "isRequired": true,
           "type": "node",
         },
-        "light": Object {
-          "type": "bool",
-        },
+        "light": [Function],
         "onChange": Object {
           "type": "func",
         },
@@ -7944,9 +7923,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "maxCount": Object {
         "type": "number",
       },
@@ -9423,6 +9400,53 @@ Map {
       },
     },
   },
+  "unstable__FluidSelect" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "type": "any",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "type": "node",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidSelectSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable__FluidTextArea" => Object {
     "propTypes": Object {
       "className": Object {
@@ -9469,9 +9493,7 @@ Map {
         "isRequired": true,
         "type": "node",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "maxCount": Object {
         "type": "number",
       },

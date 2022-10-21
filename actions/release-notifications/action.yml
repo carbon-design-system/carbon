@@ -1,8 +1,16 @@
 name: Issue Triage
-description: A custom action to update Pull requests with comments referencing the specific release information.
+description:
+  A custom action to update Pull requests with comments referencing the specific
+  release information.
 inputs:
   GITHUB_TOKEN:
     description: A GitHub token to execute GitHub tasks
+    required: true
+  OWNER:
+    description: The organization name
+    required: true
+  REPO_NAME:
+    description: The name of the repository
     required: true
   enabled:
     description: Specify whether this action should run
