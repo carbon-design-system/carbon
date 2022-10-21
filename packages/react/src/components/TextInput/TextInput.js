@@ -114,6 +114,8 @@ const TextInput = React.forwardRef(function TextInput(
       [`${prefix}--text-input-wrapper--readonly`]: readOnly,
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
+      [`${prefix}--text-input-wrapper--inline--invalid`]:
+        inline && normalizedProps.invalid,
     }
   );
   const labelClasses = classNames(`${prefix}--label`, {
@@ -195,7 +197,7 @@ const TextInput = React.forwardRef(function TextInput(
       ) : (
         <div className={`${prefix}--text-input__label-helper-wrapper`}>
           {labelWrapper}
-          {!isFluid && helper}
+          {!isFluid && (normalizedProps.validation || helper)}
         </div>
       )}
       <div className={fieldOuterWrapperClasses}>
