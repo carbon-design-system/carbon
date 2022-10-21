@@ -4533,11 +4533,11 @@ Map {
       "$$typeof": Symbol(react.context),
     },
     "defaultProps": Object {
-      "ariaLabel": "open and close list of options",
+      "ariaLabel": "Open and close list of options",
       "direction": "bottom",
       "flipped": false,
       "focusTrap": true,
-      "iconDescription": "open and close list of options",
+      "iconDescription": "Open and close list of options",
       "light": false,
       "menuOffset": [Function],
       "menuOffsetFlip": [Function],
