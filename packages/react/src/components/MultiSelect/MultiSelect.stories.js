@@ -39,6 +39,11 @@ export default {
     items: {
       table: { disable: true },
     },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
     local: {
       table: { disable: true },
     },
@@ -152,12 +157,6 @@ Playground.argTypes = {
     defaultValue: false,
   },
   invalid: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  light: {
     control: {
       type: 'boolean',
     },

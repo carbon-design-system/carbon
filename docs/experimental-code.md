@@ -89,6 +89,11 @@ to stable:
           table
     - [ ] Stories cover at least common use-cases
     - [ ] Stories may include a `Playground` story for controls
+      - [ ] Controls with no meaningful change to the component visuals should
+            be hidden from the controls panel, eg. `className`
+      - [ ] Props of type `node` with no proper controls available for
+            configuration should be hidden from the controls panel, eg.
+            `children`
     - [ ] Stories should mirror intended usage of the component
   - [ ] Component has unit/integration tests written in RTL for testing the
         component API
