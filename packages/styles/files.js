@@ -75,6 +75,8 @@ const files = [
   'scss/components/fluid-dropdown/_index.scss',
   'scss/components/fluid-list-box/_fluid-list-box.scss',
   'scss/components/fluid-list-box/_index.scss',
+  'scss/components/fluid-select/_fluid-select.scss',
+  'scss/components/fluid-select/_index.scss',
   'scss/components/fluid-text-area/_fluid-text-area.scss',
   'scss/components/fluid-text-area/_index.scss',
   'scss/components/fluid-text-input/_fluid-text-input.scss',
