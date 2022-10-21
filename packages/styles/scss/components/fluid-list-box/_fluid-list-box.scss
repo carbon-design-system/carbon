@@ -87,6 +87,7 @@
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus {
     @include focus-outline('outline');
 
+    z-index: 2;
     outline-offset: 0;
   }
 
@@ -95,22 +96,41 @@
     outline-offset: 0;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid
+    :not(.#{$prefix}--list-box--up)
+    .#{$prefix}--list-box__menu {
+    top: calc(100% + rem(3px));
+  }
+
   // Invalid / Warning styles
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:not(.#{$prefix}--list-box__wrapper--fluid--focus) {
     @include focus-outline('invalid');
 
+    z-index: 2;
     outline-offset: 0;
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
-    .#{$prefix}--list-box:not(.#{$prefix}--list-box--invalid) {
+    .#{$prefix}--list-box:not(.#{$prefix}--list-box--invalid),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--list-box
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box.#{$prefix}--list-box--warning
+    .#{$prefix}--text-input {
     border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
     .#{$prefix}--list-box,
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
-    .#{$prefix}--list-box__field:focus {
+    .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--combo-box[data-invalid]
+    .#{$prefix}--text-input {
     outline: none;
     outline-offset: 0;
   }
@@ -134,6 +154,12 @@
     margin-top: 0;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement {
+    border-bottom: 1px solid $border-strong;
+  }
+
   .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
     .#{$prefix}--list-box__invalid-icon,
   .#{$prefix}--list-box__wrapper--fluid
@@ -142,6 +168,18 @@
     top: rem(81px);
     right: $spacing-05;
     pointer-events: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid]:not(.#{$prefix}--combo-box)
+    .#{$prefix}--list-box__field {
+    padding-right: $spacing-09;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid].#{$prefix}--combo-box
+    .#{$prefix}--text-input {
+    padding-right: $spacing-10;
   }
 
   // Error + Warning divider
@@ -163,10 +201,10 @@
   }
 
   .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--list-box--invalid:hover
+    .#{$prefix}--list-box--invalid:hover:not(.#{$prefix}--combo-box)
     ~ .#{$prefix}--list-box__divider,
   .#{$prefix}--list-box__wrapper--fluid
-    .#{$prefix}--list-box--warning:hover
+    .#{$prefix}--list-box--warning:hover:not(.#{$prefix}--combo-box)
     ~ .#{$prefix}--list-box__divider {
     border-color: transparent;
   }

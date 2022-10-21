@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Text } from '../Text';
 import {
   Checkmark,
@@ -23,6 +23,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import { useFeatureFlag } from '../FeatureFlags';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const defaultItemToString = (item) => {
   if (typeof item === 'string') {
@@ -102,7 +103,7 @@ const ComboBox = React.forwardRef((props, ref) => {
     ...rest
   } = props;
   const prefix = usePrefix();
-
+  const { isFluid } = useContext(FormContext);
   const textInput = useRef();
   const comboBoxInstanceId = getInstanceId();
   const [inputValue, setInputValue] = useState(
@@ -113,6 +114,7 @@ const ComboBox = React.forwardRef((props, ref) => {
       selectedItem,
     })
   );
+  const [isFocused, setIsFocused] = useState(false);
   const [prevSelectedItem, setPrevSelectedItem] = useState(null);
   const [doneInitialSelectedItem, setDoneInitialSelectedItem] = useState(null);
   const savedOnInputChange = useRef(onInputChange);
@@ -214,6 +216,10 @@ const ComboBox = React.forwardRef((props, ref) => {
   });
   const wrapperClasses = cx(`${prefix}--list-box__wrapper`, [
     enabled ? containerClassName : null,
+    {
+      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--list-box__wrapper--fluid--focus`]: isFluid && isFocused,
+    },
   ]);
 
   const inputClasses = cx(`${prefix}--text-input`, {
@@ -294,6 +300,14 @@ const ComboBox = React.forwardRef((props, ref) => {
           },
         });
 
+        const handleFocus = (evt) => {
+          if (evt.target.type === 'button') {
+            setIsFocused(false);
+          } else {
+            setIsFocused(evt.type === 'focus' ? true : false);
+          }
+        };
+
         return (
           <div className={wrapperClasses}>
             {titleText && (
@@ -302,6 +316,8 @@ const ComboBox = React.forwardRef((props, ref) => {
               </Text>
             )}
             <ListBox
+              onFocus={handleFocus}
+              onBlur={handleFocus}
               className={className}
               disabled={disabled}
               invalid={invalid}
@@ -394,7 +410,7 @@ const ComboBox = React.forwardRef((props, ref) => {
                   : null}
               </ListBox.Menu>
             </ListBox>
-            {helperText && !invalid && !warn && (
+            {helperText && !invalid && !warn && !isFluid && (
               <Text as="div" id={comboBoxHelperId} className={helperClasses}>
                 {helperText}
               </Text>
