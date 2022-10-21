@@ -356,6 +356,7 @@ $expressive-heading-05: (
   breakpoints: (
     md: (
       font-size: scale.type-scale(9),
+      font-weight: font-family.font-weight('light'),
       line-height: 1.22,
     ),
     lg: (
