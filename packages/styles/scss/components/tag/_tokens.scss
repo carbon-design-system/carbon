@@ -6,678 +6,680 @@
 //
 
 @use 'sass:color';
+@use 'sass:map';
 @use '../../config';
 @use '../../colors';
 @use '../../themes';
 @use '../../theme' as *;
 @use '../../utilities/component-tokens';
+@use '@carbon/themes/scss/component-tokens' as tag;
 
 // red
 $tag-background-red: (
-  fallback: colors.$red-20,
+  fallback: map.get(tag.$tag-background-red, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$red-20,
+      value: map.get(tag.$tag-background-red, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$red-20,
+      value: map.get(tag.$tag-background-red, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$red-70,
+      value: map.get(tag.$tag-background-red, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$red-70,
+      value: map.get(tag.$tag-background-red, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-red: (
-  fallback: colors.$red-80,
+  fallback: map.get(tag.$tag-color-red, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$red-80,
+      value: map.get(tag.$tag-color-red, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$red-80,
+      value: map.get(tag.$tag-color-red, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$red-20,
+      value: map.get(tag.$tag-color-red, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$red-20,
+      value: map.get(tag.$tag-color-red, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-red: (
-  fallback: colors.$red-30,
+  fallback: map.get(tag.$tag-hover-red, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$red-30,
+      value: map.get(tag.$tag-hover-red, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$red-30,
+      value: map.get(tag.$tag-hover-red, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$red-70-hover,
+      value: map.get(tag.$tag-hover-red, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$red-70-hover,
+      value: map.get(tag.$tag-hover-red, g-100),
     ),
   ),
 ) !default;
 
 // magenta
 $tag-background-magenta: (
-  fallback: colors.$magenta-20,
+  fallback: map.get(tag.$tag-background-magenta, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$magenta-20,
+      value: map.get(tag.$tag-background-magenta, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$magenta-20,
+      value: map.get(tag.$tag-background-magenta, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$magenta-70,
+      value: map.get(tag.$tag-background-magenta, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$magenta-70,
+      value: map.get(tag.$tag-background-magenta, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-magenta: (
-  fallback: colors.$magenta-80,
+  fallback: map.get(tag.$tag-color-magenta, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$magenta-80,
+      value: map.get(tag.$tag-color-magenta, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$magenta-80,
+      value: map.get(tag.$tag-color-magenta, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$magenta-20,
+      value: map.get(tag.$tag-color-magenta, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$magenta-20,
+      value: map.get(tag.$tag-color-magenta, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-magenta: (
-  fallback: colors.$magenta-30,
+  fallback: map.get(tag.$tag-hover-magenta, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$magenta-30,
+      value: map.get(tag.$tag-hover-magenta, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$magenta-30,
+      value: map.get(tag.$tag-hover-magenta, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$magenta-70-hover,
+      value: map.get(tag.$tag-hover-magenta, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$magenta-70-hover,
+      value: map.get(tag.$tag-hover-magenta, g-100),
     ),
   ),
 ) !default;
 
 // purple
 $tag-background-purple: (
-  fallback: colors.$purple-20,
+  fallback: map.get(tag.$tag-background-purple, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$purple-20,
+      value: map.get(tag.$tag-background-purple, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$purple-20,
+      value: map.get(tag.$tag-background-purple, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$purple-70,
+      value: map.get(tag.$tag-background-purple, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$purple-70,
+      value: map.get(tag.$tag-background-purple, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-purple: (
-  fallback: colors.$purple-80,
+  fallback: map.get(tag.$tag-color-purple, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$purple-80,
+      value: map.get(tag.$tag-color-purple, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$purple-80,
+      value: map.get(tag.$tag-color-purple, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$purple-20,
+      value: map.get(tag.$tag-color-purple, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$purple-20,
+      value: map.get(tag.$tag-color-purple, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-purple: (
-  fallback: colors.$purple-30,
+  fallback: map.get(tag.$tag-hover-purple, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$purple-30,
+      value: map.get(tag.$tag-hover-purple, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$purple-30,
+      value: map.get(tag.$tag-hover-purple, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$purple-70-hover,
+      value: map.get(tag.$tag-hover-purple, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$purple-70-hover,
+      value: map.get(tag.$tag-hover-purple, g-100),
     ),
   ),
 ) !default;
 
 // blue
 $tag-background-blue: (
-  fallback: colors.$blue-20,
+  fallback: map.get(tag.$tag-background-blue, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$blue-20,
+      value: map.get(tag.$tag-background-blue, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$blue-20,
+      value: map.get(tag.$tag-background-blue, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$blue-70,
+      value: map.get(tag.$tag-background-blue, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$blue-70,
+      value: map.get(tag.$tag-background-blue, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-blue: (
-  fallback: colors.$blue-80,
+  fallback: map.get(tag.$tag-color-blue, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$blue-80,
+      value: map.get(tag.$tag-color-blue, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$blue-80,
+      value: map.get(tag.$tag-color-blue, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$blue-20,
+      value: map.get(tag.$tag-color-blue, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$blue-20,
+      value: map.get(tag.$tag-color-blue, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-blue: (
-  fallback: colors.$blue-30,
+  fallback: map.get(tag.$tag-hover-blue, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$blue-30,
+      value: map.get(tag.$tag-hover-blue, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$blue-30,
+      value: map.get(tag.$tag-hover-blue, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$blue-70-hover,
+      value: map.get(tag.$tag-hover-blue, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$blue-70-hover,
+      value: map.get(tag.$tag-hover-blue, g-100),
     ),
   ),
 ) !default;
 
 // cyan
 $tag-background-cyan: (
-  fallback: colors.$cyan-20,
+  fallback: map.get(tag.$tag-background-cyan, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$cyan-20,
+      value: map.get(tag.$tag-background-cyan, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$cyan-20,
+      value: map.get(tag.$tag-background-cyan, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$cyan-70,
+      value: map.get(tag.$tag-background-cyan, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$cyan-70,
+      value: map.get(tag.$tag-background-cyan, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-cyan: (
-  fallback: colors.$cyan-80,
+  fallback: map.get(tag.$tag-color-cyan, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$cyan-80,
+      value: map.get(tag.$tag-color-cyan, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$cyan-80,
+      value: map.get(tag.$tag-color-cyan, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$cyan-20,
+      value: map.get(tag.$tag-color-cyan, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$cyan-20,
+      value: map.get(tag.$tag-color-cyan, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-cyan: (
-  fallback: colors.$cyan-30,
+  fallback: map.get(tag.$tag-hover-cyan, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$cyan-30,
+      value: map.get(tag.$tag-hover-cyan, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$cyan-30,
+      value: map.get(tag.$tag-hover-cyan, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$cyan-70-hover,
+      value: map.get(tag.$tag-hover-cyan, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$cyan-70-hover,
+      value: map.get(tag.$tag-hover-cyan, g-100),
     ),
   ),
 ) !default;
 
 // teal
 $tag-background-teal: (
-  fallback: colors.$teal-20,
+  fallback: map.get(tag.$tag-background-teal, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$teal-20,
+      value: map.get(tag.$tag-background-teal, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$teal-20,
+      value: map.get(tag.$tag-background-teal, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$teal-70,
+      value: map.get(tag.$tag-background-teal, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$teal-70,
+      value: map.get(tag.$tag-background-teal, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-teal: (
-  fallback: colors.$teal-80,
+  fallback: map.get(tag.$tag-color-teal, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$teal-80,
+      value: map.get(tag.$tag-color-teal, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$teal-80,
+      value: map.get(tag.$tag-color-teal, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$teal-20,
+      value: map.get(tag.$tag-color-teal, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$teal-20,
+      value: map.get(tag.$tag-color-teal, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-teal: (
-  fallback: colors.$teal-30,
+  fallback: map.get(tag.$tag-hover-teal, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$teal-30,
+      value: map.get(tag.$tag-hover-teal, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$teal-30,
+      value: map.get(tag.$tag-hover-teal, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$teal-70-hover,
+      value: map.get(tag.$tag-hover-teal, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$teal-70-hover,
+      value: map.get(tag.$tag-hover-teal, g-100),
     ),
   ),
 ) !default;
 
 // green
 $tag-background-green: (
-  fallback: colors.$green-20,
+  fallback: map.get(tag.$tag-background-green, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$green-20,
+      value: map.get(tag.$tag-background-green, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$green-20,
+      value: map.get(tag.$tag-background-green, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$green-70,
+      value: map.get(tag.$tag-background-green, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$green-70,
+      value: map.get(tag.$tag-background-green, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-green: (
-  fallback: colors.$green-80,
+  fallback: map.get(tag.$tag-color-green, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$green-80,
+      value: map.get(tag.$tag-color-green, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$green-80,
+      value: map.get(tag.$tag-color-green, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$green-20,
+      value: map.get(tag.$tag-color-green, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$green-20,
+      value: map.get(tag.$tag-color-green, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-green: (
-  fallback: colors.$green-30,
+  fallback: map.get(tag.$tag-hover-green, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$green-30,
+      value: map.get(tag.$tag-hover-green, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$green-30,
+      value: map.get(tag.$tag-hover-green, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$green-70-hover,
+      value: map.get(tag.$tag-hover-green, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$green-70-hover,
+      value: map.get(tag.$tag-hover-green, g-100),
     ),
   ),
 ) !default;
 
 // gray
 $tag-background-gray: (
-  fallback: colors.$gray-20,
+  fallback: map.get(tag.$tag-background-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$gray-20,
+      value: map.get(tag.$tag-background-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$gray-20,
+      value: map.get(tag.$tag-background-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$gray-70,
+      value: map.get(tag.$tag-background-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$gray-70,
+      value: map.get(tag.$tag-background-gray, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-gray: (
-  fallback: colors.$gray-80,
+  fallback: map.get(tag.$tag-color-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$gray-80,
+      value: map.get(tag.$tag-color-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$gray-80,
+      value: map.get(tag.$tag-color-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$gray-20,
+      value: map.get(tag.$tag-color-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$gray-20,
+      value: map.get(tag.$tag-color-gray, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-gray: (
-  fallback: colors.$gray-30,
+  fallback: map.get(tag.$tag-hover-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$gray-30,
+      value: map.get(tag.$tag-hover-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$gray-30,
+      value: map.get(tag.$tag-hover-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$gray-70-hover,
+      value: map.get(tag.$tag-hover-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$gray-70-hover,
+      value: map.get(tag.$tag-hover-gray, g-100),
     ),
   ),
 ) !default;
 
 // cool-gray
 $tag-background-cool-gray: (
-  fallback: colors.$cool-gray-20,
+  fallback: map.get(tag.$tag-background-cool-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$cool-gray-20,
+      value: map.get(tag.$tag-background-cool-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$cool-gray-20,
+      value: map.get(tag.$tag-background-cool-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$cool-gray-70,
+      value: map.get(tag.$tag-background-cool-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$cool-gray-70,
+      value: map.get(tag.$tag-background-cool-gray, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-cool-gray: (
-  fallback: colors.$cool-gray-80,
+  fallback: map.get(tag.$tag-color-cool-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$cool-gray-80,
+      value: map.get(tag.$tag-color-cool-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$cool-gray-80,
+      value: map.get(tag.$tag-color-cool-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$cool-gray-20,
+      value: map.get(tag.$tag-color-cool-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$cool-gray-20,
+      value: map.get(tag.$tag-color-cool-gray, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-cool-gray: (
-  fallback: colors.$cool-gray-30,
+  fallback: map.get(tag.$tag-hover-cool-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$cool-gray-30,
+      value: map.get(tag.$tag-hover-cool-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$cool-gray-30,
+      value: map.get(tag.$tag-hover-cool-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$cool-gray-70-hover,
+      value: map.get(tag.$tag-hover-cool-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$cool-gray-70-hover,
+      value: map.get(tag.$tag-hover-cool-gray, g-100),
     ),
   ),
 ) !default;
 
 // warm-gray
 $tag-background-warm-gray: (
-  fallback: colors.$warm-gray-20,
+  fallback: map.get(tag.$tag-background-warm-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$warm-gray-20,
+      value: map.get(tag.$tag-background-warm-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$warm-gray-20,
+      value: map.get(tag.$tag-background-warm-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$warm-gray-70,
+      value: map.get(tag.$tag-background-warm-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$warm-gray-70,
+      value: map.get(tag.$tag-background-warm-gray, g-100),
     ),
   ),
 ) !default;
 
 $tag-color-warm-gray: (
-  fallback: colors.$warm-gray-80,
+  fallback: map.get(tag.$tag-color-warm-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$warm-gray-80,
+      value: map.get(tag.$tag-color-warm-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$warm-gray-80,
+      value: map.get(tag.$tag-color-warm-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$warm-gray-20,
+      value: map.get(tag.$tag-color-warm-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$warm-gray-20,
+      value: map.get(tag.$tag-color-warm-gray, g-100),
     ),
   ),
 ) !default;
 
 $tag-hover-warm-gray: (
-  fallback: colors.$warm-gray-30,
+  fallback: map.get(tag.$tag-hover-warm-gray, white-theme),
   values: (
     (
       theme: themes.$white,
-      value: colors.$warm-gray-30,
+      value: map.get(tag.$tag-hover-warm-gray, white-theme),
     ),
     (
       theme: themes.$g10,
-      value: colors.$warm-gray-30,
+      value: map.get(tag.$tag-hover-warm-gray, g-10),
     ),
     (
       theme: themes.$g90,
-      value: colors.$warm-gray-70-hover,
+      value: map.get(tag.$tag-hover-warm-gray, g-90),
     ),
     (
       theme: themes.$g100,
-      value: colors.$warm-gray-70-hover,
+      value: map.get(tag.$tag-hover-warm-gray, g-100),
     ),
   ),
 ) !default;

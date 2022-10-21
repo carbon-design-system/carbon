@@ -119,7 +119,7 @@ export const ClickableWithLayer = () => {
 
 export const Selectable = () => {
   return (
-    <SelectableTile id="tile-1" name="tiles">
+    <SelectableTile id="tile-1" name="tiles" value="selectable">
       Selectable
     </SelectableTile>
   );

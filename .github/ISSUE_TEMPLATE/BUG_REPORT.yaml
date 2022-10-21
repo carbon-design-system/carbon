@@ -70,6 +70,19 @@ body:
       placeholder: What did you see? What did you expect to see?
     validations:
       required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Suggested Severity
+      description:
+        'Read more to understand our [severity levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
+      options:
+        - 'Severity 1 = Must be fixed ASAP. The response must be swift. Someone from the team must drop all current work and be immediately reassigned to address the issue.'
+        - 'Severity 2 = User cannot complete task, and/or no workaround within the user experience of a given component.'
+        - 'Severity 3 = User can complete task, and/or has a workaround within the user experience of a given component.'
+        - 'Severity 4 = Unrelated to a user task, has a workaround or does not need a workaround.'
+    validations:
+      required: true
   - type: input
     id: example-url
     attributes:

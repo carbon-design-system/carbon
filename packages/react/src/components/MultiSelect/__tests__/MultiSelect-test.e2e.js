@@ -52,14 +52,6 @@ describe('MultiSelect', () => {
           invalid
           invalidText="This is invalid text"
         />
-        <WrappedMultiSelect items={items} label={label} light />
-        <WrappedMultiSelect
-          items={items}
-          label={label}
-          light
-          invalid
-          invalidText="This is invalid text"
-        />
         <WrappedMultiSelect items={items} label={label} type="inline" />
       </>
     );
