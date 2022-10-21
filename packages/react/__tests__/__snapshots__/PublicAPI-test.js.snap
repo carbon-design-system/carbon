@@ -2844,7 +2844,99 @@ Map {
     },
   },
   "FileUploader" => Object {
-    "displayName": "ClassWrapper(FileUploader)",
+    "contextType": Object {
+      "$$typeof": Symbol(react.context),
+    },
+    "defaultProps": Object {
+      "accept": Array [],
+      "buttonKind": "primary",
+      "buttonLabel": "",
+      "disabled": false,
+      "filenameStatus": "uploading",
+      "iconDescription": undefined,
+      "multiple": false,
+      "onClick": [Function],
+    },
+    "propTypes": Object {
+      "accept": Object {
+        "args": Array [
+          Object {
+            "type": "string",
+          },
+        ],
+        "type": "arrayOf",
+      },
+      "buttonKind": Object {
+        "args": Array [
+          Array [
+            "primary",
+            "secondary",
+            "danger",
+            "ghost",
+            "danger--primary",
+            "danger--ghost",
+            "danger--tertiary",
+            "tertiary",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "buttonLabel": Object {
+        "type": "string",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "filenameStatus": Object {
+        "args": Array [
+          Array [
+            "edit",
+            "complete",
+            "uploading",
+          ],
+        ],
+        "isRequired": true,
+        "type": "oneOf",
+      },
+      "iconDescription": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "labelDescription": Object {
+        "type": "string",
+      },
+      "labelTitle": Object {
+        "type": "string",
+      },
+      "multiple": Object {
+        "type": "bool",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onDelete": Object {
+        "type": "func",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
   },
   "FileUploaderButton" => Object {
     "propTypes": Object {
