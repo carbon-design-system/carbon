@@ -210,6 +210,7 @@ export const expressiveHeading05 = {
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
+      fontWeight: fontWeights.light,
       lineHeight: 1.22,
       letterSpacing: 0,
     },
