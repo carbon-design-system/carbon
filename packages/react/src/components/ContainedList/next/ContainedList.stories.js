@@ -311,13 +311,19 @@ export const Playground = PlaygroundStory.bind({});
 
 Playground.argTypes = {
   action: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   children: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   className: {
-    control: false,
+    table: {
+      disable: true,
+    },
   },
   label: {
     defaultValue: 'List title',
