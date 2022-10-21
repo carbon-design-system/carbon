@@ -13,57 +13,38 @@ body:
         an existing feature. If you are reporting a bug or problem, please use
         the bug template instead.
   - type: textarea
-    id: summary
+    id: problem
     attributes:
-      label: Summary
+      label: The problem
       description:
-        'Please describe your request in one or two sentences. Clarify if you
-        are asking for design, development, or both design and development.'
+        'Provide a clear and concise description of what the problem this new feature is trying to solve. (For example, I find it frustrating when...). Be sure to attach screenshots or videos to illustrate the problem.'
     validations:
       required: true
   - type: textarea
-    id: justification
+    id: solution
     attributes:
-      label: Justification
-      description: 'Provide the business reasons for this request.'
+      label: The solution
+      description: 'Provide a clear and concise description of what you would like to happen instead. Be sure to attach screenshots or videos to illustrate the solution if possible. Design specs are highly encouraged.'
     validations:
       required: true
   - type: textarea
-    id: Screenshots
+    id: user-research
     attributes:
-      label: Screenshots
-      description: 'Provide screenshots or a screen capture video of the proposed idea, or what you are unable to accomplish that this enhancement would make possible.'
-    validations:
-      required: true
-  - type: textarea
-    id: metrics
-    attributes:
-      label: Desired UX and success metrics
-      description:
-        'Describe the full user experience for this feature. Also define the
-        metrics by which we can measure success/failure for the user.'
-  - type: textarea
-    id: functionality
-    attributes:
-      label: Required functionality
-      description:
-        'Highlight any must have needs and functionality for the request. This
-        should not be a full list of functionality; the Carbon team will work
-        with you to define functionality based on the desired UX.'
-  - type: textarea
-    id: timeline
-    attributes:
-      label: Specific timeline issues / requests
-      description:
-        'Do you want this work within a specific time period? Is it related to
-        an upcoming release?'
+      label: Examples
+      description: Provide sample content, references, or audits of solutions solving the same problem in other applications/websites.
   - type: input
-    id: team
+    id: application
     attributes:
-      label: Your team
-      description: 'Please provide the requesting team you are apart of. @mention design and development members from your team that should be aware of this request.'
-    validations:
-      required: true
+      label: Application/PAL
+      description: "What application and/or PAL do you work on?"
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Business priority
+      options:
+        - 'High Priority = pressing release'
+        - 'Medium Priority = upcoming release but is not pressing'
+        - 'Low Priority = release date is not dependent on fix or not upcoming'
   - type: input
     id: resources
     attributes:
@@ -74,7 +55,7 @@ body:
       value:
         '_Carbon is a collaborative system. We encourage teams to build
         components and submit them for integration as either add-ons or core
-        components._'
+        components. To better understand our feature request process and what happends after you submit this issue, [check out the docs](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#type-enhancement-) on Github._'
   - type: checkboxes
     id: terms
     attributes:

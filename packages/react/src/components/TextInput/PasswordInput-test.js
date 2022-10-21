@@ -12,7 +12,6 @@ describe('PasswordInput', () => {
         className="extra-class"
         labelText="testlabel"
         helperText="testHelper"
-        light
         showPasswordLabel="Show password"
         hidePasswordLabel="Hide password"
       />
@@ -62,13 +61,6 @@ describe('PasswordInput', () => {
 
       it('should add extra classes that are passed via className', () => {
         expect(passwordInput().hasClass('extra-class')).toEqual(true);
-      });
-
-      it('has the expected classes for light', () => {
-        wrapper.setProps({ light: true });
-        expect(
-          passwordInput().hasClass(`${prefix}--text-input--light`)
-        ).toEqual(true);
       });
 
       it('should set type as expected', () => {
