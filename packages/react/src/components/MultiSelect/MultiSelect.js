@@ -18,6 +18,7 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
+import deprecate from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
@@ -405,7 +406,11 @@ MultiSelect.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `MultiSelect` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the locale of the control. Used for the default `compareItems`
@@ -488,7 +493,6 @@ MultiSelect.defaultProps = {
   initialSelectedItems: [],
   sortItems: defaultSortItems,
   type: 'default',
-  light: false,
   title: false,
   open: false,
   selectionFeedback: 'top-after-reopen',

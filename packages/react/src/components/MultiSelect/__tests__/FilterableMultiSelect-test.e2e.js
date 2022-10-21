@@ -83,18 +83,6 @@ describe('FilterableMultiSelect', () => {
         <WrappedFilterableMultiSelect
           items={items}
           placeholder={placeholder}
-          light
-        />
-        <WrappedFilterableMultiSelect
-          items={items}
-          placeholder={placeholder}
-          light
-          invalid
-          invalidText="This is invalid text"
-        />
-        <WrappedFilterableMultiSelect
-          items={items}
-          placeholder={placeholder}
           type="inline"
         />
       </>
