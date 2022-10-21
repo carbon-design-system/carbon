@@ -276,7 +276,7 @@ $heading-04: $productive-heading-04 !default;
 /// @group @carbon/type
 $productive-heading-05: (
   font-size: carbon--type-scale(8),
-  font-weight: carbon--font-weight('light'),
+  font-weight: carbon--font-weight('regular'),
   line-height: 1.25,
   letter-spacing: 0,
 ) !default;
@@ -338,7 +338,7 @@ $expressive-heading-03: (
   breakpoints: (
     xlg: (
       font-size: carbon--type-scale(5),
-      line-height: 1.25,
+      line-height: 1.4,
     ),
     max: (
       font-size: carbon--type-scale(6),
@@ -364,11 +364,11 @@ $expressive-heading-04: (
     xlg: (
       font-size: carbon--type-scale(7),
       line-height: 1.25,
-      font-weight: carbon--font-weight('light'),
+      font-weight: carbon--font-weight('regular'),
     ),
     max: (
       font-size: carbon--type-scale(8),
-      font-weight: carbon--font-weight('light'),
+      font-weight: carbon--font-weight('regular'),
     ),
   ),
 ) !default;
@@ -383,12 +383,13 @@ $fluid-heading-04: $expressive-heading-04 !default;
 /// @group @carbon/type
 $expressive-heading-05: (
   font-size: carbon--type-scale(8),
-  font-weight: carbon--font-weight('light'),
+  font-weight: carbon--font-weight('regular'),
   line-height: 1.25,
   letter-spacing: 0,
   breakpoints: (
     md: (
       font-size: carbon--type-scale(9),
+      font-weight: carbon--font-weight('light'),
       line-height: 1.22,
     ),
     lg: (
