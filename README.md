@@ -202,6 +202,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   </tr>
   <tr>
     <td align="center"><a href="https://github.com/hannelevaltanen"><img src="https://avatars.githubusercontent.com/u/26527460?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Hannele Valtanen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=hannelevaltanen" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/mgueyraud"><img src="https://avatars.githubusercontent.com/u/9916318?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mario Gueyraud</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=mgueyraud" title="Code">💻</a></td>
   </tr>
 </table>
 
