@@ -285,6 +285,7 @@ Array [
   "supportSuccessInverse",
   "supportWarning",
   "supportWarningInverse",
+  "tagTokens",
   "teal",
   "teal10",
   "teal100",

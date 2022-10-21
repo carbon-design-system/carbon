@@ -18,6 +18,7 @@ const buildCompatTokensFile = require('./builders/compat/tokens');
 const buildModulesThemesFile = require('./builders/modules-themes');
 const buildModulesTokensFile = require('./builders/modules-tokens');
 const buildModulesButtonTokens = require('./builders/modules-button-tokens');
+const buildModulesTagTokens = require('./builders/modules-tag-tokens');
 
 async function build() {
   reporter.info('Building scss files for themes...');
@@ -53,6 +54,12 @@ async function build() {
       filepath: path.join(GENERATED_SCSS_DIR, '_button-tokens.scss'),
       builder() {
         return buildModulesButtonTokens();
+      },
+    },
+    {
+      filepath: path.join(GENERATED_SCSS_DIR, '_tag-tokens.scss'),
+      builder() {
+        return buildModulesTagTokens();
       },
     },
   ];
