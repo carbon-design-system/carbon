@@ -257,7 +257,9 @@ export const ExpandableWithLayer = () => {
         <TileBelowTheFoldContent>
           <div style={{ height: '200px', width: '200px' }}>
             Below the fold content here
-            <TextInput id="test2" invalidText="A valid value is required" />
+            <Layer>
+              <TextInput id="test2" invalidText="A valid value is required" />
+            </Layer>
           </div>
         </TileBelowTheFoldContent>
       </ExpandableTile>
@@ -271,7 +273,9 @@ export const ExpandableWithLayer = () => {
           <TileBelowTheFoldContent>
             <div style={{ height: '200px' }}>
               Below the fold content here
-              <TextInput id="test2" invalidText="A valid value is required" />
+              <Layer>
+                <TextInput id="test2" invalidText="A valid value is required" />
+              </Layer>
             </div>
           </TileBelowTheFoldContent>
         </ExpandableTile>
@@ -285,7 +289,12 @@ export const ExpandableWithLayer = () => {
             <TileBelowTheFoldContent>
               <div style={{ height: '100px' }}>
                 Below the fold content here
-                <TextInput id="test2" invalidText="A valid value is required" />
+                <Layer>
+                  <TextInput
+                    id="test2"
+                    invalidText="A valid value is required"
+                  />
+                </Layer>
               </div>
             </TileBelowTheFoldContent>
           </ExpandableTile>
