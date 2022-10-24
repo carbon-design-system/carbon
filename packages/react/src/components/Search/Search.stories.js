@@ -171,7 +171,7 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'A default value',
+    defaultValue: 'Default value',
   },
   labelText: {
     control: {
