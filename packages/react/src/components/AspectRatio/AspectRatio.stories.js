@@ -8,9 +8,9 @@
 import '../AspectRatio-story.scss';
 
 import React from 'react';
-import { Grid, Column } from '../../Grid';
-import { AspectRatio } from '../';
-import mdx from '../AspectRatio.mdx';
+import { Grid, Column } from '../Grid';
+import { AspectRatio } from './';
+import mdx from './AspectRatio.mdx';
 
 export default {
   title: 'Components/AspectRatio',
