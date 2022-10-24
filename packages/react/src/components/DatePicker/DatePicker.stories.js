@@ -24,6 +24,13 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Simple = () => (
@@ -240,11 +247,6 @@ Playground.argTypes = {
     },
   },
   inline: {
-    table: {
-      disable: true,
-    },
-  },
-  light: {
     table: {
       disable: true,
     },

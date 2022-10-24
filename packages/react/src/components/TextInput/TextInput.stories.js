@@ -6,9 +6,9 @@
  */
 
 import React from 'react';
-import FluidForm from '../../FluidForm';
-import { default as TextInput, TextInputSkeleton } from '../../TextInput';
-import { Layer } from '../../Layer';
+import FluidForm from '../FluidForm';
+import { default as TextInput, TextInputSkeleton } from '../TextInput';
+import { Layer } from '../Layer';
 
 export default {
   title: 'Components/TextInput',
@@ -16,6 +16,13 @@ export default {
   subcomponents: {
     TextInputSkeleton,
     'TextInput.PasswordInput': TextInput.PasswordInput,
+  },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
   },
 };
 
@@ -125,7 +132,7 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Invalid text',
+    defaultValue: 'Error message goes here',
   },
   disabled: {
     control: {
