@@ -102,8 +102,6 @@ export {
 export RadioButton from './components/RadioButton';
 export RadioButtonGroup from './components/RadioButtonGroup';
 export Search from './components/Search';
-export SearchFilterButton from './components/SearchFilterButton';
-export SearchLayoutButton from './components/SearchLayoutButton';
 export ExpandableSearch from './components/ExpandableSearch';
 export SecondaryButton from './components/SecondaryButton';
 export Select from './components/Select';
@@ -147,6 +145,7 @@ export {
   ToggletipContent,
   ToggletipActions,
 } from './components/Toggletip';
+export TreeView, { TreeNode } from './components/TreeView';
 export UnorderedList from './components/UnorderedList';
 export SkeletonText from './components/SkeletonText';
 export SkeletonPlaceholder from './components/SkeletonPlaceholder';
@@ -206,12 +205,39 @@ export {
 } from './components/UIShell';
 
 // Experimental
+export unstable_ContainedList, {
+  ContainedListItem as unstable_ContainedListItem,
+} from './components/ContainedList';
 export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
   FeatureFlags as unstable_FeatureFlags,
   useFeatureFlag as unstable_useFeatureFlag,
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
+export {
+  FluidComboBox as unstable__FluidComboBox,
+  FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
+} from './components/FluidComboBox';
+export {
+  FluidDropdown as unstable__FluidDropdown,
+  FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
+} from './components/FluidDropdown';
+export {
+  FluidMultiSelect as unstable__FluidMultiSelect,
+  FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
+} from './components/FluidMultiSelect';
+export {
+  FluidSelect as unstable__FluidSelect,
+  FluidSelectSkeleton as unstable__FluidSelectSkeleton,
+} from './components/FluidSelect';
+export {
+  FluidTextArea as unstable__FluidTextArea,
+  FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,
+} from './components/FluidTextArea';
+export {
+  FluidTextInput as unstable__FluidTextInput,
+  FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
+} from './components/FluidTextInput';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';
@@ -240,8 +266,5 @@ export {
   TextDirection as unstable_TextDirection,
 } from './components/Text';
 export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
-export unstable_TreeView, {
-  TreeNode as unstable_TreeNode,
-} from './components/TreeView';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';

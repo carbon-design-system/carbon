@@ -17,7 +17,7 @@ test.describe('StructuredList', () => {
       test('simple @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'StructuredList',
-          id: 'components-structuredlist--simple',
+          id: 'components-structuredlist--default',
           theme,
         });
       });
@@ -35,7 +35,7 @@ test.describe('StructuredList', () => {
   test('accessibility-checker @avt', async ({ page }) => {
     await visitStory(page, {
       component: 'StructuredList',
-      id: 'components-structuredlist--simple',
+      id: 'components-structuredlist--default',
       globals: {
         theme: 'white',
       },

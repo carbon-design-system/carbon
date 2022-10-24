@@ -19,6 +19,11 @@ export default {
       options: ['sm', 'md', 'lg'],
       control: { type: 'select' },
     },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
   },
   args: {
     size: 'md',
@@ -38,14 +43,11 @@ export const Default = (args) => (
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
     <OverflowMenuItem itemText="Rename app" />
+    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
     <OverflowMenuItem itemText="Edit routes and access" requireTitle />
     <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
   </OverflowMenu>
 );
-
-Default.story = {
-  name: 'OverflowMenu',
-};
 
 export const RenderCustomIcon = (args) => (
   <OverflowMenu renderIcon={Filter} {...args}>

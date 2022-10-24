@@ -6,6 +6,7 @@ import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps'
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
 import * as FeatureFlags from '@carbon/feature-flags';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 const PasswordInput = React.forwardRef(function PasswordInput(
@@ -20,7 +21,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     invalid = false,
     invalidText,
     labelText,
-    light = false,
+    light,
     onChange = () => {},
     onClick = () => {},
     onTogglePasswordVisibility,
@@ -45,6 +46,8 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     warn,
     warnText,
   });
+
+  const { isFluid } = useContext(FormContext);
 
   const handleTogglePasswordVisibility = (event) => {
     setInputType(inputType === 'password' ? 'text' : 'password');
@@ -86,6 +89,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     {
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
+      [`${prefix}--text-input--fluid`]: isFluid,
     }
   );
   const labelClasses = classNames(`${prefix}--label`, {
@@ -156,6 +160,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         disabled={disabled}
         data-toggle-password-visibility={inputType === 'password'}
       />
+      {isFluid && <hr className={`${prefix}--text-input__divider`} />}
       <button
         type="button"
         className={passwordVisibilityToggleClasses}
@@ -170,8 +175,6 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       </button>
     </>
   );
-
-  const { isFluid } = useContext(FormContext);
 
   useEffect(() => {
     setInputType(type);
@@ -266,7 +269,11 @@ PasswordInput.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `PasswordInput` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<input>`

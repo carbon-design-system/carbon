@@ -885,6 +885,25 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "francinelucca",
+      "name": "Francine Lucca",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40550942?v=4",
+      "profile": "https://github.com/francinelucca",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    },
+    {
+      "login": "hannelevaltanen",
+      "name": "Hannele Valtanen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26527460?v=4",
+      "profile": "https://github.com/hannelevaltanen",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

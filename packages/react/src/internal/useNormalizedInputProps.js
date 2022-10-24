@@ -6,9 +6,10 @@
  */
 
 import React from 'react';
-import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 const prefix = 'cds';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { usePrefix } from './usePrefix';
 
 /**
  * @typedef {object} InputProps
@@ -54,6 +55,7 @@ export function useNormalizedInputProps({
   warn,
   warnText,
 }) {
+  const prefix = usePrefix();
   const normalizedProps = {
     disabled: !readOnly && disabled,
     invalid: !readOnly && invalid,

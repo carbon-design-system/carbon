@@ -6,8 +6,9 @@
  */
 
 import cx from 'classnames';
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import deprecate from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
 import ListBoxField from './ListBoxField';
@@ -15,6 +16,7 @@ import ListBoxMenu from './ListBoxMenu';
 import ListBoxMenuIcon from './ListBoxMenuIcon';
 import ListBoxMenuItem from './ListBoxMenuItem';
 import ListBoxSelection from './ListBoxSelection';
+import { FormContext } from '../FluidForm';
 
 const handleOnKeyDown = (event) => {
   if (event.keyCode === 27) {
@@ -49,6 +51,7 @@ const ListBox = React.forwardRef(function ListBox(
   ref
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const showWarning = !invalid && warn;
 
   const className = cx({
@@ -59,6 +62,7 @@ const ListBox = React.forwardRef(function ListBox(
     [`${prefix}--list-box--disabled`]: disabled,
     [`${prefix}--list-box--light`]: light,
     [`${prefix}--list-box--expanded`]: isOpen,
+    [`${prefix}--list-box--invalid`]: invalid,
     [`${prefix}--list-box--warning`]: showWarning,
   });
   return (
@@ -73,6 +77,7 @@ const ListBox = React.forwardRef(function ListBox(
         data-invalid={invalid || undefined}>
         {children}
       </div>
+      {isFluid && <hr className={`${prefix}--list-box__divider`} />}
       {invalid ? (
         <div className={`${prefix}--form-requirement`}>{invalidText}</div>
       ) : null}
@@ -119,7 +124,11 @@ ListBox.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `ListBox` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.

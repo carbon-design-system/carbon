@@ -81,6 +81,7 @@
     color: $text-disabled;
     cursor: not-allowed;
     outline: none;
+    resize: none;
   }
 
   .#{$prefix}--text-area:disabled::placeholder {

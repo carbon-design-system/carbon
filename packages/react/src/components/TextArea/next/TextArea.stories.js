@@ -15,6 +15,13 @@ export default {
   subcomponents: {
     TextAreaSkeleton,
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => (
@@ -60,3 +67,11 @@ export const WithLayer = () => {
 };
 
 export const Skeleton = () => <TextAreaSkeleton />;
+
+export const Playground = (args) => (
+  <TextArea
+    {...args}
+    labelText="Text area label"
+    helperText="Optional helper text."
+  />
+);

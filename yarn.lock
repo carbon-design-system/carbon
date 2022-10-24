@@ -5,12 +5,13 @@ __metadata:
   version: 6
   cacheKey: 8
 
-"@actions/core@npm:^1.2.3, @actions/core@npm:^1.8.2":
-  version: 1.8.2
-  resolution: "@actions/core@npm:1.8.2"
+"@actions/core@npm:^1.10.0, @actions/core@npm:^1.2.3, @actions/core@npm:^1.8.2":
+  version: 1.10.0
+  resolution: "@actions/core@npm:1.10.0"
   dependencies:
     "@actions/http-client": ^2.0.1
-  checksum: 1cd1a47f751501900a579e641565bbe13a09d626507a4fa46b51e6a959a74a89134490ae7311570ed8ec1735ada83bcfde81a456ea4d2e24e323c16e94e39fd1
+    uuid: ^8.3.2
+  checksum: 0a75621e007ab20d887434cdd165f0b9036f14c22252a2faed33543d8b9d04ec95d823e69ca636a25245574e4585d73e1e9e47a845339553c664f9f2c9614669
   languageName: node
   linkType: hard
 
@@ -22,6 +23,18 @@ __metadata:
     "@octokit/graphql": ^4.3.1
     "@octokit/rest": ^16.43.1
   checksum: 1772df082aab607313c4c2d15f0db05b23c469dfaad72e6299aa4130b89dd6a489e1dd738ac22a7ff3acdbcc71cb2434f503f14c6e443c928f924625102528d0
+  languageName: node
+  linkType: hard
+
+"@actions/github@npm:^5.1.1":
+  version: 5.1.1
+  resolution: "@actions/github@npm:5.1.1"
+  dependencies:
+    "@actions/http-client": ^2.0.1
+    "@octokit/core": ^3.6.0
+    "@octokit/plugin-paginate-rest": ^2.17.0
+    "@octokit/plugin-rest-endpoint-methods": ^5.13.0
+  checksum: 2210bd7f8e1e8b407b7df74a259523dc4c63f4ad3a6bfcc0d7867b6e9c3499bd3e25d7de7a9a1bbd0de3be441a8832d5c0b5c0cff3036cd477378c0ec5502434
   languageName: node
   linkType: hard
 
@@ -1784,12 +1797,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.1, @babel/runtime@npm:^7.9.2":
-  version: 7.18.3
-  resolution: "@babel/runtime@npm:7.18.3"
+"@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.1.2, @babel/runtime@npm:^7.10.2, @babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.12.13, @babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.16.3, @babel/runtime@npm:^7.16.7, @babel/runtime@npm:^7.17.8, @babel/runtime@npm:^7.18.3, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.4.4, @babel/runtime@npm:^7.5.0, @babel/runtime@npm:^7.5.5, @babel/runtime@npm:^7.7.2, @babel/runtime@npm:^7.7.6, @babel/runtime@npm:^7.8.4, @babel/runtime@npm:^7.8.7, @babel/runtime@npm:^7.9.1, @babel/runtime@npm:^7.9.2":
+  version: 7.18.9
+  resolution: "@babel/runtime@npm:7.18.9"
   dependencies:
     regenerator-runtime: ^0.13.4
-  checksum: db8526226aa02cfa35a5a7ac1a34b5f303c62a1f000c7db48cb06c6290e616483e5036ab3c4e7a84d0f3be6d4e2148d5fe5cec9564bf955f505c3e764b83d7f1
+  checksum: 36dd736baba7164e82b3cc9d43e081f0cb2d05ff867ad39cac515d99546cee75b7f782018b02a3dcf5f2ef3d27f319faa68965fdfec49d4912c60c6002353a2e
   languageName: node
   linkType: hard
 
@@ -1881,7 +1894,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/cli@^11.3.0, @carbon/cli@workspace:packages/cli":
+"@carbon/cli@^11.5.0, @carbon/cli@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "@carbon/cli@workspace:packages/cli"
   dependencies:
@@ -1889,7 +1902,7 @@ __metadata:
     "@carbon/cli-reporter": ^10.5.0
     "@octokit/plugin-retry": ^3.0.7
     "@octokit/plugin-throttling": ^4.0.0
-    "@octokit/rest": ^16.28.1
+    "@octokit/rest": ^19.0.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
@@ -1904,8 +1917,8 @@ __metadata:
     klaw-sync: ^6.0.0
     lodash.template: ^4.5.0
     markdown-toc: ^1.2.0
-    prettier: ^2.6.2
-    prettier-config-carbon: ^0.7.0
+    prettier: ^2.7.1
+    prettier-config-carbon: ^0.8.0
     progress-estimator: ^0.3.0
     remark: ^10.0.1
     replace-in-file: ^6.1.0
@@ -1918,14 +1931,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/colors@^11.4.0, @carbon/colors@workspace:packages/colors":
+"@carbon/colors@^11.6.0, @carbon/colors@workspace:packages/colors":
   version: 0.0.0-use.local
   resolution: "@carbon/colors@workspace:packages/colors"
   dependencies:
-    "@carbon/cli": ^11.3.0
+    "@carbon/cli": ^11.5.0
     "@carbon/cli-reporter": ^10.5.0
-    "@carbon/scss-generator": ^10.14.0
-    "@carbon/test-utils": ^10.25.0
+    "@carbon/scss-generator": ^10.15.0
+    "@carbon/test-utils": ^10.26.0
     change-case: ^4.1.1
     fs-extra: ^10.0.0
     rimraf: ^3.0.0
@@ -1936,14 +1949,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/elements@workspace:packages/elements"
   dependencies:
-    "@carbon/cli": ^11.3.0
-    "@carbon/colors": ^11.4.0
-    "@carbon/grid": ^11.5.0
-    "@carbon/icons": ^11.7.0
-    "@carbon/layout": ^11.5.0
-    "@carbon/motion": ^11.3.0
-    "@carbon/themes": ^11.7.0
-    "@carbon/type": ^11.7.0
+    "@carbon/cli": ^11.5.0
+    "@carbon/colors": ^11.6.0
+    "@carbon/grid": ^11.7.0
+    "@carbon/icons": ^11.10.0
+    "@carbon/layout": ^11.7.0
+    "@carbon/motion": ^11.5.0
+    "@carbon/themes": ^11.10.0
+    "@carbon/type": ^11.10.0
     fs-extra: ^10.0.0
     klaw-sync: ^6.0.0
     replace-in-file: ^3.4.2
@@ -1951,7 +1964,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/feature-flags@^0.8.0, @carbon/feature-flags@workspace:packages/feature-flags":
+"@carbon/feature-flags@^0.9.0, @carbon/feature-flags@workspace:packages/feature-flags":
   version: 0.0.0-use.local
   resolution: "@carbon/feature-flags@workspace:packages/feature-flags"
   dependencies:
@@ -1960,7 +1973,7 @@ __metadata:
     "@babel/preset-env": ^7.18.2
     "@babel/template": ^7.16.7
     "@babel/types": ^7.18.4
-    "@carbon/scss-generator": ^10.14.0
+    "@carbon/scss-generator": ^10.15.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-node-resolve": ^13.0.0
     change-case: ^4.1.2
@@ -1972,17 +1985,24 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/grid@^11.5.0, @carbon/grid@workspace:packages/grid":
+"@carbon/feature-flags@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "@carbon/feature-flags@npm:0.7.0"
+  checksum: f16348fa78939e160efcbae3c4ec4ca8511593a9354457c0ed55c586c76cffd4a71c9b4d98cd5b372701a3ef965f1b6741e02939b3d0454490786ce26d8a9137
+  languageName: node
+  linkType: hard
+
+"@carbon/grid@^11.7.0, @carbon/grid@workspace:packages/grid":
   version: 0.0.0-use.local
   resolution: "@carbon/grid@workspace:packages/grid"
   dependencies:
-    "@carbon/cli": ^11.3.0
-    "@carbon/layout": ^11.5.0
+    "@carbon/cli": ^11.5.0
+    "@carbon/layout": ^11.7.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-build-helpers@^1.3.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
+"@carbon/icon-build-helpers@^1.5.0, @carbon/icon-build-helpers@workspace:packages/icon-build-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-build-helpers@workspace:packages/icon-build-helpers"
   dependencies:
@@ -1993,7 +2013,7 @@ __metadata:
     "@babel/template": ^7.16.7
     "@babel/types": ^7.18.4
     "@carbon/cli-reporter": ^10.5.0
-    "@carbon/icon-helpers": ^10.32.0
+    "@carbon/icon-helpers": ^10.34.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-replace": ^4.0.0
     browserslist-config-carbon: ^11.0.0
@@ -2004,7 +2024,7 @@ __metadata:
     js-yaml: ^3.12.1
     klaw-sync: ^6.0.0
     memfs: ^3.4.0
-    prettier: ^2.6.2
+    prettier: ^2.7.1
     prop-types: ^15.6.2
     react: ^16.6.0
     react-dom: ^16.6.0
@@ -2017,22 +2037,22 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/icon-helpers@^10.32.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
+"@carbon/icon-helpers@^10.28.0, @carbon/icon-helpers@^10.34.0, @carbon/icon-helpers@workspace:packages/icon-helpers":
   version: 0.0.0-use.local
   resolution: "@carbon/icon-helpers@workspace:packages/icon-helpers"
   dependencies:
-    "@carbon/cli": ^11.3.0
+    "@carbon/cli": ^11.5.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"@carbon/icons-react@^11.7.0, @carbon/icons-react@workspace:packages/icons-react":
+"@carbon/icons-react@^11.10.0, @carbon/icons-react@workspace:packages/icons-react":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-react@workspace:packages/icons-react"
   dependencies:
-    "@carbon/icon-build-helpers": ^1.3.0
-    "@carbon/icon-helpers": ^10.32.0
-    "@carbon/icons": ^11.7.0
+    "@carbon/icon-build-helpers": ^1.5.0
+    "@carbon/icon-helpers": ^10.34.0
+    "@carbon/icons": ^11.10.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
     rimraf: ^3.0.2
@@ -2041,49 +2061,69 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/icons-react@npm:^10.49.0":
+  version: 10.49.0
+  resolution: "@carbon/icons-react@npm:10.49.0"
+  dependencies:
+    "@carbon/icon-helpers": ^10.28.0
+    "@carbon/telemetry": 0.1.0
+    prop-types: ^15.7.2
+  peerDependencies:
+    react: ">=16"
+  checksum: dd3aec2718ba80a40100f9015aea60f3cc39aa2e08580c07fa342c36034053f29ee5575446b0641692ef2555ca27a3f305561f271a2de2e0ddab564030d94de7
+  languageName: node
+  linkType: hard
+
 "@carbon/icons-vue@workspace:packages/icons-vue":
   version: 0.0.0-use.local
   resolution: "@carbon/icons-vue@workspace:packages/icons-vue"
   dependencies:
     "@carbon/cli-reporter": ^10.5.0
-    "@carbon/icon-helpers": ^10.32.0
-    "@carbon/icons": ^11.7.0
+    "@carbon/icon-helpers": ^10.34.0
+    "@carbon/icons": ^11.10.0
     fs-extra: ^10.0.0
-    prettier: ^2.6.2
+    prettier: ^2.7.1
     rimraf: ^3.0.0
     rollup: ^2.46.0
     vue: ^2.6.8
   languageName: unknown
   linkType: soft
 
-"@carbon/icons@^11.7.0, @carbon/icons@workspace:packages/icons":
+"@carbon/icons@^11.10.0, @carbon/icons@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@carbon/icons@workspace:packages/icons"
   dependencies:
-    "@carbon/cli": ^11.3.0
-    "@carbon/icon-build-helpers": ^1.3.0
+    "@carbon/cli": ^11.5.0
+    "@carbon/icon-build-helpers": ^1.5.0
     rimraf: ^3.0.2
   languageName: unknown
   linkType: soft
 
-"@carbon/layout@^11.5.0, @carbon/layout@workspace:packages/layout":
+"@carbon/layout@^11.7.0, @carbon/layout@workspace:packages/layout":
   version: 0.0.0-use.local
   resolution: "@carbon/layout@workspace:packages/layout"
   dependencies:
-    "@carbon/cli": ^11.3.0
+    "@carbon/cli": ^11.5.0
     "@carbon/cli-reporter": ^10.5.0
-    "@carbon/scss-generator": ^10.14.0
-    "@carbon/test-utils": ^10.25.0
+    "@carbon/scss-generator": ^10.15.0
+    "@carbon/test-utils": ^10.26.0
     core-js: ^3.16.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"@carbon/motion@^11.3.0, @carbon/motion@workspace:packages/motion":
+"@carbon/layout@npm:^10.37.0":
+  version: 10.37.1
+  resolution: "@carbon/layout@npm:10.37.1"
+  checksum: baabf7e70e4779f0e5000e700bcafe96f272debaac490a4345e39fedf8d0970636f7099e2607aeb9ca6170a56bbacdff69d8181c2a46ed8adac38fadc08332b6
+  languageName: node
+  linkType: hard
+
+"@carbon/motion@^11.5.0, @carbon/motion@workspace:packages/motion":
   version: 0.0.0-use.local
   resolution: "@carbon/motion@workspace:packages/motion"
   dependencies:
-    "@carbon/cli": ^11.3.0
+    "@carbon/cli": ^11.5.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
@@ -2092,9 +2132,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms-react@workspace:packages/pictograms-react"
   dependencies:
-    "@carbon/icon-build-helpers": ^1.3.0
-    "@carbon/icon-helpers": ^10.32.0
-    "@carbon/pictograms": ^12.4.0
+    "@carbon/icon-build-helpers": ^1.5.0
+    "@carbon/icon-helpers": ^10.34.0
+    "@carbon/pictograms": ^12.7.0
     "@carbon/telemetry": 0.1.0
     prop-types: ^15.7.2
   peerDependencies:
@@ -2102,16 +2142,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/pictograms@^12.4.0, @carbon/pictograms@workspace:packages/pictograms":
+"@carbon/pictograms@^12.7.0, @carbon/pictograms@workspace:packages/pictograms":
   version: 0.0.0-use.local
   resolution: "@carbon/pictograms@workspace:packages/pictograms"
   dependencies:
-    "@carbon/icon-build-helpers": ^1.3.0
+    "@carbon/icon-build-helpers": ^1.5.0
     rimraf: ^3.0.0
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.11.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.15.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2123,13 +2163,13 @@ __metadata:
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
     "@babel/runtime": ^7.18.3
-    "@carbon/feature-flags": ^0.8.0
-    "@carbon/icons-react": ^11.7.0
-    "@carbon/layout": ^11.5.0
-    "@carbon/styles": ^1.11.0
+    "@carbon/feature-flags": ^0.9.0
+    "@carbon/icons-react": ^11.10.0
+    "@carbon/layout": ^11.7.0
+    "@carbon/styles": ^1.15.0
     "@carbon/telemetry": 0.1.0
-    "@carbon/test-utils": ^10.25.0
-    "@carbon/themes": ^11.7.0
+    "@carbon/test-utils": ^10.26.0
+    "@carbon/themes": ^11.10.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
@@ -2150,7 +2190,8 @@ __metadata:
     babel-preset-carbon: ^0.3.0
     browserify-zlib: ^0.2.0
     browserslist-config-carbon: ^11.0.0
-    classnames: 2.3.1
+    classnames: 2.3.2
+    clipboardy: ^2.1.0
     copy-to-clipboard: ^3.3.1
     css-loader: ^6.5.1
     downshift: 5.2.1
@@ -2177,7 +2218,7 @@ __metadata:
     rimraf: ^3.0.2
     rollup: ^2.46.0
     rollup-plugin-strip-banner: ^2.0.0
-    rtlcss: ^3.5.0
+    rtlcss: ^4.0.0
     sass: ^1.51.0
     sass-loader: ^13.0.0
     storybook-readme: ^5.0.9
@@ -2195,11 +2236,11 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/scss-generator@^10.14.0, @carbon/scss-generator@workspace:packages/scss-generator":
+"@carbon/scss-generator@^10.15.0, @carbon/scss-generator@workspace:packages/scss-generator":
   version: 0.0.0-use.local
   resolution: "@carbon/scss-generator@workspace:packages/scss-generator"
   dependencies:
-    prettier: ^2.6.2
+    prettier: ^2.7.1
   languageName: unknown
   linkType: soft
 
@@ -2207,11 +2248,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@carbon/sketch@workspace:packages/sketch"
   dependencies:
-    "@carbon/colors": ^11.4.0
-    "@carbon/icon-helpers": ^10.32.0
-    "@carbon/icons": ^11.7.0
-    "@carbon/themes": ^11.7.0
-    "@carbon/type": ^11.7.0
+    "@carbon/colors": ^11.6.0
+    "@carbon/icon-helpers": ^10.34.0
+    "@carbon/icons": ^11.10.0
+    "@carbon/themes": ^11.10.0
+    "@carbon/type": ^11.10.0
     "@skpm/builder": ^0.8.0
     color-string: ^1.5.3
     core-js: ^3.16.0
@@ -2222,18 +2263,18 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^1.11.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^1.15.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
-    "@carbon/colors": ^11.4.0
-    "@carbon/feature-flags": ^0.8.0
-    "@carbon/grid": ^11.5.0
-    "@carbon/layout": ^11.5.0
-    "@carbon/motion": ^11.3.0
-    "@carbon/test-utils": ^10.25.0
-    "@carbon/themes": ^11.7.0
-    "@carbon/type": ^11.7.0
+    "@carbon/colors": ^11.6.0
+    "@carbon/feature-flags": ^0.9.0
+    "@carbon/grid": ^11.7.0
+    "@carbon/layout": ^11.7.0
+    "@carbon/motion": ^11.5.0
+    "@carbon/test-utils": ^10.26.0
+    "@carbon/themes": ^11.10.0
+    "@carbon/type": ^11.10.0
     "@ibm/plex": 6.0.0-next.6
     autoprefixer: ^10.4.7
     browserslist-config-carbon: ^11.0.0
@@ -2258,11 +2299,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/test-utils@^10.25.0, @carbon/test-utils@workspace:packages/test-utils":
+"@carbon/test-utils@^10.26.0, @carbon/test-utils@workspace:packages/test-utils":
   version: 0.0.0-use.local
   resolution: "@carbon/test-utils@workspace:packages/test-utils"
   dependencies:
-    prettier: ^2.6.2
+    prettier: ^2.7.1
     react: ^17.0.1
     react-dom: ^16.9.0
     resolve: ^1.12.0
@@ -2273,21 +2314,21 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/themes@^11.7.0, @carbon/themes@workspace:packages/themes":
+"@carbon/themes@^11.10.0, @carbon/themes@workspace:packages/themes":
   version: 0.0.0-use.local
   resolution: "@carbon/themes@workspace:packages/themes"
   dependencies:
     "@babel/node": ^7.17.10
     "@babel/preset-env": ^7.18.2
-    "@carbon/cli": ^11.3.0
+    "@carbon/cli": ^11.5.0
     "@carbon/cli-reporter": ^10.5.0
-    "@carbon/colors": ^11.4.0
-    "@carbon/layout": ^11.5.0
-    "@carbon/scss-generator": ^10.14.0
-    "@carbon/test-utils": ^10.25.0
-    "@carbon/type": ^11.7.0
+    "@carbon/colors": ^11.6.0
+    "@carbon/layout": ^11.7.0
+    "@carbon/scss-generator": ^10.15.0
+    "@carbon/test-utils": ^10.26.0
+    "@carbon/type": ^11.10.0
     change-case: ^4.1.1
-    color: ^3.1.2
+    color: ^4.0.0
     core-js: ^3.16.0
     fs-extra: ^10.0.0
     js-yaml: ^3.13.0
@@ -2295,13 +2336,14 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/type@^11.7.0, @carbon/type@workspace:packages/type":
+"@carbon/type@^11.10.0, @carbon/type@workspace:packages/type":
   version: 0.0.0-use.local
   resolution: "@carbon/type@workspace:packages/type"
   dependencies:
-    "@carbon/cli": ^11.3.0
-    "@carbon/grid": ^11.5.0
-    "@carbon/test-utils": ^10.25.0
+    "@carbon/cli": ^11.5.0
+    "@carbon/grid": ^11.7.0
+    "@carbon/layout": ^11.7.0
+    "@carbon/test-utils": ^10.26.0
     change-case: ^4.1.1
     css: ^3.0.0
     rimraf: ^3.0.0
@@ -2314,7 +2356,7 @@ __metadata:
   dependencies:
     chalk: ^4.1.1
     change-case: ^4.1.2
-    esbuild: ^0.14.10
+    esbuild: ^0.15.0
     execa: ^5.1.1
     fast-glob: ^3.2.11
     fs-extra: ^10.0.0
@@ -2803,6 +2845,13 @@ __metadata:
     esquery: ^1.4.0
     jsdoc-type-pratt-parser: ~2.2.3
   checksum: b64afeaddccbc8da185c640e608496f6d6f8ee564c6255cdb44b16e00fe441e1f0552b5748033df2baf42187cfbfa9f31c46716982945d4343f8eaf44e253087
+  languageName: node
+  linkType: hard
+
+"@esbuild/linux-loong64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "@esbuild/linux-loong64@npm:0.15.3"
+  conditions: os=linux & cpu=loong64
   languageName: node
   linkType: hard
 
@@ -4490,6 +4539,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@octokit/auth-action@npm:^2.0.1":
+  version: 2.0.2
+  resolution: "@octokit/auth-action@npm:2.0.2"
+  dependencies:
+    "@octokit/auth-token": ^3.0.0
+    "@octokit/types": ^8.0.0
+  checksum: 033b8776964bfe68ff1f603c56a4e14cfe2d6d13599b025323e1d354d97f8f0a7b0b65b1c19dcb6658261932164dd3b73aaaa46d598f0ad04b054efedc221819
+  languageName: node
+  linkType: hard
+
 "@octokit/auth-token@npm:^2.4.0, @octokit/auth-token@npm:^2.4.4":
   version: 2.5.0
   resolution: "@octokit/auth-token@npm:2.5.0"
@@ -4508,33 +4567,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/core@npm:^3.5.1":
-  version: 3.5.1
-  resolution: "@octokit/core@npm:3.5.1"
+"@octokit/core@npm:^3.5.1, @octokit/core@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "@octokit/core@npm:3.6.0"
   dependencies:
     "@octokit/auth-token": ^2.4.4
     "@octokit/graphql": ^4.5.8
-    "@octokit/request": ^5.6.0
+    "@octokit/request": ^5.6.3
     "@octokit/request-error": ^2.0.5
     "@octokit/types": ^6.0.3
     before-after-hook: ^2.2.0
     universal-user-agent: ^6.0.0
-  checksum: 67179739fc9712b201f2400f132287a2c56a18506e00900bc9d2a3f742b74f1ba69ad998e42f28f3964c0bd1d5478232c1ec7b485c97702b821fbe22b76afa90
+  checksum: f81160129037bd8555d47db60cd5381637b7e3602ad70735a7bdf8f3d250c7b7114a666bb12ef7a8746a326a5d72ed30a1b8f8a5a170007f7285c8e217bef1f0
   languageName: node
   linkType: hard
 
 "@octokit/core@npm:^4.0.0":
-  version: 4.0.4
-  resolution: "@octokit/core@npm:4.0.4"
+  version: 4.0.5
+  resolution: "@octokit/core@npm:4.0.5"
   dependencies:
     "@octokit/auth-token": ^3.0.0
     "@octokit/graphql": ^5.0.0
     "@octokit/request": ^6.0.0
     "@octokit/request-error": ^3.0.0
-    "@octokit/types": ^6.0.3
+    "@octokit/types": ^7.0.0
     before-after-hook: ^2.2.0
     universal-user-agent: ^6.0.0
-  checksum: c9ae1e5706ab568a725cc5dba314049fbd37d77f1595dd2c19733abddfd72f4e1d46d6980e212d845dde4625ce5f170af951ac0eb0d7bc09e56a159b88cbe5dd
+  checksum: 6e4a2161d22b9cb24cd1cf702e6d18200fc48a29dc66db08c37809d65243d29429123652072126d9f161e45aef6a57e72a5d56d7e975829c190e8c3c46b3f1b9
   languageName: node
   linkType: hard
 
@@ -4582,10 +4641,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/openapi-types@npm:^11.2.0":
-  version: 11.2.0
-  resolution: "@octokit/openapi-types@npm:11.2.0"
-  checksum: eb373ea496bc96bf0233505a0916eb38cb193d1829cab935e1cf1fd21839c402a1d835d3c0326290c756c0ed980a64d0ae73ad3c5d5decde9000f0828aa7ff52
+"@octokit/openapi-types@npm:^12.11.0":
+  version: 12.11.0
+  resolution: "@octokit/openapi-types@npm:12.11.0"
+  checksum: 8a7d4bd6288cc4085cabe0ca9af2b87c875c303af932cb138aa1b2290eb69d32407759ac23707bb02776466e671244a902e9857896903443a69aff4b6b2b0e3b
+  languageName: node
+  linkType: hard
+
+"@octokit/openapi-types@npm:^13.11.0":
+  version: 13.13.1
+  resolution: "@octokit/openapi-types@npm:13.13.1"
+  checksum: 7f49a46ada1cc6ed105b19aa839f570643c099488929939d7c690d3f466b6c6e0b54e066a557bd0679e0cc36d706a992c9c763c63c5f1f90afe98a68fcb15186
+  languageName: node
+  linkType: hard
+
+"@octokit/openapi-types@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "@octokit/openapi-types@npm:14.0.0"
+  checksum: 0a1f8f3be998cd82c5a640e9166d43fd183b33d5d36f5e1a9b81608e94d0da87c01ec46c9988f69cd26585d4e2ffc4d3ec99ee4f75e5fe997fc86dad0aa8293c
   languageName: node
   linkType: hard
 
@@ -4605,14 +4678,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-paginate-rest@npm:^2.16.8":
-  version: 2.17.0
-  resolution: "@octokit/plugin-paginate-rest@npm:2.17.0"
+"@octokit/plugin-paginate-rest@npm:^2.16.8, @octokit/plugin-paginate-rest@npm:^2.17.0":
+  version: 2.21.3
+  resolution: "@octokit/plugin-paginate-rest@npm:2.21.3"
   dependencies:
-    "@octokit/types": ^6.34.0
+    "@octokit/types": ^6.40.0
   peerDependencies:
     "@octokit/core": ">=2"
-  checksum: c8753cda6f7ede79d0e9df43a54e56020aa1c9c6887684e0e0d45cb6ee0dcabf460c3e4b8a18edabef711bb269fd826616e99e78dc29fb30d47c210c562603a0
+  checksum: acf31de2ba4021bceec7ff49c5b0e25309fc3c009d407f153f928ddf436ab66cd4217344138378d5523f5fb233896e1db58c9c7b3ffd9612a66d760bc5d319ed
+  languageName: node
+  linkType: hard
+
+"@octokit/plugin-paginate-rest@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "@octokit/plugin-paginate-rest@npm:3.1.0"
+  dependencies:
+    "@octokit/types": ^6.41.0
+  peerDependencies:
+    "@octokit/core": ">=4"
+  checksum: a09212a1c6e0be4a7929acd192659cb204fcb7c6a52cf7e7f1b87da0338d812c8c26e7ee44d00e8b9824d8904d6caaa978a84c26001ab982ffec5123600aa4d8
   languageName: node
   linkType: hard
 
@@ -4635,15 +4719,27 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/plugin-rest-endpoint-methods@npm:^5.12.0":
-  version: 5.13.0
-  resolution: "@octokit/plugin-rest-endpoint-methods@npm:5.13.0"
+"@octokit/plugin-rest-endpoint-methods@npm:^5.12.0, @octokit/plugin-rest-endpoint-methods@npm:^5.13.0":
+  version: 5.16.2
+  resolution: "@octokit/plugin-rest-endpoint-methods@npm:5.16.2"
   dependencies:
-    "@octokit/types": ^6.34.0
+    "@octokit/types": ^6.39.0
     deprecation: ^2.3.1
   peerDependencies:
     "@octokit/core": ">=3"
-  checksum: f331457e4317130adb456b27df2a99609fb54a4dc2da6f87009e567c7325680c901abf18ad08483535bab4ec1c892e4236f4135a2804603aebb12c0698c678c8
+  checksum: 30fcc50c335d1093f03573d9fa3a4b7d027fc98b215c43e07e82ee8dabfa0af0cf1b963feb542312ae32d897a2f68dc671577206f30850215517bebedc5a2c73
+  languageName: node
+  linkType: hard
+
+"@octokit/plugin-rest-endpoint-methods@npm:^6.0.0":
+  version: 6.2.0
+  resolution: "@octokit/plugin-rest-endpoint-methods@npm:6.2.0"
+  dependencies:
+    "@octokit/types": ^6.41.0
+    deprecation: ^2.3.1
+  peerDependencies:
+    "@octokit/core": ">=3"
+  checksum: 6acfe6c29783b2d849057bb78c931be9d9f170a2923052e7ed750506afbe5deb469585c84538009cfd1336efd4e3af01b0acee197e3f1d09df30d4c31b5adab3
   languageName: node
   linkType: hard
 
@@ -4658,14 +4754,14 @@ __metadata:
   linkType: hard
 
 "@octokit/plugin-throttling@npm:^4.0.0":
-  version: 4.1.0
-  resolution: "@octokit/plugin-throttling@npm:4.1.0"
+  version: 4.3.0
+  resolution: "@octokit/plugin-throttling@npm:4.3.0"
   dependencies:
-    "@octokit/types": ^6.0.1
+    "@octokit/types": ^7.0.0
     bottleneck: ^2.15.3
   peerDependencies:
     "@octokit/core": ^4.0.0
-  checksum: 2ac2f8373595c242d73fe55383429ee13069ab4223ddf63cf1fd62266e46ee45dad21307132ba4c2dc1463fee13591a3c89a6f8155596277bf0fe9570bcb2a68
+  checksum: f2c23c070c9a1afee80a195a4da66dca568be40be3be5532bb32eabc0e22a53ab591f7109a9499ac9eaebbc873c08cca48c90e4f8af2e2010db5f8bd99e280ae
   languageName: node
   linkType: hard
 
@@ -4702,35 +4798,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/request@npm:^5.2.0, @octokit/request@npm:^5.6.0":
-  version: 5.6.2
-  resolution: "@octokit/request@npm:5.6.2"
+"@octokit/request@npm:^5.2.0, @octokit/request@npm:^5.6.0, @octokit/request@npm:^5.6.3":
+  version: 5.6.3
+  resolution: "@octokit/request@npm:5.6.3"
   dependencies:
     "@octokit/endpoint": ^6.0.1
     "@octokit/request-error": ^2.1.0
     "@octokit/types": ^6.16.1
     is-plain-object: ^5.0.0
-    node-fetch: ^2.6.1
+    node-fetch: ^2.6.7
     universal-user-agent: ^6.0.0
-  checksum: 51ef3ad244b3d89ffd6d997fa0ed3e13a7a93b4c868ce5c53b0fcc93a654965135528e62d0720ebfeb7dfd586448a4a45d08fd75ba2e170cfa19d37834e49f1f
+  checksum: c0b4542eb4baaf880d673c758d3e0b5c4a625a4ae30abf40df5548b35f1ff540edaac74625192b1aff42a79ac661e774da4ab7d5505f1cb4ef81239b1e8510c5
   languageName: node
   linkType: hard
 
-"@octokit/request@npm:^6.0.0":
-  version: 6.2.0
-  resolution: "@octokit/request@npm:6.2.0"
+"@octokit/request@npm:^6.0.0, @octokit/request@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "@octokit/request@npm:6.2.1"
   dependencies:
     "@octokit/endpoint": ^7.0.0
     "@octokit/request-error": ^3.0.0
-    "@octokit/types": ^6.16.1
+    "@octokit/types": ^7.0.0
     is-plain-object: ^5.0.0
     node-fetch: ^2.6.7
     universal-user-agent: ^6.0.0
-  checksum: d66a2248e4cc15b7b8d558f0d947b0ec6e6deca121922b81a99df916e69fb98ecf2269ec03beb933f3df4006b60a8e2a843a67304d08f90aed8b8edcea7f71b2
+  checksum: f0a3e878de8c2e6930da5af835d9a3750800eff9ba66af02400dc75238475a9b9c2c5473047792c0f37c2c371095a36485c0729c419873bdccb6058bb8637685
   languageName: node
   linkType: hard
 
-"@octokit/rest@npm:^16.28.1, @octokit/rest@npm:^16.43.1":
+"@octokit/rest@npm:^16.43.1":
   version: 16.43.1
   resolution: "@octokit/rest@npm:16.43.1"
   dependencies:
@@ -4754,7 +4850,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/rest@npm:^18.1.0, @octokit/rest@npm:^18.12.0":
+"@octokit/rest@npm:^18.1.0":
   version: 18.12.0
   resolution: "@octokit/rest@npm:18.12.0"
   dependencies:
@@ -4763,6 +4859,18 @@ __metadata:
     "@octokit/plugin-request-log": ^1.0.4
     "@octokit/plugin-rest-endpoint-methods": ^5.12.0
   checksum: c18bd6676a60b66819b016b0f969fcd04d8dfa04d01b7af9af9a7410ff028c621c995185e29454c23c47906da506c1e01620711259989a964ebbfd9106f5b715
+  languageName: node
+  linkType: hard
+
+"@octokit/rest@npm:^19.0.0":
+  version: 19.0.3
+  resolution: "@octokit/rest@npm:19.0.3"
+  dependencies:
+    "@octokit/core": ^4.0.0
+    "@octokit/plugin-paginate-rest": ^3.0.0
+    "@octokit/plugin-request-log": ^1.0.4
+    "@octokit/plugin-rest-endpoint-methods": ^6.0.0
+  checksum: 9ee96976c4c22dab11b3dacd541e694f3ad9bb1d44243985dc90ce6e8a42c3e3176a206e8d3a883b63b517fc15af8c8c88d8d0ecd9bac2b86a635a9667fc6ff4
   languageName: node
   linkType: hard
 
@@ -4775,12 +4883,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@octokit/types@npm:^6.0.1, @octokit/types@npm:^6.0.3, @octokit/types@npm:^6.16.1, @octokit/types@npm:^6.34.0":
-  version: 6.34.0
-  resolution: "@octokit/types@npm:6.34.0"
+"@octokit/types@npm:^6.0.3, @octokit/types@npm:^6.16.1, @octokit/types@npm:^6.39.0, @octokit/types@npm:^6.40.0, @octokit/types@npm:^6.41.0":
+  version: 6.41.0
+  resolution: "@octokit/types@npm:6.41.0"
   dependencies:
-    "@octokit/openapi-types": ^11.2.0
-  checksum: f122b9aee8f6baddd515e34a0913e73b21d4bc82d6ee59d77a8aaf01b4a02c10867dd013003d087a83dc96db23511893669015af6d30c27cece185e21cf1df89
+    "@octokit/openapi-types": ^12.11.0
+  checksum: fd6f75e0b19b90d1a3d244d2b0c323ed8f2f05e474a281f60a321986683548ef2e0ec2b3a946aa9405d6092e055344455f69f58957c60f58368c8bdda5b7d2ab
+  languageName: node
+  linkType: hard
+
+"@octokit/types@npm:^7.0.0":
+  version: 7.5.1
+  resolution: "@octokit/types@npm:7.5.1"
+  dependencies:
+    "@octokit/openapi-types": ^13.11.0
+  checksum: eaa9aac2f4760aef5e69e4f663450fce34d4fab5a6a8c26cba49257ce0c4b621fd8f19ddad0ce9764b64cc6b3ef5d6fe631ff518832d3e09affbc96b7432fae5
+  languageName: node
+  linkType: hard
+
+"@octokit/types@npm:^8.0.0":
+  version: 8.0.0
+  resolution: "@octokit/types@npm:8.0.0"
+  dependencies:
+    "@octokit/openapi-types": ^14.0.0
+  checksum: 1a0197b2c4c522ac90f145e02b3f8cb048a47f71c2c6bdbf021a03db7dd30ca92a899c0186acb401337f218efe44e60d33cc1cc68715b622bb75bc1a4e79515d
   languageName: node
   linkType: hard
 
@@ -8647,12 +8773,12 @@ __metadata:
   linkType: hard
 
 "aggregate-error@npm:^3.0.0":
-  version: 3.0.1
-  resolution: "aggregate-error@npm:3.0.1"
+  version: 3.1.0
+  resolution: "aggregate-error@npm:3.1.0"
   dependencies:
     clean-stack: ^2.0.0
     indent-string: ^4.0.0
-  checksum: 1f922d00cc51cf9f7f6f729c0b925689ed5a464aefc1fac8309924f622000ee3741d314d864b2d776f9627236ea79daf5a83d093f6b72edc52160571160eff82
+  checksum: 1101a33f21baa27a2fa8e04b698271e64616b886795fd43c31068c07533c7b3facfcaf4e9e0cab3624bd88f729a592f1c901a1a229c9e490eafce411a8644b79
   languageName: node
   linkType: hard
 
@@ -10620,6 +10746,39 @@ __metadata:
   languageName: node
   linkType: hard
 
+"carbon-components-react@npm:^7.57.0":
+  version: 7.59.0
+  resolution: "carbon-components-react@npm:7.59.0"
+  dependencies:
+    "@babel/runtime": ^7.16.7
+    "@carbon/feature-flags": ^0.7.0
+    "@carbon/icons-react": ^10.49.0
+    "@carbon/layout": ^10.37.0
+    "@carbon/telemetry": 0.1.0
+    classnames: 2.3.1
+    copy-to-clipboard: ^3.3.1
+    downshift: 5.2.1
+    flatpickr: 4.6.9
+    invariant: ^2.2.3
+    lodash.debounce: ^4.0.8
+    lodash.findlast: ^4.5.0
+    lodash.isequal: ^4.5.0
+    lodash.omit: ^4.5.0
+    lodash.throttle: ^4.1.1
+    prop-types: ^15.7.2
+    react-is: ^17.0.2
+    use-resize-observer: ^6.0.0
+    wicg-inert: ^3.1.1
+    window-or-global: ^1.0.1
+  peerDependencies:
+    carbon-components: ^10.30.0
+    carbon-icons: ^7.0.7
+    react: ^16.8.6 || ^17.0.1
+    react-dom: ^16.8.6 || ^17.0.1
+  checksum: 7762d139dfa7a9ab7186f4c3d91381ba0cdc1299b6ee202233e7f67603900e4878e86a43d9a7e6bef37e1861c2124b0c4c3c20230c74853cbae3114902ecba79
+  languageName: node
+  linkType: hard
+
 "carbon-components-react@workspace:packages/carbon-components-react":
   version: 0.0.0-use.local
   resolution: "carbon-components-react@workspace:packages/carbon-components-react"
@@ -10631,10 +10790,10 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.17.12
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
-    "@carbon/react": ^1.11.0
-    "@carbon/styles": ^1.11.0
+    "@carbon/react": ^1.15.0
+    "@carbon/styles": ^1.15.0
     "@carbon/telemetry": 0.1.0
-    "@carbon/test-utils": ^10.25.0
+    "@carbon/test-utils": ^10.26.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
@@ -10654,13 +10813,25 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"carbon-components@npm:^10.57.0":
+  version: 10.58.0
+  resolution: "carbon-components@npm:10.58.0"
+  dependencies:
+    "@carbon/telemetry": 0.1.0
+    flatpickr: 4.6.1
+    lodash.debounce: ^4.0.8
+    warning: ^3.0.0
+  checksum: 25dbc8c50908db559cfde297d458fdb4c31aa376bd94339b2d16191751c3e2f736689a180368f6727275e45c45260b9c6b8a71ebe3bb63816b995dffbe50a861
+  languageName: node
+  linkType: hard
+
 "carbon-components@workspace:packages/carbon-components":
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^1.11.0
+    "@carbon/styles": ^1.15.0
     "@carbon/telemetry": 0.1.0
-    "@carbon/test-utils": ^10.25.0
+    "@carbon/test-utils": ^10.26.0
     fs-extra: ^10.0.0
     rimraf: ^3.0.2
     sass: ^1.51.0
@@ -10668,6 +10839,13 @@ __metadata:
     sass: ^1.33.0
   languageName: unknown
   linkType: soft
+
+"carbon-icons@npm:^7.0.7":
+  version: 7.0.7
+  resolution: "carbon-icons@npm:7.0.7"
+  checksum: ecb87c4f09ef52dab4a01c3de8ab5aeee14f1c93dedd09f164e95143642a34fe7a52433ab76a3536565db14f037dd8c1bf7ff1ed45b28c9c49a1bee142ffc1b5
+  languageName: node
+  linkType: hard
 
 "carbon@workspace:.":
   version: 0.0.0-use.local
@@ -10705,7 +10883,7 @@ __metadata:
     lerna: ^4.0.0
     lint-staged: ^13.0.0
     node-gyp: ^7.1.2
-    prettier: ^2.6.2
+    prettier: ^2.7.1
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.0
@@ -11030,6 +11208,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"classnames@npm:2.3.2":
+  version: 2.3.2
+  resolution: "classnames@npm:2.3.2"
+  checksum: 2c62199789618d95545c872787137262e741f9db13328e216b093eea91c85ef2bfb152c1f9e63027204e2559a006a92eb74147d46c800a9f96297ae1d9f96f4e
+  languageName: node
+  linkType: hard
+
 "clean-css@npm:4.2.x, clean-css@npm:^4.2.3":
   version: 4.2.4
   resolution: "clean-css@npm:4.2.4"
@@ -11347,7 +11532,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^1.11.0
+    "@carbon/styles": ^1.15.0
     sass: ^1.51.0
     vite: ^2.8.0
   languageName: unknown
@@ -11357,7 +11542,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.15.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -11369,7 +11554,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.15.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -11411,7 +11596,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-convert@npm:^1.9.0, color-convert@npm:^1.9.3":
+"color-convert@npm:^1.9.0":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
   dependencies:
@@ -11443,13 +11628,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-string@npm:^1.5.3, color-string@npm:^1.6.0":
-  version: 1.9.0
-  resolution: "color-string@npm:1.9.0"
+"color-string@npm:^1.5.3, color-string@npm:^1.9.0":
+  version: 1.9.1
+  resolution: "color-string@npm:1.9.1"
   dependencies:
     color-name: ^1.0.0
     simple-swizzle: ^0.2.2
-  checksum: 93c6678b847f8cfa47d19677fd19e1d4b19d7a33f100644400357c298266080b5bca64e5f874fa8ac8cc0aa0606ad44f7a838b4e6fd05e6affea190a68555bb4
+  checksum: c13fe7cff7885f603f49105827d621ce87f4571d78ba28ef4a3f1a104304748f620615e6bf065ecd2145d0d9dad83a3553f52bb25ede7239d18e9f81622f1cc5
   languageName: node
   linkType: hard
 
@@ -11462,13 +11647,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color@npm:^3.1.2":
-  version: 3.2.1
-  resolution: "color@npm:3.2.1"
+"color@npm:^4.0.0":
+  version: 4.2.3
+  resolution: "color@npm:4.2.3"
   dependencies:
-    color-convert: ^1.9.3
-    color-string: ^1.6.0
-  checksum: f81220e8b774d35865c2561be921f5652117638dcda7ca4029262046e37fc2444ac7bbfdd110cf1fd9c074a4ee5eda8f85944ffbdda26186b602dd9bb05f6400
+    color-convert: ^2.0.1
+    color-string: ^1.9.0
+  checksum: 0579629c02c631b426780038da929cca8e8d80a40158b09811a0112a107c62e10e4aad719843b791b1e658ab4e800558f2e87ca4522c8b32349d497ecb6adeb4
   languageName: node
   linkType: hard
 
@@ -12671,6 +12856,21 @@ __metadata:
   checksum: 1f59fe10b5339b54b1a1eee110022f663f3495cf7cf2f480686e89edc7fa8bfe42dbab4b54f85034bc8b092a76cc7becbc2dad4f9adad332ab5831bec39ad540
   languageName: node
   linkType: hard
+
+"custom-theme@workspace:examples/custom-theme":
+  version: 0.0.0-use.local
+  resolution: "custom-theme@workspace:examples/custom-theme"
+  dependencies:
+    "@carbon/react": ^1.15.0
+    "@types/react": ^18.0.0
+    "@types/react-dom": ^18.0.0
+    "@vitejs/plugin-react": 1.1.3
+    react: ^17.0.0
+    react-dom: ^17.0.0
+    sass: ^1.51.0
+    vite: ^2.9.5
+  languageName: unknown
+  linkType: soft
 
 "cyclist@npm:^1.0.1":
   version: 1.0.1
@@ -14106,9 +14306,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-android-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-android-64@npm:0.15.3"
+  conditions: os=android & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-android-arm64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-android-arm64@npm:0.14.38"
+  conditions: os=android & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"esbuild-android-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-android-arm64@npm:0.15.3"
   conditions: os=android & cpu=arm64
   languageName: node
   linkType: hard
@@ -14120,9 +14334,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-darwin-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-darwin-64@npm:0.15.3"
+  conditions: os=darwin & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-darwin-arm64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-darwin-arm64@npm:0.14.38"
+  conditions: os=darwin & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"esbuild-darwin-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-darwin-arm64@npm:0.15.3"
   conditions: os=darwin & cpu=arm64
   languageName: node
   linkType: hard
@@ -14134,9 +14362,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-freebsd-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-freebsd-64@npm:0.15.3"
+  conditions: os=freebsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-freebsd-arm64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-freebsd-arm64@npm:0.14.38"
+  conditions: os=freebsd & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"esbuild-freebsd-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-freebsd-arm64@npm:0.15.3"
   conditions: os=freebsd & cpu=arm64
   languageName: node
   linkType: hard
@@ -14148,9 +14390,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-linux-32@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-32@npm:0.15.3"
+  conditions: os=linux & cpu=ia32
+  languageName: node
+  linkType: hard
+
 "esbuild-linux-64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-linux-64@npm:0.14.38"
+  conditions: os=linux & cpu=x64
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-64@npm:0.15.3"
   conditions: os=linux & cpu=x64
   languageName: node
   linkType: hard
@@ -14162,9 +14418,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-linux-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-arm64@npm:0.15.3"
+  conditions: os=linux & cpu=arm64
+  languageName: node
+  linkType: hard
+
 "esbuild-linux-arm@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-linux-arm@npm:0.14.38"
+  conditions: os=linux & cpu=arm
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-arm@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-arm@npm:0.15.3"
   conditions: os=linux & cpu=arm
   languageName: node
   linkType: hard
@@ -14176,9 +14446,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-linux-mips64le@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-mips64le@npm:0.15.3"
+  conditions: os=linux & cpu=mips64el
+  languageName: node
+  linkType: hard
+
 "esbuild-linux-ppc64le@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-linux-ppc64le@npm:0.14.38"
+  conditions: os=linux & cpu=ppc64
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-ppc64le@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-ppc64le@npm:0.15.3"
   conditions: os=linux & cpu=ppc64
   languageName: node
   linkType: hard
@@ -14190,9 +14474,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-linux-riscv64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-riscv64@npm:0.15.3"
+  conditions: os=linux & cpu=riscv64
+  languageName: node
+  linkType: hard
+
 "esbuild-linux-s390x@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-linux-s390x@npm:0.14.38"
+  conditions: os=linux & cpu=s390x
+  languageName: node
+  linkType: hard
+
+"esbuild-linux-s390x@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-linux-s390x@npm:0.15.3"
   conditions: os=linux & cpu=s390x
   languageName: node
   linkType: hard
@@ -14204,9 +14502,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-netbsd-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-netbsd-64@npm:0.15.3"
+  conditions: os=netbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-openbsd-64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-openbsd-64@npm:0.14.38"
+  conditions: os=openbsd & cpu=x64
+  languageName: node
+  linkType: hard
+
+"esbuild-openbsd-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-openbsd-64@npm:0.15.3"
   conditions: os=openbsd & cpu=x64
   languageName: node
   linkType: hard
@@ -14218,9 +14530,23 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-sunos-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-sunos-64@npm:0.15.3"
+  conditions: os=sunos & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-windows-32@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-windows-32@npm:0.14.38"
+  conditions: os=win32 & cpu=ia32
+  languageName: node
+  linkType: hard
+
+"esbuild-windows-32@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-windows-32@npm:0.15.3"
   conditions: os=win32 & cpu=ia32
   languageName: node
   linkType: hard
@@ -14232,6 +14558,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild-windows-64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-windows-64@npm:0.15.3"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
 "esbuild-windows-arm64@npm:0.14.38":
   version: 0.14.38
   resolution: "esbuild-windows-arm64@npm:0.14.38"
@@ -14239,7 +14572,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.14.10, esbuild@npm:^0.14.27":
+"esbuild-windows-arm64@npm:0.15.3":
+  version: 0.15.3
+  resolution: "esbuild-windows-arm64@npm:0.15.3"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"esbuild@npm:^0.14.27":
   version: 0.14.38
   resolution: "esbuild@npm:0.14.38"
   dependencies:
@@ -14310,6 +14650,80 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esbuild@npm:^0.15.0":
+  version: 0.15.3
+  resolution: "esbuild@npm:0.15.3"
+  dependencies:
+    "@esbuild/linux-loong64": 0.15.3
+    esbuild-android-64: 0.15.3
+    esbuild-android-arm64: 0.15.3
+    esbuild-darwin-64: 0.15.3
+    esbuild-darwin-arm64: 0.15.3
+    esbuild-freebsd-64: 0.15.3
+    esbuild-freebsd-arm64: 0.15.3
+    esbuild-linux-32: 0.15.3
+    esbuild-linux-64: 0.15.3
+    esbuild-linux-arm: 0.15.3
+    esbuild-linux-arm64: 0.15.3
+    esbuild-linux-mips64le: 0.15.3
+    esbuild-linux-ppc64le: 0.15.3
+    esbuild-linux-riscv64: 0.15.3
+    esbuild-linux-s390x: 0.15.3
+    esbuild-netbsd-64: 0.15.3
+    esbuild-openbsd-64: 0.15.3
+    esbuild-sunos-64: 0.15.3
+    esbuild-windows-32: 0.15.3
+    esbuild-windows-64: 0.15.3
+    esbuild-windows-arm64: 0.15.3
+  dependenciesMeta:
+    "@esbuild/linux-loong64":
+      optional: true
+    esbuild-android-64:
+      optional: true
+    esbuild-android-arm64:
+      optional: true
+    esbuild-darwin-64:
+      optional: true
+    esbuild-darwin-arm64:
+      optional: true
+    esbuild-freebsd-64:
+      optional: true
+    esbuild-freebsd-arm64:
+      optional: true
+    esbuild-linux-32:
+      optional: true
+    esbuild-linux-64:
+      optional: true
+    esbuild-linux-arm:
+      optional: true
+    esbuild-linux-arm64:
+      optional: true
+    esbuild-linux-mips64le:
+      optional: true
+    esbuild-linux-ppc64le:
+      optional: true
+    esbuild-linux-riscv64:
+      optional: true
+    esbuild-linux-s390x:
+      optional: true
+    esbuild-netbsd-64:
+      optional: true
+    esbuild-openbsd-64:
+      optional: true
+    esbuild-sunos-64:
+      optional: true
+    esbuild-windows-32:
+      optional: true
+    esbuild-windows-64:
+      optional: true
+    esbuild-windows-arm64:
+      optional: true
+  bin:
+    esbuild: bin/esbuild
+  checksum: d41f9c2d38fd265c3de106b9cf5d720ad20138d57669d74751b5f466c866f2d82cea39c146b100186c82b96725fd09faa88759b706ed6d8cee507d07eda35a66
+  languageName: node
+  linkType: hard
+
 "escalade@npm:^3.1.1":
   version: 3.1.1
   resolution: "escalade@npm:3.1.1"
@@ -14371,34 +14785,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-config-airbnb-base@npm:^14.2.1":
-  version: 14.2.1
-  resolution: "eslint-config-airbnb-base@npm:14.2.1"
+"eslint-config-airbnb-base@npm:^15.0.0":
+  version: 15.0.0
+  resolution: "eslint-config-airbnb-base@npm:15.0.0"
   dependencies:
     confusing-browser-globals: ^1.0.10
     object.assign: ^4.1.2
-    object.entries: ^1.1.2
+    object.entries: ^1.1.5
+    semver: ^6.3.0
   peerDependencies:
-    eslint: ^5.16.0 || ^6.8.0 || ^7.2.0
-    eslint-plugin-import: ^2.22.1
-  checksum: 858bea748a3c8685b52fcf2488e6a0b964022f8387f4ee1e69cb707d4fda2a409f09eb8eea658bcd83fae3519967d10208ba7576dd3d3202b8cf0b9d1a6e21eb
+    eslint: ^7.32.0 || ^8.2.0
+    eslint-plugin-import: ^2.25.2
+  checksum: 38626bad2ce2859fccac86b30cd2b86c9b7d8d71d458331860861dc05290a5b198bded2f4fb89efcb9046ec48f8ab4c4fb00365ba8916f27b172671da28b93ea
   languageName: node
   linkType: hard
 
-"eslint-config-airbnb@npm:^18.2.1":
-  version: 18.2.1
-  resolution: "eslint-config-airbnb@npm:18.2.1"
+"eslint-config-airbnb@npm:^19.0.0":
+  version: 19.0.4
+  resolution: "eslint-config-airbnb@npm:19.0.4"
   dependencies:
-    eslint-config-airbnb-base: ^14.2.1
+    eslint-config-airbnb-base: ^15.0.0
     object.assign: ^4.1.2
-    object.entries: ^1.1.2
+    object.entries: ^1.1.5
   peerDependencies:
-    eslint: ^5.16.0 || ^6.8.0 || ^7.2.0
-    eslint-plugin-import: ^2.22.1
-    eslint-plugin-jsx-a11y: ^6.4.1
-    eslint-plugin-react: ^7.21.5
-    eslint-plugin-react-hooks: ^4 || ^3 || ^2.3.0 || ^1.7.0
-  checksum: ea11cd0006912f7086fb278e03180da4bc2378cf4e93b1dd970775d8e9b50fd11a64209bdc0ed17654d29abe4ccfa19baa4d1e1e5bd3eb660fcf4798ba2810d2
+    eslint: ^7.32.0 || ^8.2.0
+    eslint-plugin-import: ^2.25.3
+    eslint-plugin-jsx-a11y: ^6.5.1
+    eslint-plugin-react: ^7.28.0
+    eslint-plugin-react-hooks: ^4.3.0
+  checksum: 253178689c3c80eef2567e3aaf0612e18973bc9cf51d9be36074b5dd58210e8b6942200a424bcccbb81ac884e41303479ab09f251a2a97addc2de61efdc9576c
   languageName: node
   linkType: hard
 
@@ -14407,8 +14822,8 @@ __metadata:
   resolution: "eslint-config-carbon@workspace:config/eslint-config-carbon"
   dependencies:
     babel-eslint: ^10.1.0
-    eslint-config-airbnb: ^18.2.1
-    eslint-config-airbnb-base: ^14.2.1
+    eslint-config-airbnb: ^19.0.0
+    eslint-config-airbnb-base: ^15.0.0
     eslint-config-prettier: ^8.3.0
     eslint-plugin-cypress: ^2.11.3
     eslint-plugin-import: ^2.23.4
@@ -14420,7 +14835,7 @@ __metadata:
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-storybook: ^0.6.0
     eslint-restricted-globals: ^0.2.0
-    prettier: ^2.6.2
+    prettier: ^2.7.1
   peerDependencies:
     eslint: ^6.0.0 || ^7.0.0
   languageName: unknown
@@ -15114,7 +15529,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.15.0
     eslint: 8.12.0
     next: 12.1.4
     react: 18.0.0
@@ -15127,7 +15542,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.15.0
     eslint: 8.12.0
     eslint-config-next: 12.1.4
     next: 12.1.4
@@ -15788,6 +16203,13 @@ __metadata:
     flatted: ^3.1.0
     rimraf: ^3.0.2
   checksum: 4fdd10ecbcbf7d520f9040dd1340eb5dfe951e6f0ecf2252edeec03ee68d989ec8b9a20f4434270e71bcfd57800dc09b3344fca3966b2eb8f613072c7d9a2365
+  languageName: node
+  linkType: hard
+
+"flatpickr@npm:4.6.1":
+  version: 4.6.1
+  resolution: "flatpickr@npm:4.6.1"
+  checksum: 66ea82084a70570a0dcf5a46a3b7e6a6551ec06fd1238f544226540feae69d2c3fd7af69f77c73023059e1a0d50e2f6ed0a6c4d4c390794cc4c8dd3c50002338
   languageName: node
   linkType: hard
 
@@ -17704,6 +18126,24 @@ fsevents@^1.2.7:
   checksum: 7cae75c8cd9a50f57dadd77482359f659eaebac0319dd9368bcd1714f55e65badd6929ca58569da2b6494ef13fdd5598cd700b1eba23f8b79c5f19d195a3ecf7
   languageName: node
   linkType: hard
+
+"incremental-migration@workspace:examples/incremental-migration":
+  version: 0.0.0-use.local
+  resolution: "incremental-migration@workspace:examples/incremental-migration"
+  dependencies:
+    "@carbon/icons-react": ^10.49.0
+    "@carbon/react": ^1.15.0
+    carbon-components: ^10.57.0
+    carbon-components-react: ^7.57.0
+    carbon-icons: ^7.0.7
+    eslint: 8.12.0
+    eslint-config-next: 12.1.4
+    next: 12.1.4
+    react: 18.0.0
+    react-dom: 18.0.0
+    sass: ^1.51.0
+  languageName: unknown
+  linkType: soft
 
 "indent-string@npm:^2.1.0":
   version: 2.1.0
@@ -23104,7 +23544,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"object.entries@npm:^1.1.0, object.entries@npm:^1.1.1, object.entries@npm:^1.1.2, object.entries@npm:^1.1.5":
+"object.entries@npm:^1.1.0, object.entries@npm:^1.1.1, object.entries@npm:^1.1.5":
   version: 1.1.5
   resolution: "object.entries@npm:1.1.5"
   dependencies:
@@ -25255,11 +25695,11 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prettier-config-carbon@^0.7.0, prettier-config-carbon@workspace:config/prettier-config-carbon":
+"prettier-config-carbon@^0.8.0, prettier-config-carbon@workspace:config/prettier-config-carbon":
   version: 0.0.0-use.local
   resolution: "prettier-config-carbon@workspace:config/prettier-config-carbon"
   dependencies:
-    prettier: ^2.6.2
+    prettier: ^2.7.1
   peerDependencies:
     prettier: ^2.1.0
   languageName: unknown
@@ -25283,12 +25723,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"prettier@npm:^2.6.2":
-  version: 2.6.2
-  resolution: "prettier@npm:2.6.2"
+"prettier@npm:^2.7.1":
+  version: 2.7.1
+  resolution: "prettier@npm:2.7.1"
   bin:
     prettier: bin-prettier.js
-  checksum: 48d08dde8e9fb1f5bccdd205baa7f192e9fc8bc98f86e1b97d919de804e28c806b0e6cc685e4a88211aa7987fa9668f30baae19580d87ced3ed0f2ec6572106f
+  checksum: 55a4409182260866ab31284d929b3cb961e5fdb91fe0d2e099dac92eaecec890f36e524b4c19e6ceae839c99c6d7195817579cdffc8e2c80da0cb794463a748b
   languageName: node
   linkType: hard
 
@@ -26776,6 +27216,17 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"release-notifications@workspace:actions/release-notifications":
+  version: 0.0.0-use.local
+  resolution: "release-notifications@workspace:actions/release-notifications"
+  dependencies:
+    "@actions/core": ^1.10.0
+    "@actions/github": ^5.1.1
+    "@octokit/auth-action": ^2.0.1
+    "@octokit/request": ^6.2.1
+  languageName: unknown
+  linkType: soft
+
 "remark-external-links@npm:^8.0.0":
   version: 8.0.0
   resolution: "remark-external-links@npm:8.0.0"
@@ -27477,17 +27928,17 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rtlcss@npm:^3.5.0":
-  version: 3.5.0
-  resolution: "rtlcss@npm:3.5.0"
+"rtlcss@npm:^4.0.0":
+  version: 4.0.0
+  resolution: "rtlcss@npm:4.0.0"
   dependencies:
-    find-up: ^5.0.0
+    escalade: ^3.1.1
     picocolors: ^1.0.0
-    postcss: ^8.3.11
+    postcss: ^8.4.6
     strip-json-comments: ^3.1.1
   bin:
     rtlcss: bin/rtlcss.js
-  checksum: a3763cad2cb58ce1b950de155097c3c294e7aefc8bf328b58d0cc8d5efb88bf800865edc158a78ace6d1f7f99fea6fd66fb4a354d859b172dadd3dab3e0027b3
+  checksum: cd8fe728489cc8a066a58ea518ac2089c245dede9bda376c1b33ae0c119fa9dbdb6808eee27697ecad3bfed8f338d10bfeb42c1efa60c262a9def0246233484c
   languageName: node
   linkType: hard
 
@@ -29319,7 +29770,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "stylelint-config-carbon@workspace:config/stylelint-config-carbon"
   dependencies:
-    prettier: ^2.6.2
+    prettier: ^2.7.1
     stylelint: ^14.3.0
     stylelint-a11y: ^1.2.3
     stylelint-config-idiomatic-order: ^8.1.0
@@ -30580,7 +31031,7 @@ resolve@^2.0.0-next.3:
 
 "typescript@patch:typescript@^4.6.4#~builtin<compat/typescript>":
   version: 4.7.2
-  resolution: "typescript@patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=7ad353"
+  resolution: "typescript@patch:typescript@npm%3A4.7.2#~builtin<compat/typescript>::version=4.7.2&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -31587,7 +32038,7 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.15.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -31654,6 +32105,15 @@ resolve@^2.0.0-next.3:
   dependencies:
     makeerror: 1.0.x
   checksum: 4038fcf92f6ab0288267ad05008aec9e089a759f1bd32e1ea45cc2eb498eb12095ec43cf8ca2bf23a465f4580a0d33b25b89f450ba521dd27083cbc695ee6bf5
+  languageName: node
+  linkType: hard
+
+"warning@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "warning@npm:3.0.0"
+  dependencies:
+    loose-envify: ^1.0.0
+  checksum: c9f99a12803aab81b29858e7dc3415bf98b41baee3a4c3acdeb680d98c47b6e17490f1087dccc54432deed5711a5ce0ebcda2b27e9b5eb054c32ae50acb4419c
   languageName: node
   linkType: hard
 
@@ -32651,11 +33111,11 @@ resolve@^2.0.0-next.3:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^1.11.0
+    "@carbon/react": ^1.15.0
     "@octokit/core": ^4.0.0
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^4.0.0
-    "@octokit/rest": ^18.12.0
+    "@octokit/rest": ^19.0.0
     clsx: ^1.1.1
     date-fns: ^2.25.0
     fast-glob: ^3.2.7

@@ -27,7 +27,7 @@ export default {
   },
 };
 
-export const AspectRatioStory = () => {
+export const Default = () => {
   return (
     <Grid>
       <Row>
@@ -47,8 +47,6 @@ export const AspectRatioStory = () => {
     </Grid>
   );
 };
-
-AspectRatioStory.storyName = 'AspectRatio';
 
 export const Playground = () => {
   const ratio = select(
