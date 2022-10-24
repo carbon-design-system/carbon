@@ -349,6 +349,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-module-imports@npm:^7.18.6":
+  version: 7.18.6
+  resolution: "@babel/helper-module-imports@npm:7.18.6"
+  dependencies:
+    "@babel/types": ^7.18.6
+  checksum: f393f8a3b3304b1b7a288a38c10989de754f01d29caf62ce7c4e5835daf0a27b81f3ac687d9d2780d39685aae7b55267324b512150e7b2be967b0c493b6a1def
+  languageName: node
+  linkType: hard
+
 "@babel/helper-module-transforms@npm:^7.12.1, @babel/helper-module-transforms@npm:^7.16.7, @babel/helper-module-transforms@npm:^7.18.0":
   version: 7.18.0
   resolution: "@babel/helper-module-transforms@npm:7.18.0"
@@ -446,10 +455,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/helper-string-parser@npm:^7.19.4":
+  version: 7.19.4
+  resolution: "@babel/helper-string-parser@npm:7.19.4"
+  checksum: b2f8a3920b30dfac81ec282ac4ad9598ea170648f8254b10f475abe6d944808fb006aab325d3eb5a8ad3bea8dfa888cfa6ef471050dae5748497c110ec060943
+  languageName: node
+  linkType: hard
+
 "@babel/helper-validator-identifier@npm:^7.16.7":
   version: 7.16.7
   resolution: "@babel/helper-validator-identifier@npm:7.16.7"
   checksum: dbb3db9d184343152520a209b5684f5e0ed416109cde82b428ca9c759c29b10c7450657785a8b5c5256aa74acc6da491c1f0cf6b784939f7931ef82982051b69
+  languageName: node
+  linkType: hard
+
+"@babel/helper-validator-identifier@npm:^7.19.1":
+  version: 7.19.1
+  resolution: "@babel/helper-validator-identifier@npm:7.19.1"
+  checksum: 0eca5e86a729162af569b46c6c41a63e18b43dbe09fda1d2a3c8924f7d617116af39cac5e4cd5d431bb760b4dca3c0970e0c444789b1db42bcf1fa41fbad0a3a
   languageName: node
   linkType: hard
 
@@ -1845,6 +1868,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/types@npm:^7.18.6":
+  version: 7.19.4
+  resolution: "@babel/types@npm:7.19.4"
+  dependencies:
+    "@babel/helper-string-parser": ^7.19.4
+    "@babel/helper-validator-identifier": ^7.19.1
+    to-fast-properties: ^2.0.0
+  checksum: 4032f6407093f80dd4f4764be676f7527d2a5c0381586967cd79683cf8af01cdc16745a381b9cef045f702f0c9b0dffd880d84ee55dad59ba01bd23d5d52a8e0
+  languageName: node
+  linkType: hard
+
 "@base2/pretty-print-object@npm:1.0.1":
   version: 1.0.1
   resolution: "@base2/pretty-print-object@npm:1.0.1"
@@ -1903,7 +1937,7 @@ __metadata:
     "@octokit/plugin-retry": ^3.0.7
     "@octokit/plugin-throttling": ^4.0.0
     "@octokit/rest": ^19.0.0
-    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-babel": ^6.0.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     chalk: ^4.1.1
@@ -1974,7 +2008,7 @@ __metadata:
     "@babel/template": ^7.16.7
     "@babel/types": ^7.18.4
     "@carbon/scss-generator": ^10.15.0
-    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-babel": ^6.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     change-case: ^4.1.2
     fs-extra: ^10.0.0
@@ -2014,7 +2048,7 @@ __metadata:
     "@babel/types": ^7.18.4
     "@carbon/cli-reporter": ^10.5.0
     "@carbon/icon-helpers": ^10.34.0
-    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-babel": ^6.0.0
     "@rollup/plugin-replace": ^4.0.0
     browserslist-config-carbon: ^11.0.0
     change-case: ^4.1.1
@@ -2170,7 +2204,7 @@ __metadata:
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.26.0
     "@carbon/themes": ^11.10.0
-    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-babel": ^6.0.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     "@storybook/addon-a11y": ^6.5.6
@@ -5173,7 +5207,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-babel@npm:^5.2.0, @rollup/plugin-babel@npm:^5.3.0":
+"@rollup/plugin-babel@npm:^5.2.0":
   version: 5.3.1
   resolution: "@rollup/plugin-babel@npm:5.3.1"
   dependencies:
@@ -5187,6 +5221,25 @@ __metadata:
     "@types/babel__core":
       optional: true
   checksum: 220d71e4647330f252ef33d5f29700aef2e8284a0b61acfcceb47617a7f96208aa1ed16eae75619424bf08811ede5241e271a6d031f07026dee6b3a2bdcdc638
+  languageName: node
+  linkType: hard
+
+"@rollup/plugin-babel@npm:^6.0.0":
+  version: 6.0.2
+  resolution: "@rollup/plugin-babel@npm:6.0.2"
+  dependencies:
+    "@babel/helper-module-imports": ^7.18.6
+    "@rollup/pluginutils": ^5.0.1
+  peerDependencies:
+    "@babel/core": ^7.0.0
+    "@types/babel__core": ^7.1.9
+    rollup: ^1.20.0||^2.0.0||^3.0.0
+  peerDependenciesMeta:
+    "@types/babel__core":
+      optional: true
+    rollup:
+      optional: true
+  checksum: 5d551ca49a66a71f4d7f78a4bece1639418374d283b30abcc6c928074d0d00cd0e7c8d1ffac1bc9c8b15258374a015f48b4ea053f02617d7373b5707f46e6a6b
   languageName: node
   linkType: hard
 
@@ -5283,6 +5336,22 @@ __metadata:
     estree-walker: ^2.0.1
     picomatch: ^2.2.2
   checksum: 6bc41f22b1a0f1efec3043899e4d3b6b1497b3dea4d94292d8f83b4cf07a1073ecbaedd562a22d11913ff7659f459677b01b09e9598a98936e746780ecc93a12
+  languageName: node
+  linkType: hard
+
+"@rollup/pluginutils@npm:^5.0.1":
+  version: 5.0.2
+  resolution: "@rollup/pluginutils@npm:5.0.2"
+  dependencies:
+    "@types/estree": ^1.0.0
+    estree-walker: ^2.0.2
+    picomatch: ^2.3.1
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0||^3.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: edea15e543bebc7dcac3b0ac8bc7b8e8e6dbd46e2864dbe5dd28072de1fbd5b0e10d545a610c0edaa178e8a7ac432e2a2a52e547ece1308471412caba47db8ce
   languageName: node
   linkType: hard
 
@@ -7420,6 +7489,13 @@ __metadata:
   version: 0.0.39
   resolution: "@types/estree@npm:0.0.39"
   checksum: 412fb5b9868f2c418126451821833414189b75cc6bf84361156feed733e3d92ec220b9d74a89e52722e03d5e241b2932732711b7497374a404fad49087adc248
+  languageName: node
+  linkType: hard
+
+"@types/estree@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@types/estree@npm:1.0.0"
+  checksum: 910d97fb7092c6738d30a7430ae4786a38542023c6302b95d46f49420b797f21619cdde11fa92b338366268795884111c2eb10356e4bd2c8ad5b92941e9e6443
   languageName: node
   linkType: hard
 
@@ -10794,7 +10870,7 @@ __metadata:
     "@carbon/styles": ^1.15.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.26.0
-    "@rollup/plugin-babel": ^5.3.0
+    "@rollup/plugin-babel": ^6.0.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     babel-plugin-dev-expression: ^0.2.3
@@ -15472,7 +15548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"estree-walker@npm:^2.0.1":
+"estree-walker@npm:^2.0.1, estree-walker@npm:^2.0.2":
   version: 2.0.2
   resolution: "estree-walker@npm:2.0.2"
   checksum: 6151e6f9828abe2259e57f5fd3761335bb0d2ebd76dc1a01048ccee22fabcfef3c0859300f6d83ff0d1927849368775ec5a6d265dde2f6de5a1be1721cd94efc
