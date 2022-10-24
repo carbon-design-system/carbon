@@ -128,7 +128,6 @@ const TextInput = React.forwardRef(function TextInput(
     [`${prefix}--text-input__invalid-icon`]:
       normalizedProps.invalid || normalizedProps.warn,
     [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
-    [`${prefix}--text-input__readonly-icon`]: readOnly,
   });
 
   const label = labelText ? (

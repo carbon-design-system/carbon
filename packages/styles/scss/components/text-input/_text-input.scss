@@ -94,17 +94,13 @@
     width: 100%;
   }
 
-  .#{$prefix}--text-input__invalid-icon,
-  .#{$prefix}--text-input__readonly-icon {
+  .#{$prefix}--text-input__invalid-icon {
     position: absolute;
     // top/transform used to center invalid icon in IE11
     top: 50%;
     right: $spacing-05;
-    transform: translateY(-50%);
-  }
-
-  .#{$prefix}--text-input__invalid-icon {
     fill: $support-error;
+    transform: translateY(-50%);
   }
 
   .#{$prefix}--text-input__invalid-icon--warning {
@@ -175,8 +171,7 @@
   }
 
   .#{$prefix}--text-input--invalid,
-  .#{$prefix}--text-input--warning,
-  .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
+  .#{$prefix}--text-input--warning {
     padding-right: $spacing-08;
   }
 
