@@ -63,12 +63,10 @@ const TextInput = React.forwardRef(function TextInput(
     warnText,
   });
 
-  const customClassName = className ?? `${prefix}--text__input`;
   const textInputClasses = classNames(
     `${prefix}--text-input`,
     [enabled ? null : className],
     {
-      [customClassName]: enabled,
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
