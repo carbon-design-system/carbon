@@ -6,8 +6,6 @@
  */
 
 import React from 'react';
-
-const prefix = 'cds';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import { usePrefix } from './usePrefix';
 
