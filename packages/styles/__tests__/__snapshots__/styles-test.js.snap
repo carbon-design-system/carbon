@@ -283,6 +283,16 @@ Array [
     "relativePath": "scss/components/fluid-list-box",
   },
   Object {
+    "filepath": "scss/components/fluid-select/_fluid-select.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-select/fluid-select",
+    "relativePath": "scss/components/fluid-select/fluid-select",
+  },
+  Object {
+    "filepath": "scss/components/fluid-select/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-select",
+    "relativePath": "scss/components/fluid-select",
+  },
+  Object {
     "filepath": "scss/components/fluid-text-area/_fluid-text-area.scss",
     "importPath": "@carbon/styles/scss/components/fluid-text-area/fluid-text-area",
     "relativePath": "scss/components/fluid-text-area/fluid-text-area",

@@ -10,7 +10,7 @@ import cx from 'classnames';
 import Downshift, { useSelect } from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import { defaultItemToString } from './tools/itemToString';
@@ -18,9 +18,11 @@ import { defaultSortItems, defaultCompareItems } from './tools/sorting';
 import { useSelection } from '../../internal/Selection';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
+import deprecate from '../../prop-types/deprecate';
 import { keys, match } from '../../internal/keyboard';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const noop = () => {};
 const getInstanceId = setupGetInstanceId();
@@ -72,8 +74,10 @@ const MultiSelect = React.forwardRef(function MultiSelect(
   ref
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const { current: multiSelectInstanceId } = useRef(getInstanceId());
   const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [isFocused, setIsFocused] = useState(false);
   const [isOpen, setIsOpen] = useState(open);
   const [prevOpenProp, setPrevOpenProp] = useState(open);
   const [topItems, setTopItems] = useState([]);
@@ -138,6 +142,9 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       [`${prefix}--list-box__wrapper--inline`]: inline,
       [`${prefix}--multi-select__wrapper--inline--invalid`]: inline && invalid,
       [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--list-box__wrapper--fluid--focus`]:
+        !isOpen && isFluid && isFocused,
     }
   );
   const titleClasses = cx(`${prefix}--label`, {
@@ -221,6 +228,12 @@ const MultiSelect = React.forwardRef(function MultiSelect(
 
   const toggleButtonProps = getToggleButtonProps();
 
+  const handleFocus = (evt) => {
+    evt.target.classList.contains(`${prefix}--tag__close-icon`)
+      ? setIsFocused(false)
+      : setIsFocused(evt.type === 'focus' ? true : false);
+  };
+
   return (
     <div className={wrapperClasses}>
       <label className={titleClasses} {...getLabelProps()}>
@@ -233,6 +246,8 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         )}
       </label>
       <ListBox
+        onFocus={isFluid ? handleFocus : null}
+        onBlur={isFluid ? handleFocus : null}
         type={type}
         size={size}
         className={className}
@@ -405,7 +420,11 @@ MultiSelect.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `MultiSelect` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the locale of the control. Used for the default `compareItems`
@@ -488,7 +507,6 @@ MultiSelect.defaultProps = {
   initialSelectedItems: [],
   sortItems: defaultSortItems,
   type: 'default',
-  light: false,
   title: false,
   open: false,
   selectionFeedback: 'top-after-reopen',

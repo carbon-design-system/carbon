@@ -138,7 +138,7 @@ export const productiveHeading04 = {
 
 export const productiveHeading05 = {
   fontSize: rem(scale[7]),
-  fontWeight: fontWeights.light,
+  fontWeight: fontWeights.regular,
   lineHeight: 1.25,
   letterSpacing: 0,
 };
@@ -175,7 +175,7 @@ export const expressiveHeading03 = {
   breakpoints: {
     xlg: {
       fontSize: rem(scale[4]),
-      lineHeight: 1.25,
+      lineHeight: 1.4,
     },
     max: {
       fontSize: rem(scale[5]),
@@ -192,24 +192,25 @@ export const expressiveHeading04 = {
   breakpoints: {
     xlg: {
       fontSize: rem(scale[7]),
-      fontWeight: fontWeights.light,
+      fontWeight: fontWeights.regular,
       lineHeight: 1.25,
     },
     max: {
       fontSize: rem(scale[7]),
-      fontWeight: fontWeights.light,
+      fontWeight: fontWeights.regular,
     },
   },
 };
 
 export const expressiveHeading05 = {
   fontSize: rem(scale[7]),
-  fontWeight: fontWeights.light,
+  fontWeight: fontWeights.regular,
   lineHeight: 1.25,
   letterSpacing: 0,
   breakpoints: {
     md: {
       fontSize: rem(scale[8]),
+      fontWeight: fontWeights.light,
       lineHeight: 1.22,
       letterSpacing: 0,
     },

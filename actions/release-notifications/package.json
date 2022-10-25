@@ -2,7 +2,9 @@
   "name": "release-notifications",
   "private": true,
   "dependencies": {
-    "@octokit/request": "^6.2.1",
-    "octokit": "^2.0.7"
+    "@actions/core": "^1.10.0",
+    "@actions/github": "^5.1.1",
+    "@octokit/auth-action": "^2.0.1",
+    "@octokit/request": "^6.2.1"
   }
 }

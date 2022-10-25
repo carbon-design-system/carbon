@@ -15,6 +15,7 @@ import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 const rowHeightInPixels = 16;
@@ -328,7 +329,12 @@ CodeSnippet.propTypes = {
    * Specify whether you are using the light variant of the Code Snippet,
    * typically used for inline snippet to display an alternate color
    */
-  light: PropTypes.bool,
+
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `CodeSnippet` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the maximum number of rows to be shown when in collapsed view

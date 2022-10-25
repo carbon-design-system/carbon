@@ -6,9 +6,7 @@
  */
 
 import React from 'react';
-import { action } from '@storybook/addon-actions';
 
-import { withKnobs } from '@storybook/addon-knobs';
 import FluidForm from '.';
 import FluidTextInput from '../FluidTextInput';
 import FluidTextArea from '../FluidTextArea';
@@ -16,10 +14,6 @@ import ModalWrapper from '../ModalWrapper';
 
 const additionalProps = {
   className: 'some-class',
-  onSubmit: (e) => {
-    e.preventDefault();
-    action('FormSubmitted')(e);
-  },
 };
 
 const TextInputProps = {
@@ -46,7 +40,6 @@ const InvalidPasswordProps = {
 export default {
   title: 'Experimental/FluidForm',
   component: FluidForm,
-  decorators: [withKnobs],
 };
 
 export const Default = () => (
