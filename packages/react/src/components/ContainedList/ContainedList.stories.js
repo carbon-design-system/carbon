@@ -15,51 +15,59 @@ import {
   SubtractAlt,
   Wheat,
 } from '@carbon/icons-react';
-import { VStack } from '../../Stack';
-import Button from '../../Button';
-import ExpandableSearch from '../../ExpandableSearch';
-import { Layer } from '../../Layer';
-import Tag from '../../Tag';
+import { VStack } from '../Stack';
+import Button from '../Button';
+import ExpandableSearch from '../ExpandableSearch';
+import { Layer } from '../Layer';
+import Tag from '../Tag';
+import mdx from './ContainedList.mdx';
 
-import ContainedList, { ContainedListItem } from '../';
+import ContainedList, { ContainedListItem } from '.';
 
 export default {
-  title: 'Experimental/unstable_ContainedList',
+  title: 'Components/ContainedList',
   component: ContainedList,
+  subcomponents: { ContainedListItem },
+  argTypes: {
+    action: {
+      table: {
+        disable: true,
+      },
+    },
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 export const Default = () => (
-  <>
-    <ContainedList label="List title" kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-    <ContainedList label="List title" kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-  </>
+  <ContainedList label="List title" kind="on-page">
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+  </ContainedList>
 );
 
 export const Disclosed = () => (
-  <>
-    <ContainedList label="List title" kind="disclosed">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-    <ContainedList label="List title" kind="disclosed">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-  </>
+  <ContainedList label="List title" kind="disclosed">
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+  </ContainedList>
 );
 
 export const WithInteractiveItems = () => {
@@ -220,21 +228,6 @@ const PlaygroundStory = (args) => (
 export const Playground = PlaygroundStory.bind({});
 
 Playground.argTypes = {
-  action: {
-    table: {
-      disable: true,
-    },
-  },
-  children: {
-    table: {
-      disable: true,
-    },
-  },
-  className: {
-    table: {
-      disable: true,
-    },
-  },
   label: {
     defaultValue: 'List title',
   },
