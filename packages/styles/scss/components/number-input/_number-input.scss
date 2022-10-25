@@ -436,6 +436,7 @@
   }
 
   // Readonly
+  // placeholder should be moved to tokens
   $icon-readonly: $icon-disabled;
 
   .#{$prefix}--number--readonly input[type='number'] {
