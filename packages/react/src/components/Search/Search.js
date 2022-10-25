@@ -135,6 +135,7 @@ const Search = React.forwardRef(function Search(
   );
 });
 
+Search.displayName = 'Search';
 Search.propTypes = {
   /**
    * Specify an optional value for the `autocomplete` property on the underlying

@@ -2283,7 +2283,7 @@ exports[`DataTable should render 1`] = `
                 tabIndex="0"
                 translateWithId={[Function]}
               >
-                <ForwardRef(Search)
+                <Search
                   className="cds--toolbar-search-container-persistent"
                   id="custom-id"
                   labelText="Filter table"
@@ -2392,7 +2392,7 @@ exports[`DataTable should render 1`] = `
                       </ForwardRef(Close)>
                     </button>
                   </div>
-                </ForwardRef(Search)>
+                </Search>
               </TableToolbarSearch>
               <TableToolbarMenu
                 iconDescription="Settings"
@@ -3307,7 +3307,7 @@ exports[`DataTable sticky header should render 1`] = `
                 tabIndex="0"
                 translateWithId={[Function]}
               >
-                <ForwardRef(Search)
+                <Search
                   className="cds--toolbar-search-container-persistent"
                   id="custom-id"
                   labelText="Filter table"
@@ -3416,7 +3416,7 @@ exports[`DataTable sticky header should render 1`] = `
                       </ForwardRef(Close)>
                     </button>
                   </div>
-                </ForwardRef(Search)>
+                </Search>
               </TableToolbarSearch>
               <TableToolbarMenu
                 iconDescription="Settings"

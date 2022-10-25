@@ -10,7 +10,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
   tabIndex="0"
   translateWithId={[Function]}
 >
-  <ForwardRef(Search)
+  <Search
     className="custom-class cds--toolbar-search-container-expandable"
     id="custom-id"
     labelText="Filter table"
@@ -119,6 +119,6 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         </ForwardRef(Close)>
       </button>
     </div>
-  </ForwardRef(Search)>
+  </Search>
 </TableToolbarSearch>
 `;
