@@ -436,17 +436,42 @@
   }
 
   // Readonly
+  $icon-readonly: $icon-disabled;
+
   .#{$prefix}--number--readonly input[type='number'] {
     background: transparent;
   }
 
-  .#{$prefix}--number--readonly .#{$prefix}--number__controls {
-    display: none;
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
+    color: $icon-readonly;
+
+    &:hover {
+      background-color: transparent;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        background-color: transparent;
+      }
+    }
   }
 
-  .#{$prefix}--number__readonly-icon {
-    position: absolute;
-    right: rem(16px);
+  .#{$prefix}--number--readonly
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover {
+    outline: none;
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::after {
+    background: transparent;
+  }
+
+  .#{$prefix}--number--readonly
+    .#{$prefix}--number__controls:hover
+    .#{$prefix}--number__rule-divider:not(:first-of-type) {
+    background-color: $icon-readonly;
   }
 
   // Skeleton State
