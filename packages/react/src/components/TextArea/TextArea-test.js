@@ -70,12 +70,6 @@ describe('TextArea', () => {
         expect(textarea().props().defaultValue).toEqual('default value');
       });
 
-      it('should specify light version as expected', () => {
-        expect(wrapper.props().light).toEqual(false);
-        wrapper.setProps({ light: true });
-        expect(wrapper.props().light).toEqual(true);
-      });
-
       it('should set enableCounter as expected', () => {
         wrapper.setProps({ enableCounter: true });
         expect(wrapper.props().enableCounter).toEqual(true);

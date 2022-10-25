@@ -51,15 +51,6 @@ describe('Dropdown', () => {
           invalid
           invalidText="This is invalid text"
         />
-        <Dropdown style={style} items={items} label={label} light />
-        <Dropdown
-          style={style}
-          items={items}
-          label={label}
-          light
-          invalid
-          invalidText="This is invalid text"
-        />
         <Dropdown style={style} items={items} label={label} type="inline" />
         <DropdownSkeleton style={style} size="sm" />
         <DropdownSkeleton style={style} size="md" />

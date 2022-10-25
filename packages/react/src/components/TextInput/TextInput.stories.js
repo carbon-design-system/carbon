@@ -17,6 +17,13 @@ export default {
     TextInputSkeleton,
     'TextInput.PasswordInput': TextInput.PasswordInput,
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => (
@@ -125,7 +132,7 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'Invalid text',
+    defaultValue: 'Error message goes here',
   },
   disabled: {
     control: {
