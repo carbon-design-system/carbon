@@ -27,6 +27,11 @@ export default {
         disable: true,
       },
     },
+    invalid: {
+      table: {
+        disable: true,
+      },
+    },
     children: {
       table: {
         disable: true,
@@ -77,18 +82,7 @@ Playground.argTypes = {
       type: 'text',
     },
   },
-  invalid: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   legendText: {
-    control: {
-      type: 'text',
-    },
-  },
-  className: {
     control: {
       type: 'text',
     },
