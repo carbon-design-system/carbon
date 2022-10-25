@@ -7604,6 +7604,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "rows": Object {
         "type": "number",
       },
