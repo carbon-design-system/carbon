@@ -392,6 +392,17 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--text-input-wrapper--inline .cds--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: rem(200px);
+    font-weight: 400;
+  }
+
+  .#{$prefix}--text-input-wrapper--inline--invalid .cds--form-requirement {
+    color: $text-error;
+  }
+
   //-----------------------------
   // Readonly
   //-----------------------------
