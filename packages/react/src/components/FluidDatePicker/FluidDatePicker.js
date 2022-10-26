@@ -53,7 +53,7 @@ FluidDatePicker.propTypes = {
   /**
    * Specify whether or not the control is invalid
    */
-  invalid: PropTypes.boolean,
+  invalid: PropTypes.bool,
 
   /**
    * Provide the text that is displayed when the control is in error state

@@ -568,7 +568,7 @@ DatePicker.propTypes = {
   /**
    * Specify whether or not the control is invalid (Fluid only)
    */
-  invalid: PropTypes.boolean,
+  invalid: PropTypes.bool,
 
   /**
    * Provide the text that is displayed when the control is in error state (Fluid Only)
