@@ -136,7 +136,7 @@ describe('CodeSnippet', () => {
       </CodeSnippet>
     );
 
-    expect(screen.getByTitle('Copy to clipboard')).toHaveAttribute('disabled');
+    expect(document.querySelector('button')).toHaveAttribute('disabled');
   });
 });
 
@@ -149,7 +149,7 @@ describe('CodeSnippet events', () => {
       </CodeSnippet>
     );
 
-    const button = screen.getByTitle('Copy to clipboard');
+    const button = document.querySelector('button');
     userEvent.click(button);
     expect(onClick).toHaveBeenCalled();
   });
