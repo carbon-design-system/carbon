@@ -59,7 +59,10 @@ export const SingleWithCalendar = () => (
 export const RangeWithCalendar = () => {
   return (
     <>
-      <FluidDatePicker datePickerType="range">
+      <FluidDatePicker
+        invalid
+        invalidText="Error message goes here that goes to two"
+        datePickerType="range">
         <FluidDatePickerInput
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
@@ -75,11 +78,10 @@ export const RangeWithCalendar = () => {
       </FluidDatePicker>
       <br />
       <br />
-      <FluidDatePicker
-        datePickerType="range"
-        invalid
-        invalidText="Error message goes here">
+      <FluidDatePicker datePickerType="range">
         <FluidDatePickerInput
+          invalid
+          invalidText="Error message goes here that goes to two"
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
           labelText={ToggleTip}
@@ -102,6 +104,8 @@ export const RangeWithCalendar = () => {
           labelText={ToggleTip}
         />
         <FluidDatePickerInput
+          invalid
+          invalidText="Error message goes here that goes to two"
           id="date-picker-input-id-finish"
           placeholder="mm/dd/yyyy"
           labelText="End date"

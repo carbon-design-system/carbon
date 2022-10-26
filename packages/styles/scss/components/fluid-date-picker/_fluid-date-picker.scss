@@ -64,13 +64,6 @@
   }
 
   // Range
-
-  // .#{$prefix}--date-picker--fluid
-  //   .#{$prefix}--date-picker--range
-  //   .#{$prefix}--date-picker-container:focus-within::after {
-  //   display: none;
-  // }
-
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--range
     .#{$prefix}--date-picker__input,
@@ -88,35 +81,54 @@
 
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--range
-    > .#{$prefix}--date-picker-container:first-child
+    > .#{$prefix}--date-picker-container:last-child
     .#{$prefix}--date-picker__input {
-    border-right: 1px solid $border-strong;
+    border-left: 1px solid $border-strong;
   }
 
   // Invalid
-  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid {
+  // Entire input
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid,
+  // Just one input invalid
+  .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid {
     @include focus-outline('invalid');
   }
 
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker__input--invalid {
+    outline: none;
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-container:last-child.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker__input--invalid,
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
+    + .#{$prefix}--date-picker-container
+    .#{$prefix}--date-picker__input {
+    border-left: none;
+  }
+
+  .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--form-requirement {
+    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    margin: 0;
+  }
+
+  .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker,
   .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
     .#{$prefix}--date-picker {
     border-bottom: 1px solid transparent;
   }
 
-  // .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
-  //   .#{$prefix}--form-requirement {
-  //   display: block;
-  //   overflow: visible;
-  //   max-height: 100%;
-  //   color: $text-error;
-
-  // }
-
   .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
     .#{$prefix}--date-picker--range
-    > .#{$prefix}--date-picker-container:first-child
+    > .#{$prefix}--date-picker-container:last-child
     .#{$prefix}--date-picker__input {
-    border-right: 1px solid transparent;
+    border-left: 1px solid transparent;
   }
 
   .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
@@ -130,5 +142,24 @@
     height: calc(100% - 1rem);
     background: $border-strong;
     content: '';
+  }
+
+  .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker__divider {
+    width: calc(100% - 2rem);
+    border-style: solid;
+    border-color: $border-subtle;
+    border-bottom: none;
+    margin: 0 1rem;
+  }
+
+  .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker__icon {
+    top: rem(80px);
+  }
+
+  // Set focus when single input is invalid
+  .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker__input:focus {
+    @include focus-outline('outline');
   }
 }

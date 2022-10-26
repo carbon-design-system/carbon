@@ -105,7 +105,10 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
         />
       </div>
       {invalid && (
-        <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+        <>
+          {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
+          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+        </>
       )}
       {warn && <div className={`${prefix}--form-requirement`}>{warnText}</div>}
       {helperText && <div className={helperTextClasses}>{helperText}</div>}
