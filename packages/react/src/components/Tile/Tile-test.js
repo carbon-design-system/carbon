@@ -36,19 +36,9 @@ describe('Default', () => {
       </Tile>
     );
 
-<<<<<<< HEAD
-    it('renders children as expected', () => {
-      expect(wrapper.find('.child').length).toBe(1);
-    });
-
-    it('renders extra classes passed in via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
-    });
-=======
     expect(screen.getByText('Default tile').classList.contains('🚀')).toBe(
       true
     );
->>>>>>> e0562a3f7... chore(react): updated tile and stories
   });
 });
 
@@ -61,64 +51,7 @@ describe('ClickableTile', () => {
         Clickable Tile
       </ClickableTile>
     );
-<<<<<<< HEAD
-
-    beforeEach(() => {
-      wrapper.state().clicked = false;
-    });
-
-    it('renders children as expected', () => {
-      expect(wrapper.find('.child').length).toBe(1);
-    });
-
-    it('renders extra classes passed in via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
-    });
-
-    it('toggles the clickable class on click', () => {
-      expect(
-        wrapper.find('Link').hasClass(`${prefix}--tile--is-clicked`)
-      ).toEqual(false);
-      wrapper.simulate('click', { persist: () => {} });
-      expect(
-        wrapper.find('Link').hasClass(`${prefix}--tile--is-clicked`)
-      ).toEqual(true);
-    });
-
-    it('toggles the clickable state on click', () => {
-      expect(wrapper.state().clicked).toEqual(false);
-      wrapper.simulate('click', { persist: () => {} });
-      expect(wrapper.state().clicked).toEqual(true);
-    });
-
-    it('toggles the clicked state when using enter or space', () => {
-      expect(wrapper.state().clicked).toEqual(false);
-      wrapper.simulate('keydown', { which: 32, persist: () => {} });
-      expect(wrapper.state().clicked).toEqual(true);
-      wrapper.simulate('keydown', { which: 13, persist: () => {} });
-      expect(wrapper.state().clicked).toEqual(false);
-    });
-
-    it('supports setting initial clicked state from props', () => {
-      expect(shallow(<ClickableTile clicked />).state().clicked).toEqual(true);
-    });
-
-    it('supports setting clicked state from props', () => {
-      wrapper.setProps({ clicked: true });
-      wrapper.setState({ clicked: true });
-      wrapper.setProps({ clicked: false });
-      expect(wrapper.state().clicked).toEqual(false);
-    });
-
-    it('avoids changing clicked state upon setting props, unless actual value change is detected', () => {
-      wrapper.setProps({ clicked: true });
-      wrapper.setState({ clicked: false });
-      wrapper.setProps({ clicked: true });
-      expect(wrapper.state().clicked).toEqual(false);
-    });
-=======
     expect(screen.getByRole('link')).toBeInTheDocument();
->>>>>>> e0562a3f7... chore(react): updated tile and stories
   });
 });
 
@@ -192,21 +125,11 @@ describe('Multi Select', () => {
     // cycle goes back to the body element
     expect(document.body).toHaveFocus();
 
-<<<<<<< HEAD
-    it('should call onChange when the checkbox value changes', () => {
-      const onChange = jest.fn();
-      const wrapper = mount(
-        <SelectableTile onChange={onChange}>
-          <span id="test-id">test</span>
-        </SelectableTile>
-      );
-=======
     userEvent.tab();
 
     expect(id1).toHaveFocus();
   });
 });
->>>>>>> e0562a3f7... chore(react): updated tile and stories
 
 describe('ExpandableTile', () => {
   const wrapper = mount(
@@ -321,14 +244,6 @@ describe('ExpandableTile', () => {
     );
   });
 
-<<<<<<< HEAD
-    it('avoids changing padding upon setting props, unless actual value change is detected', () => {
-      wrapper.setProps({ tilePadding: 2 });
-      wrapper.setState({ tilePadding: 1 });
-      wrapper.setProps({ tilePadding: 2 });
-      expect(wrapper.state().tilePadding).toEqual(1);
-    });
-=======
   it('supports setting expanded state from props', () => {
     wrapper.setProps({ expanded: true });
     expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
@@ -339,7 +254,6 @@ describe('ExpandableTile', () => {
     expect(wrapper.children().hasClass(`${prefix}--tile--is-expanded`)).toEqual(
       false
     );
->>>>>>> e0562a3f7... chore(react): updated tile and stories
   });
 });
 
