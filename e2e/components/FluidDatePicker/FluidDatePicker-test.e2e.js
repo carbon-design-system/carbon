@@ -62,6 +62,6 @@ test.describe('FluidDatePicker', () => {
         theme: 'white',
       },
     });
-    await expect(page).toHaveNoACViolations('FluidComboBox');
+    await expect(page).toHaveNoACViolations('FluidDatePicker');
   });
 });
