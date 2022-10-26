@@ -78,10 +78,20 @@ describe('Checkbox', () => {
     );
   });
 
-  describe('indeterminate', () => {
-    it('should set the indeterminate attribute of the <input> to true', () => {
-      render(<Checkbox id="test" indeterminate labelText="test-label" />);
-      expect(screen.getByRole('checkbox').indeterminate).toBe(true);
-    });
+  it('should NOT call the `onChange` prop when readonly', () => {
+    const onChange = jest.fn();
+    render(
+      <Checkbox
+        id="test"
+        labelText="test-label"
+        onChange={onChange}
+        checked={false}
+        readOnly={true}
+      />
+    );
+
+    userEvent.click(screen.getByLabelText('test-label'));
+    userEvent.click(screen.getByRole('checkbox'));
+    expect(onChange).not.toHaveBeenCalled();
   });
 });

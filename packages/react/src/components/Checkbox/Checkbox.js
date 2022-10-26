@@ -19,6 +19,7 @@ const Checkbox = React.forwardRef(function Checkbox(
     onChange,
     indeterminate,
     hideLabel,
+    readOnly,
     title = '',
     ...other
   },
@@ -28,7 +29,10 @@ const Checkbox = React.forwardRef(function Checkbox(
   const wrapperClasses = classNames(
     `${prefix}--form-item`,
     `${prefix}--checkbox-wrapper`,
-    [className]
+    className,
+    {
+      [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
+    }
   );
   const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
     [`${prefix}--visually-hidden`]: hideLabel,
@@ -40,7 +44,9 @@ const Checkbox = React.forwardRef(function Checkbox(
         {...other}
         type="checkbox"
         onChange={(evt) => {
-          onChange(evt, { checked: evt.target.checked, id });
+          if (!readOnly) {
+            onChange(evt, { checked: evt.target.checked, id });
+          }
         }}
         className={`${prefix}--checkbox`}
         id={id}
@@ -52,6 +58,14 @@ const Checkbox = React.forwardRef(function Checkbox(
             ref(el);
           } else if (Object(ref) === ref) {
             ref.current = el;
+          }
+        }}
+        // readonly attribute not applicable to type="checkbox"
+        // see - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
+        aria-readonly={readOnly}
+        onClick={(evt) => {
+          if (readOnly) {
+            evt.preventDefault();
           }
         }}
       />
@@ -113,6 +127,11 @@ Checkbox.propTypes = {
    * `(event, { checked, id }) => void`
    */
   onChange: PropTypes.func,
+
+  /**
+   * Whether the checkbox should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify a title for the <label> node for the Checkbox

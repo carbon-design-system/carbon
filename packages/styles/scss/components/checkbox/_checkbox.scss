@@ -180,6 +180,31 @@
     background-color: $icon-disabled;
   }
 
+  //----------------------------------------------
+  // Read-only
+  // ---------------------------------------------
+  // should this be a token of it's own?
+  $border-readonly: $icon-disabled;
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox
+    + .#{$prefix}--checkbox-label::before {
+    border-color: $border-readonly;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $border-readonly;
+    background: transparent;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after {
+    border-color: $text-primary;
+  }
+
   //-----------------------------------------------
   // Skeleton
   //-----------------------------------------------
