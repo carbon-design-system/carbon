@@ -13,7 +13,7 @@ import { render, screen } from '@testing-library/react';
 
 describe('Select', () => {
   describe('behaves as expected - Component API', () => {
-    it('should respect readOnly prop', () => {
+    it.skip('should respect readOnly prop', () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
 
@@ -42,10 +42,10 @@ describe('Select', () => {
       // or have a way to click on a slotted option.
       // https://github.com/testing-library/user-event/issues/786
       //------------------------------------------------------------------------
-      // userEvent.selectOptions(theSelect, 'option-1');
+      userEvent.selectOptions(theSelect, 'option-1');
 
       // Change events should *not* fire
-      // expect(screen.getByText('Option 1').selected).toBe(false);
+      expect(screen.getByText('Option 1').selected).toBe(false);
 
       expect(onChange).toHaveBeenCalledTimes(0);
     });
