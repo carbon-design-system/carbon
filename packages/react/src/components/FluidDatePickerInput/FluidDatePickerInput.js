@@ -6,26 +6,18 @@
  */
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import DatePickerInput from '../DatePickerInput';
 import { FormContext } from '../FluidForm/FormContext';
 
 const FluidDatePickerInput = React.forwardRef(function FluidDatePickerInput(
-  { invalid, ...other },
+  { ...other },
   ref
 ) {
   return (
     <FormContext.Provider value={{ isFluid: true }}>
-      <DatePickerInput invalid={invalid} ref={ref} {...other} />
+      <DatePickerInput ref={ref} {...other} />
     </FormContext.Provider>
   );
 });
-
-FluidDatePickerInput.propTypes = {
-  /**
-   * Specify whether or not the control is invalid
-   */
-  invalid: PropTypes.boolean,
-};
 
 export default FluidDatePickerInput;
