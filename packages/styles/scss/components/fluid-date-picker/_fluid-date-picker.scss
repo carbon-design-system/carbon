@@ -90,7 +90,7 @@
   }
 
   // Range
-  .#{$prefix}--date-picker--fluid:not(.#{$prefix}--date-picker--fluid--invalid)
+  .#{$prefix}--date-picker--fluid:not(.#{$prefix}--date-picker--fluid--invalid):not(.#{$prefix}--date-picker--fluid--warn)
     .#{$prefix}--date-picker--range
     .#{$prefix}--date-picker-container:not(.#{$prefix}--date-picker--fluid--invalid) {
     border-bottom: 1px solid $border-strong;
@@ -158,7 +158,10 @@
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--single
     .#{$prefix}--date-picker--fluid--warn
-    .#{$prefix}--date-picker__input {
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker--range
+    .#{$prefix}--date-picker-container {
     border-bottom: 1px solid transparent;
   }
 
@@ -237,5 +240,39 @@
   .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
     .#{$prefix}--date-picker__input:focus {
     @include focus-outline('outline');
+  }
+
+  // Entire Datepicker invalid state
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker--range
+    ~ .#{$prefix}--form-requirement,
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker--range
+    ~ .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    margin-top: 0;
+  }
+
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker--range
+    ~ .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid,
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--warn {
+    position: relative;
+  }
+
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker--range
+    + .#{$prefix}--date-picker__icon,
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker--range
+    + .#{$prefix}--date-picker__icon {
+    top: rem(80px);
   }
 }
