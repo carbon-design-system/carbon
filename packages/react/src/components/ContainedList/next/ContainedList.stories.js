@@ -11,7 +11,6 @@ import { action } from '@storybook/addon-actions';
 import {
   Apple,
   Fish,
-  Information,
   Strawberry,
   SubtractAlt,
   Wheat,
@@ -21,7 +20,6 @@ import Button from '../../Button';
 import ExpandableSearch from '../../ExpandableSearch';
 import { Layer } from '../../Layer';
 import Tag from '../../Tag';
-import { Tooltip } from '../../Tooltip/next';
 
 import ContainedList, { ContainedListItem } from '../';
 
@@ -77,14 +75,6 @@ export const WithInteractiveItems = () => {
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
         <ContainedListItem onClick={onClick}>List item</ContainedListItem>
       </ContainedList>
-      <ContainedList label="List title" kind="disclosed">
-        <ContainedListItem onClick={onClick}>List item</ContainedListItem>
-        <ContainedListItem onClick={onClick} disabled>
-          List item
-        </ContainedListItem>
-        <ContainedListItem onClick={onClick}>List item</ContainedListItem>
-        <ContainedListItem onClick={onClick}>List item</ContainedListItem>
-      </ContainedList>
     </VStack>
   );
 };
@@ -105,19 +95,6 @@ export const WithActions = () => {
         label="List title"
         kind="on-page"
         action={<ExpandableSearch placeholder="Find item" size="lg" />}>
-        <ContainedListItem action={itemAction}>List item</ContainedListItem>
-        <ContainedListItem action={itemAction}>List item</ContainedListItem>
-        <ContainedListItem action={itemAction}>List item</ContainedListItem>
-        <ContainedListItem action={itemAction}>List item</ContainedListItem>
-      </ContainedList>
-      <ContainedList
-        label="List title"
-        kind="disclosed"
-        action={
-          <Button kind="ghost" size="sm">
-            Dismiss all
-          </Button>
-        }>
         <ContainedListItem action={itemAction}>List item</ContainedListItem>
         <ContainedListItem action={itemAction} disabled>
           List item
@@ -159,27 +136,6 @@ export const WithInteractiveItemsAndActions = () => {
           List item
         </ContainedListItem>
       </ContainedList>
-      <ContainedList
-        label="List title"
-        kind="disclosed"
-        action={
-          <Button kind="ghost" size="sm">
-            Dismiss all
-          </Button>
-        }>
-        <ContainedListItem action={itemAction} onClick={onClick}>
-          List item
-        </ContainedListItem>
-        <ContainedListItem action={itemAction} onClick={onClick}>
-          List item
-        </ContainedListItem>
-        <ContainedListItem action={itemAction} onClick={onClick}>
-          List item
-        </ContainedListItem>
-        <ContainedListItem action={itemAction} onClick={onClick}>
-          List item
-        </ContainedListItem>
-      </ContainedList>
     </VStack>
   );
 };
@@ -205,26 +161,6 @@ export const WithListTitleDecorators = () => {
         <ContainedListItem>List item</ContainedListItem>
         <ContainedListItem>List item</ContainedListItem>
       </ContainedList>
-      <ContainedList
-        label={
-          <div style={{ display: 'flex', alignItems: 'center' }}>
-            <span>List title</span>
-            <Tooltip align="top" label="Tooltip content">
-              <button
-                className="sb-tooltip-trigger"
-                style={{ color: 'inherit', border: 'none' }}
-                type="button">
-                <Information style={{ fill: 'currentColor' }} />
-              </button>
-            </Tooltip>
-          </div>
-        }
-        kind="disclosed">
-        <ContainedListItem>List item</ContainedListItem>
-        <ContainedListItem>List item</ContainedListItem>
-        <ContainedListItem>List item</ContainedListItem>
-        <ContainedListItem>List item</ContainedListItem>
-      </ContainedList>
     </VStack>
   );
 };
@@ -233,12 +169,6 @@ export const WithIcons = () => {
   return (
     <VStack gap={12}>
       <ContainedList label="List title" kind="on-page">
-        <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
-        <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
-        <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
-        <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
-      </ContainedList>
-      <ContainedList label="List title" kind="disclosed">
         <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
         <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
@@ -264,26 +194,6 @@ export const WithLayer = () => {
             </ContainedList>
             <Layer>
               <ContainedList label="List title" kind="on-page">
-                <ContainedListItem>List item</ContainedListItem>
-                <ContainedListItem>List item</ContainedListItem>
-              </ContainedList>
-            </Layer>
-          </VStack>
-        </Layer>
-      </VStack>
-      <VStack gap={5}>
-        <ContainedList label="List title" kind="disclosed">
-          <ContainedListItem>List item</ContainedListItem>
-          <ContainedListItem>List item</ContainedListItem>
-        </ContainedList>
-        <Layer>
-          <VStack gap={5}>
-            <ContainedList label="List title" kind="disclosed">
-              <ContainedListItem>List item</ContainedListItem>
-              <ContainedListItem>List item</ContainedListItem>
-            </ContainedList>
-            <Layer>
-              <ContainedList label="List title" kind="disclosed">
                 <ContainedListItem>List item</ContainedListItem>
                 <ContainedListItem>List item</ContainedListItem>
               </ContainedList>

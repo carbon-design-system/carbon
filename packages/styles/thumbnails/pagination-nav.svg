@@ -1,40 +1,35 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>pagination-nav</title>
-    <defs>
-        <polygon id="path-1" points="5.5 4.5 9.5 8 5.5 11.5"></polygon>
-        <polygon id="path-3" points="5.5 4.5 9.5 8 5.5 11.5"></polygon>
-    </defs>
-    <g id="pagination-nav" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(56.000000, 70.000000)">
-            <g transform="translate(0.000000, 12.000000)" id="icon/navigation/caret/left/16">
-                <mask id="mask-2" fill="white">
-                    <use xlink:href="#path-1"></use>
-                </mask>
-                <use id="icon-color" fill="#8C8C8C" transform="translate(7.500000, 8.000000) scale(-1, 1) translate(-7.500000, -8.000000) " xlink:href="#path-1"></use>
-            </g>
-            <g transform="translate(192.000000, 12.000000)" id="icon/navigation/caret/left/16-copy">
-                <g transform="translate(8.000000, 8.000000) scale(-1, 1) translate(-8.000000, -8.000000) ">
-                    <mask id="mask-4" fill="white">
-                        <use xlink:href="#path-3"></use>
-                    </mask>
-                    <use id="icon-color" fill="#171717" transform="translate(7.500000, 8.000000) scale(-1, 1) translate(-7.500000, -8.000000) " xlink:href="#path-3"></use>
-                </g>
-            </g>
-            <text id="1" font-family="IBMPlexSans-SemiBold, IBM Plex Sans" font-size="12" font-weight="500" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
-                <tspan x="45" y="23">1</tspan>
-            </text>
-            <text id="2" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
-                <tspan x="82" y="23">2</tspan>
-            </text>
-            <text id="3" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
-                <tspan x="119" y="23">3</tspan>
-            </text>
-            <text id="4" font-family="IBMPlexSans, IBM Plex Sans" font-size="12" font-weight="normal" line-spacing="18" letter-spacing="0.137142854" fill="#161616">
-                <tspan x="156" y="23">4</tspan>
-            </text>
-            <rect id="Rectangle" fill="#0F62FE" x="41" y="35" width="16" height="4"></rect>
-            <rect id="Rectangle-Copy" x="41" y="0" width="16" height="4"></rect>
-        </g>
-    </g>
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="pagination-nav">
+<g id="Group">
+<g id="icon/navigation/caret/left/16">
+<path id="icon color" fill-rule="evenodd" clip-rule="evenodd" d="M131 173L123 180L131 187V173Z" fill="black"/>
+<mask id="mask0_0_2240" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="123" y="173" width="8" height="14">
+<path id="icon color_2" fill-rule="evenodd" clip-rule="evenodd" d="M131 173L123 180L131 187V173Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_0_2240)">
+</g>
+</g>
+<g id="icon/navigation/caret/left/16 copy">
+<path id="icon color_3" fill-rule="evenodd" clip-rule="evenodd" d="M509 173L517 180L509 187V173Z" fill="black"/>
+<mask id="mask1_0_2240" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="509" y="173" width="8" height="14">
+<path id="icon color_4" fill-rule="evenodd" clip-rule="evenodd" d="M509 173L517 180L509 187V173Z" fill="white"/>
+</mask>
+<g mask="url(#mask1_0_2240)">
+</g>
+</g>
+<g id="1">
+<path id="Path" d="M204.184 188V185.432H208.792V173.528H208.576L204.928 177.848L202.96 176.192L207.112 171.248H211.888V185.432H215.728V188H204.184Z" fill="#161616"/>
+</g>
+<g id="2">
+<path id="Path_2" d="M288.792 188H277.8V185.936L283.272 180.896C284.056 180.176 284.712 179.412 285.24 178.604C285.768 177.796 286.032 176.984 286.032 176.168V175.88C286.032 174.952 285.776 174.2 285.264 173.624C284.752 173.048 283.976 172.76 282.936 172.76C282.424 172.76 281.976 172.832 281.592 172.976C281.208 173.12 280.876 173.32 280.596 173.576C280.316 173.832 280.084 174.132 279.9 174.476C279.716 174.82 279.568 175.192 279.456 175.592L277.656 174.896C277.816 174.4 278.036 173.916 278.316 173.444C278.596 172.972 278.948 172.552 279.372 172.184C279.796 171.816 280.308 171.52 280.908 171.296C281.508 171.072 282.216 170.96 283.032 170.96C283.848 170.96 284.576 171.08 285.216 171.32C285.856 171.56 286.392 171.896 286.824 172.328C287.256 172.76 287.588 173.272 287.82 173.864C288.052 174.456 288.168 175.112 288.168 175.832C288.168 176.488 288.076 177.096 287.892 177.656C287.708 178.216 287.456 178.748 287.136 179.252C286.816 179.756 286.428 180.248 285.972 180.728C285.516 181.208 285.024 181.688 284.496 182.168L279.984 186.224H288.792V188Z" fill="#161616"/>
+</g>
+<g id="3">
+<path id="Path_3" d="M356.264 178.352C357.4 178.352 358.252 178.092 358.82 177.572C359.388 177.052 359.672 176.384 359.672 175.568V175.4C359.672 174.52 359.396 173.86 358.844 173.42C358.292 172.98 357.568 172.76 356.672 172.76C355.808 172.76 355.104 172.948 354.56 173.324C354.016 173.7 353.568 174.208 353.216 174.848L351.728 173.696C351.936 173.36 352.188 173.028 352.484 172.7C352.78 172.372 353.128 172.08 353.528 171.824C353.928 171.568 354.392 171.36 354.92 171.2C355.448 171.04 356.048 170.96 356.72 170.96C357.424 170.96 358.088 171.052 358.712 171.236C359.336 171.42 359.876 171.692 360.332 172.052C360.788 172.412 361.148 172.856 361.412 173.384C361.676 173.912 361.808 174.512 361.808 175.184C361.808 175.728 361.724 176.216 361.556 176.648C361.388 177.08 361.16 177.456 360.872 177.776C360.584 178.096 360.244 178.368 359.852 178.592C359.46 178.816 359.04 178.984 358.592 179.096V179.192C359.04 179.288 359.476 179.444 359.9 179.66C360.324 179.876 360.7 180.156 361.028 180.5C361.356 180.844 361.62 181.26 361.82 181.748C362.02 182.236 362.12 182.792 362.12 183.416C362.12 184.136 361.984 184.796 361.712 185.396C361.44 185.996 361.056 186.508 360.56 186.932C360.064 187.356 359.464 187.688 358.76 187.928C358.056 188.168 357.28 188.288 356.432 188.288C355.712 188.288 355.072 188.208 354.512 188.048C353.952 187.888 353.456 187.672 353.024 187.4C352.592 187.128 352.212 186.824 351.884 186.488C351.556 186.152 351.264 185.8 351.008 185.432L352.52 184.28C352.728 184.616 352.956 184.92 353.204 185.192C353.452 185.464 353.728 185.696 354.032 185.888C354.336 186.08 354.68 186.228 355.064 186.332C355.448 186.436 355.896 186.488 356.408 186.488C357.592 186.488 358.488 186.22 359.096 185.684C359.704 185.148 360.008 184.384 360.008 183.392V183.2C360.008 182.208 359.704 181.444 359.096 180.908C358.488 180.372 357.592 180.104 356.408 180.104H354.44V178.352H356.264Z" fill="#161616"/>
+</g>
+<g id="4">
+<path id="Shape" fill-rule="evenodd" clip-rule="evenodd" d="M433 184.712V188H434.92V184.712H437.344V183.032H434.92V171.248H431.92L424.912 182.936V184.712H433ZM433 183.032H426.808L432.88 172.808H433V183.032Z" fill="#161616"/>
+</g>
+<rect id="Rectangle" x="194" y="210" width="32" height="8" fill="#0F62FE"/>
+</g>
+</g>
 </svg>
