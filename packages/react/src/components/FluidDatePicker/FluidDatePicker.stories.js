@@ -36,29 +36,95 @@ const ToggleTip = (
 );
 
 export const Simple = () => (
-  <FluidDatePicker datePickerType="simple">
-    <FluidDatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText={ToggleTip}
-      id="date-picker-simple"
-    />
-  </FluidDatePicker>
+  <>
+    <FluidDatePicker datePickerType="simple">
+      <FluidDatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText={ToggleTip}
+        id="date-picker-simple"
+      />
+    </FluidDatePicker>
+    <br />
+    <br />
+    <FluidDatePicker datePickerType="simple">
+      <FluidDatePickerInput
+        invalid
+        invalidText="Error message goes here that goes to two"
+        placeholder="mm/dd/yyyy"
+        labelText={ToggleTip}
+        id="date-picker-simple"
+      />
+    </FluidDatePicker>
+    <br />
+    <br />
+    <FluidDatePicker datePickerType="simple">
+      <FluidDatePickerInput
+        warn
+        warnText="Error message goes here that goes to two"
+        placeholder="mm/dd/yyyy"
+        labelText={ToggleTip}
+        id="date-picker-simple"
+      />
+    </FluidDatePicker>
+  </>
 );
 
 export const SingleWithCalendar = () => (
-  <FluidDatePicker datePickerType="single">
-    <FluidDatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText={ToggleTip}
-      id="date-picker-single"
-      size="md"
-    />
-  </FluidDatePicker>
+  <>
+    <FluidDatePicker datePickerType="single">
+      <FluidDatePickerInput
+        placeholder="mm/dd/yyyy"
+        labelText={ToggleTip}
+        id="date-picker-single"
+        size="md"
+      />
+    </FluidDatePicker>
+    <br />
+    <br />
+    <FluidDatePicker datePickerType="single">
+      <FluidDatePickerInput
+        invalid
+        invalidText="Error message goes here that goes to two"
+        placeholder="mm/dd/yyyy"
+        labelText={ToggleTip}
+        id="date-picker-single"
+        size="md"
+      />
+    </FluidDatePicker>
+    <br />
+    <br />
+    <FluidDatePicker datePickerType="single">
+      <FluidDatePickerInput
+        warn
+        warnText="Error message goes here that goes to two"
+        placeholder="mm/dd/yyyy"
+        labelText={ToggleTip}
+        id="date-picker-single"
+        size="md"
+      />
+    </FluidDatePicker>
+  </>
 );
 
 export const RangeWithCalendar = () => {
   return (
     <>
+      <FluidDatePicker datePickerType="range">
+        <FluidDatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText={ToggleTip}
+          size="md"
+        />
+        <FluidDatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+          size="md"
+        />
+      </FluidDatePicker>
+      <br />
+      <br />
       <FluidDatePicker
         invalid
         invalidText="Error message goes here that goes to two"
@@ -94,6 +160,22 @@ export const RangeWithCalendar = () => {
       </FluidDatePicker>
       <br />
       <br />
+      <FluidDatePicker datePickerType="range">
+        <FluidDatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText={ToggleTip}
+        />
+        <FluidDatePickerInput
+          invalid
+          invalidText="Error message goes here that goes to two"
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </FluidDatePicker>
+      <br />
+      <br />
       <FluidDatePicker
         datePickerType="range"
         warn
@@ -104,8 +186,38 @@ export const RangeWithCalendar = () => {
           labelText={ToggleTip}
         />
         <FluidDatePickerInput
-          invalid
-          invalidText="Error message goes here that goes to two"
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </FluidDatePicker>
+      <br />
+      <br />
+      <FluidDatePicker datePickerType="range">
+        <FluidDatePickerInput
+          warn
+          warnText="Warning message goes here"
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText={ToggleTip}
+        />
+        <FluidDatePickerInput
+          id="date-picker-input-id-finish"
+          placeholder="mm/dd/yyyy"
+          labelText="End date"
+        />
+      </FluidDatePicker>
+      <br />
+      <br />
+      <FluidDatePicker datePickerType="range">
+        <FluidDatePickerInput
+          id="date-picker-input-id-start"
+          placeholder="mm/dd/yyyy"
+          labelText={ToggleTip}
+        />
+        <FluidDatePickerInput
+          warn
+          warnText="Warning message goes here"
           id="date-picker-input-id-finish"
           placeholder="mm/dd/yyyy"
           labelText="End date"

@@ -64,10 +64,12 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const inputClasses = cx(`${prefix}--date-picker__input`, {
     [`${prefix}--date-picker__input--${size}`]: size,
     [`${prefix}--date-picker__input--invalid`]: invalid,
+    [`${prefix}--date-picker__input--warn`]: warn,
   });
   const containerClasses = cx(`${prefix}--date-picker-container`, {
     [`${prefix}--date-picker--nolabel`]: !labelText,
     [`${prefix}--date-picker--fluid--invalid`]: isFluid && invalid,
+    [`${prefix}--date-picker--fluid--warn`]: isFluid && warn,
   });
 
   const input = invalid ? (
@@ -110,7 +112,12 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
           <div className={`${prefix}--form-requirement`}>{invalidText}</div>
         </>
       )}
-      {warn && <div className={`${prefix}--form-requirement`}>{warnText}</div>}
+      {warn && (
+        <>
+          {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
+          <div className={`${prefix}--form-requirement`}>{warnText}</div>
+        </>
+      )}
       {helperText && <div className={helperTextClasses}>{helperText}</div>}
     </div>
   );

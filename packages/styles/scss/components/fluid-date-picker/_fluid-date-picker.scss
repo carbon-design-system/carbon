@@ -25,7 +25,7 @@
   .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker {
     position: relative;
     height: 100%;
-    border-bottom: 1px solid $border-strong;
+    // border-bottom: 1px solid $border-strong;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
@@ -58,12 +58,44 @@
     display: none;
   }
 
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker__input:not(.#{$prefix}--date-picker__input--invalid):not(.#{$prefix}--date-picker__input--warn),
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker--fluid--warn {
+    border-bottom: 1px solid $border-strong;
+  }
+
   // Single, Range
   .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker__icon {
     top: rem(43px);
   }
 
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--single
+    .#{$prefix}--date-picker__input {
+    width: 100%;
+  }
+
+  .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker--single {
+    border-bottom: none;
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--single
+    .#{$prefix}--date-picker__input:not(.#{$prefix}--date-picker__input--invalid),
+  .#{$prefix}--date-picker--single .#{$prefix}--date-picker--fluid--warn {
+    border-bottom: 1px solid $border-strong;
+  }
+
   // Range
+  .#{$prefix}--date-picker--fluid:not(.#{$prefix}--date-picker--fluid--invalid)
+    .#{$prefix}--date-picker--range
+    .#{$prefix}--date-picker-container:not(.#{$prefix}--date-picker--fluid--invalid) {
+    border-bottom: 1px solid $border-strong;
+  }
+
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--range
     .#{$prefix}--date-picker__input,
@@ -111,6 +143,8 @@
   }
 
   .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--warn
     .#{$prefix}--form-requirement {
     padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
     margin: 0;
@@ -120,20 +154,44 @@
     .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
     .#{$prefix}--date-picker,
   .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
-    .#{$prefix}--date-picker {
+    .#{$prefix}--date-picker,
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--single
+    .#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker__input {
     border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
     .#{$prefix}--date-picker--range
     > .#{$prefix}--date-picker-container:last-child
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:last-child
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--fluid--warn
+    + .#{$prefix}--date-picker-container:last-child
+    .#{$prefix}--date-picker__input,
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:last-child
     .#{$prefix}--date-picker__input {
     border-left: 1px solid transparent;
   }
 
   .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--invalid
     .#{$prefix}--date-picker--range
-    > .#{$prefix}--date-picker-container:first-child::after {
+    > .#{$prefix}--date-picker-container:first-child::after,
+  .#{$prefix}--date-picker--fluid.#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker--range
+    > .#{$prefix}--date-picker-container:first-child::after,
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--range
+    .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:first-child::after,
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--range
+    .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:last-child::after {
     position: absolute;
     top: rem(8px);
     right: 0;
@@ -142,6 +200,11 @@
     height: calc(100% - 1rem);
     background: $border-strong;
     content: '';
+  }
+
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--fluid--warn.#{$prefix}--date-picker-container:last-child::after {
+    left: 0;
   }
 
   .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker__divider {
@@ -153,6 +216,8 @@
   }
 
   .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker__icon,
+  .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--warn
     .#{$prefix}--date-picker__icon {
     top: rem(80px);
   }
