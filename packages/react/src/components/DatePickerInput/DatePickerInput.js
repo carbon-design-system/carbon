@@ -100,6 +100,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
       )}
       <div className={wrapperClasses}>
         {input}
+        {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
         <DatePickerIcon
           datePickerType={datePickerType}
           invalid={invalid}
