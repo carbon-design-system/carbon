@@ -36,7 +36,7 @@ const ToggleTip = (
 );
 
 export const Simple = () => (
-  <>
+  <div style={{ width: '288px' }}>
     <FluidDatePicker datePickerType="simple">
       <FluidDatePickerInput
         placeholder="mm/dd/yyyy"
@@ -49,7 +49,7 @@ export const Simple = () => (
     <FluidDatePicker datePickerType="simple">
       <FluidDatePickerInput
         invalid
-        invalidText="Error message goes here that goes to two"
+        invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
         placeholder="mm/dd/yyyy"
         labelText={ToggleTip}
         id="date-picker-simple"
@@ -60,17 +60,17 @@ export const Simple = () => (
     <FluidDatePicker datePickerType="simple">
       <FluidDatePickerInput
         warn
-        warnText="Error message goes here that goes to two"
+        warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
         placeholder="mm/dd/yyyy"
         labelText={ToggleTip}
         id="date-picker-simple"
       />
     </FluidDatePicker>
-  </>
+  </div>
 );
 
 export const SingleWithCalendar = () => (
-  <>
+  <div style={{ width: '288px' }}>
     <FluidDatePicker datePickerType="single">
       <FluidDatePickerInput
         placeholder="mm/dd/yyyy"
@@ -84,7 +84,7 @@ export const SingleWithCalendar = () => (
     <FluidDatePicker datePickerType="single">
       <FluidDatePickerInput
         invalid
-        invalidText="Error message goes here that goes to two"
+        invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
         placeholder="mm/dd/yyyy"
         labelText={ToggleTip}
         id="date-picker-single"
@@ -96,19 +96,19 @@ export const SingleWithCalendar = () => (
     <FluidDatePicker datePickerType="single">
       <FluidDatePickerInput
         warn
-        warnText="Error message goes here that goes to two"
+        warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
         placeholder="mm/dd/yyyy"
         labelText={ToggleTip}
         id="date-picker-single"
         size="md"
       />
     </FluidDatePicker>
-  </>
+  </div>
 );
 
 export const RangeWithCalendar = () => {
   return (
-    <>
+    <div style={{ width: '288px' }}>
       <FluidDatePicker datePickerType="range">
         <FluidDatePickerInput
           id="date-picker-input-id-start"
@@ -127,7 +127,7 @@ export const RangeWithCalendar = () => {
       <br />
       <FluidDatePicker
         invalid
-        invalidText="Error message goes here that goes to two"
+        invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
         datePickerType="range">
         <FluidDatePickerInput
           id="date-picker-input-id-start"
@@ -147,7 +147,7 @@ export const RangeWithCalendar = () => {
       <FluidDatePicker datePickerType="range">
         <FluidDatePickerInput
           invalid
-          invalidText="Error message goes here that goes to two"
+          invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
           labelText={ToggleTip}
@@ -168,7 +168,7 @@ export const RangeWithCalendar = () => {
         />
         <FluidDatePickerInput
           invalid
-          invalidText="Error message goes here that goes to two"
+          invalidText="Error message that is really long can wrap to more lines but should not be excessively long."
           id="date-picker-input-id-finish"
           placeholder="mm/dd/yyyy"
           labelText="End date"
@@ -179,7 +179,7 @@ export const RangeWithCalendar = () => {
       <FluidDatePicker
         datePickerType="range"
         warn
-        warnText="Warning message goes here">
+        warnText="Warning message that is really long can wrap to more lines but should not be excessively long.">
         <FluidDatePickerInput
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
@@ -196,7 +196,7 @@ export const RangeWithCalendar = () => {
       <FluidDatePicker datePickerType="range">
         <FluidDatePickerInput
           warn
-          warnText="Warning message goes here"
+          warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
           id="date-picker-input-id-start"
           placeholder="mm/dd/yyyy"
           labelText={ToggleTip}
@@ -217,13 +217,13 @@ export const RangeWithCalendar = () => {
         />
         <FluidDatePickerInput
           warn
-          warnText="Warning message goes here"
+          warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
           id="date-picker-input-id-finish"
           placeholder="mm/dd/yyyy"
           labelText="End date"
         />
       </FluidDatePicker>
-    </>
+    </div>
   );
 };
 

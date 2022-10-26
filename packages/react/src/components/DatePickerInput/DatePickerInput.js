@@ -225,9 +225,12 @@ DatePickerInput.propTypes = {
 
 function DatePickerIcon({ datePickerType, invalid, warn }) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
 
   if (datePickerType === 'simple' && !invalid && !warn) {
-    return null;
+    if (!isFluid) {
+      return null;
+    }
   }
 
   if (invalid) {

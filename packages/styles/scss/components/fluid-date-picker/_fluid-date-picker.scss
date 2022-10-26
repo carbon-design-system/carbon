@@ -222,6 +222,17 @@
     top: rem(80px);
   }
 
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker--fluid--invalid
+    .#{$prefix}--date-picker__icon--invalid,
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--date-picker--simple
+    .#{$prefix}--date-picker--fluid--warn
+    .#{$prefix}--date-picker__icon--warn {
+    display: block;
+  }
+
   // Set focus when single input is invalid
   .#{$prefix}--date-picker-container.#{$prefix}--date-picker--fluid--invalid
     .#{$prefix}--date-picker__input:focus {
