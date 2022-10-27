@@ -14,14 +14,6 @@ const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 test.describe('ContainedList', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('containedlist @vrt', async ({ page }) => {
-        await snapshotStory(page, {
-          component: 'ContainedList',
-          id: 'components-containedlist--default',
-          theme,
-        });
-      });
-
       test('default @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ContainedList',
@@ -30,10 +22,10 @@ test.describe('ContainedList', () => {
         });
       });
 
-      test('playground @vrt', async ({ page }) => {
+      test('disclosed @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ContainedList',
-          id: 'components-containedlist--playground',
+          id: 'components-containedlist--disclosed',
           theme,
         });
       });
@@ -82,6 +74,14 @@ test.describe('ContainedList', () => {
         await snapshotStory(page, {
           component: 'ContainedList',
           id: 'components-containedlist--with-list-title-decorators',
+          theme,
+        });
+      });
+
+      test('playground @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'ContainedList',
+          id: 'components-containedlist--playground',
           theme,
         });
       });

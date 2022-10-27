@@ -53,21 +53,37 @@ export default {
 };
 
 export const Default = () => (
-  <ContainedList label="List title" kind="on-page">
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-  </ContainedList>
+  <>
+    <ContainedList label="List title" kind="on-page">
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+    </ContainedList>
+    <ContainedList label="List title" kind="on-page">
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+    </ContainedList>
+  </>
 );
 
 export const Disclosed = () => (
-  <ContainedList label="List title" kind="disclosed">
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-    <ContainedListItem>List item</ContainedListItem>
-  </ContainedList>
+  <>
+    <ContainedList label="List title" kind="disclosed">
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+    </ContainedList>
+    <ContainedList label="List title" kind="disclosed">
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+    </ContainedList>
+  </>
 );
 
 export const WithInteractiveItems = () => {
