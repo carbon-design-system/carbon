@@ -8,11 +8,9 @@
 import React from 'react';
 import FluidDatePicker from '../FluidDatePicker';
 import FluidDatePickerInput from '../../FluidDatePickerInput';
-// import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
-// import { FeatureFlags } from '../../FeatureFlags';
 
-// const prefix = 'cds';
+const prefix = 'cds';
 
 describe('FluidDatePicker', () => {
   describe('renders as expected - Component API', () => {
@@ -37,6 +35,31 @@ describe('FluidDatePicker', () => {
       );
 
       expect(screen.getByTestId('datePicker-1')).toHaveClass('custom-class');
+    });
+
+    it('should add fluid classes by default', () => {
+      render(
+        <FluidDatePicker
+          onChange={() => {}}
+          className="custom-class"
+          dateFormat="m/d/Y"
+          data-testid="datePicker-1">
+          <FluidDatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Start date"
+          />
+          <FluidDatePickerInput
+            id="date-picker-input-id-finish"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+          />
+        </FluidDatePicker>
+      );
+
+      expect(screen.getByTestId('datePicker-1')).toHaveClass(
+        `${prefix}--date-picker--fluid`
+      );
     });
   });
 });

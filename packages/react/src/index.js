@@ -212,12 +212,12 @@ export {
   useFeatureFlag as unstable_useFeatureFlag,
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
-export { FluidDatePicker as unstable__FluidDatePicker } from './components/FluidDatePicker';
-export { FluidDatePickerInput as unstable__FluidDatePickerInput } from './components/FluidDatePickerInput';
 export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
+export { FluidDatePicker as unstable__FluidDatePicker } from './components/FluidDatePicker';
+export { FluidDatePickerInput as unstable__FluidDatePickerInput } from './components/FluidDatePickerInput';
 export {
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
