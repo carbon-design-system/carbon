@@ -24,8 +24,8 @@
 
   .#{$prefix}--date-picker--fluid .#{$prefix}--date-picker {
     position: relative;
+    width: 100%;
     height: 100%;
-    // border-bottom: 1px solid $border-strong;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
   }
@@ -102,7 +102,9 @@
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker--range
     .#{$prefix}--date-picker-container {
-    width: rem(144px);
+    width: 100%;
+    min-width: rem(144px);
+    min-height: rem(63px);
   }
 
   .#{$prefix}--date-picker--fluid
