@@ -1,14 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>ui-shell-right-panel</title>
-    <g id="ui-shell-right-panel" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle-Copy-2" stroke="#C6C6C6" fill="#FFFFFF" x="72" y="38" width="176" height="110"></rect>
-        <rect id="Rectangle-Copy-41" fill="#161616" x="72" y="32" width="176" height="16"></rect>
-        <rect id="Rectangle-Copy-42" fill="#161616" x="204" y="49" width="44" height="99"></rect>
-        <rect id="Rectangle-Copy-52" fill="#C6C6C6" x="106" y="38.5" width="22" height="3"></rect>
-        <rect id="Rectangle-Copy-53" fill="#C6C6C6" x="79" y="38.5" width="22" height="3"></rect>
-        <rect id="Rectangle-Copy-54" fill="#C6C6C6" x="133" y="38.5" width="22" height="3"></rect>
-        <rect id="Rectangle-Copy-55" fill="#C6C6C6" x="226" y="37" width="5" height="5"></rect>
-        <rect id="Rectangle-Copy-56" fill="#C6C6C6" x="236" y="37" width="5" height="5"></rect>
-    </g>
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ui-shell-right-panel">
+<rect id="border copy 17" x="120" y="82" width="400" height="218" fill="white"/>
+<rect id="nav copy 18" x="120" y="58" width="400" height="26" fill="#171717"/>
+<rect id="Rectangle Copy 244" opacity="0.844385" x="188" y="69" width="44" height="6" fill="#C6C6C6"/>
+<rect id="Rectangle Copy 245" opacity="0.844385" x="134" y="69" width="44" height="6" fill="#C6C6C6"/>
+<rect id="Rectangle Copy 246" opacity="0.844385" x="242" y="69" width="44" height="6" fill="#C6C6C6"/>
+<rect id="Rectangle Copy 247" opacity="0.844385" x="478" y="66" width="10" height="10" fill="#C6C6C6"/>
+<rect id="Rectangle Copy 248" opacity="0.844385" x="498" y="66" width="10" height="10" fill="#C6C6C6"/>
+<g id="border copy 18" style="mix-blend-mode:multiply">
+<rect x="120.5" y="58.5" width="399" height="243" fill="white"/>
+<rect x="120.5" y="58.5" width="399" height="243" stroke="#C6C6C6"/>
+</g>
+<rect id="nav copy 19" x="420" y="84" width="100" height="216" fill="#171717"/>
+<rect id="Rectangle Copy 260" x="420" y="84" width="100" height="2" fill="#C6C6C6"/>
+</g>
 </svg>
