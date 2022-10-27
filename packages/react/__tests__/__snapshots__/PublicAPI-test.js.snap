@@ -5594,6 +5594,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "vertical": Object {
+        "type": "bool",
+      },
     },
   },
   "ProgressStep" => Object {
