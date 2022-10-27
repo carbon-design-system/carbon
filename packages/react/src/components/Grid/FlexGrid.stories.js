@@ -16,6 +16,13 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    columns: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 function DemoContent({ children }) {
@@ -333,8 +340,5 @@ Playground.argTypes = {
       type: 'boolean',
     },
     defaultValue: false,
-  },
-  columns: {
-    control: { type: 'number' },
   },
 };

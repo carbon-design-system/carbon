@@ -29,6 +29,13 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => (
@@ -223,12 +230,6 @@ Playground.argTypes = {
     control: {
       type: 'object',
     },
-  },
-  light: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
   },
   rightOverflowButtonProps: {
     control: {
