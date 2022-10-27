@@ -51,12 +51,13 @@ types of changes you can expect to occur as a consumer of that package. We'll
 try to highlight common changes in code and the corresponding `semver` bump that
 you can expect for the package when it is updated.
 
-## `carbon-components-react`
+## `carbon-components-react`, `@carbon/react`
 
 ### Changes
 
 | Type of change                                                      | semver bump |
 | ------------------------------------------------------------------- | ----------- |
+| A change is made to component typings/definitions                   | `patch`     |
 | A new prop is added to a component                                  | `minor`     |
 | An existing prop is deprecated                                      | `minor`     |
 | An existing prop is removed                                         | `major`     |
@@ -67,6 +68,20 @@ you can expect for the package when it is updated.
 | A `PropTypes.func` prop type is changed to have fewer arguments     | `major`     |
 
 ### Examples
+
+#### A change is made to component typings/definitions
+
+semver bump: **minor**
+
+Typescript definitions for component APIs are provided on an as-is basis and are
+not bound to semver. This includes type additions, changes, or removals.
+Breaking changes may happen across patch or minor versions. The component API
+may shift and types could become outdated.
+
+If a typing is out of date or incorrect, please let us know by opening an issue
+or even better, propose a fix via PR! We appreciate the community's involvement
+in this effort to keep component types up to date and as correct as possible!
+:pray:
 
 #### A new prop is added to a component
 

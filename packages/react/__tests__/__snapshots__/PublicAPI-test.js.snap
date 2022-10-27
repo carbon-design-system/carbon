@@ -1313,7 +1313,6 @@ Map {
   "ControlledPasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "className": "\${prefix}--text__input",
       "disabled": false,
       "helperText": "",
       "invalid": false,
@@ -5598,6 +5597,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "vertical": Object {
+        "type": "bool",
+      },
     },
   },
   "ProgressStep" => Object {
@@ -7642,7 +7644,6 @@ Map {
     "ControlledPasswordInput": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "className": "\${prefix}--text__input",
         "disabled": false,
         "helperText": "",
         "invalid": false,
