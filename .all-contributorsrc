@@ -904,6 +904,33 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "torresga",
+      "name": "G. Torres",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6892410?v=4",
+      "profile": "http://torresga.github.io/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "FionaDL",
+      "name": "Fiona",
+      "avatar_url": "https://avatars.githubusercontent.com/u/28625558?v=4",
+      "profile": "https://github.com/FionaDL",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kindoflew",
+      "name": "kindoflew",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70274722?v=4",
+      "profile": "https://lewisdavanzo.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
