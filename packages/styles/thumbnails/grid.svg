@@ -2,8 +2,9 @@
 <svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>grid</title>
     <g id="grid" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(72.000000, 43.000000)" fill="#D0E2FF" opacity="0.3">
-            <g id="Grid" transform="translate(0.188358, 0.000000)">
+        <rect id="Rectangle" fill="#FFFFFF" x="68" y="37" width="183" height="111"></rect>
+        <g id="Browser-/-Grid-/-448-/-Light" transform="translate(72.188358, 43.000000)" fill="#D0E2FF" opacity="0.3">
+            <g id="Grid" transform="translate(-0.000000, 0.000000)">
                 <rect id="Column" x="168.435464" y="0" width="6.88230928" height="105"></rect>
                 <rect id="Column" x="157.206433" y="0" width="6.88230928" height="105"></rect>
                 <rect id="Column" x="145.977402" y="0" width="6.88230928" height="105"></rect>
@@ -27,15 +28,15 @@
             <g id="Header-type" transform="translate(0.000000, 4.005964)">
                 <polygon id="background" fill="#161616" points="0 0 185 0 185 6.944 0 6.944"></polygon>
                 <rect id="border-bottom" fill="#393939" x="0" y="6.79933333" width="185" height="1"></rect>
-                <text id="[Name]" font-family="IBMPlexSans-SemiBold, IBM Plex Sans" font-size="2.02533333" font-weight="500" line-spacing="2.604" letter-spacing="0.0144666669" fill="#FFFFFF">
+                <text id="[Name]" font-family="IBMPlexSans-SemiBold, IBM Plex Sans" font-size="2.02533333" font-weight="500" line-spacing="2.604" letter-spacing="0.0144666666" fill="#FFFFFF">
                     <tspan x="6.65466667" y="4.02533333">[Name]</tspan>
                 </text>
-                <text id="IBM" font-family="IBMPlexSans, IBM Plex Sans" font-size="2.02533333" font-weight="normal" line-spacing="2.604" letter-spacing="0.0144666669" fill="#FFFFFF">
+                <text id="IBM" font-family="IBMPlexSans, IBM Plex Sans" font-size="2.02533333" font-weight="normal" line-spacing="2.604" letter-spacing="0.0144666666" fill="#FFFFFF">
                     <tspan x="2.31466667" y="4.02533333">IBM</tspan>
                 </text>
             </g>
-            <g id="Browser-bar">
-                <path d="M0.978,2.27373675e-13 L184.022,2.27373675e-13 C184.562134,2.11554195e-13 185,0.437865515 185,0.978 L185,4 L185,4 L0,4 L0,0.978 C4.48749056e-17,0.437865515 0.437865515,2.27250852e-13 0.978,2.27373675e-13 Z" id="Background" fill="#A8A8A8"></path>
+            <g id="Browser-bar" transform="translate(0.000000, 0.000000)">
+                <path d="M0.978,0 L184.022,0 C184.562134,-1.581948e-14 185,0.437865515 185,0.978 L185,4 L185,4 L0,4 L0,0.978 C4.48749056e-17,0.437865515 0.437865515,-1.2282351e-16 0.978,0 Z" id="Background" fill="#A8A8A8"></path>
                 <ellipse id="Oval-2" fill="#FFFFFF" cx="5.50591586" cy="2" rx="1" ry="1"></ellipse>
                 <ellipse id="Oval-1" fill="#FFFFFF" cx="2.50591586" cy="2" rx="1" ry="1"></ellipse>
             </g>
