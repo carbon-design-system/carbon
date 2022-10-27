@@ -6063,6 +6063,9 @@ Map {
       "name": Object {
         "type": "string",
       },
+      "onBlur": Object {
+        "type": "func",
+      },
       "onChange": Object {
         "type": "func",
       },
