@@ -1936,8 +1936,9 @@
   sizes:
     - 32
 - name: build-tool
-  friendly_name: build-tool
-  aliases: []
+  friendly_name: Build tool
+  aliases: 
+    - build tool
   sizes:
     - 32
 - name: building
@@ -2515,8 +2516,10 @@
   sizes:
     - 32
 - name: catalog--publish
-  friendly_name: catalog--publish
-  aliases: []
+  friendly_name: Catalog publish
+  aliases: 
+    - catalog
+    - publish
   sizes:
     - 32
 - name: categories
@@ -4615,13 +4618,17 @@
   sizes:
     - 32
 - name: continuous-deployment
-  friendly_name: continuous-deployment
-  aliases: []
+  friendly_name: Continuous deployment
+  aliases: 
+    - continuous
+    - deployment
   sizes:
     - 32
 - name: continuous-integration
-  friendly_name: continuous-integration
-  aliases: []
+  friendly_name: Continuous integration
+  aliases: 
+    - continuous
+    - integration
   sizes:
     - 32
 - name: contour--draw
@@ -8836,8 +8843,11 @@
   sizes:
     - 32
 - name: ibm--datastage
-  friendly_name: ibm--datastage
-  aliases: []
+  friendly_name: IBM® DataStage
+  aliases: 
+    - data
+    - staging
+    - cloud
   sizes:
     - 32
 - name: ibm--match-360
@@ -8847,8 +8857,13 @@
   sizes:
     - 32
 - name: ibm--mq
-  friendly_name: ibm--mq
-  aliases: []
+  friendly_name: IBM® MQ
+  aliases: 
+    - message
+    - queue
+    - data
+    - enterprise
+    - hybrid cloud
   sizes:
     - 32
 - name: ibm--open-enterprise-languages
@@ -8859,8 +8874,11 @@
   sizes:
     - 32
 - name: ibm--power-vs
-  friendly_name: ibm--power-vs
-  aliases: []
+  friendly_name: IBM® Power VS
+  aliases: 
+    - virtual
+    - server
+    - cloud
   sizes:
     - 32
 - name: ibm-cloud
@@ -8879,8 +8897,15 @@
   sizes:
     - 32
 - name: ibm-cloud--citrix-daas
-  friendly_name: ibm-cloud--citrix-daas
-  aliases: []
+  friendly_name: Citrix DaaS for IBM Cloud®
+  aliases: 
+    - DaaS
+    - cloud
+    - bare metal server
+    - virtual server
+    - migration
+    - extension
+    - citrix
   sizes:
     - 32
 - name: ibm-cloud--dedicated-host
@@ -8896,48 +8921,77 @@
   sizes:
     - 32
 - name: ibm-cloud--direct-link-1--connect
-  friendly_name: ibm-cloud--direct-link-1--connect
-  aliases: []
+  friendly_name: IBM Cloud® Direct Link Connect 1
+  aliases: 
+    - cloud
+    - direct link
+    - connect
   sizes:
     - 32
 - name: ibm-cloud--direct-link-1--dedicated
-  friendly_name: ibm-cloud--direct-link-1--dedicated
-  aliases: []
+  friendly_name: IBM Cloud® Direct Link Dedicated 1
+  aliases: 
+    - cloud
+    - direct link
+    - dedicated
   sizes:
     - 32
 - name: ibm-cloud--direct-link-1--dedicated-hosting
-  friendly_name: ibm-cloud--direct-link-1--dedicated-hosting
-  aliases: []
+  friendly_name: IBM Cloud® Direct Link Dedicated Hosting 1
+  aliases: 
+    - cloud
+    - direct link
+    - dedicated
+    - hosting
   sizes:
     - 32
 - name: ibm-cloud--direct-link-1--exchange
-  friendly_name: ibm-cloud--direct-link-1--exchange
-  aliases: []
+  friendly_name: IBM Cloud® Direct Link Exchange 1
+  aliases: 
+    - cloud
+    - direct link
+    - exchange
   sizes:
     - 32
 - name: ibm-cloud--direct-link-2--connect
-  friendly_name: ibm-cloud--direct-link-2--connect
-  aliases: []
+  friendly_name: IBM Cloud® Direct Link Connect 2
+  aliases: 
+    - cloud
+    - direct link
+    - connect
   sizes:
     - 32
 - name: ibm-cloud--direct-link-2--dedicated
-  friendly_name: ibm-cloud--direct-link-2--dedicated
-  aliases: []
+  friendly_name: IBM Cloud® Direct Link Dedicated 2
+  aliases: 
+    - cloud
+    - direct link
+    - dedicated
   sizes:
     - 32
 - name: ibm-cloud--direct-link-2--dedicated-hosting
-  friendly_name: ibm-cloud--direct-link-2--dedicated-hosting
-  aliases: []
+  friendly_name: IBM Cloud® Direct Link Dedicated Hosting 2
+  aliases: 
+    - cloud
+    - direct link
+    - dedicated
+    - hosting
   sizes:
     - 32
 - name: ibm-cloud--event-notification
-  friendly_name: ibm-cloud--event-notification
-  aliases: []
+  friendly_name: IBM Cloud® Event Notifications
+  aliases: 
+    - cloud
+    - event
+    - notifications
   sizes:
     - 32
 - name: ibm-cloud--event-streams
-  friendly_name: ibm-cloud--event-streams
-  aliases: []
+  friendly_name: IBM Cloud® Event Streams
+  aliases: 
+    - cloud
+    - event
+    - streams
   sizes:
     - 32
 - name: ibm-cloud--hyper-protect-crypto-services
@@ -8982,13 +9036,20 @@
   sizes:
     - 32
 - name: ibm-cloud--logging
-  friendly_name: ibm-cloud--logging
-  aliases: []
+  friendly_name: IBM Cloud® Logging
+  aliases: 
+    - cloud
+    - logging
+    - log
   sizes:
     - 32
 - name: ibm-cloud--mass-data-migration
-  friendly_name: ibm-cloud--mass-data-migration
-  aliases: []
+  friendly_name: IBM Cloud® Mass Data Migration
+  aliases: 
+    - cloud
+    - data
+    - migration
+    - migrate
   sizes:
     - 32
 - name: ibm-cloud--pal
@@ -8997,8 +9058,11 @@
   sizes:
     - 32
 - name: ibm-cloud--secrets-manager
-  friendly_name: ibm-cloud--secrets-manager
-  aliases: []
+  friendly_name: IBM Cloud® Secrets Manager
+  aliases: 
+    - cloud
+    - secrets
+    - manager
   sizes:
     - 32
 - name: ibm-cloud--security-compliance-center
@@ -9024,7 +9088,8 @@
     - 32
 - name: ibm-cloud--sysdig-secure
   friendly_name: ibm-cloud--sysdig-secure
-  aliases: []
+  aliases: 
+  
   sizes:
     - 32
 - name: ibm-cloud--transit-gateway
@@ -9113,8 +9178,16 @@
   sizes:
     - 32
 - name: ibm-cloud-pak--netezza
-  friendly_name: ibm-cloud-pak--netezza
-  aliases: []
+  friendly_name: IBM Cloud Pak® Netezza®
+  aliases: 
+    - cloud
+    - cloud pak
+    - netezza
+    - server
+    - data
+    - AI
+    - storage
+    - analytics
   sizes:
     - 32
 - name: ibm-cloud-pak--network-automation
@@ -9182,48 +9255,90 @@
   sizes:
     - 32
 - name: ibm-watson--assistant
-  friendly_name: ibm-watson--assistant
-  aliases: []
+  friendly_name: IBM Watson® Assistant
+  aliases: 
+    - AI
+    - virtual agent
+    - customer service
+    - automation
   sizes:
     - 32
 - name: ibm-watson--discovery
-  friendly_name: ibm-watson--discovery
-  aliases: []
+  friendly_name: IBM Watson® Discovery
+  aliases: 
+    - data
+    - AI
+    - natural language processing
+    - analysis
+    - automation
   sizes:
     - 32
 - name: ibm-watson--knowledge-catalog
-  friendly_name: ibm-watson--knowledge-catalog
-  aliases: []
+  friendly_name: IBM Watson® Knowledge Catalog
+  aliases: 
+    - data
+    - AIOps
+    - cataloging
+    - enterprise
+    - model
+    - automation
   sizes:
     - 32
 - name: ibm-watson--knowledge-studio
-  friendly_name: ibm-watson--knowledge-studio
-  aliases: []
+  friendly_name: IBM Watson® Knowledge Studio
+  aliases: 
+    - enterprise
+    - knowledge
+    - model
+    - chatbot
+    - automation
   sizes:
     - 32
 - name: ibm-watson--language-translator
-  friendly_name: ibm-watson--language-translator
-  aliases: []
+  friendly_name: IBM Watson® Language Translator
+  aliases: 
+    - language
+    - AI
+    - translation
+    - automation
   sizes:
     - 32
 - name: ibm-watson--machine-learning
-  friendly_name: ibm-watson--machine-learning
-  aliases: []
+  friendly_name: IBM Watson® Machine Learning
+  aliases: 
+    - data
+    - AI
+    - ML
+    - automation
   sizes:
     - 32
 - name: ibm-watson--natural-language-classifier
-  friendly_name: ibm-watson--natural-language-classifier
-  aliases: []
+  friendly_name: IBM Watson® Natural Language Classifier
+  aliases: 
+    - AI
+    - analytics
+    - language
+    - text analyzer
+    - automation
   sizes:
     - 32
 - name: ibm-watson--natural-language-understanding
-  friendly_name: ibm-watson--natural-language-understanding
-  aliases: []
+  friendly_name: IBM Watson® Natural Language Understanding
+  aliases: 
+    - AI
+    - natural language processing
+    - analytics
+    - automation
   sizes:
     - 32
 - name: ibm-watson--openscale
-  friendly_name: ibm-watson--openscale
-  aliases: []
+  friendly_name: IBM Watson® OpenScale
+  aliases: 
+    - enterprise
+    - insights
+    - model
+    - AI
+    - automation
   sizes:
     - 32
 - name: ibm-watson--orders
@@ -9233,31 +9348,61 @@
     - enterprise
     - app
     - orders
+    - automation
   sizes:
     - 32
 - name: ibm-watson--query
-  friendly_name: ibm-watson--query
-  aliases: []
+  friendly_name: IBM Watson® Query
+  aliases: 
+    - query engine
+    - virtual query
+    - data
+    - enterprise
+    - automation
   sizes:
     - 32
 - name: ibm-watson--speech-to-text
-  friendly_name: ibm-watson--speech-to-text
-  aliases: []
+  friendly_name: IBM Watson® Speech to Text
+  aliases: 
+    - AI
+    - data
+    - chatbot
+    - AIOps
+    - automation
+    - text
+    - speech
   sizes:
     - 32
 - name: ibm-watson--studio
-  friendly_name: ibm-watson--studio
-  aliases: []
+  friendly_name: IBM Watson® Studio
+  aliases: 
+    - AI
+    - model
+    - automation
+    - predict
   sizes:
     - 32
 - name: ibm-watson--text-to-speech
-  friendly_name: ibm-watson--text-to-speech
-  aliases: []
+  friendly_name: IBM Watson® Text to Speech
+  aliases: 
+    - AI
+    - data
+    - chatbot
+    - automation
+    - text
+    - speech
   sizes:
     - 32
 - name: ibm-watson--tone-analyzer
-  friendly_name: ibm-watson--tone-analyzer
-  aliases: []
+  friendly_name: IBM Watson® Tone Analyzer
+  aliases: 
+    - AI
+    - data
+    - tone
+    - chatbot
+    - speech
+    - analyze 
+    - analysis
   sizes:
     - 32
 - name: ibm-z--cloud-mod-stack
@@ -9448,18 +9593,38 @@
   sizes:
     - 32
 - name: image-availability--local
-  friendly_name: image-availability--local
-  aliases: []
+  friendly_name: Image availability local
+  aliases: 
+    - exam result
+    - local
+    - image
+    - result
+    - pin
+    - here
+    - dot
   sizes:
     - 32
 - name: image-availability--retrieving
-  friendly_name: image-availability--retrieving
-  aliases: []
+  friendly_name: Image availability retrieving
+  aliases: 
+    - exam result
+    - retrieve
+    - fetch
+    - image
+    - result
+    - location
+    - incoming
   sizes:
     - 32
 - name: image-availability--unavailable
-  friendly_name: image-availability--unavailable
-  aliases: []
+  friendly_name: Image availability unavailable
+  aliases: 
+    - exam result
+    - unavailable
+    - not found
+    - image
+    - result
+    - question mark
   sizes:
     - 32
 - name: image-service
@@ -10072,8 +10237,11 @@
   sizes:
     - 32
 - name: keyboard--off
-  friendly_name: keyboard--off
-  aliases: []
+  friendly_name: Keyboard off
+  aliases: 
+    - keyboard
+    - off
+    - status
   sizes:
     - 32
 - name: kubernetes
@@ -10950,8 +11118,16 @@
   sizes:
     - 32
 - name: logo--angular
-  friendly_name: logo--angular
-  aliases: []
+  friendly_name: Logo Angular
+  aliases:
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification 
   sizes:
     - 32
 - name: logo--digg
@@ -10994,8 +11170,16 @@
     - tag
     - identification
 - name: logo--figma
-  friendly_name: logo--figma
-  aliases: []
+  friendly_name: Logo Figma
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--flickr
@@ -11051,8 +11235,16 @@
     - tag
     - identification
 - name: logo--invision
-  friendly_name: logo--invision
-  aliases: []
+  friendly_name: Logo InVision
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--jupyter
@@ -11134,8 +11326,16 @@
     - tag
     - identification
 - name: logo--npm
-  friendly_name: logo--npm
-  aliases: []
+  friendly_name: Logo npm
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--openshift
@@ -11207,13 +11407,29 @@
   sizes:
     - 32
 - name: logo--react
-  friendly_name: logo--react
-  aliases: []
+  friendly_name: Logo React
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--sketch
-  friendly_name: logo--sketch
-  aliases: []
+  friendly_name: Logo Sketch
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--skype
@@ -11256,8 +11472,16 @@
     - tag
     - identification
 - name: logo--svelte
-  friendly_name: logo--svelte
-  aliases: []
+  friendly_name: Logo Svelte
+  aliases: 
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--tumblr
@@ -11300,8 +11524,16 @@
     - tag
     - identification
 - name: logo--vue
-  friendly_name: logo--vue
-  aliases: []
+  friendly_name: Logo Vue
+  aliases:     
+    - brand
+    - emblem
+    - logotype
+    - symbol
+    - id
+    - avatar
+    - tag
+    - identification
   sizes:
     - 32
 - name: logo--wechat
@@ -13850,8 +14082,18 @@
   sizes:
     - 32
 - name: plan
-  friendly_name: plan
-  aliases: []
+  friendly_name: Plan
+  aliases: 
+    - plan
+    - guide
+    - process
+    - steps
+    - framework
+    - architecture
+    - map
+    - roadmap
+    - direction
+    - design
   sizes:
     - 32
 - name: plane
@@ -14141,8 +14383,13 @@
   sizes:
     - 32
 - name: promote
-  friendly_name: promote
-  aliases: []
+  friendly_name: Promote
+  aliases: 
+    - promote
+    - push
+    - elevate
+    - move ahead
+    - forward
   sizes:
     - 32
 - name: property-relationship
@@ -14516,13 +14763,19 @@
   sizes:
     - 32
 - name: repo--artifact
-  friendly_name: repo--artifact
-  aliases: []
+  friendly_name: Repo artifact
+  aliases: 
+    - repository
+    - artifact
+    - data
   sizes:
     - 32
 - name: repo--source-code
-  friendly_name: repo--source-code
-  aliases: []
+  friendly_name: Repo source code
+  aliases: 
+    - repository
+    - source code
+    - data   
   sizes:
     - 32
 - name: report
@@ -15866,23 +16119,31 @@
   sizes:
     - 32
 - name: side-panel--close
-  friendly_name: side-panel--close
-  aliases: []
+  friendly_name: Side-panel close
+  aliases: 
+    - UI
+    - interface
   sizes:
     - 32
 - name: side-panel--close--filled
-  friendly_name: side-panel--close--filled
-  aliases: []
+  friendly_name: Side-panel close filled
+  aliases: 
+    - UI
+    - interface
   sizes:
     - 32
 - name: side-panel--open
-  friendly_name: side-panel--open
-  aliases: []
+  friendly_name: Side-panel open
+  aliases: 
+    - UI
+    - interface
   sizes:
     - 32
 - name: side-panel--open--filled
-  friendly_name: side-panel--open--filled
-  aliases: []
+  friendly_name: Side-panel open filled
+   aliases: 
+    - UI
+    - interface
   sizes:
     - 32
 - name: sight
@@ -17475,8 +17736,9 @@
   sizes:
     - 32
 - name: test-tool
-  friendly_name: test-tool
-  aliases: []
+  friendly_name: Test tool
+  aliases: 
+    - test
   sizes:
     - 32
 - name: text--align--center
@@ -18519,8 +18781,12 @@
     - 16
     - 32
 - name: unsaved
-  friendly_name: unsaved
-  aliases: []
+  friendly_name: Unsaved
+  aliases: 
+    - unsaved
+    - status
+    - state
+    - condition
   sizes:
     - 32
 - name: up-to-top
