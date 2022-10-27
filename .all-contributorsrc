@@ -931,6 +931,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "mgueyraud",
+      "name": "Mario Gueyraud",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9916318?v=4",
+      "profile": "https://github.com/mgueyraud",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

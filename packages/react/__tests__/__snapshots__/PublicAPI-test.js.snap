@@ -4969,6 +4969,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "disableWheel": Object {
+        "type": "bool",
+      },
       "disabled": Object {
         "type": "bool",
       },
