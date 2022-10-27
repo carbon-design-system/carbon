@@ -266,7 +266,6 @@ function CodeSnippet({
             {expandCodeBtnText}
           </span>
           <ChevronDown
-            aria-label={expandCodeBtnText}
             className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
             name="chevron--down"
             role="img"
