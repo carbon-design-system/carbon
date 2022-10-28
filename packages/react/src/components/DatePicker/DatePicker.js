@@ -200,6 +200,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     onChange,
     onClose,
     onOpen,
+    readOnly = false,
     short = false,
     value,
     ...rest
@@ -228,6 +229,10 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   const childrenWithProps = React.Children.toArray(children).map(
     (child, index) => {
+      let _readOnly =
+        typeof readOnly === 'boolean' ? readOnly : readOnly[index];
+
+      console.log('_readOnly', _readOnly);
       if (
         index === 0 &&
         child.type === React.createElement(DatePickerInput, child.props).type
@@ -235,6 +240,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         return React.cloneElement(child, {
           datePickerType,
           ref: startInputField,
+          readOnly: _readOnly,
         });
       }
       if (
@@ -244,23 +250,29 @@ const DatePicker = React.forwardRef(function DatePicker(
         return React.cloneElement(child, {
           datePickerType,
           ref: endInputField,
+          readOnly: _readOnly,
         });
       }
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
+          readOnly: _readOnly,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
+          readOnly: _readOnly,
         });
       }
     }
   );
 
   useEffect(() => {
-    if (datePickerType !== 'single' && datePickerType !== 'range') {
+    if (
+      (datePickerType !== 'single' && datePickerType !== 'range') ||
+      readOnly
+    ) {
       return;
     }
 
@@ -685,6 +697,13 @@ DatePicker.propTypes = {
    * The `open` event handler.
    */
   onOpen: PropTypes.func,
+
+  /**
+   * whether the DatePicker is to be readOnly
+   * if boolean applies to all inputs
+   * if array applies to each input in order
+   */
+  readOnly: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 
   /**
    * `true` to use the short version.
