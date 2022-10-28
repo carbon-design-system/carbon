@@ -25,6 +25,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     onChange = () => {},
     pattern = '\\d{1,2}\\/\\d{1,2}\\/\\d{4}',
     placeholder,
+    readOnly = false,
     size = 'md',
     type = 'text',
     warn,
@@ -55,6 +56,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: readOnly,
   });
   const helperTextClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -72,6 +74,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
       {...rest}
       {...datePickerInputProps}
       disabled={disabled}
+      readOnly={readOnly === true}
       ref={ref}
       data-invalid
       className={inputClasses}
@@ -82,9 +85,12 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
       {...datePickerInputProps}
       disabled={disabled}
       className={inputClasses}
+      readOnly={readOnly === true}
       ref={ref}
     />
   );
+
+  console.log('readOnly', readOnly);
 
   return (
     <div className={containerClasses}>
@@ -187,6 +193,11 @@ DatePickerInput.propTypes = {
    * Specify the placeholder text
    */
   placeholder: PropTypes.string,
+
+  /**
+   * whether the DatePicker is to be readOnly
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the size of the Date Picker Input. Currently supports either `sm`, `md`, or `lg` as an option.
