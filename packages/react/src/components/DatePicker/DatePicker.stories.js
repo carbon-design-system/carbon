@@ -198,18 +198,9 @@ export const RangeWithCalendarWithLayer = () => {
 
 export const Skeleton = () => <DatePickerSkeleton range />;
 
-const readOnly = {
-  'Not specified': undefined,
-  false: false,
-  true: true,
-  '[false, true]': [false, true],
-  '[true, false]': [true, false],
-  '[true, true]': [true, true],
-};
-
-export const Playground = (args) => {
+export const Playground = ({ readOnly, ...args }) => {
   return (
-    <DatePicker datePickerType="single" {...args}>
+    <DatePicker datePickerType="single" {...args} readOnly={readOnly}>
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
@@ -276,11 +267,8 @@ Playground.argTypes = {
   },
   readOnly: {
     control: {
-      type: 'radio',
-      labels: Object.keys(readOnly),
+      type: 'boolean',
     },
-    options: Object.values(readOnly).map((_k, i) => i),
-    mapping: Object.values(readOnly),
   },
   value: {
     table: {

@@ -2467,6 +2467,19 @@ Map {
       "onOpen": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "array",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "short": Object {
         "type": "bool",
       },
