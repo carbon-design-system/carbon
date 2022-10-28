@@ -25,7 +25,6 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     onChange = () => {},
     pattern = '\\d{1,2}\\/\\d{1,2}\\/\\d{4}',
     placeholder,
-    readOnly = false,
     size = 'md',
     type = 'text',
     warn,
@@ -56,7 +55,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--label--readonly`]: readOnly,
+    [`${prefix}--label--readonly`]: rest.readOnly,
   });
   const helperTextClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -69,28 +68,17 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     [`${prefix}--date-picker--nolabel`]: !labelText,
   });
 
-  const input = invalid ? (
-    <input
-      {...rest}
-      {...datePickerInputProps}
-      disabled={disabled}
-      readOnly={readOnly === true}
-      ref={ref}
-      data-invalid
-      className={inputClasses}
-    />
-  ) : (
-    <input
-      {...rest}
-      {...datePickerInputProps}
-      disabled={disabled}
-      className={inputClasses}
-      readOnly={readOnly === true}
-      ref={ref}
-    />
-  );
-
-  console.log('readOnly', readOnly);
+  const inputProps = {
+    ...rest,
+    ...datePickerInputProps,
+    className: inputClasses,
+    disabled,
+    ref,
+  };
+  if (invalid) {
+    inputProps['data-invalid'] = true;
+  }
+  const input = <input {...inputProps} />;
 
   return (
     <div className={containerClasses}>
@@ -101,6 +89,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
       )}
       <div className={wrapperClasses}>
         {input}
+
         <DatePickerIcon
           datePickerType={datePickerType}
           invalid={invalid}
