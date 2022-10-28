@@ -65,7 +65,12 @@ const Checkbox = React.forwardRef(function Checkbox(
         aria-readonly={readOnly}
         onClick={(evt) => {
           if (readOnly) {
+            // prevent default stops the checkbox being updated
             evt.preventDefault();
+          }
+          // pass onClick event on to the user even if readonly
+          if (other.onClick) {
+            other.onClick(evt);
           }
         }}
       />

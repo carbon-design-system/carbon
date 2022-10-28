@@ -80,11 +80,13 @@ describe('Checkbox', () => {
 
   it('should NOT call the `onChange` prop when readonly', () => {
     const onChange = jest.fn();
+    const onClick = jest.fn();
     render(
       <Checkbox
         id="test"
         labelText="test-label"
         onChange={onChange}
+        onClick={onClick}
         checked={false}
         readOnly={true}
       />
@@ -92,6 +94,7 @@ describe('Checkbox', () => {
 
     userEvent.click(screen.getByLabelText('test-label'));
     userEvent.click(screen.getByRole('checkbox'));
+    expect(onClick).toHaveBeenCalled();
     expect(onChange).not.toHaveBeenCalled();
   });
 });
