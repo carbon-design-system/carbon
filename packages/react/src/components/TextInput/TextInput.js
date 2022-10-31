@@ -63,12 +63,10 @@ const TextInput = React.forwardRef(function TextInput(
     warnText,
   });
 
-  const customClassName = className ?? `${prefix}--text__input`;
   const textInputClasses = classNames(
     `${prefix}--text-input`,
     [enabled ? null : className],
     {
-      [customClassName]: enabled,
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
@@ -144,7 +142,6 @@ const TextInput = React.forwardRef(function TextInput(
     [`${prefix}--text-input__invalid-icon`]:
       normalizedProps.invalid || normalizedProps.warn,
     [`${prefix}--text-input__invalid-icon--warning`]: normalizedProps.warn,
-    [`${prefix}--text-input__readonly-icon`]: readOnly,
   });
 
   const counterClasses = classNames(`${prefix}--label`, {

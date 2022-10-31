@@ -1313,7 +1313,6 @@ Map {
   "ControlledPasswordInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "className": "\${prefix}--text__input",
       "disabled": false,
       "helperText": "",
       "invalid": false,
@@ -3530,9 +3529,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "columns": Object {
-        "type": "number",
-      },
       "condensed": Object {
         "type": "bool",
       },
@@ -4970,6 +4966,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "disableWheel": Object {
+        "type": "bool",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -5594,6 +5593,9 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "vertical": Object {
+        "type": "bool",
       },
     },
   },
@@ -7639,7 +7641,6 @@ Map {
     "ControlledPasswordInput": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "className": "\${prefix}--text__input",
         "disabled": false,
         "helperText": "",
         "invalid": false,

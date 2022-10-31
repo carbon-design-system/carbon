@@ -268,6 +268,22 @@
     border: 0;
   }
 
+  .#{$prefix}--header__submenu .#{$prefix}--header__menu {
+    a.#{$prefix}--header__menu-item[aria-current='page']::after,
+    .#{$prefix}--header__menu-item--current::after {
+      bottom: 0;
+      left: -2px;
+      border-bottom: none;
+      border-left: 3px solid $border-interactive;
+    }
+
+    a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
+    .#{$prefix}--header__menu-item--current:focus::after {
+      left: 0;
+      border-left: 3px solid $border-interactive;
+    }
+  }
+
   a.#{$prefix}--header__menu-item[aria-current='page']:focus,
   a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
     border: 2px solid $focus;

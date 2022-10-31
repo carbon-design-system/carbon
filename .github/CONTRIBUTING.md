@@ -339,14 +339,12 @@ work:
 ### If I'm contributing code, am I required to contribute it for all frameworks?
 
 If you've been working with Carbon for a while, you know that we have code
-assets in vanilla JS, React, Vue and Angular. While the core team only maintains
-the vanilla and React components, we work closely with the Vue and Angular teams
-to maintain parity. The core team also develops with a React first approach,
-which means that our vanilla components will never be ahead of React, though it
-may not be true for the other way around. If you're contributing a bug fix in a
-vanilla component which also exists in the React version, you can either
-contribute a fix for the React version as well or open an issue so that we can
-update the React component accordingly.
+assets in multiple frameworks. While the core team only maintains the React
+components, we work closely with the other framework teams to maintain parity.
+If you're contributing a bug fix in a framework other than React for a component
+which also exists in the React version, you can either contribute a fix for the
+React version as well or open an issue so that we can update the React component
+accordingly.
 
 ### How can I test-drive components or provide a bug reproduction?
 
