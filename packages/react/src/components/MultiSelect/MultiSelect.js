@@ -251,6 +251,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             evt.preventDefault();
           }
         },
+        ['aria-disabled']: true,
       }
     : {};
 
@@ -299,6 +300,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           {...readOnlyEventHandlers}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
+              readOnly={readOnly}
               clearSelection={!disabled && !readOnly ? clearSelection : noop}
               selectionCount={selectedItems.length}
               translateWithId={translateWithId}
