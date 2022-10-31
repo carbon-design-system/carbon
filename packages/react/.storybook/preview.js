@@ -14,6 +14,8 @@ import React from 'react';
 import { breakpoints } from '@carbon/layout';
 import { GlobalTheme } from '../src/components/Theme';
 
+import theme from './theme';
+
 export const globalTypes = {
   locale: {
     name: 'Locale',
@@ -86,6 +88,9 @@ export const parameters = {
   },
   darkMode: {
     current: 'light',
+  },
+  docs: {
+    theme,
   },
   // Small (<672)
   // Medium (672 - 1056px)
