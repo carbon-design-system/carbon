@@ -9,7 +9,7 @@ import React from 'react';
 import PaginationNav from '../PaginationNav';
 
 export default {
-  title: 'Components/PaginationNavTest',
+  title: 'Components/PaginationNav',
   component: PaginationNav,
   subcomponents: {},
   parameters: {},
