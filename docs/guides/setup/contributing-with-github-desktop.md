@@ -1,9 +1,9 @@
-# Contributing to Carbon using Github Desktop
+# Contributing to Carbon using GitHub Desktop
 
 ## Initial Setup
 
-1. Download and install [Github Desktop](https://desktop.github.com/)
-2. Run the Github Desktop application
+1. Download and install [GitHub Desktop](https://desktop.github.com/)
+2. Run the GitHub Desktop application
 3. Click the button labeled 'Sign in to Github.com'. This will open your browser
    and take you to an authorization page.
 4. Click the 'Authorize desktop' button, which may prompt you for your
@@ -18,7 +18,7 @@
    create a copy of the repository and add it to your account. This is where
    you'll make changes and later request the repository you forked pull those
    changes from (more on that later).
-9. Back in the Github Desktop application click the button labeled 'Clone a
+9. Back in the GitHub Desktop application click the button labeled 'Clone a
    repository from the internet...'
 10. In the modal that pops up you can search your account for the fork you made.
     Once you've selected the right repository click the blue button labeled
@@ -26,14 +26,14 @@
 11. The _next_ modal is a confirmation screen where you can double check the URL
     of your fork and select where on your computer you'd like to clone the
     repository.
-12. Once the Github Application is done cloning your repository select that you
+12. Once the GitHub Application is done cloning your repository select that you
     intend 'To contribute to the parent project' and then click the button
     labeled 'Continue'. You are now ready to work.
 
 ## Basic workflow
 
 1. First things first we need to create a "working" branch. At the top of the
-   Github Desktop application click the drop down labeled 'Current branch'
+   GitHub Desktop application click the drop down labeled 'Current branch'
 2. Click the button labeled 'New branch' and then name your branch. Typically
    this will be a general description of the work you're doing. Maybe
    'updating-accessibility-docs' or 'adding-security-pictograms'. Then click
