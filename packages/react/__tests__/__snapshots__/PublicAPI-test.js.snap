@@ -3823,6 +3823,16 @@ Map {
     },
     "render": [Function],
   },
+  "IdPrefix" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "prefix": Object {
+        "type": "string",
+      },
+    },
+  },
   "InlineLoading" => Object {
     "propTypes": Object {
       "className": Object {
@@ -9824,6 +9834,7 @@ Map {
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
   "unstable_useLayoutDirection" => Object {},
+  "useIdPrefix" => Object {},
   "useLayer" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
