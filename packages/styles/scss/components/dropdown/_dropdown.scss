@@ -473,4 +473,14 @@
   .#{$prefix}--list-box__menu-item__selected-icon {
     @include high-contrast-mode('icon-fill');
   }
+
+  $icon-readonly: $icon-disabled;
+  .#{$prefix}--dropdown--readonly,
+  .#{$prefix}--dropdown--readonly:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__menu-icon svg {
+    fill: $icon-readonly;
+  }
 }
