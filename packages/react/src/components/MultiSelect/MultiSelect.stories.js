@@ -65,6 +65,9 @@ export default {
     open: {
       table: { disable: true },
     },
+    readOnly: {
+      control: { type: 'boolean' },
+    },
     title: {
       table: { disable: true },
     },
