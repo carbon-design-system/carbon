@@ -32,6 +32,11 @@ export default {
     id: {
       table: { disable: true },
     },
+    light: {
+      table: {
+        disable: true,
+      },
+    },
   },
   parameters: {
     docs: {

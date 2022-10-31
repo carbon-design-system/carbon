@@ -31,9 +31,18 @@
     top: rem(13px);
     left: $spacing-05;
     display: flex;
+    width: calc(100% - 2rem);
     height: rem(16px);
     align-items: center;
     margin: 0;
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar {
+    display: none;
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--form__helper-text {
@@ -140,5 +149,26 @@
     right: $spacing-03;
     width: rem(32px);
     height: rem(32px);
+  }
+
+  // Skeleton
+  .#{$prefix}--text-input--fluid__skeleton {
+    position: relative;
+    height: 100%;
+    padding: $spacing-05;
+    border-bottom: 1px solid $skeleton-element;
+    background: $skeleton-background;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--skeleton {
+    height: 0.5rem;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--label {
+    margin-bottom: $spacing-04;
+  }
+
+  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--text-input {
+    width: 80%;
   }
 }

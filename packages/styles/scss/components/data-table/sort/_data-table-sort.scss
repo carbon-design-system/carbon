@@ -158,7 +158,7 @@
     opacity: 1;
   }
 
-  .#{$prefix}--table-sort--ascending .#{$prefix}--table-sort__icon {
+  .#{$prefix}--table-sort--descending .#{$prefix}--table-sort__icon {
     transform: rotate(180deg);
   }
 

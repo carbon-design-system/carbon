@@ -7,3 +7,4 @@
 
 export default from './FluidTextArea';
 export FluidTextArea from './FluidTextArea';
+export { default as FluidTextAreaSkeleton } from './FluidTextArea.Skeleton';
