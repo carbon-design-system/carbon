@@ -3529,9 +3529,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "columns": Object {
-        "type": "number",
-      },
       "condensed": Object {
         "type": "bool",
       },
@@ -4968,6 +4965,9 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "disableWheel": Object {
+        "type": "bool",
       },
       "disabled": Object {
         "type": "bool",
