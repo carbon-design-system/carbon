@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled } from '@carbon/icons-react';
@@ -40,6 +40,7 @@ const TextArea = React.forwardRef(function TextArea(
   const [textCount, setTextCount] = useState(
     defaultValue?.length || value?.length || 0
   );
+  const [ariaAnnouncement, setAriaAnnouncement] = useState('');
 
   const textareaProps = {
     id,
@@ -60,6 +61,15 @@ const TextArea = React.forwardRef(function TextArea(
   if (enableCounter) {
     textareaProps.maxLength = maxCount;
   }
+
+  useEffect(() => {
+    const lastTen = maxCount - 10;
+    if (textCount >= lastTen) {
+      setAriaAnnouncement(`${maxCount - textCount} characters left.`);
+    } else {
+      setAriaAnnouncement('');
+    }
+  }, [textCount, maxCount]);
 
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
@@ -139,6 +149,9 @@ const TextArea = React.forwardRef(function TextArea(
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}
         {input}
+        <span className={`${prefix}--text-area__counter-alert`} role="alert">
+          {ariaAnnouncement}
+        </span>
         {isFluid && <hr className={`${prefix}--text-area__divider`} />}
         {isFluid && invalid ? error : null}
       </div>
