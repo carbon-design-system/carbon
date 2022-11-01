@@ -204,7 +204,7 @@ const Dropdown = React.forwardRef(function Dropdown(
           type="button"
           className={`${prefix}--list-box__field`}
           disabled={disabled}
-          aria-disabled={disabled || readOnly}
+          aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
           title={selectedItem ? itemToString(selectedItem) : label}
           {...toggleButtonProps}
           {...readOnlyEventHandlers}
