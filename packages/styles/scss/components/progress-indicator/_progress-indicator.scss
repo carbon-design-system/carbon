@@ -273,6 +273,11 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     margin-top: 0.625rem;
   }
 
+  .#{$prefix}--progress.#{$prefix}--progress--vertical.#{$prefix}--skeleton
+    .#{$prefix}--progress-label {
+    margin-top: 0.0625rem;
+  }
+
   // Vertical Variant
 
   .#{$prefix}--progress--vertical {
