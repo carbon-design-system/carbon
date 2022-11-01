@@ -183,19 +183,16 @@
   //----------------------------------------------
   // Read-only
   // ---------------------------------------------
-  // should this be a token of it's own?
-  $border-readonly: $icon-disabled;
-
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox
     + .#{$prefix}--checkbox-label::before {
-    border-color: $border-readonly;
+    border-color: $icon-disabled;
   }
 
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::before {
-    border: 1px solid $border-readonly;
+    border: 1px solid $icon-disabled;
     background: transparent;
   }
 
