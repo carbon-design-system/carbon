@@ -90,8 +90,6 @@
   }
 
   // readonly
-  $icon-readonly: $icon-disabled;
-
   .#{$prefix}--time-picker--readonly .#{$prefix}--time-picker__input-field,
   .#{$prefix}--time-picker--readonly .#{$prefix}--select-input {
     background-color: transparent;
@@ -100,6 +98,6 @@
   .#{$prefix}--time-picker--readonly
     .#{$prefix}--select-input
     + .#{$prefix}--select__arrow {
-    fill: $icon-readonly;
+    fill: $icon-disabled;
   }
 }
