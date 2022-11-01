@@ -31,6 +31,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     allowEmpty = false,
     className: customClassName,
     disabled = false,
+    disableWheel: disableWheelProp = false,
     defaultValue,
     helperText = '',
     hideLabel = false,
@@ -163,6 +164,24 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             onClick={onClick}
             onChange={handleOnChange}
             onKeyUp={onKeyUp}
+            onFocus={(e) => {
+              if (disableWheelProp) {
+                e.target.addEventListener('wheel', disableWheel);
+              }
+
+              if (rest.onFocus) {
+                rest.onFocus(e);
+              }
+            }}
+            onBlur={(e) => {
+              if (disableWheelProp) {
+                e.target.removeEventListener('wheel', disableWheel);
+              }
+
+              if (rest.onBlur) {
+                rest.onBlur(e);
+              }
+            }}
             pattern="[0-9]*"
             readOnly={readOnly}
             step={step}
@@ -252,6 +271,11 @@ NumberInput.propTypes = {
    * Optional starting value for uncontrolled state
    */
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
+   * Specify if the wheel functionality for the input should be disabled, or not
+   */
+  disableWheel: PropTypes.bool,
 
   /**
    * Specify if the control should be disabled, or not
@@ -440,6 +464,24 @@ function getInputValidity({ allowEmpty, invalid, value, max, min }) {
   }
 
   return true;
+}
+
+/**
+ * It prevents any wheel event from emitting.
+ *
+ * We want to prevent this input field from changing by the user accidentally
+ * when the user scrolling up or down in a long form. So we prevent the default
+ * behavior of wheel events when it is focused.
+ *
+ * Because React uses passive event handler by default, we can't just call
+ * `preventDefault` in the `onWheel` event handler. So we have to get the input
+ * ref and add our event handler manually.
+ *
+ * @see https://github.com/facebook/react/pull/19654
+ * @param {WheelEvent} e A wheel event.
+ */
+function disableWheel(e) {
+  e.preventDefault();
 }
 
 /**

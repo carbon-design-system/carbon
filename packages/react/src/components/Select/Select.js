@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import classNames from 'classnames';
 import {
   ChevronDown,
@@ -16,6 +16,7 @@ import {
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const Select = React.forwardRef(function Select(
   {
@@ -42,6 +43,8 @@ const Select = React.forwardRef(function Select(
 ) {
   const prefix = usePrefix();
   const enabled = useFeatureFlag('enable-v11-release');
+  const { isFluid } = useContext(FormContext);
+  const [isFocused, setIsFocused] = useState(false);
 
   const selectClasses = classNames(
     {
@@ -51,6 +54,8 @@ const Select = React.forwardRef(function Select(
       [`${prefix}--select--invalid`]: invalid,
       [`${prefix}--select--disabled`]: disabled,
       [`${prefix}--select--warning`]: warn,
+      [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
+      [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
     },
     [enabled ? null : className]
   );
@@ -87,6 +92,11 @@ const Select = React.forwardRef(function Select(
   if (invalid) {
     ariaProps['aria-describedby'] = errorId;
   }
+
+  const handleFocus = (evt) => {
+    setIsFocused(evt.type === 'focus' ? true : false);
+  };
+
   const input = (() => {
     return (
       <>
@@ -138,10 +148,13 @@ const Select = React.forwardRef(function Select(
         {!inline && (
           <div
             className={`${prefix}--select-input__wrapper`}
-            data-invalid={invalid || null}>
+            data-invalid={invalid || null}
+            onFocus={handleFocus}
+            onBlur={handleFocus}>
             {input}
           </div>
         )}
+        {isFluid && <hr className={`${prefix}--select__divider`} />}
         {!inline && error ? error : helper}
       </div>
     </div>

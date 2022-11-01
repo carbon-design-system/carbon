@@ -215,9 +215,21 @@ export {
   useFeatureFlags as unstable_useFeatureFlags,
 } from './components/FeatureFlags';
 export {
+  FluidComboBox as unstable__FluidComboBox,
+  FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
+} from './components/FluidComboBox';
+export {
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
 } from './components/FluidDropdown';
+export {
+  FluidMultiSelect as unstable__FluidMultiSelect,
+  FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
+} from './components/FluidMultiSelect';
+export {
+  FluidSelect as unstable__FluidSelect,
+  FluidSelectSkeleton as unstable__FluidSelectSkeleton,
+} from './components/FluidSelect';
 export {
   FluidTextArea as unstable__FluidTextArea,
   FluidTextAreaSkeleton as unstable__FluidTextAreaSkeleton,

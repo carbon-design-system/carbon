@@ -8,6 +8,7 @@
 import PropTypes from 'prop-types';
 import React, { useState, useContext, useEffect } from 'react';
 import classNames from 'classnames';
+import deprecate from '../../prop-types/deprecate';
 import { WarningFilled } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
@@ -222,7 +223,11 @@ TextArea.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `TextArea` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Max character count allowed for the textarea. This is needed in order for enableCounter to display
@@ -267,7 +272,6 @@ TextArea.defaultProps = {
   invalid: false,
   invalidText: '',
   helperText: '',
-  light: false,
   enableCounter: false,
   maxCount: undefined,
 };

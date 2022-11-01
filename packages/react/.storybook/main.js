@@ -92,6 +92,9 @@ module.exports = {
   },
   framework: '@storybook/react',
   stories,
+  typescript: {
+    reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
+  },
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {

@@ -31,9 +31,18 @@
     top: rem(13px);
     left: $spacing-05;
     display: flex;
+    width: calc(100% - 2rem);
     height: rem(16px);
     align-items: center;
     margin: 0;
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar {
+    display: none;
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--form__helper-text {

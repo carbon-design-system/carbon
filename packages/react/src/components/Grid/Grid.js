@@ -36,11 +36,6 @@ Grid.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Specify how many columns wide the Grid should span
-   */
-  columns: PropTypes.number,
-
-  /**
    * Collapse the gutter to 1px. Useful for fluid layouts.
    * Rows have 1px of margin between them to match gutter.
    */
