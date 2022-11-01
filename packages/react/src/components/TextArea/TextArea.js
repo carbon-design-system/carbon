@@ -248,8 +248,8 @@ TextArea.propTypes = {
 
   /**
    * Specify the rows attribute for the `<textarea>`
-   */ 
-   rows: PropTypes.number,
+   */
+  rows: PropTypes.number,
 
   /**
    * Provide the current value of the `<textarea>`
