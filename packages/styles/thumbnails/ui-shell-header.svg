@@ -1,13 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>ui-shell-header</title>
-    <g id="ui-shell-header" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <rect id="Rectangle" stroke="#C6C6C6" fill="#FFFFFF" x="72" y="38" width="176" height="110"></rect>
-        <rect id="Rectangle-Copy-38" fill="#161616" x="72" y="32" width="176" height="16"></rect>
-        <rect id="Rectangle-Copy-42" fill="#C6C6C6" x="106" y="38.5" width="22" height="3"></rect>
-        <rect id="Rectangle-Copy-43" fill="#C6C6C6" x="79" y="38.5" width="22" height="3"></rect>
-        <rect id="Rectangle-Copy-44" fill="#C6C6C6" x="133" y="38.5" width="22" height="3"></rect>
-        <rect id="Rectangle-Copy-45" fill="#C6C6C6" x="226" y="37" width="5" height="5"></rect>
-        <rect id="Rectangle-Copy-46" fill="#C6C6C6" x="236" y="37" width="5" height="5"></rect>
-    </g>
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="ui-shell-header">
+<rect id="border copy 15" x="120" y="82" width="400" height="218" fill="white"/>
+<rect id="nav copy 16" x="120" y="58" width="400" height="26" fill="#171717"/>
+<rect id="Rectangle Copy 52" opacity="0.844385" x="188" y="69" width="44" height="6" fill="#C6C6C6"/>
+<rect id="Rectangle Copy 53" opacity="0.844385" x="134" y="69" width="44" height="6" fill="#C6C6C6"/>
+<rect id="Rectangle Copy 54" opacity="0.844385" x="242" y="69" width="44" height="6" fill="#C6C6C6"/>
+<rect id="Rectangle Copy 55" opacity="0.844385" x="478" y="66" width="10" height="10" fill="#C6C6C6"/>
+<rect id="Rectangle Copy 56" opacity="0.844385" x="498" y="66" width="10" height="10" fill="#C6C6C6"/>
+<g id="border copy 16" style="mix-blend-mode:multiply">
+<rect x="120.5" y="58.5" width="399" height="243" fill="white"/>
+<rect x="120.5" y="58.5" width="399" height="243" stroke="#C6C6C6"/>
+</g>
+<rect id="Rectangle Copy 235" x="120" y="84" width="400" height="2" fill="#525252"/>
+</g>
 </svg>

@@ -1,6 +1,6 @@
 import './FlexGrid.stories.scss';
 import React from 'react';
-import { FlexGrid, Row, Column } from '../';
+import { FlexGrid, Row, Column } from './';
 import mdx from './FlexGrid.mdx';
 
 export default {
@@ -14,6 +14,13 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+    },
+  },
+  argTypes: {
+    columns: {
+      table: {
+        disable: true,
+      },
     },
   },
 };
@@ -289,3 +296,49 @@ export const MixedGridModes = () => (
     </Row>
   </FlexGrid>
 );
+
+export const Playground = (args) => (
+  <FlexGrid {...args}>
+    <Row>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+      <Column>
+        <DemoContent>1/4</DemoContent>
+      </Column>
+    </Row>
+  </FlexGrid>
+);
+
+Playground.argTypes = {
+  as: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'div',
+  },
+  fullWidth: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+};
