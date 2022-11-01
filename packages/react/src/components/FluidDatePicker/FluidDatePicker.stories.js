@@ -181,13 +181,6 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  value: {
-    table: {
-      disable: true,
-    },
-    options: ['single', 'range'],
-    defaultValue: 'range',
-  },
   disabled: {
     control: { type: 'boolean' },
     table: {
