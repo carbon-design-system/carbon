@@ -8,7 +8,7 @@
 import './Grid.stories.scss';
 
 import React from 'react';
-import { Grid, Column, ColumnHang } from '../../Grid';
+import { Grid, Column, ColumnHang } from '../Grid';
 import mdx from './Grid.mdx';
 
 export default {
@@ -272,3 +272,42 @@ export const Offset = () => (
     />
   </Grid>
 );
+
+export const Playground = (args) => (
+  <Grid {...args}>
+    <Column sm={4} />
+    <Column sm={4} />
+    <Column sm={4} />
+    <Column sm={4} />
+  </Grid>
+);
+
+Playground.argTypes = {
+  as: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'div',
+  },
+  fullWidth: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  narrow: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  condensed: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  columns: {
+    control: { type: 'number' },
+  },
+};

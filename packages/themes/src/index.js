@@ -12,6 +12,7 @@ import * as g100 from './g100';
 import * as v10 from './v10';
 import * as buttonTokens from './component-tokens/button';
 import * as tagTokens from './component-tokens/tag';
+import * as notificationTokens from './component-tokens/notification';
 import { formatTokenName } from './tools';
 import { unstable_metadata } from './tokens';
 
@@ -32,6 +33,7 @@ export {
   v10,
   buttonTokens,
   tagTokens,
+  notificationTokens,
   unstable_metadata,
   formatTokenName,
 };
