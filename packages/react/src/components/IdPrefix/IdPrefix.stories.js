@@ -6,13 +6,13 @@
  */
 
 import React from 'react';
-import { Prefix } from '.';
+import { IdPrefix } from '.';
 import { useIdPrefix } from '../../internal/useIdPrefix';
-import mdx from './Prefix.mdx';
+import mdx from './IdPrefix.mdx';
 
 export default {
   title: 'Components/IdPrefix',
-  component: Prefix,
+  component: IdPrefix,
   parameters: {
     docs: {
       page: mdx,
@@ -29,9 +29,9 @@ export const Default = () => {
   return (
     <>
       <ExampleComponent />
-      <Prefix prefix="custom">
+      <IdPrefix prefix="custom">
         <ExampleComponent />
-      </Prefix>
+      </IdPrefix>
     </>
   );
 };
