@@ -155,17 +155,14 @@
   // readonly
   // ----------------------------------------
   // should this be a token of it's own?
-  $border-readonly: $icon-disabled;
-  $switch-readonly: $text-primary;
-
   .#{$prefix}--toggle--readonly .#{$prefix}--toggle__switch {
-    border: 1px solid $border-readonly;
+    border: 1px solid $icon-disabled;
     background-color: transparent;
 
     &::before {
       top: rem(2px);
       left: rem(2px);
-      background-color: $switch-readonly;
+      background-color: $text-primary;
     }
   }
 
