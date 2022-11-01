@@ -108,6 +108,9 @@ Playground.argTypes = {
   id: {
     control: false,
   },
+  itemText: {
+    control: false,
+  },
   backwardText: {
     control: {
       type: 'text',
