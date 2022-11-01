@@ -251,7 +251,6 @@ const MultiSelect = React.forwardRef(function MultiSelect(
             evt.preventDefault();
           }
         },
-        ['aria-disabled']: true,
       }
     : {};
 
@@ -293,7 +292,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           type="button"
           className={`${prefix}--list-box__field`}
           disabled={disabled}
-          aria-disabled={disabled}
+          aria-disabled={disabled || readOnly}
           {...toggleButtonProps}
           ref={mergeRefs(toggleButtonProps.ref, ref)}
           onKeyDown={onKeyDown}
