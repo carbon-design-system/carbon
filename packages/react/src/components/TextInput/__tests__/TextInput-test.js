@@ -295,7 +295,7 @@ describe('TextInput', () => {
     it('should respect readOnly prop', () => {
       const onChange = jest.fn();
       const onClick = jest.fn();
-      const { container } = render(
+      render(
         <TextInput
           id="input-1"
           labelText="TextInput label"
@@ -313,12 +313,6 @@ describe('TextInput', () => {
       userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).not.toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(0);
-
-      // Should display the "read-only" icon
-      const icon = container.querySelector(
-        `svg.${prefix}--text-input__readonly-icon`
-      );
-      expect(icon).toBeInTheDocument();
     });
 
     it('should not render counter with only enableCounter prop passed in', () => {
