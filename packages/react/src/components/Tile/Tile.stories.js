@@ -6,10 +6,10 @@
  */
 
 import React from 'react';
-import Link from '../../Link';
-import Button from '../../Button';
-import { default as TextInput } from '../../TextInput';
-import { default as RadioTile } from '../../RadioTile';
+import Link from '../Link';
+import Button from '../Button';
+import { default as TextInput } from '../TextInput';
+import { default as RadioTile } from '../RadioTile';
 import {
   ClickableTile,
   ExpandableTile,
@@ -17,11 +17,11 @@ import {
   Tile,
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
-} from '../';
-import TileGroup from '../../TileGroup/TileGroup';
-import { Layer } from '../../Layer';
+} from './';
+import TileGroup from '../TileGroup/TileGroup';
+import { Layer } from '../Layer';
 import './tile-story.scss';
-import mdx from '../Tile.mdx';
+import mdx from './Tile.mdx';
 
 export default {
   title: 'Components/Tile',
@@ -35,13 +35,6 @@ export default {
     TileAboveTheFoldContent,
     TileBelowTheFoldContent,
   },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-  },
   parameters: {
     docs: {
       page: mdx,
@@ -51,7 +44,7 @@ export default {
 
 export const Default = () => {
   return (
-    <Tile>
+    <Tile id="tile-1">
       Default tile
       <br />
       <br />
@@ -63,21 +56,21 @@ export const Default = () => {
 export const DefaultWithLayer = () => {
   return (
     <>
-      <Tile>
+      <Tile id="tile-1">
         First layer
         <br />
         <br />
         <Link href="https://www.carbondesignsystem.com">Link</Link>
       </Tile>
       <Layer>
-        <Tile>
+        <Tile id="tile-2">
           Second layer
           <br />
           <br />
           <Link href="https://www.carbondesignsystem.com">Link</Link>
         </Tile>
         <Layer>
-          <Tile>
+          <Tile id="tile-3">
             Third layer
             <br />
             <br />
@@ -91,7 +84,9 @@ export const DefaultWithLayer = () => {
 
 export const Clickable = () => {
   return (
-    <ClickableTile href="https://www.carbondesignsystem.com/">
+    <ClickableTile
+      id="clickable-tile-1"
+      href="https://www.carbondesignsystem.com/">
       Clickable Tile
     </ClickableTile>
   );
@@ -100,15 +95,21 @@ export const Clickable = () => {
 export const ClickableWithLayer = () => {
   return (
     <>
-      <ClickableTile href="https://www.carbondesignsystem.com/">
+      <ClickableTile
+        id="clickable-tile-1"
+        href="https://www.carbondesignsystem.com/">
         First layer
       </ClickableTile>
       <Layer>
-        <ClickableTile href="https://www.carbondesignsystem.com/">
+        <ClickableTile
+          id="clickable-tile-2"
+          href="https://www.carbondesignsystem.com/">
           Second layer
         </ClickableTile>
         <Layer>
-          <ClickableTile href="https://www.carbondesignsystem.com/">
+          <ClickableTile
+            id="clickable-tile-3"
+            href="https://www.carbondesignsystem.com/">
             Third layer
           </ClickableTile>
         </Layer>
@@ -119,7 +120,7 @@ export const ClickableWithLayer = () => {
 
 export const Selectable = () => {
   return (
-    <SelectableTile id="tile-1" name="tiles" value="selectable">
+    <SelectableTile id="selectable-tile-1" name="tiles" value="selectable">
       Selectable
     </SelectableTile>
   );
@@ -128,13 +129,13 @@ export const Selectable = () => {
 export const MultiSelect = () => {
   return (
     <div role="group" aria-label="selectable tiles">
-      <SelectableTile id="tile-1" name="tiles">
+      <SelectableTile id="selectable-tile-1" name="tiles">
         Option 1
       </SelectableTile>
-      <SelectableTile id="tile-2" name="tiles">
+      <SelectableTile id="selectable-tile-2" name="tiles">
         Option 2
       </SelectableTile>
-      <SelectableTile id="tile-3" name="tiles">
+      <SelectableTile id="selectable-tile-3" name="tiles">
         Option 3
       </SelectableTile>
     </div>
@@ -147,16 +148,19 @@ export const Radio = () => {
       defaultSelected="default-selected"
       legend="Radio Tile Group"
       name="radio tile group">
-      <RadioTile value="standard" style={{ marginBottom: '.5rem' }}>
+      <RadioTile
+        id="radio-tile-1"
+        value="standard"
+        style={{ marginBottom: '.5rem' }}>
         Option 1
       </RadioTile>
       <RadioTile
+        id="radio-tile-2"
         value="default-selected"
-        id="tile-2"
         style={{ marginBottom: '.5rem' }}>
         Option 2
       </RadioTile>
-      <RadioTile value="selected" id="tile-3">
+      <RadioTile id="radio-tile-3" value="selected">
         Option 3
       </RadioTile>
     </TileGroup>
@@ -170,10 +174,13 @@ export const RadioWithLayer = () => {
         defaultSelected="default-selected"
         legend="First layer"
         name="radio tile group">
-        <RadioTile value="standard" style={{ marginBottom: '.5rem' }}>
+        <RadioTile
+          id="radio-tile-1"
+          value="standard"
+          style={{ marginBottom: '.5rem' }}>
           Option 1
         </RadioTile>
-        <RadioTile value="default-selected" id="tile-2">
+        <RadioTile id="radio-tile-2" value="default-selected">
           Option 2
         </RadioTile>
       </TileGroup>
@@ -182,10 +189,13 @@ export const RadioWithLayer = () => {
           defaultSelected="default-selected"
           legend="Second Layer"
           name="radio tile group">
-          <RadioTile value="standard" style={{ marginBottom: '.5rem' }}>
+          <RadioTile
+            id="radio-tile-3"
+            value="standard"
+            style={{ marginBottom: '.5rem' }}>
             Option 1
           </RadioTile>
-          <RadioTile value="default-selected" id="tile-2">
+          <RadioTile id="radio-tile-4" value="default-selected">
             Option 2
           </RadioTile>
         </TileGroup>
@@ -194,10 +204,13 @@ export const RadioWithLayer = () => {
             defaultSelected="default-selected"
             legend="Third Layer"
             name="radio tile group">
-            <RadioTile value="standard" style={{ marginBottom: '.5rem' }}>
+            <RadioTile
+              id="radio-tile-5"
+              value="standard"
+              style={{ marginBottom: '.5rem' }}>
               Option 1
             </RadioTile>
-            <RadioTile value="default-selected" id="tile-2">
+            <RadioTile id="radio-tile-6" value="default-selected">
               Option 2
             </RadioTile>
           </TileGroup>
@@ -210,6 +223,7 @@ export const RadioWithLayer = () => {
 export const Expandable = () => (
   <div style={{ width: '400px' }}>
     <ExpandableTile
+      id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
       tileExpandedIconText="Interact to Collapse tile">
       <TileAboveTheFoldContent>
@@ -225,6 +239,7 @@ export const Expandable = () => (
 export const ExpandableWithInteractive = () => (
   <div style={{ width: '400px' }}>
     <ExpandableTile
+      id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
       tileExpandedIconText="Interact to Collapse tile">
       <TileAboveTheFoldContent>
@@ -249,6 +264,7 @@ export const ExpandableWithLayer = () => {
   return (
     <div style={{ width: '400px' }}>
       <ExpandableTile
+        id="expandable-tile-1"
         tileCollapsedIconText="Interact to Expand tile"
         tileExpandedIconText="Interact to Collapse tile">
         <TileAboveTheFoldContent>
@@ -265,6 +281,7 @@ export const ExpandableWithLayer = () => {
       </ExpandableTile>
       <Layer>
         <ExpandableTile
+          id="expandable-tile-2"
           tileCollapsedIconText="Interact to Expand tile"
           tileExpandedIconText="Interact to Collapse tile">
           <TileAboveTheFoldContent>
@@ -281,6 +298,7 @@ export const ExpandableWithLayer = () => {
         </ExpandableTile>
         <Layer>
           <ExpandableTile
+            id="expandable-tile-3"
             tileCollapsedIconText="Interact to Expand tile"
             tileExpandedIconText="Interact to Collapse tile">
             <TileAboveTheFoldContent>

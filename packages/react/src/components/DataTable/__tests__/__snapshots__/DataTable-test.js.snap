@@ -112,13 +112,13 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
       >
         <h4
           className="cds--data-table-header__title"
-          id="tc-74-title"
+          id="tc-82-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
-          id="tc-74-description"
+          id="tc-82-description"
         />
       </div>
       <Table
@@ -130,7 +130,7 @@ exports[`DataTable selection -- radio buttons should not have select-all checkbo
         >
           <table
             aria-describedby={null}
-            aria-labelledby="tc-74-title"
+            aria-labelledby="tc-82-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -467,13 +467,13 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
-          id="tc-68-title"
+          id="tc-76-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
-          id="tc-68-description"
+          id="tc-76-description"
         />
       </div>
       <Table
@@ -485,7 +485,7 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
         >
           <table
             aria-describedby={null}
-            aria-labelledby="tc-68-title"
+            aria-labelledby="tc-76-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -900,13 +900,13 @@ exports[`DataTable selection should have select-all default to un-checked if no 
       >
         <h4
           className="cds--data-table-header__title"
-          id="tc-44-title"
+          id="tc-49-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
-          id="tc-44-description"
+          id="tc-49-description"
         />
       </div>
       <Table
@@ -918,7 +918,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
         >
           <table
             aria-describedby={null}
-            aria-labelledby="tc-44-title"
+            aria-labelledby="tc-49-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -1304,13 +1304,13 @@ exports[`DataTable selection should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
-          id="tc-41-title"
+          id="tc-46-title"
         >
           DataTable with selection
         </h4>
         <p
           className="cds--data-table-header__description"
-          id="tc-41-description"
+          id="tc-46-description"
         />
       </div>
       <Table
@@ -1322,7 +1322,7 @@ exports[`DataTable selection should render 1`] = `
         >
           <table
             aria-describedby={null}
-            aria-labelledby="tc-41-title"
+            aria-labelledby="tc-46-title"
             className="cds--data-table"
           >
             <TableHead>
@@ -1965,13 +1965,13 @@ exports[`DataTable should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
-          id="tc-8-title"
+          id="tc-9-title"
         >
           DataTable with toolbar
         </h4>
         <p
           className="cds--data-table-header__description"
-          id="tc-8-description"
+          id="tc-9-description"
         />
       </div>
       <TableToolbar
@@ -2285,7 +2285,6 @@ exports[`DataTable should render 1`] = `
               >
                 <Search
                   className="cds--toolbar-search-container-persistent"
-                  closeButtonLabelText="Clear search input"
                   id="custom-id"
                   labelText="Filter table"
                   onBlur={[Function]}
@@ -2295,7 +2294,6 @@ exports[`DataTable should render 1`] = `
                   placeholder="Filter table"
                   size="lg"
                   tabIndex="0"
-                  type="text"
                   value=""
                 >
                   <div
@@ -2305,36 +2303,39 @@ exports[`DataTable should render 1`] = `
                   >
                     <div
                       className="cds--search-magnifier"
+                      role={null}
                     >
-                      <ForwardRef(Search)
-                        className="cds--search-magnifier-icon"
-                      >
-                        <Icon
+                      <CustomSearchIcon>
+                        <ForwardRef(Search)
                           className="cds--search-magnifier-icon"
-                          fill="currentColor"
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <svg
-                            aria-hidden={true}
+                          <Icon
                             className="cds--search-magnifier-icon"
                             fill="currentColor"
-                            focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path
-                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                            />
-                          </svg>
-                        </Icon>
-                      </ForwardRef(Search)>
+                            <svg
+                              aria-hidden={true}
+                              className="cds--search-magnifier-icon"
+                              fill="currentColor"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(Search)>
+                      </CustomSearchIcon>
                     </div>
                     <label
                       className="cds--label"
@@ -2361,6 +2362,7 @@ exports[`DataTable should render 1`] = `
                       aria-label="Clear search input"
                       className="cds--search-close cds--search-close--hidden"
                       onClick={[Function]}
+                      title="Clear search input"
                       type="button"
                     >
                       <ForwardRef(Close)>
@@ -2515,7 +2517,7 @@ exports[`DataTable should render 1`] = `
         >
           <table
             aria-describedby={null}
-            aria-labelledby="tc-8-title"
+            aria-labelledby="tc-9-title"
             className="cds--data-table cds--data-table--lg"
           >
             <TableHead>
@@ -2987,13 +2989,13 @@ exports[`DataTable sticky header should render 1`] = `
       >
         <h4
           className="cds--data-table-header__title"
-          id="tc-120-title"
+          id="tc-134-title"
         >
           DataTable with toolbar
         </h4>
         <p
           className="cds--data-table-header__description"
-          id="tc-120-description"
+          id="tc-134-description"
         />
       </div>
       <TableToolbar
@@ -3307,7 +3309,6 @@ exports[`DataTable sticky header should render 1`] = `
               >
                 <Search
                   className="cds--toolbar-search-container-persistent"
-                  closeButtonLabelText="Clear search input"
                   id="custom-id"
                   labelText="Filter table"
                   onBlur={[Function]}
@@ -3317,7 +3318,6 @@ exports[`DataTable sticky header should render 1`] = `
                   placeholder="Filter table"
                   size="lg"
                   tabIndex="0"
-                  type="text"
                   value=""
                 >
                   <div
@@ -3327,36 +3327,39 @@ exports[`DataTable sticky header should render 1`] = `
                   >
                     <div
                       className="cds--search-magnifier"
+                      role={null}
                     >
-                      <ForwardRef(Search)
-                        className="cds--search-magnifier-icon"
-                      >
-                        <Icon
+                      <CustomSearchIcon>
+                        <ForwardRef(Search)
                           className="cds--search-magnifier-icon"
-                          fill="currentColor"
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
                         >
-                          <svg
-                            aria-hidden={true}
+                          <Icon
                             className="cds--search-magnifier-icon"
                             fill="currentColor"
-                            focusable="false"
                             height={16}
                             preserveAspectRatio="xMidYMid meet"
                             viewBox="0 0 16 16"
                             width={16}
                             xmlns="http://www.w3.org/2000/svg"
                           >
-                            <path
-                              d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                            />
-                          </svg>
-                        </Icon>
-                      </ForwardRef(Search)>
+                            <svg
+                              aria-hidden={true}
+                              className="cds--search-magnifier-icon"
+                              fill="currentColor"
+                              focusable="false"
+                              height={16}
+                              preserveAspectRatio="xMidYMid meet"
+                              viewBox="0 0 16 16"
+                              width={16}
+                              xmlns="http://www.w3.org/2000/svg"
+                            >
+                              <path
+                                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                              />
+                            </svg>
+                          </Icon>
+                        </ForwardRef(Search)>
+                      </CustomSearchIcon>
                     </div>
                     <label
                       className="cds--label"
@@ -3383,6 +3386,7 @@ exports[`DataTable sticky header should render 1`] = `
                       aria-label="Clear search input"
                       className="cds--search-close cds--search-close--hidden"
                       onClick={[Function]}
+                      title="Clear search input"
                       type="button"
                     >
                       <ForwardRef(Close)>
@@ -3537,7 +3541,7 @@ exports[`DataTable sticky header should render 1`] = `
         >
           <table
             aria-describedby={null}
-            aria-labelledby="tc-120-title"
+            aria-labelledby="tc-134-title"
             className="cds--data-table cds--data-table--lg"
           >
             <TableHead>
