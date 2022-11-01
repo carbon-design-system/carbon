@@ -25,7 +25,7 @@ test.describe('FluidDatePicker', () => {
       test('fluid date picker (single) @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'FluidDatePicker',
-          id: 'experimental-unstable-fluiddatepicker--single-with-calendar',
+          id: 'experimental-unstable-fluiddatepicker--single',
           theme,
         });
       });
@@ -50,7 +50,7 @@ test.describe('FluidDatePicker', () => {
     });
     await visitStory(page, {
       component: 'FluidDatePicker',
-      id: 'experimental-unstable-fluiddatepicker--single-with-calendar',
+      id: 'experimental-unstable-fluiddatepicker--single',
       globals: {
         theme: 'white',
       },
