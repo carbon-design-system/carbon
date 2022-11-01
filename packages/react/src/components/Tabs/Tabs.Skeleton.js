@@ -13,7 +13,7 @@ import { usePrefix } from '../../internal/usePrefix';
 function Tab() {
   const prefix = usePrefix();
   return (
-    <li className={`${prefix}--tabs--scrollable__nav-item`}>
+    <li className={`${prefix}--tabs__nav-item`}>
       <div className={`${prefix}--tabs__nav-link`}>
         <span></span>
       </div>
@@ -21,20 +21,14 @@ function Tab() {
   );
 }
 
-function TabsSkeleton({ className, type, ...rest }) {
+function TabsSkeleton({ className, contained, ...rest }) {
   const prefix = usePrefix();
-  const tabClasses = cx(
-    className,
-    `${prefix}--tabs`,
-    `${prefix}--skeleton`,
-    `${prefix}--tabs--scrollable`,
-    {
-      [`${prefix}--tabs--scrollable--container`]: type === 'container',
-    }
-  );
+  const tabClasses = cx(className, `${prefix}--tabs`, `${prefix}--skeleton`, {
+    [`${prefix}--tabs--contained`]: contained,
+  });
   return (
     <div className={tabClasses} {...rest}>
-      <ul className={`${prefix}--tabs--scrollable__nav`}>
+      <ul className={`${prefix}--tabs__nav`}>
         {Tab()}
         {Tab()}
         {Tab()}
@@ -54,7 +48,7 @@ TabsSkeleton.propTypes = {
   /**
    * Provide the type of Tab
    */
-  type: PropTypes.oneOf(['', 'default', 'container']),
+  contained: PropTypes.bool,
 };
 
 export default TabsSkeleton;
