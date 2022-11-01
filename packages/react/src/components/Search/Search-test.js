@@ -7,13 +7,27 @@
 
 import React from 'react';
 import { Search as SearchIcon, Close } from '@carbon/icons-react';
-import Search from '../Search';
-import SearchSkeleton from '../Search/Search.Skeleton';
+import Search from './Search';
 import { mount, shallow } from 'enzyme';
 
 const prefix = 'cds';
 
 describe('Search', () => {
+  let wrapper;
+
+  const button = () => wrapper.find('button');
+  const input = () => wrapper.find('input');
+
+  const render = (props) => {
+    if (wrapper) {
+      return wrapper.setProps(props);
+    }
+
+    wrapper = mount(<Search labelText="testlabel" {...props} />);
+
+    return wrapper;
+  };
+
   describe('renders as expected', () => {
     const wrapper = mount(
       <Search
@@ -125,6 +139,10 @@ describe('Search', () => {
           expect(type1).toEqual('button');
           expect(type2).toEqual('button');
         });
+
+        it('should have clear title', () => {
+          expect(btns.prop('title')).toBe('Clear search input');
+        });
       });
 
       describe('icons', () => {
@@ -178,36 +196,61 @@ describe('Search', () => {
   });
 
   describe('events', () => {
-    describe('enabled textinput', () => {
-      let onClick;
-      let onChange;
-      let onClear;
-      let wrapper;
-      let input;
-      let eventObject;
+    describe('onChange', () => {
+      const onChange = jest.fn();
 
       beforeEach(() => {
-        onClick = jest.fn();
-        onChange = jest.fn();
-        onClear = jest.fn();
-
-        wrapper = mount(
-          <Search
-            id="test"
-            labelText="testlabel"
-            onClick={onClick}
-            onChange={onChange}
-            onClear={onClear}
-          />
-        );
-
-        input = wrapper.find('input');
-        eventObject = {
-          target: {
-            defaultValue: 'test',
-          },
-        };
+        onChange.mockReset();
+        render({ onChange: (e) => onChange(e.target.value) });
       });
+
+      describe('when input value is changed', () => {
+        const target = { value: 'test' };
+        const mock = { target };
+
+        beforeEach(() => {
+          input().simulate('change', mock);
+        });
+
+        it('is called', () => {
+          expect(onChange).toHaveBeenCalledWith(target.value);
+        });
+      });
+
+      describe('when clear button is clicked', () => {
+        const target = { value: '' };
+
+        beforeEach(() => {
+          button().simulate('click');
+        });
+
+        it('is called', () => {
+          expect(onChange).toHaveBeenCalledWith(target.value);
+        });
+      });
+    });
+
+    describe('enabled textinput', () => {
+      const onClick = jest.fn();
+      const onChange = jest.fn();
+      const onClear = jest.fn();
+
+      const wrapper = shallow(
+        <Search
+          id="test"
+          labelText="testlabel"
+          onClick={onClick}
+          onChange={onChange}
+          onClear={onClear}
+        />
+      );
+
+      const input = wrapper.find('input');
+      const eventObject = {
+        target: {
+          defaultValue: 'test',
+        },
+      };
 
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click');
@@ -216,78 +259,75 @@ describe('Search', () => {
 
       it('should invoke onChange when input value is changed', () => {
         input.simulate('change', eventObject);
-        expect(onChange).toHaveBeenCalledWith(
-          expect.objectContaining(eventObject)
-        );
+        expect(onChange).toHaveBeenCalledWith(eventObject);
       });
 
-      it('should invoke onClear when input value is cleared', () => {
+      it('should call onClear when input value is cleared', () => {
+        const node = document.createElement('div');
+        document.body.appendChild(node);
+
         const wrapper = mount(
           <Search
             id="test"
             labelText="testlabel"
-            onClick={onClick}
-            onChange={onChange}
             onClear={onClear}
             value="test"
-          />
+          />,
+          {
+            attachTo: node,
+          }
         );
-        wrapper.find('button').simulate('click', { target: { value: 'test' } });
+
+        wrapper.find('button').simulate('click', {
+          target: {
+            value: 'test',
+          },
+        });
         expect(onClear).toHaveBeenCalled();
+        expect(wrapper.find('input').getDOMNode()).toHaveFocus();
+
+        document.body.removeChild(node);
       });
     });
   });
 });
 
-describe('SearchSkeleton', () => {
-  describe('Renders as expected', () => {
-    it('Has the expected classes', () => {
-      const wrapper = shallow(<SearchSkeleton />);
-      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--search--xl`)).toEqual(true);
-    });
-  });
-});
+/**
+ * Find the <input> element.
+ * @param {Enzymecontainer} wrapper
+ * @returns {Enzymecontainer}
+ */
+const getInput = (wrapper) => {
+  return wrapper.find(`.${prefix}--search-input`);
+};
 
-describe('SearchSkeleton Small', () => {
-  describe('Renders as expected', () => {
-    it('Has the expected classes', () => {
-      const wrapper = shallow(<SearchSkeleton small />);
-      expect(wrapper.hasClass(`${prefix}--skeleton`)).toEqual(true);
-      expect(wrapper.hasClass(`${prefix}--search--sm`)).toEqual(true);
-    });
-  });
-});
+/**
+ * Find the value of the <input> element
+ * @param {EnzymeWrapper} wrapper
+ * @returns {number}
+ */
+const getInputValue = (wrapper) => {
+  return getInput(wrapper).prop('value');
+};
 
 describe('Detecting change in value from props', () => {
-  it('changes the hasContent state upon change in props', () => {
-    const wrapper = mount(
-      <Search
-        id="test"
-        className="extra-class"
-        label="Search Field"
-        labelText="testlabel"
-        value="foo"
-      />
+  it('should have empty value', () => {
+    const search = shallow(
+      <Search id="test" className="extra-class" labelText="testlabel" />
     );
-    expect(wrapper.state().hasContent).toBeTruthy();
-    wrapper.setProps({ value: '' });
-    expect(wrapper.state().hasContent).toBeFalsy();
+    expect(getInputValue(search)).toBe(undefined);
   });
 
-  it('avoids change the hasContent state upon setting props, unless the value actually changes', () => {
-    const wrapper = mount(
+  it('should set value if value prop is added', () => {
+    const search = shallow(
       <Search
         id="test"
         className="extra-class"
-        label="Search Field"
         labelText="testlabel"
         value="foo"
       />
     );
-    expect(wrapper.state().hasContent).toBeTruthy();
-    wrapper.setState({ hasContent: false });
-    wrapper.setProps({ value: 'foo' });
-    expect(wrapper.state().hasContent).toBeFalsy();
+
+    expect(getInputValue(search)).toBe('foo');
   });
 });

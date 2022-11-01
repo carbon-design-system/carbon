@@ -3532,9 +3532,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "columns": Object {
-        "type": "number",
-      },
       "condensed": Object {
         "type": "bool",
       },
@@ -7450,15 +7447,8 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "type": Object {
-        "args": Array [
-          Array [
-            "",
-            "default",
-            "container",
-          ],
-        ],
-        "type": "oneOf",
+      "contained": Object {
+        "type": "bool",
       },
     },
   },
