@@ -5,18 +5,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import ExpandableSearch from '../../ExpandableSearch';
-import Search from '../';
+import ExpandableSearch from '../ExpandableSearch';
+import Search from '.';
 import React from 'react';
-import { Layer } from '../../Layer';
+import { Layer } from '../Layer';
 
 export default {
   title: 'Components/Search',
   component: Search,
   argTypes: {
-    size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'select' },
+    light: {
+      table: {
+        disable: true,
+      },
     },
   },
   subcomponents: {
@@ -24,7 +25,7 @@ export default {
   },
 };
 
-export const Default = (args) => (
+export const Default = () => (
   <Search
     size="lg"
     defaultValue="A default value"
@@ -33,11 +34,10 @@ export const Default = (args) => (
     id="search-1"
     onChange={() => {}}
     onKeyDown={() => {}}
-    {...args}
   />
 );
 
-export const Disabled = (args) => (
+export const Disabled = () => (
   <Search
     disabled
     size="lg"
@@ -47,11 +47,10 @@ export const Disabled = (args) => (
     id="search-1"
     onChange={() => {}}
     onKeyDown={() => {}}
-    {...args}
   />
 );
 
-export const Expandable = (args) => (
+export const Expandable = () => (
   <ExpandableSearch
     size="lg"
     labelText="Search"
@@ -59,11 +58,10 @@ export const Expandable = (args) => (
     id="search-expandable-1"
     onChange={() => {}}
     onKeyDown={() => {}}
-    {...args}
   />
 );
 
-export const WithLayer = (args) => {
+export const WithLayer = () => {
   return (
     <>
       <Search
@@ -74,7 +72,6 @@ export const WithLayer = (args) => {
         id="search-1"
         onChange={() => {}}
         onKeyDown={() => {}}
-        {...args}
       />
       <Layer>
         <Search
@@ -85,7 +82,6 @@ export const WithLayer = (args) => {
           id="search-1"
           onChange={() => {}}
           onKeyDown={() => {}}
-          {...args}
         />
         <Layer>
           <Search
@@ -96,7 +92,6 @@ export const WithLayer = (args) => {
             id="search-1"
             onChange={() => {}}
             onKeyDown={() => {}}
-            {...args}
           />
         </Layer>
       </Layer>
@@ -104,7 +99,7 @@ export const WithLayer = (args) => {
   );
 };
 
-export const ExpandableWithLayer = (args) => {
+export const ExpandableWithLayer = () => {
   return (
     <>
       <ExpandableSearch
@@ -114,7 +109,6 @@ export const ExpandableWithLayer = (args) => {
         id="search-expandable-1"
         onChange={() => {}}
         onKeyDown={() => {}}
-        {...args}
       />
       <Layer>
         <ExpandableSearch
@@ -124,7 +118,6 @@ export const ExpandableWithLayer = (args) => {
           id="search-expandable-1"
           onChange={() => {}}
           onKeyDown={() => {}}
-          {...args}
         />
         <Layer>
           <ExpandableSearch
@@ -134,10 +127,84 @@ export const ExpandableWithLayer = (args) => {
             id="search-expandable-1"
             onChange={() => {}}
             onKeyDown={() => {}}
-            {...args}
           />
         </Layer>
       </Layer>
     </>
   );
+};
+
+export const Playground = (args) => (
+  <div style={{ width: args.playgroundWidth }}>
+    <Search id="search-playground-1" {...args} />
+  </div>
+);
+
+Playground.argTypes = {
+  playgroundWidth: {
+    control: { type: 'range', min: 300, max: 800, step: 50 },
+    defaultValue: 300,
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  closeButtonLabelText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Clear search input',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  defaultValue: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Default value',
+  },
+  labelText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Label text',
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Placeholder text',
+  },
+  renderIcon: {
+    control: false,
+  },
+  role: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'searchbox',
+  },
+  size: {
+    defaultValue: 'md',
+    options: ['sm', 'md', 'lg'],
+    control: {
+      type: 'select',
+    },
+  },
+  type: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'text',
+  },
 };

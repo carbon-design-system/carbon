@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '../AspectRatio-story.scss';
+import './AspectRatio-story.scss';
 
 import React from 'react';
-import { Grid, Column } from '../../Grid';
-import { AspectRatio } from '../';
-import mdx from '../AspectRatio.mdx';
+import { Grid, Column } from '../Grid';
+import { AspectRatio } from './';
+import mdx from './AspectRatio.mdx';
 
 export default {
   title: 'Components/AspectRatio',
@@ -49,33 +49,9 @@ export const Default = () => {
 };
 
 export const Playground = {
-  argTypes: {
-    as: {
-      control: {
-        type: null,
-      },
-    },
-    children: {
-      control: {
-        type: null,
-      },
-    },
-    className: {
-      control: {
-        type: null,
-      },
-    },
-    ratio: {
-      control: {
-        type: 'select',
-      },
-      defaultValue: '1x1',
-      options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
-    },
-  },
-  render: ({ ratio }) => {
+  render: ({ ratio }, ...args) => {
     return (
-      <Grid>
+      <Grid {...args}>
         <Column sm={1} md={2} lg={4}>
           <AspectRatio ratio={ratio}>Content</AspectRatio>
         </Column>
@@ -90,5 +66,30 @@ export const Playground = {
         </Column>
       </Grid>
     );
+  },
+};
+
+Playground.argTypes = {
+  as: {
+    table: {
+      disable: true,
+    },
+  },
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  ratio: {
+    control: {
+      type: 'select',
+    },
+    defaultValue: '1x1',
+    options: ['16x9', '9x16', '2x1', '1x2', '4x3', '3x4', '1x1'],
   },
 };
