@@ -212,13 +212,11 @@
   }
 
   // readonly
-  $icon-readonly: $icon-disabled;
-
   .#{$prefix}--date-picker__input[readonly] {
     background: transparent;
   }
 
   .#{$prefix}--date-picker__input[readonly] + .#{$prefix}--date-picker__icon {
-    fill: $icon-readonly;
+    fill: $icon-disabled;
   }
 }
