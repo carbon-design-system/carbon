@@ -1254,6 +1254,9 @@ Map {
       "danger": Object {
         "type": "bool",
       },
+      "isFullWidth": Object {
+        "type": "bool",
+      },
       "onClose": Object {
         "type": "func",
       },
@@ -4059,6 +4062,9 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "isFullWidth": Object {
+        "type": "bool",
       },
       "modalAriaLabel": Object {
         "type": "string",
