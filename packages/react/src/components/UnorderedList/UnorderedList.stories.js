@@ -61,3 +61,20 @@ export const Nested = () => {
 };
 
 Nested.storyName = 'nested';
+
+export const Playground = (args) => (
+  <UnorderedList {...args}>
+    <ListItem>Unordered List level 1</ListItem>
+    <ListItem>Unordered List level 1</ListItem>
+    <ListItem>Unordered List level 1</ListItem>
+  </UnorderedList>
+);
+
+Playground.argTypes = {
+  isExpressive: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+};
