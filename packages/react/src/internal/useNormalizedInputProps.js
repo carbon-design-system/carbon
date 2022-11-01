@@ -6,9 +6,8 @@
  */
 
 import React from 'react';
-import { WarningFilled, WarningAltFilled, EditOff } from '@carbon/icons-react';
-
-const prefix = 'cds';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { usePrefix } from './usePrefix';
 
 /**
  * @typedef {object} InputProps
@@ -54,6 +53,7 @@ export function useNormalizedInputProps({
   warn,
   warnText,
 }) {
+  const prefix = usePrefix();
   const normalizedProps = {
     disabled: !readOnly && disabled,
     invalid: !readOnly && invalid,
@@ -65,28 +65,24 @@ export function useNormalizedInputProps({
     helperId: `${id}-helper-text`,
   };
 
-  if (readOnly) {
-    normalizedProps.icon = EditOff;
-  } else {
-    if (normalizedProps.invalid) {
-      normalizedProps.icon = WarningFilled;
-      normalizedProps.validation = (
-        <div
-          className={`${prefix}--form-requirement`}
-          id={normalizedProps.invalidId}>
-          {invalidText}
-        </div>
-      );
-    } else if (normalizedProps.warn) {
-      normalizedProps.icon = WarningAltFilled;
-      normalizedProps.validation = (
-        <div
-          className={`${prefix}--form-requirement`}
-          id={normalizedProps.warnId}>
-          {warnText}
-        </div>
-      );
-    }
+  if (normalizedProps.invalid) {
+    normalizedProps.icon = WarningFilled;
+    normalizedProps.validation = (
+      <div
+        className={`${prefix}--form-requirement`}
+        id={normalizedProps.invalidId}>
+        {invalidText}
+      </div>
+    );
+  } else if (normalizedProps.warn) {
+    normalizedProps.icon = WarningAltFilled;
+    normalizedProps.validation = (
+      <div
+        className={`${prefix}--form-requirement`}
+        id={normalizedProps.warnId}>
+        {warnText}
+      </div>
+    );
   }
 
   return normalizedProps;

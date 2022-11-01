@@ -313,7 +313,7 @@
   .#{$prefix}--overflow-menu-options__option--disabled
     .#{$prefix}--overflow-menu-options__btn {
     color: $text-disabled;
-    pointer-events: none;
+    cursor: not-allowed;
 
     &:hover,
     &:active,

@@ -20,11 +20,6 @@ describe('ListBox', () => {
     expect(container.firstChild).toHaveClass('cds--list-box--disabled');
   });
 
-  it('should set the light class when `light` is true', () => {
-    const { container } = render(<ListBox light />);
-    expect(container.firstChild).toHaveClass('cds--list-box--light');
-  });
-
   it('should set the expanded class when `isOpen` is true', () => {
     const { container } = render(<ListBox isOpen />);
     expect(container.firstChild).toHaveClass('cds--list-box--expanded');
