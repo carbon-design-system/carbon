@@ -436,15 +436,12 @@
   }
 
   // Readonly
-  // placeholder should be moved to tokens
-  $icon-readonly: $icon-disabled;
-
   .#{$prefix}--number--readonly input[type='number'] {
     background: transparent;
   }
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
-    color: $icon-readonly;
+    color: $icon-disabled;
 
     &:hover {
       background-color: transparent;
@@ -472,7 +469,7 @@
   .#{$prefix}--number--readonly
     .#{$prefix}--number__controls:hover
     .#{$prefix}--number__rule-divider:not(:first-of-type) {
-    background-color: $icon-readonly;
+    background-color: $icon-disabled;
   }
 
   // Skeleton State
