@@ -8,5 +8,5 @@
 'use strict';
 
 module.exports = {
-  presets: ['babel-preset-carbon'],
+  presets: ['babel-preset-carbon', '@babel/preset-typescript'],
 };
