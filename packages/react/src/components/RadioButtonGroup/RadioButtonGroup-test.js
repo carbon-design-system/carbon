@@ -140,6 +140,34 @@ describe('RadioButtonGroup', () => {
       );
     });
 
+    it('should support `checked` prop in RadioButton when there is no `defaultSelected` or `valueSelected`', () => {
+      const { rerender } = render(
+        <RadioButtonGroup name="test" legendText="test">
+          <RadioButton labelText="test-1" value="test-1" checked />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByLabelText('test-1')).toEqual(
+        screen.getByRole('radio', {
+          checked: true,
+        })
+      );
+
+      rerender(
+        <RadioButtonGroup name="test" legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" checked />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByLabelText('test-2')).toEqual(
+        screen.getByRole('radio', {
+          checked: true,
+        })
+      );
+    });
+
     it('should support a 0 value for `valueSelected` (#9041)', () => {
       render(
         <RadioButtonGroup valueSelected={0} name="test" legendText="test">
