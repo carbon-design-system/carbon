@@ -98,11 +98,55 @@ export const Playground = (args) => {
 };
 
 Playground.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalidText: {
+    control: { type: 'text' },
+  },
+  labelText: {
+    control: { type: 'text' },
+  },
   size: {
     options: ['sm', 'md', 'lg'],
     control: { type: 'select' },
   },
   light: {
+    table: {
+      disable: true,
+    },
+  },
+  pattern: {
     table: {
       disable: true,
     },
