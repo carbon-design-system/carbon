@@ -89,6 +89,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
     className: customClassName,
     containerClassName,
     danger,
+    isFullWidth,
     onClose,
     onKeyDown,
     open,
@@ -169,6 +170,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
   const containerClass = cx({
     [`${prefix}--modal-container`]: true,
     [`${prefix}--modal-container--${size}`]: size,
+    [`${prefix}--modal-container--full-width`]: isFullWidth,
     [containerClassName]: containerClassName,
   });
 
@@ -300,6 +302,11 @@ ComposedModal.propTypes = {
    * Note that this prop is not applied if you render primary/danger button by yourself
    */
   danger: PropTypes.bool,
+
+  /**
+   * Specify whether or not the Modal content should have any inner padding.
+   */
+  isFullWidth: PropTypes.bool,
 
   /**
    * Specify an optional handler for closing modal.
