@@ -1254,6 +1254,9 @@ Map {
       "danger": Object {
         "type": "bool",
       },
+      "isFullWidth": Object {
+        "type": "bool",
+      },
       "onClose": Object {
         "type": "func",
       },
@@ -3629,9 +3632,6 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "columns": Object {
-        "type": "number",
-      },
       "condensed": Object {
         "type": "bool",
       },
@@ -4162,6 +4162,9 @@ Map {
       },
       "id": Object {
         "type": "string",
+      },
+      "isFullWidth": Object {
+        "type": "bool",
       },
       "modalAriaLabel": Object {
         "type": "string",
@@ -5069,6 +5072,9 @@ Map {
         ],
         "type": "oneOfType",
       },
+      "disableWheel": Object {
+        "type": "bool",
+      },
       "disabled": Object {
         "type": "bool",
       },
@@ -5693,6 +5699,9 @@ Map {
     "propTypes": Object {
       "className": Object {
         "type": "string",
+      },
+      "vertical": Object {
+        "type": "bool",
       },
     },
   },
@@ -7538,15 +7547,8 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "type": Object {
-        "args": Array [
-          Array [
-            "",
-            "default",
-            "container",
-          ],
-        ],
-        "type": "oneOf",
+      "contained": Object {
+        "type": "bool",
       },
     },
   },

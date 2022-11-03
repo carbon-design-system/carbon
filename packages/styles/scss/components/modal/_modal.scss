@@ -385,6 +385,12 @@
     z-index: z('modal');
   }
 
+  // Fluid Modal (No padding)
+  .#{$prefix}--modal-container--full-width .#{$prefix}--modal-content {
+    padding: 0;
+    margin: 0;
+  }
+
   // Windows HCM fix
   /* stylelint-disable */
   .#{$prefix}--modal-close__icon {
