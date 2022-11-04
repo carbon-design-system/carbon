@@ -442,6 +442,7 @@
 
   .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
     color: $icon-disabled;
+    pointer-events: none;
 
     &:hover {
       background-color: transparent;
