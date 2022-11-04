@@ -46,6 +46,7 @@ const Modal = React.forwardRef(function Modal(
     hasScrollingContent,
     closeButtonLabel,
     preventCloseOnClickOutside, // eslint-disable-line
+    isFullWidth,
     ...rest
   },
   ref
@@ -127,6 +128,7 @@ const Modal = React.forwardRef(function Modal(
 
   const containerClasses = classNames(`${prefix}--modal-container`, {
     [`${prefix}--modal-container--${size}`]: size,
+    [`${prefix}--modal-container--full-width`]: isFullWidth,
   });
 
   const contentClasses = classNames(`${prefix}--modal-content`, {
@@ -353,6 +355,11 @@ Modal.propTypes = {
    * Specify the DOM element ID of the top-level node.
    */
   id: PropTypes.string,
+
+  /**
+   * Specify whether or not the Modal content should have any inner padding.
+   */
+  isFullWidth: PropTypes.bool,
 
   /**
    * Specify a label to be read by screen readers on the modal root node
