@@ -368,6 +368,7 @@
     width: 100%;
     // 196px from design kit
     max-width: rem(196px);
+    align-items: flex-start;
 
     &:not(:focus) {
       box-shadow: rem(-1px) 0 0 0 $button-separator;
