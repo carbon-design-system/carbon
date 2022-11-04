@@ -2,7 +2,7 @@
   "name": "@carbon/sketch",
   "private": true,
   "description": "Tooling for generating a sketch plugin to bring code to design",
-  "version": "11.13.0",
+  "version": "11.13.1-rc.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -28,10 +28,10 @@
     "skpm:link": "skpm-link"
   },
   "dependencies": {
-    "@carbon/colors": "^11.7.0",
+    "@carbon/colors": "^11.7.1-rc.0",
     "@carbon/icon-helpers": "^10.34.0",
     "@carbon/icons": "^11.10.0",
-    "@carbon/themes": "^11.11.0",
+    "@carbon/themes": "^11.11.1-rc.0",
     "@carbon/type": "^11.11.0",
     "@skpm/builder": "^0.8.0",
     "color-string": "^1.5.3",
