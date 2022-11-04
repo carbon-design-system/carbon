@@ -154,7 +154,10 @@
   // ----------------------------------------
   // readonly
   // ----------------------------------------
-  // should this be a token of it's own?
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__appearance {
+    cursor: default;
+  }
+
   .#{$prefix}--toggle--readonly .#{$prefix}--toggle__switch {
     border: 1px solid $icon-disabled;
     background-color: transparent;
@@ -170,6 +173,11 @@
     top: rem(5px);
     right: rem(4px);
     fill: $background;
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__text {
+    cursor: text;
+    user-select: text;
   }
 
   // HCM
