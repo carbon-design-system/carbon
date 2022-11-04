@@ -51,7 +51,7 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-aspectratio
     docs:
-     overviewPath: './src/components/AspectRatio/docs/overview.mdx'
+      overviewPath: './src/components/AspectRatio/docs/overview.mdx'
   breadcrumb:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/breadcrumb/usage
@@ -134,6 +134,20 @@ assets:
       - input-control
     docs:
       overviewPath: ./src/components/ComposedModal/docs/overview.mdx
+  contained-list:
+    status: stable
+    externalDocsUrl: https://www.carbondesignsystem.com/components/contained-list/usage
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-containedlist
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/contained-list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/contained-list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/contained-list/accessibility.mdx
+      overviewPath: ./src/components/ContainedList/docs/overview.mdx
   content-switcher:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/content-switcher/usage
@@ -818,7 +832,7 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/accessibility.mdx
-      overviewPath:  ./src/components/Toggle/docs/overview.mdx
+      overviewPath: ./src/components/Toggle/docs/overview.mdx
   toggletip:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/toggletip/usage
