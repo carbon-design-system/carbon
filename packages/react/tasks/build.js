@@ -10,6 +10,7 @@
 const { babel } = require('@rollup/plugin-babel');
 const commonjs = require('@rollup/plugin-commonjs');
 const { nodeResolve } = require('@rollup/plugin-node-resolve');
+const typescript = require('@rollup/plugin-typescript');
 const path = require('path');
 const { rollup } = require('rollup');
 const stripBanner = require('rollup-plugin-strip-banner');
@@ -35,12 +36,22 @@ async function build() {
     },
   ];
 
-  const reactInputConfig = getRollupConfig(reactEntrypoint.filepath);
-  const reactBundle = await rollup(reactInputConfig);
-
+  // Build @carbon/react formats
   for (const format of formats) {
+    const outputDirectory = path.join(
+      reactEntrypoint.outputDirectory,
+      format.directory
+    );
+
+    const reactInputConfig = getRollupConfig(
+      reactEntrypoint.filepath,
+      outputDirectory,
+      true
+    );
+    const reactBundle = await rollup(reactInputConfig);
+
     await reactBundle.write({
-      dir: path.join(reactEntrypoint.outputDirectory, format.directory),
+      dir: outputDirectory,
       format: format.type,
       preserveModules: true,
       preserveModulesRoot: path.dirname(reactEntrypoint.filepath),
@@ -51,6 +62,8 @@ async function build() {
 
   const iconsInputConfig = getRollupConfig(iconsEntrypoint.filepath);
   const iconsBundle = await rollup(iconsInputConfig);
+
+  // Build @carbon/react icons
   for (const format of formats) {
     await iconsBundle.write({
       file:
@@ -70,7 +83,33 @@ const banner = `/**
  */
 `;
 
-function getRollupConfig(input) {
+// Base babel config for js and ts
+const babelConfig = {
+  babelrc: false,
+  exclude: ['node_modules/**'],
+  presets: [
+    [
+      '@babel/preset-env',
+      {
+        modules: false,
+        targets: {
+          browsers: ['extends browserslist-config-carbon'],
+        },
+      },
+    ],
+    '@babel/preset-react',
+  ],
+  plugins: [
+    'dev-expression',
+    '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-export-namespace-from',
+    '@babel/plugin-proposal-export-default-from',
+    '@babel/plugin-transform-react-constant-elements',
+  ],
+  babelHelpers: 'bundled',
+};
+
+function getRollupConfig(input, outDir, useTS) {
   return {
     input,
     external: [
@@ -83,30 +122,8 @@ function getRollupConfig(input) {
       commonjs({
         include: /node_modules/,
       }),
-      babel({
-        babelrc: false,
-        exclude: ['node_modules/**'],
-        presets: [
-          [
-            '@babel/preset-env',
-            {
-              modules: false,
-              targets: {
-                browsers: ['extends browserslist-config-carbon'],
-              },
-            },
-          ],
-          '@babel/preset-react',
-        ],
-        plugins: [
-          'dev-expression',
-          '@babel/plugin-proposal-class-properties',
-          '@babel/plugin-proposal-export-namespace-from',
-          '@babel/plugin-proposal-export-default-from',
-          '@babel/plugin-transform-react-constant-elements',
-        ],
-        babelHelpers: 'bundled',
-      }),
+      // Modify plugins for builds that require typescript
+      ...(useTS ? getTSPlugins(outDir) : getPlugins()),
       stripBanner(),
       {
         transform(_code, id) {
@@ -121,6 +138,39 @@ function getRollupConfig(input) {
       },
     ],
   };
+}
+
+/**
+ * Rollup plugins to support typescript compilation/transpilation
+ * @param {*} outDir
+ * @returns
+ */
+function getTSPlugins(outDir) {
+  return [
+    typescript({
+      noEmitOnError: true,
+      noForceEmit: true,
+      outputToFilesystem: false,
+      compilerOptions: {
+        rootDir: 'src',
+        emitDeclarationOnly: true,
+        declarationDir: outDir,
+      },
+    }),
+    babel({
+      ...babelConfig,
+      presets: [...babelConfig.presets, '@babel/preset-typescript'],
+      extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    }),
+  ];
+}
+
+/**
+ * Rollup plugins to support pure JS compilation
+ * @returns
+ */
+function getPlugins() {
+  return [babel(babelConfig)];
 }
 
 build().catch((error) => {
