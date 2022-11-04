@@ -165,6 +165,9 @@ Playground.argTypes = {
   },
   onChange: {
     action: 'clicked',
+    table: {
+      disable: true,
+    },
   },
   onClose: {
     action: 'clicked',
