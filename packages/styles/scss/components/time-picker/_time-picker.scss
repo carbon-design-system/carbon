@@ -90,9 +90,13 @@
   }
 
   // readonly
-  .#{$prefix}--time-picker--readonly .#{$prefix}--time-picker__input-field,
+  .#{$prefix}--time-picker--readonly .#{$prefix}--time-picker__input-field {
+    background-color: transparent;
+  }
+
   .#{$prefix}--time-picker--readonly .#{$prefix}--select-input {
     background-color: transparent;
+    cursor: default;
   }
 
   .#{$prefix}--time-picker--readonly

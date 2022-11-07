@@ -8,8 +8,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { usePrefix } from '../../../internal/usePrefix';
-import deprecate from '../../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 const TimePicker = React.forwardRef(function TimePicker(
   {
