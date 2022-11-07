@@ -15,6 +15,13 @@ import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
+import {
+  StructuredListWrapper,
+  StructuredListHead,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListCell,
+} from '../StructuredList';
 
 export default {
   title: 'Components/Modal',
@@ -75,6 +82,66 @@ export const Default = () => {
         ]}
         itemToString={(item) => (item ? item.text : '')}
       />
+    </Modal>
+  );
+};
+
+export const FullWidth = () => {
+  return (
+    <Modal
+      open
+      isFullWidth
+      modalHeading="Full Width Modal"
+      modalLabel="An example of a modal with no padding"
+      primaryButtonText="Add"
+      secondaryButtonText="Cancel">
+      <StructuredListWrapper>
+        <StructuredListHead>
+          <StructuredListRow head>
+            <StructuredListCell head noWrap>
+              Column A
+            </StructuredListCell>
+            <StructuredListCell head noWrap>
+              Column B
+            </StructuredListCell>
+            <StructuredListCell head noWrap>
+              Column C
+            </StructuredListCell>
+          </StructuredListRow>
+        </StructuredListHead>
+        <StructuredListBody>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 1</StructuredListCell>
+            <StructuredListCell>Row 1</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 2</StructuredListCell>
+            <StructuredListCell>Row 2</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 3</StructuredListCell>
+            <StructuredListCell>Row 3</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+        </StructuredListBody>
+      </StructuredListWrapper>
     </Modal>
   );
 };
