@@ -124,6 +124,7 @@
     .#{$prefix}--tag__close-icon:hover {
     background-color: transparent;
     color: $text-primary;
+    cursor: default;
   }
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
@@ -135,5 +136,12 @@
     .#{$prefix}--tag--filter
     svg {
     fill: $icon-disabled;
+  }
+
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
+    .#{$prefix}--list-box__menu-icon {
+    cursor: default;
   }
 }
