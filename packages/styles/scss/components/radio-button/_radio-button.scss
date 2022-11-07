@@ -143,6 +143,16 @@ $radio-border-width: 1px !default;
     border-color: $icon-disabled;
   }
 
+  .#{$prefix}--radio-button-group--readonly .#{$prefix}--radio-button__label {
+    cursor: default;
+  }
+
+  .#{$prefix}--radio-button-group--readonly
+    .#{$prefix}--radio-button__label-text {
+    cursor: text;
+    user-select: text;
+  }
+
   // Focus
 
   .#{$prefix}--radio-button:focus
