@@ -201,6 +201,10 @@
   }
 
   // readonly state
+  .#{$prefix}--slider--readonly {
+    cursor: default;
+  }
+
   .#{$prefix}--slider--readonly .#{$prefix}--slider__thumb {
     width: 0;
     height: 0;

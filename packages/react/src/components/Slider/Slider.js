@@ -637,7 +637,7 @@ export default class Slider extends PureComponent {
                     className={`${prefix}--slider__thumb`}
                     role="slider"
                     id={id}
-                    tabIndex={0}
+                    tabIndex={!readOnly ? 0 : -1}
                     aria-valuemax={max}
                     aria-valuemin={min}
                     aria-valuenow={value}
