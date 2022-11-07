@@ -23,6 +23,7 @@ export {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
+export ContainedList, { ContainedListItem } from './components/ContainedList';
 export ContentSwitcher from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
@@ -205,9 +206,6 @@ export {
 } from './components/UIShell';
 
 // Experimental
-export unstable_ContainedList, {
-  ContainedListItem as unstable_ContainedListItem,
-} from './components/ContainedList';
 export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
   FeatureFlags as unstable_FeatureFlags,
