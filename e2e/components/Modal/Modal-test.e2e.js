@@ -29,6 +29,14 @@ test.describe('Modal', () => {
           theme,
         });
       });
+
+      test('full width modal @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Modal',
+          id: 'components-modal--full-width',
+          theme,
+        });
+      });
     });
   });
 
