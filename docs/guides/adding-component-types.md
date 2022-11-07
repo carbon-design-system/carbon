@@ -1,102 +1,133 @@
 # Adding component types
 
 This document lays out the goal, strategy, and guidelines for adding
-[TypeScript](https://www.typescriptlang.org/) types for components within
+[TypeScript](https://www.TypeScriptlang.org/) types for components within
 `@carbon/react`.
+
+<!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
+
+- [Goal](#goal)
+  - [Purpose](#purpose)
+- [Strategy](#strategy)
+  - [Steps to provide baseline type definitions for components](#steps-to-provide-baseline-type-definitions-for-components)
+- [FAQ](#faq)
+  - [How do I know what's part of the public api?](#how-do-i-know-whats-part-of-the-public-api)
+  - [Should components have both prototypes and ts interface?](#should-components-have-both-prototypes-and-ts-interface)
+  - [Should comment docs be duplicated into the ts interface?](#should-comment-docs-be-duplicated-into-the-ts-interface)
+  - [Where should I put the ts interface in the file?](#where-should-i-put-the-ts-interface-in-the-file)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
 
 ## Goal
 
-- Get types fast, increase adoption, don’t boil the ocean
-
 The goal of this workstream is to provide as much downstream value to consumers
-who are using typescript, while writing the least amount of typescript possible
-within the Carbon monorepo codebase (this repo).
+who are using TypeScript, as quickly as possible, while writing the least amount
+of TypeScript.
 
-The goal is _not_ to convert the entire codebase to Typescript right now.
+The goal is _not_ to convert the entire codebase to TypeScript right now.
 
-### Why
+### Purpose
 
-Adding TypeScript types to components will be beneficial for the following
-reasons:
+By adding TypeScript types to components we anticipate a number of benefits:
 
 - Developer productivity will increase due to Component API's being
   self-documenting and providing tight integration with code editor
   intellisense.
 - The qualtiy of products developed will increase due to more stable, correct,
-  and thorough component API typings providing first-party through
+  and thorough component API typings provided first-party through
   `@carbon/react` itself.
--
+- Maintenance of the types themselves will be simplified by not having to go
+  through the DefinetlyTyped contribution process/system.
 
-- Component APIs will be self-documenting, improving developer productivity via
-  tight integration with code editor intellisense.
-- Consumers using TypeScript will be able to take advantage of first-party types
-  provided through `@carbon/react`, improving the quality of products developed
-  using Carbon.
-- Types will be maintained within the package itself, not having to go through
-  the DefinetlyTyped contribution process/system leading to easier maintenance
-  of typings.
+Despite these benefits, adding TypeScript to the codebase is still a large shift
+for the developer community surrounding the Carbon Design System. Most projects
+are not using TypeScript, and contributors are more likely to not have in-depth
+knowledge of TypeScript.
 
-By adding TypeScript types to components we hope to accomplis
-
-Focusing on limiting the amount of Typescript within the repository is backed by
-two primary reasons.
-
-Adding typescript to the codebase is a large shift for the developer community
-surrounding the Carbon Design System. Most projects are not using typescript,
-and contributors are more likely to not have in-depth knowledge of typescript.
 The bar to contribute to Carbon should be as low as possible to facilitate
 experimentation, innovation, and progress within the system. Adding TypeScript
 raises this bar of contribution adding additional friction to even the smallest
 of pull requests.
 
-The core group of maintainers both on the core team and the
-
-- community concerns
-- maintenance
-
-Adjacent to these concerns, we believe the majority of the benefits of
-typescript can be provided to consumers without needing to convert the entire
-codebase to use TypeScript.
+We believe the majority of the benefits of TypeScript can be provided to
+consumers without needing to convert the entire codebase to use TypeScript.
+Overall, this effort will be focused on limiting the amount of TypeScript within
+the repository for now.
 
 ## Strategy
 
-With the above concerns in mind, we'd like to approach Typescript adoption in
-the following phases:
+TypeScript will be incrementally adopted, focusing first on adding types to
+components prop APIs that are included as part of the public API of
+`@carbon/react`.
 
-1. Add as few things as possible to get baseline types provided, intellisense in
-   vscode
-2. Research and evalutate where we could extract future value from Typescript
-   for consumers or maintainers
-3. Convert the entire codebase to typescript
+Internal components, helpers, function, etc. will not initially be typed. These
+internal files/components not included in the public API should be left as `.js`
+and given a jsdoc type annotation of `/** @type any */`
+
+Other packages, such as `@carbon/icons-react`, `@carbon/elements`, etc will not
+initially be typed.
 
 Within this incremental adoption strategy, **for now types will not be bound to
 semver**.
 
-This means that types are provided on an as-is basis. The aim is for types to be
-very stable and not ship breaking changes, but the reality is typings may at
-times be incorrect, outdated, or missing. Full details available within our
-[versioning documentation]().
+This means that types are provided on an as-is basis. Ideally types will be
+stable and not ship breaking changes, but the reality is typings may at times be
+incorrect, outdated, or missing. Full details available within our
+[versioning documentation](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/versioning.md#a-change-is-made-to-component-typingsdefinitions).
 
-- link to typescript semver documentation
-
-### Steps
+### Steps to provide baseline type definitions for components
 
 Below is a general outline of what needs to be done for each component within
-the repository. The issue tracking current status of this effort is #ISSUEHERE
+the repository. There is an issue tracking curring status of this effort,
+[#12513](https://github.com/carbon-design-system/carbon/issues/12513)
 
 - Change extension to `.tsx`
 - Copying the proptypes def to above the component definition
-- Retooling those proptypes to be a ts interface
+- Retool the proptypes to be a ts interface
 - Fix errors as they appear
-- Test your changes
-
-  - Can use Storybook
+- Do not add types to internal components or functions that are not exported as
+  part of the Public API.
+  - Leave internals as `.js` and add a jsdoc type annotation of
+    `/** @type any */`
+- Test your changes - there are a few options here:
   - At the bottom of a file, write a dummy component that uses the component
-    that you’re converting to ensure that you can still pass whatever prop that
-    you need to
-  - Take a storybook example for a component, paste it into the bottom of the
-    .tsx file and validate whether or not it accepts the props as you’ve defined
-    them
+    that you’re converting to ensure that you can still pass all appropriate
+    props that you need to.
+  - Take a storybook example for a component, copy and paste it into the bottom
+    of the .tsx file and validate whether or not it accepts the props as you’ve
+    defined them
+- Ask questions if you get stuck!
+  - The team is available on slack, discord, on
+    [the issue itself](https://github.com/carbon-design-system/carbon/issues/12513).
 
-- Ask questions if you get stuck
-  - Slack, discord, on the issue itself
+## FAQ
+
+### How do I know what's part of the public api?
+
+- If it's not on [the storybook](https://react.carbondesignsystem.com), it's
+  probably not public.
+- The entire Public API is snapshotted, you can
+  [search the snapshot here](https://github.com/carbon-design-system/carbon/blob/main/packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap).
+  If it's not included there, it's not part of the public API.
+
+### Should components have both prototypes and ts interface?
+
+- Yes
+
+### Should comment docs be duplicated into the ts interface?
+
+- Yes
+  - Duplicate comments between the proptypes definition and ts interface
+  - Storybook prefers react-docgen for now
+  - Once we have ts interfaces for everything we can switch out the storybook
+    config to favor TypeScript docs
+
+### Where should I put the ts interface in the file?
+
+- Above the component definition (likely the top of the file)
+  - The component implementation should be sandwiched inbetween the ts interface
+    and the proptypes definition
