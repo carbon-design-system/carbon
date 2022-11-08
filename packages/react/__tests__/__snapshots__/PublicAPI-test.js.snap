@@ -8381,6 +8381,9 @@ Map {
       "onToggle": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
