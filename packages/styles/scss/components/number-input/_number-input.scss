@@ -470,7 +470,7 @@
   .#{$prefix}--number--readonly
     .#{$prefix}--number__controls:hover
     .#{$prefix}--number__rule-divider:not(:first-of-type) {
-    background-color: $icon-disabled;
+    background-color: $border-subtle;
   }
 
   // Skeleton State
