@@ -2367,6 +2367,12 @@ Map {
       "inline": Object {
         "type": "bool",
       },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
       "light": [Function],
       "locale": Object {
         "args": Array [
@@ -2500,6 +2506,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -9398,6 +9410,34 @@ Map {
         "type": "string",
       },
     },
+  },
+  "unstable__FluidDatePicker" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidDatePickerInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
   },
   "unstable__FluidDropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
