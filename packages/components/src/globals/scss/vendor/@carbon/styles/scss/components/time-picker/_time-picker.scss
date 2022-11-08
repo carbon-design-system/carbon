@@ -1,0 +1,94 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/placeholder-colors' as *;
+
+/// Time picker styles
+/// @access public
+/// @group time-picker
+@mixin time-picker {
+  .#{$prefix}--time-picker {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .#{$prefix}--time-picker__select {
+    justify-content: center;
+
+    &:not(:last-of-type) {
+      margin: 0 $spacing-01;
+    }
+  }
+
+  .#{$prefix}--time-picker__input {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--time-picker .#{$prefix}--select-input {
+    width: auto;
+    min-width: auto;
+    padding-right: rem(48px);
+    margin: 0;
+    line-height: 1;
+  }
+
+  .#{$prefix}--time-picker__input-field {
+    @include focus-outline('reset');
+    @include type-style('code-02');
+
+    display: flex;
+    width: 4.875rem;
+    height: rem(40px);
+    align-items: center;
+    transition: outline $duration-fast-01 motion(standard, productive),
+      background-color $duration-fast-01 motion(standard, productive);
+
+    &::placeholder {
+      @include placeholder-colors;
+    }
+  }
+
+  // V11: Possibly deprecate
+  .#{$prefix}--time-picker--light .#{$prefix}--select-input {
+    background-color: $field-02;
+
+    &:hover {
+      background-color: $field-hover;
+    }
+
+    &:disabled,
+    &:hover:disabled {
+      border-bottom: 1px solid transparent;
+      background-color: transparent;
+      color: $text-disabled;
+      cursor: not-allowed;
+    }
+  }
+
+  .#{$prefix}--time-picker--sm .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--sm .#{$prefix}--time-picker__input-field {
+    height: rem(32px);
+    max-height: rem(32px);
+  }
+
+  // TODO V11: Remove xl selector
+  .#{$prefix}--time-picker--xl .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--xl .#{$prefix}--time-picker__input-field,
+  .#{$prefix}--time-picker--lg .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--lg .#{$prefix}--time-picker__input-field {
+    height: rem(48px);
+    max-height: rem(48px);
+  }
+}

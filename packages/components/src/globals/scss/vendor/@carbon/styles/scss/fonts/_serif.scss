@@ -1,0 +1,153 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../config';
+@use './src';
+@use './unicode';
+
+$font-family: 'IBM Plex Serif';
+$name: 'IBM-Plex-Serif';
+$styles: (normal, italic);
+$unicode-ranges: (Cyrillic, Pi, Latin3, Latin2, Latin1);
+$formats: (woff2, woff);
+
+@mixin thin($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @each $style in $styles {
+    @each $unicode-range in $unicode-ranges {
+      @font-face {
+        font-display: config.$font-display;
+        font-family: $font-family;
+        font-style: $style;
+        font-weight: 100;
+        src: src.get($name, Thin, $style, $unicode-range, $formats);
+        unicode-range: unicode.get-range($unicode-range);
+      }
+    }
+  }
+}
+
+@mixin extralight($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @each $style in $styles {
+    @each $unicode-range in $unicode-ranges {
+      @font-face {
+        font-display: config.$font-display;
+        font-family: $font-family;
+        font-style: $style;
+        font-weight: 200;
+        src: src.get($name, ExtraLight, $style, $unicode-range, $formats);
+        unicode-range: unicode.get-range($unicode-range);
+      }
+    }
+  }
+}
+
+@mixin light($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @each $style in $styles {
+    @each $unicode-range in $unicode-ranges {
+      @font-face {
+        font-display: config.$font-display;
+        font-family: $font-family;
+        font-style: $style;
+        font-weight: 300;
+        src: src.get($name, Light, $style, $unicode-range, $formats);
+        unicode-range: unicode.get-range($unicode-range);
+      }
+    }
+  }
+}
+
+@mixin regular($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @each $style in $styles {
+    @each $unicode-range in $unicode-ranges {
+      @font-face {
+        font-display: config.$font-display;
+        font-family: $font-family;
+        font-style: $style;
+        font-weight: 400;
+        src: src.get($name, Regular, $style, $unicode-range, $formats);
+        unicode-range: unicode.get-range($unicode-range);
+      }
+    }
+  }
+}
+
+@mixin text($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @each $style in $styles {
+    @each $unicode-range in $unicode-ranges {
+      @font-face {
+        font-display: config.$font-display;
+        font-family: $font-family;
+        font-style: $style;
+        font-weight: 450;
+        src: src.get($name, Text, $style, $unicode-range, $formats);
+        unicode-range: unicode.get-range($unicode-range);
+      }
+    }
+  }
+}
+
+@mixin medium($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @each $style in $styles {
+    @each $unicode-range in $unicode-ranges {
+      @font-face {
+        font-display: config.$font-display;
+        font-family: $font-family;
+        font-style: $style;
+        font-weight: 500;
+        src: src.get($name, Medium, $style, $unicode-range, $formats);
+        unicode-range: unicode.get-range($unicode-range);
+      }
+    }
+  }
+}
+
+@mixin semibold($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @each $style in $styles {
+    @each $unicode-range in $unicode-ranges {
+      @font-face {
+        font-display: config.$font-display;
+        font-family: $font-family;
+        font-style: $style;
+        font-weight: 600;
+        src: src.get($name, SemiBold, $style, $unicode-range, $formats);
+        unicode-range: unicode.get-range($unicode-range);
+      }
+    }
+  }
+}
+
+@mixin bold($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @each $style in $styles {
+    @each $unicode-range in $unicode-ranges {
+      @font-face {
+        font-display: config.$font-display;
+        font-family: $font-family;
+        font-style: $style;
+        font-weight: 700;
+        src: src.get($name, Bold, $style, $unicode-range, $formats);
+        unicode-range: unicode.get-range($unicode-range);
+      }
+    }
+  }
+}
+
+@mixin all($styles: $styles, $unicode-ranges: $unicode-ranges) {
+  @include thin($styles, $unicode-ranges);
+  @include extralight($styles, $unicode-ranges);
+  @include light($styles, $unicode-ranges);
+  @include regular($styles, $unicode-ranges);
+  @include text($styles, $unicode-ranges);
+  @include medium($styles, $unicode-ranges);
+  @include semibold($styles, $unicode-ranges);
+  @include bold($styles, $unicode-ranges);
+}
+
+@mixin default() {
+  @include light();
+  @include regular();
+  @include semibold();
+}

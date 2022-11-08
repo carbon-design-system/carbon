@@ -1,0 +1,81 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing';
+@use '../../theme';
+@use '../../type';
+@use '../../utilities/button-reset';
+@use '../../utilities/convert';
+@use '../../utilities/custom-property';
+@use '../../utilities/focus-outline';
+
+@mixin toggletip() {
+  .#{$prefix}--toggletip-label {
+    @include type.type-style('label-01');
+
+    margin-right: spacing.$spacing-03;
+
+    color: theme.$text-secondary;
+  }
+
+  .#{$prefix}--toggletip-button {
+    @include button-reset.reset();
+
+    display: flex;
+    align-items: center;
+  }
+
+  .#{$prefix}--toggletip-button svg {
+    fill: theme.$icon-secondary;
+  }
+
+  .#{$prefix}--toggletip-button:hover svg,
+  .#{$prefix}--toggletip--open .#{$prefix}--toggletip-button svg {
+    fill: theme.$icon-primary;
+  }
+
+  .#{$prefix}--toggletip-button:focus {
+    @include focus-outline.focus-outline;
+  }
+
+  .#{$prefix}--toggletip {
+    @include custom-property.declaration('popover-offset', convert.rem(13px));
+  }
+
+  .#{$prefix}--toggletip-content {
+    @include custom-property.declaration(
+      'button-focus-color',
+      theme.$focus-inverse
+    );
+    @include custom-property.declaration(
+      'link-text-color',
+      theme.$link-inverse
+    );
+    @include custom-property.declaration(
+      'link-hover-text-color',
+      theme.$link-inverse
+    );
+    @include custom-property.declaration(
+      'link-focus-text-color',
+      theme.$focus-inverse
+    );
+    @include type.type-style('body-short-01');
+
+    display: grid;
+    max-width: 18rem;
+    padding: spacing.$spacing-05;
+    row-gap: spacing.$spacing-05;
+  }
+
+  .#{$prefix}--toggletip-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: spacing.$spacing-05;
+  }
+}

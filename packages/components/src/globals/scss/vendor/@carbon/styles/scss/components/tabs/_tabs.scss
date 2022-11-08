@@ -1,0 +1,442 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Tabs
+//-----------------------------
+
+@use 'vars' as *;
+
+@use '../../config' as *;
+@use '../../theme' as *;
+@use '../../colors' as *;
+@use '../../type' as *;
+@use '../../breakpoint' as *;
+@use '../../spacing' as *;
+@use '../../motion' as *;
+@use '../button/tokens' as button;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/rotate' as *;
+@use '../../utilities/box-shadow' as *;
+@use '../../utilities/component-tokens' as *;
+@use '../../utilities/custom-property';
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/visually-hidden' as *;
+@use '../../utilities/button-reset';
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/convert' as *;
+
+$icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
+
+/// Tabs styles
+/// @access public
+/// @group tabs
+@mixin tabs {
+  .#{$prefix}--tabs {
+    @include reset;
+    @include type-style('body-short-01');
+
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: rem(40px);
+    color: $text-primary;
+
+    &.#{$prefix}--tabs--contained {
+      min-height: rem(48px);
+    }
+
+    .#{$prefix}--tabs__nav {
+      display: flex;
+      overflow: auto hidden;
+      width: auto;
+      max-width: 100%;
+      flex-direction: row;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      outline: 0;
+      // hide scroll bars
+      scrollbar-width: none;
+      transition: max-height $duration-fast-01 motion(standard, productive);
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    //-----------------------------
+    // Overflow Nav Buttons
+    //-----------------------------
+    .#{$prefix}--tabs__overflow-indicator--left,
+    .#{$prefix}--tabs__overflow-indicator--right {
+      z-index: 1;
+      width: $spacing-03;
+      flex: 1 0 auto;
+    }
+
+    .#{$prefix}--tabs__overflow-indicator--left {
+      margin-right: -$spacing-03;
+      background-image: linear-gradient(to left, transparent, $background);
+    }
+
+    .#{$prefix}--tabs__overflow-indicator--right {
+      margin-left: -$spacing-03;
+      background-image: linear-gradient(to right, transparent, $background);
+    }
+
+    .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--left {
+      background-image: linear-gradient(to left, transparent, $layer);
+    }
+
+    .#{$prefix}--tabs--light .#{$prefix}--tabs__overflow-indicator--right {
+      background-image: linear-gradient(to right, transparent, $layer);
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--left {
+      background-image: linear-gradient(to left, transparent, $layer-accent);
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__overflow-indicator--right {
+      background-image: linear-gradient(to right, transparent, $layer-accent);
+    }
+
+    // Safari-only media query
+    // won't appear correctly with CSS custom properties
+    // see: code snippet and modal overflow indicators
+    @media not all and (min-resolution: 0.001dpcm) {
+      @supports (-webkit-appearance: none) and (stroke-color: transparent) {
+        .#{$prefix}--tabs__overflow-indicator--left {
+          background-image: linear-gradient(
+            to left,
+            rgba($background, 0),
+            $background
+          );
+        }
+
+        .#{$prefix}--tabs__overflow-indicator--right {
+          background-image: linear-gradient(
+            to right,
+            rgba($background, 0),
+            $background
+          );
+        }
+
+        &.#{$prefix}--tabs--contained
+          .#{$prefix}--tabs__overflow-indicator--left {
+          background-image: linear-gradient(
+            to left,
+            rgba($layer-accent, 0),
+            $layer-accent
+          );
+        }
+
+        &.#{$prefix}--tabs--contained
+          .#{$prefix}--tabs__overflow-indicator--right {
+          background-image: linear-gradient(
+            to right,
+            rgba($layer-accent, 0),
+            $layer-accent
+          );
+        }
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button {
+      @include button-reset.reset;
+
+      display: flex;
+      width: $spacing-08;
+      flex-shrink: 0;
+      align-items: center;
+      justify-content: center;
+
+      &:focus {
+        @include focus-outline('outline');
+      }
+    }
+
+    .#{$prefix}--tab--overflow-nav-button--hidden {
+      display: none;
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tab--overflow-nav-button {
+      width: $spacing-09;
+      margin: 0;
+      background-color: $layer-accent;
+    }
+
+    .#{$prefix}--tab--overflow-nav-button svg {
+      fill: $icon-primary;
+    }
+
+    //-----------------------------
+    // Item
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item {
+      @include reset;
+
+      display: flex;
+      padding: 0;
+      cursor: pointer;
+      transition: background-color $duration-fast-01
+        motion(standard, productive);
+    }
+
+    .#{$prefix}--tabs__nav-item + .#{$prefix}--tabs__nav-item {
+      margin-left: rem(1px);
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
+      background-color: $layer-accent;
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item
+      + .#{$prefix}--tabs__nav-item {
+      margin-left: 0;
+      // Draws the border without affecting the inner-content
+      box-shadow: rem(-1px) 0 0 0 $border-strong;
+    }
+
+    .#{$prefix}--tabs__nav-item .#{$prefix}--tabs__nav-link {
+      transition: color $duration-fast-01 motion(standard, productive),
+        border-bottom-color $duration-fast-01 motion(standard, productive),
+        outline $duration-fast-01 motion(standard, productive);
+    }
+
+    //-----------------------------
+    // Link
+    //-----------------------------
+    .#{$prefix}--tabs__nav-link {
+      @include button-reset.reset($width: false);
+      @include focus-outline('reset');
+      @include type-style('body-short-01');
+
+      @if not feature-flag-enabled('enable-v11-release') {
+        width: rem(160px);
+      }
+
+      overflow: hidden;
+      max-width: 10rem;
+      padding: $spacing-04 $spacing-05 $spacing-03;
+      border-bottom: $tab-underline-color;
+      color: $text-secondary;
+      text-decoration: none;
+      text-overflow: ellipsis;
+      transition: border $duration-fast-01 motion(standard, productive),
+        outline $duration-fast-01 motion(standard, productive);
+      white-space: nowrap;
+
+      &:focus,
+      &:active {
+        @include focus-outline('outline');
+      }
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-link {
+      height: rem(48px);
+      padding: $spacing-03 $spacing-05;
+      border-bottom: 0;
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+      text-align: left;
+    }
+
+    //-----------------------------
+    // Icon Item
+    //-----------------------------
+
+    .#{$prefix}--tabs__nav-item--icon,
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
+      display: flex;
+      width: $icon-tab-size;
+      height: $icon-tab-size;
+      align-items: center;
+      justify-content: center;
+      padding: 0;
+    }
+
+    &.#{$prefix}--tabs__icon--lg {
+      @include custom-property.declaration('icon-tab-size', rem(48px));
+    }
+
+    //-----------------------------
+    // Item Hover
+    //-----------------------------
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item:hover {
+      background-color: $layer-selected-hover;
+    }
+
+    //-----------------------------
+    // Item Selected
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item--selected {
+      border-bottom: 2px solid $border-interactive;
+      transition: color $duration-fast-01 motion(standard, productive);
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item--selected
+      + .#{$prefix}--tabs__nav-item {
+      box-shadow: none;
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected {
+      // Draws the border without affecting the inner-content
+      box-shadow: inset 0 2px 0 0 $border-interactive;
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
+    .#{$prefix}--tabs__nav-item--selected,
+    .#{$prefix}--tabs__nav-item--selected:focus
+      .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs__nav-item--selected:active
+      .#{$prefix}--tabs__nav-link:active {
+      @include type-style('productive-heading-01');
+
+      color: $text-primary;
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected:hover {
+      background-color: $layer;
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+
+      .#{$prefix}--tabs__nav-link:focus,
+      .#{$prefix}--tabs__nav-link:active {
+        box-shadow: none;
+      }
+    }
+
+    &.#{$prefix}--tabs--light.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item--selected,
+    &.#{$prefix}--tabs--light.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item--selected:hover {
+      background-color: $background;
+    }
+
+    //-----------------------------
+    //  Link Hover
+    //-----------------------------
+    .#{$prefix}--tabs__nav-item:hover .#{$prefix}--tabs__nav-link {
+      border-bottom: $tab-underline-color-hover;
+      color: $text-primary;
+    }
+
+    //-----------------------------
+    //  Item Disabled
+    //-----------------------------
+
+    .#{$prefix}--tabs__nav-item--disabled {
+      border-bottom: $tab-underline-disabled;
+      background-color: transparent;
+      color: $tab-text-disabled;
+      outline: none;
+    }
+
+    .#{$prefix}--tabs__nav-item--disabled:hover {
+      border-bottom: $tab-underline-disabled;
+      color: $tab-text-disabled;
+      cursor: not-allowed;
+    }
+
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled,
+    &.#{$prefix}--tabs--contained
+      .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--disabled:hover {
+      background-color: button.$button-disabled;
+    }
+
+    .#{$prefix}--tabs__nav-item--disabled:focus,
+    .#{$prefix}--tabs__nav-item--disabled:active {
+      border-bottom: $tab-underline-disabled;
+      outline: none;
+      pointer-events: none;
+    }
+
+    .#{$prefix}--tabs--light
+      .#{$prefix}--tabs__nav-item--disabled
+      .#{$prefix}--tabs__nav-link {
+      border-bottom-color: $border-subtle;
+    }
+
+    .#{$prefix}--tabs--light
+      .#{$prefix}--tabs__nav-item--disabled:hover
+      .#{$prefix}--tabs__nav-link {
+      border-bottom-color: $border-subtle;
+    }
+
+    .#{$prefix}--tabs--light
+      .#{$prefix}--tabs__nav-item--disabled
+      .#{$prefix}--tabs__nav-link:focus,
+    .#{$prefix}--tabs--light
+      .#{$prefix}--tabs__nav-item--disabled
+      .#{$prefix}--tabs__nav-link:active {
+      border-bottom-color: $border-subtle;
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--disabled {
+      border-bottom: none;
+      color: $text-on-color-disabled;
+    }
+  }
+  //-----------------------------
+  //  Tab Content Container
+  //-----------------------------
+  .#{$prefix}--tab-content {
+    padding: $spacing-05;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+  }
+
+  //-----------------------------
+  // Skeleton state
+  //-----------------------------
+  .#{$prefix}--tabs.#{$prefix}--skeleton {
+    cursor: default;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--skeleton.#{$prefix}--tabs:not(.#{$prefix}--tabs--contained)
+    .#{$prefix}--tabs__nav-link {
+    border-bottom: 2px solid $skeleton-element;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link {
+    display: flex;
+    width: 10rem;
+    height: 100%;
+    align-items: center;
+    padding: 0 1rem;
+  }
+
+  .#{$prefix}--tabs.#{$prefix}--skeleton .#{$prefix}--tabs__nav-link span {
+    @include skeleton;
+
+    display: block;
+    width: 100%;
+    height: rem(14px);
+  }
+
+  // Windows HCM fix
+  .#{$prefix}--tabs__nav-item
+    .#{$prefix}--tabs__nav-item--selected
+    .#{$prefix}--tabs__nav-item--selected {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--tabs
+    .#{$prefix}--tabs__nav-item--disabled
+    .#{$prefix}--tabs__nav-link {
+    @include high-contrast-mode('disabled');
+  }
+}

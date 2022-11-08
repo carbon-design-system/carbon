@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2021
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/// Adds text overflow styling
+/// @access public
+/// @param {Number} $width [false] - Value of width if you want to set width, else nothing
+/// @example @include text-overflow(300px);
+/// @group utilities
+@mixin text-overflow($width: false) {
+  display: block;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  // apply a width if width parameter exists
+  @if ($width) {
+    width: $width;
+  }
+}

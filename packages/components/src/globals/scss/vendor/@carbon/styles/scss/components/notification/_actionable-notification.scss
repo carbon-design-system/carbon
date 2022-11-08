@@ -1,0 +1,413 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+@use 'mixins' as *;
+@use '../../breakpoint' as *;
+@use '../../colors' as *;
+@use '../../config' as *;
+@use '../../feature-flags' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../themes' as *;
+@use '../../type' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/focus-outline' as *;
+@use './tokens' as *;
+@use '../button/mixins' as button-mixins;
+@use '../button/vars' as button-vars;
+
+/// Actionable notification styles
+/// @access public
+/// @group notification
+@mixin actionable-notification {
+  .#{$prefix}--actionable-notification {
+    @include reset;
+
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-width: rem(288px);
+    max-width: rem(288px);
+    height: auto;
+    min-height: rem(48px);
+    flex-wrap: wrap;
+    @if not enabled('enable-v11-release') {
+      margin-top: $spacing-05;
+      margin-bottom: $spacing-05;
+    }
+
+    color: $text-inverse;
+
+    @include breakpoint(md) {
+      max-width: rem(608px);
+      flex-wrap: nowrap;
+    }
+
+    @include breakpoint(lg) {
+      max-width: rem(736px);
+    }
+
+    @include breakpoint(max) {
+      max-width: rem(832px);
+    }
+  }
+
+  .#{$prefix}--actionable-notification--toast {
+    min-width: rem(288px);
+    max-width: rem(288px);
+    flex-wrap: wrap;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    a {
+    color: $link-inverse;
+  }
+
+  .#{$prefix}--actionable-notification a {
+    text-decoration: none;
+  }
+
+  .#{$prefix}--actionable-notification a:hover {
+    text-decoration: underline;
+  }
+
+  .#{$prefix}--actionable-notification a:focus {
+    outline: 1px solid $link-inverse;
+  }
+
+  .#{$prefix}--actionable-notification.#{$prefix}--actionable-notification--low-contrast
+    a:focus {
+    @include focus-outline;
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast {
+    color: $text-primary;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border-width: 1px 1px 1px 0;
+      border-style: solid;
+      content: '';
+      filter: opacity(0.4);
+      pointer-events: none;
+    }
+  }
+
+  .#{$prefix}--actionable-notification--error {
+    @include notification--experimental(
+      $support-error-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--error {
+    @include notification--experimental(
+      $support-error,
+      $notification-background-error
+    );
+
+    &::before {
+      border-color: $support-error;
+    }
+  }
+
+  .#{$prefix}--actionable-notification--success {
+    @include notification--experimental(
+      $support-success-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--success {
+    @include notification--experimental(
+      $support-success,
+      $notification-background-success
+    );
+
+    &::before {
+      border-color: $support-success;
+    }
+  }
+
+  .#{$prefix}--actionable-notification--info,
+  .#{$prefix}--actionable-notification--info-square {
+    @include notification--experimental(
+      $support-info-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--info,
+  .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--info-square {
+    @include notification--experimental(
+      $support-info,
+      $notification-background-info
+    );
+
+    &::before {
+      border-color: $support-info;
+    }
+  }
+
+  .#{$prefix}--actionable-notification--warning,
+  .#{$prefix}--actionable-notification--warning-alt {
+    @include notification--experimental(
+      $support-warning-inverse,
+      $background-inverse
+    );
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--warning,
+  .#{$prefix}--actionable-notification--low-contrast.#{$prefix}--actionable-notification--warning-alt {
+    @include notification--experimental(
+      $support-warning,
+      $notification-background-warning
+    );
+
+    &::before {
+      border-color: $support-warning;
+    }
+  }
+
+  .#{$prefix}--actionable-notification--warning
+    .#{$prefix}--inline-notification__icon,
+  .#{$prefix}--actionable-notification--warning
+    .#{$prefix}--toast-notification__icon
+    path[opacity='0'] {
+    fill: $black-100;
+    opacity: 1;
+  }
+
+  .#{$prefix}--actionable-notification__details {
+    display: flex;
+    flex-grow: 1;
+    margin: 0 $spacing-09 0 $spacing-05;
+  }
+
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--toast)
+    .#{$prefix}--actionable-notification__details {
+    @include breakpoint(md) {
+      margin: 0 $spacing-05;
+    }
+  }
+
+  .#{$prefix}--actionable-notification .#{$prefix}--inline-notification__icon {
+    flex-shrink: 0;
+    margin-top: rem(14px);
+    margin-right: $spacing-05;
+  }
+
+  .#{$prefix}--actionable-notification .#{$prefix}--toast-notification__icon {
+    flex-shrink: 0;
+    margin-top: $spacing-05;
+    margin-right: $spacing-05;
+  }
+
+  .#{$prefix}--actionable-notification__text-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    padding: rem(15px) 0;
+  }
+
+  .#{$prefix}--actionable-notification__content {
+    @include type-style('body-short-01');
+
+    word-break: break-word;
+  }
+
+  /* Ghost action button when inline */
+  .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
+    height: rem(32px);
+    margin-bottom: $spacing-03;
+    margin-left: $spacing-08;
+
+    @include breakpoint(md) {
+      margin: $spacing-03 0;
+    }
+  }
+
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
+    color: $link-inverse;
+  }
+
+  .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $background-inverse-hover;
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost:active,
+  .#{$prefix}--actionable-notification--low-contrast
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost:hover {
+    background-color: $notification-action-hover;
+  }
+
+  .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost:focus {
+    border-color: transparent;
+    box-shadow: none;
+    outline: 2px solid $focus-inverse;
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost:focus {
+    outline-color: $focus;
+  }
+
+  .#{$prefix}--actionable-notification--hide-close-button
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--ghost {
+    margin-right: $spacing-03;
+  }
+
+  /* Tertiary action button when not inline (toast) */
+  .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
+    margin-bottom: $spacing-03;
+
+    // Button should be left aligned with text. 20px is the width of the notification icon
+    margin-left: calc(#{$spacing-07} + #{rem(20px)});
+  }
+
+  // Tertiary button styles by default use mostly "inverse" tokens. Since the non-low-contrast notification
+  // background is dark, the button styles have to be inversed again.
+  // So essentially the:
+  // btn-tertiary white theme button styles should become g100 button styles
+  // btn-tertiary g10 theme button styles should become g90 button styles
+  // btn-tertiary g90 theme button styles should become g10 button styles
+  // btn-tertiary g100 theme button styles should become white button styles
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
+    @include button-mixins.button-theme(
+      transparent,
+      $notification-action-tertiary-inverse,
+      $notification-action-tertiary-inverse,
+      $notification-action-tertiary-inverse-hover,
+      currentColor,
+      $notification-action-tertiary-inverse-active
+    );
+  }
+
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:hover {
+    color: $notification-action-tertiary-inverse-text;
+  }
+
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:focus {
+    border-color: $focus-inverse;
+    background-color: $notification-action-tertiary-inverse;
+    box-shadow: inset 0 0 0 button-vars.$button-outline-width $focus-inverse,
+      inset 0 0 0 button-vars.$button-border-width $background-inverse;
+    color: $notification-action-tertiary-inverse-text;
+  }
+
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:active {
+    border-color: transparent;
+    background-color: $notification-action-tertiary-inverse-active;
+    color: $notification-action-tertiary-inverse-text;
+  }
+
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:disabled,
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:hover:disabled,
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary:focus:disabled,
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled,
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled:hover,
+  .#{$prefix}--actionable-notification:not(.#{$prefix}--actionable-notification--low-contrast)
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary.#{$prefix}--btn--disabled:focus {
+    background: transparent;
+    color: $notification-action-tertiary-inverse-text-on-color-disabled;
+    outline: none;
+  }
+
+  .#{$prefix}--actionable-notification--hide-close-button
+    .#{$prefix}--actionable-notification__action-button.#{$prefix}--btn--tertiary {
+    margin-right: $spacing-03;
+  }
+
+  .#{$prefix}--actionable-notification__close-button {
+    @include focus-outline('reset');
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    width: rem(48px);
+    min-width: rem(48px);
+    max-width: rem(48px);
+    height: rem(48px);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    transition: outline $duration-fast-02 motion(standard, productive),
+      background-color $duration-fast-02 motion(standard, productive);
+
+    &:focus {
+      outline: 2px solid $focus-inverse;
+      outline-offset: -2px;
+    }
+
+    .#{$prefix}--actionable-notification__close-icon {
+      fill: $icon-inverse;
+    }
+
+    @include breakpoint(md) {
+      position: static;
+    }
+  }
+
+  .#{$prefix}--actionable-notification--toast
+    .#{$prefix}--actionable-notification__close-button {
+    @include breakpoint(md) {
+      position: absolute;
+    }
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast
+    .#{$prefix}--actionable-notification__close-button:focus {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--actionable-notification--low-contrast
+    .#{$prefix}--actionable-notification__close-button
+    .#{$prefix}--actionable-notification__close-icon {
+    fill: $icon-primary;
+  }
+
+  // Windows HCM fix
+  /* stylelint-disable */
+  .#{$prefix}--actionable-notification {
+    @include high-contrast-mode('outline');
+  }
+
+  .#{$prefix}--actionable-notification__close-button:focus,
+  .#{$prefix}--btn.#{$prefix}--btn--ghost.#{$prefix}--actionable-notification__action-button:focus {
+    @include high-contrast-mode('focus');
+  }
+
+  .#{$prefix}--actionable-notification .#{$prefix}--inline-notification__icon,
+  .#{$prefix}--actionable-notification .#{$prefix}--toast-notification__icon {
+    @include high-contrast-mode('icon-fill');
+  }
+  /* stylelint-enable */
+}

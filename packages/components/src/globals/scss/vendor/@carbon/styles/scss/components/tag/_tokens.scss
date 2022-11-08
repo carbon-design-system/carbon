@@ -1,0 +1,829 @@
+//
+// Copyright IBM Corp. 2020
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:color';
+@use '../../colors';
+@use '../../themes';
+@use '../../theme' as *;
+@use '../../utilities/component-tokens';
+
+// red
+$tag-background-red: (
+  fallback: colors.$red-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$red-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$red-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$red-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$red-70,
+    ),
+  ),
+) !default;
+
+$tag-color-red: (
+  fallback: colors.$red-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$red-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$red-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$red-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$red-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-red: (
+  fallback: colors.$red-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$red-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$red-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$red-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$red-70-hover,
+    ),
+  ),
+) !default;
+
+// magenta
+$tag-background-magenta: (
+  fallback: colors.$magenta-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$magenta-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$magenta-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$magenta-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$magenta-70,
+    ),
+  ),
+) !default;
+
+$tag-color-magenta: (
+  fallback: colors.$magenta-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$magenta-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$magenta-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$magenta-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$magenta-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-magenta: (
+  fallback: colors.$magenta-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$magenta-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$magenta-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$magenta-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$magenta-70-hover,
+    ),
+  ),
+) !default;
+
+// purple
+$tag-background-purple: (
+  fallback: colors.$purple-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$purple-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$purple-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$purple-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$purple-70,
+    ),
+  ),
+) !default;
+
+$tag-color-purple: (
+  fallback: colors.$purple-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$purple-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$purple-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$purple-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$purple-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-purple: (
+  fallback: colors.$purple-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$purple-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$purple-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$purple-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$purple-70-hover,
+    ),
+  ),
+) !default;
+
+// blue
+$tag-background-blue: (
+  fallback: colors.$blue-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$blue-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$blue-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$blue-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$blue-70,
+    ),
+  ),
+) !default;
+
+$tag-color-blue: (
+  fallback: colors.$blue-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$blue-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$blue-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$blue-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$blue-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-blue: (
+  fallback: colors.$blue-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$blue-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$blue-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$blue-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$blue-70-hover,
+    ),
+  ),
+) !default;
+
+// cyan
+$tag-background-cyan: (
+  fallback: colors.$cyan-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$cyan-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$cyan-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$cyan-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$cyan-70,
+    ),
+  ),
+) !default;
+
+$tag-color-cyan: (
+  fallback: colors.$cyan-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$cyan-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$cyan-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$cyan-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$cyan-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-cyan: (
+  fallback: colors.$cyan-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$cyan-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$cyan-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$cyan-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$cyan-70-hover,
+    ),
+  ),
+) !default;
+
+// teal
+$tag-background-teal: (
+  fallback: colors.$teal-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$teal-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$teal-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$teal-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$teal-70,
+    ),
+  ),
+) !default;
+
+$tag-color-teal: (
+  fallback: colors.$teal-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$teal-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$teal-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$teal-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$teal-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-teal: (
+  fallback: colors.$teal-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$teal-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$teal-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$teal-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$teal-70-hover,
+    ),
+  ),
+) !default;
+
+// green
+$tag-background-green: (
+  fallback: colors.$green-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$green-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$green-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$green-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$green-70,
+    ),
+  ),
+) !default;
+
+$tag-color-green: (
+  fallback: colors.$green-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$green-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$green-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$green-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$green-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-green: (
+  fallback: colors.$green-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$green-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$green-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$green-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$green-70-hover,
+    ),
+  ),
+) !default;
+
+// gray
+$tag-background-gray: (
+  fallback: colors.$gray-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$gray-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$gray-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$gray-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$gray-70,
+    ),
+  ),
+) !default;
+
+$tag-color-gray: (
+  fallback: colors.$gray-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$gray-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$gray-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$gray-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$gray-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-gray: (
+  fallback: colors.$gray-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$gray-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$gray-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$gray-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$gray-70-hover,
+    ),
+  ),
+) !default;
+
+// cool-gray
+$tag-background-cool-gray: (
+  fallback: colors.$cool-gray-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$cool-gray-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$cool-gray-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$cool-gray-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$cool-gray-70,
+    ),
+  ),
+) !default;
+
+$tag-color-cool-gray: (
+  fallback: colors.$cool-gray-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$cool-gray-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$cool-gray-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$cool-gray-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$cool-gray-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-cool-gray: (
+  fallback: colors.$cool-gray-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$cool-gray-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$cool-gray-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$cool-gray-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$cool-gray-70-hover,
+    ),
+  ),
+) !default;
+
+// warm-gray
+$tag-background-warm-gray: (
+  fallback: colors.$warm-gray-20,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$warm-gray-20,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$warm-gray-20,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$warm-gray-70,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$warm-gray-70,
+    ),
+  ),
+) !default;
+
+$tag-color-warm-gray: (
+  fallback: colors.$warm-gray-80,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$warm-gray-80,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$warm-gray-80,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$warm-gray-20,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$warm-gray-20,
+    ),
+  ),
+) !default;
+
+$tag-hover-warm-gray: (
+  fallback: colors.$warm-gray-30,
+  values: (
+    (
+      theme: themes.$white,
+      value: colors.$warm-gray-30,
+    ),
+    (
+      theme: themes.$g10,
+      value: colors.$warm-gray-30,
+    ),
+    (
+      theme: themes.$g90,
+      value: colors.$warm-gray-70-hover,
+    ),
+    (
+      theme: themes.$g100,
+      value: colors.$warm-gray-70-hover,
+    ),
+  ),
+) !default;
+
+$tag-tokens: (
+  tag-background-red: $tag-background-red,
+  tag-color-red: $tag-color-red,
+  tag-hover-red: $tag-hover-red,
+  tag-background-magenta: $tag-background-magenta,
+  tag-color-magenta: $tag-color-magenta,
+  tag-hover-magenta: $tag-hover-magenta,
+  tag-background-purple: $tag-background-purple,
+  tag-color-purple: $tag-color-purple,
+  tag-hover-purple: $tag-hover-purple,
+  tag-background-blue: $tag-background-blue,
+  tag-color-blue: $tag-color-blue,
+  tag-hover-blue: $tag-hover-blue,
+  tag-background-cyan: $tag-background-cyan,
+  tag-color-cyan: $tag-color-cyan,
+  tag-hover-cyan: $tag-hover-cyan,
+  tag-background-teal: $tag-background-teal,
+  tag-color-teal: $tag-color-teal,
+  tag-hover-teal: $tag-hover-teal,
+  tag-background-green: $tag-background-green,
+  tag-color-green: $tag-color-green,
+  tag-hover-green: $tag-hover-green,
+  tag-background-gray: $tag-background-gray,
+  tag-color-gray: $tag-color-gray,
+  tag-hover-gray: $tag-hover-gray,
+  tag-background-cool-gray: $tag-background-cool-gray,
+  tag-color-cool-gray: $tag-color-cool-gray,
+  tag-hover-cool-gray: $tag-hover-cool-gray,
+  tag-background-warm-gray: $tag-background-warm-gray,
+  tag-color-warm-gray: $tag-color-warm-gray,
+  tag-hover-warm-gray: $tag-hover-warm-gray,
+);
+
+$tag-background-red: component-tokens.get-var(
+  $tag-background-red,
+  'tag-background-red'
+);
+
+$tag-color-red: component-tokens.get-var($tag-color-red, 'tag-color-red');
+
+$tag-hover-red: component-tokens.get-var($tag-hover-red, 'tag-hover-red');
+
+$tag-background-magenta: component-tokens.get-var(
+  $tag-background-magenta,
+  'tag-background-magenta'
+);
+
+$tag-color-magenta: component-tokens.get-var(
+  $tag-color-magenta,
+  'tag-color-magenta'
+);
+
+$tag-hover-magenta: component-tokens.get-var(
+  $tag-hover-magenta,
+  'tag-hover-magenta'
+);
+
+$tag-background-purple: component-tokens.get-var(
+  $tag-background-purple,
+  'tag-background-purple'
+);
+
+$tag-color-purple: component-tokens.get-var(
+  $tag-color-purple,
+  'tag-color-purple'
+);
+
+$tag-hover-purple: component-tokens.get-var(
+  $tag-hover-purple,
+  'tag-hover-purple'
+);
+
+$tag-background-blue: component-tokens.get-var(
+  $tag-background-blue,
+  'tag-background-blue'
+);
+
+$tag-color-blue: component-tokens.get-var($tag-color-blue, 'tag-color-blue');
+
+$tag-hover-blue: component-tokens.get-var($tag-hover-blue, 'tag-hover-blue');
+
+$tag-background-cyan: component-tokens.get-var(
+  $tag-background-cyan,
+  'tag-background-cyan'
+);
+
+$tag-color-cyan: component-tokens.get-var($tag-color-cyan, 'tag-color-cyan');
+
+$tag-hover-cyan: component-tokens.get-var($tag-hover-cyan, 'tag-hover-cyan');
+
+$tag-background-teal: component-tokens.get-var(
+  $tag-background-teal,
+  'tag-background-teal'
+);
+
+$tag-color-teal: component-tokens.get-var($tag-color-teal, 'tag-color-teal');
+
+$tag-hover-teal: component-tokens.get-var($tag-hover-teal, 'tag-hover-teal');
+
+$tag-background-green: component-tokens.get-var(
+  $tag-background-green,
+  'tag-background-green'
+);
+
+$tag-color-green: component-tokens.get-var($tag-color-green, 'tag-color-green');
+
+$tag-hover-green: component-tokens.get-var($tag-hover-green, 'tag-hover-green');
+
+$tag-background-gray: component-tokens.get-var(
+  $tag-background-gray,
+  'tag-background-gray'
+);
+
+$tag-color-gray: component-tokens.get-var($tag-color-gray, 'tag-color-gray');
+
+$tag-hover-gray: component-tokens.get-var($tag-hover-gray, 'tag-hover-gray');
+
+$tag-background-cool-gray: component-tokens.get-var(
+  $tag-background-cool-gray,
+  'tag-background-cool-gray'
+);
+
+$tag-color-cool-gray: component-tokens.get-var(
+  $tag-color-cool-gray,
+  'tag-color-cool-gray'
+);
+
+$tag-hover-cool-gray: component-tokens.get-var(
+  $tag-hover-cool-gray,
+  'tag-hover-cool-gray'
+);
+
+$tag-background-warm-gray: component-tokens.get-var(
+  $tag-background-warm-gray,
+  'tag-background-warm-gray'
+);
+
+$tag-color-warm-gray: component-tokens.get-var(
+  $tag-color-warm-gray,
+  'tag-color-warm-gray'
+);
+
+$tag-hover-warm-gray: component-tokens.get-var(
+  $tag-hover-warm-gray,
+  'tag-hover-warm-gray'
+);

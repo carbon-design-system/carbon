@@ -1,0 +1,90 @@
+//
+// Copyright IBM Corp. 2016, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../spacing';
+@use '../../theme';
+@use '../../type';
+@use '../../utilities/custom-property';
+@use '../../utilities/convert';
+@use '../../utilities/button-reset';
+@use '../../utilities/focus-outline';
+
+$tooltip-padding-block: custom-property.get-var(
+  'tooltip-padding-block',
+  spacing.$spacing-05
+);
+
+$tooltip-padding-inline: custom-property.get-var(
+  'tooltip-padding-inline',
+  spacing.$spacing-05
+);
+
+@mixin tooltip {
+  .#{$prefix}--tooltip {
+    @include custom-property.declaration('popover-offset', 12px);
+  }
+
+  .#{$prefix}--tooltip-content {
+    @include type.type-style('body-long-01');
+
+    max-width: convert.rem(288px);
+    padding: $tooltip-padding-block $tooltip-padding-inline;
+
+    color: theme.$text-inverse;
+  }
+}
+
+@mixin definition-tooltip {
+  .#{$prefix}--definition-term {
+    @include button-reset.reset;
+
+    border-bottom: 1px dotted theme.$border-strong;
+    border-radius: 0;
+
+    color: theme.$text-primary;
+  }
+
+  .#{$prefix}--definition-term:focus {
+    @include focus-outline.focus-outline;
+
+    border-bottom-color: theme.$border-interactive;
+  }
+
+  .#{$prefix}--definition-term:hover {
+    border-bottom-color: theme.$border-interactive;
+  }
+
+  .#{$prefix}--definition-tooltip {
+    @include type.type-style('body-long-01');
+
+    max-width: convert.rem(176px);
+    padding: convert.rem(8px) convert.rem(16px);
+  }
+}
+
+@mixin icon-tooltip {
+  .#{$prefix}--icon-tooltip {
+    @include custom-property.declaration(
+      'tooltip-padding-block',
+      convert.rem(2px)
+    );
+    @include custom-property.declaration(
+      'popover-caret-width',
+      convert.rem(8px)
+    );
+    @include custom-property.declaration(
+      'popover-caret-height',
+      convert.rem(4px)
+    );
+    @include custom-property.declaration('popover-offset', convert.rem(8px));
+  }
+
+  .#{$prefix}--icon-tooltip .#{$prefix}--tooltip-content {
+    @include type.type-style('body-short-01');
+  }
+}

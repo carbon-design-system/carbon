@@ -1,0 +1,38 @@
+//
+// Copyright IBM Corp. 2018, 2018
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use './config' as *;
+@use '@carbon/themes/scss/modules/config' with (
+  $prefix: $prefix,
+);
+@use './compat/themes' as compat;
+@use './themes';
+
+@forward '@carbon/themes/scss/modules/theme' with (
+  $fallback: themes.$white !default,
+  $theme: compat.$white !default,
+);
+@forward '@carbon/themes/scss/modules/tokens';
+@use '@carbon/themes/scss/modules/tokens';
+@use './utilities/custom-property';
+
+// Layer sets
+$layer: custom-property.get-var('layer');
+$layer-active: custom-property.get-var('layer-active');
+$layer-hover: custom-property.get-var('layer-hover');
+$layer-selected: custom-property.get-var('layer-selected');
+$layer-selected-hover: custom-property.get-var('layer-selected-hover');
+$layer-accent: custom-property.get-var('layer-accent');
+$layer-accent-hover: custom-property.get-var('layer-accent-hover');
+$layer-accent-active: custom-property.get-var('layer-accent-active');
+
+$field: custom-property.get-var('field');
+$field-hover: custom-property.get-var('field-hover');
+
+$border-subtle: custom-property.get-var('border-subtle');
+$border-subtle-selected: custom-property.get-var('border-subtle-selected');
+$border-strong: custom-property.get-var('border-strong');
