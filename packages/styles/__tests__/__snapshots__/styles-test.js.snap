@@ -263,6 +263,16 @@ Array [
     "relativePath": "scss/components/form",
   },
   Object {
+    "filepath": "scss/components/fluid-date-picker/_fluid-date-picker.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-date-picker/fluid-date-picker",
+    "relativePath": "scss/components/fluid-date-picker/fluid-date-picker",
+  },
+  Object {
+    "filepath": "scss/components/fluid-date-picker/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-date-picker",
+    "relativePath": "scss/components/fluid-date-picker",
+  },
+  Object {
     "filepath": "scss/components/fluid-dropdown/_fluid-dropdown.scss",
     "importPath": "@carbon/styles/scss/components/fluid-dropdown/fluid-dropdown",
     "relativePath": "scss/components/fluid-dropdown/fluid-dropdown",
