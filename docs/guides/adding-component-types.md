@@ -65,8 +65,12 @@ components prop APIs that are included as part of the public API of
 `@carbon/react`.
 
 Internal components, helpers, function, etc. will not initially be typed. These
-internal files/components not included in the public API should be left as `.js`
-and given a jsdoc type annotation of `/** @type any */`
+internal files/components not included in the public API should be left as
+`.js`, given a
+[jsdoc type annotation](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html#providing-type-hints-in-js-via-jsdoc)
+of `/** @type any */`, and
+[errors should be enabled](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html#ts-check)
+by adding `// @ts-check` to the first line in the file.
 
 Other packages, such as `@carbon/icons-react`, `@carbon/elements`, etc will not
 initially be typed.
@@ -91,8 +95,14 @@ the repository. There is an issue tracking curring status of this effort,
 - Fix errors as they appear
 - Do not add types to internal components or functions that are not exported as
   part of the Public API.
-  - Leave internals as `.js` and add a jsdoc type annotation of
-    `/** @type any */`
+
+  - Leave internals as `.js`
+  - Add a
+    [jsdoc type annotation](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html#providing-type-hints-in-js-via-jsdoc)
+    of `/** @type any */`
+  - [Enable errors](https://www.typescriptlang.org/docs/handbook/intro-to-js-ts.html#ts-check)
+    by adding `// @ts-check` to the first line in the file.
+
 - Test your changes - there are a few options here:
   - At the bottom of a file, write a dummy component that uses the component
     that you’re converting to ensure that you can still pass all appropriate
