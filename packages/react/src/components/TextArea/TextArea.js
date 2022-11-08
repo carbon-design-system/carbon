@@ -128,6 +128,7 @@ const TextArea = React.forwardRef(function TextArea(
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
+      readOnly={other.readOnly}
     />
   );
 
@@ -143,7 +144,9 @@ const TextArea = React.forwardRef(function TextArea(
         {counter}
       </div>
       <div
-        className={`${prefix}--text-area__wrapper`}
+        className={classNames(`${prefix}--text-area__wrapper`, {
+          [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+        })}
         data-invalid={invalid || null}>
         {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
@@ -250,6 +253,11 @@ TextArea.propTypes = {
    * Specify the placeholder attribute for the `<textarea>`
    */
   placeholder: PropTypes.string,
+
+  /**
+   * Whether the textarea should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the rows attribute for the `<textarea>`
