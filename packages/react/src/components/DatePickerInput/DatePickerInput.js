@@ -55,6 +55,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const labelClasses = cx(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel,
     [`${prefix}--label--disabled`]: disabled,
+    [`${prefix}--label--readonly`]: rest.readOnly,
   });
   const helperTextClasses = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
@@ -67,24 +68,17 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     [`${prefix}--date-picker--nolabel`]: !labelText,
   });
 
-  const input = invalid ? (
-    <input
-      {...rest}
-      {...datePickerInputProps}
-      disabled={disabled}
-      ref={ref}
-      data-invalid
-      className={inputClasses}
-    />
-  ) : (
-    <input
-      {...rest}
-      {...datePickerInputProps}
-      disabled={disabled}
-      className={inputClasses}
-      ref={ref}
-    />
-  );
+  const inputProps = {
+    ...rest,
+    ...datePickerInputProps,
+    className: inputClasses,
+    disabled,
+    ref,
+  };
+  if (invalid) {
+    inputProps['data-invalid'] = true;
+  }
+  const input = <input {...inputProps} />;
 
   return (
     <div className={containerClasses}>
@@ -95,6 +89,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
       )}
       <div className={wrapperClasses}>
         {input}
+
         <DatePickerIcon
           datePickerType={datePickerType}
           invalid={invalid}
@@ -187,6 +182,11 @@ DatePickerInput.propTypes = {
    * Specify the placeholder text
    */
   placeholder: PropTypes.string,
+
+  /**
+   * whether the DatePicker is to be readOnly
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the size of the Date Picker Input. Currently supports either `sm`, `md`, or `lg` as an option.
