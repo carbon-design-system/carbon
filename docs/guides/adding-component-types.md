@@ -110,8 +110,15 @@ the repository. There is an issue tracking curring status of this effort,
   - Take a storybook example for a component, copy and paste it into the bottom
     of the .tsx file and validate whether or not it accepts the props as you’ve
     defined them
+- Submit a pull request for the changes
+  - Please keep pull requests as small as possible
+  - Avoid adding additional components to a single PR unless necessary
+  - [Link to close the related issue](https://docs.github.com/en/issues/tracking-your-work-with-issues/linking-a-pull-request-to-an-issue#linking-a-pull-request-to-an-issue-using-a-keyword#linking-a-pull-request-to-an-issue-using-a-keyword),
+    e.g. `Closes #12513`
 - Ask questions if you get stuck!
-  - The team is available on slack, discord, on
+  - The team is available on slack
+    [`#carbon-wg-typescript`](https://ibm-studios.slack.com/archives/C03C8VASVED),
+    [discord](https://discord.gg/J7JEUEkTRX), or on
     [the issue itself](https://github.com/carbon-design-system/carbon/issues/12513).
 
 ## FAQ
