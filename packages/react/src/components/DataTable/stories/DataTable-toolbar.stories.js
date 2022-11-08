@@ -271,10 +271,10 @@ export const WithOverflowMenu = () => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
                 <TableCell className="cds--table-column-menu">
-                  <OverflowMenu size="sm" light flipped>
-                    <OverflowMenuItem>Action 1</OverflowMenuItem>
-                    <OverflowMenuItem>Action 2</OverflowMenuItem>
-                    <OverflowMenuItem>Action 3</OverflowMenuItem>
+                  <OverflowMenu size="sm" flipped>
+                    <OverflowMenuItem itemText="Stop app" />
+                    <OverflowMenuItem itemText="Restart app" />
+                    <OverflowMenuItem itemText="Rename app" />
                   </OverflowMenu>
                 </TableCell>
               </TableRow>
@@ -334,9 +334,9 @@ export const Playground = (args) => (
                 ))}
                 <TableCell className="cds--table-column-menu">
                   <OverflowMenu size="sm" flipped>
-                    <OverflowMenuItem>Action 1</OverflowMenuItem>
-                    <OverflowMenuItem>Action 2</OverflowMenuItem>
-                    <OverflowMenuItem>Action 3</OverflowMenuItem>
+                    <OverflowMenuItem itemText="Stop app" />
+                    <OverflowMenuItem itemText="Restart app" />
+                    <OverflowMenuItem itemText="Rename app" />
                   </OverflowMenu>
                 </TableCell>
               </TableRow>
