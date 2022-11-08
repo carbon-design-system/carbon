@@ -4,7 +4,7 @@ import { FlexGrid, Row, Column } from './';
 import mdx from './FlexGrid.mdx';
 
 export default {
-  title: 'Components/FlexGrid',
+  title: 'Elements/FlexGrid',
   component: FlexGrid,
   subcomponents: {
     Row,
