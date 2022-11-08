@@ -343,6 +343,10 @@ const DatePicker = React.forwardRef(function DatePicker(
     calendarRef.current = calendar;
 
     function handleArrowDown(event) {
+      if (match(event, keys.Escape)) {
+        calendar.calendarContainer.classList.remove('open');
+      }
+
       if (match(event, keys.ArrowDown)) {
         const {
           calendarContainer,
@@ -363,6 +367,10 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     function handleOnChange() {
+      if (datePickerType == 'single') {
+        calendar.calendarContainer.classList.remove('open');
+      }
+
       if (start.value !== '') {
         return;
       }
@@ -439,7 +447,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   useEffect(() => {
     if (calendarRef.current && disable) {
-      calendarRef.current.set('disbale', disable);
+      calendarRef.current.set('disable', disable);
     }
   }, [disable]);
 
