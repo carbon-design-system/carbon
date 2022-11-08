@@ -4920,6 +4920,9 @@ Map {
       "open": Object {
         "type": "bool",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "selectedItems": Object {
         "type": "array",
       },
