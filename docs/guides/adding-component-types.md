@@ -41,7 +41,7 @@ By adding TypeScript types to components we anticipate a number of benefits:
   and thorough component API typings provided first-party through
   `@carbon/react` itself.
 - Maintenance of the types themselves will be simplified by not having to go
-  through the DefinetlyTyped contribution process/system.
+  through the DefinitelyTyped contribution process/system.
 
 Despite these benefits, adding TypeScript to the codebase is still a large shift
 for the developer community surrounding the Carbon Design System. Most projects
