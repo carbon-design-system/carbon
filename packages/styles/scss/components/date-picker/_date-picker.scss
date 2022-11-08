@@ -46,6 +46,10 @@
     justify-content: space-between;
   }
 
+  .#{$prefix}--date-picker-container .#{$prefix}--label {
+    display: flex;
+  }
+
   .#{$prefix}--date-picker-input__wrapper {
     position: relative;
     display: flex;

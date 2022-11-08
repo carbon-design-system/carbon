@@ -23,6 +23,7 @@ export {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
+export ContainedList, { ContainedListItem } from './components/ContainedList';
 export ContentSwitcher from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
@@ -205,9 +206,6 @@ export {
 } from './components/UIShell';
 
 // Experimental
-export unstable_ContainedList, {
-  ContainedListItem as unstable_ContainedListItem,
-} from './components/ContainedList';
 export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
   FeatureFlags as unstable_FeatureFlags,
@@ -218,6 +216,8 @@ export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
+export { FluidDatePicker as unstable__FluidDatePicker } from './components/FluidDatePicker';
+export { FluidDatePickerInput as unstable__FluidDatePickerInput } from './components/FluidDatePickerInput';
 export {
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
