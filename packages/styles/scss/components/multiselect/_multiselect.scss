@@ -106,7 +106,6 @@
     visibility: hidden;
   }
 
-  $icon-disabled: $icon-disabled;
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly:hover {
     background-color: transparent;
