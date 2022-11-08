@@ -65,9 +65,6 @@ export default {
     open: {
       table: { disable: true },
     },
-    readOnly: {
-      control: { type: 'boolean' },
-    },
     title: {
       table: { disable: true },
     },
@@ -206,6 +203,9 @@ Playground.argTypes = {
       type: 'text',
     },
     defaultValue: 'To clear selection, press Delete or Backspace,',
+  },
+  readOnly: {
+    control: { type: 'boolean' },
   },
 };
 
