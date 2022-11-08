@@ -1176,6 +1176,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "selectedItem": Object {
         "args": Array [
           Array [
