@@ -895,6 +895,15 @@
         "code",
         "doc"
       ]
+    },
+    {
+      "login": "cgirani",
+      "name": "Claudia Tejos",
+      "avatar_url": "https://avatars.githubusercontent.com/u/22034430?v=4",
+      "profile": "https://github.com/cgirani",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
