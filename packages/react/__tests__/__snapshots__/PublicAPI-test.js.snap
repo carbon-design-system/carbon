@@ -7648,7 +7648,6 @@ Map {
   "TextArea" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "cols": 50,
       "disabled": false,
       "enableCounter": false,
       "helperText": "",

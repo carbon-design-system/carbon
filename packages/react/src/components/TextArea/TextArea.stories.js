@@ -21,7 +21,6 @@ export const Default = () => (
   <TextArea
     labelText="Text Area label"
     helperText="Optional helper text"
-    cols={50}
     rows={4}
     id="text-area-1"
   />
@@ -33,7 +32,6 @@ export const WithLayer = () => {
       <TextArea
         labelText="First layer"
         helperText="Optional helper text"
-        cols={50}
         rows={4}
         id="text-area-1"
       />
@@ -41,7 +39,6 @@ export const WithLayer = () => {
         <TextArea
           labelText="Second layer"
           helperText="Optional helper text"
-          cols={50}
           rows={4}
           id="text-area-1"
         />
@@ -49,7 +46,6 @@ export const WithLayer = () => {
           <TextArea
             labelText="Third layer"
             helperText="Optional helper text"
-            cols={50}
             rows={4}
             id="text-area-1"
           />
@@ -73,7 +69,6 @@ Playground.argTypes = {
     control: {
       type: 'number',
     },
-    defaultValue: 50,
   },
   defaultValue: {
     control: {
