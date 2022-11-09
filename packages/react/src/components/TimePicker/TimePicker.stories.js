@@ -85,7 +85,7 @@ export const WithLayer = () => {
 export const Playground = (args) => {
   return (
     <TimePicker id="time-picker" labelText="Select a time" {...args}>
-      <TimePickerSelect id="time-picker-select-1">
+      <TimePickerSelect id="time-picker-select-1" disabled={args.disabled}>
         <SelectItem value="AM" text="AM" />
         <SelectItem value="PM" text="PM" />
       </TimePickerSelect>
