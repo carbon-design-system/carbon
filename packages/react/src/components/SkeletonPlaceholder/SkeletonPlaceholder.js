@@ -22,7 +22,8 @@ const SkeletonPlaceholder = ({ className, ...other }) => {
 
 SkeletonPlaceholder.propTypes = {
   /**
-   * the class to be applied to the component
+   * Add a custom class to the component
+   * to set the height and width
    */
   className: PropTypes.string,
 };
