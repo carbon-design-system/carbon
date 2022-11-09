@@ -70,6 +70,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
     onMenuChange,
     direction,
     selectedItems: selected,
+    readOnly,
   },
   ref
 ) {
@@ -169,6 +170,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       [`${prefix}--multi-select--selected`]:
         selectedItems && selectedItems.length > 0,
       [`${prefix}--list-box--up`]: direction === 'top',
+      [`${prefix}--multi-select--readonly`]: readOnly,
     }
   );
 
@@ -234,6 +236,24 @@ const MultiSelect = React.forwardRef(function MultiSelect(
       : setIsFocused(evt.type === 'focus' ? true : false);
   };
 
+  const readOnlyEventHandlers = readOnly
+    ? {
+        onClick: (evt) => {
+          // NOTE: does not prevent click
+          evt.preventDefault();
+          // focus on the element as per readonly input behavior
+          evt.target.focus();
+        },
+        onKeyDown: (evt) => {
+          const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+          // This prevents the select from opening for the above keys
+          if (selectAccessKeys.includes(evt.key)) {
+            evt.preventDefault();
+          }
+        },
+      }
+    : {};
+
   return (
     <div className={wrapperClasses}>
       <label className={titleClasses} {...getLabelProps()}>
@@ -252,6 +272,7 @@ const MultiSelect = React.forwardRef(function MultiSelect(
         size={size}
         className={className}
         disabled={disabled}
+        readOnly={readOnly}
         light={light}
         invalid={invalid}
         invalidText={invalidText}
@@ -271,13 +292,15 @@ const MultiSelect = React.forwardRef(function MultiSelect(
           type="button"
           className={`${prefix}--list-box__field`}
           disabled={disabled}
-          aria-disabled={disabled}
+          aria-disabled={disabled || readOnly}
           {...toggleButtonProps}
           ref={mergeRefs(toggleButtonProps.ref, ref)}
-          onKeyDown={onKeyDown}>
+          onKeyDown={onKeyDown}
+          {...readOnlyEventHandlers}>
           {selectedItems.length > 0 && (
             <ListBox.Selection
-              clearSelection={!disabled ? clearSelection : noop}
+              readOnly={readOnly}
+              clearSelection={!disabled && !readOnly ? clearSelection : noop}
               selectionCount={selectedItems.length}
               translateWithId={translateWithId}
               disabled={disabled}
@@ -448,6 +471,11 @@ MultiSelect.propTypes = {
    * Initialize the component with an open(`true`)/closed(`false`) menu.
    */
   open: PropTypes.bool,
+
+  /**
+   * Whether or not the Dropdown is readonly
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * For full control of the selected items
