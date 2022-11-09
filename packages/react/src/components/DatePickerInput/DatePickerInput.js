@@ -8,8 +8,9 @@
 import { Calendar, WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
 
 const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const {
@@ -32,6 +33,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
     ...rest
   } = props;
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const datePickerInputProps = {
     id,
     onChange: (event) => {
@@ -62,9 +64,12 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
   const inputClasses = cx(`${prefix}--date-picker__input`, {
     [`${prefix}--date-picker__input--${size}`]: size,
     [`${prefix}--date-picker__input--invalid`]: invalid,
+    [`${prefix}--date-picker__input--warn`]: warn,
   });
   const containerClasses = cx(`${prefix}--date-picker-container`, {
     [`${prefix}--date-picker--nolabel`]: !labelText,
+    [`${prefix}--date-picker--fluid--invalid`]: isFluid && invalid,
+    [`${prefix}--date-picker--fluid--warn`]: isFluid && warn,
   });
 
   const input = invalid ? (
@@ -95,6 +100,7 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
       )}
       <div className={wrapperClasses}>
         {input}
+        {isFluid && <DatePickerIcon datePickerType={datePickerType} />}
         <DatePickerIcon
           datePickerType={datePickerType}
           invalid={invalid}
@@ -102,9 +108,17 @@ const DatePickerInput = React.forwardRef(function DatePickerInput(props, ref) {
         />
       </div>
       {invalid && (
-        <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+        <>
+          {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
+          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+        </>
       )}
-      {warn && <div className={`${prefix}--form-requirement`}>{warnText}</div>}
+      {warn && (
+        <>
+          {isFluid && <hr className={`${prefix}--date-picker__divider`} />}
+          <div className={`${prefix}--form-requirement`}>{warnText}</div>
+        </>
+      )}
       {helperText && <div className={helperTextClasses}>{helperText}</div>}
     </div>
   );
@@ -211,9 +225,12 @@ DatePickerInput.propTypes = {
 
 function DatePickerIcon({ datePickerType, invalid, warn }) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
 
   if (datePickerType === 'simple' && !invalid && !warn) {
-    return null;
+    if (!isFluid) {
+      return null;
+    }
   }
 
   if (invalid) {
