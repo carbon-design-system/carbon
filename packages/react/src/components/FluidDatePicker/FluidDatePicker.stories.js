@@ -8,6 +8,7 @@
 import React from 'react';
 import FluidDatePicker from '../FluidDatePicker';
 import FluidDatePickerInput from '../FluidDatePickerInput';
+import FluidDatePickerSkeleton from './FluidDatePicker.Skeleton';
 import {
   ToggletipLabel,
   Toggletip,
@@ -80,6 +81,33 @@ export const RangeWithCalendar = () => {
     </div>
   );
 };
+
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidDatePickerSkeleton
+      datePickerType="simple"
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-1"
+    />
+    <br />
+    <br />
+    <FluidDatePickerSkeleton
+      datePickerType="single"
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-1"
+    />
+    <br />
+    <br />
+    <FluidDatePickerSkeleton
+      datePickerType="range"
+      labelText="Label"
+      placeholder="Placeholder text"
+      id="input-1"
+    />
+  </div>
+);
 
 export const Playground = (args) => {
   const { invalid, invalidText, warn, warnText, disabled } = args;
@@ -177,11 +205,6 @@ Playground.argTypes = {
   },
   onOpen: {
     action: 'clicked',
-    table: {
-      disable: true,
-    },
-  },
-  value: {
     table: {
       disable: true,
     },
