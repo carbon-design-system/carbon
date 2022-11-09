@@ -44,7 +44,7 @@ describe('TextArea', () => {
       });
 
       it('should set cols as expected', () => {
-        expect(textarea().props().cols).toEqual(50);
+        expect(textarea().props().style).toEqual({ width: '100%' });
         wrapper.setProps({ cols: 200 });
         expect(textarea().props().cols).toEqual(200);
       });
