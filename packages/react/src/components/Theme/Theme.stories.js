@@ -7,8 +7,8 @@
 
 import './Theme-story.scss';
 import React from 'react';
-import { GlobalTheme, Theme, useTheme } from '../../Theme';
-import { Layer } from '../../Layer';
+import { GlobalTheme, Theme, useTheme } from '../Theme';
+import { Layer } from '../Layer';
 import mdx from './Theme.mdx';
 
 export default {
