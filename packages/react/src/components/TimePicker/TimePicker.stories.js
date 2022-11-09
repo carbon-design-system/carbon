@@ -89,7 +89,7 @@ export const Playground = (args) => {
         <SelectItem value="AM" text="AM" />
         <SelectItem value="PM" text="PM" />
       </TimePickerSelect>
-      <TimePickerSelect id="time-picker-select-2">
+      <TimePickerSelect id="time-picker-select-2" disabled={args.disabled}>
         <SelectItem value="Time zone 1" text="Time zone 1" />
         <SelectItem value="Time zone 2" text="Time zone 2" />
       </TimePickerSelect>
