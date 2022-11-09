@@ -115,6 +115,11 @@ Playground.argTypes = {
       disable: true,
     },
   },
+  onChange: {
+    table: {
+      disable: true,
+    },
+  },
   currentIndex: {
     control: { type: 'number' },
     defaultValue: 0,
