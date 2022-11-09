@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import SkeletonIcon from '../SkeletonIcon';
+import SkeletonIcon from '.';
 
 const propsSkeleton = {
   style: {

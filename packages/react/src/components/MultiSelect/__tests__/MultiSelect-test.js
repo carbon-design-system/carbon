@@ -241,6 +241,20 @@ describe('MultiSelect', () => {
     ).toBeFalsy();
   });
 
+  it('should not be interactive if readonly', () => {
+    const items = generateItems(4, generateGenericItem);
+    const label = 'test-label';
+    const { container } = render(
+      <MultiSelect id="test" readOnly={true} label={label} items={items} />
+    );
+    const labelNode = getByText(container, label);
+    Simulate.click(labelNode);
+
+    expect(
+      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
+    ).toBeFalsy();
+  });
+
   describe('Component API', () => {
     it('should set the default selected items with the `initialSelectedItems` prop', () => {
       const items = generateItems(4, generateGenericItem);
