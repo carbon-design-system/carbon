@@ -34,3 +34,15 @@ export const Default = () => {
     </>
   );
 };
+
+export const Playground = (args) => {
+  return <Bee {...args} />;
+};
+
+Playground.argTypes = {
+  size: {
+    options: ['16', '20', '32'],
+    control: { type: 'select' },
+    defaultValue: 16,
+  },
+};
