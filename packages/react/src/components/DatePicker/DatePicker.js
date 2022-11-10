@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
@@ -18,6 +18,8 @@ import deprecate from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
+import { FormContext } from '../FluidForm';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((_day, index) => {
@@ -189,6 +191,10 @@ const DatePicker = React.forwardRef(function DatePicker(
     disable,
     enable,
     inline,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
     light = false,
     locale = 'en',
     maxDate,
@@ -204,6 +210,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   ref
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const startInputField = useRef(null);
   const endInputField = useRef(null);
   const calendarRef = useRef(null);
@@ -357,6 +364,10 @@ const DatePicker = React.forwardRef(function DatePicker(
     calendarRef.current = calendar;
 
     function handleArrowDown(event) {
+      if (match(event, keys.Escape)) {
+        calendar.calendarContainer.classList.remove('open');
+      }
+
       if (match(event, keys.ArrowDown)) {
         const {
           calendarContainer,
@@ -377,6 +388,10 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
 
     function handleOnChange() {
+      if (datePickerType == 'single') {
+        calendar.calendarContainer.classList.remove('open');
+      }
+
       if (start.value !== '') {
         return;
       }
@@ -455,7 +470,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   useEffect(() => {
     if (calendarRef?.current?.set && disable) {
-      calendarRef.current.set('disbale', disable);
+      calendarRef.current.set('disable', disable);
     }
   }, [disable]);
 
@@ -483,9 +498,37 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
   }, [value, prefix]);
 
+  let fluidError;
+  if (isFluid) {
+    if (invalid) {
+      fluidError = (
+        <>
+          <WarningFilled
+            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
+          />
+          <hr className={`${prefix}--date-picker__divider`} />
+          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+        </>
+      );
+    }
+
+    if (warn && !invalid) {
+      fluidError = (
+        <>
+          <WarningAltFilled
+            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
+          />
+          <hr className={`${prefix}--date-picker__divider`} />
+          <div className={`${prefix}--form-requirement`}>{warnText}</div>
+        </>
+      );
+    }
+  }
+
   return (
     <div className={wrapperClasses} ref={ref} {...rest}>
       <div className={datePickerClasses}>{childrenWithProps}</div>
+      {fluidError}
     </div>
   );
 });
@@ -545,6 +588,16 @@ DatePicker.propTypes = {
    * The flatpickr `inline` option.
    */
   inline: PropTypes.bool,
+
+  /**
+   * Specify whether or not the control is invalid (Fluid only)
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in error state (Fluid Only)
+   */
+  invalidText: PropTypes.node,
 
   /**
    * `true` to use the light version.
@@ -677,6 +730,16 @@ DatePicker.propTypes = {
     PropTypes.object,
     PropTypes.number,
   ]),
+
+  /**
+   * Specify whether the control is currently in warning state (Fluid only)
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state (Fluid only)
+   */
+  warnText: PropTypes.node,
 };
 
 export default DatePicker;
