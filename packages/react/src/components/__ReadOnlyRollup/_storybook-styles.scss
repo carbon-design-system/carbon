@@ -1,0 +1,17 @@
+$block: 'readonly-rollup';
+
+// .#{$block} {
+// }
+
+.#{$block}__table {
+  border-collapse: separate;
+  border-spacing: 4rem 4rem;
+}
+
+// .#{$block}__row {
+//   height: 3rem;
+// }
+
+// .#{$block}__col {
+//   padding-right: 100px;
+// }
