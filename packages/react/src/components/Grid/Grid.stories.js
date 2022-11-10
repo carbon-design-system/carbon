@@ -289,6 +289,12 @@ Playground.argTypes = {
     },
     defaultValue: 'div',
   },
+  children: {
+    control: false,
+  },
+  className: {
+    control: false,
+  },
   fullWidth: {
     control: {
       type: 'boolean',

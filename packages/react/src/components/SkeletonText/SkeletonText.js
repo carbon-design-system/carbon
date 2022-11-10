@@ -83,7 +83,7 @@ SkeletonText.propTypes = {
    */
   heading: PropTypes.bool,
   /**
-   * the number of lines in a paragraph
+   * the number of lines shown if paragraph is true
    */
   lineCount: PropTypes.number,
   /**
