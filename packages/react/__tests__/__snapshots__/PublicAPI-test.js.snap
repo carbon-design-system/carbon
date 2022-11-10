@@ -4929,6 +4929,9 @@ Map {
       "open": Object {
         "type": "bool",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "selectedItems": Object {
         "type": "array",
       },
@@ -9438,6 +9441,23 @@ Map {
   "unstable__FluidDatePickerInput" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
+  },
+  "unstable__FluidDatePickerSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "datePickerType": Object {
+        "args": Array [
+          Array [
+            "simple",
+            "single",
+            "range",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
   },
   "unstable__FluidDropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),

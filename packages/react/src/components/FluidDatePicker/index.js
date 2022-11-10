@@ -7,3 +7,5 @@
 
 export default from './FluidDatePicker';
 export FluidDatePicker from './FluidDatePicker';
+
+export { default as FluidDatePickerSkeleton } from './FluidDatePicker.Skeleton';
