@@ -14,6 +14,13 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import Button from '../Button';
+import {
+  StructuredListWrapper,
+  StructuredListHead,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListCell,
+} from '../StructuredList';
 import mdx from './ComposedModal.mdx';
 
 export default {
@@ -52,6 +59,67 @@ export const Default = () => {
           <SelectItem value="us-south" text="US South" />
           <SelectItem value="us-east" text="US East" />
         </Select>
+      </ModalBody>
+      <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
+    </ComposedModal>
+  );
+};
+
+export const FullWidth = () => {
+  return (
+    <ComposedModal open isFullWidth>
+      <ModalHeader
+        label="An example of a modal with no padding"
+        title="Full Width Modal"
+      />
+      <ModalBody>
+        <StructuredListWrapper>
+          <StructuredListHead>
+            <StructuredListRow head>
+              <StructuredListCell head noWrap>
+                Column A
+              </StructuredListCell>
+              <StructuredListCell head noWrap>
+                Column B
+              </StructuredListCell>
+              <StructuredListCell head noWrap>
+                Column C
+              </StructuredListCell>
+            </StructuredListRow>
+          </StructuredListHead>
+          <StructuredListBody>
+            <StructuredListRow>
+              <StructuredListCell noWrap>Row 1</StructuredListCell>
+              <StructuredListCell>Row 1</StructuredListCell>
+              <StructuredListCell>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+                Pellentesque vulputate nisl a porttitor interdum.
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell noWrap>Row 2</StructuredListCell>
+              <StructuredListCell>Row 2</StructuredListCell>
+              <StructuredListCell>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+                Pellentesque vulputate nisl a porttitor interdum.
+              </StructuredListCell>
+            </StructuredListRow>
+            <StructuredListRow>
+              <StructuredListCell noWrap>Row 3</StructuredListCell>
+              <StructuredListCell>Row 3</StructuredListCell>
+              <StructuredListCell>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
+                dui magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+                posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+                Pellentesque vulputate nisl a porttitor interdum.
+              </StructuredListCell>
+            </StructuredListRow>
+          </StructuredListBody>
+        </StructuredListWrapper>
       </ModalBody>
       <ModalFooter primaryButtonText="Add" secondaryButtonText="Cancel" />
     </ComposedModal>
