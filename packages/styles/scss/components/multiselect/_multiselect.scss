@@ -106,7 +106,6 @@
     visibility: hidden;
   }
 
-  $icon-readonly: $icon-disabled;
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly:hover {
     background-color: transparent;
@@ -115,16 +114,16 @@
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
     .#{$prefix}--list-box__menu-icon
     svg {
-    fill: $icon-readonly;
+    fill: $icon-disabled;
   }
 
-  $icon-readonly: $icon-disabled;
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
     .#{$prefix}--tag--filter,
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
     .#{$prefix}--tag__close-icon:hover {
     background-color: transparent;
     color: $text-primary;
+    cursor: default;
   }
 
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
@@ -135,6 +134,13 @@
   .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
     .#{$prefix}--tag--filter
     svg {
-    fill: $icon-readonly;
+    fill: $icon-disabled;
+  }
+
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--readonly
+    .#{$prefix}--list-box__menu-icon {
+    cursor: default;
   }
 }
