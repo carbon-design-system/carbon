@@ -15,6 +15,13 @@ export default {
   subcomponents: {
     TextAreaSkeleton,
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => (
@@ -61,9 +68,7 @@ export const Playground = (args) => <TextArea {...args} id="text-area-1" />;
 
 Playground.argTypes = {
   className: {
-    control: {
-      type: 'text',
-    },
+    control: false,
   },
   cols: {
     control: {
@@ -71,11 +76,6 @@ Playground.argTypes = {
     },
   },
   defaultValue: {
-    control: {
-      type: 'text',
-    },
-  },
-  value: {
     control: {
       type: 'text',
     },
@@ -104,9 +104,7 @@ Playground.argTypes = {
     defaultValue: false,
   },
   id: {
-    control: {
-      type: 'text',
-    },
+    control: false,
   },
   invalid: {
     control: {
@@ -118,22 +116,35 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
+    defaultValue: '',
   },
   labelText: {
     control: {
       type: 'text',
     },
   },
-  light: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   maxCount: {
     control: {
       type: 'number',
     },
+  },
+  placeholder: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
+  },
+  rows: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 4,
+  },
+  value: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: '',
   },
 };
 

@@ -277,4 +277,65 @@
     + .#{$prefix}--date-picker__icon {
     top: rem(80px);
   }
+
+  // Skeleton
+  .#{$prefix}--date-picker--fluid__skeleton {
+    height: rem(64px);
+    border-bottom: 1px solid $skeleton-element;
+    background: $skeleton-background;
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton--container {
+    position: relative;
+    width: 100%;
+    height: rem(64px);
+    padding: rem(13px) rem(40px) rem(13px) $spacing-05;
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton .#{$prefix}--skeleton {
+    height: 1rem;
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton .#{$prefix}--label {
+    margin-bottom: rem(4px);
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton .#{$prefix}--text-input {
+    width: 80%;
+    height: rem(18px);
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton--container
+    .#{$prefix}--date-picker__icon {
+    top: auto;
+    bottom: rem(2px);
+  }
+
+  // Range skeleton
+  .#{$prefix}--date-picker--fluid__skeleton--range {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton--range
+    .#{$prefix}--date-picker--fluid__skeleton--container {
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton--range
+    .#{$prefix}--date-picker--fluid__skeleton--container:first-of-type {
+    border-right: 1px solid $skeleton-element;
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton--range .#{$prefix}--text-input {
+    width: 100%;
+  }
+
+  .#{$prefix}--date-picker--fluid__skeleton--range
+    .#{$prefix}--date-picker--fluid__skeleton--container
+    .#{$prefix}--date-picker__icon {
+    bottom: rem(5px);
+  }
 }
