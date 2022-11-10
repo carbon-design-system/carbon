@@ -6,9 +6,9 @@
  */
 
 import React, { useState } from 'react';
-import { SliderSkeleton } from '../../Slider';
-import Slider from '../Slider';
-import { Layer } from '../../Layer';
+import { SliderSkeleton } from '.';
+import Slider from './Slider';
+import { Layer } from '../Layer';
 import mdx from './Slider.mdx';
 
 export default {
@@ -17,48 +17,6 @@ export default {
   subcomponents: {
     SliderSkeleton,
   },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-    children: {
-      table: {
-        disable: true,
-      },
-    },
-    disabled: {
-      control: { type: 'boolean' },
-    },
-    labelText: {
-      control: { type: 'string' },
-      defaultValue: 'Slider (must be an increment of 5)',
-    },
-    min: {
-      control: { type: 'number' },
-      defaultValue: 0,
-    },
-    max: {
-      control: { type: 'number' },
-      defaultValue: 100,
-    },
-    required: {
-      control: { type: 'boolean' },
-    },
-    step: {
-      control: { type: 'number' },
-      defaultValue: 5,
-    },
-    stepMultiplier: {
-      control: { type: 'number' },
-      defaultValue: 5,
-    },
-    value: {
-      control: { type: 'number' },
-      defaultValue: 50,
-    },
-  },
   parameters: {
     docs: {
       page: mdx,
@@ -66,9 +24,8 @@ export default {
   },
 };
 
-export const Default = (args) => (
+export const Default = () => (
   <Slider
-    {...args}
     labelText="Slider Label"
     value={50}
     min={0}
@@ -76,13 +33,6 @@ export const Default = (args) => (
     step={1}
     stepMultiplier={10}
     noValidate
-  />
-);
-
-export const Playground = (args) => (
-  <Slider
-    {...args}
-    labelText={`Slider (must be an increment of ${args.step})`}
   />
 );
 
@@ -193,3 +143,84 @@ export const ControlledSliderWithLayer = () => {
 };
 
 export const Skeleton = () => <SliderSkeleton />;
+
+export const Playground = (args) => (
+  <Slider
+    {...args}
+    labelText={`Slider (must be an increment of ${args.step})`}
+  />
+);
+
+Playground.argTypes = {
+  light: {
+    table: {
+      disable: true,
+    },
+  },
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  formatLabel: {
+    table: {
+      disable: true,
+    },
+  },
+  labelText: {
+    table: {
+      disable: true,
+    },
+  },
+  min: {
+    control: { type: 'number' },
+    defaultValue: 0,
+  },
+  max: {
+    control: { type: 'number' },
+    defaultValue: 100,
+  },
+  required: {
+    control: { type: 'boolean' },
+  },
+  step: {
+    control: { type: 'number' },
+    defaultValue: 5,
+  },
+  stepMultiplier: {
+    control: { type: 'number' },
+    defaultValue: 5,
+  },
+  value: {
+    control: { type: 'number' },
+    defaultValue: 50,
+  },
+  onBlur: {
+    table: {
+      disable: true,
+    },
+  },
+  onChange: {
+    table: {
+      disable: true,
+    },
+  },
+  onInputKeyUp: {
+    table: {
+      disable: true,
+    },
+  },
+  onRelease: {
+    table: {
+      disable: true,
+    },
+  },
+};
