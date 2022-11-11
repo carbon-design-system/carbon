@@ -111,6 +111,12 @@
     max-height: 100%;
   }
 
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
   .#{$prefix}--select--fluid .#{$prefix}--form-requirement {
     padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
     margin: 0;

@@ -62,6 +62,50 @@ export const Default = () => (
   </div>
 );
 
+export const Invalid = () => (
+  <>
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker
+        id="time-picker-1"
+        labelText="Time"
+        placeholder="hh:mm"
+        invalid
+        invalidText="Error message goes here">
+        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+        <FluidTimePickerSelect id="select-2" labelText="Timezone">
+          <SelectItem value="et" text="Eastern Time (ET)" />
+          <SelectItem value="ct" text="Central Time (CT)" />
+          <SelectItem value="mt" text="Mountain Time (MT)" />
+          <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+    <br />
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker id="time-picker-1" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+        <FluidTimePickerSelect
+          id="select-2"
+          labelText="Timezone"
+          invalid
+          invalidText="Error message goes here">
+          <SelectItem value="et" text="Eastern Time (ET)" />
+          <SelectItem value="ct" text="Central Time (CT)" />
+          <SelectItem value="mt" text="Mountain Time (MT)" />
+          <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+  </>
+);
+
 // export const Skeleton = () => (
 //   <div style={{ width: '300px' }}>
 //     <FluidTimePickerSkeleton />

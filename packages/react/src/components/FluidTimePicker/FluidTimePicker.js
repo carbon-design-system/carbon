@@ -10,29 +10,43 @@ import React from 'react';
 import classnames from 'classnames';
 import FluidTextInput from '../FluidTextInput';
 import { usePrefix } from '../../internal/usePrefix';
-import { FormContext } from '../FluidForm/FormContext';
 
 const FluidTimePicker = React.forwardRef(function FluidTimePicker(
-  { className, children, ...other },
+  { className, children, invalid, invalidText, warn, warnText, ...other },
   ref
 ) {
   const prefix = usePrefix();
   const classNames = classnames(className, {
     [`${prefix}--time-picker--fluid`]: true,
     [`${prefix}--time-picker--equal-width`]: children.length !== 2,
+    [`${prefix}--time-picker--fluid--invalid`]: invalid,
+    [`${prefix}--time-picker--fluid--warning`]: warn,
   });
 
-  console.log(typeof children);
+  const errorText = () => {
+    if (invalid) {
+      return invalidText;
+    }
+    if (warn) {
+      return warnText;
+    }
+  };
+
+  const error = invalid || warn;
 
   return (
-    <FormContext.Provider value={{ isFluid: true }}>
-      <div className={classNames}>
+    <div className={classNames}>
+      <div className={`${prefix}--time-picker--fluid__wrapper`}>
         <div className={`${prefix}--time-picker__input`}>
           <FluidTextInput ref={ref} {...other} />
         </div>
         {children}
       </div>
-    </FormContext.Provider>
+      {error && <hr className={`${prefix}--text-input__divider`} />}
+      {error && (
+        <div className={`${prefix}--form-requirement`}>{errorText()}</div>
+      )}
+    </div>
   );
 });
 
@@ -43,9 +57,14 @@ FluidTimePicker.propTypes = {
   children: PropTypes.node,
 
   /**
-   * Specify an optional className to be applied to the outer FluidForm wrapper
+   * Specify an optional className to be applied to the outer FluidTimePicker wrapper
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * Specify whether or not the control is invalid

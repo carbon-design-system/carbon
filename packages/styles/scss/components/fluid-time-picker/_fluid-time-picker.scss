@@ -18,16 +18,40 @@
 @use '../fluid-select';
 
 @mixin fluid-time-picker {
-  .#{$prefix}--time-picker--fluid {
+  .#{$prefix}--time-picker--fluid .#{$prefix}--time-picker--fluid__wrapper {
     display: flex;
   }
 
-  .#{$prefix}--time-picker--fluid > *:nth-child(1),
-  .#{$prefix}--time-picker--fluid > *:nth-child(2) {
+  .#{$prefix}--time-picker--fluid__wrapper > *:nth-child(1),
+  .#{$prefix}--time-picker--fluid__wrapper > *:nth-child(2) {
     flex-basis: 25%;
   }
 
-  .#{$prefix}--time-picker--fluid.#{$prefix}--time-picker--equal-width > * {
+  .#{$prefix}--time-picker--equal-width
+    .#{$prefix}--time-picker--fluid__wrapper
+    > * {
     flex-basis: 50%;
+  }
+
+  // Invalid + Warn states
+  .#{$prefix}--time-picker--fluid .#{$prefix}--form-requirement {
+    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    margin: 0;
+    background: $field;
+  }
+
+  .#{$prefix}--time-picker--fluid--invalid {
+    border: 2px solid $support-error;
+  }
+
+  .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--form-requirement,
+  .#{$prefix}--time-picker--fluid--warn .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+  }
+
+  .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--form-requirement {
+    color: $text-error;
   }
 }
