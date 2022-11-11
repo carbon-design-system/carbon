@@ -13,10 +13,10 @@ import Select from '../Select';
 import SelectItem from '../SelectItem';
 import Slider from '../Slider';
 import TextArea from '../TextArea';
-// import TextInput from '../TextInput';
+import TextInput from '../TextInput';
 import TimePicker from '../TimePicker';
 import TimePickerSelect from '../TimePickerSelect';
-// import Toggle from '../Toggle/Toggle';
+import Toggle from '../Toggle/Toggle';
 
 import { dropItemToString, dropdownItems } from './storybook-shared';
 
@@ -30,7 +30,7 @@ export const WrappedCheckboxes = ({ id, ...rest }) => (
       defaultChecked
       {...rest}
     />
-    <Checkbox labelText="Checkbox label" id={`${id}unchecked`} {...rest} />
+    <Checkbox labelText="Checkbox label" id={`${id}-unchecked`} {...rest} />
   </fieldset>
 );
 
@@ -140,11 +140,11 @@ export const WrappedDropdown = ({
   );
 };
 
-export const WrappedComboBox = ({ id, ComboBoxValue, disabled, readOnly }) => {
-  const [selected, setSelected] = useState(ComboBoxValue);
+export const WrappedComboBox = ({ id, comboBoxValue, disabled, readOnly }) => {
+  const [selected, setSelected] = useState(comboBoxValue);
   useEffect(() => {
-    setSelected(ComboBoxValue);
-  }, [ComboBoxValue]);
+    setSelected(comboBoxValue);
+  }, [comboBoxValue]);
   return (
     <ComboBox
       id={`combo-box-${id}`}
@@ -258,7 +258,13 @@ export const WrappedRadioButton = ({
   );
 };
 
-export const WrappedSelect = ({ id, selectValue, disabled, readOnly }) => {
+export const WrappedSelect = ({
+  id,
+  selectValue,
+  disabled,
+  readOnly,
+  inline,
+}) => {
   const [selected, setSelected] = useState(selectValue);
   useEffect(() => {
     setSelected(selectValue?.id || undefined);
@@ -270,7 +276,8 @@ export const WrappedSelect = ({ id, selectValue, disabled, readOnly }) => {
       value={selected}
       onChange={(event) => setSelected(event.target.value)}
       disabled={typeof disabled === 'boolean' ? disabled : undefined}
-      readOnly={typeof readOnly === 'boolean' ? readOnly : undefined}>
+      readOnly={typeof readOnly === 'boolean' ? readOnly : undefined}
+      inline={inline}>
       {dropdownItems.map((item) => (
         <SelectItem key={item.id} text={item.text} value={item.id} />
       ))}
@@ -311,6 +318,55 @@ export const WrappedTextArea = ({ id, textAreaValue, disabled, readOnly }) => {
       onChange={(event) => setValue(event.target.value)}
       disabled={typeof disabled === 'boolean' ? disabled : undefined}
       readOnly={typeof readOnly === 'boolean' ? readOnly : undefined}
+    />
+  );
+};
+
+export const WrappedTextInput = ({
+  id,
+  textInputValue,
+  disabled,
+  readOnly,
+}) => {
+  const [value, setValue] = useState(textInputValue);
+  useEffect(() => {
+    setValue(textInputValue);
+  }, [textInputValue]);
+  return (
+    <TextInput
+      id={`text-input-${id}`}
+      labelText="Text input label"
+      value={value}
+      onChange={(event) => setValue(event.target.value)}
+      disabled={typeof disabled === 'boolean' ? disabled : undefined}
+      readOnly={typeof readOnly === 'boolean' ? readOnly : undefined}
+    />
+  );
+};
+
+export const WrappedToggle = ({
+  id,
+  toggleValue,
+  disabled,
+  readOnly,
+  size,
+}) => {
+  const [value, setValue] = useState(toggleValue);
+  useEffect(() => {
+    setValue(toggleValue);
+  }, [toggleValue]);
+  return (
+    <Toggle
+      id={`toggle-${id}`}
+      labelText="Toggle label"
+      toggled={value}
+      onToggle={(value) => {
+        console.log(id, value);
+        setValue(value);
+      }}
+      disabled={typeof disabled === 'boolean' ? disabled : undefined}
+      readOnly={typeof readOnly === 'boolean' ? readOnly : undefined}
+      size={size}
     />
   );
 };

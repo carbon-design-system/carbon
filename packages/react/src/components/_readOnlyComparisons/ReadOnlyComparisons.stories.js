@@ -20,9 +20,9 @@ import {
   WrappedSelect,
   WrappedSlider,
   WrappedTextArea,
-  // WrappedTextInput,
+  WrappedTextInput,
   WrappedTimePicker,
-  // WrappedToggle,
+  WrappedToggle,
 } from './storybook-wrappers';
 
 import {
@@ -50,352 +50,286 @@ const headerData = [
   },
 ];
 
+const wrappedThings = (id, storyName, fComponent) => {
+  return {
+    id,
+    component: storyName,
+    Enabled: fComponent('enabled', false, false),
+    Disabled: fComponent('disabled', true, false),
+    Readonly: fComponent('readonly', false, true),
+  };
+};
+
 const rowData = [
-  {
-    id: 'checkboxes',
-    component: 'Checkboxes',
-    Enabled: () => <WrappedCheckboxes id="enabled" />,
-    Disabled: () => <WrappedCheckboxes id="disabled" disabled />,
-    Readonly: () => <WrappedCheckboxes id="read-only" readOnly />,
-  },
+  wrappedThings('checkboxes', 'Checkboxes', (id, disabled, readOnly) => () => (
+    <WrappedCheckboxes {...{ id, disabled, readOnly }} />
+  )),
 
-  {
-    id: 'Date Picker Simple',
-    component: 'Date Picker Simple',
-    Enabled: ({ datePickerSimple }) => (
-      <WrappedDatePicker
-        id="enabled-simple"
-        type="simple"
-        datePickerValue={datePickerSimple}
-      />
-    ),
-    Disabled: ({ datePickerSimple }) => (
-      <WrappedDatePicker
-        id="disabled-simple"
-        type="simple"
-        datePickerValue={datePickerSimple}
-        disabled
-      />
-    ),
-    Readonly: ({ datePickerSimple }) => (
-      <WrappedDatePicker
-        id="readonly-simple"
-        type="simple"
-        datePickerValue={datePickerSimple}
-        readOnly
-      />
-    ),
-  },
+  wrappedThings(
+    'Date Picker Simple',
+    'Date Picker Simple',
+    (id, disabled, readOnly) =>
+      ({ datePickerSimple }) =>
+        (
+          <WrappedDatePicker
+            {...{ id, disabled, readOnly }}
+            datePickerValue={datePickerSimple}
+          />
+        )
+  ),
 
-  {
-    id: 'Date Picker Single',
-    component: 'Date Picker Single',
-    Enabled: ({ datePickerSingle }) => (
-      <WrappedDatePicker
-        id="enabled-single"
-        type="single"
-        datePickerValue={datePickerSingle}
-      />
-    ),
-    Disabled: ({ datePickerSingle }) => (
-      <WrappedDatePicker
-        id="disabled-single"
-        type="single"
-        datePickerValue={datePickerSingle}
-        disabled
-      />
-    ),
-    Readonly: ({ datePickerSingle }) => (
-      <WrappedDatePicker
-        id="readonly-single"
-        type="single"
-        datePickerValue={datePickerSingle}
-        readOnly
-      />
-    ),
-  },
+  wrappedThings(
+    'Date Picker Single',
+    'Date Picker Single',
+    (id, disabled, readOnly) =>
+      ({ datePickerSingle }) => {
+        return (
+          <WrappedDatePicker
+            {...{ id, disabled, readOnly }}
+            datePickerValue={datePickerSingle}
+            type="single"
+          />
+        );
+      }
+  ),
 
-  {
-    id: ' Date Picker Range',
-    component: ' Date Picker Range',
-    Enabled: ({ datePickerRangeStart, datePickerRangeEnd }) => (
-      <WrappedDatePicker
-        id="enabled-range"
-        type="range"
-        datePickerValue={[datePickerRangeStart, datePickerRangeEnd]}
-      />
-    ),
-    Disabled: ({ datePickerRangeStart, datePickerRangeEnd }) => (
-      <WrappedDatePicker
-        id="disabled-range"
-        type="range"
-        datePickerValue={[datePickerRangeStart, datePickerRangeEnd]}
-        disabled
-      />
-    ),
-    Readonly: ({ datePickerRangeStart, datePickerRangeEnd }) => (
-      <WrappedDatePicker
-        id="readonly-range"
-        type="range"
-        datePickerValue={[datePickerRangeStart, datePickerRangeEnd]}
-        readOnly
-      />
-    ),
-  },
+  wrappedThings(
+    'Date Picker Range',
+    'Date Picker Range',
+    (id, disabled, readOnly) =>
+      ({ datePickerRangeStart, datePickerRangeEnd }) => {
+        return (
+          <WrappedDatePicker
+            {...{ id, disabled, readOnly }}
+            datePickerValue={[datePickerRangeStart, datePickerRangeEnd]}
+            type="range"
+          />
+        );
+      }
+  ),
 
-  {
-    id: 'Time Picker',
-    component: 'Time Picker',
-    Enabled: ({ time, timeAMPM, timeZone }) => (
-      <WrappedTimePicker
-        id="enabled-time"
-        time={time}
-        timeAMPM={timeAMPM}
-        timeZone={timeZone}
-      />
-    ),
-    Disabled: ({ time, timeAMPM, timeZone }) => (
-      <WrappedTimePicker
-        id="disabled-time"
-        time={time}
-        timeAMPM={timeAMPM}
-        timeZone={timeZone}
-        disabled
-      />
-    ),
-    Readonly: ({ time, timeAMPM, timeZone }) => (
-      <WrappedTimePicker
-        id="readonly-time"
-        time={time}
-        timeAMPM={timeAMPM}
-        timeZone={timeZone}
-        readOnly
-      />
-    ),
-  },
+  wrappedThings(
+    'Time Picker',
+    'Time Picker',
+    (id, disabled, readOnly) =>
+      ({ time, timeAMPM, timeZone }) => {
+        return (
+          <WrappedTimePicker
+            {...{ id, disabled, readOnly, time, timeAMPM, timeZone }}
+          />
+        );
+      }
+  ),
 
-  {
-    id: 'Dropdown',
-    component: 'Dropdown',
-    Enabled: ({ dropdownValue }) => (
-      <WrappedDropdown id="enabled" dropdownValue={dropdownValue} />
-    ),
-    Disabled: ({ dropdownValue }) => (
-      <WrappedDropdown id="disabled" dropdownValue={dropdownValue} disabled />
-    ),
-    Readonly: ({ dropdownValue }) => (
-      <WrappedDropdown id="read-only" dropdownValue={dropdownValue} readOnly />
-    ),
-  },
+  wrappedThings(
+    'Dropdown',
+    'Dropdown',
+    (id, disabled, readOnly) =>
+      ({ dropdownValue }) => {
+        return (
+          <WrappedDropdown
+            {...{ id, disabled, readOnly }}
+            dropdownValue={dropdownValue}
+          />
+        );
+      }
+  ),
 
-  {
-    id: 'Dropdown-inline',
-    component: 'Dropdown inline',
-    Enabled: ({ dropdownValueInline }) => (
-      <WrappedDropdown
-        id="enabled"
-        dropdownValue={dropdownValueInline}
-        inline
-      />
-    ),
-    Disabled: ({ dropdownValueInline }) => (
-      <WrappedDropdown
-        id="disabled"
-        dropdownValue={dropdownValueInline}
-        disabled
-        inline
-      />
-    ),
-    Readonly: ({ dropdownValueInline }) => (
-      <WrappedDropdown
-        id="read-only"
-        dropdownValue={dropdownValueInline}
-        readOnly
-        inline
-      />
-    ),
-  },
+  wrappedThings(
+    'Dropdown-Inline',
+    'Dropdown inline',
+    (id, disabled, readOnly) =>
+      ({ dropdownValue }) => {
+        return (
+          <WrappedDropdown
+            {...{ id, disabled, readOnly }}
+            dropdownValue={dropdownValue}
+            inline
+          />
+        );
+      }
+  ),
 
-  {
-    id: 'ComboBox',
-    component: 'ComboBox',
-    Enabled: ({ ComboBoxValue }) => (
-      <WrappedComboBox ComboBoxValue={ComboBoxValue} />
-    ),
-    Disabled: ({ ComboBoxValue }) => (
-      <WrappedComboBox ComboBoxValue={ComboBoxValue} disabled />
-    ),
-    Readonly: ({ ComboBoxValue }) => (
-      <WrappedComboBox ComboBoxValue={ComboBoxValue} readOnly />
-    ),
-  },
+  wrappedThings(
+    'ComboBox',
+    'ComboBox',
+    (id, disabled, readOnly) =>
+      ({ comboBoxValue }) =>
+        (
+          <WrappedComboBox
+            {...{ id, disabled, readOnly }}
+            comboBoxValue={comboBoxValue}
+          />
+        )
+  ),
 
-  {
-    id: 'MultiSelect',
-    component: 'MultiSelect',
-    Enabled: ({ multiSelectValue }) => (
-      <WrappedMultiSelect id="enabled" multiSelectValue={multiSelectValue} />
-    ),
-    Disabled: ({ multiSelectValue }) => (
-      <WrappedMultiSelect
-        id="disabled"
-        multiSelectValue={multiSelectValue}
-        disabled
-      />
-    ),
-    Readonly: ({ multiSelectValue }) => (
-      <WrappedMultiSelect
-        id="read-only"
-        multiSelectValue={multiSelectValue}
-        readOnly
-      />
-    ),
-  },
+  wrappedThings(
+    'MultiSelect',
+    'MultiSelect',
+    (id, disabled, readOnly) =>
+      ({ multiSelectValue }) =>
+        (
+          <WrappedMultiSelect
+            {...{ id, disabled, readOnly }}
+            multiSelectValue={multiSelectValue}
+          />
+        )
+  ),
 
-  {
-    id: 'MultiSelect-inline',
-    component: 'MultiSelect inline',
-    Enabled: ({ multiSelectValue }) => (
-      <WrappedMultiSelect
-        id="enabled-inline"
-        multiSelectValue={multiSelectValue}
-        inline
-      />
-    ),
-    Disabled: ({ multiSelectValue }) => (
-      <WrappedMultiSelect
-        id="disabled-inline"
-        multiSelectValue={multiSelectValue}
-        inline
-        disabled
-      />
-    ),
-    Readonly: ({ multiSelectValue }) => (
-      <WrappedMultiSelect
-        id="read-only-inline"
-        multiSelectValue={multiSelectValue}
-        inline
-        readOnly
-      />
-    ),
-  },
+  wrappedThings(
+    'MultiSelect-Inline',
+    'MultiSelect inline',
+    (id, disabled, readOnly) =>
+      ({ multiSelectValue }) =>
+        (
+          <WrappedMultiSelect
+            {...{ id, disabled, readOnly }}
+            multiSelectValue={multiSelectValue}
+            inline
+          />
+        )
+  ),
 
-  {
-    id: 'NumberInput',
-    component: 'NumberInput',
-    Enabled: ({ numberInputValue }) => (
-      <WrappedNumberInput id="enabled" numberInputValue={numberInputValue} />
-    ),
-    Disabled: ({ numberInputValue }) => (
-      <WrappedNumberInput
-        id="disabled"
-        numberInputValue={numberInputValue}
-        disabled
-      />
-    ),
-    Readonly: ({ numberInputValue }) => (
-      <WrappedNumberInput
-        id="read-only"
-        numberInputValue={numberInputValue}
-        readOnly
-      />
-    ),
-  },
+  wrappedThings(
+    'NumberInput',
+    'NumberInput',
+    (id, disabled, readOnly) =>
+      ({ numberInputValue }) =>
+        (
+          <WrappedNumberInput
+            {...{ id, disabled, readOnly }}
+            numberInputValue={numberInputValue}
+          />
+        )
+  ),
 
-  {
-    id: 'RadioButton',
-    component: 'RadioButton',
-    Enabled: ({ radioButtonValue }) => (
-      <WrappedRadioButton radioButtonValue={radioButtonValue} group="enabled" />
-    ),
-    Disabled: ({ radioButtonValue }) => (
-      <WrappedRadioButton
-        radioButtonValue={radioButtonValue}
-        disabled
-        group="disabled"
-      />
-    ),
-    Readonly: ({ radioButtonValue }) => (
-      <WrappedRadioButton
-        radioButtonValue={radioButtonValue}
-        readOnly
-        group="read-only"
-      />
-    ),
-  },
+  wrappedThings(
+    'RadioButton',
+    'RadioButton',
+    (id, disabled, readOnly) =>
+      ({ radioButtonValue }) =>
+        (
+          <WrappedRadioButton
+            {...{ id, disabled, readOnly }}
+            radioButtonValue={radioButtonValue}
+            group={`${id}`}
+          />
+        )
+  ),
 
-  {
-    id: 'RadioButton-vertical',
-    component: 'RadioButton vertical',
-    Enabled: ({ radioButtonValue }) => (
-      <WrappedRadioButton
-        radioButtonValue={radioButtonValue}
-        group="enabled-vertical"
-        orientation="vertical"
-      />
-    ),
-    Disabled: ({ radioButtonValue }) => (
-      <WrappedRadioButton
-        radioButtonValue={radioButtonValue}
-        disabled
-        group="disabled-vertical"
-        orientation="vertical"
-      />
-    ),
-    Readonly: ({ radioButtonValue }) => (
-      <WrappedRadioButton
-        radioButtonValue={radioButtonValue}
-        readOnly
-        group="readonly-vertical"
-        orientation="vertical"
-      />
-    ),
-  },
+  wrappedThings(
+    'RadioButton-Vertical',
+    'RadioButton vertical',
+    (id, disabled, readOnly) =>
+      ({ radioButtonValue }) =>
+        (
+          <WrappedRadioButton
+            {...{ id, disabled, readOnly }}
+            radioButtonValue={radioButtonValue}
+            group={`${id}-vertical`}
+            orientation="vertical"
+          />
+        )
+  ),
 
-  {
-    id: 'Select',
-    component: 'Select',
-    Enabled: ({ selectValue }) => (
-      <WrappedSelect id="enabled" selectValue={selectValue} />
-    ),
-    Disabled: ({ selectValue }) => (
-      <WrappedSelect id="disabled" selectValue={selectValue} disabled />
-    ),
-    Readonly: ({ selectValue }) => (
-      <WrappedSelect id="read-only" selectValue={selectValue} readOnly />
-    ),
-  },
+  wrappedThings(
+    'Select',
+    'Select',
+    (id, disabled, readOnly) =>
+      ({ selectValue }) =>
+        (
+          <WrappedSelect
+            {...{ id, disabled, readOnly }}
+            selectValue={selectValue}
+          />
+        )
+  ),
 
-  {
-    id: 'Slider',
-    component: 'Slider',
-    Enabled: ({ sliderValue }) => (
-      <WrappedSlider id="enabled" sliderValue={sliderValue} />
-    ),
-    Disabled: ({ sliderValue }) => (
-      <WrappedSlider id="disabled" sliderValue={sliderValue} disabled />
-    ),
-    Readonly: ({ sliderValue }) => (
-      <WrappedSlider id="read-only" sliderValue={sliderValue} readOnly />
-    ),
-  },
+  wrappedThings(
+    'Select-Inline',
+    'Select inline',
+    (id, disabled, readOnly) =>
+      ({ selectValue }) =>
+        (
+          <WrappedSelect
+            {...{ id, disabled, readOnly }}
+            selectValue={selectValue}
+            inline
+          />
+        )
+  ),
 
-  {
-    id: 'TextArea',
-    component: 'TextArea',
-    Enabled: ({ textAreaValue }) => (
-      <WrappedTextArea id="enabled" textAreaValue={textAreaValue} />
-    ),
-    Disabled: ({ textAreaValue }) => (
-      <WrappedTextArea id="disabled" textAreaValue={textAreaValue} disabled />
-    ),
-    Readonly: ({ textAreaValue }) => (
-      <WrappedTextArea id="read-only" textAreaValue={textAreaValue} readOnly />
-    ),
-  },
+  wrappedThings(
+    'Slider',
+    'Slider',
+    (id, disabled, readOnly) =>
+      ({ sliderValue }) =>
+        (
+          <WrappedSlider
+            {...{ id, disabled, readOnly }}
+            sliderValue={sliderValue}
+          />
+        )
+  ),
+
+  wrappedThings(
+    'TextArea',
+    'TextArea',
+    (id, disabled, readOnly) =>
+      ({ textAreaValue }) =>
+        (
+          <WrappedTextArea
+            {...{ id, disabled, readOnly }}
+            textAreaValue={textAreaValue}
+          />
+        )
+  ),
+
+  wrappedThings(
+    'TextInput',
+    'TextInput',
+    (id, disabled, readOnly) =>
+      ({ textInputValue }) =>
+        (
+          <WrappedTextInput
+            {...{ id, disabled, readOnly }}
+            textInputValue={textInputValue}
+          />
+        )
+  ),
+
+  wrappedThings(
+    'Toggle',
+    'Toggle',
+    (id, disabled, readOnly) =>
+      ({ toggleValue }) => {
+        return (
+          <WrappedToggle
+            {...{ id, disabled, readOnly }}
+            toggleValue={toggleValue}
+          />
+        );
+      }
+  ),
+
+  wrappedThings(
+    'Toggle-small',
+    'Toggle small',
+    (id, disabled, readOnly) =>
+      ({ toggleValue }) => {
+        return (
+          <WrappedToggle
+            {...{ disabled, readOnly }}
+            id={`${id}-small`}
+            toggleValue={toggleValue}
+            size="sm"
+          />
+        );
+      }
+  ),
 ];
 
-const ReadOnlyComparison = ({ filter, ...args }) => (
+const ReadOnlyComparisons = ({ filter, ...args }) => (
   <div>
     <table className={`${blockClass}__table`}>
       <thead>
@@ -433,8 +367,8 @@ const ReadOnlyComparison = ({ filter, ...args }) => (
 
 export default {
   parameters: styles,
-  title: 'Experimental/ReadOnlyComparison',
-  component: ReadOnlyComparison,
+  title: 'Experimental/ReadOnlyComparisons',
+  component: ReadOnlyComparisons,
   argTypes: {
     radioButtonValue: {
       options: ['radio-1', 'radio-2', 'radio-3'],
@@ -455,7 +389,7 @@ export default {
         labels: multiSelectItems.labels,
       },
     },
-    ComboBoxValue: {
+    comboBoxValue: {
       options: dropdownItemsStorybookSelect.options,
       mapping: dropdownItemsStorybookSelect.mapping,
       control: {
@@ -464,14 +398,6 @@ export default {
       },
     },
     dropdownValue: {
-      options: dropdownItemsStorybookSelect.options,
-      mapping: dropdownItemsStorybookSelect.mapping,
-      control: {
-        type: 'select',
-        labels: dropdownItemsStorybookSelect.labels,
-      },
-    },
-    dropdownValueInline: {
       options: dropdownItemsStorybookSelect.options,
       mapping: dropdownItemsStorybookSelect.mapping,
       control: {
@@ -543,24 +469,37 @@ export default {
       },
       defaultValue: 'Text Area',
     },
+    textInputValue: {
+      control: {
+        type: 'text',
+      },
+      defaultValue: 'Text Input',
+    },
+    toggleValue: {
+      label: 'Toggle on/off',
+      control: {
+        type: 'boolean',
+      },
+      defaultValue: false,
+    },
   },
 };
 
-export const All = (args) => <ReadOnlyComparison {...args} />;
+export const All = (args) => <ReadOnlyComparisons {...args} />;
 export const Checkboxes = (args) => (
-  <ReadOnlyComparison {...args} filter={/Checkbox/i} />
+  <ReadOnlyComparisons {...args} filter={/Checkbox/i} />
 );
 Checkboxes.parameters = {
   controls: { hideNoControlsWarning: true, include: [] },
 };
 
 export const ComboBox = (args) => (
-  <ReadOnlyComparison {...args} filter={/ComboBox/i} />
+  <ReadOnlyComparisons {...args} filter={/ComboBox/i} />
 );
 ComboBox.parameters = { controls: { include: ['ComboBoxValue'] } };
 
 export const DatePicker = (args) => (
-  <ReadOnlyComparison {...args} filter={/Date Picker/i} />
+  <ReadOnlyComparisons {...args} filter={/Date Picker/i} />
 );
 DatePicker.parameters = {
   controls: {
@@ -574,45 +513,54 @@ DatePicker.parameters = {
 };
 
 export const Dropdown = (args) => (
-  <ReadOnlyComparison {...args} filter={/Dropdown/i} />
+  <ReadOnlyComparisons {...args} filter={/Dropdown/i} />
 );
 Dropdown.parameters = {
   controls: { include: ['dropdownValue', 'dropdownValueInline'] },
 };
 
 export const MultiSelect = (args) => (
-  <ReadOnlyComparison {...args} filter={/MultiSelect/i} />
+  <ReadOnlyComparisons {...args} filter={/MultiSelect/i} />
 );
 MultiSelect.parameters = { controls: { include: ['multiSelectValue'] } };
 
 export const NumberInput = (args) => (
-  <ReadOnlyComparison {...args} filter={/NumberInput/i} />
+  <ReadOnlyComparisons {...args} filter={/NumberInput/i} />
 );
 NumberInput.parameters = { controls: { include: ['numberInputValue'] } };
 
 export const RadioButton = (args) => (
-  <ReadOnlyComparison {...args} filter={/RadioButton/i} />
+  <ReadOnlyComparisons {...args} filter={/RadioButton/i} />
 );
 RadioButton.parameters = { controls: { include: ['radioButtonValue'] } };
 
 export const TimePicker = (args) => (
-  <ReadOnlyComparison {...args} filter={/Time Picker/i} />
+  <ReadOnlyComparisons {...args} filter={/Time Picker/i} />
 );
 TimePicker.parameters = {
   controls: { include: ['time', 'timeAMPM', 'timeZone'] },
 };
 
 export const Select = (args) => (
-  <ReadOnlyComparison {...args} filter={/^Select/i} />
+  <ReadOnlyComparisons {...args} filter={/^Select/i} />
 );
 Select.parameters = { controls: { include: ['selectValue'] } };
 
 export const Slider = (args) => (
-  <ReadOnlyComparison {...args} filter={/Slider/i} />
+  <ReadOnlyComparisons {...args} filter={/Slider/i} />
 );
 Slider.parameters = { controls: { include: ['sliderValue'] } };
 
 export const TextArea = (args) => (
-  <ReadOnlyComparison {...args} filter={/TextArea/i} />
+  <ReadOnlyComparisons {...args} filter={/TextArea/i} />
 );
 TextArea.parameters = { controls: { include: ['textAreaValue'] } };
+
+export const TextInput = (args) => (
+  <ReadOnlyComparisons {...args} filter={/TextInput/i} />
+);
+TextInput.parameters = { controls: { include: ['textInputValue'] } };
+
+export const Toggle = (args) => (
+  <ReadOnlyComparisons {...args} filter={/Toggle/i} />
+);
