@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
-export default from './FluidComboBox';
-export FluidComboBox from './FluidComboBox';
+import FluidComboBox from './FluidComboBox';
+export default FluidComboBox;
 export { default as FluidComboBoxSkeleton } from './FluidComboBox.Skeleton';

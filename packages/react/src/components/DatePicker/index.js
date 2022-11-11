@@ -5,4 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 export { default as DatePickerSkeleton } from './DatePicker.Skeleton';
-export default from './DatePicker';
+import DatePicker from './DatePicker';
+export default DatePicker;
