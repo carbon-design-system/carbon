@@ -19,12 +19,19 @@ const FluidTimePicker = React.forwardRef(function FluidTimePicker(
   const prefix = usePrefix();
   const classNames = classnames(className, {
     [`${prefix}--time-picker--fluid`]: true,
+    [`${prefix}--time-picker--equal-width`]: children.length !== 2,
   });
+
+  console.log(typeof children);
 
   return (
     <FormContext.Provider value={{ isFluid: true }}>
-      <FluidTextInput className={classNames} ref={ref} {...other} />
-      {children}
+      <div className={classNames}>
+        <div className={`${prefix}--time-picker__input`}>
+          <FluidTextInput ref={ref} {...other} />
+        </div>
+        {children}
+      </div>
     </FormContext.Provider>
   );
 });

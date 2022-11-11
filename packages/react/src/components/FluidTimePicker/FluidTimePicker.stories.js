@@ -38,17 +38,25 @@ const ToggleTip = (
 );
 
 export const Default = () => (
-  <div style={{ width: '288px' }}>
-    <FluidTimePicker labelText="Time" placeholder="hh:mm">
-      <FluidTimePickerSelect labelText={ToggleTip}>
+  <div style={{ width: '350px' }}>
+    <FluidTimePicker id="time-picker-1" labelText="Time" placeholder="hh:mm">
+      <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
         <SelectItem value="am" text="AM" />
         <SelectItem value="pm" text="PM" />
       </FluidTimePickerSelect>
-      <FluidTimePickerSelect labelText="Timezone">
+      <FluidTimePickerSelect id="select-2" labelText="Timezone">
         <SelectItem value="et" text="Eastern Time (ET)" />
         <SelectItem value="ct" text="Central Time (CT)" />
         <SelectItem value="mt" text="Mountain Time (MT)" />
         <SelectItem value="pt" text="Pacific Time (PT)" />
+      </FluidTimePickerSelect>
+    </FluidTimePicker>
+    <br />
+    <br />
+    <FluidTimePicker id="time-picker-2" labelText="Time" placeholder="hh:mm">
+      <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
+        <SelectItem value="am" text="AM" />
+        <SelectItem value="pm" text="PM" />
       </FluidTimePickerSelect>
     </FluidTimePicker>
   </div>
