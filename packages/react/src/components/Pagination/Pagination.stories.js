@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
+import mdx from './Pagination.mdx';
 
 import Pagination from './Pagination';
 
@@ -35,9 +36,29 @@ export default {
       </div>
     ),
   ],
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = () => <Pagination {...props()} />;
+export const Default = () => (
+  <Pagination
+    disabled={false}
+    page={1}
+    totalItems={103}
+    pagesUnknown={false}
+    pageInputDisabled={undefined}
+    pageSizeInputDisabled={undefined}
+    backwardText={'Previous page'}
+    forwardText={'Next page'}
+    pageSize={10}
+    pageSizes={[10, 20, 30, 40, 50]}
+    itemsPerPageText={'Items per page:'}
+    onChange={action('onChange')}
+  />
+);
 
 export const MultiplePaginationComponents = () => {
   return (
