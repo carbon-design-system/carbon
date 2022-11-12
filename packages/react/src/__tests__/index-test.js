@@ -233,6 +233,7 @@ describe('Carbon Components React', () => {
         "unstable__FluidComboBoxSkeleton",
         "unstable__FluidDatePicker",
         "unstable__FluidDatePickerInput",
+        "unstable__FluidDatePickerSkeleton",
         "unstable__FluidDropdown",
         "unstable__FluidDropdownSkeleton",
         "unstable__FluidMultiSelect",

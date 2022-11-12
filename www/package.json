@@ -1,7 +1,7 @@
 {
   "name": "www",
   "private": true,
-  "version": "0.26.0-rc.2",
+  "version": "0.26.0",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
@@ -22,7 +22,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@carbon/react": "^1.17.0-rc.2",
+    "@carbon/react": "^1.17.0",
     "@octokit/core": "^4.0.0",
     "@octokit/plugin-retry": "^3.0.9",
     "@octokit/plugin-throttling": "^4.0.0",
