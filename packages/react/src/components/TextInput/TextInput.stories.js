@@ -47,6 +47,7 @@ export const TogglePasswordVisibility = () => {
       id="text-input-1"
       labelText="Text input label"
       helperText="Optional help text"
+      autoComplete="true"
     />
   );
 };

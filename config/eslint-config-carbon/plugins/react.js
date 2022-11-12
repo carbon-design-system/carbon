@@ -44,6 +44,25 @@ module.exports = {
     ],
   },
   overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      plugins: ['@typescript-eslint'],
+      extends: ['plugin:@typescript-eslint/recommended'],
+      parser: '@typescript-eslint/parser',
+      rules: {
+        'no-unused-vars': 'off', // Disabled in favor of @typescript-eslint/no-unused-vars
+        '@typescript-eslint/no-unused-vars': [
+          'error',
+          {
+            args: 'after-used',
+            argsIgnorePattern: '^_',
+            varsIgnorePattern: '^_',
+          },
+        ],
+        '@typescript-eslint/no-empty-function': 'off', // Disabled to support default empty functions used in PropTypes
+        '@typescript-eslint/no-explicit-any': 'off', // TODO: Enable once stricter typings of internal utilities are supported
+      },
+    },
     // Sometimes we'll want to define a quick component in a story to use as a
     // wrapper for a component we're documenting. For example:
     //
