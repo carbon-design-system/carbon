@@ -12,7 +12,6 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
 >
   <Search
     className="custom-class cds--toolbar-search-container-expandable"
-    closeButtonLabelText="Clear search input"
     id="custom-id"
     labelText="Filter table"
     onBlur={[Function]}
@@ -22,7 +21,6 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
     placeholder="Filter table"
     size="lg"
     tabIndex="0"
-    type="text"
     value=""
   >
     <div
@@ -32,36 +30,39 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
     >
       <div
         className="cds--search-magnifier"
+        role={null}
       >
-        <ForwardRef(Search)
-          className="cds--search-magnifier-icon"
-        >
-          <Icon
+        <CustomSearchIcon>
+          <ForwardRef(Search)
             className="cds--search-magnifier-icon"
-            fill="currentColor"
-            height={16}
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 16 16"
-            width={16}
-            xmlns="http://www.w3.org/2000/svg"
           >
-            <svg
-              aria-hidden={true}
+            <Icon
               className="cds--search-magnifier-icon"
               fill="currentColor"
-              focusable="false"
               height={16}
               preserveAspectRatio="xMidYMid meet"
               viewBox="0 0 16 16"
               width={16}
               xmlns="http://www.w3.org/2000/svg"
             >
-              <path
-                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-              />
-            </svg>
-          </Icon>
-        </ForwardRef(Search)>
+              <svg
+                aria-hidden={true}
+                className="cds--search-magnifier-icon"
+                fill="currentColor"
+                focusable="false"
+                height={16}
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+                />
+              </svg>
+            </Icon>
+          </ForwardRef(Search)>
+        </CustomSearchIcon>
       </div>
       <label
         className="cds--label"
@@ -88,6 +89,7 @@ exports[`DataTable.TableToolbarSearch should render 1`] = `
         aria-label="Clear search input"
         className="cds--search-close cds--search-close--hidden"
         onClick={[Function]}
+        title="Clear search input"
         type="button"
       >
         <ForwardRef(Close)>
