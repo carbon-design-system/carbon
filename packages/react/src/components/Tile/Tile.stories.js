@@ -40,6 +40,13 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => {

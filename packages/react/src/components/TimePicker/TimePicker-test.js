@@ -6,177 +6,63 @@
  */
 
 import React from 'react';
-import TimePicker from '../TimePicker';
-import { mount, shallow } from 'enzyme';
+import { default as TimePicker } from './TimePicker';
 
-const prefix = 'cds';
+import { render, screen, fireEvent } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 describe('TimePicker', () => {
-  describe('renders as expected', () => {
-    describe('input', () => {
-      let wrapper;
-      let timePicker;
-      let textInput;
-
-      beforeEach(() => {
-        wrapper = mount(<TimePicker id="test" className="extra-class" />);
-
-        timePicker = () => wrapper.find(`.${prefix}--time-picker`);
-        textInput = () => wrapper.find('input');
-      });
-
-      it('renders as expected', () => {
-        expect(textInput().length).toBe(1);
-      });
-
-      it('should add extra classes that are passed via className', () => {
-        expect(timePicker().hasClass('extra-class')).toEqual(true);
-      });
-
-      it('should set type as expected', () => {
-        expect(textInput().props().type).toEqual('text');
-      });
-
-      it('should set value as expected', () => {
-        expect(textInput().props().defaultValue).toEqual(undefined);
-        wrapper.setProps({ defaultValue: 'test' });
-        expect(textInput().props().defaultValue).toEqual('test');
-      });
-
-      it('should set disabled as expected', () => {
-        expect(textInput().props().disabled).toEqual(false);
-        wrapper.setProps({ disabled: true });
-        expect(textInput().props().disabled).toEqual(true);
-      });
-
-      it('should set placeholder as expected', () => {
-        wrapper.setProps({ placeholder: 'ss:mm' });
-        expect(textInput().props().placeholder).toEqual('ss:mm');
-      });
+  describe('input', () => {
+    it('renders as expected', () => {
+      render(<TimePicker id="time-picker" />);
+      expect(screen.getByRole('textbox')).toBeInTheDocument();
     });
 
-    describe('label', () => {
-      let wrapper;
-      let label;
+    it('passes classNames as expected', () => {
+      render(<TimePicker id="time-picker" className="🚀" />);
+      expect(screen.getByRole('textbox')).toHaveClass('🚀');
+    });
 
-      beforeEach(() => {
-        wrapper = mount(<TimePicker id="test" className="extra-class" />);
+    it('should set type as expected', () => {
+      render(<TimePicker id="time-picker" />);
+      expect(screen.getByRole('textbox')).toHaveAttribute('type', 'text');
+    });
 
-        label = () => wrapper.find('label');
-      });
+    it('should set value as expected', () => {
+      render(<TimePicker id="time-picker" value="🐶" />);
+      expect(screen.getByRole('textbox')).toHaveAttribute('value', '🐶');
+    });
 
-      it('does not render a label by default', () => {
-        expect(label().length).toBe(0);
-      });
+    it('should set disabled as expected', () => {
+      const onClick = jest.fn();
+      render(<TimePicker id="time-picker" onClick={onClick} disabled />);
+      fireEvent.click(screen.getByRole('textbox'));
+      expect(onClick).not.toHaveBeenCalled();
+    });
 
-      it('renders a label', () => {
-        wrapper.setProps({ labelText: 'Enter a time' });
-        const renderedlabel = wrapper.find('label');
-        expect(renderedlabel.length).toBe(1);
-      });
+    it('should set placeholder as expected', () => {
+      render(<TimePicker id="time-picker" placeholder="🧸" />);
+      expect(screen.getByPlaceholderText('🧸')).toBeInTheDocument();
+    });
+  });
 
-      it('has the expected classes', () => {
-        wrapper.setProps({ labelText: 'Enter a time' });
-        const renderedlabel = wrapper.find('label');
-        expect(renderedlabel.hasClass(`${prefix}--label`)).toEqual(true);
-      });
+  describe('label', () => {
+    it('does not render a label by default', () => {
+      render(<TimePicker id="time-picker" />);
+      expect(screen.queryByLabelText('🐳')).not.toBeInTheDocument();
+    });
 
-      it('should set label as expected', () => {
-        wrapper.setProps({ labelText: 'Enter a time' });
-        const renderedlabel = wrapper.find('label');
-        expect(renderedlabel.text()).toEqual('Enter a time');
-      });
+    it('renders a label as expected', () => {
+      render(<TimePicker id="time-picker" labelText="🐳" />);
+      expect(screen.getByLabelText('🐳')).toBeInTheDocument();
     });
   });
 
   describe('events', () => {
-    describe('disabled time picker', () => {
-      const onClick = jest.fn();
-      const onChange = jest.fn();
-
-      const wrapper = mount(
-        <TimePicker id="test" onClick={onClick} onChange={onChange} disabled />
-      );
-
-      const input = wrapper.find('input');
-
-      it('should not invoke onClick', () => {
-        input.simulate('click');
-        expect(onClick).not.toHaveBeenCalled();
-      });
-
-      it('should not invoke onChange', () => {
-        input.simulate('change');
-        expect(onChange).not.toHaveBeenCalled();
-      });
-    });
-
-    describe('enabled textinput', () => {
-      let onClick;
-      let onChange;
-      let onBlur;
-      let wrapper;
-      let input;
-      let eventObject;
-
-      beforeEach(() => {
-        onClick = jest.fn();
-        onChange = jest.fn();
-        onBlur = jest.fn();
-        wrapper = mount(
-          <TimePicker
-            id="test"
-            onClick={onClick}
-            onChange={onChange}
-            onBlur={onBlur}
-          />
-        );
-        input = wrapper.find('input');
-        eventObject = {
-          target: {
-            defaultValue: 'test',
-          },
-        };
-      });
-
-      it('should invoke onBlur when input is clicked', () => {
-        input.simulate('blur', eventObject);
-        expect(onBlur).toHaveBeenCalledWith(
-          expect.objectContaining(eventObject)
-        );
-      });
-
-      it('should invoke onClick when input is clicked', () => {
-        input.simulate('click', eventObject);
-        expect(onClick).toHaveBeenCalledWith(
-          expect.objectContaining(eventObject)
-        );
-      });
-
-      it('should invoke onChange when input value is changed', () => {
-        input.simulate('change', eventObject);
-        expect(onChange).toHaveBeenCalledWith(
-          expect.objectContaining(eventObject)
-        );
-      });
-    });
-  });
-
-  describe('Getting derived state from props', () => {
-    it('should change the value upon change in props', () => {
-      const wrapper = shallow(<TimePicker id="test" />);
-      wrapper.setProps({ value: 'foo' });
-      wrapper.setState({ value: 'foo' });
-      wrapper.setProps({ value: 'bar' });
-      expect(wrapper.state().value).toEqual('bar');
-    });
-
-    it('should avoid change the value upon setting props, unless there the value actually changes', () => {
-      const wrapper = shallow(<TimePicker id="test" />);
-      wrapper.setProps({ value: 'foo' });
-      wrapper.setState({ value: 'bar' });
-      wrapper.setProps({ value: 'foo' });
-      expect(wrapper.state().value).toEqual('bar');
+    it('should write text inside the textbox', () => {
+      render(<TimePicker id="time-picker" />);
+      userEvent.type(screen.getByRole('textbox'), '🧛');
+      expect(screen.getByRole('textbox')).toHaveValue('🧛');
     });
   });
 });

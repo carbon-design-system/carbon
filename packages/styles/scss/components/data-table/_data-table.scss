@@ -329,26 +329,6 @@
     transition: background-color $duration-fast-01 motion(entrance, productive);
   }
 
-  .#{$prefix}--data-table
-    .#{$prefix}--table-column-checkbox
-    .#{$prefix}--checkbox:focus
-    + .#{$prefix}--checkbox-label::before {
-    //make checkbox focus larger to match expansion btn focus
-    outline-offset: rem(6px);
-  }
-
-  .#{$prefix}--data-table--compact
-    .#{$prefix}--table-column-checkbox
-    .#{$prefix}--checkbox:focus
-    + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--data-table--xs
-    .#{$prefix}--table-column-checkbox
-    .#{$prefix}--checkbox:focus
-    + .#{$prefix}--checkbox-label::before {
-    //make checkbox match expansion button focus size
-    outline-offset: rem(2px);
-  }
-
   .#{$prefix}--data-table thead th.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table tbody td.#{$prefix}--table-column-checkbox,
   .#{$prefix}--data-table thead th.#{$prefix}--table-expand,

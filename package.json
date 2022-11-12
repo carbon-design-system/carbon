@@ -30,7 +30,7 @@
   },
   "resolutions": {
     "@types/react": "~17.0.2",
-    "@types/prop-types": "15.7.4",
+    "@types/prop-types": "15.7.5",
     "ast-types": "^0.14.0",
     "node-sass": "^6.0.0",
     "react": "~17.0.2",
