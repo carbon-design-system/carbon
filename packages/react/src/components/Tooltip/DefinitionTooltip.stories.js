@@ -8,7 +8,7 @@
 import './story.scss';
 
 import React from 'react';
-import { DefinitionTooltip } from './DefinitionTooltip';
+import { DefinitionTooltip } from './';
 import mdx from './DefinitionTooltip.mdx';
 
 export default {
@@ -43,7 +43,6 @@ export default {
     ),
   ],
 };
-
 export const Default = () => {
   const definition =
     'Uniform Resource Locator; the address of a resource (such as a document or website) on the Internet.';
@@ -102,10 +101,23 @@ Playground.argTypes = {
     },
     defaultValue: 'Example definition',
   },
+  id: {
+    table: { disable: true },
+  },
   openOnHover: {
     control: {
       type: 'boolean',
     },
     defaultValue: false,
+  },
+  tooltipText: {
+    table: {
+      disable: true,
+    },
+  },
+  triggerClassName: {
+    table: {
+      disable: true,
+    },
   },
 };

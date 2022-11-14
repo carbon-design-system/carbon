@@ -8,11 +8,11 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Popover, PopoverContent } from '../../Popover';
-import { match, keys } from '../../../internal/keyboard';
-import { useFallbackId } from '../../../internal/useId';
-import { usePrefix } from '../../../internal/usePrefix';
-import deprecate from '../../../prop-types/deprecate';
+import { Popover, PopoverContent } from '../Popover';
+import { match, keys } from '../../internal/keyboard';
+import { useFallbackId } from '../../internal/useId';
+import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 function DefinitionTooltip({
   align = 'bottom-left',
