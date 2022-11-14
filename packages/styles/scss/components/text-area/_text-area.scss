@@ -25,7 +25,6 @@
     @include type-style('body-01');
     @include focus-outline('reset');
 
-    width: 100%;
     min-width: 10rem;
     height: 100%;
     min-height: rem(40px);
@@ -108,6 +107,7 @@
   .#{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
 
+    width: 100%;
     height: rem(100px);
 
     &::placeholder {

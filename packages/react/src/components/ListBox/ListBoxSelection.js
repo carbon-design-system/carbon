@@ -23,6 +23,7 @@ function ListBoxSelection({
   translateWithId: t,
   disabled,
   onClearSelection,
+  readOnly,
 }) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--list-box__selection`, {
@@ -31,7 +32,7 @@ function ListBoxSelection({
   });
   const handleOnClick = (event) => {
     event.stopPropagation();
-    if (disabled) {
+    if (disabled || readOnly) {
       return;
     }
     clearSelection(event);
@@ -41,7 +42,7 @@ function ListBoxSelection({
   };
   const handleOnKeyDown = (event) => {
     event.stopPropagation();
-    if (disabled) {
+    if (disabled || readOnly) {
       return;
     }
 
@@ -75,7 +76,8 @@ function ListBoxSelection({
         onKeyDown={handleOnKeyDown}
         disabled={disabled}
         aria-label={t('clear.all')}
-        title={description}>
+        title={description}
+        aria-disabled={readOnly ? true : undefined}>
         <Close />
       </div>
     </div>
@@ -133,6 +135,11 @@ ListBoxSelection.propTypes = {
    * clear selection element fires a keydown event
    */
   onKeyDown: PropTypes.func,
+
+  /**
+   * Whether or not the Dropdown is readonly
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify an optional `selectionCount` value that will be used to determine
