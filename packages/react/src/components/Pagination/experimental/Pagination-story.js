@@ -17,7 +17,7 @@ import {
 import {
   unstable_PageSelector as PageSelector,
   unstable_Pagination as Pagination,
-} from '../../../';
+} from '../../..';
 
 const props = () => ({
   disabled: boolean('Disable backward/forward buttons (disabled)', false),
@@ -74,3 +74,71 @@ export const WithNoSizerChildInputOrChildSelector = () => (
 
 WithNoSizerChildInputOrChildSelector.storyName =
   'with no sizer, child input, or child selector';
+
+export const Playground = (args) => <Pagination {...args} />;
+
+Playground.argTypes = {
+  className: {
+    control: false,
+  },
+  children: {
+    control: false,
+  },
+  id: {
+    control: false,
+  },
+  itemText: {
+    control: false,
+  },
+  forwardText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Next page',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: 'false',
+  },
+  itemRangeText: {
+    control: false,
+  },
+  itemsPerPageText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Items per page:',
+  },
+  initialPage: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 1,
+  },
+  pageSize: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 10,
+  },
+  pageSizes: {
+    control: {
+      type: 'array',
+    },
+    defaultValue: [10, 20, 30, 40, 50],
+  },
+  pagesUnknown: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: 'false',
+  },
+  totalItems: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 350,
+  },
+};
