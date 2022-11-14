@@ -1360,6 +1360,17 @@ Map {
         "isRequired": true,
         "type": "oneOfType",
       },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
+      },
     },
   },
   "ContainedListItem" => Object {
