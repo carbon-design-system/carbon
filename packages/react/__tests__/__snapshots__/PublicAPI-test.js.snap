@@ -5879,6 +5879,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "valueSelected": Object {
         "args": Array [
           Array [
