@@ -7,8 +7,8 @@
 
 import React from 'react';
 import { default as TimePicker } from './TimePicker';
-import SelectItem from '../../SelectItem';
-import TimePickerSelect from '../../TimePickerSelect/next/TimePickerSelect.js';
+import SelectItem from '../SelectItem';
+import TimePickerSelect from '../TimePickerSelect/next/TimePickerSelect.js';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
