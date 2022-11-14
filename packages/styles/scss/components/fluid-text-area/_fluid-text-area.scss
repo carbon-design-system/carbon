@@ -64,7 +64,7 @@
   // invalid
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid,
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area:focus {
-    border-bottom: none;
+    border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--text-area__divider,

@@ -204,6 +204,9 @@ Playground.argTypes = {
     },
     defaultValue: 'To clear selection, press Delete or Backspace,',
   },
+  readOnly: {
+    control: { type: 'boolean' },
+  },
 };
 
 export const Default = () => {

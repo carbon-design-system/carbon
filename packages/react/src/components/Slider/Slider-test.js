@@ -6,9 +6,8 @@
  */
 
 import React from 'react';
-import Slider from '../Slider';
-import SliderSkeleton from '../Slider/Slider.Skeleton';
-import { mount, shallow } from 'enzyme';
+import Slider from './Slider';
+import { mount } from 'enzyme';
 import 'requestanimationframe';
 import throttle from 'lodash.throttle';
 
@@ -437,18 +436,6 @@ describe('Slider', () => {
       wrapper.instance().onKeyDown(evt);
       expect(wrapper.state().value).toEqual(50);
       expect(handleChange).not.toHaveBeenCalled();
-    });
-  });
-});
-
-describe('SliderSkeleton', () => {
-  describe('Renders as expected', () => {
-    const wrapper = shallow(<SliderSkeleton />);
-
-    const slider = wrapper.find(`.${prefix}--slider-container`);
-
-    it('Has the expected classes', () => {
-      expect(slider.hasClass(`${prefix}--skeleton`)).toEqual(true);
     });
   });
 });
