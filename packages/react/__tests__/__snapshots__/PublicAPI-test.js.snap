@@ -475,6 +475,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "title": Object {
         "type": "string",
       },
@@ -3935,6 +3938,16 @@ Map {
     },
     "render": [Function],
   },
+  "IdPrefix" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "prefix": Object {
+        "type": "string",
+      },
+    },
+  },
   "InlineLoading" => Object {
     "propTypes": Object {
       "className": Object {
@@ -5879,6 +5892,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "valueSelected": Object {
         "args": Array [
           Array [
@@ -6152,6 +6168,9 @@ Map {
       },
       "onChange": Object {
         "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
@@ -8312,6 +8331,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -8456,6 +8478,9 @@ Map {
       },
       "onToggle": Object {
         "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
@@ -9978,6 +10003,7 @@ Map {
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
   "unstable_useLayoutDirection" => Object {},
+  "useIdPrefix" => Object {},
   "useLayer" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
