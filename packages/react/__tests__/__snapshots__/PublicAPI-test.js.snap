@@ -5879,6 +5879,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "valueSelected": Object {
         "args": Array [
           Array [
@@ -8456,6 +8459,9 @@ Map {
       },
       "onToggle": Object {
         "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
