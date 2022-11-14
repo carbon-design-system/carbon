@@ -7,40 +7,11 @@
 
 import React, { useState, useEffect } from 'react';
 
-import {
-  withKnobs,
-  text,
-  boolean,
-  number,
-  select,
-} from '@storybook/addon-knobs';
-import ProgressBar from '../ProgressBar';
-
-const sizes = {
-  'Small  (small)': 'small',
-  'Big (big) - default': 'big',
-};
-
-const types = {
-  'Default  (default)': 'default',
-  'Inline (inline)': 'inline',
-  'indented (indented)': 'indented',
-};
-
-const props = () => ({
-  helperText: text('Helper text (helperText)', 'Optional helper text'),
-  hideLabel: boolean('Hide the label (hideLabel)', false),
-  label: text('Label text (label)', 'Progress bar label'),
-  max: number('Maximum value (max)', 100),
-  size: select('Size (size)', sizes, 'big'),
-  type: select('Type (type)', types, 'default'),
-  value: number('Current value (value)', 75),
-});
+import ProgressBar from './';
 
 export default {
-  title: 'Experimental/unstable_ProgressBar',
+  title: 'Components/ProgressBar',
   component: ProgressBar,
-  decorators: [withKnobs],
 };
 
 export const Default = () => (
@@ -50,6 +21,31 @@ export const Default = () => (
     value={75}
   />
 );
+
+const PlaygroundStory = (args) => (
+  <ProgressBar
+    label="Progress bar label"
+    helperText="Optional helper text"
+    {...args}
+  />
+);
+
+export const Playground = PlaygroundStory.bind({});
+
+Playground.argTypes = {
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  hideLabel: {
+    control: { type: 'boolean' },
+  },
+  status: {
+    options: ['active', 'finished', 'error'],
+    control: { type: 'select' },
+  },
+};
 
 export const Indeterminate = () => (
   <ProgressBar label="Progress bar label" helperText="Optional helper text" />
@@ -88,10 +84,9 @@ export const Example = () => {
     <ProgressBar
       value={running ? progress : null}
       max={size}
+      status={progress === size ? 'finished' : 'active'}
       label="Export data"
       helperText={helperText}
     />
   );
 };
-
-export const Playground = () => <ProgressBar {...props()} />;

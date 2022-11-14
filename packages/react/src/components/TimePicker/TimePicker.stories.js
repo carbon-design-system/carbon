@@ -6,37 +6,29 @@
  */
 
 import React from 'react';
-import SelectItem from '../../SelectItem';
-import TimePicker from '../';
-import TimePickerSelect from '../../TimePickerSelect';
-import { Layer } from '../../Layer';
+import SelectItem from '../SelectItem';
+import TimePicker from './TimePicker';
+import TimePickerSelect from '../TimePickerSelect';
+import { Layer } from '../Layer';
+import mdx from './TimePicker.mdx';
 
 export default {
   title: 'Components/TimePicker',
   component: TimePicker,
-  argTypes: {
-    size: {
-      options: ['sm', 'md', 'lg'],
-      control: { type: 'select' },
-    },
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-  },
-  args: {
-    size: 'md',
-  },
   subcomponents: {
     TimePickerSelect,
     SelectItem,
   },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
-export const Default = (args) => {
+export const Default = () => {
   return (
-    <TimePicker id="time-picker" labelText="Select a time" {...args}>
+    <TimePicker id="time-picker" labelText="Select a time">
       <TimePickerSelect id="time-picker-select-1">
         <SelectItem value="AM" text="AM" />
         <SelectItem value="PM" text="PM" />
@@ -49,10 +41,10 @@ export const Default = (args) => {
   );
 };
 
-export const WithLayer = (args) => {
+export const WithLayer = () => {
   return (
     <>
-      <TimePicker id="time-picker" labelText="First layer" {...args}>
+      <TimePicker id="time-picker" labelText="First layer">
         <TimePickerSelect id="time-picker-select-1">
           <SelectItem value="AM" text="AM" />
           <SelectItem value="PM" text="PM" />
@@ -63,7 +55,7 @@ export const WithLayer = (args) => {
         </TimePickerSelect>
       </TimePicker>
       <Layer>
-        <TimePicker id="time-picker" labelText="Second layer" {...args}>
+        <TimePicker id="time-picker" labelText="Second layer">
           <TimePickerSelect id="time-picker-select-1">
             <SelectItem value="AM" text="AM" />
             <SelectItem value="PM" text="PM" />
@@ -74,7 +66,7 @@ export const WithLayer = (args) => {
           </TimePickerSelect>
         </TimePicker>
         <Layer>
-          <TimePicker id="time-picker" labelText="Third layer" {...args}>
+          <TimePicker id="time-picker" labelText="Third layer">
             <TimePickerSelect id="time-picker-select-1">
               <SelectItem value="AM" text="AM" />
               <SelectItem value="PM" text="PM" />
@@ -88,4 +80,75 @@ export const WithLayer = (args) => {
       </Layer>
     </>
   );
+};
+
+export const Playground = (args) => {
+  return (
+    <TimePicker id="time-picker" labelText="Select a time" {...args}>
+      <TimePickerSelect id="time-picker-select-1" disabled={args.disabled}>
+        <SelectItem value="AM" text="AM" />
+        <SelectItem value="PM" text="PM" />
+      </TimePickerSelect>
+      <TimePickerSelect id="time-picker-select-2" disabled={args.disabled}>
+        <SelectItem value="Time zone 1" text="Time zone 1" />
+        <SelectItem value="Time zone 2" text="Time zone 2" />
+      </TimePickerSelect>
+    </TimePicker>
+  );
+};
+
+Playground.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  id: {
+    table: {
+      disable: true,
+    },
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  hideLabel: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalidText: {
+    control: { type: 'text' },
+  },
+  labelText: {
+    control: { type: 'text' },
+  },
+  size: {
+    options: ['sm', 'md', 'lg'],
+    control: { type: 'select' },
+  },
+  light: {
+    table: {
+      disable: true,
+    },
+  },
+  pattern: {
+    table: {
+      disable: true,
+    },
+  },
 };

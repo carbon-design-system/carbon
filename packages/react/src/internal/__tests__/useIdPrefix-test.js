@@ -7,7 +7,7 @@
 
 import { cleanup, render } from '@testing-library/react';
 import React from 'react';
-import { usePrefix, PrefixContext } from '../usePrefix';
+import { useIdPrefix, IdPrefixContext } from '../useIdPrefix';
 
 describe('usePrefix', () => {
   afterEach(cleanup);
@@ -16,24 +16,24 @@ describe('usePrefix', () => {
     let value = null;
 
     function TestComponent() {
-      value = usePrefix();
+      value = useIdPrefix();
       return null;
     }
 
     render(<TestComponent />);
-    expect(value).toBe('cds');
+    expect(value).toBe(null);
   });
 
   it('should emit the prefix in context', () => {
     function TestComponent() {
-      const contextValue = usePrefix();
+      const contextValue = useIdPrefix();
       return <span data-testid="test">{contextValue}</span>;
     }
 
     const { getByTestId } = render(
-      <PrefixContext.Provider value="test">
+      <IdPrefixContext.Provider value="test">
         <TestComponent />
-      </PrefixContext.Provider>
+      </IdPrefixContext.Provider>
     );
 
     expect(getByTestId('test')).toHaveTextContent('test');

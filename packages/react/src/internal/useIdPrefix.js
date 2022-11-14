@@ -5,5 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './StructuredList';
-export { default as StructuredListSkeleton } from './StructuredList.Skeleton';
+import React from 'react';
+
+export const IdPrefixContext = React.createContext(null);
+
+export function useIdPrefix() {
+  return React.useContext(IdPrefixContext);
+}

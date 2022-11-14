@@ -3938,6 +3938,16 @@ Map {
     },
     "render": [Function],
   },
+  "IdPrefix" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "prefix": Object {
+        "type": "string",
+      },
+    },
+  },
   "InlineLoading" => Object {
     "propTypes": Object {
       "className": Object {
@@ -5882,6 +5892,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "valueSelected": Object {
         "args": Array [
           Array [
@@ -6711,24 +6724,96 @@ Map {
     "render": [Function],
   },
   "StructuredListBody" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "onKeyDown": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "head": Object {
+        "type": "bool",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+    },
   },
   "StructuredListCell" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "head": false,
+      "noWrap": false,
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "head": Object {
+        "type": "bool",
+      },
+      "noWrap": Object {
+        "type": "bool",
+      },
+    },
   },
   "StructuredListHead" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
   },
   "StructuredListInput" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "title": "title",
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "defaultChecked": [Function],
+      "id": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "onChange": [Function],
+      "title": Object {
+        "type": "string",
+      },
+      "value": [Function],
+    },
   },
   "StructuredListRow" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "head": false,
+      "onKeyDown": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "head": Object {
+        "type": "bool",
+      },
+      "label": [Function],
+      "onKeyDown": Object {
+        "type": "func",
+      },
+    },
   },
   "StructuredListSkeleton" => Object {
     "defaultProps": Object {
@@ -6748,8 +6833,32 @@ Map {
     },
   },
   "StructuredListWrapper" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "ariaLabel": "Structured list section",
+      "isCondensed": false,
+      "isFlush": false,
+      "selection": false,
+    },
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isCondensed": Object {
+        "type": "bool",
+      },
+      "isFlush": Object {
+        "type": "bool",
+      },
+      "selection": Object {
+        "type": "bool",
+      },
+    },
   },
   "Switch" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -8219,6 +8328,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -8363,6 +8475,9 @@ Map {
       },
       "onToggle": Object {
         "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
@@ -9885,6 +10000,7 @@ Map {
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
   "unstable_useLayoutDirection" => Object {},
+  "useIdPrefix" => Object {},
   "useLayer" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
