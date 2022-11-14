@@ -97,7 +97,6 @@ const textareaProps = {
   className: 'some-class',
   placeholder: 'Placeholder text',
   id: 'test5',
-  cols: 50,
   rows: 4,
 };
 
