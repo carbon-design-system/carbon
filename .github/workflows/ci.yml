@@ -31,6 +31,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          lfs: true
+      - name: Fetch LFS objects
+        run: git lfs fetch
+      - name: Checkout LFS objects
+        run: git lfs checkout
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Check formatting of project files
@@ -44,6 +49,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          lfs: true
+      - name: Fetch LFS objects
+        run: git lfs fetch
+      - name: Checkout LFS objects
+        run: git lfs checkout
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Lint JavaScript files
@@ -59,6 +69,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          lfs: true
       - uses: actions/cache@v3
         id: cache
         with:
@@ -66,6 +77,10 @@ jobs:
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Fetch LFS objects
+        run: git lfs fetch
+      - name: Checkout LFS objects
+        run: git lfs checkout
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Build project
@@ -85,6 +100,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          lfs: true
       - uses: actions/cache@v3
         id: cache
         with:
@@ -92,6 +108,10 @@ jobs:
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Fetch LFS objects
+        run: git lfs fetch
+      - name: Checkout LFS objects
+        run: git lfs checkout
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - uses: dorny/paths-filter@v2.11.1
@@ -124,6 +144,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          lfs: true
       - uses: actions/cache@v3
         id: cache
         with:
@@ -131,6 +152,10 @@ jobs:
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Fetch LFS objects
+        run: git lfs fetch
+      - name: Checkout LFS objects
+        run: git lfs checkout
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
@@ -182,6 +207,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '16.x'
+          lfs: true
       - uses: actions/cache@v3
         id: cache
         with:
@@ -189,6 +215,10 @@ jobs:
             node_modules
             */**/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      - name: Fetch LFS objects
+        run: git lfs fetch
+      - name: Checkout LFS objects
+        run: git lfs checkout
       - name: Install dependencies
         run: yarn install --immutable --immutable-cache
       - name: Install browsers
