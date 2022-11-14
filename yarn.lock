@@ -8651,11 +8651,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wojtekmaj/enzyme-adapter-react-17@npm:^0.6.5":
-  version: 0.6.6
-  resolution: "@wojtekmaj/enzyme-adapter-react-17@npm:0.6.6"
+"@wojtekmaj/enzyme-adapter-react-17@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "@wojtekmaj/enzyme-adapter-react-17@npm:0.8.0"
   dependencies:
-    "@wojtekmaj/enzyme-adapter-utils": ^0.1.2
+    "@wojtekmaj/enzyme-adapter-utils": ^0.2.0
     enzyme-shallow-equal: ^1.0.0
     has: ^1.0.0
     prop-types: ^15.7.0
@@ -8665,13 +8665,13 @@ __metadata:
     enzyme: ^3.0.0
     react: ^17.0.0-0
     react-dom: ^17.0.0-0
-  checksum: bf6dad41313456d7a80fdd44e0a0e95a49af8f841b1d0ac5a03c48973877ecaf9ac4d457e3f6edd0df7d40abfe625a8aaa77ffb822224a25e5e866be41d9ea0f
+  checksum: aa9674f06f6db269b72168ebf46c4513938993479eb60bac30cb6183b5aca6108ade3d08af4f56c142cb219415480d0c4b454ba9452b85c32f711c806b39cd8c
   languageName: node
   linkType: hard
 
-"@wojtekmaj/enzyme-adapter-utils@npm:^0.1.2":
-  version: 0.1.2
-  resolution: "@wojtekmaj/enzyme-adapter-utils@npm:0.1.2"
+"@wojtekmaj/enzyme-adapter-utils@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@wojtekmaj/enzyme-adapter-utils@npm:0.2.0"
   dependencies:
     function.prototype.name: ^1.1.0
     has: ^1.0.0
@@ -8679,7 +8679,7 @@ __metadata:
     prop-types: ^15.7.0
   peerDependencies:
     react: ^17.0.0-0
-  checksum: 4b2f5ff155c600137342c0ee19512b27d469fef98c20fee85785014e71d21b75cab48f93c8004548bd86410395e7577265acfa873e7a2d863c73291734c6d652
+  checksum: 837741f1382acdb02ce304745eccfdcff03f1cae2a4fb833056a7a753308cd1182b0b32a10a04be6bfedaaab8f4acd5b458bfe0b9ebaa6119c4aaaba74a14ae4
   languageName: node
   linkType: hard
 
@@ -19578,7 +19578,7 @@ fsevents@^1.2.7:
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
     "@babel/runtime": ^7.18.3
-    "@wojtekmaj/enzyme-adapter-react-17": ^0.6.5
+    "@wojtekmaj/enzyme-adapter-react-17": ^0.8.0
     accessibility-checker: ^3.1.32
     axe-core: ^4.3.5
     babel-jest: ^28.1.0
