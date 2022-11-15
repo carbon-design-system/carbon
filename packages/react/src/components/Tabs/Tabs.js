@@ -10,7 +10,7 @@ import cx from 'classnames';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState, useRef, useEffect } from 'react';
-import { Tooltip } from '../Tooltip/next';
+import { Tooltip } from '../Tooltip';
 import { useControllableState } from '../../internal/useControllableState';
 import { useEffectOnce } from '../../internal/useEffectOnce';
 import { useId } from '../../internal/useId';
