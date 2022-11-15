@@ -7,7 +7,8 @@
 
 import React from 'react';
 import FluidTimePicker from '../FluidTimePicker';
-import FluidTimePickerInput from '../../FluidTimePickerInput';
+import FluidTimePickerSelect from '../../FluidTimePickerSelect';
+import SelectItem from '../../SelectItem';
 import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
@@ -17,48 +18,46 @@ describe('FluidTimePicker', () => {
     it('should add extra classes that are passed via className', () => {
       render(
         <FluidTimePicker
-          onChange={() => {}}
           className="custom-class"
-          dateFormat="m/d/Y"
-          data-testid="datePicker-1">
-          <FluidTimePickerInput
-            id="date-picker-input-id-start"
-            placeholder="mm/dd/yyyy"
-            labelText="Start date"
-          />
-          <FluidTimePickerInput
-            id="date-picker-input-id-finish"
-            placeholder="mm/dd/yyyy"
-            labelText="End date"
-          />
+          id="time=picker-1"
+          data-testid="timePicker-1">
+          <FluidTimePickerSelect id="select-1" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+          <FluidTimePickerSelect id="select-2" labelText="Timezone">
+            <SelectItem value="et" text="Eastern Time (ET)" />
+            <SelectItem value="ct" text="Central Time (CT)" />
+            <SelectItem value="mt" text="Mountain Time (MT)" />
+            <SelectItem value="pt" text="Pacific Time (PT)" />
+          </FluidTimePickerSelect>
         </FluidTimePicker>
       );
 
-      expect(screen.getByTestId('datePicker-1')).toHaveClass('custom-class');
+      expect(screen.getByTestId('timePicker-1')).toHaveClass('custom-class');
     });
 
     it('should add fluid classes by default', () => {
       render(
         <FluidTimePicker
-          onChange={() => {}}
           className="custom-class"
-          dateFormat="m/d/Y"
-          data-testid="datePicker-1">
-          <FluidTimePickerInput
-            id="date-picker-input-id-start"
-            placeholder="mm/dd/yyyy"
-            labelText="Start date"
-          />
-          <FluidTimePickerInput
-            id="date-picker-input-id-finish"
-            placeholder="mm/dd/yyyy"
-            labelText="End date"
-          />
+          id="time=picker-1"
+          data-testid="timePicker-1">
+          <FluidTimePickerSelect id="select-1" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+          <FluidTimePickerSelect id="select-2" labelText="Timezone">
+            <SelectItem value="et" text="Eastern Time (ET)" />
+            <SelectItem value="ct" text="Central Time (CT)" />
+            <SelectItem value="mt" text="Mountain Time (MT)" />
+            <SelectItem value="pt" text="Pacific Time (PT)" />
+          </FluidTimePickerSelect>
         </FluidTimePicker>
       );
 
-      expect(screen.getByTestId('datePicker-1')).toHaveClass(
-        `${prefix}--date-picker--fluid`
+      expect(screen.getByTestId('timePicker-1')).toHaveClass(
+        `${prefix}--time-picker--fluid`
       );
     });
   });
