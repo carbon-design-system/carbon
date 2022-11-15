@@ -187,6 +187,16 @@ describe('Pagination', () => {
       expect(screen.getByText(`página ${page}`)).toBeInTheDocument();
     });
 
+    it('should not include page count when pagesUnknown', () => {
+      const page = 1;
+      render(
+        <Pagination pageSizes={[10, 20]} page={page} pagesUnknown={true} />
+      );
+
+      expect(screen.getByText(`page`)).toBeInTheDocument();
+      expect(screen.queryByText(`page ${page}`)).not.toBeInTheDocument();
+    });
+
     it('should respect size prop', () => {
       const { container } = render(<Pagination size="sm" pageSizes={[10]} />);
 
