@@ -88,22 +88,24 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
   };
 
   const updateCurrentMonth = () => {
-    const monthStr = monthToStr(
-      fp.currentMonth,
-      config.shorthand === true,
-      fp.l10n
-    );
-    fp.yearElements.forEach((elem) => {
-      const currentMonthContainer = elem.closest(
-        config.selectorFlatpickrMonthYearContainer
+    if (fp.monthElements) {
+      const monthStr = monthToStr(
+        fp.currentMonth,
+        config.shorthand === true,
+        fp.l10n
       );
-      Array.prototype.forEach.call(
-        currentMonthContainer.querySelectorAll('.cur-month'),
-        (monthElement) => {
-          monthElement.textContent = monthStr;
-        }
-      );
-    });
+      fp.yearElements.forEach((elem) => {
+        const currentMonthContainer = elem.closest(
+          config.selectorFlatpickrMonthYearContainer
+        );
+        Array.prototype.forEach.call(
+          currentMonthContainer.querySelectorAll('.cur-month'),
+          (monthElement) => {
+            monthElement.textContent = monthStr;
+          }
+        );
+      });
+    }
   };
 
   const register = () => {
@@ -200,6 +202,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     onChange,
     onClose,
     onOpen,
+    readOnly = false,
     short = false,
     value,
     ...rest
@@ -235,6 +238,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         return React.cloneElement(child, {
           datePickerType,
           ref: startInputField,
+          readOnly,
         });
       }
       if (
@@ -244,16 +248,19 @@ const DatePicker = React.forwardRef(function DatePicker(
         return React.cloneElement(child, {
           datePickerType,
           ref: endInputField,
+          readOnly,
         });
       }
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
+          readOnly,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
+          readOnly,
         });
       }
     }
@@ -270,6 +277,12 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     const onHook = (_electedDates, _dateStr, instance, prefix) => {
       updateClassNames(instance, prefix);
+      if (startInputField?.current) {
+        startInputField.current.readOnly = readOnly;
+      }
+      if (endInputField?.current) {
+        endInputField.current.readOnly = readOnly;
+      }
     };
 
     // Logic to determine if `enable` or `disable` will be passed down. If neither
@@ -328,11 +341,12 @@ const DatePicker = React.forwardRef(function DatePicker(
           inputTo: endInputField.current,
         }),
       ],
-      clickOpens: true,
+      clickOpens: !readOnly,
+      noCalendar: readOnly,
       nextArrow: rightArrowHTML,
       prevArrow: leftArrowHTML,
       onChange: (...args) => {
-        if (savedOnChange) {
+        if (savedOnChange && !readOnly) {
           savedOnChange(...args);
         }
       },
@@ -398,15 +412,17 @@ const DatePicker = React.forwardRef(function DatePicker(
       start.addEventListener('keydown', handleArrowDown);
       start.addEventListener('change', handleOnChange);
 
-      // Flatpickr's calendar dialog is not rendered in a landmark causing an
-      // error with IBM Equal Access Accessibility Checker so we add an aria
-      // role to the container div.
-      calendar.calendarContainer.setAttribute('role', 'application');
-      // IBM EAAC requires an aria-label on a role='region'
-      calendar.calendarContainer.setAttribute(
-        'aria-label',
-        'calendar-container'
-      );
+      if (calendar && calendar.calendarContainer) {
+        // Flatpickr's calendar dialog is not rendered in a landmark causing an
+        // error with IBM Equal Access Accessibility Checker so we add an aria
+        // role to the container div.
+        calendar.calendarContainer.setAttribute('role', 'application');
+        // IBM EAAC requires an aria-label on a role='region'
+        calendar.calendarContainer.setAttribute(
+          'aria-label',
+          'calendar-container'
+        );
+      }
     }
 
     if (end) {
@@ -432,46 +448,46 @@ const DatePicker = React.forwardRef(function DatePicker(
         end.removeEventListener('change', handleOnChange);
       }
     };
-  }, [savedOnChange, savedOnClose, savedOnOpen]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [savedOnChange, savedOnClose, savedOnOpen, readOnly]); //eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (calendarRef.current) {
+    if (calendarRef?.current?.set) {
       calendarRef.current.set({ dateFormat });
     }
   }, [dateFormat]);
 
   useEffect(() => {
-    if (calendarRef.current) {
+    if (calendarRef?.current?.set) {
       calendarRef.current.set('minDate', minDate);
     }
   }, [minDate]);
 
   useEffect(() => {
-    if (calendarRef.current) {
+    if (calendarRef?.current?.set) {
       calendarRef.current.set('maxDate', maxDate);
     }
   }, [maxDate]);
 
   useEffect(() => {
-    if (calendarRef.current && disable) {
+    if (calendarRef?.current?.set && disable) {
       calendarRef.current.set('disable', disable);
     }
   }, [disable]);
 
   useEffect(() => {
-    if (calendarRef.current && enable) {
+    if (calendarRef?.current?.set && enable) {
       calendarRef.current.set('enable', enable);
     }
   }, [enable]);
 
   useEffect(() => {
-    if (calendarRef.current && inline) {
+    if (calendarRef?.current?.set && inline) {
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
 
   useEffect(() => {
-    if (calendarRef.current) {
+    if (calendarRef?.current?.set) {
       if (value !== undefined) {
         calendarRef.current.setDate(value);
       }
@@ -685,6 +701,13 @@ DatePicker.propTypes = {
    * The `open` event handler.
    */
   onOpen: PropTypes.func,
+
+  /**
+   * whether the DatePicker is to be readOnly
+   * if boolean applies to all inputs
+   * if array applies to each input in order
+   */
+  readOnly: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
 
   /**
    * `true` to use the short version.

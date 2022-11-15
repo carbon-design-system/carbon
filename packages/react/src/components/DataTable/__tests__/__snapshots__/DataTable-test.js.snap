@@ -587,10 +587,10 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 className="cds--radio-button__appearance"
                               />
                               <Text
-                                className="cds--visually-hidden"
+                                className="cds--radio-button__label-text cds--visually-hidden"
                               >
                                 <span
-                                  className="cds--visually-hidden"
+                                  className="cds--radio-button__label-text cds--visually-hidden"
                                   dir="auto"
                                 >
                                   Select row
@@ -664,10 +664,10 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 className="cds--radio-button__appearance"
                               />
                               <Text
-                                className="cds--visually-hidden"
+                                className="cds--radio-button__label-text cds--visually-hidden"
                               >
                                 <span
-                                  className="cds--visually-hidden"
+                                  className="cds--radio-button__label-text cds--visually-hidden"
                                   dir="auto"
                                 >
                                   Select row
@@ -741,10 +741,10 @@ exports[`DataTable selection -- radio buttons should render 1`] = `
                                 className="cds--radio-button__appearance"
                               />
                               <Text
-                                className="cds--visually-hidden"
+                                className="cds--radio-button__label-text cds--visually-hidden"
                               >
                                 <span
-                                  className="cds--visually-hidden"
+                                  className="cds--radio-button__label-text cds--visually-hidden"
                                   dir="auto"
                                 >
                                   Select row
