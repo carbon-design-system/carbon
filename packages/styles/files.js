@@ -71,6 +71,8 @@ const files = [
   'scss/components/file-uploader/_index.scss',
   'scss/components/form/_form.scss',
   'scss/components/form/_index.scss',
+  'scss/components/fluid-date-picker/_fluid-date-picker.scss',
+  'scss/components/fluid-date-picker/_index.scss',
   'scss/components/fluid-dropdown/_fluid-dropdown.scss',
   'scss/components/fluid-dropdown/_index.scss',
   'scss/components/fluid-list-box/_fluid-list-box.scss',

@@ -323,4 +323,38 @@ describe('NumberInput', () => {
       expect(screen.getByLabelText('test-label')).toHaveValue(0);
     });
   });
+
+  it('should respect readOnly prop', () => {
+    const onChange = jest.fn();
+    const onClick = jest.fn();
+
+    render(
+      <NumberInput
+        id="input-1"
+        label="Number label"
+        onClick={onClick}
+        onChange={onChange}
+        readOnly
+        translateWithId={translateWithId}
+      />
+    );
+
+    const input = screen.getByRole('spinbutton');
+
+    // Click events should fire
+    userEvent.click(input);
+    expect(onClick).toHaveBeenCalledTimes(1);
+
+    // Change events should *not* fire
+    userEvent.type(input, '3');
+    expect(input).not.toHaveValue('3');
+
+    expect(screen.getByLabelText('increment')).toBeDisabled();
+    expect(screen.getByLabelText('decrement')).toBeDisabled();
+
+    userEvent.click(screen.getByLabelText('increment'));
+    userEvent.click(screen.getByLabelText('decrement'));
+
+    expect(onChange).toHaveBeenCalledTimes(0);
+  });
 });

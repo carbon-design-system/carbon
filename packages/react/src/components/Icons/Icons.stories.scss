@@ -6,7 +6,19 @@
 //
 .demo-icon-example {
   display: flex;
-  width: 10rem;
+  width: 15rem;
   justify-content: space-between;
   margin: 2rem;
+}
+
+.demo-icon-example:nth-child(1) svg {
+  min-width: 1rem;
+}
+
+.demo-icon-example:nth-child(2) svg {
+  min-width: 1.25rem;
+}
+
+.demo-icon-example:nth-child(3) svg {
+  min-width: 2rem;
 }

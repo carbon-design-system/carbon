@@ -129,6 +129,13 @@ const TextArea = React.forwardRef(function TextArea(
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
       readOnly={other.readOnly}
+      style={
+        other.cols
+          ? {}
+          : {
+              width: `100%`,
+            }
+      }
     />
   );
 
@@ -276,7 +283,6 @@ TextArea.defaultProps = {
   onClick: () => {},
   placeholder: '',
   rows: 4,
-  cols: 50,
   invalid: false,
   invalidText: '',
   helperText: '',

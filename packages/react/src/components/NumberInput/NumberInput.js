@@ -107,7 +107,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     [`${prefix}--number__invalid`]:
       normalizedProps.invalid || normalizedProps.warn,
     [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
-    [`${prefix}--number__readonly-icon`]: readOnly,
   });
 
   if (controlledValue !== prevControlledValue) {
@@ -196,7 +195,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
               <button
                 aria-label={decrementNumLabel || iconDescription}
                 className={`${prefix}--number__control-btn down-icon`}
-                disabled={disabled}
+                disabled={disabled | readOnly}
                 onClick={(event) => {
                   const state = {
                     value: clamp(max, min, parseInt(value) - step),
@@ -221,7 +220,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
               <button
                 aria-label={incrementNumLabel || iconDescription}
                 className={`${prefix}--number__control-btn up-icon`}
-                disabled={disabled}
+                disabled={disabled | readOnly}
                 onClick={(event) => {
                   const state = {
                     value: clamp(max, min, parseInt(value) + step),
