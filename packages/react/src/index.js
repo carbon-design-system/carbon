@@ -264,12 +264,12 @@ export {
 export { Popover, PopoverContent } from './components/Popover';
 export { default as ProgressBar } from './components/ProgressBar';
 export { HStack, Stack, VStack } from './components/Stack';
-export { Tooltip } from './components/Tooltip/next';
+export { Tooltip } from './components/Tooltip';
 export {
   Text as unstable_Text,
   TextDirection as unstable_TextDirection,
 } from './components/Text';
-export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
+export { DefinitionTooltip } from './components/Tooltip/DefinitionTooltip';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
 export { useIdPrefix } from './internal/useIdPrefix';

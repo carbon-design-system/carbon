@@ -7,7 +7,7 @@
 
 import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { Tooltip } from '../../next';
+import { Tooltip } from '../';
 
 describe('Tooltip', () => {
   it('should support a custom className with the `className` prop', () => {
