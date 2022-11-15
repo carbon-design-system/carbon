@@ -58,6 +58,11 @@ export interface CheckboxProps
     evt: React.ChangeEvent<HTMLInputElement>,
     data: { checked: boolean; id: string }
   ) => void;
+
+  /**
+   * Provide an optional onClick handler that is called on click
+   */
+  onClick?: (evt: React.MouseEvent<HTMLInputElement>) => void;
 }
 
 const Checkbox = React.forwardRef(
@@ -67,8 +72,10 @@ const Checkbox = React.forwardRef(
       id,
       labelText,
       onChange,
+      onClick,
       indeterminate,
       hideLabel,
+      readOnly,
       title = '',
       ...other
     }: CheckboxProps,
@@ -78,7 +85,10 @@ const Checkbox = React.forwardRef(
     const wrapperClasses = classNames(
       `${prefix}--form-item`,
       `${prefix}--checkbox-wrapper`,
-      [className]
+      className,
+      {
+        [`${prefix}--checkbox-wrapper--readonly`]: readOnly,
+      }
     );
     const innerLabelClasses = classNames(`${prefix}--checkbox-label-text`, {
       [`${prefix}--visually-hidden`]: hideLabel,
@@ -90,7 +100,9 @@ const Checkbox = React.forwardRef(
           {...other}
           type="checkbox"
           onChange={(evt) => {
-            onChange && onChange(evt, { checked: evt.target.checked, id });
+            if (!readOnly && onChange) {
+              onChange(evt, { checked: evt.target.checked, id });
+            }
           }}
           className={`${prefix}--checkbox`}
           id={id}
@@ -102,6 +114,19 @@ const Checkbox = React.forwardRef(
               ref(el);
             } else if (ref && Object(ref) === ref) {
               ref.current = el;
+            }
+          }}
+          // readonly attribute not applicable to type="checkbox"
+          // see - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/checkbox
+          aria-readonly={readOnly}
+          onClick={(evt) => {
+            if (readOnly) {
+              // prevent default stops the checkbox being updated
+              evt.preventDefault();
+            }
+            // pass onClick event on to the user even if readonly
+            if (onClick) {
+              onClick(evt);
             }
           }}
         />
@@ -164,6 +189,11 @@ Checkbox.propTypes = {
    * `(event, { checked, id }) => void`
    */
   onChange: PropTypes.func,
+
+  /**
+   * Specify whether the Checkbox is read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify a title for the <label> node for the Checkbox

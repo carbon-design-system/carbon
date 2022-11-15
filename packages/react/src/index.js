@@ -71,6 +71,7 @@ export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
 export { Grid, Row, Column, ColumnHang, FlexGrid } from './components/Grid';
+export { IdPrefix } from './components/IdPrefix';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
 export ListItem from './components/ListItem';
@@ -217,6 +218,11 @@ export {
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
 export {
+  FluidDatePicker as unstable__FluidDatePicker,
+  FluidDatePickerSkeleton as unstable__FluidDatePickerSkeleton,
+} from './components/FluidDatePicker';
+export { FluidDatePickerInput as unstable__FluidDatePickerInput } from './components/FluidDatePickerInput';
+export {
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
 } from './components/FluidDropdown';
@@ -266,3 +272,4 @@ export {
 export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
+export { useIdPrefix } from './internal/useIdPrefix';
