@@ -86,16 +86,60 @@ export const Invalid = () => (
     <br />
     <br />
     <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-1" labelText="Time" placeholder="hh:mm">
-        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
+      <FluidTimePicker id="time-picker-2" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
           <SelectItem value="am" text="AM" />
           <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
         <FluidTimePickerSelect
-          id="select-2"
+          id="select-4"
           labelText="Timezone"
           invalid
           invalidText="Error message goes here">
+          <SelectItem value="et" text="Eastern Time (ET)" />
+          <SelectItem value="ct" text="Central Time (CT)" />
+          <SelectItem value="mt" text="Mountain Time (MT)" />
+          <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+  </>
+);
+
+export const Warning = () => (
+  <>
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker
+        id="time-picker-1"
+        labelText="Time"
+        placeholder="hh:mm"
+        warn
+        warnText="Warning message goes here">
+        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+        <FluidTimePickerSelect id="select-2" labelText="Timezone">
+          <SelectItem value="et" text="Eastern Time (ET)" />
+          <SelectItem value="ct" text="Central Time (CT)" />
+          <SelectItem value="mt" text="Mountain Time (MT)" />
+          <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+    <br />
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker id="time-picker-2" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+        <FluidTimePickerSelect
+          id="select-4"
+          labelText="Timezone"
+          warn
+          warnText="Warning message goes here">
           <SelectItem value="et" text="Eastern Time (ET)" />
           <SelectItem value="ct" text="Central Time (CT)" />
           <SelectItem value="mt" text="Mountain Time (MT)" />
@@ -112,111 +156,127 @@ export const Invalid = () => (
 //   </div>
 // );
 
-export const Playground = (args) => {
-  return (
-    <div style={{ width: '288px' }}>
-      <FluidTimePicker {...args} />
-    </div>
-  );
-};
+// export const Playground = (args) => {
+//   return (
+//     <div style={{ width: '288px' }}>
+//       <FluidTimePicker
+//         id="time-picker-1"
+//         labelText="Time"
+//         placeholder="hh:mm"
+//         invalid
+//         invalidText="Error message goes here">
+//         <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
+//           <SelectItem value="am" text="AM" />
+//           <SelectItem value="pm" text="PM" />
+//         </FluidTimePickerSelect>
+//         <FluidTimePickerSelect id="select-2" labelText="Timezone">
+//           <SelectItem value="et" text="Eastern Time (ET)" />
+//           <SelectItem value="ct" text="Central Time (CT)" />
+//           <SelectItem value="mt" text="Mountain Time (MT)" />
+//           <SelectItem value="pt" text="Pacific Time (PT)" />
+//         </FluidTimePickerSelect>
+//       </FluidTimePicker>
+//     </div>
+//   );
+// };
 
-Playground.argTypes = {
-  // appendTo: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // children: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // className: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // disable: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // enable: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // inline: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // light: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // locale: {
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // onChange: {
-  //   action: 'clicked',
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // onClose: {
-  //   action: 'clicked',
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // onOpen: {
-  //   action: 'clicked',
-  //   table: {
-  //     disable: true,
-  //   },
-  // },
-  // disabled: {
-  //   control: { type: 'boolean' },
-  //   table: {
-  //     category: 'DatePickerInput',
-  //   },
-  // },
-  // invalid: {
-  //   control: { type: 'boolean' },
-  //   table: {
-  //     category: 'DatePickerInput',
-  //   },
-  // },
-  // invalidText: {
-  //   control: { type: 'text' },
-  //   table: {
-  //     category: 'DatePickerInput',
-  //   },
-  //   defaultValue:
-  //     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  // },
-  // placeholder: {
-  //   control: { type: 'text' },
-  //   table: {
-  //     category: 'DatePickerInput',
-  //   },
-  // },
-  // warn: {
-  //   control: { type: 'boolean' },
-  //   table: {
-  //     category: 'DatePickerInput',
-  //   },
-  // },
-  // warnText: {
-  //   control: { type: 'text' },
-  //   table: {
-  //     category: 'DatePickerInput',
-  //   },
-  //   defaultValue:
-  //     'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  // },
-};
+// Playground.argTypes = {
+// appendTo: {
+//   table: {
+//     disable: true,
+//   },
+// },
+// children: {
+//   table: {
+//     disable: true,
+//   },
+// },
+// className: {
+//   table: {
+//     disable: true,
+//   },
+// },
+// disable: {
+//   table: {
+//     disable: true,
+//   },
+// },
+// enable: {
+//   table: {
+//     disable: true,
+//   },
+// },
+// inline: {
+//   table: {
+//     disable: true,
+//   },
+// },
+// light: {
+//   table: {
+//     disable: true,
+//   },
+// },
+// locale: {
+//   table: {
+//     disable: true,
+//   },
+// },
+// onChange: {
+//   action: 'clicked',
+//   table: {
+//     disable: true,
+//   },
+// },
+// onClose: {
+//   action: 'clicked',
+//   table: {
+//     disable: true,
+//   },
+// },
+// onOpen: {
+//   action: 'clicked',
+//   table: {
+//     disable: true,
+//   },
+// },
+// disabled: {
+//   control: { type: 'boolean' },
+//   table: {
+//     category: 'DatePickerInput',
+//   },
+// },
+// invalid: {
+//   control: { type: 'boolean' },
+//   table: {
+//     category: 'DatePickerInput',
+//   },
+// },
+// invalidText: {
+//   control: { type: 'text' },
+//   table: {
+//     category: 'DatePickerInput',
+//   },
+//   defaultValue:
+//     'Error message that is really long can wrap to more lines but should not be excessively long.',
+// },
+// placeholder: {
+//   control: { type: 'text' },
+//   table: {
+//     category: 'DatePickerInput',
+//   },
+// },
+// warn: {
+//   control: { type: 'boolean' },
+//   table: {
+//     category: 'DatePickerInput',
+//   },
+// },
+// warnText: {
+//   control: { type: 'text' },
+//   table: {
+//     category: 'DatePickerInput',
+//   },
+//   defaultValue:
+//     'Warning message that is really long can wrap to more lines but should not be excessively long.',
+// },
+// };

@@ -18,6 +18,17 @@
 @use '../fluid-select';
 
 @mixin fluid-time-picker {
+  .#{$prefix}--time-picker--fluid {
+    // border-bottom: 1px inset $border-strong;
+    background: $field;
+  }
+
+  // .#{$prefix}--time-picker--fluid .#{$prefix}--text-input,
+  // .#{$prefix}--time-picker--fluid .#{$prefix}--select-input {
+  //   border-bottom: none;
+  //   min-height: rem(63px);
+  // }
+
   .#{$prefix}--time-picker--fluid .#{$prefix}--time-picker--fluid__wrapper {
     display: flex;
   }
@@ -31,6 +42,46 @@
     .#{$prefix}--time-picker--fluid__wrapper
     > * {
     flex-basis: 50%;
+  }
+
+  // Simulated borders
+  .#{$prefix}--time-picker--fluid__wrapper
+    > *:nth-child(2):not(:last-child)
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid__wrapper
+    > *:last-child
+    .#{$prefix}--select-input__wrapper::before {
+    position: absolute;
+    display: block;
+    width: 1px;
+    height: calc(100% - 1px);
+    background-color: $border-strong;
+    content: '';
+    opacity: 1;
+    transition: opacity $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--time-picker--fluid__wrapper
+    .#{$prefix}--select-input__wrapper::after {
+    right: 0;
+  }
+
+  .#{$prefix}--time-picker--fluid__wrapper
+    .#{$prefix}--select-input__wrapper::before {
+    left: 0;
+  }
+
+  .#{$prefix}--time-picker--fluid__wrapper
+    > *:nth-child(2):not(:last-child):hover
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid__wrapper
+    > *:nth-child(2):hover:not(:last-child)
+    ~ *
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid__wrapper
+    > *:last-child:hover
+    .#{$prefix}--select-input__wrapper::before {
+    opacity: 0;
   }
 
   // Invalid + Warn states
@@ -53,5 +104,59 @@
 
   .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--form-requirement {
     color: $text-error;
+  }
+
+  .#{$prefix}--time-picker--fluid--invalid
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *:nth-child(2):not(:last-child)
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid--invalid
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *:last-child
+    .#{$prefix}--select-input__wrapper::before {
+    top: 8px;
+    height: calc(100% - 1rem);
+  }
+
+  .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--text-input,
+  .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--select-input {
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--time-picker--fluid.#{$prefix}--time-picker--fluid--invalid
+    .#{$prefix}--time-picker__divider {
+    width: calc(100% - 2rem);
+    border-style: solid;
+    border-color: $border-subtle;
+    border-bottom: none;
+    margin: 0 1rem;
+  }
+
+  .#{$prefix}--time-picker--fluid--child-invalid .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--fluid--child-invalid .#{$prefix}--text-input {
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--time-picker--fluid--child-invalid
+    .#{$prefix}--select-input__wrapper {
+    position: initial;
+  }
+
+  .#{$prefix}--time-picker--fluid--child-invalid
+    .#{$prefix}--time-picker--fluid__wrapper
+    > * {
+    border-bottom: 1px solid $border-strong;
+  }
+
+  // Simulated borders when one input is invalid
+  .#{$prefix}--time-picker--fluid--child-invalid
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *:nth-child(2):not(:last-child)
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid--child-invalid
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *:last-child
+    .#{$prefix}--select-input__wrapper::before {
+    height: 100%;
   }
 }

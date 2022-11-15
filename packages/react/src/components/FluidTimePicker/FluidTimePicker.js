@@ -16,11 +16,20 @@ const FluidTimePicker = React.forwardRef(function FluidTimePicker(
   ref
 ) {
   const prefix = usePrefix();
+
+  let childIsInvalid;
+  React.Children.map(children, (child) => {
+    if (child.props.invalid) {
+      childIsInvalid = true;
+    }
+  });
+
   const classNames = classnames(className, {
     [`${prefix}--time-picker--fluid`]: true,
     [`${prefix}--time-picker--equal-width`]: children.length !== 2,
     [`${prefix}--time-picker--fluid--invalid`]: invalid,
     [`${prefix}--time-picker--fluid--warning`]: warn,
+    [`${prefix}--time-picker--fluid--child-invalid`]: childIsInvalid,
   });
 
   const errorText = () => {
@@ -42,7 +51,7 @@ const FluidTimePicker = React.forwardRef(function FluidTimePicker(
         </div>
         {children}
       </div>
-      {error && <hr className={`${prefix}--text-input__divider`} />}
+      {error && <hr className={`${prefix}--time-picker__divider`} />}
       {error && (
         <div className={`${prefix}--form-requirement`}>{errorText()}</div>
       )}
