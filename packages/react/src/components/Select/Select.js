@@ -34,6 +34,7 @@ const Select = React.forwardRef(function Select(
     invalidText,
     helperText,
     light = false,
+    readOnly,
     size,
     warn = false,
     warnText,
@@ -53,6 +54,7 @@ const Select = React.forwardRef(function Select(
       [`${prefix}--select--light`]: light,
       [`${prefix}--select--invalid`]: invalid,
       [`${prefix}--select--disabled`]: disabled,
+      [`${prefix}--select--readonly`]: readOnly,
       [`${prefix}--select--warning`]: warn,
       [`${prefix}--select--fluid--invalid`]: isFluid && invalid,
       [`${prefix}--select--fluid--focus`]: isFluid && isFocused,
@@ -97,6 +99,24 @@ const Select = React.forwardRef(function Select(
     setIsFocused(evt.type === 'focus' ? true : false);
   };
 
+  const readOnlyEventHandlers = {
+    onMouseDown: (evt) => {
+      // NOTE: does not prevent click
+      if (readOnly) {
+        evt.preventDefault();
+        // focus on the element as per readonly input behavior
+        evt.target.focus();
+      }
+    },
+    onKeyDown: (evt) => {
+      const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' '];
+      // This prevents the select from opening for the above keys
+      if (readOnly && selectAccessKeys.includes(evt.key)) {
+        evt.preventDefault();
+      }
+    },
+  };
+
   const input = (() => {
     return (
       <>
@@ -107,6 +127,8 @@ const Select = React.forwardRef(function Select(
           className={inputClasses}
           disabled={disabled || undefined}
           aria-invalid={invalid || undefined}
+          aria-readonly={readOnly || undefined}
+          {...readOnlyEventHandlers}
           ref={ref}>
           {children}
         </select>
@@ -241,6 +263,11 @@ Select.propTypes = {
    * the underlying `<input>` changes
    */
   onChange: PropTypes.func,
+
+  /**
+   * Whether the select should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the size of the Select Input.
