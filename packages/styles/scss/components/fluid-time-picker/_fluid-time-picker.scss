@@ -23,12 +23,6 @@
     background: $field;
   }
 
-  // .#{$prefix}--time-picker--fluid .#{$prefix}--text-input,
-  // .#{$prefix}--time-picker--fluid .#{$prefix}--select-input {
-  //   border-bottom: none;
-  //   min-height: rem(63px);
-  // }
-
   .#{$prefix}--time-picker--fluid .#{$prefix}--time-picker--fluid__wrapper {
     display: flex;
   }
@@ -71,17 +65,27 @@
     left: 0;
   }
 
-  .#{$prefix}--time-picker--fluid__wrapper
+  .#{$prefix}--time-picker--fluid:not(.#{$prefix}--time-picker--fluid--disabled)
+    .#{$prefix}--time-picker--fluid__wrapper
     > *:nth-child(2):not(:last-child):hover
     .#{$prefix}--select-input__wrapper::before,
-  .#{$prefix}--time-picker--fluid__wrapper
+  .#{$prefix}--time-picker--fluid:not(.#{$prefix}--time-picker--fluid--disabled)
+    .#{$prefix}--time-picker--fluid__wrapper
     > *:nth-child(2):hover:not(:last-child)
     ~ *
     .#{$prefix}--select-input__wrapper::before,
-  .#{$prefix}--time-picker--fluid__wrapper
+  .#{$prefix}--time-picker--fluid:not(.#{$prefix}--time-picker--fluid--disabled)
+    .#{$prefix}--time-picker--fluid__wrapper
     > *:last-child:hover
     .#{$prefix}--select-input__wrapper::before {
     opacity: 0;
+  }
+
+  .#{$prefix}--time-picker--fluid--disabled
+    .#{$prefix}--time-picker--fluid__wrapper
+    .#{$prefix}--select--disabled
+    .#{$prefix}--select-input__wrapper::before {
+    background: $border-disabled;
   }
 
   // Invalid + Warn states
@@ -92,11 +96,42 @@
   }
 
   .#{$prefix}--time-picker--fluid--invalid {
+    position: relative;
     border: 2px solid $support-error;
   }
 
+  .#{$prefix}--time-picker--fluid--warning {
+    position: relative;
+  }
+
+  .#{$prefix}--time-picker__icon {
+    display: none;
+  }
+
+  .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--time-picker__icon,
+  .#{$prefix}--time-picker--fluid--warning .#{$prefix}--time-picker__icon {
+    position: absolute;
+    top: rem(72px);
+    right: $spacing-05;
+    display: block;
+  }
+
+  .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--time-picker__icon {
+    fill: $support-error;
+  }
+
+  .#{$prefix}--time-picker--fluid--warning .#{$prefix}--time-picker__icon {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--time-picker--fluid--warning
+    .#{$prefix}--time-picker__icon
+    path:first-of-type {
+    fill: $icon-primary;
+  }
+
   .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--form-requirement,
-  .#{$prefix}--time-picker--fluid--warn .#{$prefix}--form-requirement {
+  .#{$prefix}--time-picker--fluid--warning .#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
     max-height: 100%;
@@ -113,17 +148,29 @@
   .#{$prefix}--time-picker--fluid--invalid
     .#{$prefix}--time-picker--fluid__wrapper
     > *:last-child
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid--warning
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *:nth-child(2):not(:last-child)
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid--warning
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *:last-child
     .#{$prefix}--select-input__wrapper::before {
     top: 8px;
     height: calc(100% - 1rem);
   }
 
   .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--text-input,
-  .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--select-input {
+  .#{$prefix}--time-picker--fluid--warning .#{$prefix}--text-input,
+  .#{$prefix}--time-picker--fluid--invalid .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--fluid--warning .#{$prefix}--select-input {
     border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--time-picker--fluid.#{$prefix}--time-picker--fluid--invalid
+    .#{$prefix}--time-picker__divider,
+  .#{$prefix}--time-picker--fluid.#{$prefix}--time-picker--fluid--warning
     .#{$prefix}--time-picker__divider {
     width: calc(100% - 2rem);
     border-style: solid;
@@ -132,17 +179,28 @@
     margin: 0 1rem;
   }
 
+  .#{$prefix}--time-picker--fluid--child-warning .#{$prefix}--select--warning {
+    border-bottom: none;
+  }
+
   .#{$prefix}--time-picker--fluid--child-invalid .#{$prefix}--select-input,
-  .#{$prefix}--time-picker--fluid--child-invalid .#{$prefix}--text-input {
+  .#{$prefix}--time-picker--fluid--child-invalid .#{$prefix}--text-input,
+  .#{$prefix}--time-picker--fluid--child-warning .#{$prefix}--select-input,
+  .#{$prefix}--time-picker--fluid--child-warning .#{$prefix}--text-input {
     border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--time-picker--fluid--child-invalid
+    .#{$prefix}--select-input__wrapper,
+  .#{$prefix}--time-picker--fluid--child-warning
     .#{$prefix}--select-input__wrapper {
     position: initial;
   }
 
   .#{$prefix}--time-picker--fluid--child-invalid
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *,
+  .#{$prefix}--time-picker--fluid--child-warning
     .#{$prefix}--time-picker--fluid__wrapper
     > * {
     border-bottom: 1px solid $border-strong;
@@ -154,6 +212,14 @@
     > *:nth-child(2):not(:last-child)
     .#{$prefix}--select-input__wrapper::before,
   .#{$prefix}--time-picker--fluid--child-invalid
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *:last-child
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid--child-warning
+    .#{$prefix}--time-picker--fluid__wrapper
+    > *:nth-child(2):not(:last-child)
+    .#{$prefix}--select-input__wrapper::before,
+  .#{$prefix}--time-picker--fluid--child-warning
     .#{$prefix}--time-picker--fluid__wrapper
     > *:last-child
     .#{$prefix}--select-input__wrapper::before {

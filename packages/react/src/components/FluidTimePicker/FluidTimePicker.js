@@ -10,26 +10,41 @@ import React from 'react';
 import classnames from 'classnames';
 import FluidTextInput from '../FluidTextInput';
 import { usePrefix } from '../../internal/usePrefix';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 const FluidTimePicker = React.forwardRef(function FluidTimePicker(
-  { className, children, invalid, invalidText, warn, warnText, ...other },
+  {
+    className,
+    children,
+    disabled,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+    ...other
+  },
   ref
 ) {
   const prefix = usePrefix();
 
-  let childIsInvalid;
+  let childIsInvalid, childIsWarning;
   React.Children.map(children, (child) => {
     if (child.props.invalid) {
       childIsInvalid = true;
+    }
+    if (child.props.warn) {
+      childIsWarning = true;
     }
   });
 
   const classNames = classnames(className, {
     [`${prefix}--time-picker--fluid`]: true,
     [`${prefix}--time-picker--equal-width`]: children.length !== 2,
+    [`${prefix}--time-picker--fluid--disabled`]: disabled,
     [`${prefix}--time-picker--fluid--invalid`]: invalid,
     [`${prefix}--time-picker--fluid--warning`]: warn,
     [`${prefix}--time-picker--fluid--child-invalid`]: childIsInvalid,
+    [`${prefix}--time-picker--fluid--child-warning`]: childIsWarning,
   });
 
   const errorText = () => {
@@ -47,13 +62,26 @@ const FluidTimePicker = React.forwardRef(function FluidTimePicker(
     <div className={classNames}>
       <div className={`${prefix}--time-picker--fluid__wrapper`}>
         <div className={`${prefix}--time-picker__input`}>
-          <FluidTextInput ref={ref} {...other} />
+          <FluidTextInput disabled={disabled} ref={ref} {...other} />
         </div>
-        {children}
+        {disabled
+          ? React.Children.toArray(children).map((child) => {
+              return React.cloneElement(child, { disabled });
+            })
+          : children}
       </div>
       {error && <hr className={`${prefix}--time-picker__divider`} />}
       {error && (
         <div className={`${prefix}--form-requirement`}>{errorText()}</div>
+      )}
+      {error && invalid ? (
+        <WarningFilled
+          className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--invalid`}
+        />
+      ) : (
+        <WarningAltFilled
+          className={`${prefix}--time-picker__icon ${prefix}--time-picker__icon--warn`}
+        />
       )}
     </div>
   );

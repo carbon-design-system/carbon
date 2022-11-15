@@ -25,7 +25,7 @@ export default {
 
 const ToggleTip = (
   <>
-    <ToggletipLabel>Time</ToggletipLabel>
+    <ToggletipLabel>Clock</ToggletipLabel>
     <Toggletip align="top-left">
       <ToggletipButton label="Show information">
         <Information />
@@ -86,13 +86,28 @@ export const Invalid = () => (
     <br />
     <br />
     <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-2" labelText="Time" placeholder="hh:mm">
+      <FluidTimePicker
+        id="time-picker-2"
+        labelText="Time"
+        placeholder="hh:mm"
+        invalid
+        invalidText="Error message goes here">
         <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
           <SelectItem value="am" text="AM" />
           <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+    <br />
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker id="time-picker-3" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect id="select-4" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
         <FluidTimePickerSelect
-          id="select-4"
+          id="select-5"
           labelText="Timezone"
           invalid
           invalidText="Error message goes here">
@@ -100,6 +115,20 @@ export const Invalid = () => (
           <SelectItem value="ct" text="Central Time (CT)" />
           <SelectItem value="mt" text="Mountain Time (MT)" />
           <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+    <br />
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker id="time-picker-4" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect
+          invalid
+          invalidText="Error message goes here"
+          id="select-6"
+          labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
       </FluidTimePicker>
     </div>
@@ -129,14 +158,30 @@ export const Warning = () => (
     </div>
     <br />
     <br />
+
     <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-2" labelText="Time" placeholder="hh:mm">
+      <FluidTimePicker
+        id="time-picker-2"
+        labelText="Time"
+        placeholder="hh:mm"
+        warn
+        warnText="Warning message goes here">
         <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
           <SelectItem value="am" text="AM" />
           <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+    <br />
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker id="time-picker-3" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect id="select-4" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
         <FluidTimePickerSelect
-          id="select-4"
+          id="select-5"
           labelText="Timezone"
           warn
           warnText="Warning message goes here">
@@ -144,6 +189,20 @@ export const Warning = () => (
           <SelectItem value="ct" text="Central Time (CT)" />
           <SelectItem value="mt" text="Mountain Time (MT)" />
           <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+    <br />
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker id="time-picker-4" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect
+          warn
+          warnText="Warning message goes here"
+          id="select-6"
+          labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
       </FluidTimePicker>
     </div>
@@ -156,127 +215,61 @@ export const Warning = () => (
 //   </div>
 // );
 
-// export const Playground = (args) => {
-//   return (
-//     <div style={{ width: '288px' }}>
-//       <FluidTimePicker
-//         id="time-picker-1"
-//         labelText="Time"
-//         placeholder="hh:mm"
-//         invalid
-//         invalidText="Error message goes here">
-//         <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
-//           <SelectItem value="am" text="AM" />
-//           <SelectItem value="pm" text="PM" />
-//         </FluidTimePickerSelect>
-//         <FluidTimePickerSelect id="select-2" labelText="Timezone">
-//           <SelectItem value="et" text="Eastern Time (ET)" />
-//           <SelectItem value="ct" text="Central Time (CT)" />
-//           <SelectItem value="mt" text="Mountain Time (MT)" />
-//           <SelectItem value="pt" text="Pacific Time (PT)" />
-//         </FluidTimePickerSelect>
-//       </FluidTimePicker>
-//     </div>
-//   );
-// };
+export const Playground = (args) => {
+  return (
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker id="time-picker-1" {...args}>
+        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+        <FluidTimePickerSelect id="select-2" labelText="Timezone">
+          <SelectItem value="et" text="Eastern Time (ET)" />
+          <SelectItem value="ct" text="Central Time (CT)" />
+          <SelectItem value="mt" text="Mountain Time (MT)" />
+          <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+  );
+};
 
-// Playground.argTypes = {
-// appendTo: {
-//   table: {
-//     disable: true,
-//   },
-// },
-// children: {
-//   table: {
-//     disable: true,
-//   },
-// },
-// className: {
-//   table: {
-//     disable: true,
-//   },
-// },
-// disable: {
-//   table: {
-//     disable: true,
-//   },
-// },
-// enable: {
-//   table: {
-//     disable: true,
-//   },
-// },
-// inline: {
-//   table: {
-//     disable: true,
-//   },
-// },
-// light: {
-//   table: {
-//     disable: true,
-//   },
-// },
-// locale: {
-//   table: {
-//     disable: true,
-//   },
-// },
-// onChange: {
-//   action: 'clicked',
-//   table: {
-//     disable: true,
-//   },
-// },
-// onClose: {
-//   action: 'clicked',
-//   table: {
-//     disable: true,
-//   },
-// },
-// onOpen: {
-//   action: 'clicked',
-//   table: {
-//     disable: true,
-//   },
-// },
-// disabled: {
-//   control: { type: 'boolean' },
-//   table: {
-//     category: 'DatePickerInput',
-//   },
-// },
-// invalid: {
-//   control: { type: 'boolean' },
-//   table: {
-//     category: 'DatePickerInput',
-//   },
-// },
-// invalidText: {
-//   control: { type: 'text' },
-//   table: {
-//     category: 'DatePickerInput',
-//   },
-//   defaultValue:
-//     'Error message that is really long can wrap to more lines but should not be excessively long.',
-// },
-// placeholder: {
-//   control: { type: 'text' },
-//   table: {
-//     category: 'DatePickerInput',
-//   },
-// },
-// warn: {
-//   control: { type: 'boolean' },
-//   table: {
-//     category: 'DatePickerInput',
-//   },
-// },
-// warnText: {
-//   control: { type: 'text' },
-//   table: {
-//     category: 'DatePickerInput',
-//   },
-//   defaultValue:
-//     'Warning message that is really long can wrap to more lines but should not be excessively long.',
-// },
-// };
+Playground.argTypes = {
+  children: {
+    table: {
+      disable: true,
+    },
+  },
+  className: {
+    table: {
+      disable: true,
+    },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  labelText: {
+    control: { type: 'string' },
+    defaultValue: 'Time',
+  },
+  invalid: {
+    control: { type: 'boolean' },
+  },
+  invalidText: {
+    control: { type: 'text' },
+    defaultValue:
+      'Error message that is really long can wrap to more lines but should not be excessively long.',
+  },
+  placeholder: {
+    control: { type: 'text' },
+    defaultValue: 'hh:mm',
+  },
+  warn: {
+    control: { type: 'boolean' },
+  },
+  warnText: {
+    control: { type: 'text' },
+    defaultValue:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  },
+};
