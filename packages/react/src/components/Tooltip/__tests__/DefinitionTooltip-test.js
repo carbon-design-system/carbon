@@ -8,7 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { DefinitionTooltip } from '../../next/DefinitionTooltip';
+import { DefinitionTooltip } from '../DefinitionTooltip';
 
 describe('DefintiionTooltip', () => {
   it('should display onClick a defintion provided via prop', () => {

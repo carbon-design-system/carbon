@@ -30,7 +30,7 @@
     "@octokit/rest": "^19.0.0",
     "@rollup/plugin-babel": "^5.3.0",
     "@rollup/plugin-commonjs": "^21.0.0",
-    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
     "child-process-promise": "^2.2.1",
@@ -47,7 +47,7 @@
     "progress-estimator": "^0.3.0",
     "remark": "^10.0.1",
     "replace-in-file": "^6.1.0",
-    "rollup": "^2.46.0",
+    "rollup": "^2.79.1",
     "sass": "^1.51.0",
     "sassdoc": "^2.7.3",
     "yargs": "^17.0.1"
