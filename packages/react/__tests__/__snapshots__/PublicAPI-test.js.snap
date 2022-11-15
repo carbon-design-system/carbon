@@ -475,6 +475,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "title": Object {
         "type": "string",
       },
@@ -2467,6 +2470,19 @@ Map {
       "onOpen": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "array",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "short": Object {
         "type": "bool",
       },
@@ -2561,6 +2577,9 @@ Map {
       "pattern": [Function],
       "placeholder": Object {
         "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
@@ -3934,6 +3953,16 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "IdPrefix" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "prefix": Object {
+        "type": "string",
+      },
+    },
   },
   "InlineLoading" => Object {
     "propTypes": Object {
@@ -6156,6 +6185,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -8315,6 +8347,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -9984,6 +10019,7 @@ Map {
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
   "unstable_useLayoutDirection" => Object {},
+  "useIdPrefix" => Object {},
   "useLayer" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},
