@@ -1905,7 +1905,7 @@ __metadata:
     "@octokit/rest": ^19.0.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-node-resolve": ^15.0.0
     chalk: ^4.1.1
     change-case: ^4.1.2
     child-process-promise: ^2.2.1
@@ -1922,7 +1922,7 @@ __metadata:
     progress-estimator: ^0.3.0
     remark: ^10.0.1
     replace-in-file: ^6.1.0
-    rollup: ^2.46.0
+    rollup: ^2.79.1
     sass: ^1.51.0
     sassdoc: ^2.7.3
     yargs: ^17.0.1
@@ -1975,12 +1975,12 @@ __metadata:
     "@babel/types": ^7.18.4
     "@carbon/scss-generator": ^10.15.0
     "@rollup/plugin-babel": ^5.3.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-node-resolve": ^15.0.0
     change-case: ^4.1.2
     fs-extra: ^10.0.0
     js-yaml: ^3.14.0
     rimraf: ^3.0.2
-    rollup: ^2.46.0
+    rollup: ^2.79.1
     rollup-plugin-strip-banner: ^2.0.0
   languageName: unknown
   linkType: soft
@@ -2029,7 +2029,7 @@ __metadata:
     react: ^16.6.0
     react-dom: ^16.6.0
     rimraf: ^3.0.0
-    rollup: ^2.46.0
+    rollup: ^2.79.1
     rollup-plugin-strip-banner: ^2.0.0
     svg-parser: ^2.0.4
     svgo: ^1.1.1
@@ -2084,7 +2084,7 @@ __metadata:
     fs-extra: ^10.0.0
     prettier: ^2.7.1
     rimraf: ^3.0.0
-    rollup: ^2.46.0
+    rollup: ^2.79.1
     vue: ^2.6.8
   languageName: unknown
   linkType: soft
@@ -2172,7 +2172,7 @@ __metadata:
     "@carbon/themes": ^11.12.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-node-resolve": ^15.0.0
     "@rollup/plugin-typescript": ^8.5.0
     "@storybook/addon-a11y": ^6.5.6
     "@storybook/addon-actions": ^6.5.6
@@ -2219,7 +2219,7 @@ __metadata:
     react-is: ^17.0.2
     requestanimationframe: ^0.0.23
     rimraf: ^3.0.2
-    rollup: ^2.46.0
+    rollup: ^2.79.1
     rollup-plugin-strip-banner: ^2.0.0
     rtlcss: ^4.0.0
     sass: ^1.51.0
@@ -5227,19 +5227,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-node-resolve@npm:^13.0.0":
-  version: 13.0.0
-  resolution: "@rollup/plugin-node-resolve@npm:13.0.0"
+"@rollup/plugin-node-resolve@npm:^15.0.0":
+  version: 15.0.1
+  resolution: "@rollup/plugin-node-resolve@npm:15.0.1"
   dependencies:
-    "@rollup/pluginutils": ^3.1.0
-    "@types/resolve": 1.17.1
-    builtin-modules: ^3.1.0
+    "@rollup/pluginutils": ^5.0.1
+    "@types/resolve": 1.20.2
     deepmerge: ^4.2.2
+    is-builtin-module: ^3.2.0
     is-module: ^1.0.0
-    resolve: ^1.19.0
+    resolve: ^1.22.1
   peerDependencies:
-    rollup: ^2.42.0
-  checksum: c0237e65f50d593efc176e07a2ddf734918bc7344f739fe2254a3bfaa4be37c6d4787d045ab79d741811d3658f7e8bbb1484e6aa25bbb9fe2a3c33472b3f371d
+    rollup: ^2.78.0||^3.0.0
+  peerDependenciesMeta:
+    rollup:
+      optional: true
+  checksum: 90e30b41626a15ebf02746a83d34b15f9fe9051ddc156a9bf785504f489947980b3bdeb7bf2f80828a9becfe472a03a96d0238328a3e3e2198a482fcac7eb3aa
   languageName: node
   linkType: hard
 
@@ -7834,6 +7837,13 @@ __metadata:
   dependencies:
     "@types/node": "*"
   checksum: dc6a6df507656004e242dcb02c784479deca516d5f4b58a1707e708022b269ae147e1da0521f3e8ad0d63638869d87e0adc023f0bd5454aa6f72ac66c7525cf5
+  languageName: node
+  linkType: hard
+
+"@types/resolve@npm:1.20.2":
+  version: 1.20.2
+  resolution: "@types/resolve@npm:1.20.2"
+  checksum: 61c2cad2499ffc8eab36e3b773945d337d848d3ac6b7b0a87c805ba814bc838ef2f262fc0f109bfd8d2e0898ff8bd80ad1025f9ff64f1f71d3d4294c9f14e5f6
   languageName: node
   linkType: hard
 
@@ -10549,10 +10559,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"builtin-modules@npm:^3.1.0":
-  version: 3.1.0
-  resolution: "builtin-modules@npm:3.1.0"
-  checksum: 954d8004f21961c92218eab15a02d3cea1c6c19312a8228546cdd8feae1dafc1aaa4746c2a8f9be9df15255756cc622fde702ce0ef8a319abfe1a505ca99f38d
+"builtin-modules@npm:^3.1.0, builtin-modules@npm:^3.3.0":
+  version: 3.3.0
+  resolution: "builtin-modules@npm:3.3.0"
+  checksum: db021755d7ed8be048f25668fe2117620861ef6703ea2c65ed2779c9e3636d5c3b82325bd912244293959ff3ae303afa3471f6a15bf5060c103e4cc3a839749d
   languageName: node
   linkType: hard
 
@@ -10904,7 +10914,7 @@ __metadata:
     "@carbon/test-utils": ^10.26.0
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
-    "@rollup/plugin-node-resolve": ^13.0.0
+    "@rollup/plugin-node-resolve": ^15.0.0
     babel-plugin-dev-expression: ^0.2.3
     babel-preset-carbon: ^0.3.0
     browserslist-config-carbon: ^11.0.0
@@ -10912,7 +10922,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     rimraf: ^3.0.2
-    rollup: ^2.46.0
+    rollup: ^2.79.1
     rollup-plugin-strip-banner: ^2.0.0
   peerDependencies:
     react: ^16.8.6 || ^17.0.1
@@ -18597,6 +18607,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
+"is-builtin-module@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "is-builtin-module@npm:3.2.0"
+  dependencies:
+    builtin-modules: ^3.3.0
+  checksum: 0315751b898feff0646511c896e88b608a755c5025d0ce9a3ad25783de50be870e47dafb838cebbb06fbb2a948b209ea55348eee267836c9dd40d3a11ec717d3
+  languageName: node
+  linkType: hard
+
 "is-callable@npm:^1.1.4, is-callable@npm:^1.1.5, is-callable@npm:^1.2.4":
   version: 1.2.4
   resolution: "is-callable@npm:1.2.4"
@@ -18626,12 +18645,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"is-core-module@npm:^2.2.0, is-core-module@npm:^2.5.0, is-core-module@npm:^2.7.0, is-core-module@npm:^2.8.0, is-core-module@npm:^2.8.1":
-  version: 2.8.1
-  resolution: "is-core-module@npm:2.8.1"
+"is-core-module@npm:^2.2.0, is-core-module@npm:^2.5.0, is-core-module@npm:^2.7.0, is-core-module@npm:^2.8.0, is-core-module@npm:^2.9.0":
+  version: 2.11.0
+  resolution: "is-core-module@npm:2.11.0"
   dependencies:
     has: ^1.0.3
-  checksum: 418b7bc10768a73c41c7ef497e293719604007f88934a6ffc5f7c78702791b8528102fb4c9e56d006d69361549b3d9519440214a74aefc7e0b79e5e4411d377f
+  checksum: f96fd490c6b48eb4f6d10ba815c6ef13f410b0ba6f7eb8577af51697de523e5f2cd9de1c441b51d27251bf0e4aebc936545e33a5d26d5d51f28d25698d4a8bab
   languageName: node
   linkType: hard
 
@@ -27809,16 +27828,16 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"resolve@^1.10.0, resolve@^1.12.0, resolve@^1.14.2, resolve@^1.17.0, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.3.2, resolve@npm:^1.13.1, resolve@npm:^1.22.0":
-  version: 1.22.0
-  resolution: "resolve@npm:1.22.0"
+"resolve@^1.10.0, resolve@^1.12.0, resolve@^1.14.2, resolve@^1.17.0, resolve@^1.19.0, resolve@^1.20.0, resolve@^1.3.2, resolve@npm:^1.13.1, resolve@npm:^1.22.0, resolve@npm:^1.22.1":
+  version: 1.22.1
+  resolution: "resolve@npm:1.22.1"
   dependencies:
-    is-core-module: ^2.8.1
+    is-core-module: ^2.9.0
     path-parse: ^1.0.7
     supports-preserve-symlinks-flag: ^1.0.0
   bin:
     resolve: bin/resolve
-  checksum: a2d14cc437b3a23996f8c7367eee5c7cf8149c586b07ca2ae00e96581ce59455555a1190be9aa92154785cf9f2042646c200d0e00e0bbd2b8a995a93a0ed3e4e
+  checksum: 07af5fc1e81aa1d866cbc9e9460fbb67318a10fa3c4deadc35c3ad8a898ee9a71a86a65e4755ac3195e0ea0cfbe201eb323ebe655ce90526fd61917313a34e4e
   languageName: node
   linkType: hard
 
@@ -27832,16 +27851,16 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.13.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.17.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.3.2#~builtin<compat/resolve>":
-  version: 1.22.0
-  resolution: "resolve@patch:resolve@npm%3A1.22.0#~builtin<compat/resolve>::version=1.22.0&hash=07638b"
+"resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.12.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.13.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.14.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.17.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.19.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.3.2#~builtin<compat/resolve>":
+  version: 1.22.1
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"
   dependencies:
-    is-core-module: ^2.8.1
+    is-core-module: ^2.9.0
     path-parse: ^1.0.7
     supports-preserve-symlinks-flag: ^1.0.0
   bin:
     resolve: bin/resolve
-  checksum: c79ecaea36c872ee4a79e3db0d3d4160b593f2ca16e031d8283735acd01715a203607e9ded3f91f68899c2937fa0d49390cddbe0fb2852629212f3cda283f4a7
+  checksum: 5656f4d0bedcf8eb52685c1abdf8fbe73a1603bb1160a24d716e27a57f6cecbe2432ff9c89c2bd57542c3a7b9d14b1882b73bfe2e9d7849c9a4c0b8b39f02b8b
   languageName: node
   linkType: hard
 
@@ -28014,9 +28033,9 @@ resolve@^2.0.0-next.3:
   languageName: node
   linkType: hard
 
-"rollup@npm:^2.43.1, rollup@npm:^2.46.0, rollup@npm:^2.59.0":
-  version: 2.70.1
-  resolution: "rollup@npm:2.70.1"
+"rollup@npm:^2.43.1, rollup@npm:^2.59.0, rollup@npm:^2.79.1":
+  version: 2.79.1
+  resolution: "rollup@npm:2.79.1"
   dependencies:
     fsevents: ~2.3.2
   dependenciesMeta:
@@ -28024,7 +28043,7 @@ resolve@^2.0.0-next.3:
       optional: true
   bin:
     rollup: dist/bin/rollup
-  checksum: 06c62933e6e81a1c8c684d7d576e507081aabdb63cc0c91bca86b7348b66df03b77827068e4990b8b6c738bd3ef66dcc8c7ed7e0ea40b736068e7618f693133e
+  checksum: 6a2bf167b3587d4df709b37d149ad0300692cc5deb510f89ac7bdc77c8738c9546ae3de9322b0968e1ed2b0e984571f5f55aae28fa7de4cfcb1bc5402a4e2be6
   languageName: node
   linkType: hard
 
