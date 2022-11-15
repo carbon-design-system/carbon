@@ -6,10 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { createContext, useState } from 'react';
 import classNames from 'classnames';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
+
+export const RadioButtonGroupContext = createContext();
 
 const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
   {
@@ -22,6 +24,7 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
     name,
     onChange = () => {},
     orientation = 'horizontal',
+    readOnly,
     valueSelected,
   },
   ref
@@ -63,9 +66,11 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
   }
 
   function handleOnChange(newSelection, value, evt) {
-    if (newSelection !== selected) {
-      setSelected(newSelection);
-      onChange(newSelection, name, evt);
+    if (!readOnly) {
+      if (newSelection !== selected) {
+        setSelected(newSelection);
+        onChange(newSelection, name, evt);
+      }
     }
   }
 
@@ -73,13 +78,17 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
     [`${prefix}--radio-button-group--${orientation}`]:
       orientation === 'vertical',
     [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
+    [`${prefix}--radio-button-group--readonly`]: readOnly,
   });
 
   const wrapperClasses = classNames(`${prefix}--form-item`, className);
 
   return (
     <div className={wrapperClasses} ref={ref}>
-      <fieldset className={fieldsetClasses} disabled={disabled}>
+      <fieldset
+        className={fieldsetClasses}
+        disabled={disabled}
+        aria-readonly={readOnly}>
         {legendText && (
           <Legend className={`${prefix}--label`}>{legendText}</Legend>
         )}
@@ -136,6 +145,11 @@ RadioButtonGroup.propTypes = {
    * Provide where radio buttons should be placed
    */
   orientation: PropTypes.oneOf(['horizontal', 'vertical']),
+
+  /**
+   * Whether the RadioButtonGroup should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the value that is currently selected in the group

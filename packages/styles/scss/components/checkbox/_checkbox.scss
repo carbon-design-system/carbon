@@ -180,6 +180,37 @@
     background-color: $icon-disabled;
   }
 
+  //----------------------------------------------
+  // Read-only
+  // ---------------------------------------------
+  .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label-text {
+    cursor: text;
+    user-select: text;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox
+    + .#{$prefix}--checkbox-label::before {
+    border-color: $icon-disabled;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $icon-disabled;
+    background: transparent;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after {
+    border-color: $text-primary;
+  }
+
   //-----------------------------------------------
   // Skeleton
   //-----------------------------------------------

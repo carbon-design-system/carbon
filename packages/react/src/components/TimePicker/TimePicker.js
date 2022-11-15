@@ -28,6 +28,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     onBlur = () => {},
     pattern = '(1[012]|[1-9]):[0-5][0-9](\\s)?',
     placeholder = 'hh:mm',
+    readOnly,
     size = 'md',
     type = 'text',
     value,
@@ -47,13 +48,15 @@ const TimePicker = React.forwardRef(function TimePicker(
 
   function handleOnClick(evt) {
     if (!disabled) {
-      setValue(isValue);
+      if (!readOnly) {
+        setValue(isValue);
+      }
       onClick(evt);
     }
   }
 
   function handleOnChange(evt) {
-    if (!disabled) {
+    if (!disabled && !readOnly) {
       setValue(isValue);
       onChange(evt);
     }
@@ -61,7 +64,9 @@ const TimePicker = React.forwardRef(function TimePicker(
 
   function handleOnBlur(evt) {
     if (!disabled) {
-      setValue(isValue);
+      if (!readOnly) {
+        setValue(isValue);
+      }
       onBlur(evt);
     }
   }
@@ -79,6 +84,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     [`${prefix}--time-picker`]: true,
     [`${prefix}--time-picker--light`]: light,
     [`${prefix}--time-picker--invalid`]: invalid,
+    [`${prefix}--time-picker--readonly`]: readOnly,
     [`${prefix}--time-picker--${size}`]: size,
     [className]: className,
   });
@@ -97,6 +103,41 @@ const TimePicker = React.forwardRef(function TimePicker(
   const error = invalid ? (
     <div className={`${prefix}--form-requirement`}>{invalidText}</div>
   ) : null;
+
+  function getInternalPickerSelects() {
+    const readOnlyEventHandlers = {
+      onMouseDown: (evt) => {
+        // NOTE: does not prevent click
+        if (readOnly) {
+          evt.preventDefault();
+          // focus on the element as per readonly input behavior
+          evt.target.focus();
+        }
+      },
+      onKeyDown: (evt) => {
+        const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' '];
+        // This prevents the select from opening for the above keys
+        if (readOnly && selectAccessKeys.includes(evt.key)) {
+          evt.preventDefault();
+        }
+      },
+    };
+
+    const mappedChildren = React.Children.map(children, (pickerSelect) => {
+      return React.cloneElement(pickerSelect, {
+        ...pickerSelect.props,
+        disabled: disabled,
+        readOnly: readOnly,
+        ...readOnlyEventHandlers,
+      });
+    });
+
+    return mappedChildren;
+  }
+
+  const readOnlyProps = {
+    readOnly: readOnly,
+  };
 
   return (
     <div className={cx(`${prefix}--form-item`, className)}>
@@ -118,9 +159,10 @@ const TimePicker = React.forwardRef(function TimePicker(
             type={type}
             value={value}
             {...rest}
+            {...readOnlyProps}
           />
         </div>
-        {children}
+        {getInternalPickerSelects()}
       </div>
       {error}
     </div>
@@ -209,6 +251,11 @@ TimePicker.propTypes = {
    * Specify the placeholder attribute for the `<input>`
    */
   placeholder: PropTypes.string,
+
+  /**
+   * Specify whether the TimePicker should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the size of the Time Picker.
