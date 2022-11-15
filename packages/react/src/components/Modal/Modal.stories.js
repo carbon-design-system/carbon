@@ -7,6 +7,7 @@
 
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
+import { action } from '@storybook/addon-actions';
 import Modal from './Modal';
 import Button from '../Button';
 import Select from '../Select';
@@ -15,6 +16,13 @@ import Dropdown from '../Dropdown';
 import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
+import {
+  StructuredListWrapper,
+  StructuredListHead,
+  StructuredListBody,
+  StructuredListRow,
+  StructuredListCell,
+} from '../StructuredList';
 
 export default {
   title: 'Components/Modal',
@@ -79,6 +87,66 @@ export const Default = () => {
   );
 };
 
+export const FullWidth = () => {
+  return (
+    <Modal
+      open
+      isFullWidth
+      modalHeading="Full Width Modal"
+      modalLabel="An example of a modal with no padding"
+      primaryButtonText="Add"
+      secondaryButtonText="Cancel">
+      <StructuredListWrapper>
+        <StructuredListHead>
+          <StructuredListRow head>
+            <StructuredListCell head noWrap>
+              Column A
+            </StructuredListCell>
+            <StructuredListCell head noWrap>
+              Column B
+            </StructuredListCell>
+            <StructuredListCell head noWrap>
+              Column C
+            </StructuredListCell>
+          </StructuredListRow>
+        </StructuredListHead>
+        <StructuredListBody>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 1</StructuredListCell>
+            <StructuredListCell>Row 1</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 2</StructuredListCell>
+            <StructuredListCell>Row 2</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+          <StructuredListRow>
+            <StructuredListCell noWrap>Row 3</StructuredListCell>
+            <StructuredListCell>Row 3</StructuredListCell>
+            <StructuredListCell>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+              magna, finibus id tortor sed, aliquet bibendum augue. Aenean
+              posuere sem vel euismod dignissim. Nulla ut cursus dolor.
+              Pellentesque vulputate nisl a porttitor interdum.
+            </StructuredListCell>
+          </StructuredListRow>
+        </StructuredListBody>
+      </StructuredListWrapper>
+    </Modal>
+  );
+};
+
 export const DangerModal = () => {
   return (
     <Modal
@@ -92,7 +160,45 @@ export const DangerModal = () => {
   );
 };
 
-export const Playground = (args) => {
+const buttons = {
+  'One (1)': '1',
+  'Two (2)': '2',
+  'Three (3)': '3',
+};
+const modalFooter = (numberOfButtons) => {
+  const secondaryButtons = () => {
+    switch (numberOfButtons) {
+      case '1':
+        return {
+          secondaryButtons: [],
+        };
+      case '2':
+        return {
+          secondaryButtonText: 'Cancel',
+        };
+      case '3':
+        return {
+          secondaryButtons: [
+            {
+              buttonText: 'Keep both',
+              onClick: action('onClick'),
+            },
+            {
+              buttonText: 'Rename',
+              onClick: action('onClick'),
+            },
+          ],
+        };
+      default:
+        return null;
+    }
+  };
+  return {
+    ...secondaryButtons(),
+  };
+};
+
+export const Playground = ({ numberOfButtons, ...args }) => {
   return (
     <Modal
       open
@@ -100,6 +206,7 @@ export const Playground = (args) => {
       primaryButtonText="Add"
       secondaryButtonText="Cancel"
       aria-label="Modal content"
+      {...modalFooter(numberOfButtons)}
       {...args}>
       <p style={{ marginBottom: '1rem' }}>
         Custom domains direct requests for your apps in this Cloud Foundry
@@ -197,6 +304,16 @@ Playground.argTypes = {
   modalLabel: {
     control: 'text',
   },
+  numberOfButtons: {
+    description: 'Count of Footer Buttons',
+    defaultValue: 'Two (2)',
+    options: Object.keys(buttons),
+    mapping: buttons,
+    control: {
+      type: 'inline-radio',
+      labels: Object.keys(buttons),
+    },
+  },
   onKeyDown: {
     action: 'clicked',
   },
@@ -208,6 +325,9 @@ Playground.argTypes = {
   },
   onSecondarySubmit: {
     action: 'clicked',
+    table: {
+      disable: true,
+    },
   },
   primaryButtonText: {
     control: 'text',
@@ -219,6 +339,9 @@ Playground.argTypes = {
   },
   secondaryButtonText: {
     control: 'text',
+    table: {
+      disable: true,
+    },
   },
   selectorPrimaryFocus: {
     table: {

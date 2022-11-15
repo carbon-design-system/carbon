@@ -126,6 +126,10 @@
     visibility: visible;
   }
 
+  // ----------------------------------------
+  // disabled
+  // ----------------------------------------
+
   .#{$prefix}--toggle--disabled .#{$prefix}--toggle__appearance {
     cursor: not-allowed;
   }
@@ -145,6 +149,35 @@
 
   .#{$prefix}--toggle--disabled .#{$prefix}--toggle__check {
     fill: button.$button-disabled;
+  }
+
+  // ----------------------------------------
+  // readonly
+  // ----------------------------------------
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__appearance {
+    cursor: default;
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__switch {
+    border: 1px solid $icon-disabled;
+    background-color: transparent;
+
+    &::before {
+      top: rem(2px);
+      left: rem(2px);
+      background-color: $text-primary;
+    }
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__check {
+    top: rem(5px);
+    right: rem(4px);
+    fill: $background;
+  }
+
+  .#{$prefix}--toggle--readonly .#{$prefix}--toggle__text {
+    cursor: text;
+    user-select: text;
   }
 
   // HCM
