@@ -8,7 +8,7 @@
 import React from 'react';
 import FluidTimePicker from '../FluidTimePicker';
 import FluidTimePickerSelect from '../FluidTimePickerSelect';
-// import FluidTimePickerSkeleton from './FluidTimePicker.Skeleton';
+import FluidTimePickerSkeleton from './FluidTimePicker.Skeleton';
 import SelectItem from '../SelectItem';
 import {
   ToggletipLabel,
@@ -38,182 +38,114 @@ const ToggleTip = (
 );
 
 export const Default = () => (
-  <div style={{ width: '350px' }}>
-    <FluidTimePicker id="time-picker-1" labelText="Time" placeholder="hh:mm">
-      <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
-        <SelectItem value="am" text="AM" />
-        <SelectItem value="pm" text="PM" />
-      </FluidTimePickerSelect>
-      <FluidTimePickerSelect id="select-2" labelText="Timezone">
-        <SelectItem value="et" text="Eastern Time (ET)" />
-        <SelectItem value="ct" text="Central Time (CT)" />
-        <SelectItem value="mt" text="Mountain Time (MT)" />
-        <SelectItem value="pt" text="Pacific Time (PT)" />
-      </FluidTimePickerSelect>
-    </FluidTimePicker>
+  <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <h3>Default</h3>
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker id="time-picker-1" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+        <FluidTimePickerSelect id="select-2" labelText="Timezone">
+          <SelectItem value="et" text="Eastern Time (ET)" />
+          <SelectItem value="ct" text="Central Time (CT)" />
+          <SelectItem value="mt" text="Mountain Time (MT)" />
+          <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+      <br />
+      <br />
+      <FluidTimePicker id="time-picker-2" labelText="Time" placeholder="hh:mm">
+        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
     <br />
     <br />
-    <FluidTimePicker id="time-picker-2" labelText="Time" placeholder="hh:mm">
-      <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
-        <SelectItem value="am" text="AM" />
-        <SelectItem value="pm" text="PM" />
-      </FluidTimePickerSelect>
-    </FluidTimePicker>
+    <h3>Invalid</h3>
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker
+        id="time-picker-3"
+        labelText="Time"
+        placeholder="hh:mm"
+        invalid
+        invalidText="Error message goes here">
+        <FluidTimePickerSelect id="select-56" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+        <FluidTimePickerSelect id="select-32" labelText="Timezone">
+          <SelectItem value="et" text="Eastern Time (ET)" />
+          <SelectItem value="ct" text="Central Time (CT)" />
+          <SelectItem value="mt" text="Mountain Time (MT)" />
+          <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+      <br />
+      <br />
+      <FluidTimePicker
+        id="time-picker-2322"
+        labelText="Time"
+        placeholder="hh:mm"
+        invalid
+        invalidText="Error message goes here">
+        <FluidTimePickerSelect id="select-354" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
+    <br />
+    <br />
+    <h3>Warning</h3>
+    <br />
+    <div style={{ width: '350px' }}>
+      <FluidTimePicker
+        id="time-picker-4454"
+        labelText="Time"
+        placeholder="hh:mm"
+        warn
+        warnText="Warning message goes here">
+        <FluidTimePickerSelect id="select-6533" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+        <FluidTimePickerSelect id="select-232343" labelText="Timezone">
+          <SelectItem value="et" text="Eastern Time (ET)" />
+          <SelectItem value="ct" text="Central Time (CT)" />
+          <SelectItem value="mt" text="Mountain Time (MT)" />
+          <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+      <br />
+      <br />
+      <FluidTimePicker
+        id="time-picker-2"
+        labelText="Time"
+        placeholder="hh:mm"
+        warn
+        warnText="Warning message goes here">
+        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+    </div>
   </div>
 );
 
-export const Invalid = () => (
-  <>
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker
-        id="time-picker-1"
-        labelText="Time"
-        placeholder="hh:mm"
-        invalid
-        invalidText="Error message goes here">
-        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-        <FluidTimePickerSelect id="select-2" labelText="Timezone">
-          <SelectItem value="et" text="Eastern Time (ET)" />
-          <SelectItem value="ct" text="Central Time (CT)" />
-          <SelectItem value="mt" text="Mountain Time (MT)" />
-          <SelectItem value="pt" text="Pacific Time (PT)" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
+export const Skeleton = () => (
+  <div style={{ width: '300px' }}>
+    <FluidTimePickerSkeleton />
     <br />
     <br />
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker
-        id="time-picker-2"
-        labelText="Time"
-        placeholder="hh:mm"
-        invalid
-        invalidText="Error message goes here">
-        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
-    <br />
-    <br />
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-3" labelText="Time" placeholder="hh:mm">
-        <FluidTimePickerSelect id="select-4" labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-        <FluidTimePickerSelect
-          id="select-5"
-          labelText="Timezone"
-          invalid
-          invalidText="Error message goes here">
-          <SelectItem value="et" text="Eastern Time (ET)" />
-          <SelectItem value="ct" text="Central Time (CT)" />
-          <SelectItem value="mt" text="Mountain Time (MT)" />
-          <SelectItem value="pt" text="Pacific Time (PT)" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
-    <br />
-    <br />
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-4" labelText="Time" placeholder="hh:mm">
-        <FluidTimePickerSelect
-          invalid
-          invalidText="Error message goes here"
-          id="select-6"
-          labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
-  </>
+    <FluidTimePickerSkeleton isOnlyTwo />
+  </div>
 );
-
-export const Warning = () => (
-  <>
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker
-        id="time-picker-1"
-        labelText="Time"
-        placeholder="hh:mm"
-        warn
-        warnText="Warning message goes here">
-        <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-        <FluidTimePickerSelect id="select-2" labelText="Timezone">
-          <SelectItem value="et" text="Eastern Time (ET)" />
-          <SelectItem value="ct" text="Central Time (CT)" />
-          <SelectItem value="mt" text="Mountain Time (MT)" />
-          <SelectItem value="pt" text="Pacific Time (PT)" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
-    <br />
-    <br />
-
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker
-        id="time-picker-2"
-        labelText="Time"
-        placeholder="hh:mm"
-        warn
-        warnText="Warning message goes here">
-        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
-    <br />
-    <br />
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-3" labelText="Time" placeholder="hh:mm">
-        <FluidTimePickerSelect id="select-4" labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-        <FluidTimePickerSelect
-          id="select-5"
-          labelText="Timezone"
-          warn
-          warnText="Warning message goes here">
-          <SelectItem value="et" text="Eastern Time (ET)" />
-          <SelectItem value="ct" text="Central Time (CT)" />
-          <SelectItem value="mt" text="Mountain Time (MT)" />
-          <SelectItem value="pt" text="Pacific Time (PT)" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
-    <br />
-    <br />
-    <div style={{ width: '350px' }}>
-      <FluidTimePicker id="time-picker-4" labelText="Time" placeholder="hh:mm">
-        <FluidTimePickerSelect
-          warn
-          warnText="Warning message goes here"
-          id="select-6"
-          labelText={ToggleTip}>
-          <SelectItem value="am" text="AM" />
-          <SelectItem value="pm" text="PM" />
-        </FluidTimePickerSelect>
-      </FluidTimePicker>
-    </div>
-  </>
-);
-
-// export const Skeleton = () => (
-//   <div style={{ width: '300px' }}>
-//     <FluidTimePickerSkeleton />
-//   </div>
-// );
 
 export const Playground = (args) => {
   return (
@@ -228,6 +160,18 @@ export const Playground = (args) => {
           <SelectItem value="ct" text="Central Time (CT)" />
           <SelectItem value="mt" text="Mountain Time (MT)" />
           <SelectItem value="pt" text="Pacific Time (PT)" />
+        </FluidTimePickerSelect>
+      </FluidTimePicker>
+      <br />
+      <br />
+      <FluidTimePicker
+        id="time-picker-2"
+        labelText="Time"
+        placeholder="hh:mm"
+        {...args}>
+        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
+          <SelectItem value="am" text="AM" />
+          <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
       </FluidTimePicker>
     </div>

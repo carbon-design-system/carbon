@@ -19,7 +19,6 @@
 
 @mixin fluid-time-picker {
   .#{$prefix}--time-picker--fluid {
-    // border-bottom: 1px inset $border-strong;
     background: $field;
   }
 
@@ -179,50 +178,26 @@
     margin: 0 1rem;
   }
 
-  .#{$prefix}--time-picker--fluid--child-warning .#{$prefix}--select--warning {
-    border-bottom: none;
+  // Skeleton styles
+  .#{$prefix}--time-picker--fluid--skeleton {
+    display: flex;
+    width: 100%;
+    height: rem(64px);
   }
 
-  .#{$prefix}--time-picker--fluid--child-invalid .#{$prefix}--select-input,
-  .#{$prefix}--time-picker--fluid--child-invalid .#{$prefix}--text-input,
-  .#{$prefix}--time-picker--fluid--child-warning .#{$prefix}--select-input,
-  .#{$prefix}--time-picker--fluid--child-warning .#{$prefix}--text-input {
-    border-bottom: 1px solid transparent;
-  }
-
-  .#{$prefix}--time-picker--fluid--child-invalid
-    .#{$prefix}--select-input__wrapper,
-  .#{$prefix}--time-picker--fluid--child-warning
-    .#{$prefix}--select-input__wrapper {
-    position: initial;
-  }
-
-  .#{$prefix}--time-picker--fluid--child-invalid
-    .#{$prefix}--time-picker--fluid__wrapper
-    > *,
-  .#{$prefix}--time-picker--fluid--child-warning
-    .#{$prefix}--time-picker--fluid__wrapper
-    > * {
-    border-bottom: 1px solid $border-strong;
-  }
-
-  // Simulated borders when one input is invalid
-  .#{$prefix}--time-picker--fluid--child-invalid
-    .#{$prefix}--time-picker--fluid__wrapper
-    > *:nth-child(2):not(:last-child)
-    .#{$prefix}--select-input__wrapper::before,
-  .#{$prefix}--time-picker--fluid--child-invalid
-    .#{$prefix}--time-picker--fluid__wrapper
-    > *:last-child
-    .#{$prefix}--select-input__wrapper::before,
-  .#{$prefix}--time-picker--fluid--child-warning
-    .#{$prefix}--time-picker--fluid__wrapper
-    > *:nth-child(2):not(:last-child)
-    .#{$prefix}--select-input__wrapper::before,
-  .#{$prefix}--time-picker--fluid--child-warning
-    .#{$prefix}--time-picker--fluid__wrapper
-    > *:last-child
-    .#{$prefix}--select-input__wrapper::before {
+  .#{$prefix}--time-picker--fluid--skeleton > * {
+    width: auto;
     height: 100%;
+  }
+
+  .#{$prefix}--time-picker--fluid--skeleton > *:nth-child(1),
+  .#{$prefix}--time-picker--fluid--skeleton > *:nth-child(2) {
+    width: 25%;
+  }
+
+  .#{$prefix}--time-picker--fluid--skeleton > *:last-child,
+  .#{$prefix}--time-picker--fluid--skeleton.#{$prefix}--time-picker--equal-width
+    > *:first-child {
+    width: 50%;
   }
 }

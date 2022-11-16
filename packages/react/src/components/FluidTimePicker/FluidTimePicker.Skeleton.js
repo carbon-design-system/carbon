@@ -7,17 +7,40 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import FluidTextInputSkeleton from '../FluidTextInput';
+import cx from 'classnames';
+import { usePrefix } from '../../internal/usePrefix';
+import { FluidTextInputSkeleton } from '../FluidTextInput';
+import { FluidSelectSkeleton } from '../FluidSelect';
 
-function FluidTimePickerSkeleton({ className, ...other }) {
-  return <FluidTextInputSkeleton className={className} {...other} />;
-}
+const FluidTimePickerSkeleton = ({ className, isOnlyTwo, ...rest }) => {
+  const prefix = usePrefix();
+  const wrapperClasses = cx(
+    className,
+    `${prefix}--time-picker--fluid--skeleton`,
+    {
+      [`${prefix}--time-picker--equal-width`]: isOnlyTwo,
+    }
+  );
+
+  return (
+    <div className={wrapperClasses} {...rest}>
+      <FluidTextInputSkeleton />
+      <FluidSelectSkeleton />
+      {!isOnlyTwo ? <FluidSelectSkeleton /> : null}
+    </div>
+  );
+};
 
 FluidTimePickerSkeleton.propTypes = {
   /**
-   * Specify an optional className to be applied to the outer FluidForm wrapper
+   * Specify an optional className to add.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify if there are only two TimePicker elements
+   */
+  isOnlyTwo: PropTypes.bool,
 };
 
 export default FluidTimePickerSkeleton;

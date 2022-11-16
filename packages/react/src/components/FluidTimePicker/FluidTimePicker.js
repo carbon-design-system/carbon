@@ -27,24 +27,12 @@ const FluidTimePicker = React.forwardRef(function FluidTimePicker(
 ) {
   const prefix = usePrefix();
 
-  let childIsInvalid, childIsWarning;
-  React.Children.map(children, (child) => {
-    if (child.props.invalid) {
-      childIsInvalid = true;
-    }
-    if (child.props.warn) {
-      childIsWarning = true;
-    }
-  });
-
   const classNames = classnames(className, {
     [`${prefix}--time-picker--fluid`]: true,
-    [`${prefix}--time-picker--equal-width`]: children.length !== 2,
+    [`${prefix}--time-picker--equal-width`]: children?.length !== 2,
     [`${prefix}--time-picker--fluid--disabled`]: disabled,
     [`${prefix}--time-picker--fluid--invalid`]: invalid,
     [`${prefix}--time-picker--fluid--warning`]: warn,
-    [`${prefix}--time-picker--fluid--child-invalid`]: childIsInvalid,
-    [`${prefix}--time-picker--fluid--child-warning`]: childIsWarning,
   });
 
   const errorText = () => {

@@ -47,16 +47,6 @@ FluidTimePickerSelect.propTypes = {
   id: PropTypes.string.isRequired,
 
   /**
-   * Specify if the currently value is invalid.
-   */
-  invalid: PropTypes.bool,
-
-  /**
-   * Message which is displayed if the value is invalid.
-   */
-  invalidText: PropTypes.node,
-
-  /**
    * Provide label text to be read by screen readers when interacting with the
    * control
    */
@@ -67,16 +57,6 @@ FluidTimePickerSelect.propTypes = {
    * the underlying `<input>` changes
    */
   onChange: PropTypes.func,
-
-  /**
-   * Specify whether the control is currently in warning state
-   */
-  warn: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in warning state
-   */
-  warnText: PropTypes.node,
 };
 
 export default FluidTimePickerSelect;
