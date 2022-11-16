@@ -9,18 +9,19 @@ import React from 'react';
 import FluidTimePicker from '../FluidTimePicker';
 import FluidTimePickerSelect from '../../FluidTimePickerSelect';
 import SelectItem from '../../SelectItem';
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 const prefix = 'cds';
 
 describe('FluidTimePicker', () => {
   describe('renders as expected - Component API', () => {
     it('should add extra classes that are passed via className', () => {
-      render(
+      const { container } = render(
         <FluidTimePicker
           className="custom-class"
           id="time=picker-1"
-          data-testid="timePicker-1">
+          data-testid="timePicker-1"
+          labelText="Time">
           <FluidTimePickerSelect id="select-1" labelText="Clock">
             <SelectItem value="am" text="AM" />
             <SelectItem value="pm" text="PM" />
@@ -34,15 +35,16 @@ describe('FluidTimePicker', () => {
         </FluidTimePicker>
       );
 
-      expect(screen.getByTestId('timePicker-1')).toHaveClass('custom-class');
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
     it('should add fluid classes by default', () => {
-      render(
+      const { container } = render(
         <FluidTimePicker
           className="custom-class"
           id="time=picker-1"
-          data-testid="timePicker-1">
+          data-testid="timePicker-1"
+          labelText="Time">
           <FluidTimePickerSelect id="select-1" labelText="Clock">
             <SelectItem value="am" text="AM" />
             <SelectItem value="pm" text="PM" />
@@ -56,9 +58,7 @@ describe('FluidTimePicker', () => {
         </FluidTimePicker>
       );
 
-      expect(screen.getByTestId('timePicker-1')).toHaveClass(
-        `${prefix}--time-picker--fluid`
-      );
+      expect(container.firstChild).toHaveClass(`${prefix}--time-picker--fluid`);
     });
   });
 });

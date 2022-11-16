@@ -323,6 +323,16 @@ Array [
     "relativePath": "scss/components/fluid-text-input",
   },
   Object {
+    "filepath": "scss/components/fluid-time-picker/_fluid-time-picker.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-time-picker/fluid-time-picker",
+    "relativePath": "scss/components/fluid-time-picker/fluid-time-picker",
+  },
+  Object {
+    "filepath": "scss/components/fluid-time-picker/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-time-picker",
+    "relativePath": "scss/components/fluid-time-picker",
+  },
+  Object {
     "filepath": "scss/components/inline-loading/_index.scss",
     "importPath": "@carbon/styles/scss/components/inline-loading",
     "relativePath": "scss/components/inline-loading",
