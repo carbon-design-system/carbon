@@ -226,10 +226,10 @@
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__field {
     position: absolute;
-    bottom: rem(13px);
+    top: rem(36px);
     left: $spacing-05;
     width: 50%;
-    height: $spacing-05;
+    height: rem(8px);
     padding: 0;
   }
 
@@ -237,10 +237,10 @@
     .#{$prefix}--skeleton
     .#{$prefix}--list-box__label {
     position: absolute;
-    top: rem(13px);
+    top: $spacing-05;
     left: $spacing-05;
     width: 25%;
-    height: $spacing-05;
+    height: rem(8px);
   }
 
   .#{$prefix}--list-box__wrapper--fluid

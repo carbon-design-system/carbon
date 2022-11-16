@@ -288,12 +288,15 @@
   .#{$prefix}--date-picker--fluid__skeleton--container {
     position: relative;
     width: 100%;
-    height: rem(64px);
-    padding: rem(13px) rem(40px) rem(13px) $spacing-05;
+    height: 100%;
   }
 
   .#{$prefix}--date-picker--fluid__skeleton .#{$prefix}--skeleton {
-    height: 1rem;
+    position: absolute;
+    top: $spacing-05;
+    left: $spacing-05;
+    width: 25%;
+    height: rem(8px);
   }
 
   .#{$prefix}--date-picker--fluid__skeleton .#{$prefix}--label {
@@ -301,14 +304,18 @@
   }
 
   .#{$prefix}--date-picker--fluid__skeleton .#{$prefix}--text-input {
-    width: 80%;
-    height: rem(18px);
+    position: absolute;
+    top: rem(36px);
+    left: $spacing-05;
+    width: 50%;
+    height: rem(8px);
+    padding: 0;
   }
 
   .#{$prefix}--date-picker--fluid__skeleton--container
     .#{$prefix}--date-picker__icon {
     top: auto;
-    bottom: rem(2px);
+    bottom: $spacing-03;
   }
 
   // Range skeleton
@@ -329,13 +336,9 @@
     border-right: 1px solid $skeleton-element;
   }
 
-  .#{$prefix}--date-picker--fluid__skeleton--range .#{$prefix}--text-input {
-    width: 100%;
-  }
-
   .#{$prefix}--date-picker--fluid__skeleton--range
     .#{$prefix}--date-picker--fluid__skeleton--container
     .#{$prefix}--date-picker__icon {
-    bottom: rem(5px);
+    bottom: $spacing-03;
   }
 }
