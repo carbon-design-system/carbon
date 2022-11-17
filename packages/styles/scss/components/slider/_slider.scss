@@ -200,6 +200,20 @@
     }
   }
 
+  // readonly state
+  .#{$prefix}--slider--readonly {
+    cursor: default;
+  }
+
+  .#{$prefix}--slider--readonly .#{$prefix}--slider__thumb {
+    width: 0;
+    height: 0;
+  }
+
+  .#{$prefix}--slider--readonly ~ .#{$prefix}--slider-text-input {
+    background-color: transparent;
+  }
+
   // Skeleton state
   .#{$prefix}--slider-container.#{$prefix}--skeleton
     .#{$prefix}--slider__range-label {
