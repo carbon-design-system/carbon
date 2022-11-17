@@ -52,9 +52,7 @@ const ValidityMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
      */
     _testValidity(): string {
       const { required, value } = this;
-      return required && !value
-        ? VALIDATION_STATUS.ERROR_REQUIRED
-        : VALIDATION_STATUS.NO_ERROR;
+      return required && !value ? VALIDATION_STATUS.ERROR_REQUIRED : VALIDATION_STATUS.NO_ERROR;
     }
 
     /**

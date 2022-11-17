@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ const getRollupConfig = require('../../tools/get-rollup-config');
  * @private
  */
 function _getFolders(dir) {
-  return fs.readdirSync(dir).filter(file => fs.statSync(path.join(dir, file)).isDirectory());
+  return fs.readdirSync(dir).filter((file) => fs.statSync(path.join(dir, file)).isDirectory());
 }
 
 /**
@@ -47,14 +47,14 @@ async function _buildComponents({ mode = 'development', dir = 'ltr' } = {}) {
   }
 
   return rollup(getRollupConfig({ mode, dir, folders }))
-    .then(bundle => {
+    .then((bundle) => {
       bundle.write({
         format: 'es',
         dir: config.distDestDir,
         banner: 'let process = { env: {} };',
       });
     })
-    .catch(err => {
+    .catch((err) => {
       // eslint-disable-next-line no-console
       console.error(err);
     });

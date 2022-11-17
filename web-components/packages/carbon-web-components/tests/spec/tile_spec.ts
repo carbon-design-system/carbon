@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -144,7 +144,7 @@ describe('bx-tile', function () {
         await Promise.resolve();
         const tile = document.querySelector('bx-expandable-tile');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        events.on(tile!, 'bx-expandable-tile-beingtoggled', event => {
+        events.on(tile!, 'bx-expandable-tile-beingtoggled', (event) => {
           event.preventDefault();
         });
         events.on(tile!, 'bx-expandable-tile-toggled', spyAfterToggle);
@@ -158,7 +158,7 @@ describe('bx-tile', function () {
         await Promise.resolve();
         const tile = document.querySelector('bx-expandable-tile');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        events.on(tile!, 'bx-expandable-tile-beingtoggled', event => {
+        events.on(tile!, 'bx-expandable-tile-beingtoggled', (event) => {
           event.preventDefault();
         });
         events.on(tile!, 'bx-expandable-tile-toggled', spyAfterToggle);
@@ -199,7 +199,7 @@ describe('bx-tile', function () {
         const tiles = document.body.querySelectorAll('bx-radio-tile');
         const input1 = tiles[1]!.shadowRoot!.querySelector('input');
         input1!.click();
-        expect(Array.prototype.map.call(tiles, item => (item as BXRadioTile).selected)).toEqual([false, true, false]);
+        expect(Array.prototype.map.call(tiles, (item) => (item as BXRadioTile).selected)).toEqual([false, true, false]);
       });
     });
   });

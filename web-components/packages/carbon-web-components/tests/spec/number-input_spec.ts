@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -142,7 +142,7 @@ describe('bx-number-input', function () {
     it('should support canceling required check', async function () {
       const input = elem as BXNumberInput;
       input.required = true;
-      events.on(input, 'invalid', event => {
+      events.on(input, 'invalid', (event) => {
         event.preventDefault();
       });
       expect(input.checkValidity()).toBe(false);

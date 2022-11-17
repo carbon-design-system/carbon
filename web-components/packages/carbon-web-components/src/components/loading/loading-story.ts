@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,7 @@ const types = {
   [`With overlay (${LOADING_TYPE.OVERLAY})`]: LOADING_TYPE.OVERLAY,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { inactive, type } = args?.['bx-loading'] ?? {};
   return html` <bx-loading ?inactive=${inactive} type=${ifNonNull(type)}></bx-loading> `;
 };

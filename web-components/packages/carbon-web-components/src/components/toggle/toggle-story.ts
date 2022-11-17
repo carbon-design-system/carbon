@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@ const sizes = {
   [`Small size (${TOGGLE_SIZE.SMALL})`]: TOGGLE_SIZE.SMALL,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { checked, checkedText, disabled, labelText, name, size, uncheckedText, value, onChange } = args?.['bx-toggle'] ?? {};
   return html`
     <bx-toggle
@@ -32,7 +32,8 @@ export const Default = args => {
       size="${ifNonNull(size)}"
       unchecked-text="${ifNonNull(uncheckedText)}"
       value="${ifNonNull(value)}"
-      @bx-toggle-changed="${onChange}"></bx-toggle>
+      @bx-toggle-changed="${onChange}"
+    ></bx-toggle>
   `;
 };
 

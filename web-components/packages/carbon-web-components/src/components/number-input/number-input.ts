@@ -319,9 +319,7 @@ export default class BXNumberInput extends BXInput {
       <div class="${prefix}--number__controls">${incrementButton} ${decrementButton}</div>
     `;
 
-    const mobileLayout = html`
-      ${decrementButton} ${input} ${incrementButton}
-    `;
+    const mobileLayout = html` ${decrementButton} ${input} ${incrementButton} `;
 
     return html`
       <div class="${wrapperClasses}" ?data-invalid=${this.invalid}>

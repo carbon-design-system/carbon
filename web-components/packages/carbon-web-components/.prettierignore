@@ -6,6 +6,7 @@ storybook-static*
 .github
 .yarn
 es
+lib
 dist
 node_modules
 docs

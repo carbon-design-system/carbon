@@ -30,9 +30,7 @@ class BXTile extends LitElement {
   colorScheme = TILE_COLOR_SCHEME.REGULAR;
 
   render() {
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   static styles = styles;

@@ -82,7 +82,7 @@ class BXSideNav extends HostListenerMixin(LitElement) {
    */
   private _updatedSideNavMenuForceCollapsedState() {
     const { expanded, _hovered: hovered } = this;
-    forEach(this.querySelectorAll((this.constructor as typeof BXSideNav).selectorMenu), item => {
+    forEach(this.querySelectorAll((this.constructor as typeof BXSideNav).selectorMenu), (item) => {
       (item as BXSideNavMenu).forceCollapsed = !expanded && !hovered;
     });
   }
@@ -139,7 +139,7 @@ class BXSideNav extends HostListenerMixin(LitElement) {
 
   shouldUpdate(changedProperties) {
     if (changedProperties.has('expanded')) {
-      this._transitionPromise = new Promise(resolve => {
+      this._transitionPromise = new Promise((resolve) => {
         this._cleanHTransition();
         this._hTransition = on(this, 'transitionend', () => {
           this._cleanHTransition();
@@ -162,27 +162,25 @@ class BXSideNav extends HostListenerMixin(LitElement) {
     }
     const doc = this.getRootNode() as Document;
     if (changedProperties.has('collapseMode')) {
-      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), item => {
+      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), (item) => {
         (item as BXHeaderMenuButton).collapseMode = this.collapseMode;
       });
     }
     if (changedProperties.has('expanded')) {
       this._updatedSideNavMenuForceCollapsedState();
-      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), item => {
+      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), (item) => {
         (item as BXHeaderMenuButton).active = this.expanded;
       });
     }
     if (changedProperties.has('usageMode')) {
-      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), item => {
+      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), (item) => {
         (item as BXHeaderMenuButton).usageMode = this.usageMode;
       });
     }
   }
 
   render() {
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   /**

@@ -140,9 +140,7 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
         </button>
       `;
     }
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   /**

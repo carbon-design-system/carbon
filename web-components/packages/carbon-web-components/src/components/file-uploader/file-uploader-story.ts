@@ -46,11 +46,9 @@ class BXCEDemoFileUploader extends LitElement {
   private _handleChange(event: CustomEvent) {
     const { addedFiles } = event.detail;
     const newFiles: FileData[] = addedFiles.map(
-      item =>
+      (item) =>
         ({
-          id: Math.random()
-            .toString(36)
-            .slice(2),
+          id: Math.random().toString(36).slice(2),
           file: item,
           state: FILE_UPLOADER_ITEM_STATE.UPLOADING,
         } as FileData)
@@ -86,7 +84,7 @@ class BXCEDemoFileUploader extends LitElement {
   private async _simulateUpload(data: FileData) {
     const { id, file } = data;
     if (file.size > 524288) {
-      this._files = this._files.map(item =>
+      this._files = this._files.map((item) =>
         id !== item.id
           ? item
           : {
@@ -102,7 +100,7 @@ class BXCEDemoFileUploader extends LitElement {
       // Simulates network request time
       const rand = Math.random() * 1000;
       await delay(rand);
-      this._files = this._files.map(item =>
+      this._files = this._files.map((item) =>
         id !== item.id
           ? item
           : {
@@ -113,7 +111,7 @@ class BXCEDemoFileUploader extends LitElement {
       this.requestUpdate();
       // Shows x icon after 1 second
       await delay(1000);
-      this._files = this._files.map(item =>
+      this._files = this._files.map((item) =>
         id !== item.id
           ? item
           : {
@@ -216,7 +214,7 @@ const defineDemoFileUploader = (() => {
   };
 })();
 
-export const Default = args => {
+export const Default = (args) => {
   const { helperText, labelText } = args?.['bx-file-uploader'] ?? {};
   const { accept, disabled, multiple } = args?.['bx-file-drop-container'] ?? {};
   const { size, disableDelete, onBeforeDelete, onDelete } = args?.['bx-file-uploader-item'] ?? {};

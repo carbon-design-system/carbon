@@ -77,7 +77,7 @@ const adjustDate = (localDate: Date, { date: moveDate = 0 }: { date?: number }) 
  *   Some event handlers in Flatpickr won't work is the calendar dropdown is put in shadow DOM, due to event retargetting.
  */
 export default (): Plugin => (fp: ExtendedFlatpickrInstanceShadowDOMEventsPlugin) => {
-  const getDateElem = localDate =>
+  const getDateElem = (localDate) =>
     find(fp.daysContainer!.firstElementChild!.children, ({ dateObj }: any) => localDate.getTime() === dateObj.getTime());
 
   /**

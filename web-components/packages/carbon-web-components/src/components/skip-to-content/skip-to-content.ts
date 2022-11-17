@@ -50,9 +50,7 @@ class BXSkipToContent extends FocusMixin(LitElement) {
 
   render() {
     const { linkAssisstiveText } = this;
-    return html`
-      <a class="${prefix}--skip-to-content" href="${ifNonNull(this.href)}"><slot>${linkAssisstiveText}</slot></a>
-    `;
+    return html` <a class="${prefix}--skip-to-content" href="${ifNonNull(this.href)}"><slot>${linkAssisstiveText}</slot></a> `;
   }
 
   updated(changedProperties) {

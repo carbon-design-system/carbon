@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,7 +21,7 @@ import './structured-list-header-cell-skeleton';
 import storyDocs from './structured-list-story.mdx';
 import styles from './structured-list-story.scss';
 
-export const Default = args => {
+export const Default = (args) => {
   const { hasSelection } = args?.['bx-structured-list'] ?? {};
   const selectionName = !hasSelection ? undefined : 'structured-list-selection';
   const selectionValues = !hasSelection

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,24 +32,24 @@ describe('bx-structured-list', function () {
       list.setAttribute('selection-name', 'selection-name-foo');
       await Promise.resolve();
       expect(list.shadowRoot!.querySelector('section')!.classList.contains('bx--structured-list--selection')).toBe(true);
-      expect(Array.prototype.every.call(rows, row => row.selectionName === 'selection-name-foo')).toBe(true);
+      expect(Array.prototype.every.call(rows, (row) => row.selectionName === 'selection-name-foo')).toBe(true);
     });
 
     it('should reflect the selection', function () {
       const input1 = rows[1]!.shadowRoot!.querySelector('input');
       input1!.click();
-      expect(Array.prototype.map.call(rows, item => (item as BXStructuredListRow).selected)).toEqual([false, true, false]);
+      expect(Array.prototype.map.call(rows, (item) => (item as BXStructuredListRow).selected)).toEqual([false, true, false]);
     });
 
     it('Should navigate by up/down keys', function () {
       (rows[0] as HTMLElement).focus();
       const event = new CustomEvent('keydown', { bubbles: true, composed: true });
       rows[0].dispatchEvent(Object.assign(event, { key: 'ArrowDown' }));
-      expect(Array.prototype.map.call(rows, item => (item as BXStructuredListRow).selected)).toEqual([false, true, false]);
-      expect(Array.prototype.map.call(rows, row => row.tabIndex)).toEqual([-1, 0, -1]);
+      expect(Array.prototype.map.call(rows, (item) => (item as BXStructuredListRow).selected)).toEqual([false, true, false]);
+      expect(Array.prototype.map.call(rows, (row) => row.tabIndex)).toEqual([-1, 0, -1]);
       rows[1].dispatchEvent(Object.assign(event, { key: 'ArrowUp' }));
-      expect(Array.prototype.map.call(rows, item => (item as BXStructuredListRow).selected)).toEqual([true, false, false]);
-      expect(Array.prototype.map.call(rows, row => row.tabIndex)).toEqual([0, -1, -1]);
+      expect(Array.prototype.map.call(rows, (item) => (item as BXStructuredListRow).selected)).toEqual([true, false, false]);
+      expect(Array.prototype.map.call(rows, (row) => row.tabIndex)).toEqual([0, -1, -1]);
     });
   });
 

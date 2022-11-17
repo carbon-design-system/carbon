@@ -35,8 +35,8 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
       // @ts-ignore: Until `connectedCallback` is added to `HTMLElement` definition
       super.connectedCallback();
       const hostListeners = (this.constructor as typeof HostListenerMixinImpl)._hostListeners;
-      Object.keys(hostListeners).forEach(listenerName => {
-        Object.keys(hostListeners[listenerName]).forEach(type => {
+      Object.keys(hostListeners).forEach((listenerName) => {
+        Object.keys(hostListeners[listenerName]).forEach((type) => {
           // Parses `document:click`/`window:click` format
           const tokens = EVENT_NAME_FORMAT.exec(type);
           if (!tokens) {
@@ -66,7 +66,7 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
     }
 
     disconnectedCallback() {
-      this._handles.forEach(handle => {
+      this._handles.forEach((handle) => {
         handle.release();
         this._handles.delete(handle);
       });

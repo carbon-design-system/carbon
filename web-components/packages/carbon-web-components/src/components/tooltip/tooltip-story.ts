@@ -45,7 +45,7 @@ const tooltipDefinitionDirections = {
   [`Left (${TOOLTIP_DIRECTION.LEFT})`]: TOOLTIP_DIRECTION.LEFT,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { open } = args?.['bx-tooltip'] ?? {};
   const { alignment, direction } = args?.['bx-tooltip-body'] ?? {};
   return html`
@@ -77,13 +77,14 @@ Default.parameters = {
   },
 };
 
-export const definition = args => {
+export const definition = (args) => {
   const { alignment, bodyText, direction } = args?.['bx-tooltip-definition'] ?? {};
   return html`
     <bx-tooltip-definition
       alignment="${ifNonNull(alignment)}"
       body-text="${ifNonNull(bodyText)}"
-      direction="${ifNonNull(direction)}">
+      direction="${ifNonNull(direction)}"
+    >
       Definition Tooltip
     </bx-tooltip-definition>
   `;
@@ -101,7 +102,7 @@ definition.parameters = {
   },
 };
 
-export const icon = args => {
+export const icon = (args) => {
   const { alignment, bodyText, direction } = args?.['bx-tooltip-icon'] ?? {};
   return html`
     <bx-tooltip-icon alignment="${ifNonNull(alignment)}" body-text="${ifNonNull(bodyText)}" direction="${ifNonNull(direction)}">

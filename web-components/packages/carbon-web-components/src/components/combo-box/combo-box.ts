@@ -141,7 +141,7 @@ class BXComboBox extends BXDropdown {
    * Handles user-initiated clearing the `<input>` for filtering.
    */
   protected _handleUserInitiatedClearInput() {
-    forEach(this.querySelectorAll((this.constructor as typeof BXComboBox).selectorItem), item => {
+    forEach(this.querySelectorAll((this.constructor as typeof BXComboBox).selectorItem), (item) => {
       (item as BXComboBoxItem).highlighted = false;
     });
     this._filterInputValue = '';
@@ -168,7 +168,7 @@ class BXComboBox extends BXDropdown {
 
   protected _selectionDidChange(itemToSelect?: BXComboBoxItem) {
     this.value = !itemToSelect ? '' : itemToSelect.value;
-    forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItemSelected), item => {
+    forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItemSelected), (item) => {
       (item as BXComboBoxItem).selected = false;
     });
     if (itemToSelect) {

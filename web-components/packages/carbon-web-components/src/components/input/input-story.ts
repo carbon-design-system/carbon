@@ -16,7 +16,7 @@ import '../form/form-item';
 import createProps from './stories/helpers';
 import storyDocs from './input-story.mdx';
 
-export const Default = args => {
+export const Default = (args) => {
   const {
     autocomplete,
     autofocus,
@@ -56,13 +56,14 @@ export const Default = args => {
       type="${ifNonNull(type)}"
       validity-message="${ifNonNull(validityMessage)}"
       value="${ifNonNull(value)}"
-      @input="${onInput}"></bx-input>
+      @input="${onInput}"
+    ></bx-input>
   `;
 };
 
 Default.storyName = 'Default';
 
-export const formItem = args => {
+export const formItem = (args) => {
   const { colorScheme, disabled, invalid, placeholder, showPasswordVisibilityToggle, size, type, value, onInput } =
     args?.['bx-input'] ?? {};
   return html`
@@ -76,7 +77,8 @@ export const formItem = args => {
         ?invalid="${invalid}"
         ?disabled="${disabled}"
         ?show-password-visibility-toggle="${showPasswordVisibilityToggle}"
-        type="${ifNonNull(type)}">
+        type="${ifNonNull(type)}"
+      >
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
@@ -87,7 +89,7 @@ export const formItem = args => {
 
 formItem.storyName = 'Form item';
 
-export const withoutFormItemWrapper = args => {
+export const withoutFormItemWrapper = (args) => {
   const { colorScheme, disabled, invalid, placeholder, showPasswordVisibilityToggle, size, type, value, onInput } =
     args?.['bx-input'] ?? {};
   return html`
@@ -100,7 +102,8 @@ export const withoutFormItemWrapper = args => {
       ?invalid="${invalid}"
       ?disabled="${disabled}"
       ?show-password-visibility-toggle="${showPasswordVisibilityToggle}"
-      type="${ifNonNull(type)}">
+      type="${ifNonNull(type)}"
+    >
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>

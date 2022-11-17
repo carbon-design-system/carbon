@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -29,7 +29,7 @@ class BXProgressIndicatorSkeleton extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has('vertical')) {
       // Propagate `vertical` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll((this.constructor as typeof BXProgressIndicatorSkeleton).selectorStep), item => {
+      forEach(this.querySelectorAll((this.constructor as typeof BXProgressIndicatorSkeleton).selectorStep), (item) => {
         (item as BXProgressStepSkeleton).vertical = this.vertical;
       });
     }

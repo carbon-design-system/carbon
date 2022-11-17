@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,7 +16,7 @@ import './page-sizes-select';
 import './pages-select';
 import storyDocs from './pagination-story.mdx';
 
-export const Default = args => {
+export const Default = (args) => {
   const { atLastPage, pageSize, start, total, onChangedCurrent, onChangedPageSizesSelect } = args?.['bx-pagination'] ?? {};
   return html`
     <bx-pagination
@@ -25,7 +25,8 @@ export const Default = args => {
       start="${ifNonNull(start)}"
       total="${ifNonNull(total)}"
       @bx-pagination-changed-current="${onChangedCurrent}"
-      @bx-page-sizes-select-changed="${onChangedPageSizesSelect}">
+      @bx-page-sizes-select-changed="${onChangedPageSizesSelect}"
+    >
       <bx-page-sizes-select slot="page-sizes-select">
         <option value="10">10</option>
         <option value="20">20</option>

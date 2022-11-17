@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@ const states = {
   [`Failed (${INLINE_LOADING_STATE.ERROR})`]: INLINE_LOADING_STATE.ERROR,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { status } = args?.['bx-inline-loading'] ?? {};
   return html` <bx-inline-loading status="${ifNonNull(status)}">Loading data...</bx-inline-loading> `;
 };

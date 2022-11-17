@@ -212,9 +212,7 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
         </div>
       `;
     }
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   static styles = styles;

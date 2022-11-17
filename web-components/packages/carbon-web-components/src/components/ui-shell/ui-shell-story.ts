@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -94,7 +94,7 @@ const StoryContent = () => html`
   </main>
 `;
 
-export const sideNav = args => {
+export const sideNav = (args) => {
   const { collapseMode, expanded } = args?.['bx-side-nav'] ?? {};
   const { href } = args?.['bx-side-nav-menu-item'] ?? {};
   updateRailExpanded({ collapseMode, expanded });
@@ -144,7 +144,7 @@ sideNav.parameters = {
   },
 };
 
-export const sideNavWithIcons = args => {
+export const sideNavWithIcons = (args) => {
   const { collapseMode, expanded } = args?.['bx-side-nav'] ?? {};
   const { href } = args?.['bx-side-nav-menu-item'] ?? {};
   updateRailExpanded({ collapseMode, expanded });
@@ -189,11 +189,11 @@ sideNavWithIcons.parameters = {
   knobs: sideNav.parameters.knobs,
 };
 
-export const header = args => {
+export const header = (args) => {
   const { collapseMode, expanded, usageMode } = args?.['bx-side-nav'] ?? {};
   const { href } = args?.['bx-side-nav-menu-item'] ?? {};
   updateRailExpanded({ collapseMode, expanded, usageMode });
-  const handleButtonToggle = event => {
+  const handleButtonToggle = (event) => {
     updateRailExpanded({ collapseMode, expanded: event.detail.active, usageMode });
   };
   const result = html`
@@ -204,7 +204,8 @@ export const header = args => {
       <bx-header-menu-button
         button-label-active="Close menu"
         button-label-inactive="Open menu"
-        @bx-header-menu-button-toggled="${handleButtonToggle}"></bx-header-menu-button>
+        @bx-header-menu-button-toggled="${handleButtonToggle}"
+      ></bx-header-menu-button>
       <bx-header-name href="javascript:void 0" prefix="IBM">[Platform]</bx-header-name>
       <bx-header-nav menu-bar-label="IBM [Platform]">
         <bx-header-nav-item href="javascript:void 0">Link 1</bx-header-nav-item>
@@ -221,7 +222,8 @@ export const header = args => {
       aria-label="Side navigation"
       collapse-mode="${ifNonNull(collapseMode)}"
       ?expanded=${expanded}
-      usage-mode="${ifNonNull(usageMode)}">
+      usage-mode="${ifNonNull(usageMode)}"
+    >
       <bx-side-nav-items>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}

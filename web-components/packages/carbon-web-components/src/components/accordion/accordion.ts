@@ -40,16 +40,14 @@ class BXAccordion extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has('size')) {
       // Propagate `size` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll((this.constructor as typeof BXAccordion).selectorAccordionItems), elem => {
+      forEach(this.querySelectorAll((this.constructor as typeof BXAccordion).selectorAccordionItems), (elem) => {
         elem.setAttribute('size', this.size);
       });
     }
   }
 
   render() {
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   static get selectorAccordionItems() {

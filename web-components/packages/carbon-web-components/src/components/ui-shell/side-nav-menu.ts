@@ -74,7 +74,7 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
    */
   private _handleSlotChange({ target }) {
     const { _hasIcon: hasIcon } = this;
-    forEach(target.assignedNodes(), item => {
+    forEach(target.assignedNodes(), (item) => {
       if (item.nodeType === Node.ELEMENT_NODE) {
         item.toggleAttribute((this.constructor as typeof BXSideNavMenu).attribItemHasIcon, hasIcon);
       }
@@ -89,7 +89,7 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
     const hasIcon = target.assignedNodes().length > 0;
     this._hasIcon = hasIcon;
     this._titleIconContainerNode?.toggleAttribute('hidden', !hasIcon);
-    forEach(this.querySelectorAll(constructor.selectorItem), item => {
+    forEach(this.querySelectorAll(constructor.selectorItem), (item) => {
       item.toggleAttribute(constructor.attribItemHasIcon, hasIcon);
     });
   }
@@ -136,7 +136,7 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
     if (changedProperties.has('expanded')) {
       const { selectorItem } = this.constructor as typeof BXSideNavMenu;
       const { expanded } = this;
-      forEach(this.querySelectorAll(selectorItem), elem => {
+      forEach(this.querySelectorAll(selectorItem), (elem) => {
         (elem as HTMLElement).tabIndex = expanded ? 0 : -1;
       });
     }

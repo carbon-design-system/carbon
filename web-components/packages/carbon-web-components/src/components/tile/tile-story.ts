@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,7 +24,7 @@ const colorSchemes = {
   [`Light (${TILE_COLOR_SCHEME.LIGHT})`]: TILE_COLOR_SCHEME.LIGHT,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { colorScheme } = args?.['bx-tile'] ?? {};
   return html` <bx-tile color-scheme="${ifNonNull(colorScheme)}">Default tile</bx-tile> `;
 };
@@ -39,7 +39,7 @@ Default.parameters = {
   },
 };
 
-export const clickable = args => {
+export const clickable = (args) => {
   const { colorScheme, disabled, download, href, hreflang, ping, rel, target, type } = args?.['bx-clickable-tile'] ?? {};
   return html`
     <bx-clickable-tile
@@ -51,7 +51,8 @@ export const clickable = args => {
       ping="${ifNonNull(ping)}"
       rel="${ifNonNull(rel)}"
       target="${ifNonNull(target)}"
-      type="${ifNonNull(type)}">
+      type="${ifNonNull(type)}"
+    >
       Clickable tile
     </bx-clickable-tile>
   `;
@@ -67,7 +68,7 @@ clickable.parameters = {
   },
 };
 
-export const singleSelectable = args => {
+export const singleSelectable = (args) => {
   const { checkmarkLabel, colorScheme, name, value, onInput } = args?.['bx-radio-tile'] ?? {};
   return html`
     <fieldset>
@@ -77,7 +78,8 @@ export const singleSelectable = args => {
         color-scheme="${ifNonNull(colorScheme)}"
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
-        @input="${onInput}">
+        @input="${onInput}"
+      >
         Single-select Tile
       </bx-radio-tile>
       <bx-radio-tile
@@ -85,7 +87,8 @@ export const singleSelectable = args => {
         color-scheme="${ifNonNull(colorScheme)}"
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
-        @input="${onInput}">
+        @input="${onInput}"
+      >
         Single-select Tile
       </bx-radio-tile>
       <bx-radio-tile
@@ -93,7 +96,8 @@ export const singleSelectable = args => {
         color-scheme="${ifNonNull(colorScheme)}"
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
-        @input="${onInput}">
+        @input="${onInput}"
+      >
         Single-select Tile
       </bx-radio-tile>
     </fieldset>
@@ -114,7 +118,7 @@ singleSelectable.parameters = {
   },
 };
 
-export const multiSelectable = args => {
+export const multiSelectable = (args) => {
   const { checkmarkLabel, colorScheme, name, selected, value, onInput } = args?.['bx-selectable-tile'] ?? {};
   return html`
     <bx-selectable-tile
@@ -123,7 +127,8 @@ export const multiSelectable = args => {
       name="${ifNonNull(name)}"
       ?selected="${selected}"
       value="${ifNonNull(value)}"
-      @input="${onInput}">
+      @input="${onInput}"
+    >
       Multi-select Tile
     </bx-selectable-tile>
   `;
@@ -140,7 +145,7 @@ multiSelectable.parameters = {
   },
 };
 
-export const expandable = args => {
+export const expandable = (args) => {
   const { colorScheme, expanded, disableChange, onBeforeChange, onChange } = args?.['bx-expandable-tile'] ?? {};
   const handleBeforeChanged = (event: CustomEvent) => {
     onBeforeChange(event);
@@ -153,7 +158,8 @@ export const expandable = args => {
       color-scheme="${ifNonNull(colorScheme)}"
       ?expanded="${expanded}"
       @bx-expandable-tile-beingchanged=${handleBeforeChanged}
-      @bx-expandable-tile-changed=${onChange}>
+      @bx-expandable-tile-changed=${onChange}
+    >
       <bx-tile-above-the-fold-content slot="above-the-fold-content" style="height: 200px">
         Above the fold content here
       </bx-tile-above-the-fold-content>
@@ -180,7 +186,7 @@ expandable.parameters = {
 
 export default {
   title: 'Components/Tile',
-  decorators: [story => html` <div>${story()}</div> `],
+  decorators: [(story) => html` <div>${story()}</div> `],
   parameters: {
     ...storyDocs.parameters,
   },

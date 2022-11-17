@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -88,7 +88,7 @@ describe('bx-accordion', function () {
 
     it('Should support preventing modal from being opened upon user gesture', async function () {
       const spyAfterToggle = jasmine.createSpy('after toggle');
-      events.on(item!, 'bx-accordion-item-beingtoggled', event => {
+      events.on(item!, 'bx-accordion-item-beingtoggled', (event) => {
         event.preventDefault();
       });
       events.on(item!, 'bx-accordion-item-toggled', spyAfterToggle);
@@ -102,7 +102,7 @@ describe('bx-accordion', function () {
       await Promise.resolve();
       item = document.body.querySelector('bx-accordion-item');
       const spyAfterToggle = jasmine.createSpy('after toggle');
-      events.on(item!, 'bx-accordion-item-beingtoggled', event => {
+      events.on(item!, 'bx-accordion-item-beingtoggled', (event) => {
         event.preventDefault();
       });
       events.on(item!, 'bx-accordion-item-toggled', spyAfterToggle);

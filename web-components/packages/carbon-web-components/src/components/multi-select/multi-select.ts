@@ -77,7 +77,7 @@ class BXMultiSelect extends BXDropdown {
       itemToSelect.selected = !itemToSelect.selected;
       this._assistiveStatusText = itemToSelect.selected ? this.selectedItemAssistiveText : this.unselectedItemAssistiveText;
     } else {
-      forEach(this.querySelectorAll((this.constructor as typeof BXMultiSelect).selectorItemSelected), item => {
+      forEach(this.querySelectorAll((this.constructor as typeof BXMultiSelect).selectorItemSelected), (item) => {
         (item as BXMultiSelectItem).selected = false;
       });
       this._handleUserInitiatedToggle(false);
@@ -86,9 +86,9 @@ class BXMultiSelect extends BXDropdown {
     // Change in `.selected` hasn't been reflected to the corresponding attribute yet
     this.value = filter(
       this.querySelectorAll((this.constructor as typeof BXMultiSelect).selectorItem),
-      item => (item as BXMultiSelectItem).selected
+      (item) => (item as BXMultiSelectItem).selected
     )
-      .map(item => (item as BXMultiSelectItem).value)
+      .map((item) => (item as BXMultiSelectItem).value)
       .join(',');
   }
 
@@ -103,7 +103,7 @@ class BXMultiSelect extends BXDropdown {
     } else if (this._clearButtonNode?.contains(event.target as Node)) {
       this._handleUserInitiatedClearInput();
     } else {
-      const shouldIgnoreClickInner = elem =>
+      const shouldIgnoreClickInner = (elem) =>
         elem.closest && elem.closest((this.constructor as typeof BXMultiSelect).selectorIgnoreClickInner);
       if (!event.composedPath().some(shouldIgnoreClickInner)) {
         super._handleClickInner(event);
@@ -199,9 +199,7 @@ class BXMultiSelect extends BXDropdown {
   protected _renderTriggerContent(): TemplateResult {
     const { triggerContent, _selectedItemContent: selectedItemContent } = this;
     return !this.filterable
-      ? html`
-          <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span>
-        `
+      ? html` <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span> `
       : html`
           <input
             id="trigger-label"
@@ -235,7 +233,7 @@ class BXMultiSelect extends BXDropdown {
 
     if (!this.open) this.open = true;
 
-    forEach(items, item => {
+    forEach(items, (item) => {
       const itemValue = (item as HTMLElement).innerText.toLocaleLowerCase();
 
       if (!itemValue.includes(inputValue)) {
@@ -287,7 +285,7 @@ class BXMultiSelect extends BXDropdown {
     this._filterInputNode.value = '';
     this.open = true;
     this._filterInputNode.focus();
-    forEach(items, item => {
+    forEach(items, (item) => {
       (item as BXMultiSelectItem).removeAttribute('filtered');
     });
   }
@@ -313,7 +311,7 @@ class BXMultiSelect extends BXDropdown {
   shouldUpdate(changedProperties) {
     const { selectorItem } = this.constructor as typeof BXMultiSelect;
     if (changedProperties.has('size')) {
-      forEach(this.querySelectorAll(selectorItem), elem => {
+      forEach(this.querySelectorAll(selectorItem), (elem) => {
         (elem as BXMultiSelectItem).size = this.size;
       });
     }
@@ -322,10 +320,10 @@ class BXMultiSelect extends BXDropdown {
       const values = !value ? [] : value.split(',');
       // Updates selection beforehand because our rendering logic for `<bx-multi-select>` looks for selected items via `qSA()`
       const items = this.querySelectorAll(selectorItem);
-      forEach(items, elem => {
+      forEach(items, (elem) => {
         (elem as BXMultiSelectItem).selected = values.indexOf((elem as BXMultiSelectItem).value) >= 0;
       });
-      this._selectedItemsCount = filter(items, elem => values.indexOf((elem as BXMultiSelectItem).value) >= 0).length;
+      this._selectedItemsCount = filter(items, (elem) => values.indexOf((elem as BXMultiSelectItem).value) >= 0).length;
     }
     return true;
   }

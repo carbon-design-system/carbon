@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -156,7 +156,7 @@ describe('bx-date-picker', function () {
     it('Should support programmatic change of the date', async function () {
       datePicker!.value = '2000-07-15';
       await Promise.resolve();
-      expect(datePicker!.calendar!.selectedDates.map(item => item.getTime())).toEqual([new Date(2000, 6, 15).getTime()]);
+      expect(datePicker!.calendar!.selectedDates.map((item) => item.getTime())).toEqual([new Date(2000, 6, 15).getTime()]);
     });
 
     it('Should support opening calendar dropdown by clicking on calendar icon', async function () {
@@ -209,7 +209,7 @@ describe('bx-date-picker', function () {
     it('Should support programmatic change of the date', async function () {
       datePicker!.value = '2000-07-10/2000-07-20';
       await Promise.resolve();
-      expect(datePicker!.calendar!.selectedDates.map(item => item.getTime())).toEqual([
+      expect(datePicker!.calendar!.selectedDates.map((item) => item.getTime())).toEqual([
         new Date(2000, 6, 10).getTime(),
         new Date(2000, 6, 20).getTime(),
       ]);
@@ -257,7 +257,7 @@ describe('bx-date-picker', function () {
     it('should support canceling required check', async function () {
       const input = elem as BXDatePickerInput;
       input.required = true;
-      events.on(input, 'invalid', event => {
+      events.on(input, 'invalid', (event) => {
         event.preventDefault();
       });
       expect(input.checkValidity()).toBe(false);

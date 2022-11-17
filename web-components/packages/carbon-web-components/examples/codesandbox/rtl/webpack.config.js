@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -65,7 +65,7 @@ module.exports = [
           dir: 'rtl',
         },
       }),
-      new webpack.NormalModuleReplacementPlugin(reCssBundle, resource => {
+      new webpack.NormalModuleReplacementPlugin(reCssBundle, (resource) => {
         resource.request = resource.request.replace(reCssBundle, '.rtl.css.js');
       }),
     ],

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,7 +24,7 @@ const sizes = {
   [`XL size (${CONTENT_SWITCHER_SIZE.EXTRA_LARGE})`]: CONTENT_SWITCHER_SIZE.EXTRA_LARGE,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { value, disableSelection, onBeforeSelect = noop, onSelect = noop, size } = args?.['bx-content-switcher'] ?? {};
   const handleBeforeSelected = (event: CustomEvent) => {
     onBeforeSelect(event);
@@ -37,7 +37,8 @@ export const Default = args => {
       value="${ifNonNull(value)}"
       @bx-content-switcher-beingselected="${handleBeforeSelected}"
       @bx-content-switcher-selected="${onSelect}"
-      size="${size}">
+      size="${size}"
+    >
       <bx-content-switcher-item value="all">Option 1</bx-content-switcher-item>
       <bx-content-switcher-item value="cloudFoundry" disabled>Option 2</bx-content-switcher-item>
       <bx-content-switcher-item value="staging">Option 3</bx-content-switcher-item>

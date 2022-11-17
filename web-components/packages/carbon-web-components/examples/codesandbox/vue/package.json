@@ -17,7 +17,6 @@
     "babel-eslint": "^10.0.0",
     "eslint": "^5.8.0",
     "eslint-plugin-vue": "^5.0.0",
-    "vue-eslint-parser": "^6.0.0",
     "vue-template-compiler": "^2.5.0"
   },
   "browserslist": [
@@ -26,7 +25,6 @@
     "not ie <= 8"
   ],
   "eslintConfig": {
-    "parser": "vue-eslint-parser",
     "parserOptions": {
       "ecmaVersion": 6,
       "sourceType": "module"

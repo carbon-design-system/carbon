@@ -55,7 +55,7 @@ import storyDocs from './data-table-story.mdx';
  * @returns `true` if the given table row matches the given search string.
  */
 const doesRowMatchSearchString = (row: TDemoTableRow, searchString: string) =>
-  Object.keys(row).some(key => key !== 'id' && String(row[key] ?? '').indexOf(searchString) >= 0);
+  Object.keys(row).some((key) => key !== 'id' && String(row[key] ?? '').indexOf(searchString) >= 0);
 
 /**
  * A class to manage table states, like selection and sorting.
@@ -95,9 +95,7 @@ class BXCEDemoDataTable extends LitElement {
   /**
    * Unique ID used for form elements.
    */
-  protected _uniqueId = Math.random()
-    .toString(36)
-    .slice(2);
+  protected _uniqueId = Math.random().toString(36).slice(2);
 
   /**
    * @param lhs A value.
@@ -119,7 +117,7 @@ class BXCEDemoDataTable extends LitElement {
    */
   private _handleCancelSelection() {
     const { _rows: oldRows, _searchString: searchString } = this;
-    this._rows = this._rows!.map(row =>
+    this._rows = this._rows!.map((row) =>
       searchString && !doesRowMatchSearchString(row, searchString) ? row : { ...row, selected: false }
     );
     this.requestUpdate('_rows', oldRows);
@@ -144,7 +142,7 @@ class BXCEDemoDataTable extends LitElement {
       const { rowId: changedRowId } = (target as HTMLElement).dataset;
       const { selected } = detail;
       const { _rows: oldRows } = this;
-      this._rows = oldRows!.map(row => (Number(changedRowId) !== row.id ? row : { ...row, selected }));
+      this._rows = oldRows!.map((row) => (Number(changedRowId) !== row.id ? row : { ...row, selected }));
       this.requestUpdate('_rows', oldRows);
     }
   }
@@ -158,7 +156,7 @@ class BXCEDemoDataTable extends LitElement {
     if (!defaultPrevented) {
       const { selected } = detail;
       const { _rows: oldRows, _searchString: searchString } = this;
-      this._rows = this._rows!.map(row =>
+      this._rows = this._rows!.map((row) =>
         searchString && !doesRowMatchSearchString(row, searchString) ? row : { ...row, selected }
       );
       this.requestUpdate('_rows', oldRows);
@@ -212,7 +210,7 @@ class BXCEDemoDataTable extends LitElement {
    */
   private _handleDeleteRows() {
     const { _rows: oldRows, _searchString: searchString } = this;
-    this._rows = oldRows!.filter(row => !row.selected || !doesRowMatchSearchString(row, searchString));
+    this._rows = oldRows!.filter((row) => !row.selected || !doesRowMatchSearchString(row, searchString));
     this.requestUpdate('_rows', oldRows);
   }
 
@@ -222,7 +220,7 @@ class BXCEDemoDataTable extends LitElement {
    * @param event The event triggering this action.
    */
   private _handleDownloadRows({ target }: MouseEvent) {
-    const blob = new Blob([JSON.stringify(this._filteredRows!.filter(row => row.selected))], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(this._filteredRows!.filter((row) => row.selected))], { type: 'application/json' });
     (target as BXBtn).href = URL.createObjectURL(blob);
     this._handleCancelSelection();
   }
@@ -338,7 +336,7 @@ class BXCEDemoDataTable extends LitElement {
     }
     if (changedProperties.has('rows') || changedProperties.has('_rows') || changedProperties.has('_searchString')) {
       const { pageSize, start, _rows: rows, _searchString: searchString } = this;
-      this._filteredRows = !searchString ? rows! : rows!.filter(row => doesRowMatchSearchString(row, searchString));
+      this._filteredRows = !searchString ? rows! : rows!.filter((row) => doesRowMatchSearchString(row, searchString));
       const count = this._filteredRows.length;
       if (count > 0 && start >= count) {
         this.start = Math.max(start - Math.ceil((start - count) / pageSize) * pageSize, 0);
@@ -436,7 +434,7 @@ class BXCEDemoDataTable extends LitElement {
           ${repeat(
             sortedRows.slice(start, start + pageSize),
             ({ id: rowId }) => rowId,
-            row => {
+            (row) => {
               const { id: rowId, selected } = row;
               const selectionName = !hasSelection ? undefined : `__bx-ce-demo-data-table_${elementId || this._uniqueId}_${rowId}`;
               const selectionValue = !hasSelection ? undefined : 'selected';
@@ -450,10 +448,7 @@ class BXCEDemoDataTable extends LitElement {
                   ${repeat(
                     columns!,
                     ({ id: columnId }) => columnId,
-                    ({ id: columnId }) =>
-                      html`
-                        <bx-table-cell>${row[columnId]}</bx-table-cell>
-                      `
+                    ({ id: columnId }) => html` <bx-table-cell>${row[columnId]}</bx-table-cell> `
                   )}
                 </bx-table-row>
               `;
@@ -498,7 +493,7 @@ const defineDemoDataTable = (() => {
   };
 })();
 
-export const Default = args => {
+export const Default = (args) => {
   const { size } = args?.['bx-table'] ?? {};
   const { colorScheme } = args?.['bx-table-body'] ?? {};
   return html`
@@ -556,21 +551,21 @@ Default.parameters = {
   },
 };
 
-export const expandable = args => {
+export const expandable = (args) => {
   const { size } = args?.['bx-table'] ?? {};
   const { zebra } = args?.['bx-table-body'] ?? {};
-  const handleExpandRowAll = event => {
+  const handleExpandRowAll = (event) => {
     const { currentTarget, detail } = event;
     const rows = currentTarget.querySelectorAll('bx-table-expand-row');
-    Array.prototype.forEach.call(rows, row => {
+    Array.prototype.forEach.call(rows, (row) => {
       row.expanded = detail.expanded;
     });
   };
-  const handleExpandRow = event => {
+  const handleExpandRow = (event) => {
     const { currentTarget } = event;
     const headerRow = currentTarget.querySelector('bx-table-header-expand-row');
     const rows = currentTarget.querySelectorAll('bx-table-expand-row');
-    headerRow.expanded = Array.prototype.every.call(rows, row => row.expanded);
+    headerRow.expanded = Array.prototype.every.call(rows, (row) => row.expanded);
   };
   return html`
     <bx-table
@@ -637,7 +632,7 @@ expandable.parameters = {
   },
 };
 
-export const sortable = args => {
+export const sortable = (args) => {
   const { size } = args?.['bx-table'] ?? {};
   const { onBeforeChangeSelection: onBeforeChangeSelectionAll } = args?.['bx-table-header-row'] ?? {};
   const { colorScheme } = args?.['bx-table-body'] ?? {};
@@ -716,7 +711,7 @@ sortable.parameters = {
   },
 };
 
-export const sortableWithPagination = args => {
+export const sortableWithPagination = (args) => {
   const { size } = args?.['bx-table'] ?? {};
   const { onBeforeChangeSelection: onBeforeChangeSelectionAll } = args?.['bx-table-header-row'] ?? {};
   const { colorScheme } = args?.['bx-table-body'] ?? {};
@@ -773,7 +768,7 @@ sortableWithPagination.parameters = {
   knobs: sortable.parameters.knobs,
 };
 
-export const skeleton = args => {
+export const skeleton = (args) => {
   const { size } = args?.['bx-table'];
   const { colorScheme } = args?.['bx-table-body'];
   return html`

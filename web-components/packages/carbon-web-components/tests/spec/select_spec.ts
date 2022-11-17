@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -170,7 +170,7 @@ describe('bx-select', function () {
       );
       await Promise.resolve();
       const { options } = document.body.querySelector('bx-select') as BXSelect;
-      expect(Array.prototype.map.call(options, option => option.value)).toEqual(['all', 'cloudFoundry']);
+      expect(Array.prototype.map.call(options, (option) => option.value)).toEqual(['all', 'cloudFoundry']);
     });
 
     it('should support querying the length of `<option>`', async function () {
@@ -199,7 +199,7 @@ describe('bx-select', function () {
       const elem = document.body.querySelector('bx-select');
       const { _attributeToProperty: origAttributeToProperty } = elem as any;
       let caught;
-      await new Promise(resolve => {
+      await new Promise((resolve) => {
         spyOn(BXSelect.prototype as any, '_attributeToProperty').and.callFake(function () {
           try {
             // TODO: See if we can get around TS2683
@@ -303,7 +303,7 @@ describe('bx-select', function () {
     it('should support canceling required check', async function () {
       const select = elem as BXSelect;
       select.required = true;
-      events.on(select, 'invalid', event => {
+      events.on(select, 'invalid', (event) => {
         event.preventDefault();
       });
       expect(select.checkValidity()).toBe(false);

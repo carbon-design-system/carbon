@@ -83,7 +83,7 @@ const table = () => {
       <bx-table-head>
         <bx-table-header-row>
           ${columns
-            .map(column => {
+            .map((column) => {
               const { id: columnId, sortCycle, title } = column;
               const sortDirectionForThisCell =
                 sortCycle && (columnId === sortColumnId ? sortDirection : TABLE_SORT_DIRECTION.NONE);
@@ -97,12 +97,12 @@ const table = () => {
       <bx-table-body>
         ${sortedRows
           .slice(start, start + pageSize)
-          .map(row => {
+          .map((row) => {
             const { id: rowId } = row;
             return `
           <bx-table-row data-row-id="${rowId}">
             ${columns
-              .map(column => {
+              .map((column) => {
                 const { id: columnId } = column;
                 return `<bx-table-cell>${row[columnId]}</bx-table-cell>`;
               })
@@ -118,13 +118,13 @@ const table = () => {
 
 table.state = {
   start: 0,
-  setStart: start => {
+  setStart: (start) => {
     setState(() => {
       table.state.start = start;
     });
   },
   pageSize: 3,
-  setPageSize: pageSize => {
+  setPageSize: (pageSize) => {
     setState(() => {
       table.state.pageSize = pageSize;
     });
@@ -133,7 +133,7 @@ table.state = {
     columnId: 'name',
     direction: TABLE_SORT_DIRECTION.ASCENDING,
   },
-  setSortInfo: sortInfo => {
+  setSortInfo: (sortInfo) => {
     setState(() => {
       table.state.sortInfo = sortInfo;
     });

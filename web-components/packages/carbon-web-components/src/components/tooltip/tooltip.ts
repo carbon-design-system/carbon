@@ -57,7 +57,7 @@ class BXTooltip extends HostListenerMixin(LitElement) implements BXFloatingMenuT
    */
   @HostListener('keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = async event => {
+  private _handleKeydown = async (event) => {
     if (event.key === ' ' || event.key === 'Enter') {
       this._handleClick();
     }
@@ -103,7 +103,7 @@ class BXTooltip extends HostListenerMixin(LitElement) implements BXFloatingMenuT
   updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (!this._menuBody) {
-        this._menuBody = find(this.childNodes, elem => (elem.constructor as typeof BXFloatingMenu).FLOATING_MENU);
+        this._menuBody = find(this.childNodes, (elem) => (elem.constructor as typeof BXFloatingMenu).FLOATING_MENU);
       }
       if (this._menuBody) {
         this._menuBody.open = this.open;

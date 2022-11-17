@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,7 +32,7 @@ const sizes = {
   [`XL size (${OVERFLOW_MENU_SIZE.EXTRA_LARGE})`]: OVERFLOW_MENU_SIZE.EXTRA_LARGE,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { open, colorScheme, disabled, direction, size } = args?.['bx-overflow-menu'] ?? {};
   return html`
     <bx-overflow-menu ?open="${open}" ?disabled="${disabled}" size="${size}">

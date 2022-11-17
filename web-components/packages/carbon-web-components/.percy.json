@@ -1,15 +1,11 @@
 {
-    "version": 2,
-    "snapshot": {
-      "widths": [
-        320,
-        1280
-      ],
-      "min-height": 800,
-      "enable-javascript": true
-    },
-    "discovery": {
-      "network-idle-timeout": 250
-    }
+  "version": 2,
+  "snapshot": {
+    "widths": [320, 1280],
+    "min-height": 800,
+    "enable-javascript": true
+  },
+  "discovery": {
+    "network-idle-timeout": 250
+  }
 }
-  

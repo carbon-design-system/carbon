@@ -43,9 +43,7 @@ class BXStructuredListHeaderRow extends LitElement {
         <div class="${prefix}--structured-list-th"></div>
       `;
     }
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   static styles = styles;

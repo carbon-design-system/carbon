@@ -21,7 +21,7 @@ async function makeWebpackServer(port) {
     const compiler = webpack(config);
     const server = new WebpackDevServer(compiler, Object.assign(config.devServer || {}, { open: false }));
     compiler.hooks.done.tap('webpack-server', () => {
-      server.listen(port, error => {
+      server.listen(port, (error) => {
         if (error) {
           reject(error);
         } else {
@@ -29,7 +29,7 @@ async function makeWebpackServer(port) {
         }
       });
     });
-    compiler.hooks.failed.tap('webpack-server', error => {
+    compiler.hooks.failed.tap('webpack-server', (error) => {
       reject(error);
     });
   });
@@ -41,7 +41,7 @@ makeWebpackServer(commander.port).then(
   () => {
     process.exit(0);
   },
-  error => {
+  (error) => {
     console.error(error); // eslint-disable-line no-console
     process.exit(1);
   }

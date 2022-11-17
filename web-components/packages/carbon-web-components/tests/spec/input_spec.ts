@@ -136,7 +136,7 @@ describe('bx-input', function () {
     it('should support canceling required check', async function () {
       const input = elem as BXInput;
       input.required = true;
-      events.on(input, 'invalid', event => {
+      events.on(input, 'invalid', (event) => {
         event.preventDefault();
       });
       expect(input.checkValidity()).toBe(false);

@@ -388,7 +388,7 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
       }
     }
     if (input) {
-      ['max', 'min', 'step', 'value'].forEach(name => {
+      ['max', 'min', 'step', 'value'].forEach((name) => {
         if (changedProperties.has(name)) {
           input[name] = this[name];
         }

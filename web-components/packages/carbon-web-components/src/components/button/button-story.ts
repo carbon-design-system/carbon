@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -42,7 +42,7 @@ const iconLayouts = {
   [`Condensed (${BUTTON_ICON_LAYOUT.CONDENSED})`]: BUTTON_ICON_LAYOUT.CONDENSED,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { autofocus, disabled, download, href, hreflang, isExpressive, kind, linkRole, ping, rel, size, target, type, onClick } =
     args?.['bx-btn'] ?? {};
   return html`
@@ -60,7 +60,8 @@ export const Default = args => {
       size="${ifNonNull(size)}"
       target="${ifNonNull(target)}"
       type="${ifNonNull(type)}"
-      @click=${onClick}>
+      @click=${onClick}
+    >
       Button
     </bx-btn>
   `;
@@ -79,7 +80,7 @@ Default.parameters = {
   },
 };
 
-export const icon = args => {
+export const icon = (args) => {
   const { kind, disabled, size, href, isExpressive, onClick } = args?.['bx-btn'] ?? {};
   return html`
     <bx-btn
@@ -88,7 +89,8 @@ export const icon = args => {
       size=${ifNonNull(size)}
       href=${ifNonNull(href || undefined)}
       ?isExpressive="${isExpressive}"
-      @click=${onClick}>
+      @click=${onClick}
+    >
       ${Add16({ slot: 'icon' })}
     </bx-btn>
   `;
@@ -96,7 +98,7 @@ export const icon = args => {
 
 icon.parameters = Default.parameters;
 
-export const textAndIcon = args => {
+export const textAndIcon = (args) => {
   const { kind, disabled, size, href, iconLayout, isExpressive, onClick } = args?.['bx-btn'] ?? {};
   return html`
     <bx-btn
@@ -106,7 +108,8 @@ export const textAndIcon = args => {
       ?isExpressive="${isExpressive}"
       size=${ifNonNull(size)}
       href=${ifNonNull(href || undefined)}
-      @click=${onClick}>
+      @click=${onClick}
+    >
       Button ${Add16({ slot: 'icon' })}
     </bx-btn>
   `;
@@ -128,7 +131,7 @@ textAndIcon.parameters = {
   },
 };
 
-export const skeleton = args => {
+export const skeleton = (args) => {
   const { disabled, size, href, isExpressive, onClick } = args?.['bx-btn-skeleton'];
   return html`
     <bx-btn-skeleton
@@ -136,7 +139,8 @@ export const skeleton = args => {
       size=${ifNonNull(size)}
       href=${ifNonNull(href || undefined)}
       ?isExpressive="${isExpressive}"
-      @click=${onClick}>
+      @click=${onClick}
+    >
     </bx-btn-skeleton>
   `;
 };

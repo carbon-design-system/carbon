@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,7 +31,8 @@ const headerCellTemplate = (props?) => {
     <bx-table-header-cell
       ?sort-active="${sortActive}"
       sort-cycle="${ifNonNull(sortCycle)}"
-      sort-direction="${ifNonNull(sortDirection)}">
+      sort-direction="${ifNonNull(sortDirection)}"
+    >
       Name
     </bx-table-header-cell>
   `;
@@ -45,7 +46,8 @@ const rowTemplate = (props?) => {
       ?selected="${selected}"
       selection-name="${ifNonNull(selectionName)}"
       selection-label="${ifNonNull(selectionLabel)}"
-      selection-value="${ifNonNull(selectionValue)}"></bx-table-row>
+      selection-value="${ifNonNull(selectionValue)}"
+    ></bx-table-row>
   `;
 };
 
@@ -58,7 +60,8 @@ const expandRowTemplate = (props?) => {
       ?selected="${selected}"
       selection-name="${ifNonNull(selectionName)}"
       selection-label="${ifNonNull(selectionLabel)}"
-      selection-value="${ifNonNull(selectionValue)}"></bx-table-expand-row>
+      selection-value="${ifNonNull(selectionValue)}"
+    ></bx-table-expand-row>
     <bx-table-expanded-row></bx-table-expanded-row>
   `;
 };
@@ -145,7 +148,7 @@ describe('data-table', function () {
       await Promise.resolve();
       const result = Array.prototype.every.call(
         document.body.querySelectorAll('bx-table-row'),
-        item => (item as BXTableRow).even === false && (item as BXTableRow).odd === false
+        (item) => (item as BXTableRow).even === false && (item as BXTableRow).odd === false
       );
       expect(result).toBe(true);
     });
@@ -277,7 +280,7 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         const elem = document.body.querySelector('bx-table-header-cell') as BXTableHeaderCell;
-        events.on(elem, 'bx-table-header-cell-sort', event => {
+        events.on(elem, 'bx-table-header-cell-sort', (event) => {
           event.preventDefault();
         });
         const button = elem.shadowRoot!.querySelector('.bx--table-sort') as HTMLButtonElement;
@@ -359,7 +362,7 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         const row = document.body.querySelector('bx-table-row');
-        events.on(row!, 'bx-table-row-change-selection', event => {
+        events.on(row!, 'bx-table-row-change-selection', (event) => {
           event.preventDefault();
         });
         row!.shadowRoot!.querySelector('input')!.click();
@@ -452,7 +455,7 @@ describe('data-table', function () {
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
         const expandRow = document.body.querySelector('bx-table-expand-row');
-        events.on(expandRow!, 'bx-table-row-expando-beingtoggled', event => {
+        events.on(expandRow!, 'bx-table-row-expando-beingtoggled', (event) => {
           event.preventDefault();
         });
         events.on(expandRow!, 'bx-table-row-expando-toggled', spyAfterToggle);

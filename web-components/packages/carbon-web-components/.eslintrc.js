@@ -54,6 +54,7 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 0,
         'jsdoc/require-param-type': 0,
         'jsdoc/require-returns-type': 0,
+        'no-undef': 0,
       },
     },
     {

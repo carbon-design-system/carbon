@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,7 +23,7 @@ const sizes = {
   [`Small size (${TAG_SIZE.SMALL})`]: TAG_SIZE.SMALL,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { size, type, title, disabled } = args?.['bx-tag'] ?? {};
   return html`
     <bx-tag size="${ifNonNull(size)}" type="${ifNonNull(type)}" title="${ifNonNull(title)}" ?disabled="${disabled}">
@@ -55,7 +55,7 @@ Default.parameters = {
   },
 };
 
-export const filter = args => {
+export const filter = (args) => {
   const {
     open,
     size,
@@ -82,7 +82,8 @@ export const filter = args => {
       ?disabled="${disabled}"
       @click="${onClick}"
       @bx-filter-tag-beingclosed="${handleBeforeClose}"
-      @bx-filter-tag-closed="${onClose}">
+      @bx-filter-tag-closed="${onClose}"
+    >
       This is a tag
     </bx-filter-tag>
   `;

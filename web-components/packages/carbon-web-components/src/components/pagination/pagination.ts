@@ -181,19 +181,19 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
     const { pageSize } = this;
     const { selectorPageSizesSelect, selectorPagesSelect } = this.constructor as typeof BXPagination;
     if (changedProperties.has('pageSize')) {
-      forEach(this.querySelectorAll(selectorPageSizesSelect), elem => {
+      forEach(this.querySelectorAll(selectorPageSizesSelect), (elem) => {
         (elem as BXPageSizesSelect).value = pageSize;
       });
     }
     if (changedProperties.has('pageSize') || changedProperties.has('start')) {
       const { start } = this;
-      forEach(this.querySelectorAll(selectorPagesSelect), elem => {
+      forEach(this.querySelectorAll(selectorPagesSelect), (elem) => {
         (elem as BXPagesSelect).value = Math.floor(start / pageSize);
       });
     }
     if (changedProperties.has('pageSize') || changedProperties.has('total')) {
       const { total } = this;
-      forEach(this.querySelectorAll(selectorPagesSelect), elem => {
+      forEach(this.querySelectorAll(selectorPagesSelect), (elem) => {
         (elem as BXPagesSelect).total = Math.ceil(total / pageSize);
       });
     }

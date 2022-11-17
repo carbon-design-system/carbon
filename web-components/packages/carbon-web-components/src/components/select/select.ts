@@ -43,9 +43,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
   /**
    * The `value` for placeholder `<option>`.
    */
-  private _placeholderItemValue = `__${prefix}-select-placeholder_${Math.random()
-    .toString(36)
-    .slice(2)}`;
+  private _placeholderItemValue = `__${prefix}-select-placeholder_${Math.random().toString(36).slice(2)}`;
 
   /**
    * The select box.
@@ -94,8 +92,8 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
     // Does not use properties to avoid delay in attribute to property mapping, which runs in custom element reaction cycle:
     // https://html.spec.whatwg.org/multipage/custom-elements.html#custom-element-reactions
     return html`
-      ${filter(element.childNodes, item => item.nodeType === Node.ELEMENT_NODE && (item as Element).matches(selectorItem)).map(
-        item => {
+      ${filter(element.childNodes, (item) => item.nodeType === Node.ELEMENT_NODE && (item as Element).matches(selectorItem)).map(
+        (item) => {
           const disabled = item.hasAttribute('disabled');
           const label = item.getAttribute('label');
           const selected = item.hasAttribute('selected');

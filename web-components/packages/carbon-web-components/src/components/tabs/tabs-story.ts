@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,7 +31,7 @@ const types = {
   [`Container type (${TABS_TYPE.CONTAINER})`]: TABS_TYPE.CONTAINER,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const {
     colorScheme,
     triggerContent,
@@ -57,7 +57,8 @@ export const Default = args => {
       type="${ifNonNull(type)}"
       value="${ifNonNull(value)}"
       @bx-tabs-beingselected="${handleBeforeSelected}"
-      @bx-tabs-selected="${onSelect}">
+      @bx-tabs-selected="${onSelect}"
+    >
       <bx-tab id="tab-all" target="panel-all" value="all">Option 1</bx-tab>
       <bx-tab id="tab-cloudFoundry" target="panel-cloudFoundry" disabled value="cloudFoundry">Option 2</bx-tab>
       <bx-tab id="tab-staging" target="panel-staging" value="staging">Option 3</bx-tab>

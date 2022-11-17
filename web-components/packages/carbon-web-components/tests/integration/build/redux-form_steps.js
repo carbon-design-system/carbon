@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,10 +28,10 @@ describe('Redux-form example', () => {
       launchTimeout: Number(process.env.LAUNCH_TIMEOUT),
       port: PORT,
     });
-    page.on('dialog', async dialog => {
+    page.on('dialog', async (dialog) => {
       const message = dialog.message();
       await dialog.dismiss();
-      await page.evaluate(content => {
+      await page.evaluate((content) => {
         document.body.insertAdjacentHTML('beforeend', `<div>${content}</div>`);
       }, message);
     });

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,7 +28,7 @@ const sizes = {
   [`Extra large size (${INPUT_SIZE.EXTRA_LARGE})`]: INPUT_SIZE.EXTRA_LARGE,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { closeButtonAssistiveText, colorScheme, disabled, labelText, name, placeholder, size, type, value, onInput } =
     args?.['bx-search'] ?? {};
   return html`
@@ -42,7 +42,8 @@ export const Default = args => {
       size="${ifNonNull(size)}"
       type="${ifNonNull(type)}"
       value="${ifNonNull(value)}"
-      @bx-search-input="${onInput}"></bx-search>
+      @bx-search-input="${onInput}"
+    ></bx-search>
   `;
 };
 

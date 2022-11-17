@@ -48,7 +48,7 @@ async function reactTypes() {
       .pipe(prettier())
       .pipe(header(banner))
       .pipe(
-        rename(pathObj => {
+        rename((pathObj) => {
           pathObj.extname = '.d.ts';
         })
       )

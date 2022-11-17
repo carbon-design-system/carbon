@@ -56,7 +56,7 @@ class BXLink extends FocusMixin(LitElement) {
     const { name } = target as HTMLSlotElement;
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
-      .some(node => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim());
+      .some((node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim());
     this[name === 'icon' ? '_hasIcon' : ''] = hasContent;
     this.requestUpdate();
   }
@@ -99,9 +99,7 @@ class BXLink extends FocusMixin(LitElement) {
    */
   protected _renderDisabledLink() {
     const { _classes: classes } = this;
-    return html`
-      <p id="link" part="link" class="${classes}">${this._renderInner()}</p>
-    `;
+    return html` <p id="link" part="link" class="${classes}">${this._renderInner()}</p> `;
   }
 
   /**

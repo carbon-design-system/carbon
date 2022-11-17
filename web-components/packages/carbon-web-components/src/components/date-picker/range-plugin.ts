@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,7 +38,7 @@ export default (config: Config): Plugin => {
       onChange() {},
       onPreCalendarPosition() {},
       onValueUpdate(selectedDates) {
-        const [startDateFormatted, endDateFormatted] = selectedDates.map(item => fp.formatDate(item, fp.config.dateFormat));
+        const [startDateFormatted, endDateFormatted] = selectedDates.map((item) => fp.formatDate(item, fp.config.dateFormat));
         if (startDateFormatted) {
           fp._input.value = startDateFormatted;
         }
@@ -49,7 +49,7 @@ export default (config: Config): Plugin => {
       onReady() {
         (origOnReady as Function).call(this);
         const { ignoredFocusElements } = fp.config;
-        ignoredFocusElements.push(...ignoredFocusElements.map(elem => elem.shadowRoot as any).filter(Boolean));
+        ignoredFocusElements.push(...ignoredFocusElements.map((elem) => elem.shadowRoot as any).filter(Boolean));
       },
     });
   };

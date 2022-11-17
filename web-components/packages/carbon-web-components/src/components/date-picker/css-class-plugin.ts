@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -121,11 +121,11 @@ export default (config: DatePickerCSSClassPluginConfig): Plugin =>
         if (days) {
           days.classList.add(classDays);
         }
-        forEach(calendarContainer.querySelectorAll(selectorFlatpickrWeekday), item => {
+        forEach(calendarContainer.querySelectorAll(selectorFlatpickrWeekday), (item) => {
           item.innerHTML = item.innerHTML.replace(/\s+/g, '');
           item.classList.add(classWeekday);
         });
-        forEach(calendarContainer.querySelectorAll(selectorFlatpickrDay), item => {
+        forEach(calendarContainer.querySelectorAll(selectorFlatpickrDay), (item) => {
           item.classList.add(classDay);
           if (item.classList.contains(classFlatpickrToday) && selectedDates!.length > 0) {
             item.classList.add(classNoBorder);

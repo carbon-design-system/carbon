@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,7 +16,7 @@ import './slider-input';
 import './slider-skeleton';
 import storyDocs from './slider-story.mdx';
 
-export const Default = args => {
+export const Default = (args) => {
   const { disabled, labelText, max, min, name, step, value, onChange } = args?.['bx-slider'] || {};
   return html`
     <bx-slider
@@ -27,7 +27,8 @@ export const Default = args => {
       name="${ifNonNull(name)}"
       step="${ifNonNull(step)}"
       value="${ifNonNull(value)}"
-      @bx-slider-changed="${onChange}"></bx-slider>
+      @bx-slider-changed="${onChange}"
+    ></bx-slider>
   `;
 };
 
@@ -48,7 +49,7 @@ Default.parameters = {
   },
 };
 
-export const withInputBox = args => {
+export const withInputBox = (args) => {
   const { disabled, labelText, max, min, name, step, value, onChange } = args?.['bx-slider'] || {};
   return html`
     <bx-slider
@@ -59,7 +60,8 @@ export const withInputBox = args => {
       name="${ifNonNull(name)}"
       step="${ifNonNull(step)}"
       value="${ifNonNull(value)}"
-      @bx-slider-changed="${onChange}">
+      @bx-slider-changed="${onChange}"
+    >
       <bx-slider-input aria-label="Slider value" type="number"></bx-slider-input>
     </bx-slider>
   `;

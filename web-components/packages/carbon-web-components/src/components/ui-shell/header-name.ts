@@ -47,9 +47,7 @@ class BXHeaderName extends FocusMixin(LitElement) {
     const { href, prefix: namePrefix } = this;
     const namePrefixPart = !namePrefix
       ? undefined
-      : html`
-          <span part="prefix" class="${prefix}--header__name--prefix">${namePrefix}</span>
-        `;
+      : html` <span part="prefix" class="${prefix}--header__name--prefix">${namePrefix}</span> `;
     return html`
       <a part="link" class="${prefix}--header__name" href="${ifDefined(href)}">${namePrefixPart}&nbsp;<slot></slot></a>
     `;

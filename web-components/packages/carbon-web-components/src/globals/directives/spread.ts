@@ -39,7 +39,7 @@ const spread = directive((attributesInfo: AttributesInfo) => (part: Part) => {
   // Removes old attributes that are no longer there
   const oldAttributesInfo = attributesMapCache.get(part);
   if (oldAttributesInfo) {
-    Object.keys(oldAttributesInfo).forEach(name => {
+    Object.keys(oldAttributesInfo).forEach((name) => {
       if (!(name in attributesInfo)) {
         element.removeAttribute(name);
       }
@@ -47,7 +47,7 @@ const spread = directive((attributesInfo: AttributesInfo) => (part: Part) => {
   }
 
   // Adds new attributes
-  Object.keys(attributesInfo).forEach(name => {
+  Object.keys(attributesInfo).forEach((name) => {
     const value = attributesInfo[name];
     if ((!oldAttributesInfo || !Object.is(value, oldAttributesInfo[name])) && typeof value !== 'undefined') {
       element.setAttribute(name, value);

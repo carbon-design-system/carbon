@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,7 +25,7 @@ const sizes = {
   [`Large size (${LINK_SIZE.LARGE})`]: LINK_SIZE.LARGE,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { disabled, download, href, hreflang, linkRole, ping, rel, size, target, type, onClick } = args?.['bx-link'] ?? {};
   return html`
     <bx-link
@@ -39,7 +39,8 @@ export const Default = args => {
       size="${ifNonNull(size)}"
       target="${ifNonNull(target)}"
       type="${ifNonNull(type)}"
-      @click="${onClick}">
+      @click="${onClick}"
+    >
       Link
     </bx-link>
   `;
@@ -47,7 +48,7 @@ export const Default = args => {
 
 Default.storyName = 'Default';
 
-export const pairedWithIcon = args => {
+export const pairedWithIcon = (args) => {
   const { disabled, download, href, hreflang, linkRole, ping, rel, size, target, type, onClick } = args?.['bx-link'] ?? {};
   return html`
     <bx-link
@@ -61,7 +62,8 @@ export const pairedWithIcon = args => {
       size="${ifNonNull(size)}"
       target="${ifNonNull(target)}"
       type="${ifNonNull(type)}"
-      @click="${onClick}">
+      @click="${onClick}"
+    >
       Download ${Download16({ slot: 'icon' })}
     </bx-link>
   `;

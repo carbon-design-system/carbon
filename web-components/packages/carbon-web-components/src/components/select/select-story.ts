@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,7 +30,7 @@ const sizes = {
   [`Extra large size (${INPUT_SIZE.EXTRA_LARGE})`]: INPUT_SIZE.EXTRA_LARGE,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const {
     autofocus,
     colorScheme,
@@ -69,7 +69,8 @@ export const Default = args => {
       size="${ifNonNull(size)}"
       validity-message="${ifNonNull(validityMessage)}"
       value="${ifNonNull(value)}"
-      @bx-select-selected="${ifNonNull(onInput)}">
+      @bx-select-selected="${ifNonNull(onInput)}"
+    >
       ${children}
     </bx-select>
   `;

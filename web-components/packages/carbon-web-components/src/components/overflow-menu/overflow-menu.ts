@@ -124,7 +124,7 @@ class BXOverflowMenu extends HostListenerMixin(FocusMixin(LitElement)) implement
     if (changedProperties.has('open')) {
       const { colorScheme, open } = this;
       if (open && !this._menuBody) {
-        this._menuBody = find(this.childNodes, elem => (elem.constructor as typeof BXOverflowMenuBody).FLOATING_MENU);
+        this._menuBody = find(this.childNodes, (elem) => (elem.constructor as typeof BXOverflowMenuBody).FLOATING_MENU);
       }
       const { _menuBody: menuBody } = this;
       if (menuBody) {

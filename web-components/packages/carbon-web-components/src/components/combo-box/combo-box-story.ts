@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,7 +31,7 @@ const sizes = {
   [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]: DROPDOWN_SIZE.EXTRA_LARGE,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const {
     open,
     colorScheme,
@@ -83,7 +83,8 @@ export const Default = args => {
       @bx-combo-box-beingselected=${handleBeforeSelect}
       @bx-combo-box-beingtoggled=${handleBeforeToggle}
       @bx-combo-box-selected=${onSelect}
-      @bx-combo-box-toggled=${onToggle}>
+      @bx-combo-box-toggled=${onToggle}
+    >
       <bx-combo-box-item value="all">Option 1</bx-combo-box-item>
       <bx-combo-box-item value="cloudFoundry">Option 2</bx-combo-box-item>
       <bx-combo-box-item value="staging">Option 3</bx-combo-box-item>

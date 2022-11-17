@@ -192,7 +192,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   @HostListener('eventChange')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChange = ({ detail }: CustomEvent) => {
-    this._value = detail.selectedDates.map(date => getISODateString(date)).join('/');
+    this._value = detail.selectedDates.map((date) => getISODateString(date)).join('/');
   };
 
   _handleFormdata(event: Event) {
@@ -211,7 +211,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     const dateInteractNode = (target as HTMLSlotElement)
       .assignedNodes()
       .find(
-        node =>
+        (node) =>
           node.nodeType === Node.ELEMENT_NODE &&
           (node as HTMLElement).matches((this.constructor as typeof BXDatePicker).selectorInputFrom)
       );
@@ -340,8 +340,8 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     }
     if (changedProperties.has('enabledRange')) {
       const { enabledRange } = this;
-      const dates = enabledRange.split('/').map(item => (!item ? undefined : parseISODateString(item))); // Allows empty start/end
-      if (dates.some(item => Boolean(item && isNaN(Number(item))))) {
+      const dates = enabledRange.split('/').map((item) => (!item ? undefined : parseISODateString(item))); // Allows empty start/end
+      if (dates.some((item) => Boolean(item && isNaN(Number(item))))) {
         // Allows empty start/end
         throw new Error(`Wrong date format found in \`enabledRange\` property: ${enabledRange}`);
       }
@@ -363,7 +363,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       }
     }
     if (changedProperties.has('disabled')) {
-      [inputFrom, inputTo].forEach(input => {
+      [inputFrom, inputTo].forEach((input) => {
         if (input) {
           input.disabled = disabled;
         }
@@ -374,8 +374,8 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       const dates = value
         .split('/')
         .filter(Boolean)
-        .map(item => parseISODateString(item));
-      if (dates.some(item => isNaN(Number(item)))) {
+        .map((item) => parseISODateString(item));
+      if (dates.some((item) => isNaN(Number(item)))) {
         throw new Error(`Wrong date format found in \`value\` property: ${value}`);
       }
       const [startDate, endDate] = dates;

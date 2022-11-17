@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,14 +15,15 @@ import ifNonNull from '../../globals/directives/if-non-null';
 import './copy-button';
 import storyDocs from './copy-button-story.mdx';
 
-export const Default = args => {
+export const Default = (args) => {
   const { buttonAssistiveText, feedbackText, feedbackTimeout, onClick } = args?.['bx-copy-button'] ?? {};
   return html`
     <bx-copy-button
       button-assistive-text="${ifNonNull(buttonAssistiveText)}"
       feedback-text="${ifNonNull(feedbackText)}"
       feedback-timeout="${ifNonNull(feedbackTimeout)}"
-      @click="${onClick}"></bx-copy-button>
+      @click="${onClick}"
+    ></bx-copy-button>
   `;
 };
 

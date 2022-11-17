@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,7 +22,7 @@ const sizes = {
 
 const noop = () => {};
 
-export const Default = args => {
+export const Default = (args) => {
   const { open, titleText, disabled, disableToggle, onBeforeToggle = noop, onToggle = noop, size } = args?.['bx-accordion'] ?? {};
   const handleBeforeToggle = (event: CustomEvent) => {
     onBeforeToggle(event);

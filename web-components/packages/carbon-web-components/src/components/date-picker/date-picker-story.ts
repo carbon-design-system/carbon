@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -54,7 +54,7 @@ const sizesHorizontal = {
   [`Short size (${DATE_PICKER_INPUT_SIZE_HORIZONTAL.SHORT})`]: DATE_PICKER_INPUT_SIZE_HORIZONTAL.SHORT,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const { disabled, name, value } = args?.['bx-date-picker'] ?? {};
   const { colorScheme, hideLabel, invalid, labelText, placeholder, size, sizeHorizontal, validityMessage } =
     args?.['bx-date-picker-input'] ?? {};
@@ -68,7 +68,8 @@ export const Default = args => {
         placeholder="${ifNonNull(placeholder)}"
         size="${ifNonNull(size)}"
         size-horizontal="${ifNonNull(sizeHorizontal)}"
-        validity-message="${ifNonNull(validityMessage)}">
+        validity-message="${ifNonNull(validityMessage)}"
+      >
       </bx-date-picker-input>
     </bx-date-picker>
   `;
@@ -85,7 +86,7 @@ Default.parameters = {
   },
 };
 
-export const singleWithCalendar = args => {
+export const singleWithCalendar = (args) => {
   const { dateFormat, disabled, enabledRange, name, open, value, onChanged, onFlatpickrError } = args?.['bx-date-picker'] ?? {};
   const { colorScheme, hideLabel, invalid, labelText, placeholder, size, validityMessage, onInput } =
     args?.['bx-date-picker-input'] ?? {};
@@ -98,7 +99,8 @@ export const singleWithCalendar = args => {
       ?open="${open}"
       value="${ifNonNull(value)}"
       @bx-date-picker-changed="${onChanged}"
-      @bx-date-picker-flatpickr-error="${onFlatpickrError}">
+      @bx-date-picker-flatpickr-error="${onFlatpickrError}"
+    >
       <bx-date-picker-input
         color-scheme="${ifNonNull(colorScheme)}"
         ?hide-label="${hideLabel}"
@@ -108,7 +110,8 @@ export const singleWithCalendar = args => {
         placeholder="${ifNonNull(placeholder)}"
         size="${ifNonNull(size)}"
         validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}">
+        @input="${onInput}"
+      >
       </bx-date-picker-input>
     </bx-date-picker>
   `;
@@ -120,7 +123,7 @@ singleWithCalendar.parameters = {
   knobs,
 };
 
-export const rangeWithCalendar = args => {
+export const rangeWithCalendar = (args) => {
   const { dateFormat, disabled, enabledRange, name, open, value, onChanged, onFlatpickrError } = args?.['bx-date-picker'] ?? {};
   const { colorScheme, hideLabel, invalid, labelText, placeholder, size, validityMessage, onInput } =
     args?.['bx-date-picker-input'] ?? {};
@@ -133,7 +136,8 @@ export const rangeWithCalendar = args => {
       ?open="${open}"
       value="${ifNonNull(value)}"
       @bx-date-picker-changed="${onChanged}"
-      @bx-date-picker-flatpickr-error="${onFlatpickrError}">
+      @bx-date-picker-flatpickr-error="${onFlatpickrError}"
+    >
       <bx-date-picker-input
         color-scheme="${ifNonNull(colorScheme)}"
         ?hide-label="${hideLabel}"
@@ -143,7 +147,8 @@ export const rangeWithCalendar = args => {
         placeholder="${ifNonNull(placeholder)}"
         size="${ifNonNull(size)}"
         validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}">
+        @input="${onInput}"
+      >
       </bx-date-picker-input>
       <bx-date-picker-input
         color-scheme="${ifNonNull(colorScheme)}"
@@ -154,7 +159,8 @@ export const rangeWithCalendar = args => {
         placeholder="${ifNonNull(placeholder)}"
         size="${ifNonNull(size)}"
         validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}">
+        @input="${onInput}"
+      >
       </bx-date-picker-input>
     </bx-date-picker>
   `;
@@ -194,7 +200,7 @@ export const skeletonRange = () =>
 
 skeletonRange.storyName = 'Skeleton range';
 
-skeletonRange.decorators = [story => html` <div>${story()}</div> `];
+skeletonRange.decorators = [(story) => html` <div>${story()}</div> `];
 
 skeletonRange.parameters = {
   percy: {

@@ -74,7 +74,7 @@ class BXInlineNotification extends FocusMixin(LitElement) {
     if (this._timeoutID) {
       this._cancelTimeout(this._timeoutID);
     }
-    this._timeoutID = (setTimeout(this._handleUserOrTimerInitiatedClose.bind(this, null), timeout) as unknown) as number;
+    this._timeoutID = setTimeout(this._handleUserOrTimerInitiatedClose.bind(this, null), timeout) as unknown as number;
   }
 
   /**

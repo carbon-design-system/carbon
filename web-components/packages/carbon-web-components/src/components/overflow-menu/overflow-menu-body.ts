@@ -131,9 +131,7 @@ class BXOverflowMenuBody extends BXFloatingMenu {
   }
 
   render() {
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   /**

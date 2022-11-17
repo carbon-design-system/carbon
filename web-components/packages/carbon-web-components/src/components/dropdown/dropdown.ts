@@ -100,7 +100,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
   protected _selectionDidChange(itemToSelect?: BXDropdownItem) {
     if (itemToSelect) {
       this.value = itemToSelect.value;
-      forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItemSelected), item => {
+      forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItemSelected), (item) => {
         (item as BXDropdownItem).selected = false;
       });
       itemToSelect.selected = true;
@@ -272,7 +272,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
         if (selectedItemText && assistiveStatusText !== selectedItemAssistiveText) {
           this._assistiveStatusText = selectedItemText;
         }
-        forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItemHighlighted), item => {
+        forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItemHighlighted), (item) => {
           (item as BXDropdownItem).highlighted = false;
         });
       }
@@ -285,7 +285,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
    * Clears the selection of dropdown items.
    */
   protected _clearHighlight() {
-    forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItem), item => {
+    forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItem), (item) => {
       (item as BXDropdownItem).highlighted = false;
     });
   }
@@ -338,9 +338,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
    */
   protected _renderTriggerContent(): TemplateResult {
     const { triggerContent, _selectedItemContent: selectedItemContent } = this;
-    return html`
-      <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span>
-    `;
+    return html` <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span> `;
   }
 
   /* eslint-disable class-methods-use-this */
@@ -483,17 +481,17 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
   shouldUpdate(changedProperties) {
     const { selectorItem } = this.constructor as typeof BXDropdown;
     if (changedProperties.has('size')) {
-      forEach(this.querySelectorAll(selectorItem), elem => {
+      forEach(this.querySelectorAll(selectorItem), (elem) => {
         (elem as BXDropdownItem).size = this.size;
       });
     }
     if (changedProperties.has('value')) {
       // `<bx-multi-select>` updates selection beforehand
       // because our rendering logic for `<bx-multi-select>` looks for selected items via `qSA()`
-      forEach(this.querySelectorAll(selectorItem), elem => {
+      forEach(this.querySelectorAll(selectorItem), (elem) => {
         (elem as BXDropdownItem).selected = (elem as BXDropdownItem).value === this.value;
       });
-      const item = find(this.querySelectorAll(selectorItem), elem => (elem as BXDropdownItem).value === this.value);
+      const item = find(this.querySelectorAll(selectorItem), (elem) => (elem as BXDropdownItem).value === this.value);
       if (item) {
         const range = this.ownerDocument!.createRange();
         range.selectNodeContents(item);
@@ -512,7 +510,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
     if (changedProperties.has('disabled')) {
       const { disabled } = this;
       // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll(selectorItem), elem => {
+      forEach(this.querySelectorAll(selectorItem), (elem) => {
         (elem as BXDropdownItem).disabled = disabled;
       });
     }

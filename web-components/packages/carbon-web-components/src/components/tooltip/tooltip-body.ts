@@ -47,7 +47,7 @@ class BXTooltipBody extends BXFloatingMenu {
    */
   @HostListener('keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = async event => {
+  private _handleKeydown = async (event) => {
     if (event.key === 'Escape') {
       this.open = false;
     }

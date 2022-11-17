@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import '../form/form-item';
 import createProps from './stories/helpers';
 import storyDocs from './number-input-story.mdx';
 
-export const Default = args => {
+export const Default = (args) => {
   const { colorScheme, disabled, value, placeholder, invalid, mobile, min, max, size, step, onInput, name } =
     args?.['bx-number-input'] ?? {};
   return html`
@@ -33,7 +33,8 @@ export const Default = args => {
       max="${ifNonNull(max)}"
       size="${ifNonNull(size)}"
       step="${ifNonNull(step)}"
-      @input="${onInput}"></bx-number-input>
+      @input="${onInput}"
+    ></bx-number-input>
   `;
 };
 
@@ -45,7 +46,7 @@ Default.parameters = {
   },
 };
 
-export const formItem = args => {
+export const formItem = (args) => {
   const { colorScheme, disabled, value, placeholder, invalid, mobile, min, max, size, step, onInput } =
     args?.['bx-number-input'] ?? {};
   return html`
@@ -61,7 +62,8 @@ export const formItem = args => {
         max="${ifNonNull(max)}"
         size="${ifNonNull(size)}"
         step="${ifNonNull(step)}"
-        @input="${onInput}">
+        @input="${onInput}"
+      >
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
@@ -80,7 +82,7 @@ formItem.parameters = {
   },
 };
 
-export const withoutFormItemWrapper = args => {
+export const withoutFormItemWrapper = (args) => {
   const { colorScheme, disabled, value, placeholder, invalid, mobile, min, max, size, step, onInput } =
     args?.['bx-number-input'] ?? {};
   return html`
@@ -95,7 +97,8 @@ export const withoutFormItemWrapper = args => {
       max="${ifNonNull(max)}"
       size="${ifNonNull(size)}"
       step="${ifNonNull(step)}"
-      @input="${onInput}">
+      @input="${onInput}"
+    >
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>

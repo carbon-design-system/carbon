@@ -86,11 +86,7 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
       : Calendar16({
           class: `${prefix}--date-picker__icon`,
           role: 'img',
-          children: [
-            html`
-              <title>Open calendar</title>
-            `,
-          ],
+          children: [html` <title>Open calendar</title> `],
         });
   }
 

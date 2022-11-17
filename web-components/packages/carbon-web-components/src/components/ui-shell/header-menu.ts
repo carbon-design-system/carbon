@@ -110,7 +110,7 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
     if (changedProperties.has('expanded')) {
       const { selectorItem } = this.constructor as typeof BXHeaderMenu;
       const { expanded } = this;
-      forEach(this.querySelectorAll(selectorItem), elem => {
+      forEach(this.querySelectorAll(selectorItem), (elem) => {
         (elem as HTMLElement).tabIndex = expanded ? 0 : -1;
       });
     }

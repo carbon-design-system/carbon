@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,7 +32,7 @@ const defaultKnobs = {
   }),
 };
 
-export const singleLine = args => {
+export const singleLine = (args) => {
   const { codeAssistiveText, copyButtonAssistiveText, copyButtonFeedbackText, copyButtonFeedbackTimeout, colorScheme, onClick } =
     args?.['bx-code-snippet'] ?? {};
   const children = `
@@ -59,7 +59,7 @@ singleLine.parameters = {
   knobs: defaultKnobs,
 };
 
-export const multiLine = args => {
+export const multiLine = (args) => {
   const {
     codeAssistiveText,
     copyButtonAssistiveText,
@@ -121,7 +121,7 @@ multiLine.parameters = {
   },
 };
 
-export const inline = args => {
+export const inline = (args) => {
   const { codeAssistiveText, copyButtonAssistiveText, copyButtonFeedbackText, copyButtonFeedbackTimeout, colorScheme, onClick } =
     args?.['bx-code-snippet'] ?? {};
   return html`

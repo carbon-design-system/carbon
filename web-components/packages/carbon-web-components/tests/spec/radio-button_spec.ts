@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -61,7 +61,7 @@ describe('bx-radio-button', function () {
     it('Should propagate disabled', async function () {
       render(template({ 'bx-radio-button-group': { disabled: true } }), document.body);
       await Promise.resolve();
-      expect(Array.prototype.every.call(document.body.querySelectorAll('bx-radio-button'), radio => radio.disabled)).toBe(true);
+      expect(Array.prototype.every.call(document.body.querySelectorAll('bx-radio-button'), (radio) => radio.disabled)).toBe(true);
     });
 
     it('Should propagate labelPosition', async function () {
@@ -75,7 +75,7 @@ describe('bx-radio-button', function () {
       expect(
         Array.prototype.every.call(
           document.body.querySelectorAll('bx-radio-button'),
-          radio => radio.labelPosition === RADIO_BUTTON_LABEL_POSITION.LEFT
+          (radio) => radio.labelPosition === RADIO_BUTTON_LABEL_POSITION.LEFT
         )
       ).toBe(true);
     });
@@ -91,7 +91,7 @@ describe('bx-radio-button', function () {
       expect(
         Array.prototype.every.call(
           document.body.querySelectorAll('bx-radio-button'),
-          radio => radio.orientation === RADIO_BUTTON_ORIENTATION.VERTICAL
+          (radio) => radio.orientation === RADIO_BUTTON_ORIENTATION.VERTICAL
         )
       ).toBe(true);
     });
@@ -105,7 +105,7 @@ describe('bx-radio-button', function () {
       );
       await Promise.resolve();
       expect(
-        Array.prototype.every.call(document.body.querySelectorAll('bx-radio-button'), radio => radio.name === 'name-foo')
+        Array.prototype.every.call(document.body.querySelectorAll('bx-radio-button'), (radio) => radio.name === 'name-foo')
       ).toBe(true);
     });
 
@@ -117,7 +117,7 @@ describe('bx-radio-button', function () {
         document.body
       );
       await Promise.resolve();
-      expect(Array.prototype.map.call(document.body.querySelectorAll('bx-radio-button'), radio => radio.checked)).toEqual([
+      expect(Array.prototype.map.call(document.body.querySelectorAll('bx-radio-button'), (radio) => radio.checked)).toEqual([
         false,
         false,
         true,
@@ -182,7 +182,7 @@ describe('bx-radio-button', function () {
       expect(
         Array.prototype.map.call(
           document.body.querySelectorAll('bx-radio-button'),
-          radio => radio.shadowRoot.querySelector('input').tabIndex
+          (radio) => radio.shadowRoot.querySelector('input').tabIndex
         )
       ).toEqual([-1, 0, -1]);
       const radioBar = document.body.querySelector('bx-radio-button[value="cloudFoundry"]') as HTMLElement;
@@ -191,7 +191,7 @@ describe('bx-radio-button', function () {
       expect(
         Array.prototype.map.call(
           document.body.querySelectorAll('bx-radio-button'),
-          radio => radio.shadowRoot.querySelector('input').tabIndex
+          (radio) => radio.shadowRoot.querySelector('input').tabIndex
         )
       ).toEqual([0, -1, -1]);
     });
@@ -212,7 +212,7 @@ describe('bx-radio-button', function () {
       expect(
         Array.prototype.map.call(
           document.body.querySelectorAll('bx-radio-button'),
-          radio => radio.shadowRoot.querySelector('input').tabIndex
+          (radio) => radio.shadowRoot.querySelector('input').tabIndex
         )
       ).toEqual([-1, 0, -1]);
       const radioBar = document.body.querySelector('bx-radio-button[value="cloudFoundry"]') as HTMLElement;
@@ -221,7 +221,7 @@ describe('bx-radio-button', function () {
       expect(
         Array.prototype.map.call(
           document.body.querySelectorAll('bx-radio-button'),
-          radio => radio.shadowRoot.querySelector('input').tabIndex
+          (radio) => radio.shadowRoot.querySelector('input').tabIndex
         )
       ).toEqual([0, -1, -1]);
     });

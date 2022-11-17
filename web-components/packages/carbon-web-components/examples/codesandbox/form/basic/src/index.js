@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,9 +12,9 @@ import 'carbon-web-components/es/components/form/form-item.js';
 import 'carbon-web-components/es/components/input/input.js';
 import 'carbon-web-components/es/components/notification/inline-notification.js';
 
-const submit = async formData => {
+const submit = async (formData) => {
   // Simulates server latency
-  await new Promise(resolve =>
+  await new Promise((resolve) =>
     setTimeout(() => {
       resolve();
     }, 500)
@@ -62,12 +62,12 @@ const submit = async formData => {
 
   notification.open = false;
 
-  const setPristine = value => {
+  const setPristine = (value) => {
     pristine = value;
     btnReset.disabled = Boolean(pristine);
   };
 
-  const setSubmitting = value => {
+  const setSubmitting = (value) => {
     inputUsername.disabled = value;
     inputPassword.disabled = value;
     btnLogin.disabled = value;

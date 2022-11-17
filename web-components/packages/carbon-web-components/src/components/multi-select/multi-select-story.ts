@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -32,7 +32,7 @@ const types = {
   [`Inline (${DROPDOWN_TYPE.INLINE})`]: DROPDOWN_TYPE.INLINE,
 };
 
-export const Default = args => {
+export const Default = (args) => {
   const {
     clearSelectionLabel,
     colorScheme,
@@ -90,7 +90,8 @@ export const Default = args => {
       @bx-multi-select-beingselected=${handleBeforeSelect}
       @bx-multi-select-beingtoggled=${handleBeforeToggle}
       @bx-multi-select-selected=${onSelect}
-      @bx-multi-select-toggled=${onToggle}>
+      @bx-multi-select-toggled=${onToggle}
+    >
       <bx-multi-select-item value="all">Option 1</bx-multi-select-item>
       <bx-multi-select-item value="cloudFoundry">Option 2</bx-multi-select-item>
       <bx-multi-select-item value="staging">Option 3</bx-multi-select-item>
@@ -102,7 +103,7 @@ export const Default = args => {
 
 Default.storyName = 'Default';
 
-export const Filterable = args => {
+export const Filterable = (args) => {
   const {
     clearSelectionLabel,
     colorScheme,
@@ -161,7 +162,8 @@ export const Filterable = args => {
       @bx-multi-select-beingselected=${handleBeforeSelect}
       @bx-multi-select-beingtoggled=${handleBeforeToggle}
       @bx-multi-select-selected=${onSelect}
-      @bx-multi-select-toggled=${onToggle}>
+      @bx-multi-select-toggled=${onToggle}
+    >
       <bx-multi-select-item value="example"
         >An example option that is really long to show what should be done to handle long text</bx-multi-select-item
       >

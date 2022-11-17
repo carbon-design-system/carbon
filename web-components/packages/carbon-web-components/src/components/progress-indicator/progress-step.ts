@@ -128,11 +128,7 @@ class BXProgressStep extends FocusMixin(LitElement) {
         <p role="button" class="${prefix}--progress-label" tabindex="0" aria-describedby="label-tooltip">${labelText}</p>
       </slot>
       <slot name="secondary-label-text">
-        ${!secondaryLabelText
-          ? undefined
-          : html`
-              <p class="${prefix}--progress-optional">${secondaryLabelText}</p>
-            `}
+        ${!secondaryLabelText ? undefined : html` <p class="${prefix}--progress-optional">${secondaryLabelText}</p> `}
       </slot>
       <span class="${prefix}--progress-line"></span>
     `;

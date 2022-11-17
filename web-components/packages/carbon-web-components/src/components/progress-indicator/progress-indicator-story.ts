@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,7 +17,7 @@ import './progress-indicator-skeleton';
 import './progress-step-skeleton';
 import storyDocs from './progress-indicator-story.mdx';
 
-export const Default = args => {
+export const Default = (args) => {
   const { vertical } = args?.['bx-progress-indicator'] ?? {};
   const { iconLabel, labelText, secondaryLabelText } = args?.['bx-progress-step'] ?? {};
   return html`
@@ -26,26 +26,31 @@ export const Default = args => {
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
         secondary-label-text="${ifNonNull(secondaryLabelText)}"
-        state="invalid"></bx-progress-step>
+        state="invalid"
+      ></bx-progress-step>
       <bx-progress-step
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
         secondary-label-text="${ifNonNull(secondaryLabelText)}"
-        state="complete"></bx-progress-step>
+        state="complete"
+      ></bx-progress-step>
       <bx-progress-step
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
         secondary-label-text="${ifNonNull(secondaryLabelText)}"
-        state="current"></bx-progress-step>
+        state="current"
+      ></bx-progress-step>
       <bx-progress-step
         disabled
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(secondaryLabelText)}"></bx-progress-step>
+        secondary-label-text="${ifNonNull(secondaryLabelText)}"
+      ></bx-progress-step>
       <bx-progress-step
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(secondaryLabelText)}"></bx-progress-step>
+        secondary-label-text="${ifNonNull(secondaryLabelText)}"
+      ></bx-progress-step>
     </bx-progress-indicator>
   `;
 };
@@ -65,7 +70,7 @@ Default.parameters = {
   },
 };
 
-export const skeleton = args => {
+export const skeleton = (args) => {
   const { vertical } = args?.['bx-progress-indicator-skeleton'];
   return html`
     <bx-progress-indicator-skeleton ?vertical="${vertical}">

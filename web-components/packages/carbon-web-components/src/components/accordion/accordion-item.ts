@@ -110,7 +110,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
     const { _sizesBreakpoints: sizesBreakpoints } = this.constructor as typeof BXAccordionItem;
     this._currentBreakpoint = Object.keys(sizesBreakpoints)
       .sort((lhs, rhs) => sizesBreakpoints[rhs] - sizesBreakpoints[lhs])
-      .find(size => width >= sizesBreakpoints[size]) as ACCORDION_ITEM_BREAKPOINT;
+      .find((size) => width >= sizesBreakpoints[size]) as ACCORDION_ITEM_BREAKPOINT;
     this.requestUpdate();
   });
 

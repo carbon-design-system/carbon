@@ -21,9 +21,7 @@ const { prefix } = settings;
 @customElement(`${prefix}-skeleton-placeholder`)
 class BXSkeletonPlaceholder extends LitElement {
   render() {
-    return html`
-      <div class="${prefix}--skeleton__placeholder"></div>
-    `;
+    return html` <div class="${prefix}--skeleton__placeholder"></div> `;
   }
 
   static styles = styles;

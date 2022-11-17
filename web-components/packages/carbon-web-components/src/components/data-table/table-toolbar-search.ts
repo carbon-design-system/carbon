@@ -101,9 +101,7 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
       [`${prefix}--search`]: true,
       [`${prefix}--search--${size}`]: size,
     });
-    return html`
-      <div class="${classes}" tabindex="${expanded ? '-1' : '0'}" @click="${handleSearchClick}">${result}</div>
-    `;
+    return html` <div class="${classes}" tabindex="${expanded ? '-1' : '0'}" @click="${handleSearchClick}">${result}</div> `;
   }
 
   /**

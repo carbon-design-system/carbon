@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -44,7 +44,7 @@ import 'carbon-web-components/es/components/data-table/table-cell-skeleton';
  * @returns `true` if the given table row matches the given search string.
  */
 const doesRowMatchSearchString = (row, searchString) =>
-  Object.keys(row).some(key => key !== 'id' && String(row[key] ?? '').indexOf(searchString) >= 0);
+  Object.keys(row).some((key) => key !== 'id' && String(row[key] ?? '').indexOf(searchString) >= 0);
 
 /**
  * A class to manage table states, like selection and sorting.
@@ -112,7 +112,7 @@ class BXCEDemoDataTable extends LitElement {
    */
   _handleCancelSelection() {
     const { _rows: oldRows, _searchString: searchString } = this;
-    this._rows = this._rows.map(row =>
+    this._rows = this._rows.map((row) =>
       searchString && !doesRowMatchSearchString(row, searchString) ? row : { ...row, selected: false }
     );
     this.requestUpdate('_rows', oldRows);
@@ -137,7 +137,7 @@ class BXCEDemoDataTable extends LitElement {
       const { rowId: changedRowId } = target.dataset;
       const { selected } = detail;
       const { _rows: oldRows } = this;
-      this._rows = oldRows.map(row => (Number(changedRowId) !== row.id ? row : { ...row, selected }));
+      this._rows = oldRows.map((row) => (Number(changedRowId) !== row.id ? row : { ...row, selected }));
       this.requestUpdate('_rows', oldRows);
     }
   }
@@ -150,7 +150,7 @@ class BXCEDemoDataTable extends LitElement {
     if (!defaultPrevented) {
       const { selected } = detail;
       const { _rows: oldRows, _searchString: searchString } = this;
-      this._rows = this._rows.map(row =>
+      this._rows = this._rows.map((row) =>
         searchString && !doesRowMatchSearchString(row, searchString) ? row : { ...row, selected }
       );
       this.requestUpdate('_rows', oldRows);
@@ -201,7 +201,7 @@ class BXCEDemoDataTable extends LitElement {
    */
   _handleDeleteRows() {
     const { _rows: oldRows, _searchString: searchString } = this;
-    this._rows = oldRows.filter(row => !row.selected || !doesRowMatchSearchString(row, searchString));
+    this._rows = oldRows.filter((row) => !row.selected || !doesRowMatchSearchString(row, searchString));
     this.requestUpdate('_rows', oldRows);
   }
 
@@ -210,7 +210,7 @@ class BXCEDemoDataTable extends LitElement {
    * @param {CustomEvent} event The event.
    */
   _handleDownloadRows({ target }) {
-    const blob = new Blob([JSON.stringify(this._filteredRows.filter(row => row.selected))], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(this._filteredRows.filter((row) => row.selected))], { type: 'application/json' });
     target.href = URL.createObjectURL(blob);
     this._handleCancelSelection();
   }
@@ -235,7 +235,8 @@ class BXCEDemoDataTable extends LitElement {
         start="${start}"
         total="${filteredRows.length}"
         @bx-pagination-changed-current="${handleChangeStart}"
-        @bx-page-sizes-select-changed="${handleChangePageSize}">
+        @bx-page-sizes-select-changed="${handleChangePageSize}"
+      >
         <bx-page-sizes-select slot="page-sizes-select">
           <option value="5">5</option>
           <option value="10">10</option>
@@ -325,7 +326,7 @@ class BXCEDemoDataTable extends LitElement {
     }
     if (changedProperties.has('rows') || changedProperties.has('_rows') || changedProperties.has('_searchString')) {
       const { pageSize, start, _rows: rows, _searchString: searchString } = this;
-      this._filteredRows = !searchString ? rows : rows.filter(row => doesRowMatchSearchString(row, searchString));
+      this._filteredRows = !searchString ? rows : rows.filter((row) => doesRowMatchSearchString(row, searchString));
       const count = this._filteredRows.length;
       if (count > 0 && start >= count) {
         this.start = Math.max(start - Math.ceil((start - count) / pageSize) * pageSize, 0);
@@ -366,7 +367,8 @@ class BXCEDemoDataTable extends LitElement {
         <bx-table-batch-actions
           ?active="${hasBatchActions}"
           selected-rows-count="${selectedRowsCountInFiltered}"
-          @bx-table-batch-actions-cancel-clicked="${handleCancelSelection}">
+          @bx-table-batch-actions-cancel-clicked="${handleCancelSelection}"
+        >
           <bx-btn @click="${handleDeleteRows}">Delete ${Delete16({ slot: 'icon' })}</bx-btn>
           <bx-btn @click="${handleDownloadRows}" href="javascript:void 0" download="table-data.json">
             Download ${Download16({ slot: 'icon' })}
@@ -389,12 +391,14 @@ class BXCEDemoDataTable extends LitElement {
         size="${size}"
         @bx-table-row-change-selection=${this._handleChangeSelection}
         @bx-table-change-selection-all=${this._handleChangeSelectionAll}
-        @bx-table-header-cell-sort=${this._handleChangeSort}>
+        @bx-table-header-cell-sort=${this._handleChangeSort}
+      >
         <bx-table-head>
           <bx-table-header-row
             ?selected=${selectedAllInFiltered}
             selection-name=${ifNonNull(selectionAllName)}
-            selection-value=${ifNonNull(selectionAllName)}>
+            selection-value=${ifNonNull(selectionAllName)}
+          >
             ${repeat(
               columns,
               ({ id: columnId }) => columnId,
@@ -405,7 +409,8 @@ class BXCEDemoDataTable extends LitElement {
                   <bx-table-header-cell
                     sort-cycle="${ifNonNull(sortCycle)}"
                     sort-direction="${ifNonNull(sortDirectionForThisCell)}"
-                    data-column-id="${columnId}">
+                    data-column-id="${columnId}"
+                  >
                     ${title}
                   </bx-table-header-cell>
                 `;
@@ -417,7 +422,7 @@ class BXCEDemoDataTable extends LitElement {
           ${repeat(
             sortedRows.slice(start, start + pageSize),
             ({ id: rowId }) => rowId,
-            row => {
+            (row) => {
               const { id: rowId, selected } = row;
               const selectionName = !hasSelection ? undefined : `__bx-ce-demo-data-table_${elementId || this._uniqueId}_${rowId}`;
               const selectionValue = !hasSelection ? undefined : 'selected';
@@ -426,7 +431,8 @@ class BXCEDemoDataTable extends LitElement {
                   ?selected=${hasSelection && selected}
                   selection-name="${ifNonNull(selectionName)}"
                   selection-value="${ifNonNull(selectionValue)}"
-                  data-row-id="${rowId}">
+                  data-row-id="${rowId}"
+                >
                   ${repeat(
                     columns,
                     ({ id: columnId }) => columnId,

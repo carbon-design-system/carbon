@@ -73,17 +73,19 @@ interface CustomElementTypeProps {
  * @param refs List of React refs to merge.
  * @returns Merged React ref.
  */
-const mergeRefs = <T>(...refs: React.Ref<T>[]) => el => {
-  refs.forEach(ref => {
-    // https://github.com/facebook/react/issues/13029#issuecomment-410002316
-    if (typeof ref === 'function') {
-      ref(el);
-    } else if (Object(ref) === ref) {
-      // `React.Ref.current` is read-only for regular use case, but we update it here
-      (ref as { current: T }).current = el;
-    }
-  });
-};
+const mergeRefs =
+  <T>(...refs: React.Ref<T>[]) =>
+  (el) => {
+    refs.forEach((ref) => {
+      // https://github.com/facebook/react/issues/13029#issuecomment-410002316
+      if (typeof ref === 'function') {
+        ref(el);
+      } else if (Object(ref) === ref) {
+        // `React.Ref.current` is read-only for regular use case, but we update it here
+        (ref as { current: T }).current = el;
+      }
+    });
+  };
 
 /**
  * @param prop A prop value.
@@ -134,7 +136,7 @@ const attachEventListeners = (
   callback: (name: string, event: Event) => void
 ): Handle => {
   const handles = new Set<Handle>();
-  Object.keys(descriptor).forEach(propName => {
+  Object.keys(descriptor).forEach((propName) => {
     if (descriptor[propName]) {
       const { event: eventDescriptor } = descriptor[propName];
       const name =
@@ -148,7 +150,7 @@ const attachEventListeners = (
           on(
             elem,
             name,
-            event => {
+            (event) => {
               callback(propName, event);
             },
             options
@@ -159,7 +161,7 @@ const attachEventListeners = (
   });
   return {
     release() {
-      handles.forEach(handle => {
+      handles.forEach((handle) => {
         handle.release();
         handles.delete(handle);
       });
@@ -209,7 +211,7 @@ const createReactCustomElementType = (name: string, descriptor: CustomElementPro
   /**
    * Array of React prop names that should be mapped to DOM properties instead of attributes.
    */
-  const nonAttributeProps = Object.keys(descriptor).filter(propName => {
+  const nonAttributeProps = Object.keys(descriptor).filter((propName) => {
     const { [propName]: descriptorItem } = descriptor;
     const { attribute } = descriptorItem ?? {};
     return attribute === false;
@@ -265,7 +267,7 @@ const createReactCustomElementType = (name: string, descriptor: CustomElementPro
      */
     updateProps(prevProps: { [key: string]: any } = {}) {
       const { props, _elem: elem } = this;
-      nonAttributeProps.forEach(propName => {
+      nonAttributeProps.forEach((propName) => {
         const { [propName]: prevValue } = prevProps;
         const { [propName]: value } = props;
         if (prevValue !== value) {
@@ -299,18 +301,18 @@ const createReactCustomElementType = (name: string, descriptor: CustomElementPro
  * @param value A React prop value.
  * @returns Serialized version of React prop value, as a boolean attribute in a custom element.
  */
-export const booleanSerializer = value => (!value ? undefined : '');
+export const booleanSerializer = (value) => (!value ? undefined : '');
 
 /**
  * @param value A React prop value.
  * @returns Serialized version of React prop value, as a number attribute in a custom element.
  */
-export const numberSerializer = value => (value == null ? value : String(value));
+export const numberSerializer = (value) => (value == null ? value : String(value));
 
 /**
  * @param value A React prop value.
  * @returns Serialized version of React prop value, as a object attribute in a custom element.
  */
-export const objectSerializer = value => (value == null ? value : JSON.stringify(value));
+export const objectSerializer = (value) => (value == null ? value : JSON.stringify(value));
 
 export default createReactCustomElementType;

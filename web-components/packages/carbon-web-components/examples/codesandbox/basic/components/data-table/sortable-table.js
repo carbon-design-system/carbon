@@ -44,7 +44,7 @@ const table = () => {
       <bx-table-head>
         <bx-table-header-row>
           ${columns
-            .map(column => {
+            .map((column) => {
               const { id: columnId, sortCycle, title } = column;
               const sortDirectionForThisCell =
                 sortCycle && (columnId === sortColumnId ? sortDirection : TABLE_SORT_DIRECTION.NONE);
@@ -57,12 +57,12 @@ const table = () => {
       </bx-table-head>
       <bx-table-body>
         ${sortedRows
-          .map(row => {
+          .map((row) => {
             const { id: rowId } = row;
             return `
           <bx-table-row data-row-id="${rowId}">
             ${columns
-              .map(column => {
+              .map((column) => {
                 const { id: columnId } = column;
                 return `<bx-table-cell>${row[columnId]}</bx-table-cell>`;
               })
@@ -79,7 +79,7 @@ table.state = {
     columnId: 'name',
     direction: TABLE_SORT_DIRECTION.ASCENDING,
   },
-  setSortInfo: sortInfo => {
+  setSortInfo: (sortInfo) => {
     setState(() => {
       table.state.sortInfo = sortInfo;
     });

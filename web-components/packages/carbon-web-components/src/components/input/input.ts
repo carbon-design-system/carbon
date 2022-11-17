@@ -270,9 +270,7 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
     });
 
     const passwordButtonLabel = html`
-      <span class="${prefix}--assistive-text">
-        ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel}
-      </span>
+      <span class="${prefix}--assistive-text"> ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel} </span>
     `;
 
     const passwordVisibilityButton = () => html`

@@ -81,10 +81,7 @@ class BXPagesSelect extends FocusMixin(LitElement) {
         <label for="select" class="${prefix}--label ${prefix}--visually-hidden"> ${formatLabelText({ count: total })} </label>
         <select class="${prefix}--select-input" .value="${value}" @change="${handleChange}">
           ${Array.from(new Array(total)).map(
-            (_item, index) =>
-              html`
-                <option value=${index} ?selected="${index === value}">${index + 1}</option>
-              `
+            (_item, index) => html` <option value=${index} ?selected="${index === value}">${index + 1}</option> `
           )}
         </select>
         ${ChevronDown16({ class: `${prefix}--select__arrow` })}

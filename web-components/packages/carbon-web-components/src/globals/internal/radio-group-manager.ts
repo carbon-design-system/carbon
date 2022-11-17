@@ -81,7 +81,7 @@ class RadioGroupManager {
     }
     const { name } = radio;
     const group = this._groups[name];
-    const hasSelectedItemInGroup = group && Array.from(group).some(item => item.checked);
+    const hasSelectedItemInGroup = group && Array.from(group).some((item) => item.checked);
     if (hasSelectedItemInGroup) {
       return false;
     }
@@ -154,7 +154,7 @@ class RadioGroupManager {
       radio.checked = true;
       radio.tabIndex = 0;
       radio.focus();
-      group.forEach(item => {
+      group.forEach((item) => {
         if (radio !== item) {
           item.checked = false;
           item.tabIndex = -1;

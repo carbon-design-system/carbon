@@ -36,7 +36,7 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleAfterChangeRadioButton = () => {
     const { selectorRadioButton } = this.constructor as typeof BXRadioButtonGroup;
-    const selected = find(this.querySelectorAll(selectorRadioButton), elem => (elem as BXRadioButton).checked);
+    const selected = find(this.querySelectorAll(selectorRadioButton), (elem) => (elem as BXRadioButton).checked);
     const oldValue = this.value;
     this.value = selected && selected.value;
     if (oldValue !== this.value) {
@@ -93,27 +93,25 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
 
   updated(changedProperties) {
     const { selectorRadioButton } = this.constructor as typeof BXRadioButtonGroup;
-    ['disabled', 'labelPosition', 'orientation', 'name'].forEach(name => {
+    ['disabled', 'labelPosition', 'orientation', 'name'].forEach((name) => {
       if (changedProperties.has(name)) {
         const { [name as keyof BXRadioButtonGroup]: value } = this;
         // Propagate the property to descendants until `:host-context()` gets supported in all major browsers
-        forEach(this.querySelectorAll(selectorRadioButton), elem => {
+        forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
           (elem as BXRadioButton)[name] = value;
         });
       }
     });
     if (changedProperties.has('value')) {
       const { value } = this;
-      forEach(this.querySelectorAll(selectorRadioButton), elem => {
+      forEach(this.querySelectorAll(selectorRadioButton), (elem) => {
         (elem as BXRadioButton).checked = value === (elem as BXRadioButton).value;
       });
     }
   }
 
   render() {
-    return html`
-      <slot></slot>
-    `;
+    return html` <slot></slot> `;
   }
 
   /**

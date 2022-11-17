@@ -21,9 +21,7 @@ const { prefix } = settings;
 @customElement(`${prefix}-table-cell-skeleton`)
 class BXTableCellSkeleton extends BXTableCell {
   render() {
-    return html`
-      <span></span>
-    `;
+    return html` <span></span> `;
   }
 }
 
