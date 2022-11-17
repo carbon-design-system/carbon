@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@ const { prefix } = settings;
 
 /**
  * Header menu.
+ *
  * @element bx-header-menu
  * @csspart trigger The trigger button.
  * @csspart trigger-icon The trigger button icon.
@@ -52,6 +53,7 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Handles user-initiated toggling the open state.
+   *
    * @param [force] If specified, forces the open state to the given one.
    */
   private _handleUserInitiatedToggle(force: boolean = !this.expanded) {
@@ -125,7 +127,8 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
         aria-haspopup="menu"
         aria-expanded="${String(Boolean(expanded))}"
         @click=${handleClick}
-        @keydown=${handleKeydownTrigger}>
+        @keydown=${handleKeydownTrigger}
+      >
         ${triggerContent}${ChevronDownGlyph({ part: 'trigger-icon', class: `${prefix}--header__menu-arrow` })}
       </a>
       <ul part="menu-body" class="${prefix}--header__menu" aria-label="${ifDefined(menuLabel)}">

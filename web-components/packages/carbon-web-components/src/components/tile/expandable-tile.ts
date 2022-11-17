@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@ const { prefix } = settings;
 
 /**
  * Expandable tile.
+ *
  * @element bx-expandable-tile
  * @fires bx-expandable-tile-beingtoggled
  *   The custom event fired before the expanded state is changed upon a user gesture.
@@ -36,6 +37,7 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
 
   /**
    * Handles `slotchange` event on the below-the-fold content.
+   *
    * @param event The event.
    */
   private _handleSlotChangeBelowTheFoldContent(event: Event) {
@@ -98,7 +100,8 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${prefix}--tile__chevron"
         aria-labelledby="above-the-fold-content"
         aria-controls="below-the-fold-content"
-        aria-expanded="${String(Boolean(expanded))}">
+        aria-expanded="${String(Boolean(expanded))}"
+      >
         ${ChevronDown16({
           id: 'icon',
         })}
@@ -107,7 +110,8 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         <div><slot name="above-the-fold-content"></slot></div>
         <div
           class="${prefix}-ce--expandable-tile--below-the-fold-content"
-          style="${ifDefined(!expanded ? undefined : `max-height: ${belowTheContentHeight}px`)}">
+          style="${ifDefined(!expanded ? undefined : `max-height: ${belowTheContentHeight}px`)}"
+        >
           <slot @slotchange="${handleSlotChangeBelowTheFoldContent}"></slot>
         </div>
       </div>

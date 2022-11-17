@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,6 +24,7 @@ const { prefix } = settings;
 
 /**
  * The input box for date picker.
+ *
  * @element bx-date-picker-input
  */
 @customElement(`${prefix}-date-picker-input`)
@@ -50,6 +51,7 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
 
   /**
    * Handles `click` event on the calendar icon.
+   *
    * @param event The event.
    */
   private _handleClickWrapper(event: MouseEvent) {
@@ -67,6 +69,7 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
 
   /**
    * Handles `input` event on `<input>` in the shadow DOM.
+   *
    * @param event The event.
    */
   private _handleInput({ target }: Event) {
@@ -83,7 +86,11 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
       : Calendar16({
           class: `${prefix}--date-picker__icon`,
           role: 'img',
-          children: [html` <title>Open calendar</title> `],
+          children: [
+            html`
+              <title>Open calendar</title>
+            `,
+          ],
         });
   }
 
@@ -246,7 +253,8 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
           placeholder="${ifNonNull(placeholder)}"
           .value="${ifNonNull(value)}"
           ?data-invalid="${invalid}"
-          @input="${handleInput}" />
+          @input="${handleInput}"
+        />
         ${this._renderIcon()}
       </div>
       ${this._renderValidityMessage()}

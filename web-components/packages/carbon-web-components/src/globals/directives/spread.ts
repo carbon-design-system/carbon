@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,6 +24,7 @@ const attributesMapCache = new WeakMap();
  * This must be used in the `...` name and must be the only part used in the attribute.
  * It applies the key-value pairs in the `attributesInfo` argument
  * and sets them as attribute name/value pairs.
+ *
  * @param classInfo The key-value pair to be set as the attribute name/value pairs.
  */
 const spread = directive((attributesInfo: AttributesInfo) => (part: Part) => {

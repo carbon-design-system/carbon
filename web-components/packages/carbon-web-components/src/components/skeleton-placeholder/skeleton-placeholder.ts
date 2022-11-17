@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,12 +15,15 @@ const { prefix } = settings;
 
 /**
  * Skeleton placeholder.
+ *
  * @element bx-skeleton-placeholder
  */
 @customElement(`${prefix}-skeleton-placeholder`)
 class BXSkeletonPlaceholder extends LitElement {
   render() {
-    return html` <div class="${prefix}--skeleton__placeholder"></div> `;
+    return html`
+      <div class="${prefix}--skeleton__placeholder"></div>
+    `;
   }
 
   static styles = styles;

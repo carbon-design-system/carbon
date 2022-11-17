@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -16,6 +16,7 @@ const { prefix } = settings;
 
 /**
  * Data table row.
+ *
  * @element bx-table-row
  * @csspart selection-container The container of the checkbox.
  * @csspart selection The checkbox.
@@ -27,6 +28,7 @@ const { prefix } = settings;
 class BXTableRow extends FocusMixin(LitElement) {
   /**
    * Handles `click` event on the check box.
+   *
    * @param event The event.
    */
   private _handleClickSelectionCheckbox(event: Event) {
@@ -65,7 +67,8 @@ class BXTableRow extends FocusMixin(LitElement) {
                 name="${selectionName}"
                 ?disabled="${disabled}"
                 .checked=${selected}
-                @click=${this._handleClickSelectionCheckbox} />
+                @click=${this._handleClickSelectionCheckbox}
+              />
               <label for="selection" class="${prefix}--checkbox-label" aria-label="${selectionLabel}"></label>
             `}
           </div>
@@ -81,6 +84,7 @@ class BXTableRow extends FocusMixin(LitElement) {
   /**
    * `true` if this table row is placed at an even position in parent `<bx-table-body>`.
    * `<bx-table-body>` sets this property, _only_ in zebra stripe mode.
+   *
    * @private
    */
   @property({ type: Boolean, reflect: true })
@@ -89,6 +93,7 @@ class BXTableRow extends FocusMixin(LitElement) {
   /**
    * `true` if this table row is placed at an odd position in parent `<bx-table-body>`.
    * `<bx-table-body>` sets this property, _only_ in zebra stripe mode.
+   *
    * @private
    */
   @property({ type: Boolean, reflect: true })
@@ -127,7 +132,9 @@ class BXTableRow extends FocusMixin(LitElement) {
   }
 
   render() {
-    return html` ${this._renderFirstCells()}<slot></slot> `;
+    return html`
+      ${this._renderFirstCells()}<slot></slot>
+    `;
   }
 
   /**

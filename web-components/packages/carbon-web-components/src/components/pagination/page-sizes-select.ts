@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ const { prefix } = settings;
 
 /**
  * The select box for page sizes.
+ *
  * @element bx-page-sizes-select
  * @slot label-text - The label text.
  * @fires bx-page-sizes-select-changed - The custom event fired after the page size is changed.
@@ -45,6 +46,7 @@ class BXPageSizesSelect extends FocusMixin(LitElement) {
 
   /**
    * Handles `slotchange` event for the `<slot>` for `<options>`.
+   *
    * @param event The event.
    */
   private _handleSlotChange({ target }: Event) {

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ const { prefix } = settings;
 
 /**
  * Note: For `<bx-code-snippet>` only. The API is subject to change/removal.
+ *
  * @param update The callback function that dictates how to update the DOM with new feedback tooltip state.
  * @returns A function that shows the feedback tooltip for the given duration.
  * @private
@@ -32,14 +33,15 @@ export const _createHandleFeedbackTooltip = (update: (properties: { showFeedback
       timeoutId = undefined;
     }
     update({ showFeedback: true });
-    timeoutId = setTimeout(() => {
+    timeoutId = (setTimeout(() => {
       update({ showFeedback: false });
-    }, timeout) as unknown as number;
+    }, timeout) as unknown) as number;
   };
 };
 
 /**
  * Note: For `<bx-code-snippet>` only. The API is subject to change/removal.
+ *
  * @param properties The properties to render.
  * @returns The template result for copy button from the given properties.
  * @private
@@ -49,7 +51,9 @@ export const _renderButton = ({
   feedbackText,
   showFeedback = false,
   className = `${prefix}--snippet-button`,
-  children = html` <slot>${Copy16({ class: `${prefix}--snippet__icon` })}</slot> `,
+  children = html`
+    <slot>${Copy16({ class: `${prefix}--snippet__icon` })}</slot>
+  `,
   handleClickButton,
 }: {
   assistiveText: string;
@@ -73,6 +77,7 @@ export const _renderButton = ({
 
 /**
  * Copy button.
+ *
  * @element bx-copy-button
  */
 @customElement(`${prefix}-copy-button`)

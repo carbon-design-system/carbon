@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ const { prefix } = settings;
 
 /**
  * The expando row in table row.
+ *
  * @element bx-table-expand-row
  */
 @customElement(`${prefix}-table-expand-row`)
@@ -33,6 +34,7 @@ class BXTableExpandRow extends HostListenerMixin(BXTableRow) {
 
   /**
    * Handles `mouseover`/`mouseout` event handler on this element.
+   *
    * @param event The event.
    */
   @HostListener('mouseover')
@@ -48,6 +50,7 @@ class BXTableExpandRow extends HostListenerMixin(BXTableRow) {
 
   /**
    * Handles user-initiated toggle request of the expando button in this table row.
+   *
    * @param expanded The new expanded state.
    */
   private _handleUserInitiatedToggleExpando(expanded = !this.expanded) {

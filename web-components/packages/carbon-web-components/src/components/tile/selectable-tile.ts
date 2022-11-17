@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ const { prefix } = settings;
 
 /**
  * Multi-selectable tile.
+ *
  * @element bx-selectable-tile
  */
 @customElement(`${prefix}-selectable-tile`)
@@ -92,7 +93,8 @@ class BXSelectableTile extends FocusMixin(LitElement) {
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
         .checked=${selected}
-        @change=${handleChange} />
+        @change=${handleChange}
+      />
       <label for="input" class="${classes}" tabindex="0">
         <div class="${prefix}--tile__checkmark">
           ${CheckmarkFilled16({

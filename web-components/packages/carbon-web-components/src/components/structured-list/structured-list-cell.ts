@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ const { prefix } = settings;
 
 /**
  * Structured list cell.
+ *
  * @element bx-structured-list-cell
  */
 @customElement(`${prefix}-structured-list-cell`)
@@ -27,7 +28,9 @@ class BXStructuredListCell extends LitElement {
   }
 
   render() {
-    return html`<slot></slot>`;
+    return html`
+      <slot></slot>
+    `;
   }
 
   static styles = styles;

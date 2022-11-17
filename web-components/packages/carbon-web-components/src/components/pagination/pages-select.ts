@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ const { prefix } = settings;
 
 /**
  * The select box for the current page.
+ *
  * @element bx-pages-select
  * @fires bx-pages-select-changed - The custom event fired after the page is changed.
  */
@@ -80,7 +81,10 @@ class BXPagesSelect extends FocusMixin(LitElement) {
         <label for="select" class="${prefix}--label ${prefix}--visually-hidden"> ${formatLabelText({ count: total })} </label>
         <select class="${prefix}--select-input" .value="${value}" @change="${handleChange}">
           ${Array.from(new Array(total)).map(
-            (_item, index) => html` <option value=${index} ?selected="${index === value}">${index + 1}</option> `
+            (_item, index) =>
+              html`
+                <option value=${index} ?selected="${index === value}">${index + 1}</option>
+              `
           )}
         </select>
         ${ChevronDown16({ class: `${prefix}--select__arrow` })}

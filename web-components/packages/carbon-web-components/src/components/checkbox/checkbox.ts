@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ const { prefix } = settings;
 
 /**
  * Check box.
+ *
  * @element bx-checkbox
  * @fires bx-checkbox-changed - The custom event fired after this changebox changes its checked state.
  * @csspart input The checkbox.
@@ -123,7 +124,8 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
         .indeterminate="${indeterminate}"
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
-        @change="${handleChange}" />
+        @change="${handleChange}"
+      />
       <label for="checkbox" part="label" class="${labelClasses}">
         <span class="${prefix}--checkbox-label-text"><slot>${labelText}</slot></span>
       </label>

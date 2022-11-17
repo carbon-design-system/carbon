@@ -17,6 +17,7 @@ const { prefix } = settings;
 
 /**
  * Overflow menu in breadcrumb.
+ *
  * @element bx-breadcrumb-overflow-menu
  */
 @customElement(`${prefix}-breadcrumb-overflow-menu`)

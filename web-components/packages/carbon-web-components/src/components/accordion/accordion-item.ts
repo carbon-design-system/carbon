@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,6 +22,7 @@ const { prefix } = settings;
 
 /**
  * Observes resize of the given element with the given resize observer.
+ *
  * @param observer The resize observer.
  * @param elem The element to observe the resize.
  */
@@ -40,6 +41,7 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 
 /**
  * Accordion item.
+ *
  * @element bx-accordion-item
  * @fires bx-accordion-item-beingtoggled
  *   The custom event fired before this accordion item is being toggled upon a user gesture.
@@ -64,6 +66,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
 
   /**
    * Handles user-initiated toggle request of this accordion item.
+   *
    * @param open The new open state.
    */
   private _handleUserInitiatedToggle(open = !this.open) {
@@ -170,7 +173,8 @@ class BXAccordionItem extends FocusMixin(LitElement) {
         aria-controls="content"
         aria-expanded="${String(Boolean(open))}"
         @click="${handleClickExpando}"
-        @keydown="${handleKeydownExpando}">
+        @keydown="${handleKeydownExpando}"
+      >
         ${ChevronRight16({
           part: 'expando-icon',
           class: `${prefix}--accordion__arrow`,
@@ -183,6 +187,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
 
   /**
    * The CSS classes for breakpoints.
+   *
    * @private
    */
   static get _classesBreakpoints() {
@@ -194,6 +199,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
 
   /**
    * The breakpoints.
+   *
    * @private
    */
   static get _sizesBreakpoints() {

@@ -22,6 +22,7 @@ const { prefix } = settings;
 
 /**
  * File uploader item.
+ *
  * @element bx-file-uploader-item
  * @slot validity-message The validity message.
  * @slot validity-message-supplement The supplemental validity message.
@@ -65,7 +66,9 @@ class BXFileUploaderItem extends LitElement {
    */
   private _renderUploading() {
     const { uploadingAssistiveText } = this;
-    return html` <bx-loading assistive-text="${uploadingAssistiveText}" type="${LOADING_TYPE.SMALL}"></bx-loading> `;
+    return html`
+      <bx-loading assistive-text="${uploadingAssistiveText}" type="${LOADING_TYPE.SMALL}"></bx-loading>
+    `;
   }
 
   /**

@@ -29,6 +29,7 @@ const dropEffects = {
 
 /**
  * File drop container.
+ *
  * @element bx-file-drop-container
  * @fires bx-file-drop-container-changed The custom event fired when there is a user gesture to select files to upload.
  */
@@ -41,6 +42,7 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
 
   /**
    * Handles user gesture to select files to upload.
+   *
    * @param event The event.
    */
   private _handleChange(event: Event | DragEvent) {
@@ -64,6 +66,7 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
 
   /**
    * Handles `dragover`, `dragleave` and `drop` events.
+   *
    * @param event The event.
    */
   @HostListener('dragover')
@@ -153,7 +156,8 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
             accept="${ifNonEmpty(accept)}"
             ?disabled="${disabled}"
             ?multiple="${multiple}"
-            @change="${handleChange}" />
+            @change="${handleChange}"
+          />
         </div>
       </label>
     `;

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,6 +24,7 @@ const { prefix } = settings;
 
 /**
  * Number input.
+ *
  * @element bx-number-input
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
@@ -271,7 +272,8 @@ export default class BXNumberInput extends BXInput {
         aria-atomic="true"
         type="button"
         ?disabled=${this.disabled}
-        @click=${handleUserInitiatedStepUp}>
+        @click=${handleUserInitiatedStepUp}
+      >
         ${CaretUp16()}
       </button>
     `;
@@ -283,7 +285,8 @@ export default class BXNumberInput extends BXInput {
         aria-atomic="true"
         type="button"
         ?disabled=${this.disabled}
-        @click=${handleUserInitiatedStepDown}>
+        @click=${handleUserInitiatedStepDown}
+      >
         ${CaretDown16()}
       </button>
     `;
@@ -307,7 +310,8 @@ export default class BXNumberInput extends BXInput {
         max="${ifNonEmpty(this.max)}"
         step="${ifNonEmpty(this.step)}"
         role="alert"
-        aria-atomic="true" />
+        aria-atomic="true"
+      />
     `;
 
     const defaultLayout = html`
@@ -315,7 +319,9 @@ export default class BXNumberInput extends BXInput {
       <div class="${prefix}--number__controls">${incrementButton} ${decrementButton}</div>
     `;
 
-    const mobileLayout = html` ${decrementButton} ${input} ${incrementButton} `;
+    const mobileLayout = html`
+      ${decrementButton} ${input} ${incrementButton}
+    `;
 
     return html`
       <div class="${wrapperClasses}" ?data-invalid=${this.invalid}>

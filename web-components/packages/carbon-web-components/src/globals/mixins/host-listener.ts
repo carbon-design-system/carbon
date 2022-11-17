@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,6 +26,7 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
   class HostListenerMixinImpl extends Base {
     /**
      * The list of handles managed by this mix-in.
+     *
      * @private
      */
     _handles: Set<Handle> = new Set(); // Not using TypeScript `private` due to: microsoft/TypeScript#17744
@@ -75,6 +76,7 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
 
     /**
      * The map, keyed by method name, of event listeners that should be attached to host element or host document.
+     *
      * @private
      */
     static _hostListeners: {

@@ -3,7 +3,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,7 +15,7 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 
 async function makeWebpackServer(port) {
-  // eslint-disable-next-line global-require, import/no-dynamic-require
+  // eslint-disable-next-line global-require
   const config = require(path.resolve(process.cwd(), 'webpack.config.js'));
   return new Promise((resolve, reject) => {
     const compiler = webpack(config);

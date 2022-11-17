@@ -21,6 +21,7 @@ const { prefix } = settings;
 
 /**
  * Trigger button of tooltip.
+ *
  * @element bx-tooltip
  */
 @customElement(`${prefix}-tooltip`)

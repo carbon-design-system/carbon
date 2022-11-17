@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,6 +35,7 @@ const capIndex = (index: number, length: number) => {
 
 /**
  * Content switcher.
+ *
  * @element bx-content-switcher
  * @fires bx-content-switcher-beingselected
  *   The custom event fired before a content switcher item is selected upon a user gesture.
@@ -45,6 +46,7 @@ const capIndex = (index: number, length: number) => {
 class BXContentSwitcher extends LitElement {
   /**
    * Handles `mouseover`/`mouseout` events on `<slot>`.
+   *
    * @param event The event.
    */
   private _handleHover({ target, type }: MouseEvent) {
@@ -73,6 +75,7 @@ class BXContentSwitcher extends LitElement {
 
   /**
    * Handles `click` event on the top-level element in the shadow DOM.
+   *
    * @param event The event.
    */
   protected _handleClick({ target }: MouseEvent) {
@@ -81,6 +84,7 @@ class BXContentSwitcher extends LitElement {
 
   /**
    * Handles `keydown` event on the top-level element in the shadow DOM.
+   *
    * @param event The event.
    */
   protected _handleKeydown({ key }: KeyboardEvent) {
@@ -91,6 +95,7 @@ class BXContentSwitcher extends LitElement {
 
   /**
    * Handles user-initiated selection of a content switcher item.
+   *
    * @param [item] The content switcher item user wants to select.
    */
   protected _handleUserInitiatedSelectItem(item: BXSwitch) {
@@ -117,6 +122,7 @@ class BXContentSwitcher extends LitElement {
 
   /**
    * Navigates through content switcher items.
+   *
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    */
   protected _navigate(direction: number) {
@@ -130,6 +136,7 @@ class BXContentSwitcher extends LitElement {
 
   /**
    * A callback that runs after change in content switcher selection upon user interaction is confirmed.
+   *
    * @param itemToSelect A content switcher item.
    */
   protected _selectionDidChange(itemToSelect: BXSwitch) {
@@ -209,7 +216,8 @@ class BXContentSwitcher extends LitElement {
         @click="${this._handleClick}"
         @keydown="${handleKeydown}"
         @mouseover="${handleHover}"
-        @mouseout="${handleHover}"></slot>
+        @mouseout="${handleHover}"
+      ></slot>
     `;
   }
 

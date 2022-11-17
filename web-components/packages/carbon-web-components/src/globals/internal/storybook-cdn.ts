@@ -9,7 +9,7 @@
 
 import packageJson from '../../../package.json';
 
-/* eslint-disable import/prefer-default-export,max-len */
+/* eslint-disable max-len */
 
 /**
  *

@@ -12,31 +12,30 @@
 const restrictedGlobals = require('eslint-restricted-globals');
 
 module.exports = {
-  plugins: ['babel'],
   parser: 'babel-eslint',
   parserOptions: {
     ecmaVersion: 6,
     sourceType: 'script',
   },
-  extends: ['../eslint-config-ibmdotcom', 'carbon-base'],
+  extends: ['../eslint-config-ibmdotcom'],
   env: {
     node: true,
     es6: true,
   },
   rules: {
     'no-restricted-globals': ['error', 'isFinite'].concat(restrictedGlobals),
-    'no-unused-expressions': 0,
-    'babel/no-unused-expressions': 2,
+    // 'no-unused-expressions': 0,
+    // 'babel/no-unused-expressions': 2,
     'import/extensions': 0,
-    'import/no-extraneous-dependencies': [
-      2,
-      {
-        devDependencies: true,
-        optionalDependencies: true,
-        peerDependencies: false,
-      },
-    ],
-    'import/no-unresolved': [2, { ignore: ['^carbon-web-components/es/icons/'] }],
+    // 'import/no-extraneous-dependencies': [
+    //   2,
+    //   {
+    //     devDependencies: true,
+    //     optionalDependencies: true,
+    //     peerDependencies: false,
+    //   },
+    // ],
+    // 'import/no-unresolved': [2, { ignore: ['^carbon-web-components/es/icons/'] }],
   },
   settings: {
     'import/resolver': {
@@ -52,7 +51,7 @@ module.exports = {
       plugins: ['@typescript-eslint'],
       rules: {
         'no-unused-vars': 0,
-        '@typescript-eslint/no-unused-vars': 2,
+        '@typescript-eslint/no-unused-vars': 0,
         'jsdoc/require-param-type': 0,
         'jsdoc/require-returns-type': 0,
       },
@@ -66,12 +65,12 @@ module.exports = {
         // TODO: See why the ESLint plugin does not work with `.tsx`
         '@carbon/react-prop-type-comments/require-proptype-comment': 0,
         '@typescript-eslint/no-unused-vars': 2,
-        'import/no-unresolved': [
-          2,
-          {
-            ignore: ['^./'],
-          },
-        ],
+        // 'import/no-unresolved': [
+        //   2,
+        //   {
+        //     ignore: ['^./'],
+        //   },
+        // ],
         'jsdoc/require-param-type': 0,
         'jsdoc/require-returns-type': 0,
         'react/jsx-uses-react': 2,
@@ -91,17 +90,17 @@ module.exports = {
       rules: {
         'no-unused-vars': 0,
         '@typescript-eslint/no-unused-vars': 2,
-        'import/no-extraneous-dependencies': 0,
-        'import/no-unresolved': [
-          2,
-          {
-            ignore: [
-              '^carbon-web-components/es/(components-react|icons)/',
-              '^@carbon/ibmdotcom-web-components/es/(components-react|icons)/',
-              '/components-react/',
-            ],
-          },
-        ],
+        // 'import/no-extraneous-dependencies': 0,
+        // 'import/no-unresolved': [
+        //   2,
+        //   {
+        //     ignore: [
+        //       '^carbon-web-components/es/(components-react|icons)/',
+        //       '^@carbon/ibmdotcom-web-components/es/(components-react|icons)/',
+        //       '/components-react/',
+        //     ],
+        //   },
+        // ],
         'react/jsx-uses-react': 2,
         'react/jsx-uses-vars': 2,
         'react/prop-types': 0,
@@ -113,7 +112,7 @@ module.exports = {
         sourceType: 'module',
       },
       rules: {
-        'import/no-unresolved': 0,
+        // 'import/no-unresolved': 0,
       },
     },
     {
@@ -122,7 +121,7 @@ module.exports = {
         sourceType: 'module',
       },
       rules: {
-        'import/no-unresolved': 0,
+        // 'import/no-unresolved': 0,
       },
     },
     {
@@ -152,7 +151,7 @@ module.exports = {
         sourceType: 'module',
       },
       rules: {
-        'import/no-unresolved': 0,
+        // 'import/no-unresolved': 0,
       },
       globals: {
         aChecker: true,

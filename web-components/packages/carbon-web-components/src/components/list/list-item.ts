@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ const { prefix } = settings;
 
 /**
  * List item.
+ *
  * @element bx-list-item
  * @slot nested - The nested child list.
  */
@@ -27,6 +28,7 @@ class BXListItem extends LitElement {
 
   /**
    * Handles `slotchange` event for the `<slot>` for the nested child list.
+   *
    * @param event The event.
    */
   private _handleSlotChangeNested({ target }: Event) {

@@ -26,6 +26,7 @@ const { prefix } = settings;
 
 /**
  * Input element. Supports all the usual attributes for textual input types
+ *
  * @element bx-input
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
@@ -46,6 +47,7 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
 
   /**
    * Handles `oninput` event on the `<input>`.
+   *
    * @param event The event.
    */
   protected _handleInput({ target }: Event) {
@@ -267,17 +269,22 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--tooltip--align-${this.tooltipAlignment}`]: this.tooltipAlignment,
     });
 
-    const passwordButtonLabel = html`<span class="${prefix}--assistive-text">
-      ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel}
-    </span>`;
+    const passwordButtonLabel = html`
+      <span class="${prefix}--assistive-text">
+        ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel}
+      </span>
+    `;
 
-    const passwordVisibilityButton = () => html`<button
-      type="button"
-      class="${passwordVisibilityToggleClasses}"
-      ?disabled="${this.disabled}"
-      @click="${this.handleTogglePasswordVisibility}">
-      ${!this.disabled && passwordButtonLabel} ${passwordVisibilityIcon}
-    </button>`;
+    const passwordVisibilityButton = () => html`
+      <button
+        type="button"
+        class="${passwordVisibilityToggleClasses}"
+        ?disabled="${this.disabled}"
+        @click="${this.handleTogglePasswordVisibility}"
+      >
+        ${!this.disabled && passwordButtonLabel} ${passwordVisibilityIcon}
+      </button>
+    `;
 
     return html`
       <label class="${labelClasses}" for="input">
@@ -300,7 +307,8 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
           ?required="${this.required}"
           type="${ifNonEmpty(this.type)}"
           .value="${this._value}"
-          @input="${handleInput}" />
+          @input="${handleInput}"
+        />
         ${this.showPasswordVisibilityToggle && (this.type === INPUT_TYPE.PASSWORD || this.type === INPUT_TYPE.TEXT)
           ? passwordVisibilityButton()
           : null}

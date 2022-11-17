@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ const { prefix } = settings;
 
 /**
  * Toast notification.
+ *
  * @element bx-toast-notification
  * @slot subtitle - The subtitle.
  * @slot title - The title.

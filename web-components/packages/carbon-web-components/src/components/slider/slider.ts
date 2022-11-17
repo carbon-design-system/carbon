@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -41,6 +41,7 @@ const THUMB_DIRECTION = {
 
 /**
  * Slider.
+ *
  * @element bx-slider
  * @slot label-text - The label text.
  * @slot max-text - The text for maximum value.
@@ -183,6 +184,7 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
 
   /**
    * Handles `pointermove` to update the thumb position and the value as necessary.
+   *
    * @param event The event.
    */
   @HostListener('document:pointermove')
@@ -196,6 +198,7 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
 
   /**
    * Updates thumb position and value upon user's `pointermove` gesture.
+   *
    * @param event The event.
    */
   private _handlePointermoveImpl(event: PointerEvent) {
@@ -433,7 +436,8 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           @pointerup="${endDrag}"
           @pointerleave="${endDrag}"
           class="${sliderClasses}"
-          role="presentation">
+          role="presentation"
+        >
           <div
             id="thumb"
             class="${prefix}--slider__thumb"
@@ -443,7 +447,8 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             aria-valuemin="${min}"
             aria-valuenow="${value}"
             style="left: ${rate * 100}%"
-            @pointerdown="${startDrag}"></div>
+            @pointerdown="${startDrag}"
+          ></div>
           <div id="track" class="${prefix}--slider__track"></div>
           <div class="${prefix}-ce--slider__filled-track-container">
             <div class="${prefix}--slider__filled-track" style="transform: translate(0%, -50%) scaleX(${rate})"></div>
@@ -454,7 +459,8 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
             name="${ifNonEmpty(name)}"
             .value="${value}"
             min="${ifNonEmpty(min)}"
-            max="${ifNonEmpty(max)}" />
+            max="${ifNonEmpty(max)}"
+          />
         </div>
         <span class="${prefix}--slider__range-label">
           <slot name="max-text">${formatMaxText({ max })}</slot>

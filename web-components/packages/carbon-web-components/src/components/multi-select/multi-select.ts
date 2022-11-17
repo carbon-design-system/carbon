@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@ const { prefix } = settings;
 
 /**
  * Multi select.
+ *
  * @element bx-multi-select
  * @fires bx-multi-select-beingselected
  *   The custom event fired before a multi select item is selected upon a user gesture.
@@ -185,7 +186,8 @@ class BXMultiSelect extends BXDropdown {
             role="button"
             class="${prefix}--list-box__selection ${prefix}--list-box__selection--multi ${prefix}--tag--filter"
             tabindex="0"
-            title="${clearSelectionLabel}">
+            title="${clearSelectionLabel}"
+          >
             ${selectedItemsCount} ${Close16({ 'aria-label': clearSelectionLabel })}
           </div>
         `;
@@ -197,7 +199,9 @@ class BXMultiSelect extends BXDropdown {
   protected _renderTriggerContent(): TemplateResult {
     const { triggerContent, _selectedItemContent: selectedItemContent } = this;
     return !this.filterable
-      ? html` <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span> `
+      ? html`
+          <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span>
+        `
       : html`
           <input
             id="trigger-label"
@@ -206,7 +210,8 @@ class BXMultiSelect extends BXDropdown {
             role="combobox"
             aria-controls="menu-body"
             aria-autocomplete="list"
-            @input="${this._handleInput}" />
+            @input="${this._handleInput}"
+          />
         `;
   }
 
@@ -246,6 +251,7 @@ class BXMultiSelect extends BXDropdown {
 
   /**
    * Navigate through dropdown items.
+   *
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    */
   protected _navigate(direction: number) {

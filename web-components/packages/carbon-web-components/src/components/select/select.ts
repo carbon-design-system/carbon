@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,6 +27,7 @@ const { prefix } = settings;
 
 /**
  * Select box.
+ *
  * @element bx-select
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
@@ -42,7 +43,9 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
   /**
    * The `value` for placeholder `<option>`.
    */
-  private _placeholderItemValue = `__${prefix}-select-placeholder_${Math.random().toString(36).slice(2)}`;
+  private _placeholderItemValue = `__${prefix}-select-placeholder_${Math.random()
+    .toString(36)
+    .slice(2)}`;
 
   /**
    * The select box.
@@ -52,6 +55,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
 
   /**
    * Handles `oninput` event on the `<input>`.
+   *
    * @param event The event.
    */
   private _handleInput({ target }: Event) {
@@ -104,7 +108,8 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
                   ?disabled="${disabled}"
                   label="${ifNonNull(label ?? textContent)}"
                   ?selected="${selected}"
-                  value="${ifNonNull(value)}">
+                  value="${ifNonNull(value)}"
+                >
                   ${textContent}
                 </option>
               `
@@ -349,7 +354,8 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
           ?disabled="${disabled}"
           aria-invalid="${String(Boolean(invalid))}"
           aria-describedby="${ifDefined(!invalid ? undefined : 'validity-message')}"
-          @input="${handleInput}">
+          @input="${handleInput}"
+        >
           ${!placeholder || value
             ? undefined
             : html`

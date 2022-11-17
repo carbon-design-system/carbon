@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ const { prefix } = settings;
 
 /**
  * Structured list wrapper.
+ *
  * @element bx-structured-list
  */
 @customElement(`${prefix}-structured-list`)
@@ -60,7 +61,9 @@ class BXStructuredList extends FocusMixin(LitElement) {
       [`${prefix}--structured-list`]: true,
       [`${prefix}--structured-list--selection`]: Boolean(selectionName),
     });
-    return html` <section id="section" class=${classes}><slot></slot></section> `;
+    return html`
+      <section id="section" class=${classes}><slot></slot></section>
+    `;
   }
 
   /**

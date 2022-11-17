@@ -46,7 +46,7 @@ function rollupPluginIcons({ include = /@carbon[\\/]icons[\\/]/i, exclude } = {}
         return null;
       }
 
-      const svg = require(id); // eslint-disable-line global-require,import/no-dynamic-require
+      const svg = require(id); // eslint-disable-line global-require
 
       const code = [
         `import { svg } from 'lit-html'`,

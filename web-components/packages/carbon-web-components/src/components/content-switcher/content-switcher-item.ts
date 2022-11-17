@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ const { prefix } = settings;
 
 /**
  * Content switcher button.
+ *
  * @element bx-content-switcher-item
  */
 @customElement(`${prefix}-content-switcher-item`)
@@ -30,6 +31,7 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
 
   /**
    * `true` to hide the divider at the left.
+   *
    * @private
    */
   @property({ type: Boolean, reflect: true, attribute: 'hide-divider' })
@@ -37,6 +39,7 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
 
   /**
    * `true` if the content switcher button should be selected.
+   *
    * @private
    */
   @property({ type: Boolean, reflect: true })
@@ -90,7 +93,8 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
         ?disabled="${disabled}"
         tabindex="${selected ? '0' : '-1'}"
         aria-controls="${ifNonNull(target)}"
-        aria-selected="${Boolean(selected)}">
+        aria-selected="${Boolean(selected)}"
+      >
         <span class="${prefix}--content-switcher__label"><slot></slot></span>
       </button>
     `;

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -114,6 +114,7 @@ class RadioGroupManager {
 
   /**
    * Manages a radio button.
+   *
    * @param radio The radio button to manage.
    * @returns This object.
    */
@@ -131,6 +132,7 @@ class RadioGroupManager {
 
   /**
    * Unmanages a radio button.
+   *
    * @param radio The radio button to unmanage.
    * @param name The old name of the radio button to unmanage.
    * @returns `true` if `element` was actually managed.
@@ -142,6 +144,7 @@ class RadioGroupManager {
 
   /**
    * Selects or focuses on a radio button.
+   *
    * @param radio The radio button to select.
    */
   select(radio: ManagedRadioButton) {

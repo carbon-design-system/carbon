@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@ const { prefix } = settings;
 
 /**
  * The trigger button for side nav in header nav.
+ *
  * @element bx-header-menu-button
  * @csspart button The button.
  * @csspart toggle-icon The toggle icon.

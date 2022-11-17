@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,26 +14,20 @@ import { html, render } from 'lit-html';
 import Fade16 from 'carbon-web-components/es/icons/fade/16';
 import EventManager from '../utils/event-manager';
 import ifNonNull from '../../src/globals/directives/if-non-null';
-/* eslint-disable import/no-duplicates */
 import BXHeaderMenu from '../../src/components/ui-shell/header-menu';
 // Above import does not seem to register the custom element
 import '../../src/components/ui-shell/header-menu';
-/* eslint-enable import/no-duplicates */
-/* eslint-disable import/no-duplicates */
 import BXSideNavMenuButton from '../../src/components/ui-shell/header-menu-button';
 // Above import does not seem to register the custom element
 import '../../src/components/ui-shell/header-menu-button';
-/* eslint-enable import/no-duplicates */
 import '../../src/components/ui-shell/header-name';
 import '../../src/components/ui-shell/header-nav';
 import '../../src/components/ui-shell/header-nav-item';
 import BXSideNav, { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from '../../src/components/ui-shell/side-nav';
 import '../../src/components/ui-shell/side-nav-link';
-/* eslint-disable import/no-duplicates */
 import BXSideNavMenu from '../../src/components/ui-shell/side-nav-menu';
 // Above import does not seem to register the custom element
 import '../../src/components/ui-shell/side-nav-menu';
-/* eslint-enable import/no-duplicates */
 import '../../src/components/ui-shell/side-nav-menu-item';
 
 const headerMenuButtonTemplate = (props?) => {
@@ -45,7 +39,8 @@ const headerMenuButtonTemplate = (props?) => {
       button-label-inactive="${ifNonNull(buttonLabelInactive)}"
       collapse-mode="${ifNonNull(collapseMode)}"
       ?disabled="${disabled}"
-      usage-mode="${ifNonNull(usageMode)}">
+      usage-mode="${ifNonNull(usageMode)}"
+    >
     </bx-header-menu-button>
   `;
 };
@@ -60,17 +55,23 @@ const headerMenuTemplate = (props?) => {
 
 const headerNameTemplate = (props?) => {
   const { href, prefix } = props ?? {};
-  return html` <bx-header-name href="${ifNonNull(href)}" prefix="${ifNonNull(prefix)}"></bx-header-name> `;
+  return html`
+    <bx-header-name href="${ifNonNull(href)}" prefix="${ifNonNull(prefix)}"></bx-header-name>
+  `;
 };
 
 const headerNavTemplate = (props?) => {
   const { menuBarLabel } = props ?? {};
-  return html` <bx-header-nav menu-bar-label="${ifNonNull(menuBarLabel)}"></bx-header-nav> `;
+  return html`
+    <bx-header-nav menu-bar-label="${ifNonNull(menuBarLabel)}"></bx-header-nav>
+  `;
 };
 
 const headerNavItemTemplate = (props?) => {
   const { href } = props ?? {};
-  return html` <bx-header-nav-item href="${ifNonNull(href)}"></bx-header-nav-item> `;
+  return html`
+    <bx-header-nav-item href="${ifNonNull(href)}"></bx-header-nav-item>
+  `;
 };
 
 const sideNavTemplate = (props?) => {
@@ -85,7 +86,9 @@ const sideNavTemplate = (props?) => {
 
 const sideNavLinkTemplate = (props?) => {
   const { active, href, children } = props ?? {};
-  return html` <bx-side-nav-link ?active="${active}" href="${ifNonNull(href)}">${children}</bx-side-nav-link> `;
+  return html`
+    <bx-side-nav-link ?active="${active}" href="${ifNonNull(href)}">${children}</bx-side-nav-link>
+  `;
 };
 
 const sideNavMenuTemplate = (props?) => {
@@ -95,7 +98,8 @@ const sideNavMenuTemplate = (props?) => {
       ?active="${active}"
       ?expanded="${expanded}"
       ?force-collapsed="${forceCollapsed}"
-      title="${ifNonNull(title)}">
+      title="${ifNonNull(title)}"
+    >
       ${children}
     </bx-side-nav-menu>
   `;
@@ -110,18 +114,18 @@ const sideNavMenuItemTemplate = (props?) => {
   `;
 };
 
-describe('ui-shell', function () {
+describe('ui-shell', function() {
   const events = new EventManager();
 
-  describe('bx-header-menu-button', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('bx-header-menu-button', function() {
+    describe('Misc attributes', function() {
+      it('should render with minimum attributes', async function() {
         render(headerMenuButtonTemplate(), document.body);
         await Promise.resolve();
         expect(document.body.querySelector('bx-header-menu-button')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes for inactive state', async function () {
+      it('should render with various attributes for inactive state', async function() {
         render(
           headerMenuButtonTemplate({
             buttonLabelActive: 'button-label-active',
@@ -136,7 +140,7 @@ describe('ui-shell', function () {
         expect(document.body.querySelector('bx-header-menu-button')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes for active state', async function () {
+      it('should render with various attributes for active state', async function() {
         render(
           headerMenuButtonTemplate({
             active: true,
@@ -153,8 +157,8 @@ describe('ui-shell', function () {
       });
     });
 
-    describe('Handling user interaction', function () {
-      it('should fire bx-header-menu-button-toggled event upon clicking the button', async function () {
+    describe('Handling user interaction', function() {
+      it('should fire bx-header-menu-button-toggled event upon clicking the button', async function() {
         render(headerMenuButtonTemplate(), document.body);
         await Promise.resolve();
         const spyAfterToggle = jasmine.createSpy('after toggle');
@@ -166,15 +170,15 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-header-menu', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('bx-header-menu', function() {
+    describe('Misc attributes', function() {
+      it('should render with minimum attributes', async function() {
         render(headerMenuTemplate(), document.body);
         await Promise.resolve();
         expect(document.body.querySelector('bx-header-menu')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async function() {
         render(
           headerMenuTemplate({
             expanded: true,
@@ -188,8 +192,8 @@ describe('ui-shell', function () {
       });
     });
 
-    describe('Handling user interaction', function () {
-      it('should toggle the expanded state upon clicking the button', async function () {
+    describe('Handling user interaction', function() {
+      it('should toggle the expanded state upon clicking the button', async function() {
         render(headerMenuTemplate(), document.body);
         await Promise.resolve();
         const menu = document.body.querySelector('bx-header-menu');
@@ -199,7 +203,7 @@ describe('ui-shell', function () {
         expect((menu as BXHeaderMenu).expanded).toBe(false);
       });
 
-      it('should collapse upon hitting ESC key', async function () {
+      it('should collapse upon hitting ESC key', async function() {
         render(headerMenuTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const menu = document.body.querySelector('bx-header-menu');
@@ -210,7 +214,7 @@ describe('ui-shell', function () {
         expect(trigger!.focus).toHaveBeenCalled();
       });
 
-      it('should collapse upon losing focus', async function () {
+      it('should collapse upon losing focus', async function() {
         render(headerMenuTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const menu = document.body.querySelector('bx-header-menu');
@@ -220,15 +224,15 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-header-name', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('bx-header-name', function() {
+    describe('Misc attributes', function() {
+      it('should render with minimum attributes', async function() {
         render(headerNameTemplate(), document.body);
         await Promise.resolve();
         expect(document.body.querySelector('bx-header-name')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async function() {
         render(
           headerNameTemplate({
             href: 'about:blank',
@@ -242,15 +246,15 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-header-nav', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('bx-header-nav', function() {
+    describe('Misc attributes', function() {
+      it('should render with minimum attributes', async function() {
         render(headerNavTemplate(), document.body);
         await Promise.resolve();
         expect(document.body.querySelector('bx-header-nav')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async function() {
         render(
           headerNavTemplate({
             menuBarLabel: 'menu-bar-label-foo',
@@ -263,15 +267,15 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-header-nav-item', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('bx-header-nav-item', function() {
+    describe('Misc attributes', function() {
+      it('should render with minimum attributes', async function() {
         render(headerNavItemTemplate(), document.body);
         await Promise.resolve();
         expect(document.body.querySelector('bx-header-nav-item')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async function() {
         render(
           headerNavItemTemplate({
             href: 'about:blank',
@@ -284,15 +288,15 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-side-nav-link', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('bx-side-nav-link', function() {
+    describe('Misc attributes', function() {
+      it('should render with minimum attributes', async function() {
         render(sideNavLinkTemplate(), document.body);
         await Promise.resolve();
         expect(document.body.querySelector('bx-side-nav-link')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async function() {
         render(
           sideNavLinkTemplate({
             active: true,
@@ -308,12 +312,14 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-side-nav', function () {
-    describe('Handling events', function () {
-      it('should let child side nav menu collapse if this side nav is collapsed', async function () {
+  describe('bx-side-nav', function() {
+    describe('Handling events', function() {
+      it('should let child side nav menu collapse if this side nav is collapsed', async function() {
         render(
           sideNavTemplate({
-            children: html` <bx-side-nav-menu></bx-side-nav-menu> `,
+            children: html`
+              <bx-side-nav-menu></bx-side-nav-menu>
+            `,
           }),
           document.body
         );
@@ -329,7 +335,7 @@ describe('ui-shell', function () {
         expect((menu as BXSideNavMenu).forceCollapsed).toBe(true);
       });
 
-      it('should toggle expand state upon upon clicking on header menu button', async function () {
+      it('should toggle expand state upon upon clicking on header menu button', async function() {
         render(sideNavTemplate(), document.body);
         await Promise.resolve();
         const nav = document.body.querySelector('bx-side-nav');
@@ -341,8 +347,8 @@ describe('ui-shell', function () {
       });
     });
 
-    describe('Working with header menu button', function () {
-      it('should propagate mode/states to header menu button', async function () {
+    describe('Working with header menu button', function() {
+      it('should propagate mode/states to header menu button', async function() {
         render(
           sideNavTemplate({
             collapseMode: SIDE_NAV_COLLAPSE_MODE.RAIL,
@@ -356,7 +362,7 @@ describe('ui-shell', function () {
         expect((menuButton as BXSideNavMenuButton).active).toBe(true);
       });
 
-      it('should propagate usage mode to header menu button', async function () {
+      it('should propagate usage mode to header menu button', async function() {
         render(
           sideNavTemplate({
             usageMode: SIDE_NAV_USAGE_MODE.HEADER_NAV,
@@ -370,15 +376,15 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-side-nav-menu', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('bx-side-nav-menu', function() {
+    describe('Misc attributes', function() {
+      it('should render with minimum attributes', async function() {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
         expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async function() {
         render(
           sideNavMenuTemplate({
             active: true,
@@ -391,7 +397,7 @@ describe('ui-shell', function () {
         expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should support collapsing side nav menu upon parent side nav is collapsed as rail', async function () {
+      it('should support collapsing side nav menu upon parent side nav is collapsed as rail', async function() {
         render(
           sideNavMenuTemplate({
             active: true,
@@ -405,8 +411,8 @@ describe('ui-shell', function () {
       });
     });
 
-    describe('Handling user interaction', function () {
-      it('should fire bx-side-nav-menu-beingtoggled/bx-side-nav-menu-toggled events upon toggling', async function () {
+    describe('Handling user interaction', function() {
+      it('should fire bx-side-nav-menu-beingtoggled/bx-side-nav-menu-toggled events upon toggling', async function() {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
         const spyBeforeToggle = jasmine.createSpy('before toggle');
@@ -419,7 +425,7 @@ describe('ui-shell', function () {
         expect(spyAfterToggle).toHaveBeenCalled();
       });
 
-      it('should support preventing side nav menu from being toggled upon user gesture', async function () {
+      it('should support preventing side nav menu from being toggled upon user gesture', async function() {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
         const spyAfterToggle = jasmine.createSpy('after toggle');
@@ -434,8 +440,8 @@ describe('ui-shell', function () {
       });
     });
 
-    describe('Detecting icons', function () {
-      it('should tell new child side nav item that the parent side nav menu has an icon', async function () {
+    describe('Detecting icons', function() {
+      it('should tell new child side nav item that the parent side nav menu has an icon', async function() {
         render(
           sideNavMenuTemplate({
             children: Fade16({ slot: 'title-icon' }),
@@ -450,10 +456,12 @@ describe('ui-shell', function () {
         expect(menuItem.hasAttribute('parent-has-icon')).toBe(true);
       });
 
-      it('should tell existing child side nav item that the parent side nav menu has an icon', async function () {
+      it('should tell existing child side nav item that the parent side nav menu has an icon', async function() {
         render(
           sideNavMenuTemplate({
-            children: html` <bx-side-nav-menu-item></bx-side-nav-menu-item> `,
+            children: html`
+              <bx-side-nav-menu-item></bx-side-nav-menu-item>
+            `,
           }),
           document.body
         );
@@ -469,15 +477,15 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-side-nav-menu-item', function () {
-    describe('Misc attributes', function () {
-      it('should render with minimum attributes', async function () {
+  describe('bx-side-nav-menu-item', function() {
+    describe('Misc attributes', function() {
+      it('should render with minimum attributes', async function() {
         render(sideNavMenuItemTemplate(), document.body);
         await Promise.resolve();
         expect(document.body.querySelector('bx-side-nav-menu-item')).toMatchSnapshot({ mode: 'shadow' });
       });
 
-      it('should render with various attributes', async function () {
+      it('should render with various attributes', async function() {
         render(
           sideNavMenuItemTemplate({
             active: true,
@@ -490,8 +498,8 @@ describe('ui-shell', function () {
       });
     });
 
-    describe('Activating', function () {
-      it('should mark the parent side nav menu as it has active child side nav menu item', async function () {
+    describe('Activating', function() {
+      it('should mark the parent side nav menu as it has active child side nav menu item', async function() {
         render(sideNavMenuItemTemplate({ active: true }), document.body);
         await Promise.resolve();
         expect((document.body.querySelector('bx-side-nav-menu') as BXSideNavMenu).active).toBe(true);
@@ -499,7 +507,7 @@ describe('ui-shell', function () {
     });
   });
 
-  afterEach(async function () {
+  afterEach(async function() {
     await render(undefined!, document.body);
     events.reset();
   });

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,6 +23,7 @@ const { prefix } = settings;
 
 /**
  * Button.
+ *
  * @element bx-btn
  * @csspart button The button.
  */
@@ -200,7 +201,8 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
               ping="${ifNonNull(ping)}"
               rel="${ifNonNull(rel)}"
               target="${ifNonNull(target)}"
-              type="${ifNonNull(type)}">
+              type="${ifNonNull(type)}"
+            >
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </a>
@@ -213,7 +215,8 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${classes}"
         ?autofocus="${autofocus}"
         ?disabled="${disabled}"
-        type="${ifNonNull(type)}">
+        type="${ifNonNull(type)}"
+      >
         <slot @slotchange="${handleSlotChange}"></slot>
         <slot name="icon" @slotchange="${handleSlotChange}"></slot>
       </button>

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,6 +24,7 @@ const { prefix } = settings;
 
 /**
  * Pagination UI.
+ *
  * @element bx-pagination
  * @slot page-sizes-select - Where to put in the `<page-sizes-select>`.
  * @fires bx-pages-select-changed - The custom event fired after the current page is changed from `<bx-pages-select>`.
@@ -47,6 +48,7 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
   /**
    * Handles user-initiated change in the row number the current page starts with.
+   *
    * @param start The new current row number, index that starts with zero.
    */
   private _handleUserInitiatedChangeStart(start: number) {
@@ -86,6 +88,7 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
   /**
    * Handles user-initiated change in current page.
+   *
    * @param event The event.
    */
   @HostListener('eventChangePage')
@@ -98,6 +101,7 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
 
   /**
    * Handles user-initiated change in number of rows per page.
+   *
    * @param event The event.
    */
   @HostListener('eventChangePageSize')
@@ -233,14 +237,16 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             ?disabled="${prevButtonDisabled}"
             class="${prevButtonClasses}"
             title="${prevButtonText}"
-            @click="${handleClickPrevButton}">
+            @click="${handleClickPrevButton}"
+          >
             ${CaretLeft24()}
           </button>
           <button
             ?disabled="${nextButtonDisabled}"
             class="${nextButtonClasses}"
             title="${nextButtonText}"
-            @click="${handleClickNextButton}">
+            @click="${handleClickNextButton}"
+          >
             ${CaretRight24()}
           </button>
         </div>

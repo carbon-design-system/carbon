@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ const { prefix } = settings;
 
 /**
  * Multi select item.
+ *
  * @element bx-multi-select-item
  */
 @customElement(`${prefix}-multi-select-item`)
@@ -47,7 +48,8 @@ class BXMultiSelectItem extends BXDropdownItem {
             ?disabled=${disabled}
             .checked=${selected}
             name="${ifDefined(selectionName || undefined)}"
-            value="${value}" />
+            value="${value}"
+          />
           <label for="input" class="${prefix}--checkbox-label">
             <span class="${prefix}--checkbox-label-text"><slot></slot></span>
           </label>

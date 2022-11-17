@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -30,6 +30,7 @@ const { prefix } = settings;
 
 /**
  * Dropdown.
+ *
  * @element bx-dropdown
  * @csspart label-text The label text.
  * @csspart helper-text The helper text.
@@ -91,6 +92,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
 
   /**
    * A callback that runs after change in dropdown selection upon user interaction is confirmed.
+   *
    * @param itemToSelect
    *   A dropdown item.
    *   Absense of this argument means clearing selection, which may be handled by a derived class.
@@ -109,6 +111,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
 
   /**
    * Handles `click` event on the top-level element in the shadow DOM.
+   *
    * @param event The event.
    */
   protected _handleClickInner(event: MouseEvent) {
@@ -187,6 +190,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
 
   /**
    * Handles `blur` event handler on the document this element is in.
+   *
    * @param event The event.
    */
   @HostListener('focusout')
@@ -213,6 +217,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
 
   /**
    * Handles user-initiated selection of a dropdown item.
+   *
    * @param [item] The dropdown item user wants to select. Absense of this argument means clearing selection.
    */
   protected _handleUserInitiatedSelectItem(item?: BXDropdownItem) {
@@ -239,6 +244,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
 
   /**
    * Handles user-initiated toggling the open state.
+   *
    * @param [force] If specified, forces the open state to the given one.
    */
   protected _handleUserInitiatedToggle(force: boolean = !this.open) {
@@ -286,6 +292,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
 
   /**
    * Navigate through dropdown items.
+   *
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    */
   protected _navigate(direction: number) {
@@ -331,7 +338,9 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
    */
   protected _renderTriggerContent(): TemplateResult {
     const { triggerContent, _selectedItemContent: selectedItemContent } = this;
-    return html` <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span> `;
+    return html`
+      <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span>
+    `;
   }
 
   /* eslint-disable class-methods-use-this */
@@ -345,6 +354,7 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
 
   /**
    * Handles event to include selected value on the parent form.
+   *
    * @param event The event.
    */
   _handleFormdata(event: Event) {
@@ -595,7 +605,8 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
         ?data-invalid=${invalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
-        @keypress=${handleKeypressInner}>
+        @keypress=${handleKeypressInner}
+      >
         ${validityIcon}
         <div
           part="trigger-button"
@@ -606,7 +617,8 @@ class BXDropdown extends ValidityMixin(HostListenerMixin(FormMixin(FocusMixin(Li
           aria-expanded="${String(open)}"
           aria-haspopup="listbox"
           aria-owns="menu-body"
-          aria-controls="menu-body">
+          aria-controls="menu-body"
+        >
           ${this._renderPrecedingTriggerContent()}${this._renderTriggerContent()}${this._renderFollowingTriggerContent()}
           <div class="${iconContainerClasses}">${ChevronDown16({ 'aria-label': toggleLabel })}</div>
         </div>

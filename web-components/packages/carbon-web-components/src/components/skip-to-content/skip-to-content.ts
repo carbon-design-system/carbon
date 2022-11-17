@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ const { prefix } = settings;
 
 /**
  * Skip-to-content link.
+ *
  * @element bx-skip-to-content
  */
 @customElement(`${prefix}-skip-to-content`)
@@ -49,7 +50,9 @@ class BXSkipToContent extends FocusMixin(LitElement) {
 
   render() {
     const { linkAssisstiveText } = this;
-    return html` <a class="${prefix}--skip-to-content" href="${ifNonNull(this.href)}"><slot>${linkAssisstiveText}</slot></a> `;
+    return html`
+      <a class="${prefix}--skip-to-content" href="${ifNonNull(this.href)}"><slot>${linkAssisstiveText}</slot></a>
+    `;
   }
 
   updated(changedProperties) {

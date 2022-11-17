@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ const { prefix } = settings;
 
 /**
  * Side nav menu.
+ *
  * @element bx-side-nav-menu
  * @slot title-icon - The icon.
  * @csspart expando The expando.
@@ -42,6 +43,7 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
 
   /**
    * Handles user-initiated toggle request of this side nav menu.
+   *
    * @param expanded The new expanded state.
    */
   private _handleUserInitiatedToggle(expanded = !this.expanded) {
@@ -156,14 +158,16 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
         aria-haspopup="true"
         aria-expanded="${String(Boolean(expanded && !forceCollapsed))}"
         class="${prefix}--side-nav__submenu"
-        @click=${handleClickExpando}>
+        @click=${handleClickExpando}
+      >
         <div id="title-icon-container" part="title-icon-container" hidden class="${prefix}--side-nav__icon">
           <slot name="title-icon" @slotchange=${handleSlotChangeTitleIcon}></slot>
         </div>
         <span part="title" class="${prefix}--side-nav__submenu-title">${title}</span>
         <div
           part="expando-icon-container"
-          class="${prefix}--side-nav__icon ${prefix}--side-nav__icon--small ${prefix}--side-nav__submenu-chevron">
+          class="${prefix}--side-nav__icon ${prefix}--side-nav__icon--small ${prefix}--side-nav__submenu-chevron"
+        >
           ${ChevronDown20({ part: 'expando-icon' })}
         </div>
       </button>

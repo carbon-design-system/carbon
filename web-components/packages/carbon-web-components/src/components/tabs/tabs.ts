@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,6 +25,7 @@ export { NAVIGATION_DIRECTION, NAVIGATION_DIRECTION_NARROW, TABS_COLOR_SCHEME, T
 
 /**
  * Tabs.
+ *
  * @element bx-tabs
  * @fires bx-tabs-beingselected
  *   The custom event fired before a tab is selected upon a user gesture.
@@ -68,6 +69,7 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
 
   /**
    * Handles `blur` event handler on this element.
+   *
    * @param event The event.
    */
   @HostListener('focusout')
@@ -84,6 +86,7 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
 
   /**
    * Handles user-initiated toggling the open state.
+   *
    * @param [force] If specified, forces the open state to the given one.
    */
   private _handleUserInitiatedToggle(force: boolean = !this._open) {
@@ -116,6 +119,7 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
 
   /**
    * Navigates through tabs.
+   *
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    * @param [options] The options.
    * @param [options.immediate]
@@ -306,7 +310,8 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
         aria-expanded="${String(open)}"
         aria-haspopup="listbox"
         aria-owns="tablist"
-        aria-controls="tablist">
+        aria-controls="tablist"
+      >
         <span id="trigger-label" class="${prefix}--tabs-trigger-text"> ${selectedItemContent || triggerContent} </span>
         ${ChevronDown16({ 'aria-hidden': 'true' })}
       </div>

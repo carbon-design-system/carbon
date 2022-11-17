@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -24,6 +24,7 @@ const { prefix } = settings;
 
 /**
  * Text area.
+ *
  * @element bx-textarea
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
@@ -33,6 +34,7 @@ const { prefix } = settings;
 export default class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
   /**
    * Handles `oninput` event on the `<input>`.
+   *
    * @param event The event.
    */
   private _handleInput({ target }: Event) {
@@ -210,7 +212,8 @@ export default class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
           ?required="${this.required}"
           rows="${ifNonNull(this.rows)}"
           .value="${this.value}"
-          @input="${this._handleInput}"></textarea>
+          @input="${this._handleInput}"
+        ></textarea>
       </div>
       <div class="${helperTextClasses}">
         <slot name="helper-text"> ${this.helperText} </slot>

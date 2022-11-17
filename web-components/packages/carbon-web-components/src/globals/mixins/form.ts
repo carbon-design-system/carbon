@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,12 +21,14 @@ const FormMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
   abstract class FormMixinImpl extends Base {
     /**
      * The handle for `formdata` event listener on the containing form.
+     *
      * @private
      */
     _hFormdata: Handle | null = null; // Not using TypeScript `private` due to: microsoft/TypeScript#17744
 
     /**
      * Handles `formdata` event.
+     *
      * @param event The event.
      */
     abstract _handleFormdata(event: Event): void;

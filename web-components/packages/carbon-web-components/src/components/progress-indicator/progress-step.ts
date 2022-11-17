@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -51,6 +51,7 @@ const icons = {
 
 /**
  * Progress step.
+ *
  * @element bx-progress-step
  * @slot secondary-label-text - The secondary progress label.
  */
@@ -88,6 +89,7 @@ class BXProgressStep extends FocusMixin(LitElement) {
 
   /**
    * `true` if the progress step should be vertical.
+   *
    * @private
    */
   @property({ type: Boolean, reflect: true })
@@ -126,7 +128,11 @@ class BXProgressStep extends FocusMixin(LitElement) {
         <p role="button" class="${prefix}--progress-label" tabindex="0" aria-describedby="label-tooltip">${labelText}</p>
       </slot>
       <slot name="secondary-label-text">
-        ${!secondaryLabelText ? undefined : html` <p class="${prefix}--progress-optional">${secondaryLabelText}</p> `}
+        ${!secondaryLabelText
+          ? undefined
+          : html`
+              <p class="${prefix}--progress-optional">${secondaryLabelText}</p>
+            `}
       </slot>
       <span class="${prefix}--progress-line"></span>
     `;

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -40,6 +40,7 @@ class BXCEDemoFileUploader extends LitElement {
 
   /**
    * Handles `bx-drop-container-changed` on `<bx-file-drop-container>`.
+   *
    * @param event The event.
    */
   private _handleChange(event: CustomEvent) {
@@ -47,7 +48,9 @@ class BXCEDemoFileUploader extends LitElement {
     const newFiles: FileData[] = addedFiles.map(
       item =>
         ({
-          id: Math.random().toString(36).slice(2),
+          id: Math.random()
+            .toString(36)
+            .slice(2),
           file: item,
           state: FILE_UPLOADER_ITEM_STATE.UPLOADING,
         } as FileData)
@@ -66,6 +69,7 @@ class BXCEDemoFileUploader extends LitElement {
 
   /**
    * Handles `bx-file-uploader-item-deleted` on `<bx-file-uploader-item>`.
+   *
    * @param event The event.
    */
   private _handleDelete(event: CustomEvent) {
@@ -76,6 +80,7 @@ class BXCEDemoFileUploader extends LitElement {
 
   /**
    * Simulates updating file.
+   *
    * @param data The data of the file being uploaded.
    */
   private async _simulateUpload(data: FileData) {
@@ -175,7 +180,8 @@ class BXCEDemoFileUploader extends LitElement {
           accept="${ifNonNull(accept)}"
           ?disabled="${disabled}"
           ?multiple="${multiple}"
-          @bx-file-drop-container-changed="${handleChange}">
+          @bx-file-drop-container-changed="${handleChange}"
+        >
           Drag and drop files here or click to upload
         </bx-file-drop-container>
         ${files.map(
@@ -186,7 +192,8 @@ class BXCEDemoFileUploader extends LitElement {
               size="${ifNonNull(size)}"
               state="${ifNonNull(state)}"
               validity-message="${ifNonNull(validityMessage)}"
-              @bx-file-uploader-item-deleted="${handleDelete}">
+              @bx-file-uploader-item-deleted="${handleDelete}"
+            >
               ${file.name}
               <span slot="validity-message-supplement">${supplementalValidityMessage}</span>
             </bx-file-uploader-item>
@@ -229,7 +236,8 @@ export const Default = args => {
       ?multiple="${multiple}"
       size="${ifNonNull(size)}"
       @bx-file-uploader-item-beingdeleted="${handleBeforeDelete}"
-      @bx-file-uploader-item-deleted="${onDelete}">
+      @bx-file-uploader-item-deleted="${onDelete}"
+    >
     </bx-ce-demo-file-uploader>
   `;
 };

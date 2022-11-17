@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,6 +18,7 @@ const { prefix } = settings;
 
 /**
  * Side nav menu item.
+ *
  * @element bx-side-nav-menu-item
  * @csspart link The link.
  * @csspart title The title.

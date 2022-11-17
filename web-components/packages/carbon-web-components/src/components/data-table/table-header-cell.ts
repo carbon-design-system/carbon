@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,6 +21,7 @@ const { prefix } = settings;
 
 /**
  * Data table header cell.
+ *
  * @element bx-table-header-cell
  * @fires bx-table-header-cell-sort
  *   The custom event fired before a new sort direction is set upon a user gesture.
@@ -30,7 +31,7 @@ const { prefix } = settings;
 class BXTableHeaderCell extends FocusMixin(LitElement) {
   /**
    * Handles `click` event on the sort button.
-   * @param event The event.
+   *
    */
   private _handleClickSortButton() {
     const nextSortDirection = this._getNextSort();
@@ -52,7 +53,7 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
 
   /**
    * Handles `slotchange` event.
-   * @param event The event.
+   *
    */
   private _handleSlotChange() {
     this.requestUpdate();
@@ -132,13 +133,16 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
           part="sort-button"
           class="${prefix}--table-sort"
           title="${this.textContent}"
-          @click=${this._handleClickSortButton}>
+          @click=${this._handleClickSortButton}
+        >
           <span part="label-text" class="${prefix}--table-header-label"><slot @slotchange=${this._handleSlotChange}></slot></span>
           ${sortIcon}
         </button>
       `;
     }
-    return html`<slot></slot>`;
+    return html`
+      <slot></slot>
+    `;
   }
 
   /**

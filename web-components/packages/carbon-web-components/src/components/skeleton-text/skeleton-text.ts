@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,6 +19,7 @@ const { prefix } = settings;
 
 /**
  * Skeleton text.
+ *
  * @element bx-skeleton-text
  */
 @customElement(`${prefix}-skeleton-text`)
@@ -35,7 +36,9 @@ class BXSkeletonText extends LitElement {
       [`${prefix}--skeleton__text`]: true,
       [`${prefix}--skeleton__heading`]: type === SKELETON_TEXT_TYPE.HEADING,
     });
-    return html` <p class="${classes}"></p> `;
+    return html`
+      <p class="${classes}"></p>
+    `;
   }
 
   static styles = styles;

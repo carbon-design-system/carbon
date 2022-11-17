@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,6 +22,7 @@ const { prefix } = settings;
 
 /**
  * Combo box.
+ *
  * @element bx-combo-box
  * @fires bx-combo-box-beingselected
  *   The custom event fired before a combo box item is selected upon a user gesture.
@@ -70,6 +71,7 @@ class BXComboBox extends BXDropdown {
   /* eslint-disable class-methods-use-this */
   /**
    * The default item matching callback.
+   *
    * @param item The combo box item.
    * @param queryText The query text user types.
    * @returns `true` if the given combo box item matches the given query text.
@@ -189,7 +191,8 @@ class BXComboBox extends BXDropdown {
         aria-label="${inputLabel}"
         aria-controls="menu-body"
         aria-autocomplete="list"
-        @input=${handleInput} />
+        @input=${handleInput}
+      />
     `;
   }
 
@@ -203,7 +206,8 @@ class BXComboBox extends BXDropdown {
             role="button"
             class="${prefix}--list-box__selection"
             tabindex="0"
-            title="${clearSelectionLabel}">
+            title="${clearSelectionLabel}"
+          >
             ${Close16({ 'aria-label': clearSelectionLabel })}
           </div>
         `;

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,6 +23,7 @@ const { prefix } = settings;
 
 /**
  * Radio button group.
+ *
  * @element bx-radio-button-group
  * @fires bx-radio-button-group-changed - The custom event fired after this radio button group changes its selected item.
  */
@@ -110,7 +111,9 @@ class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {
   }
 
   render() {
-    return html`<slot></slot>`;
+    return html`
+      <slot></slot>
+    `;
   }
 
   /**

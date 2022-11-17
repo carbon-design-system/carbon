@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,6 +38,7 @@ export enum LINK_SIZE {
 
 /**
  * Link.
+ *
  * @element bx-link
  * @csspart link The link.
  */
@@ -98,7 +99,9 @@ class BXLink extends FocusMixin(LitElement) {
    */
   protected _renderDisabledLink() {
     const { _classes: classes } = this;
-    return html` <p id="link" part="link" class="${classes}">${this._renderInner()}</p> `;
+    return html`
+      <p id="link" part="link" class="${classes}">${this._renderInner()}</p>
+    `;
   }
 
   /**
@@ -119,7 +122,8 @@ class BXLink extends FocusMixin(LitElement) {
         rel="${ifNonNull(rel)}"
         target="${ifNonNull(target)}"
         type="${ifNonNull(type)}"
-        @click="${handleClick}">
+        @click="${handleClick}"
+      >
         ${this._renderInner()}
       </a>
     `;

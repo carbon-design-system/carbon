@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -58,6 +58,7 @@ const MILLISECONDS_IN_DAY = 86400000;
 
 /**
  * Adjusts the date with the given amount of days.
+ *
  * @param localDate The original date.
  * @param options The options.
  * @param [options.date=0] The amount of days to adjust.

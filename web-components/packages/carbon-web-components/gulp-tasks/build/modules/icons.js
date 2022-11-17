@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -35,7 +35,7 @@ async function icons() {
       .src([`${config.iconsDir}/**/*.js`, `!${config.iconsDir}/index.js`])
       .pipe(
         through2.obj((file, enc, done) => {
-          const descriptor = require(file.path); // eslint-disable-line global-require,import/no-dynamic-require
+          const descriptor = require(file.path); // eslint-disable-line global-require
           const iconsESPath = path.resolve(config.jsDestDir, 'icons', path.relative(config.iconsDir, file.path));
           const spreadModulePath = path.resolve(__dirname, '../../../es/globals/directives/spread');
           file.contents = Buffer.from(`

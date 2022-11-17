@@ -16,7 +16,7 @@ const createSVGResultFromCarbonIcon = require('./svg-result-carbon-icon');
  * @returns {string} The massaged module content.
  */
 function svgResultCarbonIconLoader() {
-  const descriptor = require(this.resourcePath); // eslint-disable-line global-require,import/no-dynamic-require
+  const descriptor = require(this.resourcePath); // eslint-disable-line global-require
   return `
     import { svg } from 'lit-html';
     import spread from '${path.resolve(__dirname, '../src/globals/directives/spread')}';

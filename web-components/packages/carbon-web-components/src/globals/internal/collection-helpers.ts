@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -45,6 +45,7 @@ export const find = (
 
 /**
  * Walks through the given DOM collection and runs the given callback.
+ *
  * @param a A DOM collection.
  * @param predicate The callback function.
  * @param [thisObject] The context object for the given callback function.

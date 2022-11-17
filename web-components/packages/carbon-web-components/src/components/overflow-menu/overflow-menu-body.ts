@@ -35,6 +35,7 @@ const capIndex = (index: number, length: number) => {
 
 /**
  * Overflow menu body.
+ *
  * @element bx-overflow-menu-body
  */
 @customElement(`${prefix}-overflow-menu-body`)
@@ -59,6 +60,7 @@ class BXOverflowMenuBody extends BXFloatingMenu {
 
   /**
    * `true` if the menu should be open.
+   *
    * @private
    */
   @property({ type: Boolean, reflect: true })
@@ -81,6 +83,7 @@ class BXOverflowMenuBody extends BXFloatingMenu {
 
   /**
    * Navigates through overflow menu items.
+   *
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    */
   protected _navigate(direction: number) {
@@ -128,7 +131,9 @@ class BXOverflowMenuBody extends BXFloatingMenu {
   }
 
   render() {
-    return html`<slot></slot>`;
+    return html`
+      <slot></slot>
+    `;
   }
 
   /**

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -17,6 +17,7 @@ const { prefix } = settings;
 
 /**
  * Dropdown item.
+ *
  * @element bx-dropdown-item
  * @csspart selected-icon The selected icon.
  */
@@ -31,6 +32,7 @@ class BXDropdownItem extends LitElement {
   /**
    * `true` if this dropdown item should be highlighted.
    * If `true`, parent `<dropdown>` selects/deselects this dropdown item upon keyboard interaction.
+   *
    * @private
    */
   @property({ type: Boolean, reflect: true })
@@ -38,6 +40,7 @@ class BXDropdownItem extends LitElement {
 
   /**
    * `true` if this dropdown item should be selected.
+   *
    * @private
    */
   @property({ type: Boolean, reflect: true })

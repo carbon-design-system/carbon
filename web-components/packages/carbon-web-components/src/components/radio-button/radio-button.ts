@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -98,6 +98,7 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
 
 /**
  * Radio button.
+ *
  * @element bx-radio-button
  * @fires bx-radio-button-changed - The custom event fired after this radio button changes its checked state.
  */
@@ -253,7 +254,8 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         .checked=${checked}
         ?disabled="${disabled}"
         name=${ifNonNull(name)}
-        value=${ifNonNull(value)} />
+        value=${ifNonNull(value)}
+      />
       <label for="input" class="${prefix}--radio-button__label">
         <span class="${prefix}--radio-button__appearance"></span>
         <span class="${innerLabelClasses}"><slot>${labelText}</slot></span>

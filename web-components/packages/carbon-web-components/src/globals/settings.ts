@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -73,5 +73,4 @@ const selectorTabbable = `
 `;
 
 // Because we're going to have a bunch of exports
-// eslint-disable-next-line import/prefer-default-export
 export { selectorTabbable };

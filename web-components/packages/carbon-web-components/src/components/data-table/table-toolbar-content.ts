@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -15,6 +15,7 @@ const { prefix } = settings;
 
 /**
  * Table toolbar content.
+ *
  * @element bx-table-toolbar-content
  */
 @customElement(`${prefix}-table-toolbar-content`)
@@ -32,7 +33,9 @@ class BXTableToolbarContent extends LitElement {
   }
 
   render() {
-    return html`<slot></slot>`;
+    return html`
+      <slot></slot>
+    `;
   }
 
   static styles = styles;

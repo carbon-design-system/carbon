@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,6 +27,7 @@ const FOLLOWING = Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONT
 
 /**
  * Tries to focus on the given elements and bails out if one of them is successful.
+ *
  * @param elems The elements.
  * @param reverse `true` to go through the list in reverse order.
  * @returns `true` if one of the attempts is successful, `false` otherwise.
@@ -54,6 +55,7 @@ function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean = false)
 
 /**
  * Modal.
+ *
  * @element bx-modal
  * @csspart dialog The dialog.
  * @fires bx-modal-beingclosed
@@ -82,6 +84,7 @@ class BXModal extends HostListenerMixin(LitElement) {
 
   /**
    * Handles `click` event on this element.
+   *
    * @param event The event.
    */
   @HostListener('click')
@@ -94,6 +97,7 @@ class BXModal extends HostListenerMixin(LitElement) {
 
   /**
    * Handles `blur` event on this element.
+   *
    * @param event The event.
    */
   @HostListener('shadowRoot:focusout')
@@ -140,6 +144,7 @@ class BXModal extends HostListenerMixin(LitElement) {
 
   /**
    * Handles `click` event on the modal container.
+   *
    * @param event The event.
    */
   private _handleClickContainer(event: MouseEvent) {
@@ -150,6 +155,7 @@ class BXModal extends HostListenerMixin(LitElement) {
 
   /**
    * Handles user-initiated close request of this modal.
+   *
    * @param triggeredBy The element that triggered this close request.
    */
   private _handleUserInitiatedClose(triggeredBy: EventTarget | null) {

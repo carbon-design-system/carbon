@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -53,6 +53,7 @@ enum DATE_PICKER_MODE {
 
 /**
  * Date picker.
+ *
  * @element bx-date-picker
  * @fires bx-date-picker-changed - The custom event fired on this element when Flatpickr updates its value.
  */
@@ -238,6 +239,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
 
   /**
    * Instantiates Flatpickr.
+   *
    * @returns The Flatpickr instance.
    */
   private _instantiateDatePicker() {

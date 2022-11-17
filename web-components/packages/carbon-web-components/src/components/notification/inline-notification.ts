@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -34,6 +34,7 @@ const iconsForKinds = {
 
 /**
  * Inline notification.
+ *
  * @element bx-inline-notification
  * @slot subtitle - The subtitle.
  * @slot title - The title.
@@ -56,6 +57,7 @@ class BXInlineNotification extends FocusMixin(LitElement) {
 
   /**
    * Cancels the current timeout configured for the notification
+   *
    * @param timeoutID current timeout's identifier
    */
   protected _cancelTimeout(timeoutID: number) {
@@ -65,17 +67,19 @@ class BXInlineNotification extends FocusMixin(LitElement) {
 
   /**
    * Overrides (if exists) the timeout to close the notification
+   *
    * @param timeout the time in ms
    */
   protected _initializeTimeout(timeout: number) {
     if (this._timeoutID) {
       this._cancelTimeout(this._timeoutID);
     }
-    this._timeoutID = setTimeout(this._handleUserOrTimerInitiatedClose.bind(this, null), timeout) as unknown as number;
+    this._timeoutID = (setTimeout(this._handleUserOrTimerInitiatedClose.bind(this, null), timeout) as unknown) as number;
   }
 
   /**
    * Handles `click` event on the close button.
+   *
    * @param event The event.
    */
   protected _handleClickCloseButton({ target }: MouseEvent) {
@@ -84,6 +88,7 @@ class BXInlineNotification extends FocusMixin(LitElement) {
 
   /**
    * Handles user-initiated or through timer close request of this modal.
+   *
    * @param triggeredBy The element that triggered this close request, if there is one.
    */
   protected _handleUserOrTimerInitiatedClose(triggeredBy: EventTarget | null) {
@@ -114,7 +119,8 @@ class BXInlineNotification extends FocusMixin(LitElement) {
         class="${prefix}--${type}-notification__close-button"
         aria-label=${ifDefined(closeButtonLabel)}
         title=${ifDefined(closeButtonLabel)}
-        @click="${handleClickCloseButton}">
+        @click="${handleClickCloseButton}"
+      >
         ${Close20({
           class: `${prefix}--${type}-notification__close-icon`,
         })}

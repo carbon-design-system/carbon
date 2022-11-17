@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,6 +20,7 @@ const { prefix } = settings;
 
 /**
  * Table toolbar search.
+ *
  * @element bx-table-toolbar-search
  * @fires bx-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
@@ -49,6 +50,7 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
 
   /**
    * Handles `blur` event handler on this element.
+   *
    * @param event The event.
    */
   @HostListener('focusout')
@@ -99,7 +101,9 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
       [`${prefix}--search`]: true,
       [`${prefix}--search--${size}`]: size,
     });
-    return html` <div class="${classes}" tabindex="${expanded ? '-1' : '0'}" @click="${handleSearchClick}">${result}</div> `;
+    return html`
+      <div class="${classes}" tabindex="${expanded ? '-1' : '0'}" @click="${handleSearchClick}">${result}</div>
+    `;
   }
 
   /**

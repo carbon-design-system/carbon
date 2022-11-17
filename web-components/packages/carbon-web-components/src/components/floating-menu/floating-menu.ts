@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -44,6 +44,7 @@ export interface FloatingMenuPosition {
 
 /**
  * Observes resize of the given element with the given resize observer.
+ *
  * @param observer The resize observer.
  * @param elem The element to observe the resize.
  */

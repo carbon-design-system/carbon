@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -23,6 +23,7 @@ const { prefix } = settings;
 
 /**
  * Lnline loading spinner.
+ *
  * @element bx-inline-loading
  */
 @customElement(`${prefix}-inline-loading`)
@@ -48,7 +49,9 @@ class BXInlineLoading extends LitElement {
         [`${prefix}--loading--small`]: true,
         [`${prefix}--loading--stop`]: status === INLINE_LOADING_STATE.INACTIVE,
       });
-      return html` <div class="${classes}">${getLoadingIcon({ type: LOADING_TYPE.SMALL })}</div> `;
+      return html`
+        <div class="${classes}">${getLoadingIcon({ type: LOADING_TYPE.SMALL })}</div>
+      `;
     }
     return undefined;
   }
@@ -70,7 +73,9 @@ class BXInlineLoading extends LitElement {
     const statusIconResult = this._renderIcon();
     const statusIconWrapperResult = !statusIconResult
       ? undefined
-      : html` <div class="${prefix}--inline-loading__animation">${statusIconResult}</div> `;
+      : html`
+          <div class="${prefix}--inline-loading__animation">${statusIconResult}</div>
+        `;
     return html`
       ${statusIconWrapperResult}
       <p class="${prefix}--inline-loading__text"><slot></slot></p>
