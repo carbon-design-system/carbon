@@ -11,7 +11,6 @@ import { action } from '@storybook/addon-actions';
 import {
   Add,
   Apple,
-  ArrowUpRight,
   Fish,
   Strawberry,
   SubtractAlt,
@@ -253,8 +252,8 @@ export const UsageExamples = () => {
         action={
           <Button
             hasIconOnly
-            iconDescription="View details"
-            renderIcon={ArrowUpRight}
+            iconDescription="Add"
+            renderIcon={Add}
             tooltipPosition="left"
             kind="ghost"
           />
