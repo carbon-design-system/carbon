@@ -8,7 +8,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import Button from '../Button';
-import { Tooltip } from '../Tooltip/next';
+import { Tooltip } from '../Tooltip';
 import { usePrefix } from '../../internal/usePrefix';
 import cx from 'classnames';
 

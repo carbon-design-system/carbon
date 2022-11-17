@@ -134,9 +134,7 @@
     border-right: 1px solid $border-subtle;
   }
 
-  .#{$prefix}--pagination
-    .#{$prefix}--select__page-number
-    .#{$prefix}--select-input {
+  .#{$prefix}--pagination__right {
     border-left: 1px solid $border-subtle;
   }
 
@@ -164,6 +162,16 @@
   .#{$prefix}--pagination__right .#{$prefix}--pagination__text {
     margin-right: 1rem;
     margin-left: rem(1px);
+  }
+
+  .#{$prefix}--pagination__right
+    .#{$prefix}--pagination__text.#{$prefix}--pagination__page-text {
+    margin-right: rem(1px);
+    margin-left: 1rem;
+  }
+
+  .#{$prefix}--pagination__right .#{$prefix}--pagination__text:empty {
+    margin: 0;
   }
 
   .#{$prefix}--pagination__left {

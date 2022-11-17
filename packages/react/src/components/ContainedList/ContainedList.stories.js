@@ -90,16 +90,14 @@ export const WithInteractiveItems = () => {
   const onClick = action('onClick (ContainedListItem)');
 
   return (
-    <VStack gap={12}>
-      <ContainedList label="List title" kind="on-page">
-        <ContainedListItem onClick={onClick}>List item</ContainedListItem>
-        <ContainedListItem onClick={onClick} disabled>
-          List item
-        </ContainedListItem>
-        <ContainedListItem onClick={onClick}>List item</ContainedListItem>
-        <ContainedListItem onClick={onClick}>List item</ContainedListItem>
-      </ContainedList>
-    </VStack>
+    <ContainedList label="List title" kind="on-page">
+      <ContainedListItem onClick={onClick}>List item</ContainedListItem>
+      <ContainedListItem onClick={onClick} disabled>
+        List item
+      </ContainedListItem>
+      <ContainedListItem onClick={onClick}>List item</ContainedListItem>
+      <ContainedListItem onClick={onClick}>List item</ContainedListItem>
+    </ContainedList>
   );
 };
 
@@ -114,19 +112,17 @@ export const WithActions = () => {
   );
 
   return (
-    <VStack gap={12}>
-      <ContainedList
-        label="List title"
-        kind="on-page"
-        action={<ExpandableSearch placeholder="Find item" size="lg" />}>
-        <ContainedListItem action={itemAction}>List item</ContainedListItem>
-        <ContainedListItem action={itemAction} disabled>
-          List item
-        </ContainedListItem>
-        <ContainedListItem action={itemAction}>List item</ContainedListItem>
-        <ContainedListItem action={itemAction}>List item</ContainedListItem>
-      </ContainedList>
-    </VStack>
+    <ContainedList
+      label="List title"
+      kind="on-page"
+      action={<ExpandableSearch placeholder="Find item" size="lg" />}>
+      <ContainedListItem action={itemAction}>List item</ContainedListItem>
+      <ContainedListItem action={itemAction} disabled>
+        List item
+      </ContainedListItem>
+      <ContainedListItem action={itemAction}>List item</ContainedListItem>
+      <ContainedListItem action={itemAction}>List item</ContainedListItem>
+    </ContainedList>
   );
 };
 
@@ -142,89 +138,81 @@ export const WithInteractiveItemsAndActions = () => {
   );
 
   return (
-    <VStack gap={12}>
-      <ContainedList
-        label="List title"
-        kind="on-page"
-        action={<ExpandableSearch placeholder="Find item" size="lg" />}>
-        <ContainedListItem action={itemAction} onClick={onClick}>
-          List item
-        </ContainedListItem>
-        <ContainedListItem action={itemAction} onClick={onClick}>
-          List item
-        </ContainedListItem>
-        <ContainedListItem action={itemAction} onClick={onClick}>
-          List item
-        </ContainedListItem>
-        <ContainedListItem action={itemAction} onClick={onClick}>
-          List item
-        </ContainedListItem>
-      </ContainedList>
-    </VStack>
+    <ContainedList
+      label="List title"
+      kind="on-page"
+      action={<ExpandableSearch placeholder="Find item" size="lg" />}>
+      <ContainedListItem action={itemAction} onClick={onClick}>
+        List item
+      </ContainedListItem>
+      <ContainedListItem action={itemAction} onClick={onClick}>
+        List item
+      </ContainedListItem>
+      <ContainedListItem action={itemAction} onClick={onClick}>
+        List item
+      </ContainedListItem>
+      <ContainedListItem action={itemAction} onClick={onClick}>
+        List item
+      </ContainedListItem>
+    </ContainedList>
   );
 };
 
 export const WithListTitleDecorators = () => {
   return (
-    <VStack gap={12}>
-      <ContainedList
-        label={
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-            }}>
-            <span>List title</span>
-            <Tag size="sm">4</Tag>
-          </div>
-        }
-        kind="on-page">
-        <ContainedListItem>List item</ContainedListItem>
-        <ContainedListItem>List item</ContainedListItem>
-        <ContainedListItem>List item</ContainedListItem>
-        <ContainedListItem>List item</ContainedListItem>
-      </ContainedList>
-    </VStack>
+    <ContainedList
+      label={
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+          }}>
+          <span>List title</span>
+          <Tag size="sm">4</Tag>
+        </div>
+      }
+      kind="on-page">
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+    </ContainedList>
   );
 };
 
 export const WithIcons = () => {
   return (
-    <VStack gap={12}>
-      <ContainedList label="List title" kind="on-page">
-        <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
-        <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
-        <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
-        <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
-      </ContainedList>
-    </VStack>
+    <ContainedList label="List title" kind="on-page">
+      <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
+      <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
+      <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
+      <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
+    </ContainedList>
   );
 };
 
 export const WithLayer = () => {
   return (
-    <VStack gap={12}>
-      <VStack gap={5}>
-        <ContainedList label="List title" kind="on-page">
-          <ContainedListItem>List item</ContainedListItem>
-          <ContainedListItem>List item</ContainedListItem>
-        </ContainedList>
-        <Layer>
-          <VStack gap={5}>
+    <VStack gap={5}>
+      <ContainedList label="List title" kind="on-page">
+        <ContainedListItem>List item</ContainedListItem>
+        <ContainedListItem>List item</ContainedListItem>
+      </ContainedList>
+      <Layer>
+        <VStack gap={5}>
+          <ContainedList label="List title" kind="on-page">
+            <ContainedListItem>List item</ContainedListItem>
+            <ContainedListItem>List item</ContainedListItem>
+          </ContainedList>
+          <Layer>
             <ContainedList label="List title" kind="on-page">
               <ContainedListItem>List item</ContainedListItem>
               <ContainedListItem>List item</ContainedListItem>
             </ContainedList>
-            <Layer>
-              <ContainedList label="List title" kind="on-page">
-                <ContainedListItem>List item</ContainedListItem>
-                <ContainedListItem>List item</ContainedListItem>
-              </ContainedList>
-            </Layer>
-          </VStack>
-        </Layer>
-      </VStack>
+          </Layer>
+        </VStack>
+      </Layer>
     </VStack>
   );
 };
@@ -249,5 +237,8 @@ Playground.argTypes = {
   },
   kind: {
     defaultValue: 'on-page',
+  },
+  size: {
+    defaultValue: 'lg',
   },
 };
