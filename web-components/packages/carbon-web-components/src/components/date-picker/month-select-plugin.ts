@@ -61,12 +61,22 @@ export default (config: DatePickerMonthSelectPluginConfig): Plugin =>
      * Replaces `<select>` for month with text content.
      */
     const setupElements = () => {
-      const { monthElements, yearElements, currentMonth, l10n, _createElement: createElement } = fp;
+      const {
+        monthElements,
+        yearElements,
+        currentMonth,
+        l10n,
+        _createElement: createElement,
+      } = fp;
       if (!monthElements) {
         return;
       }
-      const { shorthand, selectorFlatpickrMonthYearContainer, selectorFlatpickrYearContainer, classFlatpickrCurrentMonth } =
-        config;
+      const {
+        shorthand,
+        selectorFlatpickrMonthYearContainer,
+        selectorFlatpickrYearContainer,
+        classFlatpickrCurrentMonth,
+      } = config;
       monthElements.forEach((elem) => {
         if (!elem.parentNode) return;
         elem.parentNode.removeChild(elem);
@@ -75,11 +85,23 @@ export default (config: DatePickerMonthSelectPluginConfig): Plugin =>
         0,
         monthElements.length,
         ...monthElements.map(() => {
-          const monthElement = createElement('span', classFlatpickrCurrentMonth);
-          monthElement.textContent = monthToStr(currentMonth, shorthand === true, l10n);
-          const monthYearContainer = yearElements[0].closest(selectorFlatpickrMonthYearContainer);
+          const monthElement = createElement(
+            'span',
+            classFlatpickrCurrentMonth
+          );
+          monthElement.textContent = monthToStr(
+            currentMonth,
+            shorthand === true,
+            l10n
+          );
+          const monthYearContainer = yearElements[0].closest(
+            selectorFlatpickrMonthYearContainer
+          );
           if (monthYearContainer) {
-            monthYearContainer.insertBefore(monthElement, yearElements[0].closest(selectorFlatpickrYearContainer));
+            monthYearContainer.insertBefore(
+              monthElement,
+              yearElements[0].closest(selectorFlatpickrYearContainer)
+            );
           }
           return monthElement;
         })
@@ -91,14 +113,25 @@ export default (config: DatePickerMonthSelectPluginConfig): Plugin =>
      */
     const updateCurrentMonth = () => {
       const { yearElements, currentMonth, l10n } = fp;
-      const { shorthand, selectorFlatpickrMonthYearContainer, selectorFlatpickrCurrentMonth } = config;
+      const {
+        shorthand,
+        selectorFlatpickrMonthYearContainer,
+        selectorFlatpickrCurrentMonth,
+      } = config;
       const monthStr = monthToStr(currentMonth, shorthand === true, l10n);
       yearElements.forEach((elem) => {
-        const currentMonthContainer = elem.closest(selectorFlatpickrMonthYearContainer);
+        const currentMonthContainer = elem.closest(
+          selectorFlatpickrMonthYearContainer
+        );
         if (currentMonthContainer) {
-          forEach(currentMonthContainer.querySelectorAll(selectorFlatpickrCurrentMonth), (monthElement) => {
-            monthElement.textContent = monthStr;
-          });
+          forEach(
+            currentMonthContainer.querySelectorAll(
+              selectorFlatpickrCurrentMonth
+            ),
+            (monthElement) => {
+              monthElement.textContent = monthStr;
+            }
+          );
         }
       });
     };

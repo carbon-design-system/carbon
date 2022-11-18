@@ -17,10 +17,17 @@
  * @param Clazz The target class.
  * @param name The method name in the given target class that works as the event listener.
  */
-const setHostListener = (type: string, options: boolean | AddEventListenerOptions, Clazz, name: string) => {
+const setHostListener = (
+  type: string,
+  options: boolean | AddEventListenerOptions,
+  Clazz,
+  name: string
+) => {
   const hostListeners = Clazz._hostListeners;
   if (!hostListeners) {
-    throw new Error('The method `@HostListener()` is defined on has to be of a class that has `HostListerMixin`.');
+    throw new Error(
+      'The method `@HostListener()` is defined on has to be of a class that has `HostListerMixin`.'
+    );
   }
   if (!hostListeners[name]) {
     hostListeners[name] = {};
@@ -36,10 +43,21 @@ const setHostListener = (type: string, options: boolean | AddEventListenerOption
  * @param descriptor The original class element descriptor of the event listener method.
  * @returns The updated class element descriptor with `@HostListener()` decorator.
  */
-const HostListenerStandard = (type: string, options: boolean | AddEventListenerOptions, descriptor) => {
+const HostListenerStandard = (
+  type: string,
+  options: boolean | AddEventListenerOptions,
+  descriptor
+) => {
   const { kind, key, placement } = descriptor;
-  if (!((kind === 'method' && placement === 'prototype') || (kind === 'field' && placement === 'own'))) {
-    throw new Error('`@HostListener()` must be defined on instance methods, but you may have defined it on static, field, etc.');
+  if (
+    !(
+      (kind === 'method' && placement === 'prototype') ||
+      (kind === 'field' && placement === 'own')
+    )
+  ) {
+    throw new Error(
+      '`@HostListener()` must be defined on instance methods, but you may have defined it on static, field, etc.'
+    );
   }
   return {
     ...descriptor,
@@ -58,9 +76,11 @@ const HostListenerStandard = (type: string, options: boolean | AddEventListenerO
  *   The event listener is attached to host element's owner document or its default view in such case.
  * @param options The event listener options.
  */
-const HostListener = (type: string, options?: boolean | AddEventListenerOptions) => (targetOrDescriptor, name: string) =>
-  typeof name !== 'undefined'
-    ? setHostListener(type, options!, targetOrDescriptor.constructor, name)
-    : HostListenerStandard(type, options!, targetOrDescriptor);
+const HostListener =
+  (type: string, options?: boolean | AddEventListenerOptions) =>
+  (targetOrDescriptor, name: string) =>
+    typeof name !== 'undefined'
+      ? setHostListener(type, options!, targetOrDescriptor.constructor, name)
+      : HostListenerStandard(type, options!, targetOrDescriptor);
 
 export default HostListener;

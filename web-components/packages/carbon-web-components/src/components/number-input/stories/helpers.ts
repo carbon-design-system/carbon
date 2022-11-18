@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,8 @@ import { NUMBER_INPUT_COLOR_SCHEME } from '../number-input';
 
 const colorSchemes = {
   Regular: null,
-  [`Light (${NUMBER_INPUT_COLOR_SCHEME.LIGHT})`]: NUMBER_INPUT_COLOR_SCHEME.LIGHT,
+  [`Light (${NUMBER_INPUT_COLOR_SCHEME.LIGHT})`]:
+    NUMBER_INPUT_COLOR_SCHEME.LIGHT,
 };
 
 const sizes = {
@@ -30,7 +31,10 @@ const createProps = ({ boolean, textNullable, number, select }) => ({
   max: number('Maximum value (max)', 100),
   step: number('Value to step the input by (step)', 1),
   size: select('Input size (size)', sizes, INPUT_SIZE.REGULAR),
-  placeholder: textNullable('Placeholder text (placeholder)', 'Optional placeholder text'),
+  placeholder: textNullable(
+    'Placeholder text (placeholder)',
+    'Optional placeholder text'
+  ),
   invalid: boolean('Invalid (invalid)', false),
   onInput: action('input'),
   mobile: boolean('Mobile mode (mobile)', false),

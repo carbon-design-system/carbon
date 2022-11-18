@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -22,7 +22,8 @@ import Add32 from 'carbon-web-components/es/icons/add/32';
 
 import storyDocs from './icon-story.mdx';
 
-export const Default = () => html` ${Add16()} ${Add20()} ${Add24()} ${Add32()} `;
+export const Default = () =>
+  html` ${Add16()} ${Add20()} ${Add24()} ${Add32()} `;
 
 Default.storyName = 'Default';
 
@@ -32,15 +33,15 @@ export const withCustomClass = () => html`
       fill: #0062ff;
     }
   </style>
-  ${Add16({ class: 'test-class' })} ${Add20({ class: 'test-class' })} ${Add24({ class: 'test-class' })}
-  ${Add32({ class: 'test-class' })}
+  ${Add16({ class: 'test-class' })} ${Add20({ class: 'test-class' })}
+  ${Add24({ class: 'test-class' })} ${Add32({ class: 'test-class' })}
 `;
 
 withCustomClass.storyName = 'With custom class';
 
 export const withAriaLabel = () => html`
-  ${Add16({ 'aria-label': 'add' })} ${Add20({ 'aria-label': 'add' })} ${Add24({ 'aria-label': 'add' })}
-  ${Add32({ 'aria-label': 'add' })}
+  ${Add16({ 'aria-label': 'add' })} ${Add20({ 'aria-label': 'add' })}
+  ${Add24({ 'aria-label': 'add' })} ${Add32({ 'aria-label': 'add' })}
 `;
 
 withAriaLabel.storyName = 'With aria-label';

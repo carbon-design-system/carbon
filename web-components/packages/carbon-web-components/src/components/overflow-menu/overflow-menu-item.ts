@@ -42,7 +42,9 @@ class BXOverflowMenuItem extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -65,7 +67,11 @@ class BXOverflowMenuItem extends FocusMixin(LitElement) {
           ></a>
         `
       : html`
-          <button class="${prefix}--overflow-menu-options__btn" ?disabled=${this.disabled} tabindex="${this.disabled ? -1 : 0}">
+          <button
+            class="${prefix}--overflow-menu-options__btn"
+            ?disabled=${this.disabled}
+            tabindex="${this.disabled ? -1 : 0}"
+          >
             <slot></slot>
           </button>
         `;

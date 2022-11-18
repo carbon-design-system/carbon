@@ -56,7 +56,9 @@ class BXLink extends FocusMixin(LitElement) {
     const { name } = target as HTMLSlotElement;
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
-      .some((node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim());
+      .some(
+        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
     this[name === 'icon' ? '_hasIcon' : ''] = hasContent;
     this.requestUpdate();
   }
@@ -90,7 +92,9 @@ class BXLink extends FocusMixin(LitElement) {
     const { _hasIcon: hasIcon, _handleSlotChange: handleSlotChange } = this;
     return html`
       <slot @slotchange="${handleSlotChange}"></slot>
-      <div ?hidden="${!hasIcon}" class="${prefix}--link__icon"><slot name="icon" @slotchange="${handleSlotChange}"></slot></div>
+      <div ?hidden="${!hasIcon}" class="${prefix}--link__icon">
+        <slot name="icon" @slotchange="${handleSlotChange}"></slot>
+      </div>
     `;
   }
 
@@ -99,14 +103,27 @@ class BXLink extends FocusMixin(LitElement) {
    */
   protected _renderDisabledLink() {
     const { _classes: classes } = this;
-    return html` <p id="link" part="link" class="${classes}">${this._renderInner()}</p> `;
+    return html`
+      <p id="link" part="link" class="${classes}">${this._renderInner()}</p>
+    `;
   }
 
   /**
    * @returns The link content.
    */
   protected _renderLink() {
-    const { download, href, hreflang, linkRole, ping, rel, target, type, _classes: classes, _handleClick: handleClick } = this;
+    const {
+      download,
+      href,
+      hreflang,
+      linkRole,
+      ping,
+      rel,
+      target,
+      type,
+      _classes: classes,
+      _handleClick: handleClick,
+    } = this;
     return html`
       <a
         id="link"
@@ -190,7 +207,9 @@ class BXLink extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 

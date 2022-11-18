@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2020
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -77,7 +77,8 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-combo-box-item[disabled]) .#{$prefix}--list-box__menu-item__option {
+:host(#{$prefix}-combo-box-item[disabled])
+  .#{$prefix}--list-box__menu-item__option {
   color: $disabled-02;
   text-decoration: none;
 }

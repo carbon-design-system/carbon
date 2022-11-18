@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,7 +27,9 @@ describe('bx-combo-box', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-combo-box')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-combo-box')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with various attributes', async function () {
@@ -46,7 +48,9 @@ describe('bx-combo-box', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-combo-box')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-combo-box')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -142,7 +146,11 @@ describe('bx-combo-box', function () {
     });
 
     it('should add/remove "selected" modifier class', async function () {
-      (document.body.querySelector('bx-combo-box-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-combo-box-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
@@ -152,13 +160,24 @@ describe('bx-combo-box', function () {
     });
 
     it('should update text', async function () {
-      (document.body.querySelector('bx-combo-box-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-combo-box-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
-      expect((elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement).value).toBe('Option 3');
+      expect(
+        (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
+          .value
+      ).toBe('Option 3');
     });
 
     it('should update value', async function () {
-      (document.body.querySelector('bx-combo-box-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-combo-box-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       expect((elem as BXComboBox).value).toBe('staging');
     });
@@ -176,17 +195,26 @@ describe('bx-combo-box', function () {
 
     it('should provide a way to cancel switching item', async function () {
       events.on(elem, 'bx-combo-box-beingselected', (event: CustomEvent) => {
-        expect(event.detail.item).toBe(document.body.querySelector('bx-combo-box-item[value="staging"]'));
+        expect(event.detail.item).toBe(
+          document.body.querySelector('bx-combo-box-item[value="staging"]')
+        );
         event.preventDefault();
       });
-      (document.body.querySelector('bx-combo-box-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-combo-box-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       expect(itemNodes[0].hasAttribute('selected')).toBe(true);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
       expect(itemNodes[2].hasAttribute('selected')).toBe(false);
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
-      expect((elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement).value).toBe('Option 1');
+      expect(
+        (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
+          .value
+      ).toBe('Option 1');
     });
 
     it('should provide a way to cancel clearing selection', async function () {
@@ -195,7 +223,11 @@ describe('bx-combo-box', function () {
         event.preventDefault();
       });
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      (elem.shadowRoot!.querySelector('.bx--list-box__selection') as HTMLElement).click();
+      (
+        elem.shadowRoot!.querySelector(
+          '.bx--list-box__selection'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       expect((elem as BXComboBox).value).toBe('all');
       expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
@@ -204,7 +236,10 @@ describe('bx-combo-box', function () {
       expect(itemNodes[2].hasAttribute('selected')).toBe(false);
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
-      expect((elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement).value).toBe('Option 1');
+      expect(
+        (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
+          .value
+      ).toBe('Option 1');
     });
 
     it('should reflect the added child to the selection', async function () {
@@ -215,7 +250,10 @@ describe('bx-combo-box', function () {
       (elem as BXComboBox).value = 'value-added';
       await delay(0); // Workaround for IE MutationObserver scheduling bug for moving elements to slot
       try {
-        expect((elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement).value).toBe('text-added');
+        expect(
+          (elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement)
+            .value
+        ).toBe('text-added');
       } finally {
         itemNode.parentNode!.removeChild(itemNode);
       }
@@ -231,7 +269,9 @@ describe('bx-combo-box', function () {
       render(template(), document.body);
       await Promise.resolve();
       elem = document.body.querySelector('bx-combo-box')!;
-      inputNode = elem.shadowRoot!.getElementById('trigger-label') as HTMLInputElement;
+      inputNode = elem.shadowRoot!.getElementById(
+        'trigger-label'
+      ) as HTMLInputElement;
       itemNodes = elem.querySelectorAll('bx-combo-box-item');
     });
 
@@ -299,7 +339,11 @@ describe('bx-combo-box', function () {
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
-      (elem.shadowRoot!.querySelector('.bx--list-box__selection') as HTMLElement).click();
+      (
+        elem.shadowRoot!.querySelector(
+          '.bx--list-box__selection'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       expect((elem as BXComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
@@ -318,7 +362,9 @@ describe('bx-combo-box', function () {
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
-      const selectionButton = elem.shadowRoot!.querySelector('.bx--list-box__selection');
+      const selectionButton = elem.shadowRoot!.querySelector(
+        '.bx--list-box__selection'
+      );
       const event = new CustomEvent('keypress', { bubbles: true });
       (event as any).key = ' ';
       selectionButton!.dispatchEvent(event);
@@ -340,7 +386,9 @@ describe('bx-combo-box', function () {
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
-      const selectionButton = elem.shadowRoot!.querySelector('.bx--list-box__selection');
+      const selectionButton = elem.shadowRoot!.querySelector(
+        '.bx--list-box__selection'
+      );
       const event = new CustomEvent('keypress', { bubbles: true });
       (event as any).key = 'Enter';
       selectionButton!.dispatchEvent(event);
@@ -359,12 +407,20 @@ describe('bx-combo-box', function () {
     it('Should support selecting an item after typing', async function () {
       (elem as BXComboBox).open = true;
       await Promise.resolve();
-      (document.body.querySelector('bx-combo-box-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-combo-box-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       inputNode.value = 'Foo';
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
-      (document.body.querySelector('bx-combo-box-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-combo-box-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);

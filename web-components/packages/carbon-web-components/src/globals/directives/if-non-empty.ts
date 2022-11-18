@@ -14,4 +14,5 @@ import { ifDefined } from 'lit-html/directives/if-defined';
  *
  * @param The value.
  */
-export default (value) => ifDefined(value === '' ? undefined : value ?? undefined);
+export default (value) =>
+  ifDefined(value === '' ? undefined : value ?? undefined);

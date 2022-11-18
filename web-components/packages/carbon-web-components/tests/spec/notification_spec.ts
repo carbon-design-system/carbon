@@ -1,14 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { render } from 'lit-html';
-import BXInlineNotification, { NOTIFICATION_KIND } from '../../src/components/notification/inline-notification';
+import BXInlineNotification, {
+  NOTIFICATION_KIND,
+} from '../../src/components/notification/inline-notification';
 import { inline } from '../../src/components/notification/notification-story';
 
 const inlineTemplate = (props?) =>
@@ -21,7 +23,9 @@ describe('bx-inline-notification', function () {
     it('Should render with minimum attributes', async function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-notification')).toMatchSnapshot({ mode: 'shadow' });
+      expect(
+        document.body.querySelector('bx-inline-notification')
+      ).toMatchSnapshot({ mode: 'shadow' });
     });
 
     it('Should render with various attributes', async function () {
@@ -38,7 +42,9 @@ describe('bx-inline-notification', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-notification')).toMatchSnapshot({ mode: 'shadow' });
+      expect(
+        document.body.querySelector('bx-inline-notification')
+      ).toMatchSnapshot({ mode: 'shadow' });
     });
   });
 
@@ -65,8 +71,12 @@ describe('bx-inline-notification', function () {
     let notification;
 
     beforeEach(async function () {
-      const initializeTimerCloseEvent = (BXInlineNotification.prototype as any)._handleUserOrTimerInitiatedClose;
-      spyOn(BXInlineNotification.prototype as any, '_initializeTimeout').and.callFake(function () {
+      const initializeTimerCloseEvent = (BXInlineNotification.prototype as any)
+        ._handleUserOrTimerInitiatedClose;
+      spyOn(
+        BXInlineNotification.prototype as any,
+        '_initializeTimeout'
+      ).and.callFake(function () {
         // TODO: See if we can get around TS2683
         // @ts-ignore
         initializeTimerCloseEvent.call(this);

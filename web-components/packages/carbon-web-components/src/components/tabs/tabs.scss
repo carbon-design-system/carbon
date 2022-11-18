@@ -133,7 +133,8 @@
   }
 }
 
-:host(#{$prefix}-tab[type='container'][disabled][role]) .#{$prefix}--tabs__nav-link {
+:host(#{$prefix}-tab[type='container'][disabled][role])
+  .#{$prefix}--tabs__nav-link {
   @include carbon--breakpoint(md) {
     color: $disabled-03;
   }

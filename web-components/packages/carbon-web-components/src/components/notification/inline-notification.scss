@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -25,7 +25,8 @@ $css--plex: true !default;
   display: flex;
 }
 
-:host(#{$prefix}-inline-notification[hide-close-button]) .#{$prefix}--inline-notification__close-button {
+:host(#{$prefix}-inline-notification[hide-close-button])
+  .#{$prefix}--inline-notification__close-button {
   display: none;
 }
 
@@ -33,7 +34,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--inline-notification--success;
 
   &[low-contrast] {
-    @extend .#{$prefix}--inline-notification--low-contrast, .#{$prefix}--inline-notification--success;
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--success;
   }
 }
 
@@ -41,7 +43,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--inline-notification--info;
 
   &[low-contrast] {
-    @extend .#{$prefix}--inline-notification--low-contrast, .#{$prefix}--inline-notification--info;
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--info;
   }
 }
 
@@ -49,7 +52,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--inline-notification--warning;
 
   &[low-contrast] {
-    @extend .#{$prefix}--inline-notification--low-contrast, .#{$prefix}--inline-notification--warning;
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--warning;
   }
 }
 
@@ -57,6 +61,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--inline-notification--error;
 
   &[low-contrast] {
-    @extend .#{$prefix}--inline-notification--low-contrast, .#{$prefix}--inline-notification--error;
+    @extend .#{$prefix}--inline-notification--low-contrast,
+      .#{$prefix}--inline-notification--error;
   }
 }

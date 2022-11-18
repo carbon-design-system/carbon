@@ -46,9 +46,14 @@ class BXTable extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has('size')) {
       // Propagate `size` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll((this.constructor as typeof BXTable).selectorRowsWithHeader), (elem) => {
-        elem.setAttribute('size', this.size);
-      });
+      forEach(
+        this.querySelectorAll(
+          (this.constructor as typeof BXTable).selectorRowsWithHeader
+        ),
+        (elem) => {
+          elem.setAttribute('size', this.size);
+        }
+      );
     }
   }
 

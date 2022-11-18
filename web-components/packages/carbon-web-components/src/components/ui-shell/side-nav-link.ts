@@ -35,7 +35,10 @@ class BXSideNavLink extends FocusMixin(LitElement) {
    * Handles `slotchange` event on the `<slot>` for the title icon.
    */
   private _handleSlotChangeTitleIcon({ target }) {
-    this._titleIconContainerNode?.toggleAttribute('hidden', target.assignedNodes().length === 0);
+    this._titleIconContainerNode?.toggleAttribute(
+      'hidden',
+      target.assignedNodes().length === 0
+    );
   }
 
   /**
@@ -59,7 +62,9 @@ class BXSideNavLink extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -71,15 +76,28 @@ class BXSideNavLink extends FocusMixin(LitElement) {
   }
 
   render() {
-    const { active, href, title, _handleSlotChangeTitleIcon: handleSlotChangeTitleIcon } = this;
+    const {
+      active,
+      href,
+      title,
+      _handleSlotChangeTitleIcon: handleSlotChangeTitleIcon,
+    } = this;
     const classes = classMap({
       [`${prefix}--side-nav__link`]: true,
       [`${prefix}--side-nav__link--current`]: active,
     });
     return html`
       <a part="link" class="${classes}" href="${href}">
-        <div id="title-icon-container" part="title-icon-container" hidden class="${prefix}--side-nav__icon">
-          <slot name="title-icon" @slotchange=${handleSlotChangeTitleIcon}></slot>
+        <div
+          id="title-icon-container"
+          part="title-icon-container"
+          hidden
+          class="${prefix}--side-nav__icon"
+        >
+          <slot
+            name="title-icon"
+            @slotchange=${handleSlotChangeTitleIcon}
+          ></slot>
         </div>
         <span part="title" class="${prefix}--side-nav__link-text">
           <slot>${title}</slot>

@@ -11,7 +11,10 @@ import { html, property, query, customElement, LitElement } from 'lit-element';
 import flatpickr from 'flatpickr';
 import { Instance as FlatpickrInstance } from 'flatpickr/dist/types/instance';
 import { Locale as FlatpickrLocale } from 'flatpickr/dist/types/locale';
-import { Options as FlatpickrOptions, Plugin as FlatpickrPlugin } from 'flatpickr/dist/types/options';
+import {
+  Options as FlatpickrOptions,
+  Plugin as FlatpickrPlugin,
+} from 'flatpickr/dist/types/options';
 import settings from 'carbon-components/es/globals/js/settings';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -79,7 +82,8 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    * @returns The effective date picker mode, determined by the child `<bx-date-picker-input>`.
    */
   private get _mode() {
-    const { selectorInputFrom, selectorInputTo } = this.constructor as typeof BXDatePicker;
+    const { selectorInputFrom, selectorInputTo } = this
+      .constructor as typeof BXDatePicker;
     if (this.querySelector(selectorInputTo)) {
       return DATE_PICKER_MODE.RANGE;
     }
@@ -114,7 +118,10 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       _classFlatpickrCurrentMonth: classFlatpickrCurrentMonth,
       _classFlatpickrToday: classFlatpickrToday,
     } = this.constructor as typeof BXDatePicker;
-    const { _floatingMenuContainerNode: floatingMenuContainerNode, _mode: mode } = this;
+    const {
+      _floatingMenuContainerNode: floatingMenuContainerNode,
+      _mode: mode,
+    } = this;
     const inputFrom = this.querySelector(selectorInputFrom);
     const inputTo = this.querySelector(selectorInputTo);
     const plugins = [
@@ -134,8 +141,14 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         selectorFlatpickrDay,
         classFlatpickrToday,
       }),
-      fixEventsPlugin({ inputFrom: inputFrom as BXDatePickerInput, inputTo: inputTo as BXDatePickerInput }),
-      focusPlugin({ inputFrom: inputFrom as BXDatePickerInput, inputTo: inputTo as BXDatePickerInput }),
+      fixEventsPlugin({
+        inputFrom: inputFrom as BXDatePickerInput,
+        inputTo: inputTo as BXDatePickerInput,
+      }),
+      focusPlugin({
+        inputFrom: inputFrom as BXDatePickerInput,
+        inputTo: inputTo as BXDatePickerInput,
+      }),
       iconPlugin(),
       monthSelectPlugin({
         selectorFlatpickrMonthYearContainer,
@@ -172,10 +185,14 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     // We use `<bx-date-picker-input>` to communicate values/events with Flatpickr,
     // but want to use `<input>` in shadow DOM to base the calendar dropdown's position on
     const { input: positionElement } = dateInteractNode!;
-    const [minDate = undefined, maxDate = undefined] = !enabledRange ? [] : enabledRange.split('/');
+    const [minDate = undefined, maxDate = undefined] = !enabledRange
+      ? []
+      : enabledRange.split('/');
     return {
       allowInput: true,
-      dateFormat: this.dateFormat ?? (this.constructor as typeof BXDatePicker).defaultDateFormat,
+      dateFormat:
+        this.dateFormat ??
+        (this.constructor as typeof BXDatePicker).defaultDateFormat,
       disableMobile: true,
       errorHandler: handleFlatpickrError,
       locale,
@@ -192,7 +209,9 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   @HostListener('eventChange')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleChange = ({ detail }: CustomEvent) => {
-    this._value = detail.selectedDates.map((date) => getISODateString(date)).join('/');
+    this._value = detail.selectedDates
+      .map((date) => getISODateString(date))
+      .join('/');
   };
 
   _handleFormdata(event: Event) {
@@ -213,7 +232,9 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       .find(
         (node) =>
           node.nodeType === Node.ELEMENT_NODE &&
-          (node as HTMLElement).matches((this.constructor as typeof BXDatePicker).selectorInputFrom)
+          (node as HTMLElement).matches(
+            (this.constructor as typeof BXDatePicker).selectorInputFrom
+          )
       );
     if (oldDateInteractNode !== dateInteractNode) {
       this._dateInteractNode = dateInteractNode as BXDatePickerInput;
@@ -226,14 +247,17 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
    */
   private _handleFlatpickrError = (error: Error) => {
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXDatePicker).eventFlatpickrError, {
-        bubbles: true,
-        cancelable: false,
-        composed: true,
-        detail: {
-          error,
-        },
-      })
+      new CustomEvent(
+        (this.constructor as typeof BXDatePicker).eventFlatpickrError,
+        {
+          bubbles: true,
+          cancelable: false,
+          composed: true,
+          detail: {
+            error,
+          },
+        }
+      )
     );
   };
 
@@ -248,7 +272,10 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     // `this._dateInteractNode` won't be there unless there is a slotted `<bx-date-input type="from">`,
     // which means Flatpickr will never be instantiated in "simple" mode.
     if (dateInteractNode && dateInteractNode.input) {
-      this.calendar = flatpickr(dateInteractNode as any, this._datePickerOptions);
+      this.calendar = flatpickr(
+        dateInteractNode as any,
+        this._datePickerOptions
+      );
     }
     return this.calendar;
   }
@@ -331,8 +358,11 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
 
   updated(changedProperties) {
     const { calendar, disabled, open } = this;
-    const { selectorInputFrom, selectorInputTo } = this.constructor as typeof BXDatePicker;
-    const inputFrom = this.querySelector(selectorInputFrom) as BXDatePickerInput;
+    const { selectorInputFrom, selectorInputTo } = this
+      .constructor as typeof BXDatePicker;
+    const inputFrom = this.querySelector(
+      selectorInputFrom
+    ) as BXDatePickerInput;
     const inputTo = this.querySelector(selectorInputTo) as BXDatePickerInput;
     if (calendar && changedProperties.has('dateFormat')) {
       const { dateFormat } = this;
@@ -340,10 +370,14 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
     }
     if (changedProperties.has('enabledRange')) {
       const { enabledRange } = this;
-      const dates = enabledRange.split('/').map((item) => (!item ? undefined : parseISODateString(item))); // Allows empty start/end
+      const dates = enabledRange
+        .split('/')
+        .map((item) => (!item ? undefined : parseISODateString(item))); // Allows empty start/end
       if (dates.some((item) => Boolean(item && isNaN(Number(item))))) {
         // Allows empty start/end
-        throw new Error(`Wrong date format found in \`enabledRange\` property: ${enabledRange}`);
+        throw new Error(
+          `Wrong date format found in \`enabledRange\` property: ${enabledRange}`
+        );
       }
       const [minDate, maxDate] = dates;
       if (minDate && maxDate && minDate > maxDate) {
@@ -376,17 +410,26 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
         .filter(Boolean)
         .map((item) => parseISODateString(item));
       if (dates.some((item) => isNaN(Number(item)))) {
-        throw new Error(`Wrong date format found in \`value\` property: ${value}`);
+        throw new Error(
+          `Wrong date format found in \`value\` property: ${value}`
+        );
       }
       const [startDate, endDate] = dates;
       if (startDate && endDate && startDate > endDate) {
-        throw new Error(`In \`value\` property, the end date shouldn't be smaller than the start date. You have: ${value}`);
+        throw new Error(
+          `In \`value\` property, the end date shouldn't be smaller than the start date. You have: ${value}`
+        );
       }
       if (calendar) {
         calendar.setDate(dates);
         [inputFrom, inputTo].forEach((input, i) => {
           if (input) {
-            input.value = !dates[i] ? '' : calendar.formatDate(new Date(dates[i]), calendar.config.dateFormat);
+            input.value = !dates[i]
+              ? ''
+              : calendar.formatDate(
+                  new Date(dates[i]),
+                  calendar.config.dateFormat
+                );
           }
         });
       }
@@ -396,17 +439,26 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   render() {
     const { _handleSlotChange: handleSlotChange } = this;
     return html`
-      <a class="${prefix}--visually-hidden" href="javascript:void 0" role="navigation"></a>
+      <a
+        class="${prefix}--visually-hidden"
+        href="javascript:void 0"
+        role="navigation"
+      ></a>
       <slot @slotchange="${handleSlotChange}"></slot>
       <div id="floating-menu-container"></div>
-      <a class="${prefix}--visually-hidden" href="javascript:void 0" role="navigation"></a>
+      <a
+        class="${prefix}--visually-hidden"
+        href="javascript:void 0"
+        role="navigation"
+      ></a>
     `;
   }
 
   /**
    * The CSS selector for Flatpickr's month/year portion.
    */
-  private static _selectorFlatpickrMonthYearContainer = '.flatpickr-current-month';
+  private static _selectorFlatpickrMonthYearContainer =
+    '.flatpickr-current-month';
 
   /**
    * The CSS selector for Flatpickr's year portion.

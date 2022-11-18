@@ -113,7 +113,9 @@ export default (config: DatePickerCSSClassPluginConfig): Plugin =>
         if (month) {
           month.classList.add(classMonth);
         }
-        const weekdays = calendarContainer.querySelector(selectorFlatpickrWeekdays);
+        const weekdays = calendarContainer.querySelector(
+          selectorFlatpickrWeekdays
+        );
         if (weekdays) {
           weekdays.classList.add(classWeekdays);
         }
@@ -121,18 +123,30 @@ export default (config: DatePickerCSSClassPluginConfig): Plugin =>
         if (days) {
           days.classList.add(classDays);
         }
-        forEach(calendarContainer.querySelectorAll(selectorFlatpickrWeekday), (item) => {
-          item.innerHTML = item.innerHTML.replace(/\s+/g, '');
-          item.classList.add(classWeekday);
-        });
-        forEach(calendarContainer.querySelectorAll(selectorFlatpickrDay), (item) => {
-          item.classList.add(classDay);
-          if (item.classList.contains(classFlatpickrToday) && selectedDates!.length > 0) {
-            item.classList.add(classNoBorder);
-          } else if (item.classList.contains(classFlatpickrToday) && selectedDates!.length === 0) {
-            item.classList.remove(classNoBorder);
+        forEach(
+          calendarContainer.querySelectorAll(selectorFlatpickrWeekday),
+          (item) => {
+            item.innerHTML = item.innerHTML.replace(/\s+/g, '');
+            item.classList.add(classWeekday);
           }
-        });
+        );
+        forEach(
+          calendarContainer.querySelectorAll(selectorFlatpickrDay),
+          (item) => {
+            item.classList.add(classDay);
+            if (
+              item.classList.contains(classFlatpickrToday) &&
+              selectedDates!.length > 0
+            ) {
+              item.classList.add(classNoBorder);
+            } else if (
+              item.classList.contains(classFlatpickrToday) &&
+              selectedDates!.length === 0
+            ) {
+              item.classList.remove(classNoBorder);
+            }
+          }
+        );
       }
     };
 

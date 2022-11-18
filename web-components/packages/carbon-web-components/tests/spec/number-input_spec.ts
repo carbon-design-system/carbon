@@ -57,7 +57,9 @@ describe('bx-number-input', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-number-input')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-number-input')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -77,7 +79,11 @@ describe('bx-number-input', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -99,7 +105,11 @@ describe('bx-number-input', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -214,7 +224,9 @@ describe('bx-number-input', function () {
       events.on(elem, 'bx-number-input', spyInput);
       (elem.shadowRoot!.querySelector('button.up-icon') as HTMLElement).click();
       expect(Number(input.value)).toEqual(initialValue + stepSize);
-      expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(initialValue + stepSize);
+      expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(
+        initialValue + stepSize
+      );
     });
 
     it('should decrement values upon user gesture', async function () {
@@ -223,9 +235,13 @@ describe('bx-number-input', function () {
       const stepSize = Number(input.step);
       const spyInput = jasmine.createSpy('input');
       events.on(elem, 'bx-number-input', spyInput);
-      (elem.shadowRoot!.querySelector('button.down-icon') as HTMLElement).click();
+      (
+        elem.shadowRoot!.querySelector('button.down-icon') as HTMLElement
+      ).click();
       expect(Number(input.value)).toEqual(initialValue - stepSize);
-      expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(initialValue - stepSize);
+      expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(
+        initialValue - stepSize
+      );
     });
 
     it('should increment values by the step amount', async function () {

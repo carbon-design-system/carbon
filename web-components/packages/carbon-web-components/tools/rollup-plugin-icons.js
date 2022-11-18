@@ -17,7 +17,10 @@ const createSVGResultCarbonIcon = require('./svg-result-carbon-icon');
  * @param {RegExp} [options.exclude] The files to exclude.
  * @returns {object} The rollup plugin to transform an `.svg` file to a `lit-html` template.
  */
-function rollupPluginIcons({ include = /@carbon[\\/]icons[\\/]/i, exclude } = {}) {
+function rollupPluginIcons({
+  include = /@carbon[\\/]icons[\\/]/i,
+  exclude,
+} = {}) {
   const filter = createFilter(include, exclude);
   return {
     name: 'lit-scss',
@@ -50,7 +53,10 @@ function rollupPluginIcons({ include = /@carbon[\\/]icons[\\/]/i, exclude } = {}
 
       const code = [
         `import { svg } from 'lit-html'`,
-        `import spread from '${path.resolve(__dirname, '../src/globals/directives/spread')}';`,
+        `import spread from '${path.resolve(
+          __dirname,
+          '../src/globals/directives/spread'
+        )}';`,
         `const svgResultCarbonIcon = ${createSVGResultCarbonIcon(svg)};`,
         `export default svgResultCarbonIcon;`,
       ].join(';');

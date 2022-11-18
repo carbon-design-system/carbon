@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -23,7 +23,8 @@
   opacity: 0;
   visibility: hidden;
   transition: background-color $duration--slow-02 motion(exit, expressive),
-    opacity $duration--moderate-02 motion(exit, expressive), z-index $duration--slow-02 motion(exit, expressive),
+    opacity $duration--moderate-02 motion(exit, expressive),
+    z-index $duration--slow-02 motion(exit, expressive),
     visibility $duration--moderate-02 motion(exit, expressive);
 
   .#{$prefix}--text-input,
@@ -131,7 +132,8 @@
   &,
   &:first-of-type {
     .#{$prefix}--btn:focus {
-      box-shadow: inset 0 0 0 $button-outline-width $focus, inset 0 0 0 $button-border-width $ui-background;
+      box-shadow: inset 0 0 0 $button-outline-width $focus,
+        inset 0 0 0 $button-border-width $ui-background;
     }
   }
 }

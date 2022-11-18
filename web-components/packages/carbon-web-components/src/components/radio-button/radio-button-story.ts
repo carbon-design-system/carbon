@@ -18,17 +18,22 @@ import './radio-button-skeleton';
 import storyDocs from './radio-button-story.mdx';
 
 const orientations = {
-  [`Horizontal (${RADIO_BUTTON_ORIENTATION.HORIZONTAL})`]: RADIO_BUTTON_ORIENTATION.HORIZONTAL,
-  [`Vertical (${RADIO_BUTTON_ORIENTATION.VERTICAL})`]: RADIO_BUTTON_ORIENTATION.VERTICAL,
+  [`Horizontal (${RADIO_BUTTON_ORIENTATION.HORIZONTAL})`]:
+    RADIO_BUTTON_ORIENTATION.HORIZONTAL,
+  [`Vertical (${RADIO_BUTTON_ORIENTATION.VERTICAL})`]:
+    RADIO_BUTTON_ORIENTATION.VERTICAL,
 };
 
 const labelPositions = {
-  [`Left (${RADIO_BUTTON_LABEL_POSITION.LEFT})`]: RADIO_BUTTON_LABEL_POSITION.LEFT,
-  [`Right (${RADIO_BUTTON_LABEL_POSITION.RIGHT})`]: RADIO_BUTTON_LABEL_POSITION.RIGHT,
+  [`Left (${RADIO_BUTTON_LABEL_POSITION.LEFT})`]:
+    RADIO_BUTTON_LABEL_POSITION.LEFT,
+  [`Right (${RADIO_BUTTON_LABEL_POSITION.RIGHT})`]:
+    RADIO_BUTTON_LABEL_POSITION.RIGHT,
 };
 
 export const Default = (args) => {
-  const { disabled, labelPosition, orientation, name, value, onChange } = args?.['bx-radio-button-group'] ?? {};
+  const { disabled, labelPosition, orientation, name, value, onChange } =
+    args?.['bx-radio-button-group'] ?? {};
   const { hideLabel, labelText } = args?.['bx-radio-button'] ?? {};
   return html`
     <bx-radio-button-group
@@ -39,9 +44,21 @@ export const Default = (args) => {
       value="${ifNonNull(value)}"
       @bx-radio-button-group-changed="${onChange}"
     >
-      <bx-radio-button ?hide-label="${hideLabel}" label-text="${ifNonNull(labelText)}" value="all"></bx-radio-button>
-      <bx-radio-button ?hide-label="${hideLabel}" label-text="${ifNonNull(labelText)}" value="cloudFoundry"></bx-radio-button>
-      <bx-radio-button ?hide-label="${hideLabel}" label-text="${ifNonNull(labelText)}" value="staging"></bx-radio-button>
+      <bx-radio-button
+        ?hide-label="${hideLabel}"
+        label-text="${ifNonNull(labelText)}"
+        value="all"
+      ></bx-radio-button>
+      <bx-radio-button
+        ?hide-label="${hideLabel}"
+        label-text="${ifNonNull(labelText)}"
+        value="cloudFoundry"
+      ></bx-radio-button>
+      <bx-radio-button
+        ?hide-label="${hideLabel}"
+        label-text="${ifNonNull(labelText)}"
+        value="staging"
+      ></bx-radio-button>
     </bx-radio-button-group>
   `;
 };
@@ -52,8 +69,16 @@ Default.parameters = {
   knobs: {
     'bx-radio-button-group': () => ({
       disabled: boolean('Disabled (disabled)', false),
-      labelPosition: select('Label position (label-position)', labelPositions, RADIO_BUTTON_LABEL_POSITION.RIGHT),
-      orientation: select('Orientation (orientation)', orientations, RADIO_BUTTON_ORIENTATION.HORIZONTAL),
+      labelPosition: select(
+        'Label position (label-position)',
+        labelPositions,
+        RADIO_BUTTON_LABEL_POSITION.RIGHT
+      ),
+      orientation: select(
+        'Orientation (orientation)',
+        orientations,
+        RADIO_BUTTON_ORIENTATION.HORIZONTAL
+      ),
       name: textNullable('Name (name)', 'radio-group'),
       value: textNullable('Value (value)', ''),
       onChange: action('bx-radio-button-group-changed'),
@@ -65,7 +90,8 @@ Default.parameters = {
   },
 };
 
-export const skeleton = () => html` <bx-radio-button-skeleton></bx-radio-button-skeleton> `;
+export const skeleton = () =>
+  html` <bx-radio-button-skeleton></bx-radio-button-skeleton> `;
 
 skeleton.parameters = {
   percy: {

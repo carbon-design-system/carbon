@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -9,7 +9,8 @@
 // "Compact" table size variant
 //
 
-:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='compact']),
+:host(#{$prefix}-table-head)
+  ::slotted(#{$prefix}-table-header-row[size='compact']),
 :host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='compact']) {
   height: rem(24px);
 }
@@ -26,7 +27,8 @@
 // "Short" table size variant
 //
 
-:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='short']),
+:host(#{$prefix}-table-head)
+  ::slotted(#{$prefix}-table-header-row[size='short']),
 :host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='short']) {
   height: rem(32px);
 }
@@ -43,7 +45,8 @@
 // "Tall" table size variant
 //
 
-:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='tall']),
+:host(#{$prefix}-table-head)
+  ::slotted(#{$prefix}-table-header-row[size='tall']),
 :host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='tall']) {
   height: rem(64px);
 }

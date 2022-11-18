@@ -73,7 +73,9 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   /**
    * The handle for the throttled listener of `pointermove` event.
    */
-  private _throttledHandlePointermoveImpl: (((event: PointerEvent) => void) & Cancelable) | null = null;
+  private _throttledHandlePointermoveImpl:
+    | (((event: PointerEvent) => void) & Cancelable)
+    | null = null;
 
   /**
    * `true` if dragging of thumb is in progress.
@@ -87,13 +89,21 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private get _rate() {
     const { max, min, value } = this;
     // Copes with out-of-range value coming programmatically or from `<bx-slider-input>`
-    return (Math.min(Number(max), Math.max(Number(min), value)) - Number(min)) / (Number(max) - Number(min));
+    return (
+      (Math.min(Number(max), Math.max(Number(min), value)) - Number(min)) /
+      (Number(max) - Number(min))
+    );
   }
 
   private set _rate(rate: number) {
     const { max, min, step } = this;
     this.value =
-      Number(min) + Math.round(((Number(max) - Number(min)) * Math.min(1, Math.max(0, rate))) / Number(step)) * Number(step);
+      Number(min) +
+      Math.round(
+        ((Number(max) - Number(min)) * Math.min(1, Math.max(0, rate))) /
+          Number(step)
+      ) *
+        Number(step);
   }
 
   /**
@@ -129,15 +139,28 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private _handleKeydown({ key, shiftKey }: KeyboardEvent) {
     if (!this.disabled) {
       if (key in THUMB_DIRECTION) {
-        const { max: rawMax, min: rawMin, step: rawStep, stepRatio: rawStepRatio, value } = this;
+        const {
+          max: rawMax,
+          min: rawMin,
+          step: rawStep,
+          stepRatio: rawStepRatio,
+          value,
+        } = this;
         const max = Number(rawMax);
         const min = Number(rawMin);
         const step = Number(rawStep);
         const stepRatio = Number(rawStepRatio);
-        const diff = (!shiftKey ? step : (max - min) / stepRatio) * THUMB_DIRECTION[key];
+        const diff =
+          (!shiftKey ? step : (max - min) / stepRatio) * THUMB_DIRECTION[key];
         const stepCount = (value + diff) / step;
         // Snaps to next
-        this.value = Math.min(max, Math.max(min, (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step));
+        this.value = Math.min(
+          max,
+          Math.max(
+            min,
+            (diff >= 0 ? Math.floor(stepCount) : Math.ceil(stepCount)) * step
+          )
+        );
         this.dispatchEvent(
           new CustomEvent((this.constructor as typeof BXSlider).eventChange, {
             bubbles: true,
@@ -166,10 +189,17 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private _handleClick(event: PointerEvent) {
     if (!this.disabled) {
       const { _trackNode: trackNode } = this;
-      const isRtl = trackNode.ownerDocument!.defaultView!.getComputedStyle(trackNode).getPropertyValue('direction') === 'rtl';
+      const isRtl =
+        trackNode
+          .ownerDocument!.defaultView!.getComputedStyle(trackNode)
+          .getPropertyValue('direction') === 'rtl';
       const thumbPosition = event.clientX;
-      const { left: trackLeft, width: trackWidth } = trackNode.getBoundingClientRect();
-      this._rate = (isRtl ? trackLeft + trackWidth - thumbPosition : thumbPosition - trackLeft) / trackWidth;
+      const { left: trackLeft, width: trackWidth } =
+        trackNode.getBoundingClientRect();
+      this._rate =
+        (isRtl
+          ? trackLeft + trackWidth - thumbPosition
+          : thumbPosition - trackLeft) / trackWidth;
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof BXSlider).eventChange, {
           bubbles: true,
@@ -204,10 +234,17 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   private _handlePointermoveImpl(event: PointerEvent) {
     const { disabled, _dragging: dragging, _trackNode: trackNode } = this;
     if (!disabled && dragging) {
-      const isRtl = trackNode.ownerDocument!.defaultView!.getComputedStyle(trackNode).getPropertyValue('direction') === 'rtl';
+      const isRtl =
+        trackNode
+          .ownerDocument!.defaultView!.getComputedStyle(trackNode)
+          .getPropertyValue('direction') === 'rtl';
       const thumbPosition = event.clientX;
-      const { left: trackLeft, width: trackWidth } = this._trackNode.getBoundingClientRect();
-      this._rate = (isRtl ? trackLeft + trackWidth - thumbPosition : thumbPosition - trackLeft) / trackWidth;
+      const { left: trackLeft, width: trackWidth } =
+        this._trackNode.getBoundingClientRect();
+      this._rate =
+        (isRtl
+          ? trackLeft + trackWidth - thumbPosition
+          : thumbPosition - trackLeft) / trackWidth;
       this.dispatchEvent(
         new CustomEvent((this.constructor as typeof BXSlider).eventChange, {
           bubbles: true,
@@ -358,14 +395,19 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   connectedCallback() {
     super.connectedCallback();
     if (!this._throttledHandlePointermoveImpl) {
-      this._throttledHandlePointermoveImpl = throttle(this._handlePointermoveImpl, 10);
+      this._throttledHandlePointermoveImpl = throttle(
+        this._handlePointermoveImpl,
+        10
+      );
     }
   }
 
@@ -378,7 +420,9 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   }
 
   shouldUpdate(changedProperties) {
-    const input = this.querySelector((this.constructor as typeof BXSlider).selectorInput) as BXSliderInput;
+    const input = this.querySelector(
+      (this.constructor as typeof BXSlider).selectorInput
+    ) as BXSliderInput;
     if (changedProperties.has('disabled')) {
       if (input) {
         input.disabled = this.disabled;
@@ -451,7 +495,10 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
           ></div>
           <div id="track" class="${prefix}--slider__track"></div>
           <div class="${prefix}-ce--slider__filled-track-container">
-            <div class="${prefix}--slider__filled-track" style="transform: translate(0%, -50%) scaleX(${rate})"></div>
+            <div
+              class="${prefix}--slider__filled-track"
+              style="transform: translate(0%, -50%) scaleX(${rate})"
+            ></div>
           </div>
           <input
             class="${prefix}--slider__input"

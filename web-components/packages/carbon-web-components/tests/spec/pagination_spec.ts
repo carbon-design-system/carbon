@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,7 +26,9 @@ describe('bx-pagination', function () {
     it('should render <bx-pagination> with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-pagination')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-pagination')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render <bx-pagination> with various attributes', async function () {
@@ -39,21 +41,27 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-pagination')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-pagination')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render <bx-page-sizes-select> with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve(); // Update cycle for `<bx-pagination>`
       await Promise.resolve(); // Update cycle for `<bx-page-sizes-select>`
-      expect(document.body.querySelector('bx-page-sizes-select')).toMatchSnapshot({ mode: 'shadow' });
+      expect(
+        document.body.querySelector('bx-page-sizes-select')
+      ).toMatchSnapshot({ mode: 'shadow' });
     });
 
     it('should render <bx-pages-select> with minimum attributes', async function () {
       render(template({ total: 100 }), document.body);
       await Promise.resolve(); // Update cycle for `<bx-pagination>`
       await Promise.resolve(); // Update cycle for `<bx-pages-select>`
-      expect(document.body.querySelector('bx-pages-select')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-pages-select')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -68,7 +76,9 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const textContentNode = document.body.querySelector('bx-pagination')!.shadowRoot!.querySelector('.bx--pagination__text');
+      const textContentNode = document.body
+        .querySelector('bx-pagination')!
+        .shadowRoot!.querySelector('.bx--pagination__text');
       expect(textContentNode!.textContent!.trim()).toBe('1–1 of 1 item');
     });
 
@@ -82,7 +92,9 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const textContentNode = document.body.querySelector('bx-pagination')!.shadowRoot!.querySelector('.bx--pagination__text');
+      const textContentNode = document.body
+        .querySelector('bx-pagination')!
+        .shadowRoot!.querySelector('.bx--pagination__text');
       expect(textContentNode!.textContent!.trim()).toBe('Item 11–30');
     });
 
@@ -97,7 +109,9 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const textContentNode = document.body.querySelector('bx-pagination')!.shadowRoot!.querySelector('.bx--pagination__text');
+      const textContentNode = document.body
+        .querySelector('bx-pagination')!
+        .shadowRoot!.querySelector('.bx--pagination__text');
       expect(textContentNode!.textContent!.trim()).toBe('Item 31–');
     });
   });
@@ -106,32 +120,44 @@ describe('bx-pagination', function () {
     it('should propagate `pageSize` property to `<bx-page-sizes-select>`', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
       paginationNode.pageSize = 20;
       await Promise.resolve();
-      const pageSizesSelectNode = document.body.querySelector('bx-page-sizes-select') as BXPageSizesSelect;
+      const pageSizesSelectNode = document.body.querySelector(
+        'bx-page-sizes-select'
+      ) as BXPageSizesSelect;
       expect(pageSizesSelectNode.value).toBe(20);
     });
 
     it('should propagate the current page to `<bx-pages-select>`', async function () {
       render(template({ total: 100 }), document.body);
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
       paginationNode.pageSize = 5;
       paginationNode.start = 21;
       await Promise.resolve();
-      const pagesSelectNode = document.body.querySelector('bx-pages-select') as BXPagesSelect;
+      const pagesSelectNode = document.body.querySelector(
+        'bx-pages-select'
+      ) as BXPagesSelect;
       expect(pagesSelectNode.value).toBe(4);
     });
 
     it('should propagate the total pages to `<bx-pages-select>`', async function () {
       render(template({ total: 100 }), document.body);
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
       paginationNode.pageSize = 5;
       paginationNode.total = 21;
       await Promise.resolve();
-      const pagesSelectNode = document.body.querySelector('bx-pages-select') as BXPagesSelect;
+      const pagesSelectNode = document.body.querySelector(
+        'bx-pages-select'
+      ) as BXPagesSelect;
       expect(pagesSelectNode.total).toBe(5);
     });
 
@@ -147,12 +173,18 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
       paginationNode.pageSize = 5;
       await Promise.resolve(); // Update in `<bx-pagination>`
       await Promise.resolve(); // Update in `<bx-pages-select>`
-      const pagesSelectNode = document.body.querySelector('bx-pages-select') as BXPagesSelect;
-      expect(pagesSelectNode.shadowRoot!.querySelector('select')!.value).toBe('38');
+      const pagesSelectNode = document.body.querySelector(
+        'bx-pages-select'
+      ) as BXPagesSelect;
+      expect(pagesSelectNode.shadowRoot!.querySelector('select')!.value).toBe(
+        '38'
+      );
     });
   });
 
@@ -167,10 +199,16 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
-      events.on(paginationNode, 'bx-pagination-changed-current', (event: CustomEvent) => {
-        newStart = event.detail.start;
-      });
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
+      events.on(
+        paginationNode,
+        'bx-pagination-changed-current',
+        (event: CustomEvent) => {
+          newStart = event.detail.start;
+        }
+      );
       paginationNode.shadowRoot!.querySelectorAll('button')[0].click();
       expect(paginationNode.start).toBe(10);
       expect(newStart).toBe(10);
@@ -186,10 +224,16 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
-      events.on(paginationNode, 'bx-pagination-changed-current', (event: CustomEvent) => {
-        newStart = event.detail.start;
-      });
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
+      events.on(
+        paginationNode,
+        'bx-pagination-changed-current',
+        (event: CustomEvent) => {
+          newStart = event.detail.start;
+        }
+      );
       paginationNode.shadowRoot!.querySelectorAll('button')[0].click();
       expect(paginationNode.start).toBe(0);
       expect(newStart).toBe(0);
@@ -204,7 +248,9 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
       const spyChanged = jasmine.createSpy('changed');
       events.on(paginationNode, 'bx-pagination-changed-current', spyChanged);
       // Prev button should be disabled when `start` indicates that we are at the first page,
@@ -225,10 +271,16 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
-      events.on(paginationNode, 'bx-pagination-changed-current', (event: CustomEvent) => {
-        newStart = event.detail.start;
-      });
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
+      events.on(
+        paginationNode,
+        'bx-pagination-changed-current',
+        (event: CustomEvent) => {
+          newStart = event.detail.start;
+        }
+      );
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(30);
       expect(newStart).toBe(30);
@@ -244,7 +296,9 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
       const spyChanged = jasmine.createSpy('changed');
       events.on(paginationNode, 'bx-pagination-changed-current', spyChanged);
       // Next button should be disabled when `start` indicates that we are at the last page,
@@ -265,7 +319,9 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
       const spyChanged = jasmine.createSpy('changed');
       events.on(paginationNode, 'bx-pagination-changed-current', spyChanged);
       // Next button should be disabled when `start` indicates that we are at the last page,
@@ -287,10 +343,16 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
-      events.on(paginationNode, 'bx-pagination-changed-current', (event: CustomEvent) => {
-        newStart = event.detail.start;
-      });
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
+      events.on(
+        paginationNode,
+        'bx-pagination-changed-current',
+        (event: CustomEvent) => {
+          newStart = event.detail.start;
+        }
+      );
       paginationNode.shadowRoot!.querySelectorAll('button')[1].click();
       expect(paginationNode.start).toBe(35);
       expect(newStart).toBe(35);
@@ -299,9 +361,18 @@ describe('bx-pagination', function () {
     it('should support user-initiated change in page size', async function () {
       render(template({ total: 100 }), document.body);
       await Promise.resolve();
-      const pagesSelectNode = document.body.querySelector('bx-pages-select') as BXPagesSelect;
-      pagesSelectNode.dispatchEvent(new CustomEvent('bx-page-sizes-select-changed', { bubbles: true, detail: { value: 5 } }));
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
+      const pagesSelectNode = document.body.querySelector(
+        'bx-pages-select'
+      ) as BXPagesSelect;
+      pagesSelectNode.dispatchEvent(
+        new CustomEvent('bx-page-sizes-select-changed', {
+          bubbles: true,
+          detail: { value: 5 },
+        })
+      );
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
       expect(paginationNode.pageSize).toBe(5);
     });
 
@@ -309,12 +380,25 @@ describe('bx-pagination', function () {
       let newStart;
       render(template({ pageSize: 10, total: 100 }), document.body);
       await Promise.resolve();
-      const paginationNode = document.body.querySelector('bx-pagination') as BXPagination;
-      events.on(paginationNode, 'bx-pagination-changed-current', (event: CustomEvent) => {
-        newStart = event.detail.start;
-      });
-      const pagesSelectNode = document.body.querySelector('bx-pages-select') as BXPagesSelect;
-      pagesSelectNode.dispatchEvent(new CustomEvent('bx-pages-select-changed', { bubbles: true, detail: { value: 3 } }));
+      const paginationNode = document.body.querySelector(
+        'bx-pagination'
+      ) as BXPagination;
+      events.on(
+        paginationNode,
+        'bx-pagination-changed-current',
+        (event: CustomEvent) => {
+          newStart = event.detail.start;
+        }
+      );
+      const pagesSelectNode = document.body.querySelector(
+        'bx-pages-select'
+      ) as BXPagesSelect;
+      pagesSelectNode.dispatchEvent(
+        new CustomEvent('bx-pages-select-changed', {
+          bubbles: true,
+          detail: { value: 3 },
+        })
+      );
       expect(paginationNode.start).toBe(30);
       expect(newStart).toBe(30);
     });

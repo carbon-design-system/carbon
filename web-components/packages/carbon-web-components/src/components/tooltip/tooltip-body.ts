@@ -61,7 +61,10 @@ class BXTooltipBody extends BXFloatingMenu {
     const position = super.position;
     const { direction: positionDirection, start, top } = position;
 
-    if (direction === FLOATING_MENU_DIRECTION.TOP || direction === FLOATING_MENU_DIRECTION.BOTTOM) {
+    if (
+      direction === FLOATING_MENU_DIRECTION.TOP ||
+      direction === FLOATING_MENU_DIRECTION.BOTTOM
+    ) {
       if (alignment === FLOATING_MENU_ALIGNMENT.START) {
         position.start -= 16;
       }
@@ -71,7 +74,10 @@ class BXTooltipBody extends BXFloatingMenu {
       }
     }
 
-    if (direction === FLOATING_MENU_DIRECTION.RIGHT || direction === FLOATING_MENU_DIRECTION.LEFT) {
+    if (
+      direction === FLOATING_MENU_DIRECTION.RIGHT ||
+      direction === FLOATING_MENU_DIRECTION.LEFT
+    ) {
       if (alignment === FLOATING_MENU_ALIGNMENT.START) {
         position.top -= 16;
       }
@@ -85,7 +91,11 @@ class BXTooltipBody extends BXFloatingMenu {
       const style = this.ownerDocument!.defaultView!.getComputedStyle(this);
       const margin = Number(
         (/^([\d-.]+)px$/.exec(
-          style.getPropertyValue(positionDirection !== FLOATING_MENU_POSITION_DIRECTION.RTL ? 'margin-right' : 'margin-left')
+          style.getPropertyValue(
+            positionDirection !== FLOATING_MENU_POSITION_DIRECTION.RTL
+              ? 'margin-right'
+              : 'margin-left'
+          )
         ) || [])[1]
       );
       if (!isNaN(margin)) {
@@ -100,7 +110,9 @@ class BXTooltipBody extends BXFloatingMenu {
 
     if (direction === FLOATING_MENU_DIRECTION.TOP) {
       const style = this.ownerDocument!.defaultView!.getComputedStyle(this);
-      const margin = Number((/^([\d-.]+)px$/.exec(style.getPropertyValue('margin-bottom')) || [])[1]);
+      const margin = Number(
+        (/^([\d-.]+)px$/.exec(style.getPropertyValue('margin-bottom')) || [])[1]
+      );
       if (!isNaN(margin)) {
         // For direction === DIRECTION_BOTTOM, the left/top margin the caret size effectively adjusts the position,
         // but for direction === DIRECTION_TOP such thing won't happen

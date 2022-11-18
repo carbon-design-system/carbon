@@ -34,14 +34,8 @@
     "build": "gulp build && yarn wca",
     "build:dist": "gulp build:dist",
     "build:dist:dev": "gulp build:dist:dev",
-    "ci-check": "yarn wca && yarn format:diff && yarn lint:src && yarn typecheck && yarn build && yarn test:unit && yarn lint:dist",
+    "ci-check": "yarn wca && && yarn typecheck && yarn build && yarn test:unit",
     "clean": "gulp clean",
-    "format": "prettier --write \"**/*.{css,js,json,md,scss,ts}\"",
-    "format:diff": "prettier --check \"**/*.{css,js,json,md,scss,ts}\"",
-    "format:staged": "prettier --write",
-    "lint": "yarn lint:src",
-    "lint:scripts": "eslint --ext .js,.ts,.tsx .",
-    "lint:src": "yarn lint:scripts",
     "reset": "yarn cache clean && yarn clean && rimraf node_modules && yarn install && yarn build",
     "start": "yarn storybook",
     "storybook": "start-storybook -p 9000",
@@ -216,11 +210,5 @@
     "webpack-dev-server": "^4.0.0",
     "zone.js": "~0.11.0"
   },
-  "typings": "es/index.d.ts",
-  "prettier": {
-    "jsxBracketSameLine": true,
-    "printWidth": 130,
-    "singleQuote": true,
-    "trailingComma": "es5"
-  }
+  "typings": "es/index.d.ts"
 }

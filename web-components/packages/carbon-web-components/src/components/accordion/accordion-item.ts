@@ -78,9 +78,21 @@ class BXAccordionItem extends FocusMixin(LitElement) {
         open,
       },
     };
-    if (this.dispatchEvent(new CustomEvent((this.constructor as typeof BXAccordionItem).eventBeforeToggle, init))) {
+    if (
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof BXAccordionItem).eventBeforeToggle,
+          init
+        )
+      )
+    ) {
       this.open = open;
-      this.dispatchEvent(new CustomEvent((this.constructor as typeof BXAccordionItem).eventToggle, init));
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof BXAccordionItem).eventToggle,
+          init
+        )
+      );
     }
   }
 
@@ -105,14 +117,19 @@ class BXAccordionItem extends FocusMixin(LitElement) {
    */
   // TODO: Wait for `.d.ts` update to support `ResizeObserver`
   // @ts-ignore
-  private _resizeObserver = new ResizeObserver((records: ResizeObserverEntry[]) => {
-    const { width } = records[records.length - 1].contentRect;
-    const { _sizesBreakpoints: sizesBreakpoints } = this.constructor as typeof BXAccordionItem;
-    this._currentBreakpoint = Object.keys(sizesBreakpoints)
-      .sort((lhs, rhs) => sizesBreakpoints[rhs] - sizesBreakpoints[lhs])
-      .find((size) => width >= sizesBreakpoints[size]) as ACCORDION_ITEM_BREAKPOINT;
-    this.requestUpdate();
-  });
+  private _resizeObserver = new ResizeObserver(
+    (records: ResizeObserverEntry[]) => {
+      const { width } = records[records.length - 1].contentRect;
+      const { _sizesBreakpoints: sizesBreakpoints } = this
+        .constructor as typeof BXAccordionItem;
+      this._currentBreakpoint = Object.keys(sizesBreakpoints)
+        .sort((lhs, rhs) => sizesBreakpoints[rhs] - sizesBreakpoints[lhs])
+        .find(
+          (size) => width >= sizesBreakpoints[size]
+        ) as ACCORDION_ITEM_BREAKPOINT;
+      this.requestUpdate();
+    }
+  );
 
   /**
    * `true` if the accordion item should be disabled.
@@ -158,7 +175,8 @@ class BXAccordionItem extends FocusMixin(LitElement) {
       _handleClickExpando: handleClickExpando,
       _handleKeydownExpando: handleKeydownExpando,
     } = this;
-    const { _classesBreakpoints: classesBreakpoints } = this.constructor as typeof BXAccordionItem;
+    const { _classesBreakpoints: classesBreakpoints } = this
+      .constructor as typeof BXAccordionItem;
     const { [currentBreakpoint!]: classBreakpoint } = classesBreakpoints;
     const contentClasses = classMap({
       [classBreakpoint]: classBreakpoint,
@@ -179,9 +197,13 @@ class BXAccordionItem extends FocusMixin(LitElement) {
           part: 'expando-icon',
           class: `${prefix}--accordion__arrow`,
         })}
-        <div part="title" class="${prefix}--accordion__title"><slot name="title">${titleText}</slot></div>
+        <div part="title" class="${prefix}--accordion__title">
+          <slot name="title">${titleText}</slot>
+        </div>
       </button>
-      <div id="content" part="content" class="${contentClasses}"><slot></slot></div>
+      <div id="content" part="content" class="${contentClasses}">
+        <slot></slot>
+      </div>
     `;
   }
 

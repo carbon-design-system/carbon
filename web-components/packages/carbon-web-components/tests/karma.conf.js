@@ -22,13 +22,23 @@ function normalizeBrowser(browser) {
 }
 
 module.exports = function setupKarma(config) {
-  const { browsers, collectCoverage, noPruneShapshot, specs, random, updateSnapshot, useExperimentalFeatures, verbose } =
-    config.customConfig;
+  const {
+    browsers,
+    collectCoverage,
+    noPruneShapshot,
+    specs,
+    random,
+    updateSnapshot,
+    useExperimentalFeatures,
+    verbose,
+  } = config.customConfig;
 
   config.set({
     basePath: '..',
 
-    browsers: (browsers.length > 0 ? browsers : ['ChromeHeadless']).map(normalizeBrowser),
+    browsers: (browsers.length > 0 ? browsers : ['ChromeHeadless']).map(
+      normalizeBrowser
+    ),
 
     frameworks: ['jasmine', 'snapshot'],
 
@@ -91,7 +101,10 @@ module.exports = function setupKarma(config) {
             ? {}
             : {
                 test: /\.[jt]s$/,
-                exclude: [__dirname, path.resolve(__dirname, '../node_modules')],
+                exclude: [
+                  __dirname,
+                  path.resolve(__dirname, '../node_modules'),
+                ],
                 enforce: 'post',
                 use: {
                   loader: 'istanbul-instrumenter-loader',
@@ -108,7 +121,9 @@ module.exports = function setupKarma(config) {
               path.dirname(require.resolve('lit-element')),
               path.dirname(require.resolve('@webcomponents/custom-elements')),
               // `ShadyCSS` NPM package is missing its entry point file
-              path.dirname(require.resolve('@webcomponents/shadycss/scoping-shim.min.js')),
+              path.dirname(
+                require.resolve('@webcomponents/shadycss/scoping-shim.min.js')
+              ),
               path.dirname(require.resolve('@webcomponents/shadydom')),
               path.resolve(__dirname, '..', 'src/polyfills'),
             ],
@@ -146,7 +161,9 @@ module.exports = function setupKarma(config) {
                   implementation: sass,
                   webpackImporter: false,
                   sassOptions: {
-                    includePaths: [path.resolve(__dirname, '..', 'node_modules')],
+                    includePaths: [
+                      path.resolve(__dirname, '..', 'node_modules'),
+                    ],
                   },
                 },
               },

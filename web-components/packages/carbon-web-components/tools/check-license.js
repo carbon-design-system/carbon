@@ -16,7 +16,12 @@ const reLicense = require('./license-text');
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
-const { currentYear, reLicenseTextCurrentYear, reLicenseTextSingleYear, reLicenseTextRange } = reLicense;
+const {
+  currentYear,
+  reLicenseTextCurrentYear,
+  reLicenseTextSingleYear,
+  reLicenseTextRange,
+} = reLicense;
 
 /**
  * Checks files with the given paths for valid license text.
@@ -32,12 +37,22 @@ const check = async (paths, { testCurrentYear, writeCurrentYear }) => {
     await Promise.all(
       paths.map(async (item) => {
         const contents = await readFile(item, 'utf8');
-        const result = (testCurrentYear || writeCurrentYear ? reLicenseTextCurrentYear : reLicense).test(contents);
+        const result = (
+          testCurrentYear || writeCurrentYear
+            ? reLicenseTextCurrentYear
+            : reLicense
+        ).test(contents);
         if (!result) {
           if (writeCurrentYear) {
             const newContents = contents
-              .replace(reLicenseTextSingleYear, (match) => `${match}, ${currentYear}`)
-              .replace(reLicenseTextRange, (match, token) => `${token}${currentYear}`);
+              .replace(
+                reLicenseTextSingleYear,
+                (match) => `${match}, ${currentYear}`
+              )
+              .replace(
+                reLicenseTextRange,
+                (match, token) => `${token}${currentYear}`
+              );
             if (!reLicenseTextCurrentYear.test(newContents)) {
               return item;
             }
@@ -51,13 +66,21 @@ const check = async (paths, { testCurrentYear, writeCurrentYear }) => {
     )
   ).filter(Boolean);
   if (filesWithErrors.length > 0) {
-    throw new Error(`Cannot find license text in: ${filesWithErrors.join(', ')}`);
+    throw new Error(
+      `Cannot find license text in: ${filesWithErrors.join(', ')}`
+    );
   }
 };
 
 const { args, ...options } = commander
-  .option('-c, --test-current-year', 'Ensures the license header represents the current year')
-  .option('-w, --write-current-year', 'Updates the license header to represent the current year')
+  .option(
+    '-c, --test-current-year',
+    'Ensures the license header represents the current year'
+  )
+  .option(
+    '-w, --write-current-year',
+    'Updates the license header to represent the current year'
+  )
   .parse(process.argv);
 check(args, options).then(
   () => {

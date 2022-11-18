@@ -10,7 +10,10 @@
 import { html, render } from 'lit-html';
 import EventManager from '../utils/event-manager';
 
-import BXInput, { INPUT_COLOR_SCHEME, INPUT_TYPE } from '../../src/components/input/input';
+import BXInput, {
+  INPUT_COLOR_SCHEME,
+  INPUT_TYPE,
+} from '../../src/components/input/input';
 import { Default } from '../../src/components/input/input-story';
 
 /**
@@ -60,7 +63,9 @@ describe('bx-input', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-input')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-input')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -79,7 +84,11 @@ describe('bx-input', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -101,7 +110,11 @@ describe('bx-input', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);

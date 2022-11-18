@@ -74,7 +74,10 @@ class BXInlineNotification extends FocusMixin(LitElement) {
     if (this._timeoutID) {
       this._cancelTimeout(this._timeoutID);
     }
-    this._timeoutID = setTimeout(this._handleUserOrTimerInitiatedClose.bind(this, null), timeout) as unknown as number;
+    this._timeoutID = setTimeout(
+      this._handleUserOrTimerInitiatedClose.bind(this, null),
+      timeout
+    ) as unknown as number;
   }
 
   /**
@@ -101,9 +104,21 @@ class BXInlineNotification extends FocusMixin(LitElement) {
           triggeredBy,
         },
       };
-      if (this.dispatchEvent(new CustomEvent((this.constructor as typeof BXInlineNotification).eventBeforeClose, init))) {
+      if (
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof BXInlineNotification).eventBeforeClose,
+            init
+          )
+        )
+      ) {
         this.open = false;
-        this.dispatchEvent(new CustomEvent((this.constructor as typeof BXInlineNotification).eventClose, init));
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof BXInlineNotification).eventClose,
+            init
+          )
+        );
       }
     }
   }
@@ -112,7 +127,11 @@ class BXInlineNotification extends FocusMixin(LitElement) {
    * @returns The template part for the close button.
    */
   protected _renderButton() {
-    const { closeButtonLabel, _type: type, _handleClickCloseButton: handleClickCloseButton } = this;
+    const {
+      closeButtonLabel,
+      _type: type,
+      _handleClickCloseButton: handleClickCloseButton,
+    } = this;
     return html`
       <button
         type="button"
@@ -135,8 +154,12 @@ class BXInlineNotification extends FocusMixin(LitElement) {
     const { subtitle, title, _type: type } = this;
     return html`
       <div class="${prefix}--${type}-notification__text-wrapper">
-        <p class="${prefix}--${type}-notification__title">${title}<slot name="title"></slot></p>
-        <div class="${prefix}--${type}-notification__subtitle">${subtitle}<slot name="subtitle"></slot></div>
+        <p class="${prefix}--${type}-notification__title">
+          ${title}<slot name="title"></slot>
+        </p>
+        <div class="${prefix}--${type}-notification__subtitle">
+          ${subtitle}<slot name="subtitle"></slot>
+        </div>
         <slot></slot>
       </div>
     `;
@@ -233,7 +256,9 @@ class BXInlineNotification extends FocusMixin(LitElement) {
   render() {
     const { _type: type } = this;
     return html`
-      <div class="${prefix}--${type}-notification__details">${this._renderIcon()}${this._renderText()}</div>
+      <div class="${prefix}--${type}-notification__details">
+        ${this._renderIcon()}${this._renderText()}
+      </div>
       ${this._renderButton()}
     `;
   }

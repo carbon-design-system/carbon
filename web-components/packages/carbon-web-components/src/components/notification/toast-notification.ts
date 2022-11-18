@@ -34,9 +34,15 @@ class BXToastNotification extends BXInlineNotification {
     const { caption, subtitle, title, _type: type } = this;
     return html`
       <div class="${prefix}--${type}-notification__details">
-        <h3 class="${prefix}--${type}-notification__title">${title}<slot name="title"></slot></h3>
-        <div class="${prefix}--${type}-notification__subtitle">${subtitle}<slot name="subtitle"></slot></div>
-        <div class="${prefix}--${type}-notification__caption">${caption}<slot name="caption"></slot></div>
+        <h3 class="${prefix}--${type}-notification__title">
+          ${title}<slot name="title"></slot>
+        </h3>
+        <div class="${prefix}--${type}-notification__subtitle">
+          ${subtitle}<slot name="subtitle"></slot>
+        </div>
+        <div class="${prefix}--${type}-notification__caption">
+          ${caption}<slot name="caption"></slot>
+        </div>
         <slot></slot>
       </div>
     `;
@@ -52,7 +58,9 @@ class BXToastNotification extends BXInlineNotification {
     const { _type: type } = this;
     return html`
       ${this._renderIcon()}
-      <div class="${prefix}--${type}-notification__details">${this._renderText()}</div>
+      <div class="${prefix}--${type}-notification__details">
+        ${this._renderText()}
+      </div>
       ${this._renderButton()}
     `;
   }

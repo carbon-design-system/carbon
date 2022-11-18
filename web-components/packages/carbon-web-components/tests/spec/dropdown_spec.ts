@@ -27,7 +27,9 @@ describe('bx-dropdown', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-dropdown')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-dropdown')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with various attributes', async function () {
@@ -44,7 +46,9 @@ describe('bx-dropdown', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-dropdown')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-dropdown')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -128,7 +132,11 @@ describe('bx-dropdown', function () {
     });
 
     it('should add/remove "selected" modifier class', async function () {
-      (document.body.querySelector('bx-dropdown-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-dropdown-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
@@ -138,13 +146,23 @@ describe('bx-dropdown', function () {
     });
 
     it('should update text', async function () {
-      (document.body.querySelector('bx-dropdown-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-dropdown-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
-      expect(elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent).toBe('Option 3');
+      expect(
+        elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent
+      ).toBe('Option 3');
     });
 
     it('should update value', async function () {
-      (document.body.querySelector('bx-dropdown-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-dropdown-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       expect((elem as BXDropdown).value).toBe('staging');
     });
@@ -162,17 +180,25 @@ describe('bx-dropdown', function () {
 
     it('should provide a way to cancel switching item', async function () {
       events.on(elem, 'bx-dropdown-beingselected', (event: CustomEvent) => {
-        expect(event.detail.item).toBe(document.body.querySelector('bx-dropdown-item[value="staging"]'));
+        expect(event.detail.item).toBe(
+          document.body.querySelector('bx-dropdown-item[value="staging"]')
+        );
         event.preventDefault();
       });
-      (document.body.querySelector('bx-dropdown-item[value="staging"]') as HTMLElement).click();
+      (
+        document.body.querySelector(
+          'bx-dropdown-item[value="staging"]'
+        ) as HTMLElement
+      ).click();
       await Promise.resolve();
       expect(itemNodes[0].hasAttribute('selected')).toBe(true);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
       expect(itemNodes[2].hasAttribute('selected')).toBe(false);
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
-      expect(elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent).toBe('Option 1');
+      expect(
+        elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent
+      ).toBe('Option 1');
     });
 
     it('should reflect the added child to the selection', async function () {
@@ -183,7 +209,9 @@ describe('bx-dropdown', function () {
       (elem as BXDropdown).value = 'value-added';
       await delay(0); // Workaround for IE MutationObserver scheduling bug for moving elements to slot
       try {
-        expect(elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent).toBe('text-added');
+        expect(
+          elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent
+        ).toBe('text-added');
       } finally {
         itemNode.parentNode!.removeChild(itemNode);
       }

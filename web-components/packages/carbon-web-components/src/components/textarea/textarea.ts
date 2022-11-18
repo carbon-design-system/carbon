@@ -167,12 +167,16 @@ export default class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
-    const invalidIcon = WarningFilled16({ class: `${prefix}--text-area__invalid-icon` });
+    const invalidIcon = WarningFilled16({
+      class: `${prefix}--text-area__invalid-icon`,
+    });
 
     const textareaClasses = classMap({
       [`${prefix}--text-area`]: true,
@@ -195,7 +199,10 @@ export default class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
       <label class="${labelClasses}" for="input">
         <slot name="label-text"> ${this.labelText} </slot>
       </label>
-      <div class="${prefix}--text-area__wrapper" ?data-invalid="${this.invalid}">
+      <div
+        class="${prefix}--text-area__wrapper"
+        ?data-invalid="${this.invalid}"
+      >
         ${this.invalid ? invalidIcon : null}
         <textarea
           ?autocomplete="${this.autocomplete}"

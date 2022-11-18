@@ -14,8 +14,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--structured-list-thead;
 }
 
-:host(#{$prefix}-structured-list-head) ::slotted(#{$prefix}-structured-list-header-row) {
-  @extend .#{$prefix}--structured-list-row, .#{$prefix}--structured-list-row--header-row;
+:host(#{$prefix}-structured-list-head)
+  ::slotted(#{$prefix}-structured-list-header-row) {
+  @extend .#{$prefix}--structured-list-row,
+    .#{$prefix}--structured-list-row--header-row;
 }
 
 :host(#{$prefix}-structured-list-header-row) {
@@ -25,7 +27,8 @@ $css--plex: true !default;
   }
 }
 
-.#{$prefix}--structured-list ::slotted(#{$prefix}-structured-list-header-cell[nowrap]) {
+.#{$prefix}--structured-list
+  ::slotted(#{$prefix}-structured-list-header-cell[nowrap]) {
   @extend .#{$prefix}--structured-list-content--nowrap;
 }
 
@@ -33,7 +36,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--structured-list-tbody;
 }
 
-:host(#{$prefix}-structured-list-body) ::slotted(#{$prefix}-structured-list-row) {
+:host(#{$prefix}-structured-list-body)
+  ::slotted(#{$prefix}-structured-list-row) {
   @extend .#{$prefix}--structured-list-row;
 }
 
@@ -41,16 +45,20 @@ $css--plex: true !default;
   fill: $ibm-color__gray-40;
 }
 
-:host(#{$prefix}-structured-list-row) ::slotted(#{$prefix}-structured-list-cell) {
+:host(#{$prefix}-structured-list-row)
+  ::slotted(#{$prefix}-structured-list-cell) {
   @extend .#{$prefix}--structured-list-td;
 }
 
-:host(#{$prefix}-structured-list-row) ::slotted(#{$prefix}-structured-list-cell[nowrap]) {
+:host(#{$prefix}-structured-list-row)
+  ::slotted(#{$prefix}-structured-list-cell[nowrap]) {
   @extend .#{$prefix}--structured-list-content--nowrap;
 }
 
 // "Selected" style with `.bx--structured-list-td` does not work somehow - Need investigation
-.#{$prefix}--structured-list-input:checked + .#{$prefix}--structured-list-cell .#{$prefix}--structured-list-svg {
+.#{$prefix}--structured-list-input:checked
+  + .#{$prefix}--structured-list-cell
+  .#{$prefix}--structured-list-svg {
   fill: $text-01;
 }
 

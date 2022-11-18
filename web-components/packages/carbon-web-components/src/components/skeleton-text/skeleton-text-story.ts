@@ -20,7 +20,9 @@ const types = {
 
 export const Default = (args) => {
   const { type } = args?.['bx-skeleton-text'] ?? {};
-  return html` <bx-skeleton-text type="${ifNonNull(type)}"></bx-skeleton-text> `;
+  return html`
+    <bx-skeleton-text type="${ifNonNull(type)}"></bx-skeleton-text>
+  `;
 };
 
 Default.storyName = 'Default';
@@ -39,7 +41,9 @@ export const lines = () => html`
   <bx-skeleton-text type="line"></bx-skeleton-text>
 `;
 
-lines.decorators = [(story) => html` <div style="width:300px">${story()}</div> `];
+lines.decorators = [
+  (story) => html` <div style="width:300px">${story()}</div> `,
+];
 
 export default {
   title: 'Components/Skeleton text',

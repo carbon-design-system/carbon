@@ -26,7 +26,9 @@ const { prefix } = settings;
  * @element bx-filter-tag
  */
 @customElement(`${prefix}-filter-tag`)
-export default class BXFilterTag extends HostListenerMixin(FocusMixin(LitElement)) {
+export default class BXFilterTag extends HostListenerMixin(
+  FocusMixin(LitElement)
+) {
   @query('button')
   protected _buttonNode!: HTMLButtonElement;
 
@@ -50,9 +52,21 @@ export default class BXFilterTag extends HostListenerMixin(FocusMixin(LitElement
             triggeredBy: event.target,
           },
         };
-        if (this.dispatchEvent(new CustomEvent((this.constructor as typeof BXFilterTag).eventBeforeClose, init))) {
+        if (
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof BXFilterTag).eventBeforeClose,
+              init
+            )
+          )
+        ) {
           this.open = false;
-          this.dispatchEvent(new CustomEvent((this.constructor as typeof BXFilterTag).eventClose, init));
+          this.dispatchEvent(
+            new CustomEvent(
+              (this.constructor as typeof BXFilterTag).eventClose,
+              init
+            )
+          );
         }
       }
     }
@@ -92,7 +106,9 @@ export default class BXFilterTag extends HostListenerMixin(FocusMixin(LitElement
     const { disabled } = this;
     return html`
       <slot></slot>
-      <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>${Close16({ 'aria-label': this.title })}</button>
+      <button class="${prefix}--tag__close-icon" ?disabled=${disabled}>
+        ${Close16({ 'aria-label': this.title })}
+      </button>
     `;
   }
 

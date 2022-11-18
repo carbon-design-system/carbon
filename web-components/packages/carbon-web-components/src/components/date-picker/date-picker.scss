@@ -66,7 +66,8 @@ $css--plex: true !default;
   outline: none;
 }
 
-:host(#{$prefix}-date-picker-input[color-scheme='light']) .#{$prefix}--date-picker__input {
+:host(#{$prefix}-date-picker-input[color-scheme='light'])
+  .#{$prefix}--date-picker__input {
   background: $field-02;
 }
 

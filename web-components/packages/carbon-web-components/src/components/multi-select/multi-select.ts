@@ -8,14 +8,28 @@
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { html, property, query, customElement, TemplateResult } from 'lit-element';
+import {
+  html,
+  property,
+  query,
+  customElement,
+  TemplateResult,
+} from 'lit-element';
 import Close16 from '@carbon/icons/lib/close/16';
-import { filter, forEach, indexOf } from '../../globals/internal/collection-helpers';
+import {
+  filter,
+  forEach,
+  indexOf,
+} from '../../globals/internal/collection-helpers';
 import BXDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
 import BXMultiSelectItem from './multi-select-item';
 import styles from './multi-select.scss';
 
-export { DROPDOWN_COLOR_SCHEME, DROPDOWN_SIZE, DROPDOWN_TYPE } from '../dropdown/dropdown';
+export {
+  DROPDOWN_COLOR_SCHEME,
+  DROPDOWN_SIZE,
+  DROPDOWN_TYPE,
+} from '../dropdown/dropdown';
 
 const { prefix } = settings;
 
@@ -75,17 +89,26 @@ class BXMultiSelect extends BXDropdown {
   protected _selectionDidChange(itemToSelect?: BXMultiSelectItem) {
     if (itemToSelect) {
       itemToSelect.selected = !itemToSelect.selected;
-      this._assistiveStatusText = itemToSelect.selected ? this.selectedItemAssistiveText : this.unselectedItemAssistiveText;
+      this._assistiveStatusText = itemToSelect.selected
+        ? this.selectedItemAssistiveText
+        : this.unselectedItemAssistiveText;
     } else {
-      forEach(this.querySelectorAll((this.constructor as typeof BXMultiSelect).selectorItemSelected), (item) => {
-        (item as BXMultiSelectItem).selected = false;
-      });
+      forEach(
+        this.querySelectorAll(
+          (this.constructor as typeof BXMultiSelect).selectorItemSelected
+        ),
+        (item) => {
+          (item as BXMultiSelectItem).selected = false;
+        }
+      );
       this._handleUserInitiatedToggle(false);
       this._assistiveStatusText = this.unselectedAllAssistiveText;
     }
     // Change in `.selected` hasn't been reflected to the corresponding attribute yet
     this.value = filter(
-      this.querySelectorAll((this.constructor as typeof BXMultiSelect).selectorItem),
+      this.querySelectorAll(
+        (this.constructor as typeof BXMultiSelect).selectorItem
+      ),
       (item) => (item as BXMultiSelectItem).selected
     )
       .map((item) => (item as BXMultiSelectItem).value)
@@ -104,7 +127,10 @@ class BXMultiSelect extends BXDropdown {
       this._handleUserInitiatedClearInput();
     } else {
       const shouldIgnoreClickInner = (elem) =>
-        elem.closest && elem.closest((this.constructor as typeof BXMultiSelect).selectorIgnoreClickInner);
+        elem.closest &&
+        elem.closest(
+          (this.constructor as typeof BXMultiSelect).selectorIgnoreClickInner
+        );
       if (!event.composedPath().some(shouldIgnoreClickInner)) {
         super._handleClickInner(event);
       }
@@ -162,7 +188,9 @@ class BXMultiSelect extends BXDropdown {
         case 'Enter':
           {
             const constructor = this.constructor as typeof BXDropdown;
-            const highlightedItem = this.querySelector(constructor.selectorItemHighlighted) as BXMultiSelectItem;
+            const highlightedItem = this.querySelector(
+              constructor.selectorItemHighlighted
+            ) as BXMultiSelectItem;
             if (highlightedItem) {
               this._handleUserInitiatedSelectItem(highlightedItem);
             } else {
@@ -177,7 +205,8 @@ class BXMultiSelect extends BXDropdown {
   }
 
   protected _renderPrecedingTriggerContent() {
-    const { clearSelectionLabel, _selectedItemsCount: selectedItemsCount } = this;
+    const { clearSelectionLabel, _selectedItemsCount: selectedItemsCount } =
+      this;
     return selectedItemsCount === 0
       ? undefined
       : html`
@@ -188,7 +217,8 @@ class BXMultiSelect extends BXDropdown {
             tabindex="0"
             title="${clearSelectionLabel}"
           >
-            ${selectedItemsCount} ${Close16({ 'aria-label': clearSelectionLabel })}
+            ${selectedItemsCount}
+            ${Close16({ 'aria-label': clearSelectionLabel })}
           </div>
         `;
   }
@@ -199,7 +229,11 @@ class BXMultiSelect extends BXDropdown {
   protected _renderTriggerContent(): TemplateResult {
     const { triggerContent, _selectedItemContent: selectedItemContent } = this;
     return !this.filterable
-      ? html` <span id="trigger-label" class="${prefix}--list-box__label">${selectedItemContent || triggerContent}</span> `
+      ? html`
+          <span id="trigger-label" class="${prefix}--list-box__label"
+            >${selectedItemContent || triggerContent}</span
+          >
+        `
       : html`
           <input
             id="trigger-label"
@@ -215,9 +249,17 @@ class BXMultiSelect extends BXDropdown {
 
   protected _renderFollowingTriggerContent(): TemplateResult | void {
     const { clearSelectionLabel, _filterInputNode: filterInputNode } = this;
-    return filterInputNode && filterInputNode.value.length > 0 && this.filterable
+    return filterInputNode &&
+      filterInputNode.value.length > 0 &&
+      this.filterable
       ? html`
-          <div id="clear-button" role="button" class="${prefix}--list-box__selection" tabindex="0" title="${clearSelectionLabel}">
+          <div
+            id="clear-button"
+            role="button"
+            class="${prefix}--list-box__selection"
+            tabindex="0"
+            title="${clearSelectionLabel}"
+          >
             ${Close16({ 'aria-label': clearSelectionLabel })}
           </div>
         `
@@ -228,7 +270,9 @@ class BXMultiSelect extends BXDropdown {
    * Handles `input` event on the `<input>` for filtering.
    */
   protected _handleInput() {
-    const items = this.querySelectorAll((this.constructor as typeof BXMultiSelect).selectorItem);
+    const items = this.querySelectorAll(
+      (this.constructor as typeof BXMultiSelect).selectorItem
+    );
     const inputValue = this._filterInputNode.value.toLocaleLowerCase();
 
     if (!this.open) this.open = true;
@@ -260,7 +304,9 @@ class BXMultiSelect extends BXDropdown {
       // only navigate through remaining item
       const constructor = this.constructor as typeof BXMultiSelect;
       const items = this.querySelectorAll(constructor.selectorItemResults);
-      const highlightedItem = this.querySelector(constructor.selectorItemHighlighted);
+      const highlightedItem = this.querySelector(
+        constructor.selectorItemHighlighted
+      );
       const highlightedIndex = indexOf(items, highlightedItem!);
 
       let nextIndex = highlightedIndex + direction;
@@ -321,9 +367,13 @@ class BXMultiSelect extends BXDropdown {
       // Updates selection beforehand because our rendering logic for `<bx-multi-select>` looks for selected items via `qSA()`
       const items = this.querySelectorAll(selectorItem);
       forEach(items, (elem) => {
-        (elem as BXMultiSelectItem).selected = values.indexOf((elem as BXMultiSelectItem).value) >= 0;
+        (elem as BXMultiSelectItem).selected =
+          values.indexOf((elem as BXMultiSelectItem).value) >= 0;
       });
-      this._selectedItemsCount = filter(items, (elem) => values.indexOf((elem as BXMultiSelectItem).value) >= 0).length;
+      this._selectedItemsCount = filter(
+        items,
+        (elem) => values.indexOf((elem as BXMultiSelectItem).value) >= 0
+      ).length;
     }
     return true;
   }

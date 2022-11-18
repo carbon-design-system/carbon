@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -38,7 +38,9 @@ describe('bx-checkbox', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-checkbox')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-checkbox')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should render with various attributes', async function () {
@@ -56,7 +58,9 @@ describe('bx-checkbox', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-checkbox')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-checkbox')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -76,7 +80,11 @@ describe('bx-checkbox', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -84,10 +92,17 @@ describe('bx-checkbox', function () {
     });
 
     it('Should respond to `formdata` event with default value', async function () {
-      render(html` <form>${template({ checked: true, name: 'name-foo' })}</form> `, document.body);
+      render(
+        html` <form>${template({ checked: true, name: 'name-foo' })}</form> `,
+        document.body
+      );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -108,7 +123,11 @@ describe('bx-checkbox', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -131,7 +150,11 @@ describe('bx-checkbox', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);

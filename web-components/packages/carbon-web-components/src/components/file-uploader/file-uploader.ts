@@ -37,8 +37,12 @@ class BXFileUploader extends LitElement {
   render() {
     const { helperText, labelText } = this;
     return html`
-      <strong class="${prefix}--file--label"><slot name="label-text">${labelText}</slot></strong>
-      <p class="${prefix}--label-description"><slot name="helperText-text">${helperText}</slot></p>
+      <strong class="${prefix}--file--label"
+        ><slot name="label-text">${labelText}</slot></strong
+      >
+      <p class="${prefix}--label-description">
+        <slot name="helperText-text">${helperText}</slot>
+      </p>
       <slot name="drop-container"></slot>
       <div class="${prefix}--file-container">
         <slot></slot>

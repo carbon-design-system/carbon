@@ -12,7 +12,11 @@ import { html, property, customElement, LitElement } from 'lit-element';
 import Arrows16 from '@carbon/icons/lib/arrows/16';
 import ArrowDown16 from '@carbon/icons/lib/arrow--down/16';
 import FocusMixin from '../../globals/mixins/focus';
-import { TABLE_SORT_CYCLE, TABLE_SORT_CYCLES, TABLE_SORT_DIRECTION } from './defs';
+import {
+  TABLE_SORT_CYCLE,
+  TABLE_SORT_CYCLES,
+  TABLE_SORT_DIRECTION,
+} from './defs';
 import styles from './data-table.scss';
 
 export { TABLE_SORT_CYCLE, TABLE_SORT_CYCLES, TABLE_SORT_DIRECTION };
@@ -45,7 +49,9 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
       },
     };
     const constructor = this.constructor as typeof BXTableHeaderCell;
-    if (this.dispatchEvent(new CustomEvent(constructor.eventBeforeSort, init))) {
+    if (
+      this.dispatchEvent(new CustomEvent(constructor.eventBeforeSort, init))
+    ) {
       this.sortActive = true;
       this.sortDirection = nextSortDirection;
     }
@@ -63,21 +69,27 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
    * @returns The next sort direction.
    */
   private _getNextSort() {
-    const { sortCycle = TABLE_SORT_CYCLE.TRI_STATES_FROM_ASCENDING, sortDirection } = this;
+    const {
+      sortCycle = TABLE_SORT_CYCLE.TRI_STATES_FROM_ASCENDING,
+      sortDirection,
+    } = this;
     if (!sortDirection) {
       throw new TypeError(
         'Table sort direction is not defined. ' +
           'Likely that `_getNextSort()` is called with non-sorted table column, which should not happen in regular condition.'
       );
     }
-    const directions = (this.constructor as typeof BXTableHeaderCell).TABLE_SORT_CYCLES[sortCycle];
+    const directions = (this.constructor as typeof BXTableHeaderCell)
+      .TABLE_SORT_CYCLES[sortCycle];
     const index = directions.indexOf(sortDirection as TABLE_SORT_DIRECTION);
     if (index < 0) {
       if (sortDirection === TABLE_SORT_DIRECTION.NONE) {
         // If the current sort direction is `none` in bi-state sort cycle, returns the first one in the cycle
         return directions[0];
       }
-      throw new RangeError(`The given sort state (${sortDirection}) is not found in the given table sort cycle: ${sortCycle}`);
+      throw new RangeError(
+        `The given sort state (${sortDirection}) is not found in the given table sort cycle: ${sortCycle}`
+      );
     }
     return directions[(index + 1) % directions.length];
   }
@@ -104,7 +116,9 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -135,7 +149,9 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
           title="${this.textContent}"
           @click=${this._handleClickSortButton}
         >
-          <span part="label-text" class="${prefix}--table-header-label"><slot @slotchange=${this._handleSlotChange}></slot></span>
+          <span part="label-text" class="${prefix}--table-header-label"
+            ><slot @slotchange=${this._handleSlotChange}></slot
+          ></span>
           ${sortIcon}
         </button>
       `;

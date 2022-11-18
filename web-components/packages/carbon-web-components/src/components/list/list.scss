@@ -50,7 +50,8 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-unordered-list[slot='nested']) ::slotted(#{$prefix}-list-item)::before {
+:host(#{$prefix}-unordered-list[slot='nested'])
+  ::slotted(#{$prefix}-list-item)::before {
   // offset to account for smaller ▪ vs –
   left: -$carbon--spacing-04;
   // ▪ square

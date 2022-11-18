@@ -11,7 +11,11 @@ import { html } from 'lit-element';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
 import ifNonNull from '../../globals/directives/if-non-null';
-import { DROPDOWN_COLOR_SCHEME, DROPDOWN_SIZE, DROPDOWN_TYPE } from './combo-box';
+import {
+  DROPDOWN_COLOR_SCHEME,
+  DROPDOWN_SIZE,
+  DROPDOWN_TYPE,
+} from './combo-box';
 import './combo-box-item';
 import storyDocs from './combo-box-story.mdx';
 
@@ -28,7 +32,8 @@ const types = {
 const sizes = {
   'Regular size': null,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
-  [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]: DROPDOWN_SIZE.EXTRA_LARGE,
+  [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]:
+    DROPDOWN_SIZE.EXTRA_LARGE,
 };
 
 export const Default = (args) => {
@@ -112,7 +117,10 @@ export default {
         invalid: boolean('Show invalid state  (invalid)', false),
         labelText: text('Label text (label-text)', 'Combo box title'),
         size: select('Dropdown size (size)', sizes, null),
-        triggerContent: text('The placeholder content (trigger-content)', 'Filter...'),
+        triggerContent: text(
+          'The placeholder content (trigger-content)',
+          'Filter...'
+        ),
         type: select('UI type (type)', types, null),
         validityMessage: text('The validity message (validity-message)', ''),
         value: text('The value of the selected item (value)', ''),

@@ -28,7 +28,10 @@ const icons = {
   [PROGRESS_STEP_STAT.QUEUED]: ({
     children,
     attrs = {},
-  }: { children?: SVGTemplateResult; attrs?: { [key: string]: string } } = {}) =>
+  }: {
+    children?: SVGTemplateResult;
+    attrs?: { [key: string]: string };
+  } = {}) =>
     svg`
       <svg ...="${spread(attrs)}">
         ${children}
@@ -38,7 +41,10 @@ const icons = {
   [PROGRESS_STEP_STAT.CURRENT]: ({
     children,
     attrs = {},
-  }: { children?: SVGTemplateResult; attrs?: { [key: string]: string } } = {}) =>
+  }: {
+    children?: SVGTemplateResult;
+    attrs?: { [key: string]: string };
+  } = {}) =>
     svg`
       <svg ...="${spread(attrs)}">
         ${children}
@@ -98,7 +104,9 @@ class BXProgressStep extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -125,10 +133,21 @@ class BXProgressStep extends FocusMixin(LitElement) {
         children: !iconLabel ? undefined : svg`<title>${iconLabel}</title>`,
       })}
       <slot>
-        <p role="button" class="${prefix}--progress-label" tabindex="0" aria-describedby="label-tooltip">${labelText}</p>
+        <p
+          role="button"
+          class="${prefix}--progress-label"
+          tabindex="0"
+          aria-describedby="label-tooltip"
+        >
+          ${labelText}
+        </p>
       </slot>
       <slot name="secondary-label-text">
-        ${!secondaryLabelText ? undefined : html` <p class="${prefix}--progress-optional">${secondaryLabelText}</p> `}
+        ${!secondaryLabelText
+          ? undefined
+          : html`
+              <p class="${prefix}--progress-optional">${secondaryLabelText}</p>
+            `}
       </slot>
       <span class="${prefix}--progress-line"></span>
     `;

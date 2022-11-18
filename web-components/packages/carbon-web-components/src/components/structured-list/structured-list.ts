@@ -34,7 +34,9 @@ class BXStructuredList extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -48,9 +50,14 @@ class BXStructuredList extends FocusMixin(LitElement) {
   shouldUpdate(changedProperties) {
     if (changedProperties.has('selectionName')) {
       // Propagate `selectionName` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll((this.constructor as typeof BXStructuredList).selectorRowsWithHeader), (elem) => {
-        (elem as BXStructuredListRow).selectionName = this.selectionName;
-      });
+      forEach(
+        this.querySelectorAll(
+          (this.constructor as typeof BXStructuredList).selectorRowsWithHeader
+        ),
+        (elem) => {
+          (elem as BXStructuredListRow).selectionName = this.selectionName;
+        }
+      );
     }
     return true;
   }
@@ -61,7 +68,9 @@ class BXStructuredList extends FocusMixin(LitElement) {
       [`${prefix}--structured-list`]: true,
       [`${prefix}--structured-list--selection`]: Boolean(selectionName),
     });
-    return html` <section id="section" class=${classes}><slot></slot></section> `;
+    return html`
+      <section id="section" class=${classes}><slot></slot></section>
+    `;
   }
 
   /**

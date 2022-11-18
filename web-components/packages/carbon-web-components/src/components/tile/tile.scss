@@ -50,7 +50,9 @@ $css--plex: true !default;
 
 :host(#{$prefix}-radio-tile),
 :host(#{$prefix}-selectable-tile) {
-  .#{$prefix}--tile-input:checked ~ .#{$prefix}--tile--selectable .#{$prefix}--tile__checkmark {
+  .#{$prefix}--tile-input:checked
+    ~ .#{$prefix}--tile--selectable
+    .#{$prefix}--tile__checkmark {
     opacity: 1;
   }
 }

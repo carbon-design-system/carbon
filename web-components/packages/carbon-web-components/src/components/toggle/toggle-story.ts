@@ -21,7 +21,17 @@ const sizes = {
 };
 
 export const Default = (args) => {
-  const { checked, checkedText, disabled, labelText, name, size, uncheckedText, value, onChange } = args?.['bx-toggle'] ?? {};
+  const {
+    checked,
+    checkedText,
+    disabled,
+    labelText,
+    name,
+    size,
+    uncheckedText,
+    value,
+    onChange,
+  } = args?.['bx-toggle'] ?? {};
   return html`
     <bx-toggle
       ?checked="${checked}"
@@ -46,12 +56,18 @@ export default {
     knobs: {
       'bx-toggle': () => ({
         checked: boolean('Checked (checked)', false),
-        checkedText: textNullable('Text for checked state (checked-text)', 'On'),
+        checkedText: textNullable(
+          'Text for checked state (checked-text)',
+          'On'
+        ),
         disabled: boolean('Disabled (disabled)', false),
         labelText: textNullable('Label text (label-text)', 'Toggle'),
         name: textNullable('Name (name)', ''),
         size: select('Toggle size (size)', sizes, null),
-        uncheckedText: textNullable('Text for unchecked state (unchecked-text)', 'Off'),
+        uncheckedText: textNullable(
+          'Text for unchecked state (unchecked-text)',
+          'Off'
+        ),
         value: textNullable('Value (value)', ''),
         onChange: action('bx-toggle-changed'),
       }),

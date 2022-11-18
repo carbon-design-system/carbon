@@ -46,7 +46,9 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
     const { name } = target as HTMLSlotElement;
     const hasContent = (target as HTMLSlotElement)
       .assignedNodes()
-      .some((node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim());
+      .some(
+        (node) => node.nodeType !== Node.TEXT_NODE || node!.textContent!.trim()
+      );
     this[name === 'icon' ? '_hasIcon' : '_hasMainContent'] = hasContent;
     this.requestUpdate();
   }
@@ -147,7 +149,9 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 

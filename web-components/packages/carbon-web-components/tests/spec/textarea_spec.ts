@@ -10,7 +10,9 @@
 import { html, render } from 'lit-html';
 import EventManager from '../utils/event-manager';
 
-import BXTextarea, { TEXTAREA_COLOR_SCHEME } from '../../src/components/textarea/textarea';
+import BXTextarea, {
+  TEXTAREA_COLOR_SCHEME,
+} from '../../src/components/textarea/textarea';
 import { Default } from '../../src/components/textarea/textarea-story';
 
 /**
@@ -55,7 +57,9 @@ describe('bx-textarea', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-textarea')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-textarea')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should reflect value in DOM', async function () {
@@ -66,7 +70,9 @@ describe('bx-textarea', function () {
         document.body
       );
       await Promise.resolve();
-      expect((document.body.querySelector('bx-textarea') as BXTextarea).value).toBe('value-foo');
+      expect(
+        (document.body.querySelector('bx-textarea') as BXTextarea).value
+      ).toBe('value-foo');
     });
   });
 
@@ -79,10 +85,14 @@ describe('bx-textarea', function () {
         document.body
       );
       await Promise.resolve();
-      const textareaNode = document.body.querySelector('bx-textarea')!.shadowRoot!.querySelector('textarea');
+      const textareaNode = document.body
+        .querySelector('bx-textarea')!
+        .shadowRoot!.querySelector('textarea');
       expect(textareaNode!.value).toBe('');
       textareaNode!.value = 'value-foo';
-      textareaNode!.dispatchEvent(new CustomEvent('input', { bubbles: true, composed: true }));
+      textareaNode!.dispatchEvent(
+        new CustomEvent('input', { bubbles: true, composed: true })
+      );
       expect(textareaNode!.value).toBe('value-foo');
     });
   });
@@ -102,7 +112,11 @@ describe('bx-textarea', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -124,7 +138,11 @@ describe('bx-textarea', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);

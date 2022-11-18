@@ -65,7 +65,10 @@ class RadioGroupManager {
   private _groups: { [name: string]: Set<ManagedRadioButton> } = {};
 
   private constructor(document: Document) {
-    (this.constructor as typeof RadioGroupManager)._instances.set(document, this);
+    (this.constructor as typeof RadioGroupManager)._instances.set(
+      document,
+      this
+    );
   }
 
   /**
@@ -81,11 +84,13 @@ class RadioGroupManager {
     }
     const { name } = radio;
     const group = this._groups[name];
-    const hasSelectedItemInGroup = group && Array.from(group).some((item) => item.checked);
+    const hasSelectedItemInGroup =
+      group && Array.from(group).some((item) => item.checked);
     if (hasSelectedItemInGroup) {
       return false;
     }
-    const isFirstInGroup = !group || group.size === 1 || this.getSortedGroup(radio)[0] === radio;
+    const isFirstInGroup =
+      !group || group.size === 1 || this.getSortedGroup(radio)[0] === radio;
     return isFirstInGroup;
   }
 
@@ -98,13 +103,21 @@ class RadioGroupManager {
     return (
       group &&
       Array.from(group).sort((lhs, rhs) => {
-        const comparisonResult = (lhs as ManagedRadioButtonDelegate).compareDocumentPosition(rhs as ManagedRadioButtonDelegate);
+        const comparisonResult = (
+          lhs as ManagedRadioButtonDelegate
+        ).compareDocumentPosition(rhs as ManagedRadioButtonDelegate);
         // eslint-disable-next-line no-bitwise
-        if (comparisonResult & Node.DOCUMENT_POSITION_FOLLOWING || comparisonResult & Node.DOCUMENT_POSITION_CONTAINED_BY) {
+        if (
+          comparisonResult & Node.DOCUMENT_POSITION_FOLLOWING ||
+          comparisonResult & Node.DOCUMENT_POSITION_CONTAINED_BY
+        ) {
           return -1;
         }
         // eslint-disable-next-line no-bitwise
-        if (comparisonResult & Node.DOCUMENT_POSITION_PRECEDING || comparisonResult & Node.DOCUMENT_POSITION_CONTAINS) {
+        if (
+          comparisonResult & Node.DOCUMENT_POSITION_PRECEDING ||
+          comparisonResult & Node.DOCUMENT_POSITION_CONTAINS
+        ) {
           return 1;
         }
         return 0;

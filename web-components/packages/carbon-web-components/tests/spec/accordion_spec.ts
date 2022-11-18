@@ -43,8 +43,13 @@ describe('bx-accordion', function () {
       await Promise.resolve();
       item = document.body.querySelector('bx-accordion-item');
 
-      const event = new CustomEvent('keydown', { bubbles: true, composed: true });
-      item!.shadowRoot!.querySelector('button')!.dispatchEvent(Object.assign(event, { key: 'Escape' }));
+      const event = new CustomEvent('keydown', {
+        bubbles: true,
+        composed: true,
+      });
+      item!
+        .shadowRoot!.querySelector('button')!
+        .dispatchEvent(Object.assign(event, { key: 'Escape' }));
       await Promise.resolve();
       expect(item!.open).toBe(false);
     });
@@ -54,8 +59,13 @@ describe('bx-accordion', function () {
       await Promise.resolve();
       item = document.body.querySelector('bx-accordion-item');
 
-      const event = new CustomEvent('keydown', { bubbles: true, composed: true });
-      item!.shadowRoot!.querySelector('button')!.dispatchEvent(Object.assign(event, { key: 'Esc' }));
+      const event = new CustomEvent('keydown', {
+        bubbles: true,
+        composed: true,
+      });
+      item!
+        .shadowRoot!.querySelector('button')!
+        .dispatchEvent(Object.assign(event, { key: 'Esc' }));
       await Promise.resolve();
       expect(item!.open).toBe(false);
     });
@@ -79,8 +89,13 @@ describe('bx-accordion', function () {
       const spyAfterToggle = jasmine.createSpy('after toggle');
       events.on(item!, 'bx-accordion-item-beingtoggled', spyBeforeToggle);
       events.on(item!, 'bx-accordion-item-toggled', spyAfterToggle);
-      const event = new CustomEvent('keydown', { bubbles: true, composed: true });
-      item!.shadowRoot!.querySelector('button')!.dispatchEvent(Object.assign(event, { key: 'Escape' }));
+      const event = new CustomEvent('keydown', {
+        bubbles: true,
+        composed: true,
+      });
+      item!
+        .shadowRoot!.querySelector('button')!
+        .dispatchEvent(Object.assign(event, { key: 'Escape' }));
       await Promise.resolve();
       expect(spyBeforeToggle).toHaveBeenCalled();
       expect(spyAfterToggle).toHaveBeenCalled();
@@ -106,8 +121,13 @@ describe('bx-accordion', function () {
         event.preventDefault();
       });
       events.on(item!, 'bx-accordion-item-toggled', spyAfterToggle);
-      const event = new CustomEvent('keydown', { bubbles: true, composed: true });
-      item!.shadowRoot!.querySelector('button')!.dispatchEvent(Object.assign(event, { key: 'Escape' }));
+      const event = new CustomEvent('keydown', {
+        bubbles: true,
+        composed: true,
+      });
+      item!
+        .shadowRoot!.querySelector('button')!
+        .dispatchEvent(Object.assign(event, { key: 'Escape' }));
       await Promise.resolve();
       expect(spyAfterToggle).not.toHaveBeenCalled();
     });

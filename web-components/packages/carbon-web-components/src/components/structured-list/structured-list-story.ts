@@ -26,39 +26,58 @@ export const Default = (args) => {
   const selectionName = !hasSelection ? undefined : 'structured-list-selection';
   const selectionValues = !hasSelection
     ? []
-    : ['structured-list-selection-0', 'structured-list-selection-1', 'structured-list-selection-2'];
+    : [
+        'structured-list-selection-0',
+        'structured-list-selection-1',
+        'structured-list-selection-2',
+      ];
   return html`
     <bx-structured-list selection-name=${ifNonNull(selectionName)}>
       <bx-structured-list-head>
         <bx-structured-list-header-row>
-          <bx-structured-list-header-cell>ColumnA</bx-structured-list-header-cell>
-          <bx-structured-list-header-cell>ColumnB</bx-structured-list-header-cell>
-          <bx-structured-list-header-cell>ColumnC</bx-structured-list-header-cell>
+          <bx-structured-list-header-cell
+            >ColumnA</bx-structured-list-header-cell
+          >
+          <bx-structured-list-header-cell
+            >ColumnB</bx-structured-list-header-cell
+          >
+          <bx-structured-list-header-cell
+            >ColumnC</bx-structured-list-header-cell
+          >
         </bx-structured-list-header-row>
       </bx-structured-list-head>
       <bx-structured-list-body>
-        <bx-structured-list-row selection-value=${ifNonNull(selectionValues[0])}>
+        <bx-structured-list-row
+          selection-value=${ifNonNull(selectionValues[0])}
+        >
           <bx-structured-list-cell>Row 1</bx-structured-list-cell>
           <bx-structured-list-cell>Row 1</bx-structured-list-cell>
           <bx-structured-list-cell
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum
-            augue. Aenean posuere sem vel euismod dignissim.</bx-structured-list-cell
+            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim.</bx-structured-list-cell
           >
         </bx-structured-list-row>
-        <bx-structured-list-row selection-value=${ifNonNull(selectionValues[1])}>
+        <bx-structured-list-row
+          selection-value=${ifNonNull(selectionValues[1])}
+        >
           <bx-structured-list-cell>Row 2</bx-structured-list-cell>
           <bx-structured-list-cell>Row 2</bx-structured-list-cell>
           <bx-structured-list-cell
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum
-            augue. Aenean posuere sem vel euismod dignissim.</bx-structured-list-cell
+            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim.</bx-structured-list-cell
           >
         </bx-structured-list-row>
-        <bx-structured-list-row selection-value=${ifNonNull(selectionValues[2])}>
+        <bx-structured-list-row
+          selection-value=${ifNonNull(selectionValues[2])}
+        >
           <bx-structured-list-cell>Row 3</bx-structured-list-cell>
           <bx-structured-list-cell>Row 3</bx-structured-list-cell>
           <bx-structured-list-cell
-            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui magna, finibus id tortor sed, aliquet bibendum
-            augue. Aenean posuere sem vel euismod dignissim.</bx-structured-list-cell
+            >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
+            magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
+            sem vel euismod dignissim.</bx-structured-list-cell
           >
         </bx-structured-list-row>
       </bx-structured-list-body>
@@ -71,7 +90,10 @@ Default.storyName = 'Default';
 Default.parameters = {
   knobs: {
     'bx-structured-list': () => ({
-      hasSelection: boolean('Supports selection feature (has-selection)', false),
+      hasSelection: boolean(
+        'Supports selection feature (has-selection)',
+        false
+      ),
     }),
   },
 };

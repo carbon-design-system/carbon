@@ -39,7 +39,9 @@ class BXHeaderName extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -47,9 +49,15 @@ class BXHeaderName extends FocusMixin(LitElement) {
     const { href, prefix: namePrefix } = this;
     const namePrefixPart = !namePrefix
       ? undefined
-      : html` <span part="prefix" class="${prefix}--header__name--prefix">${namePrefix}</span> `;
+      : html`
+          <span part="prefix" class="${prefix}--header__name--prefix"
+            >${namePrefix}</span
+          >
+        `;
     return html`
-      <a part="link" class="${prefix}--header__name" href="${ifDefined(href)}">${namePrefixPart}&nbsp;<slot></slot></a>
+      <a part="link" class="${prefix}--header__name" href="${ifDefined(href)}"
+        >${namePrefixPart}&nbsp;<slot></slot
+      ></a>
     `;
   }
 

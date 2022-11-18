@@ -35,7 +35,12 @@ class BXToggle extends BXCheckbox {
       return undefined;
     }
     return html`
-      <svg class="${prefix}--toggle__check" width="6px" height="5px" viewBox="0 0 6 5">
+      <svg
+        class="${prefix}--toggle__check"
+        width="6px"
+        height="5px"
+        viewBox="0 0 6 5"
+      >
         <path d="M2.2 2.7L5 0 6 1 2.2 5 0 2.7 1 1.5z" />
       </svg>
     `;
@@ -60,7 +65,17 @@ class BXToggle extends BXCheckbox {
   uncheckedText = '';
 
   render() {
-    const { checked, checkedText, disabled, labelText, name, size, uncheckedText, value, _handleChange: handleChange } = this;
+    const {
+      checked,
+      checkedText,
+      disabled,
+      labelText,
+      name,
+      size,
+      uncheckedText,
+      value,
+      _handleChange: handleChange,
+    } = this;
     const inputClasses = classMap({
       [`${prefix}--toggle-input`]: true,
       [`${prefix}--toggle-input--${size}`]: size,

@@ -45,13 +45,15 @@ class BXPagesSelect extends FocusMixin(LitElement) {
    * Should be changed upon the locale the UI is rendered with.
    */
   @property({ attribute: false })
-  formatLabelText = ({ count }) => `Page number, of ${count} page${count <= 1 ? '' : 's'}`;
+  formatLabelText = ({ count }) =>
+    `Page number, of ${count} page${count <= 1 ? '' : 's'}`;
 
   /**
    * The formatter for the text next to the select box. Should be changed upon the locale the UI is rendered with.
    */
   @property({ attribute: false })
-  formatSupplementalText = ({ count }) => `of ${count} page${count <= 1 ? '' : 's'}`;
+  formatSupplementalText = ({ count }) =>
+    `of ${count} page${count <= 1 ? '' : 's'}`;
 
   /**
    * The number of total pages.
@@ -68,25 +70,46 @@ class BXPagesSelect extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
-    const { formatLabelText, formatSupplementalText, total, value, _handleChange: handleChange } = this;
+    const {
+      formatLabelText,
+      formatSupplementalText,
+      total,
+      value,
+      _handleChange: handleChange,
+    } = this;
     // `<option ?selected="${index === value}">` is a workaround for:
     // https://github.com/Polymer/lit-html/issues/1052
     return html`
       <div class="${prefix}--select__page-number">
-        <label for="select" class="${prefix}--label ${prefix}--visually-hidden"> ${formatLabelText({ count: total })} </label>
-        <select class="${prefix}--select-input" .value="${value}" @change="${handleChange}">
+        <label for="select" class="${prefix}--label ${prefix}--visually-hidden">
+          ${formatLabelText({ count: total })}
+        </label>
+        <select
+          class="${prefix}--select-input"
+          .value="${value}"
+          @change="${handleChange}"
+        >
           ${Array.from(new Array(total)).map(
-            (_item, index) => html` <option value=${index} ?selected="${index === value}">${index + 1}</option> `
+            (_item, index) =>
+              html`
+                <option value=${index} ?selected="${index === value}">
+                  ${index + 1}
+                </option>
+              `
           )}
         </select>
         ${ChevronDown16({ class: `${prefix}--select__arrow` })}
       </div>
-      <span class="${prefix}--pagination__text"> ${formatSupplementalText({ count: total })} </span>
+      <span class="${prefix}--pagination__text">
+        ${formatSupplementalText({ count: total })}
+      </span>
     `;
   }
 

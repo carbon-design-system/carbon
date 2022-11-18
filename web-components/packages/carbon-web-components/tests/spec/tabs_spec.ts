@@ -80,7 +80,9 @@ describe('bx-tabs', function () {
       const itemNodes = document.body.querySelectorAll('bx-tab');
       (itemNodes[2] as HTMLElement).click();
       await Promise.resolve();
-      expect(elem!.shadowRoot!.getElementById('trigger-label')!.textContent!.trim()).toBe('Option 3');
+      expect(
+        elem!.shadowRoot!.getElementById('trigger-label')!.textContent!.trim()
+      ).toBe('Option 3');
     });
 
     it('should update value', async function () {
@@ -89,7 +91,9 @@ describe('bx-tabs', function () {
       const itemNodes = document.body.querySelectorAll('bx-tab');
       (itemNodes[2] as HTMLElement).click();
       await Promise.resolve();
-      expect((document.body.querySelector('bx-tabs') as BXTabs).value).toBe('staging');
+      expect((document.body.querySelector('bx-tabs') as BXTabs).value).toBe(
+        'staging'
+      );
     });
 
     it('should provide a way to switch item with a value', async function () {
@@ -124,7 +128,9 @@ describe('bx-tabs', function () {
       expect(itemNodes[2].hasAttribute('selected')).toBe(false);
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
-      expect(elem!.shadowRoot!.getElementById('trigger-label')!.textContent!.trim()).toBe('Option 1');
+      expect(
+        elem!.shadowRoot!.getElementById('trigger-label')!.textContent!.trim()
+      ).toBe('Option 1');
     });
 
     afterEach(async function () {
@@ -140,7 +146,9 @@ describe('bx-tabs', function () {
       const itemNodes = document.body.querySelectorAll('bx-tab');
       const event = new CustomEvent('focusin', { bubbles: true });
       (elem as HTMLElement).dispatchEvent(event);
-      expect(Array.prototype.every.call(itemNodes, (item) => (item as BXTab).inFocus)).toBe(true);
+      expect(
+        Array.prototype.every.call(itemNodes, (item) => (item as BXTab).inFocus)
+      ).toBe(true);
     });
 
     it('should support unsetting focus style to child tabs', async function () {
@@ -153,7 +161,9 @@ describe('bx-tabs', function () {
       });
       const event = new CustomEvent('focusout', { bubbles: true });
       (elem as HTMLElement).dispatchEvent(event);
-      expect(Array.prototype.every.call(itemNodes, (item) => (item as BXTab).inFocus)).toBe(false);
+      expect(
+        Array.prototype.every.call(itemNodes, (item) => (item as BXTab).inFocus)
+      ).toBe(false);
     });
   });
 

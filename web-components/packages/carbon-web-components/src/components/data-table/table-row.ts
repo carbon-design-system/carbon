@@ -42,7 +42,11 @@ class BXTableRow extends FocusMixin(LitElement) {
       },
     };
     const constructor = this.constructor as typeof BXTableRow;
-    if (this.dispatchEvent(new CustomEvent(constructor.eventBeforeChangeSelection, init))) {
+    if (
+      this.dispatchEvent(
+        new CustomEvent(constructor.eventBeforeChangeSelection, init)
+      )
+    ) {
       this.selected = selected;
     }
   }
@@ -51,12 +55,21 @@ class BXTableRow extends FocusMixin(LitElement) {
    * @returns The first set of table cells.
    */
   protected _renderFirstCells() {
-    const { disabled, selected, selectionLabel, selectionName, selectionValue } = this;
+    const {
+      disabled,
+      selected,
+      selectionLabel,
+      selectionName,
+      selectionValue,
+    } = this;
     // Using `@click` instead of `@change` to support `.preventDefault()`
     return !selectionName
       ? undefined
       : html`
-          <div part="selection-container" class="${prefix}--table-column-checkbox">
+          <div
+            part="selection-container"
+            class="${prefix}--table-column-checkbox"
+          >
             ${html`
               <input
                 id="selection"
@@ -69,7 +82,11 @@ class BXTableRow extends FocusMixin(LitElement) {
                 .checked=${selected}
                 @click=${this._handleClickSelectionCheckbox}
               />
-              <label for="selection" class="${prefix}--checkbox-label" aria-label="${selectionLabel}"></label>
+              <label
+                for="selection"
+                class="${prefix}--checkbox-label"
+                aria-label="${selectionLabel}"
+              ></label>
             `}
           </div>
         `;

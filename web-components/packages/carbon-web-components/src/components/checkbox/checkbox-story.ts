@@ -16,7 +16,16 @@ import './checkbox';
 import storyDocs from './checkbox-story.mdx';
 
 export const Default = (args) => {
-  const { checked, disabled, hideLabel, indeterminate, labelText, name, value, onChange } = args?.['bx-checkbox'] ?? {};
+  const {
+    checked,
+    disabled,
+    hideLabel,
+    indeterminate,
+    labelText,
+    name,
+    value,
+    onChange,
+  } = args?.['bx-checkbox'] ?? {};
   return html`
     <bx-checkbox
       ?checked="${checked}"

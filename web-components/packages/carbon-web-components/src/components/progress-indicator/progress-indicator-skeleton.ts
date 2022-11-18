@@ -29,9 +29,14 @@ class BXProgressIndicatorSkeleton extends LitElement {
   updated(changedProperties) {
     if (changedProperties.has('vertical')) {
       // Propagate `vertical` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll((this.constructor as typeof BXProgressIndicatorSkeleton).selectorStep), (item) => {
-        (item as BXProgressStepSkeleton).vertical = this.vertical;
-      });
+      forEach(
+        this.querySelectorAll(
+          (this.constructor as typeof BXProgressIndicatorSkeleton).selectorStep
+        ),
+        (item) => {
+          (item as BXProgressStepSkeleton).vertical = this.vertical;
+        }
+      );
     }
   }
 

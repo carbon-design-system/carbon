@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2021
+// Copyright IBM Corp. 2020, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -28,7 +28,8 @@
 
 :host(#{$prefix}-table-expanded-row) {
   display: table-row;
-  transition: height $duration--moderate-02 motion(standard), background-color $duration--fast-02 motion(standard);
+  transition: height $duration--moderate-02 motion(standard),
+    background-color $duration--fast-02 motion(standard);
 
   &[expanded] {
     height: auto;

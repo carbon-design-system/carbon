@@ -26,7 +26,9 @@ const colorSchemes = {
 
 export const Default = (args) => {
   const { colorScheme } = args?.['bx-tile'] ?? {};
-  return html` <bx-tile color-scheme="${ifNonNull(colorScheme)}">Default tile</bx-tile> `;
+  return html`
+    <bx-tile color-scheme="${ifNonNull(colorScheme)}">Default tile</bx-tile>
+  `;
 };
 
 Default.storyName = 'Default';
@@ -40,7 +42,17 @@ Default.parameters = {
 };
 
 export const clickable = (args) => {
-  const { colorScheme, disabled, download, href, hreflang, ping, rel, target, type } = args?.['bx-clickable-tile'] ?? {};
+  const {
+    colorScheme,
+    disabled,
+    download,
+    href,
+    hreflang,
+    ping,
+    rel,
+    target,
+    type,
+  } = args?.['bx-clickable-tile'] ?? {};
   return html`
     <bx-clickable-tile
       color-scheme="${ifNonNull(colorScheme)}"
@@ -69,7 +81,8 @@ clickable.parameters = {
 };
 
 export const singleSelectable = (args) => {
-  const { checkmarkLabel, colorScheme, name, value, onInput } = args?.['bx-radio-tile'] ?? {};
+  const { checkmarkLabel, colorScheme, name, value, onInput } =
+    args?.['bx-radio-tile'] ?? {};
   return html`
     <fieldset>
       <legend>Single-select tiles</legend>
@@ -109,7 +122,10 @@ singleSelectable.storyName = 'Single-selectable';
 singleSelectable.parameters = {
   knobs: {
     'bx-radio-tile': () => ({
-      checkmarkLabel: textNullable('Label text for the checkmark icon (checkmark-label)', ''),
+      checkmarkLabel: textNullable(
+        'Label text for the checkmark icon (checkmark-label)',
+        ''
+      ),
       colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
       name: textNullable('Name (name)', 'selectable-tile'),
       value: textNullable('Value (value)', ''),
@@ -119,7 +135,8 @@ singleSelectable.parameters = {
 };
 
 export const multiSelectable = (args) => {
-  const { checkmarkLabel, colorScheme, name, selected, value, onInput } = args?.['bx-selectable-tile'] ?? {};
+  const { checkmarkLabel, colorScheme, name, selected, value, onInput } =
+    args?.['bx-selectable-tile'] ?? {};
   return html`
     <bx-selectable-tile
       checkmark-label="${ifNonNull(checkmarkLabel)}"
@@ -146,7 +163,8 @@ multiSelectable.parameters = {
 };
 
 export const expandable = (args) => {
-  const { colorScheme, expanded, disableChange, onBeforeChange, onChange } = args?.['bx-expandable-tile'] ?? {};
+  const { colorScheme, expanded, disableChange, onBeforeChange, onChange } =
+    args?.['bx-expandable-tile'] ?? {};
   const handleBeforeChanged = (event: CustomEvent) => {
     onBeforeChange(event);
     if (disableChange) {
@@ -160,10 +178,15 @@ export const expandable = (args) => {
       @bx-expandable-tile-beingchanged=${handleBeforeChanged}
       @bx-expandable-tile-changed=${onChange}
     >
-      <bx-tile-above-the-fold-content slot="above-the-fold-content" style="height: 200px">
+      <bx-tile-above-the-fold-content
+        slot="above-the-fold-content"
+        style="height: 200px"
+      >
         Above the fold content here
       </bx-tile-above-the-fold-content>
-      <bx-tile-below-the-fold-content style="height: 300px"> Below the fold content here </bx-tile-below-the-fold-content>
+      <bx-tile-below-the-fold-content style="height: 300px">
+        Below the fold content here
+      </bx-tile-below-the-fold-content>
     </bx-expandable-tile>
   `;
 };

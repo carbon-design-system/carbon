@@ -64,8 +64,17 @@ export const Default = (args) => {
 Default.storyName = 'Default';
 
 export const formItem = (args) => {
-  const { colorScheme, disabled, invalid, placeholder, showPasswordVisibilityToggle, size, type, value, onInput } =
-    args?.['bx-input'] ?? {};
+  const {
+    colorScheme,
+    disabled,
+    invalid,
+    placeholder,
+    showPasswordVisibilityToggle,
+    size,
+    type,
+    value,
+    onInput,
+  } = args?.['bx-input'] ?? {};
   return html`
     <bx-form-item>
       <bx-input
@@ -90,8 +99,17 @@ export const formItem = (args) => {
 formItem.storyName = 'Form item';
 
 export const withoutFormItemWrapper = (args) => {
-  const { colorScheme, disabled, invalid, placeholder, showPasswordVisibilityToggle, size, type, value, onInput } =
-    args?.['bx-input'] ?? {};
+  const {
+    colorScheme,
+    disabled,
+    invalid,
+    placeholder,
+    showPasswordVisibilityToggle,
+    size,
+    type,
+    value,
+    onInput,
+  } = args?.['bx-input'] ?? {};
   return html`
     <bx-input
       value="${ifNonNull(value)}"

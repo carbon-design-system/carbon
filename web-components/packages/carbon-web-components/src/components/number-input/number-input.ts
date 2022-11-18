@@ -14,7 +14,10 @@ import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import CaretUp16 from '@carbon/icons/lib/caret--up/16';
 import CaretDown16 from '@carbon/icons/lib/caret--down/16';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
-import { NUMBER_INPUT_COLOR_SCHEME, NUMBER_INPUT_VALIDATION_STATUS } from './defs';
+import {
+  NUMBER_INPUT_COLOR_SCHEME,
+  NUMBER_INPUT_VALIDATION_STATUS,
+} from './defs';
 import styles from './number-input.scss';
 import BXInput, { INPUT_SIZE } from '../input/input';
 
@@ -106,10 +109,16 @@ export default class BXNumberInput extends BXInput {
   }
 
   _getValidityMessage(state: string) {
-    if (Object.values(NUMBER_INPUT_VALIDATION_STATUS).includes(state as NUMBER_INPUT_VALIDATION_STATUS)) {
+    if (
+      Object.values(NUMBER_INPUT_VALIDATION_STATUS).includes(
+        state as NUMBER_INPUT_VALIDATION_STATUS
+      )
+    ) {
       const stateMessageMap = {
-        [NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MAXIMUM]: this.validityMessageMax,
-        [NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MINIMUM]: this.validityMessageMin,
+        [NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MAXIMUM]:
+          this.validityMessageMax,
+        [NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MINIMUM]:
+          this.validityMessageMin,
       };
       return stateMessageMap[state];
     }
@@ -227,7 +236,9 @@ export default class BXNumberInput extends BXInput {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -238,7 +249,9 @@ export default class BXNumberInput extends BXInput {
       _handleUserInitiatedStepUp: handleUserInitiatedStepUp,
     } = this;
 
-    const invalidIcon = WarningFilled16({ class: `${prefix}--number__invalid` });
+    const invalidIcon = WarningFilled16({
+      class: `${prefix}--number__invalid`,
+    });
 
     const validity = this._testValidity();
 
@@ -316,7 +329,9 @@ export default class BXNumberInput extends BXInput {
 
     const defaultLayout = html`
       ${this.invalid ? invalidIcon : null} ${input}
-      <div class="${prefix}--number__controls">${incrementButton} ${decrementButton}</div>
+      <div class="${prefix}--number__controls">
+        ${incrementButton} ${decrementButton}
+      </div>
     `;
 
     const mobileLayout = html` ${decrementButton} ${input} ${incrementButton} `;
@@ -326,17 +341,30 @@ export default class BXNumberInput extends BXInput {
         <label class="${labelClasses}" for="input">
           <slot name="label-text"> ${this.labelText} </slot>
         </label>
-        <div class="${prefix}--number__input-wrapper">${this.mobile ? mobileLayout : defaultLayout}</div>
+        <div class="${prefix}--number__input-wrapper">
+          ${this.mobile ? mobileLayout : defaultLayout}
+        </div>
         <div class="${helperTextClasses}">
           <slot name="helper-text"> ${this.helperText} </slot>
         </div>
-        <div class="${prefix}--form-requirement" ?hidden="${!isGenericallyInvalid()}">
+        <div
+          class="${prefix}--form-requirement"
+          ?hidden="${!isGenericallyInvalid()}"
+        >
           <slot name="validity-message"> ${this.validityMessage} </slot>
         </div>
-        <div class="${prefix}--form-requirement" ?hidden="${validity !== NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MAXIMUM}">
+        <div
+          class="${prefix}--form-requirement"
+          ?hidden="${validity !==
+          NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MAXIMUM}"
+        >
           <slot name="validity-message-max"> ${this.validityMessageMax} </slot>
         </div>
-        <div class="${prefix}--form-requirement" ?hidden="${validity !== NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MINIMUM}">
+        <div
+          class="${prefix}--form-requirement"
+          ?hidden="${validity !==
+          NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MINIMUM}"
+        >
           <slot name="validity-message-min"> ${this.validityMessageMin} </slot>
         </div>
       </div>

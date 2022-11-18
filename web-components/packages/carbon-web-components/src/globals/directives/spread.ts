@@ -29,8 +29,14 @@ const attributesMapCache = new WeakMap();
  */
 const spread = directive((attributesInfo: AttributesInfo) => (part: Part) => {
   // The first character of `...` is interpreted as one for `PropertyPart`
-  if (!(part instanceof PropertyPart) || part.committer.name !== '..' || part.committer.parts.length > 1) {
-    throw new Error('The `spread` directive must be used in with `...` name and must be the only part in the attribute.');
+  if (
+    !(part instanceof PropertyPart) ||
+    part.committer.name !== '..' ||
+    part.committer.parts.length > 1
+  ) {
+    throw new Error(
+      'The `spread` directive must be used in with `...` name and must be the only part in the attribute.'
+    );
   }
 
   const { committer } = part;
@@ -49,7 +55,10 @@ const spread = directive((attributesInfo: AttributesInfo) => (part: Part) => {
   // Adds new attributes
   Object.keys(attributesInfo).forEach((name) => {
     const value = attributesInfo[name];
-    if ((!oldAttributesInfo || !Object.is(value, oldAttributesInfo[name])) && typeof value !== 'undefined') {
+    if (
+      (!oldAttributesInfo || !Object.is(value, oldAttributesInfo[name])) &&
+      typeof value !== 'undefined'
+    ) {
       element.setAttribute(name, value);
     }
   });

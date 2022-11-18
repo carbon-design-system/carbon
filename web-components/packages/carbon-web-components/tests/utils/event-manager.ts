@@ -29,7 +29,12 @@ class EventManager {
    * @param options An options object that specifies characteristics about the event listener.
    * @returns The handle to release the event listener. Its `release()` method removes the event listener.
    */
-  on(target: EventTarget, type: string, listener: CustomEventListener, options?: boolean | AddEventListenerOptions);
+  on(
+    target: EventTarget,
+    type: string,
+    listener: CustomEventListener,
+    options?: boolean | AddEventListenerOptions
+  );
 
   // eslint-disable-next-line no-dupe-class-members
   on<K extends keyof HTMLElementEventMap>(
@@ -47,7 +52,11 @@ class EventManager {
    * Releases all registered event listeners.
    */
   reset() {
-    for (let handle = this._handles.shift(); handle; handle = this._handles.shift()) {
+    for (
+      let handle = this._handles.shift();
+      handle;
+      handle = this._handles.shift()
+    ) {
       handle.release();
     }
     return null;

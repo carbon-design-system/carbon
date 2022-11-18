@@ -17,20 +17,34 @@ import EventManager from '../utils/event-manager';
 const fileUploaderShellTemplate = (props?) => {
   const { helperText, labelText } = props ?? {};
   return html`
-    <bx-file-uploader helper-text="${ifNonNull(helperText)}" label-text="${ifNonNull(labelText)}"></bx-file-uploader>
+    <bx-file-uploader
+      helper-text="${ifNonNull(helperText)}"
+      label-text="${ifNonNull(labelText)}"
+    ></bx-file-uploader>
   `;
 };
 
 const dropContainerTemplate = (props?) => {
   const { accept, disabled, multiple } = props ?? {};
   return html`
-    <bx-file-drop-container accept="${ifNonNull(accept)}" ?disabled="${disabled}" ?multiple="${multiple}">
+    <bx-file-drop-container
+      accept="${ifNonNull(accept)}"
+      ?disabled="${disabled}"
+      ?multiple="${multiple}"
+    >
     </bx-file-drop-container>
   `;
 };
 
 const fileUploderItemTemplate = (props?) => {
-  const { deleteAssistiveText, invalid, state, uploadingAssistiveText, uploadedAssistiveText, validityMessage } = props ?? {};
+  const {
+    deleteAssistiveText,
+    invalid,
+    state,
+    uploadingAssistiveText,
+    uploadedAssistiveText,
+    validityMessage,
+  } = props ?? {};
   return html`
     <bx-file-uploader-item
       delete-assistive-text="${ifNonNull(deleteAssistiveText)}"
@@ -52,7 +66,9 @@ describe('file-uploader', function () {
       it('should render with minimum attributes', async function () {
         render(fileUploaderShellTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-file-uploader')).toMatchSnapshot(
+          { mode: 'shadow' }
+        );
       });
 
       it('should render with various attributes', async function () {
@@ -64,7 +80,9 @@ describe('file-uploader', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-file-uploader')).toMatchSnapshot(
+          { mode: 'shadow' }
+        );
       });
     });
   });
@@ -74,7 +92,9 @@ describe('file-uploader', function () {
       it('should render with minimum attributes', async function () {
         render(dropContainerTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-drop-container')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-file-drop-container')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -87,14 +107,20 @@ describe('file-uploader', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-drop-container')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-file-drop-container')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
     describe('Handling events', function () {
       let elem;
-      const pngFile = new File([new ArrayBuffer(0)], 'foo.png', { type: 'image/png' });
-      const jpegFile = new File([new ArrayBuffer(0)], 'foo.jpg', { type: 'image/jpeg' });
+      const pngFile = new File([new ArrayBuffer(0)], 'foo.png', {
+        type: 'image/png',
+      });
+      const jpegFile = new File([new ArrayBuffer(0)], 'foo.jpg', {
+        type: 'image/jpeg',
+      });
 
       beforeEach(async function () {
         render(dropContainerTemplate({ accept: 'image/png' }), document.body);
@@ -104,7 +130,10 @@ describe('file-uploader', function () {
 
       it('Should handle drag-over', async function () {
         const dataTransfer: { dropEffect?: string } = {};
-        const event = Object.assign(new CustomEvent('dragover', { bubbles: true, composed: true }), { dataTransfer });
+        const event = Object.assign(
+          new CustomEvent('dragover', { bubbles: true, composed: true }),
+          { dataTransfer }
+        );
         elem!.dispatchEvent(event);
         await Promise.resolve();
         expect(elem).toMatchSnapshot({ mode: 'shadow' });
@@ -113,7 +142,10 @@ describe('file-uploader', function () {
 
       it('Should handle drag-leave', async function () {
         const dataTransfer: { dropEffect?: string } = {};
-        const event = Object.assign(new CustomEvent('dragleave', { bubbles: true, composed: true }), { dataTransfer });
+        const event = Object.assign(
+          new CustomEvent('dragleave', { bubbles: true, composed: true }),
+          { dataTransfer }
+        );
         elem!.dispatchEvent(event);
         expect(dataTransfer.dropEffect).toBe('move');
       });
@@ -122,10 +154,15 @@ describe('file-uploader', function () {
         const spyChange = jasmine.createSpy('after changed');
         events.on(elem!, 'bx-file-drop-container-changed', spyChange);
         const dataTransfer = { files: [pngFile, jpegFile] };
-        const event = Object.assign(new CustomEvent('drop', { bubbles: true, composed: true }), { dataTransfer });
+        const event = Object.assign(
+          new CustomEvent('drop', { bubbles: true, composed: true }),
+          { dataTransfer }
+        );
         elem!.dispatchEvent(event);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles.length).toBe(1);
-        expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(pngFile);
+        expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(
+          pngFile
+        );
       });
 
       it('Should handle file upload link', async function () {
@@ -144,24 +181,37 @@ describe('file-uploader', function () {
         const spyChange = jasmine.createSpy('after changed');
         events.on(elem!, 'bx-file-drop-container-changed', spyChange);
         const input = elem!.shadowRoot!.querySelector('input');
-        const event = new CustomEvent('change', { bubbles: true, composed: true });
+        const event = new CustomEvent('change', {
+          bubbles: true,
+          composed: true,
+        });
         input!.dispatchEvent(event);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles.length).toBe(1);
-        expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(pngFile);
+        expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(
+          pngFile
+        );
       });
 
       it('Should handle filtering by file extension', async function () {
         render(dropContainerTemplate({ accept: '.png' }), document.body);
         await Promise.resolve();
         elem = document.querySelector('bx-file-drop-container');
-        const pngFileWithoutMIMEType = new File([new ArrayBuffer(0)], 'foo.png');
+        const pngFileWithoutMIMEType = new File(
+          [new ArrayBuffer(0)],
+          'foo.png'
+        );
         const spyChange = jasmine.createSpy('after changed');
         events.on(elem!, 'bx-file-drop-container-changed', spyChange);
         const dataTransfer = { files: [pngFileWithoutMIMEType, jpegFile] };
-        const event = Object.assign(new CustomEvent('drop', { bubbles: true, composed: true }), { dataTransfer });
+        const event = Object.assign(
+          new CustomEvent('drop', { bubbles: true, composed: true }),
+          { dataTransfer }
+        );
         elem!.dispatchEvent(event);
         expect(spyChange.calls.argsFor(0)[0].detail.addedFiles.length).toBe(1);
-        expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(pngFileWithoutMIMEType);
+        expect(spyChange.calls.argsFor(0)[0].detail.addedFiles[0]).toBe(
+          pngFileWithoutMIMEType
+        );
       });
     });
   });
@@ -171,7 +221,9 @@ describe('file-uploader', function () {
       it('should render with minimum attributes', async function () {
         render(fileUploderItemTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-file-uploader-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -184,13 +236,20 @@ describe('file-uploader', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-file-uploader-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render uploaded state', async function () {
-        render(fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.UPLOADED }), document.body);
+        render(
+          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.UPLOADED }),
+          document.body
+        );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-file-uploader-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render uploaded state with various attributes', async function () {
@@ -205,14 +264,22 @@ describe('file-uploader', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-file-uploader-item')!.shadowRoot!.querySelector('svg')!.getAttribute('aria-label')
+          document.body
+            .querySelector('bx-file-uploader-item')!
+            .shadowRoot!.querySelector('svg')!
+            .getAttribute('aria-label')
         ).toBe('uploaded-assistive-text-foo');
       });
 
       it('should render editing state', async function () {
-        render(fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }), document.body);
+        render(
+          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }),
+          document.body
+        );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-file-uploader-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render editing state with various attributes', async function () {
@@ -226,13 +293,18 @@ describe('file-uploader', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-file-uploader-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
     describe('Handling delete button', function () {
       it('Should fire bx-file-uploader-item-beingdeleted/bx-file-uploader-item-deleted events upon hiding', async function () {
-        render(fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }), document.body);
+        render(
+          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }),
+          document.body
+        );
         await Promise.resolve();
         const elem = document.querySelector('bx-file-uploader-item');
         const spyBeforeDelete = jasmine.createSpy('before deleted');
@@ -246,7 +318,10 @@ describe('file-uploader', function () {
       });
 
       it('Should support preventing modal from being deleted upon user gesture', async function () {
-        render(fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }), document.body);
+        render(
+          fileUploderItemTemplate({ state: FILE_UPLOADER_ITEM_STATE.EDITING }),
+          document.body
+        );
         await Promise.resolve();
         const elem = document.querySelector('bx-file-uploader-item');
         const spyDelete = jasmine.createSpy('after deleted');

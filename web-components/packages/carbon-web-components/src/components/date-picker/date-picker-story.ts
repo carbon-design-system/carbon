@@ -12,13 +12,17 @@ import textNullable from '../../../.storybook/knob-text-nullable';
 import ifNonNull from '../../globals/directives/if-non-null';
 import { INPUT_SIZE } from '../input/input';
 import './date-picker';
-import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_SIZE_HORIZONTAL } from './date-picker-input';
+import {
+  DATE_PICKER_INPUT_COLOR_SCHEME,
+  DATE_PICKER_INPUT_SIZE_HORIZONTAL,
+} from './date-picker-input';
 import storyDocs from './date-picker-story.mdx';
 import './date-picker-input-skeleton';
 
 const colorSchemes = {
   [`Regular`]: null,
-  [`Light (${DATE_PICKER_INPUT_COLOR_SCHEME.LIGHT})`]: DATE_PICKER_INPUT_COLOR_SCHEME.LIGHT,
+  [`Light (${DATE_PICKER_INPUT_COLOR_SCHEME.LIGHT})`]:
+    DATE_PICKER_INPUT_COLOR_SCHEME.LIGHT,
 };
 
 const sizes = {
@@ -31,35 +35,70 @@ const knobs = {
   'bx-date-picker': () => ({
     dateFormat: textNullable('The date format (date-format)', 'm/d/Y'),
     disabled: boolean('Disabled (disabled in <bx-date-picker-input>)', false),
-    enabledRange: textNullable('Minimum/maximum dates in ISO8601 date format, separated by `/` (enabled-range)', ''),
+    enabledRange: textNullable(
+      'Minimum/maximum dates in ISO8601 date format, separated by `/` (enabled-range)',
+      ''
+    ),
     open: boolean('Open (open)', false),
-    value: textNullable('Value in ISO8601 date format, separated by `/` (value)', ''),
+    value: textNullable(
+      'Value in ISO8601 date format, separated by `/` (value)',
+      ''
+    ),
     onAfterChanged: action('bx-date-picker-changed'),
     onFlatpickrError: action('bx-date-picker-flatpickr-error'),
   }),
   'bx-date-picker-input': () => ({
-    colorScheme: select('Color scheme (color-scheme in <bx-date-picker-input>)', colorSchemes, null),
-    hideLabel: boolean('Hide label (hide-label in <bx-date-picker-input>)', false),
+    colorScheme: select(
+      'Color scheme (color-scheme in <bx-date-picker-input>)',
+      colorSchemes,
+      null
+    ),
+    hideLabel: boolean(
+      'Hide label (hide-label in <bx-date-picker-input>)',
+      false
+    ),
     invalid: boolean('Show invalid state  (invalid)', false),
-    labelText: textNullable('Label text (label-text in <bx-date-picker-input>)', 'Date Picker label'),
-    placeholder: textNullable('Placeholder text (placeholder in <bx-date-picker-input>)', 'mm/dd/yyyy'),
+    labelText: textNullable(
+      'Label text (label-text in <bx-date-picker-input>)',
+      'Date Picker label'
+    ),
+    placeholder: textNullable(
+      'Placeholder text (placeholder in <bx-date-picker-input>)',
+      'mm/dd/yyyy'
+    ),
     size: select('Input size (size)', sizes, INPUT_SIZE.REGULAR),
-    validityMessage: textNullable('The validity message (validity-message)', ''),
+    validityMessage: textNullable(
+      'The validity message (validity-message)',
+      ''
+    ),
     onInput: action('input'),
   }),
 };
 
 const sizesHorizontal = {
   'Regular size': null,
-  [`Short size (${DATE_PICKER_INPUT_SIZE_HORIZONTAL.SHORT})`]: DATE_PICKER_INPUT_SIZE_HORIZONTAL.SHORT,
+  [`Short size (${DATE_PICKER_INPUT_SIZE_HORIZONTAL.SHORT})`]:
+    DATE_PICKER_INPUT_SIZE_HORIZONTAL.SHORT,
 };
 
 export const Default = (args) => {
   const { disabled, name, value } = args?.['bx-date-picker'] ?? {};
-  const { colorScheme, hideLabel, invalid, labelText, placeholder, size, sizeHorizontal, validityMessage } =
-    args?.['bx-date-picker-input'] ?? {};
+  const {
+    colorScheme,
+    hideLabel,
+    invalid,
+    labelText,
+    placeholder,
+    size,
+    sizeHorizontal,
+    validityMessage,
+  } = args?.['bx-date-picker-input'] ?? {};
   return html`
-    <bx-date-picker ?disabled="${disabled}" name="${ifNonNull(name)}" value="${ifNonNull(value)}">
+    <bx-date-picker
+      ?disabled="${disabled}"
+      name="${ifNonNull(name)}"
+      value="${ifNonNull(value)}"
+    >
       <bx-date-picker-input
         color-scheme="${ifNonNull(colorScheme)}"
         ?hide-label="${hideLabel}"
@@ -81,15 +120,36 @@ Default.parameters = {
   knobs: {
     'bx-date-picker-input': () => ({
       ...knobs['bx-date-picker-input'](),
-      sizeHorizontal: select('Horizontal size (size-horizontal)', sizesHorizontal, null),
+      sizeHorizontal: select(
+        'Horizontal size (size-horizontal)',
+        sizesHorizontal,
+        null
+      ),
     }),
   },
 };
 
 export const singleWithCalendar = (args) => {
-  const { dateFormat, disabled, enabledRange, name, open, value, onChanged, onFlatpickrError } = args?.['bx-date-picker'] ?? {};
-  const { colorScheme, hideLabel, invalid, labelText, placeholder, size, validityMessage, onInput } =
-    args?.['bx-date-picker-input'] ?? {};
+  const {
+    dateFormat,
+    disabled,
+    enabledRange,
+    name,
+    open,
+    value,
+    onChanged,
+    onFlatpickrError,
+  } = args?.['bx-date-picker'] ?? {};
+  const {
+    colorScheme,
+    hideLabel,
+    invalid,
+    labelText,
+    placeholder,
+    size,
+    validityMessage,
+    onInput,
+  } = args?.['bx-date-picker-input'] ?? {};
   return html`
     <bx-date-picker
       date-format="${ifNonNull(dateFormat)}"
@@ -124,9 +184,26 @@ singleWithCalendar.parameters = {
 };
 
 export const rangeWithCalendar = (args) => {
-  const { dateFormat, disabled, enabledRange, name, open, value, onChanged, onFlatpickrError } = args?.['bx-date-picker'] ?? {};
-  const { colorScheme, hideLabel, invalid, labelText, placeholder, size, validityMessage, onInput } =
-    args?.['bx-date-picker-input'] ?? {};
+  const {
+    dateFormat,
+    disabled,
+    enabledRange,
+    name,
+    open,
+    value,
+    onChanged,
+    onFlatpickrError,
+  } = args?.['bx-date-picker'] ?? {};
+  const {
+    colorScheme,
+    hideLabel,
+    invalid,
+    labelText,
+    placeholder,
+    size,
+    validityMessage,
+    onInput,
+  } = args?.['bx-date-picker-input'] ?? {};
   return html`
     <bx-date-picker
       date-format="${ifNonNull(dateFormat)}"
@@ -172,7 +249,8 @@ rangeWithCalendar.parameters = {
   knobs,
 };
 
-export const skeletonSimple = () => html` <bx-date-picker-input-skeleton></bx-date-picker-input-skeleton> `;
+export const skeletonSimple = () =>
+  html` <bx-date-picker-input-skeleton></bx-date-picker-input-skeleton> `;
 
 skeletonSimple.storyName = 'Skeleton simple';
 
@@ -182,7 +260,12 @@ skeletonSimple.parameters = {
   },
 };
 
-export const skeletonSingle = () => html` <bx-date-picker-input-skeleton kind="single"></bx-date-picker-input-skeleton> `;
+export const skeletonSingle = () =>
+  html`
+    <bx-date-picker-input-skeleton
+      kind="single"
+    ></bx-date-picker-input-skeleton>
+  `;
 
 skeletonSingle.storyName = 'Skeleton single';
 

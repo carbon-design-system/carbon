@@ -23,7 +23,10 @@ export const decorators = [
    * @param story The original story factory.
    * @param context The story context.
    */
-  function decoratorKnobs(story, { args, parameters: { knobs } }: StoryContext) {
+  function decoratorKnobs(
+    story,
+    { args, parameters: { knobs } }: StoryContext
+  ) {
     if (Object(knobs) === knobs) {
       Object.keys(knobs).forEach((name) => {
         const { [name]: knobsForComponent } = knobs as KnobParameters;

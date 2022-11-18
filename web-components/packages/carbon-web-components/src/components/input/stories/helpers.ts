@@ -35,12 +35,18 @@ const createProps = ({ boolean, textNonEmpty, select }) => {
     colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
     disabled: boolean('Disabled (disabled)', false),
     value: textNonEmpty('Input value (value)', ''),
-    placeholder: textNonEmpty('Placeholder text (placeholder)', 'Optional placeholder text'),
+    placeholder: textNonEmpty(
+      'Placeholder text (placeholder)',
+      'Optional placeholder text'
+    ),
     invalid: boolean('Invalid (invalid)', false),
     onInput: action('input'),
     showPasswordVisibilityToggle:
       type === INPUT_TYPE.TEXT || type === INPUT_TYPE.PASSWORD
-        ? boolean('Show password visibility toggle (show-password-visibility-toggle)', false)
+        ? boolean(
+            'Show password visibility toggle (show-password-visibility-toggle)',
+            false
+          )
         : null,
     size: select('Input size (size)', sizes, INPUT_SIZE.REGULAR),
     type,

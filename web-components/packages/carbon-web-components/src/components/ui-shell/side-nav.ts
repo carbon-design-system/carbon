@@ -72,7 +72,11 @@ class BXSideNav extends HostListenerMixin(LitElement) {
       await this._updateAndTransitionPromise;
       // Checks if the side nav is not collapsed during the animation
       if (this.expanded) {
-        (this.querySelector((this.constructor as typeof BXSideNav).selectorNavItems) as HTMLElement)?.focus();
+        (
+          this.querySelector(
+            (this.constructor as typeof BXSideNav).selectorNavItems
+          ) as HTMLElement
+        )?.focus();
       }
     }
   };
@@ -82,9 +86,14 @@ class BXSideNav extends HostListenerMixin(LitElement) {
    */
   private _updatedSideNavMenuForceCollapsedState() {
     const { expanded, _hovered: hovered } = this;
-    forEach(this.querySelectorAll((this.constructor as typeof BXSideNav).selectorMenu), (item) => {
-      (item as BXSideNavMenu).forceCollapsed = !expanded && !hovered;
-    });
+    forEach(
+      this.querySelectorAll(
+        (this.constructor as typeof BXSideNav).selectorMenu
+      ),
+      (item) => {
+        (item as BXSideNavMenu).forceCollapsed = !expanded && !hovered;
+      }
+    );
   }
 
   /**
@@ -151,31 +160,52 @@ class BXSideNav extends HostListenerMixin(LitElement) {
   }
 
   updated(changedProperties) {
-    if (changedProperties.has('collapseMode') || changedProperties.has('usageMode')) {
+    if (
+      changedProperties.has('collapseMode') ||
+      changedProperties.has('usageMode')
+    ) {
       const { collapseMode, usageMode } = this;
       if (
-        (collapseMode === SIDE_NAV_COLLAPSE_MODE.FIXED || collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL) &&
+        (collapseMode === SIDE_NAV_COLLAPSE_MODE.FIXED ||
+          collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL) &&
         usageMode === SIDE_NAV_USAGE_MODE.HEADER_NAV
       ) {
-        console.warn('Fixed/rail modes of side nav cannot be used with header nav mode.'); // eslint-disable-line no-console
+        console.warn(
+          'Fixed/rail modes of side nav cannot be used with header nav mode.'
+        ); // eslint-disable-line no-console
       }
     }
     const doc = this.getRootNode() as Document;
     if (changedProperties.has('collapseMode')) {
-      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), (item) => {
-        (item as BXHeaderMenuButton).collapseMode = this.collapseMode;
-      });
+      forEach(
+        doc.querySelectorAll(
+          (this.constructor as typeof BXSideNav).selectorButtonToggle
+        ),
+        (item) => {
+          (item as BXHeaderMenuButton).collapseMode = this.collapseMode;
+        }
+      );
     }
     if (changedProperties.has('expanded')) {
       this._updatedSideNavMenuForceCollapsedState();
-      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), (item) => {
-        (item as BXHeaderMenuButton).active = this.expanded;
-      });
+      forEach(
+        doc.querySelectorAll(
+          (this.constructor as typeof BXSideNav).selectorButtonToggle
+        ),
+        (item) => {
+          (item as BXHeaderMenuButton).active = this.expanded;
+        }
+      );
     }
     if (changedProperties.has('usageMode')) {
-      forEach(doc.querySelectorAll((this.constructor as typeof BXSideNav).selectorButtonToggle), (item) => {
-        (item as BXHeaderMenuButton).usageMode = this.usageMode;
-      });
+      forEach(
+        doc.querySelectorAll(
+          (this.constructor as typeof BXSideNav).selectorButtonToggle
+        ),
+        (item) => {
+          (item as BXHeaderMenuButton).usageMode = this.usageMode;
+        }
+      );
     }
   }
 

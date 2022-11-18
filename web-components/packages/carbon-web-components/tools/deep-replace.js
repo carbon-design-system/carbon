@@ -49,8 +49,15 @@ const isPlainObj = require('is-plain-obj');
 function deepReplace(value, matcher, replacer, parents = []) {
   function mapPredicate(itemValue, key, parent) {
     const matches = matcher(itemValue, key, parent, parents);
-    const newItemValue = !matches ? itemValue : replacer(itemValue, key, parent, parents);
-    return deepReplace(newItemValue, matcher, replacer, parents.concat({ key, value: newItemValue }));
+    const newItemValue = !matches
+      ? itemValue
+      : replacer(itemValue, key, parent, parents);
+    return deepReplace(
+      newItemValue,
+      matcher,
+      replacer,
+      parents.concat({ key, value: newItemValue })
+    );
   }
   if (isPlainObj(value)) {
     return Object.keys(value).reduce((acc, key) => {
@@ -62,7 +69,9 @@ function deepReplace(value, matcher, replacer, parents = []) {
     }, {});
   }
   if (Array.isArray(value)) {
-    return value.map(mapPredicate).filter((itemValue) => itemValue !== deepReplace.DELETE);
+    return value
+      .map(mapPredicate)
+      .filter((itemValue) => itemValue !== deepReplace.DELETE);
   }
   return value;
 }

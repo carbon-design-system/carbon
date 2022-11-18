@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,13 +18,21 @@ describe('bx-loading', function () {
     });
 
     it('should choose the right template for default type', function () {
-      expect(elem!.shadowRoot!.querySelectorAll('.bx--loading--small,.bx--loading-overlay').length).toBe(0);
+      expect(
+        elem!.shadowRoot!.querySelectorAll(
+          '.bx--loading--small,.bx--loading-overlay'
+        ).length
+      ).toBe(0);
     });
 
     it('should choose the right template for regular type', async function () {
       elem!.setAttribute('type', LOADING_TYPE.REGULAR);
       await Promise.resolve();
-      expect(elem!.shadowRoot!.querySelectorAll('.bx--loading--small,.bx--loading-overlay').length).toBe(0);
+      expect(
+        elem!.shadowRoot!.querySelectorAll(
+          '.bx--loading--small,.bx--loading-overlay'
+        ).length
+      ).toBe(0);
     });
 
     it('should choose the right template for small type', async function () {
@@ -58,13 +66,17 @@ describe('bx-loading', function () {
     it('should deactivate when inactive attribute is set', async function () {
       elem!.setAttribute('inactive', '');
       await Promise.resolve();
-      expect(elem!.shadowRoot!.querySelectorAll('.bx--loading--stop').length).toBe(1);
+      expect(
+        elem!.shadowRoot!.querySelectorAll('.bx--loading--stop').length
+      ).toBe(1);
     });
 
     it('should activate when inactive attribute is unset', async function () {
       elem!.removeAttribute('inactive');
       await Promise.resolve();
-      expect(elem!.shadowRoot!.querySelectorAll('.bx--loading--stop').length).toBe(0);
+      expect(
+        elem!.shadowRoot!.querySelectorAll('.bx--loading--stop').length
+      ).toBe(0);
     });
 
     afterAll(function () {

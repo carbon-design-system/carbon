@@ -25,7 +25,9 @@ const { prefix } = settings;
  * @returns A function that shows the feedback tooltip for the given duration.
  * @private
  */
-export const _createHandleFeedbackTooltip = (update: (properties: { showFeedback?: boolean }) => void) => {
+export const _createHandleFeedbackTooltip = (
+  update: (properties: { showFeedback?: boolean }) => void
+) => {
   let timeoutId: number | void;
   return (timeout: number) => {
     if (timeoutId) {
@@ -51,7 +53,9 @@ export const _renderButton = ({
   feedbackText,
   showFeedback = false,
   className = `${prefix}--snippet-button`,
-  children = html` <slot>${Copy16({ class: `${prefix}--snippet__icon` })}</slot> `,
+  children = html`
+    <slot>${Copy16({ class: `${prefix}--snippet__icon` })}</slot>
+  `,
   handleClickButton,
 }: {
   assistiveText: string;
@@ -66,9 +70,17 @@ export const _renderButton = ({
     [`${prefix}--btn--copy__feedback--displayed`]: showFeedback,
   });
   return html`
-    <button type="button" class="${className}" title="${ifDefined(assistiveText)}" @click="${handleClickButton}">
+    <button
+      type="button"
+      class="${className}"
+      title="${ifDefined(assistiveText)}"
+      @click="${handleClickButton}"
+    >
       ${children}
-      <div class="${feedbackClasses}" data-feedback="${ifDefined(feedbackText)}"></div>
+      <div
+        class="${feedbackClasses}"
+        data-feedback="${ifDefined(feedbackText)}"
+      ></div>
     </button>
   `;
 };
@@ -83,10 +95,12 @@ class BXCopyButton extends FocusMixin(LitElement) {
   /**
    * Handles showing/hiding the feedback tooltip.
    */
-  private _handleFeedbackTooltip = _createHandleFeedbackTooltip(({ showFeedback = false }: { showFeedback?: boolean }) => {
-    this._showFeedback = showFeedback;
-    this.requestUpdate();
-  });
+  private _handleFeedbackTooltip = _createHandleFeedbackTooltip(
+    ({ showFeedback = false }: { showFeedback?: boolean }) => {
+      this._showFeedback = showFeedback;
+      this.requestUpdate();
+    }
+  );
 
   /**
    * `true` to show the feedback tooltip.
@@ -121,12 +135,19 @@ class BXCopyButton extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
-    const { buttonAssistiveText, feedbackText, _handleClickButton: handleClickButton, _showFeedback: showFeedback } = this;
+    const {
+      buttonAssistiveText,
+      feedbackText,
+      _handleClickButton: handleClickButton,
+      _showFeedback: showFeedback,
+    } = this;
     return _renderButton({
       assistiveText: buttonAssistiveText,
       feedbackText,

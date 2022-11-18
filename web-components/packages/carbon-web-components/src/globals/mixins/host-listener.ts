@@ -13,7 +13,8 @@ import Handle from '../internal/handle';
 /**
  * The format for the event name used by `@HostListener` decorator.
  */
-const EVENT_NAME_FORMAT = /^((document|window|parentRoot|shadowRoot):)?([\w-]+)$/;
+const EVENT_NAME_FORMAT =
+  /^((document|window|parentRoot|shadowRoot):)?([\w-]+)$/;
 
 /**
  * @param Base The base class.
@@ -34,7 +35,8 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
     connectedCallback() {
       // @ts-ignore: Until `connectedCallback` is added to `HTMLElement` definition
       super.connectedCallback();
-      const hostListeners = (this.constructor as typeof HostListenerMixinImpl)._hostListeners;
+      const hostListeners = (this.constructor as typeof HostListenerMixinImpl)
+        ._hostListeners;
       Object.keys(hostListeners).forEach((listenerName) => {
         Object.keys(hostListeners[listenerName]).forEach((type) => {
           // Parses `document:click`/`window:click` format
@@ -56,7 +58,8 @@ const HostListenerMixin = <T extends Constructor<HTMLElement>>(Base: T) => {
           this._handles.add(
             on(
               target,
-              ((this.constructor as typeof Base)[unprefixedType] ?? unprefixedType) as keyof HTMLElementEventMap,
+              ((this.constructor as typeof Base)[unprefixedType] ??
+                unprefixedType) as keyof HTMLElementEventMap,
               this[listenerName],
               options
             )

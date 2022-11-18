@@ -12,7 +12,10 @@ import EventManager from '../utils/event-manager';
 import ifNonNull from '../../src/globals/directives/if-non-null';
 import { INPUT_SIZE } from '../../src/components/input/input';
 import { TABLE_COLOR_SCHEME } from '../../src/components/data-table/table';
-import BXTableHeaderCell, { TABLE_SORT_CYCLE, TABLE_SORT_DIRECTION } from '../../src/components/data-table/table-header-cell';
+import BXTableHeaderCell, {
+  TABLE_SORT_CYCLE,
+  TABLE_SORT_DIRECTION,
+} from '../../src/components/data-table/table-header-cell';
 import BXTableRow from '../../src/components/data-table/table-row';
 import BXTableExpandRow from '../../src/components/data-table/table-expand-row';
 import BXTableExpandedRow from '../../src/components/data-table/table-expanded-row';
@@ -39,7 +42,8 @@ const headerCellTemplate = (props?) => {
 };
 
 const rowTemplate = (props?) => {
-  const { disabled, selected, selectionName, selectionLabel, selectionValue } = props ?? {};
+  const { disabled, selected, selectionName, selectionLabel, selectionValue } =
+    props ?? {};
   return html`
     <bx-table-row
       ?disabled="${disabled}"
@@ -52,7 +56,14 @@ const rowTemplate = (props?) => {
 };
 
 const expandRowTemplate = (props?) => {
-  const { disabled, expanded, selected, selectionName, selectionLabel, selectionValue } = props ?? {};
+  const {
+    disabled,
+    expanded,
+    selected,
+    selectionName,
+    selectionLabel,
+    selectionValue,
+  } = props ?? {};
   return html`
     <bx-table-expand-row
       ?disabled="${disabled}"
@@ -68,12 +79,22 @@ const expandRowTemplate = (props?) => {
 
 const batchActionTemplate = (props?) => {
   const { active, selectedRowsCount } = props ?? {};
-  return html` <bx-table-batch-actions ?active="${active}" selected-rows-count="${selectedRowsCount}"></bx-table-batch-actions> `;
+  return html`
+    <bx-table-batch-actions
+      ?active="${active}"
+      selected-rows-count="${selectedRowsCount}"
+    ></bx-table-batch-actions>
+  `;
 };
 
 const toolbarSearchTemplate = (props?) => {
   const { expanded, size } = props ?? {};
-  return html` <bx-table-toolbar-search ?expanded="${expanded}" size="${ifNonNull(size)}"></bx-table-toolbar-search> `;
+  return html`
+    <bx-table-toolbar-search
+      ?expanded="${expanded}"
+      size="${ifNonNull(size)}"
+    ></bx-table-toolbar-search>
+  `;
 };
 
 describe('data-table', function () {
@@ -84,7 +105,9 @@ describe('data-table', function () {
       it('should render with minimum attributes', async function () {
         render(batchActionTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-batch-actions')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-batch-actions')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -96,7 +119,9 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-batch-actions')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-batch-actions')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render non-plural selected rows count', async function () {
@@ -108,7 +133,9 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-batch-actions')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-batch-actions')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
@@ -124,7 +151,9 @@ describe('data-table', function () {
       it('should fire a custom event', async function () {
         const spyCancel = jasmine.createSpy('cancel');
         events.on(elem!, 'bx-table-batch-actions-cancel-clicked', spyCancel);
-        const cancelButton = elem.shadowRoot!.querySelector('.bx--batch-summary__cancel');
+        const cancelButton = elem.shadowRoot!.querySelector(
+          '.bx--batch-summary__cancel'
+        );
         (cancelButton as HTMLElement).click();
         await Promise.resolve();
         expect(spyCancel).toHaveBeenCalled();
@@ -134,11 +163,16 @@ describe('data-table', function () {
 
   describe('bx-table-body', function () {
     it('should support setting zebra stripe to rows', async function () {
-      render(template({ colorScheme: TABLE_COLOR_SCHEME.ZEBRA }), document.body);
+      render(
+        template({ colorScheme: TABLE_COLOR_SCHEME.ZEBRA }),
+        document.body
+      );
       await Promise.resolve();
       const result = Array.prototype.every.call(
         document.body.querySelectorAll('bx-table-row'),
-        (item, i) => (item as BXTableRow).even === ((i + 1) % 2 === 0) && (item as BXTableRow).odd === ((i + 1) % 2 !== 0)
+        (item, i) =>
+          (item as BXTableRow).even === ((i + 1) % 2 === 0) &&
+          (item as BXTableRow).odd === ((i + 1) % 2 !== 0)
       );
       expect(result).toBe(true);
     });
@@ -148,7 +182,9 @@ describe('data-table', function () {
       await Promise.resolve();
       const result = Array.prototype.every.call(
         document.body.querySelectorAll('bx-table-row'),
-        (item) => (item as BXTableRow).even === false && (item as BXTableRow).odd === false
+        (item) =>
+          (item as BXTableRow).even === false &&
+          (item as BXTableRow).odd === false
       );
       expect(result).toBe(true);
     });
@@ -159,7 +195,9 @@ describe('data-table', function () {
       it('should render with minimum attributes', async function () {
         render(headerCellTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-header-cell')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-header-cell')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -172,7 +210,9 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-header-cell')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-header-cell')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
@@ -187,8 +227,12 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        const elem = document.body.querySelector('bx-table-header-cell') as BXTableHeaderCell;
-        const button = elem.shadowRoot!.querySelector('.bx--table-sort') as HTMLButtonElement;
+        const elem = document.body.querySelector(
+          'bx-table-header-cell'
+        ) as BXTableHeaderCell;
+        const button = elem.shadowRoot!.querySelector(
+          '.bx--table-sort'
+        ) as HTMLButtonElement;
         button.click();
         await Promise.resolve();
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.ASCENDING);
@@ -210,8 +254,12 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        const elem = document.body.querySelector('bx-table-header-cell') as BXTableHeaderCell;
-        const button = elem.shadowRoot!.querySelector('.bx--table-sort') as HTMLButtonElement;
+        const elem = document.body.querySelector(
+          'bx-table-header-cell'
+        ) as BXTableHeaderCell;
+        const button = elem.shadowRoot!.querySelector(
+          '.bx--table-sort'
+        ) as HTMLButtonElement;
         button.click();
         await Promise.resolve();
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.DESCENDING);
@@ -233,8 +281,12 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        const elem = document.body.querySelector('bx-table-header-cell') as BXTableHeaderCell;
-        const button = elem.shadowRoot!.querySelector('.bx--table-sort') as HTMLButtonElement;
+        const elem = document.body.querySelector(
+          'bx-table-header-cell'
+        ) as BXTableHeaderCell;
+        const button = elem.shadowRoot!.querySelector(
+          '.bx--table-sort'
+        ) as HTMLButtonElement;
         button.click();
         await Promise.resolve();
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.ASCENDING);
@@ -256,8 +308,12 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        const elem = document.body.querySelector('bx-table-header-cell') as BXTableHeaderCell;
-        const button = elem.shadowRoot!.querySelector('.bx--table-sort') as HTMLButtonElement;
+        const elem = document.body.querySelector(
+          'bx-table-header-cell'
+        ) as BXTableHeaderCell;
+        const button = elem.shadowRoot!.querySelector(
+          '.bx--table-sort'
+        ) as HTMLButtonElement;
         button.click();
         await Promise.resolve();
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.DESCENDING);
@@ -279,11 +335,15 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        const elem = document.body.querySelector('bx-table-header-cell') as BXTableHeaderCell;
+        const elem = document.body.querySelector(
+          'bx-table-header-cell'
+        ) as BXTableHeaderCell;
         events.on(elem, 'bx-table-header-cell-sort', (event) => {
           event.preventDefault();
         });
-        const button = elem.shadowRoot!.querySelector('.bx--table-sort') as HTMLButtonElement;
+        const button = elem.shadowRoot!.querySelector(
+          '.bx--table-sort'
+        ) as HTMLButtonElement;
         button.click();
         await Promise.resolve();
         expect(elem.sortDirection).toBe(TABLE_SORT_DIRECTION.NONE);
@@ -296,7 +356,9 @@ describe('data-table', function () {
       it('should render with minimum attributes', async function () {
         render(rowTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-row')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-table-row')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
 
       it('should render with various attributes', async function () {
@@ -311,7 +373,9 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-row')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-table-row')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
     });
 
@@ -377,7 +441,9 @@ describe('data-table', function () {
       it('should render with minimum attributes', async function () {
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-expand-row')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-expand-row')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -393,7 +459,9 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-expand-row')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-expand-row')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
@@ -403,7 +471,9 @@ describe('data-table', function () {
         await Promise.resolve();
 
         const expandRow = document.body.querySelector('bx-table-expand-row');
-        const expandedRow = document.body.querySelector('bx-table-expanded-row');
+        const expandedRow = document.body.querySelector(
+          'bx-table-expanded-row'
+        );
 
         expandRow!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
@@ -424,7 +494,11 @@ describe('data-table', function () {
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
         const expandRow = document.body.querySelector('bx-table-expand-row');
-        events.on(expandRow!, 'bx-table-row-expando-beingtoggled', spyBeforeToggle);
+        events.on(
+          expandRow!,
+          'bx-table-row-expando-beingtoggled',
+          spyBeforeToggle
+        );
         events.on(expandRow!, 'bx-table-row-expando-toggled', spyAfterToggle);
         expandRow!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
@@ -440,7 +514,11 @@ describe('data-table', function () {
         render(expandRowTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const expandRow = document.body.querySelector('bx-table-expand-row');
-        events.on(expandRow!, 'bx-table-row-expando-beingtoggled', spyBeforeToggle);
+        events.on(
+          expandRow!,
+          'bx-table-row-expando-beingtoggled',
+          spyBeforeToggle
+        );
         events.on(expandRow!, 'bx-table-row-expando-toggled', spyAfterToggle);
         expandRow!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
@@ -471,12 +549,18 @@ describe('data-table', function () {
         await Promise.resolve();
 
         const expandRow = document.body.querySelector('bx-table-expand-row');
-        const expandedRow = document.body.querySelector('bx-table-expanded-row');
+        const expandedRow = document.body.querySelector(
+          'bx-table-expanded-row'
+        );
 
-        expandRow!.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
+        expandRow!.dispatchEvent(
+          new CustomEvent('mouseover', { bubbles: true })
+        );
         expect((expandedRow as BXTableExpandedRow).highlighted).toBe(true);
 
-        expandRow!.dispatchEvent(new CustomEvent('mouseout', { bubbles: true }));
+        expandRow!.dispatchEvent(
+          new CustomEvent('mouseout', { bubbles: true })
+        );
         expect((expandedRow as BXTableExpandedRow).highlighted).toBe(false);
       });
     });
@@ -487,7 +571,9 @@ describe('data-table', function () {
       it('should render with minimum attributes', async function () {
         render(toolbarSearchTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-toolbar-search')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-toolbar-search')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -499,7 +585,9 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-toolbar-search')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-table-toolbar-search')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
@@ -507,10 +595,14 @@ describe('data-table', function () {
       it('should expand and focus on the search box upon getting focus on the root', async function () {
         render(toolbarSearchTemplate(), document.body);
         await Promise.resolve();
-        const toolbarSearch = document.body.querySelector('bx-table-toolbar-search');
+        const toolbarSearch = document.body.querySelector(
+          'bx-table-toolbar-search'
+        );
         const input = toolbarSearch!.shadowRoot!.querySelector('input');
         spyOn(input!, 'focus');
-        toolbarSearch!.dispatchEvent(new CustomEvent('focusin', { bubbles: true }));
+        toolbarSearch!.dispatchEvent(
+          new CustomEvent('focusin', { bubbles: true })
+        );
         expect((toolbarSearch as BXTableToolbarSearch).expanded).toBe(true);
         await Promise.resolve();
         await Promise.resolve();
@@ -520,8 +612,12 @@ describe('data-table', function () {
       it('should collapse upon losing focus on the root', async function () {
         render(toolbarSearchTemplate({ expanded: true }), document.body);
         await Promise.resolve();
-        const toolbarSearch = document.body.querySelector('bx-table-toolbar-search');
-        toolbarSearch!.dispatchEvent(new CustomEvent('focusout', { bubbles: true }));
+        const toolbarSearch = document.body.querySelector(
+          'bx-table-toolbar-search'
+        );
+        toolbarSearch!.dispatchEvent(
+          new CustomEvent('focusout', { bubbles: true })
+        );
         expect((toolbarSearch as BXTableToolbarSearch).expanded).toBe(false);
       });
     });

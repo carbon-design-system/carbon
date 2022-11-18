@@ -28,7 +28,8 @@ import storyDocs from './tooltip-story.mdx';
 const tooltipBodyDirections = {
   [`Top (${FLOATING_MENU_DIRECTION.TOP})`]: FLOATING_MENU_DIRECTION.TOP,
   [`Right (${FLOATING_MENU_DIRECTION.RIGHT})`]: FLOATING_MENU_DIRECTION.RIGHT,
-  [`Bottom (${FLOATING_MENU_DIRECTION.BOTTOM})`]: FLOATING_MENU_DIRECTION.BOTTOM,
+  [`Bottom (${FLOATING_MENU_DIRECTION.BOTTOM})`]:
+    FLOATING_MENU_DIRECTION.BOTTOM,
   [`Left (${FLOATING_MENU_DIRECTION.LEFT})`]: FLOATING_MENU_DIRECTION.LEFT,
 };
 
@@ -53,10 +54,14 @@ export const Default = (args) => {
       ${styles}
     </style>
     <bx-tooltip ?open="${open}">
-      <bx-tooltip-body direction="${ifNonNull(direction)}" alignment="${ifNonNull(alignment)}">
+      <bx-tooltip-body
+        direction="${ifNonNull(direction)}"
+        alignment="${ifNonNull(alignment)}"
+      >
         <p>
-          This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed
-          please use a modal instead.
+          This is some tooltip text. This box shows the maximum amount of text
+          that should appear inside. If more room is needed please use a modal
+          instead.
         </p>
       </bx-tooltip-body>
     </bx-tooltip>
@@ -71,14 +76,23 @@ Default.parameters = {
       open: boolean('Open (open)', false),
     }),
     'bx-tooltip-body': () => ({
-      alignment: select('Tooltip alignment to trigger button (alignment)', tooltipAlignments, TOOLTIP_ALIGNMENT.CENTER),
-      direction: select('Direction (direction in <bx-tooltip-body>)', tooltipBodyDirections, FLOATING_MENU_DIRECTION.BOTTOM),
+      alignment: select(
+        'Tooltip alignment to trigger button (alignment)',
+        tooltipAlignments,
+        TOOLTIP_ALIGNMENT.CENTER
+      ),
+      direction: select(
+        'Direction (direction in <bx-tooltip-body>)',
+        tooltipBodyDirections,
+        FLOATING_MENU_DIRECTION.BOTTOM
+      ),
     }),
   },
 };
 
 export const definition = (args) => {
-  const { alignment, bodyText, direction } = args?.['bx-tooltip-definition'] ?? {};
+  const { alignment, bodyText, direction } =
+    args?.['bx-tooltip-definition'] ?? {};
   return html`
     <bx-tooltip-definition
       alignment="${ifNonNull(alignment)}"
@@ -95,9 +109,20 @@ definition.storyName = 'Definition tooltip';
 definition.parameters = {
   knobs: {
     'bx-tooltip-definition': () => ({
-      alignment: select('Tooltip alignment to trigger button (alignment)', tooltipAlignments, TOOLTIP_ALIGNMENT.CENTER),
-      bodyText: textNullable('Tooltip content (bodyText)', 'Brief description of the dotted, underlined word above.'),
-      direction: select('Tooltip direction (direction)', tooltipDefinitionDirections, TOOLTIP_DIRECTION.BOTTOM),
+      alignment: select(
+        'Tooltip alignment to trigger button (alignment)',
+        tooltipAlignments,
+        TOOLTIP_ALIGNMENT.CENTER
+      ),
+      bodyText: textNullable(
+        'Tooltip content (bodyText)',
+        'Brief description of the dotted, underlined word above.'
+      ),
+      direction: select(
+        'Tooltip direction (direction)',
+        tooltipDefinitionDirections,
+        TOOLTIP_DIRECTION.BOTTOM
+      ),
     }),
   },
 };
@@ -105,7 +130,11 @@ definition.parameters = {
 export const icon = (args) => {
   const { alignment, bodyText, direction } = args?.['bx-tooltip-icon'] ?? {};
   return html`
-    <bx-tooltip-icon alignment="${ifNonNull(alignment)}" body-text="${ifNonNull(bodyText)}" direction="${ifNonNull(direction)}">
+    <bx-tooltip-icon
+      alignment="${ifNonNull(alignment)}"
+      body-text="${ifNonNull(bodyText)}"
+      direction="${ifNonNull(direction)}"
+    >
       ${Filter16()}
     </bx-tooltip-icon>
   `;

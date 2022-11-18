@@ -142,12 +142,24 @@ class BXSliderInput extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
-    const { colorScheme, disabled, max, min, step, type, value, _handleChange: handleChange, _handleInput: handleInput } = this;
+    const {
+      colorScheme,
+      disabled,
+      max,
+      min,
+      step,
+      type,
+      value,
+      _handleChange: handleChange,
+      _handleInput: handleInput,
+    } = this;
     // NOTE: Our React variant has an option to add `invalid` option here,
     // but there doesn't seem a corresponding style to the thumb.
     // Because of that, in addition to the mininum/maximum constraint enforced,

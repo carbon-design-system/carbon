@@ -32,7 +32,11 @@ class BXTooltipIcon extends BXTooltipDefintion {
     });
     return html`
       <button class="${classes}" aria-describedby="tooltip-body">
-        <span class="${prefix}--assistive-text" id="tooltip-body" role="tooltip">
+        <span
+          class="${prefix}--assistive-text"
+          id="tooltip-body"
+          role="tooltip"
+        >
           <slot name="body">${bodyText}</slot>
         </span>
         <slot></slot>

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -61,11 +61,13 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-content-switcher-item[hide-divider]) .#{$prefix}--content-switcher-btn::before {
+:host(#{$prefix}-content-switcher-item[hide-divider])
+  .#{$prefix}--content-switcher-btn::before {
   background-color: transparent;
 }
 
-:host(#{$prefix}-content-switcher-item:first-of-type) .#{$prefix}--content-switcher-btn {
+:host(#{$prefix}-content-switcher-item:first-of-type)
+  .#{$prefix}--content-switcher-btn {
   border-top-left-radius: rem(4px);
   border-bottom-left-radius: rem(4px);
   border-left: rem(1px) solid $ui-05;
@@ -79,7 +81,8 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-content-switcher-item:last-of-type) .#{$prefix}--content-switcher-btn {
+:host(#{$prefix}-content-switcher-item:last-of-type)
+  .#{$prefix}--content-switcher-btn {
   border-top-right-radius: rem(4px);
   border-bottom-right-radius: rem(4px);
   border-right: rem(1px) solid $ui-05;

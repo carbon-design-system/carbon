@@ -35,10 +35,13 @@
 //
 
 :host(#{$prefix}-table-header-row) ::slotted(#{$prefix}-table-header-cell),
-:host(#{$prefix}-table-header-row) ::slotted(#{$prefix}-table-header-cell-skeleton),
+:host(#{$prefix}-table-header-row)
+  ::slotted(#{$prefix}-table-header-cell-skeleton),
 :host(#{$prefix}-table-header-row) .#{$prefix}--table-column-checkbox,
-:host(#{$prefix}-table-header-expand-row) ::slotted(#{$prefix}-table-header-cell),
-:host(#{$prefix}-table-header-expand-row) ::slotted(#{$prefix}-table-header-cell-skeleton),
+:host(#{$prefix}-table-header-expand-row)
+  ::slotted(#{$prefix}-table-header-cell),
+:host(#{$prefix}-table-header-expand-row)
+  ::slotted(#{$prefix}-table-header-cell-skeleton),
 :host(#{$prefix}-table-header-expand-row) .#{$prefix}--table-expand,
 :host(#{$prefix}-table-header-expand-row) .#{$prefix}--table-column-checkbox,
 :host(#{$prefix}-table-row) ::slotted(#{$prefix}-table-cell),

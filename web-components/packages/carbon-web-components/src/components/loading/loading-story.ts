@@ -21,7 +21,9 @@ const types = {
 
 export const Default = (args) => {
   const { inactive, type } = args?.['bx-loading'] ?? {};
-  return html` <bx-loading ?inactive=${inactive} type=${ifNonNull(type)}></bx-loading> `;
+  return html`
+    <bx-loading ?inactive=${inactive} type=${ifNonNull(type)}></bx-loading>
+  `;
 };
 
 Default.storyName = 'Default';

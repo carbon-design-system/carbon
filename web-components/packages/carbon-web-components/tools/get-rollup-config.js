@@ -61,7 +61,9 @@ function _generateInputs(mode, dir, folders) {
   const inputs = {};
 
   folders.forEach((folder) => {
-    inputs[`${folder}${dirSuffixes[dir]}${modeSuffixes[mode]}`] = `src/components/${folder}/index.ts`;
+    inputs[
+      `${folder}${dirSuffixes[dir]}${modeSuffixes[mode]}`
+    ] = `src/components/${folder}/index.ts`;
   });
 
   return inputs;
@@ -99,7 +101,11 @@ function _getPostCSSPlugins(mode, dir) {
  * @param {Array} [options.folders] Package names as inputs
  * @returns {object} The Rollup config.
  */
-function getRollupConfig({ mode = 'development', dir = 'ltr', folders = [] } = {}) {
+function getRollupConfig({
+  mode = 'development',
+  dir = 'ltr',
+  folders = [],
+} = {}) {
   const postCSSPlugins = _getPostCSSPlugins(mode, dir);
 
   const licenseOptions = {
@@ -132,7 +138,10 @@ function getRollupConfig({ mode = 'development', dir = 'ltr', folders = [] } = {
         plugins: [
           '@babel/plugin-transform-typescript',
           '@babel/plugin-proposal-class-properties',
-          ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
+          [
+            '@babel/plugin-proposal-decorators',
+            { decoratorsBeforeExport: true },
+          ],
           '@babel/plugin-proposal-nullish-coalescing-operator',
           ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
           '@babel/plugin-proposal-optional-chaining',
@@ -161,13 +170,16 @@ function getRollupConfig({ mode = 'development', dir = 'ltr', folders = [] } = {
       litSCSS({
         includePaths: [path.resolve(__dirname, '../node_modules')],
         async preprocessor(contents, id) {
-          return (await postcss(postCSSPlugins).process(contents, { from: id })).css;
+          return (await postcss(postCSSPlugins).process(contents, { from: id }))
+            .css;
         },
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify(mode),
       }),
-      ...(mode === 'development' ? [license(licenseOptions)] : [terser(), license(licenseOptions)]),
+      ...(mode === 'development'
+        ? [license(licenseOptions)]
+        : [terser(), license(licenseOptions)]),
     ],
   };
 }

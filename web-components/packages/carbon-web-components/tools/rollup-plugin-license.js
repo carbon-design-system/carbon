@@ -12,7 +12,14 @@ const readPkgUp = require('read-pkg-up');
 const MagicString = require('magic-string');
 const { createFilter } = require('@rollup/pluginutils');
 
-function rollupPluginLicense({ include, exclude, whitelist, sourcemap, sourceMap, licenseSelf } = {}) {
+function rollupPluginLicense({
+  include,
+  exclude,
+  whitelist,
+  sourcemap,
+  sourceMap,
+  licenseSelf,
+} = {}) {
   const filter = createFilter(include, exclude);
   const licensesForPackages = {};
 
@@ -25,7 +32,9 @@ function rollupPluginLicense({ include, exclude, whitelist, sourcemap, sourceMap
       }
 
       const isSelf = /\/node_modules\//i.test(id);
-      const packageContents = !isSelf ? undefined : await readPkgUp({ cwd: path.dirname(id) });
+      const packageContents = !isSelf
+        ? undefined
+        : await readPkgUp({ cwd: path.dirname(id) });
       const { name } = (packageContents && packageContents.packageJson) || {};
 
       if (!name || licensesForPackages[name]) {
@@ -52,22 +61,32 @@ function rollupPluginLicense({ include, exclude, whitelist, sourcemap, sourceMap
     async renderChunk(contents) {
       const magicString = new MagicString(contents);
 
-      const keys = Object.keys(licensesForPackages).filter((name) => !whitelist || !whitelist.test(name));
+      const keys = Object.keys(licensesForPackages).filter(
+        (name) => !whitelist || !whitelist.test(name)
+      );
       if (keys.length > 0) {
         const thirdPartyLicenseNotice = [
           '@license',
           '',
           'This bundle contains the following third-party dependencies:',
-          ...keys.filter((name) => licensesForPackages[name]).map((name) => `\n * ${name}:\n * \n ${licensesForPackages[name]}`),
+          ...keys
+            .filter((name) => licensesForPackages[name])
+            .map((name) => `\n * ${name}:\n * \n ${licensesForPackages[name]}`),
           '',
           'Also refer to the following links for the license of other third-party dependencies:',
           '',
-          ...keys.filter((name) => !licensesForPackages[name]).map((name) => `https://www.npmjs.com/package/${name}`),
+          ...keys
+            .filter((name) => !licensesForPackages[name])
+            .map((name) => `https://www.npmjs.com/package/${name}`),
         ].join('\n * ');
         magicString.prepend(`/**\n * ${thirdPartyLicenseNotice}\n */\n\n`);
       }
 
-      magicString.prepend((typeof licenseSelf === 'function' ? await licenseSelf() : licenseSelf) || '');
+      magicString.prepend(
+        (typeof licenseSelf === 'function'
+          ? await licenseSelf()
+          : licenseSelf) || ''
+      );
 
       const result = { code: magicString.toString() };
       if (sourceMap !== false && sourcemap !== false) {

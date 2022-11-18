@@ -25,8 +25,10 @@ const kinds = {
   [`Secondary button (${BUTTON_KIND.SECONDARY})`]: BUTTON_KIND.SECONDARY,
   [`Tertiary button (${BUTTON_KIND.TERTIARY})`]: BUTTON_KIND.TERTIARY,
   [`Danger button (${BUTTON_KIND.DANGER})`]: BUTTON_KIND.DANGER,
-  [`Danger tertiary button (${BUTTON_KIND.DANGER_TERTIARY})`]: BUTTON_KIND.DANGER_TERTIARY,
-  [`Danger ghost button (${BUTTON_KIND.DANGER_GHOST})`]: BUTTON_KIND.DANGER_GHOST,
+  [`Danger tertiary button (${BUTTON_KIND.DANGER_TERTIARY})`]:
+    BUTTON_KIND.DANGER_TERTIARY,
+  [`Danger ghost button (${BUTTON_KIND.DANGER_GHOST})`]:
+    BUTTON_KIND.DANGER_GHOST,
   [`Ghost button (${BUTTON_KIND.GHOST})`]: BUTTON_KIND.GHOST,
 };
 
@@ -43,8 +45,22 @@ const iconLayouts = {
 };
 
 export const Default = (args) => {
-  const { autofocus, disabled, download, href, hreflang, isExpressive, kind, linkRole, ping, rel, size, target, type, onClick } =
-    args?.['bx-btn'] ?? {};
+  const {
+    autofocus,
+    disabled,
+    download,
+    href,
+    hreflang,
+    isExpressive,
+    kind,
+    linkRole,
+    ping,
+    rel,
+    size,
+    target,
+    type,
+    onClick,
+  } = args?.['bx-btn'] ?? {};
   return html`
     <bx-btn
       ?autofocus="${autofocus}"
@@ -81,7 +97,8 @@ Default.parameters = {
 };
 
 export const icon = (args) => {
-  const { kind, disabled, size, href, isExpressive, onClick } = args?.['bx-btn'] ?? {};
+  const { kind, disabled, size, href, isExpressive, onClick } =
+    args?.['bx-btn'] ?? {};
   return html`
     <bx-btn
       kind=${ifNonNull(kind)}
@@ -99,7 +116,8 @@ export const icon = (args) => {
 icon.parameters = Default.parameters;
 
 export const textAndIcon = (args) => {
-  const { kind, disabled, size, href, iconLayout, isExpressive, onClick } = args?.['bx-btn'] ?? {};
+  const { kind, disabled, size, href, iconLayout, isExpressive, onClick } =
+    args?.['bx-btn'] ?? {};
   return html`
     <bx-btn
       kind=${ifNonNull(kind)}
@@ -132,7 +150,8 @@ textAndIcon.parameters = {
 };
 
 export const skeleton = (args) => {
-  const { disabled, size, href, isExpressive, onClick } = args?.['bx-btn-skeleton'];
+  const { disabled, size, href, isExpressive, onClick } =
+    args?.['bx-btn-skeleton'];
   return html`
     <bx-btn-skeleton
       ?disabled=${disabled}

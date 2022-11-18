@@ -13,7 +13,10 @@ import settings from 'carbon-components/es/globals/js/settings';
 import View16 from '@carbon/icons/lib/view/16';
 import ViewOff16 from '@carbon/icons/lib/view--off/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import { FLOATING_MENU_ALIGNMENT, FLOATING_MENU_DIRECTION } from '../floating-menu/floating-menu';
+import {
+  FLOATING_MENU_ALIGNMENT,
+  FLOATING_MENU_DIRECTION,
+} from '../floating-menu/floating-menu';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FormMixin from '../../globals/mixins/form';
 import ValidityMixin from '../../globals/mixins/validity';
@@ -155,7 +158,11 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
   /**
    * Boolean property to render password visibility toggle
    */
-  @property({ type: Boolean, attribute: 'show-password-visibility-toggle', reflect: true })
+  @property({
+    type: Boolean,
+    attribute: 'show-password-visibility-toggle',
+    reflect: true,
+  })
   showPasswordVisibilityToggle = false;
 
   /**
@@ -219,7 +226,9 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -227,13 +236,16 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
    * Handles password visibility toggle button click
    */
   private handleTogglePasswordVisibility() {
-    this.type = this.type === INPUT_TYPE.PASSWORD ? INPUT_TYPE.TEXT : INPUT_TYPE.PASSWORD;
+    this.type =
+      this.type === INPUT_TYPE.PASSWORD ? INPUT_TYPE.TEXT : INPUT_TYPE.PASSWORD;
   }
 
   render() {
     const { _handleInput: handleInput } = this;
 
-    const invalidIcon = WarningFilled16({ class: `${prefix}--text-input__invalid-icon` });
+    const invalidIcon = WarningFilled16({
+      class: `${prefix}--text-input__invalid-icon`,
+    });
 
     const inputClasses = classMap({
       [`${prefix}--text-input`]: true,
@@ -266,11 +278,14 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--tooltip--a11y`]: true,
       [`${prefix}--btn--disabled`]: this.disabled,
       [`${prefix}--tooltip--${this.tooltipDirection}`]: this.tooltipDirection,
-      [`${prefix}--tooltip--align-${this.tooltipAlignment}`]: this.tooltipAlignment,
+      [`${prefix}--tooltip--align-${this.tooltipAlignment}`]:
+        this.tooltipAlignment,
     });
 
     const passwordButtonLabel = html`
-      <span class="${prefix}--assistive-text"> ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel} </span>
+      <span class="${prefix}--assistive-text">
+        ${passwordIsVisible ? this.hidePasswordLabel : this.showPasswordLabel}
+      </span>
     `;
 
     const passwordVisibilityButton = () => html`
@@ -288,7 +303,10 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
       <label class="${labelClasses}" for="input">
         <slot name="label-text"> ${this.labelText} </slot>
       </label>
-      <div class="${prefix}--text-input__field-wrapper" ?data-invalid="${this.invalid}">
+      <div
+        class="${prefix}--text-input__field-wrapper"
+        ?data-invalid="${this.invalid}"
+      >
         ${this.invalid ? invalidIcon : null}
         <input
           ?autocomplete="${this.autocomplete}"
@@ -307,7 +325,8 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
           .value="${this._value}"
           @input="${handleInput}"
         />
-        ${this.showPasswordVisibilityToggle && (this.type === INPUT_TYPE.PASSWORD || this.type === INPUT_TYPE.TEXT)
+        ${this.showPasswordVisibilityToggle &&
+        (this.type === INPUT_TYPE.PASSWORD || this.type === INPUT_TYPE.TEXT)
           ? passwordVisibilityButton()
           : null}
       </div>

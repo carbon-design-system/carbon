@@ -16,7 +16,8 @@ import { find } from '../../globals/internal/collection-helpers';
 /**
  * `FlatpickrInstance` with additional properties used for `carbonFlatpickrShadowDOMEventsPlugin`.
  */
-export interface ExtendedFlatpickrInstanceShadowDOMEventsPlugin extends FlatpickrInstance {
+export interface ExtendedFlatpickrInstanceShadowDOMEventsPlugin
+  extends FlatpickrInstance {
   /**
    * The handle for `keydown` event handler in calendar dropdown.
    */
@@ -63,11 +64,23 @@ const MILLISECONDS_IN_DAY = 86400000;
  * @param options The options.
  * @param [options.date=0] The amount of days to adjust.
  */
-const adjustDate = (localDate: Date, { date: moveDate = 0 }: { date?: number }) => {
+const adjustDate = (
+  localDate: Date,
+  { date: moveDate = 0 }: { date?: number }
+) => {
   const utcDate = new Date(
-    Date.UTC(localDate.getFullYear(), localDate.getMonth(), localDate.getDate()) + moveDate * MILLISECONDS_IN_DAY
+    Date.UTC(
+      localDate.getFullYear(),
+      localDate.getMonth(),
+      localDate.getDate()
+    ) +
+      moveDate * MILLISECONDS_IN_DAY
   );
-  return new Date(utcDate.getUTCFullYear(), utcDate.getUTCMonth(), utcDate.getUTCDate());
+  return new Date(
+    utcDate.getUTCFullYear(),
+    utcDate.getUTCMonth(),
+    utcDate.getUTCDate()
+  );
 };
 
 /**
@@ -76,69 +89,96 @@ const adjustDate = (localDate: Date, { date: moveDate = 0 }: { date?: number }) 
  *   A Flatpickr plugin to handle events.
  *   Some event handlers in Flatpickr won't work is the calendar dropdown is put in shadow DOM, due to event retargetting.
  */
-export default (): Plugin => (fp: ExtendedFlatpickrInstanceShadowDOMEventsPlugin) => {
-  const getDateElem = (localDate) =>
-    find(fp.daysContainer!.firstElementChild!.children, ({ dateObj }: any) => localDate.getTime() === dateObj.getTime());
+export default (): Plugin =>
+  (fp: ExtendedFlatpickrInstanceShadowDOMEventsPlugin) => {
+    const getDateElem = (localDate) =>
+      find(
+        fp.daysContainer!.firstElementChild!.children,
+        ({ dateObj }: any) => localDate.getTime() === dateObj.getTime()
+      );
 
-  /**
-   * Handles `keydown` event.
-   */
-  const handleKeydown = (event: KeyboardEvent) => {
-    const { ctrlKey, key, target } = event;
-    if (key === 'Enter') {
-      target!.dispatchEvent(Object.assign(new CustomEvent('mousedown', { bubbles: true }), { which: 1 }));
-    } else if (!ctrlKey && key in moveDateForKeys) {
-      const { dateObj } = target as any;
-      const movedDate = adjustDate(dateObj, { date: moveDateForKeys[key] });
-      const movedDateElem = getDateElem(movedDate);
-      if (movedDateElem) {
-        movedDateElem.focus();
-      } else {
-        const innerDaysContainer = fp.daysContainer!.firstElementChild!;
-        if (movedDate.getTime() < (innerDaysContainer.firstElementChild as any).dateObj.getTime()) {
-          fp.changeMonth(-1);
-          // `fp.daysContainer` is updated by `fp.changeMonth()`
-          (fp.daysContainer!.firstElementChild!.lastElementChild as HTMLElement).focus();
-        } else if (movedDate.getTime() > (innerDaysContainer.lastElementChild as any).dateObj.getTime()) {
-          fp.changeMonth(1);
-          // `fp.daysContainer` is updated by `fp.changeMonth()`
-          (fp.daysContainer!.firstElementChild!.firstElementChild as HTMLElement).focus();
+    /**
+     * Handles `keydown` event.
+     */
+    const handleKeydown = (event: KeyboardEvent) => {
+      const { ctrlKey, key, target } = event;
+      if (key === 'Enter') {
+        target!.dispatchEvent(
+          Object.assign(new CustomEvent('mousedown', { bubbles: true }), {
+            which: 1,
+          })
+        );
+      } else if (!ctrlKey && key in moveDateForKeys) {
+        const { dateObj } = target as any;
+        const movedDate = adjustDate(dateObj, { date: moveDateForKeys[key] });
+        const movedDateElem = getDateElem(movedDate);
+        if (movedDateElem) {
+          movedDateElem.focus();
+        } else {
+          const innerDaysContainer = fp.daysContainer!.firstElementChild!;
+          if (
+            movedDate.getTime() <
+            (innerDaysContainer.firstElementChild as any).dateObj.getTime()
+          ) {
+            fp.changeMonth(-1);
+            // `fp.daysContainer` is updated by `fp.changeMonth()`
+            (
+              fp.daysContainer!.firstElementChild!
+                .lastElementChild as HTMLElement
+            ).focus();
+          } else if (
+            movedDate.getTime() >
+            (innerDaysContainer.lastElementChild as any).dateObj.getTime()
+          ) {
+            fp.changeMonth(1);
+            // `fp.daysContainer` is updated by `fp.changeMonth()`
+            (
+              fp.daysContainer!.firstElementChild!
+                .firstElementChild as HTMLElement
+            ).focus();
+          }
         }
+        event.preventDefault();
+      } else if (ctrlKey && key in moveMonthForKeys) {
+        fp.changeMonth(moveMonthForKeys[key]);
+        (
+          fp.daysContainer!.firstElementChild!.firstElementChild as HTMLElement
+        ).focus();
+        event.preventDefault();
       }
-      event.preventDefault();
-    } else if (ctrlKey && key in moveMonthForKeys) {
-      fp.changeMonth(moveMonthForKeys[key]);
-      (fp.daysContainer!.firstElementChild!.firstElementChild as HTMLElement).focus();
-      event.preventDefault();
-    }
-  };
+    };
 
-  /**
-   * Releases event listeners used in this Flatpickr plugin.
-   */
-  const release = () => {
-    if (fp._hBXCEDatePickerShadowDOMEventsPluginKeydown) {
-      fp._hBXCEDatePickerShadowDOMEventsPluginKeydown = fp._hBXCEDatePickerShadowDOMEventsPluginKeydown.release();
-    }
-  };
+    /**
+     * Releases event listeners used in this Flatpickr plugin.
+     */
+    const release = () => {
+      if (fp._hBXCEDatePickerShadowDOMEventsPluginKeydown) {
+        fp._hBXCEDatePickerShadowDOMEventsPluginKeydown =
+          fp._hBXCEDatePickerShadowDOMEventsPluginKeydown.release();
+      }
+    };
 
-  /**
-   * Sets up event listeners used for this Flatpickr plugin.
-   */
-  const init = () => {
-    release();
-    fp._hBXCEDatePickerShadowDOMEventsPluginKeydown = on(fp.calendarContainer, 'keydown', handleKeydown);
-  };
+    /**
+     * Sets up event listeners used for this Flatpickr plugin.
+     */
+    const init = () => {
+      release();
+      fp._hBXCEDatePickerShadowDOMEventsPluginKeydown = on(
+        fp.calendarContainer,
+        'keydown',
+        handleKeydown
+      );
+    };
 
-  /**
-   * Registers this Flatpickr plugin.
-   */
-  const register = () => {
-    fp.loadedPlugins.push('carbonFlatpickrShadowDOMEventsPlugin');
-  };
+    /**
+     * Registers this Flatpickr plugin.
+     */
+    const register = () => {
+      fp.loadedPlugins.push('carbonFlatpickrShadowDOMEventsPlugin');
+    };
 
-  return {
-    onReady: [register, init],
-    onDestroy: [release],
+    return {
+      onReady: [register, init],
+      onDestroy: [release],
+    };
   };
-};

@@ -63,7 +63,8 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-dropdown-item[disabled]) .#{$prefix}--list-box__menu-item__option {
+:host(#{$prefix}-dropdown-item[disabled])
+  .#{$prefix}--list-box__menu-item__option {
   color: $disabled-02;
   text-decoration: none;
 }

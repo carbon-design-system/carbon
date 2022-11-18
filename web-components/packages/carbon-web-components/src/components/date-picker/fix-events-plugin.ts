@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -31,7 +31,8 @@ export interface DatePickerFixEventsPluginConfig {
 /**
  * `FlatpickrInstance` with additional properties used for `carbonFlatpickrFixEventsPlugin`.
  */
-export interface ExtendedFlatpickrInstanceFixEventsPlugin extends FlatpickrInstance {
+export interface ExtendedFlatpickrInstanceFixEventsPlugin
+  extends FlatpickrInstance {
   /**
    * The handle for `keydown` event handler in the `<input>` for the starting date.
    */
@@ -60,7 +61,11 @@ export default (config: DatePickerFixEventsPluginConfig): Plugin =>
           case 'Enter':
             // Makes sure the hitting enter key picks up pending values of both `<input>`
             // Workaround for: https://github.com/flatpickr/flatpickr/issues/1942
-            fp.setDate([inputFrom.value!, (inputTo && inputTo.value)!], true, fp.config.dateFormat);
+            fp.setDate(
+              [inputFrom.value!, (inputTo && inputTo.value)!],
+              true,
+              fp.config.dateFormat
+            );
             event.stopPropagation();
             break;
           case 'ArrowLeft':
@@ -83,10 +88,12 @@ export default (config: DatePickerFixEventsPluginConfig): Plugin =>
      */
     const release = () => {
       if (fp._hBXCEDatePickerFixEventsPluginKeydownTo) {
-        fp._hBXCEDatePickerFixEventsPluginKeydownTo = fp._hBXCEDatePickerFixEventsPluginKeydownTo.release();
+        fp._hBXCEDatePickerFixEventsPluginKeydownTo =
+          fp._hBXCEDatePickerFixEventsPluginKeydownTo.release();
       }
       if (fp._hBXCEDatePickerFixEventsPluginKeydownFrom) {
-        fp._hBXCEDatePickerFixEventsPluginKeydownFrom = fp._hBXCEDatePickerFixEventsPluginKeydownFrom.release();
+        fp._hBXCEDatePickerFixEventsPluginKeydownFrom =
+          fp._hBXCEDatePickerFixEventsPluginKeydownFrom.release();
       }
     };
 
@@ -96,9 +103,19 @@ export default (config: DatePickerFixEventsPluginConfig): Plugin =>
     const init = () => {
       release();
       const { inputFrom, inputTo } = config;
-      fp._hBXCEDatePickerFixEventsPluginKeydownFrom = on(inputFrom, 'keydown', handleKeydown, true);
+      fp._hBXCEDatePickerFixEventsPluginKeydownFrom = on(
+        inputFrom,
+        'keydown',
+        handleKeydown,
+        true
+      );
       if (inputTo) {
-        fp._hBXCEDatePickerFixEventsPluginKeydownTo = on(inputTo, 'keydown', handleKeydown, true);
+        fp._hBXCEDatePickerFixEventsPluginKeydownTo = on(
+          inputTo,
+          'keydown',
+          handleKeydown,
+          true
+        );
       }
     };
 

@@ -68,12 +68,22 @@ export const inline = (args) => {
 inline.parameters = {
   knobs: {
     'bx-inline-notification': () => ({
-      kind: select('The notification kind (kind)', kinds, NOTIFICATION_KIND.INFO),
+      kind: select(
+        'The notification kind (kind)',
+        kinds,
+        NOTIFICATION_KIND.INFO
+      ),
       title: textNullable('Title (title)', 'Notification title'),
       subtitle: textNullable('Subtitle (subtitle)', 'Subtitle text goes here.'),
-      hideCloseButton: boolean('Hide the close button (hide-close-button)', false),
+      hideCloseButton: boolean(
+        'Hide the close button (hide-close-button)',
+        false
+      ),
       lowContrast: boolean('Use low contrast variant (low-contrast)', false),
-      closeButtonLabel: textNullable('a11y label for the close button (close-button-label)', ''),
+      closeButtonLabel: textNullable(
+        'a11y label for the close button (close-button-label)',
+        ''
+      ),
       iconLabel: textNullable('a11y label for the icon (icon-label)', ''),
       open: boolean('Open (open)', true),
       timeout: textNullable('Timeout (in ms)', ''),

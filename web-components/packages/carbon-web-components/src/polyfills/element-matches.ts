@@ -7,9 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const matchesFuncName = ['matches', 'webkitMatchesSelector', 'msMatchesSelector'].filter(
-  (name) => typeof Element.prototype[name] === 'function'
-)[0];
+const matchesFuncName = [
+  'matches',
+  'webkitMatchesSelector',
+  'msMatchesSelector',
+].filter((name) => typeof Element.prototype[name] === 'function')[0];
 
 if (matchesFuncName !== 'matches') {
   Element.prototype.matches = Element.prototype[matchesFuncName];

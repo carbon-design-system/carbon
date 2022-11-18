@@ -49,7 +49,8 @@ describe('bx-modal', function () {
 
     it('Should support specifying the primary focus element', async function () {
       spyOn(BXModal as any, '_delay').and.callFake(() => {});
-      elem!.innerHTML = '<input type="text"><button data-modal-primary-focus></button>';
+      elem!.innerHTML =
+        '<input type="text"><button data-modal-primary-focus></button>';
       const input = elem!.querySelector('input');
       const button = elem!.querySelector('button');
       spyOn(input!, 'focus');
@@ -63,7 +64,8 @@ describe('bx-modal', function () {
 
     it('Should support using primary button in footer as the primary focus element', async function () {
       spyOn(BXModal as any, '_delay').and.callFake(() => {});
-      elem!.innerHTML = '<input type="text"><bx-modal-footer><bx-btn kind="primary"></bx-btn></bx-modal-footer>';
+      elem!.innerHTML =
+        '<input type="text"><bx-modal-footer><bx-btn kind="primary"></bx-btn></bx-modal-footer>';
       const input = elem!.querySelector('input');
       const button = elem!.querySelector('bx-btn');
       spyOn(input!, 'focus');
@@ -239,7 +241,10 @@ describe('bx-modal', function () {
     beforeEach(async function () {
       elem = document.body.appendChild(document.createElement('bx-modal'));
       elem!.innerHTML = '<input type="text"><input type="text">';
-      buttonBefore = document.body.insertBefore(document.createElement('button'), document.body.firstChild);
+      buttonBefore = document.body.insertBefore(
+        document.createElement('button'),
+        document.body.firstChild
+      );
       buttonAfter = document.body.appendChild(document.createElement('button'));
       await Promise.resolve(); // Wait for initial render
     });

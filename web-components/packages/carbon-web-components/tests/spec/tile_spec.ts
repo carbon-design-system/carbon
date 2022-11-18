@@ -13,7 +13,12 @@ import { TILE_COLOR_SCHEME } from '../../src/components/tile/tile';
 import BXExpandableTile from '../../src/components/tile/expandable-tile';
 import BXSelectableTile from '../../src/components/tile/selectable-tile';
 import BXRadioTile from '../../src/components/tile/radio-tile';
-import { clickable, expandable, multiSelectable, singleSelectable } from '../../src/components/tile/tile-story';
+import {
+  clickable,
+  expandable,
+  multiSelectable,
+  singleSelectable,
+} from '../../src/components/tile/tile-story';
 
 const clickableTemplate = (props?) =>
   clickable({
@@ -43,7 +48,9 @@ describe('bx-tile', function () {
       it('should render with minimum attributes', async function () {
         render(clickableTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-clickable-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-clickable-tile')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -61,7 +68,9 @@ describe('bx-tile', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-clickable-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-clickable-tile')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render disabled state', async function () {
@@ -80,7 +89,9 @@ describe('bx-tile', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-clickable-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-clickable-tile')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
   });
@@ -90,7 +101,9 @@ describe('bx-tile', function () {
       it('should render with minimum attributes', async function () {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-expandable-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-expandable-tile')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -102,7 +115,9 @@ describe('bx-tile', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-expandable-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-expandable-tile')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
@@ -174,7 +189,9 @@ describe('bx-tile', function () {
       it('should render with minimum attributes', async function () {
         render(singleSelectableTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-radio-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-radio-tile')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
 
       it('should render with various attributes', async function () {
@@ -188,7 +205,9 @@ describe('bx-tile', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-radio-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-radio-tile')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
     });
 
@@ -199,7 +218,12 @@ describe('bx-tile', function () {
         const tiles = document.body.querySelectorAll('bx-radio-tile');
         const input1 = tiles[1]!.shadowRoot!.querySelector('input');
         input1!.click();
-        expect(Array.prototype.map.call(tiles, (item) => (item as BXRadioTile).selected)).toEqual([false, true, false]);
+        expect(
+          Array.prototype.map.call(
+            tiles,
+            (item) => (item as BXRadioTile).selected
+          )
+        ).toEqual([false, true, false]);
       });
     });
   });
@@ -209,7 +233,9 @@ describe('bx-tile', function () {
       it('should render with minimum attributes', async function () {
         render(multiSelectableTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-selectable-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-selectable-tile')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -224,7 +250,9 @@ describe('bx-tile', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-selectable-tile')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-selectable-tile')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 

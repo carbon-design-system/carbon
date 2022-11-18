@@ -11,7 +11,9 @@ import settings from 'carbon-components/es/globals/js/settings';
 import { customElement } from 'lit-element';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import RadioGroupManager, { NAVIGATION_DIRECTION } from '../../globals/internal/radio-group-manager';
+import RadioGroupManager, {
+  NAVIGATION_DIRECTION,
+} from '../../globals/internal/radio-group-manager';
 import SelectableTile from './selectable-tile';
 
 const { prefix } = settings;
@@ -48,7 +50,9 @@ class BXRadioTile extends HostListenerMixin(SelectableTile) {
    */
   private _attachManager() {
     if (!this._manager) {
-      this._manager = RadioGroupManager.get(this.getRootNode({ composed: true }) as Document);
+      this._manager = RadioGroupManager.get(
+        this.getRootNode({ composed: true }) as Document
+      );
     }
     const { name, _inputNode: inputNode, _manager: manager } = this;
     if (inputNode && name) {

@@ -23,7 +23,15 @@ const sizes = {
 const noop = () => {};
 
 export const Default = (args) => {
-  const { open, titleText, disabled, disableToggle, onBeforeToggle = noop, onToggle = noop, size } = args?.['bx-accordion'] ?? {};
+  const {
+    open,
+    titleText,
+    disabled,
+    disableToggle,
+    onBeforeToggle = noop,
+    onToggle = noop,
+    size,
+  } = args?.['bx-accordion'] ?? {};
   const handleBeforeToggle = (event: CustomEvent) => {
     onBeforeToggle(event);
     if (disableToggle) {
@@ -32,23 +40,37 @@ export const Default = (args) => {
   };
 
   return html`
-    <bx-accordion @bx-accordion-item-beingtoggled="${handleBeforeToggle}" @bx-accordion-item-toggled="${onToggle}" size="${size}">
-      <bx-accordion-item ?disabled="${disabled}" ?open="${open}" title-text=${titleText}>
+    <bx-accordion
+      @bx-accordion-item-beingtoggled="${handleBeforeToggle}"
+      @bx-accordion-item-toggled="${onToggle}"
+      size="${size}"
+    >
+      <bx-accordion-item
+        ?disabled="${disabled}"
+        ?open="${open}"
+        title-text=${titleText}
+      >
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
         </p>
       </bx-accordion-item>
       <bx-accordion-item ?open="${open}" title-text=${titleText}>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
         </p>
       </bx-accordion-item>
       <bx-accordion-item ?open="${open}">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
-          aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
+          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+          aliquip ex ea commodo consequat.
         </p>
         <span slot="title">${titleText}</span>
       </bx-accordion-item>

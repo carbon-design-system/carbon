@@ -14,14 +14,27 @@ import settings from 'carbon-components/es/globals/js/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
-import BXContentSwitcher, { NAVIGATION_DIRECTION } from '../content-switcher/content-switcher';
-import { NAVIGATION_DIRECTION_NARROW, TABS_COLOR_SCHEME, TABS_KEYBOARD_ACTION, TABS_TYPE } from './defs';
+import BXContentSwitcher, {
+  NAVIGATION_DIRECTION,
+} from '../content-switcher/content-switcher';
+import {
+  NAVIGATION_DIRECTION_NARROW,
+  TABS_COLOR_SCHEME,
+  TABS_KEYBOARD_ACTION,
+  TABS_TYPE,
+} from './defs';
 import BXTab from './tab';
 import styles from './tabs.scss';
 
 const { prefix } = settings;
 
-export { NAVIGATION_DIRECTION, NAVIGATION_DIRECTION_NARROW, TABS_COLOR_SCHEME, TABS_KEYBOARD_ACTION, TABS_TYPE };
+export {
+  NAVIGATION_DIRECTION,
+  NAVIGATION_DIRECTION_NARROW,
+  TABS_COLOR_SCHEME,
+  TABS_KEYBOARD_ACTION,
+  TABS_TYPE,
+};
 
 /**
  * Tabs.
@@ -100,8 +113,13 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
         _assistiveStatusText: assistiveStatusText,
         _selectedItemContent: selectedItemContent,
       } = this;
-      const selectedItemText = (selectedItemContent && selectedItemContent.textContent) || triggerContent;
-      if (selectedItemText && assistiveStatusText !== selectedItemAssistiveText) {
+      const selectedItemText =
+        (selectedItemContent && selectedItemContent.textContent) ||
+        triggerContent;
+      if (
+        selectedItemText &&
+        assistiveStatusText !== selectedItemAssistiveText
+      ) {
         this._assistiveStatusText = selectedItemText;
       }
     }
@@ -112,9 +130,12 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
    * Clears the selection of tabs.
    */
   private _clearHighlight() {
-    forEach(this.querySelectorAll((this.constructor as typeof BXTabs).selectorItem), (item) => {
-      (item as BXTab).highlighted = false;
-    });
+    forEach(
+      this.querySelectorAll((this.constructor as typeof BXTabs).selectorItem),
+      (item) => {
+        (item as BXTab).highlighted = false;
+      }
+    );
   }
 
   /**
@@ -128,10 +149,16 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
    *   * Starts with the selected item
    *   * Going prev/next item immediately changes the selection
    */
-  protected _navigate(direction: number, { immediate }: { immediate?: boolean } = {}) {
-    const { selectorItem, selectorItemHighlighted, selectorItemSelected } = this.constructor as typeof BXTabs;
+  protected _navigate(
+    direction: number,
+    { immediate }: { immediate?: boolean } = {}
+  ) {
+    const { selectorItem, selectorItemHighlighted, selectorItemSelected } = this
+      .constructor as typeof BXTabs;
     const nextItem = this._getNextItem(
-      this.querySelector(immediate ? selectorItemSelected : selectorItemHighlighted) as BXTab,
+      this.querySelector(
+        immediate ? selectorItemSelected : selectorItemHighlighted
+      ) as BXTab,
       direction
     );
     if (!nextItem) {
@@ -142,7 +169,8 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
       this._handleUserInitiatedSelectItem(nextItem as BXTab);
     } else {
       forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as BXTab)[immediate ? 'selected' : 'highlighted'] = nextItem === item;
+        (item as BXTab)[immediate ? 'selected' : 'highlighted'] =
+          nextItem === item;
       });
     }
 
@@ -177,7 +205,9 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
   protected _handleKeydown({ key }: KeyboardEvent) {
     const { _open: open, _triggerNode: triggerNode } = this;
     const narrowMode = Boolean(triggerNode.offsetParent);
-    const action = (this.constructor as typeof BXTabs).getAction(key, { narrowMode });
+    const action = (this.constructor as typeof BXTabs).getAction(key, {
+      narrowMode,
+    });
     if (!open && narrowMode) {
       // Menu closed in narrow mode
       switch (action) {
@@ -199,7 +229,9 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
           break;
         case TABS_KEYBOARD_ACTION.NAVIGATING:
           {
-            const direction = narrowMode ? NAVIGATION_DIRECTION_NARROW[key] : NAVIGATION_DIRECTION[key];
+            const direction = narrowMode
+              ? NAVIGATION_DIRECTION_NARROW[key]
+              : NAVIGATION_DIRECTION[key];
             if (direction) {
               this._navigate(direction, { immediate: !narrowMode });
             }
@@ -207,8 +239,11 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
           break;
         case TABS_KEYBOARD_ACTION.TRIGGERING:
           {
-            const { selectorItemHighlighted } = this.constructor as typeof BXTabs;
-            const highlightedItem = this.querySelector(selectorItemHighlighted) as BXTab;
+            const { selectorItemHighlighted } = this
+              .constructor as typeof BXTabs;
+            const highlightedItem = this.querySelector(
+              selectorItemHighlighted
+            ) as BXTab;
             if (highlightedItem) {
               if (highlightedItem.value === this.value) {
                 // Selecting an already-selected item, simply closes the narrow mode dropdown
@@ -245,7 +280,8 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
    * An assistive text for screen reader to announce, telling the open state.
    */
   @property({ attribute: 'selecting-items-assistive-text' })
-  selectingItemsAssistiveText = 'Selecting items. Use up and down arrow keys to navigate.';
+  selectingItemsAssistiveText =
+    'Selecting items. Use up and down arrow keys to navigate.';
 
   /**
    * An assistive text for screen reader to announce, telling that an item is selected.
@@ -274,7 +310,10 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
       });
     }
     if (changedProperties.has('value')) {
-      const item = find(this.querySelectorAll(selectorItem), (elem) => (elem as BXTab).value === this.value);
+      const item = find(
+        this.querySelectorAll(selectorItem),
+        (elem) => (elem as BXTab).value === this.value
+      );
       if (item) {
         const range = this.ownerDocument!.createRange();
         range.selectNodeContents(item);
@@ -312,13 +351,20 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
         aria-owns="tablist"
         aria-controls="tablist"
       >
-        <span id="trigger-label" class="${prefix}--tabs-trigger-text"> ${selectedItemContent || triggerContent} </span>
+        <span id="trigger-label" class="${prefix}--tabs-trigger-text">
+          ${selectedItemContent || triggerContent}
+        </span>
         ${ChevronDown16({ 'aria-hidden': 'true' })}
       </div>
       <ul id="tablist" role="tablist" class="${listClasses}">
         <slot></slot>
       </ul>
-      <div class="${prefix}--assistive-text" role="status" aria-live="assertive" aria-relevant="additions text">
+      <div
+        class="${prefix}--assistive-text"
+        role="status"
+        aria-live="assertive"
+        aria-relevant="additions text"
+      >
         ${assistiveStatusText}
       </div>
     `;
@@ -384,7 +430,9 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
     if (key === 'Escape') {
       return TABS_KEYBOARD_ACTION.CLOSING;
     }
-    if (key in (narrowMode ? NAVIGATION_DIRECTION_NARROW : NAVIGATION_DIRECTION)) {
+    if (
+      key in (narrowMode ? NAVIGATION_DIRECTION_NARROW : NAVIGATION_DIRECTION)
+    ) {
       return TABS_KEYBOARD_ACTION.NAVIGATING;
     }
     if (narrowMode && this.TRIGGER_KEYS.has(key)) {

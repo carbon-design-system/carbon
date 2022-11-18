@@ -14,7 +14,8 @@ import { INLINE_LOADING_STATE } from './inline-loading';
 import storyDocs from './inline-loading-story.mdx';
 
 const states = {
-  [`Inactive (${INLINE_LOADING_STATE.INACTIVE})`]: INLINE_LOADING_STATE.INACTIVE,
+  [`Inactive (${INLINE_LOADING_STATE.INACTIVE})`]:
+    INLINE_LOADING_STATE.INACTIVE,
   [`In progress (${INLINE_LOADING_STATE.ACTIVE})`]: INLINE_LOADING_STATE.ACTIVE,
   [`Success (${INLINE_LOADING_STATE.FINISHED})`]: INLINE_LOADING_STATE.FINISHED,
   [`Failed (${INLINE_LOADING_STATE.ERROR})`]: INLINE_LOADING_STATE.ERROR,
@@ -22,7 +23,11 @@ const states = {
 
 export const Default = (args) => {
   const { status } = args?.['bx-inline-loading'] ?? {};
-  return html` <bx-inline-loading status="${ifNonNull(status)}">Loading data...</bx-inline-loading> `;
+  return html`
+    <bx-inline-loading status="${ifNonNull(status)}"
+      >Loading data...</bx-inline-loading
+    >
+  `;
 };
 
 Default.storyName = 'Default';
@@ -36,7 +41,11 @@ export default {
     },
     knobs: {
       'bx-inline-loading': () => ({
-        status: select('Loading status (status)', states, INLINE_LOADING_STATE.ACTIVE),
+        status: select(
+          'Loading status (status)',
+          states,
+          INLINE_LOADING_STATE.ACTIVE
+        ),
       }),
     },
   },

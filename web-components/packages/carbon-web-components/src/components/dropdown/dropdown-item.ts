@@ -63,7 +63,12 @@ class BXDropdownItem extends LitElement {
     return html`
       <div class="${prefix}--list-box__menu-item__option">
         <slot></slot>
-        ${!selected ? undefined : Checkmark16({ part: 'selected-icon', class: `${prefix}--list-box__menu-item__selected-icon` })}
+        ${!selected
+          ? undefined
+          : Checkmark16({
+              part: 'selected-icon',
+              class: `${prefix}--list-box__menu-item__selected-icon`,
+            })}
       </div>
     `;
   }

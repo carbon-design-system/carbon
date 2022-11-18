@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -28,7 +28,9 @@ class BXCodeSnippetSkeleton extends LitElement {
   render() {
     return html`
       <div class="${prefix}--snippet-container">
-        ${this.type !== CODE_SNIPPET_TYPE.MULTI ? html` <span></span> ` : html` <span></span><span></span><span></span> `}
+        ${this.type !== CODE_SNIPPET_TYPE.MULTI
+          ? html` <span></span> `
+          : html` <span></span><span></span><span></span> `}
       </div>
     `;
   }

@@ -15,11 +15,17 @@ const deepReplace = require('../tools/deep-replace');
 const { getPaths } = deepReplace;
 const useRtl = process.env.STORYBOOK_CARBON_CUSTOM_ELEMENTS_USE_RTL === 'true';
 
-const arrayify = (value) => (Array.isArray(value) ? value : value != null ? [value] : []); // eslint-disable-line no-nested-ternary
-const testMatches = (test, s) => arrayify(test).some((item) => item.test && item.test(s));
+const arrayify = (value) =>
+  Array.isArray(value) ? value : value != null ? [value] : []; // eslint-disable-line no-nested-ternary
+const testMatches = (test, s) =>
+  arrayify(test).some((item) => item.test && item.test(s));
 
 module.exports = {
-  stories: ['./bootstrap-story.ts', '../docs/**/*-story.mdx', '../src/**/*-story.ts'],
+  stories: [
+    './bootstrap-story.ts',
+    '../docs/**/*-story.mdx',
+    '../src/**/*-story.ts',
+  ],
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-docs',
@@ -32,7 +38,8 @@ module.exports = {
     // Ignores our `.babelrc` for manager
     config.module.rules = deepReplace(
       config.module.rules,
-      (value, key, parent) => key === 'options' && /babel-loader/i.test(parent.loader),
+      (value, key, parent) =>
+        key === 'options' && /babel-loader/i.test(parent.loader),
       (value) => ({
         ...value,
         babelrc: false,
@@ -46,7 +53,9 @@ module.exports = {
     config.module.rules = deepReplace(
       config.module.rules,
       (value, key, parent, parents) =>
-        getPaths(parents) === 'use.options.presets' && Array.isArray(value) && /@babel\/preset-env/i.test(value[0]),
+        getPaths(parents) === 'use.options.presets' &&
+        Array.isArray(value) &&
+        /@babel\/preset-env/i.test(value[0]),
       (value) => [
         value[0],
         {
@@ -68,7 +77,10 @@ module.exports = {
     config.module.rules = deepReplace(
       config.module.rules,
       (value, key, parent, parents) =>
-        getPaths(parents) === 'use.options.plugins' && Array.isArray(value) && value[1] && value[1].loose,
+        getPaths(parents) === 'use.options.plugins' &&
+        Array.isArray(value) &&
+        value[1] &&
+        value[1].loose,
       (value) => [
         value[0],
         {
@@ -80,12 +92,18 @@ module.exports = {
     // Supports `*-story.mdx`
     config.module.rules = deepReplace(
       config.module.rules,
-      (value, key) => key === 'test' && testMatches(value, 'button.stories.mdx') && !testMatches(value, 'foo.mdx'),
+      (value, key) =>
+        key === 'test' &&
+        testMatches(value, 'button.stories.mdx') &&
+        !testMatches(value, 'foo.mdx'),
       (value) => [...arrayify(value), /\-story.mdx$/]
     );
     config.module.rules = deepReplace(
       config.module.rules,
-      (value, key) => key === 'exclude' && testMatches(value, 'button.stories.mdx') && !testMatches(value, 'foo.mdx'),
+      (value, key) =>
+        key === 'exclude' &&
+        testMatches(value, 'button.stories.mdx') &&
+        !testMatches(value, 'foo.mdx'),
       (value) => [...arrayify(value), /\-story.mdx$/]
     );
 
@@ -155,7 +173,8 @@ module.exports = {
     }
     // In our development environment (where `carbon-web-components/es/icons` may not have been built yet),
     // we load icons from `@carbon/icons` and use a WebPack loader to convert the icons to `lit-html` version
-    config.resolve.alias['carbon-web-components/es/icons'] = '@carbon/icons/lib';
+    config.resolve.alias['carbon-web-components/es/icons'] =
+      '@carbon/icons/lib';
 
     return config;
   },

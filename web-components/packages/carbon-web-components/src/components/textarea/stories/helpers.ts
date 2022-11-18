@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,10 @@ const createProps = ({ boolean, textNullable, number, select }) => ({
   colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
   disabled: boolean('Disabled (disabled)', false),
   value: textNullable('Input value (value)', ''),
-  placeholder: textNullable('Placeholder text (placeholder)', 'Optional placeholder text'),
+  placeholder: textNullable(
+    'Placeholder text (placeholder)',
+    'Optional placeholder text'
+  ),
   invalid: boolean('Invalid (invalid)', false),
   onInput: action('input'),
   rows: number('Number of rows (rows)', 4),

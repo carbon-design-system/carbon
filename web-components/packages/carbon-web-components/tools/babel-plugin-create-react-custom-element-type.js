@@ -10,7 +10,9 @@
 const { dirname, isAbsolute, relative, resolve } = require('path');
 const { default: template } = require('@babel/template');
 const { default: traverse } = require('@babel/traverse');
-const { default: transformTemplateLiterals } = require('@babel/plugin-transform-template-literals');
+const {
+  default: transformTemplateLiterals,
+} = require('@babel/plugin-transform-template-literals');
 const replaceExtension = require('replace-ext');
 
 const regexEvent = /^event/;
@@ -21,7 +23,12 @@ const regexEvent = /^event/;
  * @returns {string} Given `source` with its extension replaced with the given one, preserving `./`.
  */
 function replaceExtensionRelative(source, extension) {
-  return !/^\./.test(source) ? source : `${dirname(source) !== '.' ? '' : './'}${replaceExtension(source, extension)}`;
+  return !/^\./.test(source)
+    ? source
+    : `${dirname(source) !== '.' ? '' : './'}${replaceExtension(
+        source,
+        extension
+      )}`;
 }
 
 function createMetadataVisitor(api) {
@@ -43,7 +50,11 @@ function createMetadataVisitor(api) {
 
   const getParentClassImportSource = (path) => {
     const { parentPath } = path;
-    if (path.isImportDefaultSpecifier() && parentPath.isImportDeclaration && parentPath.get('source').isStringLiteral()) {
+    if (
+      path.isImportDefaultSpecifier() &&
+      parentPath.isImportDeclaration &&
+      parentPath.get('source').isStringLiteral()
+    ) {
       return parentPath.get('source').node.value;
     }
     return undefined;
@@ -72,7 +83,9 @@ function createMetadataVisitor(api) {
 
     if (
       !expression.get('callee').isIdentifier() ||
-      !propertyIsFromLit(path.scope.getBinding(expression.get('callee.name').node).path)
+      !propertyIsFromLit(
+        path.scope.getBinding(expression.get('callee.name').node).path
+      )
     ) {
       return undefined;
     }
@@ -88,7 +101,9 @@ function createMetadataVisitor(api) {
           metadata.type = value.get('name').node;
         } else if (key.isIdentifier({ name: 'attribute' })) {
           if (!value.isBooleanLiteral() && !value.isStringLiteral()) {
-            throw value.buildCodeFrameError('`attribute` in `@property` must point to a boolean literal or a string literal.');
+            throw value.buildCodeFrameError(
+              '`attribute` in `@property` must point to a boolean literal or a string literal.'
+            );
           }
           metadata.attribute = value.get('value').node;
         }
@@ -97,7 +112,9 @@ function createMetadataVisitor(api) {
 
     const leadingComments = path.parentPath.get('leadingComments');
     if (leadingComments) {
-      metadata.comments = (Array.isArray(leadingComments) ? leadingComments : [leadingComments])
+      metadata.comments = (
+        Array.isArray(leadingComments) ? leadingComments : [leadingComments]
+      )
         .map((item) => item.node)
         .filter(Boolean);
     }
@@ -131,7 +148,9 @@ function createMetadataVisitor(api) {
       const { file } = context;
       const superClass = getTarget(path.get('superClass'));
       if (superClass) {
-        const parentClassImportSource = getParentClassImportSource(superClass.scope.getBinding(superClass.node.name).path);
+        const parentClassImportSource = getParentClassImportSource(
+          superClass.scope.getBinding(superClass.node.name).path
+        );
         if (parentClassImportSource) {
           const relativeTarget = relative(
             resolve(__dirname, '../src/components'),
@@ -167,7 +186,9 @@ function createMetadataVisitor(api) {
         };
         const leadingComments = path.get('leadingComments');
         if (leadingComments) {
-          metadata.comments = (Array.isArray(leadingComments) ? leadingComments : [leadingComments]).map((item) => item.node);
+          metadata.comments = (
+            Array.isArray(leadingComments) ? leadingComments : [leadingComments]
+          ).map((item) => item.node);
         }
         customEvents[name] = metadata;
       }
@@ -179,14 +200,18 @@ function createMetadataVisitor(api) {
       const { name } = key;
       if (staticField && regexEvent.test(name)) {
         if (!value.isStringLiteral() && !value.isTemplateLiteral()) {
-          throw value.buildCodeFrameError('`static eventFoo` must refer to a string literal or a template literal.');
+          throw value.buildCodeFrameError(
+            '`static eventFoo` must refer to a string literal or a template literal.'
+          );
         }
         const metadata = {
           eventName: t.cloneDeep(value.node),
         };
         const leadingComments = path.get('leadingComments');
         if (leadingComments) {
-          metadata.comments = (Array.isArray(leadingComments) ? leadingComments : [leadingComments]).map((item) => item.node);
+          metadata.comments = (
+            Array.isArray(leadingComments) ? leadingComments : [leadingComments]
+          ).map((item) => item.node);
         }
         customEvents[name] = metadata;
       }
@@ -197,9 +222,17 @@ function createMetadataVisitor(api) {
       const { declaredProps } = context;
       const expression = path.get('expression');
       const customElementName = expression.get('arguments.0');
-      if (expression.isCallExpression() && expression.get('callee').isIdentifier({ name: 'customElement' })) {
-        if (!customElementName.isStringLiteral() && !customElementName.isTemplateLiteral()) {
-          throw customElementName.buildCodeFrameError('`@customElement()` must be called with the custom element name.');
+      if (
+        expression.isCallExpression() &&
+        expression.get('callee').isIdentifier({ name: 'customElement' })
+      ) {
+        if (
+          !customElementName.isStringLiteral() &&
+          !customElementName.isTemplateLiteral()
+        ) {
+          throw customElementName.buildCodeFrameError(
+            '`@customElement()` must be called with the custom element name.'
+          );
         }
         context.customElementName = customElementName.node;
       }
@@ -208,9 +241,12 @@ function createMetadataVisitor(api) {
       if (metadata) {
         if (
           !parentPath.isClassProperty() &&
-          (!parentPath.isClassMethod() || (parentPath.node.kind !== 'get' && parentPath.node.kind !== 'set'))
+          (!parentPath.isClassMethod() ||
+            (parentPath.node.kind !== 'get' && parentPath.node.kind !== 'set'))
         ) {
-          throw parentPath.buildCodeFrameError('`@property()` must target class properties.');
+          throw parentPath.buildCodeFrameError(
+            '`@property()` must target class properties.'
+          );
         }
         declaredProps[parent.key.name] = metadata;
       }
@@ -222,7 +258,8 @@ function createMetadataVisitor(api) {
       if (specifiers.length > 0) {
         if (source) {
           const { value: sourceValue } = source;
-          namedExportsSources[sourceValue] = namedExportsSources[sourceValue] || {};
+          namedExportsSources[sourceValue] =
+            namedExportsSources[sourceValue] || {};
           // eslint-disable-next-line no-restricted-syntax
           for (const { local, exported } of specifiers) {
             namedExportsSources[sourceValue][exported.name] = local.name;
@@ -231,11 +268,14 @@ function createMetadataVisitor(api) {
           // eslint-disable-next-line no-restricted-syntax
           for (const { local, exported } of specifiers) {
             const { path: bindingPath } = path.scope.getBinding(local.name);
-            const { value: bindingSourceValue } = bindingPath.parentPath.node.source;
-            namedExportsSources[bindingSourceValue] = namedExportsSources[bindingSourceValue] || {};
-            namedExportsSources[bindingSourceValue][exported.name] = bindingPath.isImportDefaultSpecifier()
-              ? 'default'
-              : bindingPath.get('imported').node.name;
+            const { value: bindingSourceValue } =
+              bindingPath.parentPath.node.source;
+            namedExportsSources[bindingSourceValue] =
+              namedExportsSources[bindingSourceValue] || {};
+            namedExportsSources[bindingSourceValue][exported.name] =
+              bindingPath.isImportDefaultSpecifier()
+                ? 'default'
+                : bindingPath.get('imported').node.name;
           }
         }
       }
@@ -245,7 +285,10 @@ function createMetadataVisitor(api) {
   return metadataVisitor;
 }
 
-module.exports = function generateCreateReactCustomElementType(api, { nonUpgradable } = {}) {
+module.exports = function generateCreateReactCustomElementType(
+  api,
+  { nonUpgradable } = {}
+) {
   const { types: t } = api;
 
   const booleanSerializerIdentifier = t.identifier('booleanSerializer');
@@ -258,9 +301,18 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
    * @type {object<string, ImportSpecifier>}
    */
   const importSpecifiers = {
-    Boolean: t.importSpecifier(booleanSerializerIdentifier, booleanSerializerIdentifier),
-    Number: t.importSpecifier(numberSerializerIdentifier, numberSerializerIdentifier),
-    Object: t.importSpecifier(objectSerializerIdentifier, objectSerializerIdentifier),
+    Boolean: t.importSpecifier(
+      booleanSerializerIdentifier,
+      booleanSerializerIdentifier
+    ),
+    Number: t.importSpecifier(
+      numberSerializerIdentifier,
+      numberSerializerIdentifier
+    ),
+    Object: t.importSpecifier(
+      objectSerializerIdentifier,
+      objectSerializerIdentifier
+    ),
   };
 
   /**
@@ -280,10 +332,22 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
    * @type {object<string, Identifier>}
    */
   const propTypesForLitTypes = {
-    String: t.memberExpression(t.identifier('PropTypes'), t.identifier('string')),
-    Boolean: t.memberExpression(t.identifier('PropTypes'), t.identifier('bool')),
-    Number: t.memberExpression(t.identifier('PropTypes'), t.identifier('number')),
-    Object: t.memberExpression(t.identifier('PropTypes'), t.identifier('object')),
+    String: t.memberExpression(
+      t.identifier('PropTypes'),
+      t.identifier('string')
+    ),
+    Boolean: t.memberExpression(
+      t.identifier('PropTypes'),
+      t.identifier('bool')
+    ),
+    Number: t.memberExpression(
+      t.identifier('PropTypes'),
+      t.identifier('number')
+    ),
+    Object: t.memberExpression(
+      t.identifier('PropTypes'),
+      t.identifier('object')
+    ),
   };
 
   /**
@@ -299,7 +363,9 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
     return t.importDeclaration(
       [
         t.importDefaultSpecifier(t.identifier('createReactCustomElementType')),
-        ...Array.from(new Set(typesInUse)).map((type) => importSpecifiers[type]),
+        ...Array.from(new Set(typesInUse)).map(
+          (type) => importSpecifiers[type]
+        ),
       ],
       t.stringLiteral('../../globals/wrappers/createReactCustomElementType.js')
     );
@@ -315,20 +381,32 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
       const { type, attribute } = declaredProps[name];
       const propDesciptor = [];
       if (attribute === false) {
-        propDesciptor.push(t.objectProperty(t.identifier('attribute'), t.booleanLiteral(false)));
+        propDesciptor.push(
+          t.objectProperty(t.identifier('attribute'), t.booleanLiteral(false))
+        );
       } else {
         if (type && type !== 'String') {
           const serializer = serializers[type];
           if (!serializer) {
             throw new Error(`No serializer found for type: ${type}`);
           }
-          propDesciptor.push(t.objectProperty(t.identifier('serialize'), serializer));
+          propDesciptor.push(
+            t.objectProperty(t.identifier('serialize'), serializer)
+          );
         }
         if (attribute) {
-          propDesciptor.push(t.objectProperty(t.identifier('attribute'), t.stringLiteral(attribute)));
+          propDesciptor.push(
+            t.objectProperty(
+              t.identifier('attribute'),
+              t.stringLiteral(attribute)
+            )
+          );
         }
       }
-      return t.objectProperty(t.identifier(name), t.objectExpression(propDesciptor));
+      return t.objectProperty(
+        t.identifier(name),
+        t.objectExpression(propDesciptor)
+      );
     });
 
   /**
@@ -340,7 +418,9 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
     Object.keys(customEvents).map((name) =>
       t.objectProperty(
         t.identifier(name.replace(regexEvent, 'on')),
-        t.objectExpression([t.objectProperty(t.identifier('event'), customEvents[name].eventName)])
+        t.objectExpression([
+          t.objectProperty(t.identifier('event'), customEvents[name].eventName),
+        ])
       )
     );
 
@@ -384,32 +464,60 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
         const declaredProps = {};
         const customEvents = {};
         const namedExportsSources = {};
-        const context = { file, declaredProps, customEvents, namedExportsSources };
+        const context = {
+          file,
+          declaredProps,
+          customEvents,
+          namedExportsSources,
+        };
         // Gathers metadata of custom element properties and events, into `context`
         path.traverse(metadataVisitor, context);
 
-        const relativePath = relative(resolve(__dirname, '../src/components'), file.opts.filename);
-        const retargedPath = t.stringLiteral(`../../components/${replaceExtension(relativePath, '.js')}`);
+        const relativePath = relative(
+          resolve(__dirname, '../src/components'),
+          file.opts.filename
+        );
+        const retargedPath = t.stringLiteral(
+          `../../components/${replaceExtension(relativePath, '.js')}`
+        );
 
         // Creates a module with `createReactCustomElementType()`
         // with the gathered metadata of custom element properties and events
-        const descriptors = t.objectExpression([...buildPropsDescriptor(declaredProps), ...buildEventsDescriptor(customEvents)]);
+        const descriptors = t.objectExpression([
+          ...buildPropsDescriptor(declaredProps),
+          ...buildEventsDescriptor(customEvents),
+        ]);
         const descriptorsWithParent = !context.parentDescriptorSource
           ? descriptors
-          : t.callExpression(t.memberExpression(t.identifier('Object'), t.identifier('assign')), [
-              t.objectExpression([]),
-              t.identifier('parentDescriptor'),
-              descriptors,
-            ]);
+          : t.callExpression(
+              t.memberExpression(
+                t.identifier('Object'),
+                t.identifier('assign')
+              ),
+              [
+                t.objectExpression([]),
+                t.identifier('parentDescriptor'),
+                descriptors,
+              ]
+            );
 
-        const propTypes = t.objectExpression([...buildPropTypes(declaredProps), ...buildEventsPropTypes(customEvents)]);
+        const propTypes = t.objectExpression([
+          ...buildPropTypes(declaredProps),
+          ...buildEventsPropTypes(customEvents),
+        ]);
         const propTypesWithParent = !context.parentDescriptorSource
           ? propTypes
-          : t.callExpression(t.memberExpression(t.identifier('Object'), t.identifier('assign')), [
-              t.objectExpression([]),
-              t.identifier('parentPropTypes'),
-              propTypes,
-            ]);
+          : t.callExpression(
+              t.memberExpression(
+                t.identifier('Object'),
+                t.identifier('assign')
+              ),
+              [
+                t.objectExpression([]),
+                t.identifier('parentPropTypes'),
+                propTypes,
+              ]
+            );
 
         const body = [];
         if (!context.customElementName) {
@@ -442,7 +550,12 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
             body.unshift(
               t.exportNamedDeclaration(
                 null,
-                [t.exportSpecifier(t.identifier('default'), t.identifier('CustomElement'))],
+                [
+                  t.exportSpecifier(
+                    t.identifier('default'),
+                    t.identifier('CustomElement')
+                  ),
+                ],
                 retargedPath
               )
             );
@@ -451,12 +564,26 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
         if (context.parentDescriptorSource) {
           body.unshift(
             t.importDeclaration(
-              [t.importSpecifier(t.identifier('parentDescriptor'), t.identifier('descriptor'))],
-              t.stringLiteral(replaceExtensionRelative(context.parentDescriptorSource, '.js'))
+              [
+                t.importSpecifier(
+                  t.identifier('parentDescriptor'),
+                  t.identifier('descriptor')
+                ),
+              ],
+              t.stringLiteral(
+                replaceExtensionRelative(context.parentDescriptorSource, '.js')
+              )
             ),
             t.importDeclaration(
-              [t.importSpecifier(t.identifier('parentPropTypes'), t.identifier('propTypes'))],
-              t.stringLiteral(replaceExtensionRelative(context.parentDescriptorSource, '.js'))
+              [
+                t.importSpecifier(
+                  t.identifier('parentPropTypes'),
+                  t.identifier('propTypes')
+                ),
+              ],
+              t.stringLiteral(
+                replaceExtensionRelative(context.parentDescriptorSource, '.js')
+              )
             )
           );
         }
@@ -466,14 +593,22 @@ module.exports = function generateCreateReactCustomElementType(api, { nonUpgrada
             t.exportNamedDeclaration(
               null,
               Object.keys(exports).map((exportedName) =>
-                t.exportSpecifier(t.identifier(exports[exportedName]), t.identifier(exportedName))
+                t.exportSpecifier(
+                  t.identifier(exports[exportedName]),
+                  t.identifier(exportedName)
+                )
               ),
               t.stringLiteral(replaceExtensionRelative(source, '.js'))
             )
           );
         }
         const program = t.program(body);
-        traverse(program, transformTemplateLiterals(api).visitor, path.scope, path);
+        traverse(
+          program,
+          transformTemplateLiterals(api).visitor,
+          path.scope,
+          path
+        );
         path.replaceWith(program);
         path.stop();
       },

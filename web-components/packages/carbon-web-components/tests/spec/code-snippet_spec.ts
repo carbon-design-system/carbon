@@ -1,14 +1,18 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { render } from 'lit-html';
-import { singleLine, multiLine, inline } from '../../src/components/code-snippet/code-snippet-story';
+import {
+  singleLine,
+  multiLine,
+  inline,
+} from '../../src/components/code-snippet/code-snippet-story';
 
 const singleLineTemplate = (props?) =>
   singleLine({
@@ -30,19 +34,25 @@ describe('bx-code-snippet', function () {
     it('Should render with minimum attributes for single line mode', async function () {
       render(singleLineTemplate(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should render with minimum attributes for multi line mode', async function () {
       render(multiLineTemplate(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should render with minimum attributes for inline mode', async function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should render with various attributes for single line mode', async function () {
@@ -56,7 +66,9 @@ describe('bx-code-snippet', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should render with various attributes for multi line mode', async function () {
@@ -70,7 +82,9 @@ describe('bx-code-snippet', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should render with various attributes for inline mode', async function () {
@@ -84,7 +98,9 @@ describe('bx-code-snippet', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -99,40 +115,61 @@ describe('bx-code-snippet', function () {
     it('Should show the tooltip for 2 seconds by default', async function () {
       render(singleLineTemplate(), document.body);
       await Promise.resolve();
-      const button = document.body.querySelector('bx-code-snippet')!.shadowRoot!.querySelector('.bx--snippet-button');
+      const button = document.body
+        .querySelector('bx-code-snippet')!
+        .shadowRoot!.querySelector('.bx--snippet-button');
       (button as HTMLElement).click();
       await Promise.resolve();
       const feedback = button!.querySelector('.bx--btn--copy__feedback');
-      expect(feedback!.classList.contains('bx--btn--copy__feedback--displayed')).toBe(true);
+      expect(
+        feedback!.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(true);
       jasmine.clock().tick(2000);
       await Promise.resolve();
-      expect(feedback!.classList.contains('bx--btn--copy__feedback--displayed')).toBe(false);
+      expect(
+        feedback!.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(false);
     });
 
     it('Should show the tooltip on the code snippet itself for inline mode', async function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
-      const button = document.body.querySelector('bx-code-snippet')!.shadowRoot!.querySelector('.bx--snippet--inline');
+      const button = document.body
+        .querySelector('bx-code-snippet')!
+        .shadowRoot!.querySelector('.bx--snippet--inline');
       (button as HTMLElement).click();
       await Promise.resolve();
       const feedback = button!.querySelector('.bx--btn--copy__feedback');
-      expect(feedback!.classList.contains('bx--btn--copy__feedback--displayed')).toBe(true);
+      expect(
+        feedback!.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(true);
       jasmine.clock().tick(2000);
       await Promise.resolve();
-      expect(feedback!.classList.contains('bx--btn--copy__feedback--displayed')).toBe(false);
+      expect(
+        feedback!.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(false);
     });
 
     it('Should support changing the duration', async function () {
-      render(singleLineTemplate({ copyButtonFeedbackTimeout: 500 }), document.body);
+      render(
+        singleLineTemplate({ copyButtonFeedbackTimeout: 500 }),
+        document.body
+      );
       await Promise.resolve();
-      const button = document.body.querySelector('bx-code-snippet')!.shadowRoot!.querySelector('.bx--snippet-button');
+      const button = document.body
+        .querySelector('bx-code-snippet')!
+        .shadowRoot!.querySelector('.bx--snippet-button');
       (button as HTMLElement).click();
       await Promise.resolve();
       const feedback = button!.querySelector('.bx--btn--copy__feedback');
-      expect(feedback!.classList.contains('bx--btn--copy__feedback--displayed')).toBe(true);
+      expect(
+        feedback!.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(true);
       jasmine.clock().tick(500);
       await Promise.resolve();
-      expect(feedback!.classList.contains('bx--btn--copy__feedback--displayed')).toBe(false);
+      expect(
+        feedback!.classList.contains('bx--btn--copy__feedback--displayed')
+      ).toBe(false);
     });
 
     afterEach(function () {
@@ -156,7 +193,9 @@ describe('bx-code-snippet', function () {
       snippet!.textContent = 'foo'; // Force firing `slotchange` event
       await Promise.resolve(); // For firing `slotchange` event
       await Promise.resolve(); // For re-rendering
-      expect(snippet!.shadowRoot!.querySelector('.bx--snippet-btn--expand')).toMatchSnapshot();
+      expect(
+        snippet!.shadowRoot!.querySelector('.bx--snippet-btn--expand')
+      ).toMatchSnapshot();
     });
 
     it('Should change the button text by expanding/collapsing', async function () {
@@ -174,11 +213,17 @@ describe('bx-code-snippet', function () {
       snippet!.textContent = 'foo'; // Force firing `slotchange` event
       await Promise.resolve(); // For firing `slotchange` event
       await Promise.resolve(); // For re-rendering
-      const expando = snippet!.shadowRoot!.querySelector('.bx--snippet-btn--expand');
-      expect(expando!.querySelector('.bx--snippet-btn--text')!.textContent!.trim()).toBe('expand-button-text-foo');
+      const expando = snippet!.shadowRoot!.querySelector(
+        '.bx--snippet-btn--expand'
+      );
+      expect(
+        expando!.querySelector('.bx--snippet-btn--text')!.textContent!.trim()
+      ).toBe('expand-button-text-foo');
       (expando as HTMLElement).click();
       await Promise.resolve(); // For re-rendering
-      expect(expando!.querySelector('.bx--snippet-btn--text')!.textContent!.trim()).toBe('collapse-button-text-foo');
+      expect(
+        expando!.querySelector('.bx--snippet-btn--text')!.textContent!.trim()
+      ).toBe('collapse-button-text-foo');
     });
 
     afterEach(function () {

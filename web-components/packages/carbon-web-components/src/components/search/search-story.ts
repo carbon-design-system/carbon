@@ -29,8 +29,18 @@ const sizes = {
 };
 
 export const Default = (args) => {
-  const { closeButtonAssistiveText, colorScheme, disabled, labelText, name, placeholder, size, type, value, onInput } =
-    args?.['bx-search'] ?? {};
+  const {
+    closeButtonAssistiveText,
+    colorScheme,
+    disabled,
+    labelText,
+    name,
+    placeholder,
+    size,
+    type,
+    value,
+    onInput,
+  } = args?.['bx-search'] ?? {};
   return html`
     <bx-search
       close-button-assistive-text="${ifNonNull(closeButtonAssistiveText)}"

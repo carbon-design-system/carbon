@@ -34,12 +34,19 @@ class BXModalFooter extends LitElement {
     this._hasMoreThanTwoButtons =
       (event.target as HTMLSlotElement)
         .assignedNodes()
-        .filter((node) => node.nodeType === Node.ELEMENT_NODE && (node as Element).matches(selectorButtons)).length > 2;
+        .filter(
+          (node) =>
+            node.nodeType === Node.ELEMENT_NODE &&
+            (node as Element).matches(selectorButtons)
+        ).length > 2;
     this.requestUpdate();
   }
 
   render() {
-    const { _hasMoreThanTwoButtons: hasMoreThanTwoButtons, _handleSlotChange: handleSlotChange } = this;
+    const {
+      _hasMoreThanTwoButtons: hasMoreThanTwoButtons,
+      _handleSlotChange: handleSlotChange,
+    } = this;
     const classes = classMap({
       [`${prefix}--modal-footer`]: true,
       [`${prefix}--modal-footer--three-button`]: hasMoreThanTwoButtons,

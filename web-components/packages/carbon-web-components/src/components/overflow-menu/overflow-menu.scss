@@ -55,7 +55,9 @@ $css--plex: true !default;
   @extend .#{$prefix}--overflow-menu-options;
 
   &::after {
-    @extend .#{$prefix}--overflow-menu-options, [data-floating-menu-direction='bottom'], ::after;
+    @extend .#{$prefix}--overflow-menu-options,
+      [data-floating-menu-direction='bottom'],
+      ::after;
   }
 }
 
@@ -64,7 +66,9 @@ $css--plex: true !default;
   margin-bottom: $spacing-2xs;
 
   &::after {
-    @extend .#{$prefix}--overflow-menu-options, [data-floating-menu-direction='top'], ::after;
+    @extend .#{$prefix}--overflow-menu-options,
+      [data-floating-menu-direction='top'],
+      ::after;
   }
 }
 

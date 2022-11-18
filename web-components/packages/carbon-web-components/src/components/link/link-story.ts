@@ -26,7 +26,19 @@ const sizes = {
 };
 
 export const Default = (args) => {
-  const { disabled, download, href, hreflang, linkRole, ping, rel, size, target, type, onClick } = args?.['bx-link'] ?? {};
+  const {
+    disabled,
+    download,
+    href,
+    hreflang,
+    linkRole,
+    ping,
+    rel,
+    size,
+    target,
+    type,
+    onClick,
+  } = args?.['bx-link'] ?? {};
   return html`
     <bx-link
       ?disabled="${disabled}"
@@ -49,7 +61,19 @@ export const Default = (args) => {
 Default.storyName = 'Default';
 
 export const pairedWithIcon = (args) => {
-  const { disabled, download, href, hreflang, linkRole, ping, rel, size, target, type, onClick } = args?.['bx-link'] ?? {};
+  const {
+    disabled,
+    download,
+    href,
+    hreflang,
+    linkRole,
+    ping,
+    rel,
+    size,
+    target,
+    type,
+    onClick,
+  } = args?.['bx-link'] ?? {};
   return html`
     <bx-link
       ?disabled="${disabled}"
@@ -76,7 +100,10 @@ export default {
     knobs: {
       'bx-link': () => ({
         disabled: boolean('Disabled (disabled)', false),
-        href: textNullable('Link href (href)', 'https://github.com/carbon-design-system/carbon-web-components'),
+        href: textNullable(
+          'Link href (href)',
+          'https://github.com/carbon-design-system/carbon-web-components'
+        ),
         onClick: action('click'),
         size: select('Link size (size)', sizes, null),
       }),

@@ -30,7 +30,10 @@ const { prefix } = settings;
  * @slot icon - The icon for the trigger button.
  */
 @customElement(`${prefix}-overflow-menu`)
-class BXOverflowMenu extends HostListenerMixin(FocusMixin(LitElement)) implements BXFloatingMenuTrigger {
+class BXOverflowMenu
+  extends HostListenerMixin(FocusMixin(LitElement))
+  implements BXFloatingMenuTrigger
+{
   /**
    * The menu body.
    */
@@ -124,7 +127,11 @@ class BXOverflowMenu extends HostListenerMixin(FocusMixin(LitElement)) implement
     if (changedProperties.has('open')) {
       const { colorScheme, open } = this;
       if (open && !this._menuBody) {
-        this._menuBody = find(this.childNodes, (elem) => (elem.constructor as typeof BXOverflowMenuBody).FLOATING_MENU);
+        this._menuBody = find(
+          this.childNodes,
+          (elem) =>
+            (elem.constructor as typeof BXOverflowMenuBody).FLOATING_MENU
+        );
       }
       const { _menuBody: menuBody } = this;
       if (menuBody) {

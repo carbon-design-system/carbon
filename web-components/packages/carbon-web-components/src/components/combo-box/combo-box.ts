@@ -16,7 +16,11 @@ import BXDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
 import BXComboBoxItem from './combo-box-item';
 import styles from './combo-box.scss';
 
-export { DROPDOWN_COLOR_SCHEME, DROPDOWN_SIZE, DROPDOWN_TYPE } from '../dropdown/dropdown';
+export {
+  DROPDOWN_COLOR_SCHEME,
+  DROPDOWN_SIZE,
+  DROPDOWN_TYPE,
+} from '../dropdown/dropdown';
 
 const { prefix } = settings;
 
@@ -65,7 +69,10 @@ class BXComboBox extends BXDropdown {
    * @returns `true` if the given combo box item matches the query text user types.
    */
   protected _testItemWithQueryText(item) {
-    return (this.itemMatches || this._defaultItemMatches)(item, this._filterInputNode.value);
+    return (this.itemMatches || this._defaultItemMatches)(
+      item,
+      this._filterInputNode.value
+    );
   }
 
   /* eslint-disable class-methods-use-this */
@@ -76,8 +83,13 @@ class BXComboBox extends BXDropdown {
    * @param queryText The query text user types.
    * @returns `true` if the given combo box item matches the given query text.
    */
-  protected _defaultItemMatches(item: BXComboBoxItem, queryText: string): boolean {
-    return item.textContent!.toLowerCase().indexOf(queryText.toLowerCase()) >= 0;
+  protected _defaultItemMatches(
+    item: BXComboBoxItem,
+    queryText: string
+  ): boolean {
+    return (
+      item.textContent!.toLowerCase().indexOf(queryText.toLowerCase()) >= 0
+    );
   }
   /* eslint-enable class-methods-use-this */
 
@@ -85,15 +97,21 @@ class BXComboBox extends BXDropdown {
    * Handles `input` event on the `<input>` for filtering.
    */
   protected _handleInput() {
-    const items = this.querySelectorAll((this.constructor as typeof BXComboBox).selectorItem);
-    const index = !this._filterInputNode.value ? -1 : findIndex(items, this._testItemWithQueryText, this);
+    const items = this.querySelectorAll(
+      (this.constructor as typeof BXComboBox).selectorItem
+    );
+    const index = !this._filterInputNode.value
+      ? -1
+      : findIndex(items, this._testItemWithQueryText, this);
     forEach(items, (item, i) => {
       if (i === index) {
         const menuRect = this._itemMenu?.getBoundingClientRect();
         const itemRect = item.getBoundingClientRect();
 
         if (menuRect && itemRect) {
-          const isViewable = menuRect!.top <= itemRect?.top && itemRect?.bottom <= menuRect?.top + this._itemMenu!.clientHeight;
+          const isViewable =
+            menuRect!.top <= itemRect?.top &&
+            itemRect?.bottom <= menuRect?.top + this._itemMenu!.clientHeight;
           if (!isViewable) {
             const scrollTop = itemRect?.top - menuRect?.top;
             const scrollBot = itemRect?.bottom - menuRect?.bottom;
@@ -141,9 +159,14 @@ class BXComboBox extends BXDropdown {
    * Handles user-initiated clearing the `<input>` for filtering.
    */
   protected _handleUserInitiatedClearInput() {
-    forEach(this.querySelectorAll((this.constructor as typeof BXComboBox).selectorItem), (item) => {
-      (item as BXComboBoxItem).highlighted = false;
-    });
+    forEach(
+      this.querySelectorAll(
+        (this.constructor as typeof BXComboBox).selectorItem
+      ),
+      (item) => {
+        (item as BXComboBoxItem).highlighted = false;
+      }
+    );
     this._filterInputValue = '';
     this._filterInputNode.focus();
     this._handleUserInitiatedSelectItem();
@@ -168,9 +191,14 @@ class BXComboBox extends BXDropdown {
 
   protected _selectionDidChange(itemToSelect?: BXComboBoxItem) {
     this.value = !itemToSelect ? '' : itemToSelect.value;
-    forEach(this.querySelectorAll((this.constructor as typeof BXDropdown).selectorItemSelected), (item) => {
-      (item as BXComboBoxItem).selected = false;
-    });
+    forEach(
+      this.querySelectorAll(
+        (this.constructor as typeof BXDropdown).selectorItemSelected
+      ),
+      (item) => {
+        (item as BXComboBoxItem).selected = false;
+      }
+    );
     if (itemToSelect) {
       itemToSelect.selected = true;
       this._assistiveStatusText = this.selectedItemAssistiveText;
@@ -179,7 +207,13 @@ class BXComboBox extends BXDropdown {
   }
 
   protected _renderTriggerContent(): TemplateResult {
-    const { disabled, inputLabel, triggerContent, _filterInputValue: filterInputValue, _handleInput: handleInput } = this;
+    const {
+      disabled,
+      inputLabel,
+      triggerContent,
+      _filterInputValue: filterInputValue,
+      _handleInput: handleInput,
+    } = this;
     return html`
       <input
         id="trigger-label"

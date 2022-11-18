@@ -21,9 +21,11 @@ export { MODAL_SIZE };
 const { prefix } = settings;
 
 // eslint-disable-next-line no-bitwise
-const PRECEDING = Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
+const PRECEDING =
+  Node.DOCUMENT_POSITION_PRECEDING | Node.DOCUMENT_POSITION_CONTAINS;
 // eslint-disable-next-line no-bitwise
-const FOLLOWING = Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
+const FOLLOWING =
+  Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONTAINED_BY;
 
 /**
  * Tries to focus on the given elements and bails out if one of them is successful.
@@ -32,7 +34,10 @@ const FOLLOWING = Node.DOCUMENT_POSITION_FOLLOWING | Node.DOCUMENT_POSITION_CONT
  * @param reverse `true` to go through the list in reverse order.
  * @returns `true` if one of the attempts is successful, `false` otherwise.
  */
-function tryFocusElems(elems: NodeListOf<HTMLElement>, reverse: boolean = false) {
+function tryFocusElems(
+  elems: NodeListOf<HTMLElement>,
+  reverse: boolean = false
+) {
   if (!reverse) {
     for (let i = 0; i < elems.length; ++i) {
       const elem = elems[i];
@@ -103,29 +108,46 @@ class BXModal extends HostListenerMixin(LitElement) {
   @HostListener('shadowRoot:focusout')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleBlur = async ({ target, relatedTarget }: FocusEvent) => {
-    const { open, _startSentinelNode: startSentinelNode, _endSentinelNode: endSentinelNode } = this;
+    const {
+      open,
+      _startSentinelNode: startSentinelNode,
+      _endSentinelNode: endSentinelNode,
+    } = this;
     const oldContains = target !== this && this.contains(target as Node);
     const currentContains =
       relatedTarget !== this &&
       (this.contains(relatedTarget as Node) ||
-        (this.shadowRoot?.contains(relatedTarget as Node) && relatedTarget !== (endSentinelNode as Node)));
+        (this.shadowRoot?.contains(relatedTarget as Node) &&
+          relatedTarget !== (endSentinelNode as Node)));
 
     // Performs focus wrapping if _all_ of the following is met:
     // * This modal is open
     // * The viewport still has focus
     // * Modal body used to have focus but no longer has focus
-    const { selectorTabbable: selectorTabbableForModal } = this.constructor as typeof BXModal;
+    const { selectorTabbable: selectorTabbableForModal } = this
+      .constructor as typeof BXModal;
     if (open && relatedTarget && oldContains && !currentContains) {
-      const comparisonResult = (target as Node).compareDocumentPosition(relatedTarget as Node);
+      const comparisonResult = (target as Node).compareDocumentPosition(
+        relatedTarget as Node
+      );
       // eslint-disable-next-line no-bitwise
       if (relatedTarget === startSentinelNode || comparisonResult & PRECEDING) {
         await (this.constructor as typeof BXModal)._delay();
-        if (!tryFocusElems(this.querySelectorAll(selectorTabbableForModal), true) && relatedTarget !== this) {
+        if (
+          !tryFocusElems(
+            this.querySelectorAll(selectorTabbableForModal),
+            true
+          ) &&
+          relatedTarget !== this
+        ) {
           this.focus();
         }
       }
       // eslint-disable-next-line no-bitwise
-      else if (relatedTarget === endSentinelNode || comparisonResult & FOLLOWING) {
+      else if (
+        relatedTarget === endSentinelNode ||
+        comparisonResult & FOLLOWING
+      ) {
         await (this.constructor as typeof BXModal)._delay();
         if (!tryFocusElems(this.querySelectorAll(selectorTabbableForModal))) {
           this.focus();
@@ -148,7 +170,11 @@ class BXModal extends HostListenerMixin(LitElement) {
    * @param event The event.
    */
   private _handleClickContainer(event: MouseEvent) {
-    if ((event.target as Element).matches((this.constructor as typeof BXModal).selectorCloseButton)) {
+    if (
+      (event.target as Element).matches(
+        (this.constructor as typeof BXModal).selectorCloseButton
+      )
+    ) {
       this._handleUserInitiatedClose(event.target);
     }
   }
@@ -168,9 +194,18 @@ class BXModal extends HostListenerMixin(LitElement) {
           triggeredBy,
         },
       };
-      if (this.dispatchEvent(new CustomEvent((this.constructor as typeof BXModal).eventBeforeClose, init))) {
+      if (
+        this.dispatchEvent(
+          new CustomEvent(
+            (this.constructor as typeof BXModal).eventBeforeClose,
+            init
+          )
+        )
+      ) {
         this.open = false;
-        this.dispatchEvent(new CustomEvent((this.constructor as typeof BXModal).eventClose, init));
+        this.dispatchEvent(
+          new CustomEvent((this.constructor as typeof BXModal).eventClose, init)
+        );
       }
     }
   }
@@ -205,11 +240,27 @@ class BXModal extends HostListenerMixin(LitElement) {
       ...containerClass,
     });
     return html`
-      <a id="start-sentinel" class="${prefix}--visually-hidden" href="javascript:void 0" role="navigation"></a>
-      <div part="dialog" class=${containerClasses} role="dialog" tabindex="-1" @click=${this._handleClickContainer}>
+      <a
+        id="start-sentinel"
+        class="${prefix}--visually-hidden"
+        href="javascript:void 0"
+        role="navigation"
+      ></a>
+      <div
+        part="dialog"
+        class=${containerClasses}
+        role="dialog"
+        tabindex="-1"
+        @click=${this._handleClickContainer}
+      >
         <slot></slot>
       </div>
-      <a id="end-sentinel" class="${prefix}--visually-hidden" href="javascript:void 0" role="navigation"></a>
+      <a
+        id="end-sentinel"
+        class="${prefix}--visually-hidden"
+        href="javascript:void 0"
+        role="navigation"
+      ></a>
     `;
   }
 
@@ -217,16 +268,28 @@ class BXModal extends HostListenerMixin(LitElement) {
     if (changedProperties.has('open')) {
       if (this.open) {
         this._launcher = this.ownerDocument!.activeElement;
-        const primaryFocusNode = this.querySelector((this.constructor as typeof BXModal).selectorPrimaryFocus);
+        const primaryFocusNode = this.querySelector(
+          (this.constructor as typeof BXModal).selectorPrimaryFocus
+        );
         await (this.constructor as typeof BXModal)._delay();
         if (primaryFocusNode) {
           // For cases where a `carbon-web-components` component (e.g. `<bx-btn>`) being `primaryFocusNode`,
           // where its first update/render cycle that makes it focusable happens after `<bx-modal>`'s first update/render cycle
           (primaryFocusNode as HTMLElement).focus();
-        } else if (!tryFocusElems(this.querySelectorAll((this.constructor as typeof BXModal).selectorTabbable), true)) {
+        } else if (
+          !tryFocusElems(
+            this.querySelectorAll(
+              (this.constructor as typeof BXModal).selectorTabbable
+            ),
+            true
+          )
+        ) {
           this.focus();
         }
-      } else if (this._launcher && typeof (this._launcher as HTMLElement).focus === 'function') {
+      } else if (
+        this._launcher &&
+        typeof (this._launcher as HTMLElement).focus === 'function'
+      ) {
         (this._launcher as HTMLElement).focus();
         this._launcher = null;
       }

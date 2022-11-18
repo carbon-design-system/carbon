@@ -20,7 +20,12 @@ import {
 } from './defs';
 import BXFloatingMenuTrigger from './floating-menu-trigger';
 
-export { FLOATING_MENU_ALIGNMENT, FLOATING_MENU_DIRECTION, FLOATING_MENU_DIRECTION_GROUP, FLOATING_MENU_POSITION_DIRECTION };
+export {
+  FLOATING_MENU_ALIGNMENT,
+  FLOATING_MENU_DIRECTION,
+  FLOATING_MENU_DIRECTION_GROUP,
+  FLOATING_MENU_POSITION_DIRECTION,
+};
 
 /**
  * Position of floating menu, or trigger button of floating menu.
@@ -79,7 +84,9 @@ const closestComposed = (elem: Element, selector: string) => {
 /**
  * Floating menu.
  */
-abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) {
+abstract class BXFloatingMenu extends HostListenerMixin(
+  FocusMixin(LitElement)
+) {
   /**
    * The handle for observing resize of the element containing the trigger button.
    */
@@ -99,7 +106,9 @@ abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) 
     const { container, open, parent, position } = this;
     if (container && open && parent) {
       const { direction, start, top } = position;
-      this.style[direction !== FLOATING_MENU_POSITION_DIRECTION.RTL ? 'left' : 'right'] = `${start}px`;
+      this.style[
+        direction !== FLOATING_MENU_POSITION_DIRECTION.RTL ? 'left' : 'right'
+      ] = `${start}px`;
       this.style.top = `${top}px`;
     }
   });
@@ -144,7 +153,8 @@ abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) 
       [FLOATING_MENU_DIRECTION.LEFT]: FLOATING_MENU_DIRECTION_GROUP.VERTICAL,
       [FLOATING_MENU_DIRECTION.TOP]: FLOATING_MENU_DIRECTION_GROUP.HORIZONTAL,
       [FLOATING_MENU_DIRECTION.RIGHT]: FLOATING_MENU_DIRECTION_GROUP.VERTICAL,
-      [FLOATING_MENU_DIRECTION.BOTTOM]: FLOATING_MENU_DIRECTION_GROUP.HORIZONTAL,
+      [FLOATING_MENU_DIRECTION.BOTTOM]:
+        FLOATING_MENU_DIRECTION_GROUP.HORIZONTAL,
     }[this.direction];
   }
 
@@ -152,7 +162,12 @@ abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) 
    * The DOM element to put this menu into.
    */
   get container() {
-    return closestComposed(this, (this.constructor as typeof BXFloatingMenu).selectorContainer) || this.ownerDocument!.body;
+    return (
+      closestComposed(
+        this,
+        (this.constructor as typeof BXFloatingMenu).selectorContainer
+      ) || this.ownerDocument!.body
+    );
   }
 
   /**
@@ -165,27 +180,51 @@ abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) 
     }
 
     const { container } = this;
-    const { left: refLeft = 0, top: refTop = 0, right: refRight = 0, bottom: refBottom = 0 } = triggerPosition;
+    const {
+      left: refLeft = 0,
+      top: refTop = 0,
+      right: refRight = 0,
+      bottom: refBottom = 0,
+    } = triggerPosition;
     const { width, height } = this.getBoundingClientRect();
-    const { left: containerLeft = 0, right: containerRight = 0, top: containerTop = 0 } = container.getBoundingClientRect();
+    const {
+      left: containerLeft = 0,
+      right: containerRight = 0,
+      top: containerTop = 0,
+    } = container.getBoundingClientRect();
     const refCenterHorizontal = (refLeft + refRight) / 2;
     const refCenterVertical = (refTop + refBottom) / 2;
 
-    const containerComputedStyle = container.ownerDocument!.defaultView!.getComputedStyle(container);
-    const positionDirection = containerComputedStyle.getPropertyValue('direction') as FLOATING_MENU_POSITION_DIRECTION;
+    const containerComputedStyle =
+      container.ownerDocument!.defaultView!.getComputedStyle(container);
+    const positionDirection = containerComputedStyle.getPropertyValue(
+      'direction'
+    ) as FLOATING_MENU_POSITION_DIRECTION;
     const isRtl = positionDirection === FLOATING_MENU_POSITION_DIRECTION.RTL;
-    const containerStartFromViewport = !isRtl ? containerLeft : container.ownerDocument!.defaultView!.innerWidth - containerRight;
-    const refStartFromContainer = !isRtl ? refLeft - containerLeft : containerRight - refRight;
-    const refEndFromContainer = !isRtl ? refRight - containerLeft : containerRight - refLeft;
-    const refCenterHorizontalFromContainer = !isRtl ? refCenterHorizontal - containerLeft : containerRight - refCenterHorizontal;
+    const containerStartFromViewport = !isRtl
+      ? containerLeft
+      : container.ownerDocument!.defaultView!.innerWidth - containerRight;
+    const refStartFromContainer = !isRtl
+      ? refLeft - containerLeft
+      : containerRight - refRight;
+    const refEndFromContainer = !isRtl
+      ? refRight - containerLeft
+      : containerRight - refLeft;
+    const refCenterHorizontalFromContainer = !isRtl
+      ? refCenterHorizontal - containerLeft
+      : containerRight - refCenterHorizontal;
     const refTopFromContainer = refTop - containerTop;
     const refCenterVerticalFromContainer = refCenterVertical - containerTop;
 
     if (
-      (container !== this.ownerDocument!.body || containerStartFromViewport !== 0 || containerTop !== 0) &&
+      (container !== this.ownerDocument!.body ||
+        containerStartFromViewport !== 0 ||
+        containerTop !== 0) &&
       containerComputedStyle.getPropertyValue('position') === 'static'
     ) {
-      throw new Error('Floating menu container must not have `position:static`.');
+      throw new Error(
+        'Floating menu container must not have `position:static`.'
+      );
     }
 
     const { alignment, alignmentDirection, direction } = this;
@@ -199,12 +238,14 @@ abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) 
     const alignmentStart = {
       [FLOATING_MENU_DIRECTION_GROUP.HORIZONTAL]: {
         [FLOATING_MENU_ALIGNMENT.START]: () => refStartFromContainer,
-        [FLOATING_MENU_ALIGNMENT.CENTER]: () => refCenterHorizontalFromContainer - width / 2,
+        [FLOATING_MENU_ALIGNMENT.CENTER]: () =>
+          refCenterHorizontalFromContainer - width / 2,
         [FLOATING_MENU_ALIGNMENT.END]: () => refEndFromContainer - width,
       },
       [FLOATING_MENU_DIRECTION_GROUP.VERTICAL]: {
         [FLOATING_MENU_ALIGNMENT.START]: () => refTopFromContainer,
-        [FLOATING_MENU_ALIGNMENT.CENTER]: () => refCenterVerticalFromContainer - height / 2,
+        [FLOATING_MENU_ALIGNMENT.CENTER]: () =>
+          refCenterVerticalFromContainer - height / 2,
         [FLOATING_MENU_ALIGNMENT.END]: () => refBottom - height,
       },
     }[alignmentDirection][alignment]();
@@ -238,7 +279,9 @@ abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) 
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -253,14 +296,21 @@ abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) 
 
   updated(changedProperties) {
     const { container, open, parent } = this;
-    if ((changedProperties.has('alignment') || changedProperties.has('direction') || changedProperties.has('open')) && open) {
+    if (
+      (changedProperties.has('alignment') ||
+        changedProperties.has('direction') ||
+        changedProperties.has('open')) &&
+      open
+    ) {
       if (!parent) {
         this.parent = this.parentElement as BXFloatingMenuTrigger;
         container.appendChild(this);
       }
       // Note: `this.position` cannot be referenced until `this.parent` is set
       const { direction, start, top } = this.position;
-      this.style[direction !== FLOATING_MENU_POSITION_DIRECTION.RTL ? 'left' : 'right'] = `${start}px`;
+      this.style[
+        direction !== FLOATING_MENU_POSITION_DIRECTION.RTL ? 'left' : 'right'
+      ] = `${start}px`;
       this.style.top = `${top}px`;
     }
     if (changedProperties.has('open')) {
@@ -272,9 +322,15 @@ abstract class BXFloatingMenu extends HostListenerMixin(FocusMixin(LitElement)) 
       }
       if (open) {
         const { parentElement } = this.parent ?? {};
-        this._hObserveResizeContainer = observeResize(this._resizeObserver, container);
+        this._hObserveResizeContainer = observeResize(
+          this._resizeObserver,
+          container
+        );
         if (parentElement) {
-          this._hObserveResizeParent = observeResize(this._resizeObserver, parentElement);
+          this._hObserveResizeParent = observeResize(
+            this._resizeObserver,
+            parentElement
+          );
         }
       }
     }

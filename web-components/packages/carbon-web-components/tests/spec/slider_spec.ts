@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -33,7 +33,9 @@ describe('bx-slider', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-slider')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-slider')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should render with various attributes', async function () {
@@ -50,7 +52,9 @@ describe('bx-slider', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-slider')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-slider')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -69,7 +73,11 @@ describe('bx-slider', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -91,7 +99,11 @@ describe('bx-slider', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);

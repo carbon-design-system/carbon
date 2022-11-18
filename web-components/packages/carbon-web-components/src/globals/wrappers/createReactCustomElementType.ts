@@ -109,7 +109,10 @@ const convertProp = (prop: any, descriptor: CustomElementPropDescriptor) => {
  * @param descriptor A set of React prop desciptor.
  * @returns The set of React props to set to a custom element, corresponding to the given React props.
  */
-const convertProps = (props: CustomElementTypeProps, descriptor: CustomElementPropsDescriptor) =>
+const convertProps = (
+  props: CustomElementTypeProps,
+  descriptor: CustomElementPropsDescriptor
+) =>
   Object.keys(props).reduce((acc, propName) => {
     const { [propName]: descriptorItem } = descriptor;
     const converted = convertProp(props[propName], descriptorItem);
@@ -144,7 +147,9 @@ const attachEventListeners = (
           ? (eventDescriptor as string)
           : (eventDescriptor as CustomElementEventDescriptor).name;
       const options =
-        Object(eventDescriptor) !== eventDescriptor ? undefined : (eventDescriptor as CustomElementEventDescriptor).options;
+        Object(eventDescriptor) !== eventDescriptor
+          ? undefined
+          : (eventDescriptor as CustomElementEventDescriptor).options;
       if (name) {
         handles.add(
           on(
@@ -207,7 +212,10 @@ const attachEventListeners = (
  *   document.body
  * );
  */
-const createReactCustomElementType = (name: string, descriptor: CustomElementPropsDescriptor) => {
+const createReactCustomElementType = (
+  name: string,
+  descriptor: CustomElementPropsDescriptor
+) => {
   /**
    * Array of React prop names that should be mapped to DOM properties instead of attributes.
    */
@@ -256,7 +264,11 @@ const createReactCustomElementType = (name: string, descriptor: CustomElementPro
         this._eventListenersHandle = null;
       }
       if (elem) {
-        this._eventListenersHandle = attachEventListeners(elem, descriptor, this._handleEvent);
+        this._eventListenersHandle = attachEventListeners(
+          elem,
+          descriptor,
+          this._handleEvent
+        );
       }
     };
 
@@ -288,7 +300,11 @@ const createReactCustomElementType = (name: string, descriptor: CustomElementPro
       // eslint-disable-next-line react/prop-types
       const { children, innerRef, ...props } = this.props;
       const mergedRef = mergeRefs<HTMLElement>(innerRef, this._handleElemRef);
-      return createElement(name, { ref: mergedRef, ...convertProps(props, descriptor) }, children);
+      return createElement(
+        name,
+        { ref: mergedRef, ...convertProps(props, descriptor) },
+        children
+      );
     }
   }
 
@@ -307,12 +323,14 @@ export const booleanSerializer = (value) => (!value ? undefined : '');
  * @param value A React prop value.
  * @returns Serialized version of React prop value, as a number attribute in a custom element.
  */
-export const numberSerializer = (value) => (value == null ? value : String(value));
+export const numberSerializer = (value) =>
+  value == null ? value : String(value);
 
 /**
  * @param value A React prop value.
  * @returns Serialized version of React prop value, as a object attribute in a custom element.
  */
-export const objectSerializer = (value) => (value == null ? value : JSON.stringify(value));
+export const objectSerializer = (value) =>
+  value == null ? value : JSON.stringify(value);
 
 export default createReactCustomElementType;

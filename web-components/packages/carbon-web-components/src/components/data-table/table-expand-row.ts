@@ -44,7 +44,8 @@ class BXTableExpandRow extends HostListenerMixin(BXTableRow) {
     const { selectorExpandedRow } = this.constructor as typeof BXTableExpandRow;
     const { nextElementSibling } = this;
     if (nextElementSibling?.matches(selectorExpandedRow)) {
-      (nextElementSibling as BXTableExpandedRow).highlighted = event.type === 'mouseover';
+      (nextElementSibling as BXTableExpandedRow).highlighted =
+        event.type === 'mouseover';
     }
   }
 
@@ -62,9 +63,23 @@ class BXTableExpandRow extends HostListenerMixin(BXTableRow) {
         expanded,
       },
     };
-    if (this.dispatchEvent(new CustomEvent((this.constructor as typeof BXTableExpandRow).eventBeforeExpandoToggle, init))) {
+    if (
+      this.dispatchEvent(
+        new CustomEvent(
+          (
+            this.constructor as typeof BXTableExpandRow
+          ).eventBeforeExpandoToggle,
+          init
+        )
+      )
+    ) {
       this.expanded = expanded;
-      this.dispatchEvent(new CustomEvent((this.constructor as typeof BXTableExpandRow).eventExpandoToggle, init));
+      this.dispatchEvent(
+        new CustomEvent(
+          (this.constructor as typeof BXTableExpandRow).eventExpandoToggle,
+          init
+        )
+      );
     }
   }
 
@@ -72,7 +87,10 @@ class BXTableExpandRow extends HostListenerMixin(BXTableRow) {
     const { _handleClickExpando: handleClickExpando } = this;
     return html`
       <div class="${prefix}--table-expand">
-        <button class="${prefix}--table-expand__button" @click="${handleClickExpando}">
+        <button
+          class="${prefix}--table-expand__button"
+          @click="${handleClickExpando}"
+        >
           ${ChevronRight16({ class: `${prefix}--table-expand__svg` })}
         </button>
       </div>
@@ -88,7 +106,8 @@ class BXTableExpandRow extends HostListenerMixin(BXTableRow) {
 
   updated(changedProperties) {
     if (changedProperties.has('expanded')) {
-      const { selectorExpandedRow } = this.constructor as typeof BXTableExpandRow;
+      const { selectorExpandedRow } = this
+        .constructor as typeof BXTableExpandRow;
       const { expanded, nextElementSibling } = this;
       if (nextElementSibling?.matches(selectorExpandedRow)) {
         (nextElementSibling as BXTableExpandedRow).expanded = expanded;

@@ -37,11 +37,23 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * @returns Page status text.
    */
   private _renderStatusText() {
-    const { atLastPage, start, pageSize, total, formatStatusWithDeterminateTotal, formatStatusWithIndeterminateTotal } = this;
+    const {
+      atLastPage,
+      start,
+      pageSize,
+      total,
+      formatStatusWithDeterminateTotal,
+      formatStatusWithIndeterminateTotal,
+    } = this;
     // * Regular: `1-10 of 100 items`
     // * Indeterminate total: `Item 1-10` (`Item 11-` at the last page)
-    const end = atLastPage ? undefined : Math.min(start + pageSize, total == null ? Infinity : total);
-    const format = total == null ? formatStatusWithIndeterminateTotal : formatStatusWithDeterminateTotal;
+    const end = atLastPage
+      ? undefined
+      : Math.min(start + pageSize, total == null ? Infinity : total);
+    const format =
+      total == null
+        ? formatStatusWithIndeterminateTotal
+        : formatStatusWithDeterminateTotal;
     // `start`/`end` properties starts with zero, whereas we want to show number starting with 1
     return format({ start: start + 1, end, count: total });
   }
@@ -54,13 +66,16 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   private _handleUserInitiatedChangeStart(start: number) {
     this.start = start;
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXPagination).eventChangeCurrent, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          start,
-        },
-      })
+      new CustomEvent(
+        (this.constructor as typeof BXPagination).eventChangeCurrent,
+        {
+          bubbles: true,
+          composed: true,
+          detail: {
+            start,
+          },
+        }
+      )
     );
   }
 
@@ -114,13 +129,15 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
    * The formatter, used with determinate the total pages. Should be changed upon the locale the UI is rendered with.
    */
   @property({ attribute: false })
-  formatStatusWithDeterminateTotal = ({ start, end, count }) => `${start}–${end} of ${count} item${count <= 1 ? '' : 's'}`;
+  formatStatusWithDeterminateTotal = ({ start, end, count }) =>
+    `${start}–${end} of ${count} item${count <= 1 ? '' : 's'}`;
 
   /**
    * The formatter, used with indeterminate the total pages. Should be changed upon the locale the UI is rendered with.
    */
   @property({ attribute: false })
-  formatStatusWithIndeterminateTotal = ({ start, end }) => (end == null ? `Item ${start}–` : `Item ${start}–${end}`);
+  formatStatusWithIndeterminateTotal = ({ start, end }) =>
+    end == null ? `Item ${start}–` : `Item ${start}–${end}`;
 
   /**
    * `true` to explicitly state that user is at the last page.
@@ -173,13 +190,16 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   updated(changedProperties) {
     const { pageSize } = this;
-    const { selectorPageSizesSelect, selectorPagesSelect } = this.constructor as typeof BXPagination;
+    const { selectorPageSizesSelect, selectorPagesSelect } = this
+      .constructor as typeof BXPagination;
     if (changedProperties.has('pageSize')) {
       forEach(this.querySelectorAll(selectorPageSizesSelect), (elem) => {
         (elem as BXPageSizesSelect).value = pageSize;
@@ -227,7 +247,10 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
       <div class="${prefix}--pagination__left">
         <slot name="page-sizes-select"></slot>
         <div class="${prefix}-ce--pagination__divider"></div>
-        <span class="${prefix}--pagination__text ${prefix}--pagination__items-count">${this._renderStatusText()}</span>
+        <span
+          class="${prefix}--pagination__text ${prefix}--pagination__items-count"
+          >${this._renderStatusText()}</span
+        >
       </div>
       <div class="${prefix}-ce--pagination__divider"></div>
       <div class="${prefix}--pagination__right">

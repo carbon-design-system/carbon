@@ -33,13 +33,16 @@ class BXPageSizesSelect extends FocusMixin(LitElement) {
   private _handleChange({ target }: Event) {
     const value = Number((target as HTMLSelectElement).value);
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXPageSizesSelect).eventChange, {
-        bubbles: true,
-        composed: true,
-        detail: {
-          value,
-        },
-      })
+      new CustomEvent(
+        (this.constructor as typeof BXPageSizesSelect).eventChange,
+        {
+          bubbles: true,
+          composed: true,
+          detail: {
+            value,
+          },
+        }
+      )
     );
     this.value = value;
   }
@@ -54,7 +57,9 @@ class BXPageSizesSelect extends FocusMixin(LitElement) {
     while (selectNode.firstChild) {
       selectNode.removeChild(selectNode.firstChild);
     }
-    ((target as HTMLSlotElement).assignedNodes() as HTMLOptionElement[]).forEach((item) => {
+    (
+      (target as HTMLSlotElement).assignedNodes() as HTMLOptionElement[]
+    ).forEach((item) => {
       selectNode?.appendChild(item.cloneNode(true));
     });
   }
@@ -74,16 +79,30 @@ class BXPageSizesSelect extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
-    const { labelText, value, _handleChange: handleChange, _handleSlotChange: handleSlotChange } = this;
+    const {
+      labelText,
+      value,
+      _handleChange: handleChange,
+      _handleSlotChange: handleSlotChange,
+    } = this;
     return html`
-      <label for="select" class="${prefix}--pagination__text"><slot name="label-text">${labelText}</slot></label>
+      <label for="select" class="${prefix}--pagination__text"
+        ><slot name="label-text">${labelText}</slot></label
+      >
       <div class="${prefix}--select__item-count">
-        <select id="select" class="${prefix}--select-input" .value="${value}" @change=${handleChange}></select>
+        <select
+          id="select"
+          class="${prefix}--select-input"
+          .value="${value}"
+          @change=${handleChange}
+        ></select>
         ${ChevronDown16({ class: `${prefix}--select__arrow` })}
       </div>
       <div hidden><slot @slotchange="${handleSlotChange}"></slot></div>

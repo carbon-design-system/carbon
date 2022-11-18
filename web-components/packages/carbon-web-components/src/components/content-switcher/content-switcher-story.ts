@@ -21,11 +21,18 @@ const noop = () => {};
 const sizes = {
   'Regular size': null,
   [`Small size (${CONTENT_SWITCHER_SIZE.SMALL})`]: CONTENT_SWITCHER_SIZE.SMALL,
-  [`XL size (${CONTENT_SWITCHER_SIZE.EXTRA_LARGE})`]: CONTENT_SWITCHER_SIZE.EXTRA_LARGE,
+  [`XL size (${CONTENT_SWITCHER_SIZE.EXTRA_LARGE})`]:
+    CONTENT_SWITCHER_SIZE.EXTRA_LARGE,
 };
 
 export const Default = (args) => {
-  const { value, disableSelection, onBeforeSelect = noop, onSelect = noop, size } = args?.['bx-content-switcher'] ?? {};
+  const {
+    value,
+    disableSelection,
+    onBeforeSelect = noop,
+    onSelect = noop,
+    size,
+  } = args?.['bx-content-switcher'] ?? {};
   const handleBeforeSelected = (event: CustomEvent) => {
     onBeforeSelect(event);
     if (disableSelection) {
@@ -40,10 +47,16 @@ export const Default = (args) => {
       size="${size}"
     >
       <bx-content-switcher-item value="all">Option 1</bx-content-switcher-item>
-      <bx-content-switcher-item value="cloudFoundry" disabled>Option 2</bx-content-switcher-item>
-      <bx-content-switcher-item value="staging">Option 3</bx-content-switcher-item>
+      <bx-content-switcher-item value="cloudFoundry" disabled
+        >Option 2</bx-content-switcher-item
+      >
+      <bx-content-switcher-item value="staging"
+        >Option 3</bx-content-switcher-item
+      >
       <bx-content-switcher-item value="dea">Option 4</bx-content-switcher-item>
-      <bx-content-switcher-item value="router">Option 5</bx-content-switcher-item>
+      <bx-content-switcher-item value="router"
+        >Option 5</bx-content-switcher-item
+      >
     </bx-content-switcher>
   `;
 };

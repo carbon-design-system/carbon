@@ -19,7 +19,9 @@ const toString = (descriptor) => {
   if (elem !== 'svg') {
     return `<${elem} ${formatAttributes(attrs)}>${children}</${elem}>`;
   }
-  return `<${elem} ${formatAttributes(getAttributes(attrs))}>${children}</${elem}>`;
+  return `<${elem} ${formatAttributes(
+    getAttributes(attrs)
+  )}>${children}</${elem}>`;
 };
 
 /**

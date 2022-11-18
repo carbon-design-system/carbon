@@ -24,7 +24,9 @@ export const Default = () =>
         <bx-breadcrumb-link href="/#">Breadcrumb 2</bx-breadcrumb-link>
       </bx-breadcrumb-item>
       <bx-breadcrumb-item>
-        <bx-breadcrumb-link href="/#" aria-current="page">Breadcrumb 3</bx-breadcrumb-link>
+        <bx-breadcrumb-link href="/#" aria-current="page"
+          >Breadcrumb 3</bx-breadcrumb-link
+        >
       </bx-breadcrumb-item>
     </bx-breadcrumb>
   `;
@@ -55,7 +57,9 @@ export const withOverflowMenu = () => html`
       </bx-breadcrumb-overflow-menu>
     </bx-breadcrumb-item>
     <bx-breadcrumb-item>
-      <bx-breadcrumb-link href="/#" aria-current="page">Breadcrumb 3</bx-breadcrumb-link>
+      <bx-breadcrumb-link href="/#" aria-current="page"
+        >Breadcrumb 3</bx-breadcrumb-link
+      >
     </bx-breadcrumb-item>
   </bx-breadcrumb>
 `;

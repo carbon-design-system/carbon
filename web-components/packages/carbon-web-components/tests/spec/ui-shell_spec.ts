@@ -24,7 +24,10 @@ import '../../src/components/ui-shell/header-menu-button';
 import '../../src/components/ui-shell/header-name';
 import '../../src/components/ui-shell/header-nav';
 import '../../src/components/ui-shell/header-nav-item';
-import BXSideNav, { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from '../../src/components/ui-shell/side-nav';
+import BXSideNav, {
+  SIDE_NAV_COLLAPSE_MODE,
+  SIDE_NAV_USAGE_MODE,
+} from '../../src/components/ui-shell/side-nav';
 import '../../src/components/ui-shell/side-nav-link';
 import BXSideNavMenu from '../../src/components/ui-shell/side-nav-menu';
 // Above import does not seem to register the custom element
@@ -32,7 +35,14 @@ import '../../src/components/ui-shell/side-nav-menu';
 import '../../src/components/ui-shell/side-nav-menu-item';
 
 const headerMenuButtonTemplate = (props?) => {
-  const { active, buttonLabelActive, buttonLabelInactive, collapseMode, disabled, usageMode } = props ?? {};
+  const {
+    active,
+    buttonLabelActive,
+    buttonLabelInactive,
+    collapseMode,
+    disabled,
+    usageMode,
+  } = props ?? {};
   return html`
     <bx-header-menu-button
       ?active="${ifNonNull(active)}"
@@ -49,31 +59,48 @@ const headerMenuButtonTemplate = (props?) => {
 const headerMenuTemplate = (props?) => {
   const { expanded, menuLabel, triggerContent } = props ?? {};
   return html`
-    <bx-header-menu ?expanded="${expanded}" menu-label="${ifNonNull(menuLabel)}" trigger-content="${ifNonNull(triggerContent)}">
+    <bx-header-menu
+      ?expanded="${expanded}"
+      menu-label="${ifNonNull(menuLabel)}"
+      trigger-content="${ifNonNull(triggerContent)}"
+    >
     </bx-header-menu>
   `;
 };
 
 const headerNameTemplate = (props?) => {
   const { href, prefix } = props ?? {};
-  return html` <bx-header-name href="${ifNonNull(href)}" prefix="${ifNonNull(prefix)}"></bx-header-name> `;
+  return html`
+    <bx-header-name
+      href="${ifNonNull(href)}"
+      prefix="${ifNonNull(prefix)}"
+    ></bx-header-name>
+  `;
 };
 
 const headerNavTemplate = (props?) => {
   const { menuBarLabel } = props ?? {};
-  return html` <bx-header-nav menu-bar-label="${ifNonNull(menuBarLabel)}"></bx-header-nav> `;
+  return html`
+    <bx-header-nav menu-bar-label="${ifNonNull(menuBarLabel)}"></bx-header-nav>
+  `;
 };
 
 const headerNavItemTemplate = (props?) => {
   const { href } = props ?? {};
-  return html` <bx-header-nav-item href="${ifNonNull(href)}"></bx-header-nav-item> `;
+  return html`
+    <bx-header-nav-item href="${ifNonNull(href)}"></bx-header-nav-item>
+  `;
 };
 
 const sideNavTemplate = (props?) => {
   const { collapseMode, expanded, usageMode, children } = props ?? {};
   return html`
     <bx-header-menu-button></bx-header-menu-button>
-    <bx-side-nav collapse-mode="${ifNonNull(collapseMode)}" ?expanded="${expanded}" usage-mode="${ifNonNull(usageMode)}">
+    <bx-side-nav
+      collapse-mode="${ifNonNull(collapseMode)}"
+      ?expanded="${expanded}"
+      usage-mode="${ifNonNull(usageMode)}"
+    >
       ${children}
     </bx-side-nav>
   `;
@@ -81,7 +108,11 @@ const sideNavTemplate = (props?) => {
 
 const sideNavLinkTemplate = (props?) => {
   const { active, href, children } = props ?? {};
-  return html` <bx-side-nav-link ?active="${active}" href="${ifNonNull(href)}">${children}</bx-side-nav-link> `;
+  return html`
+    <bx-side-nav-link ?active="${active}" href="${ifNonNull(href)}"
+      >${children}</bx-side-nav-link
+    >
+  `;
 };
 
 const sideNavMenuTemplate = (props?) => {
@@ -102,7 +133,10 @@ const sideNavMenuItemTemplate = (props?) => {
   const { active, href } = props ?? {};
   return html`
     <bx-side-nav-menu>
-      <bx-side-nav-menu-item ?active="${active}" href="${ifNonNull(href)}"></bx-side-nav-menu-item>
+      <bx-side-nav-menu-item
+        ?active="${active}"
+        href="${ifNonNull(href)}"
+      ></bx-side-nav-menu-item>
     </bx-side-nav-menu>
   `;
 };
@@ -115,7 +149,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerMenuButtonTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-menu-button')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-header-menu-button')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes for inactive state', async function () {
@@ -130,7 +166,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-menu-button')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-header-menu-button')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes for active state', async function () {
@@ -146,7 +184,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-menu-button')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-header-menu-button')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
@@ -168,7 +208,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerMenuTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-menu')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-header-menu')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
 
       it('should render with various attributes', async function () {
@@ -181,7 +223,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-menu')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-header-menu')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
     });
 
@@ -202,7 +246,11 @@ describe('ui-shell', function () {
         const menu = document.body.querySelector('bx-header-menu');
         const trigger = menu!.shadowRoot!.querySelector('a');
         spyOn(trigger!, 'focus');
-        trigger!.dispatchEvent(Object.assign(new CustomEvent('keydown', { bubbles: true }), { key: 'Escape' }));
+        trigger!.dispatchEvent(
+          Object.assign(new CustomEvent('keydown', { bubbles: true }), {
+            key: 'Escape',
+          })
+        );
         expect((menu as BXHeaderMenu).expanded).toBe(false);
         expect(trigger!.focus).toHaveBeenCalled();
       });
@@ -211,7 +259,9 @@ describe('ui-shell', function () {
         render(headerMenuTemplate({ expanded: true }), document.body);
         await Promise.resolve();
         const menu = document.body.querySelector('bx-header-menu');
-        (menu as HTMLElement).dispatchEvent(new CustomEvent('focusout', { bubbles: true }));
+        (menu as HTMLElement).dispatchEvent(
+          new CustomEvent('focusout', { bubbles: true })
+        );
         expect((menu as BXHeaderMenu).expanded).toBe(false);
       });
     });
@@ -222,7 +272,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerNameTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-name')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-header-name')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
 
       it('should render with various attributes', async function () {
@@ -235,7 +287,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-name')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-header-name')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
     });
   });
@@ -245,7 +299,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerNavTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-nav')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-header-nav')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
 
       it('should render with various attributes', async function () {
@@ -256,7 +312,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-nav')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-header-nav')).toMatchSnapshot({
+          mode: 'shadow',
+        });
       });
     });
   });
@@ -266,7 +324,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerNavItemTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-nav-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-header-nav-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -277,7 +337,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-nav-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-header-nav-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
   });
@@ -287,7 +349,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(sideNavLinkTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-link')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-side-nav-link')).toMatchSnapshot(
+          { mode: 'shadow' }
+        );
       });
 
       it('should render with various attributes', async function () {
@@ -301,7 +365,9 @@ describe('ui-shell', function () {
         );
         await Promise.resolve(); // First update cycle
         await Promise.resolve(); // Update cycle upon `slotchange` event
-        expect(document.body.querySelector('bx-side-nav-link')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-side-nav-link')).toMatchSnapshot(
+          { mode: 'shadow' }
+        );
       });
     });
   });
@@ -332,9 +398,19 @@ describe('ui-shell', function () {
         await Promise.resolve();
         const nav = document.body.querySelector('bx-side-nav');
         const menuButton = document.body.querySelector('bx-header-menu-button');
-        menuButton!.dispatchEvent(new CustomEvent('bx-header-menu-button-toggled', { bubbles: true, detail: { active: true } }));
+        menuButton!.dispatchEvent(
+          new CustomEvent('bx-header-menu-button-toggled', {
+            bubbles: true,
+            detail: { active: true },
+          })
+        );
         expect((nav as BXSideNav).expanded).toBe(true);
-        menuButton!.dispatchEvent(new CustomEvent('bx-header-menu-button-toggled', { bubbles: true, detail: { active: false } }));
+        menuButton!.dispatchEvent(
+          new CustomEvent('bx-header-menu-button-toggled', {
+            bubbles: true,
+            detail: { active: false },
+          })
+        );
         expect((nav as BXSideNav).expanded).toBe(false);
       });
     });
@@ -350,7 +426,9 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         const menuButton = document.body.querySelector('bx-header-menu-button');
-        expect((menuButton as BXSideNavMenuButton).collapseMode).toBe(SIDE_NAV_COLLAPSE_MODE.RAIL);
+        expect((menuButton as BXSideNavMenuButton).collapseMode).toBe(
+          SIDE_NAV_COLLAPSE_MODE.RAIL
+        );
         expect((menuButton as BXSideNavMenuButton).active).toBe(true);
       });
 
@@ -363,7 +441,9 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         const menuButton = document.body.querySelector('bx-header-menu-button');
-        expect((menuButton as BXSideNavMenuButton).usageMode).toBe(SIDE_NAV_USAGE_MODE.HEADER_NAV);
+        expect((menuButton as BXSideNavMenuButton).usageMode).toBe(
+          SIDE_NAV_USAGE_MODE.HEADER_NAV
+        );
       });
     });
   });
@@ -373,7 +453,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot(
+          { mode: 'shadow' }
+        );
       });
 
       it('should render with various attributes', async function () {
@@ -386,7 +468,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot(
+          { mode: 'shadow' }
+        );
       });
 
       it('should support collapsing side nav menu upon parent side nav is collapsed as rail', async function () {
@@ -399,7 +483,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot({ mode: 'shadow' });
+        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot(
+          { mode: 'shadow' }
+        );
       });
     });
 
@@ -472,7 +558,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(sideNavMenuItemTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-menu-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-side-nav-menu-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -484,7 +572,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-menu-item')).toMatchSnapshot({ mode: 'shadow' });
+        expect(
+          document.body.querySelector('bx-side-nav-menu-item')
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
@@ -492,7 +582,10 @@ describe('ui-shell', function () {
       it('should mark the parent side nav menu as it has active child side nav menu item', async function () {
         render(sideNavMenuItemTemplate({ active: true }), document.body);
         await Promise.resolve();
-        expect((document.body.querySelector('bx-side-nav-menu') as BXSideNavMenu).active).toBe(true);
+        expect(
+          (document.body.querySelector('bx-side-nav-menu') as BXSideNavMenu)
+            .active
+        ).toBe(true);
       });
     });
   });

@@ -50,7 +50,8 @@
 :host(#{$prefix}-table-toolbar-content[has-batch-actions]) {
   clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   transform: translate3d(0, 48px, 0);
-  transition: transform $duration--fast-02 motion(standard, productive), clip-path $duration--fast-02 motion(standard, productive);
+  transition: transform $duration--fast-02 motion(standard, productive),
+    clip-path $duration--fast-02 motion(standard, productive);
 }
 
 :host(#{$prefix}-table-toolbar-search) {

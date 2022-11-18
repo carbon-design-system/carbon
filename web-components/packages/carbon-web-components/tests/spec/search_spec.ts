@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,7 +10,9 @@
 import { render } from 'lit-html';
 import EventManager from '../utils/event-manager';
 import { INPUT_SIZE } from '../../src/components/input/input';
-import BXSearch, { SEARCH_COLOR_SCHEME } from '../../src/components/search/search';
+import BXSearch, {
+  SEARCH_COLOR_SCHEME,
+} from '../../src/components/search/search';
 import { Default } from '../../src/components/search/search-story';
 
 const template = (props?) =>
@@ -25,7 +27,9 @@ describe('bx-search', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-search')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-search')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with various attributes', async function () {
@@ -44,7 +48,9 @@ describe('bx-search', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-search')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-search')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 

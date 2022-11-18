@@ -47,7 +47,8 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
    */
   private _handleChange(event: Event | DragEvent) {
     const addedFiles = this._getFiles(event);
-    const { eventChange, selectorInput } = this.constructor as typeof BXFileDropContainer;
+    const { eventChange, selectorInput } = this
+      .constructor as typeof BXFileDropContainer;
     this.dispatchEvent(
       new CustomEvent(eventChange, {
         bubbles: true,
@@ -95,18 +96,29 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
    * @returns The list of files user chose to upload.
    */
   private _getFiles(event: Event | DragEvent) {
-    const { files } = (event.type === 'drop' ? (event as DragEvent).dataTransfer : (event.target as HTMLInputElement)) ?? {};
+    const { files } =
+      (event.type === 'drop'
+        ? (event as DragEvent).dataTransfer
+        : (event.target as HTMLInputElement)) ?? {};
     const { accept } = this;
     if (!accept || !/^(change|drop)$/.test(event.type)) {
       return Array.from(files ?? []);
     }
     const acceptedTypes = new Set(accept.split(' '));
-    return Array.prototype.filter.call(files, ({ name, type: mimeType = '' }) => {
-      const fileExtensionRegExp = /\.[^.]+$/;
-      const hasFileExtension = fileExtensionRegExp.test(name);
-      const [fileExtension] = !hasFileExtension ? [undefined] : fileExtensionRegExp.exec(name) ?? [];
-      return acceptedTypes.has(mimeType) || (fileExtension && acceptedTypes.has(fileExtension));
-    }) as File[];
+    return Array.prototype.filter.call(
+      files,
+      ({ name, type: mimeType = '' }) => {
+        const fileExtensionRegExp = /\.[^.]+$/;
+        const hasFileExtension = fileExtensionRegExp.test(name);
+        const [fileExtension] = !hasFileExtension
+          ? [undefined]
+          : fileExtensionRegExp.exec(name) ?? [];
+        return (
+          acceptedTypes.has(mimeType) ||
+          (fileExtension && acceptedTypes.has(fileExtension))
+        );
+      }
+    ) as File[];
   }
 
   /**
@@ -135,7 +147,13 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
   slot = 'drop-container';
 
   render() {
-    const { accept, disabled, multiple, _active: active, _handleChange: handleChange } = this;
+    const {
+      accept,
+      disabled,
+      multiple,
+      _active: active,
+      _handleChange: handleChange,
+    } = this;
     const labelClasses = classMap({
       [`${prefix}--file-browse-btn`]: true,
       [`${prefix}--file-browse-btn--disabled`]: disabled,

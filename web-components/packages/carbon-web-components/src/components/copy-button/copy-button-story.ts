@@ -16,7 +16,8 @@ import './copy-button';
 import storyDocs from './copy-button-story.mdx';
 
 export const Default = (args) => {
-  const { buttonAssistiveText, feedbackText, feedbackTimeout, onClick } = args?.['bx-copy-button'] ?? {};
+  const { buttonAssistiveText, feedbackText, feedbackTimeout, onClick } =
+    args?.['bx-copy-button'] ?? {};
   return html`
     <bx-copy-button
       button-assistive-text="${ifNonNull(buttonAssistiveText)}"
@@ -35,7 +36,10 @@ export default {
     ...storyDocs.parameters,
     knobs: {
       'bx-copy-button': () => ({
-        buttonAssistiveText: textNullable('Assistive text for the button (button-assistive-text)', ''),
+        buttonAssistiveText: textNullable(
+          'Assistive text for the button (button-assistive-text)',
+          ''
+        ),
         feedbackText: textNullable('Feedback text (feedback-text)', ''),
         feedbackTimeout: number('Feedback timeout (feedback-timeout)', 2000),
         onClick: action('click'),

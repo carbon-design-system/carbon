@@ -36,8 +36,10 @@ class BXTableBody extends LitElement {
     slotNode.assignedNodes().forEach((node) => {
       if (node.nodeType === Node.ELEMENT_NODE) {
         const odd = (node as HTMLElement).matches('*:nth-of-type(odd)');
-        (node as BXTableRow).even = colorScheme === TABLE_COLOR_SCHEME.ZEBRA && !odd;
-        (node as BXTableRow).odd = colorScheme === TABLE_COLOR_SCHEME.ZEBRA && odd;
+        (node as BXTableRow).even =
+          colorScheme === TABLE_COLOR_SCHEME.ZEBRA && !odd;
+        (node as BXTableRow).odd =
+          colorScheme === TABLE_COLOR_SCHEME.ZEBRA && odd;
       }
     });
   }

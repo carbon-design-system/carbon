@@ -31,7 +31,8 @@ const sizes = {
 };
 
 export const Default = (args) => {
-  const { open, size, disableClose, onBeforeClose, onClose } = args?.['bx-modal'] ?? {};
+  const { open, size, disableClose, onBeforeClose, onClose } =
+    args?.['bx-modal'] ?? {};
   const handleBeforeClose = (event: CustomEvent) => {
     onBeforeClose(event);
     if (disableClose) {
@@ -39,7 +40,12 @@ export const Default = (args) => {
     }
   };
   return html`
-    <bx-modal ?open="${open}" size="${ifNonNull(size)}" @bx-modal-beingclosed=${handleBeforeClose} @bx-modal-closed=${onClose}>
+    <bx-modal
+      ?open="${open}"
+      size="${ifNonNull(size)}"
+      @bx-modal-beingclosed=${handleBeforeClose}
+      @bx-modal-closed=${onClose}
+    >
       <bx-modal-header>
         <bx-modal-close-button></bx-modal-close-button>
         <bx-modal-label>Label (Optional)</bx-modal-label>
@@ -47,7 +53,9 @@ export const Default = (args) => {
       </bx-modal-header>
       <bx-modal-body><p>Modal text description</p></bx-modal-body>
       <bx-modal-footer>
-        <bx-modal-footer-button kind="secondary" data-modal-close>Cancel</bx-modal-footer-button>
+        <bx-modal-footer-button kind="secondary" data-modal-close
+          >Cancel</bx-modal-footer-button
+        >
         <bx-modal-footer-button kind="primary">Save</bx-modal-footer-button>
       </bx-modal-footer>
     </bx-modal>
@@ -57,7 +65,8 @@ export const Default = (args) => {
 Default.storyName = 'Default';
 
 export const SingleButton = (args) => {
-  const { open, size, disableClose, onBeforeClose, onClose } = args?.['bx-modal'] ?? {};
+  const { open, size, disableClose, onBeforeClose, onClose } =
+    args?.['bx-modal'] ?? {};
   const handleBeforeClose = (event: CustomEvent) => {
     onBeforeClose(event);
     if (disableClose) {
@@ -65,7 +74,12 @@ export const SingleButton = (args) => {
     }
   };
   return html`
-    <bx-modal ?open="${open}" size="${ifNonNull(size)}" @bx-modal-beingclosed=${handleBeforeClose} @bx-modal-closed=${onClose}>
+    <bx-modal
+      ?open="${open}"
+      size="${ifNonNull(size)}"
+      @bx-modal-beingclosed=${handleBeforeClose}
+      @bx-modal-closed=${onClose}
+    >
       <bx-modal-header>
         <bx-modal-close-button></bx-modal-close-button>
         <bx-modal-label>Label (Optional)</bx-modal-label>
@@ -82,7 +96,8 @@ export const SingleButton = (args) => {
 SingleButton.storyName = 'Single button';
 
 export const ThreeButtons = (args) => {
-  const { open, size, disableClose, onBeforeClose, onClose } = args?.['bx-modal'] ?? {};
+  const { open, size, disableClose, onBeforeClose, onClose } =
+    args?.['bx-modal'] ?? {};
   const handleBeforeClose = (event: CustomEvent) => {
     onBeforeClose(event);
     if (disableClose) {
@@ -90,7 +105,12 @@ export const ThreeButtons = (args) => {
     }
   };
   return html`
-    <bx-modal ?open="${open}" size="${ifNonNull(size)}" @bx-modal-beingclosed=${handleBeforeClose} @bx-modal-closed=${onClose}>
+    <bx-modal
+      ?open="${open}"
+      size="${ifNonNull(size)}"
+      @bx-modal-beingclosed=${handleBeforeClose}
+      @bx-modal-closed=${onClose}
+    >
       <bx-modal-header>
         <bx-modal-close-button></bx-modal-close-button>
         <bx-modal-label>Label (Optional)</bx-modal-label>
@@ -99,7 +119,9 @@ export const ThreeButtons = (args) => {
       <bx-modal-body><p>Modal text description</p></bx-modal-body>
       <bx-modal-footer>
         <bx-modal-footer-button kind="secondary">Apply</bx-modal-footer-button>
-        <bx-modal-footer-button kind="secondary" data-modal-close>Cancel</bx-modal-footer-button>
+        <bx-modal-footer-button kind="secondary" data-modal-close
+          >Cancel</bx-modal-footer-button
+        >
         <bx-modal-footer-button kind="primary">Save</bx-modal-footer-button>
       </bx-modal-footer>
     </bx-modal>

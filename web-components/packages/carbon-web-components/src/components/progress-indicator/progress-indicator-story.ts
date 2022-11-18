@@ -19,7 +19,8 @@ import storyDocs from './progress-indicator-story.mdx';
 
 export const Default = (args) => {
   const { vertical } = args?.['bx-progress-indicator'] ?? {};
-  const { iconLabel, labelText, secondaryLabelText } = args?.['bx-progress-step'] ?? {};
+  const { iconLabel, labelText, secondaryLabelText } =
+    args?.['bx-progress-step'] ?? {};
   return html`
     <bx-progress-indicator ?vertical="${vertical}">
       <bx-progress-step
@@ -65,7 +66,10 @@ Default.parameters = {
     'bx-progress-step': () => ({
       iconLabel: textNullable('Icon label (icon-label)', ''),
       labelText: textNullable('Primary label text (label-text)', 'Label'),
-      secondaryLabelText: textNullable('Secondary label text (secondary-label-text)', 'Secondary label'),
+      secondaryLabelText: textNullable(
+        'Secondary label text (secondary-label-text)',
+        'Secondary label'
+      ),
     }),
   },
 };

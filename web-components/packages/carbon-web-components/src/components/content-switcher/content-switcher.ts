@@ -52,7 +52,10 @@ class BXContentSwitcher extends LitElement {
   private _handleHover({ target, type }: MouseEvent) {
     const { selectorItem } = this.constructor as typeof BXContentSwitcher;
     const items = this.querySelectorAll(selectorItem);
-    const index = type !== 'mouseover' ? -1 : indexOf(items, (target as Element).closest(selectorItem)!);
+    const index =
+      type !== 'mouseover'
+        ? -1
+        : indexOf(items, (target as Element).closest(selectorItem)!);
     const nextIndex = index < 0 ? index : index + 1;
     forEach(this.querySelectorAll(selectorItem), (elem, i) => {
       // Specifies child `<bx-content-switcher-item>` to hide its divider instead of using CSS,
@@ -67,7 +70,9 @@ class BXContentSwitcher extends LitElement {
    * @returns The item to be selected.
    */
   protected _getNextItem(currentItem: BXSwitch, direction: number) {
-    const items = this.querySelectorAll((this.constructor as typeof BXContentSwitcher).selectorItemEnabled);
+    const items = this.querySelectorAll(
+      (this.constructor as typeof BXContentSwitcher).selectorItemEnabled
+    );
     const currentIndex = indexOf(items, currentItem);
     const nextIndex = capIndex(currentIndex + direction, items.length);
     return nextIndex === currentIndex ? null : items[nextIndex];
@@ -126,8 +131,12 @@ class BXContentSwitcher extends LitElement {
    * @param direction `-1` to navigate backward, `1` to navigate forward.
    */
   protected _navigate(direction: number) {
-    const { selectorItemSelected } = this.constructor as typeof BXContentSwitcher;
-    const nextItem = this._getNextItem(this.querySelector(selectorItemSelected) as BXSwitch, direction);
+    const { selectorItemSelected } = this
+      .constructor as typeof BXContentSwitcher;
+    const nextItem = this._getNextItem(
+      this.querySelector(selectorItemSelected) as BXSwitch,
+      direction
+    );
     if (nextItem) {
       this._handleUserInitiatedSelectItem(nextItem as BXSwitch);
       this.requestUpdate();
@@ -141,9 +150,14 @@ class BXContentSwitcher extends LitElement {
    */
   protected _selectionDidChange(itemToSelect: BXSwitch) {
     this.value = itemToSelect.value;
-    forEach(this.querySelectorAll((this.constructor as typeof BXContentSwitcher).selectorItemSelected), (item) => {
-      (item as BXSwitch).selected = false;
-    });
+    forEach(
+      this.querySelectorAll(
+        (this.constructor as typeof BXContentSwitcher).selectorItemSelected
+      ),
+      (item) => {
+        (item as BXSwitch).selected = false;
+      }
+    );
     itemToSelect.selected = true;
     // Waits for rendering with the new state that updates `tabindex`
     Promise.resolve().then(() => {

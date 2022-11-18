@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,7 +26,9 @@ describe('bx-btn', function () {
     });
 
     it('should choose the right template for default type', function () {
-      expect(elem!.shadowRoot!.querySelectorAll('button.bx--btn').length).toBe(1);
+      expect(elem!.shadowRoot!.querySelectorAll('button.bx--btn').length).toBe(
+        1
+      );
     });
 
     it('should choose the right template for link type', async function () {
@@ -53,7 +55,9 @@ describe('bx-btn', function () {
     it('should deactivate when disabled attribute is set', async function () {
       elem!.setAttribute('disabled', '');
       await Promise.resolve();
-      expect(elem!.shadowRoot!.querySelectorAll('.bx--btn--disabled').length).toBe(1);
+      expect(
+        elem!.shadowRoot!.querySelectorAll('.bx--btn--disabled').length
+      ).toBe(1);
     });
 
     it('should make it small when small attribute is set', async function () {
@@ -65,7 +69,9 @@ describe('bx-btn', function () {
     it('should allow user to select button type', async function () {
       elem!.setAttribute('kind', BUTTON_KIND.GHOST);
       await Promise.resolve();
-      expect(elem!.shadowRoot!.querySelectorAll('.bx--btn--ghost').length).toBe(1);
+      expect(elem!.shadowRoot!.querySelectorAll('.bx--btn--ghost').length).toBe(
+        1
+      );
     });
 
     afterAll(function () {
@@ -80,7 +86,9 @@ describe('bx-btn', function () {
     it('should render with minimum attributes for <button>', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with various attributes for <button>', async function () {
@@ -95,13 +103,17 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with minimum attributes for <a>', async function () {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with various attributes for <a>', async function () {
@@ -121,7 +133,9 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render disabled state for <a>', async function () {
@@ -142,7 +156,9 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 

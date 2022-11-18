@@ -14,15 +14,20 @@ import { boolean, select } from '@storybook/addon-knobs';
 import ifNonNull from '../../globals/directives/if-non-null';
 import './file-uploader';
 import './drop-container';
-import { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE } from './file-uploader-item';
+import {
+  FILE_UPLOADER_ITEM_SIZE,
+  FILE_UPLOADER_ITEM_STATE,
+} from './file-uploader-item';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { FileData } from './stories/types';
 import storyDocs from './file-uploader-story.mdx';
 
 const sizes = {
   'Regular size': null,
-  [`Small size (${FILE_UPLOADER_ITEM_SIZE.SMALL})`]: FILE_UPLOADER_ITEM_SIZE.SMALL,
-  [`Size for form field (${FILE_UPLOADER_ITEM_SIZE.FIELD})`]: FILE_UPLOADER_ITEM_SIZE.FIELD,
+  [`Small size (${FILE_UPLOADER_ITEM_SIZE.SMALL})`]:
+    FILE_UPLOADER_ITEM_SIZE.SMALL,
+  [`Size for form field (${FILE_UPLOADER_ITEM_SIZE.FIELD})`]:
+    FILE_UPLOADER_ITEM_SIZE.FIELD,
 };
 
 /**
@@ -92,7 +97,8 @@ class BXCEDemoFileUploader extends LitElement {
               state: FILE_UPLOADER_ITEM_STATE.EDITING,
               invalid: true,
               validityMessage: 'File size exceeds limit',
-              supplementalValidityMessage: '500kb max file size. Select a new file and try again.',
+              supplementalValidityMessage:
+                '500kb max file size. Select a new file and try again.',
             }
       );
       this.requestUpdate();
@@ -173,7 +179,10 @@ class BXCEDemoFileUploader extends LitElement {
       _handleDelete: handleDelete,
     } = this;
     return html`
-      <bx-file-uploader helper-text="${ifNonNull(helperText)}" label-text="${ifNonNull(labelText)}">
+      <bx-file-uploader
+        helper-text="${ifNonNull(helperText)}"
+        label-text="${ifNonNull(labelText)}"
+      >
         <bx-file-drop-container
           accept="${ifNonNull(accept)}"
           ?disabled="${disabled}"
@@ -183,7 +192,14 @@ class BXCEDemoFileUploader extends LitElement {
           Drag and drop files here or click to upload
         </bx-file-drop-container>
         ${files.map(
-          ({ id, invalid, file, state, supplementalValidityMessage, validityMessage }) => html`
+          ({
+            id,
+            invalid,
+            file,
+            state,
+            supplementalValidityMessage,
+            validityMessage,
+          }) => html`
             <bx-file-uploader-item
               data-file-id="${id}"
               ?invalid="${invalid}"
@@ -193,7 +209,9 @@ class BXCEDemoFileUploader extends LitElement {
               @bx-file-uploader-item-deleted="${handleDelete}"
             >
               ${file.name}
-              <span slot="validity-message-supplement">${supplementalValidityMessage}</span>
+              <span slot="validity-message-supplement"
+                >${supplementalValidityMessage}</span
+              >
             </bx-file-uploader-item>
           `
         )}
@@ -217,7 +235,8 @@ const defineDemoFileUploader = (() => {
 export const Default = (args) => {
   const { helperText, labelText } = args?.['bx-file-uploader'] ?? {};
   const { accept, disabled, multiple } = args?.['bx-file-drop-container'] ?? {};
-  const { size, disableDelete, onBeforeDelete, onDelete } = args?.['bx-file-uploader-item'] ?? {};
+  const { size, disableDelete, onBeforeDelete, onDelete } =
+    args?.['bx-file-uploader-item'] ?? {};
   const handleBeforeDelete = (event: CustomEvent) => {
     onBeforeDelete(event);
     if (disableDelete) {
@@ -248,13 +267,22 @@ export default {
     ...storyDocs.parameters,
     knobs: {
       'bx-file-uploader': () => ({
-        helperText: textNullable('Helper text (helper-text)', 'Only .jpg and .png files. 500kb max file size'),
+        helperText: textNullable(
+          'Helper text (helper-text)',
+          'Only .jpg and .png files. 500kb max file size'
+        ),
         labelText: textNullable('Label text (label-text)', 'Account photo'),
       }),
       'bx-file-drop-container': () => ({
-        accept: textNullable('Accepted MIME types or file extensions (accept)', 'image/jpeg image/png'),
+        accept: textNullable(
+          'Accepted MIME types or file extensions (accept)',
+          'image/jpeg image/png'
+        ),
         disabled: boolean('Disabled (disabled)', false),
-        multiple: boolean('Supports uploading multiple files at once (multiple)', true),
+        multiple: boolean(
+          'Supports uploading multiple files at once (multiple)',
+          true
+        ),
       }),
       'bx-file-uploader-item': () => ({
         size: select('Filename height (size)', sizes, null),

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,7 +26,9 @@ class BXProgressStepSkeleton extends LitElement {
 
   render() {
     return html`
-      <div class="${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable">
+      <div
+        class="${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable"
+      >
         <svg>
           <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
         </svg>

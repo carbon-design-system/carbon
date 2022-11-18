@@ -14,7 +14,10 @@ import ifNonNull from '../../globals/directives/if-non-null';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import RadioGroupManager, { NAVIGATION_DIRECTION, ManagedRadioButtonDelegate } from '../../globals/internal/radio-group-manager';
+import RadioGroupManager, {
+  NAVIGATION_DIRECTION,
+  ManagedRadioButtonDelegate,
+} from '../../globals/internal/radio-group-manager';
 import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
 import styles from './radio-button.scss';
 
@@ -150,7 +153,9 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           : navigationDirectionForKeyVertical;
       const navigationDirection = navigationDirectionForKey[event.key];
       if (navigationDirection) {
-        manager.select(manager.navigate(radioButtonDelegate, navigationDirection));
+        manager.select(
+          manager.navigate(radioButtonDelegate, navigationDirection)
+        );
       }
       if (event.key === ' ' || event.key === 'Enter') {
         manager.select(radioButtonDelegate);
@@ -209,7 +214,9 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -225,10 +232,16 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   }
 
   updated(changedProperties) {
-    const { _inputNode: inputNode, _radioButtonDelegate: radioButtonDelegate, name } = this;
+    const {
+      _inputNode: inputNode,
+      _radioButtonDelegate: radioButtonDelegate,
+      name,
+    } = this;
     if (changedProperties.has('checked') || changedProperties.has('name')) {
       if (!this._manager) {
-        this._manager = RadioGroupManager.get(this.getRootNode({ composed: true }) as Document);
+        this._manager = RadioGroupManager.get(
+          this.getRootNode({ composed: true }) as Document
+        );
       }
       const { _manager: manager } = this;
       if (changedProperties.has('name')) {
@@ -237,7 +250,12 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
           manager!.add(radioButtonDelegate);
         }
       }
-      inputNode.setAttribute('tabindex', !name || !manager || !manager.shouldBeFocusable(radioButtonDelegate) ? '-1' : '0');
+      inputNode.setAttribute(
+        'tabindex',
+        !name || !manager || !manager.shouldBeFocusable(radioButtonDelegate)
+          ? '-1'
+          : '0'
+      );
     }
   }
 

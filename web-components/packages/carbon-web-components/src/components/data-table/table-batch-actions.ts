@@ -26,7 +26,9 @@ class BXTableBatchActions extends LitElement {
    */
   private _handleCancel() {
     const { eventClickCancel } = this.constructor as typeof BXTableBatchActions;
-    this.dispatchEvent(new CustomEvent(eventClickCancel, { bubbles: true, composed: true }));
+    this.dispatchEvent(
+      new CustomEvent(eventClickCancel, { bubbles: true, composed: true })
+    );
   }
 
   /**
@@ -39,7 +41,8 @@ class BXTableBatchActions extends LitElement {
    * The formatter for selected items. Should be changed upon the locale the UI is rendered with.
    */
   @property({ attribute: false })
-  formatSelectedItemsCount = ({ count }) => `${count} item${count <= 1 ? '' : 's'} selected`;
+  formatSelectedItemsCount = ({ count }) =>
+    `${count} item${count <= 1 ? '' : 's'} selected`;
 
   /**
    * Numeric representation of the total number of items selected in a table.
@@ -55,14 +58,23 @@ class BXTableBatchActions extends LitElement {
   }
 
   render() {
-    const { formatSelectedItemsCount, selectedRowsCount, _handleCancel: handleCancel } = this;
+    const {
+      formatSelectedItemsCount,
+      selectedRowsCount,
+      _handleCancel: handleCancel,
+    } = this;
     return html`
       <div class="${prefix}--batch-summary">
-        <p class="${prefix}--batch-summary__para">${formatSelectedItemsCount({ count: selectedRowsCount })}</p>
+        <p class="${prefix}--batch-summary__para">
+          ${formatSelectedItemsCount({ count: selectedRowsCount })}
+        </p>
       </div>
       <div class="${prefix}--action-list">
         <slot></slot>
-        <button class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel" @click=${handleCancel}>
+        <button
+          class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel"
+          @click=${handleCancel}
+        >
           <slot name="cancel-button-content">Cancel</slot>
         </button>
       </div>

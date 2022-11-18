@@ -81,12 +81,21 @@ Default.parameters = {
     'bx-select': () => ({
       colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
       disabled: boolean('Disabled (disabled)', false),
-      helperText: textNullable('Helper text (helper-text)', 'Optional helper text'),
+      helperText: textNullable(
+        'Helper text (helper-text)',
+        'Optional helper text'
+      ),
       invalid: boolean('Invalid (invalid)', false),
       labelText: textNullable('Label text (label-text)', 'Select'),
-      placeholder: textNullable('Placeholder text (placeholder)', 'Optional placeholder text'),
+      placeholder: textNullable(
+        'Placeholder text (placeholder)',
+        'Optional placeholder text'
+      ),
       size: select('Dropdown size (size)', sizes, null),
-      validityMessage: textNullable('The validity message (validity-message)', ''),
+      validityMessage: textNullable(
+        'The validity message (validity-message)',
+        ''
+      ),
       value: textNullable('The value of the selected item (value)', ''),
       onInput: action('bx-select-selected'),
     }),

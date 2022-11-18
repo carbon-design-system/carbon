@@ -9,7 +9,10 @@
 
 import settings from 'carbon-components/es/globals/js/settings';
 import { html, property, customElement } from 'lit-element';
-import BXFloatingMenu, { FLOATING_MENU_ALIGNMENT, FLOATING_MENU_DIRECTION } from '../floating-menu/floating-menu';
+import BXFloatingMenu, {
+  FLOATING_MENU_ALIGNMENT,
+  FLOATING_MENU_DIRECTION,
+} from '../floating-menu/floating-menu';
 import { NAVIGATION_DIRECTION, OVERFLOW_MENU_COLOR_SCHEME } from './defs';
 import styles from './overflow-menu.scss';
 import BXOverflowMenuItem from './overflow-menu-item';
@@ -74,7 +77,8 @@ class BXOverflowMenuBody extends BXFloatingMenu {
    * @returns The item to be selected.
    */
   protected _getNextItem(currentItem: BXOverflowMenuItem, direction: number) {
-    const { selectorItemEnabled } = this.constructor as typeof BXOverflowMenuBody;
+    const { selectorItemEnabled } = this
+      .constructor as typeof BXOverflowMenuBody;
     const menuItems = this.querySelectorAll(selectorItemEnabled);
     const currentIndex = indexOf(menuItems, currentItem);
     const nextIndex = capIndex(currentIndex + direction, menuItems.length);

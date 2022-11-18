@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,9 @@
 
 import { render } from 'lit-html';
 
-import BXInlineLoading, { INLINE_LOADING_STATE } from '../../src/components/inline-loading/inline-loading';
+import BXInlineLoading, {
+  INLINE_LOADING_STATE,
+} from '../../src/components/inline-loading/inline-loading';
 import { Default } from '../../src/components/inline-loading/inline-loading-story';
 
 const template = (props?) =>
@@ -22,14 +24,22 @@ describe('bx-inline-loading', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with unknown status', async function () {
       render(template(), document.body);
-      (document.body.querySelector('bx-inline-loading') as unknown as BXInlineLoading).status = undefined!;
+      (
+        document.body.querySelector(
+          'bx-inline-loading'
+        ) as unknown as BXInlineLoading
+      ).status = undefined!;
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with inactive status', async function () {
@@ -40,7 +50,9 @@ describe('bx-inline-loading', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with finished status', async function () {
@@ -51,7 +63,9 @@ describe('bx-inline-loading', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with error status', async function () {
@@ -62,7 +76,9 @@ describe('bx-inline-loading', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 

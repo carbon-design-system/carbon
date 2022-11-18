@@ -25,7 +25,10 @@ const { prefix } = settings;
  * @element bx-tooltip
  */
 @customElement(`${prefix}-tooltip`)
-class BXTooltip extends HostListenerMixin(LitElement) implements BXFloatingMenuTrigger {
+class BXTooltip
+  extends HostListenerMixin(LitElement)
+  implements BXFloatingMenuTrigger
+{
   /**
    * The menu body.
    */
@@ -103,7 +106,10 @@ class BXTooltip extends HostListenerMixin(LitElement) implements BXFloatingMenuT
   updated(changedProperties) {
     if (changedProperties.has('open')) {
       if (!this._menuBody) {
-        this._menuBody = find(this.childNodes, (elem) => (elem.constructor as typeof BXFloatingMenu).FLOATING_MENU);
+        this._menuBody = find(
+          this.childNodes,
+          (elem) => (elem.constructor as typeof BXFloatingMenu).FLOATING_MENU
+        );
       }
       if (this._menuBody) {
         this._menuBody.open = this.open;

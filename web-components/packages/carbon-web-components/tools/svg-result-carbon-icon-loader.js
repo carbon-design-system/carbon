@@ -19,7 +19,10 @@ function svgResultCarbonIconLoader() {
   const descriptor = require(this.resourcePath); // eslint-disable-line global-require
   return `
     import { svg } from 'lit-html';
-    import spread from '${path.resolve(__dirname, '../src/globals/directives/spread')}';
+    import spread from '${path.resolve(
+      __dirname,
+      '../src/globals/directives/spread'
+    )}';
     const svgResultCarbonIcon = ${createSVGResultFromCarbonIcon(descriptor)};
     export default svgResultCarbonIcon;
   `;

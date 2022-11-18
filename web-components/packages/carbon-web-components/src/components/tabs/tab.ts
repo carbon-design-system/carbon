@@ -56,7 +56,12 @@ class BXTab extends BXContentSwitcherItem {
     const { disabled, selected } = this;
     // No `href`/`tabindex` to not to make this `<a>` click-focusable
     return html`
-      <a class="${prefix}--tabs__nav-link" role="tab" ?disabled="${disabled}" aria-selected="${Boolean(selected)}">
+      <a
+        class="${prefix}--tabs__nav-link"
+        role="tab"
+        ?disabled="${disabled}"
+        aria-selected="${Boolean(selected)}"
+      >
         <slot></slot>
       </a>
     `;

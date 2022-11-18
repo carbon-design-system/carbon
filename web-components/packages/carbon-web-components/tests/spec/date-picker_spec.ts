@@ -14,7 +14,11 @@ import EventManager from '../utils/event-manager';
 
 import BXDatePicker from '../../src/components/date-picker/date-picker';
 import BXDatePickerInput from '../../src/components/date-picker/date-picker-input';
-import { Default, singleWithCalendar, rangeWithCalendar } from '../../src/components/date-picker/date-picker-story';
+import {
+  Default,
+  singleWithCalendar,
+  rangeWithCalendar,
+} from '../../src/components/date-picker/date-picker-story';
 
 const defaultTemplate = (props?) => {
   const {
@@ -32,7 +36,16 @@ const defaultTemplate = (props?) => {
   } = props ?? {};
   return Default({
     'bx-date-picker': { disabled, name, value },
-    'bx-date-picker-input': { colorScheme, hideLabel, invalid, labelText, placeholder, size, sizeHorizontal, validityMessage },
+    'bx-date-picker-input': {
+      colorScheme,
+      hideLabel,
+      invalid,
+      labelText,
+      placeholder,
+      size,
+      sizeHorizontal,
+      validityMessage,
+    },
   });
 };
 
@@ -56,8 +69,26 @@ const singleWithCalendarTemplate = (props?) => {
     onInput,
   } = props ?? {};
   return singleWithCalendar({
-    'bx-date-picker': { dateFormat, disabled, enabledRange, name, open, value, onChanged, onFlatpickrError },
-    'bx-date-picker-input': { colorScheme, hideLabel, invalid, labelText, placeholder, size, validityMessage, onInput },
+    'bx-date-picker': {
+      dateFormat,
+      disabled,
+      enabledRange,
+      name,
+      open,
+      value,
+      onChanged,
+      onFlatpickrError,
+    },
+    'bx-date-picker-input': {
+      colorScheme,
+      hideLabel,
+      invalid,
+      labelText,
+      placeholder,
+      size,
+      validityMessage,
+      onInput,
+    },
   });
 };
 
@@ -81,8 +112,26 @@ const rangeWithCalendarTemplate = (props?) => {
     onInput,
   } = props ?? {};
   return rangeWithCalendar({
-    'bx-date-picker': { dateFormat, disabled, enabledRange, name, open, value, onChanged, onFlatpickrError },
-    'bx-date-picker-input': { colorScheme, hideLabel, invalid, labelText, placeholder, size, validityMessage, onInput },
+    'bx-date-picker': {
+      dateFormat,
+      disabled,
+      enabledRange,
+      name,
+      open,
+      value,
+      onChanged,
+      onFlatpickrError,
+    },
+    'bx-date-picker-input': {
+      colorScheme,
+      hideLabel,
+      invalid,
+      labelText,
+      placeholder,
+      size,
+      validityMessage,
+      onInput,
+    },
   });
 };
 
@@ -132,9 +181,21 @@ describe('bx-date-picker', function () {
       const { calendar } = datePicker!;
       expect(calendar).toBeTruthy();
       const { config, loadedPlugins } = datePicker!.calendar!;
-      expect(pick(config, ['allowInput', 'appendTo', 'dateFormat', 'locale', 'maxDate', 'minDate', 'positionElement'])).toEqual({
+      expect(
+        pick(config, [
+          'allowInput',
+          'appendTo',
+          'dateFormat',
+          'locale',
+          'maxDate',
+          'minDate',
+          'positionElement',
+        ])
+      ).toEqual({
         allowInput: true,
-        appendTo: datePicker!.shadowRoot!.getElementById('floating-menu-container')!,
+        appendTo: datePicker!.shadowRoot!.getElementById(
+          'floating-menu-container'
+        )!,
         dateFormat: 'm/d/Y',
         locale: flatpickr.l10ns.default,
         maxDate: undefined,
@@ -156,11 +217,15 @@ describe('bx-date-picker', function () {
     it('Should support programmatic change of the date', async function () {
       datePicker!.value = '2000-07-15';
       await Promise.resolve();
-      expect(datePicker!.calendar!.selectedDates.map((item) => item.getTime())).toEqual([new Date(2000, 6, 15).getTime()]);
+      expect(
+        datePicker!.calendar!.selectedDates.map((item) => item.getTime())
+      ).toEqual([new Date(2000, 6, 15).getTime()]);
     });
 
     it('Should support opening calendar dropdown by clicking on calendar icon', async function () {
-      datePickerInput!.shadowRoot!.querySelector('svg')!.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      datePickerInput!
+        .shadowRoot!.querySelector('svg')!
+        .dispatchEvent(new CustomEvent('click', { bubbles: true }));
       await Promise.resolve();
       const { calendar } = datePicker!;
       expect(calendar!.isOpen).toBe(true);
@@ -176,17 +241,33 @@ describe('bx-date-picker', function () {
       render(rangeWithCalendarTemplate(), document.body);
       await Promise.resolve();
       datePicker = document.body.querySelector('bx-date-picker');
-      datePickerInputStart = document.body.querySelector('bx-date-picker-input[kind="from"]');
-      datePickerInputEnd = document.body.querySelector('bx-date-picker-input[kind="to"]');
+      datePickerInputStart = document.body.querySelector(
+        'bx-date-picker-input[kind="from"]'
+      );
+      datePickerInputEnd = document.body.querySelector(
+        'bx-date-picker-input[kind="to"]'
+      );
     });
 
     it('Should instantiate Flatpickr', async function () {
       const { calendar } = datePicker!;
       expect(calendar).toBeTruthy();
       const { config, loadedPlugins } = datePicker!.calendar!;
-      expect(pick(config, ['allowInput', 'appendTo', 'dateFormat', 'locale', 'maxDate', 'minDate', 'positionElement'])).toEqual({
+      expect(
+        pick(config, [
+          'allowInput',
+          'appendTo',
+          'dateFormat',
+          'locale',
+          'maxDate',
+          'minDate',
+          'positionElement',
+        ])
+      ).toEqual({
         allowInput: true,
-        appendTo: datePicker!.shadowRoot!.getElementById('floating-menu-container')!,
+        appendTo: datePicker!.shadowRoot!.getElementById(
+          'floating-menu-container'
+        )!,
         dateFormat: 'm/d/Y',
         locale: flatpickr.l10ns.default,
         maxDate: undefined,
@@ -209,21 +290,27 @@ describe('bx-date-picker', function () {
     it('Should support programmatic change of the date', async function () {
       datePicker!.value = '2000-07-10/2000-07-20';
       await Promise.resolve();
-      expect(datePicker!.calendar!.selectedDates.map((item) => item.getTime())).toEqual([
+      expect(
+        datePicker!.calendar!.selectedDates.map((item) => item.getTime())
+      ).toEqual([
         new Date(2000, 6, 10).getTime(),
         new Date(2000, 6, 20).getTime(),
       ]);
     });
 
     it('Should support opening calendar dropdown by clicking on calendar icon for the start date', async function () {
-      datePickerInputStart!.shadowRoot!.querySelector('svg')!.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      datePickerInputStart!
+        .shadowRoot!.querySelector('svg')!
+        .dispatchEvent(new CustomEvent('click', { bubbles: true }));
       await Promise.resolve();
       const { calendar } = datePicker!;
       expect(calendar!.isOpen).toBe(true);
     });
 
     it('Should support opening calendar dropdown by clicking on calendar icon for the end date', async function () {
-      datePickerInputEnd!.shadowRoot!.querySelector('svg')!.dispatchEvent(new CustomEvent('click', { bubbles: true }));
+      datePickerInputEnd!
+        .shadowRoot!.querySelector('svg')!
+        .dispatchEvent(new CustomEvent('click', { bubbles: true }));
       await Promise.resolve();
       const { calendar } = datePicker!;
       expect(calendar!.isOpen).toBe(true);
@@ -295,7 +382,11 @@ describe('bx-date-picker', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -317,7 +408,11 @@ describe('bx-date-picker', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
@@ -338,11 +433,17 @@ describe('bx-date-picker', function () {
       );
       await Promise.resolve();
       const formData = new FormData();
-      const event = new CustomEvent('formdata', { bubbles: true, cancelable: false, composed: false });
+      const event = new CustomEvent('formdata', {
+        bubbles: true,
+        cancelable: false,
+        composed: false,
+      });
       (event as any).formData = formData; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
       const form = document.querySelector('form');
       form!.dispatchEvent(event);
-      expect(getValues(formData)).toEqual({ 'name-foo': '2000-01-01/2000-01-31' });
+      expect(getValues(formData)).toEqual({
+        'name-foo': '2000-01-01/2000-01-31',
+      });
     });
   });
 

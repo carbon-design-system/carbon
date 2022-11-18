@@ -19,7 +19,9 @@ module.exports = async (config) => {
     process.env.PORT = 9000;
   }
   await setup(config);
-  const isOpenAlready = await isPortReachable(Number(process.env.PORT), { host: 'localhost' });
+  const isOpenAlready = await isPortReachable(Number(process.env.PORT), {
+    host: 'localhost',
+  });
   if (!isOpenAlready) {
     await setupDevServer({
       command: `yarn http-server storybook-static -p ${process.env.PORT}`,

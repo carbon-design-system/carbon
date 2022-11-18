@@ -33,14 +33,17 @@ class BXHeaderMenuButton extends FocusMixin(LitElement) {
     const active = !this.active;
     this.active = active;
     this.dispatchEvent(
-      new CustomEvent((this.constructor as typeof BXHeaderMenuButton).eventToggle, {
-        bubbles: true,
-        cancelable: true,
-        composed: true,
-        detail: {
-          active,
-        },
-      })
+      new CustomEvent(
+        (this.constructor as typeof BXHeaderMenuButton).eventToggle,
+        {
+          bubbles: true,
+          cancelable: true,
+          composed: true,
+          detail: {
+            active,
+          },
+        }
+      )
     );
   }
 
@@ -83,12 +86,20 @@ class BXHeaderMenuButton extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
-    const { active, buttonLabelActive, buttonLabelInactive, disabled, _handleClick: handleClick } = this;
+    const {
+      active,
+      buttonLabelActive,
+      buttonLabelInactive,
+      disabled,
+      _handleClick: handleClick,
+    } = this;
     const buttonLabel = active ? buttonLabelActive : buttonLabelInactive;
     const classes = classMap({
       [`${prefix}--header__action`]: true,
@@ -97,7 +108,13 @@ class BXHeaderMenuButton extends FocusMixin(LitElement) {
       [`${prefix}--header__action--active`]: active,
     });
     return html`
-      <button part="button" class="${classes}" ?disabled=${disabled} aria-label="${ifNonNull(buttonLabel)}" @click=${handleClick}>
+      <button
+        part="button"
+        class="${classes}"
+        ?disabled=${disabled}
+        aria-label="${ifNonNull(buttonLabel)}"
+        @click=${handleClick}
+      >
         ${(active ? Close20 : Menu20)({ slot: 'toggle-icon' })}
       </button>
     `;

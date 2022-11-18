@@ -83,7 +83,9 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -101,7 +103,15 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
       [`${prefix}--search`]: true,
       [`${prefix}--search--${size}`]: size,
     });
-    return html` <div class="${classes}" tabindex="${expanded ? '-1' : '0'}" @click="${handleSearchClick}">${result}</div> `;
+    return html`
+      <div
+        class="${classes}"
+        tabindex="${expanded ? '-1' : '0'}"
+        @click="${handleSearchClick}"
+      >
+        ${result}
+      </div>
+    `;
   }
 
   /**

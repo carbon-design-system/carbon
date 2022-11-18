@@ -1,4 +1,5 @@
-A Carbon Design System variant that's as easy to use as native HTML elements, with no framework tax, no framework silo.
+A Carbon Design System variant that's as easy to use as native HTML elements,
+with no framework tax, no framework silo.
 
 <p align="center">
   <a href="https://www.carbondesignsystem.com">
@@ -24,9 +25,13 @@ A Carbon Design System variant that's as easy to use as native HTML elements, wi
 
 # `carbon-web-components`
 
-`carbon-web-components` is a variant of Carbon Design System with Custom Elements v1 and Shadow DOM v1 specs.
+`carbon-web-components` is a variant of Carbon Design System with Custom
+Elements v1 and Shadow DOM v1 specs.
 
-The effort stems from https://github.com/carbon-design-system/issue-tracking/issues/121. If you are interested in this project, adding 👍 to the description of that GH issue, or even contributing, will be greatly appreciated!
+The effort stems from
+https://github.com/carbon-design-system/issue-tracking/issues/121. If you are
+interested in this project, adding 👍 to the description of that GH issue, or
+even contributing, will be greatly appreciated!
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -61,16 +66,23 @@ The effort stems from https://github.com/carbon-design-system/issue-tracking/iss
 
 #### How to install
 
-All components are available via CDN. This means that they can be added to your application without the need of any
-bundler configuration. Each component is available by the `latest` tag, or referencing a specific version (starting at
+All components are available via CDN. This means that they can be added to your
+application without the need of any bundler configuration. Each component is
+available by the `latest` tag, or referencing a specific version (starting at
 version `v1.16.0`):
 
 ```html
 <!-- By `latest` tag -->
-<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.min.js"></script>
+<script
+  type="module"
+  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.min.js"
+></script>
 
 <!-- By specific version -->
-<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.min.js"></script>
+<script
+  type="module"
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.min.js"
+></script>
 ```
 
 These are the list of available components via CDN:
@@ -117,27 +129,36 @@ These are the list of available components via CDN:
 - tooltip.min.js
 - ui-shell.min.js
 
-To use the right-to-left (RTL) version of the artifacts, change the file extention from `.min.js` to `.rtl.min.js`. For
-example:
+To use the right-to-left (RTL) version of the artifacts, change the file
+extention from `.min.js` to `.rtl.min.js`. For example:
 
 ```html
 <!-- By `latest` tag (RTL) -->
-<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.rtl.min.js"></script>
+<script
+  type="module"
+  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.rtl.min.js"
+></script>
 
 <!-- By specific version (RTL) -->
-<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.rtl.min.js"></script>
+<script
+  type="module"
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.rtl.min.js"
+></script>
 ```
 
 #### Basic usage
 
-The CDN artifacts define the custom elements for the browser, so they can be directly used once the script tag has been
-added to the page. For example:
+The CDN artifacts define the custom elements for the browser, so they can be
+directly used once the script tag has been added to the page. For example:
 
 ```html
 <!DOCTYPE html>
 <html>
   <head>
-    <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/dropdown.min.js"></script>
+    <script
+      type="module"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/dropdown.min.js"
+    ></script>
     <style type="text/css">
       // Suppresses the custom element until it has been defined
       bx-dropdown:not(:defined),
@@ -160,7 +181,8 @@ added to the page. For example:
 </html>
 ```
 
-Our example at [CodeSandbox](https://codesandbox.io) shows usage with only CDN artifacts:
+Our example at [CodeSandbox](https://codesandbox.io) shows usage with only CDN
+artifacts:
 
 [![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/cdn)
 
@@ -182,9 +204,9 @@ instead:
 yarn add carbon-web-components
 ```
 
-> NOTE: Carbon and Lit dependencies will be managed by Carbon Web Components starting in
-> `v1.19.0`. For earlier versions, these dependencies will have to be installed
-> separately:
+> NOTE: Carbon and Lit dependencies will be managed by Carbon Web Components
+> starting in `v1.19.0`. For earlier versions, these dependencies will have to
+> be installed separately:
 >
 > npm:
 >
@@ -204,16 +226,20 @@ Our example at [CodeSandbox](https://codesandbox.io) shows the most basic usage:
 
 [![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic)
 
-The first thing you need is **setting up a module bundler** to resolve ECMAScript `import`s. The above example uses [Webpack](https://webpack.js.org), but you can use other bundlers like [Rollup](https://rollupjs.org/) too.
+The first thing you need is **setting up a module bundler** to resolve
+ECMAScript `import`s. The above example uses [Webpack](https://webpack.js.org),
+but you can use other bundlers like [Rollup](https://rollupjs.org/) too.
 
-Once you set up a module bundler, you can start importing our component modules, for example:
+Once you set up a module bundler, you can start importing our component modules,
+for example:
 
 ```javascript
 import 'carbon-web-components/es/components/dropdown/dropdown.js';
 import 'carbon-web-components/es/components/dropdown/dropdown-item.js';
 ```
 
-Once you've imported the component modules, you can use our components in the same manner as native HTML tags, for example:
+Once you've imported the component modules, you can use our components in the
+same manner as native HTML tags, for example:
 
 ```html
 <bx-dropdown trigger-content="Select an item">
@@ -234,9 +260,9 @@ Once you've imported the component modules, you can use our components in the sa
 ## JavaScript framework support
 
 In addition to the available Web Component versions of Carbon components, this
-library also supports usage with JavaScript frameworks like Angular, React,
-and Vue if the desire is to use instead of the pure framework versions of
-Carbon components. Specifically for React, this library comes with a wrapper
+library also supports usage with JavaScript frameworks like Angular, React, and
+Vue if the desire is to use instead of the pure framework versions of Carbon
+components. Specifically for React, this library comes with a wrapper
 implementation around the Carbon Web Components for more seamless integration
 with your React application.
 
@@ -248,7 +274,10 @@ turn, this also comes with the benefits of encapsulation within the Shadow DOM:
 
 [![Edit carbon-web-components with Angular](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/angular)
 
-Angular users can use our components in the same manner as native HTML tags, too, once you add [`CUSTOM_ELEMENTS_SCHEMA`](https://angular.io/api/core/CUSTOM_ELEMENTS_SCHEMA) schema to your Angular module, for example:
+Angular users can use our components in the same manner as native HTML tags,
+too, once you add
+[`CUSTOM_ELEMENTS_SCHEMA`](https://angular.io/api/core/CUSTOM_ELEMENTS_SCHEMA)
+schema to your Angular module, for example:
 
 ```javascript
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
@@ -265,16 +294,28 @@ import { AppComponent } from './app.component';
 export class AppModule {}
 ```
 
-The `.d.ts` files in `carbon-web-components` package are compiled with TypeScript 3.7. You can use TypeScript 3.7 in your Angular application with upcoming Angular `9.0` release, or with the following instructions, so your application can use those `.d.ts` files:
+The `.d.ts` files in `carbon-web-components` package are compiled with
+TypeScript 3.7. You can use TypeScript 3.7 in your Angular application with
+upcoming Angular `9.0` release, or with the following instructions, so your
+application can use those `.d.ts` files:
 
-- Set `true` to [`angularCompilerOptions.disableTypeScriptVersionCheck`](https://angular.io/guide/angular-compiler-options#disabletypescriptversioncheck) in `tsconfig.json`
-- In `polyfills.ts`, change [`__importDefault` TypeScript helper](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-8) as follows: `window.__importDefault = mod => (mod?.__esModule ? mod : { default: mod })`
+- Set `true` to
+  [`angularCompilerOptions.disableTypeScriptVersionCheck`](https://angular.io/guide/angular-compiler-options#disabletypescriptversioncheck)
+  in `tsconfig.json`
+- In `polyfills.ts`, change
+  [`__importDefault` TypeScript helper](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html#example-8)
+  as follows:
+  `window.__importDefault = mod => (mod?.__esModule ? mod : { default: mod })`
 
 ### React
 
 [![Edit carbon-web-components with React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/react)
 
-You can use wrapper React components in `carbon-web-components/es/components-react` generated [automatically from the custom elements](./src/globals/wrappers/createReactCustomElementType.ts) which allows you to use our components seamlessly in your React code. Here's an example:
+You can use wrapper React components in
+`carbon-web-components/es/components-react` generated
+[automatically from the custom elements](./src/globals/wrappers/createReactCustomElementType.ts)
+which allows you to use our components seamlessly in your React code. Here's an
+example:
 
 ```javascript
 import React from 'react';
@@ -295,9 +336,12 @@ const App = () => (
 render(<App />, document.getElementById('root'));
 ```
 
-Note: Using the React wrapper requires an additional dependency, [`prop-types`](https://www.npmjs.com/package/prop-types).
+Note: Using the React wrapper requires an additional dependency,
+[`prop-types`](https://www.npmjs.com/package/prop-types).
 
-To run the wrapper React components in SSR environment requires Node `12.16.3` or above that supports ["conditional mapping" feature](https://github.com/jkrems/proposal-pkg-exports#2-conditional-mapping):
+To run the wrapper React components in SSR environment requires Node `12.16.3`
+or above that supports
+["conditional mapping" feature](https://github.com/jkrems/proposal-pkg-exports#2-conditional-mapping):
 
 [![Edit carbon-web-components with React SSR](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/react-ssr)
 
@@ -309,7 +353,8 @@ Same Node version requirement applies to Next.js:
 
 [![Edit carbon-web-components with Vue](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/vue)
 
-Vue users can use our components in the same manner as native HTML tags, without any additional steps!
+Vue users can use our components in the same manner as native HTML tags, without
+any additional steps!
 
 ## Getting started with development
 
@@ -319,17 +364,28 @@ Vue users can use our components in the same manner as native HTML tags, without
 
 ## Running React/Angular/Vue Storybook demo
 
-- React: `yarn storybook:react` (Live demo: https://web-components.carbondesignsystem.com/react/index.html)
-- Angular: `yarn storybook:angular` (Live demo: https://web-components.carbondesignsystem.com/angular/index.html)
-- Vue: `yarn storybook:vue` (Live demo: https://web-components.carbondesignsystem.com/vue/index.html)
+- React: `yarn storybook:react` (Live demo:
+  https://web-components.carbondesignsystem.com/react/index.html)
+- Angular: `yarn storybook:angular` (Live demo:
+  https://web-components.carbondesignsystem.com/angular/index.html)
+- Vue: `yarn storybook:vue` (Live demo:
+  https://web-components.carbondesignsystem.com/vue/index.html)
 
 ## List of available components
 
-View available web components at: https://web-components.carbondesignsystem.com/. You can see usage information in several ways:
+View available web components at:
+https://web-components.carbondesignsystem.com/. You can see usage information in
+several ways:
 
-1. Going to Docs tab, where it shows the usage and available attributes, properties and custom events.
-2. Clicking the **KNOBS** tab at the bottom and changing values there. Most knobs are shown as something like `Button kind (kind)`, where `kind` is the attribute name
-3. Clicking the **ACTION LOGGER** tab at the bottom and interacting with the selected component. You may see something like `bx-modal-closed` which typically indicates that an event with such event type is fired. You can also expand the twistie to see the details of the event
+1. Going to Docs tab, where it shows the usage and available attributes,
+   properties and custom events.
+2. Clicking the **KNOBS** tab at the bottom and changing values there. Most
+   knobs are shown as something like `Button kind (kind)`, where `kind` is the
+   attribute name
+3. Clicking the **ACTION LOGGER** tab at the bottom and interacting with the
+   selected component. You may see something like `bx-modal-closed` which
+   typically indicates that an event with such event type is fired. You can also
+   expand the twistie to see the details of the event
 
 ## Browser support
 
@@ -339,8 +395,11 @@ View available web components at: https://web-components.carbondesignsystem.com/
 
 To support IE, you need a couple additional setups:
 
-- Toolstack to re-transpile our code to ES5 (e.g. by specifying IE11 in [`@babel/preset-env`](https://babeljs.io/docs/en/babel-preset-env) configuration)
-- Polyfills, listed [here](https://github.com/carbon-design-system/carbon-web-components/blob/main/src/polyfills/index.ts)
+- Toolstack to re-transpile our code to ES5 (e.g. by specifying IE11 in
+  [`@babel/preset-env`](https://babeljs.io/docs/en/babel-preset-env)
+  configuration)
+- Polyfills, listed
+  [here](https://github.com/carbon-design-system/carbon-web-components/blob/main/src/polyfills/index.ts)
 
 Here's an example code that shows such setup:
 
@@ -379,7 +438,8 @@ You can choose a browser (instead of Headless Chrome) by:
 > gulp test:unit -b Firefox
 ```
 
-You can keep the browser after the test (and re-run the test when files change) by:
+You can keep the browser after the test (and re-run the test when files change)
+by:
 
 ```
 > gulp test:unit -b Chrome -k
@@ -397,7 +457,8 @@ You can update snapshots by:
 > gulp test:unit --update-snapshot
 ```
 
-Above options can be used together. This is useful to debug your code as you test:
+Above options can be used together. This is useful to debug your code as you
+test:
 
 ```
 > gulp test:unit -s tests/spec/dropdown_spec.ts -b Chrome -d -k
@@ -411,7 +472,8 @@ You can run build integration test by:
 > yarn test:integration:build
 ```
 
-You can run a specific set of UI test steps (e.g. running `tests/integration/build/form-angular_steps.js` only) by:
+You can run a specific set of UI test steps (e.g. running
+`tests/integration/build/form-angular_steps.js` only) by:
 
 ```
 > yarn test:integration:build form-angular_steps
@@ -431,7 +493,8 @@ You can run UI integration test by:
 > yarn test:integration:ui
 ```
 
-You can run a specific set of UI test steps (e.g. running `tests/integration/ui/dropdown_steps.js` only) by:
+You can run a specific set of UI test steps (e.g. running
+`tests/integration/ui/dropdown_steps.js` only) by:
 
 ```
 > yarn test:integration:ui dropdown_steps

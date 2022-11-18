@@ -30,9 +30,21 @@ const { prefix } = settings;
  * @param values.handleClick The handler for the `click` event on the button.
  * @returns The template result for the expando.
  */
-const renderExpando = ({ children, handleClick }: { children: string | TemplateResult; handleClick: EventListener }) => html`
-  <button type="button" class="${prefix}--snippet-btn--expand" @click="${handleClick}">
-    <span id="button-text" class="${prefix}--snippet-btn--text"> ${children} </span>
+const renderExpando = ({
+  children,
+  handleClick,
+}: {
+  children: string | TemplateResult;
+  handleClick: EventListener;
+}) => html`
+  <button
+    type="button"
+    class="${prefix}--snippet-btn--expand"
+    @click="${handleClick}"
+  >
+    <span id="button-text" class="${prefix}--snippet-btn--text">
+      ${children}
+    </span>
     ${ChevronDown16({
       'aria-labeledby': 'button-text',
       class: `${prefix}--icon-chevron--down ${prefix}--snippet__icon`,
@@ -116,12 +128,13 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
   /**
    * Handles showing/hiding the feedback tooltip.
    */
-  private _handleCopyButtonFeedbackTooltip = createHandleCopyButtonFeedbackTooltip(
-    ({ showFeedback = false }: { showFeedback?: boolean }) => {
-      this._showCopyButtonFeedback = showFeedback;
-      this.requestUpdate();
-    }
-  );
+  private _handleCopyButtonFeedbackTooltip =
+    createHandleCopyButtonFeedbackTooltip(
+      ({ showFeedback = false }: { showFeedback?: boolean }) => {
+        this._showCopyButtonFeedback = showFeedback;
+        this.requestUpdate();
+      }
+    );
 
   /**
    * Handles `click` event on the expando.
@@ -201,7 +214,9 @@ class BXCodeSnippet extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 

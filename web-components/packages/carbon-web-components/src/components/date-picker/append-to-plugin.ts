@@ -31,11 +31,18 @@ export default (config: DatePickerAppendToPluginConfig): Plugin =>
      */
     const handlePreCalendarPosition = async () => {
       await Promise.resolve();
-      const { calendarContainer, config: fpConfig, _positionElement: positionElement } = fp;
+      const {
+        calendarContainer,
+        config: fpConfig,
+        _positionElement: positionElement,
+      } = fp;
       const { appendTo } = fpConfig;
       const { top: containerTop } = appendTo!.getBoundingClientRect();
       const { bottom: refBottom } = positionElement.getBoundingClientRect();
-      const isRtl = appendTo!.ownerDocument!.defaultView!.getComputedStyle(appendTo!).getPropertyValue('direction') === 'rtl';
+      const isRtl =
+        appendTo!
+          .ownerDocument!.defaultView!.getComputedStyle(appendTo!)
+          .getPropertyValue('direction') === 'rtl';
       calendarContainer.style.top = `${refBottom - containerTop}px`;
       calendarContainer.style.left = !isRtl ? '0' : 'auto';
       calendarContainer.style.right = !isRtl ? 'auto' : '0';

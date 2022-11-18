@@ -43,7 +43,10 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   private _handleSlotChangeBelowTheFoldContent(event: Event) {
     this._belowTheContentHeight = (event.target as HTMLSlotElement)
       .assignedNodes()
-      .reduce((acc, item) => acc + ((item as HTMLElement).offsetHeight ?? 0), 0);
+      .reduce(
+        (acc, item) => acc + ((item as HTMLElement).offsetHeight ?? 0),
+        0
+      );
     this.requestUpdate();
   }
 
@@ -85,7 +88,9 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -110,7 +115,9 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         <div><slot name="above-the-fold-content"></slot></div>
         <div
           class="${prefix}-ce--expandable-tile--below-the-fold-content"
-          style="${ifDefined(!expanded ? undefined : `max-height: ${belowTheContentHeight}px`)}"
+          style="${ifDefined(
+            !expanded ? undefined : `max-height: ${belowTheContentHeight}px`
+          )}"
         >
           <slot @slotchange="${handleSlotChangeBelowTheFoldContent}"></slot>
         </div>

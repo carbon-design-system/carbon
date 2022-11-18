@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2021
+// Copyright IBM Corp. 2019, 2022
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -21,7 +21,8 @@ $css--plex: true !default;
   display: flex;
 }
 
-:host(#{$prefix}-toast-notification[hide-close-button]) .#{$prefix}--toast-notification__close-button {
+:host(#{$prefix}-toast-notification[hide-close-button])
+  .#{$prefix}--toast-notification__close-button {
   display: none;
 }
 
@@ -29,7 +30,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--toast-notification--success;
 
   &[low-contrast] {
-    @extend .#{$prefix}--toast-notification--low-contrast, .#{$prefix}--toast-notification--success;
+    @extend .#{$prefix}--toast-notification--low-contrast,
+      .#{$prefix}--toast-notification--success;
   }
 }
 
@@ -37,7 +39,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--toast-notification--info;
 
   &[low-contrast] {
-    @extend .#{$prefix}--toast-notification--low-contrast, .#{$prefix}--toast-notification--info;
+    @extend .#{$prefix}--toast-notification--low-contrast,
+      .#{$prefix}--toast-notification--info;
   }
 }
 
@@ -45,7 +48,8 @@ $css--plex: true !default;
   @extend .#{$prefix}--toast-notification--warning;
 
   &[low-contrast] {
-    @extend .#{$prefix}--toast-notification--low-contrast, .#{$prefix}--toast-notification--warning;
+    @extend .#{$prefix}--toast-notification--low-contrast,
+      .#{$prefix}--toast-notification--warning;
   }
 }
 
@@ -53,6 +57,7 @@ $css--plex: true !default;
   @extend .#{$prefix}--toast-notification--error;
 
   &[low-contrast] {
-    @extend .#{$prefix}--toast-notification--low-contrast, .#{$prefix}--toast-notification--error;
+    @extend .#{$prefix}--toast-notification--low-contrast,
+      .#{$prefix}--toast-notification--error;
   }
 }

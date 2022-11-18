@@ -70,7 +70,16 @@ Default.parameters = {
 };
 
 export const formItem = (args) => {
-  const { colorScheme, disabled, value, placeholder, invalid, onInput, rows, cols } = args?.['bx-textarea'] ?? {};
+  const {
+    colorScheme,
+    disabled,
+    value,
+    placeholder,
+    invalid,
+    onInput,
+    rows,
+    cols,
+  } = args?.['bx-textarea'] ?? {};
   return html`
     <bx-form-item>
       <bx-textarea
@@ -101,7 +110,16 @@ formItem.parameters = {
 };
 
 export const withoutFormItemWrapper = (args) => {
-  const { colorScheme, disabled, value, placeholder, invalid, onInput, rows, cols } = args?.['bx-textarea'] ?? {};
+  const {
+    colorScheme,
+    disabled,
+    value,
+    placeholder,
+    invalid,
+    onInput,
+    rows,
+    cols,
+  } = args?.['bx-textarea'] ?? {};
   return html`
     <bx-textarea
       color-scheme="${ifNonNull(colorScheme)}"
@@ -129,7 +147,8 @@ withoutFormItemWrapper.parameters = {
   },
 };
 
-export const skeleton = () => html` <bx-textarea-skeleton></bx-textarea-skeleton> `;
+export const skeleton = () =>
+  html` <bx-textarea-skeleton></bx-textarea-skeleton> `;
 
 skeleton.parameters = {
   percy: {

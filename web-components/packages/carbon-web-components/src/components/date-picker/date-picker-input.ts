@@ -15,10 +15,18 @@ import ifNonNull from '../../globals/directives/if-non-null';
 import FocusMixin from '../../globals/mixins/focus';
 import ValidityMixin from '../../globals/mixins/validity';
 import { INPUT_SIZE } from '../input/input';
-import { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND, DATE_PICKER_INPUT_SIZE_HORIZONTAL } from './defs';
+import {
+  DATE_PICKER_INPUT_COLOR_SCHEME,
+  DATE_PICKER_INPUT_KIND,
+  DATE_PICKER_INPUT_SIZE_HORIZONTAL,
+} from './defs';
 import styles from './date-picker.scss';
 
-export { DATE_PICKER_INPUT_COLOR_SCHEME, DATE_PICKER_INPUT_KIND, DATE_PICKER_INPUT_SIZE_HORIZONTAL };
+export {
+  DATE_PICKER_INPUT_COLOR_SCHEME,
+  DATE_PICKER_INPUT_KIND,
+  DATE_PICKER_INPUT_SIZE_HORIZONTAL,
+};
 
 const { prefix } = settings;
 
@@ -46,7 +54,10 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
    */
   private get _hasValidityMessage() {
     const { validityMessage, _slotValidityMessage: slotValidityMessage } = this;
-    return validityMessage || (slotValidityMessage && slotValidityMessage.assignedNodes.length > 0);
+    return (
+      validityMessage ||
+      (slotValidityMessage && slotValidityMessage.assignedNodes.length > 0)
+    );
   }
 
   /**
@@ -101,7 +112,11 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
     } = this;
     return html`
       <div ?hidden="${!hasValidityMessage}" class="${prefix}--form-requirement">
-        <slot name="validity-message" @slotchange="${handleSlotChangeValidityMessage}">${validityMessage}</slot>
+        <slot
+          name="validity-message"
+          @slotchange="${handleSlotChangeValidityMessage}"
+          >${validityMessage}</slot
+        >
       </div>
     `;
   }
@@ -207,7 +222,9 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -239,7 +256,10 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
       <label for="input" class="${labelClasses}">
         <slot name="label-text">${labelText}</slot>
       </label>
-      <div class="${prefix}--date-picker-input__wrapper" @click="${handleClickWrapper}">
+      <div
+        class="${prefix}--date-picker-input__wrapper"
+        @click="${handleClickWrapper}"
+      >
         <input
           id="input"
           type="${type}"

@@ -18,8 +18,20 @@ import createProps from './stories/helpers';
 import storyDocs from './number-input-story.mdx';
 
 export const Default = (args) => {
-  const { colorScheme, disabled, value, placeholder, invalid, mobile, min, max, size, step, onInput, name } =
-    args?.['bx-number-input'] ?? {};
+  const {
+    colorScheme,
+    disabled,
+    value,
+    placeholder,
+    invalid,
+    mobile,
+    min,
+    max,
+    size,
+    step,
+    onInput,
+    name,
+  } = args?.['bx-number-input'] ?? {};
   return html`
     <bx-number-input
       color-scheme="${ifNonNull(colorScheme)}"
@@ -47,8 +59,19 @@ Default.parameters = {
 };
 
 export const formItem = (args) => {
-  const { colorScheme, disabled, value, placeholder, invalid, mobile, min, max, size, step, onInput } =
-    args?.['bx-number-input'] ?? {};
+  const {
+    colorScheme,
+    disabled,
+    value,
+    placeholder,
+    invalid,
+    mobile,
+    min,
+    max,
+    size,
+    step,
+    onInput,
+  } = args?.['bx-number-input'] ?? {};
   return html`
     <bx-form-item>
       <bx-number-input
@@ -67,8 +90,12 @@ export const formItem = (args) => {
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
-        <span slot="validity-message-max">Try a lower value, something less than ${max}</span>
-        <span slot="validity-message-min">Value must be larger than ${min}</span>
+        <span slot="validity-message-max"
+          >Try a lower value, something less than ${max}</span
+        >
+        <span slot="validity-message-min"
+          >Value must be larger than ${min}</span
+        >
       </bx-number-input>
     </bx-form-item>
   `;
@@ -83,8 +110,19 @@ formItem.parameters = {
 };
 
 export const withoutFormItemWrapper = (args) => {
-  const { colorScheme, disabled, value, placeholder, invalid, mobile, min, max, size, step, onInput } =
-    args?.['bx-number-input'] ?? {};
+  const {
+    colorScheme,
+    disabled,
+    value,
+    placeholder,
+    invalid,
+    mobile,
+    min,
+    max,
+    size,
+    step,
+    onInput,
+  } = args?.['bx-number-input'] ?? {};
   return html`
     <bx-number-input
       value="${ifNonNull(value)}"
@@ -114,7 +152,8 @@ withoutFormItemWrapper.parameters = {
   },
 };
 
-export const skeleton = () => html` <bx-number-input-skeleton></bx-number-input-skeleton> `;
+export const skeleton = () =>
+  html` <bx-number-input-skeleton></bx-number-input-skeleton> `;
 
 skeleton.parameters = {
   percy: {

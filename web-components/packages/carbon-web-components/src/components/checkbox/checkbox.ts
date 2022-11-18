@@ -102,12 +102,23 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
-    const { checked, disabled, hideLabel, indeterminate, labelText, name, value, _handleChange: handleChange } = this;
+    const {
+      checked,
+      disabled,
+      hideLabel,
+      indeterminate,
+      labelText,
+      name,
+      value,
+      _handleChange: handleChange,
+    } = this;
     const labelClasses = classMap({
       [`${prefix}--checkbox-label`]: true,
       [`${prefix}--visually-hidden`]: hideLabel,
@@ -127,7 +138,9 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
         @change="${handleChange}"
       />
       <label for="checkbox" part="label" class="${labelClasses}">
-        <span class="${prefix}--checkbox-label-text"><slot>${labelText}</slot></span>
+        <span class="${prefix}--checkbox-label-text"
+          ><slot>${labelText}</slot></span
+        >
       </label>
     `;
   }

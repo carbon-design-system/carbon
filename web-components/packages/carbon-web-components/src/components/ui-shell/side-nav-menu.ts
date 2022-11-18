@@ -47,7 +47,8 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
    * @param expanded The new expanded state.
    */
   private _handleUserInitiatedToggle(expanded = !this.expanded) {
-    const { eventBeforeToggle, eventToggle } = this.constructor as typeof BXSideNavMenu;
+    const { eventBeforeToggle, eventToggle } = this
+      .constructor as typeof BXSideNavMenu;
     const init = {
       bubbles: true,
       cancelable: true,
@@ -76,7 +77,10 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
     const { _hasIcon: hasIcon } = this;
     forEach(target.assignedNodes(), (item) => {
       if (item.nodeType === Node.ELEMENT_NODE) {
-        item.toggleAttribute((this.constructor as typeof BXSideNavMenu).attribItemHasIcon, hasIcon);
+        item.toggleAttribute(
+          (this.constructor as typeof BXSideNavMenu).attribItemHasIcon,
+          hasIcon
+        );
       }
     });
   }
@@ -121,7 +125,9 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
@@ -160,10 +166,20 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
         class="${prefix}--side-nav__submenu"
         @click=${handleClickExpando}
       >
-        <div id="title-icon-container" part="title-icon-container" hidden class="${prefix}--side-nav__icon">
-          <slot name="title-icon" @slotchange=${handleSlotChangeTitleIcon}></slot>
+        <div
+          id="title-icon-container"
+          part="title-icon-container"
+          hidden
+          class="${prefix}--side-nav__icon"
+        >
+          <slot
+            name="title-icon"
+            @slotchange=${handleSlotChangeTitleIcon}
+          ></slot>
         </div>
-        <span part="title" class="${prefix}--side-nav__submenu-title">${title}</span>
+        <span part="title" class="${prefix}--side-nav__submenu-title"
+          >${title}</span
+        >
         <div
           part="expando-icon-container"
           class="${prefix}--side-nav__icon ${prefix}--side-nav__icon--small ${prefix}--side-nav__submenu-chevron"

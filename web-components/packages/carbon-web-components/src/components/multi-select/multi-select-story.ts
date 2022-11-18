@@ -12,7 +12,11 @@ import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import ifNonNull from '../../globals/directives/if-non-null';
-import { DROPDOWN_COLOR_SCHEME, DROPDOWN_SIZE, DROPDOWN_TYPE } from './multi-select';
+import {
+  DROPDOWN_COLOR_SCHEME,
+  DROPDOWN_SIZE,
+  DROPDOWN_TYPE,
+} from './multi-select';
 import './multi-select-item';
 import storyDocs from './multi-select-story.mdx';
 
@@ -24,7 +28,8 @@ const colorSchemes = {
 const sizes = {
   'Regular size': null,
   [`Small size (${DROPDOWN_SIZE.SMALL})`]: DROPDOWN_SIZE.SMALL,
-  [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]: DROPDOWN_SIZE.EXTRA_LARGE,
+  [`Extra large size (${DROPDOWN_SIZE.EXTRA_LARGE})`]:
+    DROPDOWN_SIZE.EXTRA_LARGE,
 };
 
 const types = {
@@ -165,7 +170,8 @@ export const Filterable = (args) => {
       @bx-multi-select-toggled=${onToggle}
     >
       <bx-multi-select-item value="example"
-        >An example option that is really long to show what should be done to handle long text</bx-multi-select-item
+        >An example option that is really long to show what should be done to
+        handle long text</bx-multi-select-item
       >
       <bx-multi-select-item value="all">Option 1</bx-multi-select-item>
       <bx-multi-select-item value="cloudFoundry">Option 2</bx-multi-select-item>
@@ -184,19 +190,37 @@ export default {
     ...storyDocs.parameters,
     knobs: {
       'bx-multi-select': () => ({
-        clearSelectionLabel: textNullable('a11y label for the icon to clear selection (clear-selection-label)', ''),
+        clearSelectionLabel: textNullable(
+          'a11y label for the icon to clear selection (clear-selection-label)',
+          ''
+        ),
         colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
         disabled: boolean('Disabled (disabled)', false),
-        helperText: textNullable('Helper text (helper-text)', 'Optional helper text'),
+        helperText: textNullable(
+          'Helper text (helper-text)',
+          'Optional helper text'
+        ),
         invalid: boolean('Show invalid state  (invalid)', false),
         labelText: textNullable('Label text (label-text)', 'Multiselect title'),
         open: boolean('Open (open)', false),
-        toggleLabelClosed: textNullable('a11y label for the UI indicating the closed state (toggle-label-closed)', ''),
-        toggleLabelOpen: textNullable('a11y label for the UI indicating the closed state (toggle-label-open)', ''),
-        triggerContent: textNullable('The default content of the trigger button (trigger-content)', 'Select items'),
+        toggleLabelClosed: textNullable(
+          'a11y label for the UI indicating the closed state (toggle-label-closed)',
+          ''
+        ),
+        toggleLabelOpen: textNullable(
+          'a11y label for the UI indicating the closed state (toggle-label-open)',
+          ''
+        ),
+        triggerContent: textNullable(
+          'The default content of the trigger button (trigger-content)',
+          'Select items'
+        ),
         size: select('Dropdown size (size)', sizes, null),
         type: select('UI type (type)', types, null),
-        validityMessage: textNullable('The validity message (validity-message)', ''),
+        validityMessage: textNullable(
+          'The validity message (validity-message)',
+          ''
+        ),
         disableSelection: boolean(
           'Disable user-initiated selection change (Call event.preventDefault() in bx-multi-select-beingselected event)',
           false

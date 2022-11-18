@@ -39,7 +39,11 @@ class BXHeaderNav extends LitElement {
     const { menuBarLabel } = this;
     return html`
       <div part="divider" class="${prefix}-ce--header__divider"></div>
-      <ul part="menu-body" class="${prefix}--header__menu-bar" aria-label="${menuBarLabel}">
+      <ul
+        part="menu-body"
+        class="${prefix}--header__menu-bar"
+        aria-label="${menuBarLabel}"
+      >
         <slot></slot>
       </ul>
     `;

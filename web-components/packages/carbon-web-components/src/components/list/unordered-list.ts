@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,7 +27,11 @@ class BXUnorderedList extends LitElement {
 
   connectedCallback() {
     // Uses attribute for lookup from child
-    if (this.closest((this.constructor as typeof BXUnorderedList).selectorListItem)) {
+    if (
+      this.closest(
+        (this.constructor as typeof BXUnorderedList).selectorListItem
+      )
+    ) {
       this.setAttribute('slot', 'nested');
     } else {
       this.removeAttribute('slot');

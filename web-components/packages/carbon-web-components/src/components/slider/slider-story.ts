@@ -17,7 +17,8 @@ import './slider-skeleton';
 import storyDocs from './slider-story.mdx';
 
 export const Default = (args) => {
-  const { disabled, labelText, max, min, name, step, value, onChange } = args?.['bx-slider'] || {};
+  const { disabled, labelText, max, min, name, step, value, onChange } =
+    args?.['bx-slider'] || {};
   return html`
     <bx-slider
       ?disabled="${disabled}"
@@ -50,7 +51,8 @@ Default.parameters = {
 };
 
 export const withInputBox = (args) => {
-  const { disabled, labelText, max, min, name, step, value, onChange } = args?.['bx-slider'] || {};
+  const { disabled, labelText, max, min, name, step, value, onChange } =
+    args?.['bx-slider'] || {};
   return html`
     <bx-slider
       ?disabled="${disabled}"
@@ -62,7 +64,10 @@ export const withInputBox = (args) => {
       value="${ifNonNull(value)}"
       @bx-slider-changed="${onChange}"
     >
-      <bx-slider-input aria-label="Slider value" type="number"></bx-slider-input>
+      <bx-slider-input
+        aria-label="Slider value"
+        type="number"
+      ></bx-slider-input>
     </bx-slider>
   `;
 };

@@ -18,7 +18,13 @@ import containerStyles from './_container.scss'; // eslint-disable-line import/f
  * @param [options.children] The story content.
  * @returns The content that wraps the story.
  */
-const container = ({ hasMainTag, children }: { hasMainTag?: boolean; children: TemplateResult }) => html`
+const container = ({
+  hasMainTag,
+  children,
+}: {
+  hasMainTag?: boolean;
+  children: TemplateResult;
+}) => html`
   <style>
     ${containerStyles}
   </style>

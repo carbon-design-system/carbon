@@ -42,7 +42,8 @@ class BXFileUploaderItem extends LitElement {
       cancelable: true,
       composed: true,
     };
-    const { eventBeforeDelete, eventDelete } = this.constructor as typeof BXFileUploaderItem;
+    const { eventBeforeDelete, eventDelete } = this
+      .constructor as typeof BXFileUploaderItem;
     if (this.dispatchEvent(new CustomEvent(eventBeforeDelete, init))) {
       this.dispatchEvent(new CustomEvent(eventDelete, init));
     }
@@ -52,10 +53,21 @@ class BXFileUploaderItem extends LitElement {
    * @returns The content showing the editing UI of this file uploader item.
    */
   private _renderEditing() {
-    const { deleteAssistiveText, invalid, _handleClickDeleteButton: handleClickDeleteButton } = this;
+    const {
+      deleteAssistiveText,
+      invalid,
+      _handleClickDeleteButton: handleClickDeleteButton,
+    } = this;
     return html`
-      ${!invalid ? undefined : WarningFilled16({ class: `${prefix}--file-invalid` })}
-      <button type="button" aria-label="${deleteAssistiveText}" class="${prefix}--file-close" @click="${handleClickDeleteButton}">
+      ${!invalid
+        ? undefined
+        : WarningFilled16({ class: `${prefix}--file-invalid` })}
+      <button
+        type="button"
+        aria-label="${deleteAssistiveText}"
+        class="${prefix}--file-close"
+        @click="${handleClickDeleteButton}"
+      >
         ${Close16()}
       </button>
     `;
@@ -66,7 +78,12 @@ class BXFileUploaderItem extends LitElement {
    */
   private _renderUploading() {
     const { uploadingAssistiveText } = this;
-    return html` <bx-loading assistive-text="${uploadingAssistiveText}" type="${LOADING_TYPE.SMALL}"></bx-loading> `;
+    return html`
+      <bx-loading
+        assistive-text="${uploadingAssistiveText}"
+        type="${LOADING_TYPE.SMALL}"
+      ></bx-loading>
+    `;
   }
 
   /**
@@ -143,7 +160,9 @@ class BXFileUploaderItem extends LitElement {
     const { validityMessage } = this;
     return html`
       <p class="${prefix}--file-filename"><slot></slot></p>
-      <span class="${prefix}--file__state-container">${this._renderStatus()}</span>
+      <span class="${prefix}--file__state-container"
+        >${this._renderStatus()}</span
+      >
       <div class="${prefix}--form-requirement">
         <div class="${prefix}--form-requirement__title">
           <slot name="validity-message">${validityMessage}</slot>

@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -21,7 +21,9 @@ describe('bx-link', function () {
     it('should render with minimum attributes', async function () {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-link')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with various attributes', async function () {
@@ -39,7 +41,9 @@ describe('bx-link', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-link')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render disabled state', async function () {
@@ -58,7 +62,9 @@ describe('bx-link', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link')).toMatchSnapshot({ mode: 'shadow' });
+      expect(document.body.querySelector('bx-link')).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 

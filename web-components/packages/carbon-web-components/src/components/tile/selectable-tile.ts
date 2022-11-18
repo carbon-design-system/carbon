@@ -9,7 +9,14 @@
 
 import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit-html/directives/class-map';
-import { html, svg, property, query, customElement, LitElement } from 'lit-element';
+import {
+  html,
+  svg,
+  property,
+  query,
+  customElement,
+  LitElement,
+} from 'lit-element';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import ifNonNull from '../../globals/directives/if-non-null';
 import FocusMixin from '../../globals/mixins/focus';
@@ -73,12 +80,22 @@ class BXSelectableTile extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
-    const { checkmarkLabel, colorScheme, name, selected, value, _inputType: inputType, _handleChange: handleChange } = this;
+    const {
+      checkmarkLabel,
+      colorScheme,
+      name,
+      selected,
+      value,
+      _inputType: inputType,
+      _handleChange: handleChange,
+    } = this;
     const classes = classMap({
       [`${prefix}--tile`]: true,
       [`${prefix}--tile--selectable`]: true,
@@ -98,7 +115,9 @@ class BXSelectableTile extends FocusMixin(LitElement) {
       <label for="input" class="${classes}" tabindex="0">
         <div class="${prefix}--tile__checkmark">
           ${CheckmarkFilled16({
-            children: !checkmarkLabel ? undefined : svg`<title>${checkmarkLabel}</title>`,
+            children: !checkmarkLabel
+              ? undefined
+              : svg`<title>${checkmarkLabel}</title>`,
           })}
         </div>
         <div class="${prefix}--tile-content"><slot></slot></div>

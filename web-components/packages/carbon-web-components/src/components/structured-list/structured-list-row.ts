@@ -13,7 +13,10 @@ import { html, property, query, customElement, LitElement } from 'lit-element';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
-import RadioGroupManager, { NAVIGATION_DIRECTION, ManagedRadioButtonDelegate } from '../../globals/internal/radio-group-manager';
+import RadioGroupManager, {
+  NAVIGATION_DIRECTION,
+  ManagedRadioButtonDelegate,
+} from '../../globals/internal/radio-group-manager';
 import styles from './structured-list.scss';
 
 const { prefix } = settings;
@@ -31,7 +34,9 @@ const navigationDirectionForKey = {
 /**
  * The interface for `RadioGroupManager` for structured list row.
  */
-class StructuredListRowRadioButtonDelegate implements ManagedRadioButtonDelegate {
+class StructuredListRowRadioButtonDelegate
+  implements ManagedRadioButtonDelegate
+{
   /**
    * The structured list row to target.
    */
@@ -120,7 +125,9 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
     if (inputNode && manager) {
       const navigationDirection = navigationDirectionForKey[event.key];
       if (navigationDirection) {
-        manager.select(manager.navigate(this._radioButtonDelegate, navigationDirection));
+        manager.select(
+          manager.navigate(this._radioButtonDelegate, navigationDirection)
+        );
       }
       if (event.key === ' ' || event.key === 'Enter') {
         manager.select(this._radioButtonDelegate);
@@ -159,7 +166,9 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
     }
     super.connectedCallback();
     if (!this._manager) {
-      this._manager = RadioGroupManager.get(this.getRootNode({ composed: true }) as Document);
+      this._manager = RadioGroupManager.get(
+        this.getRootNode({ composed: true }) as Document
+      );
       const { selectionName } = this;
       if (selectionName) {
         this._manager?.add(this._radioButtonDelegate);
@@ -178,20 +187,28 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
     const { _manager: manager, selectionName } = this;
     if (changedProperties.has('selectionName')) {
       if (manager) {
-        manager.delete(this._radioButtonDelegate, changedProperties.get('selectionName'));
+        manager.delete(
+          this._radioButtonDelegate,
+          changedProperties.get('selectionName')
+        );
         if (selectionName) {
           manager.add(this._radioButtonDelegate);
         }
       }
       this.setAttribute(
         'tabindex',
-        !selectionName || !manager || !manager.shouldBeFocusable(this._radioButtonDelegate) ? '-1' : '0'
+        !selectionName ||
+          !manager ||
+          !manager.shouldBeFocusable(this._radioButtonDelegate)
+          ? '-1'
+          : '0'
       );
     }
   }
 
   render() {
-    const { selected, selectionName, selectionValue, selectionIconTitle } = this;
+    const { selected, selectionName, selectionValue, selectionIconTitle } =
+      this;
     if (selectionName) {
       // "Selected" style with `.bx--structured-list-td` does not work somehow - Need investigation
       return html`
@@ -204,7 +221,9 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
           name=${selectionName}
           value=${ifDefined(selectionValue)}
         />
-        <div class="${prefix}--structured-list-td ${prefix}--structured-list-cell">
+        <div
+          class="${prefix}--structured-list-td ${prefix}--structured-list-cell"
+        >
           ${CheckmarkFilled16({
             class: `${prefix}--structured-list-svg`,
             title: selectionIconTitle,

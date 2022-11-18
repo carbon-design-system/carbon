@@ -32,7 +32,8 @@ class BXListItem extends LitElement {
    * @param event The event.
    */
   private _handleSlotChangeNested({ target }: Event) {
-    this._hasNestedChild = (target as HTMLSlotElement).assignedNodes().length > 0;
+    this._hasNestedChild =
+      (target as HTMLSlotElement).assignedNodes().length > 0;
     this.requestUpdate();
   }
 
@@ -45,7 +46,12 @@ class BXListItem extends LitElement {
 
   connectedCallback() {
     // Uses attribute for lookup from child
-    this.toggleAttribute('nested', Boolean(this.closest((this.constructor as typeof BXListItem).selectorNestedList)));
+    this.toggleAttribute(
+      'nested',
+      Boolean(
+        this.closest((this.constructor as typeof BXListItem).selectorNestedList)
+      )
+    );
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'listitem');
     }
@@ -53,10 +59,16 @@ class BXListItem extends LitElement {
   }
 
   render() {
-    const { _hasNestedChild: hasNestedChild, _handleSlotChangeNested: handleSlotChangeNested } = this;
+    const {
+      _hasNestedChild: hasNestedChild,
+      _handleSlotChangeNested: handleSlotChangeNested,
+    } = this;
     return html`
       <slot></slot>
-      <div ?hidden="${!hasNestedChild}" class="${prefix}-ce--list__item__nested-child">
+      <div
+        ?hidden="${!hasNestedChild}"
+        class="${prefix}-ce--list__item__nested-child"
+      >
         <slot name="nested" @slotchange="${handleSlotChangeNested}"></slot>
       </div>
     `;

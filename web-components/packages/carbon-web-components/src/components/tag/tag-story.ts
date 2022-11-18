@@ -26,7 +26,12 @@ const sizes = {
 export const Default = (args) => {
   const { size, type, title, disabled } = args?.['bx-tag'] ?? {};
   return html`
-    <bx-tag size="${ifNonNull(size)}" type="${ifNonNull(type)}" title="${ifNonNull(title)}" ?disabled="${disabled}">
+    <bx-tag
+      size="${ifNonNull(size)}"
+      type="${ifNonNull(type)}"
+      title="${ifNonNull(title)}"
+      ?disabled="${disabled}"
+    >
       This is a tag
     </bx-tag>
   `;

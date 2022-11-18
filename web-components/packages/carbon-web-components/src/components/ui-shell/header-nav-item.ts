@@ -45,15 +45,24 @@ class BXHeaderNavItem extends FocusMixin(LitElement) {
   createRenderRoot() {
     return this.attachShadow({
       mode: 'open',
-      delegatesFocus: Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <= 537,
+      delegatesFocus:
+        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
+        537,
     });
   }
 
   render() {
     const { href, title } = this;
     return html`
-      <a part="link" class="${prefix}--header__menu-item" tabindex="0" href="${ifDefined(href)}">
-        <span part="title" class="${prefix}--text-truncate--end"><slot>${title}</slot></span>
+      <a
+        part="link"
+        class="${prefix}--header__menu-item"
+        tabindex="0"
+        href="${ifDefined(href)}"
+      >
+        <span part="title" class="${prefix}--text-truncate--end"
+          ><slot>${title}</slot></span
+        >
       </a>
     `;
   }

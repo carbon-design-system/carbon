@@ -31,7 +31,8 @@ export interface DatePickerFocusPluginConfig {
 /**
  * `FlatpickrInstance` with additional properties used for `carbonFlatpickrFocusPlugin`.
  */
-export interface ExtendedFlatpickrInstanceFocusPlugin extends FlatpickrInstance {
+export interface ExtendedFlatpickrInstanceFocusPlugin
+  extends FlatpickrInstance {
   /**
    * The handle for `blur` event handler in calendar dropdown.
    */
@@ -83,13 +84,20 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
     const handleBlur = ({ target, relatedTarget }: FocusEvent) => {
       // Obtains `beingUpdated` up-front because it'll be flushed out shortly
       const { calendarContainer, isOpen } = fp;
-      if (isOpen && calendarContainer.contains(target as Node) && !calendarContainer.contains(relatedTarget as Node)) {
+      if (
+        isOpen &&
+        calendarContainer.contains(target as Node) &&
+        !calendarContainer.contains(relatedTarget as Node)
+      ) {
         Promise.resolve().then(() => {
           const rootNode = (target as Node).getRootNode();
           // This `blur` event handler can be called from Flatpickr's code cleaning up calenar dropdown's DOM,
           // and changing focus in such condition causes removing an orphaned DOM node,
           // because Flatpickr redraws the calendar dropdown when the `<input>` gets focus.
-          if (rootNode.nodeType === Node.DOCUMENT_NODE || rootNode.nodeType === Node.DOCUMENT_FRAGMENT_NODE) {
+          if (
+            rootNode.nodeType === Node.DOCUMENT_NODE ||
+            rootNode.nodeType === Node.DOCUMENT_FRAGMENT_NODE
+          ) {
             if (fp._lastFocusInput === config.inputTo) {
               config.inputTo!.focus();
             } else {
@@ -131,19 +139,24 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
      */
     const release = () => {
       if (fp._hBXCEDatePickerFocusPluginBlur) {
-        fp._hBXCEDatePickerFocusPluginBlur = fp._hBXCEDatePickerFocusPluginBlur.release();
+        fp._hBXCEDatePickerFocusPluginBlur =
+          fp._hBXCEDatePickerFocusPluginBlur.release();
       }
       if (fp._hBXCEDatePickerFocusPluginFocusTo) {
-        fp._hBXCEDatePickerFocusPluginFocusTo = fp._hBXCEDatePickerFocusPluginFocusTo.release();
+        fp._hBXCEDatePickerFocusPluginFocusTo =
+          fp._hBXCEDatePickerFocusPluginFocusTo.release();
       }
       if (fp._hBXCEDatePickerFocusPluginFocusFrom) {
-        fp._hBXCEDatePickerFocusPluginFocusFrom = fp._hBXCEDatePickerFocusPluginFocusFrom.release();
+        fp._hBXCEDatePickerFocusPluginFocusFrom =
+          fp._hBXCEDatePickerFocusPluginFocusFrom.release();
       }
       if (fp._hBXCEDatePickerFocusPluginKeydownTo) {
-        fp._hBXCEDatePickerFocusPluginKeydownTo = fp._hBXCEDatePickerFocusPluginKeydownTo.release();
+        fp._hBXCEDatePickerFocusPluginKeydownTo =
+          fp._hBXCEDatePickerFocusPluginKeydownTo.release();
       }
       if (fp._hBXCEDatePickerFocusPluginKeydownFrom) {
-        fp._hBXCEDatePickerFocusPluginKeydownFrom = fp._hBXCEDatePickerFocusPluginKeydownFrom.release();
+        fp._hBXCEDatePickerFocusPluginKeydownFrom =
+          fp._hBXCEDatePickerFocusPluginKeydownFrom.release();
       }
     };
 
@@ -153,14 +166,35 @@ export default (config: DatePickerFocusPluginConfig): Plugin =>
     const init = () => {
       release();
       const { inputFrom, inputTo } = config;
-      fp._hBXCEDatePickerFocusPluginBlur = on(fp.calendarContainer, 'blur', handleBlur, true);
-      fp._hBXCEDatePickerFocusPluginKeydownFrom = on(inputFrom, 'keydown', handleInputKeydown);
+      fp._hBXCEDatePickerFocusPluginBlur = on(
+        fp.calendarContainer,
+        'blur',
+        handleBlur,
+        true
+      );
+      fp._hBXCEDatePickerFocusPluginKeydownFrom = on(
+        inputFrom,
+        'keydown',
+        handleInputKeydown
+      );
       if (inputTo) {
-        fp._hBXCEDatePickerFocusPluginKeydownTo = on(inputTo, 'keydown', handleInputKeydown);
+        fp._hBXCEDatePickerFocusPluginKeydownTo = on(
+          inputTo,
+          'keydown',
+          handleInputKeydown
+        );
       }
-      fp._hBXCEDatePickerFocusPluginFocusFrom = on(inputFrom, 'focus', handleInputFocus);
+      fp._hBXCEDatePickerFocusPluginFocusFrom = on(
+        inputFrom,
+        'focus',
+        handleInputFocus
+      );
       if (inputTo) {
-        fp._hBXCEDatePickerFocusPluginFocusTo = on(inputTo, 'focus', handleInputFocus);
+        fp._hBXCEDatePickerFocusPluginFocusTo = on(
+          inputTo,
+          'focus',
+          handleInputFocus
+        );
       }
     };
 
