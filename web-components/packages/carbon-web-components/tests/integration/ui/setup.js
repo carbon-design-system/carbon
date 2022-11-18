@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,7 +11,7 @@ const { setup: setupDevServer } = require('jest-dev-server');
 const setup = require('jest-playwright-preset/setup');
 const isPortReachable = require('is-port-reachable');
 
-module.exports = async config => {
+module.exports = async (config) => {
   if (!process.env.LAUNCH_TIMEOUT) {
     process.env.LAUNCH_TIMEOUT = 120000;
   }

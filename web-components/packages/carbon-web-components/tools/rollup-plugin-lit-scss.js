@@ -13,7 +13,7 @@ const sass = require('sass');
 const { createFilter } = require('@rollup/pluginutils');
 
 const renderSass = promisify(sass.render);
-const noop = s => s;
+const noop = (s) => s;
 
 /**
  * @param {string} css A CSS.

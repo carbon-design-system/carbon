@@ -30,7 +30,7 @@ jasmine.getEnv().addReporter({
   },
 });
 
-beforeEach(function() {
+beforeEach(function () {
   jasmine.addMatchers({
     toMatchSnapshot() {
       return {

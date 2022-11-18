@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2021
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -57,9 +57,9 @@ const rePseudoElements = new RegExp(`::?(${pseudoElementNames.join('|')})`);
 // eslint-disable-next-line prefer-arrow-callback
 module.exports = postcss.plugin('fix-host-pseudo', function postCssPluginFixHostPseudo() {
   return function fixHostPseudo(css) {
-    css.walkRules(async rule => {
-      await parser(selectors => {
-        selectors.walkPseudos(pseudo => {
+    css.walkRules(async (rule) => {
+      await parser((selectors) => {
+        selectors.walkPseudos((pseudo) => {
           if (pseudo.value === ':host') {
             if (pseudo.nodes.length !== 1 || pseudo.first.type !== 'selector') {
               // eslint-disable-next-line no-console
@@ -84,7 +84,7 @@ module.exports = postcss.plugin('fix-host-pseudo', function postCssPluginFixHost
                   pseudosToMove.push(followingNode);
                 }
               }
-              pseudosToMove.forEach(item => {
+              pseudosToMove.forEach((item) => {
                 const newNode = item.clone();
                 newNode.spaces.before = '';
                 newNode.spaces.after = '';

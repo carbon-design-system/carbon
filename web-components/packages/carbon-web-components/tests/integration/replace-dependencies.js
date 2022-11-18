@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2020, 2021
+ * Copyright IBM Corp. 2020, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,9 +19,9 @@ const packs = ['carbon-web-components'];
  *
  * @param {string[]} files The files.
  */
-const replace = async files => {
+const replace = async (files) => {
   await Promise.all(
-    files.map(async file => {
+    files.map(async (file) => {
       const contents = JSON.parse(await readFile(file));
       // eslint-disable-next-line no-restricted-syntax
       for (const dep of deps) {

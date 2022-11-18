@@ -60,7 +60,7 @@ const dirSuffixes = {
 function _generateInputs(mode, dir, folders) {
   const inputs = {};
 
-  folders.forEach(folder => {
+  folders.forEach((folder) => {
     inputs[`${folder}${dirSuffixes[dir]}${modeSuffixes[mode]}`] = `src/components/${folder}/index.ts`;
   });
 

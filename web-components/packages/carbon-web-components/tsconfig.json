@@ -19,7 +19,8 @@
     "noImplicitAny": false,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "types": ["jest", "node", "mocha"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "tests/**/*.ts", ".storybook/**/*.ts", ".storybook/**/*.tsx"],
   "exclude": []

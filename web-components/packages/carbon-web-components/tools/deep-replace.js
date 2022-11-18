@@ -62,7 +62,7 @@ function deepReplace(value, matcher, replacer, parents = []) {
     }, {});
   }
   if (Array.isArray(value)) {
-    return value.map(mapPredicate).filter(itemValue => itemValue !== deepReplace.DELETE);
+    return value.map(mapPredicate).filter((itemValue) => itemValue !== deepReplace.DELETE);
   }
   return value;
 }
@@ -73,8 +73,8 @@ function deepReplace(value, matcher, replacer, parents = []) {
  */
 function getPaths(nodes) {
   return nodes
-    .filter(item => typeof item.key === 'string')
-    .map(item => item.key)
+    .filter((item) => typeof item.key === 'string')
+    .map((item) => item.key)
     .join('.');
 }
 

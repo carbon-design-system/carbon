@@ -22,16 +22,8 @@ function normalizeBrowser(browser) {
 }
 
 module.exports = function setupKarma(config) {
-  const {
-    browsers,
-    collectCoverage,
-    noPruneShapshot,
-    specs,
-    random,
-    updateSnapshot,
-    useExperimentalFeatures,
-    verbose,
-  } = config.customConfig;
+  const { browsers, collectCoverage, noPruneShapshot, specs, random, updateSnapshot, useExperimentalFeatures, verbose } =
+    config.customConfig;
 
   config.set({
     basePath: '..',
