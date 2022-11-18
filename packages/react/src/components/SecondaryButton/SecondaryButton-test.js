@@ -43,7 +43,7 @@ describe('SecondaryButton', () => {
             Search
           </SecondaryButton>
         );
-        expect(container.querySelector('.cds--btn__icon')).toBeDefined();
+        expect(container.querySelector('.cds--btn__icon')).toBeTruthy();
       });
     });
   });
