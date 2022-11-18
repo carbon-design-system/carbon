@@ -7,14 +7,13 @@
 
 import React from 'react';
 import { Search } from '@carbon/icons-react';
+import { screen, render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import SecondaryButton from '../SecondaryButton';
-import { shallow, mount } from 'enzyme';
-
-const prefix = 'cds';
 
 describe('SecondaryButton', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
+    const secondaryButton = (
       <SecondaryButton size="sm" className="extra-class">
         <div className="child">Test</div>
         <div className="child">Test</div>
@@ -22,28 +21,29 @@ describe('SecondaryButton', () => {
     );
 
     it('Renders children as expected', () => {
-      expect(wrapper.find('.child').length).toBe(2);
-      expect(wrapper.find('svg').length).toBe(0);
+      const { container } = render(secondaryButton);
+      expect(screen.getAllByText('Test').length).toBe(2);
+      expect(container.querySelector('svg')).toBeNull();
     });
-    it('Renders wrapper as expected', () => {
-      expect(wrapper.length).toBe(1);
-    });
+
     it('Has the expected kind set to "secondary"', () => {
-      expect(wrapper.props().kind).toEqual('secondary');
+      const { container } = render(secondaryButton);
+      expect(container.firstChild).toHaveClass('cds--btn--secondary');
     });
+
     it('Should add extra classes that are passed via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      const { container } = render(secondaryButton);
+      expect(container.firstChild).toHaveClass('extra-class');
     });
 
     describe('Renders icon buttons', () => {
-      const iconButton = mount(
-        <SecondaryButton renderIcon={Search} iconDescription="Search">
-          Search
-        </SecondaryButton>
-      );
-      const icon = iconButton.find('svg');
       it('should have the appropriate icon', () => {
-        expect(icon.hasClass(`${prefix}--btn__icon`)).toBe(true);
+        const { container } = render(
+          <SecondaryButton renderIcon={Search} iconDescription="Search">
+            Search
+          </SecondaryButton>
+        );
+        expect(container.querySelector('.cds--btn__icon')).toBeDefined();
       });
     });
   });
