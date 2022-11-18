@@ -34,7 +34,9 @@ describe('bx-code-snippet', function () {
     it('Should render with minimum attributes for single line mode', async function () {
       render(singleLineTemplate(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-code-snippet' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -42,7 +44,9 @@ describe('bx-code-snippet', function () {
     it('Should render with minimum attributes for multi line mode', async function () {
       render(multiLineTemplate(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-code-snippet' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -50,7 +54,9 @@ describe('bx-code-snippet', function () {
     it('Should render with minimum attributes for inline mode', async function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-code-snippet' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -66,7 +72,9 @@ describe('bx-code-snippet', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-code-snippet' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -82,7 +90,9 @@ describe('bx-code-snippet', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-code-snippet' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -98,7 +108,9 @@ describe('bx-code-snippet', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-code-snippet')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-code-snippet' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });

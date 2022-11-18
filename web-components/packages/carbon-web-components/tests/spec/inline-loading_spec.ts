@@ -24,7 +24,9 @@ describe('bx-inline-loading', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-inline-loading' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -37,7 +39,9 @@ describe('bx-inline-loading', function () {
         ) as unknown as BXInlineLoading
       ).status = undefined!;
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-inline-loading' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -50,7 +54,9 @@ describe('bx-inline-loading', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-inline-loading' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -63,7 +69,9 @@ describe('bx-inline-loading', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-inline-loading' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -76,7 +84,9 @@ describe('bx-inline-loading', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-inline-loading')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-inline-loading' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });

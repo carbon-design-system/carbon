@@ -24,7 +24,7 @@ describe('bx-inline-notification', function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-notification')
+        document.body.querySelector('bx-inline-notification' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
@@ -43,7 +43,7 @@ describe('bx-inline-notification', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-notification')
+        document.body.querySelector('bx-inline-notification' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
   });

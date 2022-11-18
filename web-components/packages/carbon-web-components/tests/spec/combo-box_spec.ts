@@ -27,7 +27,9 @@ describe('bx-combo-box', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-combo-box')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-combo-box' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -48,7 +50,9 @@ describe('bx-combo-box', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-combo-box')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-combo-box' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });

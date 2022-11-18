@@ -66,9 +66,9 @@ describe('file-uploader', function () {
       it('should render with minimum attributes', async function () {
         render(fileUploaderShellTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader')).toMatchSnapshot(
-          { mode: 'shadow' }
-        );
+        expect(
+          document.body.querySelector('bx-file-uploader' as any)
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -80,9 +80,9 @@ describe('file-uploader', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-file-uploader')).toMatchSnapshot(
-          { mode: 'shadow' }
-        );
+        expect(
+          document.body.querySelector('bx-file-uploader' as any)
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
   });
@@ -93,7 +93,7 @@ describe('file-uploader', function () {
         render(dropContainerTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-file-drop-container')
+          document.body.querySelector('bx-file-drop-container' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -108,7 +108,7 @@ describe('file-uploader', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-file-drop-container')
+          document.body.querySelector('bx-file-drop-container' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -222,7 +222,7 @@ describe('file-uploader', function () {
         render(fileUploderItemTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-file-uploader-item')
+          document.body.querySelector('bx-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -237,7 +237,7 @@ describe('file-uploader', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-file-uploader-item')
+          document.body.querySelector('bx-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -248,7 +248,7 @@ describe('file-uploader', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-file-uploader-item')
+          document.body.querySelector('bx-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -278,7 +278,7 @@ describe('file-uploader', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-file-uploader-item')
+          document.body.querySelector('bx-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -294,7 +294,7 @@ describe('file-uploader', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-file-uploader-item')
+          document.body.querySelector('bx-file-uploader-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });

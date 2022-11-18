@@ -27,9 +27,11 @@ describe('bx-dropdown', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-dropdown')).toMatchSnapshot({
-        mode: 'shadow',
-      });
+      expect(document.body.querySelector('bx-dropdown' as any)).toMatchSnapshot(
+        {
+          mode: 'shadow',
+        }
+      );
     });
 
     it('should render with various attributes', async function () {
@@ -46,9 +48,11 @@ describe('bx-dropdown', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-dropdown')).toMatchSnapshot({
-        mode: 'shadow',
-      });
+      expect(document.body.querySelector('bx-dropdown' as any)).toMatchSnapshot(
+        {
+          mode: 'shadow',
+        }
+      );
     });
   });
 

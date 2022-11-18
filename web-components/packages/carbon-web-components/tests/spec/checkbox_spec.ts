@@ -38,9 +38,11 @@ describe('bx-checkbox', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-checkbox')).toMatchSnapshot({
-        mode: 'shadow',
-      });
+      expect(document.body.querySelector('bx-checkbox' as any)).toMatchSnapshot(
+        {
+          mode: 'shadow',
+        }
+      );
     });
 
     it('Should render with various attributes', async function () {
@@ -58,9 +60,11 @@ describe('bx-checkbox', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-checkbox')).toMatchSnapshot({
-        mode: 'shadow',
-      });
+      expect(document.body.querySelector('bx-checkbox' as any)).toMatchSnapshot(
+        {
+          mode: 'shadow',
+        }
+      );
     });
   });
 

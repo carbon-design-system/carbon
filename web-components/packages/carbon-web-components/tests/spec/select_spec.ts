@@ -42,7 +42,7 @@ describe('bx-select', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-select')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-select' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -63,7 +63,7 @@ describe('bx-select', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-select')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-select' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -78,7 +78,7 @@ describe('bx-select', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-select')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-select' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -235,7 +235,7 @@ describe('bx-select', function () {
       const elem = document.body.querySelector('bx-select');
       const { _attributeToProperty: origAttributeToProperty } = elem as any;
       let caught;
-      await new Promise((resolve) => {
+      await new Promise<void>((resolve) => {
         spyOn(BXSelect.prototype as any, '_attributeToProperty').and.callFake(
           function () {
             try {

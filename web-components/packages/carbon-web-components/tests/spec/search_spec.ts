@@ -27,7 +27,7 @@ describe('bx-search', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-search')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-search' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -48,7 +48,7 @@ describe('bx-search', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-search')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-search' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

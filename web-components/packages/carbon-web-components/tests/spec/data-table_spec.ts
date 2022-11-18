@@ -106,7 +106,7 @@ describe('data-table', function () {
         render(batchActionTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-batch-actions')
+          document.body.querySelector('bx-table-batch-actions' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -120,7 +120,7 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-batch-actions')
+          document.body.querySelector('bx-table-batch-actions' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -134,7 +134,7 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-batch-actions')
+          document.body.querySelector('bx-table-batch-actions' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -196,7 +196,7 @@ describe('data-table', function () {
         render(headerCellTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-header-cell')
+          document.body.querySelector('bx-table-header-cell' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -211,7 +211,7 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-header-cell')
+          document.body.querySelector('bx-table-header-cell' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -356,7 +356,9 @@ describe('data-table', function () {
       it('should render with minimum attributes', async function () {
         render(rowTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-row')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-table-row' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -373,7 +375,9 @@ describe('data-table', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-table-row')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-table-row' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -442,7 +446,7 @@ describe('data-table', function () {
         render(expandRowTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-expand-row')
+          document.body.querySelector('bx-table-expand-row' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -460,7 +464,7 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-expand-row')
+          document.body.querySelector('bx-table-expand-row' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -572,7 +576,7 @@ describe('data-table', function () {
         render(toolbarSearchTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-toolbar-search')
+          document.body.querySelector('bx-table-toolbar-search' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -586,7 +590,7 @@ describe('data-table', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-table-toolbar-search')
+          document.body.querySelector('bx-table-toolbar-search' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });

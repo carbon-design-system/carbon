@@ -21,7 +21,9 @@ describe('bx-progress-step', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-progress-step')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-progress-step' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -39,7 +41,7 @@ describe('bx-progress-step', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-progress-step[state="complete"]')
+        document.body.querySelector('bx-progress-step[state="complete"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 

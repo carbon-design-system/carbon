@@ -21,7 +21,7 @@ describe('bx-link', function () {
     it('should render with minimum attributes', async function () {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -41,7 +41,7 @@ describe('bx-link', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -62,7 +62,7 @@ describe('bx-link', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

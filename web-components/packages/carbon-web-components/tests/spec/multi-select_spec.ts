@@ -27,7 +27,9 @@ describe('bx-multi-select', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-multi-select')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-multi-select' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -52,7 +54,9 @@ describe('bx-multi-select', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-multi-select')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-multi-select' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });

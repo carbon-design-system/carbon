@@ -20,7 +20,9 @@ describe('bx-copy-button', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-copy-button')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-copy-button' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -35,7 +37,9 @@ describe('bx-copy-button', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-copy-button')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-copy-button' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });

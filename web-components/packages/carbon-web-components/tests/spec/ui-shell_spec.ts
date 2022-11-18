@@ -149,6 +149,7 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerMenuButtonTemplate(), document.body);
         await Promise.resolve();
+        // @ts-ignore
         expect(
           document.body.querySelector('bx-header-menu-button')
         ).toMatchSnapshot({ mode: 'shadow' });
@@ -167,7 +168,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-menu-button')
+          document.body.querySelector('bx-header-menu-button' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -185,7 +186,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-menu-button')
+          document.body.querySelector('bx-header-menu-button' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -208,7 +209,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerMenuTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-menu')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-header-menu' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -223,7 +226,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-menu')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-header-menu' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -272,7 +277,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerNameTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-name')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-header-name' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -283,11 +290,14 @@ describe('ui-shell', function () {
             href: 'about:blank',
             prefix: 'prefix-foo',
           }),
+          // @ts-ignore
           x`x`,
-          document.body
+          document.body as any
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-name')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-header-name' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -299,7 +309,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(headerNavTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-nav')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-header-nav' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -312,7 +324,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-header-nav')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-header-nav' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -325,7 +339,7 @@ describe('ui-shell', function () {
         render(headerNavItemTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-nav-item')
+          document.body.querySelector('bx-header-nav-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -338,7 +352,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-nav-item')
+          document.body.querySelector('bx-header-nav-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -349,9 +363,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(sideNavLinkTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-link')).toMatchSnapshot(
-          { mode: 'shadow' }
-        );
+        expect(
+          document.body.querySelector('bx-side-nav-link' as any)
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -365,9 +379,9 @@ describe('ui-shell', function () {
         );
         await Promise.resolve(); // First update cycle
         await Promise.resolve(); // Update cycle upon `slotchange` event
-        expect(document.body.querySelector('bx-side-nav-link')).toMatchSnapshot(
-          { mode: 'shadow' }
-        );
+        expect(
+          document.body.querySelector('bx-side-nav-link' as any)
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
   });
@@ -453,9 +467,9 @@ describe('ui-shell', function () {
       it('should render with minimum attributes', async function () {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot(
-          { mode: 'shadow' }
-        );
+        expect(
+          document.body.querySelector('bx-side-nav-menu' as any)
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should render with various attributes', async function () {
@@ -468,9 +482,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot(
-          { mode: 'shadow' }
-        );
+        expect(
+          document.body.querySelector('bx-side-nav-menu' as any)
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
 
       it('should support collapsing side nav menu upon parent side nav is collapsed as rail', async function () {
@@ -483,9 +497,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-side-nav-menu')).toMatchSnapshot(
-          { mode: 'shadow' }
-        );
+        expect(
+          document.body.querySelector('bx-side-nav-menu' as any)
+        ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
@@ -559,7 +573,7 @@ describe('ui-shell', function () {
         render(sideNavMenuItemTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-side-nav-menu-item')
+          document.body.querySelector('bx-side-nav-menu-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -573,7 +587,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-side-nav-menu-item')
+          document.body.querySelector('bx-side-nav-menu-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });

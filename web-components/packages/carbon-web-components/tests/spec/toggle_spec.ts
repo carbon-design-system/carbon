@@ -38,7 +38,7 @@ describe('bx-toggle', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-toggle')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-toggle' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -59,7 +59,7 @@ describe('bx-toggle', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-toggle')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-toggle' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

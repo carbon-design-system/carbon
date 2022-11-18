@@ -26,7 +26,9 @@ describe('bx-pagination', function () {
     it('should render <bx-pagination> with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-pagination')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-pagination' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -41,7 +43,9 @@ describe('bx-pagination', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-pagination')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-pagination' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -51,7 +55,7 @@ describe('bx-pagination', function () {
       await Promise.resolve(); // Update cycle for `<bx-pagination>`
       await Promise.resolve(); // Update cycle for `<bx-page-sizes-select>`
       expect(
-        document.body.querySelector('bx-page-sizes-select')
+        document.body.querySelector('bx-page-sizes-select' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
@@ -59,7 +63,9 @@ describe('bx-pagination', function () {
       render(template({ total: 100 }), document.body);
       await Promise.resolve(); // Update cycle for `<bx-pagination>`
       await Promise.resolve(); // Update cycle for `<bx-pages-select>`
-      expect(document.body.querySelector('bx-pages-select')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-pages-select' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });

@@ -63,7 +63,7 @@ describe('bx-input', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-input')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-input' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

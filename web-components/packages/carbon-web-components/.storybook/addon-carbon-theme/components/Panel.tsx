@@ -1,7 +1,8 @@
+// @ts-nocheck
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -18,7 +19,7 @@ import { CURRENT_THEME } from '../shared';
 const Panel = ({ api, active }) => {
   const [currentTheme, setCurrentTheme] = useState('white');
   const handleChange = useCallback(
-    event => {
+    (event) => {
       const { value } = event.target;
       setCurrentTheme(value);
       api.getChannel().emit(CURRENT_THEME, value);
@@ -29,7 +30,13 @@ const Panel = ({ api, active }) => {
     active && (
       <Form translate="yes">
         <Form.Field label="Select Carbon theme:">
-          <Form.Select translate="yes" name="carbon-theme" value={currentTheme} onChange={handleChange} size="flex">
+          <Form.Select
+            translate="yes"
+            name="carbon-theme"
+            value={currentTheme}
+            onChange={handleChange}
+            size="flex"
+          >
             <option key="white" value="white">
               white
             </option>

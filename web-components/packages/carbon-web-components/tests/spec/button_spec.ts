@@ -86,7 +86,7 @@ describe('bx-btn', function () {
     it('should render with minimum attributes for <button>', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -103,7 +103,7 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -111,7 +111,7 @@ describe('bx-btn', function () {
     it('should render with minimum attributes for <a>', async function () {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -133,7 +133,7 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -156,7 +156,7 @@ describe('bx-btn', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-btn')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-btn' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

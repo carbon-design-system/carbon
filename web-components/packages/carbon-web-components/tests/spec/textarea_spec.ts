@@ -57,9 +57,11 @@ describe('bx-textarea', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-textarea')).toMatchSnapshot({
-        mode: 'shadow',
-      });
+      expect(document.body.querySelector('bx-textarea' as any)).toMatchSnapshot(
+        {
+          mode: 'shadow',
+        }
+      );
     });
 
     it('Should reflect value in DOM', async function () {

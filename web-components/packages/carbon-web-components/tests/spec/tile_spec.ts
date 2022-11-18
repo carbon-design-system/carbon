@@ -49,7 +49,7 @@ describe('bx-tile', function () {
         render(clickableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-clickable-tile')
+          document.body.querySelector('bx-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -69,7 +69,7 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-clickable-tile')
+          document.body.querySelector('bx-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -90,7 +90,7 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-clickable-tile')
+          document.body.querySelector('bx-clickable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -102,7 +102,7 @@ describe('bx-tile', function () {
         render(expandableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-expandable-tile')
+          document.body.querySelector('bx-expandable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -116,7 +116,7 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-expandable-tile')
+          document.body.querySelector('bx-expandable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -189,7 +189,9 @@ describe('bx-tile', function () {
       it('should render with minimum attributes', async function () {
         render(singleSelectableTemplate(), document.body);
         await Promise.resolve();
-        expect(document.body.querySelector('bx-radio-tile')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-radio-tile' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -205,7 +207,9 @@ describe('bx-tile', function () {
           document.body
         );
         await Promise.resolve();
-        expect(document.body.querySelector('bx-radio-tile')).toMatchSnapshot({
+        expect(
+          document.body.querySelector('bx-radio-tile' as any)
+        ).toMatchSnapshot({
           mode: 'shadow',
         });
       });
@@ -234,7 +238,7 @@ describe('bx-tile', function () {
         render(multiSelectableTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-selectable-tile')
+          document.body.querySelector('bx-selectable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -251,7 +255,7 @@ describe('bx-tile', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-selectable-tile')
+          document.body.querySelector('bx-selectable-tile' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });

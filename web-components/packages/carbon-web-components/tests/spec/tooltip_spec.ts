@@ -8,7 +8,6 @@
  */
 
 import { html, render, TemplateResult } from 'lit-html';
-
 import ResizeObserver from 'resize-observer-polyfill';
 import BXTooltip from '../../src/components/tooltip/tooltip';
 import BXTooltipBody from '../../src/components/tooltip/tooltip-body';
@@ -174,7 +173,7 @@ describe('bx-tooltip-definition', function () {
       render(definitionTemplate(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-tooltip-definition')
+        document.body.querySelector('bx-tooltip-definition' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
@@ -189,7 +188,7 @@ describe('bx-tooltip-definition', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-tooltip-definition')
+        document.body.querySelector('bx-tooltip-definition' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
   });
@@ -204,7 +203,9 @@ describe('bx-tooltip-icon', function () {
     it('Should render with minimum attributes', async function () {
       render(iconTemplate(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-tooltip-icon')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-tooltip-icon' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -219,7 +220,9 @@ describe('bx-tooltip-icon', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-tooltip-icon')).toMatchSnapshot({
+      expect(
+        document.body.querySelector('bx-tooltip-icon' as any)
+      ).toMatchSnapshot({
         mode: 'shadow',
       });
     });

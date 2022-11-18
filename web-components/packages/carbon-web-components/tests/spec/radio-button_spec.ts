@@ -35,7 +35,7 @@ describe('bx-radio-button', function () {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-radio-button[value="staging"]')
+        document.body.querySelector('bx-radio-button[value="staging"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
@@ -58,7 +58,7 @@ describe('bx-radio-button', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-radio-button[value="staging"]')
+        document.body.querySelector('bx-radio-button[value="staging"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
   });

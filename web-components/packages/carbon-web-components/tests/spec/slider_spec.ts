@@ -33,7 +33,7 @@ describe('bx-slider', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-slider')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-slider' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -52,7 +52,7 @@ describe('bx-slider', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-slider')).toMatchSnapshot({
+      expect(document.body.querySelector('bx-slider' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
