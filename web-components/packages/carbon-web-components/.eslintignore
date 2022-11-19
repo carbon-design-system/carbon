@@ -1,9 +1,0 @@
-*.d.ts
-.yarn
-dist
-docs/js
-es
-lib
-node_modules
-tests/coverage
-examples
