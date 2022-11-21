@@ -1,0 +1,313 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Data table
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/data-table)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/data-table)
+
+## Getting started
+
+Here's a quick example to get you started.
+
+Data table in `carbon-web-components` focuses on primitives that constructs table UI, consisting of the following:
+
+| Tag                      | Description     | HTML tag counterpart |
+| ------------------------ | --------------- | -------------------- |
+| `<bx-data-table>`        | The container   | N/A                  |
+| `<bx-table>`             | The table       | `<table>`            |
+| `<bx-table-head>`        | The header      | `<thead>`            |
+| `<bx-table-header-row>`  | The header row  | `<tr>` in `<thead>`  |
+| `<bx-table-header-cell>` | The header cell | `<th>`               |
+| `<bx-table-body>`        | The header body | `<tbody>`            |
+| `<bx-table-row>`         | The header row  | `<tr>` in `<tbody>`  |
+| `<bx-table-cell>`        | The header cell | `<td>`               |
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/data-table/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['data-table'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-data-table>
+  <bx-table>
+    <bx-table-head>
+      <bx-table-header-row>
+        <bx-table-header-cell>Foo</bx-table-header-cell>
+        <bx-table-header-cell>Bar</bx-table-header-cell>
+        <bx-table-header-cell>Baz</bx-table-header-cell>
+      </bx-table-header-row>
+    </bx-table-head>
+    <bx-table-body>
+      <bx-table-row>
+        <bx-table-cell>Foo1</bx-table-cell>
+        <bx-table-cell>Bar1</bx-table-cell>
+        <bx-table-cell>Baz1</bx-table-cell>
+      </bx-table-row>
+      <bx-table-row>
+        <bx-table-cell>Foo2</bx-table-cell>
+        <bx-table-cell>Bar2</bx-table-cell>
+        <bx-table-cell>Baz2</bx-table-cell>
+      </bx-table-row>
+      <bx-table-row>
+        <bx-table-cell>Foo3</bx-table-cell>
+        <bx-table-cell>Bar3</bx-table-cell>
+        <bx-table-cell>Baz3</bx-table-cell>
+      </bx-table-row>
+    </bx-table-body>
+  </bx-table>
+</bx-data-table>
+```
+
+## Row selection
+
+Adding `selection-name` attribute to `<bx-table-row>`/`<bx-table-header-row>` shows the selection UI in the table row.
+
+The logic of row selection needs to be handled on by the application code. When user attempts to change row selection, the following events fire:
+
+| Element                 | Event                           | Description                                                   |
+| ----------------------- | ------------------------------- | ------------------------------------------------------------- |
+| `<bx-table-row>`        | `bx-table-row-change-selection` | Indicates user-initiated change in selection of a single row. |
+| `<bx-table-header-row>` | `bx-table-change-selection-all` | Indicates user-initiated change in selection of all rows.     |
+
+Both of above events have the following properties in the event details:
+
+| Property   | Description              |
+| ---------- | ------------------------ |
+| `selected` | The new selection state. |
+
+Both of above events bubble and are cancelable. Canceling those events mean canceling change in selection.
+
+Application code should listen to those events update its internal state of table rows. To do so, it's convenient to add a `data-` attribte to each table rows so the delegated event handler can see which row the events are from.
+
+Here's an example of [`lit-html`](https://lit-html.polymer-project.org). Note that those events are native DOM events, and thus something like `document.addEventListener('bx-table-row-change-selection', event => { ... })` works, too:
+
+```javascript
+/**
+ * Handles an event to change in selection of rows, fired from `<bx-table-row>`,
+ * to update application's row selection states.
+ * @param {CustomEvent} event The event.
+ */
+const handleChangeSelection = event => {
+  if (!event.defaultPrevented) {
+    rows = this.rows.map(row => {
+      // The row ID you set to `<bx-table-row>` the event is fired on
+      const targetRowId = event.target.dataset.rowId;
+      return targetRowId !== row.id
+        ? row
+        : {
+            ...row,
+            selected: event.detail.selected,
+          };
+    });
+  }
+};
+
+/**
+ * Handles an event to change in selection of all rows, fired from `<bx-table-header-row>`,
+ * to update application's row selection states.
+ * @param {CustomEvent} event The event.
+ */
+const handleChangeSelectionAll = event => {
+  if (!event.defaultPrevented) {
+    rows = this.rows.map(row => ({
+      ...row,
+      selected: event.detail.selected,
+    }));
+  }
+};
+
+...
+
+html`
+  <bx-data-table
+    @bx-table-row-change-selection=${handleChangeSelection}
+    @bx-table-change-selection-all=${handleChangeSelectionAll}
+  >
+    <bx-table>
+      <bx-table-head>
+        <bx-table-header-row ?selected=${rows.every(row => row.selected)} selection-name="my-row-selection-all">
+          <bx-table-header-cell>Foo</bx-table-header-cell>
+          <bx-table-header-cell>Bar</bx-table-header-cell>
+          <bx-table-header-cell>Baz</bx-table-header-cell>
+        </bx-table-header-row>
+      </bx-table-head>
+      <bx-table-body>
+        ${rows.map(
+          row => html`
+            <bx-table-row ?selected=${row.selected} selection-name="${`my-row-selection-${row.id}`}" data-row-id="${row.id}">
+              <bx-table-cell>${row.foo}</bx-table-cell>
+              <bx-table-cell>${row.bar}</bx-table-cell>
+              <bx-table-cell>${row.baz}</bx-table-cell>
+            </bx-table-row>
+          `
+        )}
+      </bx-table-body>
+    </bx-table>
+  </bx-data-table>
+`;
+```
+
+## Sorting
+
+Adding `sort-direction` attribute to `<bx-table-header-cell>` shows the sorting UI in the table header cell.
+
+The logic of sorting needs to be handled on by the application code. When user attempts to change sorting, `bx-table-header-cell-sort` event is fired, with the following properties in the event details:
+
+| Property           | Description             |
+| ------------------ | ----------------------- |
+| `oldSortDirection` | The old sort direction. |
+| `sortDirection`    | The new sort direction. |
+
+`bx-table-header-cell-sort` event bubbles and is cancelable. Canceling `bx-table-header-cell-sort` event means canceling change in sort direction.
+
+Application code should listen to those events update its internal state of sorting. An example of the logic needed is available in our codesandbox example above. To do so, it's convenient to add a `data-` attribte to each table header cells so the delegated event handler can see which table column the events are from.
+
+Here's an example of [`lit-html`](https://lit-html.polymer-project.org). Note that those events are native DOM events, and thus something like `document.addEventListener('bx-table-header-cell-sort', event => { ... })` works, too:
+
+```javascript
+/**
+ * Handles an event to sort rows, fired from `<bx-table-header-cell>`, to update application's sorting state.
+ * @param {CustomEvent} event The event.
+ */
+const handleChangeSort = event => {
+  if (!defaultPrevented) {
+    // Changes the sorting state upon user gesture
+    sortInfo = {
+      columnId: event.target.dataset.columnId,
+      direction: event.detail.direction,
+    };
+  }
+};
+
+...
+
+const collator = new Intl.Collator('en'); // Use the locale user is on
+
+/**
+ * Rows sorted by application's sorting state.
+ */
+const sortedRows = rows.slice().sort((lhs, rhs) => {
+  const lhsValue = lhs[sortInfo.columnId];
+  const rhsValue = rhs[sortInfo.columnId];
+  return (sortInfo.direction === 'ascending' ? 1 : -1) * collator.compare(lhsValue, rhsValue);
+});
+
+html`
+  <bx-data-table
+    @bx-table-header-cell-sort=${handleChangeSort}
+  >
+    <bx-table>
+      <bx-table-head>
+        <bx-table-header-row>
+          <bx-table-header-cell data-column-id="foo">Foo</bx-table-header-cell>
+          <bx-table-header-cell data-column-id="bar">Bar</bx-table-header-cell>
+          <bx-table-header-cell data-column-id="baz">Baz</bx-table-header-cell>
+        </bx-table-header-row>
+      </bx-table-head>
+      <bx-table-body>
+        ${sortedRows.map(
+          row => html`
+            <bx-table-row>
+              <bx-table-cell>${row.foo}</bx-table-cell>
+              <bx-table-cell>${row.bar}</bx-table-cell>
+              <bx-table-cell>${row.baz}</bx-table-cell>
+            </bx-table-row>
+          `
+        )}
+      </bx-table-body>
+    </bx-table>
+  </bx-data-table>
+`;
+```
+
+## Skeleton
+
+For the skeleton variation, utilize `<bx-table-header-cell-skeleton>`.
+
+```html
+<bx-table size="short">
+  <bx-table-head>
+    <bx-table-header-row>
+      <bx-table-header-cell-skeleton>Name</bx-table-header-cell-skeleton>
+      <bx-table-header-cell-skeleton>Protocol</bx-table-header-cell-skeleton>
+      <bx-table-header-cell-skeleton>Port</bx-table-header-cell-skeleton>
+      <bx-table-header-cell-skeleton>Rule</bx-table-header-cell-skeleton>
+      <bx-table-header-cell-skeleton>Attached Groups</bx-table-header-cell-skeleton>
+      <bx-table-header-cell-skeleton>Status</bx-table-header-cell-skeleton>
+    </bx-table-header-row>
+  </bx-table-head>
+  <bx-table-body color-scheme="zebra">
+    <bx-table-row>
+      <bx-table-cell-skeleton></bx-table-cell-skeleton>
+      <bx-table-cell-skeleton></bx-table-cell-skeleton>
+      <bx-table-cell-skeleton></bx-table-cell-skeleton>
+      <bx-table-cell-skeleton></bx-table-cell-skeleton>
+      <bx-table-cell-skeleton></bx-table-cell-skeleton>
+      <bx-table-cell-skeleton></bx-table-cell-skeleton>
+    </bx-table-row>
+    <bx-table-row>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+    </bx-table-row>
+    <bx-table-row>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+      <bx-table-cell></bx-table-cell>
+    </bx-table-row>
+  </bx-table-body>
+</bx-table>
+```
+
+## Attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-table sort>`) and `false` means not setting the attribute (e.g. `<bx-table>` without `sort` attribute).
+
+### `<bx-table>`
+
+<Props of="bx-table" />
+
+### `<bx-table-header-row>`
+
+<Props of="bx-table-header-row" />
+
+### `<bx-table-header-cell>`
+
+<Props of="bx-table-header-cell" />
+
+### `<bx-table-body>`
+
+<Props of="bx-table-body" />
+
+### `<bx-table-row>`
+
+<Props of="bx-table-row" />
+
+### `<bx-table-batch-actions>`
+
+<Props of="bx-table-batch-actions" />
+
+### `<bx-table-toolbar-content>`
+
+<Props of="bx-table-toolbar-content" />
+
+### `<bx-table-toolbar-search>`
+
+<Props of="bx-table-toolbar-search" />

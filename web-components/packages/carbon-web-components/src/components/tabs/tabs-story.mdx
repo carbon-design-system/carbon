@@ -1,0 +1,101 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Tabs
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/tabs)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/tabs)
+
+Tabs are used to quickly navigate between views within the same context.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/tabs/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['tabs'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-tabs trigger-content="Select an item" value="staging">
+  <bx-tab id="tab-all" target="panel-all" value="all">Option 1</bx-tab>
+  <bx-tab id="tab-cloudFoundry" target="panel-cloudFoundry" disabled value="cloudFoundry">Option 2</bx-tab>
+  <bx-tab id="tab-staging" target="panel-staging" value="staging">Option 3</bx-tab>
+  <bx-tab id="tab-dea" target="panel-dea" value="dea">Option 4</bx-tab>
+  <bx-tab id="tab-router" target="panel-router" value="router">Option 5</bx-tab>
+</bx-tabs>
+<div class="bx-ce-demo-devenv--tab-panels">
+  <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
+    <h4>Content for option 1</h4>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+  <div id="panel-cloudFoundry" role="tabpanel" aria-labelledby="tab-cloudFoundry" hidden>
+    <h4>Content for option 2</h4>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+  <div id="panel-staging" role="tabpanel" aria-labelledby="tab-staging" hidden>
+    <h4>Content for option 3</h4>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+  <div id="panel-dea" role="tabpanel" aria-labelledby="tab-dea" hidden>
+    <h4>Content for option 4</h4>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+  <div id="panel-router" role="tabpanel" aria-labelledby="tab-router" hidden>
+    <h4>Content for option 5</h4>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+      Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
+  </div>
+</div>
+```
+
+## Skeleton
+
+For the skeleton variation, utilize `<bx-tabs-skeleton>` and `<bx-tab-skeleton>`.
+
+```html
+<bx-tabs-skeleton>
+  <bx-tab-skeleton></bx-tab-skeleton>
+  <bx-tab-skeleton></bx-tab-skeleton>
+  <bx-tab-skeleton></bx-tab-skeleton>
+  <bx-tab-skeleton></bx-tab-skeleton>
+  <bx-tab-skeleton></bx-tab-skeleton>
+</bx-tabs-skeleton>
+```
+
+## `<bx-tabs>` attributes, properties and events
+
+Note: `bx-content-switcher-*` events are not fired from `<bx-tabs>`.
+
+<Props of="bx-tabs" />
+
+## `<bx-tab>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-tab disabled>`) and `false` means not setting the attribute (e.g. `<bx-tab>` without `disabled` attribute).
+
+<Props of="bx-tab" />

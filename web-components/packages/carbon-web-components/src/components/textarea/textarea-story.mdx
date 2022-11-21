@@ -1,0 +1,70 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Textarea
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/textarea)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/textarea)
+
+Text inputs enable the user to interact with and input content and data. This component can be used for long and short form entries.
+
+Textarea is a multi-line variant of text input.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/textarea/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['textarea'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-textarea placeholder="Optional placeholder text" rows="4" cols="50">
+  <span slot="label-text">Label text</span>
+  <span slot="helper-text">Optional helper text</span>
+  <span slot="validity-message">Something isn't right</span>
+</bx-textarea>
+```
+
+## Form item
+
+If the textarea is part of a form, make sure to import and wrap the textarea with `<bx-form-item>`
+
+```javascript
+import 'carbon-web-components/es/components/form/index.js';
+```
+
+```html
+<bx-form-item>
+  <bx-textarea placeholder="Optional placeholder text" rows="4" cols="50">
+    <span slot="label-text">Label text</span>
+    <span slot="helper-text">Optional helper text</span>
+    <span slot="validity-message">Something isn't right</span>
+  </bx-textarea>
+</bx-form-item>
+```
+
+## Skeleton
+
+For the skeleton variation, utilize `<bx-textarea-skeleton>`.
+
+```html
+<bx-textarea-skeleton></bx-textarea-skeleton>
+```
+
+## `<bx-textarea>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-textarea autofocus>`) and `false` means not setting the attribute (e.g. `<bx-textarea>` without `autofocus` attribute).
+
+<Props of="bx-textarea" />

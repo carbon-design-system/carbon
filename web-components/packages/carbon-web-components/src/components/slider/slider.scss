@@ -1,0 +1,36 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/slider/slider';
+
+:host(#{$prefix}-slider) {
+  outline: none;
+
+  .#{$prefix}--slider {
+    transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+  }
+
+  .#{$prefix}-ce--slider__filled-track-container {
+    transform: rotate(0) #{'/*rtl:rotate(180deg)*/'};
+  }
+
+  .#{$prefix}--slider__thumb {
+    transform: translate(-50%, -50%) #{'/*rtl:ignore*/'};
+  }
+
+  .#{$prefix}--slider__thumb:focus
+    ~ .#{$prefix}-ce--slider__filled-track-container
+    .#{$prefix}--slider__filled-track {
+    background-color: $interactive-04;
+  }
+}
+
+:host(#{$prefix}-slider-input) {
+  outline: none;
+}

@@ -1,0 +1,148 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/ui-shell/side-nav';
+
+:host(#{$prefix}-side-nav) {
+  @extend .#{$prefix}--side-nav;
+  @extend .#{$prefix}--side-nav--ux;
+  @extend .#{$prefix}--side-nav__navigation;
+
+  top: 0;
+}
+
+:host(#{$prefix}-side-nav[collapse-mode='fixed']) {
+  // TODO: Consider making `@extend .#{$prefix}--side-nav--fixed` work, possibly caused by `:not()` styles
+  width: mini-units(32);
+}
+
+:host(#{$prefix}-side-nav[collapse-mode='rail']) {
+  width: mini-units(6);
+
+  &:hover {
+    width: mini-units(32);
+  }
+}
+
+:host(#{$prefix}-side-nav[expanded]),
+:host(#{$prefix}-side-nav[collapse-mode][expanded]) {
+  @extend .#{$prefix}--side-nav--expanded;
+}
+
+:host(#{$prefix}-side-nav[usage-mode='header-nav']),
+:host(#{$prefix}-side-nav[collapse-mode][usage-mode='header-nav']) {
+  width: 0;
+}
+
+:host(#{$prefix}-side-nav[expanded][usage-mode='header-nav']),
+:host(#{$prefix}-side-nav[collapse-mode][expanded][usage-mode='header-nav']) {
+  @include carbon--breakpoint-down('lg') {
+    width: mini-units(32);
+  }
+}
+
+:host(#{$prefix}-side-nav-items) {
+  @extend .#{$prefix}--side-nav__items;
+}
+
+:host(#{$prefix}-side-nav-link) {
+  @extend .#{$prefix}--side-nav__item;
+
+  display: block;
+  outline: none;
+  width: auto;
+  height: auto;
+
+  .#{$prefix}--side-nav__icon {
+    color: $shell-side-nav-text-01;
+
+    &[hidden] {
+      display: none;
+    }
+  }
+}
+
+:host(#{$prefix}-side-nav-divider) {
+  @extend .#{$prefix}--side-nav__divider;
+
+  display: block;
+}
+
+:host(#{$prefix}-side-nav-menu) {
+  @extend .#{$prefix}--side-nav__item;
+
+  display: block;
+  outline: none;
+  width: auto;
+  height: auto;
+
+  .#{$prefix}--side-nav__icon[hidden] {
+    display: none;
+  }
+}
+
+:host(#{$prefix}-side-nav-menu[active]) {
+  @extend .#{$prefix}--side-nav__item--active;
+
+  background-color: $shell-side-nav-bg-04;
+  color: $ibm-color__gray-100;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    background-color: $shell-side-nav-accent-01;
+  }
+}
+
+:host(#{$prefix}-side-nav-menu[active][expanded]) {
+  background-color: inherit;
+  color: inherit;
+  position: inherit;
+
+  &::before {
+    content: none;
+  }
+}
+
+:host(#{$prefix}-side-nav-menu[has-icon]) {
+  @extend .#{$prefix}--side-nav__item--icon;
+}
+
+:host(#{$prefix}-side-nav-menu-item) {
+  @extend .#{$prefix}--side-nav__menu-item;
+
+  display: block;
+  outline: none;
+  width: auto;
+  height: auto;
+
+  a.#{$prefix}--side-nav__link {
+    height: mini-units(4);
+    min-height: mini-units(4);
+    padding-left: mini-units(4);
+    font-weight: 400;
+  }
+}
+
+:host(#{$prefix}-side-nav-menu-item[parent-has-icon])
+  a.#{$prefix}--side-nav__link {
+  padding-left: mini-units(9);
+}
+
+:host(#{$prefix}-side-nav-item) .#{$prefix}--side-nav__link:hover,
+:host(#{$prefix}-side-nav-menu) .#{$prefix}--side-nav__submenu:hover,
+:host(#{$prefix}-side-nav-menu-item) .#{$prefix}--side-nav__link:hover {
+  background-color: $shell-side-nav-bg-04;
+  color: $ibm-color__gray-100;
+}

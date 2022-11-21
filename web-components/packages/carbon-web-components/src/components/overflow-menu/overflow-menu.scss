@@ -1,0 +1,99 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+
+:host(#{$prefix}-overflow-menu),
+:host(#{$prefix}-breadcrumb-overflow-menu) {
+  @extend .#{$prefix}--overflow-menu;
+}
+
+:host(#{$prefix}-overflow-menu)[size='sm'],
+:host(#{$prefix}-breadcrumb-overflow-menu)[size='sm'] {
+  @extend .#{$prefix}--overflow-menu--sm;
+}
+
+:host(#{$prefix}-overflow-menu)[size='xl'],
+:host(#{$prefix}-breadcrumb-overflow-menu)[size='xl'] {
+  @extend .#{$prefix}--overflow-menu--xl;
+}
+
+:host(#{$prefix}-overflow-menu[disabled]),
+:host(#{$prefix}-breadcrumb-overflow-menu[disabled]) {
+  cursor: not-allowed;
+
+  svg {
+    fill: $disabled;
+    cursor: not-allowed;
+  }
+}
+
+:host(#{$prefix}-overflow-menu[disabled]:hover),
+:host(#{$prefix}-breadcrumb-overflow-menu[disabled]:hover) {
+  background-color: transparent;
+}
+
+:host(#{$prefix}-overflow-menu[open]),
+:host(#{$prefix}-breadcrumb-overflow-menu[open]) {
+  background-color: $ui-01;
+  transition: none;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
+}
+
+:host(#{$prefix}-overflow-menu[color-scheme='light'][open]),
+:host(#{$prefix}-breadcrumb-overflow-menu[color-scheme='light'][open]) {
+  background-color: $ui-02;
+}
+
+:host(#{$prefix}-overflow-menu-body) {
+  @extend .#{$prefix}--overflow-menu-options;
+
+  &::after {
+    @extend .#{$prefix}--overflow-menu-options,
+      [data-floating-menu-direction='bottom'],
+      ::after;
+  }
+}
+
+:host(#{$prefix}-overflow-menu-body[direction='top']) {
+  margin-top: 0;
+  margin-bottom: $spacing-2xs;
+
+  &::after {
+    @extend .#{$prefix}--overflow-menu-options,
+      [data-floating-menu-direction='top'],
+      ::after;
+  }
+}
+
+:host(#{$prefix}-overflow-menu-body[open]) {
+  @extend .#{$prefix}--overflow-menu-options--open;
+}
+
+:host(#{$prefix}-overflow-menu-body[color-scheme='light']) {
+  background-color: $ui-02;
+
+  &::after {
+    background-color: $ui-02;
+  }
+}
+
+:host(#{$prefix}-overflow-menu-item) {
+  @extend .#{$prefix}--overflow-menu-options__option;
+
+  outline: none;
+}
+
+:host(#{$prefix}-overflow-menu-item[danger]) {
+  @extend .#{$prefix}--overflow-menu-options__option--danger;
+}
+
+:host(#{$prefix}-overflow-menu-item[disabled]) {
+  @extend .#{$prefix}--overflow-menu-options__option--disabled;
+}

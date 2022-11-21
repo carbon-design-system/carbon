@@ -1,0 +1,129 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+// `@include reset` with `variable-exists(css--reset) == false or $css--reset == false` breaks the dotted underline
+// TODO: Determine how to deal with `$css--reset` across components
+$css--reset: true !default;
+// Caret's original size was 13.75px square
+$caret-size: 6.875px;
+$caret-horizontal-position: calc(#{$caret-size * (-1)} + 1px);
+
+@import 'carbon-components/scss/globals/scss/css--helpers';
+@import 'carbon-components/scss/globals/scss/layout';
+@import 'carbon-components/scss/components/tooltip/tooltip';
+
+:host(#{$prefix}-tooltip) {
+  @extend .#{$prefix}--tooltip__trigger;
+}
+
+:host(#{$prefix}-tooltip-body) {
+  @extend .#{$prefix}--tooltip;
+
+  ::slotted(#{$prefix}-tooltip-footer) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  ::slotted(p) {
+    @include type-style('body-short-01');
+
+    text-align: left;
+  }
+}
+
+:host(#{$prefix}-tooltip-body[direction='top']) {
+  margin-bottom: $spacing-03;
+
+  .#{$prefix}--tooltip__caret {
+    top: auto;
+    bottom: rem(-6px);
+    transform: rotate(180deg);
+  }
+}
+
+:host(#{$prefix}-tooltip-body[direction='right']) {
+  margin-left: $spacing-03;
+
+  .#{$prefix}--tooltip__caret {
+    right: auto;
+    left: $caret-horizontal-position;
+    // Adjust for change in Y position as caret rotates
+    transform: rotate(270deg) translate(25%, -50%);
+  }
+}
+
+:host(#{$prefix}-tooltip-body[direction='bottom']) {
+  margin-top: $spacing-03;
+}
+
+:host(#{$prefix}-tooltip-body[direction='left']) {
+  margin-right: $spacing-03;
+
+  .#{$prefix}--tooltip__caret {
+    right: $caret-horizontal-position;
+    left: auto;
+    // Adjust for change in Y position as caret rotates
+    transform: rotate(90deg) translate(-25%, -50%);
+  }
+}
+
+:host(#{$prefix}-tooltip-body[direction='top']),
+:host(#{$prefix}-tooltip-body[direction='bottom']) {
+  &[alignment='start'] {
+    .#{$prefix}--tooltip__caret {
+      margin-left: rem(17px);
+    }
+  }
+
+  &[alignment='end'] {
+    .#{$prefix}--tooltip__caret {
+      margin-right: rem(17px);
+    }
+  }
+}
+
+:host(#{$prefix}-tooltip-body[direction='left']),
+:host(#{$prefix}-tooltip-body[direction='right']) {
+  .#{$prefix}--tooltip__caret {
+    top: 50%;
+  }
+
+  &[alignment='start'] {
+    .#{$prefix}--tooltip__caret {
+      top: calc($caret-size + rem(17px));
+    }
+  }
+
+  &[alignment='end'] {
+    .#{$prefix}--tooltip__caret {
+      top: auto;
+      bottom: rem(17px);
+    }
+  }
+}
+
+:host(#{$prefix}-tooltip-body[open]) {
+  @extend .#{$prefix}--tooltip--shown;
+}
+
+:host(#{$prefix}-tooltip-definition) {
+  @extend .#{$prefix}--tooltip--definition;
+  @extend .#{$prefix}--tooltip--a11y;
+
+  outline: none;
+}
+
+:host(#{$prefix}-tooltip-icon) {
+  outline: none;
+
+  .#{$prefix}--tooltip__trigger:focus ::slotted(svg) {
+    outline: 1px solid $focus;
+  }
+}

@@ -1,0 +1,66 @@
+<!--
+@license
+
+Copyright IBM Corp. 2019
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+    <!-- Production application should limit the CSS import here to @carbon/grid CSS and `carbon-components/scss/components/ui-shell/_content.scss` -->
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/carbon-components@10.17.0/css/carbon-components.min.css">
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <bx-header aria-label="IBM Platform Name">
+      <bx-header-name href="javascript:void 0" prefix="IBM">[Platform]</bx-header-name>
+      <bx-header-nav menu-bar-label="IBM [Platform]">
+        <bx-header-nav-item href="javascript:void 0">Link 1</bx-header-nav-item>
+        <bx-header-nav-item href="javascript:void 0">Link 2</bx-header-nav-item>
+        <bx-header-nav-item href="javascript:void 0">Link 3</bx-header-nav-item>
+        <bx-header-menu menu-label="Link 4" trigger-content="Link 4">
+          <bx-header-menu-item href="javascript:void 0">Sub-link 1</bx-header-menu-item>
+          <bx-header-menu-item href="javascript:void 0">Sub-link 2</bx-header-menu-item>
+          <bx-header-menu-item href="javascript:void 0">Sub-link 3</bx-header-menu-item>
+        </bx-header-menu>
+      </bx-header-nav>
+    </bx-header>
+    <main class="bx--content bx-ce-demo-theme-zoning--ui-shell-content">
+      <div class="bx--grid">
+        <div class="bx--row">
+          <div class="bx--col-lg-13">
+            <h2>
+              Theming and CSS scoping
+            </h2>
+            <p>
+              The color scheme of <code>carbon-web-components</code> components can be changed either by CSS custom properties (this
+              example) or by
+              <a target="_blank" href="https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/styling/custom-style">
+              creating inherited components with the static <code>styles</code> property changed</a>.
+              <br />
+              <br />
+              If you inspect the style of <code>&lt;footer&gt;</code> in this example, you'll find some Carbon theme custom
+              properties there are changed to ones of <code>g100</code> theme, and see the background color as well as the color
+              of <code>&lt;bx-btn&gt;</code> reflect such change.
+              <br />
+              <br />
+              As Shadow DOM (one of the Web Components specs that <code>carbon-web-components</code> uses) promises, styles that
+              <code>carbon-web-components</code> defines do not affect styles in your application.
+            </p>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <p>
+        <span>Have questions?</span>
+        <bx-btn kind="secondary">Nope!</bx-btn>
+        <bx-btn href="https://github.com/carbon-design-system/carbon-web-components/issues/new" target="_blank">Enter an issue</bx-btn>
+      </p>
+    </footer>
+  </body>
+</html>

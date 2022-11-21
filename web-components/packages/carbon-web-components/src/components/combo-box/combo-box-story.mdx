@@ -1,0 +1,68 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Combo box
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/combo-box)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/combo-box)
+
+Combo box realizes a notion of "filterable dropdown".
+By default, the dropdown displays a label when closed. When the user hovers over the label area, a text cursor will appear.
+The drawer opens on click (anywhere in the field) and the user can type to filter through the list of options below.
+Once the user begins typing, the close (X) icon will appear to the right of the label.
+This will clear any user-inputted text.
+Selecting an item from the dropdown will close the drawer and the selected option will replace the default label.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/combo-box/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['combo-box'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-combo-box helper-text="Optional helper text" label-text="Combo box title" trigger-content="Filter...">
+  <bx-combo-box-item value="all">Option 1</bx-combo-box-item>
+  <bx-combo-box-item value="cloudFoundry">Option 2</bx-combo-box-item>
+  <bx-combo-box-item value="staging">Option 3</bx-combo-box-item>
+  <bx-combo-box-item value="dea">Option 4</bx-combo-box-item>
+  <bx-combo-box-item value="router">Option 5</bx-combo-box-item>
+  <bx-combo-box-item value="support">Option 6</bx-combo-box-item>
+  <bx-combo-box-item value="services">Option 7</bx-combo-box-item>
+  <bx-combo-box-item value="products">Option 8</bx-combo-box-item>
+</bx-combo-box>
+```
+
+## Selection
+
+When user attempts to select a combo box item, `bx-combo-box-beingselected` event fires on `<bx-combo-box>`, which has the following properties in the event details:
+
+| Property | Description                               |
+| -------- | ----------------------------------------- |
+| `item`   | The `<bx-combo-box-item>` being selected. |
+
+`bx-combo-box-beingselected` bubbles and is cancelable. Canceling this event means canceling change in selection.
+
+## `<bx-combo-box>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-combo-box open>`) and `false` means not setting the attribute (e.g. `<bx-combo-box>` without `open` attribute).
+
+<Props of="bx-combo-box" />
+
+## `<bx-combo-box-item>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-combo-box-item disabled>`) and `false` means not setting the attribute (e.g. `<bx-combo-box-item>` without `disabled` attribute).
+
+<Props of="bx-combo-box-item" />

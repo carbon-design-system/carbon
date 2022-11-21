@@ -1,0 +1,42 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Loading
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/loading)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/loading)
+
+Loading spinners are used when retrieving data or performing slow computations, and help to notify users that loading is underway.
+The waiting experience is a crucial design opportunity.
+Although it may not be obvious what is occurring on the back-end, we can communicate clearly to reassure the user that progress is happening.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/loading/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['loading'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<div style="position: relative; padding: 3rem; display: flex;">
+  <bx-loading></bx-loading>
+</div>
+```
+
+## `<bx-loading>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-loading inactive>`) and `false` means not setting the attribute (e.g. `<bx-loading>` without `inactive` attribute).
+
+<Props of="bx-loading" />

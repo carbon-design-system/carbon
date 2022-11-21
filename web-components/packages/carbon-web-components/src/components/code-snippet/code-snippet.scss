@@ -1,0 +1,174 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/components/code-snippet/code-snippet';
+@import 'carbon-components/scss/components/copy-button/copy-button';
+
+:host(#{$prefix}-code-snippet),
+:host(#{$prefix}-code-snippet-skeleton) {
+  @extend .#{$prefix}--snippet--single;
+
+  outline: none;
+
+  &::after {
+    background-color: $ui-01;
+    background-image: none;
+    mask-image: linear-gradient(to right, transparent 0%, $ui-01 100%);
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      background-color: transparent;
+      background-image: linear-gradient(to right, transparent, $ui-01);
+    }
+  }
+
+  .#{$prefix}--snippet-button .#{$prefix}--btn--copy__feedback {
+    left: 50%;
+    right: auto;
+  }
+
+  .#{$prefix}--snippet-container {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    position: relative;
+    height: 100%;
+  }
+
+  .#{$prefix}--snippet-btn--expand {
+    z-index: 1;
+    min-height: rem(40px);
+  }
+
+  pre {
+    white-space: nowrap;
+    @include type-style('code-01');
+
+    padding-right: $spacing-xs;
+  }
+}
+
+:host(#{$prefix}-code-snippet[color-scheme='light']) {
+  background-color: $ui-02;
+
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
+    background-color: $ui-02;
+  }
+
+  &:hover {
+    background-color: $hover-ui-light;
+  }
+
+  .#{$prefix}--snippet-button:hover,
+  button.#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover {
+    background-color: $hover-ui-light;
+  }
+}
+
+:host(#{$prefix}-code-snippet[type='multi']),
+:host(#{$prefix}-code-snippet-skeleton[type='multi']) {
+  @extend .#{$prefix}--snippet--multi;
+
+  height: auto;
+
+  &::after {
+    position: absolute;
+    content: '';
+    left: 0;
+    top: auto;
+    bottom: rem(16px);
+    width: 100%;
+    height: rem(16px);
+    background-color: $ui-01;
+    background-image: none;
+    mask-image: linear-gradient(to bottom, transparent 0%, $ui-01 100%);
+    @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+      background-color: transparent;
+      background-image: linear-gradient(to bottom, transparent, $ui-01);
+    }
+  }
+
+  .#{$prefix}--snippet-container {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    height: auto;
+    padding-bottom: 0;
+    max-height: rem(238px);
+    min-height: rem(56px);
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+
+    pre {
+      overflow: hidden;
+      padding-bottom: rem(24px);
+      white-space: pre;
+      padding-right: 0;
+
+      &::after {
+        // Use top-level pseudo element instead because `<pre>` here is inside a scrolling container
+        content: none;
+      }
+
+      code {
+        overflow: hidden;
+      }
+    }
+  }
+
+  .#{$prefix}-ce--snippet-container--expanded {
+    max-height: rem(1500px);
+    transition: max-height $duration--moderate-01 motion(standard, productive);
+
+    pre {
+      overflow-x: auto;
+    }
+  }
+}
+
+:host(#{$prefix}-code-snippet[type='inline']) {
+  display: inline-flex;
+  width: auto;
+  height: auto;
+  min-width: auto;
+  max-width: auto;
+  padding: 0;
+
+  &::after {
+    content: none;
+  }
+
+  .#{$prefix}--btn--copy__feedback {
+    // Half of the diagonal line of `0.6rem` square
+    top: rem(6.7882px);
+  }
+}
+
+:host(#{$prefix}-code-snippet-skeleton) {
+  @extend .#{$prefix}--skeleton;
+
+  span {
+    @include skeleton;
+
+    width: 100%;
+    height: 1rem;
+    display: block;
+    margin-top: 0.5rem;
+
+    &:first-child {
+      margin: 0;
+    }
+
+    &:nth-child(2) {
+      width: 85%;
+    }
+
+    &:nth-child(3) {
+      width: 95%;
+    }
+  }
+}

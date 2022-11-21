@@ -1,0 +1,56 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/components/form/form';
+@import 'carbon-components/scss/components/search/search';
+
+:host(#{$prefix}-search),
+:host(#{$prefix}-search-skeleton) {
+  @extend .#{$prefix}--search--lg;
+}
+
+:host(#{$prefix}-search) {
+  @extend .#{$prefix}--search;
+
+  outline: none;
+}
+
+:host(#{$prefix}-search[size='sm']),
+:host(#{$prefix}-search-skeleton[size='sm']) {
+  @extend .#{$prefix}--search--sm;
+}
+
+:host(#{$prefix}-search[size='lg']),
+:host(#{$prefix}-search-skeleton[size='lg']) {
+  @extend .#{$prefix}--search--lg;
+}
+
+:host(#{$prefix}-search[size='xl']),
+:host(#{$prefix}-search-skeleton[size='xl']) {
+  @extend .#{$prefix}--search--xl;
+}
+
+:host(#{$prefix}-search[color-scheme='light']) {
+  @extend .#{$prefix}--search--light;
+}
+
+:host(#{$prefix}-search-skeleton) {
+  width: 100%;
+
+  .#{$prefix}--search-input {
+    @include skeleton;
+
+    width: 100%;
+
+    &::placeholder {
+      color: transparent;
+    }
+  }
+}

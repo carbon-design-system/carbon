@@ -1,0 +1,75 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr 5rem;
+}
+
+footer {
+  @include carbon--theme($carbon--theme--g100, true);
+
+  > p {
+    background-color: var(--cds-ui-background);
+    color: var(--cds-text-01);
+    height: 5rem;
+    padding: 0 1rem;
+    display: flex;
+    align-items: center;
+
+    > span {
+      flex: 1;
+    }
+  }
+
+  bx-btn + bx-btn {
+    margin-left: 1rem;
+  }
+}
+
+bx-btn,
+bx-header,
+bx-header-nav,
+bx-header-nav-item,
+bx-header-menu,
+bx-header-menu-item,
+bx-header-menu-button,
+bx-header-name {
+  visibility: hidden;
+
+  &:defined {
+    visibility: inherit;
+  }
+}
+
+bx-header {
+  position: relative;
+}
+
+.bx--content.bx-ce-demo-theme-zoning--ui-shell-content {
+  background-color: var(--cds-ui-01, #f4f4f4);
+  margin: 0;
+  width: 100%;
+
+  h2 {
+    font-weight: 800;
+    margin: 30px 0;
+    font-size: 20px;
+  }
+
+  p {
+    line-height: 20px;
+  }
+}

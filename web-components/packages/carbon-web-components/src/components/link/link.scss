@@ -1,0 +1,23 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/link/link';
+
+:host(#{$prefix}-link) {
+  outline: none;
+
+  // Re-define the ruleset so this wins over `.bx--link:visited`, etc.
+  .#{$prefix}--link--disabled {
+    color: $disabled-02;
+  }
+
+  .#{$prefix}--link__icon[hidden] {
+    display: none;
+  }
+}

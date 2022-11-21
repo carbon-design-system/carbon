@@ -1,0 +1,89 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Tooltip
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/tooltip)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/tooltip)
+
+Tooltips provide additional information upon hover or focus.
+The information should be contextual, useful, and nonessential information.
+Keep tooltips short.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/tooltip/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['tooltip'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-tooltip>
+  <bx-tooltip-body>
+    <p>
+      This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed
+      please use a modal instead.
+    </p>
+    <bx-tooltip-footer> <a href="#" class="bx--link">Learn More</a><bx-btn kind="primary">Create</bx-btn> </bx-tooltip-footer>
+  </bx-tooltip-body>
+</bx-tooltip>
+```
+
+## Interactive tooltip (default)
+
+Interactive tooltips may contain rich text and other interactive elements like buttons or links. In general, hiding interactive content in a tooltip is discouraged. Interactive tooltips are best used for onboarding experiences and product tours.
+
+- If a user may need to visit an external resource, like while using a form, include a link in your interactive tooltip
+- Don’t use without a label. Consider the context a user needs before clicking a link
+
+### `<bx-tooltip>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-tooltip open>`) and `false` means not setting the attribute (e.g. `<bx-tooltip>` without `open` attribute).
+
+<Props of="bx-tooltip" />
+
+## Definition tooltip
+
+The definition tooltip provides additional help or defines an item or term. It may be used on the label of a UI element, or on a word embedded in a paragraph.
+
+- Should contain brief, read-only text
+- Use on proper nouns, technical terms, or acronyms with two letters or more
+- Do not use a definition tooltip on words with fewer than two letters
+
+```html
+<bx-tooltip-definition alignment="center" body-text="Brief description of the dotted, underlined word above." direction="bottom">
+  Definition Tooltip
+</bx-tooltip-definition>
+```
+
+### `<bx-tooltip-definition>` attributes and properties
+
+<Props of="bx-tooltip-definition" />
+
+## Icon tooltip
+
+An icon tooltip is used to clarify the action or name of an interactive icon button.
+
+- The tooltip content should only contain one or two words.
+
+```html
+<bx-tooltip-icon alignment="center" body-text="Brief description of the dotted, underlined word above." direction="bottom">
+  ${Filter16()}
+</bx-tooltip-icon>
+```
+
+### `<bx-tooltip-icon>` attributes and properties
+
+<Props of="bx-tooltip-icon" />

@@ -1,0 +1,57 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Overflow menu
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/overflow-menu)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/overflow-menu)
+
+Overflow menu is used when additional options are available to the user and there is a space constraint.
+Create overflow menu item components for each option on the menu.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/overflow-menu/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['overflow-menu'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-overflow-menu>
+  <bx-overflow-menu-body>
+    <bx-overflow-menu-item>Option 1</bx-overflow-menu-item>
+    <bx-overflow-menu-item>Option 2</bx-overflow-menu-item>
+    <bx-overflow-menu-item>Option 3</bx-overflow-menu-item>
+    <bx-overflow-menu-item>Option 4</bx-overflow-menu-item>
+    <bx-overflow-menu-item>Option 5</bx-overflow-menu-item>
+  </bx-overflow-menu-body>
+</bx-overflow-menu>
+```
+
+## `<bx-overflow-menu>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-overflow-menu open>`) and `false` means not setting the attribute (e.g. `<bx-overflow-menu>` without `open` attribute).
+
+<Props of="bx-overflow-menu" />
+
+## `<bx-overflow-menu-body>` attributes and properties
+
+<Props of="bx-overflow-menu-body" />
+
+## `<bx-overflow-menu-item>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-overflow-menu-item disabled>`) and `false` means not setting the attribute (e.g. `<bx-overflow-menu-item>` without `disabled` attribute).
+
+<Props of="bx-overflow-menu-item" />

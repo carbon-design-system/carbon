@@ -1,0 +1,93 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/list-box/list-box';
+@import 'carbon-components/scss/components/form/form';
+@import 'carbon-components/scss/components/checkbox/checkbox';
+@import 'carbon-components/scss/components/tag/tag';
+
+:host(#{$prefix}-dropdown) {
+  outline: none;
+
+  .#{$prefix}--assistive-text {
+    // Hides screen reader cursor
+    left: -100%;
+    top: -100%;
+  }
+
+  .#{$prefix}--label[hidden] {
+    display: none;
+  }
+
+  .#{$prefix}--list-box__menu {
+    top: 100%;
+    margin-top: 1px;
+  }
+}
+
+:host(#{$prefix}-dropdown[type='inline']) {
+  @extend .#{$prefix}--list-box__wrapper--inline;
+}
+
+:host(#{$prefix}-dropdown-item) {
+  @extend .#{$prefix}--list-box__menu-item;
+
+  display: block;
+
+  .#{$prefix}--list-box__menu-item__option {
+    height: 100%;
+  }
+}
+
+:host(#{$prefix}-dropdown-item[size='sm']) {
+  height: rem(32px);
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+  }
+}
+
+:host(#{$prefix}-dropdown-item[size='xl']) {
+  height: rem(48px);
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+  }
+}
+
+:host(#{$prefix}-dropdown-item[disabled])
+  .#{$prefix}--list-box__menu-item__option {
+  color: $disabled-02;
+  text-decoration: none;
+}
+
+:host(#{$prefix}-dropdown-item[highlighted]) {
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+}
+
+:host(#{$prefix}-dropdown-item[selected]) {
+  @extend .#{$prefix}--list-box__menu-item--active;
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
+  }
+
+  .#{$prefix}--list-box__menu-item__selected-icon {
+    display: block;
+  }
+}
+
+:host(#{$prefix}-dropdown-skeleton) {
+  .#{$prefix}--skeleton {
+    @include skeleton;
+  }
+}

@@ -1,0 +1,123 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/multi-select/multi-select';
+@import 'carbon-components/scss/components/form/form';
+@import 'carbon-components/scss/components/checkbox/checkbox';
+@import 'carbon-components/scss/components/tag/tag';
+
+:host(#{$prefix}-multi-select) {
+  outline: none;
+
+  .#{$prefix}--assistive-text {
+    // Hides screen reader cursor
+    left: -100%;
+    top: -100%;
+  }
+
+  .#{$prefix}--label[hidden] {
+    display: none;
+  }
+
+  .#{$prefix}--list-box__menu {
+    top: 100%;
+    margin-top: 1px;
+  }
+
+  .#{$prefix}--text-input {
+    border: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &[filterable] {
+    .#{$prefix}--list-box__field:focus-within {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
+  }
+}
+
+:host(#{$prefix}-multi-select[type='inline']) {
+  @extend .#{$prefix}--list-box__wrapper--inline;
+}
+
+:host(#{$prefix}-multi-select-item) {
+  @extend .#{$prefix}--list-box__menu-item;
+
+  display: block;
+
+  .#{$prefix}--checkbox {
+    &:checked ~ .#{$prefix}--checkbox-label-text {
+      color: $text-01;
+    }
+
+    &:focus + .#{$prefix}--checkbox-label::before {
+      box-shadow: none;
+    }
+  }
+
+  .#{$prefix}--list-box__menu-item__option {
+    height: 100%;
+
+    .#{$prefix}--checkbox-wrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    > .#{$prefix}--form-item {
+      margin: 0;
+      flex-direction: row;
+    }
+  }
+
+  &[filtered] {
+    display: none;
+  }
+}
+
+:host(#{$prefix}-multi-select-item[size='sm']) {
+  height: rem(32px);
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(7px);
+    padding-bottom: rem(7px);
+  }
+}
+
+:host(#{$prefix}-multi-select-item[size='xl']) {
+  height: rem(48px);
+
+  .#{$prefix}--list-box__menu-item__option {
+    padding-top: rem(15px);
+    padding-bottom: rem(15px);
+  }
+}
+
+:host(#{$prefix}-multi-select-item[disabled]) {
+  color: $disabled-02;
+  text-decoration: none;
+}
+
+:host(#{$prefix}-multi-select-item[highlighted]) {
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+}
+
+:host(#{$prefix}-multi-select-item[selected]) {
+  @extend .#{$prefix}--list-box__menu-item--active;
+  @extend .#{$prefix}--list-box__menu-item--highlighted;
+
+  .#{$prefix}--list-box__menu-item__option {
+    color: $text-01;
+  }
+}

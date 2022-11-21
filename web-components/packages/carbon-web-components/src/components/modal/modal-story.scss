@@ -1,0 +1,15 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+/* stylelint-disable selector-type-no-unknown */
+bx-modal[open] {
+  // `@extend` usage in the corresponding rule in `modal.scss` causes the ruleset defined after `:host(bx-modal)`,
+  // which itself is OK, but it causes an adverse effect in Playwright WebKit environment
+  // TODO: Upgrade Playwright soon
+  opacity: 1;
+  visibility: inherit;
+}

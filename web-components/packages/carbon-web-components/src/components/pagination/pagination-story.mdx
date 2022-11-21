@@ -1,0 +1,54 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Pagination
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/pagination)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/pagination)
+
+The pagination component is used to switch through multiple pages of items, when only a maxium number of items can be displayed per page.
+Can be used in combination with other components like data table.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import 'carbon-web-components/es/components/pagination/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['pagination'] })}`} />
+
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+```html
+<bx-pagination page-size="10" start="0" total="100">
+  <bx-page-sizes-select slot="page-sizes-select">
+    <option value="10">10</option>
+    <option value="20">20</option>
+    <option value="30">30</option>
+  </bx-page-sizes-select>
+  <bx-pages-select></bx-pages-select>
+</bx-pagination>
+```
+
+## `<bx-pagination>` attributes, properties and events
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-pagination at-last-page>`) and `false` means not setting the attribute (e.g. `<bx-pagination>` without `at-last-page` attribute).
+
+<Props of="bx-pagination" />
+
+## `<bx-pages-select>` attributes, properties and events
+
+<Props of="bx-pages-select" />
+
+## `<bx-page-sizes-select>` attributes, properties and events
+
+<Props of="bx-page-sizes-select" />

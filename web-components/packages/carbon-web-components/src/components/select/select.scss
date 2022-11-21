@@ -1,0 +1,28 @@
+//
+// Copyright IBM Corp. 2020, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/components/select/select';
+
+:host(#{$prefix}-select) {
+  @extend .#{$prefix}--select;
+
+  outline: none;
+
+  &[color-scheme='light'] {
+    @extend .#{$prefix}--select--light;
+  }
+
+  &[disabled] {
+    @extend .#{$prefix}--select--disabled;
+  }
+
+  &[invalid] {
+    @extend .#{$prefix}--select--invalid;
+  }
+}

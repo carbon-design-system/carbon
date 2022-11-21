@@ -1,0 +1,47 @@
+<!--
+@license
+
+Copyright IBM Corp. 2019
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+  <head>
+    <title>carbon-web-components example</title>
+    <meta charset="UTF-8" />
+    <style type="text/css">
+      body {
+        font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+      }
+
+      #app {
+        width: 300px;
+      }
+
+      my-dropdown,
+      bx-dropdown-item {
+        visibility: hidden;
+      }
+
+      my-dropdown:defined,
+      bx-dropdown-item:defined {
+        visibility: inherit;
+      }
+    </style>
+    <script type="module" src="src/index.js"></script>
+  </head>
+  <body>
+    <h1>Hello World! 👋</h1>
+    <div id="app">
+      <my-dropdown trigger-content="Select an item">
+        <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
+        <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
+        <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
+        <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
+        <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
+      </my-dropdown>
+    </div>
+  </body>
+</html>

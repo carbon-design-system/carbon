@@ -1,0 +1,31 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <style>
+    /* Suppress custom element until styles are loaded */
+    bx-toggle:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/toggle.min.js"></script>
+</head>
+<body>
+  <bx-toggle
+    checked-text="On"
+    label-text="Toggle"
+    unchecked-text="Off"
+  ></bx-toggle>
+</body>
+</html>

@@ -1,0 +1,16 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'carbon-components/scss/globals/scss/spacing';
+@import 'carbon-components/scss/globals/scss/theme-tokens';
+
+.bx-ce-demo-devenv--tab-panels {
+  flex: 1;
+  padding: $carbon--spacing-05;
+  align-self: stretch;
+  background-color: $ui-01;
+}

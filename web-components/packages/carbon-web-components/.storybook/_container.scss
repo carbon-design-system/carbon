@@ -1,0 +1,73 @@
+//
+// @license
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@import 'carbon-components/scss/globals/scss/css--helpers';
+@import 'carbon-components/scss/globals/scss/css--font-face';
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+
+:root {
+  @include carbon--theme($carbon--theme--white, true);
+}
+
+:root[storybook-carbon-theme='g10'] {
+  @include carbon--theme($carbon--theme--g10, true);
+}
+
+:root[storybook-carbon-theme='g90'] {
+  @include carbon--theme($carbon--theme--g90, true);
+}
+
+:root[storybook-carbon-theme='g100'] {
+  @include carbon--theme($carbon--theme--g100, true);
+}
+
+html,
+body,
+#root,
+#root-inner,
+[name='main-content'] {
+  position: relative;
+  height: 100%;
+}
+
+// Reverts Carbon reset style of lists for docs page
+#docs-root {
+  ol {
+    list-style-type: decimal;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+}
+
+.bx-ce-demo-devenv--container {
+  padding: 3em;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.bx--content.bx-ce-demo-devenv--ui-shell-content {
+  background-color: $ui-01;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+
+  h2 {
+    font-weight: 800;
+    margin: 30px 0;
+    font-size: 20px;
+  }
+
+  p {
+    line-height: 20px;
+  }
+}

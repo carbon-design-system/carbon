@@ -1,0 +1,14 @@
+{
+  "enabled": false,
+  "extends": ["config:base", ":maintainLockFilesWeekly", ":preserveSemverRanges", "schedule:weekends", ":noUnscheduledUpdates"],
+  "packageRules": [
+    {
+      "matchUpdateTypes": ["major"],
+      "enabled": false
+    }
+  ],
+  "rangeStrategy": "replace",
+  "vulnerabilityAlerts": {
+    "enabled": true
+  }
+}

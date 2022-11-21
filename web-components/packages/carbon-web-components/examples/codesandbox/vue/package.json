@@ -1,0 +1,38 @@
+{
+  "name": "carbon-web-components-vue-getting-started",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "vue-cli-service build",
+    "serve": "vue-cli-service serve"
+  },
+  "dependencies": {
+    "carbon-web-components": "^1.19.0",
+    "vue": "^2.5.0"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "3.6.0",
+    "@vue/cli-plugin-eslint": "3.6.0",
+    "@vue/cli-service": "3.6.0",
+    "babel-eslint": "^10.0.0",
+    "eslint": "^5.8.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "vue-template-compiler": "^2.5.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  }
+}

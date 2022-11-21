@@ -1,0 +1,25 @@
+{
+  "name": "carbon-web-components-getting-started",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sample project for getting started with the Web Components from the Carbon Design System.",
+  "license": "Apache-2",
+  "main": "index.html",
+  "scripts": {
+    "build": "parcel build index.html",
+    "start": "parcel index.html --no-hmr"
+  },
+  "dependencies": {
+    "carbon-web-components": "^1.19.0",
+    "lit-element": "^2.5.1",
+    "lit-html": "^1.4.1",
+    "lodash-es": "^4.17.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.0",
+    "@babel/plugin-proposal-decorators": "^7.10.0",
+    "@babel/plugin-transform-runtime": "^7.10.0",
+    "@types/lodash-es": "^4.17.0",
+    "parcel-bundler": "^1.10.0"
+  }
+}

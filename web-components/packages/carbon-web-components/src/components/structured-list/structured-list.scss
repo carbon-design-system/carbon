@@ -1,0 +1,71 @@
+//
+// Copyright IBM Corp. 2019, 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@import 'carbon-components/scss/globals/scss/helper-mixins';
+@import 'carbon-components/scss/components/structured-list/structured-list';
+
+.#{$prefix}--structured-list ::slotted(#{$prefix}-structured-list-head) {
+  @extend .#{$prefix}--structured-list-thead;
+}
+
+:host(#{$prefix}-structured-list-head)
+  ::slotted(#{$prefix}-structured-list-header-row) {
+  @extend .#{$prefix}--structured-list-row,
+    .#{$prefix}--structured-list-row--header-row;
+}
+
+:host(#{$prefix}-structured-list-header-row) {
+  ::slotted(#{$prefix}-structured-list-header-cell),
+  ::slotted(#{$prefix}-structured-list-header-cell-skeleton) {
+    @extend .#{$prefix}--structured-list-th;
+  }
+}
+
+.#{$prefix}--structured-list
+  ::slotted(#{$prefix}-structured-list-header-cell[nowrap]) {
+  @extend .#{$prefix}--structured-list-content--nowrap;
+}
+
+.#{$prefix}--structured-list ::slotted(#{$prefix}-structured-list-body) {
+  @extend .#{$prefix}--structured-list-tbody;
+}
+
+:host(#{$prefix}-structured-list-body)
+  ::slotted(#{$prefix}-structured-list-row) {
+  @extend .#{$prefix}--structured-list-row;
+}
+
+:host(#{$prefix}-structured-list-row:hover) .#{$prefix}--structured-list-svg {
+  fill: $ibm-color__gray-40;
+}
+
+:host(#{$prefix}-structured-list-row)
+  ::slotted(#{$prefix}-structured-list-cell) {
+  @extend .#{$prefix}--structured-list-td;
+}
+
+:host(#{$prefix}-structured-list-row)
+  ::slotted(#{$prefix}-structured-list-cell[nowrap]) {
+  @extend .#{$prefix}--structured-list-content--nowrap;
+}
+
+// "Selected" style with `.bx--structured-list-td` does not work somehow - Need investigation
+.#{$prefix}--structured-list-input:checked
+  + .#{$prefix}--structured-list-cell
+  .#{$prefix}--structured-list-svg {
+  fill: $text-01;
+}
+
+:host(#{$prefix}-structured-list-header-cell-skeleton) span {
+  @include skeleton;
+
+  width: 75%;
+  height: 1rem;
+  display: block;
+}

@@ -1,0 +1,37 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>@carbon/ibmdotcom-web-components example</title>
+  <meta charset="UTF-8"/>
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <style>
+    /* Suppress custom element until styles are loaded */
+    bx-tooltip:not(:defined) {
+      display: none;
+    }
+  </style>
+  <script type="module" src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/tooltip.min.js"></script>
+</head>
+<body>
+  <div data-floating-menu-container style="position: relative; padding: 3rem; display: flex; flex-direction: column; align-items: center;">
+    <bx-tooltip>
+      <bx-tooltip-body>
+        <p>
+          This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed
+          please use a modal instead.
+        </p>
+        <bx-tooltip-footer> <a href="#" class="bx--link">Learn More</a><bx-btn kind="primary">Create</bx-btn> </bx-tooltip-footer>
+      </bx-tooltip-body>
+    </bx-tooltip>
+  </div>
+</body>
+</html>
