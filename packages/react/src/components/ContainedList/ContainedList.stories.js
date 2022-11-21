@@ -9,17 +9,24 @@ import React from 'react';
 
 import { action } from '@storybook/addon-actions';
 import {
+  Add,
   Apple,
   Fish,
   Strawberry,
   SubtractAlt,
   Wheat,
 } from '@carbon/icons-react';
+
+import { Layer } from '../Layer';
 import { VStack } from '../Stack';
 import Button from '../Button';
 import ExpandableSearch from '../ExpandableSearch';
-import { Layer } from '../Layer';
+import OverflowMenu from '../OverflowMenu';
+import OverflowMenuItem from '../OverflowMenuItem';
 import Tag from '../Tag';
+
+import { usePrefix } from '../../internal/usePrefix';
+
 import mdx from './ContainedList.mdx';
 
 import ContainedList, { ContainedListItem } from '.';
@@ -158,62 +165,126 @@ export const WithInteractiveItemsAndActions = () => {
   );
 };
 
-export const WithListTitleDecorators = () => {
-  return (
-    <ContainedList
-      label={
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
-          <span>List title</span>
-          <Tag size="sm">4</Tag>
-        </div>
-      }
-      kind="on-page">
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-      <ContainedListItem>List item</ContainedListItem>
-    </ContainedList>
-  );
-};
+export const WithListTitleDecorators = () => (
+  <ContainedList
+    label={
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}>
+        <span>List title</span>
+        <Tag size="sm">4</Tag>
+      </div>
+    }
+    kind="on-page">
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+    <ContainedListItem>List item</ContainedListItem>
+  </ContainedList>
+);
 
-export const WithIcons = () => {
-  return (
+export const WithIcons = () => (
+  <ContainedList label="List title" kind="on-page">
+    <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
+    <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
+    <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
+    <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
+  </ContainedList>
+);
+
+export const WithLayer = () => (
+  <VStack gap={5}>
     <ContainedList label="List title" kind="on-page">
-      <ContainedListItem renderIcon={Apple}>List item</ContainedListItem>
-      <ContainedListItem renderIcon={Wheat}>List item</ContainedListItem>
-      <ContainedListItem renderIcon={Strawberry}>List item</ContainedListItem>
-      <ContainedListItem renderIcon={Fish}>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
+      <ContainedListItem>List item</ContainedListItem>
     </ContainedList>
-  );
-};
-
-export const WithLayer = () => {
-  return (
-    <VStack gap={5}>
-      <ContainedList label="List title" kind="on-page">
-        <ContainedListItem>List item</ContainedListItem>
-        <ContainedListItem>List item</ContainedListItem>
-      </ContainedList>
-      <Layer>
-        <VStack gap={5}>
+    <Layer>
+      <VStack gap={5}>
+        <ContainedList label="List title" kind="on-page">
+          <ContainedListItem>List item</ContainedListItem>
+          <ContainedListItem>List item</ContainedListItem>
+        </ContainedList>
+        <Layer>
           <ContainedList label="List title" kind="on-page">
             <ContainedListItem>List item</ContainedListItem>
             <ContainedListItem>List item</ContainedListItem>
           </ContainedList>
-          <Layer>
-            <ContainedList label="List title" kind="on-page">
-              <ContainedListItem>List item</ContainedListItem>
-              <ContainedListItem>List item</ContainedListItem>
-            </ContainedList>
-          </Layer>
-        </VStack>
-      </Layer>
-    </VStack>
+        </Layer>
+      </VStack>
+    </Layer>
+  </VStack>
+);
+
+export const UsageExamples = () => {
+  const prefix = usePrefix();
+
+  return (
+    <>
+      <ContainedList
+        label="List title"
+        action={
+          <Button
+            hasIconOnly
+            iconDescription="Add"
+            renderIcon={Add}
+            tooltipPosition="left"
+          />
+        }>
+        {[...Array(3)].map((_, i) => (
+          <ContainedListItem
+            key={i}
+            action={
+              <OverflowMenu flipped size="lg" ariaLabel="List item options">
+                <OverflowMenuItem itemText="View details" />
+                <OverflowMenuItem itemText="Edit" />
+                <OverflowMenuItem itemText="Remove" isDelete hasDivider />
+              </OverflowMenu>
+            }>
+            List item
+          </ContainedListItem>
+        ))}
+      </ContainedList>
+      <ContainedList
+        label="List title"
+        action={
+          <Button
+            hasIconOnly
+            iconDescription="Add"
+            renderIcon={Add}
+            tooltipPosition="left"
+            kind="ghost"
+          />
+        }>
+        {[...Array(3)].map((_, i) => (
+          <ContainedListItem key={i}>
+            List item
+            <br />
+            <span className={`${prefix}--label ${prefix}--label--no-margin`}>
+              Description text
+            </span>
+          </ContainedListItem>
+        ))}
+      </ContainedList>
+      <ContainedList label="List title">
+        {[...Array(3)].map((_, i) => (
+          <ContainedListItem key={i}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, 1fr)',
+                columnGap: '1rem',
+              }}>
+              <span>List item</span>
+              <span>List item details</span>
+              <span>List item details</span>
+            </div>
+          </ContainedListItem>
+        ))}
+      </ContainedList>
+    </>
   );
 };
 
