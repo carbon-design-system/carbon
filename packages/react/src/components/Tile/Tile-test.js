@@ -15,71 +15,68 @@ import {
   TileBelowTheFoldContent,
 } from './Tile';
 import userEvent from '@testing-library/user-event';
-import { cleanup, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import Link from '../Link';
 
 describe('Tile', () => {
   describe('renders as expected - Component API', () => {
-    it('should spread extra props onto outermost element', () => {
-      const { container } = render(<Tile data-testid="test-id" />);
-
-      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
-    });
-
-    it('should render children as expected', () => {
-      const component = (
-        <Tile>
+    const renderTile = (props) =>
+      render(
+        <Tile data-testid="test-id" {...props}>
           Default tile
-          <br />
-          <br />
+          <br data-testid="br-test-id" />
+          <br data-testid="br-test-id" />
           <Link href="https://www.carbondesignsystem.com">Link</Link>
         </Tile>
       );
-      const { container } = render(component);
+
+    it('should spread extra props onto outermost element', () => {
+      renderTile({ 'carbon-name': 'test' });
+      expect(screen.getByText('Default tile')).toHaveAttribute('carbon-name');
+    });
+
+    it('should render children as expected', () => {
+      renderTile({ 'carbon-name': 'test' });
       expect(screen.getByText('Default tile')).toBeTruthy();
       expect(screen.getByText('Link')).toBeTruthy();
-      expect(container.querySelectorAll('br').length).toEqual(2);
+      expect(screen.getAllByTestId('br-test-id').length).toEqual(2);
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
-      const { container } = render(<Tile className="custom-tile-class" />);
-
-      expect(container.firstChild).toHaveClass('custom-tile-class');
+      renderTile({ className: 'custom-tile-class' });
+      expect(screen.getByText('Default tile')).toHaveClass('custom-tile-class');
     });
   });
 
   describe('ClickableTile', () => {
-    afterEach(cleanup);
-
-    it('renders with a link', () => {
+    const renderClickableTile = () =>
       render(
         <ClickableTile href="https://www.carbondesignsystem.com">
           Clickable Tile
         </ClickableTile>
       );
+
+    it('renders with a link', () => {
+      renderClickableTile();
       expect(screen.getByRole('link')).toBeInTheDocument();
     });
   });
 
   describe('Multi Select', () => {
-    afterEach(cleanup);
-
-    it('does not invoke the click handler if SelectableTile is disabled', () => {
-      const onClick = jest.fn();
+    const renderMultiSelectTile = (props) =>
       render(
         <div role="group" aria-label="selectable tiles">
-          <SelectableTile
-            id="tile-1"
-            name="tiles"
-            value="value"
-            onClick={onClick}
-            disabled>
+          <SelectableTile id="tile-1" name="tiles" value="value" {...props}>
             <span role="img" aria-label="vertical traffic light">
               🚦
             </span>
           </SelectableTile>
         </div>
       );
+
+    it('does not invoke the click handler if SelectableTile is disabled', () => {
+      const onClick = jest.fn();
+      renderMultiSelectTile({ disabled: true, onClick });
       const tile = screen.getByText('🚦');
       userEvent.click(tile);
       expect(onClick).not.toHaveBeenCalled();
@@ -138,115 +135,78 @@ describe('Tile', () => {
   });
 
   describe('ExpandableTile', () => {
-    afterEach(cleanup);
-    const onClick = jest.fn();
-    const component = (
-      <ExpandableTile className="extra-class" onClick={onClick}>
-        <TileAboveTheFoldContent>
-          <div style={{ height: '200px' }}>TestAbove</div>
-        </TileAboveTheFoldContent>
-        <TileBelowTheFoldContent>
-          <div style={{ height: '500px' }}>TestBelow</div>
-        </TileBelowTheFoldContent>
-      </ExpandableTile>
-    );
+    const renderExpandableTile = (props) => {
+      render(
+        <ExpandableTile className="extra-class" {...props}>
+          <TileAboveTheFoldContent>
+            <div>TestAbove</div>
+          </TileAboveTheFoldContent>
+          <TileBelowTheFoldContent>
+            <div>TestBelow</div>
+          </TileBelowTheFoldContent>
+        </ExpandableTile>
+      );
+    };
 
     it('renders initial children as expected', () => {
-      render(component);
+      const onClick = jest.fn();
+      renderExpandableTile({ onClick });
       expect(screen.getByText('TestAbove')).toBeTruthy();
       expect(screen.getByText('TestBelow')).toBeTruthy();
     });
 
     it('has the expected classes', () => {
-      const { container } = render(component);
-      expect(container.querySelector(`.cds--tile--expandable`)).toBeTruthy();
-    });
-
-    it('renders extra classes passed in via className', () => {
-      const { container } = render(component);
-      expect(container.firstChild).toHaveClass('extra-class');
+      renderExpandableTile();
+      expect(screen.getByRole('button')).toHaveClass(`cds--tile--expandable`);
+      expect(screen.getByRole('button')).toHaveClass(`extra-class`);
     });
 
     it('toggles the expandable class on click', () => {
-      const { container } = render(component);
-      expect(container.querySelector(`.cds--tile--is-expanded`)).toBeNull();
+      const onClick = jest.fn();
+      renderExpandableTile({ onClick });
+      expect(screen.getByRole('button')).not.toHaveClass(
+        `cds--tile--is-expanded`
+      );
       const tile = screen.getByText('TestAbove');
       userEvent.click(tile);
       expect(onClick).toHaveBeenCalled();
-      expect(container.querySelector(`.cds--tile--is-expanded`)).toBeTruthy();
+      expect(screen.getByRole('button')).toHaveClass(`cds--tile--is-expanded`);
     });
 
     it('contains the default tooltip for the button', async () => {
-      render(
-        <ExpandableTile className="extra-class" data-testid={'expandable-tile'}>
-          <TileAboveTheFoldContent className="child">
-            <div style={{ height: '200px' }}>Test</div>
-          </TileAboveTheFoldContent>
-          <TileBelowTheFoldContent className="child">
-            <div style={{ height: '500px' }}>Test</div>
-          </TileBelowTheFoldContent>
-        </ExpandableTile>
-      );
-      const defaultExpandedIconText = 'Interact to collapse Tile';
-      const defaultCollapsedIconText = 'Interact to expand Tile';
-      const expandableTile = screen.getByTestId('expandable-tile');
+      renderExpandableTile();
+      const expandableTile = screen.getByRole('button');
       expect(expandableTile.getAttribute('title')).toEqual(
-        defaultCollapsedIconText
+        'Interact to expand Tile'
       );
       userEvent.click(expandableTile);
       expect(expandableTile.getAttribute('title')).toEqual(
-        defaultExpandedIconText
+        'Interact to collapse Tile'
       );
     });
 
     it('displays the custom tooltips for the button depending on state', () => {
-      render(
-        <ExpandableTile
-          className="extra-class"
-          data-testid={'expandable-tile'}
-          tileCollapsedIconText="Click To Expand"
-          tileExpandedIconText="Click To Collapse">
-          <TileAboveTheFoldContent className="child">
-            <div style={{ height: '200px' }}>Test</div>
-          </TileAboveTheFoldContent>
-          <TileBelowTheFoldContent className="child">
-            <div style={{ height: '500px' }}>Test</div>
-          </TileBelowTheFoldContent>
-        </ExpandableTile>
-      );
+      renderExpandableTile({
+        tileCollapsedIconText: 'Click To Expand',
+        tileExpandedIconText: 'Click To Collapse',
+      });
 
-      const expandableTile = screen.getByTestId('expandable-tile');
+      const expandableTile = screen.getByRole('button');
       expect(expandableTile.getAttribute('title')).toEqual('Click To Expand');
       userEvent.click(expandableTile);
       expect(expandableTile.getAttribute('title')).toEqual('Click To Collapse');
     });
 
     it('supports setting expanded prop to true', () => {
-      const { container } = render(
-        <ExpandableTile data-testid={'expandable-tile'} expanded>
-          <TileAboveTheFoldContent className="child">
-            <div style={{ height: '200px' }}>Test</div>
-          </TileAboveTheFoldContent>
-          <TileBelowTheFoldContent className="child">
-            <div style={{ height: '500px' }}>Test</div>
-          </TileBelowTheFoldContent>
-        </ExpandableTile>
-      );
-      expect(container.querySelector('.cds--tile--is-expanded')).toBeTruthy();
+      renderExpandableTile({ expanded: true });
+      expect(screen.getByRole('button')).toHaveClass('cds--tile--is-expanded');
     });
 
     it('supports setting expanded prop to false', () => {
-      const { container } = render(
-        <ExpandableTile data-testid={'expandable-tile'} expanded={false}>
-          <TileAboveTheFoldContent className="child">
-            <div style={{ height: '200px' }}>Test</div>
-          </TileAboveTheFoldContent>
-          <TileBelowTheFoldContent className="child">
-            <div style={{ height: '500px' }}>Test</div>
-          </TileBelowTheFoldContent>
-        </ExpandableTile>
+      renderExpandableTile({ expanded: false });
+      expect(screen.getByRole('button')).not.toHaveClass(
+        'cds--tile--is-expanded'
       );
-      expect(container.querySelector('.cds--tile--is-expanded')).toBeNull();
     });
   });
 
