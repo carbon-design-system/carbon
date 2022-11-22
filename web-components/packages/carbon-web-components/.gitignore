@@ -13,4 +13,3 @@ tests/coverage
 .env
 .npmrc
 yarn-error.log
-CHANGELOG.md
