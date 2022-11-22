@@ -8,7 +8,7 @@
     "start": "echo 'Running Next in Node 12.16.3+. If you have such Node version in your system just `next` here will work.' && ./node_modules/node/node_modules/.bin/node ./node_modules/.bin/next"
   },
   "dependencies": {
-    "carbon-web-components": "^1.19.0",
+    "@carbon/carbon-web-components": "latest",
     "next": "^10.0.0",
     "node": "^12.16.3",
     "react": "^17.0.0",
