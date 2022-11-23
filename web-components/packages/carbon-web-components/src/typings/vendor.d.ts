@@ -31,14 +31,14 @@ declare module 'carbon-components/es/globals/js/misc/on' {
     type: K,
     listener: (this: EventTarget, ev: HTMLElementEventMap[K]) => any,
     options?: boolean | AddEventListenerOptions
-    // @ts-ignore
-  ): Handle;
+  ): // @ts-ignore
+  Handle;
   function on(
     target: EventTarget,
     type: string,
     listener: EventListenerOrEventListenerObject,
     options?: boolean | AddEventListenerOptions
-    // @ts-ignore
-  ): Handle;
+  ): // @ts-ignore
+  Handle;
   export default on;
 }

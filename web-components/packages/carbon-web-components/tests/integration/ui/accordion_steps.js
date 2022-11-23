@@ -18,12 +18,16 @@ describe('bx-accordion', () => {
     await page.click('bx-accordion-item:nth-of-type(1) button');
     await expect(page).toHaveSelector(
       'bx-accordion-item:nth-of-type(1) #content',
-      { state: 'visible' }
+      {
+        state: 'visible',
+      }
     );
     await page.click('bx-accordion-item:nth-of-type(1) button');
     await expect(page).toHaveSelector(
       'bx-accordion-item:nth-of-type(1) #content',
-      { state: 'hidden' }
+      {
+        state: 'hidden',
+      }
     );
   });
 });
