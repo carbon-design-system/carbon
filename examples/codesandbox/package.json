@@ -1,9 +1,9 @@
 {
   "name": "codesandbox",
-  "version": "0.18.0-rc.2",
+  "version": "0.18.0",
   "private": true,
   "dependencies": {
-    "@carbon/react": "^1.17.0-rc.2",
+    "@carbon/react": "^1.17.0",
     "react": "^17.0.0",
     "react-dom": "^17.0.0"
   },

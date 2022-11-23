@@ -5,6 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:list';
+
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -31,6 +33,35 @@
     width: 100%;
   }
 
+  // Sizes
+
+  $sizes: (
+    // size: (height, item-block-padding)
+    'sm': (rem(32px), $spacing-03),
+    'md': (rem(40px), $spacing-04),
+    'lg': (rem(48px), $spacing-05),
+    'xl': (rem(64px), $spacing-06)
+  );
+
+  @each $size, $definition in $sizes {
+    $height: list.nth($definition, 1);
+    $item-block-padding: list.nth($definition, 2);
+
+    .#{$prefix}--contained-list--on-page.#{$prefix}--contained-list--#{$size}
+      .#{$prefix}--contained-list__header {
+      height: $height;
+    }
+
+    .#{$prefix}--contained-list--#{$size}
+      .#{$prefix}--contained-list-item__content,
+    .#{$prefix}--contained-list--#{$size}
+      .#{$prefix}--contained-list-item--clickable
+      .#{$prefix}--contained-list-item__content {
+      min-height: $height;
+      padding: calc(#{$item-block-padding} - #{rem(2px)}) $spacing-05;
+    }
+  }
+
   // "On Page" variant
 
   .#{$prefix}--contained-list--on-page + .#{$prefix}--contained-list--on-page {
@@ -40,7 +71,6 @@
   .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
     @include type-style('heading-compact-01');
 
-    height: $spacing-09;
     border-bottom: 1px solid $border-subtle;
     background-color: $background;
     color: $text-primary;
@@ -92,7 +122,6 @@
     .#{$prefix}--contained-list-item__content {
     @include type-style('body-01');
 
-    padding: calc(#{$spacing-05} - #{rem(2px)}) $spacing-05;
     color: $text-primary;
   }
 

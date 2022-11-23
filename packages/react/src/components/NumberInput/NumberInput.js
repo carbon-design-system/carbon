@@ -195,7 +195,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
               <button
                 aria-label={decrementNumLabel || iconDescription}
                 className={`${prefix}--number__control-btn down-icon`}
-                disabled={disabled | readOnly}
+                disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
                     value: clamp(max, min, parseInt(value) - step),
@@ -220,7 +220,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
               <button
                 aria-label={incrementNumLabel || iconDescription}
                 className={`${prefix}--number__control-btn up-icon`}
-                disabled={disabled | readOnly}
+                disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
                     value: clamp(max, min, parseInt(value) + step),
