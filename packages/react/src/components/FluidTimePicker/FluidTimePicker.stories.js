@@ -39,8 +39,6 @@ const ToggleTip = (
 
 export const Default = () => (
   <div style={{ display: 'flex', flexDirection: 'column' }}>
-    <h3>Default</h3>
-    <br />
     <div style={{ width: '350px' }}>
       <FluidTimePicker id="time-picker-1" labelText="Time" placeholder="hh:mm">
         <FluidTimePickerSelect id="select-1" labelText={ToggleTip}>
@@ -64,8 +62,6 @@ export const Default = () => (
       </FluidTimePicker>
     </div>
     <br />
-    <br />
-    <h3>Invalid</h3>
     <br />
     <div style={{ width: '350px' }}>
       <FluidTimePicker
@@ -101,8 +97,6 @@ export const Default = () => (
     </div>
     <br />
     <br />
-    <h3>Warning</h3>
-    <br />
     <div style={{ width: '350px' }}>
       <FluidTimePicker
         id="time-picker-4454"
@@ -124,12 +118,12 @@ export const Default = () => (
       <br />
       <br />
       <FluidTimePicker
-        id="time-picker-2"
+        id="time-picker-22213"
         labelText="Time"
         placeholder="hh:mm"
         warn
         warnText="Warning message goes here">
-        <FluidTimePickerSelect id="select-3" labelText={ToggleTip}>
+        <FluidTimePickerSelect id="select-34354" labelText={ToggleTip}>
           <SelectItem value="am" text="AM" />
           <SelectItem value="pm" text="PM" />
         </FluidTimePickerSelect>
