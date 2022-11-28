@@ -231,6 +231,10 @@ export {
   FluidMultiSelectSkeleton as unstable__FluidMultiSelectSkeleton,
 } from './components/FluidMultiSelect';
 export {
+  FluidNumberInput as unstable__FluidNumberInput,
+  FluidNumberInputSkeleton as unstable__FluidNumberInputSkeleton,
+} from './components/FluidNumberInput';
+export {
   FluidSelect as unstable__FluidSelect,
   FluidSelectSkeleton as unstable__FluidSelectSkeleton,
 } from './components/FluidSelect';
