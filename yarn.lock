@@ -2042,7 +2042,7 @@ __metadata:
     "@rollup/plugin-babel": ^5.3.0
     "@rollup/plugin-commonjs": ^21.0.0
     "@rollup/plugin-node-resolve": ^15.0.0
-    "@rollup/plugin-typescript": ^8.5.0
+    "@rollup/plugin-typescript": ^9.0.0
     "@storybook/addon-a11y": ^6.5.6
     "@storybook/addon-actions": ^6.5.6
     "@storybook/addon-docs": ^6.5.6
@@ -5108,20 +5108,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-typescript@npm:^8.5.0":
-  version: 8.5.0
-  resolution: "@rollup/plugin-typescript@npm:8.5.0"
+"@rollup/plugin-typescript@npm:^9.0.0":
+  version: 9.0.2
+  resolution: "@rollup/plugin-typescript@npm:9.0.2"
   dependencies:
-    "@rollup/pluginutils": ^3.1.0
-    resolve: ^1.17.0
+    "@rollup/pluginutils": ^5.0.1
+    resolve: ^1.22.1
   peerDependencies:
-    rollup: ^2.14.0
+    rollup: ^2.14.0||^3.0.0
     tslib: "*"
     typescript: ">=3.7.0"
   peerDependenciesMeta:
+    rollup:
+      optional: true
     tslib:
       optional: true
-  checksum: 2f100a73cdeb9bf82feaf8665fe791dabf5dcc17f6e727eb7b1825e7c7cf815ccd3f79f9f43ca53d7806c50686565c71f35fffcfc773b811a5c1e39eab167529
+  checksum: 0b3a15e7402a8cf46a491003a0bfe6bf50294939133cf898c1dee0b9f1f8f4742242e81abd15effd8de2e9f3fe5fd81d01a03020341e1d3d0b7f4c6be21d989f
   languageName: node
   linkType: hard
 
