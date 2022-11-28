@@ -234,14 +234,15 @@ $copy-btn-feedback: $background-inverse !default;
     overflow-x: auto;
   }
 
-  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow
+    .#{$prefix}--snippet-container
+    pre::after {
     position: absolute;
     top: 0;
     right: 0;
     width: rem(16px);
     height: 100%;
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($layer, 0), $layer);
+    background-image: linear-gradient(to right, transparent, $layer);
     content: '';
   }
 
