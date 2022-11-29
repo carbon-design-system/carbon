@@ -3,9 +3,7 @@
     <img alt="Carbon Design System" src="https://user-images.githubusercontent.com/3901764/57545698-ce5f2380-7320-11e9-8682-903df232d7b0.png" width="100%" />
   </a>
 </p>
-<h1 align="center">
-  Carbon Design System
-</h1>
+<h1 align="center">Carbon Design System</h1>
 
 > Carbon is an open-source design system built by IBM. With the IBM Design
 > Language as its foundation, the system consists of working code, design tools
