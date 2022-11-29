@@ -46,6 +46,34 @@ export const Default = () => (
   />
 );
 
+export const Invalid = () => (
+  <FluidNumberInput
+    label={ToggleTip}
+    placeholder="Placeholder text"
+    id="input-1"
+    step={10}
+    min={0}
+    max={100}
+    defaultValue={50}
+    invalid
+    invalidText="Warning message that is really long can wrap to more lines but should not be excessively long."
+  />
+);
+
+export const Warning = () => (
+  <FluidNumberInput
+    label={ToggleTip}
+    placeholder="Placeholder text"
+    id="input-1"
+    step={10}
+    min={0}
+    max={100}
+    defaultValue={50}
+    warn
+    warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
+  />
+);
+
 export const Skeleton = () => (
   <div style={{ width: '300px' }}>
     <FluidNumberInputSkeleton

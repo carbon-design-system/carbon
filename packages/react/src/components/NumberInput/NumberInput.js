@@ -8,12 +8,13 @@
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { FormContext } from '../FluidForm';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -57,6 +58,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     ...rest
   } = props;
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const [value, setValue] = useState(() => {
     if (controlledValue !== undefined) {
       return controlledValue;
@@ -138,8 +140,13 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
   }
 
+  const outerElementClasses = cx(`${prefix}--form-item`, {
+    [customClassName]: enabled,
+    [`${prefix}--number-input--fluid--invalid`]: isFluid && invalid,
+  });
+
   return (
-    <div className={cx(`${prefix}--form-item`, { [customClassName]: enabled })}>
+    <div className={outerElementClasses}>
       <div
         className={numberInputClasses}
         data-invalid={normalizedProps.invalid ? true : undefined}>

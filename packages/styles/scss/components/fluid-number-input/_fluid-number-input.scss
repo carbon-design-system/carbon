@@ -37,7 +37,13 @@
   .#{$prefix}--number-input--fluid input[type='number'] {
     min-height: rem(64px);
     padding: rem(32px) rem(80px) rem(13px) $spacing-05;
+    background: transparent;
     outline: none;
+  }
+
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number:focus-within {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--number-input--fluid .#{$prefix}--number__controls {
@@ -64,11 +70,58 @@
   }
 
   .#{$prefix}--number-input--fluid
+    input[type='number']
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn::after {
+    top: 0;
+    height: 100%;
+  }
+
+  .#{$prefix}--number-input--fluid
+    input[type='number']
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn.up-icon::after {
+    height: calc(100% + 4px);
+  }
+
+  .#{$prefix}--number-input--fluid
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn.up-icon:hover::after {
-    top: 0;
-    height: 100%;
     background: $focus;
+  }
+
+  // Invalid styles
+  .#{$prefix}--number-input--fluid .#{$prefix}--form-requirement {
+    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    margin: 0;
+  }
+
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number[data-invalid]
+    input[type='number'],
+  .#{$prefix}--number-input--fluid--invalid
+    input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number
+    input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover {
+    outline: none;
+  }
+
+  .#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number
+    input[type='number'][data-invalid]
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-bottom-width: 1px;
   }
 }
