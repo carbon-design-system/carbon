@@ -10,7 +10,7 @@
     "start": "echo 'Running server in Node 12.16.3+. If you have such Node version in your system just `node app.js` here will work.' && ./node_modules/node/node_modules/.bin/node app.js"
   },
   "dependencies": {
-    "carbon-web-components": "^1.19.0",
+    "@carbon/carbon-web-components": "latest",
     "express": "^4.17.0",
     "prop-types": "^15.7.0",
     "react": "^16.12.0",

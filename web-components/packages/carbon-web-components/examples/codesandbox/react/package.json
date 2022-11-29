@@ -8,7 +8,7 @@
     "start": "webpack serve"
   },
   "dependencies": {
-    "carbon-web-components": "^1.19.0",
+    "@carbon/carbon-web-components": "latest",
     "prop-types": "^15.7.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
