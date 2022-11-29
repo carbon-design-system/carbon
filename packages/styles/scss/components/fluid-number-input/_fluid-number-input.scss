@@ -6,7 +6,7 @@
 //
 
 //-----------------------------
-// Fluid NumberInput
+// Fluid Number Input
 //-----------------------------
 @use '../../config' as *;
 @use '../../motion' as *;
@@ -17,8 +17,58 @@
 @use '../number-input';
 
 @mixin fluid-number-input {
-  // Style overrides go here
-  //   .#{$prefix}--number-input--fluid {
+  .#{$prefix}--number-input--fluid {
+    position: relative;
+    height: 100%;
+    background: $field;
+  }
 
-  //   }
+  .#{$prefix}--number-input--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--number-input--fluid input[type='number'] {
+    min-height: rem(64px);
+    padding: rem(32px) rem(80px) rem(13px) $spacing-05;
+    outline: none;
+  }
+
+  .#{$prefix}--number-input--fluid .#{$prefix}--number__controls {
+    top: rem(23px);
+    height: rem(40px);
+    transform: translate(0);
+  }
+
+  .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-bottom: 1px solid transparent;
+  }
+
+  // Focus Overrides
+  .#{$prefix}--number-input--fluid
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover {
+    border-bottom: 1px solid $focus;
+    outline: none;
+  }
+
+  .#{$prefix}--number-input--fluid
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn.up-icon:hover::after {
+    top: 0;
+    height: 100%;
+    background: $focus;
+  }
 }

@@ -36,16 +36,20 @@ const ToggleTip = (
 
 export const Default = () => (
   <FluidNumberInput
-    labelText={ToggleTip}
+    label={ToggleTip}
     placeholder="Placeholder text"
     id="input-1"
+    step={10}
+    min={0}
+    max={100}
+    defaultValue={50}
   />
 );
 
 export const Skeleton = () => (
   <div style={{ width: '300px' }}>
     <FluidNumberInputSkeleton
-      labelText="Label"
+      label="Label"
       placeholder="Placeholder text"
       id="input-1"
     />
