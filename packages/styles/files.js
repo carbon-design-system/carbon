@@ -83,6 +83,8 @@ const files = [
   'scss/components/fluid-text-area/_index.scss',
   'scss/components/fluid-text-input/_fluid-text-input.scss',
   'scss/components/fluid-text-input/_index.scss',
+  'scss/components/fluid-time-picker/_fluid-time-picker.scss',
+  'scss/components/fluid-time-picker/_index.scss',
   'scss/components/inline-loading/_index.scss',
   'scss/components/inline-loading/_inline-loading.scss',
   'scss/components/link/_index.scss',
