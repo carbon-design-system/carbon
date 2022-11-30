@@ -35,47 +35,53 @@ const ToggleTip = (
 );
 
 export const Default = () => (
-  <FluidNumberInput
-    label={ToggleTip}
-    placeholder="Placeholder text"
-    id="input-1"
-    step={10}
-    min={0}
-    max={100}
-    defaultValue={50}
-  />
+  <div style={{ width: '400px' }}>
+    <FluidNumberInput
+      label={ToggleTip}
+      placeholder="Placeholder text"
+      id="input-1"
+      step={10}
+      min={0}
+      max={100}
+      defaultValue={50}
+    />
+  </div>
 );
 
 export const Invalid = () => (
-  <FluidNumberInput
-    label={ToggleTip}
-    placeholder="Placeholder text"
-    id="input-1"
-    step={10}
-    min={0}
-    max={100}
-    defaultValue={50}
-    invalid
-    invalidText="Warning message that is really long can wrap to more lines but should not be excessively long."
-  />
+  <div style={{ width: '400px' }}>
+    <FluidNumberInput
+      label={ToggleTip}
+      placeholder="Placeholder text"
+      id="input-1"
+      step={10}
+      min={0}
+      max={100}
+      defaultValue={50}
+      invalid
+      invalidText="Warning message that is really long can wrap to more lines but should not be excessively long."
+    />
+  </div>
 );
 
 export const Warning = () => (
-  <FluidNumberInput
-    label={ToggleTip}
-    placeholder="Placeholder text"
-    id="input-1"
-    step={10}
-    min={0}
-    max={100}
-    defaultValue={50}
-    warn
-    warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
-  />
+  <div style={{ width: '400px' }}>
+    <FluidNumberInput
+      label={ToggleTip}
+      placeholder="Placeholder text"
+      id="input-1"
+      step={10}
+      min={0}
+      max={100}
+      defaultValue={50}
+      warn
+      warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
+    />
+  </div>
 );
 
 export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
+  <div style={{ width: '400px' }}>
     <FluidNumberInputSkeleton
       label="Label"
       placeholder="Placeholder text"
@@ -101,61 +107,50 @@ Playground.argTypes = {
   //   },
   //   defaultValue: 'test-class',
   // },
-  // defaultValue: {
-  //   control: {
-  //     type: 'text',
-  //   },
-  // },
-  // placeholder: {
-  //   control: {
-  //     type: 'text',
-  //   },
-  //   defaultValue: 'Placeholder text',
-  // },
-  // invalid: {
-  //   control: {
-  //     type: 'boolean',
-  //   },
-  //   defaultValue: false,
-  // },
-  // invalidText: {
-  //   control: {
-  //     type: 'text',
-  //   },
-  //   defaultValue:
-  //     'Error message that is really long can wrap to more lines but should not be excessively long.',
-  // },
-  // isPassword: {
-  //   control: {
-  //     type: 'boolean',
-  //   },
-  //   defaultValue: false,
-  // },
-  // disabled: {
-  //   control: {
-  //     type: 'boolean',
-  //   },
-  //   defaultValue: false,
-  // },
-  // labelText: {
-  //   control: {
-  //     type: 'text',
-  //   },
-  //   defaultValue: 'Label',
-  // },
-  // warn: {
-  //   control: {
-  //     type: 'boolean',
-  //   },
-  //   defaultValue: false,
-  // },
-  // warnText: {
-  //   control: {
-  //     type: 'text',
-  //   },
-  //   defaultValue:
-  //     'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  // },
+  defaultValue: {
+    control: {
+      type: 'number',
+    },
+    defaultValue: 50,
+  },
+  invalid: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  invalidText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue:
+      'Error message that is really long can wrap to more lines but should not be excessively long.',
+  },
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  label: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Label',
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue:
+      'Warning message that is really long can wrap to more lines but should not be excessively long.',
+  },
   // value: {
   //   control: {
   //     type: 'text',

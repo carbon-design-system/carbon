@@ -59,6 +59,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
+  const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState(() => {
     if (controlledValue !== undefined) {
       return controlledValue;
@@ -140,13 +141,25 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
   }
 
+  const handleFocus = (evt) => {
+    if (evt.target.type === 'button') {
+      setIsFocused(false);
+    } else {
+      setIsFocused(evt.type === 'focus' ? true : false);
+    }
+  };
+
   const outerElementClasses = cx(`${prefix}--form-item`, {
     [customClassName]: enabled,
     [`${prefix}--number-input--fluid--invalid`]: isFluid && invalid,
+    [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
   });
 
   return (
-    <div className={outerElementClasses}>
+    <div
+      className={outerElementClasses}
+      onFocus={isFluid ? handleFocus : null}
+      onBlur={isFluid ? handleFocus : null}>
       <div
         className={numberInputClasses}
         data-invalid={normalizedProps.invalid ? true : undefined}>
@@ -252,6 +265,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             </div>
           )}
         </div>
+        {isFluid && <hr className={`${prefix}--number-input__divider`} />}
         {normalizedProps.validation ? (
           normalizedProps.validation
         ) : (
