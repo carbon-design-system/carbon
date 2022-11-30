@@ -11,5 +11,5 @@ FeatureFlags.merge({
   'enable-css-custom-properties': true,
   'enable-css-grid': true,
   'enable-v11-release': true,
-  'enable-experimental-tile-contrast': true,
+  'enable-experimental-tile-contrast': false,
 });

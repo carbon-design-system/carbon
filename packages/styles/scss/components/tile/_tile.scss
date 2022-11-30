@@ -20,7 +20,7 @@
 /// Tile styles
 /// @access public
 /// @group tile
-@mixin tile {
+@mixin tile($local-enable-experimental-tile-contrast: false) {
   .#{$prefix}--tile-group {
     @include reset;
   }
@@ -63,7 +63,10 @@
     color: $text-primary;
     text-decoration: none;
 
-    @if enabled('enable-experimental-tile-contrast') {
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
       border: 1px solid $border-tile;
     }
 
@@ -105,7 +108,10 @@
     padding-right: $spacing-09;
     border: 1px solid transparent;
 
-    @if enabled('enable-experimental-tile-contrast') {
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
       border: 1px solid $border-tile;
     }
   }
@@ -199,7 +205,10 @@
 
     @include type-style('body-compact-01');
 
-    @if enabled('enable-experimental-tile-contrast') {
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
       border: 1px solid $border-tile;
     }
 

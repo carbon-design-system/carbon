@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import Link from '../Link';
 import Button from '../Button';
 import { default as TextInput } from '../TextInput';
 import { default as RadioTile } from '../RadioTile';
@@ -24,7 +23,7 @@ import './tile-story.scss';
 import mdx from './Tile.mdx';
 
 export default {
-  title: 'Experimental/unstable_Tile',
+  title: 'Components/Tile/Experimental Improved Contrast',
   component: Tile,
   subcomponents: {
     ClickableTile,
@@ -49,59 +48,23 @@ export default {
   },
 };
 
-export const Default = () => {
-  return (
-    <Tile id="tile-1">
-      Default tile
-      <br />
-      <br />
-      <Link href="https://www.carbondesignsystem.com">Link</Link>
-    </Tile>
-  );
-};
-
-export const DefaultWithLayer = () => {
-  return (
-    <>
-      <Tile id="tile-1">
-        First layer
-        <br />
-        <br />
-        <Link href="https://www.carbondesignsystem.com">Link</Link>
-      </Tile>
-      <Layer>
-        <Tile id="tile-2">
-          Second layer
-          <br />
-          <br />
-          <Link href="https://www.carbondesignsystem.com">Link</Link>
-        </Tile>
-        <Layer>
-          <Tile id="tile-3">
-            Third layer
-            <br />
-            <br />
-            <Link href="https://www.carbondesignsystem.com">Link</Link>
-          </Tile>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+const experimentalClassname = 'experimental-tile-contrast';
 
 export const Clickable = () => {
   return (
-    <ClickableTile
-      id="clickable-tile-1"
-      href="https://www.carbondesignsystem.com/">
-      Clickable Tile
-    </ClickableTile>
+    <div className={experimentalClassname}>
+      <ClickableTile
+        id="clickable-tile-1"
+        href="https://www.carbondesignsystem.com/">
+        Clickable Tile
+      </ClickableTile>
+    </div>
   );
 };
 
 export const ClickableWithLayer = () => {
   return (
-    <>
+    <div className={experimentalClassname}>
       <ClickableTile
         id="clickable-tile-1"
         href="https://www.carbondesignsystem.com/">
@@ -121,21 +84,26 @@ export const ClickableWithLayer = () => {
           </ClickableTile>
         </Layer>
       </Layer>
-    </>
+    </div>
   );
 };
 
 export const Selectable = () => {
   return (
-    <SelectableTile id="selectable-tile-1" name="tiles" value="selectable">
-      Selectable
-    </SelectableTile>
+    <div className={experimentalClassname}>
+      <SelectableTile id="selectable-tile-1" name="tiles" value="selectable">
+        Selectable
+      </SelectableTile>
+    </div>
   );
 };
 
 export const MultiSelect = () => {
   return (
-    <div role="group" aria-label="selectable tiles">
+    <div
+      role="group"
+      aria-label="selectable tiles"
+      className={experimentalClassname}>
       <SelectableTile id="selectable-tile-1" name="tiles">
         Option 1
       </SelectableTile>
@@ -151,32 +119,34 @@ export const MultiSelect = () => {
 
 export const Radio = () => {
   return (
-    <TileGroup
-      defaultSelected="default-selected"
-      legend="Radio Tile Group"
-      name="radio tile group">
-      <RadioTile
-        id="radio-tile-1"
-        value="standard"
-        style={{ marginBottom: '.5rem' }}>
-        Option 1
-      </RadioTile>
-      <RadioTile
-        id="radio-tile-2"
-        value="default-selected"
-        style={{ marginBottom: '.5rem' }}>
-        Option 2
-      </RadioTile>
-      <RadioTile id="radio-tile-3" value="selected">
-        Option 3
-      </RadioTile>
-    </TileGroup>
+    <div className={experimentalClassname}>
+      <TileGroup
+        defaultSelected="default-selected"
+        legend="Radio Tile Group"
+        name="radio tile group">
+        <RadioTile
+          id="radio-tile-1"
+          value="standard"
+          style={{ marginBottom: '.5rem' }}>
+          Option 1
+        </RadioTile>
+        <RadioTile
+          id="radio-tile-2"
+          value="default-selected"
+          style={{ marginBottom: '.5rem' }}>
+          Option 2
+        </RadioTile>
+        <RadioTile id="radio-tile-3" value="selected">
+          Option 3
+        </RadioTile>
+      </TileGroup>
+    </div>
   );
 };
 
 export const RadioWithLayer = () => {
   return (
-    <>
+    <div className={experimentalClassname}>
       <TileGroup
         defaultSelected="default-selected"
         legend="First layer"
@@ -223,12 +193,12 @@ export const RadioWithLayer = () => {
           </TileGroup>
         </Layer>
       </Layer>
-    </>
+    </div>
   );
 };
 
 export const Expandable = () => (
-  <div style={{ width: '400px' }}>
+  <div style={{ width: '400px' }} className={experimentalClassname}>
     <ExpandableTile
       id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
@@ -244,7 +214,7 @@ export const Expandable = () => (
 );
 
 export const ExpandableWithInteractive = () => (
-  <div style={{ width: '400px' }}>
+  <div style={{ width: '400px' }} className={experimentalClassname}>
     <ExpandableTile
       id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
@@ -269,7 +239,7 @@ export const ExpandableWithInteractive = () => (
 
 export const ExpandableWithLayer = () => {
   return (
-    <div style={{ width: '400px' }}>
+    <div style={{ width: '400px' }} className={experimentalClassname}>
       <ExpandableTile
         id="expandable-tile-1"
         tileCollapsedIconText="Interact to Expand tile"
