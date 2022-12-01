@@ -11,6 +11,7 @@ env:
   DESIGN_SYSTEM_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/39
   PROPOSALS_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/51
   LABEL_ENHANCEMENT: 'type: enhancement 💡'
+  LABEL_TYPESCRIPT: 'area: typescript'
 
 jobs:
   add-to-proposals-project:
@@ -23,13 +24,23 @@ jobs:
           project-url: ${{ env.PROPOSALS_PROJECT_URL }}
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
 
+  add-to-typescript-project:
+    name: Add issue with typescript label to the TypeScript Adoption project
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/add-to-project@v0.4.0
+        with:
+          labeled: ${{ env.LABEL_TYPESCRIPT }}
+          project-url: ${{ env.DESIGN_SYSTEM_PROJECT_URL }}
+          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
+
   add-to-design-system-project:
     name: Add issue to the Design System project
     runs-on: ubuntu-latest
     steps:
       - uses: actions/add-to-project@v0.4.0
         with:
-          labeled: ${{ env.LABEL_ENHANCEMENT }}
+          labeled: ${{ env.LABEL_ENHANCEMENT }}, ${{ env.LABEL_TYPESCRIPT }}
           label-operator: NOT
           project-url: ${{ env.DESIGN_SYSTEM_PROJECT_URL }}
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
