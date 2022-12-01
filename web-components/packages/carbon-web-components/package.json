@@ -69,7 +69,7 @@
   "dependencies": {
     "@babel/runtime": "^7.16.3",
     "carbon-components": "10.55.0",
-    "flatpickr": "4.6.1",
+    "flatpickr": "4.6.13",
     "lit-element": "^2.5.1",
     "lit-html": "^1.4.1",
     "lodash-es": "^4.17.21"
