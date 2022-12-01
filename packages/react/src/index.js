@@ -242,6 +242,11 @@ export {
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
+export {
+  FluidTimePicker as unstable__FluidTimePicker,
+  FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
+} from './components/FluidTimePicker';
+export { FluidTimePickerSelect as unstable__FluidTimePickerSelect } from './components/FluidTimePickerSelect';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';

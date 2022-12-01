@@ -17,6 +17,7 @@ import { FormContext } from '../FluidForm';
 import { useFeatureFlag } from '../FeatureFlags';
 import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
+import { useAnnouncer } from '../../internal/useAnnouncer';
 
 const TextInput = React.forwardRef(function TextInput(
   {
@@ -186,6 +187,7 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
+  let ariaAnnouncement = useAnnouncer(textCount, maxCount);
 
   return (
     <div className={inputWrapperClasses}>
@@ -205,6 +207,9 @@ const TextInput = React.forwardRef(function TextInput(
             <normalizedProps.icon className={iconClasses} />
           )}
           {input}
+          <span className={`${prefix}--text-input__counter-alert`} role="alert">
+            {ariaAnnouncement}
+          </span>
           {isFluid && <hr className={`${prefix}--text-input__divider`} />}
           {isFluid && !inline && normalizedProps.validation}
         </div>
