@@ -207,7 +207,7 @@
     "web-component-analyzer": "1.2.0-next.0",
     "webpack": "^4.46.0",
     "webpack-dev-server": "^4.0.0",
-    "zone.js": "~0.11.0"
+    "zone.js": "~0.12.0"
   },
   "typings": "es/index.d.ts"
 }
