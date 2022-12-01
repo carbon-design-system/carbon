@@ -60,6 +60,16 @@ In Sass, you can enable the improved contrast tiles via a feature flag.
 @include feature-flags.enable('enable-experimental-tile-contrast');
 ```
 
+or if you have multiple feature flags you can enable them this way.
+
+```scss
+@use '@carbon/react/scss/feature-flags' with (
+  $feature-flags: (
+    'enable-experimental-tile-contrast': true,
+  )
+);
+```
+
 <Preview>
   <div style={{ width: '1018px', maxWidth: '100%' }}>
     <Story id="components-tile-experimental-improved-contrast--clickable" />
