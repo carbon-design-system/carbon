@@ -174,10 +174,11 @@ const Select = React.forwardRef(function Select(
             onFocus={handleFocus}
             onBlur={handleFocus}>
             {input}
+            {isFluid && <hr className={`${prefix}--select__divider`} />}
+            {isFluid && error ? error : null}
           </div>
         )}
-        {isFluid && <hr className={`${prefix}--select__divider`} />}
-        {!inline && error ? error : helper}
+        {!inline && !isFluid && error ? error : helper}
       </div>
     </div>
   );
