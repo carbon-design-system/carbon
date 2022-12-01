@@ -1,7 +1,7 @@
 name: Add To Project
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
   workflow_call:
     secrets:
       ADD_TO_PROJECT_PAT:
@@ -10,6 +10,7 @@ on:
 env:
   DESIGN_SYSTEM_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/39
   PROPOSALS_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/51
+  TYPESCRIPT_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/51
   LABEL_ENHANCEMENT: 'type: enhancement 💡'
   LABEL_TYPESCRIPT: 'area: typescript'
 
@@ -31,7 +32,7 @@ jobs:
       - uses: actions/add-to-project@v0.4.0
         with:
           labeled: ${{ env.LABEL_TYPESCRIPT }}
-          project-url: ${{ env.DESIGN_SYSTEM_PROJECT_URL }}
+          project-url: ${{ env.TYPESCRIPT_PROJECT_URL }}
           github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
 
   add-to-design-system-project:
