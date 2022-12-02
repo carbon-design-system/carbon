@@ -968,6 +968,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "darioplatania",
+      "name": "dario platania",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11682859?v=4",
+      "profile": "http://darioplatania.github.io/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
