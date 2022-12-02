@@ -204,7 +204,6 @@ function ProgressStep({
         onKeyDown={handleKeyDown}
         title={label}
         {...rest}>
-        <span className={`${prefix}--assistive-text`}>{message}</span>
         <SVGIcon
           complete={complete}
           current={current}
@@ -218,6 +217,7 @@ function ProgressStep({
             <p className={`${prefix}--progress-optional`}>{secondaryLabel}</p>
           ) : null}
         </div>
+        <span className={`${prefix}--assistive-text`}>{message}</span>
         <span className={`${prefix}--progress-line`} />
       </button>
     </li>

@@ -15,6 +15,8 @@ import SelectItem from '../SelectItem';
 import SelectItemGroup from '../SelectItemGroup';
 import FluidTextInput from '../FluidTextInput';
 import FluidTextArea from '../FluidTextArea';
+import FluidTimePicker from '../FluidTimePicker';
+import FluidTimePickerSelect from '../FluidTimePickerSelect';
 import ModalWrapper from '../ModalWrapper';
 
 const additionalProps = {
@@ -51,6 +53,21 @@ export const Default = () => (
   <>
     <FluidForm {...additionalProps}>
       <div style={{ display: 'flex' }}>
+        <FluidTimePicker
+          id="time-picker-1"
+          labelText="Time"
+          placeholder="hh:mm">
+          <FluidTimePickerSelect id="select-1" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+          <FluidTimePickerSelect id="select-2" labelText="Timezone">
+            <SelectItem value="et" text="Eastern Time (ET)" />
+            <SelectItem value="ct" text="Central Time (CT)" />
+            <SelectItem value="mt" text="Mountain Time (MT)" />
+            <SelectItem value="pt" text="Pacific Time (PT)" />
+          </FluidTimePickerSelect>
+        </FluidTimePicker>
         <FluidDatePicker datePickerType="range">
           <FluidDatePickerInput
             id="date-picker-input-id-start"
