@@ -144,6 +144,19 @@ describe('Dropdown', () => {
     });
   });
 
+  it('should respect readOnly prop', () => {
+    render(<Dropdown {...mockProps} readOnly={true} />);
+    openMenu(); // menu should not open
+    assertMenuClosed();
+
+    openMenu(); // menu should not open
+    expect(screen.queryByText('Item 0')).toBeNull();
+    expect(mockProps.onChange).toHaveBeenCalledTimes(0);
+    assertMenuClosed();
+
+    mockProps.onChange.mockClear();
+  });
+
   describe('should display initially selected item found in `initialSelectedItem`', () => {
     it('using an object type for the `initialSelectedItem` prop', () => {
       render(

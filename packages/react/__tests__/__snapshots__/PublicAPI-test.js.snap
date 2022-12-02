@@ -2757,6 +2757,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "renderSelectedItem": Object {
         "type": "func",
       },
@@ -7861,6 +7864,9 @@ Map {
       },
       "placeholder": Object {
         "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "rows": Object {
         "type": "number",
