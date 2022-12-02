@@ -98,6 +98,13 @@
     color: $text-disabled;
   }
 
+  //-----------------------------
+  // Readonly
+  //-----------------------------
+  .#{$prefix}--text-area__wrapper--readonly .#{$prefix}--text-area {
+    background: transparent;
+  }
+
   // V11: Possibly deprecate
   .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
     background-color: $field-02;

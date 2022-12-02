@@ -22,6 +22,7 @@ export function Toggle({
   labelText,
   onClick,
   onToggle,
+  readOnly,
   size = 'md',
   toggled,
   ...other
@@ -34,8 +35,9 @@ export function Toggle({
   });
 
   function handleClick(e) {
-    setChecked(!checked);
-
+    if (!readOnly) {
+      setChecked(!checked);
+    }
     if (onClick) {
       onClick(e);
     }
@@ -48,6 +50,7 @@ export function Toggle({
     `${prefix}--toggle`,
     {
       [`${prefix}--toggle--disabled`]: disabled,
+      [`${prefix}--toggle--readonly`]: readOnly,
     },
     className
   );
@@ -150,6 +153,11 @@ Toggle.propTypes = {
    * Provide an event listener that is called when the control is toggled
    */
   onToggle: PropTypes.func,
+
+  /**
+   * Whether the toggle should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)

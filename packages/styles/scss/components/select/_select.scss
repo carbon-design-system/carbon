@@ -252,6 +252,16 @@
     }
   }
 
+  // readonly
+  .#{$prefix}--select--readonly .#{$prefix}--select-input {
+    background-color: transparent;
+    cursor: default;
+  }
+
+  .#{$prefix}--select--readonly .#{$prefix}--select__arrow {
+    fill: $icon-disabled;
+  }
+
   //Skeleton State
   .#{$prefix}--select.#{$prefix}--skeleton {
     @include skeleton;

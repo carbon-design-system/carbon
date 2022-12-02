@@ -140,12 +140,6 @@ Playground.argTypes = {
     },
     defaultValue: 4,
   },
-  value: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: '',
-  },
 };
 
 Playground.args = {

@@ -26,6 +26,7 @@
 import { useEffect, useLayoutEffect, useState } from 'react';
 import setupGetInstanceId from '../tools/setupGetInstanceId';
 import { canUseDOM } from './environment';
+import { useIdPrefix } from './useIdPrefix';
 
 const getId = setupGetInstanceId();
 const useIsomorphicLayoutEffect = canUseDOM ? useLayoutEffect : useEffect;
@@ -38,16 +39,18 @@ let serverHandoffCompleted = false;
  * @returns {string}
  */
 export function useId(prefix = 'id') {
+  const _prefix = useIdPrefix();
+
   const [id, setId] = useState(() => {
     if (serverHandoffCompleted) {
-      return `${prefix}-${getId()}`;
+      return `${_prefix ? `${_prefix}-` : ``}${prefix}-${getId()}`;
     }
     return null;
   });
 
   useIsomorphicLayoutEffect(() => {
     if (id === null) {
-      setId(`${prefix}-${getId()}`);
+      setId(`${_prefix ? `${_prefix}-` : ``}${prefix}-${getId()}`);
     }
   }, [getId]);
 

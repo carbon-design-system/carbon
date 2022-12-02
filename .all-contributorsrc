@@ -906,6 +906,16 @@
       ]
     },
     {
+      "login": "61130061",
+      "name": "Llam4u",
+      "avatar_url": "https://avatars.githubusercontent.com/u/54393468?v=4",
+      "profile": "https://61130061.github.io/llam4u-terminal/",
+      "contributions": [
+        "code",
+        "bug"
+      ]
+    },
+    {
       "login": "torresga",
       "name": "G. Torres",
       "avatar_url": "https://avatars.githubusercontent.com/u/6892410?v=4",
@@ -937,6 +947,24 @@
       "name": "Mario Gueyraud",
       "avatar_url": "https://avatars.githubusercontent.com/u/9916318?v=4",
       "profile": "https://github.com/mgueyraud",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Djunnni",
+      "name": "Dongjoon Lee",
+      "avatar_url": "https://avatars.githubusercontent.com/u/49237205?v=4",
+      "profile": "https://velog.io/@djunnni",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "Shankar-CodeJunkie",
+      "name": "ShankarV-CodeJunkie",
+      "avatar_url": "https://avatars.githubusercontent.com/u/56068832?v=4",
+      "profile": "https://github.com/Shankar-CodeJunkie",
       "contributions": [
         "code"
       ]
