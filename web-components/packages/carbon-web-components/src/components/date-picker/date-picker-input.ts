@@ -258,8 +258,7 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
       </label>
       <div
         class="${prefix}--date-picker-input__wrapper"
-        @click="${handleClickWrapper}"
-      >
+        @click="${handleClickWrapper}">
         <input
           id="input"
           type="${type}"
@@ -269,8 +268,7 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
           placeholder="${ifNonNull(placeholder)}"
           .value="${ifNonNull(value)}"
           ?data-invalid="${invalid}"
-          @input="${handleInput}"
-        />
+          @input="${handleInput}" />
         ${this._renderIcon()}
       </div>
       ${this._renderValidityMessage()}

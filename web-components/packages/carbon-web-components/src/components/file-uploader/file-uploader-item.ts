@@ -66,8 +66,7 @@ class BXFileUploaderItem extends LitElement {
         type="button"
         aria-label="${deleteAssistiveText}"
         class="${prefix}--file-close"
-        @click="${handleClickDeleteButton}"
-      >
+        @click="${handleClickDeleteButton}">
         ${Close16()}
       </button>
     `;
@@ -81,8 +80,7 @@ class BXFileUploaderItem extends LitElement {
     return html`
       <bx-loading
         assistive-text="${uploadingAssistiveText}"
-        type="${LOADING_TYPE.SMALL}"
-      ></bx-loading>
+        type="${LOADING_TYPE.SMALL}"></bx-loading>
     `;
   }
 

@@ -63,8 +63,7 @@ export const clickable = (args) => {
       ping="${ifNonNull(ping)}"
       rel="${ifNonNull(rel)}"
       target="${ifNonNull(target)}"
-      type="${ifNonNull(type)}"
-    >
+      type="${ifNonNull(type)}">
       Clickable tile
     </bx-clickable-tile>
   `;
@@ -91,8 +90,7 @@ export const singleSelectable = (args) => {
         color-scheme="${ifNonNull(colorScheme)}"
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
-        @input="${onInput}"
-      >
+        @input="${onInput}">
         Single-select Tile
       </bx-radio-tile>
       <bx-radio-tile
@@ -100,8 +98,7 @@ export const singleSelectable = (args) => {
         color-scheme="${ifNonNull(colorScheme)}"
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
-        @input="${onInput}"
-      >
+        @input="${onInput}">
         Single-select Tile
       </bx-radio-tile>
       <bx-radio-tile
@@ -109,8 +106,7 @@ export const singleSelectable = (args) => {
         color-scheme="${ifNonNull(colorScheme)}"
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
-        @input="${onInput}"
-      >
+        @input="${onInput}">
         Single-select Tile
       </bx-radio-tile>
     </fieldset>
@@ -144,8 +140,7 @@ export const multiSelectable = (args) => {
       name="${ifNonNull(name)}"
       ?selected="${selected}"
       value="${ifNonNull(value)}"
-      @input="${onInput}"
-    >
+      @input="${onInput}">
       Multi-select Tile
     </bx-selectable-tile>
   `;
@@ -176,12 +171,10 @@ export const expandable = (args) => {
       color-scheme="${ifNonNull(colorScheme)}"
       ?expanded="${expanded}"
       @bx-expandable-tile-beingchanged=${handleBeforeChanged}
-      @bx-expandable-tile-changed=${onChange}
-    >
+      @bx-expandable-tile-changed=${onChange}>
       <bx-tile-above-the-fold-content
         slot="above-the-fold-content"
-        style="height: 200px"
-      >
+        style="height: 200px">
         Above the fold content here
       </bx-tile-above-the-fold-content>
       <bx-tile-below-the-fold-content style="height: 300px">

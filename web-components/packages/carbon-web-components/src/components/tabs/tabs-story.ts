@@ -57,8 +57,7 @@ export const Default = (args) => {
       type="${ifNonNull(type)}"
       value="${ifNonNull(value)}"
       @bx-tabs-beingselected="${handleBeforeSelected}"
-      @bx-tabs-selected="${onSelect}"
-    >
+      @bx-tabs-selected="${onSelect}">
       <bx-tab id="tab-all" target="panel-all" value="all">Option 1</bx-tab>
       <bx-tab
         id="tab-cloudFoundry"
@@ -89,8 +88,7 @@ export const Default = (args) => {
         id="panel-cloudFoundry"
         role="tabpanel"
         aria-labelledby="tab-cloudFoundry"
-        hidden
-      >
+        hidden>
         <h1>Content for option 2</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -103,8 +101,7 @@ export const Default = (args) => {
         id="panel-staging"
         role="tabpanel"
         aria-labelledby="tab-staging"
-        hidden
-      >
+        hidden>
         <h1>Content for option 3</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
@@ -126,8 +123,7 @@ export const Default = (args) => {
         id="panel-router"
         role="tabpanel"
         aria-labelledby="tab-router"
-        hidden
-      >
+        hidden>
         <h1>Content for option 5</h1>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do

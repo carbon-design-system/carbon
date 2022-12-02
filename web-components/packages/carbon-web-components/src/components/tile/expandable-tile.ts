@@ -105,8 +105,7 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${prefix}--tile__chevron"
         aria-labelledby="above-the-fold-content"
         aria-controls="below-the-fold-content"
-        aria-expanded="${String(Boolean(expanded))}"
-      >
+        aria-expanded="${String(Boolean(expanded))}">
         ${ChevronDown16({
           id: 'icon',
         })}
@@ -117,8 +116,7 @@ class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {
           class="${prefix}-ce--expandable-tile--below-the-fold-content"
           style="${ifDefined(
             !expanded ? undefined : `max-height: ${belowTheContentHeight}px`
-          )}"
-        >
+          )}">
           <slot @slotchange="${handleSlotChangeBelowTheFoldContent}"></slot>
         </div>
       </div>

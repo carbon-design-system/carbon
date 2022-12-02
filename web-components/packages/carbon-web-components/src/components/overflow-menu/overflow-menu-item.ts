@@ -70,8 +70,7 @@ class BXOverflowMenuItem extends FocusMixin(LitElement) {
           <button
             class="${prefix}--overflow-menu-options__btn"
             ?disabled=${this.disabled}
-            tabindex="${this.disabled ? -1 : 0}"
-          >
+            tabindex="${this.disabled ? -1 : 0}">
             <slot></slot>
           </button>
         `;

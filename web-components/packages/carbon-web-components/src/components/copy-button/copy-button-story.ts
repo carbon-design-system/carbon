@@ -23,8 +23,7 @@ export const Default = (args) => {
       button-assistive-text="${ifNonNull(buttonAssistiveText)}"
       feedback-text="${ifNonNull(feedbackText)}"
       feedback-timeout="${ifNonNull(feedbackTimeout)}"
-      @click="${onClick}"
-    ></bx-copy-button>
+      @click="${onClick}"></bx-copy-button>
   `;
 };
 

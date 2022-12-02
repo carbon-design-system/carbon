@@ -92,12 +92,10 @@ class BXSideNavLink extends FocusMixin(LitElement) {
           id="title-icon-container"
           part="title-icon-container"
           hidden
-          class="${prefix}--side-nav__icon"
-        >
+          class="${prefix}--side-nav__icon">
           <slot
             name="title-icon"
-            @slotchange=${handleSlotChangeTitleIcon}
-          ></slot>
+            @slotchange=${handleSlotChangeTitleIcon}></slot>
         </div>
         <span part="title" class="${prefix}--side-nav__link-text">
           <slot>${title}</slot>

@@ -285,8 +285,7 @@ export default class BXNumberInput extends BXInput {
         aria-atomic="true"
         type="button"
         ?disabled=${this.disabled}
-        @click=${handleUserInitiatedStepUp}
-      >
+        @click=${handleUserInitiatedStepUp}>
         ${CaretUp16()}
       </button>
     `;
@@ -298,8 +297,7 @@ export default class BXNumberInput extends BXInput {
         aria-atomic="true"
         type="button"
         ?disabled=${this.disabled}
-        @click=${handleUserInitiatedStepDown}
-      >
+        @click=${handleUserInitiatedStepDown}>
         ${CaretDown16()}
       </button>
     `;
@@ -323,8 +321,7 @@ export default class BXNumberInput extends BXInput {
         max="${ifNonEmpty(this.max)}"
         step="${ifNonEmpty(this.step)}"
         role="alert"
-        aria-atomic="true"
-      />
+        aria-atomic="true" />
     `;
 
     const defaultLayout = html`
@@ -349,22 +346,19 @@ export default class BXNumberInput extends BXInput {
         </div>
         <div
           class="${prefix}--form-requirement"
-          ?hidden="${!isGenericallyInvalid()}"
-        >
+          ?hidden="${!isGenericallyInvalid()}">
           <slot name="validity-message"> ${this.validityMessage} </slot>
         </div>
         <div
           class="${prefix}--form-requirement"
           ?hidden="${validity !==
-          NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MAXIMUM}"
-        >
+          NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MAXIMUM}">
           <slot name="validity-message-max"> ${this.validityMessageMax} </slot>
         </div>
         <div
           class="${prefix}--form-requirement"
           ?hidden="${validity !==
-          NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MINIMUM}"
-        >
+          NUMBER_INPUT_VALIDATION_STATUS.EXCEEDED_MINIMUM}">
           <slot name="validity-message-min"> ${this.validityMessageMin} </slot>
         </div>
       </div>

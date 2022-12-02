@@ -35,8 +35,7 @@ class BXTooltipIcon extends BXTooltipDefintion {
         <span
           class="${prefix}--assistive-text"
           id="tooltip-body"
-          role="tooltip"
-        >
+          role="tooltip">
           <slot name="body">${bodyText}</slot>
         </span>
         <slot></slot>

@@ -42,8 +42,7 @@ export const Default = (args) => {
       size="${ifNonNull(size)}"
       unchecked-text="${ifNonNull(uncheckedText)}"
       value="${ifNonNull(value)}"
-      @bx-toggle-changed="${onChange}"
-    ></bx-toggle>
+      @bx-toggle-changed="${onChange}"></bx-toggle>
   `;
 };
 

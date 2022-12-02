@@ -19,8 +19,7 @@ const fileUploaderShellTemplate = (props?) => {
   return html`
     <bx-file-uploader
       helper-text="${ifNonNull(helperText)}"
-      label-text="${ifNonNull(labelText)}"
-    ></bx-file-uploader>
+      label-text="${ifNonNull(labelText)}"></bx-file-uploader>
   `;
 };
 
@@ -30,8 +29,7 @@ const dropContainerTemplate = (props?) => {
     <bx-file-drop-container
       accept="${ifNonNull(accept)}"
       ?disabled="${disabled}"
-      ?multiple="${multiple}"
-    >
+      ?multiple="${multiple}">
     </bx-file-drop-container>
   `;
 };
@@ -52,8 +50,7 @@ const fileUploderItemTemplate = (props?) => {
       state="${ifNonNull(state)}"
       uploading-assistive-text="${ifNonNull(uploadingAssistiveText)}"
       uploaded-assistive-text="${ifNonNull(uploadedAssistiveText)}"
-      validity-message="${ifNonNull(validityMessage)}"
-    >
+      validity-message="${ifNonNull(validityMessage)}">
     </bx-file-uploader-item>
   `;
 };

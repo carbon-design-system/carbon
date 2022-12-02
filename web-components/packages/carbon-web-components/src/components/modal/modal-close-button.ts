@@ -47,8 +47,7 @@ class BXModalCloseButton extends FocusMixin(LitElement) {
         part="button"
         aria-label="${ifNonNull(assistiveText)}"
         class="${prefix}--modal-close"
-        title="${ifNonNull(assistiveText)}"
-      >
+        title="${ifNonNull(assistiveText)}">
         ${Close20({
           part: 'close-icon',
           class: `${prefix}--modal-close__icon`,

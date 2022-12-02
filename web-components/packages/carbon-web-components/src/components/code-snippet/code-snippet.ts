@@ -40,8 +40,7 @@ const renderExpando = ({
   <button
     type="button"
     class="${prefix}--snippet-btn--expand"
-    @click="${handleClick}"
-  >
+    @click="${handleClick}">
     <span id="button-text" class="${prefix}--snippet-btn--text">
       ${children}
     </span>

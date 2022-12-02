@@ -179,8 +179,7 @@ class BXSliderInput extends FocusMixin(LitElement) {
         step="${step}"
         .value="${value}"
         @change="${handleChange}"
-        @input="${handleInput}"
-      />
+        @input="${handleInput}" />
     `;
   }
 

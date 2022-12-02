@@ -133,8 +133,7 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
         aria-haspopup="menu"
         aria-expanded="${String(Boolean(expanded))}"
         @click=${handleClick}
-        @keydown=${handleKeydownTrigger}
-      >
+        @keydown=${handleKeydownTrigger}>
         ${triggerContent}${ChevronDownGlyph({
           part: 'trigger-icon',
           class: `${prefix}--header__menu-arrow`,
@@ -143,8 +142,7 @@ class BXHeaderMenu extends HostListenerMixin(FocusMixin(LitElement)) {
       <ul
         part="menu-body"
         class="${prefix}--header__menu"
-        aria-label="${ifDefined(menuLabel)}"
-      >
+        aria-label="${ifDefined(menuLabel)}">
         <slot></slot>
       </ul>
     `;

@@ -260,16 +260,14 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             ?disabled="${prevButtonDisabled}"
             class="${prevButtonClasses}"
             title="${prevButtonText}"
-            @click="${handleClickPrevButton}"
-          >
+            @click="${handleClickPrevButton}">
             ${CaretLeft24()}
           </button>
           <button
             ?disabled="${nextButtonDisabled}"
             class="${nextButtonClasses}"
             title="${nextButtonText}"
-            @click="${handleClickNextButton}"
-          >
+            @click="${handleClickNextButton}">
             ${CaretRight24()}
           </button>
         </div>

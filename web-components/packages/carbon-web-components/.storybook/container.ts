@@ -34,8 +34,7 @@ const container = ({
     name="main-content"
     data-floating-menu-container
     role="${hasMainTag ? 'none' : 'main'}"
-    class="bx--body bx-ce-demo-devenv--container"
-  >
+    class="bx--body bx-ce-demo-devenv--container">
     ${children}
   </div>
 `;

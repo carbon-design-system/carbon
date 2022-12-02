@@ -137,8 +137,7 @@ class BXLink extends FocusMixin(LitElement) {
         rel="${ifNonNull(rel)}"
         target="${ifNonNull(target)}"
         type="${ifNonNull(type)}"
-        @click="${handleClick}"
-      >
+        @click="${handleClick}">
         ${this._renderInner()}
       </a>
     `;

@@ -97,8 +97,7 @@ export const Default = (args) => {
     <bx-date-picker
       ?disabled="${disabled}"
       name="${ifNonNull(name)}"
-      value="${ifNonNull(value)}"
-    >
+      value="${ifNonNull(value)}">
       <bx-date-picker-input
         color-scheme="${ifNonNull(colorScheme)}"
         ?hide-label="${hideLabel}"
@@ -107,8 +106,7 @@ export const Default = (args) => {
         placeholder="${ifNonNull(placeholder)}"
         size="${ifNonNull(size)}"
         size-horizontal="${ifNonNull(sizeHorizontal)}"
-        validity-message="${ifNonNull(validityMessage)}"
-      >
+        validity-message="${ifNonNull(validityMessage)}">
       </bx-date-picker-input>
     </bx-date-picker>
   `;
@@ -159,8 +157,7 @@ export const singleWithCalendar = (args) => {
       ?open="${open}"
       value="${ifNonNull(value)}"
       @bx-date-picker-changed="${onChanged}"
-      @bx-date-picker-flatpickr-error="${onFlatpickrError}"
-    >
+      @bx-date-picker-flatpickr-error="${onFlatpickrError}">
       <bx-date-picker-input
         color-scheme="${ifNonNull(colorScheme)}"
         ?hide-label="${hideLabel}"
@@ -170,8 +167,7 @@ export const singleWithCalendar = (args) => {
         placeholder="${ifNonNull(placeholder)}"
         size="${ifNonNull(size)}"
         validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}"
-      >
+        @input="${onInput}">
       </bx-date-picker-input>
     </bx-date-picker>
   `;
@@ -213,8 +209,7 @@ export const rangeWithCalendar = (args) => {
       ?open="${open}"
       value="${ifNonNull(value)}"
       @bx-date-picker-changed="${onChanged}"
-      @bx-date-picker-flatpickr-error="${onFlatpickrError}"
-    >
+      @bx-date-picker-flatpickr-error="${onFlatpickrError}">
       <bx-date-picker-input
         color-scheme="${ifNonNull(colorScheme)}"
         ?hide-label="${hideLabel}"
@@ -224,8 +219,7 @@ export const rangeWithCalendar = (args) => {
         placeholder="${ifNonNull(placeholder)}"
         size="${ifNonNull(size)}"
         validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}"
-      >
+        @input="${onInput}">
       </bx-date-picker-input>
       <bx-date-picker-input
         color-scheme="${ifNonNull(colorScheme)}"
@@ -236,8 +230,7 @@ export const rangeWithCalendar = (args) => {
         placeholder="${ifNonNull(placeholder)}"
         size="${ifNonNull(size)}"
         validity-message="${ifNonNull(validityMessage)}"
-        @input="${onInput}"
-      >
+        @input="${onInput}">
       </bx-date-picker-input>
     </bx-date-picker>
   `;
@@ -263,8 +256,7 @@ skeletonSimple.parameters = {
 export const skeletonSingle = () =>
   html`
     <bx-date-picker-input-skeleton
-      kind="single"
-    ></bx-date-picker-input-skeleton>
+      kind="single"></bx-date-picker-input-skeleton>
   `;
 
 skeletonSingle.storyName = 'Skeleton single';

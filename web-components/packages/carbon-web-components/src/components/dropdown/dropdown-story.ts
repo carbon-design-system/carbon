@@ -86,8 +86,7 @@ export const Default = (args) => {
       @bx-dropdown-beingselected=${handleBeforeSelect}
       @bx-dropdown-beingtoggled=${handleBeforeToggle}
       @bx-dropdown-selected=${onSelect}
-      @bx-dropdown-toggled=${onToggle}
-    >
+      @bx-dropdown-toggled=${onToggle}>
       <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
       <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
       <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>

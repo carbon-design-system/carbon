@@ -273,8 +273,7 @@ class BXCEDemoDataTable extends LitElement {
         start="${start}"
         total="${filteredRows!.length}"
         @bx-pagination-changed-current="${handleChangeStart}"
-        @bx-page-sizes-select-changed="${handleChangePageSize}"
-      >
+        @bx-page-sizes-select-changed="${handleChangePageSize}">
         <bx-page-sizes-select slot="page-sizes-select">
           <option value="5">5</option>
           <option value="10">10</option>
@@ -432,8 +431,7 @@ class BXCEDemoDataTable extends LitElement {
         <bx-table-batch-actions
           ?active="${hasBatchActions}"
           selected-rows-count="${selectedRowsCountInFiltered}"
-          @bx-table-batch-actions-cancel-clicked="${handleCancelSelection}"
-        >
+          @bx-table-batch-actions-cancel-clicked="${handleCancelSelection}">
           <bx-btn icon-layout="condensed" @click="${handleDeleteRows}"
             >Delete ${Delete16({ slot: 'icon' })}</bx-btn
           >
@@ -441,15 +439,14 @@ class BXCEDemoDataTable extends LitElement {
             icon-layout="condensed"
             @click="${handleDownloadRows}"
             href="javascript:void 0"
-            download="table-data.json"
-          >
+            download="table-data.json">
             Download ${Download16({ slot: 'icon' })}
           </bx-btn>
         </bx-table-batch-actions>
         <bx-table-toolbar-content ?has-batch-actions="${hasBatchActions}">
           <bx-table-toolbar-search
-            @bx-search-input="${this._handleChangeSearchString}"
-          ></bx-table-toolbar-search>
+            @bx-search-input="${this
+              ._handleChangeSearchString}"></bx-table-toolbar-search>
           <bx-overflow-menu>
             ${Settings16({ slot: 'icon' })}
             <bx-overflow-menu-body>
@@ -465,14 +462,12 @@ class BXCEDemoDataTable extends LitElement {
         size="${size}"
         @bx-table-row-change-selection=${this._handleChangeSelection}
         @bx-table-change-selection-all=${this._handleChangeSelectionAll}
-        @bx-table-header-cell-sort=${this._handleChangeSort}
-      >
+        @bx-table-header-cell-sort=${this._handleChangeSort}>
         <bx-table-head>
           <bx-table-header-row
             ?selected=${selectedAllInFiltered}
             selection-name=${ifNonNull(selectionAllName)}
-            selection-value=${ifNonNull(selectionAllName)}
-          >
+            selection-value=${ifNonNull(selectionAllName)}>
             ${repeat(
               columns!,
               ({ id: columnId }) => columnId,
@@ -486,8 +481,7 @@ class BXCEDemoDataTable extends LitElement {
                   <bx-table-header-cell
                     sort-cycle="${ifNonNull(sortCycle)}"
                     sort-direction="${ifNonNull(sortDirectionForThisCell)}"
-                    data-column-id="${columnId}"
-                  >
+                    data-column-id="${columnId}">
                     ${title}
                   </bx-table-header-cell>
                 `;
@@ -512,8 +506,7 @@ class BXCEDemoDataTable extends LitElement {
                   ?selected=${hasSelection && selected}
                   selection-name="${ifNonNull(selectionName)}"
                   selection-value="${ifNonNull(selectionValue)}"
-                  data-row-id="${rowId}"
-                >
+                  data-row-id="${rowId}">
                   ${repeat(
                     columns!,
                     ({ id: columnId }) => columnId,
@@ -755,8 +748,7 @@ export const sortable = (args) => {
       size="${ifNonNull(size)}"
       @bx-table-row-change-selection=${beforeChangeSelectionHandler}
       @bx-table-change-selection-all=${beforeChangeSelectionHandler}
-      @bx-table-header-cell-sort=${beforeChangeSortHandler}
-    >
+      @bx-table-header-cell-sort=${beforeChangeSortHandler}>
     </bx-ce-demo-data-table>
   `;
 };
@@ -842,8 +834,7 @@ export const sortableWithPagination = (args) => {
       start="0"
       @bx-table-row-change-selection=${beforeChangeSelectionHandler}
       @bx-table-change-selection-all=${beforeChangeSelectionHandler}
-      @bx-table-header-cell-sort=${beforeChangeSortHandler}
-    >
+      @bx-table-header-cell-sort=${beforeChangeSortHandler}>
     </bx-ce-demo-data-table>
   `;
 };

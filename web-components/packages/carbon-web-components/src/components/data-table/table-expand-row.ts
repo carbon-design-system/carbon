@@ -89,8 +89,7 @@ class BXTableExpandRow extends HostListenerMixin(BXTableRow) {
       <div class="${prefix}--table-expand">
         <button
           class="${prefix}--table-expand__button"
-          @click="${handleClickExpando}"
-        >
+          @click="${handleClickExpando}">
           ${ChevronRight16({ class: `${prefix}--table-expand__svg` })}
         </button>
       </div>

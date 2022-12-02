@@ -73,8 +73,7 @@ class BXTableBatchActions extends LitElement {
         <slot></slot>
         <button
           class="${prefix}--btn ${prefix}--btn--primary ${prefix}--batch-summary__cancel"
-          @click=${handleCancel}
-        >
+          @click=${handleCancel}>
           <slot name="cancel-button-content">Cancel</slot>
         </button>
       </div>

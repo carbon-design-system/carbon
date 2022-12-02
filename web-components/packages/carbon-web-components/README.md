@@ -80,14 +80,12 @@ version `v1.16.0`):
 <!-- By `latest` tag -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.min.js"
-></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.min.js"></script>
 
 <!-- By specific version -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.min.js"
-></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.min.js"></script>
 ```
 
 These are the list of available components via CDN:
@@ -141,14 +139,12 @@ extention from `.min.js` to `.rtl.min.js`. For example:
 <!-- By `latest` tag (RTL) -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.rtl.min.js"
-></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.rtl.min.js"></script>
 
 <!-- By specific version (RTL) -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.rtl.min.js"
-></script>
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.rtl.min.js"></script>
 ```
 
 #### Basic usage
@@ -162,8 +158,7 @@ directly used once the script tag has been added to the page. For example:
   <head>
     <script
       type="module"
-      src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/dropdown.min.js"
-    ></script>
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/dropdown.min.js"></script>
     <style type="text/css">
       // Suppresses the custom element until it has been defined
       bx-dropdown:not(:defined),

@@ -45,8 +45,7 @@ export const Default = (args) => {
       max="${ifNonNull(max)}"
       size="${ifNonNull(size)}"
       step="${ifNonNull(step)}"
-      @input="${onInput}"
-    ></bx-number-input>
+      @input="${onInput}"></bx-number-input>
   `;
 };
 
@@ -85,8 +84,7 @@ export const formItem = (args) => {
         max="${ifNonNull(max)}"
         size="${ifNonNull(size)}"
         step="${ifNonNull(step)}"
-        @input="${onInput}"
-      >
+        @input="${onInput}">
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
@@ -135,8 +133,7 @@ export const withoutFormItemWrapper = (args) => {
       max="${ifNonNull(max)}"
       size="${ifNonNull(size)}"
       step="${ifNonNull(step)}"
-      @input="${onInput}"
-    >
+      @input="${onInput}">
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>

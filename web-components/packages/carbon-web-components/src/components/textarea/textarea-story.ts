@@ -55,8 +55,7 @@ export const Default = (args) => {
       validity-message="${ifNonNull(validityMessage)}"
       @input="${onInput}"
       rows="${ifNonNull(rows)}"
-      cols="${ifNonNull(cols)}"
-    >
+      cols="${ifNonNull(cols)}">
     </bx-textarea>
   `;
 };
@@ -90,8 +89,7 @@ export const formItem = (args) => {
         ?disabled="${disabled}"
         value="${ifNonNull(value)}"
         rows="${ifNonNull(rows)}"
-        cols="${ifNonNull(cols)}"
-      >
+        cols="${ifNonNull(cols)}">
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
@@ -129,8 +127,7 @@ export const withoutFormItemWrapper = (args) => {
       ?disabled="${disabled}"
       value="${ifNonNull(value)}"
       rows="${ifNonNull(rows)}"
-      cols="${ifNonNull(cols)}"
-    >
+      cols="${ifNonNull(cols)}">
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>

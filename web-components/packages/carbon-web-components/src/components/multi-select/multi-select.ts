@@ -215,8 +215,7 @@ class BXMultiSelect extends BXDropdown {
             role="button"
             class="${prefix}--list-box__selection ${prefix}--list-box__selection--multi ${prefix}--tag--filter"
             tabindex="0"
-            title="${clearSelectionLabel}"
-          >
+            title="${clearSelectionLabel}">
             ${selectedItemsCount}
             ${Close16({ 'aria-label': clearSelectionLabel })}
           </div>
@@ -242,8 +241,7 @@ class BXMultiSelect extends BXDropdown {
             role="combobox"
             aria-controls="menu-body"
             aria-autocomplete="list"
-            @input="${this._handleInput}"
-          />
+            @input="${this._handleInput}" />
         `;
   }
 
@@ -258,8 +256,7 @@ class BXMultiSelect extends BXDropdown {
             role="button"
             class="${prefix}--list-box__selection"
             tabindex="0"
-            title="${clearSelectionLabel}"
-          >
+            title="${clearSelectionLabel}">
             ${Close16({ 'aria-label': clearSelectionLabel })}
           </div>
         `

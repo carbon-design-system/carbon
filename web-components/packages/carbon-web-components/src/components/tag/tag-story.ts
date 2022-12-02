@@ -30,8 +30,7 @@ export const Default = (args) => {
       size="${ifNonNull(size)}"
       type="${ifNonNull(type)}"
       title="${ifNonNull(title)}"
-      ?disabled="${disabled}"
-    >
+      ?disabled="${disabled}">
       This is a tag
     </bx-tag>
   `;
@@ -87,8 +86,7 @@ export const filter = (args) => {
       ?disabled="${disabled}"
       @click="${onClick}"
       @bx-filter-tag-beingclosed="${handleBeforeClose}"
-      @bx-filter-tag-closed="${onClose}"
-    >
+      @bx-filter-tag-closed="${onClose}">
       This is a tag
     </bx-filter-tag>
   `;

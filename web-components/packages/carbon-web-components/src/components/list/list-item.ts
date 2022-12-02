@@ -67,8 +67,7 @@ class BXListItem extends LitElement {
       <slot></slot>
       <div
         ?hidden="${!hasNestedChild}"
-        class="${prefix}-ce--list__item__nested-child"
-      >
+        class="${prefix}-ce--list__item__nested-child">
         <slot name="nested" @slotchange="${handleSlotChangeNested}"></slot>
       </div>
     `;

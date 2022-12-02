@@ -88,8 +88,7 @@ export const Default = (args) => {
       @bx-combo-box-beingselected=${handleBeforeSelect}
       @bx-combo-box-beingtoggled=${handleBeforeToggle}
       @bx-combo-box-selected=${onSelect}
-      @bx-combo-box-toggled=${onToggle}
-    >
+      @bx-combo-box-toggled=${onToggle}>
       <bx-combo-box-item value="all">Option 1</bx-combo-box-item>
       <bx-combo-box-item value="cloudFoundry">Option 2</bx-combo-box-item>
       <bx-combo-box-item value="staging">Option 3</bx-combo-box-item>

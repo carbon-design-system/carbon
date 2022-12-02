@@ -48,8 +48,7 @@ export const Default = (args) => {
       </bx-structured-list-head>
       <bx-structured-list-body>
         <bx-structured-list-row
-          selection-value=${ifNonNull(selectionValues[0])}
-        >
+          selection-value=${ifNonNull(selectionValues[0])}>
           <bx-structured-list-cell>Row 1</bx-structured-list-cell>
           <bx-structured-list-cell>Row 1</bx-structured-list-cell>
           <bx-structured-list-cell
@@ -59,8 +58,7 @@ export const Default = (args) => {
           >
         </bx-structured-list-row>
         <bx-structured-list-row
-          selection-value=${ifNonNull(selectionValues[1])}
-        >
+          selection-value=${ifNonNull(selectionValues[1])}>
           <bx-structured-list-cell>Row 2</bx-structured-list-cell>
           <bx-structured-list-cell>Row 2</bx-structured-list-cell>
           <bx-structured-list-cell
@@ -70,8 +68,7 @@ export const Default = (args) => {
           >
         </bx-structured-list-row>
         <bx-structured-list-row
-          selection-value=${ifNonNull(selectionValues[2])}
-        >
+          selection-value=${ifNonNull(selectionValues[2])}>
           <bx-structured-list-cell>Row 3</bx-structured-list-cell>
           <bx-structured-list-cell>Row 3</bx-structured-list-cell>
           <bx-structured-list-cell

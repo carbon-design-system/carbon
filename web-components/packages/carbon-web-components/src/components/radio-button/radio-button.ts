@@ -272,8 +272,7 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         .checked=${checked}
         ?disabled="${disabled}"
         name=${ifNonNull(name)}
-        value=${ifNonNull(value)}
-      />
+        value=${ifNonNull(value)} />
       <label for="input" class="${prefix}--radio-button__label">
         <span class="${prefix}--radio-button__appearance"></span>
         <span class="${innerLabelClasses}"><slot>${labelText}</slot></span>

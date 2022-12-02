@@ -101,8 +101,7 @@ class BXPageSizesSelect extends FocusMixin(LitElement) {
           id="select"
           class="${prefix}--select-input"
           .value="${value}"
-          @change=${handleChange}
-        ></select>
+          @change=${handleChange}></select>
         ${ChevronDown16({ class: `${prefix}--select__arrow` })}
       </div>
       <div hidden><slot @slotchange="${handleSlotChange}"></slot></div>

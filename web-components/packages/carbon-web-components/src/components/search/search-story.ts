@@ -52,8 +52,7 @@ export const Default = (args) => {
       size="${ifNonNull(size)}"
       type="${ifNonNull(type)}"
       value="${ifNonNull(value)}"
-      @bx-search-input="${onInput}"
-    ></bx-search>
+      @bx-search-input="${onInput}"></bx-search>
   `;
 };
 

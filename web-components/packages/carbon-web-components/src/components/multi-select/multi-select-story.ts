@@ -95,8 +95,7 @@ export const Default = (args) => {
       @bx-multi-select-beingselected=${handleBeforeSelect}
       @bx-multi-select-beingtoggled=${handleBeforeToggle}
       @bx-multi-select-selected=${onSelect}
-      @bx-multi-select-toggled=${onToggle}
-    >
+      @bx-multi-select-toggled=${onToggle}>
       <bx-multi-select-item value="all">Option 1</bx-multi-select-item>
       <bx-multi-select-item value="cloudFoundry">Option 2</bx-multi-select-item>
       <bx-multi-select-item value="staging">Option 3</bx-multi-select-item>
@@ -167,8 +166,7 @@ export const Filterable = (args) => {
       @bx-multi-select-beingselected=${handleBeforeSelect}
       @bx-multi-select-beingtoggled=${handleBeforeToggle}
       @bx-multi-select-selected=${onSelect}
-      @bx-multi-select-toggled=${onToggle}
-    >
+      @bx-multi-select-toggled=${onToggle}>
       <bx-multi-select-item value="example"
         >An example option that is really long to show what should be done to
         handle long text</bx-multi-select-item

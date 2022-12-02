@@ -44,8 +44,7 @@ export const Default = (args) => {
       value="${ifNonNull(value)}"
       @bx-content-switcher-beingselected="${handleBeforeSelected}"
       @bx-content-switcher-selected="${onSelect}"
-      size="${size}"
-    >
+      size="${size}">
       <bx-content-switcher-item value="all">Option 1</bx-content-switcher-item>
       <bx-content-switcher-item value="cloudFoundry" disabled
         >Option 2</bx-content-switcher-item

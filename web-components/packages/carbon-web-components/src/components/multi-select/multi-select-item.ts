@@ -48,8 +48,7 @@ class BXMultiSelectItem extends BXDropdownItem {
             ?disabled=${disabled}
             .checked=${selected}
             name="${ifDefined(selectionName || undefined)}"
-            value="${value}"
-          />
+            value="${value}" />
           <label for="input" class="${prefix}--checkbox-label">
             <span class="${prefix}--checkbox-label-text"><slot></slot></span>
           </label>

@@ -164,26 +164,22 @@ class BXSideNavMenu extends FocusMixin(LitElement) {
         aria-haspopup="true"
         aria-expanded="${String(Boolean(expanded && !forceCollapsed))}"
         class="${prefix}--side-nav__submenu"
-        @click=${handleClickExpando}
-      >
+        @click=${handleClickExpando}>
         <div
           id="title-icon-container"
           part="title-icon-container"
           hidden
-          class="${prefix}--side-nav__icon"
-        >
+          class="${prefix}--side-nav__icon">
           <slot
             name="title-icon"
-            @slotchange=${handleSlotChangeTitleIcon}
-          ></slot>
+            @slotchange=${handleSlotChangeTitleIcon}></slot>
         </div>
         <span part="title" class="${prefix}--side-nav__submenu-title"
           >${title}</span
         >
         <div
           part="expando-icon-container"
-          class="${prefix}--side-nav__icon ${prefix}--side-nav__icon--small ${prefix}--side-nav__submenu-chevron"
-        >
+          class="${prefix}--side-nav__icon ${prefix}--side-nav__icon--small ${prefix}--side-nav__submenu-chevron">
           ${ChevronDown20({ part: 'expando-icon' })}
         </div>
       </button>

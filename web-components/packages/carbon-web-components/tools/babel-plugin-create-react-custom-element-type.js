@@ -35,7 +35,7 @@ function createMetadataVisitor(api) {
   const { types: t } = api;
 
   /**
-   * @param {Path} path The Babel path what a `@property()` decorator call refers to.
+   * @param {string} path The Babel path what a `@property()` decorator call refers to.
    * @returns {boolean} `true` if such decorator is imported from `lit-element`.
    */
   const propertyIsFromLit = (path) => {
@@ -71,7 +71,7 @@ function createMetadataVisitor(api) {
    */
 
   /**
-   * @param {Path} path The Babel path for `@property()` decorator call.
+   * @param {string} path The Babel path for `@property()` decorator call.
    * @returns {PropertyMetadata} The metadata harvested from the given `@property()` decorator call.
    */
   const getPropertyMetadata = (path) => {
@@ -123,7 +123,7 @@ function createMetadataVisitor(api) {
   };
 
   /**
-   * @param {Path} path The Babel path of the superclass.
+   * @param {string} path The Babel path of the superclass.
    * @returns {PropertyMetadata}
    *   The given Babel path itself if it's an identifier.
    *   The first argument if the given Babel path is a function, assuming it as a mixin call.
@@ -298,7 +298,7 @@ module.exports = function generateCreateReactCustomElementType(
   /**
    * The named import specifiers associated with `type` in `@property`.
    *
-   * @type {object<string, ImportSpecifier>}
+   * @type {(boolean|number|object)}
    */
   const importSpecifiers = {
     Boolean: t.importSpecifier(
@@ -318,7 +318,7 @@ module.exports = function generateCreateReactCustomElementType(
   /**
    * The serializers associated with `type` in `@property`.
    *
-   * @type {object<string, Identifier>}
+   * @type {(boolean|number|object)}
    */
   const serializers = {
     Boolean: booleanSerializerIdentifier,
@@ -329,7 +329,7 @@ module.exports = function generateCreateReactCustomElementType(
   /**
    * The prop types associated with `type` in `@property`.
    *
-   * @type {object<string, Identifier>}
+   * @type {(string|boolean|number|object)}
    */
   const propTypesForLitTypes = {
     String: t.memberExpression(
@@ -353,7 +353,7 @@ module.exports = function generateCreateReactCustomElementType(
   /**
    *
    * @param {object<string, PropertyMetadata>} declaredProps The list of metadata harvested from `@property()` decorator calls.
-   * @returns {ImportDeclaration} The `import` statement for `src/globals/wrappers/createReactCustomElementType`.
+   * @returns {string} The `import` statement for `src/globals/wrappers/createReactCustomElementType`.
    */
   const buildCreateReactCustomElementTypeImport = (declaredProps) => {
     const typesInUse = Object.keys(declaredProps)
@@ -373,7 +373,7 @@ module.exports = function generateCreateReactCustomElementType(
 
   /**
    * @param {object<string, PropertyMetadata>} declaredProps The list of metadata harvested from `@property()` decorator calls.
-   * @returns {ObjectProperty[]}
+   * @returns {object}
    *   The list of `{ attribute: 'attribute-name', serialize: typeSerializer }` generated from `@property()` decorators.
    */
   const buildPropsDescriptor = (declaredProps) =>
@@ -410,9 +410,9 @@ module.exports = function generateCreateReactCustomElementType(
     });
 
   /**
-   * @param {object<string, StringLiteral|TemplateLiteral>} customEvents
+   * @param {string} customEvents
    *   The list of metadata harvested from `eventSomething` static properties.
-   * @returns {ObjectProperty[]} The list of `{ event: 'event-name' }` generated from `eventSomething` static properties.
+   * @returns {object} The list of `{ event: 'event-name' }` generated from `eventSomething` static properties.
    */
   const buildEventsDescriptor = (customEvents) =>
     Object.keys(customEvents).map((name) =>
@@ -426,7 +426,7 @@ module.exports = function generateCreateReactCustomElementType(
 
   /**
    * @param {object<string, PropertyMetadata>} declaredProps The list of metadata harvested from `@property()` decorator calls.
-   * @returns {ObjectProperty[]} The list of `PropTypes.someType` generated from `@property()` decorators.
+   * @returns {object} The list of `PropTypes.someType` generated from `@property()` decorators.
    */
   const buildPropTypes = (declaredProps) =>
     Object.keys(declaredProps).map((name) => {
@@ -439,9 +439,9 @@ module.exports = function generateCreateReactCustomElementType(
     });
 
   /**
-   * @param {object<string, StringLiteral|TemplateLiteral>} customEvents
+   * @param {string} customEvents
    *   The list of metadata harvested from `eventSomething` static properties.
-   * @returns {ObjectProperty[]} The list of `PropTypes.func` generated from `eventSomething` static properties.
+   * @returns {object} The list of `PropTypes.func` generated from `eventSomething` static properties.
    */
   const buildEventsPropTypes = (customEvents) =>
     Object.keys(customEvents).map((name) =>

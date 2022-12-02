@@ -205,8 +205,7 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
               ping="${ifNonNull(ping)}"
               rel="${ifNonNull(rel)}"
               target="${ifNonNull(target)}"
-              type="${ifNonNull(type)}"
-            >
+              type="${ifNonNull(type)}">
               <slot @slotchange="${handleSlotChange}"></slot>
               <slot name="icon" @slotchange="${handleSlotChange}"></slot>
             </a>
@@ -219,8 +218,7 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${classes}"
         ?autofocus="${autofocus}"
         ?disabled="${disabled}"
-        type="${ifNonNull(type)}"
-      >
+        type="${ifNonNull(type)}">
         <slot @slotchange="${handleSlotChange}"></slot>
         <slot name="icon" @slotchange="${handleSlotChange}"></slot>
       </button>

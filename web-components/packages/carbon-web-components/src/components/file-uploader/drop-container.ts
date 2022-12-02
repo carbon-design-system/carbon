@@ -174,8 +174,7 @@ class BXFileDropContainer extends HostListenerMixin(LitElement) {
             accept="${ifNonEmpty(accept)}"
             ?disabled="${disabled}"
             ?multiple="${multiple}"
-            @change="${handleChange}"
-          />
+            @change="${handleChange}" />
         </div>
       </label>
     `;

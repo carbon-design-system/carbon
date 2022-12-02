@@ -219,11 +219,9 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
           class="${prefix}--structured-list-input"
           .checked=${selected}
           name=${selectionName}
-          value=${ifDefined(selectionValue)}
-        />
+          value=${ifDefined(selectionValue)} />
         <div
-          class="${prefix}--structured-list-td ${prefix}--structured-list-cell"
-        >
+          class="${prefix}--structured-list-td ${prefix}--structured-list-cell">
           ${CheckmarkFilled16({
             class: `${prefix}--structured-list-svg`,
             title: selectionIconTitle,

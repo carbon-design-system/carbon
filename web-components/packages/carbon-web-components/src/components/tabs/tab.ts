@@ -60,8 +60,7 @@ class BXTab extends BXContentSwitcherItem {
         class="${prefix}--tabs__nav-link"
         role="tab"
         ?disabled="${disabled}"
-        aria-selected="${Boolean(selected)}"
-      >
+        aria-selected="${Boolean(selected)}">
         <slot></slot>
       </a>
     `;

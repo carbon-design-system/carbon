@@ -27,31 +27,30 @@ export const Default = (args) => {
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
         secondary-label-text="${ifNonNull(secondaryLabelText)}"
-        state="invalid"
-      ></bx-progress-step>
+        state="invalid"></bx-progress-step>
       <bx-progress-step
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
         secondary-label-text="${ifNonNull(secondaryLabelText)}"
-        state="complete"
-      ></bx-progress-step>
+        state="complete"></bx-progress-step>
       <bx-progress-step
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
         secondary-label-text="${ifNonNull(secondaryLabelText)}"
-        state="current"
-      ></bx-progress-step>
+        state="current"></bx-progress-step>
       <bx-progress-step
         disabled
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(secondaryLabelText)}"
-      ></bx-progress-step>
+        secondary-label-text="${ifNonNull(
+          secondaryLabelText
+        )}"></bx-progress-step>
       <bx-progress-step
         icon-label="${ifNonNull(iconLabel)}"
         label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(secondaryLabelText)}"
-      ></bx-progress-step>
+        secondary-label-text="${ifNonNull(
+          secondaryLabelText
+        )}"></bx-progress-step>
     </bx-progress-indicator>
   `;
 };

@@ -137,8 +137,7 @@ class BXProgressStep extends FocusMixin(LitElement) {
           role="button"
           class="${prefix}--progress-label"
           tabindex="0"
-          aria-describedby="label-tooltip"
-        >
+          aria-describedby="label-tooltip">
           ${labelText}
         </p>
       </slot>

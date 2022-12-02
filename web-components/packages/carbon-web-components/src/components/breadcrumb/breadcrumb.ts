@@ -30,8 +30,7 @@ class BXBreadcrumb extends LitElement {
   render() {
     return html`
       <ol
-        class="${prefix}--breadcrumb ${prefix}--breadcrumb--no-trailing-slash"
-      >
+        class="${prefix}--breadcrumb ${prefix}--breadcrumb--no-trailing-slash">
         <slot></slot>
       </ol>
     `;

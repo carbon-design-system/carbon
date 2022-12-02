@@ -107,8 +107,7 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
       <div
         class="${classes}"
         tabindex="${expanded ? '-1' : '0'}"
-        @click="${handleSearchClick}"
-      >
+        @click="${handleSearchClick}">
         ${result}
       </div>
     `;

@@ -44,8 +44,7 @@ export const Default = (args) => {
       ?open="${open}"
       size="${ifNonNull(size)}"
       @bx-modal-beingclosed=${handleBeforeClose}
-      @bx-modal-closed=${onClose}
-    >
+      @bx-modal-closed=${onClose}>
       <bx-modal-header>
         <bx-modal-close-button></bx-modal-close-button>
         <bx-modal-label>Label (Optional)</bx-modal-label>
@@ -78,8 +77,7 @@ export const SingleButton = (args) => {
       ?open="${open}"
       size="${ifNonNull(size)}"
       @bx-modal-beingclosed=${handleBeforeClose}
-      @bx-modal-closed=${onClose}
-    >
+      @bx-modal-closed=${onClose}>
       <bx-modal-header>
         <bx-modal-close-button></bx-modal-close-button>
         <bx-modal-label>Label (Optional)</bx-modal-label>
@@ -109,8 +107,7 @@ export const ThreeButtons = (args) => {
       ?open="${open}"
       size="${ifNonNull(size)}"
       @bx-modal-beingclosed=${handleBeforeClose}
-      @bx-modal-closed=${onClose}
-    >
+      @bx-modal-closed=${onClose}>
       <bx-modal-header>
         <bx-modal-close-button></bx-modal-close-button>
         <bx-modal-label>Label (Optional)</bx-modal-label>

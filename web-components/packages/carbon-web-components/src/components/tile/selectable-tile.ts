@@ -110,8 +110,7 @@ class BXSelectableTile extends FocusMixin(LitElement) {
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
         .checked=${selected}
-        @change=${handleChange}
-      />
+        @change=${handleChange} />
       <label for="input" class="${classes}" tabindex="0">
         <div class="${prefix}--tile__checkmark">
           ${CheckmarkFilled16({

@@ -45,8 +45,7 @@ export const Default = (args) => {
     <bx-overflow-menu ?open="${open}" ?disabled="${disabled}" size="${size}">
       <bx-overflow-menu-body
         color-scheme="${ifNonNull(colorScheme)}"
-        direction="${ifNonNull(direction)}"
-      >
+        direction="${ifNonNull(direction)}">
         <bx-overflow-menu-item>Option 1</bx-overflow-menu-item>
         <bx-overflow-menu-item>Option 2</bx-overflow-menu-item>
         <bx-overflow-menu-item>Option 3</bx-overflow-menu-item>

@@ -442,15 +442,13 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       <a
         class="${prefix}--visually-hidden"
         href="javascript:void 0"
-        role="navigation"
-      ></a>
+        role="navigation"></a>
       <slot @slotchange="${handleSlotChange}"></slot>
       <div id="floating-menu-container"></div>
       <a
         class="${prefix}--visually-hidden"
         href="javascript:void 0"
-        role="navigation"
-      ></a>
+        role="navigation"></a>
     `;
   }
 

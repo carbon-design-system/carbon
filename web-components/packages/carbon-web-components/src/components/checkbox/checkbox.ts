@@ -135,8 +135,7 @@ class BXCheckbox extends FocusMixin(FormMixin(LitElement)) {
         .indeterminate="${indeterminate}"
         name="${ifNonNull(name)}"
         value="${ifNonNull(value)}"
-        @change="${handleChange}"
-      />
+        @change="${handleChange}" />
       <label for="checkbox" part="label" class="${labelClasses}">
         <span class="${prefix}--checkbox-label-text"
           ><slot>${labelText}</slot></span

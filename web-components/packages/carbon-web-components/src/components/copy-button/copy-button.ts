@@ -74,13 +74,11 @@ export const _renderButton = ({
       type="button"
       class="${className}"
       title="${ifDefined(assistiveText)}"
-      @click="${handleClickButton}"
-    >
+      @click="${handleClickButton}">
       ${children}
       <div
         class="${feedbackClasses}"
-        data-feedback="${ifDefined(feedbackText)}"
-      ></div>
+        data-feedback="${ifDefined(feedbackText)}"></div>
     </button>
   `;
 };

@@ -113,8 +113,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
                 ?disabled="${disabled}"
                 label="${ifNonNull(label ?? textContent)}"
                 ?selected="${selected}"
-                value="${ifNonNull(value)}"
-              >
+                value="${ifNonNull(value)}">
                 ${textContent}
               </option>
             `
@@ -122,8 +121,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
               <optgroup
                 class="${prefix}--select-optgroup"
                 ?disabled="${disabled}"
-                label="${ifNonNull(label)}"
-              >
+                label="${ifNonNull(label)}">
                 ${this._renderItems(item)}
               </optgroup>
             `;
@@ -364,8 +362,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
           aria-describedby="${ifDefined(
             !invalid ? undefined : 'validity-message'
           )}"
-          @input="${handleInput}"
-        >
+          @input="${handleInput}">
           ${!placeholder || value
             ? undefined
             : html`
@@ -374,8 +371,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
                   hidden
                   class="${prefix}--select-option"
                   value="${placeholderItemValue}"
-                  selected
-                >
+                  selected>
                   ${placeholder}
                 </option>
               `}

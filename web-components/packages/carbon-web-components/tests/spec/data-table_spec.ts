@@ -34,8 +34,7 @@ const headerCellTemplate = (props?) => {
     <bx-table-header-cell
       ?sort-active="${sortActive}"
       sort-cycle="${ifNonNull(sortCycle)}"
-      sort-direction="${ifNonNull(sortDirection)}"
-    >
+      sort-direction="${ifNonNull(sortDirection)}">
       Name
     </bx-table-header-cell>
   `;
@@ -50,8 +49,7 @@ const rowTemplate = (props?) => {
       ?selected="${selected}"
       selection-name="${ifNonNull(selectionName)}"
       selection-label="${ifNonNull(selectionLabel)}"
-      selection-value="${ifNonNull(selectionValue)}"
-    ></bx-table-row>
+      selection-value="${ifNonNull(selectionValue)}"></bx-table-row>
   `;
 };
 
@@ -71,8 +69,7 @@ const expandRowTemplate = (props?) => {
       ?selected="${selected}"
       selection-name="${ifNonNull(selectionName)}"
       selection-label="${ifNonNull(selectionLabel)}"
-      selection-value="${ifNonNull(selectionValue)}"
-    ></bx-table-expand-row>
+      selection-value="${ifNonNull(selectionValue)}"></bx-table-expand-row>
     <bx-table-expanded-row></bx-table-expanded-row>
   `;
 };
@@ -82,8 +79,7 @@ const batchActionTemplate = (props?) => {
   return html`
     <bx-table-batch-actions
       ?active="${active}"
-      selected-rows-count="${selectedRowsCount}"
-    ></bx-table-batch-actions>
+      selected-rows-count="${selectedRowsCount}"></bx-table-batch-actions>
   `;
 };
 
@@ -92,8 +88,7 @@ const toolbarSearchTemplate = (props?) => {
   return html`
     <bx-table-toolbar-search
       ?expanded="${expanded}"
-      size="${ifNonNull(size)}"
-    ></bx-table-toolbar-search>
+      size="${ifNonNull(size)}"></bx-table-toolbar-search>
   `;
 };
 

@@ -56,8 +56,7 @@ export const Default = (args) => {
     <bx-tooltip ?open="${open}">
       <bx-tooltip-body
         direction="${ifNonNull(direction)}"
-        alignment="${ifNonNull(alignment)}"
-      >
+        alignment="${ifNonNull(alignment)}">
         <p>
           This is some tooltip text. This box shows the maximum amount of text
           that should appear inside. If more room is needed please use a modal
@@ -97,8 +96,7 @@ export const definition = (args) => {
     <bx-tooltip-definition
       alignment="${ifNonNull(alignment)}"
       body-text="${ifNonNull(bodyText)}"
-      direction="${ifNonNull(direction)}"
-    >
+      direction="${ifNonNull(direction)}">
       Definition Tooltip
     </bx-tooltip-definition>
   `;
@@ -133,8 +131,7 @@ export const icon = (args) => {
     <bx-tooltip-icon
       alignment="${ifNonNull(alignment)}"
       body-text="${ifNonNull(bodyText)}"
-      direction="${ifNonNull(direction)}"
-    >
+      direction="${ifNonNull(direction)}">
       ${Filter16()}
     </bx-tooltip-icon>
   `;

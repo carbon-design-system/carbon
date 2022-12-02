@@ -28,8 +28,7 @@ export const Default = (args) => {
       name="${ifNonNull(name)}"
       step="${ifNonNull(step)}"
       value="${ifNonNull(value)}"
-      @bx-slider-changed="${onChange}"
-    ></bx-slider>
+      @bx-slider-changed="${onChange}"></bx-slider>
   `;
 };
 
@@ -62,12 +61,10 @@ export const withInputBox = (args) => {
       name="${ifNonNull(name)}"
       step="${ifNonNull(step)}"
       value="${ifNonNull(value)}"
-      @bx-slider-changed="${onChange}"
-    >
+      @bx-slider-changed="${onChange}">
       <bx-slider-input
         aria-label="Slider value"
-        type="number"
-      ></bx-slider-input>
+        type="number"></bx-slider-input>
     </bx-slider>
   `;
 };

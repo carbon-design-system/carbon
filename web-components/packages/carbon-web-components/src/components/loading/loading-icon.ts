@@ -35,14 +35,12 @@ export default ({
         class="${prefix}--loading__background"
         cx="50%"
         cy="50%"
-        r="${radius}"
-      />
+        r="${radius}" />
       <circle
         class="${prefix}--loading__stroke"
         cx="50%"
         cy="50%"
-        r="${radius}"
-      />
+        r="${radius}" />
     </svg>
   `;
 };

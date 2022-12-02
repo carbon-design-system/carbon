@@ -113,8 +113,7 @@ class BXHeaderMenuButton extends FocusMixin(LitElement) {
         class="${classes}"
         ?disabled=${disabled}
         aria-label="${ifNonNull(buttonLabel)}"
-        @click=${handleClick}
-      >
+        @click=${handleClick}>
         ${(active ? Close20 : Menu20)({ slot: 'toggle-icon' })}
       </button>
     `;

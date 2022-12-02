@@ -35,8 +35,7 @@ export const Default = (args) => {
       label-text="${ifNonNull(labelText)}"
       name="${ifNonNull(name)}"
       value="${ifNonNull(value)}"
-      @bx-checkbox-changed="${onChange}"
-    ></bx-checkbox>
+      @bx-checkbox-changed="${onChange}"></bx-checkbox>
   `;
 };
 

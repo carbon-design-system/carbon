@@ -131,8 +131,7 @@ export const sideNav = (args) => {
     <bx-side-nav
       aria-label="Side navigation"
       collapse-mode="${ifNonNull(collapseMode)}"
-      ?expanded=${expanded}
-    >
+      ?expanded=${expanded}>
       <bx-side-nav-items>
         <bx-side-nav-menu title="L0 menu">
           <bx-side-nav-menu-item href="${ifNonNull(href)}">
@@ -152,8 +151,7 @@ export const sideNav = (args) => {
           <bx-side-nav-menu-item
             active
             aria-current="page"
-            href="${ifNonNull(href)}"
-          >
+            href="${ifNonNull(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
           <bx-side-nav-menu-item href="${ifNonNull(href)}">
@@ -211,8 +209,7 @@ export const sideNavWithIcons = (args) => {
     <bx-side-nav
       aria-label="Side navigation"
       collapse-mode="${ifNonNull(collapseMode)}"
-      ?expanded=${expanded}
-    >
+      ?expanded=${expanded}>
       <bx-side-nav-items>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
@@ -234,8 +231,7 @@ export const sideNavWithIcons = (args) => {
           <bx-side-nav-menu-item
             active
             aria-current="page"
-            href="${ifNonNull(href)}"
-          >
+            href="${ifNonNull(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
           <bx-side-nav-menu-item href="${ifNonNull(href)}">
@@ -294,8 +290,7 @@ export const header = (args) => {
       <bx-header-menu-button
         button-label-active="Close menu"
         button-label-inactive="Open menu"
-        @bx-header-menu-button-toggled="${handleButtonToggle}"
-      ></bx-header-menu-button>
+        @bx-header-menu-button-toggled="${handleButtonToggle}"></bx-header-menu-button>
       <bx-header-name href="javascript:void 0" prefix="IBM"
         >[Platform]</bx-header-name
       >
@@ -320,8 +315,7 @@ export const header = (args) => {
       aria-label="Side navigation"
       collapse-mode="${ifNonNull(collapseMode)}"
       ?expanded=${expanded}
-      usage-mode="${ifNonNull(usageMode)}"
-    >
+      usage-mode="${ifNonNull(usageMode)}">
       <bx-side-nav-items>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
@@ -343,8 +337,7 @@ export const header = (args) => {
           <bx-side-nav-menu-item
             active
             aria-current="page"
-            href="${ifNonNull(href)}"
-          >
+            href="${ifNonNull(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
           <bx-side-nav-menu-item href="${ifNonNull(href)}">

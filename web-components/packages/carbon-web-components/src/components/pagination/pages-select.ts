@@ -94,8 +94,7 @@ class BXPagesSelect extends FocusMixin(LitElement) {
         <select
           class="${prefix}--select-input"
           .value="${value}"
-          @change="${handleChange}"
-        >
+          @change="${handleChange}">
           ${Array.from(new Array(total)).map(
             (_item, index) =>
               html`

@@ -647,8 +647,7 @@ class BXDropdown extends ValidityMixin(
           <div
             part="helper-text"
             class="${helperClasses}"
-            ?hidden="${inline || !hasHelperText}"
-          >
+            ?hidden="${inline || !hasHelperText}">
             <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
               >${helperText}</slot
             >
@@ -673,8 +672,7 @@ class BXDropdown extends ValidityMixin(
             part="menu-body"
             class="${prefix}--list-box__menu"
             role="listbox"
-            tabindex="-1"
-          >
+            tabindex="-1">
             <slot></slot>
           </div>
         `;
@@ -682,8 +680,7 @@ class BXDropdown extends ValidityMixin(
       <label
         part="label-text"
         class="${labelClasses}"
-        ?hidden="${!hasLabelText}"
-      >
+        ?hidden="${!hasLabelText}">
         <slot name="label-text" @slotchange="${handleSlotchangeLabelText}"
           >${labelText}</slot
         >
@@ -694,8 +691,7 @@ class BXDropdown extends ValidityMixin(
         ?data-invalid=${invalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
-        @keypress=${handleKeypressInner}
-      >
+        @keypress=${handleKeypressInner}>
         ${validityIcon}
         <div
           part="trigger-button"
@@ -706,8 +702,7 @@ class BXDropdown extends ValidityMixin(
           aria-expanded="${String(open)}"
           aria-haspopup="listbox"
           aria-owns="menu-body"
-          aria-controls="menu-body"
-        >
+          aria-controls="menu-body">
           ${this._renderPrecedingTriggerContent()}${this._renderTriggerContent()}${this._renderFollowingTriggerContent()}
           <div class="${iconContainerClasses}">
             ${ChevronDown16({ 'aria-label': toggleLabel })}
@@ -720,8 +715,7 @@ class BXDropdown extends ValidityMixin(
         class="${prefix}--assistive-text"
         role="status"
         aria-live="assertive"
-        aria-relevant="additions text"
-      >
+        aria-relevant="additions text">
         ${assistiveStatusText}
       </div>
     `;

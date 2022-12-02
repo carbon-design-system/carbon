@@ -32,8 +32,7 @@ export const Default = (args) => {
       start="${ifNonNull(start)}"
       total="${ifNonNull(total)}"
       @bx-pagination-changed-current="${onChangedCurrent}"
-      @bx-page-sizes-select-changed="${onChangedPageSizesSelect}"
-    >
+      @bx-page-sizes-select-changed="${onChangedPageSizesSelect}">
       <bx-page-sizes-select slot="page-sizes-select">
         <option value="10">10</option>
         <option value="20">20</option>

@@ -76,8 +76,7 @@ export const Default = (args) => {
       size="${ifNonNull(size)}"
       target="${ifNonNull(target)}"
       type="${ifNonNull(type)}"
-      @click=${onClick}
-    >
+      @click=${onClick}>
       Button
     </bx-btn>
   `;
@@ -106,8 +105,7 @@ export const icon = (args) => {
       size=${ifNonNull(size)}
       href=${ifNonNull(href || undefined)}
       ?isExpressive="${isExpressive}"
-      @click=${onClick}
-    >
+      @click=${onClick}>
       ${Add16({ slot: 'icon' })}
     </bx-btn>
   `;
@@ -126,8 +124,7 @@ export const textAndIcon = (args) => {
       ?isExpressive="${isExpressive}"
       size=${ifNonNull(size)}
       href=${ifNonNull(href || undefined)}
-      @click=${onClick}
-    >
+      @click=${onClick}>
       Button ${Add16({ slot: 'icon' })}
     </bx-btn>
   `;
@@ -158,8 +155,7 @@ export const skeleton = (args) => {
       size=${ifNonNull(size)}
       href=${ifNonNull(href || undefined)}
       ?isExpressive="${isExpressive}"
-      @click=${onClick}
-    >
+      @click=${onClick}>
     </bx-btn-skeleton>
   `;
 };

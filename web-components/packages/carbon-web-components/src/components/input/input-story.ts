@@ -56,8 +56,7 @@ export const Default = (args) => {
       type="${ifNonNull(type)}"
       validity-message="${ifNonNull(validityMessage)}"
       value="${ifNonNull(value)}"
-      @input="${onInput}"
-    ></bx-input>
+      @input="${onInput}"></bx-input>
   `;
 };
 
@@ -86,8 +85,7 @@ export const formItem = (args) => {
         ?invalid="${invalid}"
         ?disabled="${disabled}"
         ?show-password-visibility-toggle="${showPasswordVisibilityToggle}"
-        type="${ifNonNull(type)}"
-      >
+        type="${ifNonNull(type)}">
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
@@ -120,8 +118,7 @@ export const withoutFormItemWrapper = (args) => {
       ?invalid="${invalid}"
       ?disabled="${disabled}"
       ?show-password-visibility-toggle="${showPasswordVisibilityToggle}"
-      type="${ifNonNull(type)}"
-    >
+      type="${ifNonNull(type)}">
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>

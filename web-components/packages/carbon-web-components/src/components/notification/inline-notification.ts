@@ -138,8 +138,7 @@ class BXInlineNotification extends FocusMixin(LitElement) {
         class="${prefix}--${type}-notification__close-button"
         aria-label=${ifDefined(closeButtonLabel)}
         title=${ifDefined(closeButtonLabel)}
-        @click="${handleClickCloseButton}"
-      >
+        @click="${handleClickCloseButton}">
         ${Close20({
           class: `${prefix}--${type}-notification__close-icon`,
         })}

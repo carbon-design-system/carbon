@@ -43,13 +43,11 @@ export const Default = (args) => {
     <bx-accordion
       @bx-accordion-item-beingtoggled="${handleBeforeToggle}"
       @bx-accordion-item-toggled="${onToggle}"
-      size="${size}"
-    >
+      size="${size}">
       <bx-accordion-item
         ?disabled="${disabled}"
         ?open="${open}"
-        title-text=${titleText}
-      >
+        title-text=${titleText}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

@@ -68,8 +68,7 @@ class BXTableRow extends FocusMixin(LitElement) {
       : html`
           <div
             part="selection-container"
-            class="${prefix}--table-column-checkbox"
-          >
+            class="${prefix}--table-column-checkbox">
             ${html`
               <input
                 id="selection"
@@ -80,13 +79,11 @@ class BXTableRow extends FocusMixin(LitElement) {
                 name="${selectionName}"
                 ?disabled="${disabled}"
                 .checked=${selected}
-                @click=${this._handleClickSelectionCheckbox}
-              />
+                @click=${this._handleClickSelectionCheckbox} />
               <label
                 for="selection"
                 class="${prefix}--checkbox-label"
-                aria-label="${selectionLabel}"
-              ></label>
+                aria-label="${selectionLabel}"></label>
             `}
           </div>
         `;

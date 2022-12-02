@@ -50,8 +50,7 @@ const headerMenuButtonTemplate = (props?) => {
       button-label-inactive="${ifNonNull(buttonLabelInactive)}"
       collapse-mode="${ifNonNull(collapseMode)}"
       ?disabled="${disabled}"
-      usage-mode="${ifNonNull(usageMode)}"
-    >
+      usage-mode="${ifNonNull(usageMode)}">
     </bx-header-menu-button>
   `;
 };
@@ -62,8 +61,7 @@ const headerMenuTemplate = (props?) => {
     <bx-header-menu
       ?expanded="${expanded}"
       menu-label="${ifNonNull(menuLabel)}"
-      trigger-content="${ifNonNull(triggerContent)}"
-    >
+      trigger-content="${ifNonNull(triggerContent)}">
     </bx-header-menu>
   `;
 };
@@ -73,8 +71,7 @@ const headerNameTemplate = (props?) => {
   return html`
     <bx-header-name
       href="${ifNonNull(href)}"
-      prefix="${ifNonNull(prefix)}"
-    ></bx-header-name>
+      prefix="${ifNonNull(prefix)}"></bx-header-name>
   `;
 };
 
@@ -99,8 +96,7 @@ const sideNavTemplate = (props?) => {
     <bx-side-nav
       collapse-mode="${ifNonNull(collapseMode)}"
       ?expanded="${expanded}"
-      usage-mode="${ifNonNull(usageMode)}"
-    >
+      usage-mode="${ifNonNull(usageMode)}">
       ${children}
     </bx-side-nav>
   `;
@@ -122,8 +118,7 @@ const sideNavMenuTemplate = (props?) => {
       ?active="${active}"
       ?expanded="${expanded}"
       ?force-collapsed="${forceCollapsed}"
-      title="${ifNonNull(title)}"
-    >
+      title="${ifNonNull(title)}">
       ${children}
     </bx-side-nav-menu>
   `;
@@ -135,8 +130,7 @@ const sideNavMenuItemTemplate = (props?) => {
     <bx-side-nav-menu>
       <bx-side-nav-menu-item
         ?active="${active}"
-        href="${ifNonNull(href)}"
-      ></bx-side-nav-menu-item>
+        href="${ifNonNull(href)}"></bx-side-nav-menu-item>
     </bx-side-nav-menu>
   `;
 };

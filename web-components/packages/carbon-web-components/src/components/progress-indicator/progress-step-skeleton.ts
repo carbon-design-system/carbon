@@ -27,8 +27,7 @@ class BXProgressStepSkeleton extends LitElement {
   render() {
     return html`
       <div
-        class="${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable"
-      >
+        class="${prefix}--progress-step-button ${prefix}--progress-step-button--unclickable">
         <svg>
           <path d="M 7, 7 m -7, 0 a 7,7 0 1,0 14,0 a 7,7 0 1,0 -14,0" />
         </svg>

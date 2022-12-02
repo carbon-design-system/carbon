@@ -293,8 +293,7 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
         type="button"
         class="${passwordVisibilityToggleClasses}"
         ?disabled="${this.disabled}"
-        @click="${this.handleTogglePasswordVisibility}"
-      >
+        @click="${this.handleTogglePasswordVisibility}">
         ${!this.disabled && passwordButtonLabel} ${passwordVisibilityIcon}
       </button>
     `;
@@ -305,8 +304,7 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
       </label>
       <div
         class="${prefix}--text-input__field-wrapper"
-        ?data-invalid="${this.invalid}"
-      >
+        ?data-invalid="${this.invalid}">
         ${this.invalid ? invalidIcon : null}
         <input
           ?autocomplete="${this.autocomplete}"
@@ -323,8 +321,7 @@ export default class BXInput extends ValidityMixin(FormMixin(LitElement)) {
           ?required="${this.required}"
           type="${ifNonEmpty(this.type)}"
           .value="${this._value}"
-          @input="${handleInput}"
-        />
+          @input="${handleInput}" />
         ${this.showPasswordVisibilityToggle &&
         (this.type === INPUT_TYPE.PASSWORD || this.type === INPUT_TYPE.TEXT)
           ? passwordVisibilityButton()

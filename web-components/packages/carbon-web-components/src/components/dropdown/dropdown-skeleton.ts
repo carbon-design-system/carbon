@@ -21,8 +21,7 @@ class BXDropdownSkeleton extends LitElement {
   render() {
     return html`
       <div
-        class="${prefix}--skeleton ${prefix}--dropdown-v2 ${prefix}--list-box ${prefix}--form-item"
-      >
+        class="${prefix}--skeleton ${prefix}--dropdown-v2 ${prefix}--list-box ${prefix}--form-item">
         <div class="${prefix}--list-box__field">
           <span class="${prefix}--list-box__label"></span>
         </div>

@@ -349,8 +349,7 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
         aria-expanded="${String(open)}"
         aria-haspopup="listbox"
         aria-owns="tablist"
-        aria-controls="tablist"
-      >
+        aria-controls="tablist">
         <span id="trigger-label" class="${prefix}--tabs-trigger-text">
           ${selectedItemContent || triggerContent}
         </span>
@@ -363,8 +362,7 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
         class="${prefix}--assistive-text"
         role="status"
         aria-live="assertive"
-        aria-relevant="additions text"
-      >
+        aria-relevant="additions text">
         ${assistiveStatusText}
       </div>
     `;

@@ -58,8 +58,7 @@ class BXHeaderNavItem extends FocusMixin(LitElement) {
         part="link"
         class="${prefix}--header__menu-item"
         tabindex="0"
-        href="${ifDefined(href)}"
-      >
+        href="${ifDefined(href)}">
         <span part="title" class="${prefix}--text-truncate--end"
           ><slot>${title}</slot></span
         >

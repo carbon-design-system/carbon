@@ -51,8 +51,7 @@ export const Default = (args) => {
       size="${ifNonNull(size)}"
       target="${ifNonNull(target)}"
       type="${ifNonNull(type)}"
-      @click="${onClick}"
-    >
+      @click="${onClick}">
       Link
     </bx-link>
   `;
@@ -86,8 +85,7 @@ export const pairedWithIcon = (args) => {
       size="${ifNonNull(size)}"
       target="${ifNonNull(target)}"
       type="${ifNonNull(type)}"
-      @click="${onClick}"
-    >
+      @click="${onClick}">
       Download ${Download16({ slot: 'icon' })}
     </bx-link>
   `;

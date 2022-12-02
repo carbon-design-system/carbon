@@ -69,8 +69,7 @@ export const Default = (args) => {
       size="${ifNonNull(size)}"
       validity-message="${ifNonNull(validityMessage)}"
       value="${ifNonNull(value)}"
-      @bx-select-selected="${ifNonNull(onInput)}"
-    >
+      @bx-select-selected="${ifNonNull(onInput)}">
       ${children}
     </bx-select>
   `;

@@ -186,15 +186,13 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
         placeholder="${ifNonEmpty(placeholder)}"
         role="searchbox"
         .value="${value}"
-        @input="${handleInput}"
-      />
+        @input="${handleInput}" />
       <button
         part="close-button"
         class="${clearClasses}"
         @click="${handleClearInputButtonClick}"
         type="button"
-        aria-label="${closeButtonAssistiveText}"
-      >
+        aria-label="${closeButtonAssistiveText}">
         ${(size === INPUT_SIZE.SMALL ? Close16 : Close20)({
           part: 'close-icon',
           'aria-label': closeButtonAssistiveText,

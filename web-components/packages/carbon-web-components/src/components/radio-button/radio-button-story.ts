@@ -42,23 +42,19 @@ export const Default = (args) => {
       orientation="${ifNonNull(orientation)}"
       name="${ifNonNull(name)}"
       value="${ifNonNull(value)}"
-      @bx-radio-button-group-changed="${onChange}"
-    >
+      @bx-radio-button-group-changed="${onChange}">
       <bx-radio-button
         ?hide-label="${hideLabel}"
         label-text="${ifNonNull(labelText)}"
-        value="all"
-      ></bx-radio-button>
+        value="all"></bx-radio-button>
       <bx-radio-button
         ?hide-label="${hideLabel}"
         label-text="${ifNonNull(labelText)}"
-        value="cloudFoundry"
-      ></bx-radio-button>
+        value="cloudFoundry"></bx-radio-button>
       <bx-radio-button
         ?hide-label="${hideLabel}"
         label-text="${ifNonNull(labelText)}"
-        value="staging"
-      ></bx-radio-button>
+        value="staging"></bx-radio-button>
     </bx-radio-button-group>
   `;
 };

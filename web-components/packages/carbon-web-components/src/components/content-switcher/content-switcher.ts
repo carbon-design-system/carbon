@@ -230,8 +230,7 @@ class BXContentSwitcher extends LitElement {
         @click="${this._handleClick}"
         @keydown="${handleKeydown}"
         @mouseover="${handleHover}"
-        @mouseout="${handleHover}"
-      ></slot>
+        @mouseout="${handleHover}"></slot>
     `;
   }
 
