@@ -2757,6 +2757,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "renderSelectedItem": Object {
         "type": "func",
       },
