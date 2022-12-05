@@ -1316,6 +1316,8 @@ categories:
           - ZIP--reference
       - name: Status
         members:
+          - caution
+          - caution-inverted
           - checkmark
           - checkmark--filled
           - checkmark--filled--error
@@ -1323,19 +1325,17 @@ categories:
           - checkmark--outline
           - checkmark--outline--error
           - checkmark--outline--warning
+          - circle-fill
+          - circle-stroke
           - condition--point
           - condition--wait-point
+          - critical
+          - critical-severity
+          - diamond-fill
           - error
           - error--filled
           - error--outline
-          - caution
-          - caution-inverted
-          - circle-fill
-          - circle-stroke
-          - critical-severity
           - low-severity
-          - critical
-          - square-fill
           - help
           - help--filled
           - in-progress
@@ -1355,6 +1355,7 @@ categories:
           - pending
           - pending--filled
           - queued
+          - square-fill
           - undefined
           - undefined--filled
           - unknown

@@ -5,15 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
-import SliderCarbon from './Slider';
+import SliderComponent from './Slider';
 import { createClassWrapper } from '../../internal/createClassWrapper';
 
+const Slider = createClassWrapper(SliderComponent);
+
 export { default as SliderSkeleton } from './Slider.Skeleton';
-
-const Slider = FeatureFlags.enabled('enable-v11-release')
-  ? createClassWrapper(SliderCarbon)
-  : SliderCarbon;
-
 export default Slider;
 export { Slider };

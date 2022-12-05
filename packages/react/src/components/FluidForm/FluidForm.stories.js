@@ -8,8 +8,15 @@
 import React from 'react';
 
 import FluidForm from '.';
+import FluidDatePicker from '../FluidDatePicker';
+import FluidDatePickerInput from '../FluidDatePickerInput';
+import FluidSelect from '../FluidSelect';
+import SelectItem from '../SelectItem';
+import SelectItemGroup from '../SelectItemGroup';
 import FluidTextInput from '../FluidTextInput';
 import FluidTextArea from '../FluidTextArea';
+import FluidTimePicker from '../FluidTimePicker';
+import FluidTimePickerSelect from '../FluidTimePickerSelect';
 import ModalWrapper from '../ModalWrapper';
 
 const additionalProps = {
@@ -45,6 +52,54 @@ export default {
 export const Default = () => (
   <>
     <FluidForm {...additionalProps}>
+      <div style={{ display: 'flex' }}>
+        <FluidTimePicker
+          id="time-picker-1"
+          labelText="Time"
+          placeholder="hh:mm">
+          <FluidTimePickerSelect id="select-1" labelText="Clock">
+            <SelectItem value="am" text="AM" />
+            <SelectItem value="pm" text="PM" />
+          </FluidTimePickerSelect>
+          <FluidTimePickerSelect id="select-2" labelText="Timezone">
+            <SelectItem value="et" text="Eastern Time (ET)" />
+            <SelectItem value="ct" text="Central Time (CT)" />
+            <SelectItem value="mt" text="Mountain Time (MT)" />
+            <SelectItem value="pt" text="Pacific Time (PT)" />
+          </FluidTimePickerSelect>
+        </FluidTimePicker>
+        <FluidDatePicker datePickerType="range">
+          <FluidDatePickerInput
+            id="date-picker-input-id-start"
+            placeholder="mm/dd/yyyy"
+            labelText="Choose your dates"
+          />
+          <FluidDatePickerInput
+            id="date-picker-input-id-finish"
+            placeholder="mm/dd/yyyy"
+            labelText="End date"
+          />
+        </FluidDatePicker>
+        <FluidSelect
+          id="select-1"
+          defaultValue="placeholder-item"
+          labelText="Choose an option">
+          <SelectItem
+            disabled
+            hidden
+            value="placeholder-item"
+            text="Choose an option"
+          />
+          <SelectItemGroup label="Category 1">
+            <SelectItem value="option-1" text="Option 1" />
+            <SelectItem value="option-2" text="Option 2" />
+          </SelectItemGroup>
+          <SelectItemGroup label="Category 2">
+            <SelectItem value="option-3" text="Option 3" />
+            <SelectItem value="option-4" text="Option 4" />
+          </SelectItemGroup>
+        </FluidSelect>
+      </div>
       <FluidTextInput {...TextInputProps} />
       <FluidTextInput
         type="password"

@@ -5,12 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import * as FeatureFlags from '@carbon/feature-flags';
-import { OverflowMenu as OverflowMenuCarbon } from './OverflowMenu';
+import { OverflowMenu as OverflowMenuComponent } from './OverflowMenu';
 import { createClassWrapper } from '../../internal/createClassWrapper';
 
-const OverflowMenu = FeatureFlags.enabled('enable-v11-release')
-  ? createClassWrapper(OverflowMenuCarbon)
-  : OverflowMenuCarbon;
+const OverflowMenu = createClassWrapper(OverflowMenuComponent);
+
 export default OverflowMenu;
 export { OverflowMenu };

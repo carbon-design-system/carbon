@@ -6,9 +6,10 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [`carbon-components-react`](#carbon-components-react)
+- [`carbon-components-react`, `@carbon/react`](#carbon-components-react-carbonreact)
   - [Changes](#changes)
   - [Examples](#examples)
+    - [A change is made to component typings/definitions](#a-change-is-made-to-component-typingsdefinitions)
     - [A new prop is added to a component](#a-new-prop-is-added-to-a-component)
     - [An existing prop is deprecated](#an-existing-prop-is-deprecated)
     - [An existing prop is removed](#an-existing-prop-is-removed)
@@ -17,6 +18,8 @@
     - [A `PropTypes.func` prop type is changed to have different arguments](#a-proptypesfunc-prop-type-is-changed-to-have-different-arguments)
     - [A `PropTypes.func` prop type is changed to have additional arguments](#a-proptypesfunc-prop-type-is-changed-to-have-additional-arguments)
     - [A `PropTypes.func` prop type is changed to have fewer arguments](#a-proptypesfunc-prop-type-is-changed-to-have-fewer-arguments)
+    - [The DOM node that an `id` corresponds to is changed](#the-dom-node-that-an-id-corresponds-to-is-changed)
+    - [The DOM node that an `aria-label` corresponds to is changed](#the-dom-node-that-an-aria-label-corresponds-to-is-changed)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->

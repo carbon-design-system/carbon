@@ -25,7 +25,6 @@
     @include type-style('body-01');
     @include focus-outline('reset');
 
-    width: 100%;
     min-width: 10rem;
     height: 100%;
     min-height: rem(40px);
@@ -72,6 +71,17 @@
     fill: $support-error;
   }
 
+  .#{$prefix}--text-area__counter-alert {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
+  }
+
   //-----------------------------
   // Disabled
   //-----------------------------
@@ -88,6 +98,13 @@
     color: $text-disabled;
   }
 
+  //-----------------------------
+  // Readonly
+  //-----------------------------
+  .#{$prefix}--text-area__wrapper--readonly .#{$prefix}--text-area {
+    background: transparent;
+  }
+
   // V11: Possibly deprecate
   .#{$prefix}--text-area.#{$prefix}--text-area--light:disabled {
     background-color: $field-02;
@@ -97,6 +114,7 @@
   .#{$prefix}--text-area.#{$prefix}--skeleton {
     @include skeleton;
 
+    width: 100%;
     height: rem(100px);
 
     &::placeholder {

@@ -307,6 +307,10 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     //-----------------------------
     // Icon Item
     //-----------------------------
+    &.#{$prefix}--tabs__icon--default .#{$prefix}--tab--list,
+    &.#{$prefix}--tabs__icon--lg .#{$prefix}--tab--list {
+      overflow-x: visible;
+    }
 
     .#{$prefix}--tabs__nav-item--icon,
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
