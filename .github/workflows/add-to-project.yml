@@ -10,7 +10,7 @@ on:
 env:
   DESIGN_SYSTEM_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/39
   PROPOSALS_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/51
-  TYPESCRIPT_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/51
+  TYPESCRIPT_PROJECT_URL: https://github.com/orgs/carbon-design-system/projects/53
   LABEL_ENHANCEMENT: 'type: enhancement 💡'
   LABEL_TYPESCRIPT: 'area: typescript'
 
