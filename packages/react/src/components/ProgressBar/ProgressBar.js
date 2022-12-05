@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 function ProgressBar({
   className,
@@ -77,7 +78,7 @@ function ProgressBar({
   }
 
   const ref = useRef();
-  useLayoutEffect(() => {
+  useIsomorphicEffect(() => {
     if (!isFinished && !isError) {
       ref.current.style.transform = `scaleX(${percentage})`;
     } else {
