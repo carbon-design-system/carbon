@@ -10,4 +10,6 @@ import Checkbox, { CheckboxProps } from './Checkbox';
 export { default as CheckboxSkeleton } from './Checkbox.Skeleton';
 export default Checkbox;
 
+export { Checkbox };
+
 export type { CheckboxProps };
