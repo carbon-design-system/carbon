@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './TabContent';
+import TabContent from './TabContent';
+
+export default TabContent;
+export { TabContent };

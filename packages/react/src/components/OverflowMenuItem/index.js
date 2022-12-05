@@ -8,3 +8,4 @@
 import OverflowMenuItem from './OverflowMenuItem';
 
 export default OverflowMenuItem;
+export { OverflowMenuItem };
