@@ -7,37 +7,56 @@
 
 import React from 'react';
 import SelectItemGroup from '../SelectItemGroup';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
 describe('SelectItemGroup', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <SelectItemGroup className="extra-class" label="test" />
-    );
+    const renderSelectItemGroup = (props) =>
+      render(
+        <SelectItemGroup
+          className="extra-class"
+          data-testid="select-item-group"
+          label="testLabel"
+          {...props}
+        />
+      );
 
     it('should have the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--select-optgroup`)).toEqual(true);
+      renderSelectItemGroup();
+      expect(screen.getByTestId('select-item-group')).toHaveClass(
+        `${prefix}--select-optgroup`
+      );
     });
 
     it('Should add extra classes that are passed via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      renderSelectItemGroup();
+      expect(screen.getByTestId('select-item-group')).toHaveClass(
+        `extra-class`
+      );
     });
 
     it('Should add the label that is passed', () => {
-      wrapper.setProps({ label: 'placeholder-item' });
-      expect(wrapper.props().label).toEqual('placeholder-item');
+      renderSelectItemGroup();
+      expect(screen.getByTestId('select-item-group')).toHaveAttribute(
+        'label',
+        'testLabel'
+      );
     });
 
     it('Should not be disabled by default', () => {
-      expect(wrapper.props().disabled).toEqual(false);
+      renderSelectItemGroup();
+      expect(screen.getByTestId('select-item-group')).not.toHaveAttribute(
+        'disabled'
+      );
     });
 
     it('should set disabled as expected', () => {
-      expect(wrapper.props().disabled).toEqual(false);
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.props().disabled).toEqual(true);
+      renderSelectItemGroup({ disabled: true });
+      expect(screen.getByTestId('select-item-group')).toHaveAttribute(
+        'disabled'
+      );
     });
   });
 });
