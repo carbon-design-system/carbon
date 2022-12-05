@@ -7,48 +7,55 @@
 
 import React from 'react';
 import SelectItem from '../SelectItem';
-import { shallow } from 'enzyme';
+import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
 describe('SelectItem', () => {
   describe('Renders as expected', () => {
-    const wrapper = shallow(
-      <SelectItem className="extra-class" value="test" text="test" />
-    );
+    const renderSelectItem = (props) =>
+      render(
+        <SelectItem
+          className="extra-class"
+          text="test"
+          value="testValue"
+          {...props}
+        />
+      );
 
     it('Has the expected classes', () => {
-      expect(wrapper.hasClass(`${prefix}--select-option`)).toEqual(true);
+      renderSelectItem();
+      expect(screen.getByText('test')).toHaveClass(`${prefix}--select-option`);
     });
 
     it('Should add extra classes that are passed via className', () => {
-      expect(wrapper.hasClass('extra-class')).toEqual(true);
+      renderSelectItem();
+      expect(screen.getByText('test')).toHaveClass('extra-class');
     });
 
     it('Should add the value that is passed', () => {
-      wrapper.setProps({ value: 'placeholder-item' });
-      expect(wrapper.props().value).toEqual('placeholder-item');
-    });
-
-    it('Should add the select item text that is passed', () => {
-      wrapper.setProps({ text: 'Pick an option' });
-      expect(wrapper.props().children).toEqual('Pick an option');
+      renderSelectItem();
+      expect(screen.getByText('test')).toHaveAttribute('value', 'testValue');
     });
 
     it('Should not be disabled by default', () => {
-      expect(wrapper.props().disabled).toEqual(false);
+      renderSelectItem();
+      expect(screen.getByText('test')).not.toHaveAttribute('disabled');
     });
 
     it('should set disabled as expected', () => {
-      expect(wrapper.props().disabled).toEqual(false);
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.props().disabled).toEqual(true);
+      renderSelectItem({ disabled: true });
+      expect(screen.getByText('test')).toHaveAttribute('disabled');
+    });
+
+    it('should be hidden by default', () => {
+      renderSelectItem();
+      expect(screen.getByText('test')).not.toHaveAttribute('hidden');
     });
 
     it('should set hidden as expected', () => {
-      expect(wrapper.props().hidden).toEqual(false);
-      wrapper.setProps({ hidden: true });
-      expect(wrapper.props().hidden).toEqual(true);
+      renderSelectItem({ hidden: true });
+      expect(screen.getByText('test')).toHaveAttribute('hidden');
     });
   });
 });
