@@ -76,6 +76,12 @@ function ProgressBar({
     });
   }
 
+  const progressBar = document.querySelector(`.${prefix}--progress-bar__bar`);
+
+  if (progressBar && !isFinished && !isError) {
+    progressBar.style.transform = `scaleX(${percentage})`;
+  }
+
   return (
     <div className={wrapperClasses}>
       <div className={labelClasses} id={labelId}>
@@ -94,14 +100,7 @@ function ProgressBar({
         aria-valuemin={!indeterminate ? 0 : null}
         aria-valuemax={!indeterminate ? max : null}
         aria-valuenow={!indeterminate ? cappedValue : null}>
-        <div
-          className={`${prefix}--progress-bar__bar`}
-          style={
-            !isFinished && !isError
-              ? { transform: `scaleX(${percentage})` }
-              : null
-          }
-        />
+        <div className={`${prefix}--progress-bar__bar`} />
       </div>
       {helperText && (
         <div className={`${prefix}--progress-bar__helper-text`}>
