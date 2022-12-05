@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # UI Shell
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/ui-shell)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/ui-shell)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/ui-shell)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/ui-shell)
 
 UI Shell in Carbon Design System consists of several component groups.
 
@@ -18,46 +18,74 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/ui-shell/index.js';
+import '@carbon/carbon-web-components/es/components/ui-shell/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['ui-shell'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
 
 ```html
 <bx-header aria-label="IBM Platform Name">
-  <bx-header-menu-button button-label-active="Close menu" button-label-inactive="Open menu"></bx-header-menu-button>
-  <bx-header-name href="javascript:void 0" prefix="IBM">[Platform]</bx-header-name>
+  <bx-header-menu-button
+    button-label-active="Close menu"
+    button-label-inactive="Open menu"
+  ></bx-header-menu-button>
+  <bx-header-name href="javascript:void 0" prefix="IBM"
+    >[Platform]</bx-header-name
+  >
   <bx-header-nav menu-bar-label="IBM [Platform]">
     <bx-header-nav-item href="javascript:void 0">Link 1</bx-header-nav-item>
     <bx-header-nav-item href="javascript:void 0">Link 2</bx-header-nav-item>
     <bx-header-nav-item href="javascript:void 0">Link 3</bx-header-nav-item>
     <bx-header-menu menu-label="Link 4" trigger-content="Link 4">
-      <bx-header-menu-item href="javascript:void 0">Sub-link 1</bx-header-menu-item>
-      <bx-header-menu-item href="javascript:void 0">Sub-link 2</bx-header-menu-item>
-      <bx-header-menu-item href="javascript:void 0">Sub-link 3</bx-header-menu-item>
+      <bx-header-menu-item href="javascript:void 0"
+        >Sub-link 1</bx-header-menu-item
+      >
+      <bx-header-menu-item href="javascript:void 0"
+        >Sub-link 2</bx-header-menu-item
+      >
+      <bx-header-menu-item href="javascript:void 0"
+        >Sub-link 3</bx-header-menu-item
+      >
     </bx-header-menu>
   </bx-header-nav>
 </bx-header>
 <bx-side-nav aria-label="Side navigation" expanded>
   <bx-side-nav-items>
     <bx-side-nav-menu title="L0 menu">
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
     </bx-side-nav-menu>
     <bx-side-nav-menu title="L0 menu">
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item active aria-current="page" href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item active aria-current="page" href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
     </bx-side-nav-menu>
     <bx-side-nav-menu title="L0 menu">
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
     </bx-side-nav-menu>
     <bx-side-nav-divider></bx-side-nav-divider>
     <bx-side-nav-link href="javascript:void(0)">L0 link</bx-side-nav-link>
@@ -82,19 +110,37 @@ Side nav in UI Shell consists of the following components:
 <bx-side-nav aria-label="Side navigation" expanded>
   <bx-side-nav-items>
     <bx-side-nav-menu title="L0 menu">
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
     </bx-side-nav-menu>
     <bx-side-nav-menu title="L0 menu">
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item active aria-current="page" href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item active aria-current="page" href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
     </bx-side-nav-menu>
     <bx-side-nav-menu title="L0 menu">
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
-      <bx-side-nav-menu-item href="www.ibm.com"> L0 menu item </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
+      <bx-side-nav-menu-item href="www.ibm.com">
+        L0 menu item
+      </bx-side-nav-menu-item>
     </bx-side-nav-menu>
     <bx-side-nav-divider></bx-side-nav-divider>
     <bx-side-nav-link href="javascript:void(0)">L0 link</bx-side-nav-link>
@@ -105,17 +151,23 @@ Side nav in UI Shell consists of the following components:
 
 ### Expanding/collapsing
 
-`<bx-side-nav>` has `expanded` attribute to make it expanded. In its collapsed state, hovering over the side nav expands it temporarily.
+`<bx-side-nav>` has `expanded` attribute to make it expanded. In its collapsed
+state, hovering over the side nav expands it temporarily.
 
 `<bx-side-nav>` can be made non-collapsible, by setting `fixed` attribute.
 
 ### Selecting a nav item
 
-Unlike `<bx-dropdown>`, etc., user gesture of side nav item won't update the selection by itself. The assumption is that following the link in `<side-nav-link>`/`<side-nav-menu-item>` triggers routing in application, and application chooses which `<side-nav-link>`/`<side-nav-menu-item>` to set `active` attribute to, with the new URL.
+Unlike `<bx-dropdown>`, etc., user gesture of side nav item won't update the
+selection by itself. The assumption is that following the link in
+`<side-nav-link>`/`<side-nav-menu-item>` triggers routing in application, and
+application chooses which `<side-nav-link>`/`<side-nav-menu-item>` to set
+`active` attribute to, with the new URL.
 
 ### Using with header nav
 
-If `<bx-side-nav>` is used along with header (`<bx-header>`), the side nav should be pushed down. To do that, add below style to your application:
+If `<bx-side-nav>` is used along with header (`<bx-header>`), the side nav
+should be pushed down. To do that, add below style to your application:
 
 ```css
 bx-header ~ bx-side-nav {
@@ -126,25 +178,33 @@ bx-header ~ bx-side-nav {
 
 ### `<bx-side-nav>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-side-nav expanded>`) and `false` means not setting the attribute (e.g. `<bx-side-nav>` without `expanded` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-side-nav expanded>`) and `false` means not setting the attribute (e.g.
+`<bx-side-nav>` without `expanded` attribute).
 
 <Props of="bx-side-nav" />
 
 ### `<bx-side-nav-link>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-side-nav-link active>`) and `false` means not setting the attribute (e.g. `<bx-side-nav-link>` without `active` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-side-nav-link active>`) and `false` means not setting the attribute (e.g.
+`<bx-side-nav-link>` without `active` attribute).
 
 <Props of="bx-side-nav-link" />
 
 ### `<bx-side-nav-menu>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-side-nav-menu active>`) and `false` means not setting the attribute (e.g. `<bx-side-nav-menu>` without `active` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-side-nav-menu active>`) and `false` means not setting the attribute (e.g.
+`<bx-side-nav-menu>` without `active` attribute).
 
 <Props of="bx-side-nav-menu" />
 
 ### `<bx-side-nav-menu-item>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-side-nav-menu-item active>`) and `false` means not setting the attribute (e.g. `<bx-side-nav-menu-item>` without `active` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-side-nav-menu-item active>`) and `false` means not setting the attribute
+(e.g. `<bx-side-nav-menu-item>` without `active` attribute).
 
 <Props of="bx-side-nav-menu-item" />
 
@@ -176,13 +236,17 @@ Header nav in UI Shell consists of the following components:
 
 ### `<bx-header-menu>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-header-menu expanded>`) and `false` means not setting the attribute (e.g. `<bx-header-menu>` without `expanded` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-header-menu expanded>`) and `false` means not setting the attribute (e.g.
+`<bx-header-menu>` without `expanded` attribute).
 
 <Props of="bx-header-menu" />
 
 ### `<bx-header-menu-button>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-header-menu-button active>`) and `false` means not setting the attribute (e.g. `<bx-header-menu-button>` without `active` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-header-menu-button active>`) and `false` means not setting the attribute
+(e.g. `<bx-header-menu-button>` without `active` attribute).
 
 <Props of="bx-header-menu-button" />
 

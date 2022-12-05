@@ -4,22 +4,27 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Button
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/button)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/button)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/button)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/button)
 
-Buttons are used to initialize an action, either in the background or foreground of an experience.
+Buttons are used to initialize an action, either in the background or foreground
+of an experience.
 
 There are several kinds of buttons:
 
 - Primary buttons should be used for the principal call to action on the page.
 - Secondary buttons should be used for secondary actions on each page.
-- Danger buttons should be used for a negative action (such as Delete) on the page.
+- Danger buttons should be used for a negative action (such as Delete) on the
+  page.
 
-Small buttons may be used when there is not enough space for a regular sized button. This issue is most often found in tables. Small buttons should have three words or fewer.
+Small buttons may be used when there is not enough space for a regular sized
+button. This issue is most often found in tables. Small buttons should have
+three words or fewer.
 
-When words are not enough, icons can be used in buttons to better communicate what the button does. Icons are always paired with text.
+When words are not enough, icons can be used in buttons to better communicate
+what the button does. Icons are always paired with text.
 
 ## Getting started
 
@@ -28,11 +33,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/button/index.js';
+import '@carbon/carbon-web-components/es/components/button/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['button'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -51,6 +55,8 @@ For the skeleton variation, utilize `<bx-btn-skeleton>`.
 
 ## `<bx-btn>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-btn autofocus>`) and `false` means not setting the attribute (e.g. `<bx-btn>` without `autofocus` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-btn autofocus>`) and `false` means not setting the attribute (e.g.
+`<bx-btn>` without `autofocus` attribute).
 
 <Props of="bx-btn" />

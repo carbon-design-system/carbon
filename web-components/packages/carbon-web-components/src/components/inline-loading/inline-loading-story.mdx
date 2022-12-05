@@ -4,19 +4,21 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Inline loading
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/inline-loading)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/inline-loading)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/inline-loading)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/inline-loading)
 
-Inline loading spinners are used when performing actions.
-They help notify user’s that their action is being processed.
-The waiting experience is a crucial design opportunity.
-Although it may not be obvious what is occurring on the back-end, we can communicate clearly to reassure the user that progress is happening.
+Inline loading spinners are used when performing actions. They help notify
+user’s that their action is being processed. The waiting experience is a crucial
+design opportunity. Although it may not be obvious what is occurring on the
+back-end, we can communicate clearly to reassure the user that progress is
+happening.
 
-It is best practice to use an Inline loading component for any Create, Update, or Delete actions.
-The component provides feedback to the user about the progress of the action they took.
-This could be in a table, after a primary or secondary button click, or even in a modal.
+It is best practice to use an Inline loading component for any Create, Update,
+or Delete actions. The component provides feedback to the user about the
+progress of the action they took. This could be in a table, after a primary or
+secondary button click, or even in a modal.
 
 ## Getting started
 
@@ -25,11 +27,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/inline-loading/index.js';
+import '@carbon/carbon-web-components/es/components/inline-loading/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['inline-loading'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML

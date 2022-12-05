@@ -4,16 +4,17 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Data table
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/data-table)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/data-table)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/data-table)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/data-table)
 
 ## Getting started
 
 Here's a quick example to get you started.
 
-Data table in `carbon-web-components` focuses on primitives that constructs table UI, consisting of the following:
+Data table in `carbon-web-components` focuses on primitives that constructs
+table UI, consisting of the following:
 
 | Tag                      | Description     | HTML tag counterpart |
 | ------------------------ | --------------- | -------------------- |
@@ -29,11 +30,10 @@ Data table in `carbon-web-components` focuses on primitives that constructs tabl
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/data-table/index.js';
+import '@carbon/carbon-web-components/es/components/data-table/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['data-table'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -71,9 +71,11 @@ import 'carbon-web-components/es/components/data-table/index.js';
 
 ## Row selection
 
-Adding `selection-name` attribute to `<bx-table-row>`/`<bx-table-header-row>` shows the selection UI in the table row.
+Adding `selection-name` attribute to `<bx-table-row>`/`<bx-table-header-row>`
+shows the selection UI in the table row.
 
-The logic of row selection needs to be handled on by the application code. When user attempts to change row selection, the following events fire:
+The logic of row selection needs to be handled on by the application code. When
+user attempts to change row selection, the following events fire:
 
 | Element                 | Event                           | Description                                                   |
 | ----------------------- | ------------------------------- | ------------------------------------------------------------- |
@@ -86,11 +88,17 @@ Both of above events have the following properties in the event details:
 | ---------- | ------------------------ |
 | `selected` | The new selection state. |
 
-Both of above events bubble and are cancelable. Canceling those events mean canceling change in selection.
+Both of above events bubble and are cancelable. Canceling those events mean
+canceling change in selection.
 
-Application code should listen to those events update its internal state of table rows. To do so, it's convenient to add a `data-` attribte to each table rows so the delegated event handler can see which row the events are from.
+Application code should listen to those events update its internal state of
+table rows. To do so, it's convenient to add a `data-` attribte to each table
+rows so the delegated event handler can see which row the events are from.
 
-Here's an example of [`lit-html`](https://lit-html.polymer-project.org). Note that those events are native DOM events, and thus something like `document.addEventListener('bx-table-row-change-selection', event => { ... })` works, too:
+Here's an example of [`lit-html`](https://lit-html.polymer-project.org). Note
+that those events are native DOM events, and thus something like
+`document.addEventListener('bx-table-row-change-selection', event => { ... })`
+works, too:
 
 ```javascript
 /**
@@ -160,20 +168,31 @@ html`
 
 ## Sorting
 
-Adding `sort-direction` attribute to `<bx-table-header-cell>` shows the sorting UI in the table header cell.
+Adding `sort-direction` attribute to `<bx-table-header-cell>` shows the sorting
+UI in the table header cell.
 
-The logic of sorting needs to be handled on by the application code. When user attempts to change sorting, `bx-table-header-cell-sort` event is fired, with the following properties in the event details:
+The logic of sorting needs to be handled on by the application code. When user
+attempts to change sorting, `bx-table-header-cell-sort` event is fired, with the
+following properties in the event details:
 
 | Property           | Description             |
 | ------------------ | ----------------------- |
 | `oldSortDirection` | The old sort direction. |
 | `sortDirection`    | The new sort direction. |
 
-`bx-table-header-cell-sort` event bubbles and is cancelable. Canceling `bx-table-header-cell-sort` event means canceling change in sort direction.
+`bx-table-header-cell-sort` event bubbles and is cancelable. Canceling
+`bx-table-header-cell-sort` event means canceling change in sort direction.
 
-Application code should listen to those events update its internal state of sorting. An example of the logic needed is available in our codesandbox example above. To do so, it's convenient to add a `data-` attribte to each table header cells so the delegated event handler can see which table column the events are from.
+Application code should listen to those events update its internal state of
+sorting. An example of the logic needed is available in our codesandbox example
+above. To do so, it's convenient to add a `data-` attribte to each table header
+cells so the delegated event handler can see which table column the events are
+from.
 
-Here's an example of [`lit-html`](https://lit-html.polymer-project.org). Note that those events are native DOM events, and thus something like `document.addEventListener('bx-table-header-cell-sort', event => { ... })` works, too:
+Here's an example of [`lit-html`](https://lit-html.polymer-project.org). Note
+that those events are native DOM events, and thus something like
+`document.addEventListener('bx-table-header-cell-sort', event => { ... })`
+works, too:
 
 ```javascript
 /**
@@ -243,7 +262,9 @@ For the skeleton variation, utilize `<bx-table-header-cell-skeleton>`.
       <bx-table-header-cell-skeleton>Protocol</bx-table-header-cell-skeleton>
       <bx-table-header-cell-skeleton>Port</bx-table-header-cell-skeleton>
       <bx-table-header-cell-skeleton>Rule</bx-table-header-cell-skeleton>
-      <bx-table-header-cell-skeleton>Attached Groups</bx-table-header-cell-skeleton>
+      <bx-table-header-cell-skeleton
+        >Attached Groups</bx-table-header-cell-skeleton
+      >
       <bx-table-header-cell-skeleton>Status</bx-table-header-cell-skeleton>
     </bx-table-header-row>
   </bx-table-head>
@@ -278,7 +299,9 @@ For the skeleton variation, utilize `<bx-table-header-cell-skeleton>`.
 
 ## Attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-table sort>`) and `false` means not setting the attribute (e.g. `<bx-table>` without `sort` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-table sort>`) and `false` means not setting the attribute (e.g.
+`<bx-table>` without `sort` attribute).
 
 ### `<bx-table>`
 

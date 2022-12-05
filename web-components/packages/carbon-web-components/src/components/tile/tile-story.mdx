@@ -4,18 +4,21 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Tile
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/tile)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/tile)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/tile)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/tile)
 
-Tiles are a highly flexible component for displaying a wide variety of content, including informational, getting started, how-to, next steps, and more.
+Tiles are a highly flexible component for displaying a wide variety of content,
+including informational, getting started, how-to, next steps, and more.
 
-Carbon ships a basic tile structure that responds to the grid.
-Tiles have no pre-set styles for the content within them. You can customize tiles to fit your specific use case.
+Carbon ships a basic tile structure that responds to the grid. Tiles have no
+pre-set styles for the content within them. You can customize tiles to fit your
+specific use case.
 
-When using a call-to-action (CTA) within a tile, use a secondary button.
-Primary buttons should be reserved for the most important action a user can take on the page.
+When using a call-to-action (CTA) within a tile, use a secondary button. Primary
+buttons should be reserved for the most important action a user can take on the
+page.
 
 ## Getting started
 
@@ -24,11 +27,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/tile/index.js';
+import '@carbon/carbon-web-components/es/components/tile/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['tile'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -39,15 +41,16 @@ import 'carbon-web-components/es/components/tile/index.js';
 
 ## Read-only tile (default)
 
-Read-only tiles are used to display information to the user, such as features or services offered.
-Read-only tiles are often seen on marketing pages to promote content.
-These tiles can have internal calls-to-action (CTAs), such as a button or a link.
+Read-only tiles are used to display information to the user, such as features or
+services offered. Read-only tiles are often seen on marketing pages to promote
+content. These tiles can have internal calls-to-action (CTAs), such as a button
+or a link.
 
 ## Clickable tile
 
-Clickable tiles can be used as navigational items, where the entire tile is a clickable state,
-which redirects the user to a new page.
-Clickable tiles cannot contain separate internal CTAs.
+Clickable tiles can be used as navigational items, where the entire tile is a
+clickable state, which redirects the user to a new page. Clickable tiles cannot
+contain separate internal CTAs.
 
 ```html
 <bx-clickable-tile> Clickable tile </bx-clickable-tile>
@@ -59,9 +62,11 @@ Clickable tiles cannot contain separate internal CTAs.
 
 ## Selectable tile
 
-Selectable tiles work like a radio button, where the entire tile is a click target.
-Selectable tiles may contain internal CTAs (like links to docs) if the internal CTA is given its own click target.
-Selectable tiles work well for presenting options to a user in a structured manner, such as a set of pricing plans.
+Selectable tiles work like a radio button, where the entire tile is a click
+target. Selectable tiles may contain internal CTAs (like links to docs) if the
+internal CTA is given its own click target. Selectable tiles work well for
+presenting options to a user in a structured manner, such as a set of pricing
+plans.
 
 ```html
 <fieldset>
@@ -74,40 +79,54 @@ Selectable tiles work well for presenting options to a user in a structured mann
 
 ## `<bx-radio-tile>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-radio-tile selected>`) and `false` means not setting the attribute (e.g. `<bx-radio-tile>` without `selected` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-radio-tile selected>`) and `false` means not setting the attribute (e.g.
+`<bx-radio-tile>` without `selected` attribute).
 
 <Props of="bx-radio-tile" />
 
 ## Multi-selectable tile
 
 ```html
-<bx-selectable-tile name="selectable-tile"> Multi-select Tile </bx-selectable-tile>
+<bx-selectable-tile name="selectable-tile">
+  Multi-select Tile
+</bx-selectable-tile>
 ```
 
 ## `<bx-selectable-tile>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-selectable-tile selected>`) and `false` means not setting the attribute (e.g. `<bx-selectable-tile>` without `selected` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-selectable-tile selected>`) and `false` means not setting the attribute
+(e.g. `<bx-selectable-tile>` without `selected` attribute).
 
 <Props of="bx-selectable-tile" />
 
 ## Expandable tile
 
-Expandable tiles are helpful for hiding/showing larger amounts of content to a user.
-They can only be stacked in a single column, and cannot live in a row or horizontal grid.
-When expanded, tiles push content down the page.
-Expandable tiles may contain internal CTAs (like links to docs) if the internal CTA is given its own click target.
+Expandable tiles are helpful for hiding/showing larger amounts of content to a
+user. They can only be stacked in a single column, and cannot live in a row or
+horizontal grid. When expanded, tiles push content down the page. Expandable
+tiles may contain internal CTAs (like links to docs) if the internal CTA is
+given its own click target.
 
 ```html
 <bx-expandable-tile>
-  <bx-tile-above-the-fold-content slot="above-the-fold-content" style="height: 200px">
+  <bx-tile-above-the-fold-content
+    slot="above-the-fold-content"
+    style="height: 200px"
+  >
     Above the fold content here
   </bx-tile-above-the-fold-content>
-  <bx-tile-below-the-fold-content style="height: 300px"> Below the fold content here </bx-tile-below-the-fold-content>
+  <bx-tile-below-the-fold-content style="height: 300px">
+    Below the fold content here
+  </bx-tile-below-the-fold-content>
 </bx-expandable-tile>
 ```
 
 ## `<bx-expandable-tile>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-expandable-tile expanded>`) and `false` means not setting the attribute (e.g. `<bx-expandable-tile>` without `expanded` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-expandable-tile expanded>`) and `false` means not setting the attribute
+(e.g. `<bx-expandable-tile>` without `expanded` attribute).
 
 <Props of="bx-expandable-tile" />

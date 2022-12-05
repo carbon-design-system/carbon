@@ -4,13 +4,14 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Overflow menu
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/overflow-menu)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/overflow-menu)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/overflow-menu)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/overflow-menu)
 
-Overflow menu is used when additional options are available to the user and there is a space constraint.
-Create overflow menu item components for each option on the menu.
+Overflow menu is used when additional options are available to the user and
+there is a space constraint. Create overflow menu item components for each
+option on the menu.
 
 ## Getting started
 
@@ -19,11 +20,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/overflow-menu/index.js';
+import '@carbon/carbon-web-components/es/components/overflow-menu/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['overflow-menu'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -42,7 +42,9 @@ import 'carbon-web-components/es/components/overflow-menu/index.js';
 
 ## `<bx-overflow-menu>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-overflow-menu open>`) and `false` means not setting the attribute (e.g. `<bx-overflow-menu>` without `open` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-overflow-menu open>`) and `false` means not setting the attribute (e.g.
+`<bx-overflow-menu>` without `open` attribute).
 
 <Props of="bx-overflow-menu" />
 
@@ -52,6 +54,8 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. 
 
 ## `<bx-overflow-menu-item>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-overflow-menu-item disabled>`) and `false` means not setting the attribute (e.g. `<bx-overflow-menu-item>` without `disabled` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-overflow-menu-item disabled>`) and `false` means not setting the attribute
+(e.g. `<bx-overflow-menu-item>` without `disabled` attribute).
 
 <Props of="bx-overflow-menu-item" />

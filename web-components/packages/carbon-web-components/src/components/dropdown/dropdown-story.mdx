@@ -4,12 +4,13 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Dropdown
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/dropdown)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/dropdown)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/dropdown)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/dropdown)
 
-Dropdown presents a list of options that can be used to filter or sort existing content.
+Dropdown presents a list of options that can be used to filter or sort existing
+content.
 
 ## Getting started
 
@@ -18,11 +19,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/dropdown/index.js';
+import '@carbon/carbon-web-components/es/components/dropdown/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['dropdown'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -37,13 +37,16 @@ import 'carbon-web-components/es/components/dropdown/index.js';
 
 ## Selection
 
-When user attempts to select a dropdown item, `bx-dropdown-beingselected` event fires on `<bx-dropdown>`, which has the following properties in the event details:
+When user attempts to select a dropdown item, `bx-dropdown-beingselected` event
+fires on `<bx-dropdown>`, which has the following properties in the event
+details:
 
 | Property | Description                              |
 | -------- | ---------------------------------------- |
 | `item`   | The `<bx-dropdown-item>` being selected. |
 
-`bx-dropdown-beingselected` bubbles and is cancelable. Canceling this event means canceling change in selection.
+`bx-dropdown-beingselected` bubbles and is cancelable. Canceling this event
+means canceling change in selection.
 
 ## Skeleton
 
@@ -55,12 +58,16 @@ For the skeleton variation, utilize `<bx-dropdown-skeleton>`.
 
 ## `<bx-dropdown>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-dropdown open>`) and `false` means not setting the attribute (e.g. `<bx-dropdown>` without `open` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-dropdown open>`) and `false` means not setting the attribute (e.g.
+`<bx-dropdown>` without `open` attribute).
 
 <Props of="bx-dropdown" />
 
 ## `<bx-dropdown-item>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-dropdown-item disabled>`) and `false` means not setting the attribute (e.g. `<bx-dropdown-item>` without `disabled` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-dropdown-item disabled>`) and `false` means not setting the attribute (e.g.
+`<bx-dropdown-item>` without `disabled` attribute).
 
 <Props of="bx-dropdown-item" />

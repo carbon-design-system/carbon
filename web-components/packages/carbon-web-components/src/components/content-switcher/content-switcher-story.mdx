@@ -4,12 +4,14 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Content switcher
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/content-switcher)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/content-switcher)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/content-switcher)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/content-switcher)
 
-Content switcher manipulates the content shown following an exclusive or “either/or” pattern. It is used to toggle between two or more content sections within the same space on screen. Only one section can be shown at a time.
+Content switcher manipulates the content shown following an exclusive or
+“either/or” pattern. It is used to toggle between two or more content sections
+within the same space on screen. Only one section can be shown at a time.
 
 ## Getting started
 
@@ -18,11 +20,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/content-switcher/index.js';
+import '@carbon/carbon-web-components/es/components/content-switcher/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['content-switcher'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -30,7 +31,9 @@ import 'carbon-web-components/es/components/content-switcher/index.js';
 ```html
 <bx-content-switcher>
   <bx-content-switcher-item value="all">Option 1</bx-content-switcher-item>
-  <bx-content-switcher-item value="cloudFoundry" disabled>Option 2</bx-content-switcher-item>
+  <bx-content-switcher-item value="cloudFoundry" disabled
+    >Option 2</bx-content-switcher-item
+  >
   <bx-content-switcher-item value="staging">Option 3</bx-content-switcher-item>
   <bx-content-switcher-item value="dea">Option 4</bx-content-switcher-item>
   <bx-content-switcher-item value="router">Option 5</bx-content-switcher-item>

@@ -4,12 +4,13 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Slider
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/slider)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/slider)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/slider)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/slider)
 
-Sliders provide a visual indication of adjustable content, where the user can move the handle along a horizontal track to increase or decrease the value.
+Sliders provide a visual indication of adjustable content, where the user can
+move the handle along a horizontal track to increase or decrease the value.
 
 ## Getting started
 
@@ -18,17 +19,22 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/slider/index.js';
+import '@carbon/carbon-web-components/es/components/slider/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['slider'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
 
 ```html
-<bx-slider label-text="Slider" max="100" min="0" step="1" value="50"></bx-slider>
+<bx-slider
+  label-text="Slider"
+  max="100"
+  min="0"
+  step="1"
+  value="50"
+></bx-slider>
 ```
 
 ## With input box
@@ -51,12 +57,16 @@ For the skeleton variation, utilize `<bx-slider-skeleton>`.
 
 ## `<bx-slider>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-slider disabled>`) and `false` means not setting the attribute (e.g. `<bx-slider>` without `disabled` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-slider disabled>`) and `false` means not setting the attribute (e.g.
+`<bx-slider>` without `disabled` attribute).
 
 <Props of="bx-slider" />
 
 ## `<bx-slider-input>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-slider-input light>`) and `false` means not setting the attribute (e.g. `<bx-slider-input>` without `light` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-slider-input light>`) and `false` means not setting the attribute (e.g.
+`<bx-slider-input>` without `light` attribute).
 
 <Props of="bx-slider-input" />

@@ -7,5 +7,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-web-components/es/components/dropdown/dropdown.js';
-import 'carbon-web-components/es/components/dropdown/dropdown-item.js';
+import '@carbon/carbon-web-components/es/components/dropdown/dropdown.js';
+import '@carbon/carbon-web-components/es/components/dropdown/dropdown-item.js';

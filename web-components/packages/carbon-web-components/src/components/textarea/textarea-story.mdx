@@ -4,12 +4,13 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Textarea
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/textarea)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/textarea)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/textarea)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/textarea)
 
-Text inputs enable the user to interact with and input content and data. This component can be used for long and short form entries.
+Text inputs enable the user to interact with and input content and data. This
+component can be used for long and short form entries.
 
 Textarea is a multi-line variant of text input.
 
@@ -20,11 +21,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/textarea/index.js';
+import '@carbon/carbon-web-components/es/components/textarea/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['textarea'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -39,10 +39,11 @@ import 'carbon-web-components/es/components/textarea/index.js';
 
 ## Form item
 
-If the textarea is part of a form, make sure to import and wrap the textarea with `<bx-form-item>`
+If the textarea is part of a form, make sure to import and wrap the textarea
+with `<bx-form-item>`
 
 ```javascript
-import 'carbon-web-components/es/components/form/index.js';
+import '@carbon/carbon-web-components/es/components/form/index.js';
 ```
 
 ```html
@@ -65,6 +66,8 @@ For the skeleton variation, utilize `<bx-textarea-skeleton>`.
 
 ## `<bx-textarea>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-textarea autofocus>`) and `false` means not setting the attribute (e.g. `<bx-textarea>` without `autofocus` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-textarea autofocus>`) and `false` means not setting the attribute (e.g.
+`<bx-textarea>` without `autofocus` attribute).
 
 <Props of="bx-textarea" />

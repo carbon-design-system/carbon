@@ -7,5 +7,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-web-components/es/components/skip-to-content/index.js';
-import 'carbon-web-components/es/components/button/index.js';
+import '@carbon/carbon-web-components/es/components/skip-to-content/index.js';
+import '@carbon/carbon-web-components/es/components/button/index.js';

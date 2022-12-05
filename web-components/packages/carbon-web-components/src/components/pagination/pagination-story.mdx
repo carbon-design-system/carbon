@@ -4,13 +4,14 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Pagination
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/pagination)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/pagination)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/pagination)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/pagination)
 
-The pagination component is used to switch through multiple pages of items, when only a maxium number of items can be displayed per page.
-Can be used in combination with other components like data table.
+The pagination component is used to switch through multiple pages of items, when
+only a maxium number of items can be displayed per page. Can be used in
+combination with other components like data table.
 
 ## Getting started
 
@@ -19,11 +20,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/pagination/index.js';
+import '@carbon/carbon-web-components/es/components/pagination/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['pagination'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -41,7 +41,9 @@ import 'carbon-web-components/es/components/pagination/index.js';
 
 ## `<bx-pagination>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-pagination at-last-page>`) and `false` means not setting the attribute (e.g. `<bx-pagination>` without `at-last-page` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-pagination at-last-page>`) and `false` means not setting the attribute
+(e.g. `<bx-pagination>` without `at-last-page` attribute).
 
 <Props of="bx-pagination" />
 

@@ -4,12 +4,13 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Select
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/select)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/select)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/select)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/select)
 
-The select component allows users to choose one option from a list. It is used in forms for users to submit data.
+The select component allows users to choose one option from a list. It is used
+in forms for users to submit data.
 
 ## Getting started
 
@@ -18,17 +19,20 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/select/index.js';
+import '@carbon/carbon-web-components/es/components/select/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['select'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
 
 ```html
-<bx-select helper-text="Optional helper text" label-text="Select" placeholder="Optional placeholder text">
+<bx-select
+  helper-text="Optional helper text"
+  label-text="Select"
+  placeholder="Optional placeholder text"
+>
   <bx-select-item-group label="Category 1">
     <bx-select-item value="all">Option 1</bx-select-item>
     <bx-select-item value="cloudFoundry">Option 2</bx-select-item>
@@ -43,18 +47,24 @@ import 'carbon-web-components/es/components/select/index.js';
 
 ## `<bx-select>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-select autofocus>`) and `false` means not setting the attribute (e.g. `<bx-select>` without `autofocus` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-select autofocus>`) and `false` means not setting the attribute (e.g.
+`<bx-select>` without `autofocus` attribute).
 
 <Props of="bx-select" />
 
 ## `<bx-select-item-group>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-select-item-group disabled>`) and `false` means not setting the attribute (e.g. `<bx-select-item-group>` without `disabled` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-select-item-group disabled>`) and `false` means not setting the attribute
+(e.g. `<bx-select-item-group>` without `disabled` attribute).
 
 <Props of="bx-select-item-group" />
 
 ## `<bx-select-item>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-select-item disabled>`) and `false` means not setting the attribute (e.g. `<bx-select-item>` without `disabled` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-select-item disabled>`) and `false` means not setting the attribute (e.g.
+`<bx-select-item>` without `disabled` attribute).
 
 <Props of="bx-select-item" />
