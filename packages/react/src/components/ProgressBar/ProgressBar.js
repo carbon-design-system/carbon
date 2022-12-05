@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useLayoutEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
@@ -76,11 +76,14 @@ function ProgressBar({
     });
   }
 
-  const progressBar = document.querySelector(`.${prefix}--progress-bar__bar`);
-
-  if (progressBar && !isFinished && !isError) {
-    progressBar.style.transform = `scaleX(${percentage})`;
-  }
+  const ref = useRef();
+  useLayoutEffect(() => {
+    if (!isFinished && !isError) {
+      ref.current.style.transform = `scaleX(${percentage})`;
+    } else {
+      ref.current.style.transform = null;
+    }
+  }, [percentage, isFinished, isError]);
 
   return (
     <div className={wrapperClasses}>
@@ -100,7 +103,7 @@ function ProgressBar({
         aria-valuemin={!indeterminate ? 0 : null}
         aria-valuemax={!indeterminate ? max : null}
         aria-valuenow={!indeterminate ? cappedValue : null}>
-        <div className={`${prefix}--progress-bar__bar`} />
+        <div className={`${prefix}--progress-bar__bar`} ref={ref} />
       </div>
       {helperText && (
         <div className={`${prefix}--progress-bar__helper-text`}>
