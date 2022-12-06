@@ -46,6 +46,10 @@
     justify-content: space-between;
   }
 
+  .#{$prefix}--date-picker-container .#{$prefix}--label {
+    display: flex;
+  }
+
   .#{$prefix}--date-picker-input__wrapper {
     position: relative;
     display: flex;
@@ -205,5 +209,15 @@
   // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--date-picker__icon {
     @include high-contrast-mode('icon-fill');
+  }
+
+  // readonly
+  .#{$prefix}--date-picker__input[readonly] {
+    background: transparent;
+    cursor: text;
+  }
+
+  .#{$prefix}--date-picker__input[readonly] + .#{$prefix}--date-picker__icon {
+    fill: $icon-disabled;
   }
 }

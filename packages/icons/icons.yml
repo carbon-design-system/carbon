@@ -5855,6 +5855,14 @@
     - source
   sizes:
     - 32
+- name: diamond-fill
+  friendly_name: Diamond fill
+  aliases:
+    - diamond
+    - fill
+    - status
+  sizes:
+    - glyph
 - name: dicom--6000
   friendly_name: DICOM 6000
   sizes:
@@ -18463,7 +18471,6 @@
     - undefined
   sizes:
     - 32
-    - glyph
 - name: undefined--filled
   friendly_name: Undefined filled
   sizes:

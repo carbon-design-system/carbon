@@ -1,0 +1,56 @@
+import { Story, Props, Source, Preview } from '@storybook/addon-docs/blocks';
+import { IdPrefix } from '../IdPrefix';
+
+# Prefix
+
+[Source code](https://github.com/carbon-design-system/carbon/tree/main/packages/react/src/components/ClassPrefix)
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Component API](#component-api)
+- [Feedback](#feedback)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+The `IdPrefix` component is used to change the prefix applied to the
+automatically generated `id` attributes placed on certain DOM elements.
+
+<Preview>
+  <Story id="components-idprefix--default" />
+</Preview>
+
+This component is used intended to be used in limited cases, primarily only if
+you have id conflics when using v10 and v11 packages at the same time during
+migration.
+
+In React, you can use `IdPrefix` anywhere in your component tree and specify the
+prefix with the `prefix` prop. Most often it's used in the project root wrapping
+the entire project:
+
+```jsx
+import { IdPrefix } from '@carbon/react';
+
+export default function MyApp() {
+  return (
+    <IdPrefix prefix="custom">
+      <Page />
+    </IdPrefix>
+  );
+}
+```
+
+## Component API
+
+<Props />
+
+## Feedback
+
+Help us improve this component by providing feedback, asking questions on Slack,
+or updating this file on
+[GitHub](https://github.com/carbon-design-system/carbon/edit/main/packages/react/src/components/ClassPrefix/ClassPrefix.mdx).

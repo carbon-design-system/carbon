@@ -8,7 +8,7 @@
 'use strict';
 
 module.exports = {
-  moduleFileExtensions: ['js', 'json', 'node'],
+  moduleFileExtensions: ['tsx', 'ts', 'js', 'json', 'node'],
   moduleNameMapper: {
     // This mapping is the result of updating to Jest 28. We currently require
     // this as the version of uuid that gets resolved is ESM but we would like
@@ -27,9 +27,11 @@ module.exports = {
     '<rootDir>/**/*-(spec|test).js?(x)',
   ],
   transform: {
-    '^.+\\.(mjs|cjs|js|jsx)$': require.resolve('./transform/jsTransform.js'),
+    '^.+\\.(mjs|cjs|js|jsx|ts|tsx)$': require.resolve(
+      './transform/jsTransform.js'
+    ),
     '^.+\\.s?css$': require.resolve('./transform/cssTransform.js'),
-    '^(?!.*\\.(js|jsx|css|json)$)': require.resolve(
+    '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': require.resolve(
       './transform/fileTransform.js'
     ),
   },

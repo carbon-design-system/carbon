@@ -29,6 +29,8 @@
     "postinstall": "husky install"
   },
   "resolutions": {
+    "@types/react": "~17.0.2",
+    "@types/prop-types": "15.7.5",
     "ast-types": "^0.14.0",
     "node-sass": "^6.0.0",
     "react": "~17.0.2",
@@ -49,8 +51,8 @@
     "@commitlint/cli": "^17.0.0",
     "@commitlint/config-conventional": "^17.0.0",
     "@percy/cli": "^1.1.0",
-    "@percy/playwright": "^1.0.2",
-    "@playwright/test": "^1.21.1",
+    "@percy/playwright": "^1.0.4",
+    "@playwright/test": "^1.28.0",
     "@testing-library/dom": "^8.11.1",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
@@ -137,5 +139,5 @@
       "./config/stylelint-config-carbon"
     ]
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@3.3.0"
 }

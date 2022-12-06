@@ -23,6 +23,7 @@ export {
   ModalBody,
   ModalFooter,
 } from './components/ComposedModal';
+export ContainedList, { ContainedListItem } from './components/ContainedList';
 export ContentSwitcher from './components/ContentSwitcher';
 export Copy from './components/Copy';
 export CopyButton from './components/CopyButton';
@@ -70,6 +71,7 @@ export FormGroup from './components/FormGroup';
 export FormItem from './components/FormItem';
 export FormLabel from './components/FormLabel';
 export { Grid, Row, Column, ColumnHang, FlexGrid } from './components/Grid';
+export { IdPrefix } from './components/IdPrefix';
 export InlineLoading from './components/InlineLoading';
 export Link from './components/Link';
 export ListItem from './components/ListItem';
@@ -205,9 +207,6 @@ export {
 } from './components/UIShell';
 
 // Experimental
-export unstable_ContainedList, {
-  ContainedListItem as unstable_ContainedListItem,
-} from './components/ContainedList';
 export { useContextMenu as unstable_useContextMenu } from './components/ContextMenu';
 export {
   FeatureFlags as unstable_FeatureFlags,
@@ -218,6 +217,11 @@ export {
   FluidComboBox as unstable__FluidComboBox,
   FluidComboBoxSkeleton as unstable__FluidComboBoxSkeleton,
 } from './components/FluidComboBox';
+export {
+  FluidDatePicker as unstable__FluidDatePicker,
+  FluidDatePickerSkeleton as unstable__FluidDatePickerSkeleton,
+} from './components/FluidDatePicker';
+export { FluidDatePickerInput as unstable__FluidDatePickerInput } from './components/FluidDatePickerInput';
 export {
   FluidDropdown as unstable__FluidDropdown,
   FluidDropdownSkeleton as unstable__FluidDropdownSkeleton,
@@ -238,6 +242,11 @@ export {
   FluidTextInput as unstable__FluidTextInput,
   FluidTextInputSkeleton as unstable__FluidTextInputSkeleton,
 } from './components/FluidTextInput';
+export {
+  FluidTimePicker as unstable__FluidTimePicker,
+  FluidTimePickerSkeleton as unstable__FluidTimePickerSkeleton,
+} from './components/FluidTimePicker';
+export { FluidTimePickerSelect as unstable__FluidTimePickerSelect } from './components/FluidTimePickerSelect';
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';
@@ -260,11 +269,12 @@ export {
 export { Popover, PopoverContent } from './components/Popover';
 export { default as ProgressBar } from './components/ProgressBar';
 export { HStack, Stack, VStack } from './components/Stack';
-export { Tooltip } from './components/Tooltip/next';
+export { Tooltip } from './components/Tooltip';
 export {
   Text as unstable_Text,
   TextDirection as unstable_TextDirection,
 } from './components/Text';
-export { DefinitionTooltip } from './components/Tooltip/next/DefinitionTooltip';
+export { DefinitionTooltip } from './components/Tooltip/DefinitionTooltip';
 export { GlobalTheme, Theme, useTheme } from './components/Theme';
 export { usePrefix } from './internal/usePrefix';
+export { useIdPrefix } from './internal/useIdPrefix';

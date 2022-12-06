@@ -164,6 +164,8 @@ function CodeSnippet({
     [`${prefix}--snippet--light`]: light,
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
     [`${prefix}--snippet--wraptext`]: wrapText,
+    [`${prefix}--snippet--has-right-overflow`]:
+      type == 'multi' && hasRightOverflow,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
@@ -243,7 +245,7 @@ function CodeSnippet({
       {hasLeftOverflow && (
         <div className={`${prefix}--snippet__overflow-indicator--left`} />
       )}
-      {hasRightOverflow && (
+      {hasRightOverflow && type !== 'multi' && (
         <div className={`${prefix}--snippet__overflow-indicator--right`} />
       )}
       {!hideCopyButton && (
@@ -266,7 +268,6 @@ function CodeSnippet({
             {expandCodeBtnText}
           </span>
           <ChevronDown
-            aria-label={expandCodeBtnText}
             className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
             name="chevron--down"
             role="img"

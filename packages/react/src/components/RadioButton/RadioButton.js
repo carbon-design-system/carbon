@@ -35,7 +35,7 @@ const RadioButton = React.forwardRef(function RadioButton(
     onChange(value, name, event);
   }
 
-  const innerLabelClasses = classNames({
+  const innerLabelClasses = classNames(`${prefix}--radio-button__label-text`, {
     [`${prefix}--visually-hidden`]: hideLabel,
   });
 

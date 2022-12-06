@@ -94,6 +94,31 @@ describe('RadioButtonGroup', () => {
       expect(fieldset).toBeDisabled();
     });
 
+    it('should support readonly to prevent changes', () => {
+      render(
+        <RadioButtonGroup
+          defaultSelected="test-1"
+          readOnly={true}
+          name="test"
+          legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      const radio1 = screen.getByLabelText('test-1');
+      const radio2 = screen.getByLabelText('test-2');
+
+      expect(radio1).toBeChecked();
+      expect(radio2).not.toBeChecked();
+
+      userEvent.click(radio2);
+
+      // no change
+      expect(radio1).toBeChecked();
+      expect(radio2).not.toBeChecked();
+    });
+
     it('should support `defaultSelected` as a way to select a radio button', () => {
       render(
         <RadioButtonGroup
@@ -130,6 +155,34 @@ describe('RadioButtonGroup', () => {
         <RadioButtonGroup valueSelected="test-2" name="test" legendText="test">
           <RadioButton labelText="test-1" value="test-1" />
           <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByLabelText('test-2')).toEqual(
+        screen.getByRole('radio', {
+          checked: true,
+        })
+      );
+    });
+
+    it('should support `checked` prop in RadioButton when there is no `defaultSelected` or `valueSelected`', () => {
+      const { rerender } = render(
+        <RadioButtonGroup name="test" legendText="test">
+          <RadioButton labelText="test-1" value="test-1" checked />
+          <RadioButton labelText="test-2" value="test-2" />
+        </RadioButtonGroup>
+      );
+
+      expect(screen.getByLabelText('test-1')).toEqual(
+        screen.getByRole('radio', {
+          checked: true,
+        })
+      );
+
+      rerender(
+        <RadioButtonGroup name="test" legendText="test">
+          <RadioButton labelText="test-1" value="test-1" />
+          <RadioButton labelText="test-2" value="test-2" checked />
         </RadioButtonGroup>
       );
 
