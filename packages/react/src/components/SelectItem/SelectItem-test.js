@@ -1,61 +1,59 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2018, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import SelectItem from '../SelectItem';
+import SelectItem from './SelectItem';
 import { render, screen } from '@testing-library/react';
 
 const prefix = 'cds';
 
 describe('SelectItem', () => {
-  describe('Renders as expected', () => {
-    const renderSelectItem = (props) =>
-      render(
-        <SelectItem
-          className="extra-class"
-          text="test"
-          value="testValue"
-          {...props}
-        />
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto outermost element', () => {
+      render(<SelectItem data-testid="test-id" text={'testText'} />);
+      expect(screen.getByText('testText')).toHaveAttribute(
+        'data-testid',
+        'test-id'
       );
+    });
 
     it('Has the expected classes', () => {
-      renderSelectItem();
-      expect(screen.getByText('test')).toHaveClass(`${prefix}--select-option`);
+      render(<SelectItem text={'testText'} />);
+      expect(screen.getByText('testText')).toHaveClass(
+        `${prefix}--select-option`
+      );
     });
 
-    it('Should add extra classes that are passed via className', () => {
-      renderSelectItem();
-      expect(screen.getByText('test')).toHaveClass('extra-class');
+    it('should support a custom `className` prop on the outermost element', () => {
+      render(<SelectItem className="custom-class" text={'testText'} />);
+      expect(screen.getByText('testText')).toHaveClass('custom-class');
     });
 
-    it('Should add the value that is passed', () => {
-      renderSelectItem();
-      expect(screen.getByText('test')).toHaveAttribute('value', 'testValue');
+    it('should respect disabled prop', () => {
+      render(<SelectItem disabled text={'testText'} />);
+      expect(screen.getByText('testText')).toHaveAttribute('disabled');
     });
 
     it('Should not be disabled by default', () => {
-      renderSelectItem();
-      expect(screen.getByText('test')).not.toHaveAttribute('disabled');
+      render(<SelectItem text={'testText'} />);
+      expect(screen.getByText('testText')).not.toHaveAttribute('disabled');
     });
 
-    it('should set disabled as expected', () => {
-      renderSelectItem({ disabled: true });
-      expect(screen.getByText('test')).toHaveAttribute('disabled');
+    it('should respect hidden prop', () => {
+      render(<SelectItem hidden text={'testText'} />);
+      expect(screen.getByText('testText')).toHaveAttribute('hidden');
     });
 
-    it('should be hidden by default', () => {
-      renderSelectItem();
-      expect(screen.getByText('test')).not.toHaveAttribute('hidden');
-    });
-
-    it('should set hidden as expected', () => {
-      renderSelectItem({ hidden: true });
-      expect(screen.getByText('test')).toHaveAttribute('hidden');
+    it('should respect value prop', () => {
+      render(<SelectItem text={'testText'} value={'testValue'} />);
+      expect(screen.getByText('testText')).toHaveAttribute(
+        'value',
+        'testValue'
+      );
     });
   });
 });
