@@ -473,4 +473,19 @@
   .#{$prefix}--list-box__menu-item__selected-icon {
     @include high-contrast-mode('icon-fill');
   }
+
+  // readonly
+  .#{$prefix}--dropdown--readonly,
+  .#{$prefix}--dropdown--readonly:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__field,
+  .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__menu-icon {
+    cursor: default;
+  }
+
+  .#{$prefix}--dropdown--readonly .#{$prefix}--list-box__menu-icon svg {
+    fill: $icon-disabled;
+  }
 }
