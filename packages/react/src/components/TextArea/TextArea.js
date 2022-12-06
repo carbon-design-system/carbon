@@ -62,17 +62,7 @@ const TextArea = React.forwardRef(function TextArea(
   if (enableCounter) {
     textareaProps.maxLength = maxCount;
   }
-
   let ariaAnnouncement = useAnnouncer(textCount, maxCount);
-
-  useEffect(() => {
-    const lastTen = maxCount - 10;
-    if (textCount >= lastTen) {
-      setAriaAnnouncement(`${maxCount - textCount} characters left.`);
-    } else {
-      setAriaAnnouncement('');
-    }
-  }, [textCount, maxCount]);
 
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
