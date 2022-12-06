@@ -4,14 +4,18 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Progress indicator
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/progress-indicator)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/progress-indicator)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/progress-indicator)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/progress-indicator)
 
-Progress indicator is a visual representation of a users progress through a set of steps. They guide the user through a number of steps in order to complete a specified process.
+Progress indicator is a visual representation of a users progress through a set
+of steps. They guide the user through a number of steps in order to complete a
+specified process.
 
-Use progress indicators to keep the user on track when completing a specific task. By dividing the end goal into smaller, sub-tasks, it increases the percentage of completeness as each task is completed.
+Use progress indicators to keep the user on track when completing a specific
+task. By dividing the end goal into smaller, sub-tasks, it increases the
+percentage of completeness as each task is completed.
 
 ## Getting started
 
@@ -20,28 +24,47 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/progress-indicator/index.js';
+import '@carbon/web-components/es/components/progress-indicator/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['progress-indicator'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
 
 ```html
 <bx-progress-indicator>
-  <bx-progress-step label-text="Label" secondary-label-text="Secondary label" state="invalid"></bx-progress-step>
-  <bx-progress-step label-text="Label" secondary-label-text="Secondary label" state="complete"></bx-progress-step>
-  <bx-progress-step label-text="Label" secondary-label-text="Secondary label" state="current"></bx-progress-step>
-  <bx-progress-step disabled label-text="Label" secondary-label-text="Secondary label"></bx-progress-step>
-  <bx-progress-step label-text="Label" secondary-label-text="Secondary label"></bx-progress-step>
+  <bx-progress-step
+    label-text="Label"
+    secondary-label-text="Secondary label"
+    state="invalid"
+  ></bx-progress-step>
+  <bx-progress-step
+    label-text="Label"
+    secondary-label-text="Secondary label"
+    state="complete"
+  ></bx-progress-step>
+  <bx-progress-step
+    label-text="Label"
+    secondary-label-text="Secondary label"
+    state="current"
+  ></bx-progress-step>
+  <bx-progress-step
+    disabled
+    label-text="Label"
+    secondary-label-text="Secondary label"
+  ></bx-progress-step>
+  <bx-progress-step
+    label-text="Label"
+    secondary-label-text="Secondary label"
+  ></bx-progress-step>
 </bx-progress-indicator>
 ```
 
 ## Skeleton
 
-For the skeleton variation, utilize `<bx-progress-indicator-skeleton>` and `<bx-progress-step-skeleton>`.
+For the skeleton variation, utilize `<bx-progress-indicator-skeleton>` and
+`<bx-progress-step-skeleton>`.
 
 ```html
 <bx-progress-indicator-skeleton>
@@ -53,12 +76,16 @@ For the skeleton variation, utilize `<bx-progress-indicator-skeleton>` and `<bx-
 
 ## `<bx-progress-indicator>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-progress-indicator vertical>`) and `false` means not setting the attribute (e.g. `<bx-progress-indicator>` without `vertical` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-progress-indicator vertical>`) and `false` means not setting the attribute
+(e.g. `<bx-progress-indicator>` without `vertical` attribute).
 
 <Props of="bx-progress-indicator" />
 
 ## `<bx-progress-step>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-progress-step disabled>`) and `false` means not setting the attribute (e.g. `<bx-progress-step>` without `disabled` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-progress-step disabled>`) and `false` means not setting the attribute (e.g.
+`<bx-progress-step>` without `disabled` attribute).
 
 <Props of="bx-progress-step" />

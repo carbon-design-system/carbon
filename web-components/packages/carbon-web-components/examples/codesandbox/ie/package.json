@@ -20,7 +20,7 @@
     "@webcomponents/url": "^0.7.0",
     "@webcomponents/webcomponents-platform": "^1.0.0",
     "babel-loader": "^8.0.0",
-    "@carbon/carbon-web-components": "latest",
+    "@carbon/web-components": "latest",
     "core-js": "^3.0.0",
     "es6-promise": "^4.1.0",
     "html-webpack-plugin": "^3.2.0",

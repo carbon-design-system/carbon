@@ -4,14 +4,15 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Modal
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/modal)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/modal)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/modal)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/modal)
 
-Modals interrupt user workflow by design.
-They are most effective when a task must be completed before a user can continue.
-While effective when used correctly, modals should be used sparingly to limit disruption to a user experience.
+Modals interrupt user workflow by design. They are most effective when a task
+must be completed before a user can continue. While effective when used
+correctly, modals should be used sparingly to limit disruption to a user
+experience.
 
 ## Getting started
 
@@ -20,12 +21,11 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/modal/index.js';
-import 'carbon-web-components/es/components/button/index.js';
+import '@carbon/web-components/es/components/modal/index.js';
+import '@carbon/web-components/es/components/button/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['modal', 'button'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -41,39 +41,52 @@ import 'carbon-web-components/es/components/button/index.js';
   </bx-modal-header>
   <bx-modal-body><p>Modal text description</p></bx-modal-body>
   <bx-modal-footer>
-    <bx-modal-footer-button kind="secondary" data-modal-close>Cancel</bx-modal-footer-button>
+    <bx-modal-footer-button kind="secondary" data-modal-close
+      >Cancel</bx-modal-footer-button
+    >
     <bx-modal-footer-button kind="primary">Save</bx-modal-footer-button>
   </bx-modal-footer>
 </bx-modal>
 
 <script type="text/javascript">
-  document.getElementById('modal-example-button').addEventListener('click', () => {
-    document.getElementById('modal-example').open = true;
-  });
+  document
+    .getElementById('modal-example-button')
+    .addEventListener('click', () => {
+      document.getElementById('modal-example').open = true;
+    });
 </script>
 ```
 
 ## Focus management
 
-`<bx-modal>` puts focus on one of the following elements (in priority order) once it gets open:
+`<bx-modal>` puts focus on one of the following elements (in priority order)
+once it gets open:
 
 1. An programmatic-focusable element with `data-modal-primary-focus` attribute
 2. The primary button in modal footer
 3. The first sequential-focusable child element
 
-`<bx-modal>` enables "focus-wrapping" behavior after then.
-It means that hitting tab key at the last sequential-focusable element in `<bx-modal>` puts focus on the first sequential-focusable element, and hitting Shift-tab key at the first sequential-focusable element in `<bx-modal>` puts focus on the last sequential-focusable element.
+`<bx-modal>` enables "focus-wrapping" behavior after then. It means that hitting
+tab key at the last sequential-focusable element in `<bx-modal>` puts focus on
+the first sequential-focusable element, and hitting Shift-tab key at the first
+sequential-focusable element in `<bx-modal>` puts focus on the last
+sequential-focusable element.
 
-Once `<bx-modal>` gets closed, it puts focus on the last focused element before it got open, typically the launcher button.
+Once `<bx-modal>` gets closed, it puts focus on the last focused element before
+it got open, typically the launcher button.
 
 ## `<bx-modal>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-modal open>`) and `false` means not setting the attribute (e.g. `<bx-modal>` without `open` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-modal open>`) and `false` means not setting the attribute (e.g.
+`<bx-modal>` without `open` attribute).
 
 <Props of="bx-modal" />
 
 ## `<bx-modal-footer-button>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-modal-footer-button disabled>`) and `false` means not setting the attribute (e.g. `<bx-modal-footer-button>` without `disabled` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-modal-footer-button disabled>`) and `false` means not setting the attribute
+(e.g. `<bx-modal-footer-button>` without `disabled` attribute).
 
 <Props of="bx-modal-footer-button" />

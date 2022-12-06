@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Skeleton text
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/skeleton-text)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/skeleton-text)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/skeleton-text)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/skeleton-text)
 
 ## Getting started
 
@@ -16,11 +16,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/skeleton-text/index.js';
+import '@carbon/web-components/es/components/skeleton-text/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['skeleton-text'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -31,7 +30,8 @@ import 'carbon-web-components/es/components/skeleton-text/index.js';
 
 ### Lines
 
-To create multiple lines of skeleton text, set the `type` property and use multiple instances of `<bx-skeleton-text>`.
+To create multiple lines of skeleton text, set the `type` property and use
+multiple instances of `<bx-skeleton-text>`.
 
 ```html
 <bx-skeleton-text type="line"></bx-skeleton-text>

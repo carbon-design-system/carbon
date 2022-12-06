@@ -8,7 +8,7 @@
     "start": "webpack serve"
   },
   "dependencies": {
-    "@carbon/carbon-web-components": "latest"
+    "@carbon/web-components": "latest"
   },
   "devDependencies": {
     "autoprefixer": "^9.0.0",

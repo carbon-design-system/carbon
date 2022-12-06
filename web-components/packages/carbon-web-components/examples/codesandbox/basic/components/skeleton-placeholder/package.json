@@ -11,7 +11,7 @@
     "start": "parcel index.html --port=9000 --no-hmr"
   },
   "dependencies": {
-    "@carbon/carbon-web-components": "latest"
+    "@carbon/web-components": "latest"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",

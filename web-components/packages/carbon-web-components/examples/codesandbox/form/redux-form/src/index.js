@@ -12,10 +12,10 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
 import { Field, SubmissionError, reduxForm, reducer as reduxFormReducer } from 'redux-form';
-import BXBtn from 'carbon-web-components/es/components-react/button/button.js';
-import BXFormItem from 'carbon-web-components/es/components-react/form/form-item.js';
-import BXInput from 'carbon-web-components/es/components-react/input/input.js';
-import BXInlineNotification from 'carbon-web-components/es/components-react/notification/inline-notification.js';
+import BXBtn from '@carbon/web-components/es/components-react/button/button.js';
+import BXFormItem from '@carbon/web-components/es/components-react/form/form-item.js';
+import BXInput from '@carbon/web-components/es/components-react/input/input.js';
+import BXInlineNotification from '@carbon/web-components/es/components-react/notification/inline-notification.js';
 import './index.css';
 
 const reducer = combineReducers({

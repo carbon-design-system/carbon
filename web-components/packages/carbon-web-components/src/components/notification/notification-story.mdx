@@ -4,10 +4,10 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Notification
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/notification)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/notification)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/notification)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/notification)
 
 Notifications are messages that communicate information to the user.
 
@@ -18,11 +18,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/notification/index.js';
+import '@carbon/web-components/es/components/notification/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['notification'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -31,42 +30,52 @@ import 'carbon-web-components/es/components/notification/index.js';
 <bx-inline-notification
   style="min-width: 30rem; margin-bottom: .5rem"
   title="Notification title"
-  subtitle="Subtitle text goes here.">
+  subtitle="Subtitle text goes here."
+>
 </bx-inline-notification>
 ```
 
 ## Inline notification
 
-Inline notifications show up in task flows, to notify users of the status of an action. They usually appear at the top of the primary content area.
+Inline notifications show up in task flows, to notify users of the status of an
+action. They usually appear at the top of the primary content area.
 
 ```html
 <bx-inline-notification
   style="min-width: 30rem; margin-bottom: .5rem"
   title="Notification title"
-  subtitle="Subtitle text goes here.">
+  subtitle="Subtitle text goes here."
+>
 </bx-inline-notification>
 ```
 
 ## Toast notification
 
-Toasts are a non-modal, time-based window elements used to display short messages; they usually appear at the bottom of the screen and disappear after a few seconds.
+Toasts are a non-modal, time-based window elements used to display short
+messages; they usually appear at the bottom of the screen and disappear after a
+few seconds.
 
 ```html
 <bx-toast-notification
   style="min-width: 30rem; margin-bottom: 0.5rem;"
   title="Notification title"
-  subtitle="Subtitle text goes here.">
+  subtitle="Subtitle text goes here."
+>
 </bx-toast-notification>
 ```
 
 ## `<bx-inline-notification>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-inline-notification open>`) and `false` means not setting the attribute (e.g. `<bx-inline-notification>` without `open` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-inline-notification open>`) and `false` means not setting the attribute
+(e.g. `<bx-inline-notification>` without `open` attribute).
 
 <Props of="bx-inline-notification" />
 
 ## `<bx-toast-notification>` attributes, properties and events
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-toast-notification open>`) and `false` means not setting the attribute (e.g. `<bx-toast-notification>` without `open` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-toast-notification open>`) and `false` means not setting the attribute
+(e.g. `<bx-toast-notification>` without `open` attribute).
 
 <Props of="bx-toast-notification" />

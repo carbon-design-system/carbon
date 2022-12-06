@@ -8,8 +8,8 @@
  */
 
 import { Component } from '@angular/core';
-import 'carbon-web-components/es/components/dropdown/dropdown';
-import 'carbon-web-components/es/components/dropdown/dropdown-item';
+import '@carbon/web-components/es/components/dropdown/dropdown';
+import '@carbon/web-components/es/components/dropdown/dropdown-item';
 
 @Component({
   selector: 'app-root',

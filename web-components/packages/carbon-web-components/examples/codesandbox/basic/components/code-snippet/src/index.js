@@ -7,4 +7,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-web-components/es/components/code-snippet/index.js';
+import '@carbon/web-components/es/components/code-snippet/index.js';

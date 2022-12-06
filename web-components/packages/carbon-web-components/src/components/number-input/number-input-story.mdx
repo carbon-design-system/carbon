@@ -4,12 +4,13 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 # Number input
 
 > 💡 Check our
-> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/number-input)
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/number-input)
 > example implementation.
 
-[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/basic/components/number-input)
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/number-input)
 
-Number inputs are similar to text inputs, but contain controls used to increase or decrease an incremental value.
+Number inputs are similar to text inputs, but contain controls used to increase
+or decrease an incremental value.
 
 ## Getting started
 
@@ -18,11 +19,10 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import 'carbon-web-components/es/components/number-input/index.js';
+import '@carbon/web-components/es/components/number-input/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['number-input'] })}`} />
-
 <Description markdown={`${cdnCss()}`} />
 
 ### HTML
@@ -32,17 +32,20 @@ import 'carbon-web-components/es/components/number-input/index.js';
   <span slot="label-text">Label text</span>
   <span slot="helper-text">Optional helper text</span>
   <span slot="validity-message">Something isn't right</span>
-  <span slot="validity-message-max">Try a lower value, something less than 100</span>
+  <span slot="validity-message-max"
+    >Try a lower value, something less than 100</span
+  >
   <span slot="validity-message-min">Value must be larger than 0</span>
 </bx-number-input>
 ```
 
 ## Form item
 
-If the input is part of a form, make sure to import and wrap the input with `<bx-form-item>`
+If the input is part of a form, make sure to import and wrap the input with
+`<bx-form-item>`
 
 ```javascript
-import 'carbon-web-components/es/components/form/index.js';
+import '@carbon/web-components/es/components/form/index.js';
 ```
 
 ```html
@@ -51,7 +54,9 @@ import 'carbon-web-components/es/components/form/index.js';
     <span slot="label-text">Label text</span>
     <span slot="helper-text">Optional helper text</span>
     <span slot="validity-message">Something isn't right</span>
-    <span slot="validity-message-max">Try a lower value, something less than 100</span>
+    <span slot="validity-message-max"
+      >Try a lower value, something less than 100</span
+    >
     <span slot="validity-message-min">Value must be larger than 0</span>
   </bx-number-input>
 </bx-form-item>
@@ -67,6 +72,8 @@ For the skeleton variation, utilize `<bx-number-input-skeleton>`.
 
 ## `<bx-number-input>` attributes and properties
 
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g. `<bx-number-input mobile>`) and `false` means not setting the attribute (e.g. `<bx-number-input>` without `mobile` attribute).
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<bx-number-input mobile>`) and `false` means not setting the attribute (e.g.
+`<bx-number-input>` without `mobile` attribute).
 
 <Props of="bx-number-input" />
