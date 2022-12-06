@@ -2,7 +2,7 @@
 # Manual changes might be lost - proceed with caution!
 
 __metadata:
-  version: 4
+  version: 6
   cacheKey: 7
 
 "@babel/code-frame@npm:7.0.0, @babel/code-frame@npm:^7.0.0":
@@ -2222,6 +2222,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"acorn@npm:^8.5.0":
+  version: 8.8.1
+  resolution: "acorn@npm:8.8.1"
+  bin:
+    acorn: bin/acorn
+  checksum: 8/4079b67283b94935157698831967642f24a075c52ce3feaaaafe095776dfbe15d86a1b33b1e53860fc0d062ed6c83f4284a5c87c85b9ad51853a01173da6097f
+  languageName: node
+  linkType: hard
+
 "address@npm:1.0.3":
   version: 1.0.3
   resolution: "address@npm:1.0.3"
@@ -4234,9 +4243,9 @@ __metadata:
   linkType: hard
 
 "decode-uri-component@npm:^0.2.0":
-  version: 0.2.0
-  resolution: "decode-uri-component@npm:0.2.0"
-  checksum: d8cb28c33f7b0a70b159b5fa126aee821ba090396689bd46ad2c423c3a658c504d2743ab18060fd5ed1cae5377bdd3632760a8e98ba920ff49637d43dc6a9687
+  version: 0.2.2
+  resolution: "decode-uri-component@npm:0.2.2"
+  checksum: 8/95476a7d28f267292ce745eac3524a9079058bbb35767b76e3ee87d42e34cd0275d2eb19d9d08c3e167f97556e8a2872747f5e65cbebcac8b0c98d83e285f139
   languageName: node
   linkType: hard
 
@@ -5317,16 +5326,17 @@ fsevents@^1.2.7:
     nan: ^2.12.1
     node-pre-gyp: ^0.12.0
   checksum: 50f56363fcfe256e21abf9bbbbafa16c462aba768efaca55cdd8c45b59c522ab771b190891354664b47f05e8a342da0bb0bd44bb1222bd8cf1edbea2e6943b88
+  conditions: os=darwin
   languageName: node
   linkType: hard
 
-"fsevents@patch:fsevents@^1.2.7#builtin<compat/fsevents>":
+"fsevents@patch:fsevents@^1.2.7#~builtin<compat/fsevents>":
   version: 1.2.9
-  resolution: "fsevents@patch:fsevents@npm%3A1.2.9#builtin<compat/fsevents>::version=1.2.9&hash=11e9ea"
+  resolution: "fsevents@patch:fsevents@npm%3A1.2.9#~builtin<compat/fsevents>::version=1.2.9&hash=d11327"
   dependencies:
     nan: ^2.12.1
     node-pre-gyp: ^0.12.0
-  checksum: c46883f2cdf354e07315272ebd6e21ed4133c48d6eceb954c06fdb9cc832cc14d87d9bebb4acbc6aef91e5a8fe52f1374c19de30791b6c6c76806fe2173abda9
+  conditions: os=darwin
   languageName: node
   linkType: hard
 
@@ -9052,12 +9062,12 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"resolve@patch:resolve@^1.1.6#builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#builtin<compat/resolve>, resolve@patch:resolve@^1.11.0#builtin<compat/resolve>, resolve@patch:resolve@^1.3.2#builtin<compat/resolve>, resolve@patch:resolve@^1.8.1#builtin<compat/resolve>":
+"resolve@patch:resolve@^1.1.6#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.11.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.3.2#~builtin<compat/resolve>, resolve@patch:resolve@^1.8.1#~builtin<compat/resolve>":
   version: 1.11.0
-  resolution: "resolve@patch:resolve@npm%3A1.11.0#builtin<compat/resolve>::version=1.11.0&hash=3388aa"
+  resolution: "resolve@patch:resolve@npm%3A1.11.0#~builtin<compat/resolve>::version=1.11.0&hash=c3c19d"
   dependencies:
     path-parse: ^1.0.6
-  checksum: 2d92772d275894efa49787ae6d0892d0f4d6d1d45ee151cda14dd80edd9397ce015fcb798e5dcc3b61afedf49a821ef311ee85537c50bb18366279a70d427b40
+  checksum: 8/a84335c055583bccca988ebefcfffee93adabc9dc9667b7e822626336403610d9d2a71ea80e4c44fedfcadf3e343a0b8d665a965a91a6840e381362b659ebb1b
   languageName: node
   linkType: hard
 
@@ -10618,7 +10628,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"webpack@npm:4.33.0, webpack@npm:^4.28.0, webpack@npm:^4.32.0":
+"webpack@npm:^4.28.0, webpack@npm:^4.32.0":
   version: 4.33.0
   resolution: "webpack@npm:4.33.0"
   dependencies:
