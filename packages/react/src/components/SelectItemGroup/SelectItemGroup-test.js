@@ -13,32 +13,43 @@ const prefix = 'cds';
 
 describe('SelectItemGroup', () => {
   describe('Renders as expected', () => {
-    const renderSelectItemGroup = (props) =>
+    it('should have the expected classes', () => {
       render(
         <SelectItemGroup
           className="extra-class"
           data-testid="select-item-group"
           label="testLabel"
-          {...props}
         />
       );
 
-    it('should have the expected classes', () => {
-      renderSelectItemGroup();
       expect(screen.getByTestId('select-item-group')).toHaveClass(
         `${prefix}--select-optgroup`
       );
     });
 
     it('Should add extra classes that are passed via className', () => {
-      renderSelectItemGroup();
+      render(
+        <SelectItemGroup
+          className="extra-class"
+          data-testid="select-item-group"
+          label="testLabel"
+        />
+      );
+
       expect(screen.getByTestId('select-item-group')).toHaveClass(
         `extra-class`
       );
     });
 
     it('Should add the label that is passed', () => {
-      renderSelectItemGroup();
+      render(
+        <SelectItemGroup
+          className="extra-class"
+          data-testid="select-item-group"
+          label="testLabel"
+        />
+      );
+
       expect(screen.getByTestId('select-item-group')).toHaveAttribute(
         'label',
         'testLabel'
@@ -46,14 +57,29 @@ describe('SelectItemGroup', () => {
     });
 
     it('Should not be disabled by default', () => {
-      renderSelectItemGroup();
+      render(
+        <SelectItemGroup
+          className="extra-class"
+          data-testid="select-item-group"
+          label="testLabel"
+        />
+      );
+
       expect(screen.getByTestId('select-item-group')).not.toHaveAttribute(
         'disabled'
       );
     });
 
     it('should set disabled as expected', () => {
-      renderSelectItemGroup({ disabled: true });
+      render(
+        <SelectItemGroup
+          className="extra-class"
+          data-testid="select-item-group"
+          disabled
+          label="testLabel"
+        />
+      );
+
       expect(screen.getByTestId('select-item-group')).toHaveAttribute(
         'disabled'
       );
