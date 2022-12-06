@@ -92,7 +92,7 @@
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
     "autoprefixer": "^10.4.0",
-    "babel-loader": "^8.2.3",
+    "babel-loader": "^9.0.0",
     "babel-plugin-dev-expression": "^0.2.3",
     "babel-preset-carbon": "^0.3.0",
     "browserify-zlib": "^0.2.0",
