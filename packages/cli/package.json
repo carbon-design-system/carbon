@@ -28,7 +28,7 @@
     "@octokit/plugin-retry": "^3.0.7",
     "@octokit/plugin-throttling": "^4.0.0",
     "@octokit/rest": "^19.0.0",
-    "@rollup/plugin-babel": "^5.3.0",
+    "@rollup/plugin-babel": "^6.0.0",
     "@rollup/plugin-commonjs": "^21.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "chalk": "^4.1.1",

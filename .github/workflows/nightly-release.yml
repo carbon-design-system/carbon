@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    runs-on: macOS-latest
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@main
       - name: Use Node.js 16.x
