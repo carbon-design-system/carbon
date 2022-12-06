@@ -6,13 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -119,6 +120,15 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
+  const refTextarea = useRef();
+  useIsomorphicEffect(() => {
+    if (other.cols) {
+      refTextarea.current.style.width = null;
+    } else {
+      refTextarea.current.style.width = `100%`;
+    }
+  }, [other.cols]);
+
   const input = (
     <textarea
       {...other}
@@ -128,13 +138,7 @@ const TextArea = React.forwardRef(function TextArea(
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
-      style={
-        other.cols
-          ? {}
-          : {
-              width: `100%`,
-            }
-      }
+      ref={refTextarea}
     />
   );
 
