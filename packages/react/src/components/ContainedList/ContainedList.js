@@ -17,6 +17,7 @@ function ContainedList({
   action,
   children,
   className,
+  isIndented,
   kind = variants[0],
   label,
   size = 'lg',
@@ -26,6 +27,7 @@ function ContainedList({
 
   const classes = classNames(
     `${prefix}--contained-list`,
+    { [`${prefix}--contained-list--indented-rulers`]: isIndented },
     `${prefix}--contained-list--${kind}`,
     `${prefix}--contained-list--${size}`,
     className
@@ -61,6 +63,11 @@ ContainedList.propTypes = {
    * Additional CSS class names.
    */
   className: PropTypes.string,
+
+  /**
+   * Specify whether the dividing lines in between list items should be indented.
+   */
+  isIndented: PropTypes.bool,
 
   /**
    * The kind of ContainedList you want to display
