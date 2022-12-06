@@ -91,6 +91,7 @@ const ComboBox = React.forwardRef((props, ref) => {
     onInputChange,
     onToggleClick, // eslint-disable-line no-unused-vars
     placeholder,
+    readOnly,
     selectedItem,
     shouldFilterItem,
     size,
@@ -203,6 +204,7 @@ const ComboBox = React.forwardRef((props, ref) => {
     {
       [`${prefix}--list-box--up`]: direction === 'top',
       [`${prefix}--combo-box--warning`]: showWarning,
+      [`${prefix}--combo-box--readonly`]: readOnly,
     }
   );
   const titleClasses = cx(`${prefix}--label`, {
@@ -264,7 +266,7 @@ const ComboBox = React.forwardRef((props, ref) => {
         );
         const labelProps = getLabelProps();
         const buttonProps = getToggleButtonProps({
-          disabled,
+          disabled: disabled || readOnly,
           onClick: handleToggleClick(isOpen),
           // When we moved the "root node" of Downshift to the <input> for
           // ARIA 1.2 compliance, we unfortunately hit this branch for the
@@ -308,6 +310,17 @@ const ComboBox = React.forwardRef((props, ref) => {
           }
         };
 
+        const readOnlyEventHandlers = readOnly
+          ? {
+              onKeyDown: (evt) => {
+                // This prevents the select from opening for the above keys
+                if (evt.key !== 'Tab') {
+                  evt.preventDefault();
+                }
+              },
+            }
+          : {};
+
         return (
           <div className={wrapperClasses}>
             {titleText && (
@@ -341,6 +354,8 @@ const ComboBox = React.forwardRef((props, ref) => {
                   title={textInput?.current?.value}
                   {...inputProps}
                   {...rest}
+                  {...readOnlyEventHandlers}
+                  readOnly={readOnly}
                   ref={mergeRefs(textInput, ref)}
                 />
                 {invalid && (
@@ -357,7 +372,7 @@ const ComboBox = React.forwardRef((props, ref) => {
                   <ListBoxSelection
                     clearSelection={clearSelection}
                     translateWithId={translateWithId}
-                    disabled={disabled}
+                    disabled={disabled || readOnly}
                     onClearSelection={handleSelectionClear}
                   />
                 )}
@@ -539,6 +554,11 @@ ComboBox.propTypes = {
    * This is only present if the control has no items selected
    */
   placeholder: PropTypes.string,
+
+  /**
+   * Is the ComboBox readonly?
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * For full control of the selection
