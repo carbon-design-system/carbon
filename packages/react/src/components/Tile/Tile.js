@@ -457,7 +457,7 @@ export function ExpandableTile({
     if (isExpanded) {
       tile.current.style.maxHeight = null;
     } else {
-      tile.current.style.maxHeight = isTileMaxHeight + isTilePadding;
+      tile.current.style.maxHeight = isTileMaxHeight + isTilePadding + 'px';
     }
   }, [isExpanded, isTileMaxHeight, isTilePadding]);
 
