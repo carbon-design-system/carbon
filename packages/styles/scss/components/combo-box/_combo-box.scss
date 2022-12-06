@@ -42,4 +42,20 @@
     .#{$prefix}--list-box__field {
     padding: 0;
   }
+
+  // readonly
+  .#{$prefix}--combo-box--readonly,
+  .#{$prefix}--combo-box--readonly:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__menu-icon,
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection {
+    cursor: default;
+  }
+
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__menu-icon svg,
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection svg {
+    fill: $icon-disabled;
+  }
 }
