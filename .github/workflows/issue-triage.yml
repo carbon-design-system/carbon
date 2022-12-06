@@ -10,8 +10,6 @@ on:
         required: true
       APP_PRIVATE_KEY:
         required: true
-      ADD_TO_PROJECT_PAT:
-        required: true
 
 jobs:
   comment:
@@ -28,11 +26,3 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           enabled: true
-  add-to-project:
-    name: Add issue to Design System project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/add-to-project@v0.4.0
-        with:
-          project-url: https://github.com/orgs/carbon-design-system/projects/39
-          github-token: ${{ secrets.ADD_TO_PROJECT_PAT }}
