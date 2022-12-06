@@ -80,13 +80,13 @@ version `v1.16.0`):
 <!-- By `latest` tag -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/carbon-web-components/tag/latest/accordion.min.js"
+  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.min.js"
 ></script>
 
 <!-- By specific version -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/carbon-web-components/version/v1.16.0/accordion.min.js"
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.min.js"
 ></script>
 ```
 
@@ -141,13 +141,13 @@ extention from `.min.js` to `.rtl.min.js`. For example:
 <!-- By `latest` tag (RTL) -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/carbon-web-components/tag/latest/accordion.rtl.min.js"
+  src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/accordion.rtl.min.js"
 ></script>
 
 <!-- By specific version (RTL) -->
 <script
   type="module"
-  src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/carbon-web-components/version/v1.16.0/accordion.rtl.min.js"
+  src="https://1.www.s81c.com/common/carbon/web-components/version/v1.16.0/accordion.rtl.min.js"
 ></script>
 ```
 
@@ -162,7 +162,7 @@ directly used once the script tag has been added to the page. For example:
   <head>
     <script
       type="module"
-      src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/carbon-web-components/tag/latest/dropdown.min.js"
+      src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/dropdown.min.js"
     ></script>
     <style type="text/css">
       // Suppresses the custom element until it has been defined
@@ -195,18 +195,18 @@ artifacts:
 
 #### How to install
 
-To install `@carbon/carbon-web-components` in your project, you will need to run
-the following command using [npm](https://www.npmjs.com/):
+To install `@carbon/web-components` in your project, you will need to run the
+following command using [npm](https://www.npmjs.com/):
 
 ```bash
-npm install --save @carbon/carbon-web-components
+npm install --save @carbon/web-components
 ```
 
 If you prefer [Yarn](https://yarnpkg.com/en/), use the following command
 instead:
 
 ```bash
-yarn add @carbon/carbon-web-components
+yarn add @carbon/web-components
 ```
 
 > NOTE: Carbon and Lit dependencies will be managed by Carbon Web Components
@@ -239,8 +239,8 @@ Once you set up a module bundler, you can start importing our component modules,
 for example:
 
 ```javascript
-import '@carbon/carbon-web-components/es/components/dropdown/dropdown.js';
-import '@carbon/carbon-web-components/es/components/dropdown/dropdown-item.js';
+import '@carbon/web-components/es/components/dropdown/dropdown.js';
+import '@carbon/web-components/es/components/dropdown/dropdown-item.js';
 ```
 
 Once you've imported the component modules, you can use our components in the
@@ -325,8 +325,8 @@ example:
 ```javascript
 import React from 'react';
 import { render } from 'react-dom';
-import BXDropdown from '@carbon/carbon-web-components/es/components-react/dropdown/dropdown.js';
-import BXDropdownItem from '@carbon/carbon-web-components/es/components-react/dropdown/dropdown-item.js';
+import BXDropdown from '@carbon/web-components/es/components-react/dropdown/dropdown.js';
+import BXDropdownItem from '@carbon/web-components/es/components-react/dropdown/dropdown-item.js';
 
 const App = () => (
   <BXDropdown triggerContent="Select an item">

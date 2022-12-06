@@ -28,7 +28,7 @@ Here's a quick example to get you started.
 ### JS (via import)
 
 ```javascript
-import '@carbon/carbon-web-components/es/components/multi-select/index.js';
+import '@carbon/web-components/es/components/multi-select/index.js';
 ```
 
 <Description markdown={`${cdnJs({ components: ['multi-select'] })}`} />
@@ -65,7 +65,7 @@ stories apply to React, Angular, Vue, Backbone, Knockout and many others:
 html`
   <bx-multi-select>
     ${items.map(
-      item =>
+      (item) =>
         html`
           <bx-multi-select-item value="${item.value}"
             >${item.title}</bx-multi-select-item

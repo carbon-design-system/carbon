@@ -7,7 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { TABLE_SORT_DIRECTION } from '@carbon/carbon-web-components/es/components/data-table/table-header-cell';
+import { TABLE_SORT_DIRECTION } from '@carbon/web-components/es/components/data-table/table-header-cell';
 
 export const columns = [
   {

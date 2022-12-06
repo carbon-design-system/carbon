@@ -7,5 +7,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/carbon-web-components/es/components/slider/slider';
-import '@carbon/carbon-web-components/es/components/slider/slider-input';
+import '@carbon/web-components/es/components/slider/slider';
+import '@carbon/web-components/es/components/slider/slider-input';

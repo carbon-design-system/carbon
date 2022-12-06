@@ -7,10 +7,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@carbon/carbon-web-components/es/components/button/button.js';
-import '@carbon/carbon-web-components/es/components/form/form-item.js';
-import '@carbon/carbon-web-components/es/components/input/input.js';
-import '@carbon/carbon-web-components/es/components/notification/inline-notification.js';
+import '@carbon/web-components/es/components/button/button.js';
+import '@carbon/web-components/es/components/form/form-item.js';
+import '@carbon/web-components/es/components/input/input.js';
+import '@carbon/web-components/es/components/notification/inline-notification.js';
 
 const submit = async (formData) => {
   // Simulates server latency

@@ -8,8 +8,8 @@
  */
 
 import React from 'react';
-import BXDropdown from '@carbon/carbon-web-components/es/components-react/dropdown/dropdown.js';
-import BXDropdownItem from '@carbon/carbon-web-components/es/components-react/dropdown/dropdown-item.js';
+import BXDropdown from '@carbon/web-components/es/components-react/dropdown/dropdown.js';
+import BXDropdownItem from '@carbon/web-components/es/components-react/dropdown/dropdown-item.js';
 import styles from './BXDropdownDemo.module.css';
 
 const App = () => (

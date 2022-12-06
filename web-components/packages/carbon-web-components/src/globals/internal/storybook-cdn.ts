@@ -25,7 +25,7 @@ function _renderScript(components, tag, isRTL = false) {
   let scripts = '';
   const rtl = isRTL ? '.rtl' : '';
   components.forEach((component) => {
-    scripts += `<script type="module" src="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/carbon-web-components/${tag}/${component}${rtl}.min.js"></script>\n`;
+    scripts += `<script type="module" src="https://1.www.s81c.com/common/carbon/web-components/${tag}/${component}${rtl}.min.js"></script>\n`;
   });
   return scripts;
 }

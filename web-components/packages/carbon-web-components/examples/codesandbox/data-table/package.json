@@ -10,7 +10,7 @@
     "start": "parcel index.html --no-hmr"
   },
   "dependencies": {
-    "@carbon/carbon-web-components": "latest",
+    "@carbon/web-components": "latest",
     "lit-element": "^2.5.1",
     "lit-html": "^1.4.1",
     "lodash-es": "^4.17.0"

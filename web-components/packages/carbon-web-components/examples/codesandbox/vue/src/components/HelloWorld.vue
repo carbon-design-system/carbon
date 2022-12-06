@@ -18,8 +18,8 @@ LICENSE file in the root directory of this source tree.
 </template>
 
 <script>
-import '@carbon/carbon-web-components/es/components/dropdown/dropdown';
-import '@carbon/carbon-web-components/es/components/dropdown/dropdown-item';
+import '@carbon/web-components/es/components/dropdown/dropdown';
+import '@carbon/web-components/es/components/dropdown/dropdown-item';
 
 export default {
   name: 'HelloWorld',
