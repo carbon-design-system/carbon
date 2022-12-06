@@ -13,6 +13,7 @@ import { WarningFilled } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const TextArea = React.forwardRef(function TextArea(
@@ -41,7 +42,6 @@ const TextArea = React.forwardRef(function TextArea(
   const [textCount, setTextCount] = useState(
     defaultValue?.length || value?.length || 0
   );
-  const [ariaAnnouncement, setAriaAnnouncement] = useState('');
 
   const textareaProps = {
     id,
@@ -62,6 +62,8 @@ const TextArea = React.forwardRef(function TextArea(
   if (enableCounter) {
     textareaProps.maxLength = maxCount;
   }
+
+  let ariaAnnouncement = useAnnouncer(textCount, maxCount);
 
   useEffect(() => {
     const lastTen = maxCount - 10;
@@ -138,6 +140,7 @@ const TextArea = React.forwardRef(function TextArea(
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
+      readOnly={other.readOnly}
       ref={refTextarea}
     />
   );
@@ -154,7 +157,9 @@ const TextArea = React.forwardRef(function TextArea(
         {counter}
       </div>
       <div
-        className={`${prefix}--text-area__wrapper`}
+        className={classNames(`${prefix}--text-area__wrapper`, {
+          [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+        })}
         data-invalid={invalid || null}>
         {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
@@ -261,6 +266,11 @@ TextArea.propTypes = {
    * Specify the placeholder attribute for the `<textarea>`
    */
   placeholder: PropTypes.string,
+
+  /**
+   * Whether the textarea should be read-only
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * Specify the rows attribute for the `<textarea>`
