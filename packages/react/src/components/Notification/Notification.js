@@ -185,7 +185,8 @@ function NotificationIcon({ iconDescription, kind, notificationType }) {
   }
   return (
     <IconForKind
-      className={`${prefix}--${notificationType}-notification__icon`}>
+      className={`${prefix}--${notificationType}-notification__icon`}
+      size={20}>
       <title>{iconDescription}</title>
     </IconForKind>
   );
