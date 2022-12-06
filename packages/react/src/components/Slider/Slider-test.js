@@ -33,6 +33,7 @@ describe('Slider', () => {
     jest.clearAllMocks();
     jest.resetAllMocks();
   });
+
   describe('behaves as expected - Component API', () => {
     it('should render children as expected', () => {
       renderSlider({ ariaLabelInput: inputAriaValue });
@@ -235,6 +236,7 @@ describe('Slider', () => {
         tab(); // Brings focus out of input
         expect(onChange).not.toHaveBeenCalled();
       });
+
       it('gracefully tolerates empty event passed to _onDrag', () => {
         const { mouseDown, mouseUp, mouseMove } = fireEvent;
         const { container } = renderSlider({
@@ -249,6 +251,7 @@ describe('Slider', () => {
         mouseUp(theSlider);
         expect(onChange).not.toHaveBeenCalled();
       });
+
       it('gracefully tolerates empty event passed to onChange', () => {
         const { type, tab } = userEvent;
         renderSlider({
@@ -264,6 +267,7 @@ describe('Slider', () => {
         tab(); // Brings focus out of input
         expect(onChange).not.toHaveBeenCalled();
       });
+
       it('should call onBlur as expected', () => {
         const { type, tab } = userEvent;
         renderSlider({
@@ -279,20 +283,20 @@ describe('Slider', () => {
         tab(); // Brings focus out of input
         expect(onBlur).toHaveBeenCalledTimes(2);
       });
+
       it('should call onKeyDown as expected', () => {
         const { type, click } = userEvent;
         renderSlider({
           ariaLabelInput: inputAriaValue,
-          value: initialValue,
-          max: 100,
           onChange,
         });
         const theSlider = screen.getByRole('slider');
         click(theSlider);
         type(theSlider, '{arrowright}');
         type(theSlider, '{arrowright}');
-        expect(onChange).toHaveBeenCalledTimes(3);
+        expect(onChange).toHaveBeenCalledTimes(2);
       });
+
       it('should call onKeyDown and properly handle the stepMultiplier prop', () => {
         const { keyboard, click } = userEvent;
         renderSlider({
@@ -308,6 +312,7 @@ describe('Slider', () => {
           value: 11,
         });
       });
+
       it('should gracefully handle non-numeric keys', () => {
         const { tab, type } = userEvent;
         renderSlider({
@@ -339,6 +344,7 @@ describe('Slider', () => {
         type(inputElement, '1');
         expect(onChange).not.toHaveBeenCalled();
       });
+
       it('should do nothing when trying to drag', () => {
         const { mouseDown, mouseMove, mouseUp } = fireEvent;
         const { container } = renderSlider({
@@ -355,6 +361,7 @@ describe('Slider', () => {
         mouseUp(theSlider);
         expect(onChange).not.toHaveBeenCalled();
       });
+
       it('should not change slider value when using arrow key', () => {
         const { click, type } = userEvent;
         renderSlider({ disabled: true });
@@ -434,6 +441,7 @@ describe('Slider', () => {
           value: 0,
         });
       });
+
       it('sets correct state from event with a clientX in a mousemove', () => {
         const { mouseDown, mouseUp, mouseMove } = fireEvent;
         const { container } = renderSlider({
@@ -449,6 +457,7 @@ describe('Slider', () => {
           value: 100,
         });
       });
+
       it('should call release', () => {
         const { mouseDown, mouseUp, mouseMove } = fireEvent;
         const { container } = renderSlider({
