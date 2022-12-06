@@ -92,6 +92,7 @@ function ListBoxSelection({
       {...rest}
       aria-label={description}
       className={className}
+      disabled={disabled}
       onClick={onClick}
       onKeyDown={onKeyDown}
       tabIndex={disabled ? -1 : 0}
