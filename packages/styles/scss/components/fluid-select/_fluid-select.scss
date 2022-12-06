@@ -38,13 +38,13 @@
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input {
     min-height: rem(64px);
-    padding: rem(32px) $spacing-05 rem(13px);
+    padding: rem(32px) rem(32px) rem(13px) $spacing-05;
     outline: none;
+    text-overflow: ellipsis;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select__arrow {
-    top: auto;
-    bottom: 1rem;
+    top: $spacing-07;
     height: 1rem;
   }
 
@@ -54,10 +54,10 @@
   }
 
   // Invalid + Warn states
-  .#{$prefix}--select--fluid .#{$prefix}--select--invalid {
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--invalid
+    .#{$prefix}--select-input__wrapper {
     @include focus-outline('invalid');
-
-    outline-offset: 0;
   }
 
   .#{$prefix}--select--fluid
@@ -79,11 +79,16 @@
   .#{$prefix}--select--fluid
     .#{$prefix}--select--warning
     .#{$prefix}--select-input {
+    padding-right: rem(32px);
     border-bottom: 1px solid transparent;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select--warning {
     border-bottom: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
+    flex-direction: column;
   }
 
   .#{$prefix}--select--fluid
@@ -93,6 +98,23 @@
     .#{$prefix}--select--warning
     .#{$prefix}--select-input:not(:focus) {
     outline: none;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--form-requirement {
+    color: $text-error;
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--form-requirement {
@@ -122,10 +144,10 @@
   }
 
   // Focus styles
-  .#{$prefix}--select--fluid .#{$prefix}--select--fluid--focus {
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--fluid--focus
+    .#{$prefix}--select-input__wrapper {
     @include focus-outline('outline');
-
-    outline-offset: 0;
   }
 
   .#{$prefix}--select--fluid

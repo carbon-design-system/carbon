@@ -144,6 +144,11 @@ export default class Slider extends PureComponent {
     onRelease: PropTypes.func,
 
     /**
+     * Whether the slider should be read-only
+     */
+    readOnly: PropTypes.bool,
+
+    /**
      * `true` to specify if the control is required.
      */
     required: PropTypes.bool,
@@ -176,6 +181,7 @@ export default class Slider extends PureComponent {
     ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
       ? undefined
       : 'Slider number input',
+    readOnly: false,
   };
 
   static contextType = FeatureFlagContext;
@@ -267,7 +273,7 @@ export default class Slider extends PureComponent {
    */
   onDragStart = (evt) => {
     // Do nothing if component is disabled
-    if (this.props.disabled) {
+    if (this.props.disabled || this.props.readOnly) {
       return;
     }
 
@@ -292,7 +298,7 @@ export default class Slider extends PureComponent {
    */
   onDragStop = () => {
     // Do nothing if component is disabled
-    if (this.props.disabled) {
+    if (this.props.disabled || this.props.readOnly) {
       return;
     }
 
@@ -318,7 +324,7 @@ export default class Slider extends PureComponent {
    */
   _onDrag = (evt) => {
     // Do nothing if component is disabled or we have no event
-    if (this.props.disabled || !evt) {
+    if (this.props.disabled || this.props.readOnly || !evt) {
       return;
     }
 
@@ -357,7 +363,7 @@ export default class Slider extends PureComponent {
    */
   onKeyDown = (evt) => {
     // Do nothing if component is disabled or we don't have a valid event
-    if (this.props.disabled || !('which' in evt)) {
+    if (this.props.disabled || this.props.readOnly || !('which' in evt)) {
       return;
     }
 
@@ -401,7 +407,7 @@ export default class Slider extends PureComponent {
 
   onChange = (evt) => {
     // Do nothing if component is disabled
-    if (this.props.disabled) {
+    if (this.props.disabled || this.props.readOnly) {
       return;
     }
 
@@ -551,6 +557,7 @@ export default class Slider extends PureComponent {
       disabled,
       name,
       light,
+      readOnly,
       ...other
     } = this.props;
 
@@ -577,6 +584,7 @@ export default class Slider extends PureComponent {
           const sliderClasses = classNames(
             `${prefix}--slider`,
             { [`${prefix}--slider--disabled`]: disabled },
+            { [`${prefix}--slider--readonly`]: readOnly },
             [enabled ? null : className]
           );
 
@@ -629,7 +637,7 @@ export default class Slider extends PureComponent {
                     className={`${prefix}--slider__thumb`}
                     role="slider"
                     id={id}
-                    tabIndex={0}
+                    tabIndex={!readOnly ? 0 : -1}
                     aria-valuemax={max}
                     aria-valuemin={min}
                     aria-valuenow={value}
@@ -669,6 +677,7 @@ export default class Slider extends PureComponent {
                   onKeyUp={this.onInputKeyUp}
                   data-invalid={isValid ? null : true}
                   aria-invalid={isValid ? null : true}
+                  readOnly={readOnly}
                 />
               </div>
             </div>

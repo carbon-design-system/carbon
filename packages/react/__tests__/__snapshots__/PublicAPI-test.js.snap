@@ -475,6 +475,9 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "title": Object {
         "type": "string",
       },
@@ -1362,6 +1365,17 @@ Map {
         ],
         "isRequired": true,
         "type": "oneOfType",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+            "xl",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
   },
@@ -2370,6 +2384,12 @@ Map {
       "inline": Object {
         "type": "bool",
       },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
       "light": [Function],
       "locale": Object {
         "args": Array [
@@ -2464,6 +2484,19 @@ Map {
       "onOpen": Object {
         "type": "func",
       },
+      "readOnly": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "bool",
+            },
+            Object {
+              "type": "array",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
       "short": Object {
         "type": "bool",
       },
@@ -2503,6 +2536,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -2552,6 +2591,9 @@ Map {
       "pattern": [Function],
       "placeholder": Object {
         "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
@@ -2717,6 +2759,9 @@ Map {
       "light": [Function],
       "onChange": Object {
         "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "renderSelectedItem": Object {
         "type": "func",
@@ -3926,6 +3971,16 @@ Map {
     },
     "render": [Function],
   },
+  "IdPrefix" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "prefix": Object {
+        "type": "string",
+      },
+    },
+  },
   "InlineLoading" => Object {
     "propTypes": Object {
       "className": Object {
@@ -4920,6 +4975,9 @@ Map {
       "open": Object {
         "type": "bool",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "selectedItems": Object {
         "type": "array",
       },
@@ -5867,6 +5925,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "valueSelected": Object {
         "args": Array [
           Array [
@@ -6140,6 +6201,9 @@ Map {
       },
       "onChange": Object {
         "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
@@ -6696,24 +6760,96 @@ Map {
     "render": [Function],
   },
   "StructuredListBody" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "onKeyDown": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "head": Object {
+        "type": "bool",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+    },
   },
   "StructuredListCell" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "head": false,
+      "noWrap": false,
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "head": Object {
+        "type": "bool",
+      },
+      "noWrap": Object {
+        "type": "bool",
+      },
+    },
   },
   "StructuredListHead" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+    },
   },
   "StructuredListInput" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "title": "title",
+    },
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "defaultChecked": [Function],
+      "id": Object {
+        "type": "string",
+      },
+      "name": Object {
+        "type": "string",
+      },
+      "onChange": [Function],
+      "title": Object {
+        "type": "string",
+      },
+      "value": [Function],
+    },
   },
   "StructuredListRow" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "head": false,
+      "onKeyDown": [Function],
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "head": Object {
+        "type": "bool",
+      },
+      "label": [Function],
+      "onKeyDown": Object {
+        "type": "func",
+      },
+    },
   },
   "StructuredListSkeleton" => Object {
     "defaultProps": Object {
@@ -6733,8 +6869,32 @@ Map {
     },
   },
   "StructuredListWrapper" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "render": [Function],
+    "defaultProps": Object {
+      "ariaLabel": "Structured list section",
+      "isCondensed": false,
+      "isFlush": false,
+      "selection": false,
+    },
+    "propTypes": Object {
+      "ariaLabel": Object {
+        "type": "string",
+      },
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "isCondensed": Object {
+        "type": "bool",
+      },
+      "isFlush": Object {
+        "type": "bool",
+      },
+      "selection": Object {
+        "type": "bool",
+      },
+    },
   },
   "Switch" => Object {
     "$$typeof": Symbol(react.forward_ref),
@@ -7639,7 +7799,6 @@ Map {
   "TextArea" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "cols": 50,
       "disabled": false,
       "enableCounter": false,
       "helperText": "",
@@ -7708,6 +7867,9 @@ Map {
       },
       "placeholder": Object {
         "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "rows": Object {
         "type": "number",
@@ -8205,6 +8367,9 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "size": Object {
         "args": Array [
           Array [
@@ -8349,6 +8514,9 @@ Map {
       },
       "onToggle": Object {
         "type": "func",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "size": Object {
         "args": Array [
@@ -9403,6 +9571,51 @@ Map {
       },
     },
   },
+  "unstable__FluidDatePicker" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidDatePickerInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "render": [Function],
+  },
+  "unstable__FluidDatePickerSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "datePickerType": Object {
+        "args": Array [
+          Array [
+            "simple",
+            "single",
+            "range",
+          ],
+        ],
+        "type": "oneOf",
+      },
+    },
+  },
   "unstable__FluidDropdown" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -9822,10 +10035,80 @@ Map {
       },
     },
   },
+  "unstable__FluidTimePicker" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "labelText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidTimePickerSelect" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "type": "any",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "labelText": Object {
+        "type": "node",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidTimePickerSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "isOnlyTwo": Object {
+        "type": "bool",
+      },
+    },
+  },
   "unstable_useContextMenu" => Object {},
   "unstable_useFeatureFlag" => Object {},
   "unstable_useFeatureFlags" => Object {},
   "unstable_useLayoutDirection" => Object {},
+  "useIdPrefix" => Object {},
   "useLayer" => Object {},
   "usePrefix" => Object {},
   "useTheme" => Object {},

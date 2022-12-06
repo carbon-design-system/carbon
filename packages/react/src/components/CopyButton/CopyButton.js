@@ -18,7 +18,6 @@ export default function CopyButton({ iconDescription, className, ...other }) {
     <Copy
       className={classnames(className, `${prefix}--copy-btn`)}
       aria-label={iconDescription}
-      title={iconDescription}
       {...other}>
       <CopyIcon className={`${prefix}--snippet__icon`} />
     </Copy>
