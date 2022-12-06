@@ -18,6 +18,8 @@ import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import Link from '../Link';
 
+const prefix = 'cds';
+
 describe('Tile', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto outermost element', () => {
@@ -148,7 +150,9 @@ describe('Tile', () => {
 
     it('has the expected classes', () => {
       render(<ExpandableTile className="extra-class" />);
-      expect(screen.getByRole('button')).toHaveClass(`cds--tile--expandable`);
+      expect(screen.getByRole('button')).toHaveClass(
+        `${prefix}--tile--expandable`
+      );
       expect(screen.getByRole('button')).toHaveClass(`extra-class`);
     });
 
@@ -165,12 +169,14 @@ describe('Tile', () => {
         </ExpandableTile>
       );
       expect(screen.getByRole('button')).not.toHaveClass(
-        `cds--tile--is-expanded`
+        `${prefix}--tile--is-expanded`
       );
       const tile = screen.getByText('TestAbove');
       userEvent.click(tile);
       expect(onClick).toHaveBeenCalled();
-      expect(screen.getByRole('button')).toHaveClass(`cds--tile--is-expanded`);
+      expect(screen.getByRole('button')).toHaveClass(
+        `${prefix}--tile--is-expanded`
+      );
     });
 
     it('contains the default tooltip for the button', async () => {
@@ -226,7 +232,9 @@ describe('Tile', () => {
         </ExpandableTile>
       );
 
-      expect(screen.getByRole('button')).toHaveClass('cds--tile--is-expanded');
+      expect(screen.getByRole('button')).toHaveClass(
+        `${prefix}--tile--is-expanded`
+      );
     });
 
     it('supports setting expanded prop to false', () => {
@@ -241,7 +249,7 @@ describe('Tile', () => {
         </ExpandableTile>
       );
       expect(screen.getByRole('button')).not.toHaveClass(
-        'cds--tile--is-expanded'
+        `${prefix}--tile--is-expanded`
       );
     });
   });
