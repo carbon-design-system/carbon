@@ -112,12 +112,12 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
-  const refTextarea = useRef();
+  const textareaRef = useRef();
   useIsomorphicEffect(() => {
     if (other.cols) {
-      refTextarea.current.style.width = null;
+      textareaRef.current.style.width = null;
     } else {
-      refTextarea.current.style.width = `100%`;
+      textareaRef.current.style.width = `100%`;
     }
   }, [other.cols]);
 
@@ -131,7 +131,7 @@ const TextArea = React.forwardRef(function TextArea(
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
       readOnly={other.readOnly}
-      ref={refTextarea}
+      ref={textareaRef}
     />
   );
 

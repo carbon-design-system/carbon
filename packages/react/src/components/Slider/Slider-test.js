@@ -76,13 +76,6 @@ describe('Slider', () => {
         'hidden'
       );
     });
-
-    it('sets style to display:none on input field if hidden via props', () => {
-      wrapper.setProps({ hideTextInput: true });
-      expect(wrapper.find(`#${id}-input-for-slider`).props().style).toEqual({
-        display: 'none',
-      });
-    });
   });
 
   describe('Supporting label', () => {
