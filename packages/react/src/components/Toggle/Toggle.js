@@ -44,7 +44,7 @@ export function Toggle({
   }
 
   const isSm = size === 'sm';
-  const sideLabel = checked ? labelB : labelA;
+  const sideLabel = hideLabel ? labelText : checked ? labelB : labelA;
 
   const wrapperClasses = classNames(
     `${prefix}--toggle`,
