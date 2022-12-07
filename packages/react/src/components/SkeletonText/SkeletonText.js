@@ -7,8 +7,10 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
+// import React, { useRef } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+// import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const randoms = [0.973051493507435, 0.15334737213558558, 0.5671034553053769];
 
@@ -37,40 +39,40 @@ const SkeletonText = ({
 
   const widthPercent = width.includes('%');
 
-  if (widthPercent && paragraph) {
-    const lines = [];
-    for (var i = 0; i < lineCount; i++) {
-      const randomWidth = getRandomInt(0, 75, i) + 'px';
-      lines.push(
-        <p
-          className={skeletonTextClasses}
-          style={{ width: `calc(${width} - ${randomWidth})` }}
-          key={i}
-          {...other}
-        />
-      );
-    }
-    return <div>{lines}</div>;
+  let lineCountNumber;
+  if (!paragraph) {
+    lineCountNumber = '1';
+  } else {
+    lineCountNumber = lineCount;
   }
 
-  if (widthPx && paragraph) {
-    const lines = [];
-    for (var j = 0; j < lineCount; j++) {
-      const randomWidth = getRandomInt(widthNum - 75, widthNum, j) + 'px';
-      lines.push(
-        <p
-          className={skeletonTextClasses}
-          style={{ width: randomWidth }}
-          key={j}
-          {...other}
-        />
-      );
-    }
-    return <div>{lines}</div>;
+  // const refs = useRef([]);
+
+  // useIsomorphicEffect(() => {
+  //   refs.current.style.background = 'red';
+  // }, []);
+
+  const lines = [];
+  for (var i = 0; i < lineCountNumber; i++) {
+    const randomPercentWidth = getRandomInt(0, 75, i) + 'px';
+    const randomPxWidth = getRandomInt(widthNum - 75, widthNum, i) + 'px';
+
+    const style = widthPercent
+      ? `calc(${width} - ${randomPercentWidth})`
+      : widthPx
+      ? randomPxWidth
+      : width;
+    lines.push(
+      <p
+        className={skeletonTextClasses}
+        style={{ width: style }}
+        key={i}
+        // ref={refs}
+        {...other}
+      />
+    );
   }
-  return (
-    <p className={skeletonTextClasses} style={{ width: width }} {...other} />
-  );
+  return <div>{lines}</div>;
 };
 
 SkeletonText.propTypes = {
