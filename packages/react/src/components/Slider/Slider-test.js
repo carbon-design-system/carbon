@@ -18,6 +18,7 @@ const onBlur = jest.fn();
 const onChange = jest.fn();
 const onClick = jest.fn();
 const onRelease = jest.fn();
+const onKeyDown = jest.fn();
 
 const renderSlider = ({
   value = defaultSliderValue,
@@ -288,13 +289,13 @@ describe('Slider', () => {
         const { type, click } = userEvent;
         renderSlider({
           ariaLabelInput: inputAriaValue,
-          onChange,
+          onKeyDown,
         });
         const theSlider = screen.getByRole('slider');
         click(theSlider);
         type(theSlider, '{arrowright}');
         type(theSlider, '{arrowright}');
-        expect(onChange).toHaveBeenCalledTimes(2);
+        expect(onKeyDown).toHaveBeenCalledTimes(2);
       });
 
       it('should call onKeyDown and properly handle the stepMultiplier prop', () => {
