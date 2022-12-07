@@ -63,7 +63,15 @@ const SkeletonText = ({
         }
       }
     });
-  }, [paragraph, refs, width, widthNum, widthPercent, widthPx]);
+  }, [
+    lineCountNumber,
+    paragraph,
+    refs,
+    width,
+    widthNum,
+    widthPercent,
+    widthPx,
+  ]);
 
   const lines = [];
   for (var i = 0; i < lineCountNumber; i++) {
