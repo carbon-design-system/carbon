@@ -6,11 +6,11 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
-// import React, { useRef } from 'react';
+
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
-// import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const randoms = [0.973051493507435, 0.15334737213558558, 0.5671034553053769];
 
@@ -46,28 +46,32 @@ const SkeletonText = ({
     lineCountNumber = lineCount;
   }
 
-  // const refs = useRef([]);
+  const refs = useRef([]);
 
-  // useIsomorphicEffect(() => {
-  //   refs.current.style.background = 'red';
-  // }, []);
+  useIsomorphicEffect(() => {
+    refs.current.map((item, j) => {
+      const randomPercentWidth = getRandomInt(0, 75, j) + 'px';
+      const randomPxWidth = getRandomInt(widthNum - 75, widthNum, j) + 'px';
+
+      if (item) {
+        if (widthPercent && paragraph) {
+          item.style.width = `calc(${width} - ${randomPercentWidth})`;
+        } else if (widthPx && paragraph) {
+          item.style.width = randomPxWidth;
+        } else {
+          item.style.width = width;
+        }
+      }
+    });
+  }, [paragraph, refs, width, widthNum, widthPercent, widthPx]);
 
   const lines = [];
   for (var i = 0; i < lineCountNumber; i++) {
-    const randomPercentWidth = getRandomInt(0, 75, i) + 'px';
-    const randomPxWidth = getRandomInt(widthNum - 75, widthNum, i) + 'px';
-
-    const style = widthPercent
-      ? `calc(${width} - ${randomPercentWidth})`
-      : widthPx
-      ? randomPxWidth
-      : width;
     lines.push(
       <p
         className={skeletonTextClasses}
-        style={{ width: style }}
         key={i}
-        // ref={refs}
+        ref={(el) => (refs.current = [...refs.current, el])}
         {...other}
       />
     );
