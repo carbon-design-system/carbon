@@ -45,11 +45,8 @@ export const Default = () => (
       max={100}
       defaultValue={50}
     />
-  </div>
-);
-
-export const Invalid = () => (
-  <div style={{ width: '400px' }}>
+    <br />
+    <br />
     <FluidNumberInput
       label={ToggleTip}
       placeholder="Placeholder text"
@@ -61,11 +58,8 @@ export const Invalid = () => (
       invalid
       invalidText="Warning message that is really long can wrap to more lines but should not be excessively long."
     />
-  </div>
-);
-
-export const Warning = () => (
-  <div style={{ width: '400px' }}>
+    <br />
+    <br />
     <FluidNumberInput
       label={ToggleTip}
       placeholder="Placeholder text"
