@@ -1033,10 +1033,7 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
-      "readOnly": Object {
-        "type": "bool",
-      },
-      "selectedItem": Object {
+      "value": Object {
         "args": Array [
           Array [
             Object {
@@ -1856,6 +1853,9 @@ Map {
       },
       "placeholder": Object {
         "type": "string",
+      },
+      "readOnly": Object {
+        "type": "bool",
       },
       "selectedItem": Object {
         "args": Array [
