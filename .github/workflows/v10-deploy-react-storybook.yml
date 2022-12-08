@@ -14,10 +14,10 @@ on:
 
 jobs:
   build:
-    runs-on: macOS-latest
+    runs-on: macos-11
     steps:
       - uses: actions/checkout@v3
-      
+
       - name: Use Node.js 16.x
         uses: actions/setup-node@v3
         with:
