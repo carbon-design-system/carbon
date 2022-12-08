@@ -20,7 +20,7 @@ import {
 import TileGroup from '../TileGroup/TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
-import mdx from './Tile.mdx';
+import mdx from './ExperimentalTile.mdx';
 
 export default {
   title: 'Experimental/Improved Contrast Tile',
