@@ -11,39 +11,40 @@ import { screen, render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import SecondaryButton from '../SecondaryButton';
 
+const prefix = 'cds';
+
 describe('SecondaryButton', () => {
   describe('Renders as expected', () => {
-    const renderSecondaryButton = (props) => {
+    it('Renders children as expected', () => {
       render(
-        <SecondaryButton {...props} className="extra-class" size="sm">
+        <SecondaryButton>
           <div className="child">Test</div>
           <div className="child">Test</div>
         </SecondaryButton>
       );
-    };
-
-    it('Renders children as expected', () => {
-      renderSecondaryButton();
       expect(screen.getAllByText('Test').length).toBe(2);
     });
 
     it('Has the expected kind set to "secondary"', () => {
-      renderSecondaryButton();
-      expect(screen.getByRole('button')).toHaveClass('cds--btn--secondary');
+      render(<SecondaryButton />);
+      expect(screen.getByRole('button')).toHaveClass(
+        `${prefix}--btn--secondary`
+      );
     });
 
     it('Should add extra classes that are passed via className', () => {
-      renderSecondaryButton();
+      render(<SecondaryButton className="extra-class" />);
       expect(screen.getByRole('button')).toHaveClass('extra-class');
     });
 
     describe('Renders icon buttons', () => {
       it('should have the appropriate icon', () => {
-        renderSecondaryButton({
-          iconDescription: 'Search',
-          renderIcon: Search,
-        });
-        expect(screen.queryByLabelText('Search')).toHaveClass('cds--btn__icon');
+        render(
+          <SecondaryButton iconDescription={'Search'} renderIcon={Search} />
+        );
+        expect(screen.queryByLabelText('Search')).toHaveClass(
+          `${prefix}--btn__icon`
+        );
       });
     });
   });

@@ -33,6 +33,10 @@ export function useNoInteractiveChildren(
  * @returns {HTMLElement}
  */
 export function getInteractiveContent(node) {
+  if (!node || !node.childNodes) {
+    return null;
+  }
+
   if (isFocusable(node)) {
     return node;
   }

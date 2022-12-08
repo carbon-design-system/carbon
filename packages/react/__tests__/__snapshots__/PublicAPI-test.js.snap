@@ -1033,7 +1033,10 @@ Map {
       "placeholder": Object {
         "type": "string",
       },
-      "value": Object {
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "selectedItem": Object {
         "args": Array [
           Array [
             Object {
