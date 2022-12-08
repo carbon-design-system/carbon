@@ -151,8 +151,10 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
 
   const outerElementClasses = cx(`${prefix}--form-item`, {
     [customClassName]: enabled,
-    [`${prefix}--number-input--fluid--invalid`]: isFluid && invalid,
+    [`${prefix}--number-input--fluid--invalid`]:
+      isFluid && normalizedProps.invalid,
     [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
+    [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
   });
 
   return (

@@ -39,7 +39,7 @@ export const Default = () => (
     <FluidNumberInput
       label={ToggleTip}
       placeholder="Placeholder text"
-      id="input-1"
+      id="input-default"
       step={10}
       min={0}
       max={100}
@@ -53,7 +53,7 @@ export const Invalid = () => (
     <FluidNumberInput
       label={ToggleTip}
       placeholder="Placeholder text"
-      id="input-1"
+      id="input-invalid"
       step={10}
       min={0}
       max={100}
@@ -69,7 +69,7 @@ export const Warning = () => (
     <FluidNumberInput
       label={ToggleTip}
       placeholder="Placeholder text"
-      id="input-1"
+      id="input-warning"
       step={10}
       min={0}
       max={100}
@@ -85,7 +85,7 @@ export const Skeleton = () => (
     <FluidNumberInputSkeleton
       label="Label"
       placeholder="Placeholder text"
-      id="input-1"
+      id="input-skeleton"
     />
   </div>
 );
@@ -99,14 +99,8 @@ export const Playground = (args) => (
 Playground.argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
-    defaultValue: 300,
+    defaultValue: 400,
   },
-  // className: {
-  //   control: {
-  //     type: 'text',
-  //   },
-  //   defaultValue: 'test-class',
-  // },
   defaultValue: {
     control: {
       type: 'number',

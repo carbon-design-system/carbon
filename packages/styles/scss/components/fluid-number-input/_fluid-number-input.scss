@@ -61,7 +61,33 @@
     @include focus-outline('outline');
   }
 
+  // Weird overrides (needed to override focus borders on stepper buttons when hovered while input has focus)
   .#{$prefix}--number-input--fluid:not(.#{$prefix}--number-input--fluid--invalid)
+    .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper:not(.#{$prefix}--number__input-wrapper--warning)
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover {
+    outline: 2px solid transparent;
+  }
+
+  .#{$prefix}--number-input--fluid:not(.#{$prefix}--number-input--fluid--invalid)
+    .#{$prefix}--number
+    .#{$prefix}--number__input-wrapper:not(.#{$prefix}--number__input-wrapper--warning)
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover::before {
+    top: auto;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: $focus;
+  }
+  // End weirdness
+
+  .#{$prefix}--number-input--fluid:not(.#{$prefix}--number-input--fluid--invalid)
+    .#{$prefix}--number-input-wrapper:not(.#{$prefix}--number-input-wrapper__warning)
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn:hover {
@@ -74,7 +100,7 @@
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn::after {
     top: 0;
-    height: 100%;
+    height: calc(100% - rem(1px));
   }
 
   .#{$prefix}--number-input--fluid.#{$prefix}--number-input--fluid--focus
@@ -178,16 +204,51 @@
     .#{$prefix}--number
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
-    .#{$prefix}--number__control-btn:hover {
+    .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='number']
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover:not(:focus) {
     outline: none;
+  }
+
+  .#{$prefix}--number-input--fluid.#{$prefix}--number-input--invalid
+    .#{$prefix}--number__input-wrapper
+    input[type='number']
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number__input-wrapper--warning
+    input[type='number']
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn {
+    border-bottom: none;
   }
 
   .#{$prefix}--number-input--fluid--invalid
     .#{$prefix}--number
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn,
+  .#{$prefix}--number-input--fluid
+    .#{$prefix}--number
+    input[type='number']
+    ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
     border: initial;
     border-bottom-width: rem(1px);
+  }
+
+  // Disabled states
+  .#{$prefix}--number-input--fluid--disabled:not(.#{$prefix}--number-input--fluid--invalid)
+    .#{$prefix}--number {
+    border-bottom: 1px solid $border-subtle;
+  }
+
+  .#{$prefix}--number-input--fluid--disabled.#{$prefix}--number-input--fluid--invalid
+    .#{$prefix}--number
+    input[type='number']:disabled {
+    background-color: transparent;
   }
 }
