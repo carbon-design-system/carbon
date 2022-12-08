@@ -128,6 +128,11 @@ export const borderStrong01 = gray50;
 export const borderStrong02 = gray50;
 export const borderStrong03 = gray50;
 
+// border-tile
+export const borderTile01 = gray40;
+export const borderTile02 = gray30;
+export const borderTile03 = gray40;
+
 // border-inverse
 export const borderInverse = gray100;
 
