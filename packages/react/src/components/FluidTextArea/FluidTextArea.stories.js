@@ -20,6 +20,9 @@ import { Information } from '@carbon/icons-react';
 export default {
   title: 'Experimental/unstable__FluidTextArea',
   component: FluidTextArea,
+  subcomponents: {
+    FluidTextAreaSkeleton,
+  },
   argTypes: {
     hideLabel: {
       table: {
