@@ -23,7 +23,7 @@ import './tile-story.scss';
 import mdx from './Tile.mdx';
 
 export default {
-  title: 'Components/Tile/Experimental Improved Contrast',
+  title: 'Experimental/Improved Contrast Tile',
   component: Tile,
   subcomponents: {
     ClickableTile,
