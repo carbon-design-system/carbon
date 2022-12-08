@@ -6,6 +6,7 @@
 //
 
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -19,7 +20,7 @@
 /// Tile styles
 /// @access public
 /// @group tile
-@mixin tile {
+@mixin tile($local-enable-experimental-tile-contrast: false) {
   .#{$prefix}--tile-group {
     @include reset;
   }
@@ -62,6 +63,13 @@
     color: $text-primary;
     text-decoration: none;
 
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -99,6 +107,13 @@
   .#{$prefix}--tile--selectable {
     padding-right: $spacing-09;
     border: 1px solid transparent;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
   }
 
   .#{$prefix}--tile__checkmark {
@@ -189,6 +204,13 @@
     transition: max-height $duration-moderate-01 motion(standard, productive);
 
     @include type-style('body-compact-01');
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
 
     &:hover {
       background: $layer-hover;

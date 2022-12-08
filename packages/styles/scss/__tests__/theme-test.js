@@ -87,6 +87,9 @@ describe('@carbon/styles/scss/theme', () => {
         "border-strong-01",
         "border-strong-02",
         "border-strong-03",
+        "border-tile-01",
+        "border-tile-02",
+        "border-tile-03",
         "border-inverse",
         "border-interactive",
         "border-disabled",
@@ -145,6 +148,7 @@ describe('@carbon/styles/scss/theme', () => {
         "border-subtle",
         "border-subtle-selected",
         "border-strong",
+        "border-tile",
       ]
     `);
   });
