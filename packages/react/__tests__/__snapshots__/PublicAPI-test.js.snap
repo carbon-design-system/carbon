@@ -1340,7 +1340,7 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "isIndented": Object {
+      "isInset": Object {
         "type": "bool",
       },
       "kind": Object {

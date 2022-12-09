@@ -135,7 +135,7 @@
     content: '';
   }
 
-  .#{$prefix}--contained-list--indented-rulers
+  .#{$prefix}--contained-list--inset-rulers
     .#{$prefix}--contained-list-item:not(:last-of-type)::before {
     right: $spacing-05;
     left: $spacing-05;
