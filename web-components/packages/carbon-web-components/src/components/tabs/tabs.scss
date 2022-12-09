@@ -211,20 +211,6 @@
   }
 }
 
-:host(#{$prefix}-tab[in-focus][selected]),
-:host(#{$prefix}-tab[in-focus][selected]:hover) {
-  @include carbon--breakpoint(md) {
-    @include focus-outline('outline');
-
-    // `[role]` is only for specificity.
-    // We have `:not()` usage in the corresponding Carbon core style
-    // which puts specificity of "specific" scenario though the style is for "regular" scenario
-    a.#{$prefix}--tabs__nav-link[role] {
-      border-bottom-width: 2px;
-    }
-  }
-}
-
 :host(#{$prefix}-tab[highlighted][selected]),
 :host(#{$prefix}-tab[highlighted][selected]:hover) {
   background-color: $selected-ui;

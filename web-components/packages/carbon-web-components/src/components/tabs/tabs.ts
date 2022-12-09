@@ -58,27 +58,25 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
   private _open = false;
 
   /**
+   * The currently selected index
+   */
+  private _currentIndex: number = 0;
+
+  /**
    * The content of the selected item, used in the narrow mode.
    */
   private _selectedItemContent: DocumentFragment | null = null;
+
+  /**
+   * Total number of tabs in the component
+   */
+  private _totalTabs: number = 0;
 
   /**
    * The DOM element for the trigger button in narrow mode.
    */
   @query('#trigger')
   private _triggerNode!: HTMLDivElement;
-
-  /**
-   * Handles `focus` event handler on this element.
-   */
-  @HostListener('focusin')
-  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleFocusIn() {
-    const { selectorItem } = this.constructor as typeof BXTabs;
-    forEach(this.querySelectorAll(selectorItem), (item) => {
-      (item as BXTab).inFocus = true;
-    });
-  }
 
   /**
    * Handles `blur` event handler on this element.
@@ -89,10 +87,6 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
   private _handleFocusOut({ relatedTarget }: FocusEvent) {
     if (!this.contains(relatedTarget as Node)) {
-      const { selectorItem } = this.constructor as typeof BXTabs;
-      forEach(this.querySelectorAll(selectorItem), (item) => {
-        (item as BXTab).inFocus = false;
-      });
       this._handleUserInitiatedToggle(false);
     }
   }
@@ -183,6 +177,7 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
     if (nextItemText) {
       this._assistiveStatusText = nextItemText;
     }
+    this._currentIndex += direction;
     this.requestUpdate();
   }
 
@@ -202,8 +197,9 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
   }
 
   @HostListener('keydown')
-  protected _handleKeydown({ key }: KeyboardEvent) {
+  protected _handleKeydown(event: KeyboardEvent) {
     const { _open: open, _triggerNode: triggerNode } = this;
+    const { key, target } = event;
     const narrowMode = Boolean(triggerNode.offsetParent);
     const action = (this.constructor as typeof BXTabs).getAction(key, {
       narrowMode,
@@ -226,6 +222,17 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
       switch (action) {
         case TABS_KEYBOARD_ACTION.CLOSING:
           this._handleUserInitiatedToggle(false);
+          break;
+        case TABS_KEYBOARD_ACTION.SELECTING:
+          this._handleUserInitiatedSelectItem(target as BXTab);
+          break;
+        case TABS_KEYBOARD_ACTION.HOME:
+          this._navigate(this._currentIndex + this._totalTabs, {
+            immediate: !narrowMode,
+          });
+          break;
+        case TABS_KEYBOARD_ACTION.END:
+          this._navigate(-this._currentIndex, { immediate: !narrowMode });
           break;
         case TABS_KEYBOARD_ACTION.NAVIGATING:
           {
@@ -306,6 +313,7 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
     const { selectorItem } = this.constructor as typeof BXTabs;
     if (changedProperties.has('type')) {
       forEach(this.querySelectorAll(selectorItem), (elem) => {
+        this._totalTabs++;
         (elem as BXTab).type = this.type;
       });
     }
@@ -427,6 +435,15 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
   static getAction(key: string, { narrowMode }: { narrowMode?: boolean }) {
     if (key === 'Escape') {
       return TABS_KEYBOARD_ACTION.CLOSING;
+    }
+    if (key === 'Enter') {
+      return TABS_KEYBOARD_ACTION.SELECTING;
+    }
+    if (key === 'Home') {
+      return TABS_KEYBOARD_ACTION.HOME;
+    }
+    if (key === 'End') {
+      return TABS_KEYBOARD_ACTION.END;
     }
     if (
       key in (narrowMode ? NAVIGATION_DIRECTION_NARROW : NAVIGATION_DIRECTION)
