@@ -39,6 +39,8 @@ export const set = TokenSet.create({
         border.getToken('border-subtle-selected-01'),
 
         border.getToken('border-strong-01'),
+
+        border.getToken('border-tile-01'),
       ],
     }),
     TokenSet.create({
@@ -59,6 +61,8 @@ export const set = TokenSet.create({
         border.getToken('border-subtle-selected-02'),
 
         border.getToken('border-strong-02'),
+
+        border.getToken('border-tile-02'),
       ],
     }),
     TokenSet.create({
@@ -79,6 +83,8 @@ export const set = TokenSet.create({
         border.getToken('border-subtle-selected-03'),
 
         border.getToken('border-strong-03'),
+
+        border.getToken('border-tile-03'),
       ],
     }),
   ],
