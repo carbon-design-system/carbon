@@ -139,7 +139,7 @@
 
   //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
   // text/p gets 20% right padding
-  .#{$prefix}--modal-content p,
+  .#{$prefix}--modal-content > p,
   .#{$prefix}--modal-content__regular-content {
     padding-right: 20%;
     @include type-style('body-long-01');
@@ -185,7 +185,7 @@
       padding-right: $spacing-05;
     }
 
-    .#{$prefix}--modal-content p {
+    .#{$prefix}--modal-content > p {
       //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
       padding-right: 0;
     }
@@ -213,7 +213,7 @@
       padding-right: $spacing-05;
     }
 
-    .#{$prefix}--modal-content p {
+    .#{$prefix}--modal-content > p {
       //.#{$prefix}--modal-content already has 16px padding so this doesn't need any
       padding-right: 0;
     }
@@ -226,7 +226,7 @@
       width: 42%;
       max-height: 72%;
 
-      .#{$prefix}--modal-content p,
+      .#{$prefix}--modal-content > p,
       .#{$prefix}--modal-content__regular-content {
         padding-right: 20%;
       }
