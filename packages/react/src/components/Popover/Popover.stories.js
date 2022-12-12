@@ -190,6 +190,8 @@ export const AutoAlign = () => {
 export const OverlayStackingContextsExample = () => {
   const [open, setOpen] = useState(false);
   const [open2, setOpen2] = useState(false);
+  const [open3, setOpen3] = useState(false);
+  const [open4, setOpen4] = useState(false);
 
   return (
     <div style={{ margin: '4rem' }}>
@@ -197,32 +199,79 @@ export const OverlayStackingContextsExample = () => {
         Higher sibling elements are properly overlaid
       </Button>
       <br />
-      <Popover open={open} align="top">
+      <Popover open={open} align="right">
         <button
           type="button"
           onClick={() => {
             setOpen(!open);
           }}>
-          Toggle up popover
+          Click here
         </button>
         <PopoverContent>
-          <div style={{ padding: '1.5rem' }}>Popover content</div>
+          <div style={{ padding: '3.5rem' }}>
+            Popover content popover content popover content popover content
+            popover content
+          </div>
         </PopoverContent>
       </Popover>
-      <Popover open={open2}>
+      <Popover open={open2} align="left">
         <button
           type="button"
           onClick={() => {
             setOpen2(!open2);
           }}>
-          Toggle down popover
+          This popover trigger should also be overlaid
         </button>
         <PopoverContent>
-          <div style={{ padding: '1.5rem' }}>Popover content</div>
+          <div style={{ padding: '3.5rem' }}>
+            Popover content popover content popover content popover content
+            popover content
+          </div>
         </PopoverContent>
       </Popover>
       <br />
       <Button kind="ghost">and lower sibling elements are also overlaid</Button>
+
+      <div style={{ marginTop: '4rem' }}>
+        <Button kind="ghost">
+          Higher sibling elements are properly overlaid
+        </Button>
+        <br />
+        <Popover open={open3} align="right">
+          <button
+            type="button"
+            onClick={() => {
+              setOpen3(!open3);
+            }}>
+            This popover trigger should also be overlaid
+          </button>
+          <PopoverContent>
+            <div style={{ padding: '3.5rem' }}>
+              Popover content popover content popover content popover content
+              popover content
+            </div>
+          </PopoverContent>
+        </Popover>
+        <Popover open={open4} align="left">
+          <button
+            type="button"
+            onClick={() => {
+              setOpen4(!open4);
+            }}>
+            Click here
+          </button>
+          <PopoverContent>
+            <div style={{ padding: '3.5rem' }}>
+              Popover content popover content popover content popover content
+              popover content
+            </div>
+          </PopoverContent>
+        </Popover>
+        <br />
+        <Button kind="ghost">
+          and lower sibling elements are also overlaid
+        </Button>
+      </div>
     </div>
   );
 };
