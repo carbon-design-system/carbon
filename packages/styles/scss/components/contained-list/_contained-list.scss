@@ -127,12 +127,18 @@
 
   .#{$prefix}--contained-list-item:not(:last-of-type)::before {
     position: absolute;
-    right: $spacing-05;
+    right: 0;
     bottom: 0;
-    left: $spacing-05;
+    left: 0;
     height: 1px;
     background-color: $border-subtle;
     content: '';
+  }
+
+  .#{$prefix}--contained-list--inset-rulers
+    .#{$prefix}--contained-list-item:not(:last-of-type)::before {
+    right: $spacing-05;
+    left: $spacing-05;
   }
 
   .#{$prefix}--contained-list-item--clickable

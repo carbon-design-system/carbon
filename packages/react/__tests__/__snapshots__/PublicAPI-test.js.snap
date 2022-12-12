@@ -1343,6 +1343,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "isInset": Object {
+        "type": "bool",
+      },
       "kind": Object {
         "args": Array [
           Array [
