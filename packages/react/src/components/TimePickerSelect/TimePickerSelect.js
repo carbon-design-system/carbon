@@ -6,122 +6,72 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { Component } from 'react';
-import classNames from 'classnames';
+import React from 'react';
+import cx from 'classnames';
 import { ChevronDown } from '@carbon/icons-react';
-import deprecate from '../../prop-types/deprecate';
-import { PrefixContext } from '../../internal/usePrefix';
 
-export default class TimePickerSelect extends Component {
-  static contextType = PrefixContext;
+import { usePrefix } from '../../internal/usePrefix';
 
-  static propTypes = {
-    /**
-     * Provide aria-label to the <select> element
-     */
-    ['aria-label']: PropTypes.string,
+const TimePickerSelect = React.forwardRef(function TimePickerSelect(
+  {
+    ['aria-label']: ariaLabel = 'open list of options',
+    children,
+    id,
+    disabled = false,
+    className,
+    ...rest
+  },
+  ref
+) {
+  const prefix = usePrefix();
 
-    /**
-     * Provide the contents of your TimePickerSelect
-     */
-    children: PropTypes.node,
+  const selectClasses = cx({
+    [`${prefix}--select`]: true,
+    [`${prefix}--time-picker__select`]: true,
+    [className]: className,
+  });
 
-    /**
-     * Specify an optional className to be applied to the node containing the label and the select box
-     */
-    className: PropTypes.string,
+  return (
+    <div className={selectClasses}>
+      <select
+        aria-label={ariaLabel}
+        className={`${prefix}--select-input`}
+        disabled={disabled}
+        id={id}
+        ref={ref}
+        {...rest}>
+        {children}
+      </select>
+      <ChevronDown className={`${prefix}--select__arrow`} aria-hidden="true" />
+    </div>
+  );
+});
 
-    /**
-     * Optionally provide the default value of the `<select>`
-     */
-    defaultValue: PropTypes.any,
+TimePickerSelect.propTypes = {
+  /**
+   * Provide the contents of your TimePickerSelect
+   */
+  children: PropTypes.node,
 
-    /**
-     * Specify whether the control is disabled
-     */
-    disabled: PropTypes.bool,
+  /**
+   * Specify an optional className to be applied to the node containing the label and the select box
+   */
+  className: PropTypes.string,
 
-    /**
-     * hideLabel has been deprecated in v10 and will be removed in v11.
-     */
-    hideLabel: deprecate(
-      PropTypes.bool,
-      'The `hideLabel` prop for `TimePickerSelect` is no longer needed and has ' +
-        'been deprecated. It will be removed in the next major release.'
-    ),
+  /**
+   * Optionally provide the default value of the `<select>`
+   */
+  defaultValue: PropTypes.any,
 
-    /**
-     * iconDescription is deprecated in v10 and will be removed in v11.
-     */
-    iconDescription: deprecate(
-      PropTypes.string,
-      'The `iconDescription` prop for `TimePickerSelect` is no longer needed and has ' +
-        'been deprecated. It will be removed in the next major release. Use `aria-label` instead.'
-    ),
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled: PropTypes.bool,
 
-    /**
-     * Specify a custom `id` for the `<select>`
-     */
-    id: PropTypes.string.isRequired,
+  /**
+   * Specify a custom `id` for the `<select>`
+   */
+  id: PropTypes.string.isRequired,
+};
 
-    /**
-     * Provide label text to be read by screen readers when interacting with the
-     * control
-     */
-    labelText: PropTypes.node.isRequired,
-  };
-
-  static defaultProps = {
-    disabled: false,
-  };
-
-  render() {
-    const { context: prefix } = this;
-    const {
-      ['aria-label']: ariaLabel = 'open list of options',
-      children,
-      className,
-      disabled,
-      hideLabel = true,
-      id,
-      iconDescription,
-      labelText,
-      ...rest
-    } = this.props;
-
-    const selectClasses = classNames({
-      [`${prefix}--select`]: true,
-      [`${prefix}--time-picker__select`]: true,
-      [className]: className,
-    });
-
-    const labelClasses = classNames(`${prefix}--label`, {
-      // TODO: set to always be `true` after `hideLabel` is deprecated
-      [`${prefix}--visually-hidden`]: hideLabel,
-    });
-
-    const label = labelText ? (
-      <label htmlFor={id} className={labelClasses}>
-        {labelText}
-      </label>
-    ) : null;
-
-    return (
-      <div className={selectClasses}>
-        {label}
-        <select
-          className={`${prefix}--select-input`}
-          disabled={disabled}
-          id={id}
-          aria-label={ariaLabel}
-          {...rest}>
-          {children}
-        </select>
-        <ChevronDown
-          className={`${prefix}--select__arrow`}
-          aria-label={ariaLabel ? ariaLabel : iconDescription}
-        />
-      </div>
-    );
-  }
-}
+export default TimePickerSelect;
