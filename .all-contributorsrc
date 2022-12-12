@@ -977,6 +977,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "niveamartins",
+      "name": "Nivea Martins",
+      "avatar_url": "https://avatars.githubusercontent.com/u/42484149?v=4",
+      "profile": "https://github.com/niveamartins",
+      "contributions": [
+        "code",
+        "doc"
+      ]
     }
   ],
   "commitConvention": "none"
