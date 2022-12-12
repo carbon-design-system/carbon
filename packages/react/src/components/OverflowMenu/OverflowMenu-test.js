@@ -17,8 +17,8 @@ describe('OverflowMenu', () => {
     it('renders ariaLabel on the button', () => {
       render(
         <OverflowMenu open ariaLabel="Overflow menu" className="extra-class">
-          <OverflowMenuItem className="test-child">one</OverflowMenuItem>
-          <OverflowMenuItem className="test-child">two</OverflowMenuItem>
+          <OverflowMenuItem className="test-child" itemText="one" />
+          <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
 
