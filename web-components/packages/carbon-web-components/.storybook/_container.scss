@@ -10,21 +10,44 @@
 @import 'carbon-components/scss/globals/scss/css--helpers';
 @import 'carbon-components/scss/globals/scss/css--font-face';
 @import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+@import 'carbon-components/scss/globals/scss/component-tokens';
+@import 'carbon-components/src/components/tag/tag';
+@import 'carbon-components/src/components/notification/inline-notification';
+@import 'carbon-components/src/components/notification/toast-notification';
 
+// The default theme is "white" (White)
 :root {
-  @include carbon--theme($carbon--theme--white, true);
+  @include carbon--theme($carbon--theme--white, true) {
+    @include emit-component-tokens($tag-colors);
+    @include emit-component-tokens($notification-colors);
+  }
 }
 
+// Set the <html> theme attribute to "g10" to use the Gray 10 theme
+// <html theme="g10">
 :root[storybook-carbon-theme='g10'] {
-  @include carbon--theme($carbon--theme--g10, true);
+  @include carbon--theme($carbon--theme--g10, true) {
+    @include emit-component-tokens($tag-colors);
+    @include emit-component-tokens($notification-colors);
+  }
 }
 
+// Set the <html> theme attribute to "g90" to use the Gray 90 theme
+// <html theme="g90">
 :root[storybook-carbon-theme='g90'] {
-  @include carbon--theme($carbon--theme--g90, true);
+  @include carbon--theme($carbon--theme--g90, true) {
+    @include emit-component-tokens($tag-colors);
+    @include emit-component-tokens($notification-colors);
+  }
 }
 
+// Set the <html> theme attribute to "g100" to use the Gray 100 theme
+// <html theme="g100">
 :root[storybook-carbon-theme='g100'] {
-  @include carbon--theme($carbon--theme--g100, true);
+  @include carbon--theme($carbon--theme--g100, true) {
+    @include emit-component-tokens($tag-colors);
+    @include emit-component-tokens($notification-colors);
+  }
 }
 
 html,

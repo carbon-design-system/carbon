@@ -49,6 +49,19 @@ footer {
 }
 ```
 
+Some components such as `Notification` and `Tag` have specific tokens per theme that need to emitted in the styles. You can do this for example by adding the following:
+
+```css
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+@import 'carbon-components/scss/globals/scss/component-tokens';
+@import 'carbon-components/src/components/tag/tag';
+.dds-theme-zone-g90 {
+  @include carbon--theme($carbon--theme--g90, true) {
+    @include emit-component-tokens($tag-colors);
+  }
+}
+```
+
 ## Dependency injection
 
 You can let our custom elements modules load alternate `CSSResult` module. Below example uses [Webpack `NormalModuleReplacementPlugin`](https://webpack.js.org/plugins/normal-module-replacement-plugin/) to let our custom elements modules load RTL version of `CSSResult` module that is shipped alongside with default `CSSResult` modules, instead of loading the default version:

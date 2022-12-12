@@ -44,6 +44,21 @@ import '@carbon/web-components/es/components/tag/index.js';
 </bx-filter-tag>
 ```
 
+## Themeing
+
+In order to get the correct token value for the tag background, you will need to apply the following in you `scss` to your themed class. For example:
+
+```css
+@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
+@import 'carbon-components/scss/globals/scss/component-tokens';
+@import 'carbon-components/src/components/tag/tag';
+.dds-theme-zone-g90 {
+  @include carbon--theme($carbon--theme--g90, true) {
+    @include emit-component-tokens($tag-colors);
+  }
+}
+```
+
 ## `<bx-tag>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
