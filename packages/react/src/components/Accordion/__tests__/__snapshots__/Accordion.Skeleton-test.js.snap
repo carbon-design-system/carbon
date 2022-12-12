@@ -51,12 +51,10 @@ exports[`AccordionSkeleton should render 1`] = `
           paragraph={false}
           width="100%"
         >
-          <div>
-            <p
-              className="cds--skeleton__text cds--accordion__title"
-              key="0"
-            />
-          </div>
+          <p
+            className="cds--skeleton__text cds--accordion__title"
+            key="0"
+          />
         </SkeletonText>
       </span>
       <div
@@ -68,12 +66,10 @@ exports[`AccordionSkeleton should render 1`] = `
           paragraph={false}
           width="90%"
         >
-          <div>
-            <p
-              className="cds--skeleton__text"
-              key="0"
-            />
-          </div>
+          <p
+            className="cds--skeleton__text"
+            key="0"
+          />
         </SkeletonText>
         <SkeletonText
           heading={false}
@@ -81,12 +77,10 @@ exports[`AccordionSkeleton should render 1`] = `
           paragraph={false}
           width="80%"
         >
-          <div>
-            <p
-              className="cds--skeleton__text"
-              key="0"
-            />
-          </div>
+          <p
+            className="cds--skeleton__text"
+            key="0"
+          />
         </SkeletonText>
         <SkeletonText
           heading={false}
@@ -94,12 +88,10 @@ exports[`AccordionSkeleton should render 1`] = `
           paragraph={false}
           width="95%"
         >
-          <div>
-            <p
-              className="cds--skeleton__text"
-              key="0"
-            />
-          </div>
+          <p
+            className="cds--skeleton__text"
+            key="0"
+          />
         </SkeletonText>
       </div>
     </li>
@@ -148,12 +140,10 @@ exports[`AccordionSkeleton should render 1`] = `
             paragraph={false}
             width="100%"
           >
-            <div>
-              <p
-                className="cds--skeleton__text cds--accordion__title"
-                key="0"
-              />
-            </div>
+            <p
+              className="cds--skeleton__text cds--accordion__title"
+              key="0"
+            />
           </SkeletonText>
         </span>
       </li>
@@ -203,12 +193,10 @@ exports[`AccordionSkeleton should render 1`] = `
             paragraph={false}
             width="100%"
           >
-            <div>
-              <p
-                className="cds--skeleton__text cds--accordion__title"
-                key="0"
-              />
-            </div>
+            <p
+              className="cds--skeleton__text cds--accordion__title"
+              key="0"
+            />
           </SkeletonText>
         </span>
       </li>
@@ -258,12 +246,10 @@ exports[`AccordionSkeleton should render 1`] = `
             paragraph={false}
             width="100%"
           >
-            <div>
-              <p
-                className="cds--skeleton__text cds--accordion__title"
-                key="0"
-              />
-            </div>
+            <p
+              className="cds--skeleton__text cds--accordion__title"
+              key="0"
+            />
           </SkeletonText>
         </span>
       </li>
