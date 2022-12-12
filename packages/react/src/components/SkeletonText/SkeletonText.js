@@ -84,7 +84,12 @@ const SkeletonText = ({
       />
     );
   }
-  return <div>{lines}</div>;
+
+  if (lineCountNumber !== '1') {
+    return <div>{lines}</div>;
+  } else {
+    return lines;
+  }
 };
 
 SkeletonText.propTypes = {
