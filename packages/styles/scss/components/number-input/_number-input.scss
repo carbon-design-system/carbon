@@ -50,6 +50,7 @@
     background-color: $field;
     border-radius: 0;
     color: $text-primary;
+    font-family: font-family('sans');
     font-weight: 400;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
