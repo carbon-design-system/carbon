@@ -32,6 +32,7 @@ const TextInput = React.forwardRef(function TextInput(
     labelText,
     light,
     onChange = () => {},
+    onBlur = () => {},
     onClick = () => {},
     placeholder,
     readOnly,
@@ -80,6 +81,11 @@ const TextInput = React.forwardRef(function TextInput(
       if (!normalizedProps.disabled) {
         setTextCount(evt.target.value?.length);
         onChange(evt);
+      }
+    },
+    onBlur: (evt) => {
+      if (!normalizedProps.disabled) {
+        onBlur(evt);
       }
     },
     onClick: (evt) => {
@@ -299,6 +305,12 @@ TextInput.propTypes = {
    * is updated
    */
   onChange: PropTypes.func,
+
+  /**
+   * Optionally provide an `onBlur` handler that is called whenever `<input>`
+   * is focus out
+   */
+  onBlur: PropTypes.func,
 
   /**
    * Optionally provide an `onClick` handler that is called whenever the

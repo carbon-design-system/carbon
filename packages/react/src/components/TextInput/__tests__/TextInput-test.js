@@ -257,6 +257,27 @@ describe('TextInput', () => {
       );
     });
 
+    it('should respect onBlur prop', () => {
+      const onBlur = jest.fn();
+      render(
+        <TextInput
+          id="input-1"
+          labelText="TextInput label"
+          data-testid-="input-1"
+          onBlur={onBlur}
+        />
+      );
+
+      userEvent.type(screen.getByRole('textbox'), 'x')
+      userEvent.tab()
+      expect(onBlur).toHaveBeenCalledTimes(1);
+      expect(onBlur).toHaveBeenCalledWith(
+        expect.objectContaining({
+          target: expect.any(Object),
+        })
+      );
+    });
+    
     it('should respect onClick prop', () => {
       const onClick = jest.fn();
       render(

@@ -182,6 +182,7 @@ describe('PasswordInput', () => {
     describe('enabled textinput', () => {
       const onClick = jest.fn();
       const onChange = jest.fn();
+      const onBlur = jest.fn();
 
       const wrapper = shallow(
         <PasswordInput
@@ -189,6 +190,7 @@ describe('PasswordInput', () => {
           id="test"
           onClick={onClick}
           onChange={onChange}
+          onBlur={onBlur}
         />
       );
 
@@ -202,6 +204,11 @@ describe('PasswordInput', () => {
       it('should invoke onClick when input is clicked', () => {
         input.simulate('click');
         expect(onClick).toHaveBeenCalled();
+      });
+
+      it('should invoke onBlur when input is focus outed', () => {
+        input.simulate('blur', eventObject);
+        expect(onBlur).toHaveBeenCalledWith(eventObject);
       });
 
       it('should invoke onChange when input value is changed', () => {

@@ -17,6 +17,7 @@ const ControlledPasswordInput = React.forwardRef(
       id,
       placeholder,
       onChange,
+      onBlur,
       onClick,
       hideLabel,
       invalid,
@@ -62,6 +63,11 @@ const ControlledPasswordInput = React.forwardRef(
       onChange: (evt) => {
         if (!other.disabled) {
           onChange(evt);
+        }
+      },
+      onBlur: (evt) => {
+        if (!other.disabled) {
+          onBlur(evt);
         }
       },
       onClick: (evt) => {
@@ -222,6 +228,12 @@ ControlledPasswordInput.propTypes = {
    */
   onChange: PropTypes.func,
 
+   /**
+   * Optionally provide an `onBlur` handler that is called whenever `<input>`
+   * is focus outed
+   */
+  onBlur: PropTypes.func,
+
   /**
    * Optionally provide an `onClick` handler that is called whenever the
    * `<input>` is clicked
@@ -264,6 +276,7 @@ ControlledPasswordInput.propTypes = {
 ControlledPasswordInput.defaultProps = {
   disabled: false,
   onChange: () => {},
+  onBlur: () => {},
   onClick: () => {},
   invalid: false,
   invalidText: '',
