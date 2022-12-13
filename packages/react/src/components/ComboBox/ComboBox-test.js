@@ -164,6 +164,26 @@ describe('ComboBox', () => {
     });
   });
 
+  describe('when readonly', () => {
+    it('should not let the user edit the input node', () => {
+      render(<ComboBox {...mockProps} readOnly={true} />);
+
+      expect(findInputNode()).toHaveAttribute('readonly');
+
+      expect(findInputNode()).toHaveDisplayValue('');
+
+      userEvent.type(findInputNode(), 'o');
+
+      expect(findInputNode()).toHaveDisplayValue('');
+    });
+
+    it('should not let the user expand the menu', () => {
+      render(<ComboBox {...mockProps} disabled={true} />);
+      openMenu();
+      expect(findListBoxNode()).not.toHaveClass('cds--list-box--expanded');
+    });
+  });
+
   describe('downshift quirks', () => {
     it('should set `inputValue` to an empty string if a false-y value is given', () => {
       render(<ComboBox {...mockProps} />);
