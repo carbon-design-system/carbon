@@ -23,26 +23,37 @@ function ListBoxSelection({
   translateWithId: t,
   disabled,
   onClearSelection,
-  readOnly,
+  ...rest
 }) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,
   });
-  const handleOnClick = (event) => {
+  const description = selectionCount ? t('clear.all') : t('clear.selection');
+  const tagClasses = cx(
+    `${prefix}--tag`,
+    `${prefix}--tag--filter`,
+    `${prefix}--tag--high-contrast`,
+    {
+      [`${prefix}--tag--disabled`]: disabled,
+    }
+  );
+
+  function onClick(event) {
     event.stopPropagation();
-    if (disabled || readOnly) {
+    if (disabled) {
       return;
     }
     clearSelection(event);
     if (onClearSelection) {
       onClearSelection(event);
     }
-  };
-  const handleOnKeyDown = (event) => {
+  }
+
+  function onKeyDown(event) {
     event.stopPropagation();
-    if (disabled || readOnly) {
+    if (disabled) {
       return;
     }
 
@@ -53,46 +64,42 @@ function ListBoxSelection({
         onClearSelection(event);
       }
     }
-  };
-  const description = selectionCount ? t('clear.all') : t('clear.selection');
-  const tagClasses = cx(
-    `${prefix}--tag`,
-    `${prefix}--tag--filter`,
-    `${prefix}--tag--high-contrast`,
-    {
-      [`${prefix}--tag--disabled`]: disabled,
-    }
-  );
-  return selectionCount ? (
-    <div className={tagClasses}>
-      <span className={`${prefix}--tag__label`} title={selectionCount}>
-        {selectionCount}
-      </span>
-      <div
-        role="button"
-        tabIndex={disabled ? -1 : 0}
-        className={`${prefix}--tag__close-icon`}
-        onClick={handleOnClick}
-        onKeyDown={handleOnKeyDown}
-        disabled={disabled}
-        aria-label={t('clear.all')}
-        title={description}
-        aria-disabled={readOnly ? true : undefined}>
-        <Close />
+  }
+
+  if (selectionCount) {
+    return (
+      <div className={tagClasses}>
+        <span className={`${prefix}--tag__label`} title={selectionCount}>
+          {selectionCount}
+        </span>
+        <button
+          aria-label={description}
+          className={`${prefix}--tag__close-icon`}
+          disabled={disabled}
+          onClick={onClick}
+          onKeyDown={onKeyDown}
+          tabIndex={disabled ? -1 : 0}
+          title={description}
+          type="button">
+          <Close />
+        </button>
       </div>
-    </div>
-  ) : (
-    <div
-      role="button"
-      className={className}
-      tabIndex={disabled ? -1 : 0}
-      onClick={handleOnClick}
-      onKeyDown={handleOnKeyDown}
+    );
+  }
+
+  return (
+    <button
+      {...rest}
       aria-label={description}
-      title={description}>
-      {selectionCount}
+      className={className}
+      disabled={disabled}
+      onClick={onClick}
+      onKeyDown={onKeyDown}
+      tabIndex={disabled ? -1 : 0}
+      title={description}
+      type="button">
       <Close />
-    </div>
+    </button>
   );
 }
 
@@ -135,11 +142,6 @@ ListBoxSelection.propTypes = {
    * clear selection element fires a keydown event
    */
   onKeyDown: PropTypes.func,
-
-  /**
-   * Whether or not the Dropdown is readonly
-   */
-  readOnly: PropTypes.bool,
 
   /**
    * Specify an optional `selectionCount` value that will be used to determine

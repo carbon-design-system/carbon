@@ -13,11 +13,13 @@ import ListBoxMenu from './ListBoxMenu';
 import ListBoxMenuIcon from './ListBoxMenuIcon';
 import ListBoxMenuItem from './ListBoxMenuItem';
 import ListBoxSelection from './ListBoxSelection';
+import ListBoxTrigger from './ListBoxTrigger';
 
 ListBox.Field = ListBoxField;
 ListBox.Menu = ListBoxMenu;
 ListBox.MenuIcon = ListBoxMenuIcon;
 ListBox.MenuItem = ListBoxMenuItem;
 ListBox.Selection = ListBoxSelection;
+ListBox.Trigger = ListBoxTrigger;
 
 export default ListBox;

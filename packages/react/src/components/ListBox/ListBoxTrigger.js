@@ -9,7 +9,7 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { ChevronDown } from '@carbon/icons-react';
-import { usePrefix } from '../../../internal/usePrefix';
+import { usePrefix } from '../../internal/usePrefix';
 
 export const translationIds = {
   'close.menu': 'close.menu',

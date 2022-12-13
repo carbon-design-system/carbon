@@ -16,7 +16,6 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
 import mergeRefs from '../../tools/mergeRefs';
@@ -369,14 +368,14 @@ const ComboBox = React.forwardRef((props, ref) => {
                   />
                 )}
                 {inputValue && (
-                  <ListBoxSelection
+                  <ListBox.Selection
                     clearSelection={clearSelection}
                     translateWithId={translateWithId}
                     disabled={disabled || readOnly}
                     onClearSelection={handleSelectionClear}
                   />
                 )}
-                <ListBoxTrigger
+                <ListBox.Trigger
                   {...buttonProps}
                   isOpen={isOpen}
                   translateWithId={translateWithId}

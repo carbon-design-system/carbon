@@ -14,7 +14,6 @@ import React, { useContext, useState, useRef } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import Selection from '../../internal/Selection';
 import { defaultItemToString } from './tools/itemToString';
@@ -353,7 +352,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   size={size}>
                   <div className={`${prefix}--list-box__field`}>
                     {selectedItem.length > 0 && (
-                      <ListBoxSelection
+                      <ListBox.Selection
                         clearSelection={() => {
                           clearSelection();
                           if (textInput.current) {
@@ -382,7 +381,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                       />
                     )}
                     {inputValue && (
-                      <ListBoxSelection
+                      <ListBox.Selection
                         clearSelection={clearInputValue}
                         disabled={disabled}
                         translateWithId={translateWithId}
@@ -396,7 +395,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                         }}
                       />
                     )}
-                    <ListBoxTrigger
+                    <ListBox.Trigger
                       {...buttonProps}
                       isOpen={isOpen}
                       translateWithId={translateWithId}

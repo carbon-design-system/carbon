@@ -16,6 +16,7 @@ import ListBoxMenu from './ListBoxMenu';
 import ListBoxMenuIcon from './ListBoxMenuIcon';
 import ListBoxMenuItem from './ListBoxMenuItem';
 import ListBoxSelection from './ListBoxSelection';
+import ListBoxTrigger from './ListBoxTrigger';
 import { FormContext } from '../FluidForm';
 
 const handleOnKeyDown = (event) => {
@@ -162,5 +163,6 @@ ListBox.Menu = ListBoxMenu;
 ListBox.MenuIcon = ListBoxMenuIcon;
 ListBox.MenuItem = ListBoxMenuItem;
 ListBox.Selection = ListBoxSelection;
+ListBox.Trigger = ListBoxTrigger;
 
 export default ListBox;
