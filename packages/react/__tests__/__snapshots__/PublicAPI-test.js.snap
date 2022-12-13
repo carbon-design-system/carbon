@@ -1343,6 +1343,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "isInset": Object {
+        "type": "bool",
+      },
       "kind": Object {
         "args": Array [
           Array [
@@ -5259,14 +5262,7 @@ Map {
     "displayName": "ClassWrapper(OverflowMenu)",
   },
   "OverflowMenuItem" => Object {
-    "defaultProps": Object {
-      "disabled": false,
-      "hasDivider": false,
-      "isDelete": false,
-      "itemText": null,
-      "onClick": [Function],
-      "onKeyDown": [Function],
-    },
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "className": Object {
         "type": "string",
@@ -5333,6 +5329,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "Pagination" => Object {
     "$$typeof": Symbol(react.forward_ref),
