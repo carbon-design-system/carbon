@@ -44,6 +44,20 @@
     margin: 0;
   }
 
+  .#{$prefix}--text-area--fluid .#{$prefix}--label::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Only prevent wrapping if tooltip is present, otherwise tooltip will not render
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)) {
+    width: calc(100% - 2rem);
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
   //counter
   .#{$prefix}--text-area--fluid div.#{$prefix}--label {
     right: 1rem;

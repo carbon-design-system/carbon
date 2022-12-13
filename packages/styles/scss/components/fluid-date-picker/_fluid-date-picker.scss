@@ -41,6 +41,20 @@
     margin: 0;
   }
 
+  .#{$prefix}--date-picker--fluid .#{$prefix}--label::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Only prevent wrapping if tooltip is present, otherwise tooltip will not render
+  .#{$prefix}--date-picker--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)) {
+    width: calc(100% - 2rem);
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
   .#{$prefix}--date-picker--fluid
     .#{$prefix}--date-picker-input__wrapper
     .#{$prefix}--date-picker__input {

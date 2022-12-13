@@ -36,6 +36,20 @@
     margin: 0;
   }
 
+  .#{$prefix}--select--fluid .#{$prefix}--label::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Only prevent wrapping if tooltip is present, otherwise tooltip will not render
+  .#{$prefix}--select--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)) {
+    width: calc(100% - 2rem);
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
   .#{$prefix}--select--fluid .#{$prefix}--select-input {
     min-height: rem(64px);
     padding: rem(32px) rem(32px) rem(13px) $spacing-05;

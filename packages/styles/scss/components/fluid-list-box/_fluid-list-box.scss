@@ -41,6 +41,20 @@
     margin: 0;
   }
 
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label::-webkit-scrollbar {
+    display: none;
+  }
+
+  // Only prevent wrapping if tooltip is present, otherwise tooltip will not render
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)) {
+    width: calc(100% - 2rem);
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
   .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field {
     padding-top: rem(33px);
     padding-bottom: rem(13px);
