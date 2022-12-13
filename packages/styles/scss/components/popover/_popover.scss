@@ -74,7 +74,9 @@ $popover-caret-height: custom-property.get-var(
   // Container
   .#{$prefix}--popover-container {
     position: relative;
+    z-index: z('floating');
     display: inline-block;
+    isolation: isolate;
   }
 
   /// Modifiers
