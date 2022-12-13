@@ -6,8 +6,7 @@
  */
 
 import React from 'react';
-import FluidTextInput from '../FluidTextInput';
-import FluidTextInputSkeleton from './FluidTextInput.Skeleton';
+import { FluidNumberInput, FluidNumberInputSkeleton } from '.';
 import {
   ToggletipLabel,
   Toggletip,
@@ -15,34 +14,14 @@ import {
   ToggletipContent,
 } from '../Toggletip';
 import { Information } from '@carbon/icons-react';
-import './test.scss';
 
 export default {
-  title: 'Experimental/unstable__FluidTextInput',
-  component: FluidTextInput,
+  title: 'Experimental/unstable__FluidNumberInput',
+  component: FluidNumberInput,
   subcomponents: {
-    FluidTextInputSkeleton,
+    FluidNumberInputSkeleton,
   },
 };
-
-export const Default = () => (
-  <FluidTextInput
-    labelText="Label"
-    placeholder="Placeholder text"
-    id="input-1"
-  />
-);
-
-export const PasswordInput = () => (
-  <div style={{ width: '300px' }}>
-    <FluidTextInput
-      id="input-2"
-      labelText="Label"
-      placeholder="Placeholder text"
-      isPassword
-    />
-  </div>
-);
 
 const ToggleTip = (
   <>
@@ -58,47 +37,72 @@ const ToggleTip = (
   </>
 );
 
-export const DefaultWithTooltip = () => (
-  <FluidTextInput labelText={ToggleTip} placeholder="Placeholder text" />
+export const Default = () => (
+  <div style={{ width: '400px' }}>
+    <FluidNumberInput
+      label={ToggleTip}
+      placeholder="Placeholder text"
+      id="input-default"
+      step={10}
+      min={0}
+      max={100}
+      defaultValue={50}
+    />
+    <br />
+    <br />
+    <FluidNumberInput
+      label={ToggleTip}
+      placeholder="Placeholder text"
+      id="input-invalid"
+      step={10}
+      min={0}
+      max={100}
+      defaultValue={50}
+      invalid
+      invalidText="Warning message that is really long can wrap to more lines but should not be excessively long."
+    />
+    <br />
+    <br />
+    <FluidNumberInput
+      label={ToggleTip}
+      placeholder="Placeholder text"
+      id="input-warning"
+      step={10}
+      min={0}
+      max={100}
+      defaultValue={50}
+      warn
+      warnText="Warning message that is really long can wrap to more lines but should not be excessively long."
+    />
+  </div>
 );
 
 export const Skeleton = () => (
-  <div style={{ width: '300px' }}>
-    <FluidTextInputSkeleton
-      labelText="Label"
+  <div style={{ width: '400px' }}>
+    <FluidNumberInputSkeleton
+      label="Label"
       placeholder="Placeholder text"
-      id="input-1"
+      id="input-skeleton"
     />
   </div>
 );
 
 export const Playground = (args) => (
   <div style={{ width: args.playgroundWidth }}>
-    <FluidTextInput {...args} />
+    <FluidNumberInput {...args} />
   </div>
 );
 
 Playground.argTypes = {
   playgroundWidth: {
     control: { type: 'range', min: 300, max: 800, step: 50 },
-    defaultValue: 300,
-  },
-  className: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'test-class',
+    defaultValue: 400,
   },
   defaultValue: {
     control: {
-      type: 'text',
+      type: 'number',
     },
-  },
-  placeholder: {
-    control: {
-      type: 'text',
-    },
-    defaultValue: 'Placeholder text',
+    defaultValue: 50,
   },
   invalid: {
     control: {
@@ -113,19 +117,13 @@ Playground.argTypes = {
     defaultValue:
       'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
-  isPassword: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
   disabled: {
     control: {
       type: 'boolean',
     },
     defaultValue: false,
   },
-  labelText: {
+  label: {
     control: {
       type: 'text',
     },
@@ -143,10 +141,5 @@ Playground.argTypes = {
     },
     defaultValue:
       'Warning message that is really long can wrap to more lines but should not be excessively long.',
-  },
-  value: {
-    control: {
-      type: 'text',
-    },
   },
 };
