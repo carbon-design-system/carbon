@@ -282,16 +282,16 @@ PasswordInput.propTypes = {
   ),
 
   /**
-   * Optionally provide an `onChange` handler that is called whenever `<input>`
-   * is updated
-   */
-  onChange: PropTypes.func,
-
-  /**
    * Optionally provide an `onBlur` handler that is called whenever `<input>`
    * is focus out.
    */
    onBlur: PropTypes.func,
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
+   */
+  onChange: PropTypes.func,
 
   /**
    * Optionally provide an `onClick` handler that is called whenever the

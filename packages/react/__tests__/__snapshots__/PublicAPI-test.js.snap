@@ -1440,6 +1440,7 @@ Map {
       "helperText": "",
       "invalid": false,
       "invalidText": "",
+      "onBlur": [Function],
       "onChange": [Function],
       "onClick": [Function],
       "size": "",
@@ -1488,6 +1489,9 @@ Map {
         "type": "node",
       },
       "light": [Function],
+      "onBlur": Object {
+        "type": "func",
+      },
       "onChange": Object {
         "type": "func",
       },
@@ -5529,6 +5533,9 @@ Map {
         "type": "node",
       },
       "light": [Function],
+      "onBlur": Object {
+        "type": "func",
+      },
       "onChange": Object {
         "type": "func",
       },
@@ -7906,6 +7913,7 @@ Map {
         "helperText": "",
         "invalid": false,
         "invalidText": "",
+        "onBlur": [Function],
         "onChange": [Function],
         "onClick": [Function],
         "size": "",
@@ -7954,6 +7962,9 @@ Map {
           "type": "node",
         },
         "light": [Function],
+        "onBlur": Object {
+          "type": "func",
+        },
         "onChange": Object {
           "type": "func",
         },
@@ -8062,6 +8073,9 @@ Map {
           "type": "node",
         },
         "light": [Function],
+        "onBlur": Object {
+          "type": "func",
+        },
         "onChange": Object {
           "type": "func",
         },
@@ -8188,6 +8202,9 @@ Map {
       "light": [Function],
       "maxCount": Object {
         "type": "number",
+      },
+      "onBlur": Object {
+        "type": "func",
       },
       "onChange": Object {
         "type": "func",
