@@ -245,23 +245,3 @@ pre[data-line] {
   padding: 1em 0 1em 3em;
   position: relative;
 }
-
-.gatsby-highlight-code-line {
-  background-color: hsla(207, 95%, 15%, 1);
-  display: block;
-  margin-right: -1.3125rem;
-  margin-left: -1.3125rem;
-  padding-right: 1em;
-  padding-left: 1.25em;
-  border-left: 0.25em solid #ffa7c4;
-}
-
-.gatsby-highlight {
-  margin-bottom: 1.75rem;
-  margin-left: -1.3125rem;
-  margin-right: -1.3125rem;
-  border-radius: 10px;
-  background: #011627;
-  -webkit-overflow-scrolling: touch;
-  overflow: auto;
-}

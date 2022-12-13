@@ -86,7 +86,7 @@ const sections = [
     name: 'Usage',
     description: (
       <React.Fragment>
-        The default grid format closely mirrors Bootstrap's grid. At the
+        The flex grid format closely mirrors Bootstrap's grid. At the
         top-level, you define a container with the <code>.cds--grid</code> class.
         Inside of a grid, you have multiple rows where you use{' '}
         <code>.cds--row</code>. Inside of a row, you use our column classes (
