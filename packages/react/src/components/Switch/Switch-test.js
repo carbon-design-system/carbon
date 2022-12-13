@@ -1,97 +1,66 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import Switch from '../Switch';
-import { shallow } from 'enzyme';
-
-const prefix = 'cds';
+import Switch from './Switch';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 describe('Switch', () => {
-  describe('component rendering', () => {
-    const buttonWrapper = shallow(
-      <Switch kind="button" icon={<svg />} text="test" />
-    );
+  describe('renders as expected - Component API', () => {
+    it('should spread extra props onto outermost element', () => {
+      const { container } = render(<Switch data-testid="test-id" />);
 
-    it('should render a button when kind is button', () => {
-      expect(buttonWrapper.is('button')).toEqual(true);
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
     });
 
-    it('should have the expected text', () => {
-      expect(buttonWrapper.text()).toEqual('test');
+    it('should support a custom `className` prop on the outermost element', () => {
+      const { container } = render(<Switch className="custom-class" />);
+
+      expect(container.firstChild).toHaveClass('custom-class');
     });
 
-    it('label should have the expected class', () => {
-      const className = `${prefix}--content-switcher__label`;
-      expect(buttonWrapper.find('span').hasClass(className)).toEqual(true);
+    it('should respect disabled prop', () => {
+      render(<Switch disabled />);
+
+      expect(screen.getByRole('tab')).toHaveAttribute('disabled');
     });
 
-    it('should have the expected class', () => {
-      const cls = `${prefix}--content-switcher-btn`;
+    it('should call onClick when expected', () => {
+      const onClick = jest.fn();
+      render(<Switch text="First section" onClick={onClick} />);
 
-      expect(buttonWrapper.hasClass(cls)).toEqual(true);
+      userEvent.click(screen.getByText('First section'));
+
+      expect(onClick).toHaveBeenCalled();
     });
 
-    it('should not have selected class', () => {
-      const selectedClass = `${prefix}--content-switcher--selected`;
+    it('should call onKeyDown when expected', () => {
+      const onKeyDown = jest.fn();
+      render(<Switch text="First section" onKeyDown={onKeyDown} />);
 
-      expect(buttonWrapper.hasClass(selectedClass)).toEqual(false);
+      userEvent.type(screen.getByText('First section'), 'enter');
+
+      expect(onKeyDown).toHaveBeenCalled();
     });
 
-    it('should have a selected class when selected is set to true', () => {
-      const selected = true;
+    it('should respect selected prop', () => {
+      render(<Switch selected />);
 
-      buttonWrapper.setProps({ selected });
-
-      expect(
-        buttonWrapper.hasClass(`${prefix}--content-switcher--selected`)
-      ).toEqual(true);
-    });
-  });
-
-  describe('events', () => {
-    const buttonOnClick = jest.fn();
-    const linkOnClick = jest.fn();
-    const buttonOnKey = jest.fn();
-    const linkOnKey = jest.fn();
-    const index = 1;
-    const name = 'first';
-    const text = 'test';
-
-    const buttonWrapper = shallow(
-      <Switch
-        index={index}
-        name={name}
-        kind="button"
-        onClick={buttonOnClick}
-        onKeyDown={buttonOnKey}
-        text={text}
-      />
-    );
-
-    const linkWrapper = shallow(
-      <Switch
-        index={index}
-        name={name}
-        kind="anchor"
-        onClick={linkOnClick}
-        onKeyDown={linkOnKey}
-        text={text}
-      />
-    );
-
-    it('should invoke button onClick handler', () => {
-      buttonWrapper.simulate('click', { preventDefault() {} });
-      expect(buttonOnClick).toHaveBeenCalledWith({ index, name, text });
+      expect(screen.getByRole('tab')).toHaveClass(
+        'cds--content-switcher--selected'
+      );
+      expect(screen.getByRole('tab')).toHaveAttribute('aria-selected', 'true');
     });
 
-    it('should invoke link onClick handler', () => {
-      linkWrapper.simulate('click', { preventDefault() {} });
-      expect(buttonOnClick).toHaveBeenCalledWith({ index, name, text });
+    it('should respect text prop', () => {
+      render(<Switch text="First section" />);
+
+      expect(screen.getByText('First section')).toBeInTheDocument();
     });
   });
 });
