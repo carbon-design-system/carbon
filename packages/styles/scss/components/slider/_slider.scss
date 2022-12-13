@@ -134,6 +134,10 @@
     }
   }
 
+  .#{$prefix}--slider-text-input--hidden {
+    display: none;
+  }
+
   .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid {
     padding-right: 1rem;
   }
