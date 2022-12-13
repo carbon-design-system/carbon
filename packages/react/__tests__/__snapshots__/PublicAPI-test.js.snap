@@ -9826,6 +9826,100 @@ Map {
       },
     },
   },
+  "unstable__FluidNumberInput" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "allowEmpty": Object {
+        "type": "bool",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "defaultValue": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "disableWheel": Object {
+        "type": "bool",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "iconDescription": Object {
+        "type": "string",
+      },
+      "id": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "label": Object {
+        "type": "node",
+      },
+      "max": Object {
+        "type": "number",
+      },
+      "min": Object {
+        "type": "number",
+      },
+      "onChange": Object {
+        "type": "func",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyUp": Object {
+        "type": "func",
+      },
+      "step": Object {
+        "type": "number",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+      "value": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "number",
+            },
+            Object {
+              "type": "string",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable__FluidNumberInputSkeleton" => Object {
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+  },
   "unstable__FluidSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
