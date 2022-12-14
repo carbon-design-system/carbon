@@ -309,27 +309,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^10.41.1":
-  version: 10.43.1
-  resolution: "@carbon/grid@npm:10.43.1"
+"@carbon/grid@npm:^11.9.0":
+  version: 11.9.0
+  resolution: "@carbon/grid@npm:11.9.0"
   dependencies:
-    "@carbon/import-once": ^10.7.0
-    "@carbon/layout": ^10.37.1
-  checksum: d59818f5602b1cada5188982a687ef861c63a2e165ed3266496b0a0b7e2e12528e55d4ac9d7d4134a4f4c19e7e16fd48425e5982279ac86ff914ba879c120a32
+    "@carbon/layout": ^11.9.0
+  checksum: 0be7101ebdba6f49078551d8456d1a62a29bc0838233d4f2385486825ae12adde90d4508f5d43c27d087cd023b1f0a4d7df451d758dd47bbb2b6454679002bd0
   languageName: node
   linkType: hard
 
-"@carbon/import-once@npm:^10.7.0":
-  version: 10.7.0
-  resolution: "@carbon/import-once@npm:10.7.0"
-  checksum: c92625bc34833073a2b113a9cf014353210570ed1105225e70c6c6d06e5203407aa472d95685a53b6460794408897641b8d8cd5fd6416f8b0fa36c28919bf5f0
-  languageName: node
-  linkType: hard
-
-"@carbon/layout@npm:^10.37.1":
-  version: 10.37.1
-  resolution: "@carbon/layout@npm:10.37.1"
-  checksum: baabf7e70e4779f0e5000e700bcafe96f272debaac490a4345e39fedf8d0970636f7099e2607aeb9ca6170a56bbacdff69d8181c2a46ed8adac38fadc08332b6
+"@carbon/layout@npm:^11.9.0":
+  version: 11.9.0
+  resolution: "@carbon/layout@npm:11.9.0"
+  checksum: 9e121380f7588058254ebbad05934ea80c15c8734c92dc5a3c8e1068d77afc2118735d6bec37a82489a33d46140dd432d7fb5186d425eb5efd84b442b23fac18
   languageName: node
   linkType: hard
 
@@ -3285,7 +3277,7 @@ fsevents@~2.3.2:
   version: 0.0.0-use.local
   resolution: "grid-basic-example@workspace:."
   dependencies:
-    "@carbon/grid": ^10.41.1
+    "@carbon/grid": ^11.9.0
     "@parcel/transformer-sass": ^2.0.1
     "@reach/router": ^1.3.3
     classnames: ^2.2.6
