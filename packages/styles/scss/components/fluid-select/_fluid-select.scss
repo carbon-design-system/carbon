@@ -31,19 +31,22 @@
     top: rem(13px);
     left: $spacing-05;
     display: flex;
+    width: calc(100% - 2rem);
     height: rem(16px);
     align-items: center;
     margin: 0;
   }
 
-  .#{$prefix}--select--fluid .#{$prefix}--label::-webkit-scrollbar {
+  .#{$prefix}--select--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
     display: none;
   }
 
-  // Only prevent wrapping if tooltip is present, otherwise tooltip will not render
   .#{$prefix}--select--fluid
-    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)) {
-    width: calc(100% - 2rem);
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--select--fluid .#{$prefix}--label .#{$prefix}--toggletip-label {
     -ms-overflow-style: none;
     overflow-x: scroll;
     scrollbar-width: none;
