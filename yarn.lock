@@ -11021,7 +11021,7 @@ __metadata:
     glob: ^7.1.4
     husky: ^8.0.0
     jest: ^28.1.0
-    jest-junit: ^14.0.0
+    jest-junit: ^15.0.0
     lerna: ^4.0.0
     lint-staged: ^13.0.0
     node-gyp: ^7.1.2
@@ -19789,15 +19789,15 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"jest-junit@npm:^14.0.0":
-  version: 14.0.0
-  resolution: "jest-junit@npm:14.0.0"
+"jest-junit@npm:^15.0.0":
+  version: 15.0.0
+  resolution: "jest-junit@npm:15.0.0"
   dependencies:
     mkdirp: ^1.0.4
     strip-ansi: ^6.0.1
     uuid: ^8.3.2
     xml: ^1.0.1
-  checksum: 89d6755f895360be9440d0feacc1a7da9adf23fa9a58746f6f80946cd55d91ba3d32314698615090682684d8315518a166fe46a60cdbd16b38e0c5c8d6418e55
+  checksum: e8fe4d2f2ab843383ac41820a6fe495739d154ec435cd44ba590b44ec7fd62095676f3eef13f98392f81d4a3727ea58b4f4fad231fe367ac31243952b9ad716f
   languageName: node
   linkType: hard
 
