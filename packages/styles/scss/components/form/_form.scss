@@ -110,7 +110,7 @@ $input-label-weight: 400 !default;
   }
 
   input[type='number'] {
-    font-family: carbon--font-family('mono');
+    font-family: font-family('sans');
   }
 
   input[data-invalid]:not(:focus),

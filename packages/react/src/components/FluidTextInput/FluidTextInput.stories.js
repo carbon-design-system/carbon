@@ -20,6 +20,9 @@ import './test.scss';
 export default {
   title: 'Experimental/unstable__FluidTextInput',
   component: FluidTextInput,
+  subcomponents: {
+    FluidTextInputSkeleton,
+  },
 };
 
 export const Default = () => (
