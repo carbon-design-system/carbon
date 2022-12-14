@@ -21,6 +21,9 @@ import { Information } from '@carbon/icons-react';
 export default {
   title: 'Experimental/unstable__FluidMultiSelect',
   component: FluidMultiSelect,
+  subcomponents: {
+    FluidMultiSelectSkeleton,
+  },
 };
 
 const items = [

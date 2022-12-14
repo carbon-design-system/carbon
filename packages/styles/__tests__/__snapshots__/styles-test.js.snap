@@ -263,6 +263,16 @@ Array [
     "relativePath": "scss/components/form",
   },
   Object {
+    "filepath": "scss/components/fluid-combo-box/_fluid-combo-box.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-combo-box/fluid-combo-box",
+    "relativePath": "scss/components/fluid-combo-box/fluid-combo-box",
+  },
+  Object {
+    "filepath": "scss/components/fluid-combo-box/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-combo-box",
+    "relativePath": "scss/components/fluid-combo-box",
+  },
+  Object {
     "filepath": "scss/components/fluid-date-picker/_fluid-date-picker.scss",
     "importPath": "@carbon/styles/scss/components/fluid-date-picker/fluid-date-picker",
     "relativePath": "scss/components/fluid-date-picker/fluid-date-picker",
@@ -291,6 +301,26 @@ Array [
     "filepath": "scss/components/fluid-list-box/_index.scss",
     "importPath": "@carbon/styles/scss/components/fluid-list-box",
     "relativePath": "scss/components/fluid-list-box",
+  },
+  Object {
+    "filepath": "scss/components/fluid-multiselect/_fluid-multiselect.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-multiselect/fluid-multiselect",
+    "relativePath": "scss/components/fluid-multiselect/fluid-multiselect",
+  },
+  Object {
+    "filepath": "scss/components/fluid-multiselect/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-multiselect",
+    "relativePath": "scss/components/fluid-multiselect",
+  },
+  Object {
+    "filepath": "scss/components/fluid-number-input/_fluid-number-input.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-number-input/fluid-number-input",
+    "relativePath": "scss/components/fluid-number-input/fluid-number-input",
+  },
+  Object {
+    "filepath": "scss/components/fluid-number-input/_index.scss",
+    "importPath": "@carbon/styles/scss/components/fluid-number-input",
+    "relativePath": "scss/components/fluid-number-input",
   },
   Object {
     "filepath": "scss/components/fluid-select/_fluid-select.scss",

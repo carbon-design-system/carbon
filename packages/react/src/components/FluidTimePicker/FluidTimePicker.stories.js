@@ -21,6 +21,10 @@ import { Information } from '@carbon/icons-react';
 export default {
   title: 'Experimental/unstable__FluidTimePicker',
   component: FluidTimePicker,
+  subcomponents: {
+    FluidTimePickerSelect,
+    FluidTimePickerSkeleton,
+  },
 };
 
 const ToggleTip = (

@@ -13,6 +13,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { keys, matches } from '../../internal/keyboard';
 import toggleClass from '../../tools/toggleClass';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const getInstanceId = setupGetInstanceId();
 const TooltipIcon = ({
@@ -37,6 +38,7 @@ const TooltipIcon = ({
   const [isFocused, setIsFocused] = useState(false);
   const tooltipRef = useRef(null);
   const tooltipTimeout = useRef(null);
+  const buttonRef = useRef();
   const tooltipId = id || `icon-tooltip-${getInstanceId()}`;
   const tooltipTriggerClasses = cx(
     `${prefix}--tooltip__trigger`,
@@ -117,17 +119,17 @@ const TooltipIcon = ({
     return () => document.removeEventListener('keydown', handleEscKeyDown);
   }, []);
 
-  let cursorStyle;
-  if (disabled) {
-    cursorStyle = 'not-allowed';
-  } else {
-    cursorStyle = onClick ? 'pointer' : 'default';
-  }
+  useIsomorphicEffect(() => {
+    if (disabled) {
+      buttonRef.current.style.cursorStyle = 'not-allowed';
+    } else {
+      buttonRef.current.style.cursorStyle = onClick ? 'pointer' : 'default';
+    }
+  }, [disabled, onClick]);
 
   return (
     <button
       disabled={disabled}
-      style={{ cursor: cursorStyle }}
       {...rest}
       type="button"
       className={tooltipTriggerClasses}
@@ -136,7 +138,8 @@ const TooltipIcon = ({
       onMouseLeave={composeEventHandlers([onMouseLeave, handleMouseLeave])}
       onFocus={composeEventHandlers([onFocus, handleFocus])}
       onBlur={composeEventHandlers([onBlur, handleBlur])}
-      onClick={composeEventHandlers([handleClick, onClick])}>
+      onClick={composeEventHandlers([handleClick, onClick])}
+      ref={buttonRef}>
       <span
         ref={tooltipRef}
         onMouseEnter={handleMouseEnter}
