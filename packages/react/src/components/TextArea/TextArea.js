@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled } from '@carbon/icons-react';
@@ -14,6 +14,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -111,6 +112,15 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
+  const textareaRef = useRef();
+  useIsomorphicEffect(() => {
+    if (other.cols) {
+      textareaRef.current.style.width = null;
+    } else {
+      textareaRef.current.style.width = `100%`;
+    }
+  }, [other.cols]);
+
   const input = (
     <textarea
       {...other}
@@ -121,13 +131,7 @@ const TextArea = React.forwardRef(function TextArea(
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
       readOnly={other.readOnly}
-      style={
-        other.cols
-          ? {}
-          : {
-              width: `100%`,
-            }
-      }
+      ref={textareaRef}
     />
   );
 

@@ -22,3 +22,7 @@ feature-flags:
     description: >
       Enable the features and functionality for the v11 Release
     enabled: false
+  - name: enable-experimental-tile-contrast
+    description: >
+      Enable the experimental tile improved contrast styles
+    enabled: false

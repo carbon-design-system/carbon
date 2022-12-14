@@ -164,7 +164,11 @@ const ExampleDropContainerApp = (props) => {
         onAddFiles={onAddFiles}
         innerRef={uploaderButton}
       />
-      <div className={`${prefix}--file-container`} style={{ width: '100%' }}>
+      <div
+        className={classnames(
+          `${prefix}--file-container`,
+          `${prefix}--file-container--drop`
+        )}>
         {files.map(
           ({
             uuid,

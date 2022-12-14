@@ -766,6 +766,18 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
+          "name": "border-tile-01",
+          "type": "color",
+        },
+        Object {
+          "name": "border-tile-02",
+          "type": "color",
+        },
+        Object {
+          "name": "border-tile-03",
+          "type": "color",
+        },
+        Object {
           "name": "border-inverse",
           "type": "color",
         },
@@ -995,6 +1007,10 @@ test('metadata', () => {
         },
         Object {
           "name": "border-strong",
+          "type": "color",
+        },
+        Object {
+          "name": "border-tile",
           "type": "color",
         },
         Object {

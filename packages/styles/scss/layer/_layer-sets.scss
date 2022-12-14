@@ -74,6 +74,11 @@ $-default-layer-sets: (
     theme.$border-strong-02,
     theme.$border-strong-03,
   ),
+  border-tile: (
+    theme.$border-tile-01,
+    theme.$border-tile-02,
+    theme.$border-tile-03,
+  ),
 );
 
 /// Define a map of layer sets, each set should have values for each layer in
