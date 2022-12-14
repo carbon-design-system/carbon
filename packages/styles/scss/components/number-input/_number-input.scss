@@ -32,7 +32,7 @@
   }
 
   .#{$prefix}--number input[type='number'] {
-    @include type-style('code-01');
+    @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     display: inline-flex;
@@ -50,7 +50,7 @@
     background-color: $field;
     border-radius: 0;
     color: $text-primary;
-    font-family: font-family('mono');
+    font-family: font-family('sans');
     font-weight: 400;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
