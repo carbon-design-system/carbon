@@ -5,12 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { CheckmarkFilled, ErrorFilled } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 function ProgressBar({
   className,
@@ -76,6 +77,15 @@ function ProgressBar({
     });
   }
 
+  const ref = useRef();
+  useIsomorphicEffect(() => {
+    if (!isFinished && !isError) {
+      ref.current.style.transform = `scaleX(${percentage})`;
+    } else {
+      ref.current.style.transform = null;
+    }
+  }, [percentage, isFinished, isError]);
+
   return (
     <div className={wrapperClasses}>
       <div className={labelClasses} id={labelId}>
@@ -94,14 +104,7 @@ function ProgressBar({
         aria-valuemin={!indeterminate ? 0 : null}
         aria-valuemax={!indeterminate ? max : null}
         aria-valuenow={!indeterminate ? cappedValue : null}>
-        <div
-          className={`${prefix}--progress-bar__bar`}
-          style={
-            !isFinished && !isError
-              ? { transform: `scaleX(${percentage})` }
-              : null
-          }
-        />
+        <div className={`${prefix}--progress-bar__bar`} ref={ref} />
       </div>
       {helperText && (
         <div className={`${prefix}--progress-bar__helper-text`}>

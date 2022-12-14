@@ -109,7 +109,6 @@ describe('Slider', () => {
       const inputElement = container.querySelector(
         `.${prefix}--text-input.${prefix}--slider-text-input`
       );
-      expect(inputElement.style.display).toEqual('none');
       expect(inputElement.getAttribute('type')).toEqual('hidden');
     });
 
