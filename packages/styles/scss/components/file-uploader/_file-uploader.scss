@@ -119,6 +119,10 @@
     color: $text-disabled;
   }
 
+  .#{$prefix}--file-container--drop {
+    width: 100%;
+  }
+
   // For backwards compatibility
   .#{$prefix}--file-btn ~ .#{$prefix}--file-container {
     margin-top: $spacing-06;
