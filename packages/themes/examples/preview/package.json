@@ -1,5 +1,5 @@
 {
-  "name": "themes-examples-preview-v11",
+  "name": "themes-examples-preview",
   "private": true,
   "scripts": {
     "develop": "next",
