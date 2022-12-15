@@ -52,15 +52,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/colors@link:../../../colors::locator=themes-examples-preview-v11%40workspace%3A.":
+"@carbon/colors@link:../../../colors::locator=themes-examples-preview%40workspace%3A.":
   version: 0.0.0-use.local
-  resolution: "@carbon/colors@link:../../../colors::locator=themes-examples-preview-v11%40workspace%3A."
+  resolution: "@carbon/colors@link:../../../colors::locator=themes-examples-preview%40workspace%3A."
   languageName: node
   linkType: soft
 
-"@carbon/themes@link:../../::locator=themes-examples-preview-v11%40workspace%3A.":
+"@carbon/themes@link:../../::locator=themes-examples-preview%40workspace%3A.":
   version: 0.0.0-use.local
-  resolution: "@carbon/themes@link:../../::locator=themes-examples-preview-v11%40workspace%3A."
+  resolution: "@carbon/themes@link:../../::locator=themes-examples-preview%40workspace%3A."
   languageName: node
   linkType: soft
 
@@ -2973,9 +2973,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"themes-examples-preview-v11@workspace:.":
+"themes-examples-preview@workspace:.":
   version: 0.0.0-use.local
-  resolution: "themes-examples-preview-v11@workspace:."
+  resolution: "themes-examples-preview@workspace:."
   dependencies:
     "@carbon/colors": "link:../../../colors"
     "@carbon/themes": "link:../../"

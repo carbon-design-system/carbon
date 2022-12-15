@@ -340,9 +340,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/themes-examples-preview@workspace:.":
+"@carbon/themes-examples-preview-v10@workspace:.":
   version: 0.0.0-use.local
-  resolution: "@carbon/themes-examples-preview@workspace:."
+  resolution: "@carbon/themes-examples-preview-v10@workspace:."
   dependencies:
     "@carbon/grid": ^10.43.1
     "@carbon/themes": ^10.54.0
