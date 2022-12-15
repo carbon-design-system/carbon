@@ -19,8 +19,8 @@ jobs:
     # We only want notifications for successful runs for certain workflows
     if:
       ${{ github.event.workflow_run.conclusion == 'success' &&
-      contains(fromJson('["Version", "Release", Deploy React storybook to IBM
-      Cloud, promote]'), github.event.workflow.name) }}
+      contains(fromJson('["Version", "Release", "Deploy React storybook to IBM
+      Cloud", "promote"]'), github.event.workflow.name) }}
     steps:
       - name: Send custom JSON data to Slack
         id: slack-success
