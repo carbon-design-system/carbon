@@ -27,11 +27,25 @@
     top: rem(13px);
     left: $spacing-05;
     display: flex;
+    overflow: initial;
     width: calc(100% - 2rem);
     height: rem(16px);
     align-items: center;
     margin: 0;
     clip: initial;
+    white-space: initial;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--search--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--search--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--search--fluid .#{$prefix}--label .#{$prefix}--toggletip-label {
     -ms-overflow-style: none;
     overflow-x: scroll;
     scrollbar-width: none;
@@ -40,7 +54,7 @@
 
   .#{$prefix}--search--fluid .#{$prefix}--search-input {
     height: 100%;
-    padding: rem(32px) $spacing-05 rem(13px);
+    padding: rem(32px) rem(88px) rem(13px) $spacing-05;
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-magnifier-icon {
@@ -58,7 +72,7 @@
     left: auto;
     width: rem(40px);
     height: rem(40px);
-    border-bottom: none;
+    border: none;
     transition: background-color $duration-fast-01 motion(standard, productive);
   }
 
@@ -66,6 +80,7 @@
     position: absolute;
     top: auto;
     right: rem(-1px);
+    bottom: rem(14px);
     left: auto;
     display: block;
     width: rem(1px);
@@ -74,7 +89,6 @@
     content: '';
   }
 
-  // Focus styles
   .#{$prefix}--search--fluid
     .#{$prefix}--search-input:focus
     ~ .#{$prefix}--search-close:hover {
@@ -108,5 +122,9 @@
     .#{$prefix}--search-input:disabled
     ~ .#{$prefix}--search-close:hover::before {
     background: $border-subtle;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-close svg {
+    margin-bottom: rem(2px);
   }
 }

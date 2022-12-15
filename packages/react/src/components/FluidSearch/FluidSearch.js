@@ -28,107 +28,77 @@ const FluidSearch = React.forwardRef(function FluidSearch(
 
 FluidSearch.propTypes = {
   /**
-   * `true` to allow empty string.
+   * Specify an optional value for the `autocomplete` property on the underlying
+   * `<input>`, defaults to "off"
    */
-  allowEmpty: PropTypes.bool,
+  autoComplete: PropTypes.string,
 
   /**
-   * Specify an optional className to be applied to the wrapper node
+   * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
 
   /**
-   * Optional starting value for uncontrolled state
+   * Specify a label to be read by screen readers on the "close" button
    */
-  defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  closeButtonLabelText: PropTypes.string,
 
   /**
-   * Specify if the wheel functionality for the input should be disabled, or not
+   * Optionally provide the default value of the `<input>`
    */
-  disableWheel: PropTypes.bool,
+  defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 
   /**
-   * Specify if the control should be disabled, or not
+   * Specify whether the `<input>` should be disabled
    */
   disabled: PropTypes.bool,
 
   /**
-   * Provide a description for up/down icons that can be read by screen readers
-   */
-  iconDescription: PropTypes.string,
-
-  /**
    * Specify a custom `id` for the input
    */
-  id: PropTypes.string.isRequired,
+  id: PropTypes.string,
 
   /**
-   * Specify if the currently value is invalid.
+   * Provide the label text for the Search icon
    */
-  invalid: PropTypes.bool,
+  labelText: PropTypes.node.isRequired,
 
   /**
-   * Message which is displayed if the value is invalid.
-   */
-  invalidText: PropTypes.node,
-
-  /**
-   * Generic `label` that will be used as the textual representation of what
-   * this field is for
-   */
-  label: PropTypes.node,
-
-  /**
-   * The maximum value.
-   */
-  max: PropTypes.number,
-
-  /**
-   * The minimum value.
-   */
-  min: PropTypes.number,
-
-  /**
-   * Provide an optional handler that is called when the internal state of
-   * NumberInput changes. This handler is called with event and state info.
-   * `(event, { value, direction }) => void`
+   * Optional callback called when the search value changes.
    */
   onChange: PropTypes.func,
 
   /**
-   * Provide an optional function to be called when the up/down button is clicked
+   * Optional callback called when the search value is cleared.
    */
-  onClick: PropTypes.func,
+  onClear: PropTypes.func,
 
   /**
-   * Provide an optional function to be called when a key is pressed in the number input
+   * Provide a handler that is invoked on the key down event for the input
    */
-  onKeyUp: PropTypes.func,
+  onKeyDown: PropTypes.func,
 
   /**
-   * Specify how much the values should increase/decrease upon clicking on up/down button
+   * Provide an optional placeholder text for the Search.
+   * Note: if the label and placeholder differ,
+   * VoiceOver on Mac will read both
    */
-  step: PropTypes.number,
+  placeholder: PropTypes.string,
 
   /**
-   * Provide custom text for the component for each translation id
+   * Specify the role for the underlying `<input>`, defaults to `searchbox`
    */
-  translateWithId: PropTypes.func,
+  role: PropTypes.string,
 
   /**
-   * Specify the value of the input
+   * Optional prop to specify the type of the `<input>`
    */
-  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  type: PropTypes.string,
 
   /**
-   * Specify whether the control is currently in warning state
+   * Specify the value of the `<input>`
    */
-  warn: PropTypes.bool,
-
-  /**
-   * Provide the text that is displayed when the control is in warning state
-   */
-  warnText: PropTypes.node,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 export default FluidSearch;

@@ -21,9 +21,7 @@ describe('FluidSearch', () => {
         </FeatureFlags>
       );
 
-      expect(container.firstChild).toHaveClass(
-        `${prefix}--number-input--fluid`
-      );
+      expect(container.firstChild).toHaveClass(`${prefix}--search--fluid`);
     });
   });
 });
