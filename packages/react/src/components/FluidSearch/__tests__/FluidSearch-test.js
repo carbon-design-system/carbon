@@ -17,7 +17,7 @@ describe('FluidSearch', () => {
     it('should render as expected', () => {
       const { container } = render(
         <FeatureFlags flags={{ 'enable-v11-release': true }}>
-          <FluidSearch id="input-1" label="FluidTextInput label" />
+          <FluidSearch id="input-1" labelText="FluidSearch label" />
         </FeatureFlags>
       );
 
