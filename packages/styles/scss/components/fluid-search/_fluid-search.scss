@@ -1,0 +1,74 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Search
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../search';
+
+@mixin fluid-search {
+  .#{$prefix}--search--fluid {
+    height: rem(64px);
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    width: calc(100% - 2rem);
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+    clip: initial;
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-input {
+    height: 100%;
+    padding: rem(32px) $spacing-05 rem(13px);
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-magnifier-icon {
+    top: auto;
+    right: 1rem;
+    bottom: rem(13px);
+    left: auto;
+    transform: none;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-close {
+    top: auto;
+    right: rem(48px);
+    bottom: 0;
+    left: auto;
+    width: rem(40px);
+    height: rem(40px);
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
+    position: absolute;
+    top: auto;
+    right: 0;
+    left: auto;
+    display: block;
+    width: rem(1px);
+    height: 1rem;
+    background: $border-subtle;
+    content: '';
+  }
+}
