@@ -58,17 +58,55 @@
     left: auto;
     width: rem(40px);
     height: rem(40px);
+    border-bottom: none;
+    transition: background-color $duration-fast-01 motion(standard, productive);
   }
 
   .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
     position: absolute;
     top: auto;
-    right: 0;
+    right: rem(-1px);
     left: auto;
     display: block;
     width: rem(1px);
     height: 1rem;
     background: $border-subtle;
     content: '';
+  }
+
+  // Focus styles
+  .#{$prefix}--search--fluid
+    .#{$prefix}--search-input:focus
+    ~ .#{$prefix}--search-close:hover {
+    outline: none;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-close::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: rem(2px);
+    content: '';
+  }
+
+  .#{$prefix}--search--fluid
+    .#{$prefix}--search-input:focus
+    ~ .#{$prefix}--search-close::after {
+    background: $focus;
+  }
+
+  .#{$prefix}--search--fluid
+    .#{$prefix}--search-input:not(:focus)
+    ~ .#{$prefix}--search-close:not([disabled])::after {
+    height: rem(1px);
+    background: $border-strong;
+  }
+
+  .#{$prefix}--search--fluid
+    .#{$prefix}--search-input:disabled
+    ~ .#{$prefix}--search-close:hover::before {
+    background: $border-subtle;
   }
 }
