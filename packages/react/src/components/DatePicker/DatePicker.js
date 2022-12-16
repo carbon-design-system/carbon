@@ -131,12 +131,10 @@ function isLabelTextEmpty(children) {
 
 const rightArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
   <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
-  <rect width="16" height="16" style="fill:none" />
 </svg>`;
 
 const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
   <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
-  <rect width="16" height="16" style="fill:none" />
 </svg>`;
 
 function updateClassNames(calendar, prefix) {

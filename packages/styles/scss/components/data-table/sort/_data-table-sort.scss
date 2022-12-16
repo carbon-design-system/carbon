@@ -29,6 +29,11 @@
     border-bottom: none;
   }
 
+  // hidden sort description
+  .#{$prefix}--table-sort__description {
+    display: none;
+  }
+
   // -------------------------------------
   // Th > Button
   // -------------------------------------

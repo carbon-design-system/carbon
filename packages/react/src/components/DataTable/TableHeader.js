@@ -107,7 +107,7 @@ const TableHeader = React.forwardRef(function TableHeader(
       colSpan={colSpan}
       ref={ref}
       scope={scope}>
-      <div style={{ display: 'none' }} id={uniqueId}>
+      <div className={`${prefix}--table-sort__description`} id={uniqueId}>
         {sortDescription}
       </div>
       <button
