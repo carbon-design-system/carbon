@@ -17,6 +17,7 @@ import FluidTextInput from '../FluidTextInput';
 import FluidTextArea from '../FluidTextArea';
 import FluidTimePicker from '../FluidTimePicker';
 import FluidTimePickerSelect from '../FluidTimePickerSelect';
+import FluidNumberInput from '../FluidNumberInput';
 import ModalWrapper from '../ModalWrapper';
 
 const additionalProps = {
@@ -100,7 +101,19 @@ export const Default = () => (
           </SelectItemGroup>
         </FluidSelect>
       </div>
-      <FluidTextInput {...TextInputProps} />
+      <div style={{ display: 'flex' }}>
+        <FluidTextInput {...TextInputProps} />
+        <FluidNumberInput
+          label="Number Input Label"
+          placeholder="Placeholder text"
+          id="input-default"
+          step={10}
+          min={0}
+          max={100}
+          defaultValue={50}
+        />
+      </div>
+
       <FluidTextInput
         type="password"
         pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"

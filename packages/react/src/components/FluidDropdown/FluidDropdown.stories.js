@@ -18,6 +18,9 @@ import { Information } from '@carbon/icons-react';
 export default {
   title: 'Experimental/unstable__FluidDropdown',
   component: FluidDropdown,
+  subcomponents: {
+    FluidDropdownSkeleton,
+  },
 };
 
 const items = [
