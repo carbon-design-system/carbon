@@ -156,11 +156,6 @@
     * should use "light theme" (white background)?
     */
    light?: boolean;
-   // deprecate(
-   //   PropTypes.bool,
-   //   'The `light` prop for `Combobox` has ' +
-   //     'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
-   // ),
  
    /**
     * `onChange` is a utility for this controlled component to communicate to a
@@ -178,16 +173,18 @@
     * `(inputText) => void`
     * @param {string} inputText
     */
-   onInputChange?: any//(inputText: string) => void;
+   onInputChange?: (inputText: string) => void;
  
    /**
     * Helper function passed to Downshift that allows the user to observe internal
     * state changes
+    * `(changes, stateAndHelpers) => void`
     */
    onStateChange?: (changes: {}, stateAndHelpers: {}) => void;
  
    /**
     * Callback function that fires when the combobox menu toggle is clicked
+    * `(evt) => void`
     * @param {MouseEvent} event
     */
    onToggleClick?: (evt: MouseEvent) => void;
@@ -717,6 +714,7 @@
    /**
     * Callback function to notify consumer when the text input changes.
     * This provides support to change available items based on the text.
+    * `(inputText) => void`
     * @param {string} inputText
     */
    onInputChange: PropTypes.func,
@@ -724,11 +722,13 @@
    /**
     * Helper function passed to Downshift that allows the user to observe internal
     * state changes
+    * `(changes, stateAndHelpers) => void`
     */
    onStateChange: PropTypes.func,
  
    /**
     * Callback function that fires when the combobox menu toggle is clicked
+    * `(evt) => void`
     * @param {MouseEvent} event
     */
    onToggleClick: PropTypes.func,
