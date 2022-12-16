@@ -193,6 +193,12 @@ export default class Slider extends PureComponent {
     isValid: true,
   };
 
+  constructor(props) {
+    super(props);
+    this.thumbRef = React.createRef();
+    this.filledTrackRef = React.createRef();
+  }
+
   /**
    * Sets up initial slider position and value in response to component mount.
    */
@@ -216,6 +222,12 @@ export default class Slider extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
+
+    this.thumbRef.current.style.left = `${this.state.left}%`;
+    this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
+      this.state.left / 100
+    })`;
+
     if (
       this.state.value !== '' &&
       prevState.value !== this.state.value &&
@@ -564,7 +576,7 @@ export default class Slider extends PureComponent {
     delete other.onRelease;
     delete other.invalid;
 
-    const { value, left, isValid } = this.state;
+    const { value, isValid } = this.state;
 
     const scope = this.context;
     let enabled;
@@ -594,18 +606,9 @@ export default class Slider extends PureComponent {
             {
               [`${prefix}--text-input--light`]: light,
               [`${prefix}--text-input--invalid`]: isValid === false,
+              [`${prefix}--slider-text-input--hidden`]: hideTextInput,
             }
           );
-
-          const filledTrackStyle = {
-            transform: `translate(0%, -50%) scaleX(${left / 100})`,
-          };
-          const thumbStyle = {
-            left: `${left}%`,
-          };
-          const hiddenInputStyle = {
-            display: 'none',
-          };
 
           return (
             <div
@@ -641,8 +644,8 @@ export default class Slider extends PureComponent {
                     aria-valuemax={max}
                     aria-valuemin={min}
                     aria-valuenow={value}
-                    style={thumbStyle}
                     aria-labelledby={labelId}
+                    ref={this.thumbRef}
                   />
                   <div
                     className={`${prefix}--slider__track`}
@@ -652,7 +655,7 @@ export default class Slider extends PureComponent {
                   />
                   <div
                     className={`${prefix}--slider__filled-track`}
-                    style={filledTrackStyle}
+                    ref={this.filledTrackRef}
                   />
                 </div>
                 <span className={`${prefix}--slider__range-label`}>
@@ -660,7 +663,6 @@ export default class Slider extends PureComponent {
                 </span>
                 <input
                   type={hideTextInput ? 'hidden' : inputType}
-                  style={hideTextInput ? hiddenInputStyle : null}
                   id={`${id}-input-for-slider`}
                   name={name}
                   className={inputClasses}
