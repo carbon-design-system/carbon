@@ -7,13 +7,6 @@
 
 import React from 'react';
 import { FluidSearch, FluidSearchSkeleton } from '.';
-import {
-  ToggletipLabel,
-  Toggletip,
-  ToggletipButton,
-  ToggletipContent,
-} from '../Toggletip';
-import { Information } from '@carbon/icons-react';
 
 export default {
   title: 'Experimental/unstable__FluidSearch',
@@ -23,25 +16,11 @@ export default {
   },
 };
 
-const ToggleTip = (
-  <>
-    <ToggletipLabel>Search</ToggletipLabel>
-    <Toggletip align="top-left">
-      <ToggletipButton label="Show information">
-        <Information />
-      </ToggletipButton>
-      <ToggletipContent>
-        <p>Additional field information here.</p>
-      </ToggletipContent>
-    </Toggletip>
-  </>
-);
-
 export const Default = () => (
   <div style={{ width: '400px' }}>
     <FluidSearch
       size="lg"
-      labelText={ToggleTip}
+      labelText="Search"
       closeButtonLabelText="Clear search input"
       id="fluid-search-1"
       placeholder="Prompt text"
