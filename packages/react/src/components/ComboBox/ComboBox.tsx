@@ -149,7 +149,7 @@
     * We try to stay as generic as possible here to allow individuals to pass
     * in a collection of whatever kind of data structure they prefer
     */
-   items: ({} | string | number)[];
+   items: (object | string | number)[];
  
    /**
     * @deprecated
@@ -180,7 +180,7 @@
     * state changes
     * `(changes, stateAndHelpers) => void`
     */
-   onStateChange?: (changes: {}, stateAndHelpers: {}) => void;
+   onStateChange?: (changes: object, stateAndHelpers: object) => void;
  
    /**
     * Callback function that fires when the combobox menu toggle is clicked
@@ -243,7 +243,7 @@
     * Provide the text that is displayed when the control is in warning state
     */
    warnText?: ReactNodeLike; 
- };
+ }
  
  const ComboBox = React.forwardRef(( 
    props: ComboBoxProps,
@@ -266,7 +266,7 @@
      light,
      onChange,
      onInputChange,
-     onToggleClick, // eslint-disable-line no-unused-vars
+     onToggleClick, 
      placeholder,
      readOnly,
      selectedItem,
@@ -274,10 +274,8 @@
      size,
      titleText,
      translateWithId,
-     type, // eslint-disable-line no-unused-vars
      warn,
      warnText,
-     onStateChange, // eslint-disable-line no-unused-vars
      ...rest
    } = props;
    const prefix = usePrefix();
