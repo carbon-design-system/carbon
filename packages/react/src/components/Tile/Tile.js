@@ -428,10 +428,6 @@ export function ExpandableTile({
     `${prefix}--tile__chevron--interactive`
   );
 
-  const tileStyle = {
-    maxHeight: isExpanded ? null : isTileMaxHeight + isTilePadding,
-  };
-
   const childrenAsArray = getChildren();
 
   useIsomorphicEffect(() => {
@@ -457,6 +453,14 @@ export function ExpandableTile({
     }
   }, []);
 
+  useIsomorphicEffect(() => {
+    if (isExpanded) {
+      tile.current.style.maxHeight = null;
+    } else {
+      tile.current.style.maxHeight = isTileMaxHeight + isTilePadding + 'px';
+    }
+  }, [isExpanded, isTileMaxHeight, isTilePadding]);
+
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
       const [aboveTheFold] = entries;
@@ -470,7 +474,6 @@ export function ExpandableTile({
   return interactive ? (
     <div
       ref={tile}
-      style={tileStyle}
       className={interactiveClassNames}
       aria-expanded={isExpanded}
       {...rest}>
@@ -496,7 +499,6 @@ export function ExpandableTile({
     <button
       type="button"
       ref={tile}
-      style={tileStyle}
       className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}

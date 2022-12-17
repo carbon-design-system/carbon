@@ -6,7 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+} from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
@@ -131,12 +136,10 @@ function isLabelTextEmpty(children) {
 
 const rightArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
   <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
-  <rect width="16" height="16" style="fill:none" />
 </svg>`;
 
 const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
   <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
-  <rect width="16" height="16" style="fill:none" />
 </svg>`;
 
 function updateClassNames(calendar, prefix) {
@@ -449,6 +452,15 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     };
   }, [savedOnChange, savedOnClose, savedOnOpen, readOnly]); //eslint-disable-line react-hooks/exhaustive-deps
+
+  // this hook allows consumers to access the flatpickr calendar
+  // instance for cases where functions like open() or close()
+  // need to be imperatively called on the calendar
+  useImperativeHandle(ref, () => ({
+    get calendar() {
+      return calendarRef.current;
+    },
+  }));
 
   useEffect(() => {
     if (calendarRef?.current?.set) {
