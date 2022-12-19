@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import Downshift from 'downshift';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { useContext, useEffect, useState, useRef } from 'react';
 import { Text } from '../Text';
 import {
@@ -16,6 +16,8 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBoxMenuItem from '../ListBox/ListBoxMenuItem';
+import ListBoxMenu from '../ListBox/ListBoxMenu';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -52,7 +54,7 @@ const getInputValue = ({
   return inputValue || '';
 };
 
-const findHighlightedIndex = ({ items, itemToString }, inputValue) => {
+const findHighlightedIndex = ({ items, itemToString = defaultItemToString}, inputValue) => {
   if (!inputValue) {
     return -1;
   }
@@ -71,7 +73,182 @@ const findHighlightedIndex = ({ items, itemToString }, inputValue) => {
 
 const getInstanceId = setupGetInstanceId();
 
-const ComboBox = React.forwardRef((props, ref) => {
+type ExcludedAttributes = 'id' | 'onChange' | 'onClick' | 'type' | 'size';
+
+export interface ComboBoxProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    ExcludedAttributes
+  > {
+  /**
+   * 'aria-label' of the ListBox component.
+   */
+  ariaLabel?: string,
+
+  /**
+   * An optional className to add to the container node
+   */
+  className?: string,
+
+  /**
+   * Specify the direction of the combobox dropdown. Can be either top or bottom.
+   */
+  direction?: 'top' | 'bottom';
+
+  /**
+   * Specify if the control should be disabled, or not
+   */
+  disabled?: boolean; 
+
+  /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps?: React.ComponentProps<typeof Downshift>
+
+  /**
+   * Provide helper text that is used alongside the control label for
+   * additional help
+   */
+  helperText?: string;
+
+  /**
+   * Specify a custom `id` for the input
+   */
+  id: string;
+
+  /**
+   * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
+   * from their collection that are pre-selected
+   */
+  initialSelectedItem?: object | string | number;
+
+  /**
+   * Specify if the currently selected value is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText?: ReactNodeLike;
+
+  /**
+   * Optional function to render items as custom components instead of strings.
+   * Defaults to null and is overridden by a getter
+   */
+  itemToElement?: React.ComponentType | null
+
+  /**
+   * Helper function passed to downshift that allows the library to render a
+   * given item to a string label. By default, it extracts the `label` field
+   * from a given item to serve as the item label in the list
+   */
+  itemToString?: (item: unknown) => string;
+
+  /**
+   * We try to stay as generic as possible here to allow individuals to pass
+   * in a collection of whatever kind of data structure they prefer
+   */
+  items: (object | string | number)[];
+
+  /**
+   * @deprecated
+   * should use "light theme" (white background)?
+   */
+  light?: boolean;
+
+  /**
+   * `onChange` is a utility for this controlled component to communicate to a
+   * consuming component when a specific dropdown item is selected.
+   * `({ selectedItem }) => void`
+  //  * @param {{ selectedItem }}
+   */
+   onChange: (
+    data: { selectedItem: any }
+  ) => void; 
+
+  /**
+   * Callback function to notify consumer when the text input changes.
+   * This provides support to change available items based on the text.
+   * `(inputText) => void`
+   * @param {string} inputText
+   */
+  onInputChange?: (inputText: string) => void;
+
+  /**
+   * Helper function passed to Downshift that allows the user to observe internal
+   * state changes
+   * `(changes, stateAndHelpers) => void`
+   */
+  onStateChange?: (changes: object, stateAndHelpers: object) => void;
+
+  /**
+   * Callback function that fires when the combobox menu toggle is clicked
+   * `(evt) => void`
+   * @param {MouseEvent} event
+   */
+  onToggleClick?: (evt: MouseEvent) => void;
+
+  /**
+   * Used to provide a placeholder text node before a user enters any input.
+   * This is only present if the control has no items selected
+   */
+  placeholder?: string;
+
+  /**
+   * Is the ComboBox readonly?
+   */
+  readOnly?: boolean;
+
+  /**
+   * For full control of the selection
+   */
+  selectedItem?: object | string | number;
+
+  /**
+   * Specify your own filtering logic by passing in a `shouldFilterItem`
+   * function that takes in the current input and an item and passes back
+   * whether or not the item should be filtered.
+   */
+  shouldFilterItem?: (input: any) => boolean;
+
+  /**
+   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   */
+  size?: typeof ListBoxPropTypes.ListBoxSize
+
+  /**
+   * Provide text to be used in a `<label>` element that is tied to the
+   * combobox via ARIA attributes.
+   */
+  titleText?: ReactNodeLike;
+
+  /**
+   * Specify a custom translation function that takes in a message identifier
+   * and returns the localized string for the message
+   */
+  translateWithId?: (id: any) => string; 
+
+  /**
+   * Currently supports either the default type, or an inline variant
+   */
+  type?: typeof ListBoxPropTypes.ListBoxType,
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNodeLike; 
+}
+
+const ComboBox = React.forwardRef(( 
+  props: ComboBoxProps,
+  ref
+) => {
   const {
     ariaLabel,
     className: containerClassName,
@@ -89,7 +266,7 @@ const ComboBox = React.forwardRef((props, ref) => {
     light,
     onChange,
     onInputChange,
-    onToggleClick, // eslint-disable-line no-unused-vars
+    onToggleClick, 
     placeholder,
     readOnly,
     selectedItem,
@@ -97,15 +274,13 @@ const ComboBox = React.forwardRef((props, ref) => {
     size,
     titleText,
     translateWithId,
-    type, // eslint-disable-line no-unused-vars
     warn,
     warnText,
-    onStateChange, // eslint-disable-line no-unused-vars
     ...rest
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const textInput = useRef();
+  const textInput = useRef<HTMLInputElement>(null);
   const comboBoxInstanceId = getInstanceId();
   const [inputValue, setInputValue] = useState(
     getInputValue({
@@ -116,8 +291,8 @@ const ComboBox = React.forwardRef((props, ref) => {
     })
   );
   const [isFocused, setIsFocused] = useState(false);
-  const [prevSelectedItem, setPrevSelectedItem] = useState(null);
-  const [doneInitialSelectedItem, setDoneInitialSelectedItem] = useState(null);
+  const [prevSelectedItem, setPrevSelectedItem] = useState<any>();
+  const [doneInitialSelectedItem, setDoneInitialSelectedItem] = useState(false);
   const savedOnInputChange = useRef(onInputChange);
 
   if (!doneInitialSelectedItem || prevSelectedItem !== selectedItem) {
@@ -134,17 +309,17 @@ const ComboBox = React.forwardRef((props, ref) => {
   }
 
   const filterItems = (items, itemToString, inputValue) =>
-    items.filter((item) =>
+    items.filter((item) => shouldFilterItem ?
       shouldFilterItem({
         item,
         itemToString,
         inputValue,
-      })
+      }) : defaultShouldFilterItem()
     );
 
   const handleOnChange = (selectedItem) => {
     if (onChange) {
-      onChange({ selectedItem });
+      onChange({selectedItem });
     }
   };
 
@@ -260,6 +435,7 @@ const ComboBox = React.forwardRef((props, ref) => {
         toggleMenu,
       }) => {
         const rootProps = getRootProps(
+          // @ts-ignore this is not supposed to be a required property
           {},
           {
             suppressRefError: true,
@@ -284,7 +460,7 @@ const ComboBox = React.forwardRef((props, ref) => {
             }
           },
         });
-        const inputProps = getInputProps({
+        const inputProps : any = getInputProps({
           // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
           'aria-labelledby': null,
           disabled,
@@ -371,6 +547,7 @@ const ComboBox = React.forwardRef((props, ref) => {
                     translateWithId={translateWithId}
                     disabled={disabled || readOnly}
                     onClearSelection={handleSelectionClear}
+                    selectionCount={0}
                   />
                 )}
                 <ListBoxTrigger
@@ -379,48 +556,49 @@ const ComboBox = React.forwardRef((props, ref) => {
                   translateWithId={translateWithId}
                 />
               </div>
-              <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
+              <ListBoxMenu {...getMenuProps({ 'aria-label': ariaLabel })}>
                 {isOpen
                   ? filterItems(items, itemToString, inputValue).map(
                       (item, index) => {
                         const itemProps = getItemProps({
                           item,
                           index,
-                          ['aria-current']: selectedItem === item ? true : null,
+                          ['aria-current']: selectedItem === item ? "true" : "false",
                           ['aria-selected']:
-                            highlightedIndex === index ? true : null,
+                            highlightedIndex === index ? "true" : "false",
                           disabled: item.disabled,
                         });
                         return (
-                          <ListBox.MenuItem
+                          <ListBoxMenuItem
                             key={itemProps.id}
                             isActive={selectedItem === item}
                             isHighlighted={
                               highlightedIndex === index ||
-                              (selectedItem?.id &&
-                                selectedItem?.id === item.id) ||
+                              ((selectedItem as any)?.id &&
+                              (selectedItem as any)?.id === item.id) ||
                               false
                             }
                             title={
-                              itemToElement ? item.text : itemToString(item)
+                              itemToElement ? item.text : itemToString ? itemToString(item) : defaultItemToString(item)
                             }
                             {...itemProps}>
                             {itemToElement ? (
+                              // @ts-ignore
                               <ItemToElement key={itemProps.id} {...item} />
                             ) : (
-                              itemToString(item)
+                              itemToString ? itemToString(item) : defaultItemToString(item)
                             )}
                             {selectedItem === item && (
                               <Checkmark
                                 className={`${prefix}--list-box__menu-item__selected-icon`}
                               />
                             )}
-                          </ListBox.MenuItem>
+                          </ListBoxMenuItem>
                         );
                       }
                     )
                   : null}
-              </ListBox.Menu>
+              </ListBoxMenu>
             </ListBox>
             {helperText && !invalid && !warn && !isFluid && (
               <Text as="div" id={comboBoxHelperId} className={helperClasses}>
@@ -459,8 +637,8 @@ ComboBox.propTypes = {
   /**
    * Additional props passed to Downshift
    */
+  // @ts-ignore
   downshiftProps: PropTypes.shape(Downshift.propTypes),
-
   /**
    * Provide helper text that is used alongside the control label for
    * additional help
@@ -523,6 +701,7 @@ ComboBox.propTypes = {
   /**
    * `onChange` is a utility for this controlled component to communicate to a
    * consuming component when a specific dropdown item is selected.
+   * `({ selectedItem }) => void`
    * @param {{ selectedItem }}
    */
   onChange: PropTypes.func.isRequired,
@@ -530,6 +709,7 @@ ComboBox.propTypes = {
   /**
    * Callback function to notify consumer when the text input changes.
    * This provides support to change available items based on the text.
+   * `(inputText) => void`
    * @param {string} inputText
    */
   onInputChange: PropTypes.func,
@@ -537,11 +717,13 @@ ComboBox.propTypes = {
   /**
    * Helper function passed to Downshift that allows the user to observe internal
    * state changes
+   * `(changes, stateAndHelpers) => void`
    */
   onStateChange: PropTypes.func,
 
   /**
    * Callback function that fires when the combobox menu toggle is clicked
+   * `(evt) => void`
    * @param {MouseEvent} event
    */
   onToggleClick: PropTypes.func,
