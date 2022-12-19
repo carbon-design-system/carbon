@@ -37,7 +37,7 @@ function App() {
         <div className="bx--row">
           <div className="bx--col">
             <h1>
-              <code>@carbon/themes</code>
+              <code>v10 @carbon/themes</code>
             </h1>
           </div>
         </div>
