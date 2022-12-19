@@ -35,7 +35,7 @@ jobs:
                 {
                   type: "image",
                   image_url:
-                    "https://carbondesignsystem.com/static/406b7e7bf6865c094dd9a7a0bcb8bd41/3cbba/light-getting-started-developers.png",
+                    "https://user-images.githubusercontent.com/77697351/207710625-c246e20f-90af-43e4-84a7-c35f75005503.jpg",
                   alt_text: "A terminal prompt symbol",
                 },
                 {
