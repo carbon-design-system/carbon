@@ -35,14 +35,24 @@
     height: rem(16px);
     align-items: center;
     margin: 0;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label {
     -ms-overflow-style: none;
     overflow-x: scroll;
     scrollbar-width: none;
     white-space: nowrap;
-  }
-
-  .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar {
-    display: none;
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--form__helper-text {
