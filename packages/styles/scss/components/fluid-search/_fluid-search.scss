@@ -1,0 +1,141 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Search
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../search';
+
+@mixin fluid-search {
+  .#{$prefix}--search--fluid {
+    height: rem(64px);
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    overflow: initial;
+    width: calc(100% - 2rem);
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+    clip: initial;
+    white-space: initial;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--search--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--search--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--search--fluid .#{$prefix}--label .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-input {
+    height: 100%;
+    padding: rem(32px) rem(88px) rem(13px) $spacing-05;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-magnifier-icon {
+    top: auto;
+    right: 1rem;
+    bottom: rem(13px);
+    left: auto;
+    transform: none;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-close {
+    top: auto;
+    right: rem(48px);
+    bottom: 0;
+    left: auto;
+    width: rem(40px);
+    height: rem(40px);
+    border: none;
+    transition: background-color $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-close::before {
+    position: absolute;
+    top: auto;
+    right: rem(-1px);
+    bottom: rem(14px);
+    left: auto;
+    display: block;
+    width: rem(1px);
+    height: 1rem;
+    background: $border-subtle;
+    content: '';
+  }
+
+  .#{$prefix}--search--fluid
+    .#{$prefix}--search-input:focus
+    ~ .#{$prefix}--search-close:hover {
+    outline: none;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-close::after {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: rem(2px);
+    content: '';
+  }
+
+  .#{$prefix}--search--fluid
+    .#{$prefix}--search-input:focus
+    ~ .#{$prefix}--search-close::after {
+    background: $focus;
+  }
+
+  .#{$prefix}--search--fluid
+    .#{$prefix}--search-input:not(:focus)
+    ~ .#{$prefix}--search-close:not([disabled])::after {
+    height: rem(1px);
+    background: $border-strong;
+  }
+
+  .#{$prefix}--search--fluid .#{$prefix}--search-close svg {
+    margin-bottom: rem(2px);
+  }
+
+  // Disabled styles
+  .#{$prefix}--search--fluid
+    .#{$prefix}--search-input:disabled
+    ~ .#{$prefix}--search-close:hover::before {
+    background: $border-subtle;
+  }
+
+  .#{$prefix}--search--fluid.#{$prefix}--search--disabled .#{$prefix}--label {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--search--fluid.#{$prefix}--search--disabled
+    .#{$prefix}--search-input[disabled] {
+    border-bottom: 1px solid $border-subtle;
+  }
+}
