@@ -144,7 +144,7 @@ jobs:
         run: |
           npx serve -l 3000 packages/react/storybook-static &
           pid=$!
-          echo ::set-output name=pid::"$pid"
+          echo "pid=$pid" >> $GITHUB_OUTPUT
       - uses: ./actions/wait-for-it
         with:
           URL: 'http://localhost:3000'
