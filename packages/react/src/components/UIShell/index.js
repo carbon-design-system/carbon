@@ -34,6 +34,6 @@ export { default as SideNavItem } from './SideNavItem';
 export { default as SideNavItems } from './SideNavItems';
 export { default as SideNavLink } from './SideNavLink';
 export { default as SideNavLinkText } from './SideNavLinkText';
-export { defafult as SideNavMenu } from './SideNavMenu';
+export { default as SideNavMenu } from './SideNavMenu';
 export { default as SideNavMenuItem } from './SideNavMenuItem';
 export { default as SideNavSwitcher } from './SideNavSwitcher';
