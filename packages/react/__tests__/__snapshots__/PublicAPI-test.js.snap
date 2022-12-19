@@ -9922,6 +9922,12 @@ Map {
   },
   "unstable__FluidSearch" => Object {
     "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "autoComplete": "off",
+      "closeButtonLabelText": "Clear search input",
+      "role": "searchbox",
+      "type": "text",
+    },
     "propTypes": Object {
       "autoComplete": Object {
         "type": "string",
