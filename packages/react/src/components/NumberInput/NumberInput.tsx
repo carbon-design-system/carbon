@@ -7,8 +7,8 @@
 
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
-import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import PropTypes, { ReactNodeLike } from 'prop-types';
+import React, { LegacyRef, useRef, useState } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
@@ -25,7 +25,169 @@ const defaultTranslations = {
   [translationIds['decrement.number']]: 'Decrement number',
 };
 
-const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
+type ExcludedAttributes =
+  | 'defaultValue'
+  | 'id'
+  | 'min'
+  | 'max'
+  | 'onChange'
+  | 'onClick'
+  | 'size'
+  | 'step'
+  | 'value';
+
+export interface NumberInputProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    ExcludedAttributes
+  > {
+  /**
+   * `true` to allow empty string.
+   */
+  allowEmpty?: boolean;
+
+  /**
+   * Specify an optional className to be applied to the wrapper node
+   */
+  className?: string;
+
+  /**
+   * Optional starting value for uncontrolled state
+   */
+  defaultValue?: number | string;
+
+  /**
+   * Specify if the wheel functionality for the input should be disabled, or not
+   */
+  disableWheel?: boolean;
+
+  /**
+   * Specify if the control should be disabled, or not
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText: ReactNodeLike;
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Specify whether you want the steppers to be hidden
+   */
+  hideSteppers?: boolean;
+
+  /**
+   * Provide a description for up/down icons that can be read by screen readers
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify a custom `id` for the input
+   */
+  id: string;
+
+  /**
+   * Specify if the currently value is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText?: ReactNodeLike;
+
+  /**
+   * Generic `label` that will be used as the textual representation of what
+   * this field is for
+   */
+  label?: ReactNodeLike;
+
+  /**
+   * `true` to use the light version.
+   *
+   * @deprecated The `light` prop for `NumberInput` is no longer needed and has
+   *     been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * The maximum value.
+   */
+  max?: number;
+
+  /**
+   * The minimum value.
+   */
+  min?: number;
+
+  /**
+   * Provide an optional handler that is called when the internal state of
+   * NumberInput changes. This handler is called with event and state info.
+   * `(event, { value, direction }) => void`
+   */
+  onChange?: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    state: { value: number | string; direction: string }
+  ) => void;
+
+  /**
+   * Provide an optional function to be called when the up/down button is clicked
+   */
+  onClick?: (
+    event: React.MouseEvent<HTMLElement>,
+    state?: { value: number | string; direction: string }
+  ) => void;
+
+  /**
+   * Provide an optional function to be called when a key is pressed in the number input
+   */
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  /**
+   * Specify if the component should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * Specify the size of the Number Input.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify how much the values should increase/decrease upon clicking on up/down button
+   */
+  step?: number;
+
+  /**
+   * Provide custom text for the component for each translation id
+   */
+  translateWithId?: (id: string) => string;
+
+  /**
+   * Specify the value of the input
+   */
+  value?: number | string;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNodeLike;
+}
+
+const NumberInput = React.forwardRef(function NumberInput(
+  props: NumberInputProps,
+  forwardRef
+) {
   const enabled = useFeatureFlag('enable-v11-release');
   const {
     allowEmpty = false,
@@ -69,7 +231,9 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
   const [prevControlledValue, setPrevControlledValue] =
     useState(controlledValue);
   const inputRef = useRef(null);
-  const ref = useMergedRefs([forwardRef, inputRef]);
+  const ref = useMergedRefs([forwardRef, inputRef]) as
+    | LegacyRef<HTMLInputElement>
+    | undefined;
   const numberInputClasses = cx({
     [`${prefix}--number`]: true,
     [`${prefix}--number--helpertext`]: true,
@@ -78,7 +242,8 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     [`${prefix}--number--nolabel`]: hideLabel,
     [`${prefix}--number--nosteppers`]: hideSteppers,
     [`${prefix}--number--${size}`]: size,
-    [customClassName]: !enabled,
+    // Issue #12878
+    [customClassName!]: !enabled,
   });
   const isInputValid = getInputValidity({
     allowEmpty,
@@ -110,11 +275,16 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
   });
 
   if (controlledValue !== prevControlledValue) {
-    setValue(controlledValue);
+    // This cast is safe because a component should never change between being a controlled and
+    // uncontrolled component (https://reactjs.org/link/controlled-components).
+    // This condition can only be reached if controlledValue is not equal to prevControlledValue.
+    // controlledValue can only be undefined AND not equal to prevControlledValue if the above
+    // rule is violated (the component changed from controlled to uncontrolled).
+    setValue(controlledValue!);
     setPrevControlledValue(controlledValue);
   }
 
-  let ariaDescribedBy = null;
+  let ariaDescribedBy: string | undefined = undefined;
   if (normalizedProps.invalid) {
     ariaDescribedBy = normalizedProps.invalidId;
   }
@@ -138,8 +308,15 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
   }
 
+  // normalizedProps.icon actually has type CarbonIconType | undefined, from the DefinitelyTyped
+  // definition for icons-react. We use any here instead to avoid adding a dependency to that
+  // library. If those types become available without that dependency we should update the type
+  // of normalizedProps.icon.
+  const Icon = normalizedProps.icon as any;
   return (
-    <div className={cx(`${prefix}--form-item`, { [customClassName]: enabled })}>
+    <div
+      // Issue #12878
+      className={cx(`${prefix}--form-item`, { [customClassName!]: enabled })}>
       <div
         className={numberInputClasses}
         data-invalid={normalizedProps.invalid ? true : undefined}>
@@ -187,9 +364,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             type="number"
             value={value}
           />
-          {normalizedProps.icon ? (
-            <normalizedProps.icon className={iconClasses} />
-          ) : null}
+          {Icon ? <Icon className={iconClasses} /> : null}
           {!hideSteppers && (
             <div className={`${prefix}--number__controls`}>
               <button
@@ -198,7 +373,9 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
-                    value: clamp(max, min, parseInt(value) - step),
+                    // parseInt will coerce its argument to a string, so even if value is a number
+                    // we will be safe - hence the typecast to convince Typescript.
+                    value: clamp(max, min, parseInt(value as string) - step),
                     direction: 'down',
                   };
                   setValue(state.value);
@@ -211,7 +388,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                     onClick(event, state);
                   }
                 }}
-                tabIndex="-1"
+                tabIndex={-1}
                 title={decrementNumLabel || iconDescription}
                 type="button">
                 <Subtract className="down-icon" />
@@ -223,7 +400,9 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
-                    value: clamp(max, min, parseInt(value) + step),
+                    // parseInt will coerce its argument to a string, so even if value is a number
+                    // we will be safe - hence the typecast to convince Typescript.
+                    value: clamp(max, min, parseInt(value as string) + step),
                     direction: 'up',
                   };
                   setValue(state.value);
@@ -236,7 +415,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                     onClick(event, state);
                   }
                 }}
-                tabIndex="-1"
+                tabIndex={-1}
                 title={incrementNumLabel || iconDescription}
                 type="button">
                 <Add className="up-icon" />
