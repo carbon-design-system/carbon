@@ -6,14 +6,14 @@ import ReactDOM from 'react-dom/server';
 export default function App() {
   return (
     <main>
-      <div className="bx--grid">
-        <div className="bx--row">
-          <div className="bx--col">
+      <div className="cds--grid">
+        <div className="cds--row">
+          <div className="cds--col">
             <h1>Grid</h1>
           </div>
         </div>
-        <div className="bx--row">
-          <div className="bx--col">
+        <div className="cds--row">
+          <div className="cds--col">
             <ul>
               {sections.map(section => (
                 <li key={section.id}>
@@ -26,9 +26,9 @@ export default function App() {
       </div>
       {sections.map(section => (
         <section key={section.name}>
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col-sm-4 bx--col-md-8 bx--col-lg-8">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col-sm-4 cds--col-md-8 cds--col-lg-8">
                 <h2 id={section.id}>{section.name}</h2>
                 <p>{section.description}</p>
               </div>
@@ -36,9 +36,9 @@ export default function App() {
           </div>
           {section.examples.map(example => (
             <article key={example.name}>
-              <div className="bx--grid">
-                <div className="bx--row">
-                  <div className="bx--col-sm-4 bx--col-md-8 bx--col-lg-8">
+              <div className="cds--grid">
+                <div className="cds--row">
+                  <div className="cds--col-sm-4 cds--col-md-8 cds--col-lg-8">
                     <h3>{example.name}</h3>
                     {example.description && <p>{example.description}</p>}
                   </div>
@@ -47,9 +47,9 @@ export default function App() {
               <div className="example">
                 {React.createElement(example.content)}
               </div>
-              <div className="bx--grid">
-                <div className="bx--row">
-                  <div className="bx--col">
+              <div className="cds--grid">
+                <div className="cds--row">
+                  <div className="cds--col">
                     <details>
                       <summary>Code</summary>
                       <pre className="language-js">
@@ -86,11 +86,11 @@ const sections = [
     name: 'Usage',
     description: (
       <React.Fragment>
-        The default grid format closely mirrors Bootstrap's grid. At the
-        top-level, you define a container with the <code>.bx--grid</code> class.
+        The flex grid format closely mirrors Bootstrap's grid. At the
+        top-level, you define a container with the <code>.cds--grid</code> class.
         Inside of a grid, you have multiple rows where you use{' '}
-        <code>.bx--row</code>. Inside of a row, you use our column classes (
-        <code>.bx--col</code>, <code>{`.bx--col-<breakpoint>-<span>`}</code>)
+        <code>.cds--row</code>. Inside of a row, you use our column classes (
+        <code>.cds--col</code>, <code>{`.cds--col-<breakpoint>-<span>`}</code>)
       </React.Fragment>
     ),
     examples: [
@@ -98,24 +98,24 @@ const sections = [
         name: 'Auto columns',
         content() {
           return (
-            <div className="bx--grid">
-              <div className="bx--row">
-                <div className="bx--col">
+            <div className="cds--grid">
+              <div className="cds--row">
+                <div className="cds--col">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col">
+                <div className="cds--col">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col">
+                <div className="cds--col">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col">
+                <div className="cds--col">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
@@ -130,24 +130,24 @@ const sections = [
         description:
           'Use the column helpers to specify different column spans at different widths',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col-sm-1 bx--col-md-2 bx--col-lg-4">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col-sm-1 cds--col-md-2 cds--col-lg-4">
                 <div className="outside">
                   <div className="inside">Content</div>
                 </div>
               </div>
-              <div className="bx--col-sm-1 bx--col-md-2 bx--col-lg-6">
+              <div className="cds--col-sm-1 cds--col-md-2 cds--col-lg-6">
                 <div className="outside">
                   <div className="inside">Content</div>
                 </div>
               </div>
-              <div className="bx--col-sm-1 bx--col-md-2 bx--col-lg-4">
+              <div className="cds--col-sm-1 cds--col-md-2 cds--col-lg-4">
                 <div className="outside">
                   <div className="inside">Content</div>
                 </div>
               </div>
-              <div className="bx--col-sm-1 bx--col-md-2 bx--col-lg-2">
+              <div className="cds--col-sm-1 cds--col-md-2 cds--col-lg-2">
                 <div className="outside">
                   <div className="inside">Content</div>
                 </div>
@@ -161,24 +161,24 @@ const sections = [
         description:
           'Use the column helpers to specify a column span of 0 at different widths',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col-sm-1 bx--col-md-2 bx--col-lg-6">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col-sm-1 cds--col-md-2 cds--col-lg-6">
                 <div className="outside">
                   <div className="inside">Never Hidden</div>
                 </div>
               </div>
-              <div className="bx--col-sm-2 bx--col-md-0 bx--col-lg-6">
+              <div className="cds--col-sm-2 cds--col-md-0 cds--col-lg-6">
                 <div className="outside">
                   <div className="inside">Hidden on Medium Screens</div>
                 </div>
               </div>
-              <div className="bx--col-sm-0 bx--col-md-3 bx--col-lg-4">
+              <div className="cds--col-sm-0 cds--col-md-3 cds--col-lg-4">
                 <div className="outside">
                   <div className="inside">Hidden on Small Screens</div>
                 </div>
               </div>
-              <div className="bx--col-sm-1 bx--col-md-3 bx--col-lg-0">
+              <div className="cds--col-sm-1 cds--col-md-3 cds--col-lg-0">
                 <div className="outside">
                   <div className="inside">Hidden on Large Screens</div>
                 </div>
@@ -193,46 +193,46 @@ const sections = [
           'Use the column padding helper to add vertical padding to a node in a column',
         content() {
           return (
-            <div className="bx--grid">
-              <div className="bx--row">
-                <div className="bx--col bx--col-padding">
+            <div className="cds--grid">
+              <div className="cds--row">
+                <div className="cds--col cds--col-padding">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col">
-                  <div className="outside bx--col-padding">
+                <div className="cds--col">
+                  <div className="outside cds--col-padding">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col bx--col-padding">
+                <div className="cds--col cds--col-padding">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col bx--col-padding">
+                <div className="cds--col cds--col-padding">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
               </div>
-              <div className="bx--row bx--row-padding">
-                <div className="bx--col">
+              <div className="cds--row cds--row-padding">
+                <div className="cds--col">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col">
+                <div className="cds--col">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col">
+                <div className="cds--col">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
                 </div>
-                <div className="bx--col">
+                <div className="cds--col">
                   <div className="outside">
                     <div className="inside">1/4</div>
                   </div>
@@ -252,13 +252,13 @@ const sections = [
       {
         name: 'Default offset usage',
         content: () => (
-          <div className="bx--grid">
+          <div className="cds--grid">
             {Array.from({ length: 16 }).map((_, i) => {
               const offset = 15 - i;
               const span = 16 - offset;
               return (
-                <div key={i} className="bx--row">
-                  <div className={`bx--offset-lg-${offset} bx--col-lg-${span}`}>
+                <div key={i} className="cds--row">
+                  <div className={`cds--offset-lg-${offset} cds--col-lg-${span}`}>
                     <div className="outside">
                       <div className="inside">{span}</div>
                     </div>
@@ -280,46 +280,46 @@ const sections = [
       {
         name: 'Default usage',
         content: () => (
-          <div className="bx--grid bx--grid--condensed">
-            <div className="bx--row">
-              <div className="bx--col">
+          <div className="cds--grid cds--grid--condensed">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
             </div>
-            <div className="bx--row">
-              <div className="bx--col">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
@@ -333,68 +333,68 @@ const sections = [
         description:
           'Use a helper class to specify a single row as condensed. Rows that are adjacent and are condensed will have 2px of margin between them to match gutter.',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside">
-                  <div className="inside">1/4</div>
-                </div>
-              </div>
-            </div>
-            <div className="bx--row bx--row--condensed">
-              <div className="bx--col">
-                <div className="outside">
-                  <div className="inside">1/4</div>
-                </div>
-              </div>
-              <div className="bx--col">
-                <div className="outside">
-                  <div className="inside">1/4</div>
-                </div>
-              </div>
-              <div className="bx--col">
-                <div className="outside">
-                  <div className="inside">1/4</div>
-                </div>
-              </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
             </div>
-            <div className="bx--row bx--row--condensed">
-              <div className="bx--col">
+            <div className="cds--row cds--row--condensed">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+            <div className="cds--row cds--row--condensed">
+              <div className="cds--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="cds--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="cds--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
@@ -415,46 +415,46 @@ const sections = [
       {
         name: 'Default usage',
         content: () => (
-          <div className="bx--grid bx--grid--narrow">
-            <div className="bx--row">
-              <div className="bx--col">
+          <div className="cds--grid cds--grid--narrow">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
             </div>
-            <div className="bx--row">
-              <div className="bx--col">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
@@ -468,68 +468,68 @@ const sections = [
         description:
           'Use a helper class to specify a single row as narrow.',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside">
-                  <div className="inside">1/4</div>
-                </div>
-              </div>
-            </div>
-            <div className="bx--row bx--row--narrow">
-              <div className="bx--col">
-                <div className="outside">
-                  <div className="inside">1/4</div>
-                </div>
-              </div>
-              <div className="bx--col">
-                <div className="outside">
-                  <div className="inside">1/4</div>
-                </div>
-              </div>
-              <div className="bx--col">
-                <div className="outside">
-                  <div className="inside">1/4</div>
-                </div>
-              </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
             </div>
-            <div className="bx--row bx--row--narrow">
-              <div className="bx--col">
+            <div className="cds--row cds--row--narrow">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+            </div>
+            <div className="cds--row cds--row--narrow">
+              <div className="cds--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="cds--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="cds--col">
+                <div className="outside">
+                  <div className="inside">1/4</div>
+                </div>
+              </div>
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
@@ -548,26 +548,26 @@ const sections = [
     examples: [
       {
         name: 'No gutters',
-        description: 'Single column usage of bx--no-gutter',
+        description: 'Single column usage of cds--no-gutter',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col bx--no-gutter">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col cds--no-gutter">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--no-gutter">
+              <div className="cds--col cds--no-gutter">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--no-gutter">
+              <div className="cds--col cds--no-gutter">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--no-gutter">
+              <div className="cds--col cds--no-gutter">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
@@ -578,26 +578,26 @@ const sections = [
       },
       {
         name: 'No gutters',
-        description: 'Row usage of bx--no-gutter',
+        description: 'Row usage of cds--no-gutter',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row bx--no-gutter">
-              <div className="bx--col">
+          <div className="cds--grid">
+            <div className="cds--row cds--no-gutter">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
@@ -611,90 +611,90 @@ const sections = [
         description:
           'You can also specify no gutters for either direction, for both columns and rows',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col bx--no-gutter--left">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col cds--no-gutter--left">
                 <div className="outside">
                   <div className="inside">No gutter on left side</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
             </div>
-            <div className="bx--row">
-              <div className="bx--col bx--no-gutter--right">
+            <div className="cds--row">
+              <div className="cds--col cds--no-gutter--right">
                 <div className="outside">
                   <div className="inside">No gutter on right side</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
             </div>
-            <div className="bx--row bx--no-gutter--left">
-              <div className="bx--col">
+            <div className="cds--row cds--no-gutter--left">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">No gutter on left side</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">No gutter on left side</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">No gutter on left side</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">No gutter on left side</div>
                 </div>
               </div>
             </div>
-            <div className="bx--row bx--no-gutter--right">
-              <div className="bx--col">
+            <div className="cds--row cds--no-gutter--right">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">No gutter on right side</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">No gutter on right side</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">No gutter on right side</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">No gutter on right side</div>
                 </div>
@@ -716,59 +716,59 @@ const sections = [
         description:
           'In order to hang text, you will need to specify no gutter on the left-hand side and use hang on the inner text that you want to align',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1/4</div>
                 </div>
               </div>
             </div>
-            <div className="bx--row bx--no-gutter--left">
-              <div className="bx--col">
-                <div className="image-example bx--aspect-ratio bx--aspect-ratio--1x1">
+            <div className="cds--row cds--no-gutter--left">
+              <div className="cds--col">
+                <div className="image-example cds--aspect-ratio cds--aspect-ratio--1x1">
                   Full width image
                 </div>
-                <div className="outside bx--hang--left">
+                <div className="outside cds--hang--left">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="image-example bx--aspect-ratio bx--aspect-ratio--1x1">
+              <div className="cds--col">
+                <div className="image-example cds--aspect-ratio cds--aspect-ratio--1x1">
                   Full width image
                 </div>
-                <div className="outside bx--hang--left">
+                <div className="outside cds--hang--left">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="image-example bx--aspect-ratio bx--aspect-ratio--1x1">
+              <div className="cds--col">
+                <div className="image-example cds--aspect-ratio cds--aspect-ratio--1x1">
                   Full width image
                 </div>
-                <div className="outside bx--hang--left">
+                <div className="outside cds--hang--left">
                   <div className="inside">1/4</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="image-example bx--aspect-ratio bx--aspect-ratio--1x1">
+              <div className="cds--col">
+                <div className="image-example cds--aspect-ratio cds--aspect-ratio--1x1">
                   Full width image
                 </div>
-                <div className="outside bx--hang--left">
+                <div className="outside cds--hang--left">
                   <div className="inside">1/4</div>
                 </div>
               </div>
@@ -786,38 +786,38 @@ const sections = [
       {
         name: '2:1',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
-                <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
-                  <div className="bx--aspect-ratio--object">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
+                <div className="cds--aspect-ratio cds--aspect-ratio--2x1">
+                  <div className="cds--aspect-ratio--object">
                     <div className="outside">
                       <div className="inside">1</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
-                  <div className="bx--aspect-ratio--object">
+              <div className="cds--col">
+                <div className="cds--aspect-ratio cds--aspect-ratio--2x1">
+                  <div className="cds--aspect-ratio--object">
                     <div className="outside">
                       <div className="inside">1</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
-                  <div className="bx--aspect-ratio--object">
+              <div className="cds--col">
+                <div className="cds--aspect-ratio cds--aspect-ratio--2x1">
+                  <div className="cds--aspect-ratio--object">
                     <div className="outside">
                       <div className="inside">1</div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
-                  <div className="bx--aspect-ratio--object">
+              <div className="cds--col">
+                <div className="cds--aspect-ratio cds--aspect-ratio--2x1">
+                  <div className="cds--aspect-ratio--object">
                     <div className="outside">
                       <div className="inside">1</div>
                     </div>
@@ -831,25 +831,25 @@ const sections = [
       {
         name: '16:9',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--16x9">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--16x9">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--16x9">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--16x9">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--16x9">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--16x9">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--16x9">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--16x9">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -860,25 +860,25 @@ const sections = [
       {
         name: '4:3',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--4x3">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--4x3">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--4x3">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--4x3">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--4x3">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--4x3">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--4x3">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--4x3">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -889,25 +889,25 @@ const sections = [
       {
         name: '1:1',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--1x1">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--1x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--1x1">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--1x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--1x1">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--1x1">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--1x1">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--1x1">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -918,25 +918,25 @@ const sections = [
       {
         name: '3:4',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--3x4">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--3x4">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--3x4">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--3x4">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--3x4">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--3x4">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--3x4">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--3x4">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -947,25 +947,25 @@ const sections = [
       {
         name: '9:16',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--9x16">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--9x16">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--9x16">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--9x16">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--9x16">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--9x16">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
-                <div className="outside bx--aspect-ratio bx--aspect-ratio--9x16">
+              <div className="cds--col">
+                <div className="outside cds--aspect-ratio cds--aspect-ratio--9x16">
                   <div className="inside">1</div>
                 </div>
               </div>
@@ -976,32 +976,32 @@ const sections = [
       {
         name: '1:2',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
-                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">
+                  <div className="inside cds--aspect-ratio cds--aspect-ratio--1x2">
                     1
                   </div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
-                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">
+                  <div className="inside cds--aspect-ratio cds--aspect-ratio--1x2">
                     1
                   </div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
-                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">
+                  <div className="inside cds--aspect-ratio cds--aspect-ratio--1x2">
                     1
                   </div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
-                  <div className="inside bx--aspect-ratio bx--aspect-ratio--1x2">
+                  <div className="inside cds--aspect-ratio cds--aspect-ratio--1x2">
                     1
                   </div>
                 </div>
@@ -1013,9 +1013,9 @@ const sections = [
       {
         name: '1:1 Aspect Ratio Overflow',
         content: () => (
-          <div className="bx--grid">
-            <div className="bx--row">
-              <div className="bx--col bx--aspect-ratio bx--aspect-ratio--2x1">
+          <div className="cds--grid">
+            <div className="cds--row">
+              <div className="cds--col cds--aspect-ratio cds--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -1037,17 +1037,17 @@ const sections = [
                   </div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio bx--aspect-ratio--2x1">
+              <div className="cds--col cds--aspect-ratio cds--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio bx--aspect-ratio--2x1">
+              <div className="cds--col cds--aspect-ratio cds--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col bx--aspect-ratio bx--aspect-ratio--2x1">
+              <div className="cds--col cds--aspect-ratio cds--aspect-ratio--2x1">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
@@ -1069,24 +1069,24 @@ const sections = [
         description:
           'In this example, we give the grid element the class name "bleed" which we then style with a background color.',
         content: () => (
-          <div className="bx--grid bleed">
-            <div className="bx--row">
-              <div className="bx--col">
+          <div className="cds--grid bleed">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
@@ -1106,24 +1106,24 @@ const sections = [
       {
         name: 'Usage',
         content: () => (
-          <div className="bx--grid bx--grid--full-width">
-            <div className="bx--row">
-              <div className="bx--col">
+          <div className="cds--grid cds--grid--full-width">
+            <div className="cds--row">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>
               </div>
-              <div className="bx--col">
+              <div className="cds--col">
                 <div className="outside">
                   <div className="inside">1</div>
                 </div>

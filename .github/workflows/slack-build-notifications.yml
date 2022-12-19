@@ -1,0 +1,56 @@
+name: Slack Build Notifications
+
+on:
+  workflow_run:
+    workflows:
+      [
+        Add To Project,
+        Version,
+        Release,
+        Deploy React storybook to IBM Cloud,
+        promote,
+      ]
+    types: [completed]
+    branches: [main]
+
+jobs:
+  on-success:
+    runs-on: ubuntu-latest
+    # We only want notifications for successful runs for certain workflows
+    if:
+      ${{ github.event.workflow_run.conclusion == 'success' &&
+      contains(fromJson('["Version", "Release", Deploy React storybook to IBM
+      Cloud, promote]'), github.event.workflow.name) }}
+    steps:
+      - name: Send custom JSON data to Slack
+        id: slack-success
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          payload: |
+            {
+              "username": "Workflow success: ${{ github.event.workflow.name }}",
+              "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
+              "channel": "#carbon-system-notifications",
+              "text": "${{ github.event.workflow_run.url }}",
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+  on-failure:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    steps:
+      - name: Send custom JSON data to Slack
+        id: slack-failure
+        uses: slackapi/slack-github-action@v1.23.0
+        with:
+          payload: |
+            {
+              "username": "Workflow failure: ${{ github.event.workflow.name }}",
+              "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
+              "channel": "#carbon-system-notifications",
+              "text": "${{ github.event.workflow_run.url }}",
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK

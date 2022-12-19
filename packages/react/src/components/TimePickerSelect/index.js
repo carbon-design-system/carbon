@@ -7,7 +7,7 @@
 
 import * as FeatureFlags from '@carbon/feature-flags';
 
-import { default as TimePickerSelectNext } from './next/TimePickerSelect';
+import { default as TimePickerSelectNext } from './TimePickerSelect';
 
 import { default as TimePickerSelectClassic } from './TimePickerSelect';
 
