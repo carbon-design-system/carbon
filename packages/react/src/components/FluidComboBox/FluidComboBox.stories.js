@@ -106,6 +106,7 @@ export const Playground = (args) => (
       itemToString={(item) => (item ? item.text : '')}
       {...args}
     />
+    <br />
     <FluidComboBox
       placeholder="Filter..."
       {...args}
