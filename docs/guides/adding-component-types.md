@@ -90,7 +90,8 @@ the repository. There is an issue tracking curring status of this effort,
 [#12513](https://github.com/carbon-design-system/carbon/issues/12513)
 
 - Change extension to `.tsx` via git (do not simply rename)
-  - e.g. `git mv packages/react/src/components/ComponentName/ComponentName.js packages/react/src/components/ComponentName/ComponentName.tsx` 
+  - e.g.
+    `git mv packages/react/src/components/ComponentName/ComponentName.js packages/react/src/components/ComponentName/ComponentName.tsx`
 - Copying the proptypes def to above the component definition
 - Retool the proptypes to be a ts interface
 - Fix errors as they appear
