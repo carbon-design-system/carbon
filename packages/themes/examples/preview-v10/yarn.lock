@@ -309,19 +309,70 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@carbon/grid@npm:^11.9.0":
-  version: 11.9.0
-  resolution: "@carbon/grid@npm:11.9.0"
-  dependencies:
-    "@carbon/layout": ^11.9.0
-  checksum: 0be7101ebdba6f49078551d8456d1a62a29bc0838233d4f2385486825ae12adde90d4508f5d43c27d087cd023b1f0a4d7df451d758dd47bbb2b6454679002bd0
+"@carbon/colors@npm:^10.37.0":
+  version: 10.37.1
+  resolution: "@carbon/colors@npm:10.37.1"
+  checksum: 7cdc38370d1a51d968f28de951a180211b33db14f6dee5cd55c1d965ebe74c19c55924898df7c344f72dfa2c46a764ad16696038911e77b43d9b701d34c56514
   languageName: node
   linkType: hard
 
-"@carbon/layout@npm:^11.9.0":
-  version: 11.9.0
-  resolution: "@carbon/layout@npm:11.9.0"
-  checksum: 9e121380f7588058254ebbad05934ea80c15c8734c92dc5a3c8e1068d77afc2118735d6bec37a82489a33d46140dd432d7fb5186d425eb5efd84b442b23fac18
+"@carbon/grid@npm:^10.43.0, @carbon/grid@npm:^10.43.1":
+  version: 10.43.1
+  resolution: "@carbon/grid@npm:10.43.1"
+  dependencies:
+    "@carbon/import-once": ^10.7.0
+    "@carbon/layout": ^10.37.1
+  checksum: d59818f5602b1cada5188982a687ef861c63a2e165ed3266496b0a0b7e2e12528e55d4ac9d7d4134a4f4c19e7e16fd48425e5982279ac86ff914ba879c120a32
+  languageName: node
+  linkType: hard
+
+"@carbon/import-once@npm:^10.7.0":
+  version: 10.7.0
+  resolution: "@carbon/import-once@npm:10.7.0"
+  checksum: c92625bc34833073a2b113a9cf014353210570ed1105225e70c6c6d06e5203407aa472d95685a53b6460794408897641b8d8cd5fd6416f8b0fa36c28919bf5f0
+  languageName: node
+  linkType: hard
+
+"@carbon/layout@npm:^10.37.0, @carbon/layout@npm:^10.37.1":
+  version: 10.37.1
+  resolution: "@carbon/layout@npm:10.37.1"
+  checksum: baabf7e70e4779f0e5000e700bcafe96f272debaac490a4345e39fedf8d0970636f7099e2607aeb9ca6170a56bbacdff69d8181c2a46ed8adac38fadc08332b6
+  languageName: node
+  linkType: hard
+
+"@carbon/themes-examples-preview-v10@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "@carbon/themes-examples-preview-v10@workspace:."
+  dependencies:
+    "@carbon/grid": ^10.43.1
+    "@carbon/themes": ^10.54.0
+    "@parcel/transformer-sass": ^2.0.1
+    classnames: ^2.2.6
+    parcel: ^2.0.1
+    react: ^16.13.1
+    react-dom: ^16.13.1
+  languageName: unknown
+  linkType: soft
+
+"@carbon/themes@npm:^10.54.0":
+  version: 10.54.0
+  resolution: "@carbon/themes@npm:10.54.0"
+  dependencies:
+    "@carbon/colors": ^10.37.0
+    "@carbon/layout": ^10.37.0
+    "@carbon/type": ^10.44.0
+    color: ^3.1.2
+  checksum: 532e52d3d9e9981513954fe611729f3fbe6dc109dca44a092e520e69c7458d9c27c5c21ca6275bde2934ade529adbfd549adf65633680bdca1ace5f07f7b8b27
+  languageName: node
+  linkType: hard
+
+"@carbon/type@npm:^10.44.0":
+  version: 10.44.0
+  resolution: "@carbon/type@npm:10.44.0"
+  dependencies:
+    "@carbon/grid": ^10.43.0
+    "@carbon/import-once": ^10.7.0
+  checksum: 58315618107527fc26315e87c924267d3f8e1ea1e9deef76327adc8822c9edca0e2b752d0e9ce8684c93a223e25c80109571476c075570ec64c31423b5d26a9f
   languageName: node
   linkType: hard
 
@@ -1158,21 +1209,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@reach/router@npm:^1.3.3":
-  version: 1.3.3
-  resolution: "@reach/router@npm:1.3.3"
-  dependencies:
-    create-react-context: 0.3.0
-    invariant: ^2.2.3
-    prop-types: ^15.6.1
-    react-lifecycles-compat: ^3.0.4
-  peerDependencies:
-    react: 15.x || 16.x || 16.4.0-alpha.0911da3
-    react-dom: 15.x || 16.x || 16.4.0-alpha.0911da3
-  checksum: eddb1fd624a10124b9df4d001e2c064b398e94276919488e546f9d429165ed21856de5fab1150b7ea8e1465e76224cfb6270d439e785cb012b68002344ec4ed3
-  languageName: node
-  linkType: hard
-
 "@swc/helpers@npm:^0.2.11":
   version: 0.2.14
   resolution: "@swc/helpers@npm:0.2.14"
@@ -1950,17 +1986,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clipboard@npm:^2.0.0":
-  version: 2.0.6
-  resolution: "clipboard@npm:2.0.6"
-  dependencies:
-    good-listener: ^1.2.2
-    select: ^1.1.2
-    tiny-emitter: ^2.0.0
-  checksum: e0eeef536344b2334fd8b0b5969e63e094051891c7e14643e47f67779aef06491e4cecbd73b21295764235aa829534fa812134ea8920537dd6a90cad68acd11f
-  languageName: node
-  linkType: hard
-
 "clone@npm:^1.0.2":
   version: 1.0.4
   resolution: "clone@npm:1.0.4"
@@ -1982,7 +2007,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-convert@npm:^1.9.0":
+"color-convert@npm:^1.9.0, color-convert@npm:^1.9.3":
   version: 1.9.3
   resolution: "color-convert@npm:1.9.3"
   dependencies:
@@ -2007,10 +2032,30 @@ __metadata:
   languageName: node
   linkType: hard
 
-"color-name@npm:~1.1.4":
+"color-name@npm:^1.0.0, color-name@npm:~1.1.4":
   version: 1.1.4
   resolution: "color-name@npm:1.1.4"
   checksum: b0445859521eb4021cd0fb0cc1a75cecf67fceecae89b63f62b201cca8d345baf8b952c966862a9d9a2632987d4f6581f0ec8d957dfacece86f0a7919316f610
+  languageName: node
+  linkType: hard
+
+"color-string@npm:^1.6.0":
+  version: 1.9.0
+  resolution: "color-string@npm:1.9.0"
+  dependencies:
+    color-name: ^1.0.0
+    simple-swizzle: ^0.2.2
+  checksum: 93c6678b847f8cfa47d19677fd19e1d4b19d7a33f100644400357c298266080b5bca64e5f874fa8ac8cc0aa0606ad44f7a838b4e6fd05e6affea190a68555bb4
+  languageName: node
+  linkType: hard
+
+"color@npm:^3.1.2":
+  version: 3.2.1
+  resolution: "color@npm:3.2.1"
+  dependencies:
+    color-convert: ^1.9.3
+    color-string: ^1.6.0
+  checksum: f81220e8b774d35865c2561be921f5652117638dcda7ca4029262046e37fc2444ac7bbfdd110cf1fd9c074a4ee5eda8f85944ffbdda26186b602dd9bb05f6400
   languageName: node
   linkType: hard
 
@@ -2175,19 +2220,6 @@ __metadata:
     safe-buffer: ^5.0.1
     sha.js: ^2.4.8
   checksum: ba12bb2257b585a0396108c72830e85f882ab659c3320c83584b1037f8ab72415095167ced80dc4ce8e446a8ecc4b2acf36d87befe0707d73b26cf9dc77440ed
-  languageName: node
-  linkType: hard
-
-"create-react-context@npm:0.3.0":
-  version: 0.3.0
-  resolution: "create-react-context@npm:0.3.0"
-  dependencies:
-    gud: ^1.0.0
-    warning: ^4.0.3
-  peerDependencies:
-    prop-types: ^15.0.0
-    react: ^0.14.0 || ^15.0.0 || ^16.0.0
-  checksum: e59b7a65671e59f5b11e06f67faadf0733ab6c33247d5631331aeb05450d180b8ae44d73817b9c02f1527654ba490ea3d3dd7320f8d6debb36776f10b0ae6a47
   languageName: node
   linkType: hard
 
@@ -2464,13 +2496,6 @@ __metadata:
   version: 1.0.0
   resolution: "delayed-stream@npm:1.0.0"
   checksum: 46fe6e83e2cb1d85ba50bd52803c68be9bd953282fa7096f51fc29edd5d67ff84ff753c51966061e5ba7cb5e47ef6d36a91924eddb7f3f3483b1c560f77a0020
-  languageName: node
-  linkType: hard
-
-"delegate@npm:^3.1.2":
-  version: 3.2.0
-  resolution: "delegate@npm:3.2.0"
-  checksum: d943058fe05897228b158cbd1bab05164df28c8f54127873231d6b03b0a5acc1b3ee1f98ac70ccc9b79cd84aa47118a7de111fee2923753491583905069da27d
   languageName: node
   linkType: hard
 
@@ -3250,15 +3275,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"good-listener@npm:^1.2.2":
-  version: 1.2.2
-  resolution: "good-listener@npm:1.2.2"
-  dependencies:
-    delegate: ^3.1.2
-  checksum: f39fb82c4e41524f56104cfd2d7aef1a88e72f3f75139115fbdf98cc7d844e0c1b39218b2e83438c6188727bf904ed78c7f0f2feff67b32833bc3af7f0202b33
-  languageName: node
-  linkType: hard
-
 "graceful-fs@npm:^4.1.2, graceful-fs@npm:^4.2.4":
   version: 4.2.8
   resolution: "graceful-fs@npm:4.2.8"
@@ -3270,29 +3286,6 @@ fsevents@~2.3.2:
   version: 4.2.6
   resolution: "graceful-fs@npm:4.2.6"
   checksum: 792e64aafda05a151289f83eaa16aff34ef259658cefd65393883d959409f5a2389b0ec9ebf28f3d21f1b0ddc8f594a1162ae9b18e2b507a6799a70706ec573d
-  languageName: node
-  linkType: hard
-
-"grid-basic-example@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "grid-basic-example@workspace:."
-  dependencies:
-    "@carbon/grid": ^11.9.0
-    "@parcel/transformer-sass": ^2.0.1
-    "@reach/router": ^1.3.3
-    classnames: ^2.2.6
-    parcel: ^2.0.1
-    prettify-xml: ^1.2.0
-    prismjs: ^1.20.0
-    react: ^16.13.1
-    react-dom: ^16.13.1
-  languageName: unknown
-  linkType: soft
-
-"gud@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "gud@npm:1.0.0"
-  checksum: 3e2eb37cf794364077c18f036d6aa259c821c7fd188f2b7935cb00d589d82a41e0ebb1be809e1a93679417f62f1ad0513e745c3cf5329596e489aef8c5e5feae
   languageName: node
   linkType: hard
 
@@ -3682,15 +3675,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"invariant@npm:^2.2.3":
-  version: 2.2.4
-  resolution: "invariant@npm:2.2.4"
-  dependencies:
-    loose-envify: ^1.0.0
-  checksum: cc3182d793aad82a8d1f0af697b462939cb46066ec48bbf1707c150ad5fad6406137e91a262022c269702e01621f35ef60269f6c0d7fd178487959809acdfb14
-  languageName: node
-  linkType: hard
-
 "ip@npm:^1.1.5":
   version: 1.1.5
   resolution: "ip@npm:1.1.5"
@@ -3719,6 +3703,13 @@ fsevents@~2.3.2:
   version: 0.2.1
   resolution: "is-arrayish@npm:0.2.1"
   checksum: eef4417e3c10e60e2c810b6084942b3ead455af16c4509959a27e490e7aee87cfb3f38e01bbde92220b528a0ee1a18d52b787e1458ee86174d8c7f0e58cd488f
+  languageName: node
+  linkType: hard
+
+"is-arrayish@npm:^0.3.1":
+  version: 0.3.2
+  resolution: "is-arrayish@npm:0.3.2"
+  checksum: 977e64f54d91c8f169b59afcd80ff19227e9f5c791fa28fa2e5bce355cbaf6c2c356711b734656e80c9dd4a854dd7efcf7894402f1031dfc5de5d620775b4d5f
   languageName: node
   linkType: hard
 
@@ -4309,7 +4300,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"loose-envify@npm:^1.0.0, loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
+"loose-envify@npm:^1.1.0, loose-envify@npm:^1.4.0":
   version: 1.4.0
   resolution: "loose-envify@npm:1.4.0"
   dependencies:
@@ -4893,9 +4884,9 @@ fsevents@~2.3.2:
   linkType: hard
 
 "ordered-binary@npm:^1.0.0":
-  version: 1.2.1
-  resolution: "ordered-binary@npm:1.2.1"
-  checksum: 736f9b228a916af18156adcce309049f171129a08728b5f7041fa2f52706588b668b5ca67613cdfa210cc93300b11960fc56faa101554e98efe1053ec9da1e7b
+  version: 1.2.2
+  resolution: "ordered-binary@npm:1.2.2"
+  checksum: 0e50656ee06d49a261054d8ca9098fa499f8972ca627459c6e0a246e1d72f5f316f5bcf44e75de84f6f9e765dbf09b1f4addae4ae33f22b45aeed28e743ea843
   languageName: node
   linkType: hard
 
@@ -5658,25 +5649,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"prettify-xml@npm:^1.2.0":
-  version: 1.2.0
-  resolution: "prettify-xml@npm:1.2.0"
-  checksum: 148ea564be7af7d936b05b10c38e91846352397be9cdda9b304f2a3f1a2b6fa175e4dc9f377e54a35180688da1495f760103ffda4b2f5556c98c784b890eb349
-  languageName: node
-  linkType: hard
-
-"prismjs@npm:^1.20.0":
-  version: 1.20.0
-  resolution: "prismjs@npm:1.20.0"
-  dependencies:
-    clipboard: ^2.0.0
-  dependenciesMeta:
-    clipboard:
-      optional: true
-  checksum: 27ec30e90745da01e3de235f2ebed082d72a377a4abd2b4f421380d8af456799011422241c2e6867afabf86d4bbd4f9d725c50574bc2e554367f3258483ebd2c
-  languageName: node
-  linkType: hard
-
 "process-nextick-args@npm:~2.0.0":
   version: 2.0.1
   resolution: "process-nextick-args@npm:2.0.1"
@@ -5708,7 +5680,7 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"prop-types@npm:^15.6.1, prop-types@npm:^15.6.2":
+"prop-types@npm:^15.6.2":
   version: 15.7.2
   resolution: "prop-types@npm:15.7.2"
   dependencies:
@@ -5847,13 +5819,6 @@ fsevents@~2.3.2:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
-  languageName: node
-  linkType: hard
-
-"react-lifecycles-compat@npm:^3.0.4":
-  version: 3.0.4
-  resolution: "react-lifecycles-compat@npm:3.0.4"
-  checksum: a904b0fc0a8eeb15a148c9feb7bc17cec7ef96e71188280061fc340043fd6d8ee3ff233381f0e8f95c1cf926210b2c4a31f38182c8f35ac55057e453d6df204f
   languageName: node
   linkType: hard
 
@@ -6145,13 +6110,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"select@npm:^1.1.2":
-  version: 1.1.2
-  resolution: "select@npm:1.1.2"
-  checksum: 4346151e94f226ea6131e44e68e6d837f3fdee64831b756dd657cc0b02f4cb5107f867cb34a1d1216ab7737d0bf0645d44546afb030bbd8d64e891f5e4c4814e
-  languageName: node
-  linkType: hard
-
 "semver@npm:^5.4.1, semver@npm:^5.5.0, semver@npm:^5.7.0":
   version: 5.7.1
   resolution: "semver@npm:5.7.1"
@@ -6254,6 +6212,15 @@ fsevents@~2.3.2:
   version: 3.0.3
   resolution: "signal-exit@npm:3.0.3"
   checksum: f0169d3f1263d06df32ca072b0bf33b34c6f8f0341a7a1621558a2444dfbe8f5fec76b35537fcc6f0bc4944bdb5336fe0bdcf41a5422c4e45a1dba3f45475e6c
+  languageName: node
+  linkType: hard
+
+"simple-swizzle@npm:^0.2.2":
+  version: 0.2.2
+  resolution: "simple-swizzle@npm:0.2.2"
+  dependencies:
+    is-arrayish: ^0.3.1
+  checksum: a7f3f2ab5c76c4472d5c578df892e857323e452d9f392e1b5cf74b74db66e6294a1e1b8b390b519fa1b96b5b613f2a37db6cffef52c3f1f8f3c5ea64eb2d54c0
   languageName: node
   linkType: hard
 
@@ -6688,13 +6655,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"tiny-emitter@npm:^2.0.0":
-  version: 2.1.0
-  resolution: "tiny-emitter@npm:2.1.0"
-  checksum: fbcfb5145751a0e3b109507a828eb6d6d4501352ab7bb33eccef46e22e9d9ad3953158870a6966a59e57ab7c3f9cfac7cab8521db4de6a5e757012f4677df2dd
-  languageName: node
-  linkType: hard
-
 "to-fast-properties@npm:^2.0.0":
   version: 2.0.0
   resolution: "to-fast-properties@npm:2.0.0"
@@ -6978,15 +6938,6 @@ fsevents@~2.3.2:
   languageName: node
   linkType: hard
 
-"warning@npm:^4.0.3":
-  version: 4.0.3
-  resolution: "warning@npm:4.0.3"
-  dependencies:
-    loose-envify: ^1.0.0
-  checksum: 4f2cb6a9575e4faf71ddad9ad1ae7a00d0a75d24521c193fa464f30e6b04027bd97aa5d9546b0e13d3a150ab402eda216d59c1d0f2d6ca60124d96cd40dfa35c
-  languageName: node
-  linkType: hard
-
 "wcwidth@npm:^1.0.1":
   version: 1.0.1
   resolution: "wcwidth@npm:1.0.1"
@@ -6997,9 +6948,9 @@ fsevents@~2.3.2:
   linkType: hard
 
 "weak-lru-cache@npm:^1.0.0":
-  version: 1.1.4
-  resolution: "weak-lru-cache@npm:1.1.4"
-  checksum: 4d18fa26eb93ff4c0145a793b10889b97f2b5d2a7ecacce3f3d263a0f1484764b536b4a22369c13b87eff7413127d04e809378609709585b3c0fa79bc9b257d8
+  version: 1.2.0
+  resolution: "weak-lru-cache@npm:1.2.0"
+  checksum: 1a0270675529d180b08d84dc60bd728a6ff9bbbe2a58df599e7748794c148b33fe7bea15153a465505c37fb41514471dc4d09c3445b3469e5ede12e63f7e9d60
   languageName: node
   linkType: hard
 

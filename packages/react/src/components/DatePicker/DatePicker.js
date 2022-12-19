@@ -6,7 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+} from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
@@ -447,6 +452,15 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     };
   }, [savedOnChange, savedOnClose, savedOnOpen, readOnly]); //eslint-disable-line react-hooks/exhaustive-deps
+
+  // this hook allows consumers to access the flatpickr calendar
+  // instance for cases where functions like open() or close()
+  // need to be imperatively called on the calendar
+  useImperativeHandle(ref, () => ({
+    get calendar() {
+      return calendarRef.current;
+    },
+  }));
 
   useEffect(() => {
     if (calendarRef?.current?.set) {

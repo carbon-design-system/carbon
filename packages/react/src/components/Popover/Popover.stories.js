@@ -7,9 +7,8 @@
 
 import './story.scss';
 import { Checkbox } from '@carbon/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 import { Popover, PopoverContent } from '../Popover';
-import Button from '../Button';
 import mdx from './Popover.mdx';
 
 export default {
@@ -183,46 +182,6 @@ export const AutoAlign = () => {
           </PopoverContent>
         </Popover>
       </div>
-    </div>
-  );
-};
-
-export const OverlayStackingContextsExample = () => {
-  const [open, setOpen] = useState(false);
-  const [open2, setOpen2] = useState(false);
-
-  return (
-    <div style={{ margin: '4rem' }}>
-      <Button kind="ghost">
-        Higher sibling elements are properly overlaid
-      </Button>
-      <br />
-      <Popover open={open} align="top">
-        <button
-          type="button"
-          onClick={() => {
-            setOpen(!open);
-          }}>
-          Toggle up popover
-        </button>
-        <PopoverContent>
-          <div style={{ padding: '1.5rem' }}>Popover content</div>
-        </PopoverContent>
-      </Popover>
-      <Popover open={open2}>
-        <button
-          type="button"
-          onClick={() => {
-            setOpen2(!open2);
-          }}>
-          Toggle down popover
-        </button>
-        <PopoverContent>
-          <div style={{ padding: '1.5rem' }}>Popover content</div>
-        </PopoverContent>
-      </Popover>
-      <br />
-      <Button kind="ghost">and lower sibling elements are also overlaid</Button>
     </div>
   );
 };
