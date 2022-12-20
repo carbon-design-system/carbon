@@ -83,6 +83,8 @@ const files = [
   'scss/components/fluid-multiselect/_index.scss',
   'scss/components/fluid-number-input/_fluid-number-input.scss',
   'scss/components/fluid-number-input/_index.scss',
+  'scss/components/fluid-search/_fluid-search.scss',
+  'scss/components/fluid-search/_index.scss',
   'scss/components/fluid-select/_fluid-select.scss',
   'scss/components/fluid-select/_index.scss',
   'scss/components/fluid-text-area/_fluid-text-area.scss',
