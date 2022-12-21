@@ -144,6 +144,11 @@ export default class Slider extends PureComponent {
     onRelease: PropTypes.func,
 
     /**
+     * Whether the slider should be read-only
+     */
+    readOnly: PropTypes.bool,
+
+    /**
      * `true` to specify if the control is required.
      */
     required: PropTypes.bool,
@@ -176,6 +181,7 @@ export default class Slider extends PureComponent {
     ariaLabelInput: FeatureFlags.enabled('enable-v11-release')
       ? undefined
       : 'Slider number input',
+    readOnly: false,
   };
 
   static contextType = FeatureFlagContext;
@@ -186,6 +192,12 @@ export default class Slider extends PureComponent {
     needsOnRelease: false,
     isValid: true,
   };
+
+  constructor(props) {
+    super(props);
+    this.thumbRef = React.createRef();
+    this.filledTrackRef = React.createRef();
+  }
 
   /**
    * Sets up initial slider position and value in response to component mount.
@@ -210,6 +222,12 @@ export default class Slider extends PureComponent {
   componentDidUpdate(prevProps, prevState) {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
+
+    this.thumbRef.current.style.left = `${this.state.left}%`;
+    this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
+      this.state.left / 100
+    })`;
+
     if (
       this.state.value !== '' &&
       prevState.value !== this.state.value &&
@@ -267,7 +285,7 @@ export default class Slider extends PureComponent {
    */
   onDragStart = (evt) => {
     // Do nothing if component is disabled
-    if (this.props.disabled) {
+    if (this.props.disabled || this.props.readOnly) {
       return;
     }
 
@@ -292,7 +310,7 @@ export default class Slider extends PureComponent {
    */
   onDragStop = () => {
     // Do nothing if component is disabled
-    if (this.props.disabled) {
+    if (this.props.disabled || this.props.readOnly) {
       return;
     }
 
@@ -318,7 +336,7 @@ export default class Slider extends PureComponent {
    */
   _onDrag = (evt) => {
     // Do nothing if component is disabled or we have no event
-    if (this.props.disabled || !evt) {
+    if (this.props.disabled || this.props.readOnly || !evt) {
       return;
     }
 
@@ -357,7 +375,7 @@ export default class Slider extends PureComponent {
    */
   onKeyDown = (evt) => {
     // Do nothing if component is disabled or we don't have a valid event
-    if (this.props.disabled || !('which' in evt)) {
+    if (this.props.disabled || this.props.readOnly || !('which' in evt)) {
       return;
     }
 
@@ -401,7 +419,7 @@ export default class Slider extends PureComponent {
 
   onChange = (evt) => {
     // Do nothing if component is disabled
-    if (this.props.disabled) {
+    if (this.props.disabled || this.props.readOnly) {
       return;
     }
 
@@ -551,13 +569,14 @@ export default class Slider extends PureComponent {
       disabled,
       name,
       light,
+      readOnly,
       ...other
     } = this.props;
 
     delete other.onRelease;
     delete other.invalid;
 
-    const { value, left, isValid } = this.state;
+    const { value, isValid } = this.state;
 
     const scope = this.context;
     let enabled;
@@ -577,6 +596,7 @@ export default class Slider extends PureComponent {
           const sliderClasses = classNames(
             `${prefix}--slider`,
             { [`${prefix}--slider--disabled`]: disabled },
+            { [`${prefix}--slider--readonly`]: readOnly },
             [enabled ? null : className]
           );
 
@@ -586,18 +606,9 @@ export default class Slider extends PureComponent {
             {
               [`${prefix}--text-input--light`]: light,
               [`${prefix}--text-input--invalid`]: isValid === false,
+              [`${prefix}--slider-text-input--hidden`]: hideTextInput,
             }
           );
-
-          const filledTrackStyle = {
-            transform: `translate(0%, -50%) scaleX(${left / 100})`,
-          };
-          const thumbStyle = {
-            left: `${left}%`,
-          };
-          const hiddenInputStyle = {
-            display: 'none',
-          };
 
           return (
             <div
@@ -629,12 +640,12 @@ export default class Slider extends PureComponent {
                     className={`${prefix}--slider__thumb`}
                     role="slider"
                     id={id}
-                    tabIndex={0}
+                    tabIndex={!readOnly ? 0 : -1}
                     aria-valuemax={max}
                     aria-valuemin={min}
                     aria-valuenow={value}
-                    style={thumbStyle}
                     aria-labelledby={labelId}
+                    ref={this.thumbRef}
                   />
                   <div
                     className={`${prefix}--slider__track`}
@@ -644,7 +655,7 @@ export default class Slider extends PureComponent {
                   />
                   <div
                     className={`${prefix}--slider__filled-track`}
-                    style={filledTrackStyle}
+                    ref={this.filledTrackRef}
                   />
                 </div>
                 <span className={`${prefix}--slider__range-label`}>
@@ -652,7 +663,6 @@ export default class Slider extends PureComponent {
                 </span>
                 <input
                   type={hideTextInput ? 'hidden' : inputType}
-                  style={hideTextInput ? hiddenInputStyle : null}
                   id={`${id}-input-for-slider`}
                   name={name}
                   className={inputClasses}
@@ -669,6 +679,7 @@ export default class Slider extends PureComponent {
                   onKeyUp={this.onInputKeyUp}
                   data-invalid={isValid ? null : true}
                   aria-invalid={isValid ? null : true}
+                  readOnly={readOnly}
                 />
               </div>
             </div>

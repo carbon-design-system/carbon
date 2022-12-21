@@ -96,18 +96,6 @@ describe('ComboBox', () => {
             items={items}
             itemToString={(item) => (item ? item.text : '')}
             placeholder="Filter..."
-            titleText="Light combobox"
-            helperText="Combobox helper text"
-            light
-          />
-        </div>
-        <div style={{ marginBottom: '2rem' }}>
-          <ComboBox
-            onChange={() => {}}
-            id="carbon-combobox"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            placeholder="Filter..."
             titleText="Combobox with warning state"
             helperText="Combobox helper text"
             warn

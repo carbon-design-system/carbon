@@ -31,9 +31,28 @@
     top: rem(13px);
     left: $spacing-05;
     display: flex;
+    width: calc(100% - 2rem);
     height: rem(16px);
     align-items: center;
     margin: 0;
+  }
+
+  .#{$prefix}--text-input--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--text-input--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
   }
 
   .#{$prefix}--text-input--fluid .#{$prefix}--form__helper-text {
@@ -145,21 +164,25 @@
   // Skeleton
   .#{$prefix}--text-input--fluid__skeleton {
     position: relative;
-    height: 100%;
-    padding: $spacing-05;
+    height: rem(64px);
     border-bottom: 1px solid $skeleton-element;
     background: $skeleton-background;
   }
 
   .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--skeleton {
-    height: 0.5rem;
+    position: absolute;
+    top: $spacing-05;
+    left: $spacing-05;
+    width: 25%;
+    height: rem(8px);
   }
 
   .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--label {
-    margin-bottom: $spacing-04;
-  }
-
-  .#{$prefix}--text-input--fluid__skeleton .#{$prefix}--text-input {
-    width: 80%;
+    position: absolute;
+    top: rem(36px);
+    left: $spacing-05;
+    width: 50%;
+    height: rem(8px);
+    padding: 0;
   }
 }

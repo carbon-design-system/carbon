@@ -24,6 +24,13 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    light: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Simple = () => (
@@ -191,9 +198,9 @@ export const RangeWithCalendarWithLayer = () => {
 
 export const Skeleton = () => <DatePickerSkeleton range />;
 
-export const Playground = (args) => {
+export const Playground = ({ readOnly, ...args }) => {
   return (
-    <DatePicker datePickerType="single" {...args}>
+    <DatePicker datePickerType="single" {...args} readOnly={readOnly}>
       <DatePickerInput
         placeholder="mm/dd/yyyy"
         labelText="Date Picker label"
@@ -244,11 +251,6 @@ Playground.argTypes = {
       disable: true,
     },
   },
-  light: {
-    table: {
-      disable: true,
-    },
-  },
   locale: {
     table: {
       disable: true,
@@ -262,6 +264,11 @@ Playground.argTypes = {
   },
   onOpen: {
     action: 'clicked',
+  },
+  readOnly: {
+    control: {
+      type: 'boolean',
+    },
   },
   value: {
     table: {

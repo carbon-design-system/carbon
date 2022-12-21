@@ -8,12 +8,13 @@
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useContext } from 'react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { FormContext } from '../FluidForm';
 
 export const translationIds = {
   'increment.number': 'increment.number',
@@ -31,6 +32,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     allowEmpty = false,
     className: customClassName,
     disabled = false,
+    disableWheel: disableWheelProp = false,
     defaultValue,
     helperText = '',
     hideLabel = false,
@@ -41,8 +43,8 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     invalid = false,
     invalidText = enabled ? undefined : 'Provide invalidText',
     light,
-    max,
-    min,
+    max = 100,
+    min = 0,
     onChange,
     onClick,
     onKeyUp,
@@ -56,6 +58,8 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     ...rest
   } = props;
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
+  const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState(() => {
     if (controlledValue !== undefined) {
       return controlledValue;
@@ -106,7 +110,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     [`${prefix}--number__invalid`]:
       normalizedProps.invalid || normalizedProps.warn,
     [`${prefix}--number__invalid--warning`]: normalizedProps.warn,
-    [`${prefix}--number__readonly-icon`]: readOnly,
   });
 
   if (controlledValue !== prevControlledValue) {
@@ -138,8 +141,27 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
   }
 
+  const handleFocus = (evt) => {
+    if (evt.target.type === 'button') {
+      setIsFocused(false);
+    } else {
+      setIsFocused(evt.type === 'focus' ? true : false);
+    }
+  };
+
+  const outerElementClasses = cx(`${prefix}--form-item`, {
+    [customClassName]: enabled,
+    [`${prefix}--number-input--fluid--invalid`]:
+      isFluid && normalizedProps.invalid,
+    [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
+    [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
+  });
+
   return (
-    <div className={cx(`${prefix}--form-item`, { [customClassName]: enabled })}>
+    <div
+      className={outerElementClasses}
+      onFocus={isFluid ? handleFocus : null}
+      onBlur={isFluid ? handleFocus : null}>
       <div
         className={numberInputClasses}
         data-invalid={normalizedProps.invalid ? true : undefined}>
@@ -163,6 +185,24 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             onClick={onClick}
             onChange={handleOnChange}
             onKeyUp={onKeyUp}
+            onFocus={(e) => {
+              if (disableWheelProp) {
+                e.target.addEventListener('wheel', disableWheel);
+              }
+
+              if (rest.onFocus) {
+                rest.onFocus(e);
+              }
+            }}
+            onBlur={(e) => {
+              if (disableWheelProp) {
+                e.target.removeEventListener('wheel', disableWheel);
+              }
+
+              if (rest.onBlur) {
+                rest.onBlur(e);
+              }
+            }}
             pattern="[0-9]*"
             readOnly={readOnly}
             step={step}
@@ -177,7 +217,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
               <button
                 aria-label={decrementNumLabel || iconDescription}
                 className={`${prefix}--number__control-btn down-icon`}
-                disabled={disabled}
+                disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
                     value: clamp(max, min, parseInt(value) - step),
@@ -202,7 +242,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
               <button
                 aria-label={incrementNumLabel || iconDescription}
                 className={`${prefix}--number__control-btn up-icon`}
-                disabled={disabled}
+                disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
                     value: clamp(max, min, parseInt(value) + step),
@@ -227,6 +267,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             </div>
           )}
         </div>
+        {isFluid && <hr className={`${prefix}--number-input__divider`} />}
         {normalizedProps.validation ? (
           normalizedProps.validation
         ) : (
@@ -252,6 +293,11 @@ NumberInput.propTypes = {
    * Optional starting value for uncontrolled state
    */
   defaultValue: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+  /**
+   * Specify if the wheel functionality for the input should be disabled, or not
+   */
+  disableWheel: PropTypes.bool,
 
   /**
    * Specify if the control should be disabled, or not
@@ -440,6 +486,24 @@ function getInputValidity({ allowEmpty, invalid, value, max, min }) {
   }
 
   return true;
+}
+
+/**
+ * It prevents any wheel event from emitting.
+ *
+ * We want to prevent this input field from changing by the user accidentally
+ * when the user scrolling up or down in a long form. So we prevent the default
+ * behavior of wheel events when it is focused.
+ *
+ * Because React uses passive event handler by default, we can't just call
+ * `preventDefault` in the `onWheel` event handler. So we have to get the input
+ * ref and add our event handler manually.
+ *
+ * @see https://github.com/facebook/react/pull/19654
+ * @param {WheelEvent} e A wheel event.
+ */
+function disableWheel(e) {
+  e.preventDefault();
 }
 
 /**

@@ -53,11 +53,7 @@ exports[`AccordionSkeleton should render 1`] = `
         >
           <p
             className="cds--skeleton__text cds--accordion__title"
-            style={
-              Object {
-                "width": "100%",
-              }
-            }
+            key="0"
           />
         </SkeletonText>
       </span>
@@ -72,11 +68,7 @@ exports[`AccordionSkeleton should render 1`] = `
         >
           <p
             className="cds--skeleton__text"
-            style={
-              Object {
-                "width": "90%",
-              }
-            }
+            key="0"
           />
         </SkeletonText>
         <SkeletonText
@@ -87,11 +79,7 @@ exports[`AccordionSkeleton should render 1`] = `
         >
           <p
             className="cds--skeleton__text"
-            style={
-              Object {
-                "width": "80%",
-              }
-            }
+            key="0"
           />
         </SkeletonText>
         <SkeletonText
@@ -102,11 +90,7 @@ exports[`AccordionSkeleton should render 1`] = `
         >
           <p
             className="cds--skeleton__text"
-            style={
-              Object {
-                "width": "95%",
-              }
-            }
+            key="0"
           />
         </SkeletonText>
       </div>
@@ -158,11 +142,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <p
               className="cds--skeleton__text cds--accordion__title"
-              style={
-                Object {
-                  "width": "100%",
-                }
-              }
+              key="0"
             />
           </SkeletonText>
         </span>
@@ -215,11 +195,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <p
               className="cds--skeleton__text cds--accordion__title"
-              style={
-                Object {
-                  "width": "100%",
-                }
-              }
+              key="0"
             />
           </SkeletonText>
         </span>
@@ -272,11 +248,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <p
               className="cds--skeleton__text cds--accordion__title"
-              style={
-                Object {
-                  "width": "100%",
-                }
-              }
+              key="0"
             />
           </SkeletonText>
         </span>

@@ -156,7 +156,7 @@ If they are, remove the question label, label as a `type: enhancement 💡` or
 <details>
 <summary>Is there a duplicate question?</summary>
 
-We tend to recieve more questions through Slack than through Github so with any
+We tend to recieve more questions through Slack than through GitHub so with any
 incoming question issues, search in both places to see if it has already been
 answered. If you can find an answer, point the author to where they can find it
 and close the issue.
@@ -389,7 +389,7 @@ that can be particularly helpful:
 ### Alerting a team or subject matter expert
 
 Sometimes an issue comes in that is highly technical or about subject matter
-you're unfamiliar with. Nothing wrong with that! Using Github ping system you
+you're unfamiliar with. Nothing wrong with that! Using GitHub ping system you
 can alert specific sub-teams on Carbon:
 
 - @carbon-design-system/design

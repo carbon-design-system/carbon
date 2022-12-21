@@ -16,6 +16,7 @@ import {
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
+import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
@@ -55,6 +56,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     initialSelectedItem,
     selectedItem: controlledSelectedItem,
     downshiftProps,
+    readOnly,
     ...other
   },
   ref
@@ -101,6 +103,7 @@ const Dropdown = React.forwardRef(function Dropdown(
       [`${prefix}--dropdown--inline`]: inline,
       [`${prefix}--dropdown--disabled`]: disabled,
       [`${prefix}--dropdown--light`]: light,
+      [`${prefix}--dropdown--readonly`]: readOnly,
       [`${prefix}--dropdown--${size}`]: size,
       [`${prefix}--list-box--up`]: direction === 'top',
     }
@@ -151,6 +154,24 @@ const Dropdown = React.forwardRef(function Dropdown(
     setIsFocused(evt.type === 'focus' ? true : false);
   };
 
+  const readOnlyEventHandlers = readOnly
+    ? {
+        onClick: (evt) => {
+          // NOTE: does not prevent click
+          evt.preventDefault();
+          // focus on the element as per readonly input behavior
+          evt.target.focus();
+        },
+        onKeyDown: (evt) => {
+          const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+          // This prevents the select from opening for the above keys
+          if (selectAccessKeys.includes(evt.key)) {
+            evt.preventDefault();
+          }
+        },
+      }
+    : {};
+
   return (
     <div className={wrapperClasses} {...other}>
       {titleText && (
@@ -183,9 +204,10 @@ const Dropdown = React.forwardRef(function Dropdown(
           type="button"
           className={`${prefix}--list-box__field`}
           disabled={disabled}
-          aria-disabled={disabled}
+          aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
           title={selectedItem ? itemToString(selectedItem) : label}
           {...toggleButtonProps}
+          {...readOnlyEventHandlers}
           ref={mergeRefs(toggleButtonProps.ref, ref)}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem
@@ -328,13 +350,22 @@ Dropdown.propTypes = {
   /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `Dropdown` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * `onChange` is a utility for this controlled component to communicate to a
    * consuming component what kind of internal state changes are occurring.
    */
   onChange: PropTypes.func,
+
+  /**
+   * Whether or not the Dropdown is readonly
+   */
+  readOnly: PropTypes.bool,
 
   /**
    * An optional callback to render the currently selected item as a react element instead of only
@@ -388,7 +419,6 @@ Dropdown.defaultProps = {
   type: 'default',
   itemToString: defaultItemToString,
   itemToElement: null,
-  light: false,
   titleText: '',
   helperText: '',
   direction: 'bottom',

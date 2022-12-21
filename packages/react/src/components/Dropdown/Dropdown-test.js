@@ -122,14 +122,6 @@ describe('Dropdown', () => {
     });
   });
 
-  it('should specify light version as expected', () => {
-    render(<Dropdown light={true} {...mockProps} />);
-
-    expect(document.querySelector('.cds--list-box')).toHaveClass(
-      'cds--dropdown--light'
-    );
-  });
-
   it('should let the user select an option by clicking on the option node', () => {
     render(<Dropdown {...mockProps} />);
     openMenu();
@@ -150,6 +142,19 @@ describe('Dropdown', () => {
     expect(mockProps.onChange).toHaveBeenCalledWith({
       selectedItem: mockProps.items[1],
     });
+  });
+
+  it('should respect readOnly prop', () => {
+    render(<Dropdown {...mockProps} readOnly={true} />);
+    openMenu(); // menu should not open
+    assertMenuClosed();
+
+    openMenu(); // menu should not open
+    expect(screen.queryByText('Item 0')).toBeNull();
+    expect(mockProps.onChange).toHaveBeenCalledTimes(0);
+    assertMenuClosed();
+
+    mockProps.onChange.mockClear();
   });
 
   describe('should display initially selected item found in `initialSelectedItem`', () => {

@@ -6,7 +6,12 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useEffect, useRef } from 'react';
+import React, {
+  useContext,
+  useEffect,
+  useRef,
+  useImperativeHandle,
+} from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
 import l10n from 'flatpickr/dist/l10n/index';
@@ -14,9 +19,12 @@ import DatePickerInput from '../DatePickerInput';
 import carbonFlatpickrAppendToPlugin from './plugins/appendToPlugin';
 import carbonFlatpickrFixEventsPlugin from './plugins/fixEventsPlugin';
 import carbonFlatpickrRangePlugin from './plugins/rangePlugin';
+import deprecate from '../../prop-types/deprecate';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
+import { FormContext } from '../FluidForm';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 // Weekdays shorthand for english locale
 l10n.en.weekdays.shorthand.forEach((_day, index) => {
@@ -85,22 +93,24 @@ const carbonFlatpickrMonthSelectPlugin = (config) => (fp) => {
   };
 
   const updateCurrentMonth = () => {
-    const monthStr = monthToStr(
-      fp.currentMonth,
-      config.shorthand === true,
-      fp.l10n
-    );
-    fp.yearElements.forEach((elem) => {
-      const currentMonthContainer = elem.closest(
-        config.selectorFlatpickrMonthYearContainer
+    if (fp.monthElements) {
+      const monthStr = monthToStr(
+        fp.currentMonth,
+        config.shorthand === true,
+        fp.l10n
       );
-      Array.prototype.forEach.call(
-        currentMonthContainer.querySelectorAll('.cur-month'),
-        (monthElement) => {
-          monthElement.textContent = monthStr;
-        }
-      );
-    });
+      fp.yearElements.forEach((elem) => {
+        const currentMonthContainer = elem.closest(
+          config.selectorFlatpickrMonthYearContainer
+        );
+        Array.prototype.forEach.call(
+          currentMonthContainer.querySelectorAll('.cur-month'),
+          (monthElement) => {
+            monthElement.textContent = monthStr;
+          }
+        );
+      });
+    }
   };
 
   const register = () => {
@@ -126,12 +136,10 @@ function isLabelTextEmpty(children) {
 
 const rightArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
   <polygon points="11,8 6,13 5.3,12.3 9.6,8 5.3,3.7 6,3 "/>
-  <rect width="16" height="16" style="fill:none" />
 </svg>`;
 
 const leftArrowHTML = `<svg width="16px" height="16px" viewBox="0 0 16 16">
   <polygon points="5,8 10,3 10.7,3.7 6.4,8 10.7,12.3 10,13 "/>
-  <rect width="16" height="16" style="fill:none" />
 </svg>`;
 
 function updateClassNames(calendar, prefix) {
@@ -174,29 +182,38 @@ function updateClassNames(calendar, prefix) {
   }
 }
 
-function DatePicker({
-  allowInput,
-  appendTo,
-  children,
-  className,
-  closeOnSelect = true,
-  dateFormat = 'm/d/Y',
-  datePickerType,
-  disable,
-  enable,
-  inline,
-  light = false,
-  locale = 'en',
-  maxDate,
-  minDate,
-  onChange,
-  onClose,
-  onOpen,
-  short = false,
-  value,
-  ...rest
-}) {
+const DatePicker = React.forwardRef(function DatePicker(
+  {
+    allowInput,
+    appendTo,
+    children,
+    className,
+    closeOnSelect = true,
+    dateFormat = 'm/d/Y',
+    datePickerType,
+    disable,
+    enable,
+    inline,
+    invalid,
+    invalidText,
+    warn,
+    warnText,
+    light = false,
+    locale = 'en',
+    maxDate,
+    minDate,
+    onChange,
+    onClose,
+    onOpen,
+    readOnly = false,
+    short = false,
+    value,
+    ...rest
+  },
+  ref
+) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const startInputField = useRef(null);
   const endInputField = useRef(null);
   const calendarRef = useRef(null);
@@ -224,6 +241,7 @@ function DatePicker({
         return React.cloneElement(child, {
           datePickerType,
           ref: startInputField,
+          readOnly,
         });
       }
       if (
@@ -233,16 +251,19 @@ function DatePicker({
         return React.cloneElement(child, {
           datePickerType,
           ref: endInputField,
+          readOnly,
         });
       }
       if (index === 0) {
         return React.cloneElement(child, {
           ref: startInputField,
+          readOnly,
         });
       }
       if (index === 1) {
         return React.cloneElement(child, {
           ref: endInputField,
+          readOnly,
         });
       }
     }
@@ -259,6 +280,12 @@ function DatePicker({
 
     const onHook = (_electedDates, _dateStr, instance, prefix) => {
       updateClassNames(instance, prefix);
+      if (startInputField?.current) {
+        startInputField.current.readOnly = readOnly;
+      }
+      if (endInputField?.current) {
+        endInputField.current.readOnly = readOnly;
+      }
     };
 
     // Logic to determine if `enable` or `disable` will be passed down. If neither
@@ -317,11 +344,12 @@ function DatePicker({
           inputTo: endInputField.current,
         }),
       ],
-      clickOpens: true,
+      clickOpens: !readOnly,
+      noCalendar: readOnly,
       nextArrow: rightArrowHTML,
       prevArrow: leftArrowHTML,
       onChange: (...args) => {
-        if (savedOnChange) {
+        if (savedOnChange && !readOnly) {
           savedOnChange(...args);
         }
       },
@@ -339,6 +367,10 @@ function DatePicker({
     calendarRef.current = calendar;
 
     function handleArrowDown(event) {
+      if (match(event, keys.Escape)) {
+        calendar.calendarContainer.classList.remove('open');
+      }
+
       if (match(event, keys.ArrowDown)) {
         const {
           calendarContainer,
@@ -359,6 +391,10 @@ function DatePicker({
     }
 
     function handleOnChange() {
+      if (datePickerType == 'single') {
+        calendar.calendarContainer.classList.remove('open');
+      }
+
       if (start.value !== '') {
         return;
       }
@@ -379,15 +415,17 @@ function DatePicker({
       start.addEventListener('keydown', handleArrowDown);
       start.addEventListener('change', handleOnChange);
 
-      // Flatpickr's calendar dialog is not rendered in a landmark causing an
-      // error with IBM Equal Access Accessibility Checker so we add an aria
-      // role to the container div.
-      calendar.calendarContainer.setAttribute('role', 'application');
-      // IBM EAAC requires an aria-label on a role='region'
-      calendar.calendarContainer.setAttribute(
-        'aria-label',
-        'calendar-container'
-      );
+      if (calendar && calendar.calendarContainer) {
+        // Flatpickr's calendar dialog is not rendered in a landmark causing an
+        // error with IBM Equal Access Accessibility Checker so we add an aria
+        // role to the container div.
+        calendar.calendarContainer.setAttribute('role', 'application');
+        // IBM EAAC requires an aria-label on a role='region'
+        calendar.calendarContainer.setAttribute(
+          'aria-label',
+          'calendar-container'
+        );
+      }
     }
 
     if (end) {
@@ -413,46 +451,55 @@ function DatePicker({
         end.removeEventListener('change', handleOnChange);
       }
     };
-  }, [savedOnChange, savedOnClose, savedOnOpen]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [savedOnChange, savedOnClose, savedOnOpen, readOnly]); //eslint-disable-line react-hooks/exhaustive-deps
+
+  // this hook allows consumers to access the flatpickr calendar
+  // instance for cases where functions like open() or close()
+  // need to be imperatively called on the calendar
+  useImperativeHandle(ref, () => ({
+    get calendar() {
+      return calendarRef.current;
+    },
+  }));
 
   useEffect(() => {
-    if (calendarRef.current) {
+    if (calendarRef?.current?.set) {
       calendarRef.current.set({ dateFormat });
     }
   }, [dateFormat]);
 
   useEffect(() => {
-    if (calendarRef.current && minDate) {
+    if (calendarRef?.current?.set) {
       calendarRef.current.set('minDate', minDate);
     }
   }, [minDate]);
 
   useEffect(() => {
-    if (calendarRef.current && maxDate) {
+    if (calendarRef?.current?.set) {
       calendarRef.current.set('maxDate', maxDate);
     }
   }, [maxDate]);
 
   useEffect(() => {
-    if (calendarRef.current && disable) {
-      calendarRef.current.set('disbale', disable);
+    if (calendarRef?.current?.set && disable) {
+      calendarRef.current.set('disable', disable);
     }
   }, [disable]);
 
   useEffect(() => {
-    if (calendarRef.current && enable) {
+    if (calendarRef?.current?.set && enable) {
       calendarRef.current.set('enable', enable);
     }
   }, [enable]);
 
   useEffect(() => {
-    if (calendarRef.current && inline) {
+    if (calendarRef?.current?.set && inline) {
       calendarRef.current.set('inline', inline);
     }
   }, [inline]);
 
   useEffect(() => {
-    if (calendarRef.current) {
+    if (calendarRef?.current?.set) {
       if (value !== undefined) {
         calendarRef.current.setDate(value);
       }
@@ -463,12 +510,40 @@ function DatePicker({
     }
   }, [value, prefix]);
 
+  let fluidError;
+  if (isFluid) {
+    if (invalid) {
+      fluidError = (
+        <>
+          <WarningFilled
+            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--invalid`}
+          />
+          <hr className={`${prefix}--date-picker__divider`} />
+          <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+        </>
+      );
+    }
+
+    if (warn && !invalid) {
+      fluidError = (
+        <>
+          <WarningAltFilled
+            className={`${prefix}--date-picker__icon ${prefix}--date-picker__icon--warn`}
+          />
+          <hr className={`${prefix}--date-picker__divider`} />
+          <div className={`${prefix}--form-requirement`}>{warnText}</div>
+        </>
+      );
+    }
+  }
+
   return (
-    <div className={wrapperClasses} {...rest}>
+    <div className={wrapperClasses} ref={ref} {...rest}>
       <div className={datePickerClasses}>{childrenWithProps}</div>
+      {fluidError}
     </div>
   );
-}
+});
 
 DatePicker.propTypes = {
   /**
@@ -527,10 +602,23 @@ DatePicker.propTypes = {
   inline: PropTypes.bool,
 
   /**
+   * Specify whether or not the control is invalid (Fluid only)
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in error state (Fluid Only)
+   */
+  invalidText: PropTypes.node,
+
+  /**
    * `true` to use the light version.
    */
-  light: PropTypes.bool,
-
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `DatePicker` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
   /**
    *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
    */
@@ -627,6 +715,13 @@ DatePicker.propTypes = {
   onOpen: PropTypes.func,
 
   /**
+   * whether the DatePicker is to be readOnly
+   * if boolean applies to all inputs
+   * if array applies to each input in order
+   */
+  readOnly: PropTypes.oneOfType([PropTypes.bool, PropTypes.array]),
+
+  /**
    * `true` to use the short version.
    */
   short: PropTypes.bool,
@@ -647,6 +742,16 @@ DatePicker.propTypes = {
     PropTypes.object,
     PropTypes.number,
   ]),
+
+  /**
+   * Specify whether the control is currently in warning state (Fluid only)
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state (Fluid only)
+   */
+  warnText: PropTypes.node,
 };
 
 export default DatePicker;

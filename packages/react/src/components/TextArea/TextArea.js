@@ -6,12 +6,15 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import classNames from 'classnames';
+import deprecate from '../../prop-types/deprecate';
 import { WarningFilled } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import { useAnnouncer } from '../../internal/useAnnouncer';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -59,6 +62,7 @@ const TextArea = React.forwardRef(function TextArea(
   if (enableCounter) {
     textareaProps.maxLength = maxCount;
   }
+  let ariaAnnouncement = useAnnouncer(textCount, maxCount);
 
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
@@ -108,6 +112,15 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
+  const textareaRef = useRef();
+  useIsomorphicEffect(() => {
+    if (other.cols) {
+      textareaRef.current.style.width = null;
+    } else {
+      textareaRef.current.style.width = `100%`;
+    }
+  }, [other.cols]);
+
   const input = (
     <textarea
       {...other}
@@ -117,6 +130,8 @@ const TextArea = React.forwardRef(function TextArea(
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
+      readOnly={other.readOnly}
+      ref={textareaRef}
     />
   );
 
@@ -132,12 +147,17 @@ const TextArea = React.forwardRef(function TextArea(
         {counter}
       </div>
       <div
-        className={`${prefix}--text-area__wrapper`}
+        className={classNames(`${prefix}--text-area__wrapper`, {
+          [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+        })}
         data-invalid={invalid || null}>
         {invalid && !isFluid && (
           <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}
         {input}
+        <span className={`${prefix}--text-area__counter-alert`} role="alert">
+          {ariaAnnouncement}
+        </span>
         {isFluid && <hr className={`${prefix}--text-area__divider`} />}
         {isFluid && invalid ? error : null}
       </div>
@@ -209,7 +229,11 @@ TextArea.propTypes = {
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `TextArea` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Max character count allowed for the textarea. This is needed in order for enableCounter to display
@@ -234,6 +258,11 @@ TextArea.propTypes = {
   placeholder: PropTypes.string,
 
   /**
+   * Whether the textarea should be read-only
+   */
+  readOnly: PropTypes.bool,
+
+  /**
    * Specify the rows attribute for the `<textarea>`
    */
   rows: PropTypes.number,
@@ -250,11 +279,9 @@ TextArea.defaultProps = {
   onClick: () => {},
   placeholder: '',
   rows: 4,
-  cols: 50,
   invalid: false,
   invalidText: '',
   helperText: '',
-  light: false,
   enableCounter: false,
   maxCount: undefined,
 };

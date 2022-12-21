@@ -23,6 +23,14 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    readOnly: {
+      description: 'Specify whether the RadioButtonGroup is read-only',
+      control: {
+        type: 'boolean',
+      },
+    },
+  },
 };
 
 export const Default = () => {

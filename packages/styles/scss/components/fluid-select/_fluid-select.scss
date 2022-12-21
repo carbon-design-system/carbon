@@ -1,0 +1,197 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid Select
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../select';
+
+@mixin fluid-select {
+  .#{$prefix}--select--fluid .#{$prefix}--select {
+    position: relative;
+    height: 100%;
+    background: $field;
+    transition: background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    width: calc(100% - 2rem);
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--select--fluid .#{$prefix}--label .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select-input {
+    min-height: rem(64px);
+    padding: rem(32px) rem(32px) rem(13px) $spacing-05;
+    outline: none;
+    text-overflow: ellipsis;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select__arrow {
+    top: $spacing-07;
+    height: 1rem;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select__divider {
+    display: none;
+    transition: border-color $duration-fast-01 motion(standard, productive);
+  }
+
+  // Invalid + Warn states
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--invalid
+    .#{$prefix}--select-input__wrapper {
+    @include focus-outline('invalid');
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--invalid
+    .#{$prefix}--select__divider,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select__divider {
+    display: block;
+    width: calc(100% - 2rem);
+    border: none;
+    border-bottom: 1px solid $border-subtle;
+    margin: 0 1rem;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input {
+    padding-right: rem(32px);
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select--warning {
+    border-bottom: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
+    flex-direction: column;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--select-input:not(:focus),
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input:not(:focus) {
+    outline: none;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
+  .#{$prefix}--select--fluid .#{$prefix}--form-requirement {
+    padding: $spacing-03 rem(40px) $spacing-03 $spacing-05;
+    margin: 0;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select-input__wrapper[data-invalid]:hover
+    + .#{$prefix}--select__divider,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select-input__wrapper:hover
+    + .#{$prefix}--select__divider {
+    border-color: transparent;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--invalid
+    .#{$prefix}--select__invalid-icon,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--warning
+    .#{$prefix}--select__invalid-icon {
+    top: rem(73px);
+    right: $spacing-05;
+    pointer-events: none;
+  }
+
+  // Focus styles
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--fluid--focus
+    .#{$prefix}--select-input__wrapper {
+    @include focus-outline('outline');
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--fluid--focus
+    .#{$prefix}--select-input,
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--fluid--focus.#{$prefix}--select--warning {
+    border-bottom: 1px solid transparent;
+  }
+
+  // Disabled state
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-button {
+    pointer-events: none;
+  }
+
+  .#{$prefix}--select--fluid
+    .#{$prefix}--select--disabled
+    .#{$prefix}--toggletip-button
+    svg {
+    fill: $icon-disabled;
+  }
+}

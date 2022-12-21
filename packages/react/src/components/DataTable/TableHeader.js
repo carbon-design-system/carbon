@@ -88,7 +88,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     [`${prefix}--table-sort`]: true,
     [`${prefix}--table-sort--active`]:
       isSortHeader && sortDirection !== sortStates.NONE,
-    [`${prefix}--table-sort--ascending`]:
+    [`${prefix}--table-sort--descending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
@@ -107,7 +107,7 @@ const TableHeader = React.forwardRef(function TableHeader(
       colSpan={colSpan}
       ref={ref}
       scope={scope}>
-      <div style={{ display: 'none' }} id={uniqueId}>
+      <div className={`${prefix}--table-sort__description`} id={uniqueId}>
         {sortDescription}
       </div>
       <button

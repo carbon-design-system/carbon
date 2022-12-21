@@ -40,7 +40,7 @@ export const Welcome = () => {
           href="https://github.com/carbon-design-system/carbon/tree/main/packages/react"
           className="welcome__link"
           renderIcon={ArrowRight}>
-          Github repo
+          GitHub repo
         </Link>
       </Stack>
     </div>

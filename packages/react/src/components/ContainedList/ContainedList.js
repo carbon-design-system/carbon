@@ -17,15 +17,19 @@ function ContainedList({
   action,
   children,
   className,
+  isInset,
   kind = variants[0],
   label,
+  size = 'lg',
 }) {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
   const classes = classNames(
     `${prefix}--contained-list`,
+    { [`${prefix}--contained-list--inset-rulers`]: isInset },
     `${prefix}--contained-list--${kind}`,
+    `${prefix}--contained-list--${size}`,
     className
   );
 
@@ -61,6 +65,11 @@ ContainedList.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether the dividing lines in between list items should be inset.
+   */
+  isInset: PropTypes.bool,
+
+  /**
    * The kind of ContainedList you want to display
    */
   kind: PropTypes.oneOf(variants),
@@ -69,6 +78,11 @@ ContainedList.propTypes = {
    * A label describing the contained list.
    */
   label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
+
+  /**
+   * Specify the size of the contained list.
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
 };
 
 export default ContainedList;

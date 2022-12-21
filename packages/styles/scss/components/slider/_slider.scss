@@ -134,6 +134,10 @@
     }
   }
 
+  .#{$prefix}--slider-text-input--hidden {
+    display: none;
+  }
+
   .#{$prefix}--slider-text-input.#{$prefix}--text-input--invalid {
     padding-right: 1rem;
   }
@@ -198,6 +202,20 @@
       color: $text-disabled;
       outline: none;
     }
+  }
+
+  // readonly state
+  .#{$prefix}--slider--readonly {
+    cursor: default;
+  }
+
+  .#{$prefix}--slider--readonly .#{$prefix}--slider__thumb {
+    width: 0;
+    height: 0;
+  }
+
+  .#{$prefix}--slider--readonly ~ .#{$prefix}--slider-text-input {
+    background-color: transparent;
   }
 
   // Skeleton state

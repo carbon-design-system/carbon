@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@v1.22.0
+        uses: slackapi/slack-github-action@v1.23.0
         with:
           payload: |
             {
@@ -68,7 +68,7 @@ jobs:
                       "emoji": true
                     },
                     "value": "click_me_123",
-                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10289726",
+                    "url": "https://ec.yourlearning.ibm.com/w3/enrollment/event/10322733",
                     "action_id": "button-action"
                   }
                 },

@@ -151,6 +151,13 @@ describe('DatePicker', () => {
       '01/03/2018'
     );
   });
+
+  it('should accept a `ref` for the outermost element', () => {
+    const ref = jest.fn();
+    const { container } = render(<DatePicker ref={ref} />);
+
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  });
 });
 
 describe('Simple date picker', () => {
@@ -367,5 +374,41 @@ describe('Date picker with minDate and maxDate', () => {
 
     expect(mockConsoleError).not.toHaveBeenCalled();
     jest.restoreAllMocks();
+  });
+
+  it('should respect readOnly prop', () => {
+    const onChange = jest.fn();
+    const onClick = jest.fn();
+
+    render(
+      <DatePicker
+        dateFormat="m/d/Y"
+        onClick={onClick}
+        onChange={onChange}
+        datePickerType="range"
+        readOnly={true}>
+        <DatePickerInput
+          id="date-picker-input-id-start"
+          labelText="Start date"
+        />
+        <DatePickerInput
+          id="date-picker-input-id-finish"
+          labelText="End date"
+        />
+      </DatePicker>
+    );
+
+    // Click events should fire
+    const theStart = screen.getByLabelText('Start date');
+    userEvent.click(theStart);
+    expect(onClick).toHaveBeenCalledTimes(1);
+    const theEnd = screen.getByLabelText('End date');
+    userEvent.click(theEnd);
+    expect(onClick).toHaveBeenCalledTimes(2);
+
+    userEvent.type(theStart, '01/01/2018{tab}'); // should not be possible to type
+    userEvent.type(theEnd, '02/02/2018{enter}'); // should not be possible to type
+
+    expect(onChange).toHaveBeenCalledTimes(0);
   });
 });

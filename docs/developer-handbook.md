@@ -314,16 +314,16 @@ considered a chore that we are doing to keep things up-to-date.
 ### Class names
 
 Prefix all class names with `#{$prefix}--` in SCSS, which is replaced with
-`bx--` by default, and design systems inheriting Carbon can override. This
+`cds--` by default, and design systems inheriting Carbon can override. This
 prefix prevents potential conflicts with class names from the user.
 
 **HTML**
 
 ```html
 <div
-  class="bx--inline-notification bx--inline-notification--error"
+  class="cds--inline-notification cds--inline-notification--error"
   role="alert">
-  <div class="bx--inline-notification__details">...</div>
+  <div class="cds--inline-notification__details">...</div>
 </div>
 ```
 
@@ -451,8 +451,8 @@ A nested element can use a new block name as long as the styles are independent
 of the parent.
 
 ```html
-<div class="bx--component">
-  <button class="bx--component-button">Button</button>
+<div class="cds--component">
+  <button class="cds--component-button">Button</button>
 </div>
 ```
 

@@ -15,6 +15,7 @@ import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 const rowHeightInPixels = 16;
@@ -163,6 +164,8 @@ function CodeSnippet({
     [`${prefix}--snippet--light`]: light,
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
     [`${prefix}--snippet--wraptext`]: wrapText,
+    [`${prefix}--snippet--has-right-overflow`]:
+      type == 'multi' && hasRightOverflow,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
@@ -242,7 +245,7 @@ function CodeSnippet({
       {hasLeftOverflow && (
         <div className={`${prefix}--snippet__overflow-indicator--left`} />
       )}
-      {hasRightOverflow && (
+      {hasRightOverflow && type !== 'multi' && (
         <div className={`${prefix}--snippet__overflow-indicator--right`} />
       )}
       {!hideCopyButton && (
@@ -265,7 +268,6 @@ function CodeSnippet({
             {expandCodeBtnText}
           </span>
           <ChevronDown
-            aria-label={expandCodeBtnText}
             className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
             name="chevron--down"
             role="img"
@@ -328,7 +330,12 @@ CodeSnippet.propTypes = {
    * Specify whether you are using the light variant of the Code Snippet,
    * typically used for inline snippet to display an alternate color
    */
-  light: PropTypes.bool,
+
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `CodeSnippet` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the maximum number of rows to be shown when in collapsed view

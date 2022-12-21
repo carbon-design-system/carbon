@@ -203,6 +203,11 @@ export const border = TokenGroup.create({
     'border-strong-02',
     'border-strong-03',
 
+    // Border tile
+    'border-tile-01',
+    'border-tile-02',
+    'border-tile-03',
+
     // Border inverse
     'border-inverse',
 
@@ -331,6 +336,7 @@ export const contextual = TokenGroup.create({
     'border-subtle',
     'border-subtle-selected',
     'border-strong',
+    'border-tile',
   ],
 });
 
