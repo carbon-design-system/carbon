@@ -58,7 +58,7 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":yourlearning:  *Subscribe, add to your calendar, attend the next meeting*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
+                    "text": ":yourlearning:  *Subscribe and add to your calendar*     :ibm-arrow-right::ibm-arrow-right::ibm-arrow-right:"
                   },
                   "accessory": {
                     "type": "button",
