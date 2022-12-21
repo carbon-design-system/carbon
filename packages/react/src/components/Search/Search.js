@@ -8,7 +8,7 @@
 import { Search as SearchIcon, Close } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import { focus } from '../../internal/focus';
 import { keys, match } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
@@ -16,6 +16,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { composeEventHandlers } from '../../tools/events';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import deprecate from '../../prop-types/deprecate';
+import { FormContext } from '../FluidForm';
 
 const Search = React.forwardRef(function Search(
   {
@@ -42,6 +43,7 @@ const Search = React.forwardRef(function Search(
   forwardRef
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const inputRef = useRef(null);
   const ref = useMergedRefs([forwardRef, inputRef]);
   const inputId = useId('search-input');
@@ -56,6 +58,7 @@ const Search = React.forwardRef(function Search(
     [`${prefix}--search--lg`]: size === 'lg',
     [`${prefix}--search--light`]: light,
     [`${prefix}--search--disabled`]: disabled,
+    [`${prefix}--search--fluid`]: isFluid,
     [className]: className,
   });
   const clearClasses = cx({

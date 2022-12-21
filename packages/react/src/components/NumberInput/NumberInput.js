@@ -9,7 +9,6 @@ import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useState, useContext } from 'react';
-import { useFeatureFlag } from '../FeatureFlags';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
@@ -27,7 +26,6 @@ const defaultTranslations = {
 };
 
 const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
-  const enabled = useFeatureFlag('enable-v11-release');
   const {
     allowEmpty = false,
     className: customClassName,
@@ -37,11 +35,11 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     helperText = '',
     hideLabel = false,
     hideSteppers,
-    iconDescription = enabled ? undefined : 'choose a number',
+    iconDescription,
     id,
     label,
     invalid = false,
-    invalidText = enabled ? undefined : 'Provide invalidText',
+    invalidText,
     light,
     max = 100,
     min = 0,
@@ -81,7 +79,6 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     [`${prefix}--number--nolabel`]: hideLabel,
     [`${prefix}--number--nosteppers`]: hideSteppers,
     [`${prefix}--number--${size}`]: size,
-    [customClassName]: !enabled,
   });
   const isInputValid = getInputValidity({
     allowEmpty,
@@ -150,7 +147,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
   };
 
   const outerElementClasses = cx(`${prefix}--form-item`, {
-    [customClassName]: enabled,
+    [customClassName]: !!customClassName,
     [`${prefix}--number-input--fluid--invalid`]:
       isFluid && normalizedProps.invalid,
     [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
