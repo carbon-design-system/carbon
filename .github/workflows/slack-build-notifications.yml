@@ -28,10 +28,10 @@ jobs:
         with:
           payload: |
             {
-              "username": "Workflow success: ${{ github.event.workflow.name }}",
+              "username": "Workflow succeeded ✅",
               "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
               "channel": "#carbon-system-notifications",
-              "text": "${{ github.event.workflow_run.url }}"
+              "text": "The ${{ github.event.workflow.name }} workflow succeeded: ${{ github.event.workflow_run.url }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
@@ -46,10 +46,10 @@ jobs:
         with:
           payload: |
             {
-              "username": "Workflow failure: ${{ github.event.workflow.name }}",
+              "username": "Workflow failed 🚫",
               "icon_url": "https://user-images.githubusercontent.com/3360588/192045905-5d9705af-92e2-4432-805e-15db98571e8b.png",
               "channel": "#carbon-system-notifications",
-              "text": "${{ github.event.workflow_run.url }}"
+              "text": "The ${{ github.event.workflow.name }} workflow failed: ${{ github.event.workflow_run.url }}"
             }
         env:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
