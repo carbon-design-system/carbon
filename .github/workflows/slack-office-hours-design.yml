@@ -69,7 +69,7 @@ jobs:
                       emoji: true,
                     },
                     value: "click_me_123",
-                    url: "https://ec.yourlearning.ibm.com/w3/event/10289722",
+                    url: "https://ec.yourlearning.ibm.com/w3/event/10323408",
                     action_id: "button-action",
                   },
                 },
