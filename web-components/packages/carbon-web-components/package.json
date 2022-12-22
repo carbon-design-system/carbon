@@ -68,7 +68,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.16.3",
-    "carbon-components": "10.55.0",
+    "carbon-components": "10.58.3",
     "flatpickr": "4.6.13",
     "lit-element": "^2.5.1",
     "lit-html": "^1.4.1",
