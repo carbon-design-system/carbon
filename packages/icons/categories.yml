@@ -571,6 +571,7 @@ categories:
           - autoscaling
           - block-storage
           - object-storage
+          - cics--transaction-server-zos
           - cloud--auditing
           - cloud--logging
           - cloud--monitoring
@@ -1437,7 +1438,6 @@ categories:
           - cics--sit
           - cics--sit-overrides
           - cics--system-group
-          - cics--transaction-server-zos
           - cics--wui-region
           - cics-region
           - cics-region--alt
