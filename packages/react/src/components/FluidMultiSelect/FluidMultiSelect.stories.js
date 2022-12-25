@@ -21,6 +21,9 @@ import { Information } from '@carbon/icons-react';
 export default {
   title: 'Experimental/unstable__FluidMultiSelect',
   component: FluidMultiSelect,
+  subcomponents: {
+    FluidMultiSelectSkeleton,
+  },
 };
 
 const items = [
@@ -104,6 +107,7 @@ export const Playground = (args) => (
       itemToString={(item) => (item ? item.text : '')}
       {...args}
     />
+    <br />
     <FluidMultiSelect
       {...args}
       onChange={() => {}}
