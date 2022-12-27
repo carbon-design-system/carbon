@@ -15,9 +15,9 @@ import { usePrefix } from './usePrefix';
  * @property {boolean | undefined} readOnly - Whether the input should be readonly
  * @property {boolean} disabled - Whether the input should be disabled
  * @property {boolean} invalid - Whether the input should be marked as invalid
- * @property {import('prop-types').ReactNodeLike} invalidText - The validation message displayed in case the input is considered invalid
+ * @property {React.ReactNode | undefined} invalidText - The validation message displayed in case the input is considered invalid
  * @property {boolean} warn - Whether the input should be in warning state
- * @property {import('prop-types').ReactNodeLike} warnText - The validation message displayed in case the input is in warning state
+ * @property {React.ReactNode | undefined} warnText - The validation message displayed in case the input is in warning state
  */
 
 /**

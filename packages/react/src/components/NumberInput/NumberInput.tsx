@@ -7,8 +7,14 @@
 
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
-import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { LegacyRef, useContext, useRef, useState } from 'react';
+import PropTypes from 'prop-types';
+import React, {
+  LegacyRef,
+  ReactNode,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
@@ -69,7 +75,7 @@ export interface NumberInputProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText: ReactNodeLike;
+  helperText: ReactNode;
 
   /**
    * Specify whether you want the underlying label to be visually hidden
@@ -99,13 +105,13 @@ export interface NumberInputProps
   /**
    * Message which is displayed if the value is invalid.
    */
-  invalidText?: ReactNodeLike;
+  invalidText?: ReactNode;
 
   /**
    * Generic `label` that will be used as the textual representation of what
    * this field is for
    */
-  label?: ReactNodeLike;
+  label?: ReactNode;
 
   /**
    * `true` to use the light version.
@@ -181,7 +187,7 @@ export interface NumberInputProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike;
+  warnText?: ReactNode;
 }
 
 const NumberInput = React.forwardRef(function NumberInput(
@@ -219,7 +225,6 @@ const NumberInput = React.forwardRef(function NumberInput(
   } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  console.log('isFluid', isFluid);
   const [isFocused, setIsFocused] = useState(false);
   const [value, setValue] = useState(() => {
     if (controlledValue !== undefined) {
@@ -593,7 +598,13 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-function Label({ disabled, id, hideLabel, label }) {
+interface Label {
+  disabled?: boolean;
+  hideLabel?: boolean;
+  id?: string;
+  label?: ReactNode;
+}
+function Label({ disabled, id, hideLabel, label }: Label) {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -618,7 +629,11 @@ Label.propTypes = {
   label: PropTypes.node,
 };
 
-function HelperText({ disabled, description }) {
+interface HelperTextProps {
+  description?: ReactNode;
+  disabled?: boolean;
+}
+function HelperText({ disabled, description }: HelperTextProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
