@@ -10,7 +10,15 @@ import React from 'react';
 import cx from 'classnames';
 import { PrefixContext } from '../../internal/usePrefix';
 
-export default class ToggleSkeleton extends React.Component {
+export type ToggleSkeletonProps = {
+  'aria-label': string;
+  className?: string;
+  id?: string;
+  labelText?: string;
+  size?: 'sm' | 'md'
+};
+
+export default class ToggleSkeleton extends React.Component<ToggleSkeletonProps> {
   static propTypes = {
     ['aria-label']: PropTypes.string.isRequired,
 
@@ -66,7 +74,7 @@ export default class ToggleSkeleton extends React.Component {
               <label
                 className={`${prefix}--toggle-input__label`}
                 htmlFor={id}
-                aria-label={labelText ? null : this.props['aria-label']}>
+                aria-label={labelText ? undefined : this.props['aria-label']}>
                 {labelText ? <div>{labelText}</div> : null}
                 <span className={`${prefix}--toggle__switch`}>
                   <span className={`${prefix}--toggle__text--left`} />

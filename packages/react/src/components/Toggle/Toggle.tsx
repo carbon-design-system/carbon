@@ -11,7 +11,23 @@ import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 
-export function Toggle({
+export type ToggleProps = {
+  className?: string;
+  defaultToggled?: boolean;
+  disabled?: boolean;
+  hideLabel?: boolean
+  id?: string;
+  labelA?: React.ReactNode;
+  labelB?: React.ReactNode;
+  labelText: React.ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onToggle?: () => void;
+  readOnly?: boolean;
+  size?: 'sm' | 'md';
+  toggled?: boolean;
+};
+
+export const Toggle: React.FC<ToggleProps> = ({
   className,
   defaultToggled = false,
   disabled = false,
@@ -26,15 +42,16 @@ export function Toggle({
   size = 'md',
   toggled,
   ...other
-}) {
+}) => {
   const prefix = usePrefix();
   const [checked, setChecked] = useControllableState({
     value: toggled,
-    onChange: onToggle,
+    onChange: onToggle || ( () => {} ),
     defaultValue: defaultToggled,
+    name: 'Toggle',
   });
 
-  function handleClick(e) {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     if (!readOnly) {
       setChecked(!checked);
     }
