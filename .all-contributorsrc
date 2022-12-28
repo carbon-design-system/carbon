@@ -977,6 +977,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "LuskeyNoah",
+      "name": "Noah Luskey",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6210048?v=4",
+      "profile": "https://noahluskey.com",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
