@@ -12,9 +12,30 @@ import { PrefixContext } from '../../internal/usePrefix';
 
 export type ToggleSkeletonProps = {
   'aria-label': string;
+
+  /**
+   * Specify an optional className to add to the form item wrapper.
+   */
   className?: string;
+  
+  
+  /**
+   * Provide an id that unique represents the underlying `<input>`
+   */
   id?: string;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   * `aria-label` is always required but will be null if `labelText` is also
+   * provided
+   */
   labelText?: string;
+  
+
+  /**
+   * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
+   */
   size?: 'sm' | 'md'
 };
 

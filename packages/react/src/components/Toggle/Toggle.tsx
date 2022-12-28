@@ -12,18 +12,70 @@ import { useControllableState } from '../../internal/useControllableState';
 import { usePrefix } from '../../internal/usePrefix';
 
 export type ToggleProps = {
+  /**
+   * Specify a custom className to apply to the form-item node
+   */
   className?: string;
+
+  /**
+   * Specify whether the toggle should be on by default
+   */
   defaultToggled?: boolean;
+
+  /**
+   * Whether this control should be disabled
+   */
   disabled?: boolean;
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
   hideLabel?: boolean
+
+  /**
+   * Provide an id that unique represents the underlying `<button>`
+   */
   id?: string;
+
+  /**
+   * Specify the label for the "off" position
+   */
   labelA?: React.ReactNode;
+
+  /**
+   * Specify the label for the "on" position
+   */
   labelB?: React.ReactNode;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
   labelText: React.ReactNode;
+
+  /**
+   * Provide an event listener that is called when the control is clicked
+   */
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  onToggle?: () => void;
+
+  /**
+   * Provide an event listener that is called when the control is toggled
+   */
+  onToggle?: (value: any) => void;
+
+  /**
+   * Whether the toggle should be read-only
+   */
   readOnly?: boolean;
+
+  /**
+   * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
+   */
   size?: 'sm' | 'md';
+
+  /**
+   * Specify whether the control is toggled
+   */
   toggled?: boolean;
 };
 
