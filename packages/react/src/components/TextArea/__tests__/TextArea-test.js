@@ -8,6 +8,7 @@
 import React from 'react';
 import TextArea from '../TextArea';
 import userEvent from '@testing-library/user-event';
+import { fireEvent } from '@testing-library/react';
 import { render, screen } from '@testing-library/react';
 
 describe('TextArea', () => {
@@ -34,6 +35,59 @@ describe('TextArea', () => {
       userEvent.type(screen.getByRole('textbox'), 'x');
       expect(screen.getByRole('textbox')).not.toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(0);
+    });
+  });
+
+  describe('word counter behaves as expected', () => {
+    it('should correctly increase word count', () => {
+      render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter
+          maxCount={10}
+          counterMode="words"
+        />
+      );
+
+      // by default should show 0
+      expect(screen.getByText('0/10')).toBeInTheDocument();
+
+      fireEvent.change(screen.getByRole('textbox'), {
+        target: {
+          value: 'one two three four five six seven eight nine ten eleven',
+        },
+      });
+
+      expect(screen.getByText('10/10')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toHaveValue(
+        'one two three four five six seven eight nine ten'
+      );
+    });
+
+    it('should correctly decrease word count', () => {
+      render(
+        <TextArea
+          id="input-1"
+          labelText="TextArea label"
+          enableCounter
+          maxCount={10}
+          counterMode="words"
+          defaultValue="one two three four"
+        />
+      );
+
+      // by default should show 4
+      expect(screen.getByText('4/10')).toBeInTheDocument();
+
+      fireEvent.change(screen.getByRole('textbox'), {
+        target: {
+          value: 'one two three',
+        },
+      });
+
+      expect(screen.getByText('3/10')).toBeInTheDocument();
+      expect(screen.getByRole('textbox')).toHaveValue('one two three');
     });
   });
 });

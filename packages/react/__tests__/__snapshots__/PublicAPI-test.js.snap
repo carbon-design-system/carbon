@@ -7796,6 +7796,7 @@ Map {
   "TextArea" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "counterMode": "default",
       "disabled": false,
       "enableCounter": false,
       "helperText": "",
@@ -7813,6 +7814,15 @@ Map {
       },
       "cols": Object {
         "type": "number",
+      },
+      "counterMode": Object {
+        "args": Array [
+          Array [
+            "default",
+            "words",
+          ],
+        ],
+        "type": "oneOf",
       },
       "defaultValue": Object {
         "args": Array [

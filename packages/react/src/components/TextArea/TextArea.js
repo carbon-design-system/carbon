@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled } from '@carbon/icons-react';
@@ -29,6 +29,7 @@ const TextArea = React.forwardRef(function TextArea(
     light,
     placeholder,
     enableCounter,
+    counterMode,
     maxCount,
     ...other
   },
@@ -39,14 +40,52 @@ const TextArea = React.forwardRef(function TextArea(
   const enabled = useFeatureFlag('enable-v11-release');
   const { defaultValue, value, disabled } = other;
   const [textCount, setTextCount] = useState(
-    defaultValue?.length || value?.length || 0
+    defaultValue
+      ? counterMode == 'default'
+        ? defaultValue.length
+        : defaultValue.match(/\w+/g).length
+      : value
+      ? counterMode == 'default'
+        ? value.length
+        : value.match(/\w+/g).length
+      : 0
   );
+
+  const textAreaRef = useRef(null);
 
   const textareaProps = {
     id,
+    onKeyDown: (evt) => {
+      if (!other.disabled && counterMode === 'words') {
+        var key = evt.which;
+        if (textCount == maxCount && key == 32) {
+          evt.preventDefault();
+        }
+      }
+    },
     onChange: (evt) => {
       if (!other.disabled) {
-        setTextCount(evt.target.value?.length);
+        if (counterMode == 'default') {
+          setTextCount(evt.target.value?.length);
+        } else if (counterMode == 'words') {
+          if (!evt.target.value) {
+            console.log('reset');
+            setTextCount(0);
+            return;
+          }
+          if (evt.target.value.match(/\w+/g).length <= maxCount) {
+            textAreaRef.current.removeAttribute('maxLength');
+            setTextCount(evt.target.value.match(/\w+/g).length);
+          } else {
+            const first_max = evt.target.value
+              .split(/\s+/)
+              .slice(0, maxCount)
+              .join(' ');
+
+            setTextCount(maxCount);
+            textAreaRef.current.value = first_max;
+          }
+        }
         onChange(evt);
       }
     },
@@ -59,9 +98,16 @@ const TextArea = React.forwardRef(function TextArea(
   };
 
   if (enableCounter) {
-    textareaProps.maxLength = maxCount;
+    // handle different counter mode
+    if (counterMode == 'default') {
+      textareaProps.maxLength = maxCount;
+    }
   }
-  let ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  let ariaAnnouncement = useAnnouncer(
+    textCount,
+    maxCount,
+    counterMode === 'words' ? 'words' : undefined
+  );
 
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
@@ -79,7 +125,9 @@ const TextArea = React.forwardRef(function TextArea(
   });
 
   const counter =
-    enableCounter && maxCount ? (
+    enableCounter &&
+    maxCount &&
+    (counterMode === 'default' || counterMode === 'words') ? (
       <div className={counterClasses}>{`${textCount}/${maxCount}`}</div>
     ) : null;
 
@@ -120,6 +168,7 @@ const TextArea = React.forwardRef(function TextArea(
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
+      ref={textAreaRef}
       readOnly={other.readOnly}
       style={
         other.cols
@@ -174,6 +223,11 @@ TextArea.propTypes = {
    * Specify the `cols` attribute for the underlying `<textarea>` node
    */
   cols: PropTypes.number,
+
+  /**
+   * Specify the method used for calculating the counter number
+   */
+  counterMode: PropTypes.oneOf(['default', 'words']),
 
   /**
    * Optionally provide the default value of the `<textarea>`
@@ -280,6 +334,7 @@ TextArea.defaultProps = {
   helperText: '',
   enableCounter: false,
   maxCount: undefined,
+  counterMode: 'default',
 };
 
 export default TextArea;

@@ -79,6 +79,12 @@ describe('TextArea', () => {
         wrapper.setProps({ maxCount: 5 });
         expect(wrapper.props().maxCount).toEqual(5);
       });
+
+      it('should set counterMode as expected', () => {
+        expect(wrapper.props().counterMode).toEqual('default');
+        wrapper.setProps({ counterMode: 'words' });
+        expect(wrapper.props().counterMode).toEqual('words');
+      });
     });
 
     describe('label', () => {
@@ -158,6 +164,22 @@ describe('TextArea', () => {
         labels.forEach((node) => {
           expect(node.hasClass(`${prefix}--label--disabled`)).toEqual(true);
         });
+      });
+    });
+
+    describe('word counter', () => {
+      const wordCounterTestWrapper1 = mount(
+        <TextArea
+          id="wordCounterTestWrapper1"
+          labelText="someLabel"
+          counterMode={'words'}
+        />
+      );
+
+      it('should not render element with only counterMode prop passed in', () => {
+        expect(
+          wordCounterTestWrapper1.exists(`${prefix}--text-area__counter`)
+        ).toEqual(false);
       });
     });
   });
