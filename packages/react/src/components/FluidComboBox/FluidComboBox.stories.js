@@ -18,6 +18,9 @@ import { Information } from '@carbon/icons-react';
 export default {
   title: 'Experimental/unstable__FluidComboBox',
   component: FluidComboBox,
+  subcomponents: {
+    FluidComboBoxSkeleton,
+  },
 };
 
 const items = [
@@ -103,6 +106,7 @@ export const Playground = (args) => (
       itemToString={(item) => (item ? item.text : '')}
       {...args}
     />
+    <br />
     <FluidComboBox
       placeholder="Filter..."
       {...args}

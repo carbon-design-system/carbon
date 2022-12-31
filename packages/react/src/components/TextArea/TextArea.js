@@ -14,6 +14,7 @@ import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -159,6 +160,15 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
+  const textareaRef = useRef();
+  useIsomorphicEffect(() => {
+    if (other.cols) {
+      textareaRef.current.style.width = null;
+    } else {
+      textareaRef.current.style.width = `100%`;
+    }
+  }, [other.cols]);
+
   const input = (
     <textarea
       {...other}
@@ -170,13 +180,7 @@ const TextArea = React.forwardRef(function TextArea(
       disabled={other.disabled}
       ref={textAreaRef}
       readOnly={other.readOnly}
-      style={
-        other.cols
-          ? {}
-          : {
-              width: `100%`,
-            }
-      }
+      ref={textareaRef}
     />
   );
 
