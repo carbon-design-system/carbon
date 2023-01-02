@@ -75,7 +75,7 @@
     "@carbon/test-utils": "^10.26.0",
     "@carbon/themes": "^11.14.0",
     "@rollup/plugin-babel": "^6.0.0",
-    "@rollup/plugin-commonjs": "^21.0.0",
+    "@rollup/plugin-commonjs": "^24.0.0",
     "@rollup/plugin-node-resolve": "^15.0.0",
     "@rollup/plugin-typescript": "^10.0.0",
     "@storybook/addon-a11y": "^6.5.6",
