@@ -169,7 +169,7 @@
     "karma-jasmine": "^4.0.1",
     "karma-snapshot": "^0.6.0",
     "karma-sourcemap-loader": "^0.3.8",
-    "karma-spec-reporter": "0.0.35",
+    "karma-spec-reporter": "0.0.36",
     "karma-webpack": "^4.0.2",
     "lint-staged": "^12.3.8",
     "magic-string": "^0.27.0",
