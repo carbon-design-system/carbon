@@ -176,6 +176,7 @@ function getRollupConfig({
       }),
       replace({
         'process.env.NODE_ENV': JSON.stringify(mode),
+        preventAssignment: true,
       }),
       ...(mode === 'development'
         ? [license(licenseOptions)]
