@@ -26,6 +26,7 @@ import SelectItem from '../SelectItem';
 import TextInput from '../TextInput';
 import mdx from './Modal.mdx';
 import Tooltip from '../Tooltip';
+import { InlineNotification } from '../Notification';
 
 const { prefix } = settings;
 
@@ -281,6 +282,23 @@ export const Playground = () => {
           </p>
         </>
       )}
+    </Modal>
+  );
+};
+
+export const NotificationTest = () => {
+  return (
+    <Modal
+      open
+      modalHeading="Are you sure you want to delete this custom domain?"
+      modalLabel="Account resources"
+      primaryButtonText="Delete"
+      secondaryButtonText="Cancel">
+      <InlineNotification
+        kind="info"
+        title="Notification title"
+        subtitle="Subtitle text goes here"
+      />
     </Modal>
   );
 };
