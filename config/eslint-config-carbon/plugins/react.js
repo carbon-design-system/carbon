@@ -89,6 +89,14 @@ module.exports = {
         'react/forbid-dom-props': 0,
       },
     },
+    // style prop is fine to be used in internal unit testing
+    {
+      files: ['*.e2e.js'],
+      rules: {
+        'react/forbid-component-props': 0,
+        'react/forbid-dom-props': 0,
+      },
+    },
 
     // When writing fixtures, we tend to focus on the specific component and
     // don't require React in scope as we never end up executing the code. The
