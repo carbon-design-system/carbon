@@ -696,7 +696,7 @@ $tokens: (
   fluid-display-02: $fluid-display-02,
   fluid-display-03: $fluid-display-03,
   fluid-display-04: $fluid-display-04,
-);
+) !default;
 
 /// @param {Map} $map
 /// @access public
