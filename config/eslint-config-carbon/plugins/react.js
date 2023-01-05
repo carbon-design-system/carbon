@@ -33,6 +33,14 @@ module.exports = {
     'react/jsx-no-useless-fragment': 2,
     'react/no-typos': 2,
     'react/sort-prop-types': 2,
+    'react/forbid-component-props': [
+      2,
+      { forbid: [{ propName: 'style', message: 'Avoid using style prop' }] },
+    ],
+    'react/forbid-dom-props': [
+      2,
+      { forbid: [{ propName: 'style', message: 'Avoid using style prop' }] },
+    ],
 
     // react-hooks
     'react-hooks/rules-of-hooks': 2,
