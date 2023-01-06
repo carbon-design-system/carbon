@@ -3590,6 +3590,11 @@ Map {
       },
     },
   },
+  "FormContext" => Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": "React.Consumer",
+    "Provider": "React.Provider",
+  },
   "FormGroup" => Object {
     "defaultProps": Object {
       "invalid": false,
@@ -5677,6 +5682,11 @@ Map {
       },
     },
     "render": [Function],
+  },
+  "PrefixContext" => Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": "React.Consumer",
+    "Provider": "React.Provider",
   },
   "PrimaryButton" => Object {},
   "ProgressBar" => Object {
@@ -8283,6 +8293,11 @@ Map {
       },
     },
   },
+  "ThemeContext" => Object {
+    "$$typeof": Symbol(react.context),
+    "Consumer": "React.Consumer",
+    "Provider": "React.Provider",
+  },
   "Tile" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -8972,6 +8987,20 @@ Map {
   "VStack" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "render": [Function],
+  },
+  "types" => Object {
+    "0": "red",
+    "1": "magenta",
+    "10": "high-contrast",
+    "11": "outline",
+    "2": "purple",
+    "3": "blue",
+    "4": "cyan",
+    "5": "teal",
+    "6": "green",
+    "7": "gray",
+    "8": "cool-gray",
+    "9": "warm-gray",
   },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
@@ -9820,182 +9849,6 @@ Map {
     "render": [Function],
   },
   "unstable__FluidMultiSelectSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "unstable__FluidNumberInput" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "propTypes": Object {
-      "allowEmpty": Object {
-        "type": "bool",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "defaultValue": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "number",
-            },
-            Object {
-              "type": "string",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "disableWheel": Object {
-        "type": "bool",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "iconDescription": Object {
-        "type": "string",
-      },
-      "id": Object {
-        "isRequired": true,
-        "type": "string",
-      },
-      "invalid": Object {
-        "type": "bool",
-      },
-      "invalidText": Object {
-        "type": "node",
-      },
-      "label": Object {
-        "type": "node",
-      },
-      "max": Object {
-        "type": "number",
-      },
-      "min": Object {
-        "type": "number",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onClick": Object {
-        "type": "func",
-      },
-      "onKeyUp": Object {
-        "type": "func",
-      },
-      "step": Object {
-        "type": "number",
-      },
-      "translateWithId": Object {
-        "type": "func",
-      },
-      "value": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "number",
-            },
-            Object {
-              "type": "string",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "warn": Object {
-        "type": "bool",
-      },
-      "warnText": Object {
-        "type": "node",
-      },
-    },
-    "render": [Function],
-  },
-  "unstable__FluidNumberInputSkeleton" => Object {
-    "propTypes": Object {
-      "className": Object {
-        "type": "string",
-      },
-    },
-  },
-  "unstable__FluidSearch" => Object {
-    "$$typeof": Symbol(react.forward_ref),
-    "defaultProps": Object {
-      "autoComplete": "off",
-      "closeButtonLabelText": "Clear search input",
-      "role": "searchbox",
-      "type": "text",
-    },
-    "propTypes": Object {
-      "autoComplete": Object {
-        "type": "string",
-      },
-      "className": Object {
-        "type": "string",
-      },
-      "closeButtonLabelText": Object {
-        "type": "string",
-      },
-      "defaultValue": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-      "disabled": Object {
-        "type": "bool",
-      },
-      "id": Object {
-        "type": "string",
-      },
-      "labelText": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-      "onChange": Object {
-        "type": "func",
-      },
-      "onClear": Object {
-        "type": "func",
-      },
-      "onKeyDown": Object {
-        "type": "func",
-      },
-      "placeholder": Object {
-        "type": "string",
-      },
-      "role": Object {
-        "type": "string",
-      },
-      "type": Object {
-        "type": "string",
-      },
-      "value": Object {
-        "args": Array [
-          Array [
-            Object {
-              "type": "string",
-            },
-            Object {
-              "type": "number",
-            },
-          ],
-        ],
-        "type": "oneOfType",
-      },
-    },
-    "render": [Function],
-  },
-  "unstable__FluidSearchSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
         "type": "string",

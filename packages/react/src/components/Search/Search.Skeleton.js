@@ -43,3 +43,4 @@ SearchSkeleton.defaultProps = {
 };
 
 export default SearchSkeleton;
+export { SearchSkeleton };

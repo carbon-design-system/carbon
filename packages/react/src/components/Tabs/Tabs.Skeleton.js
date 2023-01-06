@@ -52,3 +52,4 @@ TabsSkeleton.propTypes = {
 };
 
 export default TabsSkeleton;
+export { TabsSkeleton };

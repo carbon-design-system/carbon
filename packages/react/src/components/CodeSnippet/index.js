@@ -5,5 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import CodeSnippet from './CodeSnippet';
+
+export default CodeSnippet;
+export { CodeSnippet };
 export { default as CodeSnippetSkeleton } from './CodeSnippet.Skeleton';
-export default from './CodeSnippet';
