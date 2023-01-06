@@ -5,4 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './ComboBox';
+import ComboBox from './ComboBox';
+export default ComboBox;
+export { ComboBox };

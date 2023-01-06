@@ -5,4 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './DataTableSkeleton';
+import DataTableSkeleton from './DataTableSkeleton';
+export default DataTableSkeleton;
+export { DataTableSkeleton };

@@ -7768,7 +7768,6 @@ __metadata:
   linkType: hard
 
 "@types/q@npm:^1.5.1":
-  version: 1.5.2
   resolution: "@types/q@npm:1.5.2"
   checksum: 3bb811e0bccfa2bf6a6d366d46bf508739de7338a22bdb8474cbd00a1aa9b5c65210f4ada6a8e9cca50f9340e529719f3b65d7f70dbc972854ebb66728743608
   languageName: node
