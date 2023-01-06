@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './InlineCheckbox';
+import InlineCheckbox from './InlineCheckbox';
+
+export default InlineCheckbox;
+export { InlineCheckbox };
