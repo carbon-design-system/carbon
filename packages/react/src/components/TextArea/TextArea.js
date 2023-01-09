@@ -52,7 +52,7 @@ const TextArea = React.forwardRef(function TextArea(
       : 0
   );
 
-  const textAreaRef = useRef(null);
+  const textareaRef = useRef(null);
 
   const textareaProps = {
     id,
@@ -75,7 +75,7 @@ const TextArea = React.forwardRef(function TextArea(
             return;
           }
           if (evt.target.value.match(/\w+/g).length <= maxCount) {
-            textAreaRef.current.removeAttribute('maxLength');
+            textareaRef.current.removeAttribute('maxLength');
             setTextCount(evt.target.value.match(/\w+/g).length);
           } else {
             const first_max = evt.target.value
@@ -84,7 +84,7 @@ const TextArea = React.forwardRef(function TextArea(
               .join(' ');
 
             setTextCount(maxCount);
-            textAreaRef.current.value = first_max;
+            textareaRef.current.value = first_max;
           }
         }
         onChange(evt);
@@ -160,7 +160,6 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
-  const textareaRef = useRef();
   useIsomorphicEffect(() => {
     if (other.cols) {
       textareaRef.current.style.width = null;
@@ -178,7 +177,6 @@ const TextArea = React.forwardRef(function TextArea(
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
-      ref={textAreaRef}
       readOnly={other.readOnly}
       ref={textareaRef}
     />

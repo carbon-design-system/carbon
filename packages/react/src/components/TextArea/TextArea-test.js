@@ -72,17 +72,6 @@ describe('TextArea', () => {
       );
     });
 
-    it('should set maxCount as expected', () => {
-      wrapper.setProps({ maxCount: 5 });
-      expect(wrapper.props().maxCount).toEqual(5);
-    });
-
-    it('should set counterMode as expected', () => {
-      expect(wrapper.props().counterMode).toEqual('default');
-      wrapper.setProps({ counterMode: 'words' });
-      expect(wrapper.props().counterMode).toEqual('words');
-    });
-
     it('should respect id prop', () => {
       render(<TextArea id="text-area-id" labelText="testLabel" />);
       expect(screen.getByLabelText('testLabel')).toHaveAttribute(
@@ -210,115 +199,111 @@ describe('TextArea', () => {
     });
 
     describe('word counter', () => {
-      const wordCounterTestWrapper1 = mount(
-        <TextArea
-          id="wordCounterTestWrapper1"
-          labelText="someLabel"
-          counterMode={'words'}
-        />
-      );
-
       it('should not render element with only counterMode prop passed in', () => {
+        render(
+          <TextArea
+            id="wordCounterTestWrapper1"
+            labelText="testLabel"
+            counterMode={'words'}
+          />
+        );
         expect(
-          wordCounterTestWrapper1.exists(`${prefix}--text-area__counter`)
-        ).toEqual(false);
+          screen.getByText('testLabel').closest(`${prefix}--text-area__counter`)
+        ).toEqual(null);
       });
     });
   });
 
-    it('should not render counter with only maxCount prop passed in', () => {
-      render(<TextArea id="testing" labelText="testLabel" maxCount={500} />);
-      // The label and the counter both have the same label class.
-      // The label exists, but not the counter.
-      expect(screen.getByText('testLabel')).toHaveClass(`${prefix}--label`);
-      expect(
-        screen
-          .getByText('testLabel')
-          .closest(`.${prefix}--text-area__label-wrapper`)
-          .getElementsByClassName(`${prefix}--label`).length
-      ).toEqual(1);
-    });
+  it('should not render counter with only maxCount prop passed in', () => {
+    render(<TextArea id="testing" labelText="testLabel" maxCount={500} />);
+    // The label and the counter both have the same label class.
+    // The label exists, but not the counter.
+    expect(screen.getByText('testLabel')).toHaveClass(`${prefix}--label`);
+    expect(
+      screen
+        .getByText('testLabel')
+        .closest(`.${prefix}--text-area__label-wrapper`)
+        .getElementsByClassName(`${prefix}--label`).length
+    ).toEqual(1);
+  });
 
-    it('should have label and counter disabled', () => {
+  it('should have label and counter disabled', () => {
+    render(
+      <TextArea
+        disabled
+        enableCounter
+        id="testing"
+        labelText="testLabel"
+        maxCount={100}
+      />
+    );
+    expect(screen.getByText('testLabel')).toHaveClass(
+      `${prefix}--label--disabled`
+    );
+    expect(screen.getByText('0/100')).toHaveClass(`${prefix}--label--disabled`);
+  });
+});
+
+describe('events', () => {
+  describe('disabled textarea', () => {
+    it('should not invoke onClick when textarea is clicked', () => {
+      const onClick = jest.fn();
       render(
         <TextArea
           disabled
-          enableCounter
           id="testing"
           labelText="testLabel"
-          maxCount={100}
+          onClick={onClick}
         />
       );
-      expect(screen.getByText('testLabel')).toHaveClass(
-        `${prefix}--label--disabled`
+      userEvent.click(screen.getByLabelText('testLabel'));
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('should not invoke onChange', () => {
+      const onChange = jest.fn();
+      render(
+        <TextArea
+          disabled
+          id="testing"
+          labelText="testLabel"
+          onChange={onChange}
+        />
       );
-      expect(screen.getByText('0/100')).toHaveClass(
-        `${prefix}--label--disabled`
-      );
+      userEvent.click(screen.getByLabelText('testLabel'));
+      userEvent.keyboard('big blue');
+      expect(onChange).not.toHaveBeenCalled();
     });
   });
 
-  describe('events', () => {
-    describe('disabled textarea', () => {
-      it('should not invoke onClick when textarea is clicked', () => {
-        const onClick = jest.fn();
-        render(
-          <TextArea
-            disabled
-            id="testing"
-            labelText="testLabel"
-            onClick={onClick}
-          />
-        );
-        userEvent.click(screen.getByLabelText('testLabel'));
-        expect(onClick).not.toHaveBeenCalled();
-      });
-
-      it('should not invoke onChange', () => {
-        const onChange = jest.fn();
-        render(
-          <TextArea
-            disabled
-            id="testing"
-            labelText="testLabel"
-            onChange={onChange}
-          />
-        );
-        userEvent.click(screen.getByLabelText('testLabel'));
-        userEvent.keyboard('big blue');
-        expect(onChange).not.toHaveBeenCalled();
-      });
+  describe('enabled textarea', () => {
+    it('should invoke onClick when textarea is clicked', async () => {
+      const onClick = jest.fn();
+      render(
+        <TextArea
+          disabled={false}
+          id="testing"
+          labelText="testLabel"
+          onClick={onClick}
+        />
+      );
+      await userEvent.click(screen.getByLabelText('testLabel'));
+      expect(onClick).toHaveBeenCalled();
     });
 
-    describe('enabled textarea', () => {
-      it('should invoke onClick when textarea is clicked', async () => {
-        const onClick = jest.fn();
-        render(
-          <TextArea
-            disabled={false}
-            id="testing"
-            labelText="testLabel"
-            onClick={onClick}
-          />
-        );
-        await userEvent.click(screen.getByLabelText('testLabel'));
-        expect(onClick).toHaveBeenCalled();
-      });
-
-      it('should invoke onChange when textarea value is changed', async () => {
-        const onChange = jest.fn();
-        render(
-          <TextArea
-            disabled={false}
-            id="testing"
-            labelText="testLabel"
-            onChange={onChange}
-          />
-        );
-        await userEvent.click(screen.getByLabelText('testLabel'));
-        userEvent.keyboard('big blue');
-        expect(onChange).toHaveBeenCalled();
-      });
+    it('should invoke onChange when textarea value is changed', async () => {
+      const onChange = jest.fn();
+      render(
+        <TextArea
+          disabled={false}
+          id="testing"
+          labelText="testLabel"
+          onChange={onChange}
+        />
+      );
+      await userEvent.click(screen.getByLabelText('testLabel'));
+      userEvent.keyboard('big blue');
+      expect(onChange).toHaveBeenCalled();
     });
   });
 });
