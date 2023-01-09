@@ -15,7 +15,7 @@
     "www"
   ],
   "scripts": {
-    "build": "lerna run build --stream --prefix --npm-client yarn",
+    "build": "lerna run build --stream --prefix",
     "ci-check": "carbon-cli ci-check",
     "clean": "lerna run clean && lerna clean --yes && rimraf node_modules",
     "doctoc": "doctoc --title '## Table of Contents'",
@@ -68,7 +68,7 @@
     "husky": "^8.0.0",
     "jest": "^28.1.0",
     "jest-junit": "^15.0.0",
-    "lerna": "^4.0.0",
+    "lerna": "^6.0.0",
     "lint-staged": "^13.0.0",
     "node-gyp": "^7.1.2",
     "prettier": "^2.7.1",
