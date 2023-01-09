@@ -153,8 +153,10 @@ categories:
           - link
           - list--boxes
           - list--bulleted
-          - list--numbered
           - list--checked
+          - list--checked--mirror
+          - list--numbered
+          - list--numbered--mirror
           - magic-wand
           - magic-wand--filled
           - no-image
@@ -313,6 +315,7 @@ categories:
           - compare
           - connect
           - connect--recursive
+          - connect--reference
           - connect--source
           - connect--target
           - continuous-deployment
@@ -392,6 +395,7 @@ categories:
           - review
           - rotate
           - run
+          - run--mirror
           - save--model
           - scan
           - scan--alt
@@ -399,6 +403,7 @@ categories:
           - search
           - search--advanced
           - search--locate
+          - search--locate--mirror
           - send
           - send--alt
           - send--alt--filled
@@ -506,6 +511,7 @@ categories:
       - name: Design and development
         members:
           - logo--angular
+          - logo--ansible-community
           - logo--figma
           - logo--invision
           - logo--jupyter
@@ -516,9 +522,11 @@ categories:
           - logo--python
           - logo--r-script
           - logo--react
+          - logo--red-hat-ansible
           - logo--sketch
           - logo--svelte
           - logo--vmware
+          - logo--vmware--alt
           - logo--vue
       - name: IBM
         members:
@@ -526,6 +534,7 @@ categories:
           - carbon
           - carbon-for-ibm-dotcom
           - carbon-for-ibm-product
+          - carbon--ui-builder
           - cloud-app
           - edt-loop
           - ibm-cloud
@@ -562,6 +571,7 @@ categories:
           - autoscaling
           - block-storage
           - object-storage
+          - cics--transaction-server-zos
           - cloud--auditing
           - cloud--logging
           - cloud--monitoring
@@ -583,13 +593,22 @@ categories:
           - direct-link
           - dns-services
           - flow-logs-vpc
+          - ibm--bluepay
+          - ibm--content-services
           - ibm--data-replication
           - ibm--datastage
+          - ibm--db2
+          - ibm--db2--alt
           - ibm--match-360
           - ibm--mq
           - ibm--open-enterprise-languages
           - ibm--power-vs
+          - ibm--telehealth
+          - ibm--tenet
+          - ibm--toolchain
+          - ibm-cloud--app-id
           - ibm-cloud--citrix-daas
+          - ibm-cloud--continuous-delivery
           - ibm-cloud--dedicated-host
           - ibm-cloud--direct-link-1--connect
           - ibm-cloud--direct-link-1--dedicated
@@ -600,15 +619,19 @@ categories:
           - ibm-cloud--direct-link-2--dedicated-hosting
           - ibm-cloud--event-notification
           - ibm-cloud--event-streams
+          - ibm-cloud--for-education
+          - ibm-cloud--HSM
           - ibm-cloud--hyper-protect-crypto-services
           - ibm-cloud--hyper-protect-dbaas
           - ibm-cloud--hyper-protect-vs
           - ibm-cloud--internet-services
+          - ibm-cloud--ipsec-vpn
           - ibm-cloud--key-protect
           - ibm-cloud--kubernetes-service
           - ibm-cloud--logging
           - ibm-cloud--mass-data-migration
           - ibm-cloud--pal
+          - ibm-cloud--privileged-access-gateway
           - ibm-cloud--secrets-manager
           - ibm-cloud--security-compliance-center
           - ibm-cloud--subnets
@@ -654,10 +677,16 @@ categories:
       - name: Commerce
         members:
           - apple
+          - apple--dash
           - account
           - basketball
           - bat
           - bee-bat
+          - bottles--01
+          - bottles--01--dash
+          - bottles--02
+          - bottles--02--dash
+          - bottles--container
           - building
           - corn
           - currency
@@ -674,6 +703,8 @@ categories:
           - delivery
           - delivery--add
           - delivery--parcel
+          - drink--01
+          - drink--02
           - enterprise
           - finance
           - fish
@@ -691,6 +722,7 @@ categories:
           - piggy-bank--slot
           - purchase
           - receipt
+          - recycle
           - shopping--bag
           - shopping--cart
           - shopping--cart--arrow-down
@@ -935,6 +967,8 @@ categories:
           - archive
           - blockchain
           - boolean
+          - boot-volume
+          - boot-volume--alt
           - box-plot
           - calculation
           - calculation--alt
@@ -1039,6 +1073,8 @@ categories:
           - data-vis--2
           - data-vis--3
           - data-vis--4
+          - data-volume
+          - data-volume--alt
           - datastore
           - decision-tree
           - diagram
@@ -1116,6 +1152,7 @@ categories:
           - subflow
           - subflow--local
           - summary--KPI
+          - summary--KPI--mirror
           - sys-provision
           - table
           - table--alias
@@ -1128,6 +1165,9 @@ categories:
           - text-mining
           - text-mining--applier
           - time-plot
+          - transform--binary
+          - transform--instructions
+          - transform--language
           - tree-view
           - tree-view--alt
           - type-pattern
@@ -1284,6 +1324,7 @@ categories:
           - script--reference
           - SDK
           - security
+          - SLM
           - SQL
           - star--review
           - SVG
@@ -1383,16 +1424,23 @@ categories:
           - bare-metal-server--01
           - bare-metal-server--02
           - bastion-host
+          - batch-job
+          - batch-job--step
           - block-storage--alt
           - box--extra-large
           - box--large
           - box--medium
           - box--small
           - cics--cmas
+          - cics--db2-connection
           - cics--explorer
+          - cics--program
+          - cics--sit
+          - cics--sit-overrides
           - cics--system-group
           - cics--wui-region
           - cics-region
+          - cics-region--alt
           - cics-region--routing
           - cics-region--target
           - cicsplex
@@ -1410,6 +1458,9 @@ categories:
           - data-backup
           - data-blob
           - data-diode
+          - db2--buffer-pool
+          - db2--data-sharing-group
+          - db2--database
           - deployment-unit--data
           - deployment-unit--execution
           - deployment-unit--installation
@@ -1421,6 +1472,7 @@ categories:
           - directory-domain
           - edge-node--alt
           - encryption
+          - executable-program
           - file-storage
           - firewall
           - firewall--classic
@@ -1483,6 +1535,8 @@ categories:
           - router
           - router--voice
           - router--wifi
+          - screen-map
+          - screen-map--set
           - security-services
           - server--dns
           - server--proxy
@@ -1495,7 +1549,9 @@ categories:
           - subnet-acl-rules
           - switch-layer-2
           - switch-layer-3
+          - tcp-ip-service
           - terminal--3270
+          - tsq
           - two-factor-authentication
           - vehicle--api
           - vehicle--connected
@@ -1513,6 +1569,10 @@ categories:
           - wifi--not-secure
           - wifi--secure
           - workflow-automation
+          - z--lpar
+          - z--systems
+          - zos
+          - zos--sysplex
   - name: Person
     subcategories:
       - name: Senses
@@ -2014,6 +2074,8 @@ categories:
           - phone--ip
           - plug
           - plug--filled
+          - port--input
+          - port--output
           - printer
           - qr-code
           - radio

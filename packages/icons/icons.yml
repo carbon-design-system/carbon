@@ -939,6 +939,11 @@
     - fruit
   sizes:
     - 32
+- name: apple--dash
+  friendly_name: apple--dash
+  aliases: []
+  sizes:
+    - 32
 - name: application
   friendly_name: Application
   aliases:
@@ -1498,6 +1503,16 @@
     - animal
   sizes:
     - 32
+- name: batch-job
+  friendly_name: batch-job
+  aliases: []
+  sizes:
+    - 32
+- name: batch-job--step
+  friendly_name: batch-job--step
+  aliases: []
+  sizes:
+    - 32
 - name: battery--charging
   friendly_name: Battery charging
   sizes:
@@ -1755,6 +1770,16 @@
     - hiking
   sizes:
     - 32
+- name: boot-volume
+  friendly_name: boot-volume
+  aliases: []
+  sizes:
+    - 32
+- name: boot-volume--alt
+  friendly_name: boot-volume--alt
+  aliases: []
+  sizes:
+    - 32
 - name: border--bottom
   friendly_name: Border bottom
   aliases:
@@ -1809,6 +1834,31 @@
     - bot
     - robot
     - technology
+  sizes:
+    - 32
+- name: bottles--01
+  friendly_name: bottles--01
+  aliases: []
+  sizes:
+    - 32
+- name: bottles--01--dash
+  friendly_name: bottles--01--dash
+  aliases: []
+  sizes:
+    - 32
+- name: bottles--02
+  friendly_name: bottles--02
+  aliases: []
+  sizes:
+    - 32
+- name: bottles--02--dash
+  friendly_name: bottles--02--dash
+  aliases: []
+  sizes:
+    - 32
+- name: bottles--container
+  friendly_name: bottles--container
+  aliases: []
   sizes:
     - 32
 - name: box
@@ -2336,6 +2386,11 @@
     - design system
     - IBM design system
     - design
+  sizes:
+    - 32
+- name: carbon--ui-builder
+  friendly_name: carbon--ui-builder
+  aliases: []
   sizes:
     - 32
 - name: carbon-accounting
@@ -3803,6 +3858,11 @@
     - address space
   sizes:
     - 32
+- name: cics--db2-connection
+  friendly_name: cics--db2-connection
+  aliases: []
+  sizes:
+    - 32
 - name: cics--explorer
   friendly_name: CICS Explorer®
   aliases:
@@ -3810,11 +3870,31 @@
     - system management
   sizes:
     - 32
+- name: cics--program
+  friendly_name: cics--program
+  aliases: []
+  sizes:
+    - 32
+- name: cics--sit
+  friendly_name: cics--sit
+  aliases: []
+  sizes:
+    - 32
+- name: cics--sit-overrides
+  friendly_name: cics--sit-overrides
+  aliases: []
+  sizes:
+    - 32
 - name: cics--system-group
   friendly_name: CICS® system group
   aliases:
     - CICS®
     - System group
+  sizes:
+    - 32
+- name: cics--transaction-server-zos
+  friendly_name: cics--transaction-server-zos
+  aliases: []
   sizes:
     - 32
 - name: cics--wui-region
@@ -3829,6 +3909,11 @@
   aliases:
     - CICS®
     - region
+  sizes:
+    - 32
+- name: cics-region--alt
+  friendly_name: cics-region--alt
+  aliases: []
   sizes:
     - 32
 - name: cics-region--routing
@@ -4468,6 +4553,11 @@
   aliases:
     - connection
     - recursive
+  sizes:
+    - 32
+- name: connect--reference
+  friendly_name: connect--reference
+  aliases: []
   sizes:
     - 32
 - name: connect--source
@@ -5497,6 +5587,16 @@
     - metrics
     - stats
     - web
+- name: data-volume
+  friendly_name: data-volume
+  aliases: []
+  sizes:
+    - 32
+- name: data-volume--alt
+  friendly_name: data-volume--alt
+  aliases: []
+  sizes:
+    - 32
 - name: database--datastax
   friendly_name: IBM Cloud® Databases for DataStax
   aliases:
@@ -5591,6 +5691,21 @@
     - datastore
     - data store
     - repository
+  sizes:
+    - 32
+- name: db2--buffer-pool
+  friendly_name: db2--buffer-pool
+  aliases: []
+  sizes:
+    - 32
+- name: db2--data-sharing-group
+  friendly_name: db2--data-sharing-group
+  aliases: []
+  sizes:
+    - 32
+- name: db2--database
+  friendly_name: db2--database
+  aliases: []
   sizes:
     - 32
 - name: debug
@@ -6595,6 +6710,16 @@
     - operation
   sizes:
     - 32
+- name: drink--01
+  friendly_name: drink--01
+  aliases: []
+  sizes:
+    - 32
+- name: drink--02
+  friendly_name: drink--02
+  aliases: []
+  sizes:
+    - 32
 - name: driver-analysis
   friendly_name: Driver analysis
   aliases:
@@ -7042,6 +7167,11 @@
     - testing
     - test
     - exam
+  sizes:
+    - 32
+- name: executable-program
+  friendly_name: executable-program
+  aliases: []
   sizes:
     - 32
 - name: exit
@@ -8836,6 +8966,16 @@
     - interactive
   sizes:
     - 32
+- name: ibm--bluepay
+  friendly_name: ibm--bluepay
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--content-services
+  friendly_name: ibm--content-services
+  aliases: []
+  sizes:
+    - 32
 - name: ibm--data-replication
   friendly_name: IBM® Data Replication
   aliases:
@@ -8845,6 +8985,16 @@
     - 32
 - name: ibm--datastage
   friendly_name: ibm--datastage
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--db2
+  friendly_name: ibm--db2
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--db2--alt
+  friendly_name: ibm--db2--alt
   aliases: []
   sizes:
     - 32
@@ -8871,6 +9021,21 @@
   aliases: []
   sizes:
     - 32
+- name: ibm--telehealth
+  friendly_name: ibm--telehealth
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--tenet
+  friendly_name: ibm--tenet
+  aliases: []
+  sizes:
+    - 32
+- name: ibm--toolchain
+  friendly_name: ibm--toolchain
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud
   friendly_name: IBM Cloud®
   aliases:
@@ -8886,8 +9051,18 @@
     - IBM Cloud
   sizes:
     - 32
+- name: ibm-cloud--app-id
+  friendly_name: ibm-cloud--app-id
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud--citrix-daas
   friendly_name: ibm-cloud--citrix-daas
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--continuous-delivery
+  friendly_name: ibm-cloud--continuous-delivery
   aliases: []
   sizes:
     - 32
@@ -8948,6 +9123,16 @@
   aliases: []
   sizes:
     - 32
+- name: ibm-cloud--for-education
+  friendly_name: ibm-cloud--for-education
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--HSM
+  friendly_name: ibm-cloud--HSM
+  aliases: []
+  sizes:
+    - 32
 - name: ibm-cloud--hyper-protect-crypto-services
   friendly_name: ibm-cloud--hyper-protect-crypto-services
   aliases: []
@@ -8972,6 +9157,11 @@
     - IBM Cloud®
     - internet
     - cloud
+  sizes:
+    - 32
+- name: ibm-cloud--ipsec-vpn
+  friendly_name: ibm-cloud--ipsec-vpn
+  aliases: []
   sizes:
     - 32
 - name: ibm-cloud--key-protect
@@ -9001,6 +9191,11 @@
     - 32
 - name: ibm-cloud--pal
   friendly_name: ibm-cloud--pal
+  aliases: []
+  sizes:
+    - 32
+- name: ibm-cloud--privileged-access-gateway
+  friendly_name: ibm-cloud--privileged-access-gateway
   aliases: []
   sizes:
     - 32
@@ -10582,6 +10777,11 @@
     - inventory
     - table
     - tally
+- name: list--checked--mirror
+  friendly_name: list--checked--mirror
+  aliases: []
+  sizes:
+    - 32
 - name: list--dropdown
   friendly_name: List dropdown
   sizes:
@@ -10608,6 +10808,11 @@
     - inventory
     - table
     - tally
+- name: list--numbered--mirror
+  friendly_name: list--numbered--mirror
+  aliases: []
+  sizes:
+    - 32
 - name: load-balancer--application
   friendly_name: Load balancer application
   aliases:
@@ -10962,6 +11167,11 @@
   aliases: []
   sizes:
     - 32
+- name: logo--ansible-community
+  friendly_name: logo--ansible-community
+  aliases: []
+  sizes:
+    - 32
 - name: logo--digg
   friendly_name: Logo Digg
   sizes:
@@ -11219,6 +11429,11 @@
   aliases: []
   sizes:
     - 32
+- name: logo--red-hat-ansible
+  friendly_name: logo--red-hat-ansible
+  aliases: []
+  sizes:
+    - 32
 - name: logo--sketch
   friendly_name: logo--sketch
   aliases: []
@@ -11307,6 +11522,11 @@
     - avatar
     - tag
     - identification
+- name: logo--vmware--alt
+  friendly_name: logo--vmware--alt
+  aliases: []
+  sizes:
+    - 32
 - name: logo--vue
   friendly_name: logo--vue
   aliases: []
@@ -14049,6 +14269,16 @@
     - file
   sizes:
     - 32
+- name: port--input
+  friendly_name: port--input
+  aliases: []
+  sizes:
+    - 32
+- name: port--output
+  friendly_name: port--output
+  aliases: []
+  sizes:
+    - 32
 - name: portfolio
   friendly_name: Portfolio
   aliases:
@@ -14397,6 +14627,11 @@
     - music
     - sound
     - control
+- name: recycle
+  friendly_name: recycle
+  aliases: []
+  sizes:
+    - 32
 - name: redo
   friendly_name: Redo
   aliases:
@@ -15026,6 +15261,11 @@
     - program
   sizes:
     - 32
+- name: run--mirror
+  friendly_name: run--mirror
+  aliases: []
+  sizes:
+    - 32
 - name: S
   friendly_name: S
   aliases:
@@ -15353,6 +15593,16 @@
     - technology
     - pc
     - mac
+- name: screen-map
+  friendly_name: screen-map
+  aliases: []
+  sizes:
+    - 32
+- name: screen-map--set
+  friendly_name: screen-map--set
+  aliases: []
+  sizes:
+    - 32
 - name: script
   friendly_name: Script
   aliases:
@@ -15408,6 +15658,11 @@
     - locate
     - discover
     - identify
+  sizes:
+    - 32
+- name: search--locate--mirror
+  friendly_name: search--locate--mirror
+  aliases: []
   sizes:
     - 32
 - name: security
@@ -16165,6 +16420,11 @@
     - systems
   sizes:
     - 32
+- name: SLM
+  friendly_name: SLM
+  aliases: []
+  sizes:
+    - 32
 - name: smell
   friendly_name: Smell
   aliases:
@@ -16908,6 +17168,11 @@
     - data
   sizes:
     - 32
+- name: summary--KPI--mirror
+  friendly_name: summary--KPI--mirror
+  aliases: []
+  sizes:
+    - 32
 - name: sun
   friendly_name: Sun
   aliases:
@@ -17284,6 +17549,11 @@
     - transportation
     - transit
     - vehicle
+  sizes:
+    - 32
+- name: tcp-ip-service
+  friendly_name: tcp-ip-service
+  aliases: []
   sizes:
     - 32
 - name: temperature
@@ -18226,6 +18496,21 @@
     - travel
   sizes:
     - 32
+- name: transform--binary
+  friendly_name: transform--binary
+  aliases: []
+  sizes:
+    - 32
+- name: transform--instructions
+  friendly_name: transform--instructions
+  aliases: []
+  sizes:
+    - 32
+- name: transform--language
+  friendly_name: transform--language
+  aliases: []
+  sizes:
+    - 32
 - name: transgender
   friendly_name: Transgender
   aliases:
@@ -18369,6 +18654,11 @@
     - warning
     - weather
     - storm
+  sizes:
+    - 32
+- name: tsq
+  friendly_name: tsq
+  aliases: []
   sizes:
     - 32
 - name: tsunami
@@ -19936,6 +20226,16 @@
     - letter
   sizes:
     - 32
+- name: z--lpar
+  friendly_name: z--lpar
+  aliases: []
+  sizes:
+    - 32
+- name: z--systems
+  friendly_name: z--systems
+  aliases: []
+  sizes:
+    - 32
 - name: z-axis
   friendly_name: Z axis
   aliases:
@@ -20043,5 +20343,15 @@
     - zoom
     - magnifying glass
     - search
+  sizes:
+    - 32
+- name: zos
+  friendly_name: zos
+  aliases: []
+  sizes:
+    - 32
+- name: zos--sysplex
+  friendly_name: zos--sysplex
+  aliases: []
   sizes:
     - 32
