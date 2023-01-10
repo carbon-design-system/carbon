@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './DangerButton';
+import DangerButton from './DangerButton';
+
+export default DangerButton;
+export { DangerButton };

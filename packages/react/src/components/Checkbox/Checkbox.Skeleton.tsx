@@ -41,3 +41,4 @@ CheckboxSkeleton.propTypes = {
 };
 
 export default CheckboxSkeleton;
+export { CheckboxSkeleton };

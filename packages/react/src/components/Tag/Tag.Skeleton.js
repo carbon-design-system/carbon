@@ -36,3 +36,4 @@ TagSkeleton.propTypes = {
 };
 
 export default TagSkeleton;
+export { TagSkeleton };

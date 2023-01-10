@@ -12,3 +12,4 @@ ContainedList.ContainedListItem = ContainedListItem;
 
 export { ContainedListItem };
 export default ContainedList;
+export { ContainedList };

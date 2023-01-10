@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './UnorderedList';
+import UnorderedList from './UnorderedList';
+
+export default UnorderedList;
+export { UnorderedList };

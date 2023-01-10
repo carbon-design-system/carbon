@@ -24,3 +24,4 @@ if (__DEV__) {
 
 export { default as TextInputSkeleton } from './TextInput.Skeleton';
 export default TextInput;
+export { TextInput };

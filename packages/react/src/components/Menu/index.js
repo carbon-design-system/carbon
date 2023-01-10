@@ -18,5 +18,12 @@ Menu.MenuItem = MenuItem;
 Menu.MenuRadioGroup = MenuRadioGroup;
 Menu.MenuSelectableItem = MenuSelectableItem;
 
-export { MenuDivider, MenuGroup, MenuItem, MenuRadioGroup, MenuSelectableItem };
+export {
+  MenuDivider,
+  MenuGroup,
+  MenuItem,
+  MenuRadioGroup,
+  MenuSelectableItem,
+  Menu,
+};
 export default Menu;
