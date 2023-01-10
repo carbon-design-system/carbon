@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -277,6 +277,8 @@ class BXDropdown extends ValidityMixin(
   protected _handleUserInitiatedToggle(force: boolean = !this.open) {
     const { eventBeforeToggle, eventToggle } = this
       .constructor as typeof BXDropdown;
+
+    const { disabled } = this;
     const init = {
       bubbles: true,
       cancelable: true,
@@ -285,37 +287,39 @@ class BXDropdown extends ValidityMixin(
         open: force,
       },
     };
-    if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
-      this.open = force;
-      if (this.open) {
-        this._assistiveStatusText = this.selectingItemsAssistiveText;
-      } else {
-        const {
-          selectedItemAssistiveText,
-          triggerContent,
-          _assistiveStatusText: assistiveStatusText,
-          _selectedItemContent: selectedItemContent,
-        } = this;
-        const selectedItemText =
-          (selectedItemContent && selectedItemContent.textContent) ||
-          triggerContent;
-        if (
-          selectedItemText &&
-          assistiveStatusText !== selectedItemAssistiveText
-        ) {
-          this._assistiveStatusText = selectedItemText;
-        }
-        forEach(
-          this.querySelectorAll(
-            (this.constructor as typeof BXDropdown).selectorItemHighlighted
-          ),
-          (item) => {
-            (item as BXDropdownItem).highlighted = false;
+    if (!disabled) {
+      if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
+        this.open = force;
+        if (this.open) {
+          this._assistiveStatusText = this.selectingItemsAssistiveText;
+        } else {
+          const {
+            selectedItemAssistiveText,
+            triggerContent,
+            _assistiveStatusText: assistiveStatusText,
+            _selectedItemContent: selectedItemContent,
+          } = this;
+          const selectedItemText =
+            (selectedItemContent && selectedItemContent.textContent) ||
+            triggerContent;
+          if (
+            selectedItemText &&
+            assistiveStatusText !== selectedItemAssistiveText
+          ) {
+            this._assistiveStatusText = selectedItemText;
           }
-        );
+          forEach(
+            this.querySelectorAll(
+              (this.constructor as typeof BXDropdown).selectorItemHighlighted
+            ),
+            (item) => {
+              (item as BXDropdownItem).highlighted = false;
+            }
+          );
+        }
+        this.requestUpdate();
+        this.dispatchEvent(new CustomEvent(eventToggle, init));
       }
-      this.requestUpdate();
-      this.dispatchEvent(new CustomEvent(eventToggle, init));
     }
   }
 
