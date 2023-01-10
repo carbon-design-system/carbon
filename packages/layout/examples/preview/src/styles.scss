@@ -14,15 +14,6 @@ body {
 }
 
 //------------------------------------------------------------------------------
-// Mini unit
-//------------------------------------------------------------------------------
-.mini-unit-box {
-  width: $spacing-09;
-  height: $spacing-09;
-  background-color: black;
-}
-
-//------------------------------------------------------------------------------
 // Spacing scale
 //------------------------------------------------------------------------------
 .spacing-scale {
@@ -33,54 +24,31 @@ body {
   padding: 0;
 }
 
-@each $spacer in $spacing {
-  $index: index($spacing, $spacer);
+$index: 1;
 
+@each $key, $value in $spacing {
   .fixed-spacing-scale-#{$index} {
-    width: $spacer;
-    height: $spacer;
+    width: $value;
+    height: $value;
     background-color: black;
     margin-right: $spacing-06;
     margin-bottom: $spacing-06;
   }
+
+  $index: $index + 1;
 }
 
-@each $spacer in $fluid-spacing {
-  $index: index($fluid-spacing, $spacer);
+$index: 1;
 
+@each $key, $value in $fluid-spacing {
   .fluid-spacing-scale-#{$index} {
-    width: $spacer;
-    height: $spacer;
+    width: $value;
+    height: $value;
     background-color: black;
     margin-right: $spacing-06;
     margin-bottom: $spacing-06;
   }
+
+  $index: $index + 1;
 }
 
-//------------------------------------------------------------------------------
-// Key heights
-//------------------------------------------------------------------------------
-.key-heights {
-  display: flex;
-  align-items: flex-end;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  flex-wrap: wrap;
-}
-
-// @each $breakpoint, $scale in $carbon--key-height-scales {
-//   @include carbon--breakpoint($breakpoint) {
-//     @each $value in $scale {
-//       $index: index($scale, $value);
-
-//       .key-height-#{$index} {
-//         width: $value;
-//         height: $value;
-//         background-color: black;
-//         margin-right: carbon--mini-units(3);
-//         margin-bottom: carbon--mini-units(3);
-//       }
-//     }
-//   }
-// }
