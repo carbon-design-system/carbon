@@ -4,12 +4,16 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "parcel build --dist-dir build --public-url \"/layout/examples/preview\" index.html",
-    "develop": "parcel index.html --no-cache"
+    "develop": "next",
+    "build": "next build && next export -o build"
   },
-  "devDependencies": {
-    "@carbon/layout": "10.36.0",
-    "@parcel/transformer-sass": "^2.0.1",
-    "parcel": "^2.0.1"
+  "dependencies": {
+    "@carbon/layout": "link:../../",
+    "@carbon/styles": "link:../../../styles",
+    "change-case": "^4.1.1",
+    "next": "^10.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass": "^1.57.1"
   }
 }
