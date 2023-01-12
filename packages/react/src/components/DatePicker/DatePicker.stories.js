@@ -33,31 +33,15 @@ export default {
   },
 };
 
-export const Simple = () => {
-  const DatePicker = React.lazy(() =>
-    import('carbon-components-react').then((module) => ({
-      default: module.DatePicker,
-    }))
-  );
-
-  const DatePickerInput = React.lazy(() =>
-    import('carbon-components-react').then((module) => ({
-      default: module.DatePickerInput,
-    }))
-  );
-
-  return (
-    <React.Suspense fallback="Loading">
-      <DatePicker datePickerType="single">
-        <DatePickerInput
-          placeholder="mm/dd/yyyy"
-          labelText="Date Picker label"
-          id="date-picker-simple"
-        />
-      </DatePicker>
-    </React.Suspense>
-  );
-};
+export const Simple = () => (
+  <DatePicker datePickerType="simple">
+    <DatePickerInput
+      placeholder="mm/dd/yyyy"
+      labelText="Date Picker label"
+      id="date-picker-simple"
+    />
+  </DatePicker>
+);
 
 export const SingleWithCalendar = () => (
   <DatePicker datePickerType="single">
