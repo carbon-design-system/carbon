@@ -103,7 +103,7 @@ the repository. There is an issue tracking curring status of this effort,
   - Even still, it would be best to have as much parity as possible between
     legacy types for `carbon-components-react@v7.x` and the new typings we're
     providing for `@carbon/react@1.x`.
-  - After copying them over to your working fileß, ensure the legacy types don't
+  - After copying them over to your working file, ensure the legacy types don't
     require any updates to match the current component proptypes specification.
 - Fix errors as they appear
 - Do not add types to internal components or functions that are not exported as

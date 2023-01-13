@@ -177,6 +177,42 @@ describe('Simple date picker', () => {
 
     expect(screen.queryByRole('application')).not.toBeInTheDocument();
   });
+
+  it('should initialize a calendar when using react.lazy', async () => {
+    const LazyDatePicker = React.lazy(() =>
+      import('carbon-components-react').then((module) => ({
+        default: module.DatePicker,
+      }))
+    );
+
+    const LazyDatePickerInput = React.lazy(() =>
+      import('carbon-components-react').then((module) => ({
+        default: module.DatePickerInput,
+      }))
+    );
+
+    render(
+      <React.Suspense fallback="Loading">
+        <LazyDatePicker datePickerType="single">
+          <LazyDatePickerInput
+            placeholder="mm/dd/yyyy"
+            labelText="Date Picker label"
+            id="date-picker-simple"
+          />
+        </LazyDatePicker>
+      </React.Suspense>
+    );
+
+    expect(
+      await screen.findByLabelText('Date Picker label')
+    ).toBeInTheDocument();
+
+    const input = document.querySelector('.cds--date-picker__input');
+
+    expect(screen.getByRole('application')).not.toHaveClass('open');
+    userEvent.click(input);
+    expect(screen.getByRole('application')).toHaveClass('open');
+  });
 });
 
 describe('Single date picker', () => {

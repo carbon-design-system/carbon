@@ -6521,6 +6521,9 @@ Map {
       "element": Object {
         "type": "elementType",
       },
+      "isActive": Object {
+        "type": "bool",
+      },
       "isSideNavExpanded": Object {
         "type": "bool",
       },
