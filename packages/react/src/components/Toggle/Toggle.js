@@ -86,7 +86,7 @@ export function Toggle({
       <LabelComponent
         htmlFor={ariaLabelledby ? null : id}
         className={`${prefix}--toggle__label`}>
-        <span className={labelTextClasses}>{labelText}</span>
+        {labelText && <span className={labelTextClasses}>{labelText}</span>}
         <div className={appearanceClasses}>
           <div className={switchClasses}>
             {isSm && (
