@@ -95,7 +95,7 @@ the repository. There is an issue tracking curring status of this effort,
 - Copy the proptypes def to above the component definition
 - Retool the proptypes to be a ts interface
 - Look for any
-  [legacy types for the component, previously provided via DefinetlyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/carbon-components-react/lib/components)
+  [legacy types for the component, previously provided via DefinitelyTyped](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/carbon-components-react/lib/components)
   - Copy these legacy types over to your working file and use them as a starting
     point.
   - NOTE: If there are legacy types available, these were originally provided
