@@ -302,11 +302,13 @@ class OverflowMenu extends Component {
     }
   };
 
-  handleKeyDown = (evt) => {
-    if (keyCodeMatches(evt, [keys.ArrowDown])) {
-      this.setState({ open: !this.state.open });
-      this.props.onClick(evt);
-    }
+  closeMenuAndFocus = () => {
+    let wasOpen = this.state.open;
+    this.closeMenu(() => {
+      if (wasOpen) {
+        this.focusMenuEl();
+      }
+    });
   };
 
   handleKeyPress = (evt) => {
@@ -324,12 +326,7 @@ class OverflowMenu extends Component {
 
     // Close the overflow menu on escape
     if (keyCodeMatches(evt, [keys.Escape])) {
-      let wasOpen = this.state.open;
-      this.closeMenu(() => {
-        if (wasOpen) {
-          this.focusMenuEl();
-        }
-      });
+      this.closeMenuAndFocus();
 
       // Stop the esc keypress from bubbling out and closing something it shouldn't
       evt.stopPropagation();
@@ -383,7 +380,7 @@ class OverflowMenu extends Component {
     );
     const nextValidIndex = (() => {
       const nextIndex = enabledIndices.indexOf(currentIndex) + direction;
-      switch (enabledIndices.indexOf(currentIndex) + direction) {
+      switch (nextIndex) {
         case -1:
           return enabledIndices.length - 1;
         case enabledIndices.length:
@@ -392,9 +389,9 @@ class OverflowMenu extends Component {
           return nextIndex;
       }
     })();
-    const { overflowMenuItem } =
+    const overflowMenuItem =
       this[`overflowMenuItem${enabledIndices[nextValidIndex]}`];
-    overflowMenuItem?.current?.focus();
+    overflowMenuItem?.focus();
   };
 
   /**
@@ -436,7 +433,7 @@ class OverflowMenu extends Component {
                 `.${this.context}--overflow-menu,.${this.context}--overflow-menu-options`
               )
             ) {
-              this.closeMenu();
+              this.closeMenuAndFocus();
             }
           }
         },
