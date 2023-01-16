@@ -43,7 +43,7 @@
   "devDependencies": {
     "@carbon/icon-build-helpers": "^1.9.0",
     "@carbon/icons": "^11.15.0-rc.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^4.0.0"
   },
   "sideEffects": false
 }

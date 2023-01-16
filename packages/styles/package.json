@@ -50,7 +50,7 @@
     "lodash.isequal": "^4.5.0",
     "postcss": "^8.4.14",
     "postcss-flexbugs-fixes": "^5.0.2",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.0.0",
     "sass": "^1.51.0"
   },
   "sideEffects": [
