@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,10 +25,8 @@ const { prefix } = settings;
  * @element bx-tooltip
  */
 @customElement(`${prefix}-tooltip`)
-class BXTooltip
-  extends HostListenerMixin(LitElement)
-  implements BXFloatingMenuTrigger
-{
+class BXTooltip extends HostListenerMixin(LitElement)
+  implements BXFloatingMenuTrigger {
   /**
    * The menu body.
    */
@@ -69,7 +67,7 @@ class BXTooltip
    */
   @HostListener('keydown')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleKeydown = async (event) => {
+  private _handleKeydown = async event => {
     if ([' ', 'Enter'].includes(event.key)) {
       this._handleClick();
     } else if (event.key === 'Escape') {
@@ -128,7 +126,7 @@ class BXTooltip
       if (!this._menuBody) {
         this._menuBody = find(
           this.childNodes,
-          (elem) => (elem.constructor as typeof BXFloatingMenu).FLOATING_MENU
+          elem => (elem.constructor as typeof BXFloatingMenu).FLOATING_MENU
         );
       }
       if (this._menuBody) {
