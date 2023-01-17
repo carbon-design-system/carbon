@@ -1,4 +1,4 @@
-name: Slack Office Hours Reminder
+name: Slack Design Office Hours Reminder
 
 on:
   schedule:
@@ -93,7 +93,7 @@ jobs:
                 },
                 {
                   type: "divider",
-                },
+                }
               ]
             }
         env:
