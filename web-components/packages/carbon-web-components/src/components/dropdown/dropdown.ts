@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -122,7 +122,7 @@ class BXDropdown extends ValidityMixin(
         this.querySelectorAll(
           (this.constructor as typeof BXDropdown).selectorItemSelected
         ),
-        (item) => {
+        item => {
           (item as BXDropdownItem).selected = false;
         }
       );
@@ -277,6 +277,8 @@ class BXDropdown extends ValidityMixin(
   protected _handleUserInitiatedToggle(force: boolean = !this.open) {
     const { eventBeforeToggle, eventToggle } = this
       .constructor as typeof BXDropdown;
+
+    const { disabled } = this;
     const init = {
       bubbles: true,
       cancelable: true,
@@ -285,37 +287,39 @@ class BXDropdown extends ValidityMixin(
         open: force,
       },
     };
-    if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
-      this.open = force;
-      if (this.open) {
-        this._assistiveStatusText = this.selectingItemsAssistiveText;
-      } else {
-        const {
-          selectedItemAssistiveText,
-          triggerContent,
-          _assistiveStatusText: assistiveStatusText,
-          _selectedItemContent: selectedItemContent,
-        } = this;
-        const selectedItemText =
-          (selectedItemContent && selectedItemContent.textContent) ||
-          triggerContent;
-        if (
-          selectedItemText &&
-          assistiveStatusText !== selectedItemAssistiveText
-        ) {
-          this._assistiveStatusText = selectedItemText;
-        }
-        forEach(
-          this.querySelectorAll(
-            (this.constructor as typeof BXDropdown).selectorItemHighlighted
-          ),
-          (item) => {
-            (item as BXDropdownItem).highlighted = false;
+    if (!disabled) {
+      if (this.dispatchEvent(new CustomEvent(eventBeforeToggle, init))) {
+        this.open = force;
+        if (this.open) {
+          this._assistiveStatusText = this.selectingItemsAssistiveText;
+        } else {
+          const {
+            selectedItemAssistiveText,
+            triggerContent,
+            _assistiveStatusText: assistiveStatusText,
+            _selectedItemContent: selectedItemContent,
+          } = this;
+          const selectedItemText =
+            (selectedItemContent && selectedItemContent.textContent) ||
+            triggerContent;
+          if (
+            selectedItemText &&
+            assistiveStatusText !== selectedItemAssistiveText
+          ) {
+            this._assistiveStatusText = selectedItemText;
           }
-        );
+          forEach(
+            this.querySelectorAll(
+              (this.constructor as typeof BXDropdown).selectorItemHighlighted
+            ),
+            item => {
+              (item as BXDropdownItem).highlighted = false;
+            }
+          );
+        }
+        this.requestUpdate();
+        this.dispatchEvent(new CustomEvent(eventToggle, init));
       }
-      this.requestUpdate();
-      this.dispatchEvent(new CustomEvent(eventToggle, init));
     }
   }
 
@@ -327,7 +331,7 @@ class BXDropdown extends ValidityMixin(
       this.querySelectorAll(
         (this.constructor as typeof BXDropdown).selectorItem
       ),
-      (item) => {
+      item => {
         (item as BXDropdownItem).highlighted = false;
       }
     );
@@ -533,20 +537,20 @@ class BXDropdown extends ValidityMixin(
   shouldUpdate(changedProperties) {
     const { selectorItem } = this.constructor as typeof BXDropdown;
     if (changedProperties.has('size')) {
-      forEach(this.querySelectorAll(selectorItem), (elem) => {
+      forEach(this.querySelectorAll(selectorItem), elem => {
         (elem as BXDropdownItem).size = this.size;
       });
     }
     if (changedProperties.has('value')) {
       // `<bx-multi-select>` updates selection beforehand
       // because our rendering logic for `<bx-multi-select>` looks for selected items via `qSA()`
-      forEach(this.querySelectorAll(selectorItem), (elem) => {
+      forEach(this.querySelectorAll(selectorItem), elem => {
         (elem as BXDropdownItem).selected =
           (elem as BXDropdownItem).value === this.value;
       });
       const item = find(
         this.querySelectorAll(selectorItem),
-        (elem) => (elem as BXDropdownItem).value === this.value
+        elem => (elem as BXDropdownItem).value === this.value
       );
       if (item) {
         const range = this.ownerDocument!.createRange();
@@ -566,7 +570,7 @@ class BXDropdown extends ValidityMixin(
     if (changedProperties.has('disabled')) {
       const { disabled } = this;
       // Propagate `disabled` attribute to descendants until `:host-context()` gets supported in all major browsers
-      forEach(this.querySelectorAll(selectorItem), (elem) => {
+      forEach(this.querySelectorAll(selectorItem), elem => {
         (elem as BXDropdownItem).disabled = disabled;
       });
     }
@@ -647,7 +651,8 @@ class BXDropdown extends ValidityMixin(
           <div
             part="helper-text"
             class="${helperClasses}"
-            ?hidden="${inline || !hasHelperText}">
+            ?hidden="${inline || !hasHelperText}"
+          >
             <slot name="helper-text" @slotchange="${handleSlotchangeHelperText}"
               >${helperText}</slot
             >
@@ -672,7 +677,8 @@ class BXDropdown extends ValidityMixin(
             part="menu-body"
             class="${prefix}--list-box__menu"
             role="listbox"
-            tabindex="-1">
+            tabindex="-1"
+          >
             <slot></slot>
           </div>
         `;
@@ -680,7 +686,8 @@ class BXDropdown extends ValidityMixin(
       <label
         part="label-text"
         class="${labelClasses}"
-        ?hidden="${!hasLabelText}">
+        ?hidden="${!hasLabelText}"
+      >
         <slot name="label-text" @slotchange="${handleSlotchangeLabelText}"
           >${labelText}</slot
         >
@@ -691,7 +698,8 @@ class BXDropdown extends ValidityMixin(
         ?data-invalid=${invalid}
         @click=${handleClickInner}
         @keydown=${handleKeydownInner}
-        @keypress=${handleKeypressInner}>
+        @keypress=${handleKeypressInner}
+      >
         ${validityIcon}
         <div
           part="trigger-button"
@@ -702,7 +710,8 @@ class BXDropdown extends ValidityMixin(
           aria-expanded="${String(open)}"
           aria-haspopup="listbox"
           aria-owns="menu-body"
-          aria-controls="menu-body">
+          aria-controls="menu-body"
+        >
           ${this._renderPrecedingTriggerContent()}${this._renderTriggerContent()}${this._renderFollowingTriggerContent()}
           <div class="${iconContainerClasses}">
             ${ChevronDown16({ 'aria-label': toggleLabel })}
@@ -715,7 +724,8 @@ class BXDropdown extends ValidityMixin(
         class="${prefix}--assistive-text"
         role="status"
         aria-live="assertive"
-        aria-relevant="additions text">
+        aria-relevant="additions text"
+      >
         ${assistiveStatusText}
       </div>
     `;
