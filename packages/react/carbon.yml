@@ -847,6 +847,7 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/accessibility.mdx
       overviewPath: ./src/components/Toggletip/docs/overview.mdx
   tooltip:
     status: stable
@@ -880,6 +881,10 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
     docs:
       overviewPath: ./src/components/TreeView/docs/overview.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tree-view/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tree-view/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tree-view/accessibility.mdx
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tree-view/code.mdx
   ui-shell-header:
     framework: react
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
@@ -890,6 +895,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/accessibility.mdx
       codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/code.mdx
   ui-shell-left-panel:
     framework: react
@@ -901,7 +909,10 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/style.mdx
       codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/code.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/accessibility.mdx
   ui-shell-right-panel:
     framework: react
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
@@ -912,7 +923,10 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/style.mdx
       codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/code.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/accessibility.mdx
   unordered-list:
     name: Unordered list
     framework: react

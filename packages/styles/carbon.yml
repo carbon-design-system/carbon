@@ -586,6 +586,16 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/accessibility.mdx
+  read-only-states:
+    name: Read-only states
+    description: Read-only states are applied to components when the user is allowed to review but not modify the component. It removes all interactive functions from the component.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/read-only-states-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: TODO
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/patterns/read-only-states-pattern/index.mdx
   search:
     name: Search
     description: Search enables users to specify a word or a phrase to find relevant pieces of content without the use of navigation.
@@ -795,6 +805,7 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/accessibility.mdx
   tooltip:
     name: Tooltip
     description: Tooltips display additional information upon hover or focus. The information included should be contextual, helpful, and nonessential while providing that extra ability to communicate and give clarity to a user.
@@ -826,9 +837,14 @@ assets:
     type: component
     platform: web
     noIndex: true
+    externalDocsUrl: https://carbondesignsystem.com/components/tree-view/usage
     thumbnailPath: ./thumbnails/tree-view.svg
     tags:
       - contextual-navigation
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tree-view/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tree-view/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tree-view/accessibility.mdx
   ui-shell-header:
     name: UI shell header
     description: This header is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
@@ -859,6 +875,7 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/accessibility.mdx
   ui-shell-right-panel:
     name: UI shell right panel
     description: The right panel is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
@@ -873,3 +890,4 @@ assets:
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/accessibility.mdx
