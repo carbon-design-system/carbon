@@ -22,6 +22,7 @@ const InfoBanner = () => (
 
 // eslint-disable-next-line react/prop-types
 export const StoryFrame = ({ children }) => (
+  // eslint-disable-next-line react/forbid-dom-props
   <div style={{ height: 'calc(100vh - 6.25rem)' }}>
     <InfoBanner />
     {children}
