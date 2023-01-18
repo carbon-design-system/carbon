@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './ContainedListItem';
+import ContainedListItem from './ContainedListItem';
+
+export default ContainedListItem;
+export { ContainedListItem };

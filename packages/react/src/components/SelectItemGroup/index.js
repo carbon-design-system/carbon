@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './SelectItemGroup';
+import SelectItemGroup from './SelectItemGroup';
+
+export default SelectItemGroup;
+export { SelectItemGroup };

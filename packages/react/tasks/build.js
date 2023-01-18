@@ -18,7 +18,7 @@ const packageJson = require('../package.json');
 
 async function build() {
   const reactEntrypoint = {
-    filepath: path.resolve(__dirname, '..', 'src', 'index.js'),
+    filepath: path.resolve(__dirname, '..', 'src', 'index.ts'),
     outputDirectory: path.resolve(__dirname, '..'),
   };
   const iconsEntrypoint = {

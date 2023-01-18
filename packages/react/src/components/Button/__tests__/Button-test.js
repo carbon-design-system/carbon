@@ -151,5 +151,22 @@ describe('Button', () => {
       render(<Button hasIconOnly iconDescription="test" renderIcon={Add} />);
       expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
     });
+
+    it('should support rendering as a custom element with the `as` prop', () => {
+      function CustomComponent(props) {
+        return <div data-testid="custom-component" {...props} />;
+      }
+
+      render(
+        <Button
+          hasIconOnly
+          iconDescription="test"
+          renderIcon={Add}
+          as={CustomComponent}
+        />
+      );
+      expect(screen.getByTestId('custom-component')).toBeInTheDocument();
+      expect(screen.getByLabelText('test')).toHaveClass('cds--btn--icon-only');
+    });
   });
 });

@@ -5,5 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import Dropdown from './Dropdown';
+
 export { default as DropdownSkeleton } from './Dropdown.Skeleton';
-export default from './Dropdown';
+export default Dropdown;
+export { Dropdown };

@@ -5,7 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './FluidDatePicker';
-export FluidDatePicker from './FluidDatePicker';
+import FluidDatePicker from './FluidDatePicker';
 
 export { default as FluidDatePickerSkeleton } from './FluidDatePicker.Skeleton';
+export default FluidDatePicker;
+export { FluidDatePicker };
