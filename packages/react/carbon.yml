@@ -94,6 +94,24 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/accessibility.mdx
       overviewPath: ./src/components/Checkbox/docs/overview.mdx
+  class-prefix:
+    name: Class prefix
+    description: The ClassPrefix component is used to change the prefix in the classes used by components in Carbon.
+    type: component
+    framework: react
+    status: stable
+    platform: web
+    thumbnailPath: TODO
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-classprefix
+    tags:
+    # TODO: confirm with aubrey
+      - TODO
+    docs:
+      overviewPath: ./src/components/ClassPrefix/docs/overview.mdx
   code-snippet:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
@@ -304,6 +322,23 @@ assets:
       - form
     docs:
       overviewPath: ./src/components/FormGroup/docs/overview.mdx
+  form-label:
+    name: Form label
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: TODO
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
+    tags:
+    # TODO: confirm with aubrey
+      - content-block
+    docs:
+      overviewPath: ./src/components/FormLabel/docs/overview.mdx
   grid:
     status: stable
     type: component
@@ -331,6 +366,24 @@ assets:
       overviewPath: ./src/components/Heading/docs/overview.mdx
     tags:
       - content-element
+  id-prefix:
+    name: Id prefix
+    description: The IdPrefix component is used to change the prefix applied to the automatically generated id attributes placed on certain DOM elements.
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: TODO
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-idprefix
+    docs:
+      overviewPath: ./src/components/IdPrefix/docs/overview.mdx
+    tags:
+    # ask Aubrey
+      - TODO
   icon-button:
     name: Icon button
     framework: react
@@ -391,6 +444,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text--layout-and-text
     tags:
       - input-control
+    docs:
+      overviewPath: ./src/components/Layout/docs/overview.mdx
   link:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
@@ -735,6 +790,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
     tags:
       - input-control
+    docs:
+      overviewPath: ./src/components/Text/docs/overview.mdx
   text-direction:
     name: Unstable text direction
     framework: react
@@ -748,6 +805,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text--set-text-direction
     tags:
       - input-control
+    docs:
+      overviewPath: ./src/components/Text/docs/text-direction-overview.mdx
   text-area:
     status: stable
     framework: react
@@ -850,7 +909,7 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/accessibility.mdx
       overviewPath: ./src/components/Tooltip/docs/overview.mdx
-  tooltip-definition:
+  definition-tooltip:
     status: stable
     framework: react
     demoLinks:
@@ -965,6 +1024,20 @@ assets:
     platform: web
     tags:
       - hook
+  use-prefix:
+    name: usePrefix
+    description: A hook that returns the prefix used in our classes.
+    framework: react
+    status: stable
+    type: function
+    platform: web
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/hooks-useprefix--page
+    tags:
+      - hook
   use-theme:
     name: useTheme
     framework: react
@@ -973,3 +1046,5 @@ assets:
     platform: web
     tags:
       - hook
+    docs:
+      overviewPath: ./src/components/Theme/docs/use-theme-overview.mdx

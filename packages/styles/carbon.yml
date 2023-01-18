@@ -821,8 +821,8 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/accessibility.mdx
-  tooltip-definition:
-    name: Tooltip definition
+  definition-tooltip:
+    name: Definition tooltip
     description: The DefinitionTooltip component is used to provide additional information about a particular term or phrase in text content. It is similar to a Tooltip component but has fewer alignment options and has a slightly different interaction pattern.
     status: stable
     type: component
