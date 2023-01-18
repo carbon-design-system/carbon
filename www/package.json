@@ -39,7 +39,7 @@
   "devDependencies": {
     "fast-glob": "^3.2.7",
     "lodash.merge": "^4.6.2",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.0.0",
     "semver": "^7.3.5"
   }
 }

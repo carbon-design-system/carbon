@@ -35,7 +35,7 @@
     "@carbon/icons": "^11.15.0-rc.0",
     "fs-extra": "^10.0.0",
     "prettier": "^2.7.1",
-    "rimraf": "^3.0.0",
+    "rimraf": "^4.0.0",
     "rollup": "^2.79.1",
     "vue": "^2.6.8"
   },
