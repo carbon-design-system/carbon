@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './SkeletonIcon';
+import SkeletonIcon from './SkeletonIcon';
+
+export default SkeletonIcon;
+export { SkeletonIcon };

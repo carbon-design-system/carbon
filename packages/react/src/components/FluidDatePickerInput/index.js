@@ -5,5 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './FluidDatePickerInput';
-export FluidDatePickerInput from './FluidDatePickerInput';
+import FluidDatePickerInput from './FluidDatePickerInput';
+
+export default FluidDatePickerInput;
+export { FluidDatePickerInput };

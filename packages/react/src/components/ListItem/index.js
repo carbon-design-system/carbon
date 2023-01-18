@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './ListItem';
+import ListItem from './ListItem';
+
+export default ListItem;
+export { ListItem };

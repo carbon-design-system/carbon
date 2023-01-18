@@ -49,6 +49,7 @@ DataTable.TableToolbarSearch = TableToolbarSearch;
 DataTable.TableToolbarMenu = TableToolbarMenu;
 
 export {
+  DataTable,
   Table,
   TableActionList,
   TableBatchAction,

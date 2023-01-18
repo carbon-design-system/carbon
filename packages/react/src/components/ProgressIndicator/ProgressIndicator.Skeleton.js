@@ -57,3 +57,4 @@ ProgressIndicatorSkeleton.propTypes = {
 };
 
 export default ProgressIndicatorSkeleton;
+export { ProgressIndicatorSkeleton };

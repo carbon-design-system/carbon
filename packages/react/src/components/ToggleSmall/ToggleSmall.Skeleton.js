@@ -10,7 +10,7 @@ import React from 'react';
 import cx from 'classnames';
 import { PrefixContext } from '../../internal/usePrefix';
 
-export default class ToggleSmallSkeleton extends React.Component {
+class ToggleSmallSkeleton extends React.Component {
   static propTypes = {
     ['aria-label']: PropTypes.string.isRequired,
 
@@ -74,3 +74,6 @@ export default class ToggleSmallSkeleton extends React.Component {
     );
   }
 }
+
+export default ToggleSmallSkeleton;
+export { ToggleSmallSkeleton };

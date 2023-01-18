@@ -5,4 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './InlineLoading';
+import InlineLoading from './InlineLoading';
+export default InlineLoading;
+export { InlineLoading };

@@ -5,4 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './SecondaryButton';
+import SecondaryButton from './SecondaryButton';
+export default SecondaryButton;
+export { SecondaryButton };

@@ -129,7 +129,15 @@ test('Public API should only change with a semver change', () => {
   const CarbonReact = require('../src');
   const PublicAPI = new Map();
 
-  Object.keys(CarbonReact).forEach((name) => {
+  // Sort alphabetically
+  const CarbonReactOrdered = Object.keys(CarbonReact)
+    .sort()
+    .reduce((obj, key) => {
+      obj[key] = CarbonReact[key];
+      return obj;
+    }, {});
+
+  Object.keys(CarbonReactOrdered).forEach((name) => {
     const Component = CarbonReact[name];
     PublicAPI.set(name, mapComponentToAPI(Component));
   });
@@ -137,7 +145,15 @@ test('Public API should only change with a semver change', () => {
   function mapComponentToAPI(Component) {
     const api = {};
 
-    Object.keys(Component).forEach((key) => {
+    // Sort alphabetically
+    const ComponentOrdered = Object.keys(Component)
+      .sort()
+      .reduce((obj, key) => {
+        obj[key] = Component[key];
+        return obj;
+      }, {});
+
+    Object.keys(ComponentOrdered).forEach((key) => {
       // There are a couple of properties on components that we don't believe
       // are part of our API, such as `_` prefixed variables, or capture details
       // that are internal to a library-specific piece of functionality. For
