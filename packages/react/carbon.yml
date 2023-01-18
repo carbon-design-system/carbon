@@ -623,19 +623,6 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/accessibility.mdx
       overviewPath: ./src/components/Search/docs/overview.mdx
-  section:
-    name: Section
-    framework: react
-    status: stable
-    type: component
-    platform: web
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/heading
-    tags:
-      - content-element
   select:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage
