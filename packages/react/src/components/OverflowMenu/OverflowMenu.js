@@ -277,6 +277,14 @@ class OverflowMenu extends Component {
     }
   }
 
+  componentDidMount() {
+    // ensure that if open=true on first render, we wait
+    // to render the floating menu until the trigger ref is not null
+    if (this._triggerRef.current) {
+      this.setState({ hasMountedTrigger: true });
+    }
+  }
+
   static getDerivedStateFromProps({ open }, state) {
     const { prevOpen } = state;
     return prevOpen === open
@@ -568,7 +576,7 @@ class OverflowMenu extends Component {
           id={id}
           ref={mergeRefs(this._triggerRef, ref)}>
           <IconElement {...iconProps} />
-          {open && wrappedMenuBody}
+          {open && this.state.hasMountedTrigger && wrappedMenuBody}
         </button>
       </ClickListener>
     );
