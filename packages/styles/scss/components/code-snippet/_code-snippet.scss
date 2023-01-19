@@ -43,6 +43,7 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn,
   .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
     background-color: $layer;
     color: $text-disabled;
