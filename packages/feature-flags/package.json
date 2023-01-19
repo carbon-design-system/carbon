@@ -44,7 +44,7 @@
     "change-case": "^4.1.2",
     "fs-extra": "^10.0.0",
     "js-yaml": "^3.14.0",
-    "rimraf": "^3.0.2",
+    "rimraf": "^4.0.0",
     "rollup": "^2.79.1",
     "rollup-plugin-strip-banner": "^2.0.0"
   },
