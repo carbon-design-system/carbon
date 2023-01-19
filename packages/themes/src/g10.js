@@ -30,7 +30,7 @@ import {
   // Support
   blue50,
   green40,
-  green60,
+  green50,
   yellow30,
   orange40,
   red50,
@@ -172,7 +172,7 @@ export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
 
 // Support
 export const supportError = red60;
-export const supportSuccess = green60;
+export const supportSuccess = green50;
 export const supportWarning = yellow30;
 export const supportInfo = blue70;
 export const supportErrorInverse = red50;

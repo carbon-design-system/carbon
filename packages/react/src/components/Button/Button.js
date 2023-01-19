@@ -158,6 +158,7 @@ const Button = React.forwardRef(function Button(
 
     return (
       <IconButton
+        as={as}
         align={align}
         label={iconDescription}
         kind={kind}

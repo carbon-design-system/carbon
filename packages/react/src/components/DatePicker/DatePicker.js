@@ -11,6 +11,8 @@ import React, {
   useEffect,
   useRef,
   useImperativeHandle,
+  useCallback,
+  useState,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -214,7 +216,13 @@ const DatePicker = React.forwardRef(function DatePicker(
 ) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const startInputField = useRef(null);
+  const [hasInput, setHasInput] = useState(false);
+  const startInputField = useCallback((node) => {
+    if (node !== null) {
+      startInputField.current = node;
+      setHasInput(true);
+    }
+  }, []);
   const endInputField = useRef(null);
   const calendarRef = useRef(null);
   const savedOnChange = useSavedCallback(onChange);
@@ -274,7 +282,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       return;
     }
 
-    if (startInputField.current === null) {
+    if (!startInputField.current) {
       return;
     }
 
@@ -451,7 +459,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         end.removeEventListener('change', handleOnChange);
       }
     };
-  }, [savedOnChange, savedOnClose, savedOnOpen, readOnly]); //eslint-disable-line react-hooks/exhaustive-deps
+  }, [savedOnChange, savedOnClose, savedOnOpen, readOnly, hasInput]); //eslint-disable-line react-hooks/exhaustive-deps
 
   // this hook allows consumers to access the flatpickr calendar
   // instance for cases where functions like open() or close()
@@ -508,7 +516,7 @@ const DatePicker = React.forwardRef(function DatePicker(
     } else if (!calendarRef.current && value) {
       startInputField.current.value = value;
     }
-  }, [value, prefix]);
+  }, [value, prefix]); //eslint-disable-line react-hooks/exhaustive-deps
 
   let fluidError;
   if (isFluid) {
