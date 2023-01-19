@@ -101,15 +101,14 @@ assets:
     framework: react
     status: stable
     platform: web
-    thumbnailPath: TODO
+    thumbnailPath: ./thumbnails/class-prefix.svg
     demoLinks:
       - type: storybook
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-classprefix
     tags:
-    # TODO: confirm with aubrey
-      - TODO
+      - content-element
     docs:
       overviewPath: ./src/components/ClassPrefix/docs/overview.mdx
   code-snippet:
@@ -328,15 +327,14 @@ assets:
     status: stable
     type: component
     platform: web
-    thumbnailPath: TODO
+    thumbnailPath: ./thumbnails/form-label.svg
     demoLinks:
       - type: storybook
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
     tags:
-    # TODO: confirm with aubrey
-      - content-block
+      - content-element
     docs:
       overviewPath: ./src/components/FormLabel/docs/overview.mdx
   grid:
@@ -373,7 +371,7 @@ assets:
     status: stable
     type: component
     platform: web
-    thumbnailPath: TODO
+    thumbnailPath: ./thumbnails/id-prefix.svg
     demoLinks:
       - type: storybook
         name: Storybook
@@ -382,8 +380,7 @@ assets:
     docs:
       overviewPath: ./src/components/IdPrefix/docs/overview.mdx
     tags:
-    # ask Aubrey
-      - TODO
+      - content-element
   icon-button:
     name: Icon button
     framework: react
