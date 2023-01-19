@@ -1,4 +1,4 @@
-name: Slack Office Hours Reminder
+name: Slack Design Office Hours Reminder
 
 on:
   schedule:
@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Send custom JSON data to Slack workflow
         id: slack
-        uses: slackapi/slack-github-action@v1.22.0
+        uses: slackapi/slack-github-action@v1.23.0
         with:
           payload: |
             {
@@ -93,7 +93,7 @@ jobs:
                 },
                 {
                   type: "divider",
-                },
+                }
               ]
             }
         env:

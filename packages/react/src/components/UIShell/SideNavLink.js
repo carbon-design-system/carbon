@@ -61,6 +61,11 @@ SideNavLink.propTypes = {
   className: PropTypes.string,
 
   /**
+   * Specify whether the link is the current page
+   */
+  isActive: PropTypes.bool,
+
+  /**
    * Specify if this is a large variation of the SideNavLink
    */
   large: PropTypes.bool,

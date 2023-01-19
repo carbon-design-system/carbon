@@ -5,7 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { OverflowMenu } from './OverflowMenu';
+import { OverflowMenu as OverflowMenuComponent } from './OverflowMenu';
 import { createClassWrapper } from '../../internal/createClassWrapper';
 
-export default createClassWrapper(OverflowMenu);
+const OverflowMenu = createClassWrapper(OverflowMenuComponent);
+
+export default OverflowMenu;
+export { OverflowMenu };

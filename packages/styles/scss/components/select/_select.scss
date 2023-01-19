@@ -121,7 +121,7 @@
   }
 
   .#{$prefix}--select--light .#{$prefix}--select-input {
-    background-color: $field;
+    background-color: $field-02;
 
     &:hover {
       background-color: $field-hover;
@@ -129,7 +129,7 @@
 
     &:disabled,
     &:hover:disabled {
-      background-color: $field;
+      background-color: $field-02;
       color: $text-disabled;
       cursor: not-allowed;
     }

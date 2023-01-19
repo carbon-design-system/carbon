@@ -8,3 +8,4 @@ import Search from './Search';
 
 export { default as SearchSkeleton } from './Search.Skeleton';
 export default Search;
+export { Search };
