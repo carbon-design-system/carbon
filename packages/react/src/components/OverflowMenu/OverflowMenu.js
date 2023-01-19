@@ -20,6 +20,7 @@ import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
+import { IconButton } from '../IconButton';
 
 const on = (element, ...args) => {
   element.addEventListener(...args);
@@ -233,10 +234,8 @@ class OverflowMenu extends Component {
   static contextType = PrefixContext;
 
   static defaultProps = {
-    ariaLabel: FeatureFlags.enabled('enable-v11-release')
-      ? null
-      : 'Open and close list of options',
-    iconDescription: 'Open and close list of options',
+    ariaLabel: FeatureFlags.enabled('enable-v11-release') ? null : 'Options',
+    iconDescription: 'Options',
     open: false,
     direction: DIRECTION_BOTTOM,
     flipped: false,
@@ -553,7 +552,7 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <button
+        <IconButton
           {...other}
           type="button"
           aria-haspopup
@@ -561,12 +560,12 @@ class OverflowMenu extends Component {
           className={overflowMenuClasses}
           onKeyDown={this.handleKeyPress}
           onClick={this.handleClick}
-          aria-label={ariaLabel}
           id={id}
-          ref={mergeRefs(this._triggerRef, ref)}>
+          ref={mergeRefs(this._triggerRef, ref)}
+          label={iconDescription}>
           <IconElement {...iconProps} />
           {open && wrappedMenuBody}
-        </button>
+        </IconButton>
       </ClickListener>
     );
   }
