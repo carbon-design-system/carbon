@@ -33,6 +33,14 @@ module.exports = {
     'react/jsx-no-useless-fragment': 2,
     'react/no-typos': 2,
     'react/sort-prop-types': 2,
+    'react/forbid-component-props': [
+      2,
+      { forbid: [{ propName: 'style', message: 'Avoid using style prop' }] },
+    ],
+    'react/forbid-dom-props': [
+      2,
+      { forbid: [{ propName: 'style', message: 'Avoid using style prop' }] },
+    ],
 
     // react-hooks
     'react-hooks/rules-of-hooks': 2,
@@ -77,6 +85,16 @@ module.exports = {
       rules: {
         'react/display-name': 0,
         'react/prop-types': 0,
+        'react/forbid-component-props': 0,
+        'react/forbid-dom-props': 0,
+      },
+    },
+    // style prop is fine to be used in internal unit testing
+    {
+      files: ['*.e2e.js'],
+      rules: {
+        'react/forbid-component-props': 0,
+        'react/forbid-dom-props': 0,
       },
     },
 
