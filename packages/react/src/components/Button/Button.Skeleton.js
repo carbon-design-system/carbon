@@ -78,3 +78,4 @@ ButtonSkeleton.propTypes = {
 };
 
 export default ButtonSkeleton;
+export { ButtonSkeleton };

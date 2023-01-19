@@ -6,6 +6,8 @@
  */
 
 import { createClassWrapper } from '../../internal/createClassWrapper';
-import TileGroup from './TileGroup';
+import TileGroupCarbon from './TileGroup';
 
-export default createClassWrapper(TileGroup);
+const TileGroup = createClassWrapper(TileGroupCarbon);
+export default TileGroup;
+export { TileGroup };

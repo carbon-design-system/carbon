@@ -39,7 +39,7 @@ export type ToggleSkeletonProps = {
   size?: 'sm' | 'md'
 };
 
-export default class ToggleSkeleton extends React.Component<ToggleSkeletonProps> {
+class ToggleSkeleton extends React.Component<ToggleSkeletonProps> {
   static propTypes = {
     ['aria-label']: PropTypes.string.isRequired,
 
@@ -110,3 +110,6 @@ export default class ToggleSkeleton extends React.Component<ToggleSkeletonProps>
     );
   }
 }
+
+export default ToggleSkeleton;
+export { ToggleSkeleton };

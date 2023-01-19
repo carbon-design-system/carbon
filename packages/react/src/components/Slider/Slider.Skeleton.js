@@ -43,3 +43,4 @@ SliderSkeleton.propTypes = {
 };
 
 export default SliderSkeleton;
+export { SliderSkeleton };

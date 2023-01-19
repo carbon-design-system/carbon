@@ -13,6 +13,11 @@ import { usePrefix } from '../../internal/usePrefix';
 
 export type ToggleProps = {
   /**
+   * Specify another element's id to be used as the label for this toggle
+   */
+  'aria-labelledby'?: string,
+
+  /**
    * Specify a custom className to apply to the form-item node
    */
   className?: string;
@@ -80,6 +85,7 @@ export type ToggleProps = {
 };
 
 export const Toggle: React.FC<ToggleProps> = ({
+  'aria-labelledby': ariaLabelledby,
   className,
   defaultToggled = false,
   disabled = false,
@@ -114,6 +120,8 @@ export const Toggle: React.FC<ToggleProps> = ({
 
   const isSm = size === 'sm';
   const sideLabel = hideLabel ? labelText : checked ? labelB : labelA;
+  const renderSideLabel = !(hideLabel && ariaLabelledby);
+  const LabelComponent = ariaLabelledby ? 'div' : 'label';
 
   const wrapperClasses = classNames(
     `${prefix}--toggle`,
@@ -145,11 +153,14 @@ export const Toggle: React.FC<ToggleProps> = ({
         role="switch"
         type="button"
         aria-checked={checked}
+        aria-labelledby={ariaLabelledby}
         disabled={disabled}
         onClick={handleClick}
       />
-      <label htmlFor={id} className={`${prefix}--toggle__label`}>
-        <span className={labelTextClasses}>{labelText}</span>
+      <LabelComponent
+        htmlFor={ariaLabelledby ? undefined : id}
+        className={`${prefix}--toggle__label`}>
+        {labelText && <span className={labelTextClasses}>{labelText}</span>}
         <div className={appearanceClasses}>
           <div className={switchClasses}>
             {isSm && (
@@ -162,16 +173,23 @@ export const Toggle: React.FC<ToggleProps> = ({
               </svg>
             )}
           </div>
-          <span className={`${prefix}--toggle__text`} aria-hidden="true">
-            {sideLabel}
-          </span>
+          {renderSideLabel && (
+            <span className={`${prefix}--toggle__text`} aria-hidden="true">
+              {sideLabel}
+            </span>
+          )}
         </div>
-      </label>
+      </LabelComponent>
     </div>
   );
 }
 
 Toggle.propTypes = {
+  /**
+   * Specify another element's id to be used as the label for this toggle
+   */
+  'aria-labelledby': PropTypes.string,
+
   /**
    * Specify a custom className to apply to the form-item node
    */
@@ -209,9 +227,17 @@ Toggle.propTypes = {
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
-   * control
+   * control. This is required unless 'aria-labelledby' is provided instead
    */
-  labelText: PropTypes.node.isRequired,
+  labelText: (props, ...rest) => {
+    if (!props['aria-labelledby'] && !props.labelText) {
+      return new Error(
+        'labelText property is required if no aria-labelledby is provided.'
+      );
+    }
+
+    return PropTypes.node(props, ...rest);
+  },
 
   /**
    * Provide an event listener that is called when the control is clicked
