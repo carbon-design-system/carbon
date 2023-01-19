@@ -59,6 +59,7 @@ const Stack = React.forwardRef(function Stack(props, ref) {
   }
 
   return (
+    // eslint-disable-next-line react/forbid-component-props
     <BaseComponent {...rest} ref={ref} className={className} style={style}>
       {children}
     </BaseComponent>
