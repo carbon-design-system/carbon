@@ -26,26 +26,26 @@ jobs:
         run: yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
-      - name: Install ibmcloud CLI
-        run: curl -fsSL https://clis.cloud.ibm.com/install/osx | sh
-      - name: Login to IBM Cloud
-        env:
-          CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY}}
-        run: |
-          ibmcloud login \
-            -a 'https://cloud.ibm.com' \
-            --apikey "$CLOUD_API_KEY" \
-            -r 'us-south'
-          ibmcloud target -o 'carbon-design-system' -s 'production'
-      - name: Install IBM Cloud plugins
-        run: |
-          ibmcloud cf install
-          ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-          ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
-      - name: Deploy React storybook
+      - name: Build static React storybook
         run: |
           cd packages/react
           yarn build-storybook
-          ibmcloud cf blue-green-deploy carbon-storybook \
-            -f manifest.yml \
-            --delete-old-apps
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
+        with:
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - name: Push to v7 repo
+        uses: cpina/github-action-push-to-another-repository@main
+        env:
+          # SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+          API_TOKEN_GITHUB: ${{ steps.generate_token.outputs.token }}
+        with:
+          source-directory: 'storybook-static'
+          destination-github-username: 'carbon-design-system'
+          destination-repository-name: 'carbon-storybook-v7'
+          user-name: carbon-bot
+          user-email: carbon@us.ibm.com
+          target-branch: main
+          commit-message: 'chore(release):  ${{ github.ref }}'
