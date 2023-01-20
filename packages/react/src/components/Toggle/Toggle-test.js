@@ -88,9 +88,27 @@ describe('Toggle', () => {
           .classList.contains(`${prefix}--visually-hidden`)
       ).toBe(true);
       expect(
-        wrapper.container.querySelector(`.${prefix}--toggle__label-text`)
-          .textContent
+        wrapper.container.querySelector(`.${prefix}--toggle__text`).textContent
       ).toBe(props.labelText);
+    });
+
+    it("doesn't render sideLabel if props.hideLabel and props['aria-labelledby'] are provided", () => {
+      const externalElementId = 'external-element-id';
+      wrapper.rerender(
+        <Toggle {...props} hideLabel aria-labelledby={externalElementId} />
+      );
+
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__text`)
+      ).toBeNull();
+
+      expect(wrapper.getByRole('switch').getAttribute('aria-labelledby')).toBe(
+        externalElementId
+      );
+
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__label`).tagName
+      ).toBe('DIV');
     });
   });
 
