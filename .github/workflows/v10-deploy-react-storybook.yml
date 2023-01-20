@@ -39,8 +39,8 @@ jobs:
       - name: Push to v7 repo
         uses: cpina/github-action-push-to-another-repository@main
         env:
-          # SSH_DEPLOY_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
-          API_TOKEN_GITHUB: ${{ steps.generate_token.outputs.token }}
+          SSH_DEPLOY_KEY: ${{ steps.generate_token.outputs.token }}
+          # API_TOKEN_GITHUB: ${{ steps.generate_token.outputs.token }}
         with:
           source-directory: 'storybook-static'
           destination-github-username: 'carbon-design-system'
