@@ -35,7 +35,7 @@ jobs:
         env:
           API_TOKEN_GITHUB: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         with:
-          source-directory: 'storybook-static'
+          source-directory: 'packages/react/storybook-static'
           destination-github-username: 'carbon-design-system'
           destination-repository-name: 'carbon-storybook-v7'
           user-name: carbon-bot
