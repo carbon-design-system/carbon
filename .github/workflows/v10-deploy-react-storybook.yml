@@ -33,7 +33,7 @@ jobs:
       - name: Create CNAME
         run: |
           touch packages/react/storybook-static/CNAME
-          echo "v7-react.carbondesignsystem.com" > ~/packages/react/CNAME
+          echo "v7-react.carbondesignsystem.com" > ~/packages/react/storybook-static/CNAME
       - name: Push to v7 repo
         uses: cpina/github-action-push-to-another-repository@main
         env:
