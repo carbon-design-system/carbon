@@ -75,7 +75,7 @@ export interface NumberInputProps
   /**
    * Provide text that is used alongside the control label for additional help
    */
-  helperText: ReactNode;
+  helperText?: ReactNode;
 
   /**
    * Specify whether you want the underlying label to be visually hidden
