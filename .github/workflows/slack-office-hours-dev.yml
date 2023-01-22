@@ -1,4 +1,4 @@
-name: Slack Office Hours Reminder
+name: Slack Office Hours Reminder - Dev
 
 on:
   schedule:

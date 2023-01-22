@@ -5,8 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import Slider from './Slider';
+import SliderComponent from './Slider';
 import { createClassWrapper } from '../../internal/createClassWrapper';
 
+const Slider = createClassWrapper(SliderComponent);
+
 export { default as SliderSkeleton } from './Slider.Skeleton';
-export default createClassWrapper(Slider);
+export default Slider;
+export { Slider };

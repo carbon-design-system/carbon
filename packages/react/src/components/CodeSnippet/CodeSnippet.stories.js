@@ -229,8 +229,8 @@ export const Skeleton = () => (
 );
 
 export const Playground = (args) => (
-  <CodeSnippet feedback="Copied to clipboard" {...args}>
-    {'node -v'}
+  <CodeSnippet type="single" feedback="Copied to clipboard" {...args}>
+    {'yarn add @carbon/react'}
   </CodeSnippet>
 );
 

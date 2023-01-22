@@ -75,3 +75,4 @@ DatePickerSkeleton.propTypes = {
 };
 
 export default DatePickerSkeleton;
+export { DatePickerSkeleton };
