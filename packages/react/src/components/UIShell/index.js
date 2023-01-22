@@ -5,35 +5,35 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export Content from './Content';
+export { default as Content } from './Content';
 
-export Header from './Header';
-export HeaderContainer from './HeaderContainer';
-export HeaderGlobalAction from './HeaderGlobalAction';
-export HeaderGlobalBar from './HeaderGlobalBar';
-export HeaderMenu from './HeaderMenu';
-export HeaderMenuButton from './HeaderMenuButton';
-export HeaderMenuItem from './HeaderMenuItem';
-export HeaderName from './HeaderName';
-export { HeaderNavigation } from './HeaderNavigation';
-export HeaderPanel from './HeaderPanel';
-export HeaderSideNavItems from './HeaderSideNavItems';
-export Switcher from './Switcher';
-export SwitcherItem from './SwitcherItem';
-export SwitcherDivider from './SwitcherDivider';
+export { default as Header } from './Header';
+export { default as HeaderContainer } from './HeaderContainer';
+export { default as HeaderGlobalAction } from './HeaderGlobalAction';
+export { default as HeaderGlobalBar } from './HeaderGlobalBar';
+export { default as HeaderMenu } from './HeaderMenu';
+export { default as HeaderMenuButton } from './HeaderMenuButton';
+export { default as HeaderMenuItem } from './HeaderMenuItem';
+export { default as HeaderName } from './HeaderName';
+export { default as HeaderNavigation } from './HeaderNavigation';
+export { default as HeaderPanel } from './HeaderPanel';
+export { default as HeaderSideNavItems } from './HeaderSideNavItems';
+export { default as Switcher } from './Switcher';
+export { default as SwitcherItem } from './SwitcherItem';
+export { default as SwitcherDivider } from './SwitcherDivider';
 
-export SkipToContent from './SkipToContent';
+export { default as SkipToContent } from './SkipToContent';
 
-export SideNav from './SideNav';
-export SideNavDetails from './SideNavDetails';
-export SideNavDivider from './SideNavDivider';
-export SideNavFooter from './SideNavFooter';
-export SideNavHeader from './SideNavHeader';
-export SideNavIcon from './SideNavIcon';
-export SideNavItem from './SideNavItem';
-export SideNavItems from './SideNavItems';
-export SideNavLink from './SideNavLink';
-export SideNavLinkText from './SideNavLinkText';
-export { SideNavMenu } from './SideNavMenu';
-export SideNavMenuItem from './SideNavMenuItem';
-export SideNavSwitcher from './SideNavSwitcher';
+export { default as SideNav } from './SideNav';
+export { default as SideNavDetails } from './SideNavDetails';
+export { default as SideNavDivider } from './SideNavDivider';
+export { default as SideNavFooter } from './SideNavFooter';
+export { default as SideNavHeader } from './SideNavHeader';
+export { default as SideNavIcon } from './SideNavIcon';
+export { default as SideNavItem } from './SideNavItem';
+export { default as SideNavItems } from './SideNavItems';
+export { default as SideNavLink } from './SideNavLink';
+export { default as SideNavLinkText } from './SideNavLinkText';
+export { default as SideNavMenu } from './SideNavMenu';
+export { default as SideNavMenuItem } from './SideNavMenuItem';
+export { default as SideNavSwitcher } from './SideNavSwitcher';

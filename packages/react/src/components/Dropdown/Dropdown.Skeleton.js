@@ -46,3 +46,4 @@ DropdownSkeleton.propTypes = {
 };
 
 export default DropdownSkeleton;
+export { DropdownSkeleton };

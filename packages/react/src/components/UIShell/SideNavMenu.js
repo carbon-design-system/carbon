@@ -153,4 +153,5 @@ function hasActiveChild(children) {
   return false;
 }
 
+export default SideNavMenu;
 export { SideNavMenu };

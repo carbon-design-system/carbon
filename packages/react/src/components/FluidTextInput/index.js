@@ -5,7 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './FluidTextInput';
-export FluidTextInput from './FluidTextInput';
+import FluidTextInput from './FluidTextInput';
+
+export default FluidTextInput;
+export { FluidTextInput };
 
 export { default as FluidTextInputSkeleton } from './FluidTextInput.Skeleton';

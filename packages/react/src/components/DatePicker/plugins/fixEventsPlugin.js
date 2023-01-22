@@ -44,12 +44,50 @@ export default (config) => (fp) => {
   };
 
   /**
+   * Handles `blur` event.
+   *
+   * For whatever reason, manual changes within the `to` input do not update the
+   * calendar on blur. If a manual change is made within the input, this block will
+   * set the date again, triggering the calendar to update.
+   */
+  const handleBlur = (event) => {
+    const { inputFrom, inputTo } = config;
+    const { target } = event;
+
+    // Only fall into this logic if the event is on the `to` input and there is a
+    // `to` date selected
+    if (inputTo === target && fp.selectedDates[1]) {
+      // Using getTime() enables the ability to more readily compare the date currently
+      // selected in the calendar and the date currently in the value of the input
+      const selectedToDate = new Date(fp.selectedDates[1]).getTime();
+      const currentValueToDate = new Date(inputTo.value).getTime();
+
+      // The date should only be set if both dates are valid dates, and they don't match.
+      // When they don't match, this indiciates that the date selected in the calendar is stale,
+      // and the current value in the input should be set for the calendar to update.
+      if (
+        selectedToDate &&
+        currentValueToDate &&
+        selectedToDate !== currentValueToDate
+      ) {
+        // Update the calendar with the value of the `to` date input
+        fp.setDate(
+          [inputFrom.value, inputTo && inputTo.value],
+          false,
+          fp.config.dateFormat
+        );
+      }
+    }
+  };
+
+  /**
    * Releases event listeners used in this Flatpickr plugin.
    */
   const release = () => {
     const { inputFrom, inputTo } = config;
     if (inputTo) {
       inputTo.removeEventListener('keydown', handleKeydown, true);
+      inputTo.removeEventListener('blur', handleBlur, true);
     }
     inputFrom.removeEventListener('keydown', handleKeydown, true);
   };
@@ -63,6 +101,7 @@ export default (config) => (fp) => {
     inputFrom.addEventListener('keydown', handleKeydown, true);
     if (inputTo) {
       inputTo.addEventListener('keydown', handleKeydown, true);
+      inputTo.addEventListener('blur', handleBlur, true);
     }
   };
 
