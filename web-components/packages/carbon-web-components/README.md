@@ -23,13 +23,13 @@ with no framework tax, no framework silo.
   </a>
 </p>
 
-# `carbon-web-components`
+# `@carbon/web-components`
 
-`carbon-web-components` is a variant of Carbon Design System with Custom
+`@carbon/web-components` is a variant of Carbon Design System with Custom
 Elements v1 and Shadow DOM v1 specs.
 
-> The original `carbon-web-components` repository has been archived. All future
-> work for the package will take place in this monorepo. Please visit the
+> The original repository, `carbon-web-components`, has been archived. All
+> future work for the package will take place in this monorepo. Please visit the
 > [original repository](https://github.com/carbon-design-system/carbon-web-components)
 > for full history of the files.
 
@@ -294,7 +294,7 @@ import { AppComponent } from './app.component';
 export class AppModule {}
 ```
 
-The `.d.ts` files in `carbon-web-components` package are compiled with
+The `.d.ts` files in `@carbon/web-components` package are compiled with
 TypeScript 3.7. You can use TypeScript 3.7 in your Angular application with
 upcoming Angular `9.0` release, or with the following instructions, so your
 application can use those `.d.ts` files:
@@ -312,7 +312,7 @@ application can use those `.d.ts` files:
 [![Edit carbon-web-components with React](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-web-components/tree/main/examples/codesandbox/react)
 
 You can use wrapper React components in
-`carbon-web-components/es/components-react` generated
+`@carbon/web-components/es/components-react` generated
 [automatically from the custom elements](./src/globals/wrappers/createReactCustomElementType.ts)
 which allows you to use our components seamlessly in your React code. Here's an
 example:
