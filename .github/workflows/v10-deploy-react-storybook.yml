@@ -1,4 +1,4 @@
-name: v10 - Deploy React storybook to IBM Cloud
+name: v10 - Deploy React storybook to GitHub Pages
 
 on:
   workflow_dispatch:
