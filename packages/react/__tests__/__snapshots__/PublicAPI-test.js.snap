@@ -2910,7 +2910,17 @@ Map {
         "type": "string",
       },
       "renderIcon": Object {
-        "type": "element",
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "role": Object {
         "type": "string",
@@ -6113,7 +6123,17 @@ Map {
         "type": "string",
       },
       "renderIcon": Object {
-        "type": "element",
+        "args": Array [
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
+        ],
+        "type": "oneOfType",
       },
       "role": Object {
         "type": "string",
