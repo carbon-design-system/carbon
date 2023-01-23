@@ -1,0 +1,21 @@
+{
+  "name": "carbon-bootstrap",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Bootstrap your application with IBM Carbon Design framework",
+  "license": "MIT",
+  "engines": {
+    "node": ">=16"
+  },
+  "keywords": [
+    "react",
+    "create-react-app",
+    "template",
+    "IBM Carbon"
+  ],
+  "main": "template.json",
+  "files": [
+    "template",
+    "template.json"
+  ]
+}
