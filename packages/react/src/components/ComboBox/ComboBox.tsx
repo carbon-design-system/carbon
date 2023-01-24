@@ -16,8 +16,6 @@ import {
   WarningFilled,
 } from '@carbon/icons-react';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
-import ListBoxMenuItem from '../ListBox/ListBoxMenuItem';
-import ListBoxMenu from '../ListBox/ListBoxMenu';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -266,7 +264,7 @@ const ComboBox = React.forwardRef((
     light,
     onChange,
     onInputChange,
-    onToggleClick, 
+    onToggleClick,
     placeholder,
     readOnly,
     selectedItem,
@@ -274,8 +272,10 @@ const ComboBox = React.forwardRef((
     size,
     titleText,
     translateWithId,
+    type: _type, 
     warn,
     warnText,
+    onStateChange: _onStateChange, 
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -319,7 +319,7 @@ const ComboBox = React.forwardRef((
 
   const handleOnChange = (selectedItem) => {
     if (onChange) {
-      onChange({selectedItem });
+      onChange({ selectedItem });
     }
   };
 
@@ -460,7 +460,7 @@ const ComboBox = React.forwardRef((
             }
           },
         });
-        const inputProps : any = getInputProps({
+        const inputProps: any = getInputProps({
           // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
           'aria-labelledby': null,
           disabled,
@@ -556,30 +556,35 @@ const ComboBox = React.forwardRef((
                   translateWithId={translateWithId}
                 />
               </div>
-              <ListBoxMenu {...getMenuProps({ 'aria-label': ariaLabel })}>
+              <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
                 {isOpen
                   ? filterItems(items, itemToString, inputValue).map(
                       (item, index) => {
                         const itemProps = getItemProps({
                           item,
                           index,
-                          ['aria-current']: selectedItem === item ? "true" : "false",
+                          ['aria-current']:
+                            selectedItem === item ? 'true' : 'false',
                           ['aria-selected']:
-                            highlightedIndex === index ? "true" : "false",
+                            highlightedIndex === index ? 'true' : 'false',
                           disabled: item.disabled,
                         });
                         return (
-                          <ListBoxMenuItem
+                          <ListBox.MenuItem
                             key={itemProps.id}
                             isActive={selectedItem === item}
                             isHighlighted={
                               highlightedIndex === index ||
                               ((selectedItem as any)?.id &&
-                              (selectedItem as any)?.id === item.id) ||
+                                (selectedItem as any)?.id === item.id) ||
                               false
                             }
                             title={
-                              itemToElement ? item.text : itemToString ? itemToString(item) : defaultItemToString(item)
+                              itemToElement
+                                ? item.text
+                                : itemToString
+                                ? itemToString(item)
+                                : defaultItemToString(item)
                             }
                             {...itemProps}>
                             {itemToElement ? (
@@ -593,12 +598,12 @@ const ComboBox = React.forwardRef((
                                 className={`${prefix}--list-box__menu-item__selected-icon`}
                               />
                             )}
-                          </ListBoxMenuItem>
+                          </ListBox.MenuItem>
                         );
                       }
                     )
                   : null}
-              </ListBoxMenu>
+              </ListBox.Menu>
             </ListBox>
             {helperText && !invalid && !warn && !isFluid && (
               <Text as="div" id={comboBoxHelperId} className={helperClasses}>
