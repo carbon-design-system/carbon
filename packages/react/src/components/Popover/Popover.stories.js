@@ -7,7 +7,7 @@
 
 import './story.scss';
 import { Checkbox } from '@carbon/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './Popover.mdx';
 
@@ -129,8 +129,32 @@ Playground.story = {
 };
 
 export const AutoAlign = () => {
+  const [open, setOpen] = useState(false);
   return (
     <div>
+      <div
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          right: '50%',
+          margin: '3rem',
+        }}>
+        <Popover open={open} autoAlign>
+          <div className="playground-trigger">
+            <Checkbox
+              onClick={() => {
+                setOpen(!open);
+              }}
+            />
+          </div>
+          <PopoverContent className="p-3">
+            <p className="popover-title">Available storage</p>
+            <p className="popover-details">
+              This server has 150 GB of block storage remaining.
+            </p>
+          </PopoverContent>
+        </Popover>
+      </div>
       <Popover open autoAlign>
         <div className="playground-trigger">
           <Checkbox />

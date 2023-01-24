@@ -35,14 +35,7 @@ export const SmallToggle = () => (
 );
 
 export const Playground = (args) => (
-  <Toggle
-    labelText="Toggle element label"
-    labelA="Off"
-    labelB="On"
-    defaultToggled
-    id="toggle-1"
-    {...args}
-  />
+  <Toggle labelA="Off" labelB="On" defaultToggled id="toggle-1" {...args} />
 );
 
 Playground.argTypes = {
