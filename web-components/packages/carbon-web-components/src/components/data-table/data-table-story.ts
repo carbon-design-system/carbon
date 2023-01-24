@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,14 +12,14 @@ import { html, property, LitElement } from 'lit-element';
 import { repeat } from 'lit-html/directives/repeat';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
-// Below path will be there when an application installs `@carbon/web-components` package.
+// Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Delete16 from '@carbon/web-components/es/icons/delete/16';
+import Delete16 from 'carbon-web-components/es/icons/delete/16';
 // @ts-ignore
-import Download16 from '@carbon/web-components/es/icons/download/16';
+import Download16 from 'carbon-web-components/es/icons/download/16';
 // @ts-ignore
-import Settings16 from '@carbon/web-components/es/icons/settings/16';
+import Settings16 from 'carbon-web-components/es/icons/settings/16';
 import BXBtn from '../button/button';
 import ifNonNull from '../../globals/directives/if-non-null';
 import '../overflow-menu/overflow-menu';
@@ -114,9 +114,9 @@ class BXCEDemoDataTable extends LitElement {
    * @param lhs A value.
    * @param rhs Another value.
    * @returns
-   *   `0` if the given two values are equal
-   *   A negative value to sort `lhs` to an index lower than `rhs`
-   *   A positive value to sort `rhs` to an index lower than `lhs`
+   *   * `0` if the given two values are equal
+   *   * A negative value to sort `lhs` to an index lower than `rhs`
+   *   * A positive value to sort `rhs` to an index lower than `lhs`
    */
   private _compare(lhs, rhs) {
     if (typeof lhs === 'number' && typeof rhs === 'number') {

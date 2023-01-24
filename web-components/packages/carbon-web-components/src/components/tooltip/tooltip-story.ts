@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2023
+ * Copyright IBM Corp. 2019, 2022
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,10 +9,10 @@
 
 import { html } from 'lit-element';
 import { boolean, select } from '@storybook/addon-knobs';
-// Below path will be there when an application installs `@carbon/web-components` package.
+// Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Filter16 from '@carbon/web-components/es/icons/filter/16';
+import Filter16 from 'carbon-web-components/es/icons/filter/16';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import ifNonNull from '../../globals/directives/if-non-null';
 import '../button/button';
