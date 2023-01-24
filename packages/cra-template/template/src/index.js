@@ -10,9 +10,7 @@ const client = new ApolloClient({
   cache: cache,
   uri: 'https://api.github.com/graphql',
   headers: {
-    authorization: `Bearer ${
-        process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN
-    }`,
+    authorization: `Bearer ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
   },
 });
 
@@ -26,12 +24,12 @@ root.render(
     </React.StrictMode>
 );*/
 ReactDOM.render(
-    <React.StrictMode>
-      <ApolloProvider client={client}>
-        <App/>
-      </ApolloProvider>
-    </React.StrictMode>,
-    document.getElementById('root')
+  <React.StrictMode>
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
