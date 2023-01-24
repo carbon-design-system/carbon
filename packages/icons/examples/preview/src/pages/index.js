@@ -247,18 +247,3 @@ The source for this icon is available [here](${source}).
   url.search = params;
   return url.href;
 }
-
-// render();
-
-// if (module.hot) {
-//   module.hot.dispose(() => {
-//     render();
-//   });
-// }
-
-
-
-
-
-
-
