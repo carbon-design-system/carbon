@@ -1,43 +1,38 @@
-# Getting Started with Create React App
+# @carbon/cra-template
 
-This project helps to bootstrap your application with IBM Carbon Design framework. The application
-has 2 sample pages, and those can be accessed over ```/``` and ```/repopage``` respectively.
-It's easy for someone to spin up an app with everything you need to start building with Carbon.
+This is the official Carbon Design System template for
+[Create React App](https://github.com/facebook/create-react-app).
 
-## Prerequisites: 
+## Usage
 
-Please create a personal github token and add it to your .env file as given below. The repopage
-uses apollo-client library to fetch repositories and display it on the carbon datatable. This is
-only needed, when you want 'REPOPAGE' to be loaded with datatable.
+To use this template, add `--template @carbon` when creating a new app.
 
-```dotenv
-REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN=xxx
+For example:
+
+```
+npx create-react-app my-app --template @carbon
+
+# or
+
+yarn create react-app my-app --template @carbon
 ```
 
-## Available Scripts
+For more information, please refer to:
 
-In the project directory, you can run:
+- [Getting Started](https://create-react-app.dev/docs/getting-started) – How to
+  create a new app.
+- [User Guide](https://create-react-app.dev) – How to develop apps bootstrapped
+  with Create React App.
 
-### `npm start`
+## Prerequisites
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+A GitHub personal access token (PAT) is required for the example `/repopage` to
+be able to fetch repository data.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. [Create a personal access token in GitHub](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+2. Create an `.env` file in the root directory
+3. Add the token to the `.env` file
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
+```
+REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN=xxx
+```

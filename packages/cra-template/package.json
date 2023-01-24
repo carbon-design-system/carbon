@@ -1,9 +1,8 @@
 {
-  "name": "carbon-bootstrap",
-  "version": "0.1.0",
-  "private": true,
-  "description": "Bootstrap your application with IBM Carbon Design framework",
-  "license": "MIT",
+  "name": "cra-template",
+  "version": "0.0.0",
+  "description": "The Carbon Design System template for Create React App",
+  "license": "Apache-2.0",
   "engines": {
     "node": ">=16"
   },
@@ -11,7 +10,11 @@
     "react",
     "create-react-app",
     "template",
-    "IBM Carbon"
+    "ibm",
+    "carbon",
+    "carbon-design-system",
+    "components",
+    "react"
   ],
   "main": "template.json",
   "files": [
