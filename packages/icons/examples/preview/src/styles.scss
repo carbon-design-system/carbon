@@ -30,7 +30,7 @@ body {
 margin: 0;
 font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
 padding: 0;
-background: #f4f4f4;
+background: $gray-10;
 }
 
 table {
@@ -142,8 +142,8 @@ pre[class*='language-'] ::selection {
 code,
 :not(pre) > code[class*='language-'] {
   border-radius: 0.3em;
-  background: #f4f4f4;
-  color: #262626;
+  background: $gray-10;
+  color: $gray-90;
   padding: 0.25rem 0.5rem;
   white-space: normal;
 }
