@@ -78,7 +78,7 @@ jobs:
                   type: "section",
                   text: {
                     type: "mrkdwn",
-                    text: ":memo:  *Sign up to share and get help at a future session*",\
+                    text: ":memo:  *Sign up to share and get help at a future session*"
                   },
                   accessory: {
                     type: "button",
