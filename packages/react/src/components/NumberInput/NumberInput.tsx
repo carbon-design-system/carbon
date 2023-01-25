@@ -326,10 +326,6 @@ const NumberInput = React.forwardRef(function NumberInput(
     [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
   });
 
-  // normalizedProps.icon actually has type CarbonIconType | undefined, from the DefinitelyTyped
-  // definition for icons-react. We use any here instead to avoid adding a dependency to that
-  // library. If those types become available without that dependency we should update the type
-  // of normalizedProps.icon.
   const Icon = normalizedProps.icon as any;
   return (
     <div
@@ -392,8 +388,6 @@ const NumberInput = React.forwardRef(function NumberInput(
                 disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
-                    // parseInt will coerce its argument to a string, so even if value is a number
-                    // we will be safe - hence the typecast to convince Typescript.
                     value: clamp(max, min, parseInt(value as string) - step),
                     direction: 'down',
                   };
@@ -419,8 +413,6 @@ const NumberInput = React.forwardRef(function NumberInput(
                 disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
-                    // parseInt will coerce its argument to a string, so even if value is a number
-                    // we will be safe - hence the typecast to convince Typescript.
                     value: clamp(max, min, parseInt(value as string) + step),
                     direction: 'up',
                   };
