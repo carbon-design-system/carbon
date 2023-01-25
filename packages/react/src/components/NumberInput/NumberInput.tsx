@@ -280,6 +280,7 @@ const NumberInput = React.forwardRef(function NumberInput(
   });
 
   if (controlledValue !== prevControlledValue) {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     setValue(controlledValue!);
     setPrevControlledValue(controlledValue);
   }
@@ -319,6 +320,7 @@ const NumberInput = React.forwardRef(function NumberInput(
   };
 
   const outerElementClasses = cx(`${prefix}--form-item`, {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     [customClassName!]: !!customClassName,
     [`${prefix}--number-input--fluid--invalid`]:
       isFluid && normalizedProps.invalid,
