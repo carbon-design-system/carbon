@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.23.0...@carbon/web-components@1.24.0-rc.0) (2023-01-25)
+
+
+### Bug Fixes
+
+* **bx-dropdown:** prevent interactivity while disabled ([#9881](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9881)) ([5fe8471](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/5fe84714b109b2cebb1cde06cf88eeb22da6baf5)), closes [#9754](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9754)
+* **masthead:** update logo url protocol ([#9914](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9914)) ([ece8c04](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/ece8c0426bb222341b2ddd423498fcb9b899e7dc)), closes [#9567](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9567)
+* **styles:** add missing styles for breadcrumb and modal ([#9942](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9942)) ([9a90ea1](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/9a90ea15de00b182dd3795f820ef525cd1809a4e)), closes [#9936](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9936) [#9923](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9923)
+* **tooltip:** close tooltip on escape or focusout ([#9871](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9871)) ([3fdd70e](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/3fdd70e85627fcf1d704b1dbb316771050ca6047)), closes [#8996](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8996)
+
+
+### Features
+
+* **tile:** add custom event to `selected-tile` ([#9898](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9898)) ([11fe5bf](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/11fe5bfb03ded3c766e10245b03406c846bb03bd)), closes [#9740](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9740)
+
+
+
+
+
 # [1.23.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.23.0-rc.0...@carbon/web-components@1.23.0) (2023-01-17)
 
 **Note:** Version bump only for package @carbon/web-components
