@@ -6521,6 +6521,9 @@ Map {
       "element": Object {
         "type": "elementType",
       },
+      "isActive": Object {
+        "type": "bool",
+      },
       "isSideNavExpanded": Object {
         "type": "bool",
       },
@@ -8495,6 +8498,9 @@ Map {
   },
   "Toggle" => Object {
     "propTypes": Object {
+      "aria-labelledby": Object {
+        "type": "string",
+      },
       "className": Object {
         "type": "string",
       },
@@ -8517,10 +8523,7 @@ Map {
       "labelB": Object {
         "type": "node",
       },
-      "labelText": Object {
-        "isRequired": true,
-        "type": "node",
-      },
+      "labelText": [Function],
       "onClick": Object {
         "type": "func",
       },
