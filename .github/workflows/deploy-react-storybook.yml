@@ -1,4 +1,4 @@
-name: Deploy React storybook to IBM Cloud
+name: Deploy React storybook to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -37,29 +37,10 @@ jobs:
         run: yarn install --immutable --immutable-cache
       - name: Build project
         run: yarn build
-      - name: Install ibmcloud CLI
-        run: curl -fsSL https://clis.cloud.ibm.com/install/osx | sh
-      - name: Login to IBM Cloud
-        env:
-          CLOUD_API_KEY: ${{ secrets.CLOUD_API_KEY}}
-        run: |
-          ibmcloud login \
-            -a 'https://cloud.ibm.com' \
-            --apikey "$CLOUD_API_KEY" \
-            -r 'us-south'
-          ibmcloud target -o 'carbon-design-system' -s 'production'
-      - name: Install IBM Cloud plugins
-        run: |
-          ibmcloud cf install
-          ibmcloud cf add-plugin-repo CF-Community https://plugins.cloudfoundry.org
-          ibmcloud cf install-plugin blue-green-deploy -f -r CF-Community
-      - name: Deploy React storybook
+      - name: Build React storybook
         run: |
           cd packages/react
           yarn build-storybook
-          ibmcloud cf blue-green-deploy carbon-storybook \
-            -f manifest.yml \
-            --delete-old-apps
       - name: Setup Pages
         uses: actions/configure-pages@v2
       - name: Upload artifact
