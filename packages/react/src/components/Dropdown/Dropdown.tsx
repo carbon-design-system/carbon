@@ -63,7 +63,7 @@ export interface DropdownProps<ItemType>
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps: any; // UseSelectProps<ItemType>;
+  downshiftProps?: Partial<UseSelectProps<ItemType>>;
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -454,7 +454,7 @@ Dropdown.propTypes = {
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps: PropTypes.object,
+  downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
   /**
    * Provide helper text that is used alongside the control label for
