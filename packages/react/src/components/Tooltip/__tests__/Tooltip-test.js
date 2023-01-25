@@ -8,6 +8,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 import { Tooltip } from '../';
+import userEvent from '@testing-library/user-event';
 
 describe('Tooltip', () => {
   it('should support a custom className with the `className` prop', () => {
@@ -53,5 +54,36 @@ describe('Tooltip', () => {
       </Tooltip>
     );
     expect(screen.getByText('test')).toHaveAttribute('aria-describedby');
+  });
+
+  it('should call onFocus', () => {
+    const onFocus = jest.fn();
+    render(
+      <Tooltip description="test description">
+        <button type="button" onFocus={onFocus}>
+          test
+        </button>
+      </Tooltip>
+    );
+
+    userEvent.click(screen.getByRole('button'));
+    expect(onFocus).toHaveBeenCalled();
+  });
+
+  it('should call onBlur', () => {
+    const onBlur = jest.fn();
+    render(
+      <Tooltip description="test description">
+        <button type="button" onBlur={onBlur}>
+          test
+        </button>
+      </Tooltip>
+    );
+
+    userEvent.click(screen.getByRole('button'));
+    userEvent.tab();
+    userEvent.tab();
+
+    expect(onBlur).toHaveBeenCalled();
   });
 });

@@ -43,6 +43,22 @@ function Tooltip({
     onMouseEnter,
   };
 
+  function getChildEventHandlers(childProps) {
+    const onFocus = () => {
+      triggerProps.onFocus();
+      if (childProps?.onFocus) {
+        childProps.onFocus();
+      }
+    };
+    const onBlur = () => {
+      triggerProps.onBlur();
+      if (childProps?.onBlur) {
+        childProps?.onBlur();
+      }
+    };
+    return { onFocus, onBlur };
+  }
+
   if (label) {
     triggerProps['aria-labelledby'] = id;
   } else {
@@ -88,7 +104,10 @@ function Tooltip({
       onMouseLeave={onMouseLeave}
       open={open}
       ref={containerRef}>
-      {React.cloneElement(child, triggerProps)}
+      {React.cloneElement(child, {
+        ...triggerProps,
+        ...getChildEventHandlers(child.props),
+      })}
       <PopoverContent
         aria-hidden="true"
         className={`${prefix}--tooltip-content`}
