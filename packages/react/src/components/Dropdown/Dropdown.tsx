@@ -386,8 +386,7 @@ const Dropdown = React.forwardRef(<ItemType,>(
                 index,
                 disabled,
               });
-              const text = isObject && 'text' in item ? item.text : itemToString(item);
-              const title = itemToElement ? text : itemToString(item);
+              const title = isObject && 'text' in item && itemToElement ? item.text : itemToString(item);
               return (
                 <ListBox.MenuItem
                   key={itemProps.id}
