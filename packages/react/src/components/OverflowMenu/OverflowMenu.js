@@ -18,7 +18,6 @@ import { OverflowMenuVertical } from '@carbon/icons-react';
 import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
 import mergeRefs from '../../tools/mergeRefs';
 import { PrefixContext } from '../../internal/usePrefix';
-import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
 import { IconButton } from '../IconButton';
 
@@ -100,9 +99,7 @@ class OverflowMenu extends Component {
     /**
      * The ARIA label.
      */
-    ariaLabel: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.string.isRequired
-      : PropTypes.string,
+    ariaLabel: PropTypes.string.isRequired,
 
     /**
      * The child nodes.
@@ -148,12 +145,10 @@ class OverflowMenu extends Component {
      * `true` to use the light version. For use on $ui-01 backgrounds only.
      * Don't use this to make OverflowMenu background color same as container background color.
      */
-    light: FeatureFlags.enabled('enable-v11-release')
-      ? deprecate(
-          PropTypes.bool,
-          'The `light` prop for `OverflowMenu` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
-        )
-      : PropTypes.bool,
+    light: deprecate(
+      PropTypes.bool,
+      'The `light` prop for `OverflowMenu` is no longer needed and has been deprecated. It will be removed in the next major release. Use the Layer component instead.'
+    ),
 
     /**
      * The adjustment in position applied to the floating menu.
@@ -226,15 +221,13 @@ class OverflowMenu extends Component {
     /**
      * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
      */
-    size: FeatureFlags.enabled('enable-v11-release')
-      ? PropTypes.oneOf(['sm', 'md', 'lg'])
-      : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg']),
   };
 
   static contextType = PrefixContext;
 
   static defaultProps = {
-    ariaLabel: FeatureFlags.enabled('enable-v11-release') ? null : 'Options',
+    ariaLabel: null,
     iconDescription: 'Options',
     open: false,
     direction: DIRECTION_BOTTOM,
