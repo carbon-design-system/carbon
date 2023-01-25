@@ -280,11 +280,6 @@ const NumberInput = React.forwardRef(function NumberInput(
   });
 
   if (controlledValue !== prevControlledValue) {
-    // This cast is safe because a component should never change between being a controlled and
-    // uncontrolled component (https://reactjs.org/link/controlled-components).
-    // This condition can only be reached if controlledValue is not equal to prevControlledValue.
-    // controlledValue can only be undefined AND not equal to prevControlledValue if the above
-    // rule is violated (the component changed from controlled to uncontrolled).
     setValue(controlledValue!);
     setPrevControlledValue(controlledValue);
   }
