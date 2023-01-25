@@ -391,7 +391,7 @@ Dropdown.propTypes = {
    * Provide the title text that will be read by a screen reader when
    * visiting this control
    */
-  titleText: PropTypes.node,
+  titleText: PropTypes.node.isRequired,
 
   /**
    * Callback function for translating ListBoxMenuIcon SVG title
