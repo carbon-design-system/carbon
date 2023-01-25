@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -74,6 +74,10 @@
 
 :host(#{$prefix}-modal[open]) {
   @extend .#{$prefix}--modal, .is-visible;
+
+  // TODO: look into if following two lines are necessary after v11 upgrade
+  opacity: 1;
+  visibility: inherit;
 }
 
 :host(#{$prefix}-modal-header) {
