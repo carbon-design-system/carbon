@@ -114,7 +114,6 @@ const ListBoxSelection: ListBoxSelectionComponent = ({
         className={`${prefix}--tag__close-icon`}
         onClick={handleOnClick}
         onKeyDown={handleOnKeyDown}
-        // disabled={disabled} TODO determine if that's always been broken
         aria-label={t('clear.all')}
         title={description}
         aria-disabled={readOnly ? true : undefined}>
