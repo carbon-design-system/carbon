@@ -8,7 +8,7 @@
 import Dropdown, { OnChangeData } from './Dropdown';
 
 export type { OnChangeData };
-export { Dropdown }
+export { Dropdown };
 export { default as DropdownSkeleton } from './Dropdown.Skeleton';
 
 export default Dropdown;

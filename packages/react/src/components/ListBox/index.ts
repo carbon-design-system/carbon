@@ -8,19 +8,23 @@
 export * as PropTypes from './ListBoxPropTypes';
 export * from './ListBoxPropTypes';
 
-import ListBoxInternal, { ListBoxComponent as ListBoxPartialComponent } from './ListBox';
+import ListBoxInternal, {
+  ListBoxComponent as ListBoxPartialComponent,
+} from './ListBox';
 import ListBoxField, { ListBoxFieldComponent } from './ListBoxField';
 import ListBoxMenu, { ListBoxMenuComponent } from './ListBoxMenu';
 import ListBoxMenuIcon, { ListBoxMenuIconComponent } from './ListBoxMenuIcon';
 import ListBoxMenuItem, { ListBoxMenuItemComponent } from './ListBoxMenuItem';
-import ListBoxSelection, { ListBoxSelectionComponent } from './ListBoxSelection';
+import ListBoxSelection, {
+  ListBoxSelectionComponent,
+} from './ListBoxSelection';
 
 export interface ListBoxComponent extends ListBoxPartialComponent {
-  readonly Field: ListBoxFieldComponent,
-  readonly Menu: ListBoxMenuComponent,
-  readonly MenuIcon: ListBoxMenuIconComponent,
-  readonly MenuItem: ListBoxMenuItemComponent,
-  readonly Selection: ListBoxSelectionComponent,
+  readonly Field: ListBoxFieldComponent;
+  readonly Menu: ListBoxMenuComponent;
+  readonly MenuIcon: ListBoxMenuIconComponent;
+  readonly MenuItem: ListBoxMenuItemComponent;
+  readonly Selection: ListBoxSelectionComponent;
 }
 
 const ListBox: ListBoxComponent = Object.assign(ListBoxInternal, {
