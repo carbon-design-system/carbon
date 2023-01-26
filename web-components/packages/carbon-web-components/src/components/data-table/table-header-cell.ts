@@ -1,14 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { html, property, customElement, LitElement } from 'lit-element';
+import { LitElement, html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 import Arrows16 from '@carbon/icons/lib/arrows/16';
 import ArrowDown16 from '@carbon/icons/lib/arrow--down/16';
 import FocusMixin from '../../globals/mixins/focus';
@@ -113,15 +114,6 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
   @property({ reflect: true, attribute: 'sort-direction' })
   sortDirection?: TABLE_SORT_DIRECTION;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'columnheader');
@@ -166,6 +158,10 @@ class BXTableHeaderCell extends FocusMixin(LitElement) {
     return `${prefix}-table-header-cell-sort`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 
   /**

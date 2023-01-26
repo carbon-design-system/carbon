@@ -8,10 +8,10 @@
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { classMap } from 'lit-html/directives/class-map';
-import { TemplateResult } from 'lit-html';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { html, property, query, customElement, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { LitElement, html, TemplateResult } from 'lit';
+import { property, customElement, query } from 'lit/decorators.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import FocusMixin from '../../globals/mixins/focus';
@@ -525,15 +525,6 @@ class BXDropdown extends ValidityMixin(
   @property({ reflect: true })
   value = '';
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   shouldUpdate(changedProperties) {
     const { selectorItem } = this.constructor as typeof BXDropdown;
     if (changedProperties.has('size')) {
@@ -781,6 +772,10 @@ class BXDropdown extends ValidityMixin(
     return `${prefix}-dropdown-toggled`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 
   /**

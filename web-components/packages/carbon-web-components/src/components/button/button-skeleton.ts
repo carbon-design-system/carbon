@@ -1,16 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { classMap } from 'lit-html/directives/class-map';
-import { html, customElement } from 'lit-element';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { html } from 'lit';
+import { customElement } from 'lit/decorators.js';
 import BXButton from './button';
 import styles from './button.scss';
 
@@ -57,13 +58,13 @@ class BXButtonSkeleton extends BXButton {
             id="button"
             role="button"
             class="${classes}"
-            download="${ifNonNull(download)}"
-            href="${ifNonNull(href)}"
-            hreflang="${ifNonNull(hreflang)}"
-            ping="${ifNonNull(ping)}"
-            rel="${ifNonNull(rel)}"
-            target="${ifNonNull(target)}"
-            type="${ifNonNull(type)}"
+            download="${ifDefined(download)}"
+            href="${ifDefined(href)}"
+            hreflang="${ifDefined(hreflang)}"
+            ping="${ifDefined(ping)}"
+            rel="${ifDefined(rel)}"
+            target="${ifDefined(target)}"
+            type="${ifDefined(type)}"
             @click="${this._handleClickLinkSkeleton}"></a>
         `
       : html`
@@ -72,7 +73,7 @@ class BXButtonSkeleton extends BXButton {
             class="${classes}"
             ?autofocus="${autofocus}"
             ?disabled="${disabled}"
-            type="${ifNonNull(type)}"></button>
+            type="${ifDefined(type)}"></button>
         `;
   }
 

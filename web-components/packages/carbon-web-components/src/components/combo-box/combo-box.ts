@@ -1,15 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { TemplateResult } from 'lit-html';
-import { html, property, query, customElement } from 'lit-element';
+import { TemplateResult, html } from 'lit';
+import { property, customElement, query } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16';
 import { findIndex, forEach } from '../../globals/internal/collection-helpers';
 import BXDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';

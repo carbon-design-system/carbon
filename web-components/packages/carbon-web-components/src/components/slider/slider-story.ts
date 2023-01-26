@@ -1,16 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, number, text } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './slider';
 import './slider-input';
 import './slider-skeleton';
@@ -22,12 +22,12 @@ export const Default = (args) => {
   return html`
     <bx-slider
       ?disabled="${disabled}"
-      label-text="${ifNonNull(labelText)}"
-      max="${ifNonNull(max)}"
-      min="${ifNonNull(min)}"
-      name="${ifNonNull(name)}"
-      step="${ifNonNull(step)}"
-      value="${ifNonNull(value)}"
+      label-text="${ifDefined(labelText)}"
+      max="${ifDefined(max)}"
+      min="${ifDefined(min)}"
+      name="${ifDefined(name)}"
+      step="${ifDefined(step)}"
+      value="${ifDefined(value)}"
       @bx-slider-changed="${onChange}"></bx-slider>
   `;
 };
@@ -56,11 +56,11 @@ export const withInputBox = (args) => {
     <bx-slider
       ?disabled="${disabled}"
       label-text="${labelText}"
-      max="${ifNonNull(max)}"
-      min="${ifNonNull(min)}"
-      name="${ifNonNull(name)}"
-      step="${ifNonNull(step)}"
-      value="${ifNonNull(value)}"
+      max="${ifDefined(max)}"
+      min="${ifDefined(min)}"
+      name="${ifDefined(name)}"
+      step="${ifDefined(step)}"
+      value="${ifDefined(value)}"
       @bx-slider-changed="${onChange}">
       <bx-slider-input
         aria-label="Slider value"

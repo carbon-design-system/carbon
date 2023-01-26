@@ -1,15 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { select } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { SKELETON_TEXT_TYPE } from './skeleton-text';
 import storyDocs from './skeleton-text-story.mdx';
 
@@ -21,7 +21,7 @@ const types = {
 export const Default = (args) => {
   const { type } = args?.['bx-skeleton-text'] ?? {};
   return html`
-    <bx-skeleton-text type="${ifNonNull(type)}"></bx-skeleton-text>
+    <bx-skeleton-text type="${ifDefined(type)}"></bx-skeleton-text>
   `;
 };
 

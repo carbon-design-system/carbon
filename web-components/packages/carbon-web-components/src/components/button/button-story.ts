@@ -1,20 +1,20 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-html';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
+import { ifDefined } from 'lit/directives/if-defined.js';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Add16 from 'carbon-web-components/es/icons/add/16';
-import ifNonNull from '../../globals/directives/if-non-null';
+import Add16 from '@carbon/web-components/es/icons/add/16';
 import { BUTTON_KIND, BUTTON_SIZE, BUTTON_ICON_LAYOUT } from './button';
 import './button-skeleton';
 import textNullable from '../../../.storybook/knob-text-nullable';
@@ -65,17 +65,17 @@ export const Default = (args) => {
     <bx-btn
       ?autofocus="${autofocus}"
       ?disabled="${disabled}"
-      download="${ifNonNull(download)}"
-      href="${ifNonNull(href)}"
-      hreflang="${ifNonNull(hreflang)}"
+      download="${ifDefined(download)}"
+      href="${ifDefined(href)}"
+      hreflang="${ifDefined(hreflang)}"
       ?isExpressive="${isExpressive}"
-      kind="${ifNonNull(kind)}"
-      link-role="${ifNonNull(linkRole)}"
-      ping="${ifNonNull(ping)}"
-      rel="${ifNonNull(rel)}"
-      size="${ifNonNull(size)}"
-      target="${ifNonNull(target)}"
-      type="${ifNonNull(type)}"
+      kind="${ifDefined(kind)}"
+      link-role="${ifDefined(linkRole)}"
+      ping="${ifDefined(ping)}"
+      rel="${ifDefined(rel)}"
+      size="${ifDefined(size)}"
+      target="${ifDefined(target)}"
+      type="${ifDefined(type)}"
       @click=${onClick}>
       Button
     </bx-btn>
@@ -100,10 +100,10 @@ export const icon = (args) => {
     args?.['bx-btn'] ?? {};
   return html`
     <bx-btn
-      kind=${ifNonNull(kind)}
+      kind=${ifDefined(kind)}
       ?disabled=${disabled}
-      size=${ifNonNull(size)}
-      href=${ifNonNull(href || undefined)}
+      size=${ifDefined(size)}
+      href=${ifDefined(href || undefined)}
       ?isExpressive="${isExpressive}"
       @click=${onClick}>
       ${Add16({ slot: 'icon' })}
@@ -118,12 +118,12 @@ export const textAndIcon = (args) => {
     args?.['bx-btn'] ?? {};
   return html`
     <bx-btn
-      kind=${ifNonNull(kind)}
+      kind=${ifDefined(kind)}
       ?disabled=${disabled}
-      icon-layout="${ifNonNull(iconLayout)}"
+      icon-layout="${ifDefined(iconLayout)}"
       ?isExpressive="${isExpressive}"
-      size=${ifNonNull(size)}
-      href=${ifNonNull(href || undefined)}
+      size=${ifDefined(size)}
+      href=${ifDefined(href || undefined)}
       @click=${onClick}>
       Button ${Add16({ slot: 'icon' })}
     </bx-btn>
@@ -152,8 +152,8 @@ export const skeleton = (args) => {
   return html`
     <bx-btn-skeleton
       ?disabled=${disabled}
-      size=${ifNonNull(size)}
-      href=${ifNonNull(href || undefined)}
+      size=${ifDefined(size)}
+      href=${ifDefined(href || undefined)}
       ?isExpressive="${isExpressive}"
       @click=${onClick}>
     </bx-btn-skeleton>

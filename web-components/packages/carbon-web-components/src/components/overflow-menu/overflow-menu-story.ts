@@ -1,15 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { boolean, select } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { FLOATING_MENU_DIRECTION } from '../floating-menu/floating-menu';
 import {
   OVERFLOW_MENU_COLOR_SCHEME,
@@ -44,8 +44,8 @@ export const Default = (args) => {
   return html`
     <bx-overflow-menu ?open="${open}" ?disabled="${disabled}" size="${size}">
       <bx-overflow-menu-body
-        color-scheme="${ifNonNull(colorScheme)}"
-        direction="${ifNonNull(direction)}">
+        color-scheme="${ifDefined(colorScheme)}"
+        direction="${ifDefined(direction)}">
         <bx-overflow-menu-item>Option 1</bx-overflow-menu-item>
         <bx-overflow-menu-item>Option 2</bx-overflow-menu-item>
         <bx-overflow-menu-item>Option 3</bx-overflow-menu-item>

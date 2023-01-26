@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { NOTIFICATION_KIND } from './inline-notification';
 import './toast-notification';
 import storyDocs from './notification-story.mdx';
@@ -49,15 +49,15 @@ export const inline = (args) => {
   return html`
     <bx-inline-notification
       style="min-width: 30rem; margin-bottom: .5rem"
-      kind="${ifNonNull(kind)}"
-      title="${ifNonNull(title)}"
-      subtitle="${ifNonNull(subtitle)}"
+      kind="${ifDefined(kind)}"
+      title="${ifDefined(title)}"
+      subtitle="${ifDefined(subtitle)}"
       ?hide-close-button="${hideCloseButton}"
       ?low-contrast="${lowContrast}"
-      close-button-label="${ifNonNull(closeButtonLabel)}"
-      icon-label="${ifNonNull(iconLabel)}"
+      close-button-label="${ifDefined(closeButtonLabel)}"
+      icon-label="${ifDefined(iconLabel)}"
       ?open="${open}"
-      timeout="${ifNonNull(timeout)}"
+      timeout="${ifDefined(timeout)}"
       @bx-notification-beingclosed="${handleBeforeClose}"
       @bx-notification-closed="${onClose}">
     </bx-inline-notification>
@@ -121,16 +121,16 @@ export const toast = (args) => {
   return html`
     <bx-toast-notification
       style="min-width: 30rem; margin-bottom: .5rem"
-      kind="${ifNonNull(kind)}"
-      title="${ifNonNull(title)}"
-      subtitle="${ifNonNull(subtitle)}"
-      caption="${ifNonNull(caption)}"
+      kind="${ifDefined(kind)}"
+      title="${ifDefined(title)}"
+      subtitle="${ifDefined(subtitle)}"
+      caption="${ifDefined(caption)}"
       ?hide-close-button="${hideCloseButton}"
       ?low-contrast="${lowContrast}"
-      close-button-label="${ifNonNull(closeButtonLabel)}"
-      icon-label="${ifNonNull(iconLabel)}"
+      close-button-label="${ifDefined(closeButtonLabel)}"
+      icon-label="${ifDefined(iconLabel)}"
       ?open="${open}"
-      timeout="${ifNonNull(timeout)}"
+      timeout="${ifDefined(timeout)}"
       @bx-notification-beingclosed="${handleBeforeClose}"
       @bx-notification-closed="${onClose}">
     </bx-toast-notification>

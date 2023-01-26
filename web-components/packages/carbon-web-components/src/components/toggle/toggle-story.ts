@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { TOGGLE_SIZE } from './toggle';
 import storyDocs from './toggle-story.mdx';
 
@@ -35,13 +35,13 @@ export const Default = (args) => {
   return html`
     <bx-toggle
       ?checked="${checked}"
-      checked-text="${ifNonNull(checkedText)}"
+      checked-text="${ifDefined(checkedText)}"
       ?disabled="${disabled}"
-      label-text="${ifNonNull(labelText)}"
-      name="${ifNonNull(name)}"
-      size="${ifNonNull(size)}"
-      unchecked-text="${ifNonNull(uncheckedText)}"
-      value="${ifNonNull(value)}"
+      label-text="${ifDefined(labelText)}"
+      name="${ifDefined(name)}"
+      size="${ifDefined(size)}"
+      unchecked-text="${ifDefined(uncheckedText)}"
+      value="${ifDefined(value)}"
       @bx-toggle-changed="${onChange}"></bx-toggle>
   `;
 };

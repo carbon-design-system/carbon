@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -78,12 +78,16 @@ $css--plex: true !default;
   }
 }
 
+/* stylelint-disable selector-pseudo-class-parentheses-space-inside */
 :host(#{$prefix}-date-picker-input[kind='simple'][size-horizontal='short']),
-:host(#{$prefix}-date-picker-input-skeleton[kind='simple'][size-horizontal='short']) {
+:host(
+    #{$prefix}-date-picker-input-skeleton[kind='simple'][size-horizontal='short']
+  ) {
   .#{$prefix}--date-picker__input {
     width: rem(90px);
   }
 }
+/* stylelint-enable selector-pseudo-class-parentheses-space-inside */
 
 :host(#{$prefix}-date-picker-input[kind='single']),
 :host(#{$prefix}-date-picker-input-skeleton[kind='single']) {

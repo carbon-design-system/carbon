@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { number, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { CODE_SNIPPET_COLOR_SCHEME } from './code-snippet';
 import storyDocs from './code-snippet-story.mdx';
 import './code-snippet-skeleton';
@@ -61,11 +61,11 @@ export const singleLine = (args) => {
   `;
   return html`
     <bx-code-snippet
-      code-assistive-text="${ifNonNull(codeAssistiveText)}"
-      copy-button-assistive-text="${ifNonNull(copyButtonAssistiveText)}"
-      copy-button-feedback-text="${ifNonNull(copyButtonFeedbackText)}"
+      code-assistive-text="${ifDefined(codeAssistiveText)}"
+      copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
+      copy-button-feedback-text="${ifDefined(copyButtonFeedbackText)}"
       copy-button-feedback-timeout="${copyButtonFeedbackTimeout}"
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       @click="${onClick}"
       >${children}</bx-code-snippet
     >
@@ -116,13 +116,13 @@ $z-indexes: (
   return html`
   <bx-code-snippet
     type="multi"
-    code-assistive-text="${ifNonNull(codeAssistiveText)}"
-    copy-button-assistive-text="${ifNonNull(copyButtonAssistiveText)}"
-    copy-button-feedback-text="${ifNonNull(copyButtonFeedbackText)}"
+    code-assistive-text="${ifDefined(codeAssistiveText)}"
+    copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
+    copy-button-feedback-text="${ifDefined(copyButtonFeedbackText)}"
     copy-button-feedback-timeout="${copyButtonFeedbackTimeout}"
-    collapse-button-text="${ifNonNull(collapseButtonText)}"
-    expand-button-text="${ifNonNull(expandButtonText)}"
-    color-scheme="${ifNonNull(colorScheme)}"
+    collapse-button-text="${ifDefined(collapseButtonText)}"
+    expand-button-text="${ifDefined(expandButtonText)}"
+    color-scheme="${ifDefined(colorScheme)}"
     @click="${onClick}"
   >${children}</bx-code-snippet>
 `;
@@ -158,11 +158,11 @@ export const inline = (args) => {
   return html`
     <bx-code-snippet
       type="inline"
-      code-assistive-text="${ifNonNull(codeAssistiveText)}"
-      copy-button-assistive-text="${ifNonNull(copyButtonAssistiveText)}"
-      copy-button-feedback-text="${ifNonNull(copyButtonFeedbackText)}"
+      code-assistive-text="${ifDefined(codeAssistiveText)}"
+      copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
+      copy-button-feedback-text="${ifDefined(copyButtonFeedbackText)}"
       copy-button-feedback-timeout="${copyButtonFeedbackTimeout}"
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       @click="${onClick}"
       >node -v</bx-code-snippet
     >

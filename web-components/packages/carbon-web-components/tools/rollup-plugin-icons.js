@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -52,7 +52,7 @@ function rollupPluginIcons({
       const svg = require(id); // eslint-disable-line global-require
 
       const code = [
-        `import { svg } from 'lit-html'`,
+        `import { svg } from 'lit'`,
         `import spread from '${path.resolve(
           __dirname,
           '../src/globals/directives/spread'

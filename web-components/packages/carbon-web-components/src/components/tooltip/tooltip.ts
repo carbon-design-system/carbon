@@ -8,7 +8,8 @@
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { html, property, query, customElement, LitElement } from 'lit-element';
+import { LitElement, html } from 'lit';
+import { property, customElement, query } from 'lit/decorators.js';
 import Information16 from '@carbon/icons/lib/information/16';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';

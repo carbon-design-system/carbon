@@ -1,15 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, render } from 'lit-html';
+import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
-import ifNonNull from '../../src/globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { INPUT_SIZE } from '../../src/components/input/input';
 import { TABLE_COLOR_SCHEME } from '../../src/components/data-table/table';
 import BXTableHeaderCell, {
@@ -33,8 +33,8 @@ const headerCellTemplate = (props?) => {
   return html`
     <bx-table-header-cell
       ?sort-active="${sortActive}"
-      sort-cycle="${ifNonNull(sortCycle)}"
-      sort-direction="${ifNonNull(sortDirection)}">
+      sort-cycle="${ifDefined(sortCycle)}"
+      sort-direction="${ifDefined(sortDirection)}">
       Name
     </bx-table-header-cell>
   `;
@@ -47,9 +47,9 @@ const rowTemplate = (props?) => {
     <bx-table-row
       ?disabled="${disabled}"
       ?selected="${selected}"
-      selection-name="${ifNonNull(selectionName)}"
-      selection-label="${ifNonNull(selectionLabel)}"
-      selection-value="${ifNonNull(selectionValue)}"></bx-table-row>
+      selection-name="${ifDefined(selectionName)}"
+      selection-label="${ifDefined(selectionLabel)}"
+      selection-value="${ifDefined(selectionValue)}"></bx-table-row>
   `;
 };
 
@@ -67,9 +67,9 @@ const expandRowTemplate = (props?) => {
       ?disabled="${disabled}"
       ?expanded="${expanded}"
       ?selected="${selected}"
-      selection-name="${ifNonNull(selectionName)}"
-      selection-label="${ifNonNull(selectionLabel)}"
-      selection-value="${ifNonNull(selectionValue)}"></bx-table-expand-row>
+      selection-name="${ifDefined(selectionName)}"
+      selection-label="${ifDefined(selectionLabel)}"
+      selection-value="${ifDefined(selectionValue)}"></bx-table-expand-row>
     <bx-table-expanded-row></bx-table-expanded-row>
   `;
 };
@@ -88,7 +88,7 @@ const toolbarSearchTemplate = (props?) => {
   return html`
     <bx-table-toolbar-search
       ?expanded="${expanded}"
-      size="${ifNonNull(size)}"></bx-table-toolbar-search>
+      size="${ifDefined(size)}"></bx-table-toolbar-search>
   `;
 };
 

@@ -1,21 +1,21 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { boolean, select } from '@storybook/addon-knobs';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Fade16 from 'carbon-web-components/es/icons/fade/16';
+import Fade16 from '@carbon/web-components/es/icons/fade/16';
 import contentStyles from 'carbon-components/scss/components/ui-shell/_content.scss';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './side-nav';
 import './side-nav-items';
 import './side-nav-link';
@@ -130,42 +130,42 @@ export const sideNav = (args) => {
     </style>
     <bx-side-nav
       aria-label="Side navigation"
-      collapse-mode="${ifNonNull(collapseMode)}"
+      collapse-mode="${ifDefined(collapseMode)}"
       ?expanded=${expanded}>
       <bx-side-nav-items>
         <bx-side-nav-menu title="L0 menu">
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>
         <bx-side-nav-menu title="L0 menu">
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
           <bx-side-nav-menu-item
             active
             aria-current="page"
-            href="${ifNonNull(href)}">
+            href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>
         <bx-side-nav-menu title="L0 menu">
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>
@@ -208,45 +208,45 @@ export const sideNavWithIcons = (args) => {
     </style>
     <bx-side-nav
       aria-label="Side navigation"
-      collapse-mode="${ifNonNull(collapseMode)}"
+      collapse-mode="${ifDefined(collapseMode)}"
       ?expanded=${expanded}>
       <bx-side-nav-items>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
           <bx-side-nav-menu-item
             active
             aria-current="page"
-            href="${ifNonNull(href)}">
+            href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>
@@ -313,46 +313,46 @@ export const header = (args) => {
     </bx-header>
     <bx-side-nav
       aria-label="Side navigation"
-      collapse-mode="${ifNonNull(collapseMode)}"
+      collapse-mode="${ifDefined(collapseMode)}"
       ?expanded=${expanded}
-      usage-mode="${ifNonNull(usageMode)}">
+      usage-mode="${ifDefined(usageMode)}">
       <bx-side-nav-items>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
           <bx-side-nav-menu-item
             active
             aria-current="page"
-            href="${ifNonNull(href)}">
+            href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>
         <bx-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifNonNull(href)}">
+          <bx-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
           </bx-side-nav-menu-item>
         </bx-side-nav-menu>

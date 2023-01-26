@@ -1,16 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, number } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './pagination';
 import './page-sizes-select';
 import './pages-select';
@@ -28,9 +28,9 @@ export const Default = (args) => {
   return html`
     <bx-pagination
       ?at-last-page="${atLastPage || undefined}"
-      page-size="${ifNonNull(pageSize)}"
-      start="${ifNonNull(start)}"
-      total="${ifNonNull(total)}"
+      page-size="${ifDefined(pageSize)}"
+      start="${ifDefined(start)}"
+      total="${ifDefined(total)}"
       @bx-pagination-changed-current="${onChangedCurrent}"
       @bx-page-sizes-select-changed="${onChangedPageSizesSelect}">
       <bx-page-sizes-select slot="page-sizes-select">

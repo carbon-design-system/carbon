@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,7 +39,7 @@ async function icons() {
           const iconsESPath = path.resolve(config.jsDestDir, 'icons', path.relative(config.iconsDir, file.path));
           const spreadModulePath = path.resolve(__dirname, '../../../es/globals/directives/spread');
           file.contents = Buffer.from(`
-                import { svg } from 'lit-html';
+                import { svg } from 'lit';
                 import spread from '${path.relative(path.dirname(iconsESPath), spreadModulePath)}';
                 const svgResultCarbonIcon = ${createSVGResultFromCarbonIcon(descriptor)};
                 export default svgResultCarbonIcon;

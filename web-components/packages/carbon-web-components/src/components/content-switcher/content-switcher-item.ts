@@ -1,16 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, customElement, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { LitElement, html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 import settings from 'carbon-components/es/globals/js/settings';
-import ifNonNull from '../../globals/directives/if-non-null';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './content-switcher.scss';
 
@@ -57,15 +58,6 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
   @property()
   value = '';
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   shouldUpdate(changedProperties) {
     if (changedProperties.has('selected') || changedProperties.has('target')) {
       const { selected, target } = this;
@@ -93,13 +85,18 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
         role="tab"
         class="${className}"
         ?disabled="${disabled}"
-        aria-controls="${ifNonNull(target)}"
+        tabindex="${selected ? '0' : '-1'}"
+        aria-controls="${ifDefined(target)}"
         aria-selected="${Boolean(selected)}">
         <span class="${prefix}--content-switcher__label"><slot></slot></span>
       </button>
     `;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 

@@ -1,15 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { boolean, select } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { LOADING_TYPE } from './loading';
 import storyDocs from './loading-story.mdx';
 
@@ -22,7 +22,7 @@ const types = {
 export const Default = (args) => {
   const { inactive, type } = args?.['bx-loading'] ?? {};
   return html`
-    <bx-loading ?inactive=${inactive} type=${ifNonNull(type)}></bx-loading>
+    <bx-loading ?inactive=${inactive} type=${ifDefined(type)}></bx-loading>
   `;
 };
 

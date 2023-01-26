@@ -1,16 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { TemplateResult } from 'lit-html';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { html, property, customElement, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { LitElement, html, TemplateResult } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 import Copy16 from '@carbon/icons/lib/copy/16';
 import settings from 'carbon-components/es/globals/js/settings';
 import FocusMixin from '../../globals/mixins/focus';
@@ -130,15 +130,6 @@ class BXCopyButton extends FocusMixin(LitElement) {
   @property({ type: Number, attribute: 'feedback-timeout' })
   feedbackTimeout = 2000;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   render() {
     const {
       buttonAssistiveText,
@@ -154,6 +145,10 @@ class BXCopyButton extends FocusMixin(LitElement) {
     });
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 

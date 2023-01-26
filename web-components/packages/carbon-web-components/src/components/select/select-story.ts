@@ -1,20 +1,20 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { INPUT_COLOR_SCHEME, INPUT_SIZE } from '../input/input';
 import './select';
 import storyDocs from './select-story.mdx';
@@ -59,17 +59,17 @@ export const Default = (args) => {
   return html`
     <bx-select
       ?autofocus="${autofocus}"
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       ?disabled="${disabled}"
-      helper-text="${ifNonNull(helperText)}"
+      helper-text="${ifDefined(helperText)}"
       ?invalid="${invalid}"
-      label-text="${ifNonNull(labelText)}"
-      name="${ifNonNull(name)}"
-      placeholder="${ifNonNull(placeholder)}"
-      size="${ifNonNull(size)}"
-      validity-message="${ifNonNull(validityMessage)}"
-      value="${ifNonNull(value)}"
-      @bx-select-selected="${ifNonNull(onInput)}">
+      label-text="${ifDefined(labelText)}"
+      name="${ifDefined(name)}"
+      placeholder="${ifDefined(placeholder)}"
+      size="${ifDefined(size)}"
+      validity-message="${ifDefined(validityMessage)}"
+      value="${ifDefined(value)}"
+      @bx-select-selected="${ifDefined(onInput)}">
       ${children}
     </bx-select>
   `;

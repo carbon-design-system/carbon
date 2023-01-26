@@ -1,15 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { select } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { INLINE_LOADING_STATE } from './inline-loading';
 import storyDocs from './inline-loading-story.mdx';
 
@@ -24,7 +24,7 @@ const states = {
 export const Default = (args) => {
   const { status } = args?.['bx-inline-loading'] ?? {};
   return html`
-    <bx-inline-loading status="${ifNonNull(status)}"
+    <bx-inline-loading status="${ifDefined(status)}"
       >Loading data...</bx-inline-loading
     >
   `;

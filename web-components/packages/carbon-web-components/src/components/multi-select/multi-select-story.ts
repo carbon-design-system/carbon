@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import {
   DROPDOWN_COLOR_SCHEME,
   DROPDOWN_SIZE,
@@ -78,20 +78,20 @@ export const Default = (args) => {
   };
   return html`
     <bx-multi-select
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       ?disabled=${disabled}
       ?invalid=${invalid}
       ?open=${open}
-      clear-selection-label=${ifNonNull(clearSelectionLabel)}
-      helper-text=${ifNonNull(helperText)}
-      label-text=${ifNonNull(labelText)}
-      size=${ifNonNull(size)}
-      toggle-label-closed=${ifNonNull(toggleLabelClosed)}
-      toggle-label-open=${ifNonNull(toggleLabelOpen)}
-      trigger-content=${ifNonNull(triggerContent)}
-      type=${ifNonNull(type)}
-      validity-message=${ifNonNull(validityMessage)}
-      value="${ifNonNull(value)}"
+      clear-selection-label=${ifDefined(clearSelectionLabel)}
+      helper-text=${ifDefined(helperText)}
+      label-text=${ifDefined(labelText)}
+      size=${ifDefined(size)}
+      toggle-label-closed=${ifDefined(toggleLabelClosed)}
+      toggle-label-open=${ifDefined(toggleLabelOpen)}
+      trigger-content=${ifDefined(triggerContent)}
+      type=${ifDefined(type)}
+      validity-message=${ifDefined(validityMessage)}
+      value="${ifDefined(value)}"
       @bx-multi-select-beingselected=${handleBeforeSelect}
       @bx-multi-select-beingtoggled=${handleBeforeToggle}
       @bx-multi-select-selected=${onSelect}
@@ -149,20 +149,20 @@ export const Filterable = (args) => {
   return html`
     <bx-multi-select
       filterable="true"
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       ?disabled=${disabled}
       ?invalid=${invalid}
       ?open=${open}
-      clear-selection-label=${ifNonNull(clearSelectionLabel)}
-      helper-text=${ifNonNull(helperText)}
-      label-text=${ifNonNull(labelText)}
-      size=${ifNonNull(size)}
-      toggle-label-closed=${ifNonNull(toggleLabelClosed)}
-      toggle-label-open=${ifNonNull(toggleLabelOpen)}
-      trigger-content=${ifNonNull(triggerContent)}
-      type=${ifNonNull(type)}
-      validity-message=${ifNonNull(validityMessage)}
-      value="${ifNonNull(value)}"
+      clear-selection-label=${ifDefined(clearSelectionLabel)}
+      helper-text=${ifDefined(helperText)}
+      label-text=${ifDefined(labelText)}
+      size=${ifDefined(size)}
+      toggle-label-closed=${ifDefined(toggleLabelClosed)}
+      toggle-label-open=${ifDefined(toggleLabelOpen)}
+      trigger-content=${ifDefined(triggerContent)}
+      type=${ifDefined(type)}
+      validity-message=${ifDefined(validityMessage)}
+      value="${ifDefined(value)}"
       @bx-multi-select-beingselected=${handleBeforeSelect}
       @bx-multi-select-beingtoggled=${handleBeforeToggle}
       @bx-multi-select-selected=${onSelect}

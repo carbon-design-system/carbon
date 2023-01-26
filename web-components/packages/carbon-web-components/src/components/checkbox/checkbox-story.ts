@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean } from '@storybook/addon-knobs';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
 import './checkbox';
 import storyDocs from './checkbox-story.mdx';
 
@@ -32,9 +32,9 @@ export const Default = (args) => {
       ?disabled="${disabled}"
       ?hide-label="${hideLabel}"
       ?indeterminate="${indeterminate}"
-      label-text="${ifNonNull(labelText)}"
-      name="${ifNonNull(name)}"
-      value="${ifNonNull(value)}"
+      label-text="${ifDefined(labelText)}"
+      name="${ifDefined(name)}"
+      value="${ifDefined(value)}"
       @bx-checkbox-changed="${onChange}"></bx-checkbox>
   `;
 };

@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { TAG_SIZE, TAG_TYPE } from './tag';
 import './filter-tag';
 import storyDocs from './tag-story.mdx';
@@ -27,9 +27,9 @@ export const Default = (args) => {
   const { size, type, title, disabled } = args?.['bx-tag'] ?? {};
   return html`
     <bx-tag
-      size="${ifNonNull(size)}"
-      type="${ifNonNull(type)}"
-      title="${ifNonNull(title)}"
+      size="${ifDefined(size)}"
+      type="${ifDefined(type)}"
+      title="${ifDefined(title)}"
       ?disabled="${disabled}">
       This is a tag
     </bx-tag>
@@ -80,9 +80,9 @@ export const filter = (args) => {
   return html`
     <bx-filter-tag
       ?open="${open}"
-      size="${ifNonNull(size)}"
-      type="${ifNonNull(type)}"
-      title="${ifNonNull(title)}"
+      size="${ifDefined(size)}"
+      type="${ifDefined(type)}"
+      title="${ifDefined(title)}"
       ?disabled="${disabled}"
       @click="${onClick}"
       @bx-filter-tag-beingclosed="${handleBeforeClose}"

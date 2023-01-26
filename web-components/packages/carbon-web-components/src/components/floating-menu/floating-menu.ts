@@ -1,13 +1,13 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { LitElement } from 'lit-element';
+import { LitElement } from 'lit';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -276,15 +276,6 @@ abstract class BXFloatingMenu extends HostListenerMixin(
     };
   }
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   disconnectedCallback() {
     if (this._hObserveResizeContainer) {
       this._hObserveResizeContainer = this._hObserveResizeContainer.release();
@@ -347,6 +338,10 @@ abstract class BXFloatingMenu extends HostListenerMixin(
   static get selectorContainer() {
     return '[data-floating-menu-container],bx-modal';
   }
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 }
 
 export default BXFloatingMenu;

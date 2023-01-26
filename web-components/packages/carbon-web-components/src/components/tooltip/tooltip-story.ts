@@ -1,20 +1,20 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { boolean, select } from '@storybook/addon-knobs';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Filter16 from 'carbon-web-components/es/icons/filter/16';
+import Filter16 from '@carbon/web-components/es/icons/filter/16';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import '../button/button';
 import './tooltip';
 import { FLOATING_MENU_DIRECTION } from '../floating-menu/floating-menu';
@@ -55,8 +55,8 @@ export const Default = (args) => {
     </style>
     <bx-tooltip ?open="${open}">
       <bx-tooltip-body
-        direction="${ifNonNull(direction)}"
-        alignment="${ifNonNull(alignment)}">
+        direction="${ifDefined(direction)}"
+        alignment="${ifDefined(alignment)}">
         <p>
           This is some tooltip text. This box shows the maximum amount of text
           that should appear inside. If more room is needed please use a modal
@@ -94,9 +94,9 @@ export const definition = (args) => {
     args?.['bx-tooltip-definition'] ?? {};
   return html`
     <bx-tooltip-definition
-      alignment="${ifNonNull(alignment)}"
-      body-text="${ifNonNull(bodyText)}"
-      direction="${ifNonNull(direction)}">
+      alignment="${ifDefined(alignment)}"
+      body-text="${ifDefined(bodyText)}"
+      direction="${ifDefined(direction)}">
       Definition Tooltip
     </bx-tooltip-definition>
   `;
@@ -129,9 +129,9 @@ export const icon = (args) => {
   const { alignment, bodyText, direction } = args?.['bx-tooltip-icon'] ?? {};
   return html`
     <bx-tooltip-icon
-      alignment="${ifNonNull(alignment)}"
-      body-text="${ifNonNull(bodyText)}"
-      direction="${ifNonNull(direction)}">
+      alignment="${ifDefined(alignment)}"
+      body-text="${ifDefined(bodyText)}"
+      direction="${ifDefined(direction)}">
       ${Filter16()}
     </bx-tooltip-icon>
   `;

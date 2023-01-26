@@ -1,14 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, customElement, LitElement } from 'lit-element';
-import { classMap } from 'lit-html/directives/class-map';
+import { LitElement, html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import ErrorFilled16 from '@carbon/icons/lib/error--filled/16';
 import settings from 'carbon-components/es/globals/js/settings';

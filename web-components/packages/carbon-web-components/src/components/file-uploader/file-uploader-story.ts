@@ -1,17 +1,18 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, property, LitElement } from 'lit-element';
+import { LitElement, html } from 'lit';
+import { property } from 'lit/decorators.js';
 import { delay } from 'bluebird';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './file-uploader';
 import './drop-container';
 import {
@@ -180,10 +181,10 @@ class BXCEDemoFileUploader extends LitElement {
     } = this;
     return html`
       <bx-file-uploader
-        helper-text="${ifNonNull(helperText)}"
-        label-text="${ifNonNull(labelText)}">
+        helper-text="${ifDefined(helperText)}"
+        label-text="${ifDefined(labelText)}">
         <bx-file-drop-container
-          accept="${ifNonNull(accept)}"
+          accept="${ifDefined(accept)}"
           ?disabled="${disabled}"
           ?multiple="${multiple}"
           @bx-file-drop-container-changed="${handleChange}">
@@ -201,9 +202,9 @@ class BXCEDemoFileUploader extends LitElement {
             <bx-file-uploader-item
               data-file-id="${id}"
               ?invalid="${invalid}"
-              size="${ifNonNull(size)}"
-              state="${ifNonNull(state)}"
-              validity-message="${ifNonNull(validityMessage)}"
+              size="${ifDefined(size)}"
+              state="${ifDefined(state)}"
+              validity-message="${ifDefined(validityMessage)}"
               @bx-file-uploader-item-deleted="${handleDelete}">
               ${file.name}
               <span slot="validity-message-supplement"
@@ -243,12 +244,12 @@ export const Default = (args) => {
   defineDemoFileUploader();
   return html`
     <bx-ce-demo-file-uploader
-      accept="${ifNonNull(accept)}"
+      accept="${ifDefined(accept)}"
       ?disabled="${disabled}"
-      helper-text="${ifNonNull(helperText)}"
-      label-text="${ifNonNull(labelText)}"
+      helper-text="${ifDefined(helperText)}"
+      label-text="${ifDefined(labelText)}"
       ?multiple="${multiple}"
-      size="${ifNonNull(size)}"
+      size="${ifDefined(size)}"
       @bx-file-uploader-item-beingdeleted="${handleBeforeDelete}"
       @bx-file-uploader-item-deleted="${onDelete}">
     </bx-ce-demo-file-uploader>

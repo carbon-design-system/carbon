@@ -1,15 +1,15 @@
 /**
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { INPUT_SIZE } from '../input/input';
 import './date-picker';
 import {
@@ -96,17 +96,17 @@ export const Default = (args) => {
   return html`
     <bx-date-picker
       ?disabled="${disabled}"
-      name="${ifNonNull(name)}"
-      value="${ifNonNull(value)}">
+      name="${ifDefined(name)}"
+      value="${ifDefined(value)}">
       <bx-date-picker-input
-        color-scheme="${ifNonNull(colorScheme)}"
+        color-scheme="${ifDefined(colorScheme)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
-        label-text="${ifNonNull(labelText)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
-        size-horizontal="${ifNonNull(sizeHorizontal)}"
-        validity-message="${ifNonNull(validityMessage)}">
+        label-text="${ifDefined(labelText)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
+        size-horizontal="${ifDefined(sizeHorizontal)}"
+        validity-message="${ifDefined(validityMessage)}">
       </bx-date-picker-input>
     </bx-date-picker>
   `;
@@ -150,23 +150,23 @@ export const singleWithCalendar = (args) => {
   } = args?.['bx-date-picker-input'] ?? {};
   return html`
     <bx-date-picker
-      date-format="${ifNonNull(dateFormat)}"
+      date-format="${ifDefined(dateFormat)}"
       ?disabled="${disabled}"
-      enabled-range="${ifNonNull(enabledRange)}"
-      name="${ifNonNull(name)}"
+      enabled-range="${ifDefined(enabledRange)}"
+      name="${ifDefined(name)}"
       ?open="${open}"
-      value="${ifNonNull(value)}"
+      value="${ifDefined(value)}"
       @bx-date-picker-changed="${onChanged}"
       @bx-date-picker-flatpickr-error="${onFlatpickrError}">
       <bx-date-picker-input
-        color-scheme="${ifNonNull(colorScheme)}"
+        color-scheme="${ifDefined(colorScheme)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         kind="single"
-        label-text="${ifNonNull(labelText)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
-        validity-message="${ifNonNull(validityMessage)}"
+        label-text="${ifDefined(labelText)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
+        validity-message="${ifDefined(validityMessage)}"
         @input="${onInput}">
       </bx-date-picker-input>
     </bx-date-picker>
@@ -202,34 +202,34 @@ export const rangeWithCalendar = (args) => {
   } = args?.['bx-date-picker-input'] ?? {};
   return html`
     <bx-date-picker
-      date-format="${ifNonNull(dateFormat)}"
+      date-format="${ifDefined(dateFormat)}"
       ?disabled="${disabled}"
-      enabled-range="${ifNonNull(enabledRange)}"
-      name="${ifNonNull(name)}"
+      enabled-range="${ifDefined(enabledRange)}"
+      name="${ifDefined(name)}"
       ?open="${open}"
-      value="${ifNonNull(value)}"
+      value="${ifDefined(value)}"
       @bx-date-picker-changed="${onChanged}"
       @bx-date-picker-flatpickr-error="${onFlatpickrError}">
       <bx-date-picker-input
-        color-scheme="${ifNonNull(colorScheme)}"
+        color-scheme="${ifDefined(colorScheme)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         kind="from"
-        label-text="${ifNonNull(labelText)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
-        validity-message="${ifNonNull(validityMessage)}"
+        label-text="${ifDefined(labelText)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
+        validity-message="${ifDefined(validityMessage)}"
         @input="${onInput}">
       </bx-date-picker-input>
       <bx-date-picker-input
-        color-scheme="${ifNonNull(colorScheme)}"
+        color-scheme="${ifDefined(colorScheme)}"
         ?hide-label="${hideLabel}"
         ?invalid="${invalid}"
         kind="to"
-        label-text="${ifNonNull(labelText)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
-        validity-message="${ifNonNull(validityMessage)}"
+        label-text="${ifDefined(labelText)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
+        validity-message="${ifDefined(validityMessage)}"
         @input="${onInput}">
       </bx-date-picker-input>
     </bx-date-picker>

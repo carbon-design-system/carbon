@@ -1,15 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { ifDefined } from 'lit-html/directives/if-defined';
-import { html, property, customElement } from 'lit-element';
+import { ifDefined } from 'lit/directives/if-defined.js';
+import { html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 import BXDropdownItem from '../dropdown/dropdown-item';
 import styles from './multi-select.scss';
 

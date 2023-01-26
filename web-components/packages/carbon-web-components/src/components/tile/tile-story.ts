@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { TILE_COLOR_SCHEME } from './tile';
 import './clickable-tile';
 import './radio-tile';
@@ -27,7 +27,7 @@ const colorSchemes = {
 export const Default = (args) => {
   const { colorScheme } = args?.['bx-tile'] ?? {};
   return html`
-    <bx-tile color-scheme="${ifNonNull(colorScheme)}">Default tile</bx-tile>
+    <bx-tile color-scheme="${ifDefined(colorScheme)}">Default tile</bx-tile>
   `;
 };
 
@@ -55,15 +55,15 @@ export const clickable = (args) => {
   } = args?.['bx-clickable-tile'] ?? {};
   return html`
     <bx-clickable-tile
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       ?disabled="${disabled}"
-      download="${ifNonNull(download)}"
-      href="${ifNonNull(href)}"
-      hreflang="${ifNonNull(hreflang)}"
-      ping="${ifNonNull(ping)}"
-      rel="${ifNonNull(rel)}"
-      target="${ifNonNull(target)}"
-      type="${ifNonNull(type)}">
+      download="${ifDefined(download)}"
+      href="${ifDefined(href)}"
+      hreflang="${ifDefined(hreflang)}"
+      ping="${ifDefined(ping)}"
+      rel="${ifDefined(rel)}"
+      target="${ifDefined(target)}"
+      type="${ifDefined(type)}">
       Clickable tile
     </bx-clickable-tile>
   `;
@@ -86,26 +86,26 @@ export const singleSelectable = (args) => {
     <fieldset>
       <legend>Single-select tiles</legend>
       <bx-radio-tile
-        checkmark-label="${ifNonNull(checkmarkLabel)}"
-        color-scheme="${ifNonNull(colorScheme)}"
-        name="${ifNonNull(name)}"
-        value="${ifNonNull(value)}"
+        checkmark-label="${ifDefined(checkmarkLabel)}"
+        color-scheme="${ifDefined(colorScheme)}"
+        name="${ifDefined(name)}"
+        value="${ifDefined(value)}"
         @input="${onInput}">
         Single-select Tile
       </bx-radio-tile>
       <bx-radio-tile
-        checkmark-label="${ifNonNull(checkmarkLabel)}"
-        color-scheme="${ifNonNull(colorScheme)}"
-        name="${ifNonNull(name)}"
-        value="${ifNonNull(value)}"
+        checkmark-label="${ifDefined(checkmarkLabel)}"
+        color-scheme="${ifDefined(colorScheme)}"
+        name="${ifDefined(name)}"
+        value="${ifDefined(value)}"
         @input="${onInput}">
         Single-select Tile
       </bx-radio-tile>
       <bx-radio-tile
-        checkmark-label="${ifNonNull(checkmarkLabel)}"
-        color-scheme="${ifNonNull(colorScheme)}"
-        name="${ifNonNull(name)}"
-        value="${ifNonNull(value)}"
+        checkmark-label="${ifDefined(checkmarkLabel)}"
+        color-scheme="${ifDefined(colorScheme)}"
+        name="${ifDefined(name)}"
+        value="${ifDefined(value)}"
         @input="${onInput}">
         Single-select Tile
       </bx-radio-tile>
@@ -135,11 +135,11 @@ export const multiSelectable = (args) => {
     args?.['bx-selectable-tile'] ?? {};
   return html`
     <bx-selectable-tile
-      checkmark-label="${ifNonNull(checkmarkLabel)}"
-      color-scheme="${ifNonNull(colorScheme)}"
-      name="${ifNonNull(name)}"
+      checkmark-label="${ifDefined(checkmarkLabel)}"
+      color-scheme="${ifDefined(colorScheme)}"
+      name="${ifDefined(name)}"
       ?selected="${selected}"
-      value="${ifNonNull(value)}"
+      value="${ifDefined(value)}"
       @input="${onInput}">
       Multi-select Tile
     </bx-selectable-tile>
@@ -168,7 +168,7 @@ export const expandable = (args) => {
   };
   return html`
     <bx-expandable-tile
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       ?expanded="${expanded}"
       @bx-expandable-tile-beingchanged=${handleBeforeChanged}
       @bx-expandable-tile-changed=${onChange}>

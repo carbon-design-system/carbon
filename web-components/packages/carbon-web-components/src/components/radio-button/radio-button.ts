@@ -1,16 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, query, customElement, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property, customElement, query } from 'lit/decorators.js';
 import settings from 'carbon-components/es/globals/js/settings';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -211,15 +212,6 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
   @property()
   value!: string;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   disconnectedCallback() {
     if (this._manager) {
       this._manager.delete(this._radioButtonDelegate);
@@ -271,8 +263,8 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
         class="${prefix}--radio-button"
         .checked=${checked}
         ?disabled="${disabled}"
-        name=${ifNonNull(name)}
-        value=${ifNonNull(value)} />
+        name=${ifDefined(name)}
+        value=${ifDefined(value)} />
       <label for="input" class="${prefix}--radio-button__label">
         <span class="${prefix}--radio-button__appearance"></span>
         <span class="${innerLabelClasses}"><slot>${labelText}</slot></span>
@@ -287,6 +279,10 @@ class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {
     return `${prefix}-radio-button-changed`;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 

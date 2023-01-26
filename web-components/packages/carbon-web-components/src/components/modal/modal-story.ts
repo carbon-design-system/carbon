@@ -1,16 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import '../button/button';
 import { MODAL_SIZE } from './modal';
 import './modal-header';
@@ -42,7 +42,7 @@ export const Default = (args) => {
   return html`
     <bx-modal
       ?open="${open}"
-      size="${ifNonNull(size)}"
+      size="${ifDefined(size)}"
       @bx-modal-beingclosed=${handleBeforeClose}
       @bx-modal-closed=${onClose}>
       <bx-modal-header>
@@ -75,7 +75,7 @@ export const SingleButton = (args) => {
   return html`
     <bx-modal
       ?open="${open}"
-      size="${ifNonNull(size)}"
+      size="${ifDefined(size)}"
       @bx-modal-beingclosed=${handleBeforeClose}
       @bx-modal-closed=${onClose}>
       <bx-modal-header>
@@ -105,7 +105,7 @@ export const ThreeButtons = (args) => {
   return html`
     <bx-modal
       ?open="${open}"
-      size="${ifNonNull(size)}"
+      size="${ifDefined(size)}"
       @bx-modal-beingclosed=${handleBeforeClose}
       @bx-modal-closed=${onClose}>
       <bx-modal-header>

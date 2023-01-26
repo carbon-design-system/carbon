@@ -1,16 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import * as knobs from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './input';
 import '../form/form-item';
 import createProps from './stories/helpers';
@@ -39,23 +39,23 @@ export const Default = (args) => {
   } = args?.['bx-input'] ?? {};
   return html`
     <bx-input
-      autocomplete="${ifNonNull(autocomplete)}"
+      autocomplete="${ifDefined(autocomplete)}"
       ?autofocus="${autofocus}"
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       ?disabled="${disabled}"
-      helper-text="${ifNonNull(helperText)}"
+      helper-text="${ifDefined(helperText)}"
       ?invalid="${invalid}"
-      label-text="${ifNonNull(labelText)}"
-      name="${ifNonNull(name)}"
-      pattern="${ifNonNull(pattern)}"
-      placeholder="${ifNonNull(placeholder)}"
+      label-text="${ifDefined(labelText)}"
+      name="${ifDefined(name)}"
+      pattern="${ifDefined(pattern)}"
+      placeholder="${ifDefined(placeholder)}"
       ?readonly="${readonly}"
       ?required="${required}"
       ?show-password-visibility-toggle="${showPasswordVisibilityToggle}"
-      size="${ifNonNull(size)}"
-      type="${ifNonNull(type)}"
-      validity-message="${ifNonNull(validityMessage)}"
-      value="${ifNonNull(value)}"
+      size="${ifDefined(size)}"
+      type="${ifDefined(type)}"
+      validity-message="${ifDefined(validityMessage)}"
+      value="${ifDefined(value)}"
       @input="${onInput}"></bx-input>
   `;
 };
@@ -77,15 +77,15 @@ export const formItem = (args) => {
   return html`
     <bx-form-item>
       <bx-input
-        value="${ifNonNull(value)}"
-        color-scheme="${ifNonNull(colorScheme)}"
-        placeholder="${ifNonNull(placeholder)}"
-        size="${ifNonNull(size)}"
+        value="${ifDefined(value)}"
+        color-scheme="${ifDefined(colorScheme)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
         @input="${onInput}"
         ?invalid="${invalid}"
         ?disabled="${disabled}"
         ?show-password-visibility-toggle="${showPasswordVisibilityToggle}"
-        type="${ifNonNull(type)}">
+        type="${ifDefined(type)}">
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
@@ -110,15 +110,15 @@ export const withoutFormItemWrapper = (args) => {
   } = args?.['bx-input'] ?? {};
   return html`
     <bx-input
-      value="${ifNonNull(value)}"
-      color-scheme="${ifNonNull(colorScheme)}"
-      placeholder="${ifNonNull(placeholder)}"
-      size="${ifNonNull(size)}"
+      value="${ifDefined(value)}"
+      color-scheme="${ifDefined(colorScheme)}"
+      placeholder="${ifDefined(placeholder)}"
+      size="${ifDefined(size)}"
       @input="${onInput}"
       ?invalid="${invalid}"
       ?disabled="${disabled}"
       ?show-password-visibility-toggle="${showPasswordVisibilityToggle}"
-      type="${ifNonNull(type)}">
+      type="${ifDefined(type)}">
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>

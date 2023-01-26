@@ -1,14 +1,14 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html, render } from 'lit-html';
-import ifNonNull from '../../src/globals/directives/if-non-null';
+import { html, render } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import '../../src/components/file-uploader/file-uploader';
 import '../../src/components/file-uploader/drop-container';
 import { FILE_UPLOADER_ITEM_STATE } from '../../src/components/file-uploader/file-uploader-item';
@@ -18,8 +18,8 @@ const fileUploaderShellTemplate = (props?) => {
   const { helperText, labelText } = props ?? {};
   return html`
     <bx-file-uploader
-      helper-text="${ifNonNull(helperText)}"
-      label-text="${ifNonNull(labelText)}"></bx-file-uploader>
+      helper-text="${ifDefined(helperText)}"
+      label-text="${ifDefined(labelText)}"></bx-file-uploader>
   `;
 };
 
@@ -27,7 +27,7 @@ const dropContainerTemplate = (props?) => {
   const { accept, disabled, multiple } = props ?? {};
   return html`
     <bx-file-drop-container
-      accept="${ifNonNull(accept)}"
+      accept="${ifDefined(accept)}"
       ?disabled="${disabled}"
       ?multiple="${multiple}">
     </bx-file-drop-container>
@@ -45,12 +45,12 @@ const fileUploderItemTemplate = (props?) => {
   } = props ?? {};
   return html`
     <bx-file-uploader-item
-      delete-assistive-text="${ifNonNull(deleteAssistiveText)}"
+      delete-assistive-text="${ifDefined(deleteAssistiveText)}"
       ?invalid="${invalid}"
-      state="${ifNonNull(state)}"
-      uploading-assistive-text="${ifNonNull(uploadingAssistiveText)}"
-      uploaded-assistive-text="${ifNonNull(uploadedAssistiveText)}"
-      validity-message="${ifNonNull(validityMessage)}">
+      state="${ifDefined(state)}"
+      uploading-assistive-text="${ifDefined(uploadingAssistiveText)}"
+      uploaded-assistive-text="${ifDefined(uploadedAssistiveText)}"
+      validity-message="${ifDefined(validityMessage)}">
     </bx-file-uploader-item>
   `;
 };

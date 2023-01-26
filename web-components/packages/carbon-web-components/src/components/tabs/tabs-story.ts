@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { TABS_COLOR_SCHEME, TABS_TYPE } from './tabs';
 import './tab';
 import './tabs-skeleton';
@@ -52,10 +52,10 @@ export const Default = (args) => {
       ${styles}
     </style>
     <bx-tabs
-      color-scheme="${ifNonNull(colorScheme)}"
-      trigger-content="${ifNonNull(triggerContent)}"
-      type="${ifNonNull(type)}"
-      value="${ifNonNull(value)}"
+      color-scheme="${ifDefined(colorScheme)}"
+      trigger-content="${ifDefined(triggerContent)}"
+      type="${ifDefined(type)}"
+      value="${ifDefined(value)}"
       @bx-tabs-beingselected="${handleBeforeSelected}"
       @bx-tabs-selected="${onSelect}">
       <bx-tab id="tab-all" target="panel-all" value="all">Option 1</bx-tab>

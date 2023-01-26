@@ -1,16 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import * as knobs from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './number-input';
 import './number-input-skeleton';
 import '../form/form-item';
@@ -34,17 +34,17 @@ export const Default = (args) => {
   } = args?.['bx-number-input'] ?? {};
   return html`
     <bx-number-input
-      color-scheme="${ifNonNull(colorScheme)}"
+      color-scheme="${ifDefined(colorScheme)}"
       ?disabled="${disabled}"
-      value="${ifNonNull(value)}"
-      placeholder="${ifNonNull(placeholder)}"
+      value="${ifDefined(value)}"
+      placeholder="${ifDefined(placeholder)}"
       ?invalid="${invalid}"
       name="${name}"
       ?mobile="${mobile}"
-      min="${ifNonNull(min)}"
-      max="${ifNonNull(max)}"
-      size="${ifNonNull(size)}"
-      step="${ifNonNull(step)}"
+      min="${ifDefined(min)}"
+      max="${ifDefined(max)}"
+      size="${ifDefined(size)}"
+      step="${ifDefined(step)}"
       @input="${onInput}"></bx-number-input>
   `;
 };
@@ -74,16 +74,16 @@ export const formItem = (args) => {
   return html`
     <bx-form-item>
       <bx-number-input
-        value="${ifNonNull(value)}"
-        color-scheme="${ifNonNull(colorScheme)}"
-        placeholder="${ifNonNull(placeholder)}"
+        value="${ifDefined(value)}"
+        color-scheme="${ifDefined(colorScheme)}"
+        placeholder="${ifDefined(placeholder)}"
         ?invalid="${invalid}"
         ?disabled="${disabled}"
         ?mobile="${mobile}"
-        min="${ifNonNull(min)}"
-        max="${ifNonNull(max)}"
-        size="${ifNonNull(size)}"
-        step="${ifNonNull(step)}"
+        min="${ifDefined(min)}"
+        max="${ifDefined(max)}"
+        size="${ifDefined(size)}"
+        step="${ifDefined(step)}"
         @input="${onInput}">
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
@@ -123,16 +123,16 @@ export const withoutFormItemWrapper = (args) => {
   } = args?.['bx-number-input'] ?? {};
   return html`
     <bx-number-input
-      value="${ifNonNull(value)}"
-      color-scheme="${ifNonNull(colorScheme)}"
-      placeholder="${ifNonNull(placeholder)}"
+      value="${ifDefined(value)}"
+      color-scheme="${ifDefined(colorScheme)}"
+      placeholder="${ifDefined(placeholder)}"
       ?invalid="${invalid}"
       ?disabled="${disabled}"
       ?mobile="${mobile}"
-      min="${ifNonNull(min)}"
-      max="${ifNonNull(max)}"
-      size="${ifNonNull(size)}"
-      step="${ifNonNull(step)}"
+      min="${ifDefined(min)}"
+      max="${ifDefined(max)}"
+      size="${ifDefined(size)}"
+      step="${ifDefined(step)}"
       @input="${onInput}">
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>

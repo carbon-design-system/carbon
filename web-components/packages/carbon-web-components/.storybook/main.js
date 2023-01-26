@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -173,7 +173,7 @@ module.exports = {
     }
     // In our development environment (where `carbon-web-components/es/icons` may not have been built yet),
     // we load icons from `@carbon/icons` and use a WebPack loader to convert the icons to `lit-html` version
-    config.resolve.alias['carbon-web-components/es/icons'] =
+    config.resolve.alias['@carbon/web-components/es/icons'] =
       '@carbon/icons/lib';
 
     return config;

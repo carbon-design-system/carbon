@@ -1,14 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, customElement, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 import settings from 'carbon-components/es/globals/js/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { TOOLTIP_ALIGNMENT, TOOLTIP_DIRECTION } from './defs';
@@ -44,15 +45,6 @@ class BXTooltipDefinition extends FocusMixin(LitElement) {
   @property()
   direction = TOOLTIP_DIRECTION.BOTTOM;
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   render() {
     const { alignment, bodyText, direction } = this;
     const classes = classMap({
@@ -72,6 +64,10 @@ class BXTooltipDefinition extends FocusMixin(LitElement) {
     `;
   }
 
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 

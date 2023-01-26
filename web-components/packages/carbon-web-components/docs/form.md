@@ -33,8 +33,8 @@ You can use our form components with Redux Form by creating a React component th
 
 ```javascript
 import { Field } from 'redux-form';
-import BXFormItem from 'carbon-web-components/es/components-react/form/form-item';
-import BXInput from 'carbon-web-components/es/components-react/input/input';
+import BXFormItem from '@carbon/web-components/es/components-react/form/form-item';
+import BXInput from '@carbon/web-components/es/components-react/input/input';
 
 ...
 

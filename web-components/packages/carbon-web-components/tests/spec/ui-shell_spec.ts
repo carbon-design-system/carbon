@@ -1,20 +1,20 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import '@types/jest';
-import { html, render } from 'lit-html';
+import { html, render } from 'lit';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Fade16 from 'carbon-web-components/es/icons/fade/16';
+import Fade16 from '@carbon/web-components/es/icons/fade/16';
 import EventManager from '../utils/event-manager';
-import ifNonNull from '../../src/globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import BXHeaderMenu from '../../src/components/ui-shell/header-menu';
 // Above import does not seem to register the custom element
 import '../../src/components/ui-shell/header-menu';
@@ -45,12 +45,12 @@ const headerMenuButtonTemplate = (props?) => {
   } = props ?? {};
   return html`
     <bx-header-menu-button
-      ?active="${ifNonNull(active)}"
-      button-label-active="${ifNonNull(buttonLabelActive)}"
-      button-label-inactive="${ifNonNull(buttonLabelInactive)}"
-      collapse-mode="${ifNonNull(collapseMode)}"
+      ?active="${ifDefined(active)}"
+      button-label-active="${ifDefined(buttonLabelActive)}"
+      button-label-inactive="${ifDefined(buttonLabelInactive)}"
+      collapse-mode="${ifDefined(collapseMode)}"
       ?disabled="${disabled}"
-      usage-mode="${ifNonNull(usageMode)}">
+      usage-mode="${ifDefined(usageMode)}">
     </bx-header-menu-button>
   `;
 };
@@ -60,8 +60,8 @@ const headerMenuTemplate = (props?) => {
   return html`
     <bx-header-menu
       ?expanded="${expanded}"
-      menu-label="${ifNonNull(menuLabel)}"
-      trigger-content="${ifNonNull(triggerContent)}">
+      menu-label="${ifDefined(menuLabel)}"
+      trigger-content="${ifDefined(triggerContent)}">
     </bx-header-menu>
   `;
 };
@@ -70,22 +70,22 @@ const headerNameTemplate = (props?) => {
   const { href, prefix } = props ?? {};
   return html`
     <bx-header-name
-      href="${ifNonNull(href)}"
-      prefix="${ifNonNull(prefix)}"></bx-header-name>
+      href="${ifDefined(href)}"
+      prefix="${ifDefined(prefix)}"></bx-header-name>
   `;
 };
 
 const headerNavTemplate = (props?) => {
   const { menuBarLabel } = props ?? {};
   return html`
-    <bx-header-nav menu-bar-label="${ifNonNull(menuBarLabel)}"></bx-header-nav>
+    <bx-header-nav menu-bar-label="${ifDefined(menuBarLabel)}"></bx-header-nav>
   `;
 };
 
 const headerNavItemTemplate = (props?) => {
   const { href } = props ?? {};
   return html`
-    <bx-header-nav-item href="${ifNonNull(href)}"></bx-header-nav-item>
+    <bx-header-nav-item href="${ifDefined(href)}"></bx-header-nav-item>
   `;
 };
 
@@ -94,9 +94,9 @@ const sideNavTemplate = (props?) => {
   return html`
     <bx-header-menu-button></bx-header-menu-button>
     <bx-side-nav
-      collapse-mode="${ifNonNull(collapseMode)}"
+      collapse-mode="${ifDefined(collapseMode)}"
       ?expanded="${expanded}"
-      usage-mode="${ifNonNull(usageMode)}">
+      usage-mode="${ifDefined(usageMode)}">
       ${children}
     </bx-side-nav>
   `;
@@ -105,7 +105,7 @@ const sideNavTemplate = (props?) => {
 const sideNavLinkTemplate = (props?) => {
   const { active, href, children } = props ?? {};
   return html`
-    <bx-side-nav-link ?active="${active}" href="${ifNonNull(href)}"
+    <bx-side-nav-link ?active="${active}" href="${ifDefined(href)}"
       >${children}</bx-side-nav-link
     >
   `;
@@ -118,7 +118,7 @@ const sideNavMenuTemplate = (props?) => {
       ?active="${active}"
       ?expanded="${expanded}"
       ?force-collapsed="${forceCollapsed}"
-      title="${ifNonNull(title)}">
+      title="${ifDefined(title)}">
       ${children}
     </bx-side-nav-menu>
   `;
@@ -130,7 +130,7 @@ const sideNavMenuItemTemplate = (props?) => {
     <bx-side-nav-menu>
       <bx-side-nav-menu-item
         ?active="${active}"
-        href="${ifNonNull(href)}"></bx-side-nav-menu-item>
+        href="${ifDefined(href)}"></bx-side-nav-menu-item>
     </bx-side-nav-menu>
   `;
 };

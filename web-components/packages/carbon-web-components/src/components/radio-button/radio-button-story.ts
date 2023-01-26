@@ -1,17 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { RADIO_BUTTON_ORIENTATION } from './radio-button-group';
 import { RADIO_BUTTON_LABEL_POSITION } from './radio-button';
 import './radio-button-skeleton';
@@ -38,22 +38,22 @@ export const Default = (args) => {
   return html`
     <bx-radio-button-group
       ?disabled="${disabled}"
-      label-position="${ifNonNull(labelPosition)}"
-      orientation="${ifNonNull(orientation)}"
-      name="${ifNonNull(name)}"
-      value="${ifNonNull(value)}"
+      label-position="${ifDefined(labelPosition)}"
+      orientation="${ifDefined(orientation)}"
+      name="${ifDefined(name)}"
+      value="${ifDefined(value)}"
       @bx-radio-button-group-changed="${onChange}">
       <bx-radio-button
         ?hide-label="${hideLabel}"
-        label-text="${ifNonNull(labelText)}"
+        label-text="${ifDefined(labelText)}"
         value="all"></bx-radio-button>
       <bx-radio-button
         ?hide-label="${hideLabel}"
-        label-text="${ifNonNull(labelText)}"
+        label-text="${ifDefined(labelText)}"
         value="cloudFoundry"></bx-radio-button>
       <bx-radio-button
         ?hide-label="${hideLabel}"
-        label-text="${ifNonNull(labelText)}"
+        label-text="${ifDefined(labelText)}"
         value="staging"></bx-radio-button>
     </bx-radio-button-group>
   `;

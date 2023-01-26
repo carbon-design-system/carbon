@@ -1,15 +1,15 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-html';
+import { html } from 'lit';
 import { boolean } from '@storybook/addon-knobs';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './structured-list';
 import './structured-list-head';
 import './structured-list-header-row';
@@ -32,7 +32,7 @@ export const Default = (args) => {
         'structured-list-selection-2',
       ];
   return html`
-    <bx-structured-list selection-name=${ifNonNull(selectionName)}>
+    <bx-structured-list selection-name=${ifDefined(selectionName)}>
       <bx-structured-list-head>
         <bx-structured-list-header-row>
           <bx-structured-list-header-cell
@@ -48,7 +48,7 @@ export const Default = (args) => {
       </bx-structured-list-head>
       <bx-structured-list-body>
         <bx-structured-list-row
-          selection-value=${ifNonNull(selectionValues[0])}>
+          selection-value=${ifDefined(selectionValues[0])}>
           <bx-structured-list-cell>Row 1</bx-structured-list-cell>
           <bx-structured-list-cell>Row 1</bx-structured-list-cell>
           <bx-structured-list-cell
@@ -58,7 +58,7 @@ export const Default = (args) => {
           >
         </bx-structured-list-row>
         <bx-structured-list-row
-          selection-value=${ifNonNull(selectionValues[1])}>
+          selection-value=${ifDefined(selectionValues[1])}>
           <bx-structured-list-cell>Row 2</bx-structured-list-cell>
           <bx-structured-list-cell>Row 2</bx-structured-list-cell>
           <bx-structured-list-cell
@@ -68,7 +68,7 @@ export const Default = (args) => {
           >
         </bx-structured-list-row>
         <bx-structured-list-row
-          selection-value=${ifNonNull(selectionValues[2])}>
+          selection-value=${ifDefined(selectionValues[2])}>
           <bx-structured-list-cell>Row 3</bx-structured-list-cell>
           <bx-structured-list-cell>Row 3</bx-structured-list-cell>
           <bx-structured-list-cell

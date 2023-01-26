@@ -1,16 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { html } from 'lit-element';
+import { html } from 'lit';
 import { boolean } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import ifNonNull from '../../globals/directives/if-non-null';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import './progress-indicator';
 import './progress-step';
 import './progress-indicator-skeleton';
@@ -24,31 +24,31 @@ export const Default = (args) => {
   return html`
     <bx-progress-indicator ?vertical="${vertical}">
       <bx-progress-step
-        icon-label="${ifNonNull(iconLabel)}"
-        label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(secondaryLabelText)}"
+        icon-label="${ifDefined(iconLabel)}"
+        label-text="${ifDefined(labelText)}"
+        secondary-label-text="${ifDefined(secondaryLabelText)}"
         state="invalid"></bx-progress-step>
       <bx-progress-step
-        icon-label="${ifNonNull(iconLabel)}"
-        label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(secondaryLabelText)}"
+        icon-label="${ifDefined(iconLabel)}"
+        label-text="${ifDefined(labelText)}"
+        secondary-label-text="${ifDefined(secondaryLabelText)}"
         state="complete"></bx-progress-step>
       <bx-progress-step
-        icon-label="${ifNonNull(iconLabel)}"
-        label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(secondaryLabelText)}"
+        icon-label="${ifDefined(iconLabel)}"
+        label-text="${ifDefined(labelText)}"
+        secondary-label-text="${ifDefined(secondaryLabelText)}"
         state="current"></bx-progress-step>
       <bx-progress-step
         disabled
-        icon-label="${ifNonNull(iconLabel)}"
-        label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(
+        icon-label="${ifDefined(iconLabel)}"
+        label-text="${ifDefined(labelText)}"
+        secondary-label-text="${ifDefined(
           secondaryLabelText
         )}"></bx-progress-step>
       <bx-progress-step
-        icon-label="${ifNonNull(iconLabel)}"
-        label-text="${ifNonNull(labelText)}"
-        secondary-label-text="${ifNonNull(
+        icon-label="${ifDefined(iconLabel)}"
+        label-text="${ifDefined(labelText)}"
+        secondary-label-text="${ifDefined(
           secondaryLabelText
         )}"></bx-progress-step>
     </bx-progress-indicator>

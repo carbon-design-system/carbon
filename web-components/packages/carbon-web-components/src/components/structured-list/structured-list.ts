@@ -1,15 +1,16 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { classMap } from 'lit-html/directives/class-map';
-import { html, property, customElement, LitElement } from 'lit-element';
+import { classMap } from 'lit/directives/class-map.js';
+import { LitElement, html } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
 import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
 import BXStructuredListRow from './structured-list-row';
@@ -30,15 +31,6 @@ class BXStructuredList extends FocusMixin(LitElement) {
    */
   @property({ attribute: 'selection-name' })
   selectionName = '';
-
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -77,7 +69,10 @@ class BXStructuredList extends FocusMixin(LitElement) {
    * The CSS selector to find the rows, including header rows.
    */
   static selectorRowsWithHeader = `${prefix}-structured-list-row,${prefix}-structured-list-header-row`;
-
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
   static styles = styles;
 }
 

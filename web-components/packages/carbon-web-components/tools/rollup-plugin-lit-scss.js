@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@ const noop = (s) => s;
  * @returns {string} A `lit-html` template of the given CSS.
  */
 function transformToTemplate(css) {
-  return `import { css } from 'lit-element';export default css([${JSON.stringify(
+  return `import { css } from 'lit';export default css([${JSON.stringify(
     css
   )}])`;
 }

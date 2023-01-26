@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -12,8 +12,9 @@ import Close20 from '@carbon/icons/lib/close/20';
 import ErrorFilled20 from '@carbon/icons/lib/error--filled/20';
 import WarningFilled20 from '@carbon/icons/lib/warning--filled/20';
 import settings from 'carbon-components/es/globals/js/settings';
-import { customElement, html, LitElement, property, svg } from 'lit-element';
-import { ifDefined } from 'lit-html/directives/if-defined';
+import { LitElement, html, svg } from 'lit';
+import { property, customElement } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import FocusMixin from '../../globals/mixins/focus';
 import { NOTIFICATION_KIND, NOTIFICATION_TYPE } from './defs';
 import styles from './inline-notification.scss';
