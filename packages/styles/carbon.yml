@@ -502,6 +502,16 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/accessibility.mdx
+  overflow-menu-v2:
+    name: Overflow menu v2
+    status: experimental
+    type: component
+    platform: web
+    noIndex: true
+    # TODO: confirm thumbnail with Jeanie
+    thumbnailPath: ./thumbnails/overflow-menu.svg
+    tags:
+      - input-control
   pagination:
     name: Pagination
     description: Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
