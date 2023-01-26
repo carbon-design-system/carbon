@@ -8,6 +8,7 @@
 import React from 'react';
 import Select from '../Select';
 import SelectItem from '../../SelectItem';
+import SelectSkeleton from '../../Select/Select.Skeleton';
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import { FeatureFlags } from '../../FeatureFlags';
@@ -117,7 +118,7 @@ describe('Select', () => {
         <Select id="select" labelText="Select" inline />
       );
 
-      const selectWrapper = container.querySelector('.cds--select');
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
       expect(selectWrapper).toHaveClass(`${prefix}--select--inline`);
     });
 
@@ -126,8 +127,8 @@ describe('Select', () => {
         <Select id="select" labelText="Select" invalid />
       );
 
-      const selectWrapper = container.querySelector('.cds--select');
-      const selectInput = container.querySelector('.cds--select-input');
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+      const selectInput = container.querySelector(`.${prefix}--select-input`);
 
       expect(selectWrapper).toHaveClass(`${prefix}--select--invalid`);
       expect(selectInput).toHaveAttribute('aria-invalid', 'true');
@@ -216,7 +217,7 @@ describe('Select', () => {
         <Select id="select" labelText="Select" warn />
       );
 
-      const selectWrapper = container.querySelector('.cds--select');
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
 
       expect(selectWrapper).toHaveClass(`${prefix}--select--warning`);
     });
@@ -320,6 +321,14 @@ describe('Select', () => {
       );
 
       expect(ref.current).toHaveClass(`${prefix}--select-input`);
+    });
+
+    it('should render a skeleton state', () => {
+      const { container } = render(<SelectSkeleton />);
+
+      const selectWrapper = container.querySelector(`.${prefix}--select`);
+
+      expect(selectWrapper).toHaveClass(`${prefix}--skeleton`);
     });
   });
 
