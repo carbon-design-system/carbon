@@ -1,4 +1,4 @@
-name: github-repo-stats
+name: Collect GitHub Repo Statistics
 
 on:
   schedule:
