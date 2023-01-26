@@ -20,7 +20,7 @@ export interface ListBoxMenuProps
    * Specify a custom `id`
    */
   id: string;
-};
+}
 
 export type ListBoxMenuComponent = ForwardRefReturn<HTMLDivElement, ListBoxMenuProps>
 

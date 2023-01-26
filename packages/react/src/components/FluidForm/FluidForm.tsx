@@ -13,7 +13,7 @@ import { FormContext } from './FormContext';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
-export interface FluidFormProps extends ReactAttr<HTMLFormElement> {};
+export type FluidFormProps = ReactAttr<HTMLFormElement>
 
 const FluidForm: React.FC<FluidFormProps> = ({
   className,

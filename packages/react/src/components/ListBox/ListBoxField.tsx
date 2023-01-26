@@ -20,7 +20,7 @@ export interface ListBoxFieldProps extends ReactAttr<HTMLDivElement> {
    */
   disabled?: boolean;
 
-};
+}
 
 /**
  * `ListBoxField` is responsible for creating the containing node for valid
@@ -69,6 +69,6 @@ ListBoxField.propTypes = {
   tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 };
 
-export interface ListBoxFieldComponent extends React.FC<ListBoxFieldProps> {}
+export type ListBoxFieldComponent = React.FC<ListBoxFieldProps>
 
 export default ListBoxField as ListBoxFieldComponent;

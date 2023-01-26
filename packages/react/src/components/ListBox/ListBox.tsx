@@ -79,7 +79,7 @@ export interface ListBoxProps
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
-};
+}
 
 export type ListBoxComponent = ForwardRefReturn<HTMLDivElement, ListBoxProps>
 

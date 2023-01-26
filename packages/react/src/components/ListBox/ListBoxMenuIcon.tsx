@@ -36,9 +36,9 @@ export interface ListBoxMenuIconProps {
    * return a string message for that given message id.
    */
   translateWithId?(messageId: string, args?: Record<string, unknown>): string;
-};
+}
 
-export type ListBoxMenuIconComponent = React.FC<ListBoxMenuIconProps>
+export type ListBoxMenuIconComponent = React.FC<ListBoxMenuIconProps>;
 
 /**
  * `ListBoxMenuIcon` is used to orient the icon up or down depending on the

@@ -48,7 +48,7 @@ export interface ListBoxSelectionProps {
    * return a string message for that given message id.
    */
   translateWithId(messageId: string, args?: Record<string, unknown>): string;
-};
+}
 
 export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>
 

@@ -34,13 +34,13 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLDivElement> {
    */
   isHighlighted?: boolean;
 
-};
+}
 
 export type ListBoxMenuItemForwardedRef = ForwardedRef<HTMLDivElement> & {
     menuItemOptionRef?: React.Ref<HTMLDivElement>;
   } | null;
 
-export interface ListBoxMenuItemComponent extends ForwardRefReturn<ListBoxMenuItemForwardedRef, ListBoxMenuItemProps> { }
+export type ListBoxMenuItemComponent = ForwardRefReturn<ListBoxMenuItemForwardedRef, ListBoxMenuItemProps>;
 
 /**
  * `ListBoxMenuItem` is a helper component for managing the container class

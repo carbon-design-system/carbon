@@ -181,7 +181,7 @@ export interface DropdownProps<ItemType>
    * Provide the text that is displayed when the control is in warning state
    */
   warnText?: React.ReactNode;
-};
+}
 
 const Dropdown = React.forwardRef(<ItemType,>(
   {
@@ -420,9 +420,9 @@ const Dropdown = React.forwardRef(<ItemType,>(
   );
 });
 
-interface DropdownComponentProps<ItemType> extends
+type DropdownComponentProps<ItemType> =
   React.PropsWithoutRef<React.PropsWithChildren<DropdownProps<ItemType>>
-    & React.RefAttributes<HTMLButtonElement>> {}
+    & React.RefAttributes<HTMLButtonElement>>
 
 interface DropdownComponent {
   <ItemType>(props: DropdownComponentProps<ItemType>): React.ReactElement | null
