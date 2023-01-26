@@ -131,7 +131,7 @@
   }
 
   .#{$prefix}--dropdown--light {
-    background-color: $field;
+    background-color: $field-02;
 
     &:hover {
       background-color: $field-hover;
@@ -353,7 +353,7 @@
 
     // V11: Possibly deprecate
     &.#{$prefix}--dropdown--light:hover {
-      background-color: $field;
+      background-color: $field-02;
     }
   }
 
