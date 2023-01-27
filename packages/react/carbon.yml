@@ -194,7 +194,7 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu-contextmenu
     platform: web
     # Ask Jeanie
-    thumbnailPath: TODO
+    # thumbnailPath: TODO
     docs:
       overviewPath: ./src/components/ContextMenu/docs/overview.mdx
     tags:

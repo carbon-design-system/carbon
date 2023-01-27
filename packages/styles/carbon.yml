@@ -603,7 +603,8 @@ assets:
     status: stable
     type: pattern
     platform: web
-    thumbnailPath: TODO
+    # Ask Jeanie
+    # thumbnailPath: TODO
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/read-only-states-pattern/index.mdx
   search:
