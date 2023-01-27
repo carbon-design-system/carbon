@@ -15,15 +15,9 @@ const prefix = 'cds';
 describe('PasswordInput', () => {
   describe('renders as expected - Component API', () => {
     it('should spread extra props onto input element', () => {
-      render(
-        <PasswordInput
-          data-testid="test-id"
-          id="input-1"
-          labelText="TextInput label"
-        />
-      );
+      render(<PasswordInput id="input-1" labelText="PasswordInput label" />);
 
-      expect(screen.getByTestId('test-id')).toHaveClass(
+      expect(screen.getByLabelText('PasswordInput label')).toHaveClass(
         `${prefix}--text-input`
       );
     });
@@ -31,27 +25,27 @@ describe('PasswordInput', () => {
     it('should support a custom `className` prop on the input element', () => {
       render(
         <PasswordInput
-          data-testid="test-id"
           id="input-1"
           labelText="PasswordInput label"
           className="custom-class"
         />
       );
 
-      expect(screen.getByTestId('test-id')).toHaveClass('custom-class');
+      expect(screen.getByLabelText('PasswordInput label')).toHaveClass(
+        'custom-class'
+      );
     });
 
     it('should respect defaultValue prop', () => {
       render(
         <PasswordInput
-          data-testid="test-id"
           id="input-1"
           labelText="PasswordInput label"
           defaultValue="This is default text"
         />
       );
 
-      expect(screen.getByTestId('test-id')).toHaveAttribute(
+      expect(screen.getByLabelText('PasswordInput label')).toHaveAttribute(
         'value',
         'This is default text'
       );
@@ -59,21 +53,15 @@ describe('PasswordInput', () => {
 
     it('should respect disabled prop', () => {
       render(
-        <PasswordInput
-          data-testid="test-id"
-          id="input-1"
-          labelText="PasswordInput label"
-          disabled
-        />
+        <PasswordInput id="input-1" labelText="PasswordInput label" disabled />
       );
 
-      expect(screen.getByTestId('test-id')).toBeDisabled();
+      expect(screen.getByLabelText('PasswordInput label')).toBeDisabled();
     });
 
     it('should respect helperText prop', () => {
       render(
         <PasswordInput
-          data-testid="test-id"
           id="input-1"
           labelText="PasswordInput label"
           helperText="This is helper text"
@@ -88,12 +76,7 @@ describe('PasswordInput', () => {
 
     it('should respect hideLabel prop', () => {
       render(
-        <PasswordInput
-          data-testid="test-id"
-          id="input-1"
-          labelText="TextInput label"
-          hideLabel
-        />
+        <PasswordInput id="input-1" labelText="TextInput label" hideLabel />
       );
 
       expect(screen.getByText('TextInput label')).toBeInTheDocument();
@@ -105,7 +88,6 @@ describe('PasswordInput', () => {
     it('should respect hidePasswordLabel prop', () => {
       render(
         <PasswordInput
-          data-testid="test-id"
           id="input-1"
           labelText="TextInput label"
           hidePasswordLabel="Hide Password"
@@ -119,15 +101,13 @@ describe('PasswordInput', () => {
 
     it('should respect id prop', () => {
       render(
-        <PasswordInput
-          data-testid="test-id"
-          id="input-1"
-          labelText="TextInput label"
-          hideLabel
-        />
+        <PasswordInput id="input-1" labelText="PasswordInput label" hideLabel />
       );
 
-      expect(screen.getByTestId('test-id')).toHaveAttribute('id', 'input-1');
+      expect(screen.getByLabelText('PasswordInput label')).toHaveAttribute(
+        'id',
+        'input-1'
+      );
     });
 
     it('should respect inline prop', () => {
@@ -142,20 +122,17 @@ describe('PasswordInput', () => {
 
     it('should respect invalid prop', () => {
       const { container } = render(
-        <PasswordInput
-          data-testid="test-id"
-          id="input-1"
-          labelText="TextInput"
-          invalid
-        />
+        <PasswordInput id="input-1" labelText="PasswordInput label" invalid />
       );
 
       const invalidIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon`
       );
 
-      expect(screen.getByTestId('test-id')).toHaveAttribute('data-invalid');
-      expect(screen.getByTestId('test-id')).toHaveClass(
+      expect(screen.getByLabelText('PasswordInput label')).toHaveAttribute(
+        'data-invalid'
+      );
+      expect(screen.getByLabelText('PasswordInput label')).toHaveClass(
         `${prefix}--text-input--invalid`
       );
       expect(invalidIcon).toBeInTheDocument();
@@ -214,15 +191,10 @@ describe('PasswordInput', () => {
 
     it('should respect size prop', () => {
       render(
-        <PasswordInput
-          data-testid="test-id"
-          id="input-1"
-          labelText="TextInput label"
-          size="sm"
-        />
+        <PasswordInput id="input-1" labelText="PasswordInput label" size="sm" />
       );
 
-      expect(screen.getByTestId('test-id')).toHaveClass(
+      expect(screen.getByLabelText('PasswordInput label')).toHaveClass(
         `${prefix}--text-input--sm`
       );
     });
@@ -230,27 +202,28 @@ describe('PasswordInput', () => {
     it('should respect type prop', () => {
       render(
         <PasswordInput
-          data-testid="test-id"
           id="input-1"
-          labelText="TextInput label"
+          labelText="PasswordInput label"
           type="text"
         />
       );
 
-      expect(screen.getByTestId('test-id')).toHaveAttribute('type', 'text');
+      expect(screen.getByLabelText('PasswordInput label')).toHaveAttribute(
+        'type',
+        'text'
+      );
     });
 
     it('should respect value prop', () => {
       render(
         <PasswordInput
-          data-testid="test-id"
           id="input-1"
-          labelText="TextInput label"
+          labelText="PasswordInput label"
           value="This is a test value"
         />
       );
 
-      expect(screen.getByTestId('test-id')).toHaveAttribute(
+      expect(screen.getByLabelText('PasswordInput label')).toHaveAttribute(
         'value',
         'This is a test value'
       );
@@ -258,19 +231,14 @@ describe('PasswordInput', () => {
 
     it('should respect warn prop', () => {
       const { container } = render(
-        <PasswordInput
-          data-testid="test-id"
-          id="input-1"
-          labelText="TextInput label"
-          warn
-        />
+        <PasswordInput id="input-1" labelText="PasswordInput label" warn />
       );
 
       const warnIcon = container.querySelector(
         `svg.${prefix}--text-input__invalid-icon--warning`
       );
 
-      expect(screen.getByTestId('test-id')).toHaveClass(
+      expect(screen.getByLabelText('PasswordInput label')).toHaveClass(
         `${prefix}--text-input--warning`
       );
       expect(warnIcon).toBeInTheDocument();
@@ -299,14 +267,14 @@ describe('PasswordInput', () => {
       render(
         <PasswordInput
           id="input-1"
-          labelText="TextInput label"
+          labelText="PasswordInput label"
           data-testid="test-id"
           onChange={onChange}
         />
       );
 
-      userEvent.type(screen.getByTestId('test-id'), 'x');
-      expect(screen.getByTestId('test-id')).toHaveValue('x');
+      userEvent.type(screen.getByLabelText('PasswordInput label'), 'x');
+      expect(screen.getByLabelText('PasswordInput label')).toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -320,13 +288,12 @@ describe('PasswordInput', () => {
       render(
         <PasswordInput
           id="input-1"
-          labelText="TextInput label"
-          data-testid="test-id"
+          labelText="PasswordInput label"
           onClick={onClick}
         />
       );
 
-      userEvent.click(screen.getByTestId('test-id'));
+      userEvent.click(screen.getByLabelText('PasswordInput label'));
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(onClick).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -336,17 +303,55 @@ describe('PasswordInput', () => {
     });
 
     it('should call onTogglePasswordVisibility when visiblity button is clicked', () => {
-      render(
-        <PasswordInput
-          data-testid="test-id"
-          id="input-1"
-          labelText="TextInput label"
-        />
-      );
+      render(<PasswordInput id="input-1" labelText="PasswordInput label" />);
 
       expect(screen.getByText('Show password')).toBeInTheDocument();
       userEvent.click(screen.getByRole('button'));
       expect(screen.getByText('Hide password')).toBeInTheDocument();
+    });
+
+    it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
+      const onClick = jest.fn();
+
+      render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          onClick={onClick}
+          disabled
+        />
+      );
+
+      userEvent.click(screen.getByLabelText('PasswordInput label'));
+      expect(onClick).not.toHaveBeenCalled();
+    });
+
+    it('should not call `onChange` when the `<input>` is clicked but disabled', () => {
+      const onChange = jest.fn();
+
+      render(
+        <PasswordInput
+          id="input-1"
+          labelText="PasswordInput label"
+          onChange={onChange}
+          disabled
+        />
+      );
+
+      userEvent.type(screen.getByLabelText('PasswordInput label'), 'x');
+      expect(screen.getByLabelText('PasswordInput label')).not.toHaveValue('x');
+      expect(onChange).toHaveBeenCalledTimes(0);
+    });
+
+    it('should support a `ref` that is placed on the <input> element', () => {
+      const ref = jest.fn();
+      render(
+        <PasswordInput id="input-1" labelText="PasswordInput label" ref={ref} />
+      );
+
+      expect(ref).toHaveBeenCalledWith(
+        screen.getByLabelText('PasswordInput label')
+      );
     });
   });
 });
