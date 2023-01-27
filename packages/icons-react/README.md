@@ -21,7 +21,7 @@ yarn add @carbon/icons-react
 
 ## Usage
 
-You can import an icon component intoo your project by referring to its name:
+You can import an icon component into your project by referring to its name:
 
 ```jsx
 import { Add } from '@carbon/icons-react';
@@ -49,7 +49,7 @@ const { Add } = require('@carbon/icons-react');
 
 _Note: if you would like to find the import path for an icon, you can reference
 our
-[Icon Library](https://www.carbondesignsystem.com/guidelines/iconography/library)_
+[Icon Library](https://carbondesignsystem.com/guidelines/icons/library)_
 
 ### Icon fill
 
