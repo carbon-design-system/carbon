@@ -2465,6 +2465,7 @@ exports[`DataTable should render 1`] = `
                       >
                         <Tooltip
                           className="cds--icon-tooltip"
+                          closeOnActivation={true}
                           defaultOpen={false}
                           label="Settings"
                         >
@@ -3587,6 +3588,7 @@ exports[`DataTable sticky header should render 1`] = `
                       >
                         <Tooltip
                           className="cds--icon-tooltip"
+                          closeOnActivation={true}
                           defaultOpen={false}
                           label="Settings"
                         >

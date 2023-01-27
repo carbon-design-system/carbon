@@ -30,12 +30,14 @@ describe('Tooltip', () => {
   });
 
   it('should support initially showing the tooltip with `defaultOpen`', () => {
-    render(
+    const { container } = render(
       <Tooltip defaultOpen label="Close">
         <button type="button">X</button>
       </Tooltip>
     );
-    expect(screen.getByLabelText('Close')).toBeVisible();
+
+    const popoverContainer = container.querySelector('.cds--popover-container');
+    expect(popoverContainer).toHaveClass('cds--popover--open');
   });
 
   it('should support labeling an element by its tooltip', () => {
@@ -82,8 +84,26 @@ describe('Tooltip', () => {
 
     userEvent.click(screen.getByRole('button'));
     userEvent.tab();
-    userEvent.tab();
 
     expect(onBlur).toHaveBeenCalled();
+  });
+
+  it('should close when item is activated and `closeOnActivation`', () => {
+    const { container } = render(
+      <>
+        <Tooltip closeOnActivation label="Close">
+          <button type="button">X</button>
+        </Tooltip>
+        <div>Hey</div>
+      </>
+    );
+
+    const popoverContainer = container.querySelector('.cds--popover-container');
+    const button = screen.getByRole('button');
+
+    button.focus();
+    expect(popoverContainer).toHaveClass('cds--popover--open');
+    button.click();
+    expect(popoverContainer).not.toHaveClass('cds--popover--open');
   });
 });

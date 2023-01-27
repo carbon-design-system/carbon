@@ -8726,6 +8726,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeOnActivation": Object {
+        "type": "bool",
+      },
       "defaultOpen": Object {
         "type": "bool",
       },

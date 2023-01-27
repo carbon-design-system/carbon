@@ -510,7 +510,7 @@ class OverflowMenu extends Component {
     const childrenWithProps = React.Children.toArray(children).map(
       (child, index) =>
         React.cloneElement(child, {
-          closeMenu: child?.props?.closeMenu || this.closeMenu,
+          closeMenu: child?.props?.closeMenu || this.closeMenuAndFocus,
           handleOverflowMenuItemFocus: this.handleOverflowMenuItemFocus,
           ref: (e) => {
             this[`overflowMenuItem${index}`] = e;
@@ -553,20 +553,22 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <IconButton
-          {...other}
-          type="button"
-          aria-haspopup
-          aria-expanded={this.state.open}
-          className={overflowMenuClasses}
-          onKeyDown={this.handleKeyPress}
-          onClick={this.handleClick}
-          id={id}
-          ref={mergeRefs(this._triggerRef, ref)}
-          label={iconDescription}>
-          <IconElement {...iconProps} />
+        <>
+          <IconButton
+            {...other}
+            type="button"
+            aria-haspopup
+            aria-expanded={this.state.open}
+            className={overflowMenuClasses}
+            onKeyDown={this.handleKeyPress}
+            onClick={this.handleClick}
+            id={id}
+            ref={mergeRefs(this._triggerRef, ref)}
+            label={iconDescription}>
+            <IconElement {...iconProps} />
+          </IconButton>
           {open && this.state.hasMountedTrigger && wrappedMenuBody}
-        </IconButton>
+        </>
       </ClickListener>
     );
   }

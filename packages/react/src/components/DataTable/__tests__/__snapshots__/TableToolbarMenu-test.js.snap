@@ -73,6 +73,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
         >
           <Tooltip
             className="cds--icon-tooltip"
+            closeOnActivation={true}
             defaultOpen={false}
             label="Add"
           >
