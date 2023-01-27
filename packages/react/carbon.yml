@@ -186,7 +186,6 @@ assets:
     name: Context menu
     status: experimental
     framework: react
-    type: component
     demoLinks:
       - type: storybook
         name: Storybook
@@ -198,7 +197,7 @@ assets:
     docs:
       overviewPath: ./src/components/ContextMenu/docs/overview.mdx
     tags:
-      - hook
+      - system-feedback
   copy-button:
     status: stable
     framework: react
