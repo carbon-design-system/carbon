@@ -112,7 +112,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--expanded:hover.#{$prefix}--list-box--light:hover {
-    background-color: $field;
+    background-color: $field-02;
   }
 
   .#{$prefix}--list-box .#{$prefix}--text-input {
@@ -155,7 +155,7 @@ $list-box-menu-width: rem(300px);
   // V11: Possibly deprecate
   // Light variation for 'list-box'
   .#{$prefix}--list-box--light {
-    background-color: $field;
+    background-color: $field-02;
 
     &:hover {
       background-color: $field-hover;
@@ -183,7 +183,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light.#{$prefix}--list-box--disabled {
-    background-color: $field;
+    background-color: $field-02;
   }
 
   .#{$prefix}--list-box--disabled,
