@@ -610,6 +610,8 @@ assets:
     tags:
       - data-display
       - contextual-navigation
+    docs:
+      overviewPath: ./src/components/Pagination/experimental/docs/overview.mdx
   popover:
     status: stable
     framework: react
