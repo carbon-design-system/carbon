@@ -33,12 +33,12 @@ You can use our form components with Redux Form by creating a React component th
 
 ```javascript
 import { Field } from 'redux-form';
-import BXFormItem from 'carbon-web-components/es/components-react/form/form-item';
-import BXInput from 'carbon-web-components/es/components-react/input/input';
+import BXFormItem from '@carbon/web-components/es/components-react/form/form-item';
+import BXInput from '@carbon/web-components/es/components-react/input/input';
 
 ...
 
-// A React component that wraps form components from `carbon-web-components`
+// A React component that wraps form components from `@carbon/web-components`
 const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
   const validityMessage = !touched ? undefined : error;
   return (
