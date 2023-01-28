@@ -30,7 +30,7 @@ const blocklist = new Set([
 const components = fs
   .readdirSync(COMPONENT_PATH)
   .filter((name) => !blocklist.has(name))
-  .map((name) => path.basename(name, '.js'));
+  .map((name) => path.basename(name, path.extname(name)));
 
 describe('DataTable exports', () => {
   it('should export DataTable by default', () => {
