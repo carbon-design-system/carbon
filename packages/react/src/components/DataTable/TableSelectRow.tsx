@@ -85,6 +85,7 @@ const TableSelectRow = ({
   };
   const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
   const tableSelectRowClasses = classNames(`${prefix}--table-column-checkbox`, {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     [className!]: className,
     [`${prefix}--table-column-radio`]: radio,
   });
