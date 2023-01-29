@@ -15,6 +15,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
 import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -34,7 +35,7 @@ const TextArea = React.forwardRef(function TextArea(
     maxCount,
     ...other
   },
-  ref
+  forwardRef
 ) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
@@ -51,8 +52,6 @@ const TextArea = React.forwardRef(function TextArea(
         : value.match(/\w+/g).length
       : 0
   );
-
-  const textareaRef = useRef(null);
 
   const textareaProps = {
     id,
@@ -160,6 +159,9 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
+  const textareaRef = useRef();
+  const ref = useMergedRefs([forwardRef, textareaRef]);
+
   useIsomorphicEffect(() => {
     if (other.cols) {
       textareaRef.current.style.width = null;
@@ -178,7 +180,7 @@ const TextArea = React.forwardRef(function TextArea(
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
       readOnly={other.readOnly}
-      ref={textareaRef}
+      ref={ref}
     />
   );
 

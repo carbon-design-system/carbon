@@ -24,9 +24,9 @@ library:
         - title: Step 5
           path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/step-5.mdx'
         - title: Wrapping up
-          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/wrapping-up.mdx'
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/wrapping-up.mdx'
         - title: FAQ
-          path: 'https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/developing/react-tutorial/faq.mdx'
+          path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/react-tutorial/faq.mdx'
 assets:
   accordion:
     status: stable
@@ -38,9 +38,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-accordion
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/accordion/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/accordion/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/accordion/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/accordion/accessibility.mdx
       overviewPath: './src/components/Accordion/docs/overview.mdx'
   aspect-ratio:
     status: stable
@@ -62,9 +62,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-breadcrumb
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/breadcrumb/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/breadcrumb/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/breadcrumb/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/breadcrumb/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/breadcrumb/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/breadcrumb/accessibility.mdx
       overviewPath: './src/components/Breadcrumb/docs/overview.mdx'
   button:
     status: stable
@@ -76,9 +76,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-button
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/button/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/button/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/button/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/button/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/button/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/button/accessibility.mdx
       overviewPath: ./src/components/Button/docs/overview.mdx
   checkbox:
     status: stable
@@ -90,9 +90,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-checkbox
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/checkbox/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/accessibility.mdx
       overviewPath: ./src/components/Checkbox/docs/overview.mdx
   code-snippet:
     status: stable
@@ -104,9 +104,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-codesnippet
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/code-snippet/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/code-snippet/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/code-snippet/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/code-snippet/accessibility.mdx
       overviewPath: ./src/components/CodeSnippet/docs/overview.mdx
   combo-box:
     status: stable
@@ -144,9 +144,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-containedlist
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/contained-list/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/contained-list/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/contained-list/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/contained-list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/contained-list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/contained-list/accessibility.mdx
       overviewPath: ./src/components/ContainedList/docs/overview.mdx
   content-switcher:
     status: stable
@@ -158,9 +158,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-contentswitcher
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/content-switcher/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/accessibility.mdx
       overviewPath: ./src/components/ContentSwitcher/docs/overview.mdx
   copy-button:
     status: stable
@@ -182,9 +182,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-datatable
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/data-table/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/data-table/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/data-table/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/data-table/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/data-table/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/data-table/accessibility.mdx
       overviewPath: ./src/components/DataTable/docs/overview.mdx
   date-picker:
     status: stable
@@ -196,9 +196,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-datepicker
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/date-picker/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/date-picker/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/date-picker/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/date-picker/accessibility.mdx
       overviewPath: ./src/components/DatePicker/docs/overview.mdx
   dropdown:
     status: stable
@@ -210,9 +210,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-dropdown
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/dropdown/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/dropdown/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/dropdown/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/dropdown/accessibility.mdx
       overviewPath: ./src/components/Dropdown/docs/overview.mdx
   error-boundary:
     name: Error boundary
@@ -240,9 +240,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-fileuploader--file-uploader
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/file-uploader/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/file-uploader/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/file-uploader/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/file-uploader/accessibility.mdx
       overviewPath: ./src/components/FileUploader/docs/overview.mdx
   flex-grid:
     name: Flex grid
@@ -284,9 +284,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-form
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/form/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/form/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/form/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/form/accessibility.mdx
       overviewPath: ./src/components/Form/docs/overview.mdx
   form-group:
     name: Form group
@@ -358,9 +358,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-inlineloading
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/inline-loading/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/inline-loading/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/inline-loading/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/inline-loading/accessibility.mdx
       overviewPath: ./src/components/InlineLoading/docs/overview.mdx
   layer:
     name: Layer
@@ -401,9 +401,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-link
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/link/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/link/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/link/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/link/accessibility.mdx
       overviewPath: ./src/components/Link/docs/overview.mdx
   loading:
     status: stable
@@ -415,9 +415,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-loading
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/loading/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/loading/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/loading/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/accessibility.mdx
       overviewPath: ./src/components/Loading/docs/overview.mdx
   menu:
     name: Unstable menu
@@ -443,9 +443,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-modal
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/modal/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/modal/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/modal/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/modal/accessibility.mdx
       overviewPath: ./src/components/Modal/docs/overview.mdx
   multiselect:
     status: stable
@@ -479,9 +479,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-numberinput
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/number-input/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/number-input/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/number-input/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/number-input/accessibility.mdx
       overviewPath: ./src/components/NumberInput/docs/overview.mdx
   ordered-list:
     name: Ordered list
@@ -498,9 +498,9 @@ assets:
     tags:
       - data-display
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/accessibility.mdx
       overviewPath: ./src/components/OrderedList/docs/overview.mdx
   overflow-menu:
     status: stable
@@ -512,9 +512,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-overflowmenu
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/overflow-menu/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/accessibility.mdx
       overviewPath: ./src/components/OverflowMenu/docs/overview.mdx
   pagination:
     status: stable
@@ -526,9 +526,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-pagination
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/pagination/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/pagination/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/pagination/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/pagination/accessibility.mdx
       overviewPath: ./src/components/Pagination/docs/overview.mdx
   pagination-nav:
     status: stable
@@ -565,8 +565,8 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-popover
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/popover/style.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/popover/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/popover/style.mdx
       overviewPath: ./src/components/Popover/docs/overview.mdx
   progress-bar:
     status: stable
@@ -578,8 +578,8 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-progressbar
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-bar/style.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-bar/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-bar/style.mdx
       overviewPath: ./src/components/ProgressBar/docs/overview.mdx
   progress-indicator:
     status: stable
@@ -591,9 +591,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-progressindicator
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/progress-indicator/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-indicator/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-indicator/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/progress-indicator/accessibility.mdx
       overviewPath: ./src/components/ProgressIndicator/docs/overview.mdx
   radio-button:
     status: stable
@@ -605,9 +605,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-radiobutton
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/radio-button/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/accessibility.mdx
       overviewPath: ./src/components/RadioButton/docs/overview.mdx
   search:
     status: stable
@@ -619,9 +619,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-search
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/search/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/accessibility.mdx
       overviewPath: ./src/components/Search/docs/overview.mdx
   section:
     name: Section
@@ -646,9 +646,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-select
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/select/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/select/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/select/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/select/accessibility.mdx
       overviewPath: ./src/components/Select/docs/overview.mdx
   skeleton:
     name: Skeleton
@@ -674,9 +674,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-slider
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/slider/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/slider/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/slider/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/slider/accessibility.mdx
       overviewPath: ./src/components/Slider/docs/overview.mdx
   stack:
     name: Stack
@@ -702,9 +702,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-structuredlist
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/structured-list/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/structured-list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/structured-list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/structured-list/accessibility.mdx
       overviewPath: ./src/components/StructuredList/docs/overview.mdx
   tabs:
     status: stable
@@ -716,9 +716,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tabs
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tabs/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tabs/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tabs/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tabs/accessibility.mdx
       overviewPath: ./src/components/Tabs/docs/overview.mdx
   tag:
     status: stable
@@ -730,9 +730,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tag
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tag/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tag/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tag/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tag/accessibility.mdx
       overviewPath: ./src/components/Tag/docs/overview.mdx
   text:
     name: Unstable text
@@ -781,9 +781,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-textinput
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/text-input/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/text-input/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/text-input/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/text-input/accessibility.mdx
       overviewPath: ./src/components/TextInput/docs/overview.mdx
   theme:
     status: stable
@@ -805,9 +805,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tile
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tile/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tile/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tile/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tile/accessibility.mdx
       overviewPath: ./src/components/Tile/docs/overview.mdx
   time-picker:
     status: stable
@@ -829,9 +829,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-toggle
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggle/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggle/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggle/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggle/accessibility.mdx
       overviewPath: ./src/components/Toggle/docs/overview.mdx
   toggletip:
     status: stable
@@ -845,8 +845,8 @@ assets:
     tags:
       - content-element
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/toggletip/style.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/style.mdx
       overviewPath: ./src/components/Toggletip/docs/overview.mdx
   tooltip:
     status: stable
@@ -858,9 +858,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-tooltip
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/tooltip/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/accessibility.mdx
       overviewPath: ./src/components/Tooltip/docs/overview.mdx
   tooltip-definition:
     status: stable
@@ -890,7 +890,7 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-header/code.mdx
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-header/code.mdx
   ui-shell-left-panel:
     framework: react
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-left-panel/usage
@@ -901,7 +901,7 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-left-panel/code.mdx
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/code.mdx
   ui-shell-right-panel:
     framework: react
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-right-panel/usage
@@ -912,7 +912,7 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
-      codePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/UI-shell-right-panel/code.mdx
+      codePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/code.mdx
   unordered-list:
     name: Unordered list
     framework: react
@@ -928,9 +928,9 @@ assets:
     tags:
       - data-display
     docs:
-      usagePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/usage.mdx
-      stylePath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/style.mdx
-      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/main/src/pages/components/list/accessibility.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/list/accessibility.mdx
       overviewPath: ./src/components/UnorderedList/docs/overview.mdx
   use-context-menu:
     name: unstable_useContextMenu
