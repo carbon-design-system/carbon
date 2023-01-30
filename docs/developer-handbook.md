@@ -109,36 +109,6 @@ package you could do the following:
 yarn lerna run build
 ```
 
-### `carbon-components`
-
-Tests are written in [Mocha](https://mochajs.org)/[Chai](http://chaijs.com). You
-can see if your code is covered by looking at
-carbon-components/tests/coverage/\*/index.html after running test.
-
-If your change may hit some browser quirks, use `-b` option, like:
-
-```sh
-gulp test:unit -b IE -b Firefox
-```
-
-(Other browsers tests can run with are: `Safari`, `Chrome` and `ChromeHeadless`)
-
-If you are very sure that your change affects a specific set of components, you
-can use `-f` option, like:
-
-```sh
-gulp test:unit -f tests/spec/fab_spec.js
-```
-
-Other options for testing are:
-
-- `-d`/`--debug`: Stop generating code coverage report. Useful to debug your
-  code when running test.
-- `-k`/`--keepalive`: Keep running test runner even after test ends. Test will
-  restart running when you make changes to any test files or any files under
-  test.
-- `-v`/`--verbose`: Let Karma emit detailed log.
-
 ## Dependency management
 
 In light of potential `npm` security issues
@@ -153,11 +123,18 @@ Byron.
 
 ### Continuous Integration
 
-We specify a `.yarnc` file in this project that sets the path for Yarn's offline
-mirror to the folder `.yarn/offline-mirror`. This folder contains all the
-tarballs for the packages that the project uses. What this allows us to do is
-run `yarn install --offline` in our Continuous Integration environment so that
-we don't have to fetch from the live registry in our builds.
+We specify a `.yarnc` file in this project that sets the path for Yarn's
+[offline cache](https://yarnpkg.com/features/offline-cache) to the folder
+`.yarn/cache`. This folder contains all the tarballs for the packages that the
+project uses.
+
+> The way it works is simple: each time a package is downloaded from a remote
+> location ... a copy will be stored within the cache. The next time this same
+> package will need to be installed, Yarn will leverage the version stored
+> within cache instead of downloading its original source.
+
+This ensures that packages are available no matter if the network goes down or
+the npm registry is unavailable.
 
 ## Package architecture and layout
 
@@ -819,10 +796,10 @@ code at that point in time.
 
 When installing a dependency, you can run `yarn add <dependency-name>` as
 normal. The only difference now is that you also will check in the corresponding
-tarball entry in `.yarn/offline-mirror` as well so that we don't have to fetch
-this dependency from the live registry during Continuous Integration builds.
+tarball entry in `.yarn/cache` as well so that we don't have to fetch this
+dependency from the live registry during Continuous Integration builds.
 
-#### CircleCI is failing saying that it cannot find a dependency in offline mode
+#### CI is failing saying that it cannot find a dependency in offline mode
 
 Most likely this is due to Yarn mistakenly removing, or forgetting to add, a
 dependency to our offline mirror. Typically, running the following set of
