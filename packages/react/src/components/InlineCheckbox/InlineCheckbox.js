@@ -10,6 +10,7 @@ import React, { useEffect, useRef } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
+/** @type any */
 const InlineCheckbox = React.forwardRef(function InlineCheckbox(
   props,
   forwardRef
