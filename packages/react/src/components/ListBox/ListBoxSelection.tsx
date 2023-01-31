@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,26 +11,66 @@ import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
 import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
+import { KeyboardEvent, MouseEvent } from 'react';
+
+export interface ListBoxSelectionProps {
+  /**
+   * Specify a function to be invoked when a user interacts with the clear
+   * selection element.
+   */
+  clearSelection(event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>): void;
+
+  /**
+   * Specify whether or not the clear selection element should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify an optional `onClearSelection` handler that is called when the underlying
+   * element is cleared
+   */
+  onClearSelection?(event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>): void;
+
+  /**
+   * Whether or not the Dropdown is readonly
+   */
+  readOnly?: boolean;
+
+  /**
+   * Specify an optional `selectionCount` value that will be used to determine
+   * whether the selection should display a badge or a single clear icon.
+   */
+  selectionCount?: number;
+
+  /**
+   * i18n hook used to provide the appropriate description for the given menu
+   * icon. This function takes in an id defined in `translationIds` and should
+   * return a string message for that given message id.
+   */
+  translateWithId(messageId: string, args?: Record<string, unknown>): string;
+}
+
+export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
  * addition to conditionally rendering a badge if the control has more than one
  * selection.
  */
-function ListBoxSelection({
+const ListBoxSelection: ListBoxSelectionComponent = ({
   clearSelection,
   selectionCount,
   translateWithId: t,
   disabled,
   onClearSelection,
   readOnly,
-}) {
+}: ListBoxSelectionProps) => {
   const prefix = usePrefix();
   const className = cx(`${prefix}--list-box__selection`, {
     [`${prefix}--tag--filter`]: selectionCount,
     [`${prefix}--list-box__selection--multi`]: selectionCount,
   });
-  const handleOnClick = (event) => {
+  const handleOnClick = (event: MouseEvent<HTMLDivElement>) => {
     event.stopPropagation();
     if (disabled || readOnly) {
       return;
@@ -40,14 +80,14 @@ function ListBoxSelection({
       onClearSelection(event);
     }
   };
-  const handleOnKeyDown = (event) => {
+  const handleOnKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
     event.stopPropagation();
     if (disabled || readOnly) {
       return;
     }
 
     // When a user hits ENTER, we'll clear the selection
-    if (match(event, keys.Enter)) {
+    if (match(event.code, keys.Enter)) {
       clearSelection(event);
       if (onClearSelection) {
         onClearSelection(event);
@@ -65,7 +105,7 @@ function ListBoxSelection({
   );
   return selectionCount ? (
     <div className={tagClasses}>
-      <span className={`${prefix}--tag__label`} title={selectionCount}>
+      <span className={`${prefix}--tag__label`} title={`${selectionCount}`}>
         {selectionCount}
       </span>
       <div
@@ -74,7 +114,6 @@ function ListBoxSelection({
         className={`${prefix}--tag__close-icon`}
         onClick={handleOnClick}
         onKeyDown={handleOnKeyDown}
-        disabled={disabled}
         aria-label={t('clear.all')}
         title={description}
         aria-disabled={readOnly ? true : undefined}>
@@ -125,18 +164,6 @@ ListBoxSelection.propTypes = {
   onClearSelection: PropTypes.func,
 
   /**
-   * Specify an optional `onClick` handler that is called when the underlying
-   * clear selection element is clicked
-   */
-  onClick: PropTypes.func,
-
-  /**
-   * Specify an optional `onKeyDown` handler that is called when the underlying
-   * clear selection element fires a keydown event
-   */
-  onKeyDown: PropTypes.func,
-
-  /**
    * Whether or not the Dropdown is readonly
    */
   readOnly: PropTypes.bool,
@@ -156,7 +183,7 @@ ListBoxSelection.propTypes = {
 };
 
 ListBoxSelection.defaultProps = {
-  translateWithId: (id) => defaultTranslations[id],
+  translateWithId: (id: string) => defaultTranslations[id],
 };
 
 export default ListBoxSelection;
