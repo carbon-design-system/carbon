@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -11,8 +11,15 @@ import classnames from 'classnames';
 import Form from '../Form';
 import { FormContext } from './FormContext';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
 
-function FluidForm({ className, children, ...other }) {
+export type FluidFormProps = ReactAttr<HTMLFormElement>
+
+const FluidForm: React.FC<FluidFormProps> = ({
+  className,
+  children,
+  ...other
+}: FluidFormProps) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--form--fluid`, className);
 

@@ -5,8 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useContext, useState } from 'react';
-import { useSelect } from 'downshift';
+import React, { useRef, useContext, useState, FocusEvent, ForwardedRef, MouseEvent, ReactNode } from 'react';
+import { useSelect, UseSelectProps, UseSelectState } from 'downshift';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import {
@@ -14,22 +14,176 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/icons-react';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, { ListBoxSize, ListBoxType, PropTypes as ListBoxPropTypes } from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+import { ReactAttr } from '../../types/common';
 
-const defaultItemToString = (item) => {
+const defaultItemToString = <ItemType,>(item?: ItemType): string => {
   if (typeof item === 'string') {
     return item;
   }
-
-  return item ? item.label : '';
+  if (typeof item === 'number') {
+    return `${item}`
+  }
+  if (item !== null && typeof item === 'object'
+    && 'label' in item && typeof item['label'] === 'string') {
+    return item['label']
+  }
+  return '';
 };
 
-const Dropdown = React.forwardRef(function Dropdown(
+type ExcludedAttributes = 'id' | 'onChange';
+
+export interface OnChangeData<ItemType> {
+  selectedItem: ItemType | null;
+}
+
+export interface DropdownProps<ItemType>
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+
+  /**
+   * 'aria-label' of the ListBox component.
+   */
+  ariaLabel?: string;
+
+  /**
+   * Specify the direction of the dropdown. Can be either top or bottom.
+   */
+  direction?: 'top' | 'bottom';
+
+  /**
+   * Disable the control
+   */
+  disabled?: boolean;
+
+  /**
+   * Additional props passed to Downshift
+   */
+  downshiftProps?: Partial<UseSelectProps<ItemType>>;
+
+  /**
+   * Provide helper text that is used alongside the control label for
+   * additional help
+   */
+  helperText?: React.ReactNode;
+
+  /**
+   * Specify whether the title text should be hidden or not
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Specify a custom `id`
+   */
+  id: string;
+
+  /**
+   * Allow users to pass in an arbitrary item or a string (in case their items are an array of strings)
+   * from their collection that are pre-selected
+   */
+  initialSelectedItem?: ItemType;
+
+  /**
+   * Specify if the currently selected value is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Function to render items as custom components instead of strings.
+   * Defaults to null and is overridden by a getter
+   */
+  itemToElement?: React.JSXElementConstructor<ItemType> | null;
+
+  /**
+   * Helper function passed to downshift that allows the library to render a
+   * given item to a string label. By default, it extracts the `label` field
+   * from a given item to serve as the item label in the list.
+   */
+  itemToString?(item: ItemType): string;
+
+  /**
+   * We try to stay as generic as possible here to allow individuals to pass
+   * in a collection of whatever kind of data structure they prefer
+   */
+  items: ItemType[];
+
+  /**
+   * Generic `label` that will be used as the textual representation of what
+   * this field is for
+   */
+  label: NonNullable<ReactNode>;
+
+  /**
+   * `true` to use the light version.
+   * @deprecated The `light` prop for `Dropdown` has been deprecated
+   * in favor of the new `Layer` component. It will be removed in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * `onChange` is a utility for this controlled component to communicate to a
+   * consuming component what kind of internal state changes are occurring.
+   */
+  onChange?(data: OnChangeData<ItemType>): void;
+
+  /**
+   * Whether or not the Dropdown is readonly
+   */
+  readOnly?: boolean;
+
+  /**
+   * An optional callback to render the currently selected item as a react element instead of only
+   * as a string.
+   */
+  renderSelectedItem?(item: ItemType): string;
+
+  /**
+   * In the case you want to control the dropdown selection entirely.
+   */
+  selectedItem?: ItemType;
+
+  /**
+   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   */
+  size?: ListBoxSize;
+
+  /**
+   * Provide the title text that will be read by a screen reader when
+   * visiting this control
+   */
+  titleText?: React.ReactNode;
+
+  /**
+   * Callback function for translating ListBoxMenuIcon SVG title
+   */
+  translateWithId?(messageId: string, args?: Record<string, unknown>): string;
+
+  /**
+   * The dropdown type, `default` or `inline`
+   */
+  type?: ListBoxType;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
+}
+
+const Dropdown = React.forwardRef(<ItemType,>(
   {
     className: containerClassName,
     disabled,
@@ -37,7 +191,7 @@ const Dropdown = React.forwardRef(function Dropdown(
     items,
     label,
     ariaLabel,
-    itemToString,
+    itemToString = defaultItemToString,
     itemToElement,
     renderSelectedItem,
     type,
@@ -58,12 +212,12 @@ const Dropdown = React.forwardRef(function Dropdown(
     downshiftProps,
     readOnly,
     ...other
-  },
-  ref
-) {
+  }: DropdownProps<ItemType>,
+  ref: ForwardedRef<HTMLButtonElement>
+) => {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
-  const selectProps = {
+  const selectProps: UseSelectProps<ItemType> = {
     ...downshiftProps,
     items,
     itemToString,
@@ -141,28 +295,32 @@ const Dropdown = React.forwardRef(function Dropdown(
       <div className={helperClasses}>{helperText}</div>
     ) : null;
 
-  function onSelectedItemChange({ selectedItem }) {
+  function onSelectedItemChange({ selectedItem }: Partial<UseSelectState<ItemType>>) {
     setIsFocused(false);
     if (onChange) {
-      onChange({ selectedItem });
+      onChange({ selectedItem: selectedItem ?? null });
     }
   }
 
   const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
 
-  const handleFocus = (evt) => {
+  const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
     setIsFocused(evt.type === 'focus' ? true : false);
   };
 
+  const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
+
   const readOnlyEventHandlers = readOnly
     ? {
-        onClick: (evt) => {
+        onClick: (evt: MouseEvent<HTMLButtonElement>) => {
           // NOTE: does not prevent click
           evt.preventDefault();
           // focus on the element as per readonly input behavior
-          evt.target.focus();
+          if (mergedRef.current !== undefined) {
+            mergedRef.current.focus();
+          }
         },
-        onKeyDown: (evt) => {
+        onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
           const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
           // This prevents the select from opening for the above keys
           if (selectAccessKeys.includes(evt.key)) {
@@ -205,10 +363,10 @@ const Dropdown = React.forwardRef(function Dropdown(
           className={`${prefix}--list-box__field`}
           disabled={disabled}
           aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
-          title={selectedItem ? itemToString(selectedItem) : label}
+          title={selectedItem && itemToString !== undefined ? itemToString(selectedItem) : label}
           {...toggleButtonProps}
           {...readOnlyEventHandlers}
-          ref={mergeRefs(toggleButtonProps.ref, ref)}>
+          ref={mergedRef}>
           <span className={`${prefix}--list-box__label`}>
             {selectedItem
               ? renderSelectedItem
@@ -221,12 +379,14 @@ const Dropdown = React.forwardRef(function Dropdown(
         <ListBox.Menu {...getMenuProps()}>
           {isOpen &&
             items.map((item, index) => {
+              const isObject = item !== null && typeof item === 'object';
+              const disabled = isObject && 'disabled' in item && item.disabled === true;
               const itemProps = getItemProps({
                 item,
                 index,
-                disabled: item.disabled,
+                disabled,
               });
-              const title = itemToElement ? item.text : itemToString(item);
+              const title = isObject && 'text' in item && itemToElement ? item.text : itemToString(item);
               return (
                 <ListBox.MenuItem
                   key={itemProps.id}
@@ -239,7 +399,8 @@ const Dropdown = React.forwardRef(function Dropdown(
                     menuItemOptionRef: menuItemOptionRefs.current[index],
                   }}
                   {...itemProps}>
-                  {itemToElement ? (
+                  {typeof item === 'object' && ItemToElement !== undefined
+                    && ItemToElement !== null ? (
                     <ItemToElement key={itemProps.id} {...item} />
                   ) : (
                     itemToString(item)
@@ -258,6 +419,14 @@ const Dropdown = React.forwardRef(function Dropdown(
     </div>
   );
 });
+
+type DropdownComponentProps<ItemType> =
+  React.PropsWithoutRef<React.PropsWithChildren<DropdownProps<ItemType>>
+    & React.RefAttributes<HTMLButtonElement>>
+
+interface DropdownComponent {
+  <ItemType>(props: DropdownComponentProps<ItemType>): React.ReactElement | null
+}
 
 Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = {
@@ -284,7 +453,7 @@ Dropdown.propTypes = {
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps: PropTypes.object,
+  downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -422,6 +591,6 @@ Dropdown.defaultProps = {
   titleText: '',
   helperText: '',
   direction: 'bottom',
-};
+} as DropdownProps<unknown>;
 
-export default Dropdown;
+export default Dropdown as DropdownComponent;

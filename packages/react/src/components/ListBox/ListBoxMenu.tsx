@@ -1,23 +1,37 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { ForwardedRef } from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import PropTypes from 'prop-types';
 import ListBoxMenuItem from './ListBoxMenuItem';
+import { ForwardRefReturn, ReactAttr } from '../../types/common';
+
+type ExcludedAttributes = 'id';
+
+export interface ListBoxMenuProps
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+
+  /**
+   * Specify a custom `id`
+   */
+  id: string;
+}
+
+export type ListBoxMenuComponent = ForwardRefReturn<HTMLDivElement, ListBoxMenuProps>
 
 /**
  * `ListBoxMenu` is a simple container node that isolates the `list-box__menu`
  * class into a single component. It is also being used to validate given
  * `children` components.
  */
-const ListBoxMenu = React.forwardRef(function ListBoxMenu(
-  { children, id, ...rest },
-  ref
+const ListBoxMenu: ListBoxMenuComponent = React.forwardRef(function ListBoxMenu(
+  { children, id, ...rest }: ListBoxMenuProps,
+  ref: ForwardedRef<HTMLDivElement>,
 ) {
   const prefix = usePrefix();
   return (
@@ -39,7 +53,7 @@ ListBoxMenu.propTypes = {
    */
   children: PropTypes.oneOfType([
     PropTypes.node,
-    PropTypes.arrayOf(ListBoxMenuItem),
+    PropTypes.arrayOf(PropTypes.oneOf([ListBoxMenuItem])),
     /**
      * allow single item using the workaround for functional components
      * https://github.com/facebook/react/issues/2979#issuecomment-222379916
