@@ -1,75 +1,36 @@
-@import '@carbon/elements/scss/elements';
-@import '@carbon/elements/scss/type/font-face/mono';
-@import '@carbon/elements/scss/type/font-face/sans';
+//
+// Copyright IBM Corp. 2018, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
 
-@include carbon--font-face-sans();
-@include carbon--font-face-mono();
+@use '@carbon/styles/scss/grid';
+@use '@carbon/type' as *;
+@use '@carbon/colors' as *;
+@use '@carbon/layout' as *;
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+@include default-type();
+@include grid.flex-grid();
+
+html {
+box-sizing: border-box;
+}
+
+*, *::before, *::after {
+box-sizing: inherit;
+}
+
+html, body {
+width: 100%;
+height: 100%;
 }
 
 body {
-  @include carbon--font-family('sans');
-  background-color: #f3f3f3;
-  margin: 0;
-  padding: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-  margin: 0;
-}
-
-h1 {
-  @include carbon--type-style('display-01');
-  margin: $spacing-07 0;
-}
-
-h2 {
-  @include carbon--type-style('productive-heading-05');
-  margin: $spacing-06 0;
-}
-
-h3 {
-  @include carbon--type-style('productive-heading-04');
-  margin: $spacing-05 0;
-}
-
-h4 {
-  @include carbon--type-style('productive-heading-03');
-  margin: $spacing-05 0;
-}
-
-h5 {
-  @include carbon--type-style('heading-02');
-  margin: $spacing-05 0;
-}
-
-h6 {
-  @include carbon--type-style('heading-01');
-  margin: $spacing-05 0;
-}
-
-p {
-  @include carbon--type-style('body-long-02');
-  margin-bottom: $spacing-05;
-}
-
-em {
-  display: block;
-  margin-bottom: $spacing-05;
-}
-
-code {
-  @include carbon--type-style('code-01');
+margin: 0;
+font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+padding: 0;
+background: $gray-10;
 }
 
 table {
@@ -181,8 +142,8 @@ pre[class*='language-'] ::selection {
 code,
 :not(pre) > code[class*='language-'] {
   border-radius: 0.3em;
-  background: $carbon--gray-10;
-  color: $carbon--gray-90;
+  background: $gray-10;
+  color: $gray-90;
   padding: 0.25rem 0.5rem;
   white-space: normal;
 }
@@ -272,3 +233,4 @@ pre[data-line] {
   -webkit-overflow-scrolling: touch;
   overflow: auto;
 }
+

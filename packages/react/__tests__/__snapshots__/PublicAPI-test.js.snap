@@ -2796,6 +2796,7 @@ Map {
         "type": "oneOf",
       },
       "titleText": Object {
+        "isRequired": true,
         "type": "node",
       },
       "translateWithId": Object {
