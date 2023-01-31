@@ -1,27 +1,28 @@
 import 'url-polyfill';
 
-import { getAttributes, toString } from '@carbon/icon-helpers';
+import { toString } from '@carbon/icon-helpers';
 import Prism from 'prismjs';
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import metadata from '../../metadata.json';
+import metadata from '../../../../metadata.json';
 
 const GITHUB_PICTOGRAM_URL =
   'https://github.com/carbon-design-system/carbon/tree/master/packages/pictograms/src/svg';
 
-function App({ metadata }) {
+export default function IndexPage() {
   const headers = ['Name', 'Preview', 'GitHub', 'Issues'];
 
+  const isBrowser = () => typeof window !== 'undefined';
+
   return (
-    <React.Fragment>
-      <div className="bx--grid">
-        <div className="bx--row">
-          <div className="bx--col">
+    <>
+       <div className="cds--grid">
+        <div className="cds--row">
+          <div className="cds--col">
             <h1>Pictograms</h1>
           </div>
         </div>
-        <div className="bx--row">
-          <div className="bx--col-sm-4 bx--col-md-6 bx--col-lg-6">
+        <div className="cds--row">
+          <div className="cds--col-sm-4 cds--col-md-6 cds--col-lg-6">
             <h2>Usage</h2>
             <p>
               Pictograms in Carbon are now provided through a set of packages
@@ -46,16 +47,16 @@ function App({ metadata }) {
         </div>
       </div>
       <section>
-        <div className="bx--grid">
-          <div className="bx--row">
-            <div className="bx--col">
+        <div className="cds--grid">
+          <div className="cds--row">
+            <div className="cds--col">
               <Table headers={headers}>
                 {metadata.icons.flatMap((icon) => {
                   const { assets, output } = icon;
                   const [asset] = assets;
 
                   return output.map((info) => {
-                    const id = window.encodeURIComponent(info.moduleName);
+                    const id = info.moduleName
                     const source = [GITHUB_PICTOGRAM_URL, asset.filepath].join(
                       '/'
                     );
@@ -98,7 +99,7 @@ function App({ metadata }) {
           </div>
         </div>
       </section>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -107,7 +108,7 @@ function Table({ children, headers }) {
     <table>
       <thead>
         <tr>
-          {headers.map((header) => (
+          {headers.map(header => (
             <th key={header}>{header}</th>
           ))}
         </tr>
@@ -117,16 +118,12 @@ function Table({ children, headers }) {
   );
 }
 
-function render() {
-  ReactDOM.render(<App metadata={metadata} />, document.getElementById('root'));
-}
-
 function getBugTemplate(name, source) {
   const url = new URL(
     'https://github.com/carbon-design-system/carbon/issues/new'
   );
   const params = new URLSearchParams();
-  params.append('title', `🔍 Visual bug for the \`${name}\` pictogram`);
+  params.append('title', `🔍 Visual bug for the \`${name}\` icon`);
   params.append(
     'body',
     `<!-- Feel free to remove sections that aren't relevant. -->
@@ -139,7 +136,17 @@ The source for this icon is available [here](${source}).
 
 > Describe in detail the issue you're having.
 
+> Is this a feature request (new component, new icon), a bug, or a general issue?
+
+> Is this issue related to a specific component?
+
+> What did you expect to happen? What happened instead? What would you like to see changed?
+
 > What browser are you working in?
+
+> What version of the Carbon Design System are you using?
+
+> What offering/product do you work on? Any pressing ship or release dates we should be aware of?
 
 ## Steps to reproduce the issue
 
@@ -156,12 +163,4 @@ The source for this icon is available [here](${source}).
   );
   url.search = params;
   return url.href;
-}
-
-render();
-
-if (module.hot) {
-  module.hot.dispose(() => {
-    render();
-  });
 }
