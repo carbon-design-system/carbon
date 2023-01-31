@@ -6,11 +6,27 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SelectSkeleton = ({ hideLabel, className, ...rest }) => {
+export interface SelectSkeletonProps extends HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify an optional className to add to the form item wrapper.
+   */
+  className?: string;
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel?: boolean;
+}
+
+const SelectSkeleton = ({
+  hideLabel,
+  className,
+  ...rest
+}: SelectSkeletonProps) => {
   const prefix = usePrefix();
   return (
     <div className={cx(`${prefix}--form-item`, className)} {...rest}>
