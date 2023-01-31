@@ -524,7 +524,8 @@ class OverflowMenu extends Component {
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
-        aria-label={ariaLabel}>
+        aria-label={ariaLabel}
+        onKeyDown={this.handleKeyPress}>
         {childrenWithProps}
       </ul>
     );
@@ -553,14 +554,13 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <>
+        <span>
           <IconButton
             {...other}
             type="button"
             aria-haspopup
             aria-expanded={this.state.open}
             className={overflowMenuClasses}
-            onKeyDown={this.handleKeyPress}
             onClick={this.handleClick}
             id={id}
             ref={mergeRefs(this._triggerRef, ref)}
@@ -568,7 +568,7 @@ class OverflowMenu extends Component {
             <IconElement {...iconProps} />
           </IconButton>
           {open && this.state.hasMountedTrigger && wrappedMenuBody}
-        </>
+        </span>
       </ClickListener>
     );
   }

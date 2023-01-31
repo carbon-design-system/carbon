@@ -21,7 +21,9 @@ describe('OverflowMenu', () => {
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
-      expect(container.firstChild.firstChild).toHaveClass('extra-class');
+      expect(container.querySelector('button.cds--overflow-menu')).toHaveClass(
+        'extra-class'
+      );
     });
 
     it('should spread extra props on the button element', () => {
@@ -34,10 +36,9 @@ describe('OverflowMenu', () => {
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
-      expect(container.firstChild.firstChild).toHaveAttribute(
-        'data-testid',
-        'test'
-      );
+      expect(
+        container.querySelector('button.cds--overflow-menu')
+      ).toHaveAttribute('data-testid', 'test');
     });
 
     it('should flip menu alignment', () => {
