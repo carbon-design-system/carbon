@@ -151,7 +151,11 @@ Toggle.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether the label should be hidden, or not
+   * If true, the side labels (props.labelA and props.labelB) will be replaced by
+   * props.labelText, so that the toggle doesn't render a top label. In order to fully
+   * hide any labels, you can use props['aria-labelledby'] to refer to another element
+   * that labels the toggle. props.labelText would no longer be required in that case
+   * and can therefore be omitted.
    */
   hideLabel: PropTypes.bool,
 
