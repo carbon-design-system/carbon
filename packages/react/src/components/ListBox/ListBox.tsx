@@ -1,39 +1,93 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import cx from 'classnames';
-import React, { useContext } from 'react';
+import React, { KeyboardEvent, MouseEvent, useContext} from 'react';
 import PropTypes from 'prop-types';
 import deprecate from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
-import ListBoxField from './ListBoxField';
-import ListBoxMenu from './ListBoxMenu';
-import ListBoxMenuIcon from './ListBoxMenuIcon';
-import ListBoxMenuItem from './ListBoxMenuItem';
-import ListBoxSelection from './ListBoxSelection';
 import { FormContext } from '../FluidForm';
+import { ForwardRefReturn, ReactAttr } from '../../types/common';
 
-const handleOnKeyDown = (event) => {
+const handleOnKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
   if (event.keyCode === 27) {
     event.stopPropagation();
   }
 };
 
-const handleClick = (event) => {
+const handleClick = (event: MouseEvent<HTMLDivElement>) => {
   event.preventDefault();
   event.stopPropagation();
 };
+
+type ExcludedAttributes = 'onKeyDown' | 'onKeyPress' | 'ref'
+
+export interface ListBoxProps
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
+
+  /**
+   * Specify whether the ListBox is currently disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Specify the text to be displayed when the control is invalid
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Specify if the control should render open
+   */
+  isOpen?: boolean;
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   * 
+   * @deprecated The `light` prop for `ListBox` has been deprecated in favor of
+   * the new `Layer` component. It will be removed in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
+   */
+  size?: ListBoxSize;
+
+  /**
+   * Specify the "type" of the ListBox. Currently supports either `default` or
+   * `inline` as an option.
+   */
+  type?: ListBoxType;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: React.ReactNode;
+}
+
+export type ListBoxComponent = ForwardRefReturn<HTMLDivElement, ListBoxProps>
 
 /**
  * `ListBox` is a generic container component that handles creating the
  * container class name in response to certain props.
  */
-const ListBox = React.forwardRef(function ListBox(
+const ListBox: ListBoxComponent = React.forwardRef(function ListBox(
   {
     children,
     className: containerClassName,
@@ -47,15 +101,15 @@ const ListBox = React.forwardRef(function ListBox(
     light,
     isOpen,
     ...rest
-  },
-  ref
+  }: ListBoxProps,
+  ref: React.LegacyRef<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const showWarning = !invalid && warn;
 
   const className = cx({
-    [containerClassName]: !!containerClassName,
+    ...(containerClassName && {[containerClassName]: true}),
     [`${prefix}--list-box`]: true,
     [`${prefix}--list-box--${size}`]: size,
     [`${prefix}--list-box--inline`]: type === 'inline',
@@ -156,11 +210,5 @@ ListBox.defaultProps = {
   disabled: false,
   type: 'default',
 };
-
-ListBox.Field = ListBoxField;
-ListBox.Menu = ListBoxMenu;
-ListBox.MenuIcon = ListBoxMenuIcon;
-ListBox.MenuItem = ListBoxMenuItem;
-ListBox.Selection = ListBoxSelection;
 
 export default ListBox;
