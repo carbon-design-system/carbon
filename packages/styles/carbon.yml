@@ -508,7 +508,6 @@ assets:
     type: component
     platform: web
     noIndex: true
-    # TODO: confirm thumbnail with Jeanie
     thumbnailPath: ./thumbnails/overflow-menu.svg
     tags:
       - input-control
@@ -603,8 +602,7 @@ assets:
     status: stable
     type: pattern
     platform: web
-    # Ask Jeanie
-    # thumbnailPath: TODO
+    thumbnailPath: ./thumbnails/read-only.svg
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/read-only-states-pattern/index.mdx
   search:
