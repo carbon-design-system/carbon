@@ -1,27 +1,28 @@
 import 'url-polyfill';
 
-import { getAttributes, toString } from '@carbon/icon-helpers';
+import { toString } from '@carbon/icon-helpers';
 import Prism from 'prismjs';
 import React, { useState } from 'react';
-import ReactDOM from 'react-dom';
-import metadata from '../../metadata.json';
+import metadata from '../../../../metadata.json';
 
 const GITHUB_ICON_URL =
   'https://github.com/carbon-design-system/carbon/tree/master/packages/icons/src/svg';
 
-function App({ metadata }) {
+export default function IndexPage() {
   const headers = ['Name', 'Size', 'Preview', 'GitHub', 'Issues', 'Path'];
 
+  const isBrowser = () => typeof window !== 'undefined';
+
   return (
-    <React.Fragment>
-      <div className="bx--grid">
-        <div className="bx--row">
-          <div className="bx--col">
+    <>
+       <div className="cds--grid">
+        <div className="cds--row">
+          <div className="cds--col">
             <h1>Icons</h1>
           </div>
         </div>
-        <div className="bx--row">
-          <div className="bx--col-sm-4 bx--col-md-6 bx--col-lg-6">
+        <div className="cds--row">
+          <div className="cds--col-sm-4 cds--col-md-6 cds--col-lg-12">
             <h2>Usage</h2>
             <p>
               Icons in Carbon are now provided through a set of packages that
@@ -104,16 +105,16 @@ function App({ metadata }) {
         </div>
       </div>
       <section>
-        <div className="bx--grid">
-          <div className="bx--row">
-            <div className="bx--col">
+        <div className="cds--grid">
+          <div className="cds--row">
+            <div className="cds--col">
               <Table headers={headers}>
                 {metadata.icons.flatMap(icon => {
                   const { assets, output } = icon;
                   const defaultAsset = assets.find(asset => asset.size === 32);
 
                   return output.map(info => {
-                    const id = window.encodeURIComponent(info.moduleName);
+                    const id = info.moduleName
                     let asset = assets.find(asset => {
                       if (info.size === 'glyph') {
                         return asset.size === 'glyph';
@@ -181,7 +182,7 @@ function App({ metadata }) {
           </div>
         </div>
       </section>
-    </React.Fragment>
+    </>
   );
 }
 
@@ -198,10 +199,6 @@ function Table({ children, headers }) {
       <tbody>{children}</tbody>
     </table>
   );
-}
-
-function render() {
-  ReactDOM.render(<App metadata={metadata} />, document.getElementById('root'));
 }
 
 function getBugTemplate(name, source) {
@@ -249,12 +246,4 @@ The source for this icon is available [here](${source}).
   );
   url.search = params;
   return url.href;
-}
-
-render();
-
-if (module.hot) {
-  module.hot.dispose(() => {
-    render();
-  });
 }
