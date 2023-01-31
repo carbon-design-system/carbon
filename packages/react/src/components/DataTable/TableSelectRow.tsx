@@ -19,7 +19,7 @@ export interface TableSelectRowProps {
   ariaLabel: string;
 
   /**
-   * Specify whether all items are selected, or not
+   * Specify whether this row is selected, or not
    */
   checked: boolean;
 
@@ -85,8 +85,7 @@ const TableSelectRow = ({
   };
   const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
   const tableSelectRowClasses = classNames(`${prefix}--table-column-checkbox`, {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    [className!]: className,
+    ...(className && { [className]: true }),
     [`${prefix}--table-column-radio`]: radio,
   });
   return (
@@ -109,7 +108,7 @@ TableSelectRow.propTypes = {
   ariaLabel: PropTypes.string.isRequired,
 
   /**
-   * Specify whether all items are selected, or not
+   * Specify whether this row is selected, or not
    */
   checked: PropTypes.bool.isRequired,
 
