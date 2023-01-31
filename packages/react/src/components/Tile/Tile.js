@@ -384,10 +384,6 @@ export function ExpandableTile({
     evt.persist();
     setIsExpanded(!isExpanded);
     setMaxHeight();
-
-    if (onClick) {
-      onClick(evt);
-    }
   }
 
   function handleKeyUp(evt) {
@@ -442,7 +438,7 @@ export function ExpandableTile({
 
     setIsTileMaxHeight(height);
     setIsTilePadding(paddingTop + paddingBottom);
-  }, []);
+  }, [isTileMaxHeight]);
 
   useIsomorphicEffect(() => {
     if (getInteractiveContent(belowTheFold.current)) {
