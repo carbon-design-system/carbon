@@ -74,10 +74,6 @@
 
 :host(#{$prefix}-modal[open]) {
   @extend .#{$prefix}--modal, .is-visible;
-
-  // TODO: look into if following two lines are necessary after v11 upgrade
-  opacity: 1;
-  visibility: inherit;
 }
 
 :host(#{$prefix}-modal-header) {
