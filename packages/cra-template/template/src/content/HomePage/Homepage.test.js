@@ -30,7 +30,7 @@ describe('Homepage -', () => {
     await screen.getByText(
       /Rapidly build beautiful and accessible experiences/i
     );
-    //swith another tab;
+    //switch to another tab;
     const developTab = screen.getByText(/Develop/i);
     fireEvent.click(developTab);
     await screen.getByText(
