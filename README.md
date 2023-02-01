@@ -213,6 +213,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/Shankar-CodeJunkie"><img src="https://avatars.githubusercontent.com/u/56068832?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ShankarV-CodeJunkie</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Shankar-CodeJunkie" title="Code">💻</a></td>
     <td align="center"><a href="http://darioplatania.github.io/"><img src="https://avatars.githubusercontent.com/u/11682859?v=4?s=100" width="100px;" alt=""/><br /><sub><b>dario platania</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=darioplatania" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/matkrzy"><img src="https://avatars.githubusercontent.com/u/14991661?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mateusz Krzyżanowski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=matkrzy" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/jkap"><img src="https://avatars.githubusercontent.com/u/224587?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jae kaplan</b></sub></a><br /><a href="#infra-jkap" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 

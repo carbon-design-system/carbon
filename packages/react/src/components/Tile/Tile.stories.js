@@ -246,6 +246,7 @@ export const Expandable = () => (
 export const ExpandableWithInteractive = () => (
   <div style={{ width: '400px' }}>
     <ExpandableTile
+      onClick={() => console.log('click')}
       id="expandable-tile-1"
       tileCollapsedIconText="Interact to Expand tile"
       tileExpandedIconText="Interact to Collapse tile">
