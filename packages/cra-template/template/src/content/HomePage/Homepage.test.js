@@ -24,7 +24,7 @@ describe('Homepage -', () => {
     const aboutTab = screen.getByText(/About/i);
     fireEvent.click(aboutTab);
     await screen.getByText(/What is Carbon?/i);
-    //swith another tab;
+    //switch to another tab;
     const designTab = screen.getByText('Design');
     fireEvent.click(designTab);
     await screen.getByText(
