@@ -554,7 +554,7 @@ class OverflowMenu extends Component {
 
     return (
       <ClickListener onClickOutside={this.handleClickOutside}>
-        <span>
+        <span className={`${prefix}--overflow-menu__wrapper`}>
           <IconButton
             {...other}
             type="button"
