@@ -13,6 +13,7 @@ import { ButtonKinds } from '../../prop-types/types';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
+import deprecate from '../../prop-types/deprecate';
 
 function noop() {}
 
@@ -184,7 +185,11 @@ FileUploaderButton.propTypes = {
   /**
    * Provide a custom tabIndex value for the `<FileUploaderButton>`
    */
-  tabIndex: PropTypes.number,
+  tabIndex: deprecate(
+    PropTypes.number,
+    'The `tabIndex` prop for `FileUploaderButton` has ' +
+      'been deprecated since it now renders a button element by default.'
+  ),
 };
 
 export default FileUploaderButton;
