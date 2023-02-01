@@ -154,7 +154,7 @@ function getTSPlugins(outDir) {
       compilerOptions: {
         rootDir: 'src',
         emitDeclarationOnly: true,
-        declarationDir: outDir,
+        outDir,
       },
     }),
     babel({
