@@ -59,7 +59,9 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
       <ClickListener
         onClickOutside={[Function]}
       >
-        <span>
+        <span
+          className="cds--overflow-menu__wrapper"
+        >
           <ForwardRef(IconButton)
             aria-expanded={false}
             aria-haspopup={true}
