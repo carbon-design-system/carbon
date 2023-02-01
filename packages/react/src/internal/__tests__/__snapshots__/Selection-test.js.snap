@@ -5,9 +5,3 @@ exports[`Selection renders as expected - Component API should render 1`] = `
   <div />
 </div>
 `;
-
-exports[`Selection should render 1`] = `
-<div>
-  <div />
-</div>
-`;
