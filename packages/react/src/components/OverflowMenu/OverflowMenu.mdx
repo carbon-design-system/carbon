@@ -32,6 +32,22 @@ this attribute is found, the menu will be placed on `document.body`.
   <Story id="components-overflowmenu--render-custom-icon" />
 </Preview>
 
+## Customizing the tooltip
+
+The `OverflowMenu` uses an `IconButton` under the hood, which means it can accept any props that an `IconButton` can receive and will succesfully pass those forward.
+To modify the tooltip's alignment, you may make use of the `align` property as described in the `IconButton` props:
+
+```jsx
+  <OverflowMenu ariaLabel="overflow-menu" align="bottom">
+    <OverflowMenuItem itemText="Stop app" />
+    <OverflowMenuItem itemText="Restart app" />
+    <OverflowMenuItem itemText="Rename app" />
+    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+  </OverflowMenu>
+```
+
 ## Component API
 
 <Props />
