@@ -25,17 +25,14 @@ export default {
 };
 
 export const Default = () => (
-  <>
-    <OverflowMenu ariaLabel="overflow-menu">
-      <OverflowMenuItem itemText="Stop app" />
-      <OverflowMenuItem itemText="Restart app" />
-      <OverflowMenuItem itemText="Rename app" />
-      <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
-      <OverflowMenuItem itemText="Edit routes and access" requireTitle />
-      <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
-    </OverflowMenu>
-    <button type="button">test focus button</button>
-  </>
+  <OverflowMenu ariaLabel="overflow-menu">
+    <OverflowMenuItem itemText="Stop app" />
+    <OverflowMenuItem itemText="Restart app" />
+    <OverflowMenuItem itemText="Rename app" />
+    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+  </OverflowMenu>
 );
 
 export const RenderCustomIcon = () => (
