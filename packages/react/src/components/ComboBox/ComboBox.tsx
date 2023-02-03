@@ -15,7 +15,11 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/icons-react';
-import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  PropTypes as ListBoxPropTypes,
+  ListBoxType,
+  ListBoxSize,
+} from '../ListBox';
 import { ListBoxTrigger, ListBoxSelection } from '../ListBox/next';
 import { match, keys } from '../../internal/keyboard';
 import setupGetInstanceId from '../../tools/setupGetInstanceId';
@@ -52,7 +56,10 @@ const getInputValue = ({
   return inputValue || '';
 };
 
-const findHighlightedIndex = ({ items, itemToString = defaultItemToString}, inputValue) => {
+const findHighlightedIndex = (
+  { items, itemToString = defaultItemToString },
+  inputValue
+) => {
   if (!inputValue) {
     return -1;
   }
@@ -81,12 +88,12 @@ export interface ComboBoxProps
   /**
    * 'aria-label' of the ListBox component.
    */
-  ariaLabel?: string,
+  ariaLabel?: string;
 
   /**
    * An optional className to add to the container node
    */
-  className?: string,
+  className?: string;
 
   /**
    * Specify the direction of the combobox dropdown. Can be either top or bottom.
@@ -96,12 +103,12 @@ export interface ComboBoxProps
   /**
    * Specify if the control should be disabled, or not
    */
-  disabled?: boolean; 
+  disabled?: boolean;
 
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps?: React.ComponentProps<typeof Downshift>
+  downshiftProps?: React.ComponentProps<typeof Downshift>;
 
   /**
    * Provide helper text that is used alongside the control label for
@@ -134,7 +141,7 @@ export interface ComboBoxProps
    * Optional function to render items as custom components instead of strings.
    * Defaults to null and is overridden by a getter
    */
-  itemToElement?: React.ComponentType | null
+  itemToElement?: React.ComponentType | null;
 
   /**
    * Helper function passed to downshift that allows the library to render a
@@ -161,9 +168,7 @@ export interface ComboBoxProps
    * `({ selectedItem }) => void`
   //  * @param {{ selectedItem }}
    */
-   onChange: (
-    data: { selectedItem: any }
-  ) => void; 
+  onChange: (data: { selectedItem: any }) => void;
 
   /**
    * Callback function to notify consumer when the text input changes.
@@ -213,7 +218,7 @@ export interface ComboBoxProps
   /**
    * Specify the size of the ListBox. Currently supports either `sm`, `md` or `lg` as an option.
    */
-  size?: typeof ListBoxPropTypes.ListBoxSize
+  size?: ListBoxSize;
 
   /**
    * Provide text to be used in a `<label>` element that is tied to the
@@ -225,12 +230,12 @@ export interface ComboBoxProps
    * Specify a custom translation function that takes in a message identifier
    * and returns the localized string for the message
    */
-  translateWithId?: (id: any) => string; 
+  translateWithId?: (id: any) => string;
 
   /**
    * Currently supports either the default type, or an inline variant
    */
-  type?: typeof ListBoxPropTypes.ListBoxType,
+  type?: ListBoxType;
 
   /**
    * Specify whether the control is currently in warning state
@@ -240,13 +245,10 @@ export interface ComboBoxProps
   /**
    * Provide the text that is displayed when the control is in warning state
    */
-  warnText?: ReactNodeLike; 
+  warnText?: ReactNodeLike;
 }
 
-const ComboBox = React.forwardRef(( 
-  props: ComboBoxProps,
-  ref
-) => {
+const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
   const {
     ariaLabel,
     className: containerClassName,
@@ -272,10 +274,10 @@ const ComboBox = React.forwardRef((
     size,
     titleText,
     translateWithId,
-    type: _type, 
+    type: _type,
     warn,
     warnText,
-    onStateChange: _onStateChange, 
+    onStateChange: _onStateChange,
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -309,12 +311,14 @@ const ComboBox = React.forwardRef((
   }
 
   const filterItems = (items, itemToString, inputValue) =>
-    items.filter((item) => shouldFilterItem ?
-      shouldFilterItem({
-        item,
-        itemToString,
-        inputValue,
-      }) : defaultShouldFilterItem()
+    items.filter((item) =>
+      shouldFilterItem
+        ? shouldFilterItem({
+            item,
+            itemToString,
+            inputValue,
+          })
+        : defaultShouldFilterItem()
     );
 
   const handleOnChange = (selectedItem) => {
@@ -584,14 +588,16 @@ const ComboBox = React.forwardRef((
                                 ? item.text
                                 : itemToString
                                 ? itemToString(item)
-                                : defaultItemToString(item)
+                                : undefined
                             }
                             {...itemProps}>
                             {itemToElement ? (
                               // @ts-ignore
                               <ItemToElement key={itemProps.id} {...item} />
+                            ) : itemToString ? (
+                              itemToString(item)
                             ) : (
-                              itemToString ? itemToString(item) : defaultItemToString(item)
+                              defaultItemToString(item)
                             )}
                             {selectedItem === item && (
                               <Checkmark
