@@ -117,7 +117,6 @@ const RepoPage = () => {
   }
 
   if (error) {
-    //console.log('hey man')
     return `Error! ${error.message}`;
   }
 
