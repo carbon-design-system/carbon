@@ -160,9 +160,9 @@ export const MixedGridModes = () => {
   return (
     <>
       <Grid>
-        <Column md={{ span: 8 }}>
+        <Column span={8}>
           <Grid>
-            <Column md={{ span: 8 }}>
+            <Column span={8}>
               <Grid narrow>
                 <Column>
                   <ColumnHang>Text</ColumnHang>
@@ -176,11 +176,11 @@ export const MixedGridModes = () => {
                 <Column>
                   <ColumnHang>Text</ColumnHang>
                 </Column>
-                <Column md={{ span: 4 }}>
+                <Column span={4}>
                   <Grid>
                     <Column>Text</Column>
                     <Column>Text</Column>
-                    <Column md={{ span: 2 }}>
+                    <Column span={2}>
                       <Grid condensed>
                         <Column>
                           <ColumnHang>Text</ColumnHang>
@@ -198,10 +198,10 @@ export const MixedGridModes = () => {
         </Column>
       </Grid>
       <Grid narrow>
-        <Column md={{ span: 8 }}>
+        <Column span={8}>
           <Grid>
-            <Column md={{ span: 4 }} />
-            <Column md={{ span: 4 }}>
+            <Column span={4} />
+            <Column span={4}>
               <Grid narrow>
                 <Column>
                   <ColumnHang>Text</ColumnHang>

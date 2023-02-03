@@ -13,14 +13,23 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useGridSettings } from './GridContext';
 import { RenderAsProps } from './RenderAsProps';
 
-export type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
+type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
 
-export type ColumnSpan = boolean | number | {
-    span?: number | ColumnSpanPercent,
-    offset?: number,
-    start?: number,
-    end?: number,
-  } | ColumnSpanPercent
+type ColumnSpanSimple = boolean | number | ColumnSpanPercent
+
+interface ColumnSpanObject {
+
+  span?: ColumnSpanSimple;
+
+  offset?: number;
+
+  start?: number;
+
+  end?: number;
+
+}
+
+export type ColumnSpan = ColumnSpanSimple | ColumnSpanObject
 
 interface ColumnBaseProps {
 
@@ -73,6 +82,12 @@ interface ColumnBaseProps {
    * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
    */
   xlg?: ColumnSpan;
+
+  /**
+   * Specify constant column span, start, or end values that will not change
+   * based on breakpoint
+   */
+  span?: ColumnSpan;
 
 }
 
@@ -218,6 +233,7 @@ function CSSGridColumn({
   lg,
   xlg,
   max,
+  span,
   ...rest
 }: ColumnProps<any>) {
   const prefix = usePrefix();
@@ -225,7 +241,8 @@ function CSSGridColumn({
     [sm, md, lg, xlg, max],
     prefix
   );
-  const className = cx(containerClassName, breakpointClassName, {
+  const spanClassName = getClassNameForSpan(span, prefix);
+  const className = cx(containerClassName, breakpointClassName, spanClassName, {
     [`${prefix}--css-grid-column`]: true,
   });
 
@@ -320,7 +337,7 @@ const breakpointNames = ['sm', 'md', 'lg', 'xlg', 'max'];
  * @param {Array<boolean|number|Breakpoint>} breakpoints
  * @returns {string}
  */
-function getClassNameForBreakpoints(breakpoints, prefix) {
+function getClassNameForBreakpoints(breakpoints: (ColumnSpan | undefined)[], prefix: string): string {
   const classNames: string[] = [];
 
   for (let i = 0; i < breakpoints.length; i++) {
@@ -352,25 +369,27 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
       continue;
     }
 
-    const { span, offset, start, end } = breakpoint;
+    if (typeof breakpoint === 'object') {
+      const { span, offset, start, end } = breakpoint;
 
-    if (typeof offset === 'number' && offset > 0) {
-      classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
-    }
-
-    if (typeof start === 'number') {
-      classNames.push(`${prefix}--${name}:col-start-${start}`);
-    }
-
-    if (typeof end === 'number') {
-      classNames.push(`${prefix}--${name}:col-end-${end}`);
-    }
-
-    if (typeof span === 'number') {
-      classNames.push(`${prefix}--${name}:col-span-${span}`);
-    } else if (typeof span === 'string') {
-      classNames.push(`${prefix}--${name}:col-span-${span.slice(0, -1)}`);
-      continue;
+      if (typeof offset === 'number' && offset > 0) {
+        classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
+      }
+  
+      if (typeof start === 'number') {
+        classNames.push(`${prefix}--${name}:col-start-${start}`);
+      }
+  
+      if (typeof end === 'number') {
+        classNames.push(`${prefix}--${name}:col-end-${end}`);
+      }
+  
+      if (typeof span === 'number') {
+        classNames.push(`${prefix}--${name}:col-span-${span}`);
+      } else if (typeof span === 'string') {
+        classNames.push(`${prefix}--${name}:col-span-${span.slice(0, -1)}`);
+        continue;
+      }
     }
   }
 
@@ -382,7 +401,7 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
  * @param {Array<boolean|number|Breakpoint>} breakpoints
  * @returns {string}
  */
-function getClassNameForFlexGridBreakpoints(breakpoints, prefix) {
+function getClassNameForFlexGridBreakpoints(breakpoints: (ColumnSpan | undefined)[], prefix: string): string {
   const classNames: string[] = [];
 
   for (let i = 0; i < breakpoints.length; i++) {
@@ -407,21 +426,50 @@ function getClassNameForFlexGridBreakpoints(breakpoints, prefix) {
       continue;
     }
 
-    const { span, offset } = breakpoint;
-    if (typeof span === 'number') {
-      classNames.push(`${prefix}--col-${name}-${span}`);
-    }
+    if (typeof breakpoint === 'object') {
+      const { span, offset } = breakpoint;
+      if (typeof span === 'number') {
+        classNames.push(`${prefix}--col-${name}-${span}`);
+      }
 
-    if (span === true) {
-      classNames.push(`${prefix}--col-${name}`);
-    }
+      if (span === true) {
+        classNames.push(`${prefix}--col-${name}`);
+      }
 
-    if (typeof offset === 'number') {
-      classNames.push(`${prefix}--offset-${name}-${offset}`);
+      if (typeof offset === 'number') {
+        classNames.push(`${prefix}--offset-${name}-${offset}`);
+      }
     }
   }
 
   return classNames.join(' ');
 }
 
-export default Column;
+/**
+ * Build the appropriate className for a span value
+ */
+function getClassNameForSpan(value: ColumnSpan | undefined, prefix: string): string {
+  const classNames: string[] = [];
+
+  if (typeof value === 'number' || typeof value === 'string') {
+    classNames.push(`${prefix}--col-span-${value}`);
+  } else if (typeof value === 'object') {
+    const { span, start, end } = value;
+
+    if (span !== undefined && span !== null) {
+      classNames.push(`${prefix}--col-span-${span}`);
+    }
+
+    if (start !== undefined && start !== null) {
+      classNames.push(`${prefix}--col-start-${start}`);
+    }
+
+    if (end !== undefined && end !== null) {
+      classNames.push(`${prefix}--col-end-${end}`);
+    }
+  }
+
+  return classNames.join('');
+}
+
+export default Column as ColumnComponent;
