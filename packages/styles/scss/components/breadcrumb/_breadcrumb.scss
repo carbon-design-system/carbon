@@ -150,4 +150,11 @@
     width: rem(100px);
     height: 1rem;
   }
+
+  .#{$prefix}--breadcrumb
+    .#{$prefix}--overflow-menu.#{$prefix}--btn--icon-only {
+    min-height: 1.125rem;
+    padding-right: 0;
+    padding-left: 0;
+  }
 }
