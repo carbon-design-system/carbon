@@ -1,0 +1,36 @@
+name: 'Issue Triage - Strategic Adopter'
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  apply-label:
+    runs-on: ubuntu-latest
+    if: |
+      !github.event.issue.pull_request && 
+      contains(github.event.issue.body, 'Instana' ) ||
+      contains(github.event.issue.body, 'QRadar' ) ||
+      contains(github.event.issue.body, 'MaaS360' ) ||
+      contains(github.event.issue.body, 'Environmental Intelligence Suite' ) ||
+      contains(github.event.issue.body, 'Watson Orchestrate' ) ||
+      contains(github.event.issue.body, 'Watson Assistant' ) ||
+      contains(github.event.issue.body, 'Planning Analytics' ) ||
+      contains(github.event.issue.body, 'ReaQta' ) ||
+      contains(github.event.issue.body, 'API Connect' ) ||
+      contains(github.event.issue.body, 'Fusion' ) ||
+      contains(github.event.issue.body, 'Flash Storage' ) ||
+      contains(github.event.issue.body, 'Envizi' ) ||
+      contains(github.event.issue.body, 'Maximo' ) ||
+      contains(github.event.issue.body, 'Turbonomic' ) ||
+      contains(github.event.issue.body, 'Fusion Microsoft 360 (embed)' )
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.issues.addLabels({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              labels: ['adopter: strategic-product']
+            })
