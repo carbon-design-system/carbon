@@ -424,3 +424,10 @@ name to ensure unpkg resolves to the latest v10 version:
 
 `https://unpkg.com/carbon-components@10/css/carbon-components.min.css`
 `https://unpkg.com/carbon-components@10/scripts/carbon-components.min.js`
+
+### When running the v10 storybook deploy manually, the v11 storybook is being published to v7-react.carbondesignsystem.com
+
+The workflow needs to be ran from the `v10` branch. Select `v10` from the
+dropdown when you run it.
+
+<img width="342" alt="image" src="https://user-images.githubusercontent.com/3360588/214062284-94065d87-5949-43a7-844b-0d1eb25aba16.png">

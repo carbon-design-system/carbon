@@ -27,6 +27,7 @@ function Tooltip({
   enterDelayMs = 100,
   leaveDelayMs = 300,
   defaultOpen = false,
+  closeOnActivation = false,
   ...rest
 }) {
   const containerRef = useRef(null);
@@ -39,9 +40,29 @@ function Tooltip({
   const triggerProps = {
     onFocus: () => setOpen(true),
     onBlur: () => setOpen(false),
+    onClick: () => closeOnActivation && setOpen(false),
     // This should be placed on the trigger in case the element is disabled
     onMouseEnter,
   };
+
+  function getChildEventHandlers(childProps) {
+    const eventHandlerFunctions = [
+      'onFocus',
+      'onBlur',
+      'onClick',
+      'onMouseEnter',
+    ];
+    const eventHandlers = {};
+    eventHandlerFunctions.forEach((functionName) => {
+      eventHandlers[functionName] = (evt) => {
+        triggerProps[functionName]();
+        if (childProps?.[functionName]) {
+          childProps?.[functionName](evt);
+        }
+      };
+    });
+    return eventHandlers;
+  }
 
   if (label) {
     triggerProps['aria-labelledby'] = id;
@@ -52,6 +73,13 @@ function Tooltip({
   function onKeyDown(event) {
     if (open && match(event, keys.Escape)) {
       event.stopPropagation();
+      setOpen(false);
+    }
+    if (
+      open &&
+      closeOnActivation &&
+      (match(event, keys.Enter) || match(event, keys.Space))
+    ) {
       setOpen(false);
     }
   }
@@ -88,7 +116,10 @@ function Tooltip({
       onMouseLeave={onMouseLeave}
       open={open}
       ref={containerRef}>
-      {React.cloneElement(child, triggerProps)}
+      {React.cloneElement(child, {
+        ...triggerProps,
+        ...getChildEventHandlers(child.props),
+      })}
       <PopoverContent
         aria-hidden="true"
         className={`${prefix}--tooltip-content`}
@@ -132,6 +163,11 @@ Tooltip.propTypes = {
    * Specify an optional className to be applied to the container node
    */
   className: PropTypes.string,
+
+  /**
+   * Determines wether the tooltip should close when inner content is activated (click, Enter or Space)
+   */
+  closeOnActivation: PropTypes.bool,
 
   /**
    * Specify whether the tooltip should be open when it first renders
