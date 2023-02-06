@@ -217,6 +217,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
+  const previousEndValue = useRef('');
   const startInputField = useCallback((node) => {
     if (node !== null) {
       startInputField.current = node;
@@ -398,9 +399,41 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     }
 
-    function handleOnChange() {
+    function handleOnStartChange() {
+      return handleOnChange('start');
+    }
+
+    function handleOnEndChange() {
+      return handleOnChange('end');
+    }
+
+    function handleOnChange(inputChanged) {
       if (datePickerType == 'single') {
         calendar.calendarContainer.classList.remove('open');
+      }
+
+      // inmediately set the end date value when end input changed
+      if (datePickerType === 'range') {
+        if (calendar.selectedDates.length === 1) {
+          let currentEndDate = new Date(end.value);
+
+          // if the end input wasn't changed by the user, the previous value is still valid
+          if (
+            currentEndDate.toString() === 'Invalid Date' &&
+            inputChanged !== 'end'
+          ) {
+            currentEndDate = new Date(previousEndValue?.current);
+            end.value = previousEndValue.current;
+          }
+
+          if (currentEndDate.toString() !== 'Invalid Date') {
+            calendar.selectedDates.push(currentEndDate);
+          }
+        }
+        // store the current end value for future reference
+        if (inputChanged === 'end') {
+          previousEndValue.current = end.value;
+        }
       }
 
       if (start.value !== '') {
@@ -421,7 +454,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     if (start) {
       start.addEventListener('keydown', handleArrowDown);
-      start.addEventListener('change', handleOnChange);
+      start.addEventListener('change', handleOnStartChange);
 
       if (calendar && calendar.calendarContainer) {
         // Flatpickr's calendar dialog is not rendered in a landmark causing an
@@ -438,7 +471,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     if (end) {
       end.addEventListener('keydown', handleArrowDown);
-      end.addEventListener('change', handleOnChange);
+      end.addEventListener('change', handleOnEndChange);
     }
 
     //component did unmount equivalent
@@ -451,12 +484,12 @@ const DatePicker = React.forwardRef(function DatePicker(
 
       if (start) {
         start.removeEventListener('keydown', handleArrowDown);
-        start.removeEventListener('change', handleOnChange);
+        start.removeEventListener('change', handleOnStartChange);
       }
 
       if (end) {
         end.removeEventListener('keydown', handleArrowDown);
-        end.removeEventListener('change', handleOnChange);
+        end.removeEventListener('change', handleOnEndChange);
       }
     };
   }, [savedOnChange, savedOnClose, savedOnOpen, readOnly, hasInput]); //eslint-disable-line react-hooks/exhaustive-deps
