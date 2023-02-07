@@ -12,6 +12,57 @@ import InlineCheckbox from '../InlineCheckbox';
 import RadioButton from '../RadioButton';
 import { usePrefix } from '../../internal/usePrefix';
 
+export interface TableSelectRowProps {
+  /**
+   * Specify the aria label for the underlying input control
+   */
+  ariaLabel: string;
+
+  /**
+   * Specify whether this row is selected, or not
+   */
+  checked: boolean;
+
+  /**
+   * The CSS class names of the cell that wraps the underlying input control
+   */
+  className?: string;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide an `id` for the underlying input control
+   */
+  id: string;
+
+  /**
+   * Provide a `name` for the underlying input control
+   */
+  name: string;
+
+  /**
+   * Provide an optional hook that is called each time the input is updated
+   */
+  onChange?: (
+    value: boolean,
+    name: string,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => void;
+
+  /**
+   * Provide a handler to listen to when a user initiates a selection request
+   */
+  onSelect: React.MouseEventHandler<HTMLInputElement>;
+
+  /**
+   * Specify whether the control should be a radio button or inline checkbox
+   */
+  radio?: boolean;
+}
+
 const TableSelectRow = ({
   ariaLabel,
   checked,
@@ -22,7 +73,7 @@ const TableSelectRow = ({
   disabled,
   radio,
   className,
-}) => {
+}: TableSelectRowProps) => {
   const prefix = usePrefix();
   const selectionInputProps = {
     id,
@@ -34,7 +85,7 @@ const TableSelectRow = ({
   };
   const InlineInputComponent = radio ? RadioButton : InlineCheckbox;
   const tableSelectRowClasses = classNames(`${prefix}--table-column-checkbox`, {
-    [className]: className,
+    ...(className && { [className]: true }),
     [`${prefix}--table-column-radio`]: radio,
   });
   return (
@@ -57,7 +108,7 @@ TableSelectRow.propTypes = {
   ariaLabel: PropTypes.string.isRequired,
 
   /**
-   * Specify whether all items are selected, or not
+   * Specify whether this row is selected, or not
    */
   checked: PropTypes.bool.isRequired,
 
