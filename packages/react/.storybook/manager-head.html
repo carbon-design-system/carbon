@@ -1,23 +1,19 @@
 <meta
   name="keywords"
-  content="IBM, design, system, Carbon, design system, Bluemix, styleguide, style, guide, components, library, pattern, kit, component, cloud, React, React.js"
-/>
+  content="IBM, design, system, Carbon, design system, Bluemix, styleguide, style, guide, components, library, pattern, kit, component, cloud, React, React.js" />
 <meta
   name="description"
-  content="This is the React implementation of the Carbon Design System. Carbon is a series of individual styles and components, that when combined make beautiful, intuitive designs."
-/>
+  content="This is the React implementation of the Carbon Design System. Carbon is a series of individual styles and components, that when combined make beautiful, intuitive designs." />
 
 <!-- Open Graph -->
 <meta property="og:title" content="Carbon Components React" />
 <meta property="og:site_name" content="Carbon Components React" />
 <meta
   property="og:description"
-  content="This is the React implementation of the Carbon Design System. Carbon is a series of individual styles and components, that when combined make beautiful, intuitive designs."
-/>
+  content="This is the React implementation of the Carbon Design System. Carbon is a series of individual styles and components, that when combined make beautiful, intuitive designs." />
 <meta
   property="og:image"
-  content="https://media.github.ibm.com/user/1679/files/aa651000-7749-11eb-900e-eeb9312ed756"
-/>
+  content="https://media.github.ibm.com/user/1679/files/aa651000-7749-11eb-900e-eeb9312ed756" />
 <meta property="og:url" content="http://react.carbondesignsystem.com" />
 
 <!-- Favicon -->
@@ -28,8 +24,7 @@
 <meta name="twitter:image:alt" content="Carbon Design System" />
 <meta
   name="twitter:image"
-  content="https://media.github.ibm.com/user/1679/files/aa651000-7749-11eb-900e-eeb9312ed756"
-/>
+  content="https://media.github.ibm.com/user/1679/files/aa651000-7749-11eb-900e-eeb9312ed756" />
 <meta name="twitter:site" content="@_carbondesign" />
 
 <!-- Storybook override -->
@@ -38,6 +33,34 @@
     document.title = 'Carbon Components React';
   }, 1000);
 </script>
+
+<!-- Tealium/GA Set up -->
+<script type="text/javascript">
+  window._ibmAnalytics = {
+    settings: {
+      name: 'CarbonReactStorybook',
+      isSpa: true,
+      tealiumProfileName: 'ibm-web-app',
+    },
+    onLoad: [['ibmStats.pageview', []]],
+  };
+  digitalData = {
+    page: {
+      pageInfo: {
+        ibm: {
+          siteId: 'IBM_' + _ibmAnalytics.settings.name,
+        },
+      },
+      category: {
+        primaryCategory: 'PC100',
+      },
+    },
+  };
+</script>
+<script
+  src="//1.www.s81c.com/common/stats/ibm-common.js"
+  type="text/javascript"
+  async="async"></script>
 
 <!-- Style overrides -->
 <style>
