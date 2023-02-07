@@ -34,7 +34,6 @@ const stories = glob
     const filepath = path.resolve(__dirname, match);
     const basename = path.basename(match, '.js');
     const denylist = new Set([
-      'TooltipDefinition-story',
       'DataTable-basic-story',
       'DataTable-batch-actions-story',
       'DataTable-filtering-story',
