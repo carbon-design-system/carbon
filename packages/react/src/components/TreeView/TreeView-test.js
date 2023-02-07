@@ -10,7 +10,8 @@ import TreeView from './TreeView';
 import TreeNode from './TreeNode';
 import userEvent from '@testing-library/user-event';
 import { fireEvent, render, screen, within } from '@testing-library/react';
-import { Document } from '@carbon/icons-react';
+
+const prefix = 'cds';
 
 describe('TreeView', () => {
   describe('renders as expected - Component API', () => {
@@ -33,7 +34,7 @@ describe('TreeView', () => {
 
       const node = screen.getByTestId('Node 1');
 
-      expect(node).toHaveClass('cds--tree-node--active');
+      expect(node).toHaveClass(`${prefix}--tree-node--active`);
     });
 
     it('should render children as expected', () => {
@@ -48,8 +49,9 @@ describe('TreeView', () => {
       const nodeParent = screen.getByTestId('Node 1');
       const nodeChild = screen.getByTestId('Node 2');
 
-      expect(nodeParent).toHaveClass('cds--tree-parent-node');
-      expect(nodeChild).toHaveClass('cds--tree-leaf-node');
+      expect(nodeParent).toHaveClass(`${prefix}--tree-parent-node`);
+      expect(nodeChild).toHaveClass(`${prefix}--tree-leaf-node`);
+
       expect(within(nodeParent).getByText('Node 1')).toBeInTheDocument();
       expect(within(nodeChild).getByText('Node 2')).toBeInTheDocument();
     });
@@ -131,7 +133,7 @@ describe('TreeView', () => {
       );
 
       expect(screen.getByRole('treeitem', { name: 'Node 1' })).toHaveClass(
-        'cds--tree-node--selected'
+        `${prefix}--tree-node--selected`
       );
     });
 
@@ -140,12 +142,11 @@ describe('TreeView', () => {
 
       const tree = screen.getByRole('tree');
 
-      expect(tree).toHaveClass('cds--tree--xs');
+      expect(tree).toHaveClass(`${prefix}--tree--xs`);
     });
   });
 
   describe('behaves as expected', () => {
-
     it('should render tree with expanded node', () => {
       render(
         <TreeView label="Tree View">
@@ -158,7 +159,7 @@ describe('TreeView', () => {
       const nodeParent = screen.getByTestId('Node 1');
       const nodeChild = nodeParent?.querySelector('div > span');
 
-      expect(nodeChild).toHaveClass('cds--tree-parent-node__toggle');
+      expect(nodeChild).toHaveClass(`${prefix}--tree-parent-node__toggle`);
       expect(within(nodeParent).getByText('Node 1')).toBeInTheDocument();
       expect(within(nodeParent).getByText('Node 2')).toBeInTheDocument();
     });
@@ -177,21 +178,28 @@ describe('TreeView', () => {
         </TreeView>
       );
 
-      const nodeParent = screen.getByTestId('Node 1');
       const nodeChild = screen.getByTestId('Node 2');
 
-      expect(nodeChild).toHaveClass('cds--tree-node--disabled');
+      expect(nodeChild.getAttribute('aria-disabled')).toEqual('true');
     });
 
     it('should render tree with icons', () => {
+      const CustomIcon = jest.fn(() => {
+        return <svg data-testid="test-icon" />;
+      });
+
       render(
         <TreeView label="Tree View">
-          <TreeNode renderIcon={Document} data-testid="Node 1" label="Node 1" />
+          <TreeNode
+            renderIcon={CustomIcon}
+            data-testid="Node 1"
+            label="Node 1"
+          />
         </TreeView>
       );
 
       expect(screen.getByTestId('Node 1')).toHaveClass(
-        'cds--tree-node--with-icon'
+        `${prefix}--tree-node--with-icon`
       );
     });
   });
