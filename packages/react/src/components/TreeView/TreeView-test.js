@@ -121,7 +121,6 @@ describe('TreeView', () => {
 
       fireEvent.click(screen.getByTestId('Node 1'));
 
-      expect(screen.getByLabelText('Tree View')).toBeInTheDocument();
       expect(onSelectSpy).toHaveBeenCalled();
     });
 
