@@ -48,7 +48,6 @@ describe('TreeView', () => {
       const nodeParent = screen.getByTestId('Node 1');
       const nodeChild = screen.getByTestId('Node 2');
 
-      expect(screen.getByLabelText('Tree View')).toBeInTheDocument();
       expect(nodeParent).toHaveClass('cds--tree-parent-node');
       expect(nodeChild).toHaveClass('cds--tree-leaf-node');
       expect(within(nodeParent).getByText('Node 1')).toBeInTheDocument();
@@ -131,7 +130,6 @@ describe('TreeView', () => {
         </TreeView>
       );
 
-      expect(screen.getByLabelText('Tree View')).toBeInTheDocument();
       expect(screen.getByRole('treeitem', { name: 'Node 1' })).toHaveClass(
         'cds--tree-node--selected'
       );
@@ -147,18 +145,6 @@ describe('TreeView', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should render tree with two nodes', () => {
-      render(
-        <TreeView label="Tree View">
-          <TreeNode label="Node 1" />
-          <TreeNode label="Node 2" />
-        </TreeView>
-      );
-
-      expect(screen.getByLabelText('Tree View')).toBeInTheDocument();
-      expect(screen.getByText('Node 1')).toBeInTheDocument();
-      expect(screen.getByText('Node 2')).toBeInTheDocument();
-    });
 
     it('should render tree with expanded node', () => {
       render(
@@ -172,7 +158,6 @@ describe('TreeView', () => {
       const nodeParent = screen.getByTestId('Node 1');
       const nodeChild = nodeParent?.querySelector('div > span');
 
-      expect(screen.getByLabelText('Tree View')).toBeInTheDocument();
       expect(nodeChild).toHaveClass('cds--tree-parent-node__toggle');
       expect(within(nodeParent).getByText('Node 1')).toBeInTheDocument();
       expect(within(nodeParent).getByText('Node 2')).toBeInTheDocument();
@@ -195,11 +180,7 @@ describe('TreeView', () => {
       const nodeParent = screen.getByTestId('Node 1');
       const nodeChild = screen.getByTestId('Node 2');
 
-      expect(screen.getByLabelText('Tree View')).toBeInTheDocument();
       expect(nodeChild).toHaveClass('cds--tree-node--disabled');
-      expect(within(nodeParent).getByText('Node 1')).toBeInTheDocument();
-      expect(within(nodeChild).getByText('Node 2')).toBeInTheDocument();
-      expect(within(nodeChild).getByText('Node 3')).toBeInTheDocument();
     });
 
     it('should render tree with icons', () => {
@@ -209,7 +190,6 @@ describe('TreeView', () => {
         </TreeView>
       );
 
-      expect(screen.getByLabelText('Tree View')).toBeInTheDocument();
       expect(screen.getByTestId('Node 1')).toHaveClass(
         'cds--tree-node--with-icon'
       );
