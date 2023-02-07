@@ -13,6 +13,7 @@ import { ButtonKinds } from '../../prop-types/types';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
+import deprecate from '../../prop-types/deprecate';
 
 function noop() {}
 
@@ -26,10 +27,8 @@ function FileUploaderButton({
   labelText: ownerLabelText = 'Add file',
   multiple = false,
   onChange = noop,
-  role = 'button',
   name,
   size = 'md',
-  tabIndex = 0,
   // eslint-disable-next-line react/prop-types
   innerRef,
   ...other
@@ -55,6 +54,7 @@ function FileUploaderButton({
 
   function onClick(event) {
     event.target.value = null;
+    inputNode.current.click();
   }
 
   function onKeyDown(event) {
@@ -78,17 +78,20 @@ function FileUploaderButton({
 
   return (
     <>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        ref={innerRef}
-        tabIndex={disabled ? -1 : tabIndex || 0}
+      <button
+        type="button"
+        disabled={disabled}
         className={classes}
+        onClick={onClick}
         onKeyDown={onKeyDown}
-        htmlFor={inputId}
         {...other}>
-        <span role={role} aria-disabled={disabled}>
-          {labelText}
-        </span>
+        {labelText}
+      </button>
+      <label
+        className={`${prefix}--visually-hidden`}
+        ref={innerRef}
+        htmlFor={inputId}>
+        <span>{labelText}</span>
       </label>
       <input
         className={`${prefix}--visually-hidden`}
@@ -101,7 +104,6 @@ function FileUploaderButton({
         accept={accept}
         name={name}
         onChange={handleOnChange}
-        onClick={onClick}
       />
     </>
   );
@@ -183,7 +185,11 @@ FileUploaderButton.propTypes = {
   /**
    * Provide a custom tabIndex value for the `<FileUploaderButton>`
    */
-  tabIndex: PropTypes.number,
+  tabIndex: deprecate(
+    PropTypes.number,
+    'The `tabIndex` prop for `FileUploaderButton` has ' +
+      'been deprecated since it now renders a button element by default.'
+  ),
 };
 
 export default FileUploaderButton;
