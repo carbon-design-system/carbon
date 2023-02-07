@@ -3157,9 +3157,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tabIndex": Object {
-        "type": "number",
-      },
+      "tabIndex": [Function],
     },
   },
   "FileUploaderDropContainer" => Object {
