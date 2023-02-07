@@ -42,14 +42,17 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: actions/github-script@v6
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: true
+          script: |
+            github.rest.repos.createRelease({
+              tag_name: context.ref,
+              name: context.ref,
+              draft: false,
+              prerelease: true,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            });
 
       - name: Upload Release Asset
         id: upload-release-asset

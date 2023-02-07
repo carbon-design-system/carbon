@@ -38,7 +38,7 @@
   "devDependencies": {
     "chalk": "^4.1.1",
     "change-case": "^4.1.2",
-    "esbuild": "^0.16.0",
+    "esbuild": "^0.17.0",
     "execa": "^5.1.1",
     "fast-glob": "^3.2.11",
     "fs-extra": "^10.0.0",
