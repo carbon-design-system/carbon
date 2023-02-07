@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { useControllableState } from '../../internal/useControllableState';
@@ -29,6 +29,7 @@ export function Toggle({
   ...other
 }) {
   const prefix = usePrefix();
+  const buttonElement = useRef(null);
   const [checked, setChecked] = useControllableState({
     value: toggled,
     onChange: onToggle,
@@ -71,9 +72,27 @@ export function Toggle({
   });
 
   return (
-    <div className={wrapperClasses}>
+    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
+    <div
+      className={wrapperClasses}
+      onClick={
+        ariaLabelledby
+          ? (e) => {
+              // the underlying <button> can only be activated by keyboard as it is visually hidden;
+              // therefore, if this event's target is the <button>, it had to be triggered by
+              // the keyboard event which already calls handleClick. if we wouldn't catch this, the
+              // onClick and onToggle functions would be called twice whenever the user activates the
+              // toggle by keyboard and props['aria-labelledby'] is passed.
+              if (buttonElement.current && e.target !== buttonElement.current) {
+                handleClick(e);
+                buttonElement.current.focus();
+              }
+            }
+          : null
+      }>
       <button
         {...other}
+        ref={buttonElement}
         id={id}
         className={`${prefix}--toggle__button`}
         role="switch"
@@ -132,7 +151,11 @@ Toggle.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Specify whether the label should be hidden, or not
+   * If true, the side labels (props.labelA and props.labelB) will be replaced by
+   * props.labelText, so that the toggle doesn't render a top label. In order to fully
+   * hide any labels, you can use props['aria-labelledby'] to refer to another element
+   * that labels the toggle. props.labelText would no longer be required in that case
+   * and can therefore be omitted.
    */
   hideLabel: PropTypes.bool,
 
