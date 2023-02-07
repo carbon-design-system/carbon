@@ -12691,6 +12691,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+"cra-template@workspace:packages/cra-template":
+  version: 0.0.0-use.local
+  resolution: "cra-template@workspace:packages/cra-template"
+  languageName: unknown
+  linkType: soft
+
 "create-ecdh@npm:^4.0.0":
   version: 4.0.3
   resolution: "create-ecdh@npm:4.0.3"
