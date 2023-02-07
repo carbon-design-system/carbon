@@ -398,34 +398,9 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     }
 
-    function handleOnStartChange() {
-      return handleOnChange('start');
-    }
-
-    function handleOnEndChange() {
-      return handleOnChange('end');
-    }
-
-    function handleOnChange(inputChanged) {
+    function handleOnChange() {
       if (datePickerType == 'single') {
         calendar.calendarContainer.classList.remove('open');
-      }
-
-      // inmediately set the end date value when end input changed
-      if (
-        datePickerType === 'range' &&
-        inputChanged === 'end' &&
-        calendar.selectedDates.length === 1
-      ) {
-        let currentEndDate = new Date(end.value);
-
-        if (currentEndDate.toString() !== 'Invalid Date') {
-          calendarRef.current.setDate(
-            [start.value, end.value],
-            true,
-            dateFormat
-          );
-        }
       }
 
       if (start.value !== '') {
@@ -446,7 +421,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     if (start) {
       start.addEventListener('keydown', handleArrowDown);
-      start.addEventListener('change', handleOnStartChange);
+      start.addEventListener('change', handleOnChange);
 
       if (calendar && calendar.calendarContainer) {
         // Flatpickr's calendar dialog is not rendered in a landmark causing an
@@ -463,7 +438,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     if (end) {
       end.addEventListener('keydown', handleArrowDown);
-      end.addEventListener('change', handleOnEndChange);
+      end.addEventListener('change', handleOnChange);
     }
 
     //component did unmount equivalent
@@ -476,12 +451,12 @@ const DatePicker = React.forwardRef(function DatePicker(
 
       if (start) {
         start.removeEventListener('keydown', handleArrowDown);
-        start.removeEventListener('change', handleOnStartChange);
+        start.removeEventListener('change', handleOnChange);
       }
 
       if (end) {
         end.removeEventListener('keydown', handleArrowDown);
-        end.removeEventListener('change', handleOnEndChange);
+        end.removeEventListener('change', handleOnChange);
       }
     };
   }, [savedOnChange, savedOnClose, savedOnOpen, readOnly, hasInput]); //eslint-disable-line react-hooks/exhaustive-deps
