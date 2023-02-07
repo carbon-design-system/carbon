@@ -8,7 +8,13 @@
 import { Add, Subtract } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef, useState, useContext } from 'react';
+import React, {
+  LegacyRef,
+  ReactNode,
+  useContext,
+  useRef,
+  useState,
+} from 'react';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { useNormalizedInputProps as normalize } from '../../internal/useNormalizedInputProps';
 import { usePrefix } from '../../internal/usePrefix';
@@ -25,7 +31,169 @@ const defaultTranslations = {
   [translationIds['decrement.number']]: 'Decrement number',
 };
 
-const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
+type ExcludedAttributes =
+  | 'defaultValue'
+  | 'id'
+  | 'min'
+  | 'max'
+  | 'onChange'
+  | 'onClick'
+  | 'size'
+  | 'step'
+  | 'value';
+
+export interface NumberInputProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    ExcludedAttributes
+  > {
+  /**
+   * `true` to allow empty string.
+   */
+  allowEmpty?: boolean;
+
+  /**
+   * Specify an optional className to be applied to the wrapper node
+   */
+  className?: string;
+
+  /**
+   * Optional starting value for uncontrolled state
+   */
+  defaultValue?: number | string;
+
+  /**
+   * Specify if the wheel functionality for the input should be disabled, or not
+   */
+  disableWheel?: boolean;
+
+  /**
+   * Specify if the control should be disabled, or not
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: ReactNode;
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Specify whether you want the steppers to be hidden
+   */
+  hideSteppers?: boolean;
+
+  /**
+   * Provide a description for up/down icons that can be read by screen readers
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify a custom `id` for the input
+   */
+  id: string;
+
+  /**
+   * Specify if the currently value is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText?: ReactNode;
+
+  /**
+   * Generic `label` that will be used as the textual representation of what
+   * this field is for
+   */
+  label?: ReactNode;
+
+  /**
+   * `true` to use the light version.
+   *
+   * @deprecated The `light` prop for `NumberInput` is no longer needed and has
+   *     been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * The maximum value.
+   */
+  max?: number;
+
+  /**
+   * The minimum value.
+   */
+  min?: number;
+
+  /**
+   * Provide an optional handler that is called when the internal state of
+   * NumberInput changes. This handler is called with event and state info.
+   * `(event, { value, direction }) => void`
+   */
+  onChange?: (
+    event: React.MouseEvent<HTMLButtonElement>,
+    state: { value: number | string; direction: string }
+  ) => void;
+
+  /**
+   * Provide an optional function to be called when the up/down button is clicked
+   */
+  onClick?: (
+    event: React.MouseEvent<HTMLElement>,
+    state?: { value: number | string; direction: string }
+  ) => void;
+
+  /**
+   * Provide an optional function to be called when a key is pressed in the number input
+   */
+  onKeyUp?: React.KeyboardEventHandler<HTMLInputElement>;
+
+  /**
+   * Specify if the component should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * Specify the size of the Number Input.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify how much the values should increase/decrease upon clicking on up/down button
+   */
+  step?: number;
+
+  /**
+   * Provide custom text for the component for each translation id
+   */
+  translateWithId?: (id: string) => string;
+
+  /**
+   * Specify the value of the input
+   */
+  value?: number | string;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNode;
+}
+
+const NumberInput = React.forwardRef(function NumberInput(
+  props: NumberInputProps,
+  forwardRef
+) {
   const {
     allowEmpty = false,
     className: customClassName,
@@ -70,7 +238,9 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
   const [prevControlledValue, setPrevControlledValue] =
     useState(controlledValue);
   const inputRef = useRef(null);
-  const ref = useMergedRefs([forwardRef, inputRef]);
+  const ref = useMergedRefs([forwardRef, inputRef]) as
+    | LegacyRef<HTMLInputElement>
+    | undefined;
   const numberInputClasses = cx({
     [`${prefix}--number`]: true,
     [`${prefix}--number--helpertext`]: true,
@@ -110,11 +280,12 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
   });
 
   if (controlledValue !== prevControlledValue) {
-    setValue(controlledValue);
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    setValue(controlledValue!);
     setPrevControlledValue(controlledValue);
   }
 
-  let ariaDescribedBy = null;
+  let ariaDescribedBy: string | undefined = undefined;
   if (normalizedProps.invalid) {
     ariaDescribedBy = normalizedProps.invalidId;
   }
@@ -138,8 +309,10 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
     }
   }
 
-  const handleFocus = (evt) => {
-    if (evt.target.type === 'button') {
+  const handleFocus: React.FocusEventHandler<
+    HTMLInputElement | HTMLDivElement
+  > = (evt) => {
+    if ('type' in evt.target && evt.target.type === 'button') {
       setIsFocused(false);
     } else {
       setIsFocused(evt.type === 'focus' ? true : false);
@@ -147,18 +320,20 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
   };
 
   const outerElementClasses = cx(`${prefix}--form-item`, {
-    [customClassName]: !!customClassName,
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    [customClassName!]: !!customClassName,
     [`${prefix}--number-input--fluid--invalid`]:
       isFluid && normalizedProps.invalid,
     [`${prefix}--number-input--fluid--focus`]: isFluid && isFocused,
     [`${prefix}--number-input--fluid--disabled`]: isFluid && disabled,
   });
 
+  const Icon = normalizedProps.icon as any;
   return (
     <div
       className={outerElementClasses}
-      onFocus={isFluid ? handleFocus : null}
-      onBlur={isFluid ? handleFocus : null}>
+      onFocus={isFluid ? handleFocus : undefined}
+      onBlur={isFluid ? handleFocus : undefined}>
       <div
         className={numberInputClasses}
         data-invalid={normalizedProps.invalid ? true : undefined}>
@@ -206,9 +381,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
             type="number"
             value={value}
           />
-          {normalizedProps.icon ? (
-            <normalizedProps.icon className={iconClasses} />
-          ) : null}
+          {Icon ? <Icon className={iconClasses} /> : null}
           {!hideSteppers && (
             <div className={`${prefix}--number__controls`}>
               <button
@@ -217,7 +390,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
-                    value: clamp(max, min, parseInt(value) - step),
+                    value: clamp(max, min, parseInt(value as string) - step),
                     direction: 'down',
                   };
                   setValue(state.value);
@@ -230,7 +403,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                     onClick(event, state);
                   }
                 }}
-                tabIndex="-1"
+                tabIndex={-1}
                 title={decrementNumLabel || iconDescription}
                 type="button">
                 <Subtract className="down-icon" />
@@ -242,7 +415,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                 disabled={disabled || readOnly}
                 onClick={(event) => {
                   const state = {
-                    value: clamp(max, min, parseInt(value) + step),
+                    value: clamp(max, min, parseInt(value as string) + step),
                     direction: 'up',
                   };
                   setValue(state.value);
@@ -255,7 +428,7 @@ const NumberInput = React.forwardRef(function NumberInput(props, forwardRef) {
                     onClick(event, state);
                   }
                 }}
-                tabIndex="-1"
+                tabIndex={-1}
                 title={incrementNumLabel || iconDescription}
                 type="button">
                 <Add className="up-icon" />
@@ -414,7 +587,13 @@ NumberInput.propTypes = {
   warnText: PropTypes.node,
 };
 
-function Label({ disabled, id, hideLabel, label }) {
+interface Label {
+  disabled?: boolean;
+  hideLabel?: boolean;
+  id?: string;
+  label?: ReactNode;
+}
+function Label({ disabled, id, hideLabel, label }: Label) {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--label`]: true,
@@ -439,7 +618,11 @@ Label.propTypes = {
   label: PropTypes.node,
 };
 
-function HelperText({ disabled, description }) {
+interface HelperTextProps {
+  description?: ReactNode;
+  disabled?: boolean;
+}
+function HelperText({ disabled, description }: HelperTextProps) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: disabled,
