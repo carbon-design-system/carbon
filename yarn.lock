@@ -2062,8 +2062,6 @@ __metadata:
     "@storybook/manager-webpack5": ^6.5.6
     "@storybook/react": ^6.5.6
     "@storybook/theming": ^6.5.6
-    "@typescript-eslint/eslint-plugin": ^5.38.1
-    "@typescript-eslint/parser": ^5.38.1
     autoprefixer: ^10.4.0
     babel-loader: ^9.0.0
     babel-plugin-dev-expression: ^0.2.3
@@ -15094,6 +15092,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eslint-config-carbon@workspace:config/eslint-config-carbon"
   dependencies:
+    "@typescript-eslint/eslint-plugin": ^5.38.1
+    "@typescript-eslint/parser": ^5.38.1
     babel-eslint: ^10.1.0
     eslint-config-airbnb: ^19.0.0
     eslint-config-airbnb-base: ^15.0.0
