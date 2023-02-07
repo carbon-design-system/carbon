@@ -217,7 +217,6 @@ const DatePicker = React.forwardRef(function DatePicker(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
-  const previousEndValue = useRef('');
   const startInputField = useCallback((node) => {
     if (node !== null) {
       startInputField.current = node;
@@ -413,26 +412,19 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
 
       // inmediately set the end date value when end input changed
-      if (datePickerType === 'range') {
-        if (calendar.selectedDates.length === 1) {
-          let currentEndDate = new Date(end.value);
+      if (
+        datePickerType === 'range' &&
+        inputChanged === 'end' &&
+        calendar.selectedDates.length === 1
+      ) {
+        let currentEndDate = new Date(end.value);
 
-          // if the end input wasn't changed by the user, the previous value is still valid
-          if (
-            currentEndDate.toString() === 'Invalid Date' &&
-            inputChanged !== 'end'
-          ) {
-            currentEndDate = new Date(previousEndValue?.current);
-            end.value = previousEndValue.current;
-          }
-
-          if (currentEndDate.toString() !== 'Invalid Date') {
-            calendar.selectedDates.push(currentEndDate);
-          }
-        }
-        // store the current end value for future reference
-        if (inputChanged === 'end') {
-          previousEndValue.current = end.value;
+        if (currentEndDate.toString() !== 'Invalid Date') {
+          calendarRef.current.setDate(
+            [start.value, end.value],
+            true,
+            dateFormat
+          );
         }
       }
 
