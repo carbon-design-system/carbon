@@ -8,24 +8,21 @@ jobs:
   apply-label:
     runs-on: ubuntu-latest
     if: |
-      !github.event.issue.pull_request && 
-      contains(github.event.issue.body, 'Instana' ) ||
-      contains(github.event.issue.body, 'QRadar' ) ||
-      contains(github.event.issue.body, 'MaaS360' ) ||
-      contains(github.event.issue.body, 'Environmental Intelligence Suite' ) ||
-      contains(github.event.issue.body, 'Watson Orchestrate' ) ||
-      contains(github.event.issue.body, 'Watson Assistant' ) ||
-      contains(github.event.issue.body, 'Planning Analytics' ) ||
-      contains(github.event.issue.body, 'ReaQta' ) ||
-      contains(github.event.issue.body, 'API Connect' ) ||
-      contains(github.event.issue.body, 'Fusion' ) ||
-      contains(github.event.issue.body, 'Flash Storage' ) ||
-      contains(github.event.issue.body, 'Envizi' ) ||
-      contains(github.event.issue.body, 'Maximo' ) ||
-      contains(github.event.issue.body, 'Turbonomic' ) ||
-      contains(github.event.issue.body, 'Fusion Microsoft 360 (embed)' )
+      !github.event.issue.pull_request
     steps:
+      - uses: actions/checkout@main
+      - uses: actions-ecosystem/action-regex-match@v2
+        id: regex-match
+        with:
+          text: ${{ github.event.issue.body }}
+          regex:
+            '\b(Instana|QRadar|MaaS360|Environmental Intelligence Suite|Watson
+            Orchestrate|Watson Assistant|Planning Analytics|ReaQta|API
+            Connect|Fusion|Flash Storage|Envizi|Maximo|Turbonomic|Fusion
+            Microsoft 360)\b'
+          flags: g
       - uses: actions/github-script@v6
+        if: ${{ steps.regex-match.outputs.match != '' }}
         with:
           script: |
             github.rest.issues.addLabels({
