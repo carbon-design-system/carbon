@@ -17,6 +17,7 @@ module.exports = {
     '!**/*.stories.js',
     '!**/*-test.e2e.js',
   ],
+  modulePathIgnorePatterns: ['/cra-template/'],
   moduleNameMapper: {
     // This is a temporary workaround from moving to Jest v28. In this update,
     // certain dependencies are only providing ESM through exports and so we use

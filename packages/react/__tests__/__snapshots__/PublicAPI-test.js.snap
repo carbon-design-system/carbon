@@ -3157,9 +3157,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tabIndex": Object {
-        "type": "number",
-      },
+      "tabIndex": [Function],
     },
   },
   "FileUploaderDropContainer" => Object {
@@ -8725,6 +8723,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "closeOnActivation": Object {
+        "type": "bool",
       },
       "defaultOpen": Object {
         "type": "bool",
