@@ -306,7 +306,7 @@ const ComboBox = React.forwardRef((props, ref) => {
         });
 
         const handleFocus = (evt) => {
-          setIsFocused(evt.type === 'focus' ? true : false);
+          setIsFocused(evt.type === 'focus');
         };
 
         const readOnlyEventHandlers = readOnly
