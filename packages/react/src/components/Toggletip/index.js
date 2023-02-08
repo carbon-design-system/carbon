@@ -95,8 +95,32 @@ function Toggletip({
   function onKeyDown(event) {
     if (open && match(event, keys.Escape)) {
       actions.close();
+
+      // If the menu is closed while focus is still inside the menu, it should return to the trigger button  (#12922)
+      const button = ref.current.children[0];
+      if (button && button.type === 'button') {
+        button.focus();
+      }
     }
   }
+
+  function handleBlur(event) {
+    // Do not close if the menu itself is clicked, should only close on focus out
+    if (open && event.relatedTarget === null) {
+      return;
+    }
+    if (!event.currentTarget.contains(event.relatedTarget)) {
+      // The menu should be closed when focus leaves the `Toggletip`  (#12922)
+      actions.close();
+    }
+  }
+
+  // If the `Toggletip` is the last focusable item in the tab order, it shoudl also close when the browser window loses focus  (#12922)
+  useWindowEvent('blur', () => {
+    if (open) {
+      actions.close();
+    }
+  });
 
   useWindowEvent('click', (event) => {
     if (open && !ref.current.contains(event.target)) {
@@ -115,6 +139,7 @@ function Toggletip({
         highContrast
         open={open}
         onKeyDown={onKeyDown}
+        onBlur={handleBlur}
         ref={ref}>
         {children}
       </Popover>

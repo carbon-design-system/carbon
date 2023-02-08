@@ -59,6 +59,10 @@ $input-label-weight: 400 !default;
     vertical-align: baseline;
   }
 
+  .#{$prefix}--label .#{$prefix}--toggletip-label {
+    @include type-style('label-01');
+  }
+
   .#{$prefix}--label--no-margin {
     margin-bottom: 0;
   }

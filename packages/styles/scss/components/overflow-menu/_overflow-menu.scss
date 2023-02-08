@@ -87,6 +87,10 @@
     fill: $icon-primary;
   }
 
+  .#{$prefix}--overflow-menu__wrapper {
+    line-height: 0;
+  }
+
   .#{$prefix}--overflow-menu-options {
     @include reset;
     @include box-shadow;
