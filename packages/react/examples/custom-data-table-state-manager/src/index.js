@@ -1,12 +1,12 @@
-import React from 'react';
-import { render } from 'react-dom';
-import CustomDataTable from './components/CustomDataTable';
+import React from "react";
+import { render } from "react-dom";
+import CustomDataTable from "./components/CustomDataTable";
 import {
   rowsMany as demoRowsMany,
   columns as demoColumns,
-  sortInfo as demoSortInfo,
-} from './table-data';
-import 'carbon-components/scss/globals/scss/styles.scss';
+  sortInfo as demoSortInfo
+} from "./table-data";
+import "carbon-components/scss/globals/scss/styles.scss";
 
 const App = () => (
   <CustomDataTable
@@ -19,4 +19,4 @@ const App = () => (
   />
 );
 
-render(<App />, document.getElementById('root'));
+render(<App />, document.getElementById("root"));

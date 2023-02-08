@@ -1,6 +1,6 @@
-import PropTypes from 'prop-types';
-import React, { useCallback, useState } from 'react';
-import { Delete } from '@carbon/icons-react';
+import PropTypes from "prop-types";
+import React, { useCallback, useState } from "react";
+import { Delete } from "@carbon/icons-react";
 import {
   TableContainer,
   Table,
@@ -17,22 +17,22 @@ import {
   TableToolbarSearch,
   TableToolbarMenu,
   TableBatchActions,
-  TableBatchAction,
-} from 'carbon-components-react';
+  TableBatchAction
+} from "carbon-components-react";
 import {
   useFilteredRows,
   usePageInfo,
   useRowSelection,
   useSortedRows,
   useSortInfo,
-  useUniqueId,
-} from '../hooks';
-import Pagination from './Pagination';
+  useUniqueId
+} from "../hooks";
+import Pagination from "./Pagination";
 import {
   TABLE_SIZE,
   TABLE_SORT_DIRECTION,
-  doesRowMatchSearchString,
-} from '../misc';
+  doesRowMatchSearchString
+} from "../misc";
 
 /**
  * An example state manager that an application can start with to achieve
@@ -67,7 +67,7 @@ const CustomDataTable = ({
   size,
   sortInfo: propSortInfo,
   start: propStart,
-  zebra,
+  zebra
 }) => {
   const [rows, setRows] = useState(propRows);
   const [sortInfo, setSortInfo] = useSortInfo(propSortInfo);
@@ -111,7 +111,7 @@ const CustomDataTable = ({
   const handleChangeSelection = useCallback(
     (event) => {
       const { currentTarget } = event;
-      const row = currentTarget.closest('tr');
+      const row = currentTarget.closest("tr");
       if (row) {
         setRowSelection(Number(row.dataset.rowId), currentTarget.checked);
       }
@@ -132,7 +132,7 @@ const CustomDataTable = ({
       const {
         columnId,
         sortCycle,
-        sortDirection: oldDirection,
+        sortDirection: oldDirection
       } = currentTarget.dataset;
       setSortInfo({ columnId, sortCycle, oldDirection });
     },
@@ -168,11 +168,13 @@ const CustomDataTable = ({
         <TableBatchActions
           shouldShowBatchActions={hasBatchActions}
           totalSelected={selectedRowsCountInFiltered}
-          onCancel={handleCancelSelection}>
+          onCancel={handleCancelSelection}
+        >
           <TableBatchAction
             tabIndex={hasBatchActions ? 0 : -1}
             renderIcon={Delete}
-            onClick={handleDeleteRows}>
+            onClick={handleDeleteRows}
+          >
             Delete
           </TableBatchAction>
         </TableBatchActions>
@@ -182,13 +184,13 @@ const CustomDataTable = ({
             onChange={handleChangeSearchString}
           />
           <TableToolbarMenu tabIndex={hasBatchActions ? -1 : 0}>
-            <TableToolbarAction onClick={() => alert('Alert 1')}>
+            <TableToolbarAction onClick={() => alert("Alert 1")}>
               Action 1
             </TableToolbarAction>
-            <TableToolbarAction onClick={() => alert('Alert 2')}>
+            <TableToolbarAction onClick={() => alert("Alert 2")}>
               Action 2
             </TableToolbarAction>
-            <TableToolbarAction onClick={() => alert('Alert 3')}>
+            <TableToolbarAction onClick={() => alert("Alert 3")}>
               Action 3
             </TableToolbarAction>
           </TableToolbarMenu>
@@ -224,7 +226,8 @@ const CustomDataTable = ({
                   data-column-id={columnId}
                   data-sort-cycle={sortCycle}
                   data-sort-direction={sortDirectionForThisCell}
-                  onClick={handleChangeSort}>
+                  onClick={handleChangeSort}
+                >
                   {title}
                 </TableHeader>
               );
@@ -241,7 +244,8 @@ const CustomDataTable = ({
               <TableRow
                 key={rowId}
                 isSelected={hasSelection && selected}
-                data-row-id={rowId}>
+                data-row-id={rowId}
+              >
                 {hasSelection && (
                   <TableSelectRow
                     id={`${elementId}--select-${rowId}`}
@@ -259,7 +263,7 @@ const CustomDataTable = ({
           })}
         </TableBody>
       </Table>
-      {typeof pageSize !== 'undefined' && (
+      {typeof pageSize !== "undefined" && (
         <Pagination
           start={start}
           count={filteredRows.length}
@@ -288,7 +292,7 @@ CustomDataTable.propTypes = {
     PropTypes.shape({
       id: PropTypes.string,
       title: PropTypes.string,
-      sortCycle: PropTypes.string,
+      sortCycle: PropTypes.string
     })
   ),
 
@@ -313,7 +317,7 @@ CustomDataTable.propTypes = {
   rows: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number,
-      selected: PropTypes.bool,
+      selected: PropTypes.bool
     })
   ),
 
@@ -327,7 +331,7 @@ CustomDataTable.propTypes = {
    */
   sortInfo: PropTypes.shape({
     columnId: PropTypes.string,
-    direction: PropTypes.string,
+    direction: PropTypes.string
   }),
 
   /**
@@ -338,7 +342,7 @@ CustomDataTable.propTypes = {
   /**
    * `true` if the zebra stripe should be shown.
    */
-  zebra: PropTypes.bool,
+  zebra: PropTypes.bool
 };
 
 CustomDataTable.defaultProps = {
@@ -346,7 +350,7 @@ CustomDataTable.defaultProps = {
   hasSelection: false,
   pageSize: 5,
   size: TABLE_SIZE.REGULAR,
-  start: 0,
+  start: 0
 };
 
 export default CustomDataTable;
