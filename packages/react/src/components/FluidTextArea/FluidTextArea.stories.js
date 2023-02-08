@@ -61,8 +61,6 @@ export const Default = () => (
   <FluidTextArea
     labelText="Text Area label"
     placeholder="Placeholder text"
-    cols={50}
-    rows={4}
     id="text-area-1"
   />
 );
@@ -72,8 +70,6 @@ export const DefaultWithLayers = () => (
     <FluidTextArea
       labelText="Text Area label"
       placeholder="Placeholder text"
-      cols={50}
-      rows={4}
       id="text-area-1"
     />
     <br />
@@ -81,8 +77,6 @@ export const DefaultWithLayers = () => (
       <FluidTextArea
         labelText="Text Area label"
         placeholder="Placeholder text"
-        cols={50}
-        rows={4}
         id="text-area-1"
       />
       <br />
@@ -90,8 +84,6 @@ export const DefaultWithLayers = () => (
         <FluidTextArea
           labelText="Text Area label"
           placeholder="Placeholder text"
-          cols={50}
-          rows={4}
           id="text-area-1"
         />
       </Layer>
