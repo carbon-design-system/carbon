@@ -1004,6 +1004,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "sierrawetmore",
+      "name": "Sierra Wetmore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/107062203?v=4",
+      "profile": "https://github.com/sierrawetmore",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
