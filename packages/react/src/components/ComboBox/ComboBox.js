@@ -226,10 +226,12 @@ const ComboBox = React.forwardRef((props, ref) => {
 
   const inputClasses = cx(`${prefix}--text-input`, {
     [`${prefix}--text-input--empty`]: !inputValue,
+    [`${prefix}--combo-box--input--focus`]: isFocused && !isFluid,
   });
 
   // needs to be Capitalized for react to render it correctly
   const ItemToElement = itemToElement;
+
   return (
     <Downshift
       {...downshiftProps}
@@ -283,6 +285,7 @@ const ComboBox = React.forwardRef((props, ref) => {
             }
           },
         });
+
         const inputProps = getInputProps({
           // Remove excess aria `aria-labelledby`. HTML <label for> provides this aria information.
           'aria-labelledby': null,
@@ -303,11 +306,7 @@ const ComboBox = React.forwardRef((props, ref) => {
         });
 
         const handleFocus = (evt) => {
-          if (evt.target.type === 'button') {
-            setIsFocused(false);
-          } else {
-            setIsFocused(evt.type === 'focus' ? true : false);
-          }
+          setIsFocused(evt.type === 'focus');
         };
 
         const readOnlyEventHandlers = readOnly
@@ -394,6 +393,7 @@ const ComboBox = React.forwardRef((props, ref) => {
                             highlightedIndex === index ? true : null,
                           disabled: item.disabled,
                         });
+
                         return (
                           <ListBox.MenuItem
                             key={itemProps.id}
