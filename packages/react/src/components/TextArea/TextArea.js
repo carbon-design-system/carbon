@@ -119,6 +119,7 @@ const TextArea = React.forwardRef(function TextArea(
   useIsomorphicEffect(() => {
     if (other.cols) {
       textareaRef.current.style.width = null;
+      textareaRef.current.style.resize = 'none';
     } else {
       textareaRef.current.style.width = `100%`;
     }

@@ -69,7 +69,7 @@ describe('FileUploaderButton', () => {
     const { container } = render(
       <FileUploaderButton accept={['.png']} labelText="test" />
     );
-    const input = container.querySelector('input');
+    const input = container.querySelector('button');
 
     const filename = 'test.png';
     const file = new File(['test'], filename, { type: 'image/png' });
