@@ -94,6 +94,23 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/checkbox/accessibility.mdx
       overviewPath: ./src/components/Checkbox/docs/overview.mdx
+  class-prefix:
+    name: Class prefix
+    description: The ClassPrefix component is used to change the prefix in the classes used by components in Carbon.
+    type: component
+    framework: react
+    status: stable
+    platform: web
+    thumbnailPath: ./thumbnails/class-prefix.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-classprefix
+    tags:
+      - content-element
+    docs:
+      overviewPath: ./src/components/ClassPrefix/docs/overview.mdx
   code-snippet:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/code-snippet/usage
@@ -135,7 +152,11 @@ assets:
     docs:
       overviewPath: ./src/components/ComposedModal/docs/overview.mdx
   contained-list:
+    name: Contained list
+    type: component
+    platform: web
     status: stable
+    thumbnailPath: ./thumbnails/contained-list.svg
     externalDocsUrl: https://www.carbondesignsystem.com/components/contained-list/usage
     framework: react
     demoLinks:
@@ -162,6 +183,21 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/content-switcher/accessibility.mdx
       overviewPath: ./src/components/ContentSwitcher/docs/overview.mdx
+  context-menu:
+    name: Context menu
+    status: experimental
+    framework: react
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu-contextmenu
+    platform: web
+    thumbnailPath: ./thumbnails/context-menu.svg
+    docs:
+      overviewPath: ./src/components/ContextMenu/docs/overview.mdx
+    tags:
+      - system-feedback
   copy-button:
     status: stable
     framework: react
@@ -255,25 +291,11 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/components-flexgrid
+        url: https://react.carbondesignsystem.com/?path=/docs/elements-flexgrid
     tags:
       - shell
     docs:
       overviewPath: ./src/components/FlexGrid/docs/overview.mdx
-  fluid-form:
-    name: Fluid form
-    framework: react
-    status: experimental
-    type: component
-    platform: web
-    thumbnailPath: ./thumbnails/fluid-form.svg
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-fluidform
-    tags:
-      - form
   form:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/form/usage
@@ -304,9 +326,24 @@ assets:
       - form
     docs:
       overviewPath: ./src/components/FormGroup/docs/overview.mdx
-  grid:
+  form-label:
+    name: Form label
+    framework: react
     status: stable
     type: component
+    platform: web
+    thumbnailPath: ./thumbnails/form-label.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-formlabel
+    tags:
+      - content-element
+    docs:
+      overviewPath: ./src/components/FormLabel/docs/overview.mdx
+  grid:
+    status: stable
     framework: react
     demoLinks:
       - type: storybook
@@ -326,9 +363,26 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/heading
+        url: https://react.carbondesignsystem.com/?path=/docs/components-heading--default
     docs:
       overviewPath: ./src/components/Heading/docs/overview.mdx
+    tags:
+      - content-element
+  id-prefix:
+    name: Id prefix
+    description: The IdPrefix component is used to change the prefix applied to the automatically generated id attributes placed on certain DOM elements.
+    framework: react
+    status: stable
+    type: component
+    platform: web
+    thumbnailPath: ./thumbnails/id-prefix.svg
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-idprefix
+    docs:
+      overviewPath: ./src/components/IdPrefix/docs/overview.mdx
     tags:
       - content-element
   icon-button:
@@ -384,6 +438,7 @@ assets:
     status: experimental
     type: component
     platform: web
+    thumbnailPath: ./thumbnails/layout-direction.svg
     demoLinks:
       - type: storybook
         name: Storybook
@@ -391,6 +446,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text--layout-and-text
     tags:
       - input-control
+    docs:
+      overviewPath: ./src/components/Layout/docs/overview.mdx
   link:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/link/usage
@@ -419,20 +476,6 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/loading/accessibility.mdx
       overviewPath: ./src/components/Loading/docs/overview.mdx
-  menu:
-    name: Unstable menu
-    framework: react
-    status: experimental
-    type: component
-    platform: web
-    thumbnailPath: ./thumbnails/menu.svg
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu
-    tags:
-      - system-feedback
   modal:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/modal/usage
@@ -457,7 +500,7 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-multiselect
     docs:
-      overviewPath: ./src/components/Multiselect/docs/overview.mdx
+      overviewPath: ./src/components/MultiSelect/docs/overview.mdx
   notification:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/notification/usage
@@ -468,6 +511,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-notifications
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/notification/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/notification/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/notification/accessibility.mdx
       overviewPath: ./src/components/Notification/docs/overview.mdx
   number-input:
     status: stable
@@ -516,6 +562,16 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/accessibility.mdx
       overviewPath: ./src/components/OverflowMenu/docs/overview.mdx
+  overflow-menu-v2:
+      status: experimental
+      framework: react
+      demoLinks:
+        - type: storybook
+          name: Storybook
+          action: link
+          url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-menu-overflowmenuv2
+      docs:
+        overviewPath: ./src/components/OverflowMenuV2/docs/overview.mdx
   pagination:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/pagination/usage
@@ -555,6 +611,8 @@ assets:
     tags:
       - data-display
       - contextual-navigation
+    docs:
+      overviewPath: ./src/components/Pagination/experimental/docs/overview.mdx
   popover:
     status: stable
     framework: react
@@ -623,19 +681,6 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/search/accessibility.mdx
       overviewPath: ./src/components/Search/docs/overview.mdx
-  section:
-    name: Section
-    framework: react
-    status: stable
-    type: component
-    platform: web
-    demoLinks:
-      - type: storybook
-        name: Storybook
-        action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/heading
-    tags:
-      - content-element
   select:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/select/usage
@@ -664,6 +709,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/components-skeleton
     tags:
       - shell
+    docs:
+      overviewPath: ./src/components/Skeleton/docs/overview.mdx
   slider:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/slider/usage
@@ -692,6 +739,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/layout-stack
     tags:
       - content-block
+    docs:
+      overviewPath: ./src/components/Stack/docs/overview.mdx
   structured-list:
     status: stable
     externalDocsUrl: https://www.carbondesignsystem.com/components/structured-list/usage
@@ -748,12 +797,15 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text
     tags:
       - input-control
+    docs:
+      overviewPath: ./src/components/Text/docs/overview.mdx
   text-direction:
     name: Unstable text direction
     framework: react
     status: experimental
     type: component
     platform: web
+    thumbnailPath: ./thumbnails/text-direction.svg
     demoLinks:
       - type: storybook
         name: Storybook
@@ -761,6 +813,8 @@ assets:
         url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-text--set-text-direction
     tags:
       - input-control
+    docs:
+      overviewPath: ./src/components/Text/docs/text-direction-overview.mdx
   text-area:
     status: stable
     framework: react
@@ -845,6 +899,7 @@ assets:
     tags:
       - content-element
     docs:
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/accessibility.mdx
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/style.mdx
       overviewPath: ./src/components/Toggletip/docs/overview.mdx
@@ -862,7 +917,7 @@ assets:
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/accessibility.mdx
       overviewPath: ./src/components/Tooltip/docs/overview.mdx
-  tooltip-definition:
+  definition-tooltip:
     status: stable
     framework: react
     demoLinks:
@@ -870,6 +925,8 @@ assets:
         name: Storybook
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-definitiontooltip
+    docs:
+      overviewPath: ./src/components/Tooltip/docs/definition-tooltip-overview.mdx
   tree-view:
     status: experimental
     framework: react
@@ -877,9 +934,12 @@ assets:
       - type: storybook
         name: Storybook
         action: link
-        url: https://react.carbondesignsystem.com/?path=/docs/experimental-unstable-treeview
+        url: https://react.carbondesignsystem.com/?path=/docs/components-treeview--default
     docs:
       overviewPath: ./src/components/TreeView/docs/overview.mdx
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/accessibility.mdx
   ui-shell-header:
     framework: react
     externalDocsUrl: https://www.carbondesignsystem.com/components/UI-shell-header/usage
@@ -890,6 +950,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-header/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-header/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-header/accessibility.mdx
       codePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-header/code.mdx
   ui-shell-left-panel:
     framework: react
@@ -901,6 +964,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/accessibility.mdx
       codePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/code.mdx
   ui-shell-right-panel:
     framework: react
@@ -912,6 +978,9 @@ assets:
         action: link
         url: https://react.carbondesignsystem.com/?path=/docs/components-ui-shell
     docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/accessibility.mdx
       codePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/code.mdx
   unordered-list:
     name: Unordered list
@@ -956,12 +1025,41 @@ assets:
     platform: web
     tags:
       - hook
+  use-layer:
+    name: useLayer
+    framework: react
+    status: stable
+    type: function
+    platform: web
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/components-layer--use-layer
+    tags:
+      - hook
+    docs:
+      overviewPath: ./src/components/Layer/docs/use-layer-overview.mdx
   use-layout-direction:
     name: unstable_useLayoutDirection
     framework: react
     status: experimental
     type: function
     platform: web
+    tags:
+      - hook
+  use-prefix:
+    name: usePrefix
+    description: A hook that returns the prefix used in our classes.
+    framework: react
+    status: stable
+    type: function
+    platform: web
+    demoLinks:
+      - type: storybook
+        name: Storybook
+        action: link
+        url: https://react.carbondesignsystem.com/?path=/docs/hooks-useprefix--page
     tags:
       - hook
   use-theme:
@@ -972,3 +1070,5 @@ assets:
     platform: web
     tags:
       - hook
+    docs:
+      overviewPath: ./src/components/Theme/docs/use-theme-overview.mdx

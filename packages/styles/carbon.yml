@@ -502,6 +502,15 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/overflow-menu/accessibility.mdx
+  overflow-menu-v2:
+    name: Overflow menu v2
+    status: experimental
+    type: component
+    platform: web
+    noIndex: true
+    thumbnailPath: ./thumbnails/overflow-menu.svg
+    tags:
+      - input-control
   pagination:
     name: Pagination
     description: Pagination is used for splitting up content or data into several pages, with a control for navigating to the next or previous page.
@@ -586,6 +595,16 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/radio-button/accessibility.mdx
+  read-only-states:
+    name: Read-only states
+    description: Read-only states are applied to components when the user is allowed to review but not modify the component. It removes all interactive functions from the component.
+    externalDocsUrl: https://carbondesignsystem.com/patterns/read-only-states-pattern
+    status: stable
+    type: pattern
+    platform: web
+    thumbnailPath: ./thumbnails/read-only.svg
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/read-only-states-pattern/index.mdx
   search:
     name: Search
     description: Search enables users to specify a word or a phrase to find relevant pieces of content without the use of navigation.
@@ -793,6 +812,7 @@ assets:
     tags:
       - content-element
     docs:
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/accessibility.mdx
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/toggletip/style.mdx
   tooltip:
@@ -810,8 +830,8 @@ assets:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/style.mdx
       accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tooltip/accessibility.mdx
-  tooltip-definition:
-    name: Tooltip definition
+  definition-tooltip:
+    name: Definition tooltip
     description: The DefinitionTooltip component is used to provide additional information about a particular term or phrase in text content. It is similar to a Tooltip component but has fewer alignment options and has a slightly different interaction pattern.
     status: stable
     type: component
@@ -826,9 +846,14 @@ assets:
     type: component
     platform: web
     noIndex: true
+    externalDocsUrl: https://carbondesignsystem.com/components/tree-view/usage
     thumbnailPath: ./thumbnails/tree-view.svg
     tags:
       - contextual-navigation
+    docs:
+      usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/usage.mdx
+      stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/style.mdx
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/tree-view/accessibility.mdx
   ui-shell-header:
     name: UI shell header
     description: This header is part of the Carbon UI shell. A shell is a collection of components shared by all products within a platform. It provides a common set of interaction patterns that persist between and across products.
@@ -857,6 +882,7 @@ assets:
     tags:
       - shell
     docs:
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/accessibility.mdx
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-left-panel/style.mdx
   ui-shell-right-panel:
@@ -871,5 +897,6 @@ assets:
     tags:
       - shell
     docs:
+      accessibilityPath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/accessibility.mdx
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/usage.mdx
       stylePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/components/UI-shell-right-panel/style.mdx
