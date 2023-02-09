@@ -51,23 +51,53 @@ export default {
 
 export const Default = () => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <ToggletipLabel>Toggletip label</ToggletipLabel>
-      <Toggletip defaultOpen>
-        <ToggletipButton label="Show information">
-          <Information />
-        </ToggletipButton>
-        <ToggletipContent>
-          <p>
-            Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
-            do eiusmod tempor incididunt ut fsil labore et dolore magna aliqua.
-          </p>
-          <ToggletipActions>
-            <Link href="#">Link action</Link>
-            <Button size="sm">Button</Button>
-          </ToggletipActions>
-        </ToggletipContent>
-      </Toggletip>
+    <div>
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <ToggletipLabel>Toggletip label</ToggletipLabel>
+        <Toggletip>
+          <ToggletipButton label="Show information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <ToggletipActions>
+              <Link href="#">Link action</Link>
+              <Button size="sm">Button</Button>
+            </ToggletipActions>
+          </ToggletipContent>
+        </Toggletip>
+      </div>
+      <br />
+      <br />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+        }}>
+        <ToggletipLabel>
+          Toggletip label -- using <code>defaultOpen</code> prop
+        </ToggletipLabel>
+        <Toggletip defaultOpen>
+          <ToggletipButton label="Show information">
+            <Information />
+          </ToggletipButton>
+          <ToggletipContent>
+            <p>
+              Lorem ipsum dolor sit amet, di os consectetur adipiscing elit, sed
+              do eiusmod tempor incididunt ut fsil labore et dolore magna
+              aliqua.
+            </p>
+            <ToggletipActions>
+              <Link href="#">Link action</Link>
+              <Button size="sm">Button</Button>
+            </ToggletipActions>
+          </ToggletipContent>
+        </Toggletip>
+      </div>
     </div>
   );
 };
@@ -76,7 +106,9 @@ const PlaygroundStory = (controls) => {
   const { align } = controls;
   return (
     <>
-      <ToggletipLabel>Toggletip label</ToggletipLabel>
+      <ToggletipLabel>
+        Toggletip label -- using <code>defaultOpen</code> prop
+      </ToggletipLabel>
       <Toggletip align={align} defaultOpen>
         <ToggletipButton label="Show information">
           <Information />
@@ -130,7 +162,6 @@ Playground.story = {
         style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
         }}>
         {story()}
       </div>

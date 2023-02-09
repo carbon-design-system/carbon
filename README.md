@@ -215,6 +215,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/matkrzy"><img src="https://avatars.githubusercontent.com/u/14991661?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mateusz Krzyżanowski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=matkrzy" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jpsorensen"><img src="https://avatars.githubusercontent.com/u/93107699?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jpsorensen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jpsorensen" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jkap"><img src="https://avatars.githubusercontent.com/u/224587?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jae kaplan</b></sub></a><br /><a href="#infra-jkap" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/sierrawetmore"><img src="https://avatars.githubusercontent.com/u/107062203?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sierra Wetmore</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sierrawetmore" title="Code">💻</a></td>
   </tr>
 </table>
 
