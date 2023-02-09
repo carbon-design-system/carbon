@@ -13,7 +13,7 @@
     "@carbon/colors": "link:../../",
     "@carbon/styles": "link:../../../styles",
     "change-case": "^4.1.1",
-    "next": "^10.0.7",
+    "next": "^12.1.0",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "sass": "^1.57.1"
