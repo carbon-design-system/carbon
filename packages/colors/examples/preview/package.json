@@ -6,16 +6,16 @@
   "browserslist": "last 2 versions",
   "source": "index.html",
   "scripts": {
-    "build": "parcel build --dist-dir build --public-url \"/colors/examples/preview\" index.html",
-    "develop": "parcel index.html --no-cache"
-  },
-  "devDependencies": {
-    "@carbon/colors": "^10.37.1",
-    "@parcel/transformer-sass": "^2.0.1",
-    "parcel": "^2.0.1"
+    "develop": "next",
+    "build": "next build && next export -o build"
   },
   "dependencies": {
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "@carbon/colors": "link:../../",
+    "@carbon/styles": "link:../../../styles",
+    "change-case": "^4.1.1",
+    "next": "^10.0.7",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "sass": "^1.57.1"
   }
 }
