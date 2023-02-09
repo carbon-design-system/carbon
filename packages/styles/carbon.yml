@@ -146,6 +146,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/common-actions.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/common-actions/index.mdx
   content-switcher:
@@ -212,6 +213,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/dialogs.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/dialog-pattern/index.mdx
   disabled-states:
@@ -222,6 +224,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/disabled-states.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/disabled-states/index.mdx
   disclosures:
@@ -232,6 +235,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/disclosure.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/disclosures-pattern/index.mdx
   dropdown:
@@ -257,6 +261,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/empty-states.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/empty-states-pattern/index.mdx
   file-uploader:
@@ -282,6 +287,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/filtering.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/filtering/index.mdx
   form:
@@ -307,6 +313,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/forms.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/forms-pattern/index.mdx
   global-header:
@@ -317,6 +324,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/global-header.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/global-header/index.mdx
   grid:
@@ -399,6 +407,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/loading-pattern.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/loading-pattern/index.mdx
   login:
@@ -409,6 +418,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/login.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/login-pattern/index.mdx
   modal:
@@ -460,6 +470,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/notifications.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/notification-pattern/index.mdx
   number-input:
@@ -485,6 +496,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/overflow-content.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/overflow-content/index.mdx
   overflow-menu:
@@ -603,6 +615,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/read-only.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/read-only-states-pattern/index.mdx
   search:
@@ -628,6 +641,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/search-pattern.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/search-pattern/index.mdx
   select:
@@ -668,6 +682,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/status-indicators.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/status-indicator-pattern/index.mdx
   structured-list:
@@ -749,6 +764,7 @@ assets:
     type: pattern
     platform: web
     thumbnailPath: ./thumbnails/text-toolbar.svg
+    noIndex: false
     docs:
       usagePath: https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/patterns/text-toolbar-pattern/index.mdx
   theme:
