@@ -13,7 +13,7 @@ import { property } from 'lit/decorators.js';
 import { repeat } from 'lit/directives/repeat.js';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
-// Below path will be there when an application installs `carbon-web-components` package.
+// Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
 import Delete16 from '@carbon/web-components/es/icons/delete/16';
@@ -115,9 +115,9 @@ class BXCEDemoDataTable extends LitElement {
    * @param lhs A value.
    * @param rhs Another value.
    * @returns
-   *   * `0` if the given two values are equal
-   *   * A negative value to sort `lhs` to an index lower than `rhs`
-   *   * A positive value to sort `rhs` to an index lower than `lhs`
+   *   `0` if the given two values are equal
+   *   A negative value to sort `lhs` to an index lower than `rhs`
+   *   A positive value to sort `rhs` to an index lower than `lhs`
    */
   private _compare(lhs, rhs) {
     if (typeof lhs === 'number' && typeof rhs === 'number') {

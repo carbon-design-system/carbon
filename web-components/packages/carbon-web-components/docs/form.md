@@ -38,7 +38,7 @@ import BXInput from '@carbon/web-components/es/components-react/input/input';
 
 ...
 
-// A React component that wraps form components from `carbon-web-components`
+// A React component that wraps form components from `@carbon/web-components`
 const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
   const validityMessage = !touched ? undefined : error;
   return (

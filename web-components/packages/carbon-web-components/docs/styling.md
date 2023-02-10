@@ -1,6 +1,6 @@
 # Using custom styles in components
 
-As Shadow DOM (one of the Web Components specs that `carbon-web-components` uses) promises, styles that `carbon-web-components` defines does not affect styles in your application, or vice versa.
+As Shadow DOM (one of the Web Components specs that `@carbon/web-components` uses) promises, styles that `@carbon/web-components` defines does not affect styles in your application, or vice versa.
 
 However, in cases where your application or a Carbon-derived style guide wants to change the styles of our components, there are a few options.
 

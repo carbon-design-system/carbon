@@ -9,7 +9,7 @@
 
 import { html, svg } from 'lit';
 
-// Below path will be there when an application installs `carbon-web-components` package.
+// Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
 import Add16 from '@carbon/web-components/es/icons/add/16';
