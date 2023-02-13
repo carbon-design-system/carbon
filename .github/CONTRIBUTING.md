@@ -274,7 +274,7 @@ GitHub.
    [Developer Handbook](../docs/developer-handbook.md) to read up on our best
    coding practices and proper commit messages.
 3. **Pull request:** Submit a PR. Be sure to fill out the template properly.
-4. **DCO** Sign the DCO by making a comment in the PR you just made.
+4. **Developer Certificate of Origin** Sign the [DCO](https://github.com/carbon-design-system/carbon-dco/blob/main/dco.md) by making a comment in the PR you just made.
 5. **Approval:** Get PR approved by design and developers, or make any necessary
    changes for approval. This process may be quick or take a few iterations of
    feedback-update.
