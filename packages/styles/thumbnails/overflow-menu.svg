@@ -1,40 +1,37 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <title>overflow-menu</title>
-    <defs>
-        <polygon id="path-1" points="0 24 108.293945 24 108.293945 3.48165941e-13 132 3.48165941e-13 132 24 132 98 0 98"></polygon>
-        <filter x="-7.6%" y="-8.2%" width="115.2%" height="120.4%" filterUnits="objectBoundingBox" id="filter-2">
-            <feOffset dx="0" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
-            <feGaussianBlur stdDeviation="3" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
-            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.3 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
-        </filter>
-        <path d="M0.75,1.5 C1.16421356,1.5 1.5,1.16421356 1.5,0.75 C1.5,0.335786438 1.16421356,0 0.75,0 C0.335786438,0 0,0.335786438 0,0.75 C0,1.16421356 0.335786438,1.5 0.75,1.5 Z M0.75,5.25 C1.16421356,5.25 1.5,4.91421356 1.5,4.5 C1.5,4.08578644 1.16421356,3.75 0.75,3.75 C0.335786438,3.75 0,4.08578644 0,4.5 C0,4.91421356 0.335786438,5.25 0.75,5.25 Z M0.75,9 C1.16421356,9 1.5,8.66421356 1.5,8.25 C1.5,7.83578644 1.16421356,7.5 0.75,7.5 C0.335786438,7.5 0,7.83578644 0,8.25 C0,8.66421356 0.335786438,9 0.75,9 Z" id="path-3"></path>
-    </defs>
-    <g id="overflow-menu" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Group" transform="translate(94.000000, 32.000000)">
-            <rect id="Rectangle-Copy-4" x="0" y="99" width="17" height="17"></rect>
-            <g id="Rectangle-2-Copy-17">
-                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
-                <use fill="#F3F3F3" fill-rule="evenodd" xlink:href="#path-1"></use>
-            </g>
-            <g transform="translate(114.000000, 6.000000)" id="icon/navigation/overflow-menu/16-copy-3">
-                <g id="overflow--menu" transform="translate(5.250000, 1.500000)">
-                    <mask id="mask-4" fill="white">
-                        <use xlink:href="#path-3"></use>
-                    </mask>
-                    <use id="Mask" fill="#000000" fill-rule="nonzero" xlink:href="#path-3"></use>
-                    <g id="Group" mask="url(#mask-4)">
-                        <g transform="translate(-5.250000, -1.500000)" id="icon-color">
-                            <rect id="Rectangle" fill="#171717" x="0" y="0" width="30" height="30"></rect>
-                        </g>
-                    </g>
-                </g>
-                <rect id="transparent-rectangle" x="0" y="0" width="12" height="12"></rect>
-            </g>
-            <rect id="Rectangle-6-Copy-31" fill="#A8A8A8" opacity="0.75" x="12" y="35" width="75" height="5"></rect>
-            <rect id="Rectangle-6-Copy-32" fill="#A8A8A8" opacity="0.75" x="12" y="84" width="75" height="5"></rect>
-            <rect id="Rectangle-2-Copy-28" fill="#DCDCDC" opacity="0.6" x="0" y="50" width="132" height="24"></rect>
-            <rect id="Rectangle-3-Copy-9" fill="#8D8D8D" x="12" y="59" width="54.7619048" height="5"></rect>
-        </g>
-    </g>
+<svg width="640" height="360" viewBox="0 0 640 360" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="overflow-menu">
+<g id="Group">
+<g id="Rectangle 2 Copy 17" filter="url(#filter0_d_718_5561)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M188 112H404.588V64H452V112V260H188V112Z" fill="#F3F3F3"/>
+</g>
+<g id="icon/navigation/overflow-menu/16 copy 3">
+<g id="overflow--menu">
+<path id="Mask" fill-rule="evenodd" clip-rule="evenodd" d="M429.5 80.5C429.5 81.3284 428.828 82 428 82C427.172 82 426.5 81.3284 426.5 80.5C426.5 79.6716 427.172 79 428 79C428.828 79 429.5 79.6716 429.5 80.5ZM429.5 88C429.5 88.8284 428.828 89.5 428 89.5C427.172 89.5 426.5 88.8284 426.5 88C426.5 87.1716 427.172 86.5 428 86.5C428.828 86.5 429.5 87.1716 429.5 88ZM428 97C428.828 97 429.5 96.3284 429.5 95.5C429.5 94.6716 428.828 94 428 94C427.172 94 426.5 94.6716 426.5 95.5C426.5 96.3284 427.172 97 428 97Z" fill="black"/>
+<mask id="mask0_718_5561" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="426" y="79" width="4" height="18">
+<path id="Mask_2" fill-rule="evenodd" clip-rule="evenodd" d="M429.5 80.5C429.5 81.3284 428.828 82 428 82C427.172 82 426.5 81.3284 426.5 80.5C426.5 79.6716 427.172 79 428 79C428.828 79 429.5 79.6716 429.5 80.5ZM429.5 88C429.5 88.8284 428.828 89.5 428 89.5C427.172 89.5 426.5 88.8284 426.5 88C426.5 87.1716 427.172 86.5 428 86.5C428.828 86.5 429.5 87.1716 429.5 88ZM428 97C428.828 97 429.5 96.3284 429.5 95.5C429.5 94.6716 428.828 94 428 94C427.172 94 426.5 94.6716 426.5 95.5C426.5 96.3284 427.172 97 428 97Z" fill="white"/>
+</mask>
+<g mask="url(#mask0_718_5561)">
+<g id="color/gray/100">
+<rect width="30" height="30" transform="matrix(2 0 0 2 416 76)" fill="#171717"/>
+</g>
+</g>
+</g>
+</g>
+<rect id="Rectangle 6 Copy 31" opacity="0.75" x="212" y="134" width="150" height="10" fill="#A8A8A8"/>
+<rect id="Rectangle 6 Copy 32" opacity="0.75" x="212" y="232" width="150" height="10" fill="#A8A8A8"/>
+<rect id="Rectangle 2 Copy 28" opacity="0.6" x="188" y="164" width="264" height="48" fill="#DCDCDC"/>
+<rect id="Rectangle 3 Copy 9" x="212" y="182" width="109.524" height="10" fill="#8D8D8D"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_d_718_5561" x="176" y="56" width="288" height="220" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="3"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.3 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_718_5561"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_718_5561" result="shape"/>
+</filter>
+</defs>
 </svg>
