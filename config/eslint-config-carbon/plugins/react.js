@@ -69,6 +69,7 @@ module.exports = {
         ],
         '@typescript-eslint/no-empty-function': 'off', // Disabled to support default empty functions used in PropTypes
         '@typescript-eslint/no-explicit-any': 'off', // TODO: Enable once stricter typings of internal utilities are supported
+        '@typescript-eslint/ban-ts-comment': 'off', // Disabled to allow some instances where we won't be able to fix type errors
       },
     },
     // Sometimes we'll want to define a quick component in a story to use as a
