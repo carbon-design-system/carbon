@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Copyright IBM Corp. 2021
  *
@@ -44,6 +45,7 @@ import { usePrefix } from './usePrefix';
  * @param {InputProps} props - The props passed to the component
  * @returns {NormalizedInputProps}
  */
+/** @type any */
 export function useNormalizedInputProps({
   id,
   readOnly,
