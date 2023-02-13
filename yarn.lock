@@ -2236,7 +2236,7 @@ __metadata:
     chalk: ^4.1.1
     change-case: ^4.1.2
     esbuild: ^0.17.0
-    execa: ^5.1.1
+    execa: ^6.0.0
     fast-glob: ^3.2.11
     fs-extra: ^10.0.0
     inquirer: ^8.1.0
@@ -15893,7 +15893,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execa@npm:^6.1.0":
+"execa@npm:^6.0.0, execa@npm:^6.1.0":
   version: 6.1.0
   resolution: "execa@npm:6.1.0"
   dependencies:
@@ -26387,7 +26387,7 @@ fsevents@^1.2.7:
   resolution: "promote-packages-to-latest@workspace:actions/promote"
   dependencies:
     "@actions/core": ^1.8.2
-    execa: ^5.1.1
+    execa: ^6.0.0
     fast-glob: ^3.2.11
     fs-extra: ^10.1.0
     got: ^11.8.0
