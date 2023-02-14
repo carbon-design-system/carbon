@@ -183,15 +183,31 @@ describe('TableSelectAll', () => {
 
       expect(screen.getByRole('checkbox').name).toEqual('select-all-input');
     });
-
-    // it('should respect onSelect prop', () => {
-    //   render(<TableSelectAll onSelect />);
-
-    //   expect();
-    // });
   });
 
   describe('behaves as expected', () => {
-    // Add tests for relevant component behavior. For more information, visit https://github.com/carbon-design-system/carbon/issues/10184#issuecomment-992978122
+    it('should respect onSelect prop', () => {
+      const onSelect = jest.fn();
+      render(
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableSelectAll
+                ariaLabel="Select all rows"
+                checked={true}
+                id="select-all"
+                name="select-all-input"
+                onSelect={onSelect}
+                indeterminate
+              />
+            </TableRow>
+          </TableHead>
+        </Table>
+      );
+
+      expect(onSelect).toHaveBeenCalledTimes(0);
+      userEvent.click(screen.getByRole('checkbox'));
+      expect(onSelect).toHaveBeenCalledTimes(1);
+    });
   });
 });
