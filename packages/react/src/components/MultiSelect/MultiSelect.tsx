@@ -276,6 +276,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     direction,
     selectedItems: selected,
     readOnly,
+    locale
   }: MultiSelectProps<ItemType>,
   ref: ForwardedRef<HTMLButtonElement>
 ) {
@@ -392,7 +393,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     selectedItems: controlledSelectedItems,
     itemToString,
     compareItems,
-    locale: 'en',
+    locale
   };
 
   if (selectionFeedback === 'fixed') {
