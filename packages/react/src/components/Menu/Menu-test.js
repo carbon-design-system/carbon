@@ -87,7 +87,7 @@ describe('MenuItem', () => {
   describe('renders as expected', () => {
     it('should be disabled', () => {
       render(
-        <Menu>
+        <Menu open>
           <MenuItem label="item" disabled />
         </Menu>
       );
@@ -104,7 +104,7 @@ describe('MenuItem', () => {
 
     it('should change kind based on prop', () => {
       render(
-        <Menu>
+        <Menu open>
           <MenuItem label="item" kind="danger" />
         </Menu>
       );
@@ -116,7 +116,7 @@ describe('MenuItem', () => {
 
     it('should render label', () => {
       render(
-        <Menu>
+        <Menu open>
           <MenuItem label="item" />
         </Menu>
       );
