@@ -1822,6 +1822,12 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@carbon/cra-template@workspace:packages/cra-template":
+  version: 0.0.0-use.local
+  resolution: "@carbon/cra-template@workspace:packages/cra-template"
+  languageName: unknown
+  linkType: soft
+
 "@carbon/elements@workspace:packages/elements":
   version: 0.0.0-use.local
   resolution: "@carbon/elements@workspace:packages/elements"
@@ -12688,12 +12694,6 @@ __metadata:
   checksum: e121f13f2b6af4a7c00de17984086a45b67eaaeeb0286a5cf67f2fdaf18d8ce6c2a9fe4ccfa37953e6982f55772f384f040f45f1961530655838c2b7486788a7
   languageName: node
   linkType: hard
-
-"cra-template@workspace:packages/cra-template":
-  version: 0.0.0-use.local
-  resolution: "cra-template@workspace:packages/cra-template"
-  languageName: unknown
-  linkType: soft
 
 "create-ecdh@npm:^4.0.0":
   version: 4.0.3
