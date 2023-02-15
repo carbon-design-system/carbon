@@ -253,7 +253,7 @@
     - app
     - coder
     - programmer
-- name: app-modernization
+- name: app--modernization
   friendly_name: App modernization
   aliases:
     - app modernization
