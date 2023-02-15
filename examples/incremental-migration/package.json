@@ -1,7 +1,7 @@
 {
   "name": "incremental-migration",
   "private": true,
-  "version": "0.22.0",
+  "version": "0.23.0-rc.0",
   "scripts": {
     "build": "next build",
     "dev": "next dev",
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@carbon/icons-react": "^10.49.0",
-    "@carbon/react": "^1.22.0",
+    "@carbon/react": "^1.23.0-rc.0",
     "carbon-components": "^10.57.0",
     "carbon-components-react": "^7.57.0",
     "carbon-icons": "^7.0.7",
