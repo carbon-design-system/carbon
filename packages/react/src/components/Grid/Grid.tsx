@@ -12,7 +12,7 @@ import { CSSGrid } from './CSSGrid';
 import { FlexGrid } from './FlexGrid';
 import { GridComponent, GridProps } from './GridTypes';
 
-function Grid(props: GridProps<unknown>) {
+function Grid<T extends React.ElementType>(props: GridProps<T>) {
   const enableCSSGrid = useFeatureFlag('enable-css-grid');
   if (enableCSSGrid) {
     return <CSSGrid {...props} />;

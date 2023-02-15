@@ -9,10 +9,11 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 import { GridSettings, useGridSettings } from './GridContext';
 import { GridComponent, GridProps } from './GridTypes';
 
-function CSSGrid<T>({
+function CSSGrid<T extends React.ElementType>({
   as: BaseComponent = 'div' as T,
   children,
   className: customClassName,
@@ -37,7 +38,8 @@ function CSSGrid<T>({
           as={BaseComponent}
           className={customClassName}
           mode={mode}
-          {...rest}>
+          {...rest}
+          >
           {children}
         </Subgrid>
       </GridSettings>
@@ -51,7 +53,7 @@ function CSSGrid<T>({
     [`${prefix}--css-grid--full-width`]: fullWidth,
   });
 
-  // TypeScript type validation reports conflicts on different instances of keyof JSX.IntrinsicElements
+  // cast as any to let TypeScript allow passing in attributes to base component
   const BaseComponentAsAny: any = BaseComponent
   return (
     <GridSettings mode="css-grid" subgrid>
@@ -98,12 +100,7 @@ CSSGrid.propTypes = {
 
 type SubgridMode = 'wide' | 'narrow' | 'condensed'
 
-interface SubgridProps {
-
-  /**
-   * Provide a custom element to render instead of the default <div>
-   */
-  as?: string | React.JSXElementConstructor<any>;
+interface SubgridBaseProps {
 
   /**
    * Pass in content that will be rendered within the `Subgrid`
@@ -122,9 +119,9 @@ interface SubgridProps {
 
 }
 
-type SubgridComponent = React.FC<SubgridProps>
+type SubgridProps = PolymorphicProps<any, SubgridBaseProps>
 
-const Subgrid: SubgridComponent = ({
+const Subgrid = ({
   as: BaseComponent = 'div',
   className: customClassName,
   children,

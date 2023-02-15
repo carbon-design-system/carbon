@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { RenderAsProps } from './RenderAsProps';
+import { PolymorphicProps } from '../../types/common';
 
 interface ColumnHangBaseProps {
 
@@ -25,17 +25,17 @@ interface ColumnHangBaseProps {
 
 }
 
-export type ColumnHangProps<T> = RenderAsProps<ColumnHangBaseProps, T>
+export type ColumnHangProps<T extends React.ElementType> = PolymorphicProps<T, ColumnHangBaseProps>
 
 export interface ColumnHangComponent {
-  <T>(props: ColumnHangProps<T>, context?: any): React.ReactElement<any, any> | null;
+  <T extends React.ElementType>(props: ColumnHangProps<T>, context?: any): React.ReactElement<any, any> | null;
 }
 
 /**
  * Helper component for rendering content that hangs on the column. Useful when
  * trying to align content across different grid modes
  */
-function ColumnHang<T>({
+function ColumnHang<T extends React.ElementType>({
   as: BaseComponent = 'div' as T,
   className: customClassName,
   children,
@@ -43,7 +43,7 @@ function ColumnHang<T>({
 }: ColumnHangProps<T>) {
   const prefix = usePrefix();
   const className = cx(customClassName, `${prefix}--grid-column-hang`);
-  // TypeScript type validation reports conflicts on different instances of keyof JSX.IntrinsicElements
+  // cast as any to let TypeScript allow passing in attributes to base component
   const BaseComponentAsAny: any = BaseComponent
   return (
     <BaseComponentAsAny {...rest} className={className}>

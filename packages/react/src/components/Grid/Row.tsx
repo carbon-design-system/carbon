@@ -9,7 +9,7 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
-import { RenderAsProps } from './RenderAsProps';
+import { PolymorphicProps } from '../../types/common';
 
 export interface RowBaseProps {
 
@@ -37,13 +37,13 @@ export interface RowBaseProps {
 
 }
 
-export type RowProps<T> = RenderAsProps<RowBaseProps, T>
+export type RowProps<T extends React.ElementType> = PolymorphicProps<T, RowBaseProps>
 
 export interface RowComponent {
-  <T>(props: RowProps<T>, context?: any): React.ReactElement<any, any> | null;
+  <T extends React.ElementType>(props: RowProps<T>, context?: any): React.ReactElement<any, any> | null;
 }
 
-function Row<T>({
+function Row<T extends React.ElementType>({
   as: BaseComponent = 'div' as T,
   condensed = false,
   narrow = false,

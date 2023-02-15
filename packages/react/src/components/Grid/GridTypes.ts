@@ -4,7 +4,8 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-import { RenderAsProps } from './RenderAsProps';
+
+import { PolymorphicProps } from '../../types/common';
 
 interface GridBaseProps {
   /**
@@ -35,8 +36,14 @@ interface GridBaseProps {
   narrow?: boolean;
 }
 
-export type GridProps<T> = RenderAsProps<GridBaseProps, T>;
+export type GridProps<T extends React.ElementType> = PolymorphicProps<
+  T,
+  GridBaseProps
+>;
 
 export interface GridComponent {
-  <T>(props: GridProps<T>, context?: any): React.ReactElement<any, any> | null;
+  <T extends React.ElementType>(
+    props: GridProps<T>,
+    context?: any
+  ): React.ReactElement<any, any> | null;
 }

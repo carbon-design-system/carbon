@@ -12,7 +12,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { GridSettings } from './GridContext';
 import { GridComponent, GridProps } from './GridTypes';
 
-function FlexGrid<T>({
+function FlexGrid<T extends React.ElementType>({
   as: BaseComponent = 'div' as T,
   condensed = false,
   narrow = false,
@@ -28,7 +28,7 @@ function FlexGrid<T>({
     [`${prefix}--grid--narrow`]: narrow,
     [`${prefix}--grid--full-width`]: fullWidth,
   });
-  // TypeScript type validation reports conflicts on different instances of keyof JSX.IntrinsicElements
+  // cast as any to let TypeScript allow passing in attributes to base component
   const BaseComponentAsAny: any = BaseComponent
   return (
     <GridSettings mode="flexbox" subgrid={false}>

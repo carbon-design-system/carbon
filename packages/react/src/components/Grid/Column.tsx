@@ -10,8 +10,8 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 import { useGridSettings } from './GridContext';
-import { RenderAsProps } from './RenderAsProps';
 
 type ColumnSpanPercent = '25%' | '50%' | '75%' | '100%';
 
@@ -91,13 +91,13 @@ interface ColumnBaseProps {
 
 }
 
-export type ColumnProps<T> = RenderAsProps<ColumnBaseProps, T>
+export type ColumnProps<T extends React.ElementType> = PolymorphicProps<T, ColumnBaseProps>;
 
 export interface ColumnComponent {
-  <T>(props: ColumnProps<T>, context?: any): React.ReactElement<any, any> | null;
+  <T extends React.ElementType>(props: ColumnProps<T>, context?: any): React.ReactElement<any, any> | null;
 }
 
-function Column<T>({
+function Column<T extends React.ElementType>({
   as: BaseComponent = 'div' as T,
   children,
   className: customClassName,
@@ -135,7 +135,7 @@ function Column<T>({
     [`${prefix}--col`]: columnClassName.length === 0,
   });
 
-  // TypeScript type validation reports conflicts on different instances of keyof JSX.IntrinsicElements
+  // cast as any to let TypeScript allow passing in attributes to base component
   const BaseComponentAsAny: any = BaseComponent
   return (
     <BaseComponentAsAny className={className} {...rest}>
