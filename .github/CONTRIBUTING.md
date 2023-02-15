@@ -268,16 +268,18 @@ GitHub.
    (i.e. Don't open an issue for website documentation in the `carbon`
    monorepo.) We reserve the right to close any issues that haven't been filled
    out properly according to the issue template.
-2. **Contributor License Agreement:** Before you can contribute any code, we
-   need you to sign a Contributor License Agreement (CLA). Code doesn't just
-   mean "components"; if you're contributing to our website docs, you're
-   contributing code. ;)
-3. **Development environment:** If you haven't already, fork and clone whichever
+2. **Development environment:** If you haven't already, fork and clone whichever
    repo you want to contribute to. Then, create a new branch and add your
    contribution in it. Checkout our
    [Developer Handbook](../docs/developer-handbook.md) to read up on our best
    coding practices and proper commit messages.
-4. **Pull request:** Submit a PR. Be sure to fill out the template properly.
+3. **Pull request:** Submit a PR. Be sure to fill out the template properly.
+4. **Developer Certificate of Origin:** In order to contribute any code, we need
+   you to sign a Developer Certificate of Origin (DCO). Code doesn't just mean
+   "components"; if you're contributing to our website docs, you're contributing
+   code. Sign the
+   [DCO](https://github.com/carbon-design-system/carbon-dco/blob/main/dco.md) by
+   making a comment in the PR you just made.
 5. **Approval:** Get PR approved by design and developers, or make any necessary
    changes for approval. This process may be quick or take a few iterations of
    feedback-update.
