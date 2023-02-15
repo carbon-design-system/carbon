@@ -7,7 +7,8 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { mount } from 'enzyme';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 import InnerClickListener from '../InnerClickListener';
 
 describe('InnerClickListener', () => {
@@ -42,68 +43,74 @@ describe('InnerClickListener', () => {
     handleRefSpy.mockRestore();
   });
 
-  it('should render', () => {
-    const wrapper = mount(
-      <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
-        <InnerChild />
-      </InnerClickListener>
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
+  describe('renders as expected - Component API', () => {
+    it('should render', () => {
+      const { container } = render(
+        <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
+          <InnerChild />
+        </InnerClickListener>
+      );
 
-  it('should call `handleRef` when mounting', () => {
-    mount(
-      <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
-        <InnerChild />
-      </InnerClickListener>
-    );
-    expect(handleRefSpy).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call `onClickOutside` when clicked outside the node that has the ref', () => {
-    const rootNode = document.createElement('div');
-    rootNode.setAttribute('id', 'root');
-
-    document.body.appendChild(rootNode);
-
-    mount(
-      <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
-        <InnerChild />
-      </InnerClickListener>,
-      {
-        attachTo: rootNode,
-      }
-    );
-
-    document.getElementById('2').click();
-    expect(onClickOutside).not.toHaveBeenCalled();
-
-    document.getElementById('1').click();
-    expect(onClickOutside).toHaveBeenCalledTimes(1);
-
-    document.dispatchEvent(new MouseEvent('click'));
-    expect(onClickOutside).toHaveBeenCalledTimes(2);
-  });
-
-  it('should not call `onClickOutside` if click target disappears', () => {
-    const rootNode2 = document.createElement('div');
-    rootNode2.setAttribute('id', 'root2');
-
-    document.body.appendChild(rootNode2);
-
-    mount(
-      <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
-        <InnerChild />
-      </InnerClickListener>,
-      {
-        attachTo: rootNode2,
-      }
-    );
-
-    document.getElementById('1').addEventListener('click', function () {
-      this.parentNode.removeChild(this);
+      expect(container).toMatchSnapshot();
     });
-    document.getElementById('1').click();
-    expect(onClickOutside).not.toHaveBeenCalled();
+  });
+
+  describe('behaves as expected', () => {
+    it('should call `handleRef` when render', () => {
+      render(
+        <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
+          <InnerChild />
+        </InnerClickListener>
+      );
+
+      expect(handleRefSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call `onClickOutside` when clicked outside the node that has the ref', () => {
+      const rootNode = document.createElement('div');
+      rootNode.setAttribute('id', 'root');
+
+      document.body.appendChild(rootNode);
+
+      render(
+        <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
+          <InnerChild />
+        </InnerClickListener>,
+        {
+          attachTo: rootNode,
+        }
+      );
+
+      userEvent.click(screen.getByText('2'));
+      expect(onClickOutside).not.toHaveBeenCalled();
+
+      userEvent.click(screen.getByText('1'));
+      expect(onClickOutside).toHaveBeenCalledTimes(1);
+
+      userEvent.click(screen.getByText('1'));
+      expect(onClickOutside).toHaveBeenCalledTimes(2);
+    });
+
+    it('should not call `onClickOutside` if click target disappears', () => {
+      const rootNode2 = document.createElement('div');
+      rootNode2.setAttribute('id', 'root2');
+
+      document.body.appendChild(rootNode2);
+
+      render(
+        <InnerClickListener refKey="innerRef" onClickOutside={onClickOutside}>
+          <InnerChild />
+        </InnerClickListener>,
+        {
+          attachTo: rootNode2,
+        }
+      );
+
+      screen.getByText('1').addEventListener('click', function () {
+        this.parentNode.removeChild(this);
+      });
+      userEvent.click(screen.getByText('1'));
+      expect(onClickOutside).not.toHaveBeenCalled();
+    });
   });
 });

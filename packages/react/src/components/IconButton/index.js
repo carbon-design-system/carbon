@@ -31,6 +31,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     <Tooltip
       align={align}
       className={`${prefix}--icon-tooltip`}
+      closeOnActivation
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
       label={label}
