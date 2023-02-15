@@ -8,13 +8,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-
-const IconSkeleton = ({ style, className, ...rest }) => {
+const IconSkeleton = ({ className, ...rest }) => {
+  const prefix = usePrefix();
   const props = {
-    style,
     ...rest,
   };
 
@@ -28,11 +26,7 @@ IconSkeleton.propTypes = {
    * Specify an optional className to add.
    */
   className: PropTypes.string,
-
-  /**
-   * The CSS styles.
-   */
-  style: PropTypes.object,
 };
 
 export default IconSkeleton;
+export { IconSkeleton };

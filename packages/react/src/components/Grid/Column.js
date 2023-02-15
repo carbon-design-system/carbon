@@ -5,16 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import * as FeatureFlags from '@carbon/feature-flags';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { useGridSettings } from './GridContext';
 
 function Column({
   as: BaseComponent = 'div',
   children,
-  className: containerClassName,
+  className: customClassName,
   sm,
   md,
   lg,
@@ -22,13 +23,30 @@ function Column({
   max,
   ...rest
 }) {
+  const { mode } = useGridSettings();
   const prefix = usePrefix();
-  const hasCSSGrid = useFeatureFlag('enable-css-grid');
-  const columnClassName = hasCSSGrid
-    ? getClassNameForBreakpoints([sm, md, lg, xlg, max], prefix)
-    : getClassNameForFlexGridBreakpoints([sm, md, lg, xlg, max], prefix);
 
-  const className = cx(containerClassName, columnClassName, {
+  if (mode === 'css-grid') {
+    return (
+      <CSSGridColumn
+        as={BaseComponent}
+        className={customClassName}
+        sm={sm}
+        md={md}
+        lg={lg}
+        xlg={xlg}
+        max={max}
+        {...rest}>
+        {children}
+      </CSSGridColumn>
+    );
+  }
+
+  const columnClassName = getClassNameForFlexGridBreakpoints(
+    [sm, md, lg, xlg, max],
+    prefix
+  );
+  const className = cx(customClassName, columnClassName, {
     [`${prefix}--col`]: columnClassName.length === 0,
   });
 
@@ -39,14 +57,28 @@ function Column({
   );
 }
 
-const spanPropType = PropTypes.oneOfType([
-  PropTypes.bool,
-  PropTypes.number,
-  PropTypes.shape({
-    span: PropTypes.number,
-    offset: PropTypes.number,
-  }),
-]);
+const percentSpanType = PropTypes.oneOf(['25%', '50%', '75%', '100%']);
+
+const spanPropType = FeatureFlags.enabled('enable-css-grid')
+  ? PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.shape({
+        span: PropTypes.oneOfType([PropTypes.number, percentSpanType]),
+        offset: PropTypes.number,
+        start: PropTypes.number,
+        end: PropTypes.number,
+      }),
+      percentSpanType,
+    ])
+  : PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.number,
+      PropTypes.shape({
+        span: PropTypes.number,
+        offset: PropTypes.number,
+      }),
+    ]);
 
 Column.propTypes = {
   /**
@@ -105,6 +137,106 @@ Column.propTypes = {
   xlg: spanPropType,
 };
 
+function CSSGridColumn({
+  as: BaseComponent = 'div',
+  children,
+  className: containerClassName,
+  sm,
+  md,
+  lg,
+  xlg,
+  max,
+  span,
+  ...rest
+}) {
+  const prefix = usePrefix();
+  const breakpointClassName = getClassNameForBreakpoints(
+    [sm, md, lg, xlg, max],
+    prefix
+  );
+  const spanClassName = getClassNameForSpan(span, prefix);
+  const className = cx(containerClassName, breakpointClassName, spanClassName, {
+    [`${prefix}--css-grid-column`]: true,
+  });
+
+  return (
+    <BaseComponent className={className} {...rest}>
+      {children}
+    </BaseComponent>
+  );
+}
+
+CSSGridColumn.propTypes = {
+  /**
+   * Provide a custom element to render instead of the default <div>
+   */
+  as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
+
+  /**
+   * Pass in content that will be rendered within the `Column`
+   */
+  children: PropTypes.node,
+
+  /**
+   * Specify a custom className to be applied to the `Column`
+   */
+  className: PropTypes.string,
+
+  /**
+   * Specify column span for the `lg` breakpoint (Default breakpoint up to 1312px)
+   * This breakpoint supports 16 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   */
+  lg: spanPropType,
+
+  /**
+   * Specify column span for the `max` breakpoint. This breakpoint supports 16
+   * columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   */
+  max: spanPropType,
+
+  /**
+   * Specify column span for the `md` breakpoint (Default breakpoint up to 1056px)
+   * This breakpoint supports 8 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   */
+  md: spanPropType,
+
+  /**
+   * Specify column span for the `sm` breakpoint (Default breakpoint up to 672px)
+   * This breakpoint supports 4 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   */
+  sm: spanPropType,
+
+  /**
+   * Specify constant column span, start,  or end values that will not change
+   * based on breakpoint
+   */
+  span: PropTypes.oneOfType([
+    PropTypes.number,
+    percentSpanType,
+    PropTypes.shape({
+      span: PropTypes.oneOfType([PropTypes.number, percentSpanType]),
+      start: PropTypes.number,
+      end: PropTypes.number,
+    }),
+  ]),
+
+  /**
+   * Specify column span for the `xlg` breakpoint (Default breakpoint up to
+   * 1584px) This breakpoint supports 16 columns by default.
+   *
+   * @see https://www.carbondesignsystem.com/guidelines/layout#breakpoints
+   */
+  xlg: spanPropType,
+};
+
 const breakpointNames = ['sm', 'md', 'lg', 'xlg', 'max'];
 
 /**
@@ -136,6 +268,13 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
       continue;
     }
 
+    // If our breakpoint is a string, the user has specified a percent
+    // they'd like this column to span.
+    if (typeof breakpoint === 'string') {
+      classNames.push(`${prefix}--${name}:col-span-${breakpoint.slice(0, -1)}`);
+      continue;
+    }
+
     // If our breakpoint is a number, the user has specified the number of
     // columns they'd like this column to span
     if (typeof breakpoint === 'number') {
@@ -143,22 +282,25 @@ function getClassNameForBreakpoints(breakpoints, prefix) {
       continue;
     }
 
-    const { span, offset } = breakpoint;
+    const { span, offset, start, end } = breakpoint;
 
     if (typeof offset === 'number' && offset > 0) {
       classNames.push(`${prefix}--${name}:col-start-${offset + 1}`);
     }
 
-    if (typeof span === 'number') {
-      if (typeof offset === 'number' && offset > 0) {
-        classNames.push(`${prefix}--${name}:col-end-${offset + span + 1}`);
-      } else {
-        classNames.push(`${prefix}--${name}:col-span-${span}`);
-      }
+    if (typeof start === 'number') {
+      classNames.push(`${prefix}--${name}:col-start-${start}`);
     }
 
-    if (span === true) {
-      classNames.push(`${prefix}--${name}:col-span-auto`);
+    if (typeof end === 'number') {
+      classNames.push(`${prefix}--${name}:col-end-${end}`);
+    }
+
+    if (typeof span === 'number') {
+      classNames.push(`${prefix}--${name}:col-span-${span}`);
+    } else if (typeof span === 'string') {
+      classNames.push(`${prefix}--${name}:col-span-${span.slice(0, -1)}`);
+      continue;
     }
   }
 
@@ -210,6 +352,33 @@ function getClassNameForFlexGridBreakpoints(breakpoints, prefix) {
   }
 
   return classNames.join(' ');
+}
+
+/**
+ * Build the appropriate className for a span value
+ */
+function getClassNameForSpan(value, prefix) {
+  const classNames = [];
+
+  if (typeof value === 'number' || typeof value === 'string') {
+    classNames.push(`${prefix}--col-span-${value}`);
+  } else if (typeof value === 'object') {
+    const { span, start, end } = value;
+
+    if (span !== undefined && span !== null) {
+      classNames.push(`${prefix}--col-span-${span}`);
+    }
+
+    if (start !== undefined && start !== null) {
+      classNames.push(`${prefix}--col-start-${start}`);
+    }
+
+    if (end !== undefined && end !== null) {
+      classNames.push(`${prefix}--col-end-${end}`);
+    }
+  }
+
+  return classNames.join('');
 }
 
 export default Column;

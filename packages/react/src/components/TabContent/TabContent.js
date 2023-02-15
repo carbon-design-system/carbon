@@ -8,11 +8,9 @@
 import PropTypes from 'prop-types';
 import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { selectorTabbable } from '../../internal/keyboard/navigation';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 /**
  * Determine if the node within the provided ref contains content that is tabbable.
@@ -20,6 +18,7 @@ const { prefix } = settings;
 function useTabbableContent(ref) {
   const [hasTabbableContent, setHasTabbableContent] = useState(false);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useIsomorphicEffect(() => {
     if (ref.current) {
       setHasTabbableContent(ref.current.querySelector(selectorTabbable));
@@ -31,6 +30,7 @@ function useTabbableContent(ref) {
 
 const TabContent = (props) => {
   const { className, selected, children, ...other } = props;
+  const prefix = usePrefix();
   const tabContentClasses = classNames(`${prefix}--tab-content`, {
     [className]: className,
   });

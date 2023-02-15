@@ -5,5 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Select.Skeleton';
-export default from './Select';
+import Select from './Select';
+
+export { default as SelectSkeleton } from './Select.Skeleton';
+export default Select;
+export { Select };

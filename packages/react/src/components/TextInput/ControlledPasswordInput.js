@@ -1,12 +1,11 @@
 import React from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
-import { View16, ViewOff16, WarningFilled16 } from '@carbon/icons-react';
+import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
 import { textInputProps } from './util';
 import { warning } from '../../internal/warning';
-
-const { prefix } = settings;
+import deprecate from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
 
@@ -37,6 +36,8 @@ const ControlledPasswordInput = React.forwardRef(
     },
     ref
   ) {
+    const prefix = usePrefix();
+
     if (__DEV__) {
       warning(
         didWarnAboutDeprecation,
@@ -93,9 +94,9 @@ const ControlledPasswordInput = React.forwardRef(
     ) : null;
     const passwordIsVisible = type === 'text';
     const passwordVisibilityIcon = passwordIsVisible ? (
-      <ViewOff16 className={`${prefix}--icon-visibility-off`} />
+      <ViewOff className={`${prefix}--icon-visibility-off`} />
     ) : (
-      <View16 className={`${prefix}--icon-visibility-on`} />
+      <View className={`${prefix}--icon-visibility-on`} />
     );
     const passwordVisibilityToggleClasses = classNames(
       `${prefix}--text-input--password__visibility__toggle`,
@@ -141,9 +142,7 @@ const ControlledPasswordInput = React.forwardRef(
           className={`${prefix}--text-input__field-wrapper`}
           data-invalid={invalid || null}>
           {invalid && (
-            <WarningFilled16
-              className={`${prefix}--text-input__invalid-icon`}
-            />
+            <WarningFilled className={`${prefix}--text-input__invalid-icon`} />
           )}
           {input}
         </div>
@@ -208,9 +207,14 @@ ControlledPasswordInput.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * Specify light version or default version of this control
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `ControlledPasswordInput` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<input>`
@@ -235,9 +239,9 @@ ControlledPasswordInput.propTypes = {
   showPasswordLabel: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
+   * Specify the size of the Text Input.
    */
-  size: PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
@@ -258,14 +262,12 @@ ControlledPasswordInput.propTypes = {
 };
 
 ControlledPasswordInput.defaultProps = {
-  className: '${prefix}--text__input',
   disabled: false,
   onChange: () => {},
   onClick: () => {},
   invalid: false,
   invalidText: '',
   helperText: '',
-  light: false,
   size: '',
 };
 

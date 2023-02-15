@@ -18,6 +18,11 @@ describe('deprecated', () => {
   beforeEach(() => {
     jest.mock('fs', () => {
       const memfs = require('memfs');
+      // Note: it seems that memfs does not support this and it is something
+      // that fs-extra requires in order to operate. In the interim, we will
+      // point the native realpath to the default realpath to get around this
+      // issue.
+      memfs.fs.realpath.native = memfs.fs.realpath;
       vol = memfs.vol;
       return memfs.fs;
     });

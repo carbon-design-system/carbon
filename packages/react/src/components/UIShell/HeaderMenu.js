@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -27,9 +27,19 @@ class HeaderMenu extends React.Component {
     ...AriaLabelPropType,
 
     /**
+     * Optionally provide a custom class to apply to the underlying `<li>` node
+     */
+    className: PropTypes.string,
+
+    /**
      * Provide a custom ref handler for the menu button
      */
     focusRef: PropTypes.func,
+
+    /**
+     * Applies selected styles to the item if a user sets this to true and aria-current !== 'page'.
+     */
+    isCurrentPage: PropTypes.bool,
 
     /**
      * Provide a label for the link text
@@ -160,6 +170,7 @@ class HeaderMenu extends React.Component {
   render() {
     const prefix = this.context;
     const {
+      isCurrentPage,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
       className: customClassName,
@@ -174,7 +185,18 @@ class HeaderMenu extends React.Component {
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
     };
-    const className = cx(`${prefix}--header__submenu`, customClassName);
+    const itemClassName = cx({
+      [`${prefix}--header__submenu`]: true,
+      [customClassName]: !!customClassName,
+    });
+    const linkClassName = cx({
+      [`${prefix}--header__menu-item`]: true,
+      [`${prefix}--header__menu-title`]: true,
+      // We set the current class only if `isCurrentPage` is passed in and we do
+      // not have an `aria-current="page"` set for the breadcrumb item
+      [`${prefix}--header__menu-item--current`]: isCurrentPage,
+    });
+
     // Notes on eslint comments and based on the examples in:
     // https://www.w3.org/TR/wai-aria-practices/examples/menubar/menubar-1/menubar-1.html#
     // - The focus is handled by the <a> menuitem, onMouseOver is for mouse
@@ -185,14 +207,14 @@ class HeaderMenu extends React.Component {
     return (
       <li // eslint-disable-line jsx-a11y/mouse-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions
         {...rest}
-        className={className}
+        className={itemClassName}
         onKeyDown={this.handleMenuClose}
         onClick={this.handleOnClick}
         onBlur={this.handleOnBlur}>
         <a // eslint-disable-line jsx-a11y/role-supports-aria-props,jsx-a11y/anchor-is-valid
           aria-haspopup="menu" // eslint-disable-line jsx-a11y/aria-proptypes
           aria-expanded={this.state.expanded}
-          className={`${prefix}--header__menu-item ${prefix}--header__menu-title`}
+          className={linkClassName}
           href="#"
           onKeyDown={this.handleOnKeyDown}
           ref={this.handleMenuButtonRef}
@@ -202,7 +224,7 @@ class HeaderMenu extends React.Component {
           {MenuContent ? (
             <MenuContent />
           ) : (
-            <ChevronDown16 className={`${this.context}--header__menu-arrow`} />
+            <ChevronDown className={`${this.context}--header__menu-arrow`} />
           )}
         </a>
         <ul
@@ -235,4 +257,6 @@ const HeaderMenuForwardRef = React.forwardRef((props, ref) => {
 });
 
 HeaderMenuForwardRef.displayName = 'HeaderMenu';
+
+export { HeaderMenu };
 export default HeaderMenuForwardRef;

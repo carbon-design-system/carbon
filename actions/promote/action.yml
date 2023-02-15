@@ -1,0 +1,11 @@
+name: Promote Packages
+description: A custom action for promoting packages on npm to the latest version
+inputs:
+  NPM_TOKEN:
+    description: A token to execute npm tasks
+    required: true
+  DRY_RUN:
+    description: Specify whether the action should run without publishing
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

@@ -17,6 +17,8 @@ body:
       description: Which package(s) are you using?
       multiple: true
       options:
+        - '@carbon/react'
+        - '@carbon/styles'
         - 'carbon-components'
         - 'carbon-components-react'
         - '@carbon/colors'
@@ -32,6 +34,7 @@ body:
         - '@carbon/themes'
         - '@carbon/type'
         - '@carbon/upgrade'
+        - 'carbon-components-svelte'
     validations:
       required: true
   - type: dropdown
@@ -53,6 +56,12 @@ body:
       placeholder: e.g. v10.42.0
     validations:
       required: true
+  - type: input
+    id: react-version
+    attributes:
+      label: React version
+      description: 'Which React version are you using?'
+      placeholder: e.g. v17.0.2
   - type: textarea
     id: description
     attributes:
@@ -61,14 +70,14 @@ body:
       placeholder: What did you see? What did you expect to see?
     validations:
       required: true
+    validations:
+      required: true
   - type: input
     id: example-url
     attributes:
-      label: CodeSandbox example
-      description:
-        'Use our
-        [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox)
-        to re-create the issue'
+      label: Reproduction/example
+      description: |
+        Re-create the issue using [CodeSandbox](https://codesandbox.io/) or [Stackblitz](https://stackblitz.com). We have templates for [@carbon/react](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx), [@carbon/styles](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox-styles), and [carbon-components-react](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v10/packages/react/examples/codesandbox)
     validations:
       required: true
   - type: textarea
@@ -76,10 +85,26 @@ body:
     attributes:
       label: Steps to reproduce
       description:
-        'How do we reproduce the error you described using the CodeSandbox link
-        above?'
+        'How do we reproduce the error you described using the
+        reproduction/example link above?'
     validations:
       required: true
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Suggested Severity
+      description:
+        'Read more to understand our [severity levels](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/support.md#severity)'
+      options:
+        - 'Severity 1 = Must be fixed ASAP. The response must be swift. Someone from the team must drop all current work and be immediately reassigned to address the issue.'
+        - 'Severity 2 = User cannot complete task, and/or no workaround within the user experience of a given component.'
+        - 'Severity 3 = User can complete task, and/or has a workaround within the user experience of a given component.'
+        - 'Severity 4 = Unrelated to a user task, has a workaround or does not need a workaround.'
+  - type: input
+    id: application
+    attributes:
+      label: Application/PAL
+      description: "What application and/or PAL do you work on?"
   - type: checkboxes
     id: terms
     attributes:

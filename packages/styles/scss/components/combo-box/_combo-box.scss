@@ -8,6 +8,7 @@
 @use '../list-box';
 @use '../../config' as *;
 @use '../../theme' as *;
+@use '../../utilities/focus-outline' as *;
 
 /// Combo box styles
 /// @access public
@@ -31,6 +32,10 @@
     border-bottom-color: $border-subtle;
   }
 
+  .#{$prefix}--combo-box--input--focus.#{$prefix}--text-input {
+    @include focus-outline('outline');
+  }
+
   .#{$prefix}--combo-box .#{$prefix}--list-box__field,
   .#{$prefix}--combo-box.#{$prefix}--list-box[data-invalid]
     .#{$prefix}--list-box__field,
@@ -41,5 +46,21 @@
   .#{$prefix}--combo-box.#{$prefix}--list-box--disabled.#{$prefix}--list-box--warning
     .#{$prefix}--list-box__field {
     padding: 0;
+  }
+
+  // readonly
+  .#{$prefix}--combo-box--readonly,
+  .#{$prefix}--combo-box--readonly:hover {
+    background-color: transparent;
+  }
+
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__menu-icon,
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection {
+    cursor: default;
+  }
+
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__menu-icon svg,
+  .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection svg {
+    fill: $icon-disabled;
   }
 }

@@ -1,0 +1,19 @@
+@use '@carbon/react';
+
+body {
+  background: react.$background;
+  color: react.$text-primary;
+}
+
+.theme-section {
+  background: react.$background;
+  color: react.$text-primary;
+}
+
+:root {
+  @include react.theme(react.$g10);
+}
+
+[data-carbon-theme='g100'] {
+  @include react.theme(react.$g100);
+}

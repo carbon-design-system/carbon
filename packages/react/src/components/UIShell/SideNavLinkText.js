@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SideNavLinkText = ({ className: customClassName, children, ...rest }) => {
+function SideNavLinkText({ className: customClassName, children, ...rest }) {
   const prefix = usePrefix();
   const className = cx(`${prefix}--side-nav__link-text`, customClassName);
   return (
@@ -18,7 +18,7 @@ const SideNavLinkText = ({ className: customClassName, children, ...rest }) => {
       {children}
     </span>
   );
-};
+}
 
 SideNavLinkText.propTypes = {
   /**

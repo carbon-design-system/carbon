@@ -5,12 +5,12 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/components/multi-select/_multi-select.scss';
+import '../../../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
-import FilterableMultiSelect from '../../MultiSelect/FilterableMultiSelect';
+import FilterableMultiSelect from '../FilterableMultiSelect';
 
 describe('FilterableMultiSelect', () => {
   beforeEach(() => {
@@ -77,18 +77,6 @@ describe('FilterableMultiSelect', () => {
         <WrappedFilterableMultiSelect
           items={items}
           placeholder={placeholder}
-          invalid
-          invalidText="This is invalid text"
-        />
-        <WrappedFilterableMultiSelect
-          items={items}
-          placeholder={placeholder}
-          light
-        />
-        <WrappedFilterableMultiSelect
-          items={items}
-          placeholder={placeholder}
-          light
           invalid
           invalidText="This is invalid text"
         />

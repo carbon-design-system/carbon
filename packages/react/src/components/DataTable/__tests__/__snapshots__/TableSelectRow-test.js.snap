@@ -6,10 +6,12 @@ exports[`DataTable.TableSelectRow should render 1`] = `
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      aria-describedby={null}
+      aria-labelledby={null}
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -24,7 +26,7 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                 onSelect={[MockFunction]}
               >
                 <td
-                  className="bx--table-column-checkbox custom-class-name"
+                  className="cds--table-column-checkbox custom-class-name"
                 >
                   <ForwardRef(InlineCheckbox)
                     ariaLabel="Aria label"
@@ -33,18 +35,12 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                     name="select-all"
                     onClick={[MockFunction]}
                   >
-                    <InlineCheckbox
-                      ariaLabel="Aria label"
-                      checked={false}
-                      id="id"
-                      innerRef={null}
-                      name="select-all"
-                      onChange={[Function]}
-                      onClick={[MockFunction]}
+                    <div
+                      className="cds--checkbox--inline"
                     >
                       <input
                         checked={false}
-                        className="bx--checkbox"
+                        className="cds--checkbox"
                         id="id"
                         name="select-all"
                         onChange={[Function]}
@@ -53,10 +49,11 @@ exports[`DataTable.TableSelectRow should render 1`] = `
                       />
                       <label
                         aria-label="Aria label"
-                        className="bx--checkbox-label"
+                        className="cds--checkbox-label"
                         htmlFor="id"
+                        onClick={[Function]}
                       />
-                    </InlineCheckbox>
+                    </div>
                   </ForwardRef(InlineCheckbox)>
                 </td>
               </TableSelectRow>

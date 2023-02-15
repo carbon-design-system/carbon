@@ -6,11 +6,10 @@
  */
 
 import { render, cleanup } from '@carbon/test-utils/react';
-import { settings } from 'carbon-components';
 import React from 'react';
 import { CodeSnippetSkeleton } from '../';
 
-const { prefix } = settings;
+const prefix = 'cds';
 const snippetTypes = ['single', 'multi'];
 
 describe('CodeSnippetSkeleton', () => {

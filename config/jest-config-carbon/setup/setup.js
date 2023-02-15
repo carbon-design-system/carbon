@@ -18,7 +18,7 @@ global.requestAnimationFrame = function requestAnimationFrame(callback) {
 };
 
 const enzyme = jest.requireActual('enzyme');
-const Adapter = jest.requireActual('enzyme-adapter-react-16');
+const Adapter = jest.requireActual('@wojtekmaj/enzyme-adapter-react-17');
 
 enzyme.configure({ adapter: new Adapter() });
 
@@ -48,4 +48,36 @@ if (global.window) {
       disconnect: jest.fn(),
     };
   });
+}
+
+if (global.window && global.AnimationEvent === undefined) {
+  // Reference: https://github.com/testing-library/react-testing-library/issues/892#issuecomment-808703402
+  class AnimationEvent extends Event {
+    constructor(type, animationEventInitDict = {}) {
+      const {
+        animationName = '',
+        elapsedTime = 0,
+        pseudoElement = '',
+        ...eventInitDict
+      } = animationEventInitDict;
+      super(type, eventInitDict);
+
+      this._animationName = animationName;
+      this._elapsedTime = elapsedTime;
+      this._pseudoElement = pseudoElement;
+    }
+
+    get animationName() {
+      return this._animationName;
+    }
+
+    get elapsedTime() {
+      return this._elapsedTime;
+    }
+
+    get pseudoElement() {
+      return this._pseudoElement;
+    }
+  }
+  global.AnimationEvent = AnimationEvent;
 }

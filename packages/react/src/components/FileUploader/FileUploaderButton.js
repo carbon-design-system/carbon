@@ -12,6 +12,8 @@ import { matches, keys } from '../../internal/keyboard';
 import { ButtonKinds } from '../../prop-types/types';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
+import deprecate from '../../prop-types/deprecate';
 
 function noop() {}
 
@@ -25,10 +27,10 @@ function FileUploaderButton({
   labelText: ownerLabelText = 'Add file',
   multiple = false,
   onChange = noop,
-  role = 'button',
   name,
-  size,
-  tabIndex = 0,
+  size = 'md',
+  // eslint-disable-next-line react/prop-types
+  innerRef,
   ...other
 }) {
   const prefix = usePrefix();
@@ -52,6 +54,7 @@ function FileUploaderButton({
 
   function onClick(event) {
     event.target.value = null;
+    inputNode.current.click();
   }
 
   function onKeyDown(event) {
@@ -75,16 +78,20 @@ function FileUploaderButton({
 
   return (
     <>
-      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
-      <label
-        tabIndex={disabled ? -1 : tabIndex || 0}
+      <button
+        type="button"
+        disabled={disabled}
         className={classes}
+        onClick={onClick}
         onKeyDown={onKeyDown}
-        htmlFor={inputId}
         {...other}>
-        <span role={role} aria-disabled={disabled}>
-          {labelText}
-        </span>
+        {labelText}
+      </button>
+      <label
+        className={`${prefix}--visually-hidden`}
+        ref={innerRef}
+        htmlFor={inputId}>
+        <span>{labelText}</span>
       </label>
       <input
         className={`${prefix}--visually-hidden`}
@@ -97,7 +104,6 @@ function FileUploaderButton({
         accept={accept}
         name={name}
         onChange={handleOnChange}
-        onClick={onClick}
       />
     </>
   );
@@ -131,7 +137,7 @@ FileUploaderButton.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * Provide a unique id for the underlying <input> node
+   * Provide a unique id for the underlying `<input>` node
    */
   id: PropTypes.string,
 
@@ -142,23 +148,17 @@ FileUploaderButton.propTypes = {
   labelText: PropTypes.node,
 
   /**
-   * Specify whether you want the component to list the files that have been
-   * submitted to be uploaded
-   */
-  listFiles: PropTypes.bool,
-
-  /**
    * Specify if the component should accept multiple files to upload
    */
   multiple: PropTypes.bool,
 
   /**
-   * Provide a name for the underlying <input> node
+   * Provide a name for the underlying `<input>` node
    */
   name: PropTypes.string,
 
   /**
-   * Provide an optional `onChange` hook that is called each time the <input>
+   * Provide an optional `onChange` hook that is called each time the `<input>`
    * value changes
    */
   onChange: PropTypes.func,
@@ -170,21 +170,26 @@ FileUploaderButton.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Provide an accessibility role for the <FileUploaderButton>
+   * Provide an accessibility role for the `<FileUploaderButton>`
    */
   role: PropTypes.string,
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available
-   * sizes. For `default` buttons, this prop can remain unspecified.
-   * V11: `default`, `field`, and `small` will be removed
+   * sizes.
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg'])
+    : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
 
   /**
-   * Provide a custom tabIndex value for the <FileUploaderButton>
+   * Provide a custom tabIndex value for the `<FileUploaderButton>`
    */
-  tabIndex: PropTypes.number,
+  tabIndex: deprecate(
+    PropTypes.number,
+    'The `tabIndex` prop for `FileUploaderButton` has ' +
+      'been deprecated since it now renders a button element by default.'
+  ),
 };
 
 export default FileUploaderButton;

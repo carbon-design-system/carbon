@@ -8,7 +8,7 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../button/tokens' as button;
 @use '../../utilities/box-shadow' as *;
@@ -16,6 +16,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/z-index' as *;
 
 /// Overflow menu styles
 /// @access public
@@ -42,7 +43,7 @@
     }
 
     &:hover {
-      background-color: $background-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -51,8 +52,6 @@
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu--xl,
   .#{$prefix}--overflow-menu--lg {
     width: rem(48px);
     height: rem(48px);
@@ -79,13 +78,17 @@
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open,
   .#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open
     .#{$prefix}--overflow-menu__trigger {
-    background-color: $field-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--overflow-menu__icon {
     width: rem(16px);
     height: rem(16px);
     fill: $icon-primary;
+  }
+
+  .#{$prefix}--overflow-menu__wrapper {
+    line-height: 0;
   }
 
   .#{$prefix}--overflow-menu-options {
@@ -110,6 +113,10 @@
       content: '';
       transition: background-color $duration-fast-02
         motion(entrance, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 
@@ -118,17 +125,18 @@
   }
 
   .#{$prefix}--overflow-menu-options--light {
-    background-color: $field-02;
+    background-color: $layer;
+
     &::after {
-      background-color: $field-02;
+      background-color: $layer;
     }
   }
 
   .#{$prefix}--overflow-menu.#{$prefix}--overflow-menu--light.#{$prefix}--overflow-menu--open:hover {
-    background-color: $field-02;
+    background-color: $layer;
   }
 
-  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']::after {
+  .#{$prefix}--overflow-menu-options[data-floating-menu-direction='bottom']:not(.#{$prefix}--breadcrumb-menu-options)::after {
     top: rem(-3px);
     left: 0;
     width: rem(40px);
@@ -161,19 +169,19 @@
     &[data-floating-menu-direction='top']::after {
       width: rem(32px);
     }
+
     &[data-floating-menu-direction='left']::after,
     &[data-floating-menu-direction='right']::after {
       height: rem(32px);
     }
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu-options--xl.#{$prefix}--overflow-menu-options,
   .#{$prefix}--overflow-menu-options--lg.#{$prefix}--overflow-menu-options {
     &[data-floating-menu-direction='bottom']::after,
     &[data-floating-menu-direction='top']::after {
       width: rem(48px);
     }
+
     &[data-floating-menu-direction='left']::after,
     &[data-floating-menu-direction='right']::after {
       height: rem(48px);
@@ -217,9 +225,6 @@
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--overflow-menu-options--xl
-    .#{$prefix}--overflow-menu-options__option,
   .#{$prefix}--overflow-menu-options--lg
     .#{$prefix}--overflow-menu-options__option {
     height: rem(48px);
@@ -230,7 +235,7 @@
   }
 
   .#{$prefix}--overflow-menu--light .#{$prefix}--overflow-menu--divider {
-    border-top: 1px solid $decorative-01;
+    border-top: 1px solid $border-subtle;
   }
 
   a.#{$prefix}--overflow-menu-options__btn::before {
@@ -241,7 +246,7 @@
   }
 
   .#{$prefix}--overflow-menu-options__btn {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     display: inline-flex;
@@ -252,7 +257,7 @@
     padding: 0 $spacing-05;
     border: none;
     background-color: transparent;
-    color: $text-02;
+    color: $text-secondary;
     cursor: pointer;
     font-family: inherit;
     font-weight: 400;
@@ -262,7 +267,7 @@
       color $duration-fast-02 motion(entrance, productive);
 
     &:hover {
-      color: $text-01;
+      color: $text-primary;
     }
 
     &:focus {
@@ -312,7 +317,7 @@
   .#{$prefix}--overflow-menu-options__option--disabled
     .#{$prefix}--overflow-menu-options__btn {
     color: $text-disabled;
-    pointer-events: none;
+    cursor: not-allowed;
 
     &:hover,
     &:active,

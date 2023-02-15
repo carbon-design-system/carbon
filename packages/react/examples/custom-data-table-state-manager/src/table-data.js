@@ -21,7 +21,7 @@ export const columns = [
   },
   {
     id: 'attachedGroups',
-    title: 'Attached Groups',
+    title: 'Attached groups',
   },
   {
     id: 'status',

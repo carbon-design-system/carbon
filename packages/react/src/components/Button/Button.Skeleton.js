@@ -8,11 +8,16 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import cx from 'classnames';
-import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
 
-const ButtonSkeleton = ({ className, small, href, size, ...rest }) => {
-  const enabled = useFeatureFlag('enable-v11-release');
+const ButtonSkeleton = ({
+  className,
+  small = false,
+  href,
+  size = FeatureFlags.enabled('enable-v11-release') ? 'lg' : 'default',
+  ...rest
+}) => {
   const prefix = usePrefix();
 
   const buttonClasses = cx(className, {
@@ -20,10 +25,9 @@ const ButtonSkeleton = ({ className, small, href, size, ...rest }) => {
     [`${prefix}--btn`]: true,
     [`${prefix}--btn--sm`]: small || size === 'sm',
     [`${prefix}--btn--md`]: size === 'field' || size === 'md',
-    // V11: change lg to xl
-    [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
-    // V11: change xl to 2xl
-    [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
+    [`${prefix}--btn--lg`]: size === 'lg',
+    [`${prefix}--btn--xl`]: size === 'xl',
+    [`${prefix}--btn--2xl`]: size === '2xl',
   });
 
   const commonProps = {
@@ -54,16 +58,18 @@ ButtonSkeleton.propTypes = {
    * For `default` buttons, this prop can remain unspecified or use `default`.
    * In the next major release of Carbon, `default`, `field`, and `small` will be removed
    */
-  size: PropTypes.oneOf([
-    'default',
-    'field',
-    'small',
-    'sm',
-    'md',
-    'lg',
-    'xl',
-    '2xl',
-  ]),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl'])
+    : PropTypes.oneOf([
+        'default',
+        'field',
+        'small',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+      ]),
 
   /**
    * Specify whether the Button should be a small variant
@@ -71,8 +77,5 @@ ButtonSkeleton.propTypes = {
   small: PropTypes.bool,
 };
 
-ButtonSkeleton.defaultProps = {
-  small: false,
-};
-
 export default ButtonSkeleton;
+export { ButtonSkeleton };

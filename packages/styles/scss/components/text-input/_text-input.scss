@@ -32,7 +32,7 @@
 @mixin text-input {
   .#{$prefix}--text-input {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     width: 100%;
@@ -56,8 +56,6 @@
     }
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--text-input--xl,
   .#{$prefix}--text-input--lg {
     height: rem(48px);
   }
@@ -120,8 +118,6 @@
     @include tooltip--placement('icon', 'bottom', 'center');
   }
 
-  .#{$prefix}--text-input--password__visibility,
-  // TODO: remove selector above
   .#{$prefix}--btn.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     @include focus-outline('reset');
 
@@ -183,11 +179,8 @@
     padding-right: rem(64px);
   }
 
-  .#{$prefix}--text-input--invalid +
-    .#{$prefix}--text-input--password__visibility,
-  // TODO: remove selector above
-  .#{$prefix}--text-input--invalid +
-    .#{$prefix}--text-input--password__visibility__toggle {
+  .#{$prefix}--text-input--invalid
+    + .#{$prefix}--text-input--password__visibility__toggle {
     right: $spacing-05;
   }
 
@@ -196,17 +189,29 @@
   }
 
   .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility
-    svg,
-  // TODO: remove selector above
-  .#{$prefix}--text-input:disabled
-    + .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger svg {
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger {
     cursor: not-allowed;
+  }
+
+  .#{$prefix}--text-input:disabled
+    ~ .#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg {
     fill: $icon-disabled;
 
     &:hover {
       fill: $icon-disabled;
     }
+  }
+
+  .#{$prefix}--text-input__counter-alert {
+    position: absolute;
+    overflow: hidden;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    margin: -1px;
+    clip: rect(0, 0, 0, 0);
   }
 
   //-----------------------------
@@ -216,7 +221,7 @@
     @include focus-outline('reset');
 
     border-bottom: 1px solid transparent;
-    background-color: $field-disabled;
+    background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
@@ -241,8 +246,6 @@
 
     box-shadow: none;
 
-    .#{$prefix}--text-input--password__visibility,
-    // TODO: remove selector above
     .#{$prefix}--text-input--password__visibility__toggle {
       right: $spacing-08;
     }
@@ -255,6 +258,8 @@
     @include skeleton;
   }
 
+  // Deprecated -- Styles have been moved to `fluid-text-input.scss`
+  // V12 - Remove this block
   //-----------------------------
   // Fluid Text Input
   //-----------------------------
@@ -270,6 +275,9 @@
     z-index: 1;
     top: rem(13px);
     left: $spacing-05;
+    display: flex;
+    height: rem(16px);
+    align-items: center;
     margin: 0;
   }
 
@@ -288,7 +296,7 @@
   }
 
   .#{$prefix}--form--fluid .#{$prefix}--text-input--invalid,
-  .#{$prefix}--form--fluid .#{$prefix}--text-input--warn {
+  .#{$prefix}--form--fluid .#{$prefix}--text-input--warning {
     border-bottom: none;
   }
 
@@ -296,7 +304,7 @@
     .#{$prefix}--text-input--invalid
     + .#{$prefix}--text-input__divider,
   .#{$prefix}--form--fluid
-    .#{$prefix}--text-input--warn
+    .#{$prefix}--text-input--warning
     + .#{$prefix}--text-input__divider {
     display: block;
     border-style: solid;
@@ -309,15 +317,17 @@
     top: rem(80px);
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--light {
-    background: $field-02;
-  }
-
   .#{$prefix}--form--fluid
     .#{$prefix}--text-input__field-wrapper[data-invalid]
-    > .#{$prefix}--text-input--invalid {
-    @include focus-outline('reset');
+    > .#{$prefix}--text-input--invalid,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning {
+    outline: none;
+  }
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input__field-wrapper--warning {
+    border-bottom: 1px solid $border-strong;
   }
 
   .#{$prefix}--form--fluid
@@ -326,11 +336,20 @@
   }
 
   .#{$prefix}--form--fluid
-    .#{$prefix}--text-input__field-wrapper[data-invalid]
-    > .#{$prefix}--text-input--invalid:focus {
+    .#{$prefix}--text-input__field-wrapper[data-invalid]:focus-within,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning:focus-within {
     @include focus-outline('outline');
   }
 
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper[data-invalid]
+    > .#{$prefix}--text-input--invalid:focus,
+  .#{$prefix}--form--fluid
+    .#{$prefix}--text-input__field-wrapper--warning
+    > .#{$prefix}--text-input--warning:focus {
+    outline: none;
+  }
   //-----------------------------
   // Inline Text Input
   //-----------------------------
@@ -350,8 +369,6 @@
     margin-top: rem(9px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--xl,
   .#{$prefix}--text-input-wrapper .#{$prefix}--label--inline--lg {
     margin-top: rem(17px);
   }
@@ -381,12 +398,41 @@
     flex-direction: column;
   }
 
+  .#{$prefix}--text-input-wrapper--inline .cds--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: rem(200px);
+    font-weight: 400;
+  }
+
+  .#{$prefix}--text-input-wrapper--inline--invalid .cds--form-requirement {
+    color: $text-error;
+  }
+
+  //-----------------------------
+  // Readonly
+  //-----------------------------
+
+  .#{$prefix}--form--fluid .#{$prefix}--text-input-wrapper--readonly,
+  .#{$prefix}--text-input-wrapper--readonly .#{$prefix}--text-input {
+    background: transparent;
+  }
+
   // Windows HCM fix
-  .#{$prefix}--text-input--password__visibility,
-    // TODO: remove selector above
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger svg,
-    .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger
+    svg,
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--text-input--password__visibility__toggle.#{$prefix}--tooltip__trigger:hover
     svg {
     @include high-contrast-mode('icon-fill');
+  }
+
+  .#{$prefix}--text-input__label-wrapper {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    .#{$prefix}--text-input__label-counter {
+      align-self: end;
+    }
   }
 }

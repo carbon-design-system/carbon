@@ -5,17 +5,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-
 import Search from '../Search';
+import { usePrefix } from '../../internal/usePrefix';
+import { composeEventHandlers } from '../../tools/events';
 
-const { prefix } = settings;
-
-function ExpandableSearch(props) {
+function ExpandableSearch({ onBlur, onChange, onExpand, onFocus, ...props }) {
   const [expanded, setExpanded] = useState(false);
+  const [hasContent, setHasContent] = useState(false);
   const searchRef = useRef(null);
+  const prefix = usePrefix();
 
   function handleFocus() {
     if (!expanded) {
@@ -28,31 +28,18 @@ function ExpandableSearch(props) {
       evt.relatedTarget &&
       evt.relatedTarget.classList.contains(`${prefix}--search-close`);
 
-    if (
-      expanded &&
-      !relatedTargetIsAllowed &&
-      !searchRef.current.state.hasContent
-    ) {
+    if (expanded && !relatedTargetIsAllowed && !hasContent) {
       setExpanded(false);
     }
   }
 
-  useEffect(() => {
-    function focusInput() {
-      if (!expanded && searchRef.current?.input) {
-        searchRef.current.input.focus();
-      }
-    }
+  function handleChange(evt) {
+    setHasContent(evt.target.value !== '');
+  }
 
-    if (searchRef.current?.magnifier) {
-      const { magnifier } = searchRef.current;
-      magnifier.addEventListener('click', focusInput);
-
-      return () => {
-        magnifier.removeEventListener('click', focusInput);
-      };
-    }
-  }, [expanded, searchRef]);
+  function handleExpand() {
+    searchRef.current.focus?.();
+  }
 
   const classes = classnames(
     `${prefix}--search--expandable`,
@@ -67,8 +54,10 @@ function ExpandableSearch(props) {
       {...props}
       ref={searchRef}
       className={classes}
-      onFocus={handleFocus}
-      onBlur={handleBlur}
+      onFocus={composeEventHandlers([onFocus, handleFocus])}
+      onBlur={composeEventHandlers([onBlur, handleBlur])}
+      onChange={composeEventHandlers([onChange, handleChange])}
+      onExpand={composeEventHandlers([onExpand, handleExpand])}
     />
   );
 }

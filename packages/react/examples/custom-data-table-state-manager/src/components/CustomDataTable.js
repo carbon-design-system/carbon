@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { useCallback, useState } from 'react';
-import { Delete16 as Delete } from '@carbon/icons-react';
+import { Delete } from '@carbon/icons-react';
 import {
   TableContainer,
   Table,

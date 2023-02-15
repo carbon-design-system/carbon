@@ -5,15 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import ToggleNext from './next/Toggle';
-import ToggleClassic from './Toggle';
-import { createComponentToggle } from '../../internal/ComponentToggle';
+import Toggle from './Toggle';
 
-const Toggle = createComponentToggle({
-  name: 'Toggle',
-  next: ToggleNext,
-  classic: ToggleClassic,
-});
-
-export { default as ToggleSkeleton } from './Toggle.Skeleton';
+export * from './Toggle.Skeleton';
 export default Toggle;
+export { Toggle };

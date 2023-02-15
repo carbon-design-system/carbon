@@ -35,3 +35,4 @@ TextAreaSkeleton.propTypes = {
 };
 
 export default TextAreaSkeleton;
+export { TextAreaSkeleton };

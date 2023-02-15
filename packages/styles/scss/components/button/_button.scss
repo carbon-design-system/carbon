@@ -5,9 +5,9 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use '../../config' as *;
 @use 'vars' as *;
 @use 'mixins' as *;
-@use '../../config' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
 @use '../../type' as *;
@@ -15,7 +15,6 @@
 @use '../../utilities/focus-outline';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
-@use '../../utilities/tooltip' as *;
 @use '../../utilities/visually-hidden' as *;
 @use 'tokens' as *;
 
@@ -103,9 +102,9 @@
       transparent,
       transparent,
       $link-primary,
-      $background-hover,
+      $layer-hover,
       currentColor,
-      $background-active
+      $layer-active
     );
 
     padding: $button-padding-ghost;
@@ -145,118 +144,9 @@
     &.#{$prefix}--btn--md {
       padding: $button-padding-ghost-field;
     }
-  }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
-    @include tooltip--trigger('icon', 'bottom');
-
-    svg,
-    &:hover svg,
-    &:focus svg {
-      fill: currentColor;
-    }
-
-    &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::before,
-    &.#{$prefix}--btn--disabled.#{$prefix}--tooltip--a11y::after,
-    &.#{$prefix}--btn--disabled .#{$prefix}--assistive-text {
-      overflow: hidden;
-      margin: -1px;
-      clip: rect(0, 0, 0, 0);
-      opacity: 0;
-    }
-  }
-
-  // Allow pointer events on tooltip when tooltip is visible
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only:not(.#{$prefix}--tooltip--hidden)
-    .#{$prefix}--assistive-text {
-    pointer-events: all;
-  }
-
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus {
-    border-color: $focus;
-  }
-
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:active:not([disabled]) {
-    border-color: transparent;
-  }
-
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger:focus
-    svg {
-    outline-color: transparent;
-  }
-
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:hover,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:focus,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger[disabled]:active {
-    cursor: not-allowed;
-    fill: $icon-on-color-disabled;
-  }
-
-  .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--top {
-    @include tooltip--trigger('icon', 'top');
-    @include tooltip--placement('icon', 'top', 'center');
-
-    &.#{$prefix}--tooltip--align-start {
-      @include tooltip--placement('icon', 'top', 'start');
-    }
-
-    &.#{$prefix}--tooltip--align-center {
-      @include tooltip--placement('icon', 'top', 'center');
-    }
-
-    &.#{$prefix}--tooltip--align-end {
-      @include tooltip--placement('icon', 'top', 'end');
-    }
-  }
-
-  .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--right {
-    @include tooltip--trigger('icon', 'right');
-    @include tooltip--placement('icon', 'right', 'center');
-
-    &.#{$prefix}--tooltip--align-start {
-      @include tooltip--placement('icon', 'right', 'start');
-    }
-
-    &.#{$prefix}--tooltip--align-center {
-      @include tooltip--placement('icon', 'right', 'center');
-    }
-
-    &.#{$prefix}--tooltip--align-end {
-      @include tooltip--placement('icon', 'right', 'end');
-    }
-  }
-
-  .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--bottom {
-    @include tooltip--trigger('icon', 'bottom');
-    @include tooltip--placement('icon', 'bottom', 'center');
-
-    &.#{$prefix}--tooltip--align-start {
-      @include tooltip--placement('icon', 'bottom', 'start');
-    }
-
-    &.#{$prefix}--tooltip--align-center {
-      @include tooltip--placement('icon', 'bottom', 'center');
-    }
-
-    &.#{$prefix}--tooltip--align-end {
-      @include tooltip--placement('icon', 'bottom', 'end');
-    }
-  }
-
-  .#{$prefix}--tooltip__trigger.#{$prefix}--btn--icon-only--left {
-    @include tooltip--trigger('icon', 'left');
-    @include tooltip--placement('icon', 'left', 'center');
-
-    &.#{$prefix}--tooltip--align-start {
-      @include tooltip--placement('icon', 'left', 'start');
-    }
-
-    &.#{$prefix}--tooltip--align-center {
-      @include tooltip--placement('icon', 'left', 'center');
-    }
-
-    &.#{$prefix}--tooltip--align-end {
-      @include tooltip--placement('icon', 'left', 'end');
+    &:not([disabled]) svg {
+      fill: $icon-primary;
     }
   }
 
@@ -329,8 +219,6 @@
       color: $text-on-color;
     }
 
-    // TODO: deprecate single dash tertiary
-    &-tertiary,
     &--tertiary {
       @include button-theme(
         transparent,
@@ -353,6 +241,7 @@
 
       &:active {
         border-color: $button-danger-active;
+        background-color: $button-danger-active;
         color: $text-on-color;
       }
 
@@ -368,8 +257,6 @@
       }
     }
 
-    // TODO: deprecate single dash ghost
-    &-ghost,
     &--ghost {
       @include button-theme(
         transparent,
@@ -421,15 +308,13 @@
     padding: $button-padding-sm;
   }
 
-  // V11: change xl to 2xl
-  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
+  .#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(80px);
   }
 
-  // V11: change lg to xl
-  .#{$prefix}--btn--lg:not(.#{$prefix}--btn--icon-only) {
+  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
 
     min-height: rem(64px);
@@ -444,7 +329,7 @@
 
   //expressive styles
   .#{$prefix}--btn--expressive {
-    @include type-style('body-short-02');
+    @include type-style('body-compact-02');
 
     min-height: 3rem;
   }
@@ -524,5 +409,14 @@
   // Windows HCM fix
   .#{$prefix}--btn:focus {
     @include high-contrast-mode('focus');
+  }
+
+  // Windows HCM fix
+  // stylelint-disable-next-line no-duplicate-selectors
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only
+    .#{$prefix}--btn__icon
+    path:not([data-icon-path]):not([fill='none']),
+  .#{$prefix}--btn--ghost.#{$prefix}--btn--icon-only .#{$prefix}--btn__icon {
+    @include high-contrast-mode('icon-fill');
   }
 }

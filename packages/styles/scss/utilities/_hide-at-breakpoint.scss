@@ -1,0 +1,34 @@
+@use '../breakpoint' as *;
+@use '../config';
+
+// Mixins that can be used to hide elements only at specific breakpoints.
+// Helpful for when you would like to hide elements outside of a Grid context
+@mixin hide-at-sm {
+  @include breakpoint-between('sm', 'md') {
+    display: none;
+  }
+}
+
+@mixin hide-at-md {
+  @include breakpoint-between('md', 'lg') {
+    display: none;
+  }
+}
+
+@mixin hide-at-lg {
+  @include breakpoint-between('lg', 'xlg') {
+    display: none;
+  }
+}
+
+@mixin hide-at-xlg {
+  @include breakpoint-between('xlg', 'max') {
+    display: none;
+  }
+}
+
+@mixin hide-at-max {
+  @include breakpoint-up('max') {
+    display: none;
+  }
+}

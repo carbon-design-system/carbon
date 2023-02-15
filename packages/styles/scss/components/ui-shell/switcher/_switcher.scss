@@ -45,7 +45,7 @@
   }
 
   .#{$prefix}--switcher__item-link {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: block;
     height: $spacing-07;

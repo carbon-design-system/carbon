@@ -8,11 +8,9 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
 import OverflowMenu from '../OverflowMenu';
-import { Settings16 } from '@carbon/icons-react';
-
-const { prefix } = settings;
+import { Settings } from '@carbon/icons-react';
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableToolbarMenu = ({
   className,
@@ -21,6 +19,7 @@ const TableToolbarMenu = ({
   children,
   ...rest
 }) => {
+  const prefix = usePrefix();
   const toolbarActionClasses = cx(
     className,
     `${prefix}--toolbar-action ${prefix}--overflow-menu`
@@ -40,7 +39,7 @@ const TableToolbarMenu = ({
 };
 
 TableToolbarMenu.defaultProps = {
-  renderIcon: Settings16,
+  renderIcon: Settings,
   iconDescription: 'Settings',
 };
 

@@ -78,7 +78,7 @@ the module or by using `enable`, `disable`, and `merge`.
   $feature-flags: (
     'feature-flag-a': false,
     'feature-flag-b': true,
-  ),
+  )
 );
 
 // Enable `feature-flag-a`

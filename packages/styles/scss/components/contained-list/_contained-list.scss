@@ -1,0 +1,209 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:list';
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../type' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/button-reset';
+
+/// Contained List styles
+/// @access public
+/// @group contained-list
+@mixin contained-list {
+  .#{$prefix}--contained-list__header {
+    position: sticky;
+    z-index: 1;
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding-inline: $spacing-05;
+  }
+
+  .#{$prefix}--contained-list__label {
+    width: 100%;
+  }
+
+  // Sizes
+
+  $sizes: (
+    // size: (height, item-block-padding)
+    'sm': (rem(32px), $spacing-03),
+    'md': (rem(40px), $spacing-04),
+    'lg': (rem(48px), $spacing-05),
+    'xl': (rem(64px), $spacing-06)
+  );
+
+  @each $size, $definition in $sizes {
+    $height: list.nth($definition, 1);
+    $item-block-padding: list.nth($definition, 2);
+
+    .#{$prefix}--contained-list--on-page.#{$prefix}--contained-list--#{$size}
+      .#{$prefix}--contained-list__header {
+      height: $height;
+    }
+
+    .#{$prefix}--contained-list--#{$size}
+      .#{$prefix}--contained-list-item__content,
+    .#{$prefix}--contained-list--#{$size}
+      .#{$prefix}--contained-list-item--clickable
+      .#{$prefix}--contained-list-item__content {
+      min-height: $height;
+      padding: calc(#{$item-block-padding} - #{rem(2px)}) $spacing-05;
+    }
+  }
+
+  // "On Page" variant
+
+  .#{$prefix}--contained-list--on-page + .#{$prefix}--contained-list--on-page {
+    margin-block-start: $spacing-05;
+  }
+
+  .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
+    @include type-style('heading-compact-01');
+
+    border-bottom: 1px solid $border-subtle;
+    background-color: $background;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--layer-two
+    .#{$prefix}--contained-list--on-page
+    .#{$prefix}--contained-list__header {
+    background-color: $layer-01;
+  }
+
+  .#{$prefix}--layer-three
+    .#{$prefix}--contained-list--on-page
+    .#{$prefix}--contained-list__header {
+    background-color: $layer-02;
+  }
+
+  // "Disclosed" variant
+
+  .#{$prefix}--contained-list--disclosed .#{$prefix}--contained-list__header {
+    @include type-style('label-01');
+
+    height: $spacing-07;
+    background-color: $layer;
+    color: $text-secondary;
+  }
+
+  // List item
+
+  .#{$prefix}--contained-list-item {
+    position: relative;
+  }
+
+  .#{$prefix}--contained-list-item:not(:first-of-type) {
+    margin-top: -1px;
+  }
+
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content {
+    @include button-reset.reset;
+
+    text-align: start;
+    transition: background-color $duration-moderate-01
+      motion(standard, productive);
+  }
+
+  .#{$prefix}--contained-list-item__content,
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content {
+    @include type-style('body-01');
+
+    color: $text-primary;
+  }
+
+  .#{$prefix}--contained-list-item:not(:last-of-type)::before {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 1px;
+    background-color: $border-subtle;
+    content: '';
+  }
+
+  .#{$prefix}--contained-list--inset-rulers
+    .#{$prefix}--contained-list-item:not(:last-of-type)::before {
+    right: $spacing-05;
+    left: $spacing-05;
+  }
+
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content:not(:disabled):hover {
+    background-color: $layer-hover;
+  }
+
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content:not(:disabled):active {
+    background-color: $layer-active;
+  }
+
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content:disabled {
+    color: $text-disabled;
+    cursor: not-allowed;
+  }
+
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content:focus {
+    outline: none;
+  }
+
+  .#{$prefix}--contained-list-item--clickable
+    .#{$prefix}--contained-list-item__content:focus::after {
+    @include focus-outline('outline');
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    content: '';
+  }
+
+  .#{$prefix}--contained-list-item--with-action
+    .#{$prefix}--contained-list-item__content {
+    padding-inline-end: $spacing-10;
+  }
+
+  .#{$prefix}--contained-list__action,
+  .#{$prefix}--contained-list-item__action {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: flex-end;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--contained-list__action > *,
+  .#{$prefix}--contained-list-item__action > * {
+    pointer-events: all;
+  }
+
+  .#{$prefix}--contained-list-item--with-icon
+    .#{$prefix}--contained-list-item__content {
+    display: grid;
+    column-gap: $spacing-04;
+    grid-template-columns: 1rem 1fr;
+  }
+
+  .#{$prefix}--contained-list-item__icon {
+    display: inline-flex;
+    padding-top: $spacing-01;
+  }
+}

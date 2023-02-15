@@ -5,5 +5,5 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './ProgressIndicator.Skeleton';
+export { default as ProgressIndicatorSkeleton } from './ProgressIndicator.Skeleton';
 export * from './ProgressIndicator';

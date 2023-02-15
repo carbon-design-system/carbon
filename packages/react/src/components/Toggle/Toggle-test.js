@@ -1,137 +1,176 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2021
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import Toggle from '../Toggle';
-import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
+import Toggle from './Toggle';
+import { render } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-const { prefix } = settings;
+const prefix = 'cds';
+
 describe('Toggle', () => {
-  const commonProps = {
-    'aria-label': 'Toggle label',
-    labelA: 'Off',
-    labelB: 'On',
+  const props = {
+    id: 'toggle-id',
+    labelA: 'labelA-unchecked',
+    labelB: 'labelB-checked',
     labelText: 'Toggle label',
+    toggled: false,
+    onToggle: () => {},
   };
+  let wrapper;
 
-  describe('Renders as expected', () => {
-    const wrapper = mount(<Toggle {...commonProps} id="toggle-1" />);
+  beforeEach(() => {
+    wrapper = render(<Toggle {...props} />);
+  });
 
-    const input = wrapper.find('input');
-
-    it('Switch and label Ids should match', () => {
-      const toggleLabel = wrapper.find(`.${prefix}--toggle__label`);
-      expect(input.id).toEqual(toggleLabel.htmlFor);
+  describe('renders as expected', () => {
+    it('button and label ids should match', () => {
+      const button = wrapper.getByRole('switch');
+      const label = wrapper.container.querySelector('label');
+      expect(button.id).toBe(label.htmlFor);
     });
 
-    it('should set defaultChecked as expected', () => {
-      expect(input.props().defaultChecked).toEqual(false);
-      wrapper.setProps({ defaultToggled: true });
-      expect(wrapper.find('input').props().defaultChecked).toEqual(true);
+    it('renders labelA when unchecked', () => {
+      wrapper.rerender(<Toggle {...props} toggled={false} />);
+      expect(wrapper.queryByText(props.labelA)).toBeTruthy();
+      expect(wrapper.queryByText(props.labelB)).toBeNull();
     });
 
-    it('Can set defaultToggled state', () => {
-      wrapper.setProps({ defaultToggled: true });
+    it('renders labelB when checked', () => {
+      wrapper.rerender(<Toggle {...props} toggled={true} />);
+      expect(wrapper.queryByText(props.labelA)).toBeNull();
+      expect(wrapper.queryByText(props.labelB)).toBeTruthy();
+    });
+
+    it('supports additional css class names', () => {
+      const className = 'some-additional-class';
+      wrapper.rerender(<Toggle {...props} className={className} />);
+
       expect(
-        wrapper.find(`.${prefix}--toggle-input`).props().defaultChecked
-      ).toEqual(true);
+        wrapper.container
+          .querySelector(`.${prefix}--toggle`)
+          .classList.contains(className)
+      ).toBe(true);
     });
 
-    it('Should add extra classes that are passed via className', () => {
-      wrapper.setProps({ className: 'extra-class' });
-      expect(wrapper.find('div').hasClass('extra-class')).toEqual(true);
+    it('supports sm size', () => {
+      expect(
+        wrapper.container
+          .querySelector(`.${prefix}--toggle__appearance`)
+          .classList.contains(`${prefix}--toggle__appearance--sm`)
+      ).toBe(false);
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__check`)
+      ).toBeNull();
+
+      wrapper.rerender(<Toggle {...props} size="sm" />);
+
+      expect(
+        wrapper.container
+          .querySelector(`.${prefix}--toggle__appearance`)
+          .classList.contains(`${prefix}--toggle__appearance--sm`)
+      ).toBe(true);
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__check`)
+      ).toBeTruthy();
     });
 
-    it('Can be disabled', () => {
-      wrapper.setProps({ disabled: true });
-      expect(wrapper.find(`.${prefix}--toggle-input`).props().disabled).toEqual(
-        true
+    it('supports to use top label as side label', () => {
+      wrapper.rerender(<Toggle {...props} hideLabel />);
+
+      expect(
+        wrapper.container
+          .querySelector(`.${prefix}--toggle__label-text`)
+          .classList.contains(`${prefix}--visually-hidden`)
+      ).toBe(true);
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__text`).textContent
+      ).toBe(props.labelText);
+    });
+
+    it("doesn't render sideLabel if props.hideLabel and props['aria-labelledby'] are provided", () => {
+      const externalElementId = 'external-element-id';
+      wrapper.rerender(
+        <Toggle {...props} hideLabel aria-labelledby={externalElementId} />
       );
-    });
 
-    it('Can have a labelA', () => {
-      wrapper.setProps({ labelA: 'labelA-test' });
-      expect(wrapper.find(`.${prefix}--toggle__text--off`).text()).toEqual(
-        'labelA-test'
-      );
-    });
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__text`)
+      ).toBeNull();
 
-    it('Can have a labelB', () => {
-      wrapper.setProps({ labelB: 'labelB-test' });
-      expect(wrapper.find(`.${prefix}--toggle__text--on`).text()).toEqual(
-        'labelB-test'
+      expect(wrapper.getByRole('switch').getAttribute('aria-labelledby')).toBe(
+        externalElementId
       );
+
+      expect(
+        wrapper.container.querySelector(`.${prefix}--toggle__label`).tagName
+      ).toBe('DIV');
     });
   });
 
-  it('toggled prop sets checked prop on input', () => {
-    const wrapper = mount(<Toggle {...commonProps} id="test" toggled />);
-
-    const input = () => wrapper.find('input');
-    expect(input().props().checked).toEqual(true);
-
-    wrapper.setProps({ toggled: false });
-    expect(input().props().checked).toEqual(false);
-  });
-
-  describe('events', () => {
-    it('passes along onChange to <input>', () => {
-      const onChange = jest.fn();
-      const id = 'test-input';
-      const wrapper = mount(
-        <Toggle {...commonProps} id={id} onChange={onChange} />
-      );
-
-      const input = wrapper.find('input');
-      const inputElement = input.instance();
-
-      inputElement.checked = true;
-      wrapper.find('input').simulate('change');
-
-      expect(
-        onChange.mock.calls.map((call) =>
-          call.map((arg, i) => (i > 0 ? arg : arg.target))
-        )
-      ).toEqual([[inputElement]]);
+  describe('behaves as expected', () => {
+    it('supports to be disabled', () => {
+      expect(wrapper.getByRole('switch').disabled).toBe(false);
+      wrapper.rerender(<Toggle {...props} disabled />);
+      expect(wrapper.getByRole('switch').disabled).toBe(true);
     });
 
-    it('should invoke onToggle with expected arguments', () => {
+    it('can be controlled with props.toggled', () => {
+      wrapper.rerender(<Toggle {...props} toggled={false} />);
+      expect(wrapper.getByRole('switch').getAttribute('aria-checked')).toBe(
+        'false'
+      );
+      wrapper.rerender(<Toggle {...props} toggled={true} />);
+      expect(wrapper.getByRole('switch').getAttribute('aria-checked')).toBe(
+        'true'
+      );
+    });
+
+    it('does not change value when readonly', () => {
+      const onClick = jest.fn();
       const onToggle = jest.fn();
-      const id = 'test-input';
-      const wrapper = mount(
-        <Toggle {...commonProps} id={id} onToggle={onToggle} />
+      wrapper.rerender(
+        <Toggle {...props} onClick={onClick} onToggle={onToggle} readOnly />
       );
 
-      const input = wrapper.find('input');
-      const inputElement = input.instance();
-
-      inputElement.checked = true;
-      wrapper.find('input').simulate('change');
-
-      const call = onToggle.mock.calls[0];
-
-      expect(call[0]).toEqual(true);
-      expect(call[1]).toEqual(id);
-      expect(call[2].target).toBe(inputElement);
+      expect(onClick).not.toHaveBeenCalled();
+      userEvent.click(wrapper.getByRole('switch'));
+      expect(onClick).toHaveBeenCalledTimes(1);
+      expect(onToggle).not.toHaveBeenCalled();
     });
   });
 
-  describe('ToggleSmall', () => {
-    const wrapper = mount(<Toggle {...commonProps} id="toggle-1" size="sm" />);
+  describe('emits events as expected', () => {
+    it('passes along props.onClick to button', () => {
+      const onClick = jest.fn();
+      wrapper.rerender(<Toggle {...props} onClick={onClick} />);
 
-    it('Sets the `ToggleSmall` className', () => {
-      const input = wrapper.find('input');
-      expect(input.hasClass(`${prefix}--toggle-input--small`)).toEqual(true);
+      expect(onClick).not.toHaveBeenCalled();
+      userEvent.click(wrapper.getByRole('switch'));
+      expect(onClick).toHaveBeenCalledTimes(1);
     });
 
-    it('Renders a checkmark SVG', () => {
-      const svg = wrapper.find(`.${prefix}--toggle__check`);
-      expect(svg.length).toBe(1);
+    it('emits props.onToggle when toggled and passes current state', () => {
+      const onToggle = jest.fn();
+
+      wrapper.rerender(
+        <Toggle {...props} onToggle={onToggle} toggled={false} />
+      );
+      expect(onToggle).not.toHaveBeenCalled();
+      userEvent.click(wrapper.getByRole('switch'));
+      expect(onToggle).toHaveBeenCalledTimes(1);
+      expect(onToggle.mock.calls[0][0]).toBe(true);
+
+      wrapper.rerender(
+        <Toggle {...props} onToggle={onToggle} toggled={true} />
+      );
+      userEvent.click(wrapper.getByRole('switch'));
+      expect(onToggle).toHaveBeenCalledTimes(2);
+      expect(onToggle.mock.calls[1][0]).toBe(false);
     });
   });
 });

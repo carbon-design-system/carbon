@@ -60,7 +60,7 @@ describe('DataTable.TableSelectAll', () => {
         </TableHead>
       </Table>
     );
-    wrapper.find('InlineCheckbox input').simulate('click');
+    wrapper.find('input').simulate('click');
     expect(mockProps.onSelect).toHaveBeenCalledTimes(1);
   });
 });

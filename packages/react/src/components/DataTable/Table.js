@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
-import deprecate from '../../prop-types/deprecate.js';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
+import { TableContext } from './TableContext';
 
 export const Table = ({
   className,
@@ -20,23 +18,27 @@ export const Table = ({
   size,
   isSortable,
   useStaticWidth,
-  shouldShowBorder,
   stickyHeader,
   overflowMenuOnHover,
   ...other
 }) => {
+  const { titleId, descriptionId } = useContext(TableContext);
+  const prefix = usePrefix();
   const componentClass = cx(`${prefix}--data-table`, className, {
     [`${prefix}--data-table--${size}`]: size,
     [`${prefix}--data-table--sort`]: isSortable,
     [`${prefix}--data-table--zebra`]: useZebraStyles,
     [`${prefix}--data-table--static`]: useStaticWidth,
-    [`${prefix}--data-table--no-border`]: !shouldShowBorder,
     [`${prefix}--data-table--sticky-header`]: stickyHeader,
     [`${prefix}--data-table--visible-overflow-menu`]: !overflowMenuOnHover,
   });
   const table = (
     <div className={`${prefix}--data-table-content`}>
-      <table {...other} className={componentClass}>
+      <table
+        aria-labelledby={titleId}
+        aria-describedby={descriptionId}
+        {...other}
+        className={componentClass}>
         {children}
       </table>
     </div>
@@ -69,30 +71,9 @@ Table.propTypes = {
   overflowMenuOnHover: PropTypes.bool,
 
   /**
-   * `false` If true, will remove the table border
-   */
-  shouldShowBorder: deprecate(
-    PropTypes.bool,
-    'The `shouldShowBorder` prop has been deprecated and can be safely removed.' +
-      'This prop will be removed in the next major release of ' +
-      '`carbon-components-react`'
-  ),
-
-  /**
    *  Change the row height of table. Currently supports `xs`, `sm`, `md`, `lg`, and `xl`.
-   *  The previous terms (`compact`, `short`, `normal`, and `tall`) will be removed in the next major release.
    */
-  size: PropTypes.oneOf([
-    'compact',
-    'short',
-    'normal',
-    'tall',
-    'xs',
-    'sm',
-    'md',
-    'lg',
-    'xl',
-  ]),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
 
   /**
    * `false` If true, will keep the header sticky (only data rows will scroll)

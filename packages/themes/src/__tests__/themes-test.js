@@ -7,26 +7,20 @@
  * @jest-environment node
  */
 
-const { themes, tokens } = require('../');
+import { themes } from '../';
+import { group, TokenFormat } from '../tokens';
 
-const tokenList = Object.keys(tokens).reduce((acc, key) => {
-  return acc.concat(tokens[key]);
-}, []);
+const tokens = group.getTokens().map((token) => {
+  return TokenFormat.convert({
+    name: token.name,
+    format: TokenFormat.formats.js,
+  });
+});
 
 describe('themes', () => {
-  describe.each(Object.keys(themes))('%s', (name) => {
-    const theme = themes[name];
-
-    // Test to make sure that all tokens defined exist in the theme
-    test.each(tokenList)('%s should be defined', (token) => {
+  describe.each(Object.entries(themes))('%s', (_name, theme) => {
+    test.each(tokens)('%s should be defined', (token) => {
       expect(theme[token]).toBeDefined();
-    });
-
-    // Test to make sure that all values in the them are actually tokens, useful
-    // for catching a case where we have an extra token that should be in the
-    // tokens export
-    test.each(Object.keys(theme))('%s should be a token', (token) => {
-      expect(tokenList.indexOf(token)).not.toBe(-1);
     });
   });
 });

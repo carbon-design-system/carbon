@@ -1,4 +1,4 @@
-import { Props } from '@storybook/addon-docs/blocks';
+import { Story, Props, Source, Preview } from '@storybook/addon-docs';
 
 # OverflowMenu
 
@@ -15,12 +15,38 @@ import { Props } from '@storybook/addon-docs/blocks';
 The overflow menu component is a clickable element that contains additional
 options that are available to the user, but there is a space constraint.
 
+<Preview>
+  <Story id="components-overflowmenu--default" />
+</Preview>
+
 ### `data-floating-menu-container`
 
 `OverflowMenu` uses React Portals to render the overflow menu into the DOM. To
 determine where in the DOM the menu will be placed, it looks for a parent
 element with the `data-floating-menu-container` attribute. If no parent with
 this attribute is found, the menu will be placed on `document.body`.
+
+## Render Custom Icon
+
+<Preview>
+  <Story id="components-overflowmenu--render-custom-icon" />
+</Preview>
+
+## Customizing the tooltip
+
+The `OverflowMenu` uses an `IconButton` under the hood, which means it can accept any props that an `IconButton` can receive and will succesfully pass those forward.
+To modify the tooltip's alignment, you may make use of the `align` property as described in the `IconButton` props:
+
+```jsx
+  <OverflowMenu ariaLabel="overflow-menu" align="bottom">
+    <OverflowMenuItem itemText="Stop app" />
+    <OverflowMenuItem itemText="Restart app" />
+    <OverflowMenuItem itemText="Rename app" />
+    <OverflowMenuItem itemText="Clone and move app" disabled requireTitle />
+    <OverflowMenuItem itemText="Edit routes and access" requireTitle />
+    <OverflowMenuItem hasDivider isDelete itemText="Delete app" />
+  </OverflowMenu>
+```
 
 ## Component API
 

@@ -10,6 +10,7 @@
 @use '../../../breakpoint' as *;
 @use '../../../config' as *;
 @use '../../../motion' as *;
+@use '../../../spacing' as *;
 @use '../../../theme' as *;
 @use '../../../type' as *;
 @use '../../../utilities/button-reset';
@@ -36,11 +37,15 @@
   .#{$prefix}--header__action {
     @include button-reset.reset();
 
+    display: inline-flex;
     width: mini-units(6);
     height: mini-units(6);
-    border: rem(2px) solid transparent;
+    border: rem(1px) solid transparent;
     transition: background-color $duration-fast-02,
       border-color $duration-fast-02;
+    @include breakpoint-down('md') {
+      min-width: $spacing-09;
+    }
   }
 
   .#{$prefix}--header__action
@@ -79,20 +84,20 @@
     background-color: $background-active;
   }
 
-  .#{$prefix}--header__action.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger {
+  .#{$prefix}--header__action.#{$prefix}--btn--icon-only {
+    align-items: center;
     justify-content: center;
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action
-    svg {
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action svg {
     fill: $icon-secondary;
   }
 
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action:hover
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:hover
     svg,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action:active
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action:active
     svg,
-  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--tooltip__trigger.#{$prefix}--header__action--active
+  .#{$prefix}--btn.#{$prefix}--btn--icon-only.#{$prefix}--header__action--active
     svg {
     fill: $icon-primary;
   }
@@ -122,7 +127,7 @@
   // Header - Name
   //--------------------------------------------------------------------------
   a.#{$prefix}--header__name {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     height: 100%;
@@ -136,6 +141,9 @@
     text-decoration: none;
     transition: border-color $duration-fast-02;
     user-select: none;
+    @include breakpoint-down('md') {
+      padding: 0 $spacing-05;
+    }
   }
 
   a.#{$prefix}--header__name:focus {
@@ -260,6 +268,22 @@
     border: 0;
   }
 
+  .#{$prefix}--header__submenu .#{$prefix}--header__menu {
+    a.#{$prefix}--header__menu-item[aria-current='page']::after,
+    .#{$prefix}--header__menu-item--current::after {
+      bottom: 0;
+      left: -2px;
+      border-bottom: none;
+      border-left: 3px solid $border-interactive;
+    }
+
+    a.#{$prefix}--header__menu-item[aria-current='page']:focus::after,
+    .#{$prefix}--header__menu-item--current:focus::after {
+      left: 0;
+      border-left: 3px solid $border-interactive;
+    }
+  }
+
   a.#{$prefix}--header__menu-item[aria-current='page']:focus,
   a.#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current:focus {
     border: 2px solid $focus;
@@ -276,7 +300,7 @@
   .#{$prefix}--header__menu-title[aria-expanded='true'] {
     // Note: needs to be higher than menu. Adding 1 here instead of moving to
     // the next level.
-    z-index: #{z('header') + 1};
+    z-index: #{z('header') + 2};
     background-color: $layer;
     color: $text-secondary;
   }
@@ -296,14 +320,14 @@
   .#{$prefix}--header__menu-title[aria-expanded='true']
     + .#{$prefix}--header__menu {
     position: absolute;
-    z-index: z('header');
+    z-index: #{z('header') + 1};
     bottom: 0;
     left: 0;
     display: flex;
     width: mini-units(25);
     flex-direction: column;
     background-color: $layer;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 8px 0 rgb(0 0 0 / 50%);
     transform: translateY(100%);
   }
 

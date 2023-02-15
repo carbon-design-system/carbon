@@ -4,12 +4,25 @@ on:
     types: [opened]
   issue_comment:
     types: [created]
+  workflow_call:
+    secrets:
+      APP_ID:
+        required: true
+      APP_PRIVATE_KEY:
+        required: true
+
 jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@main
-      - uses: ./actions/issues
+      - name: Generate token
+        uses: tibdex/github-app-token@v1
+        id: generate_token
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          app_id: ${{ secrets.APP_ID }}
+          private_key: ${{ secrets.APP_PRIVATE_KEY }}
+      - uses: carbon-design-system/carbon/actions/issues@main
+        with:
+          GITHUB_TOKEN: ${{ steps.generate_token.outputs.token }}
           enabled: true

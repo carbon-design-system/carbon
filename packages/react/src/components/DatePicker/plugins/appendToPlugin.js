@@ -23,14 +23,10 @@ export default (config) => (fp) => {
         _positionElement: positionElement,
       } = fp;
       const { appendTo } = fpConfig;
-      const {
-        left: containerLeft,
-        top: containerTop,
-      } = appendTo.getBoundingClientRect();
-      const {
-        left: refLeft,
-        bottom: refBottom,
-      } = positionElement.getBoundingClientRect();
+      const { left: containerLeft, top: containerTop } =
+        appendTo.getBoundingClientRect();
+      const { left: refLeft, bottom: refBottom } =
+        positionElement.getBoundingClientRect();
       if (
         (appendTo !== appendTo.ownerDocument.body ||
           containerLeft !== 0 ||

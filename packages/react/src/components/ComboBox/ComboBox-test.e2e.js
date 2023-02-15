@@ -5,9 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/components/combo-box/_combo-box.scss';
-import 'carbon-components/scss/components/list-box/_list-box.scss';
-import 'carbon-components/scss/components/text-input/_text-input.scss';
+import '../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
@@ -18,8 +16,7 @@ describe('ComboBox', () => {
     const items = [
       {
         id: 'option-0',
-        text:
-          'An example option that is really long to show what should be done to handle long text',
+        text: 'An example option that is really long to show what should be done to handle long text',
       },
       {
         id: 'option-1',
@@ -90,18 +87,6 @@ describe('ComboBox', () => {
             titleText="Disabled combobox"
             helperText="Combobox helper text"
             disabled
-          />
-        </div>
-        <div style={{ marginBottom: '2rem' }}>
-          <ComboBox
-            onChange={() => {}}
-            id="carbon-combobox"
-            items={items}
-            itemToString={(item) => (item ? item.text : '')}
-            placeholder="Filter..."
-            titleText="Light combobox"
-            helperText="Combobox helper text"
-            light
           />
         </div>
         <div style={{ marginBottom: '2rem' }}>

@@ -9,13 +9,11 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import window from 'window-or-global';
-import { settings } from 'carbon-components';
 import OptimizedResize from './OptimizedResize';
 import { selectorFocusable, selectorTabbable } from './keyboard/navigation';
 import { warning } from './warning';
 import wrapFocus from './wrapFocus';
-
-const { prefix } = settings;
+import { PrefixContext } from './usePrefix';
 
 /**
  * The structure for the position of floating menu.
@@ -138,6 +136,8 @@ const getFloatingPosition = ({
  * Useful when the container of the triggering element cannot have `overflow:visible` style, etc.
  */
 class FloatingMenu extends React.Component {
+  static contextType = PrefixContext;
+
   static propTypes = {
     /**
      * Contents to put into the floating menu.
@@ -277,10 +277,8 @@ class FloatingMenu extends React.Component {
       return;
     }
 
-    const {
-      menuOffset: oldMenuOffset = {},
-      menuDirection: oldMenuDirection,
-    } = prevProps;
+    const { menuOffset: oldMenuOffset = {}, menuDirection: oldMenuDirection } =
+      prevProps;
     const { menuOffset = {}, menuDirection } = this.props;
 
     if (
@@ -371,9 +369,7 @@ class FloatingMenu extends React.Component {
       tabbableNode || // First sequentially focusable node
       focusableNode || // First programmatic focusable node
       menuBody;
-    if (this.props.focusTrap) {
-      focusTarget.focus();
-    }
+    focusTarget.focus();
     if (focusTarget === menuBody && __DEV__) {
       warning(
         focusableNode === null,
@@ -464,6 +460,8 @@ class FloatingMenu extends React.Component {
   };
 
   render() {
+    const { context: prefix } = this;
+
     if (typeof document !== 'undefined') {
       const { focusTrap, target } = this.props;
       return ReactDOM.createPortal(

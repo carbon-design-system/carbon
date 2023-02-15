@@ -15,20 +15,21 @@ const { render } = SassRenderer.create(__dirname);
 
 describe('@carbon/grid', () => {
   test('Public API', async () => {
-    const { get } = await render(`
+    const { unwrap } = await render(`
       @use 'sass:meta';
       @use '../index.scss' as grid;
 
       $_: get('variables', meta.module-variables('grid'));
       $_: get('mixins', (
-        grid: meta.mixin-exists('css-grid', 'grid'),
+        css-grid: meta.mixin-exists('css-grid', 'grid'),
+        flex-grid: meta.mixin-exists('flex-grid', 'grid'),
       ));
     `);
 
-    const variables = get('variables');
-    expect(Object.keys(variables.value)).toMatchSnapshot();
-
-    const mixins = get('mixins');
-    expect(mixins.value.grid).toBe(true);
+    expect(Object.keys(unwrap('variables'))).toMatchSnapshot();
+    expect(unwrap('mixins')).toEqual({
+      'css-grid': true,
+      'flex-grid': true,
+    });
   });
 });

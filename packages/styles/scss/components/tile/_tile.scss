@@ -6,11 +6,13 @@
 //
 
 @use '../../config' as *;
+@use '../../feature-flags' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../button/tokens' as button;
+@use '../../utilities/button-reset';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/visually-hidden' as *;
@@ -18,7 +20,7 @@
 /// Tile styles
 /// @access public
 /// @group tile
-@mixin tile {
+@mixin tile($local-enable-experimental-tile-contrast: false) {
   .#{$prefix}--tile-group {
     @include reset;
   }
@@ -33,6 +35,8 @@
     outline: 2px solid transparent;
     outline-offset: -2px;
 
+    @include type-style('body-compact-01');
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -40,12 +44,11 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--tile--light {
-    background-color: $ui-02;
+    background-color: $layer-02;
   }
 
   .#{$prefix}--tile--clickable,
-  .#{$prefix}--tile--selectable,
-  .#{$prefix}--tile--expandable {
+  .#{$prefix}--tile--selectable {
     cursor: pointer;
     transition: $duration-moderate-01 motion(standard, productive);
 
@@ -54,8 +57,19 @@
     }
   }
 
-  .#{$prefix}--tile--clickable,
-  .#{$prefix}--tile--expandable {
+  .#{$prefix}--tile--clickable {
+    @include reset;
+
+    color: $text-primary;
+    text-decoration: none;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
+
     &:focus {
       @include focus-outline('outline');
     }
@@ -73,14 +87,6 @@
     border: 0;
   }
 
-  .#{$prefix}--tile--clickable {
-    @include reset;
-    @include type-style('body-short-01');
-
-    color: $text-primary;
-    text-decoration: none;
-  }
-
   .#{$prefix}--tile--clickable:hover,
   .#{$prefix}--tile--clickable:active,
   .#{$prefix}--tile--clickable:visited,
@@ -93,28 +99,32 @@
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled,
   .#{$prefix}--tile--clickable:hover.#{$prefix}--link--disabled {
     display: block;
-    background-color: $layer-disabled;
+    padding: $spacing-05;
+    background-color: $layer;
     color: $text-disabled;
   }
 
   .#{$prefix}--tile--selectable {
     padding-right: $spacing-09;
     border: 1px solid transparent;
-  }
 
-  .#{$prefix}--tile__checkmark,
-  .#{$prefix}--tile__chevron {
-    position: absolute;
-    border: none;
-    background: transparent;
-    transition: $duration-fast-02 motion(standard, productive);
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
   }
 
   .#{$prefix}--tile__checkmark {
+    position: absolute;
     top: 1rem;
     right: 1rem;
     height: 1rem;
+    border: none;
+    background: transparent;
     opacity: 0;
+    transition: $duration-fast-02 motion(standard, productive);
 
     svg {
       border-radius: 50%;
@@ -132,17 +142,22 @@
 
   .#{$prefix}--tile__chevron {
     position: absolute;
-    right: $spacing-05;
-    bottom: $spacing-05;
+    right: 0;
+    bottom: 0;
     display: flex;
-    height: 1rem;
-    align-items: flex-end;
+    width: $spacing-09;
+    height: $spacing-09;
+    align-items: center;
+    justify-content: center;
 
     svg {
-      margin-left: $spacing-03;
       fill: $icon-primary;
       transform-origin: center;
       transition: $duration-fast-02 motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
 
       // Windows, Firefox HCM Fix
       @media screen and (-ms-high-contrast: active),
@@ -151,9 +166,63 @@
         fill: ButtonText;
       }
     }
+  }
+
+  .#{$prefix}--tile__chevron--interactive {
+    @include button-reset.reset;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    width: $spacing-09;
+    height: $spacing-09;
+    align-items: center;
+    justify-content: center;
+
+    &:focus {
+      outline: 2px solid $focus;
+      outline-offset: -2px;
+    }
 
     &:hover {
+      background-color: $layer-hover;
       cursor: pointer;
+    }
+  }
+
+  .#{$prefix}--tile--expandable {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: inherit;
+    text-align: left;
+    transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    @include type-style('body-compact-01');
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-tile;
+    }
+
+    &:hover {
+      background: $layer-hover;
+    }
+  }
+
+  .#{$prefix}--tile--expandable.#{$prefix}--tile--expandable--interactive {
+    cursor: default;
+    transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer;
     }
 
     &:focus {
@@ -161,15 +230,8 @@
     }
   }
 
-  .#{$prefix}--tile--expandable {
-    overflow: hidden;
-    width: 100%;
-    border: 0;
-    color: inherit;
-    font-family: inherit;
-    font-size: inherit;
-    text-align: left;
-    transition: max-height $duration-moderate-01 motion(standard, productive);
+  .#{$prefix}--tile--expandable--interactive:focus {
+    @include focus-outline('outline');
   }
 
   .#{$prefix}--tile-content__above-the-fold {
@@ -249,7 +311,7 @@
 
   // V11: Possibly deprecate
   .#{$prefix}--tile--disabled.#{$prefix}--tile--selectable.#{$prefix}--tile--light {
-    background-color: $ui-02;
+    background-color: $layer-02;
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {

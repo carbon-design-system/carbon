@@ -5,4 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './Tab';
+import * as FeatureFlags from '@carbon/feature-flags';
+import { Tab as TabNext } from '../Tabs/Tabs';
+import { default as TabClassic } from './Tab';
+
+const Tab = FeatureFlags.enabled('enable-v11-release') ? TabNext : TabClassic;
+
+export default Tab;
+export { Tab };

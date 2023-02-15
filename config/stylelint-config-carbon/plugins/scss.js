@@ -61,6 +61,8 @@ module.exports = {
     // @-rule
     // Disallow unknown at-rules. Should be used instead of stylelint's at-rule-no-unknown.
     'scss/at-rule-no-unknown': true,
+    // Disallow parentheses in conditional @ rules (if, elsif, while)
+    'scss/at-rule-conditional-no-parentheses': OFF,
 
     // $-variable
     // Require a newline after the colon in $-variable declarations.
@@ -89,6 +91,8 @@ module.exports = {
     'scss/double-slash-comment-inline': 'never',
     // Require or disallow whitespace after the // in //-comments
     'scss/double-slash-comment-whitespace-inside': OFF,
+    // Disallow empty comments. Should be used instead of the stylelint's comment-no-empty because the core rule ignores SCSS-like comments.
+    'scss/comment-no-empty': OFF,
 
     // Declaration
     // Require or disallow properties with - in their names to be in a form of a nested group.
@@ -116,4 +120,19 @@ module.exports = {
     // Disallow redundant nesting selectors (&).
     'scss/selector-no-redundant-nesting-selector': true,
   },
+  overrides: [
+    {
+      files: [
+        './packages/components/**/*.scss',
+        './packages/grid/scss/*.scss',
+        './packages/layout/scss/*.scss',
+        './packages/motion/**/*.scss',
+        './packages/type/scss/*.scss',
+        './packages/import-once/**/*.scss',
+      ],
+      rules: {
+        'scss/no-global-function-names': OFF,
+      },
+    },
+  ],
 };

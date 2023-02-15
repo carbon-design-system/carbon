@@ -21,12 +21,13 @@ describe('usePrefix', () => {
     }
 
     render(<TestComponent />);
-    expect(value).toBe('bx');
+    expect(value).toBe('cds');
   });
 
   it('should emit the prefix in context', () => {
     function TestComponent() {
-      return <span data-testid="test">test</span>;
+      const contextValue = usePrefix();
+      return <span data-testid="test">{contextValue}</span>;
     }
 
     const { getByTestId } = render(

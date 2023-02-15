@@ -9,16 +9,19 @@
 // Radio
 //-----------------------------
 
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type';
 @use '../form';
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/component-reset' as *;
 @use '../../utilities/visually-hidden' as *;
+@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/convert' as *;
 @use '../../config' as *;
 @use '../../spacing' as *;
+
+@use '../button/tokens' as *;
 
 /// @type Number
 /// @access public
@@ -32,6 +35,7 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button-group {
     @include reset;
 
+    position: relative;
     display: flex;
     align-items: center;
   }
@@ -52,7 +56,7 @@ $radio-border-width: 1px !default;
 
     .#{$prefix}--radio-button__label {
       margin-right: 0;
-      line-height: carbon-mini-units(2.5);
+      line-height: 1.25;
     }
 
     .#{$prefix}--radio-button__label:not(:last-of-type) {
@@ -67,7 +71,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button__label {
-    @include type.type-style('body-short-01');
+    @include type.type-style('body-compact-01');
 
     display: flex;
     align-items: center;
@@ -106,35 +110,47 @@ $radio-border-width: 1px !default;
       transform: scale(0.5);
 
       // Allow the selected button to be seen in Windows HCM for IE/Edge
-      @media screen and (-ms-high-contrast: active) {
-        // Utilize a system color variable to accommodate any user HCM theme
-        background-color: WindowText;
-      }
-
-      // Firefox only HCM solution
-      @media screen and (prefers-contrast) {
-        // Utilize a system color variable to accommodate any user HCM theme
-        border: 2px solid WindowText;
+      @include high-contrast-mode('icon-fill') {
+        background-color: ButtonText;
       }
     }
   }
 
-  .#{$prefix}--radio-button:disabled-01 + .#{$prefix}--radio-button__label {
-    color: $disabled-01;
+  .#{$prefix}--radio-button:disabled + .#{$prefix}--radio-button__label {
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
-  .#{$prefix}--radio-button:disabled-01
+  .#{$prefix}--radio-button:disabled
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance,
-  .#{$prefix}--radio-button:disabled-01:checked
+  .#{$prefix}--radio-button:disabled:checked
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
-    border-color: $disabled-01;
+    // Disabled radio button, checkbox fix #10913
+    border-color: $icon-disabled;
 
     &::before {
-      background-color: $disabled-01;
+      background-color: $text-disabled;
     }
+  }
+
+  // readonly
+  .#{$prefix}--radio-button-group--readonly
+    .#{$prefix}--radio-button
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    border-color: $icon-disabled;
+  }
+
+  .#{$prefix}--radio-button-group--readonly .#{$prefix}--radio-button__label {
+    cursor: default;
+  }
+
+  .#{$prefix}--radio-button-group--readonly
+    .#{$prefix}--radio-button__label-text {
+    cursor: text;
+    user-select: text;
   }
 
   // Focus
@@ -142,8 +158,8 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button:focus
     + .#{$prefix}--radio-button__label
     .#{$prefix}--radio-button__appearance {
-    box-shadow: 0 0 0 2px $focus;
-    outline: 1px solid transparent;
+    outline: 2px solid $focus;
+    outline-offset: 1.5px;
   }
 
   // Skeleton State

@@ -6,24 +6,18 @@
  */
 
 import React from 'react';
-import {
-  WarningFilled16,
-  WarningAltFilled16,
-  EditOff16,
-} from '@carbon/icons-react';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import { usePrefix } from './usePrefix';
 
 /**
  * @typedef {object} InputProps
  * @property {string} id - The input's id
- * @property {boolean} readOnly - Whether the input should be readonly
+ * @property {boolean | undefined} readOnly - Whether the input should be readonly
  * @property {boolean} disabled - Whether the input should be disabled
  * @property {boolean} invalid - Whether the input should be marked as invalid
- * @property {string} invalidText - The validation message displayed in case the input is considered invalid
+ * @property {React.ReactNode | undefined} invalidText - The validation message displayed in case the input is considered invalid
  * @property {boolean} warn - Whether the input should be in warning state
- * @property {string} warnText - The validation message displayed in case the input is in warning state
+ * @property {React.ReactNode | undefined} warnText - The validation message displayed in case the input is in warning state
  */
 
 /**
@@ -59,6 +53,7 @@ export function useNormalizedInputProps({
   warn,
   warnText,
 }) {
+  const prefix = usePrefix();
   const normalizedProps = {
     disabled: !readOnly && disabled,
     invalid: !readOnly && invalid,
@@ -67,30 +62,27 @@ export function useNormalizedInputProps({
     warnId: `${id}-warn-msg`,
     validation: null,
     icon: null,
+    helperId: `${id}-helper-text`,
   };
 
-  if (readOnly) {
-    normalizedProps.icon = EditOff16;
-  } else {
-    if (normalizedProps.invalid) {
-      normalizedProps.icon = WarningFilled16;
-      normalizedProps.validation = (
-        <div
-          className={`${prefix}--form-requirement`}
-          id={normalizedProps.invalidId}>
-          {invalidText}
-        </div>
-      );
-    } else if (normalizedProps.warn) {
-      normalizedProps.icon = WarningAltFilled16;
-      normalizedProps.validation = (
-        <div
-          className={`${prefix}--form-requirement`}
-          id={normalizedProps.warnId}>
-          {warnText}
-        </div>
-      );
-    }
+  if (normalizedProps.invalid) {
+    normalizedProps.icon = WarningFilled;
+    normalizedProps.validation = (
+      <div
+        className={`${prefix}--form-requirement`}
+        id={normalizedProps.invalidId}>
+        {invalidText}
+      </div>
+    );
+  } else if (normalizedProps.warn) {
+    normalizedProps.icon = WarningAltFilled;
+    normalizedProps.validation = (
+      <div
+        className={`${prefix}--form-requirement`}
+        id={normalizedProps.warnId}>
+        {warnText}
+      </div>
+    );
   }
 
   return normalizedProps;

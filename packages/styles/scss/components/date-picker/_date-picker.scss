@@ -8,7 +8,7 @@
 @use '../../colors' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../spacing' as *;
 @use '../../type' as *;
 @use '../form/form';
@@ -44,6 +44,10 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .#{$prefix}--date-picker-container .#{$prefix}--label {
+    display: flex;
   }
 
   .#{$prefix}--date-picker-input__wrapper {
@@ -106,7 +110,7 @@
 
     &:disabled {
       border-bottom: 1px solid transparent;
-      background-color: $field-disabled;
+      background-color: $field;
       color: $text-disabled;
       cursor: not-allowed;
     }
@@ -125,8 +129,6 @@
   }
 
   // Size variant styles
-  // TODO V11: Remove xl selector
-  .#{$prefix}--date-picker__input--xl,
   .#{$prefix}--date-picker__input--lg {
     height: rem(48px);
   }
@@ -141,8 +143,8 @@
     // vertically center icon within parent container on IE11
     top: 50%;
     right: 1rem;
-    cursor: pointer;
     fill: $icon-primary;
+    pointer-events: none;
     transform: translateY(-50%);
   }
 
@@ -207,5 +209,15 @@
   // stylelint-disable-next-line no-duplicate-selectors
   .#{$prefix}--date-picker__icon {
     @include high-contrast-mode('icon-fill');
+  }
+
+  // readonly
+  .#{$prefix}--date-picker__input[readonly] {
+    background: transparent;
+    cursor: text;
+  }
+
+  .#{$prefix}--date-picker__input[readonly] + .#{$prefix}--date-picker__icon {
+    fill: $icon-disabled;
   }
 }

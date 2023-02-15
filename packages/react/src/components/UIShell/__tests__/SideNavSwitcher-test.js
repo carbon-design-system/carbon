@@ -5,35 +5,68 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
-import { mount } from 'enzyme';
 import SideNavSwitcher from '../SideNavSwitcher';
 
 describe('SideNavSwitcher', () => {
-  let mockProps;
-
-  beforeEach(() => {
-    mockProps = {
-      className: 'custom-classname',
-      labelText: 'label',
-      ref: jest.fn(),
-      onChange: jest.fn(),
-      options: ['Option 1', 'Option 2', 'Option 3'],
-    };
+  it('should label the <select> through `labelText`', () => {
+    render(
+      <SideNavSwitcher
+        labelText="test"
+        options={['Option 1', 'Option 2', 'Option 3']}
+      />
+    );
+    expect(screen.getByRole('combobox')).toEqual(screen.getByLabelText('test'));
   });
 
-  it('should render', () => {
-    const wrapper = mount(<SideNavSwitcher {...mockProps} />);
-    expect(wrapper).toMatchSnapshot();
+  it('should call `onChange` when the value of the <select> changes', () => {
+    const onChange = jest.fn();
+    render(
+      <SideNavSwitcher
+        labelText="test"
+        options={['Option 1', 'Option 2', 'Option 3']}
+        onChange={onChange}
+      />
+    );
+
+    userEvent.selectOptions(
+      screen.getByLabelText('test'),
+      screen.getByRole('option', { name: 'Option 1' })
+    );
+
+    expect(onChange).toHaveBeenCalled();
+    expect(onChange).toHaveBeenCalledWith(
+      expect.objectContaining({
+        target: expect.objectContaining({
+          value: 'Option 1',
+        }),
+      })
+    );
   });
 
-  it('should call `onChange` when an option is selected', () => {
-    const wrapper = mount(<SideNavSwitcher {...mockProps} />);
-    wrapper.find('select').simulate('change', {
-      target: {
-        value: 'Option 2',
-      },
-    });
-    expect(mockProps.onChange).toHaveBeenCalledTimes(1);
+  it('should support a custom `className` prop on the outermost element', () => {
+    const { container } = render(
+      <SideNavSwitcher
+        className="test"
+        labelText="test"
+        options={['Option 1', 'Option 2', 'Option 3']}
+      />
+    );
+    expect(container.firstChild).toHaveClass('test');
+  });
+
+  it('should support a `ref` on the <select> element', () => {
+    const ref = jest.fn();
+    render(
+      <SideNavSwitcher
+        ref={ref}
+        labelText="test"
+        options={['Option 1', 'Option 2', 'Option 3']}
+      />
+    );
+
+    expect(ref).toHaveBeenCalledWith(screen.getByLabelText('test'));
   });
 });

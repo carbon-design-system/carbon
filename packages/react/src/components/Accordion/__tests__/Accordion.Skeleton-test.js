@@ -5,13 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { settings } from 'carbon-components';
 import { mount } from 'enzyme';
 import React from 'react';
 import AccordionSkeleton from '../Accordion.Skeleton';
 import SkeletonText from '../../SkeletonText';
+import { render, screen } from '@testing-library/react';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('AccordionSkeleton', () => {
   it('should render', () => {
@@ -28,5 +28,27 @@ describe('AccordionSkeleton', () => {
     const count = 8;
     const wrapper = mount(<AccordionSkeleton count={count} />);
     expect(wrapper.find(`.${prefix}--accordion__item`)).toHaveLength(count);
+  });
+
+  it('should align to the left if prop isFlush is passed', () => {
+    render(<AccordionSkeleton count={8} isFlush data-testid="skeleton-1" />);
+
+    expect(screen.getByTestId('skeleton-1')).toHaveClass(
+      `${prefix}--accordion--flush`
+    );
+  });
+
+  it('should not align to left if align="start"', () => {
+    render(
+      <AccordionSkeleton
+        count={8}
+        isFlush
+        data-testid="skeleton-2"
+        align="start"
+      />
+    );
+    expect(screen.getByTestId('skeleton-2')).not.toHaveClass(
+      `${prefix}--accordion--flush`
+    );
   });
 });

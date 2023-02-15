@@ -32,8 +32,8 @@
 /// @param {Number} $select-icon-top-position [$spacing-05]
 /// @param {Number} $select-icon-left-position [$spacing-05]
 @mixin pagination-nav(
-  $color: $text-secondary,
-  $text-color-active: $text-secondary,
+  $color: $text-primary,
+  $text-color-active: $text-primary,
   $background-color-hover: $background-hover,
   $background-color-active: initial,
   $font-weight: 400,
@@ -46,7 +46,7 @@
 ) {
   .#{$prefix}--pagination-nav {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     line-height: 0;
   }
@@ -70,7 +70,7 @@
   }
 
   .#{$prefix}--pagination-nav__page {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include button-reset.reset($width: false);
 
     position: relative;
@@ -78,7 +78,7 @@
     min-width: $button-min-width;
     padding: $button-padding;
     border-radius: 0;
-    color: $text-secondary;
+    color: $text-primary;
     font-weight: $font-weight;
     line-height: 1;
     outline: 0;
@@ -90,7 +90,7 @@
 
     &:hover {
       background-color: $background-color-hover;
-      color: $text-secondary;
+      color: $text-primary;
     }
 
     &:focus {

@@ -12,6 +12,7 @@ import Filename from './Filename';
 import { keys, matches } from '../../internal/keyboard';
 import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
+import * as FeatureFlags from '@carbon/feature-flags';
 
 function FileUploaderItem({
   uuid,
@@ -34,12 +35,13 @@ function FileUploaderItem({
   });
   return (
     <span className={classes} {...other}>
-      <p className={`${prefix}--file-filename`} title={name}>
+      <p className={`${prefix}--file-filename`} title={name} id={name}>
         {name}
       </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
           iconDescription={iconDescription}
+          aria-describedby={name}
           status={status}
           invalid={invalid}
           onKeyDown={(evt) => {
@@ -105,11 +107,12 @@ FileUploaderItem.propTypes = {
   onDelete: PropTypes.func,
 
   /**
-   * Specify the size of the uploaded items, from a list of available
-   * sizes. For `default` buttons, this prop can remain unspecified.
-   * V11: `default`, `field`, and `small` will be removed
+   * Specify the size of the FileUploaderButton, from a list of available
+   * sizes.
    */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg'])
+    : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
 
   /**
    * Status of the file upload

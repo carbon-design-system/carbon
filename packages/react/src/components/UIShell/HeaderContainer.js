@@ -11,9 +11,8 @@ import React, { useState, useCallback } from 'react';
 // eslint-disable-next-line react/prop-types
 const HeaderContainer = ({ isSideNavExpanded, render: Children }) => {
   //state for expandable sidenav
-  const [isSideNavExpandedState, setIsSideNavExpandedState] = useState(
-    isSideNavExpanded
-  );
+  const [isSideNavExpandedState, setIsSideNavExpandedState] =
+    useState(isSideNavExpanded);
 
   const handleHeaderMenuButtonClick = useCallback(() => {
     setIsSideNavExpandedState(

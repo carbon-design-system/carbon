@@ -5,14 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { default as OverflowMenuNext } from './next/OverflowMenu';
-import { default as OverflowMenuClassic } from './OverflowMenu';
-import { createComponentToggle } from '../../internal/ComponentToggle';
+import { OverflowMenu as OverflowMenuComponent } from './OverflowMenu';
+import { createClassWrapper } from '../../internal/createClassWrapper';
 
-const OverflowMenu = createComponentToggle({
-  name: 'OverflowMenu',
-  next: OverflowMenuNext,
-  classic: OverflowMenuClassic,
-});
+const OverflowMenu = createClassWrapper(OverflowMenuComponent);
 
 export default OverflowMenu;
+export { OverflowMenu };

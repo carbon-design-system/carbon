@@ -8,11 +8,10 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
 import Button from '../Button';
 import TableActionList from './TableActionList';
-
-const { prefix } = settings;
+import { Text } from '../Text';
+import { usePrefix } from '../../internal/usePrefix';
 
 const translationKeys = {
   'carbon.table.batch.cancel': 'Cancel',
@@ -36,6 +35,8 @@ const TableBatchActions = ({
   translateWithId: t,
   ...rest
 }) => {
+  const [isScrolling, setIsScrolling] = React.useState();
+  const prefix = usePrefix();
   const batchActionsClasses = cx(
     {
       [`${prefix}--batch-actions`]: true,
@@ -44,18 +45,25 @@ const TableBatchActions = ({
     className
   );
 
+  const batchSummaryClasses = cx(`${prefix}--batch-summary`, {
+    [`${prefix}--batch-summary__scroll`]: isScrolling,
+  });
+
   return (
     <div
-      {...rest}
+      onScroll={() => {
+        setIsScrolling(!isScrolling);
+      }}
       aria-hidden={!shouldShowBatchActions}
-      className={batchActionsClasses}>
-      <div className={`${prefix}--batch-summary`}>
+      className={batchActionsClasses}
+      {...rest}>
+      <div className={batchSummaryClasses}>
         <p className={`${prefix}--batch-summary__para`}>
-          <span>
+          <Text as="span">
             {totalSelected > 1 || totalSelected === 0
               ? t('carbon.table.batch.items.selected', { totalSelected })
               : t('carbon.table.batch.item.selected', { totalSelected })}
-          </span>
+          </Text>
         </p>
       </div>
       <TableActionList>

@@ -8,11 +8,9 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ChevronRight16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableExpandRow = ({
   ariaLabel,
@@ -22,9 +20,10 @@ const TableExpandRow = ({
   onExpand,
   expandIconDescription,
   isSelected,
-  expandHeader,
+  expandHeader = 'expand',
   ...rest
 }) => {
+  const prefix = usePrefix();
   const className = cx(
     {
       [`${prefix}--parent-row`]: true,
@@ -47,7 +46,7 @@ const TableExpandRow = ({
           onClick={onExpand}
           title={expandIconDescription}
           aria-label={ariaLabel}>
-          <ChevronRight16
+          <ChevronRight
             className={`${prefix}--table-expand__svg`}
             aria-label={expandIconDescription}
           />
@@ -91,10 +90,6 @@ TableExpandRow.propTypes = {
    * Hook for when a listener initiates a request to expand the given row
    */
   onExpand: PropTypes.func.isRequired,
-};
-
-TableExpandRow.defaultProps = {
-  expandHeader: 'expand',
 };
 
 export default TableExpandRow;

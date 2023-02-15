@@ -10,6 +10,7 @@
 @forward 'component-reset' as component-*;
 @forward 'convert' show em, rem;
 @forward 'focus-outline';
+@forward 'hide-at-breakpoint';
 @forward 'high-contrast-mode';
 @forward 'keyframes';
 @forward 'placeholder-colors';

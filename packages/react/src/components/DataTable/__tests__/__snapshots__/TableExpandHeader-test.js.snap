@@ -6,10 +6,12 @@ exports[`DataTable.TableExpandHeader should render 1`] = `
   overflowMenuOnHover={true}
 >
   <div
-    className="bx--data-table-content"
+    className="cds--data-table-content"
   >
     <table
-      className="bx--data-table bx--data-table--no-border"
+      aria-describedby={null}
+      aria-labelledby={null}
+      className="cds--data-table"
     >
       <TableHead>
         <thead>
@@ -22,7 +24,8 @@ exports[`DataTable.TableExpandHeader should render 1`] = `
                 onExpand={[MockFunction]}
               >
                 <th
-                  className="bx--table-expand custom-class"
+                  className="cds--table-expand custom-class"
+                  id="expand"
                   scope="col"
                 />
               </TableExpandHeader>

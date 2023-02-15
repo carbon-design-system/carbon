@@ -158,7 +158,6 @@ export {
   iconSize,
   miniUnit,
   miniUnits,
-  layout,
   spacing,
 } from '@carbon/layout';
 export * from '@carbon/themes';

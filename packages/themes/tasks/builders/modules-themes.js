@@ -8,7 +8,8 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { TokenFormat, themes, group } = require('../../src/next');
+const { TokenFormat, group } = require('../../src/tokens');
+const { themes } = require('../../src');
 const { FILE_BANNER, primitive } = require('./shared');
 
 function buildThemesFile() {
@@ -146,8 +147,6 @@ const tokenMappings = {
   'layer-selected-inverse': 'ui-05',
   'border-subtle-selected': 'active-ui',
 
-  'layer-disabled': 'disabled-01',
-  'field-disabled': 'disabled-01',
   'border-disabled': 'disabled-01',
 
   'text-disabled': 'disabled-02',

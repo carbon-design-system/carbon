@@ -7,13 +7,11 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { CaretDown16 } from '@carbon/icons-react';
+import { CaretDown } from '@carbon/icons-react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export default function TreeNode({
   active,
@@ -36,6 +34,7 @@ export default function TreeNode({
   const [expanded, setExpanded] = useState(isExpanded);
   const currentNode = useRef(null);
   const currentNodeLabel = useRef(null);
+  const prefix = usePrefix();
   const nodesWithProps = React.Children.map(children, (node) => {
     if (React.isValidElement(node)) {
       return React.cloneElement(node, {
@@ -62,26 +61,24 @@ export default function TreeNode({
     [`${prefix}--tree-parent-node__toggle-icon--expanded`]: expanded,
   });
   function handleToggleClick(event) {
-    if (onToggle) {
-      onToggle(event, { id, isExpanded: !expanded, label, value });
+    if (disabled) {
+      return;
     }
+    onToggle?.(event, { id, isExpanded: !expanded, label, value });
     setExpanded(!expanded);
   }
   function handleClick(event) {
     event.stopPropagation();
     if (!disabled) {
-      if (onTreeSelect) {
-        onTreeSelect(event, { id, label, value });
-      }
-      if (onNodeSelect) {
-        onNodeSelect(event, { id, label, value });
-      }
-      if (rest.onClick) {
-        rest.onClick(event);
-      }
+      onTreeSelect?.(event, { id, label, value });
+      onNodeSelect?.(event, { id, label, value });
+      rest?.onClick?.(event);
     }
   }
   function handleKeyDown(event) {
+    if (disabled) {
+      return;
+    }
     if (matches(event, [keys.ArrowLeft, keys.ArrowRight, keys.Enter])) {
       event.stopPropagation();
     }
@@ -96,7 +93,7 @@ export default function TreeNode({
         return findParentTreeNode(node.parentNode);
       };
       if (children && expanded) {
-        onToggle(event, { id, isExpanded: false, label, value });
+        onToggle?.(event, { id, isExpanded: false, label, value });
         setExpanded(false);
       } else {
         /**
@@ -114,7 +111,7 @@ export default function TreeNode({
          */
         currentNode.current.lastChild.firstChild.focus();
       } else {
-        onToggle(event, { id, isExpanded: true, label, value });
+        onToggle?.(event, { id, isExpanded: true, label, value });
         setExpanded(true);
       }
     }
@@ -122,18 +119,16 @@ export default function TreeNode({
       event.preventDefault();
       handleClick(event);
     }
-    if (rest.onKeyDown) {
-      rest.onKeyDown(event);
-    }
+    rest?.onKeyDown?.(event);
   }
   function handleFocusEvent(event) {
-    if (event.type === 'blur' && rest.onBlur) {
-      rest.onBlur(event);
+    if (event.type === 'blur') {
+      rest?.onBlur?.(event);
     }
-    if (event.type === 'focus' && rest.onFocus) {
-      rest.onFocus(event);
+    if (event.type === 'focus') {
+      rest?.onFocus?.(event);
     }
-    onNodeFocusEvent && onNodeFocusEvent(event);
+    onNodeFocusEvent?.(event);
   }
 
   useEffect(() => {
@@ -143,9 +138,9 @@ export default function TreeNode({
      * Dynamically calculate padding to recreate tree node indentation
      * - parent nodes have (depth + 1rem) left padding
      * - leaf nodes have (depth + 2.5rem) left padding without icons (because
-     *   of expando icon + spacing)
+     *   of expand icon + spacing)
      * - leaf nodes have (depth + 2rem) left padding with icons (because of
-     *   reduced spacing between the expando icon and the node icon + label)
+     *   reduced spacing between the expand icon and the node icon + label)
      */
     const calcOffset = () => {
       // parent node
@@ -204,7 +199,7 @@ export default function TreeNode({
           className={`${prefix}--tree-parent-node__toggle`}
           disabled={disabled}
           onClick={handleToggleClick}>
-          <CaretDown16 className={toggleClasses} />
+          <CaretDown className={toggleClasses} />
         </span>
         <span className={`${prefix}--tree-node__label__details`}>
           {Icon && <Icon className={`${prefix}--tree-node__icon`} />}

@@ -8,9 +8,8 @@
 import React from 'react';
 import ProgressBar from './ProgressBar';
 import { render } from '@testing-library/react';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('ProgressBar', () => {
   const props = {
@@ -25,26 +24,28 @@ describe('ProgressBar', () => {
   describe('renders as expected', () => {
     it('progress bar and label ids match', () => {
       const bar = wrapper.getByRole('progressbar');
-      const label = wrapper.container.querySelector('span');
+      const label = wrapper.container.querySelector(
+        `.${prefix}--progress-bar__label`
+      );
       expect(bar.getAttribute('aria-labelledby')).toBe(label.id);
     });
 
     it('renders helper text when passed', () => {
       const text = 'ProgressBar helper text';
       wrapper.rerender(<ProgressBar {...props} helperText={text} />);
-      const helperText = wrapper.container.querySelector(
+      const helperTextNode = wrapper.container.querySelector(
         `.${prefix}--progress-bar__helper-text`
       );
+      const helperText = helperTextNode.firstChild.textContent;
 
-      expect(helperText.textContent).toBe(text);
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-describedby')
-      ).toBe(helperText.id);
+      expect(helperText).toBe(text);
     });
 
-    it('still renders accessible when hideLabel is passed', () => {
+    it('still renders accessible label when hideLabel is passed', () => {
       wrapper.rerender(<ProgressBar {...props} hideLabel />);
-      const label = wrapper.container.querySelector('span');
+      const label = wrapper.container.querySelector(
+        `.${prefix}--progress-bar__label`
+      );
 
       expect(label.textContent).toBe(props.label);
       expect(label.classList.contains(`${prefix}--visually-hidden`)).toBe(true);
@@ -90,6 +91,38 @@ describe('ProgressBar', () => {
           .querySelector(`.${prefix}--progress-bar`)
           .classList.contains(className)
       ).toBe(true);
+    });
+
+    it('supports finished status', () => {
+      wrapper.rerender(<ProgressBar {...props} status="finished" />);
+
+      expect(
+        wrapper.container
+          .querySelector(`.${prefix}--progress-bar`)
+          .classList.contains(`${prefix}--progress-bar--finished`)
+      ).toBe(true);
+
+      expect(
+        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
+      ).toBe('100');
+    });
+
+    it('supports error status', () => {
+      wrapper.rerender(<ProgressBar {...props} status="error" />);
+
+      expect(
+        wrapper.container
+          .querySelector(`.${prefix}--progress-bar`)
+          .classList.contains(`${prefix}--progress-bar--error`)
+      ).toBe(true);
+
+      expect(
+        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
+      ).toBe('0');
+
+      expect(
+        wrapper.getByRole('progressbar').getAttribute('aria-invalid')
+      ).toBe('true');
     });
   });
 
