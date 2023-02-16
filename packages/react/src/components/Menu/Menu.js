@@ -70,6 +70,12 @@ const Menu = React.forwardRef(function Menu(
     (item) => !item.disabled
   );
 
+  function returnFocus() {
+    if (focusReturn.current) {
+      focusReturn.current.focus();
+    }
+  }
+
   function handleOpen() {
     if (menu.current) {
       focusReturn.current = document.activeElement;
@@ -78,9 +84,13 @@ const Menu = React.forwardRef(function Menu(
     }
   }
 
-  function handleClose() {
-    if (focusReturn.current) {
-      focusReturn.current.focus();
+  function handleClose(e) {
+    if (/^key/.test(e.type)) {
+      window.addEventListener('keyup', returnFocus, { once: true });
+    } else if (e.type === 'click' && menu.current) {
+      menu.current.addEventListener('focusout', returnFocus, { once: true });
+    } else {
+      returnFocus();
     }
 
     childDispatch({ type: 'clearRegisteredItems' });
@@ -104,7 +114,7 @@ const Menu = React.forwardRef(function Menu(
       (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
       onClose
     ) {
-      handleClose();
+      handleClose(e);
     } else {
       // if currentItem is -1, the menu itself is focused.
       // in this case, the arrow keys define the first item

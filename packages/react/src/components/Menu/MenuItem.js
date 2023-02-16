@@ -74,7 +74,7 @@ const MenuItem = React.forwardRef(function MenuItem(
     if (hasChildren) {
       openSubmenu();
     } else {
-      context.state.requestCloseRoot();
+      context.state.requestCloseRoot(e);
 
       if (onClick) {
         onClick(e);
