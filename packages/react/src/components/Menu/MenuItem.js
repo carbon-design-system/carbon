@@ -82,7 +82,7 @@ const MenuItem = React.forwardRef(function MenuItem(
     }
   }
 
-  function handleMousEnter() {
+  function handleMouseEnter() {
     hoverIntentTimeout.current = setTimeout(() => {
       openSubmenu();
     }, hoverIntentDelay);
@@ -131,7 +131,7 @@ const MenuItem = React.forwardRef(function MenuItem(
       aria-haspopup={hasChildren || null}
       aria-expanded={hasChildren ? submenuOpen : null}
       onClick={handleClick}
-      onMouseEnter={hasChildren ? handleMousEnter : null}
+      onMouseEnter={hasChildren ? handleMouseEnter : null}
       onMouseLeave={hasChildren ? handleMouseLeave : null}
       onKeyDown={handleKeyDown}>
       <div className={`${prefix}--menu-item__icon`}>
