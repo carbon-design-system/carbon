@@ -104,7 +104,7 @@ Great job on getting to this point! Now it's time to code :computer:
 Before you start coding, if you have an issue in mind that you'd like to tackle,
 please first take a [search](https://github.com/IBM/carbon-components/issues)
 the issues to see if a similar issue you'd like to work on has already been
-submitted. If a similar issue has been submitted,assign yourself or ask to be
+submitted. If a similar issue has been submitted, assign yourself or ask to be
 assigned to the issue by posting a comment.
 
 If the issue does not exist, please make a new issue. Issues give us context
