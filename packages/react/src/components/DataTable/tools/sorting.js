@@ -20,6 +20,10 @@ import { sortStates } from '../state/sortStates';
  * @returns {number}
  */
 export const compare = (a, b, locale = 'en') => {
+  // prevent multiple null values in one column (sorting breaks)
+  a === null ? (a = '') : null;
+  b === null ? (b = '') : null;
+
   if (typeof a === 'number' && typeof b === 'number') {
     return a - b;
   }
