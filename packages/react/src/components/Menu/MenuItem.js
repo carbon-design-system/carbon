@@ -142,22 +142,22 @@ const MenuItem = React.forwardRef(function MenuItem(
         <div className={`${prefix}--menu-item__shortcut`}>{shortcut}</div>
       )}
       {hasChildren && (
-        <div className={`${prefix}--menu-item__shortcut`}>
-          <CaretRight />
-        </div>
-      )}
-      {hasChildren && (
-        <Menu
-          label={label}
-          open={submenuOpen}
-          onClose={() => {
-            closeSubmenu();
-            menuItem.current.focus();
-          }}
-          x={boundaries.x}
-          y={boundaries.y}>
-          {children}
-        </Menu>
+        <>
+          <div className={`${prefix}--menu-item__shortcut`}>
+            <CaretRight />
+          </div>
+          <Menu
+            label={label}
+            open={submenuOpen}
+            onClose={() => {
+              closeSubmenu();
+              menuItem.current.focus();
+            }}
+            x={boundaries.x}
+            y={boundaries.y}>
+            {children}
+          </Menu>
+        </>
       )}
     </li>
   );
