@@ -10,6 +10,9 @@ library:
       name: Storybook
       action: link
       url: https://www.ibm.com/standards/carbon/carbon-web-components
+  navData:
+    - title: Get started
+      path: 'https://github.com/carbon-design-system/carbon-website/blob/carbon-platform/src/pages/developing/frameworks/web-components.mdx'
 assets:
   accordion:
     status: stable
