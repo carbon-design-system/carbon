@@ -27,6 +27,11 @@ function menuReducer(state, action) {
         ...state,
         items: [...state.items, action.payload],
       };
+    case 'clearRegisteredItems':
+      return {
+        ...state,
+        items: [],
+      };
   }
 }
 

@@ -83,6 +83,8 @@ const Menu = React.forwardRef(function Menu(
       focusReturn.current.focus();
     }
 
+    childDispatch({ type: 'clearRegisteredItems' });
+
     if (onClose) {
       onClose();
     }
