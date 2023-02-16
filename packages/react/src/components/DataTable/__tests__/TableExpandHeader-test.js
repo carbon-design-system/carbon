@@ -86,7 +86,6 @@ describe('TableExpandHeader', () => {
         </Table>
       );
 
-      // expect(screen.getByText('child')).toBeInTheDocument();
       expect(screen.getByRole('button')).toHaveClass(
         'cds--table-expand__button'
       );
