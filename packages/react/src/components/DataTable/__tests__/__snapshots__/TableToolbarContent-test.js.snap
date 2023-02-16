@@ -9,3 +9,11 @@ exports[`DataTable.TableToolbarContent should render 1`] = `
   />
 </TableToolbarContent>
 `;
+
+exports[`TableToolbarContent renders as expected - Component API should render 1`] = `
+<div>
+  <div
+    class="cds--toolbar-content"
+  />
+</div>
+`;
