@@ -472,9 +472,11 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
   }
 
   const onKeyDown = (e) => {
-    if (match(e, keys.Delete) && !disabled) {
-      clearSelection();
-      e.stopPropagation();
+    if (!disabled) {
+      if (match(e, keys.Delete) || match(e, keys.Escape)) {
+        clearSelection();
+        e.stopPropagation();
+      }
     }
   };
 
