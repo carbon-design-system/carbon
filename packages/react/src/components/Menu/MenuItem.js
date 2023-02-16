@@ -205,7 +205,7 @@ MenuItem.propTypes = {
   shortcut: PropTypes.string,
 };
 
-const MenuItemSelectable = React.forwardRef(function MenuItemDivider(
+const MenuItemSelectable = React.forwardRef(function MenuItemSelectable(
   { className, defaultSelected, label, onChange, selected, ...rest },
   forwardRef
 ) {
