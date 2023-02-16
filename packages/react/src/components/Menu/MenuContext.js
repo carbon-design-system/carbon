@@ -8,6 +8,7 @@
 import React from 'react';
 
 const menuDefaultState = {
+  isRoot: true,
   hasIcons: false,
   size: null,
   items: [],
@@ -31,6 +32,9 @@ function menuReducer(state, action) {
 
 const MenuContext = React.createContext({
   state: menuDefaultState,
+
+  // 'dispatch' is populated by the root menu
+  dispatch: () => {},
 });
 
 export { MenuContext, menuReducer };

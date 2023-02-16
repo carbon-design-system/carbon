@@ -45,11 +45,13 @@ const Menu = React.forwardRef(function Menu(
   const focusReturn = useRef(null);
 
   const context = useContext(MenuContext);
-  const isRoot = !context.dispatch;
+
+  const isRoot = context.state.isRoot;
   const menuSize = isRoot ? size : context.state.size;
 
   const [childState, childDispatch] = useReducer(menuReducer, {
     ...context.state,
+    isRoot: false,
     size,
     requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
   });
