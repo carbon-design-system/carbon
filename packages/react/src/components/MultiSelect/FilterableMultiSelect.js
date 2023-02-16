@@ -303,14 +303,11 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   if (match(event, keys.Delete) || match(event, keys.Escape)) {
                     if (isOpen) {
                       handleOnMenuChange(true);
-                      event.stopPropagation();
-                    } else if (!isOpen) {
                       clearInputValue();
                       event.stopPropagation();
-                      if (event.target.value === '') {
-                        clearSelection();
-                        event.stopPropagation();
-                      }
+                    } else if (!isOpen) {
+                      clearSelection();
+                      event.stopPropagation();
                     }
                   }
                 }
