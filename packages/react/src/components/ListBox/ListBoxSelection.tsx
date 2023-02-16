@@ -9,7 +9,6 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
-import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { KeyboardEvent, MouseEvent } from 'react';
 

@@ -299,6 +299,22 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   event.stopPropagation();
                 }
 
+                if (!disabled) {
+                  if (match(event, keys.Delete) || match(event, keys.Escape)) {
+                    if (isOpen) {
+                      handleOnMenuChange(true);
+                      event.stopPropagation();
+                    } else if (!isOpen) {
+                      clearInputValue();
+                      event.stopPropagation();
+                      if (event.target.value === '') {
+                        clearSelection();
+                        event.stopPropagation();
+                      }
+                    }
+                  }
+                }
+
                 if (match(event, keys.Tab)) {
                   handleOnMenuChange(false);
                 }
