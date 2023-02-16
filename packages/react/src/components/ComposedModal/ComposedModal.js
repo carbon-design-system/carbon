@@ -123,7 +123,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
     onKeyDown(evt);
   }
 
-  function handleClick(evt) {
+  function handleMousedown(evt) {
     if (
       !innerModal.current.contains(evt.target) &&
       preventCloseOnClickOutside
@@ -239,7 +239,7 @@ const ComposedModal = React.forwardRef(function ComposedModal(
       ref={ref}
       aria-hidden={!open}
       onBlur={handleBlur}
-      onClick={handleClick}
+      onMouseDown={handleMousedown}
       onKeyDown={handleKeyDown}
       className={modalClass}
       tabIndex="-1">
