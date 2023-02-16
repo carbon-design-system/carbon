@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -10,16 +10,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { GridSettings } from './GridContext';
+import { GridComponent, GridProps } from './GridTypes';
 
-function FlexGrid({
-  as: BaseComponent = 'div',
+function FlexGrid<T extends React.ElementType>({
+  as: BaseComponent = 'div' as T,
   condensed = false,
   narrow = false,
   fullWidth = false,
   className: containerClassName,
   children,
   ...rest
-}) {
+}: GridProps<T>) {
   const prefix = usePrefix();
   const className = cx(containerClassName, {
     [`${prefix}--grid`]: true,
@@ -27,11 +28,13 @@ function FlexGrid({
     [`${prefix}--grid--narrow`]: narrow,
     [`${prefix}--grid--full-width`]: fullWidth,
   });
+  // cast as any to let TypeScript allow passing in attributes to base component
+  const BaseComponentAsAny: any = BaseComponent
   return (
     <GridSettings mode="flexbox" subgrid={false}>
-      <BaseComponent className={className} {...rest}>
+      <BaseComponentAsAny className={className} {...rest}>
         {children}
-      </BaseComponent>
+      </BaseComponentAsAny>
     </GridSettings>
   );
 }
@@ -70,4 +73,6 @@ FlexGrid.propTypes = {
   narrow: PropTypes.bool,
 };
 
-export { FlexGrid };
+const FlexGridComponent = FlexGrid as GridComponent;
+
+export { FlexGridComponent as FlexGrid };
