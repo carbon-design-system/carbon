@@ -76,13 +76,13 @@ export const _useContextMenu = () => {
           />
         </MenuItem>
         <MenuItemDivider />
-        <MenuItem label="Cut" shortcut="⌘X" onClick={onChange} />
-        <MenuItem label="Copy" shortcut="⌘C" onClick={onChange} />
-        <MenuItem label="Copy path" shortcut="⌥⌘C" onClick={onChange} />
-        <MenuItem label="Paste" disabled shortcut="⌘V" onClick={onChange} />
-        <MenuItem label="Duplicate" onClick={onChange} />
+        <MenuItem label="Cut" shortcut="⌘X" onClick={onClick} />
+        <MenuItem label="Copy" shortcut="⌘C" onClick={onClick} />
+        <MenuItem label="Copy path" shortcut="⌥⌘C" onClick={onClick} />
+        <MenuItem label="Paste" disabled shortcut="⌘V" onClick={onClick} />
+        <MenuItem label="Duplicate" onClick={onClick} />
         <MenuItemDivider />
-        <MenuItem label="Rename" onClick={onChange} />
+        <MenuItem label="Rename" onClick={onClick} />
         <MenuItem label="Delete" shortcut="⌫" kind="danger" onClick={onClick} />
       </Menu>
     </>
