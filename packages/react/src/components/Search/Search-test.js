@@ -67,7 +67,9 @@ describe('Search', () => {
     it('should respect labelText prop', () => {
       render(<Search labelText="test-search" />);
 
-      expect(screen.getByRole('searchbox')).toBeInTheDocument();
+      expect(screen.getByRole('searchbox').labels[0].textContent).toBe(
+        'test-search'
+      );
     });
 
     it('should call onChange when expected', () => {
