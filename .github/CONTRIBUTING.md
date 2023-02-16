@@ -114,7 +114,7 @@ contributions merged into Carbon. It's a win for everybody :tada:
 If you have no idea what you'd like to contribute, take a look at our backlog of
 issues and take your pick! Our issues with the label
 [`good first issue`](https://github.com/carbon-design-system/carbon/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue+%F0%9F%91%8B%22)
-are also a great starting point. 👋
+are a great starting point. 👋
 
 ### 2. Work in a branch
 
