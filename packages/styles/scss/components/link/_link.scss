@@ -85,6 +85,7 @@ $link-focus-text-color: custom-property.get-var(
   }
 
   .#{$prefix}--link.#{$prefix}--link--inline {
+    display: inline;
     text-decoration: underline;
 
     &:focus,
