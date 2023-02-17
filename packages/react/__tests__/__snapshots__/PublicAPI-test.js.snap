@@ -4794,6 +4794,9 @@ Map {
       "type": "default",
     },
     "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
       "clearSelectionDescription": Object {
         "type": "string",
       },
