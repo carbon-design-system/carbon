@@ -1004,6 +1004,33 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "sierrawetmore",
+      "name": "Sierra Wetmore",
+      "avatar_url": "https://avatars.githubusercontent.com/u/107062203?v=4",
+      "profile": "https://github.com/sierrawetmore",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "kcprevatt",
+      "name": "kcprevatt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68609306?v=4",
+      "profile": "https://github.com/kcprevatt",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "lewandom",
+      "name": "Marcin Lewandowski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8779205?v=4",
+      "profile": "https://github.com/lewandom",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -1,8 +1,8 @@
 import React from 'react';
-import { colors, unstable_hoverColors } from '@carbon/colors';
+import { colors, hoverColors } from '@carbon/colors';
 
 function getHoverColor(swatch, grade) {
-  for (const [key, value] of Object.entries(unstable_hoverColors)) {
+  for (const [key, value] of Object.entries(hoverColors)) {
     if (!key.includes(swatch)) {
       continue;
     }

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,20 +9,22 @@ import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 import { GridSettings, useGridSettings } from './GridContext';
+import { GridComponent, GridProps } from './GridTypes';
 
-function CSSGrid({
-  as: BaseComponent = 'div',
+function CSSGrid<T extends React.ElementType>({
+  as: BaseComponent = 'div' as T,
   children,
   className: customClassName,
   condensed = false,
   fullWidth = false,
   narrow = false,
   ...rest
-}) {
+}: GridProps<T>) {
   const prefix = usePrefix();
   const { subgrid } = useGridSettings();
-  let mode = 'wide';
+  let mode: SubgridMode = 'wide';
   if (narrow) {
     mode = 'narrow';
   } else if (condensed) {
@@ -36,7 +38,8 @@ function CSSGrid({
           as={BaseComponent}
           className={customClassName}
           mode={mode}
-          {...rest}>
+          {...rest}
+          >
           {children}
         </Subgrid>
       </GridSettings>
@@ -50,11 +53,13 @@ function CSSGrid({
     [`${prefix}--css-grid--full-width`]: fullWidth,
   });
 
+  // cast as any to let TypeScript allow passing in attributes to base component
+  const BaseComponentAsAny: any = BaseComponent
   return (
     <GridSettings mode="css-grid" subgrid>
-      <BaseComponent className={className} {...rest}>
+      <BaseComponentAsAny className={className} {...rest}>
         {children}
-      </BaseComponent>
+      </BaseComponentAsAny>
     </GridSettings>
   );
 }
@@ -93,13 +98,36 @@ CSSGrid.propTypes = {
   narrow: PropTypes.bool,
 };
 
-function Subgrid({
+type SubgridMode = 'wide' | 'narrow' | 'condensed'
+
+interface SubgridBaseProps {
+
+  /**
+   * Pass in content that will be rendered within the `Subgrid`
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify a custom className to be applied to the `Subgrid`
+   */
+  className?: string;
+
+  /**
+   * Specify the grid mode for the subgrid
+   */
+  mode?: SubgridMode;
+
+}
+
+type SubgridProps = PolymorphicProps<any, SubgridBaseProps>
+
+const Subgrid = ({
   as: BaseComponent = 'div',
   className: customClassName,
   children,
   mode,
   ...rest
-}) {
+}: SubgridProps) => {
   const prefix = usePrefix();
   const className = cx(customClassName, {
     [`${prefix}--subgrid`]: true,
@@ -133,7 +161,9 @@ Subgrid.propTypes = {
   /**
    * Specify the grid mode for the subgrid
    */
-  mode: PropTypes.oneOf(['wide', 'narrow', 'condensed']),
+  mode: PropTypes.oneOf(['wide', 'narrow', 'condensed'] as SubgridMode[]),
 };
 
-export { CSSGrid };
+const CSSGridComponent: GridComponent = CSSGrid;
+
+export { CSSGridComponent as CSSGrid };
