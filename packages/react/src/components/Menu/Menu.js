@@ -142,13 +142,7 @@ const Menu = React.forwardRef(function Menu(
   }
 
   function handleBlur(e) {
-    if (
-      open &&
-      onClose &&
-      isRoot &&
-      !menu.current.contains(e.relatedTarget) &&
-      e.relatedTarget !== focusReturn.current
-    ) {
+    if (open && onClose && isRoot && !menu.current.contains(e.relatedTarget)) {
       handleClose(e);
     }
   }
