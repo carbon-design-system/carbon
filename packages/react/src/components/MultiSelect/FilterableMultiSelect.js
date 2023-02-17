@@ -306,6 +306,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                       clearInputValue();
                       event.stopPropagation();
                     } else if (!isOpen) {
+                      clearInputValue();
                       clearSelection();
                       event.stopPropagation();
                     }
@@ -321,6 +322,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               },
               onBlur: () => {
                 setInputFocused(false);
+                setInputValue('');
               },
             });
 
