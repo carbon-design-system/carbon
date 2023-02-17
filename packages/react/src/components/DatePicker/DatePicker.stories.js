@@ -33,12 +33,28 @@ export default {
   },
 };
 
-export const Simple = () => (
-  <DatePicker datePickerType="simple">
+export const Test = () => (
+  <DatePicker
+    placeholder="m/d/Y"
+    labelText="Date picker label"
+    datePickerType="range"
+    key="dateRangePicker"
+    value={[
+      new Date('2022-10-20T21:00:00.000Z'),
+      new Date('2023-01-28T22:00:00.000Z'),
+    ]}
+    dateFormat="m/d/Y">
     <DatePickerInput
-      placeholder="mm/dd/yyyy"
-      labelText="Date Picker label"
-      id="date-picker-simple"
+      id="date-picker-range-start"
+      key="startDate"
+      placeholder={'01/29/2023'}
+      labelText="Start date"
+    />
+    <DatePickerInput
+      id="date-picker-range-end"
+      key="endDate"
+      placeholder={'10/29/2022'}
+      labelText="End date"
     />
   </DatePicker>
 );

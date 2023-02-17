@@ -449,6 +449,17 @@ const DatePicker = React.forwardRef(function DatePicker(
         calendar.destroy();
       }
 
+      // prevent a duplicate date selection when a default value is set
+      if (value) {
+        if (startInputField?.current) {
+          startInputField.current.value = '';
+        }
+        if (endInputField?.current) {
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+          endInputField.current.value = '';
+        }
+      }
+
       if (start) {
         start.removeEventListener('keydown', handleArrowDown);
         start.removeEventListener('change', handleOnChange);
