@@ -33,6 +33,16 @@ export default {
   },
 };
 
+export const Simple = () => (
+  <DatePicker datePickerType="simple">
+    <DatePickerInput
+      placeholder="mm/dd/yyyy"
+      labelText="Date Picker label"
+      id="date-picker-simple"
+    />
+  </DatePicker>
+);
+
 export const Test = () => (
   <DatePicker
     placeholder="m/d/Y"
