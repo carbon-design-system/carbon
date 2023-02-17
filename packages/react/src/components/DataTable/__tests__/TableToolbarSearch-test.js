@@ -33,10 +33,10 @@ describe('TableToolbarSearch', () => {
     });
 
     it('should respect defaultExpanded prop', () => {
-      const { container } = render(<TableToolbarSearch />);
+      const { container } = render(<TableToolbarSearch defaultExpanded />);
 
       expect(container.firstChild).toHaveClass(
-        'cds--toolbar-search-container-expandable'
+        'cds--toolbar-search-container-active'
       );
     });
 
