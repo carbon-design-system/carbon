@@ -178,40 +178,58 @@ describe('Simple date picker', () => {
     expect(screen.queryByRole('application')).not.toBeInTheDocument();
   });
 
-  it('should initialize a calendar when using react.lazy', async () => {
-    const LazyDatePicker = React.lazy(() =>
-      import('carbon-components-react').then((module) => ({
-        default: module.DatePicker,
-      }))
-    );
+  describe('react.lazy', () => {
+    let cleanup;
+    let render;
+    let screen;
+    let LazyDatePicker;
+    let LazyDatePickerInput;
 
-    const LazyDatePickerInput = React.lazy(() =>
-      import('carbon-components-react').then((module) => ({
-        default: module.DatePickerInput,
-      }))
-    );
+    beforeEach(() => {
+      jest.resetModules();
+      cleanup = require('@testing-library/react/pure').cleanup;
+      render = require('@testing-library/react/pure').render;
+      screen = require('@testing-library/react/pure').screen;
+    });
 
-    render(
-      <React.Suspense fallback="Loading">
-        <LazyDatePicker datePickerType="single">
-          <LazyDatePickerInput
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-            id="date-picker-simple"
-          />
-        </LazyDatePicker>
-      </React.Suspense>
-    );
+    afterEach(() => {
+      cleanup();
+    });
 
-    expect(
-      await screen.findByLabelText('Date Picker label')
-    ).toBeInTheDocument();
+    it('should initialize a calendar when using react.lazy', async () => {
+      LazyDatePicker = React.lazy(() =>
+        import('carbon-components-react').then((module) => ({
+          default: module.DatePicker,
+        }))
+      );
 
-    const input = document.querySelector('.cds--date-picker__input');
+      LazyDatePickerInput = React.lazy(() =>
+        import('carbon-components-react').then((module) => ({
+          default: module.DatePickerInput,
+        }))
+      );
+      render(
+        <React.Suspense fallback="Loading">
+          <LazyDatePicker datePickerType="single">
+            <LazyDatePickerInput
+              placeholder="mm/dd/yyyy"
+              labelText="Date Picker label"
+              id="date-picker-simple"
+            />
+          </LazyDatePicker>
+        </React.Suspense>
+      );
 
-    expect(screen.getByRole('application')).not.toHaveClass('open');
-    userEvent.click(input);
-    expect(screen.getByRole('application')).toHaveClass('open');
+      expect(
+        await screen.findByLabelText('Date Picker label')
+      ).toBeInTheDocument();
+
+      const input = document.querySelector('.cds--date-picker__input');
+
+      expect(screen.getByRole('application')).not.toHaveClass('open');
+      userEvent.click(input);
+      expect(screen.getByRole('application')).toHaveClass('open');
+    });
   });
 });
 

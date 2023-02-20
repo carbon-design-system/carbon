@@ -238,14 +238,13 @@ Search.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
-function CustomSearchIcon({ icon }) {
+function CustomSearchIcon({ icon: Icon }) {
   const prefix = usePrefix();
 
-  if (icon) {
-    return React.cloneElement(icon, {
-      className: `${prefix}--search-magnifier-icon`,
-    });
+  if (Icon) {
+    return <Icon className={`${prefix}--search-magnifier-icon`} />;
   }
+
   return <SearchIcon className={`${prefix}--search-magnifier-icon`} />;
 }
 
