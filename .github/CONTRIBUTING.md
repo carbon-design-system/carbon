@@ -20,7 +20,7 @@ contributing environment. Please take a look at our
 Before contributing to Carbon, you should make sure you have the following tools
 installed:
 
-- [Node.js](https://nodejs.org/en/download/) v16 or above here or follow their
+- [Node.js](https://nodejs.org/en/download/) v18 or above here or follow their
   installation through a package manager
   [here](https://nodejs.org/en/download/package-manager/))
   - If you're on macOS, we recommend using
