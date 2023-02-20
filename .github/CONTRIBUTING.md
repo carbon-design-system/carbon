@@ -44,6 +44,8 @@ With that all in place, you're ready to start contributing to Carbon!
 
 ## Start contributing
 
+## - Setting up your environment -
+
 ### 1. Fork the repo:
 
 Go to
@@ -93,7 +95,28 @@ upstream    git@github.com:carbon-design-system/carbon.git (fetch)
 upstream    git@github.com:carbon-design-system/carbon.git (push)
 ```
 
-### 4. Work in a branch
+Great job on getting to this point! Now it's time to code :computer:
+
+## - Setting up your code -
+
+### 1. Find or create an issue
+
+Before you start coding, if you have an issue in mind that you'd like to tackle,
+please first [search](https://github.com/IBM/carbon-components/issues) the
+issues to see if a similar issue you'd like to work on has already been
+submitted. If a similar issue has been submitted, assign yourself or ask to be
+assigned to the issue by posting a comment.
+
+If the issue does not exist, please make a new issue. Issues give us context
+about what you are contributing and expedite the process to getting your
+contributions merged into Carbon. It's a win for everybody :tada:
+
+If you have no idea what you'd like to contribute, take a look at our backlog of
+issues and take your pick! Our issues with the label
+[`good first issue`](https://github.com/carbon-design-system/carbon/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue+%F0%9F%91%8B%22)
+are a great starting point. 👋
+
+### 2. Work in a branch
 
 When contributing to Carbon, your work should always be done in a branch off of
 your repo, this is also how you will submit your pull request when your work is
@@ -107,7 +130,7 @@ git pull origin main
 git checkout -b {your-branch-name}
 ```
 
-### 5. Build and start the development server
+### 3. Build and start the development server
 
 From the root directory of your fork, run:
 
@@ -144,7 +167,7 @@ For information about our coding style, such as how we name our classes and our
 file structure, go to our
 [developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#coding-style)
 
-### 6. Test your JavaScript code
+### 4. Test your JavaScript code
 
 If you're contributing to our JavaScript code, test your changes by running our
 test commands:
@@ -156,7 +179,7 @@ yarn test
 For more extensive testing information, see our
 [developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#common-tasks)
 
-### 7. Add yourself to the contributor list
+### 5. Add yourself to the contributor list
 
 We want to make sure everyone is recognized for their contributions to Carbon!
 To add yourself to the `all-contributors` table in the README, you'll need to
@@ -175,15 +198,7 @@ Then, you'll need to generate the updated `all-contributors` table by running
 yarn all-contributors generate
 ```
 
-### 8. Make a pull request
-
-**Note:** Before you make a pull request,
-[search](https://github.com/IBM/carbon-components/issues) the issues to see if a
-similar issue has already been submitted. If a similar issue has been submitted,
-assign yourself or ask to be assigned to the issue by posting a comment. If the
-issue does not exist, please make a new issue. Issues give us context about what
-you are contributing and expedite the process to getting your contributions
-merged into Carbon. It's a win for everybody :tada:
+### 6. Make a pull request
 
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers, **push your commits to your fork**:
