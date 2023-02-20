@@ -87,9 +87,9 @@ const Menu = function Menu({
     ];
 
     if (!isRootMenu) {
-      const { width: parentWidth } = getParentMenu(
+      const parentWidth = getParentMenu(
         rootRef.current
-      )?.getBoundingClientRect();
+      )?.getBoundingClientRect()?.width;
 
       targetBoundaries[2] -= parentWidth;
     }
