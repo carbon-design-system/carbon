@@ -1,67 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable.TableSelectRow should render 1`] = `
-<Table
-  isSortable={false}
-  overflowMenuOnHover={true}
->
+exports[`DataTable.TableSelectRow renders as expected - Component API should render 1`] = `
+<div>
   <div
-    className="cds--data-table-content"
+    class="cds--data-table-content"
   >
     <table
-      aria-describedby={null}
-      aria-labelledby={null}
-      className="cds--data-table"
+      class="cds--data-table"
     >
-      <TableHead>
-        <thead>
-          <TableRow>
-            <tr>
-              <TableSelectRow
-                ariaLabel="Aria label"
-                checked={false}
-                className="custom-class-name"
+      <thead>
+        <tr>
+          <td
+            class="cds--table-column-checkbox custom-class-name"
+          >
+            <div
+              class="cds--checkbox--inline"
+            >
+              <input
+                class="cds--checkbox"
                 id="id"
                 name="select-all"
-                onSelect={[MockFunction]}
-              >
-                <td
-                  className="cds--table-column-checkbox custom-class-name"
-                >
-                  <ForwardRef(InlineCheckbox)
-                    ariaLabel="Aria label"
-                    checked={false}
-                    id="id"
-                    name="select-all"
-                    onClick={[MockFunction]}
-                  >
-                    <div
-                      className="cds--checkbox--inline"
-                    >
-                      <input
-                        checked={false}
-                        className="cds--checkbox"
-                        id="id"
-                        name="select-all"
-                        onChange={[Function]}
-                        onClick={[MockFunction]}
-                        type="checkbox"
-                      />
-                      <label
-                        aria-label="Aria label"
-                        className="cds--checkbox-label"
-                        htmlFor="id"
-                        onClick={[Function]}
-                      />
-                    </div>
-                  </ForwardRef(InlineCheckbox)>
-                </td>
-              </TableSelectRow>
-            </tr>
-          </TableRow>
-        </thead>
-      </TableHead>
+                type="checkbox"
+              />
+              <label
+                aria-label="Aria label"
+                class="cds--checkbox-label"
+                for="id"
+              />
+            </div>
+          </td>
+        </tr>
+      </thead>
     </table>
   </div>
-</Table>
+</div>
 `;
