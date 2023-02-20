@@ -365,6 +365,12 @@ MultiSelect.propTypes = {
   ...sortingPropTypes,
 
   /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className: PropTypes.string,
+
+  /**
    * Specify the text that should be read for screen readers that describes total items selected
    */
   clearSelectionDescription: PropTypes.string,
