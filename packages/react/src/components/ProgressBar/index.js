@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './ProgressBar';
+import ProgressBar from './ProgressBar';
+
+export default ProgressBar;
+export { ProgressBar };

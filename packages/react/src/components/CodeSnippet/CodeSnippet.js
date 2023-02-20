@@ -9,12 +9,13 @@ import PropTypes from 'prop-types';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import useResizeObserver from 'use-resize-observer/polyfilled';
-import { ChevronDown16 } from '@carbon/icons-react';
+import { ChevronDown } from '@carbon/icons-react';
 import Copy from '../Copy';
 import Button from '../Button';
 import CopyButton from '../CopyButton';
 import getUniqueId from '../../tools/uniqueId';
 import copy from 'copy-to-clipboard';
+import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 const rowHeightInPixels = 16;
@@ -32,7 +33,7 @@ function CodeSnippet({
   feedbackTimeout,
   onClick,
   ariaLabel,
-  copyLabel, //TODO: Merge this prop to `ariaLabel` in `v11`
+  copyText,
   copyButtonDescription,
   light,
   showMoreText,
@@ -50,6 +51,7 @@ function CodeSnippet({
   const { current: uid } = useRef(getUniqueId());
   const codeContentRef = useRef();
   const codeContainerRef = useRef();
+  const innerCodeRef = useRef();
   const [hasLeftOverflow, setHasLeftOverflow] = useState(false);
   const [hasRightOverflow, setHasRightOverflow] = useState(false);
   const getCodeRef = useCallback(() => {
@@ -146,7 +148,9 @@ function CodeSnippet({
   }, [handleScroll]);
 
   const handleCopyClick = (evt) => {
-    copy(children);
+    if (copyText || innerCodeRef?.current) {
+      copy(copyText ?? innerCodeRef?.current?.innerText);
+    }
 
     if (onClick) {
       onClick(evt);
@@ -160,6 +164,8 @@ function CodeSnippet({
     [`${prefix}--snippet--light`]: light,
     [`${prefix}--snippet--no-copy`]: hideCopyButton,
     [`${prefix}--snippet--wraptext`]: wrapText,
+    [`${prefix}--snippet--has-right-overflow`]:
+      type == 'multi' && hasRightOverflow,
   });
 
   const expandCodeBtnText = expandedCode ? showLessText : showMoreText;
@@ -168,7 +174,9 @@ function CodeSnippet({
     if (hideCopyButton) {
       return (
         <span className={codeSnippetClasses}>
-          <code id={uid}>{children}</code>
+          <code id={uid} ref={innerCodeRef}>
+            {children}
+          </code>
         </span>
       );
     }
@@ -177,12 +185,14 @@ function CodeSnippet({
       <Copy
         {...rest}
         onClick={handleCopyClick}
-        aria-label={copyLabel || ariaLabel}
+        aria-label={ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
         feedback={feedback}
         feedbackTimeout={feedbackTimeout}>
-        <code id={uid}>{children}</code>
+        <code id={uid} ref={innerCodeRef}>
+          {children}
+        </code>
       </Copy>
     );
   }
@@ -219,13 +229,13 @@ function CodeSnippet({
         role={type === 'single' ? 'textbox' : null}
         tabIndex={type === 'single' && !disabled ? 0 : null}
         className={`${prefix}--snippet-container`}
-        aria-label={ariaLabel || copyLabel || 'code-snippet'}
+        aria-label={ariaLabel || 'code-snippet'}
         onScroll={(type === 'single' && handleScroll) || null}
         {...containerStyle}>
         <pre
           ref={codeContentRef}
           onScroll={(type === 'multi' && handleScroll) || null}>
-          <code>{children}</code>
+          <code ref={innerCodeRef}>{children}</code>
         </pre>
       </div>
       {/**
@@ -235,7 +245,7 @@ function CodeSnippet({
       {hasLeftOverflow && (
         <div className={`${prefix}--snippet__overflow-indicator--left`} />
       )}
-      {hasRightOverflow && (
+      {hasRightOverflow && type !== 'multi' && (
         <div className={`${prefix}--snippet__overflow-indicator--right`} />
       )}
       {!hideCopyButton && (
@@ -250,15 +260,14 @@ function CodeSnippet({
       {shouldShowMoreLessBtn && (
         <Button
           kind="ghost"
-          size="field"
+          size="sm"
           className={`${prefix}--snippet-btn--expand`}
           disabled={disabled}
           onClick={() => setExpandedCode(!expandedCode)}>
           <span className={`${prefix}--snippet-btn--text`}>
             {expandCodeBtnText}
           </span>
-          <ChevronDown16
-            aria-label={expandCodeBtnText}
+          <ChevronDown
             className={`${prefix}--icon-chevron--down ${prefix}--snippet__icon`}
             name="chevron--down"
             role="img"
@@ -277,9 +286,9 @@ CodeSnippet.propTypes = {
   ariaLabel: PropTypes.string,
 
   /**
-   * Provide the content of your CodeSnippet as a string
+   * Provide the content of your CodeSnippet as a node or string
    */
-  children: PropTypes.string,
+  children: PropTypes.node,
 
   /**
    * Specify an optional className to be applied to the container node
@@ -292,10 +301,10 @@ CodeSnippet.propTypes = {
   copyButtonDescription: PropTypes.string,
 
   /**
-   * Specify a label to be read by screen readers on the containing <textbox>
-   * node
+   * Optional text to copy. If not specified, the `children` node's `innerText`
+   * will be used as the copy value.
    */
-  copyLabel: PropTypes.string,
+  copyText: PropTypes.string,
 
   /**
    * Specify whether or not the CodeSnippet should be disabled
@@ -321,7 +330,12 @@ CodeSnippet.propTypes = {
    * Specify whether you are using the light variant of the Code Snippet,
    * typically used for inline snippet to display an alternate color
    */
-  light: PropTypes.bool,
+
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `CodeSnippet` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Specify the maximum number of rows to be shown when in collapsed view
@@ -373,6 +387,7 @@ CodeSnippet.propTypes = {
 };
 
 CodeSnippet.defaultProps = {
+  ariaLabel: 'Copy to clipboard',
   type: 'single',
   showMoreText: 'Show more',
   showLessText: 'Show less',

@@ -11,9 +11,8 @@ import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
 import AccordionItem from '../AccordionItem';
 import { mount } from 'enzyme';
-import { settings } from 'carbon-components';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 describe('AccordionItem', () => {
   afterEach(cleanup);

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>toggle</title>
+    <g id="toggle" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M148,102 C141.372583,102 136,96.627417 136,90 C136,83.372583 141.372583,78 148,78 L148,78 L172,78 C178.627417,78 184,83.372583 184,90 C184,96.627417 178.627417,102 172,102 L172,102 Z" id="Combined-Shape-Copy-52" fill="#24A148"></path>
+        <circle id="Oval-Copy-72" fill="#FFFFFF" cx="172" cy="90" r="9"></circle>
+    </g>
+</svg>

@@ -9,13 +9,14 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../../utilities/skeleton' as *;
 @use '../../utilities/button-reset';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/convert' as *;
+@use '../../utilities/z-index' as *;
 
 /// Number input styles
 /// @access public
@@ -31,7 +32,7 @@
   }
 
   .#{$prefix}--number input[type='number'] {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include focus-outline('reset');
 
     display: inline-flex;
@@ -49,8 +50,8 @@
     background-color: $field;
     border-radius: 0;
     color: $text-primary;
-    font-family: font-family('mono');
-    font-weight: 300;
+    font-family: font-family('sans');
+    font-weight: 400;
     transition: background-color $duration-fast-01 motion(standard, productive),
       outline $duration-fast-01 motion(standard, productive);
 
@@ -78,8 +79,6 @@
     }
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--number--xl.#{$prefix}--number input[type='number'],
   .#{$prefix}--number--lg.#{$prefix}--number input[type='number'] {
     padding-right: rem(144px);
   }
@@ -88,10 +87,9 @@
     padding-right: rem(112px);
   }
 
-  .#{$prefix}--number input[type='number']:disabled,
-  .#{$prefix}--number--readonly input[type='number'] {
+  .#{$prefix}--number input[type='number']:disabled {
     border-bottom-color: transparent;
-    background-color: $field-disabled;
+    background-color: $field;
     color: $text-disabled;
     cursor: not-allowed;
   }
@@ -280,7 +278,7 @@
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__controls
     .#{$prefix}--number__rule-divider:first-of-type {
-    background-color: $decorative-01;
+    background-color: $border-subtle-02;
   }
 
   .#{$prefix}--number
@@ -301,18 +299,12 @@
     background-color: transparent;
   }
 
-  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
-    display: none;
-  }
-
   .#{$prefix}--number__invalid {
     position: absolute;
     right: rem(96px);
     fill: $support-error;
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--number--xl .#{$prefix}--number__invalid,
   .#{$prefix}--number--lg .#{$prefix}--number__invalid {
     right: rem(112px);
   }
@@ -326,10 +318,6 @@
     right: rem(80px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--number--xl
-    .#{$prefix}--number__invalid
-    + .#{$prefix}--number__rule-divider,
   .#{$prefix}--number--lg
     .#{$prefix}--number__invalid
     + .#{$prefix}--number__rule-divider {
@@ -368,10 +356,7 @@
   }
 
   // V11: Possibly deprecate
-  .#{$prefix}--number--light input[type='number']:disabled,
-  .#{$prefix}--number--light
-    .#{$prefix}--number--readonly
-    input[type='number'] {
+  .#{$prefix}--number--light input[type='number']:disabled {
     background-color: $field-02;
   }
 
@@ -381,33 +366,31 @@
     background-color: $field-02;
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::before,
-  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover::after {
-    background-color: $hover-light-ui;
-  }
-
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::before,
   .#{$prefix}--number--light .#{$prefix}--number__control-btn:focus::after {
     background-color: transparent;
   }
 
+  // V11: Possibly deprecate
+  // We include `:not(:focus)` here because the pseudo elements will overlap the
+  // focus outline on the button if we set their background-color on focus
+  .#{$prefix}--number--light .#{$prefix}--number__control-btn:hover,
+  .#{$prefix}--number--light
+    .#{$prefix}--number__control-btn:not(:focus):hover::before,
+  .#{$prefix}--number--light
+    .#{$prefix}--number__control-btn:not(:focus):hover::after {
+    background-color: $layer-hover-02;
+  }
+
   // Size Variant styles
-  // TODO V11: Remove xl selector
-  .#{$prefix}--number--xl input[type='number'],
   .#{$prefix}--number--lg input[type='number'] {
     height: rem(48px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--number--xl .#{$prefix}--number__controls,
   .#{$prefix}--number--lg .#{$prefix}--number__controls {
     width: rem(96px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--number--xl .#{$prefix}--number__control-btn,
   .#{$prefix}--number--lg .#{$prefix}--number__control-btn {
     width: rem(48px);
 
@@ -450,6 +433,44 @@
 
   .#{$prefix}--number--nosteppers .#{$prefix}--number__invalid {
     right: rem(16px);
+  }
+
+  // Readonly
+  .#{$prefix}--number--readonly input[type='number'] {
+    background: transparent;
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn {
+    color: $icon-disabled;
+    pointer-events: none;
+
+    &:hover {
+      background-color: transparent;
+      cursor: pointer;
+
+      &::before,
+      &::after {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .#{$prefix}--number--readonly
+    input[type='number']:focus
+    ~ .#{$prefix}--number__controls
+    .#{$prefix}--number__control-btn:hover {
+    outline: none;
+  }
+
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::before,
+  .#{$prefix}--number--readonly .#{$prefix}--number__control-btn::after {
+    background: transparent;
+  }
+
+  .#{$prefix}--number--readonly
+    .#{$prefix}--number__controls:hover
+    .#{$prefix}--number__rule-divider:not(:first-of-type) {
+    background-color: $border-subtle;
   }
 
   // Skeleton State

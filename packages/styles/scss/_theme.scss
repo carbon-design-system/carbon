@@ -5,103 +5,41 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use './config' as *;
-@use '@carbon/themes/scss/modules/config' with (
-  $prefix: $prefix,
-);
-@use './compat/themes' as compat;
-@use './themes';
+@forward './theme/theme' hide theme;
+@use './theme/theme';
+@use './layer/layer-tokens';
 
-@forward '@carbon/themes/scss/modules/theme' with (
-  $fallback: themes.$white !default,
-  $theme: compat.$white !default,
-);
-@forward '@carbon/themes/scss/modules/tokens';
-@use '@carbon/themes/scss/modules/tokens';
-@use './utilities/custom-property';
-@use './utilities/layer-set' with (
-  $layer-sets: (
-    layer: (
-      tokens.$layer-01,
-      tokens.$layer-02,
-      tokens.$layer-03,
-    ),
-    layer-active: (
-      tokens.$layer-active-01,
-      tokens.$layer-active-02,
-      tokens.$layer-active-03,
-    ),
-    layer-hover: (
-      tokens.$layer-hover-01,
-      tokens.$layer-hover-02,
-      tokens.$layer-hover-03,
-    ),
-    layer-selected: (
-      tokens.$layer-selected-01,
-      tokens.$layer-selected-02,
-      tokens.$layer-selected-03,
-    ),
-    layer-selected-hover: (
-      tokens.$layer-selected-hover-01,
-      tokens.$layer-selected-hover-02,
-      tokens.$layer-selected-hover-03,
-    ),
-    layer-accent: (
-      tokens.$layer-accent-01,
-      tokens.$layer-accent-02,
-      tokens.$layer-accent-03,
-    ),
-    layer-accent-hover: (
-      tokens.$layer-accent-hover-01,
-      tokens.$layer-accent-hover-02,
-      tokens.$layer-accent-hover-03,
-    ),
-    layer-accent-active: (
-      tokens.$layer-accent-active-01,
-      tokens.$layer-accent-active-02,
-      tokens.$layer-accent-active-03,
-    ),
-    field: (
-      tokens.$field-01,
-      tokens.$field-02,
-      tokens.$field-03,
-    ),
-    field-hover: (
-      tokens.$field-hover-01,
-      tokens.$field-hover-02,
-      tokens.$field-hover-03,
-    ),
-    border-subtle: (
-      tokens.$border-subtle-01,
-      tokens.$border-subtle-02,
-      tokens.$border-subtle-03,
-    ),
-    border-subtle-selected: (
-      tokens.$border-subtle-selected-01,
-      tokens.$border-subtle-selected-02,
-      tokens.$border-subtle-selected-03,
-    ),
-    border-strong: (
-      tokens.$border-strong-01,
-      tokens.$border-strong-02,
-      tokens.$border-strong-03,
-    ),
-  ),
-);
+/// Include the CSS Custom Properties for the active theme or a given theme on
+/// a selector
+@mixin theme($args...) {
+  @include theme.theme($args...);
 
-// Layer sets
-$layer: custom-property.get-var('layer');
-$layer-active: custom-property.get-var('layer-active');
-$layer-hover: custom-property.get-var('layer-hover');
-$layer-selected: custom-property.get-var('layer-selected');
-$layer-selected-hover: custom-property.get-var('layer-selected-hover');
-$layer-accent: custom-property.get-var('layer-accent');
-$layer-accent-hover: custom-property.get-var('layer-accent-hover');
-$layer-accent-active: custom-property.get-var('layer-accent-active');
-
-$field: custom-property.get-var('field');
-$field-hover: custom-property.get-var('field-hover');
-
-$border-subtle: custom-property.get-var('border-subtle');
-$border-subtle-selected: custom-property.get-var('border-subtle-selected');
-$border-strong: custom-property.get-var('border-strong');
+  // Note: we need to re-emit the contextual layer tokens as part of the theme
+  // mixin. Otherwise, the layer tokens are defined at the :root level and will
+  // not pick up the theme-specific, or zone-specific, value from the first
+  // layer.
+  //
+  // For example, in this situation:
+  //
+  // ```
+  // :root {
+  //   --layer-one: #000000;
+  //   --layer: var(--layer-one);
+  // }
+  // ```
+  //
+  // This will always evaluate to the value of `--layer-one` at the `:root`
+  // selector, even if `--layer-one` is redefined layer on in the cascade.
+  //
+  // ```
+  // .zone {
+  //   --layer-one: #ffffff;
+  // }
+  // ```
+  //
+  // Even though you would expect `--layer` to be redefined, it will keep the
+  // value defined at the `:root` level.
+  //
+  // @see https://github.com/carbon-design-system/carbon/issues/11138
+  @include layer-tokens.emit-layer-tokens(1);
+}

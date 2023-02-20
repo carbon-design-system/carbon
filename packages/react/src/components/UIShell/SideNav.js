@@ -4,7 +4,6 @@
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
-
 import React, { useState, useRef } from 'react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -38,9 +37,8 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
   const prefix = usePrefix();
   const { current: controlled } = useRef(expandedProp !== undefined);
   const [expandedState, setExpandedState] = useState(defaultExpanded);
-  const [expandedViaHoverState, setExpandedViaHoverState] = useState(
-    defaultExpanded
-  );
+  const [expandedViaHoverState, setExpandedViaHoverState] =
+    useState(defaultExpanded);
   const expanded = controlled ? expandedProp : expandedState;
   const handleToggle = (event, value = !expanded) => {
     if (!controlled) {
@@ -90,7 +88,9 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         : expanded;
       // avoid spreading `isSideNavExpanded` to non-Carbon UI Shell children
       return React.cloneElement(child, {
-        ...(CARBON_SIDENAV_ITEMS.includes(child.type?.displayName)
+        ...(CARBON_SIDENAV_ITEMS.includes(
+          child.type?.displayName ?? child.type?.name
+        )
           ? {
               isSideNavExpanded: currentExpansionState,
             }
@@ -126,7 +126,6 @@ const SideNav = React.forwardRef(function SideNav(props, ref) {
         <div className={overlayClassName} onClick={onOverlayClick} />
       )}
       <nav
-        aria-hidden={!expanded}
         ref={ref}
         className={`${prefix}--side-nav__navigation ${className}`}
         {...accessibilityLabel}
@@ -230,7 +229,7 @@ SideNav.propTypes = {
    * state of the component. From this, you should return a string representing
    * the label you want displayed or read by screen readers.
    */
-  translateById: PropTypes.func,
+  // translateById: PropTypes.func,
 };
 
 export default SideNav;

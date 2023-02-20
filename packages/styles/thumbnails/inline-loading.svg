@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>inline-loading</title>
+    <g id="inline-loading" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group" transform="translate(54.000000, 76.000000)">
+            <rect id="Rectangle-Copy-42" stroke="#0062FF" fill="#F3F3F3" x="0.5" y="0.5" width="211" height="31"></rect>
+            <circle id="Oval-2-Copy-2" stroke="#C6C6C6" stroke-width="3" cx="192.5" cy="16.5" r="6"></circle>
+            <path d="M193,22 C196.313708,22 199,19.3137085 199,16 C199,12.6862915 196.313708,10 193,10 C189.686292,10 187,12.6862915 187,16" id="Oval-2-Copy-3" stroke="#0062FF" stroke-width="3"></path>
+            <rect id="Rectangle-3-Copy-11" fill="#A8A8A8" x="12" y="13" width="96" height="7"></rect>
+        </g>
+    </g>
+</svg>

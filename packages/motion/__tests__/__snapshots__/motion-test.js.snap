@@ -2,13 +2,13 @@
 
 exports[`@carbon/motion @carbon/motion/scss/motion.scss 1`] = `
 Array [
-  "fast-01",
-  "fast-02",
-  "moderate-01",
-  "moderate-02",
-  "slow-01",
-  "slow-02",
-  "carbon--easings",
+  "easings",
+  "duration-fast-01",
+  "duration-fast-02",
+  "duration-moderate-01",
+  "duration-moderate-02",
+  "duration-slow-01",
+  "duration-slow-02",
 ]
 `;
 

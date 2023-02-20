@@ -8,6 +8,7 @@
 'use strict';
 
 const t = require('@babel/types');
+const { camelCase } = require('change-case');
 
 function jsToAST(value) {
   if (typeof value === 'string') {
@@ -65,11 +66,15 @@ function svgToJSX(node) {
         return attributeDenylist.every((prefix) => !key.startsWith(prefix));
       })
       .map(([key, value]) => {
+        const formatted = attributeAllowlist.has(key) ? key : camelCase(key);
         if (typeof value === 'string') {
-          return t.jSXAttribute(t.jSXIdentifier(key), t.stringLiteral(value));
+          return t.jSXAttribute(
+            t.jSXIdentifier(formatted),
+            t.stringLiteral(value)
+          );
         }
         return t.jSXAttribute(
-          t.jSXIdentifier(key),
+          t.jSXIdentifier(formatted),
           t.jSXExpressionContainer(jsToAST(value))
         );
       });

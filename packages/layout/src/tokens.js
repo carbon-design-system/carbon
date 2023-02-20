@@ -27,16 +27,6 @@ export const unstable_tokens = [
   'fluidSpacing03',
   'fluidSpacing04',
 
-  // Layout
-  // Deprecated -- Remove in v11
-  'layout01',
-  'layout02',
-  'layout03',
-  'layout04',
-  'layout05',
-  'layout06',
-  'layout07',
-
   // Containers
   'container01',
   'container02',

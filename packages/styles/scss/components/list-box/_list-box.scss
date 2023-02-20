@@ -11,7 +11,7 @@
 @use '../tag/mixins' as *;
 @use '../../config' as *;
 @use '../../colors' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../../spacing' as *;
 @use '../../motion' as *;
@@ -55,7 +55,7 @@ $list-box-menu-width: rem(300px);
     grid-template: auto auto / auto auto;
 
     .#{$prefix}--label {
-      @include type-style('body-short-01');
+      @include type-style('body-compact-01');
     }
 
     .#{$prefix}--label,
@@ -92,8 +92,6 @@ $list-box-menu-width: rem(300px);
     }
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--xl,
   .#{$prefix}--list-box--lg {
     height: rem(48px);
     max-height: rem(48px);
@@ -148,6 +146,8 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box[data-invalid].#{$prefix}--list-box--inline
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box.#{$prefix}--list-box--warning.#{$prefix}--list-box--inline
     .#{$prefix}--list-box__field {
     padding-right: rem(56px);
   }
@@ -158,18 +158,18 @@ $list-box-menu-width: rem(300px);
     background-color: $field-02;
 
     &:hover {
-      background-color: $hover-light-ui;
+      background-color: $field-hover;
     }
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu {
-    background: $field-02;
+    background: $layer;
   }
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item__option {
-    border-top-color: $decorative-01;
+    border-top-color: $border-subtle;
   }
 
   .#{$prefix}--list-box--light.#{$prefix}--list-box--expanded {
@@ -239,7 +239,7 @@ $list-box-menu-width: rem(300px);
     background-color: transparent;
 
     &:hover {
-      background-color: $field-hover;
+      background-color: $layer-hover;
     }
   }
 
@@ -373,7 +373,7 @@ $list-box-menu-width: rem(300px);
 
   // Label for a `list-box__field`
   .#{$prefix}--list-box__label {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     overflow: hidden;
     color: $text-primary;
@@ -479,7 +479,7 @@ $list-box-menu-width: rem(300px);
   }
 
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__selection--multi {
-    @include tag-theme($text-disabled, $field-disabled);
+    @include tag-theme($text-disabled, $layer);
 
     > svg {
       fill: $icon-disabled;
@@ -524,9 +524,6 @@ $list-box-menu-width: rem(300px);
     max-height: rem(220px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--expanded.#{$prefix}--list-box--xl
-    .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--expanded.#{$prefix}--list-box--lg
     .#{$prefix}--list-box__menu {
     // 48px item height * 5.5 items shown
@@ -541,7 +538,7 @@ $list-box-menu-width: rem(300px);
 
   // Descendant of a `list-box__menu` that represents a selection for a control
   .#{$prefix}--list-box__menu-item {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: relative;
     height: rem(40px);
@@ -561,15 +558,13 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:hover {
-    background-color: $hover-light-ui;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--list-box--sm .#{$prefix}--list-box__menu-item {
     height: rem(32px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item,
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item {
     height: rem(48px);
   }
@@ -580,8 +575,7 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item:active {
-    // To Do: What should this variable be?
-    // background-color: $selected-light-ui;
+    background-color: $layer-selected;
   }
 
   .#{$prefix}--list-box--disabled
@@ -653,8 +647,6 @@ $list-box-menu-width: rem(300px);
     padding-bottom: rem(7px);
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--xl .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box--lg .#{$prefix}--list-box__menu-item__option {
     height: rem(48px);
     padding-top: rem(15px);
@@ -666,6 +658,36 @@ $list-box-menu-width: rem(300px);
     .#{$prefix}--list-box__menu-item__option,
   .#{$prefix}--list-box--disabled .#{$prefix}--list-box__menu-item__option {
     color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled],
+  .#{$prefix}--list-box__menu-item[disabled] *,
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option,
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    color: $text-disabled;
+    cursor: not-allowed;
+    outline: none;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover {
+    background-color: revert;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--checkbox-label::before {
+    border-color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle;
+  }
+
+  .#{$prefix}--list-box__menu-item[disabled]:hover
+    + .#{$prefix}--list-box__menu-item
+    .#{$prefix}--list-box__menu-item__option {
+    border-top-color: $border-subtle;
   }
 
   .#{$prefix}--list-box.#{$prefix}--list-box--inline
@@ -681,7 +703,7 @@ $list-box-menu-width: rem(300px);
 
   .#{$prefix}--list-box__menu-item--highlighted {
     border-color: transparent;
-    background-color: $layer-hover;
+    background-color: $layer-selected;
     color: $text-primary;
   }
 
@@ -706,15 +728,13 @@ $list-box-menu-width: rem(300px);
 
   // V11: Possibly deprecate
   .#{$prefix}--list-box--light .#{$prefix}--list-box__menu-item--active {
-    // To Do: What should this token be?
-    // border-bottom-color: $selected-light-ui;
-    // background-color: $selected-light-ui;
-  }
-
-  .#{$prefix}--list-box__menu-item--active:hover,
-  .#{$prefix}--list-box__menu-item--active.#{$prefix}--list-box__menu-item--highlighted {
     border-bottom-color: $layer-selected;
     background-color: $layer-selected;
+  }
+
+  .#{$prefix}--list-box__menu-item--active:hover {
+    border-bottom-color: $layer-selected-hover;
+    background-color: $layer-selected-hover;
   }
 
   .#{$prefix}--list-box__menu-item--active
@@ -773,11 +793,6 @@ $list-box-menu-width: rem(300px);
     bottom: 2rem;
   }
 
-  // TODO V11: Remove xl selector
-  .#{$prefix}--list-box--up.#{$prefix}--dropdown--xl
-    .#{$prefix}--list-box__menu,
-  .#{$prefix}--list-box--up.#{$prefix}--list-box--xl
-    .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--up.#{$prefix}--dropdown--lg
     .#{$prefix}--list-box__menu,
   .#{$prefix}--list-box--up.#{$prefix}--list-box--lg
@@ -797,6 +812,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box input[type='text'] {
     min-width: 0;
     background-color: inherit;
+    text-overflow: ellipsis;
   }
 
   // Windows HCM fix

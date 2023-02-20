@@ -8,9 +8,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classnames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import * as FeatureFlags from '@carbon/feature-flags';
+import { usePrefix } from '../../internal/usePrefix';
 
 const SelectItemGroup = ({
   children,
@@ -19,6 +18,7 @@ const SelectItemGroup = ({
   label,
   ...other
 }) => {
+  const prefix = usePrefix();
   const classNames = classnames(`${prefix}--select-optgroup`, className);
   return (
     <optgroup
@@ -55,7 +55,9 @@ SelectItemGroup.propTypes = {
 
 SelectItemGroup.defaultProps = {
   disabled: false,
-  label: 'Provide label',
+  label: FeatureFlags.enabled('enable-v11-release')
+    ? undefined
+    : 'Provide label',
 };
 
 export default SelectItemGroup;

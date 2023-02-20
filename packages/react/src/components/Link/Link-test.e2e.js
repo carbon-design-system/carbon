@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/components/link/_link.scss';
-import { Download16 } from '@carbon/icons-react';
+import '../../../index.scss';
+
+import { Download } from '@carbon/icons-react';
 
 import React from 'react';
 import { mount } from '@cypress/react';
@@ -17,7 +18,7 @@ describe('Link', () => {
     mount(
       <>
         <Link href="http://www.carbondesignsystem.com">Link</Link>
-        <Link href="http://www.carbondesignsystem.com" renderIcon={Download16}>
+        <Link href="http://www.carbondesignsystem.com" renderIcon={Download}>
           Download
         </Link>
       </>

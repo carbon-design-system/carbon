@@ -8,8 +8,8 @@
 'use strict';
 
 const { types: t } = require('@carbon/scss-generator');
-const { TokenFormat } = require('../../../src/next');
-const { white, g10, g90, g100, tokens } = require('../../../src');
+const { TokenFormat } = require('../../../src/tokens');
+const { white, g10, g90, g100, tokens } = require('../../../src/v10');
 const { FILE_BANNER, primitive } = require('../shared');
 const { shouldIncludeToken } = require('./shared');
 

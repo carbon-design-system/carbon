@@ -5,6 +5,4 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Icon';
-export { default } from './Icon';
 export * from './Icon.Skeleton';

@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { CheckmarkFilled16 } from '@carbon/icons-react';
+import { CheckmarkFilled } from '@carbon/icons-react';
 import { withKnobs, boolean } from '@storybook/addon-knobs';
 
 import {
@@ -16,12 +16,11 @@ import {
   StructuredListRow,
   StructuredListInput,
   StructuredListCell,
-} from '../StructuredList';
+} from './StructuredList';
 import StructuredListSkeleton from '../StructuredList/StructuredList.Skeleton';
-import { settings } from 'carbon-components';
 import mdx from './StructuredList.mdx';
 
-const { prefix } = settings;
+const prefix = 'cds';
 
 const props = () => ({
   isCondensed: boolean('Condensed', false),
@@ -30,19 +29,18 @@ const props = () => ({
 
 export default {
   title: 'Components/StructuredList',
+  component: StructuredListWrapper,
   decorators: [withKnobs],
-
+  subcomponents: {
+    StructuredListHead,
+    StructuredListBody,
+    StructuredListRow,
+    StructuredListInput,
+    StructuredListCell,
+  },
   parameters: {
-    component: StructuredListWrapper,
     docs: {
       page: mdx,
-    },
-    subcomponents: {
-      StructuredListHead,
-      StructuredListBody,
-      StructuredListRow,
-      StructuredListInput,
-      StructuredListCell,
     },
   },
 };
@@ -81,14 +79,6 @@ export const Simple = () => (
   </StructuredListWrapper>
 );
 
-Simple.parameters = {
-  info: {
-    text: `
-        Structured Lists group content that is similar or related, such as terms or definitions.
-      `,
-  },
-};
-
 export const Playground = () => (
   <StructuredListWrapper {...props()}>
     <StructuredListHead>
@@ -123,14 +113,6 @@ export const Playground = () => (
   </StructuredListWrapper>
 );
 
-Playground.parameters = {
-  info: {
-    text: `
-        Structured Lists group content that is similar or related, such as terms or definitions.
-      `,
-  },
-};
-
 export const Selection = () => {
   const structuredListBodyRowGenerator = (numRows) => {
     return Array.apply(null, Array(numRows)).map((n, i) => (
@@ -151,11 +133,11 @@ export const Selection = () => {
           defaultChecked={!i || null}
         />
         <StructuredListCell>
-          <CheckmarkFilled16
+          <CheckmarkFilled
             className={`${prefix}--structured-list-svg`}
             aria-label="select an option">
             <title>select an option</title>
-          </CheckmarkFilled16>
+          </CheckmarkFilled>
         </StructuredListCell>
       </StructuredListRow>
     ));
@@ -177,14 +159,6 @@ export const Selection = () => {
   );
 };
 
-Selection.parameters = {
-  info: {
-    text: `
-    Structured Lists with selection allow a row of list content to be selected.
-  `,
-  },
-};
-
 export const Skeleton = () => (
   <div style={{ width: '800px' }}>
     <StructuredListSkeleton />
@@ -193,11 +167,3 @@ export const Skeleton = () => (
 );
 
 Skeleton.storyName = 'skeleton';
-
-Skeleton.parameters = {
-  info: {
-    text: `
-        Placeholder skeleton state to use when content is loading.
-      `,
-  },
-};

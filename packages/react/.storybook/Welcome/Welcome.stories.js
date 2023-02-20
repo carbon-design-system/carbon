@@ -5,24 +5,21 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-/* eslint-disable no-console */
-
 import React from 'react';
 import { Welcome as Intro } from './Welcome';
-import { default as Usage } from './Usage';
 import mdx from './Welcome.mdx';
 
 export default {
-  title: ' Getting Started',
+  title: ' Getting Started/ Welcome',
   component: Intro,
-  Usage,
   parameters: {
     docs: {
       page: mdx,
+    },
+    controls: {
+      hideNoControlsWarning: true,
     },
   },
 };
 
 export const Welcome = () => <Intro />;
-
-export const _UsingTheStorybook = () => <Usage />;

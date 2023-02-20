@@ -57,7 +57,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     position: absolute;
     left: 0;
     width: rem(128px);
-    height: 1px;
+    height: 2px;
     border: $progress-indicator-bar-width;
   }
 
@@ -77,8 +77,12 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     fill: $interactive;
   }
 
+  .#{$prefix}--progress--space-equal .#{$prefix}--progress-text {
+    overflow: hidden;
+  }
+
   .#{$prefix}--progress-label {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     overflow: hidden;
     max-width: rem(88px);
@@ -97,15 +101,9 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   }
 
   .#{$prefix}--progress-label:hover {
-    box-shadow: 0 rem(1px) $link-primary;
-    color: $link-primary;
+    box-shadow: 0 rem(1px) $link-primary-hover;
+    color: $link-primary-hover;
     cursor: pointer;
-  }
-
-  .#{$prefix}--progress-label:focus {
-    box-shadow: 0 rem(3px) 0 0 $link-primary;
-    color: $link-primary;
-    outline: none;
   }
 
   .#{$prefix}--progress--space-equal .#{$prefix}--progress-label {
@@ -113,10 +111,18 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     margin-right: 0.75rem;
   }
 
-  .#{$prefix}--progress-label:active {
-    //is this still a color token??
-    box-shadow: 0 rem(3px) 0 0 $background-brand;
-    color: $background-brand;
+  .#{$prefix}--progress-step-button:not(.#{$prefix}--progress-step-button--unclickable) {
+    &:focus {
+      outline: none;
+    }
+    &:focus-visible .#{$prefix}--progress-label {
+      color: $focus;
+      outline: rem(1px) solid $focus;
+    }
+    .#{$prefix}--progress-label:active {
+      box-shadow: 0 rem(1px) 0 0 $text-primary;
+      color: $text-primary;
+    }
   }
 
   //OVERFLOW STYLING
@@ -137,7 +143,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   //single line tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip {
-    @include type-style('body-long-01');
+    @include type-style('body-01');
 
     display: block;
     width: rem(125px);
@@ -153,7 +159,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
 
   //multiline tooltip
   .#{$prefix}--progress-step .#{$prefix}--tooltip_multi {
-    @include type-style('body-long-01');
+    @include type-style('body-01');
 
     width: rem(150px);
     height: auto;
@@ -242,12 +248,6 @@ $progress-indicator-bar-width: 1px inset transparent !default;
       cursor: not-allowed;
     }
 
-    .#{$prefix}--progress-label:focus,
-    .#{$prefix}--progress-label:active {
-      box-shadow: none;
-      outline: none;
-    }
-
     .#{$prefix}--progress-line {
       cursor: not-allowed;
     }
@@ -273,9 +273,20 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     margin-top: 0.625rem;
   }
 
+  .#{$prefix}--progress.#{$prefix}--progress--vertical.#{$prefix}--skeleton
+    .#{$prefix}--progress-label {
+    margin-top: 0.0625rem;
+  }
+
   // Vertical Variant
 
   .#{$prefix}--progress--vertical {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .#{$prefix}--progress--vertical,
+  .#{$prefix}--progress-text {
     display: flex;
     flex-direction: column;
   }
@@ -285,7 +296,6 @@ $progress-indicator-bar-width: 1px inset transparent !default;
     width: initial;
     min-width: initial;
     min-height: 3.625rem;
-    flex-wrap: wrap;
     align-content: flex-start;
   }
 
@@ -314,8 +324,7 @@ $progress-indicator-bar-width: 1px inset transparent !default;
   .#{$prefix}--progress--vertical .#{$prefix}--progress-optional {
     position: static;
     width: 100%;
-    margin-top: auto;
-    margin-left: $spacing-07;
+    margin: auto 0;
   }
 
   .#{$prefix}--progress--vertical .#{$prefix}--progress-line {

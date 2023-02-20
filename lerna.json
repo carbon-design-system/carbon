@@ -1,17 +1,21 @@
 {
-  "lerna": "3.13.4",
+  "lerna": "6.4.0",
   "version": "independent",
   "npmClient": "yarn",
   "npmClientArgs": ["--frozen-lockfile"],
   "useWorkspaces": true,
   "ignoreChanges": [
     "actions/**",
-    "codemods/**",
     "**/__fixtures__/**",
     "**/__tests__/**",
     "**/docs/**",
     "**/e2e/**",
     "**/examples/**",
     "**/*.md"
-  ]
+  ],
+  "command": {
+    "version": {
+      "message": "chore(release): %s"
+    }
+  }
 }

@@ -8,11 +8,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const SelectItem = ({ className, value, disabled, hidden, text, ...other }) => {
+  const prefix = usePrefix();
   const selectItemClasses = classNames({
     [`${prefix}--select-option`]: true,
     [className]: className,

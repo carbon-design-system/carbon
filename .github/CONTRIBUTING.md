@@ -20,7 +20,7 @@ contributing environment. Please take a look at our
 Before contributing to Carbon, you should make sure you have the following tools
 installed:
 
-- [Node.js](https://nodejs.org/en/download/) v14 or above here or follow their
+- [Node.js](https://nodejs.org/en/download/) v18 or above here or follow their
   installation through a package manager
   [here](https://nodejs.org/en/download/package-manager/))
   - If you're on macOS, we recommend using
@@ -29,6 +29,11 @@ installed:
     version manager for Node.
 - Git
 - [Yarn](https://yarnpkg.com/en/docs/install)
+- [WSL](../docs/guides/setup/windows.md) (Windows Only)
+
+If you're using Windows, there are some
+[additional steps](https://github.com/carbon-design-system/carbon/blob/main/docs/guides/setup/windows.md)
+you'll need to take.
 
 You'll also need a code editor to make changes to Carbon. There are many to
 choose from but some popular options are
@@ -38,6 +43,8 @@ choose from but some popular options are
 With that all in place, you're ready to start contributing to Carbon!
 
 ## Start contributing
+
+## - Setting up your environment -
 
 ### 1. Fork the repo:
 
@@ -88,7 +95,28 @@ upstream    git@github.com:carbon-design-system/carbon.git (fetch)
 upstream    git@github.com:carbon-design-system/carbon.git (push)
 ```
 
-### 4. Work in a branch
+Great job on getting to this point! Now it's time to code :computer:
+
+## - Setting up your code -
+
+### 1. Find or create an issue
+
+Before you start coding, if you have an issue in mind that you'd like to tackle,
+please first [search](https://github.com/IBM/carbon-components/issues) the
+issues to see if a similar issue you'd like to work on has already been
+submitted. If a similar issue has been submitted, assign yourself or ask to be
+assigned to the issue by posting a comment.
+
+If the issue does not exist, please make a new issue. Issues give us context
+about what you are contributing and expedite the process to getting your
+contributions merged into Carbon. It's a win for everybody :tada:
+
+If you have no idea what you'd like to contribute, take a look at our backlog of
+issues and take your pick! Our issues with the label
+[`good first issue`](https://github.com/carbon-design-system/carbon/issues?q=is%3Aopen+is%3Aissue+label%3A%22good+first+issue+%F0%9F%91%8B%22)
+are a great starting point. 👋
+
+### 2. Work in a branch
 
 When contributing to Carbon, your work should always be done in a branch off of
 your repo, this is also how you will submit your pull request when your work is
@@ -102,7 +130,7 @@ git pull origin main
 git checkout -b {your-branch-name}
 ```
 
-### 5. Build and start the development server
+### 3. Build and start the development server
 
 From the root directory of your fork, run:
 
@@ -139,7 +167,7 @@ For information about our coding style, such as how we name our classes and our
 file structure, go to our
 [developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#coding-style)
 
-### 6. Test your JavaScript code
+### 4. Test your JavaScript code
 
 If you're contributing to our JavaScript code, test your changes by running our
 test commands:
@@ -151,7 +179,7 @@ yarn test
 For more extensive testing information, see our
 [developer handbook](https://github.com/carbon-design-system/carbon/blob/main/docs/developer-handbook.md#common-tasks)
 
-### 7. Add yourself to the contributor list
+### 5. Add yourself to the contributor list
 
 We want to make sure everyone is recognized for their contributions to Carbon!
 To add yourself to the `all-contributors` table in the README, you'll need to
@@ -159,26 +187,18 @@ run the following commands from the root of the repo:
 
 ```sh
 # Add new contributor <username>, who made a contribution of type <contribution>
-all-contributors add <username> <contribution>
+yarn all-contributors add <username> <contribution>
 # Example:
-all-contributors add tw15egan code,doc
+yarn all-contributors add tw15egan code,doc
 ```
 
 Then, you'll need to generate the updated `all-contributors` table by running
 
 ```sh
-all-contributors generate
+yarn all-contributors generate
 ```
 
-### 8. Make a pull request
-
-**Note:** Before you make a pull request,
-[search](https://github.com/IBM/carbon-components/issues) the issues to see if a
-similar issue has already been submitted. If a similar issue has been submitted,
-assign yourself or ask to be assigned to the issue by posting a comment. If the
-issue does not exist, please make a new issue. Issues give us context about what
-you are contributing and expedite the process to getting your contributions
-merged into Carbon. It's a win for everybody :tada:
+### 6. Make a pull request
 
 When you're at a good stopping place and you're ready for feedback from other
 contributors and maintainers, **push your commits to your fork**:
@@ -263,16 +283,18 @@ GitHub.
    (i.e. Don't open an issue for website documentation in the `carbon`
    monorepo.) We reserve the right to close any issues that haven't been filled
    out properly according to the issue template.
-2. **Contributor License Agreement:** Before you can contribute any code, we
-   need you to sign a Contributor License Agreement (CLA). Code doesn't just
-   mean "components"; if you're contributing to our website docs, you're
-   contributing code. ;)
-3. **Development environment:** If you haven't already, fork and clone whichever
+2. **Development environment:** If you haven't already, fork and clone whichever
    repo you want to contribute to. Then, create a new branch and add your
    contribution in it. Checkout our
    [Developer Handbook](../docs/developer-handbook.md) to read up on our best
    coding practices and proper commit messages.
-4. **Pull request:** Submit a PR. Be sure to fill out the template properly.
+3. **Pull request:** Submit a PR. Be sure to fill out the template properly.
+4. **Developer Certificate of Origin:** In order to contribute any code, we need
+   you to sign a Developer Certificate of Origin (DCO). Code doesn't just mean
+   "components"; if you're contributing to our website docs, you're contributing
+   code. Sign the
+   [DCO](https://github.com/carbon-design-system/carbon-dco/blob/main/dco.md) by
+   making a comment in the PR you just made.
 5. **Approval:** Get PR approved by design and developers, or make any necessary
    changes for approval. This process may be quick or take a few iterations of
    feedback-update.
@@ -334,11 +356,31 @@ work:
 ### If I'm contributing code, am I required to contribute it for all frameworks?
 
 If you've been working with Carbon for a while, you know that we have code
-assets in vanilla JS, React, Vue and Angular. While the core team only maintains
-the vanilla and React components, we work closely with the Vue and Angular teams
-to maintain parity. The core team also develops with a React first approach,
-which means that our vanilla components will never be ahead of React, though it
-may not be true for the other way around. If you're contributing a bug fix in a
-vanilla component which also exists in the React version, you can either
-contribute a fix for the React version as well or open an issue so that we can
-update the React component accordingly.
+assets in multiple frameworks. While the core team only maintains the React
+components, we work closely with the other framework teams to maintain parity.
+If you're contributing a bug fix in a framework other than React for a component
+which also exists in the React version, you can either contribute a fix for the
+React version as well or open an issue so that we can update the React component
+accordingly.
+
+### How can I test-drive components or provide a bug reproduction?
+
+There are some fantastic tools out there today that provide a near fully-fledged
+development environment in the browser. These are incredibly helpful for trying
+out simple configurations or providing working code demonstrating bugs or
+problems with the libraries.
+
+We've created a few templates, housed in the repo, that can be used on these
+services:
+
+#### Stackblitz
+
+- [`@carbon/react` template](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx),
+  supporting faster sass compilation and react component usage
+
+#### Codesandbox
+
+- [`@carbon/react` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox)
+- [`@carbon/styles` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v11.2.0/examples/codesandbox-styles)
+- [`carbon-components-react` template](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/v10/packages/react/examples/codesandbox),
+  configured to use v10.x assets

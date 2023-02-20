@@ -5,9 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-// @use '../../config' as *;
 @use '../../motion' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../spacing' as *;
 @use '../../type' as *;
 @use '../../utilities/box-shadow' as *;
@@ -15,66 +14,75 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
 
-@keyframes fpFadeInDown {
+@use '../button/tokens' as *;
+
+@keyframes fp-fade-in-down {
   from {
     opacity: 0;
     transform: translate3d(0, -20px, 0);
   }
+
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes fpSlideLeft {
+@keyframes fp-slide-left {
   from {
     transform: translate3d(0, 0, 0);
   }
+
   to {
     transform: translate3d(-100%, 0, 0);
   }
 }
 
-@keyframes fpSlideLeftNew {
+@keyframes fp-slide-left-new {
   from {
     transform: translate3d(100%, 0, 0);
   }
+
   to {
     transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes fpSlideRight {
+@keyframes fp-slide-right {
   from {
     transform: translate3d(0, 0, 0);
   }
+
   to {
     transform: translate3d(100%, 0, 0);
   }
 }
 
-@keyframes fpSlideRightNew {
+@keyframes fp-slide-right-new {
   from {
     transform: translate3d(-100%, 0, 0);
   }
+
   to {
     transform: translate3d(0, 0, 0);
   }
 }
 
-@keyframes fpFadeOut {
+@keyframes fp-fade-out {
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
 }
 
-@keyframes fpFadeIn {
+@keyframes fp-fade-in {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -121,7 +129,7 @@
     padding: $spacing-02 $spacing-02 $spacing-03 $spacing-02;
     border: none;
     margin-top: rem(-2px);
-    background-color: $ui-01;
+    background-color: $layer-01;
 
     &:focus {
       @include focus-outline('border');
@@ -129,7 +137,11 @@
   }
 
   .flatpickr-calendar.animate.open {
-    animation: fpFadeInDown $duration-fast-02 motion(entrance, productive);
+    animation: fp-fade-in-down $duration-fast-02 motion(entrance, productive);
+
+    @media screen and (prefers-reduced-motion: reduce) {
+      animation: none;
+    }
   }
 
   .flatpickr-calendar.inline {
@@ -192,13 +204,13 @@
   }
 
   .flatpickr-month {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: flex;
     height: rem(40px);
     align-items: center;
     background-color: transparent;
-    color: $text-01;
+    color: $text-primary;
     line-height: 1;
     text-align: center;
   }
@@ -213,32 +225,37 @@
     justify-content: center;
     padding: 0;
     cursor: pointer;
-    fill: $icon-01;
+    fill: $icon-primary;
     line-height: 16px;
     text-decoration: none;
     transform: scale(1, 1) #{'/*rtl: scale(-1,1)*/'};
     transition: background-color $duration-fast-01 motion(standard, productive);
+    user-select: none;
     // Windows HCM fix
     @include high-contrast-mode('icon-fill');
 
+    @media screen and (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+
     &:hover {
-      background-color: $hover-ui;
+      background-color: $layer-hover;
     }
   }
 
   .flatpickr-next-month.disabled svg,
   .flatpickr-prev-month.disabled svg {
     cursor: not-allowed;
-    fill: $ui-05;
+    fill: $icon-disabled;
   }
 
   .flatpickr-next-month.disabled:hover svg,
   .flatpickr-prev-month.disabled:hover svg {
-    fill: $ui-05;
+    fill: $icon-disabled;
   }
 
   .flatpickr-current-month {
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: flex;
     height: rem(28px);
@@ -252,7 +269,7 @@
     margin-left: $spacing-02;
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $layer-hover;
     }
   }
 
@@ -261,7 +278,7 @@
     width: rem(60px);
 
     &:hover {
-      background-color: $hover-ui;
+      background-color: $background-hover;
     }
   }
 
@@ -274,7 +291,7 @@
     // Added in when upgraded to Flatpickr 4.5.5 (#1977)
     -moz-appearance: textfield; /* Firefox */
     background-color: $field-01;
-    color: $text-01;
+    color: $text-primary;
     cursor: default;
     font-family: inherit;
     font-size: inherit;
@@ -293,8 +310,8 @@
 
     &[disabled],
     &[disabled]:hover {
-      background-color: $ui-01;
-      color: $disabled-02;
+      background-color: $layer-01;
+      color: $text-disabled;
       pointer-events: none;
     }
   }
@@ -304,7 +321,7 @@
     border-bottom: 0;
 
     &::after {
-      border-bottom: rem(4px) solid $icon-01;
+      border-bottom: rem(4px) solid $icon-primary;
     }
   }
 
@@ -312,7 +329,7 @@
     top: rem(11px);
 
     &::after {
-      border-top: rem(4px) solid $icon-01;
+      border-top: rem(4px) solid $icon-primary;
     }
   }
 
@@ -338,22 +355,22 @@
     }
 
     &:hover::after {
-      border-top-color: $interactive-01;
-      border-bottom-color: $interactive-01;
+      border-top-color: $button-primary;
+      border-bottom-color: $button-primary;
     }
 
     &:active::after {
-      border-top-color: $interactive-04;
-      border-bottom-color: $interactive-04;
+      border-top-color: $border-interactive;
+      border-bottom-color: $border-interactive;
     }
   }
 
   .numInput[disabled] ~ .arrowUp::after {
-    border-bottom-color: $disabled-02;
+    border-bottom-color: $text-disabled;
   }
 
   .numInput[disabled] ~ .arrowDown::after {
-    border-top-color: $disabled-02;
+    border-top-color: $text-disabled;
   }
 
   .numInputWrapper:hover .arrowUp,
@@ -378,10 +395,10 @@
   }
 
   .flatpickr-weekday {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     flex: 1;
-    color: $text-01;
+    color: $text-primary;
     cursor: default;
   }
 
@@ -390,8 +407,8 @@
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeft {
-    animation: fpFadeOut 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
+      fp-slide-left 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeft,
@@ -400,52 +417,52 @@
   }
 
   .flatpickr-calendar.animate .dayContainer.slideLeftNew {
-    animation: fpFadeIn 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      fpSlideLeft 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
+      fp-slide-left 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideRight {
-    animation: fpFadeOut 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      fpSlideRight 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fp-fade-out 400ms cubic-bezier(0.23, 1, 0.32, 1),
+      fp-slide-right 400ms cubic-bezier(0.23, 1, 0.32, 1);
     transform: translate3d(100%, 0, 0);
   }
 
   .flatpickr-calendar.animate .dayContainer.slideRightNew {
-    animation: fpFadeIn 400ms cubic-bezier(0.23, 1, 0.32, 1),
-      fpSlideRightNew 400ms cubic-bezier(0.23, 1, 0.32, 1);
+    animation: fp-fade-in 400ms cubic-bezier(0.23, 1, 0.32, 1),
+      fp-slide-right-new 400ms cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   .flatpickr-day {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: flex;
     width: rem(40px);
     height: rem(40px);
     align-items: center;
     justify-content: center;
-    color: $text-01;
+    color: $text-primary;
     cursor: pointer;
     transition: all $duration-fast-01 motion(standard, productive);
 
     &:hover {
-      background: $hover-ui;
+      background: $layer-hover;
     }
 
     &:focus {
       @include focus-outline('outline');
 
-      outline-color: $interactive-01;
+      outline-color: $button-primary;
     }
   }
 
   .nextMonthDay,
   .prevMonthDay {
-    color: $text-05;
+    color: $text-helper;
   }
 
   .flatpickr-day.today {
     position: relative;
-    color: $link-01;
+    color: $link-primary;
     font-weight: 600;
 
     &::after {
@@ -455,7 +472,7 @@
       display: block;
       width: rem(4px);
       height: rem(4px);
-      background-color: $link-01;
+      background-color: $link-primary;
       content: '';
       transform: translateX(-50%);
     }
@@ -475,18 +492,18 @@
 
   .flatpickr-day.inRange {
     background-color: $highlight;
-    color: $text-01;
+    color: $text-primary;
   }
 
   .flatpickr-day.selected {
-    background-color: $interactive-01;
-    color: $text-04;
+    background-color: $button-primary;
+    color: $text-on-color;
     @include high-contrast-mode('focus') {
       outline-style: dotted;
     }
 
     &:focus {
-      outline: rem(1px) solid $ui-02;
+      outline: rem(1px) solid $layer-02;
       outline-offset: rem(-3px);
     }
   }
@@ -501,23 +518,23 @@
     @include focus-outline('outline');
 
     z-index: 3;
-    background: $ui-01;
+    background: $layer-01;
   }
 
   .flatpickr-day.endRange:hover {
     @include focus-outline('outline');
 
-    background: $ui-01;
-    color: $text-01;
+    background: $layer-01;
+    color: $text-primary;
   }
 
   .flatpickr-day.endRange.inRange.selected {
-    background: $interactive-01;
-    color: $text-04;
+    background: $button-primary;
+    color: $text-on-color;
   }
 
   .flatpickr-day.flatpickr-disabled {
-    color: $disabled-02;
+    color: $text-disabled;
     cursor: not-allowed;
 
     &:hover {

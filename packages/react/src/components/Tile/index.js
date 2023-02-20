@@ -5,4 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export * from './Tile';
+import {
+  Tile,
+  ClickableTile,
+  SelectableTile,
+  ExpandableTile,
+  TileAboveTheFoldContent,
+  TileBelowTheFoldContent,
+} from './Tile';
+
+export {
+  Tile,
+  ClickableTile,
+  SelectableTile,
+  ExpandableTile,
+  TileAboveTheFoldContent,
+  TileBelowTheFoldContent,
+};

@@ -5,4 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-export default from './OverflowMenuItem';
+import OverflowMenuItem from './OverflowMenuItem';
+
+export default OverflowMenuItem;
+export { OverflowMenuItem };

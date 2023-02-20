@@ -5,8 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-'use strict';
-
 const BASE62 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 /**
@@ -15,7 +13,7 @@ const BASE62 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
  * @param {string} str
  * @returns {string}
  */
-function hash(str) {
+export function hash(str) {
   const length = str.length;
   const rem = length & 3;
   const len = length ^ rem;
@@ -81,7 +79,3 @@ function hash(str) {
   }
   return s;
 }
-
-module.exports = {
-  hash,
-};

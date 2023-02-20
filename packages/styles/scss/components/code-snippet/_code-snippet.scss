@@ -8,7 +8,7 @@
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
-@use '../../compat/theme' as *;
+@use '../../theme' as *;
 @use '../../type' as *;
 @use '../copy-button';
 @use '../../utilities/convert' as *;
@@ -38,13 +38,14 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--disabled,
   .#{$prefix}--snippet--disabled
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand {
-    background-color: $layer-disabled;
+    background-color: $layer;
     color: $text-disabled;
   }
 
   .#{$prefix}--snippet--disabled .#{$prefix}--snippet-btn--expand:hover,
+  .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn,
   .#{$prefix}--snippet--disabled .#{$prefix}--copy-btn:hover {
-    background-color: $layer-disabled;
+    background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
   }
@@ -67,22 +68,22 @@ $copy-btn-feedback: $background-inverse !default;
     position: relative;
     display: inline;
     padding: 0;
-    border: 2px solid transparent;
-    background-color: $field;
+    border: 1px solid transparent;
+    background-color: $layer;
     border-radius: 4px;
     color: $text-primary;
     cursor: pointer;
 
     &:hover {
-      background-color: $layer-accent;
+      background-color: $layer-hover;
     }
 
     &:active {
-      background-color: $copy-active;
+      background-color: $layer-active;
     }
 
     &:focus {
-      border: 2px solid $focus;
+      border: 1px solid $focus;
       outline: none;
     }
 
@@ -90,6 +91,8 @@ $copy-btn-feedback: $background-inverse !default;
       @include tooltip--caret;
 
       display: none;
+
+      border: none;
     }
 
     .#{$prefix}--copy-btn__feedback {
@@ -101,8 +104,6 @@ $copy-btn-feedback: $background-inverse !default;
       margin: auto;
       clip: auto;
     }
-
-    @include tooltip--placement('icon', 'bottom', 'center');
   }
 
   .#{$prefix}--snippet--inline.#{$prefix}--copy-btn--animating::before,
@@ -131,13 +132,13 @@ $copy-btn-feedback: $background-inverse !default;
     display: inline-block;
 
     &:hover {
-      background-color: $field;
+      background-color: $layer;
       cursor: auto;
     }
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline.#{$prefix}--snippet--no-copy:hover {
-    background-color: $field-02;
+    background-color: $layer-hover;
     cursor: auto;
   }
 
@@ -234,14 +235,15 @@ $copy-btn-feedback: $background-inverse !default;
     overflow-x: auto;
   }
 
-  .#{$prefix}--snippet--multi .#{$prefix}--snippet-container pre::after {
+  .#{$prefix}--snippet--multi.#{$prefix}--snippet--has-right-overflow
+    .#{$prefix}--snippet-container
+    pre::after {
     position: absolute;
     top: 0;
     right: 0;
     width: rem(16px);
     height: 100%;
-    // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($field, 0), $field);
+    background-image: linear-gradient(to right, transparent, $layer);
     content: '';
   }
 
@@ -257,12 +259,9 @@ $copy-btn-feedback: $background-inverse !default;
     transition: all $duration-fast-01 motion(standard, productive);
   }
 
-  .#{$prefix}--snippet-button {
+  .#{$prefix}--copy-btn {
     @include reset;
 
-    position: absolute;
-    top: 0;
-    right: 0;
     display: flex;
     overflow: visible;
     width: $spacing-08;
@@ -271,7 +270,7 @@ $copy-btn-feedback: $background-inverse !default;
     justify-content: center;
     padding: 0;
     border: none;
-    background-color: $field;
+    background-color: $layer;
     cursor: pointer;
     outline: none;
 
@@ -282,43 +281,8 @@ $copy-btn-feedback: $background-inverse !default;
     }
   }
 
-  .#{$prefix}--snippet--multi .#{$prefix}--snippet-button {
-    top: $spacing-03;
-    right: $spacing-03;
-    width: $spacing-07;
-    height: $spacing-07;
-  }
-
-  .#{$prefix}--snippet-button:hover {
-    background: $field-hover;
-  }
-
-  .#{$prefix}--snippet-button:active {
-    background-color: $copy-active;
-  }
-
-  .#{$prefix}--btn--copy__feedback {
-    @include type-style('body-short-01');
-    @include font-family('sans');
-
-    z-index: z('overlay');
-    top: 0.75rem;
-    right: 1.25rem;
-    left: inherit;
-    font-weight: 400;
-  }
-
-  .#{$prefix}--btn--copy__feedback::before,
-  .#{$prefix}--btn--copy__feedback::after {
-    background: $copy-btn-feedback;
-  }
-
-  .#{$prefix}--btn--copy__feedback::after {
-    border: none;
-  }
-
   // TODO: remove copy button styles above
-  .#{$prefix}--snippet .#{$prefix}--copy-btn {
+  .#{$prefix}--snippet .#{$prefix}--popover-container {
     @include font-family('sans');
 
     position: absolute;
@@ -326,9 +290,40 @@ $copy-btn-feedback: $background-inverse !default;
     right: 0;
   }
 
+  // Overrides for codesnippet copy btn
+  // TLDR: Copy/CopyButton now uses IconButton, which uses Carbon buttons under the hood
+  // v10 opy just used native html button so it didn't have extra carbon styles that needed overriding
+  .#{$prefix}--snippet--inline.#{$prefix}--btn--md.#{$prefix}--btn--icon-only {
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--btn--md {
+    min-height: 1.25rem;
+  }
+
+  .#{$prefix}--snippet--inline.#{$prefix}--btn--primary:hover {
+    color: $text-primary;
+  }
+
+  // override multi copy btn styles
+  .#{$prefix}--snippet.#{$prefix}--snippet--multi
+    .#{$prefix}--popover-container {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn.#{$prefix}--btn--md {
+    z-index: 10;
+    width: $spacing-07;
+    height: $spacing-07;
+    min-height: $spacing-07;
+    padding: 0;
+  }
+
   // Show more / less button
   .#{$prefix}--snippet-btn--expand {
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
     @include font-family('sans');
 
     position: absolute;
@@ -340,7 +335,7 @@ $copy-btn-feedback: $background-inverse !default;
 
     padding: $spacing-03 $spacing-05;
     border: 0;
-    background-color: $field;
+    background-color: $layer;
     color: $text-primary;
   }
 
@@ -361,12 +356,12 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet-btn--expand:hover {
-    background: $field-hover;
+    background: $layer-hover;
     color: $text-primary;
   }
 
   .#{$prefix}--snippet-btn--expand:active {
-    background-color: $copy-active;
+    background-color: $layer-active;
   }
 
   .#{$prefix}--snippet-btn--expand:focus {
@@ -379,7 +374,7 @@ $copy-btn-feedback: $background-inverse !default;
     .#{$prefix}--snippet-btn--expand
     .#{$prefix}--icon-chevron--down {
     transform: rotate(180deg);
-    transition: transform $transition--expansion;
+    transition: transform $transition-expansion;
   }
 
   // Light version
@@ -387,7 +382,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--light .#{$prefix}--snippet-button,
   .#{$prefix}--snippet--light .#{$prefix}--btn.#{$prefix}--snippet-btn--expand,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn {
-    background-color: $field-02;
+    background-color: $layer;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:hover,
@@ -395,7 +390,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--light
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:hover,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:hover {
-    background-color: $hover-light-ui;
+    background-color: $layer-hover;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--inline:active,
@@ -403,7 +398,7 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet--light
     .#{$prefix}--btn.#{$prefix}--snippet-btn--expand:active,
   .#{$prefix}--snippet--light .#{$prefix}--copy-btn:active {
-    background-color: $active-light-ui;
+    background-color: $layer-active;
   }
 
   .#{$prefix}--snippet--light.#{$prefix}--snippet--single::after,
@@ -411,7 +406,7 @@ $copy-btn-feedback: $background-inverse !default;
     .#{$prefix}--snippet-container
     pre::after {
     // Safari interprets `transparent` differently, so make color token value transparent instead:
-    background-image: linear-gradient(to right, rgba($field-02, 0), $field-02);
+    background-image: linear-gradient(to right, rgba($layer, 0), $layer);
   }
 
   // Skeleton State
@@ -433,14 +428,6 @@ $copy-btn-feedback: $background-inverse !default;
     &::after {
       top: rem(-4px);
     }
-  }
-
-  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
-    z-index: 10;
-    top: $spacing-03;
-    right: $spacing-03;
-    width: $spacing-07;
-    height: $spacing-07;
   }
 
   .#{$prefix}--snippet--multi
@@ -469,13 +456,13 @@ $copy-btn-feedback: $background-inverse !default;
   .#{$prefix}--snippet__overflow-indicator--left {
     order: 0;
     margin-right: -$spacing-05;
-    background-image: linear-gradient(to left, transparent, $field);
+    background-image: linear-gradient(to left, transparent, $layer);
   }
 
   .#{$prefix}--snippet__overflow-indicator--right {
     order: 2;
     margin-left: -$spacing-05;
-    background-image: linear-gradient(to right, transparent, $field);
+    background-image: linear-gradient(to right, transparent, $layer);
   }
 
   .#{$prefix}--snippet--single .#{$prefix}--snippet__overflow-indicator--right,
@@ -507,11 +494,11 @@ $copy-btn-feedback: $background-inverse !default;
   }
 
   .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--left {
-    background-image: linear-gradient(to left, transparent, $field-02);
+    background-image: linear-gradient(to left, transparent, $layer);
   }
 
   .#{$prefix}--snippet--light .#{$prefix}--snippet__overflow-indicator--right {
-    background-image: linear-gradient(to right, transparent, $field-02);
+    background-image: linear-gradient(to right, transparent, $layer);
   }
 
   // Safari-only media query
@@ -520,11 +507,11 @@ $copy-btn-feedback: $background-inverse !default;
   @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
       .#{$prefix}--snippet__overflow-indicator--left {
-        background-image: linear-gradient(to left, rgba($field, 0), $field);
+        background-image: linear-gradient(to left, rgba($layer, 0), $layer);
       }
 
       .#{$prefix}--snippet__overflow-indicator--right {
-        background-image: linear-gradient(to right, rgba($field, 0), $field);
+        background-image: linear-gradient(to right, rgba($layer, 0), $layer);
       }
     }
   }

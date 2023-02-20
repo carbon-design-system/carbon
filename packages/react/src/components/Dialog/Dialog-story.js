@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+/* eslint-disable storybook/story-exports */
+
 import * as React from 'react';
 import { FocusScope } from '../FocusScope';
 import { Dialog } from '../Dialog';
@@ -13,6 +15,7 @@ import { Portal } from '../Portal';
 
 export default {
   title: 'Experimental/unstable_Dialog',
+  component: Dialog,
   includeStories: [],
 };
 

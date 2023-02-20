@@ -8,11 +8,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
 import { keys, match, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 export default function TreeView({
   active: prespecifiedActive,
@@ -20,13 +18,14 @@ export default function TreeView({
   className,
   hideLabel = false,
   label,
-  multiselect,
+  multiselect = false,
   onSelect,
   selected: preselected = [],
-  size = 'default',
+  size = 'sm',
   ...rest
 }) {
   const { current: treeId } = useRef(rest.id || uniqueId());
+  const prefix = usePrefix();
   const treeClasses = classNames(className, `${prefix}--tree`, {
     [`${prefix}--tree--${size}`]: size !== 'default',
   });
@@ -42,6 +41,7 @@ export default function TreeView({
       }
     );
   }
+
   function handleTreeSelect(event, node = {}) {
     const { id: nodeId } = node;
     if (multiselect && (event.metaKey || event.ctrlKey)) {
@@ -50,36 +50,33 @@ export default function TreeView({
       } else {
         setSelected(selected.filter((selectedId) => selectedId !== nodeId));
       }
+      onSelect?.(event, node);
     } else {
       setSelected([nodeId]);
       setActive(nodeId);
-    }
-    if (onSelect) {
-      onSelect(event, node);
+      onSelect?.(event, { activeNodeId: nodeId, ...node });
     }
   }
+
   function handleFocusEvent(event) {
     if (event.type === 'blur') {
-      const {
-        relatedTarget: currentFocusedNode,
-        target: prevFocusedNode,
-      } = event;
+      const { relatedTarget: currentFocusedNode, target: prevFocusedNode } =
+        event;
       if (treeRootRef?.current?.contains(currentFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
     }
     if (event.type === 'focus') {
       resetNodeTabIndices();
-      const {
-        relatedTarget: prevFocusedNode,
-        target: currentFocusedNode,
-      } = event;
+      const { relatedTarget: prevFocusedNode, target: currentFocusedNode } =
+        event;
       if (treeRootRef?.current?.contains(prevFocusedNode)) {
         prevFocusedNode.tabIndex = -1;
       }
       currentFocusedNode.tabIndex = 0;
     }
   }
+
   let focusTarget = false;
   const nodesWithProps = React.Children.map(children, (node) => {
     const sharedNodeProps = {
@@ -101,25 +98,73 @@ export default function TreeView({
 
   function handleKeyDown(event) {
     event.stopPropagation();
-    if (matches(event, [keys.ArrowUp, keys.ArrowDown])) {
+    if (
+      matches(event, [
+        keys.ArrowUp,
+        keys.ArrowDown,
+        keys.Home,
+        keys.End,
+        { code: 'KeyA' },
+      ])
+    ) {
       event.preventDefault();
     }
+
     treeWalker.current.currentNode = event.target;
     let nextFocusNode;
+
     if (match(event, keys.ArrowUp)) {
       nextFocusNode = treeWalker.current.previousNode();
     }
     if (match(event, keys.ArrowDown)) {
       nextFocusNode = treeWalker.current.nextNode();
     }
+    if (matches(event, [keys.Home, keys.End, { code: 'KeyA' }])) {
+      const nodeIds = [];
+
+      if (matches(event, [keys.Home, keys.End])) {
+        if (
+          multiselect &&
+          event.shiftKey &&
+          event.ctrlKey &&
+          !treeWalker.current.currentNode.getAttribute('aria-disabled')
+        ) {
+          nodeIds.push(treeWalker.current.currentNode?.id);
+        }
+        while (
+          match(event, keys.Home)
+            ? treeWalker.current.previousNode()
+            : treeWalker.current.nextNode()
+        ) {
+          nextFocusNode = treeWalker.current.currentNode;
+
+          if (
+            multiselect &&
+            event.shiftKey &&
+            event.ctrlKey &&
+            !nextFocusNode.getAttribute('aria-disabled')
+          ) {
+            nodeIds.push(nextFocusNode?.id);
+          }
+        }
+      }
+      if (match(event, { code: 'KeyA' }) && event.ctrlKey) {
+        treeWalker.current.currentNode = treeWalker.current.root;
+
+        while (treeWalker.current.nextNode()) {
+          if (!treeWalker.current.currentNode.getAttribute('aria-disabled')) {
+            nodeIds.push(treeWalker.current.currentNode?.id);
+          }
+        }
+      }
+      setSelected(selected.concat(nodeIds));
+    }
     if (nextFocusNode && nextFocusNode !== event.target) {
       resetNodeTabIndices();
       nextFocusNode.tabIndex = 0;
       nextFocusNode.focus();
     }
-    if (rest.onKeyDown) {
-      rest.onKeyDown(event);
-    }
+    rest?.onKeyDown?.(event);
   }
 
   useEffect(() => {
@@ -136,16 +181,19 @@ export default function TreeView({
           return NodeFilter.FILTER_SKIP;
         },
       });
-  }, []);
+  }, [prefix]);
 
-  useEffect(() => {
-    if (preselected.length) {
-      setSelected(preselected);
-    }
-    if (prespecifiedActive) {
-      setActive(prespecifiedActive);
-    }
-  }, [preselected, prespecifiedActive]);
+  const useActiveAndSelectedOnMount = () =>
+    useEffect(() => {
+      if (preselected.length) {
+        setSelected(preselected);
+      }
+      if (prespecifiedActive) {
+        setActive(prespecifiedActive);
+      }
+    }, []);
+
+  useActiveAndSelectedOnMount();
 
   const labelId = `${treeId}__label`;
   const TreeLabel = () =>
@@ -154,6 +202,7 @@ export default function TreeView({
         {label}
       </label>
     );
+
   return (
     <>
       <TreeLabel />
@@ -199,7 +248,7 @@ TreeView.propTypes = {
   label: PropTypes.string.isRequired,
 
   /**
-   * Specify the selection mode of the tree.
+   * **[Experimental]** Specify the selection mode of the tree.
    * If `multiselect` is `false` then only one node can be selected at a time
    */
   multiselect: PropTypes.bool,
@@ -219,5 +268,5 @@ TreeView.propTypes = {
   /**
    * Specify the size of the tree from a list of available sizes.
    */
-  size: PropTypes.oneOf(['default', 'compact']),
+  size: PropTypes.oneOf(['xs', 'sm']),
 };

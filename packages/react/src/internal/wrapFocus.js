@@ -6,30 +6,26 @@
  */
 
 import findLast from 'lodash.findlast';
-import { settings } from 'carbon-components';
 import {
   DOCUMENT_POSITION_BROAD_PRECEDING,
   DOCUMENT_POSITION_BROAD_FOLLOWING,
   selectorTabbable,
 } from './keyboard/navigation';
 
-const { prefix } = settings;
-
 /**
  * @param {Node} node A DOM node.
  * @param {string[]} selectorsFloatingMenus The CSS selectors that matches floating menus.
  * @returns {boolean} `true` of the given `node` is in a floating menu.
  */
-function elementOrParentIsFloatingMenu(
-  node,
-  selectorsFloatingMenus = [
-    `.${prefix}--overflow-menu-options`,
-    `.${prefix}--tooltip`,
-    '.flatpickr-calendar',
-  ]
-) {
+function elementOrParentIsFloatingMenu(node, selectorsFloatingMenus = []) {
   if (node && typeof node.closest === 'function') {
-    return selectorsFloatingMenus.some((selector) => node.closest(selector));
+    const allSelectorsFloatingMenus = [
+      `.cds--overflow-menu-options`,
+      `.cds--tooltip`,
+      '.flatpickr-calendar',
+      ...selectorsFloatingMenus,
+    ];
+    return allSelectorsFloatingMenus.some((selector) => node.closest(selector));
   }
 }
 
@@ -58,9 +54,8 @@ function wrapFocus({
     !bodyNode.contains(currentActiveNode) &&
     !elementOrParentIsFloatingMenu(currentActiveNode, selectorsFloatingMenus)
   ) {
-    const comparisonResult = oldActiveNode.compareDocumentPosition(
-      currentActiveNode
-    );
+    const comparisonResult =
+      oldActiveNode.compareDocumentPosition(currentActiveNode);
     if (
       currentActiveNode === startTrapNode ||
       comparisonResult & DOCUMENT_POSITION_BROAD_PRECEDING

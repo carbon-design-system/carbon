@@ -9,11 +9,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 import cx from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const TableRow = (props) => {
+  const prefix = usePrefix();
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`
   const className = cx(props.className, {

@@ -8,15 +8,13 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { settings } from 'carbon-components';
 import {
-  ArrowUp20 as Arrow,
-  ArrowsVertical20 as Arrows,
+  ArrowUp as Arrow,
+  ArrowsVertical as Arrows,
 } from '@carbon/icons-react';
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const translationKeys = {
   buttonDescription: 'carbon.table.header.icon.description',
@@ -62,16 +60,19 @@ const TableHeader = React.forwardRef(function TableHeader(
     scope,
     sortDirection,
     translateWithId: t,
+    id,
     ...rest
   },
   ref
 ) {
+  const prefix = usePrefix();
   const uniqueId = useId('table-sort');
 
   if (!isSortable) {
     return (
       <th
         {...rest}
+        id={id}
         className={headerClassName}
         scope={scope}
         colSpan={colSpan}
@@ -87,7 +88,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     [`${prefix}--table-sort`]: true,
     [`${prefix}--table-sort--active`]:
       isSortHeader && sortDirection !== sortStates.NONE,
-    [`${prefix}--table-sort--ascending`]:
+    [`${prefix}--table-sort--descending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
@@ -100,12 +101,13 @@ const TableHeader = React.forwardRef(function TableHeader(
 
   return (
     <th
+      id={id}
       aria-sort={ariaSort}
       className={headerClassName}
       colSpan={colSpan}
       ref={ref}
       scope={scope}>
-      <div style={{ display: 'none' }} id={uniqueId}>
+      <div className={`${prefix}--table-sort__description`} id={uniqueId}>
         {sortDescription}
       </div>
       <button
@@ -116,8 +118,11 @@ const TableHeader = React.forwardRef(function TableHeader(
         {...rest}>
         <span className={`${prefix}--table-sort__flex`}>
           <div className={`${prefix}--table-header-label`}>{children}</div>
-          <Arrow className={`${prefix}--table-sort__icon`} />
-          <Arrows className={`${prefix}--table-sort__icon-unsorted`} />
+          <Arrow size={20} className={`${prefix}--table-sort__icon`} />
+          <Arrows
+            size={20}
+            className={`${prefix}--table-sort__icon-unsorted`}
+          />
         </span>
       </button>
     </th>
@@ -140,6 +145,11 @@ TableHeader.propTypes = {
    * many columns the TableHeader cell extends in a table
    */
   colSpan: PropTypes.number,
+
+  /**
+   * Supply an id to the th element.
+   */
+  id: PropTypes.string,
 
   /**
    * Specify whether this header is the header by which a table is being sorted

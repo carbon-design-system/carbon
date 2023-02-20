@@ -7,7 +7,7 @@
 
 'use strict';
 
-const { TokenFormat, group } = require('../../../src/next');
+const { TokenFormat, group } = require('../../../src/tokens');
 
 const denylist = new Set([
   'background',
@@ -88,8 +88,6 @@ const denylist = new Set([
   'layerSelectedInverse',
   'borderSubtleSelected',
 
-  'layerDisabled',
-  'fieldDisabled',
   'borderDisabled',
 
   'textDisabled',

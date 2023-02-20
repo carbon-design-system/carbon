@@ -12,5 +12,6 @@ module.exports = {
     require.resolve('./base'),
     require.resolve('./plugins/jest'),
     require.resolve('./plugins/react'),
+    require.resolve('./plugins/storybook'),
   ],
 };

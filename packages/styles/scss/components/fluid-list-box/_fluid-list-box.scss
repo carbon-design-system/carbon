@@ -1,0 +1,274 @@
+//
+// Copyright IBM Corp. 2022
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+//-----------------------------
+// Fluid List-box
+//-----------------------------
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../spacing' as *;
+@use '../../theme' as *;
+@use '../../utilities/convert' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/skeleton' as *;
+
+@mixin fluid-list-box {
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper {
+    position: relative;
+    height: 100%;
+    background: $field;
+    transition: background-color $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box {
+    min-height: rem(64px);
+    padding: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label {
+    position: absolute;
+    z-index: 1;
+    top: rem(13px);
+    left: $spacing-05;
+    display: flex;
+    width: calc(100% - 2rem);
+    height: rem(16px);
+    align-items: center;
+    margin: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--label::-webkit-scrollbar,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label::-webkit-scrollbar {
+    display: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label:not(:has(.#{$prefix}--toggletip-label)),
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label
+    .#{$prefix}--toggletip-label {
+    -ms-overflow-style: none;
+    overflow-x: scroll;
+    scrollbar-width: none;
+    white-space: nowrap;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field {
+    padding-top: rem(33px);
+    padding-bottom: rem(13px);
+    padding-left: $spacing-05;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__menu-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:not(.#{$prefix}--list-box__wrapper--fluid--condensed)
+    .#{$prefix}--list-box__menu-item {
+    height: $spacing-10;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid:not(.#{$prefix}--list-box__wrapper--fluid--condensed)
+    .#{$prefix}--list-box__menu-item__selected-icon {
+    top: rem(20px);
+  }
+
+  // Disabled styles
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-label {
+    color: $text-disabled;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-button {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--label--disabled
+    .#{$prefix}--toggletip-button
+    svg {
+    fill: $icon-disabled;
+  }
+
+  // Focus styles
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus {
+    @include focus-outline('outline');
+
+    z-index: 2;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__field:focus {
+    outline: none;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    :not(.#{$prefix}--list-box--up)
+    .#{$prefix}--list-box__menu {
+    top: calc(100% + rem(3px));
+  }
+
+  // Invalid / Warning styles
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:not(.#{$prefix}--list-box__wrapper--fluid--focus) {
+    @include focus-outline('invalid');
+
+    z-index: 2;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--list-box:not(.#{$prefix}--list-box--invalid),
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--focus
+    .#{$prefix}--list-box
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box
+    .#{$prefix}--text-input,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--combo-box.#{$prefix}--list-box--warning
+    .#{$prefix}--text-input {
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box__field:focus,
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--combo-box[data-invalid]
+    .#{$prefix}--text-input {
+    outline: none;
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid:focus-within {
+    outline-offset: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box,
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box--warning {
+    border-bottom: 1px solid transparent;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement {
+    padding: rem(8px) 4rem rem(8px) $spacing-05;
+    margin-top: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--form-requirement {
+    border-bottom: 1px solid $border-strong;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box__invalid-icon,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    .#{$prefix}--list-box__invalid-icon {
+    top: rem(81px);
+    right: $spacing-05;
+    pointer-events: none;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid]:not(.#{$prefix}--combo-box)
+    .#{$prefix}--list-box__field {
+    padding-right: $spacing-09;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper--fluid--invalid
+    .#{$prefix}--list-box[data-invalid].#{$prefix}--combo-box
+    .#{$prefix}--text-input {
+    padding-right: $spacing-10;
+  }
+
+  // Error + Warning divider
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box__divider {
+    display: none;
+    transition: border-color $duration-fast-01 motion(standard, productive);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--invalid
+    ~ .#{$prefix}--list-box__divider,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning
+    ~ .#{$prefix}--list-box__divider {
+    display: block;
+    border: none;
+    border-bottom: 1px solid $border-subtle;
+    margin: 0 1rem;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--invalid:hover:not(.#{$prefix}--combo-box)
+    ~ .#{$prefix}--list-box__divider,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--warning:hover:not(.#{$prefix}--combo-box)
+    ~ .#{$prefix}--list-box__divider {
+    border-color: transparent;
+  }
+
+  // direction - top
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--list-box--up
+    .#{$prefix}--list-box__menu {
+    bottom: $spacing-10;
+  }
+
+  // Skeleton styles
+  .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--skeleton {
+    border-bottom: 1px solid $skeleton-element;
+    background: $skeleton-background;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__field {
+    position: absolute;
+    top: rem(36px);
+    left: $spacing-05;
+    width: 50%;
+    height: rem(8px);
+    padding: 0;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__label {
+    position: absolute;
+    top: $spacing-05;
+    left: $spacing-05;
+    width: 25%;
+    height: rem(8px);
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__field,
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--skeleton
+    .#{$prefix}--list-box__label {
+    animation: 3000ms ease-in-out skeleton infinite;
+    background: $skeleton-element;
+  }
+}

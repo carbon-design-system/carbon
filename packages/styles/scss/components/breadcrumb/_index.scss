@@ -6,6 +6,5 @@
 //
 
 @forward 'breadcrumb';
-@use 'breadcrumb';
-
-@include breadcrumb.breadcrumb;
+@use 'css';
+@use '../link';

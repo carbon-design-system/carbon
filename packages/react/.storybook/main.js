@@ -7,41 +7,93 @@
 
 'use strict';
 
-const path = require('path');
+const fs = require('fs');
+const glob = require('fast-glob');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const customProperties = require('postcss-custom-properties');
-const rtlcss = require('rtlcss');
+const path = require('path');
 
-const {
-  CARBON_ENABLE_V11_RELEASE,
-  CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES = 'false',
-  CARBON_REACT_STORYBOOK_USE_RTL,
-  CARBON_REACT_STORYBOOK_USE_SASS_LOADER,
-  NODE_ENV = 'development',
-} = process.env;
+const stories = glob
+  .sync(
+    [
+      './Welcome/Welcome.stories.js',
+      '../src/**/*.stories.js',
+      '../src/**/*.stories.mdx',
+      '../src/**/next/*.stories.js',
+      '../src/**/next/**/*.stories.js',
+      '../src/**/next/*.stories.mdx',
+      '../src/**/*-story.js',
+    ],
+    {
+      cwd: __dirname,
+    }
+  )
+  // Filters the stories by finding the paths that have a story file that ends
+  // in `-story.js` and checks to see if they also have a `.stories.js`,
+  // if so then defer to the `.stories.js`
+  .filter((match) => {
+    const filepath = path.resolve(__dirname, match);
+    const basename = path.basename(match, '.js');
+    const denylist = new Set([
+      'DataTable-basic-story',
+      'DataTable-batch-actions-story',
+      'DataTable-filtering-story',
+      'DataTable-selection-story',
+      'DataTable-sorting-story',
+      'DataTable-toolbar-story',
+      'DataTable-dynamic-content-story',
+      'DataTable-expansion-story',
+    ]);
 
-const useSassLoader = CARBON_REACT_STORYBOOK_USE_SASS_LOADER === 'true';
-const useExternalCss = NODE_ENV === 'production';
-const useRtl = CARBON_REACT_STORYBOOK_USE_RTL === 'true';
+    if (denylist.has(basename)) {
+      return false;
+    }
+
+    if (basename.endsWith('-story')) {
+      const component = basename.replace(/-story$/, '');
+      const storyName = path.resolve(
+        filepath,
+        '..',
+        'next',
+        `${component}.stories.js`
+      );
+
+      if (fs.existsSync(storyName)) {
+        return false;
+      }
+
+      return true;
+    }
+
+    return true;
+  });
 
 module.exports = {
   addons: [
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        actions: true,
+        backgrounds: false,
+        controls: true,
+        docs: true,
+        toolbars: true,
+        viewport: true,
+      },
+    },
     '@storybook/addon-storysource',
-    '@storybook/addon-knobs',
-    '@storybook/addon-actions',
-    '@storybook/addon-docs',
-    '@storybook/addon-notes/register',
-    'storybook-readme/register',
-    '@storybook/addon-links',
-    require.resolve('./addon-theme/register'),
+    '@storybook/addon-a11y',
   ],
-
-  stories: [
-    './Welcome/Welcome.stories.js',
-    '../src/**/*-story.js',
-    '../src/**/*.stories.mdx',
-  ],
-
+  core: {
+    builder: 'webpack5',
+  },
+  features: {
+    previewCsfV3: true,
+  },
+  framework: '@storybook/react',
+  stories,
+  typescript: {
+    reactDocgen: 'react-docgen', // Favor docgen from prop-types instead of TS interfaces
+  },
   webpack(config) {
     const babelLoader = config.module.rules.find((rule) => {
       return rule.use.some(({ loader }) => {
@@ -59,68 +111,21 @@ module.exports = {
     //
     // This results in these files being included in `babel-loader` and causing
     // the build times to increase dramatically
-    babelLoader.exclude = [/node_modules/, /packages\/.*\/(es|lib|umd)/];
-
-    const sassLoader = {
-      loader: require.resolve('sass-loader'),
-      options: {
-        additionalData(content) {
-          return `
-            $feature-flags: (
-              ui-shell: true,
-              enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
-            );
-            ${content}
-          `;
-        },
-        sassOptions: {
-          implementation: require('sass'),
-          includePaths: [path.resolve(__dirname, '..', 'node_modules')],
-        },
-        sourceMap: true,
-      },
-    };
-
-    const fastSassLoader = {
-      loader: require.resolve('fast-sass-loader'),
-      options: {
-        data: `
-          $feature-flags: (
-            ui-shell: true,
-            enable-css-custom-properties: ${CARBON_REACT_STORYBOOK_USE_CUSTOM_PROPERTIES},
-          );
-        `,
-        implementation: require('sass'),
-        includePaths: [path.resolve(__dirname, '..', '..', 'node_modules')],
-      },
-    };
+    babelLoader.exclude = [
+      /node_modules/,
+      /packages\/.*\/(es|lib|umd)/,
+      /packages\/icons-react\/next/,
+    ];
 
     config.module.rules.push({
-      test: /-story\.jsx?$/,
-      loaders: [
-        {
-          loader: require.resolve('@storybook/source-loader'),
-          options: {
-            prettierConfig: {
-              parser: 'babylon',
-              printWidth: 80,
-              tabWidth: 2,
-              bracketSpacing: true,
-              trailingComma: 'es5',
-              singleQuote: true,
-            },
-          },
-        },
-      ],
-      enforce: 'pre',
-    });
-
-    config.module.rules.push({
-      test: /\.scss$/,
+      test: /\.s?css$/,
       sideEffects: true,
       use: [
         {
-          loader: useExternalCss ? MiniCssExtractPlugin.loader : 'style-loader',
+          loader:
+            process.env.NODE_ENV === 'production'
+              ? MiniCssExtractPlugin.loader
+              : 'style-loader',
         },
         {
           loader: 'css-loader',
@@ -132,44 +137,40 @@ module.exports = {
         {
           loader: 'postcss-loader',
           options: {
-            plugins: () => {
-              const autoPrefixer = require('autoprefixer')({
-                overrideBrowserslist: ['last 1 version', 'ie >= 11'],
-              });
-              return [
-                customProperties(),
-                autoPrefixer,
-                ...(useRtl ? [rtlcss] : []),
-              ];
+            postcssOptions: {
+              plugins: [
+                require('autoprefixer')({
+                  overrideBrowserslist: ['last 1 version'],
+                }),
+              ],
             },
             sourceMap: true,
           },
         },
-        NODE_ENV === 'production' || useSassLoader
-          ? sassLoader
-          : fastSassLoader,
+        {
+          loader: 'sass-loader',
+          options: {
+            implementation: require('sass'),
+            sassOptions: {
+              includePaths: [
+                path.resolve(__dirname, '..', 'node_modules'),
+                path.resolve(__dirname, '..', '..', '..', 'node_modules'),
+              ],
+            },
+            warnRuleAsWarning: true,
+            sourceMap: true,
+          },
+        },
       ],
     });
 
-    if (useExternalCss) {
+    if (process.env.NODE_ENV === 'production') {
       config.plugins.push(
         new MiniCssExtractPlugin({
           filename: '[name].[contenthash].css',
         })
       );
     }
-
-    // Enable process.env variables other than STORYBOOK_* in our preview
-    // environment
-    // @see https://github.com/storybookjs/storybook/issues/12270#issuecomment-755398949
-    const definePlugin = config.plugins.find((plugin) => {
-      return plugin.definitions && plugin.definitions['process.env'];
-    });
-
-    definePlugin.definitions['process.env'] = {
-      ...definePlugin.definitions['process.env'],
-      CARBON_ENABLE_V11_RELEASE: JSON.stringify(CARBON_ENABLE_V11_RELEASE),
-    };
 
     return config;
   },

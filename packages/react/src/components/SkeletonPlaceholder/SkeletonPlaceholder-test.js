@@ -7,15 +7,13 @@
 
 import React from 'react';
 import SkeletonPlaceholder from '../SkeletonPlaceholder';
-import { shallow } from 'enzyme';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { render, screen } from '@testing-library/react';
 
 describe('SkeletonPlaceholder', () => {
-  const wrapper = shallow(<SkeletonPlaceholder />);
-
-  it('Has the expected classes', () => {
-    expect(wrapper.hasClass(`${prefix}--skeleton__placeholder`)).toEqual(true);
+  it('should pass in an extra className when one is given', () => {
+    render(
+      <SkeletonPlaceholder className="custom-class" data-testid="skeleton" />
+    );
+    expect(screen.getByTestId('skeleton')).toHaveClass('custom-class');
   });
 });

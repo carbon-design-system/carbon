@@ -5,24 +5,58 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:string';
+
 /// Font family fallbacks for: IBM Plex Mono, IBM Plex Sans, IBM Plex Sans
 /// Condensed, IBM Plex Sans Hebrew, and IBM Plex Serif
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$carbon--font-families: (
+$font-families: (
   'mono':
-    unquote(
-      "'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace"
+    string.unquote(
+      "'IBM Plex Mono', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', monospace"
     ),
-  'sans': unquote("'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif"),
+  'sans':
+    string.unquote(
+      "'IBM Plex Sans', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
   'sans-condensed':
-    unquote("'IBM Plex Sans Condensed', 'Helvetica Neue', Arial, sans-serif"),
-  'sans-hebrew':
-    unquote(
-      "'IBM Plex Sans Hebrew', 'Helvetica Hebrew', 'Arial Hebrew', sans-serif"
+    string.unquote(
+      "'IBM Plex Sans Condensed', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
     ),
-  'serif': unquote("'IBM Plex Serif', 'Georgia', Times, serif"),
+  'sans-arabic':
+    string.unquote(
+      "'IBM Plex Sans Arabic', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-devanagari':
+    string.unquote(
+      "'IBM Plex Sans Devanagari', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-hebrew':
+    string.unquote(
+      "'IBM Plex Sans Hebrew', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-jp':
+    string.unquote(
+      "'IBM Plex Sans JP', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-kr':
+    string.unquote(
+      "'IBM Plex Sans KR', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-thai-looped':
+    string.unquote(
+      "'IBM Plex Sans Thai Looped', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'sans-thai':
+    string.unquote(
+      "'IBM Plex Sans Thai', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', sans-serif"
+    ),
+  'serif':
+    string.unquote(
+      "'IBM Plex Serif', system-ui, -apple-system, BlinkMacSystemFont, '.SFNSText-Regular', serif"
+    ),
 ) !default;
 
 /// Get the font-family for an IBM Plex font
@@ -30,23 +64,23 @@ $carbon--font-families: (
 /// @return {String}
 /// @access public
 /// @group @carbon/type
-@function carbon--font-family($name) {
-  @return map-get($carbon--font-families, $name);
+@function font-family($name) {
+  @return map-get($font-families, $name);
 }
 
 /// Include the `font-family` definition for the given name in your selector
 /// @param {String} $name
 /// @access public
 /// @group @carbon/type
-@mixin carbon--font-family($name) {
-  font-family: carbon--font-family($name);
+@mixin font-family($name) {
+  font-family: font-family($name);
 }
 
 /// Suggested font weights to be used in product
 /// @type Map
 /// @access public
 /// @group @carbon/type
-$carbon--font-weights: (
+$font-weights: (
   'light': 300,
   'regular': 400,
   'semibold': 600,
@@ -57,14 +91,14 @@ $carbon--font-weights: (
 /// @return {Number}
 /// @access public
 /// @group @carbon/type
-@function carbon--font-weight($weight) {
-  @return map-get($carbon--font-weights, $weight);
+@function font-weight($weight) {
+  @return map-get($font-weights, $weight);
 }
 
 /// Set the `font-weight` property with the value for a given name
 /// @param {String} $weight
 /// @access public
 /// @group @carbon/type
-@mixin carbon--font-weight($weight) {
-  font-weight: carbon--font-weight($weight);
+@mixin font-weight($weight) {
+  font-weight: font-weight($weight);
 }

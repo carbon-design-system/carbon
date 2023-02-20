@@ -5,7 +5,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/globals/scss/vendor/@carbon/grid/scss/modules/_css-grid.scss';
 import './Grid-test.e2e.scss';
 
 import React from 'react';
@@ -18,13 +17,6 @@ describe('Grid', () => {
     mount(
       <FeatureFlags flags={{ 'enable-css-grid': true }}>
         <Grid>
-          <Column sm={4} />
-          <Column sm={4} />
-          <Column sm={4} />
-          <Column sm={4} />
-        </Grid>
-
-        <Grid narrow>
           <Column sm={4} />
           <Column sm={4} />
           <Column sm={4} />
@@ -114,9 +106,9 @@ describe('Grid', () => {
 
         <Grid>
           <Column sm={1} md={2} lg={4}>
-            <Grid narrow>
+            <Grid>
               <Column sm={1} md={2} lg={4}>
-                <p>narrow</p>
+                <p>wide</p>
               </Column>
             </Grid>
           </Column>
@@ -135,9 +127,9 @@ describe('Grid', () => {
             </Grid>
           </Column>
           <Column sm={3} md={6} lg={12}>
-            <Grid narrow>
+            <Grid>
               <Column sm={3} md={6} lg={12}>
-                <p>narrow</p>
+                <p>wide</p>
               </Column>
             </Grid>
           </Column>
@@ -177,7 +169,7 @@ describe('Grid', () => {
 
   it('should render', () => {
     cy.viewport(1400, 500);
-    cy.findAllByText(/narrow/).should('be.visible');
+    cy.findAllByText(/wide/).should('be.visible');
 
     // snapshots should always be taken _after_ an assertion that
     // a element/component should be visible. This is to ensure

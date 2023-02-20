@@ -9,12 +9,12 @@
 
 'use strict';
 
-import { colors, unstable_hoverColors } from '../src';
+import { colors, hoverColors } from '../src';
 
 test('colors', () => {
   expect(colors).toMatchSnapshot();
 });
 
-test('unstable_hoverColors', () => {
-  expect(unstable_hoverColors).toMatchSnapshot();
+test('hoverColors', () => {
+  expect(hoverColors).toMatchSnapshot();
 });

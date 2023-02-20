@@ -11,17 +11,18 @@ import {
 } from '../Menu';
 
 const InfoBanner = () => (
-  <InlineNotification
-    kind="info"
-    title="Experimental component"
-    subtitle="This component is considered experimental. Its API may change until the stable version is released."
-    lowContrast
-    hideCloseButton
-  />
+  <InlineNotification kind="info" lowContrast hideCloseButton>
+    <strong>Exerimental component</strong>
+    <p>
+      This component is considered experimental. Its API may change until the
+      stable version is released.
+    </p>
+  </InlineNotification>
 );
 
 // eslint-disable-next-line react/prop-types
 export const StoryFrame = ({ children }) => (
+  // eslint-disable-next-line react/forbid-dom-props
   <div style={{ height: 'calc(100vh - 6.25rem)' }}>
     <InfoBanner />
     {children}

@@ -21,8 +21,11 @@ function FileUploaderDropContainer({
   multiple,
   name,
   onAddFiles,
+  pattern,
   role,
   tabIndex,
+  // eslint-disable-next-line react/prop-types
+  innerRef,
   ...rest
 }) {
   const prefix = usePrefix();
@@ -52,15 +55,20 @@ function FileUploaderDropContainer({
     const acceptedTypes = new Set(accept);
     return transferredFiles.reduce((acc, curr) => {
       const { name, type: mimeType = '' } = curr;
-      const fileExtensionRegExp = new RegExp(/\.[0-9a-z]+$/, 'i');
+      const fileExtensionRegExp = new RegExp(pattern, 'i');
       const hasFileExtension = fileExtensionRegExp.test(name);
       if (!hasFileExtension) {
         return acc;
       }
       const [fileExtension] = name.match(fileExtensionRegExp);
-      if (acceptedTypes.has(mimeType) || acceptedTypes.has(fileExtension)) {
+
+      if (
+        acceptedTypes.has(mimeType) ||
+        acceptedTypes.has(fileExtension.toLowerCase())
+      ) {
         return acc.concat([curr]);
       }
+
       curr.invalidFileType = true;
       return acc.concat([curr]);
     }, []);
@@ -103,6 +111,7 @@ function FileUploaderDropContainer({
       }}>
       {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions */}
       <label
+        ref={innerRef}
         className={labelClasses}
         htmlFor={uid}
         tabIndex={tabIndex || 0}
@@ -115,22 +124,22 @@ function FileUploaderDropContainer({
         <div className={dropareaClasses} role={role || 'button'}>
           {labelText}
         </div>
-        <input
-          type="file"
-          id={uid}
-          className={`${prefix}--file-input`}
-          ref={inputRef}
-          tabIndex="-1"
-          disabled={disabled}
-          accept={accept}
-          name={name}
-          multiple={multiple}
-          onChange={handleChange}
-          onClick={(evt) => {
-            evt.target.value = null;
-          }}
-        />
       </label>
+      <input
+        type="file"
+        id={uid}
+        className={`${prefix}--file-input`}
+        ref={inputRef}
+        tabIndex="-1"
+        disabled={disabled}
+        accept={accept}
+        name={name}
+        multiple={multiple}
+        onChange={handleChange}
+        onClick={(evt) => {
+          evt.target.value = null;
+        }}
+      />
     </div>
   );
 }
@@ -179,19 +188,17 @@ FileUploaderDropContainer.propTypes = {
   onAddFiles: PropTypes.func,
 
   /**
-   * Provide an accessibility role for the <FileUploaderButton>
+   * Provide a custom regex pattern for the acceptedTypes
+   */
+  pattern: PropTypes.string,
+
+  /**
+   * Provide an accessibility role for the `<FileUploaderButton>`
    */
   role: PropTypes.string,
 
   /**
-   * Specify the size of the uploaded items, from a list of available
-   * sizes. For `default` buttons, this prop can remain unspecified.
-   * V11: `default`, `field`, and `small` will be removed
-   */
-  size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
-
-  /**
-   * Provide a custom tabIndex value for the <FileUploaderButton>
+   * Provide a custom tabIndex value for the `<FileUploaderButton>`
    */
   tabIndex: PropTypes.number,
 };
@@ -202,6 +209,7 @@ FileUploaderDropContainer.defaultProps = {
   multiple: false,
   onAddFiles: () => {},
   accept: [],
+  pattern: '.[0-9a-z]+$',
 };
 
 export default FileUploaderDropContainer;

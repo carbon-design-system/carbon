@@ -16,6 +16,10 @@ module.exports = {
     'color-named': 'never',
     // Disallow hex colors.
     'color-no-hex': OFF,
+    // Specify modern or legacy notation for applicable color-functions.
+    // Currently causes errors with sass
+    'color-function-notation': OFF,
+    'alpha-value-notation': OFF,
 
     // Function
     // Specify a blacklist of disallowed functions.

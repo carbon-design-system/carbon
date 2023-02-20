@@ -44,8 +44,9 @@ packages/icons-react/next/**
 **/_inlined/**
 
 # Examples
-**/examples/**
+packages/**/examples/**
 !packages/themes/examples/**
+!packages/grid/examples/css-grid/**
 
 # Yarn
 **/.yarn/**
@@ -58,3 +59,9 @@ packages/icons-react/next/**
 
 # Nextjs
 .next
+
+# Upgrade
+packages/upgrade/cli.js
+
+# Accessibility Verification Testing
+**/.avt/**

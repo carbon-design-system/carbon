@@ -8,12 +8,11 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import classNames from 'classnames';
-import { settings } from 'carbon-components';
-
-const { prefix } = settings;
+import { usePrefix } from '../../internal/usePrefix';
 
 const Switch = React.forwardRef(function Switch(props, tabRef) {
   const {
+    children,
     className,
     disabled,
     index,
@@ -24,6 +23,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     text,
     ...other
   } = props;
+  const prefix = usePrefix();
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
       {...other}
       {...commonProps}>
       <span className={`${prefix}--content-switcher__label`} title={text}>
-        {text}
+        {text !== undefined ? text : children}
       </span>
     </button>
   );
@@ -66,6 +66,11 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
 Switch.displayName = 'Switch';
 
 Switch.propTypes = {
+  /**
+   * Provide child elements to be rendered inside of the Switch
+   */
+  children: PropTypes.node,
+
   /**
    * Specify an optional className to be added to your Switch
    */
@@ -107,12 +112,11 @@ Switch.propTypes = {
   /**
    * Provide the contents of your Switch
    */
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
 
 Switch.defaultProps = {
   selected: false,
-  text: 'Provide text',
   onClick: () => {},
   onKeyDown: () => {},
 };

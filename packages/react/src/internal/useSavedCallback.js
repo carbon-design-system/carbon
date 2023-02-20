@@ -23,9 +23,9 @@ export function useSavedCallback(callback) {
     savedCallback.current = callback;
   });
 
-  return useCallback(() => {
+  return useCallback((...args) => {
     if (savedCallback.current) {
-      return savedCallback.current();
+      return savedCallback.current(...args);
     }
   }, []);
 }

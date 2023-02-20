@@ -7,6 +7,7 @@
 
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
+import * as FeatureFlags from '@carbon/feature-flags';
 import React from 'react';
 import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
@@ -22,13 +23,13 @@ export default class FileUploader extends React.Component {
     accept: PropTypes.arrayOf(PropTypes.string),
 
     /**
-     * Specify the type of the <FileUploaderButton>
+     * Specify the type of the `<FileUploaderButton>`
      */
     buttonKind: PropTypes.oneOf(ButtonKinds),
 
     /**
      * Provide the label text to be read by screen readers when interacting with
-     * the <FileUploaderButton>
+     * the `<FileUploaderButton>`
      */
     buttonLabel: PropTypes.string,
 
@@ -36,6 +37,11 @@ export default class FileUploader extends React.Component {
      * Provide a custom className to be applied to the container node
      */
     className: PropTypes.string,
+
+    /**
+     * Specify whether file input is disabled
+     */
+    disabled: PropTypes.bool,
 
     /**
      * Specify the status of the File Upload
@@ -46,15 +52,17 @@ export default class FileUploader extends React.Component {
     /**
      * Provide a description for the complete/close icon that can be read by screen readers
      */
-    iconDescription: PropTypes.string,
+    iconDescription: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.string.isRequired
+      : PropTypes.string,
 
     /**
-     * Specify the description text of this <FileUploader>
+     * Specify the description text of this `<FileUploader>`
      */
     labelDescription: PropTypes.string,
 
     /**
-     * Specify the title text of this <FileUploader>
+     * Specify the title text of this `<FileUploader>`
      */
     labelTitle: PropTypes.string,
 
@@ -88,16 +96,20 @@ export default class FileUploader extends React.Component {
 
     /**
      * Specify the size of the FileUploaderButton, from a list of available
-     * sizes. For `default` buttons, this prop can remain unspecified.
-     * V11: `default`, `field`, and `small` will be removed
+     * sizes.
      */
-    size: PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
+    size: FeatureFlags.enabled('enable-v11-release')
+      ? PropTypes.oneOf(['sm', 'md', 'lg'])
+      : PropTypes.oneOf(['default', 'field', 'small', 'sm', 'md', 'lg']),
   };
 
   static contextType = PrefixContext;
 
   static defaultProps = {
-    iconDescription: 'Provide icon description',
+    disabled: false,
+    iconDescription: FeatureFlags.enabled('enable-v11-release')
+      ? undefined
+      : 'Provide icon description',
     filenameStatus: 'uploading',
     buttonLabel: '',
     buttonKind: 'primary',
@@ -111,6 +123,8 @@ export default class FileUploader extends React.Component {
   };
 
   nodes = [];
+
+  uploaderButton = React.createRef();
 
   static getDerivedStateFromProps({ filenameStatus }, state) {
     const { prevFilenameStatus } = state;
@@ -147,6 +161,7 @@ export default class FileUploader extends React.Component {
       this.setState({ filenames: filteredArray });
       if (this.props.onDelete) {
         this.props.onDelete(evt);
+        this.uploaderButton.current.focus();
       }
       this.props.onClick(evt);
     }
@@ -162,6 +177,7 @@ export default class FileUploader extends React.Component {
       iconDescription,
       buttonLabel,
       buttonKind,
+      disabled,
       filenameStatus,
       labelDescription,
       labelTitle,
@@ -169,7 +185,7 @@ export default class FileUploader extends React.Component {
       multiple,
       accept,
       name,
-      size,
+      size = 'md',
       onDelete, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
@@ -181,6 +197,11 @@ export default class FileUploader extends React.Component {
       [className]: className,
     });
 
+    const getHelperLabelClasses = (baseClass) =>
+      classNames(baseClass, {
+        [`${prefix}--label-description--disabled`]: disabled,
+      });
+
     const selectedFileClasses = classNames(`${prefix}--file__selected-file`, {
       [`${prefix}--file__selected-file--md`]: size === 'field' || size === 'md',
       [`${prefix}--file__selected-file--sm`]: size === 'small' || size === 'sm',
@@ -188,9 +209,17 @@ export default class FileUploader extends React.Component {
 
     return (
       <div className={classes} {...other}>
-        <p className={`${prefix}--file--label`}>{labelTitle}</p>
-        <p className={`${prefix}--label-description`}>{labelDescription}</p>
+        {FeatureFlags.enabled('enable-v11-release') && !labelTitle ? null : (
+          <p className={getHelperLabelClasses(`${prefix}--file--label`)}>
+            {labelTitle}
+          </p>
+        )}
+        <p className={getHelperLabelClasses(`${prefix}--label-description`)}>
+          {labelDescription}
+        </p>
         <FileUploaderButton
+          innerRef={this.uploaderButton}
+          disabled={disabled}
           labelText={buttonLabel}
           multiple={multiple}
           buttonKind={buttonKind}
@@ -209,10 +238,13 @@ export default class FileUploader extends React.Component {
                   className={selectedFileClasses}
                   ref={(node) => (this.nodes[index] = node)} // eslint-disable-line
                   {...other}>
-                  <p className={`${prefix}--file-filename`}>{name}</p>
+                  <p className={`${prefix}--file-filename`} id={name}>
+                    {name}
+                  </p>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
                       iconDescription={iconDescription}
+                      aria-describedby={name}
                       status={filenameStatus}
                       onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {

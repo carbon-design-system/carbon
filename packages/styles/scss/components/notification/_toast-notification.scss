@@ -5,12 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use 'mixins' as*;
+@use 'mixins' as *;
 @use 'tokens' as *;
 @use '../../breakpoint' as *;
 @use '../../colors' as *;
 @use '../../config' as *;
-@use '../../feature-flags' as *;
+@use '../../feature-flags';
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -31,16 +31,10 @@
     display: flex;
     width: rem(288px);
     height: auto;
-    padding-left: $spacing-05;
-    margin-top: $spacing-03;
-    margin-right: $spacing-05;
-    margin-bottom: $spacing-03;
+    padding-left: rem(13px);
+
     box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2);
     color: $text-inverse;
-
-    &:first-child {
-      margin-top: $spacing-05;
-    }
 
     @include breakpoint(max) {
       width: rem(352px);
@@ -146,24 +140,8 @@
     margin-right: $spacing-05;
   }
 
-  @if feature-flag-enabled('enable-v11-release') {
-    .#{$prefix}--toast-notification__content {
-      @include type-style('body-short-01');
-
-      margin-top: $spacing-05;
-      margin-right: $spacing-05;
-      margin-bottom: $spacing-05;
-      word-break: break-word;
-    }
-
-    .#{$prefix}--toast-notification--low-contrast
-      .#{$prefix}--toast-notification__content {
-      color: $text-primary;
-    }
-  } @else {
-    .#{$prefix}--toast-notification__details {
-      margin-right: $spacing-05;
-    }
+  .#{$prefix}--toast-notification__details {
+    margin-right: $spacing-05;
   }
 
   .#{$prefix}--toast-notification__close-button {
@@ -182,7 +160,7 @@
     margin-left: auto;
     background-color: transparent;
     cursor: pointer;
-    transition: outline $transition--base, background-color $transition--base;
+    transition: outline $transition-base, background-color $transition-base;
 
     &:focus {
       outline: 2px solid $focus-inverse;
@@ -205,41 +183,39 @@
     fill: $icon-primary;
   }
 
-  @if not feature-flag-enabled('enable-v11-release') {
-    .#{$prefix}--toast-notification__title {
-      @include type-style('productive-heading-01');
+  .#{$prefix}--toast-notification__title {
+    @include type-style('heading-compact-01');
 
-      margin-top: $spacing-05;
-      font-weight: 600;
-      word-break: break-word;
-    }
+    margin-top: $spacing-05;
+    font-weight: 600;
+    word-break: break-word;
+  }
 
+  .#{$prefix}--toast-notification__subtitle {
+    @include type-style('body-compact-01');
+
+    margin-top: 0;
+    margin-bottom: $spacing-05;
+    color: $text-inverse;
+    word-break: break-word;
+  }
+
+  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__subtitle {
-      @include type-style('body-short-01');
+    color: $text-primary;
+  }
 
-      margin-top: 0;
-      margin-bottom: $spacing-05;
-      color: $text-inverse;
-      word-break: break-word;
-    }
+  .#{$prefix}--toast-notification__caption {
+    @include type-style('body-compact-01');
 
-    .#{$prefix}--toast-notification--low-contrast
-      .#{$prefix}--toast-notification__subtitle {
-      color: $text-primary;
-    }
+    padding-top: $spacing-03;
+    margin-bottom: $spacing-05;
+    color: $text-inverse;
+  }
 
+  .#{$prefix}--toast-notification--low-contrast
     .#{$prefix}--toast-notification__caption {
-      @include type-style('body-short-01');
-
-      padding-top: $spacing-03;
-      margin-bottom: $spacing-05;
-      color: $text-inverse;
-    }
-
-    .#{$prefix}--toast-notification--low-contrast
-      .#{$prefix}--toast-notification__caption {
-      color: $text-primary;
-    }
+    color: $text-primary;
   }
 
   // Windows HCM fix
@@ -250,7 +226,10 @@
   .#{$prefix}--toast-notification__close-button:focus {
     @include high-contrast-mode('focus');
   }
-  .#{$prefix}--toast-notification__icon {
+  .#{$prefix}--toast-notification .#{$prefix}--toast-notification__close-icon {
+    @include high-contrast-mode('icon-fill');
+  }
+  .#{$prefix}--toast-notification .#{$prefix}--toast-notification__icon {
     @include high-contrast-mode('icon-fill');
   }
   /* stylelint-enable */

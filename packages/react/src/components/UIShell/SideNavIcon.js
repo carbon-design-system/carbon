@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SideNavIcon = ({ children, className: customClassName, small }) => {
+function SideNavIcon({ children, className: customClassName, small }) {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--side-nav__icon`]: true,
@@ -18,7 +18,7 @@ const SideNavIcon = ({ children, className: customClassName, small }) => {
     [customClassName]: !!customClassName,
   });
   return <div className={className}>{children}</div>;
-};
+}
 
 SideNavIcon.propTypes = {
   /**

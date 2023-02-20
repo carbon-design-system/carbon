@@ -13,14 +13,18 @@
 @use '../../type' as *;
 @use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
+@use '../../utilities/custom-property';
 @use 'tokens' as *;
+
+$button-focus-color: custom-property.get-var('button-focus-color', $focus);
 
 @mixin button-base {
   @include component-reset.reset;
-  @include type-style('body-short-01');
+  @include type-style('body-compact-01');
 
   position: relative;
   display: inline-flex;
+  width: max-content;
   max-width: rem(320px);
   min-height: $button-height;
   flex-shrink: 0;
@@ -84,8 +88,8 @@
   }
 
   &:focus {
-    border-color: $focus;
-    box-shadow: inset 0 0 0 $button-outline-width $focus,
+    border-color: $button-focus-color;
+    box-shadow: inset 0 0 0 $button-outline-width $button-focus-color,
       inset 0 0 0 $button-border-width $background;
   }
 

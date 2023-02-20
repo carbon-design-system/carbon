@@ -1,4 +1,5 @@
-@import '~carbon-components/scss/globals/scss/typography';
+@use '@carbon/styles/scss/type';
+@use '@carbon/styles/scss/colors';
 
 .container-welcome {
   /* stylelint-disable-next-line declaration-no-important */
@@ -15,11 +16,22 @@
 }
 
 .welcome__heading {
-  @include type-style('productive-heading-07');
+  @include type.type-style('productive-heading-07');
 
-  color: $inverse-01;
+  color: colors.$white;
 }
 
 .welcome__heading--subtitle {
   font-weight: 600;
+}
+
+.welcome__link,
+.welcome__link:hover,
+.welcome__link.cds--link:visited {
+  margin-top: 1rem;
+  color: colors.$blue-40;
+}
+
+.welcome__link:first-child {
+  margin-top: 2rem;
 }

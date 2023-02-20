@@ -64,6 +64,7 @@ row before the </tbody></table> line.
 - [React](#react)
   - [Guidelines](#guidelines)
     - [Writing a component](#writing-a-component)
+      - [When to use `React.ForwardRef`](#when-to-use-reactforwardref)
     - [Translating a component](#translating-a-component)
       - [Working with messages that depend on state](#working-with-messages-that-depend-on-state)
     - [Using `useCallback` and `useMemo`](#using-usecallback-and-usememo)
@@ -72,6 +73,14 @@ row before the </tbody></table> line.
   - [Style](#style-1)
     - [Naming event handlers](#naming-event-handlers)
     - [Naming experimental code](#naming-experimental-code)
+  - [Testing](#testing)
+    - [Strategy](#strategy)
+    - [Organization](#organization)
+    - [Recipes](#recipes)
+      - [`ComponentName-test.js`](#componentname-testjs)
+      - [`ComponentName-test.a11y.js`](#componentname-testa11yjs)
+      - [`ComponentName-test.server.js`](#componentname-testserverjs)
+      - [Notes on manual testing](#notes-on-manual-testing)
 - [Sass](#sass)
   - [Guidelines](#guidelines-1)
     - [Author component styles using mixins](#author-component-styles-using-mixins)
@@ -82,6 +91,9 @@ row before the </tbody></table> line.
     - [Annotate relevant Sass values with SassDoc](#annotate-relevant-sass-values-with-sassdoc)
   - [Style](#style-2)
     - [Comments](#comments)
+  - [Testing](#testing-1)
+    - [Recipes](#recipes-1)
+      - [Public API](#public-api)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -224,6 +236,25 @@ _Note: not every component will mirror the structure above. Some will need to
 incorporate `useEffect`, some will not. You can think of the outline above as
 slots that you can fill if you need this functionality in a component._
 
+##### When to use `React.ForwardRef`
+
+From the [react docs](https://reactjs.org/docs/forwarding-refs.html),
+
+> Ref forwarding is an opt-in feature that lets some components take a ref they
+> receive, and pass it further down (in other words, “forward” it) to a child.
+
+For the most part, components should utilize `React.ForwardRef` so that
+consumers can impact or control the managing of focus, selection, or animations.
+
+Cases where a component _may not_ need to forward a ref include components that
+render static content or do not render elements that are focusable, interactive,
+or animatable.
+
+Note that adding a forwarded ref to a component should be considered a breaking
+change. When creating a new component, even if you do not anticipate an explicit
+need to provide a forwarded ref, it's likely still worthwhile to include one to
+avoid unecessary breaking changes in the future.
+
 #### Translating a component
 
 Certain components will need to expose a way for the caller to pass in
@@ -324,7 +355,7 @@ function MyComponent({ translateWithId: t = translateWithId }) {
 situations. In general, however, we try to avoid them unless one of the
 following conditions occur:
 
-- The identitiy of a function or object is required as a dependency in a
+- The identity of a function or object is required as a dependency in a
   dependency array
 - We have observed performance issues due to allocations that can be reproduced
   and resolved using these techniques
@@ -499,45 +530,7 @@ the function as `handleOnClick`.
 
 #### Naming experimental code
 
-The team occasionally will author code, or accept contributions, that is
-considered experimental or unstable. The goal for this code is to ship it as
-unstable for sponsor groups to leverage. During this time, the team can get
-feedback around what is working and what does not work so that changes can be
-made before an official release.
-
-For experimental or unstable code, we use the `unstable_` prefix. For example:
-
-```js
-// An unstable method
-function unstable_layout() {
-  // ...
-}
-
-// An unstable variable
-const unstable_meta = {
-  // ...
-};
-
-// An unstable component will retain its name, specifically for things like
-// the rules of hooks plugin which depend on the correct casing of the name
-function Pagination(props) {
-  // ...
-}
-
-// However, when we export the component we will export it with the `unstable_`
-// prefix. (Similar to React.unstable_Suspense, React.unstable_Profiler)
-export { default as unstable_Pagination } from './components/Pagination';
-```
-
-For teams using these features, they will need to import the functionality by
-using the `unstable_` prefix. For example:
-
-```jsx
-import { unstable_Pagination as Pagination } from 'carbon-components-react';
-```
-
-This code should be treated as experimental and will break between release
-versions for the package that it is being imported from.
+See [Experimental Code](./experimental-code.md#naming-experimental-code);
 
 ### Testing
 

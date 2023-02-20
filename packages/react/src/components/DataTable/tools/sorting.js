@@ -20,12 +20,26 @@ import { sortStates } from '../state/sortStates';
  * @returns {number}
  */
 export const compare = (a, b, locale = 'en') => {
+  // prevent multiple null values in one column (sorting breaks)
+  a === null ? (a = '') : null;
+  b === null ? (b = '') : null;
+
   if (typeof a === 'number' && typeof b === 'number') {
     return a - b;
   }
 
   if (typeof a === 'string' && typeof b === 'string') {
     return compareStrings(a, b, locale);
+  }
+
+  // if column has React elements, this should sort by the child string if there is one
+  if (typeof a === 'object' && typeof b === 'object') {
+    if (
+      typeof a.props.children === 'string' &&
+      typeof b.props.children === 'string'
+    ) {
+      return compareStrings(a.props.children, b.props.children, locale);
+    }
   }
 
   return compareStrings('' + a, '' + b, locale);

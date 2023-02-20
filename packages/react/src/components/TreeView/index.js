@@ -10,5 +10,5 @@ import TreeNode from './TreeNode';
 
 TreeView.TreeNode = TreeNode;
 
-export { TreeNode };
+export { TreeNode, TreeView };
 export default TreeView;

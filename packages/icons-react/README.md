@@ -21,12 +21,21 @@ yarn add @carbon/icons-react
 
 ## Usage
 
-Icons in this package support the following sizes: `16`, `20`, `24`, and `32`
-pixels. These sizes refer to the width and height of the icon. You can import an
-icon component into your project by referring to its name and size:
+You can import an icon component intoo your project by referring to its name:
 
 ```jsx
-import { Add24 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
+```
+
+Each icon supports a `size` prop and supports the 16px, 20px, 24px, and 32px
+sizes by default. The default size for each icon is 16px.
+
+```jsx
+import { Add } from '@carbon/icons-react';
+
+function ExampleComponent() {
+  return <Add size={32} />;
+}
 ```
 
 We also provide CommonJS and UMD files in the `lib` and `umd` directories,
@@ -35,7 +44,7 @@ respectively.
 To import using CommonJS, you can do the following:
 
 ```js
-const { Add24 } = require('@carbon/icons-react');
+const { Add } = require('@carbon/icons-react');
 ```
 
 _Note: if you would like to find the import path for an icon, you can reference
@@ -56,12 +65,12 @@ svg.my-custom-class {
 ```
 
 ```jsx
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 
 function MyComponent() {
   return (
     <button>
-      <Add16 aria-label="Add" className="my-custom-class" />
+      <Add aria-label="Add" className="my-custom-class" />
     </button>
   );
 }
@@ -89,10 +98,10 @@ svg.my-custom-class [data-icon-path='inner-path'] {
 ```
 
 ```jsx
-import { WarningFilled16 } from '@carbon/icons-react';
+import { WarningFilled } from '@carbon/icons-react';
 
 function MyComponent() {
-  return <WarningFilled16 aria-label="Add" className="my-custom-class" />;
+  return <WarningFilled aria-label="Add" className="my-custom-class" />;
 }
 ```
 
@@ -106,12 +115,12 @@ If you would like the icon to be announced by a screen reader, you can supply an
 `aria-label` or `aria-labelledby`. For example:
 
 ```jsx
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 
 function MyComponent() {
   return (
     <button>
-      <Add16 aria-label="Add" />
+      <Add aria-label="Add" />
     </button>
   );
 }
@@ -123,10 +132,10 @@ If you would like the `<svg>` to receive focus, you will need to pass in a
 `tabIndex` value. For example:
 
 ```jsx
-import { Add16 } from '@carbon/icons-react';
+import { Add } from '@carbon/icons-react';
 
 function MyComponent() {
-  return <Add16 aria-label="Add" tabIndex="0" />;
+  return <Add aria-label="Add" tabIndex="0" />;
 }
 ```
 

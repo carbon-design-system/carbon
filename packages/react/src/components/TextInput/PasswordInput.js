@@ -1,44 +1,44 @@
 import React, { useContext, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
-import { settings } from 'carbon-components';
-import { View16, ViewOff16 } from '@carbon/icons-react';
+import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
-
-const { prefix } = settings;
+import * as FeatureFlags from '@carbon/feature-flags';
+import deprecate from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
 
 const PasswordInput = React.forwardRef(function PasswordInput(
   {
-    labelText,
     className,
-    disabled,
-    id,
-    placeholder,
-    onChange,
-    onClick,
-    hideLabel,
-    inline,
-    invalid,
-    invalidText,
+    disabled = false,
     helperText,
+    hideLabel,
+    hidePasswordLabel = 'Hide password',
+    id,
+    inline,
+    invalid = false,
+    invalidText,
+    labelText,
     light,
+    onChange = () => {},
+    onClick = () => {},
+    onTogglePasswordVisibility,
+    placeholder,
+    size = 'md',
+    showPasswordLabel = 'Show password',
     tooltipPosition = 'bottom',
     tooltipAlignment = 'center',
     type = 'password',
-    hidePasswordLabel = 'Hide password',
-    showPasswordLabel = 'Show password',
-    size,
-    onTogglePasswordVisibility,
     warn,
     warnText,
-    ...other
+    ...rest
   },
   ref
 ) {
   const [inputType, setInputType] = useState(type);
-
+  const prefix = usePrefix();
   const normalizedProps = useNormalizedInputProps({
     id,
     invalid,
@@ -46,6 +46,8 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     warn,
     warnText,
   });
+
+  const { isFluid } = useContext(FormContext);
 
   const handleTogglePasswordVisibility = (event) => {
     setInputType(inputType === 'password' ? 'text' : 'password');
@@ -78,7 +80,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     type: inputType,
     className: textInputClasses,
     ref,
-    ...other,
+    ...rest,
   };
   const inputWrapperClasses = classNames(
     `${prefix}--form-item`,
@@ -87,6 +89,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     {
       [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
+      [`${prefix}--text-input--fluid`]: isFluid,
     }
   );
   const labelClasses = classNames(`${prefix}--label`, {
@@ -128,9 +131,9 @@ const PasswordInput = React.forwardRef(function PasswordInput(
 
   const passwordIsVisible = inputType === 'text';
   const passwordVisibilityIcon = passwordIsVisible ? (
-    <ViewOff16 className={`${prefix}--icon-visibility-off`} />
+    <ViewOff className={`${prefix}--icon-visibility-off`} />
   ) : (
-    <View16 className={`${prefix}--icon-visibility-on`} />
+    <View className={`${prefix}--icon-visibility-on`} />
   );
   const passwordVisibilityToggleClasses = classNames(
     `${prefix}--text-input--password__visibility__toggle`,
@@ -157,6 +160,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         disabled={disabled}
         data-toggle-password-visibility={inputType === 'password'}
       />
+      {isFluid && <hr className={`${prefix}--text-input__divider`} />}
       <button
         type="button"
         className={passwordVisibilityToggleClasses}
@@ -171,8 +175,6 @@ const PasswordInput = React.forwardRef(function PasswordInput(
       </button>
     </>
   );
-
-  const { isFluid } = useContext(FormContext);
 
   useEffect(() => {
     setInputType(type);
@@ -264,9 +266,14 @@ PasswordInput.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * Specify light version or default version of this control
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `PasswordInput` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<input>`
@@ -297,9 +304,11 @@ PasswordInput.propTypes = {
   showPasswordLabel: PropTypes.string,
 
   /**
-   * Specify the size of the Text Input. Currently supports either `small` or `large` as an option. If omitted, defaults to standard size
+   * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
    */
-  size: PropTypes.string,
+  size: FeatureFlags.enabled('enable-v11-release')
+    ? PropTypes.oneOf(['sm', 'md', 'lg'])
+    : PropTypes.string,
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
@@ -332,18 +341,6 @@ PasswordInput.propTypes = {
    * Provide the text that is displayed when the control is in warning state
    */
   warnText: PropTypes.node,
-};
-
-PasswordInput.defaultProps = {
-  className: '${prefix}--text__input',
-  disabled: false,
-  onChange: () => {},
-  onClick: () => {},
-  invalid: false,
-  invalidText: '',
-  helperText: '',
-  light: false,
-  size: '',
 };
 
 export default PasswordInput;

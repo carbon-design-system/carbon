@@ -17,6 +17,7 @@
 @mixin checkbox {
   // Spacing between checkboxes
   .#{$prefix}--form-item.#{$prefix}--checkbox-wrapper {
+    position: relative;
     margin-bottom: $spacing-02;
   }
 
@@ -40,6 +41,9 @@
   // to match the specs.
   .#{$prefix}--checkbox {
     @include visually-hidden;
+    //even though its hidden, positioning is for native validation to be aligned to checkbox
+    top: 1.25rem;
+    left: 0.7rem;
   }
 
   // The label corresponds to the content inside of the `label` tag. Since we're
@@ -47,7 +51,7 @@
   // accommodate the spacing needed for the checkbox.
   .#{$prefix}--checkbox-label {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     position: relative;
     display: flex;
@@ -117,10 +121,9 @@
   // Update properties for checked checkbox
   .#{$prefix}--checkbox:checked + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::before {
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true']::before {
+    border: none;
     border-width: 1px;
-    border-color: $icon-primary;
     background-color: $icon-primary;
   }
 
@@ -131,8 +134,7 @@
   }
 
   // Indeterminate symbol
-  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed']::after {
+  .#{$prefix}--checkbox:indeterminate + .#{$prefix}--checkbox-label::after {
     top: rem(11px);
     width: rem(8px);
     border-bottom: 2px solid $icon-inverse;
@@ -151,8 +153,7 @@
   .#{$prefix}--checkbox:checked:focus + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'].#{$prefix}--checkbox-label__focus::before,
   // Indeterminate
-  .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'].#{$prefix}--checkbox-label__focus::before {
+  .#{$prefix}--checkbox:indeterminate:focus + .#{$prefix}--checkbox-label::before {
     outline: 2px solid $focus;
     outline-offset: 1px;
   }
@@ -175,14 +176,47 @@
   .#{$prefix}--checkbox:checked:disabled + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox:indeterminate:disabled
     + .#{$prefix}--checkbox-label::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before,
-  .#{$prefix}--checkbox-label[data-contained-checkbox-state='mixed'][data-contained-checkbox-disabled='true']::before {
+  .#{$prefix}--checkbox-label[data-contained-checkbox-state='true'][data-contained-checkbox-disabled='true']::before {
     background-color: $icon-disabled;
+  }
+
+  //----------------------------------------------
+  // Read-only
+  // ---------------------------------------------
+  .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label-text {
+    cursor: text;
+    user-select: text;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox
+    + .#{$prefix}--checkbox-label::before {
+    border-color: $icon-disabled;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $icon-disabled;
+    background: transparent;
+  }
+
+  .#{$prefix}--checkbox-wrapper--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after {
+    border-color: $text-primary;
   }
 
   //-----------------------------------------------
   // Skeleton
   //-----------------------------------------------
+  .#{$prefix}--checkbox-skeleton .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
 
   .#{$prefix}--checkbox-label-text.#{$prefix}--skeleton {
     @include skeleton;
@@ -192,5 +226,12 @@
 
     // Add extra spacing when label is present
     margin: rem(1px) 0 0 rem(6px);
+  }
+
+  //-----------------------------------------------
+  // InlineCheckbox
+  //-----------------------------------------------
+  .#{$prefix}--checkbox--inline {
+    position: relative;
   }
 }

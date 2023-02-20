@@ -5,8 +5,8 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@use '../../breakpoint' as *;
 @use '../../config' as *;
+@use '../../breakpoint' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
 @use '../../theme' as *;
@@ -17,7 +17,7 @@
 @mixin breadcrumb {
   .#{$prefix}--breadcrumb {
     @include reset;
-    @include type-style('body-short-01');
+    @include type-style('body-compact-01');
 
     display: inline;
 
@@ -97,6 +97,10 @@
       content: '';
       opacity: 0;
       transition: opacity $duration-fast-01 motion(standard, productive);
+
+      @media screen and (prefers-reduced-motion: reduce) {
+        transition: none;
+      }
     }
   }
 
@@ -145,5 +149,12 @@
 
     width: rem(100px);
     height: 1rem;
+  }
+
+  .#{$prefix}--breadcrumb
+    .#{$prefix}--overflow-menu.#{$prefix}--btn--icon-only {
+    min-height: 1.125rem;
+    padding-right: 0;
+    padding-left: 0;
   }
 }

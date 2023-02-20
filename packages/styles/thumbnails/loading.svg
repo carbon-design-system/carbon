@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>loading</title>
+    <g id="loading" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval-2" stroke="#DCDCDC" stroke-width="10.8" cx="160" cy="90" r="23.6"></circle>
+        <path d="M160,114 C173.254834,114 184,103.254834 184,90 C184,76.745166 173.254834,66 160,66 C146.745166,66 136,76.745166 136,90" id="Oval-2" stroke="#0062FF" stroke-width="10.8"></path>
+    </g>
+</svg>

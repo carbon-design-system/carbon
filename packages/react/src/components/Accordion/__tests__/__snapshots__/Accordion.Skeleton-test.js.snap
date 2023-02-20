@@ -7,19 +7,19 @@ exports[`AccordionSkeleton should render 1`] = `
   open={true}
 >
   <ul
-    className="bx--accordion bx--skeleton bx--accordion--end"
+    className="cds--accordion cds--skeleton cds--accordion--end"
   >
     <li
-      className="bx--accordion__item bx--accordion__item--active"
+      className="cds--accordion__item cds--accordion__item--active"
     >
       <span
-        className="bx--accordion__heading"
+        className="cds--accordion__heading"
       >
-        <ForwardRef(ChevronRight16)
-          className="bx--accordion__arrow"
+        <ForwardRef(ChevronRight)
+          className="cds--accordion__arrow"
         >
           <Icon
-            className="bx--accordion__arrow"
+            className="cds--accordion__arrow"
             fill="currentColor"
             height={16}
             preserveAspectRatio="xMidYMid meet"
@@ -29,7 +29,7 @@ exports[`AccordionSkeleton should render 1`] = `
           >
             <svg
               aria-hidden={true}
-              className="bx--accordion__arrow"
+              className="cds--accordion__arrow"
               fill="currentColor"
               focusable="false"
               height={16}
@@ -43,26 +43,22 @@ exports[`AccordionSkeleton should render 1`] = `
               />
             </svg>
           </Icon>
-        </ForwardRef(ChevronRight16)>
+        </ForwardRef(ChevronRight)>
         <SkeletonText
-          className="bx--accordion__title"
+          className="cds--accordion__title"
           heading={false}
           lineCount={3}
           paragraph={false}
           width="100%"
         >
           <p
-            className="bx--skeleton__text bx--accordion__title"
-            style={
-              Object {
-                "width": "100%",
-              }
-            }
+            className="cds--skeleton__text cds--accordion__title"
+            key="0"
           />
         </SkeletonText>
       </span>
       <div
-        className="bx--accordion__content"
+        className="cds--accordion__content"
       >
         <SkeletonText
           heading={false}
@@ -71,12 +67,8 @@ exports[`AccordionSkeleton should render 1`] = `
           width="90%"
         >
           <p
-            className="bx--skeleton__text"
-            style={
-              Object {
-                "width": "90%",
-              }
-            }
+            className="cds--skeleton__text"
+            key="0"
           />
         </SkeletonText>
         <SkeletonText
@@ -86,12 +78,8 @@ exports[`AccordionSkeleton should render 1`] = `
           width="80%"
         >
           <p
-            className="bx--skeleton__text"
-            style={
-              Object {
-                "width": "80%",
-              }
-            }
+            className="cds--skeleton__text"
+            key="0"
           />
         </SkeletonText>
         <SkeletonText
@@ -101,12 +89,8 @@ exports[`AccordionSkeleton should render 1`] = `
           width="95%"
         >
           <p
-            className="bx--skeleton__text"
-            style={
-              Object {
-                "width": "95%",
-              }
-            }
+            className="cds--skeleton__text"
+            key="0"
           />
         </SkeletonText>
       </div>
@@ -115,16 +99,16 @@ exports[`AccordionSkeleton should render 1`] = `
       key="0"
     >
       <li
-        className="bx--accordion__item"
+        className="cds--accordion__item"
       >
         <span
-          className="bx--accordion__heading"
+          className="cds--accordion__heading"
         >
-          <ForwardRef(ChevronRight16)
-            className="bx--accordion__arrow"
+          <ForwardRef(ChevronRight)
+            className="cds--accordion__arrow"
           >
             <Icon
-              className="bx--accordion__arrow"
+              className="cds--accordion__arrow"
               fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -134,7 +118,7 @@ exports[`AccordionSkeleton should render 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="bx--accordion__arrow"
+                className="cds--accordion__arrow"
                 fill="currentColor"
                 focusable="false"
                 height={16}
@@ -148,21 +132,17 @@ exports[`AccordionSkeleton should render 1`] = `
                 />
               </svg>
             </Icon>
-          </ForwardRef(ChevronRight16)>
+          </ForwardRef(ChevronRight)>
           <SkeletonText
-            className="bx--accordion__title"
+            className="cds--accordion__title"
             heading={false}
             lineCount={3}
             paragraph={false}
             width="100%"
           >
             <p
-              className="bx--skeleton__text bx--accordion__title"
-              style={
-                Object {
-                  "width": "100%",
-                }
-              }
+              className="cds--skeleton__text cds--accordion__title"
+              key="0"
             />
           </SkeletonText>
         </span>
@@ -172,16 +152,16 @@ exports[`AccordionSkeleton should render 1`] = `
       key="1"
     >
       <li
-        className="bx--accordion__item"
+        className="cds--accordion__item"
       >
         <span
-          className="bx--accordion__heading"
+          className="cds--accordion__heading"
         >
-          <ForwardRef(ChevronRight16)
-            className="bx--accordion__arrow"
+          <ForwardRef(ChevronRight)
+            className="cds--accordion__arrow"
           >
             <Icon
-              className="bx--accordion__arrow"
+              className="cds--accordion__arrow"
               fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -191,7 +171,7 @@ exports[`AccordionSkeleton should render 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="bx--accordion__arrow"
+                className="cds--accordion__arrow"
                 fill="currentColor"
                 focusable="false"
                 height={16}
@@ -205,21 +185,17 @@ exports[`AccordionSkeleton should render 1`] = `
                 />
               </svg>
             </Icon>
-          </ForwardRef(ChevronRight16)>
+          </ForwardRef(ChevronRight)>
           <SkeletonText
-            className="bx--accordion__title"
+            className="cds--accordion__title"
             heading={false}
             lineCount={3}
             paragraph={false}
             width="100%"
           >
             <p
-              className="bx--skeleton__text bx--accordion__title"
-              style={
-                Object {
-                  "width": "100%",
-                }
-              }
+              className="cds--skeleton__text cds--accordion__title"
+              key="0"
             />
           </SkeletonText>
         </span>
@@ -229,16 +205,16 @@ exports[`AccordionSkeleton should render 1`] = `
       key="2"
     >
       <li
-        className="bx--accordion__item"
+        className="cds--accordion__item"
       >
         <span
-          className="bx--accordion__heading"
+          className="cds--accordion__heading"
         >
-          <ForwardRef(ChevronRight16)
-            className="bx--accordion__arrow"
+          <ForwardRef(ChevronRight)
+            className="cds--accordion__arrow"
           >
             <Icon
-              className="bx--accordion__arrow"
+              className="cds--accordion__arrow"
               fill="currentColor"
               height={16}
               preserveAspectRatio="xMidYMid meet"
@@ -248,7 +224,7 @@ exports[`AccordionSkeleton should render 1`] = `
             >
               <svg
                 aria-hidden={true}
-                className="bx--accordion__arrow"
+                className="cds--accordion__arrow"
                 fill="currentColor"
                 focusable="false"
                 height={16}
@@ -262,21 +238,17 @@ exports[`AccordionSkeleton should render 1`] = `
                 />
               </svg>
             </Icon>
-          </ForwardRef(ChevronRight16)>
+          </ForwardRef(ChevronRight)>
           <SkeletonText
-            className="bx--accordion__title"
+            className="cds--accordion__title"
             heading={false}
             lineCount={3}
             paragraph={false}
             width="100%"
           >
             <p
-              className="bx--skeleton__text bx--accordion__title"
-              style={
-                Object {
-                  "width": "100%",
-                }
-              }
+              className="cds--skeleton__text cds--accordion__title"
+              key="0"
             />
           </SkeletonText>
         </span>

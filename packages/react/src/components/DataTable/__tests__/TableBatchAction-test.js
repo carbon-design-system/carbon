@@ -5,25 +5,30 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import { TableBatchAction } from '../';
 
-describe('DataTable.TableBatchAction', () => {
-  it('should render', () => {
-    const wrapper = mount(
-      <TableBatchAction className="custom-class" iconDescription="test" />
-    );
-    expect(wrapper).toMatchSnapshot();
+describe('TableBatchAction', () => {
+  it('should render a <button>', () => {
+    render(<TableBatchAction />);
+    expect(screen.getByRole('button')).toBeInTheDocument();
   });
 
-  it('should support rendering a custom icon', () => {
+  it('should support custom icons through `renderIcon`', () => {
     const renderIcon = jest.fn((props) => (
-      <svg {...props}>
+      <svg {...props} data-testid="icon">
         <circle cx="16" cy="16" r="8" />
       </svg>
     ));
-    mount(<TableBatchAction iconDescription="test" renderIcon={renderIcon} />);
+    render(<TableBatchAction iconDescription="test" renderIcon={renderIcon} />);
+
     expect(renderIcon).toHaveBeenCalled();
+    expect(screen.getByTestId('icon')).toBeInTheDocument();
+  });
+
+  it('should support labeling the button with `iconDescription`', () => {
+    render(<TableBatchAction iconDescription="test" />);
+    expect(screen.getByLabelText('test')).toBeInTheDocument();
   });
 });

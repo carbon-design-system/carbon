@@ -6,11 +6,16 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import classNames from 'classnames';
-import { WarningFilled16 } from '@carbon/icons-react';
+import deprecate from '../../prop-types/deprecate';
+import { WarningFilled } from '@carbon/icons-react';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
+import { FormContext } from '../FluidForm';
+import { useAnnouncer } from '../../internal/useAnnouncer';
+import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 const TextArea = React.forwardRef(function TextArea(
   {
@@ -25,17 +30,25 @@ const TextArea = React.forwardRef(function TextArea(
     helperText,
     light,
     placeholder,
+    enableCounter,
+    maxCount,
     ...other
   },
-  ref
+  forwardRef
 ) {
   const prefix = usePrefix();
+  const { isFluid } = useContext(FormContext);
   const enabled = useFeatureFlag('enable-v11-release');
+  const { defaultValue, value, disabled } = other;
+  const [textCount, setTextCount] = useState(
+    defaultValue?.length || value?.length || 0
+  );
 
   const textareaProps = {
     id,
     onChange: (evt) => {
       if (!other.disabled) {
+        setTextCount(evt.target.value?.length);
         onChange(evt);
       }
     },
@@ -47,9 +60,14 @@ const TextArea = React.forwardRef(function TextArea(
     ref,
   };
 
+  if (enableCounter) {
+    textareaProps.maxLength = maxCount;
+  }
+  let ariaAnnouncement = useAnnouncer(textCount, maxCount);
+
   const labelClasses = classNames(`${prefix}--label`, {
-    [`${prefix}--visually-hidden`]: hideLabel,
-    [`${prefix}--label--disabled`]: other.disabled,
+    [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
+    [`${prefix}--label--disabled`]: disabled,
   });
 
   const label = labelText ? (
@@ -57,6 +75,15 @@ const TextArea = React.forwardRef(function TextArea(
       {labelText}
     </label>
   ) : null;
+
+  const counterClasses = classNames(`${prefix}--label`, {
+    [`${prefix}--label--disabled`]: disabled,
+  });
+
+  const counter =
+    enableCounter && maxCount ? (
+      <div className={counterClasses}>{`${textCount}/${maxCount}`}</div>
+    ) : null;
 
   const helperTextClasses = classNames(`${prefix}--form__helper-text`, {
     [`${prefix}--form__helper-text--disabled`]: other.disabled,
@@ -71,6 +98,9 @@ const TextArea = React.forwardRef(function TextArea(
   const error = invalid ? (
     <div role="alert" className={`${prefix}--form-requirement`} id={errorId}>
       {invalidText}
+      {isFluid && (
+        <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
+      )}
     </div>
   ) : null;
 
@@ -83,6 +113,18 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
+  const textareaRef = useRef();
+  const ref = useMergedRefs([forwardRef, textareaRef]);
+
+  useIsomorphicEffect(() => {
+    if (other.cols) {
+      textareaRef.current.style.width = null;
+      textareaRef.current.style.resize = 'none';
+    } else {
+      textareaRef.current.style.width = `100%`;
+    }
+  }, [other.cols]);
+
   const input = (
     <textarea
       {...other}
@@ -92,6 +134,8 @@ const TextArea = React.forwardRef(function TextArea(
       aria-invalid={invalid || null}
       aria-describedby={invalid ? errorId : null}
       disabled={other.disabled}
+      readOnly={other.readOnly}
+      ref={ref}
     />
   );
 
@@ -102,16 +146,26 @@ const TextArea = React.forwardRef(function TextArea(
           ? classNames(`${prefix}--form-item`, className)
           : `${prefix}--form-item`
       }>
-      {label}
+      <div className={`${prefix}--text-area__label-wrapper`}>
+        {label}
+        {counter}
+      </div>
       <div
-        className={`${prefix}--text-area__wrapper`}
+        className={classNames(`${prefix}--text-area__wrapper`, {
+          [`${prefix}--text-area__wrapper--readonly`]: other.readOnly,
+        })}
         data-invalid={invalid || null}>
-        {invalid && (
-          <WarningFilled16 className={`${prefix}--text-area__invalid-icon`} />
+        {invalid && !isFluid && (
+          <WarningFilled className={`${prefix}--text-area__invalid-icon`} />
         )}
         {input}
+        <span className={`${prefix}--text-area__counter-alert`} role="alert">
+          {ariaAnnouncement}
+        </span>
+        {isFluid && <hr className={`${prefix}--text-area__divider`} />}
+        {isFluid && invalid ? error : null}
       </div>
-      {invalid ? error : helper}
+      {invalid && !isFluid ? error : helper}
     </div>
   );
 });
@@ -138,6 +192,11 @@ TextArea.propTypes = {
    * Specify whether the control is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter: PropTypes.bool,
 
   /**
    * Provide text that is used alongside the control label for additional help
@@ -171,9 +230,19 @@ TextArea.propTypes = {
   labelText: PropTypes.node.isRequired,
 
   /**
-   * Specify whether you want the light version of this control
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `TextArea` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
+
+  /**
+   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   */
+  maxCount: PropTypes.number,
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<textarea>`
@@ -193,6 +262,11 @@ TextArea.propTypes = {
   placeholder: PropTypes.string,
 
   /**
+   * Whether the textarea should be read-only
+   */
+  readOnly: PropTypes.bool,
+
+  /**
    * Specify the rows attribute for the `<textarea>`
    */
   rows: PropTypes.number,
@@ -209,11 +283,11 @@ TextArea.defaultProps = {
   onClick: () => {},
   placeholder: '',
   rows: 4,
-  cols: 50,
   invalid: false,
   invalidText: '',
   helperText: '',
-  light: false,
+  enableCounter: false,
+  maxCount: undefined,
 };
 
 export default TextArea;

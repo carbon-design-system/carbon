@@ -5,23 +5,24 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'prefix';
-@import 'styles';
-@import 'font-family';
+@use 'sass:map';
+@use 'font-family' as *;
+@use 'prefix' as *;
+@use 'styles' as *;
 
 /// Create type classes for font families, weights, styles
 /// @access public
 /// @group @carbon/type
-@mixin carbon--type-classes {
+@mixin type-classes {
   // Font families
-  @each $name, $value in $carbon--font-families {
+  @each $name, $value in $font-families {
     .#{$prefix}--type-#{$name} {
       font-family: $value;
     }
   }
 
   // Font weights
-  @each $name, $value in $carbon--font-weights {
+  @each $name, $value in $font-weights {
     .#{$prefix}--type-#{$name} {
       font-weight: $value;
     }
@@ -35,7 +36,7 @@
   // Type styles
   @each $name, $value in $tokens {
     .#{$prefix}--type-#{$name} {
-      @include carbon--type-style($name, map-has-key($value, breakpoints));
+      @include type-style($name, map.has-key($value, breakpoints));
     }
   }
 }

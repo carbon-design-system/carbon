@@ -5,13 +5,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { render } from '@testing-library/react';
 import React from 'react';
-import { mount } from 'enzyme';
 import { TableActionList } from '../';
 
-describe('DataTable.TableActionList', () => {
-  it('should render', () => {
-    const wrapper = mount(<TableActionList className="custom-class" />);
-    expect(wrapper).toMatchSnapshot();
+describe('TableActionList', () => {
+  it('should support a custom className on the outermost element', () => {
+    const { container } = render(<TableActionList className="custom-class" />);
+    expect(container.firstChild).toHaveClass('custom-class');
+  });
+
+  it('should spread props onto the outermost element', () => {
+    const { container } = render(<TableActionList data-testid="test" />);
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 });

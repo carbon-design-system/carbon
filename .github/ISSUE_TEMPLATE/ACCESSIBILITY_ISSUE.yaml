@@ -20,6 +20,8 @@ body:
       description: Which package(s) are you using?
       multiple: true
       options:
+        - '@carbon/react'
+        - '@carbon/styles'
         - 'carbon-components'
         - 'carbon-components-react'
         - '@carbon/colors'
@@ -67,6 +69,12 @@ body:
     validations:
       required: true
   - type: input
+    id: react-version
+    attributes:
+      label: React version
+      description: 'Which React version are you using?'
+      placeholder: e.g. v17.0.2
+  - type: input
     id: tool
     attributes:
       label: Automated testing tool and ruleset
@@ -99,10 +107,10 @@ body:
   - type: input
     id: example-url
     attributes:
-      label: CodeSandbox example
+      label: Reproduction/example
       description:
         'Use our
-        [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon/tree/main/packages/react/examples/codesandbox)
+        [template](https://stackblitz.com/github/carbon-design-system/carbon/tree/main/examples/vite?file=src%2FApp.jsx)
         to re-create the issue'
     validations:
       required: true
@@ -112,7 +120,7 @@ body:
       label: Steps to reproduce
       description:
         'How do we reproduce the accessibility violation you described using the
-        CodeSandbox link above?'
+        reproduction/example link above?'
     validations:
       required: true
   - type: checkboxes

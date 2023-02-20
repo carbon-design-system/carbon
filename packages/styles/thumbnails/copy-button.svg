@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="320px" height="180px" viewBox="0 0 320 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>copy-button</title>
+    <defs>
+        <path d="M3.75,11.25 L2.5,11.25 L2.5,3.75 C2.5,3.05964406 3.05964406,2.5 3.75,2.5 L11.25,2.5 L11.25,3.75 L3.75,3.75 L3.75,11.25 Z M17.5,7.5 L17.5,17.5 L7.5,17.5 L7.5,7.5 L17.5,7.5 L17.5,7.5 Z M17.5,6.25 L7.5,6.25 C6.80964406,6.25 6.25,6.80964406 6.25,7.5 L6.25,17.5 C6.25,18.1903559 6.80964406,18.75 7.5,18.75 L17.5,18.75 C18.1903559,18.75 18.75,18.1903559 18.75,17.5 L18.75,7.5 C18.75,6.80964406 18.1903559,6.25 17.5,6.25 Z" id="path-1"></path>
+    </defs>
+    <g id="copy-button" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#F4F4F4" x="136" y="66" width="48" height="48"></rect>
+        <g id="Group" transform="translate(150.000000, 80.000000)">
+            <mask id="mask-2" fill="white">
+                <use xlink:href="#path-1"></use>
+            </mask>
+            <use id="icon-color" fill="#000000" xlink:href="#path-1"></use>
+        </g>
+    </g>
+</svg>

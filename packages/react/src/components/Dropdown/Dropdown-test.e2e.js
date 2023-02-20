@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import 'carbon-components/scss/components/dropdown/_dropdown.scss';
+import '../../../index.scss';
 
 import React from 'react';
 import { mount } from '@cypress/react';
@@ -48,15 +48,6 @@ describe('Dropdown', () => {
           style={style}
           items={items}
           label={label}
-          invalid
-          invalidText="This is invalid text"
-        />
-        <Dropdown style={style} items={items} label={label} light />
-        <Dropdown
-          style={style}
-          items={items}
-          label={label}
-          light
           invalid
           invalidText="This is invalid text"
         />

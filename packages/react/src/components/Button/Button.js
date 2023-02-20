@@ -6,103 +6,44 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import { ButtonKinds } from '../../prop-types/types';
-import deprecate from '../../prop-types/deprecate';
+import { IconButton } from '../IconButton';
 import { composeEventHandlers } from '../../tools/events';
-import { keys, matches } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
-import toggleClass from '../../tools/toggleClass';
-import { useFeatureFlag } from '../FeatureFlags';
 
 const Button = React.forwardRef(function Button(
   {
-    children,
     as,
+    children,
     className,
-    disabled,
-    small,
-    size,
-    kind,
+    dangerDescription = 'danger',
+    disabled = false,
+    hasIconOnly = false,
     href,
-    isExpressive,
-    isSelected,
-    tabIndex,
-    type,
-    renderIcon: ButtonImageElement,
-    dangerDescription,
     iconDescription,
-    hasIconOnly,
-    tooltipPosition,
-    tooltipAlignment,
-    onClick,
+    isExpressive = false,
+    isSelected,
+    kind = 'primary',
     onBlur,
+    onClick,
     onFocus,
     onMouseEnter,
     onMouseLeave,
-    ...other
+    renderIcon: ButtonImageElement,
+    size = 'lg',
+    tabIndex = 0,
+    tooltipAlignment = 'center',
+    tooltipPosition = 'top',
+    type = 'button',
+    ...rest
   },
   ref
 ) {
-  const [allowTooltipVisibility, setAllowTooltipVisibility] = useState(false);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isFocused, setIsFocused] = useState(false);
   const tooltipRef = useRef(null);
-  const tooltipTimeout = useRef(null);
   const prefix = usePrefix();
-
-  const closeTooltips = (evt) => {
-    const tooltipNode = document?.querySelectorAll(`.${prefix}--tooltip--a11y`);
-    [...tooltipNode].map((node) => {
-      toggleClass(
-        node,
-        `${prefix}--tooltip--hidden`,
-        node !== evt.currentTarget
-      );
-    });
-  };
-
-  const handleFocus = (evt) => {
-    if (hasIconOnly) {
-      closeTooltips(evt);
-      setIsFocused(true);
-      setAllowTooltipVisibility(true);
-    }
-  };
-
-  const handleBlur = () => {
-    if (hasIconOnly) {
-      setIsHovered(false);
-      setIsFocused(false);
-      setAllowTooltipVisibility(false);
-    }
-  };
-
-  const handleMouseEnter = (evt) => {
-    if (hasIconOnly) {
-      tooltipTimeout.current && clearTimeout(tooltipTimeout.current);
-
-      if (evt.target === tooltipRef.current) {
-        setAllowTooltipVisibility(true);
-        return;
-      }
-
-      closeTooltips(evt);
-
-      setAllowTooltipVisibility(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (!isFocused && hasIconOnly) {
-      tooltipTimeout.current = setTimeout(() => {
-        setAllowTooltipVisibility(false);
-        setIsHovered(false);
-      }, 100);
-    }
-  };
 
   const handleClick = (evt) => {
     // Prevent clicks on the tooltip from triggering the button click event
@@ -112,44 +53,17 @@ const Button = React.forwardRef(function Button(
     }
   };
 
-  useEffect(() => {
-    const handleEscKeyDown = (event) => {
-      if (matches(event, [keys.Escape])) {
-        setAllowTooltipVisibility(false);
-        setIsHovered(false);
-      }
-    };
-    document.addEventListener('keydown', handleEscKeyDown);
-    return () => document.removeEventListener('keydown', handleEscKeyDown);
-  }, []);
-
-  const enabled = useFeatureFlag('enable-v11-release');
-
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]:
-      (size === 'small' && !isExpressive) ||
-      (size === 'sm' && !isExpressive) ||
-      (small && !isExpressive),
-    [`${prefix}--btn--md`]:
-      (size === 'field' && !isExpressive) || (size === 'md' && !isExpressive),
-    // V11: change lg to xl
-    [`${prefix}--btn--lg`]: enabled ? size === 'xl' : size === 'lg',
-    // V11: change xl to 2xl
-    [`${prefix}--btn--xl`]: enabled ? size === '2xl' : size === 'xl',
+    [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive,
+    [`${prefix}--btn--md`]: size === 'md' && !isExpressive,
+    [`${prefix}--btn--xl`]: size === 'xl',
+    [`${prefix}--btn--2xl`]: size === '2xl',
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,
-    [`${prefix}--tooltip--visible`]: isHovered,
-    [`${prefix}--tooltip--hidden`]: hasIconOnly && !allowTooltipVisibility,
     [`${prefix}--btn--icon-only`]: hasIconOnly,
     [`${prefix}--btn--selected`]: hasIconOnly && isSelected && kind === 'ghost',
-    [`${prefix}--tooltip__trigger`]: hasIconOnly,
-    [`${prefix}--tooltip--a11y`]: hasIconOnly,
-    [`${prefix}--btn--icon-only--${tooltipPosition}`]:
-      hasIconOnly && tooltipPosition,
-    [`${prefix}--tooltip--align-${tooltipAlignment}`]:
-      hasIconOnly && tooltipAlignment,
   });
 
   const commonProps = {
@@ -165,6 +79,8 @@ const Button = React.forwardRef(function Button(
       aria-hidden="true"
     />
   );
+
+  const iconOnlyImage = !ButtonImageElement ? null : <ButtonImageElement />;
 
   const dangerButtonVariants = ['danger', 'danger--tertiary', 'danger--ghost'];
 
@@ -183,16 +99,7 @@ const Button = React.forwardRef(function Button(
   };
 
   let assistiveText;
-  if (hasIconOnly) {
-    assistiveText = (
-      <div
-        ref={tooltipRef}
-        onMouseEnter={handleMouseEnter}
-        className={`${prefix}--assistive-text`}>
-        {iconDescription}
-      </div>
-    );
-  } else if (dangerButtonVariants.includes(kind)) {
+  if (dangerButtonVariants.includes(kind)) {
     assistiveText = (
       <span id={assistiveId} className={`${prefix}--visually-hidden`}>
         {dangerDescription}
@@ -213,15 +120,15 @@ const Button = React.forwardRef(function Button(
     otherProps = anchorProps;
   }
 
-  return React.createElement(
+  const Button = React.createElement(
     component,
     {
-      onMouseEnter: composeEventHandlers([onMouseEnter, handleMouseEnter]),
-      onMouseLeave: composeEventHandlers([onMouseLeave, handleMouseLeave]),
-      onFocus: composeEventHandlers([onFocus, handleFocus]),
-      onBlur: composeEventHandlers([onBlur, handleBlur]),
-      onClick: composeEventHandlers([onClick, handleClick]),
-      ...other,
+      onMouseEnter,
+      onMouseLeave,
+      onFocus,
+      onBlur,
+      onClick,
+      ...rest,
       ...commonProps,
       ...otherProps,
     },
@@ -229,6 +136,46 @@ const Button = React.forwardRef(function Button(
     children,
     buttonImage
   );
+
+  if (hasIconOnly) {
+    let align;
+
+    if (tooltipPosition === 'top' || tooltipPosition === 'bottom') {
+      if (tooltipAlignment === 'center') {
+        align = tooltipPosition;
+      }
+      if (tooltipAlignment === 'end') {
+        align = `${tooltipPosition}-right`;
+      }
+      if (tooltipAlignment === 'start') {
+        align = `${tooltipPosition}-left`;
+      }
+    }
+
+    if (tooltipPosition === 'right' || tooltipPosition === 'left') {
+      align = tooltipPosition;
+    }
+
+    return (
+      <IconButton
+        as={as}
+        align={align}
+        label={iconDescription}
+        kind={kind}
+        size={size}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        onFocus={onFocus}
+        onBlur={onBlur}
+        onClick={composeEventHandlers([onClick, handleClick])}
+        {...rest}
+        {...commonProps}
+        {...otherProps}>
+        {iconOnlyImage ? iconOnlyImage : children}
+      </IconButton>
+    );
+  }
+  return Button;
 });
 
 Button.displayName = 'Button';
@@ -292,14 +239,14 @@ Button.propTypes = {
   isExpressive: PropTypes.bool,
 
   /**
-   * Specify whether the Button is currently selected
+   * Specify whether the Button is currently selected. Only applies to the Ghost variant.
    */
   isSelected: PropTypes.bool,
 
   /**
    * Specify the kind of Button you want to create
    */
-  kind: PropTypes.oneOf(ButtonKinds).isRequired,
+  kind: PropTypes.oneOf(ButtonKinds),
 
   /**
    * Provide an optional function to be called when the button element
@@ -343,29 +290,9 @@ Button.propTypes = {
   role: PropTypes.string,
 
   /**
-   * Specify the size of the button, from a list of available sizes.
-   * For `default` buttons, this prop can remain unspecified or use `default`.
-   * In the next major release of Carbon, `default`, `field`, and `small` will be removed
+   * Specify the size of the button, from the following list of sizes:
    */
-  size: PropTypes.oneOf([
-    'default',
-    'field',
-    'small',
-    'sm',
-    'md',
-    'lg',
-    'xl',
-    '2xl',
-  ]),
-
-  /**
-   * Deprecated in v10 in favor of `size`.
-   * Specify whether the Button should be a small variant
-   */
-  small: deprecate(
-    PropTypes.bool,
-    `\nThe prop \`small\` for Button has been deprecated in favor of \`size\`. Please use \`size="sm"\` instead.`
-  ),
+  size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl', '2xl']),
 
   /**
    * Optional prop to specify the tabIndex of the Button
@@ -388,18 +315,6 @@ Button.propTypes = {
    * Optional prop to specify the type of the Button
    */
   type: PropTypes.oneOf(['button', 'reset', 'submit']),
-};
-
-Button.defaultProps = {
-  tabIndex: 0,
-  type: 'button',
-  disabled: false,
-  kind: 'primary',
-  size: 'default',
-  dangerDescription: 'danger',
-  tooltipAlignment: 'center',
-  tooltipPosition: 'top',
-  isExpressive: false,
 };
 
 export default Button;

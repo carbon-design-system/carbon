@@ -5,23 +5,20 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { CheckmarkFilled } from '@carbon/icons-react';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React, { useRef } from 'react';
-import uid from '../../tools/uniqueId';
-import classNames from 'classnames';
-import { settings } from 'carbon-components';
-import { CheckmarkFilled16 as CheckmarkFilled } from '@carbon/icons-react';
+import React from 'react';
 import { keys, matches } from '../../internal/keyboard';
+import { useFallbackId } from '../../internal/useId';
+import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
-
-const { prefix } = settings;
 
 function RadioTile({
   children,
-  className,
+  className: customClassName,
   disabled,
   // eslint-disable-next-line no-unused-vars
-  iconDescription,
   light,
   checked,
   name,
@@ -29,11 +26,12 @@ function RadioTile({
   id,
   onChange,
   tabIndex,
-  ...other
+  ...rest
 }) {
-  const { current: inputId } = useRef(id || uid());
-  const classes = classNames(
-    className,
+  const prefix = usePrefix();
+  const inputId = useFallbackId(id);
+  const className = cx(
+    customClassName,
     `${prefix}--tile`,
     `${prefix}--tile--selectable`,
     {
@@ -57,19 +55,18 @@ function RadioTile({
   return (
     <>
       <input
-        {...other}
-        type="radio"
         checked={checked}
-        disabled={disabled}
-        name={name}
-        value={value}
         className={`${prefix}--tile-input`}
-        tabIndex={!disabled ? tabIndex : null}
+        disabled={disabled}
+        id={inputId}
+        name={name}
         onChange={!disabled ? handleOnChange : null}
         onKeyDown={!disabled ? handleOnKeyDown : null}
-        id={inputId}
+        tabIndex={!disabled ? tabIndex : null}
+        type="radio"
+        value={value}
       />
-      <label htmlFor={inputId} className={classes}>
+      <label {...rest} htmlFor={inputId} className={className}>
         <span className={`${prefix}--tile__checkmark`}>
           <CheckmarkFilled />
         </span>
@@ -96,23 +93,9 @@ RadioTile.propTypes = {
   className: PropTypes.string,
 
   /**
-   * `true` if the `<input>` should be checked at initialization.
-   */
-  defaultChecked: PropTypes.bool,
-
-  /**
    * Specify whether the RadioTile should be disabled
    */
   disabled: PropTypes.bool,
-
-  /**
-   * The description of the tile checkmark icon.
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop for `RadioTile` is no longer needed and has ' +
-      'been deprecated. It will be moved in the next major release.'
-  ),
 
   /**
    * The ID of the `<input>`.
@@ -120,9 +103,14 @@ RadioTile.propTypes = {
   id: PropTypes.string,
 
   /**
-   * `true` to use the light version.
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `RadioTile` is no longer needed and has ' +
+      'been deprecated in v11 in favor of the new `Layer` component. It will be moved in the next major release.'
+  ),
 
   /**
    * The `name` of the `<input>`.
@@ -148,7 +136,6 @@ RadioTile.propTypes = {
 RadioTile.defaultProps = {
   onChange: () => {},
   tabIndex: 0,
-  light: false,
 };
 
 export default RadioTile;

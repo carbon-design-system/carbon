@@ -7,12 +7,12 @@
 
 @use '../../config' as *;
 @use '../../feature-flags' as *;
-@use "../../type" as *;
+@use '../../type' as *;
 @use '../../motion';
-@use '../../compat/theme' as *;
-@use "../../utilities/focus-outline" as *;
-@use "../../utilities/skeleton" as *;
-@use "../../utilities/high-contrast-mode" as *;
+@use '../../theme' as *;
+@use '../../utilities/focus-outline' as *;
+@use '../../utilities/skeleton' as *;
+@use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/convert' as *;
 @use 'mixins' as *;
 
@@ -36,12 +36,14 @@
 
     display: table;
     width: 100%;
-    margin-bottom: 5rem;
+    @if not enabled('enable-v11-release') {
+      margin-bottom: 5rem;
+    }
+
     background-color: transparent;
     border-collapse: collapse;
     border-spacing: 0;
     overflow-x: auto;
-    overflow-y: hidden;
 
     // Condensed list
     &.#{$prefix}--structured-list--condensed .#{$prefix}--structured-list-td,
@@ -81,13 +83,13 @@
     display: table-row;
     border-bottom: 1px solid $border-subtle;
     transition: background-color motion.$duration-fast-02
-      motion(standard, productive);
+      motion.motion(standard, productive);
   }
 
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row):not(.#{$prefix}--structured-list-row--selected) {
-    border-bottom: 1px solid $hover-row;
-    background-color: $hover-row;
+    border-bottom: 1px solid $background-hover;
+    background-color: $background-hover;
     cursor: pointer;
   }
 
@@ -131,7 +133,7 @@
   .#{$prefix}--structured-list-th {
     @include reset;
     @include padding-th;
-    @include type-style('productive-heading-01');
+    @include type-style('heading-compact-01');
 
     display: table-cell;
     height: rem(40px);
@@ -149,7 +151,7 @@
 
   .#{$prefix}--structured-list-td {
     @include reset;
-    @include type-style('body-long-01');
+    @include type-style('body-01');
     @include padding-td;
 
     position: relative;
@@ -160,7 +162,8 @@
       border-top: 1px solid $border-subtle;
     }
 
-    transition: color motion.$duration-fast-02 motion(standard, productive);
+    transition: color motion.$duration-fast-02
+      motion.motion(standard, productive);
   }
 
   .#{$prefix}--structured-list-content--nowrap {
@@ -170,7 +173,7 @@
   .#{$prefix}--structured-list-svg {
     display: inline-block;
     fill: transparent;
-    transition: all motion.$duration-fast-02 motion(standard, productive);
+    transition: all motion.$duration-fast-02 motion.motion(standard, productive);
     vertical-align: middle;
   }
 

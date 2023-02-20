@@ -5,8 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { ChevronRight16 } from '@carbon/icons-react';
-import { settings } from 'carbon-components';
+import { ChevronRight } from '@carbon/icons-react';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
@@ -14,9 +13,9 @@ import { Text } from '../Text';
 import { match, keys } from '../../internal/keyboard';
 import { useId } from '../../internal/useId';
 import deprecate from '../../prop-types/deprecate';
+import { usePrefix } from '../../internal/usePrefix';
 
-const { prefix } = settings;
-const defaultRenderExpando = (props) => <button type="button" {...props} />;
+const defaultRenderToggle = (props) => <button type="button" {...props} />;
 
 function AccordionItem({
   children,
@@ -24,7 +23,8 @@ function AccordionItem({
   iconDescription, // eslint-disable-line
   open = false,
   onHeadingClick,
-  renderExpando: Expando = defaultRenderExpando,
+  renderExpando = defaultRenderToggle, // remove renderExpando in next major release
+  renderToggle,
   title = 'title',
   disabled,
   ...rest
@@ -33,6 +33,7 @@ function AccordionItem({
   const [prevIsOpen, setPrevIsOpen] = useState(open);
   const [animation, setAnimation] = useState('');
   const id = useId('accordion-item');
+  const prefix = usePrefix();
   const className = cx({
     [`${prefix}--accordion__item`]: true,
     [`${prefix}--accordion__item--active`]: isOpen,
@@ -40,6 +41,8 @@ function AccordionItem({
     [`${prefix}--accordion__item--disabled`]: disabled,
     [customClassName]: !!customClassName,
   });
+
+  const Toggle = renderToggle || renderExpando; // remove renderExpando in next major release
 
   if (open !== prevIsOpen) {
     setAnimation(isOpen ? 'collapsing' : 'expanding');
@@ -76,7 +79,7 @@ function AccordionItem({
 
   return (
     <li className={className} {...rest} onAnimationEnd={handleAnimationEnd}>
-      <Expando
+      <Toggle
         disabled={disabled}
         aria-controls={id}
         aria-expanded={isOpen}
@@ -84,11 +87,11 @@ function AccordionItem({
         onClick={onClick}
         onKeyDown={onKeyDown}
         type="button">
-        <ChevronRight16 className={`${prefix}--accordion__arrow`} />
+        <ChevronRight className={`${prefix}--accordion__arrow`} />
         <Text as="div" className={`${prefix}--accordion__title`}>
           {title}
         </Text>
-      </Expando>
+      </Toggle>
       <div id={id} className={`${prefix}--accordion__content`}>
         {children}
       </div>
@@ -113,17 +116,6 @@ AccordionItem.propTypes = {
   disabled: PropTypes.bool,
 
   /**
-   * The description of the expando icon.
-   */
-  iconDescription: deprecate(
-    PropTypes.string,
-    'The `iconDescription` prop has been deprecated as it is no longer ' +
-      'required. Feel free to remove this prop from <AccordionItem>. This ' +
-      'prop will be removed in the next major release of ' +
-      '`carbon-components-react`'
-  ),
-
-  /**
    * The handler of the massaged `click` event.
    */
   onClick: PropTypes.func,
@@ -134,15 +126,24 @@ AccordionItem.propTypes = {
   onHeadingClick: PropTypes.func,
 
   /**
-   * `true` to open the expando.
+   * `true` to open the expand.
    */
   open: PropTypes.bool,
 
   /**
-   * The callback function to render the expando button.
+   * The callback function to render the expand button.
    * Can be a React component class.
    */
-  renderExpando: PropTypes.func,
+  renderExpando: deprecate(
+    PropTypes.func,
+    'The `renderExpando` prop has been deprecated and will be removed in the next major release of Carbon. Use the `renderToggle` prop instead.'
+  ),
+
+  /**
+   * The callback function to render the expand button.
+   * Can be a React component class.
+   */
+  renderToggle: PropTypes.func,
 
   /**
    * The accordion title.

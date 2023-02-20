@@ -9,114 +9,64 @@
 
 'use strict';
 
-require('core-js/features/array/flat-map');
-
 const { reporter } = require('@carbon/cli-reporter');
 const { generate } = require('@carbon/scss-generator');
 const fs = require('fs-extra');
 const path = require('path');
-const yaml = require('js-yaml');
-const { formatTokenName, themes, tokens } = require('../lib');
-const buildTokensFile = require('./builders/tokens');
-const buildThemesFile = require('./builders/themes');
 const buildCompatThemesFile = require('./builders/compat/themes');
 const buildCompatTokensFile = require('./builders/compat/tokens');
 const buildModulesThemesFile = require('./builders/modules-themes');
 const buildModulesTokensFile = require('./builders/modules-tokens');
-const buildMixinsFile = require('./builders/mixins');
-
-const defaultTheme = 'white';
-const defaultThemeMapName = 'carbon--theme';
+const buildModulesButtonTokens = require('./builders/modules-button-tokens');
+const buildModulesTagTokens = require('./builders/modules-tag-tokens');
+const buildModulesNotificationTokens = require('./builders/modules-notification-tokens');
 
 async function build() {
   reporter.info('Building scss files for themes...');
 
-  const METADATA_FILE = path.resolve(__dirname, '../metadata.yml');
-  const metadata = transformMetadata(
-    yaml.safeLoad(fs.readFileSync(METADATA_FILE, 'utf8'))
-  );
-
-  const SCSS_DIR = path.resolve(__dirname, '../scss/generated');
+  const SCSS_DIR = path.resolve(__dirname, '../scss');
+  const GENERATED_SCSS_DIR = path.join(SCSS_DIR, 'generated');
   const files = [
     {
-      filepath: path.join(SCSS_DIR, '_tokens.scss'),
-      builder() {
-        return buildTokensFile(tokens, metadata, themes[defaultTheme]);
-      },
-    },
-    {
-      filepath: path.join(SCSS_DIR, '_themes.scss'),
-      builder() {
-        return buildThemesFile(
-          themes,
-          tokens,
-          defaultTheme,
-          defaultThemeMapName
-        );
-      },
-    },
-    {
-      filepath: path.join(SCSS_DIR, '_mixins.scss'),
-      builder() {
-        return buildMixinsFile(
-          themes,
-          tokens,
-          defaultTheme,
-          defaultThemeMapName
-        );
-      },
-    },
-    {
-      filepath: path.resolve(
-        SCSS_DIR,
-        '..',
-        'compat',
-        'generated',
-        '_themes.scss'
-      ),
+      filepath: path.join(SCSS_DIR, 'compat', 'generated', '_themes.scss'),
       builder() {
         return buildCompatThemesFile();
       },
     },
     {
-      filepath: path.resolve(
-        SCSS_DIR,
-        '..',
-        'compat',
-        'generated',
-        '_tokens.scss'
-      ),
+      filepath: path.resolve(SCSS_DIR, 'compat', 'generated', '_tokens.scss'),
       builder() {
         return buildCompatTokensFile();
       },
     },
     {
-      filepath: path.resolve(
-        SCSS_DIR,
-        '..',
-        'modules',
-        'generated',
-        '_themes.scss'
-      ),
+      filepath: path.join(GENERATED_SCSS_DIR, '_themes.scss'),
       builder() {
-        return buildModulesThemesFile(
-          themes,
-          tokens,
-          defaultTheme,
-          defaultThemeMapName
-        );
+        return buildModulesThemesFile();
       },
     },
     {
-      filepath: path.resolve(
-        SCSS_DIR,
-        '..',
-        'modules',
-        'generated',
-        '_tokens.scss'
-      ),
+      filepath: path.join(GENERATED_SCSS_DIR, '_tokens.scss'),
       builder() {
-        return buildModulesTokensFile(tokens);
+        return buildModulesTokensFile();
+      },
+    },
+    {
+      filepath: path.join(GENERATED_SCSS_DIR, '_button-tokens.scss'),
+      builder() {
+        return buildModulesButtonTokens();
+      },
+    },
+    {
+      filepath: path.join(GENERATED_SCSS_DIR, '_tag-tokens.scss'),
+      builder() {
+        return buildModulesTagTokens();
+      },
+    },
+    {
+      filepath: path.join(GENERATED_SCSS_DIR, '_notification-tokens.scss'),
+      builder() {
+        return buildModulesNotificationTokens();
       },
     },
   ];
@@ -129,42 +79,6 @@ async function build() {
   }
 
   reporter.success('Done! 🎉');
-}
-
-/**
- * Transform token names to formats expected by Sassdoc for descriptions and
- * aliases
- * @param {object} metadata - token metadata
- * @returns {object} token metadata
- */
-function transformMetadata(metadata) {
-  const namesRegEx = new RegExp(
-    metadata.tokens.map((token) => token.name).join('|'),
-    'g'
-  );
-
-  const replaceMap = {};
-  metadata.tokens.map((token) => {
-    replaceMap[token.name] = formatTokenName(token.name);
-  });
-
-  metadata.tokens.forEach((token, i) => {
-    // interactive01 to `$interactive-01`
-    if (token.role) {
-      token.role.forEach((role, j) => {
-        metadata.tokens[i].role[j] = role.replace(namesRegEx, (match) => {
-          return '`$' + replaceMap[match] + '`';
-        });
-      });
-    }
-
-    // brand01 to brand-01
-    if (token.alias) {
-      token.alias = formatTokenName(token.alias);
-    }
-  });
-
-  return metadata;
 }
 
 build().catch((error) => {

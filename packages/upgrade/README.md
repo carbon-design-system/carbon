@@ -24,31 +24,54 @@ You can install `@carbon/upgrade` in your project, or use a tool like
 [`npx`](https://medium.com/@maybekatz/introducing-npx-an-npm-package-runner-55f7d4bd282b)
 by running the following command in your project:
 
-    # Runs the command in "dry" mode, which means no files are altered.
-    # To update the files, re-run the command without the `-d` flag.
-    npx @carbon/upgrade -d
+```bash
+npx @carbon/upgrade
+```
 
 Below is a full output of the options and commands available:
 
 ```bash
-Usage: carbon-upgrade [options]
+Usage: @carbon/upgrade [options]
 
 Commands:
-  carbon-upgrade                            run to upgrade your project[default]
-  carbon-upgrade migrate <package> <from>   run a specific migration for a
-  <to>                                      package
+  @carbon/upgrade upgrade                   upgrade your project       [default]
+  @carbon/upgrade migrate <migration>       run a Carbon migration on your
+  [paths...]                                source files
+  @carbon/upgrade migrate list              list all available migrations
 
 Options:
-  --help        Show help                                              [boolean]
-  --version     Show version number                                    [boolean]
-  --verbose     display the full output while running a command [default: false]
-  --dry, -d     view the result of running this command without changing any
-                files                                           [default: false]
-  --ignore, -i  provide a glob pattern for directories you would like ignored
-                                                                   [default: ""]
+      --help     Show help                                             [boolean]
+      --version  Show version number                                   [boolean]
+      --force    force execution if the cli encounters an error while doing
+                 safety checks                        [boolean] [default: false]
+  -w, --write    update the files with changes found by running the migration
+                                                      [boolean] [default: false]
+  -v, --verbose  optionally include additional logs, useful for debugging
+                                                      [boolean] [default: false]
 ```
 
+### Migrations
+
+Included within the CLI are a number of migrations available to you to be ran on
+your project's source files.
+
+Migrations are automated scripts (codemods) ran using the
+[jscodeshift](https://github.com/facebook/jscodeshift) runner, that will apply
+intelligent transformations to your code.
+
+These migrations range from simple automations like a find and replace of import
+statements, to more sophisticated migrations that rewrite component prop usage,
+configuration, and set up. The source of these migrations can be viewed within
+the
+[transforms folder](https://github.com/carbon-design-system/carbon/tree/main/packages/upgrade/transforms).
+Each is tested against a series of test fixtures to ensure transforms are
+predictable and consistently provide the intended output.
+
 ## 🙌 Contributing
+
+If you have ideas on how we could make your migration experience easier, please
+reach out by
+[opening a new discussion](https://github.com/carbon-design-system/carbon/discussions/new).
 
 We're always looking for contributors to help us fix bugs, build new features,
 or help us improve the project documentation. If you're interested, definitely

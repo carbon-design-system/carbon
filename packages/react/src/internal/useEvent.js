@@ -7,7 +7,7 @@
 
 import { useEffect, useRef } from 'react';
 
-export function useEvent(element, eventName, callback) {
+export function useEvent(elementOrRef, eventName, callback) {
   const savedCallback = useRef(null);
 
   useEffect(() => {
@@ -21,10 +21,33 @@ export function useEvent(element, eventName, callback) {
       }
     }
 
+    const element = elementOrRef.current ?? elementOrRef;
     element.addEventListener(eventName, handler);
 
     return () => {
       element.removeEventListener(eventName, handler);
     };
-  }, [element, eventName]);
+  }, [elementOrRef, eventName]);
+}
+
+export function useWindowEvent(eventName, callback) {
+  const savedCallback = useRef(null);
+
+  useEffect(() => {
+    savedCallback.current = callback;
+  });
+
+  useEffect(() => {
+    function handler(event) {
+      if (savedCallback.current) {
+        savedCallback.current(event);
+      }
+    }
+
+    window.addEventListener(eventName, handler);
+
+    return () => {
+      window.removeEventListener(eventName, handler);
+    };
+  }, [eventName]);
 }

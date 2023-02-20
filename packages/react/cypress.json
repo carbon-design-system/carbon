@@ -1,9 +1,0 @@
-{
-  "componentFolder": "src",
-  "env": {
-    "coverage": false
-  },
-  "fixturesFolder": false,
-  "nodeVersion": "system",
-  "testFiles": "**/*-test.e2e.js"
-}
