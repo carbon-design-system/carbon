@@ -49,6 +49,31 @@ describe('Heading', () => {
     }
   });
 
+  it('should override heading levels when specifing the level of a section', () => {
+    render(
+      <>
+        <Heading data-testid="h1">h1</Heading>
+        <Section level={4}>
+          <Heading data-testid="h4">h4</Heading>
+          <Section>
+            <Heading data-testid="h5">h5</Heading>
+            <Section level={2}>
+              <Heading data-testid="h2">h2</Heading>
+            </Section>
+          </Section>
+        </Section>
+      </>
+    );
+
+    const levels = [1, 2, 4, 5];
+
+    for (const level of levels) {
+      const testId = `h${level}`;
+      const element = screen.getByTestId(testId);
+      expect(element.tagName).toBe(testId.toUpperCase());
+    }
+  });
+
   it('should stop increment heading levels past level 6', () => {
     render(
       <>
