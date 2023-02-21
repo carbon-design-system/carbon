@@ -1,4 +1,3 @@
-// @ts-check
 /**
  * Copyright IBM Corp. 2021
  *

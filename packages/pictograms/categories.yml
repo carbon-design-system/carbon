@@ -455,6 +455,7 @@ categories:
   - name: Design and development
     members:
       - app--developer
+      - app--modernization
       - application
       - art--tools--01
       - birthday--cake
