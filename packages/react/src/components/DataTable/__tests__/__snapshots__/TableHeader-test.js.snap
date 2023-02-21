@@ -175,3 +175,107 @@ exports[`DataTable.TableHeader should render 2`] = `
   </div>
 </Table>
 `;
+
+exports[`TableHeader should have an active and ascending class if sorting by ASC 1`] = `
+<div>
+  <div
+    class="cds--data-table-content"
+  >
+    <table
+      class="cds--data-table"
+    >
+      <thead>
+        <tr>
+          <th
+            scope="col"
+          >
+            <div
+              class="cds--table-header-label"
+            >
+              Header
+            </div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`TableHeader should have an active class if it is the sort header and the sort state is not NONE 1`] = `
+<div>
+  <div
+    class="cds--data-table-content"
+  >
+    <table
+      class="cds--data-table"
+    >
+      <thead>
+        <tr>
+          <th
+            scope="col"
+          >
+            <div
+              class="cds--table-header-label"
+            >
+              Header
+            </div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`TableHeader should render 1`] = `
+<div>
+  <div
+    class="cds--data-table-content"
+  >
+    <table
+      class="cds--data-table"
+    >
+      <thead>
+        <tr>
+          <th
+            scope="col"
+          >
+            <div
+              class="cds--table-header-label"
+            >
+              Header
+            </div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+`;
+
+exports[`TableHeader should render with sortHeader 1`] = `
+<div>
+  <div
+    class="cds--data-table-content"
+  >
+    <table
+      class="cds--data-table"
+    >
+      <thead>
+        <tr>
+          <th
+            scope="col"
+          >
+            <div
+              class="cds--table-header-label"
+            >
+              Header
+            </div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+</div>
+`;
