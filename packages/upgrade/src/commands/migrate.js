@@ -71,7 +71,7 @@ function listMigrations(migrations) {
 }
 
 /**
- * @param {object<Migration>} migration
+ * @param {Object<Migration>} migration
  * @param {Array<string>} workspaces
  * @returns {<void>}
  */

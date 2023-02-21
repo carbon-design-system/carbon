@@ -38,7 +38,7 @@ const iconSizeScale = iconSize.map((value, index) => {
 
 describe('scss/layout.scss', () => {
   it.each(spacingScale)(
-    'it should export spacing step %s',
+    'should export spacing step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';
@@ -56,7 +56,7 @@ describe('scss/layout.scss', () => {
   );
 
   it.each(fluidSpacingScale)(
-    'it should export fluid spacing step %s',
+    'should export fluid spacing step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';
@@ -74,7 +74,7 @@ describe('scss/layout.scss', () => {
   );
 
   it.each(containerScale)(
-    'it should export container step %s',
+    'should export container step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';
@@ -92,7 +92,7 @@ describe('scss/layout.scss', () => {
   );
 
   it.each(iconSizeScale)(
-    'it should export icon-size step %s',
+    'should export icon-size step `%s`',
     async (_index, id, value) => {
       const { get } = await render(`
         @use 'sass:map';
