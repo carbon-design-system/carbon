@@ -73,7 +73,20 @@ export default (config) => (fp) => {
         // Update the calendar with the value of the `to` date input
         fp.setDate(
           [inputFrom.value, inputTo && inputTo.value],
-          false,
+          true,
+          fp.config.dateFormat
+        );
+      }
+    }
+
+    // save end date in calendar inmediately after it's been written down
+    if (inputTo === target && fp.selectedDates.length === 1 && inputTo.value) {
+      let currentEndDate = new Date(inputTo.value);
+
+      if (currentEndDate.toString() !== 'Invalid Date') {
+        fp.setDate(
+          [inputFrom.value, inputTo.value],
+          true,
           fp.config.dateFormat
         );
       }

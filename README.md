@@ -25,8 +25,8 @@
   <a href="https://github.com/carbon-design-system/carbon/blob/master/.github/CONTRIBUTING.md">
     <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg" alt="PRs welcome" />
   </a>
-  <a href="https://gitter.im/carbondesignsystem/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge">
-    <img src="https://badges.gitter.im/carbondesignsystem/community.svg" alt="Chat with us on Gitter" />
+  <a href="https://discord.gg/J7JEUEkTRX">
+    <img src="https://img.shields.io/discord/689212587170201628?color=5865F2" alt="Chat with us on Discord">
   </a>
 </p>
 
@@ -213,7 +213,11 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://github.com/Shankar-CodeJunkie"><img src="https://avatars.githubusercontent.com/u/56068832?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ShankarV-CodeJunkie</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=Shankar-CodeJunkie" title="Code">💻</a></td>
     <td align="center"><a href="http://darioplatania.github.io/"><img src="https://avatars.githubusercontent.com/u/11682859?v=4?s=100" width="100px;" alt=""/><br /><sub><b>dario platania</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=darioplatania" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/matkrzy"><img src="https://avatars.githubusercontent.com/u/14991661?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Mateusz Krzyżanowski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=matkrzy" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/jpsorensen"><img src="https://avatars.githubusercontent.com/u/93107699?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jpsorensen</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jpsorensen" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/jkap"><img src="https://avatars.githubusercontent.com/u/224587?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jae kaplan</b></sub></a><br /><a href="#infra-jkap" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
+    <td align="center"><a href="https://github.com/sierrawetmore"><img src="https://avatars.githubusercontent.com/u/107062203?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sierra Wetmore</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=sierrawetmore" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/kcprevatt"><img src="https://avatars.githubusercontent.com/u/68609306?v=4?s=100" width="100px;" alt=""/><br /><sub><b>kcprevatt</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=kcprevatt" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/lewandom"><img src="https://avatars.githubusercontent.com/u/8779205?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marcin Lewandowski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=lewandom" title="Code">💻</a></td>
   </tr>
 </table>
 
