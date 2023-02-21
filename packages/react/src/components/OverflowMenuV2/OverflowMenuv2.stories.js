@@ -6,68 +6,63 @@
  */
 
 import React from 'react';
+import { action } from '@storybook/addon-actions';
+
 import { ArrowsVertical } from '@carbon/icons-react';
 
-import Menu from '../Menu';
-import { StoryFrame, buildMenu } from '../Menu/_storybook-utils';
+import { MenuItem, MenuItemRadioGroup, MenuItemDivider } from '../Menu';
 
-import { OverflowMenuV2 } from '.';
+import { OverflowMenuV2 } from './';
 
 export default {
-  title: 'Experimental/unstable_Menu/OverflowMenuV2',
-  component: Menu,
+  title: 'Experimental/unstable__OverflowMenuV2',
+  component: OverflowMenuV2,
 };
 
-const Story = (items, props = {}) => (
-  <StoryFrame>
-    <OverflowMenuV2 {...props}>{buildMenu(items)}</OverflowMenuV2>
-  </StoryFrame>
-);
+export const _OverflowMenuV2 = () => {
+  const onClick = action('onClick (MenuItem)');
 
-export const _OverflowMenuV2 = () =>
-  Story([
-    { type: 'item', label: 'Stop app' },
-    { type: 'item', label: 'Restart app' },
-    { type: 'item', label: 'Rename app' },
-    { type: 'item', label: 'Edit routes and access' },
-    { type: 'divider' },
-    { type: 'item', label: 'Delete app', kind: 'danger' },
-  ]);
-
-export const CustomIcon = () =>
-  Story(
-    [
-      {
-        type: 'radiogroup',
-        label: 'Sort by',
-        items: ['Name', 'Date created', 'Date last modified', 'Size'],
-        initialSelectedItem: 'Date created',
-      },
-      { type: 'divider' },
-      {
-        type: 'radiogroup',
-        label: 'Sort order',
-        items: ['Ascending', 'Descending'],
-        initialSelectedItem: 'Descending',
-      },
-    ],
-    {
-      renderIcon: ArrowsVertical,
-    }
+  return (
+    <OverflowMenuV2>
+      <MenuItem label="Stop app" onClick={onClick} />
+      <MenuItem label="Restart app" onClick={onClick} />
+      <MenuItem label="Rename app" onClick={onClick} />
+      <MenuItem label="Edit routes and access" onClick={onClick} />
+      <MenuItemDivider />
+      <MenuItem label="Delete app" kind="danger" onClick={onClick} />
+    </OverflowMenuV2>
   );
+};
 
-export const Nested = () =>
-  Story([
-    { type: 'item', label: 'Level 1' },
-    { type: 'item', label: 'Level 1' },
-    {
-      type: 'item',
-      label: 'Level 1',
-      children: [
-        { type: 'item', label: 'Level 2' },
-        { type: 'item', label: 'Level 2' },
-        { type: 'item', label: 'Level 2' },
-      ],
-    },
-    { type: 'item', label: 'Level 1' },
-  ]);
+export const Nested = () => {
+  return (
+    <OverflowMenuV2>
+      <MenuItem label="Level 1" />
+      <MenuItem label="Level 1" />
+      <MenuItem label="Level 1">
+        <MenuItem label="Level 2" />
+        <MenuItem label="Level 2" />
+        <MenuItem label="Level 2" />
+      </MenuItem>
+      <MenuItem label="Level 1" />
+    </OverflowMenuV2>
+  );
+};
+
+export const CustomIcon = () => {
+  return (
+    <OverflowMenuV2 renderIcon={ArrowsVertical}>
+      <MenuItemRadioGroup
+        label="Sort by"
+        items={['Name', 'Date created', 'Date last modified', 'Size']}
+        defaultSelectedItem="Date created"
+      />
+      <MenuItemDivider />
+      <MenuItemRadioGroup
+        label="Sorting direction"
+        items={['Ascending', 'Descending']}
+        defaultSelectedItem="Descending"
+      />
+    </OverflowMenuV2>
+  );
+};

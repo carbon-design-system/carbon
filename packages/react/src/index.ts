@@ -142,11 +142,11 @@ export {
 } from './components/Layout';
 export {
   Menu as unstable_Menu,
-  MenuDivider as unstable_MenuDivider,
-  MenuGroup as unstable_MenuGroup,
   MenuItem as unstable_MenuItem,
-  MenuRadioGroup as unstable_MenuRadioGroup,
-  MenuSelectableItem as unstable_MenuSelectableItem,
+  MenuItemDivider as unstable_MenuItemDivider,
+  MenuItemGroup as unstable_MenuItemGroup,
+  MenuItemRadioGroup as unstable_MenuItemRadioGroup,
+  MenuItemSelectable as unstable_MenuItemSelectable,
 } from './components/Menu';
 export { OverflowMenuV2 as unstable_OverflowMenuV2 } from './components/OverflowMenuV2';
 export {
