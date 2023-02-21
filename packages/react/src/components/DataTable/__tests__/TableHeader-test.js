@@ -1,15 +1,15 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import React from 'react';
-import { mount } from 'enzyme';
 import { Table, TableHead, TableHeader, TableRow } from '../';
+import { render } from '@testing-library/react';
 
-describe('DataTable.TableHeader', () => {
+describe('TableHeader', () => {
   let mockProps;
 
   beforeEach(() => {
@@ -21,7 +21,7 @@ describe('DataTable.TableHeader', () => {
   });
 
   it('should render', () => {
-    const simpleHeader = mount(
+    const { container } = render(
       <Table>
         <TableHead>
           <TableRow>
@@ -30,9 +30,11 @@ describe('DataTable.TableHeader', () => {
         </TableHead>
       </Table>
     );
-    expect(simpleHeader).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
+  });
 
-    const sortHeader = mount(
+  it('should render with sortHeader', () => {
+    const { container } = render(
       <Table>
         <TableHead>
           <TableRow>
@@ -43,11 +45,11 @@ describe('DataTable.TableHeader', () => {
         </TableHead>
       </Table>
     );
-    expect(sortHeader).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   it('should have an active class if it is the sort header and the sort state is not NONE', () => {
-    const wrapper = mount(
+    const { container } = render(
       <Table>
         <TableHead>
           <TableRow>
@@ -58,11 +60,11 @@ describe('DataTable.TableHeader', () => {
         </TableHead>
       </Table>
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 
   it('should have an active and ascending class if sorting by ASC', () => {
-    const wrapper = mount(
+    const { container } = render(
       <Table>
         <TableHead>
           <TableRow>
@@ -73,6 +75,6 @@ describe('DataTable.TableHeader', () => {
         </TableHead>
       </Table>
     );
-    expect(wrapper).toMatchSnapshot();
+    expect(container).toMatchSnapshot();
   });
 });
