@@ -215,7 +215,7 @@ const MenuItemSelectable = React.forwardRef(function MenuItemSelectable(
   const [checked, setChecked] = useControllableState({
     value: selected,
     onChange,
-    defaultValue: defaultSelected,
+    defaultValue: defaultSelected ?? false,
   });
 
   function handleClick(e) {
