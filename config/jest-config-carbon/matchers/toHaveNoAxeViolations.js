@@ -26,6 +26,9 @@ const defaultOptions = {
     region: {
       enabled: false,
     },
+    'color-contrast': {
+      enabled: false,
+    },
   },
 };
 
