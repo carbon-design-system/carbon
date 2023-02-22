@@ -934,6 +934,7 @@ categories:
   - name: Supply Chain
     members:
       - connected--nodes--to--the--cloud
+      - delivered
       - managing--contractual--flow
       - managing--items
       - monitored--item--on--conveyor
@@ -942,6 +943,7 @@ categories:
       - movement--of--goods--02
       - movement--of--goods--03
       - movement--of--items
+      - moving-dolly
       - process
   - name: Systems DevOps
     members:
