@@ -46,6 +46,7 @@ const MenuItem = React.forwardRef(function MenuItem(
   const hoverIntentTimeout = useRef(null);
 
   const isDisabled = disabled && !hasChildren;
+  const isDanger = kind === 'danger' && !hasChildren;
 
   function registerItem() {
     context.dispatch({
@@ -114,7 +115,7 @@ const MenuItem = React.forwardRef(function MenuItem(
 
   const classNames = cx(className, `${prefix}--menu-item`, {
     [`${prefix}--menu-item--disabled`]: isDisabled,
-    [`${prefix}--menu-item--${kind}`]: kind !== 'default',
+    [`${prefix}--menu-item--danger`]: isDanger,
   });
 
   // on first render, register this menuitem in the context's state
