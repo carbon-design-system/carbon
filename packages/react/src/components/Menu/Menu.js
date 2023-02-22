@@ -1,56 +1,74 @@
 /**
- * Copyright IBM Corp. 2020
+ * Copyright IBM Corp. 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
-import ReactDOM from 'react-dom';
-import classnames from 'classnames';
+import cx from 'classnames';
 import PropTypes from 'prop-types';
+import React, {
+  useContext,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+  useState,
+} from 'react';
+import { createPortal } from 'react-dom';
+
 import { keys, match } from '../../internal/keyboard';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
 
-import {
-  capWithinRange,
-  clickedElementHasSubnodes,
-  focusNode as focusNodeUtil,
-  getNextNode,
-  getParentMenu,
-  getParentNode,
-  getPosition,
-  getValidNodes,
-  resetFocus,
-} from './_utils';
+import { MenuContext, menuReducer } from './MenuContext';
 
-import MenuGroup from './MenuGroup';
-import MenuRadioGroup from './MenuRadioGroup';
-import MenuRadioGroupOptions from './MenuRadioGroupOptions';
-import MenuSelectableItem from './MenuSelectableItem';
+const spacing = 8; // distance to keep to window edges, in px
 
-const margin = 16; // distance to keep to body edges, in px
-const defaultSize = 'sm';
-
-const Menu = function Menu({
-  children,
-  className,
-  id,
-  level = 1,
-  open,
-  size = defaultSize,
-  target = document.body,
-  x = 0,
-  y = 0,
-  onClose = () => {},
-  ...rest
-}) {
-  const rootRef = useRef(null);
-  const [direction, setDirection] = useState(1); // 1 = to right, -1 = to left
-  const [position, setPosition] = useState([x, y]);
-  const isRootMenu = level === 1;
-  const focusReturn = useRef(null);
+const Menu = React.forwardRef(function Menu(
+  {
+    children,
+    className,
+    label,
+    onClose,
+    open,
+    size = 'sm',
+    target = document.body,
+    x = 0,
+    y = 0,
+    ...rest
+  },
+  forwardRef
+) {
   const prefix = usePrefix();
+
+  const focusReturn = useRef(null);
+
+  const context = useContext(MenuContext);
+
+  const isRoot = context.state.isRoot;
+  const menuSize = isRoot ? size : context.state.size;
+
+  const [childState, childDispatch] = useReducer(menuReducer, {
+    ...context.state,
+    isRoot: false,
+    size,
+    requestCloseRoot: isRoot ? handleClose : context.state.requestCloseRoot,
+  });
+  const childContext = useMemo(() => {
+    return {
+      state: childState,
+      dispatch: childDispatch,
+    };
+  }, [childState, childDispatch]);
+
+  const menu = useRef();
+  const ref = useMergedRefs([forwardRef, menu]);
+
+  const [position, setPosition] = useState([-1, -1]);
+  const focusableItems = childContext.state.items.filter(
+    (item) => !item.disabled
+  );
 
   function returnFocus() {
     if (focusReturn.current) {
@@ -58,303 +76,214 @@ const Menu = function Menu({
     }
   }
 
-  function close(eventType) {
-    const isKeyboardEvent = /^key/.test(eventType);
+  function handleOpen() {
+    if (menu.current) {
+      focusReturn.current = document.activeElement;
+      setPosition(calculatePosition());
+      menu.current.focus();
+    }
+  }
 
-    if (isKeyboardEvent) {
+  function handleClose(e) {
+    if (/^key/.test(e.type)) {
       window.addEventListener('keyup', returnFocus, { once: true });
+    } else if (e.type === 'click' && menu.current) {
+      menu.current.addEventListener('focusout', returnFocus, { once: true });
     } else {
-      window.addEventListener('mouseup', returnFocus, { once: true });
+      returnFocus();
     }
 
-    onClose();
-  }
+    childDispatch({ type: 'clearRegisteredItems' });
 
-  function getContainerBoundaries() {
-    const { clientWidth: bodyWidth, clientHeight: bodyHeight } = document.body;
-    return [margin, margin, bodyWidth - margin, bodyHeight - margin];
-  }
-
-  function getTargetBoundaries() {
-    const xIsRange = typeof x === 'object' && x.length === 2;
-    const yIsRange = typeof y === 'object' && y.length === 2;
-
-    const targetBoundaries = [
-      xIsRange ? x[0] : x,
-      yIsRange ? y[0] : y,
-      xIsRange ? x[1] : x,
-      yIsRange ? y[1] : y,
-    ];
-
-    if (!isRootMenu) {
-      const { width: parentWidth } = getParentMenu(
-        rootRef.current
-      )?.getBoundingClientRect();
-
-      targetBoundaries[2] -= parentWidth;
-    }
-
-    const containerBoundaries = getContainerBoundaries();
-
-    return [
-      capWithinRange(
-        targetBoundaries[0],
-        containerBoundaries[0],
-        containerBoundaries[2]
-      ),
-      capWithinRange(
-        targetBoundaries[1],
-        containerBoundaries[1],
-        containerBoundaries[3]
-      ),
-      capWithinRange(
-        targetBoundaries[2],
-        containerBoundaries[0],
-        containerBoundaries[2]
-      ),
-      capWithinRange(
-        targetBoundaries[3],
-        containerBoundaries[1],
-        containerBoundaries[3]
-      ),
-    ];
-  }
-
-  function focusNode(node) {
-    if (node) {
-      resetFocus(rootRef.current);
-      focusNodeUtil(node);
+    if (onClose) {
+      onClose();
     }
   }
 
-  function handleKeyDown(event) {
-    if (match(event, keys.Tab)) {
-      event.preventDefault();
-      close(event.type);
-    }
+  function handleKeyDown(e) {
+    e.stopPropagation();
 
+    const currentItem = focusableItems.findIndex((item) =>
+      item.ref.current.contains(document.activeElement)
+    );
+    let indexToFocus = currentItem;
+
+    // if the user presses escape or this is a submenu
+    // and the user presses ArrowLeft, close it
     if (
-      event.target.tagName === 'LI' &&
-      (match(event, keys.Enter) || match(event, keys.Space))
+      (match(e, keys.Escape) || (!isRoot && match(e, keys.ArrowLeft))) &&
+      onClose
     ) {
-      handleClick(event);
+      handleClose(e);
     } else {
-      event.stopPropagation();
-    }
-
-    if (
-      match(event, keys.Escape) ||
-      (!isRootMenu && match(event, keys.ArrowLeft))
-    ) {
-      close(event.type);
-    }
-
-    let nodeToFocus;
-
-    if (event.target.tagName === 'LI') {
-      const currentNode = event.target;
-
-      if (match(event, keys.ArrowUp)) {
-        nodeToFocus = getNextNode(currentNode, -1);
-      } else if (match(event, keys.ArrowDown)) {
-        nodeToFocus = getNextNode(currentNode, 1);
-      } else if (match(event, keys.ArrowLeft)) {
-        nodeToFocus = getParentNode(currentNode);
+      // if currentItem is -1, the menu itself is focused.
+      // in this case, the arrow keys define the first item
+      // to be focused.
+      if (match(e, keys.ArrowUp)) {
+        indexToFocus =
+          currentItem === -1 ? focusableItems.length - 1 : indexToFocus - 1;
       }
-    } else if (event.target.tagName === 'UL') {
-      const validNodes = getValidNodes(event.target);
+      if (match(e, keys.ArrowDown)) {
+        indexToFocus = currentItem === -1 ? 0 : indexToFocus + 1;
+      }
 
-      if (validNodes.length > 0 && match(event, keys.ArrowUp)) {
-        nodeToFocus = validNodes[validNodes.length - 1];
-      } else if (validNodes.length > 0 && match(event, keys.ArrowDown)) {
-        nodeToFocus = validNodes[0];
+      if (indexToFocus < 0) {
+        indexToFocus = 0;
+      }
+      if (indexToFocus >= focusableItems.length) {
+        indexToFocus = focusableItems.length - 1;
+      }
+
+      if (indexToFocus !== currentItem) {
+        const nodeToFocus = focusableItems[indexToFocus];
+        nodeToFocus.ref.current.focus();
       }
     }
+  }
 
-    focusNode(nodeToFocus);
-
-    if (rest.onKeyDown) {
-      rest.onKeyDown(event);
+  function handleBlur(e) {
+    if (open && onClose && isRoot && !menu.current.contains(e.relatedTarget)) {
+      handleClose(e);
     }
   }
 
-  function handleClick(event) {
-    if (!clickedElementHasSubnodes(event) && event.target.tagName !== 'UL') {
-      close(event.type);
-    } else {
-      event.stopPropagation();
-    }
+  function fitValue(range, axis) {
+    const { width, height } = menu.current.getBoundingClientRect();
+    const alignment = isRoot ? 'vertical' : 'horizontal';
+
+    const axes = {
+      x: {
+        max: window.innerWidth,
+        size: width,
+        anchor: alignment === 'horizontal' ? range[1] : range[0],
+        reversedAnchor: alignment === 'horizontal' ? range[0] : range[1],
+        offset: 0,
+      },
+      y: {
+        max: window.innerHeight,
+        size: height,
+        anchor: alignment === 'horizontal' ? range[0] : range[1],
+        reversedAnchor: alignment === 'horizontal' ? range[1] : range[0],
+        offset: isRoot ? 0 : 4, // top padding in menu, used to align the menu items
+      },
+    };
+
+    const { max, size, anchor, reversedAnchor, offset } = axes[axis];
+
+    // get values for different scenarios, set to false if they don't work
+    const options = [
+      // towards max (preferred)
+      max - spacing - size - anchor >= 0 ? anchor - offset : false,
+
+      // towards min / reversed (first fallback)
+      reversedAnchor - size >= 0 ? reversedAnchor - size + offset : false,
+
+      // align at max (second fallback)
+      max - spacing - size,
+    ];
+
+    const bestOption = options.find((option) => option !== false);
+
+    return bestOption >= spacing ? bestOption : spacing;
   }
 
-  function getCorrectedPosition(preferredDirection) {
-    const elementRect = rootRef.current?.getBoundingClientRect();
-    const elementDimensions = [elementRect.width, elementRect.height];
-    const targetBoundaries = getTargetBoundaries();
-    const containerBoundaries = getContainerBoundaries();
-    const { position: correctedPosition, direction: correctedDirection } =
-      getPosition(
-        elementDimensions,
-        targetBoundaries,
-        containerBoundaries,
-        preferredDirection,
-        isRootMenu,
-        rootRef.current
-      );
+  function calculatePosition() {
+    if (menu.current) {
+      const ranges = {
+        x: typeof x === 'object' && x.length === 2 ? x : [x, x],
+        y: typeof y === 'object' && y.length === 2 ? y : [y, y],
+      };
 
-    setDirection(correctedDirection);
-
-    return correctedPosition;
-  }
-
-  function handleBlur(event) {
-    if (isRootMenu && !rootRef.current?.contains(event.relatedTarget)) {
-      close(event.type);
+      return [fitValue(ranges.x, 'x'), fitValue(ranges.y, 'y')];
     }
+
+    return [-1, -1];
   }
 
   useEffect(() => {
     if (open) {
-      focusReturn.current = document.activeElement;
-      let localDirection = 1;
-
-      if (isRootMenu) {
-        rootRef.current?.focus();
-      } else {
-        const parentMenu = getParentMenu(rootRef.current);
-
-        if (parentMenu) {
-          localDirection = Number(parentMenu.dataset.direction);
-        }
-      }
-
-      const correctedPosition = getCorrectedPosition(localDirection);
-      setPosition(correctedPosition);
-    } else {
-      setPosition([0, 0]);
+      handleOpen();
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [open, x, y]);
+  }, [open]);
 
-  const someNodesHaveIcons = React.Children.toArray(children).some(
-    (node) => node.type === MenuSelectableItem || node.type === MenuRadioGroup
-  );
-
-  const options = React.Children.map(children, (node) => {
-    if (React.isValidElement(node)) {
-      return React.cloneElement(node, {
-        indented: someNodesHaveIcons,
-        level: level,
-      });
-    }
-  });
-
-  const classes = classnames(
+  const classNames = cx(
+    className,
     `${prefix}--menu`,
+    `${prefix}--menu--${menuSize}`,
     {
+      // --open sets visibility and --shown sets opacity.
+      // visibility is needed for focusing elements.
+      // opacity is only set once the position has been set correctly
+      // to avoid a flicker effect when opening.
       [`${prefix}--menu--open`]: open,
-      [`${prefix}--menu--invisible`]:
-        open && position[0] === 0 && position[1] === 0,
-      [`${prefix}--menu--root`]: isRootMenu,
-    },
-    size !== defaultSize && `${prefix}--menu--${size}`,
-    className
+      [`${prefix}--menu--shown`]: position[0] >= 0 && position[1] >= 0,
+      [`${prefix}--menu--with-icons`]: childContext.state.hasIcons,
+    }
   );
 
-  const ulAttributes = {
-    ...rest,
-    id,
-    ref: rootRef,
-    className: classes,
-    onKeyDown: handleKeyDown,
-    onClick: handleClick,
-    onBlur: handleBlur,
-    role: 'menu',
-    tabIndex: -1,
-    'data-direction': direction,
-    'data-level': level,
-    style: {
-      left: `${position[0]}px`,
-      top: `${position[1]}px`,
-    },
-  };
+  const rendered = (
+    <MenuContext.Provider value={childContext}>
+      <ul
+        {...rest}
+        className={classNames}
+        role="menu"
+        ref={ref}
+        aria-label={label}
+        tabIndex={-1}
+        onKeyDown={handleKeyDown}
+        onBlur={handleBlur}
+        // eslint-disable-next-line react/forbid-dom-props
+        style={{
+          left: `${position[0]}px`,
+          top: `${position[1]}px`,
+        }}>
+        {children}
+      </ul>
+    </MenuContext.Provider>
+  );
 
-  let childrenToRender = options;
-
-  // if the only child is a radiogroup, don't render it as radiogroup component, but
-  // only the items to prevent duplicate markup
-  if (options && options.length === 1 && options[0].type === MenuRadioGroup) {
-    const radioGroupProps = options[0].props;
-
-    ulAttributes['aria-label'] = radioGroupProps.label;
-    childrenToRender = (
-      <MenuRadioGroupOptions
-        items={radioGroupProps.items}
-        initialSelectedItem={radioGroupProps.initialSelectedItem}
-        onChange={radioGroupProps.onChange}
-      />
-    );
-  }
-
-  // if the only child is a generic group, don't render it as group component, but
-  // only the children to prevent duplicate markup
-  if (options && options.length === 1 && options[0].type === MenuGroup) {
-    const groupProps = options[0].props;
-
-    ulAttributes['aria-label'] = groupProps.label;
-    childrenToRender = React.Children.toArray(options[0].props.children);
-  }
-
-  const menu = <ul {...ulAttributes}>{childrenToRender}</ul>;
-
-  return isRootMenu
-    ? (open && ReactDOM.createPortal(menu, target)) || null
-    : menu;
-};
+  return isRoot ? (open && createPortal(rendered, target)) || null : rendered;
+});
 
 Menu.propTypes = {
   /**
-   * Specify the children of the Menu
+   * A collection of MenuItems to be rendered within this Menu.
    */
   children: PropTypes.node,
 
   /**
-   * Specify a custom className to apply to the ul node
+   * Additional CSS class names.
    */
   className: PropTypes.string,
 
   /**
-   * Define an ID for this menu
+   * A label describing the Menu.
    */
-  id: PropTypes.string,
+  label: PropTypes.string,
 
   /**
-   * Internal: keeps track of the nesting level of the menu
-   */
-  level: PropTypes.number,
-
-  /**
-   * Function called when the menu is closed
+   * Provide an optional function to be called when the Menu should be closed.
    */
   onClose: PropTypes.func,
 
   /**
-   * Specify whether the Menu is currently open
+   * Whether the Menu is open or not.
    */
   open: PropTypes.bool,
 
   /**
-   * Specify the size of the menu, from a list of available sizes.
+   * Specify the size of the Menu.
    */
-  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+  size: PropTypes.oneOf(['xs', 'sm', 'md', 'lg']),
 
   /**
-   * Optionally pass an element the Menu should be appended to as a child. Defaults to document.body.
+   * Specify a DOM node where the Menu should be rendered in. Defaults to document.body.
    */
   target: PropTypes.object,
 
   /**
-   * Specify the x position where this menu is rendered
+   * Specify the x position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([x1, x2])
    */
   x: PropTypes.oneOfType([
     PropTypes.number,
@@ -362,7 +291,7 @@ Menu.propTypes = {
   ]),
 
   /**
-   * Specify the y position where this menu is rendered
+   * Specify the y position of the Menu. Either pass a single number or an array with two numbers describing your activator's boundaries ([y1, y2])
    */
   y: PropTypes.oneOfType([
     PropTypes.number,
@@ -370,4 +299,4 @@ Menu.propTypes = {
   ]),
 };
 
-export default Menu;
+export { Menu };

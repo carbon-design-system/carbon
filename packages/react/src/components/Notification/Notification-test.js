@@ -15,7 +15,6 @@ import {
 } from './Notification';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { it } from 'window-or-global';
 
 const prefix = 'cds';
 

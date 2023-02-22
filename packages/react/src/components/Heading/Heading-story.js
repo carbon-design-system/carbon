@@ -35,3 +35,17 @@ export const Default = () => {
     </>
   );
 };
+
+export const CustomLevel = () => {
+  return (
+    <>
+      <Heading>h1</Heading>
+      <Section level={5}>
+        <Heading>h5</Heading>
+        <Section>
+          <Heading>h6</Heading>
+        </Section>
+      </Section>
+    </>
+  );
+};

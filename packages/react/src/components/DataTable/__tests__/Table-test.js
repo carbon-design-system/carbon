@@ -11,7 +11,7 @@ import { Table } from '../';
 
 describe('Table', () => {
   it.each(['xs', 'sm', 'md', 'lg', 'xl'])(
-    'it should support size="%s"',
+    'should support size=`%s`',
     (size) => {
       render(<Table size={size} />);
       expect(screen.getByRole('table')).toHaveClass(`cds--data-table--${size}`);
