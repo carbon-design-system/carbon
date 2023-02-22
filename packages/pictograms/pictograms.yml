@@ -1758,6 +1758,11 @@
     - deliver insights
     - insights
     - watson
+- name: delivered
+  friendly_name: Delivered
+  aliases:
+    - delivery
+    - delivered
 - name: delivery--truck
   friendly_name: Delivery truck
   aliases:
@@ -3836,6 +3841,12 @@
     - movement of items
     - goods
     - shipping
+- name: moving-dolly
+  friendly_name: Moving dolly
+  aliases:
+    - moving dolly
+    - delivered
+    - delivery
 - name: mqa
   friendly_name: MQA
   aliases:
