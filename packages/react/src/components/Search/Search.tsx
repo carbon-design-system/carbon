@@ -33,6 +33,7 @@ export interface SearchProps
 
   /**
    * Specify a label to be read by screen readers on the "close" button
+   * @default "Clear search input"
    */
   closeButtonLabelText?: string;
 
