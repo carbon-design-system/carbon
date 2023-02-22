@@ -12,7 +12,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
 import TimePickerSelect, {
-  TimePickerSelectProps,
+  TimePickerSelectProps
 } from '../TimePickerSelect/TimePickerSelect';
 
 type ExcludedAttributes = 'id' | 'value';
