@@ -6157,6 +6157,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "level": Object {
+        "type": "number",
+      },
     },
   },
   "Select" => Object {
