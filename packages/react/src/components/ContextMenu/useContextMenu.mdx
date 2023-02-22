@@ -52,7 +52,7 @@ Be aware that the following props are not set by `useContextMenu` and can theref
 // returns an object with 'x', 'y', 'open' and 'onClose' set accordingly intended
 // to be passed as pros to the <Menu> component.
 const menuProps = useContextMenu(
-  // the DOM element the "contextmenu" event should be attached to.
+  // the DOM element or react ref the "contextmenu" event should be attached to.
   // defaults to document.
   trigger,
 );
