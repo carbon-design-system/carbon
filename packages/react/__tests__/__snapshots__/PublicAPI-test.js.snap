@@ -4820,7 +4820,127 @@ Map {
         "type": "bool",
       },
       "downshiftProps": Object {
-        "type": "object",
+        "args": Array [
+          Object {
+            "children": Object {
+              "type": "func",
+            },
+            "defaultHighlightedIndex": Object {
+              "type": "number",
+            },
+            "defaultIsOpen": Object {
+              "type": "bool",
+            },
+            "environment": Object {
+              "args": Array [
+                Object {
+                  "addEventListener": Object {
+                    "type": "func",
+                  },
+                  "document": Object {
+                    "args": Array [
+                      Object {
+                        "activeElement": Object {
+                          "type": "any",
+                        },
+                        "body": Object {
+                          "type": "any",
+                        },
+                        "getElementById": Object {
+                          "type": "func",
+                        },
+                      },
+                    ],
+                    "type": "shape",
+                  },
+                  "removeEventListener": Object {
+                    "type": "func",
+                  },
+                },
+              ],
+              "type": "shape",
+            },
+            "getA11yStatusMessage": Object {
+              "type": "func",
+            },
+            "getItemId": Object {
+              "type": "func",
+            },
+            "highlightedIndex": Object {
+              "type": "number",
+            },
+            "id": Object {
+              "type": "string",
+            },
+            "initialHighlightedIndex": Object {
+              "type": "number",
+            },
+            "initialInputValue": Object {
+              "type": "string",
+            },
+            "initialIsOpen": Object {
+              "type": "bool",
+            },
+            "initialSelectedItem": Object {
+              "type": "any",
+            },
+            "inputId": Object {
+              "type": "string",
+            },
+            "inputValue": Object {
+              "type": "string",
+            },
+            "isOpen": Object {
+              "type": "bool",
+            },
+            "itemCount": Object {
+              "type": "number",
+            },
+            "itemToString": Object {
+              "type": "func",
+            },
+            "labelId": Object {
+              "type": "string",
+            },
+            "menuId": Object {
+              "type": "string",
+            },
+            "onChange": Object {
+              "type": "func",
+            },
+            "onInputValueChange": Object {
+              "type": "func",
+            },
+            "onOuterClick": Object {
+              "type": "func",
+            },
+            "onSelect": Object {
+              "type": "func",
+            },
+            "onStateChange": Object {
+              "type": "func",
+            },
+            "onUserAction": Object {
+              "type": "func",
+            },
+            "scrollIntoView": Object {
+              "type": "func",
+            },
+            "selectedItem": Object {
+              "type": "any",
+            },
+            "selectedItemChanged": Object {
+              "type": "func",
+            },
+            "stateReducer": Object {
+              "type": "func",
+            },
+            "suppressRefError": Object {
+              "type": "bool",
+            },
+          },
+        ],
+        "type": "shape",
       },
       "helperText": Object {
         "type": "node",

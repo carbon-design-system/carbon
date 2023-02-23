@@ -7,7 +7,7 @@
 
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import cx from 'classnames';
-import {
+import Downshift, {
   useSelect,
   UseSelectInterface,
   UseSelectProps,
@@ -654,7 +654,8 @@ MultiSelect.propTypes = {
   /**
    * Additional props passed to Downshift
    */
-  downshiftProps: PropTypes.object as React.Validator<UseSelectProps<unknown>>,
+  // @ts-ignore
+  downshiftProps: PropTypes.shape(Downshift.propTypes),
 
   /**
    * Provide helper text that is used alongside the control label for
