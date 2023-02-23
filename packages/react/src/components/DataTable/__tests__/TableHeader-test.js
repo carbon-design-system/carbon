@@ -182,7 +182,7 @@ describe('TableHeader', () => {
         </Table>
       );
 
-      userEvent.type(screen.getByRole('button'), 'test');
+      userEvent.click(screen.getByRole('button'), 'test');
       expect(onClick).toHaveBeenCalled();
     });
   });
