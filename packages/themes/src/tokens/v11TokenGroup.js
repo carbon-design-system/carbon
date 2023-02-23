@@ -286,7 +286,7 @@ export const icon = TokenGroup.create({
       state: 'disabled',
       name: 'icon-disabled',
     },
-    'icon-inverse',
+    'icon-interactive',
   ],
 });
 
