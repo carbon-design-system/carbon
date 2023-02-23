@@ -114,9 +114,6 @@ Map {
       "ariaLabel": Object {
         "type": "string",
       },
-      "caption": Object {
-        "type": "string",
-      },
       "children": Object {
         "type": "node",
       },
