@@ -140,7 +140,7 @@ the repository. There is an issue tracking curring status of this effort,
 
 - If it's not on [the storybook](https://react.carbondesignsystem.com), it's
   probably not public.
-- The entire Public API is snapshot-ed, you can
+- The entire Public API is snapshotted, you can
   [search the snapshot here](https://github.com/carbon-design-system/carbon/blob/main/packages/react/__tests__/__snapshots__/PublicAPI-test.js.snap).
   If it's not included there, it's not part of the public API.
 
