@@ -11,9 +11,6 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
-import TimePickerSelect, {
-  TimePickerSelectProps
-} from '../TimePickerSelect/TimePickerSelect';
 
 type ExcludedAttributes = 'id' | 'value';
 
@@ -242,10 +239,7 @@ const TimePicker: TimePickerComponent = React.forwardRef<
     };
 
     const mappedChildren = React.Children.map(children, (pickerSelect) => {
-      const item = pickerSelect as React.ReactElement<TimePickerSelectProps>;
-      if (item.type !== TimePickerSelect) {
-        return pickerSelect;
-      }
+      const item = pickerSelect as any;
 
       return React.cloneElement(item, {
         ...item.props,
