@@ -344,7 +344,7 @@ describe('MultiSelect', () => {
                 </span>
               </span>
             ) : (
-              ''
+              <span></span>
             )
           }
         />

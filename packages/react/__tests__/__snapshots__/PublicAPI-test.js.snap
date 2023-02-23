@@ -4784,10 +4784,10 @@ Map {
       "itemToString": [Function],
       "locale": "en",
       "open": false,
-      "selectedItems": null,
+      "selectedItems": undefined,
       "selectionFeedback": "top-after-reopen",
       "sortItems": [Function],
-      "title": false,
+      "titleText": false,
       "type": "default",
     },
     "propTypes": Object {
@@ -4938,6 +4938,9 @@ Map {
           },
         ],
         "type": "shape",
+      },
+      "helperText": Object {
+        "type": "node",
       },
       "hideLabel": Object {
         "type": "bool",
