@@ -6,8 +6,11 @@
  */
 
 import React from 'react';
-import { mount } from 'enzyme';
 import { Table, TableBody, TableExpandRow, TableExpandedRow } from '../';
+import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
+
+const prefix = 'cds';
 
 describe('DataTable.TableExpandRow', () => {
   let mockProps;
@@ -21,59 +24,95 @@ describe('DataTable.TableExpandRow', () => {
     };
   });
 
-  it('should render', () => {
-    const wrapper = mount(
-      <Table>
-        <TableBody>
-          <TableExpandRow {...mockProps} />
-          <TableExpandedRow colSpan={1} />
-        </TableBody>
-      </Table>
-    );
-    expect(wrapper).toMatchSnapshot();
+  describe('renders as expected - Component API', () => {
+    it('should render', () => {
+      const { container } = render(
+        <Table>
+          <TableBody>
+            <TableExpandRow {...mockProps} />
+            <TableExpandedRow colSpan={1} />
+          </TableBody>
+        </Table>
+      );
+
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should respect ariaLabel prop', () => {
+      render(
+        <Table>
+          <TableBody>
+            <TableExpandRow {...mockProps} />
+            <TableExpandedRow colSpan={1} />
+          </TableBody>
+        </Table>
+      );
+
+      expect(screen.getByRole('button')).toHaveAttribute(
+        'aria-label',
+        mockProps.ariaLabel
+      );
+    });
+
+    it('should support a custom `className` prop on the outermost element', () => {
+      render(
+        <Table>
+          <TableBody>
+            <TableExpandRow {...mockProps} />
+            <TableExpandedRow colSpan={1} />
+          </TableBody>
+        </Table>
+      );
+
+      expect(screen.getAllByRole('row')[0]).toHaveClass('custom-class');
+    });
+
+    it('should respect expandHeader prop', () => {
+      render(
+        <Table>
+          <TableBody>
+            <TableExpandRow {...mockProps} />
+            <TableExpandedRow colSpan={1} />
+          </TableBody>
+        </Table>
+      );
+
+      expect(screen.getAllByRole('cell')[0]).toHaveAttribute(
+        'headers',
+        'expand'
+      );
+    });
+
+    it('should respect isExpanded prop', () => {
+      render(
+        <Table>
+          <TableBody>
+            <TableExpandRow {...mockProps} />
+            <TableExpandedRow colSpan={1} />
+          </TableBody>
+        </Table>
+      );
+
+      expect(screen.getAllByRole('row')[0]).not.toHaveClass(
+        `${prefix}--expandable-row`
+      );
+    });
   });
 
-  it('should initially not define `data-previous-value`', () => {
-    const wrapper = mount(
-      <Table>
-        <TableBody>
-          <TableExpandRow {...mockProps} />
-          <TableExpandedRow colSpan={1} />
-        </TableBody>
-      </Table>
-    );
-    expect(
-      Object.keys(wrapper.find('TableCell').first().props()).indexOf(
-        'data-previous-value'
-      ) !== -1
-    ).toBe(true);
-    expect(
-      wrapper.find('TableCell').first().prop('data-previous-value')
-    ).not.toBeDefined();
-  });
+  describe('behaves as expected', () => {
+    it('should expand when button is clicked and onExpand to be called', () => {
+      render(
+        <Table>
+          <TableBody>
+            <TableExpandRow {...mockProps} />
+            <TableExpandedRow colSpan={1} />
+          </TableBody>
+        </Table>
+      );
 
-  it('should expand when the expand button is clicked', () => {
-    const initialWrapper = mount(
-      <Table>
-        <TableBody>
-          <TableExpandRow {...mockProps} />
-          <TableExpandedRow colSpan={1} />
-        </TableBody>
-      </Table>
-    );
-    initialWrapper.find('button').simulate('click');
-    expect(mockProps.onExpand).toHaveBeenCalledTimes(1);
-
-    const expandedWrapper = mount(
-      <Table>
-        <TableBody>
-          <TableExpandRow {...mockProps} isExpanded />
-          <TableExpandedRow colSpan={1} />
-        </TableBody>
-      </Table>
-    );
-    expect(
-      expandedWrapper.find('TableCell').first().prop('data-previous-value')
-    ).toBe('collapsed');
+      expect(mockProps.onExpand).toHaveBeenCalledTimes(0);
+      userEvent.click(screen.getByRole('button'));
+      expect(mockProps.onExpand).toHaveBeenCalledTimes(1);
+    });
   });
 });
