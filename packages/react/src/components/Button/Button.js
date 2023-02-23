@@ -34,7 +34,7 @@ const Button = React.forwardRef(function Button(
     onMouseLeave,
     renderIcon: ButtonImageElement,
     size = 'lg',
-    tabIndex = 0,
+    tabIndex,
     tooltipAlignment = 'center',
     tooltipPosition = 'top',
     type = 'button',
