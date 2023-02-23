@@ -878,7 +878,7 @@ test('metadata', () => {
           "type": "color",
         },
         Object {
-          "name": "icon-inverse",
+          "name": "icon-interactive",
           "type": "color",
         },
         Object {
