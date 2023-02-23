@@ -1,177 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable.TableHeader should have an active and ascending class if sorting by ASC 1`] = `
-<Table
-  isSortable={false}
-  overflowMenuOnHover={true}
->
+exports[`TableHeader renders as expected - Component API should render 1`] = `
+<div>
   <div
-    className="cds--data-table-content"
+    class="cds--data-table-content"
   >
     <table
-      aria-describedby={null}
-      aria-labelledby={null}
-      className="cds--data-table"
+      class="cds--data-table"
     >
-      <TableHead>
-        <thead>
-          <TableRow>
-            <tr>
-              <TableHeader
-                isSortHeader={true}
-                isSortable={false}
-                onClick={[MockFunction]}
-                scope="col"
-                sortDirection="ASC"
-                translateWithId={[Function]}
-              >
-                <th
-                  scope="col"
-                >
-                  <div
-                    className="cds--table-header-label"
-                  >
-                    Header
-                  </div>
-                </th>
-              </TableHeader>
-            </tr>
-          </TableRow>
-        </thead>
-      </TableHead>
+      <thead>
+        <tr>
+          <th
+            data-testid="test-id"
+            scope="col"
+          >
+            <div
+              class="cds--table-header-label"
+            >
+              Header
+            </div>
+          </th>
+        </tr>
+      </thead>
     </table>
   </div>
-</Table>
-`;
-
-exports[`DataTable.TableHeader should have an active class if it is the sort header and the sort state is not NONE 1`] = `
-<Table
-  isSortable={false}
-  overflowMenuOnHover={true}
->
-  <div
-    className="cds--data-table-content"
-  >
-    <table
-      aria-describedby={null}
-      aria-labelledby={null}
-      className="cds--data-table"
-    >
-      <TableHead>
-        <thead>
-          <TableRow>
-            <tr>
-              <TableHeader
-                isSortHeader={true}
-                isSortable={false}
-                onClick={[MockFunction]}
-                scope="col"
-                sortDirection="NONE"
-                translateWithId={[Function]}
-              >
-                <th
-                  scope="col"
-                >
-                  <div
-                    className="cds--table-header-label"
-                  >
-                    Header
-                  </div>
-                </th>
-              </TableHeader>
-            </tr>
-          </TableRow>
-        </thead>
-      </TableHead>
-    </table>
-  </div>
-</Table>
-`;
-
-exports[`DataTable.TableHeader should render 1`] = `
-<Table
-  isSortable={false}
-  overflowMenuOnHover={true}
->
-  <div
-    className="cds--data-table-content"
-  >
-    <table
-      aria-describedby={null}
-      aria-labelledby={null}
-      className="cds--data-table"
-    >
-      <TableHead>
-        <thead>
-          <TableRow>
-            <tr>
-              <TableHeader
-                isSortHeader={false}
-                isSortable={false}
-                onClick={[MockFunction]}
-                scope="col"
-                sortDirection="NONE"
-                translateWithId={[Function]}
-              >
-                <th
-                  scope="col"
-                >
-                  <div
-                    className="cds--table-header-label"
-                  >
-                    Header
-                  </div>
-                </th>
-              </TableHeader>
-            </tr>
-          </TableRow>
-        </thead>
-      </TableHead>
-    </table>
-  </div>
-</Table>
-`;
-
-exports[`DataTable.TableHeader should render 2`] = `
-<Table
-  isSortable={false}
-  overflowMenuOnHover={true}
->
-  <div
-    className="cds--data-table-content"
-  >
-    <table
-      aria-describedby={null}
-      aria-labelledby={null}
-      className="cds--data-table"
-    >
-      <TableHead>
-        <thead>
-          <TableRow>
-            <tr>
-              <TableHeader
-                isSortHeader={true}
-                isSortable={false}
-                onClick={[MockFunction]}
-                scope="col"
-                sortDirection="NONE"
-                translateWithId={[Function]}
-              >
-                <th
-                  scope="col"
-                >
-                  <div
-                    className="cds--table-header-label"
-                  >
-                    Header
-                  </div>
-                </th>
-              </TableHeader>
-            </tr>
-          </TableRow>
-        </thead>
-      </TableHead>
-    </table>
-  </div>
-</Table>
+</div>
 `;
