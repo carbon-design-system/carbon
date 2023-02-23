@@ -224,6 +224,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
   <tr>
     <td align="center"><a href="https://github.com/lewandom"><img src="https://avatars.githubusercontent.com/u/8779205?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Marcin Lewandowski</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=lewandom" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/remolueoend"><img src="https://avatars.githubusercontent.com/u/7881606?v=4?s=100" width="100px;" alt=""/><br /><sub><b>remolueoend</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=remolueoend" title="Code">💻</a></td>
+    <td align="center"><a href="https://jsehull.com/"><img src="https://avatars.githubusercontent.com/u/9935383?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jesse Hull</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jsehull" title="Code">💻</a></td>
   </tr>
 </table>
 

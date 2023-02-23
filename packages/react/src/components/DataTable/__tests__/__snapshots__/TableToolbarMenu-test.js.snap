@@ -125,7 +125,6 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
                       onKeyDown={[Function]}
                       onMouseEnter={[Function]}
                       open={false}
-                      tabIndex={0}
                       title="Add"
                       type="button"
                     >
