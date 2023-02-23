@@ -642,7 +642,7 @@ export default class Slider extends PureComponent<SliderProps> {
 
   calcValue = ({ clientX, value, useRawValue = false }: CalcValueProps) => {
     const range = this.props.max - this.props.min;
-    const boundingRect = this.element?.getBoundingClientRect();
+    const boundingRect = this.element?.getBoundingClientRect?.();
     const totalSteps = range / (this.props.step ?? Slider.defaultProps.step);
     let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
 
