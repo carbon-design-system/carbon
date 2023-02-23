@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,7 @@ describe('scss/components/overflow-menu', () => {
        @use 'sass:map';
        @use 'sass:meta';
        @use '../overflow-menu';
- 
+
        $_: get('mixin', meta.mixin-exists('overflow-menu', 'overflow-menu'));
      `);
     expect(unwrap('mixin')).toBe(true);

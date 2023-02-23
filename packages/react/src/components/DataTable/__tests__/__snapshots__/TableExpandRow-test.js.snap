@@ -1,107 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable.TableExpandRow should render 1`] = `
-<Table
-  isSortable={false}
-  overflowMenuOnHover={true}
->
+exports[`DataTable.TableExpandRow renders as expected - Component API should render 1`] = `
+<div>
   <div
-    className="cds--data-table-content"
+    class="cds--data-table-content"
   >
     <table
-      aria-describedby={null}
-      aria-labelledby={null}
-      className="cds--data-table"
+      class="cds--data-table"
     >
-      <TableBody
+      <tbody
         aria-live="polite"
       >
-        <tbody
-          aria-live="polite"
+        <tr
+          class="cds--parent-row custom-class"
+          data-parent-row="true"
         >
-          <TableExpandRow
-            ariaLabel="Aria label"
-            className="custom-class"
-            isExpanded={false}
-            onExpand={[MockFunction]}
+          <td
+            class="cds--table-expand"
+            headers="expand"
           >
-            <tr
-              className="cds--parent-row custom-class"
-              data-parent-row={true}
+            <button
+              aria-label="Aria label"
+              class="cds--table-expand__button"
+              type="button"
             >
-              <TableCell
-                className="cds--table-expand"
-                headers="expand"
+              <svg
+                aria-hidden="true"
+                class="cds--table-expand__svg"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                <td
-                  className="cds--table-expand"
-                  headers="expand"
-                >
-                  <button
-                    aria-label="Aria label"
-                    className="cds--table-expand__button"
-                    onClick={[MockFunction]}
-                    type="button"
-                  >
-                    <ForwardRef(ChevronRight)
-                      className="cds--table-expand__svg"
-                    >
-                      <Icon
-                        className="cds--table-expand__svg"
-                        fill="currentColor"
-                        height={16}
-                        preserveAspectRatio="xMidYMid meet"
-                        viewBox="0 0 16 16"
-                        width={16}
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <svg
-                          aria-hidden={true}
-                          className="cds--table-expand__svg"
-                          fill="currentColor"
-                          focusable="false"
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 16 16"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
-                          />
-                        </svg>
-                      </Icon>
-                    </ForwardRef(ChevronRight)>
-                  </button>
-                </td>
-              </TableCell>
-            </tr>
-          </TableExpandRow>
-          <TableExpandedRow
-            colSpan={1}
+                <path
+                  d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+                />
+              </svg>
+            </button>
+          </td>
+        </tr>
+        <tr
+          class="cds--expandable-row"
+          data-child-row="true"
+        >
+          <td
+            colspan="1"
           >
-            <tr
-              className="cds--expandable-row"
-              data-child-row={true}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-            >
-              <TableCell
-                colSpan={1}
-              >
-                <td
-                  colSpan={1}
-                >
-                  <div
-                    className="cds--child-row-inner-container"
-                  />
-                </td>
-              </TableCell>
-            </tr>
-          </TableExpandedRow>
-        </tbody>
-      </TableBody>
+            <div
+              class="cds--child-row-inner-container"
+            />
+          </td>
+        </tr>
+      </tbody>
     </table>
   </div>
-</Table>
+</div>
 `;

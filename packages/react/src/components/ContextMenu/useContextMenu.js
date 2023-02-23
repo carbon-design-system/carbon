@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 
 /**
- * @param {Element|Document|Window} [trigger=document] The element which should trigger the Menu on right-click
+ * @param {Element|Document|Window|object} [trigger=document] The element or ref which should trigger the Menu on right-click
  * @returns {object} Props object to pass onto Menu component
  */
 function useContextMenu(trigger = document) {
@@ -22,15 +22,17 @@ function useContextMenu(trigger = document) {
   }
 
   useEffect(() => {
+    const el = trigger?.current ?? trigger;
+
     if (
-      (trigger && trigger instanceof Element) ||
-      trigger instanceof Document ||
-      trigger instanceof Window
+      (el && el instanceof Element) ||
+      el instanceof Document ||
+      el instanceof Window
     ) {
-      trigger.addEventListener('contextmenu', openContextMenu);
+      el.addEventListener('contextmenu', openContextMenu);
 
       return () => {
-        trigger.removeEventListener('contextmenu', openContextMenu);
+        el.removeEventListener('contextmenu', openContextMenu);
       };
     }
   }, [trigger]);
