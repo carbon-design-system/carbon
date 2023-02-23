@@ -533,9 +533,9 @@ export default class Slider extends PureComponent<SliderProps> {
 
     let delta = 0;
     if (matches(evt.which, [keys.ArrowDown, keys.ArrowLeft])) {
-      delta = -(this.props.step ?? 0);
+      delta = -(this.props.step ?? Slider.defaultProps.step);
     } else if (matches(evt.which, [keys.ArrowUp, keys.ArrowRight])) {
-      delta = this.props.step ?? 0;
+      delta = this.props.step ?? Slider.defaultProps.step;
     } else {
       // Ignore keys we don't want to handle
       return;
@@ -544,18 +544,20 @@ export default class Slider extends PureComponent<SliderProps> {
     // If shift was held, account for the stepMultiplier
     if (evt.shiftKey) {
       const stepMultiplier = this.props.stepMultiplier;
-      delta *= stepMultiplier ?? 1;
+      delta *= stepMultiplier ?? Slider.defaultProps.stepMultiplier;
     }
 
-    Math.floor(this.state.value / (this.props.step ?? 1)) *
-      (this.props.step ?? 1);
+    Math.floor(
+      this.state.value / (this.props.step ?? Slider.defaultProps.step)
+    ) * (this.props.step ?? Slider.defaultProps.step);
     const { value, left } = this.calcValue({
       // Ensures custom value from `<input>` won't cause skipping next stepping point with right arrow key,
       // e.g. Typing 51 in `<input>`, moving focus onto the thumb and the hitting right arrow key should yield 52 instead of 54
       value:
         (delta > 0
-          ? Math.floor(this.state.value / (this.props.step ?? 1)) *
-            (this.props.step ?? 1)
+          ? Math.floor(
+              this.state.value / (this.props.step ?? Slider.defaultProps.step)
+            ) * (this.props.step ?? Slider.defaultProps.step)
           : this.state.value) + delta,
     });
 
@@ -641,7 +643,7 @@ export default class Slider extends PureComponent<SliderProps> {
   calcValue = ({ clientX, value, useRawValue = false }: CalcValueProps) => {
     const range = this.props.max - this.props.min;
     const boundingRect = this.element?.getBoundingClientRect();
-    const totalSteps = range / (this.props.step ?? 1);
+    const totalSteps = range / (this.props.step ?? Slider.defaultProps.step);
     let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
 
     // Enforce a minimum width of at least 1 for calculations
