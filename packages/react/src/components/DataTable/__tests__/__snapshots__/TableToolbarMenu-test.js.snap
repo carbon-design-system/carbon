@@ -52,4 +52,4 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
     </span>
   </span>
 </div>
-`;
+`; 
