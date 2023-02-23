@@ -159,5 +159,5 @@ the repository. There is an issue tracking curring status of this effort,
 ### Where should I put the ts interface in the file?
 
 - Above the component definition (likely the top of the file)
-  - The component implementation should be sandwiched in-between the ts interface
-    and the proptypes definition
+  - The component implementation should be sandwiched in-between the ts
+    interface and the proptypes definition
