@@ -658,11 +658,6 @@ ActionableNotification.propTypes = {
   ariaLabel: PropTypes.string,
 
   /**
-   * Specify the caption
-   */
-  caption: PropTypes.string,
-
-  /**
    * Specify the content
    */
   children: PropTypes.node,
