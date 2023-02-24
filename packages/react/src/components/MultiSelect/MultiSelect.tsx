@@ -409,11 +409,14 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
+  console.log(inputFocused);
+
   const className = cx(
     `${prefix}--multi-select`,
     [enabled ? null : containerClassName],
     {
       [`${prefix}--multi-select--invalid`]: invalid,
+      [`${prefix}--multi-select--invalid--focused`]: invalid && inputFocused,
       [`${prefix}--multi-select--warning`]: showWarning,
       [`${prefix}--multi-select--inline`]: inline,
       [`${prefix}--multi-select--selected`]:

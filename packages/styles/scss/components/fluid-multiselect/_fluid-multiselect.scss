@@ -19,6 +19,15 @@
 @use '../fluid-combo-box';
 
 @mixin fluid-multiselect {
+  .#{$prefix}--multi-select__wrapper.#{$prefix}--list-box__wrapper--fluid--focus:not(.#{$prefix}--multi-select--filterable__wrapper) {
+    outline-offset: -2px;
+  }
+
+  .#{$prefix}--list-box__wrapper--fluid
+    .#{$prefix}--tag.#{$prefix}--tag--filter {
+    margin-top: 1.25rem;
+  }
+
   // Filterable
   .#{$prefix}--list-box__wrapper--fluid
     .#{$prefix}--multi-select--filterable--input-focused {
