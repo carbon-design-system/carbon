@@ -13,14 +13,7 @@ import CodeSnippet from '../CodeSnippet';
 import UnorderedList from '../UnorderedList';
 import ListItem from '../ListItem';
 
-import {
-  Menu,
-  MenuItem,
-  MenuItemDivider,
-  MenuItemGroup,
-  MenuItemRadioGroup,
-  MenuItemSelectable,
-} from '../Menu';
+import { Menu, MenuItem, MenuItemDivider, MenuItemRadioGroup } from '../Menu';
 
 import { useContextMenu } from './';
 import mdx from './useContextMenu.mdx';
@@ -28,13 +21,6 @@ import mdx from './useContextMenu.mdx';
 export default {
   title: 'Experimental/unstable__useContextMenu',
   component: useContextMenu,
-  subcomponents: {
-    MenuItem,
-    MenuItemSelectable,
-    MenuItemGroup,
-    MenuItemRadioGroup,
-    MenuItemDivider,
-  },
   parameters: {
     docs: {
       page: mdx,

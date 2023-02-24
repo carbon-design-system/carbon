@@ -16,13 +16,13 @@ import mdx from './ComboButton.mdx';
 export default {
   title: 'Experimental/unstable__ComboButton',
   component: ComboButton,
+  subcomponents: {
+    MenuItem,
+    MenuItemDivider,
+  },
   parameters: {
     docs: {
       page: mdx,
-      subcomponents: {
-        MenuItem,
-        MenuItemDivider,
-      },
     },
   },
 };
