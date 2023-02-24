@@ -8,11 +8,73 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { match, keys } from '../../internal/keyboard';
-import { warning } from '../../internal/warning';
+import { keys, match } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
+import { warning } from '../../internal/warning';
+import { ForwardRefReturn } from '../../types/common';
 
-const OverflowMenuItem = React.forwardRef(function OverflowMenuItem(
+export interface OverflowMenuItemProps extends React.HTMLAttributes<HTMLElement> {
+  /**
+   * The CSS class name to be placed on the button element
+   */
+  className?: string;
+
+  /**
+   * A callback to tell the parent menu component that the menu should be closed.
+   */
+  closeMenu?: () => void;
+
+  /**
+   * `true` to make this menu item disabled.
+   */
+  disabled?: boolean;
+
+  handleOverflowMenuItemFocus?: (options: { currentIndex?: number; direction: number }) => void;
+
+  /**
+   * `true` to make this menu item a divider.
+   */
+  hasDivider?: boolean;
+
+  /**
+   * If given, overflow item will render as a link with the given href
+   */
+  href?: string;
+
+  index?: number;
+
+  /**
+   * The text to show for the menu item
+   */
+  itemText?: React.ReactNode;
+
+  /**
+   * `true` to make this menu item a danger button.
+   */
+  isDelete?: boolean;
+
+  /**
+   * `true` to require the title attribute.
+   */
+  requireTitle?: boolean;
+
+  /**
+   * The title attribute.
+   */
+  title?: string;
+
+  /**
+   * The CSS class name to be placed on the wrapper element
+   */
+  wrapperClassName?: string;
+}
+
+export type OverflowMenuItemComponent = ForwardRefReturn<
+  HTMLElement,
+  OverflowMenuItemProps
+>;
+
+const OverflowMenuItem: OverflowMenuItemComponent = React.forwardRef(function OverflowMenuItem(
   {
     className,
     closeMenu,
@@ -36,13 +98,13 @@ const OverflowMenuItem = React.forwardRef(function OverflowMenuItem(
 
   function setTabFocus(evt) {
     if (match(evt, keys.ArrowDown)) {
-      handleOverflowMenuItemFocus({
+      handleOverflowMenuItemFocus?.({
         currentIndex: index,
         direction: 1,
       });
     }
     if (match(evt, keys.ArrowUp)) {
-      handleOverflowMenuItemFocus({
+      handleOverflowMenuItemFocus?.({
         currentIndex: index,
         direction: -1,
       });
@@ -98,17 +160,23 @@ const OverflowMenuItem = React.forwardRef(function OverflowMenuItem(
         className={overflowMenuBtnClasses}
         disabled={disabled}
         href={href}
-        index={index}
         onClick={handleClick}
         onKeyDown={(evt) => {
           setTabFocus(evt);
           onKeyDown(evt);
         }}
         role="menuitem"
-        ref={ref}
-        tabIndex="-1"
-        title={requireTitle ? title || itemText : null}
-        {...rest}>
+        // ref as any: the type of `ref` is `ForwardedRef<HTMLButtonElement>` in `Button` component
+        // but `OverflowMenuItem` can be rendered as `a` tag as well, which is `HTMLAnchorElement`
+        // so we have to use `any` here
+        ref={ref as any}
+        tabIndex={-1}
+        // itemText as any: itemText may be a ReactNode, but `title` only accepts string
+        // to avoid compatibility issue, we use `any` here. Consider to enforce `itemText` to be `string?`
+        // in the next major release
+        title={requireTitle ? (title || (itemText as any)) : undefined}
+        {...rest}
+        >
         {OverflowMenuItemContent}
       </TagToUse>
     </li>
