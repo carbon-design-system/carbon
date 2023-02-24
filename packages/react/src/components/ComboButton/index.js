@@ -16,6 +16,7 @@ import { Menu } from '../Menu';
 
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { useAttachedMenu } from '../../internal/useAttachedMenu';
 
 const spacing = 4; // top and bottom spacing between the button and the menu. in px
 
@@ -28,52 +29,25 @@ function ComboButton({
   size = 'md',
 }) {
   const id = useId('combobutton');
-  const [open, setOpen] = useState(false);
-  const [position, setPosition] = useState([
-    [0, 0],
-    [0, 0],
-  ]);
-  const [width, setWidth] = useState(0);
-  const containerRef = useRef(null);
   const prefix = usePrefix();
 
-  function openMenu() {
-    if (containerRef.current) {
-      const {
-        left,
-        top,
-        right,
-        bottom,
-        width: w,
-      } = containerRef.current.getBoundingClientRect();
-      setPosition([
-        [left, right],
-        [top - spacing, bottom + spacing],
-      ]);
-      setWidth(Math.floor(w));
-    }
-
-    setOpen(true);
-  }
-
-  function closeMenu() {
-    setOpen(false);
-  }
+  const containerRef = useRef(null);
+  const [width, setWidth] = useState(0);
+  const {
+    open,
+    x,
+    y,
+    handleClick: hookOnClick,
+    handleMousedown: handleTriggerMousedown,
+    handleClose,
+  } = useAttachedMenu(containerRef);
 
   function handleTriggerClick() {
-    if (open) {
-      closeMenu();
-    } else {
-      openMenu();
+    if (containerRef.current) {
+      const { width: w } = containerRef.current.getBoundingClientRect();
+      setWidth(w);
+      hookOnClick();
     }
-  }
-
-  function handleTriggerMousedown(e) {
-    // prevent default for mousedown on trigger element to avoid
-    // the "blur" event from firing on the menu as this would close
-    // it and immediately re-open since "click" event is fired after
-    // "blur" event.
-    e.preventDefault();
   }
 
   function handlePrimaryActionClick(e) {
@@ -119,9 +93,9 @@ function ComboButton({
         label="Additional actions"
         size={size}
         open={open}
-        onClose={closeMenu}
-        x={position[0]}
-        y={position[1]}>
+        onClose={handleClose}
+        x={x}
+        y={[y[0] - spacing, y[1] + spacing]}>
         {children}
       </Menu>
     </div>
@@ -135,7 +109,7 @@ ComboButton.propTypes = {
   children: PropTypes.node.isRequired,
 
   /**
-   * Specify whether the combo button should be disabled, or not.
+   * Specify whether the ComboButton should be disabled, or not.
    */
   disabled: PropTypes.bool,
 
@@ -155,7 +129,7 @@ ComboButton.propTypes = {
   onClick: PropTypes.func,
 
   /**
-   * Specify the size of the Menu.
+   * Specify the size of the buttons and menu.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
