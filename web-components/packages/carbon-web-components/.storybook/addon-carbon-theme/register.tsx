@@ -12,7 +12,7 @@ import addons from '@storybook/addons';
 import Panel from './components/Panel';
 import { ADDON_ID, PANEL_ID } from './shared';
 
-addons.register(ADDON_ID, api => {
+addons.register(ADDON_ID, (api) => {
   addons.addPanel(PANEL_ID, {
     title: 'Carbon theme',
     // eslint-disable-next-line react/prop-types

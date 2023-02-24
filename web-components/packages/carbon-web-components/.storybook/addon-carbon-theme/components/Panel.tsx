@@ -19,7 +19,7 @@ import { CURRENT_THEME } from '../shared';
 const Panel = ({ api, active }) => {
   const [currentTheme, setCurrentTheme] = useState('white');
   const handleChange = useCallback(
-    event => {
+    (event) => {
       const { value } = event.target;
       setCurrentTheme(value);
       api.getChannel().emit(CURRENT_THEME, value);
