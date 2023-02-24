@@ -19,6 +19,10 @@ export default {
   parameters: {
     docs: {
       page: mdx,
+      subcomponents: {
+        MenuItem,
+        MenuItemDivider,
+      },
     },
   },
 };
