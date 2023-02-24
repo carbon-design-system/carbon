@@ -1,39 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable.TableExpandHeader should render 1`] = `
-<Table
-  isSortable={false}
-  overflowMenuOnHover={true}
->
+exports[`TableExpandHeader renders as expected - Component API should render 1`] = `
+<div>
   <div
-    className="cds--data-table-content"
+    class="cds--data-table-content"
   >
     <table
-      aria-describedby={null}
-      aria-labelledby={null}
-      className="cds--data-table"
+      class="cds--data-table"
     >
-      <TableHead>
-        <thead>
-          <TableRow>
-            <tr>
-              <TableExpandHeader
-                ariaLabel="test-label"
-                className="custom-class"
-                isExpanded={false}
-                onExpand={[MockFunction]}
-              >
-                <th
-                  className="cds--table-expand custom-class"
-                  id="expand"
-                  scope="col"
-                />
-              </TableExpandHeader>
-            </tr>
-          </TableRow>
-        </thead>
-      </TableHead>
+      <thead>
+        <tr>
+          <th
+            class="cds--table-expand custom-class"
+            id="expand"
+            scope="col"
+          />
+        </tr>
+      </thead>
     </table>
   </div>
-</Table>
+</div>
 `;
