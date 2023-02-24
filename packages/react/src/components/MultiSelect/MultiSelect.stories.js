@@ -302,7 +302,6 @@ export const _FilterableWithLayer = () => {
   return (
     <div style={{ width: 300 }}>
       <FilterableMultiSelect
-        invalid
         id="carbon-multiselect-example-3"
         titleText="First Layer"
         helperText="This is helper text"
