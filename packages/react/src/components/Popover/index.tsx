@@ -102,7 +102,7 @@ const Popover = React.forwardRef(<T extends React.ElementType>({
   const ref = useMergedRefs([forwardRef, popover]);
   const [autoAligned, setAutoAligned] = useState(false);
   const [autoAlignment, setAutoAlignment] = useState(align);
-  const className = cx(customClassName, {
+  const className = cx({
     [`${prefix}--popover-container`]: true,
     [`${prefix}--popover--caret`]: caret,
     [`${prefix}--popover--drop-shadow`]: dropShadow,
@@ -110,7 +110,7 @@ const Popover = React.forwardRef(<T extends React.ElementType>({
     [`${prefix}--popover--open`]: open,
     [`${prefix}--popover--${autoAlignment}`]: autoAligned,
     [`${prefix}--popover--${align}`]: !autoAligned,
-  });
+  }, customClassName);
 
   useIsomorphicEffect(() => {
     if (!open) {
