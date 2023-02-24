@@ -8,7 +8,7 @@
 import React from 'react';
 import { action } from '@storybook/addon-actions';
 
-import { MenuItem } from '../Menu';
+import { MenuItem, MenuItemDivider } from '../Menu';
 
 import { ComboButton } from './';
 import mdx from './ComboButton.mdx';
@@ -30,7 +30,9 @@ export const Playground = (args) => {
     <ComboButton {...args}>
       <MenuItem label="Second action" onClick={onClick} />
       <MenuItem label="Third action" onClick={onClick} />
-      <MenuItem label="Fourth action" onClick={onClick} />
+      <MenuItem label="Fourth action" onClick={onClick} disabled />
+      <MenuItemDivider />
+      <MenuItem label="Danger action" onClick={onClick} kind="danger" />
     </ComboButton>
   );
 };

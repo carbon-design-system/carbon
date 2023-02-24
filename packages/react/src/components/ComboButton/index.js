@@ -17,16 +17,15 @@ import { Menu } from '../Menu';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 
-const defaultSize = 'md';
 const spacing = 4; // top and bottom spacing between the button and the menu. in px
 
 function ComboButton({
   children,
   disabled,
-  kind,
+  kind = 'primary',
   label,
   onClick,
-  size = defaultSize,
+  size = 'md',
 }) {
   const id = useId('combobutton');
   const [open, setOpen] = useState(false);
