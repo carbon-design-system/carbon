@@ -1,0 +1,30 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use '../../config' as *;
+@use '../../motion' as *;
+@use '../../utilities/convert' as *;
+
+/// Combo Button styles
+/// @access public
+/// @group combo-button
+@mixin combo-button {
+  .#{$prefix}--combo-button__container {
+    display: inline-flex;
+    column-gap: rem(1px);
+  }
+
+  .#{$prefix}--combo-button__trigger svg {
+    transition: transform $duration-fast-02 motion(standard, productive);
+  }
+
+  .#{$prefix}--combo-button__container--open
+    .#{$prefix}--combo-button__trigger
+    svg {
+    transform: rotate(180deg);
+  }
+}

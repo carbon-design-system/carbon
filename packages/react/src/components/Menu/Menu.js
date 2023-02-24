@@ -239,6 +239,7 @@ const Menu = React.forwardRef(function Menu(
         onBlur={handleBlur}
         // eslint-disable-next-line react/forbid-dom-props
         style={{
+          ...rest.style,
           left: `${position[0]}px`,
           top: `${position[1]}px`,
         }}>
