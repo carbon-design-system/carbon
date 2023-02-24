@@ -1013,6 +1013,60 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "kcprevatt",
+      "name": "kcprevatt",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68609306?v=4",
+      "profile": "https://github.com/kcprevatt",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "lewandom",
+      "name": "Marcin Lewandowski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/8779205?v=4",
+      "profile": "https://github.com/lewandom",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "remolueoend",
+      "name": "remolueoend",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7881606?v=4",
+      "profile": "https://github.com/remolueoend",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "jsehull",
+      "name": "Jesse Hull",
+      "avatar_url": "https://avatars.githubusercontent.com/u/9935383?v=4",
+      "profile": "https://jsehull.com/",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "awarrier99",
+      "name": "Ashvin Warrier",
+      "avatar_url": "https://avatars.githubusercontent.com/u/17476235?v=4",
+      "profile": "https://github.com/awarrier99",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "GalvinGao",
+      "name": "GalvinGao",
+      "avatar_url": "https://avatars.githubusercontent.com/u/12567059?v=4",
+      "profile": "https://galvingao.com/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
