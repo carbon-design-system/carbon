@@ -6,18 +6,40 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes, ReactNode } from 'react';
 import classnames from 'classnames';
 import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
 
+export interface SelectItemGroupProps
+  extends HTMLAttributes<HTMLOptGroupElement> {
+  /**
+   * Provide the contents of your <SelectItemGroup>
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the <SelectItemGroup> should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify the label to be displayed
+   */
+  label: string;
+}
 const SelectItemGroup = ({
   children,
   className,
   disabled,
   label,
   ...other
-}) => {
+}: SelectItemGroupProps) => {
   const prefix = usePrefix();
   const classNames = classnames(`${prefix}--select-optgroup`, className);
   return (
