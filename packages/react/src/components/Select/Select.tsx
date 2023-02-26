@@ -24,8 +24,6 @@ import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
-import SelectItem from '../SelectItem';
-import SelectItemGroup from '../SelectItemGroup';
 
 type ExcludedAttributes = 'size';
 
