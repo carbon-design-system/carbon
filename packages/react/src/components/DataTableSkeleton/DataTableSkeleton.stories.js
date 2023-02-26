@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,6 @@ import DataTableSkeleton from './DataTableSkeleton';
 import { headers } from '../DataTable/stories/shared';
 
 const props = () => ({
-  showHeaders: boolean('Show table headers', true),
   zebra: boolean('Use zebra stripe (zebra)', false),
   compact: boolean('Compact variant (compact)', false),
   showHeader: boolean('Show the Table Header (showHeader)', true),
@@ -27,10 +26,10 @@ export default {
 };
 
 export const Skeleton = () => {
-  const { showHeaders, ...rest } = props();
+  const { ...rest } = props();
   return (
     <div style={{ width: '800px' }}>
-      <DataTableSkeleton {...rest} headers={showHeaders ? headers : null} />
+      <DataTableSkeleton {...rest} headers={headers} />
       <br />
     </div>
   );

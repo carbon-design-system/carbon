@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -61,8 +61,6 @@ export const Default = () => (
   <FluidTextArea
     labelText="Text Area label"
     placeholder="Placeholder text"
-    cols={50}
-    rows={4}
     id="text-area-1"
   />
 );
@@ -72,8 +70,6 @@ export const DefaultWithLayers = () => (
     <FluidTextArea
       labelText="Text Area label"
       placeholder="Placeholder text"
-      cols={50}
-      rows={4}
       id="text-area-1"
     />
     <br />
@@ -81,8 +77,6 @@ export const DefaultWithLayers = () => (
       <FluidTextArea
         labelText="Text Area label"
         placeholder="Placeholder text"
-        cols={50}
-        rows={4}
         id="text-area-1"
       />
       <br />
@@ -90,8 +84,6 @@ export const DefaultWithLayers = () => (
         <FluidTextArea
           labelText="Text Area label"
           placeholder="Placeholder text"
-          cols={50}
-          rows={4}
           id="text-area-1"
         />
       </Layer>

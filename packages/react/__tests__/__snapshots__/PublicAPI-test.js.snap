@@ -114,9 +114,6 @@ Map {
       "ariaLabel": Object {
         "type": "string",
       },
-      "caption": Object {
-        "type": "string",
-      },
       "children": Object {
         "type": "node",
       },
@@ -3157,9 +3154,7 @@ Map {
         ],
         "type": "oneOf",
       },
-      "tabIndex": Object {
-        "type": "number",
-      },
+      "tabIndex": [Function],
     },
   },
   "FileUploaderDropContainer" => Object {
@@ -4789,13 +4784,16 @@ Map {
       "itemToString": [Function],
       "locale": "en",
       "open": false,
-      "selectedItems": null,
+      "selectedItems": undefined,
       "selectionFeedback": "top-after-reopen",
       "sortItems": [Function],
-      "title": false,
+      "titleText": false,
       "type": "default",
     },
     "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
       "clearSelectionDescription": Object {
         "type": "string",
       },
@@ -4940,6 +4938,9 @@ Map {
           },
         ],
         "type": "shape",
+      },
+      "helperText": Object {
+        "type": "node",
       },
       "hideLabel": Object {
         "type": "bool",
@@ -6155,6 +6156,9 @@ Map {
       },
       "className": Object {
         "type": "string",
+      },
+      "level": Object {
+        "type": "number",
       },
     },
   },
@@ -8726,6 +8730,9 @@ Map {
       "className": Object {
         "type": "string",
       },
+      "closeOnActivation": Object {
+        "type": "bool",
+      },
       "defaultOpen": Object {
         "type": "bool",
       },
@@ -9055,81 +9062,7 @@ Map {
     },
   },
   "unstable_Menu" => Object {
-    "MenuDivider": Object {},
-    "MenuGroup": Object {
-      "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-      },
-    },
-    "MenuItem": Object {
-      "propTypes": Object {
-        "children": Object {
-          "type": "node",
-        },
-        "disabled": Object {
-          "type": "bool",
-        },
-        "kind": Object {
-          "args": Array [
-            Array [
-              "default",
-              "danger",
-            ],
-          ],
-          "type": "oneOf",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-        "shortcut": Object {
-          "type": "node",
-        },
-      },
-    },
-    "MenuRadioGroup": Object {
-      "propTypes": Object {
-        "initialSelectedItem": Object {
-          "type": "string",
-        },
-        "items": Object {
-          "args": Array [
-            Object {
-              "type": "string",
-            },
-          ],
-          "isRequired": true,
-          "type": "arrayOf",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "string",
-        },
-        "onChange": Object {
-          "type": "func",
-        },
-      },
-    },
-    "MenuSelectableItem": Object {
-      "propTypes": Object {
-        "initialChecked": Object {
-          "type": "bool",
-        },
-        "label": Object {
-          "isRequired": true,
-          "type": "node",
-        },
-        "onChange": Object {
-          "type": "func",
-        },
-      },
-    },
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -9137,11 +9070,8 @@ Map {
       "className": Object {
         "type": "string",
       },
-      "id": Object {
+      "label": Object {
         "type": "string",
-      },
-      "level": Object {
-        "type": "number",
       },
       "onClose": Object {
         "type": "func",
@@ -9152,6 +9082,7 @@ Map {
       "size": Object {
         "args": Array [
           Array [
+            "xs",
             "sm",
             "md",
             "lg",
@@ -9199,23 +9130,16 @@ Map {
         "type": "oneOfType",
       },
     },
-  },
-  "unstable_MenuDivider" => Object {},
-  "unstable_MenuGroup" => Object {
-    "propTypes": Object {
-      "children": Object {
-        "type": "node",
-      },
-      "label": Object {
-        "isRequired": true,
-        "type": "node",
-      },
-    },
+    "render": [Function],
   },
   "unstable_MenuItem" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "type": "node",
+      },
+      "className": Object {
+        "type": "string",
       },
       "disabled": Object {
         "type": "bool",
@@ -9231,26 +9155,69 @@ Map {
       },
       "label": Object {
         "isRequired": true,
-        "type": "node",
-      },
-      "shortcut": Object {
-        "type": "node",
-      },
-    },
-  },
-  "unstable_MenuRadioGroup" => Object {
-    "propTypes": Object {
-      "initialSelectedItem": Object {
         "type": "string",
       },
-      "items": Object {
+      "onClick": Object {
+        "type": "func",
+      },
+      "renderIcon": Object {
         "args": Array [
-          Object {
-            "type": "string",
-          },
+          Array [
+            Object {
+              "type": "func",
+            },
+            Object {
+              "type": "object",
+            },
+          ],
         ],
+        "type": "oneOfType",
+      },
+      "shortcut": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_MenuItemDivider" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_MenuItemGroup" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "label": Object {
         "isRequired": true,
-        "type": "arrayOf",
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_MenuItemRadioGroup" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "defaultSelectedItem": Object {
+        "type": "any",
+      },
+      "itemToString": Object {
+        "type": "func",
+      },
+      "items": Object {
+        "type": "array",
       },
       "label": Object {
         "isRequired": true,
@@ -9259,21 +9226,33 @@ Map {
       "onChange": Object {
         "type": "func",
       },
+      "selectedItem": Object {
+        "type": "any",
+      },
     },
+    "render": [Function],
   },
-  "unstable_MenuSelectableItem" => Object {
+  "unstable_MenuItemSelectable" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
-      "initialChecked": Object {
+      "className": Object {
+        "type": "string",
+      },
+      "defaultSelected": Object {
         "type": "bool",
       },
       "label": Object {
         "isRequired": true,
-        "type": "node",
+        "type": "string",
       },
       "onChange": Object {
         "type": "func",
       },
+      "selected": Object {
+        "type": "bool",
+      },
     },
+    "render": [Function],
   },
   "unstable_OverflowMenuV2" => Object {
     "propTypes": Object {

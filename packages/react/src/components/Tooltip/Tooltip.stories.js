@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -78,8 +78,15 @@ export const Duration = () => {
 };
 
 const PlaygroundStory = (props) => {
-  const { align, defaultOpen, description, enterDelayMs, label, leaveDelayMs } =
-    props;
+  const {
+    align,
+    closeOnActivation,
+    defaultOpen,
+    description,
+    enterDelayMs,
+    label,
+    leaveDelayMs,
+  } = props;
   return (
     <Tooltip
       align={align}
@@ -87,7 +94,8 @@ const PlaygroundStory = (props) => {
       description={description}
       enterDelayMs={enterDelayMs}
       label={label}
-      leaveDelayMs={leaveDelayMs}>
+      leaveDelayMs={leaveDelayMs}
+      closeOnActivation={closeOnActivation}>
       <button className="sb-tooltip-trigger" type="button">
         <Information />
       </button>
@@ -120,6 +128,9 @@ Playground.argTypes = {
     control: {
       type: 'select',
     },
+  },
+  closeOnActivation: {
+    defaultValue: false,
   },
   defaultOpen: {
     defaultValue: true,

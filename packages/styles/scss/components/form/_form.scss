@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -57,6 +57,10 @@ $input-label-weight: 400 !default;
     font-weight: $input-label-weight;
     line-height: 1rem;
     vertical-align: baseline;
+  }
+
+  .#{$prefix}--label .#{$prefix}--toggletip-label {
+    @include type-style('label-01');
   }
 
   .#{$prefix}--label--no-margin {

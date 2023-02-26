@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -41,7 +41,6 @@ export const Default = () => {
         buttonKind="primary"
         size="md"
         filenameStatus="edit"
-        role="button"
         accept={['.jpg', '.png']}
         multiple={true}
         disabled={false}
@@ -86,7 +85,6 @@ DragAndDropUploadContainerExampleApplication.args = {
   multiple: true,
   accept: ['image/jpeg', 'image/png'],
   disabled: false,
-  role: '',
   tabIndex: 0,
 };
 DragAndDropUploadContainerExampleApplication.argTypes = {
@@ -114,7 +112,6 @@ Playground.args = {
   size: 'md',
   filenameStatus: 'edit',
   accept: ['.jpg', '.png'],
-  role: 'button',
   multiple: true,
   disabled: false,
   iconDescription: 'Delete file',

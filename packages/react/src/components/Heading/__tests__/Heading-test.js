@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -41,6 +41,31 @@ describe('Heading', () => {
     );
 
     const levels = [1, 2, 3, 4, 5, 6];
+
+    for (const level of levels) {
+      const testId = `h${level}`;
+      const element = screen.getByTestId(testId);
+      expect(element.tagName).toBe(testId.toUpperCase());
+    }
+  });
+
+  it('should override heading levels when specifing the level of a section', () => {
+    render(
+      <>
+        <Heading data-testid="h1">h1</Heading>
+        <Section level={4}>
+          <Heading data-testid="h4">h4</Heading>
+          <Section>
+            <Heading data-testid="h5">h5</Heading>
+            <Section level={2}>
+              <Heading data-testid="h2">h2</Heading>
+            </Section>
+          </Section>
+        </Section>
+      </>
+    );
+
+    const levels = [1, 2, 4, 5];
 
     for (const level of levels) {
       const testId = `h${level}`;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -69,7 +69,7 @@ describe('FileUploaderButton', () => {
     const { container } = render(
       <FileUploaderButton accept={['.png']} labelText="test" />
     );
-    const input = container.querySelector('input');
+    const input = container.querySelector('button');
 
     const filename = 'test.png';
     const file = new File(['test'], filename, { type: 'image/png' });

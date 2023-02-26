@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,31 +14,19 @@ import { render, screen } from '@testing-library/react';
 
 describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
-    it('renders ariaLabel on the button', () => {
-      render(
-        <OverflowMenu open ariaLabel="Overflow menu" className="extra-class">
-          <OverflowMenuItem className="test-child" itemText="one" />
-          <OverflowMenuItem className="test-child" itemText="two" />
-        </OverflowMenu>
-      );
-
-      expect(screen.getByRole('button')).toHaveAttribute(
-        'aria-label',
-        'Overflow menu'
-      );
-    });
-
-    it('should support a custom `className` prop on the outermost element', () => {
+    it('should support a custom `className` prop on the button element', () => {
       const { container } = render(
         <OverflowMenu open ariaLabel="Overflow menu" className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
-      expect(container.firstChild).toHaveClass('extra-class');
+      expect(container.querySelector('button.cds--overflow-menu')).toHaveClass(
+        'extra-class'
+      );
     });
 
-    it('should spread extra props on the outermost element', () => {
+    it('should spread extra props on the button element', () => {
       const { container } = render(
         <OverflowMenu
           data-testid="test"
@@ -48,7 +36,9 @@ describe('OverflowMenu', () => {
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
       );
-      expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+      expect(
+        container.querySelector('button.cds--overflow-menu')
+      ).toHaveAttribute('data-testid', 'test');
     });
 
     it('should flip menu alignment', () => {

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -76,7 +76,7 @@ async function build() {
 }
 
 const banner = `/**
- * Copyright IBM Corp. 2016, 2022
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -112,11 +112,21 @@ const babelConfig = {
 function getRollupConfig(input, outDir, useTS) {
   return {
     input,
+    // Mark dependencies listed in `package.json` as external so that they are
+    // not included in the output bundle.
     external: [
       ...Object.keys(packageJson.peerDependencies),
       ...Object.keys(packageJson.dependencies),
       ...Object.keys(packageJson.devDependencies),
-    ],
+    ].map((name) => {
+      // Transform the name of each dependency into a regex so that imports from
+      // nested paths are correctly marked as external.
+      //
+      // Example:
+      // import 'module-name';
+      // import 'module-name/path/to/nested/module';
+      return new RegExp(`^${name}(/.*)?`);
+    }),
     plugins: [
       nodeResolve(),
       commonjs({
