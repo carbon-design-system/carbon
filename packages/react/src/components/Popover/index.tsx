@@ -314,20 +314,7 @@ Popover.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
-export interface PopoverContentProps {
-
-  /**
-   * Provide elements to be rendered inside of the component
-   */
-  children?: React.ReactNode
-
-  /**
-   * Provide a custom class name to be added to the outermost node in the
-   * component
-   */
-  className?: string
-
-}
+export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>
 
 const PopoverContent = React.forwardRef(function PopoverContent(
   { className, children, ...rest }: PopoverContentProps,
