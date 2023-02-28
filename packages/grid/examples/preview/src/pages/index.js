@@ -3,7 +3,7 @@ import Prism from 'prismjs';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
 
-export default function App() {
+export default function IndexPage() {
   return (
     <main>
       <div className="cds--grid">

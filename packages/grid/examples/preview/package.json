@@ -4,20 +4,19 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "parcel build --dist-dir build --public-url \"/grid/examples/preview\" index.html",
-    "develop": "parcel index.html --no-cache"
+    "develop": "next",
+    "build": "next build && next export -o build"
   },
   "devDependencies": {
     "@carbon/grid": "^11.9.0",
-    "@parcel/transformer-sass": "^2.0.1",
-    "parcel": "^2.0.1"
+    "next": "^12.1.4"
   },
   "dependencies": {
     "@reach/router": "^1.3.3",
     "classnames": "^2.2.6",
     "prettify-xml": "^1.2.0",
     "prismjs": "^1.20.0",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
