@@ -5,9 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useRef } from 'react';
 import { action } from '@storybook/addon-actions';
 
+import { usePrefix } from '../../internal/usePrefix';
 import CodeSnippet from '../CodeSnippet';
 import UnorderedList from '../UnorderedList';
 import ListItem from '../ListItem';
@@ -15,10 +16,16 @@ import ListItem from '../ListItem';
 import { Menu, MenuItem, MenuItemDivider, MenuItemRadioGroup } from '../Menu';
 
 import { useContextMenu } from './';
+import mdx from './useContextMenu.mdx';
 
 export default {
   title: 'Experimental/unstable__useContextMenu',
   component: useContextMenu,
+  parameters: {
+    docs: {
+      page: mdx,
+    },
+  },
 };
 
 const Text = () => (
@@ -84,6 +91,32 @@ export const _useContextMenu = () => {
         <MenuItemDivider />
         <MenuItem label="Rename" onClick={onClick} />
         <MenuItem label="Delete" shortcut="⌫" kind="danger" onClick={onClick} />
+      </Menu>
+    </>
+  );
+};
+
+export const SpecificElement = () => {
+  const prefix = usePrefix();
+
+  const el = useRef(null);
+  const menuProps = useContextMenu(el);
+
+  return (
+    <>
+      <div
+        ref={el}
+        style={{
+          cursor: 'context-menu',
+          display: 'inline',
+          padding: '0.5rem 1rem',
+          backgroundColor: `var(--${prefix}-layer-01)`,
+        }}>
+        Right click this element
+      </div>
+      <Menu {...menuProps}>
+        <MenuItem label="Edit" />
+        <MenuItem label="Delete" kind="danger" />
       </Menu>
     </>
   );

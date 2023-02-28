@@ -115,8 +115,10 @@
     cursor: not-allowed;
   }
 
-  .#{$prefix}--menu-item--disabled:hover {
+  .#{$prefix}--menu-item--disabled:hover,
+  .#{$prefix}--menu-item--disabled.#{$prefix}--menu-item--danger:hover {
     background-color: $layer;
+    color: $text-disabled;
   }
 
   .#{$prefix}--menu-item--danger:focus,

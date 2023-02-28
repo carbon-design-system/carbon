@@ -232,6 +232,7 @@ export const WithInitialSelectedItems = () => {
   return (
     <div style={{ width: 300 }}>
       <MultiSelect
+        label="Multiselect Label"
         id="carbon-multiselect-example-2"
         titleText="Multiselect title"
         helperText="This is helper text"

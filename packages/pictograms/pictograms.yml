@@ -703,6 +703,28 @@
     - government
     - municipal
     - legislature
+- name: carbon--for-ibm-dotcom
+  friendly_name: Carbon for IBM dotcom
+  aliases:
+    - pals
+    - carbon
+    - pattern asset library
+    - components
+    - patterns
+    - website design
+    - marketing pages
+    - dotcom
+- name: carbon--for-ibm-product
+  friendly_name: Carbon for IBM product
+  aliases:
+    - pal
+    - pal site
+    - pattern asset library
+    - components
+    - patterns
+    - product
+    - product design
+    - software design
 - name: care
   friendly_name: Care
   aliases:
