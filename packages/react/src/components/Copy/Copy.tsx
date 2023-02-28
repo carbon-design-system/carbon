@@ -14,6 +14,41 @@ import { usePrefix } from '../../internal/usePrefix';
 import { IconButton } from '../IconButton';
 import * as FeatureFlags from '@carbon/feature-flags';
 
+interface CopyProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Pass in content to be rendered in the underlying `<button>`
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the underlying `<button>`
+   */
+  className?: string;
+
+  /**
+   * Specify the string that is displayed when the button is clicked and the
+   * content is copied
+   */
+  feedback?: string;
+
+  /**
+   * Specify the time it takes for the feedback message to timeout
+   */
+  feedbackTimeout?: number;
+
+  /**
+   * Specify an optional `onAnimationEnd` handler that is called when the underlying
+   * animation ends
+   */
+  onAnimationEnd?: (event: React.AnimationEvent<HTMLButtonElement>) => void;
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * `<button>` is clicked
+   */
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
 export default function Copy({
   children,
   className,
@@ -22,7 +57,7 @@ export default function Copy({
   onAnimationEnd,
   onClick,
   ...other
-}) {
+}: CopyProps) {
   const [animation, setAnimation] = useState('');
   const prefix = usePrefix();
   const classNames = classnames(className, `${prefix}--copy`, {
@@ -80,11 +115,10 @@ export default function Copy({
     <button
       type="button"
       className={classNames}
-      onClick={composeEventHandlers([onClick, handleClick])}
-      onAnimationEnd={composeEventHandlers([
-        onAnimationEnd,
-        handleAnimationEnd,
-      ])}
+      onClick={() => composeEventHandlers([onClick, handleClick])}
+      onAnimationEnd={() =>
+        composeEventHandlers([onAnimationEnd, handleAnimationEnd])
+      }
       {...other}
       aria-live="polite"
       aria-label={

@@ -12,7 +12,42 @@ import { Copy as CopyIcon } from '@carbon/icons-react';
 import Copy from '../Copy';
 import { usePrefix } from '../../internal/usePrefix';
 
-export default function CopyButton({ iconDescription, className, ...other }) {
+export interface CopyButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  /**
+   * Specify an optional className to be applied to the underlying `<button>`
+   */
+  className?: string;
+
+  /**
+   * Specify the string that is displayed when the button is clicked and the
+   * content is copied
+   */
+  feedback?: string;
+
+  /**
+   * Specify the time it takes for the feedback message to timeout
+   */
+  feedbackTimeout?: number;
+
+  /**
+   * Provide a description for the icon representing the copy action that can
+   * be read by screen readers
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify an optional `onClick` handler that is called when the underlying
+   * `<button>` is clicked
+   */
+  onClick?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+export default function CopyButton({
+  iconDescription,
+  className,
+  ...other
+}: CopyButtonProps) {
   const prefix = usePrefix();
   return (
     <Copy
