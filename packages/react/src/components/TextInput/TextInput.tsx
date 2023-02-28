@@ -220,7 +220,6 @@ const TextInput = React.forwardRef(function TextInput(
     title: placeholder,
     disabled: normalizedProps.disabled,
     readOnly,
-    //eslint
     ['aria-describedby']: helperText && normalizedProps.helperId,
     ...rest,
   };
@@ -346,10 +345,8 @@ const TextInput = React.forwardRef(function TextInput(
 });
 
 TextInput.displayName = 'TextInput';
-// @ts-expect-error types not yet provided for this component
-TextInput.PasswordInput = PasswordInput;
-// @ts-expect-error types not yet provided for this component
-TextInput.ControlledPasswordInput = ControlledPasswordInput;
+(TextInput as any).PasswordInput = PasswordInput;
+(TextInput as any).ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
   /**
    * Specify an optional className to be applied to the `<input>` node
