@@ -25,7 +25,7 @@ export default {
 };
 
 export const Default = () => (
-  <OverflowMenu ariaLabel="overflow-menu">
+  <OverflowMenu aria-label="overflow-menu">
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
     <OverflowMenuItem itemText="Rename app" />
