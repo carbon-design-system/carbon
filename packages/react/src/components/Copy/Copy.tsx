@@ -115,10 +115,11 @@ export default function Copy({
     <button
       type="button"
       className={classNames}
-      onClick={() => composeEventHandlers([onClick, handleClick])}
-      onAnimationEnd={() =>
-        composeEventHandlers([onAnimationEnd, handleAnimationEnd])
-      }
+      onClick={composeEventHandlers([onClick, handleClick])}
+      onAnimationEnd={composeEventHandlers([
+        onAnimationEnd,
+        handleAnimationEnd,
+      ])}
       {...other}
       aria-live="polite"
       aria-label={
