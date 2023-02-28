@@ -2423,6 +2423,7 @@ exports[`DataTable should render 1`] = `
                   title="Settings"
                 >
                   <OverflowMenu
+                    aria-label={null}
                     ariaLabel="Settings"
                     className="cds--toolbar-action cds--overflow-menu"
                     direction="bottom"

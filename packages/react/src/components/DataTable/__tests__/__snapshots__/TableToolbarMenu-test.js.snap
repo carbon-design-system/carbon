@@ -31,6 +31,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
     title="Add"
   >
     <OverflowMenu
+      aria-label={null}
       ariaLabel="Add"
       className="custom-class cds--toolbar-action cds--overflow-menu"
       direction="bottom"
