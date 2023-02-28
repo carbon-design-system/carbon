@@ -58,17 +58,19 @@ export default {
   },
 };
 
-export const Default = (args) => {
+export const Primary_Default = (args) => {
   return <Button {...args}>Button</Button>;
 };
+Primary_Default.storyName = 'Primary button (default)';
 
-export const Secondary = (args) => {
+export const A_Secondary = (args) => {
   return (
     <Button kind="secondary" {...args}>
       Button
     </Button>
   );
 };
+A_Secondary.storyName = 'Secondary button';
 
 export const Tertiary = (args) => {
   return (

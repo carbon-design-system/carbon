@@ -14,79 +14,25 @@ export default {
   component: ProgressBar,
 };
 
-export const Default = () => (
+export const DefaultIndeterminate = () => (
+  <ProgressBar label="Progress bar label" helperText="Optional helper text" />
+);
+DefaultIndeterminate.storyName = 'Default Indeterminate progress bar';
+
+export const Determinate = () => (
   <ProgressBar
     label="Progress bar label"
     helperText="Optional helper text"
     value={75}
   />
 );
+Determinate.storyName = 'Determinate progress bar';
 
-const PlaygroundStory = (args) => (
+export const AnotherDeterminate = () => (
   <ProgressBar
     label="Progress bar label"
     helperText="Optional helper text"
-    {...args}
+    value={75}
   />
 );
-
-export const Playground = PlaygroundStory.bind({});
-
-Playground.argTypes = {
-  className: {
-    table: {
-      disable: true,
-    },
-  },
-  hideLabel: {
-    control: { type: 'boolean' },
-  },
-  status: {
-    options: ['active', 'finished', 'error'],
-    control: { type: 'select' },
-  },
-};
-
-export const Indeterminate = () => (
-  <ProgressBar label="Progress bar label" helperText="Optional helper text" />
-);
-
-export const Example = () => {
-  const size = 728;
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    setTimeout(() => {
-      const interval = setInterval(() => {
-        setProgress((currentProgress) => {
-          const advancement = Math.random() * 8;
-          if (currentProgress + advancement < size) {
-            return currentProgress + advancement;
-          } else {
-            clearInterval(interval);
-            return size;
-          }
-        });
-      }, 50);
-    }, 3000);
-  }, []);
-
-  const running = progress > 0;
-
-  let helperText = running
-    ? `${progress.toFixed(1)}MB of ${size}MB`
-    : 'Fetching assets...';
-  if (progress >= size) {
-    helperText = 'Done';
-  }
-
-  return (
-    <ProgressBar
-      value={running ? progress : null}
-      max={size}
-      status={progress === size ? 'finished' : 'active'}
-      label="Export data"
-      helperText={helperText}
-    />
-  );
-};
+AnotherDeterminate.storyName = 'zzzz Determinate progress bar';
