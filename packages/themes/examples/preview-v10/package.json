@@ -4,18 +4,16 @@
   "version": "0.0.0",
   "license": "Apache-2.0",
   "scripts": {
-    "build": "parcel build --dist-dir build --public-url \"/themes/examples/preview-v10\" index.html",
-    "develop": "parcel index.html --no-cache"
+    "develop": "next",
+    "build": "next build && next export -o build"
   },
   "dependencies": {
     "@carbon/grid": "^10.43.1",
-    "@carbon/themes": "^10.54.0",
+    "@carbon/themes": "^10.55.1",
     "classnames": "^2.2.6",
-    "react": "^16.13.1",
-    "react-dom": "^16.13.1"
-  },
-  "devDependencies": {
-    "@parcel/transformer-sass": "^2.0.1",
-    "parcel": "^2.0.1"
+    "next": "^12.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "sass": "^1.36.0"
   }
 }
