@@ -101,7 +101,6 @@ interface SelectProps
 
   /**
    * Provide an optional `onChange` hook that is called each time the value of the underlying `<input>` changes.
-   * the underlying `<input>` changes
    */
   onChange?: ChangeEventHandler<HTMLSelectElement>;
 
