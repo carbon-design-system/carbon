@@ -970,7 +970,7 @@ Map {
   "ComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "ariaLabel": "Choose an item",
+      "aria-label": "Choose an item",
       "direction": "bottom",
       "disabled": false,
       "itemToElement": null,
@@ -979,9 +979,10 @@ Map {
       "type": "default",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
