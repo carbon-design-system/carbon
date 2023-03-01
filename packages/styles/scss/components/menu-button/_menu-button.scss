@@ -13,6 +13,10 @@
 /// @access public
 /// @group menu-button
 @mixin menu-button {
+  .#{$prefix}--menu-button__trigger:not(.#{$prefix}--btn--ghost) {
+    min-width: 10rem;
+  }
+
   .#{$prefix}--menu-button__trigger svg {
     transition: transform $duration-fast-02 motion(standard, productive);
   }

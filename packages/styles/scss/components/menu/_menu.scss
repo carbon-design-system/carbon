@@ -27,12 +27,16 @@
 
     position: fixed;
     z-index: z('modal');
-    min-width: 13rem;
+    min-width: 10rem;
     max-width: 18rem;
     padding: $spacing-02 0;
     background-color: $layer;
     opacity: 0;
     visibility: hidden;
+  }
+
+  .#{$prefix}--menu--with-icons {
+    min-width: 12rem;
   }
 
   .#{$prefix}--menu--open {
