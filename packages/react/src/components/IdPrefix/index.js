@@ -7,7 +7,7 @@
 
 import PropTypes from 'prop-types';
 import React from 'react';
-import { IdPrefixContext } from '../../internal/';
+import { IdPrefixContext } from '../../internal/useIdPrefix';
 
 function IdPrefix({ children, prefix }) {
   return (
