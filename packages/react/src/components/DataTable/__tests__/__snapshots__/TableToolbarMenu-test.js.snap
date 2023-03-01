@@ -15,7 +15,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
   }
 >
   <ClassWrapper(OverflowMenu)
-    ariaLabel="Add"
+    aria-label="Add"
     className="custom-class cds--toolbar-action cds--overflow-menu"
     flipped={true}
     iconDescription="Add"
@@ -31,8 +31,7 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
     title="Add"
   >
     <OverflowMenu
-      aria-label={null}
-      ariaLabel="Add"
+      aria-label="Add"
       className="custom-class cds--toolbar-action cds--overflow-menu"
       direction="bottom"
       flipped={true}

@@ -26,7 +26,7 @@ const TableToolbarMenu = ({
   );
   return (
     <OverflowMenu
-      ariaLabel={iconDescription}
+      aria-label={iconDescription}
       renderIcon={renderIcon}
       className={toolbarActionClasses}
       title={iconDescription}
