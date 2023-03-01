@@ -21,6 +21,7 @@ const spacing = 4; // top and bottom spacing between the button and the menu. in
 
 function MenuButton({
   children,
+  className,
   disabled,
   kind = 'primary',
   label,
@@ -48,12 +49,16 @@ function MenuButton({
     }
   }
 
-  const triggerClasses = classNames(`${prefix}--menu-button__trigger`, {
-    [`${prefix}--menu-button__trigger--open`]: open,
-  });
+  const triggerClasses = classNames(
+    `${prefix}--menu-button__trigger`,
+    {
+      [`${prefix}--menu-button__trigger--open`]: open,
+    },
+    className
+  );
 
   return (
-    <div>
+    <>
       <Button
         ref={containerRef}
         className={triggerClasses}
@@ -82,7 +87,7 @@ function MenuButton({
         y={[y[0] - spacing, y[1] + spacing]}>
         {children}
       </Menu>
-    </div>
+    </>
   );
 }
 
@@ -91,6 +96,11 @@ MenuButton.propTypes = {
    * A collection of MenuItems to be rendered as actions for this MenuButton.
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Additional CSS class names.
+   */
+  className: PropTypes.string,
 
   /**
    * Specify whether the MenuButton should be disabled, or not.

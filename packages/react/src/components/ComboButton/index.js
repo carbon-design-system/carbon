@@ -22,6 +22,7 @@ const spacing = 4; // top and bottom spacing between the button and the menu. in
 
 function ComboButton({
   children,
+  className,
   disabled,
   kind = 'primary',
   label,
@@ -56,9 +57,13 @@ function ComboButton({
     }
   }
 
-  const containerClasses = classNames(`${prefix}--combo-button__container`, {
-    [`${prefix}--combo-button__container--open`]: open,
-  });
+  const containerClasses = classNames(
+    `${prefix}--combo-button__container`,
+    {
+      [`${prefix}--combo-button__container--open`]: open,
+    },
+    className
+  );
 
   const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
 
@@ -107,6 +112,11 @@ ComboButton.propTypes = {
    * A collection of MenuItems to be rendered as additional actions for this ComboButton.
    */
   children: PropTypes.node.isRequired,
+
+  /**
+   * Additional CSS class names.
+   */
+  className: PropTypes.string,
 
   /**
    * Specify whether the ComboButton should be disabled, or not.
