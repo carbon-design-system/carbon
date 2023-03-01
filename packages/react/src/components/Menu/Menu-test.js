@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import Menu, { MenuItem } from '../Menu';
+import { Menu, MenuItem } from './';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
@@ -86,7 +86,11 @@ describe('Menu', () => {
 describe('MenuItem', () => {
   describe('renders as expected', () => {
     it('should be disabled', () => {
-      render(<MenuItem label="item" disabled />);
+      render(
+        <Menu open>
+          <MenuItem label="item" disabled />
+        </Menu>
+      );
 
       expect(screen.getByRole('menuitem')).toHaveAttribute(
         'aria-disabled',
@@ -94,20 +98,28 @@ describe('MenuItem', () => {
       );
 
       expect(screen.getByRole('menuitem')).toHaveClass(
-        'cds--menu-option--disabled'
+        'cds--menu-item--disabled'
       );
     });
 
     it('should change kind based on prop', () => {
-      render(<MenuItem label="item" kind="danger" />);
+      render(
+        <Menu open>
+          <MenuItem label="item" kind="danger" />
+        </Menu>
+      );
 
       expect(screen.getByRole('menuitem')).toHaveClass(
-        'cds--menu-option--danger'
+        'cds--menu-item--danger'
       );
     });
 
     it('should render label', () => {
-      render(<MenuItem label="item" />);
+      render(
+        <Menu open>
+          <MenuItem label="item" />
+        </Menu>
+      );
 
       expect(screen.getByText('item')).toBeInTheDocument();
     });

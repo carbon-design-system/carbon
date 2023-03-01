@@ -10,8 +10,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
 import { useId } from '../../internal/useId';
-import Menu from '../Menu';
-import { keys, matches as keyCodeMatches } from '../../internal/keyboard';
+import { Menu } from '../Menu';
 import { usePrefix } from '../../internal/usePrefix';
 
 const defaultSize = 'md';
@@ -65,20 +64,6 @@ function OverflowMenuV2({
     e.preventDefault();
   }
 
-  function handleKeyPress(e) {
-    if (
-      open &&
-      keyCodeMatches(e, [
-        keys.ArrowUp,
-        keys.ArrowRight,
-        keys.ArrowDown,
-        keys.ArrowLeft,
-      ])
-    ) {
-      e.preventDefault();
-    }
-  }
-
   const containerClasses = classNames(`${prefix}--overflow-menu__container`);
 
   const triggerClasses = classNames(
@@ -100,7 +85,6 @@ function OverflowMenuV2({
         className={triggerClasses}
         onClick={handleClick}
         onMouseDown={handleMousedown}
-        onKeyDown={handleKeyPress}
         ref={triggerRef}>
         <IconElement className={`${prefix}--overflow-menu__icon`} />
       </button>
@@ -119,17 +103,17 @@ function OverflowMenuV2({
 
 OverflowMenuV2.propTypes = {
   /**
-   * Specify the children of the OverflowMenu
+   * A collection of MenuItems to be rendered within this OverflowMenu.
    */
   children: PropTypes.node,
 
   /**
-   * Optional className for the trigger button
+   * Additional CSS class names for the trigger button.
    */
   className: PropTypes.string,
 
   /**
-   * Function called to override icon rendering.
+   * Otionally provide a custom icon to be rendered on the trigger button.
    */
   renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 

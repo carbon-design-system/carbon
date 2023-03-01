@@ -942,7 +942,7 @@
     - 32
 - name: apple--dash
   friendly_name: Apple dash
-  aliases: 
+  aliases:
     - apple
     - commerce
     - fruit
@@ -1510,7 +1510,7 @@
     - 32
 - name: batch-job
   friendly_name: Batch job
-  aliases: 
+  aliases:
     - document group
     - batch
     - gear
@@ -1519,7 +1519,7 @@
     - 32
 - name: batch-job--step
   friendly_name: Batch job step
-  aliases: 
+  aliases:
     - single document
     - batch
     - step
@@ -1784,7 +1784,7 @@
     - 32
 - name: boot-volume
   friendly_name: Boot volume
-  aliases: 
+  aliases:
     - file
     - data
     - boot
@@ -1793,7 +1793,7 @@
     - 32
 - name: boot-volume--alt
   friendly_name: Boot volume alt
-  aliases: 
+  aliases:
     - file
     - data
     - boot
@@ -1860,7 +1860,7 @@
     - 32
 - name: bottles--01
   friendly_name: Bottles 01
-  aliases: 
+  aliases:
     - bottles
     - three bottles
     - long neck bottles
@@ -1871,7 +1871,7 @@
     - 32
 - name: bottles--01--dash
   friendly_name: Bottles 01 dash
-  aliases: 
+  aliases:
     - bottles
     - three bottles
     - long neck bottles
@@ -1883,7 +1883,7 @@
     - 32
 - name: bottles--02
   friendly_name: Bottles 02
-  aliases: 
+  aliases:
     - bottles
     - two bottles
     - short neck bottles
@@ -1894,7 +1894,7 @@
     - 32
 - name: bottles--02--dash
   friendly_name: Bottles 02 dash
-  aliases: 
+  aliases:
     - bottles
     - two bottles
     - short neck bottles
@@ -1906,7 +1906,7 @@
     - 32
 - name: bottles--container
   friendly_name: Bottles container
-  aliases: 
+  aliases:
     - bottles
     - two bottles
     - short neck bottles
@@ -2450,7 +2450,7 @@
     - 32
 - name: carbon--ui-builder
   friendly_name: Carbon UI builder
-  aliases: 
+  aliases:
     - carbon
     - IBM
     - IBM Carbon
@@ -2642,7 +2642,7 @@
     - 32
 - name: catalog--publish
   friendly_name: Catalog publish
-  aliases: 
+  aliases:
     - navigation
     - notebook
     - arrow
@@ -3937,7 +3937,7 @@
     - 32
 - name: cics--db2-connection
   friendly_name: IBM® CICS® Db2® connection
-  aliases: 
+  aliases:
     - CICS®
     - Db2®
     - database
@@ -3954,7 +3954,7 @@
     - 32
 - name: cics--program
   friendly_name: IBM® CICS® program
-  aliases: 
+  aliases:
     - CICS®
     - transaction processing
     - customer information
@@ -3962,7 +3962,7 @@
     - 32
 - name: cics--sit
   friendly_name: IBM® CICS® SIT
-  aliases: 
+  aliases:
     - CICS®
     - transaction processing
     - customer information
@@ -3972,7 +3972,7 @@
     - 32
 - name: cics--sit-overrides
   friendly_name: IBM® CICS® SIT overrides
-  aliases: 
+  aliases:
     - CICS®
     - transaction processing
     - customer information
@@ -3990,7 +3990,7 @@
     - 32
 - name: cics--transaction-server-zos
   friendly_name: IBM® CICS® Transaction Server for z/OS®
-  aliases: 
+  aliases:
     - CICS®
     - transaction processing
     - server
@@ -4013,7 +4013,7 @@
     - 32
 - name: cics-region--alt
   friendly_name: IBM® CICS® region alt
-  aliases: 
+  aliases:
     - CICS®
     - region
   sizes:
@@ -4660,7 +4660,7 @@
     - 32
 - name: connect--reference
   friendly_name: Connect reference
-  aliases: 
+  aliases:
     - connect
     - join
     - network
@@ -4818,7 +4818,7 @@
     - 32
 - name: continuous-deployment
   friendly_name: continuous-deployment
-  aliases: 
+  aliases:
     - continuous
     - circle
     - arrow
@@ -4829,7 +4829,7 @@
     - 32
 - name: continuous-integration
   friendly_name: Continuous integration
-  aliases: 
+  aliases:
     - integration
     - hexagon
     - divided hexagon
@@ -5711,7 +5711,7 @@
     - web
 - name: data-volume
   friendly_name: Data volume
-  aliases: 
+  aliases:
     - file
     - data
     - volume
@@ -5719,7 +5719,7 @@
     - 32
 - name: data-volume--alt
   friendly_name: Data volume alt
-  aliases: 
+  aliases:
     - file
     - data
     - volume
@@ -5823,8 +5823,8 @@
   sizes:
     - 32
 - name: db2--buffer-pool
-  friendly_name: IBM® Db2® buffer pool 
-  aliases: 
+  friendly_name: IBM® Db2® buffer pool
+  aliases:
     - data cache
     - memory
     - performance tuning
@@ -5832,7 +5832,7 @@
     - 32
 - name: db2--data-sharing-group
   friendly_name: IBM® Db2® data sharing group
-  aliases: 
+  aliases:
     - database
     - Db2®
     - group name
@@ -5840,8 +5840,8 @@
   sizes:
     - 32
 - name: db2--database
-  friendly_name: IBM® Db2® Database 
-  aliases: 
+  friendly_name: IBM® Db2® Database
+  aliases:
     - database
     - Db2®
     - RDBMS
@@ -6585,6 +6585,16 @@
     - doc
     - paper
     - document import
+- name: document--multiple-01
+  friendly_name: document--multiple-01
+  aliases: []
+  sizes:
+    - 32
+- name: document--multiple-02
+  friendly_name: document--multiple-02
+  aliases: []
+  sizes:
+    - 32
 - name: document--pdf
   friendly_name: Document pdf
   aliases:
@@ -6855,7 +6865,7 @@
     - 32
 - name: drink--01
   friendly_name: Drink 01
-  aliases: 
+  aliases:
     - bottle
     - glass
     - straw
@@ -6866,7 +6876,7 @@
     - 32
 - name: drink--02
   friendly_name: Drink 02
-  aliases: 
+  aliases:
     - bottle
     - glass
     - straw
@@ -7326,7 +7336,7 @@
     - 32
 - name: executable-program
   friendly_name: Executable program
-  aliases: 
+  aliases:
     - user interface
     - UI
     - dashboard
@@ -9134,8 +9144,8 @@
     - 32
 - name: ibm--content-services
   friendly_name: IBM® Content Services
-  aliases: 
-    - content management 
+  aliases:
+    - content management
     - SaaS
   sizes:
     - 32
@@ -9148,7 +9158,7 @@
     - 32
 - name: ibm--datastage
   friendly_name: IBM® DataStage®
-  aliases: 
+  aliases:
     - ETL tool
     - DataStage
     - data integration
@@ -9158,12 +9168,11 @@
     - transform
     - load
     - software
-
   sizes:
     - 32
 - name: ibm--db2
   friendly_name: IBM® Db2®
-  aliases: 
+  aliases:
     - database
     - RDBMS
     - relational database management system
@@ -9171,7 +9180,7 @@
     - 32
 - name: ibm--db2--alt
   friendly_name: IBM® Db2® alt
-  aliases: 
+  aliases:
     - database
     - RDBMS
     - relational database management system
@@ -9185,7 +9194,7 @@
     - 32
 - name: ibm--mq
   friendly_name: IBM® MQ
-  aliases: 
+  aliases:
     - middleware
     - messaging
     - queuing
@@ -9193,7 +9202,6 @@
     - circles
     - dial
     - bullseye
-
   sizes:
     - 32
 - name: ibm--open-enterprise-languages
@@ -9205,7 +9213,7 @@
     - 32
 - name: ibm--power-vs
   friendly_name: IBM Power® Virtual Server
-  aliases: 
+  aliases:
     - virtual server
     - workloads
     - infrastructure
@@ -9216,9 +9224,14 @@
     - solution
   sizes:
     - 32
+- name: ibm--process-mining
+  friendly_name: ibm--process-mining
+  aliases: []
+  sizes:
+    - 32
 - name: ibm--telehealth
   friendly_name: IBM® Telehealth
-  aliases: 
+  aliases:
     - health
     - medical
     - physician
@@ -9238,7 +9251,7 @@
     - 32
 - name: ibm--toolchain
   friendly_name: IBM® Open Toolchain API
-  aliases: 
+  aliases:
     - open
     - API
     - application programming interface
@@ -9272,7 +9285,7 @@
     - 32
 - name: ibm-cloud--citrix-daas
   friendly_name: Citrix DaaS for IBM Cloud®
-  aliases: 
+  aliases:
     - cloud
     - workspaces
     - digital
@@ -9287,7 +9300,7 @@
     - 32
 - name: ibm-cloud--continuous-delivery
   friendly_name: IBM Cloud® Continuous Delivery
-  aliases: 
+  aliases:
     - provision
     - toolchains
     - automate builds
@@ -9310,7 +9323,7 @@
     - 32
 - name: ibm-cloud--direct-link-1--connect
   friendly_name: IBM Cloud® Direct Link Connect 01
-  aliases: 
+  aliases:
     - cloud
     - service
     - cloud service
@@ -9329,7 +9342,7 @@
     - 32
 - name: ibm-cloud--direct-link-1--dedicated
   friendly_name: IBM Cloud® Direct Link Dedicated 01
-  aliases: 
+  aliases:
     - cloud
     - service
     - cloud service
@@ -9348,7 +9361,7 @@
     - 32
 - name: ibm-cloud--direct-link-1--dedicated-hosting
   friendly_name: IBM Cloud® Direct Link Dedicated Hosting 01
-  aliases: 
+  aliases:
     - cloud
     - service
     - cloud service
@@ -9366,7 +9379,7 @@
     - 32
 - name: ibm-cloud--direct-link-1--exchange
   friendly_name: IBM Cloud® Direct Link Exchange 01
-  aliases: 
+  aliases:
     - cloud
     - service
     - cloud service
@@ -9388,7 +9401,7 @@
     - 32
 - name: ibm-cloud--direct-link-2--connect
   friendly_name: IBM Cloud® Direct Link Connect 02
-  aliases: 
+  aliases:
     - cloud
     - service
     - cloud service
@@ -9407,7 +9420,7 @@
     - 32
 - name: ibm-cloud--direct-link-2--dedicated
   friendly_name: IBM Cloud® Direct Link Dedicated 02
-  aliases: 
+  aliases:
     - cloud
     - service
     - cloud service
@@ -9426,7 +9439,7 @@
     - 32
 - name: ibm-cloud--direct-link-2--dedicated-hosting
   friendly_name: IBM Cloud® Direct Link Dedicated Hosting 02
-  aliases: 
+  aliases:
     - cloud
     - service
     - cloud service
@@ -9444,7 +9457,7 @@
     - 32
 - name: ibm-cloud--event-notification
   friendly_name: IBM Cloud® Event Notifications
-  aliases: 
+  aliases:
     - cloud
     - service
     - event notification
@@ -9457,14 +9470,14 @@
     - webhooks
     - communication channels
     - communications
-    - governance 
+    - governance
     - spokes
     - circles
   sizes:
     - 32
 - name: ibm-cloud--event-streams
   friendly_name: IBM Cloud® Event Streams
-  aliases: 
+  aliases:
     - cloud
     - service
     - event streaming
@@ -9478,7 +9491,7 @@
     - real-time analytics
     - predictive analytics
     - connectivity
-    - event-driven architecture 
+    - event-driven architecture
     - spokes
     - circles
     - caption bubble
@@ -9486,7 +9499,7 @@
     - 32
 - name: ibm-cloud--for-education
   friendly_name: IBM Cloud® for Education
-  aliases: 
+  aliases:
     - computing environment
     - academic
     - infrastructure
@@ -9494,7 +9507,7 @@
     - 32
 - name: ibm-cloud--HSM
   friendly_name: IBM Cloud® HSM
-  aliases: 
+  aliases:
     - hardware security module
     - cryptographic infrastructure
     - cyrpto key
@@ -9507,7 +9520,7 @@
     - 32
 - name: ibm-cloud--hyper-protect-crypto-services
   friendly_name: IBM Cloud® Hyper Protect Crypto Services
-  aliases: 
+  aliases:
     - cloud
     - service
     - hybrid cloud
@@ -9528,7 +9541,7 @@
     - 32
 - name: ibm-cloud--hyper-protect-dbaas
   friendly_name: IBM Cloud® Hyper Protect DBaaS
-  aliases: 
+  aliases:
     - cloud
     - database
     - cloud database environment
@@ -9538,7 +9551,7 @@
     - database management
     - provisioning
     - IBM Cloud
-    - database maintenance 
+    - database maintenance
     - security
     - database monitoring
     - confidential computing
@@ -9551,7 +9564,7 @@
     - 32
 - name: ibm-cloud--hyper-protect-vs
   friendly_name: IBM Cloud® Hyper Protect Virtual Servers
-  aliases: 
+  aliases:
     - cloud
     - workloads
     - IBM LinuxONE
@@ -9562,7 +9575,7 @@
     - containerized workloads
     - open container
     - IBM Cloud
-    - database maintenance 
+    - database maintenance
     - security
     - database monitoring
     - database
@@ -9589,7 +9602,7 @@
     - 32
 - name: ibm-cloud--ipsec-vpn
   friendly_name: IBM Cloud® IPsec VPN
-  aliases: 
+  aliases:
     - private network
     - IaaS
     - secure
@@ -9599,7 +9612,7 @@
     - 32
 - name: ibm-cloud--key-protect
   friendly_name: IBM® Key Protect for IBM Cloud®
-  aliases: 
+  aliases:
     - cloud
     - IBM Cloud
     - key protection
@@ -9626,7 +9639,7 @@
     - 32
 - name: ibm-cloud--logging
   friendly_name: IBM Cloud® Logging
-  aliases: 
+  aliases:
     - cloud
     - cloud logging
     - IBM Cloud
@@ -9636,7 +9649,7 @@
     - analyze
     - monitor
     - service
-    - log collection 
+    - log collection
     - computer
     - shield
     - desktop computer
@@ -9645,7 +9658,7 @@
     - 32
 - name: ibm-cloud--mass-data-migration
   friendly_name: IBM Cloud® Mass Data Migration
-  aliases: 
+  aliases:
     - data transfer
     - IBM Cloud
     - data migration
@@ -9657,7 +9670,7 @@
     - 32
 - name: ibm-cloud--pal
   friendly_name: IBM Cloud® Pattern and Asset Library
-  aliases: 
+  aliases:
     - cloud
     - IBM Cloud
     - pattern library
@@ -9666,7 +9679,7 @@
     - 32
 - name: ibm-cloud--privileged-access-gateway
   friendly_name: IBM Cloud® Privileged Access Gateway
-  aliases: 
+  aliases:
     - access
     - remote
     - secure
@@ -9678,7 +9691,7 @@
     - 32
 - name: ibm-cloud--secrets-manager
   friendly_name: IBM Cloud® Secrets Manager
-  aliases: 
+  aliases:
     - secrets manager
     - IBM Cloud
     - single tenant
@@ -9714,7 +9727,7 @@
     - 32
 - name: ibm-cloud--sysdig-secure
   friendly_name: Sysdig Secure on IBM Cloud®
-  aliases: 
+  aliases:
     - cloud
     - IBM Cloud
     - scanning
@@ -9822,7 +9835,7 @@
     - 32
 - name: ibm-cloud-pak--netezza
   friendly_name: IBM Cloud Pak® Netezza®
-  aliases: 
+  aliases:
     - cloud
     - IBM Cloud
     - IBM Cloud Pak
@@ -9894,7 +9907,7 @@
     - 32
 - name: ibm-watson--assistant
   friendly_name: IBM Watson® Assistant
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - AI
@@ -9922,7 +9935,7 @@
     - 32
 - name: ibm-watson--discovery
   friendly_name: IBM Watson® Discovery
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - natural language
@@ -9939,7 +9952,7 @@
     - 32
 - name: ibm-watson--knowledge-catalog
   friendly_name: IBM Watson® Knowledge Catalog
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - catalog
@@ -9961,7 +9974,7 @@
     - 32
 - name: ibm-watson--knowledge-studio
   friendly_name: IBM Watson® Knowledge Studio
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - language domain
@@ -9982,7 +9995,7 @@
     - 32
 - name: ibm-watson--language-translator
   friendly_name: IBM Watson® Language Translator Service
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - language translator
@@ -9996,7 +10009,7 @@
     - 32
 - name: ibm-watson--machine-learning
   friendly_name: IBM Watson® Machine Learning
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - machine learning
@@ -10011,7 +10024,7 @@
     - 32
 - name: ibm-watson--natural-language-classifier
   friendly_name: IBM Watson® Natural Language Classifier Service
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - natural language classifier
@@ -10027,7 +10040,7 @@
     - 32
 - name: ibm-watson--natural-language-understanding
   friendly_name: IBM Watson® Natural Language Understanding Service
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - natural language understanding
@@ -10045,7 +10058,7 @@
     - 32
 - name: ibm-watson--openscale
   friendly_name: IBM Watson® OpenScale
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - OpenScale
@@ -10072,7 +10085,7 @@
     - 32
 - name: ibm-watson--query
   friendly_name: IBM Watson® Query
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - query
@@ -10099,7 +10112,7 @@
     - 32
 - name: ibm-watson--speech-to-text
   friendly_name: IBM Watson® Speech to Text
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - speech to text
@@ -10124,7 +10137,7 @@
     - 32
 - name: ibm-watson--studio
   friendly_name: IBM Watson® Studio
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - cloud
@@ -10148,7 +10161,7 @@
     - 32
 - name: ibm-watson--text-to-speech
   friendly_name: IBM Watson® Text to Speech
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - speech to text
@@ -10173,7 +10186,7 @@
     - 32
 - name: ibm-watson--tone-analyzer
   friendly_name: IBM Watson® Tone Analyzer
-  aliases: 
+  aliases:
     - Watson
     - IBM Watson
     - cloud
@@ -10373,7 +10386,7 @@
     - 32
 - name: image-availability--local
   friendly_name: Image availability local
-  aliases: 
+  aliases:
     - image location
     - availability
     - local
@@ -10384,7 +10397,7 @@
     - 32
 - name: image-availability--retrieving
   friendly_name: Image availability retrieving
-  aliases: 
+  aliases:
     - image location
     - availability
     - retrieving
@@ -10396,7 +10409,7 @@
     - 32
 - name: image-availability--unavailable
   friendly_name: Image availability unavailable
-  aliases: 
+  aliases:
     - image location
     - availability
     - unavailable
@@ -11018,7 +11031,7 @@
     - 32
 - name: keyboard--off
   friendly_name: Keyboard off
-  aliases: 
+  aliases:
     - console
     - typing
     - type
@@ -11026,7 +11039,7 @@
     - computer
     - word processor
     - write
-    - off
+    - 'off'
     - unavailable
   sizes:
     - 32
@@ -11532,7 +11545,7 @@
     - format
 - name: list--checked--mirror
   friendly_name: List checked mirror
-  aliases: 
+  aliases:
     - format
     - list
     - checkmark
@@ -11577,7 +11590,7 @@
     - format
 - name: list--numbered--mirror
   friendly_name: List numbered mirror
-  aliases: 
+  aliases:
     - bullet
     - agenda
     - checklist
@@ -11941,7 +11954,7 @@
     - 32
 - name: logo--angular
   friendly_name: Logo Angular
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -11954,7 +11967,7 @@
     - 32
 - name: logo--ansible-community
   friendly_name: Logo Ansible Community
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -12006,7 +12019,7 @@
     - identification
 - name: logo--figma
   friendly_name: Logo Figma
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -12071,7 +12084,7 @@
     - identification
 - name: logo--invision
   friendly_name: Logo Invision
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -12235,20 +12248,13 @@
     - 32
 - name: logo--react
   friendly_name: Logo React
-  aliases: 
-  - brand
-    - emblem
-    - logotype
-    - symbol
-    - id
-    - avatar
-    - tag
-    - identification
+  aliases:
+    - brand - emblem - logotype - symbol - id - avatar - tag - identification
   sizes:
     - 32
 - name: logo--red-hat-ansible
   friendly_name: Logo Red Hat Ansible
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -12261,7 +12267,7 @@
     - 32
 - name: logo--sketch
   friendly_name: Logo Sketch
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -12313,7 +12319,7 @@
     - identification
 - name: logo--svelte
   friendly_name: Logo Svelte
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -12365,7 +12371,7 @@
     - identification
 - name: logo--vmware--alt
   friendly_name: Logo VMware alt
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -12378,7 +12384,7 @@
     - 32
 - name: logo--vue
   friendly_name: Logo Vue
-  aliases: 
+  aliases:
     - brand
     - emblem
     - logotype
@@ -14936,7 +14942,7 @@
     - 32
 - name: plan
   friendly_name: Plan
-  aliases: 
+  aliases:
     - blueprint
     - floorplan
     - map
@@ -15132,7 +15138,7 @@
     - 32
 - name: port--input
   friendly_name: Port input
-  aliases: 
+  aliases:
     - arrow
     - circle
     - port
@@ -15141,7 +15147,7 @@
     - 32
 - name: port--output
   friendly_name: Port output
-  aliases: 
+  aliases:
     - arrow
     - circle
     - port
@@ -15249,7 +15255,7 @@
     - 32
 - name: promote
   friendly_name: Promote
-  aliases: 
+  aliases:
     - operations
     - launch
     - promote
@@ -15503,7 +15509,7 @@
     - control
 - name: recycle
   friendly_name: Recycle
-  aliases: 
+  aliases:
     - triangle
     - arrows
     - recycle
@@ -15528,6 +15534,11 @@
     - weather
     - ref
     - evapotranspiration
+  sizes:
+    - 32
+- name: reference-architecture
+  friendly_name: reference-architecture
+  aliases: []
   sizes:
     - 32
 - name: reflect--horizontal
@@ -15637,7 +15648,7 @@
     - 32
 - name: repo--artifact
   friendly_name: Repo artifact
-  aliases: 
+  aliases:
     - file folder
     - artifact
     - gear
@@ -15645,7 +15656,7 @@
     - 32
 - name: repo--source-code
   friendly_name: Repo source code
-  aliases: 
+  aliases:
     - file folder
     - angle brackets
     - source code
@@ -16146,7 +16157,7 @@
     - 32
 - name: run--mirror
   friendly_name: Run mirror
-  aliases: 
+  aliases:
     - start
     - play
     - program
@@ -16482,16 +16493,16 @@
     - mac
 - name: screen-map
   friendly_name: Screen map
-  aliases: 
-    - screen 
+  aliases:
+    - screen
     - map
     - display
   sizes:
     - 32
 - name: screen-map--set
   friendly_name: Screen map set
-  aliases: 
-    - screen 
+  aliases:
+    - screen
     - map
     - display
     - group
@@ -16557,7 +16568,7 @@
     - 32
 - name: search--locate--mirror
   friendly_name: Search locate mirror
-  aliases: 
+  aliases:
     - find
     - investigate
     - explore
@@ -17033,7 +17044,7 @@
     - 32
 - name: side-panel--close
   friendly_name: Side panel close
-  aliases: 
+  aliases:
     - controls
     - side panel
     - close
@@ -17047,7 +17058,7 @@
     - 32
 - name: side-panel--close--filled
   friendly_name: Side panel close filled
-  aliases: 
+  aliases:
     - controls
     - side panel
     - close
@@ -17062,7 +17073,7 @@
     - 32
 - name: side-panel--open
   friendly_name: Side panel open
-  aliases: 
+  aliases:
     - controls
     - side panel
     - open
@@ -17076,7 +17087,7 @@
     - 32
 - name: side-panel--open--filled
   friendly_name: Side panel open filled
-  aliases: 
+  aliases:
     - controls
     - side panel
     - close
@@ -17364,7 +17375,7 @@
     - 32
 - name: SLM
   friendly_name: SLM
-  aliases: 
+  aliases:
     - letters
     - alpha
     - type
@@ -18115,7 +18126,7 @@
     - 32
 - name: summary--KPI--mirror
   friendly_name: summary--KPI--mirror
-  aliases: 
+  aliases:
     - summary KPI
     - data
     - mirror
@@ -18501,11 +18512,11 @@
     - 32
 - name: tcp-ip-service
   friendly_name: TCP IP Service
-  aliases: 
+  aliases:
     - network
     - connection
     - LAN
-    - service 
+    - service
   sizes:
     - 32
 - name: temperature
@@ -18706,7 +18717,7 @@
     - 32
 - name: test-tool
   friendly_name: Test tool
-  aliases: 
+  aliases:
     - test
     - checkmark
     - x
@@ -19455,7 +19466,7 @@
     - 32
 - name: transform--binary
   friendly_name: Transform binary
-  aliases: 
+  aliases:
     - data transformation
     - binary
     - code
@@ -19463,7 +19474,7 @@
     - 32
 - name: transform--instructions
   friendly_name: Transform instructions
-  aliases: 
+  aliases:
     - data transformation
     - instructions
     - gear
@@ -19471,7 +19482,7 @@
     - 32
 - name: transform--language
   friendly_name: Transform language
-  aliases: 
+  aliases:
     - data transformation
     - language
     - list
@@ -20142,6 +20153,11 @@
   friendly_name: User speaker
   aliases:
     - presenter
+  sizes:
+    - 32
+- name: user--sponsor
+  friendly_name: user--sponsor
+  aliases: []
   sizes:
     - 32
 - name: user--x-ray
@@ -20873,6 +20889,11 @@
     - agriculture
   sizes:
     - 32
+- name: white-paper
+  friendly_name: white-paper
+  aliases: []
+  sizes:
+    - 32
 - name: wifi
   friendly_name: WiFi
   aliases:
@@ -21201,8 +21222,8 @@
   sizes:
     - 32
 - name: z--systems
-  friendly_name: IBM® zSystems 
-  aliases: 
+  friendly_name: IBM® zSystems
+  aliases:
     - mainframe
     - server
     - software
@@ -21318,8 +21339,8 @@
   sizes:
     - 32
 - name: zos
-  friendly_name: IBM® z/OS®  
-  aliases: 
+  friendly_name: IBM® z/OS®
+  aliases:
     - secure
     - scalable
     - operating system

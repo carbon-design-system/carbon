@@ -2045,7 +2045,6 @@ exports[`DataTable should render 1`] = `
                         className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
-                        tabIndex={0}
                         type="button"
                       >
                         Ghost
@@ -2124,7 +2123,6 @@ exports[`DataTable should render 1`] = `
                         className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
-                        tabIndex={0}
                         type="button"
                       >
                         Ghost
@@ -2203,7 +2201,6 @@ exports[`DataTable should render 1`] = `
                         className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
-                        tabIndex={0}
                         type="button"
                       >
                         Ghost
@@ -2517,7 +2514,6 @@ exports[`DataTable should render 1`] = `
                                     onKeyDown={[Function]}
                                     onMouseEnter={[Function]}
                                     open={false}
-                                    tabIndex={0}
                                     title="Settings"
                                     type="button"
                                   >
@@ -2600,7 +2596,6 @@ exports[`DataTable should render 1`] = `
                   className="cds--btn cds--btn--sm cds--btn--primary"
                   disabled={false}
                   onClick={[MockFunction]}
-                  tabIndex={0}
                   type="button"
                 >
                   Add new
@@ -3172,7 +3167,6 @@ exports[`DataTable sticky header should render 1`] = `
                         className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
-                        tabIndex={0}
                         type="button"
                       >
                         Ghost
@@ -3251,7 +3245,6 @@ exports[`DataTable sticky header should render 1`] = `
                         className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
-                        tabIndex={0}
                         type="button"
                       >
                         Ghost
@@ -3330,7 +3323,6 @@ exports[`DataTable sticky header should render 1`] = `
                         className="cds--btn cds--btn--primary"
                         disabled={false}
                         onClick={[MockFunction]}
-                        tabIndex={0}
                         type="button"
                       >
                         Ghost
@@ -3644,7 +3636,6 @@ exports[`DataTable sticky header should render 1`] = `
                                     onKeyDown={[Function]}
                                     onMouseEnter={[Function]}
                                     open={false}
-                                    tabIndex={0}
                                     title="Settings"
                                     type="button"
                                   >
@@ -3727,7 +3718,6 @@ exports[`DataTable sticky header should render 1`] = `
                   className="cds--btn cds--btn--sm cds--btn--primary"
                   disabled={false}
                   onClick={[MockFunction]}
-                  tabIndex={0}
                   type="button"
                 >
                   Add new
