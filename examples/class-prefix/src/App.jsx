@@ -2,14 +2,20 @@ import React from 'react';
 import { usePrefix } from '@carbon/react';
 import { ClassPrefix } from '@carbon/react';
 
-const prefix = usePrefix();
+function ExampleComponent() {
+  const prefix = usePrefix();
+
+  return (
+    <p>The current prefix is: {prefix}</p>
+  )
+}
 
 function App() {
   return (
     <>
       <ExampleComponent />
         <ClassPrefix prefix="custom">
-          <p>The current prefix is: {prefix}</p>;
+          <ExampleComponent />
         </ClassPrefix>
     </>
   );

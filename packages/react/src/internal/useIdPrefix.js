@@ -7,7 +7,7 @@
 
 import React from 'react';
 
-export const IdPrefixContext = React.createContext(null);
+export const IdPrefixContext = React.createContext('cds');
 
 export function useIdPrefix() {
   return React.useContext(IdPrefixContext);
