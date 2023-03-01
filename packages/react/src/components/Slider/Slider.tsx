@@ -5,8 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { KeyboardEventHandler, PureComponent } from 'react';
+import PropTypes, { ReactNodeLike } from 'prop-types';
+
 import classNames from 'classnames';
 import throttle from 'lodash.throttle';
 import * as FeatureFlags from '@carbon/feature-flags';
@@ -36,7 +37,150 @@ const DRAG_EVENT_TYPES = new Set(['mousemove', 'touchmove']);
  */
 const DRAG_STOP_EVENT_TYPES = new Set(['mouseup', 'touchend', 'touchcancel']);
 
-export default class Slider extends PureComponent {
+type ExcludedAttributes = 'onChange' | 'onBlur';
+export interface SliderProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    ExcludedAttributes
+  > {
+  /**
+   * The `ariaLabel` for the `<input>`.
+   */
+  ariaLabelInput?: string;
+
+  /**
+   * The child nodes.
+   */
+  children?: ReactNodeLike;
+
+  /**
+   * The CSS class name for the slider.
+   */
+  className?: string;
+
+  /**
+   * `true` to disable this slider.
+   */
+  disabled?: boolean;
+
+  /**
+   * The callback to format the label associated with the minimum/maximum value.
+   */
+  formatLabel?: (value: number, label: string | undefined) => string;
+
+  /**
+   * `true` to hide the number input box.
+   */
+  hideTextInput?: boolean;
+
+  /**
+   * The ID of the `<input>`.
+   */
+  id?: string;
+
+  /**
+   * The `type` attribute of the `<input>`.
+   */
+  inputType?: string;
+
+  /**
+   * `true` to specify if the control is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * The label for the slider.
+   */
+  labelText?: ReactNodeLike;
+
+  /**
+   * @deprecated
+   * `true` to use the light version.
+   */
+  light?: boolean;
+
+  /**
+   * The maximum value.
+   */
+  max: number;
+
+  /**
+   * The label associated with the maximum value.
+   */
+  maxLabel?: string;
+
+  /**
+   * The minimum value.
+   */
+  min: number;
+
+  /**
+   * The label associated with the minimum value.
+   */
+  minLabel?: string;
+
+  /**
+   * The `name` attribute of the `<input>`.
+   */
+  name?: string;
+
+  /**
+   * Provide an optional function to be called when the input element
+   * loses focus
+   */
+  onBlur?: (data: { value: string }) => void;
+
+  /**
+   * The callback to get notified of change in value.
+   * `({ value}) => void`
+  //  * @param {{ value }}
+   */
+  onChange?: (data: { value: SliderProps['value'] }) => void;
+
+  /**
+   * Provide an optional function to be called when a key is pressed in the number input
+   */
+  onInputKeyUp?: KeyboardEventHandler<HTMLInputElement>;
+
+  /**
+   * The callback to get notified of value on handle release.
+   */
+  onRelease?: (data: { value: SliderProps['value'] }) => void;
+
+  /**
+   * Whether the slider should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * `true` to specify if the control is required.
+   */
+  required?: boolean;
+
+  /**
+   * A value determining how much the value should increase/decrease by moving the thumb by mouse. If a value other than 1 is provided and the input is *not* hidden, the new step requirement should be added to a visible label. Values outside of the `step` increment will be considered invalid.
+   */
+  step?: number;
+
+  /**
+   * A value determining how much the value should increase/decrease by Shift+arrow keys,
+   * which will be `(max - min) / stepMultiplier`.
+   */
+  stepMultiplier?: number;
+
+  /**
+   * The value.
+   */
+  value: number;
+}
+
+interface CalcValueProps {
+  clientX?: number;
+  value?: number;
+  useRawValue?: boolean;
+}
+
+export default class Slider extends PureComponent<SliderProps> {
   static propTypes = {
     /**
      * The `ariaLabel` for the `<input>`.
@@ -193,10 +337,16 @@ export default class Slider extends PureComponent {
     isValid: true,
   };
 
+  thumbRef: React.RefObject<HTMLDivElement>;
+  filledTrackRef: React.RefObject<HTMLDivElement>;
+  element: HTMLDivElement | null = null;
+  inputId = '';
+  track: HTMLDivElement | null | undefined;
+
   constructor(props) {
     super(props);
-    this.thumbRef = React.createRef();
-    this.filledTrackRef = React.createRef();
+    this.thumbRef = React.createRef<HTMLDivElement>();
+    this.filledTrackRef = React.createRef<HTMLDivElement>();
   }
 
   /**
@@ -223,13 +373,15 @@ export default class Slider extends PureComponent {
     // Fire onChange event handler if present, if there's a usable value, and
     // if the value is different from the last one
 
-    this.thumbRef.current.style.left = `${this.state.left}%`;
-    this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
-      this.state.left / 100
-    })`;
-
+    if (this.thumbRef.current) {
+      this.thumbRef.current.style.left = `${this.state.left}%`;
+    }
+    if (this.filledTrackRef.current) {
+      this.filledTrackRef.current.style.transform = `translate(0%, -50%) scaleX(${
+        this.state.left / 100
+      })`;
+    }
     if (
-      this.state.value !== '' &&
       prevState.value !== this.state.value &&
       typeof this.props.onChange === 'function'
     ) {
@@ -291,12 +443,12 @@ export default class Slider extends PureComponent {
 
     // Register drag stop handlers
     DRAG_STOP_EVENT_TYPES.forEach((element) => {
-      this.element.ownerDocument.addEventListener(element, this.onDragStop);
+      this.element?.ownerDocument.addEventListener(element, this.onDragStop);
     });
 
     // Register drag handlers
     DRAG_EVENT_TYPES.forEach((element) => {
-      this.element.ownerDocument.addEventListener(element, this.onDrag);
+      this.element?.ownerDocument.addEventListener(element, this.onDrag);
     });
 
     // Perform first recalculation since we probably didn't click exactly in the
@@ -316,12 +468,12 @@ export default class Slider extends PureComponent {
 
     // Remove drag stop handlers
     DRAG_STOP_EVENT_TYPES.forEach((element) => {
-      this.element.ownerDocument.removeEventListener(element, this.onDragStop);
+      this.element?.ownerDocument.removeEventListener(element, this.onDragStop);
     });
 
     // Remove drag handlers
     DRAG_EVENT_TYPES.forEach((element) => {
-      this.element.ownerDocument.removeEventListener(element, this.onDrag);
+      this.element?.ownerDocument.removeEventListener(element, this.onDrag);
     });
 
     // Set needsOnRelease flag so event fires on next update
@@ -379,12 +531,11 @@ export default class Slider extends PureComponent {
       return;
     }
 
-    const which = Number.parseInt(evt.which);
     let delta = 0;
-    if (matches(which, [keys.ArrowDown, keys.ArrowLeft])) {
-      delta = -this.props.step;
-    } else if (matches(which, [keys.ArrowUp, keys.ArrowRight])) {
-      delta = this.props.step;
+    if (matches(evt.which, [keys.ArrowDown, keys.ArrowLeft])) {
+      delta = -(this.props.step ?? Slider.defaultProps.step);
+    } else if (matches(evt.which, [keys.ArrowUp, keys.ArrowRight])) {
+      delta = this.props.step ?? Slider.defaultProps.step;
     } else {
       // Ignore keys we don't want to handle
       return;
@@ -393,16 +544,20 @@ export default class Slider extends PureComponent {
     // If shift was held, account for the stepMultiplier
     if (evt.shiftKey) {
       const stepMultiplier = this.props.stepMultiplier;
-      delta *= stepMultiplier;
+      delta *= stepMultiplier ?? Slider.defaultProps.stepMultiplier;
     }
 
-    Math.floor(this.state.value / this.props.step) * this.props.step;
+    Math.floor(
+      this.state.value / (this.props.step ?? Slider.defaultProps.step)
+    ) * (this.props.step ?? Slider.defaultProps.step);
     const { value, left } = this.calcValue({
       // Ensures custom value from `<input>` won't cause skipping next stepping point with right arrow key,
       // e.g. Typing 51 in `<input>`, moving focus onto the thumb and the hitting right arrow key should yield 52 instead of 54
       value:
         (delta > 0
-          ? Math.floor(this.state.value / this.props.step) * this.props.step
+          ? Math.floor(
+              this.state.value / (this.props.step ?? Slider.defaultProps.step)
+            ) * (this.props.step ?? Slider.defaultProps.step)
           : this.state.value) + delta,
     });
 
@@ -428,7 +583,7 @@ export default class Slider extends PureComponent {
       return;
     }
 
-    let targetValue = Number.parseFloat(evt.target.value);
+    const targetValue = Number.parseFloat(evt.target.value);
 
     // Avoid calling calcValue for invalid numbers, but still update the state
     if (isNaN(targetValue)) {
@@ -451,7 +606,7 @@ export default class Slider extends PureComponent {
    *
    * @param {Event} evt The event.
    */
-  onBlur = (evt) => {
+  onBlur = (evt: React.FocusEvent<HTMLInputElement>) => {
     // Do nothing if we have no valid event, target, or value
     if (!evt || !('target' in evt) || typeof evt.target.value !== 'string') {
       return;
@@ -484,11 +639,12 @@ export default class Slider extends PureComponent {
    *   clientX is not provided.
    * @param {boolean} [params.useRawValue=false] `true` to use the given value as-is.
    */
-  calcValue = ({ clientX = null, value = null, useRawValue = false }) => {
+
+  calcValue = ({ clientX, value, useRawValue = false }: CalcValueProps) => {
     const range = this.props.max - this.props.min;
-    const boundingRect = this.element.getBoundingClientRect();
-    const totalSteps = range / this.props.step;
-    let width = boundingRect.right - boundingRect.left;
+    const boundingRect = this.element?.getBoundingClientRect?.();
+    const totalSteps = range / (this.props.step ?? Slider.defaultProps.step);
+    let width = boundingRect ? boundingRect.right - boundingRect.left : 0;
 
     // Enforce a minimum width of at least 1 for calculations
     if (width <= 0) {
@@ -499,7 +655,7 @@ export default class Slider extends PureComponent {
     // use the provided value or state's value to calculate it instead.
     let leftPercent;
     if (clientX != null) {
-      const leftOffset = clientX - boundingRect.left;
+      const leftOffset = clientX - (boundingRect?.left ?? 0);
       leftPercent = leftOffset / width;
     } else {
       if (value == null) {
@@ -517,8 +673,9 @@ export default class Slider extends PureComponent {
       };
     }
 
-    let steppedValue = Math.round(leftPercent * totalSteps) * this.props.step;
-    let steppedPercent = this.clamp(steppedValue / range, 0, 1);
+    let steppedValue =
+      Math.round(leftPercent * totalSteps) * (this.props.step ?? Slider.defaultProps.step);
+    const steppedPercent = this.clamp(steppedValue / range, 0, 1);
 
     steppedValue = this.clamp(
       steppedValue + this.props.min,
@@ -563,7 +720,7 @@ export default class Slider extends PureComponent {
       formatLabel = defaultFormatLabel,
       labelText,
       step,
-      stepMultiplier, // eslint-disable-line no-unused-vars
+      stepMultiplier: _stepMultiplier,
       inputType,
       required,
       disabled,
@@ -624,6 +781,7 @@ export default class Slider extends PureComponent {
                 <span className={`${prefix}--slider__range-label`}>
                   {formatLabel(min, minLabel)}
                 </span>
+                {/* @ts-ignore onBlur + onChange types are incompatible*/}
                 <div
                   className={sliderClasses}
                   ref={(node) => {
@@ -667,8 +825,8 @@ export default class Slider extends PureComponent {
                   name={name}
                   className={inputClasses}
                   value={value}
-                  aria-labelledby={!ariaLabelInput ? labelId : null}
-                  aria-label={ariaLabelInput ? ariaLabelInput : null}
+                  aria-labelledby={!ariaLabelInput ? labelId : undefined}
+                  aria-label={ariaLabelInput ? ariaLabelInput : undefined}
                   disabled={disabled}
                   required={required}
                   min={min}
@@ -676,9 +834,9 @@ export default class Slider extends PureComponent {
                   step={step}
                   onChange={this.onChange}
                   onBlur={this.onBlur}
-                  onKeyUp={this.onInputKeyUp}
+                  onKeyUp={this.props.onInputKeyUp}
                   data-invalid={isValid ? null : true}
-                  aria-invalid={isValid ? null : true}
+                  aria-invalid={isValid ? undefined : true}
                   readOnly={readOnly}
                 />
               </div>
