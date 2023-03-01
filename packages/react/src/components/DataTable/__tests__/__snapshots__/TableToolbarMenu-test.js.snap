@@ -30,31 +30,8 @@ exports[`DataTable.TableToolbarMenu should render 1`] = `
     }
     title="Add"
   >
-    <OverflowMenu
-      aria-label="Add"
-      className="custom-class cds--toolbar-action cds--overflow-menu"
-      direction="bottom"
-      flipped={true}
-      focusTrap={true}
-      iconDescription="Add"
-      menuOffset={[Function]}
-      menuOffsetFlip={[Function]}
-      onClick={[Function]}
-      onClose={[Function]}
-      onKeyDown={[Function]}
-      onOpen={[Function]}
-      open={false}
-      renderIcon={
-        Object {
-          "$$typeof": Symbol(react.forward_ref),
-          "propTypes": Object {
-            "size": [Function],
-          },
-          "render": [Function],
-        }
-      }
-      selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
-      title="Add"
+    <span
+      class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
     >
       <ClickListener
         onClickOutside={[Function]}
