@@ -11,29 +11,87 @@ import React, { useRef, useState, useMemo } from 'react';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 
-const PopoverContext = React.createContext({
+interface PopoverContext {
+
+  floating: React.Ref<HTMLSpanElement>
+
+}
+
+const PopoverContext = React.createContext<PopoverContext>({
   floating: {
     current: null,
   },
 });
 
-const Popover = React.forwardRef(function Popover(props, forwardRef) {
-  const {
-    align = 'bottom',
-    as: BaseComponent = 'span',
-    autoAlign = false,
-    caret = true,
-    className: customClassName,
-    children,
-    dropShadow = true,
-    highContrast = false,
-    open,
-    ...rest
-  } = props;
+export type PopoverAlignment = 'top' | 'top-left' | 'top-right' | 
+  'bottom' | 'bottom-left' | 'bottom-right' |
+  'left' | 'left-bottom' | 'left-top' |
+  'right' | 'right-bottom' | 'right-top'
+
+interface PopoverBaseProps {
+
+  /**
+   * Specify how the popover should align with the trigger element
+   */
+  align?: PopoverAlignment
+
+  /**
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to futurue changes.
+   */
+  autoAlign?: boolean
+
+  /**
+   * Specify whether a caret should be rendered
+   */
+  caret?: boolean
+
+  /**
+   * Provide elements to be rendered inside of the component
+   */
+  children?: React.ReactNode
+
+  /**
+   * Provide a custom class name to be added to the outermost node in the
+   * component
+   */
+  className?: string
+
+  /**
+   * Specify whether a drop shadow should be rendered on the popover
+   */
+  dropShadow?: boolean
+
+  /**
+   * Render the component using the high-contrast variant
+   */
+  highContrast?: boolean
+
+  /**
+   * Specify whether the component is currently open or closed
+   */
+  open: boolean
+
+}
+
+export type PopoverProps<T extends React.ElementType> = PolymorphicProps<T, PopoverBaseProps>
+
+const Popover = React.forwardRef(<T extends React.ElementType>({
+  align = 'bottom',
+  as,
+  autoAlign = false,
+  caret = true,
+  className: customClassName,
+  children,
+  dropShadow = true,
+  highContrast = false,
+  open,
+  ...rest
+}: PopoverProps<T>, forwardRef: React.ForwardedRef<Element>) => {
   const prefix = usePrefix();
-  const floating = useRef();
-  const popover = useRef();
+  const floating = useRef<HTMLSpanElement>(null);
+  const popover = useRef<Element>(null);
 
   const value = useMemo(() => {
     return {
@@ -52,8 +110,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
     [`${prefix}--popover--open`]: open,
     [`${prefix}--popover--${autoAlignment}`]: autoAligned,
     [`${prefix}--popover--${align}`]: !autoAligned,
-    [customClassName]: !!customClassName,
-  });
+  }, customClassName);
 
   useIsomorphicEffect(() => {
     if (!open) {
@@ -94,7 +151,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
       return;
     }
 
-    const alignments = [
+    const alignments: PopoverAlignment[] = [
       'top',
       'top-left',
       'right-bottom',
@@ -122,7 +179,11 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
       option = alignments[(alignments.indexOf(option) + 1) % alignments.length];
     }
 
-    function isVisible(alignment) {
+    function isVisible(alignment: PopoverAlignment) {
+      if (!popover.current || !floating.current) {
+        return false;
+      }
+
       popover.current.classList.add(`${prefix}--popover--${alignment}`);
 
       const rect = floating.current.getBoundingClientRect();
@@ -155,7 +216,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
       return true;
     }
 
-    let alignment = null;
+    let alignment: PopoverAlignment | null = null;
 
     for (let i = 0; i < options.length; i++) {
       const option = options[i];
@@ -172,6 +233,7 @@ const Popover = React.forwardRef(function Popover(props, forwardRef) {
     }
   }, [autoAligned, align, autoAlign, prefix, open]);
 
+  const BaseComponent: React.ElementType<any> = as ?? 'span'
   return (
     <PopoverContext.Provider value={value}>
       <BaseComponent {...rest} className={className} ref={ref}>
@@ -252,9 +314,11 @@ Popover.propTypes = {
   open: PropTypes.bool.isRequired,
 };
 
+export type PopoverContentProps = React.HTMLAttributes<HTMLSpanElement>
+
 const PopoverContent = React.forwardRef(function PopoverContent(
-  { className, children, ...rest },
-  forwardRef
+  { className, children, ...rest }: PopoverContentProps,
+  forwardRef: React.ForwardedRef<HTMLSpanElement>
 ) {
   const prefix = usePrefix();
   const { floating } = React.useContext(PopoverContext);
