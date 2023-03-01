@@ -5,13 +5,128 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
+import { ForwardRefReturn, ReactAttr } from '../../types/common';
 
-const TimePicker = React.forwardRef(function TimePicker(
+type ExcludedAttributes = 'id' | 'value';
+
+export interface TimePickerProps
+  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  /**
+   * Pass in the children that will be rendered next to the form control
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Specify a custom `id` for the `<input>`
+   */
+  id: string;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: React.ReactNode;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText?: React.ReactNode;
+
+  /**
+   * The `light` prop for `TimePicker` has been deprecated. It will be removed in v12. Use the `Layer` component instead.
+   *
+   * @deprecated The `light` prop for `TimePicker` is no longer needed and has been deprecated. It will be removed in the next major release. Use the `Layer` component instead.
+   */
+  light?: boolean;
+
+  /**
+   * Specify the maximum length of the time string in `<input>`
+   */
+  maxLength?: number;
+
+  /**
+   * Optionally provide an `onBlur` handler that is called whenever the
+   * `<input>` loses focus
+   */
+  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
+   */
+  onChange?: React.ChangeEventHandler<HTMLInputElement>;
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<input>` is clicked
+   */
+  onClick?: React.MouseEventHandler<HTMLInputElement>;
+
+  /**
+   * Specify the regular expression working as the pattern of the time string in `<input>`
+   */
+  pattern?: string;
+
+  /**
+   * Specify the placeholder attribute for the `<input>`
+   */
+  placeholder?: string;
+
+  /**
+   * Specify whether the TimePicker should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * Specify the size of the Time Picker.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify the type of the `<input>`
+   */
+  type?: string;
+
+  /**
+   * Specify the value of the `<input>`
+   */
+  value?: string;
+}
+
+export type TimePickerComponent = ForwardRefReturn<
+  HTMLInputElement,
+  TimePickerProps
+>;
+
+const TimePicker: TimePickerComponent = React.forwardRef<
+  HTMLInputElement,
+  TimePickerProps
+>(function TimePicker(
   {
     children,
     className,
@@ -34,7 +149,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     value,
     ...rest
   },
-  ref
+  ref: React.LegacyRef<HTMLInputElement>
 ) {
   const prefix = usePrefix();
 
@@ -86,7 +201,7 @@ const TimePicker = React.forwardRef(function TimePicker(
     [`${prefix}--time-picker--invalid`]: invalid,
     [`${prefix}--time-picker--readonly`]: readOnly,
     [`${prefix}--time-picker--${size}`]: size,
-    [className]: className,
+    ...(className && { [className]: true }),
   });
 
   const labelClasses = cx(`${prefix}--label`, {
@@ -124,8 +239,10 @@ const TimePicker = React.forwardRef(function TimePicker(
     };
 
     const mappedChildren = React.Children.map(children, (pickerSelect) => {
-      return React.cloneElement(pickerSelect, {
-        ...pickerSelect.props,
+      const item = pickerSelect as any;
+
+      return React.cloneElement(item, {
+        ...item.props,
         disabled: disabled,
         readOnly: readOnly,
         ...readOnlyEventHandlers,

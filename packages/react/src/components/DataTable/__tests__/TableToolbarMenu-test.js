@@ -6,35 +6,52 @@
  */
 
 import React from 'react';
-import { mount } from 'enzyme';
+import TableToolbarMenu from '../TableToolbarMenu';
 import { Download } from '@carbon/icons-react';
-import { TableToolbarMenu } from '..';
+import { render, screen } from '@testing-library/react';
 
-describe('DataTable.TableToolbarMenu', () => {
-  it('should render', () => {
-    const wrapper = mount(
-      <TableToolbarMenu
-        className="custom-class"
-        renderIcon={Download}
-        iconDescription="Add">
-        <span>test</span>
-      </TableToolbarMenu>
-    );
-    expect(wrapper).toMatchSnapshot();
-  });
-});
+describe('TableToolbarMenu', () => {
+  describe('renders as expected - Component API', () => {
+    it('should render', () => {
+      const { container } = render(
+        <TableToolbarMenu
+          className="custom-class"
+          renderIcon={Download}
+          iconDescription="Add">
+          <span>test</span>
+        </TableToolbarMenu>
+      );
 
-describe('Custom icon in DataTable.TableToolbarMenu', () => {
-  it('should render', () => {
-    const iconAction = mount(
-      <TableToolbarMenu renderIcon={Download} iconDescription="Download">
-        <span>test</span>
-      </TableToolbarMenu>
-    );
-    const originalIcon = mount(<Download />).find('svg');
-    const icon = iconAction.find('svg');
-    expect(icon.getDOMNode().querySelectorAll(':not(svg):not(title)')).toEqual(
-      originalIcon.getDOMNode().querySelectorAll(':not(svg):not(title)')
-    );
+      expect(container).toMatchSnapshot();
+    });
+
+    it('should support a custom `className` prop on the outermost element', () => {
+      render(
+        <TableToolbarMenu className="custom-class">
+          <span>test</span>
+        </TableToolbarMenu>
+      );
+      expect(screen.getByRole('button')).toHaveClass('custom-class');
+    });
+
+    it('should respect iconDescription prop', () => {
+      render(
+        <TableToolbarMenu iconDescription="Icon description">
+          <span>test</span>
+        </TableToolbarMenu>
+      );
+
+      expect(screen.getByText('Icon description')).toBeInTheDocument();
+    });
+
+    it('should respect renderIcon prop', () => {
+      render(
+        <TableToolbarMenu renderIcon={Download} iconDescription="Download">
+          <span>test</span>
+        </TableToolbarMenu>
+      );
+
+      expect(screen.getByRole('img')).toHaveAttribute('aria-label', 'Download');
+    });
   });
 });
