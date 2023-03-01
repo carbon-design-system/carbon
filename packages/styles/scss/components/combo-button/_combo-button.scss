@@ -18,6 +18,19 @@
     column-gap: rem(1px);
   }
 
+  $triggerSizes: (
+    'sm': rem(32px),
+    'md': rem(40px),
+    'lg': rem(48px),
+  );
+
+  @each $size, $trigger in $triggerSizes {
+    .#{$prefix}--combo-button__container--#{$size}
+      .#{$prefix}--combo-button__primary-action {
+      min-width: 10rem - rem(1px) - $trigger;
+    }
+  }
+
   .#{$prefix}--combo-button__trigger svg {
     transition: transform $duration-fast-02 motion(standard, productive);
   }

@@ -58,17 +58,22 @@ function ComboButton({
 
   const containerClasses = classNames(
     `${prefix}--combo-button__container`,
+    `${prefix}--combo-button__container--${size}`,
     {
       [`${prefix}--combo-button__container--open`]: open,
     },
     className
   );
 
+  const primaryActionClasses = classNames(
+    `${prefix}--combo-button__primary-action`
+  );
   const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
 
   return (
     <div className={containerClasses} ref={containerRef}>
       <Button
+        className={primaryActionClasses}
         size={size}
         disabled={disabled}
         onClick={handlePrimaryActionClick}>
