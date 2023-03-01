@@ -6,7 +6,7 @@ function ExampleComponent() {
   const idPrefix = useIdPrefix();
 
   return (
-    <p>The current prefix is: {idPrefix}</p>
+    <p>The current id prefix is: {idPrefix}</p>
   )
 }
 
