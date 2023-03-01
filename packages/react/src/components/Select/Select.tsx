@@ -80,8 +80,7 @@ interface SelectProps
   invalidText?: ReactNode;
 
   /**
-   * Provide label text to be read by screen readers when interacting with the
-   * control
+   * Provide label text to be read by screen readers when interacting with the control.
    */
   labelText?: ReactNode;
 
@@ -89,9 +88,8 @@ interface SelectProps
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
    *
-   * @deprecated The `light` prop for `Select` is no longer needed and has
-   *    been deprecated in v11 in favor of the new `Layer` component. It
-   *    will be moved in the next major release.
+   * @deprecated The `light` prop for `Select` is no longer needed and has been deprecated in v11 in favor of the new `Layer` component.
+   * It will be moved in the next major release.
    */
   light?: boolean;
 
@@ -102,7 +100,7 @@ interface SelectProps
   noLabel?: boolean;
 
   /**
-   * Provide an optional `onChange` hook that is called each time the value of
+   * Provide an optional `onChange` hook that is called each time the value of the underlying `<input>` changes.
    * the underlying `<input>` changes
    */
   onChange?: ChangeEventHandler<HTMLSelectElement>;
