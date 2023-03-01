@@ -24,7 +24,6 @@ function ComboButton({
   children,
   className,
   disabled,
-  kind = 'primary',
   label,
   onClick,
   size = 'md',
@@ -71,7 +70,6 @@ function ComboButton({
     <div className={containerClasses} ref={containerRef}>
       <Button
         size={size}
-        kind={kind}
         disabled={disabled}
         onClick={handlePrimaryActionClick}>
         {label}
@@ -80,7 +78,6 @@ function ComboButton({
         className={triggerClasses}
         label="Additional actions"
         size={size}
-        kind={kind}
         disabled={disabled}
         aria-haspopup
         aria-expanded={open}
@@ -122,11 +119,6 @@ ComboButton.propTypes = {
    * Specify whether the ComboButton should be disabled, or not.
    */
   disabled: PropTypes.bool,
-
-  /**
-   * Specify the type of button to be used as the base for the primary action and the trigger button.
-   */
-  kind: PropTypes.oneOf(['primary', 'secondary', 'ghost', 'tertiary']),
 
   /**
    * Provide the label to be renderd on the primary action button.
