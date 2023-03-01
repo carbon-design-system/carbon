@@ -18,12 +18,14 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 
 const spacing = 4; // top and bottom spacing between the button and the menu. in px
+const validButtonKinds = ['primary', 'tertiary', 'ghost'];
+const defaultButtonKind = 'primary';
 
 function MenuButton({
   children,
   className,
   disabled,
-  kind = 'primary',
+  kind = defaultButtonKind,
   label,
   size = 'md',
 }) {
@@ -57,13 +59,15 @@ function MenuButton({
     className
   );
 
+  const buttonKind = validButtonKinds.includes(kind) ? kind : defaultButtonKind;
+
   return (
     <>
       <Button
         ref={containerRef}
         className={triggerClasses}
         size={size}
-        kind={kind}
+        kind={buttonKind}
         renderIcon={ChevronDown}
         disabled={disabled}
         aria-haspopup
@@ -110,7 +114,7 @@ MenuButton.propTypes = {
   /**
    * Specify the type of button to be used as the base for the trigger button.
    */
-  kind: PropTypes.oneOf(['primary', 'secondary', 'ghost', 'tertiary']),
+  kind: PropTypes.oneOf(validButtonKinds),
 
   /**
    * Provide the label to be renderd on the trigger button.

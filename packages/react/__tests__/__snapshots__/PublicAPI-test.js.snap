@@ -9179,9 +9179,8 @@ Map {
         "args": Array [
           Array [
             "primary",
-            "secondary",
-            "ghost",
             "tertiary",
+            "ghost",
           ],
         ],
         "type": "oneOf",
