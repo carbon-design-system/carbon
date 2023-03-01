@@ -16,6 +16,7 @@ import {
   MenuItemRadioGroup,
   MenuItemDivider,
 } from './';
+import mdx from './Menu.mdx';
 
 export default {
   title: 'Experimental/unstable__Menu',
@@ -26,6 +27,11 @@ export default {
     MenuItemGroup,
     MenuItemRadioGroup,
     MenuItemDivider,
+  },
+  parameters: {
+    docs: {
+      page: mdx,
+    },
   },
 };
 

@@ -15,11 +15,6 @@ import {
   unstable__meta as meta,
 } from '@carbon/themes';
 
-const mountNode = document.getElementById('root');
-function render(element) {
-  ReactDOM.render(element, mountNode);
-}
-
 const colorNameLookup = Object.keys(colors).reduce(
   (acc, color) => ({
     ...acc,
@@ -30,7 +25,7 @@ const colorNameLookup = Object.keys(colors).reduce(
 
 const tokens = meta.colors.flatMap((color) => color.tokens);
 
-function App() {
+export default function IndexPage() {
   return (
     <React.Fragment>
       <div className="bx--grid">
@@ -302,5 +297,3 @@ function ThemeSwitcher() {
     </div>
   );
 }
-
-render(<App />);

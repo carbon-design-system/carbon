@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { useState, useContext, useRef } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
@@ -17,8 +17,116 @@ import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
-const TextArea = React.forwardRef(function TextArea(
-  {
+type ExcludedAttributes = '';
+export interface TextAreaProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLTextAreaElement>,
+    ExcludedAttributes
+  > {
+  /**
+   * Provide a custom className that is applied directly to the underlying
+   * `<textarea>` node
+   */
+  className?: string;
+
+  /**
+   * Specify the `cols` attribute for the underlying `<textarea>` node
+   */
+  cols?: number;
+
+  /**
+   * Optionally provide the default value of the `<textarea>`
+   */
+  defaultValue?: string | number;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: ReactNodeLike;
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Provide a unique identifier for the control
+   */
+  id?: string;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: ReactNodeLike;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: ReactNodeLike;
+
+  /**
+   * @deprecated
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
+  light?: boolean;
+
+  /**
+   * Max character count allowed for the textarea. This is needed in order for enableCounter to display
+   */
+  maxCount?: number;
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<textarea>`
+   * is updated
+   */
+  onChange?: (evt: React.ChangeEvent<HTMLTextAreaElement>) => void;
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<textarea>` is clicked
+   */
+  onClick?: (evt: React.MouseEvent<HTMLTextAreaElement>) => void;
+
+  /**
+   * Specify the placeholder attribute for the `<textarea>`
+   */
+  placeholder?: string;
+
+  /**
+   * Whether the textarea should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * Specify the rows attribute for the `<textarea>`
+   */
+  rows?: number;
+
+  /**
+   * Provide the current value of the `<textarea>`
+   */
+  value?: string | number;
+}
+
+const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
+  const {
     className,
     id,
     labelText,
@@ -33,37 +141,39 @@ const TextArea = React.forwardRef(function TextArea(
     enableCounter,
     maxCount,
     ...other
-  },
-  forwardRef
-) {
+  } = props;
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const enabled = useFeatureFlag('enable-v11-release');
   const { defaultValue, value, disabled } = other;
   const [textCount, setTextCount] = useState(
-    defaultValue?.length || value?.length || 0
+    defaultValue?.toString().length || value?.toString().length || 0
   );
 
-  const textareaProps = {
+  const textareaProps: {
+    id: TextAreaProps['id'];
+    onChange: TextAreaProps['onChange'];
+    onClick: TextAreaProps['onClick'];
+    maxLength?: number;
+  } = {
     id,
     onChange: (evt) => {
-      if (!other.disabled) {
+      if (!other.disabled && onChange) {
         setTextCount(evt.target.value?.length);
         onChange(evt);
       }
     },
     onClick: (evt) => {
-      if (!other.disabled) {
+      if (!other.disabled && onClick) {
         onClick(evt);
       }
     },
-    ref,
   };
 
   if (enableCounter) {
     textareaProps.maxLength = maxCount;
   }
-  let ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  const ariaAnnouncement = useAnnouncer(textCount, maxCount);
 
   const labelClasses = classNames(`${prefix}--label`, {
     [`${prefix}--visually-hidden`]: hideLabel && !isFluid,
@@ -113,14 +223,16 @@ const TextArea = React.forwardRef(function TextArea(
     }
   );
 
-  const textareaRef = useRef();
-  const ref = useMergedRefs([forwardRef, textareaRef]);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const ref = useMergedRefs([forwardRef, textareaRef]) as
+    | React.LegacyRef<HTMLTextAreaElement>
+    | undefined;
 
   useIsomorphicEffect(() => {
-    if (other.cols) {
-      textareaRef.current.style.width = null;
+    if (other.cols && textareaRef.current) {
+      textareaRef.current.style.width = '';
       textareaRef.current.style.resize = 'none';
-    } else {
+    } else if (textareaRef.current) {
       textareaRef.current.style.width = `100%`;
     }
   }, [other.cols]);
@@ -129,10 +241,10 @@ const TextArea = React.forwardRef(function TextArea(
     <textarea
       {...other}
       {...textareaProps}
-      placeholder={placeholder || null}
+      placeholder={placeholder}
       className={textareaClasses}
-      aria-invalid={invalid || null}
-      aria-describedby={invalid ? errorId : null}
+      aria-invalid={invalid}
+      aria-describedby={invalid ? errorId : undefined}
       disabled={other.disabled}
       readOnly={other.readOnly}
       ref={ref}
