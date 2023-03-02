@@ -5,139 +5,236 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React, { createContext, useState } from 'react';
+import PropTypes, { ReactElementLike, ReactNodeLike } from 'prop-types';
+import React, { createContext, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import mergeRefs from '../../tools/mergeRefs';
 
-export const RadioButtonGroupContext = createContext();
+export const RadioButtonGroupContext = createContext(null);
 
-const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
-  {
-    children,
-    className,
-    defaultSelected,
-    disabled,
-    helperText,
-    invalid = false,
-    invalidText,
-    labelPosition = 'right',
-    legendText,
-    name,
-    onChange = () => {},
-    orientation = 'horizontal',
-    readOnly,
-    valueSelected,
-    warn = false,
-    warnText,
-    ...rest
-  },
-  ref
-) {
-  const prefix = usePrefix();
+type ExcludedAttributes = 'onChange';
 
-  const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
-  const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
+export interface RadioButtonGroupProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLFieldSetElement>,
+    ExcludedAttributes
+  > {
+  /**
+   * Provide a collection of `<RadioButton>` components to render in the group
+   */
+  children?: ReactNodeLike; //ReactElement;
 
   /**
-   * prop + state alignment - getDerivedStateFromProps
-   * only update if selected prop changes
+   * Provide an optional className to be applied to the container node
    */
-  if (valueSelected !== prevValueSelected) {
-    setSelected(valueSelected);
-    setPrevValueSelected(valueSelected);
-  }
+  className?: string;
 
-  function getRadioButtons() {
-    const mappedChildren = React.Children.map(children, (radioButton) => {
-      const { value } = radioButton.props;
+  /**
+   * Specify the `<RadioButton>` to be selected by default
+   */
+  defaultSelected?: string | number;
 
-      const newProps = {
-        name: name,
-        key: value,
-        value: value,
-        onChange: handleOnChange,
-        checked: value === selected,
-      };
+  /**
+   * Specify whether the group is disabled
+   */
+  disabled?: boolean;
 
-      if (!selected && radioButton.props.checked) {
-        newProps.checked = true;
-      }
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: ReactNodeLike;
 
-      return React.cloneElement(radioButton, newProps);
-    });
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
 
-    return mappedChildren;
-  }
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: ReactNodeLike;
 
-  function handleOnChange(newSelection, value, evt) {
-    if (!readOnly) {
-      if (newSelection !== selected) {
-        setSelected(newSelection);
-        onChange(newSelection, name, evt);
+  /**
+   * Provide where label text should be placed
+   */
+  labelPosition?: 'left' | 'right';
+
+  /**
+   * Provide a legend to the RadioButtonGroup input that you are
+   * exposing to the user
+   */
+  legendText?: ReactNodeLike;
+
+  /**
+   * Specify the name of the underlying `<input>` nodes
+   */
+  name?: string;
+
+  /**
+   * Provide an optional `onChange` hook that is called whenever the value of
+   * the group changes
+   */
+  onChange?: (
+    selection: unknown,
+    name: string | undefined,
+    evt: unknown
+  ) => void;
+
+  /**
+   * Provide where radio buttons should be placed
+   */
+  orientation?: 'horizontal' | 'vertical';
+
+  /**
+   * Whether the RadioButtonGroup should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNodeLike;
+
+  /**
+   * Specify the value that is currently selected in the group
+   */
+  valueSelected?: string | number;
+}
+
+const RadioButtonGroup = React.forwardRef(
+  (props: RadioButtonGroupProps, ref) => {
+    const {
+      children,
+      className,
+      defaultSelected,
+      disabled,
+      helperText,
+      invalid = false,
+      invalidText,
+      labelPosition = 'right',
+      legendText,
+      name,
+      onChange = () => {},
+      orientation = 'horizontal',
+      readOnly,
+      valueSelected,
+      warn = false,
+      warnText,
+      ...rest
+    } = props;
+    const prefix = usePrefix();
+
+    const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
+    const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
+
+    /**
+     * prop + state alignment - getDerivedStateFromProps
+     * only update if selected prop changes
+     */
+    if (valueSelected !== prevValueSelected) {
+      setSelected(valueSelected);
+      setPrevValueSelected(valueSelected);
+    }
+
+    function getRadioButtons() {
+      const mappedChildren = React.Children.map(children, (radioButton) => {
+        const { value } = (radioButton as ReactElementLike)?.props;
+
+        const newProps = {
+          name: name,
+          key: value,
+          value: value,
+          onChange: handleOnChange,
+          checked: value === selected,
+        };
+
+        if (!selected && (radioButton as ReactElementLike)?.props.checked) {
+          newProps.checked = true;
+        }
+        if (radioButton)
+          return React.cloneElement(radioButton as ReactElementLike, newProps);
+      });
+
+      return mappedChildren;
+    }
+
+    function handleOnChange(newSelection, value, evt) {
+      if (!readOnly) {
+        if (newSelection !== selected) {
+          setSelected(newSelection);
+          onChange(newSelection, name, evt);
+        }
       }
     }
-  }
 
-  const showWarning = !readOnly && !invalid && warn;
-  const showHelper = !invalid && !disabled && !warn;
+      const showWarning = !readOnly && !invalid && warn;
+      const showHelper = !invalid && !disabled && !warn;
 
-  const wrapperClasses = classNames(`${prefix}--form-item`, className);
+      const wrapperClasses = classNames(`${prefix}--form-item`, className);
 
-  const fieldsetClasses = classNames(`${prefix}--radio-button-group`, {
-    [`${prefix}--radio-button-group--${orientation}`]:
-      orientation === 'vertical',
-    [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
-    [`${prefix}--radio-button-group--readonly`]: readOnly,
-    [`${prefix}--radio-button-group--invalid`]: !readOnly && invalid,
-    [`${prefix}--radio-button-group--warning`]: showWarning,
-  });
+    const fieldsetClasses = classNames(`${prefix}--radio-button-group`, {
+      [`${prefix}--radio-button-group--${orientation}`]:
+        orientation === 'vertical',
+      [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
+      [`${prefix}--radio-button-group--readonly`]: readOnly,
+      [`${prefix}--radio-button-group--invalid`]: !readOnly && invalid,
+      [`${prefix}--radio-button-group--warning`]: showWarning,
+    });
 
-  const helperClasses = classNames(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: disabled,
-  });
+      const helperClasses = classNames(`${prefix}--form__helper-text`, {
+        [`${prefix}--form__helper-text--disabled`]: disabled,
+      });
 
-  const helper = helperText ? (
-    <div className={helperClasses}>{helperText}</div>
-  ) : null;
+        const helper = helperText ? (
+          <div className={helperClasses}>{helperText}</div>
+        ) : null;
 
-  return (
-    <div className={wrapperClasses} ref={ref}>
-      <fieldset
-        className={fieldsetClasses}
-        disabled={disabled}
-        data-invalid={invalid ? true : undefined}
-        aria-readonly={readOnly}
-        {...rest}>
-        {legendText && (
-          <Legend className={`${prefix}--label`}>{legendText}</Legend>
-        )}
-        {getRadioButtons()}
-      </fieldset>
-      <div className={`${prefix}--radio-button__validation-msg`}>
-        {!readOnly && invalid && (
-          <>
-            <WarningFilled
-              className={`${prefix}--radio-button__invalid-icon`}
-            />
-            <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-          </>
-        )}
-        {showWarning && (
-          <>
-            <WarningAltFilled
-              className={`${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`}
-            />
-            <div className={`${prefix}--form-requirement`}>{warnText}</div>
-          </>
-        )}
-        {showHelper && helper}
+    const divRef = useRef<HTMLDivElement>(null);
+
+    return (
+      <div className={wrapperClasses} ref={mergeRefs(divRef, ref)}>
+        <fieldset
+          className={fieldsetClasses}
+          disabled={disabled}
+          data-invalid={invalid ? true : undefined}
+          aria-readonly={readOnly}
+          {...rest}>
+          {legendText && (
+            <Legend className={`${prefix}--label`}>{legendText}</Legend>
+          )}
+          {getRadioButtons()}
+        </fieldset>
+        <div className={`${prefix}--radio-button__validation-msg`}>
+          {!readOnly && invalid && (
+            <>
+              <WarningFilled
+                className={`${prefix}--radio-button__invalid-icon`}
+              />
+              <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+            </>
+          )}
+          {showWarning && (
+            <>
+              <WarningAltFilled
+                className={`${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`}
+              />
+              <div className={`${prefix}--form-requirement`}>{warnText}</div>
+            </>
+          )}
+          {showHelper && helper}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 RadioButtonGroup.propTypes = {
   /**
