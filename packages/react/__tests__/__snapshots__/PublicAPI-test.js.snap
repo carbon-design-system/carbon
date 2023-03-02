@@ -9042,6 +9042,21 @@ Map {
         ],
         "type": "oneOf",
       },
+      "tooltipAlign": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "translateWithId": Object {
         "type": "func",
       },

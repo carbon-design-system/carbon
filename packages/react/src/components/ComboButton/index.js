@@ -34,6 +34,7 @@ function ComboButton({
   label,
   onClick,
   size = 'md',
+  tooltipAlign,
   translateWithId: t = defaultTranslateWithId,
 }) {
   const id = useId('combobutton');
@@ -92,6 +93,7 @@ function ComboButton({
         label={t('carbon.combo-button.additional-actions')}
         size={size}
         disabled={disabled}
+        align={tooltipAlign}
         aria-haspopup
         aria-expanded={open}
         onClick={handleTriggerClick}
@@ -147,6 +149,20 @@ ComboButton.propTypes = {
    * Specify the size of the buttons and menu.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Specify how the trigger tooltip should be aligned.
+   */
+  tooltipAlign: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
 
   /**
    * Optional method that takes in a message id and returns an
