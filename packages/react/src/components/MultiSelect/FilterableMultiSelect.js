@@ -28,7 +28,8 @@ import { FormContext } from '../FluidForm';
 
 const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   {
-    ariaLabel,
+    ['aria-label']: ariaLabel,
+    ariaLabel: deprecatedAriaLabel,
     className: containerClassName,
     compareItems,
     direction,
@@ -339,6 +340,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   </label>
                 ) : null}
                 <ListBox
+                  aria-label={deprecatedAriaLabel || ariaLabel}
                   onFocus={isFluid ? handleFocus : null}
                   onBlur={isFluid ? handleFocus : null}
                   className={className}
@@ -465,9 +467,18 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
 FilterableMultiSelect.propTypes = {
   /**
-   * 'aria-label' of the ListBox component.
+   * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Specify the direction of the multiselect dropdown. Can be either top or bottom.
@@ -610,7 +621,7 @@ FilterableMultiSelect.propTypes = {
 };
 
 FilterableMultiSelect.defaultProps = {
-  ariaLabel: 'Choose an item',
+  ['aria-label']: 'Choose an item',
   compareItems: defaultCompareItems,
   direction: 'bottom',
   disabled: false,
