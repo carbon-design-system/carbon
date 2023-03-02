@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { MouseEventHandler, MouseEvent, useRef } from 'react';
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';

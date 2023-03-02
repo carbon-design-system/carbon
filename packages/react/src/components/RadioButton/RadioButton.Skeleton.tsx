@@ -27,7 +27,7 @@ function RadioButtonSkeleton(props: RadioButtonSkeletonProps) {
       <span className={`${prefix}--radio-button__label ${prefix}--skeleton`} />
     </div>
   );
-};
+}
   
 
 RadioButtonSkeleton.propTypes = {
