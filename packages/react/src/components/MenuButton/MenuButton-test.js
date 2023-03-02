@@ -63,4 +63,14 @@ describe('MenuButton', () => {
     expect(screen.getByRole('menu')).toBeTruthy();
     expect(screen.getByRole('menuitem')).toHaveTextContent(/^Action$/);
   });
+
+  it('should support being disabled', () => {
+    render(
+      <MenuButton label="Actions" disabled>
+        <MenuItem label="Action" />
+      </MenuButton>
+    );
+
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
 });
