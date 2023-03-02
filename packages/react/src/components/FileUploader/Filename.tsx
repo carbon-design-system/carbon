@@ -11,11 +11,34 @@ import React from 'react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
-function Filename({ iconDescription, status, invalid, ...rest }) {
+export interface FilenameProps {
+  /**
+   * Provide a description of the SVG icon to denote file upload status
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify if the file is invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Status of the file upload
+   */
+  status?: 'edit' | 'complete' | 'uploading';
+
+  /**
+   * Provide a custom tabIndex value for the `<Filename>`
+   */
+  tabIndex?: string;
+}
+function Filename(props: FilenameProps) {
+  const { iconDescription, status, invalid, tabIndex, ...rest } = props;
   const prefix = usePrefix();
   switch (status) {
     case 'uploading':
       return (
+        // @ts-ignore: todo fix once Loading component is converted to TS
         <Loading description={iconDescription} small withOverlay={false} />
       );
     case 'edit':
@@ -26,6 +49,7 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
             aria-label={iconDescription}
             className={`${prefix}--file-close`}
             type="button"
+            tabIndex={tabIndex ? parseInt(tabIndex) : undefined}
             {...rest}>
             <Close />
           </button>

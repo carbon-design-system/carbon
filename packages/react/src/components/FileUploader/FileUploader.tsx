@@ -315,6 +315,7 @@ export default class FileUploader extends PureComponent<FileUploaderProps> {
           labelText={buttonLabel}
           multiple={multiple}
           buttonKind={buttonKind}
+          // @ts-ignore
           onChange={this.handleChange}
           disableLabelChanges
           accept={accept}
@@ -340,6 +341,7 @@ export default class FileUploader extends PureComponent<FileUploaderProps> {
                       iconDescription={iconDescription}
                       aria-describedby={name}
                       status={filenameStatus}
+                      // @ts-ignore todo: check why this isn't on filename
                       onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {
                           this.handleClick(evt, { index, filenameStatus });
