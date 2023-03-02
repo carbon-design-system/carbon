@@ -12,22 +12,83 @@ import { keys, matches } from '../../internal/keyboard';
 import uniqueId from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 
-function FileUploaderDropContainer({
-  accept,
-  className,
-  id,
-  disabled,
-  labelText,
-  multiple,
-  name,
-  onAddFiles,
-  pattern,
-  role,
-  tabIndex,
-  // eslint-disable-next-line react/prop-types
-  innerRef,
-  ...rest
-}) {
+export interface FileUploaderDropContainerProps {
+  /**
+   * Specify the types of files that this input should be able to receive
+   */
+  accept?: string[];
+
+  /**
+   * Provide a custom className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify whether file input is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide a unique id for the underlying `<input>` node
+   */
+  id?: string;
+
+  /**
+   * Provide the label text to be read by screen readers when interacting with
+   * this control
+   */
+  labelText: string;
+
+  /**
+   * Specify if the component should accept multiple files to upload
+   */
+  multiple?: boolean;
+
+  /**
+   * Provide a name for the underlying `<input>` node
+   */
+  name?: string;
+
+  /**
+   * Event handler that is called after files are added to the uploader
+   * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
+   */
+  onAddFiles?: any; //todo PropTypes.func,
+
+  /**
+   * Provide a custom regex pattern for the acceptedTypes
+   */
+  pattern?: string;
+
+  /**
+   * Provide an accessibility role for the `<FileUploaderButton>`
+   */
+  role?: string;
+
+  /**
+   * Provide a custom tabIndex value for the `<FileUploaderButton>`
+   */
+  tabIndex?: number;
+}
+
+function FileUploaderDropContainer(props: FileUploaderDropContainerProps) {
+  const {
+    accept,
+    className,
+    id,
+    disabled,
+    labelText,
+    multiple,
+    name,
+    onAddFiles,
+    pattern,
+    role,
+    tabIndex,
+    // @ts-ignore
+    // eslint-disable-next-line react/prop-types
+    innerRef,
+    ...rest
+  } = props;
   const prefix = usePrefix();
   const inputRef = useRef(null);
   const { current: uid } = useRef(id || uniqueId());
@@ -37,7 +98,7 @@ function FileUploaderDropContainer({
   });
   const dropareaClasses = classNames(`${prefix}--file__drop-container`, {
     [`${prefix}--file__drop-container--drag-over`]: isActive,
-    [className]: className,
+    [className ? className : '']: className,
   });
 
   /**
@@ -49,13 +110,14 @@ function FileUploaderDropContainer({
       event.type === 'drop'
         ? [...event.dataTransfer.files]
         : [...event.target.files];
-    if (!accept.length) {
+    if (!accept?.length) {
       return transferredFiles;
     }
     const acceptedTypes = new Set(accept);
     return transferredFiles.reduce((acc, curr) => {
       const { name, type: mimeType = '' } = curr;
-      const fileExtensionRegExp = new RegExp(pattern, 'i');
+      //todo check this
+      const fileExtensionRegExp = new RegExp(pattern ?? '', 'i');
       const hasFileExtension = fileExtensionRegExp.test(name);
       if (!hasFileExtension) {
         return acc;
@@ -116,8 +178,10 @@ function FileUploaderDropContainer({
         htmlFor={uid}
         tabIndex={tabIndex || 0}
         onKeyDown={(evt) => {
+          // @ts-ignore
           if (matches(evt, [keys.Enter, keys.Space])) {
-            inputRef.current.click();
+            // @ts-ignore
+            inputRef.current?.click();
           }
         }}
         {...rest}>
@@ -130,13 +194,15 @@ function FileUploaderDropContainer({
         id={uid}
         className={`${prefix}--file-input`}
         ref={inputRef}
-        tabIndex="-1"
+        tabIndex={-1}
         disabled={disabled}
+        // @ts-ignore
         accept={accept}
         name={name}
         multiple={multiple}
         onChange={handleChange}
         onClick={(evt) => {
+          // @ts-ignore
           evt.target.value = null;
         }}
       />
