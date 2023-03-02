@@ -1,13 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable.TableToolbar should render 1`] = `
-<TableToolbar
-  aria-label="data table toolbar"
-  className="custom-class"
->
+exports[`TableToolbar renders as expected - Component API should render 1`] = `
+<div>
   <section
     aria-label="data table toolbar"
-    className="cds--table-toolbar"
+    class="cds--table-toolbar"
   />
-</TableToolbar>
+</div>
 `;
