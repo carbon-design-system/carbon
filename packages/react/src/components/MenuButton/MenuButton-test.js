@@ -16,44 +16,44 @@ import { MenuButton } from './';
 describe('MenuButton', () => {
   it('should support a ref on the outermost element', () => {
     const ref = jest.fn();
-    render(
+    const { container } = render(
       <MenuButton label="Actions" ref={ref}>
         <MenuItem label="Action" />
       </MenuButton>
     );
-    expect(ref).toHaveBeenCalledWith(screen.getByRole('button'));
+    expect(ref).toHaveBeenCalledWith(container.firstChild);
   });
 
   it('should support a custom class name on the outermost element', () => {
-    render(
+    const { container } = render(
       <MenuButton label="Actions" className="test">
         <MenuItem label="Action" />
       </MenuButton>
     );
-    expect(screen.getByRole('button')).toHaveClass('test');
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should forward additional props on the outermost element', () => {
-    render(
+    const { container } = render(
       <MenuButton label="Actions" data-testid="test">
         <MenuItem label="Action" />
       </MenuButton>
     );
-    expect(screen.getByRole('button')).toHaveAttribute('data-testid', 'test');
+    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
   });
 
   it('should render props.label on the trigger button', () => {
     render(
-      <MenuButton label="Test" data-testid="test">
+      <MenuButton label="Test">
         <MenuItem label="Action" />
       </MenuButton>
     );
     expect(screen.getByRole('button')).toHaveTextContent(/^Test$/);
   });
 
-  it('opens a menu on click', async () => {
+  it('should open a menu on click', async () => {
     render(
-      <MenuButton label="Test" data-testid="test">
+      <MenuButton label="Actions">
         <MenuItem label="Action" />
       </MenuButton>
     );
