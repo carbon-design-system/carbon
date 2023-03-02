@@ -10,6 +10,7 @@ import { Checkbox } from '@carbon/icons-react';
 import React, { useState } from 'react';
 import { Popover, PopoverContent } from '../Popover';
 import mdx from './Popover.mdx';
+import { Settings } from '@carbon/icons-react';
 
 export default {
   title: 'Components/Popover',
@@ -61,6 +62,28 @@ const PlaygroundStory = (props) => {
       <div className="playground-trigger">
         <Checkbox />
       </div>
+      <PopoverContent className="p-3">
+        <p className="popover-title">Available storage</p>
+        <p className="popover-details">
+          This server has 150 GB of block storage remaining.
+        </p>
+      </PopoverContent>
+    </Popover>
+  );
+};
+
+export const TabTip = () => {
+  const [open, setOpen] = useState(false);
+  return (
+    <Popover open={open} isTabTip autoAlign>
+      <button
+        type="button"
+        onClick={() => {
+          setOpen(!open);
+        }}>
+        <Settings />
+      </button>
+
       <PopoverContent className="p-3">
         <p className="popover-title">Available storage</p>
         <p className="popover-details">

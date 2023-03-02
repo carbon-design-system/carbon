@@ -75,6 +75,11 @@ interface PopoverBaseProps {
   highContrast?: boolean;
 
   /**
+   * Render the component using the tab tip variant
+   */
+  isTabTip?: boolean;
+
+  /**
    * Specify whether the component is currently open or closed
    */
   open: boolean;
@@ -88,10 +93,11 @@ export type PopoverProps<T extends React.ElementType> = PolymorphicProps<
 const Popover = React.forwardRef(
   <T extends React.ElementType>(
     {
-      align = 'bottom',
+      isTabTip,
+      align = isTabTip ? 'bottom-left' : 'bottom',
       as,
       autoAlign = false,
-      caret = true,
+      caret = isTabTip ? false : true,
       className: customClassName,
       children,
       dropShadow = true,
@@ -111,6 +117,17 @@ const Popover = React.forwardRef(
       };
     }, []);
 
+    if (isTabTip) {
+      const tabTipAlignments: PopoverAlignment[] = [
+        'bottom-left',
+        'bottom-right',
+      ];
+
+      if (!tabTipAlignments.includes(align)) {
+        align = 'bottom-left';
+      }
+    }
+
     const ref = useMergedRefs([forwardRef, popover]);
     const [autoAligned, setAutoAligned] = useState(false);
     const [autoAlignment, setAutoAlignment] = useState(align);
@@ -121,8 +138,9 @@ const Popover = React.forwardRef(
         [`${prefix}--popover--drop-shadow`]: dropShadow,
         [`${prefix}--popover--high-contrast`]: highContrast,
         [`${prefix}--popover--open`]: open,
-        [`${prefix}--popover--${autoAlignment}`]: autoAligned,
+        [`${prefix}--popover--${autoAlignment}`]: autoAligned && !isTabTip,
         [`${prefix}--popover--${align}`]: !autoAligned,
+        [`${prefix}--popover--tabtip`]: isTabTip,
       },
       customClassName
     );
@@ -132,7 +150,7 @@ const Popover = React.forwardRef(
         return;
       }
 
-      if (!autoAlign) {
+      if (!autoAlign || isTabTip) {
         setAutoAligned(false);
         return;
       }
@@ -251,7 +269,7 @@ const Popover = React.forwardRef(
         setAutoAligned(true);
         setAutoAlignment(alignment);
       }
-    }, [autoAligned, align, autoAlign, prefix, open]);
+    }, [autoAligned, align, autoAlign, prefix, open, isTabTip]);
 
     const BaseComponent: React.ElementType<any> = as ?? 'span';
     return (
