@@ -39,7 +39,7 @@ const items = [
 ];
 
 export default {
-  title: 'Components/ComboBox',
+  title: 'Components/Dropdown/ComboBox',
   component: ComboBox,
   argTypes: {
     size: {
@@ -77,6 +77,7 @@ export const Default = () => (
     />
   </div>
 );
+Default.storyName = 'ComboBox';
 
 export const WithLayer = () => (
   <div style={{ width: 300 }}>

@@ -14,25 +14,15 @@ export default {
   component: ProgressBar,
 };
 
-export const DefaultIndeterminate = () => (
+export const Default = () => (
   <ProgressBar label="Progress bar label" helperText="Optional helper text" />
 );
-DefaultIndeterminate.storyName = 'Default Indeterminate progress bar';
+Default.storyName = 'Indeterminate Progress Bar';
 
-export const Determinate = () => (
+export const DeterminateProgressBar = () => (
   <ProgressBar
     label="Progress bar label"
     helperText="Optional helper text"
     value={75}
   />
 );
-Determinate.storyName = 'Determinate progress bar';
-
-export const AnotherDeterminate = () => (
-  <ProgressBar
-    label="Progress bar label"
-    helperText="Optional helper text"
-    value={75}
-  />
-);
-AnotherDeterminate.storyName = 'zzzz Determinate progress bar';

@@ -66,8 +66,6 @@ export const WithAPageSelector = () => (
   </Pagination>
 );
 
-WithAPageSelector.storyName = 'with a page selector';
-
 export const WithNoSizerChildInputOrChildSelector = () => (
   <Pagination {...props()} totalItems={350} />
 );

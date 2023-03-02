@@ -4,7 +4,7 @@ import ListItem from '../ListItem';
 import mdx from './OrderedList.mdx';
 
 export default {
-  title: 'Components/OrderedList',
+  title: 'Components/Basic list/OrderedList',
   component: OrderedList,
   subcomponents: {
     ListItem,
@@ -33,8 +33,9 @@ export const Default = () => (
     <ListItem>Ordered List level 1</ListItem>
   </OrderedList>
 );
+Default.storyName = 'Ordered List';
 
-export const Nested = () => {
+export const WithNesting = () => {
   return (
     <OrderedList>
       <ListItem>
@@ -56,7 +57,7 @@ export const Nested = () => {
   );
 };
 
-export const NativeListStyles = () => {
+export const WithNativeListStyles = () => {
   return (
     <OrderedList native>
       <ListItem>Ordered List level 1</ListItem>

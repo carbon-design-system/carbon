@@ -20,7 +20,7 @@ const props = {
 };
 
 export default {
-  title: 'Components/UnorderedList',
+  title: 'Components/Basic list/UnorderedList',
   component: UnorderedList,
   subcomponents: {
     ListItem,
@@ -35,8 +35,9 @@ export const Default = () => (
     <ListItem>Unordered List level 1</ListItem>
   </UnorderedList>
 );
+Default.storyName = 'Unordered List';
 
-export const Nested = () => {
+export const WithNesting = () => {
   const regularProps = props.regular();
 
   return (
@@ -59,8 +60,6 @@ export const Nested = () => {
     </UnorderedList>
   );
 };
-
-Nested.storyName = 'nested';
 
 export const Playground = (args) => (
   <UnorderedList {...args}>

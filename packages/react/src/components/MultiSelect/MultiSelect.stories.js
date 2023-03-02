@@ -11,7 +11,7 @@ import FilterableMultiSelect from './FilterableMultiSelect';
 import { Layer } from '../Layer';
 
 export default {
-  title: 'Components/MultiSelect',
+  title: 'Components/Dropdown/MultiSelect',
   component: MultiSelect,
   subcomponents: {
     'MultiSelect.Filterable': MultiSelect.Filterable,
@@ -227,6 +227,7 @@ export const Default = () => {
     </div>
   );
 };
+Default.storyName = 'MultiSelect';
 
 export const WithInitialSelectedItems = () => {
   return (

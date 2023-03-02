@@ -11,7 +11,7 @@ import { Layer } from '../Layer';
 import mdx from './Dropdown.mdx';
 
 export default {
-  title: 'Components/Dropdown',
+  title: 'Components/Dropdown/Dropdown',
   component: Dropdown,
   subcomponents: {
     DropdownSkeleton,
@@ -165,8 +165,9 @@ export const Default = () => (
     />
   </div>
 );
+Default.storyName = 'Dropdown';
 
-export const Inline = () => (
+export const InlineDropdown = () => (
   <div style={{ width: 600 }}>
     <Dropdown
       id="inline"
@@ -180,7 +181,7 @@ export const Inline = () => (
   </div>
 );
 
-export const WithLayer = () => (
+export const DropdownWithLayer = () => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -216,7 +217,7 @@ export const WithLayer = () => (
   </div>
 );
 
-export const InlineWithLayer = () => (
+export const InlineDropdownWithLayer = () => (
   <div style={{ width: 600 }}>
     <Dropdown
       id="inline"
