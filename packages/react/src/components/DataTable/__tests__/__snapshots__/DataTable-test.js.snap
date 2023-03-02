@@ -938,7 +938,7 @@ exports[`DataTable selection should have select-all default to un-checked if no 
                         scope="col"
                       >
                         <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select all rows"
+                          aria-label="Select all rows"
                           checked={false}
                           id="data-table-7__select-all"
                           indeterminate={false}
@@ -1342,7 +1342,7 @@ exports[`DataTable selection should render 1`] = `
                         scope="col"
                       >
                         <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select all rows"
+                          aria-label="Select all rows"
                           checked={false}
                           id="data-table-6__select-all"
                           indeterminate={false}
@@ -1436,7 +1436,7 @@ exports[`DataTable selection should render 1`] = `
                         className="cds--table-column-checkbox"
                       >
                         <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select row"
+                          aria-label="Select row"
                           checked={false}
                           disabled={false}
                           id="data-table-6__select-row-b"
@@ -1499,7 +1499,7 @@ exports[`DataTable selection should render 1`] = `
                         className="cds--table-column-checkbox"
                       >
                         <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select row"
+                          aria-label="Select row"
                           checked={false}
                           disabled={false}
                           id="data-table-6__select-row-a"
@@ -1562,7 +1562,7 @@ exports[`DataTable selection should render 1`] = `
                         className="cds--table-column-checkbox"
                       >
                         <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select row"
+                          aria-label="Select row"
                           checked={false}
                           disabled={false}
                           id="data-table-6__select-row-c"
