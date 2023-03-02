@@ -310,6 +310,7 @@ export default class FileUploader extends PureComponent<FileUploaderProps> {
           {labelDescription}
         </p>
         <FileUploaderButton
+          //@ts-ignore
           innerRef={this.uploaderButton}
           disabled={disabled}
           labelText={buttonLabel}

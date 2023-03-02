@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, { useRef, useState } from 'react';
 import { matches, keys } from '../../internal/keyboard';
 import { ButtonKinds } from '../../prop-types/types';
@@ -17,22 +17,105 @@ import deprecate from '../../prop-types/deprecate';
 
 function noop() {}
 
-function FileUploaderButton({
-  accept,
-  buttonKind = 'primary',
-  className,
-  disabled = false,
-  disableLabelChanges = false,
-  id,
-  labelText: ownerLabelText = 'Add file',
-  multiple = false,
-  onChange = noop,
-  name,
-  size = 'md',
-  // eslint-disable-next-line react/prop-types
-  innerRef,
-  ...other
-}) {
+let sizes = FeatureFlags.enabled('enable-v11-release')
+  ? ['sm', 'md', 'lg']
+  : ['default', 'field', 'small', 'sm', 'md', 'lg'];
+export interface FileUploaderButtonProps {
+  /**
+   * Specify the types of files that this input should be able to receive
+   */
+  accept?: string[];
+
+  /**
+   * Specify the type of underlying button
+   */
+  buttonKind?: typeof ButtonKinds[number];
+
+  /**
+   * Provide a custom className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify whether you want to disable any updates to the FileUploaderButton
+   * label
+   */
+  disableLabelChanges?: boolean;
+
+  /**
+   * Specify whether file input is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide a unique id for the underlying `<input>` node
+   */
+  id?: string;
+
+  /**
+   * Provide the label text to be read by screen readers when interacting with
+   * this control
+   */
+  labelText?: ReactNodeLike;
+
+  /**
+   * Specify if the component should accept multiple files to upload
+   */
+  multiple?: boolean;
+
+  /**
+   * Provide a name for the underlying `<input>` node
+   */
+  name?: string;
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the `<input>`
+   * value changes
+   */
+  onChange?: any; //todo PropTypes.func,
+
+  /**
+   * Provide an optional `onClick` hook that is called each time the button is
+   * clicked
+   */
+  onClick?: any; //todo PropTypes.func,
+
+  /**
+   * Provide an accessibility role for the `<FileUploaderButton>`
+   */
+  role?: string;
+
+  /**
+   * Specify the size of the FileUploaderButton, from a list of available
+   * sizes.
+   */
+  size: typeof sizes[number];
+
+  /**
+   * Provide a custom tabIndex value for the `<FileUploaderButton>`
+   * @deprecated The `tabIndex` prop for `FileUploaderButton` has been deprecated since it now renders a button element by default.
+   */
+  tabIndex: number;
+}
+
+function FileUploaderButton(props: FileUploaderButtonProps) {
+  const {
+    accept,
+    buttonKind = 'primary',
+    className,
+    disabled = false,
+    disableLabelChanges = false,
+    id,
+    labelText: ownerLabelText = 'Add file',
+    multiple = false,
+    onChange = noop,
+    name,
+    size = 'md',
+    // eslint-disable-next-line react/prop-types
+    // @ts-ignore
+    innerRef,
+    ...other
+  } = props;
   const prefix = usePrefix();
   const [labelText, setLabelText] = useState(ownerLabelText);
   const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
@@ -54,11 +137,13 @@ function FileUploaderButton({
 
   function onClick(event) {
     event.target.value = null;
+    //@ts-ignore
     inputNode.current.click();
   }
 
   function onKeyDown(event) {
     if (matches(event, [keys.Enter, keys.Space])) {
+      //@ts-ignore
       inputNode.current.click();
     }
   }
@@ -99,8 +184,9 @@ function FileUploaderButton({
         id={inputId}
         disabled={disabled}
         type="file"
-        tabIndex="-1"
+        tabIndex={-1}
         multiple={multiple}
+        //@ts-ignore
         accept={accept}
         name={name}
         onChange={handleOnChange}
