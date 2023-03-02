@@ -23,6 +23,7 @@ export default {
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
+    ['aria-label']: 'closes notification',
     ariaLabel: 'closes notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
@@ -44,6 +45,11 @@ export const Playground = (args) => <ToastNotification {...args} />;
 
 Playground.argTypes = {
   actionButtonLabel: {
+    table: {
+      disable: true,
+    },
+  },
+  ['aria-label']: {
     table: {
       disable: true,
     },
