@@ -8,14 +8,102 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import * as FeatureFlags from '@carbon/feature-flags';
-import React from 'react';
+import React, { PureComponent } from 'react';
 import Filename from './Filename';
 import FileUploaderButton from './FileUploaderButton';
 import { ButtonKinds } from '../../prop-types/types';
 import { keys, matches } from '../../internal/keyboard';
 import { PrefixContext } from '../../internal/usePrefix';
 
-export default class FileUploader extends React.Component {
+let sizes = FeatureFlags.enabled('enable-v11-release')
+  ? ['sm', 'md', 'lg']
+  : ['default', 'field', 'small', 'sm', 'md', 'lg'];
+export interface FileUploaderProps {
+  /**
+   * Specify the types of files that this input should be able to receive
+   */
+  accept?: string[];
+
+  /**
+   * Specify the type of the `<FileUploaderButton>`
+   */
+  buttonKind: typeof ButtonKinds[number]; //todo PropTypes.oneOf(ButtonKinds),
+
+  /**
+   * Provide the label text to be read by screen readers when interacting with
+   * the `<FileUploaderButton>`
+   */
+  buttonLabel?: string;
+
+  /**
+   * Provide a custom className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify whether file input is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify the status of the File Upload
+   */
+  filenameStatus: 'edit' | 'complete' | 'uploading';
+
+  /**
+   * Provide a description for the complete/close icon that can be read by screen readers
+   */
+  iconDescription: any; //todo
+  // FeatureFlags.enabled('enable-v11-release')
+  //   ? PropTypes.string.isRequired
+  //   : PropTypes.string,
+
+  /**
+   * Specify the description text of this `<FileUploader>`
+   */
+  labelDescription?: string;
+
+  /**
+   * Specify the title text of this `<FileUploader>`
+   */
+  labelTitle?: string;
+
+  /**
+   * Specify if the component should accept multiple files to upload
+   */
+  multiple?: boolean;
+
+  /**
+   * Provide a name for the underlying `<input>` node
+   */
+  name?: string;
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the input is
+   * changed
+   */
+  onChange?: (evt: any) => void; //todoPropTypes.func,
+
+  /**
+   * Provide an optional `onClick` hook that is called each time the
+   * FileUploader is clicked
+   */
+  onClick?: (evt: any) => void; //todo PropTypes.func,
+
+  /**
+   * Provide an optional `onDelete` hook that is called when an uploaded item
+   * is removed
+   */
+  onDelete?: (evt: unknown) => void; //todo PropTypes.func,
+
+  /**
+   * Specify the size of the FileUploaderButton, from a list of available
+   * sizes.
+   */
+  size: typeof sizes[number]; //todo: better way?
+}
+
+export default class FileUploader extends PureComponent<FileUploaderProps> {
   static propTypes = {
     /**
      * Specify the types of files that this input should be able to receive
@@ -138,7 +226,7 @@ export default class FileUploader extends React.Component {
 
   handleChange = (evt) => {
     evt.stopPropagation();
-    const filenames = Array.prototype.map.call(
+    const filenames: any = Array.prototype.map.call(
       evt.target.files,
       (file) => file.name
     );
@@ -156,14 +244,18 @@ export default class FileUploader extends React.Component {
     if (filenameStatus === 'edit') {
       evt.stopPropagation();
       const filteredArray = this.state.filenames.filter(
+        // @ts-ignore
         (filename) => filename !== this.nodes[index].innerText.trim()
       );
       this.setState({ filenames: filteredArray });
       if (this.props.onDelete) {
         this.props.onDelete(evt);
+        // @ts-ignore
         this.uploaderButton.current.focus();
       }
-      this.props.onClick(evt);
+      if (this.props.onClick) {
+        this.props.onClick(evt);
+      }
     }
   };
 
@@ -194,7 +286,7 @@ export default class FileUploader extends React.Component {
 
     const classes = classNames({
       [`${prefix}--form-item`]: true,
-      [className]: className,
+      [className ?? '']: className,
     });
 
     const getHelperLabelClasses = (baseClass) =>
@@ -236,12 +328,14 @@ export default class FileUploader extends React.Component {
                 <span
                   key={index}
                   className={selectedFileClasses}
-                  ref={(node) => (this.nodes[index] = node)} // eslint-disable-line
+                  // @ts-ignore
+                  ref={(node) => (this.nodes[index] = node)}
                   {...other}>
                   <p className={`${prefix}--file-filename`} id={name}>
                     {name}
                   </p>
                   <span className={`${prefix}--file__state-container`}>
+                    {/* @ts-ignore */}
                     <Filename
                       iconDescription={iconDescription}
                       aria-describedby={name}
