@@ -19,6 +19,13 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
 
 const spacing = 4; // top and bottom spacing between the button and the menu. in px
+const defaultTranslations = {
+  'carbon.combo-button.additional-actions': 'Additional actions',
+};
+
+function defaultTranslateWithId(messageId) {
+  return defaultTranslations[messageId];
+}
 
 function ComboButton({
   children,
@@ -27,6 +34,7 @@ function ComboButton({
   label,
   onClick,
   size = 'md',
+  translateWithId: t = defaultTranslateWithId,
 }) {
   const id = useId('combobutton');
   const prefix = usePrefix();
@@ -81,7 +89,7 @@ function ComboButton({
       </Button>
       <IconButton
         className={triggerClasses}
-        label="Additional actions"
+        label={t('carbon.combo-button.additional-actions')}
         size={size}
         disabled={disabled}
         aria-haspopup
@@ -97,7 +105,7 @@ function ComboButton({
         style={{
           width: `${width}px`,
         }}
-        label="Additional actions"
+        label={t('carbon.combo-button.additional-actions')}
         size={size}
         open={open}
         onClose={handleClose}
@@ -139,6 +147,12 @@ ComboButton.propTypes = {
    * Specify the size of the buttons and menu.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
+   * Optional method that takes in a message id and returns an
+   * internationalized string.
+   */
+  translateWithId: PropTypes.func,
 };
 
 export { ComboButton };

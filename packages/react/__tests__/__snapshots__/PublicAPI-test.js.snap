@@ -9042,6 +9042,9 @@ Map {
         ],
         "type": "oneOf",
       },
+      "translateWithId": Object {
+        "type": "func",
+      },
     },
   },
   "unstable_FeatureFlags" => Object {
