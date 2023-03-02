@@ -14,18 +14,71 @@ import uid from '../../tools/uniqueId';
 import { usePrefix } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
 
-function FileUploaderItem({
-  uuid,
-  name,
-  status,
-  iconDescription,
-  onDelete,
-  invalid,
-  errorSubject,
-  errorBody,
-  size,
-  ...other
-}) {
+let sizes = FeatureFlags.enabled('enable-v11-release')
+  ? ['sm', 'md', 'lg']
+  : ['default', 'field', 'small', 'sm', 'md', 'lg'];
+export interface FileUploaderItemProps {
+  /**
+   * Error message body for an invalid file upload
+   */
+  errorBody?: string;
+
+  /**
+   * Error message subject for an invalid file upload
+   */
+  errorSubject?: string;
+
+  /**
+   * Description of status icon (displayed in native tooltip)
+   */
+  iconDescription?: string;
+
+  /**
+   * Specify if the currently uploaded file is invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Name of the uploaded file
+   */
+  name?: string;
+
+  /**
+   * Event handler that is called after removing a file from the file uploader
+   * The event handler signature looks like `onDelete(evt, { uuid })`
+   */
+  onDelete?: any; // todoPropTypes.func,
+
+  /**
+   * Specify the size of the FileUploaderButton, from a list of available
+   * sizes.
+   */
+  size?: typeof sizes[number];
+
+  /**
+   * Status of the file upload
+   */
+  status?: 'uploading' | 'edit' | 'complete';
+
+  /**
+   * Unique identifier for the file object
+   */
+  uuid?: string;
+}
+
+function FileUploaderItem(props: FileUploaderItemProps) {
+  const {
+    uuid,
+    name,
+    status,
+    iconDescription,
+    onDelete,
+    invalid,
+    errorSubject,
+    errorBody,
+    size,
+    ...other
+  } = props;
   const prefix = usePrefix();
   const { current: id } = useRef(uuid || uid());
   const classes = cx(`${prefix}--file__selected-file`, {
@@ -44,6 +97,7 @@ function FileUploaderItem({
           aria-describedby={name}
           status={status}
           invalid={invalid}
+          // @ts-ignore
           onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
