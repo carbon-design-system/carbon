@@ -14,9 +14,10 @@ import { Button } from '../Button';
 import { IconButton } from '../IconButton';
 import { Menu } from '../Menu';
 
-import { useId } from '../../internal/useId';
-import { usePrefix } from '../../internal/usePrefix';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
+import { useId } from '../../internal/useId';
+import { useMergedRefs } from '../../internal/useMergedRefs';
+import { usePrefix } from '../../internal/usePrefix';
 
 const spacing = 4; // top and bottom spacing between the button and the menu. in px
 const defaultTranslations = {
@@ -27,20 +28,25 @@ function defaultTranslateWithId(messageId) {
   return defaultTranslations[messageId];
 }
 
-function ComboButton({
-  children,
-  className,
-  disabled,
-  label,
-  onClick,
-  size = 'md',
-  tooltipAlign,
-  translateWithId: t = defaultTranslateWithId,
-}) {
+const ComboButton = React.forwardRef(function ComboButton(
+  {
+    children,
+    className,
+    disabled,
+    label,
+    onClick,
+    size = 'md',
+    tooltipAlign,
+    translateWithId: t = defaultTranslateWithId,
+    ...rest
+  },
+  forwardRef
+) {
   const id = useId('combobutton');
   const prefix = usePrefix();
 
   const containerRef = useRef(null);
+  const ref = useMergedRefs([forwardRef, containerRef]);
   const [width, setWidth] = useState(0);
   const {
     open,
@@ -80,7 +86,7 @@ function ComboButton({
   const triggerClasses = classNames(`${prefix}--combo-button__trigger`);
 
   return (
-    <div className={containerClasses} ref={containerRef}>
+    <div {...rest} className={containerClasses} ref={ref}>
       <Button
         className={primaryActionClasses}
         size={size}
@@ -98,7 +104,7 @@ function ComboButton({
         aria-expanded={open}
         onClick={handleTriggerClick}
         onMouseDown={handleTriggerMousedown}
-        aria-owns={id}>
+        aria-owns={open ? id : null}>
         <ChevronDown />
       </IconButton>
       <Menu
@@ -117,7 +123,7 @@ function ComboButton({
       </Menu>
     </div>
   );
-}
+});
 
 ComboButton.propTypes = {
   /**

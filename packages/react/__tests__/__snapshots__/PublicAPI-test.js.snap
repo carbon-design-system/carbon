@@ -9014,6 +9014,7 @@ Map {
     "9": "warm-gray",
   },
   "unstable_ComboButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
       "children": Object {
         "isRequired": true,
@@ -9061,6 +9062,7 @@ Map {
         "type": "func",
       },
     },
+    "render": [Function],
   },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
