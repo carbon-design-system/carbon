@@ -23,7 +23,6 @@ function useIsTruncated(ref) {
 }
 
 export interface ListBoxMenuItemProps extends ReactAttr<HTMLDivElement> {
-
   /**
    * Specify whether the current menu item is "active".
    */
@@ -33,46 +32,52 @@ export interface ListBoxMenuItemProps extends ReactAttr<HTMLDivElement> {
    * Specify whether the current menu item is "highlighted".
    */
   isHighlighted?: boolean;
-
 }
 
-export type ListBoxMenuItemForwardedRef = ForwardedRef<HTMLDivElement> & {
-    menuItemOptionRef?: React.Ref<HTMLDivElement>;
-  } | null;
+export type ListBoxMenuItemForwardedRef =
+  | (ForwardedRef<HTMLDivElement> & {
+      menuItemOptionRef?: React.Ref<HTMLDivElement>;
+    })
+  | null;
 
-export type ListBoxMenuItemComponent = ForwardRefReturn<ListBoxMenuItemForwardedRef, ListBoxMenuItemProps>;
+export type ListBoxMenuItemComponent = ForwardRefReturn<
+  ListBoxMenuItemForwardedRef,
+  ListBoxMenuItemProps
+>;
 
 /**
  * `ListBoxMenuItem` is a helper component for managing the container class
  * name, alongside any classes for any corresponding states, for a generic list
  * box menu item.
  */
-const ListBoxMenuItem = React.forwardRef<HTMLDivElement, ListBoxMenuItemProps>(function ListBoxMenuItem(
-  { children, isActive, isHighlighted, title, ...rest }: ListBoxMenuItemProps,
-  forwardedRef: ListBoxMenuItemForwardedRef
-) {
-  const prefix = usePrefix();
-  const ref = useRef(null);
-  const isTruncated = useIsTruncated(forwardedRef?.menuItemOptionRef || ref);
-  const className = cx(`${prefix}--list-box__menu-item`, {
-    [`${prefix}--list-box__menu-item--active`]: isActive,
-    [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
-  });
+const ListBoxMenuItem = React.forwardRef<HTMLDivElement, ListBoxMenuItemProps>(
+  function ListBoxMenuItem(
+    { children, isActive, isHighlighted, title, ...rest }: ListBoxMenuItemProps,
+    forwardedRef: ListBoxMenuItemForwardedRef
+  ) {
+    const prefix = usePrefix();
+    const ref = useRef(null);
+    const isTruncated = useIsTruncated(forwardedRef?.menuItemOptionRef || ref);
+    const className = cx(`${prefix}--list-box__menu-item`, {
+      [`${prefix}--list-box__menu-item--active`]: isActive,
+      [`${prefix}--list-box__menu-item--highlighted`]: isHighlighted,
+    });
 
-  return (
-    <div
-      {...rest}
-      className={className}
-      title={isTruncated ? title : undefined}
-      tabIndex={-1}>
+    return (
       <div
-        className={`${prefix}--list-box__menu-item__option`}
-        ref={forwardedRef?.menuItemOptionRef || ref}>
-        {children}
+        {...rest}
+        className={className}
+        title={isTruncated ? title : undefined}
+        tabIndex={-1}>
+        <div
+          className={`${prefix}--list-box__menu-item__option`}
+          ref={forwardedRef?.menuItemOptionRef || ref}>
+          {children}
+        </div>
       </div>
-    </div>
-  );
-});
+    );
+  }
+);
 
 ListBoxMenuItem.displayName = 'ListBoxMenuItem';
 ListBoxMenuItem.propTypes = {
