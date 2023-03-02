@@ -6,11 +6,16 @@
  */
 
 import './story.scss';
-import { Checkbox } from '@carbon/icons-react';
+import { Checkbox as CheckboxIcon } from '@carbon/icons-react';
 import React, { useState } from 'react';
 import { Popover, PopoverContent } from '../Popover';
+import RadioButton from '../RadioButton';
+import RadioButtonGroup from '../RadioButtonGroup';
+import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
+
+const prefix = 'cds';
 
 export default {
   title: 'Components/Popover',
@@ -60,7 +65,7 @@ const PlaygroundStory = (props) => {
       highContrast={highContrast}
       open={open}>
       <div className="playground-trigger">
-        <Checkbox />
+        <CheckboxIcon />
       </div>
       <PopoverContent className="p-3">
         <p className="popover-title">Available storage</p>
@@ -74,23 +79,91 @@ const PlaygroundStory = (props) => {
 
 export const TabTip = () => {
   const [open, setOpen] = useState(false);
+  const [openTwo, setOpenTwo] = useState(false);
   return (
-    <Popover open={open} isTabTip autoAlign>
-      <button
-        type="button"
-        onClick={() => {
-          setOpen(!open);
-        }}>
-        <Settings />
-      </button>
+    <div
+      className="popover-tabtip-story"
+      style={{ display: 'flex', justifyContent: 'space-between' }}>
+      <Popover open={open} isTabTip>
+        <button
+          aria-label="Settings"
+          type="button"
+          onClick={() => {
+            setOpen(!open);
+          }}>
+          <Settings />
+        </button>
+        <PopoverContent className="p-3">
+          <RadioButtonGroup
+            style={{ alignItems: 'flex-start', flexDirection: 'column' }}
+            legendText="Row height"
+            name="radio-button-group"
+            defaultSelected="small">
+            <RadioButton labelText="Small" value="small" id="radio-small" />
+            <RadioButton labelText="Large" value="large" id="radio-large" />
+          </RadioButtonGroup>
+          <hr />
+          <fieldset className={`${prefix}--fieldset`}>
+            <legend className={`${prefix}--label`}>Edit columns</legend>
+            <Checkbox defaultChecked labelText="Name" id="checkbox-label-1" />
+            <Checkbox defaultChecked labelText="Type" id="checkbox-label-2" />
+            <Checkbox
+              defaultChecked
+              labelText="Location"
+              id="checkbox-label-3"
+            />
+            <Checkbox
+              defaultChecked
+              labelText="Public IP"
+              id="checkbox-label-4"
+            />
+            <Checkbox labelText="Private IP" id="checkbox-label-5" />
+            <Checkbox labelText="Start date" id="checkbox-label-6" />
+            <Checkbox labelText="Description" id="checkbox-label-7" />
+          </fieldset>
+        </PopoverContent>
+      </Popover>
 
-      <PopoverContent className="p-3">
-        <p className="popover-title">Available storage</p>
-        <p className="popover-details">
-          This server has 150 GB of block storage remaining.
-        </p>
-      </PopoverContent>
-    </Popover>
+      <Popover open={openTwo} isTabTip align="bottom-right">
+        <button
+          aria-label="Settings"
+          type="button"
+          onClick={() => {
+            setOpenTwo(!openTwo);
+          }}>
+          <Settings />
+        </button>
+        <PopoverContent className="p-3">
+          <RadioButtonGroup
+            style={{ alignItems: 'flex-start', flexDirection: 'column' }}
+            legendText="Row height"
+            name="radio-button-group-2"
+            defaultSelected="small-2">
+            <RadioButton labelText="Small" value="small-2" id="radio-small-2" />
+            <RadioButton labelText="Large" value="large-2" id="radio-large-2" />
+          </RadioButtonGroup>
+          <hr />
+          <fieldset className={`${prefix}--fieldset`}>
+            <legend className={`${prefix}--label`}>Edit columns</legend>
+            <Checkbox defaultChecked labelText="Name" id="checkbox-label-8" />
+            <Checkbox defaultChecked labelText="Type" id="checkbox-label-9" />
+            <Checkbox
+              defaultChecked
+              labelText="Location"
+              id="checkbox-label-10"
+            />
+            <Checkbox
+              defaultChecked
+              labelText="Public IP"
+              id="checkbox-label-11"
+            />
+            <Checkbox labelText="Private IP" id="checkbox-label-12" />
+            <Checkbox labelText="Start date" id="checkbox-label-13" />
+            <Checkbox labelText="Description" id="checkbox-label-14" />
+          </fieldset>
+        </PopoverContent>
+      </Popover>
+    </div>
   );
 };
 
@@ -164,7 +237,7 @@ export const AutoAlign = () => {
         }}>
         <Popover open={open} autoAlign>
           <div className="playground-trigger">
-            <Checkbox
+            <CheckboxIcon
               onClick={() => {
                 setOpen(!open);
               }}
@@ -180,7 +253,7 @@ export const AutoAlign = () => {
       </div>
       <Popover open autoAlign>
         <div className="playground-trigger">
-          <Checkbox />
+          <CheckboxIcon />
         </div>
         <PopoverContent className="p-3">
           <p className="popover-title">Available storage</p>
@@ -192,7 +265,7 @@ export const AutoAlign = () => {
       <div style={{ position: 'absolute', top: 0, right: 0, margin: '3rem' }}>
         <Popover open autoAlign>
           <div className="playground-trigger">
-            <Checkbox />
+            <CheckboxIcon />
           </div>
           <PopoverContent className="p-3">
             <p className="popover-title">Available storage</p>
@@ -206,7 +279,7 @@ export const AutoAlign = () => {
         style={{ position: 'absolute', bottom: 0, right: 0, margin: '3rem' }}>
         <Popover open autoAlign>
           <div className="playground-trigger">
-            <Checkbox />
+            <CheckboxIcon />
           </div>
           <PopoverContent className="p-3">
             <p className="popover-title">Available storage</p>
@@ -219,7 +292,7 @@ export const AutoAlign = () => {
       <div style={{ position: 'absolute', bottom: 0, left: 0, margin: '3rem' }}>
         <Popover open autoAlign>
           <div className="playground-trigger">
-            <Checkbox />
+            <CheckboxIcon />
           </div>
           <PopoverContent className="p-3">
             <p className="popover-title">Available storage</p>

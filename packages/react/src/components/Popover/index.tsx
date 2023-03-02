@@ -140,7 +140,7 @@ const Popover = React.forwardRef(
         [`${prefix}--popover--open`]: open,
         [`${prefix}--popover--${autoAlignment}`]: autoAligned && !isTabTip,
         [`${prefix}--popover--${align}`]: !autoAligned,
-        [`${prefix}--popover--tabtip`]: isTabTip,
+        [`${prefix}--popover--tab-tip`]: isTabTip,
       },
       customClassName
     );
@@ -272,10 +272,28 @@ const Popover = React.forwardRef(
     }, [autoAligned, align, autoAlign, prefix, open, isTabTip]);
 
     const BaseComponent: React.ElementType<any> = as ?? 'span';
+
+    const mappedChildren = React.Children.map(children, (child) => {
+      const item = child as any;
+
+      if (item?.type === 'button') {
+        const { className } = item.props;
+        const tabTipClasses = cx(
+          `${prefix}--popover--tab-tip__button`,
+          className
+        );
+        return React.cloneElement(item, {
+          className: tabTipClasses,
+        });
+      } else {
+        return item;
+      }
+    });
+
     return (
       <PopoverContext.Provider value={value}>
         <BaseComponent {...rest} className={className} ref={ref}>
-          {children}
+          {isTabTip ? mappedChildren : children}
         </BaseComponent>
       </PopoverContext.Provider>
     );
