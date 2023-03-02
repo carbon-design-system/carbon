@@ -13,26 +13,32 @@ import { ChevronDown } from '@carbon/icons-react';
 import { Button } from '../Button';
 import { Menu } from '../Menu';
 
-import { useId } from '../../internal/useId';
-import { usePrefix } from '../../internal/usePrefix';
 import { useAttachedMenu } from '../../internal/useAttachedMenu';
+import { useId } from '../../internal/useId';
+import { useMergedRefs } from '../../internal/useMergedRefs';
+import { usePrefix } from '../../internal/usePrefix';
 
 const spacing = 4; // top and bottom spacing between the button and the menu. in px
 const validButtonKinds = ['primary', 'tertiary', 'ghost'];
 const defaultButtonKind = 'primary';
 
-function MenuButton({
-  children,
-  className,
-  disabled,
-  kind = defaultButtonKind,
-  label,
-  size = 'md',
-}) {
+const MenuButton = React.forwardRef(function MenuButton(
+  {
+    children,
+    className,
+    disabled,
+    kind = defaultButtonKind,
+    label,
+    size = 'md',
+    ...rest
+  },
+  forwardRef
+) {
   const id = useId('MenuButton');
   const prefix = usePrefix();
 
-  const containerRef = useRef(null);
+  const triggerRef = useRef(null);
+  const ref = useMergedRefs([forwardRef, triggerRef]);
   const [width, setWidth] = useState(0);
   const {
     open,
@@ -41,11 +47,11 @@ function MenuButton({
     handleClick: hookOnClick,
     handleMousedown,
     handleClose,
-  } = useAttachedMenu(containerRef);
+  } = useAttachedMenu(triggerRef);
 
   function handleClick() {
-    if (containerRef.current) {
-      const { width: w } = containerRef.current.getBoundingClientRect();
+    if (triggerRef.current) {
+      const { width: w } = triggerRef.current.getBoundingClientRect();
       setWidth(w);
       hookOnClick();
     }
@@ -64,7 +70,8 @@ function MenuButton({
   return (
     <>
       <Button
-        ref={containerRef}
+        {...rest}
+        ref={ref}
         className={triggerClasses}
         size={size}
         kind={buttonKind}
@@ -93,7 +100,7 @@ function MenuButton({
       </Menu>
     </>
   );
-}
+});
 
 MenuButton.propTypes = {
   /**
