@@ -59,8 +59,8 @@ export default (config) => (fp) => {
     if (inputTo === target && fp.selectedDates[1]) {
       // Using getTime() enables the ability to more readily compare the date currently
       // selected in the calendar and the date currently in the value of the input
-      const selectedToDate = new Date(fp.selectedDates[1]).getTime();
-      const currentValueToDate = new Date(inputTo.value).getTime();
+      const selectedToDate = new Date(fp.selectedDates[1]).setHours(0, 0, 0, 0);
+      const currentValueToDate = new Date(inputTo.value).setHours(0, 0, 0, 0);
 
       // The date should only be set if both dates are valid dates, and they don't match.
       // When they don't match, this indiciates that the date selected in the calendar is stale,
