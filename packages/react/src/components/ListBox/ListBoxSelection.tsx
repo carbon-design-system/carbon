@@ -18,7 +18,9 @@ export interface ListBoxSelectionProps {
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
    */
-  clearSelection(event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>): void;
+  clearSelection(
+    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
+  ): void;
 
   /**
    * Specify whether or not the clear selection element should be disabled
@@ -29,7 +31,9 @@ export interface ListBoxSelectionProps {
    * Specify an optional `onClearSelection` handler that is called when the underlying
    * element is cleared
    */
-  onClearSelection?(event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>): void;
+  onClearSelection?(
+    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
+  ): void;
 
   /**
    * Whether or not the Dropdown is readonly
@@ -50,7 +54,7 @@ export interface ListBoxSelectionProps {
   translateWithId(messageId: string, args?: Record<string, unknown>): string;
 }
 
-export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>
+export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
@@ -133,7 +137,7 @@ const ListBoxSelection: ListBoxSelectionComponent = ({
       <Close />
     </div>
   );
-}
+};
 
 export const translationIds = {
   'clear.all': 'clear.all',
