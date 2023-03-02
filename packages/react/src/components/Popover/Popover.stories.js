@@ -78,7 +78,7 @@ const PlaygroundStory = (props) => {
 };
 
 export const TabTip = () => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
   return (
     <div
