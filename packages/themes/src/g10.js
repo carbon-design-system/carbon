@@ -109,14 +109,14 @@ export const fieldHover03 = whiteHover;
 
 // Border
 // border-subtle-00
-export const borderSubtle00 = gray20;
+export const borderSubtle00 = gray30;
 
 // border-subtle-01
 export const borderSubtle01 = gray20;
 export const borderSubtleSelected01 = gray30;
 
 // border-subtle-02
-export const borderSubtle02 = gray20;
+export const borderSubtle02 = gray30;
 export const borderSubtleSelected02 = gray30;
 
 // border-subtle-03
