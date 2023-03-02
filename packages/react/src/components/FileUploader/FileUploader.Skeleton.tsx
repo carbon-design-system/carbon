@@ -12,7 +12,15 @@ import SkeletonText from '../SkeletonText';
 import ButtonSkeleton from '../Button/Button.Skeleton';
 import { usePrefix } from '../../internal/usePrefix';
 
-function FileUploaderSkeleton({ className, ...rest }) {
+export interface FileUploaderSkeletonProps {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
+
+function FileUploaderSkeleton(props: FileUploaderSkeletonProps) {
+  const { className, ...rest } = props;
   const prefix = usePrefix();
   return (
     <div className={cx(`${prefix}--form-item`, className)} {...rest}>

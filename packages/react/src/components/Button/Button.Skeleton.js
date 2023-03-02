@@ -11,6 +11,7 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import * as FeatureFlags from '@carbon/feature-flags';
 
+/** @type any */
 const ButtonSkeleton = ({
   className,
   small = false,

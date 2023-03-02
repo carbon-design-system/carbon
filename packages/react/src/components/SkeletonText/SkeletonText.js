@@ -18,6 +18,7 @@ function getRandomInt(min, max, n) {
   return Math.floor(randoms[n % 3] * (max - min + 1)) + min;
 }
 
+/** @type any */
 const SkeletonText = ({
   paragraph,
   lineCount,
