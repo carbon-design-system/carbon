@@ -13,7 +13,7 @@ import { FormContext } from './FormContext';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
-export type FluidFormProps = ReactAttr<HTMLFormElement>
+export type FluidFormProps = ReactAttr<HTMLFormElement>;
 
 const FluidForm: React.FC<FluidFormProps> = ({
   className,
@@ -30,7 +30,7 @@ const FluidForm: React.FC<FluidFormProps> = ({
       </Form>
     </FormContext.Provider>
   );
-}
+};
 
 FluidForm.propTypes = {
   /**
