@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -19,7 +19,7 @@ describe('scss/components/structured-list', () => {
         @use 'sass:map';
         @use 'sass:meta';
         @use '../structured-list';
-  
+
         $_: get('mixin', meta.mixin-exists('structured-list', 'structured-list'));
       `);
     expect(unwrap('mixin')).toBe(true);
