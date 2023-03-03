@@ -11,18 +11,22 @@ import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
 export interface SliderSkeletonProps extends HTMLAttributes<HTMLDivElement> {
- /**
+  /**
    * Specify an optional className to add to the form item wrapper.
    */
- className?: string;
+  className?: string;
 
- /**
-  * Specify whether the label should be hidden, or not
-  */
- hideLabel?: boolean;
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel?: boolean;
 }
 
-const SliderSkeleton = ({ hideLabel, className, ...rest }: SliderSkeletonProps) => {
+const SliderSkeleton = ({
+  hideLabel,
+  className,
+  ...rest
+}: SliderSkeletonProps) => {
   const prefix = usePrefix();
   return (
     <div className={cx(`${prefix}--form-item`, className)} {...rest}>
