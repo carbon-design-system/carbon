@@ -81,9 +81,7 @@ export const TabTip = () => {
   const [open, setOpen] = useState(true);
   const [openTwo, setOpenTwo] = useState(false);
   return (
-    <div
-      className="popover-tabtip-story"
-      style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div className="popover-tabtip-story" style={{ display: 'flex' }}>
       <Popover open={open} isTabTip>
         <button
           aria-label="Settings"
@@ -112,14 +110,6 @@ export const TabTip = () => {
               labelText="Location"
               id="checkbox-label-3"
             />
-            <Checkbox
-              defaultChecked
-              labelText="Public IP"
-              id="checkbox-label-4"
-            />
-            <Checkbox labelText="Private IP" id="checkbox-label-5" />
-            <Checkbox labelText="Start date" id="checkbox-label-6" />
-            <Checkbox labelText="Description" id="checkbox-label-7" />
           </fieldset>
         </PopoverContent>
       </Popover>
@@ -152,14 +142,6 @@ export const TabTip = () => {
               labelText="Location"
               id="checkbox-label-10"
             />
-            <Checkbox
-              defaultChecked
-              labelText="Public IP"
-              id="checkbox-label-11"
-            />
-            <Checkbox labelText="Private IP" id="checkbox-label-12" />
-            <Checkbox labelText="Start date" id="checkbox-label-13" />
-            <Checkbox labelText="Description" id="checkbox-label-14" />
           </fieldset>
         </PopoverContent>
       </Popover>
