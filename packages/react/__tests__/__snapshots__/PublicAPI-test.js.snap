@@ -8528,7 +8528,9 @@ Map {
       "labelB": Object {
         "type": "node",
       },
-      "labelText": [Function],
+      "labelText": Object {
+        "type": "string",
+      },
       "onClick": Object {
         "type": "func",
       },
