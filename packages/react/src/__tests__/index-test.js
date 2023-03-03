@@ -222,6 +222,7 @@ describe('Carbon Components React', () => {
         "VStack",
         "types",
         "unstable_FeatureFlags",
+        "unstable_Layout",
         "unstable_LayoutDirection",
         "unstable_Menu",
         "unstable_MenuItem",

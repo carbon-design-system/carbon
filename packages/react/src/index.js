@@ -258,6 +258,7 @@ export { FluidTimePickerSelect as unstable__FluidTimePickerSelect } from './comp
 export { Heading, Section } from './components/Heading';
 export { IconButton } from './components/IconButton';
 export { Layer, useLayer } from './components/Layer';
+export { Layout as unstable_Layout } from './components/Layout';
 export {
   LayoutDirection as unstable_LayoutDirection,
   useLayoutDirection as unstable_useLayoutDirection,

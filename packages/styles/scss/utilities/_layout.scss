@@ -1,0 +1,78 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use 'sass:map';
+
+@use '../spacing' as *;
+@use './custom-property';
+@use './convert' as *;
+
+$tokens: (
+  size: (
+    xs: rem(24px),
+    sm: rem(32px),
+    md: rem(40px),
+    lg: rem(48px),
+    xl: rem(64px),
+    2xl: rem(80px),
+  ),
+  density: (
+    condensed: $spacing-03,
+    normal: $spacing-05,
+  ),
+);
+
+/// Get the appropriate size token for the current layout context
+/// @param {String} $default - The default size of the component if no layout was specified
+/// @param {String} $min - The minimum size of the component
+/// @param {String} $max - The maximum size of the component
+/// @returns {String}
+/// @example height: size($default: 'md', $min: 'sm', $max: 'xl');
+/// @group utilities
+@function size($default, $min: null, $max: null) {
+  $min-token: custom-property.get-var('layout-size-#{$min}');
+  $max-token: custom-property.get-var('layout-size-#{$max}');
+  $fallback-token: custom-property.get-var('layout-size-#{$default}');
+
+  $token: custom-property.get-var('layout-size', $fallback-token);
+
+  @if $min and $max {
+    @return clamp($min-token, $token, $max-token);
+  }
+
+  @if $min {
+    @return max($min-token, $token);
+  }
+
+  @if $max {
+    @return min($token, $max-token);
+  }
+
+  @return $token;
+}
+
+/// Overwrite the layout context's size token
+/// @param {String} $size - The desired size
+/// @returns {String}
+/// @example @include size('md');
+/// @group utilities
+@mixin size($size) {
+  $value: custom-property.get-var('layout-size-#{$size}');
+  @include custom-property.declaration('layout-size', $value);
+}
+
+/// Get the appropriate density token for the current layout context
+/// @param {String} $default - The default density of the component if no layout was specified
+/// @returns {String}
+/// @example padding-inline: density($default: 'condensed');
+/// @group utilities
+@function density($default: 'normal') {
+  $fallback-token: custom-property.get-var('layout-density-#{$default}');
+  $token: custom-property.get-var('layout-density', $fallback-token);
+
+  @return $token;
+}

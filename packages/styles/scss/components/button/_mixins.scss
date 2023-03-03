@@ -14,6 +14,7 @@
 @use '../../utilities/component-reset';
 @use '../../utilities/convert' as *;
 @use '../../utilities/custom-property';
+@use '../../utilities/layout';
 @use 'tokens' as *;
 
 $button-focus-color: custom-property.get-var('button-focus-color', $focus);
@@ -26,7 +27,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   display: inline-flex;
   width: max-content;
   max-width: rem(320px);
-  min-height: $button-height;
+  height: layout.size('lg');
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;

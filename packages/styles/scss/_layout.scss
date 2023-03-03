@@ -1,0 +1,25 @@
+//
+// Copyright IBM Corp. 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+@use './config' as *;
+@use './utilities/custom-property';
+@use './utilities/convert' as *;
+@use './utilities/layout' as *;
+
+@each $group, $values in $tokens {
+  :root {
+    @each $key, $value in $values {
+      @include custom-property.declaration('layout-#{$group}-#{$key}', $value);
+    }
+  }
+
+  @each $key, $value in $values {
+    .#{$prefix}--layout--#{$group}-#{$key} {
+      @include custom-property.declaration('layout-#{$group}', $value);
+    }
+  }
+}
