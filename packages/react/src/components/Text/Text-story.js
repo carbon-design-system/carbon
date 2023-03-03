@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { LayoutDirection } from '../Layout';
+import { LayoutDirection } from '../LayoutDirection';
 import { TextDirection, Text } from '../Text';
 import RadioButtonGroup from '../RadioButtonGroup';
 import RadioButton from '../RadioButton';

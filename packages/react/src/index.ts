@@ -139,7 +139,7 @@ export * from './components/Layer';
 export {
   LayoutDirection as unstable_LayoutDirection,
   useLayoutDirection as unstable_useLayoutDirection,
-} from './components/Layout';
+} from './components/LayoutDirection';
 export {
   Menu as unstable_Menu,
   MenuItem as unstable_MenuItem,
