@@ -5,7 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useContext, useState, FocusEvent, ForwardedRef, MouseEvent, ReactNode } from 'react';
+import React, {
+  useRef,
+  useContext,
+  useState,
+  FocusEvent,
+  ForwardedRef,
+  MouseEvent,
+  ReactNode,
+} from 'react';
 import { useSelect, UseSelectProps, UseSelectState } from 'downshift';
 import cx from 'classnames';
 import PropTypes from 'prop-types';
@@ -14,7 +22,11 @@ import {
   WarningAltFilled,
   WarningFilled,
 } from '@carbon/icons-react';
-import ListBox, { ListBoxSize, ListBoxType, PropTypes as ListBoxPropTypes } from '../ListBox';
+import ListBox, {
+  ListBoxSize,
+  ListBoxType,
+  PropTypes as ListBoxPropTypes,
+} from '../ListBox';
 import mergeRefs from '../../tools/mergeRefs';
 import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
@@ -27,11 +39,15 @@ const defaultItemToString = <ItemType,>(item?: ItemType): string => {
     return item;
   }
   if (typeof item === 'number') {
-    return `${item}`
+    return `${item}`;
   }
-  if (item !== null && typeof item === 'object'
-    && 'label' in item && typeof item['label'] === 'string') {
-    return item['label']
+  if (
+    item !== null &&
+    typeof item === 'object' &&
+    'label' in item &&
+    typeof item['label'] === 'string'
+  ) {
+    return item['label'];
   }
   return '';
 };
@@ -44,7 +60,6 @@ export interface OnChangeData<ItemType> {
 
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
-
   /**
    * 'aria-label' of the ListBox component.
    */
@@ -183,249 +198,268 @@ export interface DropdownProps<ItemType>
   warnText?: React.ReactNode;
 }
 
-const Dropdown = React.forwardRef(<ItemType,>(
-  {
-    className: containerClassName,
-    disabled,
-    direction,
-    items,
-    label,
-    ariaLabel,
-    itemToString = defaultItemToString,
-    itemToElement,
-    renderSelectedItem,
-    type,
-    size,
-    onChange,
-    id,
-    titleText,
-    hideLabel,
-    helperText,
-    translateWithId,
-    light,
-    invalid,
-    invalidText,
-    warn,
-    warnText,
-    initialSelectedItem,
-    selectedItem: controlledSelectedItem,
-    downshiftProps,
-    readOnly,
-    ...other
-  }: DropdownProps<ItemType>,
-  ref: ForwardedRef<HTMLButtonElement>
-) => {
-  const prefix = usePrefix();
-  const { isFluid } = useContext(FormContext);
-  const selectProps: UseSelectProps<ItemType> = {
-    ...downshiftProps,
-    items,
-    itemToString,
-    initialSelectedItem,
-    onSelectedItemChange,
-  };
-
-  // only set selectedItem if the prop is defined. Setting if it is undefined
-  // will overwrite default selected items from useSelect
-  if (controlledSelectedItem !== undefined) {
-    selectProps.selectedItem = controlledSelectedItem;
-  }
-
-  const {
-    isOpen,
-    getToggleButtonProps,
-    getLabelProps,
-    getMenuProps,
-    getItemProps,
-    highlightedIndex,
-    selectedItem,
-  } = useSelect(selectProps);
-  const inline = type === 'inline';
-  const showWarning = !invalid && warn;
-
-  const enabled = useFeatureFlag('enable-v11-release');
-
-  const [isFocused, setIsFocused] = useState(false);
-
-  const className = cx(
-    `${prefix}--dropdown`,
-    [enabled ? null : containerClassName],
+const Dropdown = React.forwardRef(
+  <ItemType,>(
     {
-      [`${prefix}--dropdown--invalid`]: invalid,
-      [`${prefix}--dropdown--warning`]: showWarning,
-      [`${prefix}--dropdown--open`]: isOpen,
-      [`${prefix}--dropdown--inline`]: inline,
-      [`${prefix}--dropdown--disabled`]: disabled,
-      [`${prefix}--dropdown--light`]: light,
-      [`${prefix}--dropdown--readonly`]: readOnly,
-      [`${prefix}--dropdown--${size}`]: size,
-      [`${prefix}--list-box--up`]: direction === 'top',
+      className: containerClassName,
+      disabled,
+      direction,
+      items,
+      label,
+      ariaLabel,
+      itemToString = defaultItemToString,
+      itemToElement,
+      renderSelectedItem,
+      type,
+      size,
+      onChange,
+      id,
+      titleText,
+      hideLabel,
+      helperText,
+      translateWithId,
+      light,
+      invalid,
+      invalidText,
+      warn,
+      warnText,
+      initialSelectedItem,
+      selectedItem: controlledSelectedItem,
+      downshiftProps,
+      readOnly,
+      ...other
+    }: DropdownProps<ItemType>,
+    ref: ForwardedRef<HTMLButtonElement>
+  ) => {
+    const prefix = usePrefix();
+    const { isFluid } = useContext(FormContext);
+    const selectProps: UseSelectProps<ItemType> = {
+      ...downshiftProps,
+      items,
+      itemToString,
+      initialSelectedItem,
+      onSelectedItemChange,
+    };
+
+    // only set selectedItem if the prop is defined. Setting if it is undefined
+    // will overwrite default selected items from useSelect
+    if (controlledSelectedItem !== undefined) {
+      selectProps.selectedItem = controlledSelectedItem;
     }
-  );
 
-  const titleClasses = cx(`${prefix}--label`, {
-    [`${prefix}--label--disabled`]: disabled,
-    [`${prefix}--visually-hidden`]: hideLabel,
-  });
+    const {
+      isOpen,
+      getToggleButtonProps,
+      getLabelProps,
+      getMenuProps,
+      getItemProps,
+      highlightedIndex,
+      selectedItem,
+    } = useSelect(selectProps);
+    const inline = type === 'inline';
+    const showWarning = !invalid && warn;
 
-  const helperClasses = cx(`${prefix}--form__helper-text`, {
-    [`${prefix}--form__helper-text--disabled`]: disabled,
-  });
+    const enabled = useFeatureFlag('enable-v11-release');
 
-  const wrapperClasses = cx(
-    `${prefix}--dropdown__wrapper`,
-    `${prefix}--list-box__wrapper`,
-    [enabled ? containerClassName : null],
-    {
-      [`${prefix}--dropdown__wrapper--inline`]: inline,
-      [`${prefix}--list-box__wrapper--inline`]: inline,
-      [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
-      [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
-      [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
-      [`${prefix}--list-box__wrapper--fluid--focus`]:
-        isFluid && isFocused && !isOpen,
-    }
-  );
+    const [isFocused, setIsFocused] = useState(false);
 
-  // needs to be Capitalized for react to render it correctly
-  const ItemToElement = itemToElement;
-  const toggleButtonProps = getToggleButtonProps();
-  const helper =
-    helperText && !isFluid ? (
-      <div className={helperClasses}>{helperText}</div>
-    ) : null;
-
-  function onSelectedItemChange({ selectedItem }: Partial<UseSelectState<ItemType>>) {
-    setIsFocused(false);
-    if (onChange) {
-      onChange({ selectedItem: selectedItem ?? null });
-    }
-  }
-
-  const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
-
-  const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
-    setIsFocused(evt.type === 'focus' ? true : false);
-  };
-
-  const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
-
-  const readOnlyEventHandlers = readOnly
-    ? {
-        onClick: (evt: MouseEvent<HTMLButtonElement>) => {
-          // NOTE: does not prevent click
-          evt.preventDefault();
-          // focus on the element as per readonly input behavior
-          if (mergedRef.current !== undefined) {
-            mergedRef.current.focus();
-          }
-        },
-        onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
-          const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
-          // This prevents the select from opening for the above keys
-          if (selectAccessKeys.includes(evt.key)) {
-            evt.preventDefault();
-          }
-        },
+    const className = cx(
+      `${prefix}--dropdown`,
+      [enabled ? null : containerClassName],
+      {
+        [`${prefix}--dropdown--invalid`]: invalid,
+        [`${prefix}--dropdown--warning`]: showWarning,
+        [`${prefix}--dropdown--open`]: isOpen,
+        [`${prefix}--dropdown--inline`]: inline,
+        [`${prefix}--dropdown--disabled`]: disabled,
+        [`${prefix}--dropdown--light`]: light,
+        [`${prefix}--dropdown--readonly`]: readOnly,
+        [`${prefix}--dropdown--${size}`]: size,
+        [`${prefix}--list-box--up`]: direction === 'top',
       }
-    : {};
+    );
 
-  return (
-    <div className={wrapperClasses} {...other}>
-      {titleText && (
-        <label className={titleClasses} {...getLabelProps()}>
-          {titleText}
-        </label>
-      )}
-      <ListBox
-        onFocus={handleFocus}
-        onBlur={handleFocus}
-        aria-label={ariaLabel}
-        size={size}
-        className={className}
-        invalid={invalid}
-        invalidText={invalidText}
-        warn={warn}
-        warnText={warnText}
-        light={light}
-        isOpen={isOpen}
-        id={id}>
-        {invalid && (
-          <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
-        )}
-        {showWarning && (
-          <WarningAltFilled
-            className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
-          />
-        )}
-        <button
-          type="button"
-          className={`${prefix}--list-box__field`}
-          disabled={disabled}
-          aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
-          title={selectedItem && itemToString !== undefined ? itemToString(selectedItem) : label}
-          {...toggleButtonProps}
-          {...readOnlyEventHandlers}
-          ref={mergedRef}>
-          <span className={`${prefix}--list-box__label`}>
-            {selectedItem
-              ? renderSelectedItem
-                ? renderSelectedItem(selectedItem)
-                : itemToString(selectedItem)
-              : label}
-          </span>
-          <ListBox.MenuIcon isOpen={isOpen} translateWithId={translateWithId} />
-        </button>
-        <ListBox.Menu {...getMenuProps()}>
-          {isOpen &&
-            items.map((item, index) => {
-              const isObject = item !== null && typeof item === 'object';
-              const disabled = isObject && 'disabled' in item && item.disabled === true;
-              const itemProps = getItemProps({
-                item,
-                index,
-                disabled,
-              });
-              const title = isObject && 'text' in item && itemToElement ? item.text : itemToString(item);
-              return (
-                <ListBox.MenuItem
-                  key={itemProps.id}
-                  isActive={selectedItem === item}
-                  isHighlighted={
-                    highlightedIndex === index || selectedItem === item
-                  }
-                  title={title}
-                  ref={{
-                    menuItemOptionRef: menuItemOptionRefs.current[index],
-                  }}
-                  {...itemProps}>
-                  {typeof item === 'object' && ItemToElement !== undefined
-                    && ItemToElement !== null ? (
-                    <ItemToElement key={itemProps.id} {...item} />
-                  ) : (
-                    itemToString(item)
-                  )}
-                  {selectedItem === item && (
-                    <Checkmark
-                      className={`${prefix}--list-box__menu-item__selected-icon`}
-                    />
-                  )}
-                </ListBox.MenuItem>
-              );
-            })}
-        </ListBox.Menu>
-      </ListBox>
-      {!inline && !invalid && !warn && helper}
-    </div>
-  );
-});
+    const titleClasses = cx(`${prefix}--label`, {
+      [`${prefix}--label--disabled`]: disabled,
+      [`${prefix}--visually-hidden`]: hideLabel,
+    });
 
-type DropdownComponentProps<ItemType> =
-  React.PropsWithoutRef<React.PropsWithChildren<DropdownProps<ItemType>>
-    & React.RefAttributes<HTMLButtonElement>>
+    const helperClasses = cx(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
+
+    const wrapperClasses = cx(
+      `${prefix}--dropdown__wrapper`,
+      `${prefix}--list-box__wrapper`,
+      [enabled ? containerClassName : null],
+      {
+        [`${prefix}--dropdown__wrapper--inline`]: inline,
+        [`${prefix}--list-box__wrapper--inline`]: inline,
+        [`${prefix}--dropdown__wrapper--inline--invalid`]: inline && invalid,
+        [`${prefix}--list-box__wrapper--inline--invalid`]: inline && invalid,
+        [`${prefix}--list-box__wrapper--fluid--invalid`]: isFluid && invalid,
+        [`${prefix}--list-box__wrapper--fluid--focus`]:
+          isFluid && isFocused && !isOpen,
+      }
+    );
+
+    // needs to be Capitalized for react to render it correctly
+    const ItemToElement = itemToElement;
+    const toggleButtonProps = getToggleButtonProps();
+    const helper =
+      helperText && !isFluid ? (
+        <div className={helperClasses}>{helperText}</div>
+      ) : null;
+
+    function onSelectedItemChange({
+      selectedItem,
+    }: Partial<UseSelectState<ItemType>>) {
+      setIsFocused(false);
+      if (onChange) {
+        onChange({ selectedItem: selectedItem ?? null });
+      }
+    }
+
+    const menuItemOptionRefs = useRef(items.map((_) => React.createRef()));
+
+    const handleFocus = (evt: FocusEvent<HTMLDivElement>) => {
+      setIsFocused(evt.type === 'focus' ? true : false);
+    };
+
+    const mergedRef = mergeRefs(toggleButtonProps.ref, ref);
+
+    const readOnlyEventHandlers = readOnly
+      ? {
+          onClick: (evt: MouseEvent<HTMLButtonElement>) => {
+            // NOTE: does not prevent click
+            evt.preventDefault();
+            // focus on the element as per readonly input behavior
+            if (mergedRef.current !== undefined) {
+              mergedRef.current.focus();
+            }
+          },
+          onKeyDown: (evt: React.KeyboardEvent<HTMLButtonElement>) => {
+            const selectAccessKeys = ['ArrowDown', 'ArrowUp', ' ', 'Enter'];
+            // This prevents the select from opening for the above keys
+            if (selectAccessKeys.includes(evt.key)) {
+              evt.preventDefault();
+            }
+          },
+        }
+      : {};
+
+    return (
+      <div className={wrapperClasses} {...other}>
+        {titleText && (
+          <label className={titleClasses} {...getLabelProps()}>
+            {titleText}
+          </label>
+        )}
+        <ListBox
+          onFocus={handleFocus}
+          onBlur={handleFocus}
+          aria-label={ariaLabel}
+          size={size}
+          className={className}
+          invalid={invalid}
+          invalidText={invalidText}
+          warn={warn}
+          warnText={warnText}
+          light={light}
+          isOpen={isOpen}
+          id={id}>
+          {invalid && (
+            <WarningFilled className={`${prefix}--list-box__invalid-icon`} />
+          )}
+          {showWarning && (
+            <WarningAltFilled
+              className={`${prefix}--list-box__invalid-icon ${prefix}--list-box__invalid-icon--warning`}
+            />
+          )}
+          <button
+            type="button"
+            className={`${prefix}--list-box__field`}
+            disabled={disabled}
+            aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
+            title={
+              selectedItem && itemToString !== undefined
+                ? itemToString(selectedItem)
+                : label
+            }
+            {...toggleButtonProps}
+            {...readOnlyEventHandlers}
+            ref={mergedRef}>
+            <span className={`${prefix}--list-box__label`}>
+              {selectedItem
+                ? renderSelectedItem
+                  ? renderSelectedItem(selectedItem)
+                  : itemToString(selectedItem)
+                : label}
+            </span>
+            <ListBox.MenuIcon
+              isOpen={isOpen}
+              translateWithId={translateWithId}
+            />
+          </button>
+          <ListBox.Menu {...getMenuProps()}>
+            {isOpen &&
+              items.map((item, index) => {
+                const isObject = item !== null && typeof item === 'object';
+                const disabled =
+                  isObject && 'disabled' in item && item.disabled === true;
+                const itemProps = getItemProps({
+                  item,
+                  index,
+                  disabled,
+                });
+                const title =
+                  isObject && 'text' in item && itemToElement
+                    ? item.text
+                    : itemToString(item);
+                return (
+                  <ListBox.MenuItem
+                    key={itemProps.id}
+                    isActive={selectedItem === item}
+                    isHighlighted={
+                      highlightedIndex === index || selectedItem === item
+                    }
+                    title={title}
+                    ref={{
+                      menuItemOptionRef: menuItemOptionRefs.current[index],
+                    }}
+                    {...itemProps}>
+                    {typeof item === 'object' &&
+                    ItemToElement !== undefined &&
+                    ItemToElement !== null ? (
+                      <ItemToElement key={itemProps.id} {...item} />
+                    ) : (
+                      itemToString(item)
+                    )}
+                    {selectedItem === item && (
+                      <Checkmark
+                        className={`${prefix}--list-box__menu-item__selected-icon`}
+                      />
+                    )}
+                  </ListBox.MenuItem>
+                );
+              })}
+          </ListBox.Menu>
+        </ListBox>
+        {!inline && !invalid && !warn && helper}
+      </div>
+    );
+  }
+);
+
+type DropdownComponentProps<ItemType> = React.PropsWithoutRef<
+  React.PropsWithChildren<DropdownProps<ItemType>> &
+    React.RefAttributes<HTMLButtonElement>
+>;
 
 interface DropdownComponent {
-  <ItemType>(props: DropdownComponentProps<ItemType>): React.ReactElement | null
+  <ItemType>(
+    props: DropdownComponentProps<ItemType>
+  ): React.ReactElement | null;
 }
 
 Dropdown.displayName = 'Dropdown';

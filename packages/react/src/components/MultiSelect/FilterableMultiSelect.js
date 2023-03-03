@@ -88,6 +88,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
 
   const wrapperClasses = cx(
     `${prefix}--multi-select__wrapper`,
+    `${prefix}--multi-select--filterable__wrapper`,
     `${prefix}--list-box__wrapper`,
     [enabled ? containerClassName : null],
     {
@@ -244,6 +245,8 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               [enabled ? null : containerClassName],
               {
                 [`${prefix}--multi-select--invalid`]: invalid,
+                [`${prefix}--multi-select--invalid--focused`]:
+                  invalid && inputFocused,
                 [`${prefix}--multi-select--open`]: isOpen,
                 [`${prefix}--multi-select--inline`]: inline,
                 [`${prefix}--multi-select--selected`]: selectedItem.length > 0,
@@ -300,6 +303,20 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   event.stopPropagation();
                 }
 
+                if (!disabled) {
+                  if (match(event, keys.Delete) || match(event, keys.Escape)) {
+                    if (isOpen) {
+                      handleOnMenuChange(true);
+                      clearInputValue();
+                      event.stopPropagation();
+                    } else if (!isOpen) {
+                      clearInputValue();
+                      clearSelection();
+                      event.stopPropagation();
+                    }
+                  }
+                }
+
                 if (match(event, keys.Tab)) {
                   handleOnMenuChange(false);
                 }
@@ -309,6 +326,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
               },
               onBlur: () => {
                 setInputFocused(false);
+                setInputValue('');
               },
             });
 
