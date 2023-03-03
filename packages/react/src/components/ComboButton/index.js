@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -46,6 +46,7 @@ const ComboButton = React.forwardRef(function ComboButton(
   const prefix = usePrefix();
 
   const containerRef = useRef(null);
+  const menuRef = useRef(null);
   const ref = useMergedRefs([forwardRef, containerRef]);
   const [width, setWidth] = useState(0);
   const {
@@ -70,6 +71,12 @@ const ComboButton = React.forwardRef(function ComboButton(
       onClick(e);
     }
   }
+
+  useEffect(() => {
+    if (menuRef.current && width) {
+      menuRef.current.style.width = `${width}px`;
+    }
+  }, [width]);
 
   const containerClasses = classNames(
     `${prefix}--combo-button__container`,
@@ -108,11 +115,8 @@ const ComboButton = React.forwardRef(function ComboButton(
         <ChevronDown />
       </IconButton>
       <Menu
+        ref={menuRef}
         id={id}
-        // eslint-disable-next-line react/forbid-component-props
-        style={{
-          width: `${width}px`,
-        }}
         label={t('carbon.combo-button.additional-actions')}
         size={size}
         open={open}
