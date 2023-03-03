@@ -27,6 +27,14 @@ export default {
   },
 };
 
+export const Default = () => (
+  <MenuButton label="Actions">
+    <MenuItem label="First action" />
+    <MenuItem label="Second action" />
+    <MenuItem label="Third action" />
+  </MenuButton>
+);
+
 export const Playground = (args) => {
   const onClick = action('onClick (MenuItem)');
 
@@ -42,6 +50,16 @@ export const Playground = (args) => {
 };
 
 Playground.argTypes = {
+  children: {
+    control: {
+      disable: true,
+    },
+  },
+  className: {
+    control: {
+      disable: true,
+    },
+  },
   label: {
     defaultValue: 'Actions',
   },
