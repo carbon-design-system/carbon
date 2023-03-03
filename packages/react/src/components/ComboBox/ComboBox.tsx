@@ -86,6 +86,13 @@ export interface ComboBoxProps
     ExcludedAttributes
   > {
   /**
+   * Specify a label to be read by screen readers on the container node
+   * 'aria-label' of the ListBox component.
+   */
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
    * 'aria-label' of the ListBox component.
    */
   ariaLabel?: string;
@@ -250,7 +257,8 @@ export interface ComboBoxProps
 
 const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
   const {
-    ariaLabel,
+    ['aria-label']: ariaLabel,
+    ariaLabel: deprecatedAriaLabel,
     className: containerClassName,
     direction,
     disabled,
@@ -568,7 +576,10 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   translateWithId={translateWithId}
                 />
               </div>
-              <ListBox.Menu {...getMenuProps({ 'aria-label': ariaLabel })}>
+              <ListBox.Menu
+                {...getMenuProps({
+                  'aria-label': deprecatedAriaLabel || ariaLabel,
+                })}>
                 {isOpen
                   ? filterItems(items, itemToString, inputValue).map(
                       (item, index) => {
@@ -635,8 +646,19 @@ ComboBox.displayName = 'ComboBox';
 ComboBox.propTypes = {
   /**
    * 'aria-label' of the ListBox component.
+   * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   * 'aria-label' of the ListBox component.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * An optional className to add to the container node
@@ -813,7 +835,7 @@ ComboBox.defaultProps = {
   itemToElement: null,
   shouldFilterItem: defaultShouldFilterItem,
   type: 'default',
-  ariaLabel: 'Choose an item',
+  ['aria-label']: 'Choose an item',
   direction: 'bottom',
 };
 
