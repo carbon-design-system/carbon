@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -38,6 +38,7 @@ const MenuButton = React.forwardRef(function MenuButton(
   const prefix = usePrefix();
 
   const triggerRef = useRef(null);
+  const menuRef = useRef(null);
   const ref = useMergedRefs([forwardRef, triggerRef]);
   const [width, setWidth] = useState(0);
   const {
@@ -56,6 +57,12 @@ const MenuButton = React.forwardRef(function MenuButton(
       hookOnClick();
     }
   }
+
+  useEffect(() => {
+    if (menuRef.current && width) {
+      menuRef.current.style.width = `${width}px`;
+    }
+  }, [width]);
 
   const triggerClasses = classNames(
     `${prefix}--menu-button__trigger`,
@@ -85,11 +92,8 @@ const MenuButton = React.forwardRef(function MenuButton(
         {label}
       </Button>
       <Menu
+        ref={menuRef}
         id={id}
-        // eslint-disable-next-line react/forbid-component-props
-        style={{
-          width: `${width}px`,
-        }}
         label={label}
         size={size}
         open={open}
