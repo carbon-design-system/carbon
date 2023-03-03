@@ -255,7 +255,7 @@ change. When creating a new component, even if you do not anticipate an explicit
 need to provide a forwarded ref, it's likely still worthwhile to include one to
 avoid unecessary breaking changes in the future.
 
-#### Authoring dyanmic/inline styles
+#### Authoring dynamic/inline styles
 
 It's increasingly common for applications to use a Content Security Policy (CSP)
 header with a
