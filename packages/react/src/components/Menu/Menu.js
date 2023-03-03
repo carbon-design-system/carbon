@@ -211,6 +211,13 @@ const Menu = React.forwardRef(function Menu(
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
+  useEffect(() => {
+    if (menu.current && position[0] >= 0 && position[1] >= 0) {
+      menu.current.style.left = `${position[0]}px`;
+      menu.current.style.top = `${position[1]}px`;
+    }
+  }, [position]);
+
   const classNames = cx(
     className,
     `${prefix}--menu`,
@@ -236,13 +243,7 @@ const Menu = React.forwardRef(function Menu(
         aria-label={label}
         tabIndex={-1}
         onKeyDown={handleKeyDown}
-        onBlur={handleBlur}
-        // eslint-disable-next-line react/forbid-dom-props
-        style={{
-          ...rest.style,
-          left: `${position[0]}px`,
-          top: `${position[1]}px`,
-        }}>
+        onBlur={handleBlur}>
         {children}
       </ul>
     </MenuContext.Provider>
