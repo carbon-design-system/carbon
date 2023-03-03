@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -109,14 +109,14 @@ export const fieldHover03 = whiteHover;
 
 // Border
 // border-subtle-00
-export const borderSubtle00 = gray20;
+export const borderSubtle00 = gray30;
 
 // border-subtle-01
 export const borderSubtle01 = gray20;
 export const borderSubtleSelected01 = gray30;
 
 // border-subtle-02
-export const borderSubtle02 = gray20;
+export const borderSubtle02 = gray30;
 export const borderSubtleSelected02 = gray30;
 
 // border-subtle-03
@@ -169,6 +169,7 @@ export const iconInverse = white;
 export const iconOnColor = white;
 export const iconOnColorDisabled = gray50;
 export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
+export const iconInteractive = blue60;
 
 // Support
 export const supportError = red60;

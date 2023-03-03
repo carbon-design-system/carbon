@@ -1,124 +1,69 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable.TableToolbarSearch should render 1`] = `
-<TableToolbarSearch
-  className="custom-class"
-  id="custom-id"
-  onChange={[MockFunction]}
-  onClear={[Function]}
-  persistent={false}
-  tabIndex="0"
-  translateWithId={[Function]}
->
-  <Search
-    className="custom-class cds--toolbar-search-container-expandable"
-    id="custom-id"
-    labelText="Filter table"
-    onBlur={[Function]}
-    onChange={[Function]}
-    onClear={[Function]}
-    onFocus={[Function]}
-    placeholder="Filter table"
-    size="lg"
-    tabIndex="0"
-    value=""
+exports[`TableToolbarSearch renders as expected - Component API should render 1`] = `
+<div>
+  <div
+    aria-labelledby="custom-id-search"
+    class="cds--search cds--search--lg custom-class cds--toolbar-search-container-expandable"
+    role="search"
   >
     <div
-      aria-labelledby="custom-id-search"
-      className="cds--search cds--search--lg custom-class cds--toolbar-search-container-expandable"
-      role="search"
+      class="cds--search-magnifier"
     >
-      <div
-        className="cds--search-magnifier"
-        role={null}
+      <svg
+        aria-hidden="true"
+        class="cds--search-magnifier-icon"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <CustomSearchIcon>
-          <ForwardRef(Search)
-            className="cds--search-magnifier-icon"
-          >
-            <Icon
-              className="cds--search-magnifier-icon"
-              fill="currentColor"
-              height={16}
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 16 16"
-              width={16}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <svg
-                aria-hidden={true}
-                className="cds--search-magnifier-icon"
-                fill="currentColor"
-                focusable="false"
-                height={16}
-                preserveAspectRatio="xMidYMid meet"
-                viewBox="0 0 16 16"
-                width={16}
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                />
-              </svg>
-            </Icon>
-          </ForwardRef(Search)>
-        </CustomSearchIcon>
-      </div>
-      <label
-        className="cds--label"
-        htmlFor="custom-id"
-        id="custom-id-search"
-      >
-        Filter table
-      </label>
-      <input
-        autoComplete="off"
-        className="cds--search-input"
-        id="custom-id"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        placeholder="Filter table"
-        role="searchbox"
-        tabIndex="0"
-        type="text"
-        value=""
-      />
-      <button
-        aria-label="Clear search input"
-        className="cds--search-close cds--search-close--hidden"
-        onClick={[Function]}
-        title="Clear search input"
-        type="button"
-      >
-        <ForwardRef(Close)>
-          <Icon
-            fill="currentColor"
-            height={16}
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 32 32"
-            width={16}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <svg
-              aria-hidden={true}
-              fill="currentColor"
-              focusable="false"
-              height={16}
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 32 32"
-              width={16}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-              />
-            </svg>
-          </Icon>
-        </ForwardRef(Close)>
-      </button>
+        <path
+          d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+        />
+      </svg>
     </div>
-  </Search>
-</TableToolbarSearch>
+    <label
+      class="cds--label"
+      for="custom-id"
+      id="custom-id-search"
+    >
+      Filter table
+    </label>
+    <input
+      autocomplete="off"
+      class="cds--search-input"
+      id="custom-id"
+      placeholder="Filter table"
+      role="searchbox"
+      tabindex="0"
+      type="text"
+      value=""
+    />
+    <button
+      aria-label="Clear search input"
+      class="cds--search-close cds--search-close--hidden"
+      title="Clear search input"
+      type="button"
+    >
+      <svg
+        aria-hidden="true"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 32 32"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
 `;

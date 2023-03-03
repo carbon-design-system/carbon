@@ -344,6 +344,36 @@ git push upstream vX.Y.Z
 ./packages/cli/bin/carbon-cli.js changelog vA.B.C..vX.Y.Z
 ```
 
+### Releasing a new major for a single package
+
+In some cases, a single package in the monorepo may need a major version bump.
+This can be done without having to do a major version bump across all packages.
+
+For instance:
+
+- `eslint-config-carbon` needs a new major
+- All other packages should only be bumped as a new patch
+- The tag for the release should remain at the curent major `v11.x`, and not be
+  bumped to `v12.x`
+
+To do this, packages must be versioned manually.
+
+1. Switch to `main`
+1. Pull in latest `git pull upstream main`
+1. Make a new branch with the version you're going to release, e.g.
+   `git checkout -b release/v11.23.1`
+1. Run `yarn lerna version --no-git-tag-version --no-push`
+1. An interactive prompt will be presented - select the appropriate version bump
+   for each package
+1. After the interactive prompt is complete, run `yarn install` to update
+   `yarn.lock`
+1. Commit `chore(release): v11.23.1`
+1. `git push` and then open a pull request
+1. Once the changes are merged in, follow the same steps for a
+   [Stable Release](#stable-release) after the
+   `🛑 Wait for the Pull Request to be merged` step to tag the release commit
+   and trigger the automated release workflows.
+
 ## Troubleshooting
 
 ### The Version workflow succeeded, but the PR was not created

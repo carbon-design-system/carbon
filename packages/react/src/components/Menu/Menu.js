@@ -93,8 +93,6 @@ const Menu = React.forwardRef(function Menu(
       returnFocus();
     }
 
-    childDispatch({ type: 'clearRegisteredItems' });
-
     if (onClose) {
       onClose();
     }
@@ -203,6 +201,10 @@ const Menu = React.forwardRef(function Menu(
   useEffect(() => {
     if (open) {
       handleOpen();
+    } else {
+      // reset position when menu is closed in order for the --shown
+      // modifier to be applied correctly
+      setPosition(-1, -1);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
