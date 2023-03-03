@@ -35,7 +35,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     disabled,
     label,
     onClick,
-    size = 'md',
+    size = 'lg',
     tooltipAlign,
     translateWithId: t = defaultTranslateWithId,
     ...rest

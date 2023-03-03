@@ -29,7 +29,7 @@ const MenuButton = React.forwardRef(function MenuButton(
     disabled,
     kind = defaultButtonKind,
     label,
-    size = 'md',
+    size = 'lg',
     ...rest
   },
   forwardRef
