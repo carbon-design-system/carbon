@@ -480,6 +480,14 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
             if (match(event, keys.Enter) && !inputValue) {
               toggleMenu();
             }
+
+            if (match(event, keys.Escape) && inputValue) {
+              if (event.target === textInput.current && isOpen) {
+                toggleMenu();
+                event.preventDownshiftDefault = true;
+                event.persist();
+              }
+            }
           },
         });
 
