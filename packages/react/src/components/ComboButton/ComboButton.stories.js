@@ -27,6 +27,16 @@ export default {
   },
 };
 
+export const Default = () => (
+  <ComboButton label="Primary action">
+    <MenuItem label="Second action" />
+    <MenuItem label="Third action" />
+    <MenuItem label="Fourth action" disabled />
+    <MenuItemDivider />
+    <MenuItem label="Danger action" kind="danger" />
+  </ComboButton>
+);
+
 export const Playground = (args) => {
   const onClick = action('onClick (MenuItem)');
 
@@ -34,14 +44,22 @@ export const Playground = (args) => {
     <ComboButton {...args}>
       <MenuItem label="Second action" onClick={onClick} />
       <MenuItem label="Third action" onClick={onClick} />
-      <MenuItem label="Fourth action" onClick={onClick} disabled />
-      <MenuItemDivider />
-      <MenuItem label="Danger action" onClick={onClick} kind="danger" />
+      <MenuItem label="Fourth action" onClick={onClick} />
     </ComboButton>
   );
 };
 
 Playground.argTypes = {
+  children: {
+    control: {
+      disable: true,
+    },
+  },
+  className: {
+    control: {
+      disable: true,
+    },
+  },
   label: {
     defaultValue: 'Primary action',
   },
