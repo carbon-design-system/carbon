@@ -14,7 +14,7 @@ const { snapshotStory, visitStory } = require('../../test-utils/storybook');
 test.describe('ComboButton', () => {
   themes.forEach((theme) => {
     test.describe(theme, () => {
-      test('menu-button @vrt', async ({ page }) => {
+      test('combo-button @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ComboButton',
           id: 'experimental-unstable-combobutton--playground',

@@ -13,83 +13,150 @@ import { MenuItem } from '../Menu';
 
 import { ComboButton } from './';
 
+const prefix = 'cds';
+
 describe('ComboButton', () => {
-  it('should support a ref on the outermost element', () => {
-    const ref = jest.fn();
-    const { container } = render(
-      <ComboButton label="Primary action" ref={ref}>
-        <MenuItem label="Additional action" />
-      </ComboButton>
-    );
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  describe('renders as expected - Component API', () => {
+    it('supports a ref on the outermost element', () => {
+      const ref = jest.fn();
+      const { container } = render(
+        <ComboButton label="Primary action" ref={ref}>
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
+      expect(ref).toHaveBeenCalledWith(container.firstChild);
+    });
+
+    it('supports a custom class name on the outermost element', () => {
+      const { container } = render(
+        <ComboButton label="Primary action" className="test">
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
+      expect(container.firstChild).toHaveClass('test');
+    });
+
+    it('forwards additional props on the outermost element', () => {
+      const { container } = render(
+        <ComboButton label="Primary action" data-testid="test">
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+    });
+
+    it('renders props.label on the trigger button', () => {
+      render(
+        <ComboButton label="Test">
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
+      expect(screen.getAllByRole('button')[0]).toHaveTextContent(/^Test$/);
+    });
+
+    it('supports props.disabled', () => {
+      render(
+        <ComboButton label="Primary action" disabled>
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
+
+      // primary action button
+      expect(screen.getAllByRole('button')[0]).toBeDisabled();
+
+      // trigger button
+      expect(screen.getAllByRole('button')[1]).toBeDisabled();
+    });
+
+    describe('supports prop.size', () => {
+      const sizes = ['sm', 'md', 'lg'];
+
+      sizes.forEach((size) => {
+        it(`size="${size}"`, () => {
+          const { container } = render(
+            <ComboButton label="Primary action" size={size}>
+              <MenuItem label="Additional action" />
+            </ComboButton>
+          );
+
+          expect(container.firstChild).toHaveClass(
+            `${prefix}--combo-button__container--${size}`
+          );
+        });
+      });
+    });
+
+    describe('supports prop.tooltipAlign', () => {
+      const alignments = [
+        'top',
+        'top-left',
+        'top-right',
+        'bottom',
+        'bottom-left',
+        'bottom-right',
+        'left',
+        'right',
+      ];
+
+      alignments.forEach((alignment) => {
+        it(`tooltipAlign="${alignment}"`, () => {
+          const { container } = render(
+            <ComboButton label="Primary action" tooltipAlign={alignment}>
+              <MenuItem label="Additional action" />
+            </ComboButton>
+          );
+
+          expect(container.firstChild.lastChild).toHaveClass(
+            `${prefix}--popover--${alignment}`
+          );
+        });
+      });
+    });
+
+    it('supports props.translateWithId', () => {
+      const t = () => 'test';
+
+      render(
+        <ComboButton label="Primary action" translateWithId={t}>
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
+
+      const triggerButton = screen.getAllByRole('button')[1];
+      const tooltipId = triggerButton.getAttribute('aria-labelledby');
+      const tooltip = document.getElementById(tooltipId);
+
+      expect(tooltip).toHaveTextContent(t());
+    });
   });
 
-  it('should support a custom class name on the outermost element', () => {
-    const { container } = render(
-      <ComboButton label="Primary action" className="test">
-        <MenuItem label="Additional action" />
-      </ComboButton>
-    );
-    expect(container.firstChild).toHaveClass('test');
-  });
+  describe('behaves as expected', () => {
+    it('emits props.onClick on primary action click', async () => {
+      const onClick = jest.fn();
+      render(
+        <ComboButton label="Test" onClick={onClick}>
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
 
-  it('should forward additional props on the outermost element', () => {
-    const { container } = render(
-      <ComboButton label="Primary action" data-testid="test">
-        <MenuItem label="Additional action" />
-      </ComboButton>
-    );
-    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
-  });
+      expect(onClick).toHaveBeenCalledTimes(0);
+      await userEvent.click(screen.getAllByRole('button')[0]);
+      expect(onClick).toHaveBeenCalledTimes(1);
+    });
 
-  it('should render props.label on the trigger button', () => {
-    render(
-      <ComboButton label="Test">
-        <MenuItem label="Additional action" />
-      </ComboButton>
-    );
-    expect(screen.getAllByRole('button')[0]).toHaveTextContent(/^Test$/);
-  });
+    it('opens a menu on click on the trigger button', async () => {
+      render(
+        <ComboButton label="Primary action">
+          <MenuItem label="Additional action" />
+        </ComboButton>
+      );
 
-  it('should emit props.onClick on primary action click', async () => {
-    const onClick = jest.fn();
-    render(
-      <ComboButton label="Test" onClick={onClick}>
-        <MenuItem label="Additional action" />
-      </ComboButton>
-    );
+      await userEvent.click(screen.getAllByRole('button')[1]);
 
-    expect(onClick).toHaveBeenCalledTimes(0);
-    await userEvent.click(screen.getAllByRole('button')[0]);
-    expect(onClick).toHaveBeenCalledTimes(1);
-  });
-
-  it('should open a menu on click on the trigger button', async () => {
-    render(
-      <ComboButton label="Primary action">
-        <MenuItem label="Additional action" />
-      </ComboButton>
-    );
-
-    await userEvent.click(screen.getAllByRole('button')[1]);
-
-    expect(screen.getByRole('menu')).toBeTruthy();
-    expect(screen.getByRole('menuitem')).toHaveTextContent(
-      /^Additional action$/
-    );
-  });
-
-  it('should support being disabled', () => {
-    render(
-      <ComboButton label="Primary action" disabled>
-        <MenuItem label="Additional action" />
-      </ComboButton>
-    );
-
-    // primary action button
-    expect(screen.getAllByRole('button')[0]).toBeDisabled();
-
-    // trigger button
-    expect(screen.getAllByRole('button')[1]).toBeDisabled();
+      expect(screen.getByRole('menu')).toBeTruthy();
+      expect(screen.getByRole('menuitem')).toHaveTextContent(
+        /^Additional action$/
+      );
+    });
   });
 });
