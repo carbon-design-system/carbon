@@ -366,6 +366,11 @@ Popover.propTypes = {
   highContrast: PropTypes.bool,
 
   /**
+   * Render the component using the tab tip variant
+   */
+  isTabTip: PropTypes.bool,
+
+  /**
    * Specify whether the component is currently open or closed
    */
   open: PropTypes.bool.isRequired,
