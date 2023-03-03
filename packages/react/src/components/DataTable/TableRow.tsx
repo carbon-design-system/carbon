@@ -11,7 +11,18 @@ import omit from 'lodash.omit';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const TableRow = (props) => {
+export interface TableRowProps {
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+  /**
+   * Specify if the row is selected
+   */
+  isSelected?: boolean;
+}
+
+const TableRow = (props: TableRowProps) => {
   const prefix = usePrefix();
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`

@@ -7,10 +7,40 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { MouseEventHandler, PropsWithChildren } from 'react';
 import { ChevronRight } from '@carbon/icons-react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
+import { TableRowProps } from './TableRow';
+
+interface TableExpandRowProps extends PropsWithChildren<TableRowProps> {
+  /**
+   * Specify the string read by a voice reader when the expand trigger is
+   * focused
+   */
+  ariaLabel: string;
+
+  /**
+   * The id of the matching th node in the table head. Addresses a11y concerns outlined here: https://www.ibm.com/able/guidelines/ci162/info_and_relationships.html and https://www.w3.org/TR/WCAG20-TECHS/H43
+   */
+  expandHeader?: string;
+
+  /**
+   * The description of the chevron right icon, to be put in its SVG `<title>` element.
+   */
+  expandIconDescription?: string;
+
+  /**
+   * Specify whether this row is expanded or not. This helps coordinate data
+   * attributes so that `TableExpandRow` and `TableExpandedRow` work together
+   */
+  isExpanded: boolean;
+
+  /**
+   * Hook for when a listener initiates a request to expand the given row
+   */
+  onExpand: MouseEventHandler<HTMLButtonElement>;
+}
 
 const TableExpandRow = ({
   ariaLabel,
@@ -22,7 +52,7 @@ const TableExpandRow = ({
   isSelected,
   expandHeader = 'expand',
   ...rest
-}) => {
+}: TableExpandRowProps) => {
   const prefix = usePrefix();
   const className = cx(
     {

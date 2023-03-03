@@ -6,8 +6,11 @@
  */
 
 import wrapComponent from '../../tools/wrapComponent';
+import { ReactAttr } from '../../types/common';
 
-const TableCell = wrapComponent({
+export type TableCellProps = ReactAttr<'td'>;
+
+const TableCell: React.FC<TableCellProps> = wrapComponent({
   name: 'TableCell',
   type: 'td',
 });
