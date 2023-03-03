@@ -85,12 +85,11 @@ export interface ComboBoxProps
     React.InputHTMLAttributes<HTMLInputElement>,
     ExcludedAttributes
   > {
-
   /**
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
    */
-  ['aria-label']?: string,
+  ['aria-label']?: string;
 
   /**
    * @deprecated please use `aria-label` instead.
@@ -569,7 +568,10 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   translateWithId={translateWithId}
                 />
               </div>
-              <ListBox.Menu {...getMenuProps({ 'aria-label': deprecatedAriaLabel || ariaLabel })}>
+              <ListBox.Menu
+                {...getMenuProps({
+                  'aria-label': deprecatedAriaLabel || ariaLabel,
+                })}>
                 {isOpen
                   ? filterItems(items, itemToString, inputValue).map(
                       (item, index) => {
@@ -642,7 +644,7 @@ ComboBox.propTypes = {
 
   /**
    * Deprecated, please use `aria-label` instead.
-   * Specify a label to be read by screen readers on the container note. 
+   * Specify a label to be read by screen readers on the container note.
    * 'aria-label' of the ListBox component.
    */
   ariaLabel: deprecate(
