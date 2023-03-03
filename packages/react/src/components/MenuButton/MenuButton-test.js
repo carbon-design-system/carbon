@@ -13,64 +13,103 @@ import { MenuItem } from '../Menu';
 
 import { MenuButton } from './';
 
+const prefix = 'cds';
+
 describe('MenuButton', () => {
-  it('should support a ref on the outermost element', () => {
-    const ref = jest.fn();
-    const { container } = render(
-      <MenuButton label="Actions" ref={ref}>
-        <MenuItem label="Action" />
-      </MenuButton>
-    );
-    expect(ref).toHaveBeenCalledWith(container.firstChild);
+  describe('renders as expected - Component API', () => {
+    it('supports a ref on the outermost element', () => {
+      const ref = jest.fn();
+      const { container } = render(
+        <MenuButton label="Actions" ref={ref}>
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
+      expect(ref).toHaveBeenCalledWith(container.firstChild);
+    });
+
+    it('supports a custom class name on the outermost element', () => {
+      const { container } = render(
+        <MenuButton label="Actions" className="test">
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
+      expect(container.firstChild).toHaveClass('test');
+    });
+
+    it('forwards additional props on the outermost element', () => {
+      const { container } = render(
+        <MenuButton label="Actions" data-testid="test">
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
+      expect(container.firstChild).toHaveAttribute('data-testid', 'test');
+    });
+
+    it('renders props.label on the trigger button', () => {
+      render(
+        <MenuButton label="Test">
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
+      expect(screen.getByRole('button')).toHaveTextContent(/^Test$/);
+    });
+
+    it('supports props.disabled', () => {
+      render(
+        <MenuButton label="Actions" disabled>
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
+
+      expect(screen.getByRole('button')).toBeDisabled();
+    });
+
+    describe('supports prop.size', () => {
+      // Button component doesn't apply any size class for `lg`
+      const sizes = ['sm', 'md'];
+
+      sizes.forEach((size) => {
+        it(`size="${size}"`, () => {
+          const { container } = render(
+            <MenuButton label="Actions" size={size}>
+              <MenuItem label="Action" />
+            </MenuButton>
+          );
+
+          expect(container.firstChild).toHaveClass(`${prefix}--btn--${size}`);
+        });
+      });
+    });
+
+    describe('supports prop.kind', () => {
+      const kinds = ['primary', 'tertiary', 'ghost'];
+
+      kinds.forEach((kind) => {
+        it(`kind="${kind}"`, () => {
+          const { container } = render(
+            <MenuButton label="Actions" kind={kind}>
+              <MenuItem label="Action" />
+            </MenuButton>
+          );
+
+          expect(container.firstChild).toHaveClass(`${prefix}--btn--${kind}`);
+        });
+      });
+    });
   });
 
-  it('should support a custom class name on the outermost element', () => {
-    const { container } = render(
-      <MenuButton label="Actions" className="test">
-        <MenuItem label="Action" />
-      </MenuButton>
-    );
-    expect(container.firstChild).toHaveClass('test');
-  });
+  describe('behaves as expected', () => {
+    it('opens a menu on click', async () => {
+      render(
+        <MenuButton label="Actions">
+          <MenuItem label="Action" />
+        </MenuButton>
+      );
 
-  it('should forward additional props on the outermost element', () => {
-    const { container } = render(
-      <MenuButton label="Actions" data-testid="test">
-        <MenuItem label="Action" />
-      </MenuButton>
-    );
-    expect(container.firstChild).toHaveAttribute('data-testid', 'test');
-  });
+      await userEvent.click(screen.getByRole('button'));
 
-  it('should render props.label on the trigger button', () => {
-    render(
-      <MenuButton label="Test">
-        <MenuItem label="Action" />
-      </MenuButton>
-    );
-    expect(screen.getByRole('button')).toHaveTextContent(/^Test$/);
-  });
-
-  it('should open a menu on click', async () => {
-    render(
-      <MenuButton label="Actions">
-        <MenuItem label="Action" />
-      </MenuButton>
-    );
-
-    await userEvent.click(screen.getByRole('button'));
-
-    expect(screen.getByRole('menu')).toBeTruthy();
-    expect(screen.getByRole('menuitem')).toHaveTextContent(/^Action$/);
-  });
-
-  it('should support being disabled', () => {
-    render(
-      <MenuButton label="Actions" disabled>
-        <MenuItem label="Action" />
-      </MenuButton>
-    );
-
-    expect(screen.getByRole('button')).toBeDisabled();
+      expect(screen.getByRole('menu')).toBeTruthy();
+      expect(screen.getByRole('menuitem')).toHaveTextContent(/^Action$/);
+    });
   });
 });
