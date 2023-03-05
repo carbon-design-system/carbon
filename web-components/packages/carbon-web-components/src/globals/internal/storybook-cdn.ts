@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2021, 2022
+ * Copyright IBM Corp. 2021, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -44,7 +44,7 @@ export const cdnJs = ({ components }) => {
  ${_renderScript(components, `version/v${packageJson.version}`)}
 
  // LATEST tag
- ${_renderScript(components, 'tag/v1/latest')}
+ ${_renderScript(components, 'tag/latest')}
  \`\`\`
 
  > NOTE: The latest tag is a moving version. While beneficial to
@@ -59,7 +59,7 @@ export const cdnJs = ({ components }) => {
  ${_renderScript(components, `version/v${packageJson.version}`, true)}
 
  // LATEST tag
- ${_renderScript(components, 'tag/v1/latest', true)}
+ ${_renderScript(components, 'tag/latest', true)}
  \`\`\`
    `;
 };
