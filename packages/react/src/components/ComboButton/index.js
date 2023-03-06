@@ -92,13 +92,14 @@ const ComboButton = React.forwardRef(function ComboButton(
 
   return (
     <div {...rest} className={containerClasses} ref={ref}>
-      <Button
-        className={primaryActionClasses}
-        size={size}
-        disabled={disabled}
-        onClick={handlePrimaryActionClick}>
-        {label}
-      </Button>
+      <div className={primaryActionClasses}>
+        <Button
+          size={size}
+          disabled={disabled}
+          onClick={handlePrimaryActionClick}>
+          {label}
+        </Button>
+      </div>
       <IconButton
         className={triggerClasses}
         label={t('carbon.combo-button.additional-actions')}

@@ -31,6 +31,10 @@
     }
   }
 
+  .#{$prefix}--combo-button__primary-action .#{$prefix}--btn {
+    width: 100%;
+  }
+
   .#{$prefix}--combo-button__trigger svg {
     transition: transform $duration-fast-02 motion(standard, productive);
   }
