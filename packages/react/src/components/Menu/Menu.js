@@ -80,7 +80,12 @@ const Menu = React.forwardRef(function Menu(
   function handleOpen() {
     if (menu.current) {
       focusReturn.current = document.activeElement;
-      setPosition(calculatePosition());
+
+      const pos = calculatePosition();
+      menu.current.style.left = `${pos[0]}px`;
+      menu.current.style.top = `${pos[1]}px`;
+      setPosition(pos);
+
       menu.current.focus();
 
       if (onOpen) {
@@ -215,13 +220,6 @@ const Menu = React.forwardRef(function Menu(
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
-
-  useEffect(() => {
-    if (menu.current && position[0] >= 0 && position[1] >= 0) {
-      menu.current.style.left = `${position[0]}px`;
-      menu.current.style.top = `${position[1]}px`;
-    }
-  }, [position]);
 
   const classNames = cx(
     className,
