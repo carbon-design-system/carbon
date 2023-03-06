@@ -68,7 +68,7 @@ describe('ComboButton', () => {
       expect(screen.getAllByRole('button')[1]).toBeDisabled();
     });
 
-    describe('supports prop.size', () => {
+    describe('supports props.size', () => {
       const sizes = ['sm', 'md', 'lg'];
 
       sizes.forEach((size) => {
@@ -86,7 +86,7 @@ describe('ComboButton', () => {
       });
     });
 
-    describe('supports prop.tooltipAlign', () => {
+    describe('supports props.tooltipAlign', () => {
       const alignments = [
         'top',
         'top-left',

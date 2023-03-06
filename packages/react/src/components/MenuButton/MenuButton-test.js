@@ -64,7 +64,7 @@ describe('MenuButton', () => {
       expect(screen.getByRole('button')).toBeDisabled();
     });
 
-    describe('supports prop.size', () => {
+    describe('supports props.size', () => {
       // Button component doesn't apply any size class for `lg`
       const sizes = ['sm', 'md'];
 
@@ -81,7 +81,7 @@ describe('MenuButton', () => {
       });
     });
 
-    describe('supports prop.kind', () => {
+    describe('supports props.kind', () => {
       const kinds = ['primary', 'tertiary', 'ghost'];
 
       kinds.forEach((kind) => {
