@@ -28,7 +28,7 @@ const handleClick = (event: MouseEvent<HTMLDivElement>) => {
 type ExcludedAttributes = 'onKeyDown' | 'onKeyPress' | 'ref';
 
 export interface ListBoxProps
-  extends Omit<ReactAttr<'div'>, ExcludedAttributes> {
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
   /**
    * Specify whether the ListBox is currently disabled
    */
@@ -101,7 +101,7 @@ const ListBox: ListBoxComponent = React.forwardRef(function ListBox(
     isOpen,
     ...rest
   }: ListBoxProps,
-  ref: React.ForwardedRef<HTMLDivElement>
+  ref: React.LegacyRef<HTMLDivElement>
 ) {
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
