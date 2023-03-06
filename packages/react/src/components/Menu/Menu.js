@@ -31,6 +31,7 @@ const Menu = React.forwardRef(function Menu(
     className,
     label,
     onClose,
+    onOpen,
     open,
     size = 'sm',
     target = document.body,
@@ -81,6 +82,10 @@ const Menu = React.forwardRef(function Menu(
       focusReturn.current = document.activeElement;
       setPosition(calculatePosition());
       menu.current.focus();
+
+      if (onOpen) {
+        onOpen();
+      }
     }
   }
 
@@ -272,6 +277,11 @@ Menu.propTypes = {
    * Provide an optional function to be called when the Menu should be closed.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the Menu is opened.
+   */
+  onOpen: PropTypes.func,
 
   /**
    * Whether the Menu is open or not.

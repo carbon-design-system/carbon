@@ -9127,6 +9127,9 @@ Map {
       "onClose": Object {
         "type": "func",
       },
+      "onOpen": Object {
+        "type": "func",
+      },
       "open": Object {
         "type": "bool",
       },
