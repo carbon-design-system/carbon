@@ -3296,7 +3296,7 @@ Map {
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "ariaLabel": "Choose an item",
+      "aria-label": "Choose an item",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3309,9 +3309,10 @@ Map {
       "sortItems": [Function],
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
@@ -4536,7 +4537,7 @@ Map {
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "ariaLabel": "Choose an item",
+        "aria-label": "Choose an item",
         "compareItems": [Function],
         "direction": "bottom",
         "disabled": false,
@@ -4549,9 +4550,10 @@ Map {
         "sortItems": [Function],
       },
       "propTypes": Object {
-        "ariaLabel": Object {
+        "aria-label": Object {
           "type": "string",
         },
+        "ariaLabel": [Function],
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
