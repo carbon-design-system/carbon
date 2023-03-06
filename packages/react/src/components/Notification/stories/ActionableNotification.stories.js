@@ -24,7 +24,6 @@ export default {
     lowContrast: false,
     hideCloseButton: false,
     ['aria-label']: 'closes notification',
-    ariaLabel: 'closes notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
