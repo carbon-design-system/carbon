@@ -10,7 +10,16 @@ import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { usePrefix } from '../internal/usePrefix';
 
+/**
+ * @param {{ name: string, className?: string, type: string }} param0
+ * @returns
+ */
 const wrapComponent = ({ name, className: getClassName, type }) => {
+  /**
+   *
+   * @param {{ className?: string, [x: string]: any}} param0
+   * @returns
+   */
   function Component({ className: baseClassName, ...other }) {
     const prefix = usePrefix();
     const componentClass = cx(
