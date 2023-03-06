@@ -174,7 +174,7 @@ describe('Select', () => {
       render(
         <Select
           id="select-1"
-          label="Select label"
+          labelText="Select label"
           readOnly={true}
           onClick={onClick}
           onChange={onChange}>

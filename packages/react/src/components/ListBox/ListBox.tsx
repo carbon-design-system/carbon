@@ -6,7 +6,7 @@
  */
 
 import cx from 'classnames';
-import React, { KeyboardEvent, MouseEvent, useContext} from 'react';
+import React, { KeyboardEvent, MouseEvent, useContext } from 'react';
 import PropTypes from 'prop-types';
 import deprecate from '../../prop-types/deprecate';
 import { ListBoxType, ListBoxSize } from './ListBoxPropTypes';
@@ -25,11 +25,10 @@ const handleClick = (event: MouseEvent<HTMLDivElement>) => {
   event.stopPropagation();
 };
 
-type ExcludedAttributes = 'onKeyDown' | 'onKeyPress' | 'ref'
+type ExcludedAttributes = 'onKeyDown' | 'onKeyPress' | 'ref';
 
 export interface ListBoxProps
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
-
   /**
    * Specify whether the ListBox is currently disabled
    */
@@ -53,7 +52,7 @@ export interface ListBoxProps
   /**
    * `true` to use the light version. For use on $ui-01 backgrounds only.
    * Don't use this to make tile background color same as container background color.
-   * 
+   *
    * @deprecated The `light` prop for `ListBox` has been deprecated in favor of
    * the new `Layer` component. It will be removed in the next major release.
    */
@@ -81,7 +80,7 @@ export interface ListBoxProps
   warnText?: React.ReactNode;
 }
 
-export type ListBoxComponent = ForwardRefReturn<HTMLDivElement, ListBoxProps>
+export type ListBoxComponent = ForwardRefReturn<HTMLDivElement, ListBoxProps>;
 
 /**
  * `ListBox` is a generic container component that handles creating the
@@ -109,7 +108,7 @@ const ListBox: ListBoxComponent = React.forwardRef(function ListBox(
   const showWarning = !invalid && warn;
 
   const className = cx({
-    ...(containerClassName && {[containerClassName]: true}),
+    ...(containerClassName && { [containerClassName]: true }),
     [`${prefix}--list-box`]: true,
     [`${prefix}--list-box--${size}`]: size,
     [`${prefix}--list-box--inline`]: type === 'inline',
