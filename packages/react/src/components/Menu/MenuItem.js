@@ -45,6 +45,9 @@ const MenuItem = React.forwardRef(function MenuItem(
   const [submenuOpen, setSubmenuOpen] = useState(false);
   const hoverIntentTimeout = useRef(null);
 
+  const isDisabled = disabled && !hasChildren;
+  const isDanger = kind === 'danger' && !hasChildren;
+
   function registerItem() {
     context.dispatch({
       type: 'registerItem',
@@ -71,13 +74,15 @@ const MenuItem = React.forwardRef(function MenuItem(
   }
 
   function handleClick(e) {
-    if (hasChildren) {
-      openSubmenu();
-    } else {
-      context.state.requestCloseRoot(e);
+    if (!isDisabled) {
+      if (hasChildren) {
+        openSubmenu();
+      } else {
+        context.state.requestCloseRoot(e);
 
-      if (onClick) {
-        onClick(e);
+        if (onClick) {
+          onClick(e);
+        }
       }
     }
   }
@@ -109,8 +114,8 @@ const MenuItem = React.forwardRef(function MenuItem(
   }
 
   const classNames = cx(className, `${prefix}--menu-item`, {
-    [`${prefix}--menu-item--disabled`]: disabled,
-    [`${prefix}--menu-item--${kind}`]: kind !== 'default',
+    [`${prefix}--menu-item--disabled`]: isDisabled,
+    [`${prefix}--menu-item--danger`]: isDanger,
   });
 
   // on first render, register this menuitem in the context's state
@@ -127,7 +132,7 @@ const MenuItem = React.forwardRef(function MenuItem(
       ref={ref}
       className={classNames}
       tabIndex="-1"
-      aria-disabled={disabled}
+      aria-disabled={isDisabled || null}
       aria-haspopup={hasChildren || null}
       aria-expanded={hasChildren ? submenuOpen : null}
       onClick={handleClick}

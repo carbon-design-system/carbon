@@ -26,6 +26,7 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
     orientation = 'horizontal',
     readOnly,
     valueSelected,
+    ...rest
   },
   ref
 ) {
@@ -88,7 +89,8 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
       <fieldset
         className={fieldsetClasses}
         disabled={disabled}
-        aria-readonly={readOnly}>
+        aria-readonly={readOnly}
+        {...rest}>
         {legendText && (
           <Legend className={`${prefix}--label`}>{legendText}</Legend>
         )}

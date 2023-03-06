@@ -21,7 +21,7 @@ const defaultTranslations = {
   [translationIds['open.menu']]: 'Open menu',
 };
 
-const defaultTranslateWithId = (id: string) => defaultTranslations[id]
+const defaultTranslateWithId = (id: string) => defaultTranslations[id];
 
 export interface ListBoxMenuIconProps {
   /**

@@ -29,7 +29,7 @@ function FlexGrid<T extends React.ElementType>({
     [`${prefix}--grid--full-width`]: fullWidth,
   });
   // cast as any to let TypeScript allow passing in attributes to base component
-  const BaseComponentAsAny: any = BaseComponent
+  const BaseComponentAsAny: any = BaseComponent;
   return (
     <GridSettings mode="flexbox" subgrid={false}>
       <BaseComponentAsAny className={className} {...rest}>
