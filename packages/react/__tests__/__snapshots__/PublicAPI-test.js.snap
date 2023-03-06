@@ -4028,7 +4028,6 @@ Map {
       "aria-label": Object {
         "type": "string",
       },
-      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },

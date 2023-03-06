@@ -420,7 +420,6 @@ ToastNotification.defaultProps = {
 
 export function InlineNotification({
   ['aria-label']: ariaLabel,
-  ariaLabel: deprecatedAriaLabel,
   children,
   title,
   subtitle,
@@ -491,7 +490,7 @@ export function InlineNotification({
           notificationType="inline"
           onClick={handleCloseButtonClick}
           aria-hidden="true"
-          aria-label={deprecatedAriaLabel || ariaLabel}
+          aria-label={ariaLabel}
           tabIndex="-1"
         />
       )}
@@ -504,15 +503,6 @@ InlineNotification.propTypes = {
    * Provide a description for "close" icon button that can be read by screen readers
    */
   ['aria-label']: PropTypes.string,
-
-  /**
-   * Deprecated, please use `aria-label` instead.
-   * Provide a description for "close" icon button that can be read by screen readers
-   */
-  ariaLabel: deprecate(
-    PropTypes.string,
-    'This prop syntax has been deprecated. Please use the new `aria-label`.'
-  ),
 
   /**
    * Specify the content
