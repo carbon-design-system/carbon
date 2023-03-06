@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -72,11 +72,9 @@ const ComboButton = React.forwardRef(function ComboButton(
     }
   }
 
-  useEffect(() => {
-    if (menuRef.current && width) {
-      menuRef.current.style.width = `${width}px`;
-    }
-  }, [width]);
+  function handleOpen() {
+    menuRef.current.style.width = `${width}px`;
+  }
 
   const containerClasses = classNames(
     `${prefix}--combo-button__container`,
@@ -121,6 +119,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         size={size}
         open={open}
         onClose={handleClose}
+        onOpen={handleOpen}
         x={x}
         y={[y[0] - spacing, y[1] + spacing]}>
         {children}

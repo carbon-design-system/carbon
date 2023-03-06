@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -58,11 +58,9 @@ const MenuButton = React.forwardRef(function MenuButton(
     }
   }
 
-  useEffect(() => {
-    if (menuRef.current && width) {
-      menuRef.current.style.width = `${width}px`;
-    }
-  }, [width]);
+  function handleOpen() {
+    menuRef.current.style.width = `${width}px`;
+  }
 
   const triggerClasses = classNames(
     `${prefix}--menu-button__trigger`,
@@ -98,6 +96,7 @@ const MenuButton = React.forwardRef(function MenuButton(
         size={size}
         open={open}
         onClose={handleClose}
+        onOpen={handleOpen}
         x={x}
         y={[y[0] - spacing, y[1] + spacing]}>
         {children}
