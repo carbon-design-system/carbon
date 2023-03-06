@@ -9,7 +9,6 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
-import { match, keys } from '../../internal/keyboard';
 import { usePrefix } from '../../internal/usePrefix';
 import { KeyboardEvent, MouseEvent } from 'react';
 
@@ -18,7 +17,9 @@ export interface ListBoxSelectionProps {
    * Specify a function to be invoked when a user interacts with the clear
    * selection element.
    */
-  clearSelection(event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>): void;
+  clearSelection(
+    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
+  ): void;
 
   /**
    * Specify whether or not the clear selection element should be disabled
@@ -29,7 +30,9 @@ export interface ListBoxSelectionProps {
    * Specify an optional `onClearSelection` handler that is called when the underlying
    * element is cleared
    */
-  onClearSelection?(event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>): void;
+  onClearSelection?(
+    event: MouseEvent<HTMLDivElement> | KeyboardEvent<HTMLDivElement>
+  ): void;
 
   /**
    * Whether or not the Dropdown is readonly
@@ -50,7 +53,7 @@ export interface ListBoxSelectionProps {
   translateWithId(messageId: string, args?: Record<string, unknown>): string;
 }
 
-export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>
+export type ListBoxSelectionComponent = React.FC<ListBoxSelectionProps>;
 
 /**
  * `ListBoxSelection` is used to provide controls for clearing a selection, in
@@ -80,20 +83,6 @@ const ListBoxSelection: ListBoxSelectionComponent = ({
       onClearSelection(event);
     }
   };
-  const handleOnKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    event.stopPropagation();
-    if (disabled || readOnly) {
-      return;
-    }
-
-    // When a user hits ENTER, we'll clear the selection
-    if (match(event.code, keys.Enter)) {
-      clearSelection(event);
-      if (onClearSelection) {
-        onClearSelection(event);
-      }
-    }
-  };
   const description = selectionCount ? t('clear.all') : t('clear.selection');
   const tagClasses = cx(
     `${prefix}--tag`,
@@ -103,6 +92,8 @@ const ListBoxSelection: ListBoxSelectionComponent = ({
       [`${prefix}--tag--disabled`]: disabled,
     }
   );
+
+  /* eslint-disable jsx-a11y/click-events-have-key-events */
   return selectionCount ? (
     <div className={tagClasses}>
       <span className={`${prefix}--tag__label`} title={`${selectionCount}`}>
@@ -110,10 +101,9 @@ const ListBoxSelection: ListBoxSelectionComponent = ({
       </span>
       <div
         role="button"
-        tabIndex={disabled ? -1 : 0}
+        tabIndex={-1}
         className={`${prefix}--tag__close-icon`}
         onClick={handleOnClick}
-        onKeyDown={handleOnKeyDown}
         aria-label={t('clear.all')}
         title={description}
         aria-disabled={readOnly ? true : undefined}>
@@ -124,16 +114,15 @@ const ListBoxSelection: ListBoxSelectionComponent = ({
     <div
       role="button"
       className={className}
-      tabIndex={disabled ? -1 : 0}
+      tabIndex={-1}
       onClick={handleOnClick}
-      onKeyDown={handleOnKeyDown}
       aria-label={description}
       title={description}>
       {selectionCount}
       <Close />
     </div>
   );
-}
+};
 
 export const translationIds = {
   'clear.all': 'clear.all',

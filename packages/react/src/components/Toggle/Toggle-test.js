@@ -92,10 +92,15 @@ describe('Toggle', () => {
       ).toBe(props.labelText);
     });
 
-    it("doesn't render sideLabel if props.hideLabel and props['aria-labelledby'] are provided", () => {
+    it("doesn't render sideLabel if props.hideLabel and no props.labelText is provided", () => {
       const externalElementId = 'external-element-id';
       wrapper.rerender(
-        <Toggle {...props} hideLabel aria-labelledby={externalElementId} />
+        <Toggle
+          {...props}
+          hideLabel
+          labelText={null}
+          aria-labelledby={externalElementId}
+        />
       );
 
       expect(
