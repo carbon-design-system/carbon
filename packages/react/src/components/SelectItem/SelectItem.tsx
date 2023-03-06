@@ -6,15 +6,49 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { HTMLAttributes } from 'react';
 import classNames from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SelectItem = ({ className, value, disabled, hidden, text, ...other }) => {
+export interface SelectItemProps extends HTMLAttributes<HTMLOptionElement> {
+  /**
+   * Specify an optional className to be applied to the node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the <SelectItem> should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether the <SelectItem> is hidden
+   */
+  hidden?: boolean;
+
+  /**
+   * Provide the contents of your <SelectItem>
+   */
+  text: string;
+
+  /**
+   * Specify the value of the <SelectItem>
+   */
+  value: any;
+}
+
+const SelectItem = ({
+  className,
+  value,
+  disabled,
+  hidden,
+  text,
+  ...other
+}: SelectItemProps) => {
   const prefix = usePrefix();
   const selectItemClasses = classNames({
     [`${prefix}--select-option`]: true,
-    [className]: className,
+    ...(className && { [className]: className }),
   });
 
   return (
