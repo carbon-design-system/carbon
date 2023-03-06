@@ -970,7 +970,7 @@ Map {
   "ComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "ariaLabel": "Choose an item",
+      "aria-label": "Choose an item",
       "direction": "bottom",
       "disabled": false,
       "itemToElement": null,
@@ -979,9 +979,10 @@ Map {
       "type": "default",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
@@ -3295,7 +3296,7 @@ Map {
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "ariaLabel": "Choose an item",
+      "aria-label": "Choose an item",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3308,9 +3309,10 @@ Map {
       "sortItems": [Function],
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
@@ -4535,7 +4537,7 @@ Map {
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "ariaLabel": "Choose an item",
+        "aria-label": "Choose an item",
         "compareItems": [Function],
         "direction": "bottom",
         "disabled": false,
@@ -4548,9 +4550,10 @@ Map {
         "sortItems": [Function],
       },
       "propTypes": Object {
-        "ariaLabel": Object {
+        "aria-label": Object {
           "type": "string",
         },
+        "ariaLabel": [Function],
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
@@ -5664,6 +5667,9 @@ Map {
         "type": "bool",
       },
       "highContrast": Object {
+        "type": "bool",
+      },
+      "isTabTip": Object {
         "type": "bool",
       },
       "open": Object {
@@ -8529,7 +8535,9 @@ Map {
       "labelB": Object {
         "type": "node",
       },
-      "labelText": [Function],
+      "labelText": Object {
+        "type": "string",
+      },
       "onClick": Object {
         "type": "func",
       },
