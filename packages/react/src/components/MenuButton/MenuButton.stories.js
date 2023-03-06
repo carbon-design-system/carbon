@@ -31,7 +31,9 @@ export const Default = () => (
   <MenuButton label="Actions">
     <MenuItem label="First action" />
     <MenuItem label="Second action" />
-    <MenuItem label="Third action" />
+    <MenuItem label="Third action" disabled />
+    <MenuItemDivider />
+    <MenuItem label="Danger action" kind="danger" />
   </MenuButton>
 );
 
