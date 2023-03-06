@@ -255,6 +255,41 @@ change. When creating a new component, even if you do not anticipate an explicit
 need to provide a forwarded ref, it's likely still worthwhile to include one to
 avoid unecessary breaking changes in the future.
 
+#### Authoring dynamic/inline styles
+
+It's increasingly common for applications to use a Content Security Policy (CSP)
+header with a
+[`style-src` directive](https://content-security-policy.com/style-src/). When
+this is configured, inline styles are blocked. Due to this, `style={{}}` can not
+be used on any element within the codebase. The `react/forbid-component-props`
+eslint rule is configured to flag invalid usages of the `style` attribute/prop.
+
+Components that need dynamic or inline styles can author these via the
+[CSS Object Model (CSSOM)](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model).
+Dynamic styles can be set via individual properties on the
+[`CSSStyleDeclaration`](https://developer.mozilla.org/en-US/docs/Web/API/CSSStyleDeclaration)
+interface object provided to
+[`HTMLElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement).
+This will usually need to be wrapped in a `useIsomorphicEffect` hook to ensure
+compatibility between SSR and browser environments and also to ensure the value
+is unset if not provided.
+
+```jsx
+function MyComponent({ width }) {
+  const ref = useRef();
+
+  useIsomorphicEffect(() => {
+    if (width) {
+      ref.current.style.width = `${width}px`;
+    } else {
+      ref.current.style.width = null;
+    }
+  }, [width]);
+
+  return <div ref={ref} />;
+}
+```
+
 #### Translating a component
 
 Certain components will need to expose a way for the caller to pass in

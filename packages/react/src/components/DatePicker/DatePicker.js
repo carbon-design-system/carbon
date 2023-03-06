@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -447,6 +447,17 @@ const DatePicker = React.forwardRef(function DatePicker(
       // of type: Array and `destroy` will not be defined
       if (calendar && calendar.destroy) {
         calendar.destroy();
+      }
+
+      // prevent a duplicate date selection when a default value is set
+      if (value) {
+        if (startInputField?.current) {
+          startInputField.current.value = '';
+        }
+        if (endInputField?.current) {
+          // eslint-disable-next-line react-hooks/exhaustive-deps
+          endInputField.current.value = '';
+        }
       }
 
       if (start) {

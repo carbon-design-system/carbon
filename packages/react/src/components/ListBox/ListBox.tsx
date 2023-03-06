@@ -107,7 +107,8 @@ const ListBox: ListBoxComponent = React.forwardRef(function ListBox(
   const { isFluid } = useContext(FormContext);
   const showWarning = !invalid && warn;
 
-  const className = cx(containerClassName, {
+  const className = cx({
+    ...(containerClassName && { [containerClassName]: true }),
     [`${prefix}--list-box`]: true,
     [`${prefix}--list-box--${size}`]: size,
     [`${prefix}--list-box--inline`]: type === 'inline',

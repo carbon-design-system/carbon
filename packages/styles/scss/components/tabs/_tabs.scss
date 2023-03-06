@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -279,7 +279,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       }
 
       overflow: hidden;
-      max-width: 10rem;
       padding: $spacing-04 $spacing-05 $spacing-03;
       border-bottom: $tab-underline-color;
       color: $text-secondary;

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2018, 2018
+ * Copyright IBM Corp. 2018, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,11 +9,11 @@
 
 const fs = require('fs-extra');
 const path = require('path');
-const prettier = require('prettier');
-const lerna = require('../lerna.json');
+const _prettier = require('prettier');
+const _lerna = require('../lerna.json');
 const packageJson = require('../package.json');
 
-const prettierOptions = {
+const _prettierOptions = {
   ...packageJson.prettier,
   parser: 'markdown',
 };
@@ -143,7 +143,7 @@ async function sync() {
     '**/tasks/**',
   ];
   await Promise.all(
-    packages.map(async ({ packageJson, packagePath }) => {
+    packages.map(async ({ _packageJson, packagePath }) => {
       const ignorePath = path.join(packagePath, '.npmignore');
       const ignorePatterns = [...defaultIgnorePatterns];
 
