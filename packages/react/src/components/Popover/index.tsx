@@ -44,7 +44,7 @@ interface PopoverBaseProps {
   align?: PopoverAlignment;
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to futurue changes.
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
   autoAlign?: boolean;
 
@@ -75,6 +75,11 @@ interface PopoverBaseProps {
   highContrast?: boolean;
 
   /**
+   * Render the component using the tab tip variant
+   */
+  isTabTip?: boolean;
+
+  /**
    * Specify whether the component is currently open or closed
    */
   open: boolean;
@@ -88,10 +93,11 @@ export type PopoverProps<T extends React.ElementType> = PolymorphicProps<
 const Popover = React.forwardRef(
   <T extends React.ElementType>(
     {
-      align = 'bottom',
+      isTabTip,
+      align = isTabTip ? 'bottom-left' : 'bottom',
       as,
       autoAlign = false,
-      caret = true,
+      caret = isTabTip ? false : true,
       className: customClassName,
       children,
       dropShadow = true,
@@ -111,6 +117,17 @@ const Popover = React.forwardRef(
       };
     }, []);
 
+    if (isTabTip) {
+      const tabTipAlignments: PopoverAlignment[] = [
+        'bottom-left',
+        'bottom-right',
+      ];
+
+      if (!tabTipAlignments.includes(align)) {
+        align = 'bottom-left';
+      }
+    }
+
     const ref = useMergedRefs([forwardRef, popover]);
     const [autoAligned, setAutoAligned] = useState(false);
     const [autoAlignment, setAutoAlignment] = useState(align);
@@ -121,8 +138,9 @@ const Popover = React.forwardRef(
         [`${prefix}--popover--drop-shadow`]: dropShadow,
         [`${prefix}--popover--high-contrast`]: highContrast,
         [`${prefix}--popover--open`]: open,
-        [`${prefix}--popover--${autoAlignment}`]: autoAligned,
+        [`${prefix}--popover--${autoAlignment}`]: autoAligned && !isTabTip,
         [`${prefix}--popover--${align}`]: !autoAligned,
+        [`${prefix}--popover--tab-tip`]: isTabTip,
       },
       customClassName
     );
@@ -132,7 +150,7 @@ const Popover = React.forwardRef(
         return;
       }
 
-      if (!autoAlign) {
+      if (!autoAlign || isTabTip) {
         setAutoAligned(false);
         return;
       }
@@ -251,13 +269,31 @@ const Popover = React.forwardRef(
         setAutoAligned(true);
         setAutoAlignment(alignment);
       }
-    }, [autoAligned, align, autoAlign, prefix, open]);
+    }, [autoAligned, align, autoAlign, prefix, open, isTabTip]);
 
     const BaseComponent: React.ElementType<any> = as ?? 'span';
+
+    const mappedChildren = React.Children.map(children, (child) => {
+      const item = child as any;
+
+      if (item?.type === 'button') {
+        const { className } = item.props;
+        const tabTipClasses = cx(
+          `${prefix}--popover--tab-tip__button`,
+          className
+        );
+        return React.cloneElement(item, {
+          className: tabTipClasses,
+        });
+      } else {
+        return item;
+      }
+    });
+
     return (
       <PopoverContext.Provider value={value}>
         <BaseComponent {...rest} className={className} ref={ref}>
-          {children}
+          {isTabTip ? mappedChildren : children}
         </BaseComponent>
       </PopoverContext.Provider>
     );
@@ -299,7 +335,7 @@ Popover.propTypes = {
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.elementType]),
 
   /**
-   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to futurue changes.
+   * Will auto-align the popover on first render if it is not visible. This prop is currently experimental and is subject to future changes.
    */
   autoAlign: PropTypes.bool,
 
@@ -328,6 +364,11 @@ Popover.propTypes = {
    * Render the component using the high-contrast variant
    */
   highContrast: PropTypes.bool,
+
+  /**
+   * Render the component using the tab tip variant
+   */
+  isTabTip: PropTypes.bool,
 
   /**
    * Specify whether the component is currently open or closed

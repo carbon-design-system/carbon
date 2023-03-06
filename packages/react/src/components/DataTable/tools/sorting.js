@@ -100,6 +100,7 @@ export const sortRows = ({
       locale,
       sortStates,
       compare,
+      rowIds: [a, b],
     });
   });
 
