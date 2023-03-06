@@ -14,6 +14,7 @@ import RadioButtonGroup from '../RadioButtonGroup';
 import { default as Checkbox } from '../Checkbox';
 import mdx from './Popover.mdx';
 import { Settings } from '@carbon/icons-react';
+import { keys, match } from '../../internal/keyboard';
 
 const prefix = 'cds';
 
@@ -82,7 +83,14 @@ export const TabTip = () => {
   const [openTwo, setOpenTwo] = useState(false);
   return (
     <div className="popover-tabtip-story" style={{ display: 'flex' }}>
-      <Popover open={open} isTabTip>
+      <Popover
+        open={open}
+        onKeyDown={(evt) => {
+          if (match(evt, keys.Escape)) {
+            setOpen(false);
+          }
+        }}
+        isTabTip>
         <button
           aria-label="Settings"
           type="button"
