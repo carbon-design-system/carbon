@@ -6891,15 +6891,16 @@ Map {
   },
   "StructuredListWrapper" => Object {
     "defaultProps": Object {
-      "ariaLabel": "Structured list section",
+      "aria-label": "Structured list section",
       "isCondensed": false,
       "isFlush": false,
       "selection": false,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
