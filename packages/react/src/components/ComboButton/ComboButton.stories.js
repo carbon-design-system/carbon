@@ -44,7 +44,9 @@ export const Playground = (args) => {
     <ComboButton {...args}>
       <MenuItem label="Second action" onClick={onClick} />
       <MenuItem label="Third action" onClick={onClick} />
-      <MenuItem label="Fourth action" onClick={onClick} />
+      <MenuItem label="Fourth action" disabled onClick={onClick} />
+      <MenuItemDivider />
+      <MenuItem label="Danger action" kind="danger" onClick={onClick} />
     </ComboButton>
   );
 };
