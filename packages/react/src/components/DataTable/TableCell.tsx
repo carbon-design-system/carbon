@@ -5,10 +5,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { TdHTMLAttributes } from 'react';
 import wrapComponent from '../../tools/wrapComponent';
-import { ReactAttr } from '../../types/common';
 
-export type TableCellProps = ReactAttr<'td'>;
+export type TableCellProps = TdHTMLAttributes<HTMLTableCellElement>;
 
 const TableCell: React.FC<TableCellProps> = wrapComponent({
   name: 'TableCell',

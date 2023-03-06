@@ -15,7 +15,7 @@ import { ForwardRefReturn, ReactAttr } from '../../types/common';
 type ExcludedAttributes = 'id' | 'value' | 'size';
 
 export interface TimePickerProps
-  extends Omit<ReactAttr<'input'>, ExcludedAttributes> {
+  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
   /**
    * Pass in the children that will be rendered next to the form control
    */
