@@ -176,6 +176,7 @@ export const iconInverse = gray100;
 export const iconOnColor = white;
 export const iconOnColorDisabled = adjustAlpha(iconOnColor, 0.25);
 export const iconDisabled = adjustAlpha(iconPrimary, 0.25);
+export const iconInteractive = white;
 
 // Support
 export const supportError = red40;
