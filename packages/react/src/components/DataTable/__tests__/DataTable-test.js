@@ -28,9 +28,12 @@ import DataTable, {
   TableToolbarSearch,
   TableToolbarMenu,
 } from '../';
-import { sortStates } from '../state/sorting';
 import userEvent from '@testing-library/user-event';
 import { render, screen, within } from '@testing-library/react';
+
+// Test helpers
+const getLastCallFor = (mocker) =>
+  mocker.mock.calls[mocker.mock.calls.length - 1];
 
 describe('DataTable', () => {
   let mockProps;
@@ -238,21 +241,719 @@ describe('DataTable', () => {
         ]);
       });
 
-      it.skip('should reset to ASC ordering when another header is clicked', () => {
-        const wrapper = mount(<DataTable isSortable={true} {...mockProps} />);
+      it('should reset to ASC ordering when another header is clicked', () => {
+        render(<DataTable isSortable={true} {...mockProps} />);
 
-        const firstHeader = getHeaderAt(wrapper, 0);
-        const secondHeader = getHeaderAt(wrapper, 1);
+        const firstHeader = () => screen.getAllByRole('columnheader')[0];
+        const secondHeader = () => screen.getAllByRole('columnheader')[1];
+        const firstHeaderButton = within(firstHeader()).getByRole('button');
+        const secondHeaderButton = within(secondHeader()).getByRole('button');
 
-        firstHeader.simulate('click');
-        expect(wrapper.state('rowIds')).toEqual(['a', 'b', 'c']);
+        expect(firstHeader()).toHaveTextContent('ascending');
 
-        firstHeader.simulate('click');
-        expect(wrapper.state('rowIds')).toEqual(['c', 'b', 'a']);
-        expect(wrapper.state('sortDirection')).toBe(sortStates.DESC);
+        userEvent.click(firstHeaderButton);
+        expect(firstHeader()).toHaveTextContent('descending');
 
-        secondHeader.simulate('click');
-        expect(wrapper.state('sortDirection')).toBe(sortStates.ASC);
+        userEvent.click(firstHeaderButton);
+        expect(firstHeader()).toHaveTextContent('unsort');
+
+        userEvent.click(secondHeaderButton);
+        // After clicking the second header once, the table will now be
+        // sorted ascending based on that header, which means the button
+        // should now be in a state where clicking _again_ will sort it
+        // "descending" via that header:
+        expect(secondHeader()).toHaveTextContent('descending');
+      });
+    });
+
+    describe('filtering', () => {
+      it('should filter rows by the given input', () => {
+        render(<DataTable isSortable={true} {...mockProps} />);
+        const filterInput = screen.getByRole('searchbox');
+
+        // +1 for the header row
+        expect(screen.getAllByRole('row').length).toBe(
+          mockProps.rows.length + 1
+        );
+
+        userEvent.type(filterInput, 'Field 1');
+
+        expect(mockProps.render).toHaveBeenCalledWith(
+          expect.objectContaining({
+            rows: [
+              expect.objectContaining({
+                id: 'a',
+              }),
+            ],
+          })
+        );
+      });
+    });
+
+    describe('selection', () => {
+      let mockProps;
+
+      beforeEach(() => {
+        mockProps = {
+          rows: [
+            {
+              id: 'b',
+              fieldA: 'Field 2:A',
+              fieldB: 'Field 2:B',
+            },
+            {
+              id: 'a',
+              fieldA: 'Field 1:A',
+              fieldB: 'Field 1:B',
+            },
+            {
+              id: 'c',
+              fieldA: 'Field 3:A',
+              fieldB: 'Field 3:B',
+            },
+          ],
+          headers: [
+            {
+              key: 'fieldA',
+              header: 'Field A',
+            },
+            {
+              key: 'fieldB',
+              header: 'Field B',
+            },
+          ],
+          locale: 'en',
+          render: jest.fn(
+            ({
+              rows,
+              headers,
+              getHeaderProps,
+              getSelectionProps,
+              getBatchActionProps,
+              onInputChange,
+            }) => (
+              <TableContainer title="DataTable with selection">
+                <TableToolbar>
+                  <TableBatchActions {...getBatchActionProps()}>
+                    <TableBatchAction onClick={jest.fn()}>
+                      Ghost
+                    </TableBatchAction>
+                    <TableBatchAction onClick={jest.fn()}>
+                      Ghost
+                    </TableBatchAction>
+                    <TableBatchAction onClick={jest.fn()}>
+                      Ghost
+                    </TableBatchAction>
+                  </TableBatchActions>
+                  <TableToolbarContent>
+                    <TableToolbarSearch
+                      persistent
+                      onChange={onInputChange}
+                      id="custom-id"
+                    />
+                    <TableToolbarMenu>
+                      <TableToolbarAction onClick={jest.fn()}>
+                        Action 1
+                      </TableToolbarAction>
+                      <TableToolbarAction onClick={jest.fn()}>
+                        Action 2
+                      </TableToolbarAction>
+                      <TableToolbarAction onClick={jest.fn()}>
+                        Action 3
+                      </TableToolbarAction>
+                    </TableToolbarMenu>
+                    <Button onClick={jest.fn()} size="sm" kind="primary">
+                      Add new
+                    </Button>
+                  </TableToolbarContent>
+                </TableToolbar>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableSelectAll {...getSelectionProps()} />
+                      {headers.map((header, i) => (
+                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow key={row.id}>
+                        <TableSelectRow {...getSelectionProps({ row })} />
+                        {row.cells.map((cell) => (
+                          <TableCell key={cell.id}>{cell.value}</TableCell>
+                        ))}
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )
+          ),
+        };
+      });
+
+      it('should render and match snapshot', () => {
+        const { container } = render(<DataTable {...mockProps} />);
+        expect(container).toMatchSnapshot();
+      });
+
+      it('should have select-all default to un-checked if no rows are present', () => {
+        render(<DataTable {...mockProps} rows={[]} />);
+        expect(screen.getAllByRole('checkbox')[0]).not.toHaveAttribute(
+          'checked'
+        );
+      });
+
+      it('should select all rows if a user interacts with select all', () => {
+        render(<DataTable {...mockProps} />);
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+        expect(selectAllCheckbox).not.toBeChecked();
+
+        userEvent.click(selectAllCheckbox);
+
+        expect(selectAllCheckbox).toBeChecked();
+
+        const { selectedRows } = getLastCallFor(mockProps.render)[0];
+        expect(selectedRows.length).toBe(mockProps.rows.length);
+      });
+
+      it('should select a specific row when a user interacts with select row', () => {
+        render(<DataTable {...mockProps} />);
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+        const firstRowCheckbox = screen.getAllByRole('checkbox')[1];
+
+        expect(selectAllCheckbox).not.toBeChecked();
+        expect(firstRowCheckbox).not.toBeChecked();
+
+        userEvent.click(firstRowCheckbox);
+
+        expect(firstRowCheckbox).toBeChecked();
+        expect(selectAllCheckbox).toBePartiallyChecked();
+
+        const { selectedRows } = getLastCallFor(mockProps.render)[0];
+        expect(selectedRows.length).toBe(1);
+      });
+
+      it('should deselect all rows when batch action cancel is invoked', async () => {
+        render(<DataTable {...mockProps} />);
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+
+        userEvent.click(selectAllCheckbox);
+        expect(selectAllCheckbox).toBeChecked();
+
+        const { getBatchActionProps } = getLastCallFor(mockProps.render)[0];
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+
+        const cancelButton = await screen.findByText('Cancel');
+        userEvent.click(cancelButton);
+
+        expect(selectAllCheckbox).not.toBeChecked();
+        const { selectedRows } = getLastCallFor(mockProps.render)[0];
+        expect(selectedRows.length).toBe(0);
+      });
+    });
+
+    describe('selection with filtering', () => {
+      let mockProps;
+
+      beforeEach(() => {
+        mockProps = {
+          rows: [
+            {
+              id: 'b',
+              fieldA: 'Field 2:A',
+              fieldB: 'Field 2:B',
+            },
+            {
+              id: 'a',
+              fieldA: 'Field 1:A',
+              fieldB: 'Field 1:B',
+            },
+            {
+              id: 'c',
+              fieldA: 'Field 3:A',
+              fieldB: 'Field 3:B',
+            },
+          ],
+          headers: [
+            {
+              key: 'fieldA',
+              header: 'Field A',
+            },
+            {
+              key: 'fieldB',
+              header: 'Field B',
+            },
+          ],
+          locale: 'en',
+          render: jest.fn(
+            ({
+              rows,
+              headers,
+              getHeaderProps,
+              getSelectionProps,
+              onInputChange,
+            }) => (
+              <TableContainer title="DataTable with selection">
+                <TableToolbar>
+                  <TableToolbarContent>
+                    <TableToolbarSearch
+                      persistent
+                      onChange={onInputChange}
+                      id="custom-id"
+                    />
+                    <TableToolbarMenu>
+                      <TableToolbarAction onClick={jest.fn()}>
+                        Action 1
+                      </TableToolbarAction>
+                      <TableToolbarAction onClick={jest.fn()}>
+                        Action 2
+                      </TableToolbarAction>
+                      <TableToolbarAction onClick={jest.fn()}>
+                        Action 3
+                      </TableToolbarAction>
+                    </TableToolbarMenu>
+                    <Button onClick={jest.fn()} size="sm" kind="primary">
+                      Add new
+                    </Button>
+                  </TableToolbarContent>
+                </TableToolbar>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableSelectAll {...getSelectionProps()} />
+                      {headers.map((header, i) => (
+                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow key={row.id}>
+                        <TableSelectRow {...getSelectionProps({ row })} />
+                        {row.cells.map((cell) => (
+                          <TableCell key={cell.id}>{cell.value}</TableCell>
+                        ))}
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )
+          ),
+        };
+      });
+
+      it('should only select all from filtered items', () => {
+        render(<DataTable {...mockProps} />);
+
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+        const firstRowCheckbox = () => screen.getAllByRole('checkbox')[1];
+        const filterInput = screen.getByRole('searchbox');
+
+        expect(selectAllCheckbox).not.toBeChecked();
+
+        userEvent.type(filterInput, 'Field 1');
+        userEvent.click(firstRowCheckbox());
+        userEvent.clear(filterInput);
+
+        expect(selectAllCheckbox).toBePartiallyChecked();
+
+        let { selectedRows } = getLastCallFor(mockProps.render)[0];
+        expect(selectedRows.length).toBe(1);
+
+        userEvent.click(selectAllCheckbox);
+
+        selectedRows = getLastCallFor(mockProps.render)[0].selectedRows;
+        expect(selectedRows.length).toBe(0);
+      });
+
+      it('should only select rows that are not disabled even when filtered', () => {
+        const nextRows = [
+          ...mockProps.rows.map((row) => ({ ...row })),
+          {
+            id: 'd',
+            fieldA: 'Field 3:A',
+            fieldB: 'Field 3:B',
+            disabled: true,
+          },
+        ];
+        render(<DataTable {...mockProps} rows={nextRows} />);
+
+        const filterInput = screen.getByRole('searchbox');
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+
+        userEvent.type(filterInput, 'Field 3');
+        userEvent.click(selectAllCheckbox);
+
+        const { selectedRows } = getLastCallFor(mockProps.render)[0];
+        expect(selectedRows.length).toBe(1);
+
+        expect(selectAllCheckbox).toBePartiallyChecked();
+      });
+
+      it('does not select a row if they are all disabled', () => {
+        const nextRows = [
+          ...mockProps.rows.map((row) => ({ ...row, disabled: true })),
+        ];
+        render(<DataTable {...mockProps} rows={nextRows} />);
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+
+        userEvent.click(selectAllCheckbox);
+
+        expect(selectAllCheckbox).not.toBePartiallyChecked();
+        expect(selectAllCheckbox).not.toBeChecked();
+
+        const filterInput = screen.getByRole('searchbox');
+
+        userEvent.type(filterInput, 'Field 3');
+        userEvent.click(selectAllCheckbox);
+
+        const { selectedRows } = getLastCallFor(mockProps.render)[0];
+        expect(selectedRows.length).toBe(0);
+      });
+    });
+
+    describe('selection -- radio buttons', () => {
+      let mockProps;
+
+      beforeEach(() => {
+        mockProps = {
+          rows: [
+            {
+              id: 'b',
+              fieldA: 'Field 2:A',
+              fieldB: 'Field 2:B',
+            },
+            {
+              id: 'a',
+              fieldA: 'Field 1:A',
+              fieldB: 'Field 1:B',
+            },
+            {
+              id: 'c',
+              fieldA: 'Field 3:A',
+              fieldB: 'Field 3:B',
+            },
+          ],
+          headers: [
+            {
+              key: 'fieldA',
+              header: 'Field A',
+            },
+            {
+              key: 'fieldB',
+              header: 'Field B',
+            },
+          ],
+          locale: 'en',
+          radio: true,
+          render: jest.fn(
+            ({ rows, headers, getHeaderProps, getSelectionProps }) => (
+              <TableContainer title="DataTable with selection">
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      {headers.map((header, i) => (
+                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <TableRow key={row.id}>
+                        <TableSelectRow {...getSelectionProps({ row })} />
+                        {row.cells.map((cell) => (
+                          <TableCell key={cell.id}>{cell.value}</TableCell>
+                        ))}
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )
+          ),
+        };
+      });
+
+      it('should render', () => {
+        const { container } = render(<DataTable {...mockProps} />);
+        expect(container).toMatchSnapshot();
+      });
+
+      it('should not have select-all checkbox', () => {
+        const { container } = render(<DataTable {...mockProps} />);
+        expect(screen.queryAllByRole('checkbox').length).toBe(0);
+        expect(container).toMatchSnapshot();
+      });
+
+      it('should select a specific row when a user interacts with select row', () => {
+        render(<DataTable {...mockProps} />);
+        const radioButton = screen.getAllByRole('radio')[0];
+
+        expect(radioButton).not.toBeChecked();
+
+        userEvent.click(radioButton);
+        expect(radioButton).toBeChecked();
+
+        const { selectedRows } = getLastCallFor(mockProps.render)[0];
+        expect(selectedRows.length).toBe(1);
+      });
+
+      it('should deselect all other rows when a row is selected', () => {
+        render(<DataTable {...mockProps} />);
+        const radioButtonOne = screen.getAllByRole('radio')[0];
+        const radioButtonTwo = screen.getAllByRole('radio')[1];
+
+        expect(radioButtonOne).not.toBeChecked();
+
+        userEvent.click(radioButtonOne);
+
+        expect(radioButtonOne).toBeChecked();
+        expect(radioButtonTwo).not.toBeChecked();
+
+        userEvent.click(radioButtonTwo);
+        expect(radioButtonOne).not.toBeChecked();
+        expect(radioButtonTwo).toBeChecked();
+
+        const { selectedRows } = getLastCallFor(mockProps.render)[0];
+        expect(selectedRows.length).toBe(1);
+      });
+    });
+
+    describe('updates properly when passed new props', () => {
+      let mockProps;
+
+      beforeEach(() => {
+        mockProps = {
+          rows: [
+            {
+              id: 'b',
+              fieldA: 'Field 2:A',
+              fieldB: 'Field 2:B',
+            },
+            {
+              id: 'a',
+              fieldA: 'Field 1:A',
+              fieldB: 'Field 1:B',
+            },
+            {
+              id: 'c',
+              fieldA: 'Field 3:A',
+              fieldB: 'Field 3:B',
+            },
+          ],
+          headers: [
+            {
+              key: 'fieldA',
+              header: 'Field A',
+            },
+            {
+              key: 'fieldB',
+              header: 'Field B',
+            },
+          ],
+          locale: 'en',
+          render: jest.fn(
+            ({
+              rows,
+              headers,
+              getHeaderProps,
+              getExpandHeaderProps,
+              getSelectionProps,
+              getBatchActionProps,
+              getRowProps,
+              onInputChange,
+            }) => (
+              <TableContainer title="container">
+                <TableToolbar>
+                  <TableBatchActions {...getBatchActionProps()}>
+                    <TableBatchAction onClick={jest.fn()}>
+                      Ghost
+                    </TableBatchAction>
+                  </TableBatchActions>
+                  <TableToolbarSearch onChange={onInputChange} />
+                </TableToolbar>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableExpandHeader {...getExpandHeaderProps()} />
+                      <TableSelectAll {...getSelectionProps()} />
+                      {headers.map((header, i) => (
+                        <TableHeader key={i} {...getHeaderProps({ header })}>
+                          {header.header}
+                        </TableHeader>
+                      ))}
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {rows.map((row) => (
+                      <React.Fragment key={row.id}>
+                        <TableExpandRow {...getRowProps({ row })}>
+                          <TableSelectRow {...getSelectionProps({ row })} />
+                          {row.cells.map((cell) => (
+                            <TableCell key={cell.id}>{cell.value}</TableCell>
+                          ))}
+                        </TableExpandRow>
+                        {row.isExpanded && (
+                          <TableExpandedRow colSpan={headers.length + 3}>
+                            <h1>Expandable row content</h1>
+                            <p>Description here</p>
+                          </TableExpandedRow>
+                        )}
+                      </React.Fragment>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )
+          ),
+        };
+      });
+
+      it('should add additional rows when receiving new props', () => {
+        const { rerender } = render(<DataTable {...mockProps} />);
+        const args = mockProps.render.mock.calls[0][0];
+
+        expect(args.rows.length).toEqual(mockProps.rows.length);
+
+        const nextRows = [
+          ...mockProps.rows,
+          {
+            id: 'd',
+            fieldA: 'Field 4:A',
+            fieldB: 'Field 4:B',
+          },
+        ];
+
+        rerender(<DataTable {...mockProps} rows={nextRows} />);
+
+        const nextArgs = getLastCallFor(mockProps.render)[0];
+        expect(nextArgs.rows.length).toBe(nextRows.length);
+        expect(nextArgs.rows.map((row) => row.id)).toEqual([
+          'b',
+          'a',
+          'c',
+          'd',
+        ]);
+      });
+
+      it('should add additional headers when receiving new props', () => {
+        const { rerender } = render(<DataTable {...mockProps} />);
+        const args = mockProps.render.mock.calls[0][0];
+
+        expect(args.headers).toEqual(mockProps.headers);
+
+        const nextProps = {
+          rows: mockProps.rows.map((row) => ({
+            ...row,
+            fieldC: 'Field X:C',
+          })),
+          headers: [
+            ...mockProps.headers,
+            {
+              key: 'fieldC',
+              header: 'Field C',
+            },
+          ],
+        };
+
+        rerender(<DataTable {...mockProps} {...nextProps} />);
+
+        const nextArgs = getLastCallFor(mockProps.render)[0];
+        expect(nextArgs.headers).toEqual(nextProps.headers);
+      });
+
+      it('should keep batch action after adding rows, as long as some existing rows are selected', () => {
+        const { rerender } = render(<DataTable {...mockProps} />);
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+        userEvent.click(selectAllCheckbox);
+
+        const nextRows = [
+          ...mockProps.rows.map((row) => ({ ...row, isSelected: true })),
+          {
+            id: 'd',
+            fieldA: 'Field 4:A',
+            fieldB: 'Field 4:B',
+            isSelected: false,
+          },
+        ];
+
+        rerender(<DataTable {...mockProps} rows={nextRows} />);
+
+        expect(selectAllCheckbox).not.toBeChecked();
+        const { getBatchActionProps, selectedRows } = getLastCallFor(
+          mockProps.render
+        )[0];
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+        expect(selectedRows.length).toBe(3);
+      });
+
+      it('should keep selected all state after adding rows, as long as all existing rows and new row are selected', () => {
+        const { rerender } = render(<DataTable {...mockProps} />);
+        const selectAllCheckbox = screen.getAllByRole('checkbox')[0];
+        userEvent.click(selectAllCheckbox);
+
+        const nextRows = [
+          ...mockProps.rows,
+          {
+            id: 'd',
+            fieldA: 'Field 4:A',
+            fieldB: 'Field 4:B',
+          },
+        ];
+
+        rerender(<DataTable {...mockProps} rows={nextRows} />);
+
+        const { getBatchActionProps, selectedRows } = getLastCallFor(
+          mockProps.render
+        )[0];
+        expect(getBatchActionProps().shouldShowBatchActions).toBe(true);
+        expect(selectedRows.length).toBe(3);
+      });
+
+      it('should update rows when receiving new props', () => {
+        const { rerender } = render(<DataTable {...mockProps} />);
+        const args = mockProps.render.mock.calls[0][0];
+
+        expect(args.rows.length).toEqual(mockProps.rows.length);
+
+        const nextRows = mockProps.rows.slice().reverse();
+
+        rerender(<DataTable {...mockProps} rows={nextRows} />);
+
+        const nextArgs = getLastCallFor(mockProps.render)[0];
+        expect(nextArgs.rows.map((row) => row.id)).toEqual(['c', 'a', 'b']);
+      });
+
+      it('should update cells when receiving new props', () => {
+        const { rerender } = render(<DataTable {...mockProps} />);
+        const args = mockProps.render.mock.calls[0][0];
+
+        expect(args.rows.length).toEqual(mockProps.rows.length);
+
+        const nextRows = mockProps.rows.map((row) => {
+          return {
+            ...row,
+            fieldA: row.fieldA + '!',
+          };
+        });
+
+        rerender(<DataTable {...mockProps} rows={nextRows} />);
+
+        const nextArgs = getLastCallFor(mockProps.render)[0];
+        expect(nextArgs.rows.map((row) => row.cells[0].value)).toEqual([
+          'Field 2:A!',
+          'Field 1:A!',
+          'Field 3:A!',
+        ]);
       });
     });
   });
