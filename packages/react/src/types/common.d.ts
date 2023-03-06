@@ -1,11 +1,6 @@
 import * as React from 'react';
 
-/**
- * Returns all valid attributes and properties for a native HTML element.
- * T must be a valid html element (ex: 'td', 'div', 'button', 'form')
- */
-export type ReactAttr<TElement extends keyof JSX.IntrinsicElements> =
-  JSX.IntrinsicElements[TElement];
+export type ReactAttr<T = HTMLElement> = React.HTMLAttributes<T>;
 
 export type ForwardRefProps<T, P = unknown> = React.PropsWithoutRef<
   React.PropsWithChildren<P>
