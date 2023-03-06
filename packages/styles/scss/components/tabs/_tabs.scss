@@ -279,7 +279,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       }
 
       overflow: hidden;
-      max-width: 10rem;
       padding: $spacing-04 $spacing-05 $spacing-03;
       border-bottom: $tab-underline-color;
       color: $text-secondary;
