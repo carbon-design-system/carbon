@@ -10,8 +10,9 @@ import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
 
-export interface TableRowProps {
+export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
   /**
    * Specify an optional className to be applied to the container node
    */
