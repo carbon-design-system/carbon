@@ -5669,6 +5669,9 @@ Map {
       "highContrast": Object {
         "type": "bool",
       },
+      "isTabTip": Object {
+        "type": "bool",
+      },
       "open": Object {
         "isRequired": true,
         "type": "bool",
