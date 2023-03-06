@@ -12,10 +12,10 @@ import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 import { ForwardRefReturn, ReactAttr } from '../../types/common';
 
-type ExcludedAttributes = 'id' | 'value';
+type ExcludedAttributes = 'id' | 'value' | 'size';
 
 export interface TimePickerProps
-  extends Omit<ReactAttr<HTMLInputElement>, ExcludedAttributes> {
+  extends Omit<ReactAttr<'input'>, ExcludedAttributes> {
   /**
    * Pass in the children that will be rendered next to the form control
    */

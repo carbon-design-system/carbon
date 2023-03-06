@@ -12,7 +12,7 @@ import { ListBoxSize, PropTypes as ListBoxPropTypes } from '../ListBox';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
-export interface DropdownSkeletonProps extends ReactAttr<HTMLDivElement> {
+export interface DropdownSkeletonProps extends ReactAttr<'div'> {
   size?: ListBoxSize;
 }
 
