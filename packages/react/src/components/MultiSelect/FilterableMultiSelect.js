@@ -302,6 +302,10 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
                   event.stopPropagation();
                 }
 
+                if (match(event, keys.Enter)) {
+                  handleOnMenuChange(true);
+                }
+
                 if (!disabled) {
                   if (match(event, keys.Delete) || match(event, keys.Escape)) {
                     if (isOpen) {

@@ -478,6 +478,10 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
         clearSelection();
         e.stopPropagation();
       }
+
+      if (match(e, keys.Space) || match(e, keys.ArrowDown)) {
+        setIsOpenWrapper(true);
+      }
     }
   };
 
