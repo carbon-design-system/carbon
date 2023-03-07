@@ -1,0 +1,45 @@
+/**
+ * Copyright IBM Corp. 2022
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+'use strict';
+
+const { expect, test } = require('@playwright/test');
+const { themes } = require('../../test-utils/env');
+const { snapshotStory, visitStory } = require('../../test-utils/storybook');
+
+test.describe('Popover', () => {
+  themes.forEach((theme) => {
+    test.describe(theme, () => {
+      test('Popover - auto align @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Popover',
+          id: 'components-popover--auto-align',
+          theme,
+        });
+      });
+
+      test('Popover - isTabTip @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Popover',
+          id: 'components-popover--tab-tip',
+          theme,
+        });
+      });
+    });
+  });
+
+  test('accessibility-checker @avt', async ({ page }) => {
+    await visitStory(page, {
+      component: 'Popover',
+      id: 'components-popover--auto-align',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('Popover');
+  });
+});
