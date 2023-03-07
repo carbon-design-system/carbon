@@ -44,7 +44,7 @@ export const Default = () => (
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
       <Tab disabled>Tab Label 3</Tab>
-      <Tab>Tab Label 4 with a very long long label</Tab>
+      <Tab>Tab Label 4</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -77,9 +77,7 @@ export const Manual = () => (
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
       <Tab disabled>Tab Label 3</Tab>
-      <Tab title="Tab Label 4 with a very long long label">
-        Tab Label 4 with a very long long label
-      </Tab>
+      <Tab title="Tab Label 4">Tab Label 4</Tab>
       <Tab>Tab Label 5</Tab>
     </TabList>
     <TabPanels>
@@ -156,9 +154,7 @@ export const Contained = () => (
       <Tab>Tab Label 1</Tab>
       <Tab>Tab Label 2</Tab>
       <Tab disabled>Tab Label 3</Tab>
-      <Tab title="Tab Label 4 with a very long long title">
-        Tab Label 4 with a very long long title
-      </Tab>
+      <Tab title="Tab Label 4">Tab Label 4</Tab>
       <Tab>Tab Label 5</Tab>
     </TabList>
     <TabPanels>
