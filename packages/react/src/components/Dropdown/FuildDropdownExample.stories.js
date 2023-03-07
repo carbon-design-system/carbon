@@ -11,7 +11,7 @@ import { Layer } from '../Layer';
 import mdx from './Dropdown.mdx';
 
 export default {
-  title: 'Components/Dropdown/Dropdown',
+  title: 'Components/Dropdown/Dropdown/Dropdown As Fluid/Examples',
   component: Dropdown,
   subcomponents: {
     DropdownSkeleton,
@@ -73,7 +73,7 @@ const items = [
   },
 ];
 
-export const Playground = (args) => (
+export const ExampleOne = (args) => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -87,7 +87,7 @@ export const Playground = (args) => (
   </div>
 );
 
-Playground.argTypes = {
+ExampleOne.argTypes = {
   invalid: {
     control: {
       type: 'boolean',
@@ -152,7 +152,7 @@ Playground.argTypes = {
   },
 };
 
-export const Default = () => (
+export const ExampleTwo = () => (
   <div style={{ width: 400 }}>
     <Dropdown
       id="default"
@@ -163,35 +163,5 @@ export const Default = () => (
       items={items}
       itemToString={(item) => (item ? item.text : '')}
     />
-  </div>
-);
-Default.storyName = 'Dropdown';
-
-export const DropdownAsInline = () => (
-  <div style={{ width: 600 }}>
-    <Dropdown
-      id="inline"
-      titleText="Inline dropdown label"
-      initialSelectedItem={items[0]}
-      label="Dropdown menu options"
-      type="inline"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
-
-export const DropdownAsFluid = () => (
-  <div style={{ width: 600 }}>
-    <p>
-      Stub example story to show what this would look like when InlineDropdown
-      is moved to stable
-    </p>
-  </div>
-);
-
-export const Skeleton = () => (
-  <div style={{ width: 300 }}>
-    <DropdownSkeleton />
   </div>
 );

@@ -11,7 +11,7 @@ import { Layer } from '../Layer';
 import mdx from './Dropdown.mdx';
 
 export default {
-  title: 'Components/Dropdown/Dropdown',
+  title: 'Components/Dropdown/Dropdown/Dropdown As Fluid',
   component: Dropdown,
   subcomponents: {
     DropdownSkeleton,
@@ -165,30 +165,7 @@ export const Default = () => (
     />
   </div>
 );
-Default.storyName = 'Dropdown';
-
-export const DropdownAsInline = () => (
-  <div style={{ width: 600 }}>
-    <Dropdown
-      id="inline"
-      titleText="Inline dropdown label"
-      initialSelectedItem={items[0]}
-      label="Dropdown menu options"
-      type="inline"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-    />
-  </div>
-);
-
-export const DropdownAsFluid = () => (
-  <div style={{ width: 600 }}>
-    <p>
-      Stub example story to show what this would look like when InlineDropdown
-      is moved to stable
-    </p>
-  </div>
-);
+Default.storyName = 'FluidDropdown';
 
 export const Skeleton = () => (
   <div style={{ width: 300 }}>
