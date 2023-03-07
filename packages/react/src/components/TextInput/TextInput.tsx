@@ -6,7 +6,7 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useContext, useState } from 'react';
+import React, { ReactNode, useContext, useState } from 'react';
 import classNames from 'classnames';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import PasswordInput from './PasswordInput';
@@ -18,6 +18,132 @@ import { useFeatureFlag } from '../FeatureFlags';
 import * as FeatureFlags from '@carbon/feature-flags';
 import { usePrefix } from '../../internal/usePrefix';
 import { useAnnouncer } from '../../internal/useAnnouncer';
+
+type ExcludedAttributes = 'defaultValue' | 'id' | 'size' | 'value';
+
+export interface TextInputProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    ExcludedAttributes
+  > {
+  /**
+   * Specify an optional className to be applied to the `<input>` node
+   */
+  className?: string;
+
+  /**
+   * Optionally provide the default value of the `<input>`
+   */
+  defaultValue?: string | number;
+
+  /**
+   * Specify whether the `<input>` should be disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: ReactNode;
+
+  /**
+   * Specify whether you want the underlying label to be visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Specify a custom `id` for the `<input>`
+   */
+  id: string;
+
+  /**
+   * `true` to use the inline version.
+   */
+  inline?: boolean;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: ReactNode;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   */
+  labelText: ReactNode;
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   * 'The `light` prop for `TextInput` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+   */
+  light?: boolean;
+
+  /**
+   * Max character count allowed for the input. This is needed in order for enableCounter to display
+   */
+  maxCount?: number;
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<input>`
+   * is updated
+   */
+  onChange?: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the
+   * `<input>` is clicked
+   */
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
+
+  /**
+   * Specify the placeholder attribute for the `<input>`
+   */
+  placeholder?: string;
+
+  /**
+   * Whether the input should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * Specify the size of the Text Input. Currently supports the following:
+   */
+  size?: 'sm' | 'md' | 'lg' | 'xl';
+
+  /**
+   * Specify the type of the `<input>`
+   */
+  type?: string;
+
+  /**
+   * Specify the value of the `<input>`
+   */
+  value?: string | number | undefined;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNode;
+}
 
 const TextInput = React.forwardRef(function TextInput(
   {
@@ -42,7 +168,7 @@ const TextInput = React.forwardRef(function TextInput(
     enableCounter = false,
     maxCount,
     ...rest
-  },
+  }: TextInputProps,
   ref
 ) {
   const prefix = usePrefix();
@@ -51,7 +177,7 @@ const TextInput = React.forwardRef(function TextInput(
 
   const { defaultValue, value } = rest;
   const [textCount, setTextCount] = useState(
-    defaultValue?.length || value?.length || 0
+    defaultValue?.toString().length || value?.toString().length || 0
   );
 
   const normalizedProps = useNormalizedInputProps({
@@ -187,7 +313,8 @@ const TextInput = React.forwardRef(function TextInput(
   );
 
   const { isFluid } = useContext(FormContext);
-  let ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  const ariaAnnouncement = useAnnouncer(textCount, maxCount);
+  const Icon = normalizedProps.icon as any;
 
   return (
     <div className={inputWrapperClasses}>
@@ -203,9 +330,7 @@ const TextInput = React.forwardRef(function TextInput(
         <div
           className={fieldWrapperClasses}
           data-invalid={normalizedProps.invalid || null}>
-          {normalizedProps.icon && (
-            <normalizedProps.icon className={iconClasses} />
-          )}
+          {Icon && <Icon className={iconClasses} />}
           {input}
           <span className={`${prefix}--text-input__counter-alert`} role="alert">
             {ariaAnnouncement}
@@ -220,8 +345,8 @@ const TextInput = React.forwardRef(function TextInput(
 });
 
 TextInput.displayName = 'TextInput';
-TextInput.PasswordInput = PasswordInput;
-TextInput.ControlledPasswordInput = ControlledPasswordInput;
+(TextInput as any).PasswordInput = PasswordInput;
+(TextInput as any).ControlledPasswordInput = ControlledPasswordInput;
 TextInput.propTypes = {
   /**
    * Specify an optional className to be applied to the `<input>` node
