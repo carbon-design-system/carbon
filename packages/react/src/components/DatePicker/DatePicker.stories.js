@@ -257,13 +257,13 @@ Playground.argTypes = {
     },
   },
   onChange: {
-    action: 'clicked',
+    action: 'changed',
   },
   onClose: {
-    action: 'clicked',
+    action: 'closed',
   },
   onOpen: {
-    action: 'clicked',
+    action: 'opened',
   },
   readOnly: {
     control: {
