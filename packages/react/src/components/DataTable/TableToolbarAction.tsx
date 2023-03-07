@@ -10,7 +10,8 @@ import React from 'react';
 import OverflowMenuItem from '../OverflowMenuItem';
 import { ForwardRefReturn } from '../../types/common';
 
-export interface TableToolbarActionProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
+export interface TableToolbarActionProps
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onClick'> {
   /**
    * Pass in the children that will be rendered inside the TableToolbarAction
    */

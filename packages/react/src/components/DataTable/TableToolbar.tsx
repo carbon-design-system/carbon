@@ -11,7 +11,8 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
-export interface TableToolbarProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TableToolbarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   /**
    * Pass in the children that will be rendered inside the TableToolbar
    */
@@ -23,7 +24,11 @@ export interface TableToolbarProps extends React.HTMLAttributes<HTMLDivElement> 
   size?: 'sm' | 'lg';
 }
 
-const TableToolbar: React.FC<TableToolbarProps> = ({ children, size, ...rest }) => {
+const TableToolbar: React.FC<TableToolbarProps> = ({
+  children,
+  size,
+  ...rest
+}) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--table-toolbar`]: true,

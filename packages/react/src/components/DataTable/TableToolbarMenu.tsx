@@ -12,7 +12,8 @@ import React from 'react';
 import { usePrefix } from '../../internal/usePrefix';
 import OverflowMenu from '../OverflowMenu';
 
-export interface TableToolbarMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface TableToolbarMenuProps
+  extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
 
   /**
