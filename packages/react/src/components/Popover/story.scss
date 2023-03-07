@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2016, 2018
+// Copyright IBM Corp. 2016, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -97,4 +97,23 @@
   height: 100%;
   display: flex;
   flex-direction: column;
+}
+
+.popover-tabtip-story .cds--popover-content {
+  width: 16rem;
+}
+
+.popover-tabtip-story .cds--radio-button-wrapper {
+  margin-bottom: 0.5rem;
+}
+
+.popover-tabtip-story hr {
+  border: none;
+  background: theme.$border-subtle;
+  height: 1px;
+  margin: 8px 0 16px;
+}
+
+.popover-tabtip-story .cds--popover-container:last-of-type {
+  margin-left: 15rem;
 }

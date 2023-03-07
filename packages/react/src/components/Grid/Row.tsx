@@ -12,7 +12,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 
 export interface RowBaseProps {
-
   /**
    * Pass in content that will be rendered within the `Row`
    */
@@ -34,13 +33,18 @@ export interface RowBaseProps {
    * 16px into the gutter.
    */
   narrow?: boolean;
-
 }
 
-export type RowProps<T extends React.ElementType> = PolymorphicProps<T, RowBaseProps>
+export type RowProps<T extends React.ElementType> = PolymorphicProps<
+  T,
+  RowBaseProps
+>;
 
 export interface RowComponent {
-  <T extends React.ElementType>(props: RowProps<T>, context?: any): React.ReactElement<any, any> | null;
+  <T extends React.ElementType>(
+    props: RowProps<T>,
+    context?: any
+  ): React.ReactElement<any, any> | null;
 }
 
 function Row<T extends React.ElementType>({
@@ -58,7 +62,7 @@ function Row<T extends React.ElementType>({
     [`${prefix}--row--narrow`]: narrow,
   });
   // TypeScript type validation reports conflicts on different instances of keyof JSX.IntrinsicElements
-  const BaseComponentAsAny: any = BaseComponent
+  const BaseComponentAsAny: any = BaseComponent;
   return (
     <BaseComponentAsAny className={className} {...rest}>
       {children}

@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -26,6 +26,7 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
     orientation = 'horizontal',
     readOnly,
     valueSelected,
+    ...rest
   },
   ref
 ) {
@@ -88,7 +89,8 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
       <fieldset
         className={fieldsetClasses}
         disabled={disabled}
-        aria-readonly={readOnly}>
+        aria-readonly={readOnly}
+        {...rest}>
         {legendText && (
           <Legend className={`${prefix}--label`}>{legendText}</Legend>
         )}

@@ -12,7 +12,6 @@ import { usePrefix } from '../../internal/usePrefix';
 import { PolymorphicProps } from '../../types/common';
 
 interface ColumnHangBaseProps {
-
   /**
    * Pass in content that will be rendered within the `ColumnHang`
    */
@@ -22,13 +21,18 @@ interface ColumnHangBaseProps {
    * Specify a custom className to be applied to the `ColumnHang`
    */
   className?: string;
-
 }
 
-export type ColumnHangProps<T extends React.ElementType> = PolymorphicProps<T, ColumnHangBaseProps>
+export type ColumnHangProps<T extends React.ElementType> = PolymorphicProps<
+  T,
+  ColumnHangBaseProps
+>;
 
 export interface ColumnHangComponent {
-  <T extends React.ElementType>(props: ColumnHangProps<T>, context?: any): React.ReactElement<any, any> | null;
+  <T extends React.ElementType>(
+    props: ColumnHangProps<T>,
+    context?: any
+  ): React.ReactElement<any, any> | null;
 }
 
 /**
@@ -44,7 +48,7 @@ function ColumnHang<T extends React.ElementType>({
   const prefix = usePrefix();
   const className = cx(customClassName, `${prefix}--grid-column-hang`);
   // cast as any to let TypeScript allow passing in attributes to base component
-  const BaseComponentAsAny: any = BaseComponent
+  const BaseComponentAsAny: any = BaseComponent;
   return (
     <BaseComponentAsAny {...rest} className={className}>
       {children}
@@ -69,6 +73,6 @@ ColumnHang.propTypes = {
   className: PropTypes.string,
 };
 
-const ColumnHangComponent = ColumnHang as ColumnHangComponent
+const ColumnHangComponent = ColumnHang as ColumnHangComponent;
 
 export { ColumnHangComponent as ColumnHang };

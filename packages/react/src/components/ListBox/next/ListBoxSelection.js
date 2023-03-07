@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -9,7 +9,6 @@ import cx from 'classnames';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Close } from '@carbon/icons-react';
-import { match, keys } from '../../../internal/keyboard';
 import { usePrefix } from '../../../internal/usePrefix';
 
 /**
@@ -51,21 +50,6 @@ function ListBoxSelection({
     }
   }
 
-  function onKeyDown(event) {
-    event.stopPropagation();
-    if (disabled) {
-      return;
-    }
-
-    // When a user hits ENTER, we'll clear the selection
-    if (match(event, keys.Enter)) {
-      clearSelection(event);
-      if (onClearSelection) {
-        onClearSelection(event);
-      }
-    }
-  }
-
   if (selectionCount) {
     return (
       <div className={tagClasses}>
@@ -77,8 +61,7 @@ function ListBoxSelection({
           className={`${prefix}--tag__close-icon`}
           disabled={disabled}
           onClick={onClick}
-          onKeyDown={onKeyDown}
-          tabIndex={disabled ? -1 : 0}
+          tabIndex={-1}
           title={description}
           type="button">
           <Close />
@@ -94,8 +77,7 @@ function ListBoxSelection({
       className={className}
       disabled={disabled}
       onClick={onClick}
-      onKeyDown={onKeyDown}
-      tabIndex={disabled ? -1 : 0}
+      tabIndex={-1}
       title={description}
       type="button">
       <Close />
