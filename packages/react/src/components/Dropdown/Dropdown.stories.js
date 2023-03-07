@@ -121,7 +121,7 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'this is an example label',
+    defaultValue: 'This is an example label',
   },
   warn: {
     control: {
@@ -139,7 +139,7 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: 'this is an example title',
+    defaultValue: 'This is an example title',
   },
   size: {
     options: ['sm', 'md', 'lg'],
@@ -158,7 +158,6 @@ export const Default = () => (
       id="default"
       titleText="Dropdown label"
       helperText="This is some helper text"
-      initialSelectedItem={items[0]}
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
@@ -171,7 +170,6 @@ export const Inline = () => (
     <Dropdown
       id="inline"
       titleText="Inline dropdown label"
-      initialSelectedItem={items[0]}
       label="Dropdown menu options"
       type="inline"
       items={items}
@@ -186,7 +184,6 @@ export const WithLayer = () => (
       id="default"
       titleText="First Layer"
       helperText="This is some helper text"
-      initialSelectedItem={items[0]}
       label="Dropdown menu options"
       items={items}
       itemToString={(item) => (item ? item.text : '')}
@@ -196,7 +193,6 @@ export const WithLayer = () => (
         id="default"
         titleText="Second Layer"
         helperText="This is some helper text"
-        initialSelectedItem={items[0]}
         label="Dropdown menu options"
         items={items}
         itemToString={(item) => (item ? item.text : '')}
@@ -206,7 +202,6 @@ export const WithLayer = () => (
           id="default"
           titleText="Third Layer"
           helperText="This is some helper text"
-          initialSelectedItem={items[0]}
           label="Dropdown menu options"
           items={items}
           itemToString={(item) => (item ? item.text : '')}
@@ -221,7 +216,6 @@ export const InlineWithLayer = () => (
     <Dropdown
       id="inline"
       titleText="First Layer"
-      initialSelectedItem={items[0]}
       label="Dropdown menu options"
       type="inline"
       items={items}
@@ -231,7 +225,6 @@ export const InlineWithLayer = () => (
       <Dropdown
         id="inline"
         titleText="Second Layer"
-        initialSelectedItem={items[0]}
         label="Dropdown menu options"
         type="inline"
         items={items}
@@ -241,7 +234,6 @@ export const InlineWithLayer = () => (
         <Dropdown
           id="inline"
           titleText="Third Layer"
-          initialSelectedItem={items[0]}
           label="Dropdown menu options"
           type="inline"
           items={items}
