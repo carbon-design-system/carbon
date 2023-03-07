@@ -11,7 +11,7 @@ import cx from 'classnames';
 import { usePrefix } from '../internal/usePrefix';
 
 /**
- * @param {{ name: string, className?: string, type: string }} param0
+ * @param {{ name: string, type: string, className?: string | (prefix: string) => string }} props
  * @returns
  */
 const wrapComponent = ({ name, className: getClassName, type }) => {
