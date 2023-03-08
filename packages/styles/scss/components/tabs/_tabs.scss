@@ -506,4 +506,21 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     .#{$prefix}--tabs__nav-link {
     @include high-contrast-mode('disabled');
   }
+
+  //-----------------------------
+  // Grid contained tabs
+  //-----------------------------
+
+  .#{$prefix}--tabs--contained-grid {
+    max-height: none;
+  }
+  .#{$prefix}--tabs--contained-grid .#{$prefix}--tab--list {
+    display: grid;
+    overflow: inherit;
+  }
+
+  .#{$prefix}--tabs--contained-grid .#{$prefix}--tabs__nav-item {
+    width: 100%;
+    max-width: none;
+  }
 }

@@ -5,12 +5,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { breakpoints } from '@carbon/layout';
 import { ChevronLeft, ChevronRight } from '@carbon/icons-react';
 import cx from 'classnames';
 import debounce from 'lodash.debounce';
 import PropTypes from 'prop-types';
 import React, { useCallback, useState, useRef, useEffect } from 'react';
 import { Tooltip } from '../Tooltip';
+import { Grid, Column } from '../Grid';
 import { useControllableState } from '../../internal/useControllableState';
 import { useEffectOnce } from '../../internal/useEffectOnce';
 import { useId } from '../../internal/useId';
@@ -20,6 +22,7 @@ import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
+import { useMatchMedia } from '../../internal/useMatchMedia';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -29,6 +32,14 @@ const TabContext = React.createContext();
 
 // Used to keep track of position in a list of tab panels
 const TabPanelContext = React.createContext();
+
+const mediaQueries = {
+  sm: `(min-width: ${breakpoints.sm.width})`,
+  md: `(min-width: ${breakpoints.md.width})`,
+  lg: `(min-width: ${breakpoints.lg.width})`,
+  xlg: `(min-width: ${breakpoints.xlg.width})`,
+  max: `(min-width: ${breakpoints.max.width})`,
+};
 function Tabs({
   children,
   defaultSelectedIndex = 0,
@@ -129,8 +140,14 @@ function TabList({
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(null);
+
+  const isMd = useMatchMedia(mediaQueries.md);
+
+  const containedGrid = isMd && React.Children.toArray(children).length < 9;
+
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
+    [`${prefix}--tabs--contained-grid`]: containedGrid,
     [`${prefix}--tabs--light`]: light,
     [`${prefix}--tabs__icon--default`]: iconSize === 'default',
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
@@ -328,26 +345,52 @@ function TabList({
         <ChevronLeft />
       </button>
       {/* eslint-disable-next-line jsx-a11y/interactive-supports-focus */}
-      <div
-        {...rest}
-        aria-label={label}
-        ref={ref}
-        role="tablist"
-        className={`${prefix}--tab--list`}
-        onScroll={debouncedOnScroll}
-        onKeyDown={onKeyDown}>
-        {React.Children.map(children, (child, index) => {
-          return (
-            <TabContext.Provider value={index}>
-              {React.cloneElement(child, {
-                ref: (node) => {
-                  tabs.current[index] = node;
-                },
-              })}
-            </TabContext.Provider>
-          );
-        })}
-      </div>
+
+      {containedGrid ? (
+        <Grid
+          condensed
+          {...rest}
+          aria-label={label}
+          ref={ref}
+          role="tablist"
+          className={`${prefix}--tab--list`}
+          onScroll={debouncedOnScroll}
+          onKeyDown={onKeyDown}>
+          {React.Children.map(children, (child, index) => {
+            return (
+              <TabContext.Provider value={index}>
+                {React.cloneElement(child, {
+                  ref: (node) => {
+                    tabs.current[index] = node;
+                  },
+                })}
+              </TabContext.Provider>
+            );
+          })}
+        </Grid>
+      ) : (
+        <div
+          {...rest}
+          aria-label={label}
+          ref={ref}
+          role="tablist"
+          className={`${prefix}--tab--list`}
+          onScroll={debouncedOnScroll}
+          onKeyDown={onKeyDown}>
+          {React.Children.map(children, (child, index) => {
+            return (
+              <TabContext.Provider value={index}>
+                {React.cloneElement(child, {
+                  ref: (node) => {
+                    tabs.current[index] = node;
+                  },
+                })}
+              </TabContext.Provider>
+            );
+          })}
+        </div>
+      )}
+
       <button
         aria-hidden="true"
         aria-label="Scroll right"
@@ -496,7 +539,9 @@ const Tab = React.forwardRef(function Tab(
     }
   );
 
-  return (
+  const isMd = useMatchMedia(mediaQueries.md);
+
+  const tabComponent = (
     <BaseComponent
       {...rest}
       aria-controls={panelId}
@@ -521,6 +566,21 @@ const Tab = React.forwardRef(function Tab(
       type="button">
       {children}
     </BaseComponent>
+  );
+
+  if (isMd) {
+    return (
+      <Column md={1} lg={2}>
+        {tabComponent}
+      </Column>
+    );
+  }
+
+  return (
+    // if contained tab render Column
+    // if small/mobile breakpoint do not render Column
+    // if the total column count > --cds-grid-columns do not render Column
+    <>{tabComponent}</>
   );
 });
 

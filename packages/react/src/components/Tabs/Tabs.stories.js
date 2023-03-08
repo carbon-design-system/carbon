@@ -5,6 +5,8 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import './Tab.stories.scss';
+
 import React from 'react';
 import { Tabs, TabList, Tab, TabPanels, TabPanel, IconTab } from './Tabs';
 import TextInput from '../TextInput';
@@ -248,3 +250,116 @@ Playground.argTypes = {
     },
   },
 };
+
+export const ContainedGrid = () => (
+  <>
+    <Tabs>
+      <TabList aria-label="List of tabs" contained>
+        <Tab>Tab Label 1</Tab>
+        <Tab>Tab Label 2</Tab>
+        <Tab disabled>Tab Label 3</Tab>
+        <Tab title="Tab Label 4 with a very long long title">
+          Tab Label 4 with a very long long title
+        </Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
+          <form>
+            <legend className={`cds--label`}>Validation example</legend>
+            <Checkbox id="cb" labelText="Accept privacy policy" />
+            <Button
+              style={{ marginTop: '1rem', marginBottom: '1rem' }}
+              type="submit">
+              Submit
+            </Button>
+            <TextInput
+              type="text"
+              labelText="Text input label"
+              helperText="Optional help text"
+            />
+          </form>
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+
+    <Tabs>
+      <TabList aria-label="List of tabs" contained>
+        <Tab>Tab Label 1</Tab>
+        <Tab>Tab Label 2</Tab>
+        <Tab disabled>Tab Label 3</Tab>
+        <Tab title="Tab Label 4 with a very long long title">
+          Tab Label 4 with a very long long title
+        </Tab>
+        <Tab>Tab Label 5</Tab>
+        <Tab>Tab Label 6</Tab>
+        <Tab>Tab Label 7</Tab>
+        <Tab>Tab Label 8</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
+          <form>
+            <legend className={`cds--label`}>Validation example</legend>
+            <Checkbox id="cb" labelText="Accept privacy policy" />
+            <Button
+              style={{ marginTop: '1rem', marginBottom: '1rem' }}
+              type="submit">
+              Submit
+            </Button>
+            <TextInput
+              type="text"
+              labelText="Text input label"
+              helperText="Optional help text"
+            />
+          </form>
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+      </TabPanels>
+    </Tabs>
+
+    <Tabs>
+      <TabList aria-label="List of tabs" contained>
+        <Tab>Tab Label 1</Tab>
+        <Tab>Tab Label 2</Tab>
+        <Tab disabled>Tab Label 3</Tab>
+        <Tab title="Tab Label 4 with a very long long title">
+          Tab Label 4 with a very long long title
+        </Tab>
+        <Tab>Tab Label 5</Tab>
+        <Tab>Tab Label 6</Tab>
+        <Tab>Tab Label 7</Tab>
+        <Tab>Tab Label 8</Tab>
+        <Tab>Tab Label 5</Tab>
+        <Tab>Tab Label 9</Tab>
+        <Tab>Tab Label 10</Tab>
+        <Tab>Tab Label 11</Tab>
+      </TabList>
+      <TabPanels>
+        <TabPanel>Tab Panel 1</TabPanel>
+        <TabPanel>
+          <form>
+            <legend className={`cds--label`}>Validation example</legend>
+            <Checkbox id="cb" labelText="Accept privacy policy" />
+            <Button
+              style={{ marginTop: '1rem', marginBottom: '1rem' }}
+              type="submit">
+              Submit
+            </Button>
+            <TextInput
+              type="text"
+              labelText="Text input label"
+              helperText="Optional help text"
+            />
+          </form>
+        </TabPanel>
+        <TabPanel>Tab Panel 3</TabPanel>
+        <TabPanel>Tab Panel 4</TabPanel>
+        <TabPanel>Tab Panel 5</TabPanel>
+      </TabPanels>
+    </Tabs>
+  </>
+);
