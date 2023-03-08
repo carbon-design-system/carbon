@@ -30,7 +30,7 @@ export interface DataTableSkeletonProps {
   /**
    * Optionally specify the displayed headers
    */
-  headers?: [{ header: string, key: string }] | { header: string, key: string };
+  headers?: [{ header: string; key: string }] | { header: string; key: string };
 
   /**
    * Specify the number of rows that you want to render in the skeleton state
@@ -91,8 +91,8 @@ const DataTableSkeleton = ({
     <div className={`${prefix}--skeleton ${prefix}--data-table-container`}>
       {showHeader ? (
         <div className={`${prefix}--data-table-header`}>
-          <div className={`${prefix}--data-table-header__title`}/>
-          <div className={`${prefix}--data-table-header__description`}/>
+          <div className={`${prefix}--data-table-header__title`} />
+          <div className={`${prefix}--data-table-header__description`} />
         </div>
       ) : null}
       {showToolbar ? (
@@ -101,7 +101,8 @@ const DataTableSkeleton = ({
           className={`${prefix}--table-toolbar`}>
           <div className={`${prefix}--toolbar-content`}>
             <span
-              className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}/>
+              className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}
+            />
           </div>
         </section>
       ) : null}
@@ -115,7 +116,7 @@ const DataTableSkeleton = ({
                     {headers[i]?.header}
                   </div>
                 ) : (
-                  <span/>
+                  <span />
                 )}
               </th>
             ))}
