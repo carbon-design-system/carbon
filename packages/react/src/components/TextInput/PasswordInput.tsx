@@ -14,8 +14,10 @@ import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
+type ExcludedAttributes = 'size';
+
 export interface PasswordInputProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, 'size'> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
   /**
    * Provide a custom className that is applied directly to the underlyling `<input>` node
    */
