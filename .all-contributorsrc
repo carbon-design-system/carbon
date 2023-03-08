@@ -1076,6 +1076,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "shryoo-ibm",
+      "name": "Seong-Hyun Ryoo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/106095943?s=96&v=4",
+      "profile": "https://seongryoo.github.io",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
