@@ -3296,7 +3296,7 @@ Map {
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "ariaLabel": "Choose an item",
+      "aria-label": "Choose an item",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3309,9 +3309,10 @@ Map {
       "sortItems": [Function],
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
@@ -4536,7 +4537,7 @@ Map {
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "ariaLabel": "Choose an item",
+        "aria-label": "Choose an item",
         "compareItems": [Function],
         "direction": "bottom",
         "disabled": false,
@@ -4549,9 +4550,10 @@ Map {
         "sortItems": [Function],
       },
       "propTypes": Object {
-        "ariaLabel": Object {
+        "aria-label": Object {
           "type": "string",
         },
+        "ariaLabel": [Function],
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
@@ -5667,6 +5669,9 @@ Map {
       "highContrast": Object {
         "type": "bool",
       },
+      "isTabTip": Object {
+        "type": "bool",
+      },
       "open": Object {
         "isRequired": true,
         "type": "bool",
@@ -5962,6 +5967,7 @@ Map {
     },
   },
   "RadioTile" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "onChange": [Function],
       "tabIndex": 0,
@@ -6007,6 +6013,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "Row" => Object {
     "propTypes": Object {
@@ -6886,15 +6893,16 @@ Map {
   },
   "StructuredListWrapper" => Object {
     "defaultProps": Object {
-      "ariaLabel": "Structured list section",
+      "aria-label": "Structured list section",
       "isCondensed": false,
       "isFlush": false,
       "selection": false,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },

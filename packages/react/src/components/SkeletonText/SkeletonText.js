@@ -51,7 +51,8 @@ const SkeletonText = ({
   useIsomorphicEffect(() => {
     refs.current.map((item, j) => {
       const randomPercentWidth = getRandomInt(0, 75, j) + 'px';
-      const randomPxWidth = getRandomInt(widthNum - 75, widthNum, j) + 'px';
+      const randomPxWidth =
+        getRandomInt(Math.max(widthNum - 75, 0), widthNum, j) + 'px';
 
       if (item) {
         if (widthPercent && paragraph) {
