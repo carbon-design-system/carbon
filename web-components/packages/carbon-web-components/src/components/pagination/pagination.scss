@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,13 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/pagination/pagination';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/components/pagination' as *;
+@use '@carbon/styles/scss/utilities/visually-hidden' as *;
 
 :host(#{$prefix}-pagination) {
   @extend .#{$prefix}--pagination;
@@ -21,8 +27,8 @@ $css--plex: true !default;
 
   .#{$prefix}-ce--pagination__divider {
     height: 100%;
-    width: $spacing-4xs;
-    background-color: $ui-03;
+    width: rem(1px);
+    background-color: $layer-accent-01;
   }
 
   .#{$prefix}--pagination__control-buttons {
@@ -58,16 +64,18 @@ $css--plex: true !default;
     width: auto;
     min-width: auto;
     height: 100%;
-    padding: 0 2.5rem 0 $spacing-md;
+    padding: 0 2.5rem 0 $spacing-05;
     margin-right: 0;
     border: none;
 
-    @include carbon--breakpoint('md') {
-      padding-right: carbon--mini-units(4.5);
+    @include breakpoint('md') {
+      padding-right: rem(36px);
     }
 
     &:hover {
-      background: $hover-ui;
+      // TODO: check value because this is a split token
+      // (hover-ui became field-hover-01 and field-hover-02)
+      background: $field-hover-01;
     }
   }
 
@@ -75,8 +83,8 @@ $css--plex: true !default;
     top: auto;
     bottom: auto;
 
-    @include carbon--breakpoint('md') {
-      right: $carbon--spacing-05;
+    @include breakpoint('md') {
+      right: $spacing-05;
     }
   }
 }

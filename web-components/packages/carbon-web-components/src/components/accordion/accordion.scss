@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,11 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/accordion/accordion';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/accordion';
 
 :host(#{$prefix}-accordion) {
   @extend .#{$prefix}--accordion;
@@ -21,22 +25,33 @@ $css--plex: true !default;
 
   .#{$prefix}--accordion__heading {
     padding-top: calc(
-      (#{$container-03} - #{map-get($body-long-01, 'line-height')}rem) / 2
+      (#{$spacing-08} - #{map-get($body-long-01, 'line-height')}rem) / 2
     );
-    min-height: $container-03;
+    min-height: $spacing-08;
+  }
+
+  .#{$prefix}--accordion__content {
+    @extend .#{$prefix}--accordion__content;
+
+    ::slotted(p) {
+      @include type-style('body-01');
+    }
   }
 
   &[size='sm'] {
-    .#{$prefix}--accordion__heading {
-      min-height: rem(32px);
-      padding: rem(5px) 0;
-    }
+    @extend .#{$prefix}--accordion--sm;
   }
 
-  &[size='xl'] {
-    .#{$prefix}--accordion__heading {
-      min-height: rem(48px);
-    }
+  &[size='lg'] {
+    @extend .#{$prefix}--accordion--lg;
+  }
+
+  &[alignment='start'] {
+    @extend .#{$prefix}--accordion--start;
+  }
+
+  &[isFlush] {
+    @extend .#{$prefix}--accordion--flush;
   }
 }
 
@@ -44,11 +59,11 @@ $css--plex: true !default;
   @extend .#{$prefix}--accordion__item--active;
 
   .#{$prefix}--accordion__content {
-    padding-right: $carbon--spacing-05;
+    padding-right: $spacing-05;
   }
 
   .#{$prefix}-ce--accordion__content--sm {
-    padding-right: $carbon--spacing-09;
+    padding-right: $spacing-09;
   }
 
   .#{$prefix}-ce--accordion__content--md {

@@ -7,11 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { BUTTON_KIND, BUTTON_SIZE, BUTTON_ICON_LAYOUT } from './defs';
 import styles from './button.scss';
@@ -20,12 +20,10 @@ import HostListenerMixin from '../../globals/mixins/host-listener';
 
 export { BUTTON_KIND, BUTTON_SIZE, BUTTON_ICON_LAYOUT };
 
-const { prefix } = settings;
-
 /**
  * Button.
  *
- * @element bx-btn
+ * @element cds-btn
  * @csspart button The button.
  */
 @customElement(`${prefix}-btn`)

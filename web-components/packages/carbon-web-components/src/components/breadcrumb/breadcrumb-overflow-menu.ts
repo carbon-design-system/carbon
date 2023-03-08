@@ -9,17 +9,15 @@
 
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16';
 import BXOverflowMenu from '../overflow-menu/overflow-menu';
 import styles from './breadcrumb.scss';
 
-const { prefix } = settings;
-
 /**
  * Overflow menu in breadcrumb.
  *
- * @element bx-breadcrumb-overflow-menu
+ * @element cds-breadcrumb-overflow-menu
  */
 @customElement(`${prefix}-breadcrumb-overflow-menu`)
 class BXBreadcrumbOverflowMenu extends BXOverflowMenu {

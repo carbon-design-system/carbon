@@ -7,17 +7,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './header.scss';
-
-const { prefix } = settings;
 
 /**
  * Header.
  *
- * @element bx-header-nav
+ * @element cds-header-nav
  * @csspart menu-body The menu body.
  * @csspart divider The divider.
  */

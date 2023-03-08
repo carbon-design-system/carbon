@@ -10,15 +10,13 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import styles from './file-uploader.scss';
 
 export { FORM_ELEMENT_COLOR_SCHEME as TILE_COLOR_SCHEME } from '../../globals/shared-enums';
-
-const { prefix } = settings;
 
 /**
  * The value to set to `event.dataTransfer.dropEffect`, keyed by the event nane.
@@ -31,8 +29,8 @@ const dropEffects = {
 /**
  * File drop container.
  *
- * @element bx-file-drop-container
- * @fires bx-file-drop-container-changed The custom event fired when there is a user gesture to select files to upload.
+ * @element cds-file-drop-container
+ * @fires cds-file-drop-container-changed The custom event fired when there is a user gesture to select files to upload.
  */
 @customElement(`${prefix}-file-drop-container`)
 class BXFileDropContainer extends HostListenerMixin(LitElement) {

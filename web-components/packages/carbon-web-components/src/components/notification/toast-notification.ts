@@ -7,25 +7,23 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { NOTIFICATION_TYPE } from './defs';
 import BXInlineNotification from './inline-notification';
 import styles from './toast-notification.scss';
 
-const { prefix } = settings;
-
 /**
  * Toast notification.
  *
- * @element bx-toast-notification
+ * @element cds-toast-notification
  * @slot subtitle - The subtitle.
  * @slot title - The title.
- * @fires bx-notification-beingclosed
+ * @fires cds-notification-beingclosed
  *   The custom event fired before this notification is being closed upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of closing this notification.
- * @fires bx-notification-closed - The custom event fired after this notification is closed upon a user gesture.
+ * @fires cds-notification-closed - The custom event fired after this notification is closed upon a user gesture.
  */
 @customElement(`${prefix}-toast-notification`)
 class BXToastNotification extends BXInlineNotification {
@@ -35,9 +33,9 @@ class BXToastNotification extends BXInlineNotification {
     const { caption, subtitle, title, _type: type } = this;
     return html`
       <div class="${prefix}--${type}-notification__details">
-        <h3 class="${prefix}--${type}-notification__title">
+        <div class="${prefix}--${type}-notification__title">
           ${title}<slot name="title"></slot>
-        </h3>
+        </div>
         <div class="${prefix}--${type}-notification__subtitle">
           ${subtitle}<slot name="subtitle"></slot>
         </div>

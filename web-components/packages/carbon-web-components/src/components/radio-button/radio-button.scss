@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,9 +7,15 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/globals/scss/css--helpers';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/radio-button/radio-button';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/radio-button/radio-button' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include radio-button;
 
 :host(#{$prefix}-radio-button-group) {
   @extend .#{$prefix}--radio-button-group;
@@ -40,15 +46,15 @@ $css--plex: true !default;
 
 :host(#{$prefix}-radio-button[disabled]) {
   .#{$prefix}--radio-button__label {
-    color: $disabled;
+    color: $text-disabled;
     cursor: not-allowed;
   }
 
   .#{$prefix}--radio-button__appearance {
-    border-color: $disabled;
+    border-color: $border-disabled;
 
     &::before {
-      background-color: $disabled;
+      background-color: $border-disabled;
     }
   }
 }
@@ -60,6 +66,6 @@ $css--plex: true !default;
 
   .#{$prefix}--radio-button__appearance {
     margin-right: 0;
-    margin-left: $carbon--spacing-03;
+    margin-left: $spacing-03;
   }
 }

@@ -1,21 +1,22 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
+// TODO: consider consolidating size classes with css vars
+
 //
-// "Compact" table size variant
+// "xs" table size variant
 //
 
-:host(#{$prefix}-table-head)
-  ::slotted(#{$prefix}-table-header-row[size='compact']),
-:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='compact']) {
-  height: rem(24px);
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='xs']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='xs']) {
+  height: $spacing-06;
 }
 
-:host(#{$prefix}-table-row[size='compact']) {
+:host(#{$prefix}-table-row[size='xs']) {
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
     padding-top: rem(2px);
@@ -24,16 +25,15 @@
 }
 
 //
-// "Short" table size variant
+// "sm" table size variant
 //
 
-:host(#{$prefix}-table-head)
-  ::slotted(#{$prefix}-table-header-row[size='short']),
-:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='short']) {
-  height: rem(32px);
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='sm']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='sm']) {
+  height: $spacing-07;
 }
 
-:host(#{$prefix}-table-row[size='short']) {
+:host(#{$prefix}-table-row[size='sm']) {
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
     padding-top: rem(7px);
@@ -42,16 +42,48 @@
 }
 
 //
-// "Tall" table size variant
+// "md" table size variant
 //
 
-:host(#{$prefix}-table-head)
-  ::slotted(#{$prefix}-table-header-row[size='tall']),
-:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='tall']) {
-  height: rem(64px);
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='md']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='md']) {
+  height: $spacing-08;
 }
 
-:host(#{$prefix}-table-row[size='tall']) {
+:host(#{$prefix}-table-row[size='md']) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    padding-top: rem(4px);
+    padding-bottom: rem(4px);
+  }
+}
+
+//
+// "lg" table size variant - default
+//
+
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='lg']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='lg']) {
+  height: $spacing-09;
+}
+
+:host(#{$prefix}-table-row[size='lg']) {
+  ::slotted(#{$prefix}-table-cell),
+  ::slotted(#{$prefix}-table-cell-skeleton) {
+    padding-top: rem(16px);
+  }
+}
+
+//
+// "xl" table size variant
+//
+
+:host(#{$prefix}-table-head) ::slotted(#{$prefix}-table-header-row[size='xl']),
+:host(#{$prefix}-table-body) ::slotted(#{$prefix}-table-row[size='xl']) {
+  height: $spacing-10;
+}
+
+:host(#{$prefix}-table-row[size='xl']) {
   ::slotted(#{$prefix}-table-cell),
   ::slotted(#{$prefix}-table-cell-skeleton) {
     padding-top: rem(16px);

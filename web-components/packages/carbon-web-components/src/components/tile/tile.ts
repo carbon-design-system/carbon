@@ -7,20 +7,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
 
 export { TILE_COLOR_SCHEME };
 
-const { prefix } = settings;
-
 /**
  * Basic tile.
  *
- * @element bx-tile
+ * @element cds-tile
  */
 @customElement(`${prefix}-tile`)
 class BXTile extends LitElement {
@@ -29,6 +27,16 @@ class BXTile extends LitElement {
    */
   @property({ attribute: 'color-scheme', reflect: true })
   colorScheme = TILE_COLOR_SCHEME.REGULAR;
+
+  updated() {
+    const anchorTag = this.querySelector('a');
+
+    if (anchorTag) {
+      anchorTag?.classList.add(`${prefix}--link`);
+      anchorTag.before(document.createElement('br'));
+      anchorTag.before(document.createElement('br'));
+    }
+  }
 
   render() {
     return html` <slot></slot> `;

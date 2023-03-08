@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,8 +7,14 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/globals/scss/helper-mixins';
-@import 'carbon-components/scss/components/structured-list/structured-list';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/colors' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/structured-list/structured-list' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include structured-list;
 
 .#{$prefix}--structured-list ::slotted(#{$prefix}-structured-list-head) {
   @extend .#{$prefix}--structured-list-thead;
@@ -42,7 +48,8 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-structured-list-row:hover) .#{$prefix}--structured-list-svg {
-  fill: $ibm-color__gray-40;
+  // TODO: audit
+  fill: $gray-40;
 }
 
 :host(#{$prefix}-structured-list-row)
@@ -55,11 +62,11 @@ $css--plex: true !default;
   @extend .#{$prefix}--structured-list-content--nowrap;
 }
 
-// "Selected" style with `.bx--structured-list-td` does not work somehow - Need investigation
+// "Selected" style with `.#{$prefix}--structured-list-td` does not work somehow - Need investigation
 .#{$prefix}--structured-list-input:checked
   + .#{$prefix}--structured-list-cell
   .#{$prefix}--structured-list-svg {
-  fill: $text-01;
+  fill: $text-primary;
 }
 
 :host(#{$prefix}-structured-list-header-cell-skeleton) span {

@@ -9,17 +9,15 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings.js';
+import { prefix } from '../../globals/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './skip-to-content.scss';
 
-const { prefix } = settings;
-
 /**
  * Skip-to-content link.
  *
- * @element bx-skip-to-content
+ * @element cds-skip-to-content
  */
 @customElement(`${prefix}-skip-to-content`)
 class BXSkipToContent extends FocusMixin(LitElement) {

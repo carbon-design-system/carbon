@@ -7,12 +7,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './tooltip.scss';
-
-const { prefix } = settings;
 
 /**
  * Tooltip footer.

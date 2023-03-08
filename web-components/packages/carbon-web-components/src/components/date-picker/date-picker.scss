@@ -7,9 +7,14 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/globals/scss/css--helpers';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/date-picker/date-picker';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/date-picker/date-picker' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include date-picker;
 
 :host(#{$prefix}-date-picker) {
   @extend .#{$prefix}--date-picker;
@@ -35,7 +40,7 @@ $css--plex: true !default;
   .flatpickr-day.flatpickr-disabled {
     cursor: not-allowed;
     opacity: 0.5;
-    color: $ui-05;
+    color: $layer-selected-inverse;
 
     &:hover {
       background: transparent;
@@ -46,14 +51,14 @@ $css--plex: true !default;
   .flatpickr-next-month.flatpickr-disabled,
   .flatpickr-prev-month.flatpickr-disabled {
     svg {
-      fill: $ui-05;
+      fill: $layer-selected-inverse;
       opacity: 0.5;
       cursor: not-allowed;
     }
 
     &:hover {
       svg {
-        fill: $ui-05;
+        fill: $layer-selected-inverse;
       }
     }
   }
@@ -117,7 +122,7 @@ $css--plex: true !default;
 :host(#{$prefix}-date-picker-input) ::slotted(.#{$prefix}--date-picker__icon) {
   position: absolute;
   right: 1rem;
-  fill: $icon-01;
+  fill: $icon-primary;
   cursor: pointer;
   z-index: 1;
 }

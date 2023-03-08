@@ -20,9 +20,10 @@ import './structured-list-cell';
 import './structured-list-header-cell-skeleton';
 import storyDocs from './structured-list-story.mdx';
 import styles from './structured-list-story.scss';
+import { prefix } from '../../globals/settings';
 
 export const Default = (args) => {
-  const { hasSelection } = args?.['bx-structured-list'] ?? {};
+  const { hasSelection } = args?.[`${prefix}-structured-list`] ?? {};
   const selectionName = !hasSelection ? undefined : 'structured-list-selection';
   const selectionValues = !hasSelection
     ? []
@@ -32,53 +33,53 @@ export const Default = (args) => {
         'structured-list-selection-2',
       ];
   return html`
-    <bx-structured-list selection-name=${ifDefined(selectionName)}>
-      <bx-structured-list-head>
-        <bx-structured-list-header-row>
-          <bx-structured-list-header-cell
-            >ColumnA</bx-structured-list-header-cell
+    <cds-structured-list selection-name=${ifDefined(selectionName)}>
+      <cds-structured-list-head>
+        <cds-structured-list-header-row>
+          <cds-structured-list-header-cell
+            >ColumnA</cds-structured-list-header-cell
           >
-          <bx-structured-list-header-cell
-            >ColumnB</bx-structured-list-header-cell
+          <cds-structured-list-header-cell
+            >ColumnB</cds-structured-list-header-cell
           >
-          <bx-structured-list-header-cell
-            >ColumnC</bx-structured-list-header-cell
+          <cds-structured-list-header-cell
+            >ColumnC</cds-structured-list-header-cell
           >
-        </bx-structured-list-header-row>
-      </bx-structured-list-head>
-      <bx-structured-list-body>
-        <bx-structured-list-row
+        </cds-structured-list-header-row>
+      </cds-structured-list-head>
+      <cds-structured-list-body>
+        <cds-structured-list-row
           selection-value=${ifDefined(selectionValues[0])}>
-          <bx-structured-list-cell>Row 1</bx-structured-list-cell>
-          <bx-structured-list-cell>Row 1</bx-structured-list-cell>
-          <bx-structured-list-cell
+          <cds-structured-list-cell>Row 1</cds-structured-list-cell>
+          <cds-structured-list-cell>Row 1</cds-structured-list-cell>
+          <cds-structured-list-cell
             >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
             magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-            sem vel euismod dignissim.</bx-structured-list-cell
+            sem vel euismod dignissim.</cds-structured-list-cell
           >
-        </bx-structured-list-row>
-        <bx-structured-list-row
+        </cds-structured-list-row>
+        <cds-structured-list-row
           selection-value=${ifDefined(selectionValues[1])}>
-          <bx-structured-list-cell>Row 2</bx-structured-list-cell>
-          <bx-structured-list-cell>Row 2</bx-structured-list-cell>
-          <bx-structured-list-cell
+          <cds-structured-list-cell>Row 2</cds-structured-list-cell>
+          <cds-structured-list-cell>Row 2</cds-structured-list-cell>
+          <cds-structured-list-cell
             >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
             magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-            sem vel euismod dignissim.</bx-structured-list-cell
+            sem vel euismod dignissim.</cds-structured-list-cell
           >
-        </bx-structured-list-row>
-        <bx-structured-list-row
+        </cds-structured-list-row>
+        <cds-structured-list-row
           selection-value=${ifDefined(selectionValues[2])}>
-          <bx-structured-list-cell>Row 3</bx-structured-list-cell>
-          <bx-structured-list-cell>Row 3</bx-structured-list-cell>
-          <bx-structured-list-cell
+          <cds-structured-list-cell>Row 3</cds-structured-list-cell>
+          <cds-structured-list-cell>Row 3</cds-structured-list-cell>
+          <cds-structured-list-cell
             >Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dui
             magna, finibus id tortor sed, aliquet bibendum augue. Aenean posuere
-            sem vel euismod dignissim.</bx-structured-list-cell
+            sem vel euismod dignissim.</cds-structured-list-cell
           >
-        </bx-structured-list-row>
-      </bx-structured-list-body>
-    </bx-structured-list>
+        </cds-structured-list-row>
+      </cds-structured-list-body>
+    </cds-structured-list>
   `;
 };
 
@@ -86,7 +87,7 @@ Default.storyName = 'Default';
 
 Default.parameters = {
   knobs: {
-    'bx-structured-list': () => ({
+    [`${prefix}-structured-list`]: () => ({
       hasSelection: boolean(
         'Supports selection feature (has-selection)',
         false
@@ -99,32 +100,32 @@ export const skeleton = () => html`
   <style>
     ${styles}
   </style>
-  <bx-structured-list>
-    <bx-structured-list-head>
-      <bx-structured-list-header-row>
-        <bx-structured-list-header-cell-skeleton></bx-structured-list-header-cell-skeleton>
-        <bx-structured-list-header-cell-skeleton></bx-structured-list-header-cell-skeleton>
-        <bx-structured-list-header-cell-skeleton></bx-structured-list-header-cell-skeleton>
-      </bx-structured-list-header-row>
-    </bx-structured-list-head>
-    <bx-structured-list-body>
-      <bx-structured-list-row>
-        <bx-structured-list-cell></bx-structured-list-cell>
-        <bx-structured-list-cell></bx-structured-list-cell>
-        <bx-structured-list-cell></bx-structured-list-cell>
-      </bx-structured-list-row>
-      <bx-structured-list-row>
-        <bx-structured-list-cell></bx-structured-list-cell>
-        <bx-structured-list-cell></bx-structured-list-cell>
-        <bx-structured-list-cell></bx-structured-list-cell>
-      </bx-structured-list-row>
-      <bx-structured-list-row>
-        <bx-structured-list-cell></bx-structured-list-cell>
-        <bx-structured-list-cell></bx-structured-list-cell>
-        <bx-structured-list-cell></bx-structured-list-cell>
-      </bx-structured-list-row>
-    </bx-structured-list-body>
-  </bx-structured-list>
+  <cds-structured-list>
+    <cds-structured-list-head>
+      <cds-structured-list-header-row>
+        <cds-structured-list-header-cell-skeleton></cds-structured-list-header-cell-skeleton>
+        <cds-structured-list-header-cell-skeleton></cds-structured-list-header-cell-skeleton>
+        <cds-structured-list-header-cell-skeleton></cds-structured-list-header-cell-skeleton>
+      </cds-structured-list-header-row>
+    </cds-structured-list-head>
+    <cds-structured-list-body>
+      <cds-structured-list-row>
+        <cds-structured-list-cell></cds-structured-list-cell>
+        <cds-structured-list-cell></cds-structured-list-cell>
+        <cds-structured-list-cell></cds-structured-list-cell>
+      </cds-structured-list-row>
+      <cds-structured-list-row>
+        <cds-structured-list-cell></cds-structured-list-cell>
+        <cds-structured-list-cell></cds-structured-list-cell>
+        <cds-structured-list-cell></cds-structured-list-cell>
+      </cds-structured-list-row>
+      <cds-structured-list-row>
+        <cds-structured-list-cell></cds-structured-list-cell>
+        <cds-structured-list-cell></cds-structured-list-cell>
+        <cds-structured-list-cell></cds-structured-list-cell>
+      </cds-structured-list-row>
+    </cds-structured-list-body>
+  </cds-structured-list>
 `;
 
 skeleton.parameters = {

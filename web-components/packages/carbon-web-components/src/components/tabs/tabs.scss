@@ -1,12 +1,20 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'carbon-components/scss/globals/scss/css--helpers';
-@import 'carbon-components/scss/components/tabs/tabs';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/components/tabs/index';
+@use '@carbon/styles/scss/components/tabs/vars' as *;
+@use '@carbon/styles/scss/utilities/button-reset';
 
 :host(#{$prefix}-tabs),
 :host(#{$prefix}-tabs-skeleton) {
@@ -19,7 +27,7 @@
   display: block;
 
   &[color-scheme='light'] {
-    background-color: $ui-01;
+    background-color: $layer-01;
   }
 
   .#{$prefix}--tabs-trigger svg {
@@ -34,38 +42,65 @@
   }
 }
 
-:host(#{$prefix}-tabs[type='container']) {
-  @extend .#{$prefix}--tabs--container;
-}
-
+// copying styles from
 :host(#{$prefix}-tab) {
-  @extend .#{$prefix}--tabs__nav-item;
+  display: flex;
+  background: transparent;
+  width: 100%;
+
+  .#{$prefix}--tabs__nav-link {
+    @include button-reset.reset($width: false);
+    @include focus-outline('reset');
+    @include type-style('body-compact-01');
+
+    width: 100%;
+    overflow: hidden;
+    max-width: 10rem;
+    padding: $spacing-04 $spacing-05 $spacing-03;
+    border-bottom: $tab-underline-color;
+    color: $text-secondary;
+    text-align: left;
+    text-decoration: none;
+    text-overflow: ellipsis;
+    transition: border $duration-fast-01 motion(standard, productive),
+      outline $duration-fast-01 motion(standard, productive);
+    white-space: nowrap;
+
+    &:focus,
+    &:active {
+      @include focus-outline('outline');
+    }
+  }
+
+  &[selected] {
+    .#{$prefix}--tabs__nav-link {
+      @include type-style('heading-01');
+
+      border-bottom: 2px solid $border-interactive;
+    }
+  }
 
   outline: none;
-
-  .#{$prefix}--tabs__nav-link:active {
-    @include focus-outline('reset');
-  }
 }
 
 :host(#{$prefix}-tab:hover) {
-  @include carbon--breakpoint(md) {
+  @include breakpoint(md) {
     background-color: transparent;
     box-shadow: none;
   }
 
-  background-color: $hover-ui;
-  box-shadow: 0 -1px 0 $hover-ui;
+  background-color: transparent;
+  box-shadow: 0 -1px 0 $background-hover;
 }
 
 :host(#{$prefix}-tab[type='container']) {
-  @include carbon--breakpoint(md) {
-    background-color: $ui-03;
+  @include breakpoint(md) {
+    background-color: $layer-accent-01;
 
     + .#{$prefix}--tabs__nav-item {
       margin-left: 0;
       // Draws the border without affecting the inner-content
-      box-shadow: -1px 0 0 0 $ui-04;
+      box-shadow: -1px 0 0 0 $border-strong-01;
     }
 
     + .#{$prefix}--tabs__nav-item.#{$prefix}--tabs__nav-item--selected,
@@ -74,14 +109,8 @@
     }
   }
 
-  &:hover {
-    @include carbon--breakpoint(md) {
-      background-color: $hover-selected-ui;
-    }
-  }
-
   a.#{$prefix}--tabs__nav-link {
-    @include carbon--breakpoint(md) {
+    @include breakpoint(md) {
       height: rem(48px);
       // height - vertical padding
       /* stylelint-disable declaration-property-unit-whitelist */
@@ -96,7 +125,7 @@
 :host(#{$prefix}-tab[type='container'][role]),
 :host(#{$prefix}-tab[type='container'][role]:hover) {
   a.#{$prefix}--tabs__nav-link {
-    @include carbon--breakpoint(md) {
+    @include breakpoint(md) {
       border-bottom: none;
     }
   }
@@ -107,47 +136,38 @@
 // which puts specificity of "specific" scenario though the style is for "regular" scenario
 :host(#{$prefix}-tab[disabled][role]),
 :host(#{$prefix}-tab[disabled][role]:hover) {
-  background-color: $ui-01;
+  background-color: transparent;
   box-shadow: none;
   cursor: not-allowed;
   outline: none;
 
-  @include carbon--breakpoint(md) {
+  @include breakpoint(md) {
     background-color: transparent;
   }
 
   .#{$prefix}--tabs__nav-link {
     color: $tab-text-disabled;
     pointer-events: none;
+    outline: none;
 
-    @include carbon--breakpoint(md) {
+    @include breakpoint(md) {
       border-bottom: $tab-underline-disabled;
     }
   }
 }
 
-:host(#{$prefix}-tab[type='container'][disabled][role]),
-:host(#{$prefix}-tab[type='container'][disabled][role]:hover) {
-  @include carbon--breakpoint(md) {
-    background-color: $disabled-02;
-  }
-}
-
 :host(#{$prefix}-tab[type='container'][disabled][role])
   .#{$prefix}--tabs__nav-link {
-  @include carbon--breakpoint(md) {
-    color: $disabled-03;
+  @include breakpoint(md) {
+    color: $text-on-color-disabled;
   }
 }
 
 :host(#{$prefix}-tab[selected]) {
-  background-color: $hover-ui;
-  transition: color $duration--fast-01 motion(standard, productive);
+  transition: color $duration-fast-01 motion(standard, productive);
 
   &:hover {
-    background-color: $selected-ui;
-
-    @include carbon--breakpoint(md) {
+    @include breakpoint(md) {
       background-color: transparent;
     }
   }
@@ -157,18 +177,18 @@
     // Need to override Carbon core's non-selected focus color
     &:focus,
     &:active {
-      color: $text-01;
+      color: $text-primary;
     }
   }
 
-  @include carbon--breakpoint(md) {
+  @include breakpoint(md) {
     display: flex;
     background-color: transparent;
 
     .#{$prefix}--tabs__nav-link {
       @include type-style('heading-01');
 
-      border-bottom: 3px solid $interactive-01;
+      border-bottom: 3px solid $background-brand;
 
       &:focus,
       &:active {
@@ -180,14 +200,14 @@
 
 :host(#{$prefix}-tab[type='container'][selected]),
 :host(#{$prefix}-tab[type='container'][selected]:hover) {
-  @include carbon--breakpoint(md) {
-    background-color: $ui-01;
+  @include breakpoint(md) {
+    background-color: $layer-01;
 
     .#{$prefix}--tabs__nav-link {
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
       // Draws the border without affecting the inner-content
-      box-shadow: inset 0 2px 0 0 $interactive-04;
+      box-shadow: inset 0 2px 0 0 $interactive;
       border-bottom: none;
     }
 
@@ -200,12 +220,11 @@
 
 :host(#{$prefix}-tab[highlighted]),
 :host(#{$prefix}-tab[highlighted]:hover) {
-  background-color: $hover-ui;
-  box-shadow: 0 -1px 0 $hover-ui;
+  box-shadow: 0 -1px 0 $background-hover;
 
   // `highlighted` is not used in wide mode,
   // but we need guard for a scenario where a tab is highlighted and then the UI turned to wide mode
-  @include carbon--breakpoint(md) {
+  @include breakpoint(md) {
     background-color: transparent;
     box-shadow: none;
   }
@@ -213,11 +232,11 @@
 
 :host(#{$prefix}-tab[highlighted][selected]),
 :host(#{$prefix}-tab[highlighted][selected]:hover) {
-  background-color: $selected-ui;
+  background-color: $background-selected;
 
   // `highlighted` is not used in wide mode,
   // but we need guard for a scenario where a tab is highlighted and then the UI turned to wide mode
-  @include carbon--breakpoint(md) {
+  @include breakpoint(md) {
     background-color: transparent;
   }
 }
@@ -228,17 +247,17 @@
 :host(#{$prefix}-tab[disabled][in-focus][selected]),
 :host(#{$prefix}-tab[disabled][in-focus][selected]:hover) {
   display: flex;
-  background-color: $ui-01;
+  background-color: transparent;
   box-shadow: none;
 
-  @include carbon--breakpoint(md) {
+  @include breakpoint(md) {
     @include focus-outline('reset');
 
     background-color: transparent;
   }
 
   .#{$prefix}--tabs__nav-link {
-    @include carbon--breakpoint(md) {
+    @include breakpoint(md) {
       @include type-style('body-short-01');
 
       color: $tab-text-disabled;
@@ -259,7 +278,7 @@
 }
 
 :host(#{$prefix}-tab-skeleton) {
-  @include carbon--breakpoint(md) {
+  @include breakpoint(md) {
     margin-left: rem(2px);
   }
 
@@ -272,7 +291,7 @@
 }
 
 :host(#{$prefix}-tab-skeleton:first-of-type) {
-  @include carbon--breakpoint(md) {
+  @include breakpoint(md) {
     margin-left: 0;
   }
 }

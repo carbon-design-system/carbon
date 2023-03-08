@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,9 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/number-input/number-input';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/number-input/index';
 
 :host(#{$prefix}-number-input),
 :host(#{$prefix}-number-input-skeleton) {
@@ -15,7 +17,7 @@ $css--plex: true !default;
   width: 100%;
   outline: none;
 
-  .bx--form-requirement[hidden] {
+  .#{$prefix}--form-requirement[hidden] {
     display: none;
   }
 }

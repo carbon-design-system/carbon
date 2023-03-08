@@ -30,8 +30,7 @@ import '@carbon/web-components/es/components/notification/index.js';
 <bx-inline-notification
   style="min-width: 30rem; margin-bottom: .5rem"
   title="Notification title"
-  subtitle="Subtitle text goes here."
->
+  subtitle="Subtitle text goes here.">
 </bx-inline-notification>
 ```
 
@@ -44,8 +43,7 @@ action. They usually appear at the top of the primary content area.
 <bx-inline-notification
   style="min-width: 30rem; margin-bottom: .5rem"
   title="Notification title"
-  subtitle="Subtitle text goes here."
->
+  subtitle="Subtitle text goes here.">
 </bx-inline-notification>
 ```
 
@@ -59,18 +57,19 @@ few seconds.
 <bx-toast-notification
   style="min-width: 30rem; margin-bottom: 0.5rem;"
   title="Notification title"
-  subtitle="Subtitle text goes here."
->
+  subtitle="Subtitle text goes here.">
 </bx-toast-notification>
 ```
 
 ## Themeing
 
-In order to get the correct token value for the notification background, you will need to apply the following in you `scss` to your themed class. For example:
+In order to get the correct token value for the notification background, you
+will need to apply the following in you `scss` to your themed class. For
+example:
 
 ```css
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
-@import 'carbon-components/scss/globals/scss/component-tokens';
+@use '@carbon/styles/scss/vendor/@carbon/elements/scss/themes/mixins';
+@use '@carbon/styles/scss/component-tokens';
 @import 'carbon-components/src/components/notification/inline-notification';
 @import 'carbon-components/src/components/notification/toast-notification';
 .dds-theme-zone-g90 {

@@ -1,24 +1,49 @@
-//
-// Copyright IBM Corp. 2019, 2023
-//
-// This source code is licensed under the Apache-2.0 license found in the
-// LICENSE file in the root directory of this source tree.
-//
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
 
 $css--plex: true !default;
 // `@include reset` with `variable-exists(css--reset) == false or $css--reset == false` breaks the dotted underline
 // TODO: Determine how to deal with `$css--reset` across components
-$css--reset: true !default;
+// $css--reset: true !default;
 // Caret's original size was 13.75px square
 $caret-size: 6.875px;
 $caret-horizontal-position: calc(#{$caret-size * (-1)} + 1px);
 
-@import 'carbon-components/scss/globals/scss/css--helpers';
-@import 'carbon-components/scss/globals/scss/layout';
-@import 'carbon-components/scss/components/tooltip/tooltip';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/tooltip/index' as *;
+@use '@carbon/styles/scss/components/popover/index' as *;
+@use '@carbon/styles/scss/utilities/button-reset';
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+// @include tooltip;
 
 :host(#{$prefix}-tooltip) {
   @extend .#{$prefix}--tooltip__trigger;
+
+  .sb-tooltip-trigger {
+    @include button-reset.reset();
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid $border-subtle;
+  }
+
+  .sb-tooltip-trigger svg {
+    fill: $background-inverse;
+  }
 }
 
 :host(#{$prefix}-tooltip-body) {
@@ -110,14 +135,8 @@ $caret-horizontal-position: calc(#{$caret-size * (-1)} + 1px);
 }
 
 :host(#{$prefix}-tooltip-body[open]) {
-  @extend .#{$prefix}--tooltip--shown;
-}
-
-:host(#{$prefix}-tooltip-definition) {
-  @extend .#{$prefix}--tooltip--definition;
-  @extend .#{$prefix}--tooltip--a11y;
-
-  outline: none;
+  // TODO: audit
+  @extend .#{$prefix}--tooltip--shown !optional;
 }
 
 :host(#{$prefix}-tooltip-icon) {

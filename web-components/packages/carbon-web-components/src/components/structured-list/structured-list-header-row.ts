@@ -7,17 +7,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './structured-list.scss';
-
-const { prefix } = settings;
 
 /**
  * Structured list header row.
  *
- * @element bx-structured-list-header-row
+ * @element cds-structured-list-header-row
  */
 @customElement(`${prefix}-structured-list-header-row`)
 class BXStructuredListHeaderRow extends LitElement {
@@ -36,7 +34,7 @@ class BXStructuredListHeaderRow extends LitElement {
   }
 
   render() {
-    // We could look up in DOM for `bx-structured-list[hasSelection]`,
+    // We could look up in DOM for `${prefix}-structured-list[hasSelection]`,
     // but uses `hasSelection` prop to utilize attribute change callback
     if (this.selectionName) {
       return html`

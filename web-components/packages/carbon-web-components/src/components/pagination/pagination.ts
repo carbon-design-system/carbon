@@ -10,9 +10,9 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import CaretLeft24 from '@carbon/icons/lib/caret--left/24';
-import CaretRight24 from '@carbon/icons/lib/caret--right/24';
-import settings from 'carbon-components/es/globals/js/settings';
+import CaretLeft16 from '@carbon/icons/lib/caret--left/16';
+import CaretRight16 from '@carbon/icons/lib/caret--right/16';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
@@ -21,16 +21,14 @@ import BXPagesSelect from './pages-select';
 import BXPageSizesSelect from './page-sizes-select';
 import styles from './pagination.scss';
 
-const { prefix } = settings;
-
 /**
  * Pagination UI.
  *
- * @element bx-pagination
+ * @element cds-pagination
  * @slot page-sizes-select - Where to put in the `<page-sizes-select>`.
- * @fires bx-pages-select-changed - The custom event fired after the current page is changed from `<bx-pages-select>`.
- * @fires bx-page-sizes-select-changed
- *   The custom event fired after the number of rows per page is changed from `<bx-page-sizes-select>`.
+ * @fires cds-pages-select-changed - The custom event fired after the current page is changed from `<cds-pages-select>`.
+ * @fires cds-page-sizes-select-changed
+ *   The custom event fired after the number of rows per page is changed from `<cds-page-sizes-select>`.
  */
 @customElement(`${prefix}-pagination`)
 class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
@@ -253,14 +251,14 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
             class="${prevButtonClasses}"
             title="${prevButtonText}"
             @click="${handleClickPrevButton}">
-            ${CaretLeft24()}
+            ${CaretLeft16()}
           </button>
           <button
             ?disabled="${nextButtonDisabled}"
             class="${nextButtonClasses}"
             title="${nextButtonText}"
             @click="${handleClickNextButton}">
-            ${CaretRight24()}
+            ${CaretRight16()}
           </button>
         </div>
       </div>
@@ -289,14 +287,14 @@ class BXPagination extends FocusMixin(HostListenerMixin(LitElement)) {
   }
 
   /**
-   * The name of the custom event fired after the current page is changed from `<bx-pages-select>`.
+   * The name of the custom event fired after the current page is changed from `<cds-pages-select>`.
    */
   static get eventChangePage() {
     return `${prefix}-pages-select-changed`;
   }
 
   /**
-   * The name of the custom event fired after the number of rows per page is changed from `<bx-page-sizes-select>`.
+   * The name of the custom event fired after the number of rows per page is changed from `<cds-page-sizes-select>`.
    */
   static get eventChangePageSize() {
     return `${prefix}-page-sizes-select-changed`;

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,10 +7,12 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/multi-select/multi-select';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/checkbox/checkbox';
-@import 'carbon-components/scss/components/tag/tag';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/multiselect/multiselect';
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/checkbox';
+@use '@carbon/styles/scss/components/tag';
 
 :host(#{$prefix}-multi-select) {
   outline: none;
@@ -32,6 +34,7 @@ $css--plex: true !default;
 
   .#{$prefix}--text-input {
     border: none;
+    padding-left: 0;
 
     &:focus {
       outline: none;
@@ -57,7 +60,7 @@ $css--plex: true !default;
 
   .#{$prefix}--checkbox {
     &:checked ~ .#{$prefix}--checkbox-label-text {
-      color: $text-01;
+      color: $text-primary;
     }
 
     &:focus + .#{$prefix}--checkbox-label::before {
@@ -105,7 +108,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-multi-select-item[disabled]) {
-  color: $disabled-02;
+  color: $text-disabled;
   text-decoration: none;
 }
 
@@ -118,6 +121,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--list-box__menu-item--highlighted;
 
   .#{$prefix}--list-box__menu-item__option {
-    color: $text-01;
+    color: $text-primary;
   }
 }

@@ -9,18 +9,16 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { TAG_SIZE, TAG_TYPE } from './defs';
 import styles from './tag.scss';
 
 export { TAG_SIZE, TAG_TYPE };
 
-const { prefix } = settings;
-
 /**
  * Tag.
  *
- * @element bx-tag
+ * @element cds-tag
  */
 @customElement(`${prefix}-tag`)
 class BXTag extends LitElement {

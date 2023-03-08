@@ -9,16 +9,14 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import styles from './data-table.scss';
-
-const { prefix } = settings;
 
 /**
  * Table batch actions.
  *
- * @element bx-table-batch-actions
- * @fires bx-table-batch-actions-cancel-clicked - The custom event fired after the Cancel button is clicked.
+ * @element cds-table-batch-actions
+ * @fires cds-table-batch-actions-cancel-clicked - The custom event fired after the Cancel button is clicked.
  */
 @customElement(`${prefix}-table-batch-actions`)
 class BXTableBatchActions extends LitElement {

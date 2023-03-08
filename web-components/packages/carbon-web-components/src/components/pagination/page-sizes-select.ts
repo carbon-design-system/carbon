@@ -10,18 +10,16 @@
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './pagination.scss';
-
-const { prefix } = settings;
 
 /**
  * The select box for page sizes.
  *
- * @element bx-page-sizes-select
+ * @element cds-page-sizes-select
  * @slot label-text - The label text.
- * @fires bx-page-sizes-select-changed - The custom event fired after the page size is changed.
+ * @fires cds-page-sizes-select-changed - The custom event fired after the page size is changed.
  */
 @customElement(`${prefix}-page-sizes-select`)
 class BXPageSizesSelect extends FocusMixin(LitElement) {

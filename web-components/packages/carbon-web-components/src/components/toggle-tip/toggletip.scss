@@ -1,0 +1,33 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/toggletip/index' as *;
+@use '@carbon/styles/scss/components/tooltip/index' as *;
+@use '@carbon/styles/scss/components/popover/index' as *;
+@use '@carbon/styles/scss/utilities/button-reset';
+
+:host(#{$prefix}-toggletip) {
+  // TODO: audit
+  @extend .#{$prefix}--toggletip;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  outline: none;
+
+  .#{$prefix}--popover-caret {
+    background-color: $background-inverse;
+  }
+}

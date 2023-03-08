@@ -8,14 +8,15 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import * as knobs from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import './textarea';
 import './textarea-skeleton';
 import '../form/form-item';
 import createProps from './stories/helpers';
 import storyDocs from './textarea-story.mdx';
+import { prefix } from '../../globals/settings';
 
 export const Default = (args) => {
   const {
@@ -36,9 +37,9 @@ export const Default = (args) => {
     onInput,
     rows,
     cols,
-  } = args?.['bx-textarea'] ?? {};
+  } = args?.[`${prefix}-textarea`] ?? {};
   return html`
-    <bx-textarea
+    <cds-textarea
       autocomplete="${ifDefined(autocomplete)}"
       ?autofocus="${autofocus}"
       color-scheme="${ifDefined(colorScheme)}"
@@ -56,7 +57,7 @@ export const Default = (args) => {
       @input="${onInput}"
       rows="${ifDefined(rows)}"
       cols="${ifDefined(cols)}">
-    </bx-textarea>
+    </cds-textarea>
   `;
 };
 
@@ -64,7 +65,7 @@ Default.storyName = 'Default';
 
 Default.parameters = {
   knobs: {
-    'bx-textarea': () => createProps({ ...knobs, textNullable }),
+    [`${prefix}-textarea`]: () => createProps({ ...knobs, textNullable }),
   },
 };
 
@@ -78,10 +79,10 @@ export const formItem = (args) => {
     onInput,
     rows,
     cols,
-  } = args?.['bx-textarea'] ?? {};
+  } = args?.[`${prefix}-textarea`] ?? {};
   return html`
-    <bx-form-item>
-      <bx-textarea
+    <cds-form-item>
+      <cds-textarea
         color-scheme="${ifDefined(colorScheme)}"
         placeholder="${ifDefined(placeholder)}"
         @input="${onInput}"
@@ -94,8 +95,8 @@ export const formItem = (args) => {
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
         ${value}
-      </bx-textarea>
-    </bx-form-item>
+      </cds-textarea>
+    </cds-form-item>
   `;
 };
 
@@ -103,7 +104,7 @@ formItem.storyName = 'Form item';
 
 formItem.parameters = {
   knobs: {
-    'bx-textarea': () => createProps({ ...knobs, textNullable }),
+    [`${prefix}-textarea`]: () => createProps({ ...knobs, textNullable }),
   },
 };
 
@@ -117,9 +118,9 @@ export const withoutFormItemWrapper = (args) => {
     onInput,
     rows,
     cols,
-  } = args?.['bx-textarea'] ?? {};
+  } = args?.[`${prefix}-textarea`] ?? {};
   return html`
-    <bx-textarea
+    <cds-textarea
       color-scheme="${ifDefined(colorScheme)}"
       placeholder="${ifDefined(placeholder)}"
       @input="${onInput}"
@@ -132,7 +133,7 @@ export const withoutFormItemWrapper = (args) => {
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>
       <span>${value}</span>
-    </bx-textarea>
+    </cds-textarea>
   `;
 };
 
@@ -140,12 +141,12 @@ withoutFormItemWrapper.storyName = 'Without form item wrapper';
 
 withoutFormItemWrapper.parameters = {
   knobs: {
-    'bx-textarea': () => createProps({ ...knobs, textNullable }),
+    [`${prefix}-textarea`]: () => createProps({ ...knobs, textNullable }),
   },
 };
 
 export const skeleton = () =>
-  html` <bx-textarea-skeleton></bx-textarea-skeleton> `;
+  html` <cds-textarea-skeleton></cds-textarea-skeleton> `;
 
 skeleton.parameters = {
   percy: {

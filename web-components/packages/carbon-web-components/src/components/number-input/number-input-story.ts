@@ -16,6 +16,7 @@ import './number-input-skeleton';
 import '../form/form-item';
 import createProps from './stories/helpers';
 import storyDocs from './number-input-story.mdx';
+import { prefix } from '../../globals/settings';
 
 export const Default = (args) => {
   const {
@@ -31,9 +32,9 @@ export const Default = (args) => {
     step,
     onInput,
     name,
-  } = args?.['bx-number-input'] ?? {};
+  } = args?.[`${prefix}-number-input`] ?? {};
   return html`
-    <bx-number-input
+    <cds-number-input
       color-scheme="${ifDefined(colorScheme)}"
       ?disabled="${disabled}"
       value="${ifDefined(value)}"
@@ -45,7 +46,7 @@ export const Default = (args) => {
       max="${ifDefined(max)}"
       size="${ifDefined(size)}"
       step="${ifDefined(step)}"
-      @input="${onInput}"></bx-number-input>
+      @input="${onInput}"></cds-number-input>
   `;
 };
 
@@ -53,7 +54,7 @@ Default.storyName = 'Default';
 
 Default.parameters = {
   knobs: {
-    'bx-number-input': () => createProps({ ...knobs, textNullable }),
+    [`${prefix}-number-input`]: () => createProps({ ...knobs, textNullable }),
   },
 };
 
@@ -70,10 +71,10 @@ export const formItem = (args) => {
     size,
     step,
     onInput,
-  } = args?.['bx-number-input'] ?? {};
+  } = args?.[`${prefix}-number-input`] ?? {};
   return html`
-    <bx-form-item>
-      <bx-number-input
+    <cds-form-item>
+      <cds-number-input
         value="${ifDefined(value)}"
         color-scheme="${ifDefined(colorScheme)}"
         placeholder="${ifDefined(placeholder)}"
@@ -94,8 +95,8 @@ export const formItem = (args) => {
         <span slot="validity-message-min"
           >Value must be larger than ${min}</span
         >
-      </bx-number-input>
-    </bx-form-item>
+      </cds-number-input>
+    </cds-form-item>
   `;
 };
 
@@ -103,7 +104,7 @@ formItem.storyName = 'Form item';
 
 formItem.parameters = {
   knobs: {
-    'bx-number-input': () => createProps({ ...knobs, textNullable }),
+    [`${prefix}-number-input`]: () => createProps({ ...knobs, textNullable }),
   },
 };
 
@@ -120,9 +121,9 @@ export const withoutFormItemWrapper = (args) => {
     size,
     step,
     onInput,
-  } = args?.['bx-number-input'] ?? {};
+  } = args?.[`${prefix}-number-input`] ?? {};
   return html`
-    <bx-number-input
+    <cds-number-input
       value="${ifDefined(value)}"
       color-scheme="${ifDefined(colorScheme)}"
       placeholder="${ifDefined(placeholder)}"
@@ -137,7 +138,7 @@ export const withoutFormItemWrapper = (args) => {
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>
-    </bx-number-input>
+    </cds-number-input>
   `;
 };
 
@@ -145,12 +146,12 @@ withoutFormItemWrapper.storyName = 'Without form item wrapper';
 
 withoutFormItemWrapper.parameters = {
   knobs: {
-    'bx-number-input': () => createProps({ ...knobs, textNullable }),
+    [`${prefix}-number-input`]: () => createProps({ ...knobs, textNullable }),
   },
 };
 
 export const skeleton = () =>
-  html` <bx-number-input-skeleton></bx-number-input-skeleton> `;
+  html` <cds-number-input-skeleton></cds-number-input-skeleton> `;
 
 skeleton.parameters = {
   percy: {

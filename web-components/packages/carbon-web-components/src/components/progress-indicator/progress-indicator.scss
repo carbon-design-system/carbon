@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,14 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/progress-indicator/progress-indicator';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/skeleton' as *;
+@use '@carbon/styles/scss/components/progress-indicator/progress-indicator' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include progress-indicator;
 
 :host(#{$prefix}-progress-indicator),
 :host(#{$prefix}-progress-indicator-skeleton) {
@@ -26,8 +33,8 @@ $css--plex: true !default;
 
   outline: none;
 
-  // Carbon core style has hard-coded width whose value is the same as `.bx--progress-step`.
-  // We override it so changing width of `<bx-progress-step>` automatically changes the width here.
+  // Carbon core style has hard-coded width whose value is the same as `.#{$prefix}--progress-step`.
+  // We override it so changing width of `<#{$prefix}-progress-step>` automatically changes the width here.
   // https://github.com/carbon-design-system/carbon-web-components/issues/325
   .#{$prefix}--progress-line {
     width: 100%;
@@ -41,7 +48,7 @@ $css--plex: true !default;
 :host(#{$prefix}-progress-step[vertical]),
 :host(#{$prefix}-progress-step-skeleton[vertical]) {
   display: list-item;
-  min-height: 6rem;
+  min-height: $spacing-12;
   width: initial;
   min-width: initial;
 
@@ -83,14 +90,22 @@ $css--plex: true !default;
 
 :host(#{$prefix}-progress-step[state='current']) {
   @extend .#{$prefix}--progress-step--current;
+
+  svg {
+    fill: $interactive;
+  }
 }
 
 :host(#{$prefix}-progress-step[state='complete']) {
   @extend .#{$prefix}--progress-step--complete;
 
   svg {
-    fill: $interactive-01;
+    fill: $interactive;
   }
+}
+
+:host(#{$prefix}-progress-step[state='incomplete']) {
+  @extend .#{$prefix}--progress-step--incomplete;
 }
 
 :host(#{$prefix}-progress-step-skeleton) .#{$prefix}--progress-label {
@@ -102,10 +117,10 @@ $css--plex: true !default;
 
 :host(#{$prefix}-progress-step-skeleton) {
   svg {
-    fill: $ui-05;
+    fill: $layer-selected-inverse;
   }
 
   .#{$prefix}--progress-line {
-    background-color: $ui-03;
+    background-color: $layer-accent-01;
   }
 }

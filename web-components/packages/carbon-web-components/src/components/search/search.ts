@@ -13,7 +13,7 @@ import { property, customElement } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16';
 import Close20 from '@carbon/icons/lib/close/20';
 import Search16 from '@carbon/icons/lib/search/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
@@ -23,18 +23,16 @@ import styles from './search.scss';
 
 export { SEARCH_COLOR_SCHEME };
 
-const { prefix } = settings;
-
 /**
  * Search box.
  *
- * @element bx-search
+ * @element cds-search
  * @csspart search-icon The search icon.
  * @csspart label-text The label text.
  * @csspart input The input box.
  * @csspart close-button The close button.
  * @csspart close-icon The close icon.
- * @fires bx-search-input - The custom event fired after the search content is changed upon a user gesture.
+ * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
 @customElement(`${prefix}-search`)
 class BXSearch extends FocusMixin(FormMixin(LitElement)) {

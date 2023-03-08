@@ -15,12 +15,13 @@ import './slider';
 import './slider-input';
 import './slider-skeleton';
 import storyDocs from './slider-story.mdx';
+import { prefix } from '../../globals/settings';
 
 export const Default = (args) => {
   const { disabled, labelText, max, min, name, step, value, onChange } =
-    args?.['bx-slider'] || {};
+    args?.[`${prefix}-slider`] || {};
   return html`
-    <bx-slider
+    <cds-slider
       ?disabled="${disabled}"
       label-text="${ifDefined(labelText)}"
       max="${ifDefined(max)}"
@@ -28,7 +29,7 @@ export const Default = (args) => {
       name="${ifDefined(name)}"
       step="${ifDefined(step)}"
       value="${ifDefined(value)}"
-      @bx-slider-changed="${onChange}"></bx-slider>
+      @cds-slider-changed="${onChange}"></cds-slider>
   `;
 };
 
@@ -36,7 +37,7 @@ Default.storyName = 'Default';
 
 Default.parameters = {
   knobs: {
-    'bx-slider': () => ({
+    [`${prefix}-slider`]: () => ({
       disabled: boolean('Disabled (disabled)', false),
       labelText: text('Label text (label-text)', 'Slider'),
       name: text('Name (name)', ''),
@@ -44,16 +45,16 @@ Default.parameters = {
       min: number('The minimum value (min)', 0),
       step: number('The step (step)', 1),
       value: number('Value (value)', 50),
-      onAfterChange: action('bx-slider-changed'),
+      onAfterChange: action(`${prefix}-slider-changed`),
     }),
   },
 };
 
 export const withInputBox = (args) => {
   const { disabled, labelText, max, min, name, step, value, onChange } =
-    args?.['bx-slider'] || {};
+    args?.[`${prefix}-slider`] || {};
   return html`
-    <bx-slider
+    <cds-slider
       ?disabled="${disabled}"
       label-text="${labelText}"
       max="${ifDefined(max)}"
@@ -61,11 +62,11 @@ export const withInputBox = (args) => {
       name="${ifDefined(name)}"
       step="${ifDefined(step)}"
       value="${ifDefined(value)}"
-      @bx-slider-changed="${onChange}">
-      <bx-slider-input
+      @cds-slider-changed="${onChange}">
+      <cds-slider-input
         aria-label="Slider value"
-        type="number"></bx-slider-input>
-    </bx-slider>
+        type="number"></cds-slider-input>
+    </cds-slider>
   `;
 };
 
@@ -75,7 +76,8 @@ withInputBox.parameters = {
   knobs: Default.parameters.knobs,
 };
 
-export const skeleton = () => html` <bx-slider-skeleton></bx-slider-skeleton> `;
+export const skeleton = () =>
+  html` <cds-slider-skeleton></cds-slider-skeleton> `;
 
 skeleton.parameters = {
   percy: {

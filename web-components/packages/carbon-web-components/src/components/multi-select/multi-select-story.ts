@@ -10,8 +10,9 @@
 import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
-import textNullable from '../../../.storybook/knob-text-nullable';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import textNullable from '../../../.storybook/knob-text-nullable';
+import { prefix } from '../../globals/settings';
 import {
   DROPDOWN_COLOR_SCHEME,
   DROPDOWN_SIZE,
@@ -59,7 +60,7 @@ export const Default = (args) => {
     onBeforeToggle,
     onSelect,
     onToggle,
-  } = args?.['bx-multi-select'] ?? {};
+  } = args?.[`${prefix}-multi-select`] ?? {};
   const handleBeforeSelect = (event: CustomEvent) => {
     if (onBeforeSelect) {
       onBeforeSelect(event);
@@ -77,7 +78,7 @@ export const Default = (args) => {
     }
   };
   return html`
-    <bx-multi-select
+    <cds-multi-select
       color-scheme="${ifDefined(colorScheme)}"
       ?disabled=${disabled}
       ?invalid=${invalid}
@@ -92,18 +93,28 @@ export const Default = (args) => {
       type=${ifDefined(type)}
       validity-message=${ifDefined(validityMessage)}
       value="${ifDefined(value)}"
-      @bx-multi-select-beingselected=${handleBeforeSelect}
-      @bx-multi-select-beingtoggled=${handleBeforeToggle}
-      @bx-multi-select-selected=${onSelect}
-      @bx-multi-select-toggled=${onToggle}>
-      <bx-multi-select-item value="all">Option 1</bx-multi-select-item>
-      <bx-multi-select-item value="cloudFoundry">Option 2</bx-multi-select-item>
-      <bx-multi-select-item value="staging">Option 3</bx-multi-select-item>
-      <bx-multi-select-item value="dea">Option 4</bx-multi-select-item>
-      <bx-multi-select-item value="router">Option 5</bx-multi-select-item>
-    </bx-multi-select>
+      @cds-multi-select-beingselected=${handleBeforeSelect}
+      @cds-multi-select-beingtoggled=${handleBeforeToggle}
+      @cds-multi-select-selected=${onSelect}
+      @cds-multi-select-toggled=${onToggle}>
+      <cds-multi-select-item value="example"
+        >An example option that is really long to show what should be done to
+        handle long text</cds-multi-select-item
+      >
+      <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+      <cds-multi-select-item value="cloudFoundry"
+        >Option 2</cds-multi-select-item
+      >
+      <cds-multi-select-item value="staging">Option 3</cds-multi-select-item>
+      <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+      <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+    </cds-multi-select>
   `;
 };
+
+Default.decorators = [
+  (story) => html` <div style="width:300px">${story()}</div> `,
+];
 
 Default.storyName = 'Default';
 
@@ -129,7 +140,7 @@ export const Filterable = (args) => {
     onBeforeToggle,
     onSelect,
     onToggle,
-  } = args?.['bx-multi-select'] ?? {};
+  } = args?.[`${prefix}-multi-select`] ?? {};
   const handleBeforeSelect = (event: CustomEvent) => {
     if (onBeforeSelect) {
       onBeforeSelect(event);
@@ -147,7 +158,7 @@ export const Filterable = (args) => {
     }
   };
   return html`
-    <bx-multi-select
+    <cds-multi-select
       filterable="true"
       color-scheme="${ifDefined(colorScheme)}"
       ?disabled=${disabled}
@@ -163,22 +174,28 @@ export const Filterable = (args) => {
       type=${ifDefined(type)}
       validity-message=${ifDefined(validityMessage)}
       value="${ifDefined(value)}"
-      @bx-multi-select-beingselected=${handleBeforeSelect}
-      @bx-multi-select-beingtoggled=${handleBeforeToggle}
-      @bx-multi-select-selected=${onSelect}
-      @bx-multi-select-toggled=${onToggle}>
-      <bx-multi-select-item value="example"
+      @cds-multi-select-beingselected=${handleBeforeSelect}
+      @cds-multi-select-beingtoggled=${handleBeforeToggle}
+      @cds-multi-select-selected=${onSelect}
+      @cds-multi-select-toggled=${onToggle}>
+      <cds-multi-select-item value="example"
         >An example option that is really long to show what should be done to
-        handle long text</bx-multi-select-item
+        handle long text</cds-multi-select-item
       >
-      <bx-multi-select-item value="all">Option 1</bx-multi-select-item>
-      <bx-multi-select-item value="cloudFoundry">Option 2</bx-multi-select-item>
-      <bx-multi-select-item value="staging">Option 3</bx-multi-select-item>
-      <bx-multi-select-item value="dea">Option 4</bx-multi-select-item>
-      <bx-multi-select-item value="router">Option 5</bx-multi-select-item>
-    </bx-multi-select>
+      <cds-multi-select-item value="all">Option 1</cds-multi-select-item>
+      <cds-multi-select-item value="cloudFoundry"
+        >Option 2</cds-multi-select-item
+      >
+      <cds-multi-select-item value="staging">Option 3</cds-multi-select-item>
+      <cds-multi-select-item value="dea">Option 4</cds-multi-select-item>
+      <cds-multi-select-item value="router">Option 5</cds-multi-select-item>
+    </cds-multi-select>
   `;
 };
+
+Filterable.decorators = [
+  (story) => html` <div style="width:300px">${story()}</div> `,
+];
 
 Filterable.storyName = 'Filterable';
 
@@ -187,7 +204,7 @@ export default {
   parameters: {
     ...storyDocs.parameters,
     knobs: {
-      'bx-multi-select': () => ({
+      [`${prefix}-multi-select`]: () => ({
         clearSelectionLabel: textNullable(
           'a11y label for the icon to clear selection (clear-selection-label)',
           ''
@@ -220,17 +237,17 @@ export default {
           ''
         ),
         disableSelection: boolean(
-          'Disable user-initiated selection change (Call event.preventDefault() in bx-multi-select-beingselected event)',
+          `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-multi-select-beingselected event)`,
           false
         ),
         disableToggle: boolean(
-          'Disable user-initiated toggle of open state (Call event.preventDefault() in bx-multi-select-beingtoggled event)',
+          `Disable user-initiated toggle of open state (Call event.preventDefault() in ${prefix}-multi-select-beingtoggled event)`,
           false
         ),
-        onBeforeSelect: action('bx-multi-select-beingselected'),
-        onBeforeToggle: action('bx-multi-select-beingtoggled'),
-        onSelect: action('bx-multi-select-selected'),
-        onToggle: action('bx-multi-select-toggled'),
+        onBeforeSelect: action(`${prefix}-multi-select-beingselected`),
+        onBeforeToggle: action(`${prefix}-multi-select-beingtoggled`),
+        onSelect: action(`${prefix}-multi-select-selected`),
+        onToggle: action(`${prefix}-multi-select-toggled`),
       }),
     },
   },

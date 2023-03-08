@@ -9,7 +9,7 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
@@ -20,13 +20,11 @@ import styles from './radio-button.scss';
 
 export { RADIO_BUTTON_ORIENTATION };
 
-const { prefix } = settings;
-
 /**
  * Radio button group.
  *
- * @element bx-radio-button-group
- * @fires bx-radio-button-group-changed - The custom event fired after this radio button group changes its selected item.
+ * @element cds-radio-button-group
+ * @fires cds-radio-button-group-changed - The custom event fired after this radio button group changes its selected item.
  */
 @customElement(`${prefix}-radio-button-group`)
 class BXRadioButtonGroup extends FormMixin(HostListenerMixin(LitElement)) {

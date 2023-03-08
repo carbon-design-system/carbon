@@ -18,6 +18,7 @@ import {
 } from './combo-box';
 import './combo-box-item';
 import storyDocs from './combo-box-story.mdx';
+import { prefix } from '../../globals/settings';
 
 const colorSchemes = {
   [`Regular`]: null,
@@ -55,7 +56,7 @@ export const Default = (args) => {
     onBeforeToggle,
     onSelect,
     onToggle,
-  } = args?.['bx-combo-box'] ?? {};
+  } = args?.[`${prefix}-combo-box`] ?? {};
   const handleBeforeSelect = (event: CustomEvent) => {
     if (onBeforeSelect) {
       onBeforeSelect(event);
@@ -73,7 +74,7 @@ export const Default = (args) => {
     }
   };
   return html`
-    <bx-combo-box
+    <cds-combo-box
       ?open=${open}
       color-scheme="${ifDefined(colorScheme)}"
       ?disabled=${disabled}
@@ -85,21 +86,25 @@ export const Default = (args) => {
       value=${value}
       trigger-content=${triggerContent}
       type=${ifDefined(type)}
-      @bx-combo-box-beingselected=${handleBeforeSelect}
-      @bx-combo-box-beingtoggled=${handleBeforeToggle}
-      @bx-combo-box-selected=${onSelect}
-      @bx-combo-box-toggled=${onToggle}>
-      <bx-combo-box-item value="all">Option 1</bx-combo-box-item>
-      <bx-combo-box-item value="cloudFoundry">Option 2</bx-combo-box-item>
-      <bx-combo-box-item value="staging">Option 3</bx-combo-box-item>
-      <bx-combo-box-item value="dea">Option 4</bx-combo-box-item>
-      <bx-combo-box-item value="router">Option 5</bx-combo-box-item>
-      <bx-combo-box-item value="support">Option 6</bx-combo-box-item>
-      <bx-combo-box-item value="services">Option 7</bx-combo-box-item>
-      <bx-combo-box-item value="products">Option 8</bx-combo-box-item>
-    </bx-combo-box>
+      @cds-combo-box-beingselected=${handleBeforeSelect}
+      @cds-combo-box-beingtoggled=${handleBeforeToggle}
+      @cds-combo-box-selected=${onSelect}
+      @cds-combo-box-toggled=${onToggle}>
+      <cds-combo-box-item value="all">Option 1</cds-combo-box-item>
+      <cds-combo-box-item value="cloudFoundry">Option 2</cds-combo-box-item>
+      <cds-combo-box-item value="staging">Option 3</cds-combo-box-item>
+      <cds-combo-box-item value="dea">Option 4</cds-combo-box-item>
+      <cds-combo-box-item value="router">Option 5</cds-combo-box-item>
+      <cds-combo-box-item value="support">Option 6</cds-combo-box-item>
+      <cds-combo-box-item value="services">Option 7</cds-combo-box-item>
+      <cds-combo-box-item value="products">Option 8</cds-combo-box-item>
+    </cds-combo-box>
   `;
 };
+
+Default.decorators = [
+  (story) => html` <div style="width:300px">${story()}</div> `,
+];
 
 Default.storyName = 'Default';
 
@@ -108,7 +113,7 @@ export default {
   parameters: {
     ...storyDocs.parameters,
     knobs: {
-      'bx-combo-box': () => ({
+      [`${prefix}-combo-box`]: () => ({
         open: boolean('Open (open)', false),
         colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
         disabled: boolean('Disabled (disabled)', false),
@@ -124,17 +129,17 @@ export default {
         validityMessage: text('The validity message (validity-message)', ''),
         value: text('The value of the selected item (value)', ''),
         disableSelection: boolean(
-          'Disable user-initiated selection change (Call event.preventDefault() in bx-combo-box-beingselected event)',
+          `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-combo-box-beingselected event)`,
           false
         ),
         disableToggle: boolean(
-          'Disable user-initiated toggle of open state (Call event.preventDefault() in bx-combo-box-beingtoggled event)',
+          `Disable user-initiated toggle of open state (Call event.preventDefault() in ${prefix}-combo-box-beingtoggled event)`,
           false
         ),
-        onBeforeSelect: action('bx-combo-box-beingselected'),
-        onBeforeToggle: action('bx-combo-box-beingtoggled'),
-        onSelect: action('bx-combo-box-selected'),
-        onToggle: action('bx-combo-box-toggled'),
+        onBeforeSelect: action(`${prefix}-combo-box-beingselected`),
+        onBeforeToggle: action(`${prefix}-combo-box-beingtoggled`),
+        onSelect: action(`${prefix}-combo-box-selected`),
+        onToggle: action(`${prefix}-combo-box-toggled`),
       }),
     },
   },

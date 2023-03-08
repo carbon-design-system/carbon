@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,11 +7,24 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/tile/tile';
-@import 'carbon-components/scss/components/link/link';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/utilities/focus-outline' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/components/tile/index' as *;
+@use '@carbon/styles/scss/components/link/index' as *;
+@use '@carbon/styles/scss/components/form/index' as *;
 
 :host(#{$prefix}-tile) {
   @extend .#{$prefix}--tile;
+
+  ::slotted(.#{$prefix}--link) {
+    @extend .#{$prefix}--link;
+  }
+}
+
+:host(#{$prefix}-tile-group) {
+  @extend .#{$prefix}--tile-group;
 }
 
 :host(#{$prefix}-clickable-tile) {
@@ -24,13 +37,14 @@ $css--plex: true !default;
 
   .#{$prefix}--tile {
     // Overrides what `.#{$prefix}--link` defines
-    padding: $carbon--spacing-05;
+    padding: $spacing-05;
     outline: 2px solid transparent;
   }
 
   .#{$prefix}--tile--clickable {
+    @extend .#{$prefix}--tile--clickable;
     // Overrides what `.#{$prefix}--link` defines
-    transition: $duration--moderate-01 motion(standard, productive);
+    transition: $duration-moderate-01 motion(standard, productive);
 
     &:focus {
       @include focus-outline('outline');
@@ -39,13 +53,19 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-radio-tile) {
-  display: content;
+  display: block;
   outline: none;
+
+  margin-bottom: $spacing-03;
 }
 
 :host(#{$prefix}-selectable-tile) {
   display: content;
   outline: none;
+
+  .#{$prefix}--tile__chevron {
+    @extend .#{$prefix}--tile__chevron;
+  }
 }
 
 :host(#{$prefix}-radio-tile),
@@ -63,6 +83,13 @@ $css--plex: true !default;
 
   position: relative;
 
+  .#{$prefix}--tile__chevron {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
   ::slotted(#{$prefix}-tile-above-the-fold-content) {
     @extend .#{$prefix}--tile-content__above-the-fold;
   }
@@ -73,7 +100,7 @@ $css--plex: true !default;
 
   .#{$prefix}-ce--expandable-tile--below-the-fold-content {
     max-height: 0;
-    transition: max-height $duration--fast-02 motion(standard, productive);
+    transition: max-height $duration-fast-02 motion(standard, productive);
   }
 }
 
@@ -82,7 +109,7 @@ $css--plex: true !default;
 
   ::slotted(#{$prefix}-tile-below-the-fold-content) {
     opacity: 1;
-    transition: $duration--fast-02 motion(standard, productive);
+    transition: $duration-fast-02 motion(standard, productive);
   }
 }
 

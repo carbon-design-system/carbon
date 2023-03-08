@@ -10,21 +10,19 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { SLIDER_INPUT_COLOR_SCHEME } from './defs';
 import styles from './slider.scss';
 
 export { SLIDER_INPUT_COLOR_SCHEME };
 
-const { prefix } = settings;
-
 /**
  * The `<input>` box for slider.
  *
- * @element bx-slider-input
- * @fires bx-slider-input-changed - The custom event fired after the value is changed by user gesture.
+ * @element cds-slider-input
+ * @fires cds-slider-input-changed - The custom event fired after the value is changed by user gesture.
  */
 @customElement(`${prefix}-slider-input`)
 class BXSliderInput extends FocusMixin(LitElement) {

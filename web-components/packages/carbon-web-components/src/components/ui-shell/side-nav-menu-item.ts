@@ -7,20 +7,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import BXSideNavMenu from './side-nav-menu';
 import styles from './side-nav.scss';
 
-const { prefix } = settings;
-
 /**
  * Side nav menu item.
  *
- * @element bx-side-nav-menu-item
+ * @element cds-side-nav-menu-item
  * @csspart link The link.
  * @csspart title The title.
  */

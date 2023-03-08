@@ -8,10 +8,11 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from '@storybook/addon-actions';
 import { number, select } from '@storybook/addon-knobs';
+import { prefix } from '../../globals/settings';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { CODE_SNIPPET_COLOR_SCHEME } from './code-snippet';
 import storyDocs from './code-snippet-story.mdx';
 import './code-snippet-skeleton';
@@ -23,7 +24,7 @@ const colorSchemes = {
 };
 
 const defaultKnobs = {
-  'bx-code-snippet': () => ({
+  [`${prefix}-code-snippet`]: () => ({
     codeAssistiveText: textNullable(
       'Assistive text for the code portion (code-assistive-text)',
       ''
@@ -53,21 +54,21 @@ export const singleLine = (args) => {
     copyButtonFeedbackTimeout,
     colorScheme,
     onClick,
-  } = args?.['bx-code-snippet'] ?? {};
+  } = args?.[`${prefix}-code-snippet`] ?? {};
   const children = `
     node -v Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis, veritatis voluptate id incidunt molestiae
     officia possimus, quasi itaque alias, architecto hic, dicta fugit? Debitis delectus quidem explicabo vitae
     laboriosam!
   `;
   return html`
-    <bx-code-snippet
+    <cds-code-snippet
       code-assistive-text="${ifDefined(codeAssistiveText)}"
       copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
       copy-button-feedback-text="${ifDefined(copyButtonFeedbackText)}"
       copy-button-feedback-timeout="${copyButtonFeedbackTimeout}"
       color-scheme="${ifDefined(colorScheme)}"
       @click="${onClick}"
-      >${children}</bx-code-snippet
+      >${children}</cds-code-snippet
     >
   `;
 };
@@ -88,7 +89,7 @@ export const multiLine = (args) => {
     expandButtonText,
     colorScheme,
     onClick,
-  } = args?.['bx-code-snippet'] ?? {};
+  } = args?.[`${prefix}-code-snippet`] ?? {};
   const children = `
 @mixin grid-container {
   width: 100%;
@@ -114,7 +115,7 @@ $z-indexes: (
 `.trim();
   // prettier-ignore
   return html`
-  <bx-code-snippet
+  <cds-code-snippet
     type="multi"
     code-assistive-text="${ifDefined(codeAssistiveText)}"
     copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
@@ -124,7 +125,7 @@ $z-indexes: (
     expand-button-text="${ifDefined(expandButtonText)}"
     color-scheme="${ifDefined(colorScheme)}"
     @click="${onClick}"
-  >${children}</bx-code-snippet>
+  >${children}</cds-code-snippet>
 `;
 };
 
@@ -132,8 +133,8 @@ multiLine.storyName = 'Multi line';
 
 multiLine.parameters = {
   knobs: {
-    'bx-code-snippet': () => ({
-      ...defaultKnobs['bx-code-snippet'](),
+    [`${prefix}-code-snippet`]: () => ({
+      ...defaultKnobs[`${prefix}-code-snippet`](),
       collapseButtonText: textNullable(
         'The text for the collapse button (collapse-button-text)',
         ''
@@ -154,9 +155,9 @@ export const inline = (args) => {
     copyButtonFeedbackTimeout,
     colorScheme,
     onClick,
-  } = args?.['bx-code-snippet'] ?? {};
+  } = args?.[`${prefix}-code-snippet`] ?? {};
   return html`
-    <bx-code-snippet
+    <cds-code-snippet
       type="inline"
       code-assistive-text="${ifDefined(codeAssistiveText)}"
       copy-button-assistive-text="${ifDefined(copyButtonAssistiveText)}"
@@ -164,7 +165,7 @@ export const inline = (args) => {
       copy-button-feedback-timeout="${copyButtonFeedbackTimeout}"
       color-scheme="${ifDefined(colorScheme)}"
       @click="${onClick}"
-      >node -v</bx-code-snippet
+      >node -v</cds-code-snippet
     >
   `;
 };
@@ -176,7 +177,7 @@ inline.parameters = {
 };
 
 export const skeletonSingleLine = () =>
-  html` <bx-code-snippet-skeleton type="single"></bx-code-snippet-skeleton> `;
+  html` <cds-code-snippet-skeleton type="single"></cds-code-snippet-skeleton> `;
 
 skeletonSingleLine.storyName = 'Skeleton single line';
 
@@ -187,7 +188,7 @@ skeletonSingleLine.parameters = {
 };
 
 export const skeletonMultiLine = () =>
-  html` <bx-code-snippet-skeleton type="multi"></bx-code-snippet-skeleton> `;
+  html` <cds-code-snippet-skeleton type="multi"></cds-code-snippet-skeleton> `;
 
 skeletonMultiLine.storyName = 'Skeleton multi line';
 

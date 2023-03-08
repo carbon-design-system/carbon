@@ -9,23 +9,21 @@
 
 import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import BXContentSwitcherItem from '../content-switcher/content-switcher-item';
 import { TABS_TYPE } from './tabs';
 import styles from './tabs.scss';
 
-const { prefix } = settings;
-
 /**
  * Basic tab.
  *
- * @element bx-tab
+ * @element cds-tab
  */
 @customElement(`${prefix}-tab`)
 class BXTab extends BXContentSwitcherItem {
   /**
    * `true` if this tab should be highlighted.
-   * If `true`, parent `<bx-tabs>` selects/deselects this tab upon keyboard interaction.
+   * If `true`, parent `<cds-tabs>` selects/deselects this tab upon keyboard interaction.
    *
    * @private
    */

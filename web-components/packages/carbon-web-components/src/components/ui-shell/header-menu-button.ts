@@ -7,26 +7,24 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import Close20 from '@carbon/icons/lib/close/20';
 import Menu20 from '@carbon/icons/lib/menu/20';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './side-nav';
 import styles from './header.scss';
 
-const { prefix } = settings;
-
 /**
  * The trigger button for side nav in header nav.
  *
- * @element bx-header-menu-button
+ * @element cds-header-menu-button
  * @csspart button The button.
  * @csspart toggle-icon The toggle icon.
- * @fires bx-header-menu-button-toggled - The custom event fired after this header menu button is toggled upon a user gesture.
+ * @fires cds-header-menu-button-toggled - The custom event fired after this header menu button is toggled upon a user gesture.
  */
 @customElement(`${prefix}-header-menu-button`)
 class BXHeaderMenuButton extends FocusMixin(LitElement) {

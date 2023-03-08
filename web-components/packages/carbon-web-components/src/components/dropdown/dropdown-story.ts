@@ -10,6 +10,7 @@
 import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
+import { prefix } from '../../globals/settings';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import {
@@ -55,7 +56,7 @@ export const Default = (args) => {
     onBeforeToggle,
     onSelect,
     onToggle,
-  } = args?.['bx-dropdown'] ?? {};
+  } = args?.[`${prefix}-dropdown`] ?? {};
   const handleBeforeSelect = (event: CustomEvent) => {
     if (onBeforeSelect) {
       onBeforeSelect(event);
@@ -73,7 +74,7 @@ export const Default = (args) => {
     }
   };
   return html`
-    <bx-dropdown
+    <cds-dropdown
       ?open=${open}
       color-scheme="${ifDefined(colorScheme)}"
       ?disabled=${disabled}
@@ -83,24 +84,28 @@ export const Default = (args) => {
       type="${ifDefined(type)}"
       value=${ifDefined(value)}
       trigger-content=${ifDefined(triggerContent)}
-      @bx-dropdown-beingselected=${handleBeforeSelect}
-      @bx-dropdown-beingtoggled=${handleBeforeToggle}
-      @bx-dropdown-selected=${onSelect}
-      @bx-dropdown-toggled=${onToggle}>
-      <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-      <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-      <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-      <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-      <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-    </bx-dropdown>
+      @cds-dropdown-beingselected=${handleBeforeSelect}
+      @cds-dropdown-beingtoggled=${handleBeforeToggle}
+      @cds-dropdown-selected=${onSelect}
+      @cds-dropdown-toggled=${onToggle}>
+      <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+      <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+      <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+      <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+      <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+    </cds-dropdown>
   `;
 };
+
+Default.decorators = [
+  (story) => html` <div style="width:300px">${story()}</div> `,
+];
 
 Default.storyName = 'Default';
 
 Default.parameters = {
   knobs: {
-    'bx-dropdown': () => ({
+    [`${prefix}-dropdown`]: () => ({
       open: boolean('Open (open)', false),
       colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
       disabled: boolean('Disabled (disabled)', false),
@@ -117,23 +122,23 @@ Default.parameters = {
         'Select an item'
       ),
       disableSelection: boolean(
-        'Disable user-initiated selection change (Call event.preventDefault() in bx-dropdown-beingselected event)',
+        `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-dropdown-beingselected event)`,
         false
       ),
       disableToggle: boolean(
-        'Disable user-initiated toggle of open state (Call event.preventDefault() in bx-dropdown-beingtoggled event)',
+        `Disable user-initiated toggle of open state (Call event.preventDefault() in ${prefix}-dropdown-beingtoggled event)`,
         false
       ),
-      onBeforeSelect: action('bx-dropdown-beingselected'),
-      onBeforeToggle: action('bx-dropdown-beingtoggled'),
-      onSelect: action('bx-dropdown-selected'),
-      onToggle: action('bx-dropdown-toggled'),
+      onBeforeSelect: action(`${prefix}-dropdown-beingselected`),
+      onBeforeToggle: action(`${prefix}-dropdown-beingtoggled`),
+      onSelect: action(`${prefix}-dropdown-selected`),
+      onToggle: action(`${prefix}-dropdown-toggled`),
     }),
   },
 };
 
 export const skeleton = () =>
-  html` <bx-dropdown-skeleton></bx-dropdown-skeleton> `;
+  html` <cds-dropdown-skeleton></cds-dropdown-skeleton> `;
 
 skeleton.parameters = {
   percy: {

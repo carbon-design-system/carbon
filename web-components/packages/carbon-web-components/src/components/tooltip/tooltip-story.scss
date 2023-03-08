@@ -1,27 +1,31 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'carbon-components/scss/components/link/link';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/link';
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities/button-reset';
 
 /* stylelint-disable selector-type-no-unknown */
-bx-tooltip-body {
+#{$prefix}-tooltip-body {
   p {
     @include type-style('body-short-01');
   }
 
-  .bx--link {
-    color: $inverse-link;
+  .#{$prefix}--link {
+    color: $link-inverse;
 
     &:focus {
-      outline-color: $inverse-focus-ui;
+      outline-color: $focus-inverse;
     }
   }
 }
 
-.bx-ce-demo-devenv--container {
+.#{$prefix}-ce-demo-devenv--container {
   justify-content: center;
 }

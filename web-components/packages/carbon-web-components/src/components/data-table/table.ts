@@ -7,21 +7,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import { TABLE_COLOR_SCHEME, TABLE_SIZE } from './defs';
 import styles from './data-table.scss';
 
 export { TABLE_COLOR_SCHEME, TABLE_SIZE };
 
-const { prefix } = settings;
-
 /**
  * Data table.
  *
- * @element bx-table
+ * @element cds-table
  */
 @customElement(`${prefix}-table`)
 class BXTable extends LitElement {
@@ -29,7 +27,7 @@ class BXTable extends LitElement {
    * The table size.
    */
   @property({ reflect: true })
-  size = TABLE_SIZE.REGULAR;
+  size = TABLE_SIZE.LG;
 
   /**
    * `true` if this table should support sorting.

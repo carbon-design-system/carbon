@@ -11,7 +11,7 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html, TemplateResult } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import {
   _createHandleFeedbackTooltip as createHandleCopyButtonFeedbackTooltip,
@@ -21,8 +21,6 @@ import { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE } from './defs';
 import styles from './code-snippet.scss';
 
 export { CODE_SNIPPET_COLOR_SCHEME, CODE_SNIPPET_TYPE };
-
-const { prefix } = settings;
 
 /**
  * @param values The values to render.
@@ -82,7 +80,7 @@ const renderCode = ({
 /**
  * Basic code snippet.
  *
- * @element bx-code-snippet
+ * @element cds-code-snippet
  */
 @customElement(`${prefix}-code-snippet`)
 class BXCodeSnippet extends FocusMixin(LitElement) {

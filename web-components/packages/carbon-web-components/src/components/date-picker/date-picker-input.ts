@@ -11,8 +11,8 @@ import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import Calendar16 from '@carbon/icons/lib/calendar/16';
-import settings from 'carbon-components/es/globals/js/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import ValidityMixin from '../../globals/mixins/validity';
 import { INPUT_SIZE } from '../input/input';
@@ -29,12 +29,10 @@ export {
   DATE_PICKER_INPUT_SIZE_HORIZONTAL,
 };
 
-const { prefix } = settings;
-
 /**
  * The input box for date picker.
  *
- * @element bx-date-picker-input
+ * @element cds-date-picker-input
  */
 @customElement(`${prefix}-date-picker-input`)
 class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {

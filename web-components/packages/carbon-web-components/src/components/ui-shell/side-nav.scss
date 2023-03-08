@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,11 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/ui-shell/side-nav';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/ui-shell/side-nav';
 
 :host(#{$prefix}-side-nav) {
   @extend .#{$prefix}--side-nav;
@@ -19,14 +23,16 @@ $css--plex: true !default;
 
 :host(#{$prefix}-side-nav[collapse-mode='fixed']) {
   // TODO: Consider making `@extend .#{$prefix}--side-nav--fixed` work, possibly caused by `:not()` styles
-  width: mini-units(32);
+  width: 16rem;
 }
 
 :host(#{$prefix}-side-nav[collapse-mode='rail']) {
-  width: mini-units(6);
+  // TODO: audit
+  width: $spacing-09;
 
   &:hover {
-    width: mini-units(32);
+    // TODO: audit
+    width: 16rem;
   }
 }
 
@@ -42,8 +48,9 @@ $css--plex: true !default;
 
 :host(#{$prefix}-side-nav[expanded][usage-mode='header-nav']),
 :host(#{$prefix}-side-nav[collapse-mode][expanded][usage-mode='header-nav']) {
-  @include carbon--breakpoint-down('lg') {
-    width: mini-units(32);
+  @include breakpoint-down('lg') {
+    // TODO: audit
+    width: 16rem;
   }
 }
 
@@ -60,7 +67,8 @@ $css--plex: true !default;
   height: auto;
 
   .#{$prefix}--side-nav__icon {
-    color: $shell-side-nav-text-01;
+    // TODO: audit
+    color: $text-primary;
 
     &[hidden] {
       display: none;
@@ -90,8 +98,9 @@ $css--plex: true !default;
 :host(#{$prefix}-side-nav-menu[active]) {
   @extend .#{$prefix}--side-nav__item--active;
 
-  background-color: $shell-side-nav-bg-04;
-  color: $ibm-color__gray-100;
+  // TODO: audit
+  background-color: $background-selected;
+  color: $text-primary;
   position: relative;
 
   &::before {
@@ -101,7 +110,7 @@ $css--plex: true !default;
     bottom: 0;
     left: 0;
     width: 4px;
-    background-color: $shell-side-nav-accent-01;
+    background-color: $border-interactive;
   }
 }
 
@@ -128,21 +137,24 @@ $css--plex: true !default;
   height: auto;
 
   a.#{$prefix}--side-nav__link {
-    height: mini-units(4);
-    min-height: mini-units(4);
-    padding-left: mini-units(4);
+    // TODO: audit
+    height: $spacing-05;
+    min-height: $spacing-05;
+    padding-left: $spacing-05;
     font-weight: 400;
   }
 }
 
 :host(#{$prefix}-side-nav-menu-item[parent-has-icon])
   a.#{$prefix}--side-nav__link {
-  padding-left: mini-units(9);
+  // TODO: audit
+  padding-left: rem(72px);
 }
 
 :host(#{$prefix}-side-nav-item) .#{$prefix}--side-nav__link:hover,
 :host(#{$prefix}-side-nav-menu) .#{$prefix}--side-nav__submenu:hover,
 :host(#{$prefix}-side-nav-menu-item) .#{$prefix}--side-nav__link:hover {
-  background-color: $shell-side-nav-bg-04;
-  color: $ibm-color__gray-100;
+  // TODO: audit
+  background-color: $background-hover;
+  color: $text-primary;
 }

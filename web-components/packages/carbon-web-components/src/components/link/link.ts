@@ -11,11 +11,9 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './link.scss';
-
-const { prefix } = settings;
 
 /**
  * Link size.
@@ -40,7 +38,7 @@ export enum LINK_SIZE {
 /**
  * Link.
  *
- * @element bx-link
+ * @element cds-link
  * @csspart link The link.
  */
 @customElement(`${prefix}-link`)
@@ -127,6 +125,7 @@ class BXLink extends FocusMixin(LitElement) {
     } = this;
     return html`
       <a
+        tabindex="0"
         id="link"
         role="${ifDefined(linkRole)}"
         class="${classes}"

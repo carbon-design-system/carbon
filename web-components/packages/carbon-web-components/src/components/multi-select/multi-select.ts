@@ -7,10 +7,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { html, TemplateResult } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16';
+import { prefix } from '../../globals/settings';
 import {
   filter,
   forEach,
@@ -26,20 +26,18 @@ export {
   DROPDOWN_TYPE,
 } from '../dropdown/dropdown';
 
-const { prefix } = settings;
-
 /**
  * Multi select.
  *
- * @element bx-multi-select
- * @fires bx-multi-select-beingselected
+ * @element cds-multi-select
+ * @fires cds-multi-select-beingselected
  *   The custom event fired before a multi select item is selected upon a user gesture.
  *   Cancellation of this event stops changing the user-initiated selection.
- * @fires bx-multi-select-selected - The custom event fired after a multi select item is selected upon a user gesture.
- * @fires bx-multi-select-beingtoggled
+ * @fires cds-multi-select-selected - The custom event fired after a multi select item is selected upon a user gesture.
+ * @fires cds-multi-select-beingtoggled
  *   The custom event fired before the open state of this multi select is toggled upon a user gesture.
  *   Cancellation of this event stops the user-initiated toggling.
- * @fires bx-multi-select-toggled
+ * @fires cds-multi-select-toggled
  *   The custom event fired after the open state of this multi select is toggled upon a user gesture.
  */
 @customElement(`${prefix}-multi-select`)
@@ -356,7 +354,7 @@ class BXMultiSelect extends BXDropdown {
     if (changedProperties.has('value')) {
       const { value } = this;
       const values = !value ? [] : value.split(',');
-      // Updates selection beforehand because our rendering logic for `<bx-multi-select>` looks for selected items via `qSA()`
+      // Updates selection beforehand because our rendering logic for `<cds-multi-select>` looks for selected items via `qSA()`
       const items = this.querySelectorAll(selectorItem);
       forEach(items, (elem) => {
         (elem as BXMultiSelectItem).selected =

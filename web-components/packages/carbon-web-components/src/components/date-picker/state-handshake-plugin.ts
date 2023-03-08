@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -13,7 +13,7 @@ import BXDatePicker from './date-picker';
 
 /**
  * @param config Plugin configuration.
- * @returns A Flatpickr plugin to handshake states with `<bx-date-picker>`.
+ * @returns A Flatpickr plugin to handshake states with `<cds-date-picker>`.
  */
 export default (datePicker: BXDatePicker): Plugin =>
   (fp: FlatpickrInstance) => {
@@ -32,7 +32,7 @@ export default (datePicker: BXDatePicker): Plugin =>
     };
 
     /**
-     * Propagates Flatpickr's `onChange` event to `<bx-date-picker>`.
+     * Propagates Flatpickr's `onChange` event to `<cds-date-picker>`.
      *
      * @param selectedDates The latest selected dates.
      */

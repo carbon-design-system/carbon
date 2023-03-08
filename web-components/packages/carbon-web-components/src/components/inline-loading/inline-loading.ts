@@ -12,7 +12,7 @@ import { property, customElement } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import ErrorFilled16 from '@carbon/icons/lib/error--filled/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import LOADING_TYPE from '../loading/types';
 import getLoadingIcon from '../loading/loading-icon';
 import { INLINE_LOADING_STATE } from './defs';
@@ -20,12 +20,10 @@ import styles from './inline-loading.scss';
 
 export { INLINE_LOADING_STATE };
 
-const { prefix } = settings;
-
 /**
  * Lnline loading spinner.
  *
- * @element bx-inline-loading
+ * @element cds-inline-loading
  */
 @customElement(`${prefix}-inline-loading`)
 class BXInlineLoading extends LitElement {
@@ -41,7 +39,7 @@ class BXInlineLoading extends LitElement {
     }
     if (status === INLINE_LOADING_STATE.FINISHED) {
       return CheckmarkFilled16({
-        class: `${prefix}--inline-loading__checkmark-container ${prefix}--inline-loading__svg`,
+        class: `${prefix}--inline-loading__checkmark-container`,
       });
     }
     if (

@@ -7,15 +7,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import BXButton from './button';
 import styles from './button.scss';
-
-const { prefix } = settings;
 
 /**
  * Button skeleton.

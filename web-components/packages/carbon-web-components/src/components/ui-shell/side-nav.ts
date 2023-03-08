@@ -9,8 +9,8 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
 import on from 'carbon-components/es/globals/js/misc/on';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { forEach } from '../../globals/internal/collection-helpers';
@@ -22,12 +22,10 @@ import styles from './side-nav.scss';
 
 export { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE };
 
-const { prefix } = settings;
-
 /**
  * Side nav.
  *
- * @element bx-side-nav
+ * @element cds-side-nav
  */
 @customElement(`${prefix}-side-nav`)
 class BXSideNav extends HostListenerMixin(LitElement) {

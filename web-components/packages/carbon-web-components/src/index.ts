@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2020
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -102,9 +102,8 @@ export { default as BXTileGroup } from './components/tile/tile-group';
 export { default as BXToggle } from './components/toggle/toggle';
 export { default as BXTooltip } from './components/tooltip/tooltip';
 export { default as BXTooltipBody } from './components/tooltip/tooltip-body';
-export { default as BXTooltipDefinition } from './components/tooltip/tooltip-definition';
+export { default as BXTooltipDefinition } from './components/toggle-tip/toggletip';
 export { default as BXTooltipFooter } from './components/tooltip/tooltip-footer';
-export { default as BXTooltipIcon } from './components/tooltip/tooltip-icon';
 export { default as BXHeader } from './components/ui-shell/header';
 export { default as BXHeaderMenu } from './components/ui-shell/header-menu';
 export { default as BXHeaderMenuButton } from './components/ui-shell/header-menu-button';

@@ -8,13 +8,14 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import * as knobs from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import './input';
 import '../form/form-item';
 import createProps from './stories/helpers';
 import storyDocs from './input-story.mdx';
+import { prefix } from '../../globals/settings';
 
 export const Default = (args) => {
   const {
@@ -36,9 +37,9 @@ export const Default = (args) => {
     validityMessage,
     value,
     onInput,
-  } = args?.['bx-input'] ?? {};
+  } = args?.[`${prefix}-input`] ?? {};
   return html`
-    <bx-input
+    <cds-input
       autocomplete="${ifDefined(autocomplete)}"
       ?autofocus="${autofocus}"
       color-scheme="${ifDefined(colorScheme)}"
@@ -56,7 +57,7 @@ export const Default = (args) => {
       type="${ifDefined(type)}"
       validity-message="${ifDefined(validityMessage)}"
       value="${ifDefined(value)}"
-      @input="${onInput}"></bx-input>
+      @input="${onInput}"></cds-input>
   `;
 };
 
@@ -73,10 +74,10 @@ export const formItem = (args) => {
     type,
     value,
     onInput,
-  } = args?.['bx-input'] ?? {};
+  } = args?.[`${prefix}-input`] ?? {};
   return html`
-    <bx-form-item>
-      <bx-input
+    <cds-form-item>
+      <cds-input
         value="${ifDefined(value)}"
         color-scheme="${ifDefined(colorScheme)}"
         placeholder="${ifDefined(placeholder)}"
@@ -89,8 +90,8 @@ export const formItem = (args) => {
         <span slot="label-text">Label text</span>
         <span slot="helper-text">Optional helper text</span>
         <span slot="validity-message">Something isn't right</span>
-      </bx-input>
-    </bx-form-item>
+      </cds-input>
+    </cds-form-item>
   `;
 };
 
@@ -107,9 +108,9 @@ export const withoutFormItemWrapper = (args) => {
     type,
     value,
     onInput,
-  } = args?.['bx-input'] ?? {};
+  } = args?.[`${prefix}-input`] ?? {};
   return html`
-    <bx-input
+    <cds-input
       value="${ifDefined(value)}"
       color-scheme="${ifDefined(colorScheme)}"
       placeholder="${ifDefined(placeholder)}"
@@ -122,7 +123,7 @@ export const withoutFormItemWrapper = (args) => {
       <span slot="label-text">Label text</span>
       <span slot="helper-text">Optional helper text</span>
       <span slot="validity-message">Something isn't right</span>
-    </bx-input>
+    </cds-input>
   `;
 };
 
@@ -133,7 +134,8 @@ export default {
   parameters: {
     ...storyDocs.parameters,
     knobs: {
-      'bx-input': () => createProps({ ...knobs, textNonEmpty: textNullable }),
+      [`${prefix}-input`]: () =>
+        createProps({ ...knobs, textNonEmpty: textNullable }),
     },
   },
 };

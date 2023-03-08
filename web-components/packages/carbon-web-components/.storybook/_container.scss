@@ -1,53 +1,54 @@
 //
 // @license
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'carbon-components/scss/globals/scss/css--helpers';
-@import 'carbon-components/scss/globals/scss/css--font-face';
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
-@import 'carbon-components/scss/globals/scss/component-tokens';
-@import 'carbon-components/src/components/tag/tag';
-@import 'carbon-components/src/components/notification/inline-notification';
-@import 'carbon-components/src/components/notification/toast-notification';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/utilities';
+@use '@carbon/styles/scss/fonts';
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/themes' as *;
+
+@import '@carbon/type/scss/type';
+@import '@carbon/type/scss/font-face/mono';
+@import '@carbon/type/scss/font-face/sans';
+@import '@carbon/type/scss/font-face/serif';
+
+@include carbon--type-reset();
+@include carbon--font-face-mono();
+@include carbon--font-face-sans();
+@include carbon--font-face-serif();
 
 // The default theme is "white" (White)
 :root {
-  @include carbon--theme($carbon--theme--white, true) {
-    @include emit-component-tokens($tag-colors);
-    @include emit-component-tokens($notification-colors);
-  }
+  @include theme($white);
 }
-
 // Set the <html> theme attribute to "g10" to use the Gray 10 theme
 // <html theme="g10">
 :root[storybook-carbon-theme='g10'] {
-  @include carbon--theme($carbon--theme--g10, true) {
-    @include emit-component-tokens($tag-colors);
-    @include emit-component-tokens($notification-colors);
-  }
+  @include theme($g10);
 }
 
 // Set the <html> theme attribute to "g90" to use the Gray 90 theme
 // <html theme="g90">
 :root[storybook-carbon-theme='g90'] {
-  @include carbon--theme($carbon--theme--g90, true) {
-    @include emit-component-tokens($tag-colors);
-    @include emit-component-tokens($notification-colors);
-  }
+  @include theme($g90);
 }
 
 // Set the <html> theme attribute to "g100" to use the Gray 100 theme
 // <html theme="g100">
 :root[storybook-carbon-theme='g100'] {
-  @include carbon--theme($carbon--theme--g100, true) {
-    @include emit-component-tokens($tag-colors);
-    @include emit-component-tokens($notification-colors);
-  }
+  @include theme($g100);
+}
+
+body {
+  background-color: $background;
+  color: $text-primary;
 }
 
 html,
@@ -70,7 +71,7 @@ body,
   }
 }
 
-.bx-ce-demo-devenv--container {
+.#{$prefix}-ce-demo-devenv--container {
   padding: 3em;
   display: flex;
   flex-direction: column;
@@ -78,14 +79,15 @@ body,
   position: relative;
 }
 
-.bx--content.bx-ce-demo-devenv--ui-shell-content {
-  background-color: $ui-01;
+.#{$prefix}--content.#{$prefix}-ce-demo-devenv--ui-shell-content {
+  background-color: $layer-01;
   margin: 0;
   height: 100vh;
   width: 100%;
 
   h2 {
     font-weight: 800;
+    /* stylelint-disable declaration-property-unit-whitelist */
     margin: 30px 0;
     font-size: 20px;
   }

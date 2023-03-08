@@ -10,14 +10,15 @@
 import { html } from 'lit';
 import { action } from '@storybook/addon-actions';
 import { boolean, select, text } from '@storybook/addon-knobs';
+import { prefix } from '../../globals/settings';
 import { ACCORDION_SIZE } from './accordion';
 import './accordion-item';
 import storyDocs from './accordion-story.mdx';
 
 const sizes = {
-  'Regular size': null,
   [`Small size (${ACCORDION_SIZE.SMALL})`]: ACCORDION_SIZE.SMALL,
-  [`XL size (${ACCORDION_SIZE.EXTRA_LARGE})`]: ACCORDION_SIZE.EXTRA_LARGE,
+  [`Medium size (${ACCORDION_SIZE.MEDIUM})`]: ACCORDION_SIZE.MEDIUM,
+  [`Large size (${ACCORDION_SIZE.LARGE})`]: ACCORDION_SIZE.LARGE,
 };
 
 const noop = () => {};
@@ -31,7 +32,9 @@ export const Default = (args) => {
     onBeforeToggle = noop,
     onToggle = noop,
     size,
-  } = args?.['bx-accordion'] ?? {};
+    alignment,
+    isFlush,
+  } = args?.[`${prefix}-accordion`] ?? {};
   const handleBeforeToggle = (event: CustomEvent) => {
     onBeforeToggle(event);
     if (disableToggle) {
@@ -40,11 +43,13 @@ export const Default = (args) => {
   };
 
   return html`
-    <bx-accordion
-      @bx-accordion-item-beingtoggled="${handleBeforeToggle}"
-      @bx-accordion-item-toggled="${onToggle}"
-      size="${size}">
-      <bx-accordion-item
+    <cds-accordion
+      @cds-accordion-item-beingtoggled="${handleBeforeToggle}"
+      @cds-accordion-item-toggled="${onToggle}"
+      size="${size}"
+      alignment="${alignment}"
+      ?isFlush="${isFlush}">
+      <cds-accordion-item
         ?disabled="${disabled}"
         ?open="${open}"
         title-text=${titleText}>
@@ -54,16 +59,16 @@ export const Default = (args) => {
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </p>
-      </bx-accordion-item>
-      <bx-accordion-item ?open="${open}" title-text=${titleText}>
+      </cds-accordion-item>
+      <cds-accordion-item ?open="${open}" title-text=${titleText}>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
           minim veniam, quis nostrud exercitation ullamco laboris nisi ut
           aliquip ex ea commodo consequat.
         </p>
-      </bx-accordion-item>
-      <bx-accordion-item ?open="${open}">
+      </cds-accordion-item>
+      <cds-accordion-item ?open="${open}">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -71,8 +76,8 @@ export const Default = (args) => {
           aliquip ex ea commodo consequat.
         </p>
         <span slot="title">${titleText}</span>
-      </bx-accordion-item>
-    </bx-accordion>
+      </cds-accordion-item>
+    </cds-accordion>
   `;
 };
 
@@ -83,17 +88,23 @@ export default {
   parameters: {
     ...storyDocs.parameters,
     knobs: {
-      'bx-accordion': () => ({
+      [`${prefix}-accordion`]: () => ({
         open: boolean('Open the section (open)', false),
         titleText: text('The title (title-text)', 'Section title'),
         size: select('Accordion size (size)', sizes, null),
+        alignment: select(
+          'Accordion alignment (alignment)',
+          ['start', 'end'],
+          'end'
+        ),
+        isFlush: boolean('isFlush', false),
         disabled: boolean('Disable accordion item (disabled)', false),
         disableToggle: boolean(
-          'Disable user-initiated toggle action (Call event.preventDefault() in bx-accordion-beingtoggled event)',
+          `Disable user-initiated toggle action (Call event.preventDefault() in ${prefix}-accordion-beingtoggled event)`,
           false
         ),
-        onBeforeToggle: action('bx-accordion-item-beingtoggled'),
-        onToggle: action('bx-accordion-item-toggled'),
+        onBeforeToggle: action(`${prefix}-accordion-item-beingtoggled`),
+        onToggle: action(`${prefix}-accordion-item-toggled`),
       }),
     },
   },

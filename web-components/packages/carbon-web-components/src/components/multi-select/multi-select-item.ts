@@ -7,19 +7,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined';
+import { prefix } from '../../globals/settings';
 import BXDropdownItem from '../dropdown/dropdown-item';
 import styles from './multi-select.scss';
-
-const { prefix } = settings;
 
 /**
  * Multi select item.
  *
- * @element bx-multi-select-item
+ * @element cds-multi-select-item
  */
 @customElement(`${prefix}-multi-select-item`)
 class BXMultiSelectItem extends BXDropdownItem {

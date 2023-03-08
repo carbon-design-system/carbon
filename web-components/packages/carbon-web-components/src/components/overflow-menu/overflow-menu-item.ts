@@ -7,18 +7,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './overflow-menu.scss';
-
-const { prefix } = settings;
 
 /**
  * Overflow menu item.
  *
- * @element bx-overflow-menu-item
+ * @element cds-overflow-menu-item
  */
 @customElement(`${prefix}-overflow-menu-item`)
 class BXOverflowMenuItem extends FocusMixin(LitElement) {

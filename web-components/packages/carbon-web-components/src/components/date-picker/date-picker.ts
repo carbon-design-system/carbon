@@ -16,7 +16,7 @@ import {
   Options as FlatpickrOptions,
   Plugin as FlatpickrPlugin,
 } from 'flatpickr/dist/types/options';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
@@ -32,8 +32,6 @@ import rangePlugin from './range-plugin';
 import shadowDOMEventPlugin from './shadow-dom-events-plugin';
 import stateHandshakePlugin from './state-handshake-plugin';
 import styles from './date-picker.scss';
-
-const { prefix } = settings;
 
 /**
  * Date picker modes.
@@ -58,13 +56,13 @@ enum DATE_PICKER_MODE {
 /**
  * Date picker.
  *
- * @element bx-date-picker
- * @fires bx-date-picker-changed - The custom event fired on this element when Flatpickr updates its value.
+ * @element cds-date-picker
+ * @fires cds-date-picker-changed - The custom event fired on this element when Flatpickr updates its value.
  */
 @customElement(`${prefix}-date-picker`)
 class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   /**
-   * The slotted `<bx-date-input kind="from">`.
+   * The slotted `<cds-date-input kind="from">`.
    */
   private _dateInteractNode: BXDatePickerInput | null = null;
 
@@ -80,7 +78,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   private _value!: string;
 
   /**
-   * @returns The effective date picker mode, determined by the child `<bx-date-picker-input>`.
+   * @returns The effective date picker mode, determined by the child `<cds-date-picker-input>`.
    */
   private get _mode() {
     const { selectorInputFrom, selectorInputTo } = this
@@ -165,7 +163,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       // Ensures `onValueUpdate` of `rangePlugin` runs first
       // given Flatpickr puts `01/01/1970 to 01/02/1970` to from date
       // where `rangePlugin` overrides it to separate them to from/to dates.
-      // We want to ensure our handler of `onValueUpdate` (notably one in `<bx-date-picker-input>`)
+      // We want to ensure our handler of `onValueUpdate` (notably one in `<cds-date-picker-input>`)
       // gets the `<input>` value set by `rangePlugin` instead of Flatpickr core.
       plugins.push(rangePlugin({ input: inputTo as HTMLInputElement }));
     }
@@ -183,7 +181,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
       _datePickerPlugins: plugins,
       _handleFlatpickrError: handleFlatpickrError,
     } = this;
-    // We use `<bx-date-picker-input>` to communicate values/events with Flatpickr,
+    // We use `<cds-date-picker-input>` to communicate values/events with Flatpickr,
     // but want to use `<input>` in shadow DOM to base the calendar dropdown's position on
     const { input: positionElement } = dateInteractNode!;
     const [minDate = undefined, maxDate = undefined] = !enabledRange
@@ -270,7 +268,7 @@ class BXDatePicker extends HostListenerMixin(FormMixin(LitElement)) {
   private _instantiateDatePicker() {
     this._releaseDatePicker();
     const { _dateInteractNode: dateInteractNode } = this;
-    // `this._dateInteractNode` won't be there unless there is a slotted `<bx-date-input type="from">`,
+    // `this._dateInteractNode` won't be there unless there is a slotted `<cds-date-input type="from">`,
     // which means Flatpickr will never be instantiated in "simple" mode.
     if (dateInteractNode && dateInteractNode.input) {
       this.calendar = flatpickr(

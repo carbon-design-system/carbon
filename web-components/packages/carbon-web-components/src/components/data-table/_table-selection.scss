@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -11,10 +11,10 @@
 
 :host(#{$prefix}-table-header-row) .#{$prefix}--table-column-checkbox {
   position: relative;
-  background-color: $ui-03;
+  background-color: $border-subtle-01;
   // 16px padding left + 8px padding right + 20px checkbox width
   width: rem(44px);
-  transition: background-color $duration--fast-01 motion(entrance, productive);
+  transition: background-color $duration-fast-01 motion(entrance, productive);
 }
 
 :host(#{$prefix}-table-row) .#{$prefix}--table-column-checkbox {
@@ -39,11 +39,11 @@
 :host(#{$prefix}-table-row[selected]) {
   ::slotted(#{$prefix}-table-cell),
   .#{$prefix}--table-column-checkbox {
-    color: $text-01;
-    background-color: $ui-03;
-    border-top: 1px solid $ui-03;
+    color: $text-primary;
+    background-color: $layer-accent-01;
+    border-top: 1px solid $border-subtle-01;
     //bottom border acts as separator from other rows
-    border-bottom: 1px solid $active-ui;
+    border-bottom: 1px solid $layer-active;
   }
 }
 

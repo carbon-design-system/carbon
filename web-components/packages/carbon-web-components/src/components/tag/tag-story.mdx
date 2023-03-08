@@ -46,11 +46,12 @@ import '@carbon/web-components/es/components/tag/index.js';
 
 ## Themeing
 
-In order to get the correct token value for the tag background, you will need to apply the following in you `scss` to your themed class. For example:
+In order to get the correct token value for the tag background, you will need to
+apply the following in you `scss` to your themed class. For example:
 
 ```css
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/themes/mixins';
-@import 'carbon-components/scss/globals/scss/component-tokens';
+@use '@carbon/styles/scss/vendor/@carbon/elements/scss/themes/mixins';
+@use '@carbon/styles/scss/component-tokens';
 @import 'carbon-components/src/components/tag/tag';
 .dds-theme-zone-g90 {
   @include carbon--theme($carbon--theme--g90, true) {

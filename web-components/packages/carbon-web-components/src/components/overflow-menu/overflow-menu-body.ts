@@ -7,9 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import BXFloatingMenu, {
   FLOATING_MENU_ALIGNMENT,
   FLOATING_MENU_DIRECTION,
@@ -19,8 +19,6 @@ import styles from './overflow-menu.scss';
 import BXOverflowMenuItem from './overflow-menu-item';
 import HostListener from '../../globals/decorators/host-listener';
 import { indexOf } from '../../globals/internal/collection-helpers';
-
-const { prefix } = settings;
 
 /**
  * @param index The index
@@ -40,7 +38,7 @@ const capIndex = (index: number, length: number) => {
 /**
  * Overflow menu body.
  *
- * @element bx-overflow-menu-body
+ * @element cds-overflow-menu-body
  */
 @customElement(`${prefix}-overflow-menu-body`)
 class BXOverflowMenuBody extends BXFloatingMenu {

@@ -7,21 +7,19 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
 import BXStructuredListRow from './structured-list-row';
 import styles from './structured-list.scss';
 
-const { prefix } = settings;
-
 /**
  * Structured list wrapper.
  *
- * @element bx-structured-list
+ * @element cds-structured-list
  */
 @customElement(`${prefix}-structured-list`)
 class BXStructuredList extends FocusMixin(LitElement) {

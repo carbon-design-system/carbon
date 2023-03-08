@@ -7,11 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import Arrows16 from '@carbon/icons/lib/arrows/16';
 import ArrowDown16 from '@carbon/icons/lib/arrow--down/16';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import {
   TABLE_SORT_CYCLE,
@@ -22,13 +22,11 @@ import styles from './data-table.scss';
 
 export { TABLE_SORT_CYCLE, TABLE_SORT_CYCLES, TABLE_SORT_DIRECTION };
 
-const { prefix } = settings;
-
 /**
  * Data table header cell.
  *
- * @element bx-table-header-cell
- * @fires bx-table-header-cell-sort
+ * @element cds-table-header-cell
+ * @fires cds-table-header-cell-sort
  *   The custom event fired before a new sort direction is set upon a user gesture.
  *   Cancellation of this event stops the user-initiated change in sort direction.
  */

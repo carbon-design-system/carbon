@@ -8,6 +8,7 @@
  */
 
 import { html, TemplateResult } from 'lit';
+import { prefix } from '../src/globals/settings';
 import containerStyles from './_container.scss'; // eslint-disable-line import/first
 
 /**
@@ -26,12 +27,13 @@ const container = ({
   <style>
     ${containerStyles}
   </style>
+  <cds-skip-to-content href="#main-content"></cds-skip-to-content>
   <div
     id="main-content"
     name="main-content"
     data-floating-menu-container
     role="${hasMainTag ? 'none' : 'main'}"
-    class="bx--body bx-ce-demo-devenv--container">
+    class="${prefix}-ce-demo-devenv--container">
     ${children}
   </div>
 `;

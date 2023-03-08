@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,13 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/overflow-menu/overflow-menu';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/overflow-menu/overflow-menu' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include overflow-menu;
 
 :host(#{$prefix}-overflow-menu),
 :host(#{$prefix}-breadcrumb-overflow-menu) {
@@ -19,9 +25,9 @@ $css--plex: true !default;
   @extend .#{$prefix}--overflow-menu--sm;
 }
 
-:host(#{$prefix}-overflow-menu)[size='xl'],
-:host(#{$prefix}-breadcrumb-overflow-menu)[size='xl'] {
-  @extend .#{$prefix}--overflow-menu--xl;
+:host(#{$prefix}-overflow-menu)[size='lg'],
+:host(#{$prefix}-breadcrumb-overflow-menu)[size='lg'] {
+  @extend .#{$prefix}--overflow-menu--lg;
 }
 
 :host(#{$prefix}-overflow-menu[disabled]),
@@ -29,7 +35,7 @@ $css--plex: true !default;
   cursor: not-allowed;
 
   svg {
-    fill: $disabled;
+    fill: $icon-disabled;
     cursor: not-allowed;
   }
 }
@@ -41,35 +47,23 @@ $css--plex: true !default;
 
 :host(#{$prefix}-overflow-menu[open]),
 :host(#{$prefix}-breadcrumb-overflow-menu[open]) {
-  background-color: $ui-01;
+  background-color: $layer-01;
   transition: none;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.3);
 }
 
 :host(#{$prefix}-overflow-menu[color-scheme='light'][open]),
 :host(#{$prefix}-breadcrumb-overflow-menu[color-scheme='light'][open]) {
-  background-color: $ui-02;
+  background-color: $layer-02;
 }
 
 :host(#{$prefix}-overflow-menu-body) {
   @extend .#{$prefix}--overflow-menu-options;
-
-  &::after {
-    @extend .#{$prefix}--overflow-menu-options,
-      [data-floating-menu-direction='bottom'],
-      ::after;
-  }
 }
 
 :host(#{$prefix}-overflow-menu-body[direction='top']) {
   margin-top: 0;
-  margin-bottom: $spacing-2xs;
-
-  &::after {
-    @extend .#{$prefix}--overflow-menu-options,
-      [data-floating-menu-direction='top'],
-      ::after;
-  }
+  margin-bottom: $spacing-02;
 }
 
 :host(#{$prefix}-overflow-menu-body[open]) {
@@ -77,10 +71,10 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-overflow-menu-body[color-scheme='light']) {
-  background-color: $ui-02;
+  background-color: $layer-02;
 
   &::after {
-    background-color: $ui-02;
+    background-color: $layer-02;
   }
 }
 

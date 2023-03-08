@@ -7,17 +7,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './data-table.scss';
-
-const { prefix } = settings;
 
 /**
  * Data table header.
  *
- * @element bx-table-head
+ * @element cds-table-head
  */
 @customElement(`${prefix}-table-head`)
 class BXTableHead extends LitElement {

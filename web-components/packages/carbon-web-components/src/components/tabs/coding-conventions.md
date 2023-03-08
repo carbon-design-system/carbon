@@ -31,8 +31,8 @@ following reasons:
 narrow mode requires space/enter to select an item. And thus no `highlighted`
 state.
 
-|          | Normal                                                                               | Hover                                                         | Focus                                                     |
-| -------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------- | --------------------------------------------------------- |
-| Normal   | Light text (`$text-02`), light gray thick underline (`$ui-03`)                       | Light text (`$text-02`), dark gray thick underline (`$ui-04`) | (Focused means selected)                                  |
-| Disabled | Ultra-light text (`$disabled-01`), ultra-light gray thick underline (`$disabled-02`) | (No reaction to hover)                                        | (No reaction to focus)                                    |
-| Selected | Blue thick underline (`$interactive-01`/`$focus`), dark bold text                    | (No reaction to hover)                                        | Blue outline (`$interactive-01`/`$focus`), dark bold text |
+|          | Normal                                                                           | Hover                                                                           | Focus                                                     |
+| -------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- | --------------------------------------------------------- |
+| Normal   | Light text (`$text-secondary`), light gray thick underline (`$border-subtle-01`) | Light text (`$text-secondary`), dark gray thick underline (`$border-strong-01`) | (Focused means selected)                                  |
+| Disabled | Ultra-light gray thick underline (`$text-disabledx`)                             | (No reaction to hover)                                                          | (No reaction to focus)                                    |
+| Selected | Blue thick underline (`$interactive-01`/`$focus`), dark bold text                | (No reaction to hover)                                                          | Blue outline (`$interactive-01`/`$focus`), dark bold text |

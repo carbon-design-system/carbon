@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -27,24 +27,29 @@ export enum TABLE_COLOR_SCHEME {
  */
 export enum TABLE_SIZE {
   /**
-   * Compact size.
+   * xs size.
    */
-  COMPACT = 'compact',
+  XS = 'xs',
 
   /**
-   * Short size.
+   * sm size.
    */
-  SHORT = 'short',
+  SM = 'sm',
 
   /**
-   * Regular size.
+   * md size.
    */
-  REGULAR = '',
+  MD = 'md',
 
   /**
-   * Tall size.
+   * lg size - default.
    */
-  TALL = 'tall',
+  LG = 'lg',
+
+  /**
+   * xl size.
+   */
+  XL = 'xl',
 }
 
 /**

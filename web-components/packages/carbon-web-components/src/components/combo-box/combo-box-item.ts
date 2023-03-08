@@ -7,17 +7,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import BXDropdownItem from '../dropdown/dropdown-item';
 import styles from './combo-box.scss';
-
-const { prefix } = settings;
 
 /**
  * Combo box item.
  *
- * @element bx-combo-box-item
+ * @element cds-combo-box-item
  */
 @customElement(`${prefix}-combo-box-item`)
 class BXComboBoxItem extends BXDropdownItem {

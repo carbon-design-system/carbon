@@ -7,16 +7,14 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import BXTableExpandRow from './table-expand-row';
-
-const { prefix } = settings;
 
 /**
  * Data table header row.
  *
- * @element bx-table-header-expand-row
+ * @element cds-table-header-expand-row
  */
 @customElement(`${prefix}-table-header-expand-row`)
 class BXTableHeaderExpandRow extends BXTableExpandRow {

@@ -11,18 +11,16 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
 import styles from './checkbox.scss';
 
-const { prefix } = settings;
-
 /**
  * Check box.
  *
- * @element bx-checkbox
- * @fires bx-checkbox-changed - The custom event fired after this changebox changes its checked state.
+ * @element cds-checkbox
+ * @fires cds-checkbox-changed - The custom event fired after this changebox changes its checked state.
  * @csspart input The checkbox.
  * @csspart label The label.
  */

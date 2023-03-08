@@ -7,17 +7,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './form-item.scss';
-
-const { prefix } = settings;
 
 /**
  * Presentational element for form items
  *
- * @element bx-form-item
+ * @element cds-form-item
  */
 @customElement(`${prefix}-form-item`)
 class BXFormItem extends LitElement {

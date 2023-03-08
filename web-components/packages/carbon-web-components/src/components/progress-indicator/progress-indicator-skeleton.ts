@@ -9,12 +9,10 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import BXProgressStepSkeleton from './progress-step-skeleton';
 import styles from './progress-indicator.scss';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of progress indicator.

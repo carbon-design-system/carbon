@@ -7,19 +7,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import ChevronRight16 from '@carbon/icons/lib/chevron--right/16';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import Handle from '../../globals/internal/handle';
 import { ACCORDION_ITEM_BREAKPOINT } from './defs';
 import styles from './accordion.scss';
 
 export { ACCORDION_ITEM_BREAKPOINT };
-
-const { prefix } = settings;
 
 /**
  * Observes resize of the given element with the given resize observer.
@@ -43,11 +41,11 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
 /**
  * Accordion item.
  *
- * @element bx-accordion-item
- * @fires bx-accordion-item-beingtoggled
+ * @element cds-accordion-item
+ * @fires cds-accordion-item-beingtoggled
  *   The custom event fired before this accordion item is being toggled upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of toggling this accordion item.
- * @fires bx-accordion-item-toggled - The custom event fired after this accordion item is toggled upon a user gesture.
+ * @fires cds-accordion-item-toggled - The custom event fired after this accordion item is toggled upon a user gesture.
  * @csspart expando The expando button.
  * @csspart expando-icon The expando icon.
  * @csspart title The title.

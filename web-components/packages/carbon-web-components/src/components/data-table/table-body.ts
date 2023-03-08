@@ -7,19 +7,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import { TABLE_COLOR_SCHEME } from './defs';
 import BXTableRow from './table-row';
 import styles from './data-table.scss';
 
-const { prefix } = settings;
-
 /**
  * Data table body.
  *
- * @element bx-table-body
+ * @element cds-table-body
  */
 @customElement(`${prefix}-table-body`)
 class BXTableBody extends LitElement {
@@ -30,7 +28,7 @@ class BXTableBody extends LitElement {
   private _slotNode!: HTMLSlotElement;
 
   /**
-   * Updates `even`/`odd` properties of the child `<bx-table-row>`s.
+   * Updates `even`/`odd` properties of the child `<cds-table-row>`s.
    */
   private _updateZebra() {
     const { colorScheme, _slotNode: slotNode } = this;

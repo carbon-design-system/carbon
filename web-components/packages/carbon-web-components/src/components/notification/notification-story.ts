@@ -8,13 +8,14 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { NOTIFICATION_KIND } from './inline-notification';
 import './toast-notification';
 import storyDocs from './notification-story.mdx';
+import { prefix } from '../../globals/settings';
 
 const kinds = {
   [`Success (${NOTIFICATION_KIND.SUCCESS})`]: NOTIFICATION_KIND.SUCCESS,
@@ -39,7 +40,7 @@ export const inline = (args) => {
     disableClose,
     onBeforeClose = noop,
     onClose = noop,
-  } = args?.['bx-inline-notification'] ?? {};
+  } = args?.[`${prefix}-inline-notification`] ?? {};
   const handleBeforeClose = (event: CustomEvent) => {
     onBeforeClose(event);
     if (disableClose) {
@@ -47,8 +48,7 @@ export const inline = (args) => {
     }
   };
   return html`
-    <bx-inline-notification
-      style="min-width: 30rem; margin-bottom: .5rem"
+    <cds-inline-notification
       kind="${ifDefined(kind)}"
       title="${ifDefined(title)}"
       subtitle="${ifDefined(subtitle)}"
@@ -58,15 +58,15 @@ export const inline = (args) => {
       icon-label="${ifDefined(iconLabel)}"
       ?open="${open}"
       timeout="${ifDefined(timeout)}"
-      @bx-notification-beingclosed="${handleBeforeClose}"
-      @bx-notification-closed="${onClose}">
-    </bx-inline-notification>
+      @cds-notification-beingclosed="${handleBeforeClose}"
+      @cds-notification-closed="${onClose}">
+    </cds-inline-notification>
   `;
 };
 
 inline.parameters = {
   knobs: {
-    'bx-inline-notification': () => ({
+    [`${prefix}-inline-notification`]: () => ({
       kind: select(
         'The notification kind (kind)',
         kinds,
@@ -87,11 +87,11 @@ inline.parameters = {
       open: boolean('Open (open)', true),
       timeout: textNullable('Timeout (in ms)', ''),
       disableClose: boolean(
-        'Disable user-initiated close action (Call event.preventDefault() in bx-notification-beingclosed event)',
+        `Disable user-initiated close action (Call event.preventDefault() in ${prefix}-notification-beingclosed event)`,
         false
       ),
-      onBeforeClose: action('bx-notification-beingclosed'),
-      onClose: action('bx-notification-closed'),
+      onBeforeClose: action(`${prefix}-notification-beingclosed`),
+      onClose: action(`${prefix}-notification-closed`),
     }),
   },
 };
@@ -111,7 +111,7 @@ export const toast = (args) => {
     disableClose,
     onBeforeClose = noop,
     onClose = noop,
-  } = args?.['bx-toast-notification'] ?? {};
+  } = args?.[`${prefix}-toast-notification`] ?? {};
   const handleBeforeClose = (event: CustomEvent) => {
     onBeforeClose(event);
     if (disableClose) {
@@ -119,8 +119,7 @@ export const toast = (args) => {
     }
   };
   return html`
-    <bx-toast-notification
-      style="min-width: 30rem; margin-bottom: .5rem"
+    <cds-toast-notification
       kind="${ifDefined(kind)}"
       title="${ifDefined(title)}"
       subtitle="${ifDefined(subtitle)}"
@@ -131,16 +130,16 @@ export const toast = (args) => {
       icon-label="${ifDefined(iconLabel)}"
       ?open="${open}"
       timeout="${ifDefined(timeout)}"
-      @bx-notification-beingclosed="${handleBeforeClose}"
-      @bx-notification-closed="${onClose}">
-    </bx-toast-notification>
+      @cds-notification-beingclosed="${handleBeforeClose}"
+      @cds-notification-closed="${onClose}">
+    </cds-toast-notification>
   `;
 };
 
 toast.parameters = {
   knobs: {
-    'bx-toast-notification': () => ({
-      ...inline.parameters.knobs['bx-inline-notification'](),
+    [`${prefix}-toast-notification`]: () => ({
+      ...inline.parameters.knobs[`${prefix}-inline-notification`](),
       caption: textNullable('Caption (caption)', 'Time stamp [00:00:00]'),
     }),
   },

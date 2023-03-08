@@ -10,7 +10,7 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
@@ -23,8 +23,6 @@ import { RADIO_BUTTON_LABEL_POSITION, RADIO_BUTTON_ORIENTATION } from './defs';
 import styles from './radio-button.scss';
 
 export { RADIO_BUTTON_LABEL_POSITION };
-
-const { prefix } = settings;
 
 /**
  * Map of navigation direction by key for horizontal alignment.
@@ -103,8 +101,8 @@ class RadioButtonDelegate implements ManagedRadioButtonDelegate {
 /**
  * Radio button.
  *
- * @element bx-radio-button
- * @fires bx-radio-button-changed - The custom event fired after this radio button changes its checked state.
+ * @element cds-radio-button
+ * @fires cds-radio-button-changed - The custom event fired after this radio button changes its checked state.
  */
 @customElement(`${prefix}-radio-button`)
 class BXRadioButton extends HostListenerMixin(FocusMixin(LitElement)) {

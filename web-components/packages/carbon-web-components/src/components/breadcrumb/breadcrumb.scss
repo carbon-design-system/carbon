@@ -7,8 +7,11 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/link/link';
-@import 'carbon-components/scss/components/breadcrumb/breadcrumb';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/breadcrumb';
 @import '../overflow-menu/overflow-menu';
 
 :host(#{$prefix}-breadcrumb) {
@@ -17,13 +20,6 @@ $css--plex: true !default;
 
 :host(#{$prefix}-breadcrumb-item) {
   @extend .#{$prefix}--breadcrumb-item;
-
-  // TODO: see if we can remove this ::after section after v11 upgrade
-  &::after {
-    margin-left: $spacing-03;
-    color: $text-primary;
-    content: '/';
-  }
 }
 
 :host(#{$prefix}-breadcrumb-overflow-menu) {
@@ -51,7 +47,7 @@ $css--plex: true !default;
     background: $link-primary-hover;
     content: '';
     opacity: 0;
-    transition: opacity $duration--fast-01 motion(standard, productive);
+    transition: opacity $duration-fast-01 motion(standard, productive);
   }
 }
 
@@ -62,7 +58,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-breadcrumb-overflow-menu) svg {
   position: relative;
-  fill: $link-01;
+  fill: $link-primary;
   transform: translateY(4px);
 }
 
@@ -77,9 +73,9 @@ $css--plex: true !default;
 :host(#{$prefix}-breadcrumb-link) {
   outline: none;
 
-  // Re-define the ruleset so this wins over `.bx--link:visited`, etc.
+  // Re-define the ruleset so this wins over `.#{$prefix}--link:visited`, etc.
   .#{$prefix}--link--disabled {
-    color: $disabled-02;
+    color: $text-disabled;
   }
 
   .#{$prefix}--link__icon[hidden] {
@@ -88,7 +84,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-breadcrumb-link[aria-current='page']) .#{$prefix}--link {
-  color: $text-01;
+  color: $text-primary;
   cursor: auto;
 
   &:hover {

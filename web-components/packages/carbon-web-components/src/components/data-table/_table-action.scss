@@ -1,13 +1,18 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'carbon-components/scss/components/button/button';
-@import 'carbon-components/scss/components/search/search';
-@import 'carbon-components/scss/components/data-table/data-table-action';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/button';
+@use '@carbon/styles/scss/components/search';
+@use '@carbon/styles/scss/components/data-table/action';
 
 //
 // Table toolbar
@@ -27,14 +32,14 @@
 
     display: flex;
     cursor: pointer;
-    height: $layout-04;
-    width: $layout-04;
-    padding: $spacing-md;
-    transition: background-color $duration--fast-02 motion(entrance, productive);
+    height: $spacing-04;
+    width: $spacing-04;
+    padding: $spacing-05;
+    transition: background-color $duration-fast-02 motion(entrance, productive);
   }
 
   ::slotted(#{$prefix}-overflow-menu:hover) {
-    background-color: $hover-field;
+    background-color: $background-hover;
   }
 
   ::slotted(#{$prefix}-overflow-menu[disabled]:hover) {
@@ -50,8 +55,8 @@
 :host(#{$prefix}-table-toolbar-content[has-batch-actions]) {
   clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
   transform: translate3d(0, 48px, 0);
-  transition: transform $duration--fast-02 motion(standard, productive),
-    clip-path $duration--fast-02 motion(standard, productive);
+  transition: transform $duration-fast-02 motion(standard, productive),
+    clip-path $duration-fast-02 motion(standard, productive);
 }
 
 :host(#{$prefix}-table-toolbar-search) {
@@ -59,30 +64,30 @@
   @extend .#{$prefix}--toolbar-search-container-expandable;
 
   flex: none;
-  transition: flex 175ms $carbon--standard-easing;
+  transition: flex 175ms $standard-easing;
 
   .#{$prefix}--search {
     width: 100%;
     height: 100%;
 
     .#{$prefix}--search-magnifier {
-      height: $layout-04;
-      width: $layout-04;
-      padding: $spacing-md;
+      height: $spacing-04;
+      width: $spacing-04;
+      padding: $spacing-05;
       left: 0;
       cursor: pointer;
       pointer-events: all;
-      transition: background $duration--fast-02 motion(entrance, productive);
+      transition: background $duration-fast-02 motion(entrance, productive);
     }
 
     .#{$prefix}--search-close {
-      height: $layout-04;
-      width: $layout-04;
+      height: $spacing-04;
+      width: $spacing-04;
 
       &::before {
         top: 2px;
         height: calc(100% - 4px);
-        background-color: $hover-ui;
+        background-color: $background-hover;
       }
     }
   }

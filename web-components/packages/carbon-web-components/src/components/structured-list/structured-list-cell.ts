@@ -9,15 +9,13 @@
 
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import styles from './structured-list.scss';
-
-const { prefix } = settings;
 
 /**
  * Structured list cell.
  *
- * @element bx-structured-list-cell
+ * @element cds-structured-list-cell
  */
 @customElement(`${prefix}-structured-list-cell`)
 class BXStructuredListCell extends LitElement {

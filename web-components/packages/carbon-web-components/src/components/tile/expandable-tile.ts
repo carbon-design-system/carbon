@@ -11,23 +11,21 @@ import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
 
-const { prefix } = settings;
-
 /**
  * Expandable tile.
  *
- * @element bx-expandable-tile
- * @fires bx-expandable-tile-beingtoggled
+ * @element cds-expandable-tile
+ * @fires cds-expandable-tile-beingtoggled
  *   The custom event fired before the expanded state is changed upon a user gesture.
  *   Cancellation of this event stops changing the user-initiated change in expanded state.
- * @fires bx-expandable-tile-toggled - The custom event fired after a the expanded state is changed upon a user gesture.
+ * @fires cds-expandable-tile-toggled - The custom event fired after a the expanded state is changed upon a user gesture.
  */
 @customElement(`${prefix}-expandable-tile`)
 class BXExpandableTile extends HostListenerMixin(FocusMixin(LitElement)) {

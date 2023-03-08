@@ -18,6 +18,7 @@ import './tabs-skeleton';
 import './tab-skeleton';
 import styles from './tabs-story.scss';
 import storyDocs from './tabs-story.mdx';
+import { prefix } from '../../globals/settings';
 
 const noop = () => {};
 
@@ -40,7 +41,7 @@ export const Default = (args) => {
     disableSelection,
     onBeforeSelect = noop,
     onSelect = noop,
-  } = args?.['bx-tabs'] || {};
+  } = args?.[`${prefix}-tabs`] || {};
   const handleBeforeSelected = (event: CustomEvent) => {
     onBeforeSelect(event);
     if (disableSelection) {
@@ -51,30 +52,30 @@ export const Default = (args) => {
     <style>
       ${styles}
     </style>
-    <bx-tabs
+    <cds-tabs
       color-scheme="${ifDefined(colorScheme)}"
       trigger-content="${ifDefined(triggerContent)}"
       type="${ifDefined(type)}"
       value="${ifDefined(value)}"
-      @bx-tabs-beingselected="${handleBeforeSelected}"
-      @bx-tabs-selected="${onSelect}">
-      <bx-tab id="tab-all" target="panel-all" value="all">Option 1</bx-tab>
-      <bx-tab
+      @cds-tabs-beingselected="${handleBeforeSelected}"
+      @cds-tabs-selected="${onSelect}">
+      <cds-tab id="tab-all" target="panel-all" value="all">Option 1</cds-tab>
+      <cds-tab
         id="tab-cloudFoundry"
         target="panel-cloudFoundry"
         disabled
         value="cloudFoundry"
-        >Option 2</bx-tab
+        >Option 2</cds-tab
       >
-      <bx-tab id="tab-staging" target="panel-staging" value="staging"
-        >Option 3</bx-tab
+      <cds-tab id="tab-staging" target="panel-staging" value="staging"
+        >Option 3</cds-tab
       >
-      <bx-tab id="tab-dea" target="panel-dea" value="dea">Option 4</bx-tab>
-      <bx-tab id="tab-router" target="panel-router" value="router"
-        >Option 5</bx-tab
+      <cds-tab id="tab-dea" target="panel-dea" value="dea">Option 4</cds-tab>
+      <cds-tab id="tab-router" target="panel-router" value="router"
+        >Option 5</cds-tab
       >
-    </bx-tabs>
-    <div class="bx-ce-demo-devenv--tab-panels">
+    </cds-tabs>
+    <div class="${prefix}-ce-demo-devenv--tab-panels">
       <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
         <h1>Content for option 1</h1>
         <p>
@@ -140,7 +141,7 @@ Default.storyName = 'Default';
 
 Default.parameters = {
   knobs: {
-    'bx-tabs': () => ({
+    [`${prefix}-tabs`]: () => ({
       colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
       triggerContent: textNullable(
         'The default content of the trigger button for narrow screen (trigger-content)',
@@ -149,23 +150,23 @@ Default.parameters = {
       type: select('Tabs type (type)', types, null),
       value: textNullable('The value of the selected item (value)', 'staging'),
       disableSelection: boolean(
-        'Disable user-initiated selection change (Call event.preventDefault() in bx-content-switcher-beingselected event)',
+        `Disable user-initiated selection change (Call event.preventDefault() in ${prefix}-content-switcher-beingselected event)`,
         false
       ),
-      onBeforeSelect: action('bx-tabs-beingselected'),
-      onSelect: action('bx-tabs-selected'),
+      onBeforeSelect: action(`${prefix}-tabs-beingselected`),
+      onSelect: action(`${prefix}-tabs-selected`),
     }),
   },
 };
 
 export const skeleton = () => html`
-  <bx-tabs-skeleton>
-    <bx-tab-skeleton></bx-tab-skeleton>
-    <bx-tab-skeleton></bx-tab-skeleton>
-    <bx-tab-skeleton></bx-tab-skeleton>
-    <bx-tab-skeleton></bx-tab-skeleton>
-    <bx-tab-skeleton></bx-tab-skeleton>
-  </bx-tabs-skeleton>
+  <cds-tabs-skeleton>
+    <cds-tab-skeleton></cds-tab-skeleton>
+    <cds-tab-skeleton></cds-tab-skeleton>
+    <cds-tab-skeleton></cds-tab-skeleton>
+    <cds-tab-skeleton></cds-tab-skeleton>
+    <cds-tab-skeleton></cds-tab-skeleton>
+  </cds-tabs-skeleton>
 `;
 
 skeleton.parameters = {

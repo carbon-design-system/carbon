@@ -11,14 +11,15 @@ import { html } from 'lit';
 import './skip-to-content';
 import styles from './skip-to-content-story.scss';
 import storyDocs from './skip-to-content-story.mdx';
+import { prefix } from '../../globals/settings';
 
 export const Default = () => html`
   <style>
     ${styles}
   </style>
-  <div class="bx--content bx--grid">
-    <div class="bx--row">
-      <div class="bx--col-lg-13">
+  <div class="${prefix}--content ${prefix}--grid">
+    <div class="${prefix}--row">
+      <div class="${prefix}--col-lg-13">
         <h2>Purpose and function</h2>
         <p>
           The shell is perhaps the most crucial piece of any UI built with

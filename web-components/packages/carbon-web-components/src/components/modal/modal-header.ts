@@ -9,15 +9,13 @@
 
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import styles from './modal.scss';
-
-const { prefix } = settings;
 
 /**
  * Modal header.
  *
- * @element bx-modal-header
+ * @element cds-modal-header
  */
 @customElement(`${prefix}-modal-header`)
 class BXModalHeader extends LitElement {

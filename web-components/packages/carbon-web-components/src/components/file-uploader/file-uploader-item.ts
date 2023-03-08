@@ -12,25 +12,23 @@ import { property, customElement } from 'lit/decorators.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import Close16 from '@carbon/icons/lib/close/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { LOADING_TYPE } from '../loading/loading';
 import { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE } from './defs';
 import styles from './file-uploader.scss';
 
 export { FILE_UPLOADER_ITEM_SIZE, FILE_UPLOADER_ITEM_STATE };
 
-const { prefix } = settings;
-
 /**
  * File uploader item.
  *
- * @element bx-file-uploader-item
+ * @element cds-file-uploader-item
  * @slot validity-message The validity message.
  * @slot validity-message-supplement The supplemental validity message.
- * @fires bx-file-uploader-item-beingdeleted
+ * @fires cds-file-uploader-item-beingdeleted
  *   The custom event fired before this file uploader item is being deleted upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of deleting this file uploader item.
- * @fires bx-file-uploader-item-deleted - The custom event fired after this file uploader item is deleted upon a user gesture.
+ * @fires cds-file-uploader-item-deleted - The custom event fired after this file uploader item is deleted upon a user gesture.
  */
 @customElement(`${prefix}-file-uploader-item`)
 class BXFileUploaderItem extends LitElement {
@@ -79,9 +77,9 @@ class BXFileUploaderItem extends LitElement {
   private _renderUploading() {
     const { uploadingAssistiveText } = this;
     return html`
-      <bx-loading
+      <cds-loading
         assistive-text="${uploadingAssistiveText}"
-        type="${LOADING_TYPE.SMALL}"></bx-loading>
+        type="${LOADING_TYPE.SMALL}"></cds-loading>
     `;
   }
 

@@ -9,17 +9,15 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import BXProgressStep from './progress-step';
 import styles from './progress-indicator.scss';
 
-const { prefix } = settings;
-
 /**
  * Progress indicator.
  *
- * @element bx-progress-indicator
+ * @element cds-progress-indicator
  */
 @customElement(`${prefix}-progress-indicator`)
 class BXProgressIndicator extends LitElement {

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,14 +7,21 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/elements/scss/type/font-family';
-@import 'carbon-components/scss/components/checkbox/checkbox';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/motion' as *;
+@use '@carbon/styles/scss/utilities/convert' as *;
+@use '@carbon/styles/scss/components/checkbox';
 
-@import 'carbon-components/scss/components/data-table/data-table-core';
-@import 'carbon-components/scss/components/data-table/data-table-expandable';
-@import 'carbon-components/scss/components/data-table/data-table-inline-edit';
-@import 'carbon-components/scss/components/data-table/data-table-skeleton';
+@use '@carbon/styles/scss/components/data-table' as *;
+@use '@carbon/styles/scss/components/data-table/expandable';
+// TODO: deprecate
+// @use '@carbon/styles/scss/components/data-table/data-table-inline-edit';
+@use '@carbon/styles/scss/components/data-table/skeleton';
 
+// TODO: deprecate @import
 @import 'table-action';
 @import 'table-core';
 @import 'table-expandable';

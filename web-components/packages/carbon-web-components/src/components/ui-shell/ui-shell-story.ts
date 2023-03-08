@@ -13,7 +13,7 @@ import { boolean, select } from '@storybook/addon-knobs';
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
 import Fade16 from '@carbon/web-components/es/icons/fade/16';
-import contentStyles from 'carbon-components/scss/components/ui-shell/_content.scss';
+import contentStyles from '@carbon/styles/scss/components/ui-shell/content/_content.scss';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { SIDE_NAV_COLLAPSE_MODE, SIDE_NAV_USAGE_MODE } from './side-nav';
@@ -31,6 +31,7 @@ import './header-menu-button';
 import './header-name';
 import styles from './ui-shell-story.scss';
 import storyDocs from './ui-shell-story.mdx';
+import { prefix } from '../../globals/settings';
 
 const collapseModes = {
   Responsive: null,
@@ -50,15 +51,15 @@ const updateRailExpanded = ({
   usageMode = SIDE_NAV_USAGE_MODE.REGULAR,
 }) => {
   document.body.classList.toggle(
-    'bx-ce-demo-devenv--with-rail',
+    `${prefix}-ce-demo-devenv--with-rail`,
     collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL
   );
   document.body.classList.toggle(
-    'bx-ce-demo-devenv--rail-expanded',
+    `${prefix}-ce-demo-devenv--rail-expanded`,
     collapseMode === SIDE_NAV_COLLAPSE_MODE.RAIL && expanded
   );
   document.body.classList.toggle(
-    'bx-ce-demo-devenv--with-side-nav-for-header',
+    `${prefix}-ce-demo-devenv--with-side-nav-for-header`,
     usageMode === SIDE_NAV_USAGE_MODE.HEADER_NAV
   );
 };
@@ -67,10 +68,10 @@ const StoryContent = () => html`
   <style type="text/css">
     ${contentStyles.cssText}
   </style>
-  <main class="bx--content bx-ce-demo-devenv--ui-shell-content">
-    <div class="bx--grid">
-      <div class="bx--row">
-        <div class="bx--offset-lg-3 bx--col-lg-13">
+  <main class="${prefix}--content ${prefix}-ce-demo-devenv--ui-shell-content">
+    <div class="${prefix}--grid">
+      <div class="${prefix}--row">
+        <div class="${prefix}--offset-lg-3 ${prefix}--col-lg-13">
           <h2>Purpose and function</h2>
           <p>
             The shell is perhaps the most crucial piece of any UI built with
@@ -121,59 +122,59 @@ const StoryContent = () => html`
 `;
 
 export const sideNav = (args) => {
-  const { collapseMode, expanded } = args?.['bx-side-nav'] ?? {};
-  const { href } = args?.['bx-side-nav-menu-item'] ?? {};
+  const { collapseMode, expanded } = args?.[`${prefix}-side-nav`] ?? {};
+  const { href } = args?.[`${prefix}-side-nav-menu-item`] ?? {};
   updateRailExpanded({ collapseMode, expanded });
   const result = html`
     <style>
       ${styles}
     </style>
-    <bx-side-nav
+    <cds-side-nav
       aria-label="Side navigation"
       collapse-mode="${ifDefined(collapseMode)}"
       ?expanded=${expanded}>
-      <bx-side-nav-items>
-        <bx-side-nav-menu title="L0 menu">
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+      <cds-side-nav-items>
+        <cds-side-nav-menu title="L0 menu">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-menu title="L0 menu">
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-menu title="L0 menu">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item
             active
             aria-current="page"
             href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-menu title="L0 menu">
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-menu title="L0 menu">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-divider></bx-side-nav-divider>
-        <bx-side-nav-link href="javascript:void(0)">L0 link</bx-side-nav-link>
-        <bx-side-nav-link href="javascript:void(0)">L0 link</bx-side-nav-link>
-      </bx-side-nav-items>
-    </bx-side-nav>
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-divider></cds-side-nav-divider>
+        <cds-side-nav-link href="javascript:void(0)">L0 link</cds-side-nav-link>
+        <cds-side-nav-link href="javascript:void(0)">L0 link</cds-side-nav-link>
+      </cds-side-nav-items>
+    </cds-side-nav>
     ${StoryContent()}
   `;
   (result as any).hasMainTag = true;
@@ -184,7 +185,7 @@ sideNav.storyName = 'Side nav';
 
 sideNav.parameters = {
   knobs: {
-    'bx-side-nav': () => ({
+    [`${prefix}-side-nav`]: () => ({
       expanded: boolean('Expanded (expanded)', true),
       collapseMode: select(
         'Collapse mode (collapse-mode)',
@@ -192,73 +193,73 @@ sideNav.parameters = {
         null
       ),
     }),
-    'bx-side-nav-menu-item': () => ({
+    [`${prefix}-side-nav-menu-item`]: () => ({
       href: textNullable('Link href (href)', 'javascript:void 0'), // eslint-disable-line no-script-url
     }),
   },
 };
 
 export const sideNavWithIcons = (args) => {
-  const { collapseMode, expanded } = args?.['bx-side-nav'] ?? {};
-  const { href } = args?.['bx-side-nav-menu-item'] ?? {};
+  const { collapseMode, expanded } = args?.[`${prefix}-side-nav`] ?? {};
+  const { href } = args?.[`${prefix}-side-nav-menu-item`] ?? {};
   updateRailExpanded({ collapseMode, expanded });
   const result = html`
     <style>
       ${styles}
     </style>
-    <bx-side-nav
+    <cds-side-nav
       aria-label="Side navigation"
       collapse-mode="${ifDefined(collapseMode)}"
       ?expanded=${expanded}>
-      <bx-side-nav-items>
-        <bx-side-nav-menu title="L0 menu">
+      <cds-side-nav-items>
+        <cds-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-menu title="L0 menu">
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item
             active
             aria-current="page"
             href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-menu title="L0 menu">
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-divider></bx-side-nav-divider>
-        <bx-side-nav-link href="javascript:void(0)"
-          >${Fade16({ slot: 'title-icon' })}L0 link</bx-side-nav-link
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-divider></cds-side-nav-divider>
+        <cds-side-nav-link href="javascript:void(0)"
+          >${Fade16({ slot: 'title-icon' })}L0 link</cds-side-nav-link
         >
-        <bx-side-nav-link href="javascript:void(0)"
-          >${Fade16({ slot: 'title-icon' })}L0 link</bx-side-nav-link
+        <cds-side-nav-link href="javascript:void(0)"
+          >${Fade16({ slot: 'title-icon' })}L0 link</cds-side-nav-link
         >
-      </bx-side-nav-items>
-    </bx-side-nav>
+      </cds-side-nav-items>
+    </cds-side-nav>
     ${StoryContent()}
   `;
   (result as any).hasMainTag = true;
@@ -272,8 +273,9 @@ sideNavWithIcons.parameters = {
 };
 
 export const header = (args) => {
-  const { collapseMode, expanded, usageMode } = args?.['bx-side-nav'] ?? {};
-  const { href } = args?.['bx-side-nav-menu-item'] ?? {};
+  const { collapseMode, expanded, usageMode } =
+    args?.[`${prefix}-side-nav`] ?? {};
+  const { href } = args?.[`${prefix}-side-nav-menu-item`] ?? {};
   updateRailExpanded({ collapseMode, expanded, usageMode });
   const handleButtonToggle = (event) => {
     updateRailExpanded({
@@ -286,85 +288,91 @@ export const header = (args) => {
     <style>
       ${styles}
     </style>
-    <bx-header aria-label="IBM Platform Name">
-      <bx-header-menu-button
+    <cds-header aria-label="IBM Platform Name">
+      <cds-header-menu-button
         button-label-active="Close menu"
         button-label-inactive="Open menu"
-        @bx-header-menu-button-toggled="${handleButtonToggle}"></bx-header-menu-button>
-      <bx-header-name href="javascript:void 0" prefix="IBM"
-        >[Platform]</bx-header-name
+        @cds-header-menu-button-toggled="${handleButtonToggle}"></cds-header-menu-button>
+      <cds-header-name href="javascript:void 0" prefix="IBM"
+        >[Platform]</cds-header-name
       >
-      <bx-header-nav menu-bar-label="IBM [Platform]">
-        <bx-header-nav-item href="javascript:void 0">Link 1</bx-header-nav-item>
-        <bx-header-nav-item href="javascript:void 0">Link 2</bx-header-nav-item>
-        <bx-header-nav-item href="javascript:void 0">Link 3</bx-header-nav-item>
-        <bx-header-menu menu-label="Link 4" trigger-content="Link 4">
-          <bx-header-menu-item href="javascript:void 0"
-            >Sub-link 1</bx-header-menu-item
+      <cds-header-nav menu-bar-label="IBM [Platform]">
+        <cds-header-nav-item href="javascript:void 0"
+          >Link 1</cds-header-nav-item
+        >
+        <cds-header-nav-item href="javascript:void 0"
+          >Link 2</cds-header-nav-item
+        >
+        <cds-header-nav-item href="javascript:void 0"
+          >Link 3</cds-header-nav-item
+        >
+        <cds-header-menu menu-label="Link 4" trigger-content="Link 4">
+          <cds-header-menu-item href="javascript:void 0"
+            >Sub-link 1</cds-header-menu-item
           >
-          <bx-header-menu-item href="javascript:void 0"
-            >Sub-link 2</bx-header-menu-item
+          <cds-header-menu-item href="javascript:void 0"
+            >Sub-link 2</cds-header-menu-item
           >
-          <bx-header-menu-item href="javascript:void 0"
-            >Sub-link 3</bx-header-menu-item
+          <cds-header-menu-item href="javascript:void 0"
+            >Sub-link 3</cds-header-menu-item
           >
-        </bx-header-menu>
-      </bx-header-nav>
-    </bx-header>
-    <bx-side-nav
+        </cds-header-menu>
+      </cds-header-nav>
+    </cds-header>
+    <cds-side-nav
       aria-label="Side navigation"
       collapse-mode="${ifDefined(collapseMode)}"
       ?expanded=${expanded}
       usage-mode="${ifDefined(usageMode)}">
-      <bx-side-nav-items>
-        <bx-side-nav-menu title="L0 menu">
+      <cds-side-nav-items>
+        <cds-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-menu title="L0 menu">
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item
             active
             aria-current="page"
             href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-menu title="L0 menu">
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-menu title="L0 menu">
           ${Fade16({ slot: 'title-icon' })}
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-          <bx-side-nav-menu-item href="${ifDefined(href)}">
+          </cds-side-nav-menu-item>
+          <cds-side-nav-menu-item href="${ifDefined(href)}">
             L0 menu item
-          </bx-side-nav-menu-item>
-        </bx-side-nav-menu>
-        <bx-side-nav-divider></bx-side-nav-divider>
-        <bx-side-nav-link href="javascript:void(0)"
-          >${Fade16({ slot: 'title-icon' })}L0 link</bx-side-nav-link
+          </cds-side-nav-menu-item>
+        </cds-side-nav-menu>
+        <cds-side-nav-divider></cds-side-nav-divider>
+        <cds-side-nav-link href="javascript:void(0)"
+          >${Fade16({ slot: 'title-icon' })}L0 link</cds-side-nav-link
         >
-        <bx-side-nav-link href="javascript:void(0)"
-          >${Fade16({ slot: 'title-icon' })}L0 link</bx-side-nav-link
+        <cds-side-nav-link href="javascript:void(0)"
+          >${Fade16({ slot: 'title-icon' })}L0 link</cds-side-nav-link
         >
-      </bx-side-nav-items>
-    </bx-side-nav>
+      </cds-side-nav-items>
+    </cds-side-nav>
     ${StoryContent()}
   `;
   (result as any).hasMainTag = true;
@@ -373,11 +381,12 @@ export const header = (args) => {
 
 header.parameters = {
   knobs: {
-    'bx-side-nav': () => ({
-      ...sideNav.parameters.knobs['bx-side-nav'](),
+    [`${prefix}-side-nav`]: () => ({
+      ...sideNav.parameters.knobs[`${prefix}-side-nav`](),
       usageMode: select('Usage mode (usage-mode)', usageModes, null),
     }),
-    'bx-side-nav-menu-item': sideNav.parameters.knobs['bx-side-nav-menu-item'],
+    [`${prefix}-side-nav-menu-item`]:
+      sideNav.parameters.knobs[`${prefix}-side-nav-menu-item`],
   },
 };
 

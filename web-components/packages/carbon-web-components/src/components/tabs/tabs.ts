@@ -7,11 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
-import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { find, forEach } from '../../globals/internal/collection-helpers';
@@ -27,8 +25,6 @@ import {
 import BXTab from './tab';
 import styles from './tabs.scss';
 
-const { prefix } = settings;
-
 export {
   NAVIGATION_DIRECTION,
   NAVIGATION_DIRECTION_NARROW,
@@ -40,11 +36,11 @@ export {
 /**
  * Tabs.
  *
- * @element bx-tabs
- * @fires bx-tabs-beingselected
+ * @element cds-tabs
+ * @fires cds-tabs-beingselected
  *   The custom event fired before a tab is selected upon a user gesture.
  *   Cancellation of this event stops changing the user-initiated selection.
- * @fires bx-tabs-selected - The custom event fired after a a tab is selected upon a user gesture.
+ * @fires cds-tabs-selected - The custom event fired after a a tab is selected upon a user gesture.
  */
 @customElement(`${prefix}-tabs`)
 class BXTabs extends HostListenerMixin(BXContentSwitcher) {
@@ -141,8 +137,8 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
    * @param [options.immediate]
    *   `true` to make it "immediate selection change" mode, which does:
    *
-   *   * Starts with the selected item
-   *   * Going prev/next item immediately changes the selection
+   *   Starts with the selected item
+   *   Going prev/next item immediately changes the selection
    */
   protected _navigate(
     direction: number,
@@ -335,38 +331,11 @@ class BXTabs extends HostListenerMixin(BXContentSwitcher) {
   }
 
   render() {
-    const {
-      triggerContent,
-      _assistiveStatusText: assistiveStatusText,
-      _open: open,
-      _selectedItemContent: selectedItemContent,
-    } = this;
-    const triggerClasses = classMap({
-      [`${prefix}--tabs-trigger`]: true,
-      [`${prefix}--tabs-trigger--open`]: open,
-    });
-    const listClasses = classMap({
-      [`${prefix}--tabs__nav`]: true,
-      [`${prefix}--tabs__nav--hidden`]: !open,
-    });
+    const { _assistiveStatusText: assistiveStatusText } = this;
     return html`
-      <div
-        id="trigger"
-        role="button"
-        class="${triggerClasses}"
-        aria-labelledby="trigger-label"
-        aria-expanded="${String(open)}"
-        aria-haspopup="listbox"
-        aria-owns="tablist"
-        aria-controls="tablist">
-        <span id="trigger-label" class="${prefix}--tabs-trigger-text">
-          ${selectedItemContent || triggerContent}
-        </span>
-        ${ChevronDown16({ 'aria-hidden': 'true' })}
-      </div>
-      <ul id="tablist" role="tablist" class="${listClasses}">
+      <div id="tablist" role="tablist" class="${prefix}--tab--list">
         <slot></slot>
-      </ul>
+      </div>
       <div
         class="${prefix}--assistive-text"
         role="status"

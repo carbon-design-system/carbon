@@ -9,15 +9,13 @@
 
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import styles from './breadcrumb.scss';
-
-const { prefix } = settings;
 
 /**
  * Breadcrumb item.
  *
- * @element bx-breadcrumb-item
+ * @element cds-breadcrumb-item
  */
 @customElement(`${prefix}-breadcrumb-item`)
 class BXBreadcrumbItem extends LitElement {

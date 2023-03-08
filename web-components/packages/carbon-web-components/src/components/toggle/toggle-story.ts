@@ -8,10 +8,11 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import { TOGGLE_SIZE } from './toggle';
 import storyDocs from './toggle-story.mdx';
 
@@ -31,9 +32,9 @@ export const Default = (args) => {
     uncheckedText,
     value,
     onChange,
-  } = args?.['bx-toggle'] ?? {};
+  } = args?.[`${prefix}-toggle`] ?? {};
   return html`
-    <bx-toggle
+    <cds-toggle
       ?checked="${checked}"
       checked-text="${ifDefined(checkedText)}"
       ?disabled="${disabled}"
@@ -42,7 +43,7 @@ export const Default = (args) => {
       size="${ifDefined(size)}"
       unchecked-text="${ifDefined(uncheckedText)}"
       value="${ifDefined(value)}"
-      @bx-toggle-changed="${onChange}"></bx-toggle>
+      @cds-toggle-changed="${onChange}"></cds-toggle>
   `;
 };
 
@@ -53,7 +54,7 @@ export default {
   parameters: {
     ...storyDocs.parameters,
     knobs: {
-      'bx-toggle': () => ({
+      [`${prefix}-toggle`]: () => ({
         checked: boolean('Checked (checked)', false),
         checkedText: textNullable(
           'Text for checked state (checked-text)',
@@ -68,7 +69,7 @@ export default {
           'Off'
         ),
         value: textNullable('Value (value)', ''),
-        onChange: action('bx-toggle-changed'),
+        onChange: action(`${prefix}-toggle-changed`),
       }),
     },
   },

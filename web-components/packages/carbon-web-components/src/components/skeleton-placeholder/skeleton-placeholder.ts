@@ -9,15 +9,13 @@
 
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import styles from './skeleton-placeholder.scss';
-
-const { prefix } = settings;
 
 /**
  * Skeleton placeholder.
  *
- * @element bx-skeleton-placeholder
+ * @element cds-skeleton-placeholder
  */
 @customElement(`${prefix}-skeleton-placeholder`)
 class BXSkeletonPlaceholder extends LitElement {

@@ -9,11 +9,9 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { INPUT_SIZE } from '../input/input';
 import styles from './search.scss';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of search.

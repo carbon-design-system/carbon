@@ -1,11 +1,13 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-.bx--content {
+@use '@carbon/styles/scss/config' as *;
+
+.#{$prefix}--content {
   h2 {
     margin: 30px 0;
 

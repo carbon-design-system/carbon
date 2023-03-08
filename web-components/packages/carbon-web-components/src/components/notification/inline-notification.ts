@@ -11,17 +11,15 @@ import CheckmarkFilled20 from '@carbon/icons/lib/checkmark--filled/20';
 import Close20 from '@carbon/icons/lib/close/20';
 import ErrorFilled20 from '@carbon/icons/lib/error--filled/20';
 import WarningFilled20 from '@carbon/icons/lib/warning--filled/20';
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html, svg } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { NOTIFICATION_KIND, NOTIFICATION_TYPE } from './defs';
 import styles from './inline-notification.scss';
 
 export { NOTIFICATION_KIND, NOTIFICATION_TYPE };
-
-const { prefix } = settings;
 
 /**
  * The default icons, keyed by notification kind.
@@ -36,13 +34,13 @@ const iconsForKinds = {
 /**
  * Inline notification.
  *
- * @element bx-inline-notification
+ * @element cds-inline-notification
  * @slot subtitle - The subtitle.
  * @slot title - The title.
- * @fires bx-notification-beingclosed
+ * @fires cds-notification-beingclosed
  *   The custom event fired before this notification is being closed upon a user gesture.
  *   Cancellation of this event stops the user-initiated action of closing this notification.
- * @fires bx-notification-closed - The custom event fired after this notification is closed upon a user gesture.
+ * @fires cds-notification-closed - The custom event fired after this notification is closed upon a user gesture.
  */
 @customElement(`${prefix}-inline-notification`)
 class BXInlineNotification extends FocusMixin(LitElement) {

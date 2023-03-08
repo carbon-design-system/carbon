@@ -1,11 +1,13 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'carbon-components/scss/components/data-table/data-table-sort';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/components/data-table/sort';
 
 :host(#{$prefix}-table-header-row[size='compact'])
   ::slotted(#{$prefix}-table-header-cell[sort-direction]) {
@@ -51,19 +53,19 @@
 
 // Show sort icon of primary sorting column or one of hovered column
 :host(#{$prefix}-table-header-cell[sort-active])
-  .bx--table-sort
-  .bx--table-sort__icon,
+  .#{$prefix}--table-sort
+  .#{$prefix}--table-sort__icon,
 :host(#{$prefix}-table-header-cell)
-  .bx--table-sort:hover
-  .bx--table-sort__icon {
+  .#{$prefix}--table-sort:hover
+  .#{$prefix}--table-sort__icon {
   opacity: 1;
 }
 
 // `carbon-web-components` uses conditional rendering for choosing Arrows16 vs. ArrowDown16,
 // and thus `display:none` here is not needed
 :host(#{$prefix}-table-header-cell[sort-direction])
-  .bx--table-sort
-  .bx--table-sort__icon {
+  .#{$prefix}--table-sort
+  .#{$prefix}--table-sort__icon {
   display: block;
 }
 

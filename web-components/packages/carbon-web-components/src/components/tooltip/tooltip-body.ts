@@ -7,9 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import BXFloatingMenu, {
   FLOATING_MENU_ALIGNMENT,
@@ -17,8 +17,6 @@ import BXFloatingMenu, {
   FLOATING_MENU_POSITION_DIRECTION,
 } from '../floating-menu/floating-menu';
 import styles from './tooltip.scss';
-
-const { prefix } = settings;
 
 /**
  * Tooltip body.

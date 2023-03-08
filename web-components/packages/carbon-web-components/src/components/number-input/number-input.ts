@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import CaretUp16 from '@carbon/icons/lib/caret--up/16';
 import CaretDown16 from '@carbon/icons/lib/caret--down/16';
@@ -24,12 +24,10 @@ import BXInput, { INPUT_SIZE } from '../input/input';
 
 export { NUMBER_INPUT_COLOR_SCHEME, NUMBER_INPUT_VALIDATION_STATUS };
 
-const { prefix } = settings;
-
 /**
  * Number input.
  *
- * @element bx-number-input
+ * @element cds-number-input
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.

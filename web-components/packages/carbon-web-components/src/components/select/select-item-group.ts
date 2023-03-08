@@ -9,14 +9,12 @@
 
 import { LitElement } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
-
-const { prefix } = settings;
+import { prefix } from '../../globals/settings';
 
 /**
  * An option group in select box.
  *
- * @element bx-select-item-group
+ * @element cds-select-item-group
  */
 @customElement(`${prefix}-select-item-group`)
 class BXSelectItemGroup extends LitElement {

@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,9 +7,13 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/globals/scss/helper-mixins';
-@import 'carbon-components/scss/components/form/form';
-@import 'carbon-components/scss/components/search/search';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/components/form';
+@use '@carbon/styles/scss/components/search' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include search;
 
 :host(#{$prefix}-search),
 :host(#{$prefix}-search-skeleton) {
@@ -32,10 +36,11 @@ $css--plex: true !default;
   @extend .#{$prefix}--search--lg;
 }
 
-:host(#{$prefix}-search[size='xl']),
-:host(#{$prefix}-search-skeleton[size='xl']) {
-  @extend .#{$prefix}--search--xl;
-}
+// TODO: deprecate
+// :host(#{$prefix}-search[size='xl']),
+// :host(#{$prefix}-search-skeleton[size='xl']) {
+//   @extend .#{$prefix}--search--xl;
+// }
 
 :host(#{$prefix}-search[color-scheme='light']) {
   @extend .#{$prefix}--search--light;

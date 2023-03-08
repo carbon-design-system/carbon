@@ -9,11 +9,9 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { CODE_SNIPPET_TYPE } from './code-snippet';
 import styles from './code-snippet.scss';
-
-const { prefix } = settings;
 
 /**
  * Skeleton of code snippet.

@@ -9,15 +9,13 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import styles from './file-uploader.scss';
-
-const { prefix } = settings;
 
 /**
  * The shell UI for file uploader.
  *
- * @element bx-file-uploader
+ * @element cds-file-uploader
  * @slot helper-text The helper text.
  * @slot label-text The label text.
  */

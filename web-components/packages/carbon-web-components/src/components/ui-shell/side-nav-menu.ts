@@ -7,20 +7,18 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import ChevronDown20 from '@carbon/icons/lib/chevron--down/20';
+import { prefix } from '../../globals/settings';
 import { forEach } from '../../globals/internal/collection-helpers';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './side-nav.scss';
 
-const { prefix } = settings;
-
 /**
  * Side nav menu.
  *
- * @element bx-side-nav-menu
+ * @element cds-side-nav-menu
  * @slot title-icon - The icon.
  * @csspart expando The expando.
  * @csspart expando-icon-container The expando icon container.

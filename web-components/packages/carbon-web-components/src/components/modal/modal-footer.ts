@@ -10,15 +10,13 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import styles from './modal.scss';
-
-const { prefix } = settings;
 
 /**
  * Modal footer.
  *
- * @element bx-modal-footer
+ * @element cds-modal-footer
  */
 @customElement(`${prefix}-modal-footer`)
 class BXModalFooter extends LitElement {

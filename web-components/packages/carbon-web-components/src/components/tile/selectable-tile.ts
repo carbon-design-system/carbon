@@ -7,23 +7,22 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html, svg } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
-import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import Checkbox16 from '@carbon/icons/lib/checkbox/16';
+import CheckboxCheckedFilled16 from '@carbon/icons/lib/checkbox--checked--filled/16';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
 
-const { prefix } = settings;
-
 /**
  * Multi-selectable tile.
  *
- * @element bx-selectable-tile
- * @fires bx-selectable-tile-changed - The custom event fired after this selectable tile changes its selected state.
+ * @element cds-selectable-tile
+ * @fires cds-selectable-tile-changed - The custom event fired after this selectable tile changes its selected state.
  */
 @customElement(`${prefix}-selectable-tile`)
 class BXSelectableTile extends FocusMixin(LitElement) {
@@ -52,6 +51,25 @@ class BXSelectableTile extends FocusMixin(LitElement) {
         },
       })
     );
+  }
+
+  /**
+   * Handles the rendering of the icon.
+   */
+  protected _renderIcon() {
+    const { selected, checkmarkLabel } = this;
+
+    return html` ${selected
+      ? CheckboxCheckedFilled16({
+          children: !checkmarkLabel
+            ? undefined
+            : svg`<title>${checkmarkLabel}</title>`,
+        })
+      : Checkbox16({
+          children: !checkmarkLabel
+            ? undefined
+            : svg`<title>${checkmarkLabel}</title>`,
+        })}`;
   }
 
   /**
@@ -86,7 +104,6 @@ class BXSelectableTile extends FocusMixin(LitElement) {
 
   render() {
     const {
-      checkmarkLabel,
       colorScheme,
       name,
       selected,
@@ -97,6 +114,7 @@ class BXSelectableTile extends FocusMixin(LitElement) {
     const classes = classMap({
       [`${prefix}--tile`]: true,
       [`${prefix}--tile--selectable`]: true,
+      [`${prefix}--tile--is-selected`]: selected,
       [`${prefix}--tile--${colorScheme}`]: colorScheme,
     });
     return html`
@@ -110,12 +128,9 @@ class BXSelectableTile extends FocusMixin(LitElement) {
         .checked=${selected}
         @change=${handleChange} />
       <label for="input" class="${classes}" tabindex="0">
-        <div class="${prefix}--tile__checkmark">
-          ${CheckmarkFilled16({
-            children: !checkmarkLabel
-              ? undefined
-              : svg`<title>${checkmarkLabel}</title>`,
-          })}
+        <div
+          class="${prefix}--tile__checkmark ${prefix}--tile__checkmark--persistent">
+          ${this._renderIcon()}
         </div>
         <div class="${prefix}--tile-content"><slot></slot></div>
       </label>

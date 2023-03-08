@@ -10,20 +10,18 @@
 import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import HostListener from '../../globals/decorators/host-listener';
 import { INPUT_SIZE } from '../input/input';
 import BXSearch from '../search/search';
 import styles from './data-table.scss';
 
-const { prefix } = settings;
-
 /**
  * Table toolbar search.
  *
- * @element bx-table-toolbar-search
- * @fires bx-search-input - The custom event fired after the search content is changed upon a user gesture.
+ * @element cds-table-toolbar-search
+ * @fires cds-search-input - The custom event fired after the search content is changed upon a user gesture.
  */
 @customElement(`${prefix}-table-toolbar-search`)
 class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
@@ -109,7 +107,7 @@ class BXTableToolbarSearch extends HostListenerMixin(BXSearch) {
    * The name of the custom event fired after the search content is changed upon a user gesture.
    */
   static get eventInput() {
-    // The code uses on in `<bx-search>`, but definition is done also here for React event generation
+    // The code uses on in `<cds-search>`, but definition is done also here for React event generation
     return `${prefix}-search-input`;
   }
 

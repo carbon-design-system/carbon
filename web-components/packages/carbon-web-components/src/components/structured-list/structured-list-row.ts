@@ -7,11 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import CheckmarkFilled16 from '@carbon/icons/lib/checkmark--filled/16';
+import { prefix } from '../../globals/settings';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 import RadioGroupManager, {
@@ -19,8 +19,6 @@ import RadioGroupManager, {
   ManagedRadioButtonDelegate,
 } from '../../globals/internal/radio-group-manager';
 import styles from './structured-list.scss';
-
-const { prefix } = settings;
 
 /**
  * Map of navigation direction by key.
@@ -80,7 +78,7 @@ class StructuredListRowRadioButtonDelegate
 /**
  * Structured list row.
  *
- * @element bx-structured-list-row
+ * @element cds-structured-list-row
  */
 @customElement(`${prefix}-structured-list-row`)
 class BXStructuredListRow extends HostListenerMixin(LitElement) {
@@ -211,13 +209,13 @@ class BXStructuredListRow extends HostListenerMixin(LitElement) {
     const { selected, selectionName, selectionValue, selectionIconTitle } =
       this;
     if (selectionName) {
-      // "Selected" style with `.bx--structured-list-td` does not work somehow - Need investigation
+      // "Selected" style with `.${prefix}--structured-list-td` does not work somehow - Need investigation
       return html`
         <slot></slot>
         <input
           id="input"
           type="radio"
-          class="${prefix}--structured-list-input"
+          class="${prefix}--structured-list-input ${prefix}--visually-hidden"
           .checked=${selected}
           name=${selectionName}
           value=${ifDefined(selectionValue)} />

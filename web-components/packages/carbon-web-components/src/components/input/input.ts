@@ -10,7 +10,7 @@
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import View16 from '@carbon/icons/lib/view/16';
 import ViewOff16 from '@carbon/icons/lib/view--off/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
@@ -26,12 +26,10 @@ import styles from './input.scss';
 
 export { INPUT_COLOR_SCHEME, INPUT_SIZE, INPUT_TYPE };
 
-const { prefix } = settings;
-
 /**
  * Input element. Supports all the usual attributes for textual input types
  *
- * @element bx-input
+ * @element cds-input
  * @slot helper-text - The helper text.
  * @slot label-text - The label text.
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.

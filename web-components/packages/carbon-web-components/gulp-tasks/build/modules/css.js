@@ -49,10 +49,16 @@ const buildModulesCSS = ({ banner, dir }) =>
     )
     .pipe(
       sass({
-        includePaths: ['node_modules'],
+        includePaths: ['node_modules', '../../node_modules'],
       })
     )
-    .pipe(postcss([fixHostPseudo(), autoprefixer(), ...(dir === 'rtl' ? [rtlcss] : [])]))
+    .pipe(
+      postcss([
+        fixHostPseudo(),
+        autoprefixer(),
+        ...(dir === 'rtl' ? [rtlcss] : []),
+      ])
+    )
     .pipe(cleanCSS())
     .pipe(
       through2.obj((file, enc, done) => {
@@ -60,7 +66,10 @@ const buildModulesCSS = ({ banner, dir }) =>
           import { css } from 'lit';
           export default css([${JSON.stringify(String(file.contents))}]);
         `);
-        file.path = replaceExtension(file.path, dir === 'rtl' ? '.rtl.css.js' : '.css.js');
+        file.path = replaceExtension(
+          file.path,
+          dir === 'rtl' ? '.rtl.css.js' : '.css.js'
+        );
         done(null, file);
       })
     )
@@ -74,7 +83,10 @@ const buildModulesCSS = ({ banner, dir }) =>
  * @returns {Promise<void>} Stream
  */
 async function css() {
-  const banner = await readFileAsync(path.resolve(__dirname, '../../../tools/license.js'), 'utf8');
+  const banner = await readFileAsync(
+    path.resolve(__dirname, '../../../tools/license.js'),
+    'utf8'
+  );
   await Promise.all([
     promisifyStream(() => buildModulesCSS({ banner })),
     promisifyStream(() => buildModulesCSS({ banner, dir: 'rtl' })),

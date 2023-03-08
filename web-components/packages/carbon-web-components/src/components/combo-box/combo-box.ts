@@ -7,10 +7,10 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { TemplateResult, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import Close16 from '@carbon/icons/lib/close/16';
+import { prefix } from '../../globals/settings';
 import { findIndex, forEach } from '../../globals/internal/collection-helpers';
 import BXDropdown, { DROPDOWN_KEYBOARD_ACTION } from '../dropdown/dropdown';
 import BXComboBoxItem from './combo-box-item';
@@ -22,20 +22,18 @@ export {
   DROPDOWN_TYPE,
 } from '../dropdown/dropdown';
 
-const { prefix } = settings;
-
 /**
  * Combo box.
  *
- * @element bx-combo-box
- * @fires bx-combo-box-beingselected
+ * @element cds-combo-box
+ * @fires cds-combo-box-beingselected
  *   The custom event fired before a combo box item is selected upon a user gesture.
  *   Cancellation of this event stops changing the user-initiated selection.
- * @fires bx-combo-box-beingtoggled
+ * @fires cds-combo-box-beingtoggled
  *   The custom event fired before the open state of this combo box is toggled upon a user gesture.
  *   Cancellation of this event stops the user-initiated toggling.
- * @fires bx-combo-box-selected - The custom event fired after a combo box item is selected upon a user gesture.
- * @fires bx-combo-box-toggled - The custom event fired after the open state of this combo box is toggled upon a user gesture.
+ * @fires cds-combo-box-selected - The custom event fired after a combo box item is selected upon a user gesture.
+ * @fires cds-combo-box-toggled - The custom event fired after the open state of this combo box is toggled upon a user gesture.
  */
 @customElement(`${prefix}-combo-box`)
 class BXComboBox extends BXDropdown {

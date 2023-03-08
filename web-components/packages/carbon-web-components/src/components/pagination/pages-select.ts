@@ -10,17 +10,15 @@
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './pagination.scss';
-
-const { prefix } = settings;
 
 /**
  * The select box for the current page.
  *
- * @element bx-pages-select
- * @fires bx-pages-select-changed - The custom event fired after the page is changed.
+ * @element cds-pages-select
+ * @fires cds-pages-select-changed - The custom event fired after the page is changed.
  */
 @customElement(`${prefix}-pages-select`)
 class BXPagesSelect extends FocusMixin(LitElement) {

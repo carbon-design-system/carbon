@@ -7,19 +7,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './header.scss';
-
-const { prefix } = settings;
 
 /**
  * Header nav item.
  *
- * @element bx-header-nav-item
+ * @element cds-header-nav-item
  * @csspart link The link.
  * @csspart title The title.
  */

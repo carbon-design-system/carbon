@@ -8,13 +8,14 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import { ifDefined } from 'lit/directives/if-defined.js';
+import { prefix } from '../../globals/settings';
 import { INPUT_COLOR_SCHEME, INPUT_SIZE } from '../input/input';
 import './select';
 import storyDocs from './select-story.mdx';
@@ -44,20 +45,20 @@ export const Default = (args) => {
     validityMessage,
     value,
     children = html`
-      <bx-select-item-group label="Category 1">
-        <bx-select-item value="all">Option 1</bx-select-item>
-        <bx-select-item value="cloudFoundry">Option 2</bx-select-item>
-      </bx-select-item-group>
-      <bx-select-item-group label="Category 2">
-        <bx-select-item value="staging">Option 3</bx-select-item>
-        <bx-select-item value="dea">Option 4</bx-select-item>
-        <bx-select-item value="router">Option 5</bx-select-item>
-      </bx-select-item-group>
+      <cds-select-item-group label="Category 1">
+        <cds-select-item value="all">Option 1</cds-select-item>
+        <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+      </cds-select-item-group>
+      <cds-select-item-group label="Category 2">
+        <cds-select-item value="staging">Option 3</cds-select-item>
+        <cds-select-item value="dea">Option 4</cds-select-item>
+        <cds-select-item value="router">Option 5</cds-select-item>
+      </cds-select-item-group>
     `,
     onInput,
-  } = args?.['bx-select'] ?? {};
+  } = args?.[`${prefix}-select`] ?? {};
   return html`
-    <bx-select
+    <cds-select
       ?autofocus="${autofocus}"
       color-scheme="${ifDefined(colorScheme)}"
       ?disabled="${disabled}"
@@ -69,15 +70,15 @@ export const Default = (args) => {
       size="${ifDefined(size)}"
       validity-message="${ifDefined(validityMessage)}"
       value="${ifDefined(value)}"
-      @bx-select-selected="${ifDefined(onInput)}">
+      @cds-select-selected="${ifDefined(onInput)}">
       ${children}
-    </bx-select>
+    </cds-select>
   `;
 };
 
 Default.parameters = {
   knobs: {
-    'bx-select': () => ({
+    [`${prefix}-select`]: () => ({
       colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
       disabled: boolean('Disabled (disabled)', false),
       helperText: textNullable(
@@ -96,7 +97,7 @@ Default.parameters = {
         ''
       ),
       value: textNullable('The value of the selected item (value)', ''),
-      onInput: action('bx-select-selected'),
+      onInput: action(`${prefix}-select-selected`),
     }),
   },
 };

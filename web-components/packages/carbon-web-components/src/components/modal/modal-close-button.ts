@@ -10,17 +10,15 @@
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import Close20 from '@carbon/icons/lib/close/20';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './modal.scss';
 
-const { prefix } = settings;
-
 /**
  * Modal close button.
  *
- * @element bx-modal-close-button
+ * @element cds-modal-close-button
  * @csspart button The button.
  * @csspart close-icon The close icon.
  */

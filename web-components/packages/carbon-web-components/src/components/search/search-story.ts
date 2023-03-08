@@ -8,14 +8,15 @@
  */
 
 import { html } from 'lit';
+import { ifDefined } from 'lit/directives/if-defined.js';
 import { action } from '@storybook/addon-actions';
 import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import { ifDefined } from 'lit/directives/if-defined.js';
 import { INPUT_SIZE } from '../input/input';
 import { SEARCH_COLOR_SCHEME } from './search';
 import './search-skeleton';
 import storyDocs from './search-story.mdx';
+import { prefix } from '../../globals/settings';
 
 const colorSchemes = {
   [`Regular`]: null,
@@ -25,7 +26,7 @@ const colorSchemes = {
 const sizes = {
   'Regular size': null,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
-  [`Extra large size (${INPUT_SIZE.EXTRA_LARGE})`]: INPUT_SIZE.EXTRA_LARGE,
+  [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
 export const Default = (args) => {
@@ -40,9 +41,9 @@ export const Default = (args) => {
     type,
     value,
     onInput,
-  } = args?.['bx-search'] ?? {};
+  } = args?.[`${prefix}-search`] ?? {};
   return html`
-    <bx-search
+    <cds-search
       close-button-assistive-text="${ifDefined(closeButtonAssistiveText)}"
       color-scheme="${ifDefined(colorScheme)}"
       ?disabled="${disabled}"
@@ -52,7 +53,7 @@ export const Default = (args) => {
       size="${ifDefined(size)}"
       type="${ifDefined(type)}"
       value="${ifDefined(value)}"
-      @bx-search-input="${onInput}"></bx-search>
+      @cds-search-input="${onInput}"></cds-search>
   `;
 };
 
@@ -60,7 +61,7 @@ Default.storyName = 'Default';
 
 Default.parameters = {
   knobs: {
-    'bx-search': () => ({
+    [`${prefix}-search`]: () => ({
       closeButtonAssistiveText: textNullable(
         'The label text for the close button (close-button-assistive-text)',
         'Clear search input'
@@ -70,15 +71,16 @@ Default.parameters = {
       labelText: textNullable('Label text (label-text)', 'Search'),
       name: textNullable('Name (name)', ''),
       placeholder: textNullable('Placeholder text (placeholder)', ''),
-      size: select('Searh size (size)', sizes, null),
+      size: select('Search size (size)', sizes, null),
       type: textNullable('The type of the <input> (type)', ''),
       value: textNullable('Value (value)', ''),
-      onInput: action('bx-search-input'),
+      onInput: action(`${prefix}-search-input`),
     }),
   },
 };
 
-export const skeleton = () => html` <bx-search-skeleton></bx-search-skeleton> `;
+export const skeleton = () =>
+  html` <cds-search-skeleton></cds-search-skeleton> `;
 
 skeleton.parameters = {
   percy: {

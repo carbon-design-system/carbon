@@ -1,11 +1,18 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
 //
 
-@import 'carbon-components/scss/components/file-uploader/file-uploader';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/type' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/file-uploader/file-uploader' as *;
+
+// https://github.com/carbon-design-system/carbon/issues/11408
+@include file-uploader;
 
 :host(#{$prefix}-file-uploader-shell) {
   @extend .#{$prefix}--form-item;
@@ -27,7 +34,7 @@
     .#{$prefix}--form-requirement__supplement {
       @include type-style('label-01');
 
-      padding: 0 $carbon--spacing-05;
+      padding: 0 $spacing-05;
     }
 
     .#{$prefix}--form-requirement {
@@ -36,15 +43,24 @@
     }
 
     .#{$prefix}--form-requirement__supplement {
-      color: $text-01;
+      color: $text-primary;
     }
   }
 
-  &[size='field'] {
-    min-height: $container-03;
+  &[size='lg'] {
+    min-height: $spacing-09;
   }
 
   &[size='sm'] {
-    min-height: $container-02;
+    min-height: $spacing-07;
   }
+
+  // TODO: deprecate 'field' sizing
+  // &[size='field'] {
+  //   min-height: $container-03;
+  // }
+
+  // &[size='sm'] {
+  //   min-height: $container-02;
+  // }
 }

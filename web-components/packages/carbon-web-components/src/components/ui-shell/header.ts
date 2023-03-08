@@ -7,17 +7,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { customElement } from 'lit/decorators.js';
+import { prefix } from '../../globals/settings';
 import styles from './header.scss';
-
-const { prefix } = settings;
 
 /**
  * Header.
  *
- * @element bx-header
+ * @element cds-header
  */
 @customElement(`${prefix}-header`)
 class BXHeader extends LitElement {

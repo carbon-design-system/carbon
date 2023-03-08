@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2020, 2022
+// Copyright IBM Corp. 2020, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,8 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/select/select';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/components/select';
 
 :host(#{$prefix}-select) {
   @extend .#{$prefix}--select;

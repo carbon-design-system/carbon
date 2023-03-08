@@ -9,15 +9,13 @@
 
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import BXTableCell from './table-cell';
-
-const { prefix } = settings;
 
 /**
  * Data table cell with skeleton content.
  *
- * @element bx-table-cell-skeleton
+ * @element cds-table-cell-skeleton
  */
 @customElement(`${prefix}-table-cell-skeleton`)
 class BXTableCellSkeleton extends BXTableCell {

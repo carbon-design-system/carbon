@@ -15,6 +15,7 @@ import { ifDefined } from 'lit/directives/if-defined.js';
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
 import Add16 from '@carbon/web-components/es/icons/add/16';
+import { prefix } from '../../globals/settings';
 import { BUTTON_KIND, BUTTON_SIZE, BUTTON_ICON_LAYOUT } from './button';
 import './button-skeleton';
 import textNullable from '../../../.storybook/knob-text-nullable';
@@ -60,9 +61,9 @@ export const Default = (args) => {
     target,
     type,
     onClick,
-  } = args?.['bx-btn'] ?? {};
+  } = args?.[`${prefix}-btn`] ?? {};
   return html`
-    <bx-btn
+    <cds-btn
       ?autofocus="${autofocus}"
       ?disabled="${disabled}"
       download="${ifDefined(download)}"
@@ -78,13 +79,13 @@ export const Default = (args) => {
       type="${ifDefined(type)}"
       @click=${onClick}>
       Button
-    </bx-btn>
+    </cds-btn>
   `;
 };
 
 Default.parameters = {
   knobs: {
-    'bx-btn': () => ({
+    [`${prefix}-btn`]: () => ({
       kind: select('Button kind (kind)', kinds, BUTTON_KIND.PRIMARY),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, null),
@@ -97,9 +98,9 @@ Default.parameters = {
 
 export const icon = (args) => {
   const { kind, disabled, size, href, isExpressive, onClick } =
-    args?.['bx-btn'] ?? {};
+    args?.[`${prefix}-btn`] ?? {};
   return html`
-    <bx-btn
+    <cds-btn
       kind=${ifDefined(kind)}
       ?disabled=${disabled}
       size=${ifDefined(size)}
@@ -107,7 +108,7 @@ export const icon = (args) => {
       ?isExpressive="${isExpressive}"
       @click=${onClick}>
       ${Add16({ slot: 'icon' })}
-    </bx-btn>
+    </cds-btn>
   `;
 };
 
@@ -115,9 +116,9 @@ icon.parameters = Default.parameters;
 
 export const textAndIcon = (args) => {
   const { kind, disabled, size, href, iconLayout, isExpressive, onClick } =
-    args?.['bx-btn'] ?? {};
+    args?.[`${prefix}-btn`] ?? {};
   return html`
-    <bx-btn
+    <cds-btn
       kind=${ifDefined(kind)}
       ?disabled=${disabled}
       icon-layout="${ifDefined(iconLayout)}"
@@ -126,7 +127,7 @@ export const textAndIcon = (args) => {
       href=${ifDefined(href || undefined)}
       @click=${onClick}>
       Button ${Add16({ slot: 'icon' })}
-    </bx-btn>
+    </cds-btn>
   `;
 };
 
@@ -134,7 +135,7 @@ textAndIcon.storyName = 'Text and icon';
 
 textAndIcon.parameters = {
   knobs: {
-    'bx-btn': () => ({
+    [`${prefix}-btn`]: () => ({
       iconLayout: select('Icon layout (icon-layout)', iconLayouts, null),
       kind: select('Button kind (kind)', kinds, BUTTON_KIND.PRIMARY),
       disabled: boolean('Disabled (disabled)', false),
@@ -148,15 +149,15 @@ textAndIcon.parameters = {
 
 export const skeleton = (args) => {
   const { disabled, size, href, isExpressive, onClick } =
-    args?.['bx-btn-skeleton'];
+    args?.[`${prefix}-btn-skeleton`];
   return html`
-    <bx-btn-skeleton
+    <cds-btn-skeleton
       ?disabled=${disabled}
       size=${ifDefined(size)}
       href=${ifDefined(href || undefined)}
       ?isExpressive="${isExpressive}"
       @click=${onClick}>
-    </bx-btn-skeleton>
+    </cds-btn-skeleton>
   `;
 };
 
@@ -165,7 +166,7 @@ skeleton.parameters = {
     skip: true,
   },
   knobs: {
-    'bx-btn-skeleton': () => ({
+    [`${prefix}-btn-skeleton`]: () => ({
       kind: select('Button kind (kind)', kinds, BUTTON_KIND.PRIMARY),
       disabled: boolean('Disabled (disabled)', false),
       size: select('Button size (size)', sizes, null),

@@ -11,16 +11,14 @@ import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import styles from './content-switcher.scss';
-
-const { prefix } = settings;
 
 /**
  * Content switcher button.
  *
- * @element bx-content-switcher-item
+ * @element cds-content-switcher-item
  */
 @customElement(`${prefix}-content-switcher-item`)
 class BXContentSwitcherItem extends FocusMixin(LitElement) {
@@ -53,7 +51,7 @@ class BXContentSwitcherItem extends FocusMixin(LitElement) {
   target!: string;
 
   /**
-   * The `value` attribute that is set to the parent `<bx-content-switcher>` when this content switcher item is selected.
+   * The `value` attribute that is set to the parent `<cds-content-switcher>` when this content switcher item is selected.
    */
   @property()
   value = '';

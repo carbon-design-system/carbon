@@ -7,19 +7,17 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import settings from 'carbon-components/es/globals/js/settings';
 import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import Checkmark16 from '@carbon/icons/lib/checkmark/16';
+import { prefix } from '../../globals/settings';
 import { DROPDOWN_SIZE } from './dropdown';
 import styles from './dropdown.scss';
-
-const { prefix } = settings;
 
 /**
  * Dropdown item.
  *
- * @element bx-dropdown-item
+ * @element cds-dropdown-item
  * @csspart selected-icon The selected icon.
  */
 @customElement(`${prefix}-dropdown-item`)
@@ -54,7 +52,7 @@ class BXDropdownItem extends LitElement {
   size = DROPDOWN_SIZE.REGULAR;
 
   /**
-   * The `value` attribute that is set to the parent `<bx-dropdown>` when this dropdown item is selected.
+   * The `value` attribute that is set to the parent `<cds-dropdown>` when this dropdown item is selected.
    */
   @property()
   value = '';

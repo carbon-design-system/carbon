@@ -8,10 +8,8 @@
  */
 
 import { html } from 'lit';
-import settings from 'carbon-components/es/globals/js/settings';
+import { prefix } from '../../globals/settings';
 import LOADING_TYPE from './types';
-
-const { prefix } = settings;
 
 /**
  * @param Object options The options.

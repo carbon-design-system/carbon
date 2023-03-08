@@ -9,8 +9,8 @@
 
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
 import Close16 from '@carbon/icons/lib/close/16';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -19,12 +19,10 @@ import styles from './tag.scss';
 
 export { TAG_SIZE, TAG_TYPE };
 
-const { prefix } = settings;
-
 /**
  * Filter tag.
  *
- * @element bx-filter-tag
+ * @element cds-filter-tag
  */
 @customElement(`${prefix}-filter-tag`)
 class BXFilterTag extends HostListenerMixin(FocusMixin(LitElement)) {

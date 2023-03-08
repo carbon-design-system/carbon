@@ -7,11 +7,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { classMap } from 'lit/directives/class-map.js';
-import throttle from 'lodash-es/throttle';
 import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
-import settings from 'carbon-components/es/globals/js/settings';
+import { classMap } from 'lit/directives/class-map.js';
+import throttle from 'lodash-es/throttle';
+import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
 import FormMixin from '../../globals/mixins/form';
 import HostListenerMixin from '../../globals/mixins/host-listener';
@@ -19,8 +19,6 @@ import HostListener from '../../globals/decorators/host-listener';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import BXSliderInput from './slider-input';
 import styles from './slider.scss';
-
-const { prefix } = settings;
 
 interface Cancelable {
   cancel(): void;
@@ -43,11 +41,11 @@ const THUMB_DIRECTION = {
 /**
  * Slider.
  *
- * @element bx-slider
+ * @element cds-slider
  * @slot label-text - The label text.
  * @slot max-text - The text for maximum value.
  * @slot min-text - The text for minimum value.
- * @fires bx-slider-changed - The custom event fired after the value is changed by user gesture.
+ * @fires cds-slider-changed - The custom event fired after the value is changed by user gesture.
  */
 @customElement(`${prefix}-slider`)
 class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
@@ -89,7 +87,7 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
    */
   private get _rate() {
     const { max, min, value } = this;
-    // Copes with out-of-range value coming programmatically or from `<bx-slider-input>`
+    // Copes with out-of-range value coming programmatically or from `<cds-slider-input>`
     return (
       (Math.min(Number(max), Math.max(Number(min), value)) - Number(min)) /
       (Number(max) - Number(min))
@@ -520,7 +518,7 @@ class BXSlider extends HostListenerMixin(FormMixin(FocusMixin(LitElement))) {
   }
 
   /**
-   * The name of the custom event fired after the value is changed in `<bx-slider-input>` by user gesture.
+   * The name of the custom event fired after the value is changed in `<cds-slider-input>` by user gesture.
    */
   static get eventChangeInput() {
     return `${prefix}-slider-input-changed`;

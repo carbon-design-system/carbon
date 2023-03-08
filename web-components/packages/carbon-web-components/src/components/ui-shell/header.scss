@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -7,7 +7,11 @@
 
 $css--plex: true !default;
 
-@import 'carbon-components/scss/components/ui-shell/header';
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/spacing' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/components/ui-shell/header';
 
 :host(#{$prefix}-header) {
   @extend .#{$prefix}--header;
@@ -23,7 +27,7 @@ $css--plex: true !default;
     transform: translateY(-50%);
     height: rem(24px);
     width: rem(1px);
-    background-color: $shell-header-border-01;
+    background-color: $border-subtle;
   }
 }
 
@@ -41,15 +45,15 @@ $css--plex: true !default;
   outline: none;
 
   a.#{$prefix}--header__menu-item {
-    height: mini-units(6);
+    height: $spacing-09;
 
     &:hover {
-      background-color: $shell-header-bg-04;
-      color: $shell-header-text-01;
+      background-color: $background-hover;
+      color: $text-primary;
     }
 
     &:active {
-      background-color: $shell-header-bg-03;
+      background-color: $background-active;
     }
   }
 }
@@ -58,7 +62,7 @@ $css--plex: true !default;
   display: content;
   outline: none;
 
-  @include carbon--breakpoint('lg') {
+  @include breakpoint('lg') {
     display: none;
   }
 }
@@ -68,7 +72,7 @@ $css--plex: true !default;
 }
 
 :host(#{$prefix}-header-menu-button[collapse-mode='rail']) {
-  @include carbon--breakpoint('lg') {
+  @include breakpoint('lg') {
     display: block;
   }
 }
