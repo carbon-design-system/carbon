@@ -5967,6 +5967,7 @@ Map {
     },
   },
   "RadioTile" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "onChange": [Function],
       "tabIndex": 0,
@@ -6012,6 +6013,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "Row" => Object {
     "propTypes": Object {
