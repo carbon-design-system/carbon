@@ -40,8 +40,8 @@ function FileUploaderItem({
       </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
+          name={name}
           iconDescription={iconDescription}
-          aria-describedby={name}
           status={status}
           invalid={invalid}
           onKeyDown={(evt) => {

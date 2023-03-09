@@ -3279,6 +3279,9 @@ Map {
       "invalid": Object {
         "type": "bool",
       },
+      "name": Object {
+        "type": "string",
+      },
       "status": Object {
         "args": Array [
           Array [
