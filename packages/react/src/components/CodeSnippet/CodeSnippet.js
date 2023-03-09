@@ -228,7 +228,7 @@ function CodeSnippet({
         ref={codeContainerRef}
         role={type === 'single' || type === 'multi' ? 'textbox' : null}
         tabIndex={
-          type === 'single' || (type === 'multi' && !disabled) ? 0 : null
+          (type === 'single' || type === 'multi') && !disabled ? 0 : null
         }
         className={`${prefix}--snippet-container`}
         aria-label={ariaLabel || 'code-snippet'}
