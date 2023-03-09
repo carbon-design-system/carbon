@@ -8,10 +8,27 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { usePrefix } from '../../internal/usePrefix';
+import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 
-const TableToolbar = ({ children, size, ...rest }) => {
+export interface TableToolbarProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Pass in the children that will be rendered inside the TableToolbar
+   */
+  children: React.ReactNode;
+
+  /**
+   * `lg` Change the row height of table
+   */
+  size?: 'sm' | 'lg';
+}
+
+const TableToolbar: React.FC<TableToolbarProps> = ({
+  children,
+  size,
+  ...rest
+}) => {
   const prefix = usePrefix();
   const className = cx({
     [`${prefix}--table-toolbar`]: true,
