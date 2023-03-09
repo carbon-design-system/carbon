@@ -23,6 +23,7 @@ const getInstanceId = setupGetInstanceId();
 
 const Modal = React.forwardRef(function Modal(
   {
+    'aria-label': ariaLabelProp,
     children,
     className,
     modalHeading,
@@ -158,7 +159,7 @@ const Modal = React.forwardRef(function Modal(
   );
 
   const ariaLabel =
-    modalLabel || rest['aria-label'] || modalAriaLabel || modalHeading;
+    modalLabel || ariaLabelProp || modalAriaLabel || modalHeading;
   const getAriaLabelledBy = modalLabel ? modalLabelId : modalHeadingId;
 
   const hasScrollingContentProps = hasScrollingContent

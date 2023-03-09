@@ -164,7 +164,7 @@ describe('StructuredList', () => {
     });
     it('should allow a custom aria label to be passed in', () => {
       const testAriaLabel = 'custom-test-aria-label';
-      renderComponent({ wrapperProps: { ariaLabel: testAriaLabel } });
+      renderComponent({ wrapperProps: { 'aria-label': testAriaLabel } });
       expect(screen.getByLabelText(testAriaLabel)).toBeInTheDocument();
     });
     it('should check that children are rendered', () => {
