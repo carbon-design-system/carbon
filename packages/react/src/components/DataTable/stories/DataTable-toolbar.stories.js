@@ -300,7 +300,12 @@ export const Playground = (args) => (
       <TableContainer title="DataTable" description="With overflow menu">
         <TableToolbar {...getToolbarProps()} aria-label="data table toolbar">
           <TableToolbarContent>
-            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarSearch
+              onChange={(evt) => {
+                action('TableToolbarSearch - onChange')(evt);
+                onInputChange(evt);
+              }}
+            />
             <TableToolbarMenu light>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1

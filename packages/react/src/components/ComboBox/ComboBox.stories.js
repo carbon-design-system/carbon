@@ -117,7 +117,6 @@ export const WithLayer = () => (
 export const Playground = (args) => (
   <div style={{ width: 300 }}>
     <ComboBox
-      onChange={() => {}}
       id="carbon-combobox"
       items={items}
       downshiftProps={{
@@ -184,7 +183,7 @@ Playground.argTypes = {
     },
   },
   onChange: {
-    action: 'clicked',
+    action: 'changed',
   },
   onClick: {
     action: 'clicked',
