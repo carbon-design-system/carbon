@@ -32,7 +32,7 @@ const Search = React.forwardRef(function Search(
     onClear = () => {},
     onKeyDown,
     onExpand,
-    placeholder = 'search',
+    placeholder = 'Search',
     renderIcon,
     role = 'searchbox',
     size = 'md',
