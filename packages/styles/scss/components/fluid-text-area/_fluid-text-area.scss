@@ -130,6 +130,7 @@
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper[data-invalid]
     .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
+    border-bottom: none;
     color: $text-error;
   }
 

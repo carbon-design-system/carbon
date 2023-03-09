@@ -116,7 +116,8 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: '',
+    defaultValue:
+      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   labelText: {
     control: {
