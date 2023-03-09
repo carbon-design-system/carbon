@@ -13,9 +13,14 @@ import { Tabs, TabList, Tab, TabPanels, TabPanel } from './Tabs';
 
 - [Overview](#overview)
   - [Line Tabs](#line-tabs)
-  - [Container Tabs](#container-tabs)
+  - [Contained Tabs](#contained-tabs)
+  - [Icon Tabs](#icon-tabs)
 - [Component API](#component-api)
-  - [Tab `renderContent`](#tab-rendercontent)
+  - [Tab - render content on click](#tab---render-content-on-click)
+- [V11](#v11)
+  - [Tabs composition](#tabs-composition)
+  - [Various updates](#various-updates)
+  - [Max width](#max-width)
 - [Feedback](#feedback)
 
 ## Overview
@@ -143,6 +148,18 @@ minor tweaks in naming or implementation.
   `Tabs` instead.
 - Because `renderButton` is no longer needed, the associated `tabIndex` prop has
   also been deprecated.
+
+### Max width
+
+In V11, tabs no longer have a max-width property set. Which means a tab title
+can span as wide as long it's title is. To override this behavior, you may use
+some style rules:
+
+```css
+.cds--tabs__nav-link {
+  max-width: 10rem;
+}
+```
 
 ## Feedback
 
