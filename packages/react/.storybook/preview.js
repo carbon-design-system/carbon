@@ -8,7 +8,6 @@
 import './styles.scss';
 import '../src/feature-flags';
 
-import { configureActions } from '@storybook/addon-actions';
 import { white, g10, g90, g100 } from '@carbon/themes';
 import React from 'react';
 import { breakpoints } from '@carbon/layout';
@@ -202,11 +201,6 @@ export const parameters = {
     },
   },
 };
-
-configureActions({
-  depth: 3,
-  limit: 10,
-});
 
 export const decorators = [
   (Story, context) => {

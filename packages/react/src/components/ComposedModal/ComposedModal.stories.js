@@ -252,10 +252,10 @@ Playground.argTypes = {
     },
   },
   onClose: {
-    action: 'clicked',
+    action: 'onClose',
   },
   onKeyDown: {
-    action: 'clicked',
+    action: 'onKeyDown',
   },
   selectorPrimaryFocus: {
     table: {

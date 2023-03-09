@@ -674,7 +674,8 @@ export default class Slider extends PureComponent<SliderProps> {
     }
 
     let steppedValue =
-      Math.round(leftPercent * totalSteps) * (this.props.step ?? Slider.defaultProps.step);
+      Math.round(leftPercent * totalSteps) *
+      (this.props.step ?? Slider.defaultProps.step);
     const steppedPercent = this.clamp(steppedValue / range, 0, 1);
 
     steppedValue = this.clamp(

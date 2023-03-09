@@ -6,7 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { useContext, useState } from 'react';
+import React, {
+  ChangeEventHandler,
+  ComponentPropsWithRef,
+  ForwardedRef,
+  ReactNode,
+  useContext,
+  useState,
+} from 'react';
 import classNames from 'classnames';
 import {
   ChevronDown,
@@ -17,6 +24,106 @@ import deprecate from '../../prop-types/deprecate';
 import { useFeatureFlag } from '../FeatureFlags';
 import { usePrefix } from '../../internal/usePrefix';
 import { FormContext } from '../FluidForm';
+
+type ExcludedAttributes = 'size';
+
+interface SelectProps
+  extends Omit<ComponentPropsWithRef<'select'>, ExcludedAttributes> {
+  /**
+   * Provide the contents of your Select
+   */
+  children?: ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the node containing the label and the select box
+   */
+  className?: string;
+
+  /**
+   * Optionally provide the default value of the `<select>`
+   */
+  defaultValue?: any;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: ReactNode;
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Specify a custom `id` for the `<select>`
+   */
+  id: string;
+
+  /**
+   * Specify whether you want the inline version of this control
+   */
+  inline?: boolean;
+
+  /**
+   * Specify if the currently value is invalid.
+   */
+  invalid?: boolean;
+
+  /**
+   * Message which is displayed if the value is invalid.
+   */
+  invalidText?: ReactNode;
+
+  /**
+   * Provide label text to be read by screen readers when interacting with the control.
+   */
+  labelText?: ReactNode;
+
+  /**
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   *
+   * @deprecated The `light` prop for `Select` is no longer needed and has been deprecated in v11 in favor of the new `Layer` component.
+   * It will be moved in the next major release.
+   */
+  light?: boolean;
+
+  /**
+   * Reserved for use with <Pagination> component. Will not render a label for the
+   * select since Pagination renders one for us.
+   */
+  noLabel?: boolean;
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the value of the underlying `<input>` changes.
+   */
+  onChange?: ChangeEventHandler<HTMLSelectElement>;
+
+  /**
+   * Whether the select should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * Specify the size of the Select Input.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNode;
+}
 
 const Select = React.forwardRef(function Select(
   {
@@ -39,8 +146,8 @@ const Select = React.forwardRef(function Select(
     warn = false,
     warnText,
     ...other
-  },
-  ref
+  }: SelectProps,
+  ref: ForwardedRef<HTMLSelectElement>
 ) {
   const prefix = usePrefix();
   const enabled = useFeatureFlag('enable-v11-release');

@@ -1067,6 +1067,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "bianca-sparxs",
+      "name": "Bianca Sparxs",
+      "avatar_url": "https://avatars.githubusercontent.com/u/33003148?v=4",
+      "profile": "https://github.com/bianca-sparxs",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"

@@ -47,8 +47,8 @@ export function Toggle({
 
   const isSm = size === 'sm';
   const sideLabel = hideLabel ? labelText : checked ? labelB : labelA;
-  const renderSideLabel = !(hideLabel && ariaLabelledby);
-  const LabelComponent = ariaLabelledby ? 'div' : 'label';
+  const renderSideLabel = !(hideLabel && !labelText);
+  const LabelComponent = labelText ? 'label' : 'div';
 
   const wrapperClasses = classNames(
     `${prefix}--toggle`,
@@ -76,7 +76,7 @@ export function Toggle({
     <div
       className={wrapperClasses}
       onClick={
-        ariaLabelledby
+        !labelText
           ? (e) => {
               // the underlying <button> can only be activated by keyboard as it is visually hidden;
               // therefore, if this event's target is the <button>, it had to be triggered by
@@ -152,10 +152,7 @@ Toggle.propTypes = {
 
   /**
    * If true, the side labels (props.labelA and props.labelB) will be replaced by
-   * props.labelText, so that the toggle doesn't render a top label. In order to fully
-   * hide any labels, you can use props['aria-labelledby'] to refer to another element
-   * that labels the toggle. props.labelText would no longer be required in that case
-   * and can therefore be omitted.
+   * props.labelText (if passed), so that the toggle doesn't render a top label.
    */
   hideLabel: PropTypes.bool,
 
@@ -176,17 +173,11 @@ Toggle.propTypes = {
 
   /**
    * Provide the text that will be read by a screen reader when visiting this
-   * control. This is required unless 'aria-labelledby' is provided instead
+   * control. This should be provided unless 'aria-labelledby' is set instead
+   * or you use an external <label> element with its "for" attribute set to the
+   * toggle's id.
    */
-  labelText: (props, ...rest) => {
-    if (!props['aria-labelledby'] && !props.labelText) {
-      return new Error(
-        'labelText property is required if no aria-labelledby is provided.'
-      );
-    }
-
-    return PropTypes.node(props, ...rest);
-  },
+  labelText: PropTypes.string,
 
   /**
    * Provide an event listener that is called when the control is clicked
