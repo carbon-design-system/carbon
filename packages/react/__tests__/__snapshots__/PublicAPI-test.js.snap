@@ -7097,9 +7097,7 @@ Map {
       "leftOverflowButtonProps": Object {
         "type": "object",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "rightOverflowButtonProps": Object {
         "type": "object",
       },
