@@ -36,32 +36,8 @@ body {
   color: $text-primary;
 }
 
-html,
-body,
-#root,
-#root-inner,
-[name='main-content'] {
-  position: relative;
-  height: 100%;
-}
-
-// Reverts Carbon reset style of lists for docs page
-#docs-root {
-  ol {
-    list-style-type: decimal;
-  }
-
-  ul {
-    list-style-type: disc;
-  }
-}
-
-.#{$prefix}-ce-demo-devenv--container {
-  padding: 3em;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
+.sb-show-main.sb-main-padded {
+  padding: 42px;
 }
 
 .#{$prefix}--content.#{$prefix}-ce-demo-devenv--ui-shell-content {

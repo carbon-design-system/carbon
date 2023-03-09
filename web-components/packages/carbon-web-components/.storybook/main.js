@@ -17,8 +17,6 @@ const useRtl = process.env.STORYBOOK_CARBON_CUSTOM_ELEMENTS_USE_RTL === 'true';
 
 const arrayify = (value) =>
   Array.isArray(value) ? value : value != null ? [value] : []; // eslint-disable-line no-nested-ternary
-const testMatches = (test, s) =>
-  arrayify(test).some((item) => item.test && item.test(s));
 
 module.exports = {
   stories: [
@@ -29,9 +27,19 @@ module.exports = {
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-docs',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        actions: true,
+        backgrounds: false,
+        controls: true,
+        docs: true,
+        toolbars: true,
+        viewport: true,
+      },
+    },
     '@storybook/addon-knobs',
     '@storybook/addon-storysource',
-    path.resolve(__dirname, 'addon-carbon-theme'),
     path.resolve(__dirname, 'addon-knobs-args'),
   ],
   managerWebpack(config) {
@@ -49,21 +57,6 @@ module.exports = {
     return config;
   },
   webpackFinal(config) {
-    // Uses our own option for `@babel/preset-env`
-    config.module.rules = deepReplace(
-      config.module.rules,
-      (value, key, parent, parents) =>
-        getPaths(parents) === 'use.options.presets' &&
-        Array.isArray(value) &&
-        /@babel\/preset-env/i.test(value[0]),
-      (value) => [
-        value[0],
-        {
-          modules: false,
-          targets: ['last 1 version', 'Firefox ESR', 'ie >= 11'],
-        },
-      ]
-    );
     // Uses `@babel/plugin-proposal-decorators` configuration in our `.babelrc`
     config.module.rules = deepReplace(
       config.module.rules,
@@ -88,23 +81,6 @@ module.exports = {
           loose: false,
         },
       ]
-    );
-    // Supports `*-story.mdx`
-    config.module.rules = deepReplace(
-      config.module.rules,
-      (value, key) =>
-        key === 'test' &&
-        testMatches(value, 'button.stories.mdx') &&
-        !testMatches(value, 'foo.mdx'),
-      (value) => [...arrayify(value), /\-story.mdx$/]
-    );
-    config.module.rules = deepReplace(
-      config.module.rules,
-      (value, key) =>
-        key === 'exclude' &&
-        testMatches(value, 'button.stories.mdx') &&
-        !testMatches(value, 'foo.mdx'),
-      (value) => [...arrayify(value), /\-story.mdx$/]
     );
 
     config.module.rules.push(
