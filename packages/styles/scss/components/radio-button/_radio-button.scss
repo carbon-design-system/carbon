@@ -153,6 +153,50 @@ $radio-border-width: 1px !default;
     user-select: text;
   }
 
+  // invalid + warn
+  .#{$prefix}--radio-button-group--invalid
+    .#{$prefix}--radio-button
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    border-color: $support-error;
+  }
+
+  .#{$prefix}--checkbox__validation-msg {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .#{$prefix}--checkbox__invalid-icon {
+    margin: 0 rem(1px) 0 rem(3px);
+    fill: $support-error;
+  }
+
+  .#{$prefix}--checkbox__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--checkbox__invalid-icon--warning path:first-of-type {
+    fill: #000000;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--radio-button-group--warning
+    + .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+    margin-left: $spacing-03;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
   // Focus
 
   .#{$prefix}--radio-button:focus
