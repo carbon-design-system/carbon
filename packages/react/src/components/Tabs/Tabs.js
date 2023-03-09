@@ -20,6 +20,7 @@ import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
 import { keys, match, matches } from '../../internal/keyboard';
 import { usePressable } from './usePressable';
+import deprecate from '../../prop-types/deprecate';
 
 // Used to manage the overall state of the Tabs
 const TabsContext = React.createContext();
@@ -403,7 +404,11 @@ TabList.propTypes = {
   /**
    * Specify whether or not to use the light component variant
    */
-  light: PropTypes.bool,
+  light: deprecate(
+    PropTypes.bool,
+    'The `light` prop for `TabList` has ' +
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+  ),
 
   /**
    * Provide the props that describe the right overflow button

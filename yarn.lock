@@ -11695,6 +11695,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"class-prefix@workspace:examples/class-prefix":
+  version: 0.0.0-use.local
+  resolution: "class-prefix@workspace:examples/class-prefix"
+  dependencies:
+    "@carbon/react": ^1.24.0
+    "@types/react": ^18.0.0
+    "@types/react-dom": ^18.0.0
+    "@vitejs/plugin-react": 1.1.3
+    react: ^17.0.0
+    react-dom: ^17.0.0
+    sass: ^1.51.0
+    vite: ^2.9.5
+  languageName: unknown
+  linkType: soft
+
 "class-utils@npm:^0.3.5":
   version: 0.3.6
   resolution: "class-utils@npm:0.3.6"
@@ -18507,6 +18522,21 @@ fsevents@^1.2.7:
   checksum: 5c324d283552b1269cfc13a503aaaa172a280f914e5b81544f3803bc6f06a3b585fb79f66f7c771a2c052db7982c18bf92d001e3b47282e3abbbb4c4cc488d68
   languageName: node
   linkType: hard
+
+"id-prefix@workspace:examples/id-prefix":
+  version: 0.0.0-use.local
+  resolution: "id-prefix@workspace:examples/id-prefix"
+  dependencies:
+    "@carbon/react": ^1.24.0
+    "@types/react": ^18.0.0
+    "@types/react-dom": ^18.0.0
+    "@vitejs/plugin-react": 1.1.3
+    react: ^17.0.0
+    react-dom: ^17.0.0
+    sass: ^1.51.0
+    vite: ^2.9.5
+  languageName: unknown
+  linkType: soft
 
 "idb@npm:^6.1.4":
   version: 6.1.5
