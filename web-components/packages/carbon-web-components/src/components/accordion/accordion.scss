@@ -13,11 +13,13 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/utilities/convert' as *;
 @use '@carbon/styles/scss/components/accordion';
 
-:host(#{$prefix}-accordion) {
+:host(#{$prefix}-accordion),
+:host(#{$prefix}-accordion-skeleton) {
   @extend .#{$prefix}--accordion;
 }
 
-:host(#{$prefix}-accordion-item) {
+:host(#{$prefix}-accordion-item),
+:host(#{$prefix}-accordion-item-skeleton) {
   @extend .#{$prefix}--accordion__item;
 
   display: block;
@@ -35,6 +37,8 @@ $css--plex: true !default;
 
     ::slotted(p) {
       @include type-style('body-01');
+
+      margin: 0;
     }
   }
 
@@ -68,5 +72,15 @@ $css--plex: true !default;
 
   .#{$prefix}-ce--accordion__content--md {
     padding-right: 25%;
+  }
+}
+
+:host(#{$prefix}-accordion-skeleton),
+:host(#{$prefix}-accordion-item-skeleton) {
+  .#{$prefix}--accordion__heading {
+    cursor: default;
+    &:hover::before {
+      background: transparent;
+    }
   }
 }

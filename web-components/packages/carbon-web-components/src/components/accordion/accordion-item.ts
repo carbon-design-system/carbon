@@ -145,8 +145,8 @@ class BXAccordionItem extends FocusMixin(LitElement) {
   /**
    * The title text.
    */
-  @property({ attribute: 'title-text' })
-  titleText = '';
+  @property({ attribute: 'title' })
+  title = '';
 
   connectedCallback() {
     if (!this.hasAttribute('role')) {
@@ -168,7 +168,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
   render() {
     const {
       disabled,
-      titleText,
+      title,
       open,
       _currentBreakpoint: currentBreakpoint,
       _handleClickExpando: handleClickExpando,
@@ -196,7 +196,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
           class: `${prefix}--accordion__arrow`,
         })}
         <div part="title" class="${prefix}--accordion__title">
-          <slot name="title">${titleText}</slot>
+          <slot name="title">${title}</slot>
         </div>
       </button>
       <div id="content" part="content" class="${contentClasses}">
