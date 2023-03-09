@@ -164,6 +164,7 @@ $radio-border-width: 1px !default;
   .#{$prefix}--checkbox__validation-msg {
     display: flex;
     align-items: flex-end;
+    margin-top: $spacing-03;
   }
 
   .#{$prefix}--checkbox__invalid-icon {
@@ -179,6 +180,10 @@ $radio-border-width: 1px !default;
     fill: #000000;
   }
 
+  .#{$prefix}--checkbox__validation-msg .#{$prefix}--form__helper-text {
+    margin-top: 0;
+  }
+
   .#{$prefix}--radio-button-group--invalid
     + .#{$prefix}--checkbox__validation-msg
     .#{$prefix}--form-requirement,
@@ -188,6 +193,7 @@ $radio-border-width: 1px !default;
     display: block;
     overflow: visible;
     max-height: 100%;
+    margin-top: 0;
     margin-left: $spacing-03;
   }
 

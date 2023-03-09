@@ -78,7 +78,6 @@ export default {
 export const Default = () => {
   return (
     <RadioButtonGroup
-      id="test"
       legendText="Group label"
       name="radio-button-group"
       defaultSelected="radio-1">
@@ -108,7 +107,7 @@ export const Skeleton = () => {
 
 export const Playground = (args) => {
   return (
-    <RadioButtonGroup id="test" legendText="Radio Button group" {...args}>
+    <RadioButtonGroup legendText="Radio Button group" {...args}>
       <RadioButton
         labelText="Radio button label"
         value="radio-1"
