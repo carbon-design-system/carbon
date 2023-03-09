@@ -9,6 +9,7 @@ import './story.scss';
 
 import React from 'react';
 import { TrashCan, Save, Download } from '@carbon/icons-react';
+import { action } from '@storybook/addon-actions';
 import DataTable, {
   Table,
   TableBatchAction,
@@ -299,12 +300,25 @@ export const Playground = (args) => {
                   </TableBatchAction>
                 </TableBatchActions>
                 <TableToolbarContent>
-                  <TableToolbarSearch onChange={onInputChange} />
+                  <TableToolbarSearch
+                    onChange={(evt) => {
+                      action('TableToolbarSearch - onChange')(evt);
+                      onInputChange(evt);
+                    }}
+                  />
                   <TableToolbarMenu>
-                    <TableToolbarAction onClick={this.handleOnRowAdd}>
+                    <TableToolbarAction
+                      onClick={(evt) => {
+                        action('handleOnRowAdd')(evt);
+                        this.handleOnRowAdd();
+                      }}>
                       Add row
                     </TableToolbarAction>
-                    <TableToolbarAction onClick={this.handleOnHeaderAdd}>
+                    <TableToolbarAction
+                      onClick={(evt) => {
+                        action('handleOnHeaderAdd')(evt);
+                        this.handleOnHeaderAdd();
+                      }}>
                       Add header
                     </TableToolbarAction>
                   </TableToolbarMenu>
@@ -325,8 +339,13 @@ export const Playground = (args) => {
                 <TableBody>
                   {rows.map((row) => (
                     <React.Fragment key={row.id}>
-                      <TableExpandRow {...getRowProps({ row })}>
-                        <TableSelectRow {...getSelectionProps({ row })} />
+                      <TableExpandRow
+                        {...getRowProps({ row })}
+                        onClick={action('onClick')}>
+                        <TableSelectRow
+                          {...getSelectionProps({ row })}
+                          onChange={action('TableSelectRow - onChange')}
+                        />
                         {row.cells.map((cell) => (
                           <TableCell key={cell.id}>{cell.value}</TableCell>
                         ))}
