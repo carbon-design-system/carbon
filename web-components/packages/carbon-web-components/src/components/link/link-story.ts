@@ -98,10 +98,7 @@ export default {
     knobs: {
       'bx-link': () => ({
         disabled: boolean('Disabled (disabled)', false),
-        href: textNullable(
-          'Link href (href)',
-          'https://github.com/carbon-design-system/carbon-web-components'
-        ),
+        href: textNullable('Link href (href)', 'https://example.com/'),
         onClick: action('click'),
         size: select('Link size (size)', sizes, null),
       }),
