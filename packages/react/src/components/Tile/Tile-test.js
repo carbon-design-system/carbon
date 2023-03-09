@@ -59,7 +59,7 @@ describe('Tile', () => {
     it('does not invoke the click handler if ClickableTile is disabled', () => {
       const onClick = jest.fn();
       render(
-        <ClickableTile disabled href="https://www.carbondesignsystem.com">
+        <ClickableTile onClick={onClick} disabled href="https://www.carbondesignsystem.com">
           🚦
         </ClickableTile>
       );
