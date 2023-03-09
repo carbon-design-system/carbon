@@ -7,8 +7,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { classMap } from 'lit/directives/class-map.js';
 import { LitElement, html } from 'lit';
-import { customElement } from 'lit/decorators.js';
+import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import styles from './breadcrumb.scss';
 
@@ -19,6 +20,12 @@ import styles from './breadcrumb.scss';
  */
 @customElement(`${prefix}-breadcrumb`)
 class BXBreadcrumb extends LitElement {
+  /**
+   * Optional prop to omit the trailing slash for the breadcrumbs
+   */
+  @property({ type: Boolean, reflect: true, attribute: 'no-trailing-slash' })
+  noTrailingSlash = false;
+
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'nav');
@@ -27,9 +34,12 @@ class BXBreadcrumb extends LitElement {
   }
 
   render() {
+    const classes = classMap({
+      [`${prefix}--breadcrumb`]: true,
+      [`${prefix}--breadcrumb--no-trailing-slash`]: this.noTrailingSlash,
+    });
     return html`
-      <ol
-        class="${prefix}--breadcrumb ${prefix}--breadcrumb--no-trailing-slash">
+      <ol class="${classes}">
         <slot></slot>
       </ol>
     `;

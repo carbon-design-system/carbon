@@ -14,11 +14,13 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/breadcrumb';
 @import '../overflow-menu/overflow-menu';
 
-:host(#{$prefix}-breadcrumb) {
+:host(#{$prefix}-breadcrumb),
+:host(#{$prefix}-breadcrumb-skeleton) {
   @extend .#{$prefix}--breadcrumb;
 }
 
-:host(#{$prefix}-breadcrumb-item) {
+:host(#{$prefix}-breadcrumb-item),
+:host(#{$prefix}-breadcrumb-item-skeleton) {
   @extend .#{$prefix}--breadcrumb-item;
 }
 
@@ -66,7 +68,8 @@ $css--plex: true !default;
   fill: $link-primary-hover;
 }
 
-:host(#{$prefix}-breadcrumb-item:last-of-type)::after {
+:host(#{$prefix}-breadcrumb[no-trailing-slash])
+  ::slotted(#{$prefix}-breadcrumb-item:last-of-type)::after {
   content: '';
 }
 

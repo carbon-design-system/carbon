@@ -7,6 +7,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import BXLink from '../link/link';
@@ -19,6 +20,13 @@ import styles from './breadcrumb.scss';
  */
 @customElement(`${prefix}-breadcrumb-link`)
 class BXBreadcrumbLink extends BXLink {
+  render() {
+    return html`
+      ${this.href
+        ? super.render()
+        : html`<span class="${prefix}--link"><slot></slot></span>`}
+    `;
+  }
   static styles = styles;
 }
 

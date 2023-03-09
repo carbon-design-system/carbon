@@ -25,46 +25,97 @@ import '@carbon/web-components/es/components/breadcrumb/index.js';
 ### HTML
 
 ```html
-<cds-breadcrumb>
-  <cds-breadcrumb-item>
-    <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
-  </cds-breadcrumb-item>
-  <cds-breadcrumb-item>
-    <cds-breadcrumb-link href="/#">Breadcrumb 2</cds-breadcrumb-link>
-  </cds-breadcrumb-item>
-  <cds-breadcrumb-item>
-    <cds-breadcrumb-link href="/#" aria-current="page"
-      >Breadcrumb 3</cds-breadcrumb-link
-    >
-  </cds-breadcrumb-item>
-</cds-breadcrumb>
+  <cds-breadcrumb>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link >Breadcrumb 4</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+  </cds-breadcrumb>
 ```
 
 ### HTML (with overflow-menu)
 
 ```html
-<cds-breadcrumb>
-  <cds-breadcrumb-item>
-    <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
-  </cds-breadcrumb-item>
-  <cds-breadcrumb-item>
-    <cds-breadcrumb-link href="/#">Breadcrumb 2</cds-breadcrumb-link>
-  </cds-breadcrumb-item>
-  <cds-breadcrumb-item>
-    <cds-breadcrumb-overflow-menu>
-      <cds-overflow-menu-body>
-        <cds-overflow-menu-item>Option 1</cds-overflow-menu-item>
-        <cds-overflow-menu-item>Option 2</cds-overflow-menu-item>
-      </cds-overflow-menu-body>
-    </cds-breadcrumb-overflow-menu>
-  </cds-breadcrumb-item>
-  <cds-breadcrumb-item>
-    <cds-breadcrumb-link href="/#" aria-current="page"
-      >Breadcrumb 3</cds-breadcrumb-link
-    >
-  </cds-breadcrumb-item>
-</cds-breadcrumb>
+  <cds-breadcrumb>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="/#">Breadcrumb 2</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-overflow-menu>
+        <cds-overflow-menu-body>
+          <cds-overflow-menu-item>Breadcrumb 3</cds-overflow-menu-item>
+          <cds-overflow-menu-item>Breadcrumb 4</cds-overflow-menu-item>
+        </cds-overflow-menu-body>
+      </cds-breadcrumb-overflow-menu>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+    <cds-breadcrumb-link href="/#">Breadcrumb 5</cds-breadcrumb-link>
+      </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link>Breadcrumb 6</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+  </cds-breadcrumb>
 ```
+
+### HTML (skeleton)
+
+```html
+  <cds-breadcrumb-skeleton>
+    </cds-breadcrumb-skeleton>
+```
+
+### HTML (no-trailing-slash)
+
+```html
+  <cds-breadcrumb no-trailing-slash>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link >Breadcrumb 4</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+  </cds-breadcrumb>
+```
+
+### HTML (aria-current="page")
+
+```html
+  <cds-breadcrumb no-trailing-slash>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="/#">Breadcrumb 1</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="#">Breadcrumb 2</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="#">Breadcrumb 3</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+    <cds-breadcrumb-item>
+      <cds-breadcrumb-link href="/#" aria-current="page">Breadcrumb 4</cds-breadcrumb-link>
+    </cds-breadcrumb-item>
+  </cds-breadcrumb>
+```
+
+## `<cds-breadcrumb>` attributes, properties and events
+
+<Props of="cds-breadcrumb" />
 
 ## `<cds-breadcrumb-link>` attributes, properties and events
 
