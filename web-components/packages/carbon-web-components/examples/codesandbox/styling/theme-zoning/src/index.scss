@@ -34,19 +34,19 @@ footer {
     }
   }
 
-  bx-btn + bx-btn {
+  cds-btn + cds-btn {
     margin-left: 1rem;
   }
 }
 
-bx-btn,
-bx-header,
-bx-header-nav,
-bx-header-nav-item,
-bx-header-menu,
-bx-header-menu-item,
-bx-header-menu-button,
-bx-header-name {
+cds-btn,
+cds-header,
+cds-header-nav,
+cds-header-nav-item,
+cds-header-menu,
+cds-header-menu-item,
+cds-header-menu-button,
+cds-header-name {
   visibility: hidden;
 
   &:defined {
@@ -54,11 +54,11 @@ bx-header-name {
   }
 }
 
-bx-header {
+cds-header {
   position: relative;
 }
 
-.bx--content.bx-ce-demo-theme-zoning--ui-shell-content {
+.cds--content.cds-ce-demo-theme-zoning--ui-shell-content {
   background-color: var(--cds-ui-01, #f4f4f4);
   margin: 0;
   width: 100%;

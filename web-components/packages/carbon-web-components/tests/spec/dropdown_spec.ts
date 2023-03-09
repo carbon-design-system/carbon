@@ -17,21 +17,21 @@ import { Default } from '../../src/components/dropdown/dropdown-story';
 
 const template = (props?) =>
   Default({
-    'bx-dropdown': props,
+    'cds-dropdown': props,
   });
 
-describe('bx-dropdown', function () {
+describe('cds-dropdown', function () {
   const events = new EventManager();
 
   describe('Misc attributes', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-dropdown' as any)).toMatchSnapshot(
-        {
-          mode: 'shadow',
-        }
-      );
+      expect(
+        document.body.querySelector('cds-dropdown' as any)
+      ).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('should render with various attributes', async function () {
@@ -48,11 +48,11 @@ describe('bx-dropdown', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-dropdown' as any)).toMatchSnapshot(
-        {
-          mode: 'shadow',
-        }
-      );
+      expect(
+        document.body.querySelector('cds-dropdown' as any)
+      ).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 
@@ -63,15 +63,15 @@ describe('bx-dropdown', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-dropdown')!;
-      itemNode = elem.querySelector('bx-dropdown-item')!;
+      elem = document.body.querySelector('cds-dropdown')!;
+      itemNode = elem.querySelector('cds-dropdown-item')!;
     });
 
     it('should add "open" stateful modifier class', async function () {
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
 
     it('should remove "open" stateful modifier class (closed default state)', async function () {
@@ -80,7 +80,7 @@ describe('bx-dropdown', function () {
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should always close dropdown when clicking document', async function () {
@@ -89,7 +89,7 @@ describe('bx-dropdown', function () {
       elem.dispatchEvent(new CustomEvent('focusout'));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should close dropdown when clicking on an item', async function () {
@@ -98,29 +98,29 @@ describe('bx-dropdown', function () {
       (itemNode as HTMLElement).click();
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should provide a way to cancel opening', async function () {
-      events.on(elem, 'bx-dropdown-beingtoggled', (event: CustomEvent) => {
+      events.on(elem, 'cds-dropdown-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should provide a way to cancel closing', async function () {
       (elem as BXDropdown).open = true;
       await Promise.resolve();
-      events.on(elem, 'bx-dropdown-beingtoggled', (event: CustomEvent) => {
+      events.on(elem, 'cds-dropdown-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
   });
 
@@ -131,14 +131,14 @@ describe('bx-dropdown', function () {
     beforeEach(async function () {
       render(template({ open: true, value: 'all' }), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-dropdown')!;
-      itemNodes = elem.querySelectorAll('bx-dropdown-item');
+      elem = document.body.querySelector('cds-dropdown')!;
+      itemNodes = elem.querySelectorAll('cds-dropdown-item');
     });
 
     it('should add/remove "selected" modifier class', async function () {
       (
         document.body.querySelector(
-          'bx-dropdown-item[value="staging"]'
+          'cds-dropdown-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
@@ -152,19 +152,19 @@ describe('bx-dropdown', function () {
     it('should update text', async function () {
       (
         document.body.querySelector(
-          'bx-dropdown-item[value="staging"]'
+          'cds-dropdown-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
       expect(
-        elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent
+        elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
       ).toBe('Option 3');
     });
 
     it('should update value', async function () {
       (
         document.body.querySelector(
-          'bx-dropdown-item[value="staging"]'
+          'cds-dropdown-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
@@ -173,8 +173,8 @@ describe('bx-dropdown', function () {
 
     it('should provide a way to switch item with a value', async function () {
       (elem as BXDropdown).value = 'staging';
-      await Promise.resolve(); // Update cycle for `<bx-dropdown>`
-      await Promise.resolve(); // Update cycle for `<bx-dropdown-item>`
+      await Promise.resolve(); // Update cycle for `<cds-dropdown>`
+      await Promise.resolve(); // Update cycle for `<cds-dropdown-item>`
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
       expect(itemNodes[2].hasAttribute('selected')).toBe(true);
@@ -183,15 +183,15 @@ describe('bx-dropdown', function () {
     });
 
     it('should provide a way to cancel switching item', async function () {
-      events.on(elem, 'bx-dropdown-beingselected', (event: CustomEvent) => {
+      events.on(elem, 'cds-dropdown-beingselected', (event: CustomEvent) => {
         expect(event.detail.item).toBe(
-          document.body.querySelector('bx-dropdown-item[value="staging"]')
+          document.body.querySelector('cds-dropdown-item[value="staging"]')
         );
         event.preventDefault();
       });
       (
         document.body.querySelector(
-          'bx-dropdown-item[value="staging"]'
+          'cds-dropdown-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
@@ -201,12 +201,12 @@ describe('bx-dropdown', function () {
       expect(itemNodes[3].hasAttribute('selected')).toBe(false);
       expect(itemNodes[4].hasAttribute('selected')).toBe(false);
       expect(
-        elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent
+        elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
       ).toBe('Option 1');
     });
 
     it('should reflect the added child to the selection', async function () {
-      const itemNode = document.createElement('bx-dropdown-item');
+      const itemNode = document.createElement('cds-dropdown-item');
       itemNode.textContent = 'text-added';
       (itemNode as unknown as BXDropdownItem).value = 'value-added';
       elem.appendChild(itemNode);
@@ -214,7 +214,7 @@ describe('bx-dropdown', function () {
       await delay(0); // Workaround for IE MutationObserver scheduling bug for moving elements to slot
       try {
         expect(
-          elem.shadowRoot!.querySelector('.bx--list-box__label')!.textContent
+          elem.shadowRoot!.querySelector('.cds--list-box__label')!.textContent
         ).toBe('text-added');
       } finally {
         itemNode.parentNode!.removeChild(itemNode);
@@ -228,7 +228,7 @@ describe('bx-dropdown', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-dropdown')!;
+      elem = document.body.querySelector('cds-dropdown')!;
     });
 
     it('should support checking if required value exists', async function () {

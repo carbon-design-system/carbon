@@ -1,4 +1,4 @@
-# `bx-search`
+# `cds-search`
 
 ## `Misc attributes`
 
@@ -6,7 +6,7 @@
 
 ```
 <label
-  class="bx--label"
+  class="cds--label"
   for="input"
   part="label-text"
 >
@@ -14,14 +14,14 @@
   </slot>
 </label>
 <input
-  class="bx--search-input"
+  class="cds--search-input"
   id="input"
   part="input"
   role="searchbox"
 >
 <button
   aria-label=""
-  class="bx--search-close bx--search-close--hidden"
+  class="cds--search-close cds--search-close--hidden"
   part="close-button"
   type="button"
 >
@@ -33,7 +33,7 @@
 
 ```
 <label
-  class="bx--label"
+  class="cds--label"
   for="input"
   part="label-text"
 >
@@ -42,7 +42,7 @@
   </slot>
 </label>
 <input
-  class="bx--search-input"
+  class="cds--search-input"
   disabled=""
   id="input"
   name="name-foo"
@@ -54,7 +54,7 @@
 >
 <button
   aria-label="close-button-assistive-text-foo"
-  class="bx--search-close"
+  class="cds--search-close"
   part="close-button"
   type="button"
 >

@@ -15,24 +15,24 @@ LICENSE file in the root directory of this source tree.
         href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
   <style>
     /* Suppress custom element until styles are loaded */
-    bx-tabs:not(:defined) {
+    cds-tabs:not(:defined) {
       display: none;
     }
   </style>
   <script type="module" src="src/index.js"></script>
 </head>
 <body>
-  <bx-tabs
+  <cds-tabs
     trigger-content="Select an item"
     value="staging"
   >
-    <bx-tab id="tab-all" target="panel-all" value="all">Option 1</bx-tab>
-    <bx-tab id="tab-cloudFoundry" target="panel-cloudFoundry" disabled value="cloudFoundry">Option 2</bx-tab>
-    <bx-tab id="tab-staging" target="panel-staging" value="staging">Option 3</bx-tab>
-    <bx-tab id="tab-dea" target="panel-dea" value="dea">Option 4</bx-tab>
-    <bx-tab id="tab-router" target="panel-router" value="router">Option 5</bx-tab>
-  </bx-tabs>
-  <div class="bx-ce-demo-devenv--tab-panels">
+    <cds-tab id="tab-all" target="panel-all" value="all">Option 1</cds-tab>
+    <cds-tab id="tab-cloudFoundry" target="panel-cloudFoundry" disabled value="cloudFoundry">Option 2</cds-tab>
+    <cds-tab id="tab-staging" target="panel-staging" value="staging">Option 3</cds-tab>
+    <cds-tab id="tab-dea" target="panel-dea" value="dea">Option 4</cds-tab>
+    <cds-tab id="tab-router" target="panel-router" value="router">Option 5</cds-tab>
+  </cds-tabs>
+  <div class="cds-ce-demo-devenv--tab-panels">
     <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
       <h4>Content for option 1</h4>
       <p>

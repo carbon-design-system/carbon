@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -25,15 +25,15 @@ const pseudoElementNames = [
 const rePseudoElements = new RegExp(`::?(${pseudoElementNames.join('|')})`);
 
 /**
- * Below Sass code yields `:hover:host(bx-foo) svg` and `:host(bx-foo):hover svg` selectors.
- * We want `:host(bx-foo:hover)` instead.
+ * Below Sass code yields `:hover:host(cds-foo) svg` and `:host(cds-foo):hover svg` selectors.
+ * We want `:host(cds-foo:hover)` instead.
  *
- * Though generating `:host(bx-foo:hover)` from below Sass code is not what Sass language intends,
- * `:hover:host(bx-foo) svg` or `:host(bx-foo):hover svg` is not meangful in real world.
- * Therefore this PostCSS plugin converts `:hover:host(bx-foo) svg` and `:host(bx-foo):hover svg` to `:host(bx-foo:hover)`.
+ * Though generating `:host(cds-foo:hover)` from below Sass code is not what Sass language intends,
+ * `:hover:host(cds-foo) svg` or `:host(cds-foo):hover svg` is not meangful in real world.
+ * Therefore this PostCSS plugin converts `:hover:host(cds-foo) svg` and `:host(cds-foo):hover svg` to `:host(cds-foo:hover)`.
  *
  * ```scss
- * .bx--foo {
+ * .cds--foo {
  *   &:hover {
  *     svg {
  *       fill: white;
@@ -41,11 +41,11 @@ const rePseudoElements = new RegExp(`::?(${pseudoElementNames.join('|')})`);
  *   }
  * }
  *
- * :host(bx-foo) {
- *   @extend .bx--foo;
+ * :host(cds-foo) {
+ *   @extend .cds--foo;
  * }
  *
- * :host(bx-foo) {
+ * :host(cds-foo) {
  *   &:hover {
  *     svg {
  *       fill: white;

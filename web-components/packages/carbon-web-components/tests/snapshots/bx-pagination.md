@@ -1,33 +1,33 @@
-# `bx-pagination`
+# `cds-pagination`
 
 ## `Misc attributes`
 
-#### `should render <bx-pagination> with minimum attributes`
+#### `should render <cds-pagination> with minimum attributes`
 
 ```
-<div class="bx--pagination__left">
+<div class="cds--pagination__left">
   <slot name="page-sizes-select">
   </slot>
-  <div class="bx-ce--pagination__divider">
+  <div class="cds-ce--pagination__divider">
   </div>
-  <span class="bx--pagination__items-count bx--pagination__text">
+  <span class="cds--pagination__items-count cds--pagination__text">
     Item 1–10
   </span>
 </div>
-<div class="bx-ce--pagination__divider">
+<div class="cds-ce--pagination__divider">
 </div>
-<div class="bx--pagination__right">
+<div class="cds--pagination__right">
   <slot>
   </slot>
-  <div class="bx--pagination__control-buttons">
+  <div class="cds--pagination__control-buttons">
     <button
-      class="bx--pagination__button bx--pagination__button--backward bx--pagination__button--no-index"
+      class="cds--pagination__button cds--pagination__button--backward cds--pagination__button--no-index"
       disabled=""
       title="Previous page"
     >
     </button>
     <button
-      class="bx--pagination__button bx--pagination__button--forward"
+      class="cds--pagination__button cds--pagination__button--forward"
       title="Next page"
     >
     </button>
@@ -36,31 +36,31 @@
 
 ```
 
-#### `should render <bx-pagination> with various attributes`
+#### `should render <cds-pagination> with various attributes`
 
 ```
-<div class="bx--pagination__left">
+<div class="cds--pagination__left">
   <slot name="page-sizes-select">
   </slot>
-  <div class="bx-ce--pagination__divider">
+  <div class="cds-ce--pagination__divider">
   </div>
-  <span class="bx--pagination__items-count bx--pagination__text">
+  <span class="cds--pagination__items-count cds--pagination__text">
     11–30 of 200 items
   </span>
 </div>
-<div class="bx-ce--pagination__divider">
+<div class="cds-ce--pagination__divider">
 </div>
-<div class="bx--pagination__right">
+<div class="cds--pagination__right">
   <slot>
   </slot>
-  <div class="bx--pagination__control-buttons">
+  <div class="cds--pagination__control-buttons">
     <button
-      class="bx--pagination__button bx--pagination__button--backward"
+      class="cds--pagination__button cds--pagination__button--backward"
       title="Previous page"
     >
     </button>
     <button
-      class="bx--pagination__button bx--pagination__button--forward"
+      class="cds--pagination__button cds--pagination__button--forward"
       title="Next page"
     >
     </button>
@@ -69,20 +69,20 @@
 
 ```
 
-#### `should render <bx-page-sizes-select> with minimum attributes`
+#### `should render <cds-page-sizes-select> with minimum attributes`
 
 ```
 <label
-  class="bx--pagination__text"
+  class="cds--pagination__text"
   for="select"
 >
   <slot name="label-text">
     Items per page:
   </slot>
 </label>
-<div class="bx--select__item-count">
+<div class="cds--select__item-count">
   <select
-    class="bx--select-input"
+    class="cds--select-input"
     id="select"
   >
     <option value="10">
@@ -103,17 +103,17 @@
 
 ```
 
-#### `should render <bx-pages-select> with minimum attributes`
+#### `should render <cds-pages-select> with minimum attributes`
 
 ```
-<div class="bx--select__page-number">
+<div class="cds--select__page-number">
   <label
-    class="bx--label bx--visually-hidden"
+    class="cds--label cds--visually-hidden"
     for="select"
   >
     Page number, of 10 pages
   </label>
-  <select class="bx--select-input">
+  <select class="cds--select-input">
     <option
       selected=""
       value="0"
@@ -149,7 +149,7 @@
     </option>
   </select>
 </div>
-<span class="bx--pagination__text">
+<span class="cds--pagination__text">
   of 10 pages
 </span>
 

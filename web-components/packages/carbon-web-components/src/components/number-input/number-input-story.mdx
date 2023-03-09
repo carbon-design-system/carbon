@@ -28,7 +28,7 @@ import '@carbon/web-components/es/components/number-input/index.js';
 ### HTML
 
 ```html
-<bx-number-input value="0" min="0" max="100">
+<cds-number-input value="0" min="0" max="100">
   <span slot="label-text">Label text</span>
   <span slot="helper-text">Optional helper text</span>
   <span slot="validity-message">Something isn't right</span>
@@ -36,21 +36,21 @@ import '@carbon/web-components/es/components/number-input/index.js';
     >Try a lower value, something less than 100</span
   >
   <span slot="validity-message-min">Value must be larger than 0</span>
-</bx-number-input>
+</cds-number-input>
 ```
 
 ## Form item
 
 If the input is part of a form, make sure to import and wrap the input with
-`<bx-form-item>`
+`<cds-form-item>`
 
 ```javascript
 import '@carbon/web-components/es/components/form/index.js';
 ```
 
 ```html
-<bx-form-item>
-  <bx-number-input value="0" min="0" max="100">
+<cds-form-item>
+  <cds-number-input value="0" min="0" max="100">
     <span slot="label-text">Label text</span>
     <span slot="helper-text">Optional helper text</span>
     <span slot="validity-message">Something isn't right</span>
@@ -58,22 +58,22 @@ import '@carbon/web-components/es/components/form/index.js';
       >Try a lower value, something less than 100</span
     >
     <span slot="validity-message-min">Value must be larger than 0</span>
-  </bx-number-input>
-</bx-form-item>
+  </cds-number-input>
+</cds-form-item>
 ```
 
 ## Skeleton
 
-For the skeleton variation, utilize `<bx-number-input-skeleton>`.
+For the skeleton variation, utilize `<cds-number-input-skeleton>`.
 
 ```html
-<bx-number-input-skeleton></bx-number-input-skeleton>
+<cds-number-input-skeleton></cds-number-input-skeleton>
 ```
 
-## `<bx-number-input>` attributes and properties
+## `<cds-number-input>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-number-input mobile>`) and `false` means not setting the attribute (e.g.
-`<bx-number-input>` without `mobile` attribute).
+`<cds-number-input mobile>`) and `false` means not setting the attribute (e.g.
+`<cds-number-input>` without `mobile` attribute).
 
-<Props of="bx-number-input" />
+<Props of="cds-number-input" />

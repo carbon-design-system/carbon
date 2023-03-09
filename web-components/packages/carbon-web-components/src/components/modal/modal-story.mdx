@@ -31,22 +31,22 @@ import '@carbon/web-components/es/components/button/index.js';
 ### HTML
 
 ```html
-<bx-btn id="modal-example-button"> Open Modal </bx-btn>
+<cds-btn id="modal-example-button"> Open Modal </cds-btn>
 
-<bx-modal id="modal-example">
-  <bx-modal-header>
-    <bx-modal-close-button></bx-modal-close-button>
-    <bx-modal-label>Label (Optional)</bx-modal-label>
-    <bx-modal-heading>Modal Title</bx-modal-heading>
-  </bx-modal-header>
-  <bx-modal-body><p>Modal text description</p></bx-modal-body>
-  <bx-modal-footer>
-    <bx-modal-footer-button kind="secondary" data-modal-close
-      >Cancel</bx-modal-footer-button
+<cds-modal id="modal-example">
+  <cds-modal-header>
+    <cds-modal-close-button></cds-modal-close-button>
+    <cds-modal-label>Label (Optional)</cds-modal-label>
+    <cds-modal-heading>Modal Title</cds-modal-heading>
+  </cds-modal-header>
+  <cds-modal-body><p>Modal text description</p></cds-modal-body>
+  <cds-modal-footer>
+    <cds-modal-footer-button kind="secondary" data-modal-close
+      >Cancel</cds-modal-footer-button
     >
-    <bx-modal-footer-button kind="primary">Save</bx-modal-footer-button>
-  </bx-modal-footer>
-</bx-modal>
+    <cds-modal-footer-button kind="primary">Save</cds-modal-footer-button>
+  </cds-modal-footer>
+</cds-modal>
 
 <script type="text/javascript">
   document
@@ -59,34 +59,34 @@ import '@carbon/web-components/es/components/button/index.js';
 
 ## Focus management
 
-`<bx-modal>` puts focus on one of the following elements (in priority order)
+`<cds-modal>` puts focus on one of the following elements (in priority order)
 once it gets open:
 
 1. An programmatic-focusable element with `data-modal-primary-focus` attribute
 2. The primary button in modal footer
 3. The first sequential-focusable child element
 
-`<bx-modal>` enables "focus-wrapping" behavior after then. It means that hitting
-tab key at the last sequential-focusable element in `<bx-modal>` puts focus on
+`<cds-modal>` enables "focus-wrapping" behavior after then. It means that hitting
+tab key at the last sequential-focusable element in `<cds-modal>` puts focus on
 the first sequential-focusable element, and hitting Shift-tab key at the first
-sequential-focusable element in `<bx-modal>` puts focus on the last
+sequential-focusable element in `<cds-modal>` puts focus on the last
 sequential-focusable element.
 
-Once `<bx-modal>` gets closed, it puts focus on the last focused element before
+Once `<cds-modal>` gets closed, it puts focus on the last focused element before
 it got open, typically the launcher button.
 
-## `<bx-modal>` attributes and properties
+## `<cds-modal>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-modal open>`) and `false` means not setting the attribute (e.g.
-`<bx-modal>` without `open` attribute).
+`<cds-modal open>`) and `false` means not setting the attribute (e.g.
+`<cds-modal>` without `open` attribute).
 
-<Props of="bx-modal" />
+<Props of="cds-modal" />
 
-## `<bx-modal-footer-button>` attributes and properties
+## `<cds-modal-footer-button>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-modal-footer-button disabled>`) and `false` means not setting the attribute
-(e.g. `<bx-modal-footer-button>` without `disabled` attribute).
+`<cds-modal-footer-button disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-modal-footer-button>` without `disabled` attribute).
 
-<Props of="bx-modal-footer-button" />
+<Props of="cds-modal-footer-button" />

@@ -14,10 +14,10 @@ import { Default } from '../../src/components/accordion/accordion-story';
 
 const template = (props?) =>
   Default({
-    'bx-accordion': props,
+    'cds-accordion': props,
   });
 
-describe('bx-accordion', function () {
+describe('cds-accordion', function () {
   describe('Toggling', function () {
     let item: BXAccordionItem | null;
     const events = new EventManager();
@@ -25,7 +25,7 @@ describe('bx-accordion', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      item = document.body.querySelector('bx-accordion-item');
+      item = document.body.querySelector('cds-accordion-item');
     });
 
     it('Should open and close the item', async function () {
@@ -41,7 +41,7 @@ describe('bx-accordion', function () {
     it('Should have ESC key close the item', async function () {
       render(template({ open: true }), document.body);
       await Promise.resolve();
-      item = document.body.querySelector('bx-accordion-item');
+      item = document.body.querySelector('cds-accordion-item');
 
       const event = new CustomEvent('keydown', {
         bubbles: true,
@@ -57,7 +57,7 @@ describe('bx-accordion', function () {
     it('Should have legacy ESC key close the item', async function () {
       render(template({ open: true }), document.body);
       await Promise.resolve();
-      item = document.body.querySelector('bx-accordion-item');
+      item = document.body.querySelector('cds-accordion-item');
 
       const event = new CustomEvent('keydown', {
         bubbles: true,
@@ -70,25 +70,25 @@ describe('bx-accordion', function () {
       expect(item!.open).toBe(false);
     });
 
-    it('Should fire bx-accordion-item-beingtoggled/bx-accordion-item-toggled events upon opening', async function () {
+    it('Should fire cds-accordion-item-beingtoggled/cds-accordion-item-toggled events upon opening', async function () {
       const spyBeforeToggle = jasmine.createSpy('before toggle');
       const spyAfterToggle = jasmine.createSpy('after toggle');
-      events.on(item!, 'bx-accordion-item-beingtoggled', spyBeforeToggle);
-      events.on(item!, 'bx-accordion-item-toggled', spyAfterToggle);
+      events.on(item!, 'cds-accordion-item-beingtoggled', spyBeforeToggle);
+      events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
       item!.shadowRoot!.querySelector('button')!.click();
       await Promise.resolve();
       expect(spyBeforeToggle).toHaveBeenCalled();
       expect(spyAfterToggle).toHaveBeenCalled();
     });
 
-    it('Should fire bx-accordion-item-beingtoggled/bx-accordion-item-toggled events upon closing', async function () {
+    it('Should fire cds-accordion-item-beingtoggled/cds-accordion-item-toggled events upon closing', async function () {
       render(template({ open: true }), document.body);
       await Promise.resolve();
-      item = document.body.querySelector('bx-accordion-item');
+      item = document.body.querySelector('cds-accordion-item');
       const spyBeforeToggle = jasmine.createSpy('before toggle');
       const spyAfterToggle = jasmine.createSpy('after toggle');
-      events.on(item!, 'bx-accordion-item-beingtoggled', spyBeforeToggle);
-      events.on(item!, 'bx-accordion-item-toggled', spyAfterToggle);
+      events.on(item!, 'cds-accordion-item-beingtoggled', spyBeforeToggle);
+      events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
       const event = new CustomEvent('keydown', {
         bubbles: true,
         composed: true,
@@ -103,10 +103,10 @@ describe('bx-accordion', function () {
 
     it('Should support preventing modal from being opened upon user gesture', async function () {
       const spyAfterToggle = jasmine.createSpy('after toggle');
-      events.on(item!, 'bx-accordion-item-beingtoggled', (event) => {
+      events.on(item!, 'cds-accordion-item-beingtoggled', (event) => {
         event.preventDefault();
       });
-      events.on(item!, 'bx-accordion-item-toggled', spyAfterToggle);
+      events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
       item!.shadowRoot!.querySelector('button')!.click();
       await Promise.resolve();
       expect(spyAfterToggle).not.toHaveBeenCalled();
@@ -115,12 +115,12 @@ describe('bx-accordion', function () {
     it('Should support preventing modal from being closed upon user gesture', async function () {
       render(template({ open: true }), document.body);
       await Promise.resolve();
-      item = document.body.querySelector('bx-accordion-item');
+      item = document.body.querySelector('cds-accordion-item');
       const spyAfterToggle = jasmine.createSpy('after toggle');
-      events.on(item!, 'bx-accordion-item-beingtoggled', (event) => {
+      events.on(item!, 'cds-accordion-item-beingtoggled', (event) => {
         event.preventDefault();
       });
-      events.on(item!, 'bx-accordion-item-toggled', spyAfterToggle);
+      events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
       const event = new CustomEvent('keydown', {
         bubbles: true,
         composed: true,

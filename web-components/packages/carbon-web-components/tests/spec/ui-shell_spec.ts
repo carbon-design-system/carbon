@@ -44,69 +44,70 @@ const headerMenuButtonTemplate = (props?) => {
     usageMode,
   } = props ?? {};
   return html`
-    <bx-header-menu-button
+    <cds-header-menu-button
       ?active="${ifDefined(active)}"
       button-label-active="${ifDefined(buttonLabelActive)}"
       button-label-inactive="${ifDefined(buttonLabelInactive)}"
       collapse-mode="${ifDefined(collapseMode)}"
       ?disabled="${disabled}"
       usage-mode="${ifDefined(usageMode)}">
-    </bx-header-menu-button>
+    </cds-header-menu-button>
   `;
 };
 
 const headerMenuTemplate = (props?) => {
   const { expanded, menuLabel, triggerContent } = props ?? {};
   return html`
-    <bx-header-menu
+    <cds-header-menu
       ?expanded="${expanded}"
       menu-label="${ifDefined(menuLabel)}"
       trigger-content="${ifDefined(triggerContent)}">
-    </bx-header-menu>
+    </cds-header-menu>
   `;
 };
 
 const headerNameTemplate = (props?) => {
   const { href, prefix } = props ?? {};
   return html`
-    <bx-header-name
+    <cds-header-name
       href="${ifDefined(href)}"
-      prefix="${ifDefined(prefix)}"></bx-header-name>
+      prefix="${ifDefined(prefix)}"></cds-header-name>
   `;
 };
 
 const headerNavTemplate = (props?) => {
   const { menuBarLabel } = props ?? {};
   return html`
-    <bx-header-nav menu-bar-label="${ifDefined(menuBarLabel)}"></bx-header-nav>
+    <cds-header-nav
+      menu-bar-label="${ifDefined(menuBarLabel)}"></cds-header-nav>
   `;
 };
 
 const headerNavItemTemplate = (props?) => {
   const { href } = props ?? {};
   return html`
-    <bx-header-nav-item href="${ifDefined(href)}"></bx-header-nav-item>
+    <cds-header-nav-item href="${ifDefined(href)}"></cds-header-nav-item>
   `;
 };
 
 const sideNavTemplate = (props?) => {
   const { collapseMode, expanded, usageMode, children } = props ?? {};
   return html`
-    <bx-header-menu-button></bx-header-menu-button>
-    <bx-side-nav
+    <cds-header-menu-button></cds-header-menu-button>
+    <cds-side-nav
       collapse-mode="${ifDefined(collapseMode)}"
       ?expanded="${expanded}"
       usage-mode="${ifDefined(usageMode)}">
       ${children}
-    </bx-side-nav>
+    </cds-side-nav>
   `;
 };
 
 const sideNavLinkTemplate = (props?) => {
   const { active, href, children } = props ?? {};
   return html`
-    <bx-side-nav-link ?active="${active}" href="${ifDefined(href)}"
-      >${children}</bx-side-nav-link
+    <cds-side-nav-link ?active="${active}" href="${ifDefined(href)}"
+      >${children}</cds-side-nav-link
     >
   `;
 };
@@ -114,38 +115,38 @@ const sideNavLinkTemplate = (props?) => {
 const sideNavMenuTemplate = (props?) => {
   const { active, expanded, forceCollapsed, title, children } = props ?? {};
   return html`
-    <bx-side-nav-menu
+    <cds-side-nav-menu
       ?active="${active}"
       ?expanded="${expanded}"
       ?force-collapsed="${forceCollapsed}"
       title="${ifDefined(title)}">
       ${children}
-    </bx-side-nav-menu>
+    </cds-side-nav-menu>
   `;
 };
 
 const sideNavMenuItemTemplate = (props?) => {
   const { active, href } = props ?? {};
   return html`
-    <bx-side-nav-menu>
-      <bx-side-nav-menu-item
+    <cds-side-nav-menu>
+      <cds-side-nav-menu-item
         ?active="${active}"
-        href="${ifDefined(href)}"></bx-side-nav-menu-item>
-    </bx-side-nav-menu>
+        href="${ifDefined(href)}"></cds-side-nav-menu-item>
+    </cds-side-nav-menu>
   `;
 };
 
 describe('ui-shell', function () {
   const events = new EventManager();
 
-  describe('bx-header-menu-button', function () {
+  describe('cds-header-menu-button', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(headerMenuButtonTemplate(), document.body);
         await Promise.resolve();
         // @ts-ignore
         expect(
-          document.body.querySelector('bx-header-menu-button')
+          document.body.querySelector('cds-header-menu-button')
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -162,7 +163,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-menu-button' as any)
+          document.body.querySelector('cds-header-menu-button' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -180,31 +181,31 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-menu-button' as any)
+          document.body.querySelector('cds-header-menu-button' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
     describe('Handling user interaction', function () {
-      it('should fire bx-header-menu-button-toggled event upon clicking the button', async function () {
+      it('should fire cds-header-menu-button-toggled event upon clicking the button', async function () {
         render(headerMenuButtonTemplate(), document.body);
         await Promise.resolve();
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        const button = document.body.querySelector('bx-header-menu-button');
-        events.on(button!, 'bx-header-menu-button-toggled', spyAfterToggle);
+        const button = document.body.querySelector('cds-header-menu-button');
+        events.on(button!, 'cds-header-menu-button-toggled', spyAfterToggle);
         button!.shadowRoot!.querySelector('button')!.click();
         expect(spyAfterToggle).toHaveBeenCalled();
       });
     });
   });
 
-  describe('bx-header-menu', function () {
+  describe('cds-header-menu', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(headerMenuTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-menu' as any)
+          document.body.querySelector('cds-header-menu' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
@@ -221,7 +222,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-menu' as any)
+          document.body.querySelector('cds-header-menu' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
@@ -232,7 +233,7 @@ describe('ui-shell', function () {
       it('should toggle the expanded state upon clicking the button', async function () {
         render(headerMenuTemplate(), document.body);
         await Promise.resolve();
-        const menu = document.body.querySelector('bx-header-menu');
+        const menu = document.body.querySelector('cds-header-menu');
         menu!.shadowRoot!.querySelector('a')!.click();
         expect((menu as BXHeaderMenu).expanded).toBe(true);
         menu!.shadowRoot!.querySelector('a')!.click();
@@ -242,7 +243,7 @@ describe('ui-shell', function () {
       it('should collapse upon hitting ESC key', async function () {
         render(headerMenuTemplate({ expanded: true }), document.body);
         await Promise.resolve();
-        const menu = document.body.querySelector('bx-header-menu');
+        const menu = document.body.querySelector('cds-header-menu');
         const trigger = menu!.shadowRoot!.querySelector('a');
         spyOn(trigger!, 'focus');
         trigger!.dispatchEvent(
@@ -257,7 +258,7 @@ describe('ui-shell', function () {
       it('should collapse upon losing focus', async function () {
         render(headerMenuTemplate({ expanded: true }), document.body);
         await Promise.resolve();
-        const menu = document.body.querySelector('bx-header-menu');
+        const menu = document.body.querySelector('cds-header-menu');
         (menu as HTMLElement).dispatchEvent(
           new CustomEvent('focusout', { bubbles: true })
         );
@@ -266,13 +267,13 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-header-name', function () {
+  describe('cds-header-name', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(headerNameTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-name' as any)
+          document.body.querySelector('cds-header-name' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
@@ -290,7 +291,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-name' as any)
+          document.body.querySelector('cds-header-name' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
@@ -298,13 +299,13 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-header-nav', function () {
+  describe('cds-header-nav', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(headerNavTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-nav' as any)
+          document.body.querySelector('cds-header-nav' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
@@ -319,7 +320,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-nav' as any)
+          document.body.querySelector('cds-header-nav' as any)
         ).toMatchSnapshot({
           mode: 'shadow',
         });
@@ -327,13 +328,13 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-header-nav-item', function () {
+  describe('cds-header-nav-item', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(headerNavItemTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-nav-item' as any)
+          document.body.querySelector('cds-header-nav-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -346,19 +347,19 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-header-nav-item' as any)
+          document.body.querySelector('cds-header-nav-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
   });
 
-  describe('bx-side-nav-link', function () {
+  describe('cds-side-nav-link', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(sideNavLinkTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-side-nav-link' as any)
+          document.body.querySelector('cds-side-nav-link' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -374,24 +375,24 @@ describe('ui-shell', function () {
         await Promise.resolve(); // First update cycle
         await Promise.resolve(); // Update cycle upon `slotchange` event
         expect(
-          document.body.querySelector('bx-side-nav-link' as any)
+          document.body.querySelector('cds-side-nav-link' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
   });
 
-  describe('bx-side-nav', function () {
+  describe('cds-side-nav', function () {
     describe('Handling events', function () {
       it('should let child side nav menu collapse if this side nav is collapsed', async function () {
         render(
           sideNavTemplate({
-            children: html` <bx-side-nav-menu></bx-side-nav-menu> `,
+            children: html` <cds-side-nav-menu></cds-side-nav-menu> `,
           }),
           document.body
         );
         await Promise.resolve();
-        const nav = document.body.querySelector('bx-side-nav');
-        const menu = document.body.querySelector('bx-side-nav-menu');
+        const nav = document.body.querySelector('cds-side-nav');
+        const menu = document.body.querySelector('cds-side-nav-menu');
         expect((menu as BXSideNavMenu).forceCollapsed).toBe(true);
         nav!.dispatchEvent(new CustomEvent('mouseover', { bubbles: true }));
         await Promise.resolve();
@@ -404,17 +405,19 @@ describe('ui-shell', function () {
       it('should toggle expand state upon upon clicking on header menu button', async function () {
         render(sideNavTemplate(), document.body);
         await Promise.resolve();
-        const nav = document.body.querySelector('bx-side-nav');
-        const menuButton = document.body.querySelector('bx-header-menu-button');
+        const nav = document.body.querySelector('cds-side-nav');
+        const menuButton = document.body.querySelector(
+          'cds-header-menu-button'
+        );
         menuButton!.dispatchEvent(
-          new CustomEvent('bx-header-menu-button-toggled', {
+          new CustomEvent('cds-header-menu-button-toggled', {
             bubbles: true,
             detail: { active: true },
           })
         );
         expect((nav as BXSideNav).expanded).toBe(true);
         menuButton!.dispatchEvent(
-          new CustomEvent('bx-header-menu-button-toggled', {
+          new CustomEvent('cds-header-menu-button-toggled', {
             bubbles: true,
             detail: { active: false },
           })
@@ -433,7 +436,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        const menuButton = document.body.querySelector('bx-header-menu-button');
+        const menuButton = document.body.querySelector(
+          'cds-header-menu-button'
+        );
         expect((menuButton as BXSideNavMenuButton).collapseMode).toBe(
           SIDE_NAV_COLLAPSE_MODE.RAIL
         );
@@ -448,7 +453,9 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        const menuButton = document.body.querySelector('bx-header-menu-button');
+        const menuButton = document.body.querySelector(
+          'cds-header-menu-button'
+        );
         expect((menuButton as BXSideNavMenuButton).usageMode).toBe(
           SIDE_NAV_USAGE_MODE.HEADER_NAV
         );
@@ -456,13 +463,13 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-side-nav-menu', function () {
+  describe('cds-side-nav-menu', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-side-nav-menu' as any)
+          document.body.querySelector('cds-side-nav-menu' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -477,7 +484,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-side-nav-menu' as any)
+          document.body.querySelector('cds-side-nav-menu' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -492,20 +499,20 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-side-nav-menu' as any)
+          document.body.querySelector('cds-side-nav-menu' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
 
     describe('Handling user interaction', function () {
-      it('should fire bx-side-nav-menu-beingtoggled/bx-side-nav-menu-toggled events upon toggling', async function () {
+      it('should fire cds-side-nav-menu-beingtoggled/cds-side-nav-menu-toggled events upon toggling', async function () {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
         const spyBeforeToggle = jasmine.createSpy('before toggle');
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        const button = document.body.querySelector('bx-side-nav-menu');
-        events.on(button!, 'bx-side-nav-menu-beingtoggled', spyBeforeToggle);
-        events.on(button!, 'bx-side-nav-menu-toggled', spyAfterToggle);
+        const button = document.body.querySelector('cds-side-nav-menu');
+        events.on(button!, 'cds-side-nav-menu-beingtoggled', spyBeforeToggle);
+        events.on(button!, 'cds-side-nav-menu-toggled', spyAfterToggle);
         button!.shadowRoot!.querySelector('button')!.click();
         expect(spyBeforeToggle).toHaveBeenCalled();
         expect(spyAfterToggle).toHaveBeenCalled();
@@ -515,11 +522,11 @@ describe('ui-shell', function () {
         render(sideNavMenuTemplate(), document.body);
         await Promise.resolve();
         const spyAfterToggle = jasmine.createSpy('after toggle');
-        const button = document.body.querySelector('bx-side-nav-menu');
-        events.on(button!, 'bx-side-nav-menu-beingtoggled', (event) => {
+        const button = document.body.querySelector('cds-side-nav-menu');
+        events.on(button!, 'cds-side-nav-menu-beingtoggled', (event) => {
           event.preventDefault();
         });
-        events.on(button!, 'bx-side-nav-menu-toggled', spyAfterToggle);
+        events.on(button!, 'cds-side-nav-menu-toggled', spyAfterToggle);
         button!.shadowRoot!.querySelector('button')!.click();
         await Promise.resolve();
         expect(spyAfterToggle).not.toHaveBeenCalled();
@@ -535,8 +542,8 @@ describe('ui-shell', function () {
           document.body
         );
         await Promise.resolve();
-        const menu = document.body.querySelector('bx-side-nav-menu');
-        const menuItem = document.createElement('bx-side-nav-menu-item');
+        const menu = document.body.querySelector('cds-side-nav-menu');
+        const menuItem = document.createElement('cds-side-nav-menu-item');
         menu!.appendChild(menuItem);
         await Promise.resolve(); // `slotchange` event seems to happen at EOM
         expect(menuItem.hasAttribute('parent-has-icon')).toBe(true);
@@ -545,13 +552,13 @@ describe('ui-shell', function () {
       it('should tell existing child side nav item that the parent side nav menu has an icon', async function () {
         render(
           sideNavMenuTemplate({
-            children: html` <bx-side-nav-menu-item></bx-side-nav-menu-item> `,
+            children: html` <cds-side-nav-menu-item></cds-side-nav-menu-item> `,
           }),
           document.body
         );
         await Promise.resolve();
-        const menu = document.body.querySelector('bx-side-nav-menu');
-        const menuItem = menu!.querySelector('bx-side-nav-menu-item');
+        const menu = document.body.querySelector('cds-side-nav-menu');
+        const menuItem = menu!.querySelector('cds-side-nav-menu-item');
         const svg = document.createElement('svg');
         svg.setAttribute('slot', 'title-icon');
         menu!.appendChild(svg);
@@ -561,13 +568,13 @@ describe('ui-shell', function () {
     });
   });
 
-  describe('bx-side-nav-menu-item', function () {
+  describe('cds-side-nav-menu-item', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
         render(sideNavMenuItemTemplate(), document.body);
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-side-nav-menu-item' as any)
+          document.body.querySelector('cds-side-nav-menu-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
 
@@ -581,7 +588,7 @@ describe('ui-shell', function () {
         );
         await Promise.resolve();
         expect(
-          document.body.querySelector('bx-side-nav-menu-item' as any)
+          document.body.querySelector('cds-side-nav-menu-item' as any)
         ).toMatchSnapshot({ mode: 'shadow' });
       });
     });
@@ -591,7 +598,7 @@ describe('ui-shell', function () {
         render(sideNavMenuItemTemplate({ active: true }), document.body);
         await Promise.resolve();
         expect(
-          (document.body.querySelector('bx-side-nav-menu') as BXSideNavMenu)
+          (document.body.querySelector('cds-side-nav-menu') as BXSideNavMenu)
             .active
         ).toBe(true);
       });

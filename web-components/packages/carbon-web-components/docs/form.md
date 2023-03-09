@@ -1,6 +1,6 @@
 # Having components participate in form
 
-Though form elements in `carbon-web-components` (e.g. `<bx-input>`) are not native form elements like `<input>`, form elements in `carbon-web-components` have some extra APIs that align well to web/framework standards that allow those form elements to participate in form.
+Though form elements in `carbon-web-components` (e.g. `<cds-input>`) are not native form elements like `<input>`, form elements in `carbon-web-components` have some extra APIs that align well to web/framework standards that allow those form elements to participate in form.
 
 ## `formdata` event
 
@@ -20,7 +20,7 @@ button.addEventListener('click', () => {
   });
   event.formData = formData;
   form.dispatchEvent(event);
-  // Now `formData` is populated with the data in `<bx-input>`, etc. in the `<form>`.
+  // Now `formData` is populated with the data in `<cds-input>`, etc. in the `<form>`.
   // You can use `formData` with `fetch()`/XHR instead of letting `<form>` submit the data
 });
 ```

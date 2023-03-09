@@ -28,10 +28,10 @@ const getValues = (formData: FormData) => {
 
 const template = (props?) =>
   Default({
-    'bx-number-input': props,
+    'cds-number-input': props,
   });
 
-describe('bx-number-input', function () {
+describe('cds-number-input', function () {
   const events = new EventManager();
 
   describe('Rendering', function () {
@@ -58,7 +58,7 @@ describe('bx-number-input', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-number-input' as any)
+        document.body.querySelector('cds-number-input' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -126,7 +126,7 @@ describe('bx-number-input', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-number-input')!;
+      elem = document.body.querySelector('cds-number-input')!;
     });
 
     // This test is skipped for now since there seems to be a bug somewhere in the test stack.
@@ -199,7 +199,7 @@ describe('bx-number-input', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-number-input')!;
+      elem = document.body.querySelector('cds-number-input')!;
     });
 
     it('should increment values', async function () {
@@ -223,7 +223,7 @@ describe('bx-number-input', function () {
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
       const spyInput = jasmine.createSpy('input');
-      events.on(elem, 'bx-number-input', spyInput);
+      events.on(elem, 'cds-number-input', spyInput);
       (elem.shadowRoot!.querySelector('button.up-icon') as HTMLElement).click();
       expect(Number(input.value)).toEqual(initialValue + stepSize);
       expect(Number(spyInput.calls.argsFor(0)[0].detail.value)).toBe(
@@ -236,7 +236,7 @@ describe('bx-number-input', function () {
       const initialValue = Number(input.value);
       const stepSize = Number(input.step);
       const spyInput = jasmine.createSpy('input');
-      events.on(elem, 'bx-number-input', spyInput);
+      events.on(elem, 'cds-number-input', spyInput);
       (
         elem.shadowRoot!.querySelector('button.down-icon') as HTMLElement
       ).click();

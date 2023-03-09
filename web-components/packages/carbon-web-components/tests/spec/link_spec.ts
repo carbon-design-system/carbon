@@ -13,15 +13,15 @@ import { Default } from '../../src/components/link/link-story';
 
 const template = (props?) =>
   Default({
-    'bx-link': props,
+    'cds-link': props,
   });
 
-describe('bx-link', function () {
+describe('cds-link', function () {
   describe('Misc attributes', function () {
     it('should render with minimum attributes', async function () {
       render(template({ href: 'about:blank' }), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -41,7 +41,7 @@ describe('bx-link', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -62,7 +62,7 @@ describe('bx-link', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-link' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-link' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

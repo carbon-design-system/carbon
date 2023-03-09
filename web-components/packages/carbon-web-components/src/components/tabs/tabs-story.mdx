@@ -27,22 +27,22 @@ import '@carbon/web-components/es/components/tabs/index.js';
 ### HTML
 
 ```html
-<bx-tabs trigger-content="Select an item" value="staging">
-  <bx-tab id="tab-all" target="panel-all" value="all">Option 1</bx-tab>
-  <bx-tab
+<cds-tabs trigger-content="Select an item" value="staging">
+  <cds-tab id="tab-all" target="panel-all" value="all">Option 1</cds-tab>
+  <cds-tab
     id="tab-cloudFoundry"
     target="panel-cloudFoundry"
     disabled
     value="cloudFoundry"
-    >Option 2</bx-tab
+    >Option 2</cds-tab
   >
-  <bx-tab id="tab-staging" target="panel-staging" value="staging"
-    >Option 3</bx-tab
+  <cds-tab id="tab-staging" target="panel-staging" value="staging"
+    >Option 3</cds-tab
   >
-  <bx-tab id="tab-dea" target="panel-dea" value="dea">Option 4</bx-tab>
-  <bx-tab id="tab-router" target="panel-router" value="router">Option 5</bx-tab>
-</bx-tabs>
-<div class="bx-ce-demo-devenv--tab-panels">
+  <cds-tab id="tab-dea" target="panel-dea" value="dea">Option 4</cds-tab>
+  <cds-tab id="tab-router" target="panel-router" value="router">Option 5</cds-tab>
+</cds-tabs>
+<div class="cds-ce-demo-devenv--tab-panels">
   <div id="panel-all" role="tabpanel" aria-labelledby="tab-all" hidden>
     <h4>Content for option 1</h4>
     <p>
@@ -98,29 +98,29 @@ import '@carbon/web-components/es/components/tabs/index.js';
 
 ## Skeleton
 
-For the skeleton variation, utilize `<bx-tabs-skeleton>` and
-`<bx-tab-skeleton>`.
+For the skeleton variation, utilize `<cds-tabs-skeleton>` and
+`<cds-tab-skeleton>`.
 
 ```html
-<bx-tabs-skeleton>
-  <bx-tab-skeleton></bx-tab-skeleton>
-  <bx-tab-skeleton></bx-tab-skeleton>
-  <bx-tab-skeleton></bx-tab-skeleton>
-  <bx-tab-skeleton></bx-tab-skeleton>
-  <bx-tab-skeleton></bx-tab-skeleton>
-</bx-tabs-skeleton>
+<cds-tabs-skeleton>
+  <cds-tab-skeleton></cds-tab-skeleton>
+  <cds-tab-skeleton></cds-tab-skeleton>
+  <cds-tab-skeleton></cds-tab-skeleton>
+  <cds-tab-skeleton></cds-tab-skeleton>
+  <cds-tab-skeleton></cds-tab-skeleton>
+</cds-tabs-skeleton>
 ```
 
-## `<bx-tabs>` attributes, properties and events
+## `<cds-tabs>` attributes, properties and events
 
-Note: `bx-content-switcher-*` events are not fired from `<bx-tabs>`.
+Note: `cds-content-switcher-*` events are not fired from `<cds-tabs>`.
 
-<Props of="bx-tabs" />
+<Props of="cds-tabs" />
 
-## `<bx-tab>` attributes, properties and events
+## `<cds-tab>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-tab disabled>`) and `false` means not setting the attribute (e.g.
-`<bx-tab>` without `disabled` attribute).
+`<cds-tab disabled>`) and `false` means not setting the attribute (e.g.
+`<cds-tab>` without `disabled` attribute).
 
-<Props of="bx-tab" />
+<Props of="cds-tab" />

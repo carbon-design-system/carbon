@@ -1,4 +1,4 @@
-# `bx-link`
+# `cds-link`
 
 ## `Misc attributes`
 
@@ -6,7 +6,7 @@
 
 ```
 <a
-  class="bx--link"
+  class="cds--link"
   href="about:blank"
   id="link"
   part="link"
@@ -14,7 +14,7 @@
   <slot>
   </slot>
   <div
-    class="bx--link__icon"
+    class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
@@ -28,7 +28,7 @@
 
 ```
 <a
-  class="bx--link"
+  class="cds--link"
   download="file-name-foo"
   href="about:blank"
   hreflang="en"
@@ -43,7 +43,7 @@
   <slot>
   </slot>
   <div
-    class="bx--link__icon"
+    class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
@@ -57,7 +57,7 @@
 
 ```
 <p
-  class="bx--link bx--link--disabled"
+  class="cds--link cds--link--disabled"
   id="link"
   part="link"
 >
@@ -65,7 +65,7 @@
   </slot>
 </p>
 <div
-  class="bx--link__icon"
+  class="cds--link__icon"
   hidden=""
 >
   <slot name="icon">

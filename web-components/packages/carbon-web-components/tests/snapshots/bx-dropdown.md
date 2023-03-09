@@ -1,4 +1,4 @@
-# `bx-dropdown`
+# `cds-dropdown`
 
 ## `Misc attributes`
 
@@ -6,7 +6,7 @@
 
 ```
 <label
-  class="bx--label"
+  class="cds--label"
   hidden=""
   part="label-text"
 >
@@ -14,7 +14,7 @@
   </slot>
 </label>
 <div
-  class="bx--dropdown bx--list-box"
+  class="cds--dropdown cds--list-box"
   role="listbox"
 >
   <div
@@ -23,22 +23,22 @@
     aria-haspopup="listbox"
     aria-labelledby="trigger-label"
     aria-owns="menu-body"
-    class="bx--list-box__field"
+    class="cds--list-box__field"
     part="trigger-button"
     role="button"
     tabindex="0"
   >
     <span
-      class="bx--list-box__label"
+      class="cds--list-box__label"
       id="trigger-label"
     >
     </span>
-    <div class="bx--list-box__menu-icon">
+    <div class="cds--list-box__menu-icon">
     </div>
   </div>
 </div>
 <div
-  class="bx--form__helper-text"
+  class="cds--form__helper-text"
   hidden=""
   part="helper-text"
 >
@@ -48,7 +48,7 @@
 <div
   aria-live="assertive"
   aria-relevant="additions text"
-  class="bx--assistive-text"
+  class="cds--assistive-text"
   role="status"
 >
 </div>
@@ -59,7 +59,7 @@
 
 ```
 <label
-  class="bx--label bx--label--disabled"
+  class="cds--label cds--label--disabled"
   part="label-text"
 >
   <slot name="label-text">
@@ -67,7 +67,7 @@
   </slot>
 </label>
 <div
-  class="bx--dropdown bx--list-box bx--list-box--disabled bx--list-box--expanded"
+  class="cds--dropdown cds--list-box cds--list-box--disabled cds--list-box--expanded"
   role="listbox"
 >
   <div
@@ -76,22 +76,22 @@
     aria-haspopup="listbox"
     aria-labelledby="trigger-label"
     aria-owns="menu-body"
-    class="bx--list-box__field"
+    class="cds--list-box__field"
     part="trigger-button"
     role="button"
     tabindex="0"
   >
     <span
-      class="bx--list-box__label"
+      class="cds--list-box__label"
       id="trigger-label"
     >
       Option 3
     </span>
-    <div class="bx--list-box__menu-icon bx--list-box__menu-icon--open">
+    <div class="cds--list-box__menu-icon cds--list-box__menu-icon--open">
     </div>
   </div>
   <div
-    class="bx--list-box__menu"
+    class="cds--list-box__menu"
     id="menu-body"
     part="menu-body"
     role="listbox"
@@ -102,7 +102,7 @@
   </div>
 </div>
 <div
-  class="bx--form__helper-text bx--form__helper-text--disabled"
+  class="cds--form__helper-text cds--form__helper-text--disabled"
   part="helper-text"
 >
   <slot name="helper-text">
@@ -112,7 +112,7 @@
 <div
   aria-live="assertive"
   aria-relevant="additions text"
-  class="bx--assistive-text"
+  class="cds--assistive-text"
   role="status"
 >
 </div>

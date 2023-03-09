@@ -25,10 +25,10 @@ const getValues = (formData: FormData) => {
 
 const template = (props?) =>
   Default({
-    'bx-checkbox': props,
+    'cds-checkbox': props,
   });
 
-describe('bx-checkbox', function () {
+describe('cds-checkbox', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(
@@ -38,11 +38,11 @@ describe('bx-checkbox', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-checkbox' as any)).toMatchSnapshot(
-        {
-          mode: 'shadow',
-        }
-      );
+      expect(
+        document.body.querySelector('cds-checkbox' as any)
+      ).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should render with various attributes', async function () {
@@ -60,11 +60,11 @@ describe('bx-checkbox', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-checkbox' as any)).toMatchSnapshot(
-        {
-          mode: 'shadow',
-        }
-      );
+      expect(
+        document.body.querySelector('cds-checkbox' as any)
+      ).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
   });
 

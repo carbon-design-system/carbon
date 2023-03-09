@@ -161,21 +161,21 @@ directly used once the script tag has been added to the page. For example:
       src="https://1.www.s81c.com/common/carbon/web-components/tag/latest/dropdown.min.js"></script>
     <style type="text/css">
       // Suppresses the custom element until it has been defined
-      bx-dropdown:not(:defined),
-      bx-dropdown-item:not(:defined) {
+      cds-dropdown:not(:defined),
+      cds-dropdown-item:not(:defined) {
         visibility: hidden;
       }
     </style>
   </head>
   <body>
     <div id="app">
-      <bx-dropdown trigger-content="Select an item">
-        <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-        <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-        <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-        <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-        <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-      </bx-dropdown>
+      <cds-dropdown trigger-content="Select an item">
+        <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+        <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+        <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+        <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+        <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+      </cds-dropdown>
     </div>
   </body>
 </html>
@@ -242,13 +242,13 @@ Once you've imported the component modules, you can use our components in the
 same manner as native HTML tags, for example:
 
 ```html
-<bx-dropdown trigger-content="Select an item">
-  <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-  <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-  <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-  <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-  <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-</bx-dropdown>
+<cds-dropdown trigger-content="Select an item">
+  <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+  <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+  <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+  <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+</cds-dropdown>
 ```
 
 ### Other usage guides
@@ -383,7 +383,7 @@ information in several ways:
    knobs are shown as something like `Button kind (kind)`, where `kind` is the
    attribute name
 3. Clicking the **ACTION LOGGER** tab at the bottom and interacting with the
-   selected component. You may see something like `bx-modal-closed` which
+   selected component. You may see something like `cds-modal-closed` which
    typically indicates that an event with such event type is fired. You can also
    expand the twistie to see the details of the event
 

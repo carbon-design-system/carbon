@@ -1,4 +1,4 @@
-# `bx-combo-box`
+# `cds-combo-box`
 
 ## `Misc attributes`
 
@@ -6,7 +6,7 @@
 
 ```
 <label
-  class="bx--label"
+  class="cds--label"
   part="label-text"
 >
   <slot name="label-text">
@@ -14,7 +14,7 @@
   </slot>
 </label>
 <div
-  class="bx--combo-box bx--dropdown bx--list-box"
+  class="cds--combo-box cds--dropdown cds--list-box"
   role="listbox"
 >
   <div
@@ -23,24 +23,24 @@
     aria-haspopup="listbox"
     aria-labelledby="trigger-label"
     aria-owns="menu-body"
-    class="bx--list-box__field"
+    class="cds--list-box__field"
     part="trigger-button"
   >
     <input
       aria-autocomplete="list"
       aria-controls="menu-body"
       aria-label=""
-      class="bx--text-input"
+      class="cds--text-input"
       id="trigger-label"
       placeholder="undefined"
       role="combobox"
     >
-    <div class="bx--list-box__menu-icon">
+    <div class="cds--list-box__menu-icon">
     </div>
   </div>
 </div>
 <div
-  class="bx--form__helper-text"
+  class="cds--form__helper-text"
   part="helper-text"
 >
   <slot name="helper-text">
@@ -50,7 +50,7 @@
 <div
   aria-live="assertive"
   aria-relevant="additions text"
-  class="bx--assistive-text"
+  class="cds--assistive-text"
   role="status"
 >
 </div>
@@ -61,7 +61,7 @@
 
 ```
 <label
-  class="bx--label bx--label--disabled"
+  class="cds--label cds--label--disabled"
   part="label-text"
 >
   <slot name="label-text">
@@ -69,7 +69,7 @@
   </slot>
 </label>
 <div
-  class="bx--combo-box bx--dropdown bx--dropdown--invalid bx--list-box bx--list-box--disabled bx--list-box--expanded"
+  class="cds--combo-box cds--dropdown cds--dropdown--invalid cds--list-box cds--list-box--disabled cds--list-box--expanded"
   data-invalid=""
   role="listbox"
 >
@@ -79,32 +79,32 @@
     aria-haspopup="listbox"
     aria-labelledby="trigger-label"
     aria-owns="menu-body"
-    class="bx--list-box__field"
+    class="cds--list-box__field"
     part="trigger-button"
   >
     <input
       aria-autocomplete="list"
       aria-controls="menu-body"
       aria-label=""
-      class="bx--text-input"
+      class="cds--text-input"
       disabled=""
       id="trigger-label"
       placeholder="trigger-content-foo"
       role="combobox"
     >
     <div
-      class="bx--list-box__selection"
+      class="cds--list-box__selection"
       id="selection-button"
       role="button"
       tabindex="0"
       title=""
     >
     </div>
-    <div class="bx--list-box__menu-icon bx--list-box__menu-icon--open">
+    <div class="cds--list-box__menu-icon cds--list-box__menu-icon--open">
     </div>
   </div>
   <div
-    class="bx--list-box__menu"
+    class="cds--list-box__menu"
     id="menu-body"
     part="menu-body"
     role="listbox"
@@ -115,7 +115,7 @@
   </div>
 </div>
 <div
-  class="bx--form-requirement"
+  class="cds--form-requirement"
   part="validity-message"
 >
   <slot name="validity-message">
@@ -125,7 +125,7 @@
 <div
   aria-live="assertive"
   aria-relevant="additions text"
-  class="bx--assistive-text"
+  class="cds--assistive-text"
   role="status"
 >
 </div>

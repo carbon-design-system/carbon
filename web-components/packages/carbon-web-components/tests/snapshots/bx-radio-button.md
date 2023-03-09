@@ -1,4 +1,4 @@
-# `bx-radio-button`
+# `cds-radio-button`
 
 ## `Rendering`
 
@@ -6,17 +6,17 @@
 
 ```
 <input
-  class="bx--radio-button"
+  class="cds--radio-button"
   id="input"
   tabindex="-1"
   type="radio"
   value="staging"
 >
 <label
-  class="bx--radio-button__label"
+  class="cds--radio-button__label"
   for="input"
 >
-  <span class="bx--radio-button__appearance">
+  <span class="cds--radio-button__appearance">
   </span>
   <span>
     <slot>
@@ -30,7 +30,7 @@
 
 ```
 <input
-  class="bx--radio-button"
+  class="cds--radio-button"
   disabled=""
   id="input"
   name="name-foo"
@@ -39,12 +39,12 @@
   value="staging"
 >
 <label
-  class="bx--radio-button__label"
+  class="cds--radio-button__label"
   for="input"
 >
-  <span class="bx--radio-button__appearance">
+  <span class="cds--radio-button__appearance">
   </span>
-  <span class="bx--visually-hidden">
+  <span class="cds--visually-hidden">
     <slot>
       label-text-foo
     </slot>

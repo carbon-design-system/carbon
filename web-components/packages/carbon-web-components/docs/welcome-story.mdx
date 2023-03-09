@@ -67,13 +67,13 @@ import '@carbon/web-components/es/components/dropdown/dropdown-item';
 Once you've imported the component modules, you can use our components in the same manner as native HTML tags, for example:
 
 ```html
-<bx-dropdown trigger-content="Select an item">
-  <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-  <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-  <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-  <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-  <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-</bx-dropdown>
+<cds-dropdown trigger-content="Select an item">
+  <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+  <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+  <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+  <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+</cds-dropdown>
 ```
 
 If you just want to try our components for demnstrations and so on, you can use CDNs that support module mapping (for example, [JSPM](https://jspm.org)). With CDNs, you can import just our modules in `<script type="module">`:
@@ -93,28 +93,28 @@ If you just want to try our components for demnstrations and so on, you can use 
         margin: 2rem;
       }
 
-      bx-dropdown:not(:defined),
-      bx-dropdown-item:not(:defined) {
+      cds-dropdown:not(:defined),
+      cds-dropdown-item:not(:defined) {
         visibility: hidden;
       }
     </style>
   </head>
   <body>
     <div id="app">
-      <bx-dropdown trigger-content="Select an item">
-        <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-        <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-        <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-        <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-        <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-      </bx-dropdown>
+      <cds-dropdown trigger-content="Select an item">
+        <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+        <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+        <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+        <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+        <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+      </cds-dropdown>
     </div>
   </body>
 </html>
 ```
 
 <iframe
-  className="bx-ce-doc--demo-iframe"
+  className="cds-ce-doc--demo-iframe"
   src={basicExampleCDN}
   title="carbon-web-components-basic-example-cdn"
   sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"

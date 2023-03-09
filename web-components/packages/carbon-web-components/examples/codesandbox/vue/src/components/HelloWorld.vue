@@ -8,13 +8,13 @@ LICENSE file in the root directory of this source tree.
 -->
 
 <template>
-  <bx-dropdown trigger-content="Select an item">
-    <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-    <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-    <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-    <bx-dropdown-item value="dea">Option 4</bx-dropdown-item>
-    <bx-dropdown-item value="router">Option 5</bx-dropdown-item>
-  </bx-dropdown>
+  <cds-dropdown trigger-content="Select an item">
+    <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+    <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+    <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+    <cds-dropdown-item value="dea">Option 4</cds-dropdown-item>
+    <cds-dropdown-item value="router">Option 5</cds-dropdown-item>
+  </cds-dropdown>
 </template>
 
 <script>

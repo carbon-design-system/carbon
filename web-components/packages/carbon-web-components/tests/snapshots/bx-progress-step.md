@@ -1,4 +1,4 @@
-# `bx-progress-step`
+# `cds-progress-step`
 
 ## `Rendering`
 
@@ -8,7 +8,7 @@
 <slot>
   <p
     aria-describedby="label-tooltip"
-    class="bx--progress-label"
+    class="cds--progress-label"
     role="button"
     tabindex="0"
   >
@@ -16,7 +16,7 @@
 </slot>
 <slot name="secondary-label-text">
 </slot>
-<span class="bx--progress-line">
+<span class="cds--progress-line">
 </span>
 
 ```
@@ -27,7 +27,7 @@
 <slot>
   <p
     aria-describedby="label-tooltip"
-    class="bx--progress-label"
+    class="cds--progress-label"
     role="button"
     tabindex="0"
   >
@@ -35,11 +35,11 @@
   </p>
 </slot>
 <slot name="secondary-label-text">
-  <p class="bx--progress-optional">
+  <p class="cds--progress-optional">
     secondary-label-text-foo
   </p>
 </slot>
-<span class="bx--progress-line">
+<span class="cds--progress-line">
 </span>
 
 ```

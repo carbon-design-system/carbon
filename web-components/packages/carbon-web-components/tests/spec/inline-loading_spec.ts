@@ -16,16 +16,16 @@ import { Default } from '../../src/components/inline-loading/inline-loading-stor
 
 const template = (props?) =>
   Default({
-    'bx-inline-loading': props,
+    'cds-inline-loading': props,
   });
 
-describe('bx-inline-loading', function () {
+describe('cds-inline-loading', function () {
   describe('Misc attributes', function () {
     it('should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-loading' as any)
+        document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -35,12 +35,12 @@ describe('bx-inline-loading', function () {
       render(template(), document.body);
       (
         document.body.querySelector(
-          'bx-inline-loading'
+          'cds-inline-loading'
         ) as unknown as BXInlineLoading
       ).status = undefined!;
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-loading' as any)
+        document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -55,7 +55,7 @@ describe('bx-inline-loading', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-loading' as any)
+        document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -70,7 +70,7 @@ describe('bx-inline-loading', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-loading' as any)
+        document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -85,7 +85,7 @@ describe('bx-inline-loading', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-loading' as any)
+        document.body.querySelector('cds-inline-loading' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });

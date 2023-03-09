@@ -1,4 +1,4 @@
-# `bx-tooltip-definition`
+# `cds-tooltip-definition`
 
 ## `Rendering`
 
@@ -7,13 +7,13 @@
 ```
 <button
   aria-describedby="tooltip-body"
-  class="bx--tooltip--a11y bx--tooltip--align-center bx--tooltip--bottom bx--tooltip__trigger bx--tooltip__trigger--definition"
+  class="cds--tooltip--a11y cds--tooltip--align-center cds--tooltip--bottom cds--tooltip__trigger cds--tooltip__trigger--definition"
 >
   <slot>
   </slot>
 </button>
 <div
-  class="bx--assistive-text"
+  class="cds--assistive-text"
   id="tooltip-body"
   role="tooltip"
 >
@@ -28,13 +28,13 @@
 ```
 <button
   aria-describedby="tooltip-body"
-  class="bx--tooltip--a11y bx--tooltip--align-start bx--tooltip--top bx--tooltip__trigger bx--tooltip__trigger--definition"
+  class="cds--tooltip--a11y cds--tooltip--align-start cds--tooltip--top cds--tooltip__trigger cds--tooltip__trigger--definition"
 >
   <slot>
   </slot>
 </button>
 <div
-  class="bx--assistive-text"
+  class="cds--assistive-text"
   id="tooltip-body"
   role="tooltip"
 >

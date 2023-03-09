@@ -25,15 +25,15 @@ const getValues = (formData: FormData) => {
 
 const template = (props?) =>
   Default({
-    'bx-slider': props,
+    'cds-slider': props,
   });
 
-describe('bx-slider', function () {
+describe('cds-slider', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect(document.body.querySelector('bx-slider' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-slider' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -52,7 +52,7 @@ describe('bx-slider', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-slider' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-slider' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

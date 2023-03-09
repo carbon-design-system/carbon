@@ -17,10 +17,10 @@ import { Default } from '../../src/components/combo-box/combo-box-story';
 
 const template = (props?) =>
   Default({
-    'bx-combo-box': props,
+    'cds-combo-box': props,
   });
 
-describe('bx-combo-box', function () {
+describe('cds-combo-box', function () {
   const events = new EventManager();
 
   describe('Misc attributes', function () {
@@ -28,7 +28,7 @@ describe('bx-combo-box', function () {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-combo-box' as any)
+        document.body.querySelector('cds-combo-box' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -51,7 +51,7 @@ describe('bx-combo-box', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-combo-box' as any)
+        document.body.querySelector('cds-combo-box' as any)
       ).toMatchSnapshot({
         mode: 'shadow',
       });
@@ -65,15 +65,15 @@ describe('bx-combo-box', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-combo-box')!;
-      itemNode = elem.querySelector('bx-combo-box-item')!;
+      elem = document.body.querySelector('cds-combo-box')!;
+      itemNode = elem.querySelector('cds-combo-box-item')!;
     });
 
     it('should add "open" stateful modifier class', async function () {
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
 
     it('should remove "open" stateful modifier class (closed default state)', async function () {
@@ -82,7 +82,7 @@ describe('bx-combo-box', function () {
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should always close dropdown when clicking document', async function () {
@@ -91,7 +91,7 @@ describe('bx-combo-box', function () {
       elem.dispatchEvent(new CustomEvent('focusout'));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should close dropdown when clicking on an item', async function () {
@@ -100,7 +100,7 @@ describe('bx-combo-box', function () {
       (itemNode as HTMLElement).click();
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should support enter key to open the menu', async function () {
@@ -109,32 +109,32 @@ describe('bx-combo-box', function () {
       (event as any).key = 'Enter';
       inner!.dispatchEvent(event);
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       inner!.dispatchEvent(event);
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should provide a way to cancel opening', async function () {
-      events.on(elem, 'bx-combo-box-beingtoggled', (event: CustomEvent) => {
+      events.on(elem, 'cds-combo-box-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
     });
 
     it('should provide a way to cancel closing', async function () {
       (elem as BXComboBox).open = true;
       await Promise.resolve();
-      events.on(elem, 'bx-combo-box-beingtoggled', (event: CustomEvent) => {
+      events.on(elem, 'cds-combo-box-beingtoggled', (event: CustomEvent) => {
         event.preventDefault();
       });
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (inner as HTMLElement).click();
       await Promise.resolve();
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
     });
   });
 
@@ -145,14 +145,14 @@ describe('bx-combo-box', function () {
     beforeEach(async function () {
       render(template({ open: true, value: 'all' }), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-combo-box')!;
-      itemNodes = elem.querySelectorAll('bx-combo-box-item');
+      elem = document.body.querySelector('cds-combo-box')!;
+      itemNodes = elem.querySelectorAll('cds-combo-box-item');
     });
 
     it('should add/remove "selected" modifier class', async function () {
       (
         document.body.querySelector(
-          'bx-combo-box-item[value="staging"]'
+          'cds-combo-box-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
@@ -166,7 +166,7 @@ describe('bx-combo-box', function () {
     it('should update text', async function () {
       (
         document.body.querySelector(
-          'bx-combo-box-item[value="staging"]'
+          'cds-combo-box-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
@@ -179,7 +179,7 @@ describe('bx-combo-box', function () {
     it('should update value', async function () {
       (
         document.body.querySelector(
-          'bx-combo-box-item[value="staging"]'
+          'cds-combo-box-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
@@ -188,8 +188,8 @@ describe('bx-combo-box', function () {
 
     it('should provide a way to switch item with a value', async function () {
       (elem as BXComboBox).value = 'staging';
-      await Promise.resolve(); // Update cycle for `<bx-combo-box>`
-      await Promise.resolve(); // Update cycle for `<bx-combo-box-item>`
+      await Promise.resolve(); // Update cycle for `<cds-combo-box>`
+      await Promise.resolve(); // Update cycle for `<cds-combo-box-item>`
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
       expect(itemNodes[2].hasAttribute('selected')).toBe(true);
@@ -198,15 +198,15 @@ describe('bx-combo-box', function () {
     });
 
     it('should provide a way to cancel switching item', async function () {
-      events.on(elem, 'bx-combo-box-beingselected', (event: CustomEvent) => {
+      events.on(elem, 'cds-combo-box-beingselected', (event: CustomEvent) => {
         expect(event.detail.item).toBe(
-          document.body.querySelector('bx-combo-box-item[value="staging"]')
+          document.body.querySelector('cds-combo-box-item[value="staging"]')
         );
         event.preventDefault();
       });
       (
         document.body.querySelector(
-          'bx-combo-box-item[value="staging"]'
+          'cds-combo-box-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
@@ -222,19 +222,19 @@ describe('bx-combo-box', function () {
     });
 
     it('should provide a way to cancel clearing selection', async function () {
-      events.on(elem, 'bx-combo-box-beingselected', (event: CustomEvent) => {
+      events.on(elem, 'cds-combo-box-beingselected', (event: CustomEvent) => {
         expect(event.detail.item).toBeUndefined();
         event.preventDefault();
       });
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
       (
         elem.shadowRoot!.querySelector(
-          '.bx--list-box__selection'
+          '.cds--list-box__selection'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
       expect((elem as BXComboBox).value).toBe('all');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('selected')).toBe(true);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
       expect(itemNodes[2].hasAttribute('selected')).toBe(false);
@@ -247,7 +247,7 @@ describe('bx-combo-box', function () {
     });
 
     it('should reflect the added child to the selection', async function () {
-      const itemNode = document.createElement('bx-combo-box-item');
+      const itemNode = document.createElement('cds-combo-box-item');
       itemNode.textContent = 'text-added';
       (itemNode as unknown as BXComboBoxItem).value = 'value-added';
       elem.appendChild(itemNode);
@@ -272,11 +272,11 @@ describe('bx-combo-box', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-combo-box')!;
+      elem = document.body.querySelector('cds-combo-box')!;
       inputNode = elem.shadowRoot!.getElementById(
         'trigger-label'
       ) as HTMLInputElement;
-      itemNodes = elem.querySelectorAll('bx-combo-box-item');
+      itemNodes = elem.querySelectorAll('cds-combo-box-item');
     });
 
     it('Should highlight the item user types', async function () {
@@ -284,7 +284,7 @@ describe('bx-combo-box', function () {
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[2].hasAttribute('highlighted')).toBe(true);
@@ -297,7 +297,7 @@ describe('bx-combo-box', function () {
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(true);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[2].hasAttribute('highlighted')).toBe(false);
@@ -313,7 +313,7 @@ describe('bx-combo-box', function () {
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[2].hasAttribute('highlighted')).toBe(false);
@@ -329,7 +329,7 @@ describe('bx-combo-box', function () {
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[2].hasAttribute('highlighted')).toBe(false);
@@ -342,16 +342,16 @@ describe('bx-combo-box', function () {
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       (
         elem.shadowRoot!.querySelector(
-          '.bx--list-box__selection'
+          '.cds--list-box__selection'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
       expect((elem as BXComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[2].hasAttribute('highlighted')).toBe(false);
@@ -365,9 +365,9 @@ describe('bx-combo-box', function () {
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       const selectionButton = elem.shadowRoot!.querySelector(
-        '.bx--list-box__selection'
+        '.cds--list-box__selection'
       );
       const event = new CustomEvent('keypress', { bubbles: true });
       (event as any).key = ' ';
@@ -375,7 +375,7 @@ describe('bx-combo-box', function () {
       await Promise.resolve();
       expect((elem as BXComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[2].hasAttribute('highlighted')).toBe(false);
@@ -389,9 +389,9 @@ describe('bx-combo-box', function () {
       inputNode.dispatchEvent(new CustomEvent('input', { bubbles: true }));
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(true);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(true);
       const selectionButton = elem.shadowRoot!.querySelector(
-        '.bx--list-box__selection'
+        '.cds--list-box__selection'
       );
       const event = new CustomEvent('keypress', { bubbles: true });
       (event as any).key = 'Enter';
@@ -399,7 +399,7 @@ describe('bx-combo-box', function () {
       await Promise.resolve();
       expect((elem as BXComboBox).value).toBe('');
       expect(inputNode.value).toBe('');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[1].hasAttribute('highlighted')).toBe(false);
       expect(itemNodes[2].hasAttribute('highlighted')).toBe(false);
@@ -413,7 +413,7 @@ describe('bx-combo-box', function () {
       await Promise.resolve();
       (
         document.body.querySelector(
-          'bx-combo-box-item[value="staging"]'
+          'cds-combo-box-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
@@ -422,12 +422,12 @@ describe('bx-combo-box', function () {
       await Promise.resolve();
       (
         document.body.querySelector(
-          'bx-combo-box-item[value="staging"]'
+          'cds-combo-box-item[value="staging"]'
         ) as HTMLElement
       ).click();
       await Promise.resolve();
       const inner = elem.shadowRoot!.querySelector('div[role="listbox"]');
-      expect(inner!.classList.contains('bx--list-box--expanded')).toBe(false);
+      expect(inner!.classList.contains('cds--list-box--expanded')).toBe(false);
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
       expect(itemNodes[2].hasAttribute('selected')).toBe(true);

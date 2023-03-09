@@ -1,4 +1,4 @@
-# `bx-select`
+# `cds-select`
 
 ## `Misc attributes`
 
@@ -6,31 +6,31 @@
 
 ```
 <label
-  class="bx--label"
+  class="cds--label"
   for="input"
 >
   <slot name="label-text">
   </slot>
 </label>
-<div class="bx--select-input__wrapper">
+<div class="cds--select-input__wrapper">
   <select
     aria-invalid="false"
-    class="bx--select-input bx--select-input--md"
+    class="cds--select-input cds--select-input--md"
     id="input"
   >
     <optgroup
-      class="bx--select-optgroup"
+      class="cds--select-optgroup"
       label="Category 1"
     >
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 1"
         value="all"
       >
         Option 1
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 2"
         value="cloudFoundry"
       >
@@ -38,25 +38,25 @@
       </option>
     </optgroup>
     <optgroup
-      class="bx--select-optgroup"
+      class="cds--select-optgroup"
       label="Category 2"
     >
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 3"
         value="staging"
       >
         Option 3
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 4"
         value="dea"
       >
         Option 4
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 5"
         value="router"
       >
@@ -65,7 +65,7 @@
     </optgroup>
   </select>
 </div>
-<div class="bx--form__helper-text">
+<div class="cds--form__helper-text">
   <slot name="helper-text">
   </slot>
 </div>
@@ -76,33 +76,33 @@
 
 ```
 <label
-  class="bx--label bx--label--disabled"
+  class="cds--label cds--label--disabled"
   for="input"
 >
   <slot name="label-text">
     label-text-foo
   </slot>
 </label>
-<div class="bx--select-input__wrapper">
+<div class="cds--select-input__wrapper">
   <select
     aria-invalid="false"
-    class="bx--select-input bx--select-input--xl"
+    class="cds--select-input cds--select-input--xl"
     disabled=""
     id="input"
   >
     <optgroup
-      class="bx--select-optgroup"
+      class="cds--select-optgroup"
       label="Category 1"
     >
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 1"
         value="all"
       >
         Option 1
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 2"
         value="cloudFoundry"
       >
@@ -110,25 +110,25 @@
       </option>
     </optgroup>
     <optgroup
-      class="bx--select-optgroup"
+      class="cds--select-optgroup"
       label="Category 2"
     >
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 3"
         value="staging"
       >
         Option 3
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 4"
         value="dea"
       >
         Option 4
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 5"
         value="router"
       >
@@ -137,7 +137,7 @@
     </optgroup>
   </select>
 </div>
-<div class="bx--form__helper-text bx--form__helper-text--disabled">
+<div class="cds--form__helper-text cds--form__helper-text--disabled">
   <slot name="helper-text">
     helper-text-foo
   </slot>
@@ -149,35 +149,35 @@
 
 ```
 <label
-  class="bx--label"
+  class="cds--label"
   for="input"
 >
   <slot name="label-text">
   </slot>
 </label>
 <div
-  class="bx--select-input__wrapper"
+  class="cds--select-input__wrapper"
   data-invalid=""
 >
   <select
     aria-describedby="validity-message"
     aria-invalid="true"
-    class="bx--select-input bx--select-input--md"
+    class="cds--select-input cds--select-input--md"
     id="input"
   >
     <optgroup
-      class="bx--select-optgroup"
+      class="cds--select-optgroup"
       label="Category 1"
     >
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 1"
         value="all"
       >
         Option 1
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 2"
         value="cloudFoundry"
       >
@@ -185,25 +185,25 @@
       </option>
     </optgroup>
     <optgroup
-      class="bx--select-optgroup"
+      class="cds--select-optgroup"
       label="Category 2"
     >
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 3"
         value="staging"
       >
         Option 3
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 4"
         value="dea"
       >
         Option 4
       </option>
       <option
-        class="bx--select-option"
+        class="cds--select-option"
         label="Option 5"
         value="router"
       >
@@ -213,7 +213,7 @@
   </select>
 </div>
 <div
-  class="bx--form-requirement"
+  class="cds--form-requirement"
   id="validity-message"
 >
   <slot name="validity-message">

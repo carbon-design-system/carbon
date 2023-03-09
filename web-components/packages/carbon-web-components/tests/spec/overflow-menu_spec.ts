@@ -14,18 +14,18 @@ import { Default } from '../../src/components/overflow-menu/overflow-menu-story'
 
 const template = (props?) =>
   Default({
-    'bx-overflow-menu': props,
+    'cds-overflow-menu': props,
   });
 
-describe('bx-overflow-menu', function () {
+describe('cds-overflow-menu', function () {
   describe('Missing menu body', function () {
     let elem: Element;
 
     beforeEach(async function () {
       render(template({ hasBody: false }), document.body);
       await Promise.resolve();
-      document.querySelector('bx-overflow-menu')!.innerHTML = '';
-      elem = document.body.querySelector('bx-overflow-menu')!;
+      document.querySelector('cds-overflow-menu')!.innerHTML = '';
+      elem = document.body.querySelector('cds-overflow-menu')!;
     });
 
     it('Should be tolerant of missing menu body', async function () {
@@ -50,8 +50,8 @@ describe('bx-overflow-menu', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-overflow-menu')!;
-      bodyNode = elem.querySelector('bx-overflow-menu-body')!;
+      elem = document.body.querySelector('cds-overflow-menu')!;
+      bodyNode = elem.querySelector('cds-overflow-menu-body')!;
     });
 
     it('should add "open" stateful property by clicking', async function () {
@@ -71,8 +71,8 @@ describe('bx-overflow-menu', function () {
     it('should focus on the menu body when the menu is opened by clicking on the trigger button', async function () {
       spyOn(bodyNode as HTMLElement, 'focus');
       (elem as HTMLElement).click();
-      await Promise.resolve(); // For updating `<bx-overflow-menu>`
-      await Promise.resolve(); // For updating `<bx-overflow-menu-body>`
+      await Promise.resolve(); // For updating `<cds-overflow-menu>`
+      await Promise.resolve(); // For updating `<cds-overflow-menu-body>`
       expect((bodyNode as HTMLElement).focus).toHaveBeenCalled();
     });
 
@@ -105,8 +105,8 @@ describe('bx-overflow-menu', function () {
           key: ' ',
         })
       );
-      await Promise.resolve(); // For updating `<bx-overflow-menu>`
-      await Promise.resolve(); // For updating `<bx-overflow-menu-body>`
+      await Promise.resolve(); // For updating `<cds-overflow-menu>`
+      await Promise.resolve(); // For updating `<cds-overflow-menu-body>`
       expect((bodyNode as HTMLElement).focus).toHaveBeenCalled();
     });
 
@@ -139,8 +139,8 @@ describe('bx-overflow-menu', function () {
           key: 'Enter',
         })
       );
-      await Promise.resolve(); // For updating `<bx-overflow-menu>`
-      await Promise.resolve(); // For updating `<bx-overflow-menu-body>`
+      await Promise.resolve(); // For updating `<cds-overflow-menu>`
+      await Promise.resolve(); // For updating `<cds-overflow-menu-body>`
       expect((bodyNode as HTMLElement).focus).toHaveBeenCalled();
     });
   });

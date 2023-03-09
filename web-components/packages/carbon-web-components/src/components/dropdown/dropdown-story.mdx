@@ -28,46 +28,46 @@ import '@carbon/web-components/es/components/dropdown/index.js';
 ### HTML
 
 ```html
-<bx-dropdown value="bar">
-  <bx-dropdown-item value="foo">Foo</bx-dropdown-item>
-  <bx-dropdown-item value="bar">Bar</bx-dropdown-item>
-  <bx-dropdown-item value="baz">Baz</bx-dropdown-item>
-</bx-dropdown>
+<cds-dropdown value="bar">
+  <cds-dropdown-item value="foo">Foo</cds-dropdown-item>
+  <cds-dropdown-item value="bar">Bar</cds-dropdown-item>
+  <cds-dropdown-item value="baz">Baz</cds-dropdown-item>
+</cds-dropdown>
 ```
 
 ## Selection
 
-When user attempts to select a dropdown item, `bx-dropdown-beingselected` event
-fires on `<bx-dropdown>`, which has the following properties in the event
+When user attempts to select a dropdown item, `cds-dropdown-beingselected` event
+fires on `<cds-dropdown>`, which has the following properties in the event
 details:
 
 | Property | Description                              |
 | -------- | ---------------------------------------- |
-| `item`   | The `<bx-dropdown-item>` being selected. |
+| `item`   | The `<cds-dropdown-item>` being selected. |
 
-`bx-dropdown-beingselected` bubbles and is cancelable. Canceling this event
+`cds-dropdown-beingselected` bubbles and is cancelable. Canceling this event
 means canceling change in selection.
 
 ## Skeleton
 
-For the skeleton variation, utilize `<bx-dropdown-skeleton>`.
+For the skeleton variation, utilize `<cds-dropdown-skeleton>`.
 
 ```html
-<bx-dropdown-skeleton></bx-dropdown-skeleton>
+<cds-dropdown-skeleton></cds-dropdown-skeleton>
 ```
 
-## `<bx-dropdown>` attributes, properties and events
+## `<cds-dropdown>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-dropdown open>`) and `false` means not setting the attribute (e.g.
-`<bx-dropdown>` without `open` attribute).
+`<cds-dropdown open>`) and `false` means not setting the attribute (e.g.
+`<cds-dropdown>` without `open` attribute).
 
-<Props of="bx-dropdown" />
+<Props of="cds-dropdown" />
 
-## `<bx-dropdown-item>` attributes and properties
+## `<cds-dropdown-item>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-dropdown-item disabled>`) and `false` means not setting the attribute (e.g.
-`<bx-dropdown-item>` without `disabled` attribute).
+`<cds-dropdown-item disabled>`) and `false` means not setting the attribute (e.g.
+`<cds-dropdown-item>` without `disabled` attribute).
 
-<Props of="bx-dropdown-item" />
+<Props of="cds-dropdown-item" />

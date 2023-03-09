@@ -1,4 +1,4 @@
-# `bx-code-snippet`
+# `cds-code-snippet`
 
 ## `Rendering`
 
@@ -7,7 +7,7 @@
 ```
 <div
   aria-label="code-snippet"
-  class="bx--snippet-container"
+  class="cds--snippet-container"
   role="textbox"
   tabindex="0"
 >
@@ -19,14 +19,14 @@
   </code>
 </div>
 <button
-  class="bx--snippet-button"
+  class="cds--snippet-button"
   title="Copy to clipboard"
   type="button"
 >
   <slot>
   </slot>
   <div
-    class="bx--btn--copy__feedback"
+    class="cds--btn--copy__feedback"
     data-feedback="Copied!"
   >
   </div>
@@ -39,7 +39,7 @@
 ```
 <div
   aria-label="code-snippet"
-  class="bx--snippet-container"
+  class="cds--snippet-container"
   role="textbox"
   tabindex="0"
 >
@@ -51,14 +51,14 @@
   </code>
 </div>
 <button
-  class="bx--snippet-button"
+  class="cds--snippet-button"
   title="Copy to clipboard"
   type="button"
 >
   <slot>
   </slot>
   <div
-    class="bx--btn--copy__feedback"
+    class="cds--btn--copy__feedback"
     data-feedback="Copied!"
   >
   </div>
@@ -70,7 +70,7 @@
 
 ```
 <button
-  class="bx--snippet bx--snippet--inline"
+  class="cds--snippet cds--snippet--inline"
   title="Copy to clipboard"
   type="button"
 >
@@ -79,7 +79,7 @@
     </slot>
   </code>
   <div
-    class="bx--btn--copy__feedback"
+    class="cds--btn--copy__feedback"
     data-feedback="Copied!"
   >
   </div>
@@ -92,7 +92,7 @@
 ```
 <div
   aria-label="code-assistive-text-foo"
-  class="bx--snippet-container"
+  class="cds--snippet-container"
   role="textbox"
   tabindex="0"
 >
@@ -104,14 +104,14 @@
   </code>
 </div>
 <button
-  class="bx--snippet-button"
+  class="cds--snippet-button"
   title="copy-button-assistive-text-foo"
   type="button"
 >
   <slot>
   </slot>
   <div
-    class="bx--btn--copy__feedback"
+    class="cds--btn--copy__feedback"
     data-feedback="copy-button-feedback-text-foo"
   >
   </div>
@@ -124,7 +124,7 @@
 ```
 <div
   aria-label="code-assistive-text-foo"
-  class="bx--snippet-container"
+  class="cds--snippet-container"
   role="textbox"
   tabindex="0"
 >
@@ -136,14 +136,14 @@
   </code>
 </div>
 <button
-  class="bx--snippet-button"
+  class="cds--snippet-button"
   title="copy-button-assistive-text-foo"
   type="button"
 >
   <slot>
   </slot>
   <div
-    class="bx--btn--copy__feedback"
+    class="cds--btn--copy__feedback"
     data-feedback="copy-button-feedback-text-foo"
   >
   </div>
@@ -155,7 +155,7 @@
 
 ```
 <button
-  class="bx--snippet bx--snippet--inline"
+  class="cds--snippet cds--snippet--inline"
   title="copy-button-assistive-text-foo"
   type="button"
 >
@@ -164,7 +164,7 @@
     </slot>
   </code>
   <div
-    class="bx--btn--copy__feedback"
+    class="cds--btn--copy__feedback"
     data-feedback="copy-button-feedback-text-foo"
   >
   </div>
@@ -178,11 +178,11 @@
 
 ```
 <button
-  class="bx--snippet-btn--expand"
+  class="cds--snippet-btn--expand"
   type="button"
 >
   <span
-    class="bx--snippet-btn--text"
+    class="cds--snippet-btn--text"
     id="button-text"
   >
     <slot name="expand-button-text">

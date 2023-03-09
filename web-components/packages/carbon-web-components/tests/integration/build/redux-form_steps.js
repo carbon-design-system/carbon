@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -39,16 +39,16 @@ describe('Redux-form example', () => {
   }, Number(process.env.LAUNCH_TIMEOUT));
 
   it('should detect an invalid data', async () => {
-    await expect(page).toFill('bx-input[name="username"]', 'john');
-    await expect(page).toFill('bx-input[name="password"]', 'foo');
-    await expect(page).toClick('bx-btn[kind="primary"]');
-    await expect(page).toMatchElement('bx-input[name="password"][invalid]', { timeout: 2000 });
+    await expect(page).toFill('cds-input[name="username"]', 'john');
+    await expect(page).toFill('cds-input[name="password"]', 'foo');
+    await expect(page).toClick('cds-btn[kind="primary"]');
+    await expect(page).toMatchElement('cds-input[name="password"][invalid]', { timeout: 2000 });
   });
 
   it('should submit the data once all data is valid', async () => {
-    await expect(page).toFill('bx-input[name="username"]', 'john');
-    await expect(page).toFill('bx-input[name="password"]', 'redux-form');
-    await expect(page).toClick('bx-btn[kind="primary"]');
+    await expect(page).toFill('cds-input[name="username"]', 'john');
+    await expect(page).toFill('cds-input[name="password"]', 'redux-form');
+    await expect(page).toClick('cds-btn[kind="primary"]');
     await expect(page).toMatch('You submitted:', { timeout: 2000 });
   });
 

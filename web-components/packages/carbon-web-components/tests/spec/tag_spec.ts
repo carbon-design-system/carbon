@@ -13,17 +13,17 @@ import { filter } from '../../src/components/tag/tag-story';
 
 const filterTemplate = (props?) =>
   filter({
-    'bx-filter-tag': props,
+    'cds-filter-tag': props,
   });
 
-describe('bx-filter-tag', function () {
+describe('cds-filter-tag', function () {
   describe('Enabling/disabling', function () {
     const events = new EventManager();
 
     it('should allow firing click event for normal condition', async function () {
       render(filterTemplate(), document.body);
       await Promise.resolve();
-      const elem = document.querySelector('bx-filter-tag');
+      const elem = document.querySelector('cds-filter-tag');
       const spyClick = jasmine.createSpy('click');
       events.on(elem!, 'click', spyClick);
       elem!.shadowRoot!.querySelector('button')!.click();
@@ -33,7 +33,7 @@ describe('bx-filter-tag', function () {
     it('should disallow firing click event if disabled', async function () {
       render(filterTemplate({ disabled: true }), document.body);
       await Promise.resolve();
-      const elem = document.querySelector('bx-filter-tag');
+      const elem = document.querySelector('cds-filter-tag');
       const spyClick = jasmine.createSpy('click');
       events.on(elem!, 'click', spyClick);
       elem!.shadowRoot!.querySelector('button')!.click();

@@ -30,10 +30,10 @@ const getValues = (formData: FormData) => {
 
 const template = (props?) =>
   Default({
-    'bx-textarea': props,
+    'cds-textarea': props,
   });
 
-describe('bx-textarea', function () {
+describe('cds-textarea', function () {
   const events = new EventManager();
 
   describe('Rendering', function () {
@@ -57,11 +57,11 @@ describe('bx-textarea', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-textarea' as any)).toMatchSnapshot(
-        {
-          mode: 'shadow',
-        }
-      );
+      expect(
+        document.body.querySelector('cds-textarea' as any)
+      ).toMatchSnapshot({
+        mode: 'shadow',
+      });
     });
 
     it('Should reflect value in DOM', async function () {
@@ -73,7 +73,7 @@ describe('bx-textarea', function () {
       );
       await Promise.resolve();
       expect(
-        (document.body.querySelector('bx-textarea') as BXTextarea).value
+        (document.body.querySelector('cds-textarea') as BXTextarea).value
       ).toBe('value-foo');
     });
   });
@@ -88,7 +88,7 @@ describe('bx-textarea', function () {
       );
       await Promise.resolve();
       const textareaNode = document.body
-        .querySelector('bx-textarea')!
+        .querySelector('cds-textarea')!
         .shadowRoot!.querySelector('textarea');
       expect(textareaNode!.value).toBe('');
       textareaNode!.value = 'value-foo';
@@ -158,7 +158,7 @@ describe('bx-textarea', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-textarea')!;
+      elem = document.body.querySelector('cds-textarea')!;
     });
 
     it('should support checking if required value exists', async function () {

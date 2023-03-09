@@ -37,24 +37,24 @@ import '@carbon/web-components/es/components/multi-select/index.js';
 ### HTML
 
 ```html
-<bx-multi-select value="foo,baz">
-  <bx-multi-select-item value="foo">Foo</bx-multi-select-item>
-  <bx-multi-select-item value="bar">Bar</bx-multi-select-item>
-  <bx-multi-select-item value="baz">Baz</bx-multi-select-item>
-</bx-multi-select>
+<cds-multi-select value="foo,baz">
+  <cds-multi-select-item value="foo">Foo</cds-multi-select-item>
+  <cds-multi-select-item value="bar">Bar</cds-multi-select-item>
+  <cds-multi-select-item value="baz">Baz</cds-multi-select-item>
+</cds-multi-select>
 ```
 
 ## Filter mode
 
 If you'd like to have a search bar to filter through the dropdown options, you
-can add the `filterable` boolean to the `<bx-multi-select>` component.
+can add the `filterable` boolean to the `<cds-multi-select>` component.
 
 ```html
-<bx-multi-select value="foo,baz" filterable>
-  <bx-multi-select-item value="foo">Foo</bx-multi-select-item>
-  <bx-multi-select-item value="bar">Bar</bx-multi-select-item>
-  <bx-multi-select-item value="baz">Baz</bx-multi-select-item>
-</bx-multi-select>
+<cds-multi-select value="foo,baz" filterable>
+  <cds-multi-select-item value="foo">Foo</cds-multi-select-item>
+  <cds-multi-select-item value="bar">Bar</cds-multi-select-item>
+  <cds-multi-select-item value="baz">Baz</cds-multi-select-item>
+</cds-multi-select>
 ```
 
 Often you want to render the multi select items from your data. Below is an
@@ -63,52 +63,52 @@ stories apply to React, Angular, Vue, Backbone, Knockout and many others:
 
 ```javascript
 html`
-  <bx-multi-select>
+  <cds-multi-select>
     ${items.map(
       (item) =>
         html`
-          <bx-multi-select-item value="${item.value}"
-            >${item.title}</bx-multi-select-item
+          <cds-multi-select-item value="${item.value}"
+            >${item.title}</cds-multi-select-item
           >
         `
     )}
-  </bx-multi-select>
+  </cds-multi-select>
 `;
 ```
 
 ## Selection
 
 When user attempts to change selection in multi select item,
-`bx-multi-select-beingselected` event fires on `<bx-multi-select>`, which has
+`cds-multi-select-beingselected` event fires on `<cds-multi-select>`, which has
 the following properties in the event details:
 
 | Property | Description                                                    |
 | -------- | -------------------------------------------------------------- |
-| `item`   | The `<bx-multi-select-item>` whose selection is being changed. |
+| `item`   | The `<cds-multi-select-item>` whose selection is being changed. |
 
-`bx-multi-select-beingselected` bubbles and is cancelable. Canceling this event
+`cds-multi-select-beingselected` bubbles and is cancelable. Canceling this event
 means canceling change in selection.
 
 ## Note on keyboard navigation
 
-Similar to native `<select>`, `<bx-multi-select>` keeps focusing on itself even
+Similar to native `<select>`, `<cds-multi-select>` keeps focusing on itself even
 while the menu is open and user is navigating through arrow keys. Given that,
-`<bx-multi-select-item>` does not handle keyboard events by itself.
-`<bx-multi-select>` takes care of handling keyboard events for multi select
-items and updates `<bx-multi-select-item>`.
+`<cds-multi-select-item>` does not handle keyboard events by itself.
+`<cds-multi-select>` takes care of handling keyboard events for multi select
+items and updates `<cds-multi-select-item>`.
 
-## `<bx-multi-select>` attributes, properties and events
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-multi-select open>`) and `false` means not setting the attribute (e.g.
-`<bx-multi-select>` without `open` attribute).
-
-<Props of="bx-multi-select" />
-
-## `<bx-multi-select-item>` attributes and properties
+## `<cds-multi-select>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-multi-select-item disabled>`) and `false` means not setting the attribute
-(e.g. `<bx-multi-select-item>` without `disabled` attribute).
+`<cds-multi-select open>`) and `false` means not setting the attribute (e.g.
+`<cds-multi-select>` without `open` attribute).
 
-<Props of="bx-multi-select-item" />
+<Props of="cds-multi-select" />
+
+## `<cds-multi-select-item>` attributes and properties
+
+Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
+`<cds-multi-select-item disabled>`) and `false` means not setting the attribute
+(e.g. `<cds-multi-select-item>` without `disabled` attribute).
+
+<Props of="cds-multi-select-item" />

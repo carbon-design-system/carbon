@@ -79,7 +79,7 @@ class inheriting `HostListenerMixin()` and attaches an event listener using the
 target method as the listener. The `type` argument can be something like
 `document:click` so the `click` event listener is attached to `document`.
 
-Here's an example seen in `<bx-modal>` code:
+Here's an example seen in `<cds-modal>` code:
 
 ```typescript
 ...
@@ -103,11 +103,11 @@ class BXModal extends HostListenerMixin(LitElement) {
 
 ## Component styles for different component states/variants
 
-Carbon core CSS uses BEM modifier like `bx--btn--danger` to style different
+Carbon core CSS uses BEM modifier like `cds--btn--danger` to style different
 states/variants of a component.
 
 OTOH `carbon-web-components` uses attributes to represent different
-states/variants (e.g. `<bx-btn type="danger">`), in a similar manner as how
+states/variants (e.g. `<cds-btn type="danger">`), in a similar manner as how
 attributes influence states/variants of native elements (e.g.
 `<input type="hidden">`).
 
@@ -159,7 +159,7 @@ of the component internals being poked around. The current guideline for using
 `protected` is the following:
 
 - Ones where override happens within this component library (e.g.
-  `<bx-multi-select>` inheriting `<bx-dropdown>`)
+  `<cds-multi-select>` inheriting `<cds-dropdown>`)
 - Element ID's auto-generation logic
 - (Possibly some more, e.g. ones whose API are stable enough)
 
@@ -188,12 +188,13 @@ CustomElementClass.staticPropName;
 
 Wherever it makes sense, `carbon-web-components` translates user-initiated
 events to something that gives event listeners more context of what they mean.
-For example, `<bx-modal>` translates `click` event on `<bx-modal-close-button>`
-to `bx-modal-beingclosed` and `bx-modal-closed` custom events.
+For example, `<cds-modal>` translates `click` event on
+`<cds-modal-close-button>` to `cds-modal-beingclosed` and `cds-modal-closed`
+custom events.
 
-`bx-modal-beingclosed` is cancelable in a similar manner as how `click` event on
-`<a href="...">` is cancelable; If `bx-modal-beingclosed` is canceled,
-`<bx-modal>` stops closing itself.
+`cds-modal-beingclosed` is cancelable in a similar manner as how `click` event
+on `<a href="...">` is cancelable; If `cds-modal-beingclosed` is canceled,
+`<cds-modal>` stops closing itself.
 
 We define custom event names as static properties so derived classes can
 customize them.
@@ -213,7 +214,7 @@ This is for supporting locale-specific pluralization, etc. that require string
 interpolation as well as the logic to dictate the locale-specific rule of
 pluralization.
 
-The only exception to the above rules is `<bx-date-picker>` which uses the
+The only exception to the above rules is `<cds-date-picker>` which uses the
 `locale` property for all locale-specific info since there is a huge amount of
 translatable strings.
 
@@ -223,11 +224,11 @@ To avoid problems with collation, the primary means for user to determine order
 in list item is ordering them in DOM, for example:
 
 ```html
-<bx-dropdown>
-  <bx-dropdown-item value="all">Option 1</bx-dropdown-item>
-  <bx-dropdown-item value="cloudFoundry">Option 2</bx-dropdown-item>
-  <bx-dropdown-item value="staging">Option 3</bx-dropdown-item>
-</bx-dropdown>
+<cds-dropdown>
+  <cds-dropdown-item value="all">Option 1</cds-dropdown-item>
+  <cds-dropdown-item value="cloudFoundry">Option 2</cds-dropdown-item>
+  <cds-dropdown-item value="staging">Option 3</cds-dropdown-item>
+</cds-dropdown>
 ```
 
 ## Null checks
@@ -257,13 +258,14 @@ properties observed. Specifically, `carbon-web-components` doesn't set
 
 We use ShadyCSS shim as the emulation of scoped CSS in shadow DOM in IE11. There
 is one notable limitation with that; It appears that
-`:host(bx-foo) ::slotted(bx-bar)` selector does not work in ShadyCSS unless
+`:host(cds-foo) ::slotted(cds-bar)` selector does not work in ShadyCSS unless
 `<slot>` is a direct child of the shadow root. There was an issue in ShadyCSS
 repo (https://github.com/webcomponents/shadycss/issues/5) that seems to have
 explained that in detail, but the repository has been deleted somehow.
 
 To make such case work for ShadyCSS, we add a CSS class to an ancestor of
-`<slot>` in shadow DOM, and use `.bx-ce--some-class ::slotted(bx-bar)` selector.
+`<slot>` in shadow DOM, and use `.cds-ce--some-class ::slotted(cds-bar)`
+selector.
 
 ## Custom element registration
 
@@ -279,13 +281,13 @@ importing the corresponding modules. It may not be desirable in two scenarios:
 
 ## Propagating misc attributes from shadow host to an element in shadow DOM
 
-Some components, e.g. `<bx-btn>`, simply represent the content in shadow DOM,
+Some components, e.g. `<cds-btn>`, simply represent the content in shadow DOM,
 e.g. `<button>` in it. It's sometimes desiable for applications to have control
 of attributes in `<button>`, for example, adding `data-` attributes there.
 
 In such case, we let consumer create a derived class. For example, its
-`.attributeChangedCallback()` can propagate `<bx-btn>`'s attribute to `<button>`
-in it.
+`.attributeChangedCallback()` can propagate `<cds-btn>`'s attribute to
+`<button>` in it.
 
 ## Private properties
 
@@ -295,5 +297,5 @@ support inherited components.
 
 ## Component-specific considerations
 
-- [`<bx-tabs>`](./components/tabs/coding-conventions.md)
+- [`<cds-tabs>`](./components/tabs/coding-conventions.md)
 - [Handling `formdata` event](./components/form/form-data.md)

@@ -31,10 +31,10 @@ const getValues = (formData: FormData) => {
 
 const template = (props?) =>
   Default({
-    'bx-input': props,
+    'cds-input': props,
   });
 
-describe('bx-input', function () {
+describe('cds-input', function () {
   const events = new EventManager();
 
   describe('Rendering', function () {
@@ -63,7 +63,7 @@ describe('bx-input', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-input' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-input' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -128,7 +128,7 @@ describe('bx-input', function () {
     beforeEach(async function () {
       render(template(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-input')!;
+      elem = document.body.querySelector('cds-input')!;
     });
 
     it('should support checking if required value exists', async function () {

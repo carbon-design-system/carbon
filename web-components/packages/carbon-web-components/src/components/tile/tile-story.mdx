@@ -36,7 +36,7 @@ import '@carbon/web-components/es/components/tile/index.js';
 ### HTML
 
 ```html
-<bx-tile>Default tile</bx-tile>
+<cds-tile>Default tile</cds-tile>
 ```
 
 ## Read-only tile (default)
@@ -53,12 +53,12 @@ clickable state, which redirects the user to a new page. Clickable tiles cannot
 contain separate internal CTAs.
 
 ```html
-<bx-clickable-tile> Clickable tile </bx-clickable-tile>
+<cds-clickable-tile> Clickable tile </cds-clickable-tile>
 ```
 
-## `<bx-clickable-tile>` attributes and properties
+## `<cds-clickable-tile>` attributes and properties
 
-<Props of="bx-clickable-tile" />
+<Props of="cds-clickable-tile" />
 
 ## Selectable tile
 
@@ -71,35 +71,35 @@ plans.
 ```html
 <fieldset>
   <legend>Single-select tiles</legend>
-  <bx-radio-tile name="selectable-tile"> Single-select Tile </bx-radio-tile>
-  <bx-radio-tile name="selectable-tile"> Single-select Tile </bx-radio-tile>
-  <bx-radio-tile name="selectable-tile"> Single-select Tile </bx-radio-tile>
+  <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
+  <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
+  <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
 </fieldset>
 ```
 
-## `<bx-radio-tile>` attributes and properties
+## `<cds-radio-tile>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-radio-tile selected>`) and `false` means not setting the attribute (e.g.
-`<bx-radio-tile>` without `selected` attribute).
+`<cds-radio-tile selected>`) and `false` means not setting the attribute (e.g.
+`<cds-radio-tile>` without `selected` attribute).
 
-<Props of="bx-radio-tile" />
+<Props of="cds-radio-tile" />
 
 ## Multi-selectable tile
 
 ```html
-<bx-selectable-tile name="selectable-tile">
+<cds-selectable-tile name="selectable-tile">
   Multi-select Tile
-</bx-selectable-tile>
+</cds-selectable-tile>
 ```
 
-## `<bx-selectable-tile>` attributes and properties and events
+## `<cds-selectable-tile>` attributes and properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-selectable-tile selected>`) and `false` means not setting the attribute
-(e.g. `<bx-selectable-tile>` without `selected` attribute).
+`<cds-selectable-tile selected>`) and `false` means not setting the attribute
+(e.g. `<cds-selectable-tile>` without `selected` attribute).
 
-<Props of="bx-selectable-tile" />
+<Props of="cds-selectable-tile" />
 
 ## Expandable tile
 
@@ -110,23 +110,23 @@ tiles may contain internal CTAs (like links to docs) if the internal CTA is
 given its own click target.
 
 ```html
-<bx-expandable-tile>
-  <bx-tile-above-the-fold-content
+<cds-expandable-tile>
+  <cds-tile-above-the-fold-content
     slot="above-the-fold-content"
     style="height: 200px"
   >
     Above the fold content here
-  </bx-tile-above-the-fold-content>
-  <bx-tile-below-the-fold-content style="height: 300px">
+  </cds-tile-above-the-fold-content>
+  <cds-tile-below-the-fold-content style="height: 300px">
     Below the fold content here
-  </bx-tile-below-the-fold-content>
-</bx-expandable-tile>
+  </cds-tile-below-the-fold-content>
+</cds-expandable-tile>
 ```
 
-## `<bx-expandable-tile>` attributes, properties and events
+## `<cds-expandable-tile>` attributes, properties and events
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-expandable-tile expanded>`) and `false` means not setting the attribute
-(e.g. `<bx-expandable-tile>` without `expanded` attribute).
+`<cds-expandable-tile expanded>`) and `false` means not setting the attribute
+(e.g. `<cds-expandable-tile>` without `expanded` attribute).
 
-<Props of="bx-expandable-tile" />
+<Props of="cds-expandable-tile" />

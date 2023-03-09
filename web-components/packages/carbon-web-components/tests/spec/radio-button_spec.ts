@@ -29,27 +29,27 @@ const getValues = (formData: FormData) => {
 
 const template = (props?) => Default(props);
 
-describe('bx-radio-button', function () {
+describe('cds-radio-button', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(template(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-radio-button[value="staging"]' as any)
+        document.body.querySelector('cds-radio-button[value="staging"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
     it('Should render with various attributes', async function () {
       render(
         template({
-          'bx-radio-button-group': {
+          'cds-radio-button-group': {
             disabled: true,
             labelPosition: RADIO_BUTTON_LABEL_POSITION.LEFT,
             name: 'name-foo',
             orientation: RADIO_BUTTON_ORIENTATION.VERTICAL,
             value: 'staging',
           },
-          'bx-radio-button': {
+          'cds-radio-button': {
             hideLabel: true,
             labelText: 'label-text-foo',
           },
@@ -58,21 +58,21 @@ describe('bx-radio-button', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-radio-button[value="staging"]' as any)
+        document.body.querySelector('cds-radio-button[value="staging"]' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
   });
 
-  describe('Communication between <bx-radio-button-group> and <bx-radio-button>', function () {
+  describe('Communication between <cds-radio-button-group> and <cds-radio-button>', function () {
     it('Should propagate disabled', async function () {
       render(
-        template({ 'bx-radio-button-group': { disabled: true } }),
+        template({ 'cds-radio-button-group': { disabled: true } }),
         document.body
       );
       await Promise.resolve();
       expect(
         Array.prototype.every.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.disabled
         )
       ).toBe(true);
@@ -81,7 +81,7 @@ describe('bx-radio-button', function () {
     it('Should propagate labelPosition', async function () {
       render(
         template({
-          'bx-radio-button-group': {
+          'cds-radio-button-group': {
             labelPosition: RADIO_BUTTON_LABEL_POSITION.LEFT,
           },
         }),
@@ -90,7 +90,7 @@ describe('bx-radio-button', function () {
       await Promise.resolve();
       expect(
         Array.prototype.every.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.labelPosition === RADIO_BUTTON_LABEL_POSITION.LEFT
         )
       ).toBe(true);
@@ -99,7 +99,7 @@ describe('bx-radio-button', function () {
     it('Should propagate orientation', async function () {
       render(
         template({
-          'bx-radio-button-group': {
+          'cds-radio-button-group': {
             orientation: RADIO_BUTTON_ORIENTATION.VERTICAL,
           },
         }),
@@ -108,7 +108,7 @@ describe('bx-radio-button', function () {
       await Promise.resolve();
       expect(
         Array.prototype.every.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.orientation === RADIO_BUTTON_ORIENTATION.VERTICAL
         )
       ).toBe(true);
@@ -117,61 +117,61 @@ describe('bx-radio-button', function () {
     it('Should propagate name', async function () {
       render(
         template({
-          'bx-radio-button-group': { name: 'name-foo' },
+          'cds-radio-button-group': { name: 'name-foo' },
         }),
         document.body
       );
       await Promise.resolve();
       expect(
         Array.prototype.every.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.name === 'name-foo'
         )
       ).toBe(true);
     });
 
-    it('Should select <bx-radio-button> that matches the given value', async function () {
+    it('Should select <cds-radio-button> that matches the given value', async function () {
       render(
         template({
-          'bx-radio-button-group': { value: 'staging' },
+          'cds-radio-button-group': { value: 'staging' },
         }),
         document.body
       );
       await Promise.resolve();
       expect(
         Array.prototype.map.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.checked
         )
       ).toEqual([false, false, true]);
     });
 
-    it('Should update the value upon clicking <bx-radio-button>', async function () {
+    it('Should update the value upon clicking <cds-radio-button>', async function () {
       render(
         template({
-          'bx-radio-button-group': { name: 'name-foo' },
+          'cds-radio-button-group': { name: 'name-foo' },
         }),
         document.body
       );
       await Promise.resolve();
       (
         document.body.querySelector(
-          'bx-radio-button[value="staging"]'
+          'cds-radio-button[value="staging"]'
         ) as HTMLElement
       ).click();
       expect(
         (
           document.body.querySelector(
-            'bx-radio-button-group'
+            'cds-radio-button-group'
           ) as BXRadioButtonGroup
         ).value
       ).toBe('staging');
     });
 
-    it('Should update the value upon space key on <bx-radio-button>', async function () {
+    it('Should update the value upon space key on <cds-radio-button>', async function () {
       render(
         template({
-          'bx-radio-button-group': { name: 'name-foo' },
+          'cds-radio-button-group': { name: 'name-foo' },
         }),
         document.body
       );
@@ -181,7 +181,7 @@ describe('bx-radio-button', function () {
         composed: true,
       });
       const radioBaz = document.body.querySelector(
-        'bx-radio-button[value="staging"]'
+        'cds-radio-button[value="staging"]'
       );
       (radioBaz as HTMLElement).dispatchEvent(
         Object.assign(event, { key: ' ' })
@@ -189,16 +189,16 @@ describe('bx-radio-button', function () {
       expect(
         (
           document.body.querySelector(
-            'bx-radio-button-group'
+            'cds-radio-button-group'
           ) as BXRadioButtonGroup
         ).value
       ).toBe('staging');
     });
 
-    it('Should update the value upon enter key on <bx-radio-button>', async function () {
+    it('Should update the value upon enter key on <cds-radio-button>', async function () {
       render(
         template({
-          'bx-radio-button-group': { name: 'name-foo' },
+          'cds-radio-button-group': { name: 'name-foo' },
         }),
         document.body
       );
@@ -208,7 +208,7 @@ describe('bx-radio-button', function () {
         composed: true,
       });
       const radioBaz = document.body.querySelector(
-        'bx-radio-button[value="staging"]'
+        'cds-radio-button[value="staging"]'
       );
       (radioBaz as HTMLElement).dispatchEvent(
         Object.assign(event, { key: 'Enter' })
@@ -216,7 +216,7 @@ describe('bx-radio-button', function () {
       expect(
         (
           document.body.querySelector(
-            'bx-radio-button-group'
+            'cds-radio-button-group'
           ) as BXRadioButtonGroup
         ).value
       ).toBe('staging');
@@ -227,7 +227,7 @@ describe('bx-radio-button', function () {
     it('Should use left/right key for navigation in horizontal mode', async function () {
       render(
         template({
-          'bx-radio-button-group': {
+          'cds-radio-button-group': {
             orientation: RADIO_BUTTON_ORIENTATION.HORIZONTAL,
             name: 'name-foo',
           },
@@ -236,7 +236,7 @@ describe('bx-radio-button', function () {
       );
       await Promise.resolve();
       const radioFoo = document.body.querySelector(
-        'bx-radio-button[value="all"]'
+        'cds-radio-button[value="all"]'
       ) as HTMLElement;
       radioFoo.focus();
       const event = new CustomEvent('keydown', {
@@ -247,30 +247,30 @@ describe('bx-radio-button', function () {
       expect(
         (
           document.body.querySelector(
-            'bx-radio-button-group'
+            'cds-radio-button-group'
           ) as BXRadioButtonGroup
         ).value
       ).toBe('cloudFoundry');
       expect(
         Array.prototype.map.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.shadowRoot.querySelector('input').tabIndex
         )
       ).toEqual([-1, 0, -1]);
       const radioBar = document.body.querySelector(
-        'bx-radio-button[value="cloudFoundry"]'
+        'cds-radio-button[value="cloudFoundry"]'
       ) as HTMLElement;
       radioBar.dispatchEvent(Object.assign(event, { key: 'ArrowLeft' }));
       expect(
         (
           document.body.querySelector(
-            'bx-radio-button-group'
+            'cds-radio-button-group'
           ) as BXRadioButtonGroup
         ).value
       ).toBe('all');
       expect(
         Array.prototype.map.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.shadowRoot.querySelector('input').tabIndex
         )
       ).toEqual([0, -1, -1]);
@@ -279,7 +279,7 @@ describe('bx-radio-button', function () {
     it('Should use up/down key for navigation in vertical mode', async function () {
       render(
         template({
-          'bx-radio-button-group': {
+          'cds-radio-button-group': {
             orientation: RADIO_BUTTON_ORIENTATION.VERTICAL,
             name: 'name-foo',
           },
@@ -288,7 +288,7 @@ describe('bx-radio-button', function () {
       );
       await Promise.resolve();
       const radioFoo = document.body.querySelector(
-        'bx-radio-button[value="all"]'
+        'cds-radio-button[value="all"]'
       ) as HTMLElement;
       radioFoo.focus();
       const event = new CustomEvent('keydown', {
@@ -299,30 +299,30 @@ describe('bx-radio-button', function () {
       expect(
         (
           document.body.querySelector(
-            'bx-radio-button-group'
+            'cds-radio-button-group'
           ) as BXRadioButtonGroup
         ).value
       ).toBe('cloudFoundry');
       expect(
         Array.prototype.map.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.shadowRoot.querySelector('input').tabIndex
         )
       ).toEqual([-1, 0, -1]);
       const radioBar = document.body.querySelector(
-        'bx-radio-button[value="cloudFoundry"]'
+        'cds-radio-button[value="cloudFoundry"]'
       ) as HTMLElement;
       radioBar.dispatchEvent(Object.assign(event, { key: 'ArrowUp' }));
       expect(
         (
           document.body.querySelector(
-            'bx-radio-button-group'
+            'cds-radio-button-group'
           ) as BXRadioButtonGroup
         ).value
       ).toBe('all');
       expect(
         Array.prototype.map.call(
-          document.body.querySelectorAll('bx-radio-button'),
+          document.body.querySelectorAll('cds-radio-button'),
           (radio) => radio.shadowRoot.querySelector('input').tabIndex
         )
       ).toEqual([0, -1, -1]);
@@ -335,7 +335,7 @@ describe('bx-radio-button', function () {
         html`
           <form>
             ${template({
-              'bx-radio-button-group': {
+              'cds-radio-button-group': {
                 name: 'name-foo',
                 value: 'staging',
               },
@@ -362,7 +362,7 @@ describe('bx-radio-button', function () {
         html`
           <form>
             ${template({
-              'bx-radio-button-group': {
+              'cds-radio-button-group': {
                 value: 'staging',
               },
             })}
@@ -388,7 +388,7 @@ describe('bx-radio-button', function () {
         html`
           <form>
             ${template({
-              'bx-radio-button-group': {
+              'cds-radio-button-group': {
                 name: 'name-foo',
               },
             })}
@@ -414,7 +414,7 @@ describe('bx-radio-button', function () {
         html`
           <form>
             ${template({
-              'bx-radio-button-group': {
+              'cds-radio-button-group': {
                 disabled: true,
                 name: 'name-foo',
               },

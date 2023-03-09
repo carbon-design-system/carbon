@@ -1,4 +1,4 @@
-# `bx-multi-select`
+# `cds-multi-select`
 
 ## `Misc attributes`
 
@@ -6,7 +6,7 @@
 
 ```
 <label
-  class="bx--label"
+  class="cds--label"
   hidden=""
   part="label-text"
 >
@@ -14,7 +14,7 @@
   </slot>
 </label>
 <div
-  class="bx--dropdown bx--list-box"
+  class="cds--dropdown cds--list-box"
   role="listbox"
 >
   <div
@@ -23,22 +23,22 @@
     aria-haspopup="listbox"
     aria-labelledby="trigger-label"
     aria-owns="menu-body"
-    class="bx--list-box__field"
+    class="cds--list-box__field"
     part="trigger-button"
     role="button"
     tabindex="0"
   >
     <span
-      class="bx--list-box__label"
+      class="cds--list-box__label"
       id="trigger-label"
     >
     </span>
-    <div class="bx--list-box__menu-icon">
+    <div class="cds--list-box__menu-icon">
     </div>
   </div>
 </div>
 <div
-  class="bx--form__helper-text"
+  class="cds--form__helper-text"
   hidden=""
   part="helper-text"
 >
@@ -48,7 +48,7 @@
 <div
   aria-live="assertive"
   aria-relevant="additions text"
-  class="bx--assistive-text"
+  class="cds--assistive-text"
   role="status"
 >
 </div>
@@ -59,7 +59,7 @@
 
 ```
 <label
-  class="bx--label bx--label--disabled"
+  class="cds--label cds--label--disabled"
   part="label-text"
 >
   <slot name="label-text">
@@ -67,7 +67,7 @@
   </slot>
 </label>
 <div
-  class="bx--dropdown bx--dropdown--inline bx--dropdown--invalid bx--list-box bx--list-box--disabled bx--list-box--expanded bx--list-box--inline"
+  class="cds--dropdown cds--dropdown--inline cds--dropdown--invalid cds--list-box cds--list-box--disabled cds--list-box--expanded cds--list-box--inline"
   data-invalid=""
   role="listbox"
 >
@@ -77,13 +77,13 @@
     aria-haspopup="listbox"
     aria-labelledby="trigger-label"
     aria-owns="menu-body"
-    class="bx--list-box__field"
+    class="cds--list-box__field"
     part="trigger-button"
     role="button"
     tabindex="0"
   >
     <div
-      class="bx--list-box__selection bx--list-box__selection--multi bx--tag--filter"
+      class="cds--list-box__selection cds--list-box__selection--multi cds--tag--filter"
       id="selection-button"
       role="button"
       tabindex="0"
@@ -92,16 +92,16 @@
       1
     </div>
     <span
-      class="bx--list-box__label"
+      class="cds--list-box__label"
       id="trigger-label"
     >
       trigger-content-foo
     </span>
-    <div class="bx--list-box__menu-icon bx--list-box__menu-icon--open">
+    <div class="cds--list-box__menu-icon cds--list-box__menu-icon--open">
     </div>
   </div>
   <div
-    class="bx--list-box__menu"
+    class="cds--list-box__menu"
     id="menu-body"
     part="menu-body"
     role="listbox"
@@ -112,7 +112,7 @@
   </div>
 </div>
 <div
-  class="bx--form-requirement"
+  class="cds--form-requirement"
   part="validity-message"
 >
   <slot name="validity-message">
@@ -122,7 +122,7 @@
 <div
   aria-live="assertive"
   aria-relevant="additions text"
-  class="bx--assistive-text"
+  class="cds--assistive-text"
   role="status"
 >
 </div>

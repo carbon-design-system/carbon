@@ -14,10 +14,10 @@ import { Default } from '../../src/components/content-switcher/content-switcher-
 
 const template = (props?) =>
   Default({
-    'bx-content-switcher': props,
+    'cds-content-switcher': props,
   });
 
-describe('bx-content-switcher', function () {
+describe('cds-content-switcher', function () {
   describe('Selecting an item', function () {
     const events = new EventManager();
 
@@ -25,7 +25,7 @@ describe('bx-content-switcher', function () {
       render(template(), document.body);
       await Promise.resolve();
       const itemNodes = document.body.querySelectorAll(
-        'bx-content-switcher-item'
+        'cds-content-switcher-item'
       );
       (itemNodes[2] as HTMLElement).click();
       await Promise.resolve();
@@ -40,24 +40,24 @@ describe('bx-content-switcher', function () {
       render(template(), document.body);
       await Promise.resolve();
       const itemNodes = document.body.querySelectorAll(
-        'bx-content-switcher-item'
+        'cds-content-switcher-item'
       );
       (itemNodes[2] as HTMLElement).click();
       await Promise.resolve();
       expect(
-        (document.body.querySelector('bx-content-switcher') as BXTabs).value
+        (document.body.querySelector('cds-content-switcher') as BXTabs).value
       ).toBe('staging');
     });
 
     it('should provide a way to switch item with a value', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      (document.body.querySelector('bx-content-switcher') as BXTabs).value =
+      (document.body.querySelector('cds-content-switcher') as BXTabs).value =
         'staging';
-      await Promise.resolve(); // Update cycle for `<bx-content-switcher>`
-      await Promise.resolve(); // Update cycle for `<bx-content-switcher-item>`
+      await Promise.resolve(); // Update cycle for `<cds-content-switcher>`
+      await Promise.resolve(); // Update cycle for `<cds-content-switcher-item>`
       const itemNodes = document.body.querySelectorAll(
-        'bx-content-switcher-item'
+        'cds-content-switcher-item'
       );
       expect(itemNodes[0].hasAttribute('selected')).toBe(false);
       expect(itemNodes[1].hasAttribute('selected')).toBe(false);
@@ -69,16 +69,16 @@ describe('bx-content-switcher', function () {
     it('should provide a way to cancel switching item', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      const elem = document.body.querySelector('bx-content-switcher');
+      const elem = document.body.querySelector('cds-content-switcher');
       const itemNodes = document.body.querySelectorAll(
-        'bx-content-switcher-item'
+        'cds-content-switcher-item'
       );
-      (document.body.querySelector('bx-content-switcher') as BXTabs).value =
+      (document.body.querySelector('cds-content-switcher') as BXTabs).value =
         'all';
       await Promise.resolve();
       events.on(
         elem!,
-        'bx-content-switcher-beingselected',
+        'cds-content-switcher-beingselected',
         (event: CustomEvent) => {
           expect(event.detail.item).toBe(itemNodes[2]);
           event.preventDefault();
@@ -103,7 +103,7 @@ describe('bx-content-switcher', function () {
       render(template(), document.body);
       await Promise.resolve();
       const itemNodes = document.body.querySelectorAll(
-        'bx-content-switcher-item'
+        'cds-content-switcher-item'
       );
       itemNodes[0].dispatchEvent(
         new CustomEvent('mouseover', { bubbles: true })

@@ -12,16 +12,16 @@ body {
   padding: 2rem;
 }
 
-bx-btn + bx-btn {
+cds-btn + cds-btn {
   margin: 0 1rem;
 }
 
-bx-form-item,
-bx-inline-notification {
+cds-form-item,
+cds-inline-notification {
   margin-bottom: 2rem;
 }
 
-.bx-ce-demo-redux-form--btn-container {
+.cds-ce-demo-redux-form--btn-container {
   display: flex;
   align-items: center;
 }

@@ -25,10 +25,10 @@ const getValues = (formData: FormData) => {
 
 const template = (props?) =>
   Default({
-    'bx-toggle': props,
+    'cds-toggle': props,
   });
 
-describe('bx-toggle', function () {
+describe('cds-toggle', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
       render(
@@ -38,7 +38,7 @@ describe('bx-toggle', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-toggle' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-toggle' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });
@@ -59,7 +59,7 @@ describe('bx-toggle', function () {
         document.body
       );
       await Promise.resolve();
-      expect(document.body.querySelector('bx-toggle' as any)).toMatchSnapshot({
+      expect(document.body.querySelector('cds-toggle' as any)).toMatchSnapshot({
         mode: 'shadow',
       });
     });

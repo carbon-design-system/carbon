@@ -1,4 +1,4 @@
-# `bx-textarea`
+# `cds-textarea`
 
 ## `Rendering`
 
@@ -6,18 +6,18 @@
 
 ```
 <label
-  class="bx--label bx--label--disabled"
+  class="cds--label cds--label--disabled"
   for="input"
 >
   <slot name="label-text">
     label-text-foo
   </slot>
 </label>
-<div class="bx--text-area__wrapper">
+<div class="cds--text-area__wrapper">
   <textarea
     autocomplete=""
     autofocus=""
-    class="bx--text-area bx--text-area--light bx--text-area--v2"
+    class="cds--text-area cds--text-area--light cds--text-area--v2"
     cols="50"
     disabled=""
     id="input"
@@ -30,12 +30,12 @@
   >
   </textarea>
 </div>
-<div class="bx--form__helper-text bx--form__helper-text--disabled">
+<div class="cds--form__helper-text cds--form__helper-text--disabled">
   <slot name="helper-text">
     helper-text-foo
   </slot>
 </div>
-<div class="bx--form-requirement">
+<div class="cds--form-requirement">
   <slot name="validity-message">
     validity-message-foo
   </slot>

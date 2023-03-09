@@ -15,29 +15,29 @@ LICENSE file in the root directory of this source tree.
         href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
   <style>
     /* Suppress custom element until styles are loaded */
-    bx-modal:not(:defined) {
+    cds-modal:not(:defined) {
       display: none;
     }
   </style>
   <script type="module" src="src/index.js"></script>
 </head>
 <body>
-  <bx-btn id="modal-example-button">
+  <cds-btn id="modal-example-button">
     Open Modal
-  </bx-btn>
+  </cds-btn>
 
-  <bx-modal id="modal-example">
-    <bx-modal-header>
-      <bx-modal-close-button></bx-modal-close-button>
-      <bx-modal-label>Label (Optional)</bx-modal-label>
-      <bx-modal-heading>Modal Title</bx-modal-heading>
-    </bx-modal-header>
-    <bx-modal-body><p>Modal text description</p></bx-modal-body>
-    <bx-modal-footer>
-      <bx-modal-footer-button kind="secondary" data-modal-close>Cancel</bx-modal-footer-button>
-      <bx-modal-footer-button kind="primary">Save</bx-modal-footer-button>
-    </bx-modal-footer>
-  </bx-modal>
+  <cds-modal id="modal-example">
+    <cds-modal-header>
+      <cds-modal-close-button></cds-modal-close-button>
+      <cds-modal-label>Label (Optional)</cds-modal-label>
+      <cds-modal-heading>Modal Title</cds-modal-heading>
+    </cds-modal-header>
+    <cds-modal-body><p>Modal text description</p></cds-modal-body>
+    <cds-modal-footer>
+      <cds-modal-footer-button kind="secondary" data-modal-close>Cancel</cds-modal-footer-button>
+      <cds-modal-footer-button kind="primary">Save</cds-modal-footer-button>
+    </cds-modal-footer>
+  </cds-modal>
 
   <script type="text/javascript">
     document.getElementById('modal-example-button').addEventListener('click', () => {

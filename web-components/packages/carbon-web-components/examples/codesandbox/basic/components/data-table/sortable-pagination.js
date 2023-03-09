@@ -3,7 +3,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2022
+ * Copyright IBM Corp. 2022, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -14,7 +14,7 @@ import { columns, rows } from './data.js';
 
 // event listener for the table sorting event
 // triggered when user clicks on the sorting icon of the header cell
-document.addEventListener('bx-table-header-cell-sort', ({ defaultPrevented, detail, target }) => {
+document.addEventListener('cds-table-header-cell-sort', ({ defaultPrevented, detail, target }) => {
   if (!defaultPrevented) {
     const { columnId } = target.dataset;
     const { sortDirection: direction } = detail;
@@ -30,13 +30,13 @@ document.addEventListener('bx-table-header-cell-sort', ({ defaultPrevented, deta
 
 // event listener for pagination event
 // triggered when change in the row number the current page starts with
-document.addEventListener('bx-pagination-changed-current', ({ detail }) => {
+document.addEventListener('cds-pagination-changed-current', ({ detail }) => {
   table.state.setStart(detail.start);
 });
 
 // event listener for pagination event
 // triggered after the number of rows per page is changed
-document.addEventListener('bx-page-sizes-select-changed', ({ detail }) => {
+document.addEventListener('cds-page-sizes-select-changed', ({ detail }) => {
   table.state.setPageSize(detail.value);
 });
 
@@ -48,17 +48,17 @@ function _renderPagination() {
   }
 
   return `
-    <bx-pagination
+    <cds-pagination
       page-size="${pageSize}"
       start="${start}"
       total="${rows.length}"
     >
-      <bx-page-sizes-select slot="page-sizes-select">
+      <cds-page-sizes-select slot="page-sizes-select">
         <option value="3">3</option>
         <option value="6">6</option>
-      </bx-page-sizes-select>
-      <bx-pages-select></bx-pages-select>
-    </bx-pagination>
+      </cds-page-sizes-select>
+      <cds-pages-select></cds-pages-select>
+    </cds-pagination>
   `;
 }
 
@@ -79,39 +79,39 @@ const table = () => {
   }
 
   return `
-    <bx-table>
-      <bx-table-head>
-        <bx-table-header-row>
+    <cds-table>
+      <cds-table-head>
+        <cds-table-header-row>
           ${columns
             .map((column) => {
               const { id: columnId, sortCycle, title } = column;
               const sortDirectionForThisCell =
                 sortCycle && (columnId === sortColumnId ? sortDirection : TABLE_SORT_DIRECTION.NONE);
-              return `<bx-table-header-cell ${sortCycle && `sort-cycle="${sortCycle}"`} ${
+              return `<cds-table-header-cell ${sortCycle && `sort-cycle="${sortCycle}"`} ${
                 sortDirectionForThisCell && `sort-direction="${sortDirectionForThisCell}"`
-              } data-column-id="${columnId}">${title}</bx-table-header-cell>`;
+              } data-column-id="${columnId}">${title}</cds-table-header-cell>`;
             })
             .join('')}
-        </bx-table-header-row>
-      </bx-table-head>
-      <bx-table-body>
+        </cds-table-header-row>
+      </cds-table-head>
+      <cds-table-body>
         ${sortedRows
           .slice(start, start + pageSize)
           .map((row) => {
             const { id: rowId } = row;
             return `
-          <bx-table-row data-row-id="${rowId}">
+          <cds-table-row data-row-id="${rowId}">
             ${columns
               .map((column) => {
                 const { id: columnId } = column;
-                return `<bx-table-cell>${row[columnId]}</bx-table-cell>`;
+                return `<cds-table-cell>${row[columnId]}</cds-table-cell>`;
               })
               .join('')}
-          </bx-table-row>`;
+          </cds-table-row>`;
           })
           .join('')}
-      </bx-table-body>
-    </bx-table>
+      </cds-table-body>
+    </cds-table>
     ${_renderPagination()}
     `;
 };

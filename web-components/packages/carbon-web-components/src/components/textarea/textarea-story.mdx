@@ -30,44 +30,44 @@ import '@carbon/web-components/es/components/textarea/index.js';
 ### HTML
 
 ```html
-<bx-textarea placeholder="Optional placeholder text" rows="4" cols="50">
+<cds-textarea placeholder="Optional placeholder text" rows="4" cols="50">
   <span slot="label-text">Label text</span>
   <span slot="helper-text">Optional helper text</span>
   <span slot="validity-message">Something isn't right</span>
-</bx-textarea>
+</cds-textarea>
 ```
 
 ## Form item
 
 If the textarea is part of a form, make sure to import and wrap the textarea
-with `<bx-form-item>`
+with `<cds-form-item>`
 
 ```javascript
 import '@carbon/web-components/es/components/form/index.js';
 ```
 
 ```html
-<bx-form-item>
-  <bx-textarea placeholder="Optional placeholder text" rows="4" cols="50">
+<cds-form-item>
+  <cds-textarea placeholder="Optional placeholder text" rows="4" cols="50">
     <span slot="label-text">Label text</span>
     <span slot="helper-text">Optional helper text</span>
     <span slot="validity-message">Something isn't right</span>
-  </bx-textarea>
-</bx-form-item>
+  </cds-textarea>
+</cds-form-item>
 ```
 
 ## Skeleton
 
-For the skeleton variation, utilize `<bx-textarea-skeleton>`.
+For the skeleton variation, utilize `<cds-textarea-skeleton>`.
 
 ```html
-<bx-textarea-skeleton></bx-textarea-skeleton>
+<cds-textarea-skeleton></cds-textarea-skeleton>
 ```
 
-## `<bx-textarea>` attributes and properties
+## `<cds-textarea>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-textarea autofocus>`) and `false` means not setting the attribute (e.g.
-`<bx-textarea>` without `autofocus` attribute).
+`<cds-textarea autofocus>`) and `false` means not setting the attribute (e.g.
+`<cds-textarea>` without `autofocus` attribute).
 
-<Props of="bx-textarea" />
+<Props of="cds-textarea" />

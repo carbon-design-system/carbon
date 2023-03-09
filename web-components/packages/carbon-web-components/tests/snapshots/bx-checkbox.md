@@ -1,4 +1,4 @@
-# `bx-checkbox`
+# `cds-checkbox`
 
 ## `Rendering`
 
@@ -7,17 +7,17 @@
 ```
 <input
   aria-checked="false"
-  class="bx--checkbox"
+  class="cds--checkbox"
   id="checkbox"
   part="input"
   type="checkbox"
 >
 <label
-  class="bx--checkbox-label"
+  class="cds--checkbox-label"
   for="checkbox"
   part="label"
 >
-  <span class="bx--checkbox-label-text">
+  <span class="cds--checkbox-label-text">
     <slot>
     </slot>
   </span>
@@ -30,7 +30,7 @@
 ```
 <input
   aria-checked="mixed"
-  class="bx--checkbox"
+  class="cds--checkbox"
   disabled=""
   id="checkbox"
   name="name-foo"
@@ -39,11 +39,11 @@
   value="value-foo"
 >
 <label
-  class="bx--checkbox-label bx--visually-hidden"
+  class="cds--checkbox-label cds--visually-hidden"
   for="checkbox"
   part="label"
 >
-  <span class="bx--checkbox-label-text">
+  <span class="cds--checkbox-label-text">
     <slot>
       label-text-foo
     </slot>

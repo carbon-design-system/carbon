@@ -15,16 +15,16 @@ import { inline } from '../../src/components/notification/notification-story';
 
 const inlineTemplate = (props?) =>
   inline({
-    'bx-inline-notification': props,
+    'cds-inline-notification': props,
   });
 
-describe('bx-inline-notification', function () {
+describe('cds-inline-notification', function () {
   describe('Rendering titles', function () {
     it('Should render with minimum attributes', async function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-notification' as any)
+        document.body.querySelector('cds-inline-notification' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
 
@@ -43,7 +43,7 @@ describe('bx-inline-notification', function () {
       );
       await Promise.resolve();
       expect(
-        document.body.querySelector('bx-inline-notification' as any)
+        document.body.querySelector('cds-inline-notification' as any)
       ).toMatchSnapshot({ mode: 'shadow' });
     });
   });
@@ -54,7 +54,7 @@ describe('bx-inline-notification', function () {
     beforeEach(async function () {
       render(inlineTemplate(), document.body);
       await Promise.resolve();
-      notification = document.body.querySelector('bx-inline-notification');
+      notification = document.body.querySelector('cds-inline-notification');
     });
 
     it('Should support closing', async function () {
@@ -89,7 +89,7 @@ describe('bx-inline-notification', function () {
         document.body
       );
       await Promise.resolve();
-      notification = document.body.querySelector('bx-inline-notification');
+      notification = document.body.querySelector('cds-inline-notification');
     });
 
     it('Should support closing after the timeout', async function () {

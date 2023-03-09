@@ -1,6 +1,6 @@
-# `bx-tile`
+# `cds-tile`
 
-## `bx-clickable-tile`
+## `cds-clickable-tile`
 
 ## `Misc attributes`
 
@@ -8,7 +8,7 @@
 
 ```
 <a
-  class="bx--link bx--tile bx--tile--clickable"
+  class="cds--link cds--tile cds--tile--clickable"
   id="link"
   part="link"
   role="button"
@@ -16,7 +16,7 @@
   <slot>
   </slot>
   <div
-    class="bx--link__icon"
+    class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
@@ -30,7 +30,7 @@
 
 ```
 <a
-  class="bx--link bx--tile bx--tile--clickable bx--tile--light"
+  class="cds--link cds--tile cds--tile--clickable cds--tile--light"
   download="file-name-foo"
   href="about:blank"
   hreflang="en"
@@ -45,7 +45,7 @@
   <slot>
   </slot>
   <div
-    class="bx--link__icon"
+    class="cds--link__icon"
     hidden=""
   >
     <slot name="icon">
@@ -59,7 +59,7 @@
 
 ```
 <p
-  class="bx--link bx--link--disabled bx--tile bx--tile--clickable bx--tile--light"
+  class="cds--link cds--link--disabled cds--tile cds--tile--clickable cds--tile--light"
   id="link"
   part="link"
 >
@@ -67,7 +67,7 @@
   </slot>
 </p>
 <div
-  class="bx--link__icon"
+  class="cds--link__icon"
   hidden=""
 >
   <slot name="icon">
@@ -78,7 +78,7 @@
 
 ```
 
-## `bx-expandable-tile`
+## `cds-expandable-tile`
 
 ## `Misc attributes`
 
@@ -89,18 +89,18 @@
   aria-controls="below-the-fold-content"
   aria-expanded="false"
   aria-labelledby="above-the-fold-content"
-  class="bx--tile__chevron"
+  class="cds--tile__chevron"
 >
 </button>
 <div
-  class="bx--tile-content"
+  class="cds--tile-content"
   id="content"
 >
   <div>
     <slot name="above-the-fold-content">
     </slot>
   </div>
-  <div class="bx-ce--expandable-tile--below-the-fold-content">
+  <div class="cds-ce--expandable-tile--below-the-fold-content">
     <slot>
     </slot>
   </div>
@@ -115,11 +115,11 @@
   aria-controls="below-the-fold-content"
   aria-expanded="true"
   aria-labelledby="above-the-fold-content"
-  class="bx--tile__chevron"
+  class="cds--tile__chevron"
 >
 </button>
 <div
-  class="bx--tile-content"
+  class="cds--tile-content"
   id="content"
 >
   <div>
@@ -127,7 +127,7 @@
     </slot>
   </div>
   <div
-    class="bx-ce--expandable-tile--below-the-fold-content"
+    class="cds-ce--expandable-tile--below-the-fold-content"
     style="max-height: 0px"
   >
     <slot>
@@ -137,7 +137,7 @@
 
 ```
 
-## `bx-radio-tile`
+## `cds-radio-tile`
 
 ## `Misc attributes`
 
@@ -145,19 +145,19 @@
 
 ```
 <input
-  class="bx--tile-input"
+  class="cds--tile-input"
   id="input"
   tabindex="-1"
   type="radio"
 >
 <label
-  class="bx--tile bx--tile--selectable"
+  class="cds--tile cds--tile--selectable"
   for="input"
   tabindex="0"
 >
-  <div class="bx--tile__checkmark">
+  <div class="cds--tile__checkmark">
   </div>
-  <div class="bx--tile-content">
+  <div class="cds--tile-content">
     <slot>
     </slot>
   </div>
@@ -169,7 +169,7 @@
 
 ```
 <input
-  class="bx--tile-input"
+  class="cds--tile-input"
   id="input"
   name="name-foo"
   tabindex="-1"
@@ -177,13 +177,13 @@
   value="value-foo"
 >
 <label
-  class="bx--tile bx--tile--light bx--tile--selectable"
+  class="cds--tile cds--tile--light cds--tile--selectable"
   for="input"
   tabindex="0"
 >
-  <div class="bx--tile__checkmark">
+  <div class="cds--tile__checkmark">
   </div>
-  <div class="bx--tile-content">
+  <div class="cds--tile-content">
     <slot>
     </slot>
   </div>
@@ -191,7 +191,7 @@
 
 ```
 
-## `bx-selectable-tile`
+## `cds-selectable-tile`
 
 ## `Misc attributes`
 
@@ -199,19 +199,19 @@
 
 ```
 <input
-  class="bx--tile-input"
+  class="cds--tile-input"
   id="input"
   tabindex="-1"
   type="checkbox"
 >
 <label
-  class="bx--tile bx--tile--selectable"
+  class="cds--tile cds--tile--selectable"
   for="input"
   tabindex="0"
 >
-  <div class="bx--tile__checkmark">
+  <div class="cds--tile__checkmark">
   </div>
-  <div class="bx--tile-content">
+  <div class="cds--tile-content">
     <slot>
     </slot>
   </div>
@@ -223,7 +223,7 @@
 
 ```
 <input
-  class="bx--tile-input"
+  class="cds--tile-input"
   id="input"
   name="name-foo"
   tabindex="-1"
@@ -231,13 +231,13 @@
   value="value-foo"
 >
 <label
-  class="bx--tile bx--tile--light bx--tile--selectable"
+  class="cds--tile cds--tile--light cds--tile--selectable"
   for="input"
   tabindex="0"
 >
-  <div class="bx--tile__checkmark">
+  <div class="cds--tile__checkmark">
   </div>
-  <div class="bx--tile-content">
+  <div class="cds--tile-content">
     <slot>
     </slot>
   </div>

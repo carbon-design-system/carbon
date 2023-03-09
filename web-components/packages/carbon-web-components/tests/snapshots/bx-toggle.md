@@ -1,4 +1,4 @@
-# `bx-toggle`
+# `cds-toggle`
 
 ## `Rendering`
 
@@ -7,27 +7,27 @@
 ```
 <input
   aria-checked="false"
-  class="bx--toggle-input"
+  class="cds--toggle-input"
   id="checkbox"
   type="checkbox"
 >
 <label
-  class="bx--toggle-input__label"
+  class="cds--toggle-input__label"
   for="checkbox"
 >
   <slot name="label-text">
   </slot>
-  <span class="bx--toggle__switch">
+  <span class="cds--toggle__switch">
     <span
       aria-hidden="true"
-      class="bx--toggle__text--off"
+      class="cds--toggle__text--off"
     >
       <slot name="unchecked-text">
       </slot>
     </span>
     <span
       aria-hidden="true"
-      class="bx--toggle__text--on"
+      class="cds--toggle__text--on"
     >
       <slot name="checked-text">
       </slot>
@@ -42,7 +42,7 @@
 ```
 <input
   aria-checked="true"
-  class="bx--toggle-input bx--toggle-input--small"
+  class="cds--toggle-input cds--toggle-input--small"
   disabled=""
   id="checkbox"
   name="name-foo"
@@ -50,16 +50,16 @@
   value="value-foo"
 >
 <label
-  class="bx--toggle-input__label"
+  class="cds--toggle-input__label"
   for="checkbox"
 >
   <slot name="label-text">
     label-text-foo
   </slot>
-  <span class="bx--toggle__switch">
+  <span class="cds--toggle__switch">
     <span
       aria-hidden="true"
-      class="bx--toggle__text--off"
+      class="cds--toggle__text--off"
     >
       <slot name="unchecked-text">
         unchecked-text-foo
@@ -67,7 +67,7 @@
     </span>
     <span
       aria-hidden="true"
-      class="bx--toggle__text--on"
+      class="cds--toggle__text--on"
     >
       <slot name="checked-text">
         checked-text-foo

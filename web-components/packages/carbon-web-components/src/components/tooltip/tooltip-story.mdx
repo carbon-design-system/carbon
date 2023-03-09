@@ -28,18 +28,18 @@ import '@carbon/web-components/es/components/tooltip/index.js';
 ### HTML
 
 ```html
-<bx-tooltip>
-  <bx-tooltip-body>
+<cds-tooltip>
+  <cds-tooltip-body>
     <p>
       This is some tooltip text. This box shows the maximum amount of text that
       should appear inside. If more room is needed please use a modal instead.
     </p>
-    <bx-tooltip-footer>
-      <a href="#" class="bx--link">Learn More</a
-      ><bx-btn kind="primary">Create</bx-btn>
-    </bx-tooltip-footer>
-  </bx-tooltip-body>
-</bx-tooltip>
+    <cds-tooltip-footer>
+      <a href="#" class="cds--link">Learn More</a
+      ><cds-btn kind="primary">Create</cds-btn>
+    </cds-tooltip-footer>
+  </cds-tooltip-body>
+</cds-tooltip>
 ```
 
 ## Interactive tooltip (default)
@@ -54,13 +54,13 @@ product tours.
 - Don’t use without a label. Consider the context a user needs before clicking a
   link
 
-### `<bx-tooltip>` attributes and properties
+### `<cds-tooltip>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<bx-tooltip open>`) and `false` means not setting the attribute (e.g.
-`<bx-tooltip>` without `open` attribute).
+`<cds-tooltip open>`) and `false` means not setting the attribute (e.g.
+`<cds-tooltip>` without `open` attribute).
 
-<Props of="bx-tooltip" />
+<Props of="cds-tooltip" />
 
 ## Definition tooltip
 
@@ -72,18 +72,18 @@ may be used on the label of a UI element, or on a word embedded in a paragraph.
 - Do not use a definition tooltip on words with fewer than two letters
 
 ```html
-<bx-tooltip-definition
+<cds-tooltip-definition
   alignment="center"
   body-text="Brief description of the dotted, underlined word above."
   direction="bottom"
 >
   Definition Tooltip
-</bx-tooltip-definition>
+</cds-tooltip-definition>
 ```
 
-### `<bx-tooltip-definition>` attributes and properties
+### `<cds-tooltip-definition>` attributes and properties
 
-<Props of="bx-tooltip-definition" />
+<Props of="cds-tooltip-definition" />
 
 ## Icon tooltip
 
@@ -93,15 +93,15 @@ button.
 - The tooltip content should only contain one or two words.
 
 ```html
-<bx-tooltip-icon
+<cds-tooltip-icon
   alignment="center"
   body-text="Brief description of the dotted, underlined word above."
   direction="bottom"
 >
   ${Filter16()}
-</bx-tooltip-icon>
+</cds-tooltip-icon>
 ```
 
-### `<bx-tooltip-icon>` attributes and properties
+### `<cds-tooltip-icon>` attributes and properties
 
-<Props of="bx-tooltip-icon" />
+<Props of="cds-tooltip-icon" />

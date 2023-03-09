@@ -15,12 +15,12 @@ body {
   width: 300px;
 }
 
-bx-dropdown,
-bx-dropdown-item {
+cds-dropdown,
+cds-dropdown-item {
   visibility: hidden;
 }
 
-bx-dropdown:defined,
-bx-dropdown-item:defined {
+cds-dropdown:defined,
+cds-dropdown-item:defined {
   visibility: inherit;
 }

@@ -15,24 +15,24 @@ LICENSE file in the root directory of this source tree.
         href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
   <style>
     /* Suppress custom element until styles are loaded */
-    bx-pagination:not(:defined) {
+    cds-pagination:not(:defined) {
       display: none;
     }
   </style>
   <script type="module" src="src/index.js"></script>
 </head>
 <body>
-  <bx-pagination
+  <cds-pagination
     page-size="10"
     start="0"
     total="100"
   >
-    <bx-page-sizes-select slot="page-sizes-select">
+    <cds-page-sizes-select slot="page-sizes-select">
       <option value="10">10</option>
       <option value="20">20</option>
       <option value="30">30</option>
-    </bx-page-sizes-select>
-    <bx-pages-select></bx-pages-select>
-  </bx-pagination>
+    </cds-page-sizes-select>
+    <cds-pages-select></cds-pages-select>
+  </cds-pagination>
 </body>
 </html>

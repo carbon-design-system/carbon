@@ -1,4 +1,4 @@
-# `bx-copy-button`
+# `cds-copy-button`
 
 ## `Rendering`
 
@@ -6,14 +6,14 @@
 
 ```
 <button
-  class="bx--snippet-button"
+  class="cds--snippet-button"
   title="Copy to clipboard"
   type="button"
 >
   <slot>
   </slot>
   <div
-    class="bx--btn--copy__feedback"
+    class="cds--btn--copy__feedback"
     data-feedback="Copied!"
   >
   </div>
@@ -25,14 +25,14 @@
 
 ```
 <button
-  class="bx--snippet-button"
+  class="cds--snippet-button"
   title="button-assistive-text-foo"
   type="button"
 >
   <slot>
   </slot>
   <div
-    class="bx--btn--copy__feedback"
+    class="cds--btn--copy__feedback"
     data-feedback="feedback-text-foo"
   >
   </div>

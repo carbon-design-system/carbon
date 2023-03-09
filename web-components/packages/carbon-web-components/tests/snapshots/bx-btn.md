@@ -1,4 +1,4 @@
-# `bx-btn`
+# `cds-btn`
 
 ## `Misc attributes`
 
@@ -6,7 +6,7 @@
 
 ```
 <button
-  class="bx--btn bx--btn--primary"
+  class="cds--btn cds--btn--primary"
   id="button"
   part="button"
 >
@@ -23,7 +23,7 @@
 ```
 <button
   autofocus=""
-  class="bx--btn bx--btn--disabled bx--btn--secondary bx--btn--sm"
+  class="cds--btn cds--btn--disabled cds--btn--secondary cds--btn--sm"
   disabled=""
   id="button"
   part="button"
@@ -41,7 +41,7 @@
 
 ```
 <a
-  class="bx--btn bx--btn--primary"
+  class="cds--btn cds--btn--primary"
   href="about:blank"
   id="button"
   part="button"
@@ -59,7 +59,7 @@
 
 ```
 <a
-  class="bx--btn bx--btn--secondary bx--btn--sm"
+  class="cds--btn cds--btn--secondary cds--btn--sm"
   download="file-name-foo"
   href="about:blank"
   hreflang="en"
@@ -83,7 +83,7 @@
 
 ```
 <p
-  class="bx--btn bx--btn--disabled bx--btn--secondary bx--btn--sm"
+  class="cds--btn cds--btn--disabled cds--btn--secondary cds--btn--sm"
   id="button"
   part="button"
 >

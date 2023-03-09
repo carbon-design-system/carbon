@@ -35,8 +35,8 @@ const defaultTemplate = (props?) => {
     validityMessage,
   } = props ?? {};
   return Default({
-    'bx-date-picker': { disabled, name, value },
-    'bx-date-picker-input': {
+    'cds-date-picker': { disabled, name, value },
+    'cds-date-picker-input': {
       colorScheme,
       hideLabel,
       invalid,
@@ -69,7 +69,7 @@ const singleWithCalendarTemplate = (props?) => {
     onInput,
   } = props ?? {};
   return singleWithCalendar({
-    'bx-date-picker': {
+    'cds-date-picker': {
       dateFormat,
       disabled,
       enabledRange,
@@ -79,7 +79,7 @@ const singleWithCalendarTemplate = (props?) => {
       onChanged,
       onFlatpickrError,
     },
-    'bx-date-picker-input': {
+    'cds-date-picker-input': {
       colorScheme,
       hideLabel,
       invalid,
@@ -112,7 +112,7 @@ const rangeWithCalendarTemplate = (props?) => {
     onInput,
   } = props ?? {};
   return rangeWithCalendar({
-    'bx-date-picker': {
+    'cds-date-picker': {
       dateFormat,
       disabled,
       enabledRange,
@@ -122,7 +122,7 @@ const rangeWithCalendarTemplate = (props?) => {
       onChanged,
       onFlatpickrError,
     },
-    'bx-date-picker-input': {
+    'cds-date-picker-input': {
       colorScheme,
       hideLabel,
       invalid,
@@ -148,7 +148,7 @@ const getValues = (formData: FormData) => {
   return values;
 };
 
-describe('bx-date-picker', function () {
+describe('cds-date-picker', function () {
   const events = new EventManager();
 
   describe('Simple mode', function () {
@@ -157,7 +157,7 @@ describe('bx-date-picker', function () {
     beforeEach(async function () {
       render(defaultTemplate(), document.body);
       await Promise.resolve();
-      datePicker = document.body.querySelector('bx-date-picker');
+      datePicker = document.body.querySelector('cds-date-picker');
     });
 
     it('Should not instantiate Flatpickr', async function () {
@@ -173,8 +173,8 @@ describe('bx-date-picker', function () {
     beforeEach(async function () {
       render(singleWithCalendarTemplate(), document.body);
       await Promise.resolve();
-      datePicker = document.body.querySelector('bx-date-picker');
-      datePickerInput = document.body.querySelector('bx-date-picker-input');
+      datePicker = document.body.querySelector('cds-date-picker');
+      datePickerInput = document.body.querySelector('cds-date-picker-input');
     });
 
     it('Should instantiate Flatpickr', async function () {
@@ -240,12 +240,12 @@ describe('bx-date-picker', function () {
     beforeEach(async function () {
       render(rangeWithCalendarTemplate(), document.body);
       await Promise.resolve();
-      datePicker = document.body.querySelector('bx-date-picker');
+      datePicker = document.body.querySelector('cds-date-picker');
       datePickerInputStart = document.body.querySelector(
-        'bx-date-picker-input[kind="from"]'
+        'cds-date-picker-input[kind="from"]'
       );
       datePickerInputEnd = document.body.querySelector(
-        'bx-date-picker-input[kind="to"]'
+        'cds-date-picker-input[kind="to"]'
       );
     });
 
@@ -323,7 +323,7 @@ describe('bx-date-picker', function () {
     beforeEach(async function () {
       render(defaultTemplate(), document.body);
       await Promise.resolve();
-      elem = document.body.querySelector('bx-date-picker-input')!;
+      elem = document.body.querySelector('cds-date-picker-input')!;
     });
 
     it('should support checking if required value exists', async function () {
