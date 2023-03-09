@@ -74,6 +74,7 @@ function FileUploaderButton({
       }
     }
     onChange(event);
+    inputNode.current.value = '';
   }
 
   return (
