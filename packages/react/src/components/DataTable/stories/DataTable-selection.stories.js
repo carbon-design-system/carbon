@@ -70,19 +70,8 @@ export const Default = () => (
           </TableHead>
           <TableBody>
             {rows.map((row, i) => (
-              <TableRow
-                key={i}
-                {...getRowProps({ row })}
-                onClick={(evt) => {
-                  action('TableRow onClick')(evt);
-                }}>
-                <TableSelectRow
-                  {...getSelectionProps({ row })}
-                  onSelect={(evt) => {
-                    action('TableSelectRow onSelect')(evt);
-                    getSelectionProps({ row }).onSelect(evt);
-                  }}
-                />
+              <TableRow key={i} {...getRowProps({ row })}>
+                <TableSelectRow {...getSelectionProps({ row })} />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>
                 ))}
@@ -214,10 +203,7 @@ export const Playground = (args) => (
                 }}>
                 <TableSelectRow
                   {...getSelectionProps({ row })}
-                  onSelect={(evt) => {
-                    action('TableSelectRow onSelect')(evt);
-                    getSelectionProps({ row }).onSelect(evt);
-                  }}
+                  onChange={action('TableSelectRow - onChange')}
                 />
                 {row.cells.map((cell) => (
                   <TableCell key={cell.id}>{cell.value}</TableCell>

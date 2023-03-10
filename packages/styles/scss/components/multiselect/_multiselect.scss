@@ -17,12 +17,19 @@
 /// @access public
 /// @group multi-select
 @mixin multiselect {
-  .#{$prefix}--multi-select .#{$prefix}--tag {
-    min-width: auto;
-    margin: 0 $spacing-03 0 0;
+  .#{$prefix}--multi-select .#{$prefix}--list-box__field--wrapper {
+    display: inline-flex;
+    width: 100%;
+    height: calc(100% + 1px);
+    align-items: center;
   }
 
-  .#{$prefix}--multi-select--filterable .#{$prefix}--tag {
+  .#{$prefix}--multi-select .#{$prefix}--list-box__field:focus {
+    @include focus-outline('reset');
+  }
+
+  .#{$prefix}--multi-select .#{$prefix}--tag {
+    min-width: auto;
     margin: 0 $spacing-03 0 $spacing-05;
   }
 
@@ -75,12 +82,16 @@
     outline: none;
   }
 
-  .#{$prefix}--multi-select--filterable--input-focused {
+  .#{$prefix}--multi-select--filterable--input-focused,
+  .#{$prefix}--multi-select
+    .#{$prefix}--list-box__field--wrapper--input-focused {
     @include focus-outline('outline');
   }
 
   .#{$prefix}--multi-select--filterable.#{$prefix}--multi-select--selected
-    .#{$prefix}--text-input {
+    .#{$prefix}--text-input,
+  .#{$prefix}--multi-select.#{$prefix}--multi-select--selected
+    .#{$prefix}--list-box__field {
     padding-left: 0;
   }
 

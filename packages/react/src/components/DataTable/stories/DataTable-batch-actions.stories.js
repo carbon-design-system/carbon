@@ -203,7 +203,10 @@ export const Playground = (args) => (
               aria-hidden={batchActionProps.shouldShowBatchActions}>
               <TableToolbarSearch
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}
-                onChange={onInputChange}
+                onChange={(evt) => {
+                  action('TableToolbarSearch - onChange')(evt);
+                  onInputChange(evt);
+                }}
               />
               <TableToolbarMenu
                 tabIndex={batchActionProps.shouldShowBatchActions ? -1 : 0}>
@@ -240,7 +243,10 @@ export const Playground = (args) => (
             <TableBody>
               {rows.map((row, i) => (
                 <TableRow key={i} {...getRowProps({ row })}>
-                  <TableSelectRow {...getSelectionProps({ row })} />
+                  <TableSelectRow
+                    {...getSelectionProps({ row })}
+                    onChange={action('TableSelectRow - onChange')}
+                  />
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}

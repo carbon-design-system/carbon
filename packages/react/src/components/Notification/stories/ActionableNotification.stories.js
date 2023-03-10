@@ -49,13 +49,13 @@ Playground.argTypes = {
     },
   },
   onActionButtonClick: {
-    action: 'clicked',
+    action: 'onActionButtonClick',
   },
   onClose: {
-    action: 'clicked',
+    action: 'onClose',
   },
   onCloseButtonClick: {
-    action: 'clicked',
+    action: 'onCloseButtonClick',
   },
   children: {
     table: {
