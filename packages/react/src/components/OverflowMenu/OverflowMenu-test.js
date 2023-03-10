@@ -16,7 +16,7 @@ describe('OverflowMenu', () => {
   describe('Renders as expected', () => {
     it('should support a custom `className` prop on the button element', () => {
       const { container } = render(
-        <OverflowMenu open ariaLabel="Overflow menu" className="extra-class">
+        <OverflowMenu open aria-label="Overflow menu" className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
@@ -30,7 +30,7 @@ describe('OverflowMenu', () => {
       const { container } = render(
         <OverflowMenu
           data-testid="test"
-          ariaLabel="Overflow menu"
+          aria-label="Overflow menu"
           className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
@@ -45,7 +45,7 @@ describe('OverflowMenu', () => {
       render(
         <OverflowMenu
           flipped={true}
-          ariaLabel="Overflow menu"
+          aria-label="Overflow menu"
           className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
@@ -63,7 +63,7 @@ describe('OverflowMenu', () => {
       const onClick = jest.fn();
       render(
         <OverflowMenu
-          ariaLabel="Overflow menu"
+          aria-label="Overflow menu"
           className="extra-class"
           onClick={onClick}>
           <OverflowMenuItem className="test-child" itemText="one" />
@@ -79,7 +79,7 @@ describe('OverflowMenu', () => {
       const onClose = jest.fn();
       render(
         <OverflowMenu
-          ariaLabel="Overflow menu"
+          aria-label="Overflow menu"
           className="extra-class"
           onClose={onClose}>
           <OverflowMenuItem className="test-child" itemText="one" />
@@ -96,7 +96,7 @@ describe('OverflowMenu', () => {
       const onFocus = jest.fn();
       render(
         <OverflowMenu
-          ariaLabel="Overflow menu"
+          aria-label="Overflow menu"
           className="extra-class"
           onFocus={onFocus}>
           <OverflowMenuItem className="test-child" itemText="one" />
@@ -110,7 +110,7 @@ describe('OverflowMenu', () => {
 
     it('should render open if open is true', () => {
       render(
-        <OverflowMenu open ariaLabel="Overflow menu" className="extra-class">
+        <OverflowMenu open aria-label="Overflow menu" className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>
@@ -125,7 +125,7 @@ describe('OverflowMenu', () => {
     it('should render icon from renderIcon', () => {
       render(
         <OverflowMenu
-          ariaLabel="Overflow menu"
+          aria-label="Overflow menu"
           className="extra-class"
           renderIcon={() => <Filter aria-label="filter icon" />}>
           <OverflowMenuItem className="test-child" itemText="one" />
@@ -143,7 +143,7 @@ describe('OverflowMenu', () => {
       render(
         <OverflowMenu
           open
-          ariaLabel="Overflow menu"
+          aria-label="Overflow menu"
           className="extra-class"
           size="lg">
           <OverflowMenuItem className="test-child" itemText="one" />
@@ -156,7 +156,7 @@ describe('OverflowMenu', () => {
 
     it('should open on click', () => {
       render(
-        <OverflowMenu ariaLabel="Overflow menu" className="extra-class">
+        <OverflowMenu aria-label="Overflow menu" className="extra-class">
           <OverflowMenuItem className="test-child" itemText="one" />
           <OverflowMenuItem className="test-child" itemText="two" />
         </OverflowMenu>

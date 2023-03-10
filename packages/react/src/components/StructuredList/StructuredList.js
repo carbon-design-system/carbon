@@ -20,7 +20,8 @@ export function StructuredListWrapper(props) {
     children,
     selection,
     className,
-    ariaLabel,
+    ['aria-label']: ariaLabel,
+    ariaLabel: deprecatedAriaLabel,
     isCondensed,
     isFlush,
     ...other
@@ -36,7 +37,11 @@ export function StructuredListWrapper(props) {
   return (
     <GridSelectedRowStateContext.Provider value={selectedRow}>
       <GridSelectedRowDispatchContext.Provider value={setSelectedRow}>
-        <div role="table" className={classes} {...other} aria-label={ariaLabel}>
+        <div
+          role="table"
+          className={classes}
+          {...other}
+          aria-label={deprecatedAriaLabel || ariaLabel}>
           {children}
         </div>
       </GridSelectedRowDispatchContext.Provider>
@@ -48,7 +53,16 @@ StructuredListWrapper.propTypes = {
   /**
    * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Provide the contents of your StructuredListWrapper
@@ -80,7 +94,7 @@ StructuredListWrapper.defaultProps = {
   selection: false,
   isCondensed: false,
   isFlush: false,
-  ariaLabel: 'Structured list section',
+  ['aria-label']: 'Structured list section',
 };
 
 export function StructuredListHead(props) {
