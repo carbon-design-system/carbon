@@ -71,17 +71,13 @@ export interface RadioButtonGroupProps
   /**
    * Specify the name of the underlying `<input>` nodes
    */
-  name?: string;
+  name: string;
 
   /**
    * Provide an optional `onChange` hook that is called whenever the value of
    * the group changes
    */
-  onChange?: (
-    selection: unknown,
-    name: string | undefined,
-    evt: unknown
-  ) => void;
+  onChange?: (selection: unknown, name: string, evt: unknown) => void;
 
   /**
    * Provide where radio buttons should be placed
