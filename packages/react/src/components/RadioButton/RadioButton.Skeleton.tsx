@@ -28,7 +28,6 @@ function RadioButtonSkeleton(props: RadioButtonSkeletonProps) {
     </div>
   );
 }
-  
 
 RadioButtonSkeleton.propTypes = {
   /**
