@@ -91,6 +91,11 @@
     display: none;
   }
 
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--warn {
+    resize: none;
+  }
+
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper[data-invalid]
     .#{$prefix}--text-area__divider,
