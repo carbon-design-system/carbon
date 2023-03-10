@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -130,17 +130,13 @@ class BXTooltipBody extends BXFloatingMenu {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'menu');
     }
-    if (!this.hasAttribute('tabindex')) {
-      // TODO: Should we use a property?
-      this.setAttribute('tabindex', '-1');
-    }
     super.connectedCallback();
   }
 
   render() {
     return html`
       <span class="${prefix}--tooltip__caret"></span>
-      <div class="${prefix}--tooltip__content"><slot></slot></div>
+      <div tabindex="0" class="${prefix}--tooltip__content"><slot></slot></div>
     `;
   }
 
