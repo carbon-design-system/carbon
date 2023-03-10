@@ -32,8 +32,29 @@ export const Default = () => (
     <MenuItem label="First action" />
     <MenuItem label="Second action" />
     <MenuItem label="Third action" disabled />
+  </MenuButton>
+);
+
+export const WithDanger = () => (
+  <MenuButton label="Actions">
+    <MenuItem label="First action" />
+    <MenuItem label="Second action" />
+    <MenuItem label="Third action" />
     <MenuItemDivider />
     <MenuItem label="Danger action" kind="danger" />
+  </MenuButton>
+);
+
+export const WithDividers = () => (
+  <MenuButton label="Actions">
+    <MenuItem label="Create service request" />
+    <MenuItem label="Create work order" />
+    <MenuItemDivider />
+    <MenuItem label="Add plan" />
+    <MenuItem label="Add flag" />
+    <MenuItemDivider />
+    <MenuItem label="Edit source location" />
+    <MenuItem label="Recalculate source" />
   </MenuButton>
 );
 
@@ -45,8 +66,6 @@ export const Playground = (args) => {
       <MenuItem label="First action" onClick={onClick} />
       <MenuItem label="Second action" onClick={onClick} />
       <MenuItem label="Third action" onClick={onClick} disabled />
-      <MenuItemDivider />
-      <MenuItem label="Danger action" onClick={onClick} kind="danger" />
     </MenuButton>
   );
 };
