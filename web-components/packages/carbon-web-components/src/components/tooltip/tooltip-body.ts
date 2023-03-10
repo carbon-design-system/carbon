@@ -129,17 +129,13 @@ class BXTooltipBody extends BXFloatingMenu {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'menu');
     }
-    if (!this.hasAttribute('tabindex')) {
-      // TODO: Should we use a property?
-      this.setAttribute('tabindex', '-1');
-    }
     super.connectedCallback();
   }
 
   render() {
     return html`
       <span class="${prefix}--tooltip__caret"></span>
-      <div class="${prefix}--tooltip__content"><slot></slot></div>
+      <div tabindex="0" class="${prefix}--tooltip__content"><slot></slot></div>
     `;
   }
 
