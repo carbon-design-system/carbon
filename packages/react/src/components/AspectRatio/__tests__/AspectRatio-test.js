@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Simulate } from 'react-dom/test-utils';
 import { AspectRatio } from '../';
 
@@ -16,10 +16,8 @@ describe('AspectRatio', () => {
 
     for (const ratio of ratios) {
       const mountNode = document.createElement('div');
-      ReactDOM.render(
-        <AspectRatio ratio={ratio}>{ratio}</AspectRatio>,
-        mountNode
-      );
+      const root = createRoot(mountNode);
+      root.render(<AspectRatio ratio={ratio}>{ratio}</AspectRatio>);
 
       // Verify the aspect ratio class exists on the container
       const container = mountNode.firstChild;
@@ -44,11 +42,11 @@ describe('AspectRatio', () => {
     });
 
     it('should pass in a given className to the outermost node', () => {
-      ReactDOM.render(
+      const root = createRoot(mountNode);
+      root.render(
         <AspectRatio className="test" data-testid="test">
           test
-        </AspectRatio>,
-        mountNode
+        </AspectRatio>
       );
 
       const container = document.querySelector('[data-testid="test"]');
@@ -58,11 +56,11 @@ describe('AspectRatio', () => {
 
     it('should forward extra props to the outermost node', () => {
       const onClick = jest.fn();
-      ReactDOM.render(
+      const root = createRoot(mountNode);
+      root.render(
         <AspectRatio data-testid="test" onClick={onClick}>
           test
-        </AspectRatio>,
-        mountNode
+        </AspectRatio>
       );
       const container = mountNode.firstChild;
       expect(container).not.toBe(null);
@@ -86,7 +84,8 @@ describe('AspectRatio', () => {
         );
       }
 
-      ReactDOM.render(<Test />, mountNode);
+      const root = createRoot(mountNode);
+      root.render(<Test />);
 
       const section = document.querySelector('section');
       expect(section).not.toBe(null);

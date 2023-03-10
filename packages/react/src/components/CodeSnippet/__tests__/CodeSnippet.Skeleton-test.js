@@ -45,6 +45,7 @@ describe('CodeSnippetSkeleton', () => {
   it('should support a custom `className` on the outer-most element', () => {
     const className = 'test';
     const { container } = render(<CodeSnippetSkeleton className={className} />);
+    console.log(container);
     expect(container.firstChild.classList.contains(className)).toBe(true);
   });
 });

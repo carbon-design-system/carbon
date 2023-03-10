@@ -10,7 +10,7 @@ import React, { useState } from 'react';
 import { ErrorBoundary, ErrorBoundaryContext } from '../';
 
 describe('ErrorBoundary', () => {
-  afterEach(cleanup);
+  afterEach(cleanup());
 
   it('should render children and not a fallback if no error is caught', () => {
     function MockComponent() {
@@ -21,7 +21,7 @@ describe('ErrorBoundary', () => {
       return <span data-test-id="fallback">mock</span>;
     }
 
-    const { container } = render(
+    const { container, root } = render(
       <ErrorBoundary fallback={<MockFallback />}>
         <MockComponent />
       </ErrorBoundary>
@@ -32,6 +32,8 @@ describe('ErrorBoundary', () => {
 
     expect(component).toBeDefined();
     expect(fallback).toBe(null);
+
+    cleanup(root);
   });
 
   it('should render a fallback if an error is caught', () => {
