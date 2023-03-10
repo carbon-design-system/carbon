@@ -32,6 +32,14 @@ export const Default = () => (
     <MenuItem label="Second action" />
     <MenuItem label="Third action" />
     <MenuItem label="Fourth action" disabled />
+  </ComboButton>
+);
+
+export const WithDanger = () => (
+  <ComboButton label="Primary action">
+    <MenuItem label="Second action" />
+    <MenuItem label="Third action" />
+    <MenuItem label="Fourth action" />
     <MenuItemDivider />
     <MenuItem label="Danger action" kind="danger" />
   </ComboButton>
