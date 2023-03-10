@@ -24,14 +24,6 @@ $css--plex: true !default;
 
   display: block;
   outline: none;
-
-  .#{$prefix}--accordion__heading {
-    padding-top: calc(
-      (#{$spacing-08} - #{map-get($body-long-01, 'line-height')}rem) / 2
-    );
-    min-height: $spacing-08;
-  }
-
   .#{$prefix}--accordion__content {
     @extend .#{$prefix}--accordion__content;
 
@@ -57,6 +49,14 @@ $css--plex: true !default;
   &[isFlush] {
     @extend .#{$prefix}--accordion--flush;
   }
+}
+
+:host(#{$prefix}-accordion-item[expanding]) {
+  @extend .#{$prefix}--accordion__item--expanding;
+}
+
+:host(#{$prefix}-accordion-item[collapsing]) {
+  @extend .#{$prefix}--accordion__item--collapsing;
 }
 
 :host(#{$prefix}-accordion-item[open]:not([disabled])) {
