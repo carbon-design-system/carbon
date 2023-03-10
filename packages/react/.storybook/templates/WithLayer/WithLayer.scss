@@ -1,0 +1,35 @@
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/type';
+
+@use '../prefix' as *;
+
+.#{$prefix}--with-layer__wrapper {
+  position: relative;
+  padding: spacing.$spacing-05;
+  border: 1px dashed theme.$border-subtle;
+}
+
+.#{$prefix}--with-layer__wrapper .#{$prefix}--with-layer__wrapper {
+  border: none;
+  background-color: theme.$layer;
+}
+
+.#{$prefix}--with-layer__label {
+  @include type.type-style('code-01');
+
+  display: flex;
+  padding: spacing.$spacing-02;
+  background-color: theme.$layer;
+  border-block-end: 1px dashed theme.$border-subtle;
+  color: theme.$text-secondary;
+  column-gap: spacing.$spacing-02;
+  margin-block-start: spacing.$spacing-07;
+}
+
+// first label (layer-01)
+.#{$prefix}--with-layer > .#{$prefix}--with-layer__label {
+  background-color: transparent;
+  border-block-end: none;
+  margin-block-start: 0;
+}
