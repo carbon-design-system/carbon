@@ -17,12 +17,7 @@ import { useAnnouncer } from '../../internal/useAnnouncer';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { useMergedRefs } from '../../internal/useMergedRefs';
 
-type ExcludedAttributes = '';
-export interface TextAreaProps
-  extends Omit<
-    React.InputHTMLAttributes<HTMLTextAreaElement>,
-    ExcludedAttributes
-  > {
+export interface TextAreaProps extends React.InputHTMLAttributes<HTMLTextAreaElement> {
   /**
    * Provide a custom className that is applied directly to the underlying
    * `<textarea>` node
