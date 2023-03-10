@@ -25,7 +25,7 @@ export interface RadioButtonGroupProps
   /**
    * Provide a collection of `<RadioButton>` components to render in the group
    */
-  children?: ReactNodeLike; //ReactElement;
+  children?: ReactNodeLike;
 
   /**
    * Provide an optional className to be applied to the container node
