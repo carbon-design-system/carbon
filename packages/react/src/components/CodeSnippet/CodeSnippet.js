@@ -32,7 +32,8 @@ function CodeSnippet({
   feedback,
   feedbackTimeout,
   onClick,
-  ariaLabel,
+  ['aria-label']: ariaLabel,
+  ariaLabel: deprecatedAriaLabel,
   copyText,
   copyButtonDescription,
   light,
@@ -185,7 +186,7 @@ function CodeSnippet({
       <Copy
         {...rest}
         onClick={handleCopyClick}
-        aria-label={ariaLabel}
+        aria-label={deprecatedAriaLabel || ariaLabel}
         aria-describedby={uid}
         className={codeSnippetClasses}
         feedback={feedback}
@@ -231,7 +232,7 @@ function CodeSnippet({
           (type === 'single' || type === 'multi') && !disabled ? 0 : null
         }
         className={`${prefix}--snippet-container`}
-        aria-label={ariaLabel || 'code-snippet'}
+        aria-label={deprecatedAriaLabel || ariaLabel || 'code-snippet'}
         aria-readonly={type === 'single' || type === 'multi' ? true : null}
         aria-multiline={type === 'multi' ? true : null}
         onScroll={(type === 'single' && handleScroll) || null}
@@ -287,7 +288,17 @@ CodeSnippet.propTypes = {
    * Specify a label to be read by screen readers on the containing <textbox>
    * node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the containing <textbox>
+   * node
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Provide the content of your CodeSnippet as a node or string
@@ -391,7 +402,7 @@ CodeSnippet.propTypes = {
 };
 
 CodeSnippet.defaultProps = {
-  ariaLabel: 'Copy to clipboard',
+  ['aria-label']: 'Copy to clipboard',
   type: 'single',
   showMoreText: 'Show more',
   showLessText: 'Show less',
