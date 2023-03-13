@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0-rc.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.25.0...@carbon/web-components@1.26.0-rc.0) (2023-03-13)
+
+
+### Bug Fixes
+
+* **cwc:** storybook link ([#10194](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10194)) ([ea4d0a6](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/ea4d0a6c11859effef23b6aa073918dad41ce3de))
+* **date-picker:** range mode clearing first value ([#10168](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10168)) ([fe4d6da](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/fe4d6dabc2ee15953de62c7d12d72d1329756b39)), closes [#10088](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10088)
+* **lightbox-carousel:** accessibility & QA improvements to lightbox carousels ([#9149](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/9149)) ([fa408af](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/fa408afb43e47d3c0c1259a33a47c637bedb0fac)), closes [#8911](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8911) [#8913](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8913) [#8915](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8915) [#8912](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8912) [#8914](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8914) [#8911](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8911) [#8912](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8912) [/github.com/carbon-design-system/carbon-for-ibm-dotcom/blob/main/packages/web-components/src/components/expressive-modal/expressive-modal.ts#L358](https://github.com//github.com/carbon-design-system/carbon-for-ibm-dotcom/blob/main/packages/web-components/src/components/expressive-modal/expressive-modal.ts/issues/L358) [#8913](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8913) [#8914](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8914) [#8915](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/8915)
+* **storybook:** fix cwc cdn link docs ([#10189](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10189)) ([8656e2e](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/8656e2e84bcb48a7fe6d00d6ae66e4830650a10d))
+* **tile:** fix expanable content visibility ([#10203](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10203)) ([a71b9f9](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/a71b9f9c74b854851511cad3de98f47aea46cc36)), closes [#10202](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10202)
+* **tooltip:** adjust focus to div within tooltip-body ([#10217](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10217)) ([9d4a326](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/9d4a326257c869ecf7d4d1288af99a9ef8373144))
+
+
+
+
+
 # [1.25.0](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.25.0-rc.0...@carbon/web-components@1.25.0) (2023-02-28)
 
 **Note:** Version bump only for package @carbon/web-components
