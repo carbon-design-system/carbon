@@ -175,4 +175,16 @@ Playground.argTypes = {
     },
     defaultValue: '500',
   },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'This is a warning message.',
+  },
 };
