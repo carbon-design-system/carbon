@@ -23,7 +23,7 @@ export default {
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
-    ariaLabel: 'closes notification',
+    ['aria-label']: 'closes notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
@@ -41,6 +41,11 @@ export const Playground = (args) => <InlineNotification {...args} />;
 
 Playground.argTypes = {
   actionButtonLabel: {
+    table: {
+      disable: true,
+    },
+  },
+  ['aria-label']: {
     table: {
       disable: true,
     },
