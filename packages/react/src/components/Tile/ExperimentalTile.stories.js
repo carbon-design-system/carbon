@@ -203,9 +203,9 @@ export const ExpandableWithInteractive = () => (
 
 export const ExpandableWithLayer = () => {
   return (
-    <div style={{ width: '400px' }} className={experimentalClassname}>
-      <WithLayer>
-        {(layer) => (
+    <WithLayer>
+      {(layer) => (
+        <div style={{ width: '400px' }} className={experimentalClassname}>
           <ExpandableTile
             id={`expandable-tile-${layer}`}
             tileCollapsedIconText="Interact to Expand tile"
@@ -227,8 +227,8 @@ export const ExpandableWithLayer = () => {
               </div>
             </TileBelowTheFoldContent>
           </ExpandableTile>
-        )}
-      </WithLayer>
-    </div>
+        </div>
+      )}
+    </WithLayer>
   );
 };
