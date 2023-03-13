@@ -235,6 +235,11 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
+  ['aria-label']: {
+    table: {
+      disable: true,
+    },
+  },
   ariaLabel: {
     table: {
       disable: true,
