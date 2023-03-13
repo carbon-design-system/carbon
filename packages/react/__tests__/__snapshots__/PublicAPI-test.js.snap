@@ -511,6 +511,9 @@ Map {
       "clicked": Object {
         "type": "bool",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "href": Object {
         "type": "string",
       },
