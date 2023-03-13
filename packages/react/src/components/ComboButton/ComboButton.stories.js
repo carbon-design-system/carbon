@@ -25,6 +25,23 @@ export default {
       page: mdx,
     },
   },
+  argTypes: {
+    children: {
+      table: {
+        disable: true,
+      },
+    },
+    className: {
+      table: {
+        disable: true,
+      },
+    },
+    translateWithId: {
+      table: {
+        disable: true,
+      },
+    },
+  },
 };
 
 export const Default = () => (
@@ -60,16 +77,6 @@ export const Playground = (args) => {
 };
 
 Playground.argTypes = {
-  children: {
-    control: {
-      disable: true,
-    },
-  },
-  className: {
-    control: {
-      disable: true,
-    },
-  },
   label: {
     defaultValue: 'Primary action',
   },
