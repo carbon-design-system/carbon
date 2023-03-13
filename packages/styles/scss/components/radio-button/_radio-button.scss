@@ -162,7 +162,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--checkbox__validation-msg {
-    display: flex;
+    display: none;
     align-items: flex-end;
     margin-top: $spacing-03;
   }
@@ -182,6 +182,13 @@ $radio-border-width: 1px !default;
 
   .#{$prefix}--checkbox__validation-msg .#{$prefix}--form__helper-text {
     margin-top: 0;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--radio-button-group--warning
+    + .#{$prefix}--checkbox__validation-msg {
+    display: flex;
   }
 
   .#{$prefix}--radio-button-group--invalid

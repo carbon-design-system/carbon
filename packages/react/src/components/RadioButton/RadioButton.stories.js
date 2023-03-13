@@ -23,56 +23,6 @@ export default {
       page: mdx,
     },
   },
-  argTypes: {
-    readOnly: {
-      description: 'Specify whether the RadioButtonGroup is read-only',
-      control: {
-        type: 'boolean',
-      },
-    },
-    helperText: {
-      description:
-        'Provide text that is used alongside the control label for additional help',
-      control: {
-        type: 'text',
-      },
-      defaultValue: 'Helper text',
-    },
-    invalid: {
-      description: 'Specify whether the RadioButtonGroup is invalid',
-      control: {
-        type: 'boolean',
-      },
-    },
-    invalidText: {
-      description:
-        'Provide the text that is displayed when the control is in an invalid state',
-      control: {
-        type: 'text',
-      },
-      defaultValue: 'Invalid selection',
-    },
-    orientation: {
-      description: 'Provide how radio buttons should be displayed',
-      control: 'select',
-      options: ['horizontal', 'vertical'],
-    },
-    warn: {
-      description: 'Specify whether the control is currently in warning state',
-      control: {
-        type: 'boolean',
-      },
-      defaultValue: false,
-    },
-    warnText: {
-      description:
-        'Provide the text that is displayed when the control is in warning state',
-      control: {
-        type: 'text',
-      },
-      defaultValue: 'Please notice the warning',
-    },
-  },
 };
 
 export const Default = () => {
@@ -125,4 +75,55 @@ export const Playground = (args) => {
       />
     </RadioButtonGroup>
   );
+};
+
+Playground.argTypes = {
+  readOnly: {
+    description: 'Specify whether the RadioButtonGroup is read-only',
+    control: {
+      type: 'boolean',
+    },
+  },
+  helperText: {
+    description:
+      'Provide text that is used alongside the control label for additional help',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Helper text',
+  },
+  invalid: {
+    description: 'Specify whether the RadioButtonGroup is invalid',
+    control: {
+      type: 'boolean',
+    },
+  },
+  invalidText: {
+    description:
+      'Provide the text that is displayed when the control is in an invalid state',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Invalid selection',
+  },
+  orientation: {
+    description: 'Provide how radio buttons should be displayed',
+    control: 'select',
+    options: ['horizontal', 'vertical'],
+  },
+  warn: {
+    description: 'Specify whether the control is currently in warning state',
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    description:
+      'Provide the text that is displayed when the control is in warning state',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Please notice the warning',
+  },
 };
