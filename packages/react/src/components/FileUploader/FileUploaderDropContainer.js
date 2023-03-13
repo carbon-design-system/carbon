@@ -124,6 +124,7 @@ function FileUploaderDropContainer({
         ref={innerRef}
         onKeyDown={(evt) => {
           if (matches(evt, [keys.Enter, keys.Space])) {
+            evt.preventDefault();
             inputRef.current.click();
           }
         }}
