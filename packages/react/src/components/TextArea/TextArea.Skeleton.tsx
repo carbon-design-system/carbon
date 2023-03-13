@@ -10,9 +10,8 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-type ExcludedAttributes = '';
 export interface TextAreaSkeletonProps
-  extends Omit<React.InputHTMLAttributes<HTMLDivElement>, ExcludedAttributes> {
+  extends React.InputHTMLAttributes<HTMLDivElement> {
   /**
    * Specify an optional className to add to the form item wrapper.
    */
