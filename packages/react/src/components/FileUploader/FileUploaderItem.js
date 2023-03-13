@@ -47,6 +47,7 @@ function FileUploaderItem({
           onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
+                evt.preventDefault();
                 onDelete(evt, { uuid: id });
               }
             }
