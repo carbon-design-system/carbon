@@ -142,6 +142,7 @@ $input-label-weight: 400 !default;
   .#{$prefix}--text-input__field-wrapper--warning,
   .#{$prefix}--text-input__field-wrapper--warning > .#{$prefix}--text-input,
   .#{$prefix}--text-area__wrapper[data-invalid],
+  .#{$prefix}--text-area__wrapper--warn,
   .#{$prefix}--select-input__wrapper[data-invalid],
   .#{$prefix}--select--warning .#{$prefix}--select-input__wrapper,
   .#{$prefix}--time-picker[data-invalid],
