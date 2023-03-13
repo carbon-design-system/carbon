@@ -529,16 +529,17 @@ Map {
   },
   "CodeSnippet" => Object {
     "defaultProps": Object {
-      "ariaLabel": "Copy to clipboard",
+      "aria-label": "Copy to clipboard",
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
       "wrapText": false,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -7846,6 +7847,8 @@ Map {
       "onClick": [Function],
       "placeholder": "",
       "rows": 4,
+      "warn": false,
+      "warnText": "",
     },
     "propTypes": Object {
       "className": Object {
@@ -7923,6 +7926,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -9983,6 +9992,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
   },
