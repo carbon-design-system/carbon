@@ -116,7 +116,8 @@ Playground.argTypes = {
     control: {
       type: 'text',
     },
-    defaultValue: '',
+    defaultValue:
+      'Error message that is really long can wrap to more lines but should not be excessively long.',
   },
   labelText: {
     control: {
@@ -139,6 +140,18 @@ Playground.argTypes = {
       type: 'number',
     },
     defaultValue: 4,
+  },
+  warn: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
+  warnText: {
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'This is a warning message.',
   },
 };
 
