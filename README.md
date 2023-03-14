@@ -227,6 +227,7 @@ check out our [Contributing Guide](/.github/CONTRIBUTING.md) and our
     <td align="center"><a href="https://jsehull.com/"><img src="https://avatars.githubusercontent.com/u/9935383?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Jesse Hull</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=jsehull" title="Code">💻</a></td>
     <td align="center"><a href="https://github.com/awarrier99"><img src="https://avatars.githubusercontent.com/u/17476235?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Ashvin Warrier</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=awarrier99" title="Code">💻</a></td>
     <td align="center"><a href="https://galvingao.com/"><img src="https://avatars.githubusercontent.com/u/12567059?v=4?s=100" width="100px;" alt=""/><br /><sub><b>GalvinGao</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=GalvinGao" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/bianca-sparxs"><img src="https://avatars.githubusercontent.com/u/33003148?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bianca Sparxs</b></sub></a><br /><a href="https://github.com/carbon-design-system/carbon/commits?author=bianca-sparxs" title="Code">💻</a></td>
   </tr>
 </table>
 

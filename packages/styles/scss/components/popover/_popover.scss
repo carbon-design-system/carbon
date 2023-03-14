@@ -8,6 +8,7 @@
 @use '../../config' as *;
 @use '../../theme';
 @use '../../utilities/box-shadow' as *;
+@use '../../utilities/button-reset';
 @use '../../utilities/custom-property';
 @use '../../utilities/high-contrast-mode' as *;
 @use '../../utilities/focus-outline' as *;
@@ -369,5 +370,52 @@ $popover-caret-height: custom-property.get-var(
     height: $popover-caret-width;
     clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
     transform: translate(calc(-1 * $popover-offset + 100%), -50%);
+  }
+
+  //-----------------------------------------------------------------------------
+  // Tab Tip Variant
+  //-----------------------------------------------------------------------------
+  .#{$prefix}--popover--tab-tip .#{$prefix}--popover-content {
+    border-radius: 0;
+  }
+
+  .#{$prefix}--popover--tab-tip__button {
+    @include button-reset.reset;
+
+    position: relative;
+    display: inline-flex;
+    width: rem(32px);
+    height: rem(32px);
+    align-items: center;
+    justify-content: center;
+
+    &:focus {
+      @include focus-outline('outline');
+    }
+
+    &:hover {
+      background-color: theme.$layer-hover;
+    }
+  }
+
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--open
+    .#{$prefix}--popover--tab-tip__button {
+    background: theme.$layer;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .#{$prefix}--popover--tab-tip.#{$prefix}--popover--open
+    .#{$prefix}--popover--tab-tip__button:not(:focus)::after {
+    position: absolute;
+    z-index: z('floating') + 1;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: theme.$layer;
+    content: '';
+  }
+
+  .#{$prefix}--popover--tab-tip__button svg {
+    fill: theme.$icon-primary;
   }
 }

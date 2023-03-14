@@ -115,6 +115,7 @@ describe('@carbon/styles/scss/theme', () => {
         "icon-on-color",
         "icon-on-color-disabled",
         "icon-disabled",
+        "icon-interactive",
         "support-error",
         "support-success",
         "support-warning",

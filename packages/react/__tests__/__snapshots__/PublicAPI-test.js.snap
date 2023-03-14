@@ -111,9 +111,10 @@ Map {
         "isRequired": true,
         "type": "string",
       },
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -529,16 +530,17 @@ Map {
   },
   "CodeSnippet" => Object {
     "defaultProps": Object {
-      "ariaLabel": "Copy to clipboard",
+      "aria-label": "Copy to clipboard",
       "showLessText": "Show less",
       "showMoreText": "Show more",
       "type": "single",
       "wrapText": false,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -970,7 +972,7 @@ Map {
   "ComboBox" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "ariaLabel": "Choose an item",
+      "aria-label": "Choose an item",
       "direction": "bottom",
       "disabled": false,
       "itemToElement": null,
@@ -979,9 +981,10 @@ Map {
       "type": "default",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
@@ -2689,9 +2692,10 @@ Map {
       "type": "default",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
@@ -3295,7 +3299,7 @@ Map {
   "FilterableMultiSelect" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
-      "ariaLabel": "Choose an item",
+      "aria-label": "Choose an item",
       "compareItems": [Function],
       "direction": "bottom",
       "disabled": false,
@@ -3308,9 +3312,10 @@ Map {
       "sortItems": [Function],
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "compareItems": Object {
         "isRequired": true,
         "type": "func",
@@ -4023,6 +4028,9 @@ Map {
       "role": "status",
     },
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4535,7 +4543,7 @@ Map {
     "Filterable": Object {
       "$$typeof": Symbol(react.forward_ref),
       "defaultProps": Object {
-        "ariaLabel": "Choose an item",
+        "aria-label": "Choose an item",
         "compareItems": [Function],
         "direction": "bottom",
         "disabled": false,
@@ -4548,9 +4556,10 @@ Map {
         "sortItems": [Function],
       },
       "propTypes": Object {
-        "ariaLabel": Object {
+        "aria-label": Object {
           "type": "string",
         },
+        "ariaLabel": [Function],
         "compareItems": Object {
           "isRequired": true,
           "type": "func",
@@ -5060,7 +5069,7 @@ Map {
   },
   "NotificationButton" => Object {
     "defaultProps": Object {
-      "ariaLabel": "close notification",
+      "aria-label": "close notification",
       "notificationType": "toast",
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
@@ -5084,9 +5093,10 @@ Map {
       "type": "button",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
@@ -5666,6 +5676,9 @@ Map {
       "highContrast": Object {
         "type": "bool",
       },
+      "isTabTip": Object {
+        "type": "bool",
+      },
       "open": Object {
         "isRequired": true,
         "type": "bool",
@@ -5961,6 +5974,7 @@ Map {
     },
   },
   "RadioTile" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "onChange": [Function],
       "tabIndex": 0,
@@ -6006,6 +6020,7 @@ Map {
         "type": "oneOfType",
       },
     },
+    "render": [Function],
   },
   "Row" => Object {
     "propTypes": Object {
@@ -6885,15 +6900,16 @@ Map {
   },
   "StructuredListWrapper" => Object {
     "defaultProps": Object {
-      "ariaLabel": "Structured list section",
+      "aria-label": "Structured list section",
       "isCondensed": false,
       "isFlush": false,
       "selection": false,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -7088,9 +7104,7 @@ Map {
       "leftOverflowButtonProps": Object {
         "type": "object",
       },
-      "light": Object {
-        "type": "bool",
-      },
+      "light": [Function],
       "rightOverflowButtonProps": Object {
         "type": "object",
       },
@@ -7824,6 +7838,8 @@ Map {
       "onClick": [Function],
       "placeholder": "",
       "rows": 4,
+      "warn": false,
+      "warnText": "",
     },
     "propTypes": Object {
       "className": Object {
@@ -7901,6 +7917,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -8440,9 +8462,10 @@ Map {
       "timeout": 0,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "caption": Object {
         "type": "string",
       },
@@ -8528,7 +8551,9 @@ Map {
       "labelB": Object {
         "type": "node",
       },
-      "labelText": [Function],
+      "labelText": Object {
+        "type": "string",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -9959,6 +9984,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
   },

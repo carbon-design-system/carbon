@@ -1,0 +1,134 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionSkeleton renders as expected - Component API should render and match snapshot 1`] = `
+<div>
+  <ul
+    class="cds--accordion cds--skeleton cds--accordion--end"
+  >
+    <li
+      class="cds--accordion__item cds--accordion__item--active"
+    >
+      <span
+        class="cds--accordion__heading"
+      >
+        <svg
+          aria-hidden="true"
+          class="cds--accordion__arrow"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
+        <p
+          class="cds--skeleton__text cds--accordion__title"
+          style="width: 100%;"
+        />
+      </span>
+      <div
+        class="cds--accordion__content"
+      >
+        <p
+          class="cds--skeleton__text"
+          style="width: 90%;"
+        />
+        <p
+          class="cds--skeleton__text"
+          style="width: 80%;"
+        />
+        <p
+          class="cds--skeleton__text"
+          style="width: 95%;"
+        />
+      </div>
+    </li>
+    <li
+      class="cds--accordion__item"
+    >
+      <span
+        class="cds--accordion__heading"
+      >
+        <svg
+          aria-hidden="true"
+          class="cds--accordion__arrow"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
+        <p
+          class="cds--skeleton__text cds--accordion__title"
+          style="width: 100%;"
+        />
+      </span>
+    </li>
+    <li
+      class="cds--accordion__item"
+    >
+      <span
+        class="cds--accordion__heading"
+      >
+        <svg
+          aria-hidden="true"
+          class="cds--accordion__arrow"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
+        <p
+          class="cds--skeleton__text cds--accordion__title"
+          style="width: 100%;"
+        />
+      </span>
+    </li>
+    <li
+      class="cds--accordion__item"
+    >
+      <span
+        class="cds--accordion__heading"
+      >
+        <svg
+          aria-hidden="true"
+          class="cds--accordion__arrow"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          preserveAspectRatio="xMidYMid meet"
+          viewBox="0 0 16 16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+          />
+        </svg>
+        <p
+          class="cds--skeleton__text cds--accordion__title"
+          style="width: 100%;"
+        />
+      </span>
+    </li>
+  </ul>
+</div>
+`;
