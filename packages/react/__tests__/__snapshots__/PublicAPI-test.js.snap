@@ -111,9 +111,10 @@ Map {
         "isRequired": true,
         "type": "string",
       },
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -2691,9 +2692,10 @@ Map {
       "type": "default",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
@@ -4026,6 +4028,9 @@ Map {
       "role": "status",
     },
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -5064,7 +5069,7 @@ Map {
   },
   "NotificationButton" => Object {
     "defaultProps": Object {
-      "ariaLabel": "close notification",
+      "aria-label": "close notification",
       "notificationType": "toast",
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
@@ -5088,9 +5093,10 @@ Map {
       "type": "button",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
@@ -8456,9 +8462,10 @@ Map {
       "timeout": 0,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "caption": Object {
         "type": "string",
       },
