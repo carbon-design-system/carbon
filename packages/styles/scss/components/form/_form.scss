@@ -192,6 +192,12 @@ $input-label-weight: 400 !default;
     margin: 0;
   }
 
+  // fluid form in modal
+  .cds--modal-content .cds--form--fluid {
+    margin-right: -$spacing-05;
+    margin-left: -$spacing-05;
+  }
+
   // Fix for red ring when input is marked required in Firefox, refs #744
   input:not(output):not([data-invalid]):-moz-ui-invalid {
     box-shadow: none;
