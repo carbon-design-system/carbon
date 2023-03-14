@@ -64,11 +64,11 @@ export interface DropdownProps<ItemType>
    * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
    */
-  ['aria-label']?: string,
+  ['aria-label']?: string;
 
   /**
    * @deprecated please use `aria-label` instead.
-   * Specify a label to be read by screen readers on the container note. 
+   * Specify a label to be read by screen readers on the container note.
    */
   ariaLabel?: string;
 
@@ -366,7 +366,7 @@ const Dropdown = React.forwardRef(
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}
-          aria-label={ deprecatedAriaLabel || ariaLabel }
+          aria-label={deprecatedAriaLabel || ariaLabel}
           size={size}
           className={className}
           invalid={invalid}
@@ -480,7 +480,7 @@ Dropdown.propTypes = {
 
   /**
    * Deprecated, please use `aria-label` instead.
-   * Specify a label to be read by screen readers on the container note. 
+   * Specify a label to be read by screen readers on the container note.
    */
   ariaLabel: deprecate(
     PropTypes.string,
