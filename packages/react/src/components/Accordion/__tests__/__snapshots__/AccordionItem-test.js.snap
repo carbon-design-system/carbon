@@ -1,78 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccordionItem should render 1`] = `
-<AccordionItem
-  className="extra-class"
-  title="A heading"
->
+exports[`AccordionItem renders as expected - Component API should render and match snapshot 1`] = `
+<div>
   <li
-    className="cds--accordion__item extra-class"
-    onAnimationEnd={[Function]}
+    class="cds--accordion__item extra-class"
   >
-    <defaultRenderToggle
-      aria-controls="accordion-item-1"
-      aria-expanded={false}
-      className="cds--accordion__heading"
-      onClick={[Function]}
-      onKeyDown={[Function]}
+    <button
+      aria-controls="accordion-item-2"
+      aria-expanded="false"
+      class="cds--accordion__heading"
       type="button"
     >
-      <button
-        aria-controls="accordion-item-1"
-        aria-expanded={false}
-        className="cds--accordion__heading"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        type="button"
+      <svg
+        aria-hidden="true"
+        class="cds--accordion__arrow"
+        fill="currentColor"
+        focusable="false"
+        height="16"
+        preserveAspectRatio="xMidYMid meet"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
       >
-        <ForwardRef(ChevronRight)
-          className="cds--accordion__arrow"
-        >
-          <Icon
-            className="cds--accordion__arrow"
-            fill="currentColor"
-            height={16}
-            preserveAspectRatio="xMidYMid meet"
-            viewBox="0 0 16 16"
-            width={16}
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <svg
-              aria-hidden={true}
-              className="cds--accordion__arrow"
-              fill="currentColor"
-              focusable="false"
-              height={16}
-              preserveAspectRatio="xMidYMid meet"
-              viewBox="0 0 16 16"
-              width={16}
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
-              />
-            </svg>
-          </Icon>
-        </ForwardRef(ChevronRight)>
-        <Text
-          as="div"
-          className="cds--accordion__title"
-        >
-          <div
-            className="cds--accordion__title"
-            dir="auto"
-          >
-            A heading
-          </div>
-        </Text>
-      </button>
-    </defaultRenderToggle>
+        <path
+          d="M11 8L6 13 5.3 12.3 9.6 8 5.3 3.7 6 3z"
+        />
+      </svg>
+      <div
+        class="cds--accordion__title"
+        dir="auto"
+      >
+        Test title
+      </div>
+    </button>
     <div
-      className="cds--accordion__content"
-      id="accordion-item-1"
+      class="cds--accordion__content"
+      id="accordion-item-2"
     >
       Lorem ipsum.
     </div>
   </li>
-</AccordionItem>
+</div>
 `;

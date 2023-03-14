@@ -67,7 +67,7 @@ const Menu = React.forwardRef(function Menu(
 
   const [position, setPosition] = useState([-1, -1]);
   const focusableItems = childContext.state.items.filter(
-    (item) => !item.disabled
+    (item) => !item.disabled && item.ref.current
   );
 
   function returnFocus() {
@@ -80,7 +80,6 @@ const Menu = React.forwardRef(function Menu(
     if (menu.current) {
       focusReturn.current = document.activeElement;
       setPosition(calculatePosition());
-      menu.current.focus();
     }
   }
 
@@ -101,11 +100,6 @@ const Menu = React.forwardRef(function Menu(
   function handleKeyDown(e) {
     e.stopPropagation();
 
-    const currentItem = focusableItems.findIndex((item) =>
-      item.ref.current.contains(document.activeElement)
-    );
-    let indexToFocus = currentItem;
-
     // if the user presses escape or this is a submenu
     // and the user presses ArrowLeft, close it
     if (
@@ -114,28 +108,39 @@ const Menu = React.forwardRef(function Menu(
     ) {
       handleClose(e);
     } else {
-      // if currentItem is -1, the menu itself is focused.
-      // in this case, the arrow keys define the first item
-      // to be focused.
+      focusItem(e);
+    }
+  }
+
+  function focusItem(e) {
+    const currentItem = focusableItems.findIndex((item) =>
+      item.ref.current.contains(document.activeElement)
+    );
+    let indexToFocus = currentItem;
+
+    // if currentItem is -1, no menu item is focused yet.
+    // in this case, the first item should receive focus.
+    if (currentItem === -1) {
+      indexToFocus = 0;
+    } else if (e) {
       if (match(e, keys.ArrowUp)) {
-        indexToFocus =
-          currentItem === -1 ? focusableItems.length - 1 : indexToFocus - 1;
+        indexToFocus = indexToFocus - 1;
       }
       if (match(e, keys.ArrowDown)) {
-        indexToFocus = currentItem === -1 ? 0 : indexToFocus + 1;
+        indexToFocus = indexToFocus + 1;
       }
+    }
 
-      if (indexToFocus < 0) {
-        indexToFocus = 0;
-      }
-      if (indexToFocus >= focusableItems.length) {
-        indexToFocus = focusableItems.length - 1;
-      }
+    if (indexToFocus < 0) {
+      indexToFocus = focusableItems.length - 1;
+    }
+    if (indexToFocus >= focusableItems.length) {
+      indexToFocus = 0;
+    }
 
-      if (indexToFocus !== currentItem) {
-        const nodeToFocus = focusableItems[indexToFocus];
-        nodeToFocus.ref.current.focus();
-      }
+    if (indexToFocus !== currentItem) {
+      const nodeToFocus = focusableItems[indexToFocus];
+      nodeToFocus.ref.current.focus();
     }
   }
 
@@ -197,6 +202,13 @@ const Menu = React.forwardRef(function Menu(
 
     return [-1, -1];
   }
+
+  useEffect(() => {
+    if (open && focusableItems.length > 0) {
+      focusItem();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [open, focusableItems]);
 
   useEffect(() => {
     if (open) {

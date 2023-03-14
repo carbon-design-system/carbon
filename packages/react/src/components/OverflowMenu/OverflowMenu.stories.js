@@ -25,7 +25,7 @@ export default {
 };
 
 export const Default = () => (
-  <OverflowMenu ariaLabel="overflow-menu">
+  <OverflowMenu aria-label="overflow-menu">
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
     <OverflowMenuItem itemText="Rename app" />
@@ -43,7 +43,7 @@ export const RenderCustomIcon = () => (
 );
 
 export const Playground = (args) => (
-  <OverflowMenu ariaLabel="overflow-menu" {...args}>
+  <OverflowMenu aria-label="overflow-menu" {...args}>
     <OverflowMenuItem itemText="Stop app" />
     <OverflowMenuItem itemText="Restart app" />
     <OverflowMenuItem itemText="Rename app" />
