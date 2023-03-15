@@ -17,15 +17,7 @@ import deprecate from '../../prop-types/deprecate';
 export interface DefinitionTooltipProps
   extends Omit<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
-    | 'align'
-    | 'children'
-    | 'classname'
-    | 'defaultOpen'
-    | 'definition'
-    | 'id'
-    | 'openOnHover'
-    | 'tooltipText'
-    | 'triggerClassName'
+    'id' | 'classname' | 'children' | 'type'
   > {
   /**
    * Specify how the trigger should align with the tooltip
