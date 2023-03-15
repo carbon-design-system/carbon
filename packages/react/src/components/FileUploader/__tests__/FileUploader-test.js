@@ -6,7 +6,6 @@
  */
 
 import { getByLabel, getByText } from '@carbon/test-utils/dom';
-// import { render, cleanup } from '@carbon/test-utils/react';
 import { render } from '@testing-library/react';
 import React from 'react';
 import FileUploader from '../';
