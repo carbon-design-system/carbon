@@ -91,9 +91,17 @@
     display: none;
   }
 
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid,
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--warn {
+    resize: none;
+  }
+
   .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area--invalid
-    + .#{$prefix}--text-area__divider {
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--text-area__divider,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--text-area__divider {
     display: block;
     border-style: solid;
     border-color: $border-subtle;
@@ -101,11 +109,13 @@
     margin: 0 1rem;
   }
 
-  // invalid error message container
+  // invalid & warning error message container
   .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area--invalid
-    + .#{$prefix}--text-area__divider
-    + .#{$prefix}--form-requirement {
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement,
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
     position: relative;
     display: block;
     overflow: visible;
@@ -113,13 +123,30 @@
     padding: 0.5rem 2.5rem 0.5rem 1rem;
     margin: 0;
     background: $field;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper--warn
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
+    border-bottom: 1px solid $border-strong;
+    color: $text-primary;
+  }
+
+  .#{$prefix}--text-area--fluid
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--form-requirement.#{$prefix}--form-requirement {
+    border-bottom: none;
     color: $text-error;
+  }
+
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--warn {
+    border-bottom: none;
   }
 
   .#{$prefix}--modal
     .#{$prefix}--text-area--fluid
-    .#{$prefix}--text-area--invalid
-    + .#{$prefix}--text-area__divider
+    .#{$prefix}--text-area__wrapper[data-invalid]
+    .#{$prefix}--text-area__divider
     + .#{$prefix}--form-requirement {
     background: $field-02;
   }

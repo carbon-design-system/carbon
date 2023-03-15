@@ -111,9 +111,10 @@ Map {
         "isRequired": true,
         "type": "string",
       },
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "children": Object {
         "type": "node",
       },
@@ -2694,9 +2695,10 @@ Map {
       "type": "default",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
@@ -4029,6 +4031,9 @@ Map {
       "role": "status",
     },
     "propTypes": Object {
+      "aria-label": Object {
+        "type": "string",
+      },
       "children": Object {
         "type": "node",
       },
@@ -5067,7 +5072,7 @@ Map {
   },
   "NotificationButton" => Object {
     "defaultProps": Object {
-      "ariaLabel": "close notification",
+      "aria-label": "close notification",
       "notificationType": "toast",
       "renderIcon": Object {
         "$$typeof": Symbol(react.forward_ref),
@@ -5091,9 +5096,10 @@ Map {
       "type": "button",
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "className": Object {
         "type": "string",
       },
@@ -7835,6 +7841,8 @@ Map {
       "onClick": [Function],
       "placeholder": "",
       "rows": 4,
+      "warn": false,
+      "warnText": "",
     },
     "propTypes": Object {
       "className": Object {
@@ -7912,6 +7920,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
     "render": [Function],
@@ -8451,9 +8465,10 @@ Map {
       "timeout": 0,
     },
     "propTypes": Object {
-      "ariaLabel": Object {
+      "aria-label": Object {
         "type": "string",
       },
+      "ariaLabel": [Function],
       "caption": Object {
         "type": "string",
       },
@@ -9026,6 +9041,57 @@ Map {
     "8": "cool-gray",
     "9": "warm-gray",
   },
+  "unstable_ComboButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "tooltipAlign": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "translateWithId": Object {
+        "type": "func",
+      },
+    },
+    "render": [Function],
+  },
   "unstable_FeatureFlags" => Object {
     "propTypes": Object {
       "children": Object {
@@ -9089,6 +9155,9 @@ Map {
       "onClose": Object {
         "type": "func",
       },
+      "onOpen": Object {
+        "type": "func",
+      },
       "open": Object {
         "type": "bool",
       },
@@ -9141,6 +9210,46 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+    },
+    "render": [Function],
+  },
+  "unstable_MenuButton" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "propTypes": Object {
+      "children": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "kind": Object {
+        "args": Array [
+          Array [
+            "primary",
+            "tertiary",
+            "ghost",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "label": Object {
+        "isRequired": true,
+        "type": "string",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
       },
     },
     "render": [Function],
@@ -9972,6 +10081,12 @@ Map {
           ],
         ],
         "type": "oneOfType",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
       },
     },
   },
