@@ -5,13 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { OverflowMenuVertical } from '@carbon/icons-react';
-import { useId } from '../../internal/useId';
+
 import { Menu } from '../Menu';
+
+import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { useAttachedMenu } from '../../internal/useAttachedMenu';
 
 const defaultSize = 'md';
 
@@ -23,46 +26,11 @@ function OverflowMenuV2({
   ...rest
 }) {
   const id = useId('overflowmenu');
-  const [open, setOpen] = useState(false);
-  const [position, setPosition] = useState([
-    [0, 0],
-    [0, 0],
-  ]);
-  const triggerRef = useRef(null);
   const prefix = usePrefix();
 
-  function openMenu() {
-    if (triggerRef.current) {
-      const { left, top, right, bottom } =
-        triggerRef.current.getBoundingClientRect();
-      setPosition([
-        [left, right],
-        [top, bottom],
-      ]);
-    }
-
-    setOpen(true);
-  }
-
-  function closeMenu() {
-    setOpen(false);
-  }
-
-  function handleClick() {
-    if (open) {
-      closeMenu();
-    } else {
-      openMenu();
-    }
-  }
-
-  function handleMousedown(e) {
-    // prevent default for mousedown on trigger element to avoid
-    // the "blur" event from firing on the menu as this would close
-    // it and immediately re-open since "click" event is fired after
-    // "blur" event.
-    e.preventDefault();
-  }
+  const triggerRef = useRef(null);
+  const { open, x, y, handleClick, handleMousedown, handleClose } =
+    useAttachedMenu(triggerRef);
 
   const containerClasses = classNames(`${prefix}--overflow-menu__container`);
 
@@ -88,13 +56,7 @@ function OverflowMenuV2({
         ref={triggerRef}>
         <IconElement className={`${prefix}--overflow-menu__icon`} />
       </button>
-      <Menu
-        id={id}
-        size={size}
-        open={open}
-        onClose={closeMenu}
-        x={position[0]}
-        y={position[1]}>
+      <Menu id={id} size={size} open={open} onClose={handleClose} x={x} y={y}>
         {children}
       </Menu>
     </div>

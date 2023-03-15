@@ -31,6 +31,7 @@ const Menu = React.forwardRef(function Menu(
     className,
     label,
     onClose,
+    onOpen,
     open,
     size = 'sm',
     target = document.body,
@@ -79,7 +80,17 @@ const Menu = React.forwardRef(function Menu(
   function handleOpen() {
     if (menu.current) {
       focusReturn.current = document.activeElement;
-      setPosition(calculatePosition());
+
+      const pos = calculatePosition();
+      menu.current.style.left = `${pos[0]}px`;
+      menu.current.style.top = `${pos[1]}px`;
+      setPosition(pos);
+
+      menu.current.focus();
+
+      if (onOpen) {
+        onOpen();
+      }
     }
   }
 
@@ -246,12 +257,7 @@ const Menu = React.forwardRef(function Menu(
         aria-label={label}
         tabIndex={-1}
         onKeyDown={handleKeyDown}
-        onBlur={handleBlur}
-        // eslint-disable-next-line react/forbid-dom-props
-        style={{
-          left: `${position[0]}px`,
-          top: `${position[1]}px`,
-        }}>
+        onBlur={handleBlur}>
         {children}
       </ul>
     </MenuContext.Provider>
@@ -280,6 +286,11 @@ Menu.propTypes = {
    * Provide an optional function to be called when the Menu should be closed.
    */
   onClose: PropTypes.func,
+
+  /**
+   * Provide an optional function to be called when the Menu is opened.
+   */
+  onOpen: PropTypes.func,
 
   /**
    * Whether the Menu is open or not.
