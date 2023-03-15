@@ -41,6 +41,7 @@ declare global {
       'cds-link': any;
       'cds-ordered-list': any;
       'cds-unordered-list': any;
+      'cds-layer': any;
       'cds-loading': any;
       'cds-modal': any;
       'cds-modal-body': any;

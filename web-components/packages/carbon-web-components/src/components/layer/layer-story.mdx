@@ -1,0 +1,103 @@
+import { Props, Description } from '@storybook/addon-docs/blocks';
+import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+
+# Layer
+
+> 💡 Check our
+> [CodeSandbox](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/layer)
+> example implementation.
+
+[![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/layer)
+
+The `Layer` component is used to render components on different layers. Each
+layer has a specific set of token values associated with it. You can use these
+tokens directly, or use contextual tokens from our styles package like `$layer`
+or `$field`.
+
+The `Layer` component accepts any `children`. Each child of a `Layer`
+component is rendered using the layer tokens at that layer. `Layer` components
+can be nested indefinitely, but the token sets typically end after 3 layers.
+
+## Getting started
+
+Here's a quick example to get you started.
+
+### JS (via import)
+
+```javascript
+import '@carbon/web-components/es/components/layer/index.js';
+```
+
+<Description markdown={`${cdnJs({ components: ['layer'] })}`} />
+<Description markdown={`${cdnCss()}`} />
+
+### HTML
+
+Here we define a custom test class to define a custom padding.
+
+```css
+.example-layer-test-component {
+  padding: 1rem;
+}
+```
+
+```html
+  <cds-layer>
+    <div class="example-layer-test-component">Layer 1</div>
+    <cds-layer>
+      <div class="example-layer-test-component">Layer 2</div>
+      <cds-layer>
+        <div class="example-layer-test-component">Layer 3</div>
+      </cds-layer>
+    </cds-layer>
+  </cds-layer>
+```
+
+## Setting a custom level
+
+You can override the `level` of a `Layer` if you would like to change the presentation of a layer in your application. 
+This is particularly helpful if you would like to reset the `Layer` level back to `0` or if you want to make sure a part 
+of a page always renders in a certain level.
+
+```html
+  <cds-layer>
+    <div class="example-layer-test-component">Layer 1</div>
+    <cds-layer level="0">
+      <div class="example-layer-test-component">Layer 1 as well</div>
+      <cds-layer>
+        <div class="example-layer-test-component">Layer 2</div>
+      </cds-layer>
+    </cds-layer>
+  </cds-layer>
+```
+
+## Get the current layer
+If you are building a component and would like to know what layer the component resides within, you can use the `cds-use-layer` event.
+
+This event returns a `CustomEvent` with the current element firing the event, as well as its layer:
+
+```js
+  document.addEventListener(`${prefix}-use-layer`, (e) => {
+    const { layer, level } = (e as any).detail;
+
+    // use values here
+  })
+```
+
+If the structure of `Layer` components in your app change, the event will automatically fire with the new level.
+
+The level value can be one of: 0, 1, or 2 and will correspond to the level of the current layer. This value mirrors the level prop on the Layer component.
+
+## Layer role
+As `Layer` is effectively a container component, and you can configure what the `Layer` should be seen as in the DOM using `role`.
+For example, if you would like the Layer component to be seen as a section you could write the following:
+
+```html
+  <cds-layer role="section">
+    <div class="example-layer-test-component">Layer 1</div>
+  </cds-layer>
+```
+
+## `<cds-layer>` attributes, properties and events
+
+<Props of="cds-layer" />

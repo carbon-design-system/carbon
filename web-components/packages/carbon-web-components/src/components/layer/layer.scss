@@ -1,0 +1,29 @@
+//
+// Copyright IBM Corp. 2019, 2023
+//
+// This source code is licensed under the Apache-2.0 license found in the
+// LICENSE file in the root directory of this source tree.
+//
+
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/layer' as *;
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+
+:host(#{$prefix}-layer) {
+  ::slotted(*) {
+    background: $layer;
+    color: $text-primary;
+  }
+
+  &[level='0'] {
+    @extend .#{$prefix}--layer-one;
+  }
+  &[level='1'] {
+    @extend .#{$prefix}--layer-two;
+  }
+  &[level='2'] {
+    @extend .#{$prefix}--layer-three;
+  }
+}
