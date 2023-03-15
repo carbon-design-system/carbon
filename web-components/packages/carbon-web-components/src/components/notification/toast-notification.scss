@@ -1,5 +1,5 @@
 //
-// Copyright IBM Corp. 2019, 2022
+// Copyright IBM Corp. 2019, 2023
 //
 // This source code is licensed under the Apache-2.0 license found in the
 // LICENSE file in the root directory of this source tree.
@@ -26,12 +26,20 @@ $css--plex: true !default;
   display: none;
 }
 
+:host(#{$prefix}-toast-notification[low-contrast]) {
+  &[low-contrast] {
+    @extend .#{$prefix}--toast-notification--low-contrast;
+  }
+}
+
 :host(#{$prefix}-toast-notification[kind='success']) {
   @extend .#{$prefix}--toast-notification--success;
 
   &[low-contrast] {
-    @extend .#{$prefix}--toast-notification--low-contrast,
-      .#{$prefix}--toast-notification--success;
+    @include notification--experimental(
+      $support-success,
+      get-token-value($notification-colors, 'notification-background-success')
+    );
   }
 }
 
@@ -39,8 +47,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--toast-notification--info;
 
   &[low-contrast] {
-    @extend .#{$prefix}--toast-notification--low-contrast,
-      .#{$prefix}--toast-notification--info;
+    @include notification--experimental(
+      $support-info,
+      get-token-value($notification-colors, 'notification-background-info')
+    );
   }
 }
 
@@ -48,8 +58,10 @@ $css--plex: true !default;
   @extend .#{$prefix}--toast-notification--warning;
 
   &[low-contrast] {
-    @extend .#{$prefix}--toast-notification--low-contrast,
-      .#{$prefix}--toast-notification--warning;
+    @include notification--experimental(
+      $support-warning,
+      get-token-value($notification-colors, 'notification-background-warning')
+    );
   }
 }
 
@@ -57,7 +69,9 @@ $css--plex: true !default;
   @extend .#{$prefix}--toast-notification--error;
 
   &[low-contrast] {
-    @extend .#{$prefix}--toast-notification--low-contrast,
-      .#{$prefix}--toast-notification--error;
+    @include notification--experimental(
+      $support-error,
+      get-token-value($notification-colors, 'notification-background-error')
+    );
   }
 }

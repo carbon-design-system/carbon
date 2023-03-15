@@ -17,6 +17,12 @@ $css--plex: true !default;
 
 :host(#{$prefix}-breadcrumb-item) {
   @extend .#{$prefix}--breadcrumb-item;
+
+  &::after {
+    margin-left: $spacing-03;
+    color: $text-primary;
+    content: '/';
+  }
 }
 
 :host(#{$prefix}-breadcrumb-overflow-menu) {
