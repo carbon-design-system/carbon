@@ -29,6 +29,8 @@ const TextInputProps = {
   id: 'test2',
   labelText: 'Text Input label',
   placeholder: 'Placeholder text',
+  invalid: true,
+  invalidText: 'Indalid text',
 };
 
 const TextAreaProps = {
@@ -36,6 +38,8 @@ const TextAreaProps = {
   id: 'test3',
   labelText: 'Text Area label',
   placeholder: 'Placeholder text',
+  invalid: true,
+  invalidText: 'Indalid text',
 };
 
 const InvalidPasswordProps = {
