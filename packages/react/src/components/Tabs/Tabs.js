@@ -570,18 +570,14 @@ const Tab = React.forwardRef(function Tab(
 
   if (isMd) {
     return (
+      //need to conditionally render columns if more tabs than can fit in grid space
       <Column md={1} lg={2}>
         {tabComponent}
       </Column>
     );
   }
 
-  return (
-    // if contained tab render Column
-    // if small/mobile breakpoint do not render Column
-    // if the total column count > --cds-grid-columns do not render Column
-    <>{tabComponent}</>
-  );
+  return <>{tabComponent}</>;
 });
 
 Tab.propTypes = {

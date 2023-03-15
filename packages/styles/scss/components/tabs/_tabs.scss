@@ -523,4 +523,21 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     width: 100%;
     max-width: none;
   }
+
+  .#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item {
+    margin-left: 0;
+    // Draws the border without affecting the inner-content
+    box-shadow: rem(-1px) 0 0 0 $border-strong;
+  }
+
+  // this is a hack to hide columns when not contained grid -- todo: add logic to tabs.js to not render column
+  .#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--contained-grid) {
+    [class*='cds--col'],
+    .cds--css-grid-column {
+      max-width: 100%;
+      flex: 0;
+      padding: 0;
+      margin: 0;
+    }
+  }
 }
