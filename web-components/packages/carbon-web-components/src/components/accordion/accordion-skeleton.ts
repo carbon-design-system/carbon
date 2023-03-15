@@ -22,7 +22,7 @@ import styles from './accordion.scss';
  * Skeleton of code snippet.
  */
 @customElement(`${prefix}-accordion-skeleton`)
-class BXAccordionSkeleton extends LitElement {
+class CDSAccordionSkeleton extends LitElement {
   /**
    * Specify the alignment of the accordion heading title and chevron
    */
@@ -52,7 +52,7 @@ class BXAccordionSkeleton extends LitElement {
       // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
         this.shadowRoot!.querySelectorAll(
-          (this.constructor as typeof BXAccordionSkeleton)
+          (this.constructor as typeof CDSAccordionSkeleton)
             .selectorAccordionItemSkeletons
         ),
         (elem) => {
@@ -67,7 +67,7 @@ class BXAccordionSkeleton extends LitElement {
       // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
         this.shadowRoot!.querySelectorAll(
-          (this.constructor as typeof BXAccordionSkeleton)
+          (this.constructor as typeof CDSAccordionSkeleton)
             .selectorAccordionItemSkeletons
         ),
         (elem) => {
@@ -125,4 +125,4 @@ class BXAccordionSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXAccordionSkeleton;
+export default CDSAccordionSkeleton;

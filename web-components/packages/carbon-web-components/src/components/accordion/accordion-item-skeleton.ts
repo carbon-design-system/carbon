@@ -18,7 +18,7 @@ import styles from './accordion.scss';
  * Skeleton of accordion item.
  */
 @customElement(`${prefix}-accordion-item-skeleton`)
-class BXAccordionItemSkeleton extends LitElement {
+class CDSAccordionItemSkeleton extends LitElement {
   render() {
     return html`
       <span class="${prefix}--accordion__heading">
@@ -35,4 +35,4 @@ class BXAccordionItemSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXAccordionItemSkeleton;
+export default CDSAccordionItemSkeleton;

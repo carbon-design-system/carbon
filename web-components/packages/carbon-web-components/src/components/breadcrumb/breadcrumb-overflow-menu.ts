@@ -11,7 +11,7 @@ import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import OverflowMenuHorizontal16 from '@carbon/icons/lib/overflow-menu--horizontal/16';
-import BXOverflowMenu from '../overflow-menu/overflow-menu';
+import CDSOverflowMenu from '../overflow-menu/overflow-menu';
 import styles from './breadcrumb.scss';
 
 /**
@@ -20,7 +20,7 @@ import styles from './breadcrumb.scss';
  * @element cds-breadcrumb-overflow-menu
  */
 @customElement(`${prefix}-breadcrumb-overflow-menu`)
-class BXBreadcrumbOverflowMenu extends BXOverflowMenu {
+class CDSBreadcrumbOverflowMenu extends CDSOverflowMenu {
   render() {
     return html`
       <slot name="icon">
@@ -34,4 +34,4 @@ class BXBreadcrumbOverflowMenu extends BXOverflowMenu {
   static styles = styles;
 }
 
-export default BXBreadcrumbOverflowMenu;
+export default CDSBreadcrumbOverflowMenu;

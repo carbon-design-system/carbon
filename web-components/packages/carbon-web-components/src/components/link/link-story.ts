@@ -21,44 +21,38 @@ import { LINK_SIZE } from './link';
 import storyDocs from './link-story.mdx';
 
 const sizes = {
-  'Regular size': null,
   [`Small size (${LINK_SIZE.SMALL})`]: LINK_SIZE.SMALL,
+  [`Medium size (${LINK_SIZE.MEDIUM})`]: LINK_SIZE.MEDIUM,
   [`Large size (${LINK_SIZE.LARGE})`]: LINK_SIZE.LARGE,
 };
 
-export const Default = (args) => {
-  const {
-    disabled,
-    download,
-    href,
-    hreflang,
-    linkRole,
-    ping,
-    rel,
-    size,
-    target,
-    type,
-    onClick,
-  } = args?.[`${prefix}-link`] ?? {};
-  return html`
-    <cds-link
-      ?disabled="${disabled}"
-      download="${ifDefined(download)}"
-      href="${ifDefined(href)}"
-      hreflang="${ifDefined(hreflang)}"
-      link-role="${ifDefined(linkRole)}"
-      ping="${ifDefined(ping)}"
-      rel="${ifDefined(rel)}"
-      size="${ifDefined(size)}"
-      target="${ifDefined(target)}"
-      type="${ifDefined(type)}"
-      @click="${onClick}">
-      Link
-    </cds-link>
-  `;
+export const Default = () => {
+  return html` <cds-link href="#"> Link </cds-link> `;
 };
 
 Default.storyName = 'Default';
+
+export const Inline = () => {
+  return html`
+    <cds-link inline href="#"
+      >Lorem ipsum dolor sit amet, consectetur adipiscing elit.</cds-link
+    >
+    <p>
+      Ut facilisis semper lorem in aliquet. Aliquam accumsan ante justo, vitae
+      fringilla eros vehicula id. Ut at enim quis libero pharetra ullamcorper.
+      Maecenas feugiat sodales arcu ut porttitor. In blandit ultricies est.
+      Vivamus risus massa, cursus eu tellus sed, sagittis commodo nunc.
+      <cds-link inline href="#"
+        >Maecenas nunc mauris, consequat quis mauris sit amet,</cds-link
+      >
+      finibus suscipit nunc. Phasellus ex quam, placerat quis tempus sit amet,
+      pretium nec sem. Etiam dictum scelerisque mauris, blandit ultrices erat
+      pellentesque id. Quisque venenatis purus sit amet sodales condimentum.
+      Duis at tincidunt orci. Ut velit ipsum, lacinia at ex quis, aliquet
+      rhoncus purus. Praesent et scelerisque ligula.
+    </p>
+  `;
+};
 
 export const pairedWithIcon = (args) => {
   const {
@@ -92,8 +86,22 @@ export const pairedWithIcon = (args) => {
   `;
 };
 
-export default {
-  title: 'Components/Link',
+export const Playground = (args) => {
+  const { disabled, inline, visited, href, size } =
+    args?.[`${prefix}-link`] ?? {};
+  return html`
+    <cds-link
+      ?disabled="${disabled}"
+      href="${ifDefined(href)}"
+      size="${ifDefined(size)}"
+      ?inline="${inline}"
+      ?visited="${visited}">
+      Link
+    </cds-link>
+  `;
+};
+
+Playground.story = {
   parameters: {
     ...storyDocs.parameters,
     knobs: {
@@ -101,11 +109,20 @@ export default {
         disabled: boolean('Disabled (disabled)', false),
         href: textNullable(
           'Link href (href)',
-          'https://github.com/carbon-design-system/carbon-web-components'
+          'https://github.com/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components'
         ),
+        inline: boolean('Inline (inline)', false),
+        size: select('Link size (size)', sizes, LINK_SIZE.MEDIUM),
+        visited: boolean('Visited (visited)', false),
         onClick: action('click'),
-        size: select('Link size (size)', sizes, null),
       }),
     },
+  },
+};
+
+export default {
+  title: 'Components/Link',
+  parameters: {
+    ...storyDocs.parameters,
   },
 };

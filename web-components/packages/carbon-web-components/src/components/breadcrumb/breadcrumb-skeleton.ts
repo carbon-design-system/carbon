@@ -25,7 +25,7 @@ const renderItem = () => {
  * Skeleton of breadcrumb.
  */
 @customElement(`${prefix}-breadcrumb-skeleton`)
-class BXBreadcrumbSkeleton extends LitElement {
+class CDSBreadcrumbSkeleton extends LitElement {
   render() {
     return html`
       <div class="${prefix}--breadcrumb ${prefix}--skeleton">
@@ -37,4 +37,4 @@ class BXBreadcrumbSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXBreadcrumbSkeleton;
+export default CDSBreadcrumbSkeleton;

@@ -10,7 +10,7 @@
 import { html } from 'lit';
 import { customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import BXLink from '../link/link';
+import CDSLink from '../link/link';
 import styles from './breadcrumb.scss';
 
 /**
@@ -19,7 +19,7 @@ import styles from './breadcrumb.scss';
  * @element cds-breadcrumb-link
  */
 @customElement(`${prefix}-breadcrumb-link`)
-class BXBreadcrumbLink extends BXLink {
+class CDSBreadcrumbLink extends CDSLink {
   render() {
     return html`
       ${this.href
@@ -30,4 +30,4 @@ class BXBreadcrumbLink extends BXLink {
   static styles = styles;
 }
 
-export default BXBreadcrumbLink;
+export default CDSBreadcrumbLink;

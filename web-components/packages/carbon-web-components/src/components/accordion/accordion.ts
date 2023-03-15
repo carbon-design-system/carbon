@@ -22,7 +22,7 @@ export { ACCORDION_SIZE, ACCORDION_ALIGNMENT };
  * @element cds-accordion
  */
 @customElement(`${prefix}-accordion`)
-class BXAccordion extends LitElement {
+class CDSAccordion extends LitElement {
   /**
    * Accordion size should be sm, md, lg.
    */
@@ -53,7 +53,7 @@ class BXAccordion extends LitElement {
       // Propagate `size` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
         this.querySelectorAll(
-          (this.constructor as typeof BXAccordion).selectorAccordionItems
+          (this.constructor as typeof CDSAccordion).selectorAccordionItems
         ),
         (elem) => {
           elem.setAttribute('size', this.size);
@@ -64,7 +64,7 @@ class BXAccordion extends LitElement {
       // Propagate `alignment` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
         this.querySelectorAll(
-          (this.constructor as typeof BXAccordion).selectorAccordionItems
+          (this.constructor as typeof CDSAccordion).selectorAccordionItems
         ),
         (elem) => {
           elem.setAttribute('alignment', this.alignment);
@@ -78,7 +78,7 @@ class BXAccordion extends LitElement {
       // Propagate `isFlush` attribute to descendants until `:host-context()` gets supported in all major browsers
       forEach(
         this.querySelectorAll(
-          (this.constructor as typeof BXAccordion).selectorAccordionItems
+          (this.constructor as typeof CDSAccordion).selectorAccordionItems
         ),
         (elem) => {
           this.isFlush && this.alignment !== 'start'
@@ -100,4 +100,4 @@ class BXAccordion extends LitElement {
   static styles = styles;
 }
 
-export default BXAccordion;
+export default CDSAccordion;

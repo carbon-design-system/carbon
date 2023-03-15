@@ -52,7 +52,7 @@ const observeResize = (observer: ResizeObserver, elem: Element) => {
  * @csspart content The content.
  */
 @customElement(`${prefix}-accordion-item`)
-class BXAccordionItem extends FocusMixin(LitElement) {
+class CDSAccordionItem extends FocusMixin(LitElement) {
   /**
    * The current breakpoint.
    */
@@ -80,13 +80,13 @@ class BXAccordionItem extends FocusMixin(LitElement) {
     if (
       this.dispatchEvent(
         new CustomEvent(
-          (this.constructor as typeof BXAccordionItem).eventBeforeToggle,
+          (this.constructor as typeof CDSAccordionItem).eventBeforeToggle,
           init
         )
       )
     ) {
       const { selectorAccordionContent } = this
-        .constructor as typeof BXAccordionItem;
+        .constructor as typeof CDSAccordionItem;
 
       !this.open
         ? this.setAttribute('expanding', '')
@@ -101,7 +101,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
       this.open = open;
       this.dispatchEvent(
         new CustomEvent(
-          (this.constructor as typeof BXAccordionItem).eventToggle,
+          (this.constructor as typeof CDSAccordionItem).eventToggle,
           init
         )
       );
@@ -133,7 +133,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
     (records: ResizeObserverEntry[]) => {
       const { width } = records[records.length - 1].contentRect;
       const { _sizesBreakpoints: sizesBreakpoints } = this
-        .constructor as typeof BXAccordionItem;
+        .constructor as typeof CDSAccordionItem;
       this._currentBreakpoint = Object.keys(sizesBreakpoints)
         .sort((lhs, rhs) => sizesBreakpoints[rhs] - sizesBreakpoints[lhs])
         .find(
@@ -188,7 +188,7 @@ class BXAccordionItem extends FocusMixin(LitElement) {
       _handleKeydownExpando: handleKeydownExpando,
     } = this;
     const { _classesBreakpoints: classesBreakpoints } = this
-      .constructor as typeof BXAccordionItem;
+      .constructor as typeof CDSAccordionItem;
     const { [currentBreakpoint!]: classBreakpoint } = classesBreakpoints;
     const contentClasses = classMap({
       [classBreakpoint]: classBreakpoint,
@@ -264,4 +264,4 @@ class BXAccordionItem extends FocusMixin(LitElement) {
   static styles = styles;
 }
 
-export default BXAccordionItem;
+export default CDSAccordionItem;

@@ -18,7 +18,7 @@ import styles from './breadcrumb.scss';
  * @element cds-breadcrumb-item
  */
 @customElement(`${prefix}-breadcrumb-item`)
-class BXBreadcrumbItem extends LitElement {
+class CDSBreadcrumbItem extends LitElement {
   connectedCallback() {
     if (!this.hasAttribute('role')) {
       this.setAttribute('role', 'listitem');
@@ -33,4 +33,4 @@ class BXBreadcrumbItem extends LitElement {
   static styles = styles;
 }
 
-export default BXBreadcrumbItem;
+export default CDSBreadcrumbItem;
