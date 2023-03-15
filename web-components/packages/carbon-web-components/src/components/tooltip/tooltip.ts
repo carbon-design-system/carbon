@@ -57,7 +57,7 @@ class BXTooltip
    */
   @HostListener('mouseover')
   // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
-  private _handleClick = async () => {
+  private _handleOver = async () => {
     setTimeout(async () => {
       this.open = !this.open;
       const { open, updateComplete } = this;
