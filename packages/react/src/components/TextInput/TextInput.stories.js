@@ -172,10 +172,10 @@ Playground.argTypes = {
     },
   },
   onChange: {
-    action: 'clicked',
+    action: 'onChange',
   },
   onClick: {
-    action: 'clicked',
+    action: 'onClick',
   },
   size: {
     defaultValue: 'md',
