@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { render, cleanup } from '@carbon/test-utils/react';
+import { render } from '@testing-library/react';
 import { getByText } from '@carbon/test-utils/dom';
 import React from 'react';
 import { Simulate } from 'react-dom/test-utils';
@@ -13,8 +13,6 @@ import { FileUploaderButton } from '../';
 import { uploadFiles } from '../test-helpers';
 
 describe('FileUploaderButton', () => {
-  afterEach(cleanup);
-
   describe('automated accessibility tests', () => {
     it('should have no axe violations', async () => {
       const { container } = render(<FileUploaderButton name="test" />);
