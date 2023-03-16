@@ -179,6 +179,12 @@
     }
   }
 
+  // fluid form in modal
+  .#{$prefix}--modal-content .#{$prefix}--form--fluid {
+    margin-right: -$spacing-05;
+    margin-left: -$spacing-05;
+  }
+
   //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
   // text/p gets 20% right padding
   .#{$prefix}--modal-content > p,
