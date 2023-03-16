@@ -6,7 +6,9 @@
 //
 
 @use 'sass:map';
+@use 'sass:string';
 
+@use '../config';
 @use '../spacing' as *;
 @use './custom-property';
 @use './convert' as *;
@@ -25,6 +27,31 @@ $tokens: (
     normal: $spacing-05,
   ),
 );
+
+/// Allows to redefine any token values of the layout module in case a component is using
+/// non-standard values and should still participate in the layout context
+/// @param {String} $selector - The highest selector of the component
+/// @param {Map} $overrides - The map of overrides. Must follow ( group: ( token: value ) )
+/// @example @include redefine-tokens('.cds--tag', ( size: ( sm: 1.125rem, md: 1.5rem ) ))
+/// @group utilities
+@mixin redefine-tokens($selector, $overrides) {
+  @each $group, $values in $overrides {
+    @each $key, $value in $values {
+      .#{config.$prefix}--layout #{string.unquote($selector)} {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$key}',
+          $value
+        );
+      }
+
+      .#{config.$prefix}--layout--#{$group}-#{$key}
+        #{string.unquote($selector)} {
+        $token: custom-property.get-var('layout-#{$group}-#{$key}', $value);
+        @include custom-property.declaration('layout-#{$group}', $token);
+      }
+    }
+  }
+}
 
 /// Get the appropriate size token for the current layout context
 /// @param {String} $default - The default size of the component if no layout was specified

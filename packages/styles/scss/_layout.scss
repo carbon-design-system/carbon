@@ -19,7 +19,8 @@
 
   @each $key, $value in $values {
     .#{$prefix}--layout--#{$group}-#{$key} {
-      @include custom-property.declaration('layout-#{$group}', $value);
+      $token: custom-property.get-var('layout-#{$group}-#{$key}', $value);
+      @include custom-property.declaration('layout-#{$group}', $token);
     }
   }
 }
