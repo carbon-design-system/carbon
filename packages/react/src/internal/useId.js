@@ -65,7 +65,7 @@ export function useId(prefix = 'id') {
 
 /**
  * Generate a unique id if a given `id` is not provided
- * @param {string} id
+ * @param {string|undefined} id
  * @returns {string}
  */
 export function useFallbackId(id) {

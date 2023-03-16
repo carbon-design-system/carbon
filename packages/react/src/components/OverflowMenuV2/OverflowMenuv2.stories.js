@@ -10,13 +10,26 @@ import { action } from '@storybook/addon-actions';
 
 import { ArrowsVertical } from '@carbon/icons-react';
 
-import { MenuItem, MenuItemRadioGroup, MenuItemDivider } from '../Menu';
+import {
+  MenuItem,
+  MenuItemDivider,
+  MenuItemGroup,
+  MenuItemRadioGroup,
+  MenuItemSelectable,
+} from '../Menu';
 
 import { OverflowMenuV2 } from './';
 
 export default {
   title: 'Experimental/unstable__OverflowMenuV2',
   component: OverflowMenuV2,
+  subcomponents: {
+    MenuItem,
+    MenuItemSelectable,
+    MenuItemGroup,
+    MenuItemRadioGroup,
+    MenuItemDivider,
+  },
 };
 
 export const _OverflowMenuV2 = () => {
