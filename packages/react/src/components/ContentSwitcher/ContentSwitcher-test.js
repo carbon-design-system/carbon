@@ -82,7 +82,7 @@ describe('ContentSwitcher - RTL', () => {
         </ContentSwitcher>
       );
 
-      userEvent.type(screen.getByText('First section'), '{arrowright}');
+      userEvent.type(screen.getByText('First section'), '{ArrowRight}');
 
       expect(onChange).toHaveBeenCalled();
       expect(onChange).toHaveBeenLastCalledWith({

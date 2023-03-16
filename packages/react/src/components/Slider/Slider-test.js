@@ -91,7 +91,7 @@ describe('Slider', () => {
       const theSlider = screen.getByRole('slider');
       click(theSlider);
       expect(onClick).toHaveBeenCalledTimes(1);
-      type(theSlider, '{arrowright}');
+      type(theSlider, '{ArrowRight}');
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenLastCalledWith({ value: 2 });
     });
@@ -214,7 +214,7 @@ describe('Slider', () => {
       const theSlider = screen.getByRole('slider');
       click(theSlider);
       expect(onClick).toHaveBeenCalledTimes(1);
-      type(theSlider, '{arrowright}');
+      type(theSlider, '{ArrowRight}');
       const theInput = screen.getByRole('spinbutton');
       type(theInput, '{selectall}3');
       expect(onChange).toHaveBeenCalledTimes(0);
@@ -292,8 +292,8 @@ describe('Slider', () => {
         });
         const theSlider = screen.getByRole('slider');
         click(theSlider);
-        type(theSlider, '{arrowright}');
-        type(theSlider, '{arrowright}');
+        type(theSlider, '{ArrowRight}');
+        type(theSlider, '{ArrowRight}');
         expect(onKeyDown).toHaveBeenCalledTimes(2);
       });
 
@@ -307,7 +307,7 @@ describe('Slider', () => {
         });
         const theSlider = screen.getByRole('slider');
         click(theSlider);
-        keyboard('{shift}{arrowright}{/shift}{/arrowright}');
+        keyboard('{Shift>}{ArrowRight}{/Shift}{/ArrowRight}');
         expect(onChange).toHaveBeenLastCalledWith({
           value: 11,
         });
@@ -367,7 +367,7 @@ describe('Slider', () => {
         renderSlider({ disabled: true });
         const slider = screen.getByRole('slider');
         click(slider);
-        type(slider, '{arrowright}');
+        type(slider, '{ArrowRight}');
         expect(parseInt(slider.getAttribute('aria-valuenow'))).toEqual(
           defaultSliderValue
         );
@@ -420,7 +420,7 @@ describe('Slider', () => {
         const theSlider = screen.getByRole('slider');
         click(theSlider);
         expect(onClick).toHaveBeenCalledTimes(1);
-        type(theSlider, '{arrowright}');
+        type(theSlider, '{ArrowRight}');
         expect(onChange).toHaveBeenCalledTimes(2);
         expect(onChange).toHaveBeenLastCalledWith({
           value: 1,

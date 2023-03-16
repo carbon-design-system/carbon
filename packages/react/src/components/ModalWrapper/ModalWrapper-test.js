@@ -98,7 +98,7 @@ describe('ModalWrapper', () => {
     const triggerBtn = screen.getByText('Launch modal');
     userEvent.click(triggerBtn);
     expect(screen.getByTestId('modal-2')).toHaveClass('is-visible');
-    userEvent.keyboard('{esc}');
+    userEvent.keyboard('{Escape}');
     expect(screen.getByTestId('modal-2')).not.toHaveClass('is-visible');
   });
 

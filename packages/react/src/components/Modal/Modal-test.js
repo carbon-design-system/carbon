@@ -461,7 +461,7 @@ describe('events', () => {
       </Modal>
     );
 
-    userEvent.keyboard('{esc}');
+    userEvent.keyboard('{Escape}');
     expect(onRequestClose).toHaveBeenCalled();
   });
 

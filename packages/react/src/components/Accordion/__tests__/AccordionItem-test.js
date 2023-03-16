@@ -94,7 +94,7 @@ describe('AccordionItem', () => {
           Lorem ipsum.
         </AccordionItem>
       );
-      userEvent.type(screen.getByRole('button'), '{esc}');
+      userEvent.type(screen.getByRole('button'), '{Escape}');
 
       expect(screen.getByRole('button')).toHaveAttribute(
         'aria-expanded',
@@ -108,7 +108,7 @@ describe('AccordionItem', () => {
           <input type="text" />
         </AccordionItem>
       );
-      userEvent.type(screen.getByRole('textbox'), '{esc}');
+      userEvent.type(screen.getByRole('textbox'), '{Escape}');
       expect(screen.getByRole('button')).toHaveAttribute(
         'aria-expanded',
         'true'
