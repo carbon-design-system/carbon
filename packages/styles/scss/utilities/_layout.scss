@@ -28,8 +28,8 @@ $tokens: (
 
 /// Get the appropriate size token for the current layout context
 /// @param {String} $default - The default size of the component if no layout was specified
-/// @param {String} $min - The minimum size of the component
-/// @param {String} $max - The maximum size of the component
+/// @param {String} $min - The minimum size of the component (optional)
+/// @param {String} $max - The maximum size of the component (optional)
 /// @returns {String}
 /// @example height: size($default: 'md', $min: 'sm', $max: 'xl');
 /// @group utilities
@@ -66,7 +66,7 @@ $tokens: (
 }
 
 /// Get the appropriate density token for the current layout context
-/// @param {String} $default - The default density of the component if no layout was specified
+/// @param {String} $default - The default density of the component if no layout was specified (defaults to 'normal')
 /// @returns {String}
 /// @example padding-inline: density($default: 'condensed');
 /// @group utilities
