@@ -29,8 +29,6 @@ const TextInputProps = {
   id: 'test2',
   labelText: 'Text Input label',
   placeholder: 'Placeholder text',
-  invalid: true,
-  invalidText: 'Indalid text',
 };
 
 const TextAreaProps = {
@@ -38,8 +36,6 @@ const TextAreaProps = {
   id: 'test3',
   labelText: 'Text Area label',
   placeholder: 'Placeholder text',
-  invalid: true,
-  invalidText: 'Indalid text',
 };
 
 const InvalidPasswordProps = {
@@ -143,6 +139,34 @@ export const Default = () => (
           {...InvalidPasswordProps}
         />
         <FluidTextArea {...TextAreaProps} />
+        <FluidSelect
+          id="select-1"
+          defaultValue="placeholder-item"
+          labelText="Choose an option">
+          <SelectItem
+            disabled
+            hidden
+            value="placeholder-item"
+            text="Choose an option"
+          />
+          <SelectItemGroup label="Category 1">
+            <SelectItem value="option-1" text="Option 1" />
+            <SelectItem value="option-2" text="Option 2" />
+          </SelectItemGroup>
+          <SelectItemGroup label="Category 2">
+            <SelectItem value="option-3" text="Option 3" />
+            <SelectItem value="option-4" text="Option 4" />
+          </SelectItemGroup>
+        </FluidSelect>
+        <FluidNumberInput
+          label="Number Input Label"
+          placeholder="Placeholder text"
+          id="input-default"
+          step={10}
+          min={0}
+          max={100}
+          defaultValue={50}
+        />
       </FluidForm>
     </ModalWrapper>
   </>
