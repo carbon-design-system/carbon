@@ -745,7 +745,7 @@ $list-box-menu-width: rem(300px);
   .#{$prefix}--list-box__menu-item--active
     + .#{$prefix}--list-box__menu-item
     > .#{$prefix}--list-box__menu-item__option {
-    border-top-color: transparent;
+    border-top-color: $border-subtle;
   }
 
   .#{$prefix}--list-box__menu-item__selected-icon {
