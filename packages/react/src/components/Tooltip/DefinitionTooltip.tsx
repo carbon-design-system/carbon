@@ -8,13 +8,68 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Popover, PopoverContent } from '../Popover';
+import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { match, keys } from '../../internal/keyboard';
 import { useFallbackId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import deprecate from '../../prop-types/deprecate';
 
-function DefinitionTooltip({
+export interface DefinitionTooltipProps
+  extends Omit<
+    React.ButtonHTMLAttributes<HTMLButtonElement>,
+    'id' | 'classname' | 'children' | 'type'
+  > {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align?: PopoverAlignment;
+
+  /**
+   * The `children` prop will be used as the value that is being defined
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the tooltip should be open when it first renders
+   */
+  defaultOpen?: boolean;
+
+  /**
+   * The `definition` prop is used as the content inside of the tooltip that
+   * appears when a user interacts with the element rendered by the `children`
+   * prop
+   */
+  definition: React.ReactNode;
+
+  /**
+   * Provide a value that will be assigned as the id of the tooltip
+   */
+  id?: string;
+
+  /**
+   * Specifies whether or not the `DefinitionTooltip` should open on hover or not
+   */
+  openOnHover?: boolean;
+
+  /**
+   * @deprecated [Deprecated in v11] Please use the `definition` prop instead.
+   *
+   * Provide the text that will be displayed in the tooltip when it is rendered.
+   */
+  tooltipText?: React.ReactNode;
+
+  /**
+   * The CSS class name of the trigger element
+   */
+  triggerClassName?: string;
+}
+
+const DefinitionTooltip: React.FC<DefinitionTooltipProps> = ({
   align = 'bottom-left',
   className,
   children,
@@ -25,12 +80,12 @@ function DefinitionTooltip({
   tooltipText,
   triggerClassName,
   ...rest
-}) {
+}) => {
   const [isOpen, setOpen] = useState(defaultOpen);
   const prefix = usePrefix();
   const tooltipId = useFallbackId(id);
 
-  function onKeyDown(event) {
+  function onKeyDown(event: React.KeyboardEvent) {
     if (isOpen && match(event, keys.Escape)) {
       event.stopPropagation();
       setOpen(false);
@@ -72,7 +127,7 @@ function DefinitionTooltip({
       </PopoverContent>
     </Popover>
   );
-}
+};
 
 DefinitionTooltip.propTypes = {
   /**
