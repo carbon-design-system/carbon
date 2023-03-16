@@ -41,7 +41,6 @@ const {
   MenuBlur,
   MenuKeyDownArrowDown,
   MenuKeyDownArrowUp,
-  MenuKeyDownEnter,
   MenuKeyDownEscape,
   MenuKeyDownSpaceButton,
   ToggleButtonClick,

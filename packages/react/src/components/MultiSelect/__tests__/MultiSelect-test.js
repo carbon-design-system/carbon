@@ -192,7 +192,9 @@ describe('MultiSelect', () => {
     });
     pressEnter();
 
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
+    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
+      'false'
+    );
 
     pressEnter();
 
