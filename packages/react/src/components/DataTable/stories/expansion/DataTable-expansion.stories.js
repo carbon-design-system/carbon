@@ -22,6 +22,7 @@ import DataTable, {
 import { Pagination } from '../../../../';
 import { rows, headers } from '../shared';
 import mdx from '../../DataTable.mdx';
+import { action } from '@storybook/addon-actions';
 
 export default {
   title: 'Components/DataTable/Expansion',
@@ -288,7 +289,9 @@ export const Playground = (args) => (
           <TableBody>
             {rows.map((row) => (
               <React.Fragment key={row.id}>
-                <TableExpandRow {...getRowProps({ row })}>
+                <TableExpandRow
+                  {...getRowProps({ row })}
+                  onClick={action('onClick')}>
                   {row.cells.map((cell) => (
                     <TableCell key={cell.id}>{cell.value}</TableCell>
                   ))}

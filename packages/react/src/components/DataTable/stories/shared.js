@@ -93,4 +93,4 @@ export const headers = [
 ];
 
 export const batchActionClick = (selectedRows) => () =>
-  action('batch action click')(selectedRows);
+  action('Batch action click')(selectedRows);

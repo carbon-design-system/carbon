@@ -27,12 +27,16 @@
 
     position: fixed;
     z-index: z('modal');
-    min-width: 13rem;
+    min-width: 10rem;
     max-width: 18rem;
     padding: $spacing-02 0;
     background-color: $layer;
     opacity: 0;
     visibility: hidden;
+  }
+
+  .#{$prefix}--menu--with-icons {
+    min-width: 12rem;
   }
 
   .#{$prefix}--menu--open {
@@ -62,7 +66,7 @@
     color: $text-primary;
     column-gap: $spacing-03;
     cursor: pointer;
-    grid-template-columns: 0 1fr max-content;
+    grid-template-columns: 1fr max-content;
     padding-inline: $spacing-05;
     transition: background-color $duration-fast-01 motion(standard, productive);
 
@@ -89,6 +93,10 @@
   }
 
   .#{$prefix}--menu-item__icon {
+    display: none;
+  }
+
+  .#{$prefix}--menu--with-icons .#{$prefix}--menu-item__icon {
     display: flex;
   }
 

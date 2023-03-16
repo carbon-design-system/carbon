@@ -97,9 +97,18 @@ class OverflowMenu extends Component {
 
   static propTypes = {
     /**
-     * The ARIA label.
+     * Specify a label to be read by screen readers on the container node
      */
-    ariaLabel: PropTypes.string.isRequired,
+    ['aria-label']: PropTypes.string,
+
+    /**
+     * Deprecated, please use `aria-label` instead.
+     * Specify a label to be read by screen readers on the container note.
+     */
+    ariaLabel: deprecate(
+      PropTypes.string,
+      'This prop syntax has been deprecated. Please use the new `aria-label`.'
+    ),
 
     /**
      * The child nodes.
@@ -227,7 +236,7 @@ class OverflowMenu extends Component {
   static contextType = PrefixContext;
 
   static defaultProps = {
-    ariaLabel: null,
+    ['aria-label']: null,
     iconDescription: 'Options',
     open: false,
     direction: DIRECTION_BOTTOM,
@@ -458,7 +467,8 @@ class OverflowMenu extends Component {
     const prefix = this.context;
     const {
       id,
-      ariaLabel,
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
       children,
       iconDescription,
       direction,
@@ -524,7 +534,7 @@ class OverflowMenu extends Component {
         className={overflowMenuOptionsClasses}
         tabIndex="-1"
         role="menu"
-        aria-label={ariaLabel}
+        aria-label={ariaLabel || deprecatedAriaLabel}
         onKeyDown={this.handleKeyPress}>
         {childrenWithProps}
       </ul>

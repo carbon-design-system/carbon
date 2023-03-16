@@ -80,13 +80,13 @@ Playground.argTypes = {
     },
   },
   onChange: {
-    action: 'clicked',
+    action: 'onChange',
   },
   onClick: {
-    action: 'clicked',
+    action: 'onClick',
   },
   onKeyUp: {
-    action: 'clicked',
+    action: 'onKeyUp',
   },
   translateWithId: {
     table: {
