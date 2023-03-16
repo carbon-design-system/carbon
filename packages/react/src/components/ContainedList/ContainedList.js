@@ -20,16 +20,18 @@ function ContainedList({
   isInset,
   kind = variants[0],
   label,
-  size = 'lg',
+  size,
 }) {
   const labelId = `${useId('contained-list')}-header`;
   const prefix = usePrefix();
 
   const classes = classNames(
     `${prefix}--contained-list`,
-    { [`${prefix}--contained-list--inset-rulers`]: isInset },
+    {
+      [`${prefix}--contained-list--inset-rulers`]: isInset,
+      [`${prefix}--contained-list--${size}`]: size,
+    },
     `${prefix}--contained-list--${kind}`,
-    `${prefix}--contained-list--${size}`,
     className
   );
 
