@@ -10,7 +10,6 @@ import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
-import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
@@ -131,7 +130,7 @@ export interface PasswordInputProps
   /**
    * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
    */
-  size?: 'sm' | 'md' | 'lg' | 'xl';
+  size?: 'sm' | 'md' | 'lg';
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
@@ -466,9 +465,7 @@ PasswordInput.propTypes = {
   /**
    * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.
