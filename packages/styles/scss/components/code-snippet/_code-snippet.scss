@@ -201,6 +201,12 @@ $copy-btn-feedback: $background-inverse !default;
     order: 1;
     overflow-y: auto;
     transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    &:focus {
+      @include focus-outline('outline');
+
+      outline-offset: 0;
+    }
   }
 
   // expanded snippet container

@@ -1,3863 +1,1065 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DataTable selection -- radio buttons should not have select-all checkbox 1`] = `
-<DataTable
-  filterRows={[Function]}
-  headers={
-    Array [
-      Object {
-        "header": "Field A",
-        "key": "fieldA",
-      },
-      Object {
-        "header": "Field B",
-        "key": "fieldB",
-      },
-    ]
-  }
-  locale="en"
-  overflowMenuOnHover={true}
-  radio={true}
-  render={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "expandAll": [Function],
-            "expandRow": [Function],
-            "getBatchActionProps": [Function],
-            "getExpandHeaderProps": [Function],
-            "getHeaderProps": [Function],
-            "getRowProps": [Function],
-            "getSelectionProps": [Function],
-            "getTableContainerProps": [Function],
-            "getTableProps": [Function],
-            "getToolbarProps": [Function],
-            "headers": Array [
-              Object {
-                "header": "Field A",
-                "key": "fieldA",
-              },
-              Object {
-                "header": "Field B",
-                "key": "fieldB",
-              },
-            ],
-            "onInputChange": [Function],
-            "radio": true,
-            "rows": Array [],
-            "selectAll": [Function],
-            "selectRow": [Function],
-            "selectedRows": Array [],
-            "sortBy": [Function],
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": <TableContainer
-            title="DataTable with selection"
-          >
-            <Table
-              isSortable={false}
-              overflowMenuOnHover={true}
-            >
-              <TableHead>
-                <TableRow>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field A
-                  </TableHeader>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field B
-                  </TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody
-                aria-live="polite"
-              />
-            </Table>
-          </TableContainer>,
-        },
-      ],
-    }
-  }
-  rows={Array []}
-  size="lg"
-  sortRow={[Function]}
-  translateWithId={[Function]}
->
-  <TableContainer
-    title="DataTable with selection"
+exports[`DataTable behaves as expected selection -- radio buttons should not have select-all checkbox 1`] = `
+<div>
+  <div
+    class="cds--data-table-container"
   >
     <div
-      className="cds--data-table-container"
+      class="cds--data-table-header"
     >
-      <div
-        className="cds--data-table-header"
+      <h4
+        class="cds--data-table-header__title"
+        id="tc-149-title"
       >
-        <h4
-          className="cds--data-table-header__title"
-          id="tc-98-title"
-        >
-          DataTable with selection
-        </h4>
-        <p
-          className="cds--data-table-header__description"
-          id="tc-98-description"
-        />
-      </div>
-      <Table
-        isSortable={false}
-        overflowMenuOnHover={true}
-      >
-        <div
-          className="cds--data-table-content"
-        >
-          <table
-            aria-describedby={null}
-            aria-labelledby="tc-98-title"
-            className="cds--data-table"
-          >
-            <TableHead>
-              <thead>
-                <TableRow>
-                  <tr>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldA"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field A
-                        </div>
-                      </th>
-                    </TableHeader>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldB"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field B
-                        </div>
-                      </th>
-                    </TableHeader>
-                  </tr>
-                </TableRow>
-              </thead>
-            </TableHead>
-            <TableBody
-              aria-live="polite"
-            >
-              <tbody
-                aria-live="polite"
-              />
-            </TableBody>
-          </table>
-        </div>
-      </Table>
+        DataTable with selection
+      </h4>
+      <p
+        class="cds--data-table-header__description"
+        id="tc-149-description"
+      />
     </div>
-  </TableContainer>
-</DataTable>
-`;
-
-exports[`DataTable selection -- radio buttons should render 1`] = `
-<DataTable
-  filterRows={[Function]}
-  headers={
-    Array [
-      Object {
-        "header": "Field A",
-        "key": "fieldA",
-      },
-      Object {
-        "header": "Field B",
-        "key": "fieldB",
-      },
-    ]
-  }
-  locale="en"
-  overflowMenuOnHover={true}
-  radio={true}
-  render={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "expandAll": [Function],
-            "expandRow": [Function],
-            "getBatchActionProps": [Function],
-            "getExpandHeaderProps": [Function],
-            "getHeaderProps": [Function],
-            "getRowProps": [Function],
-            "getSelectionProps": [Function],
-            "getTableContainerProps": [Function],
-            "getTableProps": [Function],
-            "getToolbarProps": [Function],
-            "headers": Array [
-              Object {
-                "header": "Field A",
-                "key": "fieldA",
-              },
-              Object {
-                "header": "Field B",
-                "key": "fieldB",
-              },
-            ],
-            "onInputChange": [Function],
-            "radio": true,
-            "rows": Array [
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "b",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "a",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "c",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-            ],
-            "selectAll": [Function],
-            "selectRow": [Function],
-            "selectedRows": Array [],
-            "sortBy": [Function],
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": <TableContainer
-            title="DataTable with selection"
-          >
-            <Table
-              isSortable={false}
-              overflowMenuOnHover={true}
-            >
-              <TableHead>
-                <TableRow>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field A
-                  </TableHeader>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field B
-                  </TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-14__select-row-b"
-                    name="select-row-b"
-                    onSelect={[Function]}
-                    radio={true}
-                  />
-                  <TableCell>
-                    Field 2:A
-                  </TableCell>
-                  <TableCell>
-                    Field 2:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-14__select-row-a"
-                    name="select-row-a"
-                    onSelect={[Function]}
-                    radio={true}
-                  />
-                  <TableCell>
-                    Field 1:A
-                  </TableCell>
-                  <TableCell>
-                    Field 1:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-14__select-row-c"
-                    name="select-row-c"
-                    onSelect={[Function]}
-                    radio={true}
-                  />
-                  <TableCell>
-                    Field 3:A
-                  </TableCell>
-                  <TableCell>
-                    Field 3:B
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>,
-        },
-      ],
-    }
-  }
-  rows={
-    Array [
-      Object {
-        "fieldA": "Field 2:A",
-        "fieldB": "Field 2:B",
-        "id": "b",
-      },
-      Object {
-        "fieldA": "Field 1:A",
-        "fieldB": "Field 1:B",
-        "id": "a",
-      },
-      Object {
-        "fieldA": "Field 3:A",
-        "fieldB": "Field 3:B",
-        "id": "c",
-      },
-    ]
-  }
-  size="lg"
-  sortRow={[Function]}
-  translateWithId={[Function]}
->
-  <TableContainer
-    title="DataTable with selection"
-  >
     <div
-      className="cds--data-table-container"
+      class="cds--data-table-content"
     >
-      <div
-        className="cds--data-table-header"
+      <table
+        aria-labelledby="tc-149-title"
+        class="cds--data-table"
       >
-        <h4
-          className="cds--data-table-header__title"
-          id="tc-92-title"
-        >
-          DataTable with selection
-        </h4>
-        <p
-          className="cds--data-table-header__description"
-          id="tc-92-description"
-        />
-      </div>
-      <Table
-        isSortable={false}
-        overflowMenuOnHover={true}
-      >
-        <div
-          className="cds--data-table-content"
-        >
-          <table
-            aria-describedby={null}
-            aria-labelledby="tc-92-title"
-            className="cds--data-table"
-          >
-            <TableHead>
-              <thead>
-                <TableRow>
-                  <tr>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldA"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field A
-                        </div>
-                      </th>
-                    </TableHeader>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldB"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field B
-                        </div>
-                      </th>
-                    </TableHeader>
-                  </tr>
-                </TableRow>
-              </thead>
-            </TableHead>
-            <TableBody
-              aria-live="polite"
-            >
-              <tbody
-                aria-live="polite"
-              >
-                <TableRow
-                  key="b"
-                >
-                  <tr>
-                    <TableSelectRow
-                      ariaLabel="Select row"
-                      checked={false}
-                      disabled={false}
-                      id="data-table-14__select-row-b"
-                      name="select-row-b"
-                      onSelect={[Function]}
-                      radio={true}
-                    >
-                      <td
-                        className="cds--table-column-checkbox cds--table-column-radio"
-                      >
-                        <RadioButton
-                          checked={false}
-                          disabled={false}
-                          hideLabel={true}
-                          id="data-table-14__select-row-b"
-                          labelText="Select row"
-                          name="select-row-b"
-                          onClick={[Function]}
-                        >
-                          <div
-                            className="cds--radio-button-wrapper"
-                          >
-                            <input
-                              checked={false}
-                              className="cds--radio-button"
-                              disabled={false}
-                              id="data-table-14__select-row-b"
-                              name="select-row-b"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="radio"
-                              value=""
-                            />
-                            <label
-                              className="cds--radio-button__label"
-                              htmlFor="data-table-14__select-row-b"
-                            >
-                              <span
-                                className="cds--radio-button__appearance"
-                              />
-                              <Text
-                                className="cds--radio-button__label-text cds--visually-hidden"
-                              >
-                                <span
-                                  className="cds--radio-button__label-text cds--visually-hidden"
-                                  dir="auto"
-                                >
-                                  Select row
-                                </span>
-                              </Text>
-                            </label>
-                          </div>
-                        </RadioButton>
-                      </td>
-                    </TableSelectRow>
-                    <TableCell
-                      key="b:fieldA"
-                    >
-                      <td>
-                        Field 2:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="b:fieldB"
-                    >
-                      <td>
-                        Field 2:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-                <TableRow
-                  key="a"
-                >
-                  <tr>
-                    <TableSelectRow
-                      ariaLabel="Select row"
-                      checked={false}
-                      disabled={false}
-                      id="data-table-14__select-row-a"
-                      name="select-row-a"
-                      onSelect={[Function]}
-                      radio={true}
-                    >
-                      <td
-                        className="cds--table-column-checkbox cds--table-column-radio"
-                      >
-                        <RadioButton
-                          checked={false}
-                          disabled={false}
-                          hideLabel={true}
-                          id="data-table-14__select-row-a"
-                          labelText="Select row"
-                          name="select-row-a"
-                          onClick={[Function]}
-                        >
-                          <div
-                            className="cds--radio-button-wrapper"
-                          >
-                            <input
-                              checked={false}
-                              className="cds--radio-button"
-                              disabled={false}
-                              id="data-table-14__select-row-a"
-                              name="select-row-a"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="radio"
-                              value=""
-                            />
-                            <label
-                              className="cds--radio-button__label"
-                              htmlFor="data-table-14__select-row-a"
-                            >
-                              <span
-                                className="cds--radio-button__appearance"
-                              />
-                              <Text
-                                className="cds--radio-button__label-text cds--visually-hidden"
-                              >
-                                <span
-                                  className="cds--radio-button__label-text cds--visually-hidden"
-                                  dir="auto"
-                                >
-                                  Select row
-                                </span>
-                              </Text>
-                            </label>
-                          </div>
-                        </RadioButton>
-                      </td>
-                    </TableSelectRow>
-                    <TableCell
-                      key="a:fieldA"
-                    >
-                      <td>
-                        Field 1:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="a:fieldB"
-                    >
-                      <td>
-                        Field 1:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-                <TableRow
-                  key="c"
-                >
-                  <tr>
-                    <TableSelectRow
-                      ariaLabel="Select row"
-                      checked={false}
-                      disabled={false}
-                      id="data-table-14__select-row-c"
-                      name="select-row-c"
-                      onSelect={[Function]}
-                      radio={true}
-                    >
-                      <td
-                        className="cds--table-column-checkbox cds--table-column-radio"
-                      >
-                        <RadioButton
-                          checked={false}
-                          disabled={false}
-                          hideLabel={true}
-                          id="data-table-14__select-row-c"
-                          labelText="Select row"
-                          name="select-row-c"
-                          onClick={[Function]}
-                        >
-                          <div
-                            className="cds--radio-button-wrapper"
-                          >
-                            <input
-                              checked={false}
-                              className="cds--radio-button"
-                              disabled={false}
-                              id="data-table-14__select-row-c"
-                              name="select-row-c"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="radio"
-                              value=""
-                            />
-                            <label
-                              className="cds--radio-button__label"
-                              htmlFor="data-table-14__select-row-c"
-                            >
-                              <span
-                                className="cds--radio-button__appearance"
-                              />
-                              <Text
-                                className="cds--radio-button__label-text cds--visually-hidden"
-                              >
-                                <span
-                                  className="cds--radio-button__label-text cds--visually-hidden"
-                                  dir="auto"
-                                >
-                                  Select row
-                                </span>
-                              </Text>
-                            </label>
-                          </div>
-                        </RadioButton>
-                      </td>
-                    </TableSelectRow>
-                    <TableCell
-                      key="c:fieldA"
-                    >
-                      <td>
-                        Field 3:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="c:fieldB"
-                    >
-                      <td>
-                        Field 3:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-              </tbody>
-            </TableBody>
-          </table>
-        </div>
-      </Table>
-    </div>
-  </TableContainer>
-</DataTable>
-`;
-
-exports[`DataTable selection should have select-all default to un-checked if no rows are present 1`] = `
-<DataTable
-  filterRows={[Function]}
-  headers={
-    Array [
-      Object {
-        "header": "Field A",
-        "key": "fieldA",
-      },
-      Object {
-        "header": "Field B",
-        "key": "fieldB",
-      },
-    ]
-  }
-  locale="en"
-  overflowMenuOnHover={true}
-  render={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "expandAll": [Function],
-            "expandRow": [Function],
-            "getBatchActionProps": [Function],
-            "getExpandHeaderProps": [Function],
-            "getHeaderProps": [Function],
-            "getRowProps": [Function],
-            "getSelectionProps": [Function],
-            "getTableContainerProps": [Function],
-            "getTableProps": [Function],
-            "getToolbarProps": [Function],
-            "headers": Array [
-              Object {
-                "header": "Field A",
-                "key": "fieldA",
-              },
-              Object {
-                "header": "Field B",
-                "key": "fieldB",
-              },
-            ],
-            "onInputChange": [Function],
-            "radio": undefined,
-            "rows": Array [],
-            "selectAll": [Function],
-            "selectRow": [Function],
-            "selectedRows": Array [],
-            "sortBy": [Function],
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": <TableContainer
-            title="DataTable with selection"
-          >
-            <Table
-              isSortable={false}
-              overflowMenuOnHover={true}
-            >
-              <TableHead>
-                <TableRow>
-                  <TableSelectAll
-                    ariaLabel="Select all rows"
-                    checked={false}
-                    id="data-table-7__select-all"
-                    indeterminate={false}
-                    name="select-all"
-                    onSelect={[Function]}
-                  />
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field A
-                  </TableHeader>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field B
-                  </TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody
-                aria-live="polite"
-              />
-            </Table>
-          </TableContainer>,
-        },
-      ],
-    }
-  }
-  rows={Array []}
-  size="lg"
-  sortRow={[Function]}
-  translateWithId={[Function]}
->
-  <TableContainer
-    title="DataTable with selection"
-  >
-    <div
-      className="cds--data-table-container"
-    >
-      <div
-        className="cds--data-table-header"
-      >
-        <h4
-          className="cds--data-table-header__title"
-          id="tc-59-title"
-        >
-          DataTable with selection
-        </h4>
-        <p
-          className="cds--data-table-header__description"
-          id="tc-59-description"
-        />
-      </div>
-      <Table
-        isSortable={false}
-        overflowMenuOnHover={true}
-      >
-        <div
-          className="cds--data-table-content"
-        >
-          <table
-            aria-describedby={null}
-            aria-labelledby="tc-59-title"
-            className="cds--data-table"
-          >
-            <TableHead>
-              <thead>
-                <TableRow>
-                  <tr>
-                    <TableSelectAll
-                      ariaLabel="Select all rows"
-                      checked={false}
-                      id="data-table-7__select-all"
-                      indeterminate={false}
-                      name="select-all"
-                      onSelect={[Function]}
-                    >
-                      <th
-                        className="cds--table-column-checkbox"
-                        scope="col"
-                      >
-                        <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select all rows"
-                          checked={false}
-                          id="data-table-7__select-all"
-                          indeterminate={false}
-                          name="select-all"
-                          onClick={[Function]}
-                        >
-                          <div
-                            className="cds--checkbox--inline"
-                          >
-                            <input
-                              checked={false}
-                              className="cds--checkbox"
-                              id="data-table-7__select-all"
-                              name="select-all"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select all rows"
-                              className="cds--checkbox-label"
-                              htmlFor="data-table-7__select-all"
-                              onClick={[Function]}
-                            />
-                          </div>
-                        </ForwardRef(InlineCheckbox)>
-                      </th>
-                    </TableSelectAll>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldA"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field A
-                        </div>
-                      </th>
-                    </TableHeader>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldB"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field B
-                        </div>
-                      </th>
-                    </TableHeader>
-                  </tr>
-                </TableRow>
-              </thead>
-            </TableHead>
-            <TableBody
-              aria-live="polite"
-            >
-              <tbody
-                aria-live="polite"
-              />
-            </TableBody>
-          </table>
-        </div>
-      </Table>
-    </div>
-  </TableContainer>
-</DataTable>
-`;
-
-exports[`DataTable selection should render 1`] = `
-<DataTable
-  filterRows={[Function]}
-  headers={
-    Array [
-      Object {
-        "header": "Field A",
-        "key": "fieldA",
-      },
-      Object {
-        "header": "Field B",
-        "key": "fieldB",
-      },
-    ]
-  }
-  locale="en"
-  overflowMenuOnHover={true}
-  render={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "expandAll": [Function],
-            "expandRow": [Function],
-            "getBatchActionProps": [Function],
-            "getExpandHeaderProps": [Function],
-            "getHeaderProps": [Function],
-            "getRowProps": [Function],
-            "getSelectionProps": [Function],
-            "getTableContainerProps": [Function],
-            "getTableProps": [Function],
-            "getToolbarProps": [Function],
-            "headers": Array [
-              Object {
-                "header": "Field A",
-                "key": "fieldA",
-              },
-              Object {
-                "header": "Field B",
-                "key": "fieldB",
-              },
-            ],
-            "onInputChange": [Function],
-            "radio": undefined,
-            "rows": Array [
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "b",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "a",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "c",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-            ],
-            "selectAll": [Function],
-            "selectRow": [Function],
-            "selectedRows": Array [],
-            "sortBy": [Function],
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": <TableContainer
-            title="DataTable with selection"
-          >
-            <Table
-              isSortable={false}
-              overflowMenuOnHover={true}
-            >
-              <TableHead>
-                <TableRow>
-                  <TableSelectAll
-                    ariaLabel="Select all rows"
-                    checked={false}
-                    id="data-table-6__select-all"
-                    indeterminate={false}
-                    name="select-all"
-                    onSelect={[Function]}
-                  />
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field A
-                  </TableHeader>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field B
-                  </TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-6__select-row-b"
-                    name="select-row-b"
-                    onSelect={[Function]}
-                    radio={null}
-                  />
-                  <TableCell>
-                    Field 2:A
-                  </TableCell>
-                  <TableCell>
-                    Field 2:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-6__select-row-a"
-                    name="select-row-a"
-                    onSelect={[Function]}
-                    radio={null}
-                  />
-                  <TableCell>
-                    Field 1:A
-                  </TableCell>
-                  <TableCell>
-                    Field 1:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableSelectRow
-                    ariaLabel="Select row"
-                    checked={false}
-                    disabled={false}
-                    id="data-table-6__select-row-c"
-                    name="select-row-c"
-                    onSelect={[Function]}
-                    radio={null}
-                  />
-                  <TableCell>
-                    Field 3:A
-                  </TableCell>
-                  <TableCell>
-                    Field 3:B
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>,
-        },
-      ],
-    }
-  }
-  rows={
-    Array [
-      Object {
-        "fieldA": "Field 2:A",
-        "fieldB": "Field 2:B",
-        "id": "b",
-      },
-      Object {
-        "fieldA": "Field 1:A",
-        "fieldB": "Field 1:B",
-        "id": "a",
-      },
-      Object {
-        "fieldA": "Field 3:A",
-        "fieldB": "Field 3:B",
-        "id": "c",
-      },
-    ]
-  }
-  size="lg"
-  sortRow={[Function]}
-  translateWithId={[Function]}
->
-  <TableContainer
-    title="DataTable with selection"
-  >
-    <div
-      className="cds--data-table-container"
-    >
-      <div
-        className="cds--data-table-header"
-      >
-        <h4
-          className="cds--data-table-header__title"
-          id="tc-56-title"
-        >
-          DataTable with selection
-        </h4>
-        <p
-          className="cds--data-table-header__description"
-          id="tc-56-description"
-        />
-      </div>
-      <Table
-        isSortable={false}
-        overflowMenuOnHover={true}
-      >
-        <div
-          className="cds--data-table-content"
-        >
-          <table
-            aria-describedby={null}
-            aria-labelledby="tc-56-title"
-            className="cds--data-table"
-          >
-            <TableHead>
-              <thead>
-                <TableRow>
-                  <tr>
-                    <TableSelectAll
-                      ariaLabel="Select all rows"
-                      checked={false}
-                      id="data-table-6__select-all"
-                      indeterminate={false}
-                      name="select-all"
-                      onSelect={[Function]}
-                    >
-                      <th
-                        className="cds--table-column-checkbox"
-                        scope="col"
-                      >
-                        <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select all rows"
-                          checked={false}
-                          id="data-table-6__select-all"
-                          indeterminate={false}
-                          name="select-all"
-                          onClick={[Function]}
-                        >
-                          <div
-                            className="cds--checkbox--inline"
-                          >
-                            <input
-                              checked={false}
-                              className="cds--checkbox"
-                              id="data-table-6__select-all"
-                              name="select-all"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select all rows"
-                              className="cds--checkbox-label"
-                              htmlFor="data-table-6__select-all"
-                              onClick={[Function]}
-                            />
-                          </div>
-                        </ForwardRef(InlineCheckbox)>
-                      </th>
-                    </TableSelectAll>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldA"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field A
-                        </div>
-                      </th>
-                    </TableHeader>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldB"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field B
-                        </div>
-                      </th>
-                    </TableHeader>
-                  </tr>
-                </TableRow>
-              </thead>
-            </TableHead>
-            <TableBody
-              aria-live="polite"
-            >
-              <tbody
-                aria-live="polite"
-              >
-                <TableRow
-                  key="b"
-                >
-                  <tr>
-                    <TableSelectRow
-                      ariaLabel="Select row"
-                      checked={false}
-                      disabled={false}
-                      id="data-table-6__select-row-b"
-                      name="select-row-b"
-                      onSelect={[Function]}
-                      radio={null}
-                    >
-                      <td
-                        className="cds--table-column-checkbox"
-                      >
-                        <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select row"
-                          checked={false}
-                          disabled={false}
-                          id="data-table-6__select-row-b"
-                          name="select-row-b"
-                          onClick={[Function]}
-                        >
-                          <div
-                            className="cds--checkbox--inline"
-                          >
-                            <input
-                              checked={false}
-                              className="cds--checkbox"
-                              disabled={false}
-                              id="data-table-6__select-row-b"
-                              name="select-row-b"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select row"
-                              className="cds--checkbox-label"
-                              htmlFor="data-table-6__select-row-b"
-                              onClick={[Function]}
-                            />
-                          </div>
-                        </ForwardRef(InlineCheckbox)>
-                      </td>
-                    </TableSelectRow>
-                    <TableCell
-                      key="b:fieldA"
-                    >
-                      <td>
-                        Field 2:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="b:fieldB"
-                    >
-                      <td>
-                        Field 2:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-                <TableRow
-                  key="a"
-                >
-                  <tr>
-                    <TableSelectRow
-                      ariaLabel="Select row"
-                      checked={false}
-                      disabled={false}
-                      id="data-table-6__select-row-a"
-                      name="select-row-a"
-                      onSelect={[Function]}
-                      radio={null}
-                    >
-                      <td
-                        className="cds--table-column-checkbox"
-                      >
-                        <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select row"
-                          checked={false}
-                          disabled={false}
-                          id="data-table-6__select-row-a"
-                          name="select-row-a"
-                          onClick={[Function]}
-                        >
-                          <div
-                            className="cds--checkbox--inline"
-                          >
-                            <input
-                              checked={false}
-                              className="cds--checkbox"
-                              disabled={false}
-                              id="data-table-6__select-row-a"
-                              name="select-row-a"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select row"
-                              className="cds--checkbox-label"
-                              htmlFor="data-table-6__select-row-a"
-                              onClick={[Function]}
-                            />
-                          </div>
-                        </ForwardRef(InlineCheckbox)>
-                      </td>
-                    </TableSelectRow>
-                    <TableCell
-                      key="a:fieldA"
-                    >
-                      <td>
-                        Field 1:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="a:fieldB"
-                    >
-                      <td>
-                        Field 1:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-                <TableRow
-                  key="c"
-                >
-                  <tr>
-                    <TableSelectRow
-                      ariaLabel="Select row"
-                      checked={false}
-                      disabled={false}
-                      id="data-table-6__select-row-c"
-                      name="select-row-c"
-                      onSelect={[Function]}
-                      radio={null}
-                    >
-                      <td
-                        className="cds--table-column-checkbox"
-                      >
-                        <ForwardRef(InlineCheckbox)
-                          ariaLabel="Select row"
-                          checked={false}
-                          disabled={false}
-                          id="data-table-6__select-row-c"
-                          name="select-row-c"
-                          onClick={[Function]}
-                        >
-                          <div
-                            className="cds--checkbox--inline"
-                          >
-                            <input
-                              checked={false}
-                              className="cds--checkbox"
-                              disabled={false}
-                              id="data-table-6__select-row-c"
-                              name="select-row-c"
-                              onChange={[Function]}
-                              onClick={[Function]}
-                              type="checkbox"
-                            />
-                            <label
-                              aria-label="Select row"
-                              className="cds--checkbox-label"
-                              htmlFor="data-table-6__select-row-c"
-                              onClick={[Function]}
-                            />
-                          </div>
-                        </ForwardRef(InlineCheckbox)>
-                      </td>
-                    </TableSelectRow>
-                    <TableCell
-                      key="c:fieldA"
-                    >
-                      <td>
-                        Field 3:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="c:fieldB"
-                    >
-                      <td>
-                        Field 3:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-              </tbody>
-            </TableBody>
-          </table>
-        </div>
-      </Table>
-    </div>
-  </TableContainer>
-</DataTable>
-`;
-
-exports[`DataTable should render 1`] = `
-<DataTable
-  filterRows={[Function]}
-  headers={
-    Array [
-      Object {
-        "header": "Field A",
-        "key": "fieldA",
-      },
-      Object {
-        "header": "Field B",
-        "key": "fieldB",
-      },
-    ]
-  }
-  locale="en"
-  overflowMenuOnHover={true}
-  render={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "expandAll": [Function],
-            "expandRow": [Function],
-            "getBatchActionProps": [Function],
-            "getExpandHeaderProps": [Function],
-            "getHeaderProps": [Function],
-            "getRowProps": [Function],
-            "getSelectionProps": [Function],
-            "getTableContainerProps": [Function],
-            "getTableProps": [Function],
-            "getToolbarProps": [Function],
-            "headers": Array [
-              Object {
-                "header": "Field A",
-                "key": "fieldA",
-              },
-              Object {
-                "header": "Field B",
-                "key": "fieldB",
-              },
-            ],
-            "onInputChange": [Function],
-            "radio": undefined,
-            "rows": Array [
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "b",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "a",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "c",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-            ],
-            "selectAll": [Function],
-            "selectRow": [Function],
-            "selectedRows": Array [],
-            "sortBy": [Function],
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": <TableContainer
-            title="DataTable with toolbar"
-          >
-            <TableToolbar
-              aria-label="data table toolbar"
-            >
-              <TableBatchActions
-                onCancel={[Function]}
-                shouldShowBatchActions={false}
-                totalSelected={0}
-                translateWithId={[Function]}
-              >
-                <TableBatchAction
-                  iconDescription="Add"
-                  onClick={[MockFunction]}
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                >
-                  Ghost
-                </TableBatchAction>
-                <TableBatchAction
-                  iconDescription="Add"
-                  onClick={[MockFunction]}
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                >
-                  Ghost
-                </TableBatchAction>
-                <TableBatchAction
-                  iconDescription="Add"
-                  onClick={[MockFunction]}
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                >
-                  Ghost
-                </TableBatchAction>
-              </TableBatchActions>
-              <TableToolbarContent>
-                <TableToolbarSearch
-                  id="custom-id"
-                  onChange={[Function]}
-                  onClear={[Function]}
-                  persistent={true}
-                  tabIndex="0"
-                  translateWithId={[Function]}
-                />
-                <TableToolbarMenu
-                  iconDescription="Settings"
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                >
-                  <TableToolbarAction
-                    onClick={[MockFunction]}
-                  >
-                    Action 1
-                  </TableToolbarAction>
-                  <TableToolbarAction
-                    onClick={[MockFunction]}
-                  >
-                    Action 2
-                  </TableToolbarAction>
-                  <TableToolbarAction
-                    onClick={[MockFunction]}
-                  >
-                    Action 3
-                  </TableToolbarAction>
-                </TableToolbarMenu>
-                <Button
-                  kind="primary"
-                  onClick={[MockFunction]}
-                  size="sm"
-                >
-                  Add new
-                </Button>
-              </TableToolbarContent>
-            </TableToolbar>
-            <Table
-              isSortable={false}
-              overflowMenuOnHover={true}
-              size="lg"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field A
-                  </TableHeader>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field B
-                  </TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
-                <TableRow>
-                  <TableCell>
-                    Field 2:A
-                  </TableCell>
-                  <TableCell>
-                    Field 2:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    Field 1:A
-                  </TableCell>
-                  <TableCell>
-                    Field 1:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    Field 3:A
-                  </TableCell>
-                  <TableCell>
-                    Field 3:B
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>,
-        },
-      ],
-    }
-  }
-  rows={
-    Array [
-      Object {
-        "fieldA": "Field 2:A",
-        "fieldB": "Field 2:B",
-        "id": "b",
-      },
-      Object {
-        "fieldA": "Field 1:A",
-        "fieldB": "Field 1:B",
-        "id": "a",
-      },
-      Object {
-        "fieldA": "Field 3:A",
-        "fieldB": "Field 3:B",
-        "id": "c",
-      },
-    ]
-  }
-  size="lg"
-  sortRow={[Function]}
-  translateWithId={[Function]}
->
-  <TableContainer
-    title="DataTable with toolbar"
-  >
-    <div
-      className="cds--data-table-container"
-    >
-      <div
-        className="cds--data-table-header"
-      >
-        <h4
-          className="cds--data-table-header__title"
-          id="tc-11-title"
-        >
-          DataTable with toolbar
-        </h4>
-        <p
-          className="cds--data-table-header__description"
-          id="tc-11-description"
-        />
-      </div>
-      <TableToolbar
-        aria-label="data table toolbar"
-      >
-        <section
-          aria-label="data table toolbar"
-          className="cds--table-toolbar"
-        >
-          <TableBatchActions
-            onCancel={[Function]}
-            shouldShowBatchActions={false}
-            totalSelected={0}
-            translateWithId={[Function]}
-          >
-            <div
-              aria-hidden={true}
-              className="cds--batch-actions"
-              onScroll={[Function]}
+        <thead>
+          <tr>
+            <th
+              scope="col"
             >
               <div
-                className="cds--batch-summary"
+                class="cds--table-header-label"
               >
-                <p
-                  className="cds--batch-summary__para"
-                >
-                  <Text
-                    as="span"
-                  >
-                    <span
-                      dir="auto"
-                    >
-                      0 items selected
-                    </span>
-                  </Text>
-                </p>
+                Field A
               </div>
-              <TableActionList>
-                <div
-                  className="cds--action-list"
-                >
-                  <TableBatchAction
-                    iconDescription="Add"
-                    onClick={[MockFunction]}
-                    renderIcon={
-                      Object {
-                        "$$typeof": Symbol(react.forward_ref),
-                        "propTypes": Object {
-                          "size": [Function],
-                        },
-                        "render": [Function],
-                      }
-                    }
-                  >
-                    <Button
-                      iconDescription="Add"
-                      onClick={[MockFunction]}
-                      renderIcon={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "propTypes": Object {
-                            "size": [Function],
-                          },
-                          "render": [Function],
-                        }
-                      }
-                    >
-                      <button
-                        aria-describedby={null}
-                        aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
-                        disabled={false}
-                        onClick={[MockFunction]}
-                        type="button"
-                      >
-                        Ghost
-                        <ForwardRef(AddFilled)
-                          aria-hidden="true"
-                          aria-label="Add"
-                          className="cds--btn__icon"
-                        >
-                          <Icon
-                            aria-hidden="true"
-                            aria-label="Add"
-                            className="cds--btn__icon"
-                            fill="currentColor"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 32 32"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              aria-label="Add"
-                              className="cds--btn__icon"
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              role="img"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
-                              />
-                              <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
-                                data-icon-path="inner-path"
-                                fill="none"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(AddFilled)>
-                      </button>
-                    </Button>
-                  </TableBatchAction>
-                  <TableBatchAction
-                    iconDescription="Add"
-                    onClick={[MockFunction]}
-                    renderIcon={
-                      Object {
-                        "$$typeof": Symbol(react.forward_ref),
-                        "propTypes": Object {
-                          "size": [Function],
-                        },
-                        "render": [Function],
-                      }
-                    }
-                  >
-                    <Button
-                      iconDescription="Add"
-                      onClick={[MockFunction]}
-                      renderIcon={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "propTypes": Object {
-                            "size": [Function],
-                          },
-                          "render": [Function],
-                        }
-                      }
-                    >
-                      <button
-                        aria-describedby={null}
-                        aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
-                        disabled={false}
-                        onClick={[MockFunction]}
-                        type="button"
-                      >
-                        Ghost
-                        <ForwardRef(AddFilled)
-                          aria-hidden="true"
-                          aria-label="Add"
-                          className="cds--btn__icon"
-                        >
-                          <Icon
-                            aria-hidden="true"
-                            aria-label="Add"
-                            className="cds--btn__icon"
-                            fill="currentColor"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 32 32"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              aria-label="Add"
-                              className="cds--btn__icon"
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              role="img"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
-                              />
-                              <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
-                                data-icon-path="inner-path"
-                                fill="none"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(AddFilled)>
-                      </button>
-                    </Button>
-                  </TableBatchAction>
-                  <TableBatchAction
-                    iconDescription="Add"
-                    onClick={[MockFunction]}
-                    renderIcon={
-                      Object {
-                        "$$typeof": Symbol(react.forward_ref),
-                        "propTypes": Object {
-                          "size": [Function],
-                        },
-                        "render": [Function],
-                      }
-                    }
-                  >
-                    <Button
-                      iconDescription="Add"
-                      onClick={[MockFunction]}
-                      renderIcon={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "propTypes": Object {
-                            "size": [Function],
-                          },
-                          "render": [Function],
-                        }
-                      }
-                    >
-                      <button
-                        aria-describedby={null}
-                        aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
-                        disabled={false}
-                        onClick={[MockFunction]}
-                        type="button"
-                      >
-                        Ghost
-                        <ForwardRef(AddFilled)
-                          aria-hidden="true"
-                          aria-label="Add"
-                          className="cds--btn__icon"
-                        >
-                          <Icon
-                            aria-hidden="true"
-                            aria-label="Add"
-                            className="cds--btn__icon"
-                            fill="currentColor"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 32 32"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              aria-label="Add"
-                              className="cds--btn__icon"
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              role="img"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
-                              />
-                              <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
-                                data-icon-path="inner-path"
-                                fill="none"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(AddFilled)>
-                      </button>
-                    </Button>
-                  </TableBatchAction>
-                  <Button
-                    className="cds--batch-summary__cancel"
-                    onClick={[Function]}
-                    tabIndex={-1}
-                  >
-                    <button
-                      aria-describedby={null}
-                      aria-pressed={null}
-                      className="cds--batch-summary__cancel cds--btn cds--btn--primary"
-                      disabled={false}
-                      onClick={[Function]}
-                      tabIndex={-1}
-                      type="button"
-                    >
-                      Cancel
-                    </button>
-                  </Button>
-                </div>
-              </TableActionList>
-            </div>
-          </TableBatchActions>
-          <TableToolbarContent>
-            <div
-              className="cds--toolbar-content"
-            >
-              <TableToolbarSearch
-                id="custom-id"
-                onChange={[Function]}
-                onClear={[Function]}
-                persistent={true}
-                tabIndex="0"
-                translateWithId={[Function]}
-              >
-                <Search
-                  className="cds--toolbar-search-container-persistent"
-                  id="custom-id"
-                  labelText="Filter table"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onClear={[Function]}
-                  onFocus={[Function]}
-                  placeholder="Filter table"
-                  size="lg"
-                  tabIndex="0"
-                  value=""
-                >
-                  <div
-                    aria-labelledby="custom-id-search"
-                    className="cds--search cds--search--lg cds--toolbar-search-container-persistent"
-                    role="search"
-                  >
-                    <div
-                      className="cds--search-magnifier"
-                      role={null}
-                    >
-                      <CustomSearchIcon>
-                        <ForwardRef(Search)
-                          className="cds--search-magnifier-icon"
-                        >
-                          <Icon
-                            className="cds--search-magnifier-icon"
-                            fill="currentColor"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 16 16"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <svg
-                              aria-hidden={true}
-                              className="cds--search-magnifier-icon"
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              viewBox="0 0 16 16"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(Search)>
-                      </CustomSearchIcon>
-                    </div>
-                    <label
-                      className="cds--label"
-                      htmlFor="custom-id"
-                      id="custom-id-search"
-                    >
-                      Filter table
-                    </label>
-                    <input
-                      autoComplete="off"
-                      className="cds--search-input"
-                      id="custom-id"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      onKeyDown={[Function]}
-                      placeholder="Filter table"
-                      role="searchbox"
-                      tabIndex="0"
-                      type="text"
-                      value=""
-                    />
-                    <button
-                      aria-label="Clear search input"
-                      className="cds--search-close cds--search-close--hidden"
-                      onClick={[Function]}
-                      title="Clear search input"
-                      type="button"
-                    >
-                      <ForwardRef(Close)>
-                        <Icon
-                          fill="currentColor"
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 32 32"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <svg
-                            aria-hidden={true}
-                            fill="currentColor"
-                            focusable="false"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 32 32"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                            />
-                          </svg>
-                        </Icon>
-                      </ForwardRef(Close)>
-                    </button>
-                  </div>
-                </Search>
-              </TableToolbarSearch>
-              <TableToolbarMenu
-                iconDescription="Settings"
-                renderIcon={
-                  Object {
-                    "$$typeof": Symbol(react.forward_ref),
-                    "propTypes": Object {
-                      "size": [Function],
-                    },
-                    "render": [Function],
-                  }
-                }
-              >
-                <ClassWrapper(OverflowMenu)
-                  ariaLabel="Settings"
-                  className="cds--toolbar-action cds--overflow-menu"
-                  flipped={true}
-                  iconDescription="Settings"
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                  title="Settings"
-                >
-                  <OverflowMenu
-                    ariaLabel="Settings"
-                    className="cds--toolbar-action cds--overflow-menu"
-                    direction="bottom"
-                    flipped={true}
-                    focusTrap={true}
-                    iconDescription="Settings"
-                    menuOffset={[Function]}
-                    menuOffsetFlip={[Function]}
-                    onClick={[Function]}
-                    onClose={[Function]}
-                    onKeyDown={[Function]}
-                    onOpen={[Function]}
-                    open={false}
-                    renderIcon={
-                      Object {
-                        "$$typeof": Symbol(react.forward_ref),
-                        "propTypes": Object {
-                          "size": [Function],
-                        },
-                        "render": [Function],
-                      }
-                    }
-                    selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
-                    title="Settings"
-                  >
-                    <ClickListener
-                      onClickOutside={[Function]}
-                    >
-                      <span
-                        className="cds--overflow-menu__wrapper"
-                      >
-                        <ForwardRef(IconButton)
-                          aria-expanded={false}
-                          aria-haspopup={true}
-                          className="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md"
-                          label="Settings"
-                          onClick={[Function]}
-                          onClose={[Function]}
-                          onKeyDown={[Function]}
-                          open={false}
-                          title="Settings"
-                          type="button"
-                        >
-                          <Tooltip
-                            className="cds--icon-tooltip"
-                            closeOnActivation={true}
-                            defaultOpen={false}
-                            label="Settings"
-                          >
-                            <Popover
-                              align="top"
-                              className="cds--tooltip cds--icon-tooltip"
-                              dropShadow={false}
-                              highContrast={true}
-                              onKeyDown={[Function]}
-                              onMouseLeave={[Function]}
-                              open={false}
-                            >
-                              <span
-                                className="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
-                                onKeyDown={[Function]}
-                                onMouseLeave={[Function]}
-                              >
-                                <Button
-                                  aria-expanded={false}
-                                  aria-haspopup={true}
-                                  aria-labelledby="tooltip-7"
-                                  className="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md"
-                                  onBlur={[Function]}
-                                  onClick={[Function]}
-                                  onClose={[Function]}
-                                  onFocus={[Function]}
-                                  onKeyDown={[Function]}
-                                  onMouseEnter={[Function]}
-                                  open={false}
-                                  size="md"
-                                  title="Settings"
-                                  type="button"
-                                >
-                                  <button
-                                    aria-describedby={null}
-                                    aria-expanded={false}
-                                    aria-haspopup={true}
-                                    aria-labelledby="tooltip-7"
-                                    aria-pressed={null}
-                                    className="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--btn--primary"
-                                    disabled={false}
-                                    onBlur={[Function]}
-                                    onClick={[Function]}
-                                    onClose={[Function]}
-                                    onFocus={[Function]}
-                                    onKeyDown={[Function]}
-                                    onMouseEnter={[Function]}
-                                    open={false}
-                                    title="Settings"
-                                    type="button"
-                                  >
-                                    <ForwardRef(Settings)
-                                      aria-label="Settings"
-                                      className="cds--overflow-menu__icon"
-                                    >
-                                      <Icon
-                                        aria-label="Settings"
-                                        className="cds--overflow-menu__icon"
-                                        fill="currentColor"
-                                        height={16}
-                                        preserveAspectRatio="xMidYMid meet"
-                                        viewBox="0 0 16 16"
-                                        width={16}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <svg
-                                          aria-label="Settings"
-                                          className="cds--overflow-menu__icon"
-                                          fill="currentColor"
-                                          focusable="false"
-                                          height={16}
-                                          preserveAspectRatio="xMidYMid meet"
-                                          role="img"
-                                          viewBox="0 0 16 16"
-                                          width={16}
-                                          xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                          <path
-                                            d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3 c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1 C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4 c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4 c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4 c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8 L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6 C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
-                                          />
-                                          <path
-                                            d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8 c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
-                                          />
-                                        </svg>
-                                      </Icon>
-                                    </ForwardRef(Settings)>
-                                  </button>
-                                </Button>
-                                <ForwardRef(PopoverContent)
-                                  aria-hidden="true"
-                                  className="cds--tooltip-content"
-                                  id="tooltip-7"
-                                  role="tooltip"
-                                >
-                                  <span
-                                    aria-hidden="true"
-                                    className="cds--popover"
-                                    id="tooltip-7"
-                                    role="tooltip"
-                                  >
-                                    <span
-                                      className="cds--popover-content cds--tooltip-content"
-                                    >
-                                      Settings
-                                    </span>
-                                    <span
-                                      className="cds--popover-caret"
-                                    />
-                                  </span>
-                                </ForwardRef(PopoverContent)>
-                              </span>
-                            </Popover>
-                          </Tooltip>
-                        </ForwardRef(IconButton)>
-                      </span>
-                    </ClickListener>
-                  </OverflowMenu>
-                </ClassWrapper(OverflowMenu)>
-              </TableToolbarMenu>
-              <Button
-                kind="primary"
-                onClick={[MockFunction]}
-                size="sm"
-              >
-                <button
-                  aria-describedby={null}
-                  aria-pressed={null}
-                  className="cds--btn cds--btn--sm cds--btn--primary"
-                  disabled={false}
-                  onClick={[MockFunction]}
-                  type="button"
-                >
-                  Add new
-                </button>
-              </Button>
-            </div>
-          </TableToolbarContent>
-        </section>
-      </TableToolbar>
-      <Table
-        isSortable={false}
-        overflowMenuOnHover={true}
-        size="lg"
-      >
-        <div
-          className="cds--data-table-content"
-        >
-          <table
-            aria-describedby={null}
-            aria-labelledby="tc-11-title"
-            className="cds--data-table cds--data-table--lg"
-          >
-            <TableHead>
-              <thead>
-                <TableRow>
-                  <tr>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldA"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field A
-                        </div>
-                      </th>
-                    </TableHeader>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldB"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field B
-                        </div>
-                      </th>
-                    </TableHeader>
-                  </tr>
-                </TableRow>
-              </thead>
-            </TableHead>
-            <TableBody
-              aria-live="polite"
-            >
-              <tbody
-                aria-live="polite"
-              >
-                <TableRow
-                  key="b"
-                >
-                  <tr>
-                    <TableCell
-                      key="b:fieldA"
-                    >
-                      <td>
-                        Field 2:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="b:fieldB"
-                    >
-                      <td>
-                        Field 2:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-                <TableRow
-                  key="a"
-                >
-                  <tr>
-                    <TableCell
-                      key="a:fieldA"
-                    >
-                      <td>
-                        Field 1:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="a:fieldB"
-                    >
-                      <td>
-                        Field 1:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-                <TableRow
-                  key="c"
-                >
-                  <tr>
-                    <TableCell
-                      key="c:fieldA"
-                    >
-                      <td>
-                        Field 3:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="c:fieldB"
-                    >
-                      <td>
-                        Field 3:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-              </tbody>
-            </TableBody>
-          </table>
-        </div>
-      </Table>
-    </div>
-  </TableContainer>
-</DataTable>
-`;
-
-exports[`DataTable sticky header should render 1`] = `
-<DataTable
-  filterRows={[Function]}
-  headers={
-    Array [
-      Object {
-        "header": "Field A",
-        "key": "fieldA",
-      },
-      Object {
-        "header": "Field B",
-        "key": "fieldB",
-      },
-    ]
-  }
-  locale="en"
-  overflowMenuOnHover={true}
-  render={
-    [MockFunction] {
-      "calls": Array [
-        Array [
-          Object {
-            "expandAll": [Function],
-            "expandRow": [Function],
-            "getBatchActionProps": [Function],
-            "getExpandHeaderProps": [Function],
-            "getHeaderProps": [Function],
-            "getRowProps": [Function],
-            "getSelectionProps": [Function],
-            "getTableContainerProps": [Function],
-            "getTableProps": [Function],
-            "getToolbarProps": [Function],
-            "headers": Array [
-              Object {
-                "header": "Field A",
-                "key": "fieldA",
-              },
-              Object {
-                "header": "Field B",
-                "key": "fieldB",
-              },
-            ],
-            "onInputChange": [Function],
-            "radio": undefined,
-            "rows": Array [
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "b:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 2:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "b",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "a:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 1:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "a",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-              Object {
-                "cells": Array [
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldA",
-                    "info": Object {
-                      "header": "fieldA",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:A",
-                  },
-                  Object {
-                    "errors": null,
-                    "id": "c:fieldB",
-                    "info": Object {
-                      "header": "fieldB",
-                    },
-                    "isEditable": false,
-                    "isEditing": false,
-                    "isValid": true,
-                    "value": "Field 3:B",
-                  },
-                ],
-                "disabled": false,
-                "id": "c",
-                "isExpanded": false,
-                "isSelected": false,
-              },
-            ],
-            "selectAll": [Function],
-            "selectRow": [Function],
-            "selectedRows": Array [],
-            "sortBy": [Function],
-          },
-        ],
-      ],
-      "results": Array [
-        Object {
-          "type": "return",
-          "value": <TableContainer
-            title="DataTable with toolbar"
-          >
-            <TableToolbar
-              aria-label="data table toolbar"
-            >
-              <TableBatchActions
-                onCancel={[Function]}
-                shouldShowBatchActions={false}
-                totalSelected={0}
-                translateWithId={[Function]}
-              >
-                <TableBatchAction
-                  iconDescription="Add"
-                  onClick={[MockFunction]}
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                >
-                  Ghost
-                </TableBatchAction>
-                <TableBatchAction
-                  iconDescription="Add"
-                  onClick={[MockFunction]}
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                >
-                  Ghost
-                </TableBatchAction>
-                <TableBatchAction
-                  iconDescription="Add"
-                  onClick={[MockFunction]}
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                >
-                  Ghost
-                </TableBatchAction>
-              </TableBatchActions>
-              <TableToolbarContent>
-                <TableToolbarSearch
-                  id="custom-id"
-                  onChange={[Function]}
-                  onClear={[Function]}
-                  persistent={true}
-                  tabIndex="0"
-                  translateWithId={[Function]}
-                />
-                <TableToolbarMenu
-                  iconDescription="Settings"
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                >
-                  <TableToolbarAction
-                    onClick={[MockFunction]}
-                  >
-                    Action 1
-                  </TableToolbarAction>
-                  <TableToolbarAction
-                    onClick={[MockFunction]}
-                  >
-                    Action 2
-                  </TableToolbarAction>
-                  <TableToolbarAction
-                    onClick={[MockFunction]}
-                  >
-                    Action 3
-                  </TableToolbarAction>
-                </TableToolbarMenu>
-                <Button
-                  kind="primary"
-                  onClick={[MockFunction]}
-                  size="sm"
-                >
-                  Add new
-                </Button>
-              </TableToolbarContent>
-            </TableToolbar>
-            <Table
-              isSortable={false}
-              overflowMenuOnHover={true}
-              size="lg"
-            >
-              <TableHead>
-                <TableRow>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field A
-                  </TableHeader>
-                  <TableHeader
-                    isSortHeader={false}
-                    isSortable={false}
-                    onClick={[Function]}
-                    scope="col"
-                    sortDirection="NONE"
-                    translateWithId={[Function]}
-                  >
-                    Field B
-                  </TableHeader>
-                </TableRow>
-              </TableHead>
-              <TableBody
-                aria-live="polite"
-              >
-                <TableRow>
-                  <TableCell>
-                    Field 2:A
-                  </TableCell>
-                  <TableCell>
-                    Field 2:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    Field 1:A
-                  </TableCell>
-                  <TableCell>
-                    Field 1:B
-                  </TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>
-                    Field 3:A
-                  </TableCell>
-                  <TableCell>
-                    Field 3:B
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>,
-        },
-      ],
-    }
-  }
-  rows={
-    Array [
-      Object {
-        "fieldA": "Field 2:A",
-        "fieldB": "Field 2:B",
-        "id": "b",
-      },
-      Object {
-        "fieldA": "Field 1:A",
-        "fieldB": "Field 1:B",
-        "id": "a",
-      },
-      Object {
-        "fieldA": "Field 3:A",
-        "fieldB": "Field 3:B",
-        "id": "c",
-      },
-    ]
-  }
-  size="lg"
-  sortRow={[Function]}
-  translateWithId={[Function]}
->
-  <TableContainer
-    title="DataTable with toolbar"
-  >
-    <div
-      className="cds--data-table-container"
-    >
-      <div
-        className="cds--data-table-header"
-      >
-        <h4
-          className="cds--data-table-header__title"
-          id="tc-150-title"
-        >
-          DataTable with toolbar
-        </h4>
-        <p
-          className="cds--data-table-header__description"
-          id="tc-150-description"
-        />
-      </div>
-      <TableToolbar
-        aria-label="data table toolbar"
-      >
-        <section
-          aria-label="data table toolbar"
-          className="cds--table-toolbar"
-        >
-          <TableBatchActions
-            onCancel={[Function]}
-            shouldShowBatchActions={false}
-            totalSelected={0}
-            translateWithId={[Function]}
-          >
-            <div
-              aria-hidden={true}
-              className="cds--batch-actions"
-              onScroll={[Function]}
+            </th>
+            <th
+              scope="col"
             >
               <div
-                className="cds--batch-summary"
+                class="cds--table-header-label"
               >
-                <p
-                  className="cds--batch-summary__para"
-                >
-                  <Text
-                    as="span"
-                  >
-                    <span
-                      dir="auto"
-                    >
-                      0 items selected
-                    </span>
-                  </Text>
-                </p>
+                Field B
               </div>
-              <TableActionList>
-                <div
-                  className="cds--action-list"
-                >
-                  <TableBatchAction
-                    iconDescription="Add"
-                    onClick={[MockFunction]}
-                    renderIcon={
-                      Object {
-                        "$$typeof": Symbol(react.forward_ref),
-                        "propTypes": Object {
-                          "size": [Function],
-                        },
-                        "render": [Function],
-                      }
-                    }
-                  >
-                    <Button
-                      iconDescription="Add"
-                      onClick={[MockFunction]}
-                      renderIcon={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "propTypes": Object {
-                            "size": [Function],
-                          },
-                          "render": [Function],
-                        }
-                      }
-                    >
-                      <button
-                        aria-describedby={null}
-                        aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
-                        disabled={false}
-                        onClick={[MockFunction]}
-                        type="button"
-                      >
-                        Ghost
-                        <ForwardRef(AddFilled)
-                          aria-hidden="true"
-                          aria-label="Add"
-                          className="cds--btn__icon"
-                        >
-                          <Icon
-                            aria-hidden="true"
-                            aria-label="Add"
-                            className="cds--btn__icon"
-                            fill="currentColor"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 32 32"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              aria-label="Add"
-                              className="cds--btn__icon"
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              role="img"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
-                              />
-                              <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
-                                data-icon-path="inner-path"
-                                fill="none"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(AddFilled)>
-                      </button>
-                    </Button>
-                  </TableBatchAction>
-                  <TableBatchAction
-                    iconDescription="Add"
-                    onClick={[MockFunction]}
-                    renderIcon={
-                      Object {
-                        "$$typeof": Symbol(react.forward_ref),
-                        "propTypes": Object {
-                          "size": [Function],
-                        },
-                        "render": [Function],
-                      }
-                    }
-                  >
-                    <Button
-                      iconDescription="Add"
-                      onClick={[MockFunction]}
-                      renderIcon={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "propTypes": Object {
-                            "size": [Function],
-                          },
-                          "render": [Function],
-                        }
-                      }
-                    >
-                      <button
-                        aria-describedby={null}
-                        aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
-                        disabled={false}
-                        onClick={[MockFunction]}
-                        type="button"
-                      >
-                        Ghost
-                        <ForwardRef(AddFilled)
-                          aria-hidden="true"
-                          aria-label="Add"
-                          className="cds--btn__icon"
-                        >
-                          <Icon
-                            aria-hidden="true"
-                            aria-label="Add"
-                            className="cds--btn__icon"
-                            fill="currentColor"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 32 32"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              aria-label="Add"
-                              className="cds--btn__icon"
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              role="img"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
-                              />
-                              <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
-                                data-icon-path="inner-path"
-                                fill="none"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(AddFilled)>
-                      </button>
-                    </Button>
-                  </TableBatchAction>
-                  <TableBatchAction
-                    iconDescription="Add"
-                    onClick={[MockFunction]}
-                    renderIcon={
-                      Object {
-                        "$$typeof": Symbol(react.forward_ref),
-                        "propTypes": Object {
-                          "size": [Function],
-                        },
-                        "render": [Function],
-                      }
-                    }
-                  >
-                    <Button
-                      iconDescription="Add"
-                      onClick={[MockFunction]}
-                      renderIcon={
-                        Object {
-                          "$$typeof": Symbol(react.forward_ref),
-                          "propTypes": Object {
-                            "size": [Function],
-                          },
-                          "render": [Function],
-                        }
-                      }
-                    >
-                      <button
-                        aria-describedby={null}
-                        aria-pressed={null}
-                        className="cds--btn cds--btn--primary"
-                        disabled={false}
-                        onClick={[MockFunction]}
-                        type="button"
-                      >
-                        Ghost
-                        <ForwardRef(AddFilled)
-                          aria-hidden="true"
-                          aria-label="Add"
-                          className="cds--btn__icon"
-                        >
-                          <Icon
-                            aria-hidden="true"
-                            aria-label="Add"
-                            className="cds--btn__icon"
-                            fill="currentColor"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 32 32"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <svg
-                              aria-hidden="true"
-                              aria-label="Add"
-                              className="cds--btn__icon"
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              role="img"
-                              viewBox="0 0 32 32"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
-                              />
-                              <path
-                                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
-                                data-icon-path="inner-path"
-                                fill="none"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(AddFilled)>
-                      </button>
-                    </Button>
-                  </TableBatchAction>
-                  <Button
-                    className="cds--batch-summary__cancel"
-                    onClick={[Function]}
-                    tabIndex={-1}
-                  >
-                    <button
-                      aria-describedby={null}
-                      aria-pressed={null}
-                      className="cds--batch-summary__cancel cds--btn cds--btn--primary"
-                      disabled={false}
-                      onClick={[Function]}
-                      tabIndex={-1}
-                      type="button"
-                    >
-                      Cancel
-                    </button>
-                  </Button>
-                </div>
-              </TableActionList>
-            </div>
-          </TableBatchActions>
-          <TableToolbarContent>
-            <div
-              className="cds--toolbar-content"
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          aria-live="polite"
+        >
+          <tr>
+            <td
+              class="cds--table-column-checkbox cds--table-column-radio"
             >
-              <TableToolbarSearch
-                id="custom-id"
-                onChange={[Function]}
-                onClear={[Function]}
-                persistent={true}
-                tabIndex="0"
-                translateWithId={[Function]}
+              <div
+                class="cds--radio-button-wrapper"
               >
-                <Search
-                  className="cds--toolbar-search-container-persistent"
-                  id="custom-id"
-                  labelText="Filter table"
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  onClear={[Function]}
-                  onFocus={[Function]}
-                  placeholder="Filter table"
-                  size="lg"
-                  tabIndex="0"
+                <input
+                  class="cds--radio-button"
+                  id="data-table-16__select-row-b"
+                  name="select-row-b"
+                  type="radio"
                   value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-16__select-row-b"
                 >
-                  <div
-                    aria-labelledby="custom-id-search"
-                    className="cds--search cds--search--lg cds--toolbar-search-container-persistent"
-                    role="search"
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
                   >
-                    <div
-                      className="cds--search-magnifier"
-                      role={null}
-                    >
-                      <CustomSearchIcon>
-                        <ForwardRef(Search)
-                          className="cds--search-magnifier-icon"
-                        >
-                          <Icon
-                            className="cds--search-magnifier-icon"
-                            fill="currentColor"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 16 16"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <svg
-                              aria-hidden={true}
-                              className="cds--search-magnifier-icon"
-                              fill="currentColor"
-                              focusable="false"
-                              height={16}
-                              preserveAspectRatio="xMidYMid meet"
-                              viewBox="0 0 16 16"
-                              width={16}
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
-                              />
-                            </svg>
-                          </Icon>
-                        </ForwardRef(Search)>
-                      </CustomSearchIcon>
-                    </div>
-                    <label
-                      className="cds--label"
-                      htmlFor="custom-id"
-                      id="custom-id-search"
-                    >
-                      Filter table
-                    </label>
-                    <input
-                      autoComplete="off"
-                      className="cds--search-input"
-                      id="custom-id"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      onKeyDown={[Function]}
-                      placeholder="Filter table"
-                      role="searchbox"
-                      tabIndex="0"
-                      type="text"
-                      value=""
-                    />
-                    <button
-                      aria-label="Clear search input"
-                      className="cds--search-close cds--search-close--hidden"
-                      onClick={[Function]}
-                      title="Clear search input"
-                      type="button"
-                    >
-                      <ForwardRef(Close)>
-                        <Icon
-                          fill="currentColor"
-                          height={16}
-                          preserveAspectRatio="xMidYMid meet"
-                          viewBox="0 0 32 32"
-                          width={16}
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <svg
-                            aria-hidden={true}
-                            fill="currentColor"
-                            focusable="false"
-                            height={16}
-                            preserveAspectRatio="xMidYMid meet"
-                            viewBox="0 0 32 32"
-                            width={16}
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
-                            />
-                          </svg>
-                        </Icon>
-                      </ForwardRef(Close)>
-                    </button>
-                  </div>
-                </Search>
-              </TableToolbarSearch>
-              <TableToolbarMenu
-                iconDescription="Settings"
-                renderIcon={
-                  Object {
-                    "$$typeof": Symbol(react.forward_ref),
-                    "propTypes": Object {
-                      "size": [Function],
-                    },
-                    "render": [Function],
-                  }
-                }
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 2:A
+            </td>
+            <td>
+              Field 2:B
+            </td>
+          </tr>
+          <tr>
+            <td
+              class="cds--table-column-checkbox cds--table-column-radio"
+            >
+              <div
+                class="cds--radio-button-wrapper"
               >
-                <ClassWrapper(OverflowMenu)
-                  ariaLabel="Settings"
-                  className="cds--toolbar-action cds--overflow-menu"
-                  flipped={true}
-                  iconDescription="Settings"
-                  renderIcon={
-                    Object {
-                      "$$typeof": Symbol(react.forward_ref),
-                      "propTypes": Object {
-                        "size": [Function],
-                      },
-                      "render": [Function],
-                    }
-                  }
-                  title="Settings"
+                <input
+                  class="cds--radio-button"
+                  id="data-table-16__select-row-a"
+                  name="select-row-a"
+                  type="radio"
+                  value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-16__select-row-a"
                 >
-                  <OverflowMenu
-                    ariaLabel="Settings"
-                    className="cds--toolbar-action cds--overflow-menu"
-                    direction="bottom"
-                    flipped={true}
-                    focusTrap={true}
-                    iconDescription="Settings"
-                    menuOffset={[Function]}
-                    menuOffsetFlip={[Function]}
-                    onClick={[Function]}
-                    onClose={[Function]}
-                    onKeyDown={[Function]}
-                    onOpen={[Function]}
-                    open={false}
-                    renderIcon={
-                      Object {
-                        "$$typeof": Symbol(react.forward_ref),
-                        "propTypes": Object {
-                          "size": [Function],
-                        },
-                        "render": [Function],
-                      }
-                    }
-                    selectorPrimaryFocus="[data-overflow-menu-primary-focus]"
-                    title="Settings"
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
                   >
-                    <ClickListener
-                      onClickOutside={[Function]}
-                    >
-                      <span
-                        className="cds--overflow-menu__wrapper"
-                      >
-                        <ForwardRef(IconButton)
-                          aria-expanded={false}
-                          aria-haspopup={true}
-                          className="cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md"
-                          label="Settings"
-                          onClick={[Function]}
-                          onClose={[Function]}
-                          onKeyDown={[Function]}
-                          open={false}
-                          title="Settings"
-                          type="button"
-                        >
-                          <Tooltip
-                            className="cds--icon-tooltip"
-                            closeOnActivation={true}
-                            defaultOpen={false}
-                            label="Settings"
-                          >
-                            <Popover
-                              align="top"
-                              className="cds--tooltip cds--icon-tooltip"
-                              dropShadow={false}
-                              highContrast={true}
-                              onKeyDown={[Function]}
-                              onMouseLeave={[Function]}
-                              open={false}
-                            >
-                              <span
-                                className="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
-                                onKeyDown={[Function]}
-                                onMouseLeave={[Function]}
-                              >
-                                <Button
-                                  aria-expanded={false}
-                                  aria-haspopup={true}
-                                  aria-labelledby="tooltip-156"
-                                  className="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md"
-                                  onBlur={[Function]}
-                                  onClick={[Function]}
-                                  onClose={[Function]}
-                                  onFocus={[Function]}
-                                  onKeyDown={[Function]}
-                                  onMouseEnter={[Function]}
-                                  open={false}
-                                  size="md"
-                                  title="Settings"
-                                  type="button"
-                                >
-                                  <button
-                                    aria-describedby={null}
-                                    aria-expanded={false}
-                                    aria-haspopup={true}
-                                    aria-labelledby="tooltip-156"
-                                    aria-pressed={null}
-                                    className="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--btn--primary"
-                                    disabled={false}
-                                    onBlur={[Function]}
-                                    onClick={[Function]}
-                                    onClose={[Function]}
-                                    onFocus={[Function]}
-                                    onKeyDown={[Function]}
-                                    onMouseEnter={[Function]}
-                                    open={false}
-                                    title="Settings"
-                                    type="button"
-                                  >
-                                    <ForwardRef(Settings)
-                                      aria-label="Settings"
-                                      className="cds--overflow-menu__icon"
-                                    >
-                                      <Icon
-                                        aria-label="Settings"
-                                        className="cds--overflow-menu__icon"
-                                        fill="currentColor"
-                                        height={16}
-                                        preserveAspectRatio="xMidYMid meet"
-                                        viewBox="0 0 16 16"
-                                        width={16}
-                                        xmlns="http://www.w3.org/2000/svg"
-                                      >
-                                        <svg
-                                          aria-label="Settings"
-                                          className="cds--overflow-menu__icon"
-                                          fill="currentColor"
-                                          focusable="false"
-                                          height={16}
-                                          preserveAspectRatio="xMidYMid meet"
-                                          role="img"
-                                          viewBox="0 0 16 16"
-                                          width={16}
-                                          xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                          <path
-                                            d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3 c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1 C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4 c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4 c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4 c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8 L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6 C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
-                                          />
-                                          <path
-                                            d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8 c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
-                                          />
-                                        </svg>
-                                      </Icon>
-                                    </ForwardRef(Settings)>
-                                  </button>
-                                </Button>
-                                <ForwardRef(PopoverContent)
-                                  aria-hidden="true"
-                                  className="cds--tooltip-content"
-                                  id="tooltip-156"
-                                  role="tooltip"
-                                >
-                                  <span
-                                    aria-hidden="true"
-                                    className="cds--popover"
-                                    id="tooltip-156"
-                                    role="tooltip"
-                                  >
-                                    <span
-                                      className="cds--popover-content cds--tooltip-content"
-                                    >
-                                      Settings
-                                    </span>
-                                    <span
-                                      className="cds--popover-caret"
-                                    />
-                                  </span>
-                                </ForwardRef(PopoverContent)>
-                              </span>
-                            </Popover>
-                          </Tooltip>
-                        </ForwardRef(IconButton)>
-                      </span>
-                    </ClickListener>
-                  </OverflowMenu>
-                </ClassWrapper(OverflowMenu)>
-              </TableToolbarMenu>
-              <Button
-                kind="primary"
-                onClick={[MockFunction]}
-                size="sm"
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 1:A
+            </td>
+            <td>
+              Field 1:B
+            </td>
+          </tr>
+          <tr>
+            <td
+              class="cds--table-column-checkbox cds--table-column-radio"
+            >
+              <div
+                class="cds--radio-button-wrapper"
               >
-                <button
-                  aria-describedby={null}
-                  aria-pressed={null}
-                  className="cds--btn cds--btn--sm cds--btn--primary"
-                  disabled={false}
-                  onClick={[MockFunction]}
-                  type="button"
+                <input
+                  class="cds--radio-button"
+                  id="data-table-16__select-row-c"
+                  name="select-row-c"
+                  type="radio"
+                  value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-16__select-row-c"
                 >
-                  Add new
-                </button>
-              </Button>
-            </div>
-          </TableToolbarContent>
-        </section>
-      </TableToolbar>
-      <Table
-        isSortable={false}
-        overflowMenuOnHover={true}
-        size="lg"
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
+                  >
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 3:A
+            </td>
+            <td>
+              Field 3:B
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DataTable behaves as expected selection -- radio buttons should render 1`] = `
+<div>
+  <div
+    class="cds--data-table-container"
+  >
+    <div
+      class="cds--data-table-header"
+    >
+      <h4
+        class="cds--data-table-header__title"
+        id="tc-143-title"
+      >
+        DataTable with selection
+      </h4>
+      <p
+        class="cds--data-table-header__description"
+        id="tc-143-description"
+      />
+    </div>
+    <div
+      class="cds--data-table-content"
+    >
+      <table
+        aria-labelledby="tc-143-title"
+        class="cds--data-table"
+      >
+        <thead>
+          <tr>
+            <th
+              scope="col"
+            >
+              <div
+                class="cds--table-header-label"
+              >
+                Field A
+              </div>
+            </th>
+            <th
+              scope="col"
+            >
+              <div
+                class="cds--table-header-label"
+              >
+                Field B
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          aria-live="polite"
+        >
+          <tr>
+            <td
+              class="cds--table-column-checkbox cds--table-column-radio"
+            >
+              <div
+                class="cds--radio-button-wrapper"
+              >
+                <input
+                  class="cds--radio-button"
+                  id="data-table-15__select-row-b"
+                  name="select-row-b"
+                  type="radio"
+                  value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-15__select-row-b"
+                >
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
+                  >
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 2:A
+            </td>
+            <td>
+              Field 2:B
+            </td>
+          </tr>
+          <tr>
+            <td
+              class="cds--table-column-checkbox cds--table-column-radio"
+            >
+              <div
+                class="cds--radio-button-wrapper"
+              >
+                <input
+                  class="cds--radio-button"
+                  id="data-table-15__select-row-a"
+                  name="select-row-a"
+                  type="radio"
+                  value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-15__select-row-a"
+                >
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
+                  >
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 1:A
+            </td>
+            <td>
+              Field 1:B
+            </td>
+          </tr>
+          <tr>
+            <td
+              class="cds--table-column-checkbox cds--table-column-radio"
+            >
+              <div
+                class="cds--radio-button-wrapper"
+              >
+                <input
+                  class="cds--radio-button"
+                  id="data-table-15__select-row-c"
+                  name="select-row-c"
+                  type="radio"
+                  value=""
+                />
+                <label
+                  class="cds--radio-button__label"
+                  for="data-table-15__select-row-c"
+                >
+                  <span
+                    class="cds--radio-button__appearance"
+                  />
+                  <span
+                    class="cds--radio-button__label-text cds--visually-hidden"
+                    dir="auto"
+                  >
+                    Select row
+                  </span>
+                </label>
+              </div>
+            </td>
+            <td>
+              Field 3:A
+            </td>
+            <td>
+              Field 3:B
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DataTable behaves as expected selection should render and match snapshot 1`] = `
+<div>
+  <div
+    class="cds--data-table-container"
+  >
+    <div
+      class="cds--data-table-header"
+    >
+      <h4
+        class="cds--data-table-header__title"
+        id="tc-67-title"
+      >
+        DataTable with selection
+      </h4>
+      <p
+        class="cds--data-table-header__description"
+        id="tc-67-description"
+      />
+    </div>
+    <section
+      aria-label="data table toolbar"
+      class="cds--table-toolbar"
+    >
+      <div
+        aria-hidden="true"
+        class="cds--batch-actions"
       >
         <div
-          className="cds--data-table-content"
+          class="cds--batch-summary"
         >
-          <table
-            aria-describedby={null}
-            aria-labelledby="tc-150-title"
-            className="cds--data-table cds--data-table--lg"
+          <p
+            class="cds--batch-summary__para"
           >
-            <TableHead>
-              <thead>
-                <TableRow>
-                  <tr>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldA"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field A
-                        </div>
-                      </th>
-                    </TableHeader>
-                    <TableHeader
-                      isSortHeader={false}
-                      isSortable={false}
-                      key="fieldB"
-                      onClick={[Function]}
-                      scope="col"
-                      sortDirection="NONE"
-                      translateWithId={[Function]}
-                    >
-                      <th
-                        scope="col"
-                      >
-                        <div
-                          className="cds--table-header-label"
-                        >
-                          Field B
-                        </div>
-                      </th>
-                    </TableHeader>
-                  </tr>
-                </TableRow>
-              </thead>
-            </TableHead>
-            <TableBody
-              aria-live="polite"
+            <span
+              dir="auto"
             >
-              <tbody
-                aria-live="polite"
-              >
-                <TableRow
-                  key="b"
-                >
-                  <tr>
-                    <TableCell
-                      key="b:fieldA"
-                    >
-                      <td>
-                        Field 2:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="b:fieldB"
-                    >
-                      <td>
-                        Field 2:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-                <TableRow
-                  key="a"
-                >
-                  <tr>
-                    <TableCell
-                      key="a:fieldA"
-                    >
-                      <td>
-                        Field 1:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="a:fieldB"
-                    >
-                      <td>
-                        Field 1:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-                <TableRow
-                  key="c"
-                >
-                  <tr>
-                    <TableCell
-                      key="c:fieldA"
-                    >
-                      <td>
-                        Field 3:A
-                      </td>
-                    </TableCell>
-                    <TableCell
-                      key="c:fieldB"
-                    >
-                      <td>
-                        Field 3:B
-                      </td>
-                    </TableCell>
-                  </tr>
-                </TableRow>
-              </tbody>
-            </TableBody>
-          </table>
+              0 items selected
+            </span>
+          </p>
         </div>
-      </Table>
+        <div
+          class="cds--action-list"
+        >
+          <button
+            class="cds--btn cds--btn--primary"
+            type="button"
+          >
+            Ghost
+            <svg
+              aria-hidden="true"
+              aria-label="Add"
+              class="cds--btn__icon"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
+              />
+              <path
+                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                data-icon-path="inner-path"
+                fill="none"
+              />
+            </svg>
+          </button>
+          <button
+            class="cds--btn cds--btn--primary"
+            type="button"
+          >
+            Ghost
+            <svg
+              aria-hidden="true"
+              aria-label="Add"
+              class="cds--btn__icon"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
+              />
+              <path
+                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                data-icon-path="inner-path"
+                fill="none"
+              />
+            </svg>
+          </button>
+          <button
+            class="cds--btn cds--btn--primary"
+            type="button"
+          >
+            Ghost
+            <svg
+              aria-hidden="true"
+              aria-label="Add"
+              class="cds--btn__icon"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
+              />
+              <path
+                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                data-icon-path="inner-path"
+                fill="none"
+              />
+            </svg>
+          </button>
+          <button
+            class="cds--batch-summary__cancel cds--btn cds--btn--primary"
+            tabindex="-1"
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div
+        class="cds--toolbar-content"
+      >
+        <div
+          aria-labelledby="custom-id-search"
+          class="cds--search cds--search--lg cds--toolbar-search-container-persistent"
+          role="search"
+        >
+          <div
+            class="cds--search-magnifier"
+          >
+            <svg
+              aria-hidden="true"
+              class="cds--search-magnifier-icon"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+              />
+            </svg>
+          </div>
+          <label
+            class="cds--label"
+            for="custom-id"
+            id="custom-id-search"
+          >
+            Filter table
+          </label>
+          <input
+            autocomplete="off"
+            class="cds--search-input"
+            id="custom-id"
+            placeholder="Filter table"
+            role="searchbox"
+            tabindex="0"
+            type="text"
+            value=""
+          />
+          <button
+            aria-label="Clear search input"
+            class="cds--search-close cds--search-close--hidden"
+            title="Clear search input"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+              />
+            </svg>
+          </button>
+        </div>
+        <span
+          class="cds--overflow-menu__wrapper"
+        >
+          <span
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-labelledby="tooltip-73"
+              class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--btn--primary"
+              title="Settings"
+              type="button"
+            >
+              <svg
+                aria-label="Settings"
+                class="cds--overflow-menu__icon"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3 c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1 C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4 c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4 c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4 c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8 L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6 C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
+                />
+                <path
+                  d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8 c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
+                />
+              </svg>
+            </button>
+            <span
+              aria-hidden="true"
+              class="cds--popover"
+              id="tooltip-73"
+              role="tooltip"
+            >
+              <span
+                class="cds--popover-content cds--tooltip-content"
+              >
+                Settings
+              </span>
+              <span
+                class="cds--popover-caret"
+              />
+            </span>
+          </span>
+        </span>
+        <button
+          class="cds--btn cds--btn--sm cds--btn--primary"
+          type="button"
+        >
+          Add new
+        </button>
+      </div>
+    </section>
+    <div
+      class="cds--data-table-content"
+    >
+      <table
+        aria-labelledby="tc-67-title"
+        class="cds--data-table"
+      >
+        <thead>
+          <tr>
+            <th
+              class="cds--table-column-checkbox"
+              scope="col"
+            >
+              <div
+                class="cds--checkbox--inline"
+              >
+                <input
+                  class="cds--checkbox"
+                  id="data-table-7__select-all"
+                  name="select-all"
+                  type="checkbox"
+                />
+                <label
+                  aria-label="Select all rows"
+                  class="cds--checkbox-label"
+                  for="data-table-7__select-all"
+                />
+              </div>
+            </th>
+            <th
+              scope="col"
+            >
+              <div
+                class="cds--table-header-label"
+              >
+                Field A
+              </div>
+            </th>
+            <th
+              scope="col"
+            >
+              <div
+                class="cds--table-header-label"
+              >
+                Field B
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          aria-live="polite"
+        >
+          <tr>
+            <td
+              class="cds--table-column-checkbox"
+            >
+              <div
+                class="cds--checkbox--inline"
+              >
+                <input
+                  class="cds--checkbox"
+                  id="data-table-7__select-row-b"
+                  name="select-row-b"
+                  type="checkbox"
+                />
+                <label
+                  aria-label="Select row"
+                  class="cds--checkbox-label"
+                  for="data-table-7__select-row-b"
+                />
+              </div>
+            </td>
+            <td>
+              Field 2:A
+            </td>
+            <td>
+              Field 2:B
+            </td>
+          </tr>
+          <tr>
+            <td
+              class="cds--table-column-checkbox"
+            >
+              <div
+                class="cds--checkbox--inline"
+              >
+                <input
+                  class="cds--checkbox"
+                  id="data-table-7__select-row-a"
+                  name="select-row-a"
+                  type="checkbox"
+                />
+                <label
+                  aria-label="Select row"
+                  class="cds--checkbox-label"
+                  for="data-table-7__select-row-a"
+                />
+              </div>
+            </td>
+            <td>
+              Field 1:A
+            </td>
+            <td>
+              Field 1:B
+            </td>
+          </tr>
+          <tr>
+            <td
+              class="cds--table-column-checkbox"
+            >
+              <div
+                class="cds--checkbox--inline"
+              >
+                <input
+                  class="cds--checkbox"
+                  id="data-table-7__select-row-c"
+                  name="select-row-c"
+                  type="checkbox"
+                />
+                <label
+                  aria-label="Select row"
+                  class="cds--checkbox-label"
+                  for="data-table-7__select-row-c"
+                />
+              </div>
+            </td>
+            <td>
+              Field 3:A
+            </td>
+            <td>
+              Field 3:B
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-  </TableContainer>
-</DataTable>
+  </div>
+</div>
+`;
+
+exports[`DataTable renders as expected - Component API should render and match snapshot 1`] = `
+<div>
+  <div
+    class="cds--data-table-container"
+    data-testid="test-id"
+  >
+    <div
+      class="cds--data-table-header"
+    >
+      <h4
+        class="cds--data-table-header__title"
+        id="tc-12-title"
+      >
+        DataTable with toolbar
+      </h4>
+      <p
+        class="cds--data-table-header__description"
+        id="tc-12-description"
+      />
+    </div>
+    <section
+      aria-label="data table toolbar"
+      class="cds--table-toolbar"
+    >
+      <div
+        aria-hidden="true"
+        class="cds--batch-actions"
+      >
+        <div
+          class="cds--batch-summary"
+        >
+          <p
+            class="cds--batch-summary__para"
+          >
+            <span
+              dir="auto"
+            >
+              0 items selected
+            </span>
+          </p>
+        </div>
+        <div
+          class="cds--action-list"
+        >
+          <button
+            class="cds--btn cds--btn--primary"
+            type="button"
+          >
+            Ghost
+            <svg
+              aria-hidden="true"
+              aria-label="Add"
+              class="cds--btn__icon"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
+              />
+              <path
+                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                data-icon-path="inner-path"
+                fill="none"
+              />
+            </svg>
+          </button>
+          <button
+            class="cds--btn cds--btn--primary"
+            type="button"
+          >
+            Ghost
+            <svg
+              aria-hidden="true"
+              aria-label="Add"
+              class="cds--btn__icon"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
+              />
+              <path
+                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                data-icon-path="inner-path"
+                fill="none"
+              />
+            </svg>
+          </button>
+          <button
+            class="cds--btn cds--btn--primary"
+            type="button"
+          >
+            Ghost
+            <svg
+              aria-hidden="true"
+              aria-label="Add"
+              class="cds--btn__icon"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              role="img"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M16,2A14.1725,14.1725,0,0,0,2,16,14.1725,14.1725,0,0,0,16,30,14.1725,14.1725,0,0,0,30,16,14.1725,14.1725,0,0,0,16,2Zm8,15H17v7H15V17H8V15h7V8h2v7h7Z"
+              />
+              <path
+                d="M24 17L17 17 17 24 15 24 15 17 8 17 8 15 15 15 15 8 17 8 17 15 24 15 24 17z"
+                data-icon-path="inner-path"
+                fill="none"
+              />
+            </svg>
+          </button>
+          <button
+            class="cds--batch-summary__cancel cds--btn cds--btn--primary"
+            tabindex="-1"
+            type="button"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+      <div
+        class="cds--toolbar-content"
+      >
+        <div
+          aria-labelledby="custom-id-search"
+          class="cds--search cds--search--lg cds--toolbar-search-container-persistent"
+          role="search"
+        >
+          <div
+            class="cds--search-magnifier"
+          >
+            <svg
+              aria-hidden="true"
+              class="cds--search-magnifier-icon"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M15,14.3L10.7,10c1.9-2.3,1.6-5.8-0.7-7.7S4.2,0.7,2.3,3S0.7,8.8,3,10.7c2,1.7,5,1.7,7,0l4.3,4.3L15,14.3z M2,6.5 C2,4,4,2,6.5,2S11,4,11,6.5S9,11,6.5,11S2,9,2,6.5z"
+              />
+            </svg>
+          </div>
+          <label
+            class="cds--label"
+            for="custom-id"
+            id="custom-id-search"
+          >
+            Filter table
+          </label>
+          <input
+            autocomplete="off"
+            class="cds--search-input"
+            id="custom-id"
+            placeholder="Filter table"
+            role="searchbox"
+            tabindex="0"
+            type="text"
+            value=""
+          />
+          <button
+            aria-label="Clear search input"
+            class="cds--search-close cds--search-close--hidden"
+            title="Clear search input"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              preserveAspectRatio="xMidYMid meet"
+              viewBox="0 0 32 32"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M24 9.4L22.6 8 16 14.6 9.4 8 8 9.4 14.6 16 8 22.6 9.4 24 16 17.4 22.6 24 24 22.6 17.4 16 24 9.4z"
+              />
+            </svg>
+          </button>
+        </div>
+        <span
+          class="cds--overflow-menu__wrapper"
+        >
+          <span
+            class="cds--popover-container cds--popover--caret cds--popover--high-contrast cds--popover--top cds--tooltip cds--icon-tooltip"
+          >
+            <button
+              aria-expanded="false"
+              aria-haspopup="true"
+              aria-labelledby="tooltip-18"
+              class="cds--btn--icon-only cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--btn--primary"
+              title="Settings"
+              type="button"
+            >
+              <svg
+                aria-label="Settings"
+                class="cds--overflow-menu__icon"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                preserveAspectRatio="xMidYMid meet"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M13.5,8.4c0-0.1,0-0.3,0-0.4c0-0.1,0-0.3,0-0.4l1-0.8c0.4-0.3,0.4-0.9,0.2-1.3l-1.2-2C13.3,3.2,13,3,12.6,3 c-0.1,0-0.2,0-0.3,0.1l-1.2,0.4c-0.2-0.1-0.4-0.3-0.7-0.4l-0.3-1.3C10.1,1.3,9.7,1,9.2,1H6.8c-0.5,0-0.9,0.3-1,0.8L5.6,3.1 C5.3,3.2,5.1,3.3,4.9,3.4L3.7,3C3.6,3,3.5,3,3.4,3C3,3,2.7,3.2,2.5,3.5l-1.2,2C1.1,5.9,1.2,6.4,1.6,6.8l0.9,0.9c0,0.1,0,0.3,0,0.4 c0,0.1,0,0.3,0,0.4L1.6,9.2c-0.4,0.3-0.5,0.9-0.2,1.3l1.2,2C2.7,12.8,3,13,3.4,13c0.1,0,0.2,0,0.3-0.1l1.2-0.4 c0.2,0.1,0.4,0.3,0.7,0.4l0.3,1.3c0.1,0.5,0.5,0.8,1,0.8h2.4c0.5,0,0.9-0.3,1-0.8l0.3-1.3c0.2-0.1,0.4-0.2,0.7-0.4l1.2,0.4 c0.1,0,0.2,0.1,0.3,0.1c0.4,0,0.7-0.2,0.9-0.5l1.1-2c0.2-0.4,0.2-0.9-0.2-1.3L13.5,8.4z M12.6,12l-1.7-0.6c-0.4,0.3-0.9,0.6-1.4,0.8 L9.2,14H6.8l-0.4-1.8c-0.5-0.2-0.9-0.5-1.4-0.8L3.4,12l-1.2-2l1.4-1.2c-0.1-0.5-0.1-1.1,0-1.6L2.2,6l1.2-2l1.7,0.6 C5.5,4.2,6,4,6.5,3.8L6.8,2h2.4l0.4,1.8c0.5,0.2,0.9,0.5,1.4,0.8L12.6,4l1.2,2l-1.4,1.2c0.1,0.5,0.1,1.1,0,1.6l1.4,1.2L12.6,12z"
+                />
+                <path
+                  d="M8,11c-1.7,0-3-1.3-3-3s1.3-3,3-3s3,1.3,3,3C11,9.6,9.7,11,8,11C8,11,8,11,8,11z M8,6C6.9,6,6,6.8,6,7.9C6,7.9,6,8,6,8 c0,1.1,0.8,2,1.9,2c0,0,0.1,0,0.1,0c1.1,0,2-0.8,2-1.9c0,0,0-0.1,0-0.1C10,6.9,9.2,6,8,6C8.1,6,8,6,8,6z"
+                />
+              </svg>
+            </button>
+            <span
+              aria-hidden="true"
+              class="cds--popover"
+              id="tooltip-18"
+              role="tooltip"
+            >
+              <span
+                class="cds--popover-content cds--tooltip-content"
+              >
+                Settings
+              </span>
+              <span
+                class="cds--popover-caret"
+              />
+            </span>
+          </span>
+        </span>
+        <button
+          class="cds--btn cds--btn--sm cds--btn--primary"
+          type="button"
+        >
+          Add new
+        </button>
+      </div>
+    </section>
+    <div
+      class="cds--data-table-content"
+    >
+      <table
+        aria-labelledby="tc-12-title"
+        class="cds--data-table cds--data-table--lg"
+      >
+        <thead>
+          <tr>
+            <th
+              scope="col"
+            >
+              <div
+                class="cds--table-header-label"
+              >
+                Field A
+              </div>
+            </th>
+            <th
+              scope="col"
+            >
+              <div
+                class="cds--table-header-label"
+              >
+                Field B
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody
+          aria-live="polite"
+        >
+          <tr>
+            <td>
+              Field 2:A
+            </td>
+            <td>
+              Field 2:B
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Field 1:A
+            </td>
+            <td>
+              Field 1:B
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Field 3:A
+            </td>
+            <td>
+              Field 3:B
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 `;
