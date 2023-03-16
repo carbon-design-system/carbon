@@ -10,6 +10,49 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
+export interface DataTableSkeletonProps {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+
+  /**
+   * Specify the number of columns that you want to render in the skeleton state
+   */
+  columnCount: number;
+
+  /**
+   * Optionally specify whether you want the Skeleton to be rendered as a
+   * compact DataTable
+   */
+  compact: boolean;
+
+  /**
+   * Optionally specify the displayed headers
+   */
+  headers?: [{ header: string; key: string }] | { header: string; key: string };
+
+  /**
+   * Specify the number of rows that you want to render in the skeleton state
+   */
+  rowCount: number;
+
+  /**
+   * Specify if the table header should be rendered as part of the skeleton.
+   */
+  showHeader: boolean;
+
+  /**
+   * Specify if the table toolbar should be rendered as part of the skeleton.
+   */
+  showToolbar: boolean;
+
+  /**
+   * Optionally specify whether you want the DataTable to be zebra striped
+   */
+  zebra: boolean;
+}
+
 const DataTableSkeleton = ({
   headers,
   rowCount,
@@ -48,8 +91,8 @@ const DataTableSkeleton = ({
     <div className={`${prefix}--skeleton ${prefix}--data-table-container`}>
       {showHeader ? (
         <div className={`${prefix}--data-table-header`}>
-          <div className={`${prefix}--data-table-header__title`}></div>
-          <div className={`${prefix}--data-table-header__description`}></div>
+          <div className={`${prefix}--data-table-header__title`} />
+          <div className={`${prefix}--data-table-header__description`} />
         </div>
       ) : null}
       {showToolbar ? (
@@ -58,7 +101,8 @@ const DataTableSkeleton = ({
           className={`${prefix}--table-toolbar`}>
           <div className={`${prefix}--toolbar-content`}>
             <span
-              className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}></span>
+              className={`${prefix}--skeleton ${prefix}--btn ${prefix}--btn--sm`}
+            />
           </div>
         </section>
       ) : null}
@@ -72,7 +116,7 @@ const DataTableSkeleton = ({
                     {headers[i]?.header}
                   </div>
                 ) : (
-                  <span></span>
+                  <span />
                 )}
               </th>
             ))}

@@ -130,7 +130,12 @@ export const Playground = (args) => (
         <TableToolbar>
           <TableToolbarContent>
             {/* pass in `onInputChange` change here to make filtering work */}
-            <TableToolbarSearch onChange={onInputChange} />
+            <TableToolbarSearch
+              onChange={(evt) => {
+                action('TableToolbarSearch - onChange')(evt);
+                onInputChange(evt);
+              }}
+            />
             <TableToolbarMenu>
               <TableToolbarAction onClick={action('Action 1 Click')}>
                 Action 1
