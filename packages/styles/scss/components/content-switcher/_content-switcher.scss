@@ -13,21 +13,22 @@
 @use '../../utilities/convert' as *;
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/high-contrast-mode' as *;
+@use '../../utilities/layout';
 
 @mixin content-switcher {
   .#{$prefix}--content-switcher {
     display: flex;
     width: 100%;
-    height: rem(40px);
+    height: layout.size($default: 'md', $min: 'sm', $max: 'lg');
     justify-content: space-evenly;
   }
 
   .#{$prefix}--content-switcher--sm {
-    height: rem(32px);
+    @include layout.size('sm');
   }
 
   .#{$prefix}--content-switcher--lg {
-    height: rem(48px);
+    @include layout.size('lg');
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -41,7 +42,7 @@
     overflow: hidden;
     width: 100%;
     align-items: center;
-    padding: $spacing-03 $spacing-05;
+    padding: $spacing-03 layout.density();
     border: none;
     border-top: rem(1px) solid $border-inverse;
     border-bottom: rem(1px) solid $border-inverse;
