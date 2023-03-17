@@ -40,13 +40,14 @@ function FileUploaderItem({
       </p>
       <span className={`${prefix}--file__state-container`}>
         <Filename
+          name={name}
           iconDescription={iconDescription}
-          aria-describedby={name}
           status={status}
           invalid={invalid}
           onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
               if (status === 'edit') {
+                evt.preventDefault();
                 onDelete(evt, { uuid: id });
               }
             }
