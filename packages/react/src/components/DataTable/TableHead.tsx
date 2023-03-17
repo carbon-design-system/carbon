@@ -8,7 +8,7 @@
 import React, { ThHTMLAttributes } from 'react';
 import wrapComponent from '../../tools/wrapComponent';
 
-export type TableHeadProps = ThHTMLAttributes<HTMLTableCellElement>;
+export type TableHeadProps = ThHTMLAttributes<HTMLTableSectionElement>;
 
 const TableHead: React.FC<TableHeadProps> = wrapComponent({
   name: 'TableHead',

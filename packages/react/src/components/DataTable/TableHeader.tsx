@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,
@@ -23,7 +23,7 @@ const translationKeys: {[key: string]: string} = {
 
 interface translateWithIdAdditionalArgs {
   header?: string,
-  sortDirection?: boolean;
+  sortDirection?: string;
   isSortHeader?: boolean,
   sortStates?: typeof sortStates;
 }
@@ -33,7 +33,7 @@ const translateWithId = (
   { header, sortDirection, isSortHeader, sortStates }: translateWithIdAdditionalArgs
 ): string => {
   if (key === translationKeys.buttonDescription) {
-    if (isSortHeader) {
+    if (isSortHeader && sortStates) {
       // When transitioning, we know that the sequence of states is as follows:
       // NONE -> ASC -> DESC -> NONE
       if (sortDirection === sortStates.NONE) {
@@ -93,7 +93,7 @@ interface TableHeaderProps extends ReactAttr<HTMLTableCellElement> {
   /**
    * Hook that is invoked when the header is clicked
    */
-  onClick?: React.Dispatch<void>;
+  onClick?: MouseEventHandler<HTMLTableCellElement>;
 
   /**
    * Specify the scope of this table header. You can find more info about this
@@ -106,7 +106,7 @@ interface TableHeaderProps extends ReactAttr<HTMLTableCellElement> {
    * Specify which direction we are currently sorting by, should be one of DESC,
    * NONE, or ASC.
    */
-  sortDirection?: typeof sortStates;
+  sortDirection?: string;
 
   /**
    * Supply a method to translate internal strings with your i18n tool of
@@ -158,7 +158,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     [`${prefix}--table-sort--descending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
-  const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
+  const ariaSort = !isSortHeader ? 'none' : sortDirection ? sortDirections[sortDirection] : sortDirections[sortStates.NONE];
   const sortDescription = t('carbon.table.header.icon.description', {
     header: children,
     sortDirection,
