@@ -21,7 +21,7 @@ describe('Tabs', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 2')).toHaveAttribute(
+    expect(screen.getByText('Tab Label 2').parentElement).toHaveAttribute(
       'aria-selected',
       'true'
     );
@@ -67,7 +67,9 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 2')).toHaveClass('custom-class');
+    expect(screen.getByText('Tab Label 2').parentElement).toHaveClass(
+      'custom-class'
+    );
   });
 
   it('should not select a disabled tab and select next tab', () => {
@@ -86,13 +88,13 @@ describe('Tab', () => {
       </Tabs>
     );
 
-    expect(screen.getByText('Tab Label 1')).toHaveAttribute(
+    expect(screen.getByText('Tab Label 1').parentElement).toHaveAttribute(
       'aria-selected',
       'false'
     );
 
     // By default, if a Tab is disabled, the next Tab should be selected
-    expect(screen.getByText('Tab Label 2')).toHaveAttribute(
+    expect(screen.getByText('Tab Label 2').parentElement).toHaveAttribute(
       'aria-selected',
       'true'
     );
@@ -113,7 +115,7 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
-    expect(screen.getByText('Tab Label 1').tagName).toBe('DIV');
+    expect(screen.getByText('Tab Label 1').parentElement.tagName).toBe('DIV');
   });
 
   it('should call onClick from props if provided', () => {

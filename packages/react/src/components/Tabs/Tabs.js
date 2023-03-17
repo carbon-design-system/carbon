@@ -348,7 +348,7 @@ function TabList({
                 ref: (node) => {
                   tabs.current[index] = node;
                 },
-                hasSecondaryLabel: hasSecondaryLabelTabs,
+                hasSecondaryLabel: !!hasSecondaryLabelTabs,
               })}
             </TabContext.Provider>
           );
