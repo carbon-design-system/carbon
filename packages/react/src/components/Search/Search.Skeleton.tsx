@@ -10,7 +10,20 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const SearchSkeleton = ({ small, className, ...rest }) => {
+export interface SearchSkeletonProps
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+
+  /**
+   * Specify whether the Search should be a small variant.
+   */
+  small?: boolean;
+}
+
+const SearchSkeleton = ({ small, className, ...rest }: SearchSkeletonProps) => {
   const prefix = usePrefix();
   const searchClasses = cx(className, {
     [`${prefix}--skeleton`]: true,

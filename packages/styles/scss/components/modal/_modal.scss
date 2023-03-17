@@ -71,6 +71,41 @@
     .#{$prefix}--number__rule-divider {
       background-color: $border-subtle-02;
     }
+
+    // Fluid inputs
+    .#{$prefix}--text-input--fluid .#{$prefix}--text-input,
+    .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper,
+    .#{$prefix}--text-area--fluid .#{$prefix}--text-area,
+    .#{$prefix}--search--fluid .#{$prefix}--search-input,
+    .#{$prefix}--select--fluid .#{$prefix}--select-input,
+    .#{$prefix}--text-area--fluid
+      .#{$prefix}--text-area__wrapper[data-invalid]
+      .#{$prefix}--text-area__divider
+      + .#{$prefix}--form-requirement,
+    .#{$prefix}--list-box__wrapper--fluid .#{$prefix}--list-box,
+    .#{$prefix}--list-box__wrapper--fluid.#{$prefix}--list-box__wrapper,
+    .#{$prefix}--number-input--fluid input[type='number'],
+    .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::before,
+    .#{$prefix}--number-input--fluid .#{$prefix}--number__control-btn::after,
+    .#{$prefix}--date-picker--fluid
+      .c#{$prefix}ds--date-picker-input__wrapper
+      .#{$prefix}--date-picker__input {
+      background-color: $field-01;
+    }
+
+    .#{$prefix}--number-input--fluid
+      .#{$prefix}--number__control-btn:hover::before,
+    .#{$prefix}--number-input--fluid
+      .#{$prefix}--number__control-btn:hover::after {
+      background-color: $field-hover;
+    }
+
+    .#{$prefix}--number-input--fluid
+      .#{$prefix}--number__control-btn:focus::before,
+    .#{$prefix}--number-input--fluid
+      .#{$prefix}--number__control-btn:focus::after {
+      border-left: 2px solid $focus;
+    }
   }
 
   .#{$prefix}--modal.is-visible .#{$prefix}--modal-container {
@@ -142,6 +177,12 @@
     &:focus {
       @include focus-outline('outline');
     }
+  }
+
+  // fluid form in modal
+  .#{$prefix}--modal-content .#{$prefix}--form--fluid {
+    margin-right: -$spacing-05;
+    margin-left: -$spacing-05;
   }
 
   //TO-DO: remove .#{$prefix}--modal-content__regular-content in v11 since hasForm has been deprecated
