@@ -5,7 +5,13 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import { useCallback, useEffect, useRef, useState } from 'react';
+import {
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 /**
  * `useDelayedState` mirrors `useState` but also allows you to add a delay to
@@ -17,13 +23,18 @@ import { useCallback, useEffect, useRef, useState } from 'react';
  * pending timers when a `setState` is called before the state is updated from
  * a previous call
  */
-export function useDelayedState(initialState) {
-  const [state, setState] = useState(initialState);
-  const timeoutId = useRef(null);
+
+export type DispatchWithDelay<A> = (value: A, delayMS?: number) => void;
+
+export function useDelayedState<S>(
+  initialState: S
+): [S, DispatchWithDelay<SetStateAction<S>>] {
+  const [state, setState] = useState<S>(initialState);
+  const timeoutId = useRef<number | null>(null);
   // We use `useCallback` to match the signature of React's `useState` which will
   // always return the same reference for the `setState` updater
   const setStateWithDelay = useCallback((stateToSet, delayMs = 0) => {
-    clearTimeout(timeoutId.current);
+    window.clearTimeout(timeoutId.current ?? undefined);
     timeoutId.current = null;
 
     if (delayMs === 0) {
@@ -31,7 +42,7 @@ export function useDelayedState(initialState) {
       return;
     }
 
-    timeoutId.current = setTimeout(() => {
+    timeoutId.current = window.setTimeout(() => {
       setState(stateToSet);
       timeoutId.current = null;
     }, delayMs);
@@ -39,7 +50,7 @@ export function useDelayedState(initialState) {
 
   useEffect(() => {
     return () => {
-      clearTimeout(timeoutId.current);
+      window.clearTimeout(timeoutId.current ?? undefined);
     };
   }, []);
 

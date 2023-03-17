@@ -8,7 +8,7 @@
 import cx from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useRef, useEffect } from 'react';
-import { Popover, PopoverContent } from '../Popover';
+import { Popover, PopoverAlignment, PopoverContent } from '../Popover';
 import { keys, match } from '../../internal/keyboard';
 import { useDelayedState } from '../../internal/useDelayedState';
 import { useId } from '../../internal/useId';
@@ -17,8 +17,74 @@ import {
   getInteractiveContent,
 } from '../../internal/useNoInteractiveChildren';
 import { usePrefix } from '../../internal/usePrefix';
+import { PolymorphicProps } from '../../types/common';
 
-function Tooltip({
+interface TooltipBaseProps {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align?: PopoverAlignment;
+
+  /**
+   * Pass in the child to which the tooltip will be applied
+   */
+  children?: React.ReactElement;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Determines wether the tooltip should close when inner content is activated (click, Enter or Space)
+   */
+  closeOnActivation?: boolean;
+
+  /**
+   * Specify whether the tooltip should be open when it first renders
+   */
+  defaultOpen?: boolean;
+
+  /**
+   * Provide the description to be rendered inside of the Tooltip. The
+   * description will use `aria-describedby` and will describe the child node
+   * in addition to the text rendered inside of the child. This means that if you
+   * have text in the child node, that it will be announced alongside the
+   * description to the screen reader.
+   *
+   * Note: if label and description are both provided, label will be used and
+   * description will not be used
+   */
+  description?: React.ReactNode;
+
+  /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   */
+  enterDelayMs?: number;
+
+  /**
+   * Provide the label to be rendered inside of the Tooltip. The label will use
+   * `aria-labelledby` and will fully describe the child node that is provided.
+   * This means that if you have text in the child node, that it will not be
+   * announced to the screen reader.
+   *
+   * Note: if label and description are both provided, description will not be
+   * used
+   */
+  label?: React.ReactNode;
+
+  /**
+   * Specify the duration in milliseconds to delay before hiding the tooltip
+   */
+  leaveDelayMs?: number;
+}
+
+export type TooltipProps<T extends React.ElementType> = PolymorphicProps<
+  T,
+  TooltipBaseProps
+>;
+
+function Tooltip<T extends React.ElementType>({
   align = 'top',
   className: customClassName,
   children,
@@ -29,9 +95,9 @@ function Tooltip({
   defaultOpen = false,
   closeOnActivation = false,
   ...rest
-}) {
-  const containerRef = useRef(null);
-  const tooltipRef = useRef(null);
+}: TooltipProps<T>) {
+  const containerRef = useRef<Element>(null);
+  const tooltipRef = useRef<HTMLSpanElement>(null);
   const [open, setOpen] = useDelayedState(defaultOpen);
   const id = useId('tooltip');
   const prefix = usePrefix();
@@ -45,7 +111,7 @@ function Tooltip({
     onMouseEnter,
   };
 
-  function getChildEventHandlers(childProps) {
+  function getChildEventHandlers(childProps: any) {
     const eventHandlerFunctions = [
       'onFocus',
       'onBlur',
@@ -54,7 +120,7 @@ function Tooltip({
     ];
     const eventHandlers = {};
     eventHandlerFunctions.forEach((functionName) => {
-      eventHandlers[functionName] = (evt) => {
+      eventHandlers[functionName] = (evt: React.SyntheticEvent) => {
         triggerProps[functionName]();
         if (childProps?.[functionName]) {
           childProps?.[functionName](evt);
@@ -70,7 +136,7 @@ function Tooltip({
     triggerProps['aria-describedby'] = id;
   }
 
-  function onKeyDown(event) {
+  function onKeyDown(event: React.KeyboardEvent) {
     if (open && match(event, keys.Escape)) {
       event.stopPropagation();
       setOpen(false);
@@ -99,9 +165,13 @@ function Tooltip({
   );
 
   useEffect(() => {
-    const interactiveContent = getInteractiveContent(containerRef.current);
-    if (!interactiveContent) {
-      setOpen(false);
+    if (containerRef !== null && containerRef.current) {
+      const interactiveContent = getInteractiveContent(
+        containerRef.current as HTMLElement
+      );
+      if (!interactiveContent) {
+        setOpen(false);
+      }
     }
   });
 
@@ -116,10 +186,12 @@ function Tooltip({
       onMouseLeave={onMouseLeave}
       open={open}
       ref={containerRef}>
-      {React.cloneElement(child, {
-        ...triggerProps,
-        ...getChildEventHandlers(child.props),
-      })}
+      {child !== undefined
+        ? React.cloneElement(child, {
+            ...triggerProps,
+            ...getChildEventHandlers(child.props),
+          })
+        : null}
       <PopoverContent
         aria-hidden="true"
         className={`${prefix}--tooltip-content`}
