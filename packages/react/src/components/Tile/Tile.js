@@ -61,6 +61,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     children,
     className,
     clicked = false,
+    disabled,
     href,
     light,
     onClick = () => {},
@@ -102,9 +103,10 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     <Link
       className={classes}
       href={href}
-      onClick={handleOnClick}
+      onClick={!disabled ? handleOnClick : null}
       onKeyDown={handleOnKeyDown}
       ref={ref}
+      disabled={disabled}
       {...rest}>
       {children}
     </Link>
@@ -127,6 +129,11 @@ ClickableTile.propTypes = {
    * Boolean for whether a tile has been clicked.
    */
   clicked: PropTypes.bool,
+
+  /**
+   * Specify whether the ClickableTile should be disabled
+   */
+  disabled: PropTypes.bool,
 
   /**
    * The href for the link.
