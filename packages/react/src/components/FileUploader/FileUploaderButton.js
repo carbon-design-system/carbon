@@ -54,11 +54,13 @@ function FileUploaderButton({
 
   function onClick(event) {
     event.target.value = null;
+    inputNode.current.value = '';
     inputNode.current.click();
   }
 
   function onKeyDown(event) {
     if (matches(event, [keys.Enter, keys.Space])) {
+      inputNode.current.value = '';
       inputNode.current.click();
     }
   }
