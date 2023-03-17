@@ -31,7 +31,7 @@
   "scripts": {
     "build": "yarn clean && node tasks/build-styles.js && node tasks/build.js",
     "clean": "rimraf es lib",
-    "postinstall": "carbon-telemetry collect --install"
+    "postinstall": "carbon-telemetry collect --install && node scripts/postinstall.js"
   },
   "peerDependencies": {
     "react": "^16.8.6 || ^17.0.1",
@@ -41,7 +41,8 @@
   "dependencies": {
     "@carbon/react": "^1.25.0",
     "@carbon/styles": "^1.25.0",
-    "@carbon/telemetry": "0.1.0"
+    "@carbon/telemetry": "0.1.0",
+    "chalk": "1.1.3"
   },
   "devDependencies": {
     "@babel/core": "^7.18.2",
