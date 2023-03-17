@@ -130,9 +130,11 @@ function TabList({
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(null);
-  const hasSecondaryLabelTabs = !!React.Children.toArray(children).filter(
-    (child) => child.props.secondaryLabel
-  ).length;
+  const hasSecondaryLabelTabs =
+    contained &&
+    !!React.Children.toArray(children).filter(
+      (child) => child.props.secondaryLabel
+    ).length;
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
