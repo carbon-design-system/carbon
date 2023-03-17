@@ -56,6 +56,19 @@ describe('Tile', () => {
       );
       expect(screen.getByRole('link')).toBeInTheDocument();
     });
+    it('does not invoke the click handler if ClickableTile is disabled', () => {
+      const onClick = jest.fn();
+      render(
+        <ClickableTile
+          onClick={onClick}
+          disabled
+          href="https://www.carbondesignsystem.com">
+          🚦
+        </ClickableTile>
+      );
+      userEvent.click(screen.getByText('🚦'));
+      expect(onClick).not.toHaveBeenCalled();
+    });
   });
 
   describe('Multi Select', () => {
@@ -253,8 +266,4 @@ describe('Tile', () => {
       );
     });
   });
-
-  // Todo: Testing for a disabled ClickableTile
-  // Todo: Testing for ExpandableTile
-  // Todo: Testing for RadioTile
 });
