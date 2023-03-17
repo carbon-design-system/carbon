@@ -567,6 +567,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
             className={`${prefix}--list-box__field`}
             disabled={disabled}
             aria-disabled={disabled || readOnly}
+            aria-describedby={!inline && !invalid && !warn && helperText ? helperId : null}
             {...toggleButtonProps}
             ref={mergedRef}
             onKeyDown={onKeyDown}
