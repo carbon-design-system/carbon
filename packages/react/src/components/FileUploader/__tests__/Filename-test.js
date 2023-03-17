@@ -42,13 +42,16 @@ describe('Filename', () => {
     const onClick = jest.fn();
     const { container: edit } = render(
       <Filename
+        name="File 1"
         iconDescription="test description"
         status="edit"
         onClick={onClick}
       />
     );
 
-    Simulate.click(edit.querySelector(`[aria-label="test description"]`));
+    Simulate.click(
+      edit.querySelector(`[aria-label="test description - File 1"]`)
+    );
     expect(onClick).toHaveBeenCalledTimes(1);
 
     onClick.mockReset();

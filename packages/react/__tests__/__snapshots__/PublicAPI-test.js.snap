@@ -3168,7 +3168,6 @@ Map {
       "multiple": false,
       "onAddFiles": [Function],
       "pattern": ".[0-9a-z]+$",
-      "tabIndex": 0,
     },
     "propTypes": Object {
       "accept": Object {
@@ -3201,15 +3200,14 @@ Map {
       "onAddFiles": Object {
         "type": "func",
       },
+      "onClick": Object {
+        "type": "func",
+      },
       "pattern": Object {
         "type": "string",
       },
-      "role": Object {
-        "type": "string",
-      },
-      "tabIndex": Object {
-        "type": "number",
-      },
+      "role": [Function],
+      "tabIndex": [Function],
     },
   },
   "FileUploaderItem" => Object {
@@ -3280,6 +3278,9 @@ Map {
       },
       "invalid": Object {
         "type": "bool",
+      },
+      "name": Object {
+        "type": "string",
       },
       "status": Object {
         "args": Array [

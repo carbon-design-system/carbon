@@ -243,8 +243,8 @@ export default class FileUploader extends React.Component {
                   </p>
                   <span className={`${prefix}--file__state-container`}>
                     <Filename
+                      name={name}
                       iconDescription={iconDescription}
-                      aria-describedby={name}
                       status={filenameStatus}
                       onKeyDown={(evt) => {
                         if (matches(evt, [keys.Enter, keys.Space])) {
