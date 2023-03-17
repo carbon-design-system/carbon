@@ -1076,6 +1076,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "aze3ma",
+      "name": "Mahmoud Abdulazim",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6822318?v=4",
+      "profile": "https://www.linkedin.com/in/aze3ma/",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
