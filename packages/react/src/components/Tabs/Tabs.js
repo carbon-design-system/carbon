@@ -585,7 +585,8 @@ Tab.propTypes = {
   renderButton: PropTypes.func,
 
   /*
-   * An optional label to render under the primary tab label
+   * An optional label to render under the primary tab label.
+  /* This prop is only useful for conained tabs
    **/
   secondaryLabel: PropTypes.string,
 };
