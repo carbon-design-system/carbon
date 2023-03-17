@@ -5,7 +5,7 @@ const chalk = require('chalk');
 console.warn(
   chalk.yellow('Warning: ') +
     chalk.cyan('carbon-components') +
-    " is soon to be deprecated and is no longer receiving updates, we recommend to move to it's replacement, " +
+    " will soon be deprecated and no longer receive updates. We recommend to move to it's replacement, " +
     chalk.cyan('@carbon/styles') +
     '  at your earliest convenience. Please visit ' +
     chalk.dim.underline.italic(
