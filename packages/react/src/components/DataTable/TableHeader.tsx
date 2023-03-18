@@ -22,30 +22,30 @@ const translationKeys: {[key: string]: string} = {
 };
 
 interface translateWithIdAdditionalArgs {
-  header?: string,
+  header?: string;
   sortDirection?: string;
-  isSortHeader?: boolean,
+  isSortHeader?: boolean;
   sortStates?: typeof sortStates;
 }
 
 const translateWithId = (
   key: string,
-  { header, sortDirection, isSortHeader, sortStates }: translateWithIdAdditionalArgs
+  args?: translateWithIdAdditionalArgs
 ): string => {
-  if (key === translationKeys.buttonDescription) {
-    if (isSortHeader && sortStates) {
+  if (args && key === translationKeys.buttonDescription) {
+    if (args.isSortHeader && sortStates) {
       // When transitioning, we know that the sequence of states is as follows:
       // NONE -> ASC -> DESC -> NONE
-      if (sortDirection === sortStates.NONE) {
-        return `Click to sort rows by ${header} header in ascending order`;
+      if (args.sortDirection === sortStates.NONE) {
+        return `Click to sort rows by ${args.header} header in ascending order`;
       }
-      if (sortDirection === sortStates.ASC) {
-        return `Click to sort rows by ${header} header in descending order`;
+      if (args.sortDirection === sortStates.ASC) {
+        return `Click to sort rows by ${args.header} header in descending order`;
       }
 
-      return `Click to unsort rows by ${header} header`;
+      return `Click to unsort rows by ${args.header} header`;
     }
-    return `Click to sort rows by ${header} header in ascending order`;
+    return `Click to sort rows by ${args.header} header in ascending order`;
   }
 
   return '';
@@ -57,7 +57,7 @@ const sortDirections: {[key: string]: string} = {
   [sortStates.DESC]: 'descending',
 };
 
-interface TableHeaderProps extends ReactAttr<HTMLTableCellElement> {
+interface TableHeaderProps extends ReactAttr<HTMLTableCellElement & HTMLButtonElement> {
   /**
    * Pass in children that will be embedded in the table header label
    */
@@ -93,7 +93,7 @@ interface TableHeaderProps extends ReactAttr<HTMLTableCellElement> {
   /**
    * Hook that is invoked when the header is clicked
    */
-  onClick?: MouseEventHandler<HTMLTableCellElement>;
+  onClick?: MouseEventHandler<HTMLButtonElement>;
 
   /**
    * Specify the scope of this table header. You can find more info about this
@@ -113,7 +113,7 @@ interface TableHeaderProps extends ReactAttr<HTMLTableCellElement> {
    * choice. Translation keys are available on the `translationKeys` field for
    * this component.
    */
-  translateWithId: (key: string, { header, sortDirection, isSortHeader, sortStates }) => string;
+  translateWithId?: (key: string, { header, sortDirection, isSortHeader, sortStates }) => string;
 }
 
 const TableHeader = React.forwardRef(function TableHeader(
@@ -159,7 +159,7 @@ const TableHeader = React.forwardRef(function TableHeader(
       isSortHeader && sortDirection === sortStates.DESC,
   });
   const ariaSort = !isSortHeader ? 'none' : sortDirection ? sortDirections[sortDirection] : sortDirections[sortStates.NONE];
-  const sortDescription = t('carbon.table.header.icon.description', {
+  const sortDescription = t && t('carbon.table.header.icon.description', {
     header: children,
     sortDirection,
     isSortHeader,
