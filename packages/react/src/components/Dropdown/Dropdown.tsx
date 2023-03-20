@@ -315,17 +315,18 @@ const Dropdown = React.forwardRef(
       }
     );
 
-
-  const helperId = !helperText
-  ? undefined
-  : `dropdown-helper-text-${dropdownInstanceId}`;
+    const helperId = !helperText
+      ? undefined
+      : `dropdown-helper-text-${dropdownInstanceId}`;
 
     // needs to be Capitalized for react to render it correctly
     const ItemToElement = itemToElement;
     const toggleButtonProps = getToggleButtonProps();
     const helper =
       helperText && !isFluid ? (
-        <div id={helperId} className={helperClasses}>{helperText}</div>
+        <div id={helperId} className={helperClasses}>
+          {helperText}
+        </div>
       ) : null;
 
     function onSelectedItemChange({
@@ -399,7 +400,7 @@ const Dropdown = React.forwardRef(
             disabled={disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
             aria-describedby={
-              (!inline && !invalid && !warn && helper) ? helperId : undefined
+              !inline && !invalid && !warn && helper ? helperId : undefined
             }
             title={
               selectedItem && itemToString !== undefined

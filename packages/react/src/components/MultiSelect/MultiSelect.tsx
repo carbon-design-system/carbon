@@ -568,7 +568,7 @@ const MultiSelect = React.forwardRef(function MultiSelect<ItemType>(
             disabled={disabled}
             aria-disabled={disabled || readOnly}
             aria-describedby={
-              (!inline && !invalid && !warn && helperText) ? helperId : undefined
+              !inline && !invalid && !warn && helperText ? helperId : undefined
             }
             {...toggleButtonProps}
             ref={mergedRef}
