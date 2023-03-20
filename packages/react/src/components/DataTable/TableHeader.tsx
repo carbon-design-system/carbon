@@ -51,7 +51,7 @@ const translateWithId = (
   return '';
 };
 
-const sortDirections: {[key: string]: string} = {
+const sortDirections: {[key: string]: 'none' | 'ascending' | 'descending'} = {
   [sortStates.NONE]: 'none',
   [sortStates.ASC]: 'ascending',
   [sortStates.DESC]: 'descending',
@@ -158,7 +158,7 @@ const TableHeader = React.forwardRef(function TableHeader(
     [`${prefix}--table-sort--descending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
-  const ariaSort = !isSortHeader ? 'none' : sortDirection ? sortDirections[sortDirection] : sortDirections[sortStates.NONE];
+  const ariaSort = (!isSortHeader || !sortDirection) ? 'none' : sortDirections[sortDirection];
   const sortDescription = t && t('carbon.table.header.icon.description', {
     header: children,
     sortDirection,
