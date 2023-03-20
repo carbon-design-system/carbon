@@ -328,7 +328,7 @@
     height: rem(64px);
     flex: 0 1 50%;
     align-items: baseline;
-    padding-top: $spacing-05;
+    padding-top: calc($spacing-05 - rem(2px));
     padding-bottom: $spacing-07;
     margin: 0;
   }
