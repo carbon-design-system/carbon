@@ -22,6 +22,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     onClick,
     onKeyDown,
     selected,
+    size,
     text,
     ...other
   } = props;
@@ -51,6 +52,14 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     [`${prefix}--content-switcher--selected`]: selected,
   });
 
+  const iconButtonClasses = classNames(
+    `${prefix}--content-switcher-popover__wrapper`,
+    {
+      [`${prefix}--content-switcher-popover--selected`]: selected,
+      [`${prefix}--content-switcher-popover--disabled`]: disabled,
+    }
+  );
+
   const commonProps = {
     onClick: handleClick,
     onKeyDown: handleKeyDown,
@@ -59,20 +68,26 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
   };
 
   return isIconOnly ? (
-    <IconButton
-      label={text}
-      type="button"
-      ref={tabRef}
-      role="tab"
-      tabIndex={selected || isHovered ? 0 : -1}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      aria-selected={selected}
-      aria-label={isIconOnly ? text : null}
-      {...other}
-      {...commonProps}>
-      {children}
-    </IconButton>
+    <div className={iconButtonClasses}>
+      <IconButton
+        label={text}
+        type="button"
+        ref={tabRef}
+        role="tab"
+        tabIndex={selected || isHovered ? 0 : -1}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onFocus={handleMouseEnter}
+        onBlur={handleMouseLeave}
+        aria-selected={selected}
+        aria-label={isIconOnly ? text : null}
+        leaveDelayMs={0}
+        size={size}
+        {...other}
+        {...commonProps}>
+        {children}
+      </IconButton>
+    </div>
   ) : (
     <button
       type="button"
@@ -140,6 +155,11 @@ Switch.propTypes = {
    * Whether your Switch is selected. Reserved for usage in ContentSwitcher
    */
   selected: PropTypes.bool,
+
+  /**
+   * Passed in from `ContentSwitcher` to render icon-only variant
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Provide the contents of your Switch

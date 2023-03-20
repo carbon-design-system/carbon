@@ -166,6 +166,7 @@ export default class ContentSwitcher extends React.Component {
             onKeyDown: this.handleChildChange,
             selected: index === this.state.selectedIndex,
             ref: this.handleItemRef(index),
+            size,
           })
         )}
       </div>
