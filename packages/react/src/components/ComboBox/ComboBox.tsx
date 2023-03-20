@@ -550,6 +550,7 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                   {...readOnlyEventHandlers}
                   readOnly={readOnly}
                   ref={mergeRefs(textInput, ref)}
+                  aria-describedby={helperText && !invalid && !warn && !isFluid ? comboBoxHelperId : undefined}
                 />
                 {invalid && (
                   <WarningFilled

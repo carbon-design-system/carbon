@@ -399,7 +399,7 @@ const Dropdown = React.forwardRef(
             disabled={disabled}
             aria-disabled={readOnly ? true : undefined} // aria-disabled to remain focusable
             aria-describedby={
-              !inline && !invalid && !warn && helper ? helperId : null
+              (!inline && !invalid && !warn && helper) ? helperId : undefined
             }
             title={
               selectedItem && itemToString !== undefined
