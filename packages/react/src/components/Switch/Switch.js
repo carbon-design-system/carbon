@@ -16,6 +16,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     className,
     disabled,
     index,
+    isIconOnly,
     name,
     onClick,
     onKeyDown,
@@ -54,10 +55,11 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
       role="tab"
       tabIndex={selected ? '0' : '-1'}
       aria-selected={selected}
+      aria-label={isIconOnly ? text : null}
       {...other}
       {...commonProps}>
       <span className={`${prefix}--content-switcher__label`} title={text}>
-        {text !== undefined ? text : children}
+        {text && !isIconOnly ? text : children}
       </span>
     </button>
   );
@@ -86,6 +88,11 @@ Switch.propTypes = {
    * Reserved for usage in ContentSwitcher
    */
   index: PropTypes.number,
+
+  /**
+   * Passed in from `ContentSwitcher` to render icon-only variant
+   */
+  isIconOnly: PropTypes.bool,
 
   /**
    * Provide the name of your Switch that is used for event handlers

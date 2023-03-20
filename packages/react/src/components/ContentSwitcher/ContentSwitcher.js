@@ -35,6 +35,11 @@ export default class ContentSwitcher extends React.Component {
     className: PropTypes.string,
 
     /**
+     * Specify is the ContentSwitcher only renders icons
+     */
+    isIconOnly: PropTypes.bool,
+
+    /**
      * `true` to use the light variant.
      */
     light: deprecate(
@@ -134,6 +139,7 @@ export default class ContentSwitcher extends React.Component {
     const {
       children,
       className,
+      isIconOnly,
       light,
       selectedIndex, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
@@ -144,6 +150,7 @@ export default class ContentSwitcher extends React.Component {
     const classes = classNames(`${prefix}--content-switcher`, className, {
       [`${prefix}--content-switcher--light`]: light,
       [`${prefix}--content-switcher--${size}`]: size,
+      [`${prefix}--content-switcher--icon-only`]: isIconOnly,
     });
 
     return (
@@ -151,6 +158,7 @@ export default class ContentSwitcher extends React.Component {
         {React.Children.map(children, (child, index) =>
           React.cloneElement(child, {
             index,
+            isIconOnly,
             onClick: composeEventHandlers([
               this.handleChildChange,
               child.props.onClick,

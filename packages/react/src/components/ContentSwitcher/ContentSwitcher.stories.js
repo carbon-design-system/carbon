@@ -13,6 +13,7 @@ import Switch from '../Switch';
 
 import ContentSwitcher from './ContentSwitcher';
 import mdx from './ContentSwitcher.mdx';
+import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
 
 export default {
   title: 'Components/ContentSwitcher',
@@ -48,6 +49,22 @@ export const _WithLayer = () => (
       <Switch name="one" text="First section" />
       <Switch name="two" text="Second section" />
       <Switch name="three" text="Third section" />
+    </ContentSwitcher>
+  </WithLayer>
+);
+
+export const IconOnly = () => (
+  <WithLayer>
+    <ContentSwitcher onChange={() => {}} isIconOnly>
+      <Switch name="one" text="Table of Contents">
+        <TableOfContents />
+      </Switch>
+      <Switch name="two" text="Workspace">
+        <Workspace />
+      </Switch>
+      <Switch name="three" text="View Mode">
+        <ViewMode_2 />
+      </Switch>
     </ContentSwitcher>
   </WithLayer>
 );
