@@ -105,7 +105,7 @@
   }
 
   .#{$prefix}--select--fluid .#{$prefix}--select-input__wrapper {
-    flex-direction: column;
+    display: block;
   }
 
   .#{$prefix}--select--fluid
