@@ -6,8 +6,9 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
+import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
 
 const Switch = React.forwardRef(function Switch(props, tabRef) {
@@ -25,6 +26,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     ...other
   } = props;
   const prefix = usePrefix();
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -35,6 +37,14 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     const key = event.key || event.which;
 
     onKeyDown({ index, name, text, key });
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
   };
 
   const classes = classNames(className, `${prefix}--content-switcher-btn`, {
@@ -48,7 +58,22 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     disabled,
   };
 
-  return (
+  return isIconOnly ? (
+    <IconButton
+      label={text}
+      type="button"
+      ref={tabRef}
+      role="tab"
+      tabIndex={selected || isHovered ? 0 : -1}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      aria-selected={selected}
+      aria-label={isIconOnly ? text : null}
+      {...other}
+      {...commonProps}>
+      {children}
+    </IconButton>
+  ) : (
     <button
       type="button"
       ref={tabRef}
@@ -59,7 +84,7 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
       {...other}
       {...commonProps}>
       <span className={`${prefix}--content-switcher__label`} title={text}>
-        {text && !isIconOnly ? text : children}
+        {text !== undefined ? text : children}
       </span>
     </button>
   );
