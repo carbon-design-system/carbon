@@ -22,10 +22,10 @@ test.describe('ContentSwitcher', () => {
         });
       });
 
-      test('with layer @vrt', async ({ page }) => {
+      test('icon only @vrt', async ({ page }) => {
         await snapshotStory(page, {
           component: 'ContentSwitcher',
-          id: 'components-contentswitcher--with-layer',
+          id: 'components-contentswitcher--icon-only',
           theme,
         });
       });
@@ -36,6 +36,15 @@ test.describe('ContentSwitcher', () => {
     await visitStory(page, {
       component: 'ContentSwitcher',
       id: 'components-contentswitcher--default',
+      globals: {
+        theme: 'white',
+      },
+    });
+    await expect(page).toHaveNoACViolations('ContentSwitcher');
+
+    await visitStory(page, {
+      component: 'ContentSwitcher',
+      id: 'components-contentswitcher--icon-only',
       globals: {
         theme: 'white',
       },
