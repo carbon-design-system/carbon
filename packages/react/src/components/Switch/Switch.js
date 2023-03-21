@@ -95,7 +95,6 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
       role="tab"
       tabIndex={selected ? '0' : '-1'}
       aria-selected={selected}
-      aria-label={isIconOnly ? text : null}
       {...other}
       {...commonProps}>
       <span className={`${prefix}--content-switcher__label`} title={text}>
