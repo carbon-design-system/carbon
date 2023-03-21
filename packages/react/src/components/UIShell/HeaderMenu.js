@@ -12,6 +12,7 @@ import PropTypes from 'prop-types';
 import { keys, matches } from '../../internal/keyboard';
 import { AriaLabelPropType } from '../../prop-types/AriaPropTypes';
 import { PrefixContext } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 /**
  * `HeaderMenu` is used to render submenu's in the `Header`. Most often children
@@ -37,9 +38,19 @@ class HeaderMenu extends React.Component {
     focusRef: PropTypes.func,
 
     /**
-     * Applies selected styles to the item if a user sets this to true and aria-current !== 'page'.
+     * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
      */
-    isCurrentPage: PropTypes.bool,
+    isActive: PropTypes.bool,
+
+    /**
+     * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+     * @deprecated Please use `isActive` instead. This will be removed in the next major release.
+     */
+    isCurrentPage: deprecate(
+      PropTypes.bool,
+      'The `isCurrentPage` prop for `HeaderMenuItem` has ' +
+        'been deprecated. Please use `isActive` instead. This will be removed in the next major release.'
+    ),
 
     /**
      * Provide a label for the link text
@@ -180,6 +191,7 @@ class HeaderMenu extends React.Component {
       focusRef, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
+    let { isActive } = this.props;
 
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -189,12 +201,15 @@ class HeaderMenu extends React.Component {
       [`${prefix}--header__submenu`]: true,
       [customClassName]: !!customClassName,
     });
+    if (isCurrentPage) {
+      isActive = isCurrentPage;
+    }
     const linkClassName = cx({
       [`${prefix}--header__menu-item`]: true,
       [`${prefix}--header__menu-title`]: true,
-      // We set the current class only if `isCurrentPage` is passed in and we do
+      // We set the current class only if `isActive` is passed in and we do
       // not have an `aria-current="page"` set for the breadcrumb item
-      [`${prefix}--header__menu-item--current`]: isCurrentPage,
+      [`${prefix}--header__menu-item--current`]: isActive,
     });
 
     // Notes on eslint comments and based on the examples in:
