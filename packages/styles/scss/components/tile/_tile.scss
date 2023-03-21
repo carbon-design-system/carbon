@@ -102,6 +102,18 @@
     padding: $spacing-05;
     background-color: $layer;
     color: $text-disabled;
+    cursor: not-allowed;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-disabled;
+    }
+  }
+
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled svg {
+    fill: $icon-disabled;
   }
 
   .#{$prefix}--tile--selectable {
@@ -307,6 +319,13 @@
     background-color: $layer;
     color: $text-disabled;
     cursor: not-allowed;
+
+    @if (
+      enabled('enable-experimental-tile-contrast') or
+        $local-enable-experimental-tile-contrast
+    ) {
+      border: 1px solid $border-disabled;
+    }
   }
 
   // V11: Possibly deprecate
@@ -315,7 +334,7 @@
   }
 
   .#{$prefix}--tile--disabled.#{$prefix}--tile--is-selected {
-    border-color: button.$button-disabled;
+    border-color: $border-disabled;
   }
 
   .#{$prefix}--tile--disabled .#{$prefix}--tile__checkmark svg {

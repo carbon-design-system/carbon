@@ -89,14 +89,24 @@ export const DefaultWithLayer = () => {
   );
 };
 
-export const Clickable = () => {
+export const Clickable = (args) => {
   return (
     <ClickableTile
       id="clickable-tile-1"
-      href="https://www.carbondesignsystem.com/">
+      href="https://www.carbondesignsystem.com/"
+      {...args}>
       Clickable Tile
     </ClickableTile>
   );
+};
+
+Clickable.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
 
 export const ClickableWithLayer = () => {
@@ -125,12 +135,25 @@ export const ClickableWithLayer = () => {
   );
 };
 
-export const Selectable = () => {
+export const Selectable = (args) => {
   return (
-    <SelectableTile id="selectable-tile-1" name="tiles" value="selectable">
+    <SelectableTile
+      id="selectable-tile-1"
+      name="tiles"
+      value="selectable"
+      {...args}>
       Selectable
     </SelectableTile>
   );
+};
+
+Selectable.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
 
 export const MultiSelect = () => {
@@ -149,29 +172,41 @@ export const MultiSelect = () => {
   );
 };
 
-export const Radio = () => {
+export const Radio = (args) => {
   return (
     <TileGroup
       defaultSelected="default-selected"
       legend="Radio Tile Group"
-      name="radio tile group">
+      name="radio tile group"
+      {...args}>
       <RadioTile
         id="radio-tile-1"
         value="standard"
-        style={{ marginBottom: '.5rem' }}>
+        style={{ marginBottom: '.5rem' }}
+        {...args}>
         Option 1
       </RadioTile>
       <RadioTile
         id="radio-tile-2"
         value="default-selected"
-        style={{ marginBottom: '.5rem' }}>
+        style={{ marginBottom: '.5rem' }}
+        {...args}>
         Option 2
       </RadioTile>
-      <RadioTile id="radio-tile-3" value="selected">
+      <RadioTile id="radio-tile-3" value="selected" {...args}>
         Option 3
       </RadioTile>
     </TileGroup>
   );
+};
+
+Radio.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
 
 export const RadioWithLayer = () => {

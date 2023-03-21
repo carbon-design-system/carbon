@@ -50,16 +50,26 @@ export default {
 
 const experimentalClassname = 'experimental-tile-contrast';
 
-export const Clickable = () => {
+export const Clickable = (args) => {
   return (
     <div className={experimentalClassname}>
       <ClickableTile
         id="clickable-tile-1"
-        href="https://www.carbondesignsystem.com/">
+        href="https://www.carbondesignsystem.com/"
+        {...args}>
         Clickable Tile
       </ClickableTile>
     </div>
   );
+};
+
+Clickable.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
 
 export const ClickableWithLayer = () => {
@@ -88,14 +98,27 @@ export const ClickableWithLayer = () => {
   );
 };
 
-export const Selectable = () => {
+export const Selectable = (args) => {
   return (
     <div className={experimentalClassname}>
-      <SelectableTile id="selectable-tile-1" name="tiles" value="selectable">
+      <SelectableTile
+        id="selectable-tile-1"
+        name="tiles"
+        value="selectable"
+        {...args}>
         Selectable
       </SelectableTile>
     </div>
   );
+};
+
+Selectable.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
 
 export const MultiSelect = () => {
@@ -117,7 +140,7 @@ export const MultiSelect = () => {
   );
 };
 
-export const Radio = () => {
+export const Radio = (args) => {
   return (
     <div className={experimentalClassname}>
       <TileGroup
@@ -127,21 +150,32 @@ export const Radio = () => {
         <RadioTile
           id="radio-tile-1"
           value="standard"
-          style={{ marginBottom: '.5rem' }}>
+          style={{ marginBottom: '.5rem' }}
+          {...args}>
           Option 1
         </RadioTile>
         <RadioTile
           id="radio-tile-2"
           value="default-selected"
-          style={{ marginBottom: '.5rem' }}>
+          style={{ marginBottom: '.5rem' }}
+          {...args}>
           Option 2
         </RadioTile>
-        <RadioTile id="radio-tile-3" value="selected">
+        <RadioTile id="radio-tile-3" value="selected" {...args}>
           Option 3
         </RadioTile>
       </TileGroup>
     </div>
   );
+};
+
+Radio.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
 
 export const RadioWithLayer = () => {
