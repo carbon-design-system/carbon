@@ -23,7 +23,7 @@ export default {
     kind: 'error',
     lowContrast: false,
     hideCloseButton: false,
-    ariaLabel: 'closes notification',
+    ['aria-label']: 'closes notification',
     statusIconDescription: 'notification',
     onClose: action('onClose'),
     onCloseButtonClick: action('onCloseButtonClick'),
@@ -43,6 +43,11 @@ export const Default = () => (
 export const Playground = (args) => <ActionableNotification {...args} />;
 
 Playground.argTypes = {
+  ['aria-label']: {
+    table: {
+      disable: true,
+    },
+  },
   ariaLabel: {
     table: {
       disable: true,

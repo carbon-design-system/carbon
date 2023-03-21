@@ -1077,6 +1077,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "davesteinberg",
+      "name": "Dave Steinberg",
+      "avatar_url": "https://avatars.githubusercontent.com/u/3935584?v=4",
+      "profile": "https://github.com/davesteinberg",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
