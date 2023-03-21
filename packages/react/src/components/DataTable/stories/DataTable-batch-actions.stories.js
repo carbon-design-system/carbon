@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { action } from '@storybook/addon-actions';
-import { TrashCan, Save, Download } from '@carbon/icons-react';
+import { TrashCan, Save, Download, Add } from '@carbon/icons-react';
 
 import Button from '../../Button';
 import DataTable, {
@@ -89,6 +89,18 @@ export const Default = () => (
                 Delete
               </TableBatchAction>
               <TableBatchAction
+                hasIconOnly
+                iconDescription="Add"
+                tooltipPosition="bottom"
+                tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
+                renderIcon={Add}
+                onClick={batchActionClick(selectedRows)}>
+                Delete
+              </TableBatchAction>
+              <TableBatchAction
+                hasIconOnly
+                iconDescription="Save"
+                tooltipPosition="bottom"
                 tabIndex={batchActionProps.shouldShowBatchActions ? 0 : -1}
                 renderIcon={Save}
                 onClick={batchActionClick(selectedRows)}>

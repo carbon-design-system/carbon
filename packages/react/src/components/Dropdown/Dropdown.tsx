@@ -61,7 +61,14 @@ export interface OnChangeData<ItemType> {
 export interface DropdownProps<ItemType>
   extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
   /**
+   * Specify a label to be read by screen readers on the container node
    * 'aria-label' of the ListBox component.
+   */
+  ['aria-label']?: string;
+
+  /**
+   * @deprecated please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
    */
   ariaLabel?: string;
 
@@ -206,7 +213,8 @@ const Dropdown = React.forwardRef(
       direction,
       items,
       label,
-      ariaLabel,
+      ['aria-label']: ariaLabel,
+      ariaLabel: deprecatedAriaLabel,
       itemToString = defaultItemToString,
       itemToElement,
       renderSelectedItem,
@@ -358,7 +366,7 @@ const Dropdown = React.forwardRef(
         <ListBox
           onFocus={handleFocus}
           onBlur={handleFocus}
-          aria-label={ariaLabel}
+          aria-label={deprecatedAriaLabel || ariaLabel}
           size={size}
           className={className}
           invalid={invalid}
@@ -466,8 +474,18 @@ Dropdown.displayName = 'Dropdown';
 Dropdown.propTypes = {
   /**
    * 'aria-label' of the ListBox component.
+   * Specify a label to be read by screen readers on the container node
    */
-  ariaLabel: PropTypes.string,
+  ['aria-label']: PropTypes.string,
+
+  /**
+   * Deprecated, please use `aria-label` instead.
+   * Specify a label to be read by screen readers on the container note.
+   */
+  ariaLabel: deprecate(
+    PropTypes.string,
+    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+  ),
 
   /**
    * Provide a custom className to be applied on the bx--dropdown node

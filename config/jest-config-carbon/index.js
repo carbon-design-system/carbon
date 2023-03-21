@@ -20,7 +20,6 @@ module.exports = {
   reporters: ['default'],
   setupFiles: [require.resolve('./setup/setup.js')],
   setupFilesAfterEnv: [require.resolve('./setup/setupAfterEnv.js')],
-  snapshotSerializers: ['enzyme-to-json/serializer'],
   testMatch: [
     '<rootDir>/**/__tests__/**/*.js?(x)',
     '<rootDir>/**/*.(spec|test).js?(x)',
