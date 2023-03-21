@@ -181,6 +181,7 @@ class HeaderMenu extends React.Component {
   render() {
     const prefix = this.context;
     const {
+      isActive,
       isCurrentPage,
       'aria-label': ariaLabel,
       'aria-labelledby': ariaLabelledBy,
@@ -191,7 +192,6 @@ class HeaderMenu extends React.Component {
       focusRef, // eslint-disable-line no-unused-vars
       ...rest
     } = this.props;
-    let { isActive } = this.props;
 
     const accessibilityLabel = {
       'aria-label': ariaLabel,
@@ -201,15 +201,13 @@ class HeaderMenu extends React.Component {
       [`${prefix}--header__submenu`]: true,
       [customClassName]: !!customClassName,
     });
-    if (isCurrentPage) {
-      isActive = isCurrentPage;
-    }
+    let isActivePage = isActive ? isActive : isCurrentPage;
     const linkClassName = cx({
       [`${prefix}--header__menu-item`]: true,
       [`${prefix}--header__menu-title`]: true,
       // We set the current class only if `isActive` is passed in and we do
       // not have an `aria-current="page"` set for the breadcrumb item
-      [`${prefix}--header__menu-item--current`]: isActive,
+      [`${prefix}--header__menu-item--current`]: isActivePage,
     });
 
     // Notes on eslint comments and based on the examples in:
