@@ -10,18 +10,26 @@ import PropTypes from 'prop-types';
 import React, { useRef } from 'react';
 import TableCell from './TableCell';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
+
+interface TableExpandedRowProps extends ReactAttr<HTMLTableRowElement> {
+  /**
+   * The width of the expanded row's internal cell
+   */
+  colSpan: number;
+}
 
 const TableExpandedRow = ({
   className: customClassName,
   children,
   colSpan,
   ...rest
-}) => {
-  const rowRef = useRef(null);
+}: TableExpandedRowProps) => {
+  const rowRef = useRef<HTMLTableRowElement>(null);
   const prefix = usePrefix();
   const className = cx(`${prefix}--expandable-row`, customClassName);
 
-  const toggleParentHoverClass = (eventType) => {
+  const toggleParentHoverClass = (eventType: 'enter' | 'leave') => {
     if (rowRef && rowRef.current && rowRef.current.previousElementSibling) {
       const parentNode = rowRef.current.previousElementSibling;
       if (eventType === 'enter') {
