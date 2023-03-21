@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -36,7 +36,7 @@ const knobs = {
     dateFormat: textNullable('The date format (date-format)', 'm/d/Y'),
     disabled: boolean('Disabled (disabled in <bx-date-picker-input>)', false),
     enabledRange: textNullable(
-      'Minimum/maximum dates in ISO8601 date format, separated by `/` (enabled-range)',
+      'Minimum/maximum dates in expected date-format, separated by `/` (ie. 3-02-2023/3-21-2023 if date-format is m/d/Y) (enabled-range)',
       ''
     ),
     open: boolean('Open (open)', false),
