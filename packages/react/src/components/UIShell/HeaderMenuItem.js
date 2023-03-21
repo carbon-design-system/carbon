@@ -10,6 +10,7 @@ import React from 'react';
 import cx from 'classnames';
 import Link, { LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
   {
@@ -76,9 +77,13 @@ HeaderMenuItem.propTypes = {
 
   /**
    * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
-   * @deprecated Please use `isActive`. This will be removed soon in v12.
+   * @deprecated Please use `isActive` instead. This will be removed in the next major release.
    */
-  isCurrentPage: PropTypes.bool,
+  isCurrentPage: deprecate(
+    PropTypes.bool,
+    'The `isCurrentPage` prop for `HeaderMenuItem` has ' +
+      'been deprecated. Please use `isActive` instead. This will be removed in the next major release.'
+  ),
 
   /**
    * Optionally supply a role for the underlying `<li>` node. Useful for resetting
