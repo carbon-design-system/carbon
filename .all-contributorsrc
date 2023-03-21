@@ -1085,6 +1085,16 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "pratikkarad",
+      "name": "Pratik Karad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32093370?v=4",
+      "profile": "https://github.com/pratikkarad",
+      "contributions": [
+        "code",
+        "a11y"
+      ]
     }
   ],
   "commitConvention": "none"
