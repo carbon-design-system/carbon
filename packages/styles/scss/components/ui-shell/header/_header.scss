@@ -351,6 +351,17 @@
     color: $text-primary;
   }
 
+  .#{$prefix}--header__menu-title[aria-expanded='true']
+    + .#{$prefix}--header__menu
+    .#{$prefix}--header__menu-item.#{$prefix}--header__menu-item--current {
+    // used for both desktop and mobile
+    background-color: $layer-selected;
+
+    &:hover {
+      background-color: $layer-selected-hover;
+    }
+  }
+
   .#{$prefix}--header__menu .#{$prefix}--header__menu-item {
     height: mini-units(6);
   }
