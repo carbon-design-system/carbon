@@ -74,6 +74,15 @@
 
 :host(#{$prefix}-modal[open]) {
   @extend .#{$prefix}--modal, .is-visible;
+
+  opacity: 1;
+  transition: visibility 0ms linear,
+    opacity $duration--moderate-02 motion(entrance, expressive);
+  visibility: inherit;
+
+  @media screen and (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
 }
 
 :host(#{$prefix}-modal-header) {
