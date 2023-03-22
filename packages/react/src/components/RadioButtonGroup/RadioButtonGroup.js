@@ -116,17 +116,17 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
         )}
         {getRadioButtons()}
       </fieldset>
-      <div className={`${prefix}--checkbox__validation-msg`}>
+      <div className={`${prefix}--radio-button__validation-msg`}>
         {!readOnly && invalid && (
           <>
-            <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
+            <WarningFilled className={`${prefix}--radio-button-icon`} />
             <div className={`${prefix}--form-requirement`}>{invalidText}</div>
           </>
         )}
         {showWarning && (
           <>
             <WarningAltFilled
-              className={`${prefix}--checkbox__invalid-icon ${prefix}--checkbox__invalid-icon--warning`}
+              className={`${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`}
             />
             <div className={`${prefix}--form-requirement`}>{warnText}</div>
           </>

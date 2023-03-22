@@ -161,41 +161,41 @@ $radio-border-width: 1px !default;
     border-color: $support-error;
   }
 
-  .#{$prefix}--checkbox__validation-msg {
+  .#{$prefix}--radio-button__validation-msg {
     display: none;
     align-items: flex-end;
     margin-top: $spacing-03;
   }
 
-  .#{$prefix}--checkbox__invalid-icon {
+  .#{$prefix}--radio-button__invalid-icon {
     margin: 0 rem(1px) 0 rem(3px);
     fill: $support-error;
   }
 
-  .#{$prefix}--checkbox__invalid-icon--warning {
+  .#{$prefix}--radio-button__invalid-icon--warning {
     fill: $support-warning;
   }
 
-  .#{$prefix}--checkbox__invalid-icon--warning path:first-of-type {
+  .#{$prefix}--radio-button__invalid-icon--warning path:first-of-type {
     fill: #000000;
   }
 
-  .#{$prefix}--checkbox__validation-msg .#{$prefix}--form__helper-text {
+  .#{$prefix}--radio-button__validation-msg .#{$prefix}--form__helper-text {
     margin-top: 0;
   }
 
   .#{$prefix}--radio-button-group--invalid
-    + .#{$prefix}--checkbox__validation-msg,
+    + .#{$prefix}--radio-button__validation-msg,
   .#{$prefix}--radio-button-group--warning
-    + .#{$prefix}--checkbox__validation-msg {
+    + .#{$prefix}--radio-button__validation-msg {
     display: flex;
   }
 
   .#{$prefix}--radio-button-group--invalid
-    + .#{$prefix}--checkbox__validation-msg
+    + .#{$prefix}--radio-button__validation-msg
     .#{$prefix}--form-requirement,
   .#{$prefix}--radio-button-group--warning
-    + .#{$prefix}--checkbox__validation-msg
+    + .#{$prefix}--radio-button__validation-msg
     .#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
@@ -205,7 +205,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button-group--invalid
-    + .#{$prefix}--checkbox__validation-msg
+    + .#{$prefix}--radio-button__validation-msg
     .#{$prefix}--form-requirement {
     color: $text-error;
   }
