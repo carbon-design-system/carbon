@@ -86,7 +86,7 @@ InlineCheckbox.propTypes = {
    */
   ariaLabel: deprecate(
     PropTypes.string.isRequired,
-    'This prop syntax has been deprecated. Please use the new `aria-label`.'
+     'The `ariaLabel` prop has been deprecated in favor of `aria-label`. This prop will be removed in the next major release.'
   ),
 
   /**
