@@ -1045,9 +1045,10 @@
       "login": "jsehull",
       "name": "Jesse Hull",
       "avatar_url": "https://avatars.githubusercontent.com/u/9935383?v=4",
-      "profile": "https://jsehull.com/",
+      "profile": "https://github.com/jsehull",
       "contributions": [
-        "code"
+        "code",
+        "a11y"
       ]
     },
     {
@@ -1084,6 +1085,16 @@
       "profile": "https://github.com/davesteinberg",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "pratikkarad",
+      "name": "Pratik Karad",
+      "avatar_url": "https://avatars.githubusercontent.com/u/32093370?v=4",
+      "profile": "https://github.com/pratikkarad",
+      "contributions": [
+        "code",
+        "a11y"
       ]
     }
   ],
