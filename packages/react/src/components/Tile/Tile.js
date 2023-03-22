@@ -334,22 +334,25 @@ SelectableTile.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export function ExpandableTile({
-  tabIndex,
-  className,
-  children,
-  expanded,
-  tileMaxHeight, // eslint-disable-line
-  tilePadding, // eslint-disable-line
-  onClick,
-  onKeyUp,
-  tileCollapsedIconText,
-  tileExpandedIconText,
-  tileCollapsedLabel,
-  tileExpandedLabel,
-  light,
-  ...rest
-}) {
+export const ExpandableTile = React.forwardRef(function ExpandableTile(
+  {
+    tabIndex,
+    className,
+    children,
+    expanded,
+    tileMaxHeight, // eslint-disable-line
+    tilePadding, // eslint-disable-line
+    onClick,
+    onKeyUp,
+    tileCollapsedIconText,
+    tileExpandedIconText,
+    tileCollapsedLabel,
+    tileExpandedLabel,
+    light,
+    ...rest
+  },
+  ref
+) {
   const [isTileMaxHeight, setIsTileMaxHeight] = useState(tileMaxHeight);
   const [isTilePadding, setIsTilePadding] = useState(tilePadding);
   const [prevExpanded, setPrevExpanded] = useState(expanded);
@@ -360,7 +363,7 @@ export function ExpandableTile({
   const aboveTheFold = useRef(null);
   const belowTheFold = useRef(null);
   const tileContent = useRef(null);
-  const tile = useRef(null);
+  const tile = useRef(ref);
   const prefix = usePrefix();
 
   if (expanded !== prevExpanded) {
@@ -523,7 +526,7 @@ export function ExpandableTile({
       </div>
     </button>
   );
-}
+});
 
 ExpandableTile.propTypes = {
   /**
