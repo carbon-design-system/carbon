@@ -96,6 +96,12 @@
     resize: none;
   }
 
+  // accounts for 2px of border when invalid
+  .#{$prefix}--text-area--fluid .#{$prefix}--text-area--invalid {
+    padding: 0 rem(14px) rem(13px);
+    margin-top: rem(30px);
+  }
+
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper[data-invalid]
     .#{$prefix}--text-area__divider,
@@ -156,11 +162,10 @@
   }
 
   //invalid outline
+  // needs to be a border for some weirdness when in a modal
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper[data-invalid]:not(:focus) {
-    @include focus-outline('invalid');
-
-    outline-offset: 0;
+    border: 2px solid $support-error;
   }
 
   // focus
@@ -168,9 +173,9 @@
     .#{$prefix}--text-area__wrapper[data-invalid]:focus-within,
   .#{$prefix}--text-area--fluid .#{$prefix}--text-area__wrapper:focus-within {
     @include focus-outline('outline');
-
-    outline-offset: 0;
   }
+
+  // end weirdness
 
   .#{$prefix}--text-area--fluid
     .#{$prefix}--text-area__wrapper[data-invalid]

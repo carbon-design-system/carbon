@@ -10,7 +10,20 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-const TextAreaSkeleton = ({ hideLabel, className, ...rest }) => {
+export interface TextAreaSkeletonProps
+  extends React.InputHTMLAttributes<HTMLDivElement> {
+  /**
+   * Specify an optional className to add to the form item wrapper.
+   */
+  className?: string;
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel?: boolean;
+}
+const TextAreaSkeleton = (props: TextAreaSkeletonProps) => {
+  const { className, hideLabel, ...rest } = props;
   const prefix = usePrefix();
   return (
     <div className={cx(`${prefix}--form-item`, className)} {...rest}>
