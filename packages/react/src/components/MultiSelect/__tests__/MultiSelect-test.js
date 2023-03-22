@@ -170,7 +170,7 @@ describe('MultiSelect', () => {
     ).toBeFalsy();
   });
 
-  it('should toggle selection with enter', () => {
+  it('should not toggle selection with enter', () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
@@ -190,10 +190,6 @@ describe('MultiSelect', () => {
     Simulate.keyDown(container.querySelector('[role="listbox"]'), {
       key: 'ArrowDown',
     });
-    pressEnter();
-
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
-
     pressEnter();
 
     expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(

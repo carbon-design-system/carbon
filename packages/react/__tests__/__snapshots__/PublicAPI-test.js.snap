@@ -512,6 +512,9 @@ Map {
       "clicked": Object {
         "type": "bool",
       },
+      "disabled": Object {
+        "type": "bool",
+      },
       "href": Object {
         "type": "string",
       },
@@ -3795,9 +3798,10 @@ Map {
       "element": Object {
         "type": "elementType",
       },
-      "isCurrentPage": Object {
+      "isActive": Object {
         "type": "bool",
       },
+      "isCurrentPage": [Function],
       "isSideNavExpanded": Object {
         "type": "bool",
       },
@@ -6854,7 +6858,9 @@ Map {
       "name": Object {
         "type": "string",
       },
-      "onChange": [Function],
+      "onChange": Object {
+        "type": "func",
+      },
       "title": Object {
         "type": "string",
       },
