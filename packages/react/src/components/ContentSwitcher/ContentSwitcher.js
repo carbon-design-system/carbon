@@ -139,13 +139,16 @@ export default class ContentSwitcher extends React.Component {
     const {
       children,
       className,
-      isIconOnly,
       light,
       selectedIndex, // eslint-disable-line no-unused-vars
       selectionMode, // eslint-disable-line no-unused-vars
       size,
       ...other
     } = this.props;
+
+    const isIconOnly = React.Children.map(children, (child) => {
+      return child.type.displayName === 'IconSwitch';
+    }).every((val) => val === true);
 
     const classes = classNames(`${prefix}--content-switcher`, className, {
       [`${prefix}--content-switcher--light`]: light,
@@ -158,7 +161,6 @@ export default class ContentSwitcher extends React.Component {
         {React.Children.map(children, (child, index) =>
           React.cloneElement(child, {
             index,
-            isIconOnly,
             onClick: composeEventHandlers([
               this.handleChildChange,
               child.props.onClick,

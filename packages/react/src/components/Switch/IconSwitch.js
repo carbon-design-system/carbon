@@ -6,24 +6,28 @@
  */
 
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
+import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
 
-const Switch = React.forwardRef(function Switch(props, tabRef) {
+const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
   const {
     children,
     className,
     disabled,
     index,
+    isIconOnly,
     name,
     onClick,
     onKeyDown,
     selected,
+    size,
     text,
     ...other
   } = props;
   const prefix = usePrefix();
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -36,9 +40,25 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
     onKeyDown({ index, name, text, key });
   };
 
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
+
   const classes = classNames(className, `${prefix}--content-switcher-btn`, {
     [`${prefix}--content-switcher--selected`]: selected,
   });
+
+  const iconButtonClasses = classNames(
+    `${prefix}--content-switcher-popover__wrapper`,
+    {
+      [`${prefix}--content-switcher-popover--selected`]: selected,
+      [`${prefix}--content-switcher-popover--disabled`]: disabled,
+    }
+  );
 
   const commonProps = {
     onClick: handleClick,
@@ -48,24 +68,32 @@ const Switch = React.forwardRef(function Switch(props, tabRef) {
   };
 
   return (
-    <button
-      type="button"
-      ref={tabRef}
-      role="tab"
-      tabIndex={selected ? '0' : '-1'}
-      aria-selected={selected}
-      {...other}
-      {...commonProps}>
-      <span className={`${prefix}--content-switcher__label`} title={text}>
-        {text !== undefined ? text : children}
-      </span>
-    </button>
+    <div className={iconButtonClasses}>
+      <IconButton
+        label={text}
+        type="button"
+        ref={tabRef}
+        role="tab"
+        tabIndex={selected || isHovered ? 0 : -1}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onFocus={handleMouseEnter}
+        onBlur={handleMouseLeave}
+        aria-selected={selected}
+        aria-label={isIconOnly ? text : null}
+        leaveDelayMs={0}
+        size={size}
+        {...other}
+        {...commonProps}>
+        {children}
+      </IconButton>
+    </div>
   );
 });
 
-Switch.displayName = 'Switch';
+IconSwitch.displayName = 'IconSwitch';
 
-Switch.propTypes = {
+IconSwitch.propTypes = {
   /**
    * Provide child elements to be rendered inside of the Switch
    */
@@ -86,6 +114,11 @@ Switch.propTypes = {
    * Reserved for usage in ContentSwitcher
    */
   index: PropTypes.number,
+
+  /**
+   * Passed in from `ContentSwitcher` to render icon-only variant
+   */
+  isIconOnly: PropTypes.bool,
 
   /**
    * Provide the name of your Switch that is used for event handlers
@@ -110,15 +143,20 @@ Switch.propTypes = {
   selected: PropTypes.bool,
 
   /**
+   * Passed in from `ContentSwitcher` to render icon-only variant
+   */
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+  /**
    * Provide the contents of your Switch
    */
   text: PropTypes.string,
 };
 
-Switch.defaultProps = {
+IconSwitch.defaultProps = {
   selected: false,
   onClick: () => {},
   onKeyDown: () => {},
 };
 
-export default Switch;
+export default IconSwitch;

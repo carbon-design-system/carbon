@@ -8,10 +8,8 @@
 import React from 'react';
 
 import { WithLayer } from '../../../.storybook/templates/WithLayer';
-
-import Switch from '../Switch';
-
 import ContentSwitcher from './ContentSwitcher';
+import { Switch, IconSwitch } from '../Switch';
 import mdx from './ContentSwitcher.mdx';
 import { TableOfContents, Workspace, ViewMode_2 } from '@carbon/icons-react';
 
@@ -53,18 +51,18 @@ export const _WithLayer = () => (
   </WithLayer>
 );
 
-export const IconOnly = () => (
+export const IconOnly = (args) => (
   <WithLayer>
-    <ContentSwitcher onChange={() => {}} isIconOnly>
-      <Switch name="one" text="Table of Contents">
+    <ContentSwitcher {...args}>
+      <IconSwitch name="one" text="Table of Contents">
         <TableOfContents />
-      </Switch>
-      <Switch name="two" text="Workspace">
+      </IconSwitch>
+      <IconSwitch name="two" text="Workspace Test">
         <Workspace />
-      </Switch>
-      <Switch name="three" text="View Mode">
+      </IconSwitch>
+      <IconSwitch name="three" text="View Mode">
         <ViewMode_2 />
-      </Switch>
+      </IconSwitch>
     </ContentSwitcher>
   </WithLayer>
 );
