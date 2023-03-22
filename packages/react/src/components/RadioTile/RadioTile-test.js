@@ -49,7 +49,7 @@ describe('RadioTile', () => {
         <RadioTile value="standard" disabled data-testid="test-id" />
       );
 
-      expect(container.firstChild).toHaveAttribute('disabled');
+      expect(container.firstChild).toBeDisabled();
       expect(screen.getByTestId('test-id')).toHaveClass('cds--tile--disabled');
     });
 
