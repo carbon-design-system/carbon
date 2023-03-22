@@ -17,7 +17,7 @@ import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
 import { ReactAttr } from '../../types/common';
 
-const translationKeys: {[key: string]: string} = {
+const translationKeys: { [key: string]: string } = {
   buttonDescription: 'carbon.table.header.icon.description',
 };
 
@@ -51,13 +51,14 @@ const translateWithId = (
   return '';
 };
 
-const sortDirections: {[key: string]: 'none' | 'ascending' | 'descending'} = {
+const sortDirections: { [key: string]: 'none' | 'ascending' | 'descending' } = {
   [sortStates.NONE]: 'none',
   [sortStates.ASC]: 'ascending',
   [sortStates.DESC]: 'descending',
 };
 
-interface TableHeaderProps extends ReactAttr<HTMLTableCellElement & HTMLButtonElement> {
+interface TableHeaderProps
+  extends ReactAttr<HTMLTableCellElement & HTMLButtonElement> {
   /**
    * Pass in children that will be embedded in the table header label
    */
@@ -113,7 +114,10 @@ interface TableHeaderProps extends ReactAttr<HTMLTableCellElement & HTMLButtonEl
    * choice. Translation keys are available on the `translationKeys` field for
    * this component.
    */
-  translateWithId?: (key: string, { header, sortDirection, isSortHeader, sortStates }) => string;
+  translateWithId?: (
+    key: string,
+    { header, sortDirection, isSortHeader, sortStates }
+  ) => string;
 }
 
 const TableHeader = React.forwardRef(function TableHeader(
@@ -158,13 +162,16 @@ const TableHeader = React.forwardRef(function TableHeader(
     [`${prefix}--table-sort--descending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
-  const ariaSort = (!isSortHeader || !sortDirection) ? 'none' : sortDirections[sortDirection];
-  const sortDescription = t && t('carbon.table.header.icon.description', {
-    header: children,
-    sortDirection,
-    isSortHeader,
-    sortStates,
-  });
+  const ariaSort =
+    !isSortHeader || !sortDirection ? 'none' : sortDirections[sortDirection];
+  const sortDescription =
+    t &&
+    t('carbon.table.header.icon.description', {
+      header: children,
+      sortDirection,
+      isSortHeader,
+      sortStates,
+    });
 
   return (
     <th
