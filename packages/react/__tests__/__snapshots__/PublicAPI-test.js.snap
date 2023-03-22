@@ -4014,6 +4014,67 @@ Map {
       },
     },
   },
+  "IconSwitch" => Object {
+    "$$typeof": Symbol(react.forward_ref),
+    "defaultProps": Object {
+      "onClick": [Function],
+      "onKeyDown": [Function],
+      "selected": false,
+    },
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "disabled": Object {
+        "type": "bool",
+      },
+      "index": Object {
+        "type": "number",
+      },
+      "isIconOnly": Object {
+        "type": "bool",
+      },
+      "name": Object {
+        "args": Array [
+          Array [
+            Object {
+              "type": "string",
+            },
+            Object {
+              "type": "number",
+            },
+          ],
+        ],
+        "type": "oneOfType",
+      },
+      "onClick": Object {
+        "type": "func",
+      },
+      "onKeyDown": Object {
+        "type": "func",
+      },
+      "selected": Object {
+        "type": "bool",
+      },
+      "size": Object {
+        "args": Array [
+          Array [
+            "sm",
+            "md",
+            "lg",
+          ],
+        ],
+        "type": "oneOf",
+      },
+      "text": Object {
+        "type": "string",
+      },
+    },
+    "render": [Function],
+  },
   "IconTab" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "propTypes": Object {
@@ -7023,9 +7084,6 @@ Map {
       "index": Object {
         "type": "number",
       },
-      "isIconOnly": Object {
-        "type": "bool",
-      },
       "name": Object {
         "args": Array [
           Array [
@@ -7047,16 +7105,6 @@ Map {
       },
       "selected": Object {
         "type": "bool",
-      },
-      "size": Object {
-        "args": Array [
-          Array [
-            "sm",
-            "md",
-            "lg",
-          ],
-        ],
-        "type": "oneOf",
       },
       "text": Object {
         "type": "string",
