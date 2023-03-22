@@ -261,7 +261,7 @@ TableHeader.defaultProps = {
   translateWithId,
 };
 
-TableHeader.translationKeys = Object.values(translationKeys);
+(TableHeader as any).translationKeys = Object.values(translationKeys);
 
 TableHeader.displayName = 'TableHeader';
 
