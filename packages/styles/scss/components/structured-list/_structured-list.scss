@@ -93,12 +93,11 @@
     cursor: pointer;
   }
 
-  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected,
-  .#{$prefix}--structured-list-row:has(.#{$prefix}--structured-list-input:checked) {
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
     background-color: $background-selected;
   }
 
-  .#{$prefix}--structured-list-row:has(.#{$prefix}--structured-list-input:checked)
+  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
     .#{$prefix}--structured-list-td {
     color: $text-primary;
   }
