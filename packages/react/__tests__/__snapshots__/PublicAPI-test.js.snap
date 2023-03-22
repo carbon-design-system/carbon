@@ -3798,9 +3798,10 @@ Map {
       "element": Object {
         "type": "elementType",
       },
-      "isCurrentPage": Object {
+      "isActive": Object {
         "type": "bool",
       },
+      "isCurrentPage": [Function],
       "isSideNavExpanded": Object {
         "type": "bool",
       },
@@ -6857,7 +6858,9 @@ Map {
       "name": Object {
         "type": "string",
       },
-      "onChange": [Function],
+      "onChange": Object {
+        "type": "func",
+      },
       "title": Object {
         "type": "string",
       },
