@@ -10,8 +10,20 @@ import PropTypes from 'prop-types';
 import omit from 'lodash.omit';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
 
-const TableRow = (props) => {
+export interface TableRowProps extends ReactAttr<HTMLTableRowElement> {
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+  /**
+   * Specify if the row is selected
+   */
+  isSelected?: boolean;
+}
+
+const TableRow = (props: TableRowProps) => {
   const prefix = usePrefix();
   // Remove unnecessary props if provided to this component, these are
   // only useful in `TableExpandRow`
