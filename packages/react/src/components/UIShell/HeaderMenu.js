@@ -48,7 +48,7 @@ class HeaderMenu extends React.Component {
      */
     isCurrentPage: deprecate(
       PropTypes.bool,
-      'The `isCurrentPage` prop for `HeaderMenuItem` has ' +
+      'The `isCurrentPage` prop for `HeaderMenu` has ' +
         'been deprecated. Please use `isActive` instead. This will be removed in the next major release.'
     ),
 
