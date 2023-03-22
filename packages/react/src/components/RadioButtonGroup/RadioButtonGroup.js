@@ -119,7 +119,7 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
       <div className={`${prefix}--radio-button__validation-msg`}>
         {!readOnly && invalid && (
           <>
-            <WarningFilled className={`${prefix}--radio-button-icon`} />
+            <WarningFilled className={`${prefix}--radio-button__invalid-icon`} />
             <div className={`${prefix}--form-requirement`}>{invalidText}</div>
           </>
         )}
