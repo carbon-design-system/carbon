@@ -356,8 +356,6 @@ const Dropdown = React.forwardRef(
         }
       : {};
 
-    console.log(getMenuProps());
-
     return (
       <div className={wrapperClasses} {...other}>
         {titleText && (
