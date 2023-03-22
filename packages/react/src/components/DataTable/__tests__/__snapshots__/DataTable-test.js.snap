@@ -478,11 +478,12 @@ exports[`DataTable behaves as expected selection should render and match snapsho
         class="cds--toolbar-content"
       >
         <div
-          aria-labelledby="custom-id-search"
+          aria-label="Filter table"
           class="cds--search cds--search--lg cds--toolbar-search-container-persistent"
           role="search"
         >
           <div
+            aria-labelledby="custom-id"
             class="cds--search-magnifier"
           >
             <svg
@@ -880,11 +881,12 @@ exports[`DataTable renders as expected - Component API should render and match s
         class="cds--toolbar-content"
       >
         <div
-          aria-labelledby="custom-id-search"
+          aria-label="Filter table"
           class="cds--search cds--search--lg cds--toolbar-search-container-persistent"
           role="search"
         >
           <div
+            aria-labelledby="custom-id"
             class="cds--search-magnifier"
           >
             <svg

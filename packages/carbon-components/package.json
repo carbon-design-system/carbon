@@ -34,14 +34,15 @@
   },
   "scripts": {
     "build": "node tasks/build-styles.js",
-    "postinstall": "carbon-telemetry collect --install"
+    "postinstall": "carbon-telemetry collect --install && node scripts/postinstall.js"
   },
   "peerDependencies": {
     "sass": "^1.33.0"
   },
   "dependencies": {
     "@carbon/styles": "^1.25.0",
-    "@carbon/telemetry": "0.1.0"
+    "@carbon/telemetry": "0.1.0",
+    "chalk": "1.1.3"
   },
   "devDependencies": {
     "@carbon/test-utils": "^10.27.0",
