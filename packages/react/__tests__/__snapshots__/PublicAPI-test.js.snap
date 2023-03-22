@@ -3798,9 +3798,10 @@ Map {
       "element": Object {
         "type": "elementType",
       },
-      "isCurrentPage": Object {
+      "isActive": Object {
         "type": "bool",
       },
+      "isCurrentPage": [Function],
       "isSideNavExpanded": Object {
         "type": "bool",
       },
