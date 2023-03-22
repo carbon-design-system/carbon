@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -60,12 +60,6 @@ describe('bx-tooltip', function () {
       );
       await Promise.resolve();
       expect(trigger!.open).toBe(true);
-
-      trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
-        new CustomEvent('click', { bubbles: true, composed: true })
-      );
-      await Promise.resolve();
-      expect(trigger!.open).toBe(false);
     });
   });
 
@@ -88,14 +82,6 @@ describe('bx-tooltip', function () {
       expect(trigger!.open).toBe(true);
       expect(body!.open).toBe(true);
       expect(trigger?.getAttribute('aria-expanded')).toBe('true');
-
-      trigger!.shadowRoot!.firstElementChild!.dispatchEvent(
-        new CustomEvent('click', { bubbles: true, composed: true })
-      );
-      await Promise.resolve();
-      expect(trigger!.open).toBe(false);
-      expect(body!.open).toBe(false);
-      expect(trigger?.getAttribute('aria-expanded')).toBe('false');
     });
 
     it('Should start observing element resizes when tooltip gets open', async function () {

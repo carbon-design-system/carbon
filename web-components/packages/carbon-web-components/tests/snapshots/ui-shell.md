@@ -2,9 +2,9 @@
 
 ## `bx-header-menu-button`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <button
@@ -13,10 +13,9 @@
   part="button"
 >
 </button>
-
 ```
 
-#### `should render with various attributes for inactive state`
+####     `should render with various attributes for inactive state`
 
 ```
 <button
@@ -26,10 +25,9 @@
   part="button"
 >
 </button>
-
 ```
 
-#### `should render with various attributes for active state`
+####     `should render with various attributes for active state`
 
 ```
 <button
@@ -39,14 +37,13 @@
   part="button"
 >
 </button>
-
 ```
 
 ## `bx-header-menu`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -65,10 +62,9 @@
   <slot>
   </slot>
 </ul>
-
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -89,14 +85,13 @@
   <slot>
   </slot>
 </ul>
-
 ```
 
 ## `bx-header-name`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -106,10 +101,9 @@
   <slot>
   </slot>
 </a>
-
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -131,9 +125,9 @@
 
 ## `bx-header-nav`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <div
@@ -149,10 +143,9 @@
   <slot>
   </slot>
 </ul>
-
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <div
@@ -168,14 +161,13 @@
   <slot>
   </slot>
 </ul>
-
 ```
 
 ## `bx-header-nav-item`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -191,10 +183,9 @@
     </slot>
   </span>
 </a>
-
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -211,14 +202,13 @@
     </slot>
   </span>
 </a>
-
 ```
 
 ## `bx-side-nav-link`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -243,10 +233,9 @@
     </slot>
   </span>
 </a>
-
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -270,14 +259,13 @@
     </slot>
   </span>
 </a>
-
 ```
 
 ## `bx-side-nav-menu`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <button
@@ -314,10 +302,9 @@
   <slot>
   </slot>
 </ul>
-
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <button
@@ -355,10 +342,9 @@
   <slot>
   </slot>
 </ul>
-
 ```
 
-#### `should support collapsing side nav menu upon parent side nav is collapsed as rail`
+####     `should support collapsing side nav menu upon parent side nav is collapsed as rail`
 
 ```
 <button
@@ -395,14 +381,13 @@
   <slot>
   </slot>
 </ul>
-
 ```
 
 ## `bx-side-nav-menu-item`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -418,10 +403,9 @@
     </slot>
   </span>
 </a>
-
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -437,5 +421,43 @@
     </slot>
   </span>
 </a>
+```
+
+## `Misc attributes`
+
+####   `should render with minimum attributes`
 
 ```
+<a
+  class="bx--side-nav__link"
+  href=""
+  part="link"
+>
+  <span
+    class="bx--side-nav__link-text"
+    part="title"
+  >
+    <slot>
+    </slot>
+  </span>
+</a>
+```
+
+####   `should render with various attributes`
+
+```
+<a
+  class="bx--side-nav__link bx--side-nav__link--current"
+  href="about:blank"
+  part="link"
+>
+  <span
+    class="bx--side-nav__link-text"
+    part="title"
+  >
+    <slot>
+    </slot>
+  </span>
+</a>
+```
+

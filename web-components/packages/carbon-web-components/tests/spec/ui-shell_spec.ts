@@ -1,18 +1,17 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2020, 2022
+ * Copyright IBM Corp. 2020, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@types/jest';
 import { html, render } from 'lit-html';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Fade16 from 'carbon-web-components/es/icons/fade/16';
+import Fade16 from '@carbon/icons/lib/fade/16';
 import EventManager from '../utils/event-manager';
 import ifNonNull from '../../src/globals/directives/if-non-null';
 import BXHeaderMenu from '../../src/components/ui-shell/header-menu';
@@ -284,8 +283,6 @@ describe('ui-shell', function () {
             href: 'about:blank',
             prefix: 'prefix-foo',
           }),
-          // @ts-ignore
-          x`x`,
           document.body as any
         );
         await Promise.resolve();

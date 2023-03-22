@@ -2,9 +2,9 @@
 
 ## `bx-clickable-tile`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -26,7 +26,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -55,7 +55,7 @@
 
 ```
 
-#### `should render disabled state`
+####     `should render disabled state`
 
 ```
 <p
@@ -80,9 +80,9 @@
 
 ## `bx-expandable-tile`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <button
@@ -108,7 +108,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <button
@@ -139,9 +139,9 @@
 
 ## `bx-radio-tile`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <input
@@ -165,7 +165,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <input
@@ -193,9 +193,9 @@
 
 ## `bx-selectable-tile`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <input
@@ -219,7 +219,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <input
@@ -244,3 +244,54 @@
 </label>
 
 ```
+
+## `Misc attributes`
+
+####   `should render with minimum attributes`
+
+```
+<input
+  class="bx--tile-input"
+  id="input"
+  tabindex="-1"
+  type="checkbox"
+>
+<label
+  class="bx--tile bx--tile--selectable"
+  for="input"
+  tabindex="0"
+>
+  <div class="bx--tile__checkmark">
+  </div>
+  <div class="bx--tile-content">
+    <slot>
+    </slot>
+  </div>
+</label>
+```
+
+####   `should render with various attributes`
+
+```
+<input
+  class="bx--tile-input"
+  id="input"
+  name="name-foo"
+  tabindex="-1"
+  type="checkbox"
+  value="value-foo"
+>
+<label
+  class="bx--tile bx--tile--light bx--tile--selectable"
+  for="input"
+  tabindex="0"
+>
+  <div class="bx--tile__checkmark">
+  </div>
+  <div class="bx--tile-content">
+    <slot>
+    </slot>
+  </div>
+</label>
+```
+

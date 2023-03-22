@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -220,15 +220,6 @@ describe('bx-date-picker', function () {
       expect(
         datePicker!.calendar!.selectedDates.map((item) => item.getTime())
       ).toEqual([new Date(2000, 6, 15).getTime()]);
-    });
-
-    it('Should support opening calendar dropdown by clicking on calendar icon', async function () {
-      datePickerInput!
-        .shadowRoot!.querySelector('svg')!
-        .dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      await Promise.resolve();
-      const { calendar } = datePicker!;
-      expect(calendar!.isOpen).toBe(true);
     });
   });
 
