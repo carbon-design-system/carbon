@@ -13,6 +13,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
@@ -351,7 +352,7 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
     light,
     ...rest
   },
-  ref
+  forwardRef
 ) {
   const [isTileMaxHeight, setIsTileMaxHeight] = useState(tileMaxHeight);
   const [isTilePadding, setIsTilePadding] = useState(tilePadding);
@@ -363,8 +364,9 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   const aboveTheFold = useRef(null);
   const belowTheFold = useRef(null);
   const tileContent = useRef(null);
-  const tile = useRef(ref);
+  const tile = useRef(null);
   const prefix = usePrefix();
+  const ref = useMergedRefs([forwardRef, tile]);
 
   if (expanded !== prevExpanded) {
     setIsExpanded(expanded);
@@ -479,7 +481,7 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   }, []);
   return interactive ? (
     <div
-      ref={tile}
+      ref={ref}
       className={interactiveClassNames}
       aria-expanded={isExpanded}
       {...rest}>
@@ -504,7 +506,7 @@ export const ExpandableTile = React.forwardRef(function ExpandableTile(
   ) : (
     <button
       type="button"
-      ref={tile}
+      ref={ref}
       className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
