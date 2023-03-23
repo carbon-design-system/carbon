@@ -76,24 +76,23 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
   };
 
   return (
-    <div className={iconButtonClasses}>
-      <IconButton
-        label={text}
-        type="button"
-        ref={tabRef}
-        role="tab"
-        tabIndex={selected || isHovered ? 0 : -1}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        onFocus={handleMouseEnter}
-        onBlur={handleMouseLeave}
-        aria-selected={selected}
-        aria-label={text}
-        {...other}
-        {...commonProps}>
-        {children}
-      </IconButton>
-    </div>
+    <IconButton
+      label={text}
+      type="button"
+      ref={tabRef}
+      role="tab"
+      tabIndex={selected || isHovered ? 0 : -1}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      onFocus={handleMouseEnter}
+      onBlur={handleMouseLeave}
+      aria-selected={selected}
+      aria-label={text}
+      wrapperClasses={iconButtonClasses}
+      {...other}
+      {...commonProps}>
+      {children}
+    </IconButton>
   );
 });
 
