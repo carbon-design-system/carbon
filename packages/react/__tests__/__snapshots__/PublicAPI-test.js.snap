@@ -6857,7 +6857,9 @@ Map {
       "name": Object {
         "type": "string",
       },
-      "onChange": [Function],
+      "onChange": Object {
+        "type": "func",
+      },
       "title": Object {
         "type": "string",
       },

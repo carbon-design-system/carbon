@@ -294,10 +294,7 @@ StructuredListInput.propTypes = {
   /**
    * Provide an optional hook that is called each time the input is updated
    */
-  onChange: deprecate(
-    PropTypes.func,
-    `\nThe prop \`onChange\` will be removed in the next major version of Carbon.`
-  ),
+  onChange: PropTypes.func,
 
   /**
    * Provide a `title` for the input
