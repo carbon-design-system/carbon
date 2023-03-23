@@ -6,11 +6,14 @@
  */
 
 import PropTypes from 'prop-types';
-import React, { createContext, useState } from 'react';
+import React, { createContext, useRef, useState } from 'react';
 import classNames from 'classnames';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 export const RadioButtonGroupContext = createContext();
 
@@ -40,6 +43,8 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
 
   const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
   const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
+
+  const { current: radioButtonGroupInstanceId } = useRef(getInstanceId());
 
   /**
    * prop + state alignment - getDerivedStateFromProps
@@ -99,8 +104,14 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
     [`${prefix}--form__helper-text--disabled`]: disabled,
   });
 
+  const helperId = !helperText
+    ? undefined
+    : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
+
   const helper = helperText ? (
-    <div className={helperClasses}>{helperText}</div>
+    <div id={helperId} className={helperClasses}>
+      {helperText}
+    </div>
   ) : null;
 
   return (
@@ -110,6 +121,7 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
         disabled={disabled}
         data-invalid={invalid ? true : undefined}
         aria-readonly={readOnly}
+        aria-describedby={showHelper && helperText ? helperId : undefined}
         {...rest}>
         {legendText && (
           <Legend className={`${prefix}--label`}>{legendText}</Legend>
