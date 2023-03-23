@@ -10,7 +10,7 @@ import cx from 'classnames';
 import Downshift from 'downshift';
 import isEqual from 'lodash.isequal';
 import PropTypes from 'prop-types';
-import React, { useContext, useState, useRef } from 'react';
+import React, { useContext, useState, useRef, useEffect } from 'react';
 import { defaultFilterItems } from '../ComboBox/tools/filter';
 import { sortingPropTypes } from './MultiSelectPropTypes';
 import ListBox, { PropTypes as ListBoxPropTypes } from '../ListBox';
@@ -69,9 +69,12 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   const [isOpen, setIsOpen] = useState(open);
   const [prevOpen, setPrevOpen] = useState(open);
   const [inputValue, setInputValue] = useState('');
-  const [topItems, setTopItems] = useState([]);
+  const [topItems, setTopItems] = useState(initialSelectedItems ?? []);
   const [inputFocused, setInputFocused] = useState(false);
   const [highlightedIndex, setHighlightedIndex] = useState(null);
+  const [currentSelectedItems, setCurrentSelectedItems] = useState(
+    initialSelectedItems ?? []
+  );
   const textInput = useRef();
   const filterableMultiSelectInstanceId = useId();
 
@@ -127,7 +130,14 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
   const menuId = `${id}__menu`;
   const inputId = `${id}-input`;
 
+  useEffect(() => {
+    if (!isOpen) {
+      setTopItems(currentSelectedItems);
+    }
+  }, [currentSelectedItems, isOpen, setTopItems]);
+
   function handleOnChange(changes) {
+    setCurrentSelectedItems(changes.selectedItems);
     if (onChange) {
       onChange(changes);
     }
@@ -145,11 +155,7 @@ const FilterableMultiSelect = React.forwardRef(function FilterableMultiSelect(
     handleOnMenuChange(false);
   }
 
-  function handleOnStateChange(changes, downshift) {
-    if (changes.isOpen && !isOpen) {
-      setTopItems(downshift.selectedItem);
-    }
-
+  function handleOnStateChange(changes) {
     const { type } = changes;
     const { stateChangeTypes } = Downshift;
 
