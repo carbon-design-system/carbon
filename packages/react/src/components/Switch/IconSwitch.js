@@ -175,7 +175,7 @@ IconSwitch.propTypes = {
   /**
    * Provide the visible text displayed by the Tooltip
    */
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
 };
 
 export default IconSwitch;

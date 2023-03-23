@@ -61,9 +61,8 @@ export default class ContentSwitcher extends React.Component {
 
     /**
      * Specify the size of the Content Switcher. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
-     * TODO V11: remove `xl` (replaced with lg)
      */
-    size: PropTypes.oneOf(['sm', 'md', 'lg', 'xl']),
+    size: PropTypes.oneOf(['sm', 'md', 'lg']),
   };
 
   static contextType = PrefixContext;
