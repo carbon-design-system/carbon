@@ -11,6 +11,8 @@ import classNames from 'classnames';
 import { IconButton } from '../IconButton';
 import { usePrefix } from '../../internal/usePrefix';
 
+const noopFn = () => {};
+
 const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
   const {
     align,
@@ -19,11 +21,11 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
     disabled,
     enterDelayMs,
     index,
-    leaveDelayMs,
+    leaveDelayMs = 0,
     name,
-    onClick,
-    onKeyDown,
-    selected,
+    onClick = noopFn,
+    onKeyDown = noopFn,
+    selected = false,
     size,
     text,
     ...other
@@ -67,12 +69,15 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
     onKeyDown: handleKeyDown,
     className: classes,
     disabled,
+    align,
+    enterDelayMs,
+    leaveDelayMs,
+    size,
   };
 
   return (
     <div className={iconButtonClasses}>
       <IconButton
-        align={align}
         label={text}
         type="button"
         ref={tabRef}
@@ -84,9 +89,6 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
         onBlur={handleMouseLeave}
         aria-selected={selected}
         aria-label={text}
-        enterDelayMs={enterDelayMs}
-        leaveDelayMs={leaveDelayMs}
-        size={size}
         {...other}
         {...commonProps}>
         {children}
@@ -171,17 +173,9 @@ IconSwitch.propTypes = {
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
-   * Provide the contents of your Switch
+   * Provide the visible text displayed by the Tooltip
    */
-  text: PropTypes.string,
-};
-
-IconSwitch.defaultProps = {
-  selected: false,
-  enterDelayMs: 0,
-  leaveDelayMs: 0,
-  onClick: () => {},
-  onKeyDown: () => {},
+  text: PropTypes.string.isRequired,
 };
 
 export default IconSwitch;
