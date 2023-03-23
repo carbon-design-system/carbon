@@ -4017,11 +4017,28 @@ Map {
   "IconSwitch" => Object {
     "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
+      "enterDelayMs": 0,
+      "leaveDelayMs": 0,
       "onClick": [Function],
       "onKeyDown": [Function],
       "selected": false,
     },
     "propTypes": Object {
+      "align": Object {
+        "args": Array [
+          Array [
+            "top",
+            "top-left",
+            "top-right",
+            "bottom",
+            "bottom-left",
+            "bottom-right",
+            "left",
+            "right",
+          ],
+        ],
+        "type": "oneOf",
+      },
       "children": Object {
         "type": "node",
       },
@@ -4031,11 +4048,14 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "enterDelayMs": Object {
+        "type": "number",
+      },
       "index": Object {
         "type": "number",
       },
-      "isIconOnly": Object {
-        "type": "bool",
+      "leaveDelayMs": Object {
+        "type": "number",
       },
       "name": Object {
         "args": Array [
