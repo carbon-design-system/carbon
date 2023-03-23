@@ -7,7 +7,7 @@ jobs:
   comment:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/stale@v7
+      - uses: actions/stale@v8
         with:
           any-of-issue-labels:
             "status: waiting for author's response 💬,status: needs more info 🤷‍♀️"
