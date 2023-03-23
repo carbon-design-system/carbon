@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-#### `Should render with various attributes`
+####   `Should render with various attributes`
 
 ```
 <div class="cds--number cds--number--md">
@@ -75,3 +75,4 @@
 </div>
 
 ```
+

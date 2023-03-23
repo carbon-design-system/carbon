@@ -2,9 +2,9 @@
 
 ## `cds-file-uploader`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <strong class="cds--file--label">
@@ -24,7 +24,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <strong class="cds--file--label">
@@ -48,9 +48,9 @@
 
 ## `cds-file-drop-container`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <label
@@ -75,7 +75,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <label
@@ -103,9 +103,9 @@
 
 ```
 
-## `Handling events`
+##   `Handling events`
 
-#### `Should handle drag-over`
+####     `Should handle drag-over`
 
 ```
 <label
@@ -133,9 +133,9 @@
 
 ## `cds-file-uploader-item`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <p class="cds--file-filename">
@@ -162,7 +162,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <p class="cds--file-filename">
@@ -190,7 +190,7 @@
 
 ```
 
-#### `should render uploaded state`
+####     `should render uploaded state`
 
 ```
 <p class="cds--file-filename">
@@ -212,7 +212,7 @@
 
 ```
 
-#### `should render editing state`
+####     `should render editing state`
 
 ```
 <p class="cds--file-filename">
@@ -240,7 +240,7 @@
 
 ```
 
-#### `should render editing state with various attributes`
+####     `should render editing state with various attributes`
 
 ```
 <p class="cds--file-filename">
@@ -273,7 +273,7 @@
 
 ## `Misc attributes`
 
-#### `should render with minimum attributes`
+####   `should render with minimum attributes`
 
 ```
 <strong class="cds--file--label">
@@ -292,7 +292,7 @@
 </div>
 ```
 
-#### `should render with various attributes`
+####   `should render with various attributes`
 
 ```
 <strong class="cds--file--label">
@@ -312,3 +312,33 @@
   </slot>
 </div>
 ```
+
+## `Handling events`
+
+####   `Should handle drag-over`
+
+```
+<label
+  class="bx--file-browse-btn"
+  for="file"
+  tabindex="0"
+>
+  <div
+    class="bx--file__drop-container bx--file__drop-container--drag-over"
+    role="button"
+  >
+    <slot>
+    </slot>
+    <input
+      accept="image/png"
+      class="bx--file-input"
+      id="file"
+      tabindex="-1"
+      type="file"
+    >
+  </div>
+</label>
+```
+
+## `bx-file-uploader-shell`
+

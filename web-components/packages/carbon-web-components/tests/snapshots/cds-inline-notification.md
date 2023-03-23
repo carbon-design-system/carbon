@@ -2,7 +2,7 @@
 
 ## `Rendering titles`
 
-#### `Should render with minimum attributes`
+####   `Should render with minimum attributes`
 
 ```
 <div class="cds--inline-notification__details">
@@ -27,7 +27,7 @@
 
 ```
 
-#### `Should render with various attributes`
+####   `Should render with various attributes`
 
 ```
 <div class="cds--inline-notification__details">
@@ -55,3 +55,4 @@
 </button>
 
 ```
+

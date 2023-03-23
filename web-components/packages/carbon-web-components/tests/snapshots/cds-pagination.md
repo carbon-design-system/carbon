@@ -2,7 +2,7 @@
 
 ## `Misc attributes`
 
-#### `should render <cds-pagination> with minimum attributes`
+####   `should render <cds-pagination> with minimum attributes`
 
 ```
 <div class="cds--pagination__left">
@@ -36,7 +36,7 @@
 
 ```
 
-#### `should render <cds-pagination> with various attributes`
+####   `should render <cds-pagination> with various attributes`
 
 ```
 <div class="cds--pagination__left">
@@ -69,7 +69,7 @@
 
 ```
 
-#### `should render <cds-page-sizes-select> with minimum attributes`
+####   `should render <cds-page-sizes-select> with minimum attributes`
 
 ```
 <label
@@ -103,7 +103,7 @@
 
 ```
 
-#### `should render <cds-pages-select> with minimum attributes`
+####   `should render <cds-pages-select> with minimum attributes`
 
 ```
 <div class="cds--select__page-number">
@@ -154,3 +154,4 @@
 </span>
 
 ```
+

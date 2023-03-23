@@ -2,15 +2,15 @@
 
 ## `Misc attributes`
 
-#### `should render with minimum attributes`
+####   `should render with minimum attributes`
 
 ```
 <label
   class="cds--label"
+  hidden=""
   part="label-text"
 >
   <slot name="label-text">
-    undefined
   </slot>
 </label>
 <div
@@ -32,7 +32,7 @@
       aria-label=""
       class="cds--text-input"
       id="trigger-label"
-      placeholder="undefined"
+      placeholder=""
       role="combobox"
     >
     <div class="cds--list-box__menu-icon">
@@ -41,10 +41,10 @@
 </div>
 <div
   class="cds--form__helper-text"
+  hidden=""
   part="helper-text"
 >
   <slot name="helper-text">
-    undefined
   </slot>
 </div>
 <div
@@ -57,7 +57,7 @@
 
 ```
 
-#### `should render with various attributes`
+####   `should render with various attributes`
 
 ```
 <label
@@ -131,3 +131,4 @@
 </div>
 
 ```
+

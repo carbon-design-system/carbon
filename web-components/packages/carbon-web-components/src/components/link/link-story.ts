@@ -107,10 +107,7 @@ Playground.story = {
     knobs: {
       [`${prefix}-link`]: () => ({
         disabled: boolean('Disabled (disabled)', false),
-        href: textNullable(
-          'Link href (href)',
-          'https://github.com/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components'
-        ),
+        href: textNullable('Link href (href)', 'https://example.com/'),
         inline: boolean('Inline (inline)', false),
         size: select('Link size (size)', sizes, LINK_SIZE.MEDIUM),
         visited: boolean('Visited (visited)', false),

@@ -110,6 +110,7 @@ $css--plex: true !default;
   ::slotted(#{$prefix}-tile-below-the-fold-content) {
     opacity: 1;
     transition: $duration-fast-02 motion(standard, productive);
+    visibility: visible;
   }
 }
 

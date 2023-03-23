@@ -2,7 +2,7 @@
 
 ## `Misc attributes`
 
-#### `should render with minimum attributes`
+####   `should render with minimum attributes`
 
 ```
 <div class="cds--inline-loading__animation">
@@ -16,7 +16,7 @@
 
 ```
 
-#### `should render with unknown status`
+####   `should render with unknown status`
 
 ```
 <p class="cds--inline-loading__text">
@@ -26,7 +26,7 @@
 
 ```
 
-#### `should render with inactive status`
+####   `should render with inactive status`
 
 ```
 <div class="cds--inline-loading__animation">
@@ -40,7 +40,7 @@
 
 ```
 
-#### `should render with finished status`
+####   `should render with finished status`
 
 ```
 <div class="cds--inline-loading__animation">
@@ -52,7 +52,7 @@
 
 ```
 
-#### `should render with error status`
+####   `should render with error status`
 
 ```
 <div class="cds--inline-loading__animation">
@@ -63,3 +63,4 @@
 </p>
 
 ```
+

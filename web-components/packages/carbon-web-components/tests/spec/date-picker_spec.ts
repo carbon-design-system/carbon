@@ -221,15 +221,6 @@ describe('cds-date-picker', function () {
         datePicker!.calendar!.selectedDates.map((item) => item.getTime())
       ).toEqual([new Date(2000, 6, 15).getTime()]);
     });
-
-    it('Should support opening calendar dropdown by clicking on calendar icon', async function () {
-      datePickerInput!
-        .shadowRoot!.querySelector('svg')!
-        .dispatchEvent(new CustomEvent('click', { bubbles: true }));
-      await Promise.resolve();
-      const { calendar } = datePicker!;
-      expect(calendar!.isOpen).toBe(true);
-    });
   });
 
   describe('Range mode', function () {

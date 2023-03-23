@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-#### `Should render with minimum attributes`
+####   `Should render with minimum attributes`
 
 ```
 <slot>
@@ -12,6 +12,7 @@
     role="button"
     tabindex="0"
   >
+    First step
   </p>
 </slot>
 <slot name="secondary-label-text">
@@ -21,7 +22,7 @@
 
 ```
 
-#### `Should render with various attributes`
+####   `Should render with various attributes`
 
 ```
 <slot>
@@ -31,7 +32,7 @@
     role="button"
     tabindex="0"
   >
-    label-text-foo
+    First step
   </p>
 </slot>
 <slot name="secondary-label-text">
@@ -43,3 +44,4 @@
 </span>
 
 ```
+

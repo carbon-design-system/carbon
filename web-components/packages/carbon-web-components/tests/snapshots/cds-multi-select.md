@@ -1,8 +1,8 @@
-# `cds-dropdown`
+# `cds-multi-select`
 
 ## `Misc attributes`
 
-#### `should render with minimum attributes`
+####   `should render with minimum attributes`
 
 ```
 <label
@@ -55,7 +55,7 @@
 
 ```
 
-#### `should render with various attributes`
+####   `should render with various attributes`
 
 ```
 <label
@@ -67,7 +67,8 @@
   </slot>
 </label>
 <div
-  class="cds--dropdown cds--list-box cds--list-box--disabled cds--list-box--expanded"
+  class="cds--dropdown cds--dropdown--inline cds--dropdown--invalid cds--list-box cds--list-box--disabled cds--list-box--expanded cds--list-box--inline"
+  data-invalid=""
   role="listbox"
 >
   <div
@@ -81,11 +82,20 @@
     role="button"
     tabindex="0"
   >
+    <div
+      class="cds--list-box__selection cds--list-box__selection--multi cds--tag--filter"
+      id="selection-button"
+      role="button"
+      tabindex="0"
+      title="clear-selection-label-foo"
+    >
+      1
+    </div>
     <span
       class="cds--list-box__label"
       id="trigger-label"
     >
-      Option 3
+      trigger-content-foo
     </span>
     <div class="cds--list-box__menu-icon cds--list-box__menu-icon--open">
     </div>
@@ -102,11 +112,11 @@
   </div>
 </div>
 <div
-  class="cds--form__helper-text cds--form__helper-text--disabled"
-  part="helper-text"
+  class="cds--form-requirement"
+  part="validity-message"
 >
-  <slot name="helper-text">
-    helper-text-foo
+  <slot name="validity-message">
+    validity-message-foo
   </slot>
 </div>
 <div
@@ -118,3 +128,4 @@
 </div>
 
 ```
+

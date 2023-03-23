@@ -13,7 +13,7 @@ with no framework tax, no framework silo.
 > contributors.
 
 <p align="center">
-  <a href="https://github.com/carbon-design-system/carbon-web-components/blob/main/LICENSE">
+  <a href="https://github.com/carbon-design-system/carbon-for-ibm-dotcom/blob/main/LICENSE">
     <img src="https://img.shields.io/badge/license-Apache--2.0-blue.svg" alt="Carbon is released under the Apache-2.0 license" />
   </a>
 </p>
@@ -399,7 +399,7 @@ To support IE, you need a couple additional setups:
   [`@babel/preset-env`](https://babeljs.io/docs/en/babel-preset-env)
   configuration)
 - Polyfills, listed
-  [here](https://github.com/carbon-design-system/carbon-web-components/blob/main/src/polyfills/index.ts)
+  [here](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/blob/main/packages/carbon-web-components/src/polyfills/index.ts)
 
 Here's an example code that shows such setup:
 

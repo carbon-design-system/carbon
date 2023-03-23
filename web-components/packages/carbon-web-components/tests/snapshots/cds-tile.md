@@ -2,9 +2,9 @@
 
 ## `cds-clickable-tile`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -12,6 +12,7 @@
   id="link"
   part="link"
   role="button"
+  tabindex="0"
 >
   <slot>
   </slot>
@@ -26,11 +27,11 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
-  class="cds--link cds--tile cds--tile--clickable cds--tile--light"
+  class="cds--link cds--tile cds--tile--clickable"
   download="file-name-foo"
   href="about:blank"
   hreflang="en"
@@ -39,6 +40,7 @@
   ping="about:blank"
   rel="noopener"
   role="button"
+  tabindex="0"
   target="_blank"
   type="text/plain"
 >
@@ -55,34 +57,41 @@
 
 ```
 
-#### `should render disabled state`
+####     `should render disabled state`
 
 ```
-<p
-  class="cds--link cds--link--disabled cds--tile cds--tile--clickable cds--tile--light"
+<a
+  class="cds--link cds--tile cds--tile--clickable"
+  download="file-name-foo"
+  href="about:blank"
+  hreflang="en"
   id="link"
   part="link"
+  ping="about:blank"
+  rel="noopener"
+  role="button"
+  tabindex="0"
+  target="_blank"
+  type="text/plain"
 >
   <slot>
   </slot>
-</p>
-<div
-  class="cds--link__icon"
-  hidden=""
->
-  <slot name="icon">
-  </slot>
-</div>
-<p>
-</p>
+  <div
+    class="cds--link__icon"
+    hidden=""
+  >
+    <slot name="icon">
+    </slot>
+  </div>
+</a>
 
 ```
 
 ## `cds-expandable-tile`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <button
@@ -108,7 +117,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <button
@@ -137,65 +146,11 @@
 
 ```
 
-## `cds-radio-tile`
-
-## `Misc attributes`
-
-#### `should render with minimum attributes`
-
-```
-<input
-  class="cds--tile-input"
-  id="input"
-  tabindex="-1"
-  type="radio"
->
-<label
-  class="cds--tile cds--tile--selectable"
-  for="input"
-  tabindex="0"
->
-  <div class="cds--tile__checkmark">
-  </div>
-  <div class="cds--tile-content">
-    <slot>
-    </slot>
-  </div>
-</label>
-
-```
-
-#### `should render with various attributes`
-
-```
-<input
-  class="cds--tile-input"
-  id="input"
-  name="name-foo"
-  tabindex="-1"
-  type="radio"
-  value="value-foo"
->
-<label
-  class="cds--tile cds--tile--light cds--tile--selectable"
-  for="input"
-  tabindex="0"
->
-  <div class="cds--tile__checkmark">
-  </div>
-  <div class="cds--tile-content">
-    <slot>
-    </slot>
-  </div>
-</label>
-
-```
-
 ## `cds-selectable-tile`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <input
@@ -209,7 +164,7 @@
   for="input"
   tabindex="0"
 >
-  <div class="cds--tile__checkmark">
+  <div class="cds--tile__checkmark cds--tile__checkmark--persistent">
   </div>
   <div class="cds--tile-content">
     <slot>
@@ -219,7 +174,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <input
@@ -228,6 +183,59 @@
   name="name-foo"
   tabindex="-1"
   type="checkbox"
+  value="value-foo"
+>
+<label
+  class="cds--tile cds--tile--is-selected cds--tile--light cds--tile--selectable"
+  for="input"
+  tabindex="0"
+>
+  <div class="cds--tile__checkmark cds--tile__checkmark--persistent">
+  </div>
+  <div class="cds--tile-content">
+    <slot>
+    </slot>
+  </div>
+</label>
+
+```
+
+## `cds-radio-tile`
+
+##   `Misc attributes`
+
+####     `should render with minimum attributes`
+
+```
+<input
+  class="cds--tile-input"
+  id="input"
+  tabindex="-1"
+  type="radio"
+>
+<label
+  class="cds--tile cds--tile--selectable"
+  for="input"
+  tabindex="0"
+>
+  <div class="cds--tile__checkmark">
+  </div>
+  <div class="cds--tile-content">
+    <slot>
+    </slot>
+  </div>
+</label>
+```
+
+####     `should render with various attributes`
+
+```
+<input
+  class="cds--tile-input"
+  id="input"
+  name="name-foo"
+  tabindex="-1"
+  type="radio"
   value="value-foo"
 >
 <label
@@ -242,5 +250,55 @@
     </slot>
   </div>
 </label>
+```
+
+## `Misc attributes`
+
+####   `should render with minimum attributes`
 
 ```
+<input
+  class="bx--tile-input"
+  id="input"
+  tabindex="-1"
+  type="checkbox"
+>
+<label
+  class="bx--tile bx--tile--selectable"
+  for="input"
+  tabindex="0"
+>
+  <div class="bx--tile__checkmark">
+  </div>
+  <div class="bx--tile-content">
+    <slot>
+    </slot>
+  </div>
+</label>
+```
+
+####   `should render with various attributes`
+
+```
+<input
+  class="bx--tile-input"
+  id="input"
+  name="name-foo"
+  tabindex="-1"
+  type="checkbox"
+  value="value-foo"
+>
+<label
+  class="bx--tile bx--tile--light bx--tile--selectable"
+  for="input"
+  tabindex="0"
+>
+  <div class="bx--tile__checkmark">
+  </div>
+  <div class="bx--tile-content">
+    <slot>
+    </slot>
+  </div>
+</label>
+```
+

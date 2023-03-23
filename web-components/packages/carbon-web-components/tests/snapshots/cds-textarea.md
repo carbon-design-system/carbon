@@ -1,8 +1,8 @@
-# `cds-input`
+# `cds-textarea`
 
 ## `Rendering`
 
-#### `Should render with various attributes`
+####   `Should render with various attributes`
 
 ```
 <label
@@ -13,12 +13,12 @@
     label-text-foo
   </slot>
 </label>
-<div class="cds--text-input__field-wrapper">
-  <input
-    aria-describedby="helper-text"
+<div class="cds--text-area__wrapper">
+  <textarea
     autocomplete=""
     autofocus=""
-    class="cds--text-input cds--text-input--light cds--text-input--xl"
+    class="cds--text-area cds--text-area--light cds--text-area--v2"
+    cols="50"
     disabled=""
     id="input"
     name="name-foo"
@@ -26,13 +26,11 @@
     placeholder="placeholder-foo"
     readonly=""
     required=""
-    type="text"
+    rows="4"
   >
+  </textarea>
 </div>
-<div
-  class="cds--form__helper-text cds--form__helper-text--disabled"
-  id="helper-text"
->
+<div class="cds--form__helper-text cds--form__helper-text--disabled">
   <slot name="helper-text">
     helper-text-foo
   </slot>
@@ -44,3 +42,4 @@
 </div>
 
 ```
+

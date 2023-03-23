@@ -162,6 +162,7 @@ module.exports = function setupKarma(config) {
                   sassOptions: {
                     includePaths: [
                       path.resolve(__dirname, '..', 'node_modules'),
+                      path.resolve(__dirname, '../../../', 'node_modules'),
                     ],
                   },
                 },

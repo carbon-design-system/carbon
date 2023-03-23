@@ -2,14 +2,14 @@
 
 ## `cds-table-batch-action`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <div class="cds--batch-summary">
   <p class="cds--batch-summary__para">
-    NaN items selected
+    0 item selected
   </p>
 </div>
 <div class="cds--action-list">
@@ -24,7 +24,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <div class="cds--batch-summary">
@@ -44,7 +44,7 @@
 
 ```
 
-#### `should render non-plural selected rows count`
+####     `should render non-plural selected rows count`
 
 ```
 <div class="cds--batch-summary">
@@ -66,9 +66,9 @@
 
 ## `cds-table-header-cell`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <slot>
@@ -76,7 +76,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <button
@@ -99,9 +99,9 @@
 
 ## `cds-table-row`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <slot>
@@ -109,7 +109,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <div
@@ -139,9 +139,9 @@
 
 ## `cds-table-expand-row`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <div class="cds--table-expand">
@@ -153,7 +153,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <div class="cds--table-expand">
@@ -187,9 +187,9 @@
 
 ## `cds-table-toolbar-search`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <div
@@ -221,7 +221,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <div
@@ -252,3 +252,68 @@
 </div>
 
 ```
+
+## `Misc attributes`
+
+####   `should render with minimum attributes`
+
+```
+<div
+  class="bx--search bx--search--sm"
+  tabindex="0"
+>
+  <label
+    class="bx--label"
+    for="input"
+    part="label-text"
+  >
+    <slot>
+    </slot>
+  </label>
+  <input
+    class="bx--search-input"
+    id="input"
+    part="input"
+    role="searchbox"
+  >
+  <button
+    aria-label=""
+    class="bx--search-close bx--search-close--hidden"
+    part="close-button"
+    type="button"
+  >
+  </button>
+</div>
+```
+
+####   `should render with various attributes`
+
+```
+<div
+  class="bx--search bx--search--xl"
+  tabindex="-1"
+>
+  <label
+    class="bx--label"
+    for="input"
+    part="label-text"
+  >
+    <slot>
+    </slot>
+  </label>
+  <input
+    class="bx--search-input"
+    id="input"
+    part="input"
+    role="searchbox"
+  >
+  <button
+    aria-label=""
+    class="bx--search-close bx--search-close--hidden"
+    part="close-button"
+    type="button"
+  >
+  </button>
+</div>
+```
+

@@ -7,7 +7,6 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import '@types/jest';
 import { html, render } from 'lit';
 // Below path will be there when an application installs `carbon-web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
@@ -285,8 +284,6 @@ describe('ui-shell', function () {
             href: 'about:blank',
             prefix: 'prefix-foo',
           }),
-          // @ts-ignore
-          x`x`,
           document.body as any
         );
         await Promise.resolve();

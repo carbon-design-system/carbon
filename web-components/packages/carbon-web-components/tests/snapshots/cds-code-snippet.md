@@ -2,7 +2,7 @@
 
 ## `Rendering`
 
-#### `Should render with minimum attributes for single line mode`
+####   `Should render with minimum attributes for single line mode`
 
 ```
 <div
@@ -26,7 +26,7 @@
   <slot>
   </slot>
   <div
-    class="cds--btn--copy__feedback"
+    class="cds--assistive-text cds--btn--copy__feedback"
     data-feedback="Copied!"
   >
   </div>
@@ -34,7 +34,7 @@
 
 ```
 
-#### `Should render with minimum attributes for multi line mode`
+####   `Should render with minimum attributes for multi line mode`
 
 ```
 <div
@@ -58,7 +58,7 @@
   <slot>
   </slot>
   <div
-    class="cds--btn--copy__feedback"
+    class="cds--assistive-text cds--btn--copy__feedback"
     data-feedback="Copied!"
   >
   </div>
@@ -66,7 +66,7 @@
 
 ```
 
-#### `Should render with minimum attributes for inline mode`
+####   `Should render with minimum attributes for inline mode`
 
 ```
 <button
@@ -79,7 +79,7 @@
     </slot>
   </code>
   <div
-    class="cds--btn--copy__feedback"
+    class="cds--assistive-text cds--btn--copy__feedback"
     data-feedback="Copied!"
   >
   </div>
@@ -87,7 +87,7 @@
 
 ```
 
-#### `Should render with various attributes for single line mode`
+####   `Should render with various attributes for single line mode`
 
 ```
 <div
@@ -111,7 +111,7 @@
   <slot>
   </slot>
   <div
-    class="cds--btn--copy__feedback"
+    class="cds--assistive-text cds--btn--copy__feedback"
     data-feedback="copy-button-feedback-text-foo"
   >
   </div>
@@ -119,7 +119,7 @@
 
 ```
 
-#### `Should render with various attributes for multi line mode`
+####   `Should render with various attributes for multi line mode`
 
 ```
 <div
@@ -143,7 +143,7 @@
   <slot>
   </slot>
   <div
-    class="cds--btn--copy__feedback"
+    class="cds--assistive-text cds--btn--copy__feedback"
     data-feedback="copy-button-feedback-text-foo"
   >
   </div>
@@ -151,7 +151,7 @@
 
 ```
 
-#### `Should render with various attributes for inline mode`
+####   `Should render with various attributes for inline mode`
 
 ```
 <button
@@ -164,7 +164,7 @@
     </slot>
   </code>
   <div
-    class="cds--btn--copy__feedback"
+    class="cds--assistive-text cds--btn--copy__feedback"
     data-feedback="copy-button-feedback-text-foo"
   >
   </div>
@@ -174,7 +174,7 @@
 
 ## `Expand/collapse button in multi line mode`
 
-#### `Should render the expando`
+####   `Should render the expando`
 
 ```
 <button
@@ -192,3 +192,4 @@
 </button>
 
 ```
+

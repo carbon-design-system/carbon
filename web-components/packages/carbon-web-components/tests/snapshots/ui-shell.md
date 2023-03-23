@@ -2,9 +2,9 @@
 
 ## `cds-header-menu-button`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <button
@@ -16,7 +16,7 @@
 
 ```
 
-#### `should render with various attributes for inactive state`
+####     `should render with various attributes for inactive state`
 
 ```
 <button
@@ -29,7 +29,7 @@
 
 ```
 
-#### `should render with various attributes for active state`
+####     `should render with various attributes for active state`
 
 ```
 <button
@@ -44,9 +44,9 @@
 
 ## `cds-header-menu`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -68,7 +68,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -94,9 +94,9 @@
 
 ## `cds-header-name`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -109,7 +109,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -131,9 +131,9 @@
 
 ## `cds-header-nav`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <div
@@ -142,7 +142,7 @@
 >
 </div>
 <ul
-  aria-label="undefined"
+  aria-label=""
   class="cds--header__menu-bar"
   part="menu-body"
 >
@@ -152,7 +152,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <div
@@ -173,9 +173,9 @@
 
 ## `cds-header-nav-item`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -194,7 +194,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -216,9 +216,9 @@
 
 ## `cds-side-nav-link`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -246,7 +246,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -275,9 +275,9 @@
 
 ## `cds-side-nav-menu`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <button
@@ -317,7 +317,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <button
@@ -358,7 +358,7 @@
 
 ```
 
-#### `should support collapsing side nav menu upon parent side nav is collapsed as rail`
+####     `should support collapsing side nav menu upon parent side nav is collapsed as rail`
 
 ```
 <button
@@ -400,9 +400,9 @@
 
 ## `cds-side-nav-menu-item`
 
-## `Misc attributes`
+##   `Misc attributes`
 
-#### `should render with minimum attributes`
+####     `should render with minimum attributes`
 
 ```
 <a
@@ -421,7 +421,7 @@
 
 ```
 
-#### `should render with various attributes`
+####     `should render with various attributes`
 
 ```
 <a
@@ -439,3 +439,42 @@
 </a>
 
 ```
+
+## `Misc attributes`
+
+####   `should render with minimum attributes`
+
+```
+<a
+  class="bx--side-nav__link"
+  href=""
+  part="link"
+>
+  <span
+    class="bx--side-nav__link-text"
+    part="title"
+  >
+    <slot>
+    </slot>
+  </span>
+</a>
+```
+
+####   `should render with various attributes`
+
+```
+<a
+  class="bx--side-nav__link bx--side-nav__link--current"
+  href="about:blank"
+  part="link"
+>
+  <span
+    class="bx--side-nav__link-text"
+    part="title"
+  >
+    <slot>
+    </slot>
+  </span>
+</a>
+```
+
