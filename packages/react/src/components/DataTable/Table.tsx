@@ -49,7 +49,7 @@ export const Table = ({
   className,
   children,
   useZebraStyles,
-  sizeg,
+  size,
   isSortable = false,
   useStaticWidth,
   stickyHeader,
