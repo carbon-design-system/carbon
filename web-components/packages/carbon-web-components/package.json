@@ -1,6 +1,6 @@
 {
   "name": "@carbon/web-components",
-  "version": "1.26.0-rc.1",
+  "version": "1.26.0-rc.2",
   "publishConfig": {
     "access": "public"
   },

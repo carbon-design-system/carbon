@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0-rc.2](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.26.0-rc.1...@carbon/web-components@1.26.0-rc.2) (2023-03-23)
+
+
+### Bug Fixes
+
+* **modal:** styles with sass upgrade ([#10237](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/issues/10237)) ([46993a9](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/commit/46993a90bcb072ae77d07ea63e672821e9bdf628))
+
+
+
+
+
 # [1.26.0-rc.1](https://github.com/carbon-design-system/carbon-for-ibm-dotcom/compare/@carbon/web-components@1.26.0-rc.0...@carbon/web-components@1.26.0-rc.1) (2023-03-16)
 
 
