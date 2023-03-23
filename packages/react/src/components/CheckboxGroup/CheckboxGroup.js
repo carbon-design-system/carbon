@@ -128,12 +128,12 @@ CheckboxGroup.propTypes = {
   readOnly: PropTypes.bool,
 
   /**
-   * Specify whether the control is currently in warning state
+   * Specify whether the form group is currently in warning state
    */
   warn: PropTypes.bool,
 
   /**
-   * Provide the text that is displayed when the control is in warning state
+   * Provide the text that is displayed when the form group is in warning state
    */
   warnText: PropTypes.node,
 };

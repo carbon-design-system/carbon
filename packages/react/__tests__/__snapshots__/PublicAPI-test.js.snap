@@ -482,6 +482,41 @@ Map {
     },
     "render": [Function],
   },
+  "CheckboxGroup" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "legendId": Object {
+        "type": "node",
+      },
+      "legendText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
+  },
   "CheckboxSkeleton" => Object {
     "propTypes": Object {
       "className": Object {
