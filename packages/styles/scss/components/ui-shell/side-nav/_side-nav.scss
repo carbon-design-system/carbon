@@ -490,6 +490,11 @@
       background-color: $background-hover;
       color: $text-primary;
     }
+
+    // non-hover, selected state inherited from `_header.scss`
+    a.#{$prefix}--header__menu-item--current:hover {
+      background-color: $layer-selected-hover;
+    }
   }
 
   .#{$prefix}--side-nav
