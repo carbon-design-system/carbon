@@ -13,12 +13,24 @@ import { LitElement, html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import { BUTTON_KIND, BUTTON_SIZE, BUTTON_ICON_LAYOUT } from './defs';
+import {
+  BUTTON_KIND,
+  BUTTON_TYPE,
+  BUTTON_SIZE,
+  BUTTON_TOOLTIP_ALIGNMENT,
+  BUTTON_TOOLTIP_POSITION,
+} from './defs';
 import styles from './button.scss';
 import HostListener from '../../globals/decorators/host-listener';
 import HostListenerMixin from '../../globals/mixins/host-listener';
 
-export { BUTTON_KIND, BUTTON_SIZE, BUTTON_ICON_LAYOUT };
+export {
+  BUTTON_KIND,
+  BUTTON_TYPE,
+  BUTTON_SIZE,
+  BUTTON_TOOLTIP_ALIGNMENT,
+  BUTTON_TOOLTIP_POSITION,
+};
 
 /**
  * Button.
@@ -61,11 +73,52 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
     }
   }
 
+  @HostListener('mouseover')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleOver = () => {
+    this.openTooltip = !this.openTooltip;
+  };
+
+  /**
+   * Handles `keydown` event on this element.
+   */
+  @HostListener('mouseout')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleHoverOut = async () => {
+    this.openTooltip = !this.openTooltip;
+  };
+
+  /**
+   * Handles `keydown` event on this element.
+   * Space & enter will toggle state, Escape will only close.
+   */
+  @HostListener('focus')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleFocus = async (event) => {
+    this._handleOver();
+  };
+
+  /**
+   * Handles `keydown` event on this element.
+   * Space & enter will toggle state, Escape will only close.
+   */
+  @HostListener('focusout')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleFocusout = async (event) => {
+    this._handleOver();
+  };
+
   /**
    * `true` if the button should have input focus when the page loads.
    */
   @property({ type: Boolean, reflect: true })
   autofocus = false;
+
+  /**
+   * Specify the message read by screen readers for the danger button variant
+   */
+  @property({ reflect: true, attribute: 'danger-descriptor' })
+  dangerDescriptor;
 
   /**
    * `true` if the button should be disabled.
@@ -92,16 +145,17 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
   hreflang!: string;
 
   /**
-   * Button icon layout.
-   */
-  @property({ reflect: true, attribute: 'icon-layout' })
-  iconLayout = BUTTON_ICON_LAYOUT.REGULAR;
-
-  /**
    * `true` if expressive theme enabled.
    */
   @property({ type: Boolean, reflect: true })
   isExpressive = false;
+
+  /**
+   * Specify whether the Button is currently selected.
+   * Only applies to the Ghost variant.
+   */
+  @property({ type: Boolean, reflect: true })
+  isSelected = false;
 
   /**
    * Button kind.
@@ -114,6 +168,12 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
    */
   @property({ attribute: 'link-role' })
   linkRole = 'button';
+
+  /**
+   * Boolean to determine if tooltip is open.
+   */
+  @property({ type: Boolean })
+  openTooltip = false;
 
   /**
    * URLs to ping, if this button is rendered as `<a>`.
@@ -131,7 +191,7 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
    * Button size.
    */
   @property({ reflect: true })
-  size = BUTTON_SIZE.REGULAR;
+  size = BUTTON_SIZE.LARGE;
 
   /**
    * The link target, if this button is rendered as `<a>`.
@@ -140,25 +200,52 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
   target!: string;
 
   /**
-   * The default behavior if the button is rendered as `<button>`. MIME type of the `target`if this button is rendered as `<a>`.
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: start, center, or end.
+   */
+  @property({ reflect: true, attribute: 'tooltip-alignment' })
+  tooltipAlignment = BUTTON_TOOLTIP_ALIGNMENT.CENTER;
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  @property({ reflect: true, attribute: 'tooltip-position' })
+  tooltipPosition = BUTTON_TOOLTIP_POSITION.TOP;
+
+  /**
+   * Specify the direction of the tooltip for icon-only buttons.
+   * Can be either top, right, bottom, or left.
+   */
+  @property({ reflect: true, attribute: 'tooltip-text' })
+  tooltipText!: string;
+
+  /**
+   * Button type.
    */
   @property({ reflect: true })
-  type!: string;
+  type = BUTTON_TYPE.BUTTON;
 
   render() {
     const {
       autofocus,
+      dangerDescriptor,
       disabled,
       download,
       href,
       hreflang,
-      isExpressive,
-      linkRole,
       kind,
+      isExpressive,
+      isSelected,
+      linkRole,
+      openTooltip,
       ping,
       rel,
       size,
       target,
+      tooltipAlignment,
+      tooltipPosition,
+      tooltipText,
       type,
       _hasIcon: hasIcon,
       _hasMainContent: hasMainContent,
@@ -169,12 +256,14 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
       [`${prefix}--btn--${kind}`]: kind,
       [`${prefix}--btn--disabled`]: disabled,
       [`${prefix}--btn--icon-only`]: hasIcon && !hasMainContent,
-      [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive,
-      [`${prefix}--btn--xl`]: size === 'xl',
-      [`${prefix}--btn--field`]: size === 'field' && !isExpressive,
+      [`${prefix}--btn--${size}`]: size,
       [`${prefix}-ce--btn--has-icon`]: hasIcon,
       [`${prefix}--btn--expressive`]: isExpressive,
+      [`${prefix}--btn--selected`]: isSelected && kind === 'ghost',
     });
+
+    const isDanger = kind.includes('danger');
+
     if (href) {
       return disabled
         ? html`
@@ -201,18 +290,63 @@ class BXButton extends HostListenerMixin(FocusMixin(LitElement)) {
             </a>
           `;
     }
-    return html`
-      <button
-        id="button"
-        part="button"
-        class="${classes}"
-        ?autofocus="${autofocus}"
-        ?disabled="${disabled}"
-        type="${ifDefined(type)}">
-        <slot @slotchange="${handleSlotChange}"></slot>
-        <slot name="icon" @slotchange="${handleSlotChange}"></slot>
-      </button>
-    `;
+
+    const alignmentClass =
+      tooltipAlignment &&
+      (tooltipPosition === BUTTON_TOOLTIP_POSITION.TOP ||
+        tooltipPosition === BUTTON_TOOLTIP_POSITION.BOTTOM)
+        ? `-${tooltipAlignment}`
+        : '';
+
+    const tooltipClasses = classMap({
+      [`${prefix}--popover-container`]: true,
+      [`${prefix}--popover--caret`]: true,
+      [`${prefix}--popover--high-contrast`]: true,
+      [`${prefix}--tooltip`]: true,
+      [`${prefix}--icon-tooltip`]: hasIcon,
+      [`${prefix}--popover--open`]: openTooltip,
+      [`${prefix}--popover--${tooltipPosition}${alignmentClass}`]: tooltipText,
+    });
+
+    return tooltipText
+      ? html`
+          <span class="${tooltipClasses}">
+            <button
+              id="button"
+              part="button"
+              class="${classes}"
+              ?autofocus="${autofocus}"
+              ?disabled="${disabled}"
+              type="${ifDefined(type)}">
+              <slot @slotchange="${handleSlotChange}"></slot>
+              <slot name="icon" @slotchange="${handleSlotChange}"></slot>
+            </button>
+            <span class="${prefix}--popover">
+              <span
+                class="${prefix}--popover-content ${prefix}--tooltip-content">
+                ${tooltipText}
+              </span>
+              <span class="${prefix}--popover-caret"></span>
+            </span>
+          </span>
+        `
+      : html`
+          <button
+            id="button"
+            part="button"
+            class="${classes}"
+            ?autofocus="${autofocus}"
+            ?disabled="${disabled}"
+            type="${ifDefined(type)}">
+            ${isDanger
+              ? html`<span class="${prefix}--visually-hidden"
+                  >${dangerDescriptor}</span
+                >`
+              : ``}
+            <slot @slotchange="${handleSlotChange}"></slot>
+            <slot name="icon" @slotchange="${handleSlotChange}"></slot>
+          </button>
+        `;
   }
 
   static shadowRootOptions = {

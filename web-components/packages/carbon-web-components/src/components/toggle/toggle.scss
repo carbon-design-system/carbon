@@ -20,4 +20,8 @@ $css--plex: true !default;
       cursor: not-allowed;
     }
   }
+
+  &[read-only] {
+    @extend .#{$prefix}--toggle--readonly;
+  }
 }

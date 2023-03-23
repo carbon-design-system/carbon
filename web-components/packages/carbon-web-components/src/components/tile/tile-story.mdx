@@ -60,21 +60,20 @@ contain separate internal CTAs.
 
 <Props of="cds-clickable-tile" />
 
-## Selectable tile
+## Radio tile
 
-Selectable tiles work like a radio button, where the entire tile is a click
-target. Selectable tiles may contain internal CTAs (like links to docs) if the
-internal CTA is given its own click target. Selectable tiles work well for
+Radio tiles work like a radio button, where the entire tile is a click
+target. Radio tiles may contain internal CTAs (like links to docs) if the
+internal CTA is given its own click target. Radio tiles work well for
 presenting options to a user in a structured manner, such as a set of pricing
 plans.
 
 ```html
-<fieldset>
-  <legend>Single-select tiles</legend>
+<cds-tile-group>
   <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
   <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
   <cds-radio-tile name="selectable-tile"> Single-select Tile </cds-radio-tile>
-</fieldset>
+</cds-tile-group>
 ```
 
 ## `<cds-radio-tile>` attributes and properties
@@ -85,11 +84,11 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 
 <Props of="cds-radio-tile" />
 
-## Multi-selectable tile
+## Selectable tile
 
 ```html
 <cds-selectable-tile name="selectable-tile">
-  Multi-select Tile
+  Selectable Tile
 </cds-selectable-tile>
 ```
 
@@ -100,6 +99,39 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 (e.g. `<cds-selectable-tile>` without `selected` attribute).
 
 <Props of="cds-selectable-tile" />
+
+## Multi Select
+
+```html
+<cds-tile-group>
+  <cds-selectable-tile name="selectable-tile">
+    Selectable Tile 1
+  </cds-selectable-tile>
+  <cds-selectable-tile name="selectable-tile2">
+    Selectable Tile 2
+  </cds-selectable-tile>
+  <cds-selectable-tile name="selectable-tile3">
+    Selectable Tile 3
+  </cds-selectable-tile>  
+<cds-tile-group>
+```
+
+## Capturing tile selection
+
+If using the `cds-tile-group` component alongside either Radio or Selectable tiles,
+you can capture the events using an event listener for the following event names:
+
+* For radio tiles, capture:
+  - `cds-current-radio-tile-selection`
+* For selectable tiles, capture:
+  - `cds-current-selectable-tile-selections`
+
+```javascript
+document.addEventListener('cds-current-radio-tile-selection', (event) => {
+  // use values from the detail object within the event
+})
+```
+
 
 ## Expandable tile
 
@@ -122,6 +154,9 @@ given its own click target.
   </cds-tile-below-the-fold-content>
 </cds-expandable-tile>
 ```
+
+If the desired behavior is expanding only upon clicking the button with the caret icon,
+use the `with-interactive` attribute instead.
 
 ## `<cds-expandable-tile>` attributes, properties and events
 

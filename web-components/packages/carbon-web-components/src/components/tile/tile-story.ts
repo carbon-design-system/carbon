@@ -34,6 +34,30 @@ export const Default = (args) => {
 
 Default.storyName = 'Default';
 
+export const DefaultWithLayer = (args) => {
+  const { colorScheme } = args?.[`${prefix}-tile`] ?? {};
+  return html`
+    <cds-layer>
+      <cds-tile color-scheme="${ifDefined(colorScheme)}">
+        First layer
+        <a href="https://example.com">Link</a>
+      </cds-tile>
+      <cds-layer>
+        <cds-tile color-scheme="${ifDefined(colorScheme)}">
+          Second layer
+          <a href="https://example.com">Link</a>
+        </cds-tile>
+        <cds-layer>
+          <cds-tile color-scheme="${ifDefined(colorScheme)}">
+            Third layer
+            <a href="https://example.com">Link</a>
+          </cds-tile>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+  `;
+};
+
 export const clickable = (args) => {
   const { download, href, hreflang, ping, rel, target, type } =
     args?.[`${prefix}-clickable-tile`] ?? {};
@@ -59,12 +83,57 @@ clickable.parameters = {
   },
 };
 
+export const ClickableWithLayer = (args) => {
+  const { download, href, hreflang, ping, rel, target, type } =
+    args?.[`${prefix}-clickable-tile`] ?? {};
+  return html`
+    <cds-layer>
+      <cds-clickable-tile
+        download="${ifDefined(download)}"
+        href="${ifDefined(href)}"
+        hreflang="${ifDefined(hreflang)}"
+        ping="${ifDefined(ping)}"
+        rel="${ifDefined(rel)}"
+        target="${ifDefined(target)}"
+        type="${ifDefined(type)}">
+        Clickable tile
+      </cds-clickable-tile>
+      <cds-layer>
+        <cds-clickable-tile
+          download="${ifDefined(download)}"
+          href="${ifDefined(href)}"
+          hreflang="${ifDefined(hreflang)}"
+          ping="${ifDefined(ping)}"
+          rel="${ifDefined(rel)}"
+          target="${ifDefined(target)}"
+          type="${ifDefined(type)}">
+          Clickable tile
+        </cds-clickable-tile>
+        <cds-layer>
+          <cds-clickable-tile
+            download="${ifDefined(download)}"
+            href="${ifDefined(href)}"
+            hreflang="${ifDefined(hreflang)}"
+            ping="${ifDefined(ping)}"
+            rel="${ifDefined(rel)}"
+            target="${ifDefined(target)}"
+            type="${ifDefined(type)}">
+            Clickable tile
+          </cds-clickable-tile>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+  `;
+};
+
+ClickableWithLayer.storyName = 'Clickable with layer';
+
 export const Radio = (args) => {
   const { checkmarkLabel, colorScheme, name, value, onInput } =
     args?.[`${prefix}-radio-tile`] ?? {};
   return html`
     <cds-tile-group>
-      <legend slot="legend">Single-select tiles</legend>
+      <legend slot="legend">Radio tile group</legend>
       <cds-radio-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
         color-scheme="${ifDefined(colorScheme)}"
@@ -110,11 +179,39 @@ Radio.parameters = {
   },
 };
 
+export const RadioWithLayer = () => {
+  return html`
+    <cds-layer>
+      <cds-tile-group>
+        <legend slot="legend">First layer</legend>
+        <cds-radio-tile name="option-1a"> Option 1 </cds-radio-tile>
+        <cds-radio-tile name="option-2a"> Option 2 </cds-radio-tile>
+      </cds-tile-group>
+      <cds-layer>
+        <cds-tile-group>
+          <legend slot="legend">Second layer</legend>
+          <cds-radio-tile name="option-1b"> Option 1 </cds-radio-tile>
+          <cds-radio-tile name="option-2b"> Option 2 </cds-radio-tile>
+        </cds-tile-group>
+        <cds-layer>
+          <cds-tile-group>
+            <legend slot="legend">Third layer</legend>
+            <cds-radio-tile name="option-1c"> Option 1 </cds-radio-tile>
+            <cds-radio-tile name="option-2c"> Option 2 </cds-radio-tile>
+          </cds-tile-group>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+  `;
+};
+
+RadioWithLayer.storyName = 'Radio with layer';
+
 export const multiSelectable = (args) => {
   const { checkmarkLabel, colorScheme, name, selected, value, onInput } =
     args?.[`${prefix}-selectable-tile`] ?? {};
   return html`
-    <fieldset>
+    <cds-tile-group>
       <cds-selectable-tile
         checkmark-label="${ifDefined(checkmarkLabel)}"
         color-scheme="${ifDefined(colorScheme)}"
@@ -142,7 +239,7 @@ export const multiSelectable = (args) => {
         @input="${onInput}">
         Option 3
       </cds-selectable-tile>
-    </fieldset>
+    </cds-tile-group>
   `;
 };
 
@@ -181,6 +278,105 @@ export const expandable = (args) => {
         Below the fold content here
       </cds-tile-below-the-fold-content>
     </cds-expandable-tile>
+  `;
+};
+
+export const ExpandableWithInteractive = (args) => {
+  const { colorScheme, expanded, disableChange, onBeforeChange, onChange } =
+    args?.[`${prefix}-expandable-tile`] ?? {};
+  const handleBeforeChanged = (event: CustomEvent) => {
+    onBeforeChange(event);
+    if (disableChange) {
+      event.preventDefault();
+    }
+  };
+  return html`
+    <cds-expandable-tile
+      with-interactive
+      color-scheme="${ifDefined(colorScheme)}"
+      ?expanded="${expanded}"
+      @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+      @cds-expandable-tile-changed=${onChange}>
+      <cds-tile-above-the-fold-content
+        slot="above-the-fold-content"
+        style="height: 200px">
+        Above the fold content here
+        <div style="padding-top:1rem;">
+          <cds-btn>Example</cds-btn>
+        </div>
+      </cds-tile-above-the-fold-content>
+      <cds-tile-below-the-fold-content style="height: 300px">
+        Below the fold content here
+        <cds-input></cds-input>
+      </cds-tile-below-the-fold-content>
+    </cds-expandable-tile>
+  `;
+};
+
+export const ExpandableWithLayer = (args) => {
+  const { colorScheme, expanded, disableChange, onBeforeChange, onChange } =
+    args?.[`${prefix}-expandable-tile`] ?? {};
+  const handleBeforeChanged = (event: CustomEvent) => {
+    onBeforeChange(event);
+    if (disableChange) {
+      event.preventDefault();
+    }
+  };
+  return html`
+    <cds-layer>
+      <cds-expandable-tile
+        with-interactive
+        color-scheme="${ifDefined(colorScheme)}"
+        ?expanded="${expanded}"
+        @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+        @cds-expandable-tile-changed=${onChange}>
+        <cds-tile-above-the-fold-content
+          slot="above-the-fold-content"
+          style="height: 132px">
+          Layer 1
+        </cds-tile-above-the-fold-content>
+        <cds-tile-below-the-fold-content style="height: 200px">
+          Below the fold content here
+          <cds-input></cds-input>
+        </cds-tile-below-the-fold-content>
+      </cds-expandable-tile>
+      <cds-layer>
+        <cds-expandable-tile
+          with-interactive
+          color-scheme="${ifDefined(colorScheme)}"
+          ?expanded="${expanded}"
+          @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+          @cds-expandable-tile-changed=${onChange}>
+          <cds-tile-above-the-fold-content
+            slot="above-the-fold-content"
+            style="height: 132px">
+            Layer 2
+          </cds-tile-above-the-fold-content>
+          <cds-tile-below-the-fold-content style="height: 200px">
+            Below the fold content here
+            <cds-input></cds-input>
+          </cds-tile-below-the-fold-content>
+        </cds-expandable-tile>
+        <cds-layer>
+          <cds-expandable-tile
+            with-interactive
+            color-scheme="${ifDefined(colorScheme)}"
+            ?expanded="${expanded}"
+            @cds-expandable-tile-beingchanged=${handleBeforeChanged}
+            @cds-expandable-tile-changed=${onChange}>
+            <cds-tile-above-the-fold-content
+              slot="above-the-fold-content"
+              style="height: 132px">
+              Layer 3
+            </cds-tile-above-the-fold-content>
+            <cds-tile-below-the-fold-content style="height: 200px">
+              Below the fold content here
+              <cds-input></cds-input>
+            </cds-tile-below-the-fold-content>
+          </cds-expandable-tile>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
   `;
 };
 

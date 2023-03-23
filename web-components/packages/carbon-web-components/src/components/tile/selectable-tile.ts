@@ -15,8 +15,10 @@ import Checkbox16 from '@carbon/icons/lib/checkbox/16';
 import CheckboxCheckedFilled16 from '@carbon/icons/lib/checkbox--checked--filled/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
+import HostListenerMixin from '../../globals/mixins/host-listener';
 import { TILE_COLOR_SCHEME } from './defs';
 import styles from './tile.scss';
+import HostListener from '../../globals/decorators/host-listener';
 
 /**
  * Multi-selectable tile.
@@ -25,7 +27,7 @@ import styles from './tile.scss';
  * @fires cds-selectable-tile-changed - The custom event fired after this selectable tile changes its selected state.
  */
 @customElement(`${prefix}-selectable-tile`)
-class BXSelectableTile extends FocusMixin(LitElement) {
+class BXSelectableTile extends HostListenerMixin(FocusMixin(LitElement)) {
   @query('input')
   protected _inputNode!: HTMLInputElement;
 
@@ -71,6 +73,21 @@ class BXSelectableTile extends FocusMixin(LitElement) {
             : svg`<title>${checkmarkLabel}</title>`,
         })}`;
   }
+
+  /**
+   * Listener function for keyboard interaction.
+   *
+   * @param event to get the key pressed
+   */
+  @HostListener('keydown')
+  // @ts-ignore: The decorator refers to this method but TS thinks this method is not referred to
+  private _handleKeydown = (event: KeyboardEvent) => {
+    const { key } = event;
+
+    if (key === ' ' || key === 'Enter') {
+      this.selected = !this.selected;
+    }
+  };
 
   /**
    * The a11y text for the checkmark icon of the selected state.

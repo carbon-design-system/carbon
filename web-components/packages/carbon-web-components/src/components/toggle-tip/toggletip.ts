@@ -35,15 +35,6 @@ class BXToggletip extends FocusMixin(LitElement) {
     this.open = !this.open;
   };
 
-  createRenderRoot() {
-    return this.attachShadow({
-      mode: 'open',
-      delegatesFocus:
-        Number((/Safari\/(\d+)/.exec(navigator.userAgent) ?? ['', 0])[1]) <=
-        537,
-    });
-  }
-
   render() {
     const { alignment, id, open } = this;
     const classes = classMap({
@@ -83,6 +74,11 @@ class BXToggletip extends FocusMixin(LitElement) {
     </span>
     `;
   }
+
+  static shadowRootOptions = {
+    ...LitElement.shadowRootOptions,
+    delegatesFocus: true,
+  };
 
   static styles = styles;
 }

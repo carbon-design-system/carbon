@@ -33,18 +33,23 @@ import '@carbon/web-components/es/components/toggle/index.js';
 
 ```html
 <cds-toggle
-  checked-text="On"
+  label-a="On"
   label-text="Toggle"
-  unchecked-text="Off"
+  label-b="Off"
+></cds-toggle>
+```
+
+## Small toggle
+
+```html
+<cds-toggle
+  size="sm"
+  label-a="On"
+  label-text="Toggle"
+  label-b="Off"
 ></cds-toggle>
 ```
 
 ## `<cds-toggle>` attributes, properties and events
-
-Note: `cds-checkbox-*` events are not fired from `<cds-toggle>`.
-
-Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-toggle small>`) and `false` means not setting the attribute (e.g.
-`<cds-toggle>` without `small` attribute).
 
 <Props of="cds-toggle" />

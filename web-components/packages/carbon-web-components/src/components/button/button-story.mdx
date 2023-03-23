@@ -1,5 +1,6 @@
 import { Props, Description } from '@storybook/addon-docs/blocks';
 import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
+import Add16 from '@carbon/web-components/es/icons/add/16';
 
 # Button
 
@@ -9,22 +10,12 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 [![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/button)
 
-Buttons are used to initialize an action, either in the background or foreground
-of an experience.
+## Overview
 
-There are several kinds of buttons:
-
-- Primary buttons should be used for the principal call to action on the page.
-- Secondary buttons should be used for secondary actions on each page.
-- Danger buttons should be used for a negative action (such as Delete) on the
-  page.
-
-Small buttons may be used when there is not enough space for a regular sized
-button. This issue is most often found in tables. Small buttons should have
-three words or fewer.
-
-When words are not enough, icons can be used in buttons to better communicate
-what the button does. Icons are always paired with text.
+Buttons are clickable elements that are used to trigger actions. They
+communicate calls to action to the user and allow users to interact with pages
+in a variety of ways. `Button` labels express what action will occur when the
+user interacts with it.
 
 ## Getting started
 
@@ -44,6 +35,51 @@ import '@carbon/web-components/es/components/button/index.js';
 ```html
 <cds-btn href="https://www.ibm.com"> Button </cds-btn>
 ```
+## Danger Buttons
+
+The danger button has three different styles: primary, tertiary, and ghost.
+Determining which danger button style to use will depend on the level of
+emphasis you want to give to the danger action. Destructive actions that are
+considered a required or primary step in a workflow should use the primary
+danger button style. However, if a destructive action is just one of several
+actions a user could choose from, then a lower emphasis style like the tertiary
+danger button or the ghost danger button may be more appropriate.
+
+```html
+<cds-btn type="danger" href="https://www.ibm.com"> Button </cds-btn>
+```
+
+## Icon-only Buttons
+
+Icon buttons allow users to take actions, and make choices, with a single tap.
+Icon buttons can take the form of any of the seven types (Primary, Secondary,
+Tertiary, Danger, Danger tertiary, Danger ghost and Ghost) but most commonly
+will be styled as primary or ghost buttons.
+
+Our Storybook example also shows off the Tooltip feature, explained later.
+
+```html
+import Add16 from '@carbon/web-components/es/icons/add/16';
+
+    <cds-btn>
+      ${Add16({ slot: 'icon' })}
+    </cds-btn>```
+
+## Set of Buttons
+
+You can wrap two `Button` elements in a `ButtonSet` when an action required by
+the user has more than one option. Always use a negative action button
+(secondary) paired with a positive action button (primary) in that order.
+Negative action buttons will be on the left. Positive action buttons should be
+on the right. When these two types buttons are paired in the correct order, they
+will automatically space themselves apart.
+
+```html
+<cds-btn-set>
+  <cds-btn href="https://www.ibm.com"> Secondary 1</cds-btn>
+  <cds-btn href="https://www.ibm.com"> Primary 2</cds-btn>
+</cds-btn-set>
+```
 
 ## Skeleton
 
@@ -52,6 +88,33 @@ For the skeleton variation, utilize `<cds-btn-skeleton>`.
 ```html
 <cds-btn-skeleton size="sm"> </cds-btn-skeleton>
 ```
+
+## Component API
+
+### Button `size`
+
+This attribute specifies which size the `Button` should be rendered at. Valid values
+are `sm`, `md`, `lg`, `xl` and `2xl`. If no `size` is specified, it
+renders as `lg`.
+
+### Button `tooltipAlignment`
+
+The `tooltip-alignment` attribute is used to change where the tooltip text and caret
+is rendered in relation to the `Button`. Accepted options are `start`, `center`,
+and `end`. The default alignment is `center`.
+
+### Button `tooltipPosition`
+
+When using an icon-only button, you may be in a situation where you need to
+change where the tooltip is positioned on the screen. `tooltip-position` takes in
+a position and will render the tooltip accordingly. Accepted options are `top`,
+`bottom`, `left`, and `right`. The default is position is `top`.
+
+### ButtonSet `stacked`
+
+By passing in `stacked` to the `cds-btn-set` component, you can arrange your two
+`Button` elements vertically
+
 
 ## `<cds-btn>` attributes and properties
 

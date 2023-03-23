@@ -33,32 +33,48 @@ import '@carbon/web-components/es/components/tag/index.js';
 ### HTML
 
 ```html
-<cds-tag type="gray" title="Clear selection"> This is a tag </cds-tag>
+<cds-tag type="gray" title="tag-example"> This is a tag </cds-tag>
 ```
 
 ## Filter tag
 
+Use the `filter` attribute to turn the tag into a filterable element.
+
 ```html
-<cds-filter-tag open type="gray" title="Clear selection">
+<cds-tag filter type="gray" title="Clear selection">
   This is a tag
-</cds-filter-tag>
+</cds-tag>
 ```
 
-## Themeing
+You can use the events to catch the closing of the tag.
 
-In order to get the correct token value for the tag background, you will need to
-apply the following in you `scss` to your themed class. For example:
+```js
+document.addEventListener('dds-tag-closed', (event) => {
+  // use values here
+})
+```
 
-```css
-@use '@carbon/styles/scss/vendor/@carbon/elements/scss/themes/mixins';
-@use '@carbon/styles/scss/component-tokens';
-@import 'carbon-components/src/components/tag/tag';
-.dds-theme-zone-g90 {
-  @include carbon--theme($carbon--theme--g90, true) {
-    @include emit-component-tokens($tag-colors);
-  }
+## Custom icon
+
+If you'd like to use a custom icon other than the `Close` button, import another icon 
+and insert it within the tag element as such:
+
+```html
+  <cds-tag filter type="gray" title="Clear selection">
+    This is a tag
+    
+  </cds-tag>
+```
+
+```javascript
+import Download16 from '@carbon/web-components/es/icons/download/16';
+
+function App() {
+  return (
+    html`  <cds-tag filter type="gray" title="Clear selection">This is a tag ${Download16({ slot: 'icon' })}</cds-tag>`
+  );
 }
-```
+
 
 ## `<cds-tag>` attributes and properties
 

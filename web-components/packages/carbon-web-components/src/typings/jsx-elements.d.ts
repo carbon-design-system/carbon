@@ -81,7 +81,6 @@ declare global {
       'cds-tabs': any;
       'cds-tab': any;
       'cds-tag': any;
-      'cds-filter-tag': any;
       'cds-tile': any;
       'cds-clickable-tile': any;
       'cds-selectable-tile': any;

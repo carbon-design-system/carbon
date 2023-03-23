@@ -13,21 +13,46 @@ import { boolean, select } from '@storybook/addon-knobs';
 import textNullable from '../../../.storybook/knob-text-nullable';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { TAG_SIZE, TAG_TYPE } from './tag';
-import './filter-tag';
+import './index';
 import storyDocs from './tag-story.mdx';
 import { prefix } from '../../globals/settings';
 
-const noop = () => {};
-
 const sizes = {
-  'Regular size': null,
+  [`Medium size (${TAG_SIZE.MEDIUM})`]: TAG_SIZE.MEDIUM,
   [`Small size (${TAG_SIZE.SMALL})`]: TAG_SIZE.SMALL,
 };
 
-export const Default = (args) => {
-  const { size, type, title, disabled } = args?.[`${prefix}-tag`] ?? {};
+const types = [
+  'red',
+  'magenta',
+  'purple',
+  'blue',
+  'cyan',
+  'teal',
+  'green',
+  'gray',
+  'cool-gray',
+  'warm-gray',
+  'high-contrast',
+  'outline',
+];
+
+export const Default = () => {
+  return html`
+    ${types.map(
+      (e) => html`<cds-tag size="sm" type="${e}">Tag content</cds-tag>`
+    )}
+  `;
+};
+
+export const Playground = (args) => {
+  const { open, filter, size, type, title, disabled } =
+    args?.[`${prefix}-tag`] ?? {};
+
   return html`
     <cds-tag
+      ?filter="${filter}"
+      ?open="${open}"
       size="${ifDefined(size)}"
       type="${ifDefined(type)}"
       title="${ifDefined(title)}"
@@ -37,9 +62,7 @@ export const Default = (args) => {
   `;
 };
 
-Default.storyName = 'Default';
-
-Default.parameters = {
+Playground.parameters = {
   knobs: {
     [`${prefix}-tag`]: () => ({
       disabled: boolean('Disabled (disabled)', false),
@@ -56,55 +79,11 @@ Default.parameters = {
         ),
         'gray'
       ),
-    }),
-  },
-};
-
-export const filter = (args) => {
-  const {
-    open,
-    size,
-    type,
-    title,
-    disabled,
-    disableClose,
-    onClick,
-    onBeforeClose = noop,
-    onClose = noop,
-  } = args?.[`${prefix}-filter-tag`] ?? {};
-  const handleBeforeClose = (event: CustomEvent) => {
-    onBeforeClose(event);
-    if (disableClose) {
-      event.preventDefault();
-    }
-  };
-  return html`
-    <cds-filter-tag
-      ?open="${open}"
-      size="${ifDefined(size)}"
-      type="${ifDefined(type)}"
-      title="${ifDefined(title)}"
-      ?disabled="${disabled}"
-      @click="${onClick}"
-      @cds-filter-tag-beingclosed="${handleBeforeClose}"
-      @cds-filter-tag-closed="${onClose}">
-      This is a tag
-    </cds-filter-tag>
-  `;
-};
-
-filter.parameters = {
-  knobs: {
-    [`${prefix}-filter-tag`]: () => ({
-      ...Default.parameters.knobs[`${prefix}-tag`](),
-      open: boolean('Open (open)', true),
-      disableClose: boolean(
-        `Disable user-initiated close action (Call event.preventDefault() in ${prefix}-filter-tag-beingclosed event)`,
-        false
-      ),
+      open: boolean('Open', true),
+      filter: boolean('Filter', false),
       onClick: action('click'),
-      onBeforeClose: action(`${prefix}-filter-tag-beingclosed`),
-      onClose: action(`${prefix}-filter-tag-closed`),
+      onBeforeClose: action(`${prefix}-tag-beingclosed`),
+      onClose: action(`${prefix}-tag-closed`),
     }),
   },
 };

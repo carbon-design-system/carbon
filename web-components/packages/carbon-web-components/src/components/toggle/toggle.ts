@@ -30,7 +30,7 @@ export { TOGGLE_SIZE };
  * @fires cds-toggle-changed - The custom event fired after this changebox changes its checked state.
  */
 @customElement(`${prefix}-toggle`)
-class BXToggle extends HostListenerMixin(BXCheckbox) {
+class CDSToggle extends HostListenerMixin(BXCheckbox) {
   @query('button')
   protected _checkboxNode!: HTMLInputElement;
 
@@ -39,7 +39,7 @@ class BXToggle extends HostListenerMixin(BXCheckbox) {
    */
   protected _handleChange() {
     const { checked, indeterminate } = this._checkboxNode;
-    if (this.disabled) return;
+    if (this.disabled || this.readOnly) return;
     this.checked = !checked;
     this.indeterminate = indeterminate;
     const { eventChange } = this.constructor as typeof BXCheckbox;
@@ -85,8 +85,20 @@ class BXToggle extends HostListenerMixin(BXCheckbox) {
   /**
    * The text for the checked state.
    */
-  @property({ attribute: 'checked-text' })
-  checkedText = '';
+  @property({ attribute: 'label-a' })
+  labelA = '';
+
+  /**
+   * Hide label text.
+   */
+  @property({ reflect: true, type: Boolean })
+  hideLabel = false;
+
+  /**
+   * Read only boolean.
+   */
+  @property({ reflect: true, attribute: 'read-only', type: Boolean })
+  readOnly = false;
 
   /**
    * Toggle size.
@@ -97,19 +109,20 @@ class BXToggle extends HostListenerMixin(BXCheckbox) {
   /**
    * The text for the unchecked state.
    */
-  @property({ attribute: 'unchecked-text' })
-  uncheckedText = '';
+  @property({ attribute: 'label-b' })
+  labelB = '';
 
   render() {
     const {
       checked,
-      checkedText,
       disabled,
       labelText,
+      hideLabel,
       id,
       name,
       size,
-      uncheckedText,
+      labelA,
+      labelB,
       value,
       _handleChange: handleChange,
     } = this;
@@ -121,7 +134,7 @@ class BXToggle extends HostListenerMixin(BXCheckbox) {
       [`${prefix}--toggle__switch`]: true,
       [`${prefix}--toggle__switch--checked`]: checked,
     });
-    const stateText = checked ? checkedText : uncheckedText;
+    const stateText = checked ? labelA : labelB;
     return html`
       <button
         class="${prefix}--toggle__button"
@@ -135,12 +148,15 @@ class BXToggle extends HostListenerMixin(BXCheckbox) {
         ?disabled=${disabled}
         id="${id}"></button>
       <label for="${id}" class="${prefix}--toggle__label">
-        <span class="${prefix}--toggle__label-text">Toggle element label</span>
+        <span class="${prefix}--toggle__label-text">${labelText}</span>
         <div class="${inputClasses}">
           <div class="${toggleClasses}" @click=${handleChange}>
             ${this._renderCheckmark()}
           </div>
-          <span class="${prefix}--toggle__text" aria-hidden="true"
+          <span
+            ?hidden="${hideLabel}"
+            class="${prefix}--toggle__text"
+            aria-hidden="true"
             >${stateText}</span
           >
         </div>
@@ -158,4 +174,4 @@ class BXToggle extends HostListenerMixin(BXCheckbox) {
   static styles = styles;
 }
 
-export default BXToggle;
+export default CDSToggle;

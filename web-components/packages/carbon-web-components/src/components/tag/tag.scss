@@ -10,101 +10,98 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/config' as *;
 @use '@carbon/styles/scss/utilities' as *;
 @use '@carbon/styles/scss/breakpoint' as *;
-@use '@carbon/styles/scss/components/tag';
+@use '@carbon/styles/scss/components/tag/index' as *;
 
 :host(#{$prefix}-tag) {
   @extend .#{$prefix}--tag;
-}
 
-:host(#{$prefix}-tag[type='red']),
-:host(#{$prefix}-filter-tag[type='red']) {
-  @extend .#{$prefix}--tag--red;
-}
+  &[size='sm'] {
+    @extend .#{$prefix}--tag--sm;
 
-:host(#{$prefix}-tag[type='magenta']),
-:host(#{$prefix}-filter-tag[type='magenta']) {
-  @extend .#{$prefix}--tag--magenta;
-}
-
-:host(#{$prefix}-tag[type='purple']),
-:host(#{$prefix}-filter-tag[type='purple']) {
-  @extend .#{$prefix}--tag--purple;
-}
-
-:host(#{$prefix}-tag[type='blue']),
-:host(#{$prefix}-filter-tag[type='blue']) {
-  @extend .#{$prefix}--tag--blue;
-}
-
-:host(#{$prefix}-tag[type='cyan']),
-:host(#{$prefix}-filter-tag[type='cyan']) {
-  @extend .#{$prefix}--tag--cyan;
-}
-
-:host(#{$prefix}-tag[type='teal']),
-:host(#{$prefix}-filter-tag[type='teal']) {
-  @extend .#{$prefix}--tag--teal;
-}
-
-:host(#{$prefix}-tag[type='green']),
-:host(#{$prefix}-filter-tag[type='green']) {
-  @extend .#{$prefix}--tag--green;
-}
-
-:host(#{$prefix}-tag[type='gray']),
-:host(#{$prefix}-filter-tag[type='gray']) {
-  @extend .#{$prefix}--tag--gray;
-}
-
-:host(#{$prefix}-tag[type='cool-gray']),
-:host(#{$prefix}-filter-tag[type='cool-gray']) {
-  @extend .#{$prefix}--tag--cool-gray;
-}
-
-:host(#{$prefix}-tag[type='warm-gray']),
-:host(#{$prefix}-filter-tag[type='warm-gray']) {
-  @extend .#{$prefix}--tag--warm-gray;
-}
-
-:host(#{$prefix}-tag[disabled]),
-:host(#{$prefix}-filter-tag[disabled]) {
-  @extend .#{$prefix}--tag--disabled;
-}
-
-// tags used for filtering
-:host(#{$prefix}-filter-tag) {
-  @extend .#{$prefix}--tag;
-  @extend .#{$prefix}--tag--filter;
-
-  display: none;
-
-  &[open] {
-    display: inline-flex;
+    .#{$prefix}--tag__close-icon {
+      width: rem(18px);
+      height: rem(18px);
+      margin-left: rem(5px);
+    }
   }
-}
 
-:host(#{$prefix}-filter-tag[disabled]) .#{$prefix}--tag__close-icon {
-  cursor: not-allowed;
-
-  &,
-  &:hover {
-    background-color: transparent;
+  &[type='red'] {
+    // @extend .#{$prefix}--tag--red;
+    background-color: #{$tag-background-red};
   }
-}
 
-:host(#{$prefix}-tag[size='sm']),
-:host(#{$prefix}-filter-tag[size='sm']) {
-  @extend .#{$prefix}--tag--sm;
-
-  .#{$prefix}--tag__close-icon {
-    width: rem(18px);
-    height: rem(18px);
-    margin-left: rem(5px);
+  &[type='magenta'] {
+    @extend .#{$prefix}--tag--magenta;
   }
-}
 
-:host(#{$prefix}-filter-tag[size='sm']) {
-  padding-right: 0;
+  &[type='purple'] {
+    @extend .#{$prefix}--tag--purple;
+  }
+
+  &[type='blue'] {
+    @extend .#{$prefix}--tag--blue;
+  }
+
+  &[type='cyan'] {
+    @extend .#{$prefix}--tag--cyan;
+  }
+
+  &[type='teal'] {
+    @extend .#{$prefix}--tag--teal;
+  }
+
+  &[type='green'] {
+    @extend .#{$prefix}--tag--green;
+  }
+
+  &[type='gray'] {
+    @extend .#{$prefix}--tag--gray;
+  }
+
+  &[type='cool-gray'] {
+    @extend .#{$prefix}--tag--cool-gray;
+  }
+
+  &[type='warm-gray'] {
+    @extend .#{$prefix}--tag--warm-gray;
+  }
+
+  &[type='high-contrast'] {
+    @extend .#{$prefix}--tag--high-contrast;
+  }
+
+  &[type='outline'] {
+    @extend .#{$prefix}--tag--outline;
+  }
+
+  &[disabled] {
+    @extend .#{$prefix}--tag--disabled;
+  }
+
+  &[filter] {
+    @extend .#{$prefix}--tag--filter;
+
+    display: none;
+
+    &[size='sm'] {
+      padding-right: 0;
+    }
+
+    &[open] {
+      display: inline-flex;
+    }
+
+    &[disabled] {
+      .#{$prefix}--tag__close-icon {
+        cursor: not-allowed;
+
+        &,
+        &:hover {
+          background-color: transparent;
+        }
+      }
+    }
+  }
 }
 
 // Skeleton state

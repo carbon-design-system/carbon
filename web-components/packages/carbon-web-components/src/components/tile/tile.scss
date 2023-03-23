@@ -14,6 +14,7 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/components/tile/index' as *;
 @use '@carbon/styles/scss/components/link/index' as *;
 @use '@carbon/styles/scss/components/form/index' as *;
+@use '@carbon/styles/scss/theme' as *;
 
 :host(#{$prefix}-tile) {
   @extend .#{$prefix}--tile;
@@ -25,10 +26,12 @@ $css--plex: true !default;
 
 :host(#{$prefix}-tile-group) {
   @extend .#{$prefix}--tile-group;
+
+  background: transparent;
 }
 
 :host(#{$prefix}-clickable-tile) {
-  display: content;
+  display: grid;
   outline: none;
 
   .#{$prefix}--link--disabled {
@@ -48,6 +51,12 @@ $css--plex: true !default;
 
     &:focus {
       @include focus-outline('outline');
+    }
+  }
+
+  &:hover {
+    .#{$prefix}--tile--clickable {
+      color: inherit;
     }
   }
 }
@@ -81,15 +90,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--tile;
   @extend .#{$prefix}--tile--expandable;
 
-  position: relative;
-
-  .#{$prefix}--tile__chevron {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-  }
-
   ::slotted(#{$prefix}-tile-above-the-fold-content) {
     @extend .#{$prefix}--tile-content__above-the-fold;
   }
@@ -102,15 +102,36 @@ $css--plex: true !default;
     max-height: 0;
     transition: max-height $duration-fast-02 motion(standard, productive);
   }
-}
 
-:host(#{$prefix}-expandable-tile[expanded]) {
-  @extend .#{$prefix}--tile--is-expanded;
+  &[expanded] {
+    @extend .#{$prefix}--tile--is-expanded;
 
-  ::slotted(#{$prefix}-tile-below-the-fold-content) {
-    opacity: 1;
-    transition: $duration-fast-02 motion(standard, productive);
-    visibility: visible;
+    ::slotted(#{$prefix}-tile-below-the-fold-content) {
+      opacity: 1;
+      transition: $duration-fast-02 motion(standard, productive);
+    }
+  }
+
+  &[with-interactive] {
+    cursor: default;
+    transition: max-height $duration-moderate-01 motion(standard, productive);
+
+    &:hover {
+      background-color: $layer;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  &:not([with-interactive]) {
+    .#{$prefix}--tile__chevron {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
   }
 }
 
