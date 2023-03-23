@@ -3,11 +3,12 @@
 exports[`TableToolbarSearch renders as expected - Component API should render 1`] = `
 <div>
   <div
-    aria-labelledby="custom-id-search"
+    aria-label="Filter table"
     class="cds--search cds--search--lg custom-class cds--toolbar-search-container-expandable"
     role="search"
   >
     <div
+      aria-labelledby="custom-id"
       class="cds--search-magnifier"
     >
       <svg
