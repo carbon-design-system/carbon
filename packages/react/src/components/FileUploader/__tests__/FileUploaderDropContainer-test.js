@@ -25,7 +25,7 @@ describe('FileUploaderDropContainer', () => {
       <FileUploaderDropContainer className="test" />
     );
     const dropArea = container.querySelector('button');
-    expect(dropArea.classList.contains('test')).toBe(true);
+    expect(dropArea).toHaveClass('test');
   });
 
   it('should have a unique id each time it is used', () => {

@@ -29,6 +29,6 @@ describe('FileUploaderSkeleton', () => {
     const { container } = render(
       <FileUploaderSkeleton className={className} />
     );
-    expect(container.firstChild.classList.contains(className)).toBe(true);
+    expect(container.firstChild).toHaveClass(className);
   });
 });
