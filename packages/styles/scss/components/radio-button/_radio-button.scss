@@ -162,7 +162,7 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button__validation-msg {
-    display: none;
+    // display: none;
     align-items: flex-end;
     margin-top: $spacing-03;
   }
