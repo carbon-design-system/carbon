@@ -85,7 +85,7 @@ describe('PasswordInput', () => {
       );
     });
 
-    it('should respect hidePasswordLabel prop', () => {
+    it('should respect hidePasswordLabel prop', async () => {
       render(
         <PasswordInput
           id="input-1"
@@ -94,7 +94,7 @@ describe('PasswordInput', () => {
         />
       );
 
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
 
       expect(screen.getByText('Hide Password')).toBeInTheDocument();
     });
@@ -262,7 +262,7 @@ describe('PasswordInput', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should call onChange when expected', () => {
+    it('should call onChange when expected', async () => {
       const onChange = jest.fn();
       render(
         <PasswordInput
@@ -273,7 +273,7 @@ describe('PasswordInput', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('PasswordInput label'), 'x');
+      await userEvent.type(screen.getByLabelText('PasswordInput label'), 'x');
       expect(screen.getByLabelText('PasswordInput label')).toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(1);
       expect(onChange).toHaveBeenCalledWith(
@@ -283,7 +283,7 @@ describe('PasswordInput', () => {
       );
     });
 
-    it('should call onClick when expected', () => {
+    it('should call onClick when expected', async () => {
       const onClick = jest.fn();
       render(
         <PasswordInput
@@ -293,7 +293,7 @@ describe('PasswordInput', () => {
         />
       );
 
-      userEvent.click(screen.getByLabelText('PasswordInput label'));
+      await userEvent.click(screen.getByLabelText('PasswordInput label'));
       expect(onClick).toHaveBeenCalledTimes(1);
       expect(onClick).toHaveBeenCalledWith(
         expect.objectContaining({
@@ -302,15 +302,15 @@ describe('PasswordInput', () => {
       );
     });
 
-    it('should call onTogglePasswordVisibility when visiblity button is clicked', () => {
+    it('should call onTogglePasswordVisibility when visiblity button is clicked', async () => {
       render(<PasswordInput id="input-1" labelText="PasswordInput label" />);
 
       expect(screen.getByText('Show password')).toBeInTheDocument();
-      userEvent.click(screen.getByRole('button'));
+      await userEvent.click(screen.getByRole('button'));
       expect(screen.getByText('Hide password')).toBeInTheDocument();
     });
 
-    it('should not call `onClick` when the `<input>` is clicked but disabled', () => {
+    it('should not call `onClick` when the `<input>` is clicked but disabled', async () => {
       const onClick = jest.fn();
 
       render(
@@ -322,11 +322,11 @@ describe('PasswordInput', () => {
         />
       );
 
-      userEvent.click(screen.getByLabelText('PasswordInput label'));
+      await userEvent.click(screen.getByLabelText('PasswordInput label'));
       expect(onClick).not.toHaveBeenCalled();
     });
 
-    it('should not call `onChange` when the `<input>` is clicked but disabled', () => {
+    it('should not call `onChange` when the `<input>` is clicked but disabled', async () => {
       const onChange = jest.fn();
 
       render(
@@ -338,7 +338,7 @@ describe('PasswordInput', () => {
         />
       );
 
-      userEvent.type(screen.getByLabelText('PasswordInput label'), 'x');
+      await userEvent.type(screen.getByLabelText('PasswordInput label'), 'x');
       expect(screen.getByLabelText('PasswordInput label')).not.toHaveValue('x');
       expect(onChange).toHaveBeenCalledTimes(0);
     });

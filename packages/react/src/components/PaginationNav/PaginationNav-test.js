@@ -36,25 +36,25 @@ describe('PaginationNav', () => {
       ).toBe(4);
     });
 
-    it('should respect loop prop', () => {
+    it('should respect loop prop', async () => {
       render(<PaginationNav totalItems={4} loop />);
 
-      userEvent.click(screen.getByText('4'));
+      await userEvent.click(screen.getByText('4'));
 
-      userEvent.click(screen.getByLabelText('Next'));
+      await userEvent.click(screen.getByLabelText('Next'));
       expect(screen.getByText('1')).toHaveAttribute('aria-current', 'page');
 
-      userEvent.click(screen.getByText('1'));
-      userEvent.click(screen.getByLabelText('Previous'));
+      await userEvent.click(screen.getByText('1'));
+      await userEvent.click(screen.getByLabelText('Previous'));
 
       expect(screen.getByText('4')).toHaveAttribute('aria-current', 'page');
     });
 
-    it('should respect onChange prop', () => {
+    it('should respect onChange prop', async () => {
       const onChange = jest.fn();
 
       render(<PaginationNav totalItems={10} onChange={onChange} />);
-      userEvent.click(screen.getByText('4'));
+      await userEvent.click(screen.getByText('4'));
       expect(onChange).toHaveBeenCalled();
     });
 
@@ -86,26 +86,26 @@ describe('PaginationNav', () => {
   });
 
   describe('behaves as expected', () => {
-    it('should move to next page when "Next" is pressed', () => {
+    it('should move to next page when "Next" is pressed', async () => {
       render(<PaginationNav totalItems={4} loop />);
 
-      userEvent.click(screen.getByLabelText('Next'));
+      await userEvent.click(screen.getByLabelText('Next'));
       expect(screen.getByText('2')).toHaveAttribute('aria-current', 'page');
     });
 
-    it('should move to previous page when "Previous" is pressed', () => {
+    it('should move to previous page when "Previous" is pressed', async () => {
       render(<PaginationNav totalItems={4} loop />);
 
-      userEvent.click(screen.getByText('4'));
+      await userEvent.click(screen.getByText('4'));
 
-      userEvent.click(screen.getByLabelText('Previous'));
+      await userEvent.click(screen.getByLabelText('Previous'));
       expect(screen.getByText('3')).toHaveAttribute('aria-current', 'page');
     });
 
-    it('should move to page that is pressed', () => {
+    it('should move to page that is pressed', async () => {
       render(<PaginationNav totalItems={4} loop />);
 
-      userEvent.click(screen.getByText('4'));
+      await userEvent.click(screen.getByText('4'));
 
       expect(screen.getByText('4')).toHaveAttribute('aria-current', 'page');
     });

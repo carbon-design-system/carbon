@@ -58,7 +58,7 @@ describe('Tooltip', () => {
     expect(screen.getByText('test')).toHaveAttribute('aria-describedby');
   });
 
-  it('should call onFocus', () => {
+  it('should call onFocus', async () => {
     const onFocus = jest.fn();
     render(
       <Tooltip description="test description">
@@ -68,11 +68,11 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByRole('button'));
     expect(onFocus).toHaveBeenCalled();
   });
 
-  it('should call onBlur', () => {
+  it('should call onBlur', async () => {
     const onBlur = jest.fn();
     render(
       <Tooltip description="test description">
@@ -82,8 +82,8 @@ describe('Tooltip', () => {
       </Tooltip>
     );
 
-    userEvent.click(screen.getByRole('button'));
-    userEvent.tab();
+    await userEvent.click(screen.getByRole('button'));
+    await userEvent.tab();
 
     expect(onBlur).toHaveBeenCalled();
   });

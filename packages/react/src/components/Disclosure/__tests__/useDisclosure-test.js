@@ -15,7 +15,7 @@ describe('useDisclosure', () => {
   afterEach(cleanup);
 
   // https://www.w3.org/TR/wai-aria-practices-1.1/#keyboard-interaction-8
-  it('should toggle visibility when the button is clicked', () => {
+  it('should toggle visibility when the button is clicked', async () => {
     function TestComponent() {
       const { buttonProps, contentProps, open } = useDisclosure('testid');
       return (
@@ -37,17 +37,17 @@ describe('useDisclosure', () => {
 
     const trigger = screen.getByText('trigger');
 
-    userEvent.tab();
+    await userEvent.tab();
     expect(trigger).toHaveFocus();
 
-    userEvent.click(document.activeElement);
+    await userEvent.click(document.activeElement);
     expect(content).toBeVisible();
 
-    userEvent.click(document.activeElement);
+    await userEvent.click(document.activeElement);
     expect(content).not.toBeVisible();
   });
 
-  it('should toggle visibility when the button is focused and Enter or Space is pressed', () => {
+  it('should toggle visibility when the button is focused and Enter or Space is pressed', async () => {
     function TestComponent() {
       const { buttonProps, contentProps, open } = useDisclosure('testid');
       return (
@@ -66,15 +66,15 @@ describe('useDisclosure', () => {
 
     const trigger = screen.getByText('trigger');
 
-    userEvent.type(trigger, `${specialChars.space}`);
+    await userEvent.type(trigger, `${specialChars.space}`);
     expect(trigger).toHaveFocus();
 
-    userEvent.type(trigger, `${specialChars.enter}`);
+    await userEvent.type(trigger, `${specialChars.enter}`);
     expect(trigger).toHaveFocus();
   });
 
   // https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-8
-  it('should set `aria-expanded` to match the visibility of the content', () => {
+  it('should set `aria-expanded` to match the visibility of the content', async () => {
     function TestComponent() {
       const { buttonProps, contentProps, open } = useDisclosure('testid');
       return (
@@ -94,7 +94,7 @@ describe('useDisclosure', () => {
     const trigger = screen.getByRole('button');
     expect(trigger).toHaveAttribute('aria-expanded', 'false');
 
-    userEvent.click(trigger);
+    await userEvent.click(trigger);
 
     expect(trigger).toHaveAttribute('aria-expanded', 'true');
   });

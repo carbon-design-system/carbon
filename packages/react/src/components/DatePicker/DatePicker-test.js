@@ -227,7 +227,7 @@ describe('Simple date picker', () => {
       const input = document.querySelector('.cds--date-picker__input');
 
       expect(screen.getByRole('application')).not.toHaveClass('open');
-      userEvent.click(input);
+      await userEvent.click(input);
       expect(screen.getByRole('application')).toHaveClass('open');
     });
   });
@@ -250,7 +250,7 @@ describe('Single date picker', () => {
     expect(screen.getByRole('application')).toBeInTheDocument();
   });
 
-  it('should update the calendar classnames when open', () => {
+  it('should update the calendar classnames when open', async () => {
     render(
       <DatePicker
         onChange={() => {}}
@@ -267,11 +267,11 @@ describe('Single date picker', () => {
     const input = document.querySelector('.cds--date-picker__input');
 
     expect(screen.getByRole('application')).not.toHaveClass('open');
-    userEvent.click(input);
+    await userEvent.click(input);
     expect(screen.getByRole('application')).toHaveClass('open');
   });
 
-  it('should support controlled value', () => {
+  it('should support controlled value', async () => {
     const DatePickerExample = () => {
       const [date, setDate] = useState('');
       return (
@@ -302,7 +302,7 @@ describe('Single date picker', () => {
     render(<DatePickerExample />);
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
 
-    userEvent.type(
+    await userEvent.type(
       screen.getByLabelText('Date Picker label'),
       '01/20/1989{enter}'
     );
@@ -310,7 +310,7 @@ describe('Single date picker', () => {
       '01/20/1989'
     );
 
-    userEvent.click(screen.getByText('clear'));
+    await userEvent.click(screen.getByText('clear'));
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
   });
 });
@@ -351,7 +351,7 @@ describe('Date picker with locale', () => {
 });
 
 describe('Date picker with minDate and maxDate', () => {
-  it('should respect minDate', () => {
+  it('should respect minDate', async () => {
     render(
       <DatePicker
         onChange={() => {}}
@@ -370,14 +370,14 @@ describe('Date picker with minDate and maxDate', () => {
     const belowMinDate = document.querySelector(
       '[aria-label="December 31, 2017"]'
     );
-    userEvent.click(screen.getByTestId('input-min-max'));
-    userEvent.click(belowMinDate);
+    await userEvent.click(screen.getByTestId('input-min-max'));
+    await userEvent.click(belowMinDate);
     expect(screen.getByLabelText('Date Picker label')).toHaveValue(
       '01/01/2018'
     );
   });
 
-  it('should respect maxDate', () => {
+  it('should respect maxDate', async () => {
     render(
       <DatePicker
         onChange={() => {}}
@@ -398,8 +398,8 @@ describe('Date picker with minDate and maxDate', () => {
       '[aria-label="January 4, 2018"]'
     );
 
-    userEvent.click(screen.getByTestId('input-min-max-2'));
-    userEvent.click(aboveMaxDate);
+    await userEvent.click(screen.getByTestId('input-min-max-2'));
+    await userEvent.click(aboveMaxDate);
     expect(screen.getByLabelText('Date Picker label')).toHaveValue(
       '01/01/2018'
     );
@@ -430,7 +430,7 @@ describe('Date picker with minDate and maxDate', () => {
     jest.restoreAllMocks();
   });
 
-  it('should respect readOnly prop', () => {
+  it('should respect readOnly prop', async () => {
     const onChange = jest.fn();
     const onClick = jest.fn();
 
@@ -454,14 +454,14 @@ describe('Date picker with minDate and maxDate', () => {
 
     // Click events should fire
     const theStart = screen.getByLabelText('Start date');
-    userEvent.click(theStart);
+    await userEvent.click(theStart);
     expect(onClick).toHaveBeenCalledTimes(1);
     const theEnd = screen.getByLabelText('End date');
-    userEvent.click(theEnd);
+    await userEvent.click(theEnd);
     expect(onClick).toHaveBeenCalledTimes(2);
 
-    userEvent.type(theStart, '01/01/2018{tab}'); // should not be possible to type
-    userEvent.type(theEnd, '02/02/2018{enter}'); // should not be possible to type
+    await userEvent.type(theStart, '01/01/2018{tab}'); // should not be possible to type
+    await userEvent.type(theEnd, '02/02/2018{enter}'); // should not be possible to type
 
     expect(onChange).toHaveBeenCalledTimes(0);
   });

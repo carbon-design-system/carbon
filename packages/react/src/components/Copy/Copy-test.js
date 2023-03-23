@@ -61,7 +61,7 @@ describe('Button props', () => {
     expect(screen.getByTestId('copy-button-3')).toHaveAttribute('disabled');
   });
 
-  it('should call the click handler', () => {
+  it('should call the click handler', async () => {
     const onClick = jest.fn();
     render(
       <Copy
@@ -73,14 +73,14 @@ describe('Button props', () => {
       </Copy>
     );
 
-    const button = screen.getByTestId('copy-button-4');
-    userEvent.click(button);
+    const button = await screen.findByTestId('copy-button-4');
+    await userEvent.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 });
 
 describe('Feedback', () => {
-  it('should make the feedback visible for a limited amount of time', () => {
+  it('should make the feedback visible for a limited amount of time', async () => {
     render(
       <Copy
         aria-label="Copy button"
@@ -91,7 +91,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-5');
-    userEvent.click(button);
+    await userEvent.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
     act(() => {
@@ -103,7 +103,7 @@ describe('Feedback', () => {
     expect(button).not.toHaveClass('cds--copy-btn--animating');
   });
 
-  it('should be able to specify the feedback message', () => {
+  it('should be able to specify the feedback message', async () => {
     render(
       <Copy
         title="Copy title"
@@ -114,11 +114,11 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-6');
-    userEvent.click(button);
+    await userEvent.click(button);
     expect(screen.getAllByText('overriding-default-feedback').length).toBe(2);
   });
 
-  it('should allow users to override default feedback timeout via prop', () => {
+  it('should allow users to override default feedback timeout via prop', async () => {
     render(
       <Copy
         title="Copy title"
@@ -129,7 +129,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-7');
-    userEvent.click(button);
+    await userEvent.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
     act(() => {

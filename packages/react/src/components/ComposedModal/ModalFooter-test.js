@@ -68,13 +68,13 @@ describe('ModalFooter', () => {
     expect(screen.getByText('Cancel')).toHaveClass('custom-class');
   });
 
-  it('should call closeModal when the modal is closed', () => {
+  it('should call closeModal when the modal is closed', async () => {
     const closeModal = jest.fn();
     render(
       <ModalFooter secondaryButtonText="Cancel" closeModal={closeModal} />
     );
 
-    userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(closeModal).toHaveBeenCalled();
   });
@@ -92,7 +92,7 @@ describe('ModalFooter', () => {
     expect(screen.getByText('danger', { hidden: true })).toBeInTheDocument();
   });
 
-  it('should call onRequestClose when close requested', () => {
+  it('should call onRequestClose when close requested', async () => {
     const onRequestClose = jest.fn();
     render(
       <ModalFooter
@@ -102,12 +102,12 @@ describe('ModalFooter', () => {
       />
     );
 
-    userEvent.click(screen.getByText('Cancel'));
+    await userEvent.click(screen.getByText('Cancel'));
 
     expect(onRequestClose).toHaveBeenCalled();
   });
 
-  it('should call onRequestSubmit when submit requested', () => {
+  it('should call onRequestSubmit when submit requested', async () => {
     const onRequestSubmit = jest.fn();
     render(
       <ModalFooter
@@ -117,7 +117,7 @@ describe('ModalFooter', () => {
       />
     );
 
-    userEvent.click(screen.getByText('Submit'));
+    await userEvent.click(screen.getByText('Submit'));
 
     expect(onRequestSubmit).toHaveBeenCalled();
   });

@@ -16,7 +16,7 @@ jest.useFakeTimers();
 describe('useDelayedState', () => {
   afterEach(cleanup);
 
-  it('should update the state after the given delayMs', () => {
+  it('should update the state after the given delayMs', async () => {
     function TestComponent() {
       const [count, setCount] = useDelayedState(0);
       return (
@@ -36,15 +36,15 @@ describe('useDelayedState', () => {
     render(<TestComponent />);
     expect(screen.getByTestId('count').textContent).toBe('0');
 
-    act(() => {
-      userEvent.click(screen.getByText('increment'));
+    act(async () => {
+      await userEvent.click(screen.getByText('increment'));
       jest.runOnlyPendingTimers();
     });
 
     expect(screen.getByTestId('count').textContent).toBe('1');
   });
 
-  it('should cancel any pending state updates if called before delayMs has passed', () => {
+  it('should cancel any pending state updates if called before delayMs has passed', async () => {
     function TestComponent() {
       const [count, setCount] = useDelayedState(0);
       return (
@@ -63,17 +63,17 @@ describe('useDelayedState', () => {
 
     render(<TestComponent />);
 
-    act(() => {
-      userEvent.click(screen.getByText('increment'));
+    act(async () => {
+      await userEvent.click(screen.getByText('increment'));
       jest.advanceTimersByTime(500);
-      userEvent.click(screen.getByText('increment'));
+      await userEvent.click(screen.getByText('increment'));
       jest.runOnlyPendingTimers();
     });
 
     expect(screen.getByTestId('count').textContent).toBe('1');
   });
 
-  it('should immediately call setState if no delay is given', () => {
+  it('should immediately call setState if no delay is given', async () => {
     function TestComponent() {
       const [count, setCount] = useDelayedState(0);
       return (
@@ -92,7 +92,7 @@ describe('useDelayedState', () => {
 
     render(<TestComponent />);
     expect(screen.getByTestId('count').textContent).toBe('0');
-    userEvent.click(screen.getByText('increment'));
+    await userEvent.click(screen.getByText('increment'));
     expect(screen.getByTestId('count').textContent).toBe('1');
   });
 });

@@ -11,10 +11,10 @@ import React from 'react';
 import { DefinitionTooltip } from '../DefinitionTooltip';
 
 describe('DefintiionTooltip', () => {
-  it('should display onClick a defintion provided via prop', () => {
+  it('should display onClick a defintion provided via prop', async () => {
     const definition = 'Uniform Resource Locator';
     render(<DefinitionTooltip definition={definition}>URL</DefinitionTooltip>);
-    userEvent.click(screen.getByText('URL'));
+    await userEvent.click(screen.getByText('URL'));
     expect(screen.getByText(definition)).toBeVisible();
   });
 
