@@ -153,32 +153,19 @@ export default class ContentSwitcher extends React.Component {
 
     return (
       <div {...other} className={classes} role="tablist">
-        {React.Children.map(children, (child, index) => {
-          if (child.type.displayName === 'IconSwitch') {
-            return React.cloneElement(child, {
-              index,
-              onClick: composeEventHandlers([
-                this.handleChildChange,
-                child.props.onClick,
-              ]),
-              onKeyDown: this.handleChildChange,
-              selected: index === this.state.selectedIndex,
-              ref: this.handleItemRef(index),
-              size,
-            });
-          } else {
-            return React.cloneElement(child, {
-              index,
-              onClick: composeEventHandlers([
-                this.handleChildChange,
-                child.props.onClick,
-              ]),
-              onKeyDown: this.handleChildChange,
-              selected: index === this.state.selectedIndex,
-              ref: this.handleItemRef(index),
-            });
-          }
-        })}
+        {React.Children.map(children, (child, index) =>
+          React.cloneElement(child, {
+            index,
+            onClick: composeEventHandlers([
+              this.handleChildChange,
+              child.props.onClick,
+            ]),
+            onKeyDown: this.handleChildChange,
+            selected: index === this.state.selectedIndex,
+            ref: this.handleItemRef(index),
+            size,
+          })
+        )}
       </div>
     );
   }

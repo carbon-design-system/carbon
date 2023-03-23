@@ -17,6 +17,7 @@ export default {
   title: 'Components/ContentSwitcher',
   component: ContentSwitcher,
   subcomponents: {
+    IconSwitch,
     Switch,
   },
   argTypes: {

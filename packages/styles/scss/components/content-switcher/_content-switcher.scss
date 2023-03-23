@@ -118,6 +118,11 @@
     border-left: rem(1px) solid $border-inverse;
     border-bottom-left-radius: rem(4px);
     border-top-left-radius: rem(4px);
+
+    &:disabled {
+      border-color: $border-disabled;
+      color: $text-disabled;
+    }
   }
 
   .#{$prefix}--content-switcher:not(.#{$prefix}--content-switcher--icon-only)
@@ -125,6 +130,11 @@
     border-right: rem(1px) solid $border-inverse;
     border-bottom-right-radius: rem(4px);
     border-top-right-radius: rem(4px);
+
+    &:disabled {
+      border-color: $border-disabled;
+      color: $text-disabled;
+    }
   }
 
   .#{$prefix}--content-switcher--selected,
@@ -236,6 +246,15 @@
   }
 
   .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher--selected {
+    border-color: $layer-selected-disabled;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
     .#{$prefix}--content-switcher-btn {
     border-right: rem(1px) solid $border-inverse;
@@ -267,7 +286,7 @@
     + .#{$prefix}--content-switcher-popover__wrapper
     .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher-btn:hover::before,
-  .#{$prefix}--content-switcher-popover__wrapper:hover
+  .#{$prefix}--content-switcher-popover__wrapper:not(.#{$prefix}--content-switcher-popover--disabled):hover
     + .#{$prefix}--content-switcher-popover__wrapper
     .#{$prefix}--content-switcher-btn::before,
   .#{$prefix}--content-switcher--selected::before,
@@ -289,7 +308,7 @@
   }
 
   .#{$prefix}--content-switcher--icon-only
-    .#{$prefix}--content-switcher-btn[disabled]:hover,
+    .#{$prefix}--content-switcher-btn[disabled]:not(.#{$prefix}--content-switcher--selected):hover,
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover--selected
     + .#{$prefix}--content-switcher-popover--disabled

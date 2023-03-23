@@ -13,11 +13,13 @@ import { usePrefix } from '../../internal/usePrefix';
 
 const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
   const {
+    align,
     children,
     className,
     disabled,
+    enterDelayMs,
     index,
-    isIconOnly,
+    leaveDelayMs,
     name,
     onClick,
     onKeyDown,
@@ -70,6 +72,7 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
   return (
     <div className={iconButtonClasses}>
       <IconButton
+        align={align}
         label={text}
         type="button"
         ref={tabRef}
@@ -80,8 +83,9 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
         onFocus={handleMouseEnter}
         onBlur={handleMouseLeave}
         aria-selected={selected}
-        aria-label={isIconOnly ? text : null}
-        leaveDelayMs={0}
+        aria-label={text}
+        enterDelayMs={enterDelayMs}
+        leaveDelayMs={leaveDelayMs}
         size={size}
         {...other}
         {...commonProps}>
@@ -94,6 +98,20 @@ const IconSwitch = React.forwardRef(function Switch(props, tabRef) {
 IconSwitch.displayName = 'IconSwitch';
 
 IconSwitch.propTypes = {
+  /**
+   * Specify how the trigger should align with the tooltip
+   */
+  align: PropTypes.oneOf([
+    'top',
+    'top-left',
+    'top-right',
+    'bottom',
+    'bottom-left',
+    'bottom-right',
+    'left',
+    'right',
+  ]),
+
   /**
    * Provide child elements to be rendered inside of the Switch
    */
@@ -110,15 +128,20 @@ IconSwitch.propTypes = {
   disabled: PropTypes.bool,
 
   /**
+   * Specify the duration in milliseconds to delay before displaying the tooltip
+   */
+  enterDelayMs: PropTypes.number,
+
+  /**
    * The index of your Switch in your ContentSwitcher that is used for event handlers.
    * Reserved for usage in ContentSwitcher
    */
   index: PropTypes.number,
 
   /**
-   * Passed in from `ContentSwitcher` to render icon-only variant
+   * Specify the duration in milliseconds to delay before hiding the tooltip
    */
-  isIconOnly: PropTypes.bool,
+  leaveDelayMs: PropTypes.number,
 
   /**
    * Provide the name of your Switch that is used for event handlers
@@ -155,6 +178,8 @@ IconSwitch.propTypes = {
 
 IconSwitch.defaultProps = {
   selected: false,
+  enterDelayMs: 0,
+  leaveDelayMs: 0,
   onClick: () => {},
   onKeyDown: () => {},
 };
