@@ -9,7 +9,7 @@
 
 import { render } from 'lit';
 import EventManager from '../utils/event-manager';
-import BXAccordionItem from '../../src/components/accordion/accordion-item';
+import CDSAccordionItem from '../../src/components/accordion/accordion-item';
 import { Default } from '../../src/components/accordion/accordion-story';
 
 const template = (props?) =>
@@ -19,7 +19,7 @@ const template = (props?) =>
 
 describe('cds-accordion', function () {
   describe('Toggling', function () {
-    let item: BXAccordionItem | null;
+    let item: CDSAccordionItem | null;
     const events = new EventManager();
 
     beforeEach(async function () {

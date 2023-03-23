@@ -15,7 +15,8 @@ import textNullable from '../../../.storybook/knob-text-nullable';
 import { prefix } from '../../globals/settings';
 import { RADIO_BUTTON_ORIENTATION } from './radio-button-group';
 import { RADIO_BUTTON_LABEL_POSITION } from './radio-button';
-import './radio-button-skeleton';
+import './index';
+import '../form/form-item';
 import storyDocs from './radio-button-story.mdx';
 
 const orientations = {
@@ -32,12 +33,52 @@ const labelPositions = {
     RADIO_BUTTON_LABEL_POSITION.RIGHT,
 };
 
-export const Default = (args) => {
-  const { disabled, labelPosition, orientation, name, value, onChange } =
-    args?.[`${prefix}-radio-button-group`] ?? {};
-  const { hideLabel, labelText } = args?.[`${prefix}-radio-button`] ?? {};
+export const Default = () => {
+  return html`
+    <cds-form-item>
+      <cds-radio-button-group
+        legend-text="Group label"
+        name="radio-group"
+        value="radio-1">
+        <cds-radio-button
+          label-text="Radio button label"
+          value="radio-1"></cds-radio-button>
+        <cds-radio-button
+          label-text="Radio button label"
+          value="radio-2"></cds-radio-button>
+        <cds-radio-button
+          label-text="Radio button label"
+          value="radio-3"
+          disabledItem></cds-radio-button>
+      </cds-radio-button-group>
+    </cds-form-item>
+  `;
+};
+
+export const skeleton = () =>
+  html`<cds-radio-button-skeleton></cds-radio-button-skeleton>`;
+
+skeleton.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
+export const Playground = (args) => {
+  const {
+    disabled,
+    readOnly,
+    labelPosition,
+    orientation,
+    name,
+    value,
+    onChange,
+  } = args?.[`${prefix}-radio-button-group`] ?? {};
+  const { checked, hideLabel, labelText } =
+    args?.[`${prefix}-radio-button`] ?? {};
   return html`
     <cds-radio-button-group
+      ?readOnly="${readOnly}"
       ?disabled="${disabled}"
       label-position="${ifDefined(labelPosition)}"
       orientation="${ifDefined(orientation)}"
@@ -45,27 +86,27 @@ export const Default = (args) => {
       value="${ifDefined(value)}"
       @cds-radio-button-group-changed="${onChange}">
       <cds-radio-button
+        ?checked="${checked}"
         ?hide-label="${hideLabel}"
         label-text="${ifDefined(labelText)}"
-        value="all"></cds-radio-button>
+        value="radio-1"></cds-radio-button>
       <cds-radio-button
         ?hide-label="${hideLabel}"
         label-text="${ifDefined(labelText)}"
-        value="cloudFoundry"></cds-radio-button>
+        value="radio-2"></cds-radio-button>
       <cds-radio-button
         ?hide-label="${hideLabel}"
         label-text="${ifDefined(labelText)}"
-        value="staging"></cds-radio-button>
+        value="radio-3"></cds-radio-button>
     </cds-radio-button-group>
   `;
 };
 
-Default.storyName = 'Default';
-
-Default.parameters = {
+Playground.parameters = {
   knobs: {
     [`${prefix}-radio-button-group`]: () => ({
       disabled: boolean('Disabled (disabled)', false),
+      readOnly: boolean('read only (readOnly)', false),
       labelPosition: select(
         'Label position (label-position)',
         labelPositions,
@@ -81,18 +122,10 @@ Default.parameters = {
       onChange: action(`${prefix}-radio-button-group-changed`),
     }),
     [`${prefix}-radio-button`]: () => ({
+      checked: boolean('Checked (checked)', false),
       hideLabel: boolean('Hide label (hide-label)', false),
-      labelText: textNullable('Label text (label-text)', 'Radio button'),
+      labelText: textNullable('Label text (label-text)', 'Radio button label'),
     }),
-  },
-};
-
-export const skeleton = () =>
-  html` <cds-radio-button-skeleton></cds-radio-button-skeleton> `;
-
-skeleton.parameters = {
-  percy: {
-    skip: true,
   },
 };
 

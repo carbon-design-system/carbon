@@ -29,11 +29,6 @@ $css--plex: true !default;
   @extend .#{$prefix}--radio-button-group--vertical;
 }
 
-:host(#{$prefix}-radio-button),
-:host(#{$prefix}-radio-button-skeleton) {
-  @extend .#{$prefix}--form-item;
-}
-
 :host(#{$prefix}-radio-button) {
   @extend .#{$prefix}--radio-button-wrapper;
 
@@ -44,7 +39,12 @@ $css--plex: true !default;
   }
 }
 
-:host(#{$prefix}-radio-button[disabled]) {
+:host(#{$prefix}-radio-button[readOnly]) {
+  @extend .#{$prefix}--radio-button-group--readonly;
+}
+
+:host(#{$prefix}-radio-button[disabled]),
+:host(#{$prefix}-radio-button[disabledItem]) {
   .#{$prefix}--radio-button__label {
     color: $text-disabled;
     cursor: not-allowed;

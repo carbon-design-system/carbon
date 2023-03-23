@@ -8,7 +8,7 @@
  */
 
 import { html, render } from 'lit';
-import BXRadioButtonGroup, {
+import CDSRadioButtonGroup, {
   RADIO_BUTTON_ORIENTATION,
 } from '../../src/components/radio-button/radio-button-group';
 import { RADIO_BUTTON_LABEL_POSITION } from '../../src/components/radio-button/radio-button';
@@ -163,7 +163,7 @@ describe('cds-radio-button', function () {
         (
           document.body.querySelector(
             'cds-radio-button-group'
-          ) as BXRadioButtonGroup
+          ) as CDSRadioButtonGroup
         ).value
       ).toBe('staging');
     });
@@ -190,7 +190,7 @@ describe('cds-radio-button', function () {
         (
           document.body.querySelector(
             'cds-radio-button-group'
-          ) as BXRadioButtonGroup
+          ) as CDSRadioButtonGroup
         ).value
       ).toBe('staging');
     });
@@ -217,7 +217,7 @@ describe('cds-radio-button', function () {
         (
           document.body.querySelector(
             'cds-radio-button-group'
-          ) as BXRadioButtonGroup
+          ) as CDSRadioButtonGroup
         ).value
       ).toBe('staging');
     });
@@ -248,7 +248,7 @@ describe('cds-radio-button', function () {
         (
           document.body.querySelector(
             'cds-radio-button-group'
-          ) as BXRadioButtonGroup
+          ) as CDSRadioButtonGroup
         ).value
       ).toBe('cloudFoundry');
       expect(
@@ -265,7 +265,7 @@ describe('cds-radio-button', function () {
         (
           document.body.querySelector(
             'cds-radio-button-group'
-          ) as BXRadioButtonGroup
+          ) as CDSRadioButtonGroup
         ).value
       ).toBe('all');
       expect(
@@ -300,7 +300,7 @@ describe('cds-radio-button', function () {
         (
           document.body.querySelector(
             'cds-radio-button-group'
-          ) as BXRadioButtonGroup
+          ) as CDSRadioButtonGroup
         ).value
       ).toBe('cloudFoundry');
       expect(
@@ -317,7 +317,7 @@ describe('cds-radio-button', function () {
         (
           document.body.querySelector(
             'cds-radio-button-group'
-          ) as BXRadioButtonGroup
+          ) as CDSRadioButtonGroup
         ).value
       ).toBe('all');
       expect(
