@@ -185,7 +185,7 @@
   }
 
   //----------------------------------------------
-  // Invalid
+  // Invalid + warn
   // ---------------------------------------------
   // invalid group
   .#{$prefix}--checkbox-group[data-invalid] .cds--checkbox-label::before {
@@ -238,21 +238,29 @@
   //----------------------------------------------
   // Read-only
   // ---------------------------------------------
+  .#{$prefix}--checkbox-group--readonly .#{$prefix}--checkbox-label,
   .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label {
     cursor: default;
   }
 
+  .#{$prefix}--checkbox-group--readonly .#{$prefix}--checkbox-label-text,
   .#{$prefix}--checkbox-wrapper--readonly .#{$prefix}--checkbox-label-text {
     cursor: text;
     user-select: text;
   }
 
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox
+    + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox
     + .#{$prefix}--checkbox-label::before {
     border-color: $icon-disabled;
   }
 
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before,
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::before {
@@ -260,6 +268,9 @@
     background: transparent;
   }
 
+  .#{$prefix}--checkbox-group--readonly
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::after,
   .#{$prefix}--checkbox-wrapper--readonly
     .#{$prefix}--checkbox:checked
     + .#{$prefix}--checkbox-label::after {

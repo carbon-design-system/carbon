@@ -26,6 +26,7 @@ export default {
   title: 'Components/Checkbox',
   component: Checkbox,
   subcomponents: {
+    CheckboxGroup,
     CheckboxSkeleton,
   },
   parameters: {
@@ -56,47 +57,52 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
+  helperText: {
+    description: 'Provide text for the form group for additional help',
+    control: {
+      type: 'text',
+    },
+    defaultValue: 'Helper text goes here',
+  },
   invalid: {
+    description: 'Specify whether the form group is currently invalid',
     control: {
       type: 'boolean',
     },
     defaultValue: false,
   },
   invalidText: {
+    description:
+      'Provide the text that is displayed when the form group is in an invalid state',
     control: {
       type: 'text',
     },
     defaultValue: 'Invalid message goes here',
   },
   legendText: {
-    control: {
-      type: 'text',
-    },
-  },
-  message: {
-    control: {
-      type: 'boolean',
-    },
-    defaultValue: false,
-  },
-  messageText: {
+    description:
+      'Provide the text to be rendered inside of the fieldset <legend>',
     control: {
       type: 'text',
     },
   },
   readOnly: {
+    description: 'Specify whether the CheckboxGroup is read-only',
     control: {
       type: 'boolean',
     },
     defaultValue: false,
   },
   warn: {
+    description: 'Specify whether the form group is currently in warning state',
     control: {
       type: 'boolean',
     },
     defaultValue: false,
   },
   warnText: {
+    description:
+      'Provide the text that is displayed when the form group is in warning state',
     control: {
       type: 'text',
     },

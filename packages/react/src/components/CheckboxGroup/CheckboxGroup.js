@@ -10,12 +10,14 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 function CheckboxGroup({
   children,
   className,
-  // helper,
-  // helperText,
+  helperText,
   invalid,
   invalidText,
   legendId,
@@ -28,18 +30,25 @@ function CheckboxGroup({
   const prefix = usePrefix();
 
   const showWarning = !readOnly && !invalid && warn;
-  // const showHelper = !invalid && !disabled && !warn;
+  const showHelper = !invalid && !warn;
 
-  // const classNamesFieldset = cx(`${prefix}--fieldset`, className);
+  const checkboxGroupInstanceId = getInstanceId();
+
+  const helperId = !helperText
+    ? undefined
+    : `checkbox-group-helper-text-${checkboxGroupInstanceId}`;
+
+  const helper = helperText ? (
+    <div id={helperId} className={`${prefix}--form__helper-text`}>
+      {helperText}
+    </div>
+  ) : null;
+
   const fieldsetClasses = cx(`${prefix}--checkbox-group`, className, {
     [`${prefix}--checkbox-group--readonly`]: readOnly,
     [`${prefix}--checkbox-group--invalid`]: !readOnly && invalid,
     [`${prefix}--checkbox-group--warning`]: showWarning,
   });
-
-  // const helperClasses = cx(`${prefix}--form__helper-text`);
-
-  console.log(children);
 
   return (
     <fieldset
@@ -47,6 +56,7 @@ function CheckboxGroup({
       data-invalid={invalid ? true : undefined}
       aria-labelledby={rest['aria-labelledby'] || legendId}
       aria-readonly={readOnly}
+      aria-describedby={!invalid && !warn && helper ? helperId : undefined}
       {...rest}>
       <legend
         className={`${prefix}--label`}
@@ -54,9 +64,6 @@ function CheckboxGroup({
         {legendText}
       </legend>
       {children}
-      {/* {message ? (
-        <div className={`${prefix}--form__requirements`}>{messageText}</div>
-      ) : null} */}
       <div className={`${prefix}--checkbox__validation-msg`}>
         {!readOnly && invalid && (
           <>
@@ -72,8 +79,8 @@ function CheckboxGroup({
             <div className={`${prefix}--form-requirement`}>{warnText}</div>
           </>
         )}
-        {/* {showHelper && helper} */}
       </div>
+      {showHelper && helper}
     </fieldset>
   );
 }
@@ -90,17 +97,17 @@ CheckboxGroup.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Provide text that is used alongside the control label for additional help
+   * Provide text for the form group for additional help
    */
   helperText: PropTypes.node,
 
   /**
-   * Specify whether the control is currently invalid
+   * Specify whether the form group is currently invalid
    */
   invalid: PropTypes.bool,
 
   /**
-   * Provide the text that is displayed when the control is in an invalid state
+   * Provide the text that is displayed when the form group is in an invalid state
    */
   invalidText: PropTypes.node,
 
@@ -114,16 +121,6 @@ CheckboxGroup.propTypes = {
    * Provide the text to be rendered inside of the fieldset <legend>
    */
   legendText: PropTypes.node.isRequired,
-
-  /**
-   * Specify whether the message should be displayed in the <FormGroup>
-   */
-  message: PropTypes.bool,
-
-  /**
-   * Provide the text for the message in the <FormGroup>
-   */
-  messageText: PropTypes.string,
 
   /**
    * Whether the CheckboxGroup should be read-only
@@ -140,11 +137,5 @@ CheckboxGroup.propTypes = {
    */
   warnText: PropTypes.node,
 };
-
-// CheckboxGroup.defaultProps = {
-//   invalid: false,
-//   message: false,
-//   messageText: '',
-// };
 
 export default CheckboxGroup;
