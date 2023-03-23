@@ -153,6 +153,63 @@ $radio-border-width: 1px !default;
     user-select: text;
   }
 
+  // invalid + warn
+  .#{$prefix}--radio-button-group--invalid
+    .#{$prefix}--radio-button
+    + .#{$prefix}--radio-button__label
+    .#{$prefix}--radio-button__appearance {
+    border-color: $support-error;
+  }
+
+  .#{$prefix}--radio-button__validation-msg {
+    display: none;
+    align-items: flex-end;
+    margin-top: $spacing-03;
+  }
+
+  .#{$prefix}--radio-button__invalid-icon {
+    margin: 0 rem(1px) 0 rem(3px);
+    fill: $support-error;
+  }
+
+  .#{$prefix}--radio-button__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--radio-button__invalid-icon--warning path:first-of-type {
+    fill: #000000;
+  }
+
+  .#{$prefix}--radio-button__validation-msg .#{$prefix}--form__helper-text {
+    margin-top: 0;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--radio-button__validation-msg,
+  .#{$prefix}--radio-button-group--warning
+    + .#{$prefix}--radio-button__validation-msg {
+    display: flex;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--radio-button__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--radio-button-group--warning
+    + .#{$prefix}--radio-button__validation-msg
+    .#{$prefix}--form-requirement {
+    display: block;
+    overflow: visible;
+    max-height: 100%;
+    margin-top: 0;
+    margin-left: $spacing-03;
+  }
+
+  .#{$prefix}--radio-button-group--invalid
+    + .#{$prefix}--radio-button__validation-msg
+    .#{$prefix}--form-requirement {
+    color: $text-error;
+  }
+
   // Focus
 
   .#{$prefix}--radio-button:focus
