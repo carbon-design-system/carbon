@@ -305,33 +305,26 @@
   }
 
   .#{$prefix}--btn--sm {
-    @include layout.size('sm');
-
     padding: $button-padding-sm;
   }
 
   .#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
-    @include layout.size('2xl');
   }
 
   .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
     @include button-padding-large;
-    @include layout.size('xl');
   }
 
   // V11: Remove field
   .#{$prefix}--btn--field,
   .#{$prefix}--btn--md {
-    @include layout.size('md');
-
     padding: $button-padding-field;
   }
 
   //expressive styles
   .#{$prefix}--btn--expressive {
     @include type-style('body-compact-02');
-    @include layout.size('sm');
   }
 
   .#{$prefix}--btn--icon-only.#{$prefix}--btn--expressive {

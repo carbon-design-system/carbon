@@ -31,12 +31,12 @@ $justify-content: flex-start !default;
 /// @type Value
 /// @access public
 /// @group accordion
-$arrow-margin: 2px layout.density() 0 0 !default;
+$arrow-margin: 2px layout.density('padding-inline') 0 0 !default;
 
 /// @type Value
 /// @access public
 /// @group accordion
-$title-margin: 0 0 0 layout.density() !default;
+$title-margin: 0 0 0 layout.density('padding-inline') !default;
 
 /// @type Value
 /// @access public
@@ -68,7 +68,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
     position: relative;
     display: flex;
     width: 100%;
-    min-height: layout.size($default: 'md', $min: 'sm', $max: 'lg');
+    min-height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
     flex-direction: $flex-direction;
     align-items: center;
     justify-content: $justify-content;
@@ -98,15 +98,6 @@ $content-padding: 0 0 0 $spacing-05 !default;
     &:focus::before {
       @include focus-outline('outline-compat');
     }
-  }
-
-  // Size styles
-  .#{$prefix}--accordion--lg .#{$prefix}--accordion__heading {
-    @include layout.size('lg');
-  }
-
-  .#{$prefix}--accordion--sm .#{$prefix}--accordion__heading {
-    @include layout.size('sm');
   }
 
   // Disabled styles
@@ -162,7 +153,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion__content {
     display: none;
-    padding-inline: layout.density();
+    padding-inline: layout.density('padding-inline');
     // Transition property for when the accordion closes
     transition: padding motion(standard, productive) $duration-fast-02;
 
@@ -187,7 +178,7 @@ $content-padding: 0 0 0 $spacing-05 !default;
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__arrow {
     // Alters `$arrow-margin` token:
-    margin: 2px 0 0 layout.density();
+    margin: 2px 0 0 layout.density('padding-inline');
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__title {
@@ -195,7 +186,10 @@ $content-padding: 0 0 0 $spacing-05 !default;
   }
 
   .#{$prefix}--accordion--start .#{$prefix}--accordion__content {
-    margin-left: calc(#{layout.density()} + #{$spacing-05});
+    // TODO: add reference to docs
+    --temp-padding-inline: #{layout.density('padding-inline')};
+
+    margin-left: calc(var(--temp-padding-inline) + #{$spacing-05});
   }
 
   .#{$prefix}--accordion__item--collapsing .#{$prefix}--accordion__content,

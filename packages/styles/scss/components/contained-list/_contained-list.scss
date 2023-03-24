@@ -17,11 +17,7 @@
 @use '../../utilities/focus-outline' as *;
 @use '../../utilities/layout';
 
-$height: layout.size(
-  $default: 'lg',
-  $min: 'sm',
-  $max: 'xl',
-);
+$-height: layout.size('height', $default: 'lg', $min: 'sm', $max: 'xl');
 
 /// Contained List styles
 /// @access public
@@ -33,21 +29,11 @@ $height: layout.size(
     top: 0;
     display: flex;
     align-items: center;
-    padding-inline: layout.density();
+    padding-inline: layout.density('padding-inline');
   }
 
   .#{$prefix}--contained-list__label {
     width: 100%;
-  }
-
-  // Sizes
-
-  $sizes: ('sm', 'md', 'lg', 'xl');
-
-  @each $size in $sizes {
-    .#{$prefix}--contained-list--#{$size} {
-      @include layout.size($size);
-    }
   }
 
   // "On Page" variant
@@ -59,7 +45,7 @@ $height: layout.size(
   .#{$prefix}--contained-list--on-page .#{$prefix}--contained-list__header {
     @include type-style('heading-compact-01');
 
-    height: $height;
+    height: $-height;
     border-bottom: 1px solid $border-subtle;
     background-color: $background;
     color: $text-primary;
@@ -111,8 +97,12 @@ $height: layout.size(
     .#{$prefix}--contained-list-item__content {
     @include type-style('body-01');
 
-    min-height: $height;
-    padding: calc(calc(($height - 1em) / 2)) layout.density();
+    // TODO: add reference to docs
+    --temp-height: #{$-height};
+
+    min-height: $-height;
+    padding: calc(calc((var(--temp-height) - 1em) / 2))
+      layout.density('padding-inline');
     color: $text-primary;
   }
 
@@ -128,8 +118,8 @@ $height: layout.size(
 
   .#{$prefix}--contained-list--inset-rulers
     .#{$prefix}--contained-list-item:not(:last-of-type)::before {
-    right: layout.density();
-    left: layout.density();
+    right: layout.density('padding-inline');
+    left: layout.density('padding-inline');
   }
 
   .#{$prefix}--contained-list-item--clickable

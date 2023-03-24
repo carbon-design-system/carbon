@@ -37,8 +37,8 @@
     @include focus-outline('reset');
 
     width: 100%;
-    height: layout.size($default: 'md', $min: 'sm', $max: 'lg');
-    padding: 0 layout.density();
+    height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+    padding: 0 layout.density('padding-inline');
     border: none;
     border-bottom: 1px solid $border-strong;
     background-color: $field;
@@ -55,14 +55,6 @@
     &-wrapper svg[hidden] {
       display: none;
     }
-  }
-
-  .#{$prefix}--text-input--lg {
-    @include layout.size('lg');
-  }
-
-  .#{$prefix}--text-input--sm {
-    @include layout.size('sm');
   }
 
   .#{$prefix}--password-input {

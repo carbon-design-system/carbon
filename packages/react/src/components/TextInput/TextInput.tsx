@@ -161,7 +161,7 @@ const TextInput = React.forwardRef(function TextInput(
     onClick = () => {},
     placeholder,
     readOnly,
-    size = 'md',
+    size,
     type = 'text',
     warn = false,
     warnText,
@@ -197,7 +197,8 @@ const TextInput = React.forwardRef(function TextInput(
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input--${size}`]: size,
+      [`${prefix}--text-input--${size}`]: size, // TODO: remove in v12
+      [`${prefix}--layout--size-${size}`]: size, // TODO: convert to hook?
     }
   );
   const sharedTextInputProps = {

@@ -27,7 +27,7 @@ $button-focus-color: custom-property.get-var('button-focus-color', $focus);
   display: inline-flex;
   width: max-content;
   max-width: rem(320px);
-  height: layout.size('lg');
+  height: layout.size('height', $default: 'lg');
   flex-shrink: 0;
   align-items: center;
   justify-content: space-between;

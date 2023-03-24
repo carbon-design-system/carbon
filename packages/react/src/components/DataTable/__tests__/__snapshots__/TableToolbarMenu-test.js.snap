@@ -12,7 +12,7 @@ exports[`TableToolbarMenu renders as expected - Component API should render 1`] 
         aria-expanded="false"
         aria-haspopup="true"
         aria-labelledby="tooltip-2"
-        class="cds--btn--icon-only custom-class cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--btn--primary"
+        class="cds--btn--icon-only custom-class cds--toolbar-action cds--overflow-menu cds--overflow-menu cds--overflow-menu--md cds--btn cds--btn--md cds--layout--size-md cds--btn--primary"
         title="Add"
         type="button"
       >

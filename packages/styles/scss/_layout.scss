@@ -5,22 +5,47 @@
 // LICENSE file in the root directory of this source tree.
 //
 
+@use 'sass:map';
+
 @use './config' as *;
 @use './utilities/custom-property';
 @use './utilities/convert' as *;
 @use './utilities/layout' as *;
 
-@each $group, $values in $tokens {
-  :root {
-    @each $key, $value in $values {
-      @include custom-property.declaration('layout-#{$group}-#{$key}', $value);
+:root {
+  @each $group, $steps in $tokens {
+    $step-names: map.keys($steps);
+
+    @each $step in $step-names {
+      $values: map.get($steps, $step);
+
+      @each $property, $value in $values {
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}-#{$step}',
+          $value
+        );
+      }
     }
   }
+}
 
-  @each $key, $value in $values {
-    .#{$prefix}--layout--#{$group}-#{$key} {
-      $token: custom-property.get-var('layout-#{$group}-#{$key}', $value);
-      @include custom-property.declaration('layout-#{$group}', $token);
+@each $group, $steps in $tokens {
+  $step-names: map.keys($steps);
+
+  @each $step in $step-names {
+    $values: map.get($steps, $step);
+
+    .#{$prefix}--layout--#{$group}-#{$step} {
+      @each $property, $value in $values {
+        $token: custom-property.get-var(
+          'layout-#{$group}-#{$property}-#{$step}',
+          $value
+        );
+        @include custom-property.declaration(
+          'layout-#{$group}-#{$property}',
+          $token
+        );
+      }
     }
   }
 }

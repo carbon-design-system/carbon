@@ -19,16 +19,8 @@
   .#{$prefix}--content-switcher {
     display: flex;
     width: 100%;
-    height: layout.size($default: 'md', $min: 'sm', $max: 'lg');
+    height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
     justify-content: space-evenly;
-  }
-
-  .#{$prefix}--content-switcher--sm {
-    @include layout.size('sm');
-  }
-
-  .#{$prefix}--content-switcher--lg {
-    @include layout.size('lg');
   }
 
   .#{$prefix}--content-switcher-btn {
@@ -42,7 +34,7 @@
     overflow: hidden;
     width: 100%;
     align-items: center;
-    padding: $spacing-03 layout.density();
+    padding: $spacing-03 layout.density('padding-inline');
     border: none;
     border-top: rem(1px) solid $border-inverse;
     border-bottom: rem(1px) solid $border-inverse;

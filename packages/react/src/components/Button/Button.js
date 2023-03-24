@@ -33,7 +33,7 @@ const Button = React.forwardRef(function Button(
     onMouseEnter,
     onMouseLeave,
     renderIcon: ButtonImageElement,
-    size = 'lg',
+    size,
     tabIndex,
     tooltipAlignment = 'center',
     tooltipPosition = 'top',
@@ -55,10 +55,11 @@ const Button = React.forwardRef(function Button(
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive,
-    [`${prefix}--btn--md`]: size === 'md' && !isExpressive,
-    [`${prefix}--btn--xl`]: size === 'xl',
-    [`${prefix}--btn--2xl`]: size === '2xl',
+    [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive, // TODO: remove in v12
+    [`${prefix}--btn--md`]: size === 'md' && !isExpressive, // TODO: remove in v12
+    [`${prefix}--btn--xl`]: size === 'xl', // TODO: remove in v12
+    [`${prefix}--btn--2xl`]: size === '2xl', // TODO: remove in v12
+    [`${prefix}--layout--size-${size}`]: size, // TODO: convert to hook?
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,

@@ -19,12 +19,6 @@
 @use './mixins' as *;
 @use '../../utilities/skeleton';
 
-$height: layout.size(
-  $default: 'md',
-  $min: 'sm',
-  $max: 'md',
-);
-
 /// Tag styles
 /// @access public
 /// @group tag
@@ -33,11 +27,17 @@ $height: layout.size(
     '.#{$prefix}--tag',
     (
       size: (
-        sm: rem(18px),
-        md: rem(24px),
+        sm: (
+          height: rem(18px),
+        ),
+        md: (
+          height: rem(24px),
+        ),
       ),
     )
   );
+
+  $-height: layout.size('height', $default: 'md', $min: 'sm', $max: 'md');
 
   .#{$prefix}--tag {
     @include type-style('label-01');
@@ -48,7 +48,7 @@ $height: layout.size(
     min-width: rem(32px);
     // restricts size of contained elements
     max-width: 100%;
-    min-height: $height;
+    min-height: $-height;
     align-items: center;
     justify-content: center;
     margin: $spacing-02;
@@ -183,8 +183,8 @@ $height: layout.size(
 
   .#{$prefix}--tag__close-icon {
     display: flex;
-    width: $height;
-    height: $height;
+    width: $-height;
+    height: $-height;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
@@ -240,17 +240,6 @@ $height: layout.size(
 
   .#{$prefix}--tag--filter.#{$prefix}--tag--disabled svg {
     fill: $icon-disabled;
-  }
-
-  // medium tags
-
-  .#{$prefix}--tag.#{$prefix}--tag--md {
-    @include layout.size('md');
-  }
-
-  // small tags
-  .#{$prefix}--tag.#{$prefix}--tag--sm {
-    @include layout.size('sm');
   }
 
   .#{$prefix}--tag--sm.#{$prefix}--tag--filter {
