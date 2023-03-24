@@ -10,6 +10,7 @@ import React, { createContext, useState } from 'react';
 import classNames from 'classnames';
 import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
+import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 
 export const RadioButtonGroupContext = createContext();
 
@@ -19,6 +20,9 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
     className,
     defaultSelected,
     disabled,
+    helperText,
+    invalid = false,
+    invalidText,
     labelPosition = 'right',
     legendText,
     name,
@@ -26,6 +30,8 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
     orientation = 'horizontal',
     readOnly,
     valueSelected,
+    warn = false,
+    warnText,
     ...rest
   },
   ref
@@ -75,20 +81,34 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
     }
   }
 
+  const showWarning = !readOnly && !invalid && warn;
+  const showHelper = !invalid && !disabled && !warn;
+
+  const wrapperClasses = classNames(`${prefix}--form-item`, className);
+
   const fieldsetClasses = classNames(`${prefix}--radio-button-group`, {
     [`${prefix}--radio-button-group--${orientation}`]:
       orientation === 'vertical',
     [`${prefix}--radio-button-group--label-${labelPosition}`]: labelPosition,
     [`${prefix}--radio-button-group--readonly`]: readOnly,
+    [`${prefix}--radio-button-group--invalid`]: !readOnly && invalid,
+    [`${prefix}--radio-button-group--warning`]: showWarning,
   });
 
-  const wrapperClasses = classNames(`${prefix}--form-item`, className);
+  const helperClasses = classNames(`${prefix}--form__helper-text`, {
+    [`${prefix}--form__helper-text--disabled`]: disabled,
+  });
+
+  const helper = helperText ? (
+    <div className={helperClasses}>{helperText}</div>
+  ) : null;
 
   return (
     <div className={wrapperClasses} ref={ref}>
       <fieldset
         className={fieldsetClasses}
         disabled={disabled}
+        data-invalid={invalid ? true : undefined}
         aria-readonly={readOnly}
         {...rest}>
         {legendText && (
@@ -96,6 +116,25 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
         )}
         {getRadioButtons()}
       </fieldset>
+      <div className={`${prefix}--radio-button__validation-msg`}>
+        {!readOnly && invalid && (
+          <>
+            <WarningFilled
+              className={`${prefix}--radio-button__invalid-icon`}
+            />
+            <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+          </>
+        )}
+        {showWarning && (
+          <>
+            <WarningAltFilled
+              className={`${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`}
+            />
+            <div className={`${prefix}--form-requirement`}>{warnText}</div>
+          </>
+        )}
+        {showHelper && helper}
+      </div>
     </div>
   );
 });
@@ -120,6 +159,21 @@ RadioButtonGroup.propTypes = {
    * Specify whether the group is disabled
    */
   disabled: PropTypes.bool,
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText: PropTypes.node,
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText: PropTypes.node,
 
   /**
    * Provide where label text should be placed
@@ -157,6 +211,16 @@ RadioButtonGroup.propTypes = {
    * Specify the value that is currently selected in the group
    */
   valueSelected: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn: PropTypes.bool,
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText: PropTypes.node,
 };
 
 export default RadioButtonGroup;

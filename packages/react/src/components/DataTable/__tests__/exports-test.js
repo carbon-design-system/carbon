@@ -25,7 +25,7 @@ const blocklist = new Set([
   'DataTable.mdx',
   'stories',
   'next',
-  'TableContext.js',
+  'TableContext.tsx',
 ]);
 const components = fs
   .readdirSync(COMPONENT_PATH)
