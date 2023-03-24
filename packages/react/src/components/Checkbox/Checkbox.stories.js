@@ -10,8 +10,6 @@ import { default as Checkbox, CheckboxSkeleton } from './';
 import mdx from './Checkbox.mdx';
 import CheckboxGroup from '../CheckboxGroup';
 
-const prefix = 'cds';
-
 const checkboxEvents = {
   className: 'some-class',
   labelText: 'Checkbox label',
@@ -38,11 +36,38 @@ export default {
 
 export const Default = () => {
   return (
-    <fieldset className={`${prefix}--fieldset`}>
-      <legend className={`${prefix}--label`}>Group label</legend>
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-    </fieldset>
+    <>
+      <CheckboxGroup {...fieldsetCheckboxProps()}>
+        <Checkbox
+          defaultChecked
+          labelText={`Checkbox label`}
+          id="checkbox-label-1"
+        />
+        <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+      </CheckboxGroup>
+      <br /> <br />
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-3"
+        helperText="Helper text goes here"
+      />
+      <br /> <br />
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-4"
+        invalid
+        invalidText="Invalid text goes here"
+      />
+      <br /> <br />
+      <Checkbox
+        {...checkboxEvents}
+        id="checkbox-5"
+        warn
+        warnText="Warning text goes here"
+      />
+      <br /> <br />
+      <Checkbox {...checkboxEvents} id="checkbox-6" readOnly />
+    </>
   );
 };
 
@@ -50,7 +75,12 @@ export const Skeleton = () => <CheckboxSkeleton />;
 
 export const Playground = (args) => (
   <CheckboxGroup {...fieldsetCheckboxProps()} {...args}>
-    <Checkbox defaultChecked {...checkboxEvents} id="checkbox-0" />
+    <Checkbox
+      defaultChecked
+      {...checkboxEvents}
+      id="checkbox-0"
+      helperText="hello"
+    />
     <Checkbox {...checkboxEvents} id="checkbox-1" />
     <Checkbox disabled {...checkboxEvents} id="checkbox-2" />
   </CheckboxGroup>
@@ -159,42 +189,3 @@ Playground.argTypes = {
     },
   },
 };
-
-// export const Playground = (args) => (
-//   <Checkbox defaultChecked {...checkboxEvents} id="checkbox-a" {...args}/>
-// );
-
-// Playground.argTypes = {
-//   checked: {
-//     control: {
-//       type: 'boolean',
-//     },
-//   },
-//   className: {
-//     control: false,
-//   },
-//   defaultChecked: {
-//     control: false,
-//   },
-//   disabled: {
-//     control: {
-//       type: 'boolean',
-//     },
-//   },
-//   hideLabel: {
-//     control: {
-//       type: 'boolean',
-//     },
-//   },
-//   id: {
-//     control: false,
-//   },
-//   indeterminate: {
-//     control: {
-//       type: 'boolean',
-//     },
-//   },
-//   labelText: {
-//     control: false,
-//   },
-// };

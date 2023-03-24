@@ -187,11 +187,38 @@
   //----------------------------------------------
   // Invalid + warn
   // ---------------------------------------------
-  // invalid group
-  .#{$prefix}--checkbox-group[data-invalid] .cds--checkbox-label::before {
+  .#{$prefix}--checkbox-group[data-invalid] .cds--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--invalid .cds--checkbox-label::before,
+  .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
     border: 1px solid $support-error;
   }
 
+  // checkbox group overrides for individual validation checkbox
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper--invalid
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper--warning
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-group
+    .#{$prefix}--checkbox-wrapper
+    > .#{$prefix}--form__helper-text {
+    display: none;
+  }
+
+  .#{$prefix}--checkbox-group:not(.#{$prefix}--checkbox-group[data-invalid])
+    .#{$prefix}--checkbox-wrapper--invalid
+    .cds--checkbox-label::before,
+  .#{$prefix}--checkbox-group:not(.#{$prefix}--checkbox-group[data-invalid])
+    .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox:checked
+    + .#{$prefix}--checkbox-label::before {
+    border: 1px solid $icon-primary;
+  }
+
+  .#{$prefix}--checkbox-group__validation-msg,
   .#{$prefix}--checkbox__validation-msg {
     display: none;
     align-items: flex-end;
@@ -211,15 +238,27 @@
     fill: #000000;
   }
 
-  .#{$prefix}--checkbox-group--invalid .#{$prefix}--checkbox__validation-msg,
-  .#{$prefix}--checkbox-group--warning .#{$prefix}--checkbox__validation-msg {
+  .#{$prefix}--checkbox-group--invalid
+    .#{$prefix}--checkbox-group__validation-msg,
+  .#{$prefix}--checkbox-group--warning
+    .#{$prefix}--checkbox-group__validation-msg,
+  .#{$prefix}--checkbox-wrapper--invalid
+    > .#{$prefix}--checkbox__validation-msg,
+  .#{$prefix}--checkbox-wrapper--warning
+    > .#{$prefix}--checkbox__validation-msg {
     display: flex;
   }
 
   .#{$prefix}--checkbox-group--invalid
-    .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--checkbox-group__validation-msg
     .#{$prefix}--form-requirement,
   .#{$prefix}--checkbox-group--warning
+    .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--invalid
+    .#{$prefix}--checkbox__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--warning
     .#{$prefix}--checkbox__validation-msg
     .#{$prefix}--form-requirement {
     display: block;
@@ -230,6 +269,9 @@
   }
 
   .#{$prefix}--checkbox-group--invalid
+    .#{$prefix}--checkbox-group__validation-msg
+    .#{$prefix}--form-requirement,
+  .#{$prefix}--checkbox-wrapper--invalid
     .#{$prefix}--checkbox__validation-msg
     .#{$prefix}--form-requirement {
     color: $text-error;

@@ -64,7 +64,7 @@ function CheckboxGroup({
         {legendText}
       </legend>
       {children}
-      <div className={`${prefix}--checkbox__validation-msg`}>
+      <div className={`${prefix}--checkbox-group__validation-msg`}>
         {!readOnly && invalid && (
           <>
             <WarningFilled className={`${prefix}--checkbox__invalid-icon`} />
