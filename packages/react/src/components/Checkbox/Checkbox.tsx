@@ -124,7 +124,7 @@ const Checkbox = React.forwardRef(
 
     const helperId = !helperText
       ? undefined
-      : `checkbox-group-helper-text-${checkboxGroupInstanceId}`;
+      : `checkbox-helper-text-${checkboxGroupInstanceId}`;
 
     const helper = helperText ? (
       <div id={helperId} className={`${prefix}--form__helper-text`}>
