@@ -6,8 +6,8 @@
 
 ```
 <button
-  aria-checked="false"
-  aria-lable=""
+  aria-checked="true"
+  aria-lable="Toggle element label"
   class="cds--toggle__button"
   role="switch"
   type="button"
@@ -21,12 +21,13 @@
     Toggle element label
   </span>
   <div class="cds--toggle__appearance">
-    <div class="cds--toggle__switch">
+    <div class="cds--toggle__switch cds--toggle__switch--checked">
     </div>
     <span
       aria-hidden="true"
       class="cds--toggle__text"
     >
+      On
     </span>
   </div>
 </label>
@@ -38,13 +39,10 @@
 ```
 <button
   aria-checked="true"
-  aria-lable="label-text-foo"
+  aria-lable="Toggle element label"
   class="cds--toggle__button"
-  disabled=""
-  name="name-foo"
   role="switch"
   type="button"
-  value="value-foo"
 >
 </button>
 <label
@@ -54,14 +52,14 @@
   <span class="cds--toggle__label-text">
     Toggle element label
   </span>
-  <div class="cds--toggle__appearance cds--toggle__appearance--small">
+  <div class="cds--toggle__appearance">
     <div class="cds--toggle__switch cds--toggle__switch--checked">
     </div>
     <span
       aria-hidden="true"
       class="cds--toggle__text"
     >
-      checked-text-foo
+      On
     </span>
   </div>
 </label>

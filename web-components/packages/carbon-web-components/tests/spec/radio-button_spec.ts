@@ -12,7 +12,7 @@ import CDSRadioButtonGroup, {
   RADIO_BUTTON_ORIENTATION,
 } from '../../src/components/radio-button/radio-button-group';
 import { RADIO_BUTTON_LABEL_POSITION } from '../../src/components/radio-button/radio-button';
-import { Default } from '../../src/components/radio-button/radio-button-story';
+import { Playground } from '../../src/components/radio-button/radio-button-story';
 
 /**
  * @param formData A `FormData` instance.
@@ -27,7 +27,9 @@ const getValues = (formData: FormData) => {
   return values;
 };
 
-const template = (props?) => Default(props);
+const template = (props?) => Playground({
+  'cds-radio-button-group': props,
+});
 
 describe('cds-radio-button', function () {
   describe('Rendering', function () {

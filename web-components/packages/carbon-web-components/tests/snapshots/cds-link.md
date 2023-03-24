@@ -7,7 +7,7 @@
 ```
 <a
   class="cds--link cds--link--md"
-  href="#"
+  href="about:blank"
   id="link"
   part="link"
   tabindex="0"
@@ -30,10 +30,17 @@
 ```
 <a
   class="cds--link cds--link--md"
-  href="#"
+  download="file-name-foo"
+  href="about:blank"
+  hreflang="en"
   id="link"
   part="link"
+  ping="about:blank"
+  rel="noopener"
+  role="button"
   tabindex="0"
+  target="_blank"
+  type="text/plain"
 >
   <slot>
   </slot>
@@ -51,23 +58,23 @@
 ####   `should render disabled state`
 
 ```
-<a
-  class="cds--link cds--link--md"
-  href="#"
+<p
+  class="cds--link cds--link--disabled cds--link--md"
   id="link"
   part="link"
-  tabindex="0"
 >
   <slot>
   </slot>
-  <div
-    class="cds--link__icon"
-    hidden=""
-  >
-    <slot name="icon">
-    </slot>
-  </div>
-</a>
+</p>
+<div
+  class="cds--link__icon"
+  hidden=""
+>
+  <slot name="icon">
+  </slot>
+</div>
+<p>
+</p>
 
 ```
 

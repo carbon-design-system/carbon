@@ -6,9 +6,10 @@
 
 ```
 <button
-  class="cds--btn cds--btn--primary"
+  class="cds--btn cds--btn--lg cds--btn--primary"
   id="button"
   part="button"
+  type="button"
 >
   <slot>
   </slot>
@@ -22,7 +23,6 @@
 
 ```
 <button
-  autofocus=""
   class="cds--btn cds--btn--disabled cds--btn--secondary cds--btn--sm"
   disabled=""
   id="button"
@@ -41,11 +41,12 @@
 
 ```
 <a
-  class="cds--btn cds--btn--primary"
+  class="cds--btn cds--btn--lg cds--btn--primary"
   href="about:blank"
   id="button"
   part="button"
   role="button"
+  type="button"
 >
   <slot>
   </slot>
@@ -60,15 +61,10 @@
 ```
 <a
   class="cds--btn cds--btn--secondary cds--btn--sm"
-  download="file-name-foo"
   href="about:blank"
-  hreflang="en"
   id="button"
   part="button"
-  ping="about:blank"
-  rel="noopener"
-  role="link"
-  target="_blank"
+  role="button"
   type="text/plain"
 >
   <slot>

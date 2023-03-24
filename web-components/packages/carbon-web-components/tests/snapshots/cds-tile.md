@@ -99,6 +99,7 @@
   aria-expanded="false"
   aria-labelledby="above-the-fold-content"
   class="cds--tile__chevron"
+  tabindex="0"
 >
 </button>
 <div
@@ -125,6 +126,7 @@
   aria-expanded="true"
   aria-labelledby="above-the-fold-content"
   class="cds--tile__chevron"
+  tabindex="0"
 >
 </button>
 <div

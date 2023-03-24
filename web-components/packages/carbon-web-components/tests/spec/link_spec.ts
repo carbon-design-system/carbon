@@ -9,10 +9,10 @@
 
 import { render } from 'lit';
 import '../../src/components/link/link';
-import { Default } from '../../src/components/link/link-story';
+import { pairedWithIcon } from '../../src/components/link/link-story';
 
 const template = (props?) =>
-  Default({
+  pairedWithIcon({
     'cds-link': props,
   });
 

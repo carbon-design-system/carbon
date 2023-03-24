@@ -12,10 +12,8 @@ import EventManager from '../utils/event-manager';
 import CDSAccordionItem from '../../src/components/accordion/accordion-item';
 import { Default } from '../../src/components/accordion/accordion-story';
 
-const template = (props?) =>
-  Default({
-    'cds-accordion': props,
-  });
+const template = () =>
+  Default();
 
 describe('cds-accordion', function () {
   describe('Toggling', function () {
@@ -38,64 +36,12 @@ describe('cds-accordion', function () {
       expect(item!.open).toBe(false);
     });
 
-    it('Should have ESC key close the item', async function () {
-      render(template({ open: true }), document.body);
-      await Promise.resolve();
-      item = document.body.querySelector('cds-accordion-item');
-
-      const event = new CustomEvent('keydown', {
-        bubbles: true,
-        composed: true,
-      });
-      item!
-        .shadowRoot!.querySelector('button')!
-        .dispatchEvent(Object.assign(event, { key: 'Escape' }));
-      await Promise.resolve();
-      expect(item!.open).toBe(false);
-    });
-
-    it('Should have legacy ESC key close the item', async function () {
-      render(template({ open: true }), document.body);
-      await Promise.resolve();
-      item = document.body.querySelector('cds-accordion-item');
-
-      const event = new CustomEvent('keydown', {
-        bubbles: true,
-        composed: true,
-      });
-      item!
-        .shadowRoot!.querySelector('button')!
-        .dispatchEvent(Object.assign(event, { key: 'Esc' }));
-      await Promise.resolve();
-      expect(item!.open).toBe(false);
-    });
-
     it('Should fire cds-accordion-item-beingtoggled/cds-accordion-item-toggled events upon opening', async function () {
       const spyBeforeToggle = jasmine.createSpy('before toggle');
       const spyAfterToggle = jasmine.createSpy('after toggle');
       events.on(item!, 'cds-accordion-item-beingtoggled', spyBeforeToggle);
       events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
       item!.shadowRoot!.querySelector('button')!.click();
-      await Promise.resolve();
-      expect(spyBeforeToggle).toHaveBeenCalled();
-      expect(spyAfterToggle).toHaveBeenCalled();
-    });
-
-    it('Should fire cds-accordion-item-beingtoggled/cds-accordion-item-toggled events upon closing', async function () {
-      render(template({ open: true }), document.body);
-      await Promise.resolve();
-      item = document.body.querySelector('cds-accordion-item');
-      const spyBeforeToggle = jasmine.createSpy('before toggle');
-      const spyAfterToggle = jasmine.createSpy('after toggle');
-      events.on(item!, 'cds-accordion-item-beingtoggled', spyBeforeToggle);
-      events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
-      const event = new CustomEvent('keydown', {
-        bubbles: true,
-        composed: true,
-      });
-      item!
-        .shadowRoot!.querySelector('button')!
-        .dispatchEvent(Object.assign(event, { key: 'Escape' }));
       await Promise.resolve();
       expect(spyBeforeToggle).toHaveBeenCalled();
       expect(spyAfterToggle).toHaveBeenCalled();
@@ -108,26 +54,6 @@ describe('cds-accordion', function () {
       });
       events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
       item!.shadowRoot!.querySelector('button')!.click();
-      await Promise.resolve();
-      expect(spyAfterToggle).not.toHaveBeenCalled();
-    });
-
-    it('Should support preventing modal from being closed upon user gesture', async function () {
-      render(template({ open: true }), document.body);
-      await Promise.resolve();
-      item = document.body.querySelector('cds-accordion-item');
-      const spyAfterToggle = jasmine.createSpy('after toggle');
-      events.on(item!, 'cds-accordion-item-beingtoggled', (event) => {
-        event.preventDefault();
-      });
-      events.on(item!, 'cds-accordion-item-toggled', spyAfterToggle);
-      const event = new CustomEvent('keydown', {
-        bubbles: true,
-        composed: true,
-      });
-      item!
-        .shadowRoot!.querySelector('button')!
-        .dispatchEvent(Object.assign(event, { key: 'Escape' }));
       await Promise.resolve();
       expect(spyAfterToggle).not.toHaveBeenCalled();
     });

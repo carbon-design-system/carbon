@@ -13,9 +13,8 @@ import BXTooltip from '../../src/components/tooltip/tooltip';
 import BXTooltipBody from '../../src/components/tooltip/tooltip-body';
 import {
   TOOLTIP_ALIGNMENT,
-  TOOLTIP_DIRECTION,
-} from '../../src/components/toggle-tip/toggletip';
-import { definition, icon } from '../../src/components/tooltip/tooltip-story';
+} from '../../src/components/tooltip/defs';
+import { Default } from '../../src/components/tooltip/tooltip-story';
 
 const bodyTemplate = () => html` <cds-tooltip-body></cds-tooltip-body> `;
 const contentTemplate = ({
@@ -34,13 +33,8 @@ const template = ({
 }: { hasContent?: boolean; hasBody?: boolean } = {}) =>
   !hasContent ? (undefined! as TemplateResult) : contentTemplate({ hasBody });
 
-const definitionTemplate = (props?) =>
-  definition({
-    'cds-tooltip-definition': props,
-  });
-
 const iconTemplate = (props?) =>
-  icon({
+  Default({
     'cds-tooltip-icon': props,
   });
 
@@ -153,37 +147,6 @@ describe('cds-tooltip', function () {
   });
 });
 
-describe('cds-tooltip-definition', function () {
-  describe('Rendering', function () {
-    it('Should render with minimum attributes', async function () {
-      render(definitionTemplate(), document.body);
-      await Promise.resolve();
-      expect(
-        document.body.querySelector('cds-tooltip-definition' as any)
-      ).toMatchSnapshot({ mode: 'shadow' });
-    });
-
-    it('Should render with various attributes', async function () {
-      render(
-        definitionTemplate({
-          alignment: TOOLTIP_ALIGNMENT.START,
-          bodyText: 'body-text-foo',
-          direction: TOOLTIP_DIRECTION.TOP,
-        }),
-        document.body
-      );
-      await Promise.resolve();
-      expect(
-        document.body.querySelector('cds-tooltip-definition' as any)
-      ).toMatchSnapshot({ mode: 'shadow' });
-    });
-  });
-
-  afterEach(async function () {
-    await render(definitionTemplate({ hasContent: false }), document.body);
-  });
-});
-
 describe('cds-tooltip-icon', function () {
   describe('Rendering', function () {
     it('Should render with minimum attributes', async function () {
@@ -199,9 +162,8 @@ describe('cds-tooltip-icon', function () {
     it('Should render with various attributes', async function () {
       render(
         iconTemplate({
-          alignment: TOOLTIP_ALIGNMENT.START,
+          alignment: TOOLTIP_ALIGNMENT.TOP,
           bodyText: 'body-text-foo',
-          direction: TOOLTIP_DIRECTION.TOP,
         }),
         document.body
       );

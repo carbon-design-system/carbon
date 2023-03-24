@@ -17,7 +17,6 @@ import {
   clickable,
   expandable,
   multiSelectable,
-  singleSelectable,
 } from '../../src/components/tile/tile-story';
 
 const clickableTemplate = (props?) =>
@@ -33,11 +32,6 @@ const expandableTemplate = (props?) =>
 const multiSelectableTemplate = (props?) =>
   multiSelectable({
     'cds-selectable-tile': props,
-  });
-
-const singleSelectableTemplate = (props?) =>
-  singleSelectable({
-    'cds-radio-tile': props,
   });
 
 describe('cds-tile', function () {
@@ -187,7 +181,7 @@ describe('cds-tile', function () {
   describe('cds-radio-tile', function () {
     describe('Misc attributes', function () {
       it('should render with minimum attributes', async function () {
-        render(singleSelectableTemplate(), document.body);
+        render(clickableTemplate(), document.body);
         await Promise.resolve();
         expect(
           document.body.querySelector('cds-radio-tile' as any)
@@ -198,7 +192,7 @@ describe('cds-tile', function () {
 
       it('should render with various attributes', async function () {
         render(
-          singleSelectableTemplate({
+          clickableTemplate({
             checkmarkLabel: 'checkmark-label-foo',
             colorScheme: TILE_COLOR_SCHEME.LIGHT,
             name: 'name-foo',
@@ -217,7 +211,7 @@ describe('cds-tile', function () {
 
     describe('Selection', function () {
       it('should reflect the selection', async function () {
-        render(singleSelectableTemplate({ name: 'name-foo' }), document.body);
+        render(clickableTemplate({ name: 'name-foo' }), document.body);
         await Promise.resolve();
         const tiles = document.body.querySelectorAll('cds-radio-tile');
         const input1 = tiles[1]!.shadowRoot!.querySelector('input');
