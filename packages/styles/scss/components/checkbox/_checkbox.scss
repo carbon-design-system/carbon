@@ -94,19 +94,19 @@
 
     // Checkboxes with a background color look visually off against a parent container.
     background-color: transparent;
-    border-radius: 1px;
+    border-radius: 2px;
     content: '';
   }
 
   // Create the appearance of the check in the `after` pseudo-element
   .#{$prefix}--checkbox-label::after {
     position: absolute;
-    top: rem(8px);
+    top: rem(7.5px);
     left: rem(7px);
     width: rem(9px);
     height: rem(5px);
-    border-bottom: 2px solid $icon-inverse;
-    border-left: 2px solid $icon-inverse;
+    border-bottom: 1.5px solid $icon-inverse;
+    border-left: 1.5px solid $icon-inverse;
     margin-top: rem(-3px) #{'/*rtl:0rem*/'};
     background: none;
     content: '';
