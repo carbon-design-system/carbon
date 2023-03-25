@@ -1,5 +1,5 @@
 /**
- * Copyright IBM Corp. 2016, 2018
+ * Copyright IBM Corp. 2016, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -92,6 +92,7 @@ export interface SearchProps
    * Provide an optional placeholder text for the Search.
    * Note: if the label and placeholder differ,
    * VoiceOver on Mac will read both
+   * @default "Search"
    */
   placeholder?: string;
 
@@ -140,7 +141,7 @@ const Search: React.ForwardRefExoticComponent<SearchProps> = React.forwardRef(
       onClear = () => {},
       onKeyDown,
       onExpand,
-      placeholder = '',
+      placeholder = 'Search',
       renderIcon,
       role = 'searchbox',
       size = 'md',
@@ -208,11 +209,12 @@ const Search: React.ForwardRefExoticComponent<SearchProps> = React.forwardRef(
     }
 
     return (
-      <div role="search" aria-labelledby={searchId} className={searchClasses}>
+      <div role="search" aria-label={placeholder} className={searchClasses}>
         {/* the magnifier is used in ExpandableSearch as a click target to expand,
       however, it does not need a keyboard event bc the input element gets focus on keyboard nav and expands that way*/}
         {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events */}
         <div
+          aria-labelledby={uniqueId}
           role={onExpand ? 'button' : undefined}
           className={`${prefix}--search-magnifier`}
           onClick={onExpand}>
@@ -323,6 +325,7 @@ Search.propTypes = {
    * Provide an optional placeholder text for the Search.
    * Note: if the label and placeholder differ,
    * VoiceOver on Mac will read both
+   * @default "Search"
    */
   placeholder: PropTypes.string,
 
