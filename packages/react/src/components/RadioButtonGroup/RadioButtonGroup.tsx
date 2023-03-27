@@ -172,10 +172,10 @@ const RadioButtonGroup = React.forwardRef(
       }
     }
 
-      const showWarning = !readOnly && !invalid && warn;
-      const showHelper = !invalid && !disabled && !warn;
+    const showWarning = !readOnly && !invalid && warn;
+    const showHelper = !invalid && !disabled && !warn;
 
-      const wrapperClasses = classNames(`${prefix}--form-item`, className);
+    const wrapperClasses = classNames(`${prefix}--form-item`, className);
 
     const fieldsetClasses = classNames(`${prefix}--radio-button-group`, {
       [`${prefix}--radio-button-group--${orientation}`]:
@@ -186,13 +186,13 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--radio-button-group--warning`]: showWarning,
     });
 
-      const helperClasses = classNames(`${prefix}--form__helper-text`, {
-        [`${prefix}--form__helper-text--disabled`]: disabled,
-      });
+    const helperClasses = classNames(`${prefix}--form__helper-text`, {
+      [`${prefix}--form__helper-text--disabled`]: disabled,
+    });
 
-        const helper = helperText ? (
-          <div className={helperClasses}>{helperText}</div>
-        ) : null;
+    const helper = helperText ? (
+      <div className={helperClasses}>{helperText}</div>
+    ) : null;
 
     const divRef = useRef<HTMLDivElement>(null);
 
