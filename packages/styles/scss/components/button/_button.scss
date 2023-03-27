@@ -108,7 +108,7 @@
       $layer-active
     );
 
-    padding: $button-padding-ghost;
+    padding-inline-end: calc(layout.density('padding-inline') - rem(1px));
 
     .#{$prefix}--btn__icon {
       position: static;
@@ -134,16 +134,6 @@
       background: transparent;
       color: $text-on-color-disabled;
       outline: none;
-    }
-
-    &.#{$prefix}--btn--sm {
-      padding: $button-padding-ghost-sm;
-    }
-
-    // V11: remove field
-    &.#{$prefix}--btn--field,
-    &.#{$prefix}--btn--md {
-      padding: $button-padding-ghost-field;
     }
 
     &:not([disabled]) svg {
@@ -268,7 +258,7 @@
         $button-danger-active
       );
 
-      padding: $button-padding-ghost;
+      padding-inline-end: calc(layout.density('padding-inline') - rem(1px));
 
       .#{$prefix}--btn__icon {
         position: static;
@@ -291,35 +281,7 @@
         color: $text-disabled;
         outline: none;
       }
-
-      &.#{$prefix}--btn--sm {
-        padding: $button-padding-ghost-sm;
-      }
-
-      // V11: Remove field
-      &.#{$prefix}--btn--field,
-      &.#{$prefix}--btn--md {
-        padding: $button-padding-ghost-field;
-      }
     }
-  }
-
-  .#{$prefix}--btn--sm {
-    padding: $button-padding-sm;
-  }
-
-  .#{$prefix}--btn--2xl:not(.#{$prefix}--btn--icon-only) {
-    @include button-padding-large;
-  }
-
-  .#{$prefix}--btn--xl:not(.#{$prefix}--btn--icon-only) {
-    @include button-padding-large;
-  }
-
-  // V11: Remove field
-  .#{$prefix}--btn--field,
-  .#{$prefix}--btn--md {
-    padding: $button-padding-field;
   }
 
   //expressive styles
