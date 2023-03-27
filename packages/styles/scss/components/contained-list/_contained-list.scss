@@ -97,7 +97,7 @@ $-height: layout.size('height', $default: 'lg', $min: 'sm', $max: 'xl');
     .#{$prefix}--contained-list-item__content {
     @include type-style('body-01');
 
-    // TODO: add reference to docs
+    // see https://github.com/carbon-design-system/carbon/blob/main/packages/styles/docs/sass.md#contextual-layout-tokens -> Troubleshooting
     --temp-height: #{$-height};
 
     min-height: $-height;
