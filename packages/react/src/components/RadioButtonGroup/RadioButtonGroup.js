@@ -126,26 +126,26 @@ const RadioButtonGroup = React.forwardRef(function RadioButtonGroup(
           <Legend className={`${prefix}--label`}>{legendText}</Legend>
         )}
         {getRadioButtons()}
+        <div className={`${prefix}--radio-button__validation-msg`}>
+          {!readOnly && invalid && (
+            <>
+              <WarningFilled
+                className={`${prefix}--radio-button__invalid-icon`}
+              />
+              <div className={`${prefix}--form-requirement`}>{invalidText}</div>
+            </>
+          )}
+          {showWarning && (
+            <>
+              <WarningAltFilled
+                className={`${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`}
+              />
+              <div className={`${prefix}--form-requirement`}>{warnText}</div>
+            </>
+          )}
+        </div>
+        {showHelper && helper}
       </fieldset>
-      <div className={`${prefix}--radio-button__validation-msg`}>
-        {!readOnly && invalid && (
-          <>
-            <WarningFilled
-              className={`${prefix}--radio-button__invalid-icon`}
-            />
-            <div className={`${prefix}--form-requirement`}>{invalidText}</div>
-          </>
-        )}
-        {showWarning && (
-          <>
-            <WarningAltFilled
-              className={`${prefix}--radio-button__invalid-icon ${prefix}--radio-button__invalid-icon--warning`}
-            />
-            <div className={`${prefix}--form-requirement`}>{warnText}</div>
-          </>
-        )}
-      </div>
-      {showHelper && helper}
     </div>
   );
 });
