@@ -10,7 +10,16 @@ import React from 'react';
 import cx from 'classnames';
 import { usePrefix } from '../../internal/usePrefix';
 
-function RadioButtonSkeleton({ className, ...rest }) {
+export interface RadioButtonSkeletonProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  /**
+   * Specify an optional className to add.
+   */
+  className?: string;
+}
+
+function RadioButtonSkeleton(props: RadioButtonSkeletonProps) {
+  const { className, ...rest } = props;
   const prefix = usePrefix();
   return (
     <div className={cx(`${prefix}--radio-button-wrapper`, className)} {...rest}>
