@@ -8,7 +8,8 @@
  */
 
 import settings from 'carbon-components/es/globals/js/settings';
-import { html, property, customElement } from 'lit-element';
+import { html, property } from 'lit-element';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 import HostListener from '../../globals/decorators/host-listener';
 import BXFloatingMenu, {
   FLOATING_MENU_ALIGNMENT,

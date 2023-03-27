@@ -1,14 +1,14 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
 import { SVGTemplateResult } from 'lit-html';
-import { html, svg, property, customElement, LitElement } from 'lit-element';
+import { html, svg, property, LitElement } from 'lit-element';
 import CheckmarkOutline16 from '@carbon/icons/lib/checkmark--outline/16';
 import Warning16 from '@carbon/icons/lib/warning/16';
 import settings from 'carbon-components/es/globals/js/settings';
@@ -16,6 +16,7 @@ import spread from '../../globals/directives/spread';
 import FocusMixin from '../../globals/mixins/focus';
 import { PROGRESS_STEP_STAT } from './defs';
 import styles from './progress-indicator.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { PROGRESS_STEP_STAT };
 

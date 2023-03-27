@@ -1,13 +1,13 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
  */
 
-import { customElement, LitElement, html, property, query } from 'lit-element';
+import { LitElement, html, property, query } from 'lit-element';
 import { classMap } from 'lit-html/directives/class-map';
 import settings from 'carbon-components/es/globals/js/settings';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
@@ -17,6 +17,7 @@ import FormMixin from '../../globals/mixins/form';
 import ValidityMixin from '../../globals/mixins/validity';
 import { TEXTAREA_COLOR_SCHEME } from './defs';
 import styles from './textarea.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export { TEXTAREA_COLOR_SCHEME };
 

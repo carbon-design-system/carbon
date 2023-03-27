@@ -11,7 +11,7 @@ import settings from 'carbon-components/es/globals/js/settings';
 import { classMap } from 'lit-html/directives/class-map';
 import { TemplateResult } from 'lit-html';
 import { ifDefined } from 'lit-html/directives/if-defined';
-import { html, property, query, customElement, LitElement } from 'lit-element';
+import { html, property, query, LitElement } from 'lit-element';
 import ChevronDown16 from '@carbon/icons/lib/chevron--down/16';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
 import FocusMixin from '../../globals/mixins/focus';
@@ -33,6 +33,7 @@ import {
 } from './defs';
 import BXDropdownItem from './dropdown-item';
 import styles from './dropdown.scss';
+import { carbonElement as customElement } from '../../globals/decorators/carbon-element';
 
 export {
   DROPDOWN_COLOR_SCHEME,
