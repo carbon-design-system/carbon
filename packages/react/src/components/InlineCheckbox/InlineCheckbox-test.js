@@ -13,7 +13,7 @@ import userEvent from '@testing-library/user-event';
 describe('InlineCheckbox', () => {
   it('should render', () => {
     render(
-      <InlineCheckbox ariaLabel="test-label" id="test-id" name="test-name" />
+      <InlineCheckbox aria-label="test-label" id="test-id" name="test-name" />
     );
     expect(screen.getByRole('checkbox')).toBeInTheDocument();
   });
@@ -23,7 +23,7 @@ describe('InlineCheckbox', () => {
     render(
       /* eslint-disable jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */
       <div onClick={onClick}>
-        <InlineCheckbox ariaLabel="test-label" id="test-id" name="test-name" />
+        <InlineCheckbox aria-label="test-label" id="test-id" name="test-name" />
       </div>
     );
     userEvent.click(screen.getByRole('checkbox'));

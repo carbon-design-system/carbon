@@ -102,6 +102,7 @@ const MenuItem = React.forwardRef(function MenuItem(
   function handleKeyDown(e) {
     if (hasChildren && match(e, keys.ArrowRight)) {
       openSubmenu();
+      e.stopPropagation();
     }
 
     if (match(e, keys.Enter) || match(e, keys.Space)) {
