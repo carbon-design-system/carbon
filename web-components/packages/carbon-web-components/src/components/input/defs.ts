@@ -21,7 +21,7 @@ export enum INPUT_SIZE {
   /**
    * Regular size, same as medium size.
    */
-  REGULAR = 'md',
+  MEDIUM = 'md',
 
   /**
    * Large size.

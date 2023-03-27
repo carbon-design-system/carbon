@@ -14,7 +14,7 @@ import { createStore, combineReducers } from 'redux';
 import { Field, SubmissionError, reduxForm, reducer as reduxFormReducer } from 'redux-form';
 import BXBtn from '@carbon/web-components/es/components-react/button/button.js';
 import BXFormItem from '@carbon/web-components/es/components-react/form/form-item.js';
-import BXInput from '@carbon/web-components/es/components-react/input/input.js';
+import CDSInput from '@carbon/web-components/es/components-react/input/input.js';
 import BXInlineNotification from '@carbon/web-components/es/components-react/notification/inline-notification.js';
 import './index.css';
 
@@ -53,7 +53,7 @@ const FieldImpl = ({ input, label, type, meta: { touched, error } }) => {
   const validityMessage = !touched ? undefined : error;
   return (
     <BXFormItem>
-      <BXInput
+      <CDSInput
         {...input}
         invalid={Boolean(validityMessage)}
         label-text={label}

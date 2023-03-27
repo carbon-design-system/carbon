@@ -16,7 +16,7 @@ import styles from './number-input.scss';
  * Skeleton of number input.
  */
 @customElement(`${prefix}-number-input-skeleton`)
-class BXNumberInputSkeleton extends LitElement {
+class CDSNumberInputSkeleton extends LitElement {
   /**
    * `true` if the label should be hidden. Corresponds to the attribute with the same name.
    */
@@ -35,4 +35,4 @@ class BXNumberInputSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXNumberInputSkeleton;
+export default CDSNumberInputSkeleton;

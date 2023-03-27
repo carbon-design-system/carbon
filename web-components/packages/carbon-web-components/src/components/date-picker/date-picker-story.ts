@@ -67,7 +67,7 @@ const knobs = {
       'Placeholder text (placeholder in <cds-date-picker-input>)',
       'mm/dd/yyyy'
     ),
-    size: select('Input size (size)', sizes, INPUT_SIZE.REGULAR),
+    size: select('Input size (size)', sizes, INPUT_SIZE.MEDIUM),
     validityMessage: textNullable(
       'The validity message (validity-message)',
       ''

@@ -261,7 +261,7 @@ class BXSelect extends ValidityMixin(FormMixin(LitElement)) {
    * The input box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.REGULAR;
+  size = INPUT_SIZE.MEDIUM;
 
   /**
    * The validity message.

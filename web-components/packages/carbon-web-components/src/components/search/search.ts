@@ -126,7 +126,7 @@ class BXSearch extends FocusMixin(FormMixin(LitElement)) {
    * The search box size.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.REGULAR;
+  size = INPUT_SIZE.MEDIUM;
 
   /**
    * The `<input>` name.

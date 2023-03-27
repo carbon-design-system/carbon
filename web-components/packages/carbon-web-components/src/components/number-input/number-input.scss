@@ -8,6 +8,8 @@
 $css--plex: true !default;
 
 @use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/theme' as *;
+@use '@carbon/styles/scss/utilities';
 @use '@carbon/styles/scss/components/form';
 @use '@carbon/styles/scss/components/number-input/index';
 
@@ -20,4 +22,15 @@ $css--plex: true !default;
   .#{$prefix}--form-requirement[hidden] {
     display: none;
   }
+}
+
+.#{$prefix}--number__invalid
+  ~ .#{$prefix}--number__controls
+  .#{$prefix}--number__rule-divider:first-of-type,
+.#{$prefix}--number
+  .#{$prefix}--number__invalid
+  ~ input[type='number']:disabled
+  + .#{$prefix}--number__controls
+  .#{$prefix}--number__rule-divider:first-of-type {
+  background-color: $border-subtle;
 }

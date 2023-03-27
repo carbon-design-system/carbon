@@ -190,7 +190,7 @@ class BXDatePickerInput extends ValidityMixin(FocusMixin(LitElement)) {
    * Vertical size of this date picker input.
    */
   @property({ attribute: 'size', reflect: true })
-  size = INPUT_SIZE.REGULAR;
+  size = INPUT_SIZE.MEDIUM;
 
   /**
    * Horizontal size of this date picker input.

@@ -28,14 +28,12 @@ import '@carbon/web-components/es/components/number-input/index.js';
 ### HTML
 
 ```html
-<cds-number-input value="0" min="0" max="100">
-  <span slot="label-text">Label text</span>
-  <span slot="helper-text">Optional helper text</span>
-  <span slot="validity-message">Something isn't right</span>
-  <span slot="validity-message-max"
-    >Try a lower value, something less than 100</span
-  >
-  <span slot="validity-message-min">Value must be larger than 0</span>
+<cds-number-input
+  value="0"
+  min="0"
+  max="100"
+  label="Label text"
+  helper-text="Optional helper text">
 </cds-number-input>
 ```
 
@@ -50,14 +48,12 @@ import '@carbon/web-components/es/components/form/index.js';
 
 ```html
 <cds-form-item>
-  <cds-number-input value="0" min="0" max="100">
-    <span slot="label-text">Label text</span>
-    <span slot="helper-text">Optional helper text</span>
-    <span slot="validity-message">Something isn't right</span>
-    <span slot="validity-message-max"
-      >Try a lower value, something less than 100</span
-    >
-    <span slot="validity-message-min">Value must be larger than 0</span>
+  <cds-number-input
+    value="0"
+    min="0"
+    max="100"
+    label="Label text"
+    helper-text="Optional helper text">
   </cds-number-input>
 </cds-form-item>
 ```
@@ -73,7 +69,7 @@ For the skeleton variation, utilize `<cds-number-input-skeleton>`.
 ## `<cds-number-input>` attributes and properties
 
 Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
-`<cds-number-input mobile>`) and `false` means not setting the attribute (e.g.
-`<cds-number-input>` without `mobile` attribute).
+`<cds-number-input invalid>`) and `false` means not setting the attribute (e.g.
+`<cds-number-input>` without `invalid` attribute).
 
 <Props of="cds-number-input" />

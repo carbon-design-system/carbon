@@ -1,7 +1,7 @@
 /**
  * @license
  *
- * Copyright IBM Corp. 2019, 2022
+ * Copyright IBM Corp. 2019, 2023
  *
  * This source code is licensed under the Apache-2.0 license found in the
  * LICENSE file in the root directory of this source tree.
@@ -20,7 +20,7 @@ const inputTypes = Object.entries(INPUT_TYPE).reduce(
 
 const sizes = {
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
-  Regular: null,
+  [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
   [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
@@ -48,7 +48,7 @@ const createProps = ({ boolean, textNonEmpty, select }) => {
             false
           )
         : null,
-    size: select('Input size (size)', sizes, INPUT_SIZE.REGULAR),
+    size: select('Input size (size)', sizes, INPUT_SIZE.MEDIUM),
     type,
   };
 };

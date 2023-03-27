@@ -22,7 +22,7 @@ class BXSearchSkeleton extends LitElement {
    * The search box size. Corresponds to the attribute with the same name.
    */
   @property({ reflect: true })
-  size = INPUT_SIZE.REGULAR;
+  size = INPUT_SIZE.MEDIUM;
 
   render() {
     return html`
