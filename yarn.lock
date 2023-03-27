@@ -7370,7 +7370,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^8.0.0, @testing-library/dom@npm:^8.11.1":
+"@testing-library/dom@npm:^8.11.1":
   version: 8.11.3
   resolution: "@testing-library/dom@npm:8.11.3"
   dependencies:
@@ -7383,6 +7383,22 @@ __metadata:
     lz-string: ^1.4.4
     pretty-format: ^27.0.2
   checksum: 2245d254b6058590e25de86fb7b3c75e4a31096901a191f80d3efb9fa7e1e273043416f370c8770feb9f3ccc73a1550a877a3b003b593f1728ae828fcb52cd62
+  languageName: node
+  linkType: hard
+
+"@testing-library/dom@npm:^9.0.0":
+  version: 9.2.0
+  resolution: "@testing-library/dom@npm:9.2.0"
+  dependencies:
+    "@babel/code-frame": ^7.10.4
+    "@babel/runtime": ^7.12.5
+    "@types/aria-query": ^5.0.1
+    aria-query: ^5.0.0
+    chalk: ^4.1.0
+    dom-accessibility-api: ^0.5.9
+    lz-string: ^1.5.0
+    pretty-format: ^27.0.2
+  checksum: b145f43cd06ff083012cf2503aff6ccba97ff80715fcb106fe64af690f5536557bf24d37b97e8d685bbe3803d7f71d685ce71426cb1b9e250c3611e4372dcfa9
   languageName: node
   linkType: hard
 
@@ -7403,17 +7419,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:^12.1.2":
-  version: 12.1.4
-  resolution: "@testing-library/react@npm:12.1.4"
+"@testing-library/react@npm:^14.0.0":
+  version: 14.0.0
+  resolution: "@testing-library/react@npm:14.0.0"
   dependencies:
     "@babel/runtime": ^7.12.5
-    "@testing-library/dom": ^8.0.0
-    "@types/react-dom": "*"
+    "@testing-library/dom": ^9.0.0
+    "@types/react-dom": ^18.0.0
   peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: 944c5f8d4abb22c0650c25c7ae499651828c37c0e741ff67a4635d4cd99b307d486dabec05b372aba638bd359d29cd2af97393b5055ea294a201d80b4bc384b8
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 4a54c8f56cc4a39b50803205f84f06280bb76521d6d5d4b3b36651d760c7c7752ef142d857d52aaf4fad4848ed7a8be49afc793a5dda105955d2f8bef24901ac
   languageName: node
   linkType: hard
 
@@ -7503,6 +7519,13 @@ __metadata:
   version: 4.2.0
   resolution: "@types/aria-query@npm:4.2.0"
   checksum: e4a3748c5511deb88e93c6faf2acb0730233ff75018e9aaed95e3d2833880e9d0eda7e08e4315a827872471779471585671d08bae00ac8b9813fc140194b52e5
+  languageName: node
+  linkType: hard
+
+"@types/aria-query@npm:^5.0.1":
+  version: 5.0.1
+  resolution: "@types/aria-query@npm:5.0.1"
+  checksum: 69fd7cceb6113ed370591aef04b3fd0742e9a1b06dd045c43531448847b85de181495e4566f98e776b37c422a12fd71866e0a1dfd904c5ec3f84d271682901de
   languageName: node
   linkType: hard
 
@@ -7958,7 +7981,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:*, @types/react-dom@npm:^18.0.0":
+"@types/react-dom@npm:^18.0.0":
   version: 18.0.2
   resolution: "@types/react-dom@npm:18.0.2"
   dependencies:
@@ -11324,7 +11347,7 @@ __metadata:
     "@playwright/test": ^1.28.0
     "@testing-library/dom": ^8.11.1
     "@testing-library/jest-dom": ^5.16.1
-    "@testing-library/react": ^12.1.2
+    "@testing-library/react": ^14.0.0
     "@testing-library/user-event": ^13.5.0
     accessibility-checker: ^3.1.32
     all-contributors-cli: ^6.19.0
@@ -22204,6 +22227,15 @@ fsevents@^1.2.7:
   bin:
     lz-string: bin/bin.js
   checksum: 54e31238a61a84d8f664d9860a9fba7310c5b97a52c444f80543069bc084815eff40b8d4474ae1d93992fdf6c252dca37cf27f6adbeb4dbc3df2f3ac773d0e61
+  languageName: node
+  linkType: hard
+
+"lz-string@npm:^1.5.0":
+  version: 1.5.0
+  resolution: "lz-string@npm:1.5.0"
+  bin:
+    lz-string: bin/bin.js
+  checksum: 1ee98b4580246fd90dd54da6e346fb1caefcf05f677c686d9af237a157fdea3fd7c83a4bc58f858cd5b10a34d27afe0fdcbd0505a47e0590726a873dc8b8f65d
   languageName: node
   linkType: hard
 
