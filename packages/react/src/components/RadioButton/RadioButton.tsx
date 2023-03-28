@@ -5,15 +5,91 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes, { ReactNodeLike } from 'prop-types';
+import React, { useRef } from 'react';
 import classNames from 'classnames';
 import { Text } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { useId } from '../../internal/useId';
+import mergeRefs from '../../tools/mergeRefs';
 
-const RadioButton = React.forwardRef(function RadioButton(
-  {
+type ExcludedAttributes = 'onChange';
+
+export interface RadioButtonProps
+  extends Omit<
+    React.InputHTMLAttributes<HTMLInputElement>,
+    ExcludedAttributes
+  > {
+  /**
+   * Specify whether the `<RadioButton>` is currently checked
+   */
+  checked?: boolean;
+
+  /**
+   * Provide an optional className to be applied to the containing node
+   */
+  className?: string;
+
+  /**
+   * Specify whether the `<RadioButton>` should be checked by default
+   */
+  defaultChecked?: boolean;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether the label should be hidden, or not
+   */
+  hideLabel?: boolean;
+
+  /**
+   * Provide a unique id for the underlying `<input>` node
+   */
+  id?: string;
+
+  /**
+   * Provide where label text should be placed
+   * NOTE: `top`/`bottom` are deprecated
+   */
+  labelPosition?: 'left' | 'right';
+
+  /**
+   * Provide label text to be read by screen readers when interacting with the
+   * control
+   */
+  labelText: ReactNodeLike;
+
+  /**
+   * Provide a name for the underlying `<input>` node
+   */
+  name?: string;
+
+  /**
+   * Provide an optional `onChange` hook that is called each time the value of
+   * the underlying `<input>` changes
+   */
+  onChange?: (
+    value: string | number,
+    name: string | undefined,
+    event: any
+  ) => void;
+
+  /**
+   * Provide a handler that is invoked when a user clicks on the control
+   */
+  onClick?: (evt: React.MouseEvent<HTMLInputElement>) => void;
+
+  /**
+   * Specify the value of the `<RadioButton>`
+   */
+  value?: string | number;
+}
+
+const RadioButton = React.forwardRef((props: RadioButtonProps, ref) => {
+  const {
     className,
     disabled,
     hideLabel,
@@ -24,9 +100,8 @@ const RadioButton = React.forwardRef(function RadioButton(
     onChange = () => {},
     value = '',
     ...rest
-  },
-  ref
-) {
+  } = props;
+
   const prefix = usePrefix();
   const uid = useId('radio-button');
   const uniqueId = id || uid;
@@ -48,6 +123,8 @@ const RadioButton = React.forwardRef(function RadioButton(
     }
   );
 
+  const inputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div className={wrapperClasses}>
       <input
@@ -56,7 +133,7 @@ const RadioButton = React.forwardRef(function RadioButton(
         className={`${prefix}--radio-button`}
         onChange={handleOnChange}
         id={uniqueId}
-        ref={ref}
+        ref={mergeRefs(inputRef, ref)}
         disabled={disabled}
         value={value}
         name={name}
