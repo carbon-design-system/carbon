@@ -59,8 +59,8 @@ export { default as BXInlineNotification } from './components/notification/inlin
 export { default as BXToastNotification } from './components/notification/toast-notification';
 export { default as CDSNumberInput } from './components/number-input/number-input';
 export { default as CDSNumberInputSkeleton } from './components/number-input/number-input-skeleton';
-export { default as BXTextarea } from './components/textarea/textarea';
-export { default as BXTextareaSkeleton } from './components/textarea/textarea-skeleton';
+export { default as CDSTextarea } from './components/textarea/textarea';
+export { default as CDSTextareaSkeleton } from './components/textarea/textarea-skeleton';
 export { default as BXOverflowMenu } from './components/overflow-menu/overflow-menu';
 export { default as BXOverflowMenuBody } from './components/overflow-menu/overflow-menu-body';
 export { default as BXOverflowMenuItem } from './components/overflow-menu/overflow-menu-item';

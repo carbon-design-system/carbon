@@ -11,15 +11,12 @@ import { LitElement, html } from 'lit';
 import { property, customElement, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import WarningFilled16 from '@carbon/icons/lib/warning--filled/16';
+import WarningAltFilled16 from '@carbon/icons/lib/warning--alt--filled/16';
 import { prefix } from '../../globals/settings';
 import ifNonEmpty from '../../globals/directives/if-non-empty';
 import { ifDefined } from 'lit/directives/if-defined.js';
-import FormMixin from '../../globals/mixins/form';
-import ValidityMixin from '../../globals/mixins/validity';
-import { TEXTAREA_COLOR_SCHEME } from './defs';
+import CDSInput from '../input/input';
 import styles from './textarea.scss';
-
-export { TEXTAREA_COLOR_SCHEME };
 
 /**
  * Text area.
@@ -30,59 +27,21 @@ export { TEXTAREA_COLOR_SCHEME };
  * @slot validity-message - The validity message. If present and non-empty, this input shows the UI of its invalid state.
  */
 @customElement(`${prefix}-textarea`)
-class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
+class CDSTextarea extends CDSInput {
   /**
    * Handles `oninput` event on the `<input>`.
    *
    * @param event The event.
    */
-  private _handleInput({ target }: Event) {
+  protected _handleInput({ target }: Event) {
     this.value = (target as HTMLTextAreaElement).value;
   }
 
-  _handleFormdata(event: Event) {
-    const { formData } = event as any; // TODO: Wait for `FormDataEvent` being available in `lib.dom.d.ts`
-    const { disabled, name, value } = this;
-    if (!disabled) {
-      formData.append(name, value);
-    }
-  }
-
   /**
-   * May be any of the standard HTML autocomplete options
+   * The number of columns for the stextarea to show by default
    */
-  @property()
-  autocomplete = '';
-
-  /**
-   * Sets the textarea to be focussed automatically on page load. Defaults to false
-   */
-  @property({ type: Boolean })
-  autofocus = false;
-
-  /**
-   * The color scheme.
-   */
-  @property({ attribute: 'color-scheme', reflect: true })
-  colorScheme = TEXTAREA_COLOR_SCHEME.REGULAR;
-
-  /**
-   * The number of columns for the textarea to show by default
-   */
-  @property()
-  cols = 50;
-
-  /**
-   * Controls the disabled state of the textarea
-   */
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
-
-  /**
-   * The helper text.
-   */
-  @property({ attribute: 'helper-text' })
-  helperText = '';
+  @property({ type: Number })
+  cols;
 
   /**
    * ID to link the `label` and `textarea`
@@ -91,40 +50,10 @@ class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
   id = '';
 
   /**
-   * Controls the invalid state and visibility of the `validityMessage`
-   */
-  @property({ type: Boolean, reflect: true })
-  invalid = false;
-
-  /**
-   * The label text.
-   */
-  @property({ attribute: 'label-text' })
-  labelText = '';
-
-  /**
-   * Name for the textarea in the `FormData`
-   */
-  @property()
-  name = '';
-
-  /**
    * Pattern to validate the textarea against for HTML validity checking
    */
   @property()
   pattern = '';
-
-  /**
-   * Value to display when the textarea has an empty `value`
-   */
-  @property({ reflect: true })
-  placeholder = '';
-
-  /**
-   * Controls the readonly state of the textarea
-   */
-  @property({ type: Boolean, reflect: true })
-  readonly = false;
 
   /**
    * Boolean property to set the required status
@@ -133,28 +62,10 @@ class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
   required = false;
 
   /**
-   * The special validity message for `required`.
-   */
-  @property({ attribute: 'required-validity-message' })
-  requiredValidityMessage = 'Please fill out this field.';
-
-  /**
    * The number of rows for the textarea to show by default
    */
   @property()
   rows = 4;
-
-  /**
-   * The validity message.
-   */
-  @property({ attribute: 'validity-message' })
-  validityMessage = '';
-
-  /**
-   * The value of the text area.
-   */
-  @property()
-  value = '';
 
   /**
    * Get a reference to the underlying textarea so we can directly apply values.
@@ -164,15 +75,28 @@ class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
   protected _textarea!: HTMLTextAreaElement;
 
   render() {
+    const { enableCounter, maxCount } = this;
+
+    const textCount = this.value?.length;
+
     const invalidIcon = WarningFilled16({
       class: `${prefix}--text-area__invalid-icon`,
     });
 
+    const warnIcon = WarningAltFilled16({
+      class: `${prefix}--text-area__invalid-icon ${prefix}--text-area__invalid-icon--warning`,
+    });
+
     const textareaClasses = classMap({
       [`${prefix}--text-area`]: true,
-      [`${prefix}--text-area--v2`]: true,
-      [`${prefix}--text-area--${this.colorScheme}`]: this.colorScheme,
+      [`${prefix}--text-area--warn`]: this.warn,
       [`${prefix}--text-area--invalid`]: this.invalid,
+    });
+
+    const textareaWrapperClasses = classMap({
+      [`${prefix}--text-area__wrapper`]: true,
+      [`${prefix}--text-area__wrapper--warn`]: this.warn,
+      [`${prefix}--text-area__wrapper--readonly`]: this.readonly,
     });
 
     const labelClasses = classMap({
@@ -185,14 +109,31 @@ class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
       [`${prefix}--form__helper-text--disabled`]: this.disabled,
     });
 
+    const counter =
+      enableCounter && maxCount
+        ? html` <label class="${labelClasses}">
+            <slot name="label-text">${textCount}/${maxCount}</slot>
+          </label>`
+        : null;
+
+    const icon = () => {
+      if (this.invalid) {
+        return invalidIcon;
+      } else if (this.warn && !this.invalid) {
+        return warnIcon;
+      }
+      return null;
+    };
+
     return html`
-      <label class="${labelClasses}" for="input">
-        <slot name="label-text"> ${this.labelText} </slot>
-      </label>
-      <div
-        class="${prefix}--text-area__wrapper"
-        ?data-invalid="${this.invalid}">
-        ${this.invalid ? invalidIcon : null}
+      <div class="${prefix}--text-area__label-wrapper">
+        <label class="${labelClasses}" for="input">
+          <slot name="label-text"> ${this.label} </slot>
+        </label>
+        ${counter}
+      </div>
+      <div class="${textareaWrapperClasses}" ?data-invalid="${this.invalid}">
+        ${icon()}
         <textarea
           ?autocomplete="${this.autocomplete}"
           ?autofocus="${this.autofocus}"
@@ -208,13 +149,18 @@ class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
           ?required="${this.required}"
           rows="${ifDefined(this.rows)}"
           .value="${this.value}"
+          maxlength="${ifNonEmpty(this.maxCount)}"
           @input="${this._handleInput}"></textarea>
       </div>
-      <div class="${helperTextClasses}">
+      <div class="${helperTextClasses}" ?hidden="${this.invalid || this.warn}">
         <slot name="helper-text"> ${this.helperText} </slot>
       </div>
-      <div class="${prefix}--form-requirement">
-        <slot name="validity-message"> ${this.validityMessage} </slot>
+      <div
+        class="${prefix}--form-requirement"
+        ?hidden="${!this.invalid && !this.warn}">
+        <slot name="${this.invalid ? 'invalid-text' : 'warn-text'}">
+          ${this.invalid ? this.invalidText : this.warnText}
+        </slot>
       </div>
     `;
   }
@@ -226,4 +172,4 @@ class BXTextarea extends ValidityMixin(FormMixin(LitElement)) {
   static styles = styles; // `styles` here is a `CSSResult` generated by custom WebPack loader
 }
 
-export default BXTextarea;
+export default CDSTextarea;

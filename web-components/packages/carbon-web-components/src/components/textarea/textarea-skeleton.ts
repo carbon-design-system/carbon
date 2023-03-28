@@ -16,7 +16,7 @@ import styles from './textarea.scss';
  * Skeleton of text area.
  */
 @customElement(`${prefix}-textarea-skeleton`)
-class BXTextareaSkeleton extends LitElement {
+class CDSTextareaSkeleton extends LitElement {
   render() {
     return html`
       <span class="${prefix}--label ${prefix}--skeleton"></span>
@@ -27,4 +27,4 @@ class BXTextareaSkeleton extends LitElement {
   static styles = styles;
 }
 
-export default BXTextareaSkeleton;
+export default CDSTextareaSkeleton;

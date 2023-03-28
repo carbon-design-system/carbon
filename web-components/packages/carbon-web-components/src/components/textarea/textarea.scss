@@ -11,4 +11,11 @@ $css--plex: true !default;
 
 :host(#{$prefix}-textarea) {
   outline: none;
+
+  &[cols='0'],
+  &:not([cols]),
+  textarea[cols='0'],
+  textarea:not([cols]) {
+    width: 100%;
+  }
 }
