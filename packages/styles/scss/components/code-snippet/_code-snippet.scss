@@ -270,8 +270,6 @@ $copy-btn-feedback: $background-inverse !default;
 
     display: flex;
     overflow: visible;
-    width: $spacing-08;
-    height: $spacing-08;
     align-items: center;
     justify-content: center;
     padding: 0;
@@ -316,12 +314,8 @@ $copy-btn-feedback: $background-inverse !default;
     right: 0.5rem;
   }
 
-  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn.#{$prefix}--btn--md {
+  .#{$prefix}--snippet--multi .#{$prefix}--copy-btn {
     z-index: 10;
-    width: $spacing-07;
-    height: $spacing-07;
-    min-height: $spacing-07;
-    padding: 0;
   }
 
   // Show more / less button
