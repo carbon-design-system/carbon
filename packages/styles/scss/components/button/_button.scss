@@ -142,15 +142,15 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    $height: layout.size('height', $default: 'md', $max: 'lg');
+    $-height: layout.size('height', $default: 'md', $max: 'lg');
 
-    width: $height;
-    height: $height;
+    width: $-height;
+    height: $-height;
     justify-content: center;
     padding: 0;
     // -1px to compensate for border width
     padding-block-start: min(
-      calc(($height - rem(16px)) / 2 - rem(1px)),
+      calc(($-height - rem(16px)) / 2 - rem(1px)),
       var(--temp-padding-block-max)
     );
 

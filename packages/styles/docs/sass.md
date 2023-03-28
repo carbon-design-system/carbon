@@ -652,59 +652,75 @@ support for min and max values. Providing a default is required:
 <tr><td>
 
 ```scss
-height: layout.size('height', $default: 'md');
+.my-component {
+  height: layout.size('height', $default: 'md');
+}
 ```
 
 </td><td>
 
-```css
-height: var(--cds-layout-size-height, var(--cds-layout-size-height-md));
+```scss
+.my-component {
+  height: var(--cds-layout-size-height, var(--cds-layout-size-height-md));
+}
 ```
 
 </td></tr><tr><td>
 
 ```scss
-height: layout.size('height', $default: 'md', $min: 'sm');
+.my-component {
+  height: layout.size('height', $default: 'md', $min: 'sm');
+}
 ```
 
 </td><td>
 
-```css
-height: max(
-  var(--cds-layout-size-height-sm),
-  var(--cds-layout-size-height, var(--cds-layout-size-height-md))
-);
+```scss
+.my-component {
+  height: max(
+    var(--cds-layout-size-height-sm),
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md))
+  );
+}
 ```
 
 </td></tr><tr><td>
 
 ```scss
-height: layout.size('height', $default: 'md', $max: 'lg');
+.my-component {
+  height: layout.size('height', $default: 'md', $max: 'lg');
+}
 ```
 
 </td><td>
 
-```css
-height: min(
-  var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
-  var(--cds-layout-size-height-lg)
-);
+```scss
+.my-component {
+  height: min(
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+    var(--cds-layout-size-height-lg)
+  );
+}
 ```
 
 </td></tr><tr><td>
 
 ```scss
-height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+.my-component {
+  height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+}
 ```
 
 </td><td>
 
-```css
-height: clamp(
-  var(--cds-layout-size-height-sm),
-  var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
-  var(--cds-layout-size-height-lg)
-);
+```scss
+.my-component {
+  height: clamp(
+    var(--cds-layout-size-height-sm),
+    var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+    var(--cds-layout-size-height-lg)
+  );
+}
 ```
 
 </td></tr>
@@ -730,16 +746,20 @@ falls back to `normal` by default.
 <tr><td>
 
 ```scss
-padding-inline: layout.density('padding-inline');
+.my-component {
+  padding-inline: layout.density('padding-inline');
+}
 ```
 
 </td><td>
 
-```css
-padding-inline: var(
-  --cds-layout-density-padding-inline,
-  var(--cds-layout-density-padding-inline-normal)
-);
+```scss
+.my-component {
+  padding-inline: var(
+    --cds-layout-density-padding-inline,
+    var(--cds-layout-density-padding-inline-normal)
+  );
+}
 ```
 
 </td></tr>
