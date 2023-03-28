@@ -88,7 +88,7 @@ describe('Tooltip', () => {
     expect(onBlur).toHaveBeenCalled();
   });
 
-  it('should close when item is activated and `closeOnActivation`', () => {
+  it('should close when item is activated and `closeOnActivation`', async () => {
     const { container } = render(
       <>
         <Tooltip closeOnActivation label="Close">
@@ -101,9 +101,10 @@ describe('Tooltip', () => {
     const popoverContainer = container.querySelector('.cds--popover-container');
     const button = screen.getByRole('button');
 
-    button.focus();
+    await userEvent.tab();
+
     expect(popoverContainer).toHaveClass('cds--popover--open');
-    button.click();
+    await userEvent.click(button);
     expect(popoverContainer).not.toHaveClass('cds--popover--open');
   });
 });

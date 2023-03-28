@@ -150,7 +150,7 @@ describe('Accordion', () => {
 
       // userEvent.type clicks the element passed before typing without skipClick option
       // see: https://github.com/testing-library/user-event#typeelement-text-options
-      await userEvent.type(screen.getByText('Heading A'), '{space}', {
+      await userEvent.type(screen.getByText('Heading A'), '{Space}', {
         skipClick: true,
       });
 

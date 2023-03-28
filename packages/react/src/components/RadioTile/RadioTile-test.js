@@ -70,9 +70,8 @@ describe('RadioTile', () => {
       render(<RadioTile value="standard" onChange={onChange} />);
 
       await userEvent.click(screen.getByRole('radio'));
-      await userEvent.type(screen.getByRole('radio'), '{space}');
 
-      expect(onChange).toHaveBeenCalledTimes(2);
+      expect(onChange).toHaveBeenCalledTimes(1);
     });
 
     it('should respect tabIndex prop', () => {

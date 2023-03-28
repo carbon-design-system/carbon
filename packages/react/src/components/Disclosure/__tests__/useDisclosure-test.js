@@ -7,7 +7,7 @@
 
 import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import userEvent, { specialChars } from '@testing-library/user-event';
+import userEvent from '@testing-library/user-event';
 import { useDisclosure } from '../index.js';
 import '@testing-library/jest-dom';
 
@@ -66,10 +66,11 @@ describe('useDisclosure', () => {
 
     const trigger = screen.getByText('trigger');
 
-    await userEvent.type(trigger, `${specialChars.space}`);
+    await userEvent.keyboard('{Space}');
+
     expect(trigger).toHaveFocus();
 
-    await userEvent.type(trigger, `${specialChars.enter}`);
+    await userEvent.keyboard('{Enter}');
     expect(trigger).toHaveFocus();
   });
 
