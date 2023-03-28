@@ -6,11 +6,41 @@ import { ArgsTable, Canvas, Story } from '@storybook/addon-docs';
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+## Table of Contents
 
+- [Overview](#overview)
 - [Component API](#component-api)
 - [Feedback](#feedback)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+## Overview
+
+The `Layout` component provides a way to set layout contexts for specific parts of a web application. It uses Carbon's experimental `layout` sass module (exported from `@carbon/styles`) to control layout-related settings like size and density of all components within a layout context.
+
+All children components that support it will react to the `size` and `density` you pass in the `Layout` props. Note that not all components support the entire spectrum of options available. In these cases, a component will typically cap out at the maximum or minimum size it supports in order to still best suit the layout context's intent.
+
+If a component is outside a layout context or `props.size` / `props.density` isn't set, it will fall back to its default rendering.
+
+Components that are explicitely passed a `size` to are unaffected by the layout context. Example:
+
+```jsx
+<div>
+  {/* This text input is always lg */}
+  <TextInput size="lg" />
+
+  {/* This text input will render with its default size (md) */}
+  <TextInput />
+
+  <Layout size="sm">
+    {/* This text input will still be lg */}
+    <TextInput size="lg" />
+
+    {/* This text input will be sm */}
+    <TextInput />
+  </Layout>
+</div>
+```
 
 ## Component API
 
