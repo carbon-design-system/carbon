@@ -75,6 +75,11 @@ $height: layout.size('height', $default: 'lg');
 
   .#{$prefix}--btn__icon {
     position: absolute;
+    // -1px to compensate for border width
+    top: min(
+      calc(($height - rem(16px)) / 2 - rem(1px)),
+      var(--temp-padding-block-max)
+    );
     right: layout.density('padding-inline');
     width: rem(16px);
     height: rem(16px);
