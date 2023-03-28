@@ -255,7 +255,7 @@ function CodeSnippet({
       )}
       {!hideCopyButton && (
         <CopyButton
-          size="sm"
+          size={type === 'multi' ? 'sm' : 'md'}
           disabled={disabled}
           onClick={handleCopyClick}
           feedback={feedback}
