@@ -84,7 +84,7 @@ describe('RadioTile', () => {
     it('should respect value prop', () => {
       render(<RadioTile value="standard" />);
 
-      expect(screen.getByRole('radio')).toHaveValue('standard');
+      expect(screen.getByDisplayValue('standard')).toBeInTheDocument();
     });
 
     it('should pass a given ref to the input element', () => {

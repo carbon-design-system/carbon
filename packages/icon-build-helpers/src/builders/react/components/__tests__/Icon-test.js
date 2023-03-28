@@ -69,7 +69,7 @@ describe('Icon', () => {
       mountNode
     );
 
-    expect(getContainer().getAttribute('aria-label')).toBeInTheDocument();
+    expect(getContainer()).toHaveAttribute('aria-label', 'Mock icon');
     getContainer().focus();
     expect(document.activeElement === getContainer()).toBe(false);
 
@@ -82,7 +82,7 @@ describe('Icon', () => {
       mountNode
     );
 
-    expect(getContainer().getAttribute('aria-label')).toBeInTheDocument();
+    expect(getContainer()).not.toHaveAttribute('aria-label');
     getContainer().focus();
     expect(document.activeElement === getContainer()).toBe(false);
 
@@ -99,7 +99,7 @@ describe('Icon', () => {
       mountNode
     );
 
-    expect(getContainer().getAttribute('aria-label')).toBeInTheDocument();
+    expect(getContainer()).toHaveAttribute('aria-label', 'Mock icon');
     getContainer().focus();
     expect(document.activeElement === getContainer()).toBe(true);
   });
