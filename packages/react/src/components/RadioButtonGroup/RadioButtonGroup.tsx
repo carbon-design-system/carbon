@@ -16,7 +16,6 @@ import setupGetInstanceId from '../../tools/setupGetInstanceId';
 
 const getInstanceId = setupGetInstanceId();
 
-
 export const RadioButtonGroupContext = createContext(null);
 
 type ExcludedAttributes = 'onChange';
@@ -197,14 +196,14 @@ const RadioButtonGroup = React.forwardRef(
     });
 
     const helperId = !helperText
-    ? undefined
-    : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
+      ? undefined
+      : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
 
-  const helper = helperText ? (
-    <div id={helperId} className={helperClasses}>
-      {helperText}
-    </div>
-  ) : null;
+    const helper = helperText ? (
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
+    ) : null;
 
     const divRef = useRef<HTMLDivElement>(null);
 
