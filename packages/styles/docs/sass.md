@@ -646,6 +646,71 @@ support for min and max values. Providing a default is required:
 }
 ```
 
+<table>
+<thead><tr><th>Usage</th><th>Return</th></tr></thead>
+<tbody>
+<tr><td>
+
+```scss
+height: layout.size('height', $default: 'md');
+```
+
+</td><td>
+
+```css
+height: var(--cds-layout-size-height, var(--cds-layout-size-height-md));
+```
+
+</td></tr><tr><td>
+
+```scss
+height: layout.size('height', $default: 'md', $min: 'sm');
+```
+
+</td><td>
+
+```css
+height: max(
+  var(--cds-layout-size-height-sm),
+  var(--cds-layout-size-height, var(--cds-layout-size-height-md))
+);
+```
+
+</td></tr><tr><td>
+
+```scss
+height: layout.size('height', $default: 'md', $max: 'lg');
+```
+
+</td><td>
+
+```css
+height: min(
+  var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+  var(--cds-layout-size-height-lg)
+);
+```
+
+</td></tr><tr><td>
+
+```scss
+height: layout.size('height', $default: 'md', $min: 'sm', $max: 'lg');
+```
+
+</td><td>
+
+```css
+height: clamp(
+  var(--cds-layout-size-height-sm),
+  var(--cds-layout-size-height, var(--cds-layout-size-height-md)),
+  var(--cds-layout-size-height-lg)
+);
+```
+
+</td></tr>
+</tbody>
+</table>
+
 ##### `layout.density`
 
 `layout.density` returns the css custom properties structure outlined above. It
@@ -658,6 +723,28 @@ falls back to `normal` by default.
   padding-inline: layout.density('padding-inline');
 }
 ```
+
+<table>
+<thead><tr><th>Usage</th><th>Return</th></tr></thead>
+<tbody>
+<tr><td>
+
+```scss
+padding-inline: layout.density('padding-inline');
+```
+
+</td><td>
+
+```css
+padding-inline: var(
+  --cds-layout-density-padding-inline,
+  var(--cds-layout-density-padding-inline-normal)
+);
+```
+
+</td></tr>
+</tbody>
+</table>
 
 ##### `layout.redefine-tokens`
 
