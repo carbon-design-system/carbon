@@ -28,7 +28,7 @@ export default {
 export const Default = () => (
   <Search
     size="lg"
-    defaultValue="A default value"
+    placeholder="Find your items"
     labelText="Search"
     closeButtonLabelText="Clear search input"
     id="search-1"
@@ -41,7 +41,7 @@ export const Disabled = () => (
   <Search
     disabled
     size="lg"
-    defaultValue="A default value"
+    placeholder="Find your items"
     labelText="Search"
     closeButtonLabelText="Clear search input"
     id="search-1"
@@ -66,7 +66,7 @@ export const WithLayer = () => {
     <>
       <Search
         size="lg"
-        defaultValue="First Layer"
+        placeholder="Layer one"
         labelText="Search"
         closeButtonLabelText="Clear search input"
         id="search-1"
@@ -76,20 +76,20 @@ export const WithLayer = () => {
       <Layer>
         <Search
           size="lg"
-          defaultValue="Second Layer"
+          placeholder="Layer two"
           labelText="Search"
           closeButtonLabelText="Clear search input"
-          id="search-1"
+          id="search-2"
           onChange={() => {}}
           onKeyDown={() => {}}
         />
         <Layer>
           <Search
             size="lg"
-            defaultValue="Third Layer"
+            placeholder="Layer three"
             labelText="Search"
             closeButtonLabelText="Clear search input"
-            id="search-1"
+            id="search-3"
             onChange={() => {}}
             onKeyDown={() => {}}
           />
@@ -104,6 +104,7 @@ export const ExpandableWithLayer = () => {
     <>
       <ExpandableSearch
         size="lg"
+        placeholder="Layer one"
         labelText="First Layer"
         closeButtonLabelText="Clear search input"
         id="search-expandable-1"
@@ -113,18 +114,20 @@ export const ExpandableWithLayer = () => {
       <Layer>
         <ExpandableSearch
           size="lg"
+          placeholder="Layer two"
           labelText="Second Layer"
           closeButtonLabelText="Clear search input"
-          id="search-expandable-1"
+          id="search-expandable-2"
           onChange={() => {}}
           onKeyDown={() => {}}
         />
         <Layer>
           <ExpandableSearch
             size="lg"
+            placeholder="Layer three"
             labelText="Third Layer"
             closeButtonLabelText="Clear search input"
-            id="search-expandable-1"
+            id="search-expandable-3"
             onChange={() => {}}
             onKeyDown={() => {}}
           />

@@ -10,13 +10,13 @@ import React from 'react';
 import { HeaderMenu, HeaderMenuItem } from '../';
 
 describe('HeaderMenu', () => {
-  it('should set the current class if `isCurrentPage` is true', () => {
+  it('should set the current class if `isActive` is true', () => {
     render(
       <HeaderMenu
         data-testid="test"
         aria-label="test"
         menuLinkName="test"
-        isCurrentPage>
+        isActive>
         <HeaderMenuItem href="/a">a</HeaderMenuItem>
         <HeaderMenuItem href="/b">b</HeaderMenuItem>
         <HeaderMenuItem href="/c">c</HeaderMenuItem>

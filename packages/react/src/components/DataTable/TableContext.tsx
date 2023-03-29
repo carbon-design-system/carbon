@@ -7,7 +7,12 @@
 
 import { createContext } from 'react';
 
+interface TableContextType {
+  titleId?: string;
+  descriptionId?: string;
+}
+
 export const TableContext = createContext({
-  titleId: null,
-  descriptionId: null,
-});
+  titleId: undefined,
+  descriptionId: undefined,
+} as TableContextType);
