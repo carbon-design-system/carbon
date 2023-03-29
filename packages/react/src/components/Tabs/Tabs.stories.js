@@ -182,6 +182,44 @@ export const Contained = () => (
   </Tabs>
 );
 
+export const ContainedWithSecondaryLabel = () => (
+  <Tabs>
+    <TabList aria-label="List of tabs" contained>
+      <Tab secondaryLabel="367">Tab Label 1</Tab>
+      <Tab secondaryLabel="367">Tab Label 2</Tab>
+      <Tab disabled secondaryLabel="367">
+        Tab Label 3
+      </Tab>
+      <Tab title="Tab Label 4" secondaryLabel="367">
+        Tab Label 4
+      </Tab>
+      <Tab secondaryLabel="367">Tab Label 5</Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel>Tab Panel 1</TabPanel>
+      <TabPanel>
+        <form style={{ margin: '2em' }}>
+          <legend className={`cds--label`}>Validation example</legend>
+          <Checkbox id="cb" labelText="Accept privacy policy" />
+          <Button
+            style={{ marginTop: '1rem', marginBottom: '1rem' }}
+            type="submit">
+            Submit
+          </Button>
+          <TextInput
+            type="text"
+            labelText="Text input label"
+            helperText="Optional help text"
+          />
+        </form>
+      </TabPanel>
+      <TabPanel>Tab Panel 3</TabPanel>
+      <TabPanel>Tab Panel 4</TabPanel>
+      <TabPanel>Tab Panel 5</TabPanel>
+    </TabPanels>
+  </Tabs>
+);
+
 export const Skeleton = () => {
   return (
     <div style={{ maxWidth: '100%' }}>

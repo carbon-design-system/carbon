@@ -7112,6 +7112,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "hasSecondaryLabel": Object {
+        "type": "bool",
+      },
       "onClick": Object {
         "type": "func",
       },
@@ -7120,6 +7123,9 @@ Map {
       },
       "renderButton": Object {
         "type": "func",
+      },
+      "secondaryLabel": Object {
+        "type": "string",
       },
     },
     "render": [Function],
