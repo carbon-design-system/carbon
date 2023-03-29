@@ -8,7 +8,7 @@
  */
 
 import { html } from 'lit';
-import { select } from '@storybook/addon-knobs';
+import { select, text } from '@storybook/addon-knobs';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { INLINE_LOADING_STATE } from './inline-loading';
 import storyDocs from './inline-loading-story.mdx';
@@ -23,32 +23,44 @@ const states = {
   [`Failed (${INLINE_LOADING_STATE.ERROR})`]: INLINE_LOADING_STATE.ERROR,
 };
 
-export const Default = (args) => {
-  const { status } = args?.[`${prefix}-inline-loading`] ?? {};
-  return html`
-    <cds-inline-loading status="${ifDefined(status)}"
-      >Loading data...</cds-inline-loading
-    >
-  `;
-};
-
-Default.storyName = 'Default';
+export const Default = () =>
+  html`<cds-inline-loading>Loading data...</cds-inline-loading>`;
 
 export default {
   title: 'Components/Inline loading',
-  parameters: {
-    ...storyDocs.parameters,
-    percy: {
-      skip: true,
-    },
-    knobs: {
-      [`${prefix}-inline-loading`]: () => ({
-        status: select(
-          'Loading status (status)',
-          states,
-          INLINE_LOADING_STATE.ACTIVE
-        ),
-      }),
-    },
+  parameters: { ...storyDocs.parameters },
+};
+
+export const Playground = (args) => {
+  const { assistiveText, description, status } =
+    args?.[`${prefix}-inline-loading`] ?? {};
+  return html`
+    <cds-inline-loading
+      status="${ifDefined(status)}"
+      assistive-text=${assistiveText}>
+      ${description}
+    </cds-inline-loading>
+  `;
+};
+
+Playground.parameters = {
+  ...storyDocs.parameters,
+  percy: { skip: true },
+  knobs: {
+    [`${prefix}-inline-loading`]: () => ({
+      description: text(
+        'Description (description) - Specify the description for the inline loading text',
+        'Loading data...'
+      ),
+      assistiveText: text(
+        'Assistive text (assistive-text) - Specify a description that would be used to best describe the loading state',
+        'Loading'
+      ),
+      status: select(
+        'Loading status (status)',
+        states,
+        INLINE_LOADING_STATE.ACTIVE
+      ),
+    }),
   },
 };

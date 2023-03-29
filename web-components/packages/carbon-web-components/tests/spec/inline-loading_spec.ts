@@ -9,13 +9,13 @@
 
 import { render } from 'lit';
 
-import BXInlineLoading, {
+import CDSInlineLoading, {
   INLINE_LOADING_STATE,
 } from '../../src/components/inline-loading/inline-loading';
-import { Default } from '../../src/components/inline-loading/inline-loading-story';
+import { Playground } from '../../src/components/inline-loading/inline-loading-story';
 
 const template = (props?) =>
-  Default({
+  Playground({
     'cds-inline-loading': props,
   });
 
@@ -36,7 +36,7 @@ describe('cds-inline-loading', function () {
       (
         document.body.querySelector(
           'cds-inline-loading'
-        ) as unknown as BXInlineLoading
+        ) as unknown as CDSInlineLoading
       ).status = undefined!;
       await Promise.resolve();
       expect(

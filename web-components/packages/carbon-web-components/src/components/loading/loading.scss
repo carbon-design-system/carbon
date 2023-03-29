@@ -13,6 +13,7 @@ $css--plex: true !default;
 
 :host(#{$prefix}-loading) {
   @extend .#{$prefix}--loading;
+  display: block;
 }
 
 :host(#{$prefix}-loading[overlay]) {

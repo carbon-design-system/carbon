@@ -21,7 +21,7 @@ import styles from './loading.scss';
  * @element cds-loading
  */
 @customElement(`${prefix}-loading`)
-class BXLoading extends LitElement {
+class CDSLoading extends LitElement {
   /**
    * The assistive text for the spinner icon.
    */
@@ -62,4 +62,4 @@ class BXLoading extends LitElement {
 
 export { LOADING_TYPE };
 
-export default BXLoading;
+export default CDSLoading;
