@@ -112,7 +112,16 @@
     }
   }
 
-  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled svg {
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    > svg:not(.#{$prefix}--tile--disabled-icon) {
+    display: none;
+  }
+
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--disabled-icon {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
     fill: $icon-disabled;
   }
 

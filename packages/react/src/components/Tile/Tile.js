@@ -5,6 +5,7 @@ import {
   Checkbox,
   CheckboxCheckedFilled,
   ChevronDown,
+  Error,
 } from '@carbon/icons-react';
 import Link from '../Link';
 import { keys, matches } from '../../internal/keyboard';
@@ -109,6 +110,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
       disabled={disabled}
       {...rest}>
       {children}
+      {disabled && <Error className={`${prefix}--tile--disabled-icon`} />}
     </Link>
   );
 });

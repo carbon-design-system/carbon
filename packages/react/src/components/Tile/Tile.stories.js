@@ -91,12 +91,14 @@ export const DefaultWithLayer = () => {
 
 export const Clickable = (args) => {
   return (
-    <ClickableTile
-      id="clickable-tile-1"
-      href="https://www.carbondesignsystem.com/"
-      {...args}>
-      Clickable Tile
-    </ClickableTile>
+    <div style={{ width: '400px' }}>
+      <ClickableTile
+        id="clickable-tile-1"
+        href="https://www.carbondesignsystem.com/"
+        {...args}>
+        Clickable Tile
+      </ClickableTile>
+    </div>
   );
 };
 
