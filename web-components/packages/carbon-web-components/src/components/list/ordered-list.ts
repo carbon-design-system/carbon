@@ -11,13 +11,13 @@ import { classMap } from 'lit/directives/class-map.js';
 import { html } from 'lit';
 import { property, customElement } from 'lit/decorators.js';
 import { prefix } from '../../globals/settings';
-import BXUnorderedList from './unordered-list';
+import CDSUnorderedList from './unordered-list';
 
 /**
  * Ordered list.
  */
 @customElement(`${prefix}-ordered-list`)
-class BXOrderedList extends BXUnorderedList {
+class CDSOrderedList extends CDSUnorderedList {
   /**
    * Specify whether the ordered list should use native list styles instead of
    * custom counter
@@ -40,4 +40,4 @@ class BXOrderedList extends BXUnorderedList {
   }
 }
 
-export default BXOrderedList;
+export default CDSOrderedList;

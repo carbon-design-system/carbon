@@ -17,7 +17,7 @@ import styles from './list.scss';
  * Ordered list.
  */
 @customElement(`${prefix}-unordered-list`)
-class BXUnorderedList extends LitElement {
+class CDSUnorderedList extends LitElement {
   /**
    * `true` if expressive theme enabled.
    */
@@ -28,7 +28,7 @@ class BXUnorderedList extends LitElement {
     // Uses attribute for lookup from child
     if (
       this.closest(
-        (this.constructor as typeof BXUnorderedList).selectorListItem
+        (this.constructor as typeof CDSUnorderedList).selectorListItem
       )
     ) {
       this.setAttribute('slot', 'nested');
@@ -61,4 +61,4 @@ class BXUnorderedList extends LitElement {
   static styles = styles;
 }
 
-export default BXUnorderedList;
+export default CDSUnorderedList;

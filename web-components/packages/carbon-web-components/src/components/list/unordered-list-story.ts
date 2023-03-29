@@ -12,9 +12,38 @@ import './unordered-list';
 import './list-item';
 import { boolean } from '@storybook/addon-knobs';
 import storyDocs from './list-story.mdx';
+import { prefix } from '../../globals/settings';
 
-export const Default = (args) => {
-  const { isExpressive } = args?.['cds-list'] ?? {};
+export const Default = () => html`<cds-unordered-list>
+  <cds-list-item>Unordered List level 1</cds-list-item>
+  <cds-list-item>Unordered List level 1</cds-list-item>
+  <cds-list-item>Unordered List level 1</cds-list-item>
+</cds-unordered-list>`;
+
+export default {
+  title: 'Components/Unordered List',
+};
+
+export const Nested = () => html`<cds-unordered-list>
+  <cds-list-item>
+    Unordered List level 1
+    <cds-unordered-list>
+      <cds-list-item>Unordered List level 2</cds-list-item>
+      <cds-list-item>
+        Unordered List level 2
+        <cds-unordered-list>
+          <cds-list-item>Unordered List level 3</cds-list-item>
+          <cds-list-item>Unordered List level 3</cds-list-item>
+        </cds-unordered-list>
+      </cds-list-item>
+    </cds-unordered-list>
+  </cds-list-item>
+  <cds-list-item>Unordered List level 1</cds-list-item>
+  <cds-list-item>Unordered List level 1</cds-list-item>
+</cds-unordered-list>`;
+
+export const Playground = (args) => {
+  const { isExpressive } = args?.[`${prefix}-list`] ?? {};
   return html`
     <cds-unordered-list ?isExpressive="${isExpressive}">
       <cds-list-item>
@@ -36,16 +65,11 @@ export const Default = (args) => {
   `;
 };
 
-Default.storyName = 'Default';
-
-export default {
-  title: 'Components/Unordered List',
-  parameters: {
-    ...storyDocs.parameters,
-    knobs: {
-      'cds-list': () => ({
-        isExpressive: boolean('Expressive (isExpressive)', false),
-      }),
-    },
+Playground.parameters = {
+  ...storyDocs.parameters,
+  knobs: {
+    [`${prefix}-list`]: () => ({
+      isExpressive: boolean('Expressive (isExpressive)', false),
+    }),
   },
 };
