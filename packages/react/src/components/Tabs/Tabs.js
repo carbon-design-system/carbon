@@ -130,11 +130,17 @@ function TabList({
   const nextButton = useRef(null);
   const [isScrollable, setIsScrollable] = useState(false);
   const [scrollLeft, setScrollLeft] = useState(null);
+  const hasSecondaryLabelTabs =
+    contained &&
+    !!React.Children.toArray(children).filter(
+      (child) => child.props.secondaryLabel
+    ).length;
   const className = cx(`${prefix}--tabs`, customClassName, {
     [`${prefix}--tabs--contained`]: contained,
     [`${prefix}--tabs--light`]: light,
     [`${prefix}--tabs__icon--default`]: iconSize === 'default',
     [`${prefix}--tabs__icon--lg`]: iconSize === 'lg',
+    [`${prefix}--tabs--tall`]: hasSecondaryLabelTabs,
   });
 
   // Previous Button
@@ -344,6 +350,7 @@ function TabList({
                 ref: (node) => {
                   tabs.current[index] = node;
                 },
+                hasSecondaryLabel: hasSecondaryLabelTabs,
               })}
             </TabContext.Provider>
           );
@@ -481,6 +488,8 @@ const Tab = React.forwardRef(function Tab(
     disabled,
     onClick,
     onKeyDown,
+    secondaryLabel,
+    hasSecondaryLabel,
     ...rest
   },
   ref
@@ -524,7 +533,12 @@ const Tab = React.forwardRef(function Tab(
       onKeyDown={onKeyDown}
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
-      {children}
+      <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
+      {hasSecondaryLabel && (
+        <div className={`${prefix}--tabs__nav-item-secondary-label`}>
+          {secondaryLabel}
+        </div>
+      )}
     </BaseComponent>
   );
 });
@@ -550,6 +564,11 @@ Tab.propTypes = {
    */
   disabled: PropTypes.bool,
 
+  /*
+   * Internal use only, determines wether a tab should render as a secondary label tab
+   **/
+  hasSecondaryLabel: PropTypes.bool,
+
   /**
    * Provide a handler that is invoked when a user clicks on the control
    */
@@ -566,6 +585,12 @@ Tab.propTypes = {
    * side router libraries.
    **/
   renderButton: PropTypes.func,
+
+  /*
+   * An optional label to render under the primary tab label.
+  /* This prop is only useful for conained tabs
+   **/
+  secondaryLabel: PropTypes.string,
 };
 
 const IconTab = React.forwardRef(function IconTab(
