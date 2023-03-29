@@ -9,9 +9,9 @@
 
 module.exports = {
   plugins: ['eslint-plugin-jest', 'jest-dom'],
-  extends: ['plugin:jest-dom/recommended'],
   overrides: [
     {
+      extends: ['plugin:jest-dom/recommended'],
       files: ['*-test.js', '*.test.js', '*-spec.js', '*.spec.js'],
       env: {
         'jest/globals': true,
