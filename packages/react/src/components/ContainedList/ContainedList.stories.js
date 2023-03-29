@@ -122,7 +122,6 @@ export const WithActions = () => {
     <ContainedList
       label="List title"
       kind="on-page"
-      size="lg"
       action={<ExpandableSearch placeholder="Find item" size="lg" />}>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
       <ContainedListItem action={itemAction} disabled>
@@ -138,7 +137,6 @@ export const WithInteractiveItemsAndActions = () => {
   const onClick = action('onClick (ContainedListItem)');
   const itemAction = (
     <Button
-      size="lg"
       kind="ghost"
       iconDescription="Dismiss"
       hasIconOnly
@@ -227,7 +225,6 @@ export const UsageExamples = () => {
     <>
       <ContainedList
         label="List title"
-        size="lg"
         action={
           <Button
             hasIconOnly
@@ -252,7 +249,6 @@ export const UsageExamples = () => {
       </ContainedList>
       <ContainedList
         label="List title"
-        size="lg"
         action={
           <Button
             hasIconOnly
@@ -272,7 +268,7 @@ export const UsageExamples = () => {
           </ContainedListItem>
         ))}
       </ContainedList>
-      <ContainedList label="List title" size="lg">
+      <ContainedList label="List title">
         {[...Array(3)].map((_, i) => (
           <ContainedListItem key={i}>
             <div

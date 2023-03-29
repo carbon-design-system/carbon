@@ -142,7 +142,7 @@
   }
 
   .#{$prefix}--btn--icon-only {
-    $-height: layout.size('height', $default: 'md', $max: 'lg');
+    $-height: layout.size('height', $default: 'lg', $max: 'lg');
 
     width: $-height;
     height: $-height;
