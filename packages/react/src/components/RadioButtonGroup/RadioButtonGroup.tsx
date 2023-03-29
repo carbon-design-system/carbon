@@ -195,15 +195,15 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
-      const helperId = !helperText
-    ? undefined
-    : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
+    const helperId = !helperText
+      ? undefined
+      : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
 
     const helper = helperText ? (
-    <div id={helperId} className={helperClasses}>
-      {helperText}
-    </div>
-  ) : null;
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
+    ) : null;
 
     const divRef = useRef<HTMLDivElement>(null);
 
