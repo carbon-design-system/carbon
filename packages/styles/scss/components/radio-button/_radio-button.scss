@@ -37,7 +37,6 @@ $radio-border-width: 1px !default;
 
     position: relative;
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
   }
 
@@ -182,18 +181,17 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button-group--invalid
-    .#{$prefix}--radio-button__validation-msg,
+    + .#{$prefix}--radio-button__validation-msg,
   .#{$prefix}--radio-button-group--warning
-    .#{$prefix}--radio-button__validation-msg {
+    + .#{$prefix}--radio-button__validation-msg {
     display: flex;
-    flex-basis: 100%;
   }
 
   .#{$prefix}--radio-button-group--invalid
-    .#{$prefix}--radio-button__validation-msg
+    + .#{$prefix}--radio-button__validation-msg
     .#{$prefix}--form-requirement,
   .#{$prefix}--radio-button-group--warning
-    .#{$prefix}--radio-button__validation-msg
+    + .#{$prefix}--radio-button__validation-msg
     .#{$prefix}--form-requirement {
     display: block;
     overflow: visible;
@@ -203,20 +201,13 @@ $radio-border-width: 1px !default;
   }
 
   .#{$prefix}--radio-button-group--invalid
-    .#{$prefix}--radio-button__validation-msg
+    + .#{$prefix}--radio-button__validation-msg
     .#{$prefix}--form-requirement {
     color: $text-error;
   }
 
-  .#{$prefix}--radio-button-group .#{$prefix}--form__helper-text {
-    flex-basis: 100%;
+  .#{$prefix}--radio-button-group ~ .#{$prefix}--form__helper-text {
     margin-top: rem(6px);
-  }
-
-  .#{$prefix}--radio-button-group--vertical
-    .#{$prefix}--radio-button__validation-msg,
-  .#{$prefix}--radio-button-group--vertical .#{$prefix}--form__helper-text {
-    margin-top: 0;
   }
 
   // Focus
