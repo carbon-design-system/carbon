@@ -223,7 +223,7 @@
     @include type-style('heading-03');
 
     // padding should take into account the left and right padding of modal container
-    padding-right: calc(20% - $spacing-07);
+    padding-right: calc(20% - $spacing-09);
     color: $text-primary;
   }
 
