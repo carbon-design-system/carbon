@@ -53,6 +53,14 @@ test.describe('Tabs', () => {
           theme,
         });
       });
+
+      test('contained with secondary labels @vrt', async ({ page }) => {
+        await snapshotStory(page, {
+          component: 'Tabs',
+          id: 'components-tabs--contained-with-secondary-label',
+          theme,
+        });
+      });
     });
   });
 
