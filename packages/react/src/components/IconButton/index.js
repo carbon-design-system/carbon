@@ -22,7 +22,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     kind,
     label,
     leaveDelayMs,
-    size = 'md',
+    size = 'lg',
     ...rest
   } = props;
   const prefix = usePrefix();
@@ -102,7 +102,7 @@ IconButton.propTypes = {
   leaveDelayMs: PropTypes.number,
 
   /**
-   * Specify the size of the Button. Defaults to `md`.
+   * Specify the size of the Button. Defaults to `lg`.
    */
   size: PropTypes.oneOf(['sm', 'md', 'lg']),
 };
