@@ -24,7 +24,7 @@ describe('FileUploaderButton', () => {
 
   it('should support a custom class name on the root element', () => {
     const { container } = render(<FileUploaderButton className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should call `onClick` if the label is clicked', () => {
