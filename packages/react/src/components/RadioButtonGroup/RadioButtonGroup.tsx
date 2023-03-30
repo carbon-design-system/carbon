@@ -12,6 +12,9 @@ import { Legend } from '../Text';
 import { usePrefix } from '../../internal/usePrefix';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
 import mergeRefs from '../../tools/mergeRefs';
+import setupGetInstanceId from '../../tools/setupGetInstanceId';
+
+const getInstanceId = setupGetInstanceId();
 
 export const RadioButtonGroupContext = createContext(null);
 
@@ -131,6 +134,8 @@ const RadioButtonGroup = React.forwardRef(
     const [selected, setSelected] = useState(valueSelected ?? defaultSelected);
     const [prevValueSelected, setPrevValueSelected] = useState(valueSelected);
 
+    const { current: radioButtonGroupInstanceId } = useRef(getInstanceId());
+
     /**
      * prop + state alignment - getDerivedStateFromProps
      * only update if selected prop changes
@@ -190,8 +195,14 @@ const RadioButtonGroup = React.forwardRef(
       [`${prefix}--form__helper-text--disabled`]: disabled,
     });
 
+    const helperId = !helperText
+      ? undefined
+      : `radio-button-group-helper-text-${radioButtonGroupInstanceId}`;
+
     const helper = helperText ? (
-      <div className={helperClasses}>{helperText}</div>
+      <div id={helperId} className={helperClasses}>
+        {helperText}
+      </div>
     ) : null;
 
     const divRef = useRef<HTMLDivElement>(null);
@@ -226,8 +237,8 @@ const RadioButtonGroup = React.forwardRef(
               <div className={`${prefix}--form-requirement`}>{warnText}</div>
             </>
           )}
-          {showHelper && helper}
         </div>
+        {showHelper && helper}
       </div>
     );
   }
