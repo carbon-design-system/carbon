@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 import {
@@ -20,8 +20,7 @@ import {
 import { Layer } from '../Layer';
 import { VStack } from '../Stack';
 import Button from '../Button';
-import ExpandableSearch from '../ExpandableSearch';
-import ContainedListSearch from './ContainedListSearch';
+import Search from '../Search';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import Tag from '../Tag';
@@ -123,13 +122,68 @@ export const WithActions = () => {
     <ContainedList
       label="List title"
       kind="on-page"
-      action={<ExpandableSearch placeholder="Find item" size="lg" />}>
+      action={<Search placeholder="Search" size="lg" />}>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
       <ContainedListItem action={itemAction} disabled>
         List item
       </ContainedListItem>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
       <ContainedListItem action={itemAction}>List item</ContainedListItem>
+    </ContainedList>
+  );
+};
+
+export const WithSearch = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
+
+  useEffect(() => {
+    const listItems = [
+      'List item 1',
+      'List item 2',
+      'List item 3',
+      'List item 4',
+      'List item 5',
+      'List item 6',
+      'List item 7',
+      'List item 8',
+    ];
+
+    const results = listItems.filter((listItem) =>
+      listItem.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchResults(results);
+  }, [searchTerm]);
+
+  const itemAction = (
+    <Button
+      kind="ghost"
+      iconDescription="Dismiss"
+      hasIconOnly
+      renderIcon={SubtractAlt}
+    />
+  );
+
+  return (
+    <ContainedList
+      label="List title"
+      kind="on-page"
+      action={
+        <Search
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleChange}
+          size="lg"
+        />
+      }>
+      {searchResults.map((listItem, key) => (
+        <ContainedListItem key={key} action={itemAction}>
+          {listItem}
+        </ContainedListItem>
+      ))}
     </ContainedList>
   );
 };
@@ -147,18 +201,9 @@ export const WithInteractiveItemsAndActions = () => {
 
   return (
     <ContainedList
-      label="List Title Label"
+      label="List title label"
       kind="on-page"
-      action={<ContainedListSearch placeholder="Find item" size="lg" />}>
-      <ContainedListItem action={itemAction} onClick={onClick}>
-        List item
-      </ContainedListItem>
-      <ContainedListItem action={itemAction} onClick={onClick}>
-        List item
-      </ContainedListItem>
-      <ContainedListItem action={itemAction} onClick={onClick}>
-        List item
-      </ContainedListItem>
+      action={<Search placeholder="Search" size="lg" />}>
       <ContainedListItem action={itemAction} onClick={onClick}>
         List item
       </ContainedListItem>
