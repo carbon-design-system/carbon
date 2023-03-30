@@ -84,7 +84,7 @@ describe('CheckboxGroup', () => {
     );
   });
 
-  it('should be respect readOnly prop', () => {
+  it('should respect readOnly prop', () => {
     const { container } = render(
       <CheckboxGroup
         className="some-class"
