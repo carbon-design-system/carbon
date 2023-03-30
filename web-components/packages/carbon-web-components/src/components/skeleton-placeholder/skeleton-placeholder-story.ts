@@ -12,7 +12,7 @@ import './skeleton-placeholder';
 import storyDocs from './skeleton-placeholder-story.mdx';
 
 export const Default = () =>
-  html` <cds-skeleton-placeholder></cds-skeleton-placeholder> `;
+  html`<cds-skeleton-placeholder></cds-skeleton-placeholder>`;
 
 Default.storyName = 'Default';
 
@@ -23,7 +23,7 @@ Default.parameters = {
 };
 
 export default {
-  title: 'Components/Skeleton placeholder',
+  title: 'Components/Skeleton/Skeleton placeholder',
   parameters: {
     ...storyDocs.parameters,
   },

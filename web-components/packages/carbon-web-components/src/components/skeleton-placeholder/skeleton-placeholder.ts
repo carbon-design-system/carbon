@@ -18,7 +18,7 @@ import styles from './skeleton-placeholder.scss';
  * @element cds-skeleton-placeholder
  */
 @customElement(`${prefix}-skeleton-placeholder`)
-class BXSkeletonPlaceholder extends LitElement {
+class CDSSkeletonPlaceholder extends LitElement {
   render() {
     return html` <div class="${prefix}--skeleton__placeholder"></div> `;
   }
@@ -26,4 +26,4 @@ class BXSkeletonPlaceholder extends LitElement {
   static styles = styles;
 }
 
-export default BXSkeletonPlaceholder;
+export default CDSSkeletonPlaceholder;
