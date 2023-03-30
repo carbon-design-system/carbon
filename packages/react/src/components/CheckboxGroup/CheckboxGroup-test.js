@@ -126,7 +126,7 @@ describe('CheckboxGroup', () => {
     expect(warnIcon).toBeInTheDocument();
   });
 
-  it('should display warnText if message is true', () => {
+  it('should display warnText if warn prop is true', () => {
     render(
       <CheckboxGroup
         className="some-class"
