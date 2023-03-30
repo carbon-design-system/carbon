@@ -89,7 +89,7 @@ describe('Checkbox', () => {
     );
   });
 
-  it('should display invalidText if message is true', () => {
+  it('should display invalidText if invalid prop is true', () => {
     render(
       <Checkbox
         defaultChecked
