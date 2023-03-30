@@ -104,7 +104,7 @@ describe('CheckboxGroup', () => {
     );
   });
 
-  it('should be respect warn prop', () => {
+  it('should respect warn prop', () => {
     const { container } = render(
       <CheckboxGroup className="some-class" legendText="Checkbox heading" warn>
         <Checkbox
