@@ -116,7 +116,7 @@ describe('Checkbox', () => {
     expect(container.firstChild).toHaveClass(`cds--checkbox-wrapper--readonly`);
   });
 
-  it('should be respect warn prop', () => {
+  it('should respect warn prop', () => {
     const { container } = render(
       <Checkbox
         defaultChecked
