@@ -32,7 +32,7 @@ describe('CheckboxGroup', () => {
     expect(screen.getByText('Helper text')).toBeInTheDocument();
   });
 
-  it('should be set data-invalid when invalid prop is true', () => {
+  it('should set data-invalid when invalid prop is true', () => {
     const { container } = render(
       <CheckboxGroup
         className="some-class"
