@@ -13,6 +13,7 @@ import { composeEventHandlers } from '../../tools/events';
 import { usePrefix } from '../../internal/usePrefix';
 import useIsomorphicEffect from '../../internal/useIsomorphicEffect';
 import { getInteractiveContent } from '../../internal/useNoInteractiveChildren';
+import { useMergedRefs } from '../../internal/useMergedRefs';
 
 export const Tile = React.forwardRef(function Tile(
   { children, className, light = false, ...rest },
@@ -334,22 +335,25 @@ SelectableTile.propTypes = {
   value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
 };
 
-export function ExpandableTile({
-  tabIndex,
-  className,
-  children,
-  expanded,
-  tileMaxHeight, // eslint-disable-line
-  tilePadding, // eslint-disable-line
-  onClick,
-  onKeyUp,
-  tileCollapsedIconText,
-  tileExpandedIconText,
-  tileCollapsedLabel,
-  tileExpandedLabel,
-  light,
-  ...rest
-}) {
+export const ExpandableTile = React.forwardRef(function ExpandableTile(
+  {
+    tabIndex,
+    className,
+    children,
+    expanded,
+    tileMaxHeight, // eslint-disable-line
+    tilePadding, // eslint-disable-line
+    onClick,
+    onKeyUp,
+    tileCollapsedIconText,
+    tileExpandedIconText,
+    tileCollapsedLabel,
+    tileExpandedLabel,
+    light,
+    ...rest
+  },
+  forwardRef
+) {
   const [isTileMaxHeight, setIsTileMaxHeight] = useState(tileMaxHeight);
   const [isTilePadding, setIsTilePadding] = useState(tilePadding);
   const [prevExpanded, setPrevExpanded] = useState(expanded);
@@ -362,6 +366,7 @@ export function ExpandableTile({
   const tileContent = useRef(null);
   const tile = useRef(null);
   const prefix = usePrefix();
+  const ref = useMergedRefs([forwardRef, tile]);
 
   if (expanded !== prevExpanded) {
     setIsExpanded(expanded);
@@ -476,7 +481,7 @@ export function ExpandableTile({
   }, []);
   return interactive ? (
     <div
-      ref={tile}
+      ref={ref}
       className={interactiveClassNames}
       aria-expanded={isExpanded}
       {...rest}>
@@ -501,7 +506,7 @@ export function ExpandableTile({
   ) : (
     <button
       type="button"
-      ref={tile}
+      ref={ref}
       className={classNames}
       aria-expanded={isExpanded}
       title={isExpanded ? tileExpandedIconText : tileCollapsedIconText}
@@ -523,7 +528,7 @@ export function ExpandableTile({
       </div>
     </button>
   );
-}
+});
 
 ExpandableTile.propTypes = {
   /**
