@@ -73,7 +73,7 @@ describe('Checkbox', () => {
     expect(screen.getByText('Helper text')).toBeInTheDocument();
   });
 
-  it('should be set data-invalid when invalid prop is true', () => {
+  it('should set data-invalid when invalid prop is true', () => {
     render(
       <Checkbox
         defaultChecked
