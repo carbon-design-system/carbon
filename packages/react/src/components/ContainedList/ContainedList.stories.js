@@ -21,6 +21,7 @@ import { Layer } from '../Layer';
 import { VStack } from '../Stack';
 import Button from '../Button';
 import ExpandableSearch from '../ExpandableSearch';
+import ContainedListSearch from './ContainedListSearch';
 import OverflowMenu from '../OverflowMenu';
 import OverflowMenuItem from '../OverflowMenuItem';
 import Tag from '../Tag';
@@ -146,9 +147,15 @@ export const WithInteractiveItemsAndActions = () => {
 
   return (
     <ContainedList
-      label="List title"
+      label="List Title Label"
       kind="on-page"
-      action={<ExpandableSearch placeholder="Find item" size="lg" />}>
+      action={<ContainedListSearch placeholder="Find item" size="lg" />}>
+      <ContainedListItem action={itemAction} onClick={onClick}>
+        List item
+      </ContainedListItem>
+      <ContainedListItem action={itemAction} onClick={onClick}>
+        List item
+      </ContainedListItem>
       <ContainedListItem action={itemAction} onClick={onClick}>
         List item
       </ContainedListItem>

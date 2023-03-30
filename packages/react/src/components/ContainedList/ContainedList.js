@@ -39,10 +39,13 @@ function ContainedList({
         <div id={labelId} className={`${prefix}--contained-list__label`}>
           {label}
         </div>
-        {action && (
+        {action && action.type.displayName !== 'ContainedListSearch' && (
           <div className={`${prefix}--contained-list__action`}>{action}</div>
         )}
       </div>
+      {action && action.type.displayName === 'ContainedListSearch' && (
+        <div className={`${prefix}--contained-list__search`}>{action}</div>
+      )}
       <ul aria-labelledby={labelId}>{children}</ul>
     </div>
   );
