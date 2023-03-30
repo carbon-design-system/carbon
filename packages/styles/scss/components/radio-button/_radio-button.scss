@@ -164,7 +164,7 @@ $radio-border-width: 1px !default;
   .#{$prefix}--radio-button__validation-msg {
     display: none;
     align-items: flex-end;
-    margin-top: $spacing-03;
+    margin-top: rem(6px);
   }
 
   .#{$prefix}--radio-button__invalid-icon {
@@ -178,10 +178,6 @@ $radio-border-width: 1px !default;
 
   .#{$prefix}--radio-button__invalid-icon--warning path:first-of-type {
     fill: #000000;
-  }
-
-  .#{$prefix}--radio-button__validation-msg .#{$prefix}--form__helper-text {
-    margin-top: 0;
   }
 
   .#{$prefix}--radio-button-group--invalid
@@ -208,6 +204,10 @@ $radio-border-width: 1px !default;
     + .#{$prefix}--radio-button__validation-msg
     .#{$prefix}--form-requirement {
     color: $text-error;
+  }
+
+  .#{$prefix}--radio-button-group ~ .#{$prefix}--form__helper-text {
+    margin-top: rem(6px);
   }
 
   // Focus
