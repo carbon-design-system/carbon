@@ -103,7 +103,7 @@ describe('Checkbox', () => {
     expect(screen.getByText('Invalid text')).toBeInTheDocument();
   });
 
-  it('should be respect readOnly prop', () => {
+  it('should respect readOnly prop', () => {
     const { container } = render(
       <Checkbox
         defaultChecked
