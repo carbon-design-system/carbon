@@ -238,8 +238,8 @@ const RadioButtonGroup = React.forwardRef(
               <div className={`${prefix}--form-requirement`}>{warnText}</div>
             </>
           )}
-          {showHelper && helper}
         </div>
+        {showHelper && helper}
       </div>
     );
   }
