@@ -34,14 +34,14 @@ describe('useDelayedState', () => {
     }
 
     render(<TestComponent />);
-    expect(screen.getByTestId('count').textContent).toBe('0');
+    expect(screen.getByTestId('count')).toHaveTextContent('0');
 
     act(() => {
       userEvent.click(screen.getByText('increment'));
       jest.runOnlyPendingTimers();
     });
 
-    expect(screen.getByTestId('count').textContent).toBe('1');
+    expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
 
   it('should cancel any pending state updates if called before delayMs has passed', () => {
@@ -70,7 +70,7 @@ describe('useDelayedState', () => {
       jest.runOnlyPendingTimers();
     });
 
-    expect(screen.getByTestId('count').textContent).toBe('1');
+    expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
 
   it('should immediately call setState if no delay is given', () => {
@@ -91,8 +91,8 @@ describe('useDelayedState', () => {
     }
 
     render(<TestComponent />);
-    expect(screen.getByTestId('count').textContent).toBe('0');
+    expect(screen.getByTestId('count')).toHaveTextContent('0');
     userEvent.click(screen.getByText('increment'));
-    expect(screen.getByTestId('count').textContent).toBe('1');
+    expect(screen.getByTestId('count')).toHaveTextContent('1');
   });
 });

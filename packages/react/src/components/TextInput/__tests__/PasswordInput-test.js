@@ -45,8 +45,7 @@ describe('PasswordInput', () => {
         />
       );
 
-      expect(screen.getByLabelText('PasswordInput label')).toHaveAttribute(
-        'value',
+      expect(screen.getByLabelText('PasswordInput label')).toHaveValue(
         'This is default text'
       );
     });
@@ -223,8 +222,7 @@ describe('PasswordInput', () => {
         />
       );
 
-      expect(screen.getByLabelText('PasswordInput label')).toHaveAttribute(
-        'value',
+      expect(screen.getByLabelText('PasswordInput label')).toHaveValue(
         'This is a test value'
       );
     });

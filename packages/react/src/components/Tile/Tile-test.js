@@ -36,8 +36,8 @@ describe('Tile', () => {
           <Link href="https://www.carbondesignsystem.com">Link</Link>
         </Tile>
       );
-      expect(screen.getByText('Default tile')).toBeTruthy();
-      expect(screen.getByText('Link')).toBeTruthy();
+      expect(screen.getByText('Default tile')).toBeInTheDocument();
+      expect(screen.getByText('Link')).toBeInTheDocument();
       expect(screen.getAllByTestId('br-test-id').length).toEqual(2);
     });
 
@@ -157,8 +157,8 @@ describe('Tile', () => {
           </TileBelowTheFoldContent>
         </ExpandableTile>
       );
-      expect(screen.getByText('TestAbove')).toBeTruthy();
-      expect(screen.getByText('TestBelow')).toBeTruthy();
+      expect(screen.getByText('TestAbove')).toBeInTheDocument();
+      expect(screen.getByText('TestBelow')).toBeInTheDocument();
     });
 
     it('has the expected classes', () => {
@@ -204,11 +204,13 @@ describe('Tile', () => {
         </ExpandableTile>
       );
       const expandableTile = screen.getByRole('button');
-      expect(expandableTile.getAttribute('title')).toEqual(
+      expect(expandableTile).toHaveAttribute(
+        'title',
         'Interact to expand Tile'
       );
       userEvent.click(expandableTile);
-      expect(expandableTile.getAttribute('title')).toEqual(
+      expect(expandableTile).toHaveAttribute(
+        'title',
         'Interact to collapse Tile'
       );
     });
@@ -228,9 +230,9 @@ describe('Tile', () => {
       );
 
       const expandableTile = screen.getByRole('button');
-      expect(expandableTile.getAttribute('title')).toEqual('Click To Expand');
+      expect(expandableTile).toHaveAttribute('title', 'Click To Expand');
       userEvent.click(expandableTile);
-      expect(expandableTile.getAttribute('title')).toEqual('Click To Collapse');
+      expect(expandableTile).toHaveAttribute('title', 'Click To Collapse');
     });
 
     it('supports setting expanded prop to true', () => {
