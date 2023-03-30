@@ -50,7 +50,7 @@ describe('CheckboxGroup', () => {
     expect(container.firstChild).toHaveAttribute('data-invalid', 'true');
   });
 
-  it('should display invalidText if message is true', () => {
+  it('should display invalidText if invalid prop is true', () => {
     render(
       <CheckboxGroup
         className="some-class"
