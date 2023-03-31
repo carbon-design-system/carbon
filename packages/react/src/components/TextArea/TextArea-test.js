@@ -55,14 +55,12 @@ describe('TextArea', () => {
 
     it('should not be disabled by default', () => {
       render(<TextArea id="testing" labelText="testLabel" />);
-      expect(screen.getByLabelText('testLabel')).not.toHaveAttribute(
-        'disabled'
-      );
+      expect(screen.getByLabelText('testLabel')).toBeEnabled();
     });
 
     it('should be disabled as expected', () => {
       render(<TextArea disabled id="testing" labelText="testLabel" />);
-      expect(screen.getByLabelText('testLabel')).toHaveAttribute('disabled');
+      expect(screen.getByLabelText('testLabel')).toBeDisabled();
     });
 
     it('should respect hideLabel prop', () => {

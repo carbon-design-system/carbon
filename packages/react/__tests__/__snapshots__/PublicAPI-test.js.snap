@@ -3004,6 +3004,7 @@ Map {
     },
   },
   "ExpandableTile" => Object {
+    "$$typeof": Symbol(react.forward_ref),
     "defaultProps": Object {
       "expanded": false,
       "onClick": [Function],
@@ -3013,7 +3014,6 @@ Map {
       "tileMaxHeight": 0,
       "tilePadding": 0,
     },
-    "displayName": "ExpandableTile",
     "propTypes": Object {
       "children": Object {
         "type": "node",
@@ -3050,6 +3050,7 @@ Map {
         "type": "string",
       },
     },
+    "render": [Function],
   },
   "FileUploader" => Object {
     "contextType": Object {

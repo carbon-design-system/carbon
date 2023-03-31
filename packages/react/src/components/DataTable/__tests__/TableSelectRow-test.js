@@ -67,7 +67,7 @@ describe('DataTable.TableSelectRow', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').checked).toBe(true);
+      expect(screen.getByRole('checkbox')).toBeChecked();
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
@@ -97,7 +97,7 @@ describe('DataTable.TableSelectRow', () => {
         </Table>
       );
 
-      expect(screen.getByRole('checkbox').disabled).toBe(true);
+      expect(screen.getByRole('checkbox')).toBeDisabled();
     });
 
     it('should respect id prop', () => {

@@ -23,7 +23,7 @@ describe('Checkbox', () => {
 
   it('should use defaultChecked to set the default value of the <input> checkbox', () => {
     render(<Checkbox id="test" labelText="test-label" defaultChecked />);
-    expect(screen.getByRole('checkbox').checked).toBe(true);
+    expect(screen.getByRole('checkbox')).toBeChecked();
   });
 
   it('should support a custom `className` prop on the outermost element', () => {
@@ -41,18 +41,18 @@ describe('Checkbox', () => {
 
   it('should disable the <input> if disabled is provided as a prop', () => {
     const { rerender } = render(<Checkbox id="test" labelText="test-label" />);
-    expect(screen.getByRole('checkbox').disabled).toBe(false);
+    expect(screen.getByRole('checkbox')).toBeEnabled();
 
     rerender(<Checkbox id="test" labelText="test-label" disabled />);
-    expect(screen.getByRole('checkbox').disabled).toBe(true);
+    expect(screen.getByRole('checkbox')).toBeDisabled();
   });
 
   it('should set checked on the <input> if checked is provided as a prop', () => {
     render(<Checkbox id="test1" labelText="test-label-1" />);
-    expect(screen.getByLabelText('test-label-1').checked).toBe(false);
+    expect(screen.getByLabelText('test-label-1')).not.toBeChecked();
 
     render(<Checkbox id="test2" labelText="test-label-2" checked />);
-    expect(screen.getByLabelText('test-label-2').checked).toBe(true);
+    expect(screen.getByLabelText('test-label-2')).toBeChecked();
   });
 
   it('should hide the label if hideLabel is provided as a prop', () => {
