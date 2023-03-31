@@ -10,11 +10,11 @@
 import { html, render } from 'lit';
 import EventManager from '../utils/event-manager';
 import { INPUT_SIZE } from '../../src/components/input/input';
-import BXSelect, {
+import CDSSelect, {
   SELECT_COLOR_SCHEME,
 } from '../../src/components/select/select';
-import BXSelectItem from '../../src/components/select/select-item';
-import BXSelectItemGroup from '../../src/components/select/select-item-group';
+import CDSSelectItem from '../../src/components/select/select-item';
+import CDSSelectItemGroup from '../../src/components/select/select-item-group';
 import { Default } from '../../src/components/select/select-story';
 
 /**
@@ -89,7 +89,7 @@ describe('cds-select', function () {
       render(template(), document.body);
       await Promise.resolve();
       const elem = document.body.querySelector('cds-select');
-      const item = document.createElement('cds-select-item') as BXSelectItem;
+      const item = document.createElement('cds-select-item') as CDSSelectItem;
       item.disabled = true;
       item.label = 'label-foo';
       item.selected = true;
@@ -111,7 +111,7 @@ describe('cds-select', function () {
       const item = document.body.querySelector(
         'cds-select-item[value="staging"]'
       );
-      (item as BXSelectItem).disabled = true;
+      (item as CDSSelectItem).disabled = true;
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<option>`s
       const elem = document.body.querySelector('cds-select');
@@ -142,7 +142,7 @@ describe('cds-select', function () {
       const elem = document.body.querySelector('cds-select');
       const item = document.createElement(
         'cds-select-item-group'
-      ) as BXSelectItem;
+      ) as CDSSelectItem;
       item.disabled = true;
       item.label = 'label-foo';
       elem!.appendChild(item);
@@ -161,7 +161,7 @@ describe('cds-select', function () {
       const itemGroup = document.body.querySelector(
         'cds-select-item-group[label="Category 2"]'
       );
-      (itemGroup as BXSelectItemGroup).disabled = true;
+      (itemGroup as CDSSelectItemGroup).disabled = true;
       await Promise.resolve(); // Let `MutationObserver` run
       await Promise.resolve(); // Update cycle of rendering new child `<optgroup>`s
       const elem = document.body.querySelector('cds-select');
@@ -199,7 +199,9 @@ describe('cds-select', function () {
         document.body
       );
       await Promise.resolve();
-      const { options } = document.body.querySelector('cds-select') as BXSelect;
+      const { options } = document.body.querySelector(
+        'cds-select'
+      ) as CDSSelect;
       expect(
         Array.prototype.map.call(options, (option) => option.value)
       ).toEqual(['all', 'cloudFoundry']);
@@ -217,16 +219,16 @@ describe('cds-select', function () {
       );
       await Promise.resolve();
       expect(
-        (document.body.querySelector('cds-select') as BXSelect).length
+        (document.body.querySelector('cds-select') as CDSSelect).length
       ).toBe(2);
     });
 
     it('should support querying the type', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      expect((document.body.querySelector('cds-select') as BXSelect).type).toBe(
-        'select-one'
-      );
+      expect(
+        (document.body.querySelector('cds-select') as CDSSelect).type
+      ).toBe('select-one');
     });
 
     it('should unsupport multiple selection', async function () {
@@ -236,7 +238,7 @@ describe('cds-select', function () {
       const { _attributeToProperty: origAttributeToProperty } = elem as any;
       let caught;
       await new Promise<void>((resolve) => {
-        spyOn(BXSelect.prototype as any, '_attributeToProperty').and.callFake(
+        spyOn(CDSSelect.prototype as any, '_attributeToProperty').and.callFake(
           function () {
             try {
               // TODO: See if we can get around TS2683
@@ -251,21 +253,21 @@ describe('cds-select', function () {
         elem!.setAttribute('multiple', '');
       });
       expect(caught).toBeDefined();
-      expect((elem as BXSelect).multiple).toBe(false);
+      expect((elem as CDSSelect).multiple).toBe(false);
     });
 
     it('should support querying the selected index', async function () {
       render(template({ value: 'staging' }), document.body);
       await Promise.resolve();
       expect(
-        (document.body.querySelector('cds-select') as BXSelect).selectedIndex
+        (document.body.querySelector('cds-select') as CDSSelect).selectedIndex
       ).toBe(2);
     });
 
     it('should support setting the selected index', async function () {
       render(template(), document.body);
       await Promise.resolve();
-      const select = document.body.querySelector('cds-select') as BXSelect;
+      const select = document.body.querySelector('cds-select') as CDSSelect;
       select.selectedIndex = 2;
       expect(select.value).toBe('staging');
     });
@@ -334,7 +336,7 @@ describe('cds-select', function () {
     });
 
     it('should support checking if required value exists', async function () {
-      const select = elem as BXSelect;
+      const select = elem as CDSSelect;
       select.required = true;
       const spyInvalid = jasmine.createSpy('invalid');
       events.on(select, 'invalid', spyInvalid);
@@ -349,7 +351,7 @@ describe('cds-select', function () {
     });
 
     it('should support canceling required check', async function () {
-      const select = elem as BXSelect;
+      const select = elem as CDSSelect;
       select.required = true;
       events.on(select, 'invalid', (event) => {
         event.preventDefault();
@@ -360,14 +362,14 @@ describe('cds-select', function () {
     });
 
     it('should treat empty custom validity message as not invalid', async function () {
-      const select = elem as BXSelect;
+      const select = elem as CDSSelect;
       select.setCustomValidity('');
       expect(select.invalid).toBe(false);
       expect(select.validityMessage).toBe('');
     });
 
     it('should treat non-empty custom validity message as invalid', async function () {
-      const select = elem as BXSelect;
+      const select = elem as CDSSelect;
       select.setCustomValidity('validity-message-foo');
       expect(select.invalid).toBe(true);
       expect(select.validityMessage).toBe('validity-message-foo');

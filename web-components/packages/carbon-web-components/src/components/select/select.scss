@@ -15,15 +15,31 @@ $css--plex: true !default;
 
   outline: none;
 
-  &[color-scheme='light'] {
-    @extend .#{$prefix}--select--light;
-  }
-
   &[disabled] {
     @extend .#{$prefix}--select--disabled;
   }
 
   &[invalid] {
     @extend .#{$prefix}--select--invalid;
+  }
+
+  &[readonly] select {
+    pointer-events: none;
+  }
+
+  &[inline][warn] {
+    .#{$prefix}--form__helper-text,
+    .#{$prefix}--label {
+      align-self: flex-start;
+      margin-top: 0.8125rem;
+    }
+
+    select {
+      padding-right: 3.5rem;
+    }
+
+    .#{$prefix}--select__invalid-icon--warning {
+      right: 2rem;
+    }
   }
 }

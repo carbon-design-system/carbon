@@ -17,7 +17,7 @@ import { prefix } from '../../globals/settings';
  * @element cds-select-item-group
  */
 @customElement(`${prefix}-select-item-group`)
-class BXSelectItemGroup extends LitElement {
+class CDSSelectItemGroup extends LitElement {
   /**
    * `true` to disable this option.
    */
@@ -31,4 +31,4 @@ class BXSelectItemGroup extends LitElement {
   label = '';
 }
 
-export default BXSelectItemGroup;
+export default CDSSelectItemGroup;

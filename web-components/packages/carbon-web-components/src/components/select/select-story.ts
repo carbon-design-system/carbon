@@ -16,33 +16,133 @@ import textNullable from '../../../.storybook/knob-text-nullable';
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
 import { prefix } from '../../globals/settings';
-import { INPUT_COLOR_SCHEME, INPUT_SIZE } from '../input/input';
+import { INPUT_SIZE } from '../input/input';
 import './select';
+import './select-item-group';
+import './select-item';
+import './select-skeleton';
+import '../form/form-item';
+import '../layer';
 import storyDocs from './select-story.mdx';
 
-const colorSchemes = {
-  [`Regular`]: null,
-  [`Light (${INPUT_COLOR_SCHEME.LIGHT})`]: INPUT_COLOR_SCHEME.LIGHT,
-};
-
 const sizes = {
-  'Regular size': null,
   [`Small size (${INPUT_SIZE.SMALL})`]: INPUT_SIZE.SMALL,
-  [`Extra large size (${INPUT_SIZE.EXTRA_LARGE})`]: INPUT_SIZE.EXTRA_LARGE,
+  [`Medium size (${INPUT_SIZE.MEDIUM})`]: INPUT_SIZE.MEDIUM,
+  [`Large size (${INPUT_SIZE.LARGE})`]: INPUT_SIZE.LARGE,
 };
 
-export const Default = (args) => {
+export const Default = () => {
+  return html`
+    <cds-form-item>
+      <cds-select
+        helper-text="Optional helper text"
+        label-text="Select an option"
+        placeholder="Choose an option">
+        <cds-select-item-group label="Category 1">
+          <cds-select-item value="all">Option 1</cds-select-item>
+          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        </cds-select-item-group>
+        <cds-select-item-group label="Category 2">
+          <cds-select-item value="staging">Option 3</cds-select-item>
+          <cds-select-item value="dea">Option 4</cds-select-item>
+          <cds-select-item value="router">Option 5</cds-select-item>
+        </cds-select-item-group>
+      </cds-select>
+    </cds-form-item>
+  `;
+};
+
+export const Inline = () => {
+  return html`
+    <cds-form-item>
+      <cds-select
+        inline
+        helper-text="Optional helper text"
+        label-text="Select an option"
+        placeholder="Choose an option">
+        <cds-select-item-group label="Category 1">
+          <cds-select-item value="all">Option 1</cds-select-item>
+          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        </cds-select-item-group>
+        <cds-select-item-group label="Category 2">
+          <cds-select-item value="staging">Option 3</cds-select-item>
+          <cds-select-item value="dea">Option 4</cds-select-item>
+          <cds-select-item value="router">Option 5</cds-select-item>
+        </cds-select-item-group>
+      </cds-select>
+    </cds-form-item>
+  `;
+};
+
+export const skeleton = () =>
+  html` <cds-select-skeleton></cds-select-skeleton> `;
+
+skeleton.parameters = {
+  percy: {
+    skip: true,
+  },
+};
+
+export const WithLayer = () => {
+  return html`
+    <cds-layer>
+      <cds-select helper-text="First layer" placeholder="Choose an option">
+        <cds-select-item-group label="Category 1">
+          <cds-select-item value="all">Option 1</cds-select-item>
+          <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+        </cds-select-item-group>
+        <cds-select-item-group label="Category 2">
+          <cds-select-item value="staging">Option 3</cds-select-item>
+          <cds-select-item value="dea">Option 4</cds-select-item>
+          <cds-select-item value="router">Option 5</cds-select-item>
+        </cds-select-item-group>
+      </cds-select>
+      <cds-layer>
+        <cds-select helper-text="Second layer" placeholder="Choose an option">
+          <cds-select-item-group label="Category 1">
+            <cds-select-item value="all">Option 1</cds-select-item>
+            <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+          </cds-select-item-group>
+          <cds-select-item-group label="Category 2">
+            <cds-select-item value="staging">Option 3</cds-select-item>
+            <cds-select-item value="dea">Option 4</cds-select-item>
+            <cds-select-item value="router">Option 5</cds-select-item>
+          </cds-select-item-group>
+        </cds-select>
+
+        <cds-layer>
+          <cds-select helper-text="Third layer" placeholder="Choose an option">
+            <cds-select-item-group label="Category 1">
+              <cds-select-item value="all">Option 1</cds-select-item>
+              <cds-select-item value="cloudFoundry">Option 2</cds-select-item>
+            </cds-select-item-group>
+            <cds-select-item-group label="Category 2">
+              <cds-select-item value="staging">Option 3</cds-select-item>
+              <cds-select-item value="dea">Option 4</cds-select-item>
+              <cds-select-item value="router">Option 5</cds-select-item>
+            </cds-select-item-group>
+          </cds-select>
+        </cds-layer>
+      </cds-layer>
+    </cds-layer>
+  `;
+};
+
+export const Playground = (args) => {
   const {
-    autofocus,
-    colorScheme,
     disabled,
     helperText,
+    hideLabel,
+    inline,
     invalid,
+    invalidText,
     labelText,
     name,
     placeholder,
     size,
-    validityMessage,
+    readonly,
+    warn,
+    warnText,
     value,
     children = html`
       <cds-select-item-group label="Category 1">
@@ -58,44 +158,50 @@ export const Default = (args) => {
     onInput,
   } = args?.[`${prefix}-select`] ?? {};
   return html`
-    <cds-select
-      ?autofocus="${autofocus}"
-      color-scheme="${ifDefined(colorScheme)}"
-      ?disabled="${disabled}"
-      helper-text="${ifDefined(helperText)}"
-      ?invalid="${invalid}"
-      label-text="${ifDefined(labelText)}"
-      name="${ifDefined(name)}"
-      placeholder="${ifDefined(placeholder)}"
-      size="${ifDefined(size)}"
-      validity-message="${ifDefined(validityMessage)}"
-      value="${ifDefined(value)}"
-      @cds-select-selected="${ifDefined(onInput)}">
-      ${children}
-    </cds-select>
+    <cds-form-item>
+      <cds-select
+        ?inline="${inline}"
+        ?disabled="${disabled}"
+        helper-text="${ifDefined(helperText)}"
+        ?hide-label="${hideLabel}"
+        ?invalid="${invalid}"
+        invalid-text="${ifDefined(invalidText)}"
+        label-text="${ifDefined(labelText)}"
+        name="${ifDefined(name)}"
+        placeholder="${ifDefined(placeholder)}"
+        size="${ifDefined(size)}"
+        ?readonly="${readonly}"
+        ?warn="${warn}"
+        warn-text="${ifDefined(warnText)}"
+        value="${ifDefined(value)}"
+        @cds-select-selected="${ifDefined(onInput)}">
+        ${children}
+      </cds-select>
+    </cds-form-item>
   `;
 };
 
-Default.parameters = {
+Playground.parameters = {
   knobs: {
     [`${prefix}-select`]: () => ({
-      colorScheme: select('Color scheme (color-scheme)', colorSchemes, null),
       disabled: boolean('Disabled (disabled)', false),
       helperText: textNullable(
         'Helper text (helper-text)',
         'Optional helper text'
       ),
+      hideLabel: boolean('Hide label (hide-label)', false),
+      inline: boolean('Inline (inline)', false),
       invalid: boolean('Invalid (invalid)', false),
-      labelText: textNullable('Label text (label-text)', 'Select'),
+      invalidText: textNullable('Invalid text (invalid-text)', 'Error message'),
+      labelText: textNullable('Label text (label-text)', 'Select an option'),
       placeholder: textNullable(
-        'Placeholder text (placeholder)',
-        'Optional placeholder text'
+        'Placeholder (placeholder)',
+        'Choose an option'
       ),
-      size: select('Dropdown size (size)', sizes, null),
-      validityMessage: textNullable(
-        'The validity message (validity-message)',
-        ''
-      ),
+      size: select('Dropdown size (size)', sizes, INPUT_SIZE.MEDIUM),
+      readonly: boolean('Read only (readonly)', false),
+      warn: boolean('Warn (warn)', false),
+      warnText: textNullable('Warn text (warn-text)', 'Warning message'),
       value: textNullable('The value of the selected item (value)', ''),
       onInput: action(`${prefix}-select-selected`),
     }),
@@ -107,4 +213,9 @@ export default {
   parameters: {
     ...storyDocs.parameters,
   },
+  decorators: [
+    (story) => {
+      return html`<div style="width: 400px">${story()}</div>`;
+    },
+  ],
 };
