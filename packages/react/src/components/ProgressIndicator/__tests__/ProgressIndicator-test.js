@@ -190,7 +190,7 @@ describe('ProgressStep', () => {
       expect(screen.getByRole('listitem')).toHaveClass(
         'cds--progress-step--disabled'
       );
-      expect(screen.getByRole('button')).toHaveAttribute('disabled');
+      expect(screen.getByRole('button')).toBeDisabled();
       expect(screen.getByRole('button')).toHaveClass(
         'cds--progress-step-button--unclickable'
       );
@@ -205,7 +205,7 @@ describe('ProgressStep', () => {
     it('should respect invalid prop', () => {
       render(<ProgressStep label="First step" invalid />);
 
-      expect(screen.getByText('Invalid')).toBeDefined();
+      expect(screen.getByText('Invalid')).toBeInTheDocument();
     });
 
     it('should respect label prop', () => {

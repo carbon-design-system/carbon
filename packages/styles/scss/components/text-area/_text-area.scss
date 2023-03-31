@@ -6,6 +6,7 @@
 //
 
 @use '../form';
+@use '../../colors' as *;
 @use '../../config' as *;
 @use '../../motion' as *;
 @use '../../spacing' as *;
@@ -69,6 +70,15 @@
     top: $spacing-04;
     right: $spacing-05;
     fill: $support-error;
+  }
+
+  .#{$prefix}--text-area__invalid-icon--warning {
+    fill: $support-warning;
+  }
+
+  .#{$prefix}--text-area__invalid-icon--warning path[fill] {
+    fill: $black-100;
+    opacity: 1;
   }
 
   .#{$prefix}--text-area__counter-alert {

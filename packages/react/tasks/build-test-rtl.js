@@ -16,13 +16,13 @@ function writeTestFile(props, componentName, isSubComponent) {
       test = `it('should render children as expected', () => {
                 render(<${componentName}>add appropriate children</${componentName}>)
 
-                expect(); 
+                expect();
             });\n\n`;
     } else if (prop === 'className') {
       test = `it('should support a custom \`className\` prop on the outermost element', () => {
             const { container } = render(<${componentName} className="custom-class" />)
 
-            expect(container.firstChild).toHaveClass('custom-class'); 
+            expect(container.firstChild).toHaveClass('custom-class');
         });\n\n`;
     } else if (
       prop === 'onClick' ||
@@ -39,12 +39,12 @@ function writeTestFile(props, componentName, isSubComponent) {
 
             // perform action to call ${prop}
 
-            expect(${prop}).toHaveBeenCalled(); 
+            expect(${prop}).toHaveBeenCalled();
         });\n\n`;
     } else {
       test = `it('should respect ${prop} prop', () => {
-            render(<${componentName} ${prop} />); 
-    
+            render(<${componentName} ${prop} />);
+
             expect();
         });\n\n`;
     }
@@ -54,23 +54,23 @@ function writeTestFile(props, componentName, isSubComponent) {
 
   const testFile = isSubComponent
     ? `/**
-    * Copyright IBM Corp. 2022
+    * Copyright IBM Corp. ${new Date().getFullYear()}
     *
     * This source code is licensed under the Apache-2.0 license found in the
     * LICENSE file in the root directory of this source tree.
     */
-   
+
   import React from 'react';
   import ${componentName} from '../${componentName}';
   import userEvent from '@testing-library/user-event';
   import { render, screen } from '@testing-library/react';
-  
+
   describe('${componentName}', () => {
     describe('renders as expected - Component API', () => {
       it('should spread extra props onto outermost element', () => {
         const { container } = render(<${componentName} data-testid="test-id" />)
 
-        expect(container.firstChild).toHaveAttribute('data-testid', 'test-id'); 
+        expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
       })
 
       ${propTests}
@@ -82,25 +82,25 @@ function writeTestFile(props, componentName, isSubComponent) {
   });
   `
     : `/**
-    * Copyright IBM Corp. 2022
+    * Copyright IBM Corp. ${new Date().getFullYear()}
     *
     * This source code is licensed under the Apache-2.0 license found in the
     * LICENSE file in the root directory of this source tree.
     */
-   
+
   import React from 'react';
   import ${componentName} from './${componentName}';
   import userEvent from '@testing-library/user-event';
   import { render, screen } from '@testing-library/react';
-  
+
   describe('${componentName}', () => {
     describe('renders as expected - Component API', () => {
       it('should spread extra props onto outermost element', () => {
         const { container } = render(<${componentName} data-testid="test-id" />)
 
-        expect(container.firstChild).toHaveAttribute('data-testid', 'test-id'); 
+        expect(container.firstChild).toHaveAttribute('data-testid', 'test-id');
       })
-      
+
       ${propTests}
     });
 
