@@ -47,7 +47,7 @@ export interface FileUploaderItemProps {
    * Event handler that is called after removing a file from the file uploader
    * The event handler signature looks like `onDelete(evt, { uuid })`
    */
-  onDelete?: any; // todoPropTypes.func,
+  onDelete?: (evt: React.KeyboardEvent, { uuid: string }) => void;
 
   /**
    * Specify the size of the FileUploaderButton, from a list of available
@@ -97,16 +97,16 @@ function FileUploaderItem(props: FileUploaderItemProps) {
           aria-describedby={name}
           status={status}
           invalid={invalid}
-          // @ts-ignore
+          // @ts-ignore property not defined on Filename
           onKeyDown={(evt) => {
             if (matches(evt, [keys.Enter, keys.Space])) {
-              if (status === 'edit') {
+              if (status === 'edit' && onDelete) {
                 onDelete(evt, { uuid: id });
               }
             }
           }}
           onClick={(evt) => {
-            if (status === 'edit') {
+            if (status === 'edit' && onDelete) {
               onDelete(evt, { uuid: id });
             }
           }}
