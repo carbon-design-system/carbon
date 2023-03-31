@@ -27,7 +27,7 @@ describe('Switch', () => {
     it('should respect disabled prop', () => {
       render(<Switch disabled />);
 
-      expect(screen.getByRole('tab')).toHaveAttribute('disabled');
+      expect(screen.getByRole('tab')).toBeDisabled();
     });
 
     it('should call onClick when expected', () => {

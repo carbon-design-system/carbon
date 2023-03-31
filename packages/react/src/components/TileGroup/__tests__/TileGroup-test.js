@@ -24,7 +24,7 @@ describe('PasswordInput', () => {
       const legend = screen.getByText('TestGroup', {
         selector: 'legend',
       });
-      expect(legend).toBeDefined();
+      expect(legend).toBeInTheDocument();
     });
 
     it('should render <RadioTile> as children', () => {

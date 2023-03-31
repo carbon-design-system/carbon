@@ -153,7 +153,7 @@ describe('ComboButton', () => {
 
       await userEvent.click(screen.getAllByRole('button')[1]);
 
-      expect(screen.getByRole('menu')).toBeTruthy();
+      expect(screen.getByRole('menu')).toBeInTheDocument();
       expect(screen.getByRole('menuitem')).toHaveTextContent(
         /^Additional action$/
       );
