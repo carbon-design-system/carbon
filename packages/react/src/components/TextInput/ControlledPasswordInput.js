@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { View, ViewOff, WarningFilled } from '@carbon/icons-react';
 import { textInputProps } from './util';
 import { warning } from '../../internal/warning';
-import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
 
 let didWarnAboutDeprecation = false;
@@ -22,7 +21,6 @@ const ControlledPasswordInput = React.forwardRef(
       invalid,
       invalidText,
       helperText,
-      light,
       // eslint-disable-next-line react/prop-types
       type = 'password',
       // eslint-disable-next-line react/prop-types
@@ -52,7 +50,6 @@ const ControlledPasswordInput = React.forwardRef(
       `${prefix}--password-input`,
       className,
       {
-        [`${prefix}--text-input--light`]: light,
         [`${prefix}--text-input--invalid`]: invalid,
         [`${prefix}--text-input--${size}`]: size,
       }
@@ -205,16 +202,6 @@ ControlledPasswordInput.propTypes = {
    * control
    */
   labelText: PropTypes.node.isRequired,
-
-  /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
-   * Don't use this to make tile background color same as container background color.
-   */
-  light: deprecate(
-    PropTypes.bool,
-    'The `light` prop for `ControlledPasswordInput` has ' +
-      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
-  ),
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<input>`

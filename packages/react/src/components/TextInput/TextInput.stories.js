@@ -17,13 +17,6 @@ export default {
     TextInputSkeleton,
     'TextInput.PasswordInput': TextInput.PasswordInput,
   },
-  argTypes: {
-    light: {
-      table: {
-        disable: true,
-      },
-    },
-  },
 };
 
 export const Default = () => (

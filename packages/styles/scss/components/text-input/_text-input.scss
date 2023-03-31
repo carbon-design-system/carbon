@@ -80,11 +80,6 @@
     @include placeholder-colors;
   }
 
-  // V11: Possibly deprecate
-  .#{$prefix}--text-input--light {
-    background-color: $field-02;
-  }
-
   //-----------------------------
   // Disabled & Error icon spacing
   //-----------------------------
@@ -226,11 +221,6 @@
     cursor: not-allowed;
     // Needed to fix disabled text in Safari #6673
     -webkit-text-fill-color: $text-disabled;
-  }
-
-  // V11: Possibly deprecate
-  .#{$prefix}--text-input--light:disabled {
-    background-color: $field-02;
   }
 
   .#{$prefix}--text-input:disabled::placeholder {

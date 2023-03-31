@@ -83,14 +83,6 @@ export interface TextInputProps
   labelText: ReactNode;
 
   /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
-   * Don't use this to make tile background color same as container background color.
-   * 'The `light` prop for `TextInput` has ' +
-      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
-   */
-  light?: boolean;
-
-  /**
    * Max character count allowed for the input. This is needed in order for enableCounter to display
    */
   maxCount?: number;
@@ -156,7 +148,6 @@ const TextInput = React.forwardRef(function TextInput(
     invalid = false,
     invalidText,
     labelText,
-    light,
     onChange = () => {},
     onClick = () => {},
     placeholder,
@@ -194,7 +185,6 @@ const TextInput = React.forwardRef(function TextInput(
     `${prefix}--text-input`,
     [enabled ? null : className],
     {
-      [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
       [`${prefix}--text-input--${size}`]: size,
@@ -237,7 +227,6 @@ const TextInput = React.forwardRef(function TextInput(
     `${prefix}--text-input-wrapper`,
     {
       [`${prefix}--text-input-wrapper--readonly`]: readOnly,
-      [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
       [`${prefix}--text-input-wrapper--inline--invalid`]:
         inline && normalizedProps.invalid,
@@ -403,16 +392,6 @@ TextInput.propTypes = {
    * control
    */
   labelText: PropTypes.node.isRequired,
-
-  /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
-   * Don't use this to make tile background color same as container background color.
-   */
-  light: deprecate(
-    PropTypes.bool,
-    'The `light` prop for `TextInput` has ' +
-      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
-  ),
 
   /**
    * Max character count allowed for the input. This is needed in order for enableCounter to display

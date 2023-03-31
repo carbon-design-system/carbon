@@ -78,13 +78,6 @@ export interface PasswordInputProps
   labelText: ReactNodeLike;
 
   /**
-   * @deprecated The `light` prop for `PasswordInput` has been deprecated in favor of the new `Layer` component. It will be removed in the next major release.
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
-   * Don't use this to make tile background color same as container background color.
-   */
-  light?: boolean;
-
-  /**
    * Max character count allowed for the input. This is needed in order for enableCounter to display
    */
   maxCount?: number;
@@ -177,7 +170,6 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     invalid = false,
     invalidText,
     labelText,
-    light,
     onChange = () => {},
     onClick = () => {},
     onTogglePasswordVisibility,
@@ -217,7 +209,6 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     `${prefix}--password-input`,
     className,
     {
-      [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
       [`${prefix}--text-input--${size}`]: size,
@@ -246,7 +237,6 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     `${prefix}--text-input-wrapper`,
     `${prefix}--password-input-wrapper`,
     {
-      [`${prefix}--text-input-wrapper--light`]: light,
       [`${prefix}--text-input-wrapper--inline`]: inline,
       [`${prefix}--text-input--fluid`]: isFluid,
     }
@@ -423,16 +413,6 @@ PasswordInput.propTypes = {
    * control
    */
   labelText: PropTypes.node.isRequired,
-
-  /**
-   * `true` to use the light version. For use on $ui-01 backgrounds only.
-   * Don't use this to make tile background color same as container background color.
-   */
-  light: deprecate(
-    PropTypes.bool,
-    'The `light` prop for `PasswordInput` has ' +
-      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
-  ),
 
   /**
    * Optionally provide an `onChange` handler that is called whenever `<input>`
