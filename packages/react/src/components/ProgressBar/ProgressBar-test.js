@@ -27,7 +27,7 @@ describe('ProgressBar', () => {
       const label = wrapper.container.querySelector(
         `.${prefix}--progress-bar__label`
       );
-      expect(bar.getAttribute('aria-labelledby')).toBe(label.id);
+      expect(bar).toHaveAttribute('aria-labelledby', label.id);
     });
 
     it('renders helper text when passed', () => {
@@ -47,39 +47,39 @@ describe('ProgressBar', () => {
         `.${prefix}--progress-bar__label`
       );
 
-      expect(label.textContent).toBe(props.label);
-      expect(label.classList.contains(`${prefix}--visually-hidden`)).toBe(true);
+      expect(label).toHaveTextContent(props.label);
+      expect(label).toHaveClass(`${prefix}--visually-hidden`);
     });
 
     it('renders as indeterminate when no value is passed', () => {
       const bar = wrapper.getByRole('progressbar');
 
-      expect(bar.getAttribute('aria-valuenow')).toBe(null);
-      expect(bar.getAttribute('aria-valuemax')).toBe(null);
-      expect(bar.getAttribute('aria-valuemin')).toBe(null);
+      expect(bar).not.toHaveAttribute('aria-valuenow');
+      expect(bar).not.toHaveAttribute('aria-valuemax');
+      expect(bar).not.toHaveAttribute('aria-valuemin');
       expect(
-        wrapper.container
-          .querySelector(`.${prefix}--progress-bar`)
-          .classList.contains(`${prefix}--progress-bar--indeterminate`)
-      ).toBe(true);
+        wrapper.container.querySelector(`.${prefix}--progress-bar`)
+      ).toHaveClass(`${prefix}--progress-bar--indeterminate`);
     });
 
     it('sets aria-valuenow correctly', () => {
       const value = 42;
       wrapper.rerender(<ProgressBar {...props} value={value} />);
 
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
-      ).toBe(value.toString());
+      expect(wrapper.getByRole('progressbar')).toHaveAttribute(
+        'aria-valuenow',
+        value.toString()
+      );
     });
 
     it('sets aria-valuemax correctly', () => {
       const max = 84;
       wrapper.rerender(<ProgressBar {...props} value={0} max={max} />);
 
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-valuemax')
-      ).toBe(max.toString());
+      expect(wrapper.getByRole('progressbar')).toHaveAttribute(
+        'aria-valuemax',
+        max.toString()
+      );
     });
 
     it('supports additional css class names', () => {
@@ -87,42 +87,39 @@ describe('ProgressBar', () => {
       wrapper.rerender(<ProgressBar {...props} className={className} />);
 
       expect(
-        wrapper.container
-          .querySelector(`.${prefix}--progress-bar`)
-          .classList.contains(className)
-      ).toBe(true);
+        wrapper.container.querySelector(`.${prefix}--progress-bar`)
+      ).toHaveClass(className);
     });
 
     it('supports finished status', () => {
       wrapper.rerender(<ProgressBar {...props} status="finished" />);
 
       expect(
-        wrapper.container
-          .querySelector(`.${prefix}--progress-bar`)
-          .classList.contains(`${prefix}--progress-bar--finished`)
-      ).toBe(true);
+        wrapper.container.querySelector(`.${prefix}--progress-bar`)
+      ).toHaveClass(`${prefix}--progress-bar--finished`);
 
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
-      ).toBe('100');
+      expect(wrapper.getByRole('progressbar')).toHaveAttribute(
+        'aria-valuenow',
+        '100'
+      );
     });
 
     it('supports error status', () => {
       wrapper.rerender(<ProgressBar {...props} status="error" />);
 
       expect(
-        wrapper.container
-          .querySelector(`.${prefix}--progress-bar`)
-          .classList.contains(`${prefix}--progress-bar--error`)
-      ).toBe(true);
+        wrapper.container.querySelector(`.${prefix}--progress-bar`)
+      ).toHaveClass(`${prefix}--progress-bar--error`);
 
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
-      ).toBe('0');
+      expect(wrapper.getByRole('progressbar')).toHaveAttribute(
+        'aria-valuenow',
+        '0'
+      );
 
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-invalid')
-      ).toBe('true');
+      expect(wrapper.getByRole('progressbar')).toHaveAttribute(
+        'aria-invalid',
+        'true'
+      );
     });
   });
 
@@ -132,18 +129,20 @@ describe('ProgressBar', () => {
       const max = 50;
       wrapper.rerender(<ProgressBar {...props} value={value} max={max} />);
 
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
-      ).toBe(max.toString());
+      expect(wrapper.getByRole('progressbar')).toHaveAttribute(
+        'aria-valuenow',
+        max.toString()
+      );
     });
 
     it('ensures a positive value', () => {
       const value = -10;
       wrapper.rerender(<ProgressBar {...props} value={value} />);
 
-      expect(
-        wrapper.getByRole('progressbar').getAttribute('aria-valuenow')
-      ).toBe('0');
+      expect(wrapper.getByRole('progressbar')).toHaveAttribute(
+        'aria-valuenow',
+        '0'
+      );
     });
   });
 });
