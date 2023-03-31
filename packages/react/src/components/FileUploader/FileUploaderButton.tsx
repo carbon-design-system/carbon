@@ -72,13 +72,13 @@ export interface FileUploaderButtonProps {
    * Provide an optional `onChange` hook that is called each time the `<input>`
    * value changes
    */
-  onChange?: any; //todo PropTypes.func,
+  onChange?: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 
   /**
    * Provide an optional `onClick` hook that is called each time the button is
    * clicked
    */
-  onClick?: any; //todo PropTypes.func,
+  onClick?: (evt: React.MouseEvent<HTMLButtonElement>) => void;
 
   /**
    * Provide an accessibility role for the `<FileUploaderButton>`
@@ -111,7 +111,7 @@ function FileUploaderButton(props: FileUploaderButtonProps) {
     onChange = noop,
     name,
     size = 'md',
-    // @ts-ignore
+    // @ts-ignore property not defined on FileUploaderButton
     innerRef,
     ...other
   } = props;
@@ -119,7 +119,7 @@ function FileUploaderButton(props: FileUploaderButtonProps) {
   const [labelText, setLabelText] = useState(ownerLabelText);
   const [prevOwnerLabelText, setPrevOwnerLabelText] = useState(ownerLabelText);
   const { current: inputId } = useRef(id || uid());
-  const inputNode = useRef(null);
+  const inputNode = useRef<HTMLInputElement>(null);
   const classes = cx(`${prefix}--btn`, className, {
     [`${prefix}--btn--${buttonKind}`]: buttonKind,
     [`${prefix}--btn--disabled`]: disabled,
@@ -136,14 +136,12 @@ function FileUploaderButton(props: FileUploaderButtonProps) {
 
   function onClick(event) {
     event.target.value = null;
-    //@ts-ignore
-    inputNode.current.click();
+    inputNode.current?.click();
   }
 
   function onKeyDown(event) {
     if (matches(event, [keys.Enter, keys.Space])) {
-      //@ts-ignore
-      inputNode.current.click();
+      inputNode.current?.click();
     }
   }
 
@@ -185,7 +183,7 @@ function FileUploaderButton(props: FileUploaderButtonProps) {
         type="file"
         tabIndex={-1}
         multiple={multiple}
-        //@ts-ignore
+        // @ts-ignore accept property type mismatch
         accept={accept}
         name={name}
         onChange={handleOnChange}
