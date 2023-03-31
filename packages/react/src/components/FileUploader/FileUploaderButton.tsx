@@ -111,7 +111,6 @@ function FileUploaderButton(props: FileUploaderButtonProps) {
     onChange = noop,
     name,
     size = 'md',
-    // eslint-disable-next-line react/prop-types
     // @ts-ignore
     innerRef,
     ...other
