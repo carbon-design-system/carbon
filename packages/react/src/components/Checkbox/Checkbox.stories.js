@@ -17,7 +17,7 @@ const checkboxEvents = {
 
 const fieldsetCheckboxProps = () => ({
   className: 'some-class',
-  legendText: 'Checkbox heading',
+  legendText: 'Heading label',
 });
 
 export default {
@@ -36,16 +36,20 @@ export default {
 
 export const Default = () => {
   return (
+    <CheckboxGroup {...fieldsetCheckboxProps()}>
+      <Checkbox
+        defaultChecked
+        labelText={`Checkbox label`}
+        id="checkbox-label-1"
+      />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
+    </CheckboxGroup>
+  );
+};
+
+export const Single = () => {
+  return (
     <>
-      <CheckboxGroup {...fieldsetCheckboxProps()}>
-        <Checkbox
-          defaultChecked
-          labelText={`Checkbox label`}
-          id="checkbox-label-1"
-        />
-        <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
-      </CheckboxGroup>
-      <br /> <br />
       <Checkbox
         {...checkboxEvents}
         id="checkbox-3"
