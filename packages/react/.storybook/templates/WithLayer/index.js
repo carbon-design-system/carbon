@@ -21,29 +21,35 @@ function WithLayer({ children }) {
 
   return (
     <div className={`${prefix}--with-layer`}>
-      <div className={`${prefix}--with-layer__label`}>
-        <Icon />
-        layer-01
-      </div>
-      <div className={`${prefix}--with-layer__wrapper`}>
-        {renderChild(0)}
-
+      <div className={`${prefix}--with-layer__layer`}>
         <div className={`${prefix}--with-layer__label`}>
           <Icon />
-          layer-02
+          layer-01
         </div>
-        <div className={`${prefix}--with-layer__wrapper`}>
-          <Layer>
-            {renderChild(1)}
+        <div className={`${prefix}--with-layer__content`}>
+          {renderChild(0)}
 
+          <div className={`${prefix}--with-layer__layer`}>
             <div className={`${prefix}--with-layer__label`}>
               <Icon />
-              layer-03
+              layer-02
             </div>
-            <div className={`${prefix}--with-layer__wrapper`}>
-              <Layer>{renderChild(2)}</Layer>
+            <div className={`${prefix}--with-layer__content`}>
+              <Layer>
+                {renderChild(1)}
+
+                <div className={`${prefix}--with-layer__layer`}>
+                  <div className={`${prefix}--with-layer__label`}>
+                    <Icon />
+                    layer-03
+                  </div>
+                  <div className={`${prefix}--with-layer__content`}>
+                    <Layer>{renderChild(2)}</Layer>
+                  </div>
+                </div>
+              </Layer>
             </div>
-          </Layer>
+          </div>
         </div>
       </div>
     </div>
