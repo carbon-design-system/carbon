@@ -155,7 +155,7 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
-    expect(screen.queryByText('test-secondary-label')).toBeNull();
+    expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
   it('should call onClick from props if provided', () => {

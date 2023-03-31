@@ -65,10 +65,7 @@ describe('TextInput', () => {
         />
       );
 
-      expect(screen.getByRole('textbox')).toHaveAttribute(
-        'value',
-        'This is default text'
-      );
+      expect(screen.getByRole('textbox')).toHaveValue('This is default text');
     });
 
     it('should respect disabled prop', () => {
@@ -197,10 +194,7 @@ describe('TextInput', () => {
         />
       );
 
-      expect(screen.getByRole('textbox')).toHaveAttribute(
-        'value',
-        'This is a test value'
-      );
+      expect(screen.getByRole('textbox')).toHaveValue('This is a test value');
     });
 
     it('should respect warn prop', () => {
