@@ -10,10 +10,12 @@ import React from 'react';
 import cx from 'classnames';
 import Link, { LinkPropTypes } from './Link';
 import { usePrefix } from '../../internal/usePrefix';
+import deprecate from '../../prop-types/deprecate';
 
 const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
   {
     className,
+    isActive,
     isCurrentPage,
     'aria-current': ariaCurrent,
     children,
@@ -24,12 +26,15 @@ const HeaderMenuItem = React.forwardRef(function HeaderMenuItem(
   ref
 ) {
   const prefix = usePrefix();
+  if (isCurrentPage) {
+    isActive = isCurrentPage;
+  }
   const linkClassName = cx({
     [`${prefix}--header__menu-item`]: true,
-    // We set the current class only if `isCurrentPage` is passed in and we do
+    // We set the current class only if `isActive` is passed in and we do
     // not have an `aria-current="page"` set for the breadcrumb item
     [`${prefix}--header__menu-item--current`]:
-      isCurrentPage && ariaCurrent !== 'page',
+      isActive && ariaCurrent !== 'page',
   });
 
   return (
@@ -66,9 +71,19 @@ HeaderMenuItem.propTypes = {
   className: PropTypes.string,
 
   /**
-   * Applies selected styles to the item if a user sets this to true and aria-current !== 'page'.
+   * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
    */
-  isCurrentPage: PropTypes.bool,
+  isActive: PropTypes.bool,
+
+  /**
+   * Applies selected styles to the item if a user sets this to true and `aria-current !== 'page'`.
+   * @deprecated Please use `isActive` instead. This will be removed in the next major release.
+   */
+  isCurrentPage: deprecate(
+    PropTypes.bool,
+    'The `isCurrentPage` prop for `HeaderMenuItem` has ' +
+      'been deprecated. Please use `isActive` instead. This will be removed in the next major release.'
+  ),
 
   /**
    * Optionally supply a role for the underlying `<li>` node. Useful for resetting

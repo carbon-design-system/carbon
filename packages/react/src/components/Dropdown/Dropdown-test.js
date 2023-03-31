@@ -150,7 +150,7 @@ describe('Dropdown', () => {
     assertMenuClosed();
 
     openMenu(); // menu should not open
-    expect(screen.queryByText('Item 0')).toBeNull();
+    expect(screen.queryByText('Item 0')).not.toBeInTheDocument();
     expect(mockProps.onChange).toHaveBeenCalledTimes(0);
     assertMenuClosed();
 
@@ -187,7 +187,7 @@ describe('Dropdown', () => {
     it('should accept a `ref` for the underlying button element', () => {
       const ref = React.createRef();
       render(<Dropdown {...mockProps} ref={ref} />);
-      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
+      expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
   });
 });

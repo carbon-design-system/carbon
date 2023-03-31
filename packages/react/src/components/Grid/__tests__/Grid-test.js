@@ -19,12 +19,12 @@ describe('Grid', () => {
 
   it('should include a custom className', () => {
     const { container } = render(<Grid className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should pass un-used props to the top-level node that is rendered', () => {
     const { container } = render(<Grid id="test" />);
-    expect(container.firstChild.getAttribute('id')).toBe('test');
+    expect(container.firstChild).toHaveAttribute('id', 'test');
   });
 
   it('should render `children` that are given', () => {
