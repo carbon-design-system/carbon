@@ -24,7 +24,7 @@ function WithLayer({ children }) {
       <div className={`${prefix}--with-layer__layer`}>
         <div className={`${prefix}--with-layer__label`}>
           <Icon />
-          layer-01
+          Layer 1
         </div>
         <div className={`${prefix}--with-layer__content`}>
           {renderChild(0)}
@@ -32,7 +32,7 @@ function WithLayer({ children }) {
           <div className={`${prefix}--with-layer__layer`}>
             <div className={`${prefix}--with-layer__label`}>
               <Icon />
-              layer-02
+              Layer 2
             </div>
             <div className={`${prefix}--with-layer__content`}>
               <Layer>
@@ -41,7 +41,7 @@ function WithLayer({ children }) {
                 <div className={`${prefix}--with-layer__layer`}>
                   <div className={`${prefix}--with-layer__label`}>
                     <Icon />
-                    layer-03
+                    Layer 3
                   </div>
                   <div className={`${prefix}--with-layer__content`}>
                     <Layer>{renderChild(2)}</Layer>
