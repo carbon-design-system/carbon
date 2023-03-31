@@ -224,6 +224,9 @@ const DatePicker = React.forwardRef(function DatePicker(
     }
   }, []);
   const endInputField = useRef(null);
+
+  const lastStartValue = useRef('');
+
   const calendarRef = useRef(null);
   const savedOnChange = useSavedCallback(onChange);
   const savedOnClose = useSavedCallback(onClose);
@@ -350,6 +353,7 @@ const DatePicker = React.forwardRef(function DatePicker(
         carbonFlatpickrFixEventsPlugin({
           inputFrom: startInputField.current,
           inputTo: endInputField.current,
+          lastStartValue,
         }),
       ],
       clickOpens: !readOnly,
@@ -398,9 +402,14 @@ const DatePicker = React.forwardRef(function DatePicker(
       }
     }
 
-    function handleOnChange() {
+    function handleOnChange(event) {
       if (datePickerType == 'single') {
         calendar.calendarContainer.classList.remove('open');
+      }
+
+      const { target } = event;
+      if (target === start) {
+        lastStartValue.current = start.value;
       }
 
       if (start.value !== '') {
