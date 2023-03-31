@@ -180,7 +180,7 @@ describe('TreeView', () => {
 
       const nodeChild = screen.getByTestId('Node 2');
 
-      expect(nodeChild.getAttribute('aria-disabled')).toEqual('true');
+      expect(nodeChild).toHaveAttribute('aria-disabled', 'true');
     });
 
     it('should render tree with icons', () => {

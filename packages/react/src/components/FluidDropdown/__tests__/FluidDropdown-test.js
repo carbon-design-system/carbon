@@ -180,7 +180,7 @@ describe('FluidDropdown', () => {
     it('should accept a `ref` for the underlying button element', () => {
       const ref = React.createRef();
       render(<FluidDropdown {...mockProps} ref={ref} />);
-      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
+      expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
   });
 });

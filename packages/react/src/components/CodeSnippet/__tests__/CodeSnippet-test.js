@@ -172,12 +172,12 @@ describe('Show more button', () => {
   it('should not have show more button when less then 15 rows', () => {
     render(<CodeSnippet type="multi">{multiShort}</CodeSnippet>);
 
-    expect(screen.queryByText('Show more')).toBe(null);
+    expect(screen.queryByText('Show more')).not.toBeInTheDocument();
   });
 
   it('should not have show more button when exactly 15 rows', () => {
     render(<CodeSnippet type="multi">{multi15}</CodeSnippet>);
 
-    expect(screen.queryByText('Show more')).toBe(null);
+    expect(screen.queryByText('Show more')).not.toBeInTheDocument();
   });
 });

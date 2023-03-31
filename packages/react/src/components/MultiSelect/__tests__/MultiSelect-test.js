@@ -114,13 +114,11 @@ describe('MultiSelect', () => {
 
     Simulate.click(itemNode);
 
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'true');
 
     Simulate.click(itemNode);
 
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
-      'false'
-    );
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
   });
 
   it('should close the menu when the user hits the Escape key', () => {
@@ -183,18 +181,14 @@ describe('MultiSelect', () => {
     const [item] = items;
     const itemNode = getByText(container, item.label);
 
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
-      'false'
-    );
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
 
     Simulate.keyDown(container.querySelector('[role="listbox"]'), {
       key: 'ArrowDown',
     });
     pressEnter();
 
-    expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
-      'false'
-    );
+    expect(itemNode).toHaveAttribute('data-contained-checkbox-state', 'false');
   });
 
   it('should clear selected items when the user clicks the clear selection button', () => {
@@ -314,11 +308,11 @@ describe('MultiSelect', () => {
 
       Simulate.click(labelNode);
 
-      expect(getByText(container, 'joey')).toBeTruthy();
-      expect(getByText(container, 'johnny')).toBeTruthy();
-      expect(getByText(container, 'tommy')).toBeTruthy();
-      expect(getByText(container, 'dee dee')).toBeTruthy();
-      expect(getByText(container, 'marky')).toBeTruthy();
+      expect(getByText(container, 'joey')).toBeInTheDocument();
+      expect(getByText(container, 'johnny')).toBeInTheDocument();
+      expect(getByText(container, 'tommy')).toBeInTheDocument();
+      expect(getByText(container, 'dee dee')).toBeInTheDocument();
+      expect(getByText(container, 'marky')).toBeInTheDocument();
     });
 
     it('should support a custom itemToElement', () => {
@@ -411,7 +405,7 @@ describe('MultiSelect', () => {
         />
       );
 
-      expect(getByText(container, 'Fool of a Took!')).toBeTruthy();
+      expect(getByText(container, 'Fool of a Took!')).toBeInTheDocument();
 
       expect(document.querySelector('[data-invalid="true"')).toBeInstanceOf(
         HTMLElement
@@ -445,7 +439,7 @@ describe('MultiSelect', () => {
       );
 
       // the first option in the list to the the former third option in the list
-      expect(optionsArray[0].getAttribute('aria-label')).toBe('Item 2');
+      expect(optionsArray[0]).toHaveAttribute('aria-label', 'Item 2');
     });
 
     it('should accept a `ref` for the underlying button element', () => {
@@ -453,7 +447,7 @@ describe('MultiSelect', () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       render(<MultiSelect id="test" label={label} items={items} ref={ref} />);
-      expect(ref.current.getAttribute('aria-haspopup')).toBe('listbox');
+      expect(ref.current).toHaveAttribute('aria-haspopup', 'listbox');
     });
   });
 });

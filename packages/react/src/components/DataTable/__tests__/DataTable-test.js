@@ -402,9 +402,7 @@ describe('DataTable', () => {
 
       it('should have select-all default to un-checked if no rows are present', () => {
         render(<DataTable {...mockProps} rows={[]} />);
-        expect(screen.getAllByRole('checkbox')[0]).not.toHaveAttribute(
-          'checked'
-        );
+        expect(screen.getAllByRole('checkbox')[0]).not.toBeChecked();
       });
 
       it('should select all rows if a user interacts with select all', () => {

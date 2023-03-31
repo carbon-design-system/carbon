@@ -48,7 +48,7 @@ describe('Button props', () => {
       />
     );
 
-    expect(screen.getByTestId('copy-btn-3')).toHaveAttribute('disabled');
+    expect(screen.getByTestId('copy-btn-3')).toBeDisabled();
   });
 
   it('should call the click handler', () => {
