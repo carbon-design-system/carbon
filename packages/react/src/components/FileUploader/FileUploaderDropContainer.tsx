@@ -53,7 +53,12 @@ export interface FileUploaderDropContainerProps {
    * Event handler that is called after files are added to the uploader
    * The event handler signature looks like `onAddFiles(evt, { addedFiles })`
    */
-  onAddFiles?: any; //todo PropTypes.func,
+  onAddFiles?: (
+    evt: React.ChangeEvent<HTMLDivElement>,
+    {
+      addedFiles: [],
+    }
+  ) => void;
 
   /**
    * Provide a custom regex pattern for the acceptedTypes
@@ -90,7 +95,7 @@ function FileUploaderDropContainer(props: FileUploaderDropContainerProps) {
     ...rest
   } = props;
   const prefix = usePrefix();
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const { current: uid } = useRef(id || uniqueId());
   const [isActive, setActive] = useState(false);
   const labelClasses = classNames(`${prefix}--file-browse-btn`, {
@@ -116,7 +121,6 @@ function FileUploaderDropContainer(props: FileUploaderDropContainerProps) {
     const acceptedTypes = new Set(accept);
     return transferredFiles.reduce((acc, curr) => {
       const { name, type: mimeType = '' } = curr;
-      //todo check this
       const fileExtensionRegExp = new RegExp(pattern ?? '', 'i');
       const hasFileExtension = fileExtensionRegExp.test(name);
       if (!hasFileExtension) {
@@ -138,7 +142,7 @@ function FileUploaderDropContainer(props: FileUploaderDropContainerProps) {
 
   function handleChange(event) {
     const addedFiles = validateFiles(event);
-    return onAddFiles(event, { addedFiles });
+    if (onAddFiles) return onAddFiles(event, { addedFiles }); 
   }
 
   return (
@@ -180,7 +184,6 @@ function FileUploaderDropContainer(props: FileUploaderDropContainerProps) {
         onKeyDown={(evt) => {
           // @ts-ignore
           if (matches(evt, [keys.Enter, keys.Space])) {
-            // @ts-ignore
             inputRef.current?.click();
           }
         }}
@@ -196,13 +199,13 @@ function FileUploaderDropContainer(props: FileUploaderDropContainerProps) {
         ref={inputRef}
         tabIndex={-1}
         disabled={disabled}
-        // @ts-ignore
+        // @ts-ignore property type mismatch
         accept={accept}
         name={name}
         multiple={multiple}
         onChange={handleChange}
         onClick={(evt) => {
-          // @ts-ignore
+          // @ts-ignore property shouldn't exist on type
           evt.target.value = null;
         }}
       />
