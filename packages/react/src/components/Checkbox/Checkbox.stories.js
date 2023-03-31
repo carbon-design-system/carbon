@@ -37,8 +37,7 @@ export default {
 export const Default = () => {
   return (
     <CheckboxGroup {...fieldsetCheckboxProps()}>
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-a" />
-      <Checkbox labelText={`Checkbox label`} id="checkbox-label-b" />
+      <Checkbox labelText={`Checkbox label`} id="checkbox-label-1" />
       <Checkbox labelText={`Checkbox label`} id="checkbox-label-2" />
     </CheckboxGroup>
   );
