@@ -33,6 +33,17 @@
     width: 100%;
   }
 
+  .#{$prefix}--contained-list__search {
+    position: sticky;
+    z-index: 1;
+    top: rem(48px);
+  }
+
+  .#{$prefix}--contained-list__search .#{$prefix}--search-input {
+    border-bottom: 1px solid $border-subtle;
+    background-color: $background;
+  }
+
   // Sizes
 
   $sizes: (
