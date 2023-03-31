@@ -137,9 +137,12 @@
     }
   }
 
-  .#{$prefix}--content-switcher--selected,
-  .#{$prefix}--content-switcher--selected:first-child,
-  .#{$prefix}--content-switcher--selected:last-child {
+  .#{$prefix}--content-switcher
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected,
+  .#{$prefix}--content-switcher
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:first-child,
+  .#{$prefix}--content-switcher
+    .#{$prefix}--content-switcher-btn.#{$prefix}--content-switcher--selected:last-child {
     border: 0;
   }
 
@@ -247,10 +250,10 @@
 
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:first-child
-    .#{$prefix}--content-switcher--selected,
+    .#{$prefix}--content-switcher--selected[disabled],
   .#{$prefix}--content-switcher--icon-only
     .#{$prefix}--content-switcher-popover__wrapper:last-child
-    .#{$prefix}--content-switcher--selected {
+    .#{$prefix}--content-switcher--selected[disabled] {
     border-color: $layer-selected-disabled;
   }
 
@@ -260,6 +263,37 @@
     border-right: rem(1px) solid $border-inverse;
     border-bottom-right-radius: rem(4px);
     border-top-right-radius: rem(4px);
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:last-child
+    .#{$prefix}--content-switcher-btn:focus {
+    border-right: 1px solid transparent;
+    background: none;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-popover__wrapper:first-child
+    .#{$prefix}--content-switcher-btn:focus {
+    border-left: 1px solid transparent;
+    background: none;
+  }
+
+  .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn {
+    // accounts for the larger icon sizes to keep the switcher at 48px
+    padding-right: rem(14px);
+    padding-left: rem(14px);
+  }
+
+  .#{$prefix}--content-switcher--lg .#{$prefix}--content-switcher-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .#{$prefix}--content-switcher--icon-only
+    .#{$prefix}--content-switcher-btn
+    svg {
+    fill: $icon-primary;
   }
 
   .#{$prefix}--content-switcher--icon-only
