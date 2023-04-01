@@ -6,7 +6,7 @@
  */
 
 import PropTypes, { ReactNodeLike } from 'prop-types';
-import React, { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef, useEffect } from 'react';
 import classNames from 'classnames';
 import deprecate from '../../prop-types/deprecate';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
@@ -155,8 +155,12 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   const enabled = useFeatureFlag('enable-v11-release');
   const { defaultValue, value, disabled } = other;
   const [textCount, setTextCount] = useState(
-    defaultValue?.toString().length || value?.toString().length || 0
+    defaultValue?.toString()?.length || value?.toString()?.length || 0
   );
+
+  useEffect(() => {
+    setTextCount(defaultValue?.toString()?.length || value?.toString()?.length || 0);
+  }, [value, defaultValue]);
 
   const textareaProps: {
     id: TextAreaProps['id'];
@@ -261,6 +265,7 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
     <textarea
       {...other}
       {...textareaProps}
+      value={value}
       placeholder={placeholder}
       className={textareaClasses}
       aria-invalid={invalid}
