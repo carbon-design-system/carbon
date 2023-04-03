@@ -53,7 +53,7 @@ class ToggleSkeleton extends React.Component<ToggleSkeletonProps> {
     /**
      * Provide the text that will be read by a screen reader when visiting this
      * control
-     * `aria-label` is always required but will be null if `labelText` is also
+     * `aria-label` is always required but will be undefined if `labelText` is also
      * provided
      */
     labelText: PropTypes.string,
