@@ -6,7 +6,9 @@
  */
 
 import React from 'react';
-import DataTable, {
+import { DataTable } from '..';
+
+const {
   Table,
   TableBody,
   TableCell,
@@ -14,7 +16,7 @@ import DataTable, {
   TableHead,
   TableHeader,
   TableRow,
-} from '..';
+} = DataTable;
 
 import mdx from '../DataTable.mdx';
 

@@ -44,7 +44,7 @@ describe('IconButton', () => {
         </IconButton>
       </FeatureFlags>
     );
-    expect(screen.getByTestId('icon-button')).toHaveAttribute('disabled');
+    expect(screen.getByTestId('icon-button')).toBeDisabled();
   });
 
   it('should support a `ref` on the underlying <button> element', () => {
