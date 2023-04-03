@@ -271,7 +271,7 @@ describe('Single date picker', () => {
     expect(screen.getByRole('application')).toHaveClass('open');
   });
 
-  it('should support controlled value', async () => {
+  it('should support controlled value',  () => {
     const DatePickerExample = () => {
       const [date, setDate] = useState('');
       return (
@@ -302,7 +302,7 @@ describe('Single date picker', () => {
     render(<DatePickerExample />);
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
 
-    await userEvent.type(
+    userEvent.type(
       screen.getByLabelText('Date Picker label'),
       '01/20/1989{enter}'
     );
@@ -310,7 +310,7 @@ describe('Single date picker', () => {
       '01/20/1989'
     );
 
-    await userEvent.click(screen.getByText('clear'));
+    userEvent.click(screen.getByText('clear'));
     expect(screen.getByLabelText('Date Picker label')).toHaveValue('');
   });
 });
