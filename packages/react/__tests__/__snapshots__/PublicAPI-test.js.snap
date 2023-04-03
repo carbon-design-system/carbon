@@ -456,6 +456,9 @@ Map {
       "disabled": Object {
         "type": "bool",
       },
+      "helperText": Object {
+        "type": "node",
+      },
       "hideLabel": Object {
         "type": "bool",
       },
@@ -465,6 +468,12 @@ Map {
       },
       "indeterminate": Object {
         "type": "bool",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
       },
       "labelText": Object {
         "isRequired": true,
@@ -479,8 +488,49 @@ Map {
       "title": Object {
         "type": "string",
       },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
     },
     "render": [Function],
+  },
+  "CheckboxGroup" => Object {
+    "propTypes": Object {
+      "children": Object {
+        "type": "node",
+      },
+      "className": Object {
+        "type": "string",
+      },
+      "helperText": Object {
+        "type": "node",
+      },
+      "invalid": Object {
+        "type": "bool",
+      },
+      "invalidText": Object {
+        "type": "node",
+      },
+      "legendId": Object {
+        "type": "node",
+      },
+      "legendText": Object {
+        "isRequired": true,
+        "type": "node",
+      },
+      "readOnly": Object {
+        "type": "bool",
+      },
+      "warn": Object {
+        "type": "bool",
+      },
+      "warnText": Object {
+        "type": "node",
+      },
+    },
   },
   "CheckboxSkeleton" => Object {
     "propTypes": Object {
