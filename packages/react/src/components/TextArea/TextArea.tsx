@@ -159,7 +159,9 @@ const TextArea = React.forwardRef((props: TextAreaProps, forwardRef) => {
   );
 
   useEffect(() => {
-    setTextCount(defaultValue?.toString()?.length || value?.toString()?.length || 0);
+    setTextCount(
+      defaultValue?.toString()?.length || value?.toString()?.length || 0
+    );
   }, [value, defaultValue]);
 
   const textareaProps: {
