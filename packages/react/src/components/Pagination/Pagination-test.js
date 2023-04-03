@@ -16,7 +16,7 @@ describe('Pagination', () => {
     it('should label icon with backwardText', () => {
       render(<Pagination backwardText="Move backwards" pageSizes={[10]} />);
 
-      expect(screen.getByText('Move backwards')).toBeDefined();
+      expect(screen.getByText('Move backwards')).toBeInTheDocument();
     });
 
     it('should support a custom `className` prop on the outermost element', () => {
@@ -32,17 +32,17 @@ describe('Pagination', () => {
 
       expect(
         screen.getByLabelText('Next page', { hidden: true })
-      ).toHaveAttribute('disabled');
+      ).toBeDisabled();
 
       expect(
         screen.getByLabelText('Previous page', { hidden: true })
-      ).toHaveAttribute('disabled');
+      ).toBeDisabled();
     });
 
     it('should label icon with forwardText', () => {
       render(<Pagination forwardText="forward" pageSizes={[10]} />);
 
-      expect(screen.getByText('forward')).toBeDefined();
+      expect(screen.getByText('forward')).toBeInTheDocument();
     });
 
     it('should respect itemRangeText prop', () => {
@@ -58,7 +58,7 @@ describe('Pagination', () => {
         />
       );
 
-      expect(screen.getByText('1–10 de 40 éléments')).toBeDefined();
+      expect(screen.getByText('1–10 de 40 éléments')).toBeInTheDocument();
     });
 
     it('should respect itemText prop', () => {
@@ -72,7 +72,7 @@ describe('Pagination', () => {
         />
       );
 
-      expect(screen.getByText('1-10 éléments')).toBeDefined();
+      expect(screen.getByText('1-10 éléments')).toBeInTheDocument();
     });
 
     it('should respect itemsPerPageText prop', () => {
@@ -80,7 +80,7 @@ describe('Pagination', () => {
         <Pagination pageSizes={[10]} itemsPerPageText={'éléments par page'} />
       );
 
-      expect(screen.getByText('éléments par page')).toBeDefined();
+      expect(screen.getByText('éléments par page')).toBeInTheDocument();
     });
 
     it('should call onChange when approrpiate', () => {
@@ -109,7 +109,7 @@ describe('Pagination', () => {
         />
       );
 
-      expect(screen.getByText('11–20 of 40 items')).toBeDefined();
+      expect(screen.getByText('11–20 of 40 items')).toBeInTheDocument();
     });
 
     it('should respect pageInputDisabled prop', () => {
@@ -134,7 +134,7 @@ describe('Pagination', () => {
         />
       );
 
-      expect(screen.getByText('2 de 4')).toBeDefined();
+      expect(screen.getByText('2 de 4')).toBeInTheDocument();
     });
 
     it('should respect pageSize prop', () => {
@@ -147,7 +147,7 @@ describe('Pagination', () => {
         />
       );
 
-      expect(screen.getByText('21–40 of 40 items')).toBeDefined();
+      expect(screen.getByText('21–40 of 40 items')).toBeInTheDocument();
     });
 
     it('should respect pageSizeInputDisabled prop', () => {

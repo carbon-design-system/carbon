@@ -7,7 +7,7 @@
 
 import cx from 'classnames';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { MouseEventHandler } from 'react';
 import {
   ArrowUp as Arrow,
   ArrowsVertical as Arrows,
@@ -15,39 +15,110 @@ import {
 import { sortStates } from './state/sorting';
 import { useId } from '../../internal/useId';
 import { usePrefix } from '../../internal/usePrefix';
+import { ReactAttr } from '../../types/common';
 
-const translationKeys = {
+const translationKeys: { [key: string]: string } = {
   buttonDescription: 'carbon.table.header.icon.description',
 };
 
+interface translateWithIdAdditionalArgs {
+  header?: string;
+  sortDirection?: string;
+  isSortHeader?: boolean;
+  sortStates?: typeof sortStates;
+}
+
 const translateWithId = (
-  key,
-  { header, sortDirection, isSortHeader, sortStates }
-) => {
-  if (key === translationKeys.buttonDescription) {
-    if (isSortHeader) {
+  key: string,
+  args?: translateWithIdAdditionalArgs
+): string => {
+  if (args && key === translationKeys.buttonDescription) {
+    if (args.isSortHeader && sortStates) {
       // When transitioning, we know that the sequence of states is as follows:
       // NONE -> ASC -> DESC -> NONE
-      if (sortDirection === sortStates.NONE) {
-        return `Click to sort rows by ${header} header in ascending order`;
+      if (args.sortDirection === sortStates.NONE) {
+        return `Click to sort rows by ${args.header} header in ascending order`;
       }
-      if (sortDirection === sortStates.ASC) {
-        return `Click to sort rows by ${header} header in descending order`;
+      if (args.sortDirection === sortStates.ASC) {
+        return `Click to sort rows by ${args.header} header in descending order`;
       }
 
-      return `Click to unsort rows by ${header} header`;
+      return `Click to unsort rows by ${args.header} header`;
     }
-    return `Click to sort rows by ${header} header in ascending order`;
+    return `Click to sort rows by ${args.header} header in ascending order`;
   }
 
   return '';
 };
 
-const sortDirections = {
+const sortDirections: { [key: string]: 'none' | 'ascending' | 'descending' } = {
   [sortStates.NONE]: 'none',
   [sortStates.ASC]: 'ascending',
   [sortStates.DESC]: 'descending',
 };
+
+interface TableHeaderProps
+  extends ReactAttr<HTMLTableCellElement & HTMLButtonElement> {
+  /**
+   * Pass in children that will be embedded in the table header label
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Specify an optional className to be applied to the container node
+   */
+  className?: string;
+
+  /**
+   * Specify `colSpan` as a non-negative integer value to indicate how
+   * many columns the TableHeader cell extends in a table
+   */
+  colSpan?: number;
+
+  /**
+   * Supply an id to the th element.
+   */
+  id?: string;
+
+  /**
+   * Specify whether this header is the header by which a table is being sorted
+   * by
+   */
+  isSortHeader?: boolean;
+
+  /**
+   * Specify whether this header is one through which a user can sort the table
+   */
+  isSortable?: boolean;
+
+  /**
+   * Hook that is invoked when the header is clicked
+   */
+  onClick?: MouseEventHandler<HTMLButtonElement>;
+
+  /**
+   * Specify the scope of this table header. You can find more info about this
+   * attribute at the following URL:
+   * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th#attr-scope
+   */
+  scope: string;
+
+  /**
+   * Specify which direction we are currently sorting by, should be one of DESC,
+   * NONE, or ASC.
+   */
+  sortDirection?: string;
+
+  /**
+   * Supply a method to translate internal strings with your i18n tool of
+   * choice. Translation keys are available on the `translationKeys` field for
+   * this component.
+   */
+  translateWithId?: (
+    key: string,
+    { header, sortDirection, isSortHeader, sortStates }
+  ) => string;
+}
 
 const TableHeader = React.forwardRef(function TableHeader(
   {
@@ -62,8 +133,8 @@ const TableHeader = React.forwardRef(function TableHeader(
     translateWithId: t,
     id,
     ...rest
-  },
-  ref
+  }: TableHeaderProps,
+  ref: React.Ref<HTMLTableCellElement>
 ) {
   const prefix = usePrefix();
   const uniqueId = useId('table-sort');
@@ -91,13 +162,16 @@ const TableHeader = React.forwardRef(function TableHeader(
     [`${prefix}--table-sort--descending`]:
       isSortHeader && sortDirection === sortStates.DESC,
   });
-  const ariaSort = !isSortHeader ? 'none' : sortDirections[sortDirection];
-  const sortDescription = t('carbon.table.header.icon.description', {
-    header: children,
-    sortDirection,
-    isSortHeader,
-    sortStates,
-  });
+  const ariaSort =
+    !isSortHeader || !sortDirection ? 'none' : sortDirections[sortDirection];
+  const sortDescription =
+    t &&
+    t('carbon.table.header.icon.description', {
+      header: children,
+      sortDirection,
+      isSortHeader,
+      sortStates,
+    });
 
   return (
     <th
@@ -194,7 +268,7 @@ TableHeader.defaultProps = {
   translateWithId,
 };
 
-TableHeader.translationKeys = Object.values(translationKeys);
+(TableHeader as any).translationKeys = Object.values(translationKeys);
 
 TableHeader.displayName = 'TableHeader';
 

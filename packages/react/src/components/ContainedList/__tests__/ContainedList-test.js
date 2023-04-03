@@ -61,7 +61,7 @@ describe('ContainedList', () => {
       `.${prefix}--contained-list__label`
     );
 
-    expect(list.getAttribute('aria-labelledby')).toBe(label.id);
+    expect(list).toHaveAttribute('aria-labelledby', label.id);
   });
 
   it('renders props.label', () => {
@@ -69,16 +69,14 @@ describe('ContainedList', () => {
       `.${prefix}--contained-list__label`
     );
 
-    expect(label.textContent).toBe(defaultProps.list.label);
+    expect(label).toHaveTextContent(defaultProps.list.label);
   });
 
   it('supports additional css class names', () => {
     const className = 'some-class';
     wrapper.rerender(<TestComponent list={{ className }} />);
 
-    expect(wrapper.container.firstChild.classList.contains(className)).toBe(
-      true
-    );
+    expect(wrapper.container.firstChild).toHaveClass(className);
   });
 
   a11y('ContainedList');
@@ -88,16 +86,14 @@ describe('ContainedListItem', () => {
   it('renders props.children', () => {
     const content = wrapper.getByRole('listitem');
 
-    expect(content.textContent).toBe(defaultProps.item.children);
+    expect(content).toHaveTextContent(defaultProps.item.children);
   });
 
   it('supports additional css class names', () => {
     const className = 'some-class';
     wrapper.rerender(<TestComponent item={{ className }} />);
 
-    expect(wrapper.getByRole('listitem').classList.contains(className)).toBe(
-      true
-    );
+    expect(wrapper.getByRole('listitem')).toHaveClass(className);
   });
 
   it('renders props.action adjacent to content', () => {

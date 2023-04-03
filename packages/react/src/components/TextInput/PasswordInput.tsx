@@ -1,13 +1,169 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {
+  InputHTMLAttributes,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import classNames from 'classnames';
-import PropTypes from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import { View, ViewOff } from '@carbon/icons-react';
 import { useNormalizedInputProps } from '../../internal/useNormalizedInputProps';
 import { textInputProps } from './util';
 import { FormContext } from '../FluidForm';
-import * as FeatureFlags from '@carbon/feature-flags';
 import deprecate from '../../prop-types/deprecate';
 import { usePrefix } from '../../internal/usePrefix';
+
+type ExcludedAttributes = 'size';
+
+export interface PasswordInputProps
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, ExcludedAttributes> {
+  /**
+   * Provide a custom className that is applied directly to the underlyling `<input>` node
+   */
+  className?: string;
+
+  /**
+   * Optionally provide the default value of the `<input>`
+   */
+  defaultValue?: string | number;
+
+  /**
+   * Specify whether the control is disabled
+   */
+  disabled?: boolean;
+
+  /**
+   * Specify whether to display the character counter
+   */
+  enableCounter?: boolean;
+
+  /**
+   * Provide text that is used alongside the control label for additional help
+   */
+  helperText?: ReactNodeLike;
+
+  /**
+   * Specify whether or not the underlying label is visually hidden
+   */
+  hideLabel?: boolean;
+
+  /**
+   * "Hide password" tooltip text on password visibility toggle
+   */
+  hidePasswordLabel?: string;
+
+  /**
+   * Provide a unique identifier for the input field
+   */
+  id: string;
+
+  /**
+   * `true` to use the inline version
+   */
+  inline?: boolean;
+
+  /**
+   * Specify whether the control is currently invalid
+   */
+  invalid?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in an invalid state
+   */
+  invalidText?: ReactNodeLike;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this control
+   */
+  labelText: ReactNodeLike;
+
+  /**
+   * @deprecated The `light` prop for `PasswordInput` has been deprecated in favor of the new `Layer` component. It will be removed in the next major release.
+   * `true` to use the light version. For use on $ui-01 backgrounds only.
+   * Don't use this to make tile background color same as container background color.
+   */
+  light?: boolean;
+
+  /**
+   * Max character count allowed for the input. This is needed in order for enableCounter to display
+   */
+  maxCount?: number;
+
+  /**
+   * Optionally provide an `onChange` handler that is called whenever `<input>` is updated
+   * @param evt Change event triggered by `<input>`
+   * @returns {void}
+   */
+  onChange?: (evt: React.ChangeEvent<HTMLInputElement>) => void;
+
+  /**
+   * Optionally provide an `onClick` handler that is called whenever the `<input>` is returned
+   * @param evt Mouse event triggered by `<input>`
+   * @returns {void}
+   */
+  onClick?: (evt: React.MouseEvent<HTMLInputElement>) => void;
+
+  /**
+   * Callback function that is called whenever the toggle password visibility button is clicked
+   * @param evt Mouse event triggered by the password visibility `<button>`
+   * @returns {void}
+   */
+  onTogglePasswordVisibility?: (
+    evt: React.MouseEvent<HTMLButtonElement>
+  ) => void;
+
+  /**
+   * Specify the placeholder attribute for the `<input>`
+   */
+  placeholder?: string;
+
+  /**
+   * Whether the input should be read-only
+   */
+  readOnly?: boolean;
+
+  /**
+   * "Show password" tooltip text on password visibility toggle
+   */
+  showPasswordLabel?: string;
+
+  /**
+   * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
+   */
+  size?: 'sm' | 'md' | 'lg';
+
+  /**
+   * Specify the alignment of the tooltip to the icon-only button.
+   * Can be one of: `start`, `center`, or `end`.
+   */
+  tooltipAlignment?: 'start' | 'center' | 'end';
+
+  /**
+   * Specify the direction of the tooltip for the icon-only button.
+   * Can be either `top`, `right`, `bottom`, or `left`
+   */
+  tooltipPosition?: 'top' | 'right' | 'bottom' | 'left';
+
+  /**
+   * The input type, either `password` or `text`
+   */
+  type?: 'password' | 'text';
+
+  /**
+   * Provide the current value of the `<input>`
+   */
+  value?: string | number;
+
+  /**
+   * Specify whether the control is currently in warning state
+   */
+  warn?: boolean;
+
+  /**
+   * Provide the text that is displayed when the control is in warning state
+   */
+  warnText?: ReactNodeLike;
+}
 
 const PasswordInput = React.forwardRef(function PasswordInput(
   {
@@ -26,15 +182,16 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     onClick = () => {},
     onTogglePasswordVisibility,
     placeholder,
+    readOnly,
     size = 'md',
     showPasswordLabel = 'Show password',
     tooltipPosition = 'bottom',
     tooltipAlignment = 'center',
     type = 'password',
-    warn,
+    warn = false,
     warnText,
     ...rest
-  },
+  }: PasswordInputProps,
   ref
 ) {
   const [inputType, setInputType] = useState(type);
@@ -45,6 +202,8 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     invalidText,
     warn,
     warnText,
+    readOnly,
+    disabled,
   });
 
   const { isFluid } = useContext(FormContext);
@@ -180,6 +339,8 @@ const PasswordInput = React.forwardRef(function PasswordInput(
     setInputType(type);
   }, [type]);
 
+  const Icon = normalizedProps.icon as typeof React.Component;
+
   return (
     <div className={inputWrapperClasses}>
       {!inline ? (
@@ -194,9 +355,7 @@ const PasswordInput = React.forwardRef(function PasswordInput(
         <div
           className={fieldWrapperClasses}
           data-invalid={normalizedProps.invalid || null}>
-          {normalizedProps.icon && (
-            <normalizedProps.icon className={iconClasses} />
-          )}
+          {Icon && <Icon className={iconClasses} />}
           {input}
           {isFluid && !inline && normalizedProps.validation}
         </div>
@@ -306,9 +465,7 @@ PasswordInput.propTypes = {
   /**
    * Specify the size of the Text Input. Supports `sm`, `md`, or `lg`.
    */
-  size: FeatureFlags.enabled('enable-v11-release')
-    ? PropTypes.oneOf(['sm', 'md', 'lg'])
-    : PropTypes.string,
+  size: PropTypes.oneOf(['sm', 'md', 'lg']),
 
   /**
    * Specify the alignment of the tooltip to the icon-only button.

@@ -1079,6 +1079,15 @@
       ]
     },
     {
+      "login": "aze3ma",
+      "name": "Mahmoud Abdulazim",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6822318?v=4",
+      "profile": "https://www.github.com/aze3ma",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "davesteinberg",
       "name": "Dave Steinberg",
       "avatar_url": "https://avatars.githubusercontent.com/u/3935584?v=4",
@@ -1095,6 +1104,24 @@
       "contributions": [
         "code",
         "a11y"
+      ]
+    },
+    {
+      "login": "shryoo-ibm",
+      "name": "Seong-Hyun Ryoo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/106095943?s=96&v=4",
+      "profile": "https://seongryoo.github.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "gerzonc",
+      "name": "Gerzon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36211892?v=4",
+      "profile": "https://github.com/gerzonc",
+      "contributions": [
+        "code"
       ]
     }
   ],

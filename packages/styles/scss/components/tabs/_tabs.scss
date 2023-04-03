@@ -299,8 +299,23 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       height: rem(48px);
       padding: $spacing-03 $spacing-05;
       border-bottom: 0;
+    }
+
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
+      .#{$prefix}--tabs__nav-item-label {
       // height - vertical padding
       line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    }
+
+    &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item-secondary-label {
+      @include type-style('label-01');
+
+      min-height: rem(16px);
+    }
+
+    &.#{$prefix}--tabs--contained.#{$prefix}--tabs--tall
+      .#{$prefix}--tabs__nav-link {
+      height: rem(64px);
     }
 
     //-----------------------------
@@ -319,6 +334,10 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       align-items: center;
       justify-content: center;
       padding: 0;
+
+      .#{$prefix}--tabs__nav-item-label {
+        line-height: 0;
+      }
     }
 
     &.#{$prefix}--tabs__icon--lg {
@@ -363,11 +382,17 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       color: $text-primary;
     }
 
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
+      .#{$prefix}--tabs__nav-item--selected,
+    &.#{$prefix}--tabs--contained:not(.#{$prefix}--tabs--tall)
+      .#{$prefix}--tabs__nav-item--selected:hover {
+      // height - vertical padding
+      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
+    }
+
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected,
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--selected:hover {
       background-color: $layer;
-      // height - vertical padding
-      line-height: calc(#{rem(48px)} - (#{$spacing-03} * 2));
 
       .#{$prefix}--tabs__nav-link:focus,
       .#{$prefix}--tabs__nav-link:active {

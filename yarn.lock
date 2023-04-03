@@ -2025,7 +2025,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/react@^1.25.0, @carbon/react@workspace:packages/react":
+"@carbon/react@^1.26.0, @carbon/react@workspace:packages/react":
   version: 0.0.0-use.local
   resolution: "@carbon/react@workspace:packages/react"
   dependencies:
@@ -2040,7 +2040,7 @@ __metadata:
     "@carbon/feature-flags": ^0.13.0
     "@carbon/icons-react": ^11.17.0
     "@carbon/layout": ^11.12.0
-    "@carbon/styles": ^1.25.0
+    "@carbon/styles": ^1.26.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.27.0
     "@carbon/themes": ^11.17.0
@@ -2139,7 +2139,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@carbon/styles@^1.25.0, @carbon/styles@workspace:packages/styles":
+"@carbon/styles@^1.26.0, @carbon/styles@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@carbon/styles@workspace:packages/styles"
   dependencies:
@@ -11245,8 +11245,8 @@ __metadata:
     "@babel/plugin-transform-react-constant-elements": ^7.17.12
     "@babel/preset-env": ^7.18.2
     "@babel/preset-react": ^7.17.12
-    "@carbon/react": ^1.25.0
-    "@carbon/styles": ^1.25.0
+    "@carbon/react": ^1.26.0
+    "@carbon/styles": ^1.26.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.27.0
     "@rollup/plugin-babel": ^6.0.0
@@ -11285,7 +11285,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "carbon-components@workspace:packages/carbon-components"
   dependencies:
-    "@carbon/styles": ^1.25.0
+    "@carbon/styles": ^1.26.0
     "@carbon/telemetry": 0.1.0
     "@carbon/test-utils": ^10.27.0
     chalk: 1.1.3
@@ -11659,7 +11659,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "class-prefix@workspace:examples/class-prefix"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -12024,7 +12024,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-styles@workspace:examples/codesandbox-styles"
   dependencies:
-    "@carbon/styles": ^1.25.0
+    "@carbon/styles": ^1.26.0
     sass: ^1.51.0
     vite: ^2.8.0
   languageName: unknown
@@ -12034,7 +12034,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox-with-sass-compilation@workspace:examples/codesandbox-with-sass-compilation"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -12046,7 +12046,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "codesandbox@workspace:examples/codesandbox"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     react: ^17.0.0
     react-dom: ^17.0.0
     react-scripts: 5.0.0
@@ -13325,7 +13325,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "custom-theme@workspace:examples/custom-theme"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -15118,6 +15118,7 @@ __metadata:
     eslint-plugin-cypress: ^2.12.1
     eslint-plugin-import: ^2.27.5
     eslint-plugin-jest: ^26.9.0
+    eslint-plugin-jest-dom: ^4.0.3
     eslint-plugin-jsdoc: ^40.0.0
     eslint-plugin-jsx-a11y: ^6.7.1
     eslint-plugin-prettier: ^4.2.1
@@ -15309,6 +15310,19 @@ __metadata:
   peerDependencies:
     eslint: ^2 || ^3 || ^4 || ^5 || ^6 || ^7.2.0 || ^8
   checksum: f500571a380167e25d72a4d925ef9a7aae8899eada57653e5f3051ec3d3c16d08271fcefe41a30a9a2f4fefc232f066253673ee4ea77b30dba65ae173dade85d
+  languageName: node
+  linkType: hard
+
+"eslint-plugin-jest-dom@npm:^4.0.3":
+  version: 4.0.3
+  resolution: "eslint-plugin-jest-dom@npm:4.0.3"
+  dependencies:
+    "@babel/runtime": ^7.16.3
+    "@testing-library/dom": ^8.11.1
+    requireindex: ^1.2.0
+  peerDependencies:
+    eslint: ^6.8.0 || ^7.0.0 || ^8.0.0
+  checksum: 6bd22cdb7951a4b9ac65fe35c7bdc3e44cbe09918c79535fa698433d730392ef7a6faa55468b84d1cb0303a923266a05d45e38278d88380b0f09c8e8f57c75de
   languageName: node
   linkType: hard
 
@@ -15824,7 +15838,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-light-dark@workspace:examples/light-dark-mode"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     eslint: 8.12.0
     next: 12.1.4
     react: 18.0.0
@@ -15837,7 +15851,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "examples-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     eslint: 8.12.0
     eslint-config-next: 12.1.4
     next: 12.1.4
@@ -18365,7 +18379,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "id-prefix@workspace:examples/id-prefix"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -18525,7 +18539,7 @@ fsevents@^1.2.7:
   resolution: "incremental-migration@workspace:examples/incremental-migration"
   dependencies:
     "@carbon/icons-react": ^10.49.0
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     carbon-components: ^10.57.0
     carbon-components-react: ^7.57.0
     carbon-icons: ^7.0.7
@@ -27984,7 +27998,7 @@ fsevents@^1.2.7:
   languageName: node
   linkType: hard
 
-"requireindex@npm:^1.1.0":
+"requireindex@npm:^1.1.0, requireindex@npm:^1.2.0":
   version: 1.2.0
   resolution: "requireindex@npm:1.2.0"
   checksum: 50d8b10a1ff1fdf6aea7a1870bc7bd238b0fb1917d8d7ca17fd03afc38a65dcd7a8a4eddd031f89128b5f0065833d5c92c4fef67f2c04e8624057fe626c9cf94
@@ -32483,7 +32497,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "vite@workspace:examples/vite"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     "@types/react": ^18.0.0
     "@types/react-dom": ^18.0.0
     "@vitejs/plugin-react": 1.1.3
@@ -33574,7 +33588,7 @@ fsevents@^1.2.7:
   version: 0.0.0-use.local
   resolution: "www@workspace:www"
   dependencies:
-    "@carbon/react": ^1.25.0
+    "@carbon/react": ^1.26.0
     "@octokit/core": ^4.0.0
     "@octokit/plugin-retry": ^3.0.9
     "@octokit/plugin-throttling": ^4.0.0
