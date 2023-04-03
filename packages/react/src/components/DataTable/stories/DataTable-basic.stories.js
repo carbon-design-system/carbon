@@ -19,6 +19,7 @@ const {
 } = DataTable;
 
 import mdx from '../DataTable.mdx';
+import './datatable-story.scss';
 
 export default {
   title: 'Components/DataTable/Basic',
@@ -102,6 +103,128 @@ export const Default = () => {
 
   return (
     <Table size="lg" useZebraStyles={false}>
+      <TableHead>
+        <TableRow>
+          {headers.map((header) => (
+            <TableHeader id={header.key} key={header}>
+              {header}
+            </TableHeader>
+          ))}
+        </TableRow>
+      </TableHead>
+      <TableBody>
+        {rows.map((row) => (
+          <TableRow key={row.id}>
+            {Object.keys(row)
+              .filter((key) => key !== 'id')
+              .map((key) => {
+                return <TableCell key={key}>{row[key]}</TableCell>;
+              })}
+          </TableRow>
+        ))}
+      </TableBody>
+    </Table>
+  );
+};
+
+export const XLWithTwoLines = () => {
+  const rows = [
+    {
+      id: 'load-balancer-1',
+      name: (
+        <div className="sb-two-lines">
+          <p>Load Balancer 1</p>
+          <p>Austin, Tx</p>
+        </div>
+      ),
+      rule: 'Round robin',
+      Status: 'Starting',
+      other: 'Test',
+      example: '22',
+    },
+    {
+      id: 'load-balancer-2',
+      name: (
+        <div className="sb-two-lines">
+          <p>Load Balancer 2</p>
+          <p>Austin, Tx</p>
+        </div>
+      ),
+      rule: 'DNS delegation',
+      status: 'Active',
+      other: 'Test',
+      example: '22',
+    },
+    {
+      id: 'load-balancer-3',
+      name: (
+        <div className="sb-two-lines">
+          <p>Load Balancer 3</p>
+          <p>Austin, Tx</p>
+        </div>
+      ),
+      rule: 'Round robin',
+      status: 'Disabled',
+      other: 'Test',
+      example: '22',
+    },
+    {
+      id: 'load-balancer-4',
+      name: (
+        <div className="sb-two-lines">
+          <p>Load Balancer 4</p>
+          <p>Austin, Tx</p>
+        </div>
+      ),
+      rule: 'Round robin',
+      status: 'Disabled',
+      other: 'Test',
+      example: '22',
+    },
+    {
+      id: 'load-balancer-5',
+      name: (
+        <div className="sb-two-lines">
+          <p>Load Balancer 5</p>
+          <p>Austin, Tx</p>
+        </div>
+      ),
+      rule: 'Round robin',
+      status: 'Disabled',
+      other: 'Test',
+      example: '22',
+    },
+    {
+      id: 'load-balancer-6',
+      name: (
+        <div className="sb-two-lines">
+          <p>Load Balancer 6</p>
+          <p>Austin, Tx</p>
+        </div>
+      ),
+      rule: 'Round robin',
+      status: 'Disabled',
+      other: 'Test',
+      example: '22',
+    },
+    {
+      id: 'load-balancer-7',
+      name: (
+        <div className="sb-two-lines">
+          <p>Load Balancer 7</p>
+          <p>Austin, Tx</p>
+        </div>
+      ),
+      rule: 'Round robin',
+      status: 'Disabled',
+      other: 'Test',
+      example: '22',
+    },
+  ];
+  const headers = ['Name', 'Rule', 'Status', 'Other', 'Example'];
+
+  return (
+    <Table size="xl" useZebraStyles={false}>
       <TableHead>
         <TableRow>
           {headers.map((header) => (
