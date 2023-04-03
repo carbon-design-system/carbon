@@ -1,0 +1,106 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+$css--plex: true !default;
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/utilities/custom-property';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/breakpoint' as *;
+@use '@carbon/styles/scss/components/popover';
+
+:host(#{$prefix}-popover[highContrast]) {
+  ::slotted(#{$prefix}-popover-content) {
+    @extend .#{$prefix}--popover;
+  }
+}
+
+:host(#{$prefix}-popover[tabTip][open]) {
+  ::slotted(.#{$prefix}--popover--tab-tip__button) {
+    background: theme.$layer !important; /* stylelint-disable-line declaration-no-important */
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+}
+
+:host(#{$prefix}-popover-content[open]) {
+  .#{$prefix}--popover-content {
+    display: block;
+  }
+
+  &[tabTip] {
+    .#{$prefix}--popover-content {
+      border-radius: 0;
+      background: theme.$layer;
+    }
+  }
+  &[caret] {
+    .#{$prefix}--popover-caret {
+      display: block;
+    }
+  }
+}
+
+:host(#{$prefix}-popover-content[dropShadow]) {
+  @include custom-property.declaration(
+    'popover-drop-shadow',
+    drop-shadow(0 2px 2px rgba(0, 0, 0, 0.2))
+  );
+}
+
+:host(#{$prefix}-popover-content[align='bottom']) {
+  @extend .#{$prefix}--popover--bottom;
+}
+
+:host(#{$prefix}-popover-content[align='bottom-left']) {
+  @extend .#{$prefix}--popover--bottom-left;
+}
+
+:host(#{$prefix}-popover-content[align='bottom-right']) {
+  @extend .#{$prefix}--popover--bottom-right;
+}
+
+:host(#{$prefix}-popover-content[align='left']) {
+  @extend .#{$prefix}--popover--left;
+}
+
+:host(#{$prefix}-popover-content[align='left-bottom']) {
+  @extend .#{$prefix}--popover--left-bottom;
+}
+
+:host(#{$prefix}-popover-content[align='left-top']) {
+  @extend .#{$prefix}--popover--left-top;
+}
+
+:host(#{$prefix}-popover-content[align='right']) {
+  @extend .#{$prefix}--popover--right;
+}
+
+:host(#{$prefix}-popover-content[align='right-bottom']) {
+  @extend .#{$prefix}--popover--right-bottom;
+}
+
+:host(#{$prefix}-popover-content[align='right-top']) {
+  @extend .#{$prefix}--popover--right-top;
+}
+
+:host(#{$prefix}-popover-content[align='top']) {
+  @extend .#{$prefix}--popover--top;
+}
+
+:host(#{$prefix}-popover-content[align='top-left']) {
+  @extend .#{$prefix}--popover--top-left;
+}
+
+:host(#{$prefix}-popover-content[align='top-right']) {
+  @extend .#{$prefix}--popover--top-right;
+}
+
+:host(#{$prefix}-popover-content) {
+  @extend .#{$prefix}--popover;
+}

@@ -1,0 +1,123 @@
+/**
+ * @license
+ *
+ * Copyright IBM Corp. 2019, 2023
+ *
+ * This source code is licensed under the Apache-2.0 license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+@use '@carbon/styles/scss/config' as *;
+@use '@carbon/styles/scss/utilities' as *;
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
+
+/// Utilities
+.flex {
+  display: flex;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.align-end {
+  align-items: flex-end;
+}
+
+.justify-items-end {
+  justify-items: end;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.display-inline-block {
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}
+
+.mt-9 {
+  padding-top: 3rem;
+}
+
+.mt-10 {
+  padding-top: 4rem;
+}
+
+.p-3 {
+  padding: 1rem;
+}
+
+#{$prefix}-popover .playground-trigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid theme.$border-subtle;
+}
+
+#{$prefix}-popover .playground-trigger svg {
+  fill: theme.$background-inverse;
+}
+
+#{$prefix}-popover .popover-title {
+  @include type.type-style('heading-compact-01');
+  margin-bottom: spacing.$spacing-01;
+}
+
+#{$prefix}-popover .popover-details {
+  @include type.type-style('body-compact-01');
+}
+
+#{$prefix}-popover .popover-story {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.popover-tabtip-story .p-3 {
+  width: 16rem;
+}
+
+.popover-tabtip-story #{$prefix}-popover .cds--radio-button-wrapper {
+  margin-bottom: 0.5rem;
+}
+
+.popover-tabtip-story hr {
+  border: none;
+  background: theme.$border-subtle;
+  height: 1px;
+  margin: 8px 0 16px;
+}
+
+.popover-tabtip-story #{$prefix}-popover:last-of-type {
+  margin-left: 15rem;
+}

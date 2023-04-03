@@ -1,0 +1,42 @@
+<!--
+@license
+
+Copyright IBM Corp. 2020
+
+This source code is licensed under the Apache-2.0 license found in the
+LICENSE file in the root directory of this source tree.
+-->
+
+<html>
+<head>
+  <title>carbon-web-components example</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://1.www.s81c.com/common/carbon-for-ibm-dotcom/tag/v1/latest/plex.css"/>
+  <style>
+    /* Suppress custom element until styles are loaded */
+    cds-pagination:not(:defined) {
+      display: none;
+    }
+    .p-3 {
+      padding: 1rem;
+    }
+  </style>
+  <script type="module" src="src/index.js"></script>
+</head>
+<body>
+  <cds-popover open>
+    <div class="playground-trigger">
+      <svg id="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><defs><style>.cls-1{fill:none;}</style></defs><title>checkbox</title><path d="M26,4H6A2,2,0,0,0,4,6V26a2,2,0,0,0,2,2H26a2,2,0,0,0,2-2V6A2,2,0,0,0,26,4ZM6,26V6H26V26Z"/><rect id="_Transparent_Rectangle_" data-name="&lt;Transparent Rectangle&gt;" class="cls-1" width="32" height="32"/></svg>
+      </div>
+    <cds-popover-content>
+      <div class="p-3">
+        <p class="popover-title">Available storage</p>
+        <p class="popover-details">
+          This server has 150 GB of block storage remaining.
+        </p>
+      </div>
+    </cds-popover-content>
+  </cds-popover>
+</body>
+</html>
