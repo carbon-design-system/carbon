@@ -21,10 +21,11 @@ function Accordion({
   ...rest
 }) {
   const prefix = usePrefix();
+
   const className = cx(`${prefix}--accordion`, customClassName, {
     [`${prefix}--accordion--${align}`]: align,
-    [`${prefix}--accordion--${size}`]: size, // TODO: remove in v12
-    [`${prefix}--layout--size-${size}`]: size, // TODO: convert to hook?
+    [`${prefix}--accordion--${size}`]: size, // TODO: V12 - Remove this class
+    [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--accordion--flush`]: isFlush && align !== 'start',
   });
   return (

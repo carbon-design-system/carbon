@@ -46,8 +46,8 @@ const Tag = ({
   const tagClasses = classNames(`${prefix}--tag`, className, {
     [`${prefix}--tag--disabled`]: disabled,
     [`${prefix}--tag--filter`]: filter,
-    [`${prefix}--tag--${size}`]: size, // TODO: remove in v12
-    [`${prefix}--layout--size-${size}`]: size, // TODO: convert to hook?
+    [`${prefix}--tag--${size}`]: size, // TODO: V12 - Remove this class
+    [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--tag--${type}`]: type,
     [`${prefix}--tag--interactive`]: other.onClick && !filter,
   });

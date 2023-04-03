@@ -143,8 +143,8 @@ export default class ContentSwitcher extends React.Component {
 
     const classes = classNames(`${prefix}--content-switcher`, className, {
       [`${prefix}--content-switcher--light`]: light,
-      [`${prefix}--content-switcher--${size}`]: size, // TODO: remove in v12
-      [`${prefix}--layout--size-${size}`]: size, // TODO: convert to hook?
+      [`${prefix}--content-switcher--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
     });
 
     return (

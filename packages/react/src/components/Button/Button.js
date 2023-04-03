@@ -55,11 +55,11 @@ const Button = React.forwardRef(function Button(
 
   const buttonClasses = classNames(className, {
     [`${prefix}--btn`]: true,
-    [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive, // TODO: remove in v12
-    [`${prefix}--btn--md`]: size === 'md' && !isExpressive, // TODO: remove in v12
-    [`${prefix}--btn--xl`]: size === 'xl', // TODO: remove in v12
-    [`${prefix}--btn--2xl`]: size === '2xl', // TODO: remove in v12
-    [`${prefix}--layout--size-${size}`]: size, // TODO: convert to hook?
+    [`${prefix}--btn--sm`]: size === 'sm' && !isExpressive, // TODO: V12 - Remove this class
+    [`${prefix}--btn--md`]: size === 'md' && !isExpressive, // TODO: V12 - Remove this class
+    [`${prefix}--btn--xl`]: size === 'xl', // TODO: V12 - Remove this class
+    [`${prefix}--btn--2xl`]: size === '2xl', // TODO: V12 - Remove this class
+    [`${prefix}--layout--size-${size}`]: size,
     [`${prefix}--btn--${kind}`]: kind,
     [`${prefix}--btn--disabled`]: disabled,
     [`${prefix}--btn--expressive`]: isExpressive,

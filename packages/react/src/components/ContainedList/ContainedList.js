@@ -29,8 +29,8 @@ function ContainedList({
     `${prefix}--contained-list`,
     {
       [`${prefix}--contained-list--inset-rulers`]: isInset,
-      [`${prefix}--contained-list--${size}`]: size, // TODO: remove in v12
-      [`${prefix}--layout--size-${size}`]: size, // TODO: convert to hook?
+      [`${prefix}--contained-list--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
     },
     `${prefix}--contained-list--${kind}`,
     className

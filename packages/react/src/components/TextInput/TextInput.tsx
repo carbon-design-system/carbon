@@ -197,8 +197,8 @@ const TextInput = React.forwardRef(function TextInput(
       [`${prefix}--text-input--light`]: light,
       [`${prefix}--text-input--invalid`]: normalizedProps.invalid,
       [`${prefix}--text-input--warning`]: normalizedProps.warn,
-      [`${prefix}--text-input--${size}`]: size, // TODO: remove in v12
-      [`${prefix}--layout--size-${size}`]: size, // TODO: convert to hook?
+      [`${prefix}--text-input--${size}`]: size, // TODO: V12 - Remove this class
+      [`${prefix}--layout--size-${size}`]: size,
     }
   );
   const sharedTextInputProps = {
