@@ -27,6 +27,7 @@ describe('Carbon Components React', () => {
         "ButtonSet",
         "ButtonSkeleton",
         "Checkbox",
+        "CheckboxGroup",
         "CheckboxSkeleton",
         "ClassPrefix",
         "ClickableTile",
