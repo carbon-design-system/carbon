@@ -19,12 +19,12 @@ describe('Row', () => {
 
   it('should include a custom className', () => {
     const { container } = render(<Row className="test" />);
-    expect(container.firstChild.classList.contains('test')).toBe(true);
+    expect(container.firstChild).toHaveClass('test');
   });
 
   it('should pass un-used props to the top-level node that is rendered', () => {
     const { container } = render(<Row id="test" />);
-    expect(container.firstChild.getAttribute('id')).toBe('test');
+    expect(container.firstChild).toHaveAttribute('id', 'test');
   });
 
   it('should render `children` that are given', () => {
