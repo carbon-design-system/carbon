@@ -5,14 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import PropTypes, {ReactNodeLike} from 'prop-types';
+import PropTypes, { ReactNodeLike } from 'prop-types';
 import React, {
   useContext,
   useEffect,
   useRef,
   useImperativeHandle,
   useCallback,
-  useState, ChangeEventHandler, ForwardedRef,
+  useState,
+  ChangeEventHandler,
+  ForwardedRef,
 } from 'react';
 import cx from 'classnames';
 import flatpickr from 'flatpickr';
@@ -27,7 +29,7 @@ import { usePrefix } from '../../internal/usePrefix';
 import { useSavedCallback } from '../../internal/useSavedCallback';
 import { FormContext } from '../FluidForm';
 import { WarningFilled, WarningAltFilled } from '@carbon/icons-react';
-import {ReactAttr} from "../../types/common";
+import { ReactAttr } from '../../types/common';
 //import {FlatpickrFn} from "flatpickr/dist/types/instance";
 
 // Weekdays shorthand for english locale
@@ -186,23 +188,21 @@ function updateClassNames(calendar, prefix) {
   }
 }
 type ExcludedAttributes = 'value' | 'onChange' | 'locale';
-export type DatePickerTypes = 'simple' | 'single' | 'range'
+export type DatePickerTypes = 'simple' | 'single' | 'range';
 export type CalRef = {
-  inline:boolean,
-  disableMobile: boolean,
-  defaultDate: Date,
-  closeOnSelect: (evt: React.ChangeEvent<HTMLTextAreaElement>) => void,
-  mode: 'simple' | 'single' | 'range',
-  allowInput: boolean,
-  dateFormat: string,
-  locale: string,
-  plugins: [],
-  clickOpens: any
-
+  inline: boolean;
+  disableMobile: boolean;
+  defaultDate: Date;
+  closeOnSelect: (evt: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  mode: 'simple' | 'single' | 'range';
+  allowInput: boolean;
+  dateFormat: string;
+  locale: string;
+  plugins: [];
+  clickOpens: any;
 };
 interface DatePickerProps
-  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes>
-{
+  extends Omit<ReactAttr<HTMLDivElement>, ExcludedAttributes> {
   /**
    * flatpickr prop passthrough. Allows the user to enter a date directly
    * into the input field
@@ -276,67 +276,71 @@ interface DatePickerProps
   /**
    *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
    */
-  locale?: string | any | 'ar' | // Arabic
-    'at' | // Austria
-    'az' | // Azerbaijan
-    'be' | // Belarusian
-    'bg' | // Bulgarian
-    'bn' | // Bangla
-    'bs' | // Bosnia
-    'cat' | // Catalan
-    'cs' | // Czech
-    'cy' | // Welsh
-    'da' | // Danish
-    'de' | // German
-    'en' | // English
-    'eo' | // Esperanto
-    'es' | // Spanish
-    'et' | // Estonian
-    'fa' | // Persian
-    'fi' | // Finnish
-    'fo' | // Faroese
-    'fr' | // French
-    'ga' | // Gaelic
-    'gr' | // Greek
-    'he' | // Hebrew
-    'hi' | // Hindi
-    'hr' | // Croatian
-    'hu' | // Hungarian
-    'id' | // Indonesian
-    'is' | // Icelandic
-    'it' | // Italian
-    'ja' | // Japanese
-    'ka' | // Georgian
-    'km' | // Khmer
-    'ko' | // Korean
-    'kz' | // Kazakh
-    'lt' | // Lithuanian
-    'lv' | // Latvian
-    'mk' | // Macedonian
-    'mn' | // Mongolian
-    'ms' | // Malaysian
-    'my' | // Burmese
-    'nl' | // Dutch
-    'no' | // Norwegian
-    'pa' | // Punjabi
-    'pl' | // Polish
-    'pt' | // Portuguese
-    'ro' | // Romanian
-    'ru' | // Russian
-    'si' | // Sinhala
-    'sk' | // Slovak
-    'sl' | // Slovenian
-    'sq' | // Albanian
-    'sr' | // Serbian
-    'sv' | // Swedish
-    'th' | // Thai
-    'tr' | // Turkish
-    'uk' | // Ukrainian
-    'uz' | // Uzbek
-    'uz_latn' | // Uzbek Latin
-    'vn' | // Vietnamese
-    'zh_tw' | // Mandarin Traditional
-    'zh' | undefined // Mandarin;
+  locale?:
+    | string
+    | any
+    | 'ar' // Arabic
+    | 'at' // Austria
+    | 'az' // Azerbaijan
+    | 'be' // Belarusian
+    | 'bg' // Bulgarian
+    | 'bn' // Bangla
+    | 'bs' // Bosnia
+    | 'cat' // Catalan
+    | 'cs' // Czech
+    | 'cy' // Welsh
+    | 'da' // Danish
+    | 'de' // German
+    | 'en' // English
+    | 'eo' // Esperanto
+    | 'es' // Spanish
+    | 'et' // Estonian
+    | 'fa' // Persian
+    | 'fi' // Finnish
+    | 'fo' // Faroese
+    | 'fr' // French
+    | 'ga' // Gaelic
+    | 'gr' // Greek
+    | 'he' // Hebrew
+    | 'hi' // Hindi
+    | 'hr' // Croatian
+    | 'hu' // Hungarian
+    | 'id' // Indonesian
+    | 'is' // Icelandic
+    | 'it' // Italian
+    | 'ja' // Japanese
+    | 'ka' // Georgian
+    | 'km' // Khmer
+    | 'ko' // Korean
+    | 'kz' // Kazakh
+    | 'lt' // Lithuanian
+    | 'lv' // Latvian
+    | 'mk' // Macedonian
+    | 'mn' // Mongolian
+    | 'ms' // Malaysian
+    | 'my' // Burmese
+    | 'nl' // Dutch
+    | 'no' // Norwegian
+    | 'pa' // Punjabi
+    | 'pl' // Polish
+    | 'pt' // Portuguese
+    | 'ro' // Romanian
+    | 'ru' // Russian
+    | 'si' // Sinhala
+    | 'sk' // Slovak
+    | 'sl' // Slovenian
+    | 'sq' // Albanian
+    | 'sr' // Serbian
+    | 'sv' // Swedish
+    | 'th' // Thai
+    | 'tr' // Turkish
+    | 'uk' // Ukrainian
+    | 'uz' // Uzbek
+    | 'uz_latn' // Uzbek Latin
+    | 'vn' // Vietnamese
+    | 'zh_tw' // Mandarin Traditional
+    | 'zh'
+    | undefined; // Mandarin;
 
   /**
    * The maximum date that a user can pick to.
@@ -425,7 +429,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   const prefix = usePrefix();
   const { isFluid } = useContext(FormContext);
   const [hasInput, setHasInput] = useState(false);
-  const startInputField:any = useCallback((node) => {
+  const startInputField: any = useCallback((node) => {
     if (node !== null) {
       startInputField.current = node;
       setHasInput(true);
@@ -462,7 +466,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   
   const savedOnOpen = useSavedCallback(onOpen);
   const endInputField = useRef<HTMLTextAreaElement>(null);
-  const calendarRef:any | undefined = useRef(null);
+  const calendarRef: any | undefined = useRef(null);
   const savedOnChange = useSavedCallback(() => onChange);
   const savedOnClose = useSavedCallback(datePickerType === 'range' ? onCalendarClose : onClose);
   const savedOnOpen = useSavedCallback(() => onOpen);
@@ -474,12 +478,14 @@ const DatePicker = React.forwardRef(function DatePicker(
     [`${prefix}--date-picker--single`]: datePickerType === 'single',
     [`${prefix}--date-picker--range`]: datePickerType === 'range',
     [`${prefix}--date-picker--nolabel`]:
-    datePickerType === 'range' && isLabelTextEmpty(children),
+      datePickerType === 'range' && isLabelTextEmpty(children),
   });
-  const wrapperClasses = cx(`${prefix}--form-item`, { [String(className)]: className });
+  const wrapperClasses = cx(`${prefix}--form-item`, {
+    [String(className)]: className,
+  });
 
   const childrenWithProps = React.Children.toArray(children).map(
-    (child:any, index) => {
+    (child: any, index) => {
       if (
         index === 0 &&
         child.type === React.createElement(DatePickerInput, child.props).type
@@ -529,7 +535,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       if (startInputField?.current) {
         startInputField.current.readOnly = readOnly;
       }
-      if (endInputField?.current ) {
+      if (endInputField?.current) {
         endInputField.current.readOnly = readOnly;
       }
     };
@@ -556,7 +562,7 @@ const DatePicker = React.forwardRef(function DatePicker(
 
     const { current: start } = startInputField;
     const { current: end } = endInputField;
-    const  flatpickerconfig:any = {
+    const flatpickerconfig: any = {
       inline: inline ?? false,
       disableMobile: true,
       defaultDate: value,
@@ -576,8 +582,8 @@ const DatePicker = React.forwardRef(function DatePicker(
           : () => {},
         appendTo
           ? carbonFlatpickrAppendToPlugin({
-            appendTo,
-          })
+              appendTo,
+            })
           : () => {},
         carbonFlatpickrMonthSelectPlugin({
           selectorFlatpickrMonthYearContainer: '.flatpickr-current-month',
@@ -604,7 +610,7 @@ const DatePicker = React.forwardRef(function DatePicker(
       onReady: onHook,
       onMonthChange: onHook,
       onYearChange: onHook,
-      onOpen: (...args:[any, string, string, string]) => {
+      onOpen: (...args: [any, string, string, string]) => {
         onHook(...args);
         savedOnOpen(...args);
       },
@@ -629,12 +635,12 @@ const DatePicker = React.forwardRef(function DatePicker(
           calendarContainer.querySelector('.selected') && fpSelectedDateElem;
         const todayDateElem =
           calendarContainer.querySelector('.today') && fptodayDateElem;
-        ((
-          selectedDateElem ||
-          todayDateElem ||
-          calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
-          calendarContainer
-        ) as HTMLElement).focus();
+        (
+          (selectedDateElem ||
+            todayDateElem ||
+            calendarContainer.querySelector('.flatpickr-day[tabindex]') ||
+            calendarContainer) as HTMLElement
+        ).focus();
       }
     }
 
@@ -720,7 +726,7 @@ const DatePicker = React.forwardRef(function DatePicker(
   // this hook allows consumers to access the flatpickr calendar
   // instance for cases where functions like open() or close()
   // need to be imperatively called on the calendar
-  useImperativeHandle(ref, ():any => ({
+  useImperativeHandle(ref, (): any => ({
     get calendar() {
       return calendarRef.current;
     },
@@ -881,7 +887,7 @@ DatePicker.propTypes = {
   light: deprecate(
     PropTypes.bool,
     'The `light` prop for `DatePicker` has ' +
-    'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
+      'been deprecated in favor of the new `Layer` component. It will be removed in the next major release.'
   ),
   /**
    *  The language locale used to format the days of the week, months, and numbers. The full list of supported locales can be found here https://github.com/flatpickr/flatpickr/tree/master/src/l10n
