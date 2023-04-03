@@ -1114,6 +1114,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "gerzonc",
+      "name": "Gerzon",
+      "avatar_url": "https://avatars.githubusercontent.com/u/36211892?v=4",
+      "profile": "https://github.com/gerzonc",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "commitConvention": "none"
