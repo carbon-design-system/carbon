@@ -121,23 +121,32 @@ Selectable.argTypes = {
   },
 };
 
-export const MultiSelect = () => {
+export const MultiSelect = (args) => {
   return (
     <div
       role="group"
       aria-label="selectable tiles"
       className={experimentalClassname}>
-      <SelectableTile id="selectable-tile-1" name="tiles">
+      <SelectableTile id="selectable-tile-1" name="tiles" {...args}>
         Option 1
       </SelectableTile>
-      <SelectableTile id="selectable-tile-2" name="tiles">
+      <SelectableTile id="selectable-tile-2" name="tiles" {...args}>
         Option 2
       </SelectableTile>
-      <SelectableTile id="selectable-tile-3" name="tiles">
+      <SelectableTile id="selectable-tile-3" name="tiles" {...args}>
         Option 3
       </SelectableTile>
     </div>
   );
+};
+
+MultiSelect.argTypes = {
+  disabled: {
+    control: {
+      type: 'boolean',
+    },
+    defaultValue: false,
+  },
 };
 
 export const Radio = (args) => {
