@@ -175,7 +175,6 @@ describe('TextArea', () => {
 
     it('should respect rows prop', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" rows={25} />);
-
       expect(screen.getByRole('textbox')).toHaveAttribute('rows', '25');
     });
 
