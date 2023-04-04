@@ -17,6 +17,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     align,
     children,
     className,
+    closeOnActivation = true,
     defaultOpen = false,
     enterDelayMs,
     kind,
@@ -31,7 +32,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     <Tooltip
       align={align}
       className={`${prefix}--icon-tooltip`}
-      closeOnActivation
+      closeOnActivation={closeOnActivation}
       defaultOpen={defaultOpen}
       enterDelayMs={enterDelayMs}
       label={label}
@@ -72,6 +73,11 @@ IconButton.propTypes = {
    * Specify an optional className to be added to your Button
    */
   className: PropTypes.string,
+
+  /**
+   * Determines whether the tooltip should close when inner content is activated (click, Enter or Space)
+   */
+  closeOnActivation: PropTypes.bool,
 
   /**
    * Specify whether the tooltip should be open when it first renders
