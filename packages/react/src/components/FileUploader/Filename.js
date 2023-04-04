@@ -11,7 +11,7 @@ import React from 'react';
 import Loading from '../Loading';
 import { usePrefix } from '../../internal/usePrefix';
 
-function Filename({ iconDescription, status, invalid, ...rest }) {
+function Filename({ iconDescription, status, invalid, name, ...rest }) {
   const prefix = usePrefix();
   switch (status) {
     case 'uploading':
@@ -23,7 +23,7 @@ function Filename({ iconDescription, status, invalid, ...rest }) {
         <>
           {invalid && <WarningFilled className={`${prefix}--file-invalid`} />}
           <button
-            aria-label={iconDescription}
+            aria-label={`${iconDescription} - ${name}`}
             className={`${prefix}--file-close`}
             type="button"
             {...rest}>
@@ -56,6 +56,11 @@ Filename.propTypes = {
    * Specify if the file is invalid
    */
   invalid: PropTypes.bool,
+
+  /**
+   * Name of the uploaded file
+   */
+  name: PropTypes.string,
 
   /**
    * Status of the file upload

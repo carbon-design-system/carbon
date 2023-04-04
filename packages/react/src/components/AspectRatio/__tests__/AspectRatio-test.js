@@ -53,7 +53,7 @@ describe('AspectRatio', () => {
 
       const container = document.querySelector('[data-testid="test"]');
       expect(container).not.toBe(null);
-      expect(container.classList.contains('test')).toBe(true);
+      expect(container).toHaveClass('test');
     });
 
     it('should forward extra props to the outermost node', () => {
@@ -66,7 +66,7 @@ describe('AspectRatio', () => {
       );
       const container = mountNode.firstChild;
       expect(container).not.toBe(null);
-      expect(container.getAttribute('data-testid')).toBe('test');
+      expect(container).toHaveAttribute('data-testid');
 
       Simulate.click(container);
       expect(onClick).toHaveBeenCalledTimes(1);
@@ -95,7 +95,7 @@ describe('AspectRatio', () => {
       expect(article).not.toBe(null);
 
       // Make sure props are forwarded to a custom base component
-      expect(article.classList.contains('test')).toBe(true);
+      expect(article).toHaveClass('test');
     });
   });
 });

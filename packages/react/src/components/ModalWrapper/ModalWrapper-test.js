@@ -180,7 +180,7 @@ describe('ModalWrapper', () => {
 
     expect(handleSubmit).toHaveBeenCalled();
     setTimeout(() => {
-      expect(document.activeElement).toEqual(triggerBtn);
+      expect(triggerBtn).toHaveFocus();
     }, 0);
   });
 });
