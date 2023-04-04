@@ -54,6 +54,19 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
+  align: {
+    options: [
+      'top',
+      'top-left',
+      'top-right',
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+      'left',
+      'right',
+    ],
+    control: { type: 'select' },
+  },
   ariaLabel: {
     table: {
       disable: true,
