@@ -6,9 +6,12 @@
  */
 
 import React from 'react';
-import ContentSwitcher from './ContentSwitcher';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import Switch from '../Switch';
-import { Layer } from '../Layer';
+
+import ContentSwitcher from './ContentSwitcher';
 import mdx from './ContentSwitcher.mdx';
 
 export default {
@@ -39,31 +42,15 @@ export const Default = () => (
   </ContentSwitcher>
 );
 
-export const WithLayer = () => {
-  return (
-    <>
-      <ContentSwitcher onChange={() => {}}>
-        <Switch name="one" text="First section" />
-        <Switch name="two" text="Second section" />
-        <Switch name="three" text="Third section" />
-      </ContentSwitcher>
-      <Layer>
-        <ContentSwitcher onChange={() => {}}>
-          <Switch name="one" text="First section" />
-          <Switch name="two" text="Second section" />
-          <Switch name="three" text="Third section" />
-        </ContentSwitcher>
-        <Layer>
-          <ContentSwitcher onChange={() => {}}>
-            <Switch name="one" text="First section" />
-            <Switch name="two" text="Second section" />
-            <Switch name="three" text="Third section" />
-          </ContentSwitcher>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+export const _WithLayer = () => (
+  <WithLayer>
+    <ContentSwitcher onChange={() => {}}>
+      <Switch name="one" text="First section" />
+      <Switch name="two" text="Second section" />
+      <Switch name="three" text="Third section" />
+    </ContentSwitcher>
+  </WithLayer>
+);
 
 export const Playground = (args) => (
   <ContentSwitcher {...args}>
