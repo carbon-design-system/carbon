@@ -227,9 +227,36 @@ const DatePicker = React.forwardRef(function DatePicker(
 
   const lastStartValue = useRef('');
 
+  // fix datepicker deleting the selectedDate when the calendar closes
+  const onCalendarClose = (selectedDates, dateStr) => {
+    setTimeout(() => {
+      if (
+        lastStartValue.current &&
+        selectedDates[0] &&
+        !startInputField.current.value
+      ) {
+        startInputField.current.value = lastStartValue.current;
+        calendarRef.current.setDate(
+          [startInputField.current.value, endInputField.current.value],
+          true,
+          calendarRef.current.config.dateFormat
+        );
+      }
+      if (onClose) {
+        onClose(
+          calendarRef.current.selectedDates,
+          dateStr,
+          calendarRef.current
+        );
+      }
+    });
+  };
+
   const calendarRef = useRef(null);
   const savedOnChange = useSavedCallback(onChange);
-  const savedOnClose = useSavedCallback(onClose);
+  const savedOnClose = useSavedCallback(
+    datePickerType === 'range' ? onCalendarClose : onClose
+  );
   const savedOnOpen = useSavedCallback(onOpen);
 
   const datePickerClasses = cx(`${prefix}--date-picker`, {
