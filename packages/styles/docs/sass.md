@@ -777,21 +777,21 @@ classes.
 @use '@carbon/styles/scss/utilities/layout';
 
 @include layout.redefine-tokens(
-  $selector: '.my-component',
   // for which selector these tokens should be defined
+  $selector: '.my-component',
+
+  // all applicable overrides, must follow ( group: ( step: ( property: value ) ) )
   $overrides:
     (
-      // all applicable overrides, Must follow ( group: ( step: ( property: value ) ) )
-      size:
+      size: (
+        sm: (
+          height: 1.125rem,
+        )
+        md:
         (
-          sm: (
-            height: 1.125rem,
-          )
-          md:
-          (
-            height: 1.5rem,
-          )
+          height: 1.5rem,
         ),
+      )
     )
 );
 
