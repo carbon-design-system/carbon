@@ -73,7 +73,6 @@ describe('TextArea', () => {
 
     it('should respect id prop', () => {
       render(<TextArea id="textarea-1" labelText="TextArea label" />);
-
       expect(screen.getByRole('textbox')).toHaveAttribute('id', 'textarea-1');
     });
 
