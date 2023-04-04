@@ -60,6 +60,95 @@ describe('Checkbox', () => {
     expect(screen.getByText('test-label')).toHaveClass('cds--visually-hidden');
   });
 
+  it('should render helperText', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        helperText="Helper text"
+      />
+    );
+
+    expect(screen.getByText('Helper text')).toBeInTheDocument();
+  });
+
+  it('should set data-invalid when invalid prop is true', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+      />
+    );
+
+    expect(screen.getByRole('checkbox')).toHaveAttribute(
+      'data-invalid',
+      'true'
+    );
+  });
+
+  it('should display invalidText if invalid prop is true', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        invalid
+        invalidText="Invalid text"
+      />
+    );
+
+    expect(screen.getByText('Invalid text')).toBeInTheDocument();
+  });
+
+  it('should respect readOnly prop', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        readOnly
+      />
+    );
+
+    expect(container.firstChild).toHaveClass(`cds--checkbox-wrapper--readonly`);
+  });
+
+  it('should respect warn prop', () => {
+    const { container } = render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        warn
+      />
+    );
+
+    const warnIcon = container.querySelector(
+      `svg.cds--checkbox__invalid-icon--warning`
+    );
+
+    expect(container.firstChild).toHaveClass(`cds--checkbox-wrapper--warning`);
+    expect(warnIcon).toBeInTheDocument();
+  });
+
+  it('should display warnText if warn prop is true', () => {
+    render(
+      <Checkbox
+        defaultChecked
+        labelText="Checkbox label"
+        id="checkbox-label-1"
+        warn
+        warnText="Warn text"
+      />
+    );
+
+    expect(screen.getByText('Warn text')).toBeInTheDocument();
+    expect(screen.getByText('Warn text')).toHaveClass(`cds--form-requirement`);
+  });
+
   it('should call the `onChange` prop when the <input> value changes', () => {
     const onChange = jest.fn();
     render(<Checkbox id="test" labelText="test-label" onChange={onChange} />);
