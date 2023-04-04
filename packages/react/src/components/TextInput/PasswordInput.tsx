@@ -317,10 +317,11 @@ const PasswordInput = React.forwardRef(function PasswordInput(
           invalidId: normalizedProps.invalidId,
           warn: normalizedProps.warn,
           warnId: normalizedProps.warnId,
-          hasHelper:
-            Boolean(helperText &&
-            !isFluid &&
-            (inline || (!inline && !normalizedProps.validation))),
+          hasHelper: Boolean(
+            helperText &&
+              !isFluid &&
+              (inline || (!inline && !normalizedProps.validation))
+          ),
           helperId: normalizedProps.helperId,
         })}
         disabled={disabled}
