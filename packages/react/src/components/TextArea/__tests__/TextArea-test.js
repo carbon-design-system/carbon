@@ -187,7 +187,6 @@ describe('TextArea', () => {
           maxCount={500}
         />
       );
-
       expect(screen.getByRole('textbox')).toHaveAttribute('maxlength', '500');
       expect(screen.getByText('0/500')).toBeInTheDocument();
     });
