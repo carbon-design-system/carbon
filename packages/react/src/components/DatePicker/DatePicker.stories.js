@@ -6,10 +6,12 @@
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import DatePicker from './DatePicker';
 import DatePickerSkeleton from './DatePicker.Skeleton';
 import DatePickerInput from '../DatePickerInput';
-import { Layer } from '../Layer';
 import mdx from './DatePicker.mdx';
 
 export default {
@@ -73,128 +75,56 @@ export const RangeWithCalendar = () => {
   );
 };
 
-export const SimpleWithLayer = () => {
-  return (
-    <>
+export const SimpleWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <DatePicker datePickerType="simple">
         <DatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="Date Picker label"
-          id="date-picker-simple"
+          id={`date-picker-simple-${layer}`}
           size="md"
         />
       </DatePicker>
-      <Layer>
-        <DatePicker datePickerType="simple">
-          <DatePickerInput
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-            id="date-picker-simple"
-            size="md"
-          />
-        </DatePicker>
-        <Layer>
-          <DatePicker datePickerType="simple">
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Date Picker label"
-              id="date-picker-simple"
-              size="md"
-            />
-          </DatePicker>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
-export const SingleWithCalendarWithLayer = () => {
-  return (
-    <>
+export const SingleWithCalendarWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <DatePicker datePickerType="single">
         <DatePickerInput
           placeholder="mm/dd/yyyy"
           labelText="Date Picker label"
-          id="date-picker-single"
+          id={`date-picker-single-${layer}`}
           size="md"
         />
       </DatePicker>
-      <Layer>
-        <DatePicker datePickerType="single">
-          <DatePickerInput
-            placeholder="mm/dd/yyyy"
-            labelText="Date Picker label"
-            id="date-picker-single"
-            size="md"
-          />
-        </DatePicker>
-        <Layer>
-          <DatePicker datePickerType="single">
-            <DatePickerInput
-              placeholder="mm/dd/yyyy"
-              labelText="Date Picker label"
-              id="date-picker-single"
-              size="md"
-            />
-          </DatePicker>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
-export const RangeWithCalendarWithLayer = () => {
-  return (
-    <>
+export const RangeWithCalendarWithLayer = () => (
+  <WithLayer>
+    {(layer) => (
       <DatePicker datePickerType="range">
         <DatePickerInput
-          id="date-picker-input-id-start"
+          id={`date-picker-input-id-start-${layer}`}
           placeholder="mm/dd/yyyy"
           labelText="Start date"
           size="md"
         />
         <DatePickerInput
-          id="date-picker-input-id-finish"
+          id={`date-picker-input-id-finish-${layer}`}
           placeholder="mm/dd/yyyy"
           labelText="End date"
           size="md"
         />
       </DatePicker>
-      <Layer>
-        <DatePicker datePickerType="range">
-          <DatePickerInput
-            id="date-picker-input-id-start"
-            placeholder="mm/dd/yyyy"
-            labelText="Start date"
-            size="md"
-          />
-          <DatePickerInput
-            id="date-picker-input-id-finish"
-            placeholder="mm/dd/yyyy"
-            labelText="End date"
-            size="md"
-          />
-        </DatePicker>
-        <Layer>
-          <DatePicker datePickerType="range">
-            <DatePickerInput
-              id="date-picker-input-id-start"
-              placeholder="mm/dd/yyyy"
-              labelText="Start date"
-              size="md"
-            />
-            <DatePickerInput
-              id="date-picker-input-id-finish"
-              placeholder="mm/dd/yyyy"
-              labelText="End date"
-              size="md"
-            />
-          </DatePicker>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Skeleton = () => <DatePickerSkeleton range />;
 
