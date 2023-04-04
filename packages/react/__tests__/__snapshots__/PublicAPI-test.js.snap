@@ -9796,6 +9796,9 @@ Map {
       "invalidText": Object {
         "type": "node",
       },
+      "readOnly": Object {
+        "type": "bool",
+      },
       "warn": Object {
         "type": "bool",
       },
