@@ -54,6 +54,10 @@
     background-color: transparent;
   }
 
+  .#{$prefix}--combo-box--readonly .#{$prefix}--text-input {
+    border-bottom-color: $border-subtle;
+  }
+
   .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__menu-icon,
   .#{$prefix}--combo-box--readonly .#{$prefix}--list-box__selection {
     cursor: default;
