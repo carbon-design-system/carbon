@@ -112,6 +112,7 @@
   // Readonly
   //-----------------------------
   .#{$prefix}--text-area__wrapper--readonly .#{$prefix}--text-area {
+    border-bottom-color: $border-subtle;
     background: transparent;
   }
 
