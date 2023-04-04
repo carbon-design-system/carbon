@@ -108,17 +108,20 @@
     border-color: $layer-hover;
   }
 
-  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected {
     border-color: $layer-selected;
     background-color: $layer-selected;
   }
 
-  .#{$prefix}--structured-list-row--selected
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row--selected
     + .#{$prefix}--structured-list-row {
     border-color: $layer-selected;
   }
 
-  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
     .#{$prefix}--structured-list-td {
     color: $text-primary;
   }
@@ -135,7 +138,8 @@
   .#{$prefix}--structured-list--selection
     .#{$prefix}--structured-list-row:hover:not(.#{$prefix}--structured-list-row--header-row)
     > .#{$prefix}--structured-list-td,
-  .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
+  .#{$prefix}--structured-list--selection
+    .#{$prefix}--structured-list-row.#{$prefix}--structured-list-row--selected
     > .#{$prefix}--structured-list-td {
     color: $text-primary;
   }
