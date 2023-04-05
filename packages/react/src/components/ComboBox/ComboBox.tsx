@@ -496,6 +496,17 @@ const ComboBox = React.forwardRef((props: ComboBoxProps, ref) => {
                 event.persist();
               }
             }
+
+            if (match(event, keys.Home)) {
+              event.target.setSelectionRange(0, 0);
+            }
+
+            if (match(event, keys.End)) {
+              event.target.setSelectionRange(
+                event.target.value.length,
+                event.target.value.length
+              );
+            }
           },
         });
 
