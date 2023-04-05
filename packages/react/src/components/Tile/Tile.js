@@ -6,6 +6,7 @@ import {
   CheckboxCheckedFilled,
   ChevronDown,
   Error,
+  ArrowRight,
 } from '@carbon/icons-react';
 import Link from '../Link';
 import { keys, matches } from '../../internal/keyboard';
@@ -68,6 +69,7 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     light,
     onClick = () => {},
     onKeyDown = () => {},
+    renderIcon: Icon,
     ...rest
   },
   ref
@@ -101,6 +103,12 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
     onKeyDown(evt);
   }
 
+  const iconImage = !Icon ? (
+    <ArrowRight className={`${prefix}--tile--icon`} aria-hidden="true" />
+  ) : (
+    <Icon className={`${prefix}--tile--icon`} aria-hidden="true" />
+  );
+
   return (
     <Link
       className={classes}
@@ -111,7 +119,13 @@ export const ClickableTile = React.forwardRef(function ClickableTile(
       disabled={disabled}
       {...rest}>
       {children}
-      {disabled && <Error className={`${prefix}--tile--disabled-icon`} />}
+      {iconImage}
+      {disabled && (
+        <Error
+          className={`${prefix}--tile--disabled-icon`}
+          aria-hidden="true"
+        />
+      )}
     </Link>
   );
 });
@@ -166,6 +180,12 @@ ClickableTile.propTypes = {
    * The rel property for the link.
    */
   rel: PropTypes.string,
+
+  /**
+   * Optional prop to allow overriding the icon rendering.
+   * Can be a React component class
+   */
+  renderIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.object]),
 };
 
 export const SelectableTile = React.forwardRef(function SelectableTile(

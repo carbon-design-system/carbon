@@ -18,6 +18,7 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from './';
+import { Add } from '@carbon/icons-react';
 import TileGroup from '../TileGroup/TileGroup';
 import { Layer } from '../Layer';
 import './tile-story.scss';
@@ -95,6 +96,8 @@ export const Clickable = (args) => {
       <ClickableTile
         id="clickable-tile-1"
         href="https://www.carbondesignsystem.com/"
+        renderIcon={Add}
+        iconDescription="Icon Description"
         {...args}>
         Clickable Tile
       </ClickableTile>

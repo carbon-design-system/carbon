@@ -112,17 +112,26 @@
     }
   }
 
-  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
-    > svg:not(.#{$prefix}--tile--disabled-icon) {
-    display: none;
-  }
-
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--icon,
   .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
     .#{$prefix}--tile--disabled-icon {
     position: absolute;
     right: 1rem;
     bottom: 1rem;
+  }
+
+  .#{$prefix}--tile--clickable .#{$prefix}--tile--icon {
+    fill: $icon-interactive;
+  }
+
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--disabled-icon {
     fill: $icon-disabled;
+  }
+
+  .#{$prefix}--tile--clickable.#{$prefix}--link--disabled
+    .#{$prefix}--tile--icon {
+    display: none;
   }
 
   .#{$prefix}--tile--selectable {
