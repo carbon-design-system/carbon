@@ -6,6 +6,9 @@
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import FluidTextArea from '../FluidTextArea';
 import FluidTextAreaSkeleton from './FluidTextArea.Skeleton';
 import {
@@ -14,7 +17,6 @@ import {
   ToggletipButton,
   ToggletipContent,
 } from '../Toggletip';
-import { Layer } from '../Layer';
 import { Information } from '@carbon/icons-react';
 
 export default {
@@ -66,29 +68,15 @@ export const Default = () => (
 );
 
 export const DefaultWithLayers = () => (
-  <>
-    <FluidTextArea
-      labelText="Text Area label"
-      placeholder="Placeholder text"
-      id="text-area-1"
-    />
-    <br />
-    <Layer>
+  <WithLayer>
+    {(layer) => (
       <FluidTextArea
         labelText="Text Area label"
         placeholder="Placeholder text"
-        id="text-area-1"
+        id={`text-area-${layer}`}
       />
-      <br />
-      <Layer>
-        <FluidTextArea
-          labelText="Text Area label"
-          placeholder="Placeholder text"
-          id="text-area-1"
-        />
-      </Layer>
-    </Layer>
-  </>
+    )}
+  </WithLayer>
 );
 
 const ToggleTip = (
