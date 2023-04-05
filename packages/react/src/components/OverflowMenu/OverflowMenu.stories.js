@@ -54,7 +54,7 @@ export const Playground = (args) => (
 );
 
 Playground.argTypes = {
-  align: {
+  tooltipAlignment: {
     options: [
       'top',
       'top-left',
