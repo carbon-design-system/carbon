@@ -13,6 +13,8 @@ import { Copy as CopyIcon } from '@carbon/icons-react';
 
 jest.useFakeTimers();
 
+const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+
 describe('Copy', () => {
   it('should set tabIndex if one is passed via props', () => {
     render(
@@ -73,8 +75,10 @@ describe('Button props', () => {
       </Copy>
     );
 
-    const button = await screen.findByTestId('copy-button-4');
-    await userEvent.click(button);
+    const button = screen.getByTestId('copy-button-4');
+    console.log('hi1');
+    await user.click(button);
+    console.log('hi2');
     expect(onClick).toHaveBeenCalled();
   });
 });
@@ -91,7 +95,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-5');
-    await userEvent.click(button);
+    await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
     act(() => {
@@ -114,7 +118,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-6');
-    await userEvent.click(button);
+    await user.click(button);
     expect(screen.getAllByText('overriding-default-feedback').length).toBe(2);
   });
 
@@ -129,7 +133,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-button-7');
-    await userEvent.click(button);
+    await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
     act(() => {

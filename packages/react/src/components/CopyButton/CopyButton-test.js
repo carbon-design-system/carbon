@@ -11,6 +11,7 @@ import React from 'react';
 import CopyButton from '../CopyButton';
 
 jest.useFakeTimers();
+const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
 describe('CopyButton', () => {
   it('should set tabIndex if one is passed via props', () => {
@@ -62,7 +63,7 @@ describe('Button props', () => {
       />
     );
     const button = screen.getByTestId('copy-btn-4');
-    await userEvent.click(button);
+    await user.click(button);
     expect(onClick).toHaveBeenCalled();
   });
 });
@@ -74,7 +75,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-btn-5');
-    await userEvent.click(button);
+    await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
     act(() => {
@@ -95,7 +96,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-btn-6');
-    await userEvent.click(button);
+    await user.click(button);
     // returns array of 2 for visible tooltip text and assistive text
     expect(screen.getAllByText('custom-feedback').length).toBe(2);
   });
@@ -110,7 +111,7 @@ describe('Feedback', () => {
     );
 
     const button = screen.getByTestId('copy-btn-7');
-    await userEvent.click(button);
+    await user.click(button);
 
     expect(button).toHaveClass('cds--copy-btn--animating');
     act(() => {
