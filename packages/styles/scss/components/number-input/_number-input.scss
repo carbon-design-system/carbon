@@ -210,12 +210,10 @@
     input[type='number']:focus
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
 
     &:hover {
       @include focus-outline('outline');
-
-      border: 0;
     }
   }
 
@@ -223,7 +221,7 @@
     input[type='number'][data-invalid]
     ~ .#{$prefix}--number__controls
     .#{$prefix}--number__control-btn {
-    border-bottom-width: 0;
+    border-bottom-color: transparent;
   }
 
   // add invalid outline to number controls only when invalid input is not focused
@@ -449,6 +447,7 @@
 
   // Readonly
   .#{$prefix}--number--readonly input[type='number'] {
+    border-bottom-color: $border-subtle;
     background: transparent;
   }
 
