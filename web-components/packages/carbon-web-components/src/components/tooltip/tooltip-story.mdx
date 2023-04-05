@@ -9,9 +9,9 @@ import { cdnJs, cdnCss } from '../../globals/internal/storybook-cdn';
 
 [![Edit carbon-web-components](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/github/carbon-design-system/carbon-for-ibm-dotcom/tree/main/packages/carbon-web-components/examples/codesandbox/basic/components/tooltip)
 
-Tooltips provide additional information upon hover or focus. The information
+You can use the Tooltip component as a wrapper to display a popup for an interactive element that you provide. If you are trying to place interactive content inside of the Tooltip itself, consider using Toggletip instead. You can provide the interactive 
+element as a child to Tooltip. Tooltips provide additional information upon hover or focus. The information
 should be contextual, useful, and nonessential information. Keep tooltips short.
-
 ## Getting started
 
 Here's a quick example to get you started.
@@ -20,6 +20,7 @@ Here's a quick example to get you started.
 
 ```javascript
 import '@carbon/web-components/es/components/tooltip/index.js';
+import Information16 from '@carbon/icons/lib/information/16';
 ```
 
 <Description markdown={`${cdnJs({ components: ['tooltip'] })}`} />
@@ -28,31 +29,21 @@ import '@carbon/web-components/es/components/tooltip/index.js';
 ### HTML
 
 ```html
-<cds-tooltip>
-  <cds-tooltip-body>
-    <p>
-      This is some tooltip text. This box shows the maximum amount of text that
-      should appear inside. If more room is needed please use a modal instead.
-    </p>
-    <cds-tooltip-footer>
-      <a href="#" class="cds--link">Learn More</a
-      ><cds-btn kind="primary">Create</cds-btn>
-    </cds-tooltip-footer>
-  </cds-tooltip-body>
+<cds-tooltip
+  align="bottom">
+   <div class="sb-tooltip-trigger">
+  ${Information16()}
+  </div>
+  <cds-tooltip-content>
+    Occassionally, services are updated in a specified time window to ensure no down time for customers.
+  </cds-tooltip-content>
 </cds-tooltip>
 ```
-
-## Interactive tooltip (default)
-
-Interactive tooltips may contain rich text and other interactive elements like
-buttons or links. In general, hiding interactive content in a tooltip is
-discouraged. Interactive tooltips are best used for onboarding experiences and
-product tours.
-
-- If a user may need to visit an external resource, like while using a form,
-  include a link in your interactive tooltip
-- Don’t use without a label. Consider the context a user needs before clicking a
-  link
+## Toggletips vs Tooltips
+Toggletips and tooltips are similar visually and both contain a popover and interactive trigger element. 
+The two components differ in the way they are invoked and dismissed and if the user must interact with the contents. 
+A tooltip is exposed on hover or focus when you need to expose brief, supplemental information that is not interactive. 
+A toggletip is used on click or enter when you need to expose interactive elements, such as button, that a user needs to interact with.
 
 ### `<cds-tooltip>` attributes and properties
 
@@ -61,47 +52,3 @@ Note: For `boolean` attributes, `true` means simply setting the attribute (e.g.
 `<cds-tooltip>` without `open` attribute).
 
 <Props of="cds-tooltip" />
-
-## Definition tooltip
-
-The definition tooltip provides additional help or defines an item or term. It
-may be used on the label of a UI element, or on a word embedded in a paragraph.
-
-- Should contain brief, read-only text
-- Use on proper nouns, technical terms, or acronyms with two letters or more
-- Do not use a definition tooltip on words with fewer than two letters
-
-```html
-<cds-tooltip-definition
-  alignment="center"
-  body-text="Brief description of the dotted, underlined word above."
-  direction="bottom"
->
-  Definition Tooltip
-</cds-tooltip-definition>
-```
-
-### `<cds-tooltip-definition>` attributes and properties
-
-<Props of="cds-tooltip-definition" />
-
-## Icon tooltip
-
-An icon tooltip is used to clarify the action or name of an interactive icon
-button.
-
-- The tooltip content should only contain one or two words.
-
-```html
-<cds-tooltip-icon
-  alignment="center"
-  body-text="Brief description of the dotted, underlined word above."
-  direction="bottom"
->
-  ${Filter16()}
-</cds-tooltip-icon>
-```
-
-### `<cds-tooltip-icon>` attributes and properties
-
-<Props of="cds-tooltip-icon" />

@@ -18,22 +18,22 @@ import { ifDefined } from 'lit/directives/if-defined';
 import { prefix } from '../../globals/settings';
 import './toggletip';
 import '../button';
-import { TOOLTIP_ALIGNMENT } from '../tooltip/defs';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
 import storyDocs from './toggletip-story.mdx';
 
 const tooltipAlignments = {
-  [`top`]: TOOLTIP_ALIGNMENT.TOP,
-  [`top-left`]: TOOLTIP_ALIGNMENT.TOP_LEFT,
-  [`top-right`]: TOOLTIP_ALIGNMENT.TOP_RIGHT,
-  [`bottom`]: TOOLTIP_ALIGNMENT.BOTTOM,
-  [`bottom-left`]: TOOLTIP_ALIGNMENT.BOTTOM_LEFT,
-  [`bottom-right`]: TOOLTIP_ALIGNMENT.BOTTOM_RIGHT,
-  [`left`]: TOOLTIP_ALIGNMENT.LEFT,
-  [`left-bottom`]: TOOLTIP_ALIGNMENT.LEFT_BOTTOM,
-  [`left-top`]: TOOLTIP_ALIGNMENT.LEFT_TOP,
-  [`right`]: TOOLTIP_ALIGNMENT.RIGHT,
-  [`right-bottom`]: TOOLTIP_ALIGNMENT.RIGHT_BOTTOM,
-  [`right-top`]: TOOLTIP_ALIGNMENT.RIGHT_TOP,
+  [`top`]: POPOVER_ALIGNMENT.TOP,
+  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
+  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
+  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
+  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`left`]: POPOVER_ALIGNMENT.LEFT,
+  [`left-bottom`]: POPOVER_ALIGNMENT.LEFT_BOTTOM,
+  [`left-top`]: POPOVER_ALIGNMENT.LEFT_TOP,
+  [`right`]: POPOVER_ALIGNMENT.RIGHT,
+  [`right-bottom`]: POPOVER_ALIGNMENT.RIGHT_BOTTOM,
+  [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
 };
 
 export const Default = (args) => {
@@ -55,7 +55,7 @@ Default.parameters = {
       alignment: select(
         'Toggletip alignment to trigger button (alignment)',
         tooltipAlignments,
-        TOOLTIP_ALIGNMENT.BOTTOM
+        POPOVER_ALIGNMENT.BOTTOM
       ),
       bodyText: textNullable(
         'Toggletip content (bodyText)',

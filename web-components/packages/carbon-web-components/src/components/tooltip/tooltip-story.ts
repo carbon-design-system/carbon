@@ -8,75 +8,123 @@
  */
 
 import { html } from 'lit';
-import { boolean, number, select } from '@storybook/addon-knobs';
+import { boolean, number, select, text } from '@storybook/addon-knobs';
 // Below path will be there when an application installs `@carbon/web-components` package.
 // In our dev env, we auto-generate the file and re-map below path to to point to the generated file.
 // @ts-ignore
-import Filter16 from '@carbon/web-components/es/icons/filter/16';
-import '../button/button';
 import './tooltip';
-import './tooltip-body';
-import './tooltip-footer';
-import { TOOLTIP_ALIGNMENT } from './defs';
+import './tooltip-content';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
 import { prefix } from '../../globals/settings';
 import styles from './tooltip-story.scss';
 import storyDocs from './tooltip-story.mdx';
+import Information16 from '@carbon/icons/lib/information/16';
 
 const tooltipAlignments = {
-  [`top`]: TOOLTIP_ALIGNMENT.TOP,
-  [`top-left`]: TOOLTIP_ALIGNMENT.TOP_LEFT,
-  [`top-right`]: TOOLTIP_ALIGNMENT.TOP_RIGHT,
-  [`bottom`]: TOOLTIP_ALIGNMENT.BOTTOM,
-  [`bottom-left`]: TOOLTIP_ALIGNMENT.BOTTOM_LEFT,
-  [`bottom-right`]: TOOLTIP_ALIGNMENT.BOTTOM_RIGHT,
-  [`left`]: TOOLTIP_ALIGNMENT.LEFT,
-  [`left-bottom`]: TOOLTIP_ALIGNMENT.LEFT_BOTTOM,
-  [`left-top`]: TOOLTIP_ALIGNMENT.LEFT_TOP,
-  [`right`]: TOOLTIP_ALIGNMENT.RIGHT,
-  [`right-bottom`]: TOOLTIP_ALIGNMENT.RIGHT_BOTTOM,
-  [`right-top`]: TOOLTIP_ALIGNMENT.RIGHT_TOP,
+  [`top`]: POPOVER_ALIGNMENT.TOP,
+  [`top-left`]: POPOVER_ALIGNMENT.TOP_LEFT,
+  [`top-right`]: POPOVER_ALIGNMENT.TOP_RIGHT,
+  [`bottom`]: POPOVER_ALIGNMENT.BOTTOM,
+  [`bottom-left`]: POPOVER_ALIGNMENT.BOTTOM_LEFT,
+  [`bottom-right`]: POPOVER_ALIGNMENT.BOTTOM_RIGHT,
+  [`left`]: POPOVER_ALIGNMENT.LEFT,
+  [`left-bottom`]: POPOVER_ALIGNMENT.LEFT_BOTTOM,
+  [`left-top`]: POPOVER_ALIGNMENT.LEFT_TOP,
+  [`right`]: POPOVER_ALIGNMENT.RIGHT,
+  [`right-bottom`]: POPOVER_ALIGNMENT.RIGHT_BOTTOM,
+  [`right-top`]: POPOVER_ALIGNMENT.RIGHT_TOP,
 };
 
-export const Default = (args) => {
-  const { open } = args?.['cds-tooltip'] ?? {};
-  const { alignment, direction, enterDelay, exitDelay } =
-    args?.[`${prefix}-tooltip`] ?? {};
+export const Default = () => {
+  return html`
+    <style>
+      ${styles}
+    </style>
+    <cds-tooltip align="bottom">
+      <div class="sb-tooltip-trigger">${Information16()}</div>
+      <cds-tooltip-content>
+        Occassionally, services are updated in a specified time window to ensure
+        no down time for customers.
+      </cds-tooltip-content>
+    </cds-tooltip>
+  `;
+};
+
+export const Alignment = () => {
+  return html`
+    <style>
+      ${styles}
+    </style>
+    <cds-tooltip align="bottom-left">
+      <div class="sb-tooltip-trigger">${Information16()}</div>
+      <cds-tooltip-content> Tooltip alignment </cds-tooltip-content>
+    </cds-tooltip>
+  `;
+};
+
+export const Duration = () => {
+  return html`
+    <style>
+      ${styles}
+    </style>
+    <cds-tooltip enter-delay-ms=${0} exit-delay-ms=${300}>
+      <div class="sb-tooltip-trigger">${Information16()}</div>
+      <cds-tooltip-content> Label one </cds-tooltip-content>
+    </cds-tooltip>
+  `;
+};
+
+export const Playground = (args) => {
+  const {
+    alignment,
+    defaultOpen,
+    label,
+    enterDelay,
+    exitDelay,
+    closeOnActivation,
+  } = args?.['cds-tooltip'] ?? {};
   return html`
     <style>
       ${styles}
     </style>
     <cds-tooltip
-      ?open="${open}"
+      ?defaultOpen=${defaultOpen}
       align=${alignment}
-      direction=${direction}
       enter-delay-ms=${enterDelay}
-      exit-delay-ms=${exitDelay}>
-      This is some tooltip text. This box shows the maximum amount of text that
-      should appear inside. If more room is needed please use a modal instead.
+      exit-delay-ms=${exitDelay}
+      ?closeOnActivation=${closeOnActivation}>
+      <div class="sb-tooltip-trigger">${Information16()}</div>
+      <cds-tooltip-content> ${label} </cds-tooltip-content>
     </cds-tooltip>
   `;
 };
 
-Default.storyName = 'Default';
-
-Default.parameters = {
+Playground.parameters = {
   knobs: {
     [`${prefix}-tooltip`]: () => ({
-      open: boolean('Open (open)', false),
+      defaultOpen: boolean('Default open (defaultOpen)', false),
       alignment: select(
         'Tooltip alignment to trigger button (alignment)',
         tooltipAlignments,
-        TOOLTIP_ALIGNMENT.TOP
+        POPOVER_ALIGNMENT.TOP
       ),
+      label: text('Label (label)', 'Custom label'),
       enterDelay: number('Enter delay (in ms)', 100),
       exitDelay: number('Exit delay (in ms)', 300),
+      closeOnActivation: boolean(
+        'Close on activation (closeOnActivation)',
+        false
+      ),
     }),
   },
 };
+
+Default.storyName = 'Default';
 
 export default {
   title: 'Components/Tooltip',
   parameters: {
     ...storyDocs.parameters,
   },
+  decorators: [(story) => html`<div class="sb-tooltip-story">${story()}</div>`],
 };

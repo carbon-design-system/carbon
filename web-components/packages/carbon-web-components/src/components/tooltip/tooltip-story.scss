@@ -6,26 +6,32 @@
 //
 
 @use '@carbon/styles/scss/config' as *;
-@use '@carbon/styles/scss/components/link';
-@use '@carbon/styles/scss/type' as *;
-@use '@carbon/styles/scss/theme' as *;
 @use '@carbon/styles/scss/utilities/button-reset';
+@use '@carbon/styles/scss/spacing';
+@use '@carbon/styles/scss/theme';
+@use '@carbon/styles/scss/type';
 
-/* stylelint-disable selector-type-no-unknown */
-#{$prefix}-tooltip-body {
-  p {
-    @include type-style('body-short-01');
-  }
-
-  .#{$prefix}--link {
-    color: $link-inverse;
-
-    &:focus {
-      outline-color: $focus-inverse;
-    }
-  }
+// This is a utility class to make sure that tooltip stories have a minimum
+// height when used in MDX docs
+.sb-tooltip-story {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 250px;
+  margin: auto;
 }
 
-.#{$prefix}-ce-demo-devenv--container {
+.sb-tooltip-trigger {
+  @include button-reset.reset();
+
+  display: flex;
+  align-items: center;
   justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid theme.$border-subtle;
+}
+
+.sb-tooltip-trigger svg {
+  fill: theme.$background-inverse;
 }

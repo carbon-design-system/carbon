@@ -8,6 +8,4 @@
  */
 
 import './tooltip';
-import './tooltip-body';
-import '../toggle-tip/toggletip';
-import './tooltip-footer';
+import './tooltip-content';

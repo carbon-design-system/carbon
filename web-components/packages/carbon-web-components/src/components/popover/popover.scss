@@ -15,7 +15,9 @@ $css--plex: true !default;
 @use '@carbon/styles/scss/breakpoint' as *;
 @use '@carbon/styles/scss/components/popover';
 
+:host(#{$prefix}-tooltip[highContrast]),
 :host(#{$prefix}-popover[highContrast]) {
+  ::slotted(#{$prefix}-tooltip-content),
   ::slotted(#{$prefix}-popover-content) {
     @extend .#{$prefix}--popover;
   }
@@ -28,7 +30,14 @@ $css--plex: true !default;
   }
 }
 
+:host(#{$prefix}-tooltip-content),
+:host(#{$prefix}-popover-content) {
+  @extend .#{$prefix}--popover;
+}
+
+:host(#{$prefix}-tooltip-content[open]),
 :host(#{$prefix}-popover-content[open]) {
+  color: purple;
   .#{$prefix}--popover-content {
     display: block;
   }
@@ -53,54 +62,62 @@ $css--plex: true !default;
   );
 }
 
+:host(#{$prefix}-tooltip-content[align='bottom']),
 :host(#{$prefix}-popover-content[align='bottom']) {
   @extend .#{$prefix}--popover--bottom;
 }
 
+:host(#{$prefix}-tooltip-content[align='bottom-left']),
 :host(#{$prefix}-popover-content[align='bottom-left']) {
   @extend .#{$prefix}--popover--bottom-left;
 }
 
+:host(#{$prefix}-tooltip-content[align='bottom-right']),
 :host(#{$prefix}-popover-content[align='bottom-right']) {
   @extend .#{$prefix}--popover--bottom-right;
 }
 
+:host(#{$prefix}-tooltip-content[align='left']),
 :host(#{$prefix}-popover-content[align='left']) {
   @extend .#{$prefix}--popover--left;
 }
 
+:host(#{$prefix}-tooltip-content[align='left-bottom']),
 :host(#{$prefix}-popover-content[align='left-bottom']) {
   @extend .#{$prefix}--popover--left-bottom;
 }
 
+:host(#{$prefix}-tooltip-content[align='left-top']),
 :host(#{$prefix}-popover-content[align='left-top']) {
   @extend .#{$prefix}--popover--left-top;
 }
 
+:host(#{$prefix}-tooltip-content[align='right']),
 :host(#{$prefix}-popover-content[align='right']) {
   @extend .#{$prefix}--popover--right;
 }
 
+:host(#{$prefix}-tooltip-content[align='right-bottom']),
 :host(#{$prefix}-popover-content[align='right-bottom']) {
   @extend .#{$prefix}--popover--right-bottom;
 }
 
+:host(#{$prefix}-tooltip-content[align='right-top']),
 :host(#{$prefix}-popover-content[align='right-top']) {
   @extend .#{$prefix}--popover--right-top;
 }
 
+:host(#{$prefix}-tooltip-content[align='top']),
 :host(#{$prefix}-popover-content[align='top']) {
   @extend .#{$prefix}--popover--top;
 }
 
+:host(#{$prefix}-tooltip-content[align='top-left']),
 :host(#{$prefix}-popover-content[align='top-left']) {
   @extend .#{$prefix}--popover--top-left;
 }
 
+:host(#{$prefix}-tooltip-content[align='top-right']),
 :host(#{$prefix}-popover-content[align='top-right']) {
   @extend .#{$prefix}--popover--top-right;
-}
-
-:host(#{$prefix}-popover-content) {
-  @extend .#{$prefix}--popover;
 }

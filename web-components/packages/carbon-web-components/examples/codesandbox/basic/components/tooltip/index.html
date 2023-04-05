@@ -23,15 +23,19 @@ LICENSE file in the root directory of this source tree.
 </head>
 <body>
   <div data-floating-menu-container style="position: relative; padding: 3rem; display: flex; flex-direction: column; align-items: center;">
-    <cds-tooltip>
-      <cds-tooltip-body>
-        <p>
-          This is some tooltip text. This box shows the maximum amount of text that should appear inside. If more room is needed
-          please use a modal instead.
-        </p>
-        <cds-tooltip-footer> <a href="#" class="cds--link">Learn More</a><cds-btn kind="primary">Create</cds-btn> </cds-tooltip-footer>
-      </cds-tooltip-body>
-    </cds-tooltip>
+    <cds-tooltip
+      align="bottom">
+     <div class="sb-tooltip-trigger">
+      <svg focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg" fill="currentColor" width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+        <path d="M17 22L17 14 13 14 13 16 15 16 15 22 12 22 12 24 20 24 20 22 17 22zM16 8a1.5 1.5 0 101.5 1.5A1.5 1.5 0 0016 8z"></path>
+        <path d="M16,30A14,14,0,1,1,30,16,14,14,0,0,1,16,30ZM16,4A12,12,0,1,0,28,16,12,12,0,0,0,16,4Z"></path>
+        <title>Information</title>
+      </svg>
+     </div>
+    <cds-tooltip-content>
+      Occassionally, services are updated in a specified time window to ensure no down time for customers.
+    </cds-tooltip-content>
+  </cds-tooltip>
   </div>
 </body>
 </html>

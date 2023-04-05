@@ -14,8 +14,13 @@ declare global {
     interface IntrinsicElements {
       'cds-accordion': any;
       'cds-accordion-item': any;
+      'cds-accordion-skeleton': any;
       'cds-btn': any;
       'cds-breadcrumb': any;
+      'cds-breadcrumb-item': any;
+      'cds-breadcrumb-link': any;
+      'cds-breadcrumb-overflow-menu': any;
+      'cds-breadcrumb-skeleton': any;
       'cds-checkbox': any;
       'cds-checkbox-skeleton': any;
       'cds-code-snippet': any;
@@ -65,6 +70,8 @@ declare global {
       'cds-pages-select': any;
       'cds-progress-indicator': any;
       'cds-progress-step': any;
+      'cds-popover': any;
+      'cds-popover-content': any;
       'cds-radio-button': any;
       'cds-radio-button-group': any;
       'cds-search': any;
@@ -86,10 +93,7 @@ declare global {
       'cds-clickable-tile': any;
       'cds-selectable-tile': any;
       'cds-tooltip': any;
-      'cds-tooltip-body': any;
-      'cds-tooltip-definition': any;
-      'cds-tooltip-footer': any;
-      'cds-tooltip-icon': any;
+      'cds-tooltip-content': any;
       'cds-header': any;
       'cds-header-nav': any;
       'cds-header-nav-item': any;

@@ -12,7 +12,7 @@ import { html, property, customElement, LitElement } from 'lit-element';
 import Information16 from '@carbon/icons/lib/information/16';
 import { prefix } from '../../globals/settings';
 import FocusMixin from '../../globals/mixins/focus';
-import { TOOLTIP_ALIGNMENT } from '../tooltip/defs';
+import { POPOVER_ALIGNMENT } from '../popover/defs';
 import styles from './toggletip.scss';
 
 /**
@@ -26,7 +26,7 @@ class BXToggletip extends FocusMixin(LitElement) {
    * How the tooltip is aligned to the trigger button.
    */
   @property()
-  alignment = TOOLTIP_ALIGNMENT.TOP;
+  alignment = POPOVER_ALIGNMENT.TOP;
 
   @property({ type: Boolean, reflect: true })
   open = false;
