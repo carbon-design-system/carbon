@@ -17,6 +17,7 @@ import {
 import userEvent from '@testing-library/user-event';
 import { render, screen } from '@testing-library/react';
 import Link from '../Link';
+import { Add } from '@carbon/icons-react';
 
 const prefix = 'cds';
 
@@ -68,6 +69,17 @@ describe('Tile', () => {
       );
       userEvent.click(screen.getByText('🚦'));
       expect(onClick).not.toHaveBeenCalled();
+    });
+    it('should allow for a custom icon', () => {
+      render(
+        <ClickableTile
+          href="https://www.carbondesignsystem.com"
+          renderIcon={() => <Add data-testid="test" />}>
+          Clickable Tile
+        </ClickableTile>
+      );
+
+      expect(screen.getByTestId('test')).toBeInTheDocument();
     });
   });
 
