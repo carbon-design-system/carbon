@@ -11,8 +11,7 @@ import { render } from 'lit';
 import EventManager from '../utils/event-manager';
 import { Default, Playground } from '../../src/components/tag/tag-story';
 
-const tagTemplate = () =>
-  Default();
+const tagTemplate = () => Default();
 
 const playgroundTemplate = (props?) =>
   Playground({

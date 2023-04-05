@@ -13,18 +13,41 @@ import { boolean } from '@storybook/addon-knobs';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { prefix } from '../../globals/settings';
 import textNullable from '../../../.storybook/knob-text-nullable';
-import './checkbox';
+import './index';
 import storyDocs from './checkbox-story.mdx';
 
-export const Default = (args) => {
+const checkboxLabel = 'Checkbox label';
+
+export const Default = () => {
+  return html`
+    <fieldset class="${prefix}--fieldset">
+      <legend class="${prefix}--label">Group label</legend>
+      <cds-checkbox label-text="${checkboxLabel}"></cds-checkbox>
+      <cds-checkbox label-text="${checkboxLabel}"></cds-checkbox>
+    </fieldset>
+  `;
+};
+
+Default.storyName = 'Default';
+
+export const Skeleton = () => {
+  return html`
+    <fieldset class="${prefix}--fieldset">
+      <cds-checkbox-skeleton
+        label-text="${checkboxLabel}"></cds-checkbox-skeleton>
+    </fieldset>
+  `;
+};
+
+export const Playground = (args) => {
   const {
     checked,
     disabled,
     hideLabel,
     indeterminate,
-    labelText,
-    name,
-    value,
+    labelText = checkboxLabel,
+    readonly,
+    title,
     onChange,
   } = args?.[`${prefix}-checkbox`] ?? {};
   return html`
@@ -36,8 +59,8 @@ export const Default = (args) => {
         ?hide-label="${hideLabel}"
         ?indeterminate="${indeterminate}"
         label-text="${ifDefined(labelText)}"
-        name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
+        ?readonly="${readonly}"
+        title="${ifDefined(title)}"
         @cds-checkbox-changed="${onChange}"></cds-checkbox>
       <cds-checkbox
         ?checked="${checked}"
@@ -45,30 +68,30 @@ export const Default = (args) => {
         ?hide-label="${hideLabel}"
         ?indeterminate="${indeterminate}"
         label-text="${ifDefined(labelText)}"
-        name="${ifDefined(name)}"
-        value="${ifDefined(value)}"
+        ?readonly="${readonly}"
+        title="${ifDefined(title)}"
         @cds-checkbox-changed="${onChange}"></cds-checkbox>
     </fieldset>
   `;
 };
 
-Default.storyName = 'Default';
+Playground.parameters = {
+  knobs: {
+    [`${prefix}-checkbox`]: () => ({
+      checked: boolean('Checked (checked)', false),
+      disabled: boolean('Disabled (disabled)', false),
+      hideLabel: boolean('Hide label (hide-label)', false),
+      indeterminate: boolean('Indeterminate (indeterminate)', false),
+      readonly: boolean('Read only (readonly)', false),
+      title: textNullable('Title (title)', ''),
+      onChange: action(`${prefix}-checkbox-changed`),
+    }),
+  },
+};
 
 export default {
   title: 'Components/Checkbox',
   parameters: {
     ...storyDocs.parameters,
-    knobs: {
-      [`${prefix}-checkbox`]: () => ({
-        checked: boolean('Checked (checked)', false),
-        disabled: boolean('Disabled (disabled)', false),
-        hideLabel: boolean('Hide label (hide-label)', false),
-        indeterminate: boolean('Indeterminate state (indeterminate)', false),
-        labelText: textNullable('Label text (label-text)', 'Checkbox'),
-        name: textNullable('Name (name)', ''),
-        value: textNullable('Value (value)', ''),
-        onChange: action(`${prefix}-checkbox-changed`),
-      }),
-    },
   },
 };

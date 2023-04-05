@@ -8,7 +8,7 @@
  */
 
 import { html, render } from 'lit';
-import { Default } from '../../src/components/checkbox/checkbox-story';
+import { Playground as Default } from '../../src/components/checkbox/checkbox-story';
 
 /**
  * @param formData A `FormData` instance.

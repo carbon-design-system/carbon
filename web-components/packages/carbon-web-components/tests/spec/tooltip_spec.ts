@@ -11,9 +11,7 @@ import { html, render, TemplateResult } from 'lit';
 import ResizeObserver from 'resize-observer-polyfill';
 import BXTooltip from '../../src/components/tooltip/tooltip';
 import BXTooltipBody from '../../src/components/tooltip/tooltip-body';
-import {
-  TOOLTIP_ALIGNMENT,
-} from '../../src/components/tooltip/defs';
+import { TOOLTIP_ALIGNMENT } from '../../src/components/tooltip/defs';
 import { Default } from '../../src/components/tooltip/tooltip-story';
 
 const bodyTemplate = () => html` <cds-tooltip-body></cds-tooltip-body> `;

@@ -27,9 +27,10 @@ const getValues = (formData: FormData) => {
   return values;
 };
 
-const template = (props?) => Playground({
-  'cds-radio-button-group': props,
-});
+const template = (props?) =>
+  Playground({
+    'cds-radio-button-group': props,
+  });
 
 describe('cds-radio-button', function () {
   describe('Rendering', function () {

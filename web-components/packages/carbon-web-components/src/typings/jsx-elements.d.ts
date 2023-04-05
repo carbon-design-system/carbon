@@ -17,6 +17,7 @@ declare global {
       'cds-btn': any;
       'cds-breadcrumb': any;
       'cds-checkbox': any;
+      'cds-checkbox-skeleton': any;
       'cds-code-snippet': any;
       'cds-combo-box': any;
       'cds-combo-box-item': any;

@@ -12,8 +12,7 @@ import EventManager from '../utils/event-manager';
 import CDSAccordionItem from '../../src/components/accordion/accordion-item';
 import { Default } from '../../src/components/accordion/accordion-story';
 
-const template = () =>
-  Default();
+const template = () => Default();
 
 describe('cds-accordion', function () {
   describe('Toggling', function () {

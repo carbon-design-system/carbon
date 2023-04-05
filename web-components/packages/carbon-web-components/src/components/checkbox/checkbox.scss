@@ -16,5 +16,13 @@ $css--plex: true !default;
   @extend .#{$prefix}--form-item;
   @extend .#{$prefix}--checkbox-wrapper;
 
-  outline: none;
+  &[readonly] {
+    @extend .#{$prefix}--checkbox-wrapper--readonly;
+  }
+}
+
+:host(#{$prefix}-checkbox-skeleton) {
+  .#{$prefix}--checkbox-label {
+    cursor: default;
+  }
 }
