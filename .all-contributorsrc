@@ -13,23 +13,21 @@
   "skipCi": true,
   "contributors": [
     {
-      "login": "tw15egan",
-      "name": "TJ Egan",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/11928039?v=4",
-      "profile": "https://github.com/tw15egan",
+      "login": "tay1orjones",
+      "name": "Taylor Jones",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/3360588?v=4",
+      "profile": "https://github.com/tay1orjones",
       "contributions": [
         "code",
         "doc",
-        "infra",
-        "review",
         "a11y"
       ]
     },
     {
-      "login": "joshblack",
-      "name": "Josh Black",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/3901764?v=4",
-      "profile": "https://github.com/joshblack",
+      "login": "tw15egan",
+      "name": "TJ Egan",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/11928039?v=4",
+      "profile": "https://github.com/tw15egan",
       "contributions": [
         "code",
         "doc",
@@ -51,18 +49,6 @@
       ]
     },
     {
-      "login": "dakahn",
-      "name": "DAK",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/40970507?v=4",
-      "profile": "https://dakahn.netlify.com/",
-      "contributions": [
-        "code",
-        "doc",
-        "review",
-        "a11y"
-      ]
-    },
-    {
       "login": "andreancardona",
       "name": "Andrea N. Cardona",
       "avatar_url": "https://avatars2.githubusercontent.com/u/32720851?v=4",
@@ -75,46 +61,10 @@
       ]
     },
     {
-      "login": "emyarod",
-      "name": "emyarod",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/8265238?v=4",
-      "profile": "https://github.com/emyarod",
-      "contributions": [
-        "code",
-        "doc",
-        "review",
-        "a11y"
-      ]
-    },
-    {
-      "login": "jnm2377",
-      "name": "Josefina Mancilla",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/32556167?v=4",
-      "profile": "https://github.com/jnm2377",
-      "contributions": [
-        "code",
-        "doc",
-        "review",
-        "a11y"
-      ]
-    },
-    {
-      "login": "vpicone",
-      "name": "Vince Picone",
-      "avatar_url": "https://avatars1.githubusercontent.com/u/4078018?v=4",
-      "profile": "https://www.vincepic.one/",
-      "contributions": [
-        "code",
-        "doc",
-        "review",
-        "a11y"
-      ]
-    },
-    {
-      "login": "rjhenriquez",
-      "name": "Ricardo Henriquez",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/4718579?v=4",
-      "profile": "http://turpialcreative/",
+      "login": "francinelucca",
+      "name": "Francine Lucca",
+      "avatar_url": "https://avatars.githubusercontent.com/u/40550942?v=4",
+      "profile": "https://github.com/francinelucca",
       "contributions": [
         "code",
         "doc",
@@ -157,6 +107,77 @@
       ]
     },
     {
+      "login": "laurenmrice",
+      "name": "Lauren Rice",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/43969356?v=4",
+      "profile": "https://github.com/laurenmrice",
+      "contributions": [
+        "design",
+        "review"
+      ]
+    },
+    {
+      "login": "joshblack",
+      "name": "Josh Black",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3901764?v=4",
+      "profile": "https://github.com/joshblack",
+      "contributions": [
+        "code",
+        "doc",
+        "infra",
+        "review",
+        "a11y"
+      ]
+    },
+    {
+      "login": "dakahn",
+      "name": "DAK",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/40970507?v=4",
+      "profile": "https://dakahn.netlify.com/",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "a11y"
+      ]
+    },
+    {
+      "login": "jnm2377",
+      "name": "Josefina Mancilla",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/32556167?v=4",
+      "profile": "https://github.com/jnm2377",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "a11y"
+      ]
+    },
+    {
+      "login": "emyarod",
+      "name": "emyarod",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/8265238?v=4",
+      "profile": "https://github.com/emyarod",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "a11y"
+      ]
+    },
+    {
+      "login": "vpicone",
+      "name": "Vince Picone",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/4078018?v=4",
+      "profile": "https://www.vincepic.one/",
+      "contributions": [
+        "code",
+        "doc",
+        "review",
+        "a11y"
+      ]
+    },
+    {
       "login": "jillianhowarth",
       "name": "jillianhowarth",
       "avatar_url": "https://avatars0.githubusercontent.com/u/20690344?v=4",
@@ -168,13 +189,15 @@
       ]
     },
     {
-      "login": "laurenmrice",
-      "name": "Lauren Rice",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/43969356?v=4",
-      "profile": "https://github.com/laurenmrice",
+      "login": "rjhenriquez",
+      "name": "Ricardo Henriquez",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/4718579?v=4",
+      "profile": "http://turpialcreative/",
       "contributions": [
-        "design",
-        "review"
+        "code",
+        "doc",
+        "review",
+        "a11y"
       ]
     },
     {
@@ -204,7 +227,9 @@
       "profile": "https://janhassel.de/",
       "contributions": [
         "code",
-        "doc"
+        "doc",
+        "a11y",
+        "design"
       ]
     },
     {
@@ -221,24 +246,6 @@
       "name": "Rosie Z",
       "avatar_url": "https://avatars2.githubusercontent.com/u/35401262?v=4",
       "profile": "https://github.com/rzhekova",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "Abdul-Sen",
-      "name": "Abdul Rehman",
-      "avatar_url": "https://avatars2.githubusercontent.com/u/38502132?v=4",
-      "profile": "http://abdul-sen.github.io/portfolio",
-      "contributions": [
-        "code"
-      ]
-    },
-    {
-      "login": "gptt916",
-      "name": "Nick Gong",
-      "avatar_url": "https://avatars3.githubusercontent.com/u/20601623?v=4",
-      "profile": "https://github.com/gptt916",
       "contributions": [
         "code"
       ]
@@ -385,14 +392,12 @@
       ]
     },
     {
-      "login": "tay1orjones",
-      "name": "Taylor Jones",
-      "avatar_url": "https://avatars0.githubusercontent.com/u/3360588?v=4",
-      "profile": "https://github.com/tay1orjones",
+      "login": "Abdul-Sen",
+      "name": "Abdul Rehman",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/38502132?v=4",
+      "profile": "http://abdul-sen.github.io/portfolio",
       "contributions": [
-        "code",
-        "doc",
-        "a11y"
+        "code"
       ]
     },
     {
@@ -887,13 +892,12 @@
       ]
     },
     {
-      "login": "francinelucca",
-      "name": "Francine Lucca",
-      "avatar_url": "https://avatars.githubusercontent.com/u/40550942?v=4",
-      "profile": "https://github.com/francinelucca",
+      "login": "gptt916",
+      "name": "Nick Gong",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/20601623?v=4",
+      "profile": "https://github.com/gptt916",
       "contributions": [
-        "code",
-        "doc"
+        "code"
       ]
     },
     {
@@ -1097,6 +1101,15 @@
       ]
     },
     {
+      "login": "shryoo-ibm",
+      "name": "Seong-Hyun Ryoo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/106095943?s=96&v=4",
+      "profile": "https://seongryoo.github.io",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
       "login": "pratikkarad",
       "name": "Pratik Karad",
       "avatar_url": "https://avatars.githubusercontent.com/u/32093370?v=4",
@@ -1106,15 +1119,7 @@
         "a11y"
       ]
     },
-    {
-      "login": "shryoo-ibm",
-      "name": "Seong-Hyun Ryoo",
-      "avatar_url": "https://avatars.githubusercontent.com/u/106095943?s=96&v=4",
-      "profile": "https://seongryoo.github.io",
-      "contributions": [
-        "code"
-      ]
-    },
+
     {
       "login": "gerzonc",
       "name": "Gerzon",
