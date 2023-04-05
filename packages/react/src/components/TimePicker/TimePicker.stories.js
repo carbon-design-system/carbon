@@ -6,10 +6,12 @@
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import SelectItem from '../SelectItem';
 import TimePicker from './TimePicker';
 import TimePickerSelect from '../TimePickerSelect';
-import { Layer } from '../Layer';
 import mdx from './TimePicker.mdx';
 
 export default {
@@ -41,46 +43,22 @@ export const Default = () => {
   );
 };
 
-export const WithLayer = () => {
-  return (
-    <>
-      <TimePicker id="time-picker" labelText="First layer">
-        <TimePickerSelect id="time-picker-select-1">
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <TimePicker id={`time-picker-${layer}`} labelText="Select a time">
+        <TimePickerSelect id={`time-picker-select-${layer}-1`}>
           <SelectItem value="AM" text="AM" />
           <SelectItem value="PM" text="PM" />
         </TimePickerSelect>
-        <TimePickerSelect id="time-picker-select-2">
+        <TimePickerSelect id={`time-picker-select-${layer}-2`}>
           <SelectItem value="Time zone 1" text="Time zone 1" />
           <SelectItem value="Time zone 2" text="Time zone 2" />
         </TimePickerSelect>
       </TimePicker>
-      <Layer>
-        <TimePicker id="time-picker" labelText="Second layer">
-          <TimePickerSelect id="time-picker-select-1">
-            <SelectItem value="AM" text="AM" />
-            <SelectItem value="PM" text="PM" />
-          </TimePickerSelect>
-          <TimePickerSelect id="time-picker-select-2">
-            <SelectItem value="Time zone 1" text="Time zone 1" />
-            <SelectItem value="Time zone 2" text="Time zone 2" />
-          </TimePickerSelect>
-        </TimePicker>
-        <Layer>
-          <TimePicker id="time-picker" labelText="Third layer">
-            <TimePickerSelect id="time-picker-select-1">
-              <SelectItem value="AM" text="AM" />
-              <SelectItem value="PM" text="PM" />
-            </TimePickerSelect>
-            <TimePickerSelect id="time-picker-select-2">
-              <SelectItem value="Time zone 1" text="Time zone 1" />
-              <SelectItem value="Time zone 2" text="Time zone 2" />
-            </TimePickerSelect>
-          </TimePicker>
-        </Layer>
-      </Layer>
-    </>
-  );
-};
+    )}
+  </WithLayer>
+);
 
 export const Playground = (args) => {
   return (
