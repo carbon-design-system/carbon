@@ -5,17 +5,12 @@
 // LICENSE file in the root directory of this source tree.
 //
 
-@import '~@carbon/type/scss/type';
-@import '~@carbon/themes/scss/themes';
+@use '@carbon/styles/scss/type';
 
-.demo-inner-container-header {
-  @include carbon--type-style('productive-heading-01');
-
-  color: $text-01;
+.sb-two-lines p:first-child {
+  @include type.type-style('body-compact-01');
 }
 
-.demo-inner-container-content {
-  @include carbon--type-style('body-long-01');
-
-  color: $text-02;
+.sb-two-lines p:last-child {
+  @include type.type-style('label-01');
 }
