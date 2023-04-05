@@ -36,7 +36,7 @@ const ComboButton = React.forwardRef(function ComboButton(
     label,
     onClick,
     size = 'lg',
-    tooltipAlign,
+    tooltipAlignment,
     translateWithId: t = defaultTranslateWithId,
     ...rest
   },
@@ -105,7 +105,7 @@ const ComboButton = React.forwardRef(function ComboButton(
         label={t('carbon.combo-button.additional-actions')}
         size={size}
         disabled={disabled}
-        align={tooltipAlign}
+        align={tooltipAlignment}
         aria-haspopup
         aria-expanded={open}
         onClick={handleTriggerClick}
@@ -163,7 +163,7 @@ ComboButton.propTypes = {
   /**
    * Specify how the trigger tooltip should be aligned.
    */
-  tooltipAlign: PropTypes.oneOf([
+  tooltipAlignment: PropTypes.oneOf([
     'top',
     'top-left',
     'top-right',

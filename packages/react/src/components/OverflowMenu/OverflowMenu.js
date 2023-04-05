@@ -97,20 +97,6 @@ class OverflowMenu extends Component {
 
   static propTypes = {
     /**
-     * Specify how the tooltip should align with the OverflowMenu
-     */
-    align: PropTypes.oneOf([
-      'top',
-      'top-left',
-      'top-right',
-      'bottom',
-      'bottom-left',
-      'bottom-right',
-      'left',
-      'right',
-    ]),
-
-    /**
      * Specify a label to be read by screen readers on the container node
      */
     ['aria-label']: PropTypes.string,
@@ -245,6 +231,20 @@ class OverflowMenu extends Component {
      * Specify the size of the OverflowMenu. Currently supports either `sm`, 'md' (default) or 'lg` as an option.
      */
     size: PropTypes.oneOf(['sm', 'md', 'lg']),
+
+    /**
+     * Specify how the tooltip should align with the OverflowMenu
+     */
+    tooltipAlignment: PropTypes.oneOf([
+      'top',
+      'top-left',
+      'top-right',
+      'bottom',
+      'bottom-left',
+      'bottom-right',
+      'left',
+      'right',
+    ]),
   };
 
   static contextType = PrefixContext;
@@ -481,7 +481,6 @@ class OverflowMenu extends Component {
     const prefix = this.context;
     const {
       id,
-      align,
       ['aria-label']: ariaLabel,
       ariaLabel: deprecatedAriaLabel,
       children,
@@ -501,6 +500,7 @@ class OverflowMenu extends Component {
       menuOptionsClass,
       light,
       size = 'md',
+      tooltipAlignment,
       ...other
     } = this.props;
 
@@ -582,7 +582,7 @@ class OverflowMenu extends Component {
         <span className={`${prefix}--overflow-menu__wrapper`}>
           <IconButton
             {...other}
-            align={align}
+            align={tooltipAlignment}
             type="button"
             aria-haspopup
             aria-expanded={this.state.open}
