@@ -50,6 +50,7 @@ describe('useDisclosure', () => {
   it('should toggle visibility when the button is focused and Enter or Space is pressed', async () => {
     function TestComponent() {
       const { buttonProps, contentProps, open } = useDisclosure('testid');
+
       return (
         <>
           <button type="button" {...buttonProps}>
@@ -61,17 +62,22 @@ describe('useDisclosure', () => {
         </>
       );
     }
+    const user = userEvent.setup();
 
     render(<TestComponent />);
 
-    const trigger = screen.getByText('trigger');
+    screen.getByText('trigger').focus();
 
-    await userEvent.keyboard('{Space}');
+    const content = screen.getByText('content');
 
-    expect(trigger).toHaveFocus();
+    await user.keyboard('[Space]');
+    expect(content.hidden).toBe(false);
 
-    await userEvent.keyboard('{Enter}');
-    expect(trigger).toHaveFocus();
+    await user.keyboard('[Space]');
+    expect(content.hidden).toBe(true);
+
+    await user.keyboard('[Enter]');
+    expect(content.hidden).toBe(false);
   });
 
   // https://www.w3.org/TR/wai-aria-practices-1.1/#wai-aria-roles-states-and-properties-8
