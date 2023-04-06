@@ -55,7 +55,7 @@ describe('Search', () => {
     it('should respect disabled prop', () => {
       render(<Search labelText="test-search" disabled />);
 
-      expect(screen.getByRole('searchbox').disabled).toBe(true);
+      expect(screen.getByRole('searchbox')).toBeDisabled();
     });
 
     it('should respect id prop', () => {
@@ -67,7 +67,7 @@ describe('Search', () => {
     it('should respect labelText prop', () => {
       render(<Search labelText="test-search" />);
 
-      expect(screen.getByRole('searchbox').labels[0].textContent).toBe(
+      expect(screen.getByRole('searchbox').labels[0]).toHaveTextContent(
         'test-search'
       );
     });

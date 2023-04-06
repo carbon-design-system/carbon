@@ -190,9 +190,7 @@ describe('Modal', () => {
       </Modal>
     );
 
-    expect(screen.getByText('Primary button text')).not.toHaveAttribute(
-      'disabled'
-    );
+    expect(screen.getByText('Primary button text')).toBeEnabled();
   });
 
   it('disables primary button is disablePrimaryButton prop is passed', () => {
@@ -211,7 +209,7 @@ describe('Modal', () => {
       </Modal>
     );
 
-    expect(screen.getByText('Primary button text')).toHaveAttribute('disabled');
+    expect(screen.getByText('Primary button text')).toBeDisabled();
   });
 
   it('should set button text when passed via props', () => {

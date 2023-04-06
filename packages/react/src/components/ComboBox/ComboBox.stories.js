@@ -6,8 +6,10 @@
  */
 
 import React from 'react';
+
+import { WithLayer } from '../../../.storybook/templates/WithLayer';
+
 import ComboBox from '../ComboBox';
-import { Layer } from '../Layer';
 import mdx from './ComboBox.mdx';
 
 const items = [
@@ -78,40 +80,22 @@ export const Default = () => (
   </div>
 );
 
-export const WithLayer = () => (
-  <div style={{ width: 300 }}>
-    <ComboBox
-      onChange={() => {}}
-      id="carbon-combobox"
-      items={items}
-      itemToString={(item) => (item ? item.text : '')}
-      placeholder="Filter..."
-      titleText="First Layer"
-      helperText="Combobox helper text"
-    />
-    <Layer>
-      <ComboBox
-        onChange={() => {}}
-        id="carbon-combobox"
-        items={items}
-        itemToString={(item) => (item ? item.text : '')}
-        placeholder="Filter..."
-        titleText="Second Layer"
-        helperText="Combobox helper text"
-      />
-      <Layer>
+export const _WithLayer = () => (
+  <WithLayer>
+    {(layer) => (
+      <div style={{ width: 300 }}>
         <ComboBox
           onChange={() => {}}
-          id="carbon-combobox"
+          id={`carbon-combobox-${layer}`}
           items={items}
           itemToString={(item) => (item ? item.text : '')}
           placeholder="Filter..."
-          titleText="Third Layer"
+          titleText="ComboBox title"
           helperText="Combobox helper text"
         />
-      </Layer>
-    </Layer>
-  </div>
+      </div>
+    )}
+  </WithLayer>
 );
 
 export const Playground = (args) => (

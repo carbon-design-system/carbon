@@ -157,7 +157,7 @@ describe('Tab', () => {
         </TabPanels>
       </Tabs>
     );
-    expect(screen.queryByText('test-secondary-label')).toBeNull();
+    expect(screen.queryByText('test-secondary-label')).not.toBeInTheDocument();
   });
 
   it('should display an icon from renderIcon prop', () => {

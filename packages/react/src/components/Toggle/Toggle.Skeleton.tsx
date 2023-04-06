@@ -10,7 +10,34 @@ import React from 'react';
 import cx from 'classnames';
 import { PrefixContext } from '../../internal/usePrefix';
 
-class ToggleSkeleton extends React.Component {
+type ToggleSkeletonProps = {
+  'aria-label': string;
+
+  /**
+   * Specify an optional className to add to the form item wrapper.
+   */
+  className?: string;
+
+  /**
+   * Provide an id that unique represents the underlying `<input>`
+   */
+  id?: string;
+
+  /**
+   * Provide the text that will be read by a screen reader when visiting this
+   * control
+   * `aria-label` is always required but will be null if `labelText` is also
+   * provided
+   */
+  labelText?: string;
+
+  /**
+   * Specify the size of the Toggle. Currently only supports 'sm' or 'md' (default)
+   */
+  size?: 'sm' | 'md';
+} & React.HTMLAttributes<HTMLDivElement>;
+
+class ToggleSkeleton extends React.Component<ToggleSkeletonProps> {
   static propTypes = {
     ['aria-label']: PropTypes.string.isRequired,
 
@@ -26,7 +53,7 @@ class ToggleSkeleton extends React.Component {
     /**
      * Provide the text that will be read by a screen reader when visiting this
      * control
-     * `aria-label` is always required but will be null if `labelText` is also
+     * `aria-label` is always required but will be undefined if `labelText` is also
      * provided
      */
     labelText: PropTypes.string,
@@ -37,7 +64,7 @@ class ToggleSkeleton extends React.Component {
     size: PropTypes.oneOf(['sm', 'md']),
   };
 
-  static defaultProps = {
+  static defaultProps: Partial<ToggleSkeletonProps> = {
     ['aria-label']: 'Toggle is loading',
     size: 'md',
   };
@@ -66,7 +93,7 @@ class ToggleSkeleton extends React.Component {
               <label
                 className={`${prefix}--toggle-input__label`}
                 htmlFor={id}
-                aria-label={labelText ? null : this.props['aria-label']}>
+                aria-label={labelText ? undefined : this.props['aria-label']}>
                 {labelText ? <div>{labelText}</div> : null}
                 <span className={`${prefix}--toggle__switch`}>
                   <span className={`${prefix}--toggle__text--left`} />
