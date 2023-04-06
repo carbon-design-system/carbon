@@ -510,11 +510,6 @@ const Tab = React.forwardRef(function Tab(
     }
   );
 
-  const iconClasses = cx({
-    [`${prefix}--tabs__nav-item--icon`]: true,
-    [`${prefix}--tabs__nav-item--icon-secondary`]: hasSecondaryLabel,
-  });
-
   return (
     <BaseComponent
       {...rest}
@@ -538,21 +533,19 @@ const Tab = React.forwardRef(function Tab(
       onKeyDown={onKeyDown}
       tabIndex={selectedIndex === index ? '0' : '-1'}
       type="button">
-      <div className={`${prefix}--tabs__wrapper`}>
-        <div>
-          <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
-          {hasSecondaryLabel && (
-            <div className={`${prefix}--tabs__nav-item-secondary-label`}>
-              {secondaryLabel}
-            </div>
-          )}
-        </div>
+      <div className={`${prefix}--tabs__nav-item-label-wrapper`}>
+        <span className={`${prefix}--tabs__nav-item-label`}>{children}</span>
         {Icon && (
-          <div className={iconClasses}>
+          <div className={`${prefix}--tabs__nav-item--icon`}>
             <Icon size={16} />
           </div>
         )}
       </div>
+      {hasSecondaryLabel && (
+        <div className={`${prefix}--tabs__nav-item-secondary-label`}>
+          {secondaryLabel}
+        </div>
+      )}
     </BaseComponent>
   );
 });

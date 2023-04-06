@@ -233,7 +233,7 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
     //-----------------------------
     // Wrapper
     //-----------------------------
-    .#{$prefix}--tabs__wrapper {
+    .#{$prefix}--tabs__nav-item-label-wrapper {
       display: flex;
     }
 
@@ -284,10 +284,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
 
     &.#{$prefix}--tabs--contained .#{$prefix}--tabs__nav-item--icon {
       padding-left: $spacing-05;
-
-      &.#{$prefix}--tabs__nav-item--icon-secondary {
-        align-items: start;
-      }
     }
 
     //-----------------------------
@@ -358,10 +354,6 @@ $icon-tab-size: custom-property.get-var('icon-tab-size', rem(40px));
       align-items: center;
       justify-content: center;
       padding: 0;
-
-      .#{$prefix}--tabs__wrapper {
-        line-height: 0;
-      }
     }
 
     &.#{$prefix}--tabs__icon--lg {
