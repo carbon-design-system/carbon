@@ -41,10 +41,10 @@ export default {
 export const Default = () => (
   <Tabs>
     <TabList aria-label="List of tabs">
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab>Tab Label 4</Tab>
+      <Tab>Tab label 1</Tab>
+      <Tab>Tab label 2</Tab>
+      <Tab disabled>Tab label 3</Tab>
+      <Tab>Tab label 4</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -74,15 +74,15 @@ export const Default = () => (
 export const WithIcons = () => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs">
-      <Tab renderIcon={Bee}>Tab Label 1</Tab>
-      <Tab renderIcon={Monster}>Tab Label 2</Tab>
+      <Tab renderIcon={Bee}>Tab label 1</Tab>
+      <Tab renderIcon={Monster}>Tab label 2</Tab>
       <Tab disabled renderIcon={Corn}>
-        Tab Label 3
+        Tab label 3
       </Tab>
-      <Tab title="Tab Label 4" renderIcon={Bat}>
-        Tab Label 4
+      <Tab title="Tab label 4" renderIcon={Bat}>
+        Tab label 4
       </Tab>
-      <Tab renderIcon={Home}>Tab Label 5</Tab>
+      <Tab renderIcon={Home}>Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -113,11 +113,11 @@ export const WithIcons = () => (
 export const Manual = () => (
   <Tabs>
     <TabList activation="manual" aria-label="List of tabs">
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab title="Tab Label 4">Tab Label 4</Tab>
-      <Tab>Tab Label 5</Tab>
+      <Tab>Tab label 1</Tab>
+      <Tab>Tab label 2</Tab>
+      <Tab disabled>Tab label 3</Tab>
+      <Tab title="Tab label 4">Tab label 4</Tab>
+      <Tab>Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -190,11 +190,11 @@ export const IconOnly = () => (
 export const Contained = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab disabled>Tab Label 3</Tab>
-      <Tab title="Tab Label 4">Tab Label 4</Tab>
-      <Tab>Tab Label 5</Tab>
+      <Tab>Tab label 1</Tab>
+      <Tab>Tab label 2</Tab>
+      <Tab disabled>Tab label 3</Tab>
+      <Tab title="Tab label 4">Tab label 4</Tab>
+      <Tab>Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -224,15 +224,15 @@ export const Contained = () => (
 export const ContainedWithIcons = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab renderIcon={Bee}>Tab Label 1</Tab>
-      <Tab renderIcon={Monster}>Tab Label 2</Tab>
+      <Tab renderIcon={Bee}>Tab label 1</Tab>
+      <Tab renderIcon={Monster}>Tab label 2</Tab>
       <Tab disabled renderIcon={Bat}>
-        Tab Label 3
+        Tab label 3
       </Tab>
-      <Tab title="Tab Label 4" renderIcon={Corn}>
-        Tab Label 4
+      <Tab title="Tab label 4" renderIcon={Corn}>
+        Tab label 4
       </Tab>
-      <Tab renderIcon={Home}>Tab Label 5</Tab>
+      <Tab renderIcon={Home}>Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -262,15 +262,15 @@ export const ContainedWithIcons = () => (
 export const ContainedWithSecondaryLabels = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
-      <Tab secondaryLabel="367">Tab Label 1</Tab>
-      <Tab secondaryLabel="367">Tab Label 2</Tab>
+      <Tab secondaryLabel="367">Tab label 1</Tab>
+      <Tab secondaryLabel="367">Tab label 2</Tab>
       <Tab disabled secondaryLabel="367">
-        Tab Label 3
+        Tab label 3
       </Tab>
-      <Tab title="Tab Label 4" secondaryLabel="367">
-        Tab Label 4
+      <Tab title="Tab label 4" secondaryLabel="367">
+        Tab label 4
       </Tab>
-      <Tab secondaryLabel="367">Tab Label 5</Tab>
+      <Tab secondaryLabel="367">Tab label 5</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
@@ -301,19 +301,19 @@ export const ContainedWithSecondaryLabelsAndIcons = () => (
   <Tabs>
     <TabList aria-label="List of tabs" contained>
       <Tab renderIcon={Bee} secondaryLabel="367">
-        Tab Label 1
+        Tab label 1
       </Tab>
       <Tab renderIcon={Monster} secondaryLabel="367">
-        Tab Label 2
+        Tab label 2
       </Tab>
       <Tab renderIcon={Bat} disabled secondaryLabel="367">
-        Tab Label 3
+        Tab label 3
       </Tab>
-      <Tab renderIcon={Corn} title="Tab Label 4" secondaryLabel="367">
-        Tab Label 4
+      <Tab renderIcon={Corn} title="Tab label 4" secondaryLabel="367">
+        Tab label 4
       </Tab>
       <Tab renderIcon={Home} secondaryLabel="367">
-        Tab Label 5
+        Tab label 5
       </Tab>
     </TabList>
     <TabPanels>
@@ -352,10 +352,10 @@ export const Skeleton = () => {
 export const Playground = (args) => (
   <Tabs>
     <TabList aria-label="List of tabs" {...args}>
-      <Tab>Tab Label 1</Tab>
-      <Tab>Tab Label 2</Tab>
-      <Tab>Tab Label 3</Tab>
-      <Tab>Tab Label 4</Tab>
+      <Tab>Tab label 1</Tab>
+      <Tab>Tab label 2</Tab>
+      <Tab>Tab label 3</Tab>
+      <Tab>Tab label 4</Tab>
     </TabList>
     <TabPanels>
       <TabPanel>Tab Panel 1</TabPanel>
