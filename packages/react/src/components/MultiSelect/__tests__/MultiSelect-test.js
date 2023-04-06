@@ -6,12 +6,11 @@
  */
 
 import { getByText, isElementVisible } from '@carbon/test-utils/dom';
-import { pressEnter, pressSpace, pressTab } from '@carbon/test-utils/keyboard';
-import { cleanup, render } from '@testing-library/react';
+import { cleanup, render, screen } from '@testing-library/react';
 import React from 'react';
-import { act, Simulate } from 'react-dom/test-utils';
 import MultiSelect from '../';
 import { generateItems, generateGenericItem } from '../../ListBox/test-helpers';
+import userEvent from '@testing-library/user-event';
 
 describe('MultiSelect', () => {
   beforeEach(() => {
@@ -52,7 +51,7 @@ describe('MultiSelect', () => {
     ).toBeNull();
   });
 
-  it('should open the menu when a user clicks on the label', () => {
+  it('should open the menu when a user clicks on the label', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
@@ -60,42 +59,44 @@ describe('MultiSelect', () => {
     );
 
     const labelNode = getByText(container, label);
-    Simulate.click(labelNode);
+    await userEvent.click(labelNode);
 
-    expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
-    ).toBeInstanceOf(HTMLElement);
-  });
-
-  it('should open the menu when a user hits space while the field is focused', () => {
-    const items = generateItems(4, generateGenericItem);
-    const { container } = render(
-      <MultiSelect id="test" label="test-label" items={items} />
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-haspopup',
+      'listbox'
     );
-
-    pressTab();
-    pressSpace();
-
-    expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
-    ).toBeInstanceOf(HTMLElement);
   });
 
-  it('should open the menu when a user hits enter while the field is focused', () => {
+  it('should open the menu when a user hits space while the field is focused', async () => {
     const items = generateItems(4, generateGenericItem);
-    const { container } = render(
-      <MultiSelect id="test" label="test-label" items={items} />
+    render(<MultiSelect id="test" label="test-label" items={items} />);
+
+    await userEvent.tab();
+    await userEvent.keyboard('[Space]');
+
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-haspopup',
+      'listbox'
     );
-
-    pressTab();
-    pressEnter();
-
-    expect(
-      container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
-    ).toBeInstanceOf(HTMLElement);
   });
 
-  it('should let the user toggle item selection with a mouse', () => {
+  it('should open the menu when a user hits enter while the field is focused', async () => {
+    const items = generateItems(4, generateGenericItem);
+    render(<MultiSelect id="test" label="test-label" items={items} />);
+
+    await userEvent.tab();
+    await userEvent.keyboard('[Enter]');
+
+    expect(screen.getByRole('button')).toHaveAttribute('aria-expanded', 'true');
+    expect(screen.getByRole('button')).toHaveAttribute(
+      'aria-haspopup',
+      'listbox'
+    );
+  });
+
+  it('should let the user toggle item selection with a mouse', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
@@ -103,7 +104,7 @@ describe('MultiSelect', () => {
     );
 
     const labelNode = getByText(container, label);
-    Simulate.click(labelNode);
+    await userEvent.click(labelNode);
 
     const [item] = items;
     const itemNode = getByText(container, item.label);
@@ -112,40 +113,38 @@ describe('MultiSelect', () => {
       document.querySelector('[aria-selected="true"][role="option"]')
     ).toBeNull();
 
-    Simulate.click(itemNode);
+    await userEvent.click(itemNode);
 
     expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
 
-    Simulate.click(itemNode);
+    await userEvent.click(itemNode);
 
     expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
       'false'
     );
   });
 
-  it('should close the menu when the user hits the Escape key', () => {
+  it('should close the menu when the user hits the Escape key', async () => {
     const items = generateItems(4, generateGenericItem);
     const { container } = render(
       <MultiSelect id="test" label="test-label" items={items} />
     );
 
-    pressTab();
-    pressSpace();
+    await userEvent.tab();
+    await userEvent.keyboard('[Space]');
 
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeInstanceOf(HTMLElement);
 
-    Simulate.keyDown(container.querySelector('[role="listbox"]'), {
-      key: 'Escape',
-    });
+    await userEvent.keyboard('[Escape]');
 
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeNull();
   });
 
-  it('close menu with click outside of field', () => {
+  it('close menu with click outside of field', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
@@ -157,28 +156,28 @@ describe('MultiSelect', () => {
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
 
-    Simulate.click(labelNode);
+    await userEvent.click(labelNode);
 
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeTruthy();
 
-    Simulate.blur(container.querySelector('[role="listbox"]'));
+    await userEvent.click(document.body);
 
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
   });
 
-  it('should toggle selection with enter', () => {
+  it('should toggle selection with enter', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
 
-    pressTab();
-    pressSpace();
+    await userEvent.tab();
+    await userEvent.keyboard('[Space]');
 
     const [item] = items;
     const itemNode = getByText(container, item.label);
@@ -187,38 +186,36 @@ describe('MultiSelect', () => {
       'false'
     );
 
-    Simulate.keyDown(container.querySelector('[role="listbox"]'), {
-      key: 'ArrowDown',
-    });
-    pressEnter();
+    await userEvent.keyboard('[ArrowDown]');
+    await userEvent.keyboard('[Enter]');
 
     expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe('true');
 
-    pressEnter();
+    await userEvent.keyboard('[Enter]');
 
     expect(itemNode.getAttribute('data-contained-checkbox-state')).toBe(
       'false'
     );
   });
 
-  it('should clear selected items when the user clicks the clear selection button', () => {
+  it('should clear selected items when the user clicks the clear selection button', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
       <MultiSelect id="test" label={label} items={items} />
     );
     const labelNode = getByText(container, label);
-    Simulate.click(labelNode);
+    await userEvent.click(labelNode);
 
     const [item] = items;
     const itemNode = getByText(container, item.label);
-    Simulate.click(itemNode);
+    await userEvent.click(itemNode);
 
     expect(
       document.querySelector('[aria-label="Clear all selected items"]')
     ).toBeTruthy();
 
-    Simulate.click(
+    await userEvent.click(
       document.querySelector('[aria-label="Clear all selected items"]')
     );
 
@@ -227,28 +224,28 @@ describe('MultiSelect', () => {
     ).toBeFalsy();
   });
 
-  it('should not be interactive if disabled', () => {
+  it('should not be interactive if disabled', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
       <MultiSelect id="test" disabled label={label} items={items} />
     );
     const labelNode = getByText(container, label);
-    Simulate.click(labelNode);
+    await userEvent.click(labelNode);
 
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
     ).toBeFalsy();
   });
 
-  it('should not be interactive if readonly', () => {
+  it('should not be interactive if readonly', async () => {
     const items = generateItems(4, generateGenericItem);
     const label = 'test-label';
     const { container } = render(
       <MultiSelect id="test" readOnly={true} label={label} items={items} />
     );
     const labelNode = getByText(container, label);
-    Simulate.click(labelNode);
+    await userEvent.click(labelNode);
 
     expect(
       container.querySelector('[aria-expanded="true"][aria-haspopup="listbox"]')
@@ -256,7 +253,7 @@ describe('MultiSelect', () => {
   });
 
   describe('Component API', () => {
-    it('should set the default selected items with the `initialSelectedItems` prop', () => {
+    it('should set the default selected items with the `initialSelectedItems` prop', async () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const { container } = render(
@@ -274,7 +271,7 @@ describe('MultiSelect', () => {
 
       const labelNode = getByText(container, label);
 
-      Simulate.click(labelNode);
+      await userEvent.click(labelNode);
 
       expect(
         document.querySelector('[data-contained-checkbox-state="true"]')
@@ -297,7 +294,7 @@ describe('MultiSelect', () => {
       expect(document.getElementById('custom-id')).toBeTruthy();
     });
 
-    it('should support a custom itemToString with object items', () => {
+    it('should support a custom itemToString with object items', async () => {
       const items = [
         { text: 'joey' },
         { text: 'johnny' },
@@ -316,7 +313,7 @@ describe('MultiSelect', () => {
       );
       const labelNode = getByText(container, label);
 
-      Simulate.click(labelNode);
+      await userEvent.click(labelNode);
 
       expect(getByText(container, 'joey')).toBeTruthy();
       expect(getByText(container, 'johnny')).toBeTruthy();
@@ -325,7 +322,7 @@ describe('MultiSelect', () => {
       expect(getByText(container, 'marky')).toBeTruthy();
     });
 
-    it('should support a custom itemToElement', () => {
+    it('should support a custom itemToElement', async () => {
       const items = [{ text: 'test-item' }];
       const label = 'test-label';
       const { container } = render(
@@ -351,7 +348,7 @@ describe('MultiSelect', () => {
       );
 
       const labelNode = getByText(container, label);
-      Simulate.click(labelNode);
+      await userEvent.click(labelNode);
 
       expect(document.querySelector('.test-element')).toBeTruthy();
       expect(document.querySelector('span[role="img"]')).toBeTruthy();
@@ -374,7 +371,7 @@ describe('MultiSelect', () => {
       expect(translateWithId).toHaveBeenCalled();
     });
 
-    it('should call onChange when the selection changes', () => {
+    it('should call onChange when the selection changes', async () => {
       const testFunction = jest.fn();
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
@@ -389,14 +386,12 @@ describe('MultiSelect', () => {
       );
 
       const labelNode = getByText(container, label);
-      Simulate.click(labelNode);
+      await userEvent.click(labelNode);
 
       const [item] = items;
       const itemNode = getByText(container, item.label);
 
-      act(() => {
-        Simulate.click(itemNode);
-      });
+      await userEvent.click(itemNode);
 
       expect(testFunction).toHaveBeenCalledTimes(1);
     });
@@ -422,7 +417,7 @@ describe('MultiSelect', () => {
       );
     });
 
-    it('should support different feedback modes with selectionFeedback', () => {
+    it('should support different feedback modes with selectionFeedback', async () => {
       const items = generateItems(4, generateGenericItem);
       const label = 'test-label';
       const [_firstItem, _secondItem, thirdItem] = items;
@@ -437,11 +432,11 @@ describe('MultiSelect', () => {
 
       // click the label to open the multiselect options menu
       const labelNode = getByText(container, label);
-      Simulate.click(labelNode);
+      await userEvent.click(labelNode);
 
       // click the third option down in the list
       const itemNode = getByText(container, thirdItem.label);
-      Simulate.click(itemNode);
+      await userEvent.click(itemNode);
 
       // get an array of all the options
       const optionsArray = Array.from(
